@@ -5149,13 +5149,18 @@ async function renderResilienz(){
  .stress-sign{border:1px solid var(--line,#ddd);border-radius:14px;padding:12px;background:#fff;transition:.2s;cursor:pointer;user-select:none}
  .stress-sign:hover{box-shadow:0 6px 16px rgba(23,56,79,.08);transform:translateY(-2px)}
  .skill-suggest{margin-top:14px;padding:18px;border-radius:18px;background:linear-gradient(135deg,#eef8fd,#e3f3fb);border:1px solid #b9dff0;box-shadow:0 4px 14px rgba(22,136,207,.08)}
- .treasure{min-height:260px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);font:inherit;border-radius:20px;transition:.3s cubic-bezier(.2,.8,.2,1);background:linear-gradient(160deg,#fff7ea,#ffedcf);border:1px solid #f6dfae;overflow:hidden;position:relative}
- .treasure::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 15%,rgba(255,214,107,.35),transparent 60%)}
- .treasure:hover{transform:translateY(-6px)scale(1.015);box-shadow:0 18px 34px rgba(200,140,30,.22)}
+ .treasure{min-height:260px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);font:inherit;border-radius:20px;transition:.3s cubic-bezier(.2,.8,.2,1);background:linear-gradient(160deg,#f4fbee,#e2f4d6);border:2px dashed #b9dea0;overflow:hidden;position:relative}
+ .treasure::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 15%,rgba(184,222,140,.4),transparent 60%)}
+ .treasure-gem{position:absolute;width:16px;height:16px;transform:rotate(45deg);border-radius:3px;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+ .treasure-gem-tl{top:12px;left:12px;background:linear-gradient(135deg,#7fd4c1,#4fae9a)}
+ .treasure-gem-tr{top:12px;right:12px;background:linear-gradient(135deg,#f4b6d2,#e07fa8)}
+ .treasure-gem-bl{bottom:12px;left:12px;background:linear-gradient(135deg,#ffd66b,#e8a83c)}
+ .treasure-gem-br{bottom:12px;right:12px;background:linear-gradient(135deg,#9ecbf5,#5f9fd6)}
+ .treasure:hover{transform:translateY(-6px)scale(1.015);box-shadow:0 18px 34px rgba(120,170,80,.22)}
  .treasure:hover .chest{transform:rotate(-3deg)scale(1.06)}
- .treasure h2{position:relative;font-size:18px;color:#a05a12;margin:0 0 6px;font-weight:800}
- .treasure p{position:relative;font-size:12px;color:#8a6a3d;line-height:1.5;margin:0 0 8px}
- .treasure small{position:relative;font-size:11px;color:#a3855a}
+ .treasure h2{position:relative;font-size:18px;color:#3d7a3a;margin:0 0 6px;font-weight:800}
+ .treasure p{position:relative;font-size:12px;color:#5c7a52;line-height:1.5;margin:0 0 8px}
+ .treasure small{position:relative;font-size:11px;color:#6f8f63}
  .chest{position:relative;margin:10px 0;filter:drop-shadow(0 10px 10px rgba(150,90,10,.18));transition:transform .3s cubic-bezier(.2,.8,.2,1)}
  .chest-sparkle{transform-origin:center;animation:chest-twinkle 2.4s ease-in-out infinite}
  .chest-sparkle-2{animation-delay:.5s}
@@ -5202,6 +5207,10 @@ async function renderResilienz(){
  </div>
 
  <button class="card treasure"onclick="openResilienzSchatzkiste()">
+ <div class="treasure-gem treasure-gem-tl"></div>
+ <div class="treasure-gem treasure-gem-tr"></div>
+ <div class="treasure-gem treasure-gem-bl"></div>
+ <div class="treasure-gem treasure-gem-br"></div>
  <div class="kicker">MEIN PERSÖNLICHER WERKZEUGKASTEN</div>
  <div class="chest">
  <svg viewBox="0 0 120 100"width="88"height="74">
