@@ -123,7 +123,24 @@ service cloud.firestore {
       allow read: if isApproved();
       allow create, update: if isApproved() && uid == request.auth.uid
         && request.resource.data.uid == request.auth.uid;
-      allow delete: if isApproved() && uid == request.auth.uid;
+      allow delete: if isApproved() && (uid == request.auth.uid || isTeacher());
+    }
+
+    // Noten (Punkte 0–15 je Fach/Halbjahr): rein privat, ausschließlich die
+    // Person selbst darf ihre eigenen Noten lesen/ändern – nicht einmal
+    // Lehrkräfte oder Admins (genau wie die Resilienz-Schatzkiste).
+    match /noten/{uid} {
+      allow read, delete: if isApproved() && uid == request.auth.uid;
+      allow create, update: if isApproved() && uid == request.auth.uid
+        && request.resource.data.uid == request.auth.uid;
+    }
+
+    // Wochen-/Monatsplanung: private Aufgabenplanung jeder Person für sich,
+    // orientiert am Stundenplan.
+    match /wochenplanung/{id} {
+      allow read: if isApproved() && resource.data.uid == request.auth.uid;
+      allow create: if isApproved() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isApproved() && resource.data.uid == request.auth.uid;
     }
 
     // Steckbriefe fürs Kennenlernen: jede Person legt genau ein eigenes
@@ -440,6 +457,56 @@ service cloud.firestore {
         && request.resource.data.createdBy == request.auth.uid;
       allow update, delete: if isTeacher()
         || (isApproved() && resource.data.createdBy == request.auth.uid);
+    }
+
+    // ---------------------------------------------------------
+    // LERNWERKSTATT · FÄCHER-ZEITSTRAHL (Lehrplan, Aufträge, Material,
+    // Teams, Produkte, Lernstand)
+    // ---------------------------------------------------------
+    // Lehrplan-Wochen (Zeitstrahl): von Lehrkräften gepflegt, für alle
+    // freigeschalteten Nutzer:innen lesbar.
+    match /lehrplanWochen/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+    // Aufträge/Ziele je Woche: von Lehrkräften gepflegt.
+    match /lehrplanAuftraege/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+    // Material je Woche: von Lehrkräften eingestellt.
+    match /lehrplanMaterialien/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+    // Aufträge je Praktikumsphase (z. B. Blockpraktikum): von Lehrkräften
+    // gepflegt, für alle sichtbar – live gespiegelt in fpA, Lernpfad und Startseite.
+    match /praktikumsAuftraege/{phaseId} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+    // Teams/Gruppen je Woche: Schüler:innen bilden sie selbst.
+    match /lehrplanTeams/{id} {
+      allow read: if isApproved();
+      allow create: if isApproved() && request.resource.data.createdBy == request.auth.uid;
+      allow update: if isTeacher()
+        || (isApproved() && request.auth.uid in resource.data.get('mitgliederUids',[]))
+        || (isApproved() && resource.data.createdBy == request.auth.uid);
+      allow delete: if isTeacher() || (isApproved() && resource.data.createdBy == request.auth.uid);
+    }
+    // Produkte/Ergebnisse je Woche: Schüler:innen laden hoch, Lehrkraft sieht alles.
+    match /lehrplanProdukte/{id} {
+      allow read: if isApproved();
+      allow create: if isApproved() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isTeacher() || (isApproved() && resource.data.uid == request.auth.uid);
+    }
+    // Persönlicher Fortschritt je Woche (Ziele erfüllt, Häkchen): privat,
+    // aber für Lehrkräfte einsehbar (z. B. für die Ampel-Übersicht).
+    match /lehrplanFortschritt/{id} {
+      allow read: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
+      allow create: if isApproved() && request.resource.data.uid == request.auth.uid;
+      allow update: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
+      allow delete: if isApproved() && resource.data.uid == request.auth.uid;
     }
 
     match /essayEntries/{id} {
