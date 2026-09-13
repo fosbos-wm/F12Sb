@@ -1117,14 +1117,10 @@ async function renderKlassenteam(){
 // STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F12Sb
 // ============================================================
 
-// Die 7 benoteten Fächer der F12Sb (Sozialwesen). Das Wahlpflichtfach
-// ist reiner Förderunterricht, wird nicht benotet und taucht daher hier
-// bewusst nicht auf.
 // Fächer der FOS 12 Sozialwesen. "Sozialwirtschaft und Recht" läuft als
 // zweijähriges Profilfach weiter. Die beiden frei gewählten Fächer der
 // Schule erscheinen als "Wahlpflichtfach 1/2" (echte Fachbezeichnung je
-// nach Wahl der Schüler:innen unterschiedlich). Das Fachreferat (§17
-// FOBOSO, das "Seminar") wird separat als eigener Notenpunkt geführt.
+// nach Wahl der Schüler:innen unterschiedlich).
 const F12SB_FAECHER=[
  {key:"deutsch",label:"Deutsch"},
  {key:"englisch",label:"Englisch"},
@@ -1135,9 +1131,6 @@ const F12SB_FAECHER=[
  {key:"wahlpflicht1",label:"Wahlpflichtfach 1"},
  {key:"wahlpflicht2",label:"Wahlpflichtfach 2"}
 ];
-// Fachreferat/Seminar: eigener Notenpunkt, kein Schulaufgabe/sonstige-
-// Modell (nur eine Gesamtbewertung je Halbjahr, wie bei fpA in F11Sb).
-const FACHREFERAT_LABEL="Fachreferat (Seminar)";
 
 // ============================================================
 // LERNWERKSTATT · FÄCHER-ZEITSTRAHL
@@ -1702,7 +1695,6 @@ function berechneHalbjahresergebnis(noten,fach,hj){
  return foboso19Runden(roh);
 }
 function fachLabel(fach){
- if(fach==="fachreferat")return "Fachreferat (Seminar)";
  return F12SB_FAECHER.find(f=>f.key===fach)?.label||fach;
 }
 // Bezeichnung der "sonstigen Leistung" – fängt auch ältere Einträge ab,
@@ -1807,23 +1799,6 @@ async function deleteNotenEintrag(fach,hj,entryId){
 }
 async function openNotenDetail(fach,hj){
  const noten=await getMeineNoten();
- if(fach==="fachreferat"){
- const liste=notenListe(noten,fach,hj);
- const avg=notenDurchschnitt(liste);
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"1. HALBJAHR":"2. HALBJAHR"}</div>
- <h2>${esc(fachLabel(fach))}</h2>
- <p style="color:var(--muted)">Die fachpraktische Ausbildung wird separat bewertet (§8 FOBOSO) – trag hier die einzelnen Bewertungen ein.</p>
- <div class="notice"style="margin-bottom:14px"><strong style="font-size:22px">${avg===null?"—":avg+" Punkte"}</strong><small style="display:block;color:var(--muted)">Durchschnitt aus ${liste.length} ${liste.length===1?"Eintrag":"Einträgen"}</small></div>
- <div class="list">${liste.map(e=>`<div class="list-item"><div><strong>${e.value} Punkte</strong></div><button class="secondary"onclick="deleteNotenEintrag('${fach}','${hj}','${e.id}')">Löschen</button></div>`).join("")||`<div class="empty">Noch keine Note eingetragen.</div>`}</div>
- <div class="form-actions"style="margin-top:14px;flex-wrap:wrap">
- <input id="notenNeuValue"type="number"min="0"max="15"placeholder="0–15"style="width:80px">
- <button class="primary"onclick="addNotenEintrag('${fach}','${hj}')">＋ Hinzufügen</button>
- </div>
- <div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="closeModal()">Schließen</button></div>
- `);
- return;
- }
  const sa=schulaufgabenListe(noten,fach,hj);
  const sonst=sonstigeListe(noten,fach,hj);
  const sSchnitt=sonstigeSchnitt(sonst);
@@ -1907,15 +1882,14 @@ function checkFoboso21(punkte){
 // grobe Orientierung, ob die Zulassungsvoraussetzungen zur Abschlussprüfung
 // nach §31/§35 FOBOSO grundsätzlich im Rahmen liegen. Die exakte
 // Fachabitur-Berechnung mit optimalem Streichvorschlag (25 Halbjahresergebnisse
-// + 4 dreifach gewichtete Prüfungen + Fachreferat, §35 Abs. 6 FOBOSO) leistet
+// + 4 dreifach gewichtete Prüfungen, §35 Abs. 6 FOBOSO) leistet
 // diese App bewusst nicht – dafür nutzt eure Schule den offiziellen
 // Streichvorschlag-Rechner (z. B. der Beruflichen Oberschule Traunstein).
 function berechneBestehen(noten){
  const faecherHJ1=F12SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj1"));
  const faecherHJ2=F12SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj2"));
- const fachreferatHj1=notenDurchschnitt(notenListe(noten,"fachreferat","hj1")),fachreferatHj2=notenDurchschnitt(notenListe(noten,"fachreferat","hj2"));
- const vollHJ1=faecherHJ1.every(p=>Number.isFinite(p))&&Number.isFinite(fachreferatHj1);
- const vollJahr=vollHJ1&&faecherHJ2.every(p=>Number.isFinite(p))&&Number.isFinite(fachreferatHj2);
+ const vollHJ1=faecherHJ1.every(p=>Number.isFinite(p));
+ const vollJahr=vollHJ1&&faecherHJ2.every(p=>Number.isFinite(p));
 
  let jahr=null;
  if(vollJahr){
@@ -1927,33 +1901,14 @@ function berechneBestehen(noten){
  const unter4=jahrespunkte.filter(p=>p>=1&&p<=3).length;
  const nullPunkte=jahrespunkte.filter(p=>p===0).length;
  const imRahmen=nullPunkte<=1 && (nullPunkte===1?unter4===0:unter4<=2);
- jahr={jahrespunkte,imRahmen,fachreferatHj1,fachreferatHj2};
+ jahr={jahrespunkte,imRahmen};
  }
  return{jahr,vollHJ1,vollJahr};
 }
 // Einfache Orientierung "was fehlt noch": für jedes noch unter 4 liegende
 // oder fehlende Fach wird angezeigt, welcher Wert für die einfachste
 // Bestehens-Variante (Regel a: alle Fächer ≥4) fehlen würde.
-function wasFehltNochHJ1(noten){
- const liste=F12SB_FAECHER.map(f=>{
- const p=berechneHalbjahresergebnis(noten,f.key,"hj1");
- if(!Number.isFinite(p)){
- const hatSA=schulaufgabenListe(noten,f.key,"hj1").length>0;
- const hatSonst=sonstigeListe(noten,f.key,"hj1").length>0;
- const fehlt=!hatSA&&!hatSonst?"Schulaufgabe und sonstige Leistungen fehlen noch":!hatSA?"Schulaufgabe fehlt noch":"Sonstige Leistungen fehlen noch";
- return{label:f.label,status:"fehlt",text:fehlt};
- }
- if(p===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
- if(p<4)return{label:f.label,status:"kritisch",text:`Aktuell ${p} Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-p} Punkte`};
- return{label:f.label,status:"ok",text:`${p} Punkte`};
- });
- const fpaP=notenDurchschnitt(notenListe(noten,"fachreferat","hj1"));
- if(fpaP===null)liste.push({label:"Fachreferat (Seminar)",status:"fehlt",text:"Note fehlt noch"});
- else if(fpaP===0)liste.push({label:"Fachreferat (Seminar)",status:"ungenuegend",text:"0 Punkte – mind. 4 Punkte nötig"});
- else if(fpaP<4)liste.push({label:"Fachreferat (Seminar)",status:"kritisch",text:`Aktuell ${fpaP} Punkte – mind. 4 Punkte nötig`});
- else liste.push({label:"Fachreferat (Seminar)",status:"ok",text:`${fpaP} Punkte`});
- return liste;
-}
+
 // Analoge Übersicht fürs ganze Schuljahr: Jahrespunktzahl je Fach (Durchschnitt
 // der beiden Halbjahresergebnisse) plus fpA mit eigener Jahresregel (§8 FOBOSO).
 function wasFehltNochJahr(noten){
@@ -1969,14 +1924,6 @@ function wasFehltNochJahr(noten){
  if(jp<4)return{label:f.label,status:"kritisch",text:`Aktuell ${jp} Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-jp} Punkte`};
  return{label:f.label,status:"ok",text:`${jp} Punkte im Jahr`};
  });
- const fpa1=notenDurchschnitt(notenListe(noten,"fachreferat","hj1"));
- const fpa2=notenDurchschnitt(notenListe(noten,"fachreferat","hj2"));
- if(fpa1===null||fpa2===null){
- liste.push({label:"Fachreferat (Seminar)",status:"fehlt",text:fpa1===null&&fpa2===null?"HJ1 und HJ2 fehlen noch":fpa1===null?"HJ1 fehlt noch":"HJ2 fehlt noch"});
- }else{
- const ok=fpa1>=4&&fpa2>=4&&(fpa1+fpa2)>=10;
- liste.push({label:"Fachreferat (Seminar)",status:ok?"ok":(fpa1===0||fpa2===0)?"ungenuegend":"kritisch",text:`HJ1: ${fpa1} · HJ2: ${fpa2} Punkte (Summe ${fpa1+fpa2}, mind. 10 nötig)`});
- }
  return liste;
 }
 
@@ -2179,9 +2126,7 @@ function printNotenPDF(noten,bestehen){
  const win=window.open("","_blank","width=800,height=800");
  if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
  const fmt=(fach,hj)=>{const erg=berechneHalbjahresergebnis(noten,fach,hj);const sa=schulaufgabenListe(noten,fach,hj).length,so=sonstigeListe(noten,fach,hj).length;return erg===null?"—":`${erg} Punkte (${sa} SA, ${so} sonst.)`};
- const fmtFpa=hj=>{const l=notenListe(noten,"fachreferat",hj);const a=notenDurchschnitt(l);return a===null?"—":`${a} (${l.length} ${l.length===1?"Note":"Noten"})`};
  const rows=F12SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
- const fpaRow=`<tr><td><em>Fachreferat (Seminar)</em></td><td>${fmtFpa("hj1")}</td><td>${fmtFpa("hj2")}</td></tr>`;
  const statusText=(label,r)=>!r?`${label}: noch nicht alle Noten eingetragen.`:`${label}: ${r.passed?"nach aktueller Punktlage bestanden":"nach aktueller Punktlage nicht bestanden"}.`;
  win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Noten – F12Sb</title>
  <style>
@@ -2196,7 +2141,7 @@ function printNotenPDF(noten,bestehen){
  <div class="print-note">Persönliche Notenübersicht. Im Druckdialog „Als PDF sichern“ auswählen.</div>
  <h1>Meine Noten – F12Sb</h1>
  <div class="meta">Punkte 0–15 je Fach und Halbjahr</div>
- <table><thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead><tbody>${rows}${fpaRow}</tbody></table>
+ <table><thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead><tbody>${rows}</tbody></table>
  <div class="status">
  <strong>${!bestehen.vollJahr?"Jahresergebnis: noch nicht alle Noten eingetragen.":bestehen.jahr.imRahmen?"Zulassungs-Orientierung: im Rahmen von §35 Abs. 9 FOBOSO.":"Achtung: Punktlage könnte die Zulassung zur Abschlussprüfung gefährden."}</strong>
  </div>
@@ -2281,7 +2226,6 @@ async function renderKompass(){
  <strong style="display:block;font-size:13px;margin-bottom:8px"> Note eintragen</strong>
  <label style="font-size:11px">Fach<select id="notenSchnellFach">
  ${F12SB_FAECHER.map(f=>`<option value="${f.key}">${f.label}</option>`).join("")}
- <option value="fachreferat">Fachreferat (Seminar)</option>
  </select></label>
  <label style="font-size:11px;margin-top:8px;display:block">Halbjahr<select id="notenSchnellHj">
  <option value="hj1">1. Halbjahr</option>
@@ -2309,16 +2253,6 @@ async function renderKompass(){
  <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('${f.key}','hj2')">${zelle(erg2,w2)}</button></td>
  </tr>`;
  }).join("")}
- ${(()=>{const l1=notenListe(noten,"fachreferat","hj1"),a1=notenDurchschnitt(l1),l2=notenListe(noten,"fachreferat","hj2"),a2=notenDurchschnitt(l2);
- const zelleFpa=(a,l)=>{
- if(!l.length)return"–";
- const werte=l.map(e=>e.value).join(", ");
- return a!==null&&l.length>1?`<strong>${a}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
- };
- return`<tr class="noten-fpa"><td><em>Fachreferat</em></td>
- <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fachreferat','hj1')">${zelleFpa(a1,l1)}</button></td>
- <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fachreferat','hj2')">${zelleFpa(a2,l2)}</button></td>
- </tr>`;})()}
  </tbody></table></div>
  <p style="font-size:10px;color:var(--muted);margin:6px 0 0">Fett = Halbjahresergebnis nach FOBOSO (braucht Schulaufgabe UND sonstige Leistungen). In Klammern/ohne Klammer: die einzelnen eingetragenen Werte.</p>
  <div class="form-actions"style="margin-top:10px">
@@ -2332,11 +2266,10 @@ async function renderKompass(){
  <details class="noten-collapsible">
  <summary> Jahresergebnis je Fach</summary>
  <div class="notice">
- ${!bestehen.vollJahr?`<p style="margin:0">Trag alle Noten beider Halbjahre ein (inkl. Fachreferat), um deinen endgültigen Stand zu sehen.</p>`
- :`<strong style="font-size:15px">${bestehen.jahr.imRahmen?" Zulassungs-Orientierung: im Rahmen von §35 Abs. 9 FOBOSO":" Achtung: Punktlage könnte die Zulassung zur Abschlussprüfung gefährden"}</strong>
- <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Fachreferat (Seminar): HJ1 ${bestehen.jahr.fachreferatHj1} · HJ2 ${bestehen.jahr.fachreferatHj2} Punkte</p>`}
+ ${!bestehen.vollJahr?`<p style="margin:0">Trag alle Noten beider Halbjahre ein, um deinen endgültigen Stand zu sehen.</p>`
+ :`<strong style="font-size:15px">${bestehen.jahr.imRahmen?" Zulassungs-Orientierung: im Rahmen von §35 Abs. 9 FOBOSO":" Achtung: Punktlage könnte die Zulassung zur Abschlussprüfung gefährden"}</strong>`}
  <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochJahr(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
- <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §21, §35 Abs. 9 FOBOSO – <strong>ohne Gewähr</strong>. Die vollständige Fachabitur-Berechnung (25 Halbjahresergebnisse, 4 dreifach gewichtete Prüfungen, Fachreferat, §35 Abs. 6 FOBOSO) mit optimalem Streichvorschlag leistet diese Übersicht bewusst nicht – dafür nutzt eure Schule den offiziellen Streichvorschlag-Rechner (z. B. der Beruflichen Oberschule Traunstein).</p>
+ <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §21, §35 Abs. 9 FOBOSO – <strong>ohne Gewähr</strong>. Die vollständige Fachabitur-Berechnung (25 Halbjahresergebnisse, 4 dreifach gewichtete Prüfungen, §35 Abs. 6 FOBOSO) mit optimalem Streichvorschlag leistet diese Übersicht bewusst nicht – dafür nutzt eure Schule den offiziellen Streichvorschlag-Rechner (z. B. der Beruflichen Oberschule Traunstein).</p>
  </div>
  </details>
  <details class="noten-collapsible">
@@ -2346,7 +2279,7 @@ async function renderKompass(){
  <ul style="margin:8px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.6">
  <li>Je Halbjahr: Durchschnitt der sonstigen Leistungen + Schulaufgabe(n), geteilt durch die Anzahl der eingerechneten Werte.</li>
  <li>Eingebracht werden 25 Halbjahresergebnisse aus 12/2, 12/1 und 11/2 (11/1 nur bei reinen 11.-Klasse-Fächern) – maximal ein Ergebnis pro Fach darf gestrichen werden.</li>
- <li>Dazu kommen 4 Prüfungsleistungen (dreifach gewichtet), das Ergebnis des Fachreferats und (aus der 11. Klasse) die fachpraktische Ausbildung.</li>
+ <li>Dazu kommen 4 Prüfungsleistungen (dreifach gewichtet) und (aus der 11. Klasse) die fachpraktische Ausbildung.</li>
  <li>Zulassung zur Abschlussprüfung: höchstens 2 Gesamtergebnisse mit 1–3 Punkten bzw. 1 mit 0 Punkten, bei kritischer Punktlage zusätzlich eine Mindestsumme von 200–240 Punkten.</li>
  <li>Durchschnittsnote: S = 17/3 − 5·E/M (E = erreichte Punktsumme, M = 600 Punkte höchstmöglich).</li>
  </ul>
