@@ -1,4 +1,4 @@
-let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = Promise.all([ import("https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js"), import("https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js"), import("https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js") ]).then(([appMod, authMod, fsMod])=>{ ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment}=fsMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db) db=getFirestore(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }); return firebaseReadyPromise; } /*
+let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = Promise.all([ import("https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js"), import("https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js"), import("https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js"), import("https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js") ]).then(([appMod, authMod, fsMod, storageMod])=>{ ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment}=fsMod); ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db) db=getFirestore(app); if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }); return firebaseReadyPromise; } /*
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
@@ -11,6 +11,10 @@ const statusLabel={green:"Auf Kurs",yellow:"Klärungsbedarf",red:"Handlungsbedar
 const labels={question:"Frage",info:"Info",idea:"Idee",project:"Projekt",practice:"Praxis"};
 let currentUser=null, profile=null, unsubscribers=[];
 let activeBoardId=null;
+let activeFach=null;
+function openFach(fach){activeFach=fach;go("fach")}
+function closeFach(){activeFach=null;go("faecher")}
+window.openFach=openFach;window.closeFach=closeFach;
 
 function toast(t){const
 x=$("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove("show"),
@@ -649,7 +653,7 @@ async function saveLernpfadOutcome(){
  if(!outcome){toast("Bitte kurz eintragen, wie es gelaufen ist.");return}
  try{
  await updateDoc(doc(db,"lernpfade",id),{outcome,outcomeAt:serverTimestamp()});
- closeModal();await render();toast("Danke für deine Reflexion.");
+ closeModal();await render();showMotivationsBild();toast("Danke für deine Reflexion.");
  }catch(e){
  console.error("Lernpfad-Ergebnis speichern:",e);
  toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");
@@ -906,6 +910,16 @@ const LANDKREIS_ORTE=[
  ["Großweil",843,709,"gap"],["Ohlstadt",786,732,"gap"],["Schwaigen",659,749,"gap"]
 ];
 let liveUnsubHeimat=null;
+let liveUnsubMiniKalender=null;
+function subscribeMiniKalenderLive(){
+ // Der Mini-Kalender auf der Startseite ist derselbe Campus-Kalender –
+ // ändert eine Lehrkraft dort etwas (events/calendar-Sammlung), wird die
+ // Startseite live nachgezogen, ohne dass neu navigiert werden muss.
+ const refresh=()=>{miniKalenderHTML().then(html=>{const el=$("miniKalenderWrap");if(el)el.innerHTML=html});};
+ const unsub1=onSnapshot(collection(db,"events"),refresh,e=>console.error("Mini-Kalender-Live-Update:",e));
+ const unsub2=onSnapshot(collection(db,"calendar"),refresh,e=>console.error("Mini-Kalender-Live-Update:",e));
+ liveUnsubMiniKalender=()=>{unsub1();unsub2()};
+}
 async function getHeimatEintraege(){
  if(!db)return [];
  try{
@@ -955,6 +969,24 @@ async function removeHeimatort(){
  try{await deleteDoc(doc(db,"heimatorte",currentUser.uid));await render();toast("Eintrag entfernt.")}
  catch(e){console.error("Heimatort löschen:",e);toast("Konnte nicht entfernt werden.")}
 }
+async function removeHeimatortAsTeacher(uid,name){
+ if(!isTeacher()){toast("Dieser Bereich ist nur für Lehrkräfte.");return}
+ if(!confirm(`Eintrag von ${name||"dieser Person"} wirklich entfernen?`))return;
+ try{await deleteDoc(doc(db,"heimatorte",uid));await render();toast("Eintrag entfernt.")}
+ catch(e){console.error("Heimatort löschen (Lehrkraft):",e);toast("Konnte nicht entfernt werden.")}
+}
+async function resetAlleHeimatorte(){
+ if(!isTeacher()){toast("Dieser Bereich ist nur für Lehrkräfte.");return}
+ if(!confirm("Wirklich ALLE Heimatorte-Einträge der Klasse zurücksetzen? Das kann nicht rückgängig gemacht werden."))return;
+ try{
+ const entries=await getHeimatEintraege();
+ await Promise.all(entries.map(e=>deleteDoc(doc(db,"heimatorte",e.uid))));
+ await render();
+ toast("Alle Einträge zurückgesetzt.");
+ }catch(e){console.error("Heimatorte zurücksetzen:",e);toast("Konnte nicht zurückgesetzt werden.")}
+}
+window.removeHeimatortAsTeacher=removeHeimatortAsTeacher;
+window.resetAlleHeimatorte=resetAlleHeimatorte;
 function subscribeHeimatkarteLive(){
  liveUnsubHeimat=onSnapshot(collection(db,"heimatorte"),snap=>{
  const entries=snap.docs.map(d=>({id:d.id,...d.data()}));
@@ -1025,7 +1057,7 @@ async function saveSteckbrief(){
  uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Campus-Mitglied",
  mag,gutDarin,fakt,updatedAt:serverTimestamp()
  });
- closeModal();await render();toast("Steckbrief gespeichert.");
+ closeModal();await render();showMotivationsBild();toast("Steckbrief gespeichert.");
  }catch(e){console.error("Steckbrief speichern:",e);toast("Konnte nicht gespeichert werden.")}
 }
 async function deleteSteckbrief(){
@@ -1047,12 +1079,17 @@ async function renderKlassenteam(){
  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
  <select id="heimatOrtSelect"style="flex:1;min-width:200px">
  <option value="">Ort auswählen …</option>
- ${LANDKREIS_ORTE.map(([name])=>`<option value="${esc(name)}"${myHeimatort?.ort===name?"selected":""}>${esc(name)}</option>`).join("")}
+ ${[...LANDKREIS_ORTE].sort((a,b)=>a[0].localeCompare(b[0],"de")).map(([name])=>`<option value="${esc(name)}"${myHeimatort?.ort===name?"selected":""}>${esc(name)}</option>`).join("")}
  </select>
  <button class="primary"onclick="saveHeimatort()">${myHeimatort?"Aktualisieren":"Eintragen"}</button>
  ${myHeimatort?`<button class="secondary"onclick="removeHeimatort()">Entfernen</button>`:""}
  </div>
  <div id="heimatkarteWrap">${heimatkarteSVG(heimatEntries)}</div>
+ ${isTeacher()?`<details style="margin-top:14px">
+ <summary style="cursor:pointer;color:var(--muted);font-size:13px">Für Lehrkräfte: Einträge verwalten (${heimatEntries.length})</summary>
+ <div class="list"style="margin-top:10px">${heimatEntries.map(e=>`<div class="list-item"><div><strong>${esc(e.name||"Campus-Mitglied")}</strong><small>${esc(e.ort||"")}</small></div><button class="secondary"onclick="removeHeimatortAsTeacher('${e.uid}','${esc(e.name||"")}')">Entfernen</button></div>`).join("")||`<div class="empty">Noch keine Einträge.</div>`}</div>
+ ${heimatEntries.length?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="resetAlleHeimatorte()">Alle Einträge zurücksetzen</button></div>`:""}
+ </details>`:""}
  </div>
 
  <div class="card"style="margin-top:16px">
@@ -1076,10 +1113,1001 @@ async function renderKlassenteam(){
  ${footer()}`;
 }
 
+// ============================================================
+// STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F12Sb
+// ============================================================
+
+// Die 7 benoteten Fächer der F12Sb (Sozialwesen). Das Wahlpflichtfach
+// ist reiner Förderunterricht, wird nicht benotet und taucht daher hier
+// bewusst nicht auf.
+// Fächer der FOS 12 Sozialwesen. "Sozialwirtschaft und Recht" läuft als
+// zweijähriges Profilfach weiter. Die beiden frei gewählten Fächer der
+// Schule erscheinen als "Wahlpflichtfach 1/2" (echte Fachbezeichnung je
+// nach Wahl der Schüler:innen unterschiedlich). Das Fachreferat (§17
+// FOBOSO, das "Seminar") wird separat als eigener Notenpunkt geführt.
+const F12SB_FAECHER=[
+ {key:"deutsch",label:"Deutsch"},
+ {key:"englisch",label:"Englisch"},
+ {key:"geschichte",label:"Geschichte/Sozialkunde"},
+ {key:"mathematik",label:"Mathematik"},
+ {key:"paedagogik",label:"Pädagogik/Psychologie"},
+ {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht"},
+ {key:"wahlpflicht1",label:"Wahlpflichtfach 1"},
+ {key:"wahlpflicht2",label:"Wahlpflichtfach 2"}
+];
+// Fachreferat/Seminar: eigener Notenpunkt, kein Schulaufgabe/sonstige-
+// Modell (nur eine Gesamtbewertung je Halbjahr, wie bei fpA in F11Sb).
+const FACHREFERAT_LABEL="Fachreferat (Seminar)";
+
+// ============================================================
+// LERNWERKSTATT · FÄCHER-ZEITSTRAHL
+// ============================================================
+// Praktikumsphasen 2026/27 (gilt fachübergreifend, aus dem B-Block-Plan).
+const PRAKTIKUMSPHASEN=[
+ {id:"pr1",start:"2026-09-15",end:"2026-10-02",titel:"B-Block Start – Praktikum",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr2",start:"2026-10-26",end:"2026-11-20",titel:"Praktikumsphase",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr3",start:"2026-12-14",end:"2027-01-15",titel:"Praktikumsphase",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr4",start:"2027-02-15",end:"2027-03-05",titel:"Praktikumsphase",bereich:"Übergang",icon:"🔄"},
+ {id:"pr5",start:"2027-04-12",end:"2027-04-30",titel:"Praktikumsphase Pflege",bereich:"Pflegebereich",icon:"🏥"},
+ {id:"pr6",start:"2027-06-07",end:"2027-06-25",titel:"Praktikumsphase Pflege",bereich:"Pflegebereich",icon:"🏥"},
+ {id:"pr7",start:"2027-07-19",end:"2027-07-30",titel:"Praktikumsphase Pflege",bereich:"Pflegebereich",icon:"🏥"}
+];
+
+// Aufträge je Praktikumsphase: von Lehrkräften gepflegt, überall live
+// gespiegelt (Lernpfad-Wegpunkte, fpA-Übersicht, Startseite) – ein
+// Datentopf, keine Kopien.
+async function getPraktikumsAuftraege(){
+ try{
+ const snap=await getDocs(collection(db,"praktikumsAuftraege"));
+ const map={};
+ snap.docs.forEach(d=>{map[d.id]=d.data()});
+ return map;
+ }catch(e){console.error("Praktikumsaufträge laden:",e);return {}}
+}
+async function savePraktikumsphaseAuftrag(phaseId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können Aufträge eintragen.");return}
+ const titel=$("praktAuftragTitel")?.value.trim();
+ const beschreibung=$("praktAuftragBeschreibung")?.value.trim();
+ if(!titel){toast("Bitte einen Titel eingeben.");return}
+ try{
+ await setDoc(doc(db,"praktikumsAuftraege",phaseId),{
+ phaseId,titel,beschreibung,updatedBy:currentUser.uid,updatedAt:serverTimestamp()
+ });
+ closeModal();await render();toast("Auftrag gespeichert.");
+ }catch(e){console.error("Praktikumsauftrag speichern:",e);toast("Konnte nicht gespeichert werden.")}
+}
+async function deletePraktikumsphaseAuftrag(phaseId){
+ if(!confirm("Diesen Praktikumsauftrag wirklich löschen?"))return;
+ try{await deleteDoc(doc(db,"praktikumsAuftraege",phaseId));closeModal();await render();toast("Auftrag gelöscht.")}
+ catch(e){console.error("Praktikumsauftrag löschen:",e);toast("Konnte nicht gelöscht werden.")}
+}
+async function openPraktikumsphaseAuftragForm(phaseId){
+ const phase=PRAKTIKUMSPHASEN.find(p=>p.id===phaseId);
+ if(!phase)return;
+ const alle=await getPraktikumsAuftraege();
+ const bestehend=alle[phaseId];
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">PRAKTIKUMSPHASE · ${esc(fmtDateOnly(phase.start))}–${esc(fmtDateOnly(phase.end))}</div>
+ <h2>${esc(phase.titel)}</h2>
+ ${isTeacher()?`<div class="form">
+ <label>Titel des Auftrags<input id="praktAuftragTitel"type="text"value="${esc(bestehend?.titel||"")}"placeholder="z. B. Beobachtungsauftrag Erziehungsstile"></label>
+ <label>Beschreibung<textarea id="praktAuftragBeschreibung"rows="4"placeholder="Was sollen die Schüler:innen in dieser Praktikumsphase konkret tun?">${esc(bestehend?.beschreibung||"")}</textarea></label>
+ <div class="form-actions">
+ <button class="secondary"onclick="closeModal()">Abbrechen</button>
+ ${bestehend?`<button class="secondary"onclick="deletePraktikumsphaseAuftrag('${phaseId}')">Löschen</button>`:""}
+ <button class="primary"onclick="savePraktikumsphaseAuftrag('${phaseId}')">Speichern</button>
+ </div>
+ </div>`
+ :!bestehend?`<div class="empty">Für diese Praktikumsphase wurde noch kein Auftrag eingetragen.</div>`
+ :`<h3 style="margin:8px 0">${esc(bestehend.titel)}</h3><p style="color:var(--muted);white-space:pre-wrap">${esc(bestehend.beschreibung||"")}</p>
+ <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`}
+ `);
+}
+window.openPraktikumsphaseAuftragForm=openPraktikumsphaseAuftragForm;
+window.savePraktikumsphaseAuftrag=savePraktikumsphaseAuftrag;
+window.deletePraktikumsphaseAuftrag=deletePraktikumsphaseAuftrag;
+
+// Lehrplan-Zeitstrahl je Fach. "typ": "projekt" | "einzel". Aktuell mit
+// echten Inhalten für Pädagogik/Psychologie befüllt (Jahresverlaufsplanung
+// FOS 12 Sozialwesen, B-Block 2026/27); die übrigen Fächer sind als leere,
+// erweiterbare Struktur angelegt.
+const LEHRPLAN_WOCHEN={
+ paedagogik:[
+ {id:"pp12_01",start:"2026-09-15",end:"2026-09-17",lb:"LB 1",thema:"Formalia und der Begriff Entwicklung",typ:"einzel",
+ planung:"Formalia/Der Begriff Entwicklung; Begriff Entwicklung; Bedingungen der Entwicklung."},
+ {id:"pp12_02",start:"2026-09-22",end:"2026-09-24",lb:"LB 1",thema:"Psychoanalyse: Grundannahmen und Persönlichkeitsmodell",typ:"einzel",
+ planung:"Bedingungen der Entwicklung; Einstieg Psychoanalyse/Grundannahmen, Instanzen und Dynamiken; Das psychoanalytische Persönlichkeitsmodell."},
+ {id:"pp12_03",start:"2026-09-29",end:"2026-10-01",lb:"LB 1",thema:"Ich-Stärke, Angst und Abwehr",typ:"einzel",
+ planung:"Ich-Stärke und Ich-Schwäche; Angst und Abwehr (Lernsituation „Carlas Diebstähle“); Angst und Abwehr."},
+ {id:"pp12_04",start:"2026-10-06",end:"2026-10-08",lb:"LB 1",thema:"Abwehrmechanismen und psychosexuelle Entwicklung",typ:"einzel",
+ planung:"Die Abwehrmechanismen; Psychosexuelle Entwicklung (orale und anale Phase); Phallische Phase, Latenzperiode, genitale Phase (Puzzle)."},
+ {id:"pp12_05",start:"2026-10-13",end:"2026-10-15",lb:"LB 1",thema:"Fehlentwicklungen und Lebensspanne",typ:"einzel",
+ planung:"Entstehung von seelischen Fehlentwicklungen/kritische Würdigung der psychoanalytischen Theorie; Entwicklung im Lebenslauf – die Theorie der Lebensspanne; 1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie.",
+ leistungsnachweis:true},
+ {id:"pp12_06",start:"2026-10-20",end:"2026-10-22",lb:"LB 1",thema:"Bindung und Erklärvideo (Produktphase)",typ:"einzel",
+ planung:"Bindung und Entwicklung; Erstellen eines Erklärvideos; Präsentation und Besprechung der Videos I.",
+ produktphase:true},
+ {id:"pp12_07",start:"2026-10-27",end:"2026-10-29",lb:"LB 1",thema:"Videos II und sichere/unsichere Bindung",typ:"einzel",
+ planung:"Präsentation und Besprechung der Videos II; Sichere und unsichere Bindung; Sichere und unsichere Bindung.",
+ produktphase:true},
+ {id:"pp12_08",start:"2026-11-10",end:"2026-11-12",lb:"LB 1",thema:"Bindungsförderung, Jugendalter, Resilienz",typ:"einzel",
+ planung:"Förderung gelungener Bindung; Entwicklung im Jugendalter; Vulnerabilität und Resilienz."},
+ {id:"pp12_09",start:"2026-11-17",end:"2026-11-19",lb:"LB 1",thema:"Puffer LB1 – Übergang zu LB 2: Persönlichkeit",typ:"einzel",
+ planung:"Puffer/Prüfungsvorbereitung zu LB 1; Start LB 2: Begriff Persönlichkeit."},
+ {id:"pp12_10",start:"2026-11-24",end:"2026-11-26",lb:"LB 2",thema:"Persönlichkeitserhebung und Big-Five-Modell",typ:"einzel",
+ planung:"Erhebung der Persönlichkeit; Big-Five-Modell; Big-Five-Modell."},
+ {id:"pp12_11",start:"2026-12-01",end:"2026-12-03",lb:"LB 2",thema:"Personenzentrierte Theorie und Aktualisierungstendenz",typ:"einzel",
+ planung:"Menschenbild der personenzentrierten Theorie; Menschenbild der personenzentrierten Theorie; Aktualisierungstendenz."},
+ {id:"pp12_12",start:"2026-12-08",end:"2026-12-10",lb:"LB 2",thema:"Selbstkonzept und Schulaufgabe",typ:"einzel",
+ planung:"Bildung und Wirkung des Selbstkonzepts; 1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit; Flexibilität des Selbstkonzepts/Abwehr.",
+ leistungsnachweis:true},
+ {id:"pp12_13",start:"2026-12-15",end:"2026-12-17",lb:"LB 2",thema:"Bewertungsprozess, Kongruenz, psychische Störungen",typ:"einzel",
+ planung:"Organismischer Bewertungsprozess; Kongruenz und Inkongruenz; Entstehung psychischer Störungen."},
+ {id:"pp12_14",start:"2026-12-22",end:"2026-12-23",lb:"LB 2",thema:"Bedeutung für Erziehung und sozial-kognitive Theorie",typ:"einzel",
+ planung:"Bedeutung für die Erziehung; Die sozial-kognitive Theorie und Persönlichkeit."},
+ {id:"pp12_15",start:"2027-01-12",end:"2027-01-14",lb:"LB 2",thema:"Identität und Identitätstypen nach Marcia",typ:"einzel",
+ planung:"Identität oder Selbstverständnis eines Menschen; Identitätstypen nach Marcia; Puffer/Prüfungsvorbereitung."},
+ {id:"pp12_16",start:"2027-01-19",end:"2027-01-21",lb:"LB 3",thema:"Puffer LB2 – Start LB 3: Soziale Arbeit",typ:"einzel",
+ planung:"Puffer LB 2; Start LB 3: Grundlagen Sozialer Arbeit; Aufgabenbereiche der Sozialen Arbeit."},
+ {id:"pp12_17",start:"2027-01-26",end:"2027-01-28",lb:"LB 3",thema:"Aufgabenbereiche und Handlungskonzepte",typ:"einzel",
+ planung:"Aufgabenbereiche der Sozialen Arbeit; Aufgabenbereiche der Sozialen Arbeit; Handlungskonzepte."},
+ {id:"pp12_18",start:"2027-02-02",end:"2027-02-04",lb:"LB 3",thema:"Verhaltensorientiertes Konzept und Anpassung",typ:"einzel",
+ planung:"Verhaltensorientiertes Konzept; Verhaltensmodifikation; Anpassung."},
+ {id:"pp12_19",start:"2027-02-16",end:"2027-02-18",lb:"LB 3",thema:"Nische, Habitat und Lebens-Stress",typ:"einzel",
+ planung:"Nische und Habitat; Lebens-Stress; Methode für die Praxis."},
+ {id:"pp12_20",start:"2027-02-23",end:"2027-02-25",lb:"LB 3",thema:"Fallbearbeitung und Life-Modell/Lebenswelt",typ:"einzel",
+ planung:"Fallbearbeitung Frau Müller; kritische Würdigung Life-Modell; Thiersch – Lebenswelt."},
+ {id:"pp12_21",start:"2027-03-02",end:"2027-03-04",lb:"LB 3",thema:"Thiersch: Dimensionen und Handlungsmaximen",typ:"einzel",
+ planung:"Thiersch – Dimensionen; Thiersch – Handlungsmaximen; Wiederholung/Prüfungsvorbereitung."},
+ {id:"pp12_22",start:"2027-03-09",end:"2027-03-11",lb:"LB 4",thema:"2. Schulaufgabe – Start LB 4: Kommunikation",typ:"einzel",
+ planung:"2. Schulaufgabe: Soziale Arbeit; Puffer; Start LB 4: Soziale Kommunikation und Interaktion.",
+ leistungsnachweis:true},
+ {id:"pp12_23",start:"2027-03-16",end:"2027-03-18",lb:"LB 4",thema:"Organon-Modell und erstes Axiom",typ:"einzel",
+ planung:"Organon-Modell; erfolgreiche und gestörte Kommunikation; erstes Axiom (Watzlawick)."},
+ {id:"pp12_24",start:"2027-04-06",end:"2027-04-08",lb:"LB 4",thema:"Zweites bis viertes Axiom",typ:"einzel",
+ planung:"Zweites Axiom; drittes Axiom; viertes Axiom (Watzlawick)."},
+ {id:"pp12_25",start:"2027-04-13",end:"2027-04-15",lb:"LB 4",thema:"Fünftes Axiom, Fallbearbeitung, Techniken",typ:"einzel",
+ planung:"Fünftes Axiom; Fallbearbeitung; Kommunikationstechniken."},
+ {id:"pp12_26",start:"2027-04-20",end:"2027-04-22",lb:"LB 4",thema:"Kulturelle Unterschiede und Kurzarbeit",typ:"einzel",
+ planung:"Kulturbedingte Unterschiede; Wiederholung/Prüfungsvorbereitung; 2. Kurzarbeit: Kommunikation.",
+ leistungsnachweis:true},
+ {id:"pp12_27",start:"2027-04-27",end:"2027-04-29",lb:"LB 4",thema:"Digitale Medien – Start Fachreferate",typ:"einzel",
+ planung:"Kommunikation und digitale Medien; Puffer; Präsentationen der Fachreferate.",
+ produktphase:true},
+ {id:"pp12_28",start:"2027-05-04",end:"2027-05-05",lb:"LB 4",thema:"Präsentationen der Fachreferate",typ:"einzel",
+ planung:"Präsentationen Fachreferate; Präsentationen Fachreferate.",
+ produktphase:true},
+ {id:"pp12_29",start:"2027-05-11",end:"2027-05-13",lb:"LB 1–4",thema:"Puffer und Wiederholung vor der Fachabiturprüfung",typ:"einzel",
+ planung:"Puffer/Prüfungsvorbereitung; Puffer/Prüfungsvorbereitung; Wiederholung – Gesamtwiederholung LB 1–4."}
+ ],
+ deutsch:[],englisch:[],geschichte:[],mathematik:[],sozialwirtschaft:[],wahlpflicht1:[],wahlpflicht2:[]
+};
+// Lernziel-Vorschläge je Woche, abgeleitet aus den offiziellen
+// Kompetenzerwartungen des LehrplanPLUS FOS 12 Pädagogik/Psychologie
+// (lehrplanplus.bayern.de, LB 1–4). Lehrkräfte sehen diese als Vorschlag
+// beim erstmaligen Anlegen eines Auftrags und können sie frei anpassen.
+const LEHRPLAN_ZIELE_VORSCHLAG={
+ pp12_01:["Ich kann den Begriff Entwicklung definieren und zentrale Bedingungen von Entwicklung (Anlage, Umwelt, Selbststeuerung) erläutern."],
+ pp12_02:["Ich kann die Grundannahmen der Psychoanalyse und das psychoanalytische Instanzenmodell (Es, Ich, Über-Ich) erklären."],
+ pp12_03:["Ich kann Ich-Stärke und Ich-Schwäche unterscheiden und das Zusammenspiel von Angst und Abwehr an einem Fallbeispiel analysieren."],
+ pp12_04:["Ich kann zentrale Abwehrmechanismen benennen und die psychosexuellen Entwicklungsphasen nach Freud (oral, anal, phallisch, Latenz, genital) beschreiben."],
+ pp12_05:["Ich kann die Entstehung seelischer Fehlentwicklungen aus psychoanalytischer Sicht erklären und die Theorie kritisch würdigen.","Ich kann Entwicklung als lebenslangen Prozess (Theorie der Lebensspanne) beschreiben."],
+ pp12_06:["Ich kann den Zusammenhang von Bindung und Entwicklung erläutern und mein Wissen in einem eigenen Erklärvideo aufbereiten."],
+ pp12_07:["Ich kann sichere und unsichere Bindungsmuster unterscheiden und ihre Bedeutung für die weitere Entwicklung einschätzen."],
+ pp12_08:["Ich kann Maßnahmen zur Förderung gelungener Bindung benennen und Vulnerabilität sowie Resilienz im Jugendalter erläutern."],
+ pp12_09:["Ich kann die zentralen Inhalte von LB 1 (Entwicklung) zusammenfassend wiedergeben und den Übergang zum Persönlichkeitsbegriff (LB 2) einordnen."],
+ pp12_10:["Ich kann Methoden zur Erhebung von Persönlichkeit benennen und das Big-Five-Modell mit seinen Dimensionen erklären."],
+ pp12_11:["Ich kann das Menschenbild der personenzentrierten Theorie nach Rogers erläutern und den Begriff Aktualisierungstendenz erklären."],
+ pp12_12:["Ich kann die Bildung und Wirkung des Selbstkonzepts beschreiben und dessen Flexibilität sowie Abwehrmechanismen erläutern."],
+ pp12_13:["Ich kann den organismischen Bewertungsprozess sowie Kongruenz und Inkongruenz nach Rogers erklären und auf die Entstehung psychischer Störungen beziehen."],
+ pp12_14:["Ich kann die Bedeutung der personenzentrierten und der sozial-kognitiven Theorie für die Erziehung erläutern."],
+ pp12_15:["Ich kann den Begriff Identität erklären und die Identitätstypen nach Marcia unterscheiden."],
+ pp12_16:["Ich kann Grundlagen und zentrale Aufgabenbereiche der Sozialen Arbeit benennen und erläutern."],
+ pp12_17:["Ich kann Aufgabenbereiche der Sozialen Arbeit vertiefen und ein Handlungskonzept Sozialer Arbeit erläutern."],
+ pp12_18:["Ich kann das verhaltensorientierte Konzept Sozialer Arbeit erklären und Verhaltensmodifikation an einem Beispiel anwenden."],
+ pp12_19:["Ich kann die Begriffe Nische, Habitat und Lebens-Stress im Kontext Sozialer Arbeit erläutern und auf die Praxis beziehen."],
+ pp12_20:["Ich kann einen Praxisfall mithilfe des Life-Modells und Thierschs Konzept der Lebensweltorientierung analysieren."],
+ pp12_21:["Ich kann Thierschs Dimensionen und Handlungsmaximen der Lebensweltorientierung erläutern und auf einen Fall anwenden."],
+ pp12_22:["Ich kann soziale Kommunikation und Interaktion als Grundbegriffe definieren und ihre Bedeutung im Sozialwesen einordnen."],
+ pp12_23:["Ich kann das Organon-Modell nach Bühler erklären und erfolgreiche von gestörter Kommunikation unterscheiden (erstes Axiom nach Watzlawick)."],
+ pp12_24:["Ich kann das zweite, dritte und vierte Axiom von Watzlawick erläutern und an Beispielen erkennen."],
+ pp12_25:["Ich kann das fünfte Axiom erläutern und Kommunikationstechniken auf eine Fallbearbeitung anwenden."],
+ pp12_26:["Ich kann kulturbedingte Unterschiede in der Kommunikation erläutern und mein Wissen zu Kommunikationsmodellen zusammenfassen."],
+ pp12_27:["Ich kann Chancen und Risiken digitaler Medien für Kommunikation und Lernen einschätzen."],
+ pp12_28:["Ich kann mein Fachreferat strukturiert und fachlich fundiert präsentieren."],
+ pp12_29:["Ich kann die zentralen Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."]
+};
+function lehrplanWocheById(fach,wocheId){
+ return (LEHRPLAN_WOCHEN[fach]||[]).find(w=>w.id===wocheId)||null;
+}
+// Farbcodierung je Lernbereich (unabhängig von Projekt/Einzelthema),
+// dieselbe Nummerierung wie bei der Lernstandsmessung (LB1–LB4).
+const LERNBEREICH_FARBEN={
+ 1:{bg:"#dbeafe",border:"#4a90d9",text:"#1f5a8a"},
+ 2:{bg:"#f0e0fb",border:"#9b59b6",text:"#6c3483"},
+ 3:{bg:"#dcf3d1",border:"#3fa66a",text:"#1f6b3d"},
+ 4:{bg:"#fde8c2",border:"#e0a324",text:"#8a6512"}
+};
+function lernbereichNummern(lbText){
+ return (lbText||"").match(/\d/g)||[];
+}
+function lernbereichBadgeHTML(lbText){
+ const nums=lernbereichNummern(lbText);
+ if(!nums.length)return"";
+ if(nums.length>1)return`<span class="lb-badge"style="background:#eef1f3;border-color:#8a99a3;color:#556570">Lernbereich ${nums.join("+")}</span>`;
+ const c=LERNBEREICH_FARBEN[nums[0]]||LERNBEREICH_FARBEN[1];
+ return`<span class="lb-badge"style="background:${c.bg};border-color:${c.border};color:${c.text}">Lernbereich ${nums[0]}</span>`;
+}
+function lernbereichAkzentfarbe(lbText){
+ const nums=lernbereichNummern(lbText);
+ if(nums.length!==1)return"#8a99a3";
+ return(LERNBEREICH_FARBEN[nums[0]]||LERNBEREICH_FARBEN[1]).border;
+}
+
+// Unterrichtsblöcke aus der Block- und Praxislogik der Jahresverlaufsplanung
+// (nur Pädagogik/Psychologie) – gruppieren die Wochen im Lernpfad zu klar
+// abgegrenzten Abschnitten mit Überschrift.
+const UNTERRICHTSBLOECKE={
+ paedagogik:[
+ {id:"ub1",start:"2026-10-05",end:"2026-10-23",titel:"Unterrichtsblock 1",stunden:18},
+ {id:"ub2",start:"2026-11-23",end:"2026-12-11",titel:"Unterrichtsblock 2",stunden:18},
+ {id:"ub3",start:"2027-01-18",end:"2027-02-05",titel:"Unterrichtsblock 3",stunden:18},
+ {id:"ub4",start:"2027-03-08",end:"2027-03-19",titel:"Unterrichtsblock 4",stunden:12},
+ {id:"ub5",start:"2027-04-05",end:"2027-04-09",titel:"Unterrichtsblock 5",stunden:6},
+ {id:"ub6",start:"2027-05-03",end:"2027-05-14",titel:"Unterrichtsblock 6",stunden:12},
+ {id:"ub7",start:"2027-06-28",end:"2027-07-16",titel:"Unterrichtsblock 7",stunden:18}
+ ]
+};
+function findUnterrichtsblock(fach,dateStr){
+ return (UNTERRICHTSBLOECKE[fach]||[]).find(b=>dateStr>=b.start&&dateStr<=b.end)||null;
+}
+
+function combinedTimeline(fach){
+ const wochen=(LEHRPLAN_WOCHEN[fach]||[]).map(w=>({...w,kind:"woche"}));
+ return [...wochen].sort((a,b)=>a.start.localeCompare(b.start));
+}
+
+// ---- Motivierende Kurz-Verstärkung (intermittierend) ----
+// Bei kleinen Schritten erscheint die Nachricht bewusst nicht jedes Mal
+// (nach einem variablen Muster), bei großen Meilensteinen (Woche
+// komplett geschafft) immer – intermittierende Verstärkung wirkt
+// nachhaltiger als eine erwartbare Nachricht bei jedem Klick.
+const MOTIVATIONS_KARTEN=[
+ {emoji:"🔥",text:"Läuft bei dir!"},
+ {emoji:"💪",text:"Nice, weiter so!"},
+ {emoji:"🚀",text:"Das war stark!"},
+ {emoji:"⭐",text:"Du rockst das!"},
+ {emoji:"🙌",text:"Sauber gemacht!"},
+ {emoji:"🎯",text:"Ziel erreicht – on to the next!"},
+ {emoji:"😎",text:"Genau so!"},
+ {emoji:"🏆",text:"Top Leistung!"}
+];
+const MOTIVATIONS_KARTEN_BESONDERS=[
+ {emoji:"🎉",text:"Ganze Woche geschafft – richtig stark!"},
+ {emoji:"🥳",text:"Komplett abgeschlossen, weiter so!"},
+ {emoji:"👑",text:"Das nenn ich Einsatz!"}
+];
+function showMotivationsBild(besonders){
+ if(!besonders && Math.random()>0.65)return;
+ const liste=besonders?MOTIVATIONS_KARTEN_BESONDERS:MOTIVATIONS_KARTEN;
+ const pick=liste[Math.floor(Math.random()*liste.length)];
+ const el=document.createElement("div");
+ el.className="motivations-karte";
+ el.innerHTML=`<div class="motivations-karte-inner"><span class="motivations-emoji">${pick.emoji}</span><strong>${esc(pick.text)}</strong></div>`;
+ el.onclick=()=>el.remove();
+ document.body.appendChild(el);
+ setTimeout(()=>el.remove(),2600);
+}
+// Alte Aufrufstellen nutzen weiterhin diesen Namen.
+function showMotivationsToast(besonders){showMotivationsBild(besonders)}
+
+// ---- Auftrag/Ziele je Woche (Lehrkraft pflegt, Schüler:innen sehen) ------
+async function getLehrplanAuftrag(wocheId){
+ try{
+ const snap=await getDocs(query(collection(db,"lehrplanAuftraege"),where("wocheId","==",wocheId)));
+ if(snap.empty)return null;
+ return {id:snap.docs[0].id,...snap.docs[0].data()};
+ }catch(e){console.error("Auftrag laden:",e);return null}
+}
+async function saveLehrplanAuftrag(fach,wocheId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können Arbeitsaufträge eintragen.");return}
+ const titel=$("auftragTitel")?.value.trim();
+ const beschreibung=$("auftragBeschreibung")?.value.trim()||"";
+ if(!titel){toast("Bitte einen Titel eingeben.");return}
+ try{
+ const existing=await getLehrplanAuftrag(wocheId);
+ const payload={wocheId,fach,titel,beschreibung,updatedAt:serverTimestamp(),updatedBy:currentUser.uid};
+ if(existing)await updateDoc(doc(db,"lehrplanAuftraege",existing.id),payload);
+ else{payload.createdAt=serverTimestamp();await addDoc(collection(db,"lehrplanAuftraege"),payload)}
+ await openWocheDetail(fach,wocheId);
+ toast("Arbeitsauftrag gespeichert.");
+ }catch(e){console.error("Auftrag speichern:",e);toast("Konnte nicht gespeichert werden.")}
+}
+async function deleteLehrplanAuftrag(id,fach,wocheId){
+ if(!confirm("Diesen Arbeitsauftrag wirklich löschen?"))return;
+ try{await deleteDoc(doc(db,"lehrplanAuftraege",id));await openWocheDetail(fach,wocheId);toast("Arbeitsauftrag gelöscht.")}
+ catch(e){console.error(e);toast("Konnte nicht gelöscht werden.")}
+}
+
+// ---- Material je Woche ----------------------------------------------
+const MATERIAL_KATEGORIEN=[
+ {key:"lernsituation",label:"Lernsituation"},{key:"lehrtext",label:"Lehrtext"},
+ {key:"praesentation",label:"Präsentation"},{key:"bild",label:"Bild"},
+ {key:"video",label:"Video"},{key:"audio",label:"Audio"},{key:"link",label:"Link"}
+];
+async function getLehrplanMaterialien(wocheId){
+ try{
+ const snap=await getDocs(query(collection(db,"lehrplanMaterialien"),where("wocheId","==",wocheId)));
+ return snap.docs.map(d=>({id:d.id,...d.data()}));
+ }catch(e){console.error("Material laden:",e);return []}
+}
+async function addLehrplanMaterial(fach,wocheId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können Material einstellen.");return}
+ const kategorie=$("matKategorie")?.value;
+ const titel=$("matTitel")?.value.trim();
+ const url=$("matUrl")?.value.trim();
+ if(!titel){toast("Bitte einen Titel eingeben.");return}
+ try{
+ await addDoc(collection(db,"lehrplanMaterialien"),{wocheId,fach,kategorie,titel,url,createdBy:currentUser.uid,createdAt:serverTimestamp()});
+ await openWocheDetail(fach,wocheId);
+ toast("Material hinzugefügt.");
+ }catch(e){console.error("Material speichern:",e);toast("Konnte nicht gespeichert werden.")}
+}
+async function deleteLehrplanMaterial(id,fach,wocheId){
+ if(!confirm("Dieses Material wirklich löschen?"))return;
+ try{await deleteDoc(doc(db,"lehrplanMaterialien",id));await openWocheDetail(fach,wocheId);toast("Gelöscht.")}
+ catch(e){console.error(e);toast("Konnte nicht gelöscht werden.")}
+}
+function materialEmbedHTML(m){
+ const url=m.url||"";
+ if(m.kategorie==="video"){
+ if(/youtube\.com|youtu\.be/.test(url)){
+ const idMatch=url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
+ const vid=idMatch?idMatch[1]:"";
+ return vid?`<iframe width="100%"height="200"src="https://www.youtube.com/embed/${vid}"loading="lazy"style="border:0;border-radius:8px"allowfullscreen></iframe>`:`<a href="${url}"target="_blank"rel="noopener">${esc(m.titel)} ↗</a>`;
+ }
+ return `<video controls style="width:100%;border-radius:8px;max-height:240px"src="${url}"></video>`;
+ }
+ if(m.kategorie==="audio")return `<audio controls style="width:100%"src="${url}"></audio>`;
+ if(m.kategorie==="bild")return `<img src="${url}"alt="${esc(m.titel)}"style="max-width:100%;border-radius:8px">`;
+ return `<a href="${url}"target="_blank"rel="noopener"class="pill"> ${esc(m.titel)} öffnen ↗</a>`;
+}
+
+// ---- Teams/Gruppen je Woche -------------------------------------------
+async function getLehrplanTeams(wocheId){
+ try{
+ const snap=await getDocs(query(collection(db,"lehrplanTeams"),where("wocheId","==",wocheId)));
+ return snap.docs.map(d=>({id:d.id,...d.data()}));
+ }catch(e){console.error("Teams laden:",e);return []}
+}
+async function createLehrplanTeam(fach,wocheId){
+ const teamName=$("neuTeamName")?.value.trim();
+ if(!teamName){toast("Bitte einen Team-Namen eingeben.");return}
+ try{
+ await addDoc(collection(db,"lehrplanTeams"),{wocheId,fach,teamName,mitgliederUids:[currentUser.uid],mitgliederNamen:[profile?.displayName||"Ich"],createdBy:currentUser.uid,createdAt:serverTimestamp()});
+ await openWocheDetail(fach,wocheId);
+ toast("Team erstellt – du bist Mitglied!");
+ }catch(e){console.error(e);toast("Konnte nicht erstellt werden.")}
+}
+async function joinLehrplanTeam(teamId,fach,wocheId){
+ try{
+ const ref=doc(db,"lehrplanTeams",teamId);
+ const snap=await getDoc(ref);
+ if(!snap.exists())return;
+ const d=snap.data();
+ if((d.mitgliederUids||[]).includes(currentUser.uid)){toast("Du bist schon in diesem Team.");return}
+ await updateDoc(ref,{mitgliederUids:[...(d.mitgliederUids||[]),currentUser.uid],mitgliederNamen:[...(d.mitgliederNamen||[]),profile?.displayName||"Mitglied"]});
+ await openWocheDetail(fach,wocheId);
+ toast("Team beigetreten!");
+ }catch(e){console.error(e);toast("Konnte nicht beitreten.")}
+}
+async function leaveLehrplanTeam(teamId,fach,wocheId){
+ try{
+ const ref=doc(db,"lehrplanTeams",teamId);
+ const snap=await getDoc(ref);
+ if(!snap.exists())return;
+ const d=snap.data();
+ const uids=[...(d.mitgliederUids||[])],namen=[...(d.mitgliederNamen||[])];
+ const idx=uids.indexOf(currentUser.uid);
+ if(idx>-1){uids.splice(idx,1);namen.splice(idx,1)}
+ await updateDoc(ref,{mitgliederUids:uids,mitgliederNamen:namen});
+ await openWocheDetail(fach,wocheId);
+ toast("Team verlassen.");
+ }catch(e){console.error(e);toast("Konnte nicht verlassen werden.")}
+}
+async function deleteLehrplanTeam(teamId,fach,wocheId){
+ if(!confirm("Dieses Team wirklich auflösen?"))return;
+ try{await deleteDoc(doc(db,"lehrplanTeams",teamId));await openWocheDetail(fach,wocheId);toast("Team aufgelöst.")}
+ catch(e){console.error(e);toast("Konnte nicht gelöscht werden.")}
+}
+
+// ---- Produkte/Ergebnisse je Woche --------------------------------------
+async function getLehrplanProdukte(wocheId){
+ try{
+ const snap=await getDocs(query(collection(db,"lehrplanProdukte"),where("wocheId","==",wocheId)));
+ return snap.docs.map(d=>({id:d.id,...d.data()}));
+ }catch(e){console.error("Produkte laden:",e);return []}
+}
+async function addLehrplanProdukt(fach,wocheId){
+ const titel=$("produktTitel")?.value.trim();
+ const inhalt=$("produktInhalt")?.value.trim();
+ const file=$("produktDatei")?.files?.[0]||null;
+ if(!titel){toast("Bitte einen Titel eingeben.");return}
+ if(!inhalt&&!file){toast("Bitte einen Link/Text eingeben oder eine Datei auswählen.");return}
+ try{
+ let dateiUrl="",dateiName="";
+ if(file){
+ toast("Datei wird hochgeladen …");
+ const up=await uploadCampusDatei(file,`lehrplanProdukte/${wocheId}`);
+ dateiUrl=up.url;dateiName=up.name;
+ }
+ await addDoc(collection(db,"lehrplanProdukte"),{wocheId,fach,uid:currentUser.uid,name:profile?.displayName||"Campus-Mitglied",titel,inhalt,dateiUrl,dateiName,createdAt:serverTimestamp()});
+ await openWocheDetail(fach,wocheId);
+ showMotivationsBild();
+ }catch(e){console.error("Lernprodukt hochladen:",e);toast("Fehler: "+(e?.message||e));}
+}
+async function deleteLehrplanProdukt(id,fach,wocheId){
+ if(!confirm("Dieses Produkt wirklich löschen?"))return;
+ try{await deleteDoc(doc(db,"lehrplanProdukte",id));await openWocheDetail(fach,wocheId);toast("Gelöscht.")}
+ catch(e){console.error(e);toast("Konnte nicht gelöscht werden.")}
+}
+
+// ---- Persönlicher Fortschritt (Ziele erfüllt, Häkchen am Zeitstrahl) ---
+async function getLehrplanFortschritt(wocheId){
+ if(!currentUser)return {zieleErfuellt:{},abgeschlossen:false};
+ try{
+ const snap=await getDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`));
+ if(!snap.exists())return {zieleErfuellt:{},abgeschlossen:false};
+ return snap.data();
+ }catch(e){console.error("Fortschritt laden:",e);return {zieleErfuellt:{},abgeschlossen:false}}
+}
+async function toggleZielErfuellt(fach,wocheId,zielId,erfuellt){
+ try{
+ const ref=doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`);
+ const snap=await getDoc(ref);
+ const data=snap.exists()?snap.data():{uid:currentUser.uid,wocheId,fach,zieleErfuellt:{},abgeschlossen:false};
+ data.zieleErfuellt=data.zieleErfuellt||{};
+ data.zieleErfuellt[zielId]=erfuellt;
+ data.updatedAt=serverTimestamp();
+ await setDoc(ref,data);
+ await openWocheDetail(fach,wocheId);
+ if(erfuellt)showMotivationsToast();
+ }catch(e){console.error("Ziel-Status:",e);toast("Konnte nicht gespeichert werden.")}
+}
+async function toggleAuftragGelesen(fach,wocheId,erledigt){
+ try{
+ const ref=doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`);
+ const snap=await getDoc(ref);
+ const data=snap.exists()?snap.data():{uid:currentUser.uid,wocheId,fach,zieleErfuellt:{},abgeschlossen:false};
+ data.auftragGelesen=erledigt;
+ data.updatedAt=serverTimestamp();
+ await setDoc(ref,data);
+ await openWocheDetail(fach,wocheId);
+ if(erledigt)showMotivationsToast();
+ }catch(e){console.error("Auftrag-gelesen-Status:",e);toast("Konnte nicht gespeichert werden.")}
+}
+async function toggleMaterialErhalten(fach,wocheId,erledigt){
+ try{
+ const ref=doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`);
+ const snap=await getDoc(ref);
+ const data=snap.exists()?snap.data():{uid:currentUser.uid,wocheId,fach,zieleErfuellt:{},abgeschlossen:false};
+ data.materialErhalten=erledigt;
+ data.updatedAt=serverTimestamp();
+ await setDoc(ref,data);
+ await openWocheDetail(fach,wocheId);
+ if(erledigt)showMotivationsToast();
+ }catch(e){console.error("Material-erhalten-Status:",e);toast("Konnte nicht gespeichert werden.")}
+}
+window.toggleAuftragGelesen=toggleAuftragGelesen;
+window.toggleMaterialErhalten=toggleMaterialErhalten;
+async function markWocheAbgeschlossen(fach,wocheId){
+ const fortschritt=await getLehrplanFortschritt(wocheId);
+ const ziele=LEHRPLAN_ZIELE_VORSCHLAG[wocheId]||[];
+ const alleErfuellt=ziele.length>0 && ziele.every((z,i)=>fortschritt.zieleErfuellt?.[`z${i}`]);
+ if(!alleErfuellt){toast("Bitte zuerst alle Ziele als erfüllt markieren.");return}
+ try{
+ await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),{...fortschritt,uid:currentUser.uid,wocheId,fach,abgeschlossen:true,updatedAt:serverTimestamp()});
+ await render();
+ showMotivationsToast(true);
+ }catch(e){console.error("Woche abschließen:",e);toast("Konnte nicht gespeichert werden.")}
+}
+
+window.saveLehrplanAuftrag=saveLehrplanAuftrag;window.deleteLehrplanAuftrag=deleteLehrplanAuftrag;
+window.addLehrplanMaterial=addLehrplanMaterial;window.deleteLehrplanMaterial=deleteLehrplanMaterial;
+window.createLehrplanTeam=createLehrplanTeam;window.joinLehrplanTeam=joinLehrplanTeam;
+window.leaveLehrplanTeam=leaveLehrplanTeam;window.deleteLehrplanTeam=deleteLehrplanTeam;
+window.addLehrplanProdukt=addLehrplanProdukt;window.deleteLehrplanProdukt=deleteLehrplanProdukt;
+window.toggleZielErfuellt=toggleZielErfuellt;window.markWocheAbgeschlossen=markWocheAbgeschlossen;
+
+function webUntisUrl(){
+ const today=new Date().toISOString().slice(0,10);
+ return `https://fos-bos-weilheim.webuntis.com/WebUntis?school=fos-bos-weilheim#/basic/timetablePublic/class?date=${today}&entityId=1190`;
+}
+function webUntisEmbedHTML(heightPx,openByDefault){
+ const url=webUntisUrl();
+ return `<details class="untis-embed"${openByDefault?"open":""}>
+ <summary> Stundenplan anzeigen/ausblenden</summary>
+ <iframe src="${url}"loading="lazy"style="width:100%;height:${heightPx}px;border:1px solid var(--line,#e2eaf0);border-radius:10px;background:#fff"class="untis-iframe"title="Stundenplan F12Sb (WebUntis)"></iframe>
+ <div class="untis-fallback"><small>Wird der Stundenplan oben nicht angezeigt? Manche Schulnetzwerke blockieren die Einbettung.</small>
+ <a href="${url}"target="_blank"rel="noopener"class="pill"> Stundenplan in WebUntis öffnen ↗</a></div>
+ </details>`;
+}
+
+// ---- Noten (0–15 Punkte je Fach, getrennt nach Halbjahr) ------------------
+async function getMeineNoten(){
+ if(!db||!currentUser)return {entries:{}};
+ try{
+ const snap=await getDoc(doc(db,"noten",currentUser.uid));
+ if(!snap.exists())return {entries:{}};
+ const d=snap.data();
+ return {entries:d.entries||{}};
+ }catch(e){console.error("Noten laden:",e);return {entries:{}}}
+}
+// FPA (fachpraktische Ausbildung) bleibt ein einfacher Notentopf – dafür gilt
+// eine eigene Regel (§8 FOBOSO), keine Schulaufgabe/sonstige-Leistungen-Logik.
+function notenListe(noten,fach,hj){
+ return (noten.entries?.[fach]?.[hj])||[];
+}
+function notenDurchschnitt(liste){
+ if(!liste.length)return null;
+ const sum=liste.reduce((a,e)=>a+e.value,0);
+ return Math.round(sum/liste.length);
+}
+// Rundung nach § 19 Abs. 6 FOBOSO: ab „,50" aufrunden, darunter abrunden;
+// Werte unter 1,00 werden immer auf 0 abgerundet.
+function foboso19Runden(wert){
+ if(wert===null||!Number.isFinite(wert))return null;
+ if(wert<1)return 0;
+ return Math.round(wert);
+}
+// Notenbezeichnung nach der Punktetabelle in § 19 FOBOSO.
+function fobosoNotenwort(punkte){
+ if(!Number.isFinite(punkte))return"";
+ if(punkte>=13)return"sehr gut";
+ if(punkte>=10)return"gut";
+ if(punkte>=7)return"befriedigend";
+ if(punkte>=4)return"ausreichend";
+ if(punkte>=1)return"mangelhaft";
+ return"ungenügend";
+}
+// Die 7 regulären Fächer: Schulaufgabe(n) + gewichteter Durchschnitt der
+// "sonstigen Leistungen" (schriftlich: Stegreif/Kurzarbeit + mündlich, als
+// EIN gemeinsamer Topf), beides zählt 1:1, danach gerundet (§21 Abs.1 FOBOSO).
+function schulaufgabenListe(noten,fach,hj){
+ return noten.entries?.[fach]?.[hj]?.schulaufgaben||[];
+}
+function sonstigeListe(noten,fach,hj){
+ return noten.entries?.[fach]?.[hj]?.sonstige||[];
+}
+// Alle bisher eingetragenen Einzelwerte (Schulaufgabe(n) + sonstige
+// Leistungen) als schlichte Zahlenliste, für die Kurzanzeige, solange noch
+// kein Halbjahresergebnis berechnet werden kann.
+function alleEinzelwerte(noten,fach,hj){
+ const sa=schulaufgabenListe(noten,fach,hj);
+ const so=sonstigeListe(noten,fach,hj).map(e=>e.value);
+ return[...sa,...so];
+}
+function sonstigeSchnitt(liste){
+ if(!liste.length)return null;
+ const gewSumme=liste.reduce((a,e)=>a+(e.gewicht||1),0);
+ return liste.reduce((a,e)=>a+e.value*(e.gewicht||1),0)/gewSumme;
+}
+function berechneHalbjahresergebnis(noten,fach,hj){
+ const sa=schulaufgabenListe(noten,fach,hj);
+ const sonst=sonstigeListe(noten,fach,hj);
+ if(!sa.length||!sonst.length)return null;
+ const sSchnitt=sonstigeSchnitt(sonst);
+ const saSumme=sa.reduce((a,v)=>a+v,0);
+ const roh=(saSumme+sSchnitt)/(sa.length+1);
+ return foboso19Runden(roh);
+}
+function fachLabel(fach){
+ if(fach==="fachreferat")return "Fachreferat (Seminar)";
+ return F12SB_FAECHER.find(f=>f.key===fach)?.label||fach;
+}
+// Bezeichnung der "sonstigen Leistung" – fängt auch ältere Einträge ab,
+// die noch mit dem alten zweistufigen "schriftlich"/"muendlich" gespeichert wurden.
+function sonstigeLeistungLabel(type){
+ if(type==="muendlich")return "Mündliche Note";
+ if(type==="stegreif")return "Stegreifaufgabe";
+ if(type==="kurzarbeit")return "Kurzarbeit";
+ return "Schriftlich (Stegreif/KA)";
+}
+async function updateNotenDoc(mutator){
+ const ref=doc(db,"noten",currentUser.uid);
+ const snap=await getDoc(ref);
+ const data=snap.exists()?snap.data():{uid:currentUser.uid,entries:{}};
+ data.entries=data.entries||{};
+ mutator(data);
+ data.uid=currentUser.uid;
+ data.updatedAt=serverTimestamp();
+ await setDoc(ref,data);
+}
+async function addSchulaufgabe(fach,hj){
+ const value=$("saNeuValue")?.value;
+ const num=Math.max(0,Math.min(15,parseInt(value,10)));
+ if(!Number.isFinite(num)){toast("Bitte eine Zahl von 0 bis 15 eingeben.");return}
+ try{
+ await updateNotenDoc(data=>{
+ data.entries[fach]=data.entries[fach]||{};
+ data.entries[fach][hj]=data.entries[fach][hj]||{schulaufgaben:[],sonstige:[]};
+ data.entries[fach][hj].schulaufgaben=data.entries[fach][hj].schulaufgaben||[];
+ data.entries[fach][hj].schulaufgaben.push(num);
+ });
+ closeModal();
+ await render();
+ toast("Schulaufgabe hinzugefügt.");
+ }catch(e){console.error("Schulaufgabe speichern:",e);toast("Fehler: "+(e?.message||e));}
+}
+async function deleteSchulaufgabe(fach,hj,index){
+ try{
+ await updateNotenDoc(data=>{
+ if(data.entries?.[fach]?.[hj]?.schulaufgaben)data.entries[fach][hj].schulaufgaben.splice(index,1);
+ });
+ closeModal();
+ await render();
+ toast("Entfernt.");
+ }catch(e){console.error("Schulaufgabe löschen:",e);toast("Fehler: "+(e?.message||e));}
+}
+async function addSonstigeLeistung(fach,hj){
+ const value=$("sonstNeuValue")?.value;
+ const type=$("sonstNeuType")?.value;
+ const gewicht=$("sonstNeuGewicht")?.value;
+ const num=Math.max(0,Math.min(15,parseInt(value,10)));
+ const g=Math.max(0.5,Math.min(5,parseFloat(gewicht)||1));
+ if(!Number.isFinite(num)){toast("Bitte eine Zahl von 0 bis 15 eingeben.");return}
+ try{
+ await updateNotenDoc(data=>{
+ data.entries[fach]=data.entries[fach]||{};
+ data.entries[fach][hj]=data.entries[fach][hj]||{schulaufgaben:[],sonstige:[]};
+ data.entries[fach][hj].sonstige=data.entries[fach][hj].sonstige||[];
+ data.entries[fach][hj].sonstige.push({id:`${Date.now()}_${Math.random().toString(36).slice(2,7)}`,value:num,type,gewicht:g});
+ });
+ closeModal();
+ await render();
+ toast("Note hinzugefügt.");
+ }catch(e){console.error("Sonstige Leistung speichern:",e);toast("Fehler: "+(e?.message||e));}
+}
+async function deleteSonstigeLeistung(fach,hj,entryId){
+ try{
+ await updateNotenDoc(data=>{
+ if(data.entries?.[fach]?.[hj]?.sonstige)data.entries[fach][hj].sonstige=data.entries[fach][hj].sonstige.filter(e=>e.id!==entryId);
+ });
+ closeModal();
+ await render();
+ toast("Gelöscht.");
+ }catch(e){console.error("Sonstige Leistung löschen:",e);toast("Fehler: "+(e?.message||e));}
+}
+// FPA behält die einfache Eintragsliste (kein Schulaufgabe/sonstige-Modell).
+async function addNotenEintrag(fach,hj){
+ if(!isApproved()){toast("Nur freigeschaltete Nutzer können Noten eintragen.");return}
+ const value=$("notenNeuValue")?.value;
+ const num=Math.max(0,Math.min(15,parseInt(value,10)));
+ if(!Number.isFinite(num)){toast("Bitte eine Zahl von 0 bis 15 eingeben.");return}
+ try{
+ await updateNotenDoc(data=>{
+ data.entries[fach]=data.entries[fach]||{};
+ data.entries[fach][hj]=data.entries[fach][hj]||[];
+ data.entries[fach][hj].push({id:`${Date.now()}_${Math.random().toString(36).slice(2,7)}`,value:num,type:""});
+ });
+ closeModal();
+ await render();
+ toast("Note hinzugefügt.");
+ }catch(e){console.error("Note speichern:",e);toast("Note konnte nicht gespeichert werden.")}
+}
+async function deleteNotenEintrag(fach,hj,entryId){
+ try{
+ await updateNotenDoc(data=>{
+ if(data.entries?.[fach]?.[hj])data.entries[fach][hj]=data.entries[fach][hj].filter(e=>e.id!==entryId);
+ });
+ await openNotenDetail(fach,hj);
+ await render();
+ toast("Note gelöscht.");
+ }catch(e){console.error("Note löschen:",e);toast("Konnte nicht gelöscht werden.")}
+}
+async function openNotenDetail(fach,hj){
+ const noten=await getMeineNoten();
+ if(fach==="fachreferat"){
+ const liste=notenListe(noten,fach,hj);
+ const avg=notenDurchschnitt(liste);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"1. HALBJAHR":"2. HALBJAHR"}</div>
+ <h2>${esc(fachLabel(fach))}</h2>
+ <p style="color:var(--muted)">Die fachpraktische Ausbildung wird separat bewertet (§8 FOBOSO) – trag hier die einzelnen Bewertungen ein.</p>
+ <div class="notice"style="margin-bottom:14px"><strong style="font-size:22px">${avg===null?"—":avg+" Punkte"}</strong><small style="display:block;color:var(--muted)">Durchschnitt aus ${liste.length} ${liste.length===1?"Eintrag":"Einträgen"}</small></div>
+ <div class="list">${liste.map(e=>`<div class="list-item"><div><strong>${e.value} Punkte</strong></div><button class="secondary"onclick="deleteNotenEintrag('${fach}','${hj}','${e.id}')">Löschen</button></div>`).join("")||`<div class="empty">Noch keine Note eingetragen.</div>`}</div>
+ <div class="form-actions"style="margin-top:14px;flex-wrap:wrap">
+ <input id="notenNeuValue"type="number"min="0"max="15"placeholder="0–15"style="width:80px">
+ <button class="primary"onclick="addNotenEintrag('${fach}','${hj}')">＋ Hinzufügen</button>
+ </div>
+ <div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="closeModal()">Schließen</button></div>
+ `);
+ return;
+ }
+ const sa=schulaufgabenListe(noten,fach,hj);
+ const sonst=sonstigeListe(noten,fach,hj);
+ const sSchnitt=sonstigeSchnitt(sonst);
+ const ergebnis=berechneHalbjahresergebnis(noten,fach,hj);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"1. HALBJAHR":"2. HALBJAHR"}</div>
+ <h2>${esc(fachLabel(fach))}</h2>
+ <p style="color:var(--muted)">Nach § 21 Abs. 1 FOBOSO: Der (gewichtete) Durchschnitt der sonstigen Leistungen zählt genauso viel wie jede Schulaufgabe.</p>
+ <div class="notice"style="margin-bottom:14px">
+ <strong style="font-size:24px">${ergebnis===null?"—":`${ergebnis} Punkte`}</strong>${ergebnis!==null?` <span class="pill">${fobosoNotenwort(ergebnis)}</span>`:""}
+ <small style="display:block;color:var(--muted)">Halbjahresergebnis (gerundet)</small>
+ </div>
+
+ <h3 style="margin:14px 0 6px;font-size:14px"> Schulaufgabe(n)</h3>
+ <div class="list">${sa.map((v,i)=>`<div class="list-item"><strong>${v} Punkte</strong><button class="secondary"onclick="deleteSchulaufgabe('${fach}','${hj}',${i})">Löschen</button></div>`).join("")||`<div class="empty">Noch keine Schulaufgabe eingetragen.</div>`}</div>
+ <div class="form-actions"style="margin-top:8px;align-items:flex-end">
+ <label style="width:80px">Punkte<input id="saNeuValue"type="number"min="0"max="15"placeholder="0–15"></label>
+ <button class="primary"onclick="addSchulaufgabe('${fach}','${hj}')">＋ Schulaufgabe</button>
+ </div>
+
+ <h3 style="margin:18px 0 4px;font-size:14px"> Sonstige Leistungen (schriftlich & mündlich, ein gemeinsamer Topf)</h3>
+ <p style="font-size:11px;color:var(--muted);margin:0 0 8px">Durchschnitt: ${sSchnitt===null?"—":sSchnitt.toFixed(2)+" Punkte"} aus ${sonst.length} ${sonst.length===1?"Eintrag":"Einträgen"} – zählt wie eine weitere Schulaufgabe.</p>
+ <div class="list">${sonst.map(e=>`<div class="list-item"><div><strong>${e.value} Punkte</strong><small>${sonstigeLeistungLabel(e.type)}${e.gewicht&&e.gewicht!==1?` · Gewicht ${e.gewicht}`:""}</small></div><button class="secondary"onclick="deleteSonstigeLeistung('${fach}','${hj}','${e.id}')">Löschen</button></div>`).join("")||`<div class="empty">Noch keine Leistung eingetragen.</div>`}</div>
+ <div class="form-actions"style="margin-top:8px;flex-wrap:wrap;align-items:flex-end">
+ <label style="width:70px">Punkte<input id="sonstNeuValue"type="number"min="0"max="15"placeholder="0–15"></label>
+ <label style="width:170px">Art<select id="sonstNeuType">
+ <option value="stegreif">Stegreifaufgabe</option>
+ <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="muendlich">Mündliche Note</option>
+ </select></label>
+ <label style="width:85px">Gewichtung<input id="sonstNeuGewicht"type="number"min="0.5"max="5"step="0.5"value="1"title="Gewichtung nach Umfang/Schwierigkeitsgrad"></label>
+ <button class="primary"onclick="addSonstigeLeistung('${fach}','${hj}')">＋ Hinzufügen</button>
+ </div>
+
+ <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>
+ `);
+}
+async function resetMeineNoten(){
+ if(!confirm("Wirklich alle eigenen Noten zurücksetzen? Das kann nicht rückgängig gemacht werden."))return;
+ try{
+ await deleteDoc(doc(db,"noten",currentUser.uid));
+ closeModal();
+ await render();
+ toast("Noten zurückgesetzt.");
+ }catch(e){console.error("Noten zurücksetzen:",e);toast("Konnte nicht zurückgesetzt werden.")}
+}
+window.addSchulaufgabe=addSchulaufgabe;window.deleteSchulaufgabe=deleteSchulaufgabe;
+window.addSonstigeLeistung=addSonstigeLeistung;window.deleteSonstigeLeistung=deleteSonstigeLeistung;
+window.openNotenDetail=openNotenDetail;
+function openNotenSchnellzugriff(){
+ const fach=$("notenSchnellFach")?.value;
+ const hj=$("notenSchnellHj")?.value;
+ if(fach&&hj)openNotenDetail(fach,hj);
+}
+window.openNotenSchnellzugriff=openNotenSchnellzugriff;
+window.addNotenEintrag=addNotenEintrag;
+window.deleteNotenEintrag=deleteNotenEintrag;
+window.resetMeineNoten=resetMeineNoten;
+
+// ---- Bestehens-Rechner nach §8, §21 Abs. 3, §22 Abs. 1 Nr. 2 FOBOSO -------
+// Hinweis: Dies ist ausschließlich eine Orientierungshilfe (wie die
+// entsprechenden "ohne Gewähr"-Tools der Schulen selbst). Die tatsächliche
+// Entscheidung trifft die Klassenkonferenz/Schulleitung anhand einer
+// pädagogischen Gesamtwürdigung, nicht rein rechnerisch. Verwendet wird
+// jeweils der Durchschnitt aller schriftlichen/mündlichen Einzelnoten.
+function checkFoboso21(punkte){
+ const n=punkte.length;
+ if(!n)return{passed:null,rule:null};
+ const sum=punkte.reduce((a,b)=>a+b,0);
+ const zero=punkte.filter(p=>p===0).length;
+ const oneToThree=punkte.filter(p=>p>=1&&p<=3).length;
+ const atLeastFour=punkte.filter(p=>p>=4).length;
+ if(zero===0&&oneToThree===0)return{passed:true,rule:"a"};
+ if(zero===1&&oneToThree===0&&atLeastFour===n-1&&sum>=6*n)return{passed:true,rule:"d"};
+ if(zero===0&&oneToThree===1&&atLeastFour===n-1&&sum>=5*n)return{passed:true,rule:"b"};
+ if(zero===0&&oneToThree===2&&atLeastFour===n-2&&sum>=6*n)return{passed:true,rule:"c"};
+ return{passed:false,rule:null};
+}
+// Für die 12. Klasse gibt es keine Probezeit mehr (die gilt nur in der 11.).
+// Stattdessen ist relevant: die Jahrespunktzahl je Fach (§21 FOBOSO) und eine
+// grobe Orientierung, ob die Zulassungsvoraussetzungen zur Abschlussprüfung
+// nach §31/§35 FOBOSO grundsätzlich im Rahmen liegen. Die exakte
+// Fachabitur-Berechnung mit optimalem Streichvorschlag (25 Halbjahresergebnisse
+// + 4 dreifach gewichtete Prüfungen + Fachreferat, §35 Abs. 6 FOBOSO) leistet
+// diese App bewusst nicht – dafür nutzt eure Schule den offiziellen
+// Streichvorschlag-Rechner (z. B. der Beruflichen Oberschule Traunstein).
+function berechneBestehen(noten){
+ const faecherHJ1=F12SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj1"));
+ const faecherHJ2=F12SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj2"));
+ const fachreferatHj1=notenDurchschnitt(notenListe(noten,"fachreferat","hj1")),fachreferatHj2=notenDurchschnitt(notenListe(noten,"fachreferat","hj2"));
+ const vollHJ1=faecherHJ1.every(p=>Number.isFinite(p))&&Number.isFinite(fachreferatHj1);
+ const vollJahr=vollHJ1&&faecherHJ2.every(p=>Number.isFinite(p))&&Number.isFinite(fachreferatHj2);
+
+ let jahr=null;
+ if(vollJahr){
+ // Jahrespunktzahl nach § 21 Abs. 2 FOBOSO: Durchschnitt der beiden
+ // (bereits gerundeten) Halbjahresergebnisse, danach erneut gerundet.
+ const jahrespunkte=F12SB_FAECHER.map((f,i)=>foboso19Runden((faecherHJ1[i]+faecherHJ2[i])/2));
+ // Orientierung nach §35 Abs. 9 FOBOSO: höchstens 2 Gesamtergebnisse mit
+ // 1–3 Punkten bzw. 1 mit 0 Punkten – sonst ist die Zulassung gefährdet.
+ const unter4=jahrespunkte.filter(p=>p>=1&&p<=3).length;
+ const nullPunkte=jahrespunkte.filter(p=>p===0).length;
+ const imRahmen=nullPunkte<=1 && (nullPunkte===1?unter4===0:unter4<=2);
+ jahr={jahrespunkte,imRahmen,fachreferatHj1,fachreferatHj2};
+ }
+ return{jahr,vollHJ1,vollJahr};
+}
+// Einfache Orientierung "was fehlt noch": für jedes noch unter 4 liegende
+// oder fehlende Fach wird angezeigt, welcher Wert für die einfachste
+// Bestehens-Variante (Regel a: alle Fächer ≥4) fehlen würde.
+function wasFehltNochHJ1(noten){
+ const liste=F12SB_FAECHER.map(f=>{
+ const p=berechneHalbjahresergebnis(noten,f.key,"hj1");
+ if(!Number.isFinite(p)){
+ const hatSA=schulaufgabenListe(noten,f.key,"hj1").length>0;
+ const hatSonst=sonstigeListe(noten,f.key,"hj1").length>0;
+ const fehlt=!hatSA&&!hatSonst?"Schulaufgabe und sonstige Leistungen fehlen noch":!hatSA?"Schulaufgabe fehlt noch":"Sonstige Leistungen fehlen noch";
+ return{label:f.label,status:"fehlt",text:fehlt};
+ }
+ if(p===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
+ if(p<4)return{label:f.label,status:"kritisch",text:`Aktuell ${p} Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-p} Punkte`};
+ return{label:f.label,status:"ok",text:`${p} Punkte`};
+ });
+ const fpaP=notenDurchschnitt(notenListe(noten,"fachreferat","hj1"));
+ if(fpaP===null)liste.push({label:"Fachreferat (Seminar)",status:"fehlt",text:"Note fehlt noch"});
+ else if(fpaP===0)liste.push({label:"Fachreferat (Seminar)",status:"ungenuegend",text:"0 Punkte – mind. 4 Punkte nötig"});
+ else if(fpaP<4)liste.push({label:"Fachreferat (Seminar)",status:"kritisch",text:`Aktuell ${fpaP} Punkte – mind. 4 Punkte nötig`});
+ else liste.push({label:"Fachreferat (Seminar)",status:"ok",text:`${fpaP} Punkte`});
+ return liste;
+}
+// Analoge Übersicht fürs ganze Schuljahr: Jahrespunktzahl je Fach (Durchschnitt
+// der beiden Halbjahresergebnisse) plus fpA mit eigener Jahresregel (§8 FOBOSO).
+function wasFehltNochJahr(noten){
+ const liste=F12SB_FAECHER.map(f=>{
+ const p1=berechneHalbjahresergebnis(noten,f.key,"hj1");
+ const p2=berechneHalbjahresergebnis(noten,f.key,"hj2");
+ if(!Number.isFinite(p1)||!Number.isFinite(p2)){
+ const fehlt=!Number.isFinite(p1)&&!Number.isFinite(p2)?"HJ1 und HJ2 fehlen noch":!Number.isFinite(p1)?"HJ1 fehlt noch":"HJ2 fehlt noch";
+ return{label:f.label,status:"fehlt",text:fehlt};
+ }
+ const jp=foboso19Runden((p1+p2)/2);
+ if(jp===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
+ if(jp<4)return{label:f.label,status:"kritisch",text:`Aktuell ${jp} Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-jp} Punkte`};
+ return{label:f.label,status:"ok",text:`${jp} Punkte im Jahr`};
+ });
+ const fpa1=notenDurchschnitt(notenListe(noten,"fachreferat","hj1"));
+ const fpa2=notenDurchschnitt(notenListe(noten,"fachreferat","hj2"));
+ if(fpa1===null||fpa2===null){
+ liste.push({label:"Fachreferat (Seminar)",status:"fehlt",text:fpa1===null&&fpa2===null?"HJ1 und HJ2 fehlen noch":fpa1===null?"HJ1 fehlt noch":"HJ2 fehlt noch"});
+ }else{
+ const ok=fpa1>=4&&fpa2>=4&&(fpa1+fpa2)>=10;
+ liste.push({label:"Fachreferat (Seminar)",status:ok?"ok":(fpa1===0||fpa2===0)?"ungenuegend":"kritisch",text:`HJ1: ${fpa1} · HJ2: ${fpa2} Punkte (Summe ${fpa1+fpa2}, mind. 10 nötig)`});
+ }
+ return liste;
+}
+
+// ---- Wochen-/Monatsplanung -------------------------------------------
+async function getMeineWochenplanung(){
+ if(!db||!currentUser)return [];
+ try{
+ const snap=await getDocs(query(collection(db,"wochenplanung"),where("uid","==",currentUser.uid)));
+ return snap.docs.map(d=>({id:d.id,...d.data()}))
+ .sort((a,b)=>(a.dueDate||"9999-99-99").localeCompare(b.dueDate||"9999-99-99"));
+ }catch(e){console.error("Wochenplanung laden:",e);return []}
+}
+function openWochenplanForm(existing){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">WOCHEN-/MONATSPLANUNG</div>
+ <h2>${existing?"Eintrag bearbeiten":"Neue Planung"}</h2>
+ <div class="form">
+ <label>Was steht an?<input id="wpTitle"type="text"maxlength="140"value="${esc(existing?.title||"")}"placeholder="z. B. Vokabeltest vorbereiten"></label>
+ <label>Fach (optional)<select id="wpSubject">
+ <option value="">Kein bestimmtes Fach</option>
+ ${F12SB_FAECHER.map(f=>`<option value="${f.key}"${existing?.subject===f.key?"selected":""}>${f.label}</option>`).join("")}
+ </select></label>
+ <label>Zeitraum<select id="wpScope">
+ <option value="woche"${(!existing||existing.scope==="woche")?"selected":""}>Diese Woche</option>
+ <option value="monat"${existing?.scope==="monat"?"selected":""}>Dieser Monat</option>
+ </select></label>
+ <label>Termin (optional)<input id="wpDate"type="date"value="${esc(existing?.dueDate||"")}"></label>
+ <label>Notiz (optional)<textarea id="wpNote"rows="2"maxlength="300">${esc(existing?.note||"")}</textarea></label>
+ <div class="form-actions">
+ <button class="secondary"onclick="closeModal()">Abbrechen</button>
+ ${existing?`<button class="secondary"onclick="deleteWochenplanEntry('${existing.id}')">Löschen</button>`:""}
+ <button class="primary"onclick="saveWochenplanEntry(${existing?`'${existing.id}'`:"null"})">Speichern</button>
+ </div>
+ </div>`);
+}
+async function saveWochenplanEntry(id){
+ if(!isApproved()){toast("Nur freigeschaltete Nutzer können planen.");return}
+ const title=$("wpTitle")?.value.trim();
+ if(!title){toast("Bitte eintragen, was ansteht.");return}
+ const payload={
+ uid:currentUser.uid,
+ title,
+ subject:$("wpSubject")?.value||"",
+ scope:$("wpScope")?.value||"woche",
+ dueDate:$("wpDate")?.value||"",
+ note:$("wpNote")?.value.trim()||"",
+ updatedAt:serverTimestamp()
+ };
+ try{
+ if(id){
+ await updateDoc(doc(db,"wochenplanung",id),payload);
+ }else{
+ payload.createdAt=serverTimestamp();
+ payload.done=false;
+ await addDoc(collection(db,"wochenplanung"),payload);
+ }
+ closeModal();
+ await render();
+ toast("Gespeichert.");
+ }catch(e){console.error("Wochenplanung speichern:",e);toast("Konnte nicht gespeichert werden.")}
+}
+async function toggleWochenplanDone(id,done){
+ try{await updateDoc(doc(db,"wochenplanung",id),{done:!done,updatedAt:serverTimestamp()});await render();}
+ catch(e){console.error("Wochenplanung ändern:",e);toast("Konnte nicht geändert werden.")}
+}
+async function deleteWochenplanEntry(id){
+ if(!confirm("Diesen Planungseintrag wirklich löschen?"))return;
+ try{
+ await deleteDoc(doc(db,"wochenplanung",id));
+ closeModal();
+ await render();
+ toast("Eintrag gelöscht.");
+ }catch(e){console.error("Wochenplanung löschen:",e);toast("Konnte nicht gelöscht werden.")}
+}
+async function quickAddWochenplan(){
+ const input=$("quickWpInput");
+ const title=input?.value.trim();
+ if(!title){toast("Bitte kurz eintragen, was ansteht.");return}
+ if(!isApproved()){toast("Nur freigeschaltete Nutzer können planen.");return}
+ try{
+ await addDoc(collection(db,"wochenplanung"),{
+ uid:currentUser.uid,title,subject:"",scope:"woche",dueDate:"",note:"",done:false,createdAt:serverTimestamp()
+ });
+ if(input)input.value="";
+ await render();
+ toast("Zur Wochenplanung hinzugefügt.");
+ }catch(e){console.error("Schnell-Eintrag:",e);toast("Konnte nicht gespeichert werden.")}
+}
+window.openWochenplanForm=openWochenplanForm;
+window.saveWochenplanEntry=saveWochenplanEntry;
+window.toggleWochenplanDone=toggleWochenplanDone;
+window.deleteWochenplanEntry=deleteWochenplanEntry;
+window.quickAddWochenplan=quickAddWochenplan;
+
+function aktuellePraktikumsphase(){
+ const today=new Date().toISOString().slice(0,10);
+ const laufend=PRAKTIKUMSPHASEN.find(p=>today>=p.start&&today<=p.end);
+ if(laufend)return {...laufend,status:"laufend"};
+ const kommend=PRAKTIKUMSPHASEN.filter(p=>p.start>today).sort((a,b)=>a.start.localeCompare(b.start))[0];
+ return kommend?{...kommend,status:"kommend"}:null;
+}
+async function miniKalenderHTML(){
+ let events=[];
+ try{events=(await getCollection("events","start",false)).map(e=>({...e,collection:"events"}))}catch(e){}
+ if(!events.length){try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){}}
+ let birthdayEvents=[];
+ try{birthdayEvents=await getBirthdayEvents()}catch(e){}
+ // Dieselben Schulferien-Zeiträume wie im vollständigen Campus-Kalender.
+ const ferienZeitraeume=[
+ ["2026-08-03","2026-09-14"],["2026-11-02","2026-11-06"],["2026-12-24","2027-01-08"],
+ ["2027-02-08","2027-02-12"],["2027-03-22","2027-04-02"],["2027-05-18","2027-05-28"],["2027-08-02","2027-09-13"]
+ ];
+ const istFerien=key=>ferienZeitraeume.some(([von,bis])=>key>=von&&key<=bis);
+ const today=new Date();today.setHours(0,0,0,0);
+ const monday=new Date(today);monday.setDate(today.getDate()-((today.getDay()+6)%7));
+ const days=Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return d});
+ const dateKey=d=>d.toISOString().slice(0,10);
+ const eventDates=new Set(events.map(e=>String(e.start||e.date||"").slice(0,10)));
+ const birthdayDates=new Set(birthdayEvents.map(e=>String(e.start||"").slice(0,10)));
+ const wt=["Mo","Di","Mi","Do","Fr","Sa","So"];
+ return `<a href="#kalender"class="mini-kalender">
+ ${days.map((d,i)=>{const key=dateKey(d);const isToday=key===dateKey(today);
+ const ferien=istFerien(key),geburtstag=birthdayDates.has(key),termin=eventDates.has(key);
+ return `<div class="mini-kalender-day${isToday?" mini-kalender-today":""}${ferien?" mini-kalender-ferien":""}"><small>${wt[i]}</small><strong>${d.getDate()}</strong>${geburtstag?`<span class="mini-kalender-dot mini-kalender-dot-pink"></span>`:termin?`<span class="mini-kalender-dot"></span>`:""}</div>`;}).join("")}
+ </a>
+ <small style="display:block;margin-top:6px;color:var(--muted);font-size:10px">Zum vollständigen Campus-Kalender →</small>`;
+}
 async function renderStart(){
- let tasks=[],projects=[],news=[],nextCalendar=null,birthdayInfo=null;
- try{[tasks,projects,news,nextCalendar,birthdayInfo]=await Promise.all([getCollection("tasks","deadline",false),getCollection("projects"),getCollection("news"),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo()])}catch(e){}
- const on=tasks.filter(x=>x.status==="green").length;
+ let tasks=[],projects=[],news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
+ try{[tasks,projects,news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("tasks","deadline",false),getCollection("projects"),getCollection("news"),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
+ const miniKalender=await miniKalenderHTML();
  const upcomingDate=nextCalendar?.start||nextCalendar?.date||nextCalendar?.startDate;
  const upcomingDateText=upcomingDate?.seconds?new Date(upcomingDate.seconds*1000).toLocaleDateString("de-DE"):String(upcomingDate||"").slice(0,10);
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
@@ -1087,7 +2115,41 @@ async function renderStart(){
  +(isTeacher()?`<button class="secondary"onclick="openUserManagement()"> Benutzer verwalten</button>`:"");
  return`<section class="hero"><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Projekte, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
-</div><div class="actions"><button class="primary"onclick="go('kompass')">Mein Kompass →</button><button class="secondary"onclick="go('forum')">Campus-Forum</button></div></section>
+</div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button><button class="secondary"onclick="go('forum')">Campus-Forum</button></div></section>
+ <div class="grid grid-3">
+ <div class="card card-compact"style="background:var(--soft-blue)"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
+class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isAdmin()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
+</div>`).join("")||`<div class="empty">Noch keine News.</div>`}</div></div>
+ <div class="card card-compact"style="background:var(--soft-purple)"><h3> Nächster Termin</h3><div class="list">${nextCalendar?`<div class="list-item"><div><strong>${esc(nextCalendar.title||nextCalendar.name||"Termin")}</strong><small>${esc(upcomingDateText)}${upcomingTime}</small></div><span class="pill green">Termin</span></div>`:`<div class="empty">Noch keine anstehenden Termine.</div>`}</div></div>
+ <div class="card card-compact"style="background:var(--soft-pink)"><h3> Geburtstage</h3>${
+ !birthdayInfo?`<div class="empty">Noch keine Geburtstage eingetragen.</div>`
+ :birthdayInfo.isToday?`<p style="margin:6px 0 0;font-weight:800;font-size:14px"> Herzlichen Glückwunsch, ${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}!</p>`
+ :`<div class="list-item"><div><strong>${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}</strong><small>${esc(birthdayInfo.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))} · ${birthdayInfo.days===1?"morgen":`in ${birthdayInfo.days} Tagen`}</small></div><span class="pill"style="background:${personColor(birthdayInfo.people[0].uid).border};color:#fff">Nächste(r)</span></div>`
+ }</div>
+ </div>
+ <div class="grid grid-2"style="margin-bottom:16px;gap:12px">
+ <div class="card card-compact"style="text-align:center">
+ <h3 style="margin:0 0 6px"> Uhrzeit</h3>
+ <div style="display:flex;justify-content:center">${analogClockSVG(64)}</div>
+ <small class="live-clock-date"style="color:var(--muted);display:block;margin-top:4px">${new Date().toLocaleDateString("de-DE",{weekday:"long",day:"2-digit",month:"long"})}</small>
+ </div>
+ <div class="card card-compact">
+ <h3 style="margin:0 0 8px"> Kalender</h3>
+ <div id="miniKalenderWrap">${miniKalender}</div>
+ </div>
+ </div>
+ ${(()=>{ensureGlobalClock();return"";})()}
+ <div class="card"style="margin-top:16px;margin-bottom:16px">
+ <div class="kicker">STUNDENPLAN</div>
+ <h2 style="margin-top:4px">Aktueller Stundenplan</h2>
+ ${webUntisEmbedHTML(300)}
+ <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+ <input id="quickWpInput"type="text"maxlength="140"placeholder="Was steht diese Woche an? Kurz eintragen …"style="flex:1;min-width:220px">
+ <button class="primary"onclick="quickAddWochenplan()">＋ Zur Wochenplanung</button>
+ <button class="secondary"onclick="go('kompass')">Ausführlicher planen →</button>
+ </div>
+ ${wochenplan.length?`<div class="list"style="margin-top:10px">${wochenplan.filter(w=>!w.done).slice(0,3).map(w=>`<div class="list-item"><div><strong>${esc(w.title)}</strong>${w.subject?`<small>${esc(F12SB_FAECHER.find(f=>f.key===w.subject)?.label||"")}</small>`:""}</div><span class="pill">${w.scope==="monat"?"Monat":"Woche"}</span></div>`).join("")}</div>`:""}
+ </div>
  <div class="card"style="margin-bottom:16px;text-align:center;background:var(--soft-green)">
  <h2 style="margin:0 0 8px"> FOSBOS-WM Jahresfokus: Solidarität und Zusammenhalt</h2>
  <p style="margin:0;font-style:italic;color:var(--muted)">„Solidarität lebt von kleinen Taten – heute schon jemandem geholfen?“</p>
@@ -1097,59 +2159,606 @@ verbinden wir Lernen, Projekte, Praxis und Gemeinschaft. Alle angemeldeten Mitgl
  ${tile(" ","Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass")}
  ${tile(" ","Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt")}
  ${tile(" ","Campus-Forum","Austauschen, fragen, helfen und gemeinsam denken.","forum")}
- ${tile(" ","Pinnwand","Ideen sammeln, brainstormen und gemeinsam pinnen.","pinnwand")}
  ${tile(" ","Projekte","Projektteams, Ziele, Fortschritt und Ergebnisse.","projekte")}
  ${tile(" ","Kompetenzwerkstatt","Kompetenzen sichtbar machen und entwickeln.","kompetenz")}
  ${tile(" ","Lernjournal","Lernweg, Reflexionen und nächste Schritte.","journal")}</div>
- <div class="grid grid-3"style="margin-top:12px"><div class="card stat"><b>${tasks.length}</b><span>Arbeitspakete</span></div>
-<div class="card stat"><b>${on}</b><span>auf Kurs</span></div><div class="card stat"><b>${currentUser?1:0}</b><span>dein Zugang
-ist aktiv</span></div></div>
- <div class="grid grid-3"style="margin-top:12px">
- <div class="card"style="background:var(--soft-blue)"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
-class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isAdmin()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
-</div>`).join("")||`<div class="empty">Noch keine News.</div>`}</div></div>
- <div class="card"style="background:var(--soft-purple)"><h3> Nächster Termin</h3><div class="list">${nextCalendar?`<div class="list-item"><div><strong>${esc(nextCalendar.title||nextCalendar.name||"Termin")}</strong><small>${esc(upcomingDateText)}${upcomingTime}</small></div><span class="pill green">Termin</span></div>`:`<div class="empty">Noch keine anstehenden Termine.</div>`}</div></div>
- <div class="card"style="background:var(--soft-pink)"><h3> Geburtstage</h3>${
- !birthdayInfo?`<div class="empty">Noch keine Geburtstage eingetragen.</div>`
- :birthdayInfo.isToday?`<p style="margin:10px 0 0;font-weight:800;font-size:16px"> Herzlichen Glückwunsch zum Geburtstag, ${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}!</p>`
- :`<div class="list-item"><div><strong>${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}</strong><small>${esc(birthdayInfo.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))} · ${birthdayInfo.days===1?"morgen":`in ${birthdayInfo.days} Tagen`}</small></div><span class="pill"style="background:${personColor(birthdayInfo.people[0].uid).border};color:#fff">Nächste(r)</span></div>`
- }</div>
- </div>${footer()}`;
+</div>${footer()}`;
 }
+async function getRecentForumActivityCount(days){
+ try{
+ const posts=await getCollection("posts","createdAt",true);
+ const cutoff=Date.now()-days*86400000;
+ return posts.filter(p=>{
+ const t=p.createdAt?.seconds?p.createdAt.seconds*1000:0;
+ return t>=cutoff;
+ }).length;
+ }catch(e){return 0}
+}
+
+function printNotenPDF(noten,bestehen){
+ const win=window.open("","_blank","width=800,height=800");
+ if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
+ const fmt=(fach,hj)=>{const erg=berechneHalbjahresergebnis(noten,fach,hj);const sa=schulaufgabenListe(noten,fach,hj).length,so=sonstigeListe(noten,fach,hj).length;return erg===null?"—":`${erg} Punkte (${sa} SA, ${so} sonst.)`};
+ const fmtFpa=hj=>{const l=notenListe(noten,"fachreferat",hj);const a=notenDurchschnitt(l);return a===null?"—":`${a} (${l.length} ${l.length===1?"Note":"Noten"})`};
+ const rows=F12SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
+ const fpaRow=`<tr><td><em>Fachreferat (Seminar)</em></td><td>${fmtFpa("hj1")}</td><td>${fmtFpa("hj2")}</td></tr>`;
+ const statusText=(label,r)=>!r?`${label}: noch nicht alle Noten eingetragen.`:`${label}: ${r.passed?"nach aktueller Punktlage bestanden":"nach aktueller Punktlage nicht bestanden"}.`;
+ win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Noten – F12Sb</title>
+ <style>
+ @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.55;margin:0}
+ h1{font-size:24px;margin:0 0 4px}.meta{color:#666;font-size:12px;margin-bottom:20px}
+ table{width:100%;border-collapse:collapse;margin-bottom:20px}th,td{border:1px solid #ccc;padding:8px;text-align:left;font-size:13px}
+ th{background:#f3f3f3}.status{background:#f3f3f3;border-radius:8px;padding:12px;font-size:13px;margin-top:10px}
+ .disclaimer{font-size:11px;color:#777;margin-top:16px}
+ .print-note{background:#f3f3f3;padding:10px;border-radius:8px;margin-bottom:20px;font-size:12px}
+ @media print{.print-note{display:none}}
+ </style></head><body>
+ <div class="print-note">Persönliche Notenübersicht. Im Druckdialog „Als PDF sichern“ auswählen.</div>
+ <h1>Meine Noten – F12Sb</h1>
+ <div class="meta">Punkte 0–15 je Fach und Halbjahr</div>
+ <table><thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead><tbody>${rows}${fpaRow}</tbody></table>
+ <div class="status">
+ <strong>${!bestehen.vollJahr?"Jahresergebnis: noch nicht alle Noten eingetragen.":bestehen.jahr.imRahmen?"Zulassungs-Orientierung: im Rahmen von §35 Abs. 9 FOBOSO.":"Achtung: Punktlage könnte die Zulassung zur Abschlussprüfung gefährden."}</strong>
+ </div>
+ <p class="disclaimer">Diese Berechnung ist ausschließlich eine Orientierungshilfe nach §21, §35 Abs. 9 FOBOSO – ohne Gewähr. Die vollständige Fachabitur-Berechnung übernimmt der offizielle Streichvorschlag-Rechner eurer Schule.</p>
+ <script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script>
+ </body></html>`);
+ win.document.close();
+}
+function printWochenplanPDF(entries){
+ const win=window.open("","_blank","width=800,height=800");
+ if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
+ const rows=entries.map(w=>`<tr><td>${w.done?"✓":""}</td><td>${escPDF(w.title)}</td><td>${w.subject?escPDF(F12SB_FAECHER.find(f=>f.key===w.subject)?.label||""):"—"}</td><td>${w.scope==="monat"?"Monat":"Woche"}</td><td>${escPDF(w.dueDate||"—")}</td></tr>`).join("");
+ win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Wochenplanung – F12Sb</title>
+ <style>
+ @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.55;margin:0}
+ h1{font-size:24px;margin:0 0 16px}
+ table{width:100%;border-collapse:collapse}th,td{border:1px solid #ccc;padding:8px;text-align:left;font-size:13px}
+ th{background:#f3f3f3}
+ .print-note{background:#f3f3f3;padding:10px;border-radius:8px;margin-bottom:20px;font-size:12px}
+ @media print{.print-note{display:none}}
+ </style></head><body>
+ <div class="print-note">Persönliche Wochen-/Monatsplanung. Im Druckdialog „Als PDF sichern“ auswählen.</div>
+ <h1>Meine Wochen-/Monatsplanung – F12Sb</h1>
+ <table><thead><tr><th>Erl.</th><th>Was steht an</th><th>Fach</th><th>Zeitraum</th><th>Termin</th></tr></thead><tbody>${rows||"<tr><td colspan=5>Noch keine Einträge.</td></tr>"}</tbody></table>
+ <script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script>
+ </body></html>`);
+ win.document.close();
+}
+window.printNotenPDF=printNotenPDF;window.printWochenplanPDF=printWochenplanPDF;
+
 async function renderKompass(){
  const tasks=await getCollection("tasks","deadline",false), projects=await getCollection("projects");
  const projectDeadlines=projects.filter(p=>p.deadline).sort((a,b)=>String(a.deadline).localeCompare(String(b.deadline)));
  const todayStr=new Date().toISOString().slice(0,10);
- return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Aufgaben, Projekte, Ziele und Lernweg.",`<button class="primary"onclick="openTaskForm()">＋ Aufgabe</button>`)}
+ const [unreadCount,forumActivity,wochenplan,noten]=await Promise.all([
+ getUnreadMessageCount().catch(()=>0),
+ getRecentForumActivityCount(3),
+ getMeineWochenplanung(),
+ getMeineNoten()
+ ]);
+ const bestehen=berechneBestehen(noten);
+ const offenePlanung=wochenplan.filter(w=>!w.done);
+ const erledigtePlanung=wochenplan.filter(w=>w.done);
+
+ return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Aufgaben, Noten und Projekte.",`<button class="primary"onclick="openTaskForm()">＋ Aufgabe</button>`)}
+
+ ${(unreadCount>0||forumActivity>0)?`<div class="kompass-alerts">
+ ${unreadCount>0?`<a href="#forum-nachrichten"class="pill kompass-alert-msg"> ${unreadCount} neue Nachricht${unreadCount===1?"":"en"}</a>`:""}
+ ${forumActivity>0?`<a href="#forum-board"class="pill kompass-alert-forum"> ${forumActivity} neue${forumActivity===1?"r":""} Forum-Beitrag${forumActivity===1?"":"e"} (3 Tage)</a>`:""}
+ </div>`:""}
+
+ <div class="kicker"style="margin-top:6px">ORIENTIERUNG</div>
+ <div class="card"style="margin-top:8px">
+ <h2 style="margin-top:0"> Aktueller Stundenplan</h2>
+ ${webUntisEmbedHTML(360)}
+ </div>
+
+ <div class="kicker"style="margin:22px 0 8px">WOCHEN-/MONATSPLANUNG</div>
+ <div class="card">
+ <p style="color:var(--muted);margin-top:0">Orientiere dich am Stundenplan oben: Was steht diese Woche oder diesen Monat an? Nur du siehst deine eigene Planung.</p>
+ <div class="form-actions"style="margin-bottom:10px">
+ <button class="primary"onclick="openWochenplanForm(null)">＋ Neuer Planungspunkt</button>
+ ${wochenplan.length?`<button class="secondary"onclick="printWochenplanPDF(${JSON.stringify(wochenplan).replace(/"/g,"&quot;")})"> Als PDF</button>`:""}
+ </div>
+ <div class="list">${offenePlanung.map(w=>`<div class="list-item">
+ <div><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox"onclick="toggleWochenplanDone('${w.id}',${!!w.done})"><strong>${esc(w.title)}</strong></label>
+ <small>${w.subject?esc(F12SB_FAECHER.find(f=>f.key===w.subject)?.label||""):"Kein Fach"} ${w.dueDate?"· "+esc(fmtDateOnly(w.dueDate)):""}</small></div>
+ <div style="display:flex;gap:6px;align-items:center"><span class="pill">${w.scope==="monat"?"Monat":"Woche"}</span><button class="secondary"onclick="openWochenplanForm(${JSON.stringify(w).replace(/"/g,"&quot;")})">Bearbeiten</button></div>
+ </div>`).join("")||`<div class="empty">Noch nichts geplant. Leg deinen ersten Punkt an.</div>`}</div>
+ ${erledigtePlanung.length?`<details style="margin-top:10px"><summary style="cursor:pointer;color:var(--muted);font-size:13px">${erledigtePlanung.length} erledigt</summary>
+ <div class="list"style="margin-top:8px">${erledigtePlanung.map(w=>`<div class="list-item"style="opacity:.6"><div><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox"checked onclick="toggleWochenplanDone('${w.id}',${!!w.done})"><strong style="text-decoration:line-through">${esc(w.title)}</strong></label></div><button class="secondary"onclick="deleteWochenplanEntry('${w.id}')">Löschen</button></div>`).join("")}</div>
+ </details>`:""}
+ </div>
+
+ <div class="kicker"style="margin:22px 0 8px">PERSÖNLICH · NUR FÜR DICH SICHTBAR</div>
+ <div class="card">
+ <h2 style="margin-top:0"> Meine Noten</h2>
+ <p style="color:var(--muted);font-size:12px">Halbjahresergebnis nach § 21 Abs. 1 FOBOSO. Diese Ansicht sieht ausschließlich du selbst, nicht einmal Lehrkräfte.</p>
+
+ <div class="noten-split">
+ <div class="noten-eintragen-kachel">
+ <strong style="display:block;font-size:13px;margin-bottom:8px"> Note eintragen</strong>
+ <label style="font-size:11px">Fach<select id="notenSchnellFach">
+ ${F12SB_FAECHER.map(f=>`<option value="${f.key}">${f.label}</option>`).join("")}
+ <option value="fachreferat">Fachreferat (Seminar)</option>
+ </select></label>
+ <label style="font-size:11px;margin-top:8px;display:block">Halbjahr<select id="notenSchnellHj">
+ <option value="hj1">1. Halbjahr</option>
+ <option value="hj2">2. Halbjahr</option>
+ </select></label>
+ <button class="primary"style="margin-top:10px;width:100%"onclick="openNotenSchnellzugriff()">Öffnen →</button>
+ </div>
+
+ <div class="noten-uebersicht">
+ <div style="overflow-x:auto"><table class="noten-table noten-table-kompakt">
+ <thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead>
+ <tbody>
+ ${F12SB_FAECHER.map(f=>{
+ const erg1=berechneHalbjahresergebnis(noten,f.key,"hj1");
+ const erg2=berechneHalbjahresergebnis(noten,f.key,"hj2");
+ const w1=alleEinzelwerte(noten,f.key,"hj1");
+ const w2=alleEinzelwerte(noten,f.key,"hj2");
+ const zelle=(erg,w)=>{
+ if(!w.length)return"–";
+ const werte=w.join(", ");
+ return erg!==null?`<strong>${erg}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
+ };
+ return`<tr><td>${f.label}</td>
+ <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('${f.key}','hj1')">${zelle(erg1,w1)}</button></td>
+ <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('${f.key}','hj2')">${zelle(erg2,w2)}</button></td>
+ </tr>`;
+ }).join("")}
+ ${(()=>{const l1=notenListe(noten,"fachreferat","hj1"),a1=notenDurchschnitt(l1),l2=notenListe(noten,"fachreferat","hj2"),a2=notenDurchschnitt(l2);
+ const zelleFpa=(a,l)=>{
+ if(!l.length)return"–";
+ const werte=l.map(e=>e.value).join(", ");
+ return a!==null&&l.length>1?`<strong>${a}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
+ };
+ return`<tr class="noten-fpa"><td><em>Fachreferat</em></td>
+ <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fachreferat','hj1')">${zelleFpa(a1,l1)}</button></td>
+ <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fachreferat','hj2')">${zelleFpa(a2,l2)}</button></td>
+ </tr>`;})()}
+ </tbody></table></div>
+ <p style="font-size:10px;color:var(--muted);margin:6px 0 0">Fett = Halbjahresergebnis nach FOBOSO (braucht Schulaufgabe UND sonstige Leistungen). In Klammern/ohne Klammer: die einzelnen eingetragenen Werte.</p>
+ <div class="form-actions"style="margin-top:10px">
+ <button class="secondary"onclick="resetMeineNoten()">Zurücksetzen</button>
+ <button class="secondary"onclick="printNotenPDF(${JSON.stringify(noten).replace(/"/g,"&quot;")},${JSON.stringify(bestehen).replace(/"/g,"&quot;")})"> PDF</button>
+ </div>
+ </div>
+ </div>
+
+ <div class="grid grid-2"style="margin-top:16px;gap:12px">
+ <details class="noten-collapsible">
+ <summary> Jahresergebnis je Fach</summary>
+ <div class="notice">
+ ${!bestehen.vollJahr?`<p style="margin:0">Trag alle Noten beider Halbjahre ein (inkl. Fachreferat), um deinen endgültigen Stand zu sehen.</p>`
+ :`<strong style="font-size:15px">${bestehen.jahr.imRahmen?" Zulassungs-Orientierung: im Rahmen von §35 Abs. 9 FOBOSO":" Achtung: Punktlage könnte die Zulassung zur Abschlussprüfung gefährden"}</strong>
+ <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Fachreferat (Seminar): HJ1 ${bestehen.jahr.fachreferatHj1} · HJ2 ${bestehen.jahr.fachreferatHj2} Punkte</p>`}
+ <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochJahr(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
+ <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §21, §35 Abs. 9 FOBOSO – <strong>ohne Gewähr</strong>. Die vollständige Fachabitur-Berechnung (25 Halbjahresergebnisse, 4 dreifach gewichtete Prüfungen, Fachreferat, §35 Abs. 6 FOBOSO) mit optimalem Streichvorschlag leistet diese Übersicht bewusst nicht – dafür nutzt eure Schule den offiziellen Streichvorschlag-Rechner (z. B. der Beruflichen Oberschule Traunstein).</p>
+ </div>
+ </details>
+ <details class="noten-collapsible">
+ <summary> So wird die Fachabiturnote berechnet</summary>
+ <div class="notice">
+ <p style="margin:0"><strong>Kurz erklärt (§21, §31, §35 FOBOSO):</strong></p>
+ <ul style="margin:8px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.6">
+ <li>Je Halbjahr: Durchschnitt der sonstigen Leistungen + Schulaufgabe(n), geteilt durch die Anzahl der eingerechneten Werte.</li>
+ <li>Eingebracht werden 25 Halbjahresergebnisse aus 12/2, 12/1 und 11/2 (11/1 nur bei reinen 11.-Klasse-Fächern) – maximal ein Ergebnis pro Fach darf gestrichen werden.</li>
+ <li>Dazu kommen 4 Prüfungsleistungen (dreifach gewichtet), das Ergebnis des Fachreferats und (aus der 11. Klasse) die fachpraktische Ausbildung.</li>
+ <li>Zulassung zur Abschlussprüfung: höchstens 2 Gesamtergebnisse mit 1–3 Punkten bzw. 1 mit 0 Punkten, bei kritischer Punktlage zusätzlich eine Mindestsumme von 200–240 Punkten.</li>
+ <li>Durchschnittsnote: S = 17/3 − 5·E/M (E = erreichte Punktsumme, M = 600 Punkte höchstmöglich).</li>
+ </ul>
+ <p style="margin-top:12px;font-size:11px;color:var(--muted)">Das ist eine vereinfachte Orientierung – die exakte, optimale Berechnung (inkl. Streichvorschlag) übernimmt der offizielle Rechner eurer Schule.</p>
+ </div>
+ </details>
+ </div>
+ </div>
+
+ <div class="kicker"style="margin:22px 0 8px">AUFGABEN & PROJEKTE</div>
  <div class="grid grid-3"><div class="card stat"><b>${tasks.filter(t=>t.ownerUid===currentUser.uid).length}</b><span>Meine
 Aufgaben</span></div><div class="card stat"><b>${projects.length}</b><span>Projekte</span></div><div class="card stat">
 <b>${profile?.role==="teacher"?"Lehrkraft":profile?.role==="admin"?"Admin":"Schüler/in"}</b><span>Rolle</span></div></div>
- <div class="card"style="margin-top:12px;background:var(--soft-blue)"><h3> Meine Aufgaben</h3><div
-class="list">${tasks.filter(t=>t.ownerUid===currentUser.uid).map(taskHTML).join("")||`<div class="empty"><strong>Noch keine
-Aufgaben</strong>Lege deine erste Aufgabe an.</div>`}</div></div>
- <div class="card"style="margin-top:12px;background:var(--soft-purple)"><h3> Meine Projekt-Fristen</h3><p style="color:var(--muted);font-size:12px;margin-top:-4px">Dein persönlicher Überblick über Projekt-Abgabetermine – erscheint bewusst nicht im allgemeinen Campus-Kalender.</p><div class="list">${projectDeadlines.map(p=>{
- const overdue=String(p.deadline)<todayStr;
- return`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.team||"")}</small></div><span class="pill${overdue?"":"green"}">${overdue?"überfällig · ":""}${esc(fmtDateOnly(p.deadline))}</span></div>`;
- }).join("")||`<div class="empty">Noch keine Projekt-Fristen eingetragen.</div>`}</div></div>
- <div class="card"style="margin-top:12px;background:var(--soft-teal)"><h3> Aktuelle Projekte</h3><div class="list">${projects.map(p=>`<div class="list- item"><div><strong>${esc(p.title)}</strong><small>${esc(p.team||"")} · ${esc(p.partner||"")}</small></div><span
-class="pill">${Number(p.progress||0)}%</span></div>`).join("")||`<div class="empty">Noch keine Projekte.</div>`}</div>
+ <div class="grid grid-3"style="margin-top:12px">
+ <button type="button"class="card tile-square"style="background:var(--soft-blue)"onclick="openMeineAufgabenModal()">
+ <span class="emoji"></span><strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
+ </button>
+ <button type="button"class="card tile-square"style="background:var(--soft-purple)"onclick="openProjektFristenModal()">
+ <span class="emoji"></span><strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
+ </button>
+ <button type="button"class="card tile-square"style="background:var(--soft-teal)"onclick="openAktuelleProjekteModal()">
+ <span class="emoji"></span><strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
+ </button>
+ </div>
 </div>${footer()}`;
 }
+async function openMeineAufgabenModal(){
+ let tasks=[];
+ try{tasks=await getCollection("tasks","deadline",false)}catch(e){}
+ const meine=tasks.filter(t=>t.ownerUid===currentUser.uid);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">MEIN KOMPASS</div><h2> Meine Aufgaben</h2>
+ <div class="list">${meine.map(taskHTML).join("")||`<div class="empty"><strong>Noch keine Aufgaben</strong>Lege deine erste Aufgabe an.</div>`}</div>
+ <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="closeModal();openTaskForm()">＋ Aufgabe</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+async function openProjektFristenModal(){
+ let projects=[];
+ try{projects=await getCollection("projects")}catch(e){}
+ const todayStr=new Date().toISOString().slice(0,10);
+ const projectDeadlines=projects.filter(p=>p.deadline).sort((a,b)=>String(a.deadline).localeCompare(String(b.deadline)));
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">MEIN KOMPASS</div><h2> Meine Projektfristen</h2>
+ <p style="color:var(--muted);font-size:12px">Dein persönlicher Überblick über Projekt-Abgabetermine – erscheint bewusst nicht im allgemeinen Campus-Kalender.</p>
+ <div class="list">${projectDeadlines.map(p=>{
+ const overdue=String(p.deadline)<todayStr;
+ return`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.team||"")}</small></div><span class="pill${overdue?"":"green"}">${overdue?"überfällig · ":""}${esc(fmtDateOnly(p.deadline))}</span></div>`;
+ }).join("")||`<div class="empty">Noch keine Projekt-Fristen eingetragen.</div>`}</div>
+ <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+async function openAktuelleProjekteModal(){
+ let projects=[];
+ try{projects=await getCollection("projects")}catch(e){}
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">MEIN KOMPASS</div><h2> Meine Projekte</h2>
+ <div class="list">${projects.map(p=>`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.team||"")} · ${esc(p.partner||"")}</small></div><span class="pill">${Number(p.progress||0)}%</span></div>`).join("")||`<div class="empty">Noch keine Projekte.</div>`}</div>
+ <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+window.openMeineAufgabenModal=openMeineAufgabenModal;
+window.openProjektFristenModal=openProjektFristenModal;
+window.openAktuelleProjekteModal=openAktuelleProjekteModal;
 function taskHTML(t){return`<div class="list-item"><div><strong>${esc(t.title)}</strong><small>Verantwortlich:
 ${esc(t.ownerName||"")} · Deadline: ${esc(t.deadline||"—")} · Nächster Schritt: ${esc(t.next||"—")}</small></div><div
 class="traffic">${statusDot(t.status)}<span class="pill">${statusLabel[t.status]||"—"}</span></div></div>`}
+
+// ---- Klassenübersicht für Lehrkräfte: Lehrplan-Fortschritt + Ampel je LB --
+function ampelDotHTML(status){
+ if(status===null)return`<span class="ampel-dot ampel-none"title="Noch keine Daten"></span>`;
+ const color=status==="green"?"#3fa66a":status==="yellow"?"#e0a324":"#d9534f";
+ return`<span class="ampel-dot"style="background:${color}"title="${status==="green"?"gut":status==="yellow"?"teilweise":"braucht Unterstützung"}"></span>`;
+}
+async function openLehrplanKlassenuebersicht(fach){
+ if(!isTeacher()){toast("Nur Lehrkräfte können die Klassenübersicht öffnen.");return}
+ const fachLbl=F12SB_FAECHER.find(f=>f.key===fach)?.label||fach;
+ const wochenGesamt=(LEHRPLAN_WOCHEN[fach]||[]).length;
+ let students=[],fortschrittDocs=[],lsTasks=[],allAttempts=[];
+ try{
+ [students,fortschrittDocs,lsTasks,allAttempts]=await Promise.all([
+ getAllUsersForLernstand(),
+ getDocs(query(collection(db,"lehrplanFortschritt"),where("fach","==",fach))).then(s=>s.docs.map(d=>d.data())),
+ getLernstandTasks(),
+ getAllLernstandAttempts()
+ ]);
+ }catch(e){console.error("Klassenübersicht laden:",e);toast("Konnte nicht geladen werden.");return}
+
+ const tasksByLb={1:[],2:[],3:[],4:[]};
+ lsTasks.forEach(t=>{const n=t.learningArea?.match(/\d/)?.[0];if(n&&tasksByLb[n])tasksByLb[n].push(t)});
+
+ function ampelFuerSchueler(uid,lbNum){
+ const relevantIds=tasksByLb[lbNum].map(t=>t.id);
+ const relevant=allAttempts.filter(a=>a.uid===uid&&relevantIds.includes(a.taskId));
+ if(!relevant.length)return null;
+ const neuesterProAufgabe={};
+ relevant.forEach(a=>{if(!neuesterProAufgabe[a.taskId]||a.attempt>neuesterProAufgabe[a.taskId].attempt)neuesterProAufgabe[a.taskId]=a});
+ const werte=Object.values(neuesterProAufgabe);
+ const maxSum=werte.reduce((s,a)=>s+lernstandMaxPoints(a.taskId),0);
+ const totalSum=werte.reduce((s,a)=>s+(a.total||0),0);
+ return maxSum>0?lernstandStatus(totalSum,maxSum):null;
+ }
+
+ const rows=students.map(s=>{
+ const abgeschlossen=fortschrittDocs.filter(f=>f.uid===s.uid&&f.abgeschlossen).length;
+ const ampeln=[1,2,3,4].map(n=>ampelFuerSchueler(s.uid,n));
+ return{s,abgeschlossen,ampeln};
+ });
+
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker"> KLASSENÜBERSICHT · NUR LEHRKRÄFTE</div>
+ <h2>${esc(fachLbl)} – Fortschritt der Klasse</h2>
+ <p style="color:var(--muted);font-size:12px">Lehrplan-Fortschritt (abgeschlossene Wochen im Lernpfad) und Ampel-Status je Lernbereich, basierend auf den Lernstandsmessungen.</p>
+ <div style="overflow-x:auto"><table class="ls-matrix">
+ <thead><tr><th>Schüler:in</th><th>Wochen</th><th>LB 1</th><th>LB 2</th><th>LB 3</th><th>LB 4</th></tr></thead>
+ <tbody>${rows.map(r=>`<tr>
+ <td>${esc(r.s.displayName||r.s.email||"Schüler/in")}</td>
+ <td>${r.abgeschlossen} / ${wochenGesamt}</td>
+ ${r.ampeln.map(a=>`<td style="text-align:center">${ampelDotHTML(a)}</td>`).join("")}
+ </tr>`).join("")||`<tr><td colspan="6">Keine Schüler:innen gefunden.</td></tr>`}</tbody>
+ </table></div>
+ <p style="font-size:11px;color:var(--muted);margin-top:10px"><span class="ampel-dot"style="background:#3fa66a"></span> gut &nbsp; <span class="ampel-dot"style="background:#e0a324"></span> teilweise &nbsp; <span class="ampel-dot"style="background:#d9534f"></span> braucht Unterstützung &nbsp; <span class="ampel-dot ampel-none"></span> noch keine Daten</p>
+ <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>
+ `);
+}
+window.openLehrplanKlassenuebersicht=openLehrplanKlassenuebersicht;
+
+async function renderFaecherUebersicht(){
+ return`${pageHead("LEHRPLAN & LERNINHALTE","Fächer 12. Klasse","Wähle ein Fach, um den Lehrplan-Zeitstrahl mit Themen, Aufträgen und Material zu öffnen.","")}
+ <div class="grid grid-4">${F12SB_FAECHER.map(f=>{
+ const wochen=LEHRPLAN_WOCHEN[f.key]||[];
+ const c=personColor(f.key);
+ return`<button class="card tile"style="background:${c.bg};border-left:4px solid ${c.border};text-align:left"onclick="openFach('${f.key}')">
+ <strong style="font-size:15px;color:${c.text}">${f.label}</strong>
+ <small style="display:block;margin-top:6px">${wochen.length?`${wochen.length} Lehrplan-Wochen hinterlegt`:"Lehrplan-Zeitstrahl folgt"}</small>
+ </button>`;
+ }).join("")}</div>
+ ${footer()}`;
+}
+
+async function renderFachDetail(){
+ if(!activeFach)return await renderFaecherUebersicht();
+ const fach=F12SB_FAECHER.find(f=>f.key===activeFach);
+ const timeline=combinedTimeline(activeFach);
+ const wochenItems=timeline.filter(t=>t.kind==="woche");
+ const fortschritte=await Promise.all(wochenItems.map(async w=>({id:w.id,f:await getLehrplanFortschritt(w.id)})));
+ const fortschrittMap={};fortschritte.forEach(x=>fortschrittMap[x.id]=x.f);
+ const praktikumsAuftraege=await getPraktikumsAuftraege();
+ const heute=new Date().toISOString().slice(0,10);
+ const erledigtCount=wochenItems.filter(w=>fortschrittMap[w.id]?.abgeschlossen).length;
+ const fortschrittProzent=wochenItems.length?Math.round(erledigtCount/wochenItems.length*100):0;
+ const naechsteIdx=timeline.findIndex(item=>item.kind==="woche"&&!fortschrittMap[item.id]?.abgeschlossen);
+
+ return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
+ ${pageHead("LERNPFAD",fach?.label||"Fach",`Dein Weg durchs Schuljahr – ${erledigtCount} von ${wochenItems.length} Wochen geschafft.`,isTeacher()?`<button class="secondary"onclick="openLehrplanKlassenuebersicht('${activeFach}')"> Klassenübersicht</button>`:"")}
+ <style>
+ .lernpfad{position:relative;margin:20px 0 10px;padding-left:44px}
+ .lp-linie-hinter{position:absolute;left:20px;top:6px;bottom:6px;width:5px;background:#e2eaf0;border-radius:3px}
+ .lp-linie-vorne{position:absolute;left:20px;top:6px;width:5px;background:linear-gradient(180deg,#3fa66a,#5cc98a);border-radius:3px;transition:height .4s}
+ .lp-node{position:relative;margin-bottom:20px}
+ .lp-punkt{position:absolute;left:-44px;top:0;width:40px;height:40px;border-radius:50%;background:#fff;border:3px solid #b8c4cc;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;z-index:2;transition:.2s}
+ .lp-punkt.lp-done{background:#3fa66a;border-color:#3fa66a;color:#fff}
+ .lp-punkt.lp-projekt{border-color:#3fa66a;color:#3fa66a}
+ .lp-punkt.lp-einzel{border-color:#e0a324;color:#e0a324}
+ .lp-punkt.lp-aktuell{transform:scale(1.15);box-shadow:0 0 0 5px rgba(22,136,207,.25)}
+ .lp-karte{background:#fff;border:1px solid var(--line,#e2eaf0);border-radius:14px;padding:14px 16px;cursor:pointer;transition:.15s}
+ .lp-karte:hover{transform:translateX(4px);box-shadow:0 6px 16px rgba(23,56,79,.1)}
+ .lp-karte-date{font-size:11px;color:var(--muted)}
+ .lb-badge{font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;border:1.5px solid;white-space:nowrap}
+ .lp-karte strong{display:block;font-size:13px;margin-top:2px}
+ .lp-karte small{display:block;color:var(--muted);font-size:11px;margin-top:4px;line-height:1.4}
+ .lp-typ-pill{margin-top:8px;display:inline-block;font-size:10px}
+ .lp-legende{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;padding:10px 14px;background:#f7fafc;border-radius:10px;font-size:11px;color:var(--muted)}
+ .lp-legende-item{display:flex;align-items:center;gap:6px}
+ .lp-legende-dot{width:14px;height:14px;border-radius:50%;border:2px solid;display:inline-block;flex:0 0 auto}
+ .lp-legende-raute{border-radius:4px;transform:rotate(45deg);width:12px;height:12px;font-size:7px;display:flex;align-items:center;justify-content:center}
+ .lp-legende-raute i{transform:rotate(-45deg);font-style:normal}
+ .lp-waypoint{position:relative;margin:26px 0}
+ .lp-waypoint-punkt{position:absolute;left:-44px;top:0;width:40px;height:40px;border-radius:10px;background:var(--soft-blue);border:3px solid #4a90d9;display:flex;align-items:center;justify-content:center;font-size:17px;transform:rotate(45deg);z-index:2}
+ .lp-waypoint-punkt span{transform:rotate(-45deg);display:block}
+ .lp-waypoint-karte{background:var(--soft-blue);border-radius:12px;padding:10px 14px;font-size:12px;cursor:pointer;transition:.15s}
+ .lp-waypoint-karte:hover{transform:translateX(4px)}
+ .lp-waypoint-karte strong{display:block;font-size:12.5px}
+ .lp-block-head{position:relative;margin:30px 0 14px;padding-left:2px}
+ .lp-block-head::before{content:"";position:absolute;left:-44px;top:50%;width:24px;height:2px;background:#b8c4cc}
+ .lp-block-head strong{font-size:13px;color:#17384f;text-transform:uppercase;letter-spacing:.03em}
+ .lp-block-head small{color:var(--muted);margin-left:6px}
+ @media(max-width:600px){.lernpfad{padding-left:38px}.lp-punkt,.lp-waypoint-punkt{left:-38px;width:34px;height:34px}.lp-block-head::before{left:-38px;width:20px}}
+ </style>
+ <div class="lp-legende">
+ <span class="lp-legende-item"><span class="pill"style="background:#3fa66a;color:#fff;font-size:10px"> Projekt</span></span>
+ <span class="lp-legende-item"><span class="pill"style="background:#e0a324;color:#fff;font-size:10px"> Einzelthema</span></span>
+ <span class="lp-legende-item"><span class="lp-legende-dot lp-legende-raute"style="background:var(--soft-blue);border-color:#4a90d9"><i>🏫</i></span>Praktikum · Erziehungsbereich</span>
+ <span class="lp-legende-item"><span class="lp-legende-dot lp-legende-raute"style="background:var(--soft-blue);border-color:#4a90d9"><i>🏥</i></span>Praktikum · Pflegebereich</span>
+ </div>
+ <div class="lp-legende"style="margin-top:6px">
+ ${[1,2,3,4].map(n=>`<span class="lp-legende-item"><span class="lb-badge"style="background:${LERNBEREICH_FARBEN[n].bg};border-color:${LERNBEREICH_FARBEN[n].border};color:${LERNBEREICH_FARBEN[n].text}">Lernbereich ${n}</span></span>`).join("")}
+ </div>
+ <div class="lernpfad">
+ <div class="lp-linie-hinter"></div>
+ <div class="lp-linie-vorne"style="height:${fortschrittProzent}%"></div>
+ ${(()=>{let lastBlock=null;return timeline.map((item,idx)=>{
+ if(item.kind==="praktikum"){
+ const auftrag=praktikumsAuftraege[item.id];
+ return`<div class="lp-waypoint">
+ <div class="lp-waypoint-punkt"><span>${item.icon||"🏥"}</span></div>
+ <div class="lp-waypoint-karte"onclick="openPraktikumsphaseAuftragForm('${item.id}')">
+ <span class="lp-karte-date">${esc(fmtDateOnly(item.start))}–${esc(fmtDateOnly(item.end))}</span>
+ <strong>${esc(item.titel)}</strong>
+ <small>${auftrag?` ${esc(auftrag.titel)}`:"Noch kein Auftrag eingetragen – antippen zum Eintragen"}</small>
+ </div>
+ </div>`;
+ }
+ const block=findUnterrichtsblock(activeFach,item.start);
+ let blockHeadHTML="";
+ if(block&&block.id!==lastBlock){
+ blockHeadHTML=`<div class="lp-block-head"><strong>${esc(block.titel)}</strong><small>${esc(block.stunden)} Std.</small></div>`;
+ lastBlock=block.id;
+ }
+ const fortschritt=fortschrittMap[item.id]||{abgeschlossen:false};
+ const aktuell=idx===naechsteIdx;
+ return`${blockHeadHTML}<div class="lp-node">
+ <div class="lp-punkt lp-${item.typ}${fortschritt.abgeschlossen?" lp-done":""}${aktuell?" lp-aktuell":""}">${fortschritt.abgeschlossen?"✓":item.typ==="projekt"?"":""}</div>
+ <div class="lp-karte"style="border-top:4px solid ${lernbereichAkzentfarbe(item.lb)}"onclick="openWocheDetail('${activeFach}','${item.id}')">
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
+ ${lernbereichBadgeHTML(item.lb)}
+ <span class="lp-karte-date">${esc(fmtDateOnly(item.start))}–${esc(fmtDateOnly(item.end))}</span>
+ </div>
+ <strong>${esc(item.thema)}</strong>
+ <small>${esc(item.planung.slice(0,90))}${item.planung.length>90?"…":""}</small>
+ <span class="pill lp-typ-pill"style="background:${item.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${item.typ==="projekt"?" Projekt":" Einzelthema"}</span>
+ </div>
+ </div>`;
+ }).join("")})()||`<div class="empty"><strong>Für dieses Fach ist noch kein Lernpfad hinterlegt.</strong>Sobald die Jahresplanung vorliegt, erscheinen hier die einzelnen Stationen.</div>`}
+ </div>
+ ${footer()}`;
+}
+window.renderFaecherUebersicht=renderFaecherUebersicht;
+
+// ---- Wochen-Detail: Auftrag/Ziele, Material, Team, Hilfe, Produkte, Lernstand
+function showWocheTab(tabId){
+ document.querySelectorAll(".wd-panel").forEach(el=>el.style.display=el.id===`wdPanel_${tabId}`?"block":"none");
+ document.querySelectorAll(".wd-tab").forEach(el=>el.classList.toggle("wd-tab-active",el.dataset.tab===tabId));
+}
+window.showWocheTab=showWocheTab;
+
+async function openWocheDetail(fach,wocheId){
+ const woche=lehrplanWocheById(fach,wocheId);
+ if(!woche){toast("Diese Woche wurde nicht gefunden.");return}
+ const [auftrag,materialien,teams,produkte,fortschritt,lsTasks,lsAttempts]=await Promise.all([
+ getLehrplanAuftrag(wocheId),getLehrplanMaterialien(wocheId),getLehrplanTeams(wocheId),
+ getLehrplanProdukte(wocheId),getLehrplanFortschritt(wocheId),
+ getLernstandTasks().catch(()=>[]),getMyLernstandAttempts().catch(()=>[])
+ ]);
+ // Verknüpfung mit der Lernstandsmessung: dieselben Aufgaben, gefiltert
+ // nach dem Lernbereich dieser Woche (z. B. "LB 3" → "lb3"). Kein eigener
+ // Datentopf – Ergebnisse und Versuche sind automatisch synchron, weil es
+ // exakt dieselbe Datenquelle wie unter Lernwerkstatt → Lernstandsmessung ist.
+ const wocheLbKeys=(woche.lb||"").match(/\d/g)?.map(n=>"lb"+n)||[];
+ const relevanteTasks=lsTasks.filter(t=>wocheLbKeys.includes(t.learningArea));
+ const lernstandBearbeitet=relevanteTasks.some(t=>lernstandAttemptCount(lsAttempts,t.id)>0);
+ const ziele=(LEHRPLAN_ZIELE_VORSCHLAG[wocheId]||[]).map((text,i)=>({id:`z${i}`,text}));
+ const alleErfuellt=ziele.length>0 && ziele.every(z=>fortschritt.zieleErfuellt?.[z.id]);
+ const meinTeam=teams.find(t=>(t.mitgliederUids||[]).includes(currentUser.uid));
+ const fachLbl=F12SB_FAECHER.find(f=>f.key===fach)?.label||fach;
+ const meinProdukt=produkte.some(p=>p.uid===currentUser.uid);
+
+ // Fortschritt: jeder Arbeitsschritt bekommt einen eigenen Haken, damit
+ // jederzeit klar ist, wo genau man gerade steht.
+ const schritte=[
+ {label:"Auftrag gelesen",done:!!fortschritt.auftragGelesen,tab:"ziele"},
+ {label:"Material erhalten",done:!!fortschritt.materialErhalten,tab:"material"},
+ ...(woche.typ==="projekt"?[{label:"Team gebildet",done:!!meinTeam,tab:"team"}]:[]),
+ {label:"Lernprodukt",done:meinProdukt,tab:"produkte"},
+ {label:"Überprüfung",done:lernstandBearbeitet,tab:"lernstand"},
+ {label:"Selbsteinschätzung",done:alleErfuellt,tab:"selbsteinschaetzung"},
+ {label:"Fertig",done:!!fortschritt.abgeschlossen,tab:"selbsteinschaetzung"}
+ ];
+ let aktivIdx=schritte.findIndex(s=>!s.done);
+ if(aktivIdx===-1)aktivIdx=schritte.length-1;
+ const startTab=schritte[Math.min(aktivIdx,schritte.length-1)].tab;
+
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">${esc(fachLbl)} · ${esc(woche.lb)} · ${esc(fmtDateOnly(woche.start))}–${esc(fmtDateOnly(woche.end))}</div>
+ <h2>${esc(woche.thema)}</h2>
+ <span class="pill"style="background:${woche.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${woche.typ==="projekt"?"Projektarbeit":"Selbstlern-/Eigenarbeit"}</span>
+ <p style="margin-top:10px;color:var(--muted)">${esc(woche.planung)}</p>
+ ${woche.praxis?`<div class="card"style="background:var(--soft-blue);margin-top:10px;padding:10px 12px"><strong style="font-size:12px"> Praxistransfer</strong><small style="display:block;margin-top:4px">${esc(woche.praxis)}</small></div>`:""}
+
+ <div class="wd-stepper">
+ ${schritte.map((s,i)=>`<div class="wd-step${s.done?" wd-step-done":""}${i===aktivIdx&&!s.done?" wd-step-aktiv":""}">
+ <div class="wd-step-dot">${s.done?"✓":i+1}</div><small>${esc(s.label)}</small>
+ </div>${i<schritte.length-1?`<div class="wd-step-line${schritte[i+1].done||s.done?" wd-step-line-done":""}"></div>`:""}`).join("")}
+ </div>
+
+ <div class="wd-tabs">
+ <button type="button"class="wd-tab"data-tab="ziele"onclick="showWocheTab('ziele')"> Lernziele und Aufgaben</button>
+ <button type="button"class="wd-tab"data-tab="material"onclick="showWocheTab('material')"> Lernmaterialien</button>
+ <button type="button"class="wd-tab"data-tab="team"onclick="showWocheTab('team')"> ${woche.typ==="projekt"?"Team":"(Team)"}</button>
+ <button type="button"class="wd-tab"data-tab="produkte"onclick="showWocheTab('produkte')"> Lernprodukte</button>
+ <button type="button"class="wd-tab"data-tab="lernstand"onclick="showWocheTab('lernstand')"> Überprüfung des Lernstandes</button>
+ <button type="button"class="wd-tab"data-tab="selbsteinschaetzung"onclick="showWocheTab('selbsteinschaetzung')"> Selbsteinschätzung</button>
+ </div>
+
+ <div class="wd-panel"id="wdPanel_ziele">
+ <div class="wd-ziele-info">
+ <strong> Lernziele laut Lehrplan</strong> <small>(${esc(woche.lb)}, LehrplanPLUS FOS 12 Pädagogik/Psychologie)</small>
+ <ul>${ziele.map(z=>`<li>${esc(z.text)}</li>`).join("")||"<li>Für dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</li>"}</ul>
+ </div>
+
+ <h3 style="margin:18px 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--muted)"> Konkreter Arbeitsauftrag</h3>
+ <p style="font-size:11px;color:var(--muted);margin:0 0 10px">Von der Lehrkraft frei gestaltet – legt fest, WIE die Lernziele oben konkret bearbeitet werden.</p>
+ ${isTeacher()?`<div class="form">
+ <label>Titel<input id="auftragTitel"type="text"value="${esc(auftrag?.titel||"")}"placeholder="z. B. Fallanalyse Erziehungsstile"></label>
+ <label>Beschreibung<textarea id="auftragBeschreibung"rows="4"placeholder="Was genau sollen die Schüler:innen tun?">${esc(auftrag?.beschreibung||"")}</textarea></label>
+ <div class="form-actions">
+ <button class="primary"onclick="saveLehrplanAuftrag('${fach}','${wocheId}')">Speichern</button>
+ ${auftrag?`<button class="secondary"onclick="deleteLehrplanAuftrag('${auftrag.id}','${fach}','${wocheId}')">Löschen</button>`:""}
+ </div>
+ </div>`
+ :!auftrag?`<div class="empty">Für diese Woche wurde noch kein Arbeitsauftrag eingetragen.</div>`
+ :`<div class="card"style="background:var(--soft-blue)"><strong>${esc(auftrag.titel)}</strong>${auftrag.beschreibung?`<p style="margin:6px 0 0;white-space:pre-wrap">${esc(auftrag.beschreibung)}</p>`:""}</div>`}
+ ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.auftragGelesen?"checked":""}onchange="toggleAuftragGelesen('${fach}','${wocheId}',this.checked)"><span> Auftrag gelesen, Ziele sind mir klar</span></label>`:""}
+ <p style="font-size:11px;color:var(--muted);margin:16px 0 6px">Bevor es losgeht:</p>
+ ${miniToolRow([["🧭","Lernpfad","lernpfad"],["🤔","Metakognition","metakognition"]])}
+ </div>
+
+ <div class="wd-panel"id="wdPanel_material">
+ ${isTeacher()?`<div class="form"style="margin-bottom:12px">
+ <div style="display:flex;gap:8px;flex-wrap:wrap">
+ <select id="matKategorie">${MATERIAL_KATEGORIEN.map(k=>`<option value="${k.key}">${k.label}</option>`).join("")}</select>
+ <input id="matTitel"type="text"placeholder="Titel"style="flex:1;min-width:140px">
+ <input id="matUrl"type="url"placeholder="Link/URL"style="flex:1;min-width:160px">
+ <button class="primary"onclick="addLehrplanMaterial('${fach}','${wocheId}')">＋ Hinzufügen</button>
+ </div>
+ </div>`:""}
+ <div class="list">${materialien.map(m=>`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
+ <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(MATERIAL_KATEGORIEN.find(k=>k.key===m.kategorie)?.label||m.kategorie)}: ${esc(m.titel)}</strong>${isTeacher()?`<button class="secondary"onclick="deleteLehrplanMaterial('${m.id}','${fach}','${wocheId}')">Löschen</button>`:""}</div>
+ ${m.url?materialEmbedHTML(m):""}
+ </div>`).join("")||`<div class="empty">Noch keine Lernmaterialien eingestellt.</div>`}</div>
+ <p style="font-size:11px;color:var(--muted);margin-top:12px">Zum Bearbeiten des Materials:</p>
+ ${miniToolRow([["🗂️","Karteikarten & Timer","lernwerkzeuge"],["🤖","KI zum Lernen","ki-lernen"],["🔗","Lernressourcen","ressourcen"],["⏱️","Uhr & Timer","uhr-timer"]])}
+ ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.materialErhalten?"checked":""}onchange="toggleMaterialErhalten('${fach}','${wocheId}',this.checked)"><span> Materialien erhalten/gesichtet</span></label>`:""}
+ </div>
+
+ <div class="wd-panel"id="wdPanel_team">
+ <p style="color:var(--muted);margin-top:0">Team/Gruppe${woche.typ==="projekt"?" – für dieses Projekt vorgesehen":" – freiwillig (deshalb in Klammern)"}. Passende Mitstreiter:innen findest du auch über die Kompetenzwerkstatt.</p>
+ <div class="list">${teams.map(t=>{const inTeam=(t.mitgliederUids||[]).includes(currentUser.uid);return`<div class="list-item"><div><strong>${esc(t.teamName)}</strong><small>${esc((t.mitgliederNamen||[]).join(", ")||"Noch niemand")}</small></div><div style="display:flex;gap:6px">${inTeam?`<button class="secondary"onclick="leaveLehrplanTeam('${t.id}','${fach}','${wocheId}')">Verlassen</button>`:`<button class="primary"onclick="joinLehrplanTeam('${t.id}','${fach}','${wocheId}')">Beitreten</button>`}${isTeacher()?`<button class="secondary"onclick="deleteLehrplanTeam('${t.id}','${fach}','${wocheId}')">Auflösen</button>`:""}</div></div>`}).join("")||`<div class="empty">Noch keine Teams gebildet.</div>`}</div>
+ ${!meinTeam?`<div class="form-actions"style="margin-top:10px"><input id="neuTeamName"type="text"placeholder="Team-Name"style="flex:1"><button class="primary"onclick="createLehrplanTeam('${fach}','${wocheId}')">＋ Team gründen</button></div>`:""}
+ ${miniToolRow([["🌟","Kompetenzwerkstatt","kompetenz"],["🤝","Kollaborations-Tools","kollaboration"]])}
+ </div>
+
+ <div class="wd-panel"id="wdPanel_produkte">
+ <div class="list">${produkte.map(p=>`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
+ <div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(p.titel)}</strong><small>${esc(p.name)}${p.inhalt?" · "+esc(p.inhalt.slice(0,60)):""}</small></div>${(p.uid===currentUser.uid||isTeacher())?`<button class="secondary"onclick="deleteLehrplanProdukt('${p.id}','${fach}','${wocheId}')">Löschen</button>`:""}</div>
+ ${p.dateiUrl?dateiEmbedHTML(p.dateiUrl,p.dateiName):""}
+ </div>`).join("")||`<div class="empty">Noch keine Lernprodukte hochgeladen.</div>`}</div>
+ <p style="font-size:11px;color:var(--muted);margin-top:12px">Zum Erstellen deines Produkts:</p>
+ ${miniToolRow([["🔗","Lernressourcen","ressourcen"],["🤖","KI zum Lernen","ki-lernen"],["✍️","Fachaufsatz-Training","fachaufsatz"]])}
+ <div class="form-actions"style="margin-top:10px;flex-wrap:wrap">
+ <input id="produktTitel"type="text"placeholder="Titel des Lernprodukts"style="flex:1;min-width:140px">
+ <input id="produktInhalt"type="text"placeholder="Link oder kurze Beschreibung (optional)"style="flex:1;min-width:160px">
+ </div>
+ <div class="form-actions"style="margin-top:8px;flex-wrap:wrap;align-items:center">
+ <label style="font-weight:700;font-size:12px">Datei (optional, max. 15 MB)<input id="produktDatei"type="file"style="display:block;margin-top:4px"></label>
+ <button class="primary"onclick="addLehrplanProdukt('${fach}','${wocheId}')">＋ Hochladen</button>
+ </div>
+ </div>
+
+ <div class="wd-panel"id="wdPanel_lernstand">
+ <p style="color:var(--muted);margin-top:0">Dieselben Kompetenzüberprüfungen wie unter „Lernstandsmessung" in der Lernwerkstatt, hier gefiltert nach ${esc(woche.lb)}. Die Lehrkraft sieht dein Ergebnis über das Ampelsystem.</p>
+ <div class="list">${relevanteTasks.map(t=>{
+ const latest=lernstandLatest(lsAttempts,t.id),count=lernstandAttemptCount(lsAttempts,t.id),max=lernstandMaxPoints(t.id);
+ return`<div class="list-item"><div><strong>${t.nr}. ${esc(t.title)}</strong><small>${count?`letzter Stand: ${latest.total}/${max} · Versuch ${latest.attempt}`:"noch nicht bearbeitet"}</small></div>
+ <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+ ${latest?`<span class="pill ${lernstandStatus(latest.total,max)}">${lernstandStatusText(latest.total,max)}</span>`:""}
+ ${count?`<button class="secondary"onclick="openLernstandResult('${t.id}')">🔓 Musterlösung</button>`:""}
+ <button class="primary"onclick="openLernstand('${t.id}')">${count?"Weiter/ansehen":"Starten"} →</button>
+ </div></div>`;
+ }).join("")||`<div class="empty">Für ${esc(woche.lb)} sind noch keine Lernstandsmessungen hinterlegt.</div>`}</div>
+ <div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="closeModal();go('lernstand')"> Alle Lernstandsmessungen ansehen</button></div>
+ </div>
+
+ <div class="wd-panel"id="wdPanel_selbsteinschaetzung">
+ <p style="color:var(--muted);margin-top:0">Schätz dich jetzt zum Schluss selbst ein: Welche Lernziele hast du wirklich erreicht?</p>
+ <div class="list">${ziele.map(z=>`<div class="list-item"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;flex:1"><input type="checkbox"${fortschritt.zieleErfuellt?.[z.id]?"checked":""}onchange="toggleZielErfuellt('${fach}','${wocheId}','${z.id}',this.checked)"><span>${esc(z.text)}</span></label></div>`).join("")||`<div class="empty">Für dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</div>`}</div>
+ ${ziele.length?`<div class="form-actions"style="margin-top:12px">
+ <button class="primary"${fortschritt.abgeschlossen?"disabled":""}onclick="markWocheAbgeschlossen('${fach}','${wocheId}')">${fortschritt.abgeschlossen?"✓ Woche abgeschlossen":alleErfuellt?"✓ Woche als abgeschlossen markieren":" Erst alle Ziele erfüllen"}</button>
+ </div>`:""}
+ <p style="font-size:11px;color:var(--muted);margin-top:16px">Zur Vertiefung deiner Reflexion:</p>
+ ${miniToolRow([["🤔","Metakognition","metakognition"],["🧭","Lernpfad aktualisieren","lernpfad"],["💬","Lerncoaching","lerncoaching"]])}
+ </div>
+
+ <div class="wd-footer">
+ <button class="secondary"onclick="closeModal()">Schließen</button>
+ <span style="flex:1"></span>
+ <button class="secondary"onclick="closeModal();go('forum-board')">❓ Im Forum fragen</button>
+ <button class="primary"onclick="closeModal();go('forum-nachrichten')"> Lehrkraft fragen</button>
+ </div>
+ `);
+ showWocheTab(startTab);
+}
+window.openWocheDetail=openWocheDetail;
 
 async function renderLernwerkstatt(){
  const groups=[
  {title:"Dich selbst einschätzen",color:"var(--soft-blue)",items:[
  [" ","Lernstrategien-Check","Kein Lerntyp-Test – dein Strategien-Profil in 25 Fragen.","lernstrategien"],
- [" ","Metakognitive Lernstrategien","Informieren und selbst einschätzen: Planung, Überwachung, Bewertung.","metakognition"],
+ [" ","Metakognitive Lernstrategien","Über das eigene Lernen nachdenken – klick dich durch.","metakognition"],
  [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"],
  [" ","Lernstandsmessung","Kurz prüfen: Wo stehe ich und was ist mein nächster Schritt?","lernstand"]
  ]},
  {title:"Konkret lernen & üben",color:"var(--soft-green)",items:[
  [" ","Lernmethoden","Planung, Lernen, Zusammenarbeit und Reflexion.","methoden"],
  [" ","Lern-Werkzeuge","Karteikarten, Fokus-Timer und Glossar zum selbstständigen Lernen.","lernwerkzeuge"],
+ [" ","Uhr & Timer","Aktuelle Uhrzeit im Blick, plus frei einstellbarer Timer für alle.","uhr-timer"],
  [" ","Fachaufsatz-Training","Fachaufsatz Pädagogik/Psychologie Baustein für Baustein üben.","fachaufsatz"],
  [" ","Tools für Zusammenarbeit","Padlet, Wortwolke & Co. für Gruppenarbeit und Unterricht.","kollaboration"],
  [" ","Lernressourcen","TaskCard, KI, Videos, ByCS/mebis, Canva und LearningApps.","ressourcen"],
@@ -1162,6 +2771,11 @@ async function renderLernwerkstatt(){
  ]}
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
+ <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
+ <a class="card tile"href="#faecher"style="background:linear-gradient(135deg,var(--soft-blue),var(--soft-purple));min-height:110px;margin-bottom:22px">
+ <span class="emoji"></span><strong style="font-size:16px">Fächer 12. Klasse</strong>
+ <small>Lehrplan-Zeitstrahl je Fach: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
+ </a>
  ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
 <strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
  ${footer()}`;
@@ -3043,7 +4657,7 @@ async function addCard(){
  createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
  createdAt:serverTimestamp()
  });
- closeModal();studyOrder=[];await render();toast("Karte hinzugefügt.");
+ closeModal();studyOrder=[];await render();showMotivationsBild();toast("Karte hinzugefügt.");
  }catch(e){
  console.error("Karte anlegen:",e);
  toast(e?.code==="permission-denied"?"Firebase verweigert das Hinzufügen. Bitte die Firestore-Regeln prüfen.":"Karte konnte nicht gespeichert werden.");
@@ -3112,6 +4726,141 @@ async function downloadDeckPDF(deckId){
  ========================================================= */
 let pomodoroSecondsLeft=25*60, pomodoroPhase="fokus", pomodoroRunning=false, pomodoroInterval=null;
 let pomodoroWorkMin=25, pomodoroBreakMin=5;
+
+// ---- Uhr & Timer (frei einstellbar für Lehrkräfte und Schüler) ----------
+// ---- Datei-Upload (Firebase Storage) – gemeinsam für Lernprodukte und
+// Pinnwand-Notizen genutzt. Max. 15 MB pro Datei.
+const DATEI_MAX_BYTES=15*1024*1024;
+async function uploadCampusDatei(file,pfadPrefix){
+ if(!storage)await loadFirebase();
+ if(!storage)throw new Error("Firebase Storage konnte nicht geladen werden (Netzwerk/Verbindung prüfen).");
+ if(file.size>DATEI_MAX_BYTES)throw new Error("Datei ist zu groß (max. 15 MB).");
+ const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+ const path=`${pfadPrefix}/${currentUser.uid}_${Date.now()}_${safeName}`;
+ try{
+ const fileRef=storageRef(storage,path);
+ await uploadBytes(fileRef,file);
+ const url=await getDownloadURL(fileRef);
+ return {url,name:file.name,path};
+ }catch(e){
+ console.error("Datei-Upload:",e);
+ if(e?.code==="storage/unauthorized")throw new Error("Firebase blockiert den Upload (storage/unauthorized) – die storage.rules wurden vermutlich noch nicht in der Firebase-Konsole veröffentlicht.");
+ if(e?.code==="storage/unknown"||e?.code==="storage/retry-limit-exceeded")throw new Error("Firebase Storage antwortet nicht – ist Storage im Firebase-Projekt bereits aktiviert (Konsole → Storage → Erste Schritte)?");
+ throw new Error(`Upload fehlgeschlagen (${e?.code||e?.message||"unbekannter Fehler"}).`);
+ }
+}
+function dateiIstBild(name){return /\.(jpe?g|png|gif|webp|svg)$/i.test(name||"")}
+function dateiIstVideo(name){return /\.(mp4|webm|mov|m4v)$/i.test(name||"")}
+function dateiIstAudio(name){return /\.(mp3|wav|ogg|m4a)$/i.test(name||"")}
+// ---- Mini-Werkzeug-Kacheln: passende Lernwerkstatt-Tools direkt im
+// jeweiligen Arbeitsschritt startbar machen ----------------------------
+function miniToolRow(tools){
+ return `<div class="mini-tool-row">${tools.map(([icon,label,route])=>
+ `<a href="#${route}"class="mini-tool-tile"onclick="closeModal()"><span class="mini-tool-icon">${icon}</span><span class="mini-tool-label">${label}</span></a>`
+ ).join("")}</div>`;
+}
+
+function dateiEmbedHTML(url,name){
+ if(dateiIstBild(name))return`<img src="${esc(url)}"alt="${esc(name)}"style="max-width:100%;border-radius:8px">`;
+ if(dateiIstVideo(name))return`<video controls style="width:100%;border-radius:8px;max-height:240px"src="${esc(url)}"></video>`;
+ if(dateiIstAudio(name))return`<audio controls style="width:100%"src="${esc(url)}"></audio>`;
+ return`<a href="${esc(url)}"target="_blank"rel="noopener"class="pill"> ${esc(name)} öffnen ↗</a>`;
+}
+
+function analogClockSVG(size){
+ const s=size||90;
+ const marks=Array.from({length:12},(_,i)=>{
+ const angle=i*30*Math.PI/180;
+ const x1=50+42*Math.sin(angle),y1=50-42*Math.cos(angle);
+ const x2=50+(i%3===0?36:38)*Math.sin(angle),y2=50-(i%3===0?36:38)*Math.cos(angle);
+ return `<line x1="${x1.toFixed(1)}"y1="${y1.toFixed(1)}"x2="${x2.toFixed(1)}"y2="${y2.toFixed(1)}"stroke="#8a99a3"stroke-width="${i%3===0?2:1}"stroke-linecap="round"/>`;
+ }).join("");
+ return `<svg class="analog-clock"viewBox="0 0 100 100"width="${s}"height="${s}">
+ <circle cx="50"cy="50"r="47"fill="#fff"stroke="#d6e2ea"stroke-width="2"/>
+ ${marks}
+ <line class="clock-hand-h"x1="50"y1="50"x2="50"y2="28"stroke="#17384f"stroke-width="4"stroke-linecap="round"></line>
+ <line class="clock-hand-m"x1="50"y1="50"x2="50"y2="16"stroke="#17384f"stroke-width="3"stroke-linecap="round"></line>
+ <line class="clock-hand-s"x1="50"y1="50"x2="50"y2="12"stroke="#e8890c"stroke-width="1.5"stroke-linecap="round"></line>
+ <circle cx="50"cy="50"r="3.5"fill="#17384f"/>
+ </svg>`;
+}
+let __globalClockInterval=null;
+function ensureGlobalClock(){
+ if(__globalClockInterval)return;
+ const tick=()=>{
+ const now=new Date();
+ const h=now.getHours()%12,m=now.getMinutes(),s=now.getSeconds();
+ const hDeg=h*30+m*0.5, mDeg=m*6+s*0.1, sDeg=s*6;
+ document.querySelectorAll(".clock-hand-h").forEach(el=>el.setAttribute("transform",`rotate(${hDeg} 50 50)`));
+ document.querySelectorAll(".clock-hand-m").forEach(el=>el.setAttribute("transform",`rotate(${mDeg} 50 50)`));
+ document.querySelectorAll(".clock-hand-s").forEach(el=>el.setAttribute("transform",`rotate(${sDeg} 50 50)`));
+ const dateStr=now.toLocaleDateString("de-DE",{weekday:"long",day:"2-digit",month:"long"});
+ document.querySelectorAll(".live-clock-date").forEach(el=>el.textContent=dateStr);
+ };
+ tick();
+ __globalClockInterval=setInterval(tick,1000);
+}
+let simpleTimerMinutes=10;
+let simpleTimerSecondsLeft=600;
+let simpleTimerRunning=false;
+let simpleTimerInterval=null;
+function simpleTimerFormat(sec){const m=Math.floor(sec/60),s=sec%60;return`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+function startSimpleTimer(){
+ if(simpleTimerRunning)return;
+ if(simpleTimerSecondsLeft<=0){
+ const mins=Math.max(1,Math.min(180,parseInt($("simpleTimerInput")?.value,10)||10));
+ simpleTimerMinutes=mins;simpleTimerSecondsLeft=mins*60;
+ }
+ simpleTimerRunning=true;
+ const btn=$("simpleTimerStartBtn");if(btn)btn.textContent="Läuft …";
+ simpleTimerInterval=setInterval(()=>{
+ simpleTimerSecondsLeft--;
+ const disp=$("simpleTimerDisplay");if(disp)disp.textContent=simpleTimerFormat(simpleTimerSecondsLeft);
+ if(simpleTimerSecondsLeft<=0){
+ clearInterval(simpleTimerInterval);simpleTimerRunning=false;
+ toast(" Zeit ist um!");
+ const b=$("simpleTimerStartBtn");if(b)b.textContent="▶ Start";
+ }
+ },1000);
+}
+function pauseSimpleTimer(){
+ clearInterval(simpleTimerInterval);simpleTimerRunning=false;
+ const btn=$("simpleTimerStartBtn");if(btn)btn.textContent="▶ Weiter";
+}
+function resetSimpleTimer(){
+ clearInterval(simpleTimerInterval);simpleTimerRunning=false;
+ const mins=Math.max(1,Math.min(180,parseInt($("simpleTimerInput")?.value,10)||10));
+ simpleTimerMinutes=mins;simpleTimerSecondsLeft=mins*60;
+ const disp=$("simpleTimerDisplay");if(disp)disp.textContent=simpleTimerFormat(simpleTimerSecondsLeft);
+ const btn=$("simpleTimerStartBtn");if(btn)btn.textContent="▶ Start";
+}
+window.startSimpleTimer=startSimpleTimer;window.pauseSimpleTimer=pauseSimpleTimer;window.resetSimpleTimer=resetSimpleTimer;
+function renderUhrTimer(){
+ ensureGlobalClock();
+ return`${pageHead("SELBSTSTÄNDIG LERNEN","Uhr & Timer","Aktuelle Uhrzeit im Blick behalten oder einen frei einstellbaren Timer starten.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>`)}
+ <div class="grid grid-2"style="gap:16px">
+ <div class="card"style="text-align:center">
+ <div class="kicker">AKTUELLE UHRZEIT</div>
+ <div style="display:flex;justify-content:center;margin-top:10px">${analogClockSVG(160)}</div>
+ <div class="pomo-phase live-clock-date"style="margin-top:8px">${new Date().toLocaleDateString("de-DE",{weekday:"long",day:"2-digit",month:"long"})}</div>
+ </div>
+ <div class="card"style="text-align:center">
+ <div class="kicker">TIMER</div>
+ <div class="pomo-display"id="simpleTimerDisplay"style="margin-top:10px">${simpleTimerFormat(simpleTimerSecondsLeft)}</div>
+ <div class="pomo-actions">
+ <button class="primary"id="simpleTimerStartBtn"onclick="startSimpleTimer()">${simpleTimerRunning?"Läuft …":"▶ Start"}</button>
+ <button class="secondary"onclick="pauseSimpleTimer()">⏸ Pause</button>
+ <button class="secondary"onclick="resetSimpleTimer()">↺ Zurücksetzen</button>
+ </div>
+ <div class="pomo-settings">
+ <label>Minuten<input id="simpleTimerInput"type="number"min="1"max="180"value="${simpleTimerMinutes}"></label>
+ </div>
+ <small style="display:block;margin-top:10px;color:var(--muted)">Lehrkräfte und Schüler:innen können die Minuten frei einstellen – z. B. für Prüfungssimulationen, Gruppenarbeiten oder eigene Lernphasen.</small>
+ </div>
+ </div>
+ ${footer()}`;
+}
+window.renderUhrTimer=renderUhrTimer;
 
 function renderFokusTimer(){
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Fokus-Timer","Pomodoro-Technik: fokussiert arbeiten, dann bewusst Pause machen.",`<button class="secondary"onclick="go('lernwerkzeuge')">← Lern-Werkzeuge</button>`)}
@@ -3258,7 +5007,7 @@ async function addGlossaryEntry(){
  createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
  createdAt:serverTimestamp()
  });
- closeModal();await render();toast("Begriff hinzugefügt.");
+ closeModal();await render();showMotivationsBild();toast("Begriff hinzugefügt.");
  }catch(e){
  console.error("Glossar-Eintrag anlegen:",e);
  toast(e?.code==="permission-denied"?"Firebase verweigert das Hinzufügen. Bitte die Firestore-Regeln prüfen.":"Begriff konnte nicht gespeichert werden.");
@@ -3342,10 +5091,10 @@ const essayParts=[
  ["Hast du sowohl Chancen als auch Grenzen benannt wie im Muster?","Ist deine Einschätzung ähnlich sachlich begründet?"]]
 ];
 const essayLernbereiche=[
- ["12.1","Entwicklung begreifen und pädagogisch gestalten"],
- ["12.2","Persönlichkeit und Identität"],
- ["12.3","Soziale Arbeit – Aufgaben & Arbeitsfelder"],
- ["12.4","Kommunikation und Interaktion"]
+ ["11.1","Pädagogik/Psychologie als Wissenschaft"],
+ ["11.2","Grundlagen des Erlebens, Verhaltens, Handelns"],
+ ["11.3","Erziehungs- und Bildungsprozesse"],
+ ["11.4","Lernen als steuerbarer Prozess"]
 ];
 function essayLernbereichLabel(code){
  const found=essayLernbereiche.find(l=>l[0]===code);
@@ -3367,26 +5116,9 @@ function essaySelfCheckStatus(entry,criteriaCount){
  return {color:"yellow",label:`🟡 ${metCount}/${criteriaCount} Kriterien selbst erfüllt`};
 }
 
-// Fest eingebautes Beispiel-Fallbeispiel, damit Fachaufsatz-Training von
-// Anfang an nutzbar ist, ohne dass eine Lehrkraft manuell etwas anlegen
-// muss. Komplett eigener, frei erfundener Fall (kein Lehrbuchtext) –
-// kann nicht gelöscht/bearbeitet werden, Lehrkräfte legen bei Bedarf
-// zusätzlich eigene Fallbeispiele über"＋ Neues Fallbeispiel"an.
-const ESSAY_SEED_CASES=[{
- id:"seed-elias",
- isSeed:true,
- title:"Elias – zwischen Talent und eigenem Willen",
- lernbereich:"12.1",
- theoryArea:"Die Bedingungen der Entwicklung (Anlage, Umwelt, Selbststeuerung)",
- caseText:"Elias ist 14 Jahre alt. Schon als Kleinkind fiel er durch ein außergewöhnliches musikalisches Gehör auf: Noch bevor er sprechen konnte, summte er ganze Melodien nach, die er nur ein einziges Mal gehört hatte. Seine Mutter ist Musiklehrerin und unterrichtet an der örtlichen Musikschule Klavier und Gesang.\n\nMit fünf Jahren bekam Elias sein erstes Klavier geschenkt und begann, sich selbst kleine Stücke beizubringen. Seine Eltern, beide berufstätig, konnten sich zunächst keinen regelmäßigen Unterricht leisten. Erst als eine Nachbarin, selbst ehemalige Konzertpianistin, auf Elias'Talent aufmerksam wurde und anbot, ihn kostenlos zu unterrichten, begann eine systematische Förderung.\n\nIn den folgenden Jahren übte Elias täglich mehrere Stunden – oft aus eigenem Antrieb, auch wenn seine Eltern ihn manchmal eher zum Spielen im Freien ermuntern wollten. Als seine Klavierlehrerin nach zwei Jahren wegzog, suchte sich Elias selbstständig Video-Tutorials und Noten im Internet, um weiter voranzukommen.\n\nMit zwölf Jahren gewann Elias einen regionalen Jugendmusikwettbewerb. Die Anerkennung motivierte ihn, noch intensiver zu üben. Gleichzeitig häuften sich in der Schule Konflikte, weil ihm die vielen Übungsstunden kaum noch Zeit für Hausaufgaben ließen – seine Eltern reagierten uneinig: Der Vater drängte auf bessere Schulnoten, die Mutter unterstützte Elias'musikalischen Weg vorbehaltlos.\n\nAktuell überlegt Elias, sich an einem Musikgymnasium zu bewerben, das eine deutlich intensivere musikalische Ausbildung bietet, dafür aber einen Umzug in eine andere Stadt bedeuten würde.\n\nSie sollen im Rahmen eines Beratungsgesprächs mit Elias'Eltern erläutern, durch welche Bedingungen Elias'musikalische Entwicklung bisher beeinflusst wurde und wie diese zueinander in Beziehung stehen.",
- pdfUrl:"",
- modelAnswers:{
- einleitung:"Die Entwicklungspsychologie beschäftigt sich mit gerichteten, zeitlich geordneten und miteinander zusammenhängenden Veränderungen des Erlebens und Verhaltens im Laufe des Lebens. Dabei stellt sich häufig die Frage, wodurch eine solche Entwicklung überhaupt beeinflusst wird. Am Beispiel des 14-jährigen Elias, der sich durch ein außergewöhnliches musikalisches Talent auszeichnet, soll im Folgenden gezeigt werden, welche Bedingungen seine bisherige Entwicklung geprägt haben. Zunächst werden die drei Entwicklungsbedingungen Anlage, Umwelt und Selbststeuerung allgemein erläutert, bevor sie anschließend am Fallbeispiel konkretisiert und abschließend beurteilt werden.",
- theorie:"Die Entwicklung eines Menschen wird durch drei Kategorien von Bedingungen beeinflusst: Anlage, Umwelt und Selbststeuerung.\n\nMit Anlage bezeichnet man die genetische Ausstattung eines Menschen, die bei der Befruchtung festgelegt wird. Sie stellt das vorhandene Wachstums- und Entwicklungspotenzial dar und muss als Werdemöglichkeit verstanden werden, die erst durch entsprechende Umwelteinflüsse entfaltet werden kann.\n\nUnter Umwelt versteht man alle direkten und indirekten Einflüsse, denen ein Mensch von der Empfängnis bis zu seinem Tod ausgesetzt ist. Man unterscheidet dabei vier Bereiche: die natürliche, die kulturelle, die ökonomische und die soziale Umwelt. Umwelteinflüsse gelten als Schrittmacher der Entwicklung, da sie mitentscheiden, ob sich vorhandene Anlagen entfalten können.\n\nMit Selbststeuerung werden alle Kräfte bezeichnet, mit denen ein Mensch als aktives Wesen selbst Einfluss auf seine Entwicklung nimmt. Der Mensch ist dabei nicht nur passiv Umwelteinflüssen ausgesetzt, sondern gestaltet seine eigene Entwicklung durch eigene Ziele, Entscheidungen und Handlungen aktiv mit.\n\nDiese drei Bedingungen stehen nicht unabhängig nebeneinander, sondern in ständiger Wechselwirkung zueinander.",
- analyse:"Bei Elias lassen sich alle drei Entwicklungsbedingungen erkennen und einander zuordnen.\n\nAnlage: Bereits als Kleinkind fiel Elias durch ein außergewöhnliches musikalisches Gehör auf – er summte Melodien nach, bevor er sprechen konnte. Da seine Mutter selbst Musiklehrerin ist, liegt die Vermutung nahe, dass Elias eine musikalische Begabung mütterlicherseits geerbt hat.\n\nUmwelt: Mehrere Umweltfaktoren lassen sich unterscheiden. Zur sozialen Umwelt zählt zum einen das musikalisch geprägte Elternhaus, zum anderen die Nachbarin, die Elias kostenlosen Unterricht anbot und damit seine Förderung erst ermöglichte. Zur ökonomischen Umwelt gehört, dass sich die Familie zunächst keinen regelmäßigen Unterricht leisten konnte – ein Umstand, der Elias'Entwicklung anfangs eher hemmte. Die uneinige Erziehungshaltung der Eltern stellt ebenfalls einen sozialen Umweltfaktor dar, der Elias'weitere Entwicklung beeinflussen könnte.\n\nSelbststeuerung: Besonders deutlich wird Selbststeuerung darin, dass Elias sich Stücke zunächst selbst beibrachte, täglich aus eigenem Antrieb übte und sich nach dem Weggang seiner Lehrerin selbstständig neue Lernquellen suchte. Auch die aktuelle Überlegung, sich am Musikgymnasium zu bewerben, ist Ausdruck seiner eigenständigen Zielsetzung.",
- beurteilung:"Elias'bisherige Entwicklung zeigt exemplarisch, wie eng Anlage, Umwelt und Selbststeuerung zusammenwirken: Ohne seine Begabung hätte die Förderung durch die Nachbarin keine Wirkung gezeigt; ohne diese Förderung hätte sich seine Begabung kaum entfalten können; und ohne seine eigene Motivation hätte er die Lücke nach dem Lehrerwechsel nicht selbstständig überbrückt.\n\nAls Chance ist zu werten, dass Elias über eine seltene Kombination aus Begabung, unterstützendem Umfeld und hoher Eigenmotivation verfügt. Als Grenze bzw. Risiko ist die uneinige elterliche Haltung zu nennen, die Elias in einen Loyalitätskonflikt bringen könnte, ebenso wie die Frage, ob ein Umzug an ein Musikgymnasium seine schulische und soziale Entwicklung zusätzlich belasten würde.\n\nFür das Beratungsgespräch mit den Eltern wäre daher zu empfehlen, gemeinsam eine Lösung zu finden, die Elias'musikalische Entwicklung weiter fördert, ohne seine schulische und soziale Entwicklung zu vernachlässigen – beispielsweise durch ein Gespräch mit dem angestrebten Musikgymnasium über Möglichkeiten des Übergangs oder durch eine schrittweise Erprobung vor einer endgültigen Entscheidung."
- }
-}];
+// Fest eingebaute Beispiel-Fallbeispiele (aktuell keine für F12Sb hinterlegt –
+// die App unterstützt sie aber genauso wie F12Sb, falls später gewünscht).
+const ESSAY_SEED_CASES=[];
 
 async function getEssayCases(){
  const stored=await getCollection("essayCases");
@@ -3423,7 +5155,7 @@ async function renderFachaufsatzUebersicht(){
  const cases=await getEssayCases();
  const grouped=essayLernbereiche.map(([code,label])=>({code,label,cases:cases.filter(c=>c.lernbereich===code)}));
  const ungrouped=cases.filter(c=>!c.lernbereich||!essayLernbereiche.some(l=>l[0]===c.lernbereich));
- return`${pageHead("SELBSTSTÄNDIG LERNEN","Fachaufsatz-Training","Fachaufsatz in Pädagogik/Psychologie üben – Baustein für Baustein, gegliedert nach den Lernbereichen 12.1–12.4.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
+ return`${pageHead("SELBSTSTÄNDIG LERNEN","Fachaufsatz-Training","Fachaufsatz in Pädagogik/Psychologie üben – Baustein für Baustein, gegliedert nach den Lernbereichen 11.1–11.4.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
  <button class="primary"onclick="openEssayCaseForm()">＋ Neues Fallbeispiel</button>`)}
  <div class="notice"><strong>Deine Übungstexte sind privat.</strong><p style="margin-bottom:0">Nur du selbst und Lehrkräfte können sehen, was du hier schreibst – nicht deine Mitschüler:innen.</p></div>
  ${grouped.map(g=>`
@@ -3568,6 +5300,7 @@ async function saveEssayEntry(caseId,type){
  text,selfCheck,selfCheckAt:serverTimestamp(),updatedAt:serverTimestamp()
  },{merge:true});
  await render();
+ showMotivationsBild();
  toast("Gespeichert.");
  }catch(e){
  console.error("Fachaufsatz-Baustein speichern:",e);
@@ -3579,8 +5312,13 @@ async function saveEssayEntry(caseId,type){
 // gezielten Vergleichsfragen statt einer einfachen Musterlösung zum Abschreiben.
 async function openEssayModelCompare(caseId,type){
  try{
+ let c=null;
+ if(caseId.startsWith("seed-")){
+ c=ESSAY_SEED_CASES.find(s=>s.id===caseId)||null;
+ }else{
  const snap=await getDoc(doc(db,"essayCases",caseId));
- const c=snap.exists()?{id:snap.id,...snap.data()}:null;
+ c=snap.exists()?{id:snap.id,...snap.data()}:null;
+ }
  if(!c){toast("Dieses Fallbeispiel wurde nicht gefunden.");return}
  const model=(c.modelAnswers?.[type]||"").trim();
  if(!model){toast("Für diesen Baustein ist noch kein Musterbeispiel hinterlegt.");return}
@@ -3990,22 +5728,17 @@ async function openNewMessagePicker(){
  if(!isApproved()){toast("Nur freigeschaltete Nutzer können Nachrichten schreiben.");return}
  const users=await getApprovedUserDirectory();
  if(!users.length){toast("Keine anderen freigeschalteten Campus-Mitglieder gefunden.");return}
- window.__messageDirectory=users;
  modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> NEUE NACHRICHT</div><h2>Person auswählen</h2>
- <label>Suche<input class="search"id="messageUserSearch"placeholder="Name suchen …"oninput="filterMessageUserList()"></label>
- <div class="list"id="messageUserList"style="max-height:320px;overflow:auto;margin-top:10px">
- ${users.map(u=>`<div class="card"data-name="${esc((u.displayName||u.email||"").toLowerCase())}"style="cursor:pointer;padding:10px 14px;margin-bottom:6px"onclick="openConversation('${u.uid}')">
- <strong>${esc(u.displayName||u.email||"Campus-Mitglied")}</strong> <small>${u.role==="teacher"?"· Lehrkraft":u.role==="admin"?"· Admin":"· Schüler/in"}</small>
- </div>`).join("")}
+ <div class="form">
+ <label>Empfänger:in<select id="messageRecipientSelect">
+ <option value="">Bitte auswählen …</option>
+ ${users.map(u=>`<option value="${u.uid}">${esc(u.displayName||u.email||"Campus-Mitglied")} ${u.role==="teacher"?"(Lehrkraft)":u.role==="admin"?"(Admin)":"(Schüler/in)"}</option>`).join("")}
+ </select></label>
+ <div class="form-actions">
+ <button class="secondary"onclick="closeModal()">Abbrechen</button>
+ <button class="primary"onclick="startNewConversation()">Nachricht schreiben</button>
  </div>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button></div>`);
-}
-
-function filterMessageUserList(){
- const q=($("messageUserSearch")?.value||"").toLowerCase().trim();
- document.querySelectorAll("#messageUserList [data-name]").forEach(row=>{
- row.hidden=Boolean(q) && !row.dataset.name.includes(q);
- });
+ </div>`);
 }
 
 async function markConversationRead(otherUid){
@@ -4022,7 +5755,12 @@ async function markConversationRead(otherUid){
  }catch(e){console.error("Nachrichten als gelesen markieren:",e)}
 }
 
+function startNewConversation(){
+ openConversation($("messageRecipientSelect")?.value);
+}
+window.startNewConversation=startNewConversation;
 async function openConversation(otherUid){
+ if(!otherUid){toast("Bitte eine Person auswählen.");return}
  const users=window.__messageDirectory||await getApprovedUserDirectory();
  const other=users.find(u=>u.uid===otherUid);
  activeConversationUid=otherUid;
@@ -4077,7 +5815,10 @@ async function renderConversationView(){
  <button class="secondary"onclick="cancelMessageReply()"></button></div>`:""}
  <div class="comment-box"style="margin-top:10px;flex-direction:column;align-items:stretch;gap:8px">
  <textarea id="messageComposeText"rows="2"placeholder="Nachricht schreiben …"></textarea>
- <button class="primary"onclick="sendMessage()"style="align-self:flex-end">Senden</button>
+ <div style="display:flex;justify-content:space-between;align-items:center">
+ ${emojiPickerHTML("messageComposeText","emojiPickerMessage")}
+ <button class="primary"onclick="sendMessage()">Senden</button>
+ </div>
  </div>
  </div>${footer()}`;
 }
@@ -4220,9 +5961,17 @@ function closePinnwandBoard(){activeBoardId=null;go("pinnwand")}
 
 function boardNoteHTML(p){
  const canDelete=p.authorUid===currentUser.uid||isTeacher();
+ let mediaHTML="";
+ if(p.url&&p.mediaType==="bild")mediaHTML=`<img src="${esc(p.url)}"alt=""class="pin-note-media"loading="lazy">`;
+ else if(p.url&&p.mediaType==="video"){
+ const ytMatch=p.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{6,})/);
+ mediaHTML=ytMatch?`<iframe class="pin-note-media"src="https://www.youtube.com/embed/${ytMatch[1]}"loading="lazy"allowfullscreen></iframe>`:`<video class="pin-note-media"controls src="${esc(p.url)}"></video>`;
+ }
+ else if(p.url&&p.mediaType==="audio")mediaHTML=`<audio class="pin-note-media-audio"controls src="${esc(p.url)}"></audio>`;
  return`<div class="pin-note"style="background:${noteColorBg(p.color)}">
  <p class="pin-note-text">${esc(p.text)}</p>
- ${p.url?`<a class="pin-note-link"href="${esc(p.url)}"target="_blank"rel="noopener noreferrer"> Link öffnen</a>`:""}
+ ${mediaHTML}
+ ${p.url&&(!p.mediaType||p.mediaType==="link")?`<a class="pin-note-link"href="${esc(p.url)}"target="_blank"rel="noopener noreferrer"> Link öffnen</a>`:""}
  <div class="pin-note-meta"><small>${esc(p.authorName||"Campus-Mitglied")} · ${fmtDate(p.createdAt)}</small>
  <span>
  <button class="pin-note-delete"title="Melden"onclick="openReportForm('boardPosts','${p.id}','${esc((p.text||"").slice(0,80))}')"></button>
@@ -4258,6 +6007,10 @@ async function renderPinnwandBoard(){
  .pin-note{break-inside:avoid;-webkit-column-break-inside:avoid;margin:0 0 14px;padding:14px 14px 10px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.08);color:#2a2a2a}
  .pin-note-text{margin:0 0 8px;white-space:pre-wrap;word-break:break-word}
  .pin-note-link{display:inline-block;margin-bottom:8px;font-weight:700;color:inherit;text-decoration:underline}
+ .pin-note-media{display:block;width:100%;border-radius:8px;margin-bottom:8px;max-height:220px;object-fit:cover}
+ iframe.pin-note-media{height:160px;border:0}
+ video.pin-note-media{max-height:220px}
+ .pin-note-media-audio{width:100%;margin-bottom:8px}
  .pin-note-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;opacity:.75}
  .pin-note-delete{background:none;border:none;cursor:pointer;font-size:14px;padding:2px 6px;opacity:.6}
  .pin-note-delete:hover{opacity:1}
@@ -4353,7 +6106,14 @@ function openBoardPostForm(){
  <h2>Neue Notiz</h2>
  <div class="form">
  <label>Text<textarea id="bpText"rows="4"maxlength="500"placeholder="Deine Idee, Frage oder dein Beitrag …"></textarea></label>
- <label>Link (optional)<input id="bpUrl"type="url"placeholder="https://…"></label>
+ <label>Medium (optional)<select id="bpMediaType"onchange="$('bpUrl').placeholder=this.value==='bild'?'Bild-URL (…jpg/png)':this.value==='video'?'Video-URL (auch YouTube)':this.value==='audio'?'Audio-URL (…mp3)':'https://…'">
+ <option value="link">Nur Link</option>
+ <option value="bild">Bild</option>
+ <option value="video">Video</option>
+ <option value="audio">Audio</option>
+ </select></label>
+ <label>Link/URL (optional)<input id="bpUrl"type="url"placeholder="https://…"></label>
+ <label>Oder Datei hochladen (optional, max. 15 MB)<input id="bpDatei"type="file"></label>
  <label>Farbe</label>
  <div class="chips"id="bpColorPicker"style="margin:2px 0 10px">
  ${noteColors.map((c,i)=>`<span class="chip"data-color="${c.id}"style="background:${c.bg};cursor:pointer;color:#2a2a2a;${i===0?"outline:2px solid var(--brand,#1598d1)":""}"onclick="selectBoardNoteColor('${c.id}')">${c.id}</span>`).join("")}
@@ -4378,24 +6138,33 @@ async function addBoardPost(){
  if(!activeBoardId)return;
  const text=$("bpText")?.value.trim()||"";
  let url=$("bpUrl")?.value.trim()||"";
+ let mediaType=$("bpMediaType")?.value||"link";
  const color=$("bpColor")?.value||noteColors[0].id;
+ const file=$("bpDatei")?.files?.[0]||null;
  if(!text){toast("Bitte einen Text für die Notiz eingeben.");return}
+ if(url&&file){toast("Bitte entweder einen Link ODER eine Datei angeben, nicht beides.");return}
  if(url){
  url=/^https?:\/\//i.test(url)?url:"https://"+url;
  try{const u=new URL(url);if(!/^https?:$/.test(u.protocol))throw new Error("protocol")}
  catch(e){toast("Bitte einen gültigen Link eingeben oder das Feld leer lassen.");return}
  }
  try{
+ if(file){
+ toast("Datei wird hochgeladen …");
+ const up=await uploadCampusDatei(file,`boardPosts/${activeBoardId}`);
+ url=up.url;
+ mediaType=dateiIstBild(up.name)?"bild":dateiIstVideo(up.name)?"video":dateiIstAudio(up.name)?"audio":"link";
+ }
  await addDoc(collection(db,"boardPosts"),{
- boardId:activeBoardId,text,url,color,
+ boardId:activeBoardId,text,url,mediaType,color,
  authorUid:currentUser.uid,
  authorName:profile?.displayName||currentUser.email||"Campus-Mitglied",
  createdAt:serverTimestamp()
  });
- closeModal();await render();toast("Notiz angeheftet.");
+ closeModal();await render();showMotivationsBild();toast("Notiz angeheftet.");
  }catch(e){
  console.error("Notiz anheften:",e);
- toast(e?.code==="permission-denied"?"Firebase verweigert das Anheften. Bitte die Firestore-Regeln prüfen.":"Notiz konnte nicht gespeichert werden.");
+ toast("Fehler: "+(e?.message||e));
  }
 }
 
@@ -4501,6 +6270,18 @@ function competencyCategoryColor(category){
  const hue=COMPETENCY_CATEGORY_HUES[category]??170;
  return {bg:`hsl(${hue},55%,96%)`,border:`hsl(${hue},42%,58%)`,pill:`hsl(${hue},50%,89%)`};
 }
+async function deleteCompetency(id){
+ if(!confirm("Diese Kompetenz wirklich löschen?"))return;
+ try{
+ await deleteDoc(doc(db,"competencies",id));
+ await render();
+ toast("Kompetenz gelöscht.");
+ }catch(e){
+ console.error("Kompetenz löschen:",e);
+ toast("Konnte nicht gelöscht werden.");
+ }
+}
+window.deleteCompetency=deleteCompetency;
 function competencyCard(c,mine){
  const level=Math.max(1,Math.min(5,Number(c.level)||1)),bars="●".repeat(level)+"○".repeat(5-level);
  const initials=String(c.ownerName||"Campus").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase();
@@ -4522,19 +6303,6 @@ function filterCompetencyNetwork(){
  card.hidden=!((!q||card.dataset.name.toLowerCase().includes(q))&&(cat==="all"||card.dataset.category===cat)&&(!only||card.dataset.help==="yes"));
  });
 }
-async function deleteCompetency(id){
- if(!confirm("Diese Kompetenz wirklich löschen?"))return;
- try{
- await deleteDoc(doc(db,"competencies",id));
- await render();
- toast("Kompetenz gelöscht.");
- }catch(e){
- console.error("Kompetenz löschen:",e);
- toast("Konnte nicht gelöscht werden.");
- }
-}
-window.deleteCompetency=deleteCompetency;
-
 function openCompetencyHelp(uid,name,competency){
  modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> CAMPUS HILFT</div><h2>Hilfe anfragen</h2><p>Du möchtest <strong>${esc(name)}</strong> zu <strong>${esc(competency)}</strong> ansprechen.</p><label>Deine Nachricht<textarea id="competencyHelpMessage"rows="5"placeholder="Wobei brauchst du Hilfe?"></textarea></label><div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="createCompetencyHelpPost('${uid}','${esc(name)}','${esc(competency)}')"> Hilfeanfrage erstellen</button></div>`);
 }
@@ -4674,10 +6442,19 @@ async function renderJournal(){
  margin-top:12px;
  padding:14px;
  border:1px solid var(--line,#ddd);
- border-radius:10px;
+ border-left:4px solid #b8c4cc;
+ border-radius:6px 10px 10px 6px;
  }
  .journal-detail strong{display:block;margin-bottom:6px}
  .journal-detail p{margin:0;white-space:pre-wrap}
+ .journal-c-blau{background:var(--soft-blue);border-left-color:#4a90d9}
+ .journal-c-gruen{background:var(--soft-green);border-left-color:#3fa66a}
+ .journal-c-orange{background:var(--soft-orange);border-left-color:#e0a324}
+ .journal-c-lila{background:var(--soft-purple);border-left-color:#9b59b6}
+ .journal-c-teal{background:var(--soft-teal);border-left-color:#1a9b8e}
+ label.journal-c-blau,label.journal-c-gruen,label.journal-c-orange,label.journal-c-lila,label.journal-c-teal{
+ padding:12px;border-radius:6px 10px 10px 6px;border-left:4px solid;
+ }
  @media(max-width:800px){
  .journal-two-tiles{grid-template-columns:1fr}
  .journal-form-grid{grid-template-columns:1fr}
@@ -4737,23 +6514,23 @@ async function renderJournal(){
  <textarea id="jWorkedOn"rows="3"placeholder="Thema, Aufgabe, Projekt oder Lernziel …"></textarea>
  </label>
 
- <label>Was habe ich verstanden oder gelernt?
+ <label class="journal-c-gruen">Was habe ich verstanden oder gelernt?
  <textarea id="jLearned"rows="4"placeholder="Was ist mir heute klarer geworden? Was kann ich jetzt besser?"></textarea>
  </label>
 
- <label>Was war schwierig?
+ <label class="journal-c-orange">Was war schwierig?
  <textarea id="jDifficult"rows="4"placeholder="Was war schwierig oder ist noch unklar?"></textarea>
  </label>
 
- <label>Was hat mir geholfen? Welche Methode/Strategie hat funktioniert?
+ <label class="journal-c-blau">Was hat mir geholfen? Welche Methode/Strategie hat funktioniert?
  <textarea id="jHelpful"rows="4"placeholder="Methode, Person, Material, Erklärung oder Strategie …"></textarea>
  </label>
 
- <label class="full">Ein Gedanke über mein Lernen <small style="font-weight:400;color:var(--muted)">(optional, metakognitiv)</small>
+ <label class="full journal-c-lila">Ein Gedanke über mein Lernen <small style="font-weight:400;color:var(--muted)">(optional, metakognitiv)</small>
  <textarea id="jMetaThought"rows="3"placeholder="Was ist dir heute über dein eigenes Lernen aufgefallen? Z. B.: Wie gut konntest du vorher einschätzen, was schwer wird? Wie hast du gemerkt, ob du etwas wirklich verstanden hast?"></textarea>
  </label>
 
- <label>Mein nächster Lernschritt
+ <label class="journal-c-teal">Mein nächster Lernschritt
  <textarea id="jNextStep"rows="4"placeholder="Was mache ich als Nächstes?"></textarea>
  </label>
 
@@ -5209,6 +6986,14 @@ async function renderResilienz(){
  .res-icon{font-size:31px;margin-bottom:8px}.res-tag{display:inline-block;margin-top:6px;border-radius:999px;font-size:9.5px;padding:3px 9px}
  .res-layout{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}
  .res-scale{width:100%;accent-color:#168fd0}
+ .vstress-row{display:flex;gap:20px;align-items:flex-start;margin:20px 0;flex-wrap:wrap}
+ .vstress-wrap{display:flex;align-items:center;gap:16px;margin:0}
+ .vstress-row .skill-suggest{margin:0;min-width:220px}
+ .vstress-num{font-size:32px;font-weight:800;color:#c0392b;line-height:1}
+ .vstress-track{position:relative;width:54px;height:220px;border-radius:27px;background:#f0f3f5;border:1px solid var(--line,#e2eaf0);overflow:hidden}
+ .vstress-fill{position:absolute;bottom:0;left:0;width:100%;border-radius:0 0 27px 27px;transition:height .12s ease,background .12s ease}
+ .vstress-input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;writing-mode:vertical-lr;direction:rtl;-webkit-appearance:slider-vertical}
+ .vstress-scale{display:flex;flex-direction:column;justify-content:space-between;height:220px;font-size:11px;color:var(--muted)}
  .stress-value{font-size:40px;font-weight:900;line-height:1;background:linear-gradient(90deg,var(--blue-dark),var(--green));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
  .stress-face{font-size:30px}
  .stress-signs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
@@ -5251,24 +7036,30 @@ async function renderResilienz(){
  <div class="res-layout">
  <div class="card">
  <div class="kicker">DEIN MOMENT</div>
- <h2> Wie hoch ist dein Stress gerade?</h2>
- <p>Schätze deinen momentanen Stress von <b>0</b> (ruhig) bis <b>10</b> (sehr angespannt) ein. Es gibt dabei kein „richtig“ oder „falsch“.</p>
- <div style="display:flex;align-items:center;gap:14px;margin:18px 0 8px">
- <div class="stress-value"id="resStressValue">5</div><div class="stress-face"id="resStressFace"></div>
- </div>
- <input id="resStress"class="res-scale"type="range"min="0"max="10"value="5"oninput="updateResilienzStress(this.value)">
- <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:12px"><span>0 · ruhig</span><span>5 · angespannt</span><span>10 · sehr hoch</span></div>
-
- <div class="card"style="margin-top:16px">
- <h3>Woran merkst du es bei dir?</h3>
+ <h2> Hast du Stress? Woran merkst du es?</h2>
  <p style="color:var(--muted);font-size:12px;margin-top:-6px">Tippe an, was gerade zutrifft.</p>
  <div class="stress-signs"id="resStressSigns">${STRESS_SIGNS.map(s=>`<div class="stress-sign"data-active="0"onclick="toggleStressSign(this,'hsl(${s.hue},55%,90%)','hsl(${s.hue},42%,55%)')"> ${s.label}</div>`).join("")}</div>
+
+ <h2 style="margin-top:22px"> Wie hoch ist dein Stress gerade?</h2>
+ <p>Schätze deinen momentanen Stress von <b>0</b> (ruhig) bis <b>10</b> (sehr angespannt) ein. Es gibt dabei kein „richtig“ oder „falsch“.</p>
+
+ <div class="vstress-row">
+ <div class="vstress-wrap">
+ <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+ <div class="vstress-num"id="resStressValue">5</div>
+ <div class="vstress-track">
+ <div class="vstress-fill"id="resStressFill"style="height:50%;background:rgb(63,166,106)"></div>
+ <input id="resStress"type="range"min="0"max="10"step="1"value="5"oninput="updateResilienzStress(this.value)"class="vstress-input">
+ </div>
+ </div>
+ <div class="vstress-scale"><span>10 · sehr hoch</span><span>5 · angespannt</span><span>0 · ruhig</span></div>
  </div>
 
- <div class="skill-suggest"id="resSkillSuggest">
+ <div class="skill-suggest"id="resSkillSuggest"style="flex:1">
  <strong> Deine passenden Skills</strong>
  <p style="margin-bottom:8px">Stell den Regler ein – dann schlägt dir die App passende Übungen vor.</p>
  <div id="resSkillButtons"></div>
+ </div>
  </div>
  </div>
 
@@ -5316,11 +7107,29 @@ async function renderResilienz(){
  </div>${footer()}`;
 }
 
+// Farbverlauf des Stress-Reglers: 0 = leicht transparentes Grün, 5 = volles
+// Grün, 5–10 = sanfter Übergang zu Rot.
+function stressFarbe(v){
+ const gruen=[63,166,106],rot=[214,58,58];
+ if(v<=5){
+ const t=v/5;
+ const alpha=(0.12+t*0.88).toFixed(2);
+ return`rgba(${gruen[0]},${gruen[1]},${gruen[2]},${alpha})`;
+ }
+ const t=(v-5)/5;
+ const r=Math.round(gruen[0]+(rot[0]-gruen[0])*t);
+ const g=Math.round(gruen[1]+(rot[1]-gruen[1])*t);
+ const b=Math.round(gruen[2]+(rot[2]-gruen[2])*t);
+ return`rgb(${r},${g},${b})`;
+}
 function updateResilienzStress(value){
  const v=Number(value);
- const val=$("resStressValue"),face=$("resStressFace"),box=$("resSkillButtons");
+ const val=$("resStressValue"),box=$("resSkillButtons"),fill=$("resStressFill");
  if(val)val.textContent=v;
- if(face)face.textContent=v<=2?"":v<=4?"":v<=6?"":v<=8?"":"";
+ if(fill){
+ fill.style.height=`${v*10}%`;
+ fill.style.background=stressFarbe(v);
+ }
  const ids=v<=2?["fokus","ressource","leicht"]:v<=5?["boden","bewegung","fokus","kontakt"]:v<=7?["atem","boden","distanz","bewegung"]:["atem","boden","pause","kontakt"];
  if(box)box.innerHTML=ids.slice(0,3).map(id=>{
  const s=resilienzSkillData(id);
@@ -5389,7 +7198,6 @@ function closeResilienzModal(){stopResonanzTimer();closeModal();}
 // dem Farbkreis, einheitliche Sättigung/Helligkeit), damit die Resilienz-Skills
 // sowohl in der Übersicht als auch in der Schatzkiste ruhig und ausgewogen
 // wirken statt bunt gemischt zu sein.
-
 const RESILIENZ_TAG_HUES={
  "Regulation":200,
  "Körper":130,
@@ -5558,30 +7366,59 @@ function renderPraxisProjekte(){
 
 async function renderPraktikum(){
  let assignments=[], questions=[], projects=[];
+ let challenges=[],solutions=[],results=[];
  try{assignments=await getCollection("practice","createdAt",true)}catch(e){console.error(e)}
  try{questions=await getCollection("fpaQuestions","createdAt",true)}catch(e){console.error(e)}
  try{projects=await getCollection("fpaProjects","createdAt",true)}catch(e){console.error(e)}
+ try{challenges=await getCollection("kiChallenges","createdAt",true)}catch(e){console.error(e)}
+ try{solutions=await getCollection("kiSolutions","createdAt",true)}catch(e){console.error(e)}
+ try{results=await getCollection("kiResults","createdAt",true)}catch(e){console.error(e)}
 
- assignments=assignments.filter(p=>p.module==="fpa" && p.type==="teacherAssignment");
+ assignments=assignments.filter(p=>p.module==="fachreferat" && p.type==="teacherAssignment");
+ const praktikumsAuftraege=await getPraktikumsAuftraege();
 
  return`${pageHead("SCHULE ↔ PRAXIS","fpA","Praxisaufträge und eigenständige Werkzeuge für die fachpraktische Ausbildung.",
  isTeacher()?`<button class="primary"onclick="openPracticeForm()">＋ Praxisauftrag</button>`:"")}
  <style>
  .fpa-main{margin-bottom:18px}
- .fpa-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+ .fpa-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
  .fpa-tool{min-height:185px;cursor:pointer;transition:.15s;text-align:left;color:var(--ink);font:inherit}
  .fpa-tool:hover{transform:translateY(-2px)}
  .fpa-tool .emoji{font-size:30px;display:block;margin-bottom:10px}
  .fpa-tool strong{display:block;font-size:14px;color:var(--blue-dark);margin:0 0 6px}
  .fpa-tool small{display:block;font-size:12px;color:var(--muted);line-height:1.5}
  .fpa-count{margin-top:14px}
- @media(max-width:850px){.fpa-tools{grid-template-columns:1fr}}
+ .ki-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+ .ki-card{min-height:255px;cursor:pointer;transition:.15s;text-align:left;color:var(--ink);font:inherit}
+ .ki-card:hover{transform:translateY(-2px)}
+ .ki-card h2{font-size:16px;line-height:1.3;color:var(--blue-dark);margin:0 0 8px;font-weight:800}
+ .ki-card p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
+ .ki-step{font-size:27px;font-weight:800;margin-bottom:10px;color:var(--blue)}
+ .ki-action{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
+ .ki-process{margin-bottom:16px}
+ .ki-process h3{font-size:16px;color:var(--blue-dark);margin:0 0 4px}
+ .ki-process .grid strong{font-size:13px;color:var(--blue-dark)}
+ .ki-process .grid small{font-size:12px;color:var(--muted);line-height:1.5}
+ @media(max-width:850px){.fpa-tools{grid-template-columns:1fr}.ki-grid{grid-template-columns:1fr}}
  </style>
 
- <div class="card fpa-main">
- <div class="kicker">LEHRKRAFT → SCHÜLER</div>
+ <div class="kicker">PRAKTIKUMSPHASEN 2026/27</div>
+ <div class="grid grid-3"style="margin-top:8px;margin-bottom:22px">${PRAKTIKUMSPHASEN.map(p=>{
+ const heute=new Date().toISOString().slice(0,10);
+ const status=heute>=p.start&&heute<=p.end?"laufend":heute>p.end?"vorbei":"kommend";
+ const auftrag=praktikumsAuftraege[p.id];
+ return`<button type="button"class="card"style="text-align:left;cursor:pointer;background:${status==="laufend"?"var(--soft-orange)":status==="vorbei"?"#f3f5f7":"var(--soft-blue)"}"onclick="openPraktikumsphaseAuftragForm('${p.id}')">
+ ${status==="laufend"?`<span class="pill"style="background:#e8890c;color:#fff">läuft gerade</span>`:""}
+ <strong style="display:block;margin-top:6px">${p.icon} ${esc(p.titel)}</strong>
+ <small style="display:block;color:var(--muted);margin-top:4px">${esc(fmtDateOnly(p.start))}–${esc(fmtDateOnly(p.end))}</small>
+ <small style="display:block;margin-top:6px">${auftrag?` ${esc(auftrag.titel)}`:isTeacher()?"Antippen, um einen Auftrag einzutragen":"Noch kein Auftrag eingetragen"}</small>
+ </button>`;
+ }).join("")}</div>
+
+ <div class="kicker">BEREICH 1 · LEHRKRAFT → SCHÜLER</div>
+ <div class="card fpa-main"style="margin-top:8px;background:var(--soft-blue)">
  <h2> Praxisaufträge</h2>
- <p>Hier erscheinen ausschließlich fpA-Praxisaufträge der Lehrkraft.</p>
+ <p>Hier erscheinen ausschließlich fpA-Praxisaufträge der Lehrkraft: beobachten, bearbeiten, durchführen.</p>
  <div class="grid grid-2">
  ${assignments.map(p=>`<article class="card">
  <span class="pill ${p.state==="offen"?"orange":"green"}">${esc(p.state||"offen")}</span>
@@ -5605,11 +7442,40 @@ async function renderPraktikum(){
  <small>Praxisprojekte dokumentieren und Ergebnisse festhalten.</small>
  <span class="pill fpa-count">${projects.length} Projekte</span>
  </button>
+ </div>
 
- <button class="card fpa-tool"onclick="go('ki')">
- <span class="emoji"></span><strong>KI-Innovationspartnerschaften</strong>
- <small>Praxisprobleme, Schülerteams und entstandene Lösungen.</small>
- <span class="pill fpa-count">Zum Modul →</span>
+ <div class="kicker"style="margin:26px 0 8px">BEREICH 2 · KI-INNOVATIONSPARTNERSCHAFTEN</div>
+ <div class="card"style="margin-bottom:16px;background:var(--soft-orange)">
+ <h2>Praxisproblem → Schülerteam → Ergebnis</h2>
+ <p>Betriebe tragen reale Herausforderungen ein, Schülerteams bearbeiten sie mit KI-Unterstützung, Ergebnisse werden dokumentiert.</p>
+ ${isTeacher()?`<div style="margin-top:12px"><button class="primary"onclick="openKIChallengeForm()">＋ Praxisproblem eintragen</button></div>`:""}
+ </div>
+ <div class="card ki-process">
+ <h3>Der Ablauf</h3>
+ <div class="grid grid-3">
+ <div class="card"><strong style="display:block;margin-bottom:8px">1. Praxisproblem</strong><small style="display:block">Ein realer Bedarf wird beschrieben.</small></div>
+ <div class="card"><strong style="display:block;margin-bottom:8px">2. Entwicklung</strong><small style="display:block">Ein Schülerteam bearbeitet die Herausforderung.</small></div>
+ <div class="card"><strong style="display:block;margin-bottom:8px">3. Ergebnis</strong><small style="display:block">Die Lösung wird dokumentiert.</small></div>
+ </div>
+ </div>
+ <div class="ki-grid">
+ <button class="card ki-card"style="background:var(--soft-blue)"onclick="openKIChallengesLibrary()">
+ <div class="ki-step">1</div>
+ <h2>Praxisproblem<br>Herausforderungen im Praktikumsbetrieb</h2>
+ <p>Betriebe tragen konkrete Herausforderungen ein. Sie werden in einer Bibliothek gesammelt.</p>
+ <div class="ki-action"><span class="pill">${challenges.length} Einträge</span><span class="pill">Öffnen →</span></div>
+ </button>
+ <button class="card ki-card"style="background:var(--soft-purple)"onclick="openKISolutionsLibrary()">
+ <div class="ki-step">2</div>
+ <h2>Schülerteam / Schüler<br>löst Herausforderung</h2>
+ <p>Schüler übernehmen eine Herausforderung und dokumentieren Team, Aufgaben und KI-Einsatz.</p>
+ <div class="ki-action"><span class="pill">${solutions.length} Bearbeitungen</span><span class="pill">Öffnen →</span></div>
+ </button>
+ <button class="card ki-card"style="background:var(--soft-green)"onclick="openKIResultsLibrary()">
+ <div class="ki-step">3</div>
+ <h2>Ergebnisse<br>Ideen & Produkte</h2>
+ <p>Entstandene Ideen, Konzepte, Prototypen und Produkte werden gesammelt.</p>
+ <div class="ki-action"><span class="pill">${results.length} Ergebnisse</span><span class="pill">Öffnen →</span></div>
  </button>
  </div>
  ${footer()}`;
@@ -5646,7 +7512,7 @@ async function saveFPAQuestion(){
  if(!title||!textQ){toast("Bitte Titel und Frage ausfüllen.");return}
  try{
  await addDoc(collection(db,"fpaQuestions"),{
- module:"fpa",type:"question",title,text:textQ,context:$("fpaQContext")?.value.trim()||"",
+ module:"fachreferat",type:"question",title,text:textQ,context:$("fpaQContext")?.value.trim()||"",
  studentName:profile?.displayName||currentUser?.email||"Campus-Mitglied",
  createdBy:currentUser.uid,createdAt:serverTimestamp()
  });
@@ -5684,7 +7550,7 @@ async function saveFPAProject(){
  const title=$("fpaPTitle")?.value.trim()||"";if(!title){toast("Bitte einen Projektnamen eingeben.");return}
  try{
  await addDoc(collection(db,"fpaProjects"),{
- module:"fpa",title,team:$("fpaPTeam")?.value.trim()||"",
+ module:"fachreferat",title,team:$("fpaPTeam")?.value.trim()||"",
  partner:$("fpaPPartner")?.value.trim()||"",description:$("fpaPDescription")?.value.trim()||"",
  goal:$("fpaPGoal")?.value.trim()||"",status:"offen",
  createdBy:currentUser.uid,createdAt:serverTimestamp()
@@ -5807,7 +7673,7 @@ async function saveKISolution(challengeId){
  aiUse:$("kiAI")?.value.trim()||"",status:"in Bearbeitung",
  createdBy:currentUser.uid,createdAt:serverTimestamp()
  });
- closeModal();await render();toast("Bearbeitung gespeichert.");
+ closeModal();await render();showMotivationsBild();toast("Bearbeitung gespeichert.");
  }catch(e){console.error("KI Lösung:",e);toast("Speichern fehlgeschlagen: "+(e.code||"Fehler"))}
 }
 function openKISolutionsLibrary(){
@@ -5957,15 +7823,14 @@ async function renderKalender(){
  }
 
  const typeMeta={
- schulaufgabe:{label:"Schulaufgabe",shortLabel:"Schulaufgabe",className:"cal-blue"},
- kurzarbeit:{label:"Kurzarbeit",shortLabel:"Kurzarbeit",className:"cal-red"},
- projektvorstellung:{label:"Projektvorstellung",shortLabel:"Projekt",className:"cal-green"},
- referat:{label:"Referat",shortLabel:"Referat",className:"cal-yellow"},
- praesentation:{label:"Präsentation",shortLabel:"Präsentation",className:"cal-purple"},
- sonstiges:{label:"Sonstiger Termin",shortLabel:"Termin",className:"cal-grey"},
- geburtstag:{label:"Geburtstag",shortLabel:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",shortLabel:"Ferien",className:"cal-holiday"},
- abschlusspruefung:{label:"Abschlussprüfung FOSBOS",shortLabel:"Prüfung",className:"cal-final"}
+ schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
+ kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
+ projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
+ referat:{label:"Referat",className:"cal-yellow"},
+ praesentation:{label:"Präsentation",className:"cal-purple"},
+ sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
+ geburtstag:{label:"Geburtstag",className:"cal-birthday"},
+ ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
  };
 
  // Schulferien Bayern – Schuljahr 2026/27.
@@ -5993,20 +7858,7 @@ async function renderKalender(){
  });
  let birthdayEvents=[];
  try{birthdayEvents=await getBirthdayEvents()}catch(e){console.error("Kalender Geburtstage:",e)}
-
- // Abschlussprüfung FOSBOS 2027 (Fachabiturprüfung zum Erwerb der
- // Fachhochschulreife) – amtliche Termine laut Bekanntmachung des
- // Bayerischen Staatsministeriums für Unterricht und Kultus vom 23. Juli
- // 2025 (BayMBl. 2025 Nr. 320). Pädagogik/Psychologie als 4. Prüfungsfach
- // passend zum Ausbildungsrichtung Sozialwesen der F12Sb.
- const abschlusspruefungEvents=[
- {start:"2027-05-12",type:"abschlusspruefung",title:"Abschlussprüfung: Deutsch",description:"Schriftliche Fachabiturprüfung FOSBOS 2027"},
- {start:"2027-05-14",type:"abschlusspruefung",title:"Abschlussprüfung: Pädagogik/Psychologie (4. Prüfungsfach)",description:"Schriftliche Fachabiturprüfung FOSBOS 2027"},
- {start:"2027-06-01",type:"abschlusspruefung",title:"Abschlussprüfung: Englisch",description:"Schriftliche Fachabiturprüfung FOSBOS 2027"},
- {start:"2027-06-03",type:"abschlusspruefung",title:"Abschlussprüfung: Mathematik",description:"Schriftliche Fachabiturprüfung FOSBOS 2027"},
- {start:"2027-07-09",type:"abschlusspruefung",title:"Zeugnisausgabe Fachhochschulreife",description:"Amtliches Zeugnisdatum FOSBOS 2027"}
- ];
- events=[...events,...birthdayEvents,...ferienEvents,...abschlusspruefungEvents];
+ events=[...events,...birthdayEvents,...ferienEvents];
 
  const normalizeType=e=>{
  const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
@@ -6043,7 +7895,7 @@ async function renderKalender(){
  const meta=firstType?typeMeta[firstType]:null;
  cells.push(`<button type="button"class="cal-day ${meta?`has-event ${meta.className}`:""}"onclick="openCalendarDay(${y},${m},${d})">
  <span class="cal-num">${d}</span>
- ${meta?`<span class="cal-event-type">${esc(meta.shortLabel||meta.label)}</span>${ds.length>1?`<span class="cal-count">+${ds.length-1}</span>`:""}`:""}
+ ${meta?`<span class="cal-event-type">${esc(meta.label)}</span>${ds.length>1?`<span class="cal-count">+${ds.length-1}</span>`:""}`:""}
  </button>`);
  }
  while(cells.length%7)cells.push('<div class="cal-day empty"></div>');
@@ -6072,12 +7924,11 @@ async function renderKalender(){
  .cal-day.empty{border:0;background:transparent;cursor:default}
  .cal-day.has-event{border:2px solid rgba(0,0,0,.16)}
  .cal-num{display:block;font-size:14px;flex:0 0 auto}
- .cal-event-type{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:10px;line-height:1.25;margin-top:4px;font-weight:700}
+ .cal-event-type{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:9.5px;line-height:1.25;margin-top:4px;font-weight:700;word-break:break-word}
  .cal-count{position:absolute;right:5px;bottom:5px;font-size:10px;background:rgba(255,255,255,.8);border-radius:10px;padding:1px 5px}
  .cal-blue{background:#dbeafe!important}.cal-red{background:#fee2e2!important}.cal-green{background:#dcfce7!important}
  .cal-yellow{background:#fef3c7!important}.cal-purple{background:#ede9fe!important}.cal-grey{background:#e5e7eb!important}
  .cal-holiday{background:#e3f5da!important;border-color:#8bc34a!important}
- .cal-final{background:#fdecc8!important;border-color:#c8960c!important;font-weight:800}
  .cal-birthday{background:#ffe4ec!important;border-color:#f472b6!important}
  .cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
  .cal-legend-item{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#fff;font-size:12px}
@@ -6164,10 +8015,21 @@ function openBirthdayForm(){
  <label>Geburtstag (Tag &amp; Monat)<input id="birthdayInput"type="date"value="${current?`2000-${current}`:""}"></label>
  <p style="color:var(--muted);font-size:12px;margin-top:4px">Nur Tag und Monat werden gespeichert und im Campus-Kalender für alle sichtbar angezeigt – dein Geburtsjahr bleibt privat.</p>
  <div class="form-actions"><button class="secondary"type="button"onclick="closeModal()">Abbrechen</button>
+ ${current?`<button class="secondary"type="button"onclick="removeBirthday()">Löschen</button>`:""}
  <button id="birthdaySaveBtn"class="primary"type="button">Speichern</button></div>
  </div>`);
  $("birthdaySaveBtn").addEventListener("click",saveBirthday);
 }
+
+async function removeBirthday(){
+ if(!confirm("Deinen eingetragenen Geburtstag wirklich wieder entfernen?"))return;
+ try{
+ await updateDoc(doc(db,"users",currentUser.uid),{birthday:"",updatedAt:serverTimestamp()});
+ if(profile)profile.birthday="";
+ closeModal();toast("Geburtstag entfernt.");await render();
+ }catch(e){console.error("Geburtstag löschen:",e);toast("Konnte nicht entfernt werden.")}
+}
+window.removeBirthday=removeBirthday;
 
 async function saveBirthday(){
  const val=$("birthdayInput")?.value||"";
@@ -6195,8 +8057,7 @@ function calendarTypeMeta(e){
  praesentation:{label:"Präsentation",className:"cal-purple"},
  sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
  geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"},
- abschlusspruefung:{label:"Abschlussprüfung FOSBOS",className:"cal-final"}
+ ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
  })[key]||{label:"Sonstiger Termin",className:"cal-grey"};
 }
 
@@ -6314,6 +8175,7 @@ function openClassTeamUpdateForm(){
  </select></label>
  <label>Titel<input id="ctTitle"placeholder="Kurze Überschrift"required></label>
  <label>Information<textarea id="ctText"rows="6"placeholder="Was sollte das Klassenteam wissen?"required></textarea></label>
+ <div style="margin-top:-8px;margin-bottom:10px">${emojiPickerHTML("ctText","emojiPickerClassTeam")}</div>
  <label>Nächster Schritt / Vereinbarung (optional)<textarea id="ctFollowUp"rows="3"></textarea></label>
  <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
  <button class="primary"onclick="saveClassTeamUpdate()">Veröffentlichen</button></div>
@@ -6858,82 +8720,15 @@ const LERNSTAND_COMPETENCIES = [
 ];
 
 const LERNSTAND_AREAS = {
- lb1:{title:"Entwicklung begreifen und pädagogisch gestalten",icon:""},
- lb2:{title:"Persönlichkeit und Identität",icon:""},
- lb3:{title:"Soziale Arbeit – Aufgaben & Arbeitsfelder",icon:""},
- lb4:{title:"Kommunikation und Interaktion",icon:""}
+ lb1:{title:"Wissenschaftliche Pädagogik & Psychologie",icon:""},
+ lb2:{title:"Grundlagen des Erlebens & Verhaltens",icon:""},
+ lb3:{title:"Erziehungsprozesse",icon:""},
+ lb4:{title:"Lernen",icon:""}
 };
 
 const LERNSTAND_DEFAULTS = [
  {
- "id": "ls01","nr": 1,"learningArea": "lb1","areaTitle": "Entwicklung als lebensumfassenden, multifaktoriell beeinflussten Prozess begreifen und pädagogisch gestalten","title": "Merkmale und Bedingungen von Entwicklung (Anlage, Umwelt, Selbststeuerung)","description": "3 K-Prim-Aufgaben (je 5 Aussagen zum Ankreuzen) und 2 offene Fragen zu den Fallbeispielen „Lukas“, „Petra“ und „Judith“.","tasks": [
- {
- "id": "fachwissen","type": "kprim","label": "K-Prim 1 – Merkmale des Entwicklungsbegriffs","points": 3,"intro": "Beurteilen Sie jede der folgenden Aussagen zum Begriff „Entwicklung“. Setzen Sie ein Häkchen NUR bei den Aussagen, die Sie für RICHTIG halten.","statements": [
- {
- "text": "Entwicklung bezeichnet eine gerichtete, zeitlich geordnete Reihe von Veränderungen des Erlebens und Verhaltens.","correct": true,"explain": "Kernaussage der Definition (Hobmair)."
- },
- {
- "text": "Die Reihenfolge der Entwicklungsveränderungen ist prinzipiell umkehrbar.","correct": false,"explain": "Die Reihenfolge ist gerade NICHT umkehrbar, z. B. krabbeln Kinder, bevor sie gehen können."
- },
- {
- "text": "Entwicklungsveränderungen lassen sich bestimmten Altersspannen zuordnen (Lebensalterbezogenheit).","correct": true,"explain": "Das nennt man Lebensalterbezogenheit."
- },
- {
- "text": "Entwicklung bezieht sich ausschließlich auf die Kindheit und endet mit dem Erreichen des Erwachsenenalters.","correct": false,"explain": "Entwicklung ist ein lebensumfassender Prozess (vgl. Lernbereichstitel 12.1) und endet nicht mit dem Erwachsenenalter."
- },
- {
- "text": "Die einzelnen Veränderungen im Entwicklungsverlauf treten unabhängig voneinander auf.","correct": false,"explain": "Die Veränderungen bilden untereinander einen Zusammenhang und bauen aufeinander auf (z. B. Strampeln, Kriechen, Gehen)."
- }
- ],"solution": "Richtig sind Aussage 1 und 3 (2 von 5)."
- },
- {
- "id": "erkennen","type": "kprim","label": "K-Prim 2 – Die drei Entwicklungsbedingungen","points": 3,"intro": "Beurteilen Sie jede der folgenden Aussagen zu Anlage, Umwelt und Selbststeuerung. Setzen Sie ein Häkchen NUR bei den Aussagen, die Sie für RICHTIG halten.","statements": [
- {
- "text": "Mit „Anlage“ wird die genetische Ausstattung eines Menschen bezeichnet, die bei der Befruchtung festgelegt wird.","correct": true,"explain": ""
- },
- {
- "text": "Die vier Bereiche der Umwelt sind die natürliche, kulturelle, ökonomische und soziale Umwelt.","correct": true,"explain": ""
- },
- {
- "text": "Selbststeuerung bedeutet, dass der Mensch ausschließlich passiv auf Umwelteinflüsse reagiert.","correct": false,"explain": "Der Mensch ist als aktives Wesen zu verstehen, das „von sich aus“ Entwicklungsprozesse herbeiführt."
- },
- {
- "text": "Anlage, Umwelt und Selbststeuerung wirken unabhängig voneinander und beeinflussen sich nicht gegenseitig.","correct": false,"explain": "Die drei Bedingungen stehen in Wechselbeziehung zueinander und beeinflussen sich gegenseitig."
- },
- {
- "text": "Genetische Faktoren sind u. a. für sensible Phasen verantwortlich, in denen bestimmte Verhaltensweisen und Persönlichkeitsmerkmale optimal erworben werden können.","correct": true,"explain": ""
- }
- ],"solution": "Richtig sind Aussage 1, 2 und 5 (3 von 5)."
- },
- {
- "id": "analysieren","type": "kprim","label": "K-Prim 3 – Zusammenwirken der Bedingungen am Fall „Judith“","points": 3,"intro": "Beurteilen Sie jede der folgenden Aussagen zum Fallbeispiel „Judith – ein Leben für den Schachsport“. Setzen Sie ein Häkchen NUR bei den Aussagen, die Sie für RICHTIG halten.","statements": [
- {
- "text": "Judiths mathematisch-logische Begabung lässt sich als Hinweis auf einen Anlagefaktor deuten, da ihr Vater Mathematikprofessor ist.","correct": true,"explain": "So die Argumentation der Lösungsskizze."
- },
- {
- "text": "Die Anlage entfaltet sich automatisch in vollem Umfang, unabhängig von Umwelteinflüssen.","correct": false,"explain": "Das angelegte Potenzial muss erst durch entsprechende Umwelteinflüsse entfaltet werden."
- },
- {
- "text": "Ohne Judiths eigene Motivation (Selbststeuerung) hätte sich ihre Begabung vermutlich nicht in diesem Ausmaß entfalten können.","correct": true,"explain": ""
- },
- {
- "text": "Die gesellschaftliche Anerkennung, die Judith durch das Schachspiel erhielt, zeigt, dass die Selbststeuerung unabhängig von der Umwelt wirkt.","correct": false,"explain": "Das Beispiel zeigt im Gegenteil die Abhängigkeit/Wechselwirkung zwischen Selbststeuerung und Umwelt (Anerkennung von außen stützt die Motivation)."
- },
- {
- "text": "Anlage, Umwelt und Selbststeuerung stehen bei Judiths Entwicklung in wechselseitiger Abhängigkeit zueinander.","correct": true,"explain": "Kernaussage zum „Zusammenspiel der Entwicklungsbedingungen“."
- }
- ],"solution": "Richtig sind Aussage 1, 3 und 5 (3 von 5)."
- },
- {
- "id": "anwenden","label": "Offene Frage 1 – Begriff Entwicklung am Fall „Lukas“","points": 3,"prompt": "Erläutern Sie anhand des Fallbeispiels „Lukas und der Spracherwerb“, was unter dem Begriff „Entwicklung“ im psychologischen Sinne zu verstehen ist. Zeigen Sie anhand von mindestens zwei konkreten Textstellen auf, dass bei Lukas hinsichtlich des Spracherwerbs Entwicklung stattgefunden hat.","solution": "Entwicklung im psychologischen Sinne bezeichnet eine gerichtete, zeitlich geordnete Reihe von miteinander zusammenhängenden Veränderungen des Erlebens und Verhaltens (Hobmair).\n\nBezug zu Lukas: Als Lukas vor acht Wochen in die Krippe kam, sprach er „kein einziges verständliches Wort“, sondern verständigte sich mit seiner Mutter in einer „Geheimsprache“ (Z. 12–15). Seit etwa einem Monat beherrscht Lukas nun einige verständliche Worte wie „Tee“ oder „bauen“ (Z. 39–40). Damit zeigt sich eine gerichtete Veränderung seines Verhaltens (von unverständlicher Lautsprache hin zu ersten verständlichen Wörtern) über die Zeit hinweg – also Entwicklung im Bereich des Spracherwerbs, auch wenn diese langsamer verläuft als bei seinen Geschwistern."
- },
- {
- "id": "reflektieren","label": "Offene Frage 2 – Bedingungen der Entwicklung am Fall „Petra“","points": 3,"prompt": "Erklären Sie anhand des Fallbeispiels „Petra – ein Schicksal, das unter die Haut geht“, durch welche der drei Entwicklungsbedingungen (Anlage, Umwelt, Selbststeuerung) die Entwicklung von Petra beeinflusst wurde. Ordnen Sie jeder genannten Bedingung mindestens eine konkrete Textstelle zu.","solution": "Anlage: Petras früher Entwicklungsvorsprung (Lesen mit vier Jahren, Z. 19–22) kann als Hinweis auf eine überdurchschnittliche kognitive Anlage gedeutet werden.\n\nUmwelt (soziale Umwelt): Der Tod der Mutter bei einem Autounfall (Z. 43–44), die gegen ihren Willen erfolgte Unterbringung im Internat (Z. 44–47) sowie die seltenen Besuche des Vaters (Z. 50–51) sind belastende Umweltbedingungen, die Petras Entwicklung negativ beeinflussten.\n\nSelbststeuerung: Petras aktives Rebellieren gegen die Internatsordnung (Z. 49) und ihre bewusste, sorgfältig geplante Entscheidung zur Flucht (Z. 59–60) zeigen, dass sie – wenn auch in eine ungünstige Richtung – selbst aktiv Einfluss auf ihre eigene Entwicklung genommen hat.\n\nFazit: Am Fall wird deutlich, dass die drei Bedingungen zusammenwirken und sich gegenseitig beeinflussen, statt unabhängig voneinander zu wirken."
- }
- ]
- },
- {
- "id": "ls02","nr": 2,"learningArea": "lb1","areaTitle": "Entwicklung als lebensumfassenden, multifaktoriell beeinflussten Prozess begreifen und pädagogisch gestalten","title": "Psychoanalytische Entwicklungstheorie nach Freud","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls01","nr": 1,"learningArea": "lb1","areaTitle": "Wissenschaftliche Pädagogik & Psychologie","title": "Gegenstandsbereiche von Pädagogik und Psychologie","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -6952,7 +8747,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls03","nr": 3,"learningArea": "lb1","areaTitle": "Entwicklung als lebensumfassenden, multifaktoriell beeinflussten Prozess begreifen und pädagogisch gestalten","title": "Sozialemotionale Entwicklung und Bindungstheorie (Bindungstypologie nach Ahnert)","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls02","nr": 2,"learningArea": "lb1","areaTitle": "Wissenschaftliche Pädagogik & Psychologie","title": "Wissenschaftliche Pädagogik/Psychologie vs. Alltagspsychologie","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -6971,7 +8766,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls04","nr": 4,"learningArea": "lb1","areaTitle": "Entwicklung als lebensumfassenden, multifaktoriell beeinflussten Prozess begreifen und pädagogisch gestalten","title": "Entwicklungsaufgaben über die Lebensspanne nach Baltes","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls03","nr": 3,"learningArea": "lb1","areaTitle": "Wissenschaftliche Pädagogik & Psychologie","title": "Experiment als wissenschaftliche Methode","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -6990,7 +8785,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls05","nr": 5,"learningArea": "lb1","areaTitle": "Entwicklung als lebensumfassenden, multifaktoriell beeinflussten Prozess begreifen und pädagogisch gestalten","title": "Vulnerabilität und Resilienz","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls04","nr": 4,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Wahrnehmungsprozess","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7009,7 +8804,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls06","nr": 6,"learningArea": "lb2","areaTitle": "Persönlichkeit und Identität beschreiben, erklären und reflektieren","title": "Persönlichkeitsbegriff und die fünf Dimensionen („Big Five“)","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls05","nr": 5,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Einflussfaktoren auf Wahrnehmung","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7028,7 +8823,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls07","nr": 7,"learningArea": "lb2","areaTitle": "Persönlichkeit und Identität beschreiben, erklären und reflektieren","title": "Personenzentrierte Theorie nach Rogers","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls06","nr": 6,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Mehrspeichermodell des Gedächtnisses","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7047,7 +8842,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls08","nr": 8,"learningArea": "lb2","areaTitle": "Persönlichkeit und Identität beschreiben, erklären und reflektieren","title": "Sozialkognitive Theorie nach Bandura","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls07","nr": 7,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Speichersysteme des Langzeitgedächtnisses","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7066,7 +8861,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls09","nr": 9,"learningArea": "lb2","areaTitle": "Persönlichkeit und Identität beschreiben, erklären und reflektieren","title": "Identitätsmodell nach Marcia","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls08","nr": 8,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Strategien zum Wissenserwerb","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7085,7 +8880,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls10","nr": 10,"learningArea": "lb3","areaTitle": "Aufgaben und Arbeitsfelder Sozialer Arbeit professionell einordnen","title": "Aufgabenbereiche Sozialer Arbeit (Sozialhilfe, Gesundheits-/Altenhilfe, Kinder-/Jugendhilfe)","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls09","nr": 9,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Emotionen und ihre Komponenten","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7104,7 +8899,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls11","nr": 11,"learningArea": "lb3","areaTitle": "Aufgaben und Arbeitsfelder Sozialer Arbeit professionell einordnen","title": "Verhaltensorientiertes Konzept der Einzelhilfe","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls10","nr": 10,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Emotionsregulation","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7123,7 +8918,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls12","nr": 12,"learningArea": "lb3","areaTitle": "Aufgaben und Arbeitsfelder Sozialer Arbeit professionell einordnen","title": "Ökologisches Konzept – Life Model nach Germain/Gitterman","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls11","nr": 11,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Motivation","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7142,7 +8937,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls13","nr": 13,"learningArea": "lb3","areaTitle": "Aufgaben und Arbeitsfelder Sozialer Arbeit professionell einordnen","title": "Lebensweltorientierte Soziale Arbeit nach Thiersch","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls12","nr": 12,"learningArea": "lb2","areaTitle": "Grundlagen des Erlebens und Verhaltens","title": "Attributionstheorie nach Weiner","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7161,7 +8956,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls14","nr": 14,"learningArea": "lb4","areaTitle": "In sozialen Beziehungen empathisch und zielführend kommunizieren und interagieren","title": "Grundlagen der Kommunikation – Organon-Modell nach Bühler","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls13","nr": 13,"learningArea": "lb3","areaTitle": "Erziehungsprozesse","title": "Merkmale von Erziehung","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7180,7 +8975,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls15","nr": 15,"learningArea": "lb4","areaTitle": "In sozialen Beziehungen empathisch und zielführend kommunizieren und interagieren","title": "Kommunikationstheorie nach Watzlawick (5 Axiome)","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls14","nr": 14,"learningArea": "lb3","areaTitle": "Erziehungsprozesse","title": "Mündigkeit nach Roth","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7199,7 +8994,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls16","nr": 16,"learningArea": "lb4","areaTitle": "In sozialen Beziehungen empathisch und zielführend kommunizieren und interagieren","title": "Entstehung von Kommunikationsstörungen","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls15","nr": 15,"learningArea": "lb3","areaTitle": "Erziehungsprozesse","title": "Erziehungsmaßnahmen","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7218,7 +9013,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls17","nr": 17,"learningArea": "lb4","areaTitle": "In sozialen Beziehungen empathisch und zielführend kommunizieren und interagieren","title": "Kommunikationstechniken für gelungene Kommunikation","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls16","nr": 16,"learningArea": "lb3","areaTitle": "Erziehungsprozesse","title": "Erziehungsstile nach Baumrind","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7237,7 +9032,7 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls18","nr": 18,"learningArea": "lb4","areaTitle": "In sozialen Beziehungen empathisch und zielführend kommunizieren und interagieren","title": "Interkulturelle Kommunikation","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls17","nr": 17,"learningArea": "lb3","areaTitle": "Erziehungsprozesse","title": "Frühe Bildung und Erziehung","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7256,7 +9051,159 @@ const LERNSTAND_DEFAULTS = [
  ]
  },
  {
- "id": "ls19","nr": 19,"learningArea": "lb4","areaTitle": "In sozialen Beziehungen empathisch und zielführend kommunizieren und interagieren","title": "Kommunikation und Gefährdungen in digitalen Medien","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ "id": "ls18","nr": 18,"learningArea": "lb4","areaTitle": "Lernen","title": "Begriff und Merkmale des Lernens","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ {
+ "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "erkennen","label": "Erkennen & Zuordnen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "anwenden","label": "Anwenden & Erklären","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "analysieren","label": "Analysieren & Beurteilen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "reflektieren","label": "Reflektieren & Handeln","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ }
+ ]
+ },
+ {
+ "id": "ls19","nr": 19,"learningArea": "lb4","areaTitle": "Lernen","title": "Klassisches Konditionieren – Grundlagen","description": "Beispielhafte Kompetenzüberprüfung: klassisches Konditionieren. Nach drei Versuchen werden die Musterlösungen sichtbar.","tasks": [
+ {
+ "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Erkläre die Begriffe neutraler Reiz, unkonditionierter Reiz, unkonditionierte Reaktion, konditionierter Reiz und konditionierte Reaktion.","solution": "Neutraler Reiz: löst zunächst keine relevante gelernte Reaktion aus. Unkonditionierter Reiz: löst eine Reaktion ohne vorheriges Lernen aus. Unkonditionierte Reaktion: angeborene/nicht gelernte Reaktion. Konditionierter Reiz: ursprünglich neutraler Reiz, der durch Kopplung gelernt wurde. Konditionierte Reaktion: gelernte Reaktion auf den konditionierten Reiz."
+ },
+ {
+ "id": "erkennen","label": "Erkennen & Zuordnen","points": 3,"prompt": "Ein Schüler bekommt vor einer Klassenarbeit wiederholt einen bestimmten Signalton kurz vor dem Austeilen der Aufgaben zu hören. Nach mehreren Wiederholungen wird er bereits beim Signalton nervös. Ordne Signalton, Klassenarbeit und Nervosität den Elementen der klassischen Konditionierung zu.","solution": "Der Signalton ist zunächst ein neutraler Reiz und wird nach der Kopplung zum konditionierten Reiz. Die Klassenarbeit fungiert im Beispiel als unkonditionierter Reiz, die ursprüngliche Prüfungsreaktion als unkonditionierte Reaktion. Die Nervosität beim Signalton ist die konditionierte Reaktion."
+ },
+ {
+ "id": "anwenden","label": "Anwenden & Erklären","points": 3,"prompt": "Erkläre mit dem Ablauf der klassischen Konditionierung, warum der Schüler nach mehreren Kopplungen bereits beim Signalton nervös wird.","solution": "Der zunächst neutrale Signalton wird wiederholt mit dem auslösenden Reiz der Klassenarbeit gekoppelt. Durch die Lernvorgänge erhält der Signalton die Funktion eines konditionierten Reizes. Er kann anschließend allein die gelernte konditionierte Reaktion der Nervosität auslösen."
+ },
+ {
+ "id": "analysieren","label": "Analysieren & Beurteilen","points": 3,"prompt": "Analysiere den Fall. Zeige, welche Aussage über den Lernprozess durch die Konditionierung erklärt werden kann und welche Aspekte damit nicht vollständig erklärt sind.","solution": "Die Konditionierung erklärt die gelernte Verbindung zwischen Signalton und Nervosität. Sie erklärt aber nicht automatisch alle Ursachen der Prüfungsangst, etwa Gedanken, persönliche Bewertungen, Vorerfahrungen oder soziale Einflüsse. Eine fachlich gute Analyse grenzt die Erklärungskraft des Modells ein."
+ },
+ {
+ "id": "reflektieren","label": "Reflektieren & Handeln","points": 3,"prompt": "Entwickle zwei pädagogisch sinnvolle Möglichkeiten, wie der Schüler die gelernte Reaktion auf den Signalton abschwächen könnte. Begründe beide Vorschläge fachlich.","solution": "Möglich sind beispielsweise eine schrittweise Gegenkonditionierung bzw. neue positive Kopplungen mit dem Signalton sowie eine Veränderung der Situation durch wiederholte, sichere Erfahrungen ohne unmittelbar anschließende negative Konsequenz. Entscheidend ist die fachliche Begründung und die nachvollziehbare Verbindung zum Konditionierungsprozess."
+ }
+ ]
+ },
+ {
+ "id": "ls20","nr": 20,"learningArea": "lb4","areaTitle": "Lernen","title": "Erweiterungen des klassischen Konditionierens","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ {
+ "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "erkennen","label": "Erkennen & Zuordnen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "anwenden","label": "Anwenden & Erklären","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "analysieren","label": "Analysieren & Beurteilen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "reflektieren","label": "Reflektieren & Handeln","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ }
+ ]
+ },
+ {
+ "id": "ls21","nr": 21,"learningArea": "lb4","areaTitle": "Lernen","title": "Thorndike / Versuch-Irrtum-Lernen","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ {
+ "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "erkennen","label": "Erkennen & Zuordnen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "anwenden","label": "Anwenden & Erklären","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "analysieren","label": "Analysieren & Beurteilen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "reflektieren","label": "Reflektieren & Handeln","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ }
+ ]
+ },
+ {
+ "id": "ls22","nr": 22,"learningArea": "lb4","areaTitle": "Lernen","title": "Operantes Konditionieren / Verstärkung","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ {
+ "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "erkennen","label": "Erkennen & Zuordnen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "anwenden","label": "Anwenden & Erklären","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "analysieren","label": "Analysieren & Beurteilen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "reflektieren","label": "Reflektieren & Handeln","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ }
+ ]
+ },
+ {
+ "id": "ls23","nr": 23,"learningArea": "lb4","areaTitle": "Lernen","title": "Verstärkung pädagogisch einsetzen","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ {
+ "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "erkennen","label": "Erkennen & Zuordnen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "anwenden","label": "Anwenden & Erklären","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "analysieren","label": "Analysieren & Beurteilen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "reflektieren","label": "Reflektieren & Handeln","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ }
+ ]
+ },
+ {
+ "id": "ls24","nr": 24,"learningArea": "lb4","areaTitle": "Lernen","title": "Sozial-kognitive Theorie nach Bandura","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ {
+ "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "erkennen","label": "Erkennen & Zuordnen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "anwenden","label": "Anwenden & Erklären","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "analysieren","label": "Analysieren & Beurteilen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "reflektieren","label": "Reflektieren & Handeln","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ }
+ ]
+ },
+ {
+ "id": "ls25","nr": 25,"learningArea": "lb4","areaTitle": "Lernen","title": "Modelllernen / Teilprozesse","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
+ {
+ "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "erkennen","label": "Erkennen & Zuordnen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "anwenden","label": "Anwenden & Erklären","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "analysieren","label": "Analysieren & Beurteilen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ },
+ {
+ "id": "reflektieren","label": "Reflektieren & Handeln","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
+ }
+ ]
+ },
+ {
+ "id": "ls26","nr": 26,"learningArea": "lb4","areaTitle": "Lernen","title": "Medien und Lernen","description": "Kompetenzüberprüfung mit fünf einheitlichen Kompetenzdimensionen.","tasks": [
  {
  "id": "fachwissen","label": "Fachwissen","points": 3,"prompt": "Aufgabe wird später eingetragen.","solution": ""
  },
@@ -7299,8 +9246,6 @@ function kprimGrade(task,checked){
  statements.forEach((s,i)=>{ if(!!checked[i]!==!!s.correct) errors++; });
  const total=statements.length;
  const allCorrect=errors===0;
- // Punktevergabe: alle richtig = volle Punktzahl, sonst anteilig nach Fehlerzahl,
- // ab 3 oder mehr Fehlern 0 Punkte.
  const maxPoints=Number(task.points)||3;
  let points;
  if(errors===0)points=maxPoints;
@@ -7433,7 +9378,7 @@ async function renderLernstand(){
  }
 
  return`${pageHead(
- "LERNSTAND · PÄDAGOGIK & PSYCHOLOGIE","Lernstandsmessung","19 Kompetenzüberprüfungen – mit einem einheitlichen Kompetenzprofil, damit deine Entwicklung sichtbar wird.",
+ "LERNSTAND · PÄDAGOGIK & PSYCHOLOGIE","Lernstandsmessung","26 Kompetenzüberprüfungen – mit einem einheitlichen Kompetenzprofil, damit deine Entwicklung sichtbar wird.",
  isTeacher()?`<button class="primary"onclick="openLernstandEditor()">＋ Aufgaben verwalten</button>`:""
  )}
  <style>
@@ -7443,7 +9388,6 @@ async function renderLernstand(){
  .ls-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--line,#ddd)}.ls-item-main{min-width:0}.ls-item-main strong{display:block}.ls-item-main small{display:block;color:var(--muted);margin-top:3px}.ls-item-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}
  .ls-competence-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:12px}.ls-comp-card{border:1px solid var(--line,#ddd);border-radius:12px;padding:11px;background:#fff}.ls-comp-card strong{font-size:12px;display:block}.ls-comp-card small{color:var(--muted)}.ls-mini-bar{display:block;height:6px;background:#edf0f2;border-radius:99px;overflow:hidden;margin-top:8px}.ls-mini-bar i{display:block;height:100%;background:var(--brand,#168fd0)}
  .ls-task-box{border:1px solid var(--line,#ddd);border-radius:12px;padding:14px;margin-top:10px;background:#fff}.ls-task-box h4{margin:0 0 7px}.ls-points{font-weight:800}.ls-progress{display:flex;gap:5px;margin:10px 0}.ls-progress span{height:7px;flex:1;border-radius:99px;background:#e9ecef}.ls-progress span.on{background:var(--brand,#168fd0)}.ls-solution{margin-top:10px;padding:12px;border-radius:10px;background:#f5f7f8;border:1px solid var(--line,#ddd)}
- .ls-kprim-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}.ls-kprim-row{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--line,#ddd);border-radius:9px;cursor:pointer;background:#fafbfc}.ls-kprim-row:hover{background:#f1f5f8}.ls-kprim-row input{margin-top:3px;flex:0 0 auto}.ls-fb-green{background:var(--soft-green,#dcf1c8);border-color:var(--green,#82b83b)}.ls-fb-red{background:var(--soft-red,#fad2d5);border-color:#b32b32}
  .ls-teacher-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.ls-teacher-stats .card{margin:0}.ls-student-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ls-student-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px;border:1px solid var(--line,#ddd);border-radius:12px;background:#fff}.ls-student-row small{display:block;color:var(--muted);margin-top:3px}.ls-detail-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.ls-matrix{width:100%;border-collapse:collapse}.ls-matrix th,.ls-matrix td{padding:9px;border-bottom:1px solid var(--line,#ddd);text-align:left;font-size:12px}.ls-matrix th{color:var(--muted)}.ls-matrix td.num{text-align:center;font-weight:800}.ls-overview-scroll{overflow:auto}.ls-grade-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.ls-grade-grid label{font-size:12px}.ls-grade-grid input{width:100%}
  @media(max-width:900px){.ls-intro{grid-template-columns:1fr}.ls-area-grid,.ls-detail-grid,.ls-student-grid{grid-template-columns:1fr}.ls-flow{grid-template-columns:1fr}.ls-competence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ls-teacher-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ls-grade-grid{grid-template-columns:1fr 1fr}}
  @media(max-width:600px){.ls-competence-grid,.ls-teacher-stats,.ls-grade-grid{grid-template-columns:1fr}.ls-item,.ls-student-row{align-items:flex-start;flex-direction:column}.ls-item-actions{justify-content:flex-start}}
@@ -7454,7 +9398,7 @@ async function renderLernstand(){
  <section class="card ls-intro-card"><span class="badge">BIS ZU 15 PUNKTE</span><h2>Einheitliches Bewertungsschema</h2><p>Jede Kompetenzaufgabe wird mit bis zu <strong>3 Punkten</strong> bewertet. Die meisten Themen umfassen fünf Aufgaben (max. 15 Punkte), einzelne Themen können mehr Aufgaben enthalten.</p><div class="list"><div class="list-item"><strong>ab 80 %</strong><span class="pill green">Auf Kurs</span></div><div class="list-item"><strong>53–79 %</strong><span class="pill yellow">Klärungsbedarf</span></div><div class="list-item"><strong>unter 53 %</strong><span class="pill red">Handlungsbedarf</span></div></div></section>
  </div>
  <div class="card"style="margin-bottom:16px"><div class="kicker">KOMPETENZENTWICKLUNG</div><h2>Entwicklung über das Schuljahr</h2><p>Jede abgegebene und bewertete Messung wird dem eigenen Profil zugeordnet. Die fünf Kompetenzdimensionen können dadurch über mehrere Themen hinweg verglichen werden.</p><div class="ls-competence-grid">${LERNSTAND_COMPETENCIES.map(c=>{const series=lernstandCompetenceSeries(ownAttempts,c.id);const last=series.length?series[series.length-1]:null;return`<div class="ls-comp-card"><strong>${esc(c.label)}</strong><small>${last===null?"Noch kein Ergebnis":last+"/3 Punkte zuletzt"}</small>${last===null?"":lernstandBar(last,3)}</div>`}).join("")}</div>${latest?`<div class="notice"style="margin-top:14px"><strong>Letzter Lernstand: ${latest.total}/${lernstandMaxPoints(latest.taskId)} · ${lernstandStatusText(latest.total,lernstandMaxPoints(latest.taskId))}</strong><p style="margin-bottom:0">Versuch ${latest.attempt} bei „${esc(latest.title||"Lernstandsmessung")}".</p></div>`:`<div class="notice"style="margin-top:14px"><strong>Noch keine Lernstandsmessung abgeschlossen.</strong><p style="margin-bottom:0">Starte nach dem nächsten Thema mit der passenden Kompetenzüberprüfung.</p></div>`}</div>
- <div class="ls-area-grid">${["lb1","lb2","lb3","lb4"].map(areaId=>`<section class="card ls-area"><div class="ls-area-head"><div><span class="badge">${LERNSTAND_AREAS[areaId].icon} LERNBEREICH</span><h2>${esc(LERNSTAND_AREAS[areaId].title)}</h2></div><span class="pill">${byArea[areaId].length} Messungen</span></div>${byArea[areaId].map(t=>{const a=lernstandLatest(ownAttempts,t.id);const count=lernstandAttemptCount(ownAttempts,t.id);const max=lernstandMaxPoints(t.id);return`<div class="ls-item"><div class="ls-item-main"><strong>${t.nr}. ${esc(t.title)}</strong><small>${count?`letzter Stand: ${a.total}/${max} · Versuch ${a.attempt}`:"noch nicht bearbeitet"}</small></div><div class="ls-item-actions">${a?`<span class="pill ${lernstandStatus(a.total,max)}">${lernstandStatusText(a.total,max)}</span>`:""}<button class="secondary"onclick="openLernstand('${t.id}')">${a?"Weiter / ansehen":"Starten"} →</button></div></div>`}).join("")}</section>`).join("")}</div>${footer()}`;
+ <div class="ls-area-grid">${["lb1","lb2","lb3","lb4"].map(areaId=>`<section class="card ls-area"><div class="ls-area-head"><div><span class="badge">${LERNSTAND_AREAS[areaId].icon} LERNBEREICH</span><h2>${esc(LERNSTAND_AREAS[areaId].title)}</h2></div><span class="pill">${byArea[areaId].length} Messungen</span></div>${byArea[areaId].map(t=>{const a=lernstandLatest(ownAttempts,t.id);const count=lernstandAttemptCount(ownAttempts,t.id);const max=lernstandMaxPoints(t.id);return`<div class="ls-item"><div class="ls-item-main"><strong>${t.nr}. ${esc(t.title)}</strong><small>${count?`letzter Stand: ${a.total}/${max} · Versuch ${a.attempt}`:"noch nicht bearbeitet"}</small></div><div class="ls-item-actions">${a?`<span class="pill ${lernstandStatus(a.total,max)}">${lernstandStatusText(a.total,max)}</span>`:""}${count?`<button class="secondary"onclick="openLernstandResult('${t.id}')">🔓 Musterlösung</button>`:""}<button class="secondary"onclick="openLernstand('${t.id}')">${a?"Weiter / ansehen":"Starten"} →</button></div></div>`}).join("")}</section>`).join("")}</div>${footer()}`;
 }
 
 // Rendert eine einzelne Kompetenzaufgabe im Bearbeitungsformular: K-Prim als
@@ -7482,7 +9426,7 @@ function openLernstand(id){
  if(count>=3){openLernstandResult(id);return}
  const nextAttempt=count+1;
  const prior=lernstandLatest(attempts,id);
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">${LERNSTAND_AREAS[t.learningArea].icon} LERNSTANDSMESSUNG ${t.nr}/19</div><h2>${esc(t.title)}</h2><p>${esc(t.description||"Kompetenzüberprüfung mit fünf Kompetenzdimensionen.")}</p><div class="notice"><strong>Versuch ${nextAttempt} von 3</strong><p style="margin-bottom:0">Bearbeite alle ${t.tasks.length} Kompetenzaufgaben. Bei K-Prim-Aufgaben nur die als richtig erkannten Aussagen ankreuzen. Nach dem dritten Versuch kannst du die vollständigen Musterlösungen einsehen.</p></div><div class="ls-progress">${[1,2,3].map(n=>`<span class="${n<=count?"on":""}"></span>`).join("")}</div><div class="form">${t.tasks.map((q,i)=>lernstandTaskInputHTML(q,i,prior)).join("")}<div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="submitLernstand('${t.id}',${nextAttempt})">Versuch ${nextAttempt} abgeben</button></div></div>`);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">${LERNSTAND_AREAS[t.learningArea].icon} LERNSTANDSMESSUNG ${t.nr}/26</div><h2>${esc(t.title)}</h2><p>${esc(t.description||"Kompetenzüberprüfung mit fünf Kompetenzdimensionen.")}</p><div class="notice"><strong>Versuch ${nextAttempt} von 3</strong><p style="margin-bottom:0">Bearbeite alle ${t.tasks.length} Kompetenzaufgaben. Bei K-Prim-Aufgaben nur die als richtig erkannten Aussagen ankreuzen. Nach dem dritten Versuch kannst du die vollständigen Musterlösungen einsehen.</p></div><div class="ls-progress">${[1,2,3].map(n=>`<span class="${n<=count?"on":""}"></span>`).join("")}</div><div class="form">${t.tasks.map((q,i)=>lernstandTaskInputHTML(q,i,prior)).join("")}<div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="submitLernstand('${t.id}',${nextAttempt})">Versuch ${nextAttempt} abgeben</button></div></div>`);
  });
 }
 
@@ -7504,13 +9448,13 @@ async function downloadLernstandResultPDF(id){
  return`<div class="item"><strong>${escPDF(String(i+1)+"."+q.label)} · ${q.points} P.</strong><div><em>Aufgabe:</em> ${escPDF(q.prompt||"")}</div><div style="margin-top:6px"><em>Musterlösung:</em><br>${escPDF(q.solution||"Noch keine Musterlösung hinterlegt.").replace(/\n/g,"<br>")}</div></div>`;
  }).join("");
  openToolPrintWindow(
- "Lernstandsmessung – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(scoreLine)}</strong></div>`+body,"F12Sb · Lernstandsmessung"+t.nr+"/19 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
+ "Lernstandsmessung – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(scoreLine)}</strong></div>`+body,"F12Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
  );
  }catch(e){console.error("Lernstand PDF:",e);toast("Das PDF konnte nicht erstellt werden.")}
 }
 
 function openLernstandResult(id){
- getLernstandTasks().then(async tasks=>{const t=tasks.find(x=>x.id===id);if(!t)return;const attempts=await getMyLernstandAttempts();const rows=attempts.filter(x=>x.taskId===id).sort((a,b)=>(a.attempt||0)-(b.attempt||0));const latest=rows[rows.length-1];const max=t.tasks.reduce((s,q)=>s+(Number(q.points)||0),0);modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> ERGEBNIS · ${t.nr}/19</div><h2>${esc(t.title)}</h2><div class="notice"><strong>${latest?.status==="bewertet"?`${latest.total}/${max} · ${lernstandStatusText(latest.total,max)}`:`${Number(latest?.total)||0}/${max} · K-Prim automatisch gewertet, offene Fragen noch nicht bewertet`}</strong><p style="margin-bottom:0">Hier sind die vollständigen Musterlösungen.</p></div>${t.tasks.map((q,i)=>{
+ getLernstandTasks().then(async tasks=>{const t=tasks.find(x=>x.id===id);if(!t)return;const attempts=await getMyLernstandAttempts();const rows=attempts.filter(x=>x.taskId===id).sort((a,b)=>(a.attempt||0)-(b.attempt||0));const latest=rows[rows.length-1];const max=t.tasks.reduce((s,q)=>s+(Number(q.points)||0),0);modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> ERGEBNIS · ${t.nr}/26</div><h2>${esc(t.title)}</h2><div class="notice"><strong>${latest?.status==="bewertet"?`${latest.total}/${max} · ${lernstandStatusText(latest.total,max)}`:`${Number(latest?.total)||0}/${max} · K-Prim automatisch gewertet, offene Fragen noch nicht bewertet`}</strong><p style="margin-bottom:0">Hier sind die vollständigen Musterlösungen.</p></div>${t.tasks.map((q,i)=>{
  if(q.type==="kprim"){
  return`<div class="ls-task-box"><h4>${i+1}. ${esc(q.label)} · ${q.points} P.</h4><p>${esc(q.intro||"")}</p><div class="ls-kprim-list">${(q.statements||[]).map(s=>`<div class="ls-kprim-row"style="cursor:default"><span>${s.correct?"✅":"❌"}</span><span>${esc(s.text)}${s.explain?` — <em style="color:var(--muted)">${esc(s.explain)}</em>`:""}</span></div>`).join("")}</div>${q.solution?`<p style="margin-top:10px;font-weight:700">${esc(q.solution)}</p>`:""}</div>`;
  }
@@ -7542,6 +9486,7 @@ async function submitLernstand(taskId,attempt){
  try{
  await addDoc(collection(db,"lernstandVersuche"),{uid:currentUser.uid,displayName:profile?.displayName||currentUser?.email||"Schüler/in",taskId:t.id,title:t.title,nr:t.nr,learningArea:t.learningArea,attempt,answers,competencies,kprimFeedback,total:autoPoints,status:"abgegeben",createdAt:serverTimestamp()});
  closeModal();
+ showMotivationsBild();
  showLernstandSubmitFeedback(t,kprimFeedback,attempt);
  }catch(e){console.error("Lernstand speichern:",e);toast("Lernstand konnte nicht gespeichert werden.")}
 }
@@ -7595,7 +9540,7 @@ async function downloadLernstandTeacherPDF(attemptId){
  }).join("");
  const scoreLine=a.status==="bewertet"?`Gesamt: ${a.total}/${max} Punkte (${lernstandStatusText(a.total,max)})`:`Gesamt bisher: ${Number(a.total)||0}/${max} Punkte (noch nicht vollständig bewertet)`;
  openToolPrintWindow(
- "Bewertungsbericht – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(a.displayName||"Schüler/in")} · Versuch ${a.attempt}/3</strong><br>${escPDF(scoreLine)}${a.feedback?`<br><em>Rückmeldung:</em> ${escPDF(a.feedback)}`:""}</div>`+body,"F12Sb · Lernstandsmessung"+t.nr+"/19 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
+ "Bewertungsbericht – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(a.displayName||"Schüler/in")} · Versuch ${a.attempt}/3</strong><br>${escPDF(scoreLine)}${a.feedback?`<br><em>Rückmeldung:</em> ${escPDF(a.feedback)}`:""}</div>`+body,"F12Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
  );
  }catch(e){console.error("Lernstand-Bewertungsbericht PDF:",e);toast("Das PDF konnte nicht erstellt werden.")}
 }
@@ -7646,7 +9591,7 @@ async function openLernstandEditor(){
 async function openLernstandTaskEditor(id){
  if(!isTeacher()){toast("Nur Lehrkräfte können Aufgaben einstellen.");return}
  const tasks=await getLernstandTasks(),t=tasks.find(x=>x.id===id);if(!t)return;
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> ${t.nr}/19 · ${esc(LERNSTAND_AREAS[t.learningArea].title)}</div><h2>${esc(t.title)}</h2><div class="form"><label>Kurzer Überblick / Beschreibung<textarea id="lsEditDescription"rows="3">${esc(t.description||"")}</textarea></label>${t.tasks.map(q=>{
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> ${t.nr}/26 · ${esc(LERNSTAND_AREAS[t.learningArea].title)}</div><h2>${esc(t.title)}</h2><div class="form"><label>Kurzer Überblick / Beschreibung<textarea id="lsEditDescription"rows="3">${esc(t.description||"")}</textarea></label>${t.tasks.map(q=>{
  if(q.type==="kprim"){
  return`<div class="ls-task-box"><h4>${esc(q.label)} · ${q.points} Punkte (K-Prim, automatisch bewertet)</h4><p style="color:var(--muted);font-size:12px">${esc(q.intro||"")}</p><div class="ls-kprim-list">${(q.statements||[]).map(s=>`<div class="ls-kprim-row"style="cursor:default"><span>${s.correct?"✅":"❌"}</span><span>${esc(s.text)}</span></div>`).join("")}</div><p style="margin-top:8px;color:var(--muted);font-size:11px">K-Prim-Aufgaben werden aktuell nicht über dieses Formular bearbeitet – melde dich bei Bedarf, dann passe ich die Aussagen im Code an.</p></div>`;
  }
@@ -7671,10 +9616,12 @@ async function render(){
  if(!currentUser)return;
  if(liveUnsubscribe){liveUnsubscribe();liveUnsubscribe=null;}
  if(liveUnsubHeimat){liveUnsubHeimat();liveUnsubHeimat=null;}
+ if(liveUnsubMiniKalender){liveUnsubMiniKalender();liveUnsubMiniKalender=null;}
  const seq=++__campusRenderSeq;
  const p=location.hash.replace("#","")||"start";
  const pages={
  start:renderStart,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
+ faecher:renderFaecherUebersicht,fach:renderFachDetail,
  ressourcen:renderRessourcenRoute,lernpfad:renderLernpfadRoute,forum:renderForum,"forum-board":renderForumBoard,"forum-nachrichten":renderForumMessages,
  pinnwand:renderPinnwandUebersicht,"pinnwand-board":renderPinnwandBoard,
  kollaboration:renderKollaborationsTools,
@@ -7687,7 +9634,7 @@ async function render(){
  umfrage:renderUmfrageUebersicht,"umfrage-board":renderUmfrageBoard,
  zufallspicker:renderZufallspicker,
  lernwerkzeuge:renderLernWerkzeuge,
- karteikarten:renderKarteikartenUebersicht,"karteikarten-board":renderKarteikartenBoard,"fokus-timer":renderFokusTimer,
+ karteikarten:renderKarteikartenUebersicht,"karteikarten-board":renderKarteikartenBoard,"fokus-timer":renderFokusTimer,"uhr-timer":renderUhrTimer,
  glossar:renderGlossar,
  fachaufsatz:renderFachaufsatzUebersicht,"fachaufsatz-board":renderFachaufsatzBoard,
  projekte:renderProjekte,kompetenz:renderKompetenz,journal:renderLernjournalRoute,
@@ -7722,6 +9669,9 @@ async function render(){
  }
  if(p==="klassenteam"){
  subscribeHeimatkarteLive();
+ }
+ if(p==="start"){
+ subscribeMiniKalenderLive();
  }
  if(p==="ampel-board"&&activeAmpelId){
  subscribeAmpelLive(activeAmpelId);
@@ -7878,7 +9828,6 @@ window.deleteNews=deleteNews;
 window.render=render;
 window.resilienzSkillDone=resilienzSkillDone;
 window.toggleResilienzSchatz=toggleResilienzSchatz;
-window.filterMessageUserList=filterMessageUserList;
 window.openConversation=openConversation;
 window.closeConversation=closeConversation;
 window.replyToMessage=replyToMessage;
@@ -8065,7 +10014,7 @@ value),status:$("fStatus").value,next:$("fNext").value.trim()||"Nächsten Schrit
 }
 function openNewsForm(){
  if(!isTeacher()){toast("Nur Lehrkräfte können News veröffentlichen.");return}
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">CAMPUS-NEWS · LEHRKRAFT</div><h2>News veröffentlichen</h2><div class="form"><label>Überschrift<input id="newsTitle"placeholder="Kurze Überschrift"required></label><label>News<textarea id="newsText"rows="6"placeholder="Was sollen die Campus-Mitglieder wissen?"required></textarea></label><div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addNews()">Veröffentlichen</button></div></div>`);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">CAMPUS-NEWS · LEHRKRAFT</div><h2>News veröffentlichen</h2><div class="form"><label>Überschrift<input id="newsTitle"placeholder="Kurze Überschrift"required></label><label>News<textarea id="newsText"rows="6"placeholder="Was sollen die Campus-Mitglieder wissen?"required></textarea></label><div style="margin-top:-8px;margin-bottom:10px">${emojiPickerHTML("newsText","emojiPickerNews")}</div><div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addNews()">Veröffentlichen</button></div></div>`);
 }
 
 async function addNews(){
@@ -8075,12 +10024,46 @@ async function addNews(){
  try{await addDoc(collection(db,"news"),{authorUid:currentUser.uid,authorName:profile?.displayName||currentUser?.email||"Lehrkraft",title,text,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});closeModal();await render();toast("News veröffentlicht.")}catch(e){console.error(e);toast("News konnte nicht veröffentlicht werden.")}
 }
 
+// ---- Emoji-Picker (wiederverwendbar für Forum-Beiträge und Nachrichten) --
+const EMOJI_PICKER_LISTE=["😀","😂","🥰","😅","😉","🙂","😊","😍","🤔","😮","😢","😡","👍","👎","❤️","🔥","🎉","👏","🙏","💡","✅","❌","🤝","🚀","📚","🎓","😴","🥳","💪","👀"];
+function emojiPickerHTML(targetId,pickerId){
+ return `<div style="position:relative;display:inline-block">
+ <button type="button"class="secondary"onclick="toggleEmojiPicker('${pickerId}')"title="Emoji einfügen">😊</button>
+ <div id="${pickerId}"class="emoji-picker"hidden>
+ ${EMOJI_PICKER_LISTE.map(e=>`<button type="button"onclick="insertEmoji('${targetId}','${e}','${pickerId}')">${e}</button>`).join("")}
+ </div>
+ </div>`;
+}
+function toggleEmojiPicker(pickerId){
+ const el=$(pickerId);
+ if(!el)return;
+ document.querySelectorAll(".emoji-picker").forEach(p=>{if(p.id!==pickerId)p.hidden=true});
+ el.hidden=!el.hidden;
+}
+function insertEmoji(targetId,emoji,pickerId){
+ const field=$(targetId);
+ if(field){
+ const start=field.selectionStart??field.value.length;
+ const end=field.selectionEnd??field.value.length;
+ field.value=field.value.slice(0,start)+emoji+field.value.slice(end);
+ field.focus();
+ field.selectionStart=field.selectionEnd=start+emoji.length;
+ }
+ const picker=$(pickerId);
+ if(picker)picker.hidden=true;
+}
+window.toggleEmojiPicker=toggleEmojiPicker;window.insertEmoji=insertEmoji;
+document.addEventListener("click",e=>{
+ if(e.target.closest(".emoji-picker")||e.target.closest('[onclick^="toggleEmojiPicker"]'))return;
+ document.querySelectorAll(".emoji-picker").forEach(p=>p.hidden=true);
+});
+
 function openPostForm(defaultType="question"){
  modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">CAMPUS-FORUM</div><h2>Beitrag
 schreiben</h2><div class="form"><label>Kategorie<select id="pType"><option value="question"
 ${defaultType==="question"?"selected":""}> Frage</option><option value="info" ${defaultType==="info"?"selected":""}>
 Info</option><option value="idea" ${defaultType==="idea"?"selected":""}> Idee</option><option value="project">
-Projekt</option><option value="practice"> Praxis</option></select></label><label>Beitrag<textarea id="pText"rows="5"placeholder="Was möchtest du teilen?"required></textarea></label><div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addPost()">Veröffentlichen</button></div></div>`);
+Projekt</option><option value="practice"> Praxis</option></select></label><label>Beitrag<textarea id="pText"rows="5"placeholder="Was möchtest du teilen?"required></textarea></label><div style="margin-top:-8px;margin-bottom:10px">${emojiPickerHTML("pText","emojiPickerPost")}</div><div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addPost()">Veröffentlichen</button></div></div>`);
 }
 async function addPost(){
  const text=$("pText").value.trim();if(!text){toast("Bitte Beitrag eingeben.");return}
@@ -8240,6 +10223,7 @@ async function addJournal(){
  });
 
  await render();
+ showMotivationsBild();
  toast("Lernjournal gespeichert.");
  }catch(error){
  console.error("Lernjournal speichern:",error);
@@ -8279,13 +10263,13 @@ function openJournalEntry(id){
  ${j.mood?`<span class="pill">Befinden: ${esc(j.mood)}</span>`:""}
  ${j.satisfaction?`<span class="pill">Zufriedenheit: ${esc(j.satisfaction)}</span>`:""}
 
- ${j.goalAchieved?`<div class="journal-detail"><strong>Zielerreichung (letztes Ziel)</strong><p>${esc(j.goalAchieved)}</p></div>`:""}
+ ${j.goalAchieved?`<div class="journal-detail journal-c-blau"><strong>Zielerreichung (letztes Ziel)</strong><p>${esc(j.goalAchieved)}</p></div>`:""}
  ${j.workedOn?`<div class="journal-detail"><strong>Woran habe ich heute gearbeitet?</strong><p>${esc(j.workedOn)}</p></div>`:""}
- ${j.learned?`<div class="journal-detail"><strong>Was habe ich verstanden oder gelernt?</strong><p>${esc(j.learned)}</p></div>`:""}
- ${j.difficult?`<div class="journal-detail"><strong>Was war schwierig?</strong><p>${esc(j.difficult)}</p></div>`:""}
- ${j.helpful?`<div class="journal-detail"><strong>Was hat mir geholfen? Welche Methode/Strategie hat funktioniert?</strong><p>${esc(j.helpful)}</p></div>`:""}
- ${j.metaThought?`<div class="journal-detail"><strong>Ein Gedanke über mein Lernen</strong><p>${esc(j.metaThought)}</p></div>`:""}
- ${j.nextStep?`<div class="journal-detail"><strong>Mein nächster Lernschritt</strong><p>${esc(j.nextStep)}</p></div>`:""}
+ ${j.learned?`<div class="journal-detail journal-c-gruen"><strong>Was habe ich verstanden oder gelernt?</strong><p>${esc(j.learned)}</p></div>`:""}
+ ${j.difficult?`<div class="journal-detail journal-c-orange"><strong>Was war schwierig?</strong><p>${esc(j.difficult)}</p></div>`:""}
+ ${j.helpful?`<div class="journal-detail journal-c-blau"><strong>Was hat mir geholfen? Welche Methode/Strategie hat funktioniert?</strong><p>${esc(j.helpful)}</p></div>`:""}
+ ${j.metaThought?`<div class="journal-detail journal-c-lila"><strong>Ein Gedanke über mein Lernen</strong><p>${esc(j.metaThought)}</p></div>`:""}
+ ${j.nextStep?`<div class="journal-detail journal-c-teal"><strong>Mein nächster Lernschritt</strong><p>${esc(j.nextStep)}</p></div>`:""}
 
  <div class="form-actions">
  <button class="secondary"onclick="closeModal()">Schließen</button>
@@ -8373,7 +10357,7 @@ async function addCompetence(){
  const name=$("cName")?.value.trim();if(!name){toast("Bitte eine Kompetenz eintragen.");return}
  try{
  await addDoc(collection(db,"competencies"),{uid:currentUser.uid,ownerName:profile?.displayName||currentUser?.email||"Campus-Mitglied",name,category:$("cCategory").value,level:Math.max(1,Math.min(5,Number($("cLevel").value)||1)),description:$("cDescription").value.trim()||"",canHelp:Boolean($("cCanHelp").checked),helpText:$("cHelpText").value.trim()||"",createdAt:serverTimestamp()});
- closeModal();await render();toast("Kompetenz ins Netzwerk aufgenommen.");
+ closeModal();await render();showMotivationsBild();toast("Kompetenz ins Netzwerk aufgenommen.");
  }catch(e){console.error("Kompetenz speichern:",e);toast("Kompetenz konnte nicht gespeichert werden.")}
 }
 
@@ -8385,7 +10369,7 @@ function openPracticeForm(){
 async function addPractice(){
  if(!isTeacher()){toast("Nur Lehrkräfte können Praxisaufträge erstellen.");return}
  try{await addDoc(collection(db,"practice"),
-{module:"fpa",type:"teacherAssignment",title:$("rTitle").value.trim()||"Praxisauftrag",date:cleanDateInput($("rDate").value),state:"offen",text:$("rText").value.trim()
+{module:"fachreferat",type:"teacherAssignment",title:$("rTitle").value.trim()||"Praxisauftrag",date:cleanDateInput($("rDate").value),state:"offen",text:$("rText").value.trim()
 ||"Beschreibung ergänzen",createdBy:currentUser.uid,createdAt:serverTimestamp()});closeModal();await
 render();toast("fpA-Praxisauftrag gespeichert.")}catch(e){console.error(e);toast("fpA-Praxisauftrag konnte nicht gespeichert werden.")}}
 
