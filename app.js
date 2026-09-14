@@ -7615,9 +7615,12 @@ function openCalendarDay(y,m,d){
  ${e.time?`<p><strong>Uhrzeit:</strong> ${esc(e.time)}</p>`:""}
  ${e.location?`<p><strong>Ort:</strong> ${esc(e.location)}</p>`:""}
  <p style="white-space:pre-wrap">${esc(e.description||e.text||"")}</p>
- ${isTeacher() && e.id && e.type!=="ferien"?`<div class="form-actions"style="margin-top:10px">
+ ${isTeacher() && e.id && e.type!=="ferien" && e.type!=="geburtstag" && e.type!=="pruefung"?`<div class="form-actions"style="margin-top:10px">
  <button class="secondary"onclick="editCalendarEntry('${e.collection||"events"}','${e.id}','${esc(String(e.title||e.name||"").replace(/\n/g,"\\n"))}','${esc(String(e.type||"sonstiges"))}','${esc(String(e.date||e.start||"").slice(0,10))}','${esc(String(e.time||""))}','${esc(String(e.location||"").replace(/\n/g,"\\n"))}','${esc(String(e.description||e.text||"").replace(/\n/g,"\\n"))}')">Bearbeiten</button>
  <button class="secondary"onclick="deleteCalendarEntry('${e.collection||"events"}','${e.id}')">Termin löschen</button>
+ </div>`:""}
+ ${e.type==="geburtstag" && e.uid && (e.uid===currentUser.uid||isTeacher())?`<div class="form-actions"style="margin-top:10px">
+ <button class="secondary"onclick="${e.uid===currentUser.uid?"removeBirthday()":`adminRemoveBirthday('${e.uid}')`}">Termin löschen</button>
  </div>`:""}
  </div>`;
  }).join("")||`<div class="empty">An diesem Tag ist noch kein Termin eingetragen.</div>`}</div>
