@@ -1612,8 +1612,8 @@ function sonstigeListe(noten,fach,hj){
 // Leistungen) als schlichte Zahlenliste, für die Kurzanzeige, solange noch
 // kein Halbjahresergebnis berechnet werden kann.
 function alleEinzelwerte(noten,fach,hj){
- const sa=schulaufgabenListe(noten,fach,hj);
- const so=sonstigeListe(noten,fach,hj).map(e=>e.value);
+ const sa=schulaufgabenListe(noten,fach,hj).map(v=>({value:v,muendlich:false}));
+ const so=sonstigeListe(noten,fach,hj).map(e=>({value:e.value,muendlich:e.type==="muendlich"}));
  return[...sa,...so];
 }
 function sonstigeSchnitt(liste){
@@ -2174,7 +2174,7 @@ async function renderKompass(){
  const w2=alleEinzelwerte(noten,f.key,"hj2");
  const zelle=(erg,w)=>{
  if(!w.length)return"–";
- const werte=w.join(", ");
+ const werte=w.map(x=>`${x.value}<sup title="${x.muendlich?"mündlich":"schriftlich"}">${x.muendlich?"m":"s"}</sup>`).join(", ");
  return erg!==null?`<strong>${erg}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
  };
  return`<tr><td>${f.label}</td>
@@ -2183,7 +2183,7 @@ async function renderKompass(){
  </tr>`;
  }).join("")}
  </tbody></table></div>
- <p style="font-size:10px;color:var(--muted);margin:6px 0 0">Fett = Halbjahresergebnis nach FOBOSO (braucht Schulaufgabe UND sonstige Leistungen). In Klammern/ohne Klammer: die einzelnen eingetragenen Werte.</p>
+ <p style="font-size:10px;color:var(--muted);margin:6px 0 0">Fett = Halbjahresergebnis nach FOBOSO (braucht Schulaufgabe UND sonstige Leistungen). In Klammern: die einzelnen Werte, <sup>s</sup> = schriftlich, <sup>m</sup> = mündlich.</p>
  <div class="form-actions"style="margin-top:10px">
  <button class="secondary"onclick="resetMeineNoten()">Zurücksetzen</button>
  <button class="secondary"onclick="printNotenPDF(${JSON.stringify(noten).replace(/"/g,"&quot;")},${JSON.stringify(bestehen).replace(/"/g,"&quot;")})"> PDF</button>
