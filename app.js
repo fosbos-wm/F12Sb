@@ -7520,7 +7520,7 @@ async function getBirthdayEvents(){
  if(!mm||!dd)return null;
  const dateStr=`${yearFor(mm)}-${String(mm).padStart(2,"0")}-${String(dd).padStart(2,"0")}`;
  return {
- start:dateStr,type:"geburtstag",
+ uid:u.uid,start:dateStr,type:"geburtstag",
  title:` ${u.displayName||u.email||"Campus-Mitglied"} hat Geburtstag`,
  description:"Herzlichen Glückwunsch von der ganzen F12Sb!"
  };
