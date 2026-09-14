@@ -58,7 +58,7 @@ service cloud.firestore {
           && resource.data.role == 'student'
           && request.resource.data.role == 'student'
           && request.resource.data.diff(resource.data).affectedKeys()
-               .hasOnly(['status', 'approvedAt', 'approvedBy', 'updatedAt'])
+               .hasOnly(['status', 'approvedAt', 'approvedBy', 'updatedAt', 'birthday'])
         )
         || (
           isSelf(uid)
@@ -479,12 +479,6 @@ service cloud.firestore {
       allow read: if isApproved();
       allow create, update, delete: if isTeacher();
     }
-    // Aufträge je Praktikumsphase (z. B. Blockpraktikum): von Lehrkräften
-    // gepflegt, für alle sichtbar – live gespiegelt in fpA, Lernpfad und Startseite.
-    match /praktikumsAuftraege/{phaseId} {
-      allow read: if isApproved();
-      allow create, update, delete: if isTeacher();
-    }
     // Teams/Gruppen je Woche: Schüler:innen bilden sie selbst.
     match /lehrplanTeams/{id} {
       allow read: if isApproved();
@@ -563,56 +557,13 @@ service cloud.firestore {
     }
 
     // ---------------------------------------------------------
-    // PRACTICAL TRAINING / FPA
-    // ---------------------------------------------------------
-    match /fpaQuestions/{id} {
-      allow read: if isApproved();
-      allow create: if isApproved()
-        && request.resource.data.createdBy == request.auth.uid;
-      allow update, delete: if isTeacher()
-        || (isApproved() && resource.data.createdBy == request.auth.uid);
-    }
-
-    match /fpaProjects/{id} {
-      allow read: if isApproved();
-      allow create: if isApproved()
-        && request.resource.data.createdBy == request.auth.uid;
-      allow update, delete: if isTeacher()
-        || (isApproved() && resource.data.createdBy == request.auth.uid);
-    }
-
-    // ---------------------------------------------------------
-    // KI INNOVATIONSLABOR
+    // KI ZUM LERNEN (Lehrkräfte stellen Links/Angebote bereit)
     // ---------------------------------------------------------
     match /kiLernwerkstattLinks/{id} {
       allow read: if isApproved();
       allow create: if isTeacher()
         && request.resource.data.createdBy == request.auth.uid;
       allow update, delete: if isTeacher();
-    }
-
-    match /kiChallenges/{id} {
-      allow read: if isApproved();
-      allow create: if isApproved()
-        && request.resource.data.createdBy == request.auth.uid;
-      allow update, delete: if isTeacher()
-        || (isApproved() && resource.data.createdBy == request.auth.uid);
-    }
-
-    match /kiSolutions/{id} {
-      allow read: if isApproved();
-      allow create: if isApproved()
-        && request.resource.data.createdBy == request.auth.uid;
-      allow update, delete: if isTeacher()
-        || (isApproved() && resource.data.createdBy == request.auth.uid);
-    }
-
-    match /kiResults/{id} {
-      allow read: if isApproved();
-      allow create: if isApproved()
-        && request.resource.data.createdBy == request.auth.uid;
-      allow update, delete: if isTeacher()
-        || (isApproved() && resource.data.createdBy == request.auth.uid);
     }
 
     // ---------------------------------------------------------

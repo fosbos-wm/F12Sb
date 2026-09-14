@@ -6,7 +6,7 @@ let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, 
  F12Sb MASTER – STABILE MODULREGISTRY
  Die Master-App selbst enthält keine Pflicht-Imports
  von Zusatzmodulen. Module werden erst beim Öffnen geladen.
- ========================================================= */ const CAMPUS_MODULES={ lernpfad:{label:"Persönlicher Lernpfad",route:"lernpfad",ready:true}, lernressourcen:{label:"Lernressourcen",route:"ressourcen",ready:true}, lernjournal:{label:"Lernjournal",route:"journal",ready:true}, lernmethoden:{label:"Lernmethoden",route:"methoden",ready:true}, lernimpulse:{label:"Lernimpulse",route:"impulse",ready:false}, lernstand:{label:"Lernstandsmessung",route:"lernstand",ready:true}, lerncoaching:{label:"Lerncoaching",route:"lerncoaching",ready:false}, resilienz:{label:"Resilienz & Respressi",route:"resilienz",ready:false}, kompetenz:{label:"Kompetenzwerkstatt",route:"kompetenz",ready:true}, forum:{label:"Campus-Forum",route:"forum",ready:true}, pinnwand:{label:"Pinnwand",route:"pinnwand",ready:true}, kollaboration:{label:"Tools für Zusammenarbeit",route:"kollaboration",ready:true}, wortwolke:{label:"Wortwolke",route:"wortwolke",ready:true}, kanban:{label:"Kanban-Board",route:"kanban",ready:true}, terminfindung:{label:"Terminfindung",route:"terminfindung",ready:true}, teamgesucht:{label:"Team gesucht",route:"teamgesucht",ready:true}, checkliste:{label:"Gemeinsame Checkliste",route:"checkliste",ready:true}, ampel:{label:"Verständnis-Ampel",route:"ampel",ready:true}, umfrage:{label:"Live-Umfrage",route:"umfrage",ready:true}, zufallspicker:{label:"Wer ist dran?",route:"zufallspicker",ready:true}, lernwerkzeuge:{label:"Lern-Werkzeuge",route:"lernwerkzeuge",ready:true}, karteikarten:{label:"Karteikarten",route:"karteikarten",ready:true},"fokus-timer":{label:"Fokus-Timer",route:"fokus-timer",ready:true}, glossar:{label:"Glossar",route:"glossar",ready:true}, projekte:{label:"Projekte",route:"projekte",ready:true}, praxis:{label:"fpA",route:"praktikum",ready:true}, ki:{label:"KI-Innovationslabor",route:"ki",ready:true}, kalender:{label:"Campus-Kalender",route:"kalender",ready:true}, kompetenzprofil:{label:"Kompetenzprofil",route:"kompetenzprofil",ready:false}, team:{label:"Lehrkräfte Klassenteam",route:"team",ready:true} }; const configReady = !Object.values(firebaseConfig).some(v => String(v).includes("HIER_") || String(v).includes("DEIN-PROJEKT")); let app=null, auth=null, db=null; const $=id=>document.getElementById(id); const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+ ========================================================= */ const CAMPUS_MODULES={ lernpfad:{label:"Persönlicher Lernpfad",route:"lernpfad",ready:true}, lernressourcen:{label:"Lernressourcen",route:"ressourcen",ready:true}, lernjournal:{label:"Lernjournal",route:"journal",ready:true}, lernmethoden:{label:"Lernmethoden",route:"methoden",ready:true}, lernimpulse:{label:"Lernimpulse",route:"impulse",ready:false}, lernstand:{label:"Lernstandsmessung",route:"lernstand",ready:true}, lerncoaching:{label:"Lerncoaching",route:"lerncoaching",ready:false}, resilienz:{label:"Resilienz & Respressi",route:"resilienz",ready:false}, kompetenz:{label:"Kompetenzwerkstatt",route:"kompetenz",ready:true}, forum:{label:"Campus-Forum",route:"forum",ready:true}, pinnwand:{label:"Pinnwand",route:"pinnwand",ready:true}, kollaboration:{label:"Tools für Zusammenarbeit",route:"kollaboration",ready:true}, wortwolke:{label:"Wortwolke",route:"wortwolke",ready:true}, kanban:{label:"Kanban-Board",route:"kanban",ready:true}, terminfindung:{label:"Terminfindung",route:"terminfindung",ready:true}, teamgesucht:{label:"Team gesucht",route:"teamgesucht",ready:true}, checkliste:{label:"Gemeinsame Checkliste",route:"checkliste",ready:true}, ampel:{label:"Verständnis-Ampel",route:"ampel",ready:true}, umfrage:{label:"Live-Umfrage",route:"umfrage",ready:true}, zufallspicker:{label:"Wer ist dran?",route:"zufallspicker",ready:true}, lernwerkzeuge:{label:"Lern-Werkzeuge",route:"lernwerkzeuge",ready:true}, karteikarten:{label:"Karteikarten",route:"karteikarten",ready:true},"fokus-timer":{label:"Fokus-Timer",route:"fokus-timer",ready:true}, glossar:{label:"Glossar",route:"glossar",ready:true}, projekte:{label:"Projekte",route:"projekte",ready:true}, kalender:{label:"Campus-Kalender",route:"kalender",ready:true}, kompetenzprofil:{label:"Kompetenzprofil",route:"kompetenzprofil",ready:false}, team:{label:"Lehrkräfte Klassenteam",route:"team",ready:true} }; const configReady = !Object.values(firebaseConfig).some(v => String(v).includes("HIER_") || String(v).includes("DEIN-PROJEKT")); let app=null, auth=null, db=null; const $=id=>document.getElementById(id); const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const statusLabel={green:"Auf Kurs",yellow:"Klärungsbedarf",red:"Handlungsbedarf"};
 const labels={question:"Frage",info:"Info",idea:"Idee",project:"Projekt",practice:"Praxis"};
 let currentUser=null, profile=null, unsubscribers=[];
@@ -1108,7 +1108,7 @@ async function renderKlassenteam(){
  <div class="card"style="margin-top:16px">
  <div class="kicker">TERMINE</div>
  <h2 style="margin-top:4px">Geburtstage im Klassenteam</h2>
- <div class="list">${birthdays.map(b=>{const c=personColor(b.uid);return`<div class="list-item"style="background:${c.bg};border-left:4px solid ${c.border};border-radius:8px;padding:10px 12px;margin-bottom:6px"><div><strong style="color:${c.text}">${esc(b.name)}</strong><small>${esc(b.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))}</small></div>${b.isToday?`<span class="pill green"> Heute!</span>`:`<span class="pill"style="background:${c.border};color:#fff">in ${b.days} Tagen</span>`}</div>`}).join("")||`<div class="empty">Noch keine Geburtstage eingetragen.</div>`}</div>
+ <div class="list">${birthdays.map(b=>{const c=personColor(b.uid);return`<div class="list-item"style="background:${c.bg};border-left:4px solid ${c.border};border-radius:8px;padding:10px 12px;margin-bottom:6px"><div><strong style="color:${c.text}">${esc(b.name)}</strong><small>${esc(b.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))}</small></div><div style="display:flex;align-items:center;gap:8px">${b.isToday?`<span class="pill green"> Heute!</span>`:`<span class="pill"style="background:${c.border};color:#fff">in ${b.days} Tagen</span>`}${isTeacher()?`<button type="button"class="secondary"style="padding:4px 8px"onclick="adminRemoveBirthday('${b.uid}')"title="Geburtstag entfernen">✕</button>`:""}</div></div>`}).join("")||`<div class="empty">Noch keine Geburtstage eingetragen.</div>`}</div>
  </div>
  ${footer()}`;
 }
@@ -1135,70 +1135,6 @@ const F12SB_FAECHER=[
 // ============================================================
 // LERNWERKSTATT · FÄCHER-ZEITSTRAHL
 // ============================================================
-// Praktikumsphasen 2026/27 (gilt fachübergreifend, aus dem B-Block-Plan).
-const PRAKTIKUMSPHASEN=[
- {id:"pr1",start:"2026-09-15",end:"2026-10-02",titel:"B-Block Start – Praktikum",bereich:"Erziehungsbereich",icon:"🏫"},
- {id:"pr2",start:"2026-10-26",end:"2026-11-20",titel:"Praktikumsphase",bereich:"Erziehungsbereich",icon:"🏫"},
- {id:"pr3",start:"2026-12-14",end:"2027-01-15",titel:"Praktikumsphase",bereich:"Erziehungsbereich",icon:"🏫"},
- {id:"pr4",start:"2027-02-15",end:"2027-03-05",titel:"Praktikumsphase",bereich:"Übergang",icon:"🔄"},
- {id:"pr5",start:"2027-04-12",end:"2027-04-30",titel:"Praktikumsphase Pflege",bereich:"Pflegebereich",icon:"🏥"},
- {id:"pr6",start:"2027-06-07",end:"2027-06-25",titel:"Praktikumsphase Pflege",bereich:"Pflegebereich",icon:"🏥"},
- {id:"pr7",start:"2027-07-19",end:"2027-07-30",titel:"Praktikumsphase Pflege",bereich:"Pflegebereich",icon:"🏥"}
-];
-
-// Aufträge je Praktikumsphase: von Lehrkräften gepflegt, überall live
-// gespiegelt (Lernpfad-Wegpunkte, fpA-Übersicht, Startseite) – ein
-// Datentopf, keine Kopien.
-async function getPraktikumsAuftraege(){
- try{
- const snap=await getDocs(collection(db,"praktikumsAuftraege"));
- const map={};
- snap.docs.forEach(d=>{map[d.id]=d.data()});
- return map;
- }catch(e){console.error("Praktikumsaufträge laden:",e);return {}}
-}
-async function savePraktikumsphaseAuftrag(phaseId){
- if(!isTeacher()){toast("Nur Lehrkräfte können Aufträge eintragen.");return}
- const titel=$("praktAuftragTitel")?.value.trim();
- const beschreibung=$("praktAuftragBeschreibung")?.value.trim();
- if(!titel){toast("Bitte einen Titel eingeben.");return}
- try{
- await setDoc(doc(db,"praktikumsAuftraege",phaseId),{
- phaseId,titel,beschreibung,updatedBy:currentUser.uid,updatedAt:serverTimestamp()
- });
- closeModal();await render();toast("Auftrag gespeichert.");
- }catch(e){console.error("Praktikumsauftrag speichern:",e);toast("Konnte nicht gespeichert werden.")}
-}
-async function deletePraktikumsphaseAuftrag(phaseId){
- if(!confirm("Diesen Praktikumsauftrag wirklich löschen?"))return;
- try{await deleteDoc(doc(db,"praktikumsAuftraege",phaseId));closeModal();await render();toast("Auftrag gelöscht.")}
- catch(e){console.error("Praktikumsauftrag löschen:",e);toast("Konnte nicht gelöscht werden.")}
-}
-async function openPraktikumsphaseAuftragForm(phaseId){
- const phase=PRAKTIKUMSPHASEN.find(p=>p.id===phaseId);
- if(!phase)return;
- const alle=await getPraktikumsAuftraege();
- const bestehend=alle[phaseId];
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">PRAKTIKUMSPHASE · ${esc(fmtDateOnly(phase.start))}–${esc(fmtDateOnly(phase.end))}</div>
- <h2>${esc(phase.titel)}</h2>
- ${isTeacher()?`<div class="form">
- <label>Titel des Auftrags<input id="praktAuftragTitel"type="text"value="${esc(bestehend?.titel||"")}"placeholder="z. B. Beobachtungsauftrag Erziehungsstile"></label>
- <label>Beschreibung<textarea id="praktAuftragBeschreibung"rows="4"placeholder="Was sollen die Schüler:innen in dieser Praktikumsphase konkret tun?">${esc(bestehend?.beschreibung||"")}</textarea></label>
- <div class="form-actions">
- <button class="secondary"onclick="closeModal()">Abbrechen</button>
- ${bestehend?`<button class="secondary"onclick="deletePraktikumsphaseAuftrag('${phaseId}')">Löschen</button>`:""}
- <button class="primary"onclick="savePraktikumsphaseAuftrag('${phaseId}')">Speichern</button>
- </div>
- </div>`
- :!bestehend?`<div class="empty">Für diese Praktikumsphase wurde noch kein Auftrag eingetragen.</div>`
- :`<h3 style="margin:8px 0">${esc(bestehend.titel)}</h3><p style="color:var(--muted);white-space:pre-wrap">${esc(bestehend.beschreibung||"")}</p>
- <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`}
- `);
-}
-window.openPraktikumsphaseAuftragForm=openPraktikumsphaseAuftragForm;
-window.savePraktikumsphaseAuftrag=savePraktikumsphaseAuftrag;
-window.deletePraktikumsphaseAuftrag=deletePraktikumsphaseAuftrag;
 
 // Lehrplan-Zeitstrahl je Fach. "typ": "projekt" | "einzel". Aktuell mit
 // echten Inhalten für Pädagogik/Psychologie befüllt (Jahresverlaufsplanung
@@ -2018,13 +1954,7 @@ window.toggleWochenplanDone=toggleWochenplanDone;
 window.deleteWochenplanEntry=deleteWochenplanEntry;
 window.quickAddWochenplan=quickAddWochenplan;
 
-function aktuellePraktikumsphase(){
- const today=new Date().toISOString().slice(0,10);
- const laufend=PRAKTIKUMSPHASEN.find(p=>today>=p.start&&today<=p.end);
- if(laufend)return {...laufend,status:"laufend"};
- const kommend=PRAKTIKUMSPHASEN.filter(p=>p.start>today).sort((a,b)=>a.start.localeCompare(b.start))[0];
- return kommend?{...kommend,status:"kommend"}:null;
-}
+
 async function miniKalenderHTML(){
  let events=[];
  try{events=(await getCollection("events","start",false)).map(e=>({...e,collection:"events"}))}catch(e){}
@@ -2127,7 +2057,6 @@ function printNotenPDF(noten,bestehen){
  if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
  const fmt=(fach,hj)=>{const erg=berechneHalbjahresergebnis(noten,fach,hj);const sa=schulaufgabenListe(noten,fach,hj).length,so=sonstigeListe(noten,fach,hj).length;return erg===null?"—":`${erg} Punkte (${sa} SA, ${so} sonst.)`};
  const rows=F12SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
- const statusText=(label,r)=>!r?`${label}: noch nicht alle Noten eingetragen.`:`${label}: ${r.passed?"nach aktueller Punktlage bestanden":"nach aktueller Punktlage nicht bestanden"}.`;
  win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Noten – F12Sb</title>
  <style>
  @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.55;margin:0}
@@ -2342,7 +2271,19 @@ window.openProjektFristenModal=openProjektFristenModal;
 window.openAktuelleProjekteModal=openAktuelleProjekteModal;
 function taskHTML(t){return`<div class="list-item"><div><strong>${esc(t.title)}</strong><small>Verantwortlich:
 ${esc(t.ownerName||"")} · Deadline: ${esc(t.deadline||"—")} · Nächster Schritt: ${esc(t.next||"—")}</small></div><div
-class="traffic">${statusDot(t.status)}<span class="pill">${statusLabel[t.status]||"—"}</span></div></div>`}
+class="traffic">${statusDot(t.status)}<span class="pill">${statusLabel[t.status]||"—"}</span>${(t.createdBy===currentUser.uid||isTeacher())?`<button type="button"class="secondary"style="padding:4px 8px;margin-left:6px"onclick="deleteTask('${t.id}')"title="Aufgabe löschen">✕</button>`:""}</div></div>`}
+async function deleteTask(id){
+ if(!confirm("Diese Aufgabe wirklich löschen?"))return;
+ try{
+ await deleteDoc(doc(db,"tasks",id));
+ await render();
+ toast("Aufgabe gelöscht.");
+ }catch(e){
+ console.error("Aufgabe löschen:",e);
+ toast(e?.code==="permission-denied"?"Firebase verweigert das Löschen. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gelöscht werden.");
+ }
+}
+window.deleteTask=deleteTask;
 
 // ---- Klassenübersicht für Lehrkräfte: Lehrplan-Fortschritt + Ampel je LB --
 function ampelDotHTML(status){
@@ -2423,7 +2364,6 @@ async function renderFachDetail(){
  const wochenItems=timeline.filter(t=>t.kind==="woche");
  const fortschritte=await Promise.all(wochenItems.map(async w=>({id:w.id,f:await getLehrplanFortschritt(w.id)})));
  const fortschrittMap={};fortschritte.forEach(x=>fortschrittMap[x.id]=x.f);
- const praktikumsAuftraege=await getPraktikumsAuftraege();
  const heute=new Date().toISOString().slice(0,10);
  const erledigtCount=wochenItems.filter(w=>fortschrittMap[w.id]?.abgeschlossen).length;
  const fortschrittProzent=wochenItems.length?Math.round(erledigtCount/wochenItems.length*100):0;
@@ -2468,8 +2408,6 @@ async function renderFachDetail(){
  <div class="lp-legende">
  <span class="lp-legende-item"><span class="pill"style="background:#3fa66a;color:#fff;font-size:10px"> Projekt</span></span>
  <span class="lp-legende-item"><span class="pill"style="background:#e0a324;color:#fff;font-size:10px"> Einzelthema</span></span>
- <span class="lp-legende-item"><span class="lp-legende-dot lp-legende-raute"style="background:var(--soft-blue);border-color:#4a90d9"><i>🏫</i></span>Praktikum · Erziehungsbereich</span>
- <span class="lp-legende-item"><span class="lp-legende-dot lp-legende-raute"style="background:var(--soft-blue);border-color:#4a90d9"><i>🏥</i></span>Praktikum · Pflegebereich</span>
  </div>
  <div class="lp-legende"style="margin-top:6px">
  ${[1,2,3,4].map(n=>`<span class="lp-legende-item"><span class="lb-badge"style="background:${LERNBEREICH_FARBEN[n].bg};border-color:${LERNBEREICH_FARBEN[n].border};color:${LERNBEREICH_FARBEN[n].text}">Lernbereich ${n}</span></span>`).join("")}
@@ -2478,17 +2416,6 @@ async function renderFachDetail(){
  <div class="lp-linie-hinter"></div>
  <div class="lp-linie-vorne"style="height:${fortschrittProzent}%"></div>
  ${(()=>{let lastBlock=null;return timeline.map((item,idx)=>{
- if(item.kind==="praktikum"){
- const auftrag=praktikumsAuftraege[item.id];
- return`<div class="lp-waypoint">
- <div class="lp-waypoint-punkt"><span>${item.icon||"🏥"}</span></div>
- <div class="lp-waypoint-karte"onclick="openPraktikumsphaseAuftragForm('${item.id}')">
- <span class="lp-karte-date">${esc(fmtDateOnly(item.start))}–${esc(fmtDateOnly(item.end))}</span>
- <strong>${esc(item.titel)}</strong>
- <small>${auftrag?` ${esc(auftrag.titel)}`:"Noch kein Auftrag eingetragen – antippen zum Eintragen"}</small>
- </div>
- </div>`;
- }
  const block=findUnterrichtsblock(activeFach,item.start);
  let blockHeadHTML="";
  if(block&&block.id!==lastBlock){
@@ -7178,12 +7105,24 @@ async function toggleResilienzSchatz(skillId){
  toast("In deine Resilienz-Schatzkiste gelegt.");
  if(btn){btn.className="primary schatz-btn-active";btn.textContent="★ In der Schatzkiste"}
  }
+ await refreshTreasureCount();
  }catch(e){
  console.error("Resilienz-Schatzkiste ändern:",e);
  toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");
  }finally{
  resilienzSchatzInFlight.delete(skillId);
  }
+}
+// Aktualisiert die "X Schätze gespeichert"-Anzeige auf der Kachel sofort,
+// ohne die ganze Resilienz-Seite neu zu laden (verhindert, dass eine
+// laufende Übung dabei unterbrochen wird).
+async function refreshTreasureCount(){
+ const badge=document.querySelector(".treasure-count");
+ if(!badge)return;
+ try{
+ const favorites=await getMyResilienzSchaetze();
+ badge.textContent=`${favorites.length} Schätze gespeichert`;
+ }catch(e){console.error("Schatzkisten-Zähler aktualisieren:",e)}
 }
 async function openResilienzSchatzkiste(){
  const favorites=await getMyResilienzSchaetze();
@@ -7201,6 +7140,7 @@ async function removeFromResilienzSchatzkiste(skillId){
  await deleteDoc(doc(db,"resilienzSchaetze",`${currentUser.uid}_${skillId}`));
  toast("Aus der Schatzkiste entfernt.");
  await openResilienzSchatzkiste();
+ await refreshTreasureCount();
  }catch(e){
  console.error("Aus Schatzkiste entfernen:",e);
  toast("Konnte nicht entfernt werden.");
@@ -7290,378 +7230,6 @@ async function renderFragenHilfe(){
  ${footer()}`;
 }
 
-function renderPraxisFragen(){
- return Promise.resolve(`${pageHead('fpA · EIGENES TOOL','Fragen aus der Praxis','Fragen aus dem Praktikum – getrennt von Praxisaufträgen.',`<button class="primary"onclick="openFPAQuestionForm()">＋ Frage eintragen</button>`)}<div class="card"><h2> Fragen aus der Praxis</h2><p>Dieses Tool ist vollständig von Praxisaufträgen und KI-Innovationspartnerschaften getrennt.</p><div id="fpaQuestionsPage"class="empty">Lade Einträge …</div></div>${footer()}`);
-}
-function renderPraxisProjekte(){
- return Promise.resolve(`${pageHead('fpA · EIGENES TOOL','Projekte in der Praxis','Praxisprojekte – getrennt von Praxisaufträgen.',`<button class="primary"onclick="openFPAProjectForm()">＋ Projekt eintragen</button>`)}<div class="card"><h2> Projekte in der Praxis</h2><p>Dieses Tool ist vollständig eigenständig.</p><div id="fpaProjectsPage"class="empty">Lade Einträge …</div></div>${footer()}`);
-}
-
-async function renderPraktikum(){
- let assignments=[], questions=[], projects=[];
- let challenges=[],solutions=[],results=[];
- try{assignments=await getCollection("practice","createdAt",true)}catch(e){console.error(e)}
- try{questions=await getCollection("fpaQuestions","createdAt",true)}catch(e){console.error(e)}
- try{projects=await getCollection("fpaProjects","createdAt",true)}catch(e){console.error(e)}
- try{challenges=await getCollection("kiChallenges","createdAt",true)}catch(e){console.error(e)}
- try{solutions=await getCollection("kiSolutions","createdAt",true)}catch(e){console.error(e)}
- try{results=await getCollection("kiResults","createdAt",true)}catch(e){console.error(e)}
-
- assignments=assignments.filter(p=>p.module==="fachreferat" && p.type==="teacherAssignment");
- const praktikumsAuftraege=await getPraktikumsAuftraege();
-
- return`${pageHead("SCHULE ↔ PRAXIS","fpA","Praxisaufträge und eigenständige Werkzeuge für die fachpraktische Ausbildung.",
- isTeacher()?`<button class="primary"onclick="openPracticeForm()">＋ Praxisauftrag</button>`:"")}
- <style>
- .fpa-main{margin-bottom:18px}
- .fpa-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
- .fpa-tool{min-height:185px;cursor:pointer;transition:.15s;text-align:left;color:var(--ink);font:inherit}
- .fpa-tool:hover{transform:translateY(-2px)}
- .fpa-tool .emoji{font-size:30px;display:block;margin-bottom:10px}
- .fpa-tool strong{display:block;font-size:14px;color:var(--blue-dark);margin:0 0 6px}
- .fpa-tool small{display:block;font-size:12px;color:var(--muted);line-height:1.5}
- .fpa-count{margin-top:14px}
- .ki-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
- .ki-card{min-height:255px;cursor:pointer;transition:.15s;text-align:left;color:var(--ink);font:inherit}
- .ki-card:hover{transform:translateY(-2px)}
- .ki-card h2{font-size:16px;line-height:1.3;color:var(--blue-dark);margin:0 0 8px;font-weight:800}
- .ki-card p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
- .ki-step{font-size:27px;font-weight:800;margin-bottom:10px;color:var(--blue)}
- .ki-action{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
- .ki-process{margin-bottom:16px}
- .ki-process h3{font-size:16px;color:var(--blue-dark);margin:0 0 4px}
- .ki-process .grid strong{font-size:13px;color:var(--blue-dark)}
- .ki-process .grid small{font-size:12px;color:var(--muted);line-height:1.5}
- @media(max-width:850px){.fpa-tools{grid-template-columns:1fr}.ki-grid{grid-template-columns:1fr}}
- </style>
-
- <div class="kicker">PRAKTIKUMSPHASEN 2026/27</div>
- <div class="grid grid-3"style="margin-top:8px;margin-bottom:22px">${PRAKTIKUMSPHASEN.map(p=>{
- const heute=new Date().toISOString().slice(0,10);
- const status=heute>=p.start&&heute<=p.end?"laufend":heute>p.end?"vorbei":"kommend";
- const auftrag=praktikumsAuftraege[p.id];
- return`<button type="button"class="card"style="text-align:left;cursor:pointer;background:${status==="laufend"?"var(--soft-orange)":status==="vorbei"?"#f3f5f7":"var(--soft-blue)"}"onclick="openPraktikumsphaseAuftragForm('${p.id}')">
- ${status==="laufend"?`<span class="pill"style="background:#e8890c;color:#fff">läuft gerade</span>`:""}
- <strong style="display:block;margin-top:6px">${p.icon} ${esc(p.titel)}</strong>
- <small style="display:block;color:var(--muted);margin-top:4px">${esc(fmtDateOnly(p.start))}–${esc(fmtDateOnly(p.end))}</small>
- <small style="display:block;margin-top:6px">${auftrag?` ${esc(auftrag.titel)}`:isTeacher()?"Antippen, um einen Auftrag einzutragen":"Noch kein Auftrag eingetragen"}</small>
- </button>`;
- }).join("")}</div>
-
- <div class="kicker">BEREICH 1 · LEHRKRAFT → SCHÜLER</div>
- <div class="card fpa-main"style="margin-top:8px;background:var(--soft-blue)">
- <h2> Praxisaufträge</h2>
- <p>Hier erscheinen ausschließlich fpA-Praxisaufträge der Lehrkraft: beobachten, bearbeiten, durchführen.</p>
- <div class="grid grid-2">
- ${assignments.map(p=>`<article class="card">
- <span class="pill ${p.state==="offen"?"orange":"green"}">${esc(p.state||"offen")}</span>
- <h3>${esc(p.title||"Praxisauftrag")}</h3>
- <p>${esc(p.text||"")}</p>
- <small>${esc(p.date||"")}</small>
- ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('practice','${p.id}','Praxisauftrag')">Löschen</button></div>`:""}
- </article>`).join("")||`<div class="empty">Noch keine Praxisaufträge vorhanden.</div>`}
- </div>
- </div>
-
- <div class="fpa-tools">
- <button class="card fpa-tool"onclick="openFPAQuestions()">
- <span class="emoji"></span><strong>Fragen aus der Praxis</strong>
- <small>Eigene Fragen aus dem Praktikum sammeln und dokumentieren.</small>
- <span class="pill fpa-count">${questions.length} Einträge</span>
- </button>
-
- <button class="card fpa-tool"onclick="openFPAProjects()">
- <span class="emoji"></span><strong>Projekte in der Praxis</strong>
- <small>Praxisprojekte dokumentieren und Ergebnisse festhalten.</small>
- <span class="pill fpa-count">${projects.length} Projekte</span>
- </button>
- </div>
-
- <div class="kicker"style="margin:26px 0 8px">BEREICH 2 · KI-INNOVATIONSPARTNERSCHAFTEN</div>
- <div class="card"style="margin-bottom:16px;background:var(--soft-orange)">
- <h2>Praxisproblem → Schülerteam → Ergebnis</h2>
- <p>Betriebe tragen reale Herausforderungen ein, Schülerteams bearbeiten sie mit KI-Unterstützung, Ergebnisse werden dokumentiert.</p>
- ${isTeacher()?`<div style="margin-top:12px"><button class="primary"onclick="openKIChallengeForm()">＋ Praxisproblem eintragen</button></div>`:""}
- </div>
- <div class="card ki-process">
- <h3>Der Ablauf</h3>
- <div class="grid grid-3">
- <div class="card"><strong style="display:block;margin-bottom:8px">1. Praxisproblem</strong><small style="display:block">Ein realer Bedarf wird beschrieben.</small></div>
- <div class="card"><strong style="display:block;margin-bottom:8px">2. Entwicklung</strong><small style="display:block">Ein Schülerteam bearbeitet die Herausforderung.</small></div>
- <div class="card"><strong style="display:block;margin-bottom:8px">3. Ergebnis</strong><small style="display:block">Die Lösung wird dokumentiert.</small></div>
- </div>
- </div>
- <div class="ki-grid">
- <button class="card ki-card"style="background:var(--soft-blue)"onclick="openKIChallengesLibrary()">
- <div class="ki-step">1</div>
- <h2>Praxisproblem<br>Herausforderungen im Praktikumsbetrieb</h2>
- <p>Betriebe tragen konkrete Herausforderungen ein. Sie werden in einer Bibliothek gesammelt.</p>
- <div class="ki-action"><span class="pill">${challenges.length} Einträge</span><span class="pill">Öffnen →</span></div>
- </button>
- <button class="card ki-card"style="background:var(--soft-purple)"onclick="openKISolutionsLibrary()">
- <div class="ki-step">2</div>
- <h2>Schülerteam / Schüler<br>löst Herausforderung</h2>
- <p>Schüler übernehmen eine Herausforderung und dokumentieren Team, Aufgaben und KI-Einsatz.</p>
- <div class="ki-action"><span class="pill">${solutions.length} Bearbeitungen</span><span class="pill">Öffnen →</span></div>
- </button>
- <button class="card ki-card"style="background:var(--soft-green)"onclick="openKIResultsLibrary()">
- <div class="ki-step">3</div>
- <h2>Ergebnisse<br>Ideen & Produkte</h2>
- <p>Entstandene Ideen, Konzepte, Prototypen und Produkte werden gesammelt.</p>
- <div class="ki-action"><span class="pill">${results.length} Ergebnisse</span><span class="pill">Öffnen →</span></div>
- </button>
- </div>
- ${footer()}`;
-}
-
-function openFPAQuestions(){
- let a=[];
- getCollection("fpaQuestions","createdAt",true).then(rows=>{
- a=rows;
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">fpA · FRAGEN</div><h2> Fragen aus der Praxis</h2>
- <div class="list">${a.map(q=>`<div class="card"style="margin-bottom:10px">
- <small>${esc(q.createdAt?fmtDate(q.createdAt):"")}</small><h3>${esc(q.title||"Frage")}</h3>
- <p>${esc(q.text||"")}</p><span class="pill">${esc(q.studentName||"")}</span>
- ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('fpaQuestions','${q.id}','Praxisfrage')">Löschen</button></div>`:""}
- </div>`).join("")||`<div class="empty">Noch keine Fragen.</div>`}</div>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
- <button class="primary"onclick="closeModal();setTimeout(openFPAQuestionForm,50)">＋ Frage eintragen</button></div>`);
- }).catch(e=>{console.error(e);toast("Fragen konnten nicht geladen werden.")});
-}
-function openFPAQuestionForm(){
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">fpA · FRAGEN</div><h2>Frage aus der Praxis eintragen</h2>
- <div class="form">
- <label>Titel / kurze Frage<input id="fpaQTitle"required></label>
- <label>Meine Frage<textarea id="fpaQText"rows="5"required></textarea></label>
- <label>Kontext aus dem Praktikum<textarea id="fpaQContext"rows="3"></textarea></label>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
- <button class="primary"onclick="saveFPAQuestion()">Speichern</button></div>
- </div>`);
-}
-async function saveFPAQuestion(){
- const title=$("fpaQTitle")?.value.trim()||"", textQ=$("fpaQText")?.value.trim()||"";
- if(!title||!textQ){toast("Bitte Titel und Frage ausfüllen.");return}
- try{
- await addDoc(collection(db,"fpaQuestions"),{
- module:"fachreferat",type:"question",title,text:textQ,context:$("fpaQContext")?.value.trim()||"",
- studentName:profile?.displayName||currentUser?.email||"Campus-Mitglied",
- createdBy:currentUser.uid,createdAt:serverTimestamp()
- });
- closeModal();await render();toast("Frage gespeichert.");
- }catch(e){console.error(e);toast("Frage konnte nicht gespeichert werden: "+(e.code||"Fehler"))}
-}
-
-function openFPAProjects(){
- getCollection("fpaProjects","createdAt",true).then(a=>{
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">fpA · PROJEKTE</div><h2> Projekte in der Praxis</h2>
- <div class="list">${a.map(p=>`<div class="card"style="margin-bottom:10px">
- <span class="pill">${esc(p.status||"offen")}</span><h3>${esc(p.title||"Praxisprojekt")}</h3>
- <p>${esc(p.description||"")}</p><p><b>Team:</b> ${esc(p.team||"—")} · <b>Praxispartner:</b> ${esc(p.partner||"—")}</p>
- ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('fpaProjects','${p.id}','Praxisprojekt')">Löschen</button></div>`:""}
- </div>`).join("")||`<div class="empty">Noch keine Praxisprojekte.</div>`}</div>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
- <button class="primary"onclick="closeModal();setTimeout(openFPAProjectForm,50)">＋ Projekt eintragen</button></div>`);
- }).catch(e=>{console.error(e);toast("Projekte konnten nicht geladen werden.")});
-}
-function openFPAProjectForm(){
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">fpA · PROJEKT</div><h2>Praxisprojekt eintragen</h2>
- <div class="form">
- <label>Projektname<input id="fpaPTitle"required></label>
- <label>Team / Schüler<input id="fpaPTeam"></label>
- <label>Praxispartner<input id="fpaPPartner"></label>
- <label>Beschreibung<textarea id="fpaPDescription"rows="4"></textarea></label>
- <label>Ziel<textarea id="fpaPGoal"rows="3"></textarea></label>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
- <button class="primary"onclick="saveFPAProject()">Speichern</button></div>
- </div>`);
-}
-async function saveFPAProject(){
- const title=$("fpaPTitle")?.value.trim()||"";if(!title){toast("Bitte einen Projektnamen eingeben.");return}
- try{
- await addDoc(collection(db,"fpaProjects"),{
- module:"fachreferat",title,team:$("fpaPTeam")?.value.trim()||"",
- partner:$("fpaPPartner")?.value.trim()||"",description:$("fpaPDescription")?.value.trim()||"",
- goal:$("fpaPGoal")?.value.trim()||"",status:"offen",
- createdBy:currentUser.uid,createdAt:serverTimestamp()
- });
- closeModal();await render();toast("Praxisprojekt gespeichert.");
- }catch(e){console.error(e);toast("Projekt konnte nicht gespeichert werden: "+(e.code||"Fehler"))}
-}
-
-async function renderKI(){
- let challenges=[],solutions=[],results=[];
- try{challenges=await getCollection("kiChallenges","createdAt",true)}catch(e){console.error(e)}
- try{solutions=await getCollection("kiSolutions","createdAt",true)}catch(e){console.error(e)}
- try{results=await getCollection("kiResults","createdAt",true)}catch(e){console.error(e)}
-
- return`${pageHead("INNOVATIONSPARTNERSCHAFT","KI-Innovationspartnerschaften","Praxisproblem → Schülerteam → Ergebnis.",`<button class="primary"onclick="openKIChallengeForm()">＋ Praxisproblem eintragen</button>`)}
- <style>
- .ki-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
- .ki-card{min-height:255px;cursor:pointer;transition:.15s;text-align:left;color:var(--ink);font:inherit}
- .ki-card:hover{transform:translateY(-2px)}
- .ki-card h2{font-size:16px;line-height:1.3;color:var(--blue-dark);margin:0 0 8px;font-weight:800}
- .ki-card p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
- .ki-step{font-size:27px;font-weight:800;margin-bottom:10px;color:var(--blue)}
- .ki-action{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
- .ki-process{margin-bottom:16px}
- .ki-process h3{font-size:16px;color:var(--blue-dark);margin:0 0 4px}
- .ki-process .grid strong{font-size:13px;color:var(--blue-dark)}
- .ki-process .grid small{font-size:12px;color:var(--muted);line-height:1.5}
- @media(max-width:850px){.ki-grid{grid-template-columns:1fr}}
- </style>
- <div class="card ki-process">
- <h3>Der Ablauf</h3>
- <div class="grid grid-3">
- <div class="card"><strong style="display:block;margin-bottom:8px">1. Praxisproblem</strong><small style="display:block">Ein realer Bedarf wird beschrieben.</small></div>
- <div class="card"><strong style="display:block;margin-bottom:8px">2. Entwicklung</strong><small style="display:block">Ein Schülerteam bearbeitet die Herausforderung.</small></div>
- <div class="card"><strong style="display:block;margin-bottom:8px">3. Ergebnis</strong><small style="display:block">Die Lösung wird dokumentiert.</small></div>
- </div>
- </div>
- <div class="ki-grid">
- <button class="card ki-card"onclick="openKIChallengesLibrary()">
- <div class="ki-step">1</div>
- <h2>Praxisproblem<br>Herausforderungen im Praktikumsbetrieb</h2>
- <p>Betriebe tragen konkrete Herausforderungen ein. Sie werden in einer Bibliothek gesammelt.</p>
- <div class="ki-action"><span class="pill">${challenges.length} Einträge</span><span class="pill">Öffnen →</span></div>
- </button>
- <button class="card ki-card"onclick="openKISolutionsLibrary()">
- <div class="ki-step">2</div>
- <h2>Schülerteam / Schüler<br>löst Herausforderung</h2>
- <p>Schüler übernehmen eine Herausforderung und dokumentieren Team, Aufgaben und KI-Einsatz.</p>
- <div class="ki-action"><span class="pill">${solutions.length} Bearbeitungen</span><span class="pill">Öffnen →</span></div>
- </button>
- <button class="card ki-card"onclick="openKIResultsLibrary()">
- <div class="ki-step">3</div>
- <h2>Ergebnisse<br>Ideen & Produkte</h2>
- <p>Entstandene Ideen, Konzepte, Prototypen und Produkte werden gesammelt.</p>
- <div class="ki-action"><span class="pill">${results.length} Ergebnisse</span><span class="pill">Öffnen →</span></div>
- </button>
- </div>${footer()}`;
-}
-
-function openKIChallengeForm(){
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">1 · PRAXISPROBLEM</div>
- <h2>Herausforderung eintragen</h2><div class="form">
- <label>Betrieb / Einrichtung<input id="kiCompany"required></label>
- <label>Ansprechperson<input id="kiContact"></label>
- <label>Titel des Praxisproblems<input id="kiTitle"required></label>
- <label>Herausforderung<textarea id="kiDescription"rows="5"required></textarea></label>
- <label>Betroffene / Zielgruppe<textarea id="kiTarget"rows="3"></textarea></label>
- <label>Gewünschter Nutzen<textarea id="kiGoal"rows="3"></textarea></label>
- <label>Datenschutz / Rahmenbedingungen<textarea id="kiPrivacy"rows="3"></textarea></label>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
- <button class="primary"onclick="saveKIChallenge()">Speichern</button></div></div>`);
-}
-async function saveKIChallenge(){
- const title=$("kiTitle")?.value.trim()||"", desc=$("kiDescription")?.value.trim()||"";
- if(!title||!desc){toast("Bitte Titel und Herausforderung ausfüllen.");return}
- try{
- await addDoc(collection(db,"kiChallenges"),{
- module:"kiInnovationspartnerschaften",company:$("kiCompany")?.value.trim()||"",
- contact:$("kiContact")?.value.trim()||"",title,description:desc,
- target:$("kiTarget")?.value.trim()||"",goal:$("kiGoal")?.value.trim()||"",
- privacy:$("kiPrivacy")?.value.trim()||"",status:"offen",
- createdBy:currentUser.uid,createdAt:serverTimestamp()
- });
- closeModal();await render();toast("Praxisproblem gespeichert.");
- }catch(e){console.error("KI Herausforderung:",e);toast("Speichern fehlgeschlagen: "+(e.code||"Fehler"))}
-}
-function openKIChallengesLibrary(){
- getCollection("kiChallenges","createdAt",true).then(a=>{
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">1 · PRAXISPROBLEM</div>
- <h2>Bibliothek der Herausforderungen</h2>
- <div class="list">${a.map(c=>`<div class="card"style="margin-bottom:10px">
- <span class="pill">${esc(c.status||"offen")}</span><h3>${esc(c.title||"Herausforderung")}</h3>
- <small>${esc(c.company||"")}</small><p>${esc(c.description||"")}</p>
- ${isTeacher()?`<button class="secondary"onclick="deleteCampusEntry('kiChallenges','${c.id}','Herausforderung')">Löschen</button>`:""}
- <button class="primary"onclick="openKITakeChallenge('${c.id}')">Herausforderung übernehmen</button>
- </div>`).join("")||`<div class="empty">Noch keine Herausforderungen.</div>`}</div>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
- <button class="primary"onclick="closeModal();setTimeout(openKIChallengeForm,50)">＋ Neue Herausforderung</button></div>`);
- }).catch(e=>{console.error(e);toast("Herausforderungen konnten nicht geladen werden.")});
-}
-function openKITakeChallenge(id){
- getCollection("kiChallenges","createdAt",true).then(a=>{
- const c=a.find(x=>x.id===id);if(!c){toast("Herausforderung nicht gefunden.");return}
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">2 · ENTWICKLUNG</div>
- <h2>${esc(c.title)}</h2><p>${esc(c.description)}</p><div class="form">
- <label>Einzelperson oder Team<select id="kiMode"><option value="team">Schülerteam</option><option value="single">Einzelschüler/in</option></select></label>
- <label>Name / Team<input id="kiTeam"required></label><label>Mitglieder<textarea id="kiMembers"rows="3"></textarea></label>
- <label>Wer macht was?<textarea id="kiRoles"rows="4"></textarea></label>
- <label>Geplanter KI-Einsatz<textarea id="kiAI"rows="4"></textarea></label>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
- <button class="primary"onclick="saveKISolution('${c.id}')">Bearbeitung speichern</button></div></div>`);
- }).catch(e=>{console.error(e);toast("Herausforderung konnte nicht geöffnet werden.")});
-}
-async function saveKISolution(challengeId){
- const team=$("kiTeam")?.value.trim()||"";if(!team){toast("Bitte Name oder Team eintragen.");return}
- try{
- await addDoc(collection(db,"kiSolutions"),{
- module:"kiInnovationspartnerschaften",challengeId,mode:$("kiMode")?.value||"team",
- team,members:$("kiMembers")?.value.trim()||"",roles:$("kiRoles")?.value.trim()||"",
- aiUse:$("kiAI")?.value.trim()||"",status:"in Bearbeitung",
- createdBy:currentUser.uid,createdAt:serverTimestamp()
- });
- closeModal();await render();showMotivationsBild();toast("Bearbeitung gespeichert.");
- }catch(e){console.error("KI Lösung:",e);toast("Speichern fehlgeschlagen: "+(e.code||"Fehler"))}
-}
-function openKISolutionsLibrary(){
- getCollection("kiSolutions","createdAt",true).then(a=>{
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">2 · ENTWICKLUNG</div>
- <h2>Schülerteams & Lösungsentwicklung</h2>
- <div class="list">${a.map(s=>`<div class="card"style="margin-bottom:10px">
- <span class="pill">${esc(s.status||"in Bearbeitung")}</span><h3>${esc(s.team||"Schüler/in")}</h3>
- <p><b>Mitglieder:</b> ${esc(s.members||"—")}</p><p><b>Wer macht was:</b> ${esc(s.roles||"—")}</p>
- <p><b>KI-Einsatz:</b> ${esc(s.aiUse||"—")}</p>
- ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('kiSolutions','${s.id}','Bearbeitung')">Löschen</button></div>`:""}
- </div>`).join("")||`<div class="empty">Noch keine Bearbeitungen.</div>`}</div>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
- <button class="primary"onclick="closeModal();setTimeout(openKIChallengesLibrary,50)">＋ Herausforderung auswählen</button></div>`);
- }).catch(e=>{console.error(e);toast("Bearbeitungen konnten nicht geladen werden.")});
-}
-function openKIResultForm(){
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">3 · ERGEBNIS</div>
- <h2>Ergebnis dokumentieren</h2><div class="form">
- <label>Titel<input id="kiResultTitle"required></label>
- <label>Art<select id="kiResultType"><option>Idee</option><option>Konzept</option><option>Prototyp</option><option>Produkt</option><option>Material</option><option>Prompt / KI-Workflow</option><option>Sonstiges</option></select></label>
- <label>Beschreibung<textarea id="kiResultDescription"rows="5"></textarea></label>
- <label>Schülerteam / Schüler<input id="kiResultTeam"></label><label>Praxispartner<input id="kiResultPartner"></label>
- <label>Link zum Ergebnis<input id="kiResultLink"></label>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
- <button class="primary"onclick="saveKIResult()">Ergebnis speichern</button></div></div>`);
-}
-async function saveKIResult(){
- const title=$("kiResultTitle")?.value.trim()||"";if(!title){toast("Bitte einen Titel eingeben.");return}
- try{
- await addDoc(collection(db,"kiResults"),{
- module:"kiInnovationspartnerschaften",title,type:$("kiResultType")?.value||"Idee",
- description:$("kiResultDescription")?.value.trim()||"",team:$("kiResultTeam")?.value.trim()||"",
- partner:$("kiResultPartner")?.value.trim()||"",link:$("kiResultLink")?.value.trim()||"",
- createdBy:currentUser.uid,createdAt:serverTimestamp()
- });
- closeModal();await render();toast("Ergebnis gespeichert.");
- }catch(e){console.error("KI Ergebnis:",e);toast("Speichern fehlgeschlagen: "+(e.code||"Fehler"))}
-}
-function openKIResultsLibrary(){
- getCollection("kiResults","createdAt",true).then(a=>{
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">3 · ERGEBNIS</div>
- <h2>Ergebnisse, Ideen & Produkte</h2>
- <div class="list">${a.map(r=>`<div class="card"style="margin-bottom:10px">
- <span class="pill">${esc(r.type||"Ergebnis")}</span><h3>${esc(r.title||"Ergebnis")}</h3>
- <p>${esc(r.description||"")}</p><p><b>Team:</b> ${esc(r.team||"—")} · <b>Praxispartner:</b> ${esc(r.partner||"—")}</p>
- ${r.link?`<a href="${esc(r.link)}"target="_blank"rel="noopener">Ergebnis öffnen →</a>`:""}
- ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('kiResults','${r.id}','Ergebnis')">Löschen</button></div>`:""}
- </div>`).join("")||`<div class="empty">Noch keine Ergebnisse.</div>`}</div>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
- <button class="primary"onclick="closeModal();setTimeout(openKIResultForm,50)">＋ Ergebnis eintragen</button></div>`);
- }).catch(e=>{console.error(e);toast("Ergebnisse konnten nicht geladen werden.")});
-}
-
-
 /* =========================================================
  KALENDER-EXPORT FÜRS HANDY (.ics)
  Erzeugt eine iCalendar-Datei, die sich in jeder Handy-Kalender-
@@ -7732,7 +7300,13 @@ async function exportCampusCalendarICS(){
  const ferienRangeEvents=ferienZeitraeume.map(([start,end,label])=>(
  {start,rangeEnd:end,title:label,description:"Schulferien in Bayern"}
  ));
- downloadICS([...events,...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F12Sb Kalender");
+ const pruefungsTermineICS=[
+ ["2027-05-12","Deutsch – Fachabiturprüfung"],
+ ["2027-05-14","Profilfach (Pädagogik/Psychologie) – Fachabiturprüfung"],
+ ["2027-06-01","Englisch – Fachabiturprüfung"],
+ ["2027-06-03","Mathematik – Fachabiturprüfung"]
+ ].map(([start,title])=>({start,title,description:"Zentraler Prüfungstermin lt. Kultusministerium."}));
+ downloadICS([...events,...birthdayEvents,...ferienRangeEvents,...pruefungsTermineICS],"campuskalender.ics","F12Sb Kalender");
  toast("Kalender wird heruntergeladen – Datei öffnen, um sie zum Handy-Kalender hinzuzufügen.");
  }catch(e){console.error("Kalender-Export:",e);toast("Der Kalender konnte nicht exportiert werden.")}
 }
@@ -7763,7 +7337,8 @@ async function renderKalender(){
  praesentation:{label:"Präsentation",className:"cal-purple"},
  sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
  geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
+ ferien:{label:"Schulferien Bayern",className:"cal-holiday"},
+ pruefung:{label:"Abschlussprüfung",className:"cal-gold"}
  };
 
  // Schulferien Bayern – Schuljahr 2026/27.
@@ -7789,9 +7364,21 @@ async function renderKalender(){
  });
  }
  });
+ // Schriftliche Fachabiturprüfung 2027 – zentrale Prüfungstermine für alle
+ // FOSBOS Bayern (Bekanntmachung des Kultusministeriums, BayMBl. 2025 Nr. 320).
+ const pruefungsTermine=[
+ ["2027-05-12","Deutsch – Fachabiturprüfung"],
+ ["2027-05-14","Profilfach (Pädagogik/Psychologie) – Fachabiturprüfung"],
+ ["2027-06-01","Englisch – Fachabiturprüfung"],
+ ["2027-06-03","Mathematik – Fachabiturprüfung"]
+ ];
+ const pruefungsEvents=pruefungsTermine.map(([datum,titel])=>({
+ start:datum,type:"pruefung",title:titel,
+ description:"Zentraler Prüfungstermin lt. Kultusministerium – gilt für alle Beruflichen Oberschulen Bayerns."
+ }));
  let birthdayEvents=[];
  try{birthdayEvents=await getBirthdayEvents()}catch(e){console.error("Kalender Geburtstage:",e)}
- events=[...events,...birthdayEvents,...ferienEvents];
+ events=[...events,...birthdayEvents,...ferienEvents,...pruefungsEvents];
 
  const normalizeType=e=>{
  const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
@@ -7863,6 +7450,7 @@ async function renderKalender(){
  .cal-yellow{background:#fef3c7!important}.cal-purple{background:#ede9fe!important}.cal-grey{background:#e5e7eb!important}
  .cal-holiday{background:#e3f5da!important;border-color:#8bc34a!important}
  .cal-birthday{background:#ffe4ec!important;border-color:#f472b6!important}
+ .cal-gold{background:#fdf0c8!important;border-color:#d4a017!important;font-weight:700!important}
  .cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
  .cal-legend-item{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#fff;font-size:12px}
  .cal-legend-dot{width:13px;height:13px;border-radius:3px;border:1px solid rgba(0,0,0,.12)}
@@ -7964,6 +7552,20 @@ async function removeBirthday(){
 }
 window.removeBirthday=removeBirthday;
 
+async function adminRemoveBirthday(uid){
+ if(!isTeacher()){toast("Nur Lehrkräfte können fremde Geburtstage entfernen.");return}
+ if(!confirm("Diesen Geburtstag wirklich entfernen?"))return;
+ try{
+ await updateDoc(doc(db,"users",uid),{birthday:"",updatedAt:serverTimestamp()});
+ toast("Geburtstag entfernt.");
+ await render();
+ }catch(e){
+ console.error("Geburtstag (fremd) löschen:",e);
+ toast(e?.code==="permission-denied"?"Firebase verweigert das Entfernen. Bitte die Firestore-Regeln prüfen.":"Konnte nicht entfernt werden.");
+ }
+}
+window.adminRemoveBirthday=adminRemoveBirthday;
+
 async function saveBirthday(){
  const val=$("birthdayInput")?.value||"";
  if(!val){toast("Bitte ein Datum auswählen.");return}
@@ -7990,7 +7592,8 @@ function calendarTypeMeta(e){
  praesentation:{label:"Präsentation",className:"cal-purple"},
  sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
  geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
+ ferien:{label:"Schulferien Bayern",className:"cal-holiday"},
+ pruefung:{label:"Abschlussprüfung",className:"cal-gold"}
  })[key]||{label:"Sonstiger Termin",className:"cal-grey"};
 }
 
@@ -9571,8 +9174,8 @@ async function render(){
  glossar:renderGlossar,
  fachaufsatz:renderFachaufsatzUebersicht,"fachaufsatz-board":renderFachaufsatzBoard,
  projekte:renderProjekte,kompetenz:renderKompetenz,journal:renderLernjournalRoute,
- praktikum:renderPraktikum,resilienz:renderResilienz,praxisfragen:renderPraxisFragen,fragenhilfe:renderFragenHilfe,
- praxisprojekte:renderPraxisProjekte,ki:renderKI,kalender:renderKalender,team:renderTeam,
+ resilienz:renderResilienz,fragenhilfe:renderFragenHilfe,
+ kalender:renderKalender,team:renderTeam,
  impulse:renderLernimpulse,lernstand:renderLernstand,
  kompetenzprofil:()=>modulePlaceholder("Kompetenzprofil"),methoden:renderLernmethoden,lernstrategien:renderLernstrategienTest,metakognition:renderMetakognition,
  lerncoaching:renderLerncoaching
@@ -9721,24 +9324,9 @@ window.setUserStatus=setUserStatus;
 window.setUserRole=setUserRole;
 window.openPostForm=openPostForm;
 window.openPracticeForm=openPracticeForm;
-window.openFPAQuestions=openFPAQuestions;
-window.openFPAQuestionForm=openFPAQuestionForm;
-window.saveFPAQuestion=saveFPAQuestion;
-window.openFPAProjects=openFPAProjects;
-window.openFPAProjectForm=openFPAProjectForm;
-window.saveFPAProject=saveFPAProject;
-window.openKIChallengeForm=openKIChallengeForm;
-window.openKIChallengesLibrary=openKIChallengesLibrary;
-window.openKITakeChallenge=openKITakeChallenge;
-window.openKISolutionsLibrary=openKISolutionsLibrary;
-window.openKIResultForm=openKIResultForm;
-window.openKIResultsLibrary=openKIResultsLibrary;
 window.openKILearningLinkForm=openKILearningLinkForm;
 window.saveKILearningLink=saveKILearningLink;
 window.deleteKILearningLink=deleteKILearningLink;
-window.saveKIChallenge=saveKIChallenge;
-window.saveKISolution=saveKISolution;
-window.saveKIResult=saveKIResult;
 window.resilienzImpuls=resilienzImpuls;
 window.openResonanzatmung=openResonanzatmung;
 window.startResilienzSkill=startResilienzSkill;
