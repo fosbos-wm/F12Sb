@@ -698,13 +698,15 @@ $("loginForm").addEventListener("submit",async e=>{
 });
 $("registerForm").addEventListener("submit",async e=>{
  e.preventDefault();$("authError").textContent="";
- if($("registerPassword").value!==$("registerPassword2").value){$("authError").textContent="Die Passwörter stimmen nicht überein.";return}
+ const pw=$("registerPassword").value;
+ if(pw!==$("registerPassword2").value){$("authError").textContent="Die Passwörter stimmen nicht überein.";return}
+ if(pw.length<8||!/[A-Za-zÄÖÜäöüß]/.test(pw)||!/[0-9]/.test(pw)){$("authError").textContent="Das Passwort muss mindestens 8 Zeichen lang sein und Buchstaben UND Zahlen enthalten.";return}
  if(!configReady){$("authError").textContent="Firebase ist noch nicht konfiguriert.";return}
  const {firstName,lastName}=getRegisterNameFields();
  if(!firstName||!lastName){$("authError").textContent="Bitte Vorname und Nachname angeben.";return}
  try{
  await loadFirebase();
- const cred=await createUserWithEmailAndPassword(auth,$("registerEmail").value.trim(),$("registerPassword").value);
+ const cred=await createUserWithEmailAndPassword(auth,$("registerEmail").value.trim(),pw);
  const fullName=`${firstName} ${lastName}`.trim();
  await updateProfile(cred.user,{displayName:fullName});
  await ensureProfile(cred.user,fullName,{firstName,lastName});

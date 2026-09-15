@@ -54,8 +54,9 @@
       <label>Vorname<input id="registerFirstName" maxlength="40" autocomplete="given-name" required></label>
       <label>Nachname<input id="registerLastName" maxlength="40" autocomplete="family-name" required></label>
       <label>E-Mail-Adresse<input id="registerEmail" type="email" autocomplete="email" required></label>
-      <label>Passwort<input id="registerPassword" type="password" minlength="6" autocomplete="new-password" required></label>
-      <label>Passwort wiederholen<input id="registerPassword2" type="password" minlength="6" autocomplete="new-password" required></label>
+      <label>Passwort<input id="registerPassword" type="password" minlength="8" autocomplete="new-password" required></label>
+      <small style="display:block;margin-top:-10px;margin-bottom:10px;color:var(--muted)">Mindestens 8 Zeichen, davon Buchstaben UND Zahlen.</small>
+      <label>Passwort wiederholen<input id="registerPassword2" type="password" minlength="8" autocomplete="new-password" required></label>
       <label class="check"><input id="registerConsent" type="checkbox" required> Ich habe die Hinweise zur Nutzung gelesen.</label>
       <button class="primary wide" type="submit">Konto erstellen</button>
     </form>
