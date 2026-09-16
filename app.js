@@ -422,7 +422,7 @@ async function renderRessourcenRoute(){
  };
 
  return`${pageHead("LERNWERKSTATT","Lernressourcen-Bibliothek","Finde passende Lernmaterialien, digitale Angebote und externe Lernwege – zentral für Schüler und Lehrkräfte.",addButton)}
- <div class="card"style="background:var(--soft-green)">
+ <div class="card"style="border-left:4px solid #3fa66a">
  <span class="badge"> DEINE LERNBIBLIOTHEK</span>
  <h2>Passende Ressource auswählen</h2>
  <p>TaskCards, KI-Lernangebote, Videos, ByCS/mebis, Canva und LearningApps sowie weitere Webseiten an einem Ort.</p>
@@ -498,7 +498,7 @@ function lernpfadEntryHTML(e){
  ${e.standort?`<p style="margin:4px 0 0;font-size:13px">${esc(e.standort)}</p>`:""}
  ${e.strategyDetail?`<div class="notice"style="margin-top:4px"><strong>Konkret:</strong> ${esc(e.strategyDetail)}</div>`:""}
  ${lernpfadStrategyLinkHTML(e.strategy)}
- ${e.outcome?`<div class="notice"style="margin-top:6px;background:var(--soft-green)"><strong> Wie ist es gelaufen?</strong> ${esc(e.outcome)}</div>`
+ ${e.outcome?`<div class="notice"style="margin-top:6px;border-left:4px solid #3fa66a"><strong> Wie ist es gelaufen?</strong> ${esc(e.outcome)}</div>`
  :`<button class="secondary"style="align-self:flex-start;margin-top:6px"onclick="openLernpfadOutcomeForm('${e.id}')">Wie ist es gelaufen? (später ergänzen)</button>`}
  </div>`;
 }
@@ -532,7 +532,7 @@ function lernpfadPatternsHTML(entries){
  const p=computeLernpfadPatterns(entries);
  const reflectPct=p.total?Math.round((p.withOutcome/p.total)*100):0;
  const maxCount=Math.max(1,...Object.values(p.strategyCounts));
- return`<div class="card"style="margin-bottom:14px;background:var(--soft-blue)">
+ return`<div class="card"style="margin-bottom:14px;border-left:4px solid #4a90d9">
  <div class="kicker">AUSWERTUNG</div>
  <h3 style="margin:6px 0 4px"> Meine Lernmuster</h3>
  <p style="color:var(--muted);font-size:12px;margin:0 0 12px">Basierend auf ${p.total} Check-ins – gute Gesprächspunkte fürs nächste Lerncoaching, wenn du magst.</p>
@@ -1996,11 +1996,11 @@ async function renderStart(){
 verbinden wir Lernen, Projekte, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
 </div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button><button class="secondary"onclick="go('forum')">Campus-Forum</button></div></section>
  <div class="grid grid-3">
- <div class="card card-compact"style="background:var(--soft-blue)"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
+ <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
 class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isAdmin()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
 </div>`).join("")||`<div class="empty">Noch keine News.</div>`}</div></div>
- <div class="card card-compact"style="background:var(--soft-purple)"><h3> Nächster Termin</h3><div class="list">${nextCalendar?`<div class="list-item"><div><strong>${esc(nextCalendar.title||nextCalendar.name||"Termin")}</strong><small>${esc(upcomingDateText)}${upcomingTime}</small></div><span class="pill green">Termin</span></div>`:`<div class="empty">Noch keine anstehenden Termine.</div>`}</div></div>
- <div class="card card-compact"style="background:var(--soft-pink)"><h3> Geburtstage</h3>${
+ <div class="card card-compact"style="border-left:4px solid #9b59b6"><h3> Nächster Termin</h3><div class="list">${nextCalendar?`<div class="list-item"><div><strong>${esc(nextCalendar.title||nextCalendar.name||"Termin")}</strong><small>${esc(upcomingDateText)}${upcomingTime}</small></div><span class="pill green">Termin</span></div>`:`<div class="empty">Noch keine anstehenden Termine.</div>`}</div></div>
+ <div class="card card-compact"style="border-left:4px solid #e0629e"><h3> Geburtstage</h3>${
  !birthdayInfo?`<div class="empty">Noch keine Geburtstage eingetragen.</div>`
  :birthdayInfo.isToday?`<p style="margin:6px 0 0;font-weight:800;font-size:14px"> Herzlichen Glückwunsch, ${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}!</p>`
  :`<div class="list-item"><div><strong>${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}</strong><small>${esc(birthdayInfo.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))} · ${birthdayInfo.days===1?"morgen":`in ${birthdayInfo.days} Tagen`}</small></div><span class="pill"style="background:${personColor(birthdayInfo.people[0].uid).border};color:#fff">Nächste(r)</span></div>`
@@ -2029,7 +2029,7 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  </div>
  ${wochenplan.length?`<div class="list"style="margin-top:10px">${wochenplan.filter(w=>!w.done).slice(0,3).map(w=>`<div class="list-item"><div><strong>${esc(w.title)}</strong>${w.subject?`<small>${esc(F12SB_FAECHER.find(f=>f.key===w.subject)?.label||"")}</small>`:""}</div><span class="pill">${w.scope==="monat"?"Monat":"Woche"}</span></div>`).join("")}</div>`:""}
  </div>
- <div class="card"style="margin-bottom:16px;text-align:center;background:var(--soft-green)">
+ <div class="card"style="margin-bottom:16px;text-align:center;border-left:4px solid #3fa66a">
  <h2 style="margin:0 0 8px"> FOSBOS-WM Jahresfokus: Solidarität und Zusammenhalt</h2>
  <p style="margin:0;font-style:italic;color:var(--muted)">„Solidarität lebt von kleinen Taten – heute schon jemandem geholfen?“</p>
  </div>
@@ -2225,13 +2225,13 @@ async function renderKompass(){
 Aufgaben</span></div><div class="card stat"><b>${projects.length}</b><span>Projekte</span></div><div class="card stat">
 <b>${profile?.role==="teacher"?"Lehrkraft":profile?.role==="admin"?"Admin":"Schüler/in"}</b><span>Rolle</span></div></div>
  <div class="grid grid-3"style="margin-top:12px">
- <button type="button"class="card tile-square"style="background:var(--soft-blue)"onclick="openMeineAufgabenModal()">
+ <button type="button"class="card tile-square"style="background:#fff;border:2px solid #4a90d9"onclick="openMeineAufgabenModal()">
  <span class="emoji"></span><strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
  </button>
- <button type="button"class="card tile-square"style="background:var(--soft-purple)"onclick="openProjektFristenModal()">
+ <button type="button"class="card tile-square"style="background:#fff;border:2px solid #9b59b6"onclick="openProjektFristenModal()">
  <span class="emoji"></span><strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
  </button>
- <button type="button"class="card tile-square"style="background:var(--soft-teal)"onclick="openAktuelleProjekteModal()">
+ <button type="button"class="card tile-square"style="background:#fff;border:2px solid #1a9b8e"onclick="openAktuelleProjekteModal()">
  <span class="emoji"></span><strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
  </button>
  </div>
@@ -2492,7 +2492,7 @@ async function openWocheDetail(fach,wocheId){
  <h2>${esc(woche.thema)}</h2>
  <span class="pill"style="background:${woche.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${woche.typ==="projekt"?"Projektarbeit":"Selbstlern-/Eigenarbeit"}</span>
  <p style="margin-top:10px;color:var(--muted)">${esc(woche.planung)}</p>
- ${woche.praxis?`<div class="card"style="background:var(--soft-blue);margin-top:10px;padding:10px 12px"><strong style="font-size:12px"> Praxistransfer</strong><small style="display:block;margin-top:4px">${esc(woche.praxis)}</small></div>`:""}
+ ${woche.praxis?`<div class="card"style="border-left:4px solid #4a90d9;margin-top:10px;padding:10px 12px"><strong style="font-size:12px"> Praxistransfer</strong><small style="display:block;margin-top:4px">${esc(woche.praxis)}</small></div>`:""}
 
  <div class="wd-stepper">
  ${schritte.map((s,i)=>`<div class="wd-step${s.done?" wd-step-done":""}${i===aktivIdx&&!s.done?" wd-step-aktiv":""}">
@@ -2526,7 +2526,7 @@ async function openWocheDetail(fach,wocheId){
  </div>
  </div>`
  :!auftrag?`<div class="empty">Für diese Woche wurde noch kein Arbeitsauftrag eingetragen.</div>`
- :`<div class="card"style="background:var(--soft-blue)"><strong>${esc(auftrag.titel)}</strong>${auftrag.beschreibung?`<p style="margin:6px 0 0;white-space:pre-wrap">${esc(auftrag.beschreibung)}</p>`:""}</div>`}
+ :`<div class="card"style="border-left:4px solid #4a90d9"><strong>${esc(auftrag.titel)}</strong>${auftrag.beschreibung?`<p style="margin:6px 0 0;white-space:pre-wrap">${esc(auftrag.beschreibung)}</p>`:""}</div>`}
  ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.auftragGelesen?"checked":""}onchange="toggleAuftragGelesen('${fach}','${wocheId}',this.checked)"><span> Auftrag gelesen, Ziele sind mir klar</span></label>`:""}
  <p style="font-size:11px;color:var(--muted);margin:16px 0 6px">Bevor es losgeht:</p>
  ${miniToolRow([["🧭","Lernpfad","lernpfad"],["🤔","Metakognition","metakognition"]])}
@@ -2611,13 +2611,13 @@ window.openWocheDetail=openWocheDetail;
 
 async function renderLernwerkstatt(){
  const groups=[
- {title:"Dich selbst einschätzen",color:"var(--soft-blue)",items:[
+ {title:"Dich selbst einschätzen",color:"#4a90d9",items:[
  [" ","Lernstrategien-Check","Kein Lerntyp-Test – dein Strategien-Profil in 25 Fragen.","lernstrategien"],
  [" ","Metakognitive Lernstrategien","Über das eigene Lernen nachdenken – klick dich durch.","metakognition"],
  [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"],
  [" ","Lernstandsmessung","Kurz prüfen: Wo stehe ich und was ist mein nächster Schritt?","lernstand"]
  ]},
- {title:"Konkret lernen & üben",color:"var(--soft-green)",items:[
+ {title:"Konkret lernen & üben",color:"#3fa66a",items:[
  [" ","Lernmethoden","Planung, Lernen, Zusammenarbeit und Reflexion.","methoden"],
  [" ","Lern-Werkzeuge","Karteikarten, Fokus-Timer und Glossar zum selbstständigen Lernen.","lernwerkzeuge"],
  [" ","Uhr & Timer","Aktuelle Uhrzeit im Blick, plus frei einstellbarer Timer für alle.","uhr-timer"],
@@ -2627,18 +2627,18 @@ async function renderLernwerkstatt(){
  [" ","KI zum Lernen","KI als Lernpartner nutzen – bereitgestellte KI-Angebote der Lehrkräfte.","ki-lernen"],
  [" ","Lernimpulse","Kurze Impulse für Reflexion und Deeper Learning.","impulse"]
  ]},
- {title:"Unterstützung holen",color:"var(--soft-orange)",items:[
+ {title:"Unterstützung holen",color:"#e0a324",items:[
  [" ","Lerncoaching","Individuelle Begleitung und Kontakt zu einer Lehrkraft.","lerncoaching"],
  [" ","Fragen & Hilfe","Antworten rund um die F12Sb und das Lernen.","fragenhilfe"]
  ]}
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
  <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
- <a class="card tile"href="#faecher"style="background:linear-gradient(135deg,var(--soft-blue),var(--soft-purple));min-height:110px;margin-bottom:22px">
+ <a class="card tile"href="#faecher"style="background:#fff;border:2px solid #4a90d9;min-height:110px;margin-bottom:22px">
  <span class="emoji"></span><strong style="font-size:16px">Fächer 12. Klasse</strong>
  <small>Lehrplan-Zeitstrahl je Fach: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
  </a>
- ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
+ ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border:2px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
 <strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
  ${footer()}`;
 }
@@ -5193,7 +5193,7 @@ async function openEssayModelCompare(caseId,type){
  <h2>${esc(essayPartLabel(type))} – Vergleich mit dem Musterbeispiel</h2>
  <p style="color:var(--muted);font-size:12px">Lies zuerst deinen eigenen Text nochmal durch, dann das Musterbeispiel. Die Fragen unten helfen dir beim Vergleichen.</p>
  <div class="card"style="background:#f7fafc;margin-bottom:10px"><strong>Dein Text</strong><p style="white-space:pre-wrap;margin:6px 0 0">${esc(myText)||"(kein Text gespeichert)"}</p></div>
- <div class="card"style="background:var(--soft-green,#dcf1c8);margin-bottom:10px"><strong> Musterbeispiel</strong><p style="white-space:pre-wrap;margin:6px 0 0">${esc(model)}</p></div>
+ <div class="card"style="border-left:4px solid #3fa66a;margin-bottom:10px"><strong> Musterbeispiel</strong><p style="white-space:pre-wrap;margin:6px 0 0">${esc(model)}</p></div>
  ${compareQuestions.length?`<div class="notice"><strong>Zum Vergleichen</strong><ul style="margin:8px 0 0;padding-left:18px">${compareQuestions.map(q=>`<li>${esc(q)}</li>`).join("")}</ul></div>`:""}
  <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
  }catch(e){console.error("Musterbeispiel-Vergleich:",e);toast("Der Vergleich konnte nicht geöffnet werden.")}
@@ -5353,7 +5353,7 @@ async function renderKILernen(){
  @media(max-width:800px){.ki-learn-grid{grid-template-columns:1fr}}
  </style>
 
- <div class="card"style="margin-bottom:16px;background:var(--soft-green)">
+ <div class="card"style="margin-bottom:16px;border-left:4px solid #4a90d9">
  <span class="badge"> LEHRKRAFTGESTEUERT</span>
  <h2>KI-Angebote für dein Lernen</h2>
  <p>Hier findest du nur KI-Angebote, die von Lehrkräften für den Campus bereitgestellt wurden. Öffne ein Angebot und nutze es direkt zum Lernen.</p>
@@ -5454,12 +5454,12 @@ async function renderForum(){
  const unread=await getUnreadMessageCount();
  return`${pageHead("GEMEINSCHAFT","Campus-Forum","Wähle einen Bereich: gemeinsamer Austausch im Forum oder persönliche Nachrichten.","")}
  <div class="grid grid-2"style="gap:18px;margin-top:4px">
- <a class="card tile"href="#forum-board"style="min-height:180px;background:var(--soft-blue)">
+ <a class="card tile"href="#forum-board"style="min-height:180px;background:#fff;border:2px solid #4a90d9">
  <span class="emoji"></span>
  <strong>Forum</strong>
  <small>Gemeinsam denken, fragen, austauschen und unterstützen – für die ganze F12Sb sichtbar.</small>
  </a>
- <a class="card tile"href="#forum-nachrichten"style="min-height:180px;background:var(--soft-teal)">
+ <a class="card tile"href="#forum-nachrichten"style="min-height:180px;background:#fff;border:2px solid #1a9b8e">
  <span class="emoji"></span>
  <strong>Persönliche Nachrichten${unread?` <span class="badge">${unread}</span>`:""}</strong>
  <small>Schreibe direkt mit einem Schüler oder einer Lehrkraft – nur ihr beide seht die Unterhaltung.</small>
@@ -5484,7 +5484,7 @@ Infos</span><span class="chip"> Ideen</span><span class="chip"> Projekte</span><
 <input class="search"id="forumSearch"placeholder="Beiträge durchsuchen …"></div>
  <div class="list"id="forumList">${posts.map(postHTML).join("")||`<div class="empty"><strong>Noch keine
 Beiträge</strong>Schreibe den ersten Beitrag.</div>`}</div>
- <div class="card"style="margin-top:12px;background:var(--soft-green)"><h3> Campus hilft</h3><p>Du kannst anderen bei einem
+ <div class="card"style="margin-top:12px;border-left:4px solid #3fa66a"><h3> Campus hilft</h3><p>Du kannst anderen bei einem
 Thema helfen? Teile dein Wissen.</p><button class="secondary"style="margin-top:10px"onclick="openHelpForm()">Hilfe
 anbieten</button></div>${footer()}`;
 }
@@ -6108,7 +6108,7 @@ async function renderKompetenz(){
  </div>
  <div class="competency-grid"id="competencyNetwork">${data.map(c=>competencyCard(c,false)).join("")||`<div class="empty"><strong>Noch keine Kompetenzen im Netzwerk.</strong><p>Sei die erste Person.</p></div>`}</div>
  </div>
- <div class="card"style="margin-top:12px;background:var(--soft-green)"><span class="badge"> UNSER CAMPUS-GEDANKE</span><h2>Wissen teilen ist eine Stärke.</h2><p>Du musst nicht alles können. Vielleicht kannst du etwas, das jemand anderes gerade braucht – und umgekehrt.</p><p><strong>„Ich kann dir helfen. Du kannst mir helfen. Zusammen kommen wir weiter.“</strong></p></div>
+ <div class="card"style="margin-top:12px;border-left:4px solid #3fa66a"><span class="badge"> UNSER CAMPUS-GEDANKE</span><h2>Wissen teilen ist eine Stärke.</h2><p>Du musst nicht alles können. Vielleicht kannst du etwas, das jemand anderes gerade braucht – und umgekehrt.</p><p><strong>„Ich kann dir helfen. Du kannst mir helfen. Zusammen kommen wir weiter.“</strong></p></div>
  ${footer()}`;
 }
 // Ein fester, sanft abgestimmter Farbton pro Kompetenz-Kategorie (gleicher
@@ -6833,7 +6833,7 @@ async function renderResilienz(){
  return`${pageHead(
  "RESILIENZ & RESPRESSI","Resilienz & Respressi","Finde heraus, was dir gerade helfen könnte – und probiere es direkt aus.",`<button class="primary"onclick="resilienzImpuls()"> Impuls für mich</button>`
  )}
- <div class="card" style="background:var(--soft-pink);margin-bottom:16px;text-align:center;padding:22px">
+ <div class="card" style="border-left:4px solid #e0629e;margin-bottom:16px;text-align:center;padding:22px">
  <p style="font-size:21px;font-style:italic;font-weight:700;color:var(--ink);margin:0">„Guck in das Leuchten der Augen des anderen!“</p>
  <p style="margin:8px 0 0;color:var(--muted);font-weight:700">— Dr. Gunther Schmidt</p>
  </div>
@@ -7218,7 +7218,7 @@ async function renderFragenHilfe(){
  ];
 
  return`${pageHead("ORIENTIERUNG","Fragen & Hilfe","Antworten rund um die F12Sb, selbstständiges Lernen und deinen Lernweg.")}
- <div class="card"style="margin-bottom:16px;background:var(--soft-green)">
+ <div class="card"style="margin-bottom:16px;border-left:4px solid #3fa66a">
  <span class="badge"> ORIENTIERUNG</span>
  <h2>Du hast eine Frage?</h2>
  <p>Hier findest du schnelle Antworten zu den wichtigsten Fragen rund um die F12Sb und das Lernen. Nutze die Themen als erste Orientierung.</p>
@@ -7659,14 +7659,14 @@ async function renderTeam(){
  @media(max-width:850px){.team-info-grid{grid-template-columns:1fr}}
  </style>
  <div class="team-info-grid">
- <section class="card"style="background:var(--soft-blue)">
+ <section class="card"style="border-left:4px solid #4a90d9">
  <div class="kicker">KLASSENTEAM</div>
  <h2>Interne Informationen</h2>
  <p>Hier können Lehrkräfte wichtige Beobachtungen, Vorkommnisse, Vereinbarungen und Informationen für das Klassenteam dokumentieren.</p>
  <div class="notice"><strong>Nur für Lehrkräfte</strong><p style="margin-bottom:0">Schülerinnen und Schüler haben keinen Zugang zu diesem Bereich.</p></div>
  <div style="margin-top:14px"><button class="primary"onclick="openClassTeamUpdateForm()">＋ Neue Information</button></div>
  </section>
- <section class="card"style="background:var(--soft-green)">
+ <section class="card"style="border-left:4px solid #3fa66a">
  <div class="kicker">BIBLIOTHEK</div><h2>Historie</h2>
  <p>Alle bisherigen Informationen werden chronologisch gesammelt.</p>
  <div class="list">
@@ -7687,7 +7687,7 @@ async function renderTeam(){
  </div>
  </section>
  </div>
- <section class="card"style="margin-top:16px;background:var(--soft-orange)">
+ <section class="card"style="margin-top:16px;border-left:4px solid #e0a324">
  <div class="kicker">MODERATION</div>
  <h2>Gemeldete Inhalte ${openReports.length?`<span class="badge">${openReports.length}</span>`:""}</h2>
  <p>Meldungen aus Campus-Forum, Pinnwand und Team gesucht – nur für Lehrkräfte sichtbar, nicht für die gemeldete Person oder andere Schüler:innen.</p>
