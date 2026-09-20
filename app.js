@@ -75,7 +75,7 @@ function showImpressum(){
  </div>`);
 }
 
-function tile(icon,title,text,target){return`<a class="card tile"href="#${target}"><span class="emoji">${icon}</span>
+function tile(icon,title,text,target,farbe){return`<a class="card tile"style="border-left:4px solid ${farbe||"var(--line)"}"href="#${target}"><span class="emoji">${icon}</span>
 <strong>${title}</strong><small>${text}</small></a>`}
 function statusDot(s){return`<span class="dot ${s}"></span>`}
 function isApproved(){return profile?.status==="approved"}
@@ -2035,12 +2035,12 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  </div>
  ${pageHead("ÜBERSICHT","Unser Campus","Die wichtigsten Bereiche auf einen Blick.",newsAction)}
  <div class="grid grid-4">
- ${tile(" ","Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass")}
- ${tile(" ","Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt")}
- ${tile(" ","Campus-Forum","Austauschen, fragen, helfen und gemeinsam denken.","forum")}
- ${tile(" ","Projekte","Projektteams, Ziele, Fortschritt und Ergebnisse.","projekte")}
- ${tile(" ","Kompetenzwerkstatt","Kompetenzen sichtbar machen und entwickeln.","kompetenz")}
- ${tile(" ","Lernjournal","Lernweg, Reflexionen und nächste Schritte.","journal")}</div>
+ ${tile(" ","Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass","#1688cf")}
+ ${tile(" ","Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt","#e0a324")}
+ ${tile(" ","Campus-Forum","Austauschen, fragen, helfen und gemeinsam denken.","forum","#1a9b8e")}
+ ${tile(" ","Projekte","Projektteams, Ziele, Fortschritt und Ergebnisse.","projekte","#7c5cbf")}
+ ${tile(" ","Kompetenzwerkstatt","Kompetenzen sichtbar machen und entwickeln.","kompetenz","#3fa66a")}
+ ${tile(" ","Lernjournal","Lernweg, Reflexionen und nächste Schritte.","journal","#d24d76")}</div>
 </div>${footer()}`;
 }
 async function getRecentForumActivityCount(days){
