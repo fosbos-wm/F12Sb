@@ -2782,10 +2782,9 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  <div class="grid grid-4">
  ${tile(" ","Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass","#1688cf")}
  ${tile(" ","Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt","#e0a324")}
- ${tile(" ","Campus-Forum","Austauschen, fragen, helfen und gemeinsam denken.","forum","#1a9b8e")}
- ${tile(" ","Projekte","Projektteams, Ziele, Fortschritt und Ergebnisse.","projekte","#7c5cbf")}
- ${tile(" ","Kompetenzwerkstatt","Kompetenzen sichtbar machen und entwickeln.","kompetenz","#3fa66a")}
- ${tile(" ","Lernjournal","Lernweg, Reflexionen und nächste Schritte.","journal","#d24d76")}</div>
+ ${tile(" ","Resilienz & Respressi","Finde heraus, was dir gerade helfen könnte.","resilienz","#3fa66a")}
+ ${tile(" ","Campus-Kalender","Alle Termine der Klasse auf einen Blick.","kalender","#7c5cbf")}
+ ${tile(" ","Alternativer Leistungsnachweis","Check-out · K-Prim-Test.","leistungsnachweis","#d24d76")}</div>
 </div>${footer()}`;
 }
 async function getRecentForumActivityCount(days){
@@ -2970,13 +2969,13 @@ async function renderKompass(){
 Aufgaben</span></div><div class="card stat"><b>${projects.length}</b><span>Projekte</span></div><div class="card stat">
 <b>${profile?.role==="teacher"?"Lehrkraft":profile?.role==="admin"?"Admin":"Schüler/in"}</b><span>Rolle</span></div></div>
  <div class="grid grid-3"style="margin-top:12px">
- <button type="button"class="card tile-square"style="background:#fff;border:2px solid #4a90d9"onclick="openMeineAufgabenModal()">
+ <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #4a90d9"onclick="openMeineAufgabenModal()">
  <span class="emoji"></span><strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
  </button>
- <button type="button"class="card tile-square"style="background:#fff;border:2px solid #9b59b6"onclick="openProjektFristenModal()">
+ <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #9b59b6"onclick="openProjektFristenModal()">
  <span class="emoji"></span><strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
  </button>
- <button type="button"class="card tile-square"style="background:#fff;border:2px solid #1a9b8e"onclick="openAktuelleProjekteModal()">
+ <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #1a9b8e"onclick="openAktuelleProjekteModal()">
  <span class="emoji"></span><strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
  </button>
  </div>
@@ -3104,88 +3103,131 @@ async function renderFaecherUebersicht(){
  ${footer()}`;
 }
 
+const PP_ZEITSTRAHL_TAGE=[{date:"2026-09-16",lb:1,thema:"Formalia/Der Begriff Entwicklung",typ:"normal"},
+{date:"2026-09-18",lb:1,thema:"Begriff Entwicklung",typ:"normal"},
+{date:"2026-09-21",lb:1,thema:"Bedingungen der Entwicklung",typ:"normal"},
+{date:"2026-09-23",lb:1,thema:"Bedingungen der Entwicklung",typ:"normal"},
+{date:"2026-09-25",lb:1,thema:"Einstieg Psychoanalyse: Grundannahmen, Instanzen, Dynamiken",typ:"normal"},
+{date:"2026-09-28",lb:1,thema:"Das psychoanalytische Persönlichkeitsmodell",typ:"normal"},
+{date:"2026-09-30",lb:1,thema:"Ich-Stärke und Ich-Schwäche",typ:"normal"},
+{date:"2026-10-02",lb:1,thema:"Angst und Abwehr (Lernsituation „Carlas Diebstähle“)",typ:"normal"},
+{date:"2026-10-05",lb:1,thema:"Angst und Abwehr",typ:"normal"},
+{date:"2026-10-07",lb:1,thema:"Die Abwehrmechanismen",typ:"normal"},
+{date:"2026-10-09",lb:1,thema:"Psychosexuelle Entwicklung (orale und anale Phase)",typ:"normal"},
+{date:"2026-10-12",lb:1,thema:"Phallische Phase, Latenzperiode, genitale Phase",typ:"normal"},
+{date:"2026-10-14",lb:1,thema:"Entstehung seelischer Fehlentwicklungen, kritische Würdigung",typ:"normal"},
+{date:"2026-10-16",lb:1,thema:"Entwicklung im Lebenslauf – Theorie der Lebensspanne",typ:"normal"},
+{date:"2026-10-19",lb:1,thema:"Bindung und Entwicklung",typ:"normal"},
+{date:"2026-10-21",lb:1,thema:"Erstellen eines Erklärvideos",typ:"normal"},
+{date:"2026-10-23",lb:1,thema:"Präsentation und Besprechung der Videos I",typ:"normal"},
+{date:"2026-10-26",lb:1,thema:"Präsentation und Besprechung der Videos II",typ:"normal"},
+{date:"2026-10-28",lb:1,thema:"Sichere und unsichere Bindung",typ:"normal"},
+{date:"2026-10-30",lb:1,thema:"Sichere und unsichere Bindung",typ:"normal"},
+{date:"2026-11-09",lb:1,thema:"Förderung gelungener Bindung",typ:"normal"},
+{date:"2026-11-11",lb:1,thema:"Entwicklung im Jugendalter",typ:"normal"},
+{date:"2026-11-13",lb:1,thema:"Vulnerabilität und Resilienz",typ:"normal"},
+{date:"2026-11-16",lb:1,thema:"1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie",typ:"exam"},
+{date:"2026-11-20",lb:2,thema:"Begriff Persönlichkeit",typ:"normal"},
+{date:"2026-11-23",lb:2,thema:"Erhebung der Persönlichkeit",typ:"normal"},
+{date:"2026-11-25",lb:2,thema:"Big-Five-Modell",typ:"normal"},
+{date:"2026-11-27",lb:2,thema:"Big-Five-Modell",typ:"normal"},
+{date:"2026-11-30",lb:2,thema:"Menschenbild der personenzentrierten Theorie",typ:"normal"},
+{date:"2026-12-02",lb:2,thema:"Menschenbild der personenzentrierten Theorie",typ:"normal"},
+{date:"2026-12-04",lb:2,thema:"Aktualisierungstendenz",typ:"normal"},
+{date:"2026-12-07",lb:2,thema:"Bildung und Wirkung des Selbstkonzepts",typ:"normal"},
+{date:"2026-12-09",lb:2,thema:"1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit",typ:"exam"},
+{date:"2026-12-11",lb:2,thema:"Flexibilität des Selbstkonzepts/Abwehr",typ:"normal"},
+{date:"2026-12-14",lb:2,thema:"Organismischer Bewertungsprozess",typ:"normal"},
+{date:"2026-12-16",lb:2,thema:"Kongruenz und Inkongruenz",typ:"normal"},
+{date:"2026-12-18",lb:2,thema:"Entstehung psychischer Störungen",typ:"normal"},
+{date:"2026-12-21",lb:2,thema:"Bedeutung für die Erziehung",typ:"normal"},
+{date:"2026-12-23",lb:2,thema:"Die sozial-kognitive Theorie und Persönlichkeit",typ:"normal"},
+{date:"2027-01-11",lb:2,thema:"Identität oder Selbstverständnis eines Menschen",typ:"normal"},
+{date:"2027-01-13",lb:2,thema:"Identitätstypen nach Marcia",typ:"normal"},
+{date:"2027-01-15",lb:3,thema:"Grundlagen Sozialer Arbeit",typ:"normal"},
+{date:"2027-01-18",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
+{date:"2027-01-20",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
+{date:"2027-01-22",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
+{date:"2027-01-25",lb:3,thema:"Handlungskonzepte",typ:"normal"},
+{date:"2027-01-27",lb:3,thema:"Verhaltensorientiertes Konzept",typ:"normal"},
+{date:"2027-01-29",lb:3,thema:"Verhaltensmodifikation",typ:"normal"},
+{date:"2027-02-01",lb:3,thema:"Life-Modell – Transaktion",typ:"normal"},
+{date:"2027-02-03",lb:3,thema:"Anpassung",typ:"normal"},
+{date:"2027-02-05",lb:3,thema:"Nische und Habitat",typ:"normal"},
+{date:"2027-02-15",lb:3,thema:"Lebens-Stress",typ:"normal"},
+{date:"2027-02-17",lb:3,thema:"Methode für die Praxis",typ:"normal"},
+{date:"2027-02-19",lb:3,thema:"Fallbearbeitung Frau Müller",typ:"normal"},
+{date:"2027-02-22",lb:3,thema:"Kritische Würdigung Life-Modell",typ:"normal"},
+{date:"2027-02-24",lb:3,thema:"Thiersch – Lebenswelt",typ:"normal"},
+{date:"2027-02-26",lb:3,thema:"Thiersch – Dimensionen",typ:"normal"},
+{date:"2027-03-01",lb:3,thema:"Thiersch – Handlungsmaximen",typ:"normal"},
+{date:"2027-03-03",lb:3,thema:"Wiederholung/Prüfungsvorbereitung LB 3",typ:"normal"},
+{date:"2027-03-05",lb:3,thema:"2. Schulaufgabe: Soziale Arbeit",typ:"exam"},
+{date:"2027-03-08",lb:4,thema:"Soziale Kommunikation und Interaktion",typ:"normal"},
+{date:"2027-03-10",lb:4,thema:"Organon-Modell",typ:"normal"},
+{date:"2027-03-12",lb:4,thema:"Erfolgreiche und gestörte Kommunikation",typ:"normal"},
+{date:"2027-03-15",lb:4,thema:"Erstes Axiom (Watzlawick)",typ:"normal"},
+{date:"2027-03-17",lb:4,thema:"Zweites Axiom",typ:"normal"},
+{date:"2027-03-19",lb:4,thema:"Drittes Axiom",typ:"normal"},
+{date:"2027-04-05",lb:4,thema:"Viertes Axiom",typ:"normal"},
+{date:"2027-04-07",lb:4,thema:"Fünftes Axiom",typ:"normal"},
+{date:"2027-04-09",lb:4,thema:"Fallbearbeitung",typ:"normal"},
+{date:"2027-04-12",lb:4,thema:"Kommunikationstechniken",typ:"normal"},
+{date:"2027-04-14",lb:4,thema:"Kulturbedingte Unterschiede in der Kommunikation",typ:"normal"},
+{date:"2027-04-16",lb:4,thema:"Kommunikation und digitale Medien",typ:"normal"},
+{date:"2027-04-19",lb:4,thema:"Fachreferate: Vorbereitung/Recherche",typ:"normal"},
+{date:"2027-04-21",lb:4,thema:"Präsentationen der Fachreferate",typ:"normal"},
+{date:"2027-04-23",lb:4,thema:"Präsentationen der Fachreferate",typ:"normal"},
+{date:"2027-04-26",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
+{date:"2027-04-28",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"}
+];
+// ---- Horizontaler Zeitstrahl (rein informativ, nicht anklickbar) ----
+// Ein Punkt je Unterrichtstermin (Mo/Mi/Fr), farbig nach Lernbereich,
+// Prüfungen als Raute, "Heute" wandert automatisch mit dem Datum mit.
+function zeitstrahlPunktHTML(tag,istHeute){
+ const c=LERNBEREICH_FARBEN[tag.lb]||null;
+ const istExam=tag.typ==="exam";
+ const farbe=istExam?"#E24B4A":c?c.border:"#b8c4cc";
+ const punktStil=istExam
+  ?`width:18px;height:18px;border-radius:4px;transform:rotate(45deg);background:${farbe}`
+  :`width:${istHeute?14:11}px;height:${istHeute?14:11}px;border-radius:50%;background:${farbe}${istHeute?`;box-shadow:0 0 0 3px ${c?c.bg:"#eef1f3"}`:""}`;
+ const datum=fmtDateOnly(tag.date);
+ return`<div style="flex:0 0 84px;text-align:center;position:relative">
+ <div style="${punktStil};margin:${istExam?22:istHeute?24:26}px auto 8px;position:relative;z-index:1"></div>
+ <div style="font-size:10.5px;color:${istHeute?farbe:"var(--muted)"};font-weight:${istHeute?700:400}">${esc(datum)}</div>
+ <div style="font-size:11.5px;margin-top:3px;font-weight:${istHeute||istExam?700:400};line-height:1.25;color:${istExam?"#A32D2D":"inherit"}">${esc(tag.thema.length>34?tag.thema.slice(0,33)+"…":tag.thema)}</div>
+ </div>`;
+}
+function horizontalerZeitstrahlHTML(){
+ const heute=new Date().toISOString().slice(0,10);
+ let heuteIdx=PP_ZEITSTRAHL_TAGE.findIndex(t=>t.date>=heute);
+ if(heuteIdx===-1)heuteIdx=PP_ZEITSTRAHL_TAGE.length-1;
+ return`<div class="zeitstrahl-scroll"style="overflow-x:auto;padding:14px 4px 6px">
+ <div style="position:relative;min-width:${PP_ZEITSTRAHL_TAGE.length*84+40}px;padding:0 20px">
+ <div style="position:absolute;left:20px;right:20px;top:34px;height:2px;background:var(--line,#e2eaf0)"></div>
+ <div style="display:flex">
+ ${PP_ZEITSTRAHL_TAGE.map((tag,i)=>{
+  const istHeute=i===heuteIdx;
+  const marker=istHeute?`<div style="flex:0 0 0;position:relative;width:0"><div style="position:absolute;top:-2px;left:-1px;background:#E24B4A;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;transform:translateX(-50%)">Heute</div></div>`:"";
+  return marker+zeitstrahlPunktHTML(tag,istHeute);
+ }).join("")}
+ </div>
+ </div>
+ </div>
+ <div style="display:flex;gap:16px;flex-wrap:wrap;margin:10px 4px 0;font-size:11.5px;color:var(--muted)">
+ ${[1,2,3,4].map(n=>`<span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:50%;background:${LERNBEREICH_FARBEN[n].border};display:inline-block"></span>Lernbereich ${n}</span>`).join("")}
+ <span style="display:flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:3px;transform:rotate(45deg);background:#E24B4A;display:inline-block"></span>Kurzarbeit/Schulaufgabe</span>
+ </div>`;
+}
+
 async function renderFachDetail(){
  if(!activeFach)return await renderFaecherUebersicht();
  const fach=F12SB_FAECHER.find(f=>f.key===activeFach);
- const timeline=combinedTimeline(activeFach);
- const wochenItems=timeline.filter(t=>t.kind==="woche");
- const fortschritte=await Promise.all(wochenItems.map(async w=>({id:w.id,f:await getLehrplanFortschritt(w.id)})));
- const fortschrittMap={};fortschritte.forEach(x=>fortschrittMap[x.id]=x.f);
- const heute=new Date().toISOString().slice(0,10);
- const erledigtCount=wochenItems.filter(w=>fortschrittMap[w.id]?.abgeschlossen).length;
- const fortschrittProzent=wochenItems.length?Math.round(erledigtCount/wochenItems.length*100):0;
- const naechsteIdx=timeline.findIndex(item=>item.kind==="woche"&&!fortschrittMap[item.id]?.abgeschlossen);
  const taskcardLinks=await ladeTaskcardLinks();
 
  return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
- ${pageHead("LERNPFAD",fach?.label||"Fach",`Dein Weg durchs Schuljahr – ${erledigtCount} von ${wochenItems.length} Wochen geschafft.`,isTeacher()?`<button class="secondary"onclick="openLehrplanKlassenuebersicht('${activeFach}')"> Klassenübersicht</button>`:"")}
- <style>
- .lernpfad{position:relative;margin:20px 0 10px;padding-left:44px}
- .lp-linie-hinter{position:absolute;left:20px;top:6px;bottom:6px;width:5px;background:#e2eaf0;border-radius:3px}
- .lp-linie-vorne{position:absolute;left:20px;top:6px;width:5px;background:linear-gradient(180deg,#3fa66a,#5cc98a);border-radius:3px;transition:height .4s}
- .lp-node{position:relative;margin-bottom:20px}
- .lp-punkt{position:absolute;left:-44px;top:0;width:40px;height:40px;border-radius:50%;background:#fff;border:3px solid #b8c4cc;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;z-index:2;transition:.2s}
- .lp-punkt.lp-done{background:#3fa66a;border-color:#3fa66a;color:#fff}
- .lp-punkt.lp-projekt{border-color:#3fa66a;color:#3fa66a}
- .lp-punkt.lp-einzel{border-color:#e0a324;color:#e0a324}
- .lp-punkt.lp-aktuell{transform:scale(1.15);box-shadow:0 0 0 5px rgba(22,136,207,.25)}
- .lp-karte{background:#fff;border:1px solid var(--line,#e2eaf0);border-radius:14px;padding:14px 16px;cursor:pointer;transition:.15s}
- .lp-karte:hover{transform:translateX(4px);box-shadow:0 6px 16px rgba(23,56,79,.1)}
- .lp-karte-date{font-size:11px;color:var(--muted)}
- .lb-badge{font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;border:1.5px solid;white-space:nowrap}
- .lp-karte strong{display:block;font-size:13px;margin-top:2px}
- .lp-karte small{display:block;color:var(--muted);font-size:11px;margin-top:4px;line-height:1.4}
- .lp-typ-pill{margin-top:8px;display:inline-block;font-size:10px}
- .lp-legende{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;padding:10px 14px;background:#f7fafc;border-radius:10px;font-size:11px;color:var(--muted)}
- .lp-legende-item{display:flex;align-items:center;gap:6px}
- .lp-legende-dot{width:14px;height:14px;border-radius:50%;border:2px solid;display:inline-block;flex:0 0 auto}
- .lp-legende-raute{border-radius:4px;transform:rotate(45deg);width:12px;height:12px;font-size:7px;display:flex;align-items:center;justify-content:center}
- .lp-legende-raute i{transform:rotate(-45deg);font-style:normal}
- .lp-waypoint{position:relative;margin:26px 0}
- .lp-waypoint-punkt{position:absolute;left:-44px;top:0;width:40px;height:40px;border-radius:10px;background:var(--soft-blue);border:3px solid #4a90d9;display:flex;align-items:center;justify-content:center;font-size:17px;transform:rotate(45deg);z-index:2}
- .lp-waypoint-punkt span{transform:rotate(-45deg);display:block}
- .lp-waypoint-karte{background:var(--soft-blue);border-radius:12px;padding:10px 14px;font-size:12px;cursor:pointer;transition:.15s}
- .lp-waypoint-karte:hover{transform:translateX(4px)}
- .lp-waypoint-karte strong{display:block;font-size:12.5px}
- .lp-block-head{position:relative;margin:30px 0 14px;padding-left:2px}
- .lp-block-head::before{content:"";position:absolute;left:-44px;top:50%;width:24px;height:2px;background:#b8c4cc}
- .lp-block-head strong{font-size:13px;color:#17384f;text-transform:uppercase;letter-spacing:.03em}
- .lp-block-head small{color:var(--muted);margin-left:6px}
- @media(max-width:600px){.lernpfad{padding-left:38px}.lp-punkt,.lp-waypoint-punkt{left:-38px;width:34px;height:34px}.lp-block-head::before{left:-38px;width:20px}}
- </style>
- <div class="lp-legende">
- <span class="lp-legende-item"><span class="pill"style="background:#3fa66a;color:#fff;font-size:10px"> Projekt</span></span>
- <span class="lp-legende-item"><span class="pill"style="background:#e0a324;color:#fff;font-size:10px"> Einzelthema</span></span>
- </div>
- <div class="lp-legende"style="margin-top:6px">
- ${[1,2,3,4].map(n=>`<span class="lp-legende-item"><span class="lb-badge"style="background:${LERNBEREICH_FARBEN[n].bg};border-color:${LERNBEREICH_FARBEN[n].border};color:${LERNBEREICH_FARBEN[n].text}">Lernbereich ${n}</span></span>`).join("")}
- </div>
- <div class="lernpfad">
- <div class="lp-linie-hinter"></div>
- <div class="lp-linie-vorne"style="height:${fortschrittProzent}%"></div>
- ${(()=>{let lastBlock=null;return timeline.map((item,idx)=>{
- const block=findUnterrichtsblock(activeFach,item.start);
- let blockHeadHTML="";
- if(block&&block.id!==lastBlock){
- blockHeadHTML=`<div class="lp-block-head"><strong>${esc(block.titel)}</strong><small>${esc(block.stunden)} Std.</small></div>`;
- lastBlock=block.id;
- }
- const fortschritt=fortschrittMap[item.id]||{abgeschlossen:false};
- const aktuell=idx===naechsteIdx;
- return`${blockHeadHTML}<div class="lp-node">
- <div class="lp-punkt lp-${item.typ}${fortschritt.abgeschlossen?" lp-done":""}${aktuell?" lp-aktuell":""}">${fortschritt.abgeschlossen?"✓":item.typ==="projekt"?"":""}</div>
- <div class="lp-karte"style="border-top:4px solid ${lernbereichAkzentfarbe(item.lb)}"onclick="openWocheDetail('${activeFach}','${item.id}')">
- <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
- ${lernbereichBadgeHTML(item.lb)}
- <span class="lp-karte-date">${esc(fmtDateOnly(item.start))}–${esc(fmtDateOnly(item.end))}</span>
- </div>
- <strong>${esc(item.thema)}</strong>
- <small>${esc(item.planung.slice(0,90))}${item.planung.length>90?"…":""}</small>
- <span class="pill lp-typ-pill"style="background:${item.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${item.typ==="projekt"?" Projekt":" Einzelthema"}</span>
- </div>
- </div>`;
- }).join("")})()||`<div class="empty"><strong>Für dieses Fach ist noch kein Lernpfad hinterlegt.</strong>Sobald die Jahresplanung vorliegt, erscheinen hier die einzelnen Stationen.</div>`}
- </div>
+ ${pageHead("LERNPFAD",fach?.label||"Fach","Der Zeitstrahl zeigt, wann welches Thema drankommt – zum reinen Orientieren, nichts zum Anklicken.",isTeacher()?`<button class="secondary"onclick="openLehrplanKlassenuebersicht('${activeFach}')"> Klassenübersicht</button>`:"")}
+ ${horizontalerZeitstrahlHTML()}
  ${lernbereichKachelnHTML(taskcardLinks)}
  ${footer()}`;
 }
@@ -3381,11 +3423,11 @@ async function renderLernwerkstatt(){
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
  <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
- <a class="card tile"href="#faecher"style="background:#fff;border:2px solid #4a90d9;min-height:110px;margin-bottom:22px">
+ <a class="card tile"href="#faecher"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px">
  <span class="emoji"></span><strong style="font-size:16px">Fächer 12. Klasse</strong>
  <small>Lehrplan-Zeitstrahl je Fach: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
  </a>
- ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border:2px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
+ ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
 <strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
  ${footer()}`;
 }
@@ -6201,12 +6243,12 @@ async function renderForum(){
  const unread=await getUnreadMessageCount();
  return`${pageHead("GEMEINSCHAFT","Campus-Forum","Wähle einen Bereich: gemeinsamer Austausch im Forum oder persönliche Nachrichten.","")}
  <div class="grid grid-2"style="gap:18px;margin-top:4px">
- <a class="card tile"href="#forum-board"style="min-height:180px;background:#fff;border:2px solid #4a90d9">
+ <a class="card tile"href="#forum-board"style="min-height:180px;background:#fff;border-left:4px solid #4a90d9">
  <span class="emoji"></span>
  <strong>Forum</strong>
  <small>Gemeinsam denken, fragen, austauschen und unterstützen – für die ganze F12Sb sichtbar.</small>
  </a>
- <a class="card tile"href="#forum-nachrichten"style="min-height:180px;background:#fff;border:2px solid #1a9b8e">
+ <a class="card tile"href="#forum-nachrichten"style="min-height:180px;background:#fff;border-left:4px solid #1a9b8e">
  <span class="emoji"></span>
  <strong>Persönliche Nachrichten${unread?` <span class="badge">${unread}</span>`:""}</strong>
  <small>Schreibe direkt mit einem Schüler oder einer Lehrkraft – nur ihr beide seht die Unterhaltung.</small>
