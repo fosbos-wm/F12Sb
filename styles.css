@@ -70,7 +70,7 @@ main#content{flex:1;min-width:0;padding:28px 34px 60px;max-width:1500px}
 .hero h1{font-size:34px;color:var(--blue-dark);margin:8px 0}.hero p{color:var(--muted);max-width:700px;line-height:1.5}.badge{display:inline-block;background:#edf7e7;color:#5b842c;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;letter-spacing:.08em}
 .grid{display:grid;gap:12px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
-.card.tile{display:flex;flex-direction:column;gap:8px;min-height:130px}.tile .emoji{font-size:25px}.tile strong{font-size:15px;color:var(--blue-dark)}.tile small{font-size:12px;line-height:1.45;color:var(--muted)}
+.card.tile{display:flex;flex-direction:column;gap:8px;min-height:130px}.tile strong{font-size:15px;color:var(--blue-dark)}.tile small{font-size:12px;line-height:1.45;color:var(--muted)}.tile-label{font-size:10.5px;font-weight:700;letter-spacing:.04em;margin-top:4px;text-transform:uppercase}
 .tile-square{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;aspect-ratio:1/1;cursor:pointer;border:none;width:100%}
 .tile-square .emoji{font-size:26px}
 .tile-square strong{font-size:13px;color:var(--blue-dark)}

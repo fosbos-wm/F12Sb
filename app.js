@@ -75,8 +75,8 @@ function showImpressum(){
  </div>`);
 }
 
-function tile(icon,title,text,target,farbe){return`<a class="card tile"style="border-left:4px solid ${farbe||"var(--line)"}"href="#${target}"><span class="emoji">${icon}</span>
-<strong>${title}</strong><small>${text}</small></a>`}
+function tile(title,text,target,farbe,label){return`<a class="card tile"style="border-left:4px solid ${farbe||"var(--line)"}"href="#${target}">
+<strong>${title}</strong><small>${text}</small>${label?`<span class="tile-label"style="color:${farbe||"var(--muted)"}">${label}</span>`:""}</a>`}
 function statusDot(s){return`<span class="dot ${s}"></span>`}
 function isApproved(){return profile?.status==="approved"}
 function isTeacher(){return isApproved() && (profile?.role==="teacher"||profile?.role==="admin")}
@@ -722,7 +722,6 @@ $("logoutBtn").onclick=async()=>{
  try{await loadFirebase();await signOut(auth)}catch(e){console.error(e)}
 };
 $("menuBtn").onclick=()=>$("sidebar").classList.toggle("open");
-$("helpQuick").onclick=openHelpForm;
 $("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
 
 async function getCollection(name,sortField="createdAt",desc=true){
@@ -1292,7 +1291,7 @@ function lernbereichKachelnHTML(links){
   return`<div class="card"style="border-left:5px solid ${c.border};display:flex;flex-direction:column;gap:8px">
   <strong style="color:${c.text}">Lernbereich ${lb.num} · ${esc(lb.titel)}</strong>
   <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-  ${url?`<a class="primary"style="text-decoration:none;padding:9px 14px;border-radius:9px"href="${urlAttr}"target="_blank"rel="noopener">📋 TaskCard öffnen</a>`:`<small style="color:var(--muted)">Noch kein TaskCard-Link hinterlegt.</small>`}
+  ${url?`<a class="primary"style="text-decoration:none;padding:9px 14px;border-radius:9px"href="${urlAttr}"target="_blank"rel="noopener">TaskCard öffnen</a>`:`<small style="color:var(--muted)">Noch kein TaskCard-Link hinterlegt.</small>`}
   ${isTeacher()?`<button class="secondary"onclick="taskcardLinkBearbeiten('${lb.key}','${urlAttr}')">${url?"Link ändern":"＋ Link hinterlegen"}</button>`:""}
   </div>
   </div>`;
@@ -2780,11 +2779,11 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  </div>
  ${pageHead("ÜBERSICHT","Unser Campus","Die wichtigsten Bereiche auf einen Blick.",newsAction)}
  <div class="grid grid-4">
- ${tile(" ","Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass","#1688cf")}
- ${tile(" ","Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt","#e0a324")}
- ${tile(" ","Resilienz & Respressi","Finde heraus, was dir gerade helfen könnte.","resilienz","#3fa66a")}
- ${tile(" ","Campus-Kalender","Alle Termine der Klasse auf einen Blick.","kalender","#7c5cbf")}
- ${tile(" ","Alternativer Leistungsnachweis","Check-out · K-Prim-Test.","leistungsnachweis","#d24d76")}</div>
+ ${tile("Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass","#1688cf","PERSÖNLICH")}
+ ${tile("Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt","#e0a324","LERNEN")}
+ ${tile("Resilienz & Respressi","Finde heraus, was dir gerade helfen könnte.","resilienz","#3fa66a","WOHLBEFINDEN")}
+ ${tile("Campus-Kalender","Alle Termine der Klasse auf einen Blick.","kalender","#7c5cbf","ORGANISATION")}
+ ${tile("Alternativer Leistungsnachweis","Check-out · K-Prim-Test.","leistungsnachweis","#d24d76","PRÜFUNG")}</div>
 </div>${footer()}`;
 }
 async function getRecentForumActivityCount(days){
@@ -2970,13 +2969,13 @@ Aufgaben</span></div><div class="card stat"><b>${projects.length}</b><span>Proje
 <b>${profile?.role==="teacher"?"Lehrkraft":profile?.role==="admin"?"Admin":"Schüler/in"}</b><span>Rolle</span></div></div>
  <div class="grid grid-3"style="margin-top:12px">
  <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #4a90d9"onclick="openMeineAufgabenModal()">
- <span class="emoji"></span><strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
+ <strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
  </button>
  <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #9b59b6"onclick="openProjektFristenModal()">
- <span class="emoji"></span><strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
+ <strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
  </button>
  <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #1a9b8e"onclick="openAktuelleProjekteModal()">
- <span class="emoji"></span><strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
+ <strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
  </button>
  </div>
 </div>${footer()}`;
@@ -3095,9 +3094,10 @@ async function renderFaecherUebersicht(){
  <div class="grid grid-4">${F12SB_FAECHER.map(f=>{
  const wochen=LEHRPLAN_WOCHEN[f.key]||[];
  const c=personColor(f.key);
- return`<button class="card tile"style="background:${c.bg};border-left:4px solid ${c.border};text-align:left"onclick="openFach('${f.key}')">
- <strong style="font-size:15px;color:${c.text}">${f.label}</strong>
+ return`<button class="card tile"style="background:#fff;border-left:4px solid ${c.border};text-align:left"onclick="openFach('${f.key}')">
+ <strong style="font-size:15px">${f.label}</strong>
  <small style="display:block;margin-top:6px">${wochen.length?`${wochen.length} Lehrplan-Wochen hinterlegt`:"Lehrplan-Zeitstrahl folgt"}</small>
+ <span class="tile-label"style="color:${c.border}">FACH</span>
  </button>`;
  }).join("")}</div>
  ${footer()}`;
@@ -3424,11 +3424,12 @@ async function renderLernwerkstatt(){
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
  <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
  <a class="card tile"href="#faecher"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px">
- <span class="emoji"></span><strong style="font-size:16px">Fächer 12. Klasse</strong>
+ <strong style="font-size:16px">Fächer 12. Klasse</strong>
  <small>Lehrplan-Zeitstrahl je Fach: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
+ <span class="tile-label"style="color:#4a90d9">LEHRPLAN</span>
  </a>
- ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
-<strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
+ ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}">
+<strong>${x[1]}</strong><small>${x[2]}</small><span class="tile-label"style="color:${g.color}">${g.title}</span></a>`).join("")}</div>`).join("")}
  ${footer()}`;
 }
 
@@ -3452,7 +3453,7 @@ async function renderKollaborationsTools(){
  ["","Team gesucht","Pinnwand für Gruppenfindung: Wer sucht noch Mitstreiter:innen?","teamgesucht",true],
  ["✅","Gemeinsame Checkliste","Meilensteine im Projekt oder Praktikum gemeinsam abhaken.","checkliste",true]
  ];
- const toolTile=t=>`<a class="card tile"href="#${t[3]}"><span class="emoji">${t[0]}</span>
+ const toolTile=t=>`<a class="card tile"href="#${t[3]}">
 <strong>${t[1]}</strong><small>${t[2]}</small>${!t[4]?`<span class="badge"style="margin-top:8px">IN VORBEREITUNG</span>`:""}</a>`;
  return`${pageHead("ZUSAMMENARBEIT","Tools für Zusammenarbeit","Kostenlose, direkt in die F12Sb integrierte Tools für Gruppenarbeit, Brainstorming und Unterricht – ganz ohne externe Anmeldung.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>`)}
  <h3 style="margin:0 0 10px">🔴 Live im Unterricht</h3>
@@ -5101,7 +5102,7 @@ async function renderLernWerkzeuge(){
  ["","Glossar","Gemeinsames Nachschlagewerk für Fachbegriffe – von der Klasse befüllt.","glossar",true]
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lern-Werkzeuge","Kostenlose Werkzeuge fürs eigene Lernen – Wiederholen, Fokussieren und Nachschlagen.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>`)}
- <div class="grid grid-3">${tools.map(t=>`<a class="card tile"href="#${t[3]}"><span class="emoji">${t[0]}</span>
+ <div class="grid grid-3">${tools.map(t=>`<a class="card tile"href="#${t[3]}">
 <strong>${t[1]}</strong><small>${t[2]}</small></a>`).join("")}</div>
  ${footer()}`;
 }
