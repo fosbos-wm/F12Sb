@@ -10477,7 +10477,7 @@ Date().toISOString()})});await render()}catch(e){toast("Antwort konnte nicht ges
 function focusComment(id){setTimeout(()=>{const e=$("comment-"+id);if(e)
 {e.focus();e.scrollIntoView({behavior:"smooth",block:"center"});}},80)}
 async function deleteNews(id){
- if(!isAdmin()){toast("Nur der Admin kann News löschen.");return}
+ if(!isTeacher()){toast("Nur Lehrkräfte können News löschen.");return}
  if(!confirm("News wirklich löschen?"))return;
  try{await deleteDoc(doc(db,"news",id));await render();toast("News gelöscht.")}catch(e){console.error(e);toast("News konnte nicht gelöscht werden.")}
 }
