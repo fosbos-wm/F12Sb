@@ -3480,11 +3480,14 @@ async function renderLernwerkstatt(){
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
  <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
- <button type="button"class="card tile"onclick="openFach('paedagogik')"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px;text-align:left;width:100%">
- <strong style="font-size:16px">Pädagogik und Psychologie</strong>
- <small>Lehrplan-Zeitstrahl: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
+ <div class="card tile"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+ <button type="button"onclick="openFach('paedagogik')"style="background:none;border:none;padding:0;text-align:left;cursor:pointer;flex:1;min-width:0">
+ <strong style="font-size:16px;display:block">Pädagogik und Psychologie</strong>
+ <small style="display:block">Lehrplan-Zeitstrahl: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
  <span class="tile-label"style="color:#4a90d9">LEHRPLAN</span>
  </button>
+ <button type="button"class="secondary"onclick="go('ressourcen')"style="flex:0 0 auto;white-space:nowrap">Lernressourcen →</button>
+ </div>
  ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}">
 <strong>${x[1]}</strong><small>${x[2]}</small><span class="tile-label"style="color:${g.color}">${g.title}</span></a>`).join("")}</div>`).join("")}
  ${footer()}`;
