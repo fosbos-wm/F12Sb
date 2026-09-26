@@ -1309,6 +1309,20 @@ function lernbereichKachelnHTML(links){
   </div>
   </div>`;
  }).join("")}
+ </div>
+ <h3 style="margin:26px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--muted)"> TaskCards für die Prüfungen</h3>
+ <div class="grid grid-2"style="gap:12px">
+ ${(()=>{
+  const url=(links.pruefung||{}).url||"";
+  const urlAttr=esc(url).replace(/'/g,"&#39;");
+  return`<div class="card"style="border-left:5px solid #A32D2D;display:flex;flex-direction:column;gap:8px">
+  <strong style="color:#791F1F">Prüfungsvorbereitung</strong>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+  ${url?`<a class="primary"style="text-decoration:none;padding:9px 14px;border-radius:9px"href="${urlAttr}"target="_blank"rel="noopener">TaskCard öffnen</a>`:`<small style="color:var(--muted)">Noch kein TaskCard-Link hinterlegt.</small>`}
+  ${isTeacher()?`<button class="secondary"onclick="taskcardLinkBearbeiten('pruefung','${urlAttr}')">${url?"Link ändern":"＋ Link hinterlegen"}</button>`:""}
+  </div>
+  </div>`;
+ })()}
  </div>`;
 }
 async function taskcardLinkBearbeiten(lbKey,aktuell){
@@ -3233,7 +3247,7 @@ async function renderFachDetail(){
  const fach=F12SB_LEHRPLAN_FAECHER.find(f=>f.key===activeFach);
  const taskcardLinks=await ladeTaskcardLinks();
 
- return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
+ return`<button class="secondary"onclick="closeFach()">← Zurück</button>
  ${pageHead("LERNPFAD",fach?.label||"Fach","Der Zeitstrahl zeigt, wann welches Thema drankommt – zum reinen Orientieren, nichts zum Anklicken.",isTeacher()?`<button class="secondary"onclick="openLehrplanKlassenuebersicht('${activeFach}')"> Klassenübersicht</button>`:"")}
  ${horizontalerZeitstrahlHTML()}
  ${lernbereichKachelnHTML(taskcardLinks)}
