@@ -13,7 +13,7 @@ let currentUser=null, profile=null, unsubscribers=[];
 let activeBoardId=null;
 let activeFach=null;
 function openFach(fach){activeFach=fach;go("fach")}
-function closeFach(){activeFach=null;go("faecher")}
+function closeFach(){activeFach=null;go("lernwerkstatt")}
 window.openFach=openFach;window.closeFach=closeFach;
 
 function toast(t){const
@@ -2780,18 +2780,27 @@ async function miniKalenderHTML(){
  ];
  const istFerien=key=>ferienZeitraeume.some(([von,bis])=>key>=von&&key<=bis);
  const today=new Date();today.setHours(0,0,0,0);
+ // Immer die AKTUELLE Kalenderwoche, Montag bis Freitag (5 Tage) –
+ // wandert von selbst jede Woche mit dem heutigen Datum weiter.
  const monday=new Date(today);monday.setDate(today.getDate()-((today.getDay()+6)%7));
- const days=Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return d});
+ const days=Array.from({length:5},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return d});
  const dateKey=d=>d.toISOString().slice(0,10);
  const eventDates=new Set(events.map(e=>String(e.start||e.date||"").slice(0,10)));
  const birthdayDates=new Set(birthdayEvents.map(e=>String(e.start||"").slice(0,10)));
- const wt=["Mo","Di","Mi","Do","Fr","Sa","So"];
+ const wt=["Mo","Di","Mi","Do","Fr"];
+ // Der nächste anstehende Termin (heute oder später), unabhängig davon,
+ // ob er noch in diese Woche fällt.
+ let naechster=null;
+ try{naechster=await getUpcomingCampusCalendarEvent();}catch(e){}
+ const naechsterDatum=naechster?String(naechster.start||naechster.date||"").slice(0,10):null;
+ const naechsterText=naechster?`${esc(naechster.title||naechster.name||"Termin")} · ${naechsterDatum?fmtDateOnly(naechsterDatum):""}`:"Aktuell kein anstehender Termin";
  return `<a href="#kalender"class="mini-kalender">
  ${days.map((d,i)=>{const key=dateKey(d);const isToday=key===dateKey(today);
  const ferien=istFerien(key),geburtstag=birthdayDates.has(key),termin=eventDates.has(key);
  return `<div class="mini-kalender-day${isToday?" mini-kalender-today":""}${ferien?" mini-kalender-ferien":""}"><small>${wt[i]}</small><strong>${d.getDate()}</strong>${geburtstag?`<span class="mini-kalender-dot mini-kalender-dot-pink"></span>`:termin?`<span class="mini-kalender-dot"></span>`:""}</div>`;}).join("")}
  </a>
- <small style="display:block;margin-top:6px;color:var(--muted);font-size:10px">Zum vollständigen Campus-Kalender →</small>`;
+ <small style="display:block;margin-top:8px;font-weight:700;color:var(--ink)">${naechsterText}</small>
+ <small style="display:block;margin-top:2px;color:var(--muted);font-size:10px">Zum vollständigen Campus-Kalender →</small>`;
 }
 async function renderStart(){
  let tasks=[],projects=[],news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
@@ -3471,11 +3480,11 @@ async function renderLernwerkstatt(){
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
  <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
- <a class="card tile"href="#faecher"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px">
- <strong style="font-size:16px">Fächer 12. Klasse</strong>
- <small>Lehrplan-Zeitstrahl je Fach: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
+ <button type="button"class="card tile"onclick="openFach('paedagogik')"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px;text-align:left;width:100%">
+ <strong style="font-size:16px">Pädagogik und Psychologie</strong>
+ <small>Lehrplan-Zeitstrahl: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
  <span class="tile-label"style="color:#4a90d9">LEHRPLAN</span>
- </a>
+ </button>
  ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}">
 <strong>${x[1]}</strong><small>${x[2]}</small><span class="tile-label"style="color:${g.color}">${g.title}</span></a>`).join("")}</div>`).join("")}
  ${footer()}`;
