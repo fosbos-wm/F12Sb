@@ -1118,11 +1118,24 @@ async function renderKlassenteam(){
 // STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F12Sb
 // ============================================================
 
-// Fächer der FOS 12 Sozialwesen. "Sozialwirtschaft und Recht" läuft als
-// zweijähriges Profilfach weiter. Die beiden frei gewählten Fächer der
-// Schule erscheinen als "Wahlpflichtfach 1/2" (echte Fachbezeichnung je
-// nach Wahl der Schüler:innen unterschiedlich).
+// Fächer der FOS 12 Sozialwesen – für Noteneintrag, Halbjahresergebnis
+// und Wochenplanung wird über ALLE Fächer eingetragen. "Sozialwirtschaft
+// und Recht" läuft als zweijähriges Profilfach weiter. Die beiden frei
+// gewählten Fächer der Schule erscheinen als "Wahlpflichtfach 1/2" (echte
+// Fachbezeichnung je nach Wahl der Schüler:innen unterschiedlich).
 const F12SB_FAECHER=[
+ {key:"deutsch",label:"Deutsch"},
+ {key:"englisch",label:"Englisch"},
+ {key:"geschichte",label:"Geschichte/Sozialkunde"},
+ {key:"mathematik",label:"Mathematik"},
+ {key:"paedagogik",label:"Pädagogik/Psychologie"},
+ {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht"},
+ {key:"wahlpflicht1",label:"Wahlpflichtfach 1"},
+ {key:"wahlpflicht2",label:"Wahlpflichtfach 2"}
+];
+// Nur für den Lehrplan-Zeitstrahl (Fächer 12. Klasse): dort ist aktuell
+// ausschließlich Pädagogik/Psychologie hinterlegt.
+const F12SB_LEHRPLAN_FAECHER=[
  {key:"paedagogik",label:"Pädagogik/Psychologie"}
 ];
 
@@ -1136,58 +1149,58 @@ const F12SB_FAECHER=[
 // erweiterbare Struktur angelegt.
 const LEHRPLAN_WOCHEN={
  paedagogik:[ {id:"pp12_01",start:"2026-09-16",end:"2026-09-18",lb:"LB 1",thema:"Formalia und der Begriff Entwicklung",typ:"einzel",
- planung:"Formalia/ Der Begriff Entwicklung; Begriff Entwicklung."},
- {id:"pp12_02",start:"2026-09-21",end:"2026-09-25",lb:"LB 1",thema:"Bedingungen der Entwicklung, Einstieg Psychoanalyse",typ:"einzel",
- planung:"Bedingungen der Entwicklung; Bedingungen der Entwicklung; Einstieg Psychoanalyse/ Grundannahmen, Instanzen und Dynamiken."},
- {id:"pp12_03",start:"2026-09-28",end:"2026-10-02",lb:"LB 1",thema:"Psychoanalytisches Persönlichkeitsmodell, Ich-Stärke",typ:"einzel",
- planung:"Das psychoanalytische Persönlichkeitsmodell; Ich-Stärke und Ich-Schwäche; Angst und Abwehr (Lernsituation „Carlas Diebstähle“)."},
- {id:"pp12_04",start:"2026-10-05",end:"2026-10-09",lb:"LB 1",thema:"Abwehrmechanismen und psychosexuelle Entwicklung",typ:"einzel",
- planung:"Angst und Abwehr; Die Abwehrmechanismen; Psychosexuelle Entwicklung (orale und anale Phase)."},
- {id:"pp12_05",start:"2026-10-12",end:"2026-10-16",lb:"LB 1",thema:"Phallische Phase bis Genitale Phase, Fehlentwicklungen",typ:"einzel",
- planung:"Phallische Phase, Latenzperiode, genitale Phase (Puzzle); Entstehung von seelischen Fehlentwicklungen/kritische Würdigung der psychoanalytischen Theorie; Entwicklung im Lebenslauf – die Theorie der Lebensspanne."},
- {id:"pp12_06",start:"2026-10-19",end:"2026-10-23",lb:"LB 1",thema:"Bindung und Entwicklung, Erklärvideo (Produktphase)",typ:"einzel",
- planung:"Bindung und Entwicklung; Erstellen eines Erklärvideos; Präsentation und Besprechung der Videos I.",produktphase:true},
- {id:"pp12_07",start:"2026-10-26",end:"2026-10-30",lb:"LB 1",thema:"Videopräsentationen, sichere/unsichere Bindung",typ:"einzel",
- planung:"Präsentation und Besprechung der Videos II; Sichere und unsichere Bindung; Sichere und unsichere Bindung.",produktphase:true},
- {id:"pp12_08",start:"2026-11-09",end:"2026-11-13",lb:"LB 1",thema:"Bindungsförderung, Jugendalter, Resilienz",typ:"einzel",
- planung:"Förderung gelungener Bindung; Entwicklung im Jugendalter; Vulnerabilität und Resilienz."},
- {id:"pp12_09",start:"2026-11-16",end:"2026-11-20",lb:"LB 2",thema:"1. Kurzarbeit – Start LB 2: Persönlichkeit",typ:"einzel",
- planung:"1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie; Begriff Persönlichkeit.",leistungsnachweis:true},
- {id:"pp12_10",start:"2026-11-23",end:"2026-11-27",lb:"LB 2",thema:"Persönlichkeitserhebung und Big-Five-Modell",typ:"einzel",
- planung:"Erhebung der Persönlichkeit; Big-Five-Modell; Big-Five-Modell."},
- {id:"pp12_11",start:"2026-11-30",end:"2026-12-04",lb:"LB 2",thema:"Personenzentrierte Theorie und Aktualisierungstendenz",typ:"einzel",
- planung:"Menschenbild der personenzentrierten Theorie; Menschenbild der personenzentrierten Theorie; Aktualisierungstendenz."},
- {id:"pp12_12",start:"2026-12-07",end:"2026-12-11",lb:"LB 2",thema:"Selbstkonzept und 1. Schulaufgabe",typ:"einzel",
- planung:"Bildung und Wirkung des Selbstkonzepts; 1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit; Flexibilität des Selbstkonzepts/Abwehr.",leistungsnachweis:true},
- {id:"pp12_13",start:"2026-12-14",end:"2026-12-18",lb:"LB 2",thema:"Bewertungsprozess, Kongruenz, psychische Störungen",typ:"einzel",
- planung:"Organismischer Bewertungsprozess; Kongruenz und Inkongruenz; Entstehung psychischer Störungen."},
- {id:"pp12_14",start:"2026-12-21",end:"2026-12-23",lb:"LB 2",thema:"Bedeutung für Erziehung, sozial-kognitive Theorie",typ:"einzel",
- planung:"Bedeutung für die Erziehung; Die sozial-kognitive Theorie und Persönlichkeit."},
+ planung:"Formalia/Der Begriff Entwicklung; Begriff Entwicklung."},
+ {id:"pp12_02",start:"2026-09-21",end:"2026-09-25",lb:"LB 1",thema:"Bedingungen der Entwicklung",typ:"einzel",
+ planung:"Bedingungen der Entwicklung; Bedingungen der Entwicklung; Bedingungen der Entwicklung."},
+ {id:"pp12_03",start:"2026-09-28",end:"2026-10-02",lb:"LB 1",thema:"Einstieg Psychoanalyse und Persönlichkeitsmodell",typ:"einzel",
+ planung:"Einstieg Psychoanalyse: Grundannahmen, Instanzen, Dynamiken; Das psychoanalytische Persönlichkeitsmodell; Ich-Stärke und Ich-Schwäche."},
+ {id:"pp12_04",start:"2026-10-05",end:"2026-10-09",lb:"LB 1",thema:"Angst, Abwehr und Abwehrmechanismen",typ:"einzel",
+ planung:"Angst und Abwehr (Lernsituation „Carlas Diebstähle“); Angst und Abwehr; Die Abwehrmechanismen."},
+ {id:"pp12_05",start:"2026-10-12",end:"2026-10-16",lb:"LB 1",thema:"Psychosexuelle Entwicklung bis Fehlentwicklungen",typ:"einzel",
+ planung:"Psychosexuelle Entwicklung (orale und anale Phase); Phallische Phase, Latenzperiode, genitale Phase; Entstehung seelischer Fehlentwicklungen, kritische Würdigung."},
+ {id:"pp12_06",start:"2026-10-19",end:"2026-10-23",lb:"LB 1",thema:"Theorie der Lebensspanne, Bindung, Erklärvideo (Produktphase)",typ:"einzel",
+ planung:"Entwicklung im Lebenslauf – Theorie der Lebensspanne; Bindung und Entwicklung; Erstellen eines Erklärvideos.",produktphase:true},
+ {id:"pp12_07",start:"2026-10-26",end:"2026-10-30",lb:"LB 1",thema:"Sichere/unsichere Bindung, Förderung gelungener Bindung",typ:"einzel",
+ planung:"Sichere und unsichere Bindung; Sichere und unsichere Bindung; Förderung gelungener Bindung."},
+ {id:"pp12_08",start:"2026-11-09",end:"2026-11-13",lb:"LB 1",thema:"Jugendalter, Resilienz – 1. Kurzarbeit",typ:"einzel",
+ planung:"Entwicklung im Jugendalter; Vulnerabilität und Resilienz; 1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie.",leistungsnachweis:true},
+ {id:"pp12_09",start:"2026-11-16",end:"2026-11-20",lb:"LB 2",thema:"Begriff Persönlichkeit und Erhebung der Persönlichkeit",typ:"einzel",
+ planung:"Begriff Persönlichkeit; Erhebung der Persönlichkeit."},
+ {id:"pp12_10",start:"2026-11-23",end:"2026-11-27",lb:"LB 2",thema:"Big-Five-Modell und personenzentrierte Theorie",typ:"einzel",
+ planung:"Big-Five-Modell; Big-Five-Modell; Menschenbild der personenzentrierten Theorie."},
+ {id:"pp12_11",start:"2026-11-30",end:"2026-12-04",lb:"LB 2",thema:"Menschenbild, Aktualisierungstendenz, Selbstkonzept",typ:"einzel",
+ planung:"Menschenbild der personenzentrierten Theorie; Aktualisierungstendenz; Bildung und Wirkung des Selbstkonzepts."},
+ {id:"pp12_12",start:"2026-12-07",end:"2026-12-11",lb:"LB 2",thema:"1. Schulaufgabe – Selbstkonzept und Bewertungsprozess",typ:"einzel",
+ planung:"1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit; Flexibilität des Selbstkonzepts/Abwehr; Organismischer Bewertungsprozess.",leistungsnachweis:true},
+ {id:"pp12_13",start:"2026-12-14",end:"2026-12-18",lb:"LB 2",thema:"Kongruenz, psychische Störungen, Bedeutung für Erziehung",typ:"einzel",
+ planung:"Kongruenz und Inkongruenz; Entstehung psychischer Störungen; Bedeutung für die Erziehung."},
+ {id:"pp12_14",start:"2026-12-21",end:"2026-12-23",lb:"LB 2",thema:"Sozial-kognitive Theorie, Identität",typ:"einzel",
+ planung:"Die sozial-kognitive Theorie und Persönlichkeit; Identität oder Selbstverständnis eines Menschen."},
  {id:"pp12_15",start:"2027-01-11",end:"2027-01-15",lb:"LB 3",thema:"Identität nach Marcia – Start LB 3: Soziale Arbeit",typ:"einzel",
- planung:"Identität oder Selbstverständnis eines Menschen; Identitätstypen nach Marcia; Grundlagen Sozialer Arbeit."},
- {id:"pp12_16",start:"2027-01-18",end:"2027-01-22",lb:"LB 3",thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"einzel",
- planung:"Aufgabenbereiche der Sozialen Arbeit; Aufgabenbereiche der Sozialen Arbeit; Aufgabenbereiche der Sozialen Arbeit."},
- {id:"pp12_17",start:"2027-01-25",end:"2027-01-29",lb:"LB 3",thema:"Handlungskonzepte und verhaltensorientiertes Konzept",typ:"einzel",
- planung:"Handlungskonzepte; Verhaltensorientiertes Konzept; Verhaltensmodifikation."},
- {id:"pp12_18",start:"2027-02-01",end:"2027-02-05",lb:"LB 3",thema:"Life-Modell: Transaktion, Anpassung, Nische/Habitat",typ:"einzel",
- planung:"Life-Modell – Transaktion; Anpassung; Nische und Habitat."},
- {id:"pp12_19",start:"2027-02-15",end:"2027-02-19",lb:"LB 3",thema:"Lebens-Stress und Methode für die Praxis",typ:"einzel",
- planung:"Lebens-Stress; Methode für die Praxis; Fallbearbeitung Frau Müller."},
- {id:"pp12_20",start:"2027-02-22",end:"2027-02-26",lb:"LB 3",thema:"Fallbearbeitung, Life-Modell, Thiersch: Lebenswelt",typ:"einzel",
- planung:"Kritische Würdigung Life-Modell; Thiersch – Lebenswelt; Thiersch – Dimensionen."},
- {id:"pp12_21",start:"2027-03-01",end:"2027-03-05",lb:"LB 3",thema:"Thiersch: Handlungsmaximen – 2. Schulaufgabe",typ:"einzel",
- planung:"Thiersch – Handlungsmaximen; Wiederholung/Prüfungsvorbereitung LB 3; 2. Schulaufgabe: Soziale Arbeit.",leistungsnachweis:true},
- {id:"pp12_22",start:"2027-03-08",end:"2027-03-12",lb:"LB 4",thema:"Start LB 4: Kommunikation, Organon-Modell",typ:"einzel",
- planung:"Soziale Kommunikation und Interaktion; Organon-Modell; Erfolgreiche und gestörte Kommunikation."},
- {id:"pp12_23",start:"2027-03-15",end:"2027-03-19",lb:"LB 4",thema:"Erstes bis drittes Axiom (Watzlawick)",typ:"einzel",
- planung:"Erstes Axiom (Watzlawick); Zweites Axiom; Drittes Axiom."},
- {id:"pp12_24",start:"2027-04-05",end:"2027-04-09",lb:"LB 4",thema:"Viertes und fünftes Axiom",typ:"einzel",
- planung:"Viertes Axiom; Fünftes Axiom; Fallbearbeitung."},
- {id:"pp12_25",start:"2027-04-12",end:"2027-04-16",lb:"LB 4",thema:"Fallbearbeitung, Kommunikationstechniken, digitale Medien",typ:"einzel",
- planung:"Kommunikationstechniken; Kulturbedingte Unterschiede in der Kommunikation; Kommunikation und digitale Medien."},
- {id:"pp12_26",start:"2027-04-19",end:"2027-04-23",lb:"LB 4",thema:"Kulturelle Unterschiede – Fachreferate",typ:"einzel",
- planung:"Fachreferate: Vorbereitung/Recherche; Präsentationen der Fachreferate; Präsentationen der Fachreferate.",produktphase:true},
- {id:"pp12_27",start:"2027-04-26",end:"2027-04-28",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung LB 1–4",typ:"einzel",
+ planung:"Identitätstypen nach Marcia; Grundlagen Sozialer Arbeit; Aufgabenbereiche der Sozialen Arbeit."},
+ {id:"pp12_16",start:"2027-01-18",end:"2027-01-22",lb:"LB 3",thema:"Aufgabenbereiche und Handlungskonzepte Sozialer Arbeit",typ:"einzel",
+ planung:"Aufgabenbereiche der Sozialen Arbeit; Aufgabenbereiche der Sozialen Arbeit; Handlungskonzepte."},
+ {id:"pp12_17",start:"2027-01-25",end:"2027-01-29",lb:"LB 3",thema:"Verhaltensorientiertes Konzept, Life-Modell",typ:"einzel",
+ planung:"Verhaltensorientiertes Konzept; Verhaltensmodifikation; Life-Modell – Transaktion."},
+ {id:"pp12_18",start:"2027-02-01",end:"2027-02-05",lb:"LB 3",thema:"Anpassung, Nische/Habitat, Lebens-Stress",typ:"einzel",
+ planung:"Anpassung; Nische und Habitat; Lebens-Stress."},
+ {id:"pp12_19",start:"2027-02-15",end:"2027-02-19",lb:"LB 3",thema:"Methode für die Praxis, Fallbearbeitung, Life-Modell",typ:"einzel",
+ planung:"Methode für die Praxis; Fallbearbeitung Frau Müller; Kritische Würdigung Life-Modell."},
+ {id:"pp12_20",start:"2027-02-22",end:"2027-02-26",lb:"LB 3",thema:"Thiersch: Lebenswelt, Dimensionen, Handlungsmaximen",typ:"einzel",
+ planung:"Thiersch – Lebenswelt; Thiersch – Dimensionen; Thiersch – Handlungsmaximen."},
+ {id:"pp12_21",start:"2027-03-01",end:"2027-03-05",lb:"LB 4",thema:"2. Schulaufgabe – Start LB 4: Kommunikation",typ:"einzel",
+ planung:"Wiederholung/Prüfungsvorbereitung LB 3; 2. Schulaufgabe: Soziale Arbeit; Soziale Kommunikation und Interaktion.",leistungsnachweis:true},
+ {id:"pp12_22",start:"2027-03-08",end:"2027-03-12",lb:"LB 4",thema:"Organon-Modell, erfolgreiche/gestörte Kommunikation, erstes Axiom",typ:"einzel",
+ planung:"Organon-Modell; Erfolgreiche und gestörte Kommunikation; Erstes Axiom (Watzlawick)."},
+ {id:"pp12_23",start:"2027-03-15",end:"2027-03-19",lb:"LB 4",thema:"Zweites bis viertes Axiom",typ:"einzel",
+ planung:"Zweites Axiom; Drittes Axiom; Viertes Axiom."},
+ {id:"pp12_24",start:"2027-04-05",end:"2027-04-09",lb:"LB 4",thema:"Fünftes Axiom, Fallbearbeitung, Kommunikationstechniken",typ:"einzel",
+ planung:"Fünftes Axiom; Fallbearbeitung; Kommunikationstechniken."},
+ {id:"pp12_25",start:"2027-04-12",end:"2027-04-16",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung",typ:"einzel",
+ planung:"Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4.",review:true},
+ {id:"pp12_26",start:"2027-04-19",end:"2027-04-23",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung",typ:"einzel",
+ planung:"Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4.",review:true},
+ {id:"pp12_27",start:"2027-04-26",end:"2027-04-28",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung",typ:"einzel",
  planung:"Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4.",review:true}
  ],
  deutsch:[],englisch:[],geschichte:[],mathematik:[],sozialwirtschaft:[],wahlpflicht1:[],wahlpflicht2:[]
@@ -1197,32 +1210,32 @@ const LEHRPLAN_WOCHEN={
 // (lehrplanplus.bayern.de, LB 1–4). Lehrkräfte sehen diese als Vorschlag
 // beim erstmaligen Anlegen eines Auftrags und können sie frei anpassen.
 const LEHRPLAN_ZIELE_VORSCHLAG={ pp12_01:["Ich kann den Begriff Entwicklung definieren und den formalen Aufbau des Lernbereichs einordnen."],
- pp12_02:["Ich kann zentrale Bedingungen von Entwicklung (Anlage, Umwelt, Selbststeuerung) erläutern und die Grundannahmen der Psychoanalyse (Instanzenmodell: Es, Ich, Über-Ich) erklären."],
- pp12_03:["Ich kann das psychoanalytische Persönlichkeitsmodell erklären und Ich-Stärke von Ich-Schwäche unterscheiden."],
- pp12_04:["Ich kann zentrale Abwehrmechanismen benennen und die psychosexuellen Entwicklungsphasen nach Freud (oral, anal) beschreiben."],
- pp12_05:["Ich kann die weiteren psychosexuellen Phasen (phallisch, Latenz, genital) beschreiben, die Entstehung seelischer Fehlentwicklungen erklären und die psychoanalytische Theorie kritisch würdigen."],
- pp12_06:["Ich kann den Zusammenhang von Bindung und Entwicklung erläutern und mein Wissen in einem eigenen Erklärvideo aufbereiten."],
- pp12_07:["Ich kann Erklärvideos fachlich einordnen und sichere von unsicherer Bindung unterscheiden."],
- pp12_08:["Ich kann Maßnahmen zur Förderung gelungener Bindung benennen und Vulnerabilität sowie Resilienz im Jugendalter erläutern."],
- pp12_09:["Ich kann die zentralen Inhalte von LB 1 (Entwicklung) in der Kurzarbeit anwenden und den Begriff Persönlichkeit definieren."],
- pp12_10:["Ich kann Methoden zur Erhebung von Persönlichkeit benennen und das Big-Five-Modell mit seinen Dimensionen erklären."],
- pp12_11:["Ich kann das Menschenbild der personenzentrierten Theorie nach Rogers erläutern und den Begriff Aktualisierungstendenz erklären."],
- pp12_12:["Ich kann die Bildung und Wirkung des Selbstkonzepts beschreiben und die Inhalte aus Entwicklung/Persönlichkeit in der Schulaufgabe anwenden."],
- pp12_13:["Ich kann den organismischen Bewertungsprozess sowie Kongruenz und Inkongruenz nach Rogers erklären und auf die Entstehung psychischer Störungen beziehen."],
- pp12_14:["Ich kann die Bedeutung der personenzentrierten und der sozial-kognitiven Theorie für die Erziehung erläutern."],
- pp12_15:["Ich kann die Identitätstypen nach Marcia unterscheiden und Grundlagen der Sozialen Arbeit benennen."],
- pp12_16:["Ich kann zentrale Aufgabenbereiche der Sozialen Arbeit erläutern."],
- pp12_17:["Ich kann Handlungskonzepte Sozialer Arbeit erläutern, insbesondere das verhaltensorientierte Konzept."],
- pp12_18:["Ich kann das Life-Modell (Transaktion, Anpassung, Nische und Habitat) auf einen Praxisfall beziehen."],
- pp12_19:["Ich kann den Begriff Lebens-Stress erläutern und Methoden für die Praxis Sozialer Arbeit anwenden."],
- pp12_20:["Ich kann einen Praxisfall mithilfe des Life-Modells analysieren und Thierschs Konzept der Lebensweltorientierung erläutern."],
- pp12_21:["Ich kann Thierschs Handlungsmaximen erläutern und die Inhalte aus Sozialer Arbeit in der Schulaufgabe anwenden."],
- pp12_22:["Ich kann soziale Kommunikation und Interaktion definieren und das Organon-Modell nach Bühler erklären."],
- pp12_23:["Ich kann erfolgreiche von gestörter Kommunikation unterscheiden und das erste bis dritte Axiom nach Watzlawick erläutern."],
- pp12_24:["Ich kann das vierte und fünfte Axiom von Watzlawick erläutern und an Beispielen erkennen."],
- pp12_25:["Ich kann Kommunikationstechniken auf eine Fallbearbeitung anwenden und Chancen/Risiken digitaler Medien für Kommunikation einschätzen."],
- pp12_26:["Ich kann kulturbedingte Unterschiede in der Kommunikation erläutern und mein Fachreferat strukturiert präsentieren."],
- pp12_27:["Ich kann die zentralen Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."]
+ pp12_02:["Ich kann zentrale Bedingungen von Entwicklung (Anlage, Umwelt, Selbststeuerung) erläutern."],
+ pp12_03:["Ich kann die Grundannahmen der Psychoanalyse (Instanzenmodell: Es, Ich, Über-Ich) sowie das psychoanalytische Persönlichkeitsmodell erklären und Ich-Stärke von Ich-Schwäche unterscheiden."],
+ pp12_04:["Ich kann das Zusammenspiel von Angst und Abwehr an einem Fallbeispiel analysieren und zentrale Abwehrmechanismen benennen."],
+ pp12_05:["Ich kann die psychosexuellen Entwicklungsphasen nach Freud beschreiben, die Entstehung seelischer Fehlentwicklungen erklären und die psychoanalytische Theorie kritisch würdigen."],
+ pp12_06:["Ich kann Entwicklung als lebenslangen Prozess (Theorie der Lebensspanne) beschreiben, den Zusammenhang von Bindung und Entwicklung erläutern und mein Wissen in einem eigenen Erklärvideo aufbereiten."],
+ pp12_07:["Ich kann sichere und unsichere Bindung unterscheiden und Maßnahmen zur Förderung gelungener Bindung benennen."],
+ pp12_08:["Ich kann die Entwicklung im Jugendalter sowie Vulnerabilität und Resilienz erläutern und die zentralen Inhalte von LB 1 in der Kurzarbeit anwenden."],
+ pp12_09:["Ich kann den Begriff Persönlichkeit definieren und Methoden zur Erhebung von Persönlichkeit benennen."],
+ pp12_10:["Ich kann das Big-Five-Modell erklären und das Menschenbild der personenzentrierten Theorie nach Rogers einordnen."],
+ pp12_11:["Ich kann das Menschenbild der personenzentrierten Theorie, den Begriff Aktualisierungstendenz sowie Bildung und Wirkung des Selbstkonzepts erklären."],
+ pp12_12:["Ich kann die Inhalte aus Entwicklung/Persönlichkeit in der Schulaufgabe anwenden und die Flexibilität des Selbstkonzepts sowie den organismischen Bewertungsprozess erklären."],
+ pp12_13:["Ich kann Kongruenz und Inkongruenz nach Rogers erklären und auf die Entstehung psychischer Störungen sowie die Bedeutung für die Erziehung beziehen."],
+ pp12_14:["Ich kann die Bedeutung der sozial-kognitiven Theorie für die Erziehung erläutern und den Begriff Identität erklären."],
+ pp12_15:["Ich kann die Identitätstypen nach Marcia unterscheiden und Grundlagen sowie Aufgabenbereiche der Sozialen Arbeit benennen."],
+ pp12_16:["Ich kann zentrale Aufgabenbereiche und ein Handlungskonzept der Sozialen Arbeit erläutern."],
+ pp12_17:["Ich kann das verhaltensorientierte Konzept Sozialer Arbeit erklären und Verhaltensmodifikation sowie das Life-Modell auf einen Fall beziehen."],
+ pp12_18:["Ich kann Anpassung sowie die Begriffe Nische, Habitat und Lebens-Stress im Kontext Sozialer Arbeit erläutern."],
+ pp12_19:["Ich kann eine Methode für die Praxis anwenden und einen Praxisfall mithilfe des Life-Modells analysieren."],
+ pp12_20:["Ich kann Thierschs Konzept der Lebensweltorientierung mit seinen Dimensionen und Handlungsmaximen erläutern und auf einen Fall anwenden."],
+ pp12_21:["Ich kann die Inhalte aus Soziale Arbeit in der Schulaufgabe anwenden, soziale Kommunikation und Interaktion definieren."],
+ pp12_22:["Ich kann das Organon-Modell nach Bühler erklären und erfolgreiche von gestörter Kommunikation unterscheiden (erstes Axiom nach Watzlawick)."],
+ pp12_23:["Ich kann das zweite, dritte und vierte Axiom von Watzlawick erläutern und an Beispielen erkennen."],
+ pp12_24:["Ich kann das fünfte Axiom erläutern und Kommunikationstechniken auf eine Fallbearbeitung anwenden."],
+ pp12_25:["Ich kann die Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."],
+ pp12_26:["Ich kann die Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."],
+ pp12_27:["Ich kann die Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."]
 };
 function lehrplanWocheById(fach,wocheId){
  return (LEHRPLAN_WOCHEN[fach]||[]).find(w=>w.id===wocheId)||null;
@@ -2008,10 +2021,24 @@ async function openCheckoutKlassenuebersicht(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 KURZARBEIT-ERSATZ · KLASSENÜBERSICHT</div><h2>Check-outs der Klasse</h2>
   <p style="font-size:12px;color:var(--muted);margin-top:0">Markiert = von der Schülerin / dem Schüler für den Ersatz gewählt (${d.einst.anzahlWaehlen} aus ${d.einst.anzahlGesamt}).</p>
-  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th></tr></thead>
+  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th><th></th></tr></thead>
   <tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
-   return`<tr><td>${esc(s.displayName||s.email||"")}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table></div>
-  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="coPdfErsatzKlasse()">PDF Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+   return`<tr><td>${esc(s.displayName||s.email||"")}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td><button class="secondary"onclick="coPdfErsatzSchuelerFuer('${s.uid}')">PDF</button></td></tr>`;}).join("")}</tbody></table></div>
+  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="coPdfErsatzKlasse()">PDF Klasse (alle)</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+// PDF mit dem Kurzarbeit-Ersatz EINER einzelnen Person – zum gezielten
+// Austeilen, ohne die ganze Klassen-PDF drucken zu müssen.
+async function coPdfErsatzSchuelerFuer(uid){
+ if(!isTeacher())return;
+ try{
+  const {pool,students,abgaben,auswahl,d}=await coLadeKlasse();
+  const s=students.find(x=>x.uid===uid);
+  const a=abgaben[uid]||{};
+  const w=new Set(auswahl[uid]?.ids||[]);
+  const e=auswahl[uid]?coErsatz([...w],a):null;
+  const tab=`<table><thead><tr><th>Check-out</th><th>Datum</th><th>Ergebnis</th><th>gewählt</th></tr></thead><tbody>${pool.map(c=>`<tr><td>${escPDF(c.titel)}</td><td>${coDatum(c.datum)}</td><td>${a[c.id]?.ausgewertet?npText(a[c.id].notenpunkte):"–"}</td><td>${w.has(c.id)?"[x]":""}</td></tr>`).join("")}</tbody></table>`;
+  openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs",`<div class="item"style="background:#f5f7f8"><strong>${escPDF(s?.displayName||s?.email||"")}</strong><div>${e?`Ø ${e.schnitt.toFixed(2).replace(".",",")} → <b>${npText(e.np)}</b> (${e.anzahl} gewählte Check-outs)`:"Noch keine Auswahl getroffen"}</div></div>${tab}`,`F12Sb · Pädagogik/Psychologie · ${d.einst.anzahlWaehlen} aus ${d.einst.anzahlGesamt}`);
+ }catch(err){console.error(err);toast("PDF konnte nicht erstellt werden.");}
 }
 async function coPdfErsatzKlasse(){
  if(!isTeacher())return;
@@ -2025,7 +2052,7 @@ async function coPdfErsatzKlasse(){
 }
 Object.assign(window,{coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
  openCheckoutTest,coAntwort,coAbgeben,openCheckoutMeinErgebnis,openCheckoutErgebnisse,openCheckoutSchuelerErgebnis,coPdfSchueler,coPdfKlasse,
- openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse});
+ openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfErsatzSchuelerFuer});
 
 // ---- Eigene Seite: Alternativer Leistungsnachweis (Sidebar-Eintrag) ----
 async function renderAlternativerLeistungsnachweis(){
@@ -2847,9 +2874,6 @@ function printWochenplanPDF(entries){
 window.printNotenPDF=printNotenPDF;window.printWochenplanPDF=printWochenplanPDF;
 
 async function renderKompass(){
- const tasks=await getCollection("tasks","deadline",false), projects=await getCollection("projects");
- const projectDeadlines=projects.filter(p=>p.deadline).sort((a,b)=>String(a.deadline).localeCompare(String(b.deadline)));
- const todayStr=new Date().toISOString().slice(0,10);
  const [unreadCount,forumActivity,wochenplan,noten]=await Promise.all([
  getUnreadMessageCount().catch(()=>0),
  getRecentForumActivityCount(3),
@@ -2860,7 +2884,7 @@ async function renderKompass(){
  const offenePlanung=wochenplan.filter(w=>!w.done);
  const erledigtePlanung=wochenplan.filter(w=>w.done);
 
- return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Aufgaben, Noten und Projekte.",`<button class="primary"onclick="openTaskForm()">＋ Aufgabe</button>`)}
+ return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Wochenplanung und Noten.","")}
 
  ${(unreadCount>0||forumActivity>0)?`<div class="kompass-alerts">
  ${unreadCount>0?`<a href="#forum-nachrichten"class="pill kompass-alert-msg"> ${unreadCount} neue Nachricht${unreadCount===1?"":"en"}</a>`:""}
@@ -2961,22 +2985,6 @@ async function renderKompass(){
  </div>
  </details>
  </div>
- </div>
-
- <div class="kicker"style="margin:22px 0 8px">AUFGABEN & PROJEKTE</div>
- <div class="grid grid-3"><div class="card stat"><b>${tasks.filter(t=>t.ownerUid===currentUser.uid).length}</b><span>Meine
-Aufgaben</span></div><div class="card stat"><b>${projects.length}</b><span>Projekte</span></div><div class="card stat">
-<b>${profile?.role==="teacher"?"Lehrkraft":profile?.role==="admin"?"Admin":"Schüler/in"}</b><span>Rolle</span></div></div>
- <div class="grid grid-3"style="margin-top:12px">
- <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #4a90d9"onclick="openMeineAufgabenModal()">
- <strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
- </button>
- <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #9b59b6"onclick="openProjektFristenModal()">
- <strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
- </button>
- <button type="button"class="card tile-square"style="background:#fff;border-left:4px solid #1a9b8e"onclick="openAktuelleProjekteModal()">
- <strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
- </button>
  </div>
 </div>${footer()}`;
 }
@@ -3091,7 +3099,7 @@ window.openLehrplanKlassenuebersicht=openLehrplanKlassenuebersicht;
 
 async function renderFaecherUebersicht(){
  return`${pageHead("LEHRPLAN & LERNINHALTE","Fächer 12. Klasse","Wähle ein Fach, um den Lehrplan-Zeitstrahl mit Themen, Aufträgen und Material zu öffnen.","")}
- <div class="grid grid-4">${F12SB_FAECHER.map(f=>{
+ <div class="grid grid-4">${F12SB_LEHRPLAN_FAECHER.map(f=>{
  const wochen=LEHRPLAN_WOCHEN[f.key]||[];
  const c=personColor(f.key);
  return`<button class="card tile"style="background:#fff;border-left:4px solid ${c.border};text-align:left"onclick="openFach('${f.key}')">
@@ -3107,77 +3115,77 @@ const PP_ZEITSTRAHL_TAGE=[{date:"2026-09-16",lb:1,thema:"Formalia/Der Begriff En
 {date:"2026-09-18",lb:1,thema:"Begriff Entwicklung",typ:"normal"},
 {date:"2026-09-21",lb:1,thema:"Bedingungen der Entwicklung",typ:"normal"},
 {date:"2026-09-23",lb:1,thema:"Bedingungen der Entwicklung",typ:"normal"},
-{date:"2026-09-25",lb:1,thema:"Einstieg Psychoanalyse: Grundannahmen, Instanzen, Dynamiken",typ:"normal"},
-{date:"2026-09-28",lb:1,thema:"Das psychoanalytische Persönlichkeitsmodell",typ:"normal"},
-{date:"2026-09-30",lb:1,thema:"Ich-Stärke und Ich-Schwäche",typ:"normal"},
-{date:"2026-10-02",lb:1,thema:"Angst und Abwehr (Lernsituation „Carlas Diebstähle“)",typ:"normal"},
-{date:"2026-10-05",lb:1,thema:"Angst und Abwehr",typ:"normal"},
-{date:"2026-10-07",lb:1,thema:"Die Abwehrmechanismen",typ:"normal"},
-{date:"2026-10-09",lb:1,thema:"Psychosexuelle Entwicklung (orale und anale Phase)",typ:"normal"},
-{date:"2026-10-12",lb:1,thema:"Phallische Phase, Latenzperiode, genitale Phase",typ:"normal"},
-{date:"2026-10-14",lb:1,thema:"Entstehung seelischer Fehlentwicklungen, kritische Würdigung",typ:"normal"},
-{date:"2026-10-16",lb:1,thema:"Entwicklung im Lebenslauf – Theorie der Lebensspanne",typ:"normal"},
-{date:"2026-10-19",lb:1,thema:"Bindung und Entwicklung",typ:"normal"},
-{date:"2026-10-21",lb:1,thema:"Erstellen eines Erklärvideos",typ:"normal"},
-{date:"2026-10-23",lb:1,thema:"Präsentation und Besprechung der Videos I",typ:"normal"},
-{date:"2026-10-26",lb:1,thema:"Präsentation und Besprechung der Videos II",typ:"normal"},
+{date:"2026-09-25",lb:1,thema:"Bedingungen der Entwicklung",typ:"normal"},
+{date:"2026-09-28",lb:1,thema:"Einstieg Psychoanalyse: Grundannahmen, Instanzen, Dynamiken",typ:"normal"},
+{date:"2026-09-30",lb:1,thema:"Das psychoanalytische Persönlichkeitsmodell",typ:"normal"},
+{date:"2026-10-02",lb:1,thema:"Ich-Stärke und Ich-Schwäche",typ:"normal"},
+{date:"2026-10-05",lb:1,thema:"Angst und Abwehr (Lernsituation „Carlas Diebstähle“)",typ:"normal"},
+{date:"2026-10-07",lb:1,thema:"Angst und Abwehr",typ:"normal"},
+{date:"2026-10-09",lb:1,thema:"Die Abwehrmechanismen",typ:"normal"},
+{date:"2026-10-12",lb:1,thema:"Psychosexuelle Entwicklung (orale und anale Phase)",typ:"normal"},
+{date:"2026-10-14",lb:1,thema:"Phallische Phase, Latenzperiode, genitale Phase",typ:"normal"},
+{date:"2026-10-16",lb:1,thema:"Entstehung seelischer Fehlentwicklungen, kritische Würdigung",typ:"normal"},
+{date:"2026-10-19",lb:1,thema:"Entwicklung im Lebenslauf – Theorie der Lebensspanne",typ:"normal"},
+{date:"2026-10-21",lb:1,thema:"Bindung und Entwicklung",typ:"normal"},
+{date:"2026-10-23",lb:1,thema:"Erstellen eines Erklärvideos",typ:"normal"},
+{date:"2026-10-26",lb:1,thema:"Sichere und unsichere Bindung",typ:"normal"},
 {date:"2026-10-28",lb:1,thema:"Sichere und unsichere Bindung",typ:"normal"},
-{date:"2026-10-30",lb:1,thema:"Sichere und unsichere Bindung",typ:"normal"},
-{date:"2026-11-09",lb:1,thema:"Förderung gelungener Bindung",typ:"normal"},
-{date:"2026-11-11",lb:1,thema:"Entwicklung im Jugendalter",typ:"normal"},
-{date:"2026-11-13",lb:1,thema:"Vulnerabilität und Resilienz",typ:"normal"},
-{date:"2026-11-16",lb:1,thema:"1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie",typ:"exam"},
-{date:"2026-11-20",lb:2,thema:"Begriff Persönlichkeit",typ:"normal"},
-{date:"2026-11-23",lb:2,thema:"Erhebung der Persönlichkeit",typ:"normal"},
+{date:"2026-10-30",lb:1,thema:"Förderung gelungener Bindung",typ:"normal"},
+{date:"2026-11-09",lb:1,thema:"Entwicklung im Jugendalter",typ:"normal"},
+{date:"2026-11-11",lb:1,thema:"Vulnerabilität und Resilienz",typ:"normal"},
+{date:"2026-11-13",lb:1,thema:"1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie",typ:"exam"},
+{date:"2026-11-16",lb:2,thema:"Begriff Persönlichkeit",typ:"normal"},
+{date:"2026-11-20",lb:2,thema:"Erhebung der Persönlichkeit",typ:"normal"},
+{date:"2026-11-23",lb:2,thema:"Big-Five-Modell",typ:"normal"},
 {date:"2026-11-25",lb:2,thema:"Big-Five-Modell",typ:"normal"},
-{date:"2026-11-27",lb:2,thema:"Big-Five-Modell",typ:"normal"},
+{date:"2026-11-27",lb:2,thema:"Menschenbild der personenzentrierten Theorie",typ:"normal"},
 {date:"2026-11-30",lb:2,thema:"Menschenbild der personenzentrierten Theorie",typ:"normal"},
-{date:"2026-12-02",lb:2,thema:"Menschenbild der personenzentrierten Theorie",typ:"normal"},
-{date:"2026-12-04",lb:2,thema:"Aktualisierungstendenz",typ:"normal"},
-{date:"2026-12-07",lb:2,thema:"Bildung und Wirkung des Selbstkonzepts",typ:"normal"},
-{date:"2026-12-09",lb:2,thema:"1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit",typ:"exam"},
-{date:"2026-12-11",lb:2,thema:"Flexibilität des Selbstkonzepts/Abwehr",typ:"normal"},
-{date:"2026-12-14",lb:2,thema:"Organismischer Bewertungsprozess",typ:"normal"},
-{date:"2026-12-16",lb:2,thema:"Kongruenz und Inkongruenz",typ:"normal"},
-{date:"2026-12-18",lb:2,thema:"Entstehung psychischer Störungen",typ:"normal"},
-{date:"2026-12-21",lb:2,thema:"Bedeutung für die Erziehung",typ:"normal"},
-{date:"2026-12-23",lb:2,thema:"Die sozial-kognitive Theorie und Persönlichkeit",typ:"normal"},
-{date:"2027-01-11",lb:2,thema:"Identität oder Selbstverständnis eines Menschen",typ:"normal"},
-{date:"2027-01-13",lb:2,thema:"Identitätstypen nach Marcia",typ:"normal"},
-{date:"2027-01-15",lb:3,thema:"Grundlagen Sozialer Arbeit",typ:"normal"},
+{date:"2026-12-02",lb:2,thema:"Aktualisierungstendenz",typ:"normal"},
+{date:"2026-12-04",lb:2,thema:"Bildung und Wirkung des Selbstkonzepts",typ:"normal"},
+{date:"2026-12-07",lb:2,thema:"1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit",typ:"exam"},
+{date:"2026-12-09",lb:2,thema:"Flexibilität des Selbstkonzepts/Abwehr",typ:"normal"},
+{date:"2026-12-11",lb:2,thema:"Organismischer Bewertungsprozess",typ:"normal"},
+{date:"2026-12-14",lb:2,thema:"Kongruenz und Inkongruenz",typ:"normal"},
+{date:"2026-12-16",lb:2,thema:"Entstehung psychischer Störungen",typ:"normal"},
+{date:"2026-12-18",lb:2,thema:"Bedeutung für die Erziehung",typ:"normal"},
+{date:"2026-12-21",lb:2,thema:"Die sozial-kognitive Theorie und Persönlichkeit",typ:"normal"},
+{date:"2026-12-23",lb:2,thema:"Identität oder Selbstverständnis eines Menschen",typ:"normal"},
+{date:"2027-01-11",lb:2,thema:"Identitätstypen nach Marcia",typ:"normal"},
+{date:"2027-01-13",lb:3,thema:"Grundlagen Sozialer Arbeit",typ:"normal"},
+{date:"2027-01-15",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
 {date:"2027-01-18",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
 {date:"2027-01-20",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
-{date:"2027-01-22",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
-{date:"2027-01-25",lb:3,thema:"Handlungskonzepte",typ:"normal"},
-{date:"2027-01-27",lb:3,thema:"Verhaltensorientiertes Konzept",typ:"normal"},
-{date:"2027-01-29",lb:3,thema:"Verhaltensmodifikation",typ:"normal"},
-{date:"2027-02-01",lb:3,thema:"Life-Modell – Transaktion",typ:"normal"},
-{date:"2027-02-03",lb:3,thema:"Anpassung",typ:"normal"},
-{date:"2027-02-05",lb:3,thema:"Nische und Habitat",typ:"normal"},
-{date:"2027-02-15",lb:3,thema:"Lebens-Stress",typ:"normal"},
-{date:"2027-02-17",lb:3,thema:"Methode für die Praxis",typ:"normal"},
-{date:"2027-02-19",lb:3,thema:"Fallbearbeitung Frau Müller",typ:"normal"},
-{date:"2027-02-22",lb:3,thema:"Kritische Würdigung Life-Modell",typ:"normal"},
-{date:"2027-02-24",lb:3,thema:"Thiersch – Lebenswelt",typ:"normal"},
-{date:"2027-02-26",lb:3,thema:"Thiersch – Dimensionen",typ:"normal"},
-{date:"2027-03-01",lb:3,thema:"Thiersch – Handlungsmaximen",typ:"normal"},
-{date:"2027-03-03",lb:3,thema:"Wiederholung/Prüfungsvorbereitung LB 3",typ:"normal"},
-{date:"2027-03-05",lb:3,thema:"2. Schulaufgabe: Soziale Arbeit",typ:"exam"},
-{date:"2027-03-08",lb:4,thema:"Soziale Kommunikation und Interaktion",typ:"normal"},
-{date:"2027-03-10",lb:4,thema:"Organon-Modell",typ:"normal"},
-{date:"2027-03-12",lb:4,thema:"Erfolgreiche und gestörte Kommunikation",typ:"normal"},
-{date:"2027-03-15",lb:4,thema:"Erstes Axiom (Watzlawick)",typ:"normal"},
-{date:"2027-03-17",lb:4,thema:"Zweites Axiom",typ:"normal"},
-{date:"2027-03-19",lb:4,thema:"Drittes Axiom",typ:"normal"},
-{date:"2027-04-05",lb:4,thema:"Viertes Axiom",typ:"normal"},
-{date:"2027-04-07",lb:4,thema:"Fünftes Axiom",typ:"normal"},
-{date:"2027-04-09",lb:4,thema:"Fallbearbeitung",typ:"normal"},
-{date:"2027-04-12",lb:4,thema:"Kommunikationstechniken",typ:"normal"},
-{date:"2027-04-14",lb:4,thema:"Kulturbedingte Unterschiede in der Kommunikation",typ:"normal"},
-{date:"2027-04-16",lb:4,thema:"Kommunikation und digitale Medien",typ:"normal"},
-{date:"2027-04-19",lb:4,thema:"Fachreferate: Vorbereitung/Recherche",typ:"normal"},
-{date:"2027-04-21",lb:4,thema:"Präsentationen der Fachreferate",typ:"normal"},
-{date:"2027-04-23",lb:4,thema:"Präsentationen der Fachreferate",typ:"normal"},
+{date:"2027-01-22",lb:3,thema:"Handlungskonzepte",typ:"normal"},
+{date:"2027-01-25",lb:3,thema:"Verhaltensorientiertes Konzept",typ:"normal"},
+{date:"2027-01-27",lb:3,thema:"Verhaltensmodifikation",typ:"normal"},
+{date:"2027-01-29",lb:3,thema:"Life-Modell – Transaktion",typ:"normal"},
+{date:"2027-02-01",lb:3,thema:"Anpassung",typ:"normal"},
+{date:"2027-02-03",lb:3,thema:"Nische und Habitat",typ:"normal"},
+{date:"2027-02-05",lb:3,thema:"Lebens-Stress",typ:"normal"},
+{date:"2027-02-15",lb:3,thema:"Methode für die Praxis",typ:"normal"},
+{date:"2027-02-17",lb:3,thema:"Fallbearbeitung Frau Müller",typ:"normal"},
+{date:"2027-02-19",lb:3,thema:"Kritische Würdigung Life-Modell",typ:"normal"},
+{date:"2027-02-22",lb:3,thema:"Thiersch – Lebenswelt",typ:"normal"},
+{date:"2027-02-24",lb:3,thema:"Thiersch – Dimensionen",typ:"normal"},
+{date:"2027-02-26",lb:3,thema:"Thiersch – Handlungsmaximen",typ:"normal"},
+{date:"2027-03-01",lb:3,thema:"Wiederholung/Prüfungsvorbereitung LB 3",typ:"normal"},
+{date:"2027-03-03",lb:3,thema:"2. Schulaufgabe: Soziale Arbeit",typ:"exam"},
+{date:"2027-03-05",lb:4,thema:"Soziale Kommunikation und Interaktion",typ:"normal"},
+{date:"2027-03-08",lb:4,thema:"Organon-Modell",typ:"normal"},
+{date:"2027-03-10",lb:4,thema:"Erfolgreiche und gestörte Kommunikation",typ:"normal"},
+{date:"2027-03-12",lb:4,thema:"Erstes Axiom (Watzlawick)",typ:"normal"},
+{date:"2027-03-15",lb:4,thema:"Zweites Axiom",typ:"normal"},
+{date:"2027-03-17",lb:4,thema:"Drittes Axiom",typ:"normal"},
+{date:"2027-03-19",lb:4,thema:"Viertes Axiom",typ:"normal"},
+{date:"2027-04-05",lb:4,thema:"Fünftes Axiom",typ:"normal"},
+{date:"2027-04-07",lb:4,thema:"Fallbearbeitung",typ:"normal"},
+{date:"2027-04-09",lb:4,thema:"Kommunikationstechniken",typ:"normal"},
+{date:"2027-04-12",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
+{date:"2027-04-14",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
+{date:"2027-04-16",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
+{date:"2027-04-19",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
+{date:"2027-04-21",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
+{date:"2027-04-23",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
 {date:"2027-04-26",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
 {date:"2027-04-28",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"}
 ];
@@ -3222,7 +3230,7 @@ function horizontalerZeitstrahlHTML(){
 
 async function renderFachDetail(){
  if(!activeFach)return await renderFaecherUebersicht();
- const fach=F12SB_FAECHER.find(f=>f.key===activeFach);
+ const fach=F12SB_LEHRPLAN_FAECHER.find(f=>f.key===activeFach);
  const taskcardLinks=await ladeTaskcardLinks();
 
  return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
