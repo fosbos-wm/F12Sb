@@ -328,3 +328,72 @@ main#content{flex:1;min-width:0;padding:28px 34px 60px;max-width:1500px}
 .mini-tool-tile:hover{background:#eef3f6;transform:translateY(-2px)}
 .mini-tool-icon{font-size:19px}
 .mini-tool-label{font-size:9.5px;font-weight:700;color:#355064;line-height:1.2}
+
+/* ---- Alternativer Leistungsnachweis: Check-out / K-Prim-Test ---- */
+/* ---- Check-out (K-Prim-Test zum Wochenabschluss) ---- */
+.co-banner{display:flex;align-items:center;gap:14px;background:#e9f7ee;border:2px solid #3fa66a;border-radius:14px;padding:12px 16px;margin:0 0 16px}
+.co-banner>div{flex:1}
+.co-banner b{display:block;font-size:15px}
+.co-banner small{color:var(--muted)}
+.co-live-punkt{width:12px;height:12px;border-radius:50%;background:#3fa66a;flex:0 0 auto;animation:coPuls 1.4s ease-in-out infinite}
+@keyframes coPuls{0%,100%{box-shadow:0 0 0 0 rgba(63,166,106,.55)}50%{box-shadow:0 0 0 7px rgba(63,166,106,0)}}
+@media(prefers-reduced-motion:reduce){.co-live-punkt{animation:none}}
+.co-karte{margin-top:16px}
+.co-kopf{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.co-kopf h3{margin:0 0 4px}
+.co-kopf small{color:var(--muted);font-size:12.5px;line-height:1.45;display:block;max-width:640px}
+.co-liste{display:flex;flex-direction:column}
+.co-zeile{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.co-lb{background:var(--c);color:#fff;font-size:11px;font-weight:800;border-radius:6px;padding:3px 8px;flex:0 0 auto}
+.co-titel{flex:1;min-width:180px}
+.co-titel b{display:block;font-size:14px}
+.co-titel small{color:var(--muted);font-size:12px}
+.co-chip{font-size:11px;font-weight:800;border-radius:999px;padding:3px 10px;display:inline-flex;align-items:center;gap:6px}
+.co-chip.live{background:#e9f7ee;color:#2d7a4f}
+.co-chip.live .co-live-punkt{width:8px;height:8px}
+.co-chip.fertig{background:#eef3f7;color:var(--muted)}
+.co-chip.entwurf{background:#fff8e6;color:#8a5a00}
+.co-aktion{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.co-np{font-size:14px;color:var(--ink)}
+.co-ersatz{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;padding:12px 14px;background:#f7fafc;border-radius:12px}
+.co-ersatz small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.co-vignette{border-left:5px solid;background:#f7fafc;border-radius:10px;padding:12px 16px;margin:10px 0 14px}
+.co-vignette p{margin:6px 0 0;white-space:pre-wrap;line-height:1.55}
+.co-aufgabe{margin-bottom:12px}
+.co-aussage{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.co-aussage>span{flex:1;min-width:200px;font-size:14px;line-height:1.4}
+.co-aussage label{display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer;white-space:nowrap}
+.co-test-fuss{position:sticky;bottom:-1px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0 4px;margin-top:10px}
+.co-test-fuss span{font-size:13px;color:var(--muted)}
+.co-summe{font-size:16px;margin:6px 0 10px;padding:10px 14px;background:#e9f7ee;border-radius:10px}
+.co-erg-tab th,.co-erg-tab td{padding:5px 6px;border-bottom:1px solid var(--line);font-size:13px}
+.co-erg-matrix td,.co-erg-matrix th{white-space:nowrap}
+.co-gewaehlt{background:#dcf1c8;font-weight:800}
+.co-monitor{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}
+.co-mon-zeile{display:flex;flex-direction:column;border-radius:8px;padding:6px 10px;background:#f1f4f7;font-size:13px}
+.co-mon-zeile small{color:var(--muted);font-size:11.5px}
+.co-mon-zeile.ab{background:#dcf1c8}
+.co-mon-zeile.lauf{background:#fff8e6}
+.co-ed-aufgabe{margin:10px 0;background:#f7fafc}
+.co-ed-aussage{display:flex;gap:8px;align-items:center;margin-top:6px}
+.co-ed-aussage span{font-weight:800;color:var(--muted);width:16px}
+.co-ed-aussage input{flex:1}
+.co-ed-aussage select{width:96px}
+.co-wahl{cursor:pointer;gap:10px}
+.pg-matrix th,.pg-matrix td,.co-erg-matrix th,.co-erg-matrix td,.apt-matrix th,.apt-matrix td{padding:7px 12px}
+.pg-matrix th,.co-erg-matrix th{text-align:center}
+
+/* ---- K-Prim als Tabelle (Aussage | richtig | falsch) ---- */
+.form input[type=checkbox],.form input[type=radio]{width:auto}
+.kp-stamm{display:block;font-size:15px;line-height:1.4;margin-bottom:8px}
+.kp-vignette{background:#f7fafc;border-left:4px solid var(--blue);border-radius:8px;padding:10px 14px;margin:0 0 10px;white-space:pre-wrap;line-height:1.55;font-size:14px}
+.kp-anleitung{font-size:14px;line-height:1.5;margin:0 0 8px;color:var(--ink)}
+.kp-tabelle{width:100%;border-collapse:collapse;font-size:14px}
+.kp-tabelle th{text-align:left;font-weight:700;padding:8px 6px;border-bottom:1.5px solid var(--line)}
+.kp-tabelle td{padding:12px 6px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+.kp-tabelle tbody tr:last-child td{border-bottom:0}
+.kp-tabelle .kp-rf{width:84px;text-align:center}
+.kp-tabelle td.kp-rf{padding:0}
+.kp-nr{margin-right:4px}
+.kp-klick{display:flex;align-items:flex-start;justify-content:center;padding:12px 6px;cursor:pointer;height:100%}
+.kp-klick input{width:18px!important;height:18px;margin:2px 0 0;cursor:pointer;accent-color:var(--blue-dark)}

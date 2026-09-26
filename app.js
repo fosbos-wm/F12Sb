@@ -1124,14 +1124,7 @@ async function renderKlassenteam(){
 // Schule erscheinen als "Wahlpflichtfach 1/2" (echte Fachbezeichnung je
 // nach Wahl der Schüler:innen unterschiedlich).
 const F12SB_FAECHER=[
- {key:"deutsch",label:"Deutsch"},
- {key:"englisch",label:"Englisch"},
- {key:"geschichte",label:"Geschichte/Sozialkunde"},
- {key:"mathematik",label:"Mathematik"},
- {key:"paedagogik",label:"Pädagogik/Psychologie"},
- {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht"},
- {key:"wahlpflicht1",label:"Wahlpflichtfach 1"},
- {key:"wahlpflicht2",label:"Wahlpflichtfach 2"}
+ {key:"paedagogik",label:"Pädagogik/Psychologie"}
 ];
 
 // ============================================================
@@ -1143,73 +1136,60 @@ const F12SB_FAECHER=[
 // FOS 12 Sozialwesen, B-Block 2026/27); die übrigen Fächer sind als leere,
 // erweiterbare Struktur angelegt.
 const LEHRPLAN_WOCHEN={
- paedagogik:[
- {id:"pp12_01",start:"2026-09-15",end:"2026-09-17",lb:"LB 1",thema:"Formalia und der Begriff Entwicklung",typ:"einzel",
- planung:"Formalia/Der Begriff Entwicklung; Begriff Entwicklung; Bedingungen der Entwicklung."},
- {id:"pp12_02",start:"2026-09-22",end:"2026-09-24",lb:"LB 1",thema:"Psychoanalyse: Grundannahmen und Persönlichkeitsmodell",typ:"einzel",
- planung:"Bedingungen der Entwicklung; Einstieg Psychoanalyse/Grundannahmen, Instanzen und Dynamiken; Das psychoanalytische Persönlichkeitsmodell."},
- {id:"pp12_03",start:"2026-09-29",end:"2026-10-01",lb:"LB 1",thema:"Ich-Stärke, Angst und Abwehr",typ:"einzel",
- planung:"Ich-Stärke und Ich-Schwäche; Angst und Abwehr (Lernsituation „Carlas Diebstähle“); Angst und Abwehr."},
- {id:"pp12_04",start:"2026-10-06",end:"2026-10-08",lb:"LB 1",thema:"Abwehrmechanismen und psychosexuelle Entwicklung",typ:"einzel",
- planung:"Die Abwehrmechanismen; Psychosexuelle Entwicklung (orale und anale Phase); Phallische Phase, Latenzperiode, genitale Phase (Puzzle)."},
- {id:"pp12_05",start:"2026-10-13",end:"2026-10-15",lb:"LB 1",thema:"Fehlentwicklungen und Lebensspanne",typ:"einzel",
- planung:"Entstehung von seelischen Fehlentwicklungen/kritische Würdigung der psychoanalytischen Theorie; Entwicklung im Lebenslauf – die Theorie der Lebensspanne; 1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie.",
- leistungsnachweis:true},
- {id:"pp12_06",start:"2026-10-20",end:"2026-10-22",lb:"LB 1",thema:"Bindung und Erklärvideo (Produktphase)",typ:"einzel",
- planung:"Bindung und Entwicklung; Erstellen eines Erklärvideos; Präsentation und Besprechung der Videos I.",
- produktphase:true},
- {id:"pp12_07",start:"2026-10-27",end:"2026-10-29",lb:"LB 1",thema:"Videos II und sichere/unsichere Bindung",typ:"einzel",
- planung:"Präsentation und Besprechung der Videos II; Sichere und unsichere Bindung; Sichere und unsichere Bindung.",
- produktphase:true},
- {id:"pp12_08",start:"2026-11-10",end:"2026-11-12",lb:"LB 1",thema:"Bindungsförderung, Jugendalter, Resilienz",typ:"einzel",
+ paedagogik:[ {id:"pp12_01",start:"2026-09-16",end:"2026-09-18",lb:"LB 1",thema:"Formalia und der Begriff Entwicklung",typ:"einzel",
+ planung:"Formalia/ Der Begriff Entwicklung; Begriff Entwicklung."},
+ {id:"pp12_02",start:"2026-09-21",end:"2026-09-25",lb:"LB 1",thema:"Bedingungen der Entwicklung, Einstieg Psychoanalyse",typ:"einzel",
+ planung:"Bedingungen der Entwicklung; Bedingungen der Entwicklung; Einstieg Psychoanalyse/ Grundannahmen, Instanzen und Dynamiken."},
+ {id:"pp12_03",start:"2026-09-28",end:"2026-10-02",lb:"LB 1",thema:"Psychoanalytisches Persönlichkeitsmodell, Ich-Stärke",typ:"einzel",
+ planung:"Das psychoanalytische Persönlichkeitsmodell; Ich-Stärke und Ich-Schwäche; Angst und Abwehr (Lernsituation „Carlas Diebstähle“)."},
+ {id:"pp12_04",start:"2026-10-05",end:"2026-10-09",lb:"LB 1",thema:"Abwehrmechanismen und psychosexuelle Entwicklung",typ:"einzel",
+ planung:"Angst und Abwehr; Die Abwehrmechanismen; Psychosexuelle Entwicklung (orale und anale Phase)."},
+ {id:"pp12_05",start:"2026-10-12",end:"2026-10-16",lb:"LB 1",thema:"Phallische Phase bis Genitale Phase, Fehlentwicklungen",typ:"einzel",
+ planung:"Phallische Phase, Latenzperiode, genitale Phase (Puzzle); Entstehung von seelischen Fehlentwicklungen/kritische Würdigung der psychoanalytischen Theorie; Entwicklung im Lebenslauf – die Theorie der Lebensspanne."},
+ {id:"pp12_06",start:"2026-10-19",end:"2026-10-23",lb:"LB 1",thema:"Bindung und Entwicklung, Erklärvideo (Produktphase)",typ:"einzel",
+ planung:"Bindung und Entwicklung; Erstellen eines Erklärvideos; Präsentation und Besprechung der Videos I.",produktphase:true},
+ {id:"pp12_07",start:"2026-10-26",end:"2026-10-30",lb:"LB 1",thema:"Videopräsentationen, sichere/unsichere Bindung",typ:"einzel",
+ planung:"Präsentation und Besprechung der Videos II; Sichere und unsichere Bindung; Sichere und unsichere Bindung.",produktphase:true},
+ {id:"pp12_08",start:"2026-11-09",end:"2026-11-13",lb:"LB 1",thema:"Bindungsförderung, Jugendalter, Resilienz",typ:"einzel",
  planung:"Förderung gelungener Bindung; Entwicklung im Jugendalter; Vulnerabilität und Resilienz."},
- {id:"pp12_09",start:"2026-11-17",end:"2026-11-19",lb:"LB 1",thema:"Puffer LB1 – Übergang zu LB 2: Persönlichkeit",typ:"einzel",
- planung:"Puffer/Prüfungsvorbereitung zu LB 1; Start LB 2: Begriff Persönlichkeit."},
- {id:"pp12_10",start:"2026-11-24",end:"2026-11-26",lb:"LB 2",thema:"Persönlichkeitserhebung und Big-Five-Modell",typ:"einzel",
+ {id:"pp12_09",start:"2026-11-16",end:"2026-11-20",lb:"LB 2",thema:"1. Kurzarbeit – Start LB 2: Persönlichkeit",typ:"einzel",
+ planung:"1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie; Begriff Persönlichkeit.",leistungsnachweis:true},
+ {id:"pp12_10",start:"2026-11-23",end:"2026-11-27",lb:"LB 2",thema:"Persönlichkeitserhebung und Big-Five-Modell",typ:"einzel",
  planung:"Erhebung der Persönlichkeit; Big-Five-Modell; Big-Five-Modell."},
- {id:"pp12_11",start:"2026-12-01",end:"2026-12-03",lb:"LB 2",thema:"Personenzentrierte Theorie und Aktualisierungstendenz",typ:"einzel",
+ {id:"pp12_11",start:"2026-11-30",end:"2026-12-04",lb:"LB 2",thema:"Personenzentrierte Theorie und Aktualisierungstendenz",typ:"einzel",
  planung:"Menschenbild der personenzentrierten Theorie; Menschenbild der personenzentrierten Theorie; Aktualisierungstendenz."},
- {id:"pp12_12",start:"2026-12-08",end:"2026-12-10",lb:"LB 2",thema:"Selbstkonzept und Schulaufgabe",typ:"einzel",
- planung:"Bildung und Wirkung des Selbstkonzepts; 1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit; Flexibilität des Selbstkonzepts/Abwehr.",
- leistungsnachweis:true},
- {id:"pp12_13",start:"2026-12-15",end:"2026-12-17",lb:"LB 2",thema:"Bewertungsprozess, Kongruenz, psychische Störungen",typ:"einzel",
+ {id:"pp12_12",start:"2026-12-07",end:"2026-12-11",lb:"LB 2",thema:"Selbstkonzept und 1. Schulaufgabe",typ:"einzel",
+ planung:"Bildung und Wirkung des Selbstkonzepts; 1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit; Flexibilität des Selbstkonzepts/Abwehr.",leistungsnachweis:true},
+ {id:"pp12_13",start:"2026-12-14",end:"2026-12-18",lb:"LB 2",thema:"Bewertungsprozess, Kongruenz, psychische Störungen",typ:"einzel",
  planung:"Organismischer Bewertungsprozess; Kongruenz und Inkongruenz; Entstehung psychischer Störungen."},
- {id:"pp12_14",start:"2026-12-22",end:"2026-12-23",lb:"LB 2",thema:"Bedeutung für Erziehung und sozial-kognitive Theorie",typ:"einzel",
+ {id:"pp12_14",start:"2026-12-21",end:"2026-12-23",lb:"LB 2",thema:"Bedeutung für Erziehung, sozial-kognitive Theorie",typ:"einzel",
  planung:"Bedeutung für die Erziehung; Die sozial-kognitive Theorie und Persönlichkeit."},
- {id:"pp12_15",start:"2027-01-12",end:"2027-01-14",lb:"LB 2",thema:"Identität und Identitätstypen nach Marcia",typ:"einzel",
- planung:"Identität oder Selbstverständnis eines Menschen; Identitätstypen nach Marcia; Puffer/Prüfungsvorbereitung."},
- {id:"pp12_16",start:"2027-01-19",end:"2027-01-21",lb:"LB 3",thema:"Puffer LB2 – Start LB 3: Soziale Arbeit",typ:"einzel",
- planung:"Puffer LB 2; Start LB 3: Grundlagen Sozialer Arbeit; Aufgabenbereiche der Sozialen Arbeit."},
- {id:"pp12_17",start:"2027-01-26",end:"2027-01-28",lb:"LB 3",thema:"Aufgabenbereiche und Handlungskonzepte",typ:"einzel",
- planung:"Aufgabenbereiche der Sozialen Arbeit; Aufgabenbereiche der Sozialen Arbeit; Handlungskonzepte."},
- {id:"pp12_18",start:"2027-02-02",end:"2027-02-04",lb:"LB 3",thema:"Verhaltensorientiertes Konzept und Anpassung",typ:"einzel",
- planung:"Verhaltensorientiertes Konzept; Verhaltensmodifikation; Anpassung."},
- {id:"pp12_19",start:"2027-02-16",end:"2027-02-18",lb:"LB 3",thema:"Nische, Habitat und Lebens-Stress",typ:"einzel",
- planung:"Nische und Habitat; Lebens-Stress; Methode für die Praxis."},
- {id:"pp12_20",start:"2027-02-23",end:"2027-02-25",lb:"LB 3",thema:"Fallbearbeitung und Life-Modell/Lebenswelt",typ:"einzel",
- planung:"Fallbearbeitung Frau Müller; kritische Würdigung Life-Modell; Thiersch – Lebenswelt."},
- {id:"pp12_21",start:"2027-03-02",end:"2027-03-04",lb:"LB 3",thema:"Thiersch: Dimensionen und Handlungsmaximen",typ:"einzel",
- planung:"Thiersch – Dimensionen; Thiersch – Handlungsmaximen; Wiederholung/Prüfungsvorbereitung."},
- {id:"pp12_22",start:"2027-03-09",end:"2027-03-11",lb:"LB 4",thema:"2. Schulaufgabe – Start LB 4: Kommunikation",typ:"einzel",
- planung:"2. Schulaufgabe: Soziale Arbeit; Puffer; Start LB 4: Soziale Kommunikation und Interaktion.",
- leistungsnachweis:true},
- {id:"pp12_23",start:"2027-03-16",end:"2027-03-18",lb:"LB 4",thema:"Organon-Modell und erstes Axiom",typ:"einzel",
- planung:"Organon-Modell; erfolgreiche und gestörte Kommunikation; erstes Axiom (Watzlawick)."},
- {id:"pp12_24",start:"2027-04-06",end:"2027-04-08",lb:"LB 4",thema:"Zweites bis viertes Axiom",typ:"einzel",
- planung:"Zweites Axiom; drittes Axiom; viertes Axiom (Watzlawick)."},
- {id:"pp12_25",start:"2027-04-13",end:"2027-04-15",lb:"LB 4",thema:"Fünftes Axiom, Fallbearbeitung, Techniken",typ:"einzel",
- planung:"Fünftes Axiom; Fallbearbeitung; Kommunikationstechniken."},
- {id:"pp12_26",start:"2027-04-20",end:"2027-04-22",lb:"LB 4",thema:"Kulturelle Unterschiede und Kurzarbeit",typ:"einzel",
- planung:"Kulturbedingte Unterschiede; Wiederholung/Prüfungsvorbereitung; 2. Kurzarbeit: Kommunikation.",
- leistungsnachweis:true},
- {id:"pp12_27",start:"2027-04-27",end:"2027-04-29",lb:"LB 4",thema:"Digitale Medien – Start Fachreferate",typ:"einzel",
- planung:"Kommunikation und digitale Medien; Puffer; Präsentationen der Fachreferate.",
- produktphase:true},
- {id:"pp12_28",start:"2027-05-04",end:"2027-05-05",lb:"LB 4",thema:"Präsentationen der Fachreferate",typ:"einzel",
- planung:"Präsentationen Fachreferate; Präsentationen Fachreferate.",
- produktphase:true},
- {id:"pp12_29",start:"2027-05-11",end:"2027-05-13",lb:"LB 1–4",thema:"Puffer und Wiederholung vor der Fachabiturprüfung",typ:"einzel",
- planung:"Puffer/Prüfungsvorbereitung; Puffer/Prüfungsvorbereitung; Wiederholung – Gesamtwiederholung LB 1–4."}
+ {id:"pp12_15",start:"2027-01-11",end:"2027-01-15",lb:"LB 3",thema:"Identität nach Marcia – Start LB 3: Soziale Arbeit",typ:"einzel",
+ planung:"Identität oder Selbstverständnis eines Menschen; Identitätstypen nach Marcia; Grundlagen Sozialer Arbeit."},
+ {id:"pp12_16",start:"2027-01-18",end:"2027-01-22",lb:"LB 3",thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"einzel",
+ planung:"Aufgabenbereiche der Sozialen Arbeit; Aufgabenbereiche der Sozialen Arbeit; Aufgabenbereiche der Sozialen Arbeit."},
+ {id:"pp12_17",start:"2027-01-25",end:"2027-01-29",lb:"LB 3",thema:"Handlungskonzepte und verhaltensorientiertes Konzept",typ:"einzel",
+ planung:"Handlungskonzepte; Verhaltensorientiertes Konzept; Verhaltensmodifikation."},
+ {id:"pp12_18",start:"2027-02-01",end:"2027-02-05",lb:"LB 3",thema:"Life-Modell: Transaktion, Anpassung, Nische/Habitat",typ:"einzel",
+ planung:"Life-Modell – Transaktion; Anpassung; Nische und Habitat."},
+ {id:"pp12_19",start:"2027-02-15",end:"2027-02-19",lb:"LB 3",thema:"Lebens-Stress und Methode für die Praxis",typ:"einzel",
+ planung:"Lebens-Stress; Methode für die Praxis; Fallbearbeitung Frau Müller."},
+ {id:"pp12_20",start:"2027-02-22",end:"2027-02-26",lb:"LB 3",thema:"Fallbearbeitung, Life-Modell, Thiersch: Lebenswelt",typ:"einzel",
+ planung:"Kritische Würdigung Life-Modell; Thiersch – Lebenswelt; Thiersch – Dimensionen."},
+ {id:"pp12_21",start:"2027-03-01",end:"2027-03-05",lb:"LB 3",thema:"Thiersch: Handlungsmaximen – 2. Schulaufgabe",typ:"einzel",
+ planung:"Thiersch – Handlungsmaximen; Wiederholung/Prüfungsvorbereitung LB 3; 2. Schulaufgabe: Soziale Arbeit.",leistungsnachweis:true},
+ {id:"pp12_22",start:"2027-03-08",end:"2027-03-12",lb:"LB 4",thema:"Start LB 4: Kommunikation, Organon-Modell",typ:"einzel",
+ planung:"Soziale Kommunikation und Interaktion; Organon-Modell; Erfolgreiche und gestörte Kommunikation."},
+ {id:"pp12_23",start:"2027-03-15",end:"2027-03-19",lb:"LB 4",thema:"Erstes bis drittes Axiom (Watzlawick)",typ:"einzel",
+ planung:"Erstes Axiom (Watzlawick); Zweites Axiom; Drittes Axiom."},
+ {id:"pp12_24",start:"2027-04-05",end:"2027-04-09",lb:"LB 4",thema:"Viertes und fünftes Axiom",typ:"einzel",
+ planung:"Viertes Axiom; Fünftes Axiom; Fallbearbeitung."},
+ {id:"pp12_25",start:"2027-04-12",end:"2027-04-16",lb:"LB 4",thema:"Fallbearbeitung, Kommunikationstechniken, digitale Medien",typ:"einzel",
+ planung:"Kommunikationstechniken; Kulturbedingte Unterschiede in der Kommunikation; Kommunikation und digitale Medien."},
+ {id:"pp12_26",start:"2027-04-19",end:"2027-04-23",lb:"LB 4",thema:"Kulturelle Unterschiede – Fachreferate",typ:"einzel",
+ planung:"Fachreferate: Vorbereitung/Recherche; Präsentationen der Fachreferate; Präsentationen der Fachreferate.",produktphase:true},
+ {id:"pp12_27",start:"2027-04-26",end:"2027-04-28",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung LB 1–4",typ:"einzel",
+ planung:"Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4.",review:true}
  ],
  deutsch:[],englisch:[],geschichte:[],mathematik:[],sozialwirtschaft:[],wahlpflicht1:[],wahlpflicht2:[]
 };
@@ -1217,36 +1197,33 @@ const LEHRPLAN_WOCHEN={
 // Kompetenzerwartungen des LehrplanPLUS FOS 12 Pädagogik/Psychologie
 // (lehrplanplus.bayern.de, LB 1–4). Lehrkräfte sehen diese als Vorschlag
 // beim erstmaligen Anlegen eines Auftrags und können sie frei anpassen.
-const LEHRPLAN_ZIELE_VORSCHLAG={
- pp12_01:["Ich kann den Begriff Entwicklung definieren und zentrale Bedingungen von Entwicklung (Anlage, Umwelt, Selbststeuerung) erläutern."],
- pp12_02:["Ich kann die Grundannahmen der Psychoanalyse und das psychoanalytische Instanzenmodell (Es, Ich, Über-Ich) erklären."],
- pp12_03:["Ich kann Ich-Stärke und Ich-Schwäche unterscheiden und das Zusammenspiel von Angst und Abwehr an einem Fallbeispiel analysieren."],
- pp12_04:["Ich kann zentrale Abwehrmechanismen benennen und die psychosexuellen Entwicklungsphasen nach Freud (oral, anal, phallisch, Latenz, genital) beschreiben."],
- pp12_05:["Ich kann die Entstehung seelischer Fehlentwicklungen aus psychoanalytischer Sicht erklären und die Theorie kritisch würdigen.","Ich kann Entwicklung als lebenslangen Prozess (Theorie der Lebensspanne) beschreiben."],
+const LEHRPLAN_ZIELE_VORSCHLAG={ pp12_01:["Ich kann den Begriff Entwicklung definieren und den formalen Aufbau des Lernbereichs einordnen."],
+ pp12_02:["Ich kann zentrale Bedingungen von Entwicklung (Anlage, Umwelt, Selbststeuerung) erläutern und die Grundannahmen der Psychoanalyse (Instanzenmodell: Es, Ich, Über-Ich) erklären."],
+ pp12_03:["Ich kann das psychoanalytische Persönlichkeitsmodell erklären und Ich-Stärke von Ich-Schwäche unterscheiden."],
+ pp12_04:["Ich kann zentrale Abwehrmechanismen benennen und die psychosexuellen Entwicklungsphasen nach Freud (oral, anal) beschreiben."],
+ pp12_05:["Ich kann die weiteren psychosexuellen Phasen (phallisch, Latenz, genital) beschreiben, die Entstehung seelischer Fehlentwicklungen erklären und die psychoanalytische Theorie kritisch würdigen."],
  pp12_06:["Ich kann den Zusammenhang von Bindung und Entwicklung erläutern und mein Wissen in einem eigenen Erklärvideo aufbereiten."],
- pp12_07:["Ich kann sichere und unsichere Bindungsmuster unterscheiden und ihre Bedeutung für die weitere Entwicklung einschätzen."],
+ pp12_07:["Ich kann Erklärvideos fachlich einordnen und sichere von unsicherer Bindung unterscheiden."],
  pp12_08:["Ich kann Maßnahmen zur Förderung gelungener Bindung benennen und Vulnerabilität sowie Resilienz im Jugendalter erläutern."],
- pp12_09:["Ich kann die zentralen Inhalte von LB 1 (Entwicklung) zusammenfassend wiedergeben und den Übergang zum Persönlichkeitsbegriff (LB 2) einordnen."],
+ pp12_09:["Ich kann die zentralen Inhalte von LB 1 (Entwicklung) in der Kurzarbeit anwenden und den Begriff Persönlichkeit definieren."],
  pp12_10:["Ich kann Methoden zur Erhebung von Persönlichkeit benennen und das Big-Five-Modell mit seinen Dimensionen erklären."],
  pp12_11:["Ich kann das Menschenbild der personenzentrierten Theorie nach Rogers erläutern und den Begriff Aktualisierungstendenz erklären."],
- pp12_12:["Ich kann die Bildung und Wirkung des Selbstkonzepts beschreiben und dessen Flexibilität sowie Abwehrmechanismen erläutern."],
+ pp12_12:["Ich kann die Bildung und Wirkung des Selbstkonzepts beschreiben und die Inhalte aus Entwicklung/Persönlichkeit in der Schulaufgabe anwenden."],
  pp12_13:["Ich kann den organismischen Bewertungsprozess sowie Kongruenz und Inkongruenz nach Rogers erklären und auf die Entstehung psychischer Störungen beziehen."],
  pp12_14:["Ich kann die Bedeutung der personenzentrierten und der sozial-kognitiven Theorie für die Erziehung erläutern."],
- pp12_15:["Ich kann den Begriff Identität erklären und die Identitätstypen nach Marcia unterscheiden."],
- pp12_16:["Ich kann Grundlagen und zentrale Aufgabenbereiche der Sozialen Arbeit benennen und erläutern."],
- pp12_17:["Ich kann Aufgabenbereiche der Sozialen Arbeit vertiefen und ein Handlungskonzept Sozialer Arbeit erläutern."],
- pp12_18:["Ich kann das verhaltensorientierte Konzept Sozialer Arbeit erklären und Verhaltensmodifikation an einem Beispiel anwenden."],
- pp12_19:["Ich kann die Begriffe Nische, Habitat und Lebens-Stress im Kontext Sozialer Arbeit erläutern und auf die Praxis beziehen."],
- pp12_20:["Ich kann einen Praxisfall mithilfe des Life-Modells und Thierschs Konzept der Lebensweltorientierung analysieren."],
- pp12_21:["Ich kann Thierschs Dimensionen und Handlungsmaximen der Lebensweltorientierung erläutern und auf einen Fall anwenden."],
- pp12_22:["Ich kann soziale Kommunikation und Interaktion als Grundbegriffe definieren und ihre Bedeutung im Sozialwesen einordnen."],
- pp12_23:["Ich kann das Organon-Modell nach Bühler erklären und erfolgreiche von gestörter Kommunikation unterscheiden (erstes Axiom nach Watzlawick)."],
- pp12_24:["Ich kann das zweite, dritte und vierte Axiom von Watzlawick erläutern und an Beispielen erkennen."],
- pp12_25:["Ich kann das fünfte Axiom erläutern und Kommunikationstechniken auf eine Fallbearbeitung anwenden."],
- pp12_26:["Ich kann kulturbedingte Unterschiede in der Kommunikation erläutern und mein Wissen zu Kommunikationsmodellen zusammenfassen."],
- pp12_27:["Ich kann Chancen und Risiken digitaler Medien für Kommunikation und Lernen einschätzen."],
- pp12_28:["Ich kann mein Fachreferat strukturiert und fachlich fundiert präsentieren."],
- pp12_29:["Ich kann die zentralen Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."]
+ pp12_15:["Ich kann die Identitätstypen nach Marcia unterscheiden und Grundlagen der Sozialen Arbeit benennen."],
+ pp12_16:["Ich kann zentrale Aufgabenbereiche der Sozialen Arbeit erläutern."],
+ pp12_17:["Ich kann Handlungskonzepte Sozialer Arbeit erläutern, insbesondere das verhaltensorientierte Konzept."],
+ pp12_18:["Ich kann das Life-Modell (Transaktion, Anpassung, Nische und Habitat) auf einen Praxisfall beziehen."],
+ pp12_19:["Ich kann den Begriff Lebens-Stress erläutern und Methoden für die Praxis Sozialer Arbeit anwenden."],
+ pp12_20:["Ich kann einen Praxisfall mithilfe des Life-Modells analysieren und Thierschs Konzept der Lebensweltorientierung erläutern."],
+ pp12_21:["Ich kann Thierschs Handlungsmaximen erläutern und die Inhalte aus Sozialer Arbeit in der Schulaufgabe anwenden."],
+ pp12_22:["Ich kann soziale Kommunikation und Interaktion definieren und das Organon-Modell nach Bühler erklären."],
+ pp12_23:["Ich kann erfolgreiche von gestörter Kommunikation unterscheiden und das erste bis dritte Axiom nach Watzlawick erläutern."],
+ pp12_24:["Ich kann das vierte und fünfte Axiom von Watzlawick erläutern und an Beispielen erkennen."],
+ pp12_25:["Ich kann Kommunikationstechniken auf eine Fallbearbeitung anwenden und Chancen/Risiken digitaler Medien für Kommunikation einschätzen."],
+ pp12_26:["Ich kann kulturbedingte Unterschiede in der Kommunikation erläutern und mein Fachreferat strukturiert präsentieren."],
+ pp12_27:["Ich kann die zentralen Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."]
 };
 function lehrplanWocheById(fach,wocheId){
  return (LEHRPLAN_WOCHEN[fach]||[]).find(w=>w.id===wocheId)||null;
@@ -1280,18 +1257,785 @@ function lernbereichAkzentfarbe(lbText){
 // abgegrenzten Abschnitten mit Überschrift.
 const UNTERRICHTSBLOECKE={
  paedagogik:[
- {id:"ub1",start:"2026-10-05",end:"2026-10-23",titel:"Unterrichtsblock 1",stunden:18},
- {id:"ub2",start:"2026-11-23",end:"2026-12-11",titel:"Unterrichtsblock 2",stunden:18},
- {id:"ub3",start:"2027-01-18",end:"2027-02-05",titel:"Unterrichtsblock 3",stunden:18},
- {id:"ub4",start:"2027-03-08",end:"2027-03-19",titel:"Unterrichtsblock 4",stunden:12},
- {id:"ub5",start:"2027-04-05",end:"2027-04-09",titel:"Unterrichtsblock 5",stunden:6},
- {id:"ub6",start:"2027-05-03",end:"2027-05-14",titel:"Unterrichtsblock 6",stunden:12},
- {id:"ub7",start:"2027-06-28",end:"2027-07-16",titel:"Unterrichtsblock 7",stunden:18}
+ {id:"lb1",start:"2026-09-16",end:"2026-11-13",titel:"Lernbereich 1 · Entwicklung",stunden:40},
+ {id:"lb2",start:"2026-11-16",end:"2026-12-23",titel:"Lernbereich 2 · Persönlichkeit und Identität",stunden:29},
+ {id:"lb3",start:"2027-01-11",end:"2027-03-05",titel:"Lernbereich 3 · Soziale Arbeit",stunden:33},
+ {id:"lb4",start:"2027-03-08",end:"2027-04-23",titel:"Lernbereich 4 · Kommunikation",stunden:26},
+ {id:"review",start:"2027-04-26",end:"2027-04-28",titel:"Wiederholung und Prüfungsvorbereitung",stunden:2}
  ]
 };
 function findUnterrichtsblock(fach,dateStr){
  return (UNTERRICHTSBLOECKE[fach]||[]).find(b=>dateStr>=b.start&&dateStr<=b.end)||null;
 }
+
+// ---- 4 Lernbereich-Kacheln (unter dem Zeitstrahl) mit TaskCard-Verlinkung ----
+const PP_LERNBEREICHE=[
+ {key:"lb1",num:1,titel:"Entwicklung"},
+ {key:"lb2",num:2,titel:"Persönlichkeit und Identität"},
+ {key:"lb3",num:3,titel:"Soziale Arbeit"},
+ {key:"lb4",num:4,titel:"Kommunikation"}
+];
+async function ladeTaskcardLinks(){
+ try{
+  const s=await getDocs(collection(db,"taskcardLinks"));
+  const map={};s.docs.forEach(d=>map[d.id]=d.data());
+  return map;
+ }catch(e){console.error("TaskCard-Links laden:",e);return{};}
+}
+function lernbereichKachelnHTML(links){
+ return`<h3 style="margin:26px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--muted)"> Lernbereiche · TaskCard</h3>
+ <div class="grid grid-2"style="gap:12px">
+ ${PP_LERNBEREICHE.map(lb=>{
+  const c=LERNBEREICH_FARBEN[lb.num];
+  const url=(links[lb.key]||{}).url||"";
+  const urlAttr=esc(url).replace(/'/g,"&#39;");
+  return`<div class="card"style="border-left:5px solid ${c.border};display:flex;flex-direction:column;gap:8px">
+  <strong style="color:${c.text}">Lernbereich ${lb.num} · ${esc(lb.titel)}</strong>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+  ${url?`<a class="primary"style="text-decoration:none;padding:9px 14px;border-radius:9px"href="${urlAttr}"target="_blank"rel="noopener">📋 TaskCard öffnen</a>`:`<small style="color:var(--muted)">Noch kein TaskCard-Link hinterlegt.</small>`}
+  ${isTeacher()?`<button class="secondary"onclick="taskcardLinkBearbeiten('${lb.key}','${urlAttr}')">${url?"Link ändern":"＋ Link hinterlegen"}</button>`:""}
+  </div>
+  </div>`;
+ }).join("")}
+ </div>`;
+}
+async function taskcardLinkBearbeiten(lbKey,aktuell){
+ const url=prompt("TaskCard-Link für diesen Lernbereich:",aktuell||"https://");
+ if(url===null)return;
+ try{
+  await setDoc(doc(db,"taskcardLinks",lbKey),{url:url.trim(),updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
+  await render();toast("TaskCard-Link gespeichert.");
+ }catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+window.taskcardLinkBearbeiten=taskcardLinkBearbeiten;
+
+// ============================================================
+// ALTERNATIVER LEISTUNGSNACHWEIS · Check-out / K-Prim-Test
+// ------------------------------------------------------------
+// Ersetzt die 2. Kurzarbeit in Pädagogik/Psychologie: Statt einer
+// einzelnen Kurzarbeit im 2. Halbjahr wählt die Lehrkraft mehrere
+// Check-outs (Fallvignette + K-Prim-Aufgaben je Lernbereich), aus
+// denen die Schüler:innen 7 auswählen; der Notenpunkte-Durchschnitt
+// ersetzt die Kurzarbeit. Engine 1:1 aus der F11Sb übernommen.
+// ============================================================
+const PP_FARBEN={1:"#4a90d9",2:"#9b59b6",3:"#3fa66a",4:"#e0a324"};
+// ---- K-Prim als Tabelle: Aussage | richtig | falsch (wie in der Prüfung) ----
+const KPRIM_ANLEITUNG="<b>Kreuzen Sie für jede Aussage an, ob sie richtig oder falsch ist.</b>";
+// name: Präfix der Radio-Gruppen (je Aussage name_j). antworten: {j:"r"|"f"}.
+// onchange: optionaler Aufruf, %J und %V werden durch Aussage und Wert ersetzt.
+function kprimTabelleHTML(name,aussagen,antworten={},onchange=""){
+ return`<table class="kp-tabelle"><thead><tr><th>Aussage</th><th class="kp-rf">richtig</th><th class="kp-rf">falsch</th></tr></thead><tbody>
+  ${aussagen.map((t,j)=>`<tr><td><b class="kp-nr">${j+1}</b> ${esc(t)}</td>${["r","f"].map(v=>`<td class="kp-rf"><label class="kp-klick"><input type="radio"name="${name}_${j}"value="${v}"aria-label="Aussage ${j+1}: ${v==="r"?"richtig":"falsch"}"${antworten[j]===v?" checked":""}${onchange?` onchange="${onchange.replace(/%J/g,j).replace(/%V/g,v)}"`:""}></label></td>`).join("")}</tr>`).join("")}
+ </tbody></table>`;
+}
+function kprimFrageKopfHTML(nr,stamm,vignette){
+ return`<strong class="kp-stamm">${nr?nr+". ":""}${esc(stamm||"")}</strong>
+  ${vignette?`<div class="kp-vignette">${esc(vignette)}</div>`:""}
+  <p class="kp-anleitung">${/beurteilen sie/i.test(stamm||"")?"":"Beurteilen Sie die folgenden Aussagen. "}${KPRIM_ANLEITUNG}</p>`;
+}
+// ============================================================
+// CHECK-OUT · K-Prim-Test zum Wochenabschluss (Pädagogik/Psychologie)
+// ------------------------------------------------------------
+// Ablauf: Lehrkraft legt einen Check-out an (Fallvignette + 3–5 K-Prim-
+// Aufgaben) → schaltet ihn in der Testsituation LIVE → Schüler:innen
+// bearbeiten ihn (Antworten werden laufend gespeichert) → Lehrkraft
+// beendet LIVE → die App wertet automatisch aus (Bewertungseinheiten →
+// FOSBOS-Notenpunkte 0–15, Note in Klammern).
+// Kurzarbeit-Ersatz: aus den (standardmäßig 10) gewerteten Check-outs
+// wählen die Schüler:innen die 7 für sie relevanten aus – der Durchschnitt
+// der Notenpunkte ersetzt eine Kurzarbeit.
+// Datenschutz beim Test: Die Lösungen liegen getrennt in „checkoutLoesungen"
+// (nur Lehrkräfte lesbar); ausgewertet wird im Browser der Lehrkraft.
+// ============================================================
+
+// Bewertungseinheiten (BE) je K-Prim-Aufgabe nach Anzahl der Fehler
+// (0, 1, 2, 3, 4 Fehler) – nach ISB-Vorgabe: volle Punktzahl nur bei vier
+// richtigen Entscheidungen, bei drei die Hälfte, bei zwei 1 BE, sonst 0.
+// Nicht beantwortete Aussage = Fehler.
+const CHECKOUT_BE_NACH_FEHLERN=[4,2,1,0,0];
+// Bewertungsschlüssel Pädagogik/Psychologie (eingeführt lt. „Unterrichten,
+// Korrigieren und Bewerten im Fach Pädagogik/Psychologie an der Beruflichen
+// Oberschule Bayern", Stand 13.09.2022): [Notenpunkte, Mindestprozent].
+// 15: 100–96 · 14: 95–91 · … · 3: 40–34 · 2: 33–27 · 1: 26–20 · 0: 19–0.
+// Zwischenwerte werden nicht aufgerundet (z. B. 95,5 % → 14 Punkte).
+const FOSBOS_SCHLUESSEL=[[15,96],[14,91],[13,86],[12,81],[11,76],[10,71],[9,66],[8,61],[7,56],[6,51],[5,46],[4,41],[3,34],[2,27],[1,20]];
+const CHECKOUT_MIN_AUFGABEN=3,CHECKOUT_MAX_AUFGABEN=5;
+function notenpunkteAusProzent(p){for(const [np,min] of FOSBOS_SCHLUESSEL)if(p>=min)return np;return 0;}
+function noteAusNotenpunkten(np){return np>=13?1:np>=10?2:np>=7?3:np>=4?4:np>=1?5:6;}
+function npText(np){return`${np} Punkte (${noteAusNotenpunkten(np)})`;}
+function coDatum(d){return d?fmtDateOnly(d):"";}
+function coBewerten(co,loesung,antworten){
+ let be=0,max=0;
+ const auswertung=(co.aufgaben||[]).map((a,i)=>{
+  const l=(loesung?.aufgaben?.[i]?.richtig)||[];
+  let fehler=0;const korrekt=[],angekreuzt=[];
+  for(let j=0;j<4;j++){
+   const v=antworten?.[`${i}_${j}`]||"";
+   const ok=!!v&&((v==="r")===!!l[j]);
+   if(!ok)fehler++;
+   korrekt.push(ok);angekreuzt.push(v);
+  }
+  const p=CHECKOUT_BE_NACH_FEHLERN[fehler]??0;
+  be+=p;max+=CHECKOUT_BE_NACH_FEHLERN[0];
+  return{fehler,be:p,korrekt,angekreuzt,loesung:[0,1,2,3].map(j=>!!l[j])};
+ });
+ const prozent=max?Math.round(be/max*1000)/10:0;
+ const notenpunkte=notenpunkteAusProzent(prozent);
+ return{be,maxBE:max,prozent,notenpunkte,note:noteAusNotenpunkten(notenpunkte),auswertung};
+}
+
+// ---- Laden ----
+async function ladeCheckoutDaten(){
+ const lehrer=isTeacher();
+ const basis={anzahlGesamt:10,anzahlWaehlen:7,auswahlOffen:false};
+ try{
+  const docs=lehrer?(await getDocs(collection(db,"checkouts"))).docs
+   :(await Promise.all(["live","beendet"].map(st=>getDocs(query(collection(db,"checkouts"),where("status","==",st)))))).flatMap(s=>s.docs);
+  const checkouts=docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||""))||tsSek(a.createdAt)-tsSek(b.createdAt));
+  let einst={};
+  try{const e=await getDoc(doc(db,"checkoutEinstellungen","pp"));einst=e.exists()?e.data():{};}catch(e){}
+  const meineAbgaben={};let auswahl=null;
+  if(!lehrer){
+   const s=await getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));
+   s.docs.forEach(d=>{const x=d.data();meineAbgaben[x.checkoutId]=x;});
+   try{const a=await getDoc(doc(db,"checkoutAuswahl",currentUser.uid));auswahl=a.exists()?a.data():null;}catch(e){}
+  }
+  return{checkouts,einst:{...basis,...einst},meineAbgaben,auswahl};
+ }catch(e){console.error("Check-outs laden:",e);return{checkouts:[],einst:basis,meineAbgaben:{},auswahl:null,fehler:true};}
+}
+// Die für den Kurzarbeit-Ersatz zählenden Check-outs (beendet, „zählt").
+function coPool(checkouts,einst){return checkouts.filter(c=>c.status==="beendet"&&c.zaehlt!==false).slice(0,einst.anzahlGesamt||10);}
+function coErsatz(ids,abgabenByCo){
+ const nps=ids.map(id=>abgabenByCo[id]).filter(a=>a?.ausgewertet).map(a=>Number(a.notenpunkte)||0);
+ if(!nps.length)return null;
+ const schnitt=nps.reduce((a,b)=>a+b,0)/nps.length;
+ return{schnitt,np:Math.round(schnitt),anzahl:nps.length};
+}
+
+// ---- Startseite: Hinweis, wenn ein Check-out gerade läuft ----
+async function checkoutStartBannerHTML(){
+ if(!currentUser||!isApproved())return"";
+ try{
+  const s=await getDocs(query(collection(db,"checkouts"),where("status","==","live")));
+  if(s.empty)return"";
+  const co={id:s.docs[0].id,...s.docs[0].data()};
+  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(co.titel||"")}</b><small>Live-Übersicht öffnen, um den Stand zu sehen und den Test zu beenden.</small></div><button class="primary"onclick="openCheckoutMonitor('${co.id}')">Live-Übersicht</button></div>`;
+  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(co.titel||"")}</b><small>Deine Lehrkraft hat den Test freigeschaltet.</small></div><button class="primary"onclick="openCheckoutTest('${co.id}')">Jetzt starten</button></div>`;
+ }catch(e){return"";}
+}
+
+// ---- Bereich auf dem P/P-Lernweg ----
+function checkoutSektionHTML(d){
+ if(!d)return"";
+ const lehrer=isTeacher();
+ const lbFarbe=n=>PP_FARBEN[n]||"#8a99a3";
+ const pool=coPool(d.checkouts,d.einst);
+ const statusChip=c=>c.status==="live"?`<span class="co-chip live"><span class="co-live-punkt"></span>läuft</span>`:c.status==="beendet"?`<span class="co-chip fertig">beendet</span>`:`<span class="co-chip entwurf">Entwurf</span>`;
+ const zeilen=d.checkouts.map(c=>{
+  const a=d.meineAbgaben[c.id];
+  let rechts="";
+  if(lehrer){
+   rechts=c.status==="entwurf"?`<button class="secondary"onclick="openCheckoutEditor('${c.id}')">Bearbeiten</button><button class="primary"onclick="coLiveStarten('${c.id}')">▶ Live freischalten</button>`
+    :c.status==="live"?`<button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button>`
+    :`<button class="secondary"onclick="openCheckoutErgebnisse('${c.id}')">Ergebnisse</button><button class="secondary"onclick="coPdfKlasse('${c.id}')">PDF Klasse</button>`;
+  }else{
+   rechts=c.status==="live"?(a?.abgegeben?`<span class="co-chip fertig">abgegeben ✓</span>`:`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Starten"}</button>`)
+    :a?.ausgewertet?`<b class="co-np">${npText(a.notenpunkte)}</b><button class="secondary"onclick="openCheckoutMeinErgebnis('${c.id}')">Ansehen</button><button class="secondary"onclick="coPdfSchueler('${c.id}')">PDF</button>`
+    :a?`<small style="color:var(--muted)">wird ausgewertet …</small>`:`<small style="color:var(--muted)">nicht teilgenommen</small>`;
+  }
+  return`<div class="co-zeile"style="--c:${lbFarbe(c.lbNum)}">
+   <span class="co-lb">LB ${esc(c.lbNum||"")}</span>
+   <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${coDatum(c.datum)} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben${c.zaehlt===false?" · zählt nicht für den Kurzarbeit-Ersatz":""}</small></div>
+   ${statusChip(c)}
+   <div class="co-aktion">${rechts}</div>
+  </div>`;
+ }).join("");
+ // Kurzarbeit-Ersatz
+ let ersatz="";
+ if(lehrer){
+  ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>${pool.length} von ${d.einst.anzahlGesamt} Check-outs gewertet · Schüler:innen wählen ${d.einst.anzahlWaehlen} aus · Auswahl ist ${d.einst.auswahlOffen?"<b>geöffnet</b>":"geschlossen"}</small></div>
+   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="secondary"onclick="openCheckoutKlassenuebersicht()">Klassenübersicht</button></div></div>`;
+ }else{
+  const aByCo=d.meineAbgaben;
+  const gewertet=pool.filter(c=>aByCo[c.id]?.ausgewertet);
+  const e=d.auswahl?coErsatz(d.auswahl.ids||[],aByCo):null;
+  ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>${gewertet.length} von ${d.einst.anzahlGesamt} Check-outs geschrieben · du wählst die ${d.einst.anzahlWaehlen} für dich besten aus${e?` · <b>deine Auswahl: Ø ${e.schnitt.toFixed(1).replace(".",",")} → ${npText(e.np)}</b>`:""}</small></div>
+   <div class="co-aktion">${d.einst.auswahlOffen?`<button class="primary"onclick="openCheckoutAuswahl()">${d.auswahl?"Auswahl ändern":`${d.einst.anzahlWaehlen} auswählen`}</button>`:`<small style="color:var(--muted)">Auswahl wird von deiner Lehrkraft freigeschaltet</small>`}${d.auswahl?`<button class="secondary"onclick="coPdfErsatzSchueler()">PDF</button>`:""}</div></div>`;
+ }
+ return`<div class="card co-karte">
+  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Check-Out-Test live frei: eine Fallvignette mit 3–5 K-Prim-Aufgaben. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
+   ${lehrer?`<button class="primary"onclick="openCheckoutEditor()">＋ Neuer Check-out</button>`:""}</div>
+  <div class="co-liste">${zeilen||`<div class="empty">${lehrer?"Noch kein Check-out angelegt.":"Noch kein Check-out freigeschaltet."}</div>`}</div>
+  ${ersatz}
+ </div>`;
+}
+function checkoutLiveBannerHTML(d){
+ const live=(d?.checkouts||[]).filter(c=>c.status==="live");
+ if(!live.length)return"";
+ return live.map(c=>{
+  const a=d.meineAbgaben[c.id];
+  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(c.titel||"")}</b><small>Beenden, sobald alle fertig sind – danach wird automatisch ausgewertet.</small></div><button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button></div>`;
+  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(c.titel||"")}</b><small>${a?.abgegeben?"Du hast abgegeben. Das Ergebnis siehst du, sobald deine Lehrkraft den Test beendet.":"Deine Lehrkraft hat den Test freigeschaltet."}</small></div>${a?.abgegeben?"":`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Jetzt starten"}</button>`}</div>`;
+ }).join("");
+}
+
+// ---- Editor (Lehrkraft): strukturiert nach der ISB-Vorgabe für K-Prim ----
+// ① Situation (Vignette) → ② 3–5 K-Prim-Aufgaben (Einleitungssatz + genau
+// 4 Aussagen) → ③ Checkliste. Automatische Hinweise prüfen, was sich prüfen
+// lässt (Längen, absolute/vage Begriffe, doppelte Verneinung, Muster).
+let coEditor=null;
+const CO_CHECKLISTE=[
+ ["Situation","Situationsbeschreibung adäquat (anwendungsorientierte Informationen)"],
+ ["Situation","Alle notwendigen, aber keine irrelevanten Informationen"],
+ ["Situation","Frei von Hinweisen auf die korrekte(n) Antwort(en)"],
+ ["Situation","Sprache einfach, klar, ohne Mehrdeutigkeiten"],
+ ["Situation","Nur bekannte Abkürzungen und Fachbegriffe"],
+ ["Aufgaben","Angemessener Schwierigkeitsgrad"],
+ ["Aufgaben","Frei von doppelten Verneinungen"],
+ ["Aufgaben","Keine Wortwiederholungen aus der Situation in Einleitungssatz und Aussagen"],
+ ["Aufgaben","Aussagen eindeutig richtig oder falsch (fachlich unumstritten)"],
+ ["Aufgaben","Aussagen homogen (ähnliche Länge und Grammatik)"],
+ ["Aufgaben","Keine vagen Mengenangaben oder absoluten Begriffe (z. B. „immer“, „eventuell“)"],
+ ["Aufgaben","Jede Aufgabe hat genau vier Aussagen"],
+ ["Aufgaben","Position und Anzahl der richtigen Aussagen variieren"]
+];
+const CO_WORT_ABSOLUT=/\b(immer|nie|niemals|stets|ausschließlich|grundsätzlich|jede[rsmn]?|alle|eventuell|vielleicht|manchmal|oft|häufig|selten|meistens|gelegentlich)\b/gi;
+const CO_WORT_NEGATION=/\b(nicht|kein\w*|nie|niemals|ohne|weder)\b/gi;
+function coLeereAufgabe(){return{stamm:"",aussagen:[{text:"",richtig:true},{text:"",richtig:false},{text:"",richtig:false},{text:"",richtig:true}]};}
+function coPruefung(e){
+ const pro=e.aufgaben.map(a=>{
+  const h=[],texte=a.aussagen.map(s=>s.text.trim());
+  const laengen=texte.filter(Boolean).map(t=>t.length);
+  if(laengen.length===4){const mn=Math.min(...laengen),mx=Math.max(...laengen);if(mx>mn*1.6&&mx-mn>25)h.push("Aussagen sehr unterschiedlich lang");}
+  const abs=[...new Set(texte.join(" ").match(CO_WORT_ABSOLUT)||[])].map(w=>w.toLowerCase());
+  if(abs.length)h.push(`absolute/vage Begriffe: ${[...new Set(abs)].join(", ")}`);
+  texte.forEach((t,j)=>{if((t.match(CO_WORT_NEGATION)||[]).length>=2)h.push(`doppelte Verneinung? (Aussage ${j+1})`);});
+  const r=a.aussagen.filter(s=>s.richtig).length;
+  return{hinweise:h,richtig:r};
+ });
+ const glob=[];
+ if(e.aufgaben.length>=2){
+  const muster=e.aufgaben.map(a=>a.aussagen.map(s=>s.richtig?"r":"f").join(""));
+  if(new Set(muster).size===1)glob.push("Alle Aufgaben haben dasselbe Richtig/Falsch-Muster – Position der richtigen Aussagen variieren.");
+  else if(new Set(pro.map(p=>p.richtig)).size===1)glob.push("Überall gleich viele richtige Aussagen – Anzahl variieren.");
+ }
+ return{pro,glob};
+}
+function coPruefChips(p){return p.hinweise.length?p.hinweise.map(h=>`<span class="co-hinweis">⚠ ${esc(h)}</span>`).join(""):`<span class="co-hinweis ok">✓ unauffällig</span>`;}
+async function openCheckoutEditor(id){
+ if(!isTeacher())return;
+ if(id){
+  try{
+   const [c,l]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutLoesungen",id))]);
+   if(!c.exists()){toast("Nicht gefunden.");return}
+   const co=c.data(),lo=l.exists()?l.data():{};
+   if(co.status!=="entwurf"){toast("Nur Entwürfe können bearbeitet werden.");return}
+   coEditor={id,titel:co.titel||"",lbNum:co.lbNum||1,datum:co.datum||"",zaehlt:co.zaehlt!==false,vignetteTitel:co.vignette?.titel||"",vignetteText:co.vignette?.text||"",
+    klassisch:lo.klassisch||"",checkliste:lo.checkliste||[],
+    aufgaben:(co.aufgaben||[]).map((a,i)=>({stamm:a.stamm||"",aussagen:[0,1,2,3].map(j=>({text:a.aussagen?.[j]||"",richtig:!!lo.aufgaben?.[i]?.richtig?.[j]}))}))};
+  }catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
+ }else{
+  const heute=new Date().toISOString().slice(0,10);
+  const lauf=PROJEKT_PHASEN.find(p=>heute>=p.start&&heute<=p.end)||PROJEKT_PHASEN.find(p=>heute<p.start)||PROJEKT_PHASEN[0];
+  coEditor={id:null,titel:"",lbNum:lauf.lbNum,datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:[coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe()]};
+ }
+ coEditorRender();
+}
+function coEditorLesen(){
+ if(!coEditor||!$("coTitel"))return;
+ coEditor.titel=$("coTitel").value;coEditor.lbNum=Number($("coLb").value)||1;coEditor.datum=$("coDatum").value;coEditor.zaehlt=$("coZaehlt").checked;
+ coEditor.vignetteTitel=$("coVigTitel").value;coEditor.vignetteText=$("coVigText").value;coEditor.klassisch=$("coKlassisch").value;
+ coEditor.checkliste=CO_CHECKLISTE.map((c,k)=>!!$(`coCl${k}`)?.checked);
+ coEditor.aufgaben=coEditor.aufgaben.map((a,i)=>({stamm:$(`coStamm${i}`)?.value||"",aussagen:[0,1,2,3].map(j=>({text:$(`coA${i}_${j}`)?.value||"",richtig:$(`coR${i}_${j}`)?.value==="r"}))}));
+}
+// Aktualisiert nur die Hinweise (beim Tippen), ohne das Formular neu zu zeichnen.
+function coEditorPruefen(){
+ coEditorLesen();
+ const p=coPruefung(coEditor);
+ p.pro.forEach((x,i)=>{const el=$(`coHinw${i}`);if(el)el.innerHTML=`<b>${x.richtig} richtig · ${4-x.richtig} falsch</b> ${coPruefChips(x)}`;});
+ const g=$("coHinwGlob");if(g)g.innerHTML=p.glob.map(t=>`<div class="co-hinweis">⚠ ${esc(t)}</div>`).join("");
+ const n=coEditor.checkliste.filter(Boolean).length,cs=$("coClStand");if(cs)cs.textContent=`${n}/${CO_CHECKLISTE.length} bestätigt`;
+}
+function coEditorRender(){
+ const e=coEditor,p=coPruefung(e),be=CHECKOUT_BE_NACH_FEHLERN;
+ const cl=CO_CHECKLISTE.map(([g,t],k)=>`${k===0||CO_CHECKLISTE[k-1][0]!==g?`<div class="co-cl-gruppe">${g}</div>`:""}<label class="co-cl"><input id="coCl${k}"type="checkbox"${e.checkliste[k]?" checked":""} onchange="coEditorPruefen()"> ${esc(t)}</label>`).join("");
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUT-TEST · ${e.id?"ENTWURF BEARBEITEN":"NEU ANLEGEN"} · NUR LEHRKRÄFTE</div>
+  <h2>K-Prim-Test anlegen</h2>
+  <p class="co-ed-intro">Aufbau nach ISB-Vorgabe: <b>① Situation</b> → <b>② ${CHECKOUT_MIN_AUFGABEN}–${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben</b> (je Einleitungssatz + 4 Aussagen) → <b>③ Checkliste</b>. Wertung je Aufgabe: 4 richtig = ${be[0]} BE · 3 = ${be[1]} BE · 2 = ${be[2]} BE · sonst 0.</p>
+  <div class="form">
+   <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <label style="flex:2;min-width:200px">Titel<input id="coTitel"value="${esc(e.titel)}"placeholder="z. B. Kommunikation in der Lerngruppe"></label>
+    <label style="flex:1;min-width:110px">Lernbereich<select id="coLb">${[1,2,3,4].map(n=>`<option value="${n}"${e.lbNum===n?" selected":""}>LB ${n}</option>`).join("")}</select></label>
+    <label style="flex:1;min-width:140px">Datum<input id="coDatum"type="date"value="${esc(e.datum)}"></label>
+   </div>
+   <label class="check"><input id="coZaehlt"type="checkbox"${e.zaehlt?" checked":""}> zählt für den Kurzarbeit-Ersatz</label>
+
+   <div class="co-ed-schritt"><span>①</span> Situation (Vignette)</div>
+   <label>Überschrift<input id="coVigTitel"value="${esc(e.vignetteTitel)}"placeholder="z. B. Schwierige Kommunikation in der Lerngruppe"></label>
+   <label>Situationsbeschreibung<textarea id="coVigText"rows="7"placeholder="Jede Zeile wird für die Schüler:innen nummeriert.">${esc(e.vignetteText)}</textarea></label>
+   <small class="co-ed-tipp">Nur relevante Informationen, keine Hinweise auf die Lösung. Zeilenumbrüche werden nummeriert – so kannst du in Aussagen auf Zeilen verweisen.</small>
+   <label>Klassische Aufgabenstellung <span class="co-opt">optional · nur für den Aufgabenpool, Schüler sehen sie nicht</span><textarea id="coKlassisch"rows="2"placeholder="z. B. Erklären Sie anhand von Luzie und Tom die Entstehung einer Kommunikationsstörung auf Basis des 3. Axioms nach Watzlawick.">${esc(e.klassisch)}</textarea></label>
+
+   <div class="co-ed-schritt"><span>②</span> K-Prim-Aufgaben</div>
+   <small class="co-ed-tipp">Erst die richtige(n) Aussage(n) formulieren, dann plausible Distraktoren. Aussagen ähnlich lang und gleich gebaut.</small>
+   ${e.aufgaben.map((a,i)=>`<div class="card co-ed-aufgabe">
+    <div class="co-ed-kopf"><b>Aufgabe ${i+1}</b><span id="coHinw${i}"><b>${p.pro[i].richtig} richtig · ${4-p.pro[i].richtig} falsch</b> ${coPruefChips(p.pro[i])}</span></div>
+    <label>Einleitungssatz<input id="coStamm${i}"value="${esc(a.stamm)}"oninput="coEditorPruefen()"placeholder="z. B. Die weitere Kommunikation zwischen Tom und Luzie kann erfolgreich verlaufen, wenn …"></label>
+    ${a.aussagen.map((s,j)=>`<div class="co-ed-aussage"><span>${j+1}</span><textarea id="coA${i}_${j}"rows="2"oninput="coEditorPruefen()"placeholder="Aussage ${j+1}">${esc(s.text)}</textarea>
+     <select id="coR${i}_${j}"onchange="coEditorPruefen()"><option value="r"${s.richtig?" selected":""}>richtig</option><option value="f"${!s.richtig?" selected":""}>falsch</option></select></div>`).join("")}
+   </div>`).join("")}
+   <div id="coHinwGlob">${p.glob.map(t=>`<div class="co-hinweis">⚠ ${esc(t)}</div>`).join("")}</div>
+   <div class="form-actions">
+    ${e.aufgaben.length<CHECKOUT_MAX_AUFGABEN?`<button class="secondary"onclick="coEditorAufgabe(1)">＋ Aufgabe</button>`:""}
+    ${e.aufgaben.length>CHECKOUT_MIN_AUFGABEN?`<button class="secondary"onclick="coEditorAufgabe(-1)">− letzte Aufgabe</button>`:""}
+    <button class="secondary"onclick="coEditorVorschlag()">Vorschläge aus der App</button>
+   </div>
+
+   <details class="co-ed-details"><summary><span class="co-ed-schritt-inline">③</span> Checkliste (ISB) · <span id="coClStand">${e.checkliste.filter(Boolean).length}/${CO_CHECKLISTE.length} bestätigt</span></summary><div class="co-cl-liste">${cl}</div></details>
+   <details class="co-ed-details"><summary>Aus Word einfügen (Textvorlage)</summary>
+    <p style="font-size:12px;color:var(--muted);margin:6px 0">Text in dieser Form einfügen – R = richtig, F = falsch:</p>
+    <pre class="co-vorlage">TITEL: Kommunikation in der Lerngruppe
+LB: 4
+SITUATION: Schwierige Kommunikation in der Lerngruppe
+Für die Vorbereitung auf die Prüfung hat Tom …
+Luzie (abfällig): „Ich freue mich auch …“
+AUFGABENSTELLUNG: Erklären Sie … (optional)
+AUFGABE: Die Kommunikation kann erfolgreich verlaufen, wenn …
+F: … Tom im Sinne des 5. Axioms …
+F: … Luzie im Sinne des 2. Axioms …
+R: … Tom im Sinne des 1. Axioms …
+F: … Luzie im Sinne des 4. Axioms …
+AUFGABE: …</pre>
+    <textarea id="coImport"rows="6"placeholder="Hier einfügen …"></textarea>
+    <div class="form-actions"><button class="secondary"onclick="coEditorImport()">Übernehmen</button></div>
+   </details>
+   <div class="form-actions co-ed-fuss">
+    ${e.id?`<button class="secondary"onclick="coLoeschen('${e.id}')">Löschen</button>`:""}
+    <button class="secondary"onclick="coEditorLesen();coPoolExport('pdf')">PDF für Aufgabenpool</button>
+    <button class="secondary"onclick="coEditorLesen();coPoolExport('word')">Word für Aufgabenpool</button>
+    <span style="flex:1"></span>
+    <button class="secondary"onclick="closeModal()">Abbrechen</button>
+    <button class="primary"onclick="coEditorSpeichern()">Entwurf speichern</button>
+   </div>
+  </div>`);
+}
+function coEditorAufgabe(d){coEditorLesen();if(d>0&&coEditor.aufgaben.length<CHECKOUT_MAX_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());if(d<0&&coEditor.aufgaben.length>CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.pop();coEditorRender();}
+function coEditorVorschlag(){
+ coEditorLesen();
+ const ph=PROJEKT_PHASEN.find(p=>p.lbNum===coEditor.lbNum);
+ const kp=PP_EINHEITEN.filter(e=>ph&&(ph.trainingWochen.includes(e.id)||ph.notwendigeWochen.includes(e.id))).flatMap(e=>e.kprim||[]).slice(0,CHECKOUT_MAX_AUFGABEN);
+ if(!kp.length){toast("Für diesen Lernbereich gibt es keine Vorschläge.");return}
+ if(!confirm(`${kp.length} K-Prim-Aufgaben aus den App-Vorschlägen einsetzen? Bestehende Aufgaben werden ersetzt.`))return;
+ coEditor.aufgaben=kp.map(k=>({stamm:k.frage||"",aussagen:[0,1,2,3].map(j=>({text:k.statements?.[j]?.text||"",richtig:!!k.statements?.[j]?.correct}))}));
+ while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
+ coEditorRender();toast("Eingesetzt – bitte eine Situation ergänzen und die Aussagen auf den Fall zuschneiden.");
+}
+// Textvorlage (aus Word kopiert) oder JSON einlesen.
+function coEditorImport(){
+ coEditorLesen();
+ const roh=$("coImport").value.trim();
+ if(!roh){toast("Bitte zuerst Text einfügen.");return}
+ try{
+  if(roh.startsWith("{")){
+   const j=JSON.parse(roh);
+   if(j.titel)coEditor.titel=j.titel;
+   if(j.lb)coEditor.lbNum=Number(j.lb)||coEditor.lbNum;
+   if(typeof j.vignette==="string")coEditor.vignetteText=j.vignette;
+   else if(j.vignette){coEditor.vignetteTitel=j.vignette.titel||"";coEditor.vignetteText=j.vignette.text||"";}
+   if(j.aufgabenstellung)coEditor.klassisch=j.aufgabenstellung;
+   if(Array.isArray(j.aufgaben)&&j.aufgaben.length)coEditor.aufgaben=j.aufgaben.slice(0,CHECKOUT_MAX_AUFGABEN).map(a=>({stamm:a.stamm||a.frage||"",aussagen:[0,1,2,3].map(k=>{const s=(a.aussagen||a.statements||[])[k]||{};return{text:typeof s==="string"?s:(s.text||""),richtig:!!(s.richtig??s.correct)};})}));
+  }else{
+   let modus="",situation=[],aufgaben=[],klassisch=[];
+   roh.split(/\r?\n/).forEach(z=>{
+    const t=z.trim();let m;
+    if(m=t.match(/^TITEL:\s*(.*)$/i)){coEditor.titel=m[1];modus="";}
+    else if(m=t.match(/^LB:\s*(\d)/i)){coEditor.lbNum=Number(m[1]);modus="";}
+    else if(m=t.match(/^SITUATION:\s*(.*)$/i)){coEditor.vignetteTitel=m[1];modus="sit";}
+    else if(m=t.match(/^AUFGABENSTELLUNG:\s*(.*)$/i)){klassisch.push(m[1]);modus="kl";}
+    else if(m=t.match(/^AUFGABE:\s*(.*)$/i)){aufgaben.push({stamm:m[1],aussagen:[]});modus="auf";}
+    else if(m=t.match(/^([RF])\s*[:)]\s*(.*)$/i)){const a=aufgaben[aufgaben.length-1];if(a&&a.aussagen.length<4)a.aussagen.push({text:m[2],richtig:m[1].toUpperCase()==="R"});}
+    else if(modus==="sit")situation.push(z.replace(/^\s*\d+\s+/,""));
+    else if(modus==="kl"&&t)klassisch.push(t);
+    else if(modus==="auf"&&t&&aufgaben.length){const a=aufgaben[aufgaben.length-1];if(!a.aussagen.length)a.stamm=(a.stamm+" "+t).trim();}
+   });
+   if(situation.length)coEditor.vignetteText=situation.join("\n").replace(/^\n+|\n+$/g,"");
+   if(klassisch.length)coEditor.klassisch=klassisch.join(" ");
+   if(aufgaben.length){
+    const fehl=aufgaben.findIndex(a=>a.aussagen.length!==4);
+    if(fehl>-1)toast(`Aufgabe ${fehl+1} hat nicht genau 4 Aussagen – bitte ergänzen.`);
+    coEditor.aufgaben=aufgaben.slice(0,CHECKOUT_MAX_AUFGABEN).map(a=>({stamm:a.stamm,aussagen:[0,1,2,3].map(k=>a.aussagen[k]||{text:"",richtig:false})}));
+   }
+  }
+  while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
+  coEditorRender();toast("Übernommen – bitte prüfen und speichern.");
+ }catch(e){console.error(e);toast("Das Format konnte nicht gelesen werden.");}
+}
+async function coEditorSpeichern(){
+ coEditorLesen();
+ const e=coEditor;
+ if(!e.titel.trim()){toast("Bitte einen Titel eingeben.");return}
+ if(!e.vignetteText.trim()){toast("Bitte die Situation (Vignette) eintragen.");return}
+ const unvollst=e.aufgaben.findIndex(a=>!a.stamm.trim()||a.aussagen.some(s=>!s.text.trim()));
+ if(unvollst>-1){toast(`Aufgabe ${unvollst+1}: Einleitungssatz und alle 4 Aussagen ausfüllen.`);return}
+ const offen=CO_CHECKLISTE.length-e.checkliste.filter(Boolean).length;
+ if(offen&&!confirm(`${offen} Punkt(e) der Checkliste sind noch nicht bestätigt. Trotzdem speichern?`))return;
+ const daten={titel:e.titel.trim(),lbNum:e.lbNum,datum:e.datum,zaehlt:e.zaehlt,status:"entwurf",
+  vignette:{titel:e.vignetteTitel.trim(),text:e.vignetteText.replace(/\s+$/,"")},
+  aufgaben:e.aufgaben.map(a=>({stamm:a.stamm.trim(),aussagen:a.aussagen.map(s=>s.text.trim())})),
+  updatedAt:serverTimestamp(),updatedBy:currentUser.uid};
+ // Lösung, klassische Aufgabenstellung und Checkliste liegen nur bei den Lehrkräften.
+ const loesung={aufgaben:e.aufgaben.map(a=>({richtig:a.aussagen.map(s=>!!s.richtig)})),klassisch:e.klassisch.trim(),checkliste:e.checkliste,updatedAt:serverTimestamp()};
+ try{
+  let id=e.id;
+  if(id)await setDoc(doc(db,"checkouts",id),daten,{merge:true});
+  else{const r=await addDoc(collection(db,"checkouts"),{...daten,createdAt:serverTimestamp(),createdBy:currentUser.uid});id=r.id;}
+  await setDoc(doc(db,"checkoutLoesungen",id),loesung);
+  toast("Check-Out-Test gespeichert.");closeModal();await render();
+ }catch(err){console.error("Check-out speichern:",err);toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+// Situation mit Zeilennummern (wie in Prüfungsaufgaben).
+function coSituationHTML(v,pdf=false){
+ const E=pdf?escPDF:esc;
+ const zeilen=String(v?.text||"").split(/\r?\n/);
+ return`<div class="co-situation">${v?.titel?`<div class="co-sit-titel">Situation: ${E(v.titel)}</div>`:""}
+  <table class="co-sit-tab"style="border-collapse:collapse;width:100%">${zeilen.map((z,k)=>`<tr><td class="co-sit-nr"style="width:28px;vertical-align:top;color:#8a99a3;font-size:12px;padding:2px 8px 2px 0;text-align:right">${k+1}</td><td style="padding:2px 0;line-height:1.55">${E(z)||"&nbsp;"}</td></tr>`).join("")}</table></div>`;
+}
+// Export für den ISB-Aufgabenpool: Situation, klassische Aufgabenstellung,
+// K-Prim-Aufgaben mit Lösung (X). Dateiname INHALT_KPRIM_SCHULNUMMER.
+function coPoolExport(art){
+ const e=coEditor;if(!e)return;
+ const nr=prompt("Schulnummer für den Dateinamen (INHALT_KPRIM_SCHULNUMMER):",localStorage.getItem("coSchulnummer")||"");
+ if(nr===null)return;
+ try{localStorage.setItem("coSchulnummer",nr.trim());}catch(x){}
+ const inhalt=((e.titel||"Inhalt").trim().split(/\s+/).find(w=>w.length>3)||"Inhalt").replace(/[^A-Za-zÄÖÜäöüß0-9-]/g,"");
+ const name=`${inhalt}_KPRIM_${nr.trim()||"0000"}`;
+ const be=CHECKOUT_BE_NACH_FEHLERN[0];
+ const aufg=e.aufgaben.map((a,i)=>`<h3 style="margin:18px 0 4px">Aufgabe ${i+1}: K-Prim-Aufgabe</h3>
+  <p style="margin:0 0 6px">Entscheiden Sie bei den Aussagen 1–4, ob sie jeweils richtig oder falsch sind.</p>
+  <p style="margin:0 0 6px"><b>${escPDF(a.stamm)}</b></p>
+  <table style="width:100%;border-collapse:collapse" border="1" cellpadding="6"><tr><th style="width:60px">richtig</th><th style="width:60px">falsch</th><th style="text-align:left">Aussage</th></tr>
+  ${a.aussagen.map((s,j)=>`<tr><td style="text-align:center">${s.richtig?"X":""}</td><td style="text-align:center">${s.richtig?"":"X"}</td><td>${j+1}. ${escPDF(s.text)}</td></tr>`).join("")}</table>
+  <p style="text-align:right;margin:4px 0 0">____ / ${be} BE</p>`).join("");
+ const body=`<p><b>Lernbereich:</b> LB ${e.lbNum} · Pädagogik/Psychologie 11</p>
+  <h2>Ausgangssituation</h2>${coSituationHTML({titel:e.vignetteTitel,text:e.vignetteText},true)}
+  ${e.klassisch.trim()?`<h2>Klassische Aufgabenstellung</h2><p>${escPDF(e.klassisch)}</p>`:""}
+  <h2>K-Prim-Aufgaben (mit Lösung)</h2>${aufg}
+  <p style="font-size:11px;color:#666;margin-top:14px">Wertung je Aufgabe: 4 richtige Entscheidungen = ${be} BE, 3 = ${CHECKOUT_BE_NACH_FEHLERN[1]} BE, 2 = ${CHECKOUT_BE_NACH_FEHLERN[2]} BE, weniger = 0 BE.</p>`;
+ if(art==="word"){
+  const html=`<html><head><meta charset="utf-8"><title>${escPDF(name)}</title></head><body style="font-family:Arial,sans-serif;font-size:11pt"><h1>${escPDF(e.titel||name)}</h1>${body}</body></html>`;
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff",html],{type:"application/msword"}));a.download=name+".doc";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
+  toast(`${name}.doc wird heruntergeladen.`);
+ }else openToolPrintWindow(name,body,`${e.titel||""} · als PDF sichern und unter „${name}“ in mebis hochladen`);
+}
+async function coLoeschen(id){
+ if(!isTeacher())return;
+ if(!confirm("Diesen Check-out wirklich löschen? Abgaben und Ergebnisse dazu werden ebenfalls gelöscht."))return;
+ try{
+  const ab=await getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)));
+  await Promise.all(ab.docs.map(d=>deleteDoc(d.ref)));
+  await deleteDoc(doc(db,"checkoutLoesungen",id)).catch(()=>{});
+  await deleteDoc(doc(db,"checkouts",id));
+  toast("Check-out gelöscht.");closeModal();await render();
+ }catch(e){console.error(e);toast("Konnte nicht gelöscht werden.");}
+}
+
+// ---- Live schalten / beenden / auswerten (Lehrkraft) ----
+async function coLiveStarten(id){
+ if(!isTeacher())return;
+ if(!confirm("Check-out jetzt LIVE freischalten? Alle Schüler:innen können ihn dann sofort öffnen."))return;
+ try{await updateDoc(doc(db,"checkouts",id),{status:"live",liveAt:serverTimestamp()});toast("Check-out ist live.");await openCheckoutMonitor(id);}
+ catch(e){console.error(e);toast("Konnte nicht freigeschaltet werden.");}
+}
+function coUnsubAll(){if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}}
+async function openCheckoutMonitor(id){
+ if(!isTeacher())return;
+ coUnsubAll();
+ let co=null,students=[];
+ try{const c=await getDoc(doc(db,"checkouts",id));co=c.exists()?{id,...c.data()}:null;students=await getAllUsersForLernstand();}catch(e){}
+ if(!co){toast("Nicht gefunden.");return}
+ const n=(co.aufgaben||[]).length*4;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUT · LIVE-ÜBERSICHT</div>
+  <h2>${esc(co.titel)}</h2>
+  <div id="coMonitor"><p style="color:var(--muted)">Lädt …</p></div>
+  <div class="form-actions"style="margin-top:14px">
+   <button class="secondary"onclick="closeModal()">Schließen</button>
+   ${co.status==="live"?`<button class="primary"style="background:#d9534f"onclick="coBeenden('${id}')">■ Live beenden & auswerten</button>`:`<button class="secondary"onclick="openCheckoutErgebnisse('${id}')">Ergebnisse</button>`}
+  </div>`);
+ window.__coUnsub=onSnapshot(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)),snap=>{
+  const box=$("coMonitor");if(!box){coUnsubAll();return}
+  const ab={};snap.docs.forEach(d=>{const x=d.data();ab[x.uid]=x;});
+  const abgegeben=Object.values(ab).filter(a=>a.abgegeben).length;
+  box.innerHTML=`<p style="font-size:14px"><b>${abgegeben}</b> abgegeben · <b>${Object.keys(ab).length-abgegeben}</b> in Bearbeitung · <b>${students.length-Object.keys(ab).length}</b> noch nicht gestartet</p>
+   <div class="co-monitor">${students.map(s=>{const a=ab[s.uid];const k=a?Object.keys(a.antworten||{}).length:0;
+    return`<div class="co-mon-zeile ${a?.abgegeben?"ab":a?"lauf":"nicht"}"><span>${esc(s.displayName||s.email||"")}</span><small>${a?.abgegeben?"abgegeben ✓":a?`${k}/${n} beantwortet`:"noch nicht gestartet"}</small></div>`;}).join("")}</div>`;
+ },e=>console.error("Check-out-Monitor:",e));
+}
+async function coBeenden(id){
+ if(!isTeacher())return;
+ if(!confirm("Check-out jetzt beenden? Danach kann niemand mehr etwas ändern und die App wertet automatisch aus."))return;
+ coUnsubAll();
+ try{
+  await updateDoc(doc(db,"checkouts",id),{status:"beendet",endAt:serverTimestamp()});
+  toast("Beendet – wird ausgewertet …");
+  await coAuswerten(id);
+  await openCheckoutErgebnisse(id);
+ }catch(e){console.error("Check-out beenden:",e);toast("Konnte nicht beendet werden.");}
+}
+async function coAuswerten(id){
+ const [c,l,ab]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutLoesungen",id)),getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)))]);
+ if(!c.exists()||!l.exists())throw new Error("Check-out oder Lösung fehlt");
+ const co=c.data(),lo=l.data();
+ await Promise.all(ab.docs.map(d=>{const x=d.data();const erg=coBewerten(co,lo,x.antworten||{});
+  return updateDoc(d.ref,{...erg,ausgewertet:true,abgegeben:true,ausgewertetAm:serverTimestamp()});}));
+ await updateDoc(doc(db,"checkouts",id),{ausgewertetAm:serverTimestamp(),teilnehmer:ab.size,maxBE:(co.aufgaben||[]).length*CHECKOUT_BE_NACH_FEHLERN[0]});
+ toast(`${ab.size} Abgaben ausgewertet.`);
+}
+async function coNeuAuswerten(id){
+ if(!confirm("Alle Abgaben dieses Check-outs neu auswerten (z. B. nach einer Korrektur der Lösung)?"))return;
+ try{await coAuswerten(id);await openCheckoutErgebnisse(id);}catch(e){console.error(e);toast("Konnte nicht ausgewertet werden.");}
+}
+
+// ---- Test bearbeiten (Schüler:in) ----
+async function openCheckoutTest(id){
+ coUnsubAll();
+ let co=null,a=null;
+ try{
+  const c=await getDoc(doc(db,"checkouts",id));co=c.exists()?{id,...c.data()}:null;
+  const s=await getDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`));a=s.exists()?s.data():null;
+ }catch(e){console.error(e);}
+ if(!co){toast("Dieser Check-out ist nicht verfügbar.");return}
+ if(co.status!=="live"){toast("Dieser Check-out ist nicht (mehr) freigeschaltet.");return}
+ if(a?.abgegeben){toast("Du hast bereits abgegeben.");return}
+ const ant=a?.antworten||{};
+ const c=PP_FARBEN[co.lbNum]||"#4a90d9";
+ modal(`<div id="coTest">
+  <div class="kicker"style="color:${c}">🏁 CHECK-OUT · LB ${esc(co.lbNum)} · ${coDatum(co.datum)}</div>
+  <h2>${esc(co.titel)}</h2>
+  <div class="co-info">Lies die Situation genau. Entscheide dann bei <b>jeder</b> Aussage, ob sie richtig oder falsch ist.
+   <span>Wertung je Aufgabe: 4 richtig = ${CHECKOUT_BE_NACH_FEHLERN[0]} BE · 3 = ${CHECKOUT_BE_NACH_FEHLERN[1]} BE · 2 = ${CHECKOUT_BE_NACH_FEHLERN[2]} BE · sonst 0 · Leer = falsch · Antworten werden automatisch gespeichert.</span></div>
+  <div class="co-vignette"style="border-left-color:${c}">${coSituationHTML(co.vignette)}</div>
+  ${(co.aufgaben||[]).map((q,i)=>`<div class="card co-aufgabe">
+   <div class="co-auf-kopf"><span>Aufgabe ${i+1}</span><span>/ ${CHECKOUT_BE_NACH_FEHLERN[0]} BE</span></div>
+   <strong class="kp-stamm">${esc(q.stamm)}</strong>
+   <p class="kp-anleitung">Entscheiden Sie bei den Aussagen 1–4, ob sie jeweils <b>richtig oder falsch</b> sind.</p>
+   ${kprimTabelleHTML(`coT${i}`,q.aussagen||[],Object.fromEntries([0,1,2,3].map(j=>[j,ant[`${i}_${j}`]])),`coAntwort('${id}','${i}_%J','%V')`)}
+  </div>`).join("")}
+  <div class="co-test-fuss"><span id="coStand"></span><button class="primary"onclick="coAbgeben('${id}')">Abgeben</button></div>
+ </div>`);
+ coStandAktualisieren(co);
+ // Beendet die Lehrkraft den Test, wird die Bearbeitung sofort gesperrt.
+ window.__coUnsub=onSnapshot(doc(db,"checkouts",id),snap=>{
+  if(!$("coTest")){coUnsubAll();return}
+  const x=snap.data();
+  if(x&&x.status!=="live"){coUnsubAll();$("coTest").innerHTML=`<h2>Der Check-out wurde beendet.</h2><p>Deine gespeicherten Antworten werden gewertet. Das Ergebnis erscheint in deinem Lernweg.</p><div class="form-actions"><button class="primary"onclick="closeModal();render()">OK</button></div>`;}
+ });
+}
+function coStandAktualisieren(co){
+ const n=(co?.aufgaben||[]).length*4||document.querySelectorAll("#coTest .kp-tabelle tbody tr").length;
+ const k=document.querySelectorAll('#coTest input[type="radio"]:checked').length;
+ const el=$("coStand");if(el)el.textContent=`${k} von ${n} Aussagen beantwortet`;
+}
+async function coAntwort(id,key,wert){
+ coStandAktualisieren();
+ try{
+  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",antworten:{[key]:wert},updatedAt:serverTimestamp()},{merge:true});
+ }catch(e){console.error("Antwort speichern:",e);toast(e?.code==="permission-denied"?"Der Check-out ist nicht mehr freigeschaltet – Antwort nicht gespeichert.":"Antwort konnte nicht gespeichert werden – Verbindung prüfen.");}
+}
+async function coAbgeben(id){
+ const alle=document.querySelectorAll("#coTest .kp-tabelle tbody tr").length;
+ const k=document.querySelectorAll('#coTest input[type="radio"]:checked').length;
+ if(k<alle&&!confirm(`Du hast ${alle-k} Aussage(n) noch nicht beantwortet – diese zählen als Fehler. Trotzdem abgeben?`))return;
+ if(k===alle&&!confirm("Jetzt endgültig abgeben? Danach kannst du nichts mehr ändern."))return;
+ try{
+  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",abgegeben:true,abgegebenAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
+  coUnsubAll();closeModal();toast("Abgegeben ✓");await render();
+ }catch(e){console.error(e);toast("Konnte nicht abgegeben werden.");}
+}
+
+// ---- Ergebnisse ----
+function coAufgabeErgebnisHTML(q,i,erg,pdf=false){
+ const E=pdf?escPDF:esc;
+ const r=erg?.auswertung?.[i];
+ const zeichen=v=>v==="r"?"richtig":v==="f"?"falsch":"–";
+ return`<div class="${pdf?"item":"card co-aufgabe"}"><b>${i+1}. ${E(q.stamm)}</b>${r?` <span style="float:right">${r.be} BE · ${r.fehler} Fehler</span>`:""}
+  <table class="co-erg-tab"style="width:100%;border-collapse:collapse;margin-top:6px;font-size:13px"><thead><tr><th style="text-align:left">Aussage</th><th>angekreuzt</th><th>Lösung</th><th></th></tr></thead><tbody>
+  ${(q.aussagen||[]).map((t,j)=>`<tr><td>${j+1}. ${E(t)}</td><td style="text-align:center">${zeichen(r?.angekreuzt?.[j])}</td><td style="text-align:center">${r?(r.loesung?.[j]?"richtig":"falsch"):"–"}</td><td style="text-align:center;color:${r?.korrekt?.[j]?"#3fa66a":"#d9534f"}">${r?(r.korrekt?.[j]?"✓":"✗"):""}</td></tr>`).join("")}
+  </tbody></table></div>`;
+}
+function coSummeHTML(erg){return erg?.ausgewertet?`<b>${erg.be} von ${erg.maxBE} BE (${String(erg.prozent).replace(".",",")} %) · ${npText(erg.notenpunkte)}</b>`:"nicht ausgewertet";}
+async function openCheckoutMeinErgebnis(id){
+ try{
+  const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`))]);
+  const co=c.data(),erg=a.exists()?a.data():null;
+  modal(`<button class="modal-close"onclick="closeModal()">×</button>
+   <div class="kicker">🏁 CHECK-OUT · DEIN ERGEBNIS</div><h2>${esc(co.titel)}</h2>
+   <div class="co-summe">${coSummeHTML(erg)}</div>
+   <div class="co-vignette"style="border-left-color:${PP_FARBEN[co.lbNum]||"#4a90d9"}">${coSituationHTML(co.vignette)}</div>
+   ${(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg)).join("")}
+   <div class="form-actions"><button class="secondary"onclick="coPdfSchueler('${id}')">PDF herunterladen</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+ }catch(e){console.error(e);toast("Konnte nicht geladen werden.");}
+}
+async function coLadeErgebnisse(id){
+ const [c,ab,students]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id))),getAllUsersForLernstand()]);
+ const co={id,...c.data()};const abgaben={};ab.docs.forEach(d=>{const x=d.data();abgaben[x.uid]=x;});
+ return{co,abgaben,students};
+}
+async function openCheckoutErgebnisse(id){
+ if(!isTeacher())return;
+ let d;try{d=await coLadeErgebnisse(id);}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
+ const {co,abgaben,students}=d;
+ const erg=Object.values(abgaben).filter(a=>a.ausgewertet);
+ const schnitt=erg.length?(erg.reduce((s,a)=>s+a.notenpunkte,0)/erg.length).toFixed(1).replace(".",","):"–";
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUT · ERGEBNISSE · NUR LEHRKRÄFTE</div><h2>${esc(co.titel)}</h2>
+  <p style="font-size:13px;color:var(--muted)">${coDatum(co.datum)} · ${erg.length} ausgewertet · Klassenschnitt ${schnitt} Punkte</p>
+  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>Ergebnis</th></tr></thead>
+  <tbody>${students.map(s=>{const a=abgaben[s.uid];
+   if(!a)return`<tr><td>${esc(s.displayName||s.email||"")}</td><td colspan="${(co.aufgaben||[]).length+2}"style="color:var(--muted)">nicht teilgenommen</td></tr>`;
+   if(!a.ausgewertet)return`<tr><td>${esc(s.displayName||s.email||"")}</td><td colspan="${(co.aufgaben||[]).length+2}">noch nicht ausgewertet</td></tr>`;
+   return`<tr style="cursor:pointer"onclick="openCheckoutSchuelerErgebnis('${id}','${s.uid}')"><td>${esc(s.displayName||s.email||"")}</td>${(a.auswertung||[]).map(r=>`<td style="text-align:center"title="${r.fehler} Fehler">${r.be}</td>`).join("")}<td style="text-align:center">${a.be}/${a.maxBE}</td><td><b>${npText(a.notenpunkte)}</b></td></tr>`;}).join("")}</tbody></table></div>
+  <div class="form-actions"style="margin-top:14px">
+   <button class="secondary"onclick="coNeuAuswerten('${id}')">Neu auswerten</button>
+   <button class="secondary"onclick="coLoeschen('${id}')">Löschen</button>
+   <button class="primary"onclick="coPdfKlasse('${id}')">PDF Klasse</button>
+   <button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+async function openCheckoutSchuelerErgebnis(id,uid){
+ let d;try{d=await coLadeErgebnisse(id);}catch(e){return}
+ const a=d.abgaben[uid],s=d.students.find(x=>x.uid===uid);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUT · ${esc(s?.displayName||s?.email||"")}</div><h2>${esc(d.co.titel)}</h2>
+  <div class="co-summe">${coSummeHTML(a)}</div>
+  ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a)).join("")}
+  <div class="form-actions"><button class="secondary"onclick="openCheckoutErgebnisse('${id}')">← Zurück</button><button class="secondary"onclick="coPdfSchueler('${id}','${uid}')">PDF</button></div>`);
+}
+
+// ---- PDF (Druckfenster „Als PDF sichern") ----
+function coPdfBlock(co,erg,name){
+ return`<div class="item"style="background:#f5f7f8"><strong>${escPDF(name)}</strong><div>${erg?.ausgewertet?`${erg.be} von ${erg.maxBE} BE (${String(erg.prozent).replace(".",",")} %) · <b>${npText(erg.notenpunkte)}</b>`:"nicht teilgenommen"}</div></div>
+  ${erg?.ausgewertet?(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg,true)).join(""):""}`;
+}
+function coVignettePdf(co){return`<div class="item">${coSituationHTML(co.vignette,true)}</div>`;}
+async function coPdfSchueler(id,uid){
+ uid=uid||currentUser.uid;
+ try{
+  const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${uid}`))]);
+  const co=c.data(),erg=a.exists()?a.data():null;
+  openToolPrintWindow(`${co.titel} – Ergebnis`,coVignettePdf(co)+coPdfBlock(co,erg,erg?.name||profile?.displayName||""),`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)}`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+async function coPdfKlasse(id){
+ if(!isTeacher())return;
+ try{
+  const {co,abgaben,students}=await coLadeErgebnisse(id);
+  const tabelle=`<table><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>
+   ${students.map(s=>{const a=abgaben[s.uid];return`<tr><td>${escPDF(s.displayName||s.email||"")}</td>${a?.ausgewertet?(a.auswertung||[]).map(r=>`<td>${r.be}</td>`).join("")+`<td>${a.be}/${a.maxBE}</td><td>${String(a.prozent).replace(".",",")}</td><td><b>${npText(a.notenpunkte)}</b></td>`:`<td colspan="${(co.aufgaben||[]).length+3}">nicht teilgenommen</td>`}</tr>`;}).join("")}</tbody></table>`;
+  const einzel=students.filter(s=>abgaben[s.uid]?.ausgewertet).map(s=>`<div style="break-before:page">${coPdfBlock(co,abgaben[s.uid],s.displayName||s.email||"")}</div>`).join("");
+  openToolPrintWindow(`${co.titel} – Ergebnisse der Klasse`,`<h2>Übersicht</h2>${tabelle}<div style="break-before:page"></div>${coVignettePdf(co)}${einzel}`,`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)} · Wertung je Aufgabe ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+
+// ---- Kurzarbeit-Ersatz: 7 aus 10 ----
+async function openCheckoutAuswahl(){
+ const d=await ladeCheckoutDaten();
+ if(!d.einst.auswahlOffen){toast("Die Auswahl ist gerade nicht freigeschaltet.");return}
+ const pool=coPool(d.checkouts,d.einst).filter(c=>d.meineAbgaben[c.id]?.ausgewertet);
+ const gewaehlt=new Set(d.auswahl?.ids||[]);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 KURZARBEIT-ERSATZ</div><h2>Wähle deine ${d.einst.anzahlWaehlen} Check-outs</h2>
+  <p style="font-size:13px;color:var(--muted);margin-top:0">Der Durchschnitt der Notenpunkte deiner Auswahl ersetzt eine Kurzarbeit (gerundet).</p>
+  ${pool.length<d.einst.anzahlWaehlen?`<div class="empty">Du hast erst ${pool.length} gewertete Check-outs – du brauchst mindestens ${d.einst.anzahlWaehlen}.</div>`:""}
+  <div class="list"id="coAuswahlListe">${pool.map(c=>{const a=d.meineAbgaben[c.id];return`<label class="list-item co-wahl"><input type="checkbox"value="${c.id}"data-np="${a.notenpunkte}"${gewaehlt.has(c.id)?" checked":""} onchange="coAuswahlStand(${d.einst.anzahlWaehlen})"><div style="flex:1"><strong>${esc(c.titel)}</strong><small>LB ${esc(c.lbNum)} · ${coDatum(c.datum)}</small></div><b>${npText(a.notenpunkte)}</b></label>`;}).join("")}</div>
+  <div class="co-test-fuss"><span id="coAuswahlStand"></span><button class="primary"onclick="coAuswahlSpeichern(${d.einst.anzahlWaehlen})">Auswahl speichern</button></div>`);
+ coAuswahlStand(d.einst.anzahlWaehlen);
+}
+function coAuswahlStand(soll){
+ const boxen=[...document.querySelectorAll("#coAuswahlListe input:checked")];
+ const nps=boxen.map(b=>Number(b.dataset.np)||0);
+ const el=$("coAuswahlStand");if(!el)return;
+ const schnitt=nps.length?nps.reduce((a,b)=>a+b,0)/nps.length:0;
+ el.innerHTML=`${nps.length} von ${soll} gewählt${nps.length?` · Ø ${schnitt.toFixed(1).replace(".",",")} → <b>${npText(Math.round(schnitt))}</b>`:""}`;
+ el.style.color=nps.length===soll?"#3e7a2a":"var(--muted)";
+}
+async function coAuswahlSpeichern(soll){
+ const ids=[...document.querySelectorAll("#coAuswahlListe input:checked")].map(b=>b.value);
+ if(ids.length!==soll){toast(`Bitte genau ${soll} Check-outs auswählen.`);return}
+ try{
+  await setDoc(doc(db,"checkoutAuswahl",currentUser.uid),{uid:currentUser.uid,name:profile?.displayName||currentUser.email||"",ids,updatedAt:serverTimestamp()});
+  toast("Auswahl gespeichert.");closeModal();await render();
+ }catch(e){console.error(e);toast(e?.code==="permission-denied"?"Die Auswahl ist nicht (mehr) freigeschaltet.":"Konnte nicht gespeichert werden.");}
+}
+async function coPdfErsatzSchueler(){
+ const d=await ladeCheckoutDaten();
+ const pool=coPool(d.checkouts,d.einst);const ids=new Set(d.auswahl?.ids||[]);
+ const e=d.auswahl?coErsatz(d.auswahl.ids||[],d.meineAbgaben):null;
+ const tab=`<table><thead><tr><th>Check-out</th><th>Datum</th><th>Ergebnis</th><th>gewählt</th></tr></thead><tbody>${pool.map(c=>{const a=d.meineAbgaben[c.id];return`<tr><td>${escPDF(c.titel)}</td><td>${coDatum(c.datum)}</td><td>${a?.ausgewertet?npText(a.notenpunkte):"–"}</td><td>${ids.has(c.id)?"✓":""}</td></tr>`;}).join("")}</tbody></table>`;
+ openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs",`<div class="item"style="background:#f5f7f8"><strong>${escPDF(profile?.displayName||"")}</strong><div>${e?`Ø ${e.schnitt.toFixed(2).replace(".",",")} → <b>${npText(e.np)}</b> (${e.anzahl} gewählte Check-outs)`:"Noch keine Auswahl"}</div></div>${tab}`,"F12Sb · Pädagogik/Psychologie");
+}
+async function openCheckoutEinstellungen(){
+ if(!isTeacher())return;
+ const d=await ladeCheckoutDaten();const e=d.einst;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 KURZARBEIT-ERSATZ · EINSTELLUNGEN</div><h2>Check-outs als Kurzarbeit-Ersatz</h2>
+  <div class="form">
+   <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <label style="flex:1">Anzahl gewerteter Check-outs<input id="coEGesamt"type="number"min="1"max="30"value="${e.anzahlGesamt}"></label>
+    <label style="flex:1">Davon auswählen<input id="coEWaehlen"type="number"min="1"max="30"value="${e.anzahlWaehlen}"></label>
+   </div>
+   <label class="check"><input id="coEOffen"type="checkbox"${e.auswahlOffen?" checked":""}> Schüler:innen dürfen jetzt auswählen</label>
+   <p style="font-size:12px;color:var(--muted)">Es zählen die ersten ${e.anzahlGesamt} beendeten Check-outs (nach Datum), die für den Kurzarbeit-Ersatz markiert sind. Nimmst du das Häkchen wieder heraus, ist die Auswahl eingefroren.</p>
+   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="coEinstellungenSpeichern()">Speichern</button></div>
+  </div>`);
+}
+async function coEinstellungenSpeichern(){
+ const anzahlGesamt=Math.max(1,Number($("coEGesamt").value)||10),anzahlWaehlen=Math.max(1,Math.min(anzahlGesamt,Number($("coEWaehlen").value)||7));
+ try{await setDoc(doc(db,"checkoutEinstellungen","pp"),{anzahlGesamt,anzahlWaehlen,auswahlOffen:$("coEOffen").checked,updatedAt:serverTimestamp()},{merge:true});toast("Gespeichert.");closeModal();await render();}
+ catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+async function coLadeKlasse(){
+ const d=await ladeCheckoutDaten();
+ const pool=coPool(d.checkouts,d.einst);
+ const [students,ab,aw]=await Promise.all([getAllUsersForLernstand(),getDocs(collection(db,"checkoutAbgaben")),getDocs(collection(db,"checkoutAuswahl"))]);
+ const abgaben={};ab.docs.forEach(x=>{const a=x.data();(abgaben[a.uid]=abgaben[a.uid]||{})[a.checkoutId]=a;});
+ const auswahl={};aw.docs.forEach(x=>{auswahl[x.id]=x.data();});
+ return{d,pool,students,abgaben,auswahl};
+}
+async function openCheckoutKlassenuebersicht(){
+ if(!isTeacher())return;
+ let k;try{k=await coLadeKlasse();}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
+ const {pool,students,abgaben,auswahl,d}=k;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 KURZARBEIT-ERSATZ · KLASSENÜBERSICHT</div><h2>Check-outs der Klasse</h2>
+  <p style="font-size:12px;color:var(--muted);margin-top:0">Markiert = von der Schülerin / dem Schüler für den Ersatz gewählt (${d.einst.anzahlWaehlen} aus ${d.einst.anzahlGesamt}).</p>
+  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th></tr></thead>
+  <tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
+   return`<tr><td>${esc(s.displayName||s.email||"")}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table></div>
+  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="coPdfErsatzKlasse()">PDF Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+async function coPdfErsatzKlasse(){
+ if(!isTeacher())return;
+ try{
+  const {pool,students,abgaben,auswahl,d}=await coLadeKlasse();
+  const legende=`<div class="item">${pool.map((c,i)=>`${i+1}: ${escPDF(c.titel)} (${coDatum(c.datum)})`).join(" · ")}</div>`;
+  const tab=`<table><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th>${i+1}</th>`).join("")}<th>Ø Auswahl</th><th>Ersatznote</th></tr></thead><tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
+   return`<tr><td>${escPDF(s.displayName||s.email||"")}</td>${pool.map(c=>`<td>${a[c.id]?.ausgewertet?(w.has(c.id)?`<b>[${a[c.id].notenpunkte}]</b>`:a[c.id].notenpunkte):"–"}</td>`).join("")}<td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table>`;
+  openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs (Klasse)",legende+tab,`F12Sb · Pädagogik/Psychologie · [x] = gewählt · ${d.einst.anzahlWaehlen} aus ${d.einst.anzahlGesamt}`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+Object.assign(window,{coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
+ openCheckoutTest,coAntwort,coAbgeben,openCheckoutMeinErgebnis,openCheckoutErgebnisse,openCheckoutSchuelerErgebnis,coPdfSchueler,coPdfKlasse,
+ openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse});
+
+// ---- Eigene Seite: Alternativer Leistungsnachweis (Sidebar-Eintrag) ----
+async function renderAlternativerLeistungsnachweis(){
+ const d=await ladeCheckoutDaten();
+ return`${pageHead("ALTERNATIVER LEISTUNGSNACHWEIS","Check-out · K-Prim-Test","Ersetzt die 2. Kurzarbeit in Pädagogik/Psychologie: Am Ende eines Lernbereichs schaltet deine Lehrkraft einen Check-out live – eine Fallvignette mit K-Prim-Aufgaben.")}
+ ${checkoutLiveBannerHTML(d)}
+ ${checkoutSektionHTML(d)}`;
+}
+window.renderAlternativerLeistungsnachweis=renderAlternativerLeistungsnachweis;
 
 function combinedTimeline(fach){
  const wochen=(LEHRPLAN_WOCHEN[fach]||[]).map(w=>({...w,kind:"woche"}));
@@ -1992,9 +2736,10 @@ async function renderStart(){
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
  const newsAction=(isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:"")
  +(isTeacher()?`<button class="secondary"onclick="openUserManagement()"> Benutzer verwalten</button>`:"");
- return`<section class="hero"><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
+ const coBanner=await checkoutStartBannerHTML();
+ return`${coBanner}<section class="hero"><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Projekte, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
-</div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button><button class="secondary"onclick="go('forum')">Campus-Forum</button></div></section>
+</div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button><button class="secondary"onclick="go('lernwerkstatt')">Lernwerkstatt</button></div></section>
  <div class="grid grid-3">
  <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
 class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isAdmin()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
@@ -2370,6 +3115,7 @@ async function renderFachDetail(){
  const erledigtCount=wochenItems.filter(w=>fortschrittMap[w.id]?.abgeschlossen).length;
  const fortschrittProzent=wochenItems.length?Math.round(erledigtCount/wochenItems.length*100):0;
  const naechsteIdx=timeline.findIndex(item=>item.kind==="woche"&&!fortschrittMap[item.id]?.abgeschlossen);
+ const taskcardLinks=await ladeTaskcardLinks();
 
  return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
  ${pageHead("LERNPFAD",fach?.label||"Fach",`Dein Weg durchs Schuljahr – ${erledigtCount} von ${wochenItems.length} Wochen geschafft.`,isTeacher()?`<button class="secondary"onclick="openLehrplanKlassenuebersicht('${activeFach}')"> Klassenübersicht</button>`:"")}
@@ -2440,6 +3186,7 @@ async function renderFachDetail(){
  </div>`;
  }).join("")})()||`<div class="empty"><strong>Für dieses Fach ist noch kein Lernpfad hinterlegt.</strong>Sobald die Jahresplanung vorliegt, erscheinen hier die einzelnen Stationen.</div>`}
  </div>
+ ${lernbereichKachelnHTML(taskcardLinks)}
  ${footer()}`;
 }
 window.renderFaecherUebersicht=renderFaecherUebersicht;
@@ -9181,6 +9928,7 @@ async function render(){
  projekte:renderProjekte,kompetenz:renderKompetenz,journal:renderLernjournalRoute,
  resilienz:renderResilienz,fragenhilfe:renderFragenHilfe,
  kalender:renderKalender,team:renderTeam,
+ leistungsnachweis:renderAlternativerLeistungsnachweis,
  impulse:renderLernimpulse,lernstand:renderLernstand,
  kompetenzprofil:()=>modulePlaceholder("Kompetenzprofil"),methoden:renderLernmethoden,lernstrategien:renderLernstrategienTest,metakognition:renderMetakognition,
  lerncoaching:renderLerncoaching

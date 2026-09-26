@@ -503,6 +503,63 @@ service cloud.firestore {
       allow delete: if isApproved() && resource.data.uid == request.auth.uid;
     }
 
+    // TaskCard-Links je Lernbereich (4 Kacheln unter dem Zeitstrahl).
+    match /taskcardLinks/{id} {
+      allow read: if isApproved();
+      allow write: if isTeacher();
+    }
+
+    // ---------------------------------------------------------
+    // ALTERNATIVER LEISTUNGSNACHWEIS (Check-out/K-Prim-Test, live
+    // durch die Lehrkraft) – Pädagogik/Psychologie, 4 Lernbereiche.
+    // ---------------------------------------------------------
+    function checkoutIstLive(coId) {
+      return get(/databases/$(database)/documents/checkouts/$(coId)).data.status == 'live';
+    }
+    // Aufgaben: Schüler:innen sehen nur freigeschaltete oder beendete Tests.
+    match /checkouts/{id} {
+      allow read: if isTeacher()
+        || (isApproved() && resource.data.status in ['live', 'beendet']);
+      allow create, update, delete: if isTeacher();
+    }
+    // Lösungen: ausschließlich Lehrkräfte (Auswertung im Browser der Lehrkraft).
+    match /checkoutLoesungen/{id} {
+      allow read, write: if isTeacher();
+    }
+    // Abgaben (ID <checkoutId>_<uid>): nur solange der Test live ist und noch
+    // nicht abgegeben wurde. Punkte/Noten schreibt nur die Lehrkraft.
+    match /checkoutAbgaben/{id} {
+      allow read: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
+      allow create: if isApproved()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.checkoutId + '_' + request.auth.uid
+        && checkoutIstLive(request.resource.data.checkoutId)
+        && request.resource.data.keys().hasOnly(['checkoutId','uid','name','antworten','abgegeben','abgegebenAt','updatedAt']);
+      allow update: if isTeacher()
+        || (isApproved()
+          && resource.data.uid == request.auth.uid
+          && resource.data.get('abgegeben', false) == false
+          && checkoutIstLive(resource.data.checkoutId)
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['antworten','abgegeben','abgegebenAt','updatedAt','name']));
+      allow delete: if isTeacher();
+    }
+    // Einstellungen Kurzarbeit-Ersatz (z. B. 7 aus 10, Auswahl offen?).
+    match /checkoutEinstellungen/{id} {
+      allow read: if isApproved();
+      allow write: if isTeacher();
+    }
+    // Auswahl der Schüler:innen für den Kurzarbeit-Ersatz – nur solange die
+    // Lehrkraft die Auswahl geöffnet hat.
+    match /checkoutAuswahl/{uid} {
+      allow read: if isApproved() && (uid == request.auth.uid || isTeacher());
+      allow create, update: if isTeacher()
+        || (isApproved() && uid == request.auth.uid
+          && request.resource.data.uid == request.auth.uid
+          && get(/databases/$(database)/documents/checkoutEinstellungen/pp).data.auswahlOffen == true);
+      allow delete: if isTeacher();
+    }
+
     match /essayEntries/{id} {
       allow read: if isApproved()
         && (resource.data.uid == request.auth.uid || isTeacher());
