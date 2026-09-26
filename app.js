@@ -376,14 +376,17 @@ async function renderRessourcenRoute(){
 
  const types={
  taskcard:{icon:"",label:"TaskCard"},
+ canva:{icon:"",label:"Canva"},
+ bycs:{icon:"",label:"ByCS / mebis"},
+ learningapps:{icon:"",label:"LearningApps"},
+ video:{icon:"",label:"YouTube-Links"},
  ki:{icon:"",label:"KI-Lernressource"},
  external:{icon:"",label:"Externer Link"},
- video:{icon:"",label:"Video-Link"},
- bycs:{icon:"",label:"ByCS / mebis"},
- canva:{icon:"",label:"Canva"},
- learningapps:{icon:"",label:"LearningApps"},
  website:{icon:"",label:"Webseite"}
  };
+ // Reihenfolge der Abschnitte auf der Seite: TaskCards zuerst, dann
+ // Canva, ByCS, LearningApps, YouTube-Links, Rest danach.
+ const typReihenfolge=["taskcard","canva","bycs","learningapps","video","ki","external","website"];
  const typeOf=r=>{
  const raw=String(r.type??r.category??"external").toLowerCase();
  if(types[raw]) return raw;
@@ -426,14 +429,11 @@ async function renderRessourcenRoute(){
  const type=typeOf(r),t=types[type],tags=tagsOf(r),url=urlOf(r);
  const lbNum=lbNummerVon(r);
  const lbFarbe=lbNum&&LERNBEREICH_FARBEN[lbNum]?LERNBEREICH_FARBEN[lbNum].border:null;
- return`<article class="card resource-card"${lbFarbe?`style="border-left:4px solid ${lbFarbe}"`:""}data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}">
- <div class="resource-head"><span class="resource-icon">${t.icon}</span><span class="pill">${esc(t.label)}</span></div>
+ return`<article class="card resource-card resource-card-square"${lbFarbe?`style="border-left:4px solid ${lbFarbe}"`:""}data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}">
+ <span class="pill">${esc(t.label)}</span>
  <h3>${esc(titleOf(r))}</h3>
- ${descOf(r)?`<p>${esc(descOf(r))}</p>`:""}
- ${subjectOf(r)?`<div class="resource-meta"> ${esc(subjectOf(r))}</div>`:""}
- ${tags.length?`<div class="chips">${tags.map(x=>`<span class="chip">#${esc(x)}</span>`).join("")}</div>`:""}
- ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">${t.icon} Lernressource öffnen →</button>`:`<div class="notice">Für diese Ressource ist noch kein Link hinterlegt.</div>`}
- ${canEdit?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')">Bearbeiten</button><button class="secondary"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">Löschen</button></div>`:""}
+ ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">Öffnen →</button>`:`<small style="color:var(--muted)">Noch kein Link hinterlegt.</small>`}
+ ${canEdit?`<div class="resource-actions"><button class="text-button"onclick="editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')">Bearbeiten</button><button class="text-button"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">Löschen</button></div>`:""}
  </article>`;
  };
 
@@ -444,14 +444,19 @@ async function renderRessourcenRoute(){
  <p>TaskCards, KI-Lernangebote, Videos, ByCS/mebis, Canva und LearningApps sowie weitere Webseiten an einem Ort.</p>
  <div class="chips"><span class="chip"> TaskCard</span><span class="chip"> KI</span><span class="chip"> Video</span><span class="chip"> ByCS / mebis</span><span class="chip"> Canva</span><span class="chip"> LearningApps</span><span class="chip"> Webseite</span></div>
  </div>
- ${Object.entries(grouped).map(([type,list])=>{
- if(!list.length)return"";
+ ${typReihenfolge.map(type=>{
+ const list=grouped[type];
+ if(!list||!list.length)return"";
  const t=types[type];
- const lbListe=list.filter(r=>lbNummerVon(r)!==null).sort((a,b)=>lbNummerVon(a)-lbNummerVon(b));
- const andereListe=list.filter(r=>lbNummerVon(r)===null);
+ const geordnet=[...list].sort((a,b)=>{
+  const la=lbNummerVon(a),lb=lbNummerVon(b);
+  if(la!==null&&lb!==null)return la-lb;
+  if(la!==null)return-1;
+  if(lb!==null)return 1;
+  return 0;
+ });
  return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div>
- ${lbListe.length?`<div class="grid grid-4">${lbListe.map(card).join("")}</div>`:""}
- ${andereListe.length?`<div class="grid grid-3"${lbListe.length?'style="margin-top:12px"':""}>${andereListe.map(card).join("")}</div>`:""}
+ <div class="grid grid-4">${geordnet.map(card).join("")}</div>
  </section>`;
  }).join("")}
  ${resources.length?`<div class="notice"style="margin-top:16px"> ${resources.length} Lernressource${resources.length===1?"":"n"} verfügbar.</div>`:`<div class="card empty"style="margin-top:12px"><strong>Noch keine Lernressourcen vorhanden.</strong><p>Lege z. B. eine TaskCard, einen KI-Link, ein Video oder einen ByCS-/mebis-Link an.</p>${canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Erste Lernressource anlegen</button>`:""}</div>`}
