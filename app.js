@@ -405,12 +405,28 @@ async function renderRessourcenRoute(){
  const grouped={taskcard:[],ki:[],external:[],video:[],bycs:[],canva:[],learningapps:[],website:[]};
  resources.forEach(r=>grouped[typeOf(r)].push(r));
 
+ // Ressourcen, die sich eindeutig einem Lernbereich zuordnen lassen
+ // ("Lernbereich 2: ...", "12.4 ...", "LB 3 …"), werden geordnet
+ // LB 1 → LB 4 nebeneinander mit farbigem linkem Rand dargestellt.
+ const lbNummerVon=r=>{
+  const titel=titleOf(r);
+  let m=titel.match(/Lernbereich\s*(\d)/i);
+  if(m)return Number(m[1]);
+  m=titel.match(/^\s*12\.(\d)\b/);
+  if(m)return Number(m[1]);
+  m=titel.match(/\bLB\s*(\d)\b/i);
+  if(m)return Number(m[1]);
+  return null;
+ };
+
  const canEdit=typeof isTeacher==="function" && isTeacher();
  const addButton=canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Lernressource hinzufügen</button>`:"";
 
  const card=r=>{
  const type=typeOf(r),t=types[type],tags=tagsOf(r),url=urlOf(r);
- return`<article class="card resource-card"data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}">
+ const lbNum=lbNummerVon(r);
+ const lbFarbe=lbNum&&LERNBEREICH_FARBEN[lbNum]?LERNBEREICH_FARBEN[lbNum].border:null;
+ return`<article class="card resource-card"${lbFarbe?`style="border-left:4px solid ${lbFarbe}"`:""}data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}">
  <div class="resource-head"><span class="resource-icon">${t.icon}</span><span class="pill">${esc(t.label)}</span></div>
  <h3>${esc(titleOf(r))}</h3>
  ${descOf(r)?`<p>${esc(descOf(r))}</p>`:""}
@@ -431,7 +447,12 @@ async function renderRessourcenRoute(){
  ${Object.entries(grouped).map(([type,list])=>{
  if(!list.length)return"";
  const t=types[type];
- return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div><div class="grid grid-3">${list.map(card).join("")}</div></section>`;
+ const lbListe=list.filter(r=>lbNummerVon(r)!==null).sort((a,b)=>lbNummerVon(a)-lbNummerVon(b));
+ const andereListe=list.filter(r=>lbNummerVon(r)===null);
+ return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div>
+ ${lbListe.length?`<div class="grid grid-4">${lbListe.map(card).join("")}</div>`:""}
+ ${andereListe.length?`<div class="grid grid-3"${lbListe.length?'style="margin-top:12px"':""}>${andereListe.map(card).join("")}</div>`:""}
+ </section>`;
  }).join("")}
  ${resources.length?`<div class="notice"style="margin-top:16px"> ${resources.length} Lernressource${resources.length===1?"":"n"} verfügbar.</div>`:`<div class="card empty"style="margin-top:12px"><strong>Noch keine Lernressourcen vorhanden.</strong><p>Lege z. B. eine TaskCard, einen KI-Link, ein Video oder einen ByCS-/mebis-Link an.</p>${canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Erste Lernressource anlegen</button>`:""}</div>`}
  ${footer()}`;
@@ -8146,6 +8167,7 @@ async function renderKalender(){
  const typeMeta={
  schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
  kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
+ kprim:{label:"KPrim-Test",className:"cal-teal"},
  projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
  referat:{label:"Referat",className:"cal-yellow"},
  praesentation:{label:"Präsentation",className:"cal-purple"},
@@ -8260,7 +8282,7 @@ async function renderKalender(){
  .cal-num{display:block;font-size:14px;flex:0 0 auto}
  .cal-event-type{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:9.5px;line-height:1.25;margin-top:4px;font-weight:700;word-break:break-word}
  .cal-count{position:absolute;right:5px;bottom:5px;font-size:10px;background:rgba(255,255,255,.8);border-radius:10px;padding:1px 5px}
- .cal-blue{background:#dbeafe!important}.cal-red{background:#fee2e2!important}.cal-green{background:#dcfce7!important}
+ .cal-blue{background:#dbeafe!important}.cal-red{background:#fee2e2!important}.cal-green{background:#dcfce7!important}.cal-teal{background:#ccfbf1!important}
  .cal-yellow{background:#fef3c7!important}.cal-purple{background:#ede9fe!important}.cal-grey{background:#e5e7eb!important}
  .cal-holiday{background:#e3f5da!important;border-color:#8bc34a!important}
  .cal-birthday{background:#ffe4ec!important;border-color:#f472b6!important}
@@ -8401,6 +8423,7 @@ function calendarTypeMeta(e){
  return ({
  schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
  kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
+ kprim:{label:"KPrim-Test",className:"cal-teal"},
  projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
  referat:{label:"Referat",className:"cal-yellow"},
  praesentation:{label:"Präsentation",className:"cal-purple"},
@@ -10722,6 +10745,7 @@ function openCalendarForm(){
  <select id="calType">
  <option value="schulaufgabe">Schulaufgabe</option>
  <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="kprim">KPrim-Test</option>
  <option value="projektvorstellung">Projektvorstellung</option>
  <option value="referat">Referat</option>
  <option value="praesentation">Präsentation</option>
@@ -10779,6 +10803,7 @@ function editCalendarEntry(collectionName,id,title,type,date,time,location,descr
  <select id="calType">
  <option value="schulaufgabe">Schulaufgabe</option>
  <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="kprim">KPrim-Test</option>
  <option value="projektvorstellung">Projektvorstellung</option>
  <option value="referat">Referat</option>
  <option value="praesentation">Präsentation</option>
