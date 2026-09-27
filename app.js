@@ -5931,17 +5931,28 @@ async function renderFachaufsatzBoard(){
  const byType={};myEntries.forEach(e=>byType[e.type]=e);
  const canManage=!c.isSeed&&(isTeacher()||c.createdBy===currentUser.uid);
  const teacherEntries=isTeacher()?await getAllEssayEntriesForCase(c.id):[];
+ const taskcardLinks=await ladeTaskcardLinks();
+ const fobizzUrl=(taskcardLinks.fobizz_fachaufsatz||{}).url||"";
  return`${pageHead("SELBSTSTÄNDIG LERNEN",esc(c.title||"Fallbeispiel"),
  essayLernbereichLabel(c.lernbereich)+(c.theoryArea?" · "+esc(c.theoryArea):""),`<button class="secondary"onclick="closeEssayCase()">← Fallbeispiel-Übersicht</button>
  <button class="secondary"onclick="downloadEssayPDF('${c.id}')"> Meinen Aufsatz als PDF</button>
  ${canManage?`<button class="secondary"onclick="openEssayModelAnswersForm('${c.id}')"> Musterlösungen bearbeiten</button>`:""}
  ${canManage?`<button class="secondary"onclick="deleteEssayCase('${c.id}')">Fall löschen</button>`:""}`)}
- <div class="card">
+ ${(c.quelle||c.pruefungsfrage)?`<div class="card"style="border-left:4px solid #9b59b6">
+ <h3 style="margin-top:0">Prüfungsfrage</h3>
+ ${c.quelle?`<small style="color:var(--muted)">${esc(c.quelle)}</small>`:""}
+ ${c.pruefungsfrage?`<p style="white-space:pre-wrap;margin-top:8px">${esc(c.pruefungsfrage)}</p>`:""}
+ </div>`:""}
+ <div class="card"style="margin-top:14px">
  <h3 style="margin-top:0">Fallbeispiel</h3>
  ${c.caseText?`<p style="white-space:pre-wrap">${esc(c.caseText)}</p>`:""}
  ${c.pdfUrl?`<a href="${esc(c.pdfUrl)}"target="_blank"rel="noopener noreferrer"class="secondary"style="display:inline-block;text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid var(--line,#ddd);margin-top:${c.caseText?"10px":"0"}"> Fallbeispiel-PDF öffnen</a>`:""}
  ${!c.caseText&&!c.pdfUrl?`<p class="empty">Kein Fallbeispiel-Text oder -Link hinterlegt.</p>`:""}
  </div>
+ ${c.theorieinhalt?`<div class="card"style="margin-top:14px;border-left:4px solid #3fa66a">
+ <h3 style="margin-top:0">Theorieinhalt</h3>
+ <p style="white-space:pre-wrap">${esc(c.theorieinhalt)}</p>
+ </div>`:""}
  ${essayParts.map(([type,label,criteria])=>{
  const entry=byType[type];
  const hasModel=!!(c.modelAnswers?.[type]||"").trim();
@@ -5956,6 +5967,9 @@ async function renderFachaufsatzBoard(){
  ${entry&&!entry.feedbackRequested?`<button class="secondary"onclick="requestEssayFeedback('${c.id}','${type}')"> Zur Korrektur einreichen</button>`:""}
  ${entry?.feedbackRequested?`<span class="pill"> Rückmeldung angefragt</span>`:""}
  ${entry&&hasModel?`<button class="secondary"onclick="openEssayModelCompare('${c.id}','${type}')"> Mit Musterbeispiel vergleichen</button>`:""}
+ ${entry?.text?`<button class="secondary"onclick="kopiereFuerFobizz('${c.id}','${type}')">Text für fobizz kopieren</button>`:""}
+ ${entry?.text&&fobizzUrl?`<a class="secondary"style="text-decoration:none;display:inline-block;padding:9px 14px;border-radius:9px;border:1px solid var(--line,#ddd)"href="${esc(fobizzUrl)}"target="_blank"rel="noopener">fobizz-Assistent öffnen →</a>`:""}
+ ${isTeacher()?`<button class="text-button"style="font-size:11px"onclick="taskcardLinkBearbeiten('fobizz_fachaufsatz','${esc(fobizzUrl).replace(/'/g,"&#39;")}')">${fobizzUrl?"fobizz-Link ändern":"＋ fobizz-Link hinterlegen"}</button>`:""}
  </div>
  ${entry?.feedback?`<div class="notice"style="margin-top:10px"><strong> Rückmeldung von ${esc(entry.feedbackBy||"Lehrkraft")}</strong><p style="margin-bottom:0;white-space:pre-wrap">${esc(entry.feedback)}</p></div>`:""}
  </div>`;
@@ -5983,7 +5997,10 @@ function openEssayCaseForm(){
  <div class="form">
  <label>Titel<input id="ecTitle"maxlength="150"placeholder="z. B. Der Kindergarten-Konflikt"></label>
  <label>Lernbereich<select id="ecLernbereich">${essayLernbereiche.map(([code,label])=>`<option value="${code}">${esc(code)} – ${esc(label)}</option>`).join("")}</select></label>
- <label>Theoriebereich (optional)<input id="ecTheoryArea"maxlength="150"placeholder="z. B. Bindungstheorie nach Bowlby"></label>
+ <label>Ursprungsprüfung / Quelle (optional)<input id="ecQuelle"maxlength="200"placeholder="z. B. Fachabiturprüfung PäPsy 2023, Aufgabe 2"></label>
+ <label>Prüfungsfrage / Aufgabenstellung<textarea id="ecFrage"rows="3"maxlength="1000"placeholder="Die konkrete Aufgabenstellung aus der Prüfung …"></textarea></label>
+ <label>Theoriebereich (Kurzbezeichnung, optional)<input id="ecTheoryArea"maxlength="150"placeholder="z. B. Bindungstheorie nach Bowlby"></label>
+ <label>Theorieinhalt (der Stoff, der zur Beantwortung nötig ist)<textarea id="ecTheorieinhalt"rows="6"maxlength="4000"placeholder="Zusammenfassung/Stichpunkte der Theorie, die die Schüler:innen für diesen Fachaufsatz brauchen …"></textarea></label>
  <label>Fallbeispiel-Text (optional, falls kein PDF-Link)<textarea id="ecCaseText"rows="6"maxlength="3000"placeholder="Beschreibung des Falls …"></textarea></label>
  <label>Link zur Fallbeispiel-PDF (optional, z. B. Google Drive)<input id="ecPdfUrl"type="url"placeholder="https://…"></label>
  <div class="form-actions">
@@ -5996,7 +6013,10 @@ function openEssayCaseForm(){
 async function addEssayCase(){
  const title=$("ecTitle")?.value.trim()||"";
  const lernbereich=$("ecLernbereich")?.value||"";
+ const quelle=$("ecQuelle")?.value.trim()||"";
+ const pruefungsfrage=$("ecFrage")?.value.trim()||"";
  const theoryArea=$("ecTheoryArea")?.value.trim()||"";
+ const theorieinhalt=$("ecTheorieinhalt")?.value.trim()||"";
  const caseText=$("ecCaseText")?.value.trim()||"";
  const pdfUrlRaw=$("ecPdfUrl")?.value.trim()||"";
  if(!title){toast("Bitte einen Titel eingeben.");return}
@@ -6004,7 +6024,7 @@ async function addEssayCase(){
  const pdfUrl=pdfUrlRaw?normalizeExternalUrl(pdfUrlRaw):"";
  try{
  await addDoc(collection(db,"essayCases"),{
- title,lernbereich,theoryArea,caseText,pdfUrl,
+ title,lernbereich,quelle,pruefungsfrage,theoryArea,theorieinhalt,caseText,pdfUrl,
  createdBy:currentUser.uid,
  createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
  createdAt:serverTimestamp()
@@ -6127,6 +6147,47 @@ async function requestEssayFeedback(caseId,type){
  toast(e?.code==="permission-denied"?"Firebase verweigert die Anfrage. Bitte die Firestore-Regeln prüfen.":"Anfrage konnte nicht gesendet werden.");
  }
 }
+
+// ---- KI-Vorkorrektur über einen fobizz-Assistenten -----------------------
+// fobizz bietet keine Schnittstelle, über die man einen bestimmten
+// Assistenten direkt aus einer fremden Webseite heraus automatisch
+// aufrufen könnte – Assistenten laufen ausschließlich im fobizz-KI-Chat
+// selbst. Der Weg hier: Text + Kontext in die Zwischenablage kopieren,
+// die Person öffnet den fobizz-Assistenten (Link von der Lehrkraft
+// hinterlegt) und fügt den kopierten Text dort ein.
+async function kopiereFuerFobizz(caseId,type){
+ const text=$(`essayText_${type}`)?.value.trim()||"";
+ if(!text){toast("Bitte zuerst einen Text schreiben und speichern.");return}
+ try{
+ const caseSnap=await getDoc(doc(db,"essayCases",caseId));
+ const c=caseSnap.exists()?caseSnap.data():{};
+ const part=essayParts.find(p=>p[0]===type);
+ const block=`Baustein: ${part?.[1]||type}
+
+Erfolgskriterien für diesen Baustein:
+${(part?.[2]||[]).map(k=>`- ${k}`).join("\n")}
+
+Prüfungsfrage/Aufgabenstellung:
+${c.pruefungsfrage||"(nicht hinterlegt)"}
+
+Fallbeispiel:
+${c.caseText||"(nicht hinterlegt)"}
+
+Benötigter Theorieinhalt:
+${c.theorieinhalt||"(nicht hinterlegt)"}
+
+Mein Text zu diesem Baustein:
+${text}
+
+Bitte gib mir eine kurze, konstruktive Vorkorrektur: Was ist gut, was fehlt fachlich noch, sind die Erfolgskriterien erfüllt? Keine Note, keine Musterlösung.`;
+ await navigator.clipboard.writeText(block);
+ toast("In die Zwischenablage kopiert – jetzt beim fobizz-Assistenten einfügen.");
+ }catch(e){
+ console.error("Für fobizz kopieren:",e);
+ toast("Konnte nicht in die Zwischenablage kopiert werden.");
+ }
+}
+window.kopiereFuerFobizz=kopiereFuerFobizz;
 
 function openTeacherFeedbackForm(entryId,name,partLabel,text,existingFeedback){
  window.__feedbackEntryId=entryId;
