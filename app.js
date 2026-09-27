@@ -1320,35 +1320,26 @@ async function ladeTaskcardLinks(){
   return map;
  }catch(e){console.error("TaskCard-Links laden:",e);return{};}
 }
+function taskcardKachelHTML(titel,farbe,textFarbe,key,url){
+ const urlAttr=esc(url).replace(/'/g,"&#39;");
+ return`<div class="card resource-card-square"style="border-left:4px solid ${farbe}">
+ <strong style="color:${textFarbe};font-size:13px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1">${esc(titel)}</strong>
+ ${url?`<a class="primary resource-open"style="text-decoration:none;text-align:center"href="${urlAttr}"target="_blank"rel="noopener">TaskCard öffnen</a>`:`<small style="color:var(--muted);flex:0 0 auto">Noch kein Link hinterlegt.</small>`}
+ ${isTeacher()?`<button class="text-button"style="margin-top:6px;font-size:11px"onclick="taskcardLinkBearbeiten('${key}','${urlAttr}')">${url?"Link ändern":"＋ Link hinterlegen"}</button>`:""}
+ </div>`;
+}
 function lernbereichKachelnHTML(links){
  return`<h3 style="margin:26px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--muted)"> Lernbereiche · TaskCard</h3>
- <div class="grid grid-2"style="gap:12px">
+ <div class="grid grid-4"style="gap:12px">
  ${PP_LERNBEREICHE.map(lb=>{
   const c=LERNBEREICH_FARBEN[lb.num];
   const url=(links[lb.key]||{}).url||"";
-  const urlAttr=esc(url).replace(/'/g,"&#39;");
-  return`<div class="card"style="border-left:5px solid ${c.border};display:flex;flex-direction:column;gap:8px">
-  <strong style="color:${c.text}">Lernbereich ${lb.num} · ${esc(lb.titel)}</strong>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-  ${url?`<a class="primary"style="text-decoration:none;padding:9px 14px;border-radius:9px"href="${urlAttr}"target="_blank"rel="noopener">TaskCard öffnen</a>`:`<small style="color:var(--muted)">Noch kein TaskCard-Link hinterlegt.</small>`}
-  ${isTeacher()?`<button class="secondary"onclick="taskcardLinkBearbeiten('${lb.key}','${urlAttr}')">${url?"Link ändern":"＋ Link hinterlegen"}</button>`:""}
-  </div>
-  </div>`;
+  return taskcardKachelHTML(`Lernbereich ${lb.num} · ${lb.titel}`,c.border,c.text,lb.key,url);
  }).join("")}
  </div>
  <h3 style="margin:26px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--muted)"> TaskCards für die Prüfungen</h3>
- <div class="grid grid-2"style="gap:12px">
- ${(()=>{
-  const url=(links.pruefung||{}).url||"";
-  const urlAttr=esc(url).replace(/'/g,"&#39;");
-  return`<div class="card"style="border-left:5px solid #A32D2D;display:flex;flex-direction:column;gap:8px">
-  <strong style="color:#791F1F">Prüfungsvorbereitung</strong>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-  ${url?`<a class="primary"style="text-decoration:none;padding:9px 14px;border-radius:9px"href="${urlAttr}"target="_blank"rel="noopener">TaskCard öffnen</a>`:`<small style="color:var(--muted)">Noch kein TaskCard-Link hinterlegt.</small>`}
-  ${isTeacher()?`<button class="secondary"onclick="taskcardLinkBearbeiten('pruefung','${urlAttr}')">${url?"Link ändern":"＋ Link hinterlegen"}</button>`:""}
-  </div>
-  </div>`;
- })()}
+ <div class="grid grid-4"style="gap:12px">
+ ${taskcardKachelHTML("Prüfungsvorbereitung","#A32D2D","#791F1F","pruefung",(links.pruefung||{}).url||"")}
  </div>`;
 }
 async function taskcardLinkBearbeiten(lbKey,aktuell){
@@ -3246,22 +3237,22 @@ function zeitstrahlPunktHTML(tag,istHeute){
  const istExam=tag.typ==="exam";
  const farbe=istExam?"#E24B4A":c?c.border:"#b8c4cc";
  const punktStil=istExam
-  ?`width:18px;height:18px;border-radius:4px;transform:rotate(45deg);background:${farbe}`
-  :`width:${istHeute?14:11}px;height:${istHeute?14:11}px;border-radius:50%;background:${farbe}${istHeute?`;box-shadow:0 0 0 3px ${c?c.bg:"#eef1f3"}`:""}`;
+  ?`width:20px;height:20px;border-radius:4px;transform:rotate(45deg);background:${farbe}`
+  :`width:${istHeute?16:12}px;height:${istHeute?16:12}px;border-radius:50%;background:${farbe}${istHeute?`;box-shadow:0 0 0 4px ${c?c.bg:"#eef1f3"}`:""}`;
  const datum=fmtDateOnly(tag.date);
- return`<div style="flex:0 0 84px;text-align:center;position:relative">
- <div style="${punktStil};margin:${istExam?22:istHeute?24:26}px auto 8px;position:relative;z-index:1"></div>
- <div style="font-size:10.5px;color:${istHeute?farbe:"var(--muted)"};font-weight:${istHeute?700:400}">${esc(datum)}</div>
- <div style="font-size:11.5px;margin-top:3px;font-weight:${istHeute||istExam?700:400};line-height:1.25;color:${istExam?"#A32D2D":"inherit"}">${esc(tag.thema.length>34?tag.thema.slice(0,33)+"…":tag.thema)}</div>
+ return`<div class="zeitstrahl-punkt"style="flex:0 0 128px;text-align:center;position:relative">
+ <div style="${punktStil};margin:${istExam?24:istHeute?26:28}px auto 10px;position:relative;z-index:1"></div>
+ <div style="font-size:12px;color:${istHeute?farbe:"var(--muted)"};font-weight:${istHeute?700:400}">${esc(datum)}</div>
+ <div class="zeitstrahl-thema"style="font-size:13px;margin-top:5px;font-weight:${istHeute||istExam?700:500};color:${istExam?"#A32D2D":"var(--ink)"}">${esc(tag.thema)}</div>
  </div>`;
 }
 function horizontalerZeitstrahlHTML(){
  const heute=new Date().toISOString().slice(0,10);
  let heuteIdx=PP_ZEITSTRAHL_TAGE.findIndex(t=>t.date>=heute);
  if(heuteIdx===-1)heuteIdx=PP_ZEITSTRAHL_TAGE.length-1;
- return`<div class="zeitstrahl-scroll"style="overflow-x:auto;padding:14px 4px 6px">
- <div style="position:relative;min-width:${PP_ZEITSTRAHL_TAGE.length*84+40}px;padding:0 20px">
- <div style="position:absolute;left:20px;right:20px;top:34px;height:2px;background:var(--line,#e2eaf0)"></div>
+ return`<div class="zeitstrahl-scroll"style="overflow-x:auto;padding:16px 4px 8px">
+ <div style="position:relative;min-width:${PP_ZEITSTRAHL_TAGE.length*128+40}px;padding:0 20px">
+ <div style="position:absolute;left:20px;right:20px;top:38px;height:2px;background:var(--line,#e2eaf0)"></div>
  <div style="display:flex">
  ${PP_ZEITSTRAHL_TAGE.map((tag,i)=>{
   const istHeute=i===heuteIdx;
@@ -6334,9 +6325,7 @@ Infos</span><span class="chip"> Ideen</span><span class="chip"> Projekte</span><
 <input class="search"id="forumSearch"placeholder="Beiträge durchsuchen …"></div>
  <div class="list"id="forumList">${posts.map(postHTML).join("")||`<div class="empty"><strong>Noch keine
 Beiträge</strong>Schreibe den ersten Beitrag.</div>`}</div>
- <div class="card"style="margin-top:12px;border-left:4px solid #3fa66a"><h3> Campus hilft</h3><p>Du kannst anderen bei einem
-Thema helfen? Teile dein Wissen.</p><button class="secondary"style="margin-top:10px"onclick="openHelpForm()">Hilfe
-anbieten</button></div>${footer()}`;
+ ${footer()}`;
 }
 
 /* ---------------------------------------------------------

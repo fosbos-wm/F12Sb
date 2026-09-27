@@ -129,14 +129,14 @@ main#content{flex:1;min-width:0;padding:28px 34px 60px;max-width:1500px}
 
 /* LERNRESSOURCEN-MODUL */
 .resource-section{margin-top:24px}
-.resource-card{display:flex;flex-direction:column;min-height:230px}
-.resource-head{display:flex;align-items:center;gap:9px}
-.resource-icon{font-size:28px}
-.resource-card h3{margin:12px 0 6px}
-.resource-card p{margin:0 0 10px}
-.resource-meta{font-size:12px;color:var(--muted);margin-bottom:8px}
-.resource-card .chips{margin-bottom:12px}
-.resource-open{margin-top:auto;width:100%}
+.resource-card-square{aspect-ratio:1;display:flex;flex-direction:column;padding:14px;overflow:hidden}
+.resource-card-square .pill{align-self:flex-start;flex:0 0 auto}
+.resource-card-square h3{margin:10px 0 8px;font-size:13.5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.resource-open{width:100%;font-size:13px;padding:8px 0}
+.resource-actions{display:flex;justify-content:space-between;margin-top:8px}
+.resource-actions .text-button{font-size:11px;padding:0}
+@media(max-width:520px){.resource-card-square{aspect-ratio:auto;min-height:150px}}
+.zeitstrahl-thema{line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 
 /* LERNCOACHING – Zusatz */
 .lerncoaching-email{display:inline-flex;align-items:center;gap:8px;margin-top:10px}
