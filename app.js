@@ -5833,14 +5833,14 @@ const essayParts=[
  ["Hast du sowohl Chancen als auch Grenzen benannt wie im Muster?","Ist deine Einschätzung ähnlich sachlich begründet?"]]
 ];
 const essayLernbereiche=[
- ["11.1","Pädagogik/Psychologie als Wissenschaft"],
- ["11.2","Grundlagen des Erlebens, Verhaltens, Handelns"],
- ["11.3","Erziehungs- und Bildungsprozesse"],
- ["11.4","Lernen als steuerbarer Prozess"]
+ ["1","Entwicklung"],
+ ["2","Persönlichkeit und Identität"],
+ ["3","Soziale Arbeit"],
+ ["4","Kommunikation"]
 ];
 function essayLernbereichLabel(code){
  const found=essayLernbereiche.find(l=>l[0]===code);
- return found?`${found[0]} – ${found[1]}`:(code||"Ohne Lernbereich");
+ return found?`Lernbereich ${found[0]} – ${found[1]}`:(code||"Ohne Lernbereich");
 }
 function essayPartLabel(type){
  const found=essayParts.find(p=>p[0]===type);
@@ -5887,9 +5887,9 @@ async function getAllEssayEntriesForCase(caseId){
 
 function essayCaseTileHTML(c){
  return`<div class="card tile"style="cursor:pointer;text-align:left"onclick="openEssayCase('${c.id}')">
- <span class="emoji"></span>
  <strong>${esc(c.title||"Fallbeispiel")}</strong>
  <small>${esc(c.theoryArea||"")||"Fachaufsatz-Training"}</small>
+ ${c.quelle?`<small style="display:block;margin-top:2px;color:var(--muted)">${esc(c.quelle)}</small>`:""}
  </div>`;
 }
 
@@ -5899,9 +5899,9 @@ async function renderFachaufsatzUebersicht(){
  const ungrouped=cases.filter(c=>!c.lernbereich||!essayLernbereiche.some(l=>l[0]===c.lernbereich));
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Fachaufsatz-Training","Fachaufsatz in Pädagogik/Psychologie üben – Baustein für Baustein, gegliedert nach den Lernbereichen 11.1–11.4.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
  <button class="primary"onclick="openEssayCaseForm()">＋ Neues Fallbeispiel</button>`)}
- <div class="notice"><strong>Deine Übungstexte sind privat.</strong><p style="margin-bottom:0">Nur du selbst und Lehrkräfte können sehen, was du hier schreibst – nicht deine Mitschüler:innen.</p></div>
+ <div class="notice"><strong>So funktioniert's:</strong><p style="margin-bottom:0">Jedes Fallbeispiel basiert auf einer echten alten Prüfungsfrage. Ihr übt den Fachaufsatz dazu in 4 Bausteinen (Einleitung, Theorie allgemein, Theorie am Fall, Beurteilung) einzeln: Text schreiben → Erfolgskriterien selbst ankreuzen → optional per fobizz-Assistent eine schnelle KI-Vorkorrektur holen → bei Bedarf zur Lehrkraft zur Korrektur einreichen. Deine Übungstexte sind privat – nur du selbst und Lehrkräfte sehen sie, nicht deine Mitschüler:innen.</p></div>
  ${grouped.map(g=>`
- <h3 style="margin:20px 0 10px">${esc(g.code)} – ${esc(g.label)}</h3>
+ <h3 style="margin:20px 0 10px">Lernbereich ${esc(g.code)} – ${esc(g.label)}</h3>
  <div class="grid grid-3">${g.cases.map(essayCaseTileHTML).join("")||`<div class="empty">Noch kein Fallbeispiel in diesem Lernbereich.</div>`}</div>`).join("")}
  ${ungrouped.length?`<h3 style="margin:20px 0 10px">Ohne Lernbereich</h3><div class="grid grid-3">${ungrouped.map(essayCaseTileHTML).join("")}</div>`:""}
  ${footer()}`;
@@ -5970,6 +5970,7 @@ async function renderFachaufsatzBoard(){
  ${entry?.text&&fobizzUrl?`<a class="secondary"style="text-decoration:none;display:inline-block;padding:9px 14px;border-radius:9px;border:1px solid var(--line,#ddd)"href="${esc(fobizzUrl)}"target="_blank"rel="noopener">fobizz-Assistent öffnen →</a>`:""}
  ${isTeacher()?`<button class="text-button"style="font-size:11px"onclick="taskcardLinkBearbeiten('fobizz_fachaufsatz','${esc(fobizzUrl).replace(/'/g,"&#39;")}')">${fobizzUrl?"fobizz-Link ändern":"＋ fobizz-Link hinterlegen"}</button>`:""}
  </div>
+ ${entry?.text?`<small style="display:block;margin-top:6px;color:var(--muted)">Tipp: Erst „Text für fobizz kopieren", dann „fobizz-Assistent öffnen" und den Text dort einfügen – für eine schnelle KI-Vorkorrektur, bevor du bei der Lehrkraft zur Korrektur einreichst.</small>`:""}
  ${entry?.feedback?`<div class="notice"style="margin-top:10px"><strong> Rückmeldung von ${esc(entry.feedbackBy||"Lehrkraft")}</strong><p style="margin-bottom:0;white-space:pre-wrap">${esc(entry.feedback)}</p></div>`:""}
  </div>`;
  }).join("")}
@@ -5993,9 +5994,10 @@ function openEssayCaseForm(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
  <div class="kicker">FACHAUFSATZ-TRAINING</div>
  <h2>Neues Fallbeispiel</h2>
+ <p style="color:var(--muted);font-size:13px;margin-top:-4px">Ausgangspunkt ist idealerweise eine echte alte Prüfungsfrage: Trage Quelle und Aufgabenstellung ein, ergänze das Fallbeispiel sowie den zur Beantwortung nötigen Theorieinhalt. Die Schüler:innen üben daraus die 4 Bausteine des Fachaufsatzes einzeln.</p>
  <div class="form">
  <label>Titel<input id="ecTitle"maxlength="150"placeholder="z. B. Der Kindergarten-Konflikt"></label>
- <label>Lernbereich<select id="ecLernbereich">${essayLernbereiche.map(([code,label])=>`<option value="${code}">${esc(code)} – ${esc(label)}</option>`).join("")}</select></label>
+ <label>Lernbereich<select id="ecLernbereich">${essayLernbereiche.map(([code,label])=>`<option value="${code}">Lernbereich ${esc(code)} – ${esc(label)}</option>`).join("")}</select></label>
  <label>Ursprungsprüfung / Quelle (optional)<input id="ecQuelle"maxlength="200"placeholder="z. B. Fachabiturprüfung PäPsy 2023, Aufgabe 2"></label>
  <label>Prüfungsfrage / Aufgabenstellung<textarea id="ecFrage"rows="3"maxlength="1000"placeholder="Die konkrete Aufgabenstellung aus der Prüfung …"></textarea></label>
  <label>Theoriebereich (Kurzbezeichnung, optional)<input id="ecTheoryArea"maxlength="150"placeholder="z. B. Bindungstheorie nach Bowlby"></label>
