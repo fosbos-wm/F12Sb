@@ -3466,8 +3466,7 @@ async function renderLernwerkstatt(){
  {title:"Dich selbst einschätzen",color:"#4a90d9",items:[
  [" ","Lernstrategien-Check","Kein Lerntyp-Test – dein Strategien-Profil in 25 Fragen.","lernstrategien"],
  [" ","Metakognitive Lernstrategien","Über das eigene Lernen nachdenken – klick dich durch.","metakognition"],
- [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"],
- [" ","Lernstandsmessung","Kurz prüfen: Wo stehe ich und was ist mein nächster Schritt?","lernstand"]
+ [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"]
  ]},
  {title:"Konkret lernen & üben",color:"#3fa66a",items:[
  [" ","Lernmethoden","Planung, Lernen, Zusammenarbeit und Reflexion.","methoden"],
@@ -6087,7 +6086,9 @@ async function renderFachaufsatzBoard(){
  </div>
  <div class="card"style="margin-top:14px;border-left:4px solid #3fa66a">
  <h3 style="margin-top:0">2. Theorie zur Beantwortung</h3>
- <p style="white-space:pre-wrap">${esc(c.theorieinhalt||"")||"Noch kein Theorieinhalt hinterlegt."}</p>
+ ${c.theoriePdfUrl?`<a href="${esc(c.theoriePdfUrl)}"target="_blank"rel="noopener noreferrer"class="secondary"style="display:inline-block;text-decoration:none;padding:8px 14px;border-radius:8px;border:1px solid var(--line,#ddd);margin-bottom:${c.theorieinhalt?"10px":"0"}"> Lehrtext als PDF öffnen</a>`:""}
+ ${c.theorieinhalt?`<p style="white-space:pre-wrap">${esc(c.theorieinhalt)}</p>`:""}
+ ${!c.theorieinhalt&&!c.theoriePdfUrl?`<p class="empty">Noch kein Theorieinhalt hinterlegt.</p>`:""}
  </div>
  <div class="notice"style="margin-top:14px"><strong>Tipp fürs Schreiben:</strong><p style="margin-bottom:0">${esc(ESSAY_VORGEHEN_TIPP)}</p></div>
  <div class="card"style="margin-top:14px">
@@ -6127,13 +6128,14 @@ function openEssayCaseForm(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
  <div class="kicker">FACHAUFSATZ-TRAINING</div>
  <h2>Neue Aufgabe</h2>
- <p style="color:var(--muted);font-size:13px;margin-top:-4px">Lade die Aufgabenstellung einer echten (alten) Abschlussprüfung hoch, dazu den Theorieteil, der zur Beantwortung nötig ist. Die Schüler:innen sehen dann: 1. Aufgabenstellung, 2. Theorie, 3. Raum zur Beantwortung mit Selbsteinschätzung und fobizz-Vorkorrektur.</p>
+ <p style="color:var(--muted);font-size:13px;margin-top:-4px">Lade die Aufgabenstellung einer echten (alten) Abschlussprüfung hoch, dazu den Theorieteil, der zur Beantwortung nötig ist – als PDF-Link (z. B. Google Drive) und/oder als Text. Die Schüler:innen sehen dann: 1. Aufgabenstellung, 2. Theorie als Lehrtext, 3. Raum zur Beantwortung mit Selbsteinschätzung und fobizz-Vorkorrektur.</p>
  <div class="form">
  <label>Titel<input id="ecTitle"maxlength="150"placeholder="z. B. Fachabiturprüfung PäPsy 2023, Aufgabe 2"></label>
  <label>Lernbereich<select id="ecLernbereich">${essayLernbereiche.map(([code,label])=>`<option value="${code}">Lernbereich ${esc(code)} – ${esc(label)}</option>`).join("")}</select></label>
  <label>Quelle (optional)<input id="ecQuelle"maxlength="200"placeholder="z. B. Abschlussprüfung 2023, Nachtermin"></label>
  <label>Aufgabenstellung<textarea id="ecFrage"rows="6"maxlength="4000"placeholder="Die vollständige Aufgabenstellung (inkl. Fallbeispiel/Material, falls Teil der Prüfungsaufgabe) …"></textarea></label>
- <label>Theorie zur Beantwortung<textarea id="ecTheorieinhalt"rows="8"maxlength="6000"placeholder="Der Theorieinhalt, den die Schüler:innen zur Beantwortung brauchen …"></textarea></label>
+ <label>Theorie als PDF (Lehrtext, z. B. Google Drive-Link) – wird den Schüler:innen als Lehrtext zur Verfügung gestellt<input id="ecTheoriePdfUrl"type="url"placeholder="https://…"></label>
+ <label>Theorie zur Beantwortung als Text (optional, zusätzlich zur PDF oder allein)<textarea id="ecTheorieinhalt"rows="6"maxlength="6000"placeholder="Stichpunkte/Zusammenfassung, falls kein PDF-Lehrtext oder zusätzlich dazu …"></textarea></label>
  <label>Link zu weiteren Materialien (optional, z. B. Google Drive)<input id="ecPdfUrl"type="url"placeholder="https://…"></label>
  <div class="form-actions">
  <button class="secondary"onclick="closeModal()">Abbrechen</button>
@@ -6147,14 +6149,17 @@ async function addEssayCase(){
  const lernbereich=$("ecLernbereich")?.value||"";
  const quelle=$("ecQuelle")?.value.trim()||"";
  const aufgabenstellung=$("ecFrage")?.value.trim()||"";
+ const theoriePdfUrlRaw=$("ecTheoriePdfUrl")?.value.trim()||"";
  const theorieinhalt=$("ecTheorieinhalt")?.value.trim()||"";
  const pdfUrlRaw=$("ecPdfUrl")?.value.trim()||"";
  if(!title){toast("Bitte einen Titel eingeben.");return}
  if(!aufgabenstellung){toast("Bitte die Aufgabenstellung eingeben.");return}
+ if(!theoriePdfUrlRaw&&!theorieinhalt){toast("Bitte die Theorie entweder als PDF-Link oder als Text eingeben.");return}
+ const theoriePdfUrl=theoriePdfUrlRaw?normalizeExternalUrl(theoriePdfUrlRaw):"";
  const pdfUrl=pdfUrlRaw?normalizeExternalUrl(pdfUrlRaw):"";
  try{
  await addDoc(collection(db,"essayCases"),{
- title,lernbereich,quelle,aufgabenstellung,theorieinhalt,pdfUrl,
+ title,lernbereich,quelle,aufgabenstellung,theoriePdfUrl,theorieinhalt,pdfUrl,
  createdBy:currentUser.uid,
  createdByName:profile?.displayName||currentUser.email||"Lehrkraft",
  createdAt:serverTimestamp()
@@ -6292,7 +6297,7 @@ Aufgabenstellung:
 ${c.aufgabenstellung||"(nicht hinterlegt)"}
 
 Theorie zur Beantwortung:
-${c.theorieinhalt||"(nicht hinterlegt)"}
+${c.theorieinhalt||(c.theoriePdfUrl?"(als PDF-Lehrtext hinterlegt, siehe Link in der App)":"(nicht hinterlegt)")}
 
 Mein Fachaufsatz:
 ${text}
