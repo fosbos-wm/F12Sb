@@ -5250,7 +5250,7 @@ async function renderZuordnungBoard(){
  .zu-col{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0}
  .zu-tile{border-radius:12px;font-size:14px;line-height:1.3;transition:opacity .15s,border-color .2s}
  .zu-begriff{padding:14px 10px;min-height:36px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;cursor:grab;touch-action:none;user-select:none;border:2px solid transparent}
- .zu-begriff.zu-geloest{cursor:default;opacity:.45}
+ .zu-begriff.zu-geloest{cursor:default;opacity:.75;border-color:#3fa66a}
  .zu-erklaerung{padding:12px 14px;background:#fff;border:2px solid var(--line,#e2eaf0);color:var(--ink)}
  .zu-erklaerung.zu-geloest{border-color:#3fa66a;background:#eaf3de;opacity:.75}
  .zu-erklaerung.zu-falsch{border-color:#d92c34!important;background:#fad2d5!important}
@@ -5262,7 +5262,7 @@ async function renderZuordnungBoard(){
  ${paare.map((p,i)=>{
  const f=ZU_FARBEN[i%ZU_FARBEN.length];
  const geloest=!!zuordnungGeloest[i];
- return`<div class="zu-tile zu-begriff${geloest?" zu-geloest":""}"data-index="${i}"style="background:${geloest?"#eee":f.bg};color:${geloest?"#888":f.text}">${esc(p.begriff)}</div>`;
+ return`<div class="zu-tile zu-begriff${geloest?" zu-geloest":""}"data-index="${i}"style="background:${geloest?"#eaf3de":f.bg};color:${geloest?"#27500A":f.text}">${esc(p.begriff)}</div>`;
  }).join("")}
  </div>
  <div class="zu-col">
