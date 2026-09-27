@@ -2797,13 +2797,15 @@ async function miniKalenderHTML(){
  try{naechster=await getUpcomingCampusCalendarEvent();}catch(e){}
  const naechsterDatum=naechster?String(naechster.start||naechster.date||"").slice(0,10):null;
  const naechsterText=naechster?`${esc(naechster.title||naechster.name||"Termin")} · ${naechsterDatum?fmtDateOnly(naechsterDatum):""}`:"Aktuell kein anstehender Termin";
- return `<a href="#kalender"class="mini-kalender">
+ return `<a href="#kalender"class="mini-kalender-link"style="text-decoration:none;color:inherit;display:block">
+ <div class="mini-kalender">
  ${days.map((d,i)=>{const key=dateKey(d);const isToday=key===dateKey(today);
  const ferien=istFerien(key),geburtstag=birthdayDates.has(key),termin=eventDates.has(key);
  return `<div class="mini-kalender-day${isToday?" mini-kalender-today":""}${ferien?" mini-kalender-ferien":""}"><small>${wt[i]}</small><strong>${d.getDate()}</strong>${geburtstag?`<span class="mini-kalender-dot mini-kalender-dot-pink"></span>`:termin?`<span class="mini-kalender-dot"></span>`:""}</div>`;}).join("")}
- </a>
+ </div>
  <small style="display:block;margin-top:8px;font-weight:700;color:var(--ink)">${naechsterText}</small>
- <small style="display:block;margin-top:2px;color:var(--muted);font-size:10px">Zum vollständigen Campus-Kalender →</small>`;
+ <small style="display:block;margin-top:2px;color:var(--blue-dark);font-size:10px">Zum vollständigen Campus-Kalender →</small>
+ </a>`;
 }
 async function renderStart(){
  let tasks=[],projects=[],news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
