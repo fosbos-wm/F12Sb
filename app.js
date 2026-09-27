@@ -3587,12 +3587,11 @@ async function renderWortwolkeUebersicht(){
  return`${pageHead("ZUSAMMENARBEIT","Wortwolke","Spontane Stichwort-Sammlung – ideal für Einstieg, Brainstorming oder Blitzlicht im Unterricht.",`<button class="secondary"onclick="go('kollaboration')">← Tools für Zusammenarbeit</button>
  <button class="primary"onclick="openWordcloudForm()">＋ Neue Wortwolke</button>`)}
  <div class="grid grid-3">${clouds.map(c=>`
- <div class="card tile"style="cursor:pointer;text-align:left;position:relative"onclick="openWordcloud('${c.id}')">
- <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
- <button class="secondary"style="padding:4px 10px;font-size:12px"onclick="event.stopPropagation();downloadWordcloudPDF('${c.id}')"> PDF</button>
- ${canManage?`<button class="secondary"style="padding:4px 10px;font-size:12px"onclick="event.stopPropagation();deleteWordcloud('${c.id}')"> Löschen</button>`:""}
+ <div class="card tile"style="cursor:pointer;text-align:left"onclick="openWordcloud('${c.id}')">
+ <div style="display:flex;justify-content:flex-end;gap:6px;margin-bottom:6px">
+ <button class="secondary"style="padding:4px 10px;font-size:12px"onclick="event.stopPropagation();downloadWordcloudPDF('${c.id}')">PDF</button>
+ ${canManage?`<button class="secondary"style="padding:4px 10px;font-size:12px"onclick="event.stopPropagation();deleteWordcloud('${c.id}')">Löschen</button>`:""}
  </div>
- <span class="emoji"></span>
  <strong>${esc(c.title||"Wortwolke")}</strong>
  <small>${esc(c.description||"")||"Frage oder Impuls für die Klasse."}</small>
  </div>`).join("")||`<div class="empty"><strong>Noch keine Wortwolke.</strong>Starte die erste Frage für die Klasse.</div>`}
