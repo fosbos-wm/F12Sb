@@ -6033,7 +6033,8 @@ async function getAllEssayEntriesForCase(caseId){
 }
 
 function essayCaseTileHTML(c){
- return`<div class="card tile"style="cursor:pointer;text-align:left"onclick="openEssayCase('${c.id}')">
+ const farbe=LERNBEREICH_FARBEN[Number(c.lernbereich)]?.border||"#b8c4cc";
+ return`<div class="card tile"style="cursor:pointer;text-align:left;border-left:4px solid ${farbe}"onclick="openEssayCase('${c.id}')">
  <strong>${esc(c.title||"Aufgabe")}</strong>
  <small>${esc(c.quelle||"")||"Fachaufsatz-Training"}</small>
  </div>`;
@@ -6041,14 +6042,18 @@ function essayCaseTileHTML(c){
 
 async function renderFachaufsatzUebersicht(){
  const cases=await getEssayCases();
- const grouped=essayLernbereiche.map(([code,label])=>({code,label,cases:cases.filter(c=>c.lernbereich===code)}));
+ const grouped=essayLernbereiche.map(([code,label])=>({code,label,cases:cases.filter(c=>c.lernbereich===code)})).filter(g=>g.cases.length);
  const ungrouped=cases.filter(c=>!c.lernbereich||!essayLernbereiche.some(l=>l[0]===c.lernbereich));
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Fachaufsatz-Training","Fachaufsatz in Pädagogik/Psychologie an echten Prüfungsaufgaben üben.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
  ${isTeacher()?`<button class="primary"onclick="openEssayCaseForm()">＋ Neue Aufgabe</button>`:""}`)}
  <div class="notice"><strong>So funktioniert's:</strong><p style="margin-bottom:0">Jede Aufgabe basiert auf einer echten alten Prüfungsaufgabe: 1. Aufgabenstellung lesen, 2. Theorie zur Beantwortung lesen, 3. im Antwortraum deinen Fachaufsatz schreiben, danach die Erfolgskriterien nach dem echten Bewertungsbogen selbst ankreuzen, optional per fobizz-Assistent eine schnelle KI-Vorkorrektur holen und bei Bedarf zur Lehrkraft zur Korrektur einreichen. Deine Übungstexte sind privat – nur du selbst und Lehrkräfte sehen sie, nicht deine Mitschüler:innen.</p></div>
+ <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
+ ${essayLernbereiche.map(([code,label])=>{const c=LERNBEREICH_FARBEN[Number(code)];return`<span class="pill"style="background:${c.bg};color:${c.text}">Lernbereich ${esc(code)} · ${esc(label)}</span>`;}).join("")}
+ </div>
+ ${!cases.length?`<div class="card empty"style="text-align:center"><strong>Noch keine Übungsaufgaben</strong><p style="margin-bottom:0">${isTeacher()?"Lege oben die erste Prüfungsaufgabe zum Üben an.":"Deine Lehrkraft stellt hier bald die ersten Prüfungsaufgaben zum Üben ein."}</p></div>`:""}
  ${grouped.map(g=>`
  <h3 style="margin:20px 0 10px">Lernbereich ${esc(g.code)} – ${esc(g.label)}</h3>
- <div class="grid grid-3">${g.cases.map(essayCaseTileHTML).join("")||`<div class="empty">Noch keine Aufgabe in diesem Lernbereich.</div>`}</div>`).join("")}
+ <div class="grid grid-3">${g.cases.map(essayCaseTileHTML).join("")}</div>`).join("")}
  ${ungrouped.length?`<h3 style="margin:20px 0 10px">Ohne Lernbereich</h3><div class="grid grid-3">${ungrouped.map(essayCaseTileHTML).join("")}</div>`:""}
  ${footer()}`;
 }
