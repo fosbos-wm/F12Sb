@@ -5523,6 +5523,30 @@ let simpleTimerSecondsLeft=600;
 let simpleTimerRunning=false;
 let simpleTimerInterval=null;
 function simpleTimerFormat(sec){const m=Math.floor(sec/60),s=sec%60;return`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+// ---- Ring-Darstellung des Timers (Fortschrittsring statt reiner Zahl) ----
+const TIMER_RING_R=78,TIMER_RING_C=2*Math.PI*TIMER_RING_R;
+function timerRingFarbe(secLeft){
+ if(secLeft<=0)return"#E24B4A"; // rot: Zeit um
+ if(secLeft<=60)return"#e0a324"; // amber: letzte Minute
+ return"#378ADD"; // blau: normal
+}
+function timerRingInnerHTML(){
+ const total=Math.max(1,simpleTimerMinutes*60);
+ const secLeft=Math.max(0,simpleTimerSecondsLeft);
+ const farbe=timerRingFarbe(secLeft);
+ const offset=TIMER_RING_C*(1-secLeft/total);
+ return`<svg width="180"height="180"viewBox="0 0 180 180">
+ <circle cx="90"cy="90"r="${TIMER_RING_R}"fill="none"stroke="var(--line,#e2eaf0)"stroke-width="10"/>
+ <circle cx="90"cy="90"r="${TIMER_RING_R}"fill="none"stroke="${farbe}"stroke-width="10"stroke-linecap="round"stroke-dasharray="${TIMER_RING_C.toFixed(1)}"stroke-dashoffset="${offset.toFixed(1)}"transform="rotate(-90 90 90)"style="transition:stroke-dashoffset 1s linear,stroke .3s"/>
+ </svg>
+ <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+ <span style="font-size:32px;font-weight:700;color:${farbe}"id="simpleTimerDisplay">${simpleTimerFormat(secLeft)}</span>
+ <span style="font-size:12px;color:var(--muted);margin-top:2px">von ${simpleTimerFormat(total)}</span>
+ </div>`;
+}
+function updateTimerRing(){
+ const wrap=$("timerRingWrap");if(wrap)wrap.innerHTML=timerRingInnerHTML();
+}
 function startSimpleTimer(){
  if(simpleTimerRunning)return;
  if(simpleTimerSecondsLeft<=0){
@@ -5531,26 +5555,27 @@ function startSimpleTimer(){
  }
  simpleTimerRunning=true;
  const btn=$("simpleTimerStartBtn");if(btn)btn.textContent="Läuft …";
+ updateTimerRing();
  simpleTimerInterval=setInterval(()=>{
  simpleTimerSecondsLeft--;
- const disp=$("simpleTimerDisplay");if(disp)disp.textContent=simpleTimerFormat(simpleTimerSecondsLeft);
+ updateTimerRing();
  if(simpleTimerSecondsLeft<=0){
  clearInterval(simpleTimerInterval);simpleTimerRunning=false;
  toast(" Zeit ist um!");
- const b=$("simpleTimerStartBtn");if(b)b.textContent="▶ Start";
+ const b=$("simpleTimerStartBtn");if(b)b.textContent="Start";
  }
  },1000);
 }
 function pauseSimpleTimer(){
  clearInterval(simpleTimerInterval);simpleTimerRunning=false;
- const btn=$("simpleTimerStartBtn");if(btn)btn.textContent="▶ Weiter";
+ const btn=$("simpleTimerStartBtn");if(btn)btn.textContent="Weiter";
 }
 function resetSimpleTimer(){
  clearInterval(simpleTimerInterval);simpleTimerRunning=false;
  const mins=Math.max(1,Math.min(180,parseInt($("simpleTimerInput")?.value,10)||10));
  simpleTimerMinutes=mins;simpleTimerSecondsLeft=mins*60;
- const disp=$("simpleTimerDisplay");if(disp)disp.textContent=simpleTimerFormat(simpleTimerSecondsLeft);
- const btn=$("simpleTimerStartBtn");if(btn)btn.textContent="▶ Start";
+ updateTimerRing();
+ const btn=$("simpleTimerStartBtn");if(btn)btn.textContent="Start";
 }
 window.startSimpleTimer=startSimpleTimer;window.pauseSimpleTimer=pauseSimpleTimer;window.resetSimpleTimer=resetSimpleTimer;
 function renderUhrTimer(){
@@ -5564,11 +5589,11 @@ function renderUhrTimer(){
  </div>
  <div class="card"style="text-align:center">
  <div class="kicker">TIMER</div>
- <div class="pomo-display"id="simpleTimerDisplay"style="margin-top:10px">${simpleTimerFormat(simpleTimerSecondsLeft)}</div>
- <div class="pomo-actions">
- <button class="primary"id="simpleTimerStartBtn"onclick="startSimpleTimer()">${simpleTimerRunning?"Läuft …":"▶ Start"}</button>
- <button class="secondary"onclick="pauseSimpleTimer()">⏸ Pause</button>
- <button class="secondary"onclick="resetSimpleTimer()">↺ Zurücksetzen</button>
+ <div id="timerRingWrap"style="position:relative;width:180px;height:180px;margin:10px auto 0">${timerRingInnerHTML()}</div>
+ <div class="pomo-actions"style="margin-top:14px">
+ <button class="primary"id="simpleTimerStartBtn"onclick="startSimpleTimer()">${simpleTimerRunning?"Läuft …":"Start"}</button>
+ <button class="secondary"onclick="pauseSimpleTimer()">Pause</button>
+ <button class="secondary"onclick="resetSimpleTimer()">Zurücksetzen</button>
  </div>
  <div class="pomo-settings">
  <label>Minuten<input id="simpleTimerInput"type="number"min="1"max="180"value="${simpleTimerMinutes}"></label>
