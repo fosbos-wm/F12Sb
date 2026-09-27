@@ -1144,18 +1144,24 @@ async function renderKlassenteam(){
 // STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F12Sb
 // ============================================================
 
-// Fächer der FOS 12 Sozialwesen – für Noteneintrag, Halbjahresergebnis
-// und Wochenplanung wird über ALLE Fächer eingetragen. "Sozialwirtschaft
-// und Recht" läuft als zweijähriges Profilfach weiter. Die beiden frei
-// gewählten Fächer der Schule erscheinen als "Wahlpflichtfach 1/2" (echte
-// Fachbezeichnung je nach Wahl der Schüler:innen unterschiedlich).
+// Fächer der FOS 12 Sozialwesen laut offizieller Stundentafel – für
+// Noteneintrag, Halbjahresergebnis und Wochenplanung wird über ALLE
+// Fächer eingetragen. "Geschichte" und "Chemie" laufen nur in FOS 11
+// und fallen in FOS 12 weg, dafür kommen "Politik und Gesellschaft",
+// "Religionslehre/Ethik", "Sport", "Biologie" und "Soziologie" neu
+// hinzu. Die beiden frei gewählten Fächer der Schule erscheinen als
+// "Wahlpflichtfach 1/2" (echte Fachbezeichnung je nach Wahl unterschiedlich).
 const F12SB_FAECHER=[
  {key:"deutsch",label:"Deutsch"},
  {key:"englisch",label:"Englisch"},
- {key:"geschichte",label:"Geschichte/Sozialkunde"},
  {key:"mathematik",label:"Mathematik"},
+ {key:"politikgesellschaft",label:"Politik und Gesellschaft"},
+ {key:"religionethik",label:"Religionslehre/Ethik"},
+ {key:"sport",label:"Sport",einbringungsfaehig:false},
  {key:"paedagogik",label:"Pädagogik/Psychologie"},
  {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht"},
+ {key:"biologie",label:"Biologie"},
+ {key:"soziologie",label:"Soziologie"},
  {key:"wahlpflicht1",label:"Wahlpflichtfach 1"},
  {key:"wahlpflicht2",label:"Wahlpflichtfach 2"}
 ];
@@ -1229,7 +1235,7 @@ const LEHRPLAN_WOCHEN={
  {id:"pp12_27",start:"2027-04-26",end:"2027-04-28",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung",typ:"einzel",
  planung:"Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4.",review:true}
  ],
- deutsch:[],englisch:[],geschichte:[],mathematik:[],sozialwirtschaft:[],wahlpflicht1:[],wahlpflicht2:[]
+ deutsch:[],englisch:[],mathematik:[],politikgesellschaft:[],religionethik:[],sport:[],sozialwirtschaft:[],biologie:[],soziologie:[],wahlpflicht1:[],wahlpflicht2:[]
 };
 // Lernziel-Vorschläge je Woche, abgeleitet aus den offiziellen
 // Kompetenzerwartungen des LehrplanPLUS FOS 12 Pädagogik/Psychologie
@@ -2625,8 +2631,11 @@ function checkFoboso21(punkte){
 // diese App bewusst nicht – dafür nutzt eure Schule den offiziellen
 // Streichvorschlag-Rechner (z. B. der Beruflichen Oberschule Traunstein).
 function berechneBestehen(noten){
- const faecherHJ1=F12SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj1"));
- const faecherHJ2=F12SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj2"));
+ // Nicht einbringungsfähige Fächer (z. B. Sport) zählen für die
+ // Bestehens-Orientierung nach §35 Abs. 9 FOBOSO nicht mit.
+ const einbringungsfaehigeFaecher=F12SB_FAECHER.filter(f=>f.einbringungsfaehig!==false);
+ const faecherHJ1=einbringungsfaehigeFaecher.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj1"));
+ const faecherHJ2=einbringungsfaehigeFaecher.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj2"));
  const vollHJ1=faecherHJ1.every(p=>Number.isFinite(p));
  const vollJahr=vollHJ1&&faecherHJ2.every(p=>Number.isFinite(p));
 
@@ -2634,7 +2643,7 @@ function berechneBestehen(noten){
  if(vollJahr){
  // Jahrespunktzahl nach § 21 Abs. 2 FOBOSO: Durchschnitt der beiden
  // (bereits gerundeten) Halbjahresergebnisse, danach erneut gerundet.
- const jahrespunkte=F12SB_FAECHER.map((f,i)=>foboso19Runden((faecherHJ1[i]+faecherHJ2[i])/2));
+ const jahrespunkte=einbringungsfaehigeFaecher.map((f,i)=>foboso19Runden((faecherHJ1[i]+faecherHJ2[i])/2));
  // Orientierung nach §35 Abs. 9 FOBOSO: höchstens 2 Gesamtergebnisse mit
  // 1–3 Punkten bzw. 1 mit 0 Punkten – sonst ist die Zulassung gefährdet.
  const unter4=jahrespunkte.filter(p=>p>=1&&p<=3).length;
@@ -2659,6 +2668,9 @@ function wasFehltNochJahr(noten){
  return{label:f.label,status:"fehlt",text:fehlt};
  }
  const jp=foboso19Runden((p1+p2)/2);
+ // Nicht einbringungsfähige Fächer (Sport) zählen nicht fürs Bestehen –
+ // hier daher keine "kritisch/ungenügend"-Einstufung, nur Information.
+ if(f.einbringungsfaehig===false)return{label:f.label,status:"ok",text:`${jp} Punkte im Jahr (nicht einbringungsfähig)`};
  if(jp===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
  if(jp<4)return{label:f.label,status:"kritisch",text:`Aktuell ${jp} Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-jp} Punkte`};
  return{label:f.label,status:"ok",text:`${jp} Punkte im Jahr`};
