@@ -5210,7 +5210,13 @@ function openZuordnung(id){activeZuordnungId=id;go("zuordnung-board")}
 function closeZuordnung(){activeZuordnungId=null;go("zuordnung")}
 
 // aktueller Spielstand (nur im Speicher, kein Firestore nötig)
-let zuordnungShuffle=[],zuordnungAuswahl={},zuordnungAusgewertet=false;
+let zuordnungShuffle=[],zuordnungGeloest={};
+// Farbpalette für die Begriffs-Kacheln (zyklisch, nur zur Unterscheidbarkeit –
+// ohne inhaltliche Bedeutung wie bei den Lernbereichs-Farben).
+const ZU_FARBEN=[
+ {bg:"#E6F1FB",text:"#0C447C"},{bg:"#EEEDFE",text:"#3C3489"},{bg:"#EAF3DE",text:"#27500A"},
+ {bg:"#FAEEDA",text:"#633806"},{bg:"#E1F5EE",text:"#085041"},{bg:"#FBEAF0",text:"#72243E"}
+];
 
 async function renderZuordnungBoard(){
  if(!activeZuordnungId)return await renderZuordnungUebersicht();
@@ -5231,48 +5237,102 @@ async function renderZuordnungBoard(){
  const j=Math.floor(Math.random()*(i+1));
  [zuordnungShuffle[i],zuordnungShuffle[j]]=[zuordnungShuffle[j],zuordnungShuffle[i]];
  }
- zuordnungAuswahl={};zuordnungAusgewertet=false;
+ zuordnungGeloest={};
  }
  const canManage=isTeacher();
- const richtigCount=zuordnungAusgewertet?paare.filter((_,i)=>Number(zuordnungAuswahl[i])===i).length:0;
- return`${pageHead("SELBSTSTÄNDIG LERNEN",esc(u.title||"Zuordnungsübung"),esc(u.description||"")||"Ordne jedem Begriff die passende Erklärung zu.",
+ const geloestCount=Object.keys(zuordnungGeloest).length;
+ const fertig=paare.length>0&&geloestCount===paare.length;
+ return`${pageHead("SELBSTSTÄNDIG LERNEN",esc(u.title||"Zuordnungsübung"),esc(u.description||"")||"Ziehe jeden Begriff auf die passende Erklärung.",
  `<button class="secondary"onclick="closeZuordnung()">← Zuordnungsübungen</button>
  ${canManage?`<button class="secondary"onclick="deleteZuordnung('${u.id}')">Übung löschen</button>`:""}`)}
+ <style>
+ .zu-spielfeld{display:flex;gap:20px;align-items:flex-start}
+ .zu-col{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0}
+ .zu-tile{border-radius:12px;font-size:14px;line-height:1.3;transition:opacity .15s,border-color .2s}
+ .zu-begriff{padding:14px 10px;min-height:36px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;cursor:grab;touch-action:none;user-select:none;border:2px solid transparent}
+ .zu-begriff.zu-geloest{cursor:default;opacity:.45}
+ .zu-erklaerung{padding:12px 14px;background:#fff;border:2px solid var(--line,#e2eaf0);color:var(--ink)}
+ .zu-erklaerung.zu-geloest{border-color:#3fa66a;background:#eaf3de;opacity:.75}
+ .zu-erklaerung.zu-falsch{border-color:#d92c34!important;background:#fad2d5!important}
+ </style>
  ${paare.length?`<div class="card">
- <table style="width:100%;border-collapse:collapse">
- <tbody>
+ <p style="margin:0 0 14px;color:var(--muted);font-size:13px">Ziehe jede Begriffs-Kachel links auf ihre passende Erklärung rechts.</p>
+ <div class="zu-spielfeld">
+ <div class="zu-col">
  ${paare.map((p,i)=>{
- const ausgewaehlt=zuordnungAuswahl[i];
- const korrekt=zuordnungAusgewertet&&Number(ausgewaehlt)===i;
- const falsch=zuordnungAusgewertet&&ausgewaehlt!==undefined&&Number(ausgewaehlt)!==i;
- const rowStyle=korrekt?"background:#eaf3de":falsch?"background:#fad2d5":"";
- return`<tr style="${rowStyle}">
- <td style="padding:8px 10px;border-bottom:1px solid var(--line,#e2eaf0);font-weight:700;width:40%">${esc(p.begriff)}</td>
- <td style="padding:8px 10px;border-bottom:1px solid var(--line,#e2eaf0)">
- <select onchange="zuordnungWaehlen(${i},this.value)"${zuordnungAusgewertet?"disabled":""}style="width:100%">
- <option value=""${ausgewaehlt===undefined?"selected":""}>– bitte wählen –</option>
- ${zuordnungShuffle.map(j=>`<option value="${j}"${String(ausgewaehlt)===String(j)?"selected":""}>${esc(paare[j].erklaerung)}</option>`).join("")}
- </select>
- </td>
- </tr>`;
+ const f=ZU_FARBEN[i%ZU_FARBEN.length];
+ const geloest=!!zuordnungGeloest[i];
+ return`<div class="zu-tile zu-begriff${geloest?" zu-geloest":""}"data-index="${i}"style="background:${geloest?"#eee":f.bg};color:${geloest?"#888":f.text}">${esc(p.begriff)}</div>`;
  }).join("")}
- </tbody>
- </table>
+ </div>
+ <div class="zu-col">
+ ${zuordnungShuffle.map(j=>{
+ const geloest=!!zuordnungGeloest[j];
+ return`<div class="zu-tile zu-erklaerung${geloest?" zu-geloest":""}"data-index="${j}">${esc(paare[j].erklaerung)}</div>`;
+ }).join("")}
+ </div>
+ </div>
  </div>
  <div class="form-actions"style="margin-top:14px">
- ${!zuordnungAusgewertet?`<button class="primary"onclick="zuordnungUeberpruefen(${paare.length})">Überprüfen</button>`:`<span class="pill${richtigCount===paare.length?"green":""}">${richtigCount} von ${paare.length} richtig</span><button class="secondary"onclick="zuordnungNochmal()">Nochmal versuchen</button>`}
+ ${fertig?`<span class="pill green">Alle ${paare.length} richtig zugeordnet!</span>`:`<span class="pill">${geloestCount} von ${paare.length} zugeordnet</span>`}
+ <button class="secondary"onclick="zuordnungNochmal()">Neu mischen</button>
  </div>`
  :`<div class="empty"><strong>Diese Übung hat noch keine Begriffe.</strong></div>`}
  ${footer()}`;
 }
-function zuordnungWaehlen(i,val){zuordnungAuswahl[i]=val;}
-function zuordnungUeberpruefen(anzahl){
- const offen=Array.from({length:anzahl},(_,i)=>i).some(i=>zuordnungAuswahl[i]===undefined||zuordnungAuswahl[i]==="");
- if(offen){toast("Bitte erst jedem Begriff eine Erklärung zuordnen.");return}
- zuordnungAusgewertet=true;render();
+function zuordnungNochmal(){zuordnungShuffle=[];zuordnungGeloest={};render();}
+window.zuordnungNochmal=zuordnungNochmal;
+
+// Ziehen per Pointer Events (funktioniert mit Maus UND Touch). Ein Klon der
+// Kachel folgt dem Finger/Mauszeiger, die Original-Kachel bleibt an Ort und
+// Stelle (nur abgedunkelt), damit sich die Spalte während des Ziehens nicht
+// verschiebt. Beim Loslassen wird geprüft, über welcher Erklärung sich der
+// Zeiger befindet.
+function initZuordnungDragDrop(){
+ document.querySelectorAll(".zu-begriff:not(.zu-geloest)").forEach(tile=>{
+ tile.addEventListener("pointerdown",e=>{
+ e.preventDefault();
+ const idx=tile.dataset.index;
+ const rect=tile.getBoundingClientRect();
+ const clone=tile.cloneNode(true);
+ clone.style.position="fixed";
+ clone.style.left=rect.left+"px";
+ clone.style.top=rect.top+"px";
+ clone.style.width=rect.width+"px";
+ clone.style.height=rect.height+"px";
+ clone.style.zIndex=1000;
+ clone.style.pointerEvents="none";
+ clone.style.boxShadow="0 6px 16px rgba(23,56,79,.25)";
+ clone.style.cursor="grabbing";
+ document.body.appendChild(clone);
+ tile.style.opacity=".3";
+ const offsetX=e.clientX-rect.left,offsetY=e.clientY-rect.top;
+ function onMove(ev){
+ clone.style.left=(ev.clientX-offsetX)+"px";
+ clone.style.top=(ev.clientY-offsetY)+"px";
+ }
+ function onUp(ev){
+ document.removeEventListener("pointermove",onMove);
+ clone.remove();
+ const zielEl=document.elementFromPoint(ev.clientX,ev.clientY);
+ const ziel=zielEl?.closest(".zu-erklaerung");
+ if(ziel&&!ziel.classList.contains("zu-geloest")&&ziel.dataset.index===idx){
+ zuordnungGeloest[idx]=true;
+ render();
+ }else{
+ tile.style.opacity="1";
+ if(ziel){
+ ziel.classList.add("zu-falsch");
+ setTimeout(()=>ziel.classList.remove("zu-falsch"),350);
+ }
+ }
+ }
+ document.addEventListener("pointermove",onMove);
+ document.addEventListener("pointerup",onUp,{once:true});
+ });
+ });
 }
-function zuordnungNochmal(){zuordnungShuffle=[];zuordnungAuswahl={};zuordnungAusgewertet=false;render();}
-window.zuordnungWaehlen=zuordnungWaehlen;window.zuordnungUeberpruefen=zuordnungUeberpruefen;window.zuordnungNochmal=zuordnungNochmal;
+window.initZuordnungDragDrop=initZuordnungDragDrop;
 
 function openZuordnungForm(){
  if(!isTeacher()){toast("Nur Lehrkräfte können eine Zuordnungsübung anlegen.");return}
@@ -10313,6 +10373,9 @@ async function render(){
  getDoc(doc(db,"termPolls",activeTermPollId)).then(snap=>{
  if(snap.exists())subscribeTerminfindungLive(activeTermPollId,snap.data().slots||[]);
  });
+ }
+ if(p==="zuordnung-board"){
+ initZuordnungDragDrop();
  }
  if(p==="methoden"){
  renderProkChips();
