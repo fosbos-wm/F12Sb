@@ -8775,7 +8775,7 @@ const SEED_SCHULTERMINE_2627=[
  ["2027-06-23","anmeldung_einsicht","Anmeldung zur Einsichtnahme in die Prüfungsarbeiten","16:30","16:30–17:00 Uhr im Sekretariat"],
  ["2027-06-24","anmeldung_muendl","Letztmögliche Anmeldung zur mündlichen Prüfung","08:30","Persönlich im Sekretariat"],
  ["2027-06-24","anmeldung_einsicht","Letztmögliche Anmeldung zur Einsichtnahme in die Prüfungsarbeiten","08:30","Persönlich im Sekretariat"],
- ["2027-06-25","muendl_pruefungen","Bekanntgabe Zeitplan mündliche Prüfungen","10:00","10:00–13:00 Uhr in F010"],
+ ["2027-06-25","muendl_pruefungen","Bekanntgabe Zeitplan mündliche Prüfungen","10:00","10:00–13:00 Uhr","F010"],
  ["2027-06-25","rueckgabe_streichvorschlag","Rückgabe Streichvorschlag","","Bis 12:00 Uhr: späteste Rückgabe des unterschriebenen Streichvorschlags an die Klassenleitung oder deren Vertretung"],
  ["2027-06-28","muendl_pruefungen","Mündliche Prüfungen","","Nach speziellem Zeitplan (28.–30.06.2027)"],
  ["2027-06-29","muendl_pruefungen","Mündliche Prüfungen","","Nach speziellem Zeitplan (28.–30.06.2027)"],
@@ -8787,12 +8787,12 @@ async function importSchultermine(){
  if(!confirm("Die Schultermine 2026/27 (Gemeinschaftstag, Digitaltage, Notenschluss, Prüfungstermine …) jetzt in den Kalender eintragen? Bereits vorhandene Einträge werden nicht doppelt angelegt.")) return;
  let neu=0,vorhanden=0;
  try{
-  for(const [date,type,title,time,description] of SEED_SCHULTERMINE_2627){
+  for(const [date,type,title,time,description,location=""] of SEED_SCHULTERMINE_2627){
    const id=`schultermin26_${date}_${type}${title.startsWith("Letztmöglich")?"_letzte":""}${title.startsWith("Bekanntgabe Zeitplan")?"_zeitplan":""}`;
    const ref=doc(db,"events",id);
    const snap=await getDoc(ref);
    if(snap.exists()){vorhanden++;continue}
-   await setDoc(ref,{title,date,start:date,type,time,location:"",description,
+   await setDoc(ref,{title,date,start:date,type,time,location,description,
     createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
     createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
    neu++;
