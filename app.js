@@ -8462,18 +8462,7 @@ async function renderKalender(){
  try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){console.error("Kalender calendar:",e)}
  }
 
- const typeMeta={
- schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
- kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
- kprim:{label:"KPrim-Test",className:"cal-teal"},
- projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
- referat:{label:"Referat",className:"cal-yellow"},
- praesentation:{label:"Präsentation",className:"cal-purple"},
- sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
- geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"},
- pruefung:{label:"Abschlussprüfung",className:"cal-gold"}
- };
+ const typeMeta=CAL_EVENT_TYPES;
 
  // Schulferien Bayern – Schuljahr 2026/27.
  const ferienZeitraeume=[
@@ -8561,7 +8550,7 @@ async function renderKalender(){
  };
 
  window._campusCalendarEvents=events;
- const addButton=isTeacher()?'<button id="calendarAddBtn"class="primary"type="button">＋ Termin eintragen</button>':"";
+ const addButton=isTeacher()?'<button id="calendarAddBtn"class="primary"type="button">＋ Termin eintragen</button><button class="secondary"type="button"onclick="importSchultermine()"> Schultermine 26/27 eintragen</button>':"";
  const birthdayButton='<button id="calendarBirthdayBtn"class="secondary"type="button"> Meinen Geburtstag eintragen</button>';
  const exportButton='<button class="secondary"type="button"onclick="exportCampusCalendarICS()"> Kalender aufs Handy exportieren</button>';
  const legend=Object.entries(typeMeta).map(([k,v])=>
@@ -8585,6 +8574,18 @@ async function renderKalender(){
  .cal-holiday{background:#e3f5da!important;border-color:#8bc34a!important}
  .cal-birthday{background:#ffe4ec!important;border-color:#f472b6!important}
  .cal-gold{background:#fdf0c8!important;border-color:#d4a017!important;font-weight:700!important}
+ .cal-orange{background:#ffedd5!important;border-color:#fb923c!important}
+ .cal-indigo{background:#e0e7ff!important;border-color:#818cf8!important}
+ .cal-sand{background:#f1e4d3!important;border-color:#b08968!important}
+ .cal-lime{background:#ecfccb!important;border-color:#84cc16!important}
+ .cal-fuchsia{background:#fae8ff!important;border-color:#d946ef!important}
+ .cal-sky{background:#bae6fd!important;border-color:#0ea5e9!important}
+ .cal-amber{background:#fde68a!important;border-color:#f59e0b!important}
+ .cal-rose{background:#fecdd3!important;border-color:#fb7185!important}
+ .cal-cyan{background:#cffafe!important;border-color:#22d3ee!important}
+ .cal-emerald{background:#d1fae5!important;border-color:#34d399!important}
+ .cal-slate{background:#cbd5e1!important;border-color:#64748b!important}
+ .cal-violet{background:#e9d5ff!important;border-color:#a855f7!important}
  .cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
  .cal-legend-item{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#fff;font-size:12px}
  .cal-legend-dot{width:13px;height:13px;border-radius:3px;border:1px solid rgba(0,0,0,.12)}
@@ -8715,22 +8716,95 @@ async function saveBirthday(){
  }
 }
 
-function calendarTypeMeta(e){
- const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
- const key=raw==="präsentation"?"praesentation":raw;
- return ({
+const CAL_EVENT_TYPES={
+ // bestehende Terminarten
  schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
  kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
  kprim:{label:"KPrim-Test",className:"cal-teal"},
  projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
  referat:{label:"Referat",className:"cal-yellow"},
  praesentation:{label:"Präsentation",className:"cal-purple"},
+ // neue Terminarten (Schulkalender 26/27)
+ gemeinschaftstag:{label:"Gemeinschaftstag",className:"cal-orange"},
+ digitaltag:{label:"Digitaltag",className:"cal-indigo"},
+ notenschluss:{label:"Notenschluss",className:"cal-sand"},
+ weihnachtsfeier:{label:"Weihnachtsfeier",className:"cal-lime"},
+ theaterbesuch:{label:"Theaterbesuch",className:"cal-fuchsia"},
+ muendl_pruefungen:{label:"Mündliche Prüfungen",className:"cal-sky"},
+ abi_zeugnis:{label:"Abitur-Zeugnisverleihung",className:"cal-amber"},
+ rueckgabe_streichvorschlag:{label:"Rückgabe Streichvorschlag",className:"cal-rose"},
+ anmeldung_muendl:{label:"Anmeldung mündl. Prüfung",className:"cal-cyan"},
+ anmeldung_einsicht:{label:"Anmeldung Einsichtnahme",className:"cal-emerald"},
+ notenbekanntgabe_ap:{label:"Notenbekanntgabe Abschlussprüfung",className:"cal-slate"},
+ elternabend:{label:"Elternabend",className:"cal-violet"},
+ // automatische Einträge
  sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
  geburtstag:{label:"Geburtstag",className:"cal-birthday"},
  ferien:{label:"Schulferien Bayern",className:"cal-holiday"},
  pruefung:{label:"Abschlussprüfung",className:"cal-gold"}
- })[key]||{label:"Sonstiger Termin",className:"cal-grey"};
+};
+// Reihenfolge der Auswahl im Formular (ohne automatische Einträge)
+const CAL_SELECT_KEYS=["schulaufgabe","kurzarbeit","kprim","projektvorstellung","referat","praesentation",
+ "gemeinschaftstag","digitaltag","notenschluss","weihnachtsfeier","theaterbesuch","muendl_pruefungen",
+ "abi_zeugnis","rueckgabe_streichvorschlag","anmeldung_muendl","anmeldung_einsicht","notenbekanntgabe_ap","elternabend","sonstiges"];
+function calTypeOptionsHTML(){
+ return CAL_SELECT_KEYS.map(k=>`<option value="${k}">${k==="sonstiges"?"Sonstiger Termin / frei wählbar":esc(CAL_EVENT_TYPES[k].label)}</option>`).join("");
 }
+
+function calendarTypeMeta(e){
+ const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
+ const key=raw==="präsentation"?"praesentation":raw;
+ return CAL_EVENT_TYPES[key]||CAL_EVENT_TYPES.sonstiges;
+}
+
+// Einmaliger Import der Schultermine 26/27 (Terminkalender FOSBOS Weilheim, Stand 09/2026).
+// Feste Dokument-IDs: mehrfaches Klicken erzeugt keine Dubletten. Jeder Eintrag ist ein
+// normaler Kalendereintrag und kann von Lehrkräften/Admin wie gewohnt bearbeitet und gelöscht werden.
+const SEED_SCHULTERMINE_2627=[
+ ["2026-09-25","gemeinschaftstag","Gemeinschaftstag","","Gemeinschaftstag für alle Klassen"],
+ ["2026-10-08","elternabend","Elternabend","17:00","17:00 Uhr Wahl Elternbeirat\n17:30 Uhr Klassenelternversammlung\nIm Anschluss 1. Elternbeiratssitzung"],
+ ["2026-10-28","theaterbesuch","Theaterbesuch","","4.–6. Stunde: Theaterbesuch für alle 13. Klassen und zusätzliche 12. Klassen"],
+ ["2026-10-29","digitaltag","1. Digitaltag","",""],
+ ["2026-11-23","digitaltag","2. Digitaltag","",""],
+ ["2026-12-23","weihnachtsfeier","Weihnachtsfeier der SMV","08:30",""],
+ ["2027-01-22","notenschluss","Notenschluss Jahrgangsstufe 12 und 13","","Für 12/I und 13/I"],
+ ["2027-03-16","digitaltag","3. Digitaltag","",""],
+ ["2027-04-29","notenschluss","Notenschluss Jahrgangsstufe 12/13","",""],
+ ["2027-06-23","notenbekanntgabe_ap","Notenbekanntgabe Abschlussprüfung","16:00","16:00 Uhr Jgst. 12/13: Klassenleitungsstunde. Notenbekanntgabe der Abschlussprüfungsergebnisse durch die Klassenleitung. Letzte Informationsmöglichkeit bei Herrn Avdullahi zum Streichvorschlag."],
+ ["2027-06-23","anmeldung_muendl","Anmeldung zur mündlichen Prüfung","16:30","16:30–17:00 Uhr im Sekretariat"],
+ ["2027-06-23","anmeldung_einsicht","Anmeldung zur Einsichtnahme in die Prüfungsarbeiten","16:30","16:30–17:00 Uhr im Sekretariat"],
+ ["2027-06-24","anmeldung_muendl","Letztmögliche Anmeldung zur mündlichen Prüfung","08:30","Persönlich im Sekretariat"],
+ ["2027-06-24","anmeldung_einsicht","Letztmögliche Anmeldung zur Einsichtnahme in die Prüfungsarbeiten","08:30","Persönlich im Sekretariat"],
+ ["2027-06-25","muendl_pruefungen","Bekanntgabe Zeitplan mündliche Prüfungen","10:00","10:00–13:00 Uhr in F010"],
+ ["2027-06-25","rueckgabe_streichvorschlag","Rückgabe Streichvorschlag","","Bis 12:00 Uhr: späteste Rückgabe des unterschriebenen Streichvorschlags an die Klassenleitung oder deren Vertretung"],
+ ["2027-06-28","muendl_pruefungen","Mündliche Prüfungen","","Nach speziellem Zeitplan (28.–30.06.2027)"],
+ ["2027-06-29","muendl_pruefungen","Mündliche Prüfungen","","Nach speziellem Zeitplan (28.–30.06.2027)"],
+ ["2027-06-30","muendl_pruefungen","Mündliche Prüfungen","","Nach speziellem Zeitplan (28.–30.06.2027)"],
+ ["2027-07-09","abi_zeugnis","Abitur-Zeugnisverleihung 2027","",""]
+];
+async function importSchultermine(){
+ if(!isTeacher()){toast("Nur Lehrkräfte können Termine importieren.");return}
+ if(!confirm("Die Schultermine 2026/27 (Gemeinschaftstag, Digitaltage, Notenschluss, Prüfungstermine …) jetzt in den Kalender eintragen? Bereits vorhandene Einträge werden nicht doppelt angelegt.")) return;
+ let neu=0,vorhanden=0;
+ try{
+  for(const [date,type,title,time,description] of SEED_SCHULTERMINE_2627){
+   const id=`schultermin26_${date}_${type}${title.startsWith("Letztmöglich")?"_letzte":""}${title.startsWith("Bekanntgabe Zeitplan")?"_zeitplan":""}`;
+   const ref=doc(db,"events",id);
+   const snap=await getDoc(ref);
+   if(snap.exists()){vorhanden++;continue}
+   await setDoc(ref,{title,date,start:date,type,time,location:"",description,
+    createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+    createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+   neu++;
+  }
+  toast(`${neu} Termine eingetragen${vorhanden?` (${vorhanden} schon vorhanden)`:""}.`);
+  await render();
+ }catch(e){
+  console.error("Schultermine importieren:",e);
+  toast(e?.code==="permission-denied"?"Firebase verweigert das Eintragen. Bitte die Firestore-Regeln prüfen.":"Die Termine konnten nicht eingetragen werden.");
+ }
+}
+window.importSchultermine=importSchultermine;
 
 function openCalendarDay(y,m,d){
  const events=window._campusCalendarEvents||[];
@@ -11044,15 +11118,7 @@ function openCalendarForm(){
  <div class="form">
  <label>Titel *<input id="calTitle"type="text"placeholder="z. B. Schulaufgabe Pädagogik"required></label>
  <label>Terminart *
- <select id="calType">
- <option value="schulaufgabe">Schulaufgabe</option>
- <option value="kurzarbeit">Kurzarbeit</option>
- <option value="kprim">KPrim-Test</option>
- <option value="projektvorstellung">Projektvorstellung</option>
- <option value="referat">Referat</option>
- <option value="praesentation">Präsentation</option>
- <option value="sonstiges">Sonstiger Termin / frei wählbar</option>
- </select>
+ <select id="calType">${calTypeOptionsHTML()}</select>
  </label>
  <label>Datum *<input id="calDate"type="date"required></label>
  <label>Uhrzeit<input id="calTime"type="time"></label>
@@ -11102,15 +11168,7 @@ function editCalendarEntry(collectionName,id,title,type,date,time,location,descr
  <div class="form">
  <label>Titel *<input id="calTitle"type="text"value="${esc(title||"")}"required></label>
  <label>Terminart *
- <select id="calType">
- <option value="schulaufgabe">Schulaufgabe</option>
- <option value="kurzarbeit">Kurzarbeit</option>
- <option value="kprim">KPrim-Test</option>
- <option value="projektvorstellung">Projektvorstellung</option>
- <option value="referat">Referat</option>
- <option value="praesentation">Präsentation</option>
- <option value="sonstiges">Sonstiger Termin / frei wählbar</option>
- </select>
+ <select id="calType">${calTypeOptionsHTML()}</select>
  </label>
  <label>Datum *<input id="calDate"type="date"value="${esc(date||"")}"required></label>
  <label>Uhrzeit<input id="calTime"type="time"value="${esc(time||"")}"></label>
