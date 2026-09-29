@@ -2,19 +2,24 @@ let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, 
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
-*/ const firebaseConfig = { apiKey: "AIzaSyB_q4BaOGXaxLLL_fYB1MNA0HO2llAeG_s", authDomain: "f12sb-9f3db.firebaseapp.com", projectId: "f12sb-9f3db", storageBucket: "f12sb-9f3db.firebasestorage.app", messagingSenderId: "85936724696", appId: "1:85936724696:web:aa5be7604fd580e4add5ad" }; /* =========================================================
- F12Sb MASTER – STABILE MODULREGISTRY
+*/ const firebaseConfig = { apiKey: "AIzaSyBKRUQz7x0hA8_GxJ4qi-61veKrS3GQqCA", authDomain: "f11sb-62bae.firebaseapp.com", projectId: "f11sb-62bae", storageBucket: "f11sb-62bae.firebasestorage.app", messagingSenderId: "579105646323", appId: "1:579105646323:web:3bfb668a90cb37540e3986", measurementId: "G-20SRP6BE9K" }; /* =========================================================
+ F11Sb MASTER – STABILE MODULREGISTRY
  Die Master-App selbst enthält keine Pflicht-Imports
  von Zusatzmodulen. Module werden erst beim Öffnen geladen.
- ========================================================= */ const CAMPUS_MODULES={ lernpfad:{label:"Persönlicher Lernpfad",route:"lernpfad",ready:true}, lernressourcen:{label:"Lernressourcen",route:"ressourcen",ready:true}, lernjournal:{label:"Lernjournal",route:"journal",ready:true}, lernmethoden:{label:"Lernmethoden",route:"methoden",ready:true}, lernimpulse:{label:"Lernimpulse",route:"impulse",ready:false}, lernstand:{label:"Lernstandsmessung",route:"lernstand",ready:true}, lerncoaching:{label:"Lerncoaching",route:"lerncoaching",ready:false}, resilienz:{label:"Resilienz & Respressi",route:"resilienz",ready:false}, kompetenz:{label:"Kompetenzwerkstatt",route:"kompetenz",ready:true}, forum:{label:"Campus-Forum",route:"forum",ready:true}, pinnwand:{label:"Pinnwand",route:"pinnwand",ready:true}, kollaboration:{label:"Tools für Zusammenarbeit",route:"kollaboration",ready:true}, wortwolke:{label:"Wortwolke",route:"wortwolke",ready:true}, kanban:{label:"Kanban-Board",route:"kanban",ready:true}, terminfindung:{label:"Terminfindung",route:"terminfindung",ready:true}, teamgesucht:{label:"Team gesucht",route:"teamgesucht",ready:true}, checkliste:{label:"Gemeinsame Checkliste",route:"checkliste",ready:true}, ampel:{label:"Verständnis-Ampel",route:"ampel",ready:true}, umfrage:{label:"Live-Umfrage",route:"umfrage",ready:true}, zufallspicker:{label:"Wer ist dran?",route:"zufallspicker",ready:true}, lernwerkzeuge:{label:"Lern-Werkzeuge",route:"lernwerkzeuge",ready:true}, karteikarten:{label:"Karteikarten",route:"karteikarten",ready:true},"fokus-timer":{label:"Fokus-Timer",route:"fokus-timer",ready:true}, glossar:{label:"Glossar",route:"glossar",ready:true}, projekte:{label:"Projekte",route:"projekte",ready:true}, kalender:{label:"Campus-Kalender",route:"kalender",ready:true}, kompetenzprofil:{label:"Kompetenzprofil",route:"kompetenzprofil",ready:false}, team:{label:"Lehrkräfte Klassenteam",route:"team",ready:true} }; const configReady = !Object.values(firebaseConfig).some(v => String(v).includes("HIER_") || String(v).includes("DEIN-PROJEKT")); let app=null, auth=null, db=null; const $=id=>document.getElementById(id); const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+ ========================================================= */ const CAMPUS_MODULES={ lernpfad:{label:"Persönlicher Lernpfad",route:"lernpfad",ready:true}, lernressourcen:{label:"Lernressourcen",route:"ressourcen",ready:true}, lernjournal:{label:"Lernjournal",route:"journal",ready:true}, lernmethoden:{label:"Lernmethoden",route:"methoden",ready:true}, lernimpulse:{label:"Lernimpulse",route:"impulse",ready:false}, lernstand:{label:"Lernstandsmessung",route:"lernstand",ready:true}, lerncoaching:{label:"Lerncoaching",route:"lerncoaching",ready:false}, resilienz:{label:"Resilienz & Respressi",route:"resilienz",ready:false}, kompetenz:{label:"Kompetenzwerkstatt",route:"kompetenz",ready:true}, forum:{label:"Campus-Forum",route:"forum",ready:true}, pinnwand:{label:"Pinnwand",route:"pinnwand",ready:true}, kollaboration:{label:"Tools für Zusammenarbeit",route:"kollaboration",ready:true}, wortwolke:{label:"Wortwolke",route:"wortwolke",ready:true}, kanban:{label:"Kanban-Board",route:"kanban",ready:true}, terminfindung:{label:"Terminfindung",route:"terminfindung",ready:true}, teamgesucht:{label:"Team gesucht",route:"teamgesucht",ready:true}, checkliste:{label:"Gemeinsame Checkliste",route:"checkliste",ready:true}, ampel:{label:"Verständnis-Ampel",route:"ampel",ready:true}, umfrage:{label:"Live-Umfrage",route:"umfrage",ready:true}, zufallspicker:{label:"Wer ist dran?",route:"zufallspicker",ready:true}, lernwerkzeuge:{label:"Lern-Werkzeuge",route:"lernwerkzeuge",ready:true}, karteikarten:{label:"Karteikarten",route:"karteikarten",ready:true},"fokus-timer":{label:"Fokus-Timer",route:"fokus-timer",ready:true}, glossar:{label:"Glossar",route:"glossar",ready:true}, projekte:{label:"Projekte",route:"projekte",ready:true}, praxis:{label:"fpA",route:"praktikum",ready:true}, ki:{label:"KI-Innovationslabor",route:"ki",ready:true}, kalender:{label:"Campus-Kalender",route:"kalender",ready:true}, kompetenzprofil:{label:"Kompetenzprofil",route:"kompetenzprofil",ready:false}, team:{label:"Lehrkräfte Klassenteam",route:"team",ready:true} }; const configReady = !Object.values(firebaseConfig).some(v => String(v).includes("HIER_") || String(v).includes("DEIN-PROJEKT")); let app=null, auth=null, db=null; const $=id=>document.getElementById(id); const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const statusLabel={green:"Auf Kurs",yellow:"Klärungsbedarf",red:"Handlungsbedarf"};
 const labels={question:"Frage",info:"Info",idea:"Idee",project:"Projekt",practice:"Praxis"};
 let currentUser=null, profile=null, unsubscribers=[];
 let activeBoardId=null;
 let activeFach=null;
-function openFach(fach){activeFach=fach;go("fach")}
-function closeFach(){activeFach=null;go("lernwerkstatt")}
+let activePhaseDetail=null;
+let ppDirty=false; // Zeitstrahl nach Änderungen im Modal neu zeichnen
+function openFach(fach){activeFach=fach;activePhaseDetail=null;go("fach")}
+function closeFach(){activeFach=null;activePhaseDetail=null;go("faecher")}
+function openPhaseDetail(phaseId){activePhaseDetail=phaseId;render()}
+function closePhaseDetail(){activePhaseDetail=null;render()}
 window.openFach=openFach;window.closeFach=closeFach;
+window.openPhaseDetail=openPhaseDetail;window.closePhaseDetail=closePhaseDetail;
 
 function toast(t){const
 x=$("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove("show"),
@@ -26,10 +31,10 @@ function authError(err){
  $("authError").textContent=map[err?.code]||"Anmeldung konnte nicht durchgeführt werden.";
 }
 function modal(html){$("modal").innerHTML=html;$("modalBackdrop").hidden=false}
-function closeModal(){$("modalBackdrop").hidden=true}
+function closeModal(){$("modalBackdrop").hidden=true;if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}if(ppDirty){ppDirty=false;if(activeFach==="paedagogik")render();}}
 function pageHead(k,h,p,actions=""){return`<div class="page-head"><div><div class="kicker">${k}</div><h1>${h}</h1><p>${p}</p>
 </div><div class="actions">${actions}</div></div>`}
-function footer(){return`<div class="footer"><span>F12Sb 26/27 · FOSBOS Weilheim</span><span>Gemeinsam · offen ·
+function footer(){return`<div class="footer"><span>F11Sb 26/27 · FOSBOS Weilheim</span><span>Gemeinsam · offen ·
 respektvoll</span><span><button type="button"onclick="showImpressum()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Impressum</button></span></div>`}
 
 /* =========================================================
@@ -67,7 +72,7 @@ function showImpressum(){
  Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
  <div class="notice">
- <strong>Hinweis zur F12Sb-App</strong>
+ <strong>Hinweis zur F11Sb-App</strong>
  <p style="margin-bottom:0">Diese App ist ein Unterrichts-/Klassenprojekt und kein offizielles IT-Angebot der Schulverwaltung. Die obigen Angaben entsprechen denen der offiziellen Schul-Website (fos-bos-weilheim.de). Für Rückfragen zu dieser App wende dich zusätzlich an die betreuende Lehrkraft. Eine ausführliche Datenschutzerklärung für die App selbst steht noch aus.</p>
  </div>
 
@@ -75,8 +80,8 @@ function showImpressum(){
  </div>`);
 }
 
-function tile(title,text,target,farbe,label){return`<a class="card tile"style="border-left:4px solid ${farbe||"var(--line)"}"href="#${target}">
-<strong>${title}</strong><small>${text}</small>${label?`<span class="tile-label"style="color:${farbe||"var(--muted)"}">${label}</span>`:""}</a>`}
+function tile(icon,title,text,target){return`<a class="card tile"href="#${target}"><span class="emoji">${icon}</span>
+<strong>${title}</strong><small>${text}</small></a>`}
 function statusDot(s){return`<span class="dot ${s}"></span>`}
 function isApproved(){return profile?.status==="approved"}
 function isTeacher(){return isApproved() && (profile?.role==="teacher"||profile?.role==="admin")}
@@ -378,17 +383,14 @@ async function renderRessourcenRoute(){
 
  const types={
  taskcard:{icon:"",label:"TaskCard"},
- canva:{icon:"",label:"Canva"},
- bycs:{icon:"",label:"ByCS / mebis"},
- learningapps:{icon:"",label:"LearningApps"},
- video:{icon:"",label:"YouTube-Links"},
  ki:{icon:"",label:"KI-Lernressource"},
  external:{icon:"",label:"Externer Link"},
+ video:{icon:"",label:"Video-Link"},
+ bycs:{icon:"",label:"ByCS / mebis"},
+ canva:{icon:"",label:"Canva"},
+ learningapps:{icon:"",label:"LearningApps"},
  website:{icon:"",label:"Webseite"}
  };
- // Reihenfolge der Abschnitte auf der Seite: TaskCards zuerst, dann
- // Canva, ByCS, LearningApps, YouTube-Links, Rest danach.
- const typReihenfolge=["taskcard","canva","bycs","learningapps","video","ki","external","website"];
  const typeOf=r=>{
  const raw=String(r.type??r.category??"external").toLowerCase();
  if(types[raw]) return raw;
@@ -410,32 +412,19 @@ async function renderRessourcenRoute(){
  const grouped={taskcard:[],ki:[],external:[],video:[],bycs:[],canva:[],learningapps:[],website:[]};
  resources.forEach(r=>grouped[typeOf(r)].push(r));
 
- // Ressourcen, die sich eindeutig einem Lernbereich zuordnen lassen
- // ("Lernbereich 2: ...", "12.4 ...", "LB 3 …"), werden geordnet
- // LB 1 → LB 4 nebeneinander mit farbigem linkem Rand dargestellt.
- const lbNummerVon=r=>{
-  const titel=titleOf(r);
-  let m=titel.match(/Lernbereich\s*(\d)/i);
-  if(m)return Number(m[1]);
-  m=titel.match(/^\s*12\.(\d)\b/);
-  if(m)return Number(m[1]);
-  m=titel.match(/\bLB\s*(\d)\b/i);
-  if(m)return Number(m[1]);
-  return null;
- };
-
  const canEdit=typeof isTeacher==="function" && isTeacher();
  const addButton=canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Lernressource hinzufügen</button>`:"";
 
  const card=r=>{
  const type=typeOf(r),t=types[type],tags=tagsOf(r),url=urlOf(r);
- const lbNum=lbNummerVon(r);
- const lbFarbe=lbNum&&LERNBEREICH_FARBEN[lbNum]?LERNBEREICH_FARBEN[lbNum].border:null;
- return`<article class="card resource-card resource-card-square"${lbFarbe?`style="border-left:4px solid ${lbFarbe}"`:""}data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}">
- <span class="pill">${esc(t.label)}</span>
+ return`<article class="card resource-card"data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}">
+ <div class="resource-head"><span class="resource-icon">${t.icon}</span><span class="pill">${esc(t.label)}</span></div>
  <h3>${esc(titleOf(r))}</h3>
- ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">Öffnen →</button>`:`<small style="color:var(--muted)">Noch kein Link hinterlegt.</small>`}
- ${canEdit?`<div class="resource-actions"><button class="text-button"onclick="editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')">Bearbeiten</button><button class="text-button"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">Löschen</button></div>`:""}
+ ${descOf(r)?`<p>${esc(descOf(r))}</p>`:""}
+ ${subjectOf(r)?`<div class="resource-meta"> ${esc(subjectOf(r))}</div>`:""}
+ ${tags.length?`<div class="chips">${tags.map(x=>`<span class="chip">#${esc(x)}</span>`).join("")}</div>`:""}
+ ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">${t.icon} Lernressource öffnen →</button>`:`<div class="notice">Für diese Ressource ist noch kein Link hinterlegt.</div>`}
+ ${canEdit?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')">Bearbeiten</button><button class="secondary"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">Löschen</button></div>`:""}
  </article>`;
  };
 
@@ -446,20 +435,10 @@ async function renderRessourcenRoute(){
  <p>TaskCards, KI-Lernangebote, Videos, ByCS/mebis, Canva und LearningApps sowie weitere Webseiten an einem Ort.</p>
  <div class="chips"><span class="chip"> TaskCard</span><span class="chip"> KI</span><span class="chip"> Video</span><span class="chip"> ByCS / mebis</span><span class="chip"> Canva</span><span class="chip"> LearningApps</span><span class="chip"> Webseite</span></div>
  </div>
- ${typReihenfolge.map(type=>{
- const list=grouped[type];
- if(!list||!list.length)return"";
+ ${Object.entries(grouped).map(([type,list])=>{
+ if(!list.length)return"";
  const t=types[type];
- const geordnet=[...list].sort((a,b)=>{
-  const la=lbNummerVon(a),lb=lbNummerVon(b);
-  if(la!==null&&lb!==null)return la-lb;
-  if(la!==null)return-1;
-  if(lb!==null)return 1;
-  return 0;
- });
- return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div>
- <div class="grid grid-4">${geordnet.map(card).join("")}</div>
- </section>`;
+ return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div><div class="grid grid-3">${list.map(card).join("")}</div></section>`;
  }).join("")}
  ${resources.length?`<div class="notice"style="margin-top:16px"> ${resources.length} Lernressource${resources.length===1?"":"n"} verfügbar.</div>`:`<div class="card empty"style="margin-top:12px"><strong>Noch keine Lernressourcen vorhanden.</strong><p>Lege z. B. eine TaskCard, einen KI-Link, ein Video oder einen ByCS-/mebis-Link an.</p>${canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Erste Lernressource anlegen</button>`:""}</div>`}
  ${footer()}`;
@@ -751,6 +730,7 @@ $("logoutBtn").onclick=async()=>{
  try{await loadFirebase();await signOut(auth)}catch(e){console.error(e)}
 };
 $("menuBtn").onclick=()=>$("sidebar").classList.toggle("open");
+$("helpQuick").onclick=openHelpForm;
 $("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
 
 async function getCollection(name,sortField="createdAt",desc=true){
@@ -789,6 +769,14 @@ function fmtDateOnly(v){
  if(typeof v==="object"&&v.seconds)return new Date(v.seconds*1000).toLocaleDateString("de-DE");
  const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(String(v));
  return m?`${m[3]}.${m[2]}.${m[1]}`:String(v);
+}
+// Letzter Donnerstag am oder vor einem gegebenen Datum (für die
+// Blockberichte-Abgabetermine: letzter Donnerstag jedes Praktikumsblocks).
+function letzterDonnerstagVorOrAm(dateStr){
+ const d=new Date(dateStr+"T00:00:00");
+ const diff=(d.getDay()-4+7)%7; // Donnerstag = Tag 4
+ d.setDate(d.getDate()-diff);
+ return d.toISOString().slice(0,10);
 }
 function cleanDateInput(v){return v||"—"}
 
@@ -1139,150 +1127,407 @@ async function renderKlassenteam(){
  <div class="card"style="margin-top:16px">
  <div class="kicker">TERMINE</div>
  <h2 style="margin-top:4px">Geburtstage im Klassenteam</h2>
- <div class="list">${birthdays.map(b=>{const c=personColor(b.uid);return`<div class="list-item"style="background:${c.bg};border-left:4px solid ${c.border};border-radius:8px;padding:10px 12px;margin-bottom:6px"><div><strong style="color:${c.text}">${esc(b.name)}</strong><small>${esc(b.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))}</small></div><div style="display:flex;align-items:center;gap:8px">${b.isToday?`<span class="pill green"> Heute!</span>`:`<span class="pill"style="background:${c.border};color:#fff">in ${b.days} Tagen</span>`}${isTeacher()?`<button type="button"class="secondary"style="padding:4px 8px"onclick="adminRemoveBirthday('${b.uid}')"title="Geburtstag entfernen">✕</button>`:""}</div></div>`}).join("")||`<div class="empty">Noch keine Geburtstage eingetragen.</div>`}</div>
+ <div class="list">${birthdays.map(b=>{const c=personColor(b.uid);return`<div class="list-item"style="background:${c.bg};border-left:4px solid ${c.border};border-radius:8px;padding:10px 12px;margin-bottom:6px"><div><strong style="color:${c.text}">${esc(b.name)}</strong><small>${esc(b.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))}</small></div>${b.isToday?`<span class="pill green"> Heute!</span>`:`<span class="pill"style="background:${c.border};color:#fff">in ${b.days} Tagen</span>`}</div>`}).join("")||`<div class="empty">Noch keine Geburtstage eingetragen.</div>`}</div>
  </div>
  ${footer()}`;
 }
 
 // ============================================================
-// STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F12Sb
+// STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F11Sb
 // ============================================================
 
-// Fächer der FOS 12 Sozialwesen laut offizieller Stundentafel – für
-// Noteneintrag, Halbjahresergebnis und Wochenplanung wird über ALLE
-// Fächer eingetragen. "Geschichte" und "Chemie" laufen nur in FOS 11
-// und fallen in FOS 12 weg, dafür kommen "Politik und Gesellschaft",
-// "Religionslehre/Ethik", "Sport", "Biologie" und "Soziologie" neu
-// hinzu. Die beiden frei gewählten Fächer der Schule erscheinen als
-// "Wahlpflichtfach 1/2" (echte Fachbezeichnung je nach Wahl unterschiedlich).
-const F12SB_FAECHER=[
+// Die 7 benoteten Fächer der F11Sb (Sozialwesen). Das Wahlpflichtfach
+// ist reiner Förderunterricht, wird nicht benotet und taucht daher hier
+// bewusst nicht auf.
+const F11SB_FAECHER=[
  {key:"deutsch",label:"Deutsch"},
  {key:"englisch",label:"Englisch"},
+ {key:"geschichte",label:"Geschichte"},
  {key:"mathematik",label:"Mathematik"},
- {key:"politikgesellschaft",label:"Politik und Gesellschaft"},
- {key:"religionethik",label:"Religionslehre/Ethik"},
- {key:"sport",label:"Sport",einbringungsfaehig:false},
  {key:"paedagogik",label:"Pädagogik/Psychologie"},
  {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht"},
- {key:"biologie",label:"Biologie"},
- {key:"soziologie",label:"Soziologie"},
- {key:"wahlpflicht1",label:"Wahlpflichtfach 1"},
- {key:"wahlpflicht2",label:"Wahlpflichtfach 2"}
-];
-// Nur für den Lehrplan-Zeitstrahl (Fächer 12. Klasse): dort ist aktuell
-// ausschließlich Pädagogik/Psychologie hinterlegt.
-const F12SB_LEHRPLAN_FAECHER=[
- {key:"paedagogik",label:"Pädagogik/Psychologie"}
+ {key:"chemie",label:"Chemie"}
 ];
 
 // ============================================================
 // LERNWERKSTATT · FÄCHER-ZEITSTRAHL
 // ============================================================
+// Praktikumsphasen 2026/27 (gilt fachübergreifend, aus dem B-Block-Plan).
+// B-Block-Termine exakt aus dem offiziellen Dokument "Einteilung Unterrichts-
+// und Praktikumszeit 2026/2027" der FOSBOS Weilheim übernommen (nur 6 Blöcke,
+// nicht 7 – vorherige Annahme war hier ungenau).
+const PRAKTIKUMSPHASEN=[
+ {id:"pr1",start:"2026-09-15",end:"2026-10-02",titel:"Praktikum – B-Block – Erziehung (Block 1)",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr2",start:"2026-10-26",end:"2026-11-20",titel:"Praktikum – B-Block – Erziehung (Block 2)",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr3",start:"2026-12-14",end:"2027-01-15",titel:"Praktikum – B-Block – Erziehung (Block 3)",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr4",start:"2027-02-15",end:"2027-03-05",titel:"Praktikum – B-Block – Pflege (Block 1)",bereich:"Pflegebereich",icon:"🏥"},
+ {id:"pr5",start:"2027-04-19",end:"2027-05-07",titel:"Praktikum – B-Block – Pflege (Block 2)",bereich:"Pflegebereich",icon:"🏥"},
+ {id:"pr6",start:"2027-06-14",end:"2027-07-09",titel:"Praktikum – B-Block – Pflege (Block 3)",bereich:"Pflegebereich",icon:"🏥"}
+];
 
-// Lehrplan-Zeitstrahl je Fach. "typ": "projekt" | "einzel". Aktuell mit
-// echten Inhalten für Pädagogik/Psychologie befüllt (Jahresverlaufsplanung
-// FOS 12 Sozialwesen, B-Block 2026/27); die übrigen Fächer sind als leere,
-// erweiterbare Struktur angelegt.
+// Aufträge je Praktikumsphase: von Lehrkräften gepflegt, überall live
+// gespiegelt (Lernpfad-Wegpunkte, fpA-Übersicht, Startseite) – ein
+// Datentopf, keine Kopien.
+async function getPraktikumsAuftraege(){
+ try{
+ const snap=await getDocs(collection(db,"praktikumsAuftraege"));
+ const map={};
+ snap.docs.forEach(d=>{map[d.id]=d.data()});
+ return map;
+ }catch(e){console.error("Praktikumsaufträge laden:",e);return {}}
+}
+async function savePraktikumsphaseAuftrag(phaseId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können Aufträge eintragen.");return}
+ const titel=$("praktAuftragTitel")?.value.trim();
+ const beschreibung=$("praktAuftragBeschreibung")?.value.trim();
+ if(!titel){toast("Bitte einen Titel eingeben.");return}
+ try{
+ await setDoc(doc(db,"praktikumsAuftraege",phaseId),{
+ phaseId,titel,beschreibung,updatedBy:currentUser.uid,updatedAt:serverTimestamp()
+ });
+ closeModal();await render();toast("Auftrag gespeichert.");
+ }catch(e){console.error("Praktikumsauftrag speichern:",e);toast("Konnte nicht gespeichert werden.")}
+}
+async function deletePraktikumsphaseAuftrag(phaseId){
+ if(!confirm("Diesen Praktikumsauftrag wirklich löschen?"))return;
+ try{await deleteDoc(doc(db,"praktikumsAuftraege",phaseId));closeModal();await render();toast("Auftrag gelöscht.")}
+ catch(e){console.error("Praktikumsauftrag löschen:",e);toast("Konnte nicht gelöscht werden.")}
+}
+async function openPraktikumsphaseAuftragForm(phaseId){
+ const phase=PRAKTIKUMSPHASEN.find(p=>p.id===phaseId);
+ if(!phase)return;
+ const alle=await getPraktikumsAuftraege();
+ const bestehend=alle[phaseId];
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">PRAKTIKUMSPHASE · ${esc(fmtDateOnly(phase.start))}–${esc(fmtDateOnly(phase.end))}</div>
+ <h2>${esc(phase.titel)}</h2>
+ ${isTeacher()?`<div class="form">
+ <label>Titel des Auftrags<input id="praktAuftragTitel"type="text"value="${esc(bestehend?.titel||"")}"placeholder="z. B. Beobachtungsauftrag Erziehungsstile"></label>
+ <label>Beschreibung<textarea id="praktAuftragBeschreibung"rows="4"placeholder="Was sollen die Schüler:innen in dieser Praktikumsphase konkret tun?">${esc(bestehend?.beschreibung||"")}</textarea></label>
+ <div class="form-actions">
+ <button class="secondary"onclick="closeModal()">Abbrechen</button>
+ ${bestehend?`<button class="secondary"onclick="deletePraktikumsphaseAuftrag('${phaseId}')">Löschen</button>`:""}
+ <button class="primary"onclick="savePraktikumsphaseAuftrag('${phaseId}')">Speichern</button>
+ </div>
+ </div>`
+ :!bestehend?`<div class="empty">Für diese Praktikumsphase wurde noch kein Auftrag eingetragen.</div>`
+ :`<h3 style="margin:8px 0">${esc(bestehend.titel)}</h3><p style="color:var(--muted);white-space:pre-wrap">${esc(bestehend.beschreibung||"")}</p>
+ <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`}
+ `);
+}
+window.openPraktikumsphaseAuftragForm=openPraktikumsphaseAuftragForm;
+window.savePraktikumsphaseAuftrag=savePraktikumsphaseAuftrag;
+window.deletePraktikumsphaseAuftrag=deletePraktikumsphaseAuftrag;
+
+// ============================================================
+// PÄDAGOGIK/PSYCHOLOGIE · ZEITSTRAHL MIT ZEITBUDGET (Umbau 26/27)
+// ------------------------------------------------------------
+// Aufbau: 4 Lernbereiche = 4 Blöcke im Zeitstrahl. Jeder Block besteht aus
+//   (1) dem PROJEKT (Projektinhalte + Team-Meilensteine) und danach
+//   (2) dem ABSCHLUSSPRÜFUNGS-TRAINING (APT) mit den übrigen Lehrplan-
+//       inhalten des Lernbereichs, je Inhalt in 5 Bereichen:
+//       Prüfungsfrage → Inhalte & Aufgabeneingrenzung → Basis-Check →
+//       Lernprodukt & Vorkorrektur (umgesetzt). Der K-Prim-Test läuft
+//       separat als „Check-out“ am Ende der Woche (live durch die Lehrkraft).
+// Die Zeitbudgets rechnen in echten Schulwochen (siehe SCHULWOCHEN_PP).
+// ============================================================
+
+// Bayerische Ferien 2026/27 (BayMBl. 2022 Nr. 747).
+const FERIEN_2026_27=[
+ {start:"2026-11-02",end:"2026-11-06",titel:"Herbstferien"},
+ {start:"2026-12-24",end:"2027-01-08",titel:"Weihnachtsferien"},
+ {start:"2027-02-08",end:"2027-02-12",titel:"Frühjahrsferien"},
+ {start:"2027-03-22",end:"2027-04-02",titel:"Osterferien"},
+ {start:"2027-05-18",end:"2027-05-28",titel:"Pfingstferien"}
+];
+// P/P-Schulwochen = alle Wochen außerhalb der B-Block-Praktika und der
+// Ferien. Ändert sich der Blockplan, nur HIER anpassen – Zeitbudget,
+// Zeitstrahl und Fortschritt rechnen sich automatisch neu.
+const SCHULWOCHEN_PP=[
+ {id:"sw01",start:"2026-10-05",end:"2026-10-09"},
+ {id:"sw02",start:"2026-10-12",end:"2026-10-16"},
+ {id:"sw03",start:"2026-10-19",end:"2026-10-23"},
+ {id:"sw04",start:"2026-11-23",end:"2026-11-27"},
+ {id:"sw05",start:"2026-11-30",end:"2026-12-04"},
+ {id:"sw06",start:"2026-12-07",end:"2026-12-11"},
+ {id:"sw07",start:"2027-01-18",end:"2027-01-22"},
+ {id:"sw08",start:"2027-01-25",end:"2027-01-29"},
+ {id:"sw09",start:"2027-02-01",end:"2027-02-05"},
+ {id:"sw10",start:"2027-03-08",end:"2027-03-12"},
+ {id:"sw11",start:"2027-03-15",end:"2027-03-19"},
+ {id:"sw12",start:"2027-04-05",end:"2027-04-09"},
+ {id:"sw13",start:"2027-04-12",end:"2027-04-16"},
+ {id:"sw14",start:"2027-05-10",end:"2027-05-14"},
+ {id:"sw15",start:"2027-05-31",end:"2027-06-04"},
+ {id:"sw16",start:"2027-06-07",end:"2027-06-11"},
+ {id:"sw17",start:"2027-07-12",end:"2027-07-16"},
+ {id:"sw18",start:"2027-07-19",end:"2027-07-23"},
+ {id:"sw19",start:"2027-07-26",end:"2027-07-30"}
+];
+function swById(id){return SCHULWOCHEN_PP.find(w=>w.id===id)||null;}
+
+// Vier ausbalancierte Lernbereichsfarben (gleiche Helligkeit/Sättigung,
+// nur der Farbton wechselt) – Blau, Violett, Grün, Terrakotta.
+const PP_FARBEN={1:"#3F7FC1",2:"#8A64B8",3:"#3C9A6B",4:"#C9773A"};
+
+// Reihenfolge = zeitliche Reihenfolge im Schuljahr (Umbau: LB 1 ist nur noch
+// die interaktive Einstiegsstunde „Das Experiment“ + Prüfungstraining in
+// zusammen 3 Schulwochen; jedes der drei echten Projekte LB 3 / LB 2 / LB 4
+// läuft 3 Schulwochen). Wochen ändern: nur die Listen projektSchulwochen /
+// aptSchulwochen unten anpassen (IDs siehe SCHULWOCHEN_PP).
+// Gemeinsamer Ablauf der drei Projekte (meilensteine): Team → Leitfrage →
+// fachliche Grundlage → Basis-Check → Praxisbezug → Entwurf mit Feedback →
+// Endprodukt. Index 5 (Entwurf) und 6 (Endprodukt) bestätigt die Lehrkraft.
+const PROJEKT_PHASEN_ROH=[
+ {id:"lb1",lb:"LB 1",lbNum:1,titel:"Das Experiment – interaktive Stunde",lbTitel:"Wissenschaft & Erziehung",
+  einstieg:true,stundeWocheId:"pp03",einstiegWeg:["pp01","pp02","stunde","pp03"],
+  projektSchulwochen:["sw01"],aptSchulwochen:["sw02","sw03"],
+  notwendigeWochen:["pp01","pp02","pp03"],trainingWochen:["pp1a1","pp1a2","pp1a3","pp1a4"],
+  meilensteine:[],bestaetigung:[]},
+ {id:"lb3",lb:"LB 3",lbNum:3,titel:"Praxisbeobachtung: Erziehung und Erziehungsstile erkennen",lbTitel:"Erziehung",
+  projektSchulwochen:["sw04","sw05","sw06"],aptSchulwochen:["sw07"],
+  notwendigeWochen:["pp04","pp05"],trainingWochen:["pp06","pp07"],
+  auftrag:{titel:"Praxisbeobachtung: Erziehung und Erziehungsstile erkennen",text:
+`In euren Praktika erlebt ihr täglich Erziehung, oft ohne sie so zu benennen. In diesem Projekt untersucht ihr im Team, woran man Erziehung erkennt und welche Erziehungsstile nach Baumrind in der Praxis sichtbar werden.
+
+Euer Weg:
+1. Bildet ein Team, grenzt euer Thema ein und formuliert eine Leitfrage mit Begründung.
+2. Erarbeitet die fachliche Grundlage (Merkmale von Erziehung, Erziehungsstile nach Baumrind) und prüft euren Wissensstand im Basis-Check.
+3. Wendet die Theorie auf eine Beobachtung aus dem Praktikum an: beschreibt die Situation kurz und analysiert sie fachlich.
+4. Legt eine Gliederung bzw. einen Entwurf vor und holt euch Feedback der Lehrkraft.
+5. Erstellt euer Endprodukt (Ausarbeitung, Plakat oder Präsentation) und beantwortet darin eure Leitfrage.
+
+Datenschutz: Beobachtungen nur anonymisiert verwenden, also keine Namen, keine Einrichtung, keine erkennbaren Details.`},
+  meilensteine:["Team gebildet","Thema eingegrenzt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Merkmale von Erziehung, Baumrind)","Basis-Check gemacht","Praxisbezug: anonymisierte Praktikumsbeobachtung fachlich analysiert","Gliederung bzw. Entwurf liegt vor (Feedback der Lehrkraft)","Endprodukt abgegeben und präsentiert"],
+  bestaetigung:[5,6]},
+ {id:"lb2",lb:"LB 2",lbNum:2,titel:"Wahrnehmungs- und Gedächtnis-Parcours",lbTitel:"Wahrnehmung, Gedächtnis, Emotion, Motivation",
+  projektSchulwochen:["sw08","sw09","sw10"],aptSchulwochen:["sw11","sw12","sw13"],
+  notwendigeWochen:["pp09","pp2p2","pp12"],trainingWochen:["pp2a1","pp10","pp11"],
+  auftrag:{titel:"Wahrnehmungs- und Gedächtnis-Parcours",text:
+`Wahrnehmung und Gedächtnis kann man am besten selbst erleben. Ihr entwickelt im Team eine Station für einen gemeinsamen Parcours, an der Mitschüler:innen ein Wahrnehmungs- oder Gedächtnisphänomen selbst ausprobieren.
+
+Euer Weg:
+1. Bildet ein Team, entscheidet euch für ein Phänomen (Wahrnehmung oder Gedächtnis) und formuliert eine Leitfrage mit Begründung.
+2. Erarbeitet die fachliche Grundlage (Wahrnehmung, Mehrspeichermodell, Strategien zum Wissenserwerb) und prüft euren Wissensstand im Basis-Check.
+3. Beschreibt kurz, was eure Station zeigt, und analysiert fachlich, welche Prozesse und Einflussfaktoren dahinterstehen.
+4. Legt ein Konzept für eure Station vor (Idee, Material, Ablauf) und holt euch Feedback der Lehrkraft.
+5. Führt eure Station im Parcours durch und gebt eine kurze Reflexion ab.`},
+  meilensteine:["Team gebildet","Phänomen gewählt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Wahrnehmung, Gedächtnis)","Basis-Check gemacht","Praxisbezug: Station kurz beschrieben und fachlich analysiert","Konzept bzw. Entwurf der Station liegt vor (Feedback der Lehrkraft)","Station im Parcours durchgeführt, Reflexion abgegeben"],
+  bestaetigung:[5,6]},
+ {id:"lb4",lb:"LB 4",lbNum:4,titel:"Konditionierung im Alltag entdecken",lbTitel:"Lernen",
+  projektSchulwochen:["sw14","sw15","sw16"],aptSchulwochen:["sw17","sw18","sw19"],
+  notwendigeWochen:["pp4p1","pp13","pp14"],trainingWochen:["pp15","pp16"],
+  auftrag:{titel:"Konditionierung im Alltag entdecken",text:
+`Lernen durch Konditionierung passiert ständig: in Werbung, Schule, Familie, Spielen und Social Media. Ihr geht im Team auf Spurensuche und ordnet Alltagsbeispiele fachlich ein.
+
+Euer Weg:
+1. Bildet ein Team, grenzt euer Thema ein und formuliert eine Leitfrage mit Begründung.
+2. Erarbeitet die fachliche Grundlage (Merkmale von Lernen, klassisches Konditionieren nach Pawlow, operantes Konditionieren nach Thorndike und Skinner) und prüft euren Wissensstand im Basis-Check.
+3. Sammelt Alltagsbeispiele, wählt eines aus, beschreibt es kurz und analysiert es fachlich (klassisch oder operant?).
+4. Legt eine Gliederung bzw. einen Entwurf eurer Dokumentation vor und holt euch Feedback der Lehrkraft.
+5. Erstellt euer Endprodukt (Dokumentation, Plakat oder Präsentation) und beantwortet darin eure Leitfrage.`},
+  meilensteine:["Team gebildet","Thema eingegrenzt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Konditionierung)","Basis-Check gemacht","Praxisbezug: Alltagsbeispiel kurz beschrieben und fachlich analysiert","Gliederung bzw. Entwurf liegt vor (Feedback der Lehrkraft)","Endprodukt abgegeben und präsentiert"],
+  bestaetigung:[5,6]}
+];
+// Teams hängen am Projekt (nicht an einem einzelnen Inhalt) – ein Team pro
+// Projekt, sichtbar in allen Projektinhalten.
+const PROJEKT_PHASEN=PROJEKT_PHASEN_ROH.map(ph=>{
+ const pw=ph.projektSchulwochen.map(swById),aw=ph.aptSchulwochen.map(swById);
+ return {...ph,projektWocheId:"team_"+ph.id,
+  projektStart:pw[0].start,projektEnde:pw[pw.length-1].end,
+  aptStart:aw[0].start,aptEnde:aw[aw.length-1].end,
+  start:pw[0].start,end:aw[aw.length-1].end};
+});
+function projektPhaseById(id){return PROJEKT_PHASEN.find(p=>p.id===id)||null;}
+function projektPhaseByWoche(wocheId){return PROJEKT_PHASEN.find(p=>p.notwendigeWochen.includes(wocheId)||p.trainingWochen.includes(wocheId))||null;}
+// LB 1 ist nur die interaktive Einstiegsstunde: kein Team, keine Meilensteine.
+function wocheHatTeam(woche){return woche?.typ==="projekt"&&!projektPhaseByWoche(woche.id)?.einstieg;}
+function teamAnchorFor(wocheId){const ph=PROJEKT_PHASEN.find(p=>p.notwendigeWochen.includes(wocheId));return ph?ph.projektWocheId:wocheId;}
+
+// Inhalte (Nr. = Nummer aus der Inhaltsliste Jgst. 11). typ "projekt" =
+// Projektinhalt, typ "apt" = Abschlussprüfungs-Training. "bezug" verlinkt
+// APT-Inhalte quer mit den Projektinhalten, auf denen sie aufbauen.
+// IDs bestehender Wochen (pp01 …) wurden beibehalten, wo das Thema passt –
+// bereits eingetragene Aufträge/Materialien bleiben so erhalten.
+const PP_EINHEITEN=[
+ // ---------- LB 1 · Projekt ----------
+ {id:"pp01",phase:"lb1",typ:"projekt",nr:"1",thema:"Gegenstand der Psychologie: Erleben und Verhalten",
+  planung:"Erleben (innere, nur der Person selbst zugängliche Vorgänge) und Verhalten (von außen beobachtbar) unterscheiden und an Beispielen zeigen, was sich beobachten und was sich nur erfragen lässt.",
+  praxis:"Im Praktikum Beispiele sammeln: Was ist beobachtbares Verhalten, was lässt sich nur erschließen oder erfragen?",
+  ziele:["Ich kann Erleben und Verhalten als Gegenstand der Psychologie definieren und voneinander abgrenzen.","Ich kann an Alltags- und Praxisbeispielen zeigen, welche Anteile beobachtbar (Verhalten) und welche nur erschließbar bzw. erfragbar (Erleben) sind.","Ich kann für ein Beispiel-Experiment festlegen, welches Verhalten beobachtet und wie das Erleben erfasst wird (z. B. durch Befragung)."]},
+ {id:"pp02",phase:"lb1",typ:"projekt",nr:"7, 8",thema:"Wissenschaftliche und alltagspsychologische Aussagen",
+  planung:"Merkmale wissenschaftlicher Aussagen (systematische Gewinnung, Überprüfbarkeit, Allgemeingültigkeit, Objektivität) den Merkmalen alltagspsychologischer Aussagen (zufällige Erkenntnisgewinnung, fehlende Überprüfbarkeit, unzulässige Verallgemeinerung, Subjektivität) gegenüberstellen; eine Alltagsvermutung (z. B. „Kaugummikauen hilft beim Lernen“) in eine überprüfbare Hypothese umformulieren.",
+  praxis:"Praxisbeobachtung mit Kriterienraster: Was ist Beobachtung, was ist Interpretation?",
+  ziele:["Ich kann die Merkmale wissenschaftlicher Aussagen – systematische Gewinnung, Überprüfbarkeit, Allgemeingültigkeit und Objektivität – erläutern.","Ich kann die Merkmale alltagspsychologischer Aussagen – zufällige Erkenntnisgewinnung, fehlende Überprüfbarkeit, unzulässige Verallgemeinerung und Subjektivität – an Beispielen aufzeigen.","Ich kann eine Alltagsvermutung in eine wissenschaftlich überprüfbare Hypothese umformulieren."]},
+ {id:"pp03",phase:"lb1",typ:"projekt",nr:"9, 10",thema:"Das Experiment als wissenschaftliche Methode",
+  interaktiv:true,
+  planung:"Aufbau eines Experiments (Hypothese, unabhängige/abhängige Variable, Versuchs- und Kontrollgruppe) und seine Kennzeichen Willkürlichkeit, Variierbarkeit und Wiederholbarkeit. Du arbeitest die interaktive Stunde „Das Experiment“ durch: Kaugummi-Versuch in Kleingruppen durchführen, Ergebnisse der Klasse vergleichen, Merkmale erarbeiten und im Abschlussquiz anwenden.",
+  praxis:"Kaugummi-Versuch in Kleingruppen (Gruppe A ohne, Gruppe B mit Kaugummi); die Ergebnisse werden anonym mit der Klasse verglichen.",
+  ziele:["Ich kann das Experiment als wissenschaftliche Methode beschreiben (Hypothese, unabhängige und abhängige Variable, Versuchs- und Kontrollgruppe).","Ich kann die Kennzeichen Willkürlichkeit, Variierbarkeit und Wiederholbarkeit erklären und an einem Beispiel erkennen und begründen.","Ich kann Ergebnisse eines Experiments vergleichen und kritisch beurteilen, ob sie sich verallgemeinern lassen."]},
+ // ---------- LB 1 · Abschlussprüfungs-Training ----------
+ {id:"pp1a1",phase:"lb1",typ:"apt",nr:"2, 6",bezug:["pp01","pp02"],thema:"Gegenstand der Pädagogik: Erziehungswissenschaft, Erziehungspraxis, Erziehung und Bildung",
+  planung:"Erziehungswissenschaft (Theorie) und Erziehungspraxis unterscheiden und aufeinander beziehen; Erziehung und Bildung definieren und abgrenzen.",
+  ziele:["Ich kann Erziehungswissenschaft und Erziehungspraxis als Gegenstand der Pädagogik unterscheiden und ihren Zusammenhang erläutern.","Ich kann die Begriffe Erziehung und Bildung definieren und voneinander abgrenzen.","Ich kann den Gegenstand der Pädagogik von dem der Psychologie abgrenzen und Wechselwirkungen aufzeigen."],
+  pruefung:"Grenzen Sie die Erziehungswissenschaft von der Erziehungspraxis ab und erläutern Sie an einem Beispiel aus Ihrem Praktikum, wie sich beide Bereiche gegenseitig beeinflussen. Unterscheiden Sie dabei die Begriffe Erziehung und Bildung.",
+  kprim:[{frage:"Welche Aussagen zum Gegenstand der Pädagogik treffen zu?",statements:[
+   {text:"Die Erziehungswissenschaft beschreibt, erklärt und reflektiert Erziehungsvorgänge systematisch.",correct:true},
+   {text:"Erziehungspraxis meint das konkrete erzieherische Handeln, z. B. in Familie oder Kita.",correct:true},
+   {text:"Bildung ist ausschließlich das, was von außen durch Erziehende bewirkt wird.",correct:false},
+   {text:"Die Pädagogik befasst sich ausschließlich mit dem Erleben und Verhalten einzelner Personen.",correct:false}]}]},
+ {id:"pp1a2",phase:"lb1",typ:"apt",nr:"3",bezug:[],thema:"Ziele und Handlungen der Erziehung",
+  planung:"Erziehungsziele (Herkunft, Funktion) und Erziehungshandlungen bzw. -maßnahmen aufeinander beziehen.",
+  ziele:["Ich kann erklären, was Erziehungsziele sind und wovon sie abhängen (z. B. Gesellschaft, Werte, Einrichtung).","Ich kann Erziehungshandlungen (z. B. Lob, Ermutigung, Vorbild, Grenzen setzen) beschreiben und einem Erziehungsziel zuordnen.","Ich kann an einem Praxisbeispiel begründen, ob eine Erziehungshandlung zum angestrebten Ziel passt."],
+  pruefung:"Erläutern Sie an einem Beispiel aus Ihrem Erziehungspraktikum den Zusammenhang zwischen einem Erziehungsziel und den dazu passenden Erziehungshandlungen. Beurteilen Sie, ob die gewählten Handlungen zielführend sind.",
+  kprim:[{frage:"Welche Aussagen zu Zielen und Handlungen der Erziehung treffen zu?",statements:[
+   {text:"Erziehungsziele beschreiben erwünschte Eigenschaften bzw. Verhaltensweisen, die Zu-Erziehende erreichen sollen.",correct:true},
+   {text:"Erziehungsziele sind von gesellschaftlichen Werten und Normen unabhängig.",correct:false},
+   {text:"Erziehungshandlungen sollten auf ein Erziehungsziel ausgerichtet sein.",correct:true},
+   {text:"Eine Erziehungsmaßnahme wirkt unabhängig von Situation und Person immer gleich.",correct:false}]}]},
+ {id:"pp1a3",phase:"lb1",typ:"apt",nr:"4",bezug:["pp01"],thema:"Beziehung zwischen Erziehenden und Zu-Erziehenden",
+  planung:"Die pädagogische Beziehung als Grundlage von Erziehung; Merkmale einer förderlichen Beziehung und ihre Wirkung.",
+  ziele:["Ich kann die pädagogische Beziehung als Grundlage von Erziehung beschreiben.","Ich kann Merkmale einer förderlichen Beziehung (z. B. Wertschätzung, Echtheit, Einfühlungsvermögen, Verlässlichkeit) erläutern.","Ich kann an einem Praxisbeispiel zeigen, wie sich die Beziehung auf Erleben und Verhalten des Zu-Erziehenden auswirkt."],
+  pruefung:"Beschreiben Sie Merkmale einer förderlichen Beziehung zwischen Erziehenden und Zu-Erziehenden und erläutern Sie an einem Beispiel aus Ihrem Praktikum, welche Auswirkungen diese Beziehung auf das Kind bzw. den Jugendlichen hat.",
+  kprim:[{frage:"Welche Aussagen zur Beziehung zwischen Erziehenden und Zu-Erziehenden treffen zu?",statements:[
+   {text:"Eine tragfähige Beziehung ist eine wichtige Voraussetzung dafür, dass Erziehung wirken kann.",correct:true},
+   {text:"Wertschätzung bedeutet, dass jedes Verhalten des Kindes gutgeheißen werden muss.",correct:false},
+   {text:"Die pädagogische Beziehung ist in der Regel asymmetrisch, z. B. hinsichtlich Verantwortung und Erfahrung.",correct:true},
+   {text:"Verlässlichkeit und Echtheit der Erziehenden spielen für die Beziehung keine Rolle.",correct:false}]}]},
+ {id:"pp1a4",phase:"lb1",typ:"apt",nr:"5",bezug:[],thema:"Einrichtungen der Erziehung",
+  planung:"Einrichtungen der Erziehung nach Zielgruppe, Auftrag und Funktion (familienergänzend/-ersetzend) ordnen – am Beispiel der eigenen Praktikumseinrichtung.",
+  ziele:["Ich kann Einrichtungen der Erziehung (z. B. Familie, Krippe, Kindergarten, Hort, Schule, Jugendarbeit, Heim) benennen und nach Zielgruppe ordnen.","Ich kann Aufgaben und Ziele einer Einrichtung beschreiben, z. B. meiner Praktikumseinrichtung.","Ich kann familienergänzende und familienersetzende Einrichtungen unterscheiden."],
+  pruefung:"Stellen Sie Ihre Praktikumseinrichtung als Einrichtung der Erziehung vor. Beschreiben Sie Zielgruppe, Aufgaben und Ziele und grenzen Sie sie von einer weiteren Einrichtung der Erziehung ab.",
+  kprim:[{frage:"Welche Aussagen zu Einrichtungen der Erziehung treffen zu?",statements:[
+   {text:"Die Familie gilt als erste und grundlegende Erziehungsinstanz.",correct:true},
+   {text:"Kindertageseinrichtungen haben einen eigenen Bildungs- und Erziehungsauftrag.",correct:true},
+   {text:"Ein Heim der Kinder- und Jugendhilfe ist familienergänzend, weil die Kinder abends immer nach Hause gehen.",correct:false},
+   {text:"Schule hat ausschließlich einen Bildungs- und keinen Erziehungsauftrag.",correct:false}]}]},
+ // ---------- LB 3 · Projekt ----------
+ {id:"pp04",phase:"lb3",typ:"projekt",nr:"18",thema:"Merkmale von Erziehung",
+  planung:"Erziehung als beabsichtigte Lernhilfe, als soziale Kommunikation und Interaktion und als soziales Handeln; Abgrenzung zu Betreuung und Versorgung.",
+  praxis:"Beobachtungen aus dem Erziehungspraktikum (anonymisiert) anhand der Merkmale von Erziehung analysieren.",
+  ziele:["Ich kann Erziehung als beabsichtigte (intentionale) Lernhilfe erläutern.","Ich kann Erziehung als soziale Kommunikation und Interaktion sowie als soziales Handeln beschreiben.","Ich kann in beobachteten Praxissituationen die Merkmale von Erziehung nachweisen und Erziehung von Betreuung/Versorgung abgrenzen."]},
+ {id:"pp05",phase:"lb3",typ:"projekt",nr:"20",thema:"Erziehungsstile nach Baumrind",
+  planung:"Autoritativ, autoritär, permissiv, vernachlässigend – anhand der Dimensionen Lenkung/Anforderung und Zuwendung/Responsivität; beobachtete Situationen begründet zuordnen.",
+  praxis:"Anonymisierte Fallvignetten aus dem Erziehungspraktikum einem Stil zuordnen und Alternativen begründen.",
+  ziele:["Ich kann die Erziehungsstile nach Baumrind (autoritativ, autoritär, permissiv, vernachlässigend) anhand von Lenkung/Anforderung und Zuwendung/Responsivität beschreiben.","Ich kann beobachtete Erziehungssituationen begründet einem Erziehungsstil zuordnen.","Ich kann mögliche Auswirkungen der Stile auf die Entwicklung von Kindern und Jugendlichen erläutern."]},
+ // ---------- LB 3 · Abschlussprüfungs-Training ----------
+ {id:"pp06",phase:"lb3",typ:"apt",nr:"19",bezug:["pp04","pp05"],thema:"Mündigkeit nach Roth",
+  planung:"Mündigkeit als Erziehungsziel mit Selbst-, Sach- und Sozialkompetenz; Möglichkeiten der Umsetzung durch Erziehungsmaßnahmen.",
+  ziele:["Ich kann Mündigkeit nach Heinrich Roth als Erziehungsziel erklären.","Ich kann Selbst-, Sach- und Sozialkompetenz beschreiben und mit Beispielen belegen.","Ich kann Erziehungsmaßnahmen ableiten, die Mündigkeit fördern, und begründen, welcher Erziehungsstil dies unterstützt."],
+  pruefung:"Erläutern Sie das Erziehungsziel Mündigkeit nach Roth mit seinen drei Kompetenzbereichen. Zeigen Sie an einem Beispiel aus dem Erziehungspraktikum auf, durch welche Erziehungsmaßnahmen Mündigkeit gefördert werden kann.",
+  kprim:[{frage:"Welche Aussagen zur Mündigkeit nach Roth treffen zu?",statements:[
+   {text:"Nach Roth umfasst Mündigkeit Selbst-, Sach- und Sozialkompetenz.",correct:true},
+   {text:"Sachkompetenz bedeutet, für sich selbst verantwortlich handeln zu können.",correct:false},
+   {text:"Sozialkompetenz meint u. a. die Fähigkeit, in sozialen Situationen verantwortlich zu handeln.",correct:true},
+   {text:"Mündigkeit wird am besten durch einen autoritären Erziehungsstil gefördert.",correct:false}]}]},
+ {id:"pp07",phase:"lb3",typ:"apt",nr:"21",bezug:["pp04"],thema:"Bildungs- und Erziehungsbereiche des BayBEP",
+  planung:"Themenbezogene Bildungs- und Erziehungsbereiche: digitale Medien und Technologien, Umwelt, Gesundheit sowie ein weiterer Bereich (z. B. Mathematik oder Naturwissenschaften und Technik).",
+  ziele:["Ich kann den Bayerischen Bildungs- und Erziehungsplan (BayBEP) als Orientierungsrahmen für Kindertageseinrichtungen einordnen.","Ich kann die Bereiche digitale Medien und Technologien, Umwelt, Gesundheit und einen weiteren Bereich mit Zielen und Praxisbeispielen beschreiben.","Ich kann Angebote meiner Praktikumseinrichtung einem Bildungs- und Erziehungsbereich zuordnen."],
+  pruefung:"Beschreiben Sie zwei themenbezogene Bildungs- und Erziehungsbereiche des BayBEP und erläutern Sie für einen davon ein konkretes Angebot aus Ihrer Praktikumseinrichtung, das die dort genannten Ziele umsetzt.",
+  kprim:[{frage:"Welche Aussagen zum BayBEP treffen zu?",statements:[
+   {text:"Der BayBEP ist ein Orientierungsrahmen für Bildung und Erziehung in bayerischen Kindertageseinrichtungen.",correct:true},
+   {text:"Umwelt und Gesundheit gehören zu den themenbezogenen Bildungs- und Erziehungsbereichen.",correct:true},
+   {text:"Digitale Medien sollen laut BayBEP in Kindertageseinrichtungen grundsätzlich nicht vorkommen.",correct:false},
+   {text:"Die Bildungsbereiche werden in der Kita streng getrennt in festen Unterrichtsstunden umgesetzt.",correct:false}]}]},
+ // ---------- LB 2 · Projekt ----------
+ {id:"pp09",phase:"lb2",typ:"projekt",nr:"11",thema:"Wahrnehmung: Begriff, Prozess und Einflussfaktoren",
+  planung:"Wahrnehmungsprozess (Reizaufnahme, Weiterleitung und Verarbeitung, Bewertung/Empfindung, Reaktion) sowie individuelle und soziale Einflussfaktoren – daraus eine Parcours-Station entwickeln.",
+  praxis:"Beobachtungsfehler und Wahrnehmungsverzerrungen im Praxisalltag reflektieren.",
+  ziele:["Ich kann Wahrnehmung definieren und den Wahrnehmungsprozess (Reizaufnahme, Weiterleitung und Verarbeitung, Bewertung/Empfindung, Reaktion) beschreiben.","Ich kann individuelle (z. B. Bedürfnisse, Erwartungen, Erfahrungen) und soziale Einflussfaktoren (z. B. Gruppendruck, Vorurteile) erläutern.","Ich kann eine Parcours-Station entwickeln, die einen Wahrnehmungseffekt erlebbar macht und fachlich erklärt."]},
+ {id:"pp2p2",phase:"lb2",typ:"projekt",nr:"12",thema:"Gedächtnis: Mehrspeichermodell und Kontrollprozesse",
+  planung:"Ultrakurzzeit-, Kurzzeit- und Langzeitgedächtnis; Kontrollprozesse Organisation, Elaboration und Wiederholung – als Parcours-Station erlebbar machen.",
+  praxis:"Erinnerungsleistungen im Alltag (z. B. Namen, Abläufe) beobachten und mit dem Modell erklären.",
+  ziele:["Ich kann Gedächtnis definieren und das Modell mit Ultrakurzzeit-, Kurzzeit- und Langzeitgedächtnis beschreiben.","Ich kann die Kontrollprozesse Organisation, Elaboration und Wiederholung erklären.","Ich kann an einer Parcours-Station zeigen, wie Kontrollprozesse das Behalten verbessern."]},
+ {id:"pp12",phase:"lb2",typ:"projekt",nr:"14",thema:"Strategien zum Wissenserwerb",
+  planung:"Mindmap, Karteikarten & Co.: Welche Kontrollprozesse nutzen sie? Eine Strategie als Parcours-Station ausprobieren lassen.",
+  praxis:"Eigene Lernstrategie für die Abschlussprüfung auswählen und begründen.",
+  ziele:["Ich kann Strategien zum Wissenserwerb (z. B. Mindmap, Karteikarten) beschreiben.","Ich kann erklären, welche Kontrollprozesse des Gedächtnisses diese Strategien nutzen.","Ich kann eine Strategie für mein eigenes Lernen auswählen und begründen."]},
+ // ---------- LB 2 · Abschlussprüfungs-Training ----------
+ {id:"pp2a1",phase:"lb2",typ:"apt",nr:"13",bezug:["pp2p2","pp12"],thema:"Speichersysteme des Langzeitgedächtnisses nach Markowitsch",
+  planung:"Deklarative (episodisch-autobiographisches Gedächtnis, Wissenssystem) und nicht-deklarative Systeme (prozedurales Gedächtnis, Priming, perzeptuelles Gedächtnis) mit Beispielen.",
+  ziele:["Ich kann die Speichersysteme des Langzeitgedächtnisses nach Markowitsch in deklarative und nicht-deklarative Systeme einteilen.","Ich kann jedem Speichersystem passende Beispiele aus Alltag und Praxis zuordnen.","Ich kann Folgen für das Lernen und die pädagogische bzw. pflegerische Praxis ableiten."],
+  pruefung:"Stellen Sie die Speichersysteme des Langzeitgedächtnisses nach Markowitsch dar und ordnen Sie jedem ein Beispiel aus Ihrem Praktikum zu. Erläutern Sie eine Konsequenz für die Gestaltung von Lernprozessen.",
+  kprim:[{frage:"Welche Aussagen zu den Speichersystemen nach Markowitsch treffen zu?",statements:[
+   {text:"Das episodisch-autobiographische Gedächtnis gehört zu den deklarativen Speichersystemen.",correct:true},
+   {text:"Fahrradfahren ist typischerweise im prozeduralen Gedächtnis gespeichert.",correct:true},
+   {text:"Deklarative Inhalte sind dem Bewusstsein nicht zugänglich und lassen sich nicht in Worte fassen.",correct:false},
+   {text:"Priming zählt zum Wissenssystem (semantisches Gedächtnis).",correct:false}]}]},
+ {id:"pp10",phase:"lb2",typ:"apt",nr:"15",bezug:["pp09"],thema:"Emotion: Begriff, Komponenten und Emotionsregulation",
+  planung:"Emotion und ihre Komponenten an einem konkreten Beispiel; je eine antezedenzfokussierte und eine reaktionsfokussierte Regulationsstrategie.",
+  ziele:["Ich kann Emotion definieren und ihre Komponenten (z. B. subjektives Erleben, physiologische Veränderung, Ausdruck, kognitive Bewertung, Handlungstendenz) beschreiben.","Ich kann die Komponenten an einem konkreten Beispiel (z. B. Prüfungsangst) aufzeigen.","Ich kann je eine antezedenzfokussierte (z. B. Neubewertung) und eine reaktionsfokussierte Strategie (z. B. Atemtechnik) erklären und bewerten."],
+  pruefung:"Erläutern Sie die Komponenten einer Emotion am Beispiel der Angst vor einer Prüfung. Stellen Sie je eine antezedenzfokussierte und eine reaktionsfokussierte Strategie der Emotionsregulation dar und beurteilen Sie deren Wirksamkeit.",
+  kprim:[{frage:"Welche Aussagen zu Emotion und Emotionsregulation treffen zu?",statements:[
+   {text:"Antezedenzfokussierte Strategien setzen an, bevor die emotionale Reaktion voll entstanden ist, z. B. durch Neubewertung.",correct:true},
+   {text:"Das Unterdrücken des Gesichtsausdrucks ist eine reaktionsfokussierte Strategie.",correct:true},
+   {text:"Physiologische Veränderungen wie Herzklopfen gehören nicht zu den Komponenten einer Emotion.",correct:false},
+   {text:"Emotionen bestehen ausschließlich aus dem subjektiven Gefühlserleben.",correct:false}]}]},
+ {id:"pp11",phase:"lb2",typ:"apt",nr:"16, 17",bezug:["pp09","pp12"],thema:"Motivation und Attributionstheorie nach Weiner",
+  planung:"Motivation: Begriff und Merkmale; ergebnis- und attributionsabhängige Emotionen; Folgen von internal/external für die Emotion und von stabil/variabel für Erfolgserwartung und Motivation.",
+  ziele:["Ich kann Motivation definieren und ihre Merkmale (z. B. Aktivierung, Richtung, Ausdauer/Intensität) beschreiben.","Ich kann ergebnisabhängige (z. B. Freude) und attributionsabhängige Emotionen (z. B. Stolz) nach Weiner unterscheiden.","Ich kann die Folgen von internal/external für die Emotion und von stabil/variabel für Erfolgserwartung und Motivation erklären."],
+  pruefung:"Erläutern Sie mithilfe der Attributionstheorie nach Weiner, wie sich die Ursachenzuschreibung eines Misserfolgs in einer Klassenarbeit auf Emotion, Erfolgserwartung und Motivation einer Schülerin auswirkt. Unterscheiden Sie dabei ergebnis- und attributionsabhängige Emotionen.",
+  kprim:[{frage:"Welche Aussagen zur Attributionstheorie nach Weiner treffen zu?",statements:[
+   {text:"Freude über einen Erfolg ist eine ergebnisabhängige Emotion.",correct:true},
+   {text:"Stolz entsteht vor allem, wenn ein Erfolg internal, z. B. auf eigene Anstrengung, zurückgeführt wird.",correct:true},
+   {text:"Die Dimension stabil/variabel beeinflusst vor allem die Erfolgserwartung.",correct:true},
+   {text:"Wird Misserfolg auf mangelnde Begabung (internal, stabil) zurückgeführt, steigt meist die Erfolgserwartung.",correct:false}]}]},
+ // ---------- LB 4 · Projekt ----------
+ {id:"pp4p1",phase:"lb4",typ:"projekt",nr:"22",thema:"Merkmale des Begriffs Lernen",
+  planung:"Verhaltensaufbau oder -änderung, relativ dauerhaft, keine Reifung, beruht auf Erfahrung und Übung, nicht direkt beobachtbar.",
+  praxis:"Pflege: Welche Veränderungen im Verhalten sind Lernen – und welche nicht?",
+  ziele:["Ich kann Lernen als relativ dauerhaften Verhaltensaufbau oder Verhaltensänderung definieren.","Ich kann Lernen von Reifung abgrenzen und erklären, dass Lernen auf Erfahrung und Übung beruht.","Ich kann erklären, warum Lernen nicht direkt beobachtbar ist, sondern aus Verhaltensänderungen erschlossen wird."]},
+ {id:"pp13",phase:"lb4",typ:"projekt",nr:"23",thema:"Klassisches Konditionieren nach Pawlow",
+  planung:"Konditionierungsprozess (vor, während, nach der Konditionierung; neutraler, unkonditionierter und konditionierter Reiz; unkonditionierte und konditionierte Reaktion), Reizgeneralisierung, Konditionierung höherer Ordnung.",
+  praxis:"Pflege: Routinen, Signale und situative Auslöser beobachten; keine personenbezogenen Diagnosen.",
+  ziele:["Ich kann den Konditionierungsprozess nach Pawlow mit den zugehörigen Reizen und Reaktionen beschreiben.","Ich kann Reizgeneralisierung und Konditionierung höherer Ordnung erklären.","Ich kann klassisches Konditionieren an Alltags- und Praxisbeispielen nachweisen."]},
+ {id:"pp14",phase:"lb4",typ:"projekt",nr:"24",thema:"Operantes Konditionieren nach Thorndike und Skinner",
+  planung:"Lerngesetze nach Thorndike, Lernen durch Verstärkung nach Skinner, Verstärkerarten, Relativität von Verstärkern.",
+  praxis:"Pflege: Verstärkung in Anleitung und Alltagsbegleitung analysieren; ethisch vertretbare Alternativen entwickeln.",
+  ziele:["Ich kann die Lerngesetze nach Thorndike (u. a. Gesetz des Effekts) erklären.","Ich kann Lernen durch Verstärkung nach Skinner mit den Verstärkerarten (positive/negative, primäre/sekundäre Verstärker) beschreiben.","Ich kann die Relativität von Verstärkern (Premack-Prinzip) erläutern und an Praxisbeispielen anwenden."]},
+ // ---------- LB 4 · Abschlussprüfungs-Training ----------
+ {id:"pp15",phase:"lb4",typ:"apt",nr:"25",bezug:["pp14"],thema:"Sozial-kognitive Theorie nach Bandura",
+  planung:"Phasen und Teilprozesse: Aufmerksamkeitsprozesse (Bedingungen der Aufmerksamkeit), Gedächtnisprozesse, motorische Reproduktionsprozesse, Motivationsprozesse (Erwartungshaltungen, Formen der Bekräftigung).",
+  ziele:["Ich kann die Phasen (Aneignung, Ausführung) und Teilprozesse der sozial-kognitiven Theorie nach Bandura beschreiben.","Ich kann Bedingungen der Aufmerksamkeit (Merkmale von Modell, Beobachter, Situation) sowie Gedächtnis- und Reproduktionsprozesse erläutern.","Ich kann Motivationsprozesse mit Erwartungshaltungen und Formen der Bekräftigung (direkt, stellvertretend, Selbstbekräftigung) erklären."],
+  pruefung:"Erläutern Sie an einem Beispiel aus Ihrem Praktikum die Phasen und Teilprozesse des Modelllernens nach Bandura. Gehen Sie dabei besonders auf die Bedingungen der Aufmerksamkeit und die Formen der Bekräftigung ein.",
+  kprim:[{frage:"Welche Aussagen zur sozial-kognitiven Theorie nach Bandura treffen zu?",statements:[
+   {text:"Bandura unterscheidet zwischen einer Aneignungs- und einer Ausführungsphase.",correct:true},
+   {text:"Stellvertretende Bekräftigung: Der Beobachter nimmt wahr, dass das Modell für sein Verhalten belohnt wird.",correct:true},
+   {text:"Ein in der Aneignungsphase gelerntes Verhalten wird immer auch sofort ausgeführt.",correct:false},
+   {text:"Merkmale des Modells (z. B. Sympathie, Ansehen) beeinflussen die Aufmerksamkeit des Beobachters nicht.",correct:false}]}]},
+ {id:"pp16",phase:"lb4",typ:"apt",nr:"26",bezug:["pp13","pp14"],thema:"Medien als Einflussfaktor für Lernprozesse",
+  planung:"Einfluss von Medien auf Lernprozesse auf Basis einer Lerntheorie (z. B. Bandura oder operantes Konditionieren) erklären und pädagogische Konsequenzen ableiten.",
+  ziele:["Ich kann den Einfluss von Medien auf Lernprozesse auf Basis einer Lerntheorie erklären.","Ich kann an einem Beispiel (z. B. Social Media, Games, Werbung) aufzeigen, welche Verhaltensweisen durch Medien gelernt werden können.","Ich kann Konsequenzen für einen reflektierten pädagogischen Umgang mit Medien ableiten."],
+  pruefung:"Erläutern Sie auf Basis der sozial-kognitiven Theorie nach Bandura, wie Kinder und Jugendliche durch Medien (z. B. Influencer:innen in Social Media) Verhaltensweisen lernen können. Leiten Sie daraus zwei pädagogische Konsequenzen ab.",
+  kprim:[{frage:"Welche Aussagen zu Medien als Einflussfaktor auf Lernprozesse treffen zu?",statements:[
+   {text:"Influencer:innen können für Jugendliche als Modelle im Sinne Banduras wirken.",correct:true},
+   {text:"Likes und positive Kommentare können aus Sicht des operanten Konditionierens als Verstärker wirken.",correct:true},
+   {text:"Medien haben lerntheoretisch keinen Einfluss auf Verhalten, weil es sich nur um Fiktion handelt.",correct:false},
+   {text:"Beobachter übernehmen jedes gesehene Verhalten, unabhängig von den beobachteten Konsequenzen.",correct:false}]}]}
+].map(e=>{
+ const ph=PROJEKT_PHASEN_ROH.find(p=>p.id===e.phase);
+ const wochen=(e.typ==="projekt"?ph.projektSchulwochen:ph.aptSchulwochen).map(swById);
+ return {...e,lb:ph.lb,start:wochen[0].start,end:wochen[wochen.length-1].end,praxis:e.praxis||""};
+});
+
+// Lehrplan-Zeitstrahl je Fach. Pädagogik/Psychologie nutzt die Einheiten
+// oben (typ "projekt" | "apt"); die übrigen Fächer sind als leere,
+// erweiterbare Struktur angelegt (typ "projekt" | "einzel").
 const LEHRPLAN_WOCHEN={
- paedagogik:[ {id:"pp12_01",start:"2026-09-16",end:"2026-09-18",lb:"LB 1",thema:"Formalia und der Begriff Entwicklung",typ:"einzel",
- planung:"Formalia/Der Begriff Entwicklung; Begriff Entwicklung."},
- {id:"pp12_02",start:"2026-09-21",end:"2026-09-25",lb:"LB 1",thema:"Bedingungen der Entwicklung",typ:"einzel",
- planung:"Bedingungen der Entwicklung; Bedingungen der Entwicklung; Bedingungen der Entwicklung."},
- {id:"pp12_03",start:"2026-09-28",end:"2026-10-02",lb:"LB 1",thema:"Einstieg Psychoanalyse und Persönlichkeitsmodell",typ:"einzel",
- planung:"Einstieg Psychoanalyse: Grundannahmen, Instanzen, Dynamiken; Das psychoanalytische Persönlichkeitsmodell; Ich-Stärke und Ich-Schwäche."},
- {id:"pp12_04",start:"2026-10-05",end:"2026-10-09",lb:"LB 1",thema:"Angst, Abwehr und Abwehrmechanismen",typ:"einzel",
- planung:"Angst und Abwehr (Lernsituation „Carlas Diebstähle“); Angst und Abwehr; Die Abwehrmechanismen."},
- {id:"pp12_05",start:"2026-10-12",end:"2026-10-16",lb:"LB 1",thema:"Psychosexuelle Entwicklung bis Fehlentwicklungen",typ:"einzel",
- planung:"Psychosexuelle Entwicklung (orale und anale Phase); Phallische Phase, Latenzperiode, genitale Phase; Entstehung seelischer Fehlentwicklungen, kritische Würdigung."},
- {id:"pp12_06",start:"2026-10-19",end:"2026-10-23",lb:"LB 1",thema:"Theorie der Lebensspanne, Bindung, Erklärvideo (Produktphase)",typ:"einzel",
- planung:"Entwicklung im Lebenslauf – Theorie der Lebensspanne; Bindung und Entwicklung; Erstellen eines Erklärvideos.",produktphase:true},
- {id:"pp12_07",start:"2026-10-26",end:"2026-10-30",lb:"LB 1",thema:"Sichere/unsichere Bindung, Förderung gelungener Bindung",typ:"einzel",
- planung:"Sichere und unsichere Bindung; Sichere und unsichere Bindung; Förderung gelungener Bindung."},
- {id:"pp12_08",start:"2026-11-09",end:"2026-11-13",lb:"LB 1",thema:"Jugendalter, Resilienz – 1. Kurzarbeit",typ:"einzel",
- planung:"Entwicklung im Jugendalter; Vulnerabilität und Resilienz; 1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie.",leistungsnachweis:true},
- {id:"pp12_09",start:"2026-11-16",end:"2026-11-20",lb:"LB 2",thema:"Begriff Persönlichkeit und Erhebung der Persönlichkeit",typ:"einzel",
- planung:"Begriff Persönlichkeit; Erhebung der Persönlichkeit."},
- {id:"pp12_10",start:"2026-11-23",end:"2026-11-27",lb:"LB 2",thema:"Big-Five-Modell und personenzentrierte Theorie",typ:"einzel",
- planung:"Big-Five-Modell; Big-Five-Modell; Menschenbild der personenzentrierten Theorie."},
- {id:"pp12_11",start:"2026-11-30",end:"2026-12-04",lb:"LB 2",thema:"Menschenbild, Aktualisierungstendenz, Selbstkonzept",typ:"einzel",
- planung:"Menschenbild der personenzentrierten Theorie; Aktualisierungstendenz; Bildung und Wirkung des Selbstkonzepts."},
- {id:"pp12_12",start:"2026-12-07",end:"2026-12-11",lb:"LB 2",thema:"1. Schulaufgabe – Selbstkonzept und Bewertungsprozess",typ:"einzel",
- planung:"1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit; Flexibilität des Selbstkonzepts/Abwehr; Organismischer Bewertungsprozess.",leistungsnachweis:true},
- {id:"pp12_13",start:"2026-12-14",end:"2026-12-18",lb:"LB 2",thema:"Kongruenz, psychische Störungen, Bedeutung für Erziehung",typ:"einzel",
- planung:"Kongruenz und Inkongruenz; Entstehung psychischer Störungen; Bedeutung für die Erziehung."},
- {id:"pp12_14",start:"2026-12-21",end:"2026-12-23",lb:"LB 2",thema:"Sozial-kognitive Theorie, Identität",typ:"einzel",
- planung:"Die sozial-kognitive Theorie und Persönlichkeit; Identität oder Selbstverständnis eines Menschen."},
- {id:"pp12_15",start:"2027-01-11",end:"2027-01-15",lb:"LB 3",thema:"Identität nach Marcia – Start LB 3: Soziale Arbeit",typ:"einzel",
- planung:"Identitätstypen nach Marcia; Grundlagen Sozialer Arbeit; Aufgabenbereiche der Sozialen Arbeit."},
- {id:"pp12_16",start:"2027-01-18",end:"2027-01-22",lb:"LB 3",thema:"Aufgabenbereiche und Handlungskonzepte Sozialer Arbeit",typ:"einzel",
- planung:"Aufgabenbereiche der Sozialen Arbeit; Aufgabenbereiche der Sozialen Arbeit; Handlungskonzepte."},
- {id:"pp12_17",start:"2027-01-25",end:"2027-01-29",lb:"LB 3",thema:"Verhaltensorientiertes Konzept, Life-Modell",typ:"einzel",
- planung:"Verhaltensorientiertes Konzept; Verhaltensmodifikation; Life-Modell – Transaktion."},
- {id:"pp12_18",start:"2027-02-01",end:"2027-02-05",lb:"LB 3",thema:"Anpassung, Nische/Habitat, Lebens-Stress",typ:"einzel",
- planung:"Anpassung; Nische und Habitat; Lebens-Stress."},
- {id:"pp12_19",start:"2027-02-15",end:"2027-02-19",lb:"LB 3",thema:"Methode für die Praxis, Fallbearbeitung, Life-Modell",typ:"einzel",
- planung:"Methode für die Praxis; Fallbearbeitung Frau Müller; Kritische Würdigung Life-Modell."},
- {id:"pp12_20",start:"2027-02-22",end:"2027-02-26",lb:"LB 3",thema:"Thiersch: Lebenswelt, Dimensionen, Handlungsmaximen",typ:"einzel",
- planung:"Thiersch – Lebenswelt; Thiersch – Dimensionen; Thiersch – Handlungsmaximen."},
- {id:"pp12_21",start:"2027-03-01",end:"2027-03-05",lb:"LB 4",thema:"2. Schulaufgabe – Start LB 4: Kommunikation",typ:"einzel",
- planung:"Wiederholung/Prüfungsvorbereitung LB 3; 2. Schulaufgabe: Soziale Arbeit; Soziale Kommunikation und Interaktion.",leistungsnachweis:true},
- {id:"pp12_22",start:"2027-03-08",end:"2027-03-12",lb:"LB 4",thema:"Organon-Modell, erfolgreiche/gestörte Kommunikation, erstes Axiom",typ:"einzel",
- planung:"Organon-Modell; Erfolgreiche und gestörte Kommunikation; Erstes Axiom (Watzlawick)."},
- {id:"pp12_23",start:"2027-03-15",end:"2027-03-19",lb:"LB 4",thema:"Zweites bis viertes Axiom",typ:"einzel",
- planung:"Zweites Axiom; Drittes Axiom; Viertes Axiom."},
- {id:"pp12_24",start:"2027-04-05",end:"2027-04-09",lb:"LB 4",thema:"Fünftes Axiom, Fallbearbeitung, Kommunikationstechniken",typ:"einzel",
- planung:"Fünftes Axiom; Fallbearbeitung; Kommunikationstechniken."},
- {id:"pp12_25",start:"2027-04-12",end:"2027-04-16",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung",typ:"einzel",
- planung:"Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4.",review:true},
- {id:"pp12_26",start:"2027-04-19",end:"2027-04-23",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung",typ:"einzel",
- planung:"Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4.",review:true},
- {id:"pp12_27",start:"2027-04-26",end:"2027-04-28",lb:"LB 1–4",thema:"Wiederholung und Prüfungsvorbereitung",typ:"einzel",
- planung:"Wiederholung/Prüfungsvorbereitung LB 1–4; Wiederholung/Prüfungsvorbereitung LB 1–4.",review:true}
- ],
- deutsch:[],englisch:[],mathematik:[],politikgesellschaft:[],religionethik:[],sport:[],sozialwirtschaft:[],biologie:[],soziologie:[],wahlpflicht1:[],wahlpflicht2:[]
+ paedagogik:PP_EINHEITEN,
+ deutsch:[],englisch:[],geschichte:[],mathematik:[],sozialwirtschaft:[],chemie:[]
 };
-// Lernziel-Vorschläge je Woche, abgeleitet aus den offiziellen
-// Kompetenzerwartungen des LehrplanPLUS FOS 12 Pädagogik/Psychologie
-// (lehrplanplus.bayern.de, LB 1–4). Lehrkräfte sehen diese als Vorschlag
-// beim erstmaligen Anlegen eines Auftrags und können sie frei anpassen.
-const LEHRPLAN_ZIELE_VORSCHLAG={ pp12_01:["Ich kann den Begriff Entwicklung definieren und den formalen Aufbau des Lernbereichs einordnen."],
- pp12_02:["Ich kann zentrale Bedingungen von Entwicklung (Anlage, Umwelt, Selbststeuerung) erläutern."],
- pp12_03:["Ich kann die Grundannahmen der Psychoanalyse (Instanzenmodell: Es, Ich, Über-Ich) sowie das psychoanalytische Persönlichkeitsmodell erklären und Ich-Stärke von Ich-Schwäche unterscheiden."],
- pp12_04:["Ich kann das Zusammenspiel von Angst und Abwehr an einem Fallbeispiel analysieren und zentrale Abwehrmechanismen benennen."],
- pp12_05:["Ich kann die psychosexuellen Entwicklungsphasen nach Freud beschreiben, die Entstehung seelischer Fehlentwicklungen erklären und die psychoanalytische Theorie kritisch würdigen."],
- pp12_06:["Ich kann Entwicklung als lebenslangen Prozess (Theorie der Lebensspanne) beschreiben, den Zusammenhang von Bindung und Entwicklung erläutern und mein Wissen in einem eigenen Erklärvideo aufbereiten."],
- pp12_07:["Ich kann sichere und unsichere Bindung unterscheiden und Maßnahmen zur Förderung gelungener Bindung benennen."],
- pp12_08:["Ich kann die Entwicklung im Jugendalter sowie Vulnerabilität und Resilienz erläutern und die zentralen Inhalte von LB 1 in der Kurzarbeit anwenden."],
- pp12_09:["Ich kann den Begriff Persönlichkeit definieren und Methoden zur Erhebung von Persönlichkeit benennen."],
- pp12_10:["Ich kann das Big-Five-Modell erklären und das Menschenbild der personenzentrierten Theorie nach Rogers einordnen."],
- pp12_11:["Ich kann das Menschenbild der personenzentrierten Theorie, den Begriff Aktualisierungstendenz sowie Bildung und Wirkung des Selbstkonzepts erklären."],
- pp12_12:["Ich kann die Inhalte aus Entwicklung/Persönlichkeit in der Schulaufgabe anwenden und die Flexibilität des Selbstkonzepts sowie den organismischen Bewertungsprozess erklären."],
- pp12_13:["Ich kann Kongruenz und Inkongruenz nach Rogers erklären und auf die Entstehung psychischer Störungen sowie die Bedeutung für die Erziehung beziehen."],
- pp12_14:["Ich kann die Bedeutung der sozial-kognitiven Theorie für die Erziehung erläutern und den Begriff Identität erklären."],
- pp12_15:["Ich kann die Identitätstypen nach Marcia unterscheiden und Grundlagen sowie Aufgabenbereiche der Sozialen Arbeit benennen."],
- pp12_16:["Ich kann zentrale Aufgabenbereiche und ein Handlungskonzept der Sozialen Arbeit erläutern."],
- pp12_17:["Ich kann das verhaltensorientierte Konzept Sozialer Arbeit erklären und Verhaltensmodifikation sowie das Life-Modell auf einen Fall beziehen."],
- pp12_18:["Ich kann Anpassung sowie die Begriffe Nische, Habitat und Lebens-Stress im Kontext Sozialer Arbeit erläutern."],
- pp12_19:["Ich kann eine Methode für die Praxis anwenden und einen Praxisfall mithilfe des Life-Modells analysieren."],
- pp12_20:["Ich kann Thierschs Konzept der Lebensweltorientierung mit seinen Dimensionen und Handlungsmaximen erläutern und auf einen Fall anwenden."],
- pp12_21:["Ich kann die Inhalte aus Soziale Arbeit in der Schulaufgabe anwenden, soziale Kommunikation und Interaktion definieren."],
- pp12_22:["Ich kann das Organon-Modell nach Bühler erklären und erfolgreiche von gestörter Kommunikation unterscheiden (erstes Axiom nach Watzlawick)."],
- pp12_23:["Ich kann das zweite, dritte und vierte Axiom von Watzlawick erläutern und an Beispielen erkennen."],
- pp12_24:["Ich kann das fünfte Axiom erläutern und Kommunikationstechniken auf eine Fallbearbeitung anwenden."],
- pp12_25:["Ich kann die Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."],
- pp12_26:["Ich kann die Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."],
- pp12_27:["Ich kann die Inhalte aus LB 1 bis LB 4 vernetzt wiederholen und mich gezielt auf die Fachabiturprüfung vorbereiten."]
-};
+// Lernziele je Einheit (aus den Kompetenzerwartungen des LehrplanPLUS FOS 11
+// und der Inhaltsliste Jgst. 11 abgeleitet).
+const LEHRPLAN_ZIELE_VORSCHLAG=Object.fromEntries(PP_EINHEITEN.map(e=>[e.id,e.ziele]));
 function lehrplanWocheById(fach,wocheId){
  return (LEHRPLAN_WOCHEN[fach]||[]).find(w=>w.id===wocheId)||null;
 }
 // Farbcodierung je Lernbereich (unabhängig von Projekt/Einzelthema),
 // dieselbe Nummerierung wie bei der Lernstandsmessung (LB1–LB4).
 const LERNBEREICH_FARBEN={
- 1:{bg:"#dbeafe",border:"#4a90d9",text:"#1f5a8a"},
- 2:{bg:"#f0e0fb",border:"#9b59b6",text:"#6c3483"},
- 3:{bg:"#dcf3d1",border:"#3fa66a",text:"#1f6b3d"},
- 4:{bg:"#fde8c2",border:"#e0a324",text:"#8a6512"}
+ 1:{bg:"#E3EDF8",border:"#3F7FC1",text:"#24507F"},
+ 2:{bg:"#EEE7F6",border:"#8A64B8",text:"#5A3D7E"},
+ 3:{bg:"#E1F2EA",border:"#3C9A6B",text:"#236246"},
+ 4:{bg:"#F8EADF",border:"#C9773A",text:"#8A4E21"}
 };
 function lernbereichNummern(lbText){
  return (lbText||"").match(/\d/g)||[];
@@ -1305,809 +1550,23 @@ function lernbereichAkzentfarbe(lbText){
 // abgegrenzten Abschnitten mit Überschrift.
 const UNTERRICHTSBLOECKE={
  paedagogik:[
- {id:"lb1",start:"2026-09-16",end:"2026-11-13",titel:"Lernbereich 1 · Entwicklung",stunden:40},
- {id:"lb2",start:"2026-11-16",end:"2026-12-23",titel:"Lernbereich 2 · Persönlichkeit und Identität",stunden:29},
- {id:"lb3",start:"2027-01-11",end:"2027-03-05",titel:"Lernbereich 3 · Soziale Arbeit",stunden:33},
- {id:"lb4",start:"2027-03-08",end:"2027-04-23",titel:"Lernbereich 4 · Kommunikation",stunden:26},
- {id:"review",start:"2027-04-26",end:"2027-04-28",titel:"Wiederholung und Prüfungsvorbereitung",stunden:2}
+ {id:"ub1",start:"2026-10-05",end:"2026-10-23",titel:"Unterrichtsblock 1",stunden:18},
+ {id:"ub2",start:"2026-11-23",end:"2026-12-11",titel:"Unterrichtsblock 2",stunden:18},
+ {id:"ub3",start:"2027-01-18",end:"2027-02-05",titel:"Unterrichtsblock 3",stunden:18},
+ {id:"ub4",start:"2027-03-08",end:"2027-03-19",titel:"Unterrichtsblock 4",stunden:12},
+ {id:"ub5",start:"2027-04-05",end:"2027-04-09",titel:"Unterrichtsblock 5",stunden:6},
+ {id:"ub6",start:"2027-05-03",end:"2027-05-14",titel:"Unterrichtsblock 6",stunden:12},
+ {id:"ub7",start:"2027-06-28",end:"2027-07-16",titel:"Unterrichtsblock 7",stunden:18}
  ]
 };
 function findUnterrichtsblock(fach,dateStr){
  return (UNTERRICHTSBLOECKE[fach]||[]).find(b=>dateStr>=b.start&&dateStr<=b.end)||null;
 }
 
-// ---- 4 Lernbereich-Kacheln (unter dem Zeitstrahl) mit TaskCard-Verlinkung ----
-const PP_LERNBEREICHE=[
- {key:"lb1",num:1,titel:"Entwicklung"},
- {key:"lb2",num:2,titel:"Persönlichkeit und Identität"},
- {key:"lb3",num:3,titel:"Soziale Arbeit"},
- {key:"lb4",num:4,titel:"Kommunikation"}
-];
-async function ladeTaskcardLinks(){
- try{
-  const s=await getDocs(collection(db,"taskcardLinks"));
-  const map={};s.docs.forEach(d=>map[d.id]=d.data());
-  return map;
- }catch(e){console.error("TaskCard-Links laden:",e);return{};}
-}
-function taskcardKachelHTML(titel,farbe,textFarbe,key,url){
- const urlAttr=esc(url).replace(/'/g,"&#39;");
- return`<div class="card resource-card-square"style="border-left:4px solid ${farbe}">
- <strong style="color:${textFarbe};font-size:13px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:1">${esc(titel)}</strong>
- ${url?`<a class="primary resource-open"style="text-decoration:none;text-align:center"href="${urlAttr}"target="_blank"rel="noopener">TaskCard öffnen</a>`:`<small style="color:var(--muted);flex:0 0 auto">Noch kein Link hinterlegt.</small>`}
- ${isTeacher()?`<button class="text-button"style="margin-top:6px;font-size:11px"onclick="taskcardLinkBearbeiten('${key}','${urlAttr}')">${url?"Link ändern":"＋ Link hinterlegen"}</button>`:""}
- </div>`;
-}
-function lernbereichKachelnHTML(links){
- return`<h3 style="margin:26px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--muted)"> Lernbereiche · TaskCard</h3>
- <div class="grid grid-4"style="gap:12px">
- ${PP_LERNBEREICHE.map(lb=>{
-  const c=LERNBEREICH_FARBEN[lb.num];
-  const url=(links[lb.key]||{}).url||"";
-  return taskcardKachelHTML(`Lernbereich ${lb.num} · ${lb.titel}`,c.border,c.text,lb.key,url);
- }).join("")}
- </div>
- <h3 style="margin:26px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--muted)"> TaskCards für die Prüfungen</h3>
- <div class="grid grid-4"style="gap:12px">
- ${taskcardKachelHTML("Prüfungsvorbereitung","#A32D2D","#791F1F","pruefung",(links.pruefung||{}).url||"")}
- </div>`;
-}
-async function taskcardLinkBearbeiten(lbKey,aktuell){
- const url=prompt("TaskCard-Link für diesen Lernbereich:",aktuell||"https://");
- if(url===null)return;
- try{
-  await setDoc(doc(db,"taskcardLinks",lbKey),{url:url.trim(),updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
-  await render();toast("TaskCard-Link gespeichert.");
- }catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
-}
-window.taskcardLinkBearbeiten=taskcardLinkBearbeiten;
-
-// ============================================================
-// ALTERNATIVER LEISTUNGSNACHWEIS · Check-out / K-Prim-Test
-// ------------------------------------------------------------
-// Ersetzt die 2. Kurzarbeit in Pädagogik/Psychologie: Statt einer
-// einzelnen Kurzarbeit im 2. Halbjahr wählt die Lehrkraft mehrere
-// Check-outs (Fallvignette + K-Prim-Aufgaben je Lernbereich), aus
-// denen die Schüler:innen 7 auswählen; der Notenpunkte-Durchschnitt
-// ersetzt die Kurzarbeit. Engine 1:1 aus der F11Sb übernommen.
-// ============================================================
-const PP_FARBEN={1:"#4a90d9",2:"#9b59b6",3:"#3fa66a",4:"#e0a324"};
-// ---- K-Prim als Tabelle: Aussage | richtig | falsch (wie in der Prüfung) ----
-const KPRIM_ANLEITUNG="<b>Kreuzen Sie für jede Aussage an, ob sie richtig oder falsch ist.</b>";
-// name: Präfix der Radio-Gruppen (je Aussage name_j). antworten: {j:"r"|"f"}.
-// onchange: optionaler Aufruf, %J und %V werden durch Aussage und Wert ersetzt.
-function kprimTabelleHTML(name,aussagen,antworten={},onchange=""){
- return`<table class="kp-tabelle"><thead><tr><th>Aussage</th><th class="kp-rf">richtig</th><th class="kp-rf">falsch</th></tr></thead><tbody>
-  ${aussagen.map((t,j)=>`<tr><td><b class="kp-nr">${j+1}</b> ${esc(t)}</td>${["r","f"].map(v=>`<td class="kp-rf"><label class="kp-klick"><input type="radio"name="${name}_${j}"value="${v}"aria-label="Aussage ${j+1}: ${v==="r"?"richtig":"falsch"}"${antworten[j]===v?" checked":""}${onchange?` onchange="${onchange.replace(/%J/g,j).replace(/%V/g,v)}"`:""}></label></td>`).join("")}</tr>`).join("")}
- </tbody></table>`;
-}
-function kprimFrageKopfHTML(nr,stamm,vignette){
- return`<strong class="kp-stamm">${nr?nr+". ":""}${esc(stamm||"")}</strong>
-  ${vignette?`<div class="kp-vignette">${esc(vignette)}</div>`:""}
-  <p class="kp-anleitung">${/beurteilen sie/i.test(stamm||"")?"":"Beurteilen Sie die folgenden Aussagen. "}${KPRIM_ANLEITUNG}</p>`;
-}
-// ============================================================
-// CHECK-OUT · K-Prim-Test zum Wochenabschluss (Pädagogik/Psychologie)
-// ------------------------------------------------------------
-// Ablauf: Lehrkraft legt einen Check-out an (Fallvignette + 3–5 K-Prim-
-// Aufgaben) → schaltet ihn in der Testsituation LIVE → Schüler:innen
-// bearbeiten ihn (Antworten werden laufend gespeichert) → Lehrkraft
-// beendet LIVE → die App wertet automatisch aus (Bewertungseinheiten →
-// FOSBOS-Notenpunkte 0–15, Note in Klammern).
-// Kurzarbeit-Ersatz: aus den (standardmäßig 10) gewerteten Check-outs
-// wählen die Schüler:innen die 7 für sie relevanten aus – der Durchschnitt
-// der Notenpunkte ersetzt eine Kurzarbeit.
-// Datenschutz beim Test: Die Lösungen liegen getrennt in „checkoutLoesungen"
-// (nur Lehrkräfte lesbar); ausgewertet wird im Browser der Lehrkraft.
-// ============================================================
-
-// Bewertungseinheiten (BE) je K-Prim-Aufgabe nach Anzahl der Fehler
-// (0, 1, 2, 3, 4 Fehler) – nach ISB-Vorgabe: volle Punktzahl nur bei vier
-// richtigen Entscheidungen, bei drei die Hälfte, bei zwei 1 BE, sonst 0.
-// Nicht beantwortete Aussage = Fehler.
-const CHECKOUT_BE_NACH_FEHLERN=[4,2,1,0,0];
-// Bewertungsschlüssel Pädagogik/Psychologie (eingeführt lt. „Unterrichten,
-// Korrigieren und Bewerten im Fach Pädagogik/Psychologie an der Beruflichen
-// Oberschule Bayern", Stand 13.09.2022): [Notenpunkte, Mindestprozent].
-// 15: 100–96 · 14: 95–91 · … · 3: 40–34 · 2: 33–27 · 1: 26–20 · 0: 19–0.
-// Zwischenwerte werden nicht aufgerundet (z. B. 95,5 % → 14 Punkte).
-const FOSBOS_SCHLUESSEL=[[15,96],[14,91],[13,86],[12,81],[11,76],[10,71],[9,66],[8,61],[7,56],[6,51],[5,46],[4,41],[3,34],[2,27],[1,20]];
-const CHECKOUT_MIN_AUFGABEN=3,CHECKOUT_MAX_AUFGABEN=5;
-function notenpunkteAusProzent(p){for(const [np,min] of FOSBOS_SCHLUESSEL)if(p>=min)return np;return 0;}
-function noteAusNotenpunkten(np){return np>=13?1:np>=10?2:np>=7?3:np>=4?4:np>=1?5:6;}
-function npText(np){return`${np} Punkte (${noteAusNotenpunkten(np)})`;}
-function coDatum(d){return d?fmtDateOnly(d):"";}
-function coBewerten(co,loesung,antworten){
- let be=0,max=0;
- const auswertung=(co.aufgaben||[]).map((a,i)=>{
-  const l=(loesung?.aufgaben?.[i]?.richtig)||[];
-  let fehler=0;const korrekt=[],angekreuzt=[];
-  for(let j=0;j<4;j++){
-   const v=antworten?.[`${i}_${j}`]||"";
-   const ok=!!v&&((v==="r")===!!l[j]);
-   if(!ok)fehler++;
-   korrekt.push(ok);angekreuzt.push(v);
-  }
-  const p=CHECKOUT_BE_NACH_FEHLERN[fehler]??0;
-  be+=p;max+=CHECKOUT_BE_NACH_FEHLERN[0];
-  return{fehler,be:p,korrekt,angekreuzt,loesung:[0,1,2,3].map(j=>!!l[j])};
- });
- const prozent=max?Math.round(be/max*1000)/10:0;
- const notenpunkte=notenpunkteAusProzent(prozent);
- return{be,maxBE:max,prozent,notenpunkte,note:noteAusNotenpunkten(notenpunkte),auswertung};
-}
-
-// ---- Laden ----
-async function ladeCheckoutDaten(){
- const lehrer=isTeacher();
- const basis={anzahlGesamt:10,anzahlWaehlen:7,auswahlOffen:false};
- try{
-  const docs=lehrer?(await getDocs(collection(db,"checkouts"))).docs
-   :(await Promise.all(["live","beendet"].map(st=>getDocs(query(collection(db,"checkouts"),where("status","==",st)))))).flatMap(s=>s.docs);
-  const checkouts=docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||""))||tsSek(a.createdAt)-tsSek(b.createdAt));
-  let einst={};
-  try{const e=await getDoc(doc(db,"checkoutEinstellungen","pp"));einst=e.exists()?e.data():{};}catch(e){}
-  const meineAbgaben={};let auswahl=null;
-  if(!lehrer){
-   const s=await getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));
-   s.docs.forEach(d=>{const x=d.data();meineAbgaben[x.checkoutId]=x;});
-   try{const a=await getDoc(doc(db,"checkoutAuswahl",currentUser.uid));auswahl=a.exists()?a.data():null;}catch(e){}
-  }
-  return{checkouts,einst:{...basis,...einst},meineAbgaben,auswahl};
- }catch(e){console.error("Check-outs laden:",e);return{checkouts:[],einst:basis,meineAbgaben:{},auswahl:null,fehler:true};}
-}
-// Die für den Kurzarbeit-Ersatz zählenden Check-outs (beendet, „zählt").
-function coPool(checkouts,einst){return checkouts.filter(c=>c.status==="beendet"&&c.zaehlt!==false).slice(0,einst.anzahlGesamt||10);}
-function coErsatz(ids,abgabenByCo){
- const nps=ids.map(id=>abgabenByCo[id]).filter(a=>a?.ausgewertet).map(a=>Number(a.notenpunkte)||0);
- if(!nps.length)return null;
- const schnitt=nps.reduce((a,b)=>a+b,0)/nps.length;
- return{schnitt,np:Math.round(schnitt),anzahl:nps.length};
-}
-
-// ---- Startseite: Hinweis, wenn ein Check-out gerade läuft ----
-async function checkoutStartBannerHTML(){
- if(!currentUser||!isApproved())return"";
- try{
-  const s=await getDocs(query(collection(db,"checkouts"),where("status","==","live")));
-  if(s.empty)return"";
-  const co={id:s.docs[0].id,...s.docs[0].data()};
-  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(co.titel||"")}</b><small>Live-Übersicht öffnen, um den Stand zu sehen und den Test zu beenden.</small></div><button class="primary"onclick="openCheckoutMonitor('${co.id}')">Live-Übersicht</button></div>`;
-  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(co.titel||"")}</b><small>Deine Lehrkraft hat den Test freigeschaltet.</small></div><button class="primary"onclick="openCheckoutTest('${co.id}')">Jetzt starten</button></div>`;
- }catch(e){return"";}
-}
-
-// ---- Bereich auf dem P/P-Lernweg ----
-function checkoutSektionHTML(d){
- if(!d)return"";
- const lehrer=isTeacher();
- const lbFarbe=n=>PP_FARBEN[n]||"#8a99a3";
- const pool=coPool(d.checkouts,d.einst);
- const statusChip=c=>c.status==="live"?`<span class="co-chip live"><span class="co-live-punkt"></span>läuft</span>`:c.status==="beendet"?`<span class="co-chip fertig">beendet</span>`:`<span class="co-chip entwurf">Entwurf</span>`;
- const zeilen=d.checkouts.map(c=>{
-  const a=d.meineAbgaben[c.id];
-  let rechts="";
-  if(lehrer){
-   rechts=c.status==="entwurf"?`<button class="secondary"onclick="openCheckoutEditor('${c.id}')">Bearbeiten</button><button class="primary"onclick="coLiveStarten('${c.id}')">▶ Live freischalten</button>`
-    :c.status==="live"?`<button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button>`
-    :`<button class="secondary"onclick="openCheckoutErgebnisse('${c.id}')">Ergebnisse</button><button class="secondary"onclick="coPdfKlasse('${c.id}')">PDF Klasse</button>`;
-  }else{
-   rechts=c.status==="live"?(a?.abgegeben?`<span class="co-chip fertig">abgegeben ✓</span>`:`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Starten"}</button>`)
-    :a?.ausgewertet?`<b class="co-np">${npText(a.notenpunkte)}</b><button class="secondary"onclick="openCheckoutMeinErgebnis('${c.id}')">Ansehen</button><button class="secondary"onclick="coPdfSchueler('${c.id}')">PDF</button>`
-    :a?`<small style="color:var(--muted)">wird ausgewertet …</small>`:`<small style="color:var(--muted)">nicht teilgenommen</small>`;
-  }
-  return`<div class="co-zeile"style="--c:${lbFarbe(c.lbNum)}">
-   <span class="co-lb">LB ${esc(c.lbNum||"")}</span>
-   <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${coDatum(c.datum)} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben${c.zaehlt===false?" · zählt nicht für den Kurzarbeit-Ersatz":""}</small></div>
-   ${statusChip(c)}
-   <div class="co-aktion">${rechts}</div>
-  </div>`;
- }).join("");
- // Kurzarbeit-Ersatz
- let ersatz="";
- if(lehrer){
-  ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>${pool.length} von ${d.einst.anzahlGesamt} Check-outs gewertet · Schüler:innen wählen ${d.einst.anzahlWaehlen} aus · Auswahl ist ${d.einst.auswahlOffen?"<b>geöffnet</b>":"geschlossen"}</small></div>
-   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="secondary"onclick="openCheckoutKlassenuebersicht()">Klassenübersicht</button></div></div>`;
- }else{
-  const aByCo=d.meineAbgaben;
-  const gewertet=pool.filter(c=>aByCo[c.id]?.ausgewertet);
-  const e=d.auswahl?coErsatz(d.auswahl.ids||[],aByCo):null;
-  ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>${gewertet.length} von ${d.einst.anzahlGesamt} Check-outs geschrieben · du wählst die ${d.einst.anzahlWaehlen} für dich besten aus${e?` · <b>deine Auswahl: Ø ${e.schnitt.toFixed(1).replace(".",",")} → ${npText(e.np)}</b>`:""}</small></div>
-   <div class="co-aktion">${d.einst.auswahlOffen?`<button class="primary"onclick="openCheckoutAuswahl()">${d.auswahl?"Auswahl ändern":`${d.einst.anzahlWaehlen} auswählen`}</button>`:`<small style="color:var(--muted)">Auswahl wird von deiner Lehrkraft freigeschaltet</small>`}${d.auswahl?`<button class="secondary"onclick="coPdfErsatzSchueler()">PDF</button>`:""}</div></div>`;
- }
- return`<div class="card co-karte">
-  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Check-Out-Test live frei: eine Fallvignette mit 3–5 K-Prim-Aufgaben. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
-   ${lehrer?`<button class="primary"onclick="openCheckoutEditor()">＋ Neuer Check-out</button>`:""}</div>
-  <div class="co-liste">${zeilen||`<div class="empty">${lehrer?"Noch kein Check-out angelegt.":"Noch kein Check-out freigeschaltet."}</div>`}</div>
-  ${ersatz}
- </div>`;
-}
-function checkoutLiveBannerHTML(d){
- const live=(d?.checkouts||[]).filter(c=>c.status==="live");
- if(!live.length)return"";
- return live.map(c=>{
-  const a=d.meineAbgaben[c.id];
-  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(c.titel||"")}</b><small>Beenden, sobald alle fertig sind – danach wird automatisch ausgewertet.</small></div><button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button></div>`;
-  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(c.titel||"")}</b><small>${a?.abgegeben?"Du hast abgegeben. Das Ergebnis siehst du, sobald deine Lehrkraft den Test beendet.":"Deine Lehrkraft hat den Test freigeschaltet."}</small></div>${a?.abgegeben?"":`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Jetzt starten"}</button>`}</div>`;
- }).join("");
-}
-
-// ---- Editor (Lehrkraft): strukturiert nach der ISB-Vorgabe für K-Prim ----
-// ① Situation (Vignette) → ② 3–5 K-Prim-Aufgaben (Einleitungssatz + genau
-// 4 Aussagen) → ③ Checkliste. Automatische Hinweise prüfen, was sich prüfen
-// lässt (Längen, absolute/vage Begriffe, doppelte Verneinung, Muster).
-let coEditor=null;
-const CO_CHECKLISTE=[
- ["Situation","Situationsbeschreibung adäquat (anwendungsorientierte Informationen)"],
- ["Situation","Alle notwendigen, aber keine irrelevanten Informationen"],
- ["Situation","Frei von Hinweisen auf die korrekte(n) Antwort(en)"],
- ["Situation","Sprache einfach, klar, ohne Mehrdeutigkeiten"],
- ["Situation","Nur bekannte Abkürzungen und Fachbegriffe"],
- ["Aufgaben","Angemessener Schwierigkeitsgrad"],
- ["Aufgaben","Frei von doppelten Verneinungen"],
- ["Aufgaben","Keine Wortwiederholungen aus der Situation in Einleitungssatz und Aussagen"],
- ["Aufgaben","Aussagen eindeutig richtig oder falsch (fachlich unumstritten)"],
- ["Aufgaben","Aussagen homogen (ähnliche Länge und Grammatik)"],
- ["Aufgaben","Keine vagen Mengenangaben oder absoluten Begriffe (z. B. „immer“, „eventuell“)"],
- ["Aufgaben","Jede Aufgabe hat genau vier Aussagen"],
- ["Aufgaben","Position und Anzahl der richtigen Aussagen variieren"]
-];
-const CO_WORT_ABSOLUT=/\b(immer|nie|niemals|stets|ausschließlich|grundsätzlich|jede[rsmn]?|alle|eventuell|vielleicht|manchmal|oft|häufig|selten|meistens|gelegentlich)\b/gi;
-const CO_WORT_NEGATION=/\b(nicht|kein\w*|nie|niemals|ohne|weder)\b/gi;
-function coLeereAufgabe(){return{stamm:"",aussagen:[{text:"",richtig:true},{text:"",richtig:false},{text:"",richtig:false},{text:"",richtig:true}]};}
-function coPruefung(e){
- const pro=e.aufgaben.map(a=>{
-  const h=[],texte=a.aussagen.map(s=>s.text.trim());
-  const laengen=texte.filter(Boolean).map(t=>t.length);
-  if(laengen.length===4){const mn=Math.min(...laengen),mx=Math.max(...laengen);if(mx>mn*1.6&&mx-mn>25)h.push("Aussagen sehr unterschiedlich lang");}
-  const abs=[...new Set(texte.join(" ").match(CO_WORT_ABSOLUT)||[])].map(w=>w.toLowerCase());
-  if(abs.length)h.push(`absolute/vage Begriffe: ${[...new Set(abs)].join(", ")}`);
-  texte.forEach((t,j)=>{if((t.match(CO_WORT_NEGATION)||[]).length>=2)h.push(`doppelte Verneinung? (Aussage ${j+1})`);});
-  const r=a.aussagen.filter(s=>s.richtig).length;
-  return{hinweise:h,richtig:r};
- });
- const glob=[];
- if(e.aufgaben.length>=2){
-  const muster=e.aufgaben.map(a=>a.aussagen.map(s=>s.richtig?"r":"f").join(""));
-  if(new Set(muster).size===1)glob.push("Alle Aufgaben haben dasselbe Richtig/Falsch-Muster – Position der richtigen Aussagen variieren.");
-  else if(new Set(pro.map(p=>p.richtig)).size===1)glob.push("Überall gleich viele richtige Aussagen – Anzahl variieren.");
- }
- return{pro,glob};
-}
-function coPruefChips(p){return p.hinweise.length?p.hinweise.map(h=>`<span class="co-hinweis">⚠ ${esc(h)}</span>`).join(""):`<span class="co-hinweis ok">✓ unauffällig</span>`;}
-async function openCheckoutEditor(id){
- if(!isTeacher())return;
- if(id){
-  try{
-   const [c,l]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutLoesungen",id))]);
-   if(!c.exists()){toast("Nicht gefunden.");return}
-   const co=c.data(),lo=l.exists()?l.data():{};
-   if(co.status!=="entwurf"){toast("Nur Entwürfe können bearbeitet werden.");return}
-   coEditor={id,titel:co.titel||"",lbNum:co.lbNum||1,datum:co.datum||"",zaehlt:co.zaehlt!==false,vignetteTitel:co.vignette?.titel||"",vignetteText:co.vignette?.text||"",
-    klassisch:lo.klassisch||"",checkliste:lo.checkliste||[],
-    aufgaben:(co.aufgaben||[]).map((a,i)=>({stamm:a.stamm||"",aussagen:[0,1,2,3].map(j=>({text:a.aussagen?.[j]||"",richtig:!!lo.aufgaben?.[i]?.richtig?.[j]}))}))};
-  }catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
- }else{
-  const heute=new Date().toISOString().slice(0,10);
-  const lauf=PROJEKT_PHASEN.find(p=>heute>=p.start&&heute<=p.end)||PROJEKT_PHASEN.find(p=>heute<p.start)||PROJEKT_PHASEN[0];
-  coEditor={id:null,titel:"",lbNum:lauf.lbNum,datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:[coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe()]};
- }
- coEditorRender();
-}
-function coEditorLesen(){
- if(!coEditor||!$("coTitel"))return;
- coEditor.titel=$("coTitel").value;coEditor.lbNum=Number($("coLb").value)||1;coEditor.datum=$("coDatum").value;coEditor.zaehlt=$("coZaehlt").checked;
- coEditor.vignetteTitel=$("coVigTitel").value;coEditor.vignetteText=$("coVigText").value;coEditor.klassisch=$("coKlassisch").value;
- coEditor.checkliste=CO_CHECKLISTE.map((c,k)=>!!$(`coCl${k}`)?.checked);
- coEditor.aufgaben=coEditor.aufgaben.map((a,i)=>({stamm:$(`coStamm${i}`)?.value||"",aussagen:[0,1,2,3].map(j=>({text:$(`coA${i}_${j}`)?.value||"",richtig:$(`coR${i}_${j}`)?.value==="r"}))}));
-}
-// Aktualisiert nur die Hinweise (beim Tippen), ohne das Formular neu zu zeichnen.
-function coEditorPruefen(){
- coEditorLesen();
- const p=coPruefung(coEditor);
- p.pro.forEach((x,i)=>{const el=$(`coHinw${i}`);if(el)el.innerHTML=`<b>${x.richtig} richtig · ${4-x.richtig} falsch</b> ${coPruefChips(x)}`;});
- const g=$("coHinwGlob");if(g)g.innerHTML=p.glob.map(t=>`<div class="co-hinweis">⚠ ${esc(t)}</div>`).join("");
- const n=coEditor.checkliste.filter(Boolean).length,cs=$("coClStand");if(cs)cs.textContent=`${n}/${CO_CHECKLISTE.length} bestätigt`;
-}
-function coEditorRender(){
- const e=coEditor,p=coPruefung(e),be=CHECKOUT_BE_NACH_FEHLERN;
- const cl=CO_CHECKLISTE.map(([g,t],k)=>`${k===0||CO_CHECKLISTE[k-1][0]!==g?`<div class="co-cl-gruppe">${g}</div>`:""}<label class="co-cl"><input id="coCl${k}"type="checkbox"${e.checkliste[k]?" checked":""} onchange="coEditorPruefen()"> ${esc(t)}</label>`).join("");
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 CHECK-OUT-TEST · ${e.id?"ENTWURF BEARBEITEN":"NEU ANLEGEN"} · NUR LEHRKRÄFTE</div>
-  <h2>K-Prim-Test anlegen</h2>
-  <p class="co-ed-intro">Aufbau nach ISB-Vorgabe: <b>① Situation</b> → <b>② ${CHECKOUT_MIN_AUFGABEN}–${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben</b> (je Einleitungssatz + 4 Aussagen) → <b>③ Checkliste</b>. Wertung je Aufgabe: 4 richtig = ${be[0]} BE · 3 = ${be[1]} BE · 2 = ${be[2]} BE · sonst 0.</p>
-  <div class="form">
-   <div style="display:flex;gap:10px;flex-wrap:wrap">
-    <label style="flex:2;min-width:200px">Titel<input id="coTitel"value="${esc(e.titel)}"placeholder="z. B. Kommunikation in der Lerngruppe"></label>
-    <label style="flex:1;min-width:110px">Lernbereich<select id="coLb">${[1,2,3,4].map(n=>`<option value="${n}"${e.lbNum===n?" selected":""}>LB ${n}</option>`).join("")}</select></label>
-    <label style="flex:1;min-width:140px">Datum<input id="coDatum"type="date"value="${esc(e.datum)}"></label>
-   </div>
-   <label class="check"><input id="coZaehlt"type="checkbox"${e.zaehlt?" checked":""}> zählt für den Kurzarbeit-Ersatz</label>
-
-   <div class="co-ed-schritt"><span>①</span> Situation (Vignette)</div>
-   <label>Überschrift<input id="coVigTitel"value="${esc(e.vignetteTitel)}"placeholder="z. B. Schwierige Kommunikation in der Lerngruppe"></label>
-   <label>Situationsbeschreibung<textarea id="coVigText"rows="7"placeholder="Jede Zeile wird für die Schüler:innen nummeriert.">${esc(e.vignetteText)}</textarea></label>
-   <small class="co-ed-tipp">Nur relevante Informationen, keine Hinweise auf die Lösung. Zeilenumbrüche werden nummeriert – so kannst du in Aussagen auf Zeilen verweisen.</small>
-   <label>Klassische Aufgabenstellung <span class="co-opt">optional · nur für den Aufgabenpool, Schüler sehen sie nicht</span><textarea id="coKlassisch"rows="2"placeholder="z. B. Erklären Sie anhand von Luzie und Tom die Entstehung einer Kommunikationsstörung auf Basis des 3. Axioms nach Watzlawick.">${esc(e.klassisch)}</textarea></label>
-
-   <div class="co-ed-schritt"><span>②</span> K-Prim-Aufgaben</div>
-   <small class="co-ed-tipp">Erst die richtige(n) Aussage(n) formulieren, dann plausible Distraktoren. Aussagen ähnlich lang und gleich gebaut.</small>
-   ${e.aufgaben.map((a,i)=>`<div class="card co-ed-aufgabe">
-    <div class="co-ed-kopf"><b>Aufgabe ${i+1}</b><span id="coHinw${i}"><b>${p.pro[i].richtig} richtig · ${4-p.pro[i].richtig} falsch</b> ${coPruefChips(p.pro[i])}</span></div>
-    <label>Einleitungssatz<input id="coStamm${i}"value="${esc(a.stamm)}"oninput="coEditorPruefen()"placeholder="z. B. Die weitere Kommunikation zwischen Tom und Luzie kann erfolgreich verlaufen, wenn …"></label>
-    ${a.aussagen.map((s,j)=>`<div class="co-ed-aussage"><span>${j+1}</span><textarea id="coA${i}_${j}"rows="2"oninput="coEditorPruefen()"placeholder="Aussage ${j+1}">${esc(s.text)}</textarea>
-     <select id="coR${i}_${j}"onchange="coEditorPruefen()"><option value="r"${s.richtig?" selected":""}>richtig</option><option value="f"${!s.richtig?" selected":""}>falsch</option></select></div>`).join("")}
-   </div>`).join("")}
-   <div id="coHinwGlob">${p.glob.map(t=>`<div class="co-hinweis">⚠ ${esc(t)}</div>`).join("")}</div>
-   <div class="form-actions">
-    ${e.aufgaben.length<CHECKOUT_MAX_AUFGABEN?`<button class="secondary"onclick="coEditorAufgabe(1)">＋ Aufgabe</button>`:""}
-    ${e.aufgaben.length>CHECKOUT_MIN_AUFGABEN?`<button class="secondary"onclick="coEditorAufgabe(-1)">− letzte Aufgabe</button>`:""}
-    <button class="secondary"onclick="coEditorVorschlag()">Vorschläge aus der App</button>
-   </div>
-
-   <details class="co-ed-details"><summary><span class="co-ed-schritt-inline">③</span> Checkliste (ISB) · <span id="coClStand">${e.checkliste.filter(Boolean).length}/${CO_CHECKLISTE.length} bestätigt</span></summary><div class="co-cl-liste">${cl}</div></details>
-   <details class="co-ed-details"><summary>Aus Word einfügen (Textvorlage)</summary>
-    <p style="font-size:12px;color:var(--muted);margin:6px 0">Text in dieser Form einfügen – R = richtig, F = falsch:</p>
-    <pre class="co-vorlage">TITEL: Kommunikation in der Lerngruppe
-LB: 4
-SITUATION: Schwierige Kommunikation in der Lerngruppe
-Für die Vorbereitung auf die Prüfung hat Tom …
-Luzie (abfällig): „Ich freue mich auch …“
-AUFGABENSTELLUNG: Erklären Sie … (optional)
-AUFGABE: Die Kommunikation kann erfolgreich verlaufen, wenn …
-F: … Tom im Sinne des 5. Axioms …
-F: … Luzie im Sinne des 2. Axioms …
-R: … Tom im Sinne des 1. Axioms …
-F: … Luzie im Sinne des 4. Axioms …
-AUFGABE: …</pre>
-    <textarea id="coImport"rows="6"placeholder="Hier einfügen …"></textarea>
-    <div class="form-actions"><button class="secondary"onclick="coEditorImport()">Übernehmen</button></div>
-   </details>
-   <div class="form-actions co-ed-fuss">
-    ${e.id?`<button class="secondary"onclick="coLoeschen('${e.id}')">Löschen</button>`:""}
-    <button class="secondary"onclick="coEditorLesen();coPoolExport('pdf')">PDF für Aufgabenpool</button>
-    <button class="secondary"onclick="coEditorLesen();coPoolExport('word')">Word für Aufgabenpool</button>
-    <span style="flex:1"></span>
-    <button class="secondary"onclick="closeModal()">Abbrechen</button>
-    <button class="primary"onclick="coEditorSpeichern()">Entwurf speichern</button>
-   </div>
-  </div>`);
-}
-function coEditorAufgabe(d){coEditorLesen();if(d>0&&coEditor.aufgaben.length<CHECKOUT_MAX_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());if(d<0&&coEditor.aufgaben.length>CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.pop();coEditorRender();}
-function coEditorVorschlag(){
- coEditorLesen();
- const ph=PROJEKT_PHASEN.find(p=>p.lbNum===coEditor.lbNum);
- const kp=PP_EINHEITEN.filter(e=>ph&&(ph.trainingWochen.includes(e.id)||ph.notwendigeWochen.includes(e.id))).flatMap(e=>e.kprim||[]).slice(0,CHECKOUT_MAX_AUFGABEN);
- if(!kp.length){toast("Für diesen Lernbereich gibt es keine Vorschläge.");return}
- if(!confirm(`${kp.length} K-Prim-Aufgaben aus den App-Vorschlägen einsetzen? Bestehende Aufgaben werden ersetzt.`))return;
- coEditor.aufgaben=kp.map(k=>({stamm:k.frage||"",aussagen:[0,1,2,3].map(j=>({text:k.statements?.[j]?.text||"",richtig:!!k.statements?.[j]?.correct}))}));
- while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
- coEditorRender();toast("Eingesetzt – bitte eine Situation ergänzen und die Aussagen auf den Fall zuschneiden.");
-}
-// Textvorlage (aus Word kopiert) oder JSON einlesen.
-function coEditorImport(){
- coEditorLesen();
- const roh=$("coImport").value.trim();
- if(!roh){toast("Bitte zuerst Text einfügen.");return}
- try{
-  if(roh.startsWith("{")){
-   const j=JSON.parse(roh);
-   if(j.titel)coEditor.titel=j.titel;
-   if(j.lb)coEditor.lbNum=Number(j.lb)||coEditor.lbNum;
-   if(typeof j.vignette==="string")coEditor.vignetteText=j.vignette;
-   else if(j.vignette){coEditor.vignetteTitel=j.vignette.titel||"";coEditor.vignetteText=j.vignette.text||"";}
-   if(j.aufgabenstellung)coEditor.klassisch=j.aufgabenstellung;
-   if(Array.isArray(j.aufgaben)&&j.aufgaben.length)coEditor.aufgaben=j.aufgaben.slice(0,CHECKOUT_MAX_AUFGABEN).map(a=>({stamm:a.stamm||a.frage||"",aussagen:[0,1,2,3].map(k=>{const s=(a.aussagen||a.statements||[])[k]||{};return{text:typeof s==="string"?s:(s.text||""),richtig:!!(s.richtig??s.correct)};})}));
-  }else{
-   let modus="",situation=[],aufgaben=[],klassisch=[];
-   roh.split(/\r?\n/).forEach(z=>{
-    const t=z.trim();let m;
-    if(m=t.match(/^TITEL:\s*(.*)$/i)){coEditor.titel=m[1];modus="";}
-    else if(m=t.match(/^LB:\s*(\d)/i)){coEditor.lbNum=Number(m[1]);modus="";}
-    else if(m=t.match(/^SITUATION:\s*(.*)$/i)){coEditor.vignetteTitel=m[1];modus="sit";}
-    else if(m=t.match(/^AUFGABENSTELLUNG:\s*(.*)$/i)){klassisch.push(m[1]);modus="kl";}
-    else if(m=t.match(/^AUFGABE:\s*(.*)$/i)){aufgaben.push({stamm:m[1],aussagen:[]});modus="auf";}
-    else if(m=t.match(/^([RF])\s*[:)]\s*(.*)$/i)){const a=aufgaben[aufgaben.length-1];if(a&&a.aussagen.length<4)a.aussagen.push({text:m[2],richtig:m[1].toUpperCase()==="R"});}
-    else if(modus==="sit")situation.push(z.replace(/^\s*\d+\s+/,""));
-    else if(modus==="kl"&&t)klassisch.push(t);
-    else if(modus==="auf"&&t&&aufgaben.length){const a=aufgaben[aufgaben.length-1];if(!a.aussagen.length)a.stamm=(a.stamm+" "+t).trim();}
-   });
-   if(situation.length)coEditor.vignetteText=situation.join("\n").replace(/^\n+|\n+$/g,"");
-   if(klassisch.length)coEditor.klassisch=klassisch.join(" ");
-   if(aufgaben.length){
-    const fehl=aufgaben.findIndex(a=>a.aussagen.length!==4);
-    if(fehl>-1)toast(`Aufgabe ${fehl+1} hat nicht genau 4 Aussagen – bitte ergänzen.`);
-    coEditor.aufgaben=aufgaben.slice(0,CHECKOUT_MAX_AUFGABEN).map(a=>({stamm:a.stamm,aussagen:[0,1,2,3].map(k=>a.aussagen[k]||{text:"",richtig:false})}));
-   }
-  }
-  while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
-  coEditorRender();toast("Übernommen – bitte prüfen und speichern.");
- }catch(e){console.error(e);toast("Das Format konnte nicht gelesen werden.");}
-}
-async function coEditorSpeichern(){
- coEditorLesen();
- const e=coEditor;
- if(!e.titel.trim()){toast("Bitte einen Titel eingeben.");return}
- if(!e.vignetteText.trim()){toast("Bitte die Situation (Vignette) eintragen.");return}
- const unvollst=e.aufgaben.findIndex(a=>!a.stamm.trim()||a.aussagen.some(s=>!s.text.trim()));
- if(unvollst>-1){toast(`Aufgabe ${unvollst+1}: Einleitungssatz und alle 4 Aussagen ausfüllen.`);return}
- const offen=CO_CHECKLISTE.length-e.checkliste.filter(Boolean).length;
- if(offen&&!confirm(`${offen} Punkt(e) der Checkliste sind noch nicht bestätigt. Trotzdem speichern?`))return;
- const daten={titel:e.titel.trim(),lbNum:e.lbNum,datum:e.datum,zaehlt:e.zaehlt,status:"entwurf",
-  vignette:{titel:e.vignetteTitel.trim(),text:e.vignetteText.replace(/\s+$/,"")},
-  aufgaben:e.aufgaben.map(a=>({stamm:a.stamm.trim(),aussagen:a.aussagen.map(s=>s.text.trim())})),
-  updatedAt:serverTimestamp(),updatedBy:currentUser.uid};
- // Lösung, klassische Aufgabenstellung und Checkliste liegen nur bei den Lehrkräften.
- const loesung={aufgaben:e.aufgaben.map(a=>({richtig:a.aussagen.map(s=>!!s.richtig)})),klassisch:e.klassisch.trim(),checkliste:e.checkliste,updatedAt:serverTimestamp()};
- try{
-  let id=e.id;
-  if(id)await setDoc(doc(db,"checkouts",id),daten,{merge:true});
-  else{const r=await addDoc(collection(db,"checkouts"),{...daten,createdAt:serverTimestamp(),createdBy:currentUser.uid});id=r.id;}
-  await setDoc(doc(db,"checkoutLoesungen",id),loesung);
-  toast("Check-Out-Test gespeichert.");closeModal();await render();
- }catch(err){console.error("Check-out speichern:",err);toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
-}
-// Situation mit Zeilennummern (wie in Prüfungsaufgaben).
-function coSituationHTML(v,pdf=false){
- const E=pdf?escPDF:esc;
- const zeilen=String(v?.text||"").split(/\r?\n/);
- return`<div class="co-situation">${v?.titel?`<div class="co-sit-titel">Situation: ${E(v.titel)}</div>`:""}
-  <table class="co-sit-tab"style="border-collapse:collapse;width:100%">${zeilen.map((z,k)=>`<tr><td class="co-sit-nr"style="width:28px;vertical-align:top;color:#8a99a3;font-size:12px;padding:2px 8px 2px 0;text-align:right">${k+1}</td><td style="padding:2px 0;line-height:1.55">${E(z)||"&nbsp;"}</td></tr>`).join("")}</table></div>`;
-}
-// Export für den ISB-Aufgabenpool: Situation, klassische Aufgabenstellung,
-// K-Prim-Aufgaben mit Lösung (X). Dateiname INHALT_KPRIM_SCHULNUMMER.
-function coPoolExport(art){
- const e=coEditor;if(!e)return;
- const nr=prompt("Schulnummer für den Dateinamen (INHALT_KPRIM_SCHULNUMMER):",localStorage.getItem("coSchulnummer")||"");
- if(nr===null)return;
- try{localStorage.setItem("coSchulnummer",nr.trim());}catch(x){}
- const inhalt=((e.titel||"Inhalt").trim().split(/\s+/).find(w=>w.length>3)||"Inhalt").replace(/[^A-Za-zÄÖÜäöüß0-9-]/g,"");
- const name=`${inhalt}_KPRIM_${nr.trim()||"0000"}`;
- const be=CHECKOUT_BE_NACH_FEHLERN[0];
- const aufg=e.aufgaben.map((a,i)=>`<h3 style="margin:18px 0 4px">Aufgabe ${i+1}: K-Prim-Aufgabe</h3>
-  <p style="margin:0 0 6px">Entscheiden Sie bei den Aussagen 1–4, ob sie jeweils richtig oder falsch sind.</p>
-  <p style="margin:0 0 6px"><b>${escPDF(a.stamm)}</b></p>
-  <table style="width:100%;border-collapse:collapse" border="1" cellpadding="6"><tr><th style="width:60px">richtig</th><th style="width:60px">falsch</th><th style="text-align:left">Aussage</th></tr>
-  ${a.aussagen.map((s,j)=>`<tr><td style="text-align:center">${s.richtig?"X":""}</td><td style="text-align:center">${s.richtig?"":"X"}</td><td>${j+1}. ${escPDF(s.text)}</td></tr>`).join("")}</table>
-  <p style="text-align:right;margin:4px 0 0">____ / ${be} BE</p>`).join("");
- const body=`<p><b>Lernbereich:</b> LB ${e.lbNum} · Pädagogik/Psychologie 11</p>
-  <h2>Ausgangssituation</h2>${coSituationHTML({titel:e.vignetteTitel,text:e.vignetteText},true)}
-  ${e.klassisch.trim()?`<h2>Klassische Aufgabenstellung</h2><p>${escPDF(e.klassisch)}</p>`:""}
-  <h2>K-Prim-Aufgaben (mit Lösung)</h2>${aufg}
-  <p style="font-size:11px;color:#666;margin-top:14px">Wertung je Aufgabe: 4 richtige Entscheidungen = ${be} BE, 3 = ${CHECKOUT_BE_NACH_FEHLERN[1]} BE, 2 = ${CHECKOUT_BE_NACH_FEHLERN[2]} BE, weniger = 0 BE.</p>`;
- if(art==="word"){
-  const html=`<html><head><meta charset="utf-8"><title>${escPDF(name)}</title></head><body style="font-family:Arial,sans-serif;font-size:11pt"><h1>${escPDF(e.titel||name)}</h1>${body}</body></html>`;
-  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff",html],{type:"application/msword"}));a.download=name+".doc";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
-  toast(`${name}.doc wird heruntergeladen.`);
- }else openToolPrintWindow(name,body,`${e.titel||""} · als PDF sichern und unter „${name}“ in mebis hochladen`);
-}
-async function coLoeschen(id){
- if(!isTeacher())return;
- if(!confirm("Diesen Check-out wirklich löschen? Abgaben und Ergebnisse dazu werden ebenfalls gelöscht."))return;
- try{
-  const ab=await getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)));
-  await Promise.all(ab.docs.map(d=>deleteDoc(d.ref)));
-  await deleteDoc(doc(db,"checkoutLoesungen",id)).catch(()=>{});
-  await deleteDoc(doc(db,"checkouts",id));
-  toast("Check-out gelöscht.");closeModal();await render();
- }catch(e){console.error(e);toast("Konnte nicht gelöscht werden.");}
-}
-
-// ---- Live schalten / beenden / auswerten (Lehrkraft) ----
-async function coLiveStarten(id){
- if(!isTeacher())return;
- if(!confirm("Check-out jetzt LIVE freischalten? Alle Schüler:innen können ihn dann sofort öffnen."))return;
- try{await updateDoc(doc(db,"checkouts",id),{status:"live",liveAt:serverTimestamp()});toast("Check-out ist live.");await openCheckoutMonitor(id);}
- catch(e){console.error(e);toast("Konnte nicht freigeschaltet werden.");}
-}
-function coUnsubAll(){if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}}
-async function openCheckoutMonitor(id){
- if(!isTeacher())return;
- coUnsubAll();
- let co=null,students=[];
- try{const c=await getDoc(doc(db,"checkouts",id));co=c.exists()?{id,...c.data()}:null;students=await getAllUsersForLernstand();}catch(e){}
- if(!co){toast("Nicht gefunden.");return}
- const n=(co.aufgaben||[]).length*4;
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 CHECK-OUT · LIVE-ÜBERSICHT</div>
-  <h2>${esc(co.titel)}</h2>
-  <div id="coMonitor"><p style="color:var(--muted)">Lädt …</p></div>
-  <div class="form-actions"style="margin-top:14px">
-   <button class="secondary"onclick="closeModal()">Schließen</button>
-   ${co.status==="live"?`<button class="primary"style="background:#d9534f"onclick="coBeenden('${id}')">■ Live beenden & auswerten</button>`:`<button class="secondary"onclick="openCheckoutErgebnisse('${id}')">Ergebnisse</button>`}
-  </div>`);
- window.__coUnsub=onSnapshot(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)),snap=>{
-  const box=$("coMonitor");if(!box){coUnsubAll();return}
-  const ab={};snap.docs.forEach(d=>{const x=d.data();ab[x.uid]=x;});
-  const abgegeben=Object.values(ab).filter(a=>a.abgegeben).length;
-  box.innerHTML=`<p style="font-size:14px"><b>${abgegeben}</b> abgegeben · <b>${Object.keys(ab).length-abgegeben}</b> in Bearbeitung · <b>${students.length-Object.keys(ab).length}</b> noch nicht gestartet</p>
-   <div class="co-monitor">${students.map(s=>{const a=ab[s.uid];const k=a?Object.keys(a.antworten||{}).length:0;
-    return`<div class="co-mon-zeile ${a?.abgegeben?"ab":a?"lauf":"nicht"}"><span>${esc(s.displayName||s.email||"")}</span><small>${a?.abgegeben?"abgegeben ✓":a?`${k}/${n} beantwortet`:"noch nicht gestartet"}</small></div>`;}).join("")}</div>`;
- },e=>console.error("Check-out-Monitor:",e));
-}
-async function coBeenden(id){
- if(!isTeacher())return;
- if(!confirm("Check-out jetzt beenden? Danach kann niemand mehr etwas ändern und die App wertet automatisch aus."))return;
- coUnsubAll();
- try{
-  await updateDoc(doc(db,"checkouts",id),{status:"beendet",endAt:serverTimestamp()});
-  toast("Beendet – wird ausgewertet …");
-  await coAuswerten(id);
-  await openCheckoutErgebnisse(id);
- }catch(e){console.error("Check-out beenden:",e);toast("Konnte nicht beendet werden.");}
-}
-async function coAuswerten(id){
- const [c,l,ab]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutLoesungen",id)),getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)))]);
- if(!c.exists()||!l.exists())throw new Error("Check-out oder Lösung fehlt");
- const co=c.data(),lo=l.data();
- await Promise.all(ab.docs.map(d=>{const x=d.data();const erg=coBewerten(co,lo,x.antworten||{});
-  return updateDoc(d.ref,{...erg,ausgewertet:true,abgegeben:true,ausgewertetAm:serverTimestamp()});}));
- await updateDoc(doc(db,"checkouts",id),{ausgewertetAm:serverTimestamp(),teilnehmer:ab.size,maxBE:(co.aufgaben||[]).length*CHECKOUT_BE_NACH_FEHLERN[0]});
- toast(`${ab.size} Abgaben ausgewertet.`);
-}
-async function coNeuAuswerten(id){
- if(!confirm("Alle Abgaben dieses Check-outs neu auswerten (z. B. nach einer Korrektur der Lösung)?"))return;
- try{await coAuswerten(id);await openCheckoutErgebnisse(id);}catch(e){console.error(e);toast("Konnte nicht ausgewertet werden.");}
-}
-
-// ---- Test bearbeiten (Schüler:in) ----
-async function openCheckoutTest(id){
- coUnsubAll();
- let co=null,a=null;
- try{
-  const c=await getDoc(doc(db,"checkouts",id));co=c.exists()?{id,...c.data()}:null;
-  const s=await getDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`));a=s.exists()?s.data():null;
- }catch(e){console.error(e);}
- if(!co){toast("Dieser Check-out ist nicht verfügbar.");return}
- if(co.status!=="live"){toast("Dieser Check-out ist nicht (mehr) freigeschaltet.");return}
- if(a?.abgegeben){toast("Du hast bereits abgegeben.");return}
- const ant=a?.antworten||{};
- const c=PP_FARBEN[co.lbNum]||"#4a90d9";
- modal(`<div id="coTest">
-  <div class="kicker"style="color:${c}">🏁 CHECK-OUT · LB ${esc(co.lbNum)} · ${coDatum(co.datum)}</div>
-  <h2>${esc(co.titel)}</h2>
-  <div class="co-info">Lies die Situation genau. Entscheide dann bei <b>jeder</b> Aussage, ob sie richtig oder falsch ist.
-   <span>Wertung je Aufgabe: 4 richtig = ${CHECKOUT_BE_NACH_FEHLERN[0]} BE · 3 = ${CHECKOUT_BE_NACH_FEHLERN[1]} BE · 2 = ${CHECKOUT_BE_NACH_FEHLERN[2]} BE · sonst 0 · Leer = falsch · Antworten werden automatisch gespeichert.</span></div>
-  <div class="co-vignette"style="border-left-color:${c}">${coSituationHTML(co.vignette)}</div>
-  ${(co.aufgaben||[]).map((q,i)=>`<div class="card co-aufgabe">
-   <div class="co-auf-kopf"><span>Aufgabe ${i+1}</span><span>/ ${CHECKOUT_BE_NACH_FEHLERN[0]} BE</span></div>
-   <strong class="kp-stamm">${esc(q.stamm)}</strong>
-   <p class="kp-anleitung">Entscheiden Sie bei den Aussagen 1–4, ob sie jeweils <b>richtig oder falsch</b> sind.</p>
-   ${kprimTabelleHTML(`coT${i}`,q.aussagen||[],Object.fromEntries([0,1,2,3].map(j=>[j,ant[`${i}_${j}`]])),`coAntwort('${id}','${i}_%J','%V')`)}
-  </div>`).join("")}
-  <div class="co-test-fuss"><span id="coStand"></span><button class="primary"onclick="coAbgeben('${id}')">Abgeben</button></div>
- </div>`);
- coStandAktualisieren(co);
- // Beendet die Lehrkraft den Test, wird die Bearbeitung sofort gesperrt.
- window.__coUnsub=onSnapshot(doc(db,"checkouts",id),snap=>{
-  if(!$("coTest")){coUnsubAll();return}
-  const x=snap.data();
-  if(x&&x.status!=="live"){coUnsubAll();$("coTest").innerHTML=`<h2>Der Check-out wurde beendet.</h2><p>Deine gespeicherten Antworten werden gewertet. Das Ergebnis erscheint in deinem Lernweg.</p><div class="form-actions"><button class="primary"onclick="closeModal();render()">OK</button></div>`;}
- });
-}
-function coStandAktualisieren(co){
- const n=(co?.aufgaben||[]).length*4||document.querySelectorAll("#coTest .kp-tabelle tbody tr").length;
- const k=document.querySelectorAll('#coTest input[type="radio"]:checked').length;
- const el=$("coStand");if(el)el.textContent=`${k} von ${n} Aussagen beantwortet`;
-}
-async function coAntwort(id,key,wert){
- coStandAktualisieren();
- try{
-  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",antworten:{[key]:wert},updatedAt:serverTimestamp()},{merge:true});
- }catch(e){console.error("Antwort speichern:",e);toast(e?.code==="permission-denied"?"Der Check-out ist nicht mehr freigeschaltet – Antwort nicht gespeichert.":"Antwort konnte nicht gespeichert werden – Verbindung prüfen.");}
-}
-async function coAbgeben(id){
- const alle=document.querySelectorAll("#coTest .kp-tabelle tbody tr").length;
- const k=document.querySelectorAll('#coTest input[type="radio"]:checked').length;
- if(k<alle&&!confirm(`Du hast ${alle-k} Aussage(n) noch nicht beantwortet – diese zählen als Fehler. Trotzdem abgeben?`))return;
- if(k===alle&&!confirm("Jetzt endgültig abgeben? Danach kannst du nichts mehr ändern."))return;
- try{
-  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",abgegeben:true,abgegebenAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
-  coUnsubAll();closeModal();toast("Abgegeben ✓");await render();
-  showMotivationsBild(true,"abgabe");
- }catch(e){console.error(e);toast("Konnte nicht abgegeben werden.");}
-}
-
-// ---- Ergebnisse ----
-function coAufgabeErgebnisHTML(q,i,erg,pdf=false){
- const E=pdf?escPDF:esc;
- const r=erg?.auswertung?.[i];
- const zeichen=v=>v==="r"?"richtig":v==="f"?"falsch":"–";
- return`<div class="${pdf?"item":"card co-aufgabe"}"><b>${i+1}. ${E(q.stamm)}</b>${r?` <span style="float:right">${r.be} BE · ${r.fehler} Fehler</span>`:""}
-  <table class="co-erg-tab"style="width:100%;border-collapse:collapse;margin-top:6px;font-size:13px"><thead><tr><th style="text-align:left">Aussage</th><th>angekreuzt</th><th>Lösung</th><th></th></tr></thead><tbody>
-  ${(q.aussagen||[]).map((t,j)=>`<tr><td>${j+1}. ${E(t)}</td><td style="text-align:center">${zeichen(r?.angekreuzt?.[j])}</td><td style="text-align:center">${r?(r.loesung?.[j]?"richtig":"falsch"):"–"}</td><td style="text-align:center;color:${r?.korrekt?.[j]?"#3fa66a":"#d9534f"}">${r?(r.korrekt?.[j]?"✓":"✗"):""}</td></tr>`).join("")}
-  </tbody></table></div>`;
-}
-function coSummeHTML(erg){return erg?.ausgewertet?`<b>${erg.be} von ${erg.maxBE} BE (${String(erg.prozent).replace(".",",")} %) · ${npText(erg.notenpunkte)}</b>`:"nicht ausgewertet";}
-async function openCheckoutMeinErgebnis(id){
- try{
-  const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`))]);
-  const co=c.data(),erg=a.exists()?a.data():null;
-  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-   <div class="kicker">🏁 CHECK-OUT · DEIN ERGEBNIS</div><h2>${esc(co.titel)}</h2>
-   <div class="co-summe">${coSummeHTML(erg)}</div>
-   <div class="co-vignette"style="border-left-color:${PP_FARBEN[co.lbNum]||"#4a90d9"}">${coSituationHTML(co.vignette)}</div>
-   ${(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg)).join("")}
-   <div class="form-actions"><button class="secondary"onclick="coPdfSchueler('${id}')">PDF herunterladen</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
- }catch(e){console.error(e);toast("Konnte nicht geladen werden.");}
-}
-async function coLadeErgebnisse(id){
- const [c,ab,students]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id))),getAllUsersForLernstand()]);
- const co={id,...c.data()};const abgaben={};ab.docs.forEach(d=>{const x=d.data();abgaben[x.uid]=x;});
- return{co,abgaben,students};
-}
-async function openCheckoutErgebnisse(id){
- if(!isTeacher())return;
- let d;try{d=await coLadeErgebnisse(id);}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
- const {co,abgaben,students}=d;
- const erg=Object.values(abgaben).filter(a=>a.ausgewertet);
- const schnitt=erg.length?(erg.reduce((s,a)=>s+a.notenpunkte,0)/erg.length).toFixed(1).replace(".",","):"–";
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 CHECK-OUT · ERGEBNISSE · NUR LEHRKRÄFTE</div><h2>${esc(co.titel)}</h2>
-  <p style="font-size:13px;color:var(--muted)">${coDatum(co.datum)} · ${erg.length} ausgewertet · Klassenschnitt ${schnitt} Punkte</p>
-  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>Ergebnis</th></tr></thead>
-  <tbody>${students.map(s=>{const a=abgaben[s.uid];
-   if(!a)return`<tr><td>${esc(s.displayName||s.email||"")}</td><td colspan="${(co.aufgaben||[]).length+2}"style="color:var(--muted)">nicht teilgenommen</td></tr>`;
-   if(!a.ausgewertet)return`<tr><td>${esc(s.displayName||s.email||"")}</td><td colspan="${(co.aufgaben||[]).length+2}">noch nicht ausgewertet</td></tr>`;
-   return`<tr style="cursor:pointer"onclick="openCheckoutSchuelerErgebnis('${id}','${s.uid}')"><td>${esc(s.displayName||s.email||"")}</td>${(a.auswertung||[]).map(r=>`<td style="text-align:center"title="${r.fehler} Fehler">${r.be}</td>`).join("")}<td style="text-align:center">${a.be}/${a.maxBE}</td><td><b>${npText(a.notenpunkte)}</b></td></tr>`;}).join("")}</tbody></table></div>
-  <div class="form-actions"style="margin-top:14px">
-   <button class="secondary"onclick="coNeuAuswerten('${id}')">Neu auswerten</button>
-   <button class="secondary"onclick="coLoeschen('${id}')">Löschen</button>
-   <button class="primary"onclick="coPdfKlasse('${id}')">PDF Klasse</button>
-   <button class="secondary"onclick="closeModal()">Schließen</button></div>`);
-}
-async function openCheckoutSchuelerErgebnis(id,uid){
- let d;try{d=await coLadeErgebnisse(id);}catch(e){return}
- const a=d.abgaben[uid],s=d.students.find(x=>x.uid===uid);
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 CHECK-OUT · ${esc(s?.displayName||s?.email||"")}</div><h2>${esc(d.co.titel)}</h2>
-  <div class="co-summe">${coSummeHTML(a)}</div>
-  ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a)).join("")}
-  <div class="form-actions"><button class="secondary"onclick="openCheckoutErgebnisse('${id}')">← Zurück</button><button class="secondary"onclick="coPdfSchueler('${id}','${uid}')">PDF</button></div>`);
-}
-
-// ---- PDF (Druckfenster „Als PDF sichern") ----
-function coPdfBlock(co,erg,name){
- return`<div class="item"style="background:#f5f7f8"><strong>${escPDF(name)}</strong><div>${erg?.ausgewertet?`${erg.be} von ${erg.maxBE} BE (${String(erg.prozent).replace(".",",")} %) · <b>${npText(erg.notenpunkte)}</b>`:"nicht teilgenommen"}</div></div>
-  ${erg?.ausgewertet?(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg,true)).join(""):""}`;
-}
-function coVignettePdf(co){return`<div class="item">${coSituationHTML(co.vignette,true)}</div>`;}
-async function coPdfSchueler(id,uid){
- uid=uid||currentUser.uid;
- try{
-  const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${uid}`))]);
-  const co=c.data(),erg=a.exists()?a.data():null;
-  openToolPrintWindow(`${co.titel} – Ergebnis`,coVignettePdf(co)+coPdfBlock(co,erg,erg?.name||profile?.displayName||""),`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)}`);
- }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
-}
-async function coPdfKlasse(id){
- if(!isTeacher())return;
- try{
-  const {co,abgaben,students}=await coLadeErgebnisse(id);
-  const tabelle=`<table><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>
-   ${students.map(s=>{const a=abgaben[s.uid];return`<tr><td>${escPDF(s.displayName||s.email||"")}</td>${a?.ausgewertet?(a.auswertung||[]).map(r=>`<td>${r.be}</td>`).join("")+`<td>${a.be}/${a.maxBE}</td><td>${String(a.prozent).replace(".",",")}</td><td><b>${npText(a.notenpunkte)}</b></td>`:`<td colspan="${(co.aufgaben||[]).length+3}">nicht teilgenommen</td>`}</tr>`;}).join("")}</tbody></table>`;
-  const einzel=students.filter(s=>abgaben[s.uid]?.ausgewertet).map(s=>`<div style="break-before:page">${coPdfBlock(co,abgaben[s.uid],s.displayName||s.email||"")}</div>`).join("");
-  openToolPrintWindow(`${co.titel} – Ergebnisse der Klasse`,`<h2>Übersicht</h2>${tabelle}<div style="break-before:page"></div>${coVignettePdf(co)}${einzel}`,`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)} · Wertung je Aufgabe ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern`);
- }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
-}
-
-// ---- Kurzarbeit-Ersatz: 7 aus 10 ----
-async function openCheckoutAuswahl(){
- const d=await ladeCheckoutDaten();
- if(!d.einst.auswahlOffen){toast("Die Auswahl ist gerade nicht freigeschaltet.");return}
- const pool=coPool(d.checkouts,d.einst).filter(c=>d.meineAbgaben[c.id]?.ausgewertet);
- const gewaehlt=new Set(d.auswahl?.ids||[]);
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 KURZARBEIT-ERSATZ</div><h2>Wähle deine ${d.einst.anzahlWaehlen} Check-outs</h2>
-  <p style="font-size:13px;color:var(--muted);margin-top:0">Der Durchschnitt der Notenpunkte deiner Auswahl ersetzt eine Kurzarbeit (gerundet).</p>
-  ${pool.length<d.einst.anzahlWaehlen?`<div class="empty">Du hast erst ${pool.length} gewertete Check-outs – du brauchst mindestens ${d.einst.anzahlWaehlen}.</div>`:""}
-  <div class="list"id="coAuswahlListe">${pool.map(c=>{const a=d.meineAbgaben[c.id];return`<label class="list-item co-wahl"><input type="checkbox"value="${c.id}"data-np="${a.notenpunkte}"${gewaehlt.has(c.id)?" checked":""} onchange="coAuswahlStand(${d.einst.anzahlWaehlen})"><div style="flex:1"><strong>${esc(c.titel)}</strong><small>LB ${esc(c.lbNum)} · ${coDatum(c.datum)}</small></div><b>${npText(a.notenpunkte)}</b></label>`;}).join("")}</div>
-  <div class="co-test-fuss"><span id="coAuswahlStand"></span><button class="primary"onclick="coAuswahlSpeichern(${d.einst.anzahlWaehlen})">Auswahl speichern</button></div>`);
- coAuswahlStand(d.einst.anzahlWaehlen);
-}
-function coAuswahlStand(soll){
- const boxen=[...document.querySelectorAll("#coAuswahlListe input:checked")];
- const nps=boxen.map(b=>Number(b.dataset.np)||0);
- const el=$("coAuswahlStand");if(!el)return;
- const schnitt=nps.length?nps.reduce((a,b)=>a+b,0)/nps.length:0;
- el.innerHTML=`${nps.length} von ${soll} gewählt${nps.length?` · Ø ${schnitt.toFixed(1).replace(".",",")} → <b>${npText(Math.round(schnitt))}</b>`:""}`;
- el.style.color=nps.length===soll?"#3e7a2a":"var(--muted)";
-}
-async function coAuswahlSpeichern(soll){
- const ids=[...document.querySelectorAll("#coAuswahlListe input:checked")].map(b=>b.value);
- if(ids.length!==soll){toast(`Bitte genau ${soll} Check-outs auswählen.`);return}
- try{
-  await setDoc(doc(db,"checkoutAuswahl",currentUser.uid),{uid:currentUser.uid,name:profile?.displayName||currentUser.email||"",ids,updatedAt:serverTimestamp()});
-  toast("Auswahl gespeichert.");closeModal();await render();
- }catch(e){console.error(e);toast(e?.code==="permission-denied"?"Die Auswahl ist nicht (mehr) freigeschaltet.":"Konnte nicht gespeichert werden.");}
-}
-async function coPdfErsatzSchueler(){
- const d=await ladeCheckoutDaten();
- const pool=coPool(d.checkouts,d.einst);const ids=new Set(d.auswahl?.ids||[]);
- const e=d.auswahl?coErsatz(d.auswahl.ids||[],d.meineAbgaben):null;
- const tab=`<table><thead><tr><th>Check-out</th><th>Datum</th><th>Ergebnis</th><th>gewählt</th></tr></thead><tbody>${pool.map(c=>{const a=d.meineAbgaben[c.id];return`<tr><td>${escPDF(c.titel)}</td><td>${coDatum(c.datum)}</td><td>${a?.ausgewertet?npText(a.notenpunkte):"–"}</td><td>${ids.has(c.id)?"✓":""}</td></tr>`;}).join("")}</tbody></table>`;
- openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs",`<div class="item"style="background:#f5f7f8"><strong>${escPDF(profile?.displayName||"")}</strong><div>${e?`Ø ${e.schnitt.toFixed(2).replace(".",",")} → <b>${npText(e.np)}</b> (${e.anzahl} gewählte Check-outs)`:"Noch keine Auswahl"}</div></div>${tab}`,"F12Sb · Pädagogik/Psychologie");
-}
-async function openCheckoutEinstellungen(){
- if(!isTeacher())return;
- const d=await ladeCheckoutDaten();const e=d.einst;
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 KURZARBEIT-ERSATZ · EINSTELLUNGEN</div><h2>Check-outs als Kurzarbeit-Ersatz</h2>
-  <div class="form">
-   <div style="display:flex;gap:10px;flex-wrap:wrap">
-    <label style="flex:1">Anzahl gewerteter Check-outs<input id="coEGesamt"type="number"min="1"max="30"value="${e.anzahlGesamt}"></label>
-    <label style="flex:1">Davon auswählen<input id="coEWaehlen"type="number"min="1"max="30"value="${e.anzahlWaehlen}"></label>
-   </div>
-   <label class="check"><input id="coEOffen"type="checkbox"${e.auswahlOffen?" checked":""}> Schüler:innen dürfen jetzt auswählen</label>
-   <p style="font-size:12px;color:var(--muted)">Es zählen die ersten ${e.anzahlGesamt} beendeten Check-outs (nach Datum), die für den Kurzarbeit-Ersatz markiert sind. Nimmst du das Häkchen wieder heraus, ist die Auswahl eingefroren.</p>
-   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="coEinstellungenSpeichern()">Speichern</button></div>
-  </div>`);
-}
-async function coEinstellungenSpeichern(){
- const anzahlGesamt=Math.max(1,Number($("coEGesamt").value)||10),anzahlWaehlen=Math.max(1,Math.min(anzahlGesamt,Number($("coEWaehlen").value)||7));
- try{await setDoc(doc(db,"checkoutEinstellungen","pp"),{anzahlGesamt,anzahlWaehlen,auswahlOffen:$("coEOffen").checked,updatedAt:serverTimestamp()},{merge:true});toast("Gespeichert.");closeModal();await render();}
- catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
-}
-async function coLadeKlasse(){
- const d=await ladeCheckoutDaten();
- const pool=coPool(d.checkouts,d.einst);
- const [students,ab,aw]=await Promise.all([getAllUsersForLernstand(),getDocs(collection(db,"checkoutAbgaben")),getDocs(collection(db,"checkoutAuswahl"))]);
- const abgaben={};ab.docs.forEach(x=>{const a=x.data();(abgaben[a.uid]=abgaben[a.uid]||{})[a.checkoutId]=a;});
- const auswahl={};aw.docs.forEach(x=>{auswahl[x.id]=x.data();});
- return{d,pool,students,abgaben,auswahl};
-}
-async function openCheckoutKlassenuebersicht(){
- if(!isTeacher())return;
- let k;try{k=await coLadeKlasse();}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
- const {pool,students,abgaben,auswahl,d}=k;
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 KURZARBEIT-ERSATZ · KLASSENÜBERSICHT</div><h2>Check-outs der Klasse</h2>
-  <p style="font-size:12px;color:var(--muted);margin-top:0">Markiert = von der Schülerin / dem Schüler für den Ersatz gewählt (${d.einst.anzahlWaehlen} aus ${d.einst.anzahlGesamt}).</p>
-  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th><th></th></tr></thead>
-  <tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
-   return`<tr><td>${esc(s.displayName||s.email||"")}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td><button class="secondary"onclick="coPdfErsatzSchuelerFuer('${s.uid}')">PDF</button></td></tr>`;}).join("")}</tbody></table></div>
-  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="coPdfErsatzKlasse()">PDF Klasse (alle)</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
-}
-// PDF mit dem Kurzarbeit-Ersatz EINER einzelnen Person – zum gezielten
-// Austeilen, ohne die ganze Klassen-PDF drucken zu müssen.
-async function coPdfErsatzSchuelerFuer(uid){
- if(!isTeacher())return;
- try{
-  const {pool,students,abgaben,auswahl,d}=await coLadeKlasse();
-  const s=students.find(x=>x.uid===uid);
-  const a=abgaben[uid]||{};
-  const w=new Set(auswahl[uid]?.ids||[]);
-  const e=auswahl[uid]?coErsatz([...w],a):null;
-  const tab=`<table><thead><tr><th>Check-out</th><th>Datum</th><th>Ergebnis</th><th>gewählt</th></tr></thead><tbody>${pool.map(c=>`<tr><td>${escPDF(c.titel)}</td><td>${coDatum(c.datum)}</td><td>${a[c.id]?.ausgewertet?npText(a[c.id].notenpunkte):"–"}</td><td>${w.has(c.id)?"[x]":""}</td></tr>`).join("")}</tbody></table>`;
-  openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs",`<div class="item"style="background:#f5f7f8"><strong>${escPDF(s?.displayName||s?.email||"")}</strong><div>${e?`Ø ${e.schnitt.toFixed(2).replace(".",",")} → <b>${npText(e.np)}</b> (${e.anzahl} gewählte Check-outs)`:"Noch keine Auswahl getroffen"}</div></div>${tab}`,`F12Sb · Pädagogik/Psychologie · ${d.einst.anzahlWaehlen} aus ${d.einst.anzahlGesamt}`);
- }catch(err){console.error(err);toast("PDF konnte nicht erstellt werden.");}
-}
-async function coPdfErsatzKlasse(){
- if(!isTeacher())return;
- try{
-  const {pool,students,abgaben,auswahl,d}=await coLadeKlasse();
-  const legende=`<div class="item">${pool.map((c,i)=>`${i+1}: ${escPDF(c.titel)} (${coDatum(c.datum)})`).join(" · ")}</div>`;
-  const tab=`<table><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th>${i+1}</th>`).join("")}<th>Ø Auswahl</th><th>Ersatznote</th></tr></thead><tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
-   return`<tr><td>${escPDF(s.displayName||s.email||"")}</td>${pool.map(c=>`<td>${a[c.id]?.ausgewertet?(w.has(c.id)?`<b>[${a[c.id].notenpunkte}]</b>`:a[c.id].notenpunkte):"–"}</td>`).join("")}<td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table>`;
-  openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs (Klasse)",legende+tab,`F12Sb · Pädagogik/Psychologie · [x] = gewählt · ${d.einst.anzahlWaehlen} aus ${d.einst.anzahlGesamt}`);
- }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
-}
-Object.assign(window,{coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
- openCheckoutTest,coAntwort,coAbgeben,openCheckoutMeinErgebnis,openCheckoutErgebnisse,openCheckoutSchuelerErgebnis,coPdfSchueler,coPdfKlasse,
- openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfErsatzSchuelerFuer});
-
-// ---- Eigene Seite: Alternativer Leistungsnachweis (Sidebar-Eintrag) ----
-async function renderAlternativerLeistungsnachweis(){
- const d=await ladeCheckoutDaten();
- return`${pageHead("ALTERNATIVER LEISTUNGSNACHWEIS","Check-out · K-Prim-Test","Ersetzt die 2. Kurzarbeit in Pädagogik/Psychologie: Am Ende eines Lernbereichs schaltet deine Lehrkraft einen Check-out live – eine Fallvignette mit K-Prim-Aufgaben.")}
- ${checkoutLiveBannerHTML(d)}
- ${checkoutSektionHTML(d)}`;
-}
-window.renderAlternativerLeistungsnachweis=renderAlternativerLeistungsnachweis;
-
 function combinedTimeline(fach){
  const wochen=(LEHRPLAN_WOCHEN[fach]||[]).map(w=>({...w,kind:"woche"}));
- return [...wochen].sort((a,b)=>a.start.localeCompare(b.start));
+ const praktika=fach==="paedagogik"?PRAKTIKUMSPHASEN.map(p=>({...p,kind:"praktikum"})):[];
+ return [...wochen,...praktika].sort((a,b)=>a.start.localeCompare(b.start));
 }
 
 // ---- Motivierende Kurz-Verstärkung (variable Quote) ----
@@ -2245,13 +1704,13 @@ async function saveLehrplanAuftrag(fach,wocheId){
  const payload={wocheId,fach,titel,beschreibung,updatedAt:serverTimestamp(),updatedBy:currentUser.uid};
  if(existing)await updateDoc(doc(db,"lehrplanAuftraege",existing.id),payload);
  else{payload.createdAt=serverTimestamp();await addDoc(collection(db,"lehrplanAuftraege"),payload)}
- await openWocheDetail(fach,wocheId);
+ await reopenDetail(fach,wocheId);
  toast("Arbeitsauftrag gespeichert.");
  }catch(e){console.error("Auftrag speichern:",e);toast("Konnte nicht gespeichert werden.")}
 }
 async function deleteLehrplanAuftrag(id,fach,wocheId){
  if(!confirm("Diesen Arbeitsauftrag wirklich löschen?"))return;
- try{await deleteDoc(doc(db,"lehrplanAuftraege",id));await openWocheDetail(fach,wocheId);toast("Arbeitsauftrag gelöscht.")}
+ try{await deleteDoc(doc(db,"lehrplanAuftraege",id));await reopenDetail(fach,wocheId);toast("Arbeitsauftrag gelöscht.")}
  catch(e){console.error(e);toast("Konnte nicht gelöscht werden.")}
 }
 
@@ -2275,13 +1734,13 @@ async function addLehrplanMaterial(fach,wocheId){
  if(!titel){toast("Bitte einen Titel eingeben.");return}
  try{
  await addDoc(collection(db,"lehrplanMaterialien"),{wocheId,fach,kategorie,titel,url,createdBy:currentUser.uid,createdAt:serverTimestamp()});
- await openWocheDetail(fach,wocheId);
+ await reopenDetail(fach,wocheId);
  toast("Material hinzugefügt.");
  }catch(e){console.error("Material speichern:",e);toast("Konnte nicht gespeichert werden.")}
 }
 async function deleteLehrplanMaterial(id,fach,wocheId){
  if(!confirm("Dieses Material wirklich löschen?"))return;
- try{await deleteDoc(doc(db,"lehrplanMaterialien",id));await openWocheDetail(fach,wocheId);toast("Gelöscht.")}
+ try{await deleteDoc(doc(db,"lehrplanMaterialien",id));await reopenDetail(fach,wocheId);toast("Gelöscht.")}
  catch(e){console.error(e);toast("Konnte nicht gelöscht werden.")}
 }
 function materialEmbedHTML(m){
@@ -2310,11 +1769,27 @@ async function createLehrplanTeam(fach,wocheId){
  const teamName=$("neuTeamName")?.value.trim();
  if(!teamName){toast("Bitte einen Team-Namen eingeben.");return}
  try{
- await addDoc(collection(db,"lehrplanTeams"),{wocheId,fach,teamName,mitgliederUids:[currentUser.uid],mitgliederNamen:[profile?.displayName||"Ich"],createdBy:currentUser.uid,createdAt:serverTimestamp()});
- await openWocheDetail(fach,wocheId);
+ await addDoc(collection(db,"lehrplanTeams"),{wocheId:teamAnchorFor(wocheId),fach,teamName,mitgliederUids:[currentUser.uid],mitgliederNamen:[profile?.displayName||"Ich"],createdBy:currentUser.uid,createdAt:serverTimestamp()});
+ await reopenDetail(fach,wocheId);
  toast("Team erstellt – du bist Mitglied!");
   showMotivationsBild(false,"team");
  }catch(e){console.error(e);toast("Konnte nicht erstellt werden.")}
+}
+// Projekt-Meilensteine: werden direkt am Team-Dokument gespeichert
+// (meilensteinIndex = Anzahl bereits erreichter Meilensteine, 0 = noch keiner).
+async function setTeamMeilenstein(teamId,index,fach,wocheId){
+ if(!isTeacher()&&!MEILENSTEINE_SCHUELER_DUERFEN_ABHAKEN){toast("Nur Lehrkräfte können den Projekt-Fortschritt setzen.");return}
+ try{
+ await updateDoc(doc(db,"lehrplanTeams",teamId),{meilensteinIndex:index,meilensteinUpdatedAt:serverTimestamp()});
+ toast("Fortschritt aktualisiert.");
+ await reopenDetail(fach,wocheId);
+ }catch(e){console.error("Meilenstein setzen:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+window.setTeamMeilenstein=setTeamMeilenstein;
+function meilensteinAmpelFarbe(index,gesamt){
+ if(index<=0)return"#c7d0d6";
+ if(index>=gesamt)return"#3fa66a";
+ return"#e0a324";
 }
 async function joinLehrplanTeam(teamId,fach,wocheId){
  try{
@@ -2324,7 +1799,7 @@ async function joinLehrplanTeam(teamId,fach,wocheId){
  const d=snap.data();
  if((d.mitgliederUids||[]).includes(currentUser.uid)){toast("Du bist schon in diesem Team.");return}
  await updateDoc(ref,{mitgliederUids:[...(d.mitgliederUids||[]),currentUser.uid],mitgliederNamen:[...(d.mitgliederNamen||[]),profile?.displayName||"Mitglied"]});
- await openWocheDetail(fach,wocheId);
+ await reopenDetail(fach,wocheId);
  toast("Team beigetreten!");
   showMotivationsBild(false,"team");
  }catch(e){console.error(e);toast("Konnte nicht beitreten.")}
@@ -2339,15 +1814,273 @@ async function leaveLehrplanTeam(teamId,fach,wocheId){
  const idx=uids.indexOf(currentUser.uid);
  if(idx>-1){uids.splice(idx,1);namen.splice(idx,1)}
  await updateDoc(ref,{mitgliederUids:uids,mitgliederNamen:namen});
- await openWocheDetail(fach,wocheId);
+ await reopenDetail(fach,wocheId);
  toast("Team verlassen.");
  }catch(e){console.error(e);toast("Konnte nicht verlassen werden.")}
 }
 async function deleteLehrplanTeam(teamId,fach,wocheId){
  if(!confirm("Dieses Team wirklich auflösen?"))return;
- try{await deleteDoc(doc(db,"lehrplanTeams",teamId));await openWocheDetail(fach,wocheId);toast("Team aufgelöst.")}
+ try{await deleteDoc(doc(db,"lehrplanTeams",teamId));await reopenDetail(fach,wocheId);toast("Team aufgelöst.")}
  catch(e){console.error(e);toast("Konnte nicht gelöscht werden.")}
 }
+
+
+// ============================================================
+// PROJEKT-MEILENSTEINE MIT PERSÖNLICHEN BEITRÄGEN
+// ------------------------------------------------------------
+// • Meilenstein 0 („Team gebildet") gilt, sobald das Team existiert.
+// • Jeder weitere Meilenstein: JEDES Teammitglied trägt seinen eigenen
+//   Beitrag ein (Text, optional Link/Datei). Erst wenn alle Mitglieder
+//   etwas eingetragen haben, ist der Meilenstein erreicht.
+// • Meilensteine aus ph.bestaetigung brauchen zusätzlich das OK der
+//   Lehrkraft (Bestätigen oder mit Kommentar zurückgeben).
+// Beiträge: Collection „meilensteinBeitraege", ID <teamId>_<index>_<uid>.
+// Prüfung durch die Lehrkraft: Feld „msPruefung" am Team-Dokument.
+// ============================================================
+let msKontext=null,pgDaten=null;
+async function getMeilensteinBeitraege(teamIds){
+ const ids=(teamIds||[]).filter(Boolean);
+ if(!ids.length)return[];
+ const out=[];
+ try{
+  for(let i=0;i<ids.length;i+=10){
+   const snap=await getDocs(query(collection(db,"meilensteinBeitraege"),where("teamId","in",ids.slice(i,i+10))));
+   snap.docs.forEach(d=>out.push({id:d.id,...d.data()}));
+  }
+ }catch(e){console.error("Meilenstein-Beiträge laden:",e);}
+ return out;
+}
+function tsSek(t){return t?.seconds||0;}
+function msBrauchtBestaetigung(ph,i){return(ph.bestaetigung||[]).includes(i);}
+function msStatus(ph,team,beitraege,i){
+ if(!team)return{zustand:"offen",fehlend:[],beitraege:[]};
+ if(i===0)return{zustand:"erreicht",fehlend:[],beitraege:[],auto:true};
+ const uids=team.mitgliederUids||[],namen=team.mitgliederNamen||[];
+ const bs=(beitraege||[]).filter(b=>b.teamId===team.id&&Number(b.index)===i&&uids.includes(b.uid));
+ const fehlend=uids.map((u,k)=>({uid:u,name:namen[k]||"Mitglied"})).filter(m=>!bs.some(b=>b.uid===m.uid));
+ const pr=(team.msPruefung||{})[i]||null;
+ let zustand;
+ if(fehlend.length)zustand="offen";
+ else if(!msBrauchtBestaetigung(ph,i))zustand="erreicht";
+ else if(pr?.s==="ok")zustand="erreicht";
+ else if(pr?.s==="zurueck"&&!bs.some(b=>tsSek(b.updatedAt)>tsSek(pr.at)))zustand="zurueck";
+ else zustand="wartet";
+ return{zustand,fehlend,beitraege:bs,pruefung:pr};
+}
+function msErreichtAnzahl(ph,team,beitraege){
+ if(!team)return 0;
+ return ph.meilensteine.filter((m,i)=>msStatus(ph,team,beitraege,i).zustand==="erreicht").length;
+}
+function msEigeneBeitraege(ph,team,beitraege,uid){
+ const g=Math.max(0,ph.meilensteine.length-1);
+ if(!team)return{n:0,g};
+ return{n:ph.meilensteine.filter((m,i)=>i>0&&(beitraege||[]).some(b=>b.teamId===team.id&&Number(b.index)===i&&b.uid===uid)).length,g};
+}
+function msNaechster(ph,team,beitraege){
+ for(let i=0;i<ph.meilensteine.length;i++){const st=msStatus(ph,team,beitraege,i);if(st.zustand!=="erreicht")return{i,st};}
+ return null;
+}
+const MS_ZUSTAND={
+ erreicht:{t:"erreicht",f:"#3fa66a",i:"✓"},
+ wartet:{t:"alle Beiträge da – wartet auf Bestätigung der Lehrkraft",f:"#e0a324",i:"⏳"},
+ zurueck:{t:"von der Lehrkraft zurückgegeben – bitte überarbeiten",f:"#d9534f",i:"↩"},
+ offen:{t:"offen",f:"#9fb0bd",i:"○"}
+};
+function msLinksHTML(b){
+ return`${b.link?` <a href="${esc(b.link)}"target="_blank"rel="noopener">Link ↗</a>`:""}${b.dateiUrl?` <a href="${esc(b.dateiUrl)}"target="_blank"rel="noopener">${esc(b.dateiName||"Datei")} ↗</a>`:""}`;
+}
+// Liste aller Meilensteine eines Teams. ansicht bestimmt, wohin nach dem
+// Speichern zurückgesprungen wird ("seite" | "modal" | "gesamtcheck" | "schueler").
+function msListeHTML(ph,team,beitraege,ansicht="seite",fokusUid=null){
+ if(!team)return"";
+ const c=ppFarbe(ph),ich=currentUser?.uid,lehrer=isTeacher();
+ const imTeam=(team.mitgliederUids||[]).includes(ich);
+ return`<div class="ms-liste">${ph.meilensteine.map((m,i)=>{
+  const st=msStatus(ph,team,beitraege,i),Z=MS_ZUSTAND[st.zustand];
+  const meiner=st.beitraege.find(b=>b.uid===ich);
+  const bestaetigen=msBrauchtBestaetigung(ph,i);
+  const personen=i>0?(team.mitgliederUids||[]).map((u,k)=>{
+   const b=st.beitraege.find(x=>x.uid===u);
+   return`<span class="ms-person${b?" ok":""}${fokusUid===u?" fokus":""}"title="${esc(b?b.text:"noch kein Beitrag")}">${b?"✓":"○"} ${esc((team.mitgliederNamen||[])[k]||"Mitglied")}</span>`;
+  }).join(""):"";
+  const lehrerBeitraege=lehrer&&st.beitraege.length?`<div class="ms-beitraege">${st.beitraege.map(b=>`<div${fokusUid===b.uid?' class="fokus"':""}><b>${esc(b.name||"")}:</b> ${esc(b.text||"")}${msLinksHTML(b)}</div>`).join("")}</div>`:"";
+  const lehrerAktion=lehrer&&bestaetigen&&i>0&&!st.fehlend.length?`
+    ${st.zustand!=="erreicht"?`<button class="primary"onclick="msPruefen('${ph.id}','${team.id}',${i},true,'${ansicht}')">✓ Bestätigen</button>`:""}
+    ${st.zustand!=="zurueck"?`<button class="secondary"onclick="msPruefen('${ph.id}','${team.id}',${i},false,'${ansicht}')">↩ Zurückgeben</button>`:""}`:"";
+  const schuelerAktion=!lehrer&&imTeam&&i>0?`<button class="${meiner?"secondary":"primary"}"onclick="openMsBeitrag('${ph.id}','${team.id}',${i},'${ansicht}')">${meiner?"Beitrag ändern":"Mein Beitrag"}</button>`:"";
+  return`<div class="ms-zeile ms-${st.zustand}"style="--c:${c}">
+   <span class="ms-icon"style="background:${st.zustand==="erreicht"?c:"#fff"};border-color:${st.zustand==="erreicht"?c:Z.f};color:${st.zustand==="erreicht"?"#fff":Z.f}">${Z.i}</span>
+   <div class="ms-body">
+    <div class="ms-kopf"><b>${esc(m)}</b>${bestaetigen?`<span class="ms-tag">Lehrkraft bestätigt</span>`:""}</div>
+    <small class="ms-status"style="color:${Z.f}">${i===0?"erreicht mit der Teamgründung":esc(Z.t)}${st.zustand==="offen"&&st.fehlend.length&&i>0?` · es fehlt noch: ${esc(st.fehlend.map(f=>f.name).join(", "))}`:""}</small>
+    ${personen?`<div class="ms-personen">${personen}</div>`:""}
+    ${st.pruefung?.kommentar&&st.zustand==="zurueck"?`<div class="ms-kommentar"><b>Rückmeldung:</b> ${esc(st.pruefung.kommentar)}</div>`:""}
+    ${!lehrer&&meiner?`<div class="ms-meiner"><b>Dein Beitrag:</b> ${esc(meiner.text)}${msLinksHTML(meiner)}</div>`:""}
+    ${lehrerBeitraege}
+   </div>
+   <div class="ms-aktion">${schuelerAktion}${lehrerAktion}</div>
+  </div>`;
+ }).join("")}</div>`;
+}
+async function msZurueck(){
+ const k=msKontext||{};
+ if(k.ansicht==="modal")return openMeilensteinModal(k.phId,k.teamId,k.zurueck);
+ if(k.ansicht==="gesamtcheck"){pgDaten=null;return openProjektGesamtcheck();}
+ if(k.ansicht==="schueler"){pgDaten=null;return openProjektSchuelerDetail(k.uid,k.phId);}
+ closeModal();return render();
+}
+async function openMsBeitrag(phId,teamId,i,ansicht){
+ const ph=projektPhaseById(phId);if(!ph)return;
+ msKontext={...(msKontext||{}),phId,teamId,ansicht:ansicht||msKontext?.ansicht||"seite"};
+ let b=null;
+ try{const s=await getDoc(doc(db,"meilensteinBeitraege",`${teamId}_${i}_${currentUser.uid}`));b=s.exists()?s.data():null;}catch(e){}
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker"style="color:${ppFarbe(ph)}">${esc(ph.lb)} · PROJEKT-MEILENSTEIN ${i+1}/${ph.meilensteine.length}</div>
+  <h2>${esc(ph.meilensteine[i])}</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:0">Was hast <b>du</b> zu diesem Meilenstein beigetragen? Der Meilenstein gilt erst als erreicht, wenn alle aus eurem Team ihren Beitrag eingetragen haben${msBrauchtBestaetigung(ph,i)?" und eure Lehrkraft ihn bestätigt hat":""}.</p>
+  <div class="form">
+   <label>Mein Beitrag<textarea id="msText"rows="4"maxlength="1500"placeholder="z. B. Ich habe die Hypothese mit UV und AV formuliert und die Kontrollgruppe geplant.">${esc(b?.text||"")}</textarea></label>
+   <label>Link (optional)<input id="msLink"type="url"value="${esc(b?.link||"")}"placeholder="https://…"></label>
+   <label>Datei (optional, max. 15 MB)<input id="msDatei"type="file"></label>
+   ${b?.dateiUrl?`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a class="pill"href="${esc(b.dateiUrl)}"target="_blank"rel="noopener">${esc(b.dateiName||"Datei")} ↗</a><label class="check"style="font-size:12px"><input id="msDateiWeg"type="checkbox"> Datei löschen</label></div>`:""}
+   <div class="form-actions">
+    <button class="secondary"onclick="msZurueck()">Abbrechen</button>
+    ${b?`<button class="secondary"onclick="msBeitragLoeschen('${phId}','${teamId}',${i})">Beitrag löschen</button>`:""}
+    <button class="primary"onclick="msBeitragSpeichern('${phId}','${teamId}',${i})">Beitrag speichern</button>
+   </div>
+  </div>`);
+}
+async function msBeitragSpeichern(phId,teamId,i){
+ const text=$("msText")?.value.trim()||"";
+ let link=$("msLink")?.value.trim()||"";
+ const file=$("msDatei")?.files?.[0]||null;
+ const weg=$("msDateiWeg")?.checked;
+ if(!text){toast("Bitte kurz beschreiben, was du beigetragen hast.");return}
+ if(link&&!/^https?:\/\//i.test(link))link="https://"+link;
+ const ref=doc(db,"meilensteinBeitraege",`${teamId}_${i}_${currentUser.uid}`);
+ try{
+  const alt=await getDoc(ref);const altDaten=alt.exists()?alt.data():{};
+  const patch={teamId,phaseId:phId,index:i,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",text,link,updatedAt:serverTimestamp()};
+  let altUrlLoeschen="";
+  if(file){toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(file,`meilensteinBeitraege/${teamId}`);patch.dateiUrl=up.url;patch.dateiName=up.name;altUrlLoeschen=altDaten.dateiUrl||"";}
+  else if(weg){patch.dateiUrl="";patch.dateiName="";altUrlLoeschen=altDaten.dateiUrl||"";}
+  await setDoc(ref,patch,{merge:true});
+  if(altUrlLoeschen)await deleteCampusDatei(altUrlLoeschen);
+  toast("Beitrag gespeichert.");showMotivationsBild(false,"abgabe");
+  await msZurueck();
+ }catch(e){console.error("Meilenstein-Beitrag:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Fehler: "+(e?.message||e));}
+}
+async function msBeitragLoeschen(phId,teamId,i){
+ if(!confirm("Deinen Beitrag zu diesem Meilenstein löschen?"))return;
+ const ref=doc(db,"meilensteinBeitraege",`${teamId}_${i}_${currentUser.uid}`);
+ try{const alt=await getDoc(ref);const url=alt.exists()?alt.data().dateiUrl:"";await deleteDoc(ref);await deleteCampusDatei(url);toast("Beitrag gelöscht.");await msZurueck();}
+ catch(e){console.error(e);toast("Konnte nicht gelöscht werden.");}
+}
+async function msPruefen(phId,teamId,i,ok,ansicht){
+ if(!isTeacher())return;
+ let kommentar="";
+ if(!ok){const r=prompt("Rückmeldung an das Team (was fehlt noch?):","");if(r===null)return;kommentar=r.trim();}
+ msKontext={...(msKontext||{}),phId,teamId,ansicht:ansicht||msKontext?.ansicht||"seite"};
+ try{
+  await updateDoc(doc(db,"lehrplanTeams",teamId),{[`msPruefung.${i}`]:{s:ok?"ok":"zurueck",kommentar,at:serverTimestamp(),von:currentUser.uid}});
+  toast(ok?"Meilenstein bestätigt.":"Meilenstein zurückgegeben.");
+  await msZurueck();
+ }catch(e){console.error("Meilenstein prüfen:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+// Eigenes Fenster mit allen Meilensteinen eines Teams (aus der Wochenansicht).
+async function openMeilensteinModal(phId,teamId,zurueck){
+ const ph=projektPhaseById(phId);if(!ph)return;
+ let team=null;
+ try{const s=await getDoc(doc(db,"lehrplanTeams",teamId));team=s.exists()?{id:s.id,...s.data()}:null;}catch(e){}
+ if(!team){toast("Team nicht gefunden.");return}
+ msKontext={phId,teamId,ansicht:"modal",zurueck:zurueck||null};
+ const bs=await getMeilensteinBeitraege([teamId]);
+ const eig=msEigeneBeitraege(ph,team,bs,currentUser.uid);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker"style="color:${ppFarbe(ph)}">${esc(ph.lb)} · PROJEKT-MEILENSTEINE · TEAM „${esc(team.teamName||"")}“</div>
+  <h2>${esc(ph.titel)}</h2>
+  <p style="font-size:13px;color:var(--muted);margin-top:0">Team-Meilensteine erreicht: <b>${msErreichtAnzahl(ph,team,bs)}/${ph.meilensteine.length}</b>${!isTeacher()&&(team.mitgliederUids||[]).includes(currentUser.uid)?` · deine Beiträge: <b>${eig.n}/${eig.g}</b>`:""}</p>
+  ${msListeHTML(ph,team,bs,"modal")}
+  <div class="form-actions"style="margin-top:14px">${zurueck?`<button class="secondary"onclick="reopenDetail('${zurueck.fach}','${zurueck.woche}')">← Zurück</button>`:""}<button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+window.openMsBeitrag=openMsBeitrag;window.msBeitragSpeichern=msBeitragSpeichern;window.msBeitragLoeschen=msBeitragLoeschen;
+window.msPruefen=msPruefen;window.msZurueck=msZurueck;window.openMeilensteinModal=openMeilensteinModal;
+
+// ---- Projekt-Gesamtcheck (Lehrkraft) ----
+async function ladeProjektCheckDaten(){
+ const students=await getAllUsersForLernstand();
+ const teams=[];
+ await Promise.all(PROJEKT_PHASEN.map(async ph=>{(await getLehrplanTeams(ph.projektWocheId)).forEach(t=>teams.push({...t,phaseId:ph.id}));}));
+ const beitraege=await getMeilensteinBeitraege(teams.map(t=>t.id));
+ const ids=PROJEKT_PHASEN.flatMap(p=>p.notwendigeWochen);
+ let fortschritt=[];
+ try{const s=await getDocs(query(collection(db,"lehrplanFortschritt"),where("wocheId","in",ids)));fortschritt=s.docs.map(d=>d.data());}catch(e){console.error(e);}
+ return{students,teams,beitraege,fortschritt};
+}
+function pgZelle(d,s,ph){
+ const team=d.teams.find(t=>t.phaseId===ph.id&&(t.mitgliederUids||[]).includes(s.uid))||null;
+ const inh=ph.notwendigeWochen.filter(id=>d.fortschritt.some(f=>f.uid===s.uid&&f.wocheId===id&&f.abgeschlossen)).length;
+ const eig=msEigeneBeitraege(ph,team,d.beitraege,s.uid);
+ const ms=msErreichtAnzahl(ph,team,d.beitraege);
+ return{team,inh,inhG:ph.notwendigeWochen.length,eig,ms,msG:ph.meilensteine.length};
+}
+async function openProjektGesamtcheck(){
+ if(!isTeacher()){toast("Nur Lehrkräfte können den Projekt-Gesamtcheck öffnen.");return}
+ try{pgDaten=await ladeProjektCheckDaten();}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
+ const d=pgDaten,heute=new Date().toISOString().slice(0,10);
+ // Warteschlange: Meilensteine, die auf Bestätigung warten
+ const warten=[];
+ PROJEKT_PHASEN.forEach(ph=>d.teams.filter(t=>t.phaseId===ph.id).forEach(t=>(ph.bestaetigung||[]).forEach(i=>{const st=msStatus(ph,t,d.beitraege,i);if(st.zustand==="wartet")warten.push({ph,t,i,st});})));
+ const rows=d.students.map(s=>`<tr><td style="padding:8px">${esc(s.displayName||s.email||"Schüler/in")}</td>${PROJEKT_PHASEN.map(ph=>{
+  const z=pgZelle(d,s,ph);
+  if(ph.einstieg){
+   const sch=ppEinstiegSchritte(ph,id=>d.fortschritt.find(x=>x.uid===s.uid&&x.wocheId===id));
+   const n=sch.filter(x=>x.done).length,stundeOk=sch.find(x=>x.art==="stunde")?.done;
+   const farbe=n===sch.length?"#3fa66a":n>0?"#e0a324":"#c7d0d6";
+   return`<td class="pg-zelle"onclick="openProjektSchuelerDetail('${s.uid}','${ph.id}')"title="Details öffnen"><span class="ampel-dot"style="background:${farbe}"></span>
+   <small>${n}/${sch.length} Schritte<br>Stunde ${stundeOk?"gemacht ✓":"offen"}</small></td>`;
+  }
+  if(heute<ph.projektStart&&!z.team&&!z.inh)return`<td class="pg-zelle kommend">–</td>`;
+  const q=Math.min(z.inh/z.inhG,z.eig.g?z.eig.n/z.eig.g:1);
+  const farbe=!z.team?"#c7d0d6":q>=1&&z.ms>=z.msG?"#3fa66a":q>0||z.ms>1?"#e0a324":"#c7d0d6";
+  return`<td class="pg-zelle"onclick="openProjektSchuelerDetail('${s.uid}','${ph.id}')"title="Details öffnen"><span class="ampel-dot"style="background:${farbe}"></span>
+   <small>Inhalte ${z.inh}/${z.inhG}<br>Beiträge ${z.eig.n}/${z.eig.g}<br>Team ${z.team?`${z.ms}/${z.msG}`:"–"}</small></td>`;}).join("")}</tr>`).join("");
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🔬 PROJEKT-GESAMTCHECK · NUR LEHRKRÄFTE</div>
+  <h2>Alle vier Projekte auf einen Blick</h2>
+  <h3 style="margin:10px 0 6px">⏳ Wartet auf deine Bestätigung (${warten.length})</h3>
+  <div class="list">${warten.map(w=>`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:6px">
+   <div><strong style="color:${ppFarbe(w.ph)}">${esc(w.ph.lb)} · Team „${esc(w.t.teamName||"")}“</strong><small>Meilenstein: ${esc(w.ph.meilensteine[w.i])}</small></div>
+   <div class="ms-beitraege">${w.st.beitraege.map(b=>`<div><b>${esc(b.name||"")}:</b> ${esc(b.text||"")}${msLinksHTML(b)}</div>`).join("")}</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary"onclick="msPruefen('${w.ph.id}','${w.t.id}',${w.i},true,'gesamtcheck')">✓ Bestätigen</button><button class="secondary"onclick="msPruefen('${w.ph.id}','${w.t.id}',${w.i},false,'gesamtcheck')">↩ Zurückgeben</button></div>
+  </div>`).join("")||`<div class="empty">Gerade wartet nichts auf eine Bestätigung.</div>`}</div>
+  <h3 style="margin:18px 0 4px">Stand je Schüler:in</h3>
+  <p style="color:var(--muted);font-size:12px;margin-top:0">Inhalte = persönlich abgeschlossene Projektinhalte · Beiträge = eigene Meilenstein-Beiträge · Team = erreichte Team-Meilensteine. Zelle antippen für Details.</p>
+  <div style="overflow-x:auto"><table class="ls-matrix pg-matrix">
+   <thead><tr><th>Schüler:in</th>${PROJEKT_PHASEN.map(ph=>`<th style="color:${ppFarbe(ph)}">${esc(ph.lb)}</th>`).join("")}</tr></thead>
+   <tbody>${rows||`<tr><td colspan="5">Keine Schüler:innen gefunden.</td></tr>`}</tbody>
+  </table></div>
+  <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+window.openProjektGesamtcheck=openProjektGesamtcheck;
+async function openProjektSchuelerDetail(uid,phId){
+ if(!isTeacher())return;
+ if(!pgDaten){try{pgDaten=await ladeProjektCheckDaten();}catch(e){toast("Konnte nicht geladen werden.");return}}
+ const d=pgDaten,ph=projektPhaseById(phId),s=d.students.find(x=>x.uid===uid);
+ if(!ph||!s)return;
+ const z=pgZelle(d,s,ph);
+ msKontext={phId,teamId:z.team?.id,ansicht:"schueler",uid};
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker"style="color:${ppFarbe(ph)}">${esc(ph.lb)} · PROJEKT · ${esc(s.displayName||s.email||"")}</div>
+  <h2>${esc(ph.titel)}</h2>
+  <h3 class="apt-h3">${ph.einstieg?"Einstiegsinhalte (persönlich)":"Projektinhalte (persönlich)"}</h3>
+  <div class="list">${ph.notwendigeWochen.map(id=>{const e=lehrplanWocheById("paedagogik",id);const f=d.fortschritt.find(x=>x.uid===uid&&x.wocheId===id)||{};
+   return`<div class="list-item"><div><strong>${f.abgeschlossen?"✓ ":""}${esc(e?.thema||id)}</strong><small>${f.abgeschlossen?"abgeschlossen":Object.values(f.zieleErfuellt||{}).some(Boolean)?"in Arbeit":"noch offen"}</small></div></div>`;}).join("")}</div>
+  ${ph.einstieg?(()=>{const f=d.fortschritt.find(x=>x.uid===uid&&x.wocheId===ph.stundeWocheId)||{};return`<h3 class="apt-h3">Interaktive Stunde</h3><div class="list"><div class="list-item"><div><strong>${f.experimentErledigt?"✓ Stunde „Das Experiment“ abgeschlossen":"Stunde noch nicht abgeschlossen"}</strong>${f.experimentAm?.seconds?`<small>am ${esc(new Date(f.experimentAm.seconds*1000).toLocaleDateString("de-DE"))}</small>`:""}</div></div></div>`;})():`<h3 class="apt-h3">Meilensteine ${z.team?`· Team „${esc(z.team.teamName||"")}“ · eigene Beiträge ${z.eig.n}/${z.eig.g}`:""}</h3>
+  ${z.team?msListeHTML(ph,z.team,d.beitraege,"schueler",uid):`<div class="empty">Noch in keinem Team.</div>`}`}
+  <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="openProjektGesamtcheck()">← Zurück zum Gesamtcheck</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+window.openProjektSchuelerDetail=openProjektSchuelerDetail;
 
 // ---- Produkte/Ergebnisse je Woche --------------------------------------
 async function getLehrplanProdukte(wocheId){
@@ -2370,13 +2103,23 @@ async function addLehrplanProdukt(fach,wocheId){
  dateiUrl=up.url;dateiName=up.name;
  }
  await addDoc(collection(db,"lehrplanProdukte"),{wocheId,fach,uid:currentUser.uid,name:profile?.displayName||"Campus-Mitglied",titel,inhalt,dateiUrl,dateiName,createdAt:serverTimestamp()});
- await openWocheDetail(fach,wocheId);
+ if(lehrplanWocheById(fach,wocheId)?.typ==="apt"&&!isTeacher()){await aptSetzen(wocheId,{produktHochgeladen:true},{tab:"produkt"});return}
+ await reopenDetail(fach,wocheId);
  showMotivationsBild(false,"abgabe");
  }catch(e){console.error("Lernprodukt hochladen:",e);toast("Fehler: "+(e?.message||e));}
 }
 async function deleteLehrplanProdukt(id,fach,wocheId){
  if(!confirm("Dieses Produkt wirklich löschen?"))return;
- try{await deleteDoc(doc(db,"lehrplanProdukte",id));await openWocheDetail(fach,wocheId);toast("Gelöscht.")}
+ try{
+ const alt=await getDoc(doc(db,"lehrplanProdukte",id));
+ const altUrl=alt.exists()?alt.data().dateiUrl:"";
+ await deleteDoc(doc(db,"lehrplanProdukte",id));
+ await deleteCampusDatei(altUrl);
+ if(lehrplanWocheById(fach,wocheId)?.typ==="apt"&&!isTeacher()){
+  const rest=(await getLehrplanProdukte(wocheId)).filter(p=>p.uid===currentUser.uid);
+  if(!rest.length){await aptSetzen(wocheId,{produktHochgeladen:false,vorkorrekturUmgesetzt:false},{tab:"produkt"});toast("Gelöscht.");return}
+ }
+ await reopenDetail(fach,wocheId);toast("Gelöscht.")}
  catch(e){console.error(e);toast("Konnte nicht gelöscht werden.")}
 }
 
@@ -2398,7 +2141,7 @@ async function toggleZielErfuellt(fach,wocheId,zielId,erfuellt){
  data.zieleErfuellt[zielId]=erfuellt;
  data.updatedAt=serverTimestamp();
  await setDoc(ref,data);
- await openWocheDetail(fach,wocheId);
+ await reopenDetail(fach,wocheId);
  if(erfuellt)showMotivationsBild(false,"haken","ziel:"+wocheId+":"+zielId);
  }catch(e){console.error("Ziel-Status:",e);toast("Konnte nicht gespeichert werden.")}
 }
@@ -2410,7 +2153,7 @@ async function toggleAuftragGelesen(fach,wocheId,erledigt){
  data.auftragGelesen=erledigt;
  data.updatedAt=serverTimestamp();
  await setDoc(ref,data);
- await openWocheDetail(fach,wocheId);
+ await reopenDetail(fach,wocheId);
  if(erledigt)showMotivationsBild(false,"haken","auftrag:"+wocheId);
  }catch(e){console.error("Auftrag-gelesen-Status:",e);toast("Konnte nicht gespeichert werden.")}
 }
@@ -2422,11 +2165,367 @@ async function toggleMaterialErhalten(fach,wocheId,erledigt){
  data.materialErhalten=erledigt;
  data.updatedAt=serverTimestamp();
  await setDoc(ref,data);
- await openWocheDetail(fach,wocheId);
+ await reopenDetail(fach,wocheId);
  if(erledigt)showMotivationsBild(false,"haken","material:"+wocheId);
  }catch(e){console.error("Material-erhalten-Status:",e);toast("Konnte nicht gespeichert werden.")}
 }
 window.toggleAuftragGelesen=toggleAuftragGelesen;
+
+// ---- Basis-Check: 2-3 kurze Fragen direkt nach dem Material, damit früh
+// sichtbar wird, ob die Grundidee verstanden wurde (nicht nur "gelesen"). ----
+async function getBasischeckFragen(wocheId){
+ try{
+ const snap=await getDoc(doc(db,"basischeckFragen",wocheId));
+ return snap.exists()?(snap.data().fragen||[]):[];
+ }catch(e){console.error("Basis-Check-Fragen laden:",e);return[]}
+}
+function basischeckTypToggle(i){
+ const typ=$(`bcTyp${i}`)?.value;
+ const mc=$(`bcMcBereich${i}`),kp=$(`bcKprimBereich${i}`),of=$(`bcOffenBereich${i}`);
+ if(mc)mc.style.display=typ==="mc"?"block":"none";
+ if(kp)kp.style.display=typ==="kprim"?"block":"none";
+ if(of)of.style.display=typ==="offen"?"block":"none";
+}
+window.basischeckTypToggle=basischeckTypToggle;
+async function saveBasischeckFragen(fach,wocheId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können Basis-Check-Fragen anlegen.");return}
+ const fragen=[];
+ for(let i=0;i<3;i++){
+ const text=$(`bcFrage${i}`)?.value.trim();
+ if(!text)continue;
+ const typ=$(`bcTyp${i}`)?.value||"mc";
+ if(typ==="mc"){
+ const opts=[0,1,2].map(j=>$(`bcOpt${i}_${j}`)?.value.trim()).filter(Boolean);
+ const richtig=parseInt($(`bcRichtig${i}`)?.value,10);
+ if(opts.length<2||!Number.isFinite(richtig))continue;
+ fragen.push({typ,text,optionen:opts,richtig});
+ }else if(typ==="kprim"){
+ const statements=[0,1,2,3].map(j=>({
+ text:$(`bcStatement${i}_${j}`)?.value.trim()||"",
+ correct:$(`bcStatementRichtig${i}_${j}`)?.value==="true"
+ })).filter(s=>s.text);
+ if(statements.length<2)continue;
+ const vignette=$(`bcVignette${i}`)?.value.trim()||"";
+ fragen.push({typ,text,statements,...(vignette?{vignette}:{})});
+ }else if(typ==="offen"){
+ const stichworte=($(`bcStichworte${i}`)?.value||"").split(",").map(s=>s.trim()).filter(Boolean);
+ if(!stichworte.length)continue;
+ fragen.push({typ,text,stichworte});
+ }
+ }
+ if(!fragen.length){toast("Bitte mindestens eine vollständige Frage eingeben.");return}
+ try{
+ await setDoc(doc(db,"basischeckFragen",wocheId),{wocheId,fach,fragen,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
+ toast("Basis-Check gespeichert.");
+ await reopenDetail(fach,wocheId);
+ }catch(e){console.error("Basis-Check speichern:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+window.saveBasischeckFragen=saveBasischeckFragen;
+async function getMyBasischeckVersuch(wocheId){
+ try{
+ const snap=await getDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${wocheId}`));
+ return snap.exists()?snap.data():null;
+ }catch(e){console.error("Basis-Check-Versuch laden:",e);return null}
+}
+function basischeckAmpel(richtig,gesamt){
+ if(gesamt<=0)return null;
+ if(richtig===gesamt)return"gruen";
+ if(richtig>0)return"orange";
+ return"rot";
+}
+function basischeckAmpelText(ampel){
+ if(ampel==="gruen")return"Alles richtig – Basis sitzt";
+ if(ampel==="orange")return"Teilweise richtig – nochmal reinschauen";
+ if(ampel==="rot")return"Noch nicht verstanden";
+ return"Noch nicht bearbeitet";
+}
+// Wertet eine einzelne Basis-Check-Frage aus, je nach Typ. Alte Fragen ohne
+// "typ"-Feld werden wie Multiple Choice behandelt (Rückwärtskompatibilität).
+function basischeckGradeFrage(f,i){
+ const typ=f.typ||"mc";
+ if(typ==="mc"){
+ const antwort=parseInt(document.querySelector(`input[name="bcQ${i}"]:checked`)?.value,10);
+ return {beantwortet:Number.isFinite(antwort),richtig:antwort===f.richtig,antwort};
+ }
+ if(typ==="kprim"){
+ const werte=f.statements.map((s,j)=>document.querySelector(`input[name="bcKp${i}_${j}"]:checked`)?.value||"");
+ const alleBeantwortet=werte.every(Boolean);
+ const {allCorrect}=kprimGrade({statements:f.statements},werte.map(w=>w==="r"));
+ // als Text speichern ("rfrf"), weil Firestore keine verschachtelten Listen erlaubt
+ return {beantwortet:alleBeantwortet,richtig:alleBeantwortet&&allCorrect,antwort:werte.map(w=>w||"-").join("")};
+ }
+ if(typ==="offen"){
+ const text=($(`bcOffenAntwort${i}`)?.value||"").trim();
+ if(!text)return{beantwortet:false,richtig:false,antwort:""};
+ const treffer=f.stichworte.every(w=>text.toLowerCase().includes(w.toLowerCase()));
+ return {beantwortet:true,richtig:treffer,antwort:text};
+ }
+ return {beantwortet:false,richtig:false,antwort:null};
+}
+async function submitBasischeck(fach,wocheId){
+ const fragen=await getBasischeckFragen(wocheId);
+ if(!fragen.length){toast("Keine Fragen vorhanden.");return}
+ const ergebnisse=fragen.map((f,i)=>basischeckGradeFrage(f,i));
+ if(ergebnisse.some(e=>!e.beantwortet)){toast("Bitte alle Fragen beantworten.");return}
+ const richtig=ergebnisse.filter(e=>e.richtig).length;
+ const ampel=basischeckAmpel(richtig,fragen.length);
+ try{
+ await setDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${wocheId}`),{
+ uid:currentUser.uid,wocheId,fach,antworten:ergebnisse.map(e=>e.antwort),richtig,gesamt:fragen.length,ampel,
+ name:profile?.displayName||currentUser?.email||"Schüler/in",createdAt:serverTimestamp()
+ });
+ toast(`${richtig} von ${fragen.length} richtig.`);
+ if(lehrplanWocheById(fach,wocheId)?.typ==="apt"){await aptSetzen(wocheId,{basischeckErledigt:true},{tab:"basischeck"});return}
+ await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),{uid:currentUser.uid,wocheId,fach,basischeckErledigt:true,updatedAt:serverTimestamp()},{merge:true}).catch(e=>console.error(e));
+ await reopenDetail(fach,wocheId);
+ if(ampel==="gruen")showMotivationsBild(false,"lernen","bc:"+wocheId);
+ }catch(e){console.error("Basis-Check abgeben:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+window.submitBasischeck=submitBasischeck;
+
+// ---- Live-Wochenübersicht für Lehrkräfte: Fortschritt-Position je Person,
+// Basis-Check-Ampel, Lernstand-Ampel und "zuletzt aktiv" – aktualisiert sich
+// automatisch per Firestore-Live-Listener, ohne dass neu geöffnet werden muss.
+let wochenLiveState=null;
+function renderWochenLiveTable(fach,wocheId,woche){
+ const st=wochenLiveState;
+ if(!st)return;
+ const tbody=$("wochenLiveTbody");
+ if(!tbody)return;
+ const relevanteTasks=st.lsTasks.filter(t=>st.wocheLbKeys.includes(t.learningArea));
+ // Basis-Schritte, die immer zählen: Auftrag, Material, Lernprodukt, Lernstand, Selbsteinschätzung.
+ // Basis-Check und Team zählen nur mit, wenn für diese Woche zutreffend.
+ const gesamtSchritte=5+(st.hatBasischeck?1:0)+(wocheHatTeam(woche)?1:0)+(woche.interaktiv?1:0);
+ tbody.innerHTML=st.students.map(s=>{
+ const f=st.fortschritt.find(x=>x.uid===s.uid)||{};
+ const bc=st.basischeck.find(x=>x.uid===s.uid);
+ const team=st.teams.some(t=>(t.mitgliederUids||[]).includes(s.uid));
+ const produkt=st.produkte.some(p=>p.uid===s.uid);
+ const lernstandOk=relevanteTasks.some(t=>st.lsAttempts.some(a=>a.uid===s.uid&&a.taskId===t.id));
+ let position=0;
+ if(f.auftragGelesen)position++;
+ if(f.materialErhalten)position++;
+ if(st.hatBasischeck&&bc)position++;
+ if(wocheHatTeam(woche)&&team)position++;
+ if(woche.interaktiv&&f.experimentErledigt)position++;
+ if(produkt)position++;
+ if(lernstandOk)position++;
+ const zieleErfuellt=st.ziele.length>0&&st.ziele.every(z=>f.zieleErfuellt?.[z.id]);
+ if(zieleErfuellt)position++;
+ const letzteAktivitaet=f.updatedAt?.seconds?new Date(f.updatedAt.seconds*1000):null;
+ const tageInaktiv=letzteAktivitaet?Math.floor((Date.now()-letzteAktivitaet.getTime())/86400000):null;
+ return`<tr>
+ <td>${esc(s.displayName||s.email||"Schüler/in")}</td>
+ <td>${position} / ${gesamtSchritte}</td>
+ <td style="text-align:center">${st.hatBasischeck?praktikumsAmpelDotHTMLGeneric(bc?.ampel,bc?basischeckAmpelText(bc.ampel):"Noch nicht bearbeitet"):"–"}</td>
+ <td style="text-align:center">${relevanteTasks.length?ampelDotHTML(lernstandOk?lernstandStatus((st.lsAttempts.find(a=>a.uid===s.uid&&relevanteTasks.some(t=>t.id===a.taskId))?.total)||0,relevanteTasks.length?lernstandMaxPoints(relevanteTasks[0].id):15):null):"–"}</td>
+ <td style="font-size:11px;color:${tageInaktiv!==null&&tageInaktiv>=3?"#d9534f":"var(--muted)"}">${letzteAktivitaet?letzteAktivitaet.toLocaleDateString("de-DE"):"noch nicht begonnen"}</td>
+ </tr>`;
+ }).join("")||`<tr><td colspan="5">Keine Schüler:innen gefunden.</td></tr>`;
+}
+function praktikumsAmpelDotHTMLGeneric(ampel,titel){
+ if(!ampel)return`<span class="ampel-dot ampel-none"title="${esc(titel||"Noch offen")}"></span>`;
+ return`<span class="ampel-dot"style="background:${ampelFarbe(ampel)}"title="${esc(titel||"")}"></span>`;
+}
+function subscribeWochenLive(fach,wocheId,woche){
+ liveUnsubscribe=onSnapshot(
+ query(collection(db,"lehrplanFortschritt"),where("wocheId","==",wocheId)),
+ snap=>{wochenLiveState.fortschritt=snap.docs.map(d=>d.data());renderWochenLiveTable(fach,wocheId,woche);},
+ e=>console.error("Wochen-Live-Update (Fortschritt):",e)
+ );
+ onSnapshot(
+ query(collection(db,"basischeckVersuche"),where("wocheId","==",wocheId)),
+ snap=>{wochenLiveState.basischeck=snap.docs.map(d=>d.data());renderWochenLiveTable(fach,wocheId,woche);},
+ e=>console.error("Wochen-Live-Update (Basis-Check):",e)
+ );
+}
+async function openWochenLiveUebersicht(fach,wocheId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können die Live-Übersicht öffnen.");return}
+ const woche=lehrplanWocheById(fach,wocheId);
+ if(!woche){toast("Diese Woche wurde nicht gefunden.");return}
+ let students=[],teams=[],produkte=[],lsTasks=[],lsAttempts=[],basischeckFragen=[];
+ try{
+ [students,teams,produkte,lsTasks,lsAttempts,basischeckFragen]=await Promise.all([
+ getAllUsersForLernstand(),getLehrplanTeams(teamAnchorFor(wocheId)),getLehrplanProdukte(wocheId),
+ getLernstandTasks(),getAllLernstandAttempts(),getBasischeckFragen(wocheId)
+ ]);
+ }catch(e){console.error("Live-Übersicht laden:",e);toast("Konnte nicht geladen werden.");return}
+ const wocheLbKeys=(woche.lb||"").match(/\d/g)?.map(n=>"lb"+n)||[];
+ const ziele=(LEHRPLAN_ZIELE_VORSCHLAG[wocheId]||[]).map((text,i)=>({id:`z${i}`,text}));
+ wochenLiveState={students,teams,produkte,lsTasks,lsAttempts,wocheLbKeys,ziele,fortschritt:[],basischeck:[],hatBasischeck:basischeckFragen.length>0};
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker"> LIVE-ÜBERSICHT · NUR LEHRKRÄFTE</div>
+ <h2>${esc(woche.thema)}</h2>
+ <p style="color:var(--muted);font-size:12px">Aktualisiert sich automatisch, sobald Schüler:innen einen Schritt abschließen – kein Neuladen nötig. Rot markiertes Datum = seit 3+ Tagen keine Aktivität.</p>
+ <div style="overflow-x:auto"><table class="ls-matrix">
+ <thead><tr><th>Schüler:in</th><th>Fortschritt</th><th>Basis-Check</th><th>Abschluss-Check</th><th>Zuletzt aktiv</th></tr></thead>
+ <tbody id="wochenLiveTbody"><tr><td colspan="5">Lädt …</td></tr></tbody>
+ </table></div>
+ <div class="form-actions"style="margin-top:14px">
+ <button class="primary"onclick="openAbschlussCheckQualitaet('${fach}','${wocheId}')"> Qualitäts-Ansicht Abschluss-Check</button>
+ <button class="secondary"onclick="closeModal()">Schließen</button>
+ </div>
+ `);
+ renderWochenLiveTable(fach,wocheId,woche);
+ subscribeWochenLive(fach,wocheId,woche);
+}
+window.openWochenLiveUebersicht=openWochenLiveUebersicht;
+
+// ---- Qualitäts-Ansicht Abschluss-Check: nicht nur wer bestanden hat, sondern
+// echte fachliche Auswertung – Klassenschnitt, Punkte je Person, und welche
+// einzelne Teilaufgabe der Klasse am schwersten fiel.
+async function openAbschlussCheckQualitaet(fach,wocheId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können die Qualitäts-Ansicht öffnen.");return}
+ const woche=lehrplanWocheById(fach,wocheId);
+ if(!woche){toast("Diese Woche wurde nicht gefunden.");return}
+ let students=[],lsTasks=[],lsAttempts=[];
+ try{
+ [students,lsTasks,lsAttempts]=await Promise.all([getAllUsersForLernstand(),getLernstandTasks(),getAllLernstandAttempts()]);
+ }catch(e){console.error("Qualitäts-Ansicht laden:",e);toast("Konnte nicht geladen werden.");return}
+ const wocheLbKeys=(woche.lb||"").match(/\d/g)?.map(n=>"lb"+n)||[];
+ const relevanteTasks=lsTasks.filter(t=>wocheLbKeys.includes(t.learningArea));
+ if(!relevanteTasks.length){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">QUALITÄTS-ANSICHT · ABSCHLUSS-CHECK</div><h2>${esc(woche.thema)}</h2>
+ <div class="empty">Für diese Woche ist keine Lernstandsmessung hinterlegt.</div>`);
+ return;
+ }
+ // Je Person und Aufgabe nur den jeweils letzten Versuch werten.
+ const zeilen=students.map(s=>{
+ const proAufgabe=relevanteTasks.map(t=>lernstandLatest(lsAttempts.filter(a=>a.uid===s.uid),t.id));
+ const bearbeitet=proAufgabe.filter(Boolean);
+ const summe=bearbeitet.reduce((sum,a)=>sum+(Number(a.total)||0),0);
+ const max=relevanteTasks.reduce((sum,t)=>sum+lernstandMaxPoints(t.id),0);
+ return {name:s.displayName||s.email||"Schüler/in",summe,max,bearbeitet:bearbeitet.length,gesamt:relevanteTasks.length,attempts:bearbeitet};
+ });
+ const bearbeiteteZeilen=zeilen.filter(z=>z.bearbeitet>0);
+ const klassenschnitt=bearbeiteteZeilen.length?(bearbeiteteZeilen.reduce((s,z)=>s+z.summe,0)/bearbeiteteZeilen.length):0;
+ const maxGesamt=relevanteTasks.reduce((sum,t)=>sum+lernstandMaxPoints(t.id),0);
+
+ // Pro Teilkompetenz (z. B. Fachwissen, Anwenden, Analysieren) den
+ // Klassenschnitt berechnen, um Schwachstellen im Stoff sichtbar zu machen.
+ const teilaufgaben=[];
+ relevanteTasks.forEach(t=>{
+ (t.tasks||[]).forEach(sub=>{
+ const werte=[];
+ students.forEach(s=>{
+ const latest=lernstandLatest(lsAttempts.filter(a=>a.uid===s.uid),t.id);
+ if(latest?.competencies?.[sub.id]!==undefined)werte.push(Number(latest.competencies[sub.id])||0);
+ });
+ if(werte.length){
+ const schnitt=werte.reduce((a,b)=>a+b,0)/werte.length;
+ teilaufgaben.push({label:`${t.nr}. ${t.title} – ${sub.label}`,schnitt,max:sub.points,quote:schnitt/(sub.points||1),anzahl:werte.length});
+ }
+ });
+ });
+ teilaufgaben.sort((a,b)=>a.quote-b.quote);
+
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">QUALITÄTS-ANSICHT · ABSCHLUSS-CHECK</div>
+ <h2>${esc(woche.thema)}</h2>
+ <div class="card"style="border-left:4px solid #4a90d9;margin:10px 0 16px">
+ <strong style="font-size:20px">Ø ${klassenschnitt.toFixed(1)} von ${maxGesamt} Punkten</strong>
+ <p style="margin:4px 0 0;color:var(--muted);font-size:12px">${bearbeiteteZeilen.length} von ${students.length} haben bereits bearbeitet.</p>
+ </div>
+
+ <h3 style="margin-bottom:6px"> Wo die Klasse noch Schwierigkeiten hat</h3>
+ <div class="list"style="margin-bottom:16px">
+ ${teilaufgaben.slice(0,5).map(t=>{
+ const farbe=t.quote>=0.8?"#3fa66a":t.quote>=0.53?"#e0a324":"#d9534f";
+ return`<div class="list-item"><div><strong>${esc(t.label)}</strong><small>Klassenschnitt: ${t.schnitt.toFixed(1)} von ${t.max} Punkten (${Math.round(t.quote*100)}%), ${t.anzahl} Bearbeitungen</small></div><span class="pill"style="background:${farbe};color:#fff">${Math.round(t.quote*100)}%</span></div>`;
+ }).join("")||`<div class="empty">Noch keine ausreichenden Daten.</div>`}
+ </div>
+
+ <h3 style="margin-bottom:6px"> Punkte je Person</h3>
+ <div class="list">
+ ${zeilen.map(z=>{
+ const pct=z.max?z.summe/z.max:0;
+ const farbe=z.bearbeitet===0?"#c7d0d6":pct>=0.8?"#3fa66a":pct>=0.53?"#e0a324":"#d9534f";
+ return`<div class="list-item"><div><strong>${esc(z.name)}</strong></div><span class="pill"style="background:${farbe};color:#fff">${z.bearbeitet===0?"noch offen":`${z.summe.toFixed(0)}/${z.max} (${z.bearbeitet}/${z.gesamt} Aufgaben)`}</span></div>`;
+ }).join("")}
+ </div>
+ <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>
+ `);
+}
+window.openAbschlussCheckQualitaet=openAbschlussCheckQualitaet;
+
+// ---- Phasen-Live-Übersicht: zwei parallele Signale je Person – wie weit sie
+// mit den notwendigen Wochen-Inhalten ist (Ampel A) und wo ihr Team beim
+// Projekt steht (Ampel B, aus den projektspezifischen Meilensteinen).
+let phasenLiveState=null;
+function inhaltsAmpelFarbe(fertig,gesamt){
+ if(gesamt===0)return"#c7d0d6";
+ if(fertig===0)return"#c7d0d6";
+ if(fertig===gesamt)return"#3fa66a";
+ return"#e0a324";
+}
+function renderPhasenLiveTable(phase){
+ const st=phasenLiveState;
+ if(!st)return;
+ const tbody=$("phasenLiveTbody");
+ if(!tbody)return;
+ tbody.innerHTML=st.students.map(s=>{
+ const fertigeWochen=phase.notwendigeWochen.filter(wId=>
+ st.fortschritt.some(f=>f.uid===s.uid&&f.wocheId===wId&&f.abgeschlossen)
+ ).length;
+ const team=st.teams.find(t=>(t.mitgliederUids||[]).includes(s.uid));
+ const idx=msErreichtAnzahl(phase,team,st.beitraege);
+ const nx=team?msNaechster(phase,team,st.beitraege):null;
+ const eig=msEigeneBeitraege(phase,team,st.beitraege,s.uid);
+ const stundeFertig=phase.einstieg&&st.fortschritt.some(f=>f.uid===s.uid&&f.wocheId===phase.stundeWocheId&&f.experimentErledigt);
+ const meilensteinLabel=phase.einstieg?(stundeFertig?"interaktive Stunde gemacht":"interaktive Stunde noch offen"):!team?"kein Team":!nx?"alle Meilensteine erreicht":`nächster: ${phase.meilensteine[nx.i]} (${MS_ZUSTAND[nx.st.zustand].t}) · eigene Beiträge ${eig.n}/${eig.g}`;
+ const letzteAktivitaet=st.fortschritt.filter(f=>f.uid===s.uid&&phase.notwendigeWochen.includes(f.wocheId))
+ .map(f=>f.updatedAt?.seconds?new Date(f.updatedAt.seconds*1000):null).filter(Boolean).sort((a,b)=>b-a)[0];
+ const tageInaktiv=letzteAktivitaet?Math.floor((Date.now()-letzteAktivitaet.getTime())/86400000):null;
+ return`<tr>
+ <td>${esc(s.displayName||s.email||"Schüler/in")}</td>
+ <td style="text-align:center"><span class="ampel-dot"style="background:${inhaltsAmpelFarbe(fertigeWochen,phase.notwendigeWochen.length)}"title="${fertigeWochen} von ${phase.notwendigeWochen.length} notwendigen Wochen"></span> ${fertigeWochen}/${phase.notwendigeWochen.length}</td>
+ <td style="text-align:center"><span class="ampel-dot"style="background:${phase.einstieg?(stundeFertig?"#3fa66a":"#c7d0d6"):meilensteinAmpelFarbe(idx,phase.meilensteine.length)}"title="${esc(meilensteinLabel)}"></span></td>
+ <td style="font-size:12px;color:var(--muted)">${esc(phase.einstieg?"–":(team?.teamName||"kein Team"))}</td>
+ <td style="font-size:11px">${esc(meilensteinLabel)}</td>
+ <td style="font-size:11px;color:${tageInaktiv!==null&&tageInaktiv>=3?"#d9534f":"var(--muted)"}">${letzteAktivitaet?letzteAktivitaet.toLocaleDateString("de-DE"):"noch nicht begonnen"}</td>
+ </tr>`;
+ }).join("")||`<tr><td colspan="6">Keine Schüler:innen gefunden.</td></tr>`;
+}
+function subscribePhasenLive(phase){
+ liveUnsubscribe=onSnapshot(
+ query(collection(db,"lehrplanFortschritt"),where("wocheId","in",phase.notwendigeWochen.length?phase.notwendigeWochen:["_none_"])),
+ snap=>{phasenLiveState.fortschritt=snap.docs.map(d=>d.data());renderPhasenLiveTable(phase);},
+ e=>console.error("Phasen-Live-Update:",e)
+ );
+ onSnapshot(
+ query(collection(db,"lehrplanTeams"),where("wocheId","==",phase.projektWocheId)),
+ snap=>{phasenLiveState.teams=snap.docs.map(d=>({id:d.id,...d.data()}));renderPhasenLiveTable(phase);},
+ e=>console.error("Phasen-Live-Update (Teams):",e)
+ );
+}
+async function openPhasenLiveUebersicht(phaseId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können die Live-Übersicht öffnen.");return}
+ const phase=projektPhaseById(phaseId);
+ if(!phase){toast("Diese Phase wurde nicht gefunden.");return}
+ let students=[],teams=[];
+ try{
+ students=await getAllUsersForLernstand();
+ teams=await getLehrplanTeams(phase.projektWocheId);
+ }catch(e){console.error("Phasen-Live-Übersicht laden:",e);toast("Konnte nicht geladen werden.");return}
+ phasenLiveState={students,teams,fortschritt:[],beitraege:await getMeilensteinBeitraege(teams.map(t=>t.id))};
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker"> LIVE-ÜBERSICHT · ${esc(phase.lb)} · NUR LEHRKRÄFTE</div>
+ <h2>${esc(phase.titel)}</h2>
+ <p style="color:var(--muted);font-size:12px">Zwei Signale: links der Inhalts-Fortschritt (notwendige Wochen), rechts der Projekt-Meilenstein des Teams. Aktualisiert sich automatisch. Rot markiertes Datum = seit 3+ Tagen keine Aktivität.</p>
+ <div style="overflow-x:auto"><table class="ls-matrix">
+ <thead><tr><th>Schüler:in</th><th>Inhalt</th><th>Projekt</th><th>Team</th><th>Meilenstein</th><th>Zuletzt aktiv</th></tr></thead>
+ <tbody id="phasenLiveTbody"><tr><td colspan="6">Lädt …</td></tr></tbody>
+ </table></div>
+ <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>
+ `);
+ renderPhasenLiveTable(phase);
+ subscribePhasenLive(phase);
+}
+window.openPhasenLiveUebersicht=openPhasenLiveUebersicht;
+
+// Projekt-Gesamtcheck und APT-Gesamtcheck: siehe Abschnitte „PROJEKT-MEILENSTEINE“ und „APT-GESAMTCHECK“.
+
 window.toggleMaterialErhalten=toggleMaterialErhalten;
 async function markWocheAbgeschlossen(fach,wocheId){
  const fortschritt=await getLehrplanFortschritt(wocheId);
@@ -2455,7 +2554,7 @@ function webUntisEmbedHTML(heightPx,openByDefault){
  const url=webUntisUrl();
  return `<details class="untis-embed"${openByDefault?"open":""}>
  <summary> Stundenplan anzeigen/ausblenden</summary>
- <iframe src="${url}"loading="lazy"style="width:100%;height:${heightPx}px;border:1px solid var(--line,#e2eaf0);border-radius:10px;background:#fff"class="untis-iframe"title="Stundenplan F12Sb (WebUntis)"></iframe>
+ <iframe src="${url}"loading="lazy"style="width:100%;height:${heightPx}px;border:1px solid var(--line,#e2eaf0);border-radius:10px;background:#fff"class="untis-iframe"title="Stundenplan F11Sb (WebUntis)"></iframe>
  <div class="untis-fallback"><small>Wird der Stundenplan oben nicht angezeigt? Manche Schulnetzwerke blockieren die Einbettung.</small>
  <a href="${url}"target="_blank"rel="noopener"class="pill"> Stundenplan in WebUntis öffnen ↗</a></div>
  </details>`;
@@ -2511,8 +2610,8 @@ function sonstigeListe(noten,fach,hj){
 // Leistungen) als schlichte Zahlenliste, für die Kurzanzeige, solange noch
 // kein Halbjahresergebnis berechnet werden kann.
 function alleEinzelwerte(noten,fach,hj){
- const sa=schulaufgabenListe(noten,fach,hj).map(v=>({value:v,muendlich:false}));
- const so=sonstigeListe(noten,fach,hj).map(e=>({value:e.value,muendlich:e.type==="muendlich"}));
+ const sa=schulaufgabenListe(noten,fach,hj);
+ const so=sonstigeListe(noten,fach,hj).map(e=>e.value);
  return[...sa,...so];
 }
 function sonstigeSchnitt(liste){
@@ -2530,7 +2629,8 @@ function berechneHalbjahresergebnis(noten,fach,hj){
  return foboso19Runden(roh);
 }
 function fachLabel(fach){
- return F12SB_FAECHER.find(f=>f.key===fach)?.label||fach;
+ if(fach==="fpa")return "Fachpraktische Ausbildung";
+ return F11SB_FAECHER.find(f=>f.key===fach)?.label||fach;
 }
 // Bezeichnung der "sonstigen Leistung" – fängt auch ältere Einträge ab,
 // die noch mit dem alten zweistufigen "schriftlich"/"muendlich" gespeichert wurden.
@@ -2634,6 +2734,23 @@ async function deleteNotenEintrag(fach,hj,entryId){
 }
 async function openNotenDetail(fach,hj){
  const noten=await getMeineNoten();
+ if(fach==="fpa"){
+ const liste=notenListe(noten,fach,hj);
+ const avg=notenDurchschnitt(liste);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"1. HALBJAHR":"2. HALBJAHR"}</div>
+ <h2>${esc(fachLabel(fach))}</h2>
+ <p style="color:var(--muted)">Die fachpraktische Ausbildung wird separat bewertet (§8 FOBOSO) – trag hier die einzelnen Bewertungen ein.</p>
+ <div class="notice"style="margin-bottom:14px"><strong style="font-size:22px">${avg===null?"—":avg+" Punkte"}</strong><small style="display:block;color:var(--muted)">Durchschnitt aus ${liste.length} ${liste.length===1?"Eintrag":"Einträgen"}</small></div>
+ <div class="list">${liste.map(e=>`<div class="list-item"><div><strong>${e.value} Punkte</strong></div><button class="secondary"onclick="deleteNotenEintrag('${fach}','${hj}','${e.id}')">Löschen</button></div>`).join("")||`<div class="empty">Noch keine Note eingetragen.</div>`}</div>
+ <div class="form-actions"style="margin-top:14px;flex-wrap:wrap">
+ <input id="notenNeuValue"type="number"min="0"max="15"placeholder="0–15"style="width:80px">
+ <button class="primary"onclick="addNotenEintrag('${fach}','${hj}')">＋ Hinzufügen</button>
+ </div>
+ <div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="closeModal()">Schließen</button></div>
+ `);
+ return;
+ }
  const sa=schulaufgabenListe(noten,fach,hj);
  const sonst=sonstigeListe(noten,fach,hj);
  const sSchnitt=sonstigeSchnitt(sonst);
@@ -2712,45 +2829,57 @@ function checkFoboso21(punkte){
  if(zero===0&&oneToThree===2&&atLeastFour===n-2&&sum>=6*n)return{passed:true,rule:"c"};
  return{passed:false,rule:null};
 }
-// Für die 12. Klasse gibt es keine Probezeit mehr (die gilt nur in der 11.).
-// Stattdessen ist relevant: die Jahrespunktzahl je Fach (§21 FOBOSO) und eine
-// grobe Orientierung, ob die Zulassungsvoraussetzungen zur Abschlussprüfung
-// nach §31/§35 FOBOSO grundsätzlich im Rahmen liegen. Die exakte
-// Fachabitur-Berechnung mit optimalem Streichvorschlag (25 Halbjahresergebnisse
-// + 4 dreifach gewichtete Prüfungen, §35 Abs. 6 FOBOSO) leistet
-// diese App bewusst nicht – dafür nutzt eure Schule den offiziellen
-// Streichvorschlag-Rechner (z. B. der Beruflichen Oberschule Traunstein).
 function berechneBestehen(noten){
- // Nicht einbringungsfähige Fächer (z. B. Sport) zählen für die
- // Bestehens-Orientierung nach §35 Abs. 9 FOBOSO nicht mit.
- const einbringungsfaehigeFaecher=F12SB_FAECHER.filter(f=>f.einbringungsfaehig!==false);
- const faecherHJ1=einbringungsfaehigeFaecher.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj1"));
- const faecherHJ2=einbringungsfaehigeFaecher.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj2"));
- const vollHJ1=faecherHJ1.every(p=>Number.isFinite(p));
- const vollJahr=vollHJ1&&faecherHJ2.every(p=>Number.isFinite(p));
+ const faecherHJ1=F11SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj1"));
+ const faecherHJ2=F11SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj2"));
+ const fpaHj1=notenDurchschnitt(notenListe(noten,"fpa","hj1")),fpaHj2=notenDurchschnitt(notenListe(noten,"fpa","hj2"));
+ const vollHJ1=faecherHJ1.every(p=>Number.isFinite(p))&&Number.isFinite(fpaHj1);
+ const vollJahr=vollHJ1&&faecherHJ2.every(p=>Number.isFinite(p))&&Number.isFinite(fpaHj2);
 
+ let probezeit=null;
+ if(vollHJ1){
+ const fachCheck=checkFoboso21(faecherHJ1);
+ const fpaOk=fpaHj1>=4;
+ probezeit={passed:fachCheck.passed&&fpaOk,fachCheck,fpaOk};
+ }
  let jahr=null;
  if(vollJahr){
  // Jahrespunktzahl nach § 21 Abs. 2 FOBOSO: Durchschnitt der beiden
  // (bereits gerundeten) Halbjahresergebnisse, danach erneut gerundet.
- const jahrespunkte=einbringungsfaehigeFaecher.map((f,i)=>foboso19Runden((faecherHJ1[i]+faecherHJ2[i])/2));
- // Orientierung nach §35 Abs. 9 FOBOSO: höchstens 2 Gesamtergebnisse mit
- // 1–3 Punkten bzw. 1 mit 0 Punkten – sonst ist die Zulassung gefährdet.
- const unter4=jahrespunkte.filter(p=>p>=1&&p<=3).length;
- const nullPunkte=jahrespunkte.filter(p=>p===0).length;
- const imRahmen=nullPunkte<=1 && (nullPunkte===1?unter4===0:unter4<=2);
- jahr={jahrespunkte,imRahmen};
+ const jahrespunkte=F11SB_FAECHER.map((f,i)=>foboso19Runden((faecherHJ1[i]+faecherHJ2[i])/2));
+ const fachCheck=checkFoboso21(jahrespunkte);
+ const fpaOk=fpaHj1>=4&&fpaHj2>=4&&(fpaHj1+fpaHj2)>=10;
+ jahr={passed:fachCheck.passed&&fpaOk,fachCheck,fpaOk,jahrespunkte};
  }
- return{jahr,vollHJ1,vollJahr};
+ return{probezeit,jahr,vollHJ1,vollJahr};
 }
 // Einfache Orientierung "was fehlt noch": für jedes noch unter 4 liegende
 // oder fehlende Fach wird angezeigt, welcher Wert für die einfachste
 // Bestehens-Variante (Regel a: alle Fächer ≥4) fehlen würde.
-
+function wasFehltNochHJ1(noten){
+ const liste=F11SB_FAECHER.map(f=>{
+ const p=berechneHalbjahresergebnis(noten,f.key,"hj1");
+ if(!Number.isFinite(p)){
+ const hatSA=schulaufgabenListe(noten,f.key,"hj1").length>0;
+ const hatSonst=sonstigeListe(noten,f.key,"hj1").length>0;
+ const fehlt=!hatSA&&!hatSonst?"Schulaufgabe und sonstige Leistungen fehlen noch":!hatSA?"Schulaufgabe fehlt noch":"Sonstige Leistungen fehlen noch";
+ return{label:f.label,status:"fehlt",text:fehlt};
+ }
+ if(p===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
+ if(p<4)return{label:f.label,status:"kritisch",text:`Aktuell ${p} Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-p} Punkte`};
+ return{label:f.label,status:"ok",text:`${p} Punkte`};
+ });
+ const fpaP=notenDurchschnitt(notenListe(noten,"fpa","hj1"));
+ if(fpaP===null)liste.push({label:"Fachpraktische Ausbildung",status:"fehlt",text:"Note fehlt noch"});
+ else if(fpaP===0)liste.push({label:"Fachpraktische Ausbildung",status:"ungenuegend",text:"0 Punkte – mind. 4 Punkte nötig"});
+ else if(fpaP<4)liste.push({label:"Fachpraktische Ausbildung",status:"kritisch",text:`Aktuell ${fpaP} Punkte – mind. 4 Punkte nötig`});
+ else liste.push({label:"Fachpraktische Ausbildung",status:"ok",text:`${fpaP} Punkte`});
+ return liste;
+}
 // Analoge Übersicht fürs ganze Schuljahr: Jahrespunktzahl je Fach (Durchschnitt
 // der beiden Halbjahresergebnisse) plus fpA mit eigener Jahresregel (§8 FOBOSO).
 function wasFehltNochJahr(noten){
- const liste=F12SB_FAECHER.map(f=>{
+ const liste=F11SB_FAECHER.map(f=>{
  const p1=berechneHalbjahresergebnis(noten,f.key,"hj1");
  const p2=berechneHalbjahresergebnis(noten,f.key,"hj2");
  if(!Number.isFinite(p1)||!Number.isFinite(p2)){
@@ -2758,15 +2887,331 @@ function wasFehltNochJahr(noten){
  return{label:f.label,status:"fehlt",text:fehlt};
  }
  const jp=foboso19Runden((p1+p2)/2);
- // Nicht einbringungsfähige Fächer (Sport) zählen nicht fürs Bestehen –
- // hier daher keine "kritisch/ungenügend"-Einstufung, nur Information.
- if(f.einbringungsfaehig===false)return{label:f.label,status:"ok",text:`${jp} Punkte im Jahr (nicht einbringungsfähig)`};
  if(jp===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
  if(jp<4)return{label:f.label,status:"kritisch",text:`Aktuell ${jp} Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-jp} Punkte`};
  return{label:f.label,status:"ok",text:`${jp} Punkte im Jahr`};
  });
+ const fpa1=notenDurchschnitt(notenListe(noten,"fpa","hj1"));
+ const fpa2=notenDurchschnitt(notenListe(noten,"fpa","hj2"));
+ if(fpa1===null||fpa2===null){
+ liste.push({label:"Fachpraktische Ausbildung",status:"fehlt",text:fpa1===null&&fpa2===null?"HJ1 und HJ2 fehlen noch":fpa1===null?"HJ1 fehlt noch":"HJ2 fehlt noch"});
+ }else{
+ const ok=fpa1>=4&&fpa2>=4&&(fpa1+fpa2)>=10;
+ liste.push({label:"Fachpraktische Ausbildung",status:ok?"ok":(fpa1===0||fpa2===0)?"ungenuegend":"kritisch",text:`HJ1: ${fpa1} · HJ2: ${fpa2} Punkte (Summe ${fpa1+fpa2}, mind. 10 nötig)`});
+ }
  return liste;
 }
+
+// ---- Praktikumsberichte (Blockberichte): Tätigkeitsnachweis + Einschätzungsbogen ----
+// Einschätzungsbogen ist nur bei den ersten beiden Blöcken je Ausbildungsrichtung
+// Pflicht (bestätigt: Erziehung pr1+pr2, Pflege pr5+pr6 – Abgabe 01.10./19.11.2026
+// bzw. 29.04./24.06.2027), Tätigkeitsnachweis bei allen 7 Blöcken.
+const EINSCHAETZUNG_PFLICHT_PHASEN=["pr2","pr5","pr6"];
+// Feste Abgabetermine für den Einschätzungsbogen, wo diese von der
+// "letzter Donnerstag des Blocks"-Formel abweichen (explizit vorgegeben).
+const EINSCHAETZUNG_FRIST_FIX={pr2:"2026-11-12",pr3:"2026-12-22"};
+function einschaetzungFrist(phaseId){
+ return EINSCHAETZUNG_FRIST_FIX[phaseId]||letzterDonnerstagVorOrAm(PRAKTIKUMSPHASEN.find(x=>x.id===phaseId)?.end);
+}
+function praktikumsberichtTypenFuerPhase(phaseId){
+ const typen=[{typ:"taetigkeit",label:"Tätigkeitsnachweis"}];
+ if(EINSCHAETZUNG_PFLICHT_PHASEN.includes(phaseId))typen.push({typ:"einschaetzung",label:"Einschätzungsbogen"});
+ return typen;
+}
+function praktikumsberichtFristISO(phaseId){
+ const p=PRAKTIKUMSPHASEN.find(x=>x.id===phaseId);
+ return p?letzterDonnerstagVorOrAm(p.end):null;
+}
+function ampelFarbe(ampel){
+ if(ampel==="gruen")return"#3fa66a";
+ if(ampel==="orange")return"#e0a324";
+ if(ampel==="rot")return"#d9534f";
+ return"#c7d0d6";
+}
+function ampelText(ampel){
+ if(ampel==="gruen")return"Pünktlich & vollständig";
+ if(ampel==="orange")return"Noch unvollständig";
+ if(ampel==="rot")return"Zu spät / fehlerhaft";
+ return"Noch nicht eingeschätzt";
+}
+// Für die deutschen Ampel-Werte (gruen/orange/rot) der Praktikumsberichte –
+// bewusst getrennt von ampelDotHTML, das englische Lernstand-Werte erwartet.
+function praktikumsAmpelDotHTML(ampel){
+ if(!ampel)return`<span class="ampel-dot ampel-none"title="Noch offen"></span>`;
+ return`<span class="ampel-dot"style="background:${ampelFarbe(ampel)}"title="${ampelText(ampel)}"></span>`;
+}
+async function getMeinePraktikumsberichte(){
+ try{
+ const snap=await getDocs(query(collection(db,"praktikumsberichte"),where("uid","==",currentUser.uid)));
+ const map={};
+ snap.docs.forEach(d=>{const data=d.data();map[`${data.phaseId}_${data.typ}`]=data});
+ return map;
+ }catch(e){console.error("Praktikumsberichte laden:",e);return{}}
+}
+async function getAllePraktikumsberichte(){
+ try{
+ const snap=await getDocs(collection(db,"praktikumsberichte"));
+ return snap.docs.map(d=>({id:d.id,...d.data()}));
+ }catch(e){console.error("Praktikumsberichte (alle) laden:",e);return[]}
+}
+async function uploadPraktikumsbericht(phaseId,typ){
+ const input=$(`pbFile_${phaseId}_${typ}`);
+ const file=input?.files?.[0];
+ if(!file){toast("Bitte zuerst eine Datei auswählen.");return}
+ try{
+ toast("Datei wird hochgeladen …");
+ const up=await uploadCampusDatei(file,`praktikumsberichte/${phaseId}_${typ}`);
+ const docId=`${currentUser.uid}_${phaseId}_${typ}`;
+ await setDoc(doc(db,"praktikumsberichte",docId),{
+ uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",
+ phaseId,typ,dateiUrl:up.url,dateiName:up.name,hochgeladenAm:serverTimestamp(),
+ ampel:null,unterschriftBetreuer:null,stempelBetrieb:null,unterschriftSchueler:null,ausfuehrlichkeit:null
+ },{merge:true});
+ await openPraktikumsblockDetail(phaseId);
+ showMotivationsBild(false,"abgabe");
+ }catch(e){console.error("Bericht hochladen:",e);toast("Fehler: "+(e?.message||e));}
+}
+window.uploadPraktikumsbericht=uploadPraktikumsbericht;
+// Eigenen Blockbericht wieder löschen (z. B. falsche Datei hochgeladen).
+// Lehrkräfte dürfen ebenfalls löschen. Danach kann neu hochgeladen werden.
+async function deletePraktikumsbericht(phaseId,typ,uid){
+ uid=uid||currentUser.uid;
+ if(uid!==currentUser.uid&&!isTeacher())return;
+ const ref=doc(db,"praktikumsberichte",`${uid}_${phaseId}_${typ}`);
+ try{
+  const alt=await getDoc(ref);
+  if(!alt.exists()){toast("Datei ist schon gelöscht.");return}
+  const d=alt.data();
+  if(!confirm(d.ampel?"Diese Datei wurde schon bewertet. Trotzdem löschen? Die Bewertung geht dabei verloren.":"Diese Datei wirklich löschen?"))return;
+  await deleteDoc(ref);
+  await deleteCampusDatei(d.dateiUrl);
+  toast("Datei gelöscht – du kannst jetzt eine neue hochladen.");
+  if(uid===currentUser.uid)await openPraktikumsblockDetail(phaseId);else await openLehrkraftPraktikumsUebersicht(phaseId);
+ }catch(e){console.error("Bericht löschen:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Löschen. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gelöscht werden.");}
+}
+window.deletePraktikumsbericht=deletePraktikumsbericht;
+async function saveAmpelBewertung(uid,phaseId,typ){
+ if(!isTeacher()){toast("Nur Lehrkräfte können bewerten.");return}
+ const ub=$(`amp_ub_${uid}_${phaseId}_${typ}`)?.checked||false;
+ const sb=$(`amp_sb_${uid}_${phaseId}_${typ}`)?.checked||false;
+ const us=$(`amp_us_${uid}_${phaseId}_${typ}`)?.checked||false;
+ const af=$(`amp_af_${uid}_${phaseId}_${typ}`)?.checked||false;
+ const ampel=$(`amp_farbe_${uid}_${phaseId}_${typ}`)?.value||null;
+ try{
+ await updateDoc(doc(db,"praktikumsberichte",`${uid}_${phaseId}_${typ}`),{
+ unterschriftBetreuer:ub,stempelBetrieb:sb,unterschriftSchueler:us,ausfuehrlichkeit:af,
+ ampel,bewertetAm:serverTimestamp(),bewertetVon:currentUser.uid
+ });
+ toast("Bewertung gespeichert.");
+ await openLehrkraftPraktikumsUebersicht(phaseId);
+ }catch(e){console.error("Ampel-Bewertung speichern:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+window.saveAmpelBewertung=saveAmpelBewertung;
+
+// Schnell-Ampel für die Kurzdurchsicht: setzt nur die Farbe, ohne die vier
+// Detailkriterien abzufragen. Lässt bereits gesetzte Kriterien unangetastet.
+async function schnellAmpel(uid,phaseId,typ,ampel){
+ if(!isTeacher()){toast("Nur Lehrkräfte können bewerten.");return}
+ try{
+ await updateDoc(doc(db,"praktikumsberichte",`${uid}_${phaseId}_${typ}`),{
+ ampel,bewertetAm:serverTimestamp(),bewertetVon:currentUser.uid
+ });
+ toast(`Ampel gesetzt: ${ampelText(ampel)}`);
+ await openLehrkraftPraktikumsUebersicht(phaseId);
+ }catch(e){console.error("Schnell-Ampel setzen:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+window.schnellAmpel=schnellAmpel;
+
+async function openPraktikumsblockDetail(phaseId){
+ const p=PRAKTIKUMSPHASEN.find(x=>x.id===phaseId);
+ if(!p)return;
+ const auftraege=await getPraktikumsAuftraege();
+ const auftrag=auftraege[phaseId];
+ const meineBerichte=await getMeinePraktikumsberichte();
+ const frist=letzterDonnerstagVorOrAm(p.end);
+ const typen=praktikumsberichtTypenFuerPhase(phaseId);
+ const dateiNamen={taetigkeit:"taetigkeitsnachweis.pdf",einschaetzung:"einschaetzungsbogen.pdf"};
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">${p.icon} ${esc(p.bereich)} · ${esc(fmtDateOnly(p.start))}–${esc(fmtDateOnly(p.end))}</div>
+ <h2>${esc(p.titel)}</h2>
+ ${isTeacher()?`<div class="form"style="margin-bottom:16px">
+ <label>Titel des Auftrags<input id="praktAuftragTitel"type="text"value="${esc(auftrag?.titel||"")}"placeholder="z. B. Beobachtungsauftrag Erziehungsstile"></label>
+ <label>Beschreibung<textarea id="praktAuftragBeschreibung"rows="3"placeholder="Was sollen die Schüler:innen konkret tun?">${esc(auftrag?.beschreibung||"")}</textarea></label>
+ <div class="form-actions">
+ <button class="primary"onclick="savePraktikumsphaseAuftrag('${phaseId}')">Auftrag speichern</button>
+ ${auftrag?`<button class="secondary"onclick="deletePraktikumsphaseAuftrag('${phaseId}')">Löschen</button>`:""}
+ </div>
+ </div>`
+ :auftrag?`<div class="card"style="border-left:4px solid #4a90d9;margin-bottom:16px"><strong>${esc(auftrag.titel)}</strong>${auftrag.beschreibung?`<p style="margin:6px 0 0;white-space:pre-wrap">${esc(auftrag.beschreibung)}</p>`:""}</div>`
+ :""}
+
+ <h3 style="margin-bottom:2px"> Blockberichte</h3>
+ <p style="font-size:12px;color:var(--muted);margin-top:0">Formular ausfüllen/unterschreiben lassen, dann hier als Foto/Scan hochladen. Jeweils bis 19:00 Uhr des Abgabetermins.</p>
+ ${typen.map(t=>{
+ const eintrag=meineBerichte[`${phaseId}_${t.typ}`];
+ const terminDieserArt=t.typ==="einschaetzung"?einschaetzungFrist(phaseId):frist;
+ return`<div class="card"style="margin-bottom:12px;background:${eintrag?"var(--soft-green)":"#f7fafc"}">
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+ <strong>${esc(t.label)}</strong>
+ <span style="display:flex;gap:10px">
+ <a href="${dateiNamen[t.typ]}"download style="font-size:11px">Formular als PDF herunterladen ↓</a>
+ ${t.typ==="taetigkeit"?`<a href="fehlzeitentabelle.pdf"download style="font-size:11px"> + Anlage Fehlzeitentabelle ↓</a>`:""}
+ </span>
+ </div>
+ <small style="display:block;color:var(--muted);margin-top:4px">Abgabe: ${esc(fmtDateOnly(terminDieserArt))}, 19:00 Uhr</small>
+ ${eintrag?`<div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+ <a href="${esc(eintrag.dateiUrl)}"target="_blank"rel="noopener"class="pill"> ${esc(eintrag.dateiName)}</a>
+ <span style="display:flex;gap:8px;align-items:center"><span class="pill"style="background:${ampelFarbe(eintrag.ampel)};color:#fff">${esc(ampelText(eintrag.ampel))}</span>
+ <button class="secondary"onclick="deletePraktikumsbericht('${phaseId}','${t.typ}')">Löschen</button></span>
+ </div>`
+ :`<div class="form-actions"style="margin-top:8px">
+ <input id="pbFile_${phaseId}_${t.typ}"type="file"accept="image/*,.pdf"style="flex:1;min-width:160px">
+ <button class="primary"onclick="uploadPraktikumsbericht('${phaseId}','${t.typ}')">＋ Hochladen</button>
+ </div>`}
+ </div>`;
+ }).join("")}
+ <div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="closeModal()">Schließen</button></div>
+ `);
+}
+window.openPraktikumsblockDetail=openPraktikumsblockDetail;
+
+async function openLehrkraftPraktikumsUebersicht(phaseId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können die Übersicht öffnen.");return}
+ const p=PRAKTIKUMSPHASEN.find(x=>x.id===phaseId);
+ if(!p)return;
+ let students=[],alleBerichte=[];
+ try{
+ [students,alleBerichte]=await Promise.all([getAllUsersForLernstand(),getAllePraktikumsberichte()]);
+ }catch(e){console.error("Praktikumsübersicht laden:",e);toast("Konnte nicht geladen werden.");return}
+ const typen=praktikumsberichtTypenFuerPhase(phaseId);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">KLASSENÜBERSICHT · NUR LEHRKRÄFTE</div>
+ <h2>${p.icon} ${esc(p.titel)} – Blockberichte</h2>
+ <p style="color:var(--muted);font-size:12px">${typen.map(t=>`Abgabefrist ${esc(t.label)}: ${esc(fmtDateOnly(t.typ==="einschaetzung"?einschaetzungFrist(phaseId):letzterDonnerstagVorOrAm(p.end)))}, 19:00 Uhr`).join(" · ")}</p>
+ <div style="overflow-x:auto"><table class="ls-matrix">
+ <thead><tr><th>Schüler:in</th>${typen.map(t=>`<th>${esc(t.label)}</th>`).join("")}</tr></thead>
+ <tbody>${students.map(s=>`<tr>
+ <td>${esc(s.displayName||s.email||"Schüler/in")}</td>
+ ${typen.map(t=>{
+ const eintrag=alleBerichte.find(b=>b.uid===s.uid&&b.phaseId===phaseId&&b.typ===t.typ);
+ if(!eintrag)return`<td style="text-align:center;color:var(--muted)">–</td>`;
+ const dot=(farbe,label)=>`<button type="button"onclick="schnellAmpel('${s.uid}','${phaseId}','${t.typ}','${farbe}')"title="${label}"style="width:16px;height:16px;border-radius:50%;background:${ampelFarbe(farbe)};border:2px solid ${eintrag.ampel===farbe?"#17384f":"transparent"};cursor:pointer;padding:0"></button>`;
+ return`<td><div style="display:flex;gap:4px;align-items:center;justify-content:center">
+ ${dot("gruen","Pünktlich & vollständig")}${dot("orange","Noch unvollständig")}${dot("rot","Zu spät/fehlerhaft")}
+ <button type="button"class="secondary"style="padding:2px 6px;font-size:10px;margin-left:4px"onclick="openAmpelBewertungForm('${s.uid}','${phaseId}','${t.typ}')">Details</button>
+ </div></td>`;
+ }).join("")}
+ </tr>`).join("")||`<tr><td colspan="${typen.length+1}">Keine Schüler:innen gefunden.</td></tr>`}</tbody>
+ </table></div>
+ <p style="font-size:10px;color:var(--muted);margin-top:8px"> Grün = pünktlich & vollständig · Orange = noch unvollständig · Rot = zu spät/fehlerhaft. Punkt anklicken für die Kurzdurchsicht, „Details" für die vier Einzelkriterien.</p>
+ <div class="form-actions"style="margin-top:14px">
+ <button class="secondary"onclick="openPraktikumsGesamtuebersicht()"> Gesamtübersicht alle Blöcke</button>
+ <button class="secondary"onclick="closeModal()">Schließen</button>
+ </div>
+ `);
+}
+window.openLehrkraftPraktikumsUebersicht=openLehrkraftPraktikumsUebersicht;
+
+// Baut für jede/n Schüler:in und jeden Berichtstyp aller Blöcke die
+// Ampel-Matrix auf – gemeinsam genutzt von Bildschirmansicht und PDF.
+async function ladeGesamtAmpelMatrix(){
+ const [students,alleBerichte]=await Promise.all([getAllUsersForLernstand(),getAllePraktikumsberichte()]);
+ const spalten=[];
+ PRAKTIKUMSPHASEN.forEach(p=>{
+ praktikumsberichtTypenFuerPhase(p.id).forEach(t=>{
+ spalten.push({phaseId:p.id,typ:t.typ,label:`${p.titel.replace("Praktikum – B-Block – ","")} · ${t.label==="Tätigkeitsnachweis"?"TN":"EB"}`});
+ });
+ });
+ const zeilen=students.map(s=>({
+ name:s.displayName||s.email||"Schüler/in",
+ werte:spalten.map(sp=>alleBerichte.find(b=>b.uid===s.uid&&b.phaseId===sp.phaseId&&b.typ===sp.typ)?.ampel||null)
+ }));
+ return{spalten,zeilen};
+}
+
+async function openPraktikumsGesamtuebersicht(){
+ if(!isTeacher()){toast("Nur Lehrkräfte können die Gesamtübersicht öffnen.");return}
+ let spalten=[],zeilen=[];
+ try{({spalten,zeilen}=await ladeGesamtAmpelMatrix())}
+ catch(e){console.error("Gesamtübersicht laden:",e);toast("Konnte nicht geladen werden.");return}
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">KLASSENÜBERSICHT · ALLE BLÖCKE · NUR LEHRKRÄFTE</div>
+ <h2> Ampel-Gesamtsicht Praktikumsberichte</h2>
+ <p style="font-size:11px;color:var(--muted)">TN = Tätigkeitsnachweis, EB = Einschätzungsbogen.</p>
+ <div style="overflow-x:auto"><table class="ls-matrix"style="font-size:11px">
+ <thead><tr><th>Schüler:in</th>${spalten.map(sp=>`<th style="white-space:nowrap">${esc(sp.label)}</th>`).join("")}</tr></thead>
+ <tbody>${zeilen.map(z=>`<tr><td>${esc(z.name)}</td>${z.werte.map(a=>`<td style="text-align:center">${praktikumsAmpelDotHTML(a)}</td>`).join("")}</tr>`).join("")||`<tr><td colspan="${spalten.length+1}">Keine Schüler:innen gefunden.</td></tr>`}</tbody>
+ </table></div>
+ <p style="font-size:10px;color:var(--muted);margin-top:8px"><span class="ampel-dot"style="background:#3fa66a"></span> pünktlich & vollständig <span class="ampel-dot"style="background:#e0a324"></span> unvollständig <span class="ampel-dot"style="background:#d9534f"></span> zu spät/fehlerhaft <span class="ampel-dot ampel-none"></span> noch offen</p>
+ <div class="form-actions"style="margin-top:14px">
+ <button class="primary"onclick="printPraktikumsGesamtPDF()"> Als PDF drucken</button>
+ <button class="secondary"onclick="closeModal()">Schließen</button>
+ </div>
+ `);
+}
+window.openPraktikumsGesamtuebersicht=openPraktikumsGesamtuebersicht;
+
+async function printPraktikumsGesamtPDF(){
+ const {spalten,zeilen}=await ladeGesamtAmpelMatrix();
+ const win=window.open("","_blank");
+ if(!win){toast("Bitte Pop-ups für diese Seite erlauben.");return}
+ const escPDF=s=>String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+ const farbe=a=>a==="gruen"?"#3fa66a":a==="orange"?"#e0a324":a==="rot"?"#d9534f":"#e5e7eb";
+ const rows=zeilen.map(z=>`<tr><td>${escPDF(z.name)}</td>${z.werte.map(a=>`<td style="background:${farbe(a)}"></td>`).join("")}</tr>`).join("");
+ const head=spalten.map(sp=>`<th>${escPDF(sp.label)}</th>`).join("");
+ win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Praktikumsberichte – Ampel-Gesamtsicht</title>
+ <style>
+ @page{size:A4 landscape;margin:14mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;margin:0}
+ h1{font-size:20px;margin:0 0 4px}.meta{color:#666;font-size:11px;margin-bottom:14px}
+ table{width:100%;border-collapse:collapse}th,td{border:1px solid #999;padding:5px;text-align:center;font-size:10px}
+ th{background:#f3f3f3;white-space:nowrap}td:first-child,th:first-child{text-align:left;white-space:nowrap}
+ .legende{margin-top:12px;font-size:10px;color:#555}
+ .print-note{background:#f3f3f3;padding:8px;border-radius:6px;margin-bottom:14px;font-size:11px}
+ @media print{.print-note{display:none}}
+ </style></head><body>
+ <div class="print-note">Im Druckdialog „Als PDF sichern“ auswählen.</div>
+ <h1>Praktikumsberichte – Ampel-Gesamtsicht F11Sb</h1>
+ <div class="meta">TN = Tätigkeitsnachweis, EB = Einschätzungsbogen · Stand: ${new Date().toLocaleDateString("de-DE")}</div>
+ <table><thead><tr><th>Schüler:in</th>${head}</tr></thead><tbody>${rows}</tbody></table>
+ <div class="legende">🟩 pünktlich &amp; vollständig &nbsp; 🟧 unvollständig &nbsp; 🟥 zu spät/fehlerhaft &nbsp; ⬜ noch offen</div>
+ <script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script>
+ </body></html>`);
+ win.document.close();
+}
+window.printPraktikumsGesamtPDF=printPraktikumsGesamtPDF;
+
+async function openAmpelBewertungForm(uid,phaseId,typ){
+ const berichte=await getAllePraktikumsberichte();
+ const eintrag=berichte.find(b=>b.uid===uid&&b.phaseId===phaseId&&b.typ===typ);
+ if(!eintrag){toast("Noch keine Datei hochgeladen.");return}
+ const p=PRAKTIKUMSPHASEN.find(x=>x.id===phaseId);
+ const frist=typ==="einschaetzung"?einschaetzungFrist(phaseId):letzterDonnerstagVorOrAm(p.end);
+ const hochgeladenAm=eintrag.hochgeladenAm?.seconds?new Date(eintrag.hochgeladenAm.seconds*1000):null;
+ const fristDatum=new Date(frist+"T19:00:00");
+ const verspaetet=hochgeladenAm&&hochgeladenAm>fristDatum;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">${esc(eintrag.name)} · ${praktikumsberichtTypenFuerPhase(phaseId).find(t=>t.typ===typ)?.label}</div>
+ <h2>Bewertung</h2>
+ <a href="${esc(eintrag.dateiUrl)}"target="_blank"rel="noopener"class="pill"style="margin-bottom:10px;display:inline-block"> ${esc(eintrag.dateiName)} ansehen</a>
+ ${hochgeladenAm?`<p style="font-size:12px;color:${verspaetet?"#d9534f":"var(--muted)"}">Hochgeladen: ${hochgeladenAm.toLocaleString("de-DE")}${verspaetet?" – NACH der Frist!":" – rechtzeitig"}</p>`:""}
+ <div class="form"style="margin-top:10px">
+ <label class="check"><input id="amp_ub_${uid}_${phaseId}_${typ}"type="checkbox"${eintrag.unterschriftBetreuer?"checked":""}> Unterschrift Betreuer:in vorhanden</label>
+ <label class="check"><input id="amp_sb_${uid}_${phaseId}_${typ}"type="checkbox"${eintrag.stempelBetrieb?"checked":""}> Stempel des Betriebes vorhanden</label>
+ <label class="check"><input id="amp_us_${uid}_${phaseId}_${typ}"type="checkbox"${eintrag.unterschriftSchueler?"checked":""}> Unterschrift Schüler:in vorhanden</label>
+ <label class="check"><input id="amp_af_${uid}_${phaseId}_${typ}"type="checkbox"${eintrag.ausfuehrlichkeit?"checked":""}> Ausführlich & inhaltlich sinnvoll</label>
+ <label>Ampel-Einschätzung<select id="amp_farbe_${uid}_${phaseId}_${typ}">
+ <option value="gruen"${eintrag.ampel==="gruen"?"selected":""}> Grün – pünktlich & vollständig</option>
+ <option value="orange"${eintrag.ampel==="orange"?"selected":""}> Orange – noch unvollständig</option>
+ <option value="rot"${eintrag.ampel==="rot"?"selected":""}> Rot – zu spät/fehlerhaft</option>
+ </select></label>
+ <div class="form-actions">
+ <button class="secondary"onclick="openLehrkraftPraktikumsUebersicht('${phaseId}')">Zurück</button>
+ <button class="primary"onclick="saveAmpelBewertung('${uid}','${phaseId}','${typ}')">Speichern</button>
+ </div>
+ </div>
+ `);
+}
+window.openAmpelBewertungForm=openAmpelBewertungForm;
 
 // ---- Wochen-/Monatsplanung -------------------------------------------
 async function getMeineWochenplanung(){
@@ -2785,7 +3230,7 @@ function openWochenplanForm(existing){
  <label>Was steht an?<input id="wpTitle"type="text"maxlength="140"value="${esc(existing?.title||"")}"placeholder="z. B. Vokabeltest vorbereiten"></label>
  <label>Fach (optional)<select id="wpSubject">
  <option value="">Kein bestimmtes Fach</option>
- ${F12SB_FAECHER.map(f=>`<option value="${f.key}"${existing?.subject===f.key?"selected":""}>${f.label}</option>`).join("")}
+ ${F11SB_FAECHER.map(f=>`<option value="${f.key}"${existing?.subject===f.key?"selected":""}>${f.label}</option>`).join("")}
  </select></label>
  <label>Zeitraum<select id="wpScope">
  <option value="woche"${(!existing||existing.scope==="woche")?"selected":""}>Diese Woche</option>
@@ -2860,7 +3305,13 @@ window.toggleWochenplanDone=toggleWochenplanDone;
 window.deleteWochenplanEntry=deleteWochenplanEntry;
 window.quickAddWochenplan=quickAddWochenplan;
 
-
+function aktuellePraktikumsphase(){
+ const today=new Date().toISOString().slice(0,10);
+ const laufend=PRAKTIKUMSPHASEN.find(p=>today>=p.start&&today<=p.end);
+ if(laufend)return {...laufend,status:"laufend"};
+ const kommend=PRAKTIKUMSPHASEN.filter(p=>p.start>today).sort((a,b)=>a.start.localeCompare(b.start))[0];
+ return kommend?{...kommend,status:"kommend"}:null;
+}
 async function miniKalenderHTML(){
  let events=[];
  try{events=(await getCollection("events","start",false)).map(e=>({...e,collection:"events"}))}catch(e){}
@@ -2874,46 +3325,38 @@ async function miniKalenderHTML(){
  ];
  const istFerien=key=>ferienZeitraeume.some(([von,bis])=>key>=von&&key<=bis);
  const today=new Date();today.setHours(0,0,0,0);
- // Immer die AKTUELLE Kalenderwoche, Montag bis Freitag (5 Tage) –
- // wandert von selbst jede Woche mit dem heutigen Datum weiter.
  const monday=new Date(today);monday.setDate(today.getDate()-((today.getDay()+6)%7));
- const days=Array.from({length:5},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return d});
+ const days=Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return d});
  const dateKey=d=>d.toISOString().slice(0,10);
  const eventDates=new Set(events.map(e=>String(e.start||e.date||"").slice(0,10)));
  const birthdayDates=new Set(birthdayEvents.map(e=>String(e.start||"").slice(0,10)));
- const wt=["Mo","Di","Mi","Do","Fr"];
- // Der nächste anstehende Termin (heute oder später), unabhängig davon,
- // ob er noch in diese Woche fällt.
- let naechster=null;
- try{naechster=await getUpcomingCampusCalendarEvent();}catch(e){}
- const naechsterDatum=naechster?String(naechster.start||naechster.date||"").slice(0,10):null;
- const naechsterText=naechster?`${esc(naechster.title||naechster.name||"Termin")} · ${naechsterDatum?fmtDateOnly(naechsterDatum):""}`:"Aktuell kein anstehender Termin";
- return `<a href="#kalender"class="mini-kalender-link"style="text-decoration:none;color:inherit;display:block">
- <div class="mini-kalender">
+ const wt=["Mo","Di","Mi","Do","Fr","Sa","So"];
+ return `<a href="#kalender"class="mini-kalender">
  ${days.map((d,i)=>{const key=dateKey(d);const isToday=key===dateKey(today);
  const ferien=istFerien(key),geburtstag=birthdayDates.has(key),termin=eventDates.has(key);
  return `<div class="mini-kalender-day${isToday?" mini-kalender-today":""}${ferien?" mini-kalender-ferien":""}"><small>${wt[i]}</small><strong>${d.getDate()}</strong>${geburtstag?`<span class="mini-kalender-dot mini-kalender-dot-pink"></span>`:termin?`<span class="mini-kalender-dot"></span>`:""}</div>`;}).join("")}
- </div>
- <small style="display:block;margin-top:8px;font-weight:700;color:var(--ink)">${naechsterText}</small>
- <small style="display:block;margin-top:2px;color:var(--blue-dark);font-size:10px">Zum vollständigen Campus-Kalender →</small>
- </a>`;
+ </a>
+ <small style="display:block;margin-top:6px;color:var(--muted);font-size:10px">Zum vollständigen Campus-Kalender →</small>`;
 }
 async function renderStart(){
  let tasks=[],projects=[],news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
  try{[tasks,projects,news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("tasks","deadline",false),getCollection("projects"),getCollection("news"),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
  const miniKalender=await miniKalenderHTML();
+ const coBanner=await checkoutStartBannerHTML();
+ const praktikumsphase=aktuellePraktikumsphase();
+ const praktikumsAuftraegeMap=await getPraktikumsAuftraege().catch(()=>({}));
+ const aktuellerPraktikumsauftrag=(praktikumsphase?.status==="laufend")?praktikumsAuftraegeMap[praktikumsphase.id]:null;
  const upcomingDate=nextCalendar?.start||nextCalendar?.date||nextCalendar?.startDate;
  const upcomingDateText=upcomingDate?.seconds?new Date(upcomingDate.seconds*1000).toLocaleDateString("de-DE"):String(upcomingDate||"").slice(0,10);
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
  const newsAction=(isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:"")
  +(isTeacher()?`<button class="secondary"onclick="openUserManagement()"> Benutzer verwalten</button>`:"");
- const coBanner=await checkoutStartBannerHTML();
- return`${coBanner}<section class="hero"><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
+ return`${coBanner}<section class="hero"><div><span class="badge"> F11Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Projekte, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
-</div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button><button class="secondary"onclick="go('lernwerkstatt')">Lernwerkstatt</button></div></section>
- <div class="grid grid-3">
+</div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button><button class="secondary"onclick="go('forum')">Campus-Forum</button></div></section>
+ <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
  <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
-class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isTeacher()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
+class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isAdmin()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
 </div>`).join("")||`<div class="empty">Noch keine News.</div>`}</div></div>
  <div class="card card-compact"style="border-left:4px solid #9b59b6"><h3> Nächster Termin</h3><div class="list">${nextCalendar?`<div class="list-item"><div><strong>${esc(nextCalendar.title||nextCalendar.name||"Termin")}</strong><small>${esc(upcomingDateText)}${upcomingTime}</small></div><span class="pill green">Termin</span></div>`:`<div class="empty">Noch keine anstehenden Termine.</div>`}</div></div>
  <div class="card card-compact"style="border-left:4px solid #e0629e"><h3> Geburtstage</h3>${
@@ -2922,8 +3365,7 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  :`<div class="list-item"><div><strong>${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}</strong><small>${esc(birthdayInfo.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))} · ${birthdayInfo.days===1?"morgen":`in ${birthdayInfo.days} Tagen`}</small></div><span class="pill"style="background:${personColor(birthdayInfo.people[0].uid).border};color:#fff">Nächste(r)</span></div>`
  }</div>
  </div>
- </div>
- <div class="grid grid-2"style="margin-top:16px;margin-bottom:16px;gap:12px">
+ <div class="grid grid-3"style="margin-bottom:20px;gap:20px">
  <div class="card card-compact"style="text-align:center">
  <h3 style="margin:0 0 6px"> Uhrzeit</h3>
  <div style="display:flex;justify-content:center">${analogClockSVG(64)}</div>
@@ -2933,7 +3375,17 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  <h3 style="margin:0 0 8px"> Kalender</h3>
  <div id="miniKalenderWrap">${miniKalender}</div>
  </div>
+ ${praktikumsphase?`<a class="card card-compact"href="#praktikum"style="border-left:4px solid #e0a324;display:block;text-decoration:none;color:inherit">
+ <h3 style="margin:0 0 6px"> ${praktikumsphase.status==="laufend"?"Praktikum läuft gerade":"Nächstes Praktikum"}</h3>
+ <strong style="display:block">${esc(praktikumsphase.titel)}</strong>
+ <small style="display:block;margin-top:4px">${esc(fmtDateOnly(praktikumsphase.start))}–${esc(fmtDateOnly(praktikumsphase.end))} · ${esc(praktikumsphase.bereich)}</small>
+ </a>`:`<div class="card card-compact"style="border-left:4px solid #e0a324"><h3 style="margin:0">Praktikum</h3><small>Aktuell keine Phase hinterlegt.</small></div>`}
  </div>
+ ${aktuellerPraktikumsauftrag?`<a class="card"href="#praktikum"style="display:block;text-decoration:none;color:inherit;border-left:4px solid #e0a324;margin-bottom:16px">
+ <span class="pill"style="background:#e8890c;color:#fff">fpA Auftrag</span>
+ <strong style="display:block;margin-top:8px;font-size:15px">${esc(aktuellerPraktikumsauftrag.titel)}</strong>
+ ${aktuellerPraktikumsauftrag.beschreibung?`<small style="display:block;margin-top:4px;color:var(--muted)">${esc(aktuellerPraktikumsauftrag.beschreibung.slice(0,140))}${aktuellerPraktikumsauftrag.beschreibung.length>140?"…":""}</small>`:""}
+ </a>`:""}
  ${(()=>{ensureGlobalClock();return"";})()}
  <div class="card"style="margin-top:16px;margin-bottom:16px">
  <div class="kicker">STUNDENPLAN</div>
@@ -2944,7 +3396,7 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  <button class="primary"onclick="quickAddWochenplan()">＋ Zur Wochenplanung</button>
  <button class="secondary"onclick="go('kompass')">Ausführlicher planen →</button>
  </div>
- ${wochenplan.length?`<div class="list"style="margin-top:10px">${wochenplan.filter(w=>!w.done).slice(0,3).map(w=>`<div class="list-item"><div><strong>${esc(w.title)}</strong>${w.subject?`<small>${esc(F12SB_FAECHER.find(f=>f.key===w.subject)?.label||"")}</small>`:""}</div><span class="pill">${w.scope==="monat"?"Monat":"Woche"}</span></div>`).join("")}</div>`:""}
+ ${wochenplan.length?`<div class="list"style="margin-top:10px">${wochenplan.filter(w=>!w.done).slice(0,3).map(w=>`<div class="list-item"><div><strong>${esc(w.title)}</strong>${w.subject?`<small>${esc(F11SB_FAECHER.find(f=>f.key===w.subject)?.label||"")}</small>`:""}</div><span class="pill">${w.scope==="monat"?"Monat":"Woche"}</span></div>`).join("")}</div>`:""}
  </div>
  <div class="card"style="margin-bottom:16px;text-align:center;border-left:4px solid #3fa66a">
  <h2 style="margin:0 0 8px"> FOSBOS-WM Jahresfokus: Solidarität und Zusammenhalt</h2>
@@ -2952,11 +3404,14 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  </div>
  ${pageHead("ÜBERSICHT","Unser Campus","Die wichtigsten Bereiche auf einen Blick.",newsAction)}
  <div class="grid grid-4">
- ${tile("Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass","#1688cf","PERSÖNLICH")}
- ${tile("Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt","#e0a324","LERNEN")}
- ${tile("Resilienz & Respressi","Finde heraus, was dir gerade helfen könnte.","resilienz","#3fa66a","WOHLBEFINDEN")}
- ${tile("Campus-Kalender","Alle Termine der Klasse auf einen Blick.","kalender","#7c5cbf","ORGANISATION")}
- ${tile("Alternativer Leistungsnachweis","Check-out · K-Prim-Test.","leistungsnachweis","#d24d76","PRÜFUNG")}</div>
+ ${tile(" ","Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass")}
+ ${tile(" ","Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt")}
+ ${tile(" ","Campus-Forum","Austauschen, fragen, helfen und gemeinsam denken.","forum")}
+ ${tile(" ","Projekte","Projektteams, Ziele, Fortschritt und Ergebnisse.","projekte")}
+ ${tile(" ","Kompetenzwerkstatt","Kompetenzen sichtbar machen und entwickeln.","kompetenz")}
+ ${tile(" ","Lernjournal","Lernweg, Reflexionen und nächste Schritte.","journal")}
+ ${tile(" ","fpA","Theorie-Praxis-Transfer-Aufträge und Reflexion.","praktikum")}
+ ${tile(" ","KI-Innovationslabor","KI-Ideen und Innovationspartnerschaften.","ki")}</div>
 </div>${footer()}`;
 }
 async function getRecentForumActivityCount(days){
@@ -2974,8 +3429,11 @@ function printNotenPDF(noten,bestehen){
  const win=window.open("","_blank","width=800,height=800");
  if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
  const fmt=(fach,hj)=>{const erg=berechneHalbjahresergebnis(noten,fach,hj);const sa=schulaufgabenListe(noten,fach,hj).length,so=sonstigeListe(noten,fach,hj).length;return erg===null?"—":`${erg} Punkte (${sa} SA, ${so} sonst.)`};
- const rows=F12SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
- win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Noten – F12Sb</title>
+ const fmtFpa=hj=>{const l=notenListe(noten,"fpa",hj);const a=notenDurchschnitt(l);return a===null?"—":`${a} (${l.length} ${l.length===1?"Note":"Noten"})`};
+ const rows=F11SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
+ const fpaRow=`<tr><td><em>Fachpraktische Ausbildung</em></td><td>${fmtFpa("hj1")}</td><td>${fmtFpa("hj2")}</td></tr>`;
+ const statusText=(label,r)=>!r?`${label}: noch nicht alle Noten eingetragen.`:`${label}: ${r.passed?"nach aktueller Punktlage bestanden":"nach aktueller Punktlage nicht bestanden"}.`;
+ win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Noten – F11Sb</title>
  <style>
  @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.55;margin:0}
  h1{font-size:24px;margin:0 0 4px}.meta{color:#666;font-size:12px;margin-bottom:20px}
@@ -2986,13 +3444,14 @@ function printNotenPDF(noten,bestehen){
  @media print{.print-note{display:none}}
  </style></head><body>
  <div class="print-note">Persönliche Notenübersicht. Im Druckdialog „Als PDF sichern“ auswählen.</div>
- <h1>Meine Noten – F12Sb</h1>
+ <h1>Meine Noten – F11Sb</h1>
  <div class="meta">Punkte 0–15 je Fach und Halbjahr</div>
- <table><thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead><tbody>${rows}</tbody></table>
+ <table><thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead><tbody>${rows}${fpaRow}</tbody></table>
  <div class="status">
- <strong>${!bestehen.vollJahr?"Jahresergebnis: noch nicht alle Noten eingetragen.":bestehen.jahr.imRahmen?"Zulassungs-Orientierung: im Rahmen von §35 Abs. 9 FOBOSO.":"Achtung: Punktlage könnte die Zulassung zur Abschlussprüfung gefährden."}</strong>
+ <strong>${statusText("Probezeit (Stand HJ1)",bestehen.probezeit)}</strong><br>
+ <strong>${statusText("Bestehen des Schuljahres",bestehen.jahr)}</strong>
  </div>
- <p class="disclaimer">Diese Berechnung ist ausschließlich eine Orientierungshilfe nach §21, §35 Abs. 9 FOBOSO – ohne Gewähr. Die vollständige Fachabitur-Berechnung übernimmt der offizielle Streichvorschlag-Rechner eurer Schule.</p>
+ <p class="disclaimer">Diese Berechnung ist ausschließlich eine Orientierungshilfe nach §8, §21 Abs. 3, §22 Abs. 1 Nr. 2 FOBOSO – ohne Gewähr. Die tatsächliche Entscheidung trifft die Klassenkonferenz/Schulleitung anhand einer pädagogischen Gesamtwürdigung.</p>
  <script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script>
  </body></html>`);
  win.document.close();
@@ -3000,8 +3459,8 @@ function printNotenPDF(noten,bestehen){
 function printWochenplanPDF(entries){
  const win=window.open("","_blank","width=800,height=800");
  if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
- const rows=entries.map(w=>`<tr><td>${w.done?"✓":""}</td><td>${escPDF(w.title)}</td><td>${w.subject?escPDF(F12SB_FAECHER.find(f=>f.key===w.subject)?.label||""):"—"}</td><td>${w.scope==="monat"?"Monat":"Woche"}</td><td>${escPDF(w.dueDate||"—")}</td></tr>`).join("");
- win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Wochenplanung – F12Sb</title>
+ const rows=entries.map(w=>`<tr><td>${w.done?"✓":""}</td><td>${escPDF(w.title)}</td><td>${w.subject?escPDF(F11SB_FAECHER.find(f=>f.key===w.subject)?.label||""):"—"}</td><td>${w.scope==="monat"?"Monat":"Woche"}</td><td>${escPDF(w.dueDate||"—")}</td></tr>`).join("");
+ win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Wochenplanung – F11Sb</title>
  <style>
  @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.55;margin:0}
  h1{font-size:24px;margin:0 0 16px}
@@ -3011,7 +3470,7 @@ function printWochenplanPDF(entries){
  @media print{.print-note{display:none}}
  </style></head><body>
  <div class="print-note">Persönliche Wochen-/Monatsplanung. Im Druckdialog „Als PDF sichern“ auswählen.</div>
- <h1>Meine Wochen-/Monatsplanung – F12Sb</h1>
+ <h1>Meine Wochen-/Monatsplanung – F11Sb</h1>
  <table><thead><tr><th>Erl.</th><th>Was steht an</th><th>Fach</th><th>Zeitraum</th><th>Termin</th></tr></thead><tbody>${rows||"<tr><td colspan=5>Noch keine Einträge.</td></tr>"}</tbody></table>
  <script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script>
  </body></html>`);
@@ -3020,6 +3479,9 @@ function printWochenplanPDF(entries){
 window.printNotenPDF=printNotenPDF;window.printWochenplanPDF=printWochenplanPDF;
 
 async function renderKompass(){
+ const tasks=await getCollection("tasks","deadline",false), projects=await getCollection("projects");
+ const projectDeadlines=projects.filter(p=>p.deadline).sort((a,b)=>String(a.deadline).localeCompare(String(b.deadline)));
+ const todayStr=new Date().toISOString().slice(0,10);
  const [unreadCount,forumActivity,wochenplan,noten]=await Promise.all([
  getUnreadMessageCount().catch(()=>0),
  getRecentForumActivityCount(3),
@@ -3030,7 +3492,7 @@ async function renderKompass(){
  const offenePlanung=wochenplan.filter(w=>!w.done);
  const erledigtePlanung=wochenplan.filter(w=>w.done);
 
- return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Wochenplanung und Noten.","")}
+ return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Aufgaben, Noten und Projekte.",`<button class="primary"onclick="openTaskForm()">＋ Aufgabe</button>`)}
 
  ${(unreadCount>0||forumActivity>0)?`<div class="kompass-alerts">
  ${unreadCount>0?`<a href="#forum-nachrichten"class="pill kompass-alert-msg"> ${unreadCount} neue Nachricht${unreadCount===1?"":"en"}</a>`:""}
@@ -3052,7 +3514,7 @@ async function renderKompass(){
  </div>
  <div class="list">${offenePlanung.map(w=>`<div class="list-item">
  <div><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox"onclick="toggleWochenplanDone('${w.id}',${!!w.done})"><strong>${esc(w.title)}</strong></label>
- <small>${w.subject?esc(F12SB_FAECHER.find(f=>f.key===w.subject)?.label||""):"Kein Fach"} ${w.dueDate?"· "+esc(fmtDateOnly(w.dueDate)):""}</small></div>
+ <small>${w.subject?esc(F11SB_FAECHER.find(f=>f.key===w.subject)?.label||""):"Kein Fach"} ${w.dueDate?"· "+esc(fmtDateOnly(w.dueDate)):""}</small></div>
  <div style="display:flex;gap:6px;align-items:center"><span class="pill">${w.scope==="monat"?"Monat":"Woche"}</span><button class="secondary"onclick="openWochenplanForm(${JSON.stringify(w).replace(/"/g,"&quot;")})">Bearbeiten</button></div>
  </div>`).join("")||`<div class="empty">Noch nichts geplant. Leg deinen ersten Punkt an.</div>`}</div>
  ${erledigtePlanung.length?`<details style="margin-top:10px"><summary style="cursor:pointer;color:var(--muted);font-size:13px">${erledigtePlanung.length} erledigt</summary>
@@ -3069,7 +3531,8 @@ async function renderKompass(){
  <div class="noten-eintragen-kachel">
  <strong style="display:block;font-size:13px;margin-bottom:8px"> Note eintragen</strong>
  <label style="font-size:11px">Fach<select id="notenSchnellFach">
- ${F12SB_FAECHER.map(f=>`<option value="${f.key}">${f.label}</option>`).join("")}
+ ${F11SB_FAECHER.map(f=>`<option value="${f.key}">${f.label}</option>`).join("")}
+ <option value="fpa">Fachpraktische Ausbildung</option>
  </select></label>
  <label style="font-size:11px;margin-top:8px;display:block">Halbjahr<select id="notenSchnellHj">
  <option value="hj1">1. Halbjahr</option>
@@ -3082,14 +3545,14 @@ async function renderKompass(){
  <div style="overflow-x:auto"><table class="noten-table noten-table-kompakt">
  <thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead>
  <tbody>
- ${F12SB_FAECHER.map(f=>{
+ ${F11SB_FAECHER.map(f=>{
  const erg1=berechneHalbjahresergebnis(noten,f.key,"hj1");
  const erg2=berechneHalbjahresergebnis(noten,f.key,"hj2");
  const w1=alleEinzelwerte(noten,f.key,"hj1");
  const w2=alleEinzelwerte(noten,f.key,"hj2");
  const zelle=(erg,w)=>{
  if(!w.length)return"–";
- const werte=w.map(x=>`${x.value}<sup title="${x.muendlich?"mündlich":"schriftlich"}">${x.muendlich?"m":"s"}</sup>`).join(", ");
+ const werte=w.join(", ");
  return erg!==null?`<strong>${erg}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
  };
  return`<tr><td>${f.label}</td>
@@ -3097,8 +3560,18 @@ async function renderKompass(){
  <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('${f.key}','hj2')">${zelle(erg2,w2)}</button></td>
  </tr>`;
  }).join("")}
+ ${(()=>{const l1=notenListe(noten,"fpa","hj1"),a1=notenDurchschnitt(l1),l2=notenListe(noten,"fpa","hj2"),a2=notenDurchschnitt(l2);
+ const zelleFpa=(a,l)=>{
+ if(!l.length)return"–";
+ const werte=l.map(e=>e.value).join(", ");
+ return a!==null&&l.length>1?`<strong>${a}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
+ };
+ return`<tr class="noten-fpa"><td><em>fpA</em></td>
+ <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fpa','hj1')">${zelleFpa(a1,l1)}</button></td>
+ <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fpa','hj2')">${zelleFpa(a2,l2)}</button></td>
+ </tr>`;})()}
  </tbody></table></div>
- <p style="font-size:10px;color:var(--muted);margin:6px 0 0">Fett = Halbjahresergebnis nach FOBOSO (braucht Schulaufgabe UND sonstige Leistungen). In Klammern: die einzelnen Werte, <sup>s</sup> = schriftlich, <sup>m</sup> = mündlich.</p>
+ <p style="font-size:10px;color:var(--muted);margin:6px 0 0">Fett = Halbjahresergebnis nach FOBOSO (braucht Schulaufgabe UND sonstige Leistungen). In Klammern/ohne Klammer: die einzelnen eingetragenen Werte.</p>
  <div class="form-actions"style="margin-top:10px">
  <button class="secondary"onclick="resetMeineNoten()">Zurücksetzen</button>
  <button class="secondary"onclick="printNotenPDF(${JSON.stringify(noten).replace(/"/g,"&quot;")},${JSON.stringify(bestehen).replace(/"/g,"&quot;")})"> PDF</button>
@@ -3108,29 +3581,42 @@ async function renderKompass(){
 
  <div class="grid grid-2"style="margin-top:16px;gap:12px">
  <details class="noten-collapsible">
- <summary> Jahresergebnis je Fach</summary>
+ <summary> Probezeit-Status (HJ1)</summary>
  <div class="notice">
- ${!bestehen.vollJahr?`<p style="margin:0">Trag alle Noten beider Halbjahre ein, um deinen endgültigen Stand zu sehen.</p>`
- :`<strong style="font-size:15px">${bestehen.jahr.imRahmen?" Zulassungs-Orientierung: im Rahmen von §35 Abs. 9 FOBOSO":" Achtung: Punktlage könnte die Zulassung zur Abschlussprüfung gefährden"}</strong>`}
- <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochJahr(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
- <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §21, §35 Abs. 9 FOBOSO – <strong>ohne Gewähr</strong>. Die vollständige Fachabitur-Berechnung (25 Halbjahresergebnisse, 4 dreifach gewichtete Prüfungen, §35 Abs. 6 FOBOSO) mit optimalem Streichvorschlag leistet diese Übersicht bewusst nicht – dafür nutzt eure Schule den offiziellen Streichvorschlag-Rechner (z. B. der Beruflichen Oberschule Traunstein).</p>
+ ${!bestehen.vollHJ1?`<p style="margin:0">Trag alle Noten des 1. Halbjahrs ein (inkl. fachpraktischer Ausbildung), um deinen endgültigen Stand zu sehen.</p>`
+ :`<strong style="font-size:15px">${bestehen.probezeit.passed?" Probezeit nach aktueller Punktlage bestanden":" Probezeit nach aktueller Punktlage nicht bestanden"}</strong>
+ <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Fachpraktische Ausbildung HJ1: ${bestehen.probezeit.fpaOk?"✓ mind. 4 Punkte":"✗ unter 4 Punkten"} · Fächer-Regel: ${bestehen.probezeit.fachCheck.passed?`erfüllt (Variante ${bestehen.probezeit.fachCheck.rule})`:"nicht erfüllt"}</p>`}
+ <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochHJ1(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
+ <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §8, §21 Abs. 3 FOBOSO – <strong>ohne Gewähr</strong>. Die tatsächliche Entscheidung trifft die Klassenkonferenz.</p>
  </div>
  </details>
  <details class="noten-collapsible">
- <summary> So wird die Fachabiturnote berechnet</summary>
+ <summary> Bestehen des Schuljahres</summary>
  <div class="notice">
- <p style="margin:0"><strong>Kurz erklärt (§21, §31, §35 FOBOSO):</strong></p>
- <ul style="margin:8px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.6">
- <li>Je Halbjahr: Durchschnitt der sonstigen Leistungen + Schulaufgabe(n), geteilt durch die Anzahl der eingerechneten Werte.</li>
- <li>Eingebracht werden 25 Halbjahresergebnisse aus 12/2, 12/1 und 11/2 (11/1 nur bei reinen 11.-Klasse-Fächern) – maximal ein Ergebnis pro Fach darf gestrichen werden.</li>
- <li>Dazu kommen 4 Prüfungsleistungen (dreifach gewichtet) und (aus der 11. Klasse) die fachpraktische Ausbildung.</li>
- <li>Zulassung zur Abschlussprüfung: höchstens 2 Gesamtergebnisse mit 1–3 Punkten bzw. 1 mit 0 Punkten, bei kritischer Punktlage zusätzlich eine Mindestsumme von 200–240 Punkten.</li>
- <li>Durchschnittsnote: S = 17/3 − 5·E/M (E = erreichte Punktsumme, M = 600 Punkte höchstmöglich).</li>
- </ul>
- <p style="margin-top:12px;font-size:11px;color:var(--muted)">Das ist eine vereinfachte Orientierung – die exakte, optimale Berechnung (inkl. Streichvorschlag) übernimmt der offizielle Rechner eurer Schule.</p>
+ ${!bestehen.vollJahr?`<p style="margin:0">Trag alle Noten beider Halbjahre ein (inkl. fachpraktischer Ausbildung), um deinen endgültigen Stand zu sehen.</p>`
+ :`<strong style="font-size:15px">${bestehen.jahr.passed?" Schuljahr nach aktueller Punktlage bestanden":" Schuljahr nach aktueller Punktlage nicht bestanden"}</strong>
+ <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Fachpraktische Ausbildung: ${bestehen.jahr.fpaOk?"✓ Bedingungen erfüllt":"✗ Bedingungen nicht erfüllt"} · Fächer-Regel: ${bestehen.jahr.fachCheck.passed?`erfüllt (Variante ${bestehen.jahr.fachCheck.rule})`:"nicht erfüllt"}</p>`}
+ <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochJahr(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
+ <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §22 Abs. 1 Nr. 2, §21 Abs. 3 FOBOSO – <strong>ohne Gewähr</strong>. Die tatsächliche Entscheidung trifft die Klassenkonferenz.</p>
  </div>
  </details>
  </div>
+ </div>
+
+ <div class="kicker"style="margin:22px 0 8px">AUFGABEN & PROJEKTE</div>
+ <div class="grid grid-3"><div class="card stat"><b>${tasks.filter(t=>t.ownerUid===currentUser.uid).length}</b><span>Meine
+Aufgaben</span></div><div class="card stat"><b>${projects.length}</b><span>Projekte</span></div><div class="card stat">
+<b>${profile?.role==="teacher"?"Lehrkraft":profile?.role==="admin"?"Admin":"Schüler/in"}</b><span>Rolle</span></div></div>
+ <div class="grid grid-3"style="margin-top:12px">
+ <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #4a90d9"onclick="openMeineAufgabenModal()">
+ <span class="emoji"></span><strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
+ </button>
+ <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #9b59b6"onclick="openProjektFristenModal()">
+ <span class="emoji"></span><strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
+ </button>
+ <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #1a9b8e"onclick="openAktuelleProjekteModal()">
+ <span class="emoji"></span><strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
+ </button>
  </div>
 </div>${footer()}`;
 }
@@ -3170,19 +3656,7 @@ window.openProjektFristenModal=openProjektFristenModal;
 window.openAktuelleProjekteModal=openAktuelleProjekteModal;
 function taskHTML(t){return`<div class="list-item"><div><strong>${esc(t.title)}</strong><small>Verantwortlich:
 ${esc(t.ownerName||"")} · Deadline: ${esc(t.deadline||"—")} · Nächster Schritt: ${esc(t.next||"—")}</small></div><div
-class="traffic">${statusDot(t.status)}<span class="pill">${statusLabel[t.status]||"—"}</span>${(t.createdBy===currentUser.uid||isTeacher())?`<button type="button"class="secondary"style="padding:4px 8px;margin-left:6px"onclick="deleteTask('${t.id}')"title="Aufgabe löschen">✕</button>`:""}</div></div>`}
-async function deleteTask(id){
- if(!confirm("Diese Aufgabe wirklich löschen?"))return;
- try{
- await deleteDoc(doc(db,"tasks",id));
- await render();
- toast("Aufgabe gelöscht.");
- }catch(e){
- console.error("Aufgabe löschen:",e);
- toast(e?.code==="permission-denied"?"Firebase verweigert das Löschen. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gelöscht werden.");
- }
-}
-window.deleteTask=deleteTask;
+class="traffic">${statusDot(t.status)}<span class="pill">${statusLabel[t.status]||"—"}</span></div></div>`}
 
 // ---- Klassenübersicht für Lehrkräfte: Lehrplan-Fortschritt + Ampel je LB --
 function ampelDotHTML(status){
@@ -3192,7 +3666,7 @@ function ampelDotHTML(status){
 }
 async function openLehrplanKlassenuebersicht(fach){
  if(!isTeacher()){toast("Nur Lehrkräfte können die Klassenübersicht öffnen.");return}
- const fachLbl=F12SB_FAECHER.find(f=>f.key===fach)?.label||fach;
+ const fachLbl=F11SB_FAECHER.find(f=>f.key===fach)?.label||fach;
  const wochenGesamt=(LEHRPLAN_WOCHEN[fach]||[]).length;
  let students=[],fortschrittDocs=[],lsTasks=[],allAttempts=[];
  try{
@@ -3244,145 +3718,2677 @@ async function openLehrplanKlassenuebersicht(fach){
 window.openLehrplanKlassenuebersicht=openLehrplanKlassenuebersicht;
 
 async function renderFaecherUebersicht(){
- return`${pageHead("LEHRPLAN & LERNINHALTE","Fächer 12. Klasse","Wähle ein Fach, um den Lehrplan-Zeitstrahl mit Themen, Aufträgen und Material zu öffnen.","")}
- <div class="grid grid-4">${F12SB_LEHRPLAN_FAECHER.map(f=>{
+ return`${pageHead("LEHRPLAN & LERNINHALTE","Fächer 11. Klasse","Wähle ein Fach, um den Lehrplan-Zeitstrahl mit Themen, Aufträgen und Material zu öffnen.","")}
+ <div class="grid grid-4">${F11SB_FAECHER.map(f=>{
  const wochen=LEHRPLAN_WOCHEN[f.key]||[];
  const c=personColor(f.key);
  return`<button class="card tile"style="background:#fff;border-left:4px solid ${c.border};text-align:left"onclick="openFach('${f.key}')">
- <strong style="font-size:15px">${f.label}</strong>
- <small style="display:block;margin-top:6px">${wochen.length?`${wochen.length} Lehrplan-Wochen hinterlegt`:"Lehrplan-Zeitstrahl folgt"}</small>
- <span class="tile-label"style="color:${c.border}">FACH</span>
+ <strong style="font-size:15px;color:${c.text}">${f.label}</strong>
+ <small style="display:block;margin-top:6px">${f.key==="paedagogik"?"4 Lernbereiche · Projekt + Abschlussprüfungs-Training":wochen.length?`${wochen.length} Lehrplan-Wochen hinterlegt`:"Lehrplan-Zeitstrahl folgt"}</small>
  </button>`;
  }).join("")}</div>
  ${footer()}`;
 }
 
-const PP_ZEITSTRAHL_TAGE=[{date:"2026-09-16",lb:1,thema:"Formalia/Der Begriff Entwicklung",typ:"normal"},
-{date:"2026-09-18",lb:1,thema:"Begriff Entwicklung",typ:"normal"},
-{date:"2026-09-21",lb:1,thema:"Bedingungen der Entwicklung",typ:"normal"},
-{date:"2026-09-23",lb:1,thema:"Bedingungen der Entwicklung",typ:"normal"},
-{date:"2026-09-25",lb:1,thema:"Bedingungen der Entwicklung",typ:"normal"},
-{date:"2026-09-28",lb:1,thema:"Einstieg Psychoanalyse: Grundannahmen, Instanzen, Dynamiken",typ:"normal"},
-{date:"2026-09-30",lb:1,thema:"Das psychoanalytische Persönlichkeitsmodell",typ:"normal"},
-{date:"2026-10-02",lb:1,thema:"Ich-Stärke und Ich-Schwäche",typ:"normal"},
-{date:"2026-10-05",lb:1,thema:"Angst und Abwehr (Lernsituation „Carlas Diebstähle“)",typ:"normal"},
-{date:"2026-10-07",lb:1,thema:"Angst und Abwehr",typ:"normal"},
-{date:"2026-10-09",lb:1,thema:"Die Abwehrmechanismen",typ:"normal"},
-{date:"2026-10-12",lb:1,thema:"Psychosexuelle Entwicklung (orale und anale Phase)",typ:"normal"},
-{date:"2026-10-14",lb:1,thema:"Phallische Phase, Latenzperiode, genitale Phase",typ:"normal"},
-{date:"2026-10-16",lb:1,thema:"Entstehung seelischer Fehlentwicklungen, kritische Würdigung",typ:"normal"},
-{date:"2026-10-19",lb:1,thema:"Entwicklung im Lebenslauf – Theorie der Lebensspanne",typ:"normal"},
-{date:"2026-10-21",lb:1,thema:"Bindung und Entwicklung",typ:"normal"},
-{date:"2026-10-23",lb:1,thema:"Erstellen eines Erklärvideos",typ:"normal"},
-{date:"2026-10-26",lb:1,thema:"Sichere und unsichere Bindung",typ:"normal"},
-{date:"2026-10-28",lb:1,thema:"Sichere und unsichere Bindung",typ:"normal"},
-{date:"2026-10-30",lb:1,thema:"Förderung gelungener Bindung",typ:"normal"},
-{date:"2026-11-09",lb:1,thema:"Entwicklung im Jugendalter",typ:"normal"},
-{date:"2026-11-11",lb:1,thema:"Vulnerabilität und Resilienz",typ:"normal"},
-{date:"2026-11-13",lb:1,thema:"1. Kurzarbeit: Entwicklung/Psychoanalytische Theorie",typ:"exam"},
-{date:"2026-11-16",lb:2,thema:"Begriff Persönlichkeit",typ:"normal"},
-{date:"2026-11-20",lb:2,thema:"Erhebung der Persönlichkeit",typ:"normal"},
-{date:"2026-11-23",lb:2,thema:"Big-Five-Modell",typ:"normal"},
-{date:"2026-11-25",lb:2,thema:"Big-Five-Modell",typ:"normal"},
-{date:"2026-11-27",lb:2,thema:"Menschenbild der personenzentrierten Theorie",typ:"normal"},
-{date:"2026-11-30",lb:2,thema:"Menschenbild der personenzentrierten Theorie",typ:"normal"},
-{date:"2026-12-02",lb:2,thema:"Aktualisierungstendenz",typ:"normal"},
-{date:"2026-12-04",lb:2,thema:"Bildung und Wirkung des Selbstkonzepts",typ:"normal"},
-{date:"2026-12-07",lb:2,thema:"1. Schulaufgabe: Psychosexuelle Entwicklung/Persönlichkeit",typ:"exam"},
-{date:"2026-12-09",lb:2,thema:"Flexibilität des Selbstkonzepts/Abwehr",typ:"normal"},
-{date:"2026-12-11",lb:2,thema:"Organismischer Bewertungsprozess",typ:"normal"},
-{date:"2026-12-14",lb:2,thema:"Kongruenz und Inkongruenz",typ:"normal"},
-{date:"2026-12-16",lb:2,thema:"Entstehung psychischer Störungen",typ:"normal"},
-{date:"2026-12-18",lb:2,thema:"Bedeutung für die Erziehung",typ:"normal"},
-{date:"2026-12-21",lb:2,thema:"Die sozial-kognitive Theorie und Persönlichkeit",typ:"normal"},
-{date:"2026-12-23",lb:2,thema:"Identität oder Selbstverständnis eines Menschen",typ:"normal"},
-{date:"2027-01-11",lb:2,thema:"Identitätstypen nach Marcia",typ:"normal"},
-{date:"2027-01-13",lb:3,thema:"Grundlagen Sozialer Arbeit",typ:"normal"},
-{date:"2027-01-15",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
-{date:"2027-01-18",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
-{date:"2027-01-20",lb:3,thema:"Aufgabenbereiche der Sozialen Arbeit",typ:"normal"},
-{date:"2027-01-22",lb:3,thema:"Handlungskonzepte",typ:"normal"},
-{date:"2027-01-25",lb:3,thema:"Verhaltensorientiertes Konzept",typ:"normal"},
-{date:"2027-01-27",lb:3,thema:"Verhaltensmodifikation",typ:"normal"},
-{date:"2027-01-29",lb:3,thema:"Life-Modell – Transaktion",typ:"normal"},
-{date:"2027-02-01",lb:3,thema:"Anpassung",typ:"normal"},
-{date:"2027-02-03",lb:3,thema:"Nische und Habitat",typ:"normal"},
-{date:"2027-02-05",lb:3,thema:"Lebens-Stress",typ:"normal"},
-{date:"2027-02-15",lb:3,thema:"Methode für die Praxis",typ:"normal"},
-{date:"2027-02-17",lb:3,thema:"Fallbearbeitung Frau Müller",typ:"normal"},
-{date:"2027-02-19",lb:3,thema:"Kritische Würdigung Life-Modell",typ:"normal"},
-{date:"2027-02-22",lb:3,thema:"Thiersch – Lebenswelt",typ:"normal"},
-{date:"2027-02-24",lb:3,thema:"Thiersch – Dimensionen",typ:"normal"},
-{date:"2027-02-26",lb:3,thema:"Thiersch – Handlungsmaximen",typ:"normal"},
-{date:"2027-03-01",lb:3,thema:"Wiederholung/Prüfungsvorbereitung LB 3",typ:"normal"},
-{date:"2027-03-03",lb:3,thema:"2. Schulaufgabe: Soziale Arbeit",typ:"exam"},
-{date:"2027-03-05",lb:4,thema:"Soziale Kommunikation und Interaktion",typ:"normal"},
-{date:"2027-03-08",lb:4,thema:"Organon-Modell",typ:"normal"},
-{date:"2027-03-10",lb:4,thema:"Erfolgreiche und gestörte Kommunikation",typ:"normal"},
-{date:"2027-03-12",lb:4,thema:"Erstes Axiom (Watzlawick)",typ:"normal"},
-{date:"2027-03-15",lb:4,thema:"Zweites Axiom",typ:"normal"},
-{date:"2027-03-17",lb:4,thema:"Drittes Axiom",typ:"normal"},
-{date:"2027-03-19",lb:4,thema:"Viertes Axiom",typ:"normal"},
-{date:"2027-04-05",lb:4,thema:"Fünftes Axiom",typ:"normal"},
-{date:"2027-04-07",lb:4,thema:"Fallbearbeitung",typ:"normal"},
-{date:"2027-04-09",lb:4,thema:"Kommunikationstechniken",typ:"normal"},
-{date:"2027-04-12",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
-{date:"2027-04-14",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
-{date:"2027-04-16",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
-{date:"2027-04-19",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
-{date:"2027-04-21",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
-{date:"2027-04-23",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
-{date:"2027-04-26",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"},
-{date:"2027-04-28",lb:0,thema:"Wiederholung/Prüfungsvorbereitung LB 1–4",typ:"review"}
-];
-// ---- Horizontaler Zeitstrahl (rein informativ, nicht anklickbar) ----
-// Ein Punkt je Unterrichtstermin (Mo/Mi/Fr), farbig nach Lernbereich,
-// Prüfungen als Raute, "Heute" wandert automatisch mit dem Datum mit.
-function zeitstrahlPunktHTML(tag,istHeute){
- const c=LERNBEREICH_FARBEN[tag.lb]||null;
- const istExam=tag.typ==="exam";
- const farbe=istExam?"#E24B4A":c?c.border:"#b8c4cc";
- const punktStil=istExam
-  ?`width:20px;height:20px;border-radius:4px;transform:rotate(45deg);background:${farbe}`
-  :`width:${istHeute?16:12}px;height:${istHeute?16:12}px;border-radius:50%;background:${farbe}${istHeute?`;box-shadow:0 0 0 4px ${c?c.bg:"#eef1f3"}`:""}`;
- const datum=fmtDateOnly(tag.date);
- return`<div class="zeitstrahl-punkt"style="flex:0 0 128px;text-align:center;position:relative">
- <div style="${punktStil};margin:${istExam?24:istHeute?26:28}px auto 10px;position:relative;z-index:1"></div>
- <div style="font-size:12px;color:${istHeute?farbe:"var(--muted)"};font-weight:${istHeute?700:400}">${esc(datum)}</div>
- <div class="zeitstrahl-thema"style="font-size:13px;margin-top:5px;font-weight:${istHeute||istExam?700:500};color:${istExam?"#A32D2D":"var(--ink)"}">${esc(tag.thema)}</div>
+// ============================================================
+// PÄDAGOGIK/PSYCHOLOGIE · ZEITSTRAHL (Ebene 1), TEILANSICHT (Ebene 2),
+// APT-INHALT (Ebene 3)
+// ============================================================
+const SCHULJAHR_START="2026-09-15",SCHULJAHR_ENDE="2027-07-30";
+function phaseStatus(ph,heute){return heute<ph.start?"kommend":heute>ph.end?"fertig":"laeuft";}
+function fmtKurz(d){const m=/^\d{4}-(\d{2})-(\d{2})/.exec(d||"");return m?`${m[2]}.${m[1]}.`:String(d||"")}
+function ppHexRgb(h){h=String(h).replace("#","");return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16))}
+// Mischt die Lernbereichsfarbe mit einem hellen Grau – t=0 fast farblos,
+// t=1 volle Farbe. So "sättigt" sich eine Kachel mit dem Fortschritt.
+function ppMix(hex,t){const a=ppHexRgb("#EEF2F6"),b=ppHexRgb(hex),k=Math.max(0,Math.min(1,t));return`rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*k)).join(",")})`;}
+function ppFarbe(ph){return PP_FARBEN[ph.lbNum]||"#8a99a3";}
+function ppSaettigung(prozent){return 0.08+0.92*(prozent/100);}
+const APT_SCHRITT_LABELS=["Prüfungsfrage","Einarbeitung","Fachaufsatz üben","Feedback"];
+const APT_TABS=["frage","einarbeitung","aufsatz","feedback"];
+// Ältere Tab-Namen (Buttons, gespeicherte Aufrufe) auf die neuen 4 Schritte abbilden.
+const STUNDE_TAB_IDX={frage:0,einarbeitung:1,inhalte:1,basischeck:1,aufsatz:2,produkt:2,feedback:3,abschluss:3};
+// Alte Haken zählen weiter mit, damit bereits gesammelter Fortschritt nicht verloren geht.
+function aptSchritte(f){f=f||{};return[
+ !!f.frageGelesen,
+ !!(f.einarbeitungAbgeschlossen||(f.materialBearbeitet&&f.basischeckErledigt&&f.eingrenzung)),
+ !!(f.aufsatzErledigt||f.produktHochgeladen),
+ !!(f.feedbackErledigt||f.vorkorrekturUmgesetzt)
+];}
+// Stundeninhalte mit den 4 Schritten: alle Prüfungstrainings-Einheiten und die Einstiegsinhalte.
+function istStundeneinheit(id){const e=lehrplanWocheById("paedagogik",id);return e?.typ==="apt"||PROJEKT_PHASEN.some(p=>p.einstieg&&p.notwendigeWochen.includes(id));}
+function ppTeilWochen(ph,teil){return(teil==="projekt"?ph.projektSchulwochen:ph.aptSchulwochen).map(swById);}
+function ppTeilName(teil,ph){return teil==="projekt"?(ph?.einstieg?"Einstieg":"Projekt"):"Abschlussprüfungs-Training";}
+function ppTeilIcon(teil,ph){return teil==="projekt"?(ph?.einstieg?"🧪":"🔬"):"🎓";}
+
+// Einstieg (LB 1): Weg in 4 Schritten (Inhalt 1 → Inhalt 7/8 → interaktive Stunde → Abschluss Inhalt 9/10).
+// get(wocheId) liefert das Fortschrittsdokument der Person (Schüler:in-Map oder Lehrkraft-Liste).
+function ppEinstiegSchritte(ph,get){
+ return(ph.einstiegWeg||[]).map((k,i)=>k==="stunde"
+  ?{nr:i+1,art:"stunde",id:ph.stundeWocheId,done:!!(get(ph.stundeWocheId)||{}).experimentErledigt}
+  :{nr:i+1,art:"einheit",id:k,done:!!(get(k)||{}).abgeschlossen});
+}
+function ppTeilFortschritt(ph,teil,fortschrittMap,meinTeam){
+ if(teil==="projekt"){
+  const inhalteFertig=ph.notwendigeWochen.filter(id=>fortschrittMap[id]?.abgeschlossen).length;
+  if(ph.einstieg){
+   const sch=ppEinstiegSchritte(ph,id=>fortschrittMap[id]);
+   const n=sch.filter(x=>x.done).length;
+   return{erledigt:n,gesamt:sch.length,prozent:sch.length?Math.round(n/sch.length*100):0,inhalteFertig,inhalteGesamt:ph.notwendigeWochen.length,ms:0,msGesamt:0,stunde:sch.find(x=>x.art==="stunde")?.done?1:0};
+  }
+  const ms=msErreichtAnzahl(ph,meinTeam,meinTeam?._beitraege);
+  const gesamt=ph.notwendigeWochen.length+ph.meilensteine.length;
+  return{erledigt:inhalteFertig+ms,gesamt,prozent:gesamt?Math.round((inhalteFertig+ms)/gesamt*100):0,inhalteFertig,inhalteGesamt:ph.notwendigeWochen.length,ms,msGesamt:ph.meilensteine.length};
+ }
+ const schritte=ph.trainingWochen.reduce((s,id)=>s+aptSchritte(fortschrittMap[id]).filter(Boolean).length,0);
+ const gesamt=ph.trainingWochen.length*APT_TABS.length;
+ const inhalteFertig=ph.trainingWochen.filter(id=>aptSchritte(fortschrittMap[id]).every(Boolean)).length;
+ return{erledigt:schritte,gesamt,prozent:gesamt?Math.round(schritte/gesamt*100):0,inhalteFertig,inhalteGesamt:ph.trainingWochen.length};
+}
+// Zeitbudget in Schulwochen: wie viele sind noch übrig, wo "sollte" man
+// ungefähr stehen (für die Tempo-Anzeige)?
+function ppZeitbudget(wochen,heute){
+ const gesamt=wochen.length,pl=gesamt>1?"n":"";
+ const vergangen=wochen.filter(w=>w.end<heute).length;
+ const laufend=wochen.find(w=>w.start<=heute&&heute<=w.end)||null;
+ const rest=gesamt-vergangen;
+ let soll=vergangen/gesamt;
+ if(laufend){const tag=Math.round((new Date(heute)-new Date(laufend.start))/86400000);soll=(vergangen+Math.min(1,(tag+1)/5))/gesamt;}
+ const naechste=wochen.find(w=>w.start>heute)||null;
+ let text,zustand;
+ if(heute<wochen[0].start){zustand="kommend";text=`startet am ${fmtKurz(wochen[0].start)} · ${gesamt} Schulwoche${pl}`;}
+ else if(rest<=0){zustand="vorbei";text=`Zeitbudget aufgebraucht (${gesamt} Schulwoche${pl})`;}
+ else{zustand=laufend?"laeuft":"pause";text=`noch ${rest} von ${gesamt} Schulwoche${pl}${laufend?" · diese Woche läuft":naechste?` · weiter ab ${fmtKurz(naechste.start)}`:""}`;}
+ return{gesamt,vergangen,rest,laufend,soll:Math.max(0,Math.min(1,soll)),text,zustand};
+}
+function ppTempo(prozent,budget){
+ if(prozent>=100)return{txt:"✓ geschafft",farbe:"#3fa66a"};
+ if(budget.zustand==="kommend")return prozent>0?{txt:"Vorsprung",farbe:"#3fa66a"}:null;
+ if(budget.zustand==="vorbei")return{txt:"Zeitbudget überschritten",farbe:"#d9534f"};
+ const soll=Math.round(budget.soll*100);
+ if(prozent>=soll-10)return{txt:"im Zeitplan",farbe:"#3fa66a"};
+ if(prozent>=soll-30)return{txt:"etwas hinterher",farbe:"#e0a324"};
+ return{txt:"deutlich hinterher",farbe:"#d9534f"};
+}
+async function ladePPTeams(){
+ const res={};
+ await Promise.all(PROJEKT_PHASEN.map(async ph=>{
+  const teams=await getLehrplanTeams(ph.projektWocheId);
+  res[ph.id]=teams.find(t=>(t.mitgliederUids||[]).includes(currentUser?.uid))||null;
+ }));
+ const meine=Object.values(res).filter(Boolean);
+ const bs=await getMeilensteinBeitraege(meine.map(t=>t.id));
+ meine.forEach(t=>{t._beitraege=bs.filter(b=>b.teamId===t.id);});
+ return res;
+}
+function ppWochenZellenHTML(wochen,farbe,heute){
+ return`<div class="pp-wz-reihe">${wochen.map(w=>{
+  const st=w.end<heute?"vorbei":(w.start<=heute&&heute<=w.end)?"jetzt":"kommend";
+  const stil=st==="vorbei"?`background:${ppMix(farbe,.45)};border-color:${ppMix(farbe,.45)};color:#fff`:st==="jetzt"?`border-color:${farbe};color:${farbe};font-weight:800`:"";
+  return`<span class="pp-wz pp-wz-${st}"style="${stil}"title="Schulwoche ${fmtKurz(w.start)}–${fmtKurz(w.end)} · Freitag ${fmtKurz(w.end)}: Check-out (K-Prim)">${fmtKurz(w.start)}<i class="pp-wz-fr">Fr</i></span>`;
+ }).join("")}</div>`;
+}
+
+// ---- Jahresleiste: das ganze Schuljahr, Schulwochen farbig, Praktika
+// schraffiert, Ferien gestrichelt, rote Linie = heute ----
+function ppJahresleisteHTML(heute){
+ const t0=new Date(SCHULJAHR_START).getTime(),t1=new Date(SCHULJAHR_ENDE).getTime()+86400000;
+ const pos=d=>(new Date(d).getTime()-t0)/(t1-t0)*100;
+ const breite=(a,b)=>Math.max(0.4,pos(b)-pos(a)+86400000/(t1-t0)*100);
+ const seg=(a,b,stil,titel,inner="",attr="")=>`<div class="pp-jl-seg"style="left:${pos(a).toFixed(2)}%;width:${breite(a,b).toFixed(2)}%;${stil}"title="${esc(titel)}"${attr}>${inner}</div>`;
+ const prakt=PRAKTIKUMSPHASEN.map(p=>seg(p.start,p.end,"background:repeating-linear-gradient(135deg,#dde3e8 0 4px,#eef2f5 4px 8px)",`${p.titel} · ${fmtKurz(p.start)}–${fmtKurz(p.end)}`,`<span class="pp-jl-icon">${p.icon||""}</span>`)).join("");
+ const ferien=FERIEN_2026_27.map(f=>seg(f.start,f.end,"background:#fff;border:1px dashed #c7d0d6",`${f.titel} · ${fmtKurz(f.start)}–${fmtKurz(f.end)}`)).join("");
+ const wochen=PROJEKT_PHASEN.flatMap(ph=>["projekt","apt"].flatMap(teil=>ppTeilWochen(ph,teil).map(w=>{
+  const c=ppFarbe(ph);
+  const bg=teil==="projekt"?c:`repeating-linear-gradient(135deg,${c} 0 5px,${ppMix(c,.5)} 5px 10px)`;
+  return seg(w.start,w.end,`background:${bg};cursor:pointer`,`${ph.lb} · ${ppTeilName(teil,ph)} · ${fmtKurz(w.start)}–${fmtKurz(w.end)}`,"",` onclick="openPhaseDetail('${ph.id}:${teil}')"`);
+ }))).join("");
+ const monate=["2026-10-01","2026-11-01","2026-12-01","2027-01-01","2027-02-01","2027-03-01","2027-04-01","2027-05-01","2027-06-01","2027-07-01"];
+ const mNamen=["Okt","Nov","Dez","Jan","Feb","Mär","Apr","Mai","Jun","Jul"];
+ const heuteHTML=heute>=SCHULJAHR_START&&heute<=SCHULJAHR_ENDE?`<div class="pp-jl-heute"style="left:${pos(heute).toFixed(2)}%"title="Heute"></div>`:"";
+ return`<div class="pp-jl-wrap">
+  <div class="pp-jl">${prakt}${ferien}${wochen}${heuteHTML}</div>
+  <div class="pp-jl-monate">${monate.map((m,i)=>`<span style="left:${pos(m).toFixed(2)}%">${mNamen[i]}</span>`).join("")}</div>
  </div>`;
 }
-function horizontalerZeitstrahlHTML(){
+
+// ---- Eine Teil-Kachel (Projekt oder APT) mit Sättigung + Zeitbudget ----
+function ppTeilKachelHTML(ph,teil,fortschrittMap,meinTeam,heute){
+ const c=ppFarbe(ph);
+ const fs=ppTeilFortschritt(ph,teil,fortschrittMap,meinTeam);
+ const wochen=ppTeilWochen(ph,teil);
+ const budget=ppZeitbudget(wochen,heute);
+ const tempo=ppTempo(fs.prozent,budget);
+ const t=ppSaettigung(fs.prozent);
+ const textFarbe=t>0.55?"#fff":"#17384f";
+ const muster=teil==="apt"?";background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.16) 0 6px,transparent 6px 12px)":"";
+ const jetzt=budget.zustand==="laeuft";
+ const detail=teil==="projekt"?(ph.einstieg?`${fs.erledigt}/${fs.gesamt} Schritte · Stunde ${fs.stunde?"gemacht":"offen"}`:`${fs.inhalteFertig}/${fs.inhalteGesamt} Inhalte · ${fs.ms}/${fs.msGesamt} Meilensteine`):`${fs.inhalteFertig}/${fs.inhalteGesamt} Inhalte · ${fs.erledigt}/${fs.gesamt} Schritte`;
+ return`<button type="button"class="pp-teil${jetzt?" pp-teil-jetzt":""}"style="--c:${c};border-color:${jetzt?c:ppMix(c,.35)}"onclick="openPhaseDetail('${ph.id}:${teil}')">
+  <div class="pp-teil-farbfeld"style="background-color:${ppMix(c,t)}${muster};color:${textFarbe}">
+   <span class="pp-teil-icon">${ppTeilIcon(teil,ph)}</span>
+   <span class="pp-teil-prozent">${fs.prozent}%</span>
+  </div>
+  <div class="pp-teil-body">
+   <div class="pp-teil-art"style="color:${c}">${ppTeilName(teil,ph)}${jetzt?" · JETZT":""}</div>
+   <div class="pp-teil-titel">${esc(teil==="projekt"?ph.titel:"Prüfungsinhalte "+ph.lb)}</div>
+   <div class="pp-teil-meta">${detail}</div>
+   <div class="pp-budget">⏳ ${esc(budget.text)}</div>
+   ${tempo?`<span class="pp-tempo"style="background:${tempo.farbe}">${esc(tempo.txt)}</span>`:""}
+   ${ppWochenZellenHTML(wochen,c,heute)}
+  </div>
+ </button>`;
+}
+
+// ---- Kompakter Zeitstrahl für Ebene 2 (oben am Rand) ----
+function ppMiniZeitstrahlHTML(fortschrittMap,meineTeams,heute,aktivKey,coDaten){
+ return`<div class="pp-mini-wrap"><div class="pp-mini">${PROJEKT_PHASEN.map(ph=>{
+  const c=ppFarbe(ph);
+  return`<div class="pp-mini-block"style="flex:${ph.projektSchulwochen.length+ph.aptSchulwochen.length} 1 0">
+   <div class="pp-mini-lb"style="color:${c}">${esc(ph.lb)}</div>
+   <div class="pp-mini-teile">${["projekt","apt"].map(teil=>{
+    const fs=ppTeilFortschritt(ph,teil,fortschrittMap,meineTeams[ph.id]);
+    const key=`${ph.id}:${teil}`;
+    const wochen=ppTeilWochen(ph,teil),n=wochen.length;
+    const t=ppSaettigung(fs.prozent);
+    return`<div class="pp-mini-spalte"style="flex:${n} 1 0">
+     <button type="button"class="pp-mini-teil${key===aktivKey?" aktiv":""}"style="background:${ppMix(c,t)};color:${t>0.55?"#fff":"#17384f"};--c:${c}"onclick="openPhaseDetail('${key}')"title="${esc(ph.lb+" · "+ppTeilName(teil,ph)+" · "+fs.prozent+" %")}">${teil==="projekt"?(ph.einstieg?"E":"P"):"A"} ${fs.prozent}%</button>
+     <div class="pp-mini-fr">${wochen.map(w=>{const co=coFuerWoche(coDaten,w);return`<span class="pp-fr-marke${co?" "+co.status:""}"title="${esc("Freitag "+fmtKurz(w.end)+": Check-out (K-Prim)"+(co?" · "+(co.status==="live"?"läuft":co.status==="beendet"?"beendet":"Entwurf"):""))}">Fr${co?.status==="beendet"?" ✓":""}</span>`;}).join("")}</div>
+    </div>`;
+   }).join("")}</div>
+  </div>`;
+ }).join("")}</div><div class="pp-mini-leg"><span class="pp-fr-marke">Fr</span> K-Prim-Check-out am Freitag</div></div>`;
+}
+// ---- Check-out am Freitag: Zuordnung Woche ↔ Check-out (über das Datum) ----
+function coFuerWoche(coDaten,w){
+ const liste=(coDaten?.checkouts||[]).filter(c=>c.datum&&c.datum>=w.start&&c.datum<=w.end);
+ return liste.find(c=>c.status==="live")||liste[0]||null;
+}
+function coAktionHTML(c,d){
+ const a=d.meineAbgaben?.[c.id];
+ if(isTeacher()){
+  return c.status==="entwurf"?`<button class="secondary"onclick="openCheckoutEditor('${c.id}')">Bearbeiten</button><button class="primary"onclick="coLiveStarten('${c.id}')">▶ Live freischalten</button>`
+   :c.status==="live"?`<button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button>`
+   :`<button class="secondary"onclick="openCheckoutErgebnisse('${c.id}')">Ergebnisse</button>`;
+ }
+ return c.status==="live"?(a?.abgegeben?`<span class="co-chip fertig">abgegeben ✓</span>`:`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Starten"}</button>`)
+  :a?.ausgewertet?`<b class="co-np">${npText(a.notenpunkte)}</b><button class="secondary"onclick="openCheckoutMeinErgebnis('${c.id}')">Ansehen</button>`
+  :a?`<small style="color:var(--muted)">wird ausgewertet …</small>`:`<small style="color:var(--muted)">nicht teilgenommen</small>`;
+}
+// Karte auf Ebene 2 direkt unter dem Zeitstrahl: ein Check-out je Freitag.
+// K-Prim-Aufgabeninfo (unter dem Inhalt der Ebene 2, einheitlich in Gelb):
+//  Schüler:in → Freitage dieser Etappe, eigene abgeschlossene Tests (Bibliothek), Kurzarbeit-Ersatz
+//  Lehrkraft  → Freitage mit Aktionen, Ergebnisse je Check-out, Ersatz-Einstellungen und PDFs
+function coStatChip(c,d){
+ if(c.status==="live")return`<span class="co-chip live"><span class="co-live-punkt"></span>läuft</span>`;
+ if(c.status==="beendet")return`<span class="co-chip fertig">beendet</span>`;
+ return`<span class="co-chip entwurf">Entwurf</span>`;
+}
+function ppKprimBereichHTML(ph,teil,coDaten,heute){
+ if(!coDaten)return"";
+ const d=coDaten,lehrer=isTeacher();
+ const wochen=ppTeilWochen(ph,teil);
+ const ids=teil==="projekt"?ph.notwendigeWochen:ph.trainingWochen;
+ const themen=ids.map(id=>ppKurz(lehrplanWocheById("paedagogik",id))).filter(Boolean).join(", ");
+ const stat=d.stat||{};
+ // --- Freitage dieser Etappe ---
+ const fr=wochen.map(w=>{
+  const co=coFuerWoche(d,w),vorbei=w.end<heute;
+  let rechts="";
+  if(co)rechts=coAktionHTML(co,d);
+  else if(lehrer){
+   const vl=CHECKOUT_VORLAGEN.find(v=>v.datum===w.end);
+   rechts=(vl?`<button class="primary"onclick="openCheckoutEditor(null,{datum:'${w.end}',lbNum:${ph.lbNum},vorlage:'${vl.id}'})">📋 Vorlage „${esc(vl.titel)}“ einsetzen</button>`:"")
+    +`<button class="${vl?"secondary":"primary"}"onclick="openCheckoutEditor(null,{datum:'${w.end}',lbNum:${ph.lbNum}})">＋ Check-out anlegen</button>`;
+  }
+  else rechts=`<small style="color:var(--muted)">${vorbei?"kein Check-out":"Deine Lehrkraft schaltet ihn am Freitag frei."}</small>`;
+  const st=co&&lehrer&&co.status==="beendet"&&stat[co.id]?` · ${stat[co.id].n} ausgewertet · Ø ${(stat[co.id].summe/stat[co.id].n).toFixed(1).replace(".",",")} Punkte`:"";
+  return`<div class="co-zeile"><span class="co-lb">Fr ${fmtKurz(w.end)}</span>
+   <div class="co-titel"><b>${co?esc(co.titel||"Check-out"):"Check-out"}</b><small>${co?`${(co.aufgaben||[]).length} K-Prim-Aufgaben${st}`:"3 K-Prim-Aufgaben zu den Themen der Woche"}</small></div>
+   ${co?coStatChip(co,d):""}<div class="co-aktion">${rechts}</div></div>`;
+ }).join("");
+ // --- Bibliothek bzw. Ergebnisse ---
+ let mitte="",ersatz="";
+ if(lehrer){
+  const beendet=(d.checkouts||[]).filter(c=>c.status==="beendet");
+  mitte=`<div class="kicker pp-kp-h">ERGEBNISSE · ALLE BEENDETEN CHECK-OUTS (${beendet.length})</div>
+   <div class="co-liste">${beendet.map(c=>{const t=stat[c.id];return`<div class="co-zeile"><span class="co-lb">LB ${esc(c.lbNum||"")}</span>
+    <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${coDatum(c.datum)} · ${t?`${t.n} ausgewertet · Ø ${(t.summe/t.n).toFixed(1).replace(".",",")} Punkte`:"noch keine Auswertung"}</small></div>
+    <div class="co-aktion"><button class="secondary"onclick="openCheckoutErgebnisse('${c.id}')">Ergebnisse</button><button class="secondary"onclick="coPdfKlasse('${c.id}')">PDF Klasse</button></div></div>`;}).join("")||`<div class="empty">Noch kein Check-out beendet. Die Ergebnisse erscheinen hier, sobald du einen Test beendet hast.</div>`}</div>`;
+  ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>Schüler:innen wählen ${d.einst.anzahlWaehlen} Tests aus ihrer Bibliothek · ${esc(coAuswahlStatus(d.einst).text)}</small></div>
+   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="primary"onclick="openCheckoutKlassenuebersicht()">Ergebnisse je Schüler:in</button><button class="secondary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button></div></div>`;
+ }else{
+  const fertig=(d.checkouts||[]).filter(c=>d.meineAbgaben?.[c.id]?.abgegeben);
+  mitte=`<div class="kicker pp-kp-h">MEINE ABGESCHLOSSENEN CHECK-OUTS (${fertig.length})</div>
+   <div class="co-liste">${fertig.map(c=>{const a=d.meineAbgaben[c.id];
+    return`<div class="co-zeile"><span class="co-lb">LB ${esc(c.lbNum||"")}</span>
+     <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${esc(coTestDatum(c,a))}${a.ausgewertet?` · ${a.be} von ${a.maxBE} BE`:""}</small></div>
+     <div class="co-aktion">${a.ausgewertet?`<b class="co-np">${esc(npText(a.notenpunkte))}</b><button class="secondary"onclick="openCheckoutMeinErgebnis('${c.id}')">Ansehen</button><button class="secondary"onclick="coPdfSchueler('${c.id}')">PDF</button>`:`<small style="color:var(--muted)">wird ausgewertet …</small>`}</div></div>`;}).join("")||`<div class="empty">Noch kein Check-out abgeschlossen. Deine erledigten Tests erscheinen hier und bilden deine Bibliothek.</div>`}</div>`;
+  const pool=coPool(d.checkouts,d.einst).filter(c=>d.meineAbgaben?.[c.id]?.ausgewertet);
+  const status=coAuswahlStatus(d.einst);
+  const e=d.auswahl?coErsatz(d.auswahl.ids||[],d.meineAbgaben):null;
+  let aktion="";
+  if(status.offen)aktion=pool.length>=d.einst.anzahlWaehlen?`<button class="primary"onclick="openCheckoutAuswahl()">${d.auswahl?"Auswahl ändern":`${d.einst.anzahlWaehlen} Tests auswählen`}</button>`:`<small style="color:var(--muted)">Du brauchst mindestens ${d.einst.anzahlWaehlen} ausgewertete Tests (bisher ${pool.length}).</small>`;
+  else aktion=`<small style="color:var(--muted)">${esc(status.text)}</small>`;
+  ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>Wähle ${d.einst.anzahlWaehlen} Tests aus deiner Bibliothek (${pool.length} verfügbar). Der Durchschnitt der Notenpunkte ersetzt eine Kurzarbeit, ab ,5 wird aufgerundet.${e?` · <b>Deine Auswahl: Ø ${e.schnitt.toFixed(2).replace(".",",")} → ${esc(npText(e.np))}</b>`:""}</small></div>
+   <div class="co-aktion">${aktion}${d.auswahl?`<button class="secondary"onclick="coPdfRespizienz()">PDF Auswahl</button>`:""}${fertig.length?`<button class="secondary"onclick="coPdfSchuelerAlle()">PDF alle Ergebnisse</button>`:""}</div></div>`;
+ }
+ return`<div class="card co-karte pp-kp">
+  <div class="co-kopf"><div><h3>🏁 K-Prim-Aufgaben · Check-out am Freitag</h3><small>Jeden Freitag ein Test mit 3 K-Prim-Aufgaben (je 4 Aussagen richtig oder falsch) zu den Themen der Woche${themen?` (${esc(themen)})`:""}. Deine Lehrkraft schaltet ihn live frei, ausgewertet wird in Notenpunkten nach dem P/P-Bewertungsschlüssel.</small></div></div>
+  <div class="kicker pp-kp-h">FREITAGE IN DIESER ETAPPE</div>
+  <div class="co-liste">${fr}</div>
+  ${mitte}
+  ${ersatz}
+ </div>`;
+}
+// ---- Nächster Schritt für Schüler:innen ----
+function ppNaechsterSchrittHTML(fortschrittMap,heute){
+ const teile=PROJEKT_PHASEN.flatMap(ph=>[{ph,teil:"projekt"},{ph,teil:"apt"}]);
+ const offen=x=>x.teil==="projekt"?x.ph.notwendigeWochen.filter(id=>!fortschrittMap[id]?.abgeschlossen):x.ph.trainingWochen.filter(id=>!aptSchritte(fortschrittMap[id]).every(Boolean));
+ let idx=teile.findIndex(x=>{const w=ppTeilWochen(x.ph,x.teil);return heute<=w[w.length-1].end;});
+ if(idx===-1)idx=teile.length-1;
+ const aktuell=teile[idx];
+ const rueckstand=teile.slice(0,idx).filter(x=>offen(x).length);
+ const naechsteId=offen(aktuell)[0];
+ const e=naechsteId?lehrplanWocheById("paedagogik",naechsteId):null;
+ const c=ppFarbe(aktuell.ph);
+ return`<div class="card pp-next"style="border-left:4px solid ${c}">
+  <div class="kicker">DEIN NÄCHSTER SCHRITT</div>
+  ${e?`<button type="button"class="pp-next-btn"onclick="openLehrplanEinheit('paedagogik','${e.id}')"><span>${ppTeilIcon(aktuell.teil,aktuell.ph)}</span><span><small>${esc(aktuell.ph.lb)} · ${ppTeilName(aktuell.teil,aktuell.ph)}</small><strong>${esc(e.thema)}</strong></span><span>→</span></button>`
+   :`<p style="margin:6px 0 0">Im aktuellen Abschnitt (${esc(aktuell.ph.lb)} · ${ppTeilName(aktuell.teil,aktuell.ph)}) ist alles erledigt. Stark!</p>`}
+  ${rueckstand.length?`<p style="font-size:12px;color:#b3541e;margin:10px 0 0">⚠︎ Noch offen aus früheren Abschnitten: ${rueckstand.map(x=>`<a href="javascript:void 0"onclick="openPhaseDetail('${x.ph.id}:${x.teil}')">${esc(x.ph.lb)} ${ppTeilName(x.teil,x.ph)} (${offen(x).length})</a>`).join(", ")}</p>`:""}
+ </div>`;
+}
+
+async function renderPaedagogikPhasenZeitstrahl(fach,fortschrittMap,heute){
+ const meineTeams=await ladePPTeams();
+ if(activePhaseDetail){
+  const [phId,teil]=String(activePhaseDetail).split(":");
+  const ph=projektPhaseById(phId);
+  if(ph){
+   const extra={coDaten:await ladeCheckoutDaten()};
+   if(ph.einstieg&&teil!=="apt"&&isTeacher())extra.stunde=await ladeStundenStatus(ph);
+   return renderPPTeilAnsicht(ph,teil==="apt"?"apt":"projekt",fortschrittMap,meineTeams,heute,extra);
+  }
+  activePhaseDetail=null;
+ }
+ const coDaten=await ladeCheckoutDaten();
+ return renderPPJahresuebersicht(fortschrittMap,meineTeams,heute,coDaten);
+}
+
+// Kurznamen der Inhalte für die kompakte Lernweg-Ansicht.
+const PP_KURZ={pp01:"Erleben und Verhalten",pp02:"Wissenschaftliche Aussagen",pp03:"Das Experiment",pp1a1:"Erziehung und Bildung",pp1a2:"Ziele der Erziehung",pp1a3:"Erziehungsbeziehung",pp1a4:"Einrichtungen",pp04:"Merkmale von Erziehung",pp05:"Baumrind",pp06:"Mündigkeit (Roth)",pp07:"BayBEP",pp09:"Wahrnehmung",pp2p2:"Mehrspeichermodell",pp12:"Lernstrategien",pp2a1:"Gedächtnis (Markowitsch)",pp10:"Emotion",pp11:"Motivation (Weiner)",pp4p1:"Begriff Lernen",pp13:"Pawlow",pp14:"Thorndike und Skinner",pp15:"Bandura",pp16:"Medien und Lernen"};
+function ppKurz(e){return e?(PP_KURZ[e.id]||e.thema):"";}
+// ---- Ebene 1: Lernweg mit 8 Stationen ----
+// Alle Teile in Zeitreihenfolge (Projekt, APT je Lernbereich).
+function ppAlleTeile(){return PROJEKT_PHASEN.flatMap(ph=>[{ph,teil:"projekt"},{ph,teil:"apt"}]);}
+function ppOffeneIds(x,fortschrittMap){return x.teil==="projekt"?x.ph.notwendigeWochen.filter(id=>!fortschrittMap[id]?.abgeschlossen):x.ph.trainingWochen.filter(id=>!aptSchritte(fortschrittMap[id]).every(Boolean));}
+// Index des Teils, der gerade dran ist (läuft oder als Nächstes kommt).
+function ppAktuellerIndex(heute){
+ const teile=ppAlleTeile();
+ const i=teile.findIndex(x=>{const w=ppTeilWochen(x.ph,x.teil);return heute<=w[w.length-1].end;});
+ return i===-1?teile.length-1:i;
+}
+// Liegen zwischen zwei Teilen Praktika oder Ferien? -> Symbol für die Pause.
+function ppPauseZwischen(nachDatum,vorDatum){
+ const p=PRAKTIKUMSPHASEN.find(x=>x.start>nachDatum&&x.start<vorDatum);
+ const f=FERIEN_2026_27.find(x=>x.start>nachDatum&&x.start<vorDatum);
+ if(!p&&!f)return null;
+ const titel=[p&&p.titel.replace("Praktikum – B-Block – ","Praktikum "),f&&f.titel].filter(Boolean).join(" + ");
+ return{icon:p?(p.icon||"🏥"):"🌴",titel};
+}
+function ppStationHTML(x,i,teile,fortschrittMap,meineTeams,heute,aktIdx){
+ const {ph,teil}=x,c=ppFarbe(ph);
+ const fs=ppTeilFortschritt(ph,teil,fortschrittMap,meineTeams[ph.id]);
+ const wochen=ppTeilWochen(ph,teil),n=wochen.length;
+ const budget=ppZeitbudget(wochen,heute);
+ const tempo=isTeacher()?null:ppTempo(fs.prozent,budget);
+ const hier=i===aktIdx;
+ const fertig=fs.prozent>=100;
+ const winkel=Math.round(fs.prozent*3.6);
+ const ring=isTeacher()?(hier?c:ppMix(c,.35)):`conic-gradient(${c} ${winkel}deg,${ppMix(c,.16)} 0)`;
+ let linie="";
+ if(i<teile.length-1){
+  const y=teile[i+1],yw=ppTeilWochen(y.ph,y.teil);
+  const pause=ppPauseZwischen(wochen[n-1].end,yw[0].start);
+  const c2=ppFarbe(y.ph);
+  const bg=pause?"repeating-linear-gradient(90deg,#c3cfd8 0 8px,transparent 8px 14px)":(c===c2?c:`linear-gradient(90deg,${c},${c2})`);
+  linie=`<span class="pp-weg-linie${pause?" pp-weg-pause-linie":""}"style="background:${bg}"></span>${pause?`<span class="pp-weg-pause"title="${esc(pause.titel)}">${pause.icon}</span>`:""}`;
+ }
+ const zeigTempo=tempo&&(hier||(budget.zustand==="vorbei"&&!fertig));
+ return`<button type="button"class="pp-weg-station${hier?" hier":""}${isTeacher()?" lk":""}${fertig?" fertig":""}"style="--c:${c}"onclick="openPhaseDetail('${ph.id}:${teil}')"title="${esc(ph.lb+" · "+ppTeilName(teil,ph)+" · "+fs.prozent+" %")}">
+  ${linie}
+  ${hier?`<span class="pp-weg-hier">${isTeacher()?"Jetzt im Plan":"Du bist hier"}</span>`:""}
+  <span class="pp-weg-ring"style="background:${ring}"><span style="color:${isTeacher()||fs.prozent?c:"#9fb0bd"}"><small>${ppTeilIcon(teil,ph)}</small>${isTeacher()?`<small class="pp-weg-wo">${n} Wo</small>`:fertig?"✓":fs.prozent+" %"}</span></span>
+  <span class="pp-weg-text">
+   <span class="pp-weg-typ"style="color:${c}"><span class="pp-weg-lbmobil">LB ${ph.lbNum} · </span>${teil==="projekt"?ppTeilName("projekt",ph):"Prüfungstraining"}</span>
+   <span class="pp-weg-titel">${esc(teil==="projekt"?ph.titel:ppAptKurztitel(ph))}</span>
+   <span class="pp-weg-zeit">${fmtKurz(wochen[0].start)}–${fmtKurz(wochen[n-1].end)} · ${n} Schulwoche${n>1?"n":""}</span>
+   ${zeigTempo?`<span class="pp-tempo"style="background:${tempo.farbe}">${esc(tempo.txt)}</span>`:""}
+  </span>
+ </button>`;
+}
+// Kurztitel fürs Prüfungstraining: die Themen statt "Prüfungsinhalte LB x".
+function ppAptKurztitel(ph){
+ const t=ph.trainingWochen.map(id=>lehrplanWocheById("paedagogik",id)).filter(Boolean).map(ppKurz);
+ const s=t.join(", ");
+ return s||("Prüfungsinhalte "+ph.lb);
+}
+// Karte "Diese Woche": Inhalte des aktuellen Teils zum Weiterarbeiten.
+function ppDieseWocheHTML(x,fortschrittMap,meineTeams,heute){
+ const {ph,teil}=x,c=ppFarbe(ph),wochen=ppTeilWochen(ph,teil);
+ const lauf=wochen.find(w=>w.start<=heute&&heute<=w.end);
+ const kopf=lauf?`Diese Woche · ${fmtKurz(lauf.start)}–${fmtKurz(lauf.end)}`:`Als Nächstes · ab ${fmtKurz(wochen.find(w=>w.start>heute)?.start||wochen[0].start)}`;
+ const ids=teil==="projekt"?ph.notwendigeWochen:ph.trainingWochen;
+ const zeilen=ids.map(id=>{
+  const e=lehrplanWocheById("paedagogik",id);if(!e)return"";
+  let fertig,info;
+  if(teil==="projekt"){fertig=!!fortschrittMap[id]?.abgeschlossen;info=fertig?"abgeschlossen":"";}
+  else{const s=aptSchritte(fortschrittMap[id]),k=s.filter(Boolean).length;fertig=k===APT_TABS.length;info=fertig?"alle Schritte erledigt":`${k}/${APT_TABS.length} Schritte · nächster: ${APT_SCHRITT_LABELS[s.indexOf(false)]}`;}
+  return`<button type="button"class="pp-dw-zeile"onclick="openLehrplanEinheit('paedagogik','${id}')"><span class="pp-dw-box${fertig?" x":""}"style="--c:${c}">${fertig?"✓":""}</span><span><b>${esc(e.thema)}</b>${isTeacher()?`<small>Inhalt Nr. ${esc(e.nr||"")}</small>`:info?`<small>${esc(info)}</small>`:""}</span></button>`;
+ }).join("");
+ let ms="";
+ if(teil==="projekt"&&!isTeacher()&&ph.einstieg){
+  const done=!!fortschrittMap[ph.stundeWocheId]?.experimentErledigt;
+  ms=`<div class="pp-dw-ms">🧪 Interaktive Stunde „Das Experiment“: ${done?"gemacht ✓":"noch nicht abgeschlossen"}<button class="secondary"style="margin-top:6px"onclick="openExperimentStunde()">${done?"Stunde wiederholen":"Stunde starten"}</button></div>`;
+ }else if(teil==="projekt"&&!isTeacher()){
+  const team=meineTeams[ph.id],nx=team?msNaechster(ph,team,team._beitraege):null;
+  const meinFehlt=nx&&nx.i>0&&!nx.st.beitraege.some(b=>b.uid===currentUser.uid);
+  const hinweis=!nx?"":meinFehlt?"dein Beitrag fehlt noch":nx.st.zustand==="wartet"?"wartet auf Bestätigung der Lehrkraft":nx.st.zustand==="zurueck"?"zurückgegeben – bitte überarbeiten":`es fehlt noch: ${nx.st.fehlend.map(f=>f.name).join(", ")}`;
+  ms=team?(nx?`<div class="pp-dw-ms">★ Meilenstein ${nx.i+1}/${ph.meilensteine.length}: „${esc(ph.meilensteine[nx.i])}“<small style="color:${meinFehlt||nx.st.zustand==="zurueck"?"#b3541e":"var(--muted)"}">${esc(hinweis)} · Team „${esc(team.teamName||"")}“</small>${meinFehlt?`<button class="secondary"style="margin-top:6px"onclick="openMsBeitrag('${ph.id}','${team.id}',${nx.i},'seite')">Mein Beitrag eintragen</button>`:""}</div>`:`<div class="pp-dw-ms">★ Alle Meilensteine erreicht</div>`)
+   :`<div class="pp-dw-ms">★ Noch kein Team – bilde im Projekt ein Team, um die Meilensteine abzuhaken.</div>`;
+ }
+ const naechste=isTeacher()?null:ppOffeneIds(x,fortschrittMap)[0];
+ const ne=naechste?lehrplanWocheById("paedagogik",naechste):null;
+ return`<div class="card pp-dw">
+  <div class="pp-dw-kopf"style="color:${c}">${kopf}</div>
+  <h3>${ppTeilIcon(teil,ph)} ${esc(teil==="projekt"?ph.titel:"Prüfungstraining "+ph.lb)}</h3>
+  ${zeilen}${ms}
+  <div class="pp-dw-aktion">${ne?`<button class="primary"onclick="openLehrplanEinheit('paedagogik','${ne.id}')">Weiter: ${esc(ppKurz(ne))}</button>`:""}<button class="secondary"onclick="openPhaseDetail('${ph.id}:${teil}')">Zur Übersicht</button></div>
+ </div>`;
+}
+function ppTempoKarteHTML(x,fortschrittMap,meineTeams,heute,teile,aktIdx){
+ const {ph,teil}=x,c=ppFarbe(ph);
+ const fs=ppTeilFortschritt(ph,teil,fortschrittMap,meineTeams[ph.id]);
+ const budget=ppZeitbudget(ppTeilWochen(ph,teil),heute);
+ const tempo=ppTempo(fs.prozent,budget);
+ const soll=Math.round(budget.soll*100);
+ const next=teile[aktIdx+1];
+ const nw=next?ppTeilWochen(next.ph,next.teil):null;
+ return`<div class="card pp-tk">
+  <div class="pp-dw-kopf">Dein Tempo</div>
+  <div class="pp-tk-zahl"><span>${fs.prozent} %</span>${tempo?`<span class="pp-tempo"style="background:${tempo.farbe}">${esc(tempo.txt)}</span>`:""}</div>
+  <div class="pp-tk-info">${budget.zustand==="kommend"?"":`Soll heute: ${soll} % · `}${esc(budget.text)}</div>
+  <div class="pp-balken"><div style="width:${fs.prozent}%;background:${c}"></div>${budget.zustand==="kommend"?"":`<i style="left:${soll}%"></i>`}</div>
+  <div class="pp-tk-info"style="margin-top:4px">Balken = geschafft · Strich = Soll laut Zeitbudget</div>
+  ${next?`<p class="pp-tk-danach">Danach: ${ppTeilIcon(next.teil,next.ph)} ${esc(next.ph.lb)} ${ppTeilName(next.teil,next.ph)} ab ${fmtKurz(nw[0].start)} (${nw.length} Schulwoche${nw.length>1?"n":""}).</p>`:""}
+ </div>`;
+}
+function ppOffenKarteHTML(teile,fortschrittMap,aktIdx){
+ const rueck=teile.slice(0,aktIdx).map(x=>({x,ids:ppOffeneIds(x,fortschrittMap)})).filter(r=>r.ids.length);
+ if(!rueck.length)return`<div class="card pp-ok"><div class="pp-dw-kopf">Noch offen</div><p class="pp-ok-leer">✓ Nichts offen aus früheren Etappen.</p></div>`;
+ return`<div class="card pp-ok"><div class="pp-dw-kopf">Noch offen</div>${rueck.map(({x,ids})=>`<div class="pp-ok-eintrag">
+  <h3>${ppTeilIcon(x.teil,x.ph)} ${esc(x.ph.lb)} ${ppTeilName(x.teil,x.ph)}</h3>
+  <small>${ids.length} Inhalt${ids.length>1?"e":""} offen: ${ids.map(id=>esc(ppKurz(lehrplanWocheById("paedagogik",id)))).join(", ")}</small>
+  <button class="secondary"onclick="openLehrplanEinheit('paedagogik','${ids[0]}')">Nachholen</button></div>`).join("")}</div>`;
+}
+function renderPPJahresuebersicht(fortschrittMap,meineTeams,heute,coDaten){
+ const gesamt=PROJEKT_PHASEN.reduce((s,ph)=>{["projekt","apt"].forEach(t=>{const f=ppTeilFortschritt(ph,t,fortschrittMap,meineTeams[ph.id]);s.e+=f.erledigt;s.g+=f.gesamt;});return s},{e:0,g:0});
+ const gesamtProzent=gesamt.g?Math.round(gesamt.e/gesamt.g*100):0;
+ const teile=ppAlleTeile(),aktIdx=ppAktuellerIndex(heute),akt=teile[aktIdx];
+ const unter=isTeacher()?"Acht Stationen durchs Schuljahr: je Lernbereich ein Projekt und ein Prüfungstraining.":`Acht Stationen durchs Schuljahr. Der Ring zeigt, wie viel du geschafft hast – ${gesamtProzent} % deines Jahres.`;
+ return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
+ ${pageHead("LERNPFAD","Pädagogik/Psychologie",unter,isTeacher()?`<button class="secondary"onclick="openProjektGesamtcheck()">🔬 Projekt-Gesamtcheck</button> <button class="secondary"onclick="openFachaufsatzTrainingCheck()">🎓 APT-Gesamtcheck</button>`:"")}
+ ${checkoutLiveBannerHTML(coDaten)}
+ <div class="card pp-weg-card">
+  <div class="pp-weg-lbs">${PROJEKT_PHASEN.map(ph=>{const c=ppFarbe(ph);return`<div style="background:${ppMix(c,.14)};color:${c}"><b>Lernbereich ${ph.lbNum}</b><span>${esc(ph.lbTitel)}</span></div>`}).join("")}</div>
+  <div class="pp-weg">${teile.map((x,i)=>ppStationHTML(x,i,teile,fortschrittMap,meineTeams,heute,aktIdx)).join("")}</div>
+  <div class="pp-legende"><span>🔬 Projekt: Inhalte abhaken und Team-Meilensteine</span><span>🎓 Prüfungstraining: je Inhalt 4 Schritte bis zur umgesetzten Vorkorrektur</span><span>🏁 Check-out: K-Prim-Test am Ende der Woche</span><span>- - - Pause durch Praktikum 🏫🏥 oder Ferien 🌴</span></div>
+ </div>
+ <div class="pp-weg-karten${isTeacher()?" lehrkraft":""}">
+  ${ppDieseWocheHTML(akt,fortschrittMap,meineTeams,heute)}
+  ${isTeacher()?"":ppTempoKarteHTML(akt,fortschrittMap,meineTeams,heute,teile,aktIdx)+ppOffenKarteHTML(teile,fortschrittMap,aktIdx)}
+ </div>
+ ${checkoutSektionHTML(coDaten)}
+ ${footer()}`;
+}
+
+// ---- Ebene 2: Projekt- oder APT-Ansicht eines Lernbereichs ----
+function renderPPTeilAnsicht(ph,teil,fortschrittMap,meineTeams,heute,extra={}){
+ const c=ppFarbe(ph);
+ const meinTeam=meineTeams[ph.id];
+ const fs=ppTeilFortschritt(ph,teil,fortschrittMap,meinTeam);
+ const wochen=ppTeilWochen(ph,teil);
+ const budget=ppZeitbudget(wochen,heute);
+ const tempo=ppTempo(fs.prozent,budget);
+ const t=ppSaettigung(fs.prozent);
+ const anderer=teil==="projekt"?"apt":"projekt";
+ const kopf=`<div class="card pp-teilkopf"style="border-left:5px solid ${c}">
+  <div class="pp-teilkopf-farbe"style="background-color:${ppMix(c,t)};color:${t>0.55?"#fff":"#17384f"}${teil==="apt"?";background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.16) 0 6px,transparent 6px 12px)":""}"><span>${ppTeilIcon(teil,ph)}</span><b>${fs.prozent}%</b></div>
+  <div style="flex:1;min-width:220px">
+   <div class="kicker"style="color:${c}">${esc(ph.lb)} · ${ppTeilName(teil,ph).toUpperCase()} · ${fmtKurz(wochen[0].start)}–${fmtKurz(wochen[wochen.length-1].end)}</div>
+   <h2 style="margin:4px 0">${esc(teil==="projekt"?ph.titel:"Abschlussprüfungs-Training "+ph.lb)}</h2>
+   <div class="pp-budget"style="font-size:13px">⏳ ${esc(budget.text)} ${tempo?`<span class="pp-tempo"style="background:${tempo.farbe}">${esc(tempo.txt)}</span>`:""}</div>
+   <div class="pp-balken"><div style="width:${fs.prozent}%;background:${c}"></div><i style="left:${Math.round(budget.soll*100)}%"title="Hier solltest du laut Zeitbudget ungefähr stehen"></i></div>
+   <small style="color:var(--muted)">Balken = dein Fortschritt · Strich = Soll laut Zeitbudget</small>
+   ${ppWochenZellenHTML(wochen,c,heute)}
+  </div>
+ </div>`;
+ const quer=`<button type="button"class="pp-quer"style="--c:${ppFarbe(ph)}"onclick="openPhaseDetail('${ph.id}:${anderer}')">${ppTeilIcon(anderer,ph)} Zum ${anderer==="apt"?"Abschlussprüfungs-Training":ppTeilName("projekt",ph)} ${esc(ph.lb)} wechseln →</button>`;
+
+ let inhalt="";
+ if(teil==="projekt"&&ph.einstieg){
+  inhalt=ppEinstiegInhaltHTML(ph,fortschrittMap,c,extra.stunde);
+ }else if(teil==="projekt"){
+  const eig=meinTeam?msEigeneBeitraege(ph,meinTeam,meinTeam._beitraege,currentUser.uid):null;
+  inhalt=`${ppAuftragKarteHTML(ph)}
+  <div class="kicker"style="margin:18px 0 8px">PROJEKTINHALTE – bearbeiten und abhaken</div>
+  ${ph.notwendigeWochen.map((id,i)=>{
+   const e=lehrplanWocheById("paedagogik",id);if(!e)return"";
+   const f=fortschrittMap[id]||{};
+   const fertig=!!f.abgeschlossen;
+   const begonnen=!fertig&&(f.auftragGelesen||f.materialErhalten||Object.values(f.zieleErfuellt||{}).some(Boolean));
+   const apt=PP_EINHEITEN.filter(a=>a.typ==="apt"&&(a.bezug||[]).includes(id));
+   return`<div class="pp-einheit${fertig?" fertig":""}"style="--c:${c}"onclick="openLehrplanEinheit('paedagogik','${id}')">
+    <span class="pp-einheit-haken">${fertig?"✓":i+1}</span>
+    <div style="flex:1"><strong>${esc(e.thema)}</strong><small>Inhalt Nr. ${esc(e.nr)} · ${fertig?"abgeschlossen":begonnen?"in Arbeit":"noch offen"}</small>
+    ${apt.length?`<small class="pp-bezug">🎓 wird vertieft im Abschlussprüfungs-Training: ${apt.map(a=>`<a href="javascript:void 0"onclick="event.stopPropagation();openAptDetail('${a.id}')">${esc(a.thema)}</a>`).join(" · ")}</small>`:""}</div>
+    <span>→</span>
+   </div>`;}).join("")}
+  <div class="kicker"style="margin:18px 0 8px">PROJEKT-MEILENSTEINE ${meinTeam?`· TEAM „${esc(meinTeam.teamName)}“`:""}</div>
+  ${meinTeam?`<p class="ms-info">Team-Meilensteine erreicht: <b>${msErreichtAnzahl(ph,meinTeam,meinTeam._beitraege)}/${ph.meilensteine.length}</b> · deine Beiträge: <b>${eig.n}/${eig.g}</b>. Ein Meilenstein ist erreicht, wenn alle aus dem Team ihren Beitrag eingetragen haben – bei „Lehrkraft bestätigt“ zusätzlich nach dem OK der Lehrkraft.</p>
+   ${msListeHTML(ph,meinTeam,meinTeam._beitraege,"seite")}`
+  :isTeacher()?`<div class="empty">Die Meilensteine aller Teams siehst und bestätigst du im Projekt-Gesamtcheck. <button class="primary"style="margin-top:8px"onclick="openProjektGesamtcheck()">🔬 Projekt-Gesamtcheck</button></div>`
+  :`<div class="empty">Du bist noch in keinem Projektteam. <button class="primary"style="margin-top:8px"onclick="openWocheDetail('paedagogik','${ph.notwendigeWochen[0]}','team')">Team gründen oder beitreten</button></div>`}`;
+ }else{
+  inhalt=`<div class="kicker"style="margin:18px 0 8px">PRÜFUNGSINHALTE – je Inhalt 4 Schritte</div>
+  <div class="pp-apt-grid">${ph.trainingWochen.map(id=>{
+   const e=lehrplanWocheById("paedagogik",id);if(!e)return"";
+   const s=aptSchritte(fortschrittMap[id]);
+   const n=s.filter(Boolean).length;
+   return`<div class="pp-apt-karte${n===APT_TABS.length?" fertig":""}"style="--c:${c};border-color:${n===APT_TABS.length?c:ppMix(c,.3)}"onclick="openLehrplanEinheit('paedagogik','${id}')">
+    <div class="pp-apt-farbe"style="background:${ppMix(c,ppSaettigung(n/APT_TABS.length*100))}"></div>
+    <small style="color:${c};font-weight:800">Inhalt Nr. ${esc(e.nr)} · ${n}/${APT_TABS.length}</small>
+    <strong>${esc(e.thema)}</strong>
+    <div class="pp-schritte">${s.map((d,i)=>`<span class="${d?"done":""}"style="${d?`background:${c};border-color:${c}`:""}"title="${esc(APT_SCHRITT_LABELS[i])}">${d?"✓":i+1}</span>`).join("")}</div>
+    ${(e.bezug||[]).length?`<small class="pp-bezug">🔗 baut auf dem Projekt auf: ${(e.bezug||[]).map(b=>`<a href="javascript:void 0"onclick="event.stopPropagation();openWocheDetail('paedagogik','${b}')">${esc(lehrplanWocheById("paedagogik",b)?.thema||b)}</a>`).join(" · ")}</small>`:""}
+   </div>`;}).join("")}</div>
+  <p style="font-size:11px;color:var(--muted);margin-top:10px">① Prüfungsfrage · ② Inhalte & Aufgabeneingrenzung · ③ Basis-Check · ④ Lernprodukt hochladen & Vorkorrektur umsetzen. Den K-Prim-Test schreibst du als 🏁 Check-out am Ende der Woche.</p>`;
+ }
+ return`<button class="secondary"onclick="closePhaseDetail()">← Zurück zum Zeitstrahl</button>
+ ${ppMiniZeitstrahlHTML(fortschrittMap,meineTeams,heute,`${ph.id}:${teil}`,extra.coDaten)}
+ ${kopf}
+ <div class="card"style="margin-top:14px">${quer}${inhalt}</div>
+ ${ppKprimBereichHTML(ph,teil,extra.coDaten,heute)}
+ ${footer()}`;
+}
+
+function ppAuftragKarteHTML(ph){
+ const a=ph.auftrag;if(!a)return"";
+ const c=ppFarbe(ph),w=ppTeilWochen(ph,"projekt");
+ return`<div class="pp-auftrag"style="--c:${c}"><div class="kicker"style="color:${c};margin:0 0 4px">AUFTRAG DER LEHRKRAFT · ${fmtKurz(w[0].start)}–${fmtKurz(w[w.length-1].end)} · ${w.length} Schulwochen</div><h3>${esc(a.titel)}</h3><p>${esc(a.text)}</p></div>`;
+}
+// LB 1: Einstiegsstunde statt Projekt – Stunde starten, Inhalte abhaken, Lehrkraft sieht, wer sie gemacht hat.
+async function ladeStundenStatus(ph){
+ try{
+  const [students,snap]=await Promise.all([getAllUsersForLernstand(),getDocs(query(collection(db,"lehrplanFortschritt"),where("wocheId","==",ph.stundeWocheId)))]);
+  const erledigt=new Set(snap.docs.map(d=>d.data()).filter(f=>f.experimentErledigt).map(f=>f.uid));
+  return{students,erledigt};
+ }catch(e){console.error("Stunden-Status laden:",e);return null;}
+}
+function ppStundeKarteHTML(ph,fortschrittMap,c){
+ const done=!!fortschrittMap[ph.stundeWocheId]?.experimentErledigt,lehrer=isTeacher();
+ const sch=ppEinstiegSchritte(ph,id=>fortschrittMap[id]);
+ const st=sch.find(x=>x.art==="stunde"),vor=sch.filter(x=>x.nr<(st?.nr||0));
+ const vorErl=vor.filter(x=>x.done).length;
+ const hinweis=lehrer||!st||!vor.length?"":`<p class="pp-stunde-status">Vorher erledigt: ${vorErl} von ${vor.length}${!done&&vorErl<vor.length?" · empfohlen: erst die Schritte davor abschließen":""}</p>`;
+ return`<div class="pp-stunde${done?" fertig":""}"style="--c:${c}">
+  <div class="pp-stunde-icon">🧪</div>
+  <div style="flex:1;min-width:200px"><div class="kicker"style="color:${c};margin:0 0 2px">${st?`SCHRITT ${st.nr} · `:""}INTERAKTIVE STUNDE · ca. eine Doppelstunde</div><h3>Das Experiment</h3>
+   <p>Kaugummi-Versuch in Kleingruppen, Klassenvergleich, Merkmale eines Experiments, Anwendungsaufgaben und Abschlussquiz.</p>
+   ${lehrer?"":`<p class="pp-stunde-status">${done?"✓ Abgeschlossen":"Noch nicht abgeschlossen"}</p>`}${hinweis}</div>
+  <div class="pp-stunde-akt"><button class="primary"onclick="openExperimentStunde()">${lehrer?"Stunde öffnen":done?"Stunde wiederholen":"Stunde starten"}</button></div>
+ </div>`;
+}
+function ppEinstiegInhaltHTML(ph,fortschrittMap,c,stunde){
+ const sch=ppEinstiegSchritte(ph,id=>fortschrittMap[id]);
+ const letzter=sch.length;
+ const weg=sch.map(sx=>{
+  if(sx.art==="stunde")return ppStundeKarteHTML(ph,fortschrittMap,c);
+  const e=lehrplanWocheById("paedagogik",sx.id);if(!e)return"";
+  const f=fortschrittMap[sx.id]||{};
+  const begonnen=!sx.done&&(f.auftragGelesen||f.materialErhalten||Object.values(f.zieleErfuellt||{}).some(Boolean));
+  const abschluss=sx.nr===letzter;
+  const status=sx.done?"abgeschlossen":begonnen?"in Arbeit":"noch offen";
+  return`<div class="pp-einheit${sx.done?" fertig":""}"style="--c:${c}"onclick="openLehrplanEinheit('paedagogik','${sx.id}')">
+   <span class="pp-einheit-haken">${sx.done?"✓":sx.nr}</span>
+   <div style="flex:1"><strong>${abschluss?"Abschluss: ":""}${esc(e.thema)}</strong><small>${abschluss?"Wird in der interaktiven Stunde erarbeitet, hier abhaken, wenn die Ziele erfüllt sind · ":""}Inhalt Nr. ${esc(e.nr)} · ${status}</small></div>
+   <span>→</span></div>`;
+ }).join("");
+ let lehrer="";
+ if(isTeacher()){
+  if(stunde){
+   const schueler=stunde.students||[];
+   const n=schueler.filter(x=>stunde.erledigt.has(x.uid)).length;
+   lehrer=`<div class="kicker"style="margin:18px 0 8px">WER HAT DIE STUNDE GEMACHT? · ${n} von ${schueler.length}</div>
+   <div class="pp-stunde-liste">${schueler.map(x=>{const ok=stunde.erledigt.has(x.uid);return`<span class="pp-stunde-chip${ok?" ok":""}">${ok?"✓":"–"} ${esc(x.displayName||x.email||"Schüler/in")}</span>`;}).join("")||`<div class="empty">Keine Schüler:innen gefunden.</div>`}</div>
+   <small style="color:var(--muted)">Als gemacht gilt die Stunde, sobald das Abschlussquiz vollständig bearbeitet wurde.</small>`;
+  }else lehrer=`<div class="empty">Der Stand der Klasse konnte nicht geladen werden.</div>`;
+ }
+ return`<div class="kicker"style="margin:0 0 8px">SO GEHT'S · ${sch.length} SCHRITTE</div>
+ <div class="pp-weg-liste">${weg}</div>
+ <div class="pp-weiter"style="--c:${c}"><span>🎓</span><div><b>Weitere Inhalte</b><small>Die Pädagogik-Inhalte dieses Lernbereichs findest du im Abschlussprüfungs-Training.</small></div>
+  <button type="button"class="secondary"onclick="openPhaseDetail('${ph.id}:apt')">Zum Abschlussprüfungs-Training →</button></div>
+ ${lehrer}`;
+}
+// Schüler:innen dürfen die Meilensteine ihres eigenen Teams selbst abhaken
+// (auf false setzen, wenn das wieder nur Lehrkräfte dürfen sollen).
+const MEILENSTEINE_SCHUELER_DUERFEN_ABHAKEN=true;
+async function ppMeilensteinSetzen(teamId,index){
+ try{
+  await updateDoc(doc(db,"lehrplanTeams",teamId),{meilensteinIndex:index,meilensteinUpdatedAt:serverTimestamp()});
+  await render();
+  if(index>0)showMotivationsBild(false,"team","ms:"+teamId+":"+index);
+ }catch(e){console.error("Meilenstein setzen:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+window.ppMeilensteinSetzen=ppMeilensteinSetzen;
+
+async function stundeKarteHTML(f){
+ const done=!!f?.experimentErledigt,lehrer=isTeacher();
+ return`<div class="pp-stunde${done?" fertig":""}"style="--c:#3F7FC1;margin-bottom:14px">
+  <div class="pp-stunde-icon">🧪</div>
+  <div style="flex:1;min-width:180px"><div class="kicker"style="color:#3F7FC1;margin:0 0 2px">INTERAKTIVE STUNDE</div><h3>Das Experiment</h3>
+   ${lehrer?"":`<p class="pp-stunde-status">${done?"✓ Abgeschlossen":"Noch nicht abgeschlossen"}</p>`}</div>
+  <div class="pp-stunde-akt"><button class="primary"onclick="openExperimentStunde()">${lehrer?"Stunde öffnen":done?"Stunde wiederholen":"Stunde starten"}</button></div>
+ </div>`;
+}
+
+// ============================================================
+// INTERAKTIVE STUNDE „DAS EXPERIMENT“ (LB 1)
+// ------------------------------------------------------------
+// Die Stunde liegt als eigenständige Seite im Repo (experiment/das-experiment.html)
+// und läuft hier als Vollbild-Overlay (iframe, gleiche Herkunft). Die Seite
+// selbst kennt kein Firebase; sie spricht per postMessage mit der App:
+//  • experiment:bereit        → App antwortet mit experiment:init (Rolle, erledigt?)
+//  • experiment:klasse-laden  → App liefert die anonymen Klassenwerte
+//  • experiment:senden        → speichert NUR {gruppe, woerter} anonym
+//                               (Collection „experimentErgebnisse“, ohne UID/Zeit)
+//  • experiment:erledigt      → Abschlussquiz fertig → Häkchen „Stunde gemacht“
+//                               im persönlichen Fortschritt (lehrplanFortschritt)
+//  • experiment:zuruecksetzen → nur Lehrkraft: alle Klassenwerte löschen
+// Quizergebnisse und Freitexte bleiben lokal im Browser (localStorage).
+// ============================================================
+const EXPERIMENT_URL="experiment/das-experiment.html";
+let experimentHandler=null;
+function experimentWocheId(){return projektPhaseById("lb1")?.stundeWocheId||"pp03";}
+function openExperimentStunde(){
+ closeExperimentStunde(true);
+ const ov=document.createElement("div");
+ ov.id="experimentOverlay";ov.className="exp-overlay";
+ ov.innerHTML=`<div class="exp-leiste"><b>🧪 Das Experiment · interaktive Stunde</b><button type="button"class="secondary"onclick="closeExperimentStunde()">✕ Schließen</button></div><iframe id="experimentFrame"title="Das Experiment – interaktive Stunde"src="${EXPERIMENT_URL}"></iframe>`;
+ document.body.appendChild(ov);
+ document.body.classList.add("exp-offen");
+ experimentHandler=ev=>{experimentNachricht(ev);};
+ window.addEventListener("message",experimentHandler);
+}
+function closeExperimentStunde(still){
+ $("experimentOverlay")?.remove();
+ document.body.classList.remove("exp-offen");
+ if(experimentHandler){window.removeEventListener("message",experimentHandler);experimentHandler=null;}
+ if(!still&&ppDirty){ppDirty=false;if(activeFach==="paedagogik")render();}
+}
+async function experimentKlassenwerte(){
+ const snap=await getDocs(collection(db,"experimentErgebnisse"));
+ const werte={A:[],B:[]};
+ snap.docs.forEach(d=>{const x=d.data();if((x.gruppe==="A"||x.gruppe==="B")&&Number.isInteger(x.woerter))werte[x.gruppe].push(x.woerter);});
+ return werte;
+}
+async function experimentErledigtSetzen(){
+ if(isTeacher()||!currentUser)return;
+ const wocheId=experimentWocheId();
+ await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),
+  {uid:currentUser.uid,wocheId,fach:"paedagogik",experimentErledigt:true,experimentAm:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
+ ppDirty=true;
+ showMotivationsBild(true);
+}
+async function experimentNachricht(ev){
+ const fr=$("experimentFrame");
+ if(!fr||ev.source!==fr.contentWindow||ev.origin!==location.origin)return;
+ const m=ev.data||{};
+ if(typeof m.type!=="string"||!m.type.startsWith("experiment:"))return;
+ const senden=o=>fr.contentWindow?.postMessage(o,location.origin);
+ try{
+  if(m.type==="experiment:bereit"){
+   const f=await getLehrplanFortschritt(experimentWocheId());
+   senden({type:"experiment:init",rolle:isTeacher()?"lehrkraft":"schueler",erledigt:!!f.experimentErledigt});
+  }else if(m.type==="experiment:klasse-laden"){
+   senden({type:"experiment:klasse",werte:await experimentKlassenwerte()});
+  }else if(m.type==="experiment:senden"){
+   const w=Number(m.woerter);
+   if(!["A","B"].includes(m.gruppe)||!Number.isInteger(w)||w<0||w>10)return;
+   await addDoc(collection(db,"experimentErgebnisse"),{gruppe:m.gruppe,woerter:w});
+   senden({type:"experiment:gesendet"});
+   senden({type:"experiment:klasse",werte:await experimentKlassenwerte()});
+  }else if(m.type==="experiment:erledigt"){
+   await experimentErledigtSetzen();
+   senden({type:"experiment:erledigt-gespeichert"});
+  }else if(m.type==="experiment:zuruecksetzen"){
+   if(!isTeacher())return;
+   if(!confirm("Alle anonymen Klassenwerte des Experiments löschen?"))return;
+   const snap=await getDocs(collection(db,"experimentErgebnisse"));
+   await Promise.all(snap.docs.map(d=>deleteDoc(d.ref)));
+   senden({type:"experiment:klasse",werte:{A:[],B:[]}});
+  }
+ }catch(e){
+  console.error("Experiment-Brücke:",e);
+  senden({type:"experiment:fehler",fuer:m.type,text:e?.code==="permission-denied"?"Firebase verweigert den Zugriff. Bitte die Firestore-Regeln prüfen (Collection experimentErgebnisse).":"Konnte nicht gespeichert werden."});
+ }
+}
+window.openExperimentStunde=openExperimentStunde;window.closeExperimentStunde=closeExperimentStunde;
+
+// Öffnet eine Einheit passend zu ihrem Typ.
+function openLehrplanEinheit(fach,id){
+ const e=lehrplanWocheById(fach,id);
+ if(istStundeneinheit(id))return openAptDetail(id);
+ return openWocheDetail(fach,id);
+}
+window.openLehrplanEinheit=openLehrplanEinheit;
+// Nach jeder Änderung im Modal: dasselbe Modal neu laden und beim
+// Schließen den Zeitstrahl aktualisieren (Sättigung/Zeitbudget).
+async function reopenDetail(fach,wocheId){
+ ppDirty=true;
+ const e=lehrplanWocheById(fach,wocheId);
+ if(istStundeneinheit(wocheId))return openAptDetail(wocheId);
+ return openWocheDetail(fach,wocheId);
+}
+
+// Kleiner Fortschrittskopf in den Inhalts-Fenstern (Ebene 3).
+async function ppEinheitKopfHTML(wocheId){
+ const ph=projektPhaseByWoche(wocheId);
+ if(!ph)return"";
+ const teil=ph.notwendigeWochen.includes(wocheId)?"projekt":"apt";
+ const ids=teil==="projekt"?ph.notwendigeWochen:ph.trainingWochen;
+ const [fs,teams]=await Promise.all([
+  Promise.all(ids.map(async id=>[id,await getLehrplanFortschritt(id)])),
+  teil==="projekt"?getLehrplanTeams(ph.projektWocheId):Promise.resolve([])
+ ]);
+ const map=Object.fromEntries(fs);
+ const meinTeam=teams.find(t=>(t.mitgliederUids||[]).includes(currentUser?.uid));
+ const f=ppTeilFortschritt(ph,teil,map,meinTeam);
  const heute=new Date().toISOString().slice(0,10);
- let heuteIdx=PP_ZEITSTRAHL_TAGE.findIndex(t=>t.date>=heute);
- if(heuteIdx===-1)heuteIdx=PP_ZEITSTRAHL_TAGE.length-1;
- return`<div class="zeitstrahl-scroll"style="overflow-x:auto;padding:16px 4px 8px">
- <div style="position:relative;min-width:${PP_ZEITSTRAHL_TAGE.length*128+40}px;padding:0 20px">
- <div style="position:absolute;left:20px;right:20px;top:38px;height:2px;background:var(--line,#e2eaf0)"></div>
- <div style="display:flex">
- ${PP_ZEITSTRAHL_TAGE.map((tag,i)=>{
-  const istHeute=i===heuteIdx;
-  const marker=istHeute?`<div style="flex:0 0 0;position:relative;width:0"><div style="position:absolute;top:-2px;left:-1px;background:#E24B4A;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;transform:translateX(-50%)">Heute</div></div>`:"";
-  return marker+zeitstrahlPunktHTML(tag,istHeute);
- }).join("")}
- </div>
- </div>
- </div>
- <div style="display:flex;gap:16px;flex-wrap:wrap;margin:10px 4px 0;font-size:11.5px;color:var(--muted)">
- ${[1,2,3,4].map(n=>`<span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:50%;background:${LERNBEREICH_FARBEN[n].border};display:inline-block"></span>Lernbereich ${n}</span>`).join("")}
- <span style="display:flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:3px;transform:rotate(45deg);background:#E24B4A;display:inline-block"></span>Kurzarbeit/Schulaufgabe</span>
+ const budget=ppZeitbudget(ppTeilWochen(ph,teil),heute);
+ const c=ppFarbe(ph);
+ return`<div class="pp-modal-kopf"style="--c:${c}">
+  <span class="pp-modal-kopf-farbe"style="background:${ppMix(c,ppSaettigung(f.prozent))}">${ppTeilIcon(teil,ph)}</span>
+  <span style="flex:1;min-width:0"><b style="color:${c}">${esc(ph.lb)} · ${ppTeilName(teil,ph)}</b> · ${f.prozent}% · ${esc(budget.text)}
+   <span class="pp-balken klein"><span style="width:${f.prozent}%;background:${c}"></span></span></span>
  </div>`;
 }
+
+// ============================================================
+// ABSCHLUSSPRÜFUNGS-TRAINING · Detailfenster eines Inhalts
+// ============================================================
+let aptAktiverTab=null,aptLetzteEinheit=null,aptKprimWiederholen=false; // Reste der alten Tabs (nur noch von älteren Funktionen gelesen)
+const APT_OPERATOREN=[["nennen","I"],["beschreiben","I"],["darstellen","I–II"],["erklären","II"],["erläutern","II"],["vergleichen","II"],["anwenden","II"],["analysieren","II–III"],["beurteilen","III"],["bewerten","III"],["Stellung nehmen","III"],["entwickeln","III"]];
+function showAptTab(tab){
+ aptAktiverTab=tab;
+ document.querySelectorAll(".apt-panel").forEach(el=>el.style.display=el.id===`aptPanel_${tab}`?"block":"none");
+ document.querySelectorAll(".apt-tab").forEach(el=>el.classList.toggle("wd-tab-active",el.dataset.tab===tab));
+}
+window.showAptTab=showAptTab;
+async function getAptInhalt(id){
+ try{const s=await getDoc(doc(db,"aptInhalte",id));return s.exists()?s.data():{};}
+ catch(e){console.error("APT-Inhalt laden:",e);return{};}
+}
+function aptKprimAufgaben(inhalt,e){return(inhalt.kprim&&inhalt.kprim.length)?inhalt.kprim:(e.kprim||[]);}
+
+// Basis-Check-Bereich (Lehrkraft-Editor bzw. Schüler-Test) – gemeinsam
+// genutzt von Projektinhalten und APT-Inhalten.
+// ---- K-Prim als Tabelle: Aussage | richtig | falsch (wie in der Prüfung) ----
+const KPRIM_ANLEITUNG="<b>Kreuzen Sie für jede Aussage an, ob sie richtig oder falsch ist.</b>";
+// name: Präfix der Radio-Gruppen (je Aussage name_j). antworten: {j:"r"|"f"}.
+// onchange: optionaler Aufruf, %J und %V werden durch Aussage und Wert ersetzt.
+function kprimTabelleHTML(name,aussagen,antworten={},onchange=""){
+ return`<table class="kp-tabelle"><thead><tr><th>Aussage</th><th class="kp-rf">richtig</th><th class="kp-rf">falsch</th></tr></thead><tbody>
+  ${aussagen.map((t,j)=>`<tr><td><b class="kp-nr">${j+1}</b> ${esc(t)}</td>${["r","f"].map(v=>`<td class="kp-rf"><label class="kp-klick"><input type="radio"name="${name}_${j}"value="${v}"aria-label="Aussage ${j+1}: ${v==="r"?"richtig":"falsch"}"${antworten[j]===v?" checked":""}${onchange?` onchange="${onchange.replace(/%J/g,j).replace(/%V/g,v)}"`:""}></label></td>`).join("")}</tr>`).join("")}
+ </tbody></table>`;
+}
+function kprimFrageKopfHTML(nr,stamm,vignette){
+ return`<strong class="kp-stamm">${nr?nr+". ":""}${esc(stamm||"")}</strong>
+  ${vignette?`<div class="kp-vignette">${esc(vignette)}</div>`:""}
+  <p class="kp-anleitung">${/beurteilen sie/i.test(stamm||"")?"":"Beurteilen Sie die folgenden Aussagen. "}${KPRIM_ANLEITUNG}</p>`;
+}
+function basischeckPanelHTML(fach,wocheId,basischeckFragen,meinBasischeck,extraSchueler=""){
+ if(isTeacher())return`<div class="form">
+  ${[0,1,2].map(i=>{
+   const f=basischeckFragen[i]||{};
+   const typ=f.typ||"mc";
+   return`<div class="card"style="margin-bottom:10px;background:#f7fafc">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+     <label style="flex:1;min-width:200px">Frage ${i+1}${i>0?" (optional)":""}<input id="bcFrage${i}"type="text"value="${esc(f.text||"")}"placeholder="z. B. Was versteht man unter …?"></label>
+     <label style="width:190px">Fragetyp<select id="bcTyp${i}"onchange="basischeckTypToggle(${i})">
+      <option value="mc"${typ==="mc"?" selected":""}>Multiple Choice</option>
+      <option value="kprim"${typ==="kprim"?" selected":""}>K-Prim (richtig/falsch je Aussage)</option>
+      <option value="offen"${typ==="offen"?" selected":""}>Offene Frage</option>
+     </select></label>
+    </div>
+    <div id="bcMcBereich${i}"style="display:${typ==="mc"?"block":"none"};margin-top:8px">
+     <div class="grid grid-2">${[0,1,2].map(j=>`<label>Antwort ${j+1}${j>1?" (optional)":""}<input id="bcOpt${i}_${j}"type="text"value="${esc(f.optionen?.[j]||"")}"></label>`).join("")}</div>
+     <label style="margin-top:6px">Richtige Antwort<select id="bcRichtig${i}">${[0,1,2].map(j=>`<option value="${j}"${f.richtig===j?" selected":""}>Antwort ${j+1}</option>`).join("")}</select></label>
+    </div>
+    <div id="bcKprimBereich${i}"style="display:${typ==="kprim"?"block":"none"};margin-top:8px">
+     <label style="margin-bottom:8px">Fallvignette / Einleitungstext (optional – steht über der Tabelle)<textarea id="bcVignette${i}"rows="3"placeholder="z. B. kurze Fallbeschreibung, auf die sich die Aussagen beziehen">${esc(f.vignette||"")}</textarea></label>
+<p style="font-size:11px;color:var(--muted);margin:0 0 6px">Bis zu 4 Aussagen, jeweils als richtig oder falsch markieren. Nur „alles richtig" zählt als bestanden.</p>
+     ${[0,1,2,3].map(j=>{const s=f.statements?.[j]||{};return`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+      <input id="bcStatement${i}_${j}"type="text"value="${esc(s.text||"")}"placeholder="Aussage ${j+1}${j>1?" (optional)":""}"style="flex:1">
+      <select id="bcStatementRichtig${i}_${j}"style="width:90px"><option value="true"${s.correct?" selected":""}>richtig</option><option value="false"${s.correct===false?" selected":""}>falsch</option></select>
+     </div>`;}).join("")}
+    </div>
+    <div id="bcOffenBereich${i}"style="display:${typ==="offen"?"block":"none"};margin-top:8px">
+     <label>Erwartete Stichworte (kommagetrennt – ALLE müssen in der Antwort vorkommen)<input id="bcStichworte${i}"type="text"value="${esc((f.stichworte||[]).join(", "))}"placeholder="z. B. Sozialisation, Erziehung, Werte"></label>
+    </div>
+   </div>`;
+  }).join("")}
+  <button class="primary"onclick="saveBasischeckFragen('${fach}','${wocheId}')">Basis-Check speichern</button>
+ </div>`;
+ if(!basischeckFragen.length)return`<div class="empty">Für diesen Inhalt wurde noch kein Basis-Check eingerichtet.</div>${extraSchueler}`;
+ if(meinBasischeck)return`<div class="card"style="background:${ampelFarbe(meinBasischeck.ampel)}1a;border-left:4px solid ${ampelFarbe(meinBasischeck.ampel)}">
+  <strong>${meinBasischeck.richtig} von ${meinBasischeck.gesamt} richtig</strong>
+  <p style="margin:6px 0 0;color:var(--muted)">${esc(basischeckAmpelText(meinBasischeck.ampel))}</p>
+ </div>`;
+ return`<div class="form">
+  ${basischeckFragen.map((f,i)=>{
+   const typ=f.typ||"mc";
+   return`<div class="card"style="margin-bottom:10px">
+    ${typ==="kprim"?kprimFrageKopfHTML(i+1,f.text,f.vignette):`<strong style="display:block;margin-bottom:8px">${i+1}. ${esc(f.text)}</strong>`}
+    ${typ==="mc"?f.optionen.map((o,j)=>`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:4px"><input type="radio"name="bcQ${i}"value="${j}"> <span>${esc(o)}</span></label>`).join(""):""}
+    ${typ==="kprim"?kprimTabelleHTML(`bcKp${i}`,f.statements.map(x=>x.text)):""}
+    ${typ==="offen"?`<textarea id="bcOffenAntwort${i}"rows="3"placeholder="Deine Antwort …"></textarea>`:""}
+   </div>`;
+  }).join("")}
+  <button class="primary"onclick="submitBasischeck('${fach}','${wocheId}')">Basis-Check abgeben</button>
+ </div>`;
+}
+
+// ---- Einarbeitung: interaktive Seite je Stunde (einarbeitung/inhalte/<id>.json) ----
+const einarbeitungCache={};
+async function einarbeitungInfo(id){
+ if(id in einarbeitungCache)return einarbeitungCache[id];
+ let r=null;
+ try{
+  const res=await fetch(`einarbeitung/inhalte/${encodeURIComponent(id)}.json`,{cache:"no-cache"});
+  if(res.ok){
+   const j=await res.json();
+   const ARTEN=["mc","lueckentext","zuordnung","sortieren","kprim","frei"];
+   const zahl=(j.abschnitte||[]).reduce((n,x)=>n+(x.aufgaben||[]).length+(x.bloecke||[]).filter(b=>ARTEN.includes(b.typ)).length,0);
+   r={titel:j.titel||"",entwurf:!!j.entwurf,aufgaben:zahl};
+  }
+ }catch(e){r=null;}
+ einarbeitungCache[id]=r;return r;
+}
+async function ladeStundeKlasse(wocheId){
+ const [students,snap]=await Promise.all([getAllUsersForLernstand(),getDocs(query(collection(db,"lehrplanFortschritt"),where("wocheId","==",wocheId)))]);
+ const fs={};snap.docs.forEach(d=>{const x=d.data();fs[x.uid]=x;});
+ return{students,fs};
+}
+function stDatum(ts){const d=coTsDatum(ts);return d?d.toLocaleDateString("de-DE"):"";}
+async function openAptDetail(wocheId,tab){
+ const fach="paedagogik";
+ const e=lehrplanWocheById(fach,wocheId);
+ if(!e){toast("Dieser Inhalt wurde nicht gefunden.");return}
+ const ph=projektPhaseByWoche(wocheId);
+ const c=ph?ppFarbe(ph):"#4a90d9";
+ const lehrer=isTeacher();
+ const [inhalt,materialien,fortschritt,links,ein,klasse,stundeKarte]=await Promise.all([
+  getAptInhalt(wocheId),getLehrplanMaterialien(wocheId),getLehrplanFortschritt(wocheId),
+  ladeTaskcardLinks().catch(()=>({})),einarbeitungInfo(wocheId),
+  lehrer?ladeStundeKlasse(wocheId).catch(()=>null):Promise.resolve(null),
+  e.interaktiv?stundeKarteHTML(await getLehrplanFortschritt(wocheId)):Promise.resolve("")
+ ]);
+ const schritte=aptSchritte(fortschritt),n=schritte.filter(Boolean).length;
+ const offenIdx=schritte.findIndex(x=>!x);
+ const oeffne=tab&&STUNDE_TAB_IDX[tab]!==undefined?STUNDE_TAB_IDX[tab]:(offenIdx===-1?3:offenIdx);
+ const fobizzUrl=(links.fobizz_fachaufsatz||{}).url||"";
+ const frage=inhalt.pruefungsfrage||e.pruefung||"";
+
+ // ① Prüfungsfrage
+ const s1=lehrer?`<div class="form">
+   <p style="font-size:12px;color:var(--muted);margin:0">Prüfungsfrage aus einer Abschlussprüfung (Text und/oder Datei).</p>
+   <label>Prüfungsfrage<textarea id="aptFrageText"rows="5">${esc(frage)}</textarea></label>
+   <label>Datei (optional, z. B. PDF/Bild, max. 15 MB)<input id="aptFrageDatei"type="file"></label>
+   ${inhalt.frageDateiUrl?`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${dateiEmbedHTML(inhalt.frageDateiUrl,inhalt.frageDateiName)}<button class="secondary"onclick="aptFrageDateiEntfernen('${wocheId}')">Datei entfernen</button></div>`:""}
+   <div class="form-actions"><button class="primary"onclick="saveAptFrage('${wocheId}')">Prüfungsfrage speichern</button></div></div>`
+  :!(inhalt.pruefungsfrage||inhalt.frageDateiUrl)?`<div class="empty">Deine Lehrkraft stellt die Prüfungsfrage hier bereit.</div>`
+  :`<div class="card apt-frage"style="border-left:4px solid ${c}">
+   ${inhalt.pruefungsfrage?`<p style="white-space:pre-wrap;font-size:15px;line-height:1.5;margin:6px 0">${esc(inhalt.pruefungsfrage)}</p>`:""}
+   ${inhalt.frageDateiUrl?dateiEmbedHTML(inhalt.frageDateiUrl,inhalt.frageDateiName):""}</div>`;
+ const s1b=lehrer?"":`<label class="apt-check"><input type="checkbox"${fortschritt.frageGelesen?" checked":""} onchange="aptSetzen('${wocheId}',{frageGelesen:this.checked,frageAm:serverTimestamp()},{tab:'frage'})"><span>Ich habe die Prüfungsfrage gelesen</span></label>`;
+
+ // ② Einarbeitung
+ const erg=fortschritt.einarbeitungAufgaben;
+ const einKarte=ein?`<div class="st-ein"style="--c:${c}"><div><b>${esc(ein.titel||"Interaktive Einarbeitung")}</b>
+   <small>${ein.aufgaben} Aufgaben${ein.entwurf?" · Entwurf":""}${erg&&!lehrer?` · zuletzt: ${erg.richtig} von ${erg.gesamt} richtig`:""}</small></div>
+   <button class="primary"onclick="openEinarbeitung('${wocheId}')">${erg?.fertig?"Nochmal öffnen":"Einarbeitung starten"}</button></div>`
+  :(lehrer?`<div class="empty">Noch keine interaktive Einarbeitung. Lege die Datei <code>einarbeitung/inhalte/${esc(wocheId)}.json</code> im Repo an (siehe README im Ordner „einarbeitung“).</div>`:"");
+ const matListe=materialien.map(m=>`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
+   <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(MATERIAL_KATEGORIEN.find(k=>k.key===m.kategorie)?.label||m.kategorie)}: ${esc(m.titel)}</strong>${lehrer?`<button class="secondary"onclick="deleteLehrplanMaterial('${m.id}','${fach}','${wocheId}')">Löschen</button>`:""}</div>
+   ${m.url?materialEmbedHTML(m):""}</div>`).join("");
+ const matForm=lehrer?`<div class="form"style="margin:10px 0"><div style="display:flex;gap:8px;flex-wrap:wrap">
+   <select id="matKategorie">${MATERIAL_KATEGORIEN.map(k=>`<option value="${k.key}">${k.label}</option>`).join("")}</select>
+   <input id="matTitel"type="text"placeholder="Titel"style="flex:1;min-width:140px">
+   <input id="matUrl"type="url"placeholder="Link/URL"style="flex:1;min-width:160px">
+   <button class="primary"onclick="addLehrplanMaterial('${fach}','${wocheId}')">＋ Material</button></div></div>`:"";
+ const abgeschlossenAm=stDatum(fortschritt.einarbeitungAm);
+ const s2=`${einKarte}
+  ${matListe||lehrer?`<h3 class="apt-h3">Material</h3><div class="list">${matListe||`<div class="empty">Noch kein Material eingestellt.</div>`}</div>`:""}${matForm}
+  ${lehrer?"":schritte[1]?`<div class="st-fertig">✓ Einarbeitung abgeschlossen${abgeschlossenAm?` am ${abgeschlossenAm}`:""} <button class="text-button"style="font-size:11px"onclick="aptSetzen('${wocheId}',{einarbeitungAbgeschlossen:false,materialBearbeitet:false,basischeckErledigt:false},{tab:'einarbeitung'})">zurücknehmen</button></div>`
+   :`<div class="form-actions"style="margin-top:12px"><button class="primary"onclick="stundeEinarbeitungAbschliessen('${wocheId}')">Ich habe die Einarbeitung abgeschlossen</button></div>`}`;
+
+ // ③ Fachaufsatz üben
+ const hatText=!!(fortschritt.aufsatzText||"").trim();
+ const fobizzBtn=fobizzUrl?`<a class="secondary"style="text-decoration:none;display:inline-block;padding:9px 14px;border-radius:9px;border:1px solid var(--line)"href="${esc(fobizzUrl)}"target="_blank"rel="noopener noreferrer">🤖 Fobizz-Assistent öffnen ↗</a>`:`<small style="color:var(--muted)">Der Link zum Fobizz-Assistenten wird von deiner Lehrkraft hinterlegt.</small>`;
+ const s3=lehrer?`<p style="font-size:13px;color:var(--muted);margin:0 0 8px">Die Schüler:innen schreiben ihren Text hier, kopieren ihn und lassen ihn im Fobizz-Assistenten korrigieren.</p>
+   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${fobizzUrl?`<a href="${esc(fobizzUrl)}"target="_blank"rel="noopener noreferrer">${esc(fobizzUrl)}</a>`:`<small style="color:var(--muted)">Noch kein Fobizz-Link hinterlegt.</small>`}<button class="secondary"onclick="stundeFobizzLinkAendern('${wocheId}')">Fobizz-Link ${fobizzUrl?"ändern":"hinterlegen"}</button></div>`
+  :`<p style="font-size:13px;color:var(--muted);margin:0 0 8px">Beantworte die Prüfungsfrage als Fachaufsatz, lass deinen Text von der KI korrigieren und arbeite die Rückmeldung ein.</p>
+   <label style="display:block;font-weight:700;font-size:12px">Dein Text<textarea id="stAufsatz"rows="10"style="width:100%;margin-top:4px"placeholder="Schreibe hier deinen Fachaufsatz …">${esc(fortschritt.aufsatzText||"")}</textarea></label>
+   <div class="form-actions"style="margin-top:8px;flex-wrap:wrap;justify-content:flex-start"><button class="primary"onclick="stundeAufsatzSpeichern('${wocheId}')">Text speichern</button>
+    <button class="secondary"onclick="stundeAufsatzKopieren('${wocheId}')">Text für Fobizz kopieren</button>${fobizzBtn}</div>
+   <small style="display:block;color:var(--muted);margin-top:6px">Erst „Text für Fobizz kopieren“, dann den Assistenten öffnen und einfügen.</small>
+   <label class="apt-check"style="margin-top:10px"><input type="checkbox"${fortschritt.aufsatzErledigt?" checked":""}${hatText?"":" disabled"} onchange="aptSetzen('${wocheId}',{aufsatzErledigt:this.checked,aufsatzKiAm:serverTimestamp()},{tab:'aufsatz'})"><span>Ich habe meinen Text mit dem KI-Assistenten korrigieren lassen${hatText?"":" (erst Text speichern)"}</span></label>`;
+
+ // ④ Feedback
+ const wunsch=!!fortschritt.besprechungGewuenscht&&!fortschritt.besprechungErledigt;
+ const s4=lehrer?`<p style="font-size:13px;color:var(--muted);margin:0">Die Schüler:innen halten fest, was sie aus der Rückmeldung mitnehmen, und können eine Besprechung wünschen. Im Klassenstand oben siehst du das mit 💬. Dort kannst du auch eine Rückmeldung schreiben.</p>`
+  :`${fortschritt.lehrerFeedback?`<div class="card"style="border-left:4px solid #3fa66a;padding:10px 12px;margin-bottom:10px"><div class="kicker">RÜCKMELDUNG DEINER LEHRKRAFT</div><p style="margin:4px 0 0;white-space:pre-wrap;font-size:13px">${esc(fortschritt.lehrerFeedback)}</p></div>`:""}
+   <label style="display:block;font-weight:700;font-size:12px">Was nimmst du aus der Rückmeldung mit? Was hast du überarbeitet?<textarea id="stFeedback"rows="4"style="width:100%;margin-top:4px"placeholder="z. B. Operator „erläutern“ mit Beispiel ergänzt, Fachbegriffe genauer verwendet …">${esc(fortschritt.feedbackText||"")}</textarea></label>
+   <div class="form-actions"style="margin-top:8px;flex-wrap:wrap;justify-content:flex-start">
+    ${fortschritt.feedbackErledigt?`<span class="st-fertig">✓ Rückmeldung eingearbeitet <button class="text-button"style="font-size:11px"onclick="aptSetzen('${wocheId}',{feedbackErledigt:false,vorkorrekturUmgesetzt:false},{tab:'feedback'})">zurücknehmen</button></span>`
+     :`<button class="primary"onclick="stundeFeedbackAbschliessen('${wocheId}')">Ich habe die Rückmeldung eingearbeitet</button>`}
+    ${wunsch?`<span class="st-wunsch">💬 Besprechung gewünscht${fortschritt.besprechungAm?` (${stDatum(fortschritt.besprechungAm)})`:""}</span><button class="secondary"onclick="aptSetzen('${wocheId}',{besprechungGewuenscht:false},{tab:'feedback'})">Zurücknehmen</button>`
+     :`<button class="secondary"onclick="aptSetzen('${wocheId}',{besprechungGewuenscht:true,besprechungErledigt:false,besprechungAm:serverTimestamp()},{tab:'feedback'})">💬 Besprechung mit der Lehrkraft wünschen</button>`}
+   </div>`;
+
+ const sek=(i,titel,body,extra="")=>`<details class="st-schritt${!lehrer&&schritte[i]?" done":""}"${i===oeffne?" open":""}style="--c:${c}"><summary><span class="st-nr">${!lehrer&&schritte[i]?"✓":i+1}</span><b>${esc(titel)}</b></summary><div class="st-body">${body}${extra}</div></details>`;
+ const balken=lehrer?"":`<div class="st-balken-wrap"><div class="st-balken"><i style="width:${n/4*100}%;background:${c}"></i></div><small><b>${n} von 4</b> Schritten erledigt</small></div>`;
+
+ // Klassenstand (Lehrkraft)
+ let klassenHTML="";
+ if(lehrer){
+  if(!klasse)klassenHTML=`<div class="empty">Der Klassenstand konnte nicht geladen werden.</div>`;
+  else{
+   const zeilen=klasse.students.map(st=>{
+    const f=klasse.fs[st.uid]||null,sc=aptSchritte(f);
+    const wu=f?.besprechungGewuenscht&&!f?.besprechungErledigt;
+    const ea=f?.einarbeitungAufgaben;
+    return`<tr><td>${esc(st.displayName||st.email||"Schüler/in")}</td>
+     <td><span class="apt-dots">${sc.map((d,i)=>`<span class="apt-dot${d?" an":""}"style="${d?`background:${c};border-color:${c}`:""}"title="${esc(APT_SCHRITT_LABELS[i])}">${d?"✓":i+1}</span>`).join("")}</span></td>
+     <td style="font-size:12px">${f?.einarbeitungAbgeschlossen?`${esc(stDatum(f.einarbeitungAm))}${ea?.gesamt?` · ${ea.richtig}/${ea.gesamt}`:""}`:"–"}</td>
+     <td>${wu?`<span title="Besprechung gewünscht">💬</span>`:""}</td>
+     <td><button class="secondary"style="font-size:11px"onclick="openStundeSchueler('${wocheId}','${st.uid}')">Ansehen</button></td></tr>`;}).join("");
+   const fertigN=klasse.students.filter(st=>aptSchritte(klasse.fs[st.uid]).every(Boolean)).length;
+   klassenHTML=`<h3 class="apt-h3">Klassenstand · ${fertigN} von ${klasse.students.length} fertig</h3>
+    <div style="overflow-x:auto"><table class="ls-matrix"><thead><tr><th>Schüler:in</th><th>Schritte</th><th>Einarbeitung (Datum · Aufgaben)</th><th>💬</th><th></th></tr></thead><tbody>${zeilen||`<tr><td colspan="5">Keine Schüler:innen gefunden.</td></tr>`}</tbody></table></div>
+    <small style="color:var(--muted)">Ansehen zeigt, was die Person in dieser Stunde gemacht hat, samt Aufsatztext.</small>`;
+  }
+ }
+
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker"style="color:${c}">${esc(e.lb||"")} · ${e.typ==="apt"?"ABSCHLUSSPRÜFUNGS-TRAINING":"EINSTIEG"}</div>
+  <h2>${esc(e.thema)}</h2>
+  ${balken}
+  ${stundeKarte}
+  ${klassenHTML}
+  <div class="st-schritte">
+   ${sek(0,"Prüfungsfrage",s1,s1b)}
+   ${sek(1,"Einarbeitung ins Thema",s2)}
+   ${sek(2,"Fachaufsatz üben",s3)}
+   ${sek(3,"Feedback",s4)}
+  </div>
+  <div class="apt-hinweis-checkout">🏁 Den K-Prim-Test zu diesem Lernbereich schreibst du als <b>Check-out</b> am Ende der Woche. Deine Lehrkraft schaltet ihn live frei.</div>
+  <div class="wd-footer"><button class="secondary"onclick="closeModal()">Schließen</button><span style="flex:1"></span>
+   ${!lehrer?`<button class="primary"onclick="closeModal();go('forum-nachrichten')">Lehrkraft fragen</button>`:""}</div>`);
+}
+window.openAptDetail=openAptDetail;
+
+// ---- Speichern: Schüler:innen-Fortschritt ----
+// ---- Aktionen der 4 Schritte ----
+async function stundeEinarbeitungAbschliessen(wocheId){
+ await aptSetzen(wocheId,{einarbeitungAbgeschlossen:true,einarbeitungAm:serverTimestamp(),materialBearbeitet:true,basischeckErledigt:true,basischeckUebersprungen:false},{tab:"einarbeitung",motiv:true});
+}
+async function stundeAufsatzSpeichern(wocheId){
+ const t=($("stAufsatz")?.value||"").trim();
+ if(!t){toast("Schreibe zuerst deinen Text.");return}
+ await aptSetzen(wocheId,{aufsatzText:t,aufsatzAm:serverTimestamp()},{tab:"aufsatz"});
+ toast("Text gespeichert.");showMotivationsBild(false,"lernen","aufsatz:"+wocheId);
+}
+async function stundeAufsatzKopieren(wocheId){
+ const [inhalt,f]=await Promise.all([getAptInhalt(wocheId),getLehrplanFortschritt(wocheId)]);
+ const text=($("stAufsatz")?.value||f.aufsatzText||"").trim();
+ if(!text){toast("Schreibe zuerst deinen Text.");return}
+ const e=lehrplanWocheById("paedagogik",wocheId);
+ const paket=`Aufgabe:\n${inhalt.pruefungsfrage||e?.pruefung||""}\n\nMein Text:\n${text}`;
+ try{await navigator.clipboard.writeText(paket);toast("Kopiert. Jetzt im Fobizz-Assistenten einfügen.");}
+ catch(err){toast("Kopieren nicht möglich. Bitte den Text von Hand markieren und kopieren.");}
+}
+async function stundeFeedbackAbschliessen(wocheId){
+ const t=($("stFeedback")?.value||"").trim();
+ await aptSetzen(wocheId,{feedbackText:t,feedbackErledigt:true,feedbackAm:serverTimestamp()},{tab:"feedback",motiv:true});
+}
+async function stundeFobizzLinkAendern(wocheId){
+ if(!isTeacher())return;
+ const links=await ladeTaskcardLinks().catch(()=>({}));
+ const url=prompt("Link zum Fobizz-Assistenten:",(links.fobizz_fachaufsatz||{}).url||"https://");
+ if(url===null)return;
+ try{await setDoc(doc(db,"taskcardLinks","fobizz_fachaufsatz"),{url:url.trim(),updatedAt:serverTimestamp(),updatedBy:currentUser.uid});toast("Link gespeichert.");await openAptDetail(wocheId,"aufsatz");}
+ catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+// Lehrkraft: was hat diese Person in der Stunde gemacht?
+async function openStundeSchueler(wocheId,uid,zurueck){
+ if(!isTeacher())return;
+ try{
+  const [snap,students]=await Promise.all([getDoc(doc(db,"lehrplanFortschritt",`${uid}_${wocheId}`)),getAllUsersForLernstand()]);
+  const f=snap.exists()?snap.data():{};
+  const st=students.find(x=>x.uid===uid),e=lehrplanWocheById("paedagogik",wocheId),ph=projektPhaseByWoche(wocheId),c=ph?ppFarbe(ph):"#4a90d9";
+  const sc=aptSchritte(f),ea=f.einarbeitungAufgaben;
+  const wunsch=f.besprechungGewuenscht&&!f.besprechungErledigt;
+  const info=[
+   f.frageGelesen?`gelesen${f.frageAm?` am ${stDatum(f.frageAm)}`:""}`:"noch nicht gelesen",
+   f.einarbeitungAbgeschlossen?`abgeschlossen${f.einarbeitungAm?` am ${stDatum(f.einarbeitungAm)}`:""}${ea?.gesamt?` · Aufgaben: ${ea.richtig} von ${ea.gesamt} richtig`:""}`:(ea?.gesamt?`in Arbeit · Aufgaben: ${ea.richtig} von ${ea.gesamt} richtig`:"offen"),
+   f.aufsatzErledigt?`Text mit KI korrigiert${f.aufsatzKiAm?` am ${stDatum(f.aufsatzKiAm)}`:""}`:((f.aufsatzText||"").trim()?"Text geschrieben, KI-Korrektur noch offen":"noch kein Text"),
+   f.feedbackErledigt?`eingearbeitet${f.feedbackAm?` am ${stDatum(f.feedbackAm)}`:""}`:"offen"
+  ];
+  modal(`<button class="modal-close"onclick="closeModal()">×</button>
+   <div class="kicker"style="color:${c}">${esc(e?.lb||"")} · ${esc(st?.displayName||st?.email||"")}</div>
+   <h2>${esc(e?.thema||wocheId)}</h2>
+   <div class="list">${sc.map((d,i)=>`<div class="list-item"><div><strong>${d?"✓":"○"} ${esc(APT_SCHRITT_LABELS[i])}</strong><small>${esc(info[i])}</small></div></div>`).join("")}</div>
+   ${(f.aufsatzText||"").trim()?`<h3 class="apt-h3">Aufsatztext</h3><div class="card"style="padding:10px 14px;font-size:13px;white-space:pre-wrap;line-height:1.5">${esc(f.aufsatzText)}</div>`:""}
+   ${f.feedbackText?`<h3 class="apt-h3">Was die Person aus der Rückmeldung mitnimmt</h3><div class="card"style="padding:10px 14px;font-size:13px;white-space:pre-wrap">${esc(f.feedbackText)}</div>`:""}
+   ${wunsch?`<div class="st-wunsch"style="margin:12px 0">💬 Besprechung gewünscht${f.besprechungAm?` (${esc(stDatum(f.besprechungAm))})`:""} <button class="secondary"style="margin-left:8px"onclick="stundeBesprechungErledigt('${wocheId}','${uid}')">Als besprochen markieren</button></div>`:""}
+   <h3 class="apt-h3">Deine Rückmeldung an die Person</h3>
+   ${snap.exists()?`<div class="form"><textarea id="stLehrerFb"rows="4"placeholder="Kurze Rückmeldung, die die Person im Schritt „Feedback“ sieht.">${esc(f.lehrerFeedback||"")}</textarea>
+    <div class="form-actions"><button class="primary"onclick="stundeLehrerFeedback('${wocheId}','${uid}')">Rückmeldung speichern</button></div></div>`:`<div class="empty">Diese Person hat in dieser Stunde noch nichts gemacht.</div>`}
+   <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="${zurueck||`openAptDetail('${wocheId}')`}">← Zurück</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+ }catch(e){console.error(e);toast("Konnte nicht geladen werden.");}
+}
+async function stundeLehrerFeedback(wocheId,uid){
+ try{await setDoc(doc(db,"lehrplanFortschritt",`${uid}_${wocheId}`),{lehrerFeedback:($("stLehrerFb")?.value||"").trim(),lehrerFeedbackAm:serverTimestamp(),lehrerFeedbackVon:currentUser.uid},{merge:true});toast("Rückmeldung gespeichert.");await openStundeSchueler(wocheId,uid);}
+ catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+async function stundeBesprechungErledigt(wocheId,uid){
+ try{await setDoc(doc(db,"lehrplanFortschritt",`${uid}_${wocheId}`),{besprechungErledigt:true,besprechungGewuenscht:false},{merge:true});toast("Als besprochen markiert.");await openStundeSchueler(wocheId,uid);}
+ catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+// ---- Interaktive Einarbeitung (Overlay mit einarbeitung/player.html) ----
+// Nachrichten: einarbeitung:bereit → :init | :fortschritt {richtig,gesamt,fertig} | :abgeschlossen {richtig,gesamt}
+let einarbeitungHandler=null,einarbeitungWoche=null,einarbeitungGeaendert=false;
+function openEinarbeitung(wocheId){
+ closeEinarbeitung(true);
+ einarbeitungWoche=wocheId;einarbeitungGeaendert=false;
+ const ov=document.createElement("div");ov.id="einarbeitungOverlay";ov.className="exp-overlay";
+ ov.innerHTML=`<div class="exp-leiste"><b>📖 Einarbeitung</b><button type="button"class="secondary"onclick="closeEinarbeitung()">✕ Schließen</button></div><iframe id="einarbeitungFrame"title="Einarbeitung"src="einarbeitung/player.html?id=${encodeURIComponent(wocheId)}"></iframe>`;
+ document.body.appendChild(ov);document.body.classList.add("exp-offen");
+ einarbeitungHandler=ev=>{einarbeitungNachricht(ev);};
+ window.addEventListener("message",einarbeitungHandler);
+}
+async function closeEinarbeitung(still){
+ $("einarbeitungOverlay")?.remove();document.body.classList.remove("exp-offen");
+ if(einarbeitungHandler){window.removeEventListener("message",einarbeitungHandler);einarbeitungHandler=null;}
+ const id=einarbeitungWoche;einarbeitungWoche=null;
+ if(!still&&id&&einarbeitungGeaendert){einarbeitungGeaendert=false;await openAptDetail(id,"einarbeitung");}
+}
+async function einarbeitungSpeichern(id,patch){
+ const alt=await getLehrplanFortschritt(id);
+ const neu={...alt,...patch,uid:currentUser.uid,wocheId:id,fach:"paedagogik",updatedAt:serverTimestamp()};
+ neu.abgeschlossen=aptSchritte(neu).every(Boolean);
+ await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${id}`),neu);
+ ppDirty=true;einarbeitungGeaendert=true;
+}
+async function einarbeitungNachricht(ev){
+ const fr=$("einarbeitungFrame");
+ if(!fr||ev.source!==fr.contentWindow||ev.origin!==location.origin)return;
+ const m=ev.data||{};
+ if(typeof m.type!=="string"||!m.type.startsWith("einarbeitung:"))return;
+ const id=einarbeitungWoche;if(!id)return;
+ const senden=o=>fr.contentWindow?.postMessage(o,location.origin);
+ const zahl=v=>Math.max(0,Math.min(200,Math.floor(Number(v))||0));
+ try{
+  if(m.type==="einarbeitung:bereit"){
+   const f=await getLehrplanFortschritt(id);
+   senden({type:"einarbeitung:init",rolle:isTeacher()?"lehrkraft":"schueler",abgeschlossen:!!f.einarbeitungAbgeschlossen});
+  }else if(m.type==="einarbeitung:fortschritt"&&!isTeacher()){
+   await einarbeitungSpeichern(id,{einarbeitungAufgaben:{richtig:zahl(m.richtig),gesamt:zahl(m.gesamt),fertig:!!m.fertig}});
+  }else if(m.type==="einarbeitung:abgeschlossen"&&!isTeacher()){
+   await einarbeitungSpeichern(id,{einarbeitungAufgaben:{richtig:zahl(m.richtig),gesamt:zahl(m.gesamt),fertig:true},einarbeitungAbgeschlossen:true,einarbeitungAm:serverTimestamp(),materialBearbeitet:true,basischeckErledigt:true,basischeckUebersprungen:false});
+   senden({type:"einarbeitung:gespeichert"});
+    showMotivationsBild(false,"lernen","einarb:"+id);
+   await closeEinarbeitung();
+  }
+ }catch(e){
+  console.error("Einarbeitung:",e);
+  senden({type:"einarbeitung:fehler",text:e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden."});
+ }
+}
+Object.assign(window,{stundeEinarbeitungAbschliessen,stundeAufsatzSpeichern,stundeAufsatzKopieren,stundeFeedbackAbschliessen,stundeFobizzLinkAendern,openStundeSchueler,stundeLehrerFeedback,stundeBesprechungErledigt,openEinarbeitung,closeEinarbeitung});
+async function aptSetzen(wocheId,patch,opts={}){
+ try{
+  const alt=await getLehrplanFortschritt(wocheId);
+  const neu={...alt,...patch,uid:currentUser.uid,wocheId,fach:"paedagogik",updatedAt:serverTimestamp()};
+  const fertig=aptSchritte(neu).every(Boolean);
+  const warFertig=!!alt.abgeschlossen;
+  neu.abgeschlossen=fertig;
+  await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),neu);
+  ppDirty=true;
+  await openAptDetail(wocheId,opts.tab);
+  if(fertig&&!warFertig)showMotivationsBild(true);
+  else if(!patch.besprechungGewuenscht&&(opts.motiv||Object.values(patch).some(v=>v===true))){
+    const k=Object.keys(patch).find(x=>patch[x]===true)||"schritt";
+    const art=k==="feedbackErledigt"?"reflexion":k==="frageGelesen"?"haken":"lernen";
+    showMotivationsBild(false,opts.art||art,"apt:"+wocheId+":"+k);
+   }
+ }catch(e){console.error("APT-Fortschritt speichern:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+window.aptSetzen=aptSetzen;
+async function aptEingrenzungSpeichern(wocheId){
+ const eingrenzung={operator:$("aptEgOperator")?.value.trim()||"",gegenstand:$("aptEgGegenstand")?.value.trim()||"",teile:$("aptEgTeile")?.value.trim()||"",praxis:$("aptEgPraxis")?.value.trim()||""};
+ if(!eingrenzung.operator||!eingrenzung.gegenstand){toast("Bitte mindestens Operator und Gegenstand eintragen.");return}
+ await aptSetzen(wocheId,{eingrenzung},{tab:"inhalte",motiv:true});
+}
+window.aptEingrenzungSpeichern=aptEingrenzungSpeichern;
+async function aptKprimAbgeben(wocheId){
+ const e=lehrplanWocheById("paedagogik",wocheId);
+ const kprim=aptKprimAufgaben(await getAptInhalt(wocheId),e);
+ const antworten=[],aufgaben=[];
+ let punkte=0,max=0,offen=false;
+ kprim.forEach((a,i)=>{
+  const checked=(a.statements||[]).map((s,j)=>{const v=document.querySelector(`input[name="aptKpA${i}_${j}"]:checked`)?.value;if(!v)offen=true;return v==="r";});
+  const g=kprimGrade({statements:a.statements,points:3},checked);
+  punkte+=g.points;max+=3;
+  aufgaben.push({fehler:g.errors,punkte:g.points});
+  antworten.push(checked.map(x=>x?"r":"f").join(""));
+ });
+ if(offen){toast("Bitte bei jeder Aussage richtig oder falsch wählen.");return}
+ aptKprimWiederholen=false;
+ await aptSetzen(wocheId,{kprim:{punkte,max,aufgaben,antworten,am:new Date().toISOString()}},{tab:"abschluss",motiv:punkte===max});
+ toast(`${punkte} von ${max} Punkten.`);
+}
+window.aptKprimAbgeben=aptKprimAbgeben;
+function aptKprimNochmal(wocheId){aptKprimWiederholen=true;openAptDetail(wocheId,"abschluss");}
+window.aptKprimNochmal=aptKprimNochmal;
+
+// ---- Speichern: Lehrkraft ----
+async function saveAptFrage(wocheId){
+ if(!isTeacher()){toast("Nur Lehrkräfte können die Prüfungsfrage einstellen.");return}
+ const text=$("aptFrageText")?.value.trim()||"";
+ const file=$("aptFrageDatei")?.files?.[0]||null;
+ if(!text&&!file){toast("Bitte Text eingeben oder eine Datei wählen.");return}
+ try{
+  const patch={pruefungsfrage:text,updatedAt:serverTimestamp(),updatedBy:currentUser.uid};
+  let altUrl="";
+  if(file){
+   const alt=await getDoc(doc(db,"aptInhalte",wocheId));altUrl=alt.exists()?alt.data().frageDateiUrl||"":"";
+   toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(file,`aptInhalte/${wocheId}`);patch.frageDateiUrl=up.url;patch.frageDateiName=up.name;
+  }
+  await setDoc(doc(db,"aptInhalte",wocheId),patch,{merge:true});
+  if(altUrl)await deleteCampusDatei(altUrl);
+  toast("Prüfungsfrage gespeichert.");
+  await openAptDetail(wocheId,"frage");
+ }catch(e){console.error("Prüfungsfrage speichern:",e);toast("Fehler: "+(e?.message||e));}
+}
+async function aptFrageDateiEntfernen(wocheId){
+ if(!confirm("Datei wirklich von der Prüfungsfrage entfernen?"))return;
+ try{
+  const alt=await getDoc(doc(db,"aptInhalte",wocheId));const altUrl=alt.exists()?alt.data().frageDateiUrl||"":"";
+  await setDoc(doc(db,"aptInhalte",wocheId),{frageDateiUrl:"",frageDateiName:"",updatedAt:serverTimestamp()},{merge:true});
+  await deleteCampusDatei(altUrl);
+  toast("Datei gelöscht.");await openAptDetail(wocheId,"frage");}
+ catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+async function saveAptHinweis(wocheId){
+ if(!isTeacher())return;
+ try{await setDoc(doc(db,"aptInhalte",wocheId),{eingrenzungHinweis:$("aptHinweis")?.value.trim()||"",updatedAt:serverTimestamp(),updatedBy:currentUser.uid},{merge:true});toast("Hinweis gespeichert.");await openAptDetail(wocheId,"inhalte");}
+ catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+async function saveAptKprim(wocheId){
+ if(!isTeacher())return;
+ const kprim=[];
+ for(let i=0;i<3;i++){
+  const frage=$(`aptKpFrage${i}`)?.value.trim()||"";
+  const statements=[0,1,2,3].map(j=>({text:$(`aptKpS${i}_${j}`)?.value.trim()||"",correct:$(`aptKpR${i}_${j}`)?.value==="true"})).filter(s=>s.text);
+  if(!frage&&!statements.length)continue;
+  if(statements.length!==4){toast(`Aufgabe ${i+1}: Bitte genau 4 Aussagen eintragen.`);return}
+  kprim.push({frage:frage||"Welche Aussagen treffen zu?",statements});
+ }
+ if(!kprim.length){toast("Bitte mindestens eine vollständige Aufgabe eingeben.");return}
+ try{await setDoc(doc(db,"aptInhalte",wocheId),{kprim,updatedAt:serverTimestamp(),updatedBy:currentUser.uid},{merge:true});toast("K-Prim-Aufgaben gespeichert.");await openAptDetail(wocheId,"abschluss");}
+ catch(e){console.error(e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+async function saveAptVorkorrektur(produktId,wocheId){
+ if(!isTeacher())return;
+ try{
+  await updateDoc(doc(db,"lehrplanProdukte",produktId),{vorkorrektur:$(`vk_${produktId}`)?.value.trim()||"",vorkorrekturAmpel:$(`vkA_${produktId}`)?.value||"orange",vorkorrekturAm:serverTimestamp(),vorkorrekturVon:currentUser.uid});
+  toast("Vorkorrektur gespeichert.");
+  await openAptDetail(wocheId,"produkt");
+ }catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+window.saveAptFrage=saveAptFrage;window.aptFrageDateiEntfernen=aptFrageDateiEntfernen;
+window.saveAptHinweis=saveAptHinweis;window.saveAptKprim=saveAptKprim;window.saveAptVorkorrektur=saveAptVorkorrektur;
+
+
+// ---- Schritt 4 zweistufig: Vorkorrektur umgesetzt ----
+async function aptVorkorrekturUmgesetzt(produktId,wocheId){
+ const reaktion=$(`vkR_${produktId}`)?.value.trim()||"";
+ if(!reaktion){toast("Bitte kurz eintragen, was du überarbeitet hast.");return}
+ try{
+  await updateDoc(doc(db,"lehrplanProdukte",produktId),{reaktion,reaktionAm:serverTimestamp()});
+  await aptSetzen(wocheId,{vorkorrekturUmgesetzt:true},{tab:"produkt",motiv:true});
+ }catch(e){console.error("Vorkorrektur umgesetzt:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+window.aptVorkorrekturUmgesetzt=aptVorkorrekturUmgesetzt;
+
+// ============================================================
+// APT-GESAMTCHECK (Lehrkraft): Matrix Schüler:innen × Inhalte eines
+// Lernbereichs, je Zelle die 4 Schritte. Filter: hinter dem Zeitplan,
+// wartet auf Vorkorrektur, Vorkorrektur noch nicht umgesetzt.
+// ============================================================
+let aptCheckLb="lb1",aptCheckFilter="alle",aptCheckDaten=null;
+async function ladeAptCheckDaten(){
+ const alleIds=PROJEKT_PHASEN.flatMap(p=>p.trainingWochen);
+ const students=await getAllUsersForLernstand();
+ const [fs,ps]=await Promise.all([
+  getDocs(query(collection(db,"lehrplanFortschritt"),where("wocheId","in",alleIds))),
+  getDocs(query(collection(db,"lehrplanProdukte"),where("wocheId","in",alleIds)))
+ ]);
+ return{students,fortschritt:fs.docs.map(d=>d.data()),produkte:ps.docs.map(d=>({id:d.id,...d.data()}))};
+}
+// Zustand von Schritt 4 für eine Person: "fertig" | "umsetzen" (Vorkorrektur
+// da, noch nicht umgesetzt) | "wartet" (hochgeladen, Vorkorrektur fehlt) | "offen".
+function aptSchritt4Zustand(f,produkte){
+ if(f?.feedbackErledigt||(f?.produktHochgeladen&&f?.vorkorrekturUmgesetzt))return"fertig";
+ if(f?.besprechungGewuenscht&&!f?.besprechungErledigt)return"wartet";   // Besprechung gewünscht
+ return"offen";
+}
+async function openFachaufsatzTrainingCheck(lbId,filter){
+ if(!isTeacher()){toast("Nur Lehrkräfte können den APT-Gesamtcheck öffnen.");return}
+ if(lbId)aptCheckLb=lbId;
+ if(filter)aptCheckFilter=filter;
+ if(!aptCheckDaten||(!lbId&&!filter)){
+  try{aptCheckDaten=await ladeAptCheckDaten();}catch(e){console.error("APT-Gesamtcheck:",e);toast("Konnte nicht geladen werden.");return}
+ }
+ const d=aptCheckDaten,ph=projektPhaseById(aptCheckLb)||PROJEKT_PHASEN[0],c=ppFarbe(ph);
+ const heute=new Date().toISOString().slice(0,10);
+ const budget=ppZeitbudget(ppTeilWochen(ph,"apt"),heute);
+ const n=APT_TABS.length;
+ const zeilen=d.students.map(s=>{
+  const zellen=ph.trainingWochen.map(id=>{
+   const f=d.fortschritt.find(x=>x.uid===s.uid&&x.wocheId===id)||null;
+   const pr=d.produkte.filter(p=>p.uid===s.uid&&p.wocheId===id);
+   return{id,f,pr,schritte:aptSchritte(f),z4:aptSchritt4Zustand(f,pr)};
+  });
+  const erledigt=zellen.reduce((a,z)=>a+z.schritte.filter(Boolean).length,0),gesamt=zellen.length*n;
+  const prozent=gesamt?Math.round(erledigt/gesamt*100):0;
+  const tempo=ppTempo(prozent,budget);
+  const hinterher=budget.zustand!=="kommend"&&prozent<Math.round(budget.soll*100)-10;
+  return{s,zellen,erledigt,gesamt,prozent,tempo,hinterher,wartet:zellen.some(z=>z.z4==="wartet"),umsetzen:zellen.some(z=>z.z4==="umsetzen")};
+ });
+ const gefiltert=zeilen.filter(r=>aptCheckFilter==="hinterher"?r.hinterher:aptCheckFilter==="wartet"?r.wartet:aptCheckFilter==="umsetzen"?r.umsetzen:true);
+ const dot=(done,i,z4)=>{
+  if(i===3&&!done&&z4==="wartet")return`<span class="apt-dot halb"title="Besprechung gewünscht">💬</span>`;
+  if(i===3&&!done&&z4==="umsetzen")return`<span class="apt-dot umsetzen"title="Vorkorrektur da – noch nicht umgesetzt">!</span>`;
+  return`<span class="apt-dot${done?" an":""}"style="${done?`background:${c};border-color:${c}`:""}"title="${esc(APT_SCHRITT_LABELS[i])}">${done?"✓":i+1}</span>`;
+ };
+ const warten=d.fortschritt.filter(f=>ph.trainingWochen.includes(f.wocheId)&&f.besprechungGewuenscht&&!f.besprechungErledigt);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🎓 ABSCHLUSSPRÜFUNGS-TRAINING · GESAMTCHECK · NUR LEHRKRÄFTE</div>
+  <h2>Trainingsstand der Klasse</h2>
+  <div class="apt-check-tabs">${PROJEKT_PHASEN.map(p=>`<button type="button"class="${p.id===ph.id?"aktiv":""}"style="--c:${ppFarbe(p)}"onclick="openFachaufsatzTrainingCheck('${p.id}')">${esc(p.lb)}</button>`).join("")}
+   <select onchange="openFachaufsatzTrainingCheck(null,this.value)">
+    ${[["alle","Alle anzeigen"],["hinterher","Hinter dem Zeitplan"],["wartet","Besprechung gewünscht"]].map(([k,l])=>`<option value="${k}"${aptCheckFilter===k?" selected":""}>${l}</option>`).join("")}
+   </select>
+   <button type="button"class="secondary"onclick="aptCheckDaten=null;openFachaufsatzTrainingCheck()">↻</button>
+  </div>
+  <p style="color:var(--muted);font-size:12px;margin:6px 0">Je Inhalt 4 Schritte: ① Prüfungsfrage · ② Einarbeitung · ③ Fachaufsatz üben · ④ Feedback. 💬 = Besprechung gewünscht. Zelle antippen für Details. Zeitbudget: ${esc(budget.text)}.</p>
+  <div style="overflow-x:auto"><table class="ls-matrix apt-matrix">
+   <thead><tr><th>Schüler:in</th>${ph.trainingWochen.map(id=>`<th title="${esc(lehrplanWocheById("paedagogik",id)?.thema||"")}">${esc(ppKurz(lehrplanWocheById("paedagogik",id)))}</th>`).join("")}<th>Stand</th></tr></thead>
+   <tbody>${gefiltert.map(r=>`<tr><td>${esc(r.s.displayName||r.s.email||"Schüler/in")}</td>
+    ${r.zellen.map(z=>`<td class="apt-zelle"onclick="openAptSchuelerDetail('${r.s.uid}','${z.id}')"><span class="apt-dots">${z.schritte.map((dn,i)=>dot(dn,i,z.z4)).join("")}</span></td>`).join("")}
+    <td style="white-space:nowrap"><b>${r.prozent} %</b>${r.tempo?` <span class="pp-tempo"style="background:${r.tempo.farbe}">${esc(r.tempo.txt)}</span>`:""}</td></tr>`).join("")||`<tr><td colspan="${ph.trainingWochen.length+2}">Niemand in dieser Auswahl.</td></tr>`}</tbody>
+  </table></div>
+  <h3 style="margin:18px 0 6px">💬 ${esc(ph.lb)}: Besprechung gewünscht (${warten.length})</h3>
+  <div class="list">${warten.map(f=>{const e=lehrplanWocheById("paedagogik",f.wocheId),st=d.students.find(x=>x.uid===f.uid);return`<div class="list-item"style="cursor:pointer"onclick="openAptSchuelerDetail('${f.uid}','${f.wocheId}')"><div><strong>${esc(st?.displayName||st?.email||"Schüler/in")}</strong><small>${esc(e?.thema||f.wocheId)}${f.besprechungAm?" · "+esc(stDatum(f.besprechungAm)):""}</small></div><span>→</span></div>`;}).join("")||`<div class="empty">Keine offenen Besprechungswünsche.</div>`}</div>
+  <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+window.openFachaufsatzTrainingCheck=openFachaufsatzTrainingCheck;
+async function openAptSchuelerDetail(uid,wocheId){
+ if(!isTeacher())return;
+ const ph=projektPhaseByWoche(wocheId);
+ return openStundeSchueler(wocheId,uid,`openFachaufsatzTrainingCheck('${ph?.id||aptCheckLb}')`);
+}
+window.openAptSchuelerDetail=openAptSchuelerDetail;
+
+// ============================================================
+// CHECK-OUT · K-Prim-Test zum Wochenabschluss (Pädagogik/Psychologie)
+// ------------------------------------------------------------
+// Ablauf: Lehrkraft legt einen Check-out an (Fallvignette + 3–5 K-Prim-
+// Aufgaben) → schaltet ihn in der Testsituation LIVE → Schüler:innen
+// bearbeiten ihn (Antworten werden laufend gespeichert) → Lehrkraft
+// beendet LIVE → die App wertet automatisch aus (Bewertungseinheiten →
+// FOSBOS-Notenpunkte 0–15, Note in Klammern).
+// Kurzarbeit-Ersatz: aus den (standardmäßig 10) gewerteten Check-outs
+// wählen die Schüler:innen die 7 für sie relevanten aus – der Durchschnitt
+// der Notenpunkte ersetzt eine Kurzarbeit.
+// Datenschutz beim Test: Die Lösungen liegen getrennt in „checkoutLoesungen"
+// (nur Lehrkräfte lesbar); ausgewertet wird im Browser der Lehrkraft.
+// ============================================================
+
+// Bewertungseinheiten (BE) je K-Prim-Aufgabe nach Anzahl der Fehler
+// (0, 1, 2, 3, 4 Fehler) – nach ISB-Vorgabe: volle Punktzahl nur bei vier
+// richtigen Entscheidungen, bei drei die Hälfte, bei zwei 1 BE, sonst 0.
+// Nicht beantwortete Aussage = Fehler.
+const CHECKOUT_BE_NACH_FEHLERN=[4,2,1,0,0];
+// Bewertungsschlüssel Pädagogik/Psychologie (eingeführt lt. „Unterrichten,
+// Korrigieren und Bewerten im Fach Pädagogik/Psychologie an der Beruflichen
+// Oberschule Bayern", Stand 13.09.2022): [Notenpunkte, Mindestprozent].
+// 15: 100–96 · 14: 95–91 · … · 3: 40–34 · 2: 33–27 · 1: 26–20 · 0: 19–0.
+// Zwischenwerte werden nicht aufgerundet (z. B. 95,5 % → 14 Punkte).
+const FOSBOS_SCHLUESSEL=[[15,96],[14,91],[13,86],[12,81],[11,76],[10,71],[9,66],[8,61],[7,56],[6,51],[5,46],[4,41],[3,34],[2,27],[1,20]];
+const CHECKOUT_MIN_AUFGABEN=3,CHECKOUT_MAX_AUFGABEN=3; // immer genau 3 K-Prim-Aufgaben je Check-out
+function notenpunkteAusProzent(p){for(const [np,min] of FOSBOS_SCHLUESSEL)if(p>=min)return np;return 0;}
+function noteAusNotenpunkten(np){return np>=13?1:np>=10?2:np>=7?3:np>=4?4:np>=1?5:6;}
+function npText(np){return`${np} Punkte (${noteAusNotenpunkten(np)})`;}
+function coDatum(d){return d?fmtDateOnly(d):"";}
+function coBewerten(co,loesung,antworten){
+ let be=0,max=0;
+ const auswertung=(co.aufgaben||[]).map((a,i)=>{
+  const l=(loesung?.aufgaben?.[i]?.richtig)||[];
+  let fehler=0;const korrekt=[],angekreuzt=[];
+  for(let j=0;j<4;j++){
+   const v=antworten?.[`${i}_${j}`]||"";
+   const ok=!!v&&((v==="r")===!!l[j]);
+   if(!ok)fehler++;
+   korrekt.push(ok);angekreuzt.push(v);
+  }
+  const p=CHECKOUT_BE_NACH_FEHLERN[fehler]??0;
+  be+=p;max+=CHECKOUT_BE_NACH_FEHLERN[0];
+  const erk=[0,1,2,3].map(j=>String(loesung?.aufgaben?.[i]?.erklaerung?.[j]||""));
+  return{fehler,be:p,korrekt,angekreuzt,loesung:[0,1,2,3].map(j=>!!l[j]),erklaerung:erk};
+ });
+ const prozent=max?Math.round(be/max*1000)/10:0;
+ const notenpunkte=notenpunkteAusProzent(prozent);
+ return{be,maxBE:max,prozent,notenpunkte,note:noteAusNotenpunkten(notenpunkte),auswertung};
+}
+
+// ---- Laden ----
+async function ladeCheckoutDaten(){
+ const lehrer=isTeacher();
+ const basis={anzahlGesamt:10,anzahlWaehlen:7,auswahlOffen:false};
+ try{
+  const docs=lehrer?(await getDocs(collection(db,"checkouts"))).docs
+   :(await Promise.all(["live","beendet"].map(st=>getDocs(query(collection(db,"checkouts"),where("status","==",st)))))).flatMap(s=>s.docs);
+  const checkouts=docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||""))||tsSek(a.createdAt)-tsSek(b.createdAt));
+  let einst={};
+  try{const e=await getDoc(doc(db,"checkoutEinstellungen","pp"));einst=e.exists()?e.data():{};}catch(e){}
+  const meineAbgaben={};let auswahl=null;const stat={};
+  if(lehrer){
+   try{(await getDocs(collection(db,"checkoutAbgaben"))).docs.forEach(x=>{const a=x.data();if(!a.ausgewertet)return;const t=(stat[a.checkoutId]=stat[a.checkoutId]||{n:0,summe:0});t.n++;t.summe+=Number(a.notenpunkte)||0;});}catch(e){console.error("Check-out-Statistik:",e);}
+  }
+  if(!lehrer){
+   const s=await getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));
+   s.docs.forEach(d=>{const x=d.data();meineAbgaben[x.checkoutId]=x;});
+   try{const a=await getDoc(doc(db,"checkoutAuswahl",currentUser.uid));auswahl=a.exists()?a.data():null;}catch(e){}
+  }
+  return{checkouts,einst:{...basis,...einst},meineAbgaben,auswahl,stat};
+ }catch(e){console.error("Check-outs laden:",e);return{checkouts:[],einst:basis,meineAbgaben:{},auswahl:null,stat:{},fehler:true};}
+}
+// Die für den Kurzarbeit-Ersatz zählenden Check-outs (beendet, „zählt").
+// Bibliothek = alle beendeten Check-outs, die für den Kurzarbeit-Ersatz zählen.
+function coPool(checkouts,einst){return checkouts.filter(c=>c.status==="beendet"&&c.zaehlt!==false);}
+// Kaufmännisch runden: ,5 wird immer aufgerundet (Epsilon gegen Fließkomma-Fehler).
+function coRundenAuf(x){return Math.floor(x+0.5+1e-9);}
+function coTsDatum(ts){if(!ts)return null;if(typeof ts.toDate==="function")return ts.toDate();if(ts.seconds)return new Date(ts.seconds*1000);return ts instanceof Date?ts:null;}
+// Auswahlfenster: offen, wenn die Lehrkraft es von Hand geöffnet hat ODER heute
+// zwischen „Auswahl ab“ und (optional) „Auswahl bis“ liegt. Gleiche Logik wie in den Firestore-Regeln.
+function coAuswahlStatus(einst){
+ const jetzt=Date.now(),ab=coTsDatum(einst?.auswahlAb),bis=coTsDatum(einst?.auswahlBis);
+ const f=d=>d.toLocaleDateString("de-DE");
+ if(einst?.auswahlOffen)return{offen:true,text:"Die Auswahl ist freigeschaltet."};
+ if(ab&&jetzt<ab.getTime())return{offen:false,text:`Die Auswahl startet am ${f(ab)}.`};
+ if(ab&&(!bis||jetzt<=bis.getTime()))return{offen:true,text:bis?`Auswahl offen bis ${f(bis)}.`:"Die Auswahl ist freigeschaltet."};
+ if(ab&&bis)return{offen:false,vorbei:true,text:`Die Auswahl ist seit ${f(bis)} beendet.`};
+ return{offen:false,text:"Deine Lehrkraft legt fest, ab wann du auswählen kannst."};
+}
+function coErsatz(ids,abgabenByCo){
+ const nps=ids.map(id=>abgabenByCo[id]).filter(a=>a?.ausgewertet).map(a=>Number(a.notenpunkte)||0);
+ if(!nps.length)return null;
+ const schnitt=nps.reduce((a,b)=>a+b,0)/nps.length;
+ const as=ids.map(id=>abgabenByCo[id]).filter(a=>a?.ausgewertet);
+ return{schnitt,np:coRundenAuf(schnitt),anzahl:nps.length,be:as.reduce((x,a)=>x+(Number(a.be)||0),0),maxBE:as.reduce((x,a)=>x+(Number(a.maxBE)||0),0)};
+}
+
+// ---- Startseite: Hinweis, wenn ein Check-out gerade läuft ----
+async function checkoutStartBannerHTML(){
+ if(!currentUser||!isApproved())return"";
+ try{
+  const s=await getDocs(query(collection(db,"checkouts"),where("status","==","live")));
+  if(s.empty)return"";
+  const co={id:s.docs[0].id,...s.docs[0].data()};
+  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(co.titel||"")}</b><small>Live-Übersicht öffnen, um den Stand zu sehen und den Test zu beenden.</small></div><button class="primary"onclick="openCheckoutMonitor('${co.id}')">Live-Übersicht</button></div>`;
+  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(co.titel||"")}</b><small>Deine Lehrkraft hat den Test freigeschaltet.</small></div><button class="primary"onclick="openCheckoutTest('${co.id}')">Jetzt starten</button></div>`;
+ }catch(e){return"";}
+}
+
+// ---- Bereich auf dem P/P-Lernweg ----
+function checkoutSektionHTML(d){
+ if(!d)return"";
+ const lehrer=isTeacher();
+ const lbFarbe=n=>PP_FARBEN[n]||"#8a99a3";
+ const pool=coPool(d.checkouts,d.einst);
+ const statusChip=c=>c.status==="live"?`<span class="co-chip live"><span class="co-live-punkt"></span>läuft</span>`:c.status==="beendet"?`<span class="co-chip fertig">beendet</span>`:`<span class="co-chip entwurf">Entwurf</span>`;
+ const zeilen=d.checkouts.map(c=>{
+  const a=d.meineAbgaben[c.id];
+  let rechts="";
+  if(lehrer){
+   rechts=c.status==="entwurf"?`<button class="secondary"onclick="openCheckoutEditor('${c.id}')">Bearbeiten</button><button class="primary"onclick="coLiveStarten('${c.id}')">▶ Live freischalten</button>`
+    :c.status==="live"?`<button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button>`
+    :`<button class="secondary"onclick="openCheckoutErgebnisse('${c.id}')">Ergebnisse</button><button class="secondary"onclick="coPdfKlasse('${c.id}')">PDF Klasse</button>`;
+  }else{
+   rechts=c.status==="live"?(a?.abgegeben?`<span class="co-chip fertig">abgegeben ✓</span>`:`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Starten"}</button>`)
+    :a?.ausgewertet?`<b class="co-np">${npText(a.notenpunkte)}</b><button class="secondary"onclick="openCheckoutMeinErgebnis('${c.id}')">Ansehen</button><button class="secondary"onclick="coPdfSchueler('${c.id}')">PDF</button>`
+    :a?`<small style="color:var(--muted)">wird ausgewertet …</small>`:`<small style="color:var(--muted)">nicht teilgenommen</small>`;
+  }
+  return`<div class="co-zeile"style="--c:${lbFarbe(c.lbNum)}">
+   <span class="co-lb">LB ${esc(c.lbNum||"")}</span>
+   <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${coDatum(c.datum)} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben${c.zaehlt===false?" · zählt nicht für den Kurzarbeit-Ersatz":""}</small></div>
+   ${statusChip(c)}
+   <div class="co-aktion">${rechts}</div>
+  </div>`;
+ }).join("");
+ // Kurzarbeit-Ersatz
+ let ersatz="";
+ if(lehrer){
+  ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>${pool.length} Check-outs beendet · Schüler:innen wählen ${d.einst.anzahlWaehlen} aus · ${esc(coAuswahlStatus(d.einst).text)}</small></div>
+   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="secondary"onclick="openCheckoutKlassenuebersicht()">Klassenübersicht</button></div></div>`;
+ }else{
+  const aByCo=d.meineAbgaben;
+  const gewertet=pool.filter(c=>aByCo[c.id]?.ausgewertet);
+  const e=d.auswahl?coErsatz(d.auswahl.ids||[],aByCo):null;
+  ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>${gewertet.length} Check-outs geschrieben · du wählst ${d.einst.anzahlWaehlen} aus deiner Bibliothek aus${e?` · <b>deine Auswahl: Ø ${e.schnitt.toFixed(1).replace(".",",")} → ${npText(e.np)}</b>`:""}</small></div>
+   <div class="co-aktion">${coAuswahlStatus(d.einst).offen?`<button class="primary"onclick="openCheckoutAuswahl()">${d.auswahl?"Auswahl ändern":`${d.einst.anzahlWaehlen} auswählen`}</button>`:`<small style="color:var(--muted)">${esc(coAuswahlStatus(d.einst).text)}</small>`}${d.auswahl?`<button class="secondary"onclick="coPdfErsatzSchueler()">PDF</button>`:""}</div></div>`;
+ }
+ return`<div class="card co-karte">
+  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Check-Out-Test live frei: eine Fallvignette mit 3–5 K-Prim-Aufgaben. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
+   ${lehrer?`<button class="primary"onclick="openCheckoutEditor()">＋ Neuer Check-out</button>`:""}</div>
+  <div class="co-liste">${zeilen||`<div class="empty">${lehrer?"Noch kein Check-out angelegt.":"Noch kein Check-out freigeschaltet."}</div>`}</div>
+  ${ersatz}
+ </div>`;
+}
+function checkoutLiveBannerHTML(d){
+ const live=(d?.checkouts||[]).filter(c=>c.status==="live");
+ if(!live.length)return"";
+ return live.map(c=>{
+  const a=d.meineAbgaben[c.id];
+  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(c.titel||"")}</b><small>Beenden, sobald alle fertig sind – danach wird automatisch ausgewertet.</small></div><button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button></div>`;
+  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(c.titel||"")}</b><small>${a?.abgegeben?"Du hast abgegeben. Das Ergebnis siehst du, sobald deine Lehrkraft den Test beendet.":"Deine Lehrkraft hat den Test freigeschaltet."}</small></div>${a?.abgegeben?"":`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Jetzt starten"}</button>`}</div>`;
+ }).join("");
+}
+
+// ---- Editor (Lehrkraft): strukturiert nach der ISB-Vorgabe für K-Prim ----
+// ① Situation (Vignette) → ② 3–5 K-Prim-Aufgaben (Einleitungssatz + genau
+// 4 Aussagen) → ③ Checkliste. Automatische Hinweise prüfen, was sich prüfen
+// lässt (Längen, absolute/vage Begriffe, doppelte Verneinung, Muster).
+// ---- Aufgabenbank und Vorlagen für Check-outs -------------------------------
+// Jede Aufgabe = eigene Fallvignette (+ optional Material) + Einleitungssatz + 4 Aussagen.
+// „erklaerung“ ist eine kurze Begründung, die Schüler:innen erst NACH der Auswertung sehen.
+const CO_AUFGABENBANK=[
+ {
+  "id": "tim-max",
+  "titel": "Tim und Max – Alltagspsychologie",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kindergarten „Wirbelwind“",
+   "text": "Sie absolvieren Ihr Praktikum im Kindergarten „Wirbelwind“ in Wendelstein. Seit Beginn Ihres Praktikums vor drei Wochen beobachten Sie immer wieder zwei Geschwisterkinder, die beide in Ihrer Gruppe sind. Der 3-jährige Max ist neu in den Kindergarten gekommen und hält sich fast immer in der Nähe seines Bruders Tim auf, der mit seinen fünf Jahren zu den Vorschulkindern gehört. Er will, dass Tim immer nur mit ihm spielt. Sie beobachten immer wieder, wie Tim genervt die Augen verdreht und versucht, Max abzuschütteln, zum Beispiel indem er zu ihm sagt, dass er sich mal andere Kinder zum Spielen suchen soll oder indem er einfach davonrennt. Daraufhin lässt Max immer den Kopf und die Schultern hängen, Tränen laufen ihm über die Wangen und er streckt seinen Arm nach Tim aus. Regelmäßig hat dies zur Folge, dass Tim dann einlenkt, seinem Bruder den Arm um die Schultern legt und ihn dann doch mit sich nimmt. Ihnen tun beide irgendwie leid und Sie erzählen der Erzieherin Moni davon.",
+   "zeilen": false
+  },
+  "kontext": "Pädagogische/psychologische Kompetenz bedeutet auch, fachlich fundierte Einschätzungen vorzunehmen und begründetes Handeln abzuleiten.\nIm Teamgespräch nimmt die Erzieherin Moni Bezug zu Ihren Beobachtungen im Alltag. Da Tim häufig genervt reagiert, wenn Max seine Nähe sucht und dabei die Augen verdreht oder weggeht, stellt sie fest: „Tim mag seinen Bruder einfach nicht!“",
+  "stamm": "Diese Aussage ist alltagstheoretisch, wenn …",
+  "aussagen": [
+   {
+    "text": "… Monis Schlussfolgerung sich aus einem umfassenden Bestand von fachlichen Eindrücken, die sie im Laufe ihres langjährigen beruflichen Alltags zufällig angesammelt hat, bildet.",
+    "richtig": true,
+    "erklaerung": "Fehlende Systematik"
+   },
+   {
+    "text": "… Monis Aussage sich als gesichertes Ergebnis einstufen lässt, da die Information durch mehrere Elterngespräche zur sozial-emotionalen Entwicklung sowie wiederholte gezielte Beobachtungen mit einem Beobachtungsbogen gewonnen wurde.",
+    "richtig": false,
+    "erklaerung": "Systematik: gezielte, wiederholte Beobachtung spricht für eine wissenschaftliche Aussage"
+   },
+   {
+    "text": "… Monis Kollegin Sarah aufgrund ihrer langjährigen Berufserfahrung durch die Beobachtung der gleichen Spielsituationen zwischen den Brüdern die Emotion von Tim als natürliches Wetteifern unter Brüdern deutet.",
+    "richtig": true,
+    "erklaerung": "Subjektivität"
+   },
+   {
+    "text": "… Monis Erkenntnis aus mehreren geplanten Beobachtungen aus den letzten zwei Kindergartenjahren stammt, in denen sie bei allen wiederholt konfliktreiche Situationen zwischen den zwei Brüdern beobachten konnte.",
+    "richtig": false,
+    "erklaerung": "Keine unzulässige Verallgemeinerung/Allgemeingültigkeit"
+   }
+  ]
+ },
+ {
+  "id": "hannes",
+  "titel": "Hannes und Herr Kluge – wissenschaftliche Kriterien",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Fallbeispiel: Hannes",
+   "text": "Hannes (3,5 Jahre) ist seit 3 Monaten in der Kindergartengruppe „Sternchen“ und hat sich\nmittlerweile gut eingewöhnt. Doch seit zwei Wochen fällt Erzieher Martin Kluge sein Verhalten\nauf: Hannes zwickt die anderen Kinder und wird schnell wütend, wenn er ein Spielzeug nicht\nsofort bekommen kann. Einmal hat er sogar gesehen, wie Hannes einem Mädchen ins Gesicht\ngespuckt hat. Herr Kluge zieht die Notbremse und holt die Eltern von Hannes Jung zum\nGespräch in die Einrichtung.\nHerr Kluge: „Nun, da ich Ihnen den Fall geschildert habe, müssen wir überlegen, wie wir mit dem\naggressiven Verhalten von Hannes umgehen.“\nFrau Jung: „Ist er denn wirklich so aggressiv? Die Kinderpflegerin Fatima meinte neulich zu mir,\nsie erlebe ihn eher als ausgeglichenen, neugierigen Jungen.“\nHerr Kluge: „Ich sehe das anders. Und aus diesem Grund müssen wir handeln. Letztens waren\nwir zu zweit in der Puppenecke und er hat so wütend auf die Puppen eingeschlagen und – ja,\nauch wenn Sie das jetzt nicht glauben wollen, genau so war es – das hat mir echt Angst\ngemacht. Sehen Sie doch: Wenn Hannes sein aggressives Verhalten nicht bald in den Griff\nbekommt, wird aus ihm später ein gewalttätiger Schläger! Während meiner Ausbildung hatten\nwir auch so ein Kind in der Gruppe, er zeigte das gleiche Verhalten wie Hannes – der sitzt jetzt\nim Gefängnis.“\nHerr Jung: „Also, ich weiß nicht. Gibt es da vielleicht so etwas wie einen Aggressions-Test oder\nFragebogen, den man dazu durchführen könnte? Dann wüssten wir genauer, ob…“\nHerr Kluge (unterbrochen): „Ach, da brauche ich keinen Test, sowas kann ich selbst einschätzen.\nDafür arbeite ich lange genug! Vertrauen Sie mir.“\nDie Personen verabreden sich zu einem weiteren Treffen und Herr und Frau Jung gehen\nbedrückt und unsicher aus der Einrichtung.",
+   "zeilen": true
+  },
+  "kontext": "Fachkräfte in der pädagogischen Arbeit sind angewiesen, stets nur wissenschaftlich fundierte Aussagen und Entscheidungen zu treffen.",
+  "stamm": "Herr Kluge würde Hannes‘ Fall nach wissenschaftlichen Kriterien beurteilen, wenn …",
+  "aussagen": [
+   {
+    "text": "… neben ihm auch der Vater Gewalthandlungen von Hannes beobachtet hätten, da dann das Merkmal der Objektivität vorliegen würde.",
+    "richtig": false,
+    "erklaerung": ""
+   },
+   {
+    "text": "… er Beweise für die in Z. 15‒17 getätigte Aussage vorlegen könnte, um eine objektive Einschätzung zu treffen.",
+    "richtig": false,
+    "erklaerung": ""
+   },
+   {
+    "text": "… er sich selbst einen Aggressionstest ausdenken und mit Hannes durchführen würde. Das Vorgehen wäre systematisch und die Aussagen daraus allgemeingültig.",
+    "richtig": false,
+    "erklaerung": ""
+   },
+   {
+    "text": "… er und Fatima Hannes‘ Verhalten über mehrere Wochen beobachten und systematisch dokumentieren würden, um nachvollziehbare und vergleichbare Aussagen zu Hannes tätigen zu können.",
+    "richtig": true,
+    "erklaerung": ""
+   }
+  ]
+ },
+ {
+  "id": "schlaf",
+  "titel": "Schlaf und Experiment – Studie",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Lernnachmittag vor der Schulaufgabe",
+   "text": "Am Tag vor der nächsten Schulaufgabe in Mathematik treffen Sie sich am Nachmittag mit Ihren Schulfreundinnen Larissa, Klara und Tina zum Lernen.\nKlara begrüßt Sie gar nicht richtig, sondern meint gleich zu Larissa: „Mensch du siehst aber gar nicht gut aus. Bist du krank?“\nLarissa erwidert darauf: „Nein, ich schlafe nur unglaublich schlecht. Seit mein Freund bei mir eingezogen ist und wir jede Nacht nebeneinander schlafen, mach ich nachts kaum noch ein Auge zu.“\nKlara nickt zustimmend: „Das kann ich mir gut vorstellen. Ich schlafe auch richtig schlecht, wenn jemand neben mir liegt. Es ist viel besser alleine zu schlafen. Wenn man nämlich alleine schläft, steigt die Leistungsfähigkeit des Menschen spürbar an. Durch die Bewegungen, die dein Partner nachts macht, wird auch dein Schlaf gestört. Heute solltest du unbedingt alleine schlafen, damit du für die Schulaufgabe morgen fit bist.“\nTina runzelt die Stirn und meint: „Also das glaube ich nicht.“\nLarissa wirft ein: „Doch, das macht echt Sinn. Solange ich nämlich noch meine 8 Stunden jede Nacht durchgeschlafen habe, hat mir auch niemand unterstellt, ich sähe krank aus. Da konnte ich mich nachts richtig erholen und war viel fitter.“\nTina gibt zu: „Ja, es stimmt schon, dass sich die Schlafqualität und Schlafdauer darauf auswirkt, wie du von anderen wahrgenommen wirst. Dazu habe ich erst vor kurzem etwas gelesen. Aber, dass es an deinem Freund liegt, dass du schlecht schläfst, das kann ich mir nicht vorstellen. Ich liege auch neben meinem Partner und ich schlafe richtig gut. Aber wartet mal, ich zeige euch noch kurz die Studie, die ich da gelesen habe. Danach müssen wir aber unbedingt mit Mathe anfangen.“",
+   "zeilen": false
+  },
+  "kontext": "Tina meint, dass die Schlafqualität und die Schlafdauer eine Auswirkung auf die wahrgenommene Gesundheit, Attraktivität und Müdigkeit einer Person haben. Sie bezieht sich dabei auf eine experimentelle Studie (vgl. Material). Jedes Experiment muss die Kriterien Willkürlichkeit, Variierbarkeit und Wiederholbarkeit erfüllen, um als wissenschaftliche Methode anerkannt zu sein.",
+  "material": {
+   "titel": "Schönheitsschlaf: Experimentelle Studie zur wahrgenommenen Gesundheit und Attraktivität von Menschen mit Schlafentzug",
+   "text": "Die experimentelle Studie „Schönheitsschlaf: Wahrgenommene Gesundheit und Attraktivität von Menschen mit Schlafentzug“ untersuchte, ob Personen nach einer Nacht mit Schlafentzug im Vergleich zu einer normalen Nachtruhe als weniger gesund, weniger attraktiv und müder wahrgenommen werden. Die Untersuchung wurde in einem Schlaflabor in Stockholm, Schweden, durchgeführt. An der Studie nahmen 23 gesunde Erwachsene im Alter von 18 bis 31 Jahren teil, die fotografiert wurden, sowie 65 ungeschulte Beobachter im Alter von 18 bis 61 Jahren, die diese Fotos bewerteten. Die Teilnehmer wurden nach einer normalen Nachtruhe von acht Stunden sowie nach einer Phase des Schlafentzugs fotografiert. Der Schlafentzug bestand aus 31 Stunden Wachsein nach einer Nacht mit verkürzter Schlafdauer. Anschließend wurden die Fotos in zufälliger Reihenfolge den Beobachtern präsentiert. Diese bewerteten die wahrgenommene Gesundheit, Attraktivität und Müdigkeit der abgebildeten Personen […]. Teilnehmer mit Schlafentzug wurden als weniger gesund wahrgenommen als nach einer normalen Nachtruhe […]. Zudem wirkten sie deutlich müder […] und etwas weniger attraktiv […].\nZusammenfassend verdeutlichen die Ergebnisse, dass Schlafentzug das äußere Erscheinungsbild beeinflusst und dazu führt, dass Menschen als weniger gesund, weniger attraktiv und müder wahrgenommen werden.",
+   "quelle": "Quelle: BMJ 2010; 341 doi. Veröffentlicht am: 15. Dezember 2010. Internetpublikation unter: https://www-bmj-com.translate.goog/content/341/bmj.c6614?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=de&_x_tr_pto=sc, aufgerufen am 11.06.2026."
+  },
+  "stamm": "Beurteilen Sie die folgenden Aussagen zur geschilderten Studie.",
+  "aussagen": [
+   {
+    "text": "Die geschilderte Studie erfüllt das Kriterium der Willkürlichkeit, da die Schlafdauer für jede Person zufällig gewählt worden ist.",
+    "richtig": false,
+    "erklaerung": ""
+   },
+   {
+    "text": "Die geschilderte Studie erfüllt das Kriterium der Variierbarkeit, da die Schlafbedingungen (normale Nachtruhe vs. Schlafentzug) systematisch variiert worden sind.",
+    "richtig": true,
+    "erklaerung": ""
+   },
+   {
+    "text": "Die geschilderte Studie erfüllt das Kriterium der Wiederholbarkeit, da das Schlaflaborprozedere und der Ablauf der Fotodarbietung genau beschrieben worden sind.",
+    "richtig": true,
+    "erklaerung": ""
+   },
+   {
+    "text": "Die geschilderte Studie bestätigt Tinas Aussage, dass Schlafqualität und Schlafdauer eine Auswirkung auf die wahrgenommene Gesundheit, Attraktivität und Müdigkeit einer Person haben.",
+    "richtig": false,
+    "erklaerung": ""
+   }
+  ]
+ },
+ {
+  "id": "luan-a",
+  "titel": "Luan und ADHS – Variante A",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Erziehungsberatungsstelle",
+   "text": "Frau Müller kommt mit ihrem 5-jährigen Sohn Luan in die Erziehungsberatungsstelle, da sie mit der Erziehung ihres sehr lebhaften und aufbrausenden Sohnes überfordert ist. Frau Müller berichtet der Sozialpädagogin, dass ihr Sohn bei jeder Kleinigkeit ausflippe. Neulich, als ihre Freundin zu Besuch war, schmiss er vor lauter Wut einen Teller auf den Boden, weil er kein weiteres Stück Kuchen bekam. Ihre Freundin habe ihr nun empfohlen, sich Hilfe bei einer Beratungsstelle zu holen. Die Freundin sei sich sicher, Luan würde ADHS haben, schließlich sei er so aggressiv wie der Sohn der Nachbarin. Und der habe schließlich auch ADHS. Außerdem würde er ja auch gar nicht folgen. Das wäre ja wohl auch typisch für Kinder mit ADHS. Luans Erzieherin sieht das Ganze aber weniger dramatisch. Er könne sich in der Gruppe doch sehr gut an Regeln halten.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Die Sozialpädagogin gibt eine wissenschaftsbasierte Einschätzung zu Luan ab, wenn …",
+  "pruefen": "Im Word-Dokument war keine Lösung angekreuzt. Die Lösung wurde aus dem Inhalt abgeleitet – bitte fachlich prüfen.",
+  "aussagen": [
+   {
+    "text": "… sie die Vermutung der Freundin aufgrund der Ähnlichkeit zum Nachbarskind als Bestätigung für eine ADHS-Diagnose übernimmt.",
+    "richtig": false,
+    "erklaerung": ""
+   },
+   {
+    "text": "… sie eine differenzierte Verhaltensbeobachtung in verschiedenen Lebenswelten (z. B. Schule, Zuhause) durchführt.",
+    "richtig": true,
+    "erklaerung": ""
+   },
+   {
+    "text": "… sie standardisierte Fragebögen oder klinische Interviews zur Erhebung der Symptomatik einsetzt.",
+    "richtig": true,
+    "erklaerung": ""
+   },
+   {
+    "text": "… sie eine interdisziplinäre Zusammenarbeit mit Lehrkräften, Eltern und medizinischem Fachpersonal anstrebt, um ein ganzheitliches Bild zu erhalten.",
+    "richtig": true,
+    "erklaerung": ""
+   }
+  ]
+ },
+ {
+  "id": "luan-b",
+  "titel": "Luan und ADHS – Variante B",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Erziehungsberatungsstelle",
+   "text": "Frau Müller kommt mit ihrem 5-jährigen Sohn Luan in die Erziehungsberatungsstelle, da sie mit der Erziehung ihres sehr lebhaften und aufbrausenden Sohnes überfordert ist. Frau Müller berichtet der Sozialpädagogin, dass ihr Sohn bei jeder Kleinigkeit ausflippe. Neulich, als ihre Freundin zu Besuch war, schmiss er vor lauter Wut einen Teller auf den Boden, weil er kein weiteres Stück Kuchen bekam. Ihre Freundin habe ihr nun empfohlen, sich Hilfe bei einer Beratungsstelle zu holen. Die Freundin sei sich sicher, Luan würde ADHS haben, schließlich sei er so aggressiv wie der Sohn der Nachbarin. Und der habe schließlich auch ADHS. Außerdem würde er ja auch gar nicht folgen. Das wäre ja wohl auch typisch für Kinder mit ADHS. Luans Erzieherin sieht das Ganze aber weniger dramatisch. Er könne sich in der Gruppe doch sehr gut an Regeln halten.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Die Sozialpädagogin gibt eine wissenschaftsbasierte Einschätzung zu Luan ab, wenn …",
+  "pruefen": "Im Word-Dokument war keine Lösung angekreuzt. Die Lösung wurde aus dem Inhalt abgeleitet – bitte fachlich prüfen.",
+  "aussagen": [
+   {
+    "text": "… sie ausgewertete Fragebögen von den wichtigen Bezugspersonen (Mutter, Vater, Erzieherinnen) mit einbezieht.",
+    "richtig": true,
+    "erklaerung": ""
+   },
+   {
+    "text": "… sie ihre Einschätzung auf die detaillierten Schilderungen der Mutter stützt, da diese Luan im Alltag intensiv erlebt.",
+    "richtig": false,
+    "erklaerung": ""
+   },
+   {
+    "text": "… sie einen standardisierten Beobachtungsbogen verwendet, um Luans Verhalten über einen längeren Zeitraum zu erfassen.",
+    "richtig": true,
+    "erklaerung": ""
+   },
+   {
+    "text": "… sie die Einschätzung aufgrund des Vorfalls mit dem auf den Boden geschmissenen Teller trifft, weil dieser sehr eindrücklich ist.",
+    "richtig": false,
+    "erklaerung": ""
+   }
+  ]
+ },
+ {
+  "id": "erz-wiss-praxis",
+  "titel": "Erziehungswissenschaft und Erziehungspraxis",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kindertagesstätte „Sonnenhügel“",
+   "zeilen": false,
+   "text": "Sie absolvieren Ihr Praktikum in der Kindertagesstätte „Sonnenhügel“. Im Teamgespräch berichtet die Gruppenleiterin Frau Kaiser, dass sich einige Kinder morgens schwer von ihren Eltern lösen. Ihre Kollegin Lea liest daraufhin in einer Fachzeitschrift eine Studie, die in zahlreichen Einrichtungen durchgeführt wurde und einen Zusammenhang zwischen gleichbleibenden Verabschiedungen und der Eingewöhnung beschreibt. Am folgenden Tag führt Frau Kaiser probeweise einen kurzen, immer gleichen Ablauf für den Abschied ein. Nach zwei Wochen stellt sie im Team fest, dass sich zwei Kinder inzwischen leichter von ihren Eltern trennen."
+  },
+  "kontext": "",
+  "stamm": "Die Situation wird fachlich zutreffend eingeordnet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… die von Lea gelesene Studie als Erziehungswissenschaft gilt, weil sie Erkenntnisse systematisch gewinnt und über den Einzelfall hinaus formuliert.",
+    "richtig": true,
+    "erklaerung": "Erziehungswissenschaft untersucht Erziehung systematisch und formuliert verallgemeinerbare Aussagen."
+   },
+   {
+    "text": "… das Vorgehen von Frau Kaiser als Erziehungswissenschaft gilt, weil damit ein konkretes Problem in der Gruppe gelöst werden soll.",
+    "richtig": false,
+    "erklaerung": "Konkretes erzieherisches Handeln im Alltag ist Erziehungspraxis, nicht Erziehungswissenschaft."
+   },
+   {
+    "text": "… die Erfahrung mit zwei Kindern für Frau Kaiser ausreicht, um eine für die gesamte Frühpädagogik gültige Gesetzmäßigkeit zu formulieren.",
+    "richtig": false,
+    "erklaerung": "Einzelfallerfahrungen aus der Praxis erlauben keine allgemeingültige Aussage (unzulässige Verallgemeinerung)."
+   },
+   {
+    "text": "… Frau Kaiser durch die Übertragung von Forschungsergebnissen auf ihre Gruppe eine theoriegeleitete Erziehungspraxis gestaltet.",
+    "richtig": true,
+    "erklaerung": "Erziehungspraxis nutzt wissenschaftliche Erkenntnisse als Grundlage für das eigene Handeln."
+   }
+  ]
+ },
+ {
+  "id": "erz-bildung",
+  "titel": "Erziehung und Bildung",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Hort „Bunte Welt“",
+   "zeilen": false,
+   "text": "In Ihrem Praktikum im Hort „Bunte Welt“ beobachten Sie die zwölfjährige Mira. Aus eigenem Antrieb baut sie in der Freispielzeit aus Holzresten eine Murmelbahn, probiert verschiedene Neigungen aus, verwirft eine Idee und erklärt später einem jüngeren Kind, warum die Kugel schneller wird. Erzieher Herr Gruber hatte zuvor das Werkmaterial bereitgestellt und mit den Kindern vereinbart, dass Werkzeuge nach der Arbeit zurückgeräumt werden. Als Mira ihr Werkzeug liegen lässt, erinnert er sie freundlich an diese Absprache. Daraufhin räumt sie auf."
+  },
+  "kontext": "",
+  "stamm": "Erziehung und Bildung werden in der Situation zutreffend unterschieden, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… die Erinnerung von Herrn Gruber als Bildungsvorgang gilt, weil sie das Kind zu neuem Wissen führt.",
+    "richtig": false,
+    "erklaerung": "Die Erinnerung ist absichtsvolles Einwirken einer Fachkraft und damit eine Erziehungshandlung."
+   },
+   {
+    "text": "… Miras Erproben und Verbessern ihrer Konstruktion als Bildung gilt, da sie sich durch eigene Tätigkeit Wissen und Fähigkeiten aneignet.",
+    "richtig": true,
+    "erklaerung": "Bildung ist die aktive Auseinandersetzung des Menschen mit der Welt und seine Selbstentwicklung."
+   },
+   {
+    "text": "… Bildung erst dann entsteht, wenn eine Fachkraft die Lerninhalte plant und die Kinder gezielt anleitet.",
+    "richtig": false,
+    "erklaerung": "Bildung geht vom Kind aus (Selbstbildung); Fachkräfte können sie anregen, müssen sie aber nicht steuern."
+   },
+   {
+    "text": "… das Aufräumen als Erziehung gilt, weil das Ergebnis erwünscht ist, unabhängig davon, ob die Fachkraft eine Absicht verfolgt.",
+    "richtig": false,
+    "erklaerung": "Erziehung ist durch die Absicht der Erziehenden bestimmt, das Verhalten oder die Fähigkeiten anderer zu beeinflussen."
+   }
+  ]
+ },
+ {
+  "id": "erz-ziele-handlungen",
+  "titel": "Erziehungsziele und Erziehungshandlungen",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kindergarten „Regenbogen“",
+   "zeilen": false,
+   "text": "Im Leitbild des Kindergartens „Regenbogen“ hat das Team festgehalten, dass die Kinder zu selbstständigen und rücksichtsvollen Menschen heranwachsen sollen. In der Gruppe der Vierjährigen beobachten Sie mehrere Situationen. Beim Anziehen im Flur wartet Erzieherin Frau Dimitrova, bis Jonas selbst versucht, den Reißverschluss zu schließen, und lobt ihn danach für seinen Versuch. Kurz darauf entreißt Emma einem anderen Kind die Puppe. Frau Dimitrova geht zu ihr, beschreibt ruhig, dass das Kind traurig ist, und schlägt vor, gemeinsam eine zweite Puppe zu suchen. Die Vertretungskraft dagegen nimmt Emma die Puppe ab, stellt sie ins Regal und schickt das Mädchen in die Leseecke."
+  },
+  "kontext": "",
+  "stamm": "Erziehungshandlungen und Erziehungsziele des Teams passen zusammen, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… das geduldige Abwarten und das anschließende Lob die Eigeninitiative des Jungen stärken und damit Selbstständigkeit fördern.",
+    "richtig": true,
+    "erklaerung": "Ermutigung und Lob nach eigenem Versuch unterstützen das Ziel Selbstständigkeit."
+   },
+   {
+    "text": "… das schweigende Wegnehmen der Puppe Rücksichtnahme aufbaut, weil das Kind die Folge seines Handelns spürt.",
+    "richtig": false,
+    "erklaerung": "Eine Maßnahme ohne Erklärung fördert eher Gehorsam; für Rücksichtnahme braucht das Kind Einsicht in die Gefühle des anderen."
+   },
+   {
+    "text": "… das ruhige Beschreiben der Gefühle des Gegenübers einen Perspektivwechsel anregt und so zur Rücksichtnahme beiträgt.",
+    "richtig": true,
+    "erklaerung": "Das Benennen der Gefühle macht die Sicht des anderen zugänglich und unterstützt das Ziel Rücksichtnahme."
+   },
+   {
+    "text": "… Frau Dimitrova die Ziele des Leitbilds in konkrete Erziehungshandlungen übersetzt und sich daran im Vorgehen orientiert.",
+    "richtig": true,
+    "erklaerung": "Erziehungsziele geben Orientierung und werden durch passende Erziehungshandlungen umgesetzt."
+   }
+  ]
+ },
+ {
+  "id": "paed-beziehung",
+  "titel": "Pädagogische Beziehung",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Ganztagsbetreuung einer Grundschule",
+   "zeilen": false,
+   "text": "Sie absolvieren Ihr Praktikum in der Ganztagsbetreuung einer Grundschule. Der achtjährige Felix ist seit dem Schulwechsel zurückhaltend und wartet in der Hausaufgabenzeit meist ab. Betreuerin Frau Öztürk begrüßt ihn morgens mit Namen, setzt sich zu ihm und fragt, woran er gerade arbeitet. Als er eine Rechenaufgabe falsch löst, bemerkt sie seine Unsicherheit und sagt ruhig, Fehler gehörten zum Üben dazu. Dann zeigt sie ihm einen anderen Lösungsweg. Sie bringt ihm wie versprochen am Freitag ein Schachspiel mit und erklärt ihm, dass sie zwischendurch auch andere Kinder unterstützen muss. Nach einigen Wochen bittet Felix von sich aus eine Mitschülerin um Hilfe."
+  },
+  "kontext": "",
+  "stamm": "Frau Öztürk gestaltet die pädagogische Beziehung förderlich, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… sie Felix durch persönliche Begrüßung und Interesse an seiner Arbeit Wertschätzung entgegenbringt und ihm damit Sicherheit vermittelt.",
+    "richtig": true,
+    "erklaerung": "Wertschätzung ist ein zentrales Merkmal einer förderlichen Beziehung."
+   },
+   {
+    "text": "… sie ihre Zusage einhält und ihre begrenzte Zeit offen darlegt, sodass Felix sich auf sie verlassen kann.",
+    "richtig": true,
+    "erklaerung": "Verlässlichkeit und Echtheit schaffen Vertrauen."
+   },
+   {
+    "text": "… sie Felix bei Schwierigkeiten sofort die Lösung vorgibt, weil eine förderliche Beziehung das Kind vor Misserfolgen bewahren soll.",
+    "richtig": false,
+    "erklaerung": "Eine förderliche Beziehung unterstützt die Selbstständigkeit und lässt Fehler als Lernchance zu."
+   },
+   {
+    "text": "… sie sein Unbehagen wahrnimmt und sich in seine Lage einfühlt, bevor sie eine alternative Vorgehensweise vorschlägt.",
+    "richtig": true,
+    "erklaerung": "Einfühlungsvermögen (Empathie) ist ein Merkmal einer förderlichen Beziehung."
+   }
+  ]
+ },
+ {
+  "id": "erz-einrichtungen",
+  "titel": "Einrichtungen der Erziehung",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Wohngruppe „Brückenhaus“",
+   "zeilen": false,
+   "text": "In Ihrem Praktikum in der Wohngruppe „Brückenhaus“ lernen Sie die zehnjährige Sofia kennen. Sie lebt seit vier Monaten dort, weil ihre Mutter schwer erkrankt ist und ihr Vater die Betreuung nicht übernehmen kann. Die Wohngruppe sichert Versorgung, Tagesstruktur und Beziehungsangebote. Sofia besucht vormittags die Grundschule. An zwei Nachmittagen pro Woche geht sie in den Hort in der Nachbarschaft und macht dort ihre Hausaufgaben. Am Wochenende besucht sie ihre Mutter im Krankenhaus."
+  },
+  "kontext": "",
+  "stamm": "Die Einrichtungen werden fachlich zutreffend zugeordnet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… die Wohngruppe als familienersetzende Einrichtung gilt, weil sie Aufgaben der Familie im Lebensalltag des Mädchens übernimmt.",
+    "richtig": true,
+    "erklaerung": "Heimerziehung und Wohngruppen ersetzen die Familie, wenn Kinder dort nicht leben können."
+   },
+   {
+    "text": "… der Hort als familienergänzende Einrichtung gilt, da er Begleitung und Förderung neben dem Elternhaus anbietet.",
+    "richtig": true,
+    "erklaerung": "Der Hort begleitet Schulkinder in der Freizeit und unterstützt die Familie, ohne sie zu ersetzen."
+   },
+   {
+    "text": "… die Schule als familienersetzende Einrichtung gilt, weil sie den Kindern verpflichtende Bildungsangebote macht.",
+    "richtig": false,
+    "erklaerung": "Die Schule hat einen Bildungs- und Erziehungsauftrag, ersetzt die Familie aber nicht."
+   },
+   {
+    "text": "… Wohngruppe und Hort dieselbe Zielgruppe haben, weil beide Angebote sich an Kinder in familiären Krisen richten.",
+    "richtig": false,
+    "erklaerung": "Der Hort richtet sich an Schulkinder allgemein; die Wohngruppe an Kinder, die vorübergehend oder dauerhaft nicht in ihrer Familie leben können."
+   }
+  ]
+ },
+ {
+  "id": "erleben-verhalten-handeln",
+  "titel": "Erleben, Verhalten und Handeln in der Praxis",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Grundschulklasse",
+   "zeilen": false,
+   "text": "In Ihrem Praktikum in einer Grundschulklasse beobachten Sie den siebenjährigen Leon. Bei der Rückgabe der Mathematikarbeit senkt er den Blick, zerknüllt das Blatt und schiebt es in seinen Ranzen. Später erzählt er der Lehrerin Frau Brandt, dass er Sorge hatte, seine Eltern könnten schimpfen. Frau Brandt setzt sich in der Pause zu ihm, bespricht Lernwege mit ihm und vereinbart, die nächste Arbeit gemeinsam vorzubereiten. Leon entschließt sich daraufhin, täglich zehn Minuten zu üben, und legt dafür einen Plan an."
+  },
+  "kontext": "",
+  "stamm": "Die Situation wird fachlich zutreffend beschrieben, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… das Zerknüllen des Blattes als beobachtbares Verhalten eingeordnet wird, weil Außenstehende es unmittelbar wahrnehmen können.",
+    "richtig": true,
+    "erklaerung": "Verhalten umfasst alle von außen beobachtbaren Äußerungen."
+   },
+   {
+    "text": "… Leons Sorge als Verhalten eingeordnet wird, weil er sie einer Erwachsenen mitteilt und sie damit für andere sichtbar wird.",
+    "richtig": false,
+    "erklaerung": "Die Sorge ist Erleben und nur ihm selbst zugänglich. Beobachtbar ist seine Mitteilung darüber."
+   },
+   {
+    "text": "… Leons Entschluss, nach Plan zu üben, als Handeln gilt, da er bewusst und mit Absicht ein Ziel verfolgt.",
+    "richtig": true,
+    "erklaerung": "Handeln ist bewusstes, zielgerichtetes Verhalten mit einer Absicht."
+   },
+   {
+    "text": "… die Beschäftigung mit Leons Sorge der Psychologie zuzuordnen ist, während die Frage nach Frau Brandts absichtsvoller Unterstützung Gegenstand der Pädagogik ist.",
+    "richtig": true,
+    "erklaerung": "Psychologie untersucht Erleben und Verhalten; die Pädagogik untersucht Erziehung als absichtsvolle Einwirkung."
+   }
+  ]
+ }
+];
+// Vorlage = Check-out mit genau 3 Aufgaben aus der Bank; wird am passenden Freitag per Klick eingesetzt.
+const CHECKOUT_VORLAGEN=[
+ {
+  "id": "lb1-woche1",
+  "titel": "Alltags- und Wissenschaftstheorie",
+  "lbNum": 1,
+  "datum": "2026-10-09",
+  "aufgaben": [
+   "tim-max",
+   "hannes",
+   "schlaf"
+  ]
+ },
+ {
+  "id": "lb1-woche2",
+  "titel": "Gegenstand der Pädagogik und Erziehung",
+  "lbNum": 1,
+  "datum": "2026-10-16",
+  "aufgaben": [
+   "erz-wiss-praxis",
+   "erz-bildung",
+   "erz-ziele-handlungen"
+  ]
+ },
+ {
+  "id": "lb1-woche3",
+  "titel": "Beziehung, Einrichtungen und Gegenstand der Psychologie",
+  "lbNum": 1,
+  "datum": "2026-10-23",
+  "aufgaben": [
+   "paed-beziehung",
+   "erz-einrichtungen",
+   "erleben-verhalten-handeln"
+  ]
+ }
+];
+let coEditor=null;
+const CO_CHECKLISTE=[
+ ["Situation","Situationsbeschreibung adäquat (anwendungsorientierte Informationen)"],
+ ["Situation","Alle notwendigen, aber keine irrelevanten Informationen"],
+ ["Situation","Frei von Hinweisen auf die korrekte(n) Antwort(en)"],
+ ["Situation","Sprache einfach, klar, ohne Mehrdeutigkeiten"],
+ ["Situation","Nur bekannte Abkürzungen und Fachbegriffe"],
+ ["Aufgaben","Angemessener Schwierigkeitsgrad"],
+ ["Aufgaben","Frei von doppelten Verneinungen"],
+ ["Aufgaben","Keine Wortwiederholungen aus der Situation in Einleitungssatz und Aussagen"],
+ ["Aufgaben","Aussagen eindeutig richtig oder falsch (fachlich unumstritten)"],
+ ["Aufgaben","Aussagen homogen (ähnliche Länge und Grammatik)"],
+ ["Aufgaben","Keine vagen Mengenangaben oder absoluten Begriffe (z. B. „immer“, „eventuell“)"],
+ ["Aufgaben","Jede Aufgabe hat genau vier Aussagen"],
+ ["Aufgaben","Position und Anzahl der richtigen Aussagen variieren"]
+];
+const CO_WORT_ABSOLUT=/\b(immer|nie|niemals|stets|ausschließlich|grundsätzlich|jede[rsmn]?|alle|eventuell|vielleicht|manchmal|oft|häufig|selten|meistens|gelegentlich)\b/gi;
+const CO_WORT_NEGATION=/\b(nicht|kein\w*|nie|niemals|ohne|weder)\b/gi;
+// Editor-Form einer Aufgabe. Ältere Formen ({stamm,aussagen}) werden ergänzt.
+function coAufgabeNorm(a){
+ a=a||{};
+ const q={stamm:"",kontext:"",vTitel:"",vText:"",vZeilen:false,mTitel:"",mText:"",mQuelle:"",pruefen:"",...a};
+ q.aussagen=[0,1,2,3].map(j=>({text:"",richtig:false,erklaerung:"",...(a.aussagen?.[j]||{})}));
+ return q;
+}
+function coLeereAufgabe(){return coAufgabeNorm({aussagen:[{richtig:true},{richtig:false},{richtig:false},{richtig:true}]});}
+function coAufgabeAusBank(id){
+ const b=CO_AUFGABENBANK.find(x=>x.id===id);if(!b)return coLeereAufgabe();
+ return coAufgabeNorm({stamm:b.stamm,kontext:b.kontext||"",vTitel:b.vignette?.titel||"",vText:b.vignette?.text||"",vZeilen:!!b.vignette?.zeilen,
+  mTitel:b.material?.titel||"",mText:b.material?.text||"",mQuelle:b.material?.quelle||"",pruefen:b.pruefen||"",
+  aussagen:b.aussagen.map(x=>({text:x.text,richtig:!!x.richtig,erklaerung:x.erklaerung||""}))});
+}
+function coPruefung(e){
+ const pro=e.aufgaben.map(a=>{
+  const h=[],texte=a.aussagen.map(s=>s.text.trim());
+  const laengen=texte.filter(Boolean).map(t=>t.length);
+  if(laengen.length===4){const mn=Math.min(...laengen),mx=Math.max(...laengen);if(mx>mn*1.6&&mx-mn>25)h.push("Aussagen sehr unterschiedlich lang");}
+  const abs=[...new Set(texte.join(" ").match(CO_WORT_ABSOLUT)||[])].map(w=>w.toLowerCase());
+  if(abs.length)h.push(`absolute/vage Begriffe: ${[...new Set(abs)].join(", ")}`);
+  texte.forEach((t,j)=>{if((t.match(CO_WORT_NEGATION)||[]).length>=2)h.push(`doppelte Verneinung? (Aussage ${j+1})`);});
+  const r=a.aussagen.filter(s=>s.richtig).length;
+  return{hinweise:h,richtig:r};
+ });
+ const glob=[];
+ if(e.aufgaben.length>=2){
+  const muster=e.aufgaben.map(a=>a.aussagen.map(s=>s.richtig?"r":"f").join(""));
+  if(new Set(muster).size===1)glob.push("Alle Aufgaben haben dasselbe Richtig/Falsch-Muster – Position der richtigen Aussagen variieren.");
+  else if(new Set(pro.map(p=>p.richtig)).size===1)glob.push("Überall gleich viele richtige Aussagen – Anzahl variieren.");
+ }
+ return{pro,glob};
+}
+function coPruefChips(p){return p.hinweise.length?p.hinweise.map(h=>`<span class="co-hinweis">⚠ ${esc(h)}</span>`).join(""):`<span class="co-hinweis ok">✓ unauffällig</span>`;}
+async function openCheckoutEditor(id,vorgabe){
+ if(!isTeacher())return;
+ if(id){
+  try{
+   const [c,l]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutLoesungen",id))]);
+   if(!c.exists()){toast("Nicht gefunden.");return}
+   const co=c.data(),lo=l.exists()?l.data():{};
+   if(co.status!=="entwurf"){toast("Nur Entwürfe können bearbeitet werden.");return}
+   const glob=co.vignette?.text?co.vignette:null; // ältere Check-outs: eine gemeinsame Situation
+   coEditor={id,titel:co.titel||"",lbNum:co.lbNum||1,datum:co.datum||"",zaehlt:co.zaehlt!==false,vignetteTitel:"",vignetteText:"",
+    klassisch:lo.klassisch||"",checkliste:lo.checkliste||[],
+    aufgaben:(co.aufgaben||[]).map((a,i)=>coAufgabeNorm({stamm:a.stamm||"",kontext:a.kontext||"",
+     vTitel:a.vignette?.titel??(glob?.titel||""),vText:a.vignette?.text??(glob?.text||""),vZeilen:a.vignette?!!a.vignette.zeilen:!!glob,
+     mTitel:a.material?.titel||"",mText:a.material?.text||"",mQuelle:a.material?.quelle||"",
+     aussagen:[0,1,2,3].map(j=>({text:a.aussagen?.[j]||"",richtig:!!lo.aufgaben?.[i]?.richtig?.[j],erklaerung:lo.aufgaben?.[i]?.erklaerung?.[j]||""}))}))};
+  }catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
+ }else{
+  const heute=new Date().toISOString().slice(0,10);
+  const lauf=PROJEKT_PHASEN.find(p=>heute>=p.start&&heute<=p.end)||PROJEKT_PHASEN.find(p=>heute<p.start)||PROJEKT_PHASEN[0];
+  coEditor={id:null,titel:"",lbNum:lauf.lbNum,datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:[coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe()]};
+  if(vorgabe?.datum)coEditor.datum=vorgabe.datum;
+  if(vorgabe?.lbNum)coEditor.lbNum=vorgabe.lbNum;
+  const vl=vorgabe?.vorlage?CHECKOUT_VORLAGEN.find(v=>v.id===vorgabe.vorlage):null;
+  if(vl){coEditor.titel=vl.titel;coEditor.lbNum=vl.lbNum;coEditor.aufgaben=vl.aufgaben.map(coAufgabeAusBank);}
+ }
+ coEditorRender();
+}
+function coEditorLesen(){
+ if(!coEditor||!$("coTitel"))return;
+ coEditor.titel=$("coTitel").value;coEditor.lbNum=Number($("coLb").value)||1;coEditor.datum=$("coDatum").value;coEditor.zaehlt=$("coZaehlt").checked;
+ coEditor.klassisch=$("coKlassisch").value;
+ coEditor.checkliste=CO_CHECKLISTE.map((c,k)=>!!$(`coCl${k}`)?.checked);
+ const v=(id,def="")=>$(id)?.value??def;
+ coEditor.aufgaben=coEditor.aufgaben.map((a,i)=>({...a,
+  stamm:v(`coStamm${i}`),kontext:v(`coKo${i}`),vTitel:v(`coVT${i}`),vText:v(`coVX${i}`),vZeilen:!!$(`coVZ${i}`)?.checked,
+  mTitel:v(`coMT${i}`),mText:v(`coMX${i}`),mQuelle:v(`coMQ${i}`),
+  aussagen:[0,1,2,3].map(j=>({text:v(`coA${i}_${j}`),richtig:$(`coR${i}_${j}`)?.value==="r",erklaerung:v(`coE${i}_${j}`)}))}));
+}
+// Aktualisiert nur die Hinweise (beim Tippen), ohne das Formular neu zu zeichnen.
+function coEditorPruefen(){
+ coEditorLesen();
+ const p=coPruefung(coEditor);
+ p.pro.forEach((x,i)=>{const el=$(`coHinw${i}`);if(el)el.innerHTML=`<b>${x.richtig} richtig · ${4-x.richtig} falsch</b> ${coPruefChips(x)}`;});
+ const g=$("coHinwGlob");if(g)g.innerHTML=p.glob.map(t=>`<div class="co-hinweis">⚠ ${esc(t)}</div>`).join("");
+ const n=coEditor.checkliste.filter(Boolean).length,cs=$("coClStand");if(cs)cs.textContent=`${n}/${CO_CHECKLISTE.length} bestätigt`;
+}
+function coEditorRender(){
+ coEditor.aufgaben=coEditor.aufgaben.map(coAufgabeNorm);
+ // Ältere Importe mit einer gemeinsamen Situation: sie wird jeder Aufgabe als eigene Fallvignette mitgegeben.
+ if((coEditor.vignetteText||"").trim()){
+  coEditor.aufgaben.forEach(a=>{if(!a.vText.trim()){a.vTitel=coEditor.vignetteTitel||"";a.vText=coEditor.vignetteText;a.vZeilen=true;}});
+  coEditor.vignetteText="";coEditor.vignetteTitel="";
+ }
+ const e=coEditor,p=coPruefung(e),be=CHECKOUT_BE_NACH_FEHLERN;
+ const cl=CO_CHECKLISTE.map(([g,t],k)=>`${k===0||CO_CHECKLISTE[k-1][0]!==g?`<div class="co-cl-gruppe">${g}</div>`:""}<label class="co-cl"><input id="coCl${k}"type="checkbox"${e.checkliste[k]?" checked":""} onchange="coEditorPruefen()"> ${esc(t)}</label>`).join("");
+ const bankOpt=`<option value="">Aus der Aufgabenbank einsetzen …</option>${CO_AUFGABENBANK.map(b=>`<option value="${esc(b.id)}">${esc(b.titel)}</option>`).join("")}`;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUT-TEST · ${e.id?"ENTWURF BEARBEITEN":"NEU ANLEGEN"} · NUR LEHRKRÄFTE</div>
+  <h2>K-Prim-Test anlegen</h2>
+  <p class="co-ed-intro">Jeder Freitagstest hat genau <b>${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben</b>. Jede Aufgabe beginnt mit ihrer eigenen <b>Fallvignette</b> (optional mit Material), dann folgen Einleitungssatz und 4 Aussagen. Wertung je Aufgabe: 4 richtig = ${be[0]} BE · 3 = ${be[1]} BE · 2 = ${be[2]} BE · sonst 0.</p>
+  <div class="form">
+   ${!e.id&&CHECKOUT_VORLAGEN.length?`<div class="co-ed-vorlage"><b>📋 Vorlage:</b> <select id="coVorlage"onchange="coVorlageWaehlen()"><option value="">Ganzen Test aus Vorlage einsetzen …</option>${CHECKOUT_VORLAGEN.map(v=>`<option value="${esc(v.id)}">${esc(v.titel)} (LB ${v.lbNum} · ${esc(coDatum(v.datum))})</option>`).join("")}</select></div>`:""}
+   <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <label style="flex:2;min-width:200px">Titel<input id="coTitel"value="${esc(e.titel)}"placeholder="z. B. Alltags- und Wissenschaftstheorie"></label>
+    <label style="flex:1;min-width:110px">Lernbereich<select id="coLb">${[1,2,3,4].map(n=>`<option value="${n}"${e.lbNum===n?" selected":""}>LB ${n}</option>`).join("")}</select></label>
+    <label style="flex:1;min-width:140px">Datum<input id="coDatum"type="date"value="${esc(e.datum)}"></label>
+   </div>
+   <label class="check"><input id="coZaehlt"type="checkbox"${e.zaehlt?" checked":""}> zählt für den Kurzarbeit-Ersatz</label>
+   <label>Klassische Aufgabenstellung <span class="co-opt">optional · nur für den Aufgabenpool, Schüler sehen sie nicht</span><textarea id="coKlassisch"rows="2"placeholder="z. B. Stellen Sie anhand der Aussagen von Herrn Kluge drei Merkmale der Alltagstheorie dar.">${esc(e.klassisch)}</textarea></label>
+
+   <div class="co-ed-schritt"><span>①</span> K-Prim-Aufgaben</div>
+   <small class="co-ed-tipp">Erst die richtige(n) Aussage(n) formulieren, dann plausible Distraktoren. Aussagen ähnlich lang und gleich gebaut. Die Begründung sehen Schüler:innen erst nach der Auswertung.</small>
+   ${e.aufgaben.map((a,i)=>`<div class="card co-ed-aufgabe">
+    <div class="co-ed-kopf"><b>Aufgabe ${i+1}</b><span id="coHinw${i}"><b>${p.pro[i].richtig} richtig · ${4-p.pro[i].richtig} falsch</b> ${coPruefChips(p.pro[i])}</span></div>
+    <select id="coBank${i}"class="co-ed-bank"onchange="coBankEinsetzen(${i})">${bankOpt}</select>
+    ${a.pruefen?`<div class="co-hinweis">⚠ ${esc(a.pruefen)}</div>`:""}
+    <div class="co-ed-abschn">📖 Fallvignette</div>
+    <label>Überschrift<input id="coVT${i}"value="${esc(a.vTitel)}"placeholder="z. B. Kindergarten „Wirbelwind“"></label>
+    <label>Text<textarea id="coVX${i}"rows="6"placeholder="Situation ohne Hinweise auf die Lösung.">${esc(a.vText)}</textarea></label>
+    <label class="check"><input id="coVZ${i}"type="checkbox"${a.vZeilen?" checked":""}> Zeilen nummerieren (jeder Zeilenumbruch = neue Zeile, für Verweise wie „Z. 15–17“)</label>
+    <details class="co-ed-details"${a.mText?" open":""}><summary>📎 Material (optional, z. B. Studie oder Text)</summary>
+     <label>Titel<input id="coMT${i}"value="${esc(a.mTitel)}"></label>
+     <label>Text<textarea id="coMX${i}"rows="5">${esc(a.mText)}</textarea></label>
+     <label>Quelle<input id="coMQ${i}"value="${esc(a.mQuelle)}"></label>
+    </details>
+    <div class="co-ed-abschn">❓ Aufgabe</div>
+    <label>Zusatz zur Situation <span class="co-opt">optional</span><textarea id="coKo${i}"rows="2"placeholder="z. B. Ein Teamgespräch, ein Zitat oder ein Hinweis zur Aufgabe">${esc(a.kontext)}</textarea></label>
+    <label>Einleitungssatz<input id="coStamm${i}"value="${esc(a.stamm)}"oninput="coEditorPruefen()"placeholder="z. B. Diese Aussage ist alltagstheoretisch, wenn …"></label>
+    ${a.aussagen.map((s,j)=>`<div class="co-ed-aussage"><span>${j+1}</span><div style="flex:1;display:flex;flex-direction:column;gap:4px"><textarea id="coA${i}_${j}"rows="2"oninput="coEditorPruefen()"placeholder="Aussage ${j+1}">${esc(s.text)}</textarea><input id="coE${i}_${j}"value="${esc(s.erklaerung)}"placeholder="Begründung (optional, erst nach der Auswertung sichtbar)"></div>
+     <select id="coR${i}_${j}"onchange="coEditorPruefen()"><option value="r"${s.richtig?" selected":""}>richtig</option><option value="f"${!s.richtig?" selected":""}>falsch</option></select></div>`).join("")}
+   </div>`).join("")}
+   <div id="coHinwGlob">${p.glob.map(t=>`<div class="co-hinweis">⚠ ${esc(t)}</div>`).join("")}</div>
+   <div class="form-actions">
+    <button class="secondary"onclick="coEditorVorschlag()">Vorschläge aus der App</button>
+   </div>
+
+   <details class="co-ed-details"><summary><span class="co-ed-schritt-inline">②</span> Checkliste (ISB) · <span id="coClStand">${e.checkliste.filter(Boolean).length}/${CO_CHECKLISTE.length} bestätigt</span></summary><div class="co-cl-liste">${cl}</div></details>
+   <details class="co-ed-details"><summary>Aus Word einfügen (Textvorlage)</summary>
+    <p style="font-size:12px;color:var(--muted);margin:6px 0">Text in dieser Form einfügen – R = richtig, F = falsch. Eine SITUATION gilt für alle Aufgaben, die du danach noch anpassen kannst:</p>
+    <pre class="co-vorlage">TITEL: Kommunikation in der Lerngruppe
+LB: 4
+SITUATION: Schwierige Kommunikation in der Lerngruppe
+Für die Vorbereitung auf die Prüfung hat Tom …
+Luzie (abfällig): „Ich freue mich auch …“
+AUFGABENSTELLUNG: Erklären Sie … (optional)
+AUFGABE: Die Kommunikation kann erfolgreich verlaufen, wenn …
+F: … Tom im Sinne des 5. Axioms …
+F: … Luzie im Sinne des 2. Axioms …
+R: … Tom im Sinne des 1. Axioms …
+F: … Luzie im Sinne des 4. Axioms …
+AUFGABE: …</pre>
+    <textarea id="coImport"rows="6"placeholder="Hier einfügen …"></textarea>
+    <div class="form-actions"><button class="secondary"onclick="coEditorImport()">Übernehmen</button></div>
+   </details>
+   <div class="form-actions co-ed-fuss">
+    ${e.id?`<button class="secondary"onclick="coLoeschen('${e.id}')">Löschen</button>`:""}
+    <button class="secondary"onclick="coEditorLesen();coPoolExport('pdf')">PDF für Aufgabenpool</button>
+    <button class="secondary"onclick="coEditorLesen();coPoolExport('word')">Word für Aufgabenpool</button>
+    <span style="flex:1"></span>
+    <button class="secondary"onclick="closeModal()">Abbrechen</button>
+    <button class="primary"onclick="coEditorSpeichern()">Entwurf speichern</button>
+   </div>
+  </div>`);
+}
+function coBankEinsetzen(i){
+ coEditorLesen();
+ const id=$(`coBank${i}`)?.value;if(!id)return;
+ const a=coEditor.aufgaben[i];
+ const belegt=a.vText.trim()||a.stamm.trim()||a.aussagen.some(x=>x.text.trim());
+ if(belegt&&!confirm(`Aufgabe ${i+1} wird durch die Aufgabe aus der Bank ersetzt. Fortfahren?`)){coEditorRender();return}
+ coEditor.aufgaben[i]=coAufgabeAusBank(id);
+ coEditorRender();toast("Aufgabe eingesetzt – bitte prüfen.");
+}
+function coVorlageWaehlen(){
+ coEditorLesen();
+ const id=$("coVorlage")?.value;if(!id)return;
+ const v=CHECKOUT_VORLAGEN.find(x=>x.id===id);if(!v)return;
+ const belegt=coEditor.aufgaben.some(a=>a.vText.trim()||a.stamm.trim()||a.aussagen.some(x=>x.text.trim()));
+ if(belegt&&!confirm("Der Inhalt dieses Entwurfs wird durch die Vorlage ersetzt. Fortfahren?")){coEditorRender();return}
+ coEditor.titel=v.titel;coEditor.lbNum=v.lbNum;coEditor.datum=v.datum;coEditor.aufgaben=v.aufgaben.map(coAufgabeAusBank);
+ coEditorRender();toast("Vorlage eingesetzt – bitte prüfen und speichern.");
+}
+function coEditorAufgabe(d){coEditorLesen();if(d>0&&coEditor.aufgaben.length<CHECKOUT_MAX_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());if(d<0&&coEditor.aufgaben.length>CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.pop();coEditorRender();}
+function coEditorVorschlag(){
+ coEditorLesen();
+ const ph=PROJEKT_PHASEN.find(p=>p.lbNum===coEditor.lbNum);
+ const kp=PP_EINHEITEN.filter(e=>ph&&(ph.trainingWochen.includes(e.id)||ph.notwendigeWochen.includes(e.id))).flatMap(e=>e.kprim||[]).slice(0,CHECKOUT_MAX_AUFGABEN);
+ if(!kp.length){toast("Für diesen Lernbereich gibt es keine Vorschläge.");return}
+ if(!confirm(`${kp.length} K-Prim-Aufgaben aus den App-Vorschlägen einsetzen? Bestehende Aufgaben werden ersetzt.`))return;
+ coEditor.aufgaben=kp.map(k=>coAufgabeNorm({stamm:k.frage||"",aussagen:[0,1,2,3].map(j=>({text:k.statements?.[j]?.text||"",richtig:!!k.statements?.[j]?.correct}))}));
+ while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
+ coEditorRender();toast("Eingesetzt – bitte je Aufgabe eine Fallvignette ergänzen und die Aussagen auf den Fall zuschneiden.");
+}
+// Textvorlage (aus Word kopiert) oder JSON einlesen.
+function coEditorImport(){
+ coEditorLesen();
+ const roh=$("coImport").value.trim();
+ if(!roh){toast("Bitte zuerst Text einfügen.");return}
+ try{
+  if(roh.startsWith("{")){
+   const j=JSON.parse(roh);
+   if(j.titel)coEditor.titel=j.titel;
+   if(j.lb)coEditor.lbNum=Number(j.lb)||coEditor.lbNum;
+   if(typeof j.vignette==="string")coEditor.vignetteText=j.vignette;
+   else if(j.vignette){coEditor.vignetteTitel=j.vignette.titel||"";coEditor.vignetteText=j.vignette.text||"";}
+   if(j.aufgabenstellung)coEditor.klassisch=j.aufgabenstellung;
+   if(Array.isArray(j.aufgaben)&&j.aufgaben.length)coEditor.aufgaben=j.aufgaben.slice(0,CHECKOUT_MAX_AUFGABEN).map(a=>({stamm:a.stamm||a.frage||"",aussagen:[0,1,2,3].map(k=>{const s=(a.aussagen||a.statements||[])[k]||{};return{text:typeof s==="string"?s:(s.text||""),richtig:!!(s.richtig??s.correct)};})}));
+    if(Array.isArray(j.aufgaben)&&j.aufgaben.length)coEditor.aufgaben=coEditor.aufgaben.map((x,ii)=>{const q=j.aufgaben[ii]||{};const v=q.vignette;const ma=q.material||{};
+     return{...x,kontext:q.kontext||"",vTitel:typeof v==="object"&&v?(v.titel||""):"",vText:typeof v==="string"?v:(v?.text||""),vZeilen:!!(v&&v.zeilen),mTitel:ma.titel||"",mText:ma.text||"",mQuelle:ma.quelle||""};});
+  }else{
+   let modus="",situation=[],aufgaben=[],klassisch=[];
+   roh.split(/\r?\n/).forEach(z=>{
+    const t=z.trim();let m;
+    if(m=t.match(/^TITEL:\s*(.*)$/i)){coEditor.titel=m[1];modus="";}
+    else if(m=t.match(/^LB:\s*(\d)/i)){coEditor.lbNum=Number(m[1]);modus="";}
+    else if(m=t.match(/^SITUATION:\s*(.*)$/i)){coEditor.vignetteTitel=m[1];modus="sit";}
+    else if(m=t.match(/^AUFGABENSTELLUNG:\s*(.*)$/i)){klassisch.push(m[1]);modus="kl";}
+    else if(m=t.match(/^AUFGABE:\s*(.*)$/i)){aufgaben.push({stamm:m[1],aussagen:[]});modus="auf";}
+    else if(m=t.match(/^([RF])\s*[:)]\s*(.*)$/i)){const a=aufgaben[aufgaben.length-1];if(a&&a.aussagen.length<4)a.aussagen.push({text:m[2],richtig:m[1].toUpperCase()==="R"});}
+    else if(modus==="sit")situation.push(z.replace(/^\s*\d+\s+/,""));
+    else if(modus==="kl"&&t)klassisch.push(t);
+    else if(modus==="auf"&&t&&aufgaben.length){const a=aufgaben[aufgaben.length-1];if(!a.aussagen.length)a.stamm=(a.stamm+" "+t).trim();}
+   });
+   if(situation.length)coEditor.vignetteText=situation.join("\n").replace(/^\n+|\n+$/g,"");
+   if(klassisch.length)coEditor.klassisch=klassisch.join(" ");
+   if(aufgaben.length){
+    const fehl=aufgaben.findIndex(a=>a.aussagen.length!==4);
+    if(fehl>-1)toast(`Aufgabe ${fehl+1} hat nicht genau 4 Aussagen – bitte ergänzen.`);
+    coEditor.aufgaben=aufgaben.slice(0,CHECKOUT_MAX_AUFGABEN).map(a=>coAufgabeNorm({stamm:a.stamm,aussagen:[0,1,2,3].map(k=>a.aussagen[k]||{text:"",richtig:false})}));
+   }
+  }
+  while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
+  coEditorRender();toast("Übernommen – bitte prüfen und speichern.");
+ }catch(e){console.error(e);toast("Das Format konnte nicht gelesen werden.");}
+}
+async function coEditorSpeichern(){
+ coEditorLesen();
+ const e=coEditor;
+ if(!e.titel.trim()){toast("Bitte einen Titel eingeben.");return}
+ if(e.aufgaben.length!==CHECKOUT_MAX_AUFGABEN){toast(`Ein Check-out hat immer genau ${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben.`);return}
+ const unvollst=e.aufgaben.findIndex(a=>!a.vText.trim()||!a.stamm.trim()||a.aussagen.some(s=>!s.text.trim()));
+ if(unvollst>-1){toast(`Aufgabe ${unvollst+1}: Fallvignette, Einleitungssatz und alle 4 Aussagen ausfüllen.`);return}
+ const matFehl=e.aufgaben.findIndex(a=>(a.mTitel.trim()||a.mQuelle.trim())&&!a.mText.trim());
+ if(matFehl>-1){toast(`Aufgabe ${matFehl+1}: Das Material braucht einen Text.`);return}
+ const offen=CO_CHECKLISTE.length-e.checkliste.filter(Boolean).length;
+ if(offen&&!confirm(`${offen} Punkt(e) der Checkliste sind noch nicht bestätigt. Trotzdem speichern?`))return;
+ const daten={titel:e.titel.trim(),lbNum:e.lbNum,datum:e.datum,zaehlt:e.zaehlt,status:"entwurf",
+  vignette:null,
+  aufgaben:e.aufgaben.map(a=>{
+   const q={stamm:a.stamm.trim(),vignette:{titel:a.vTitel.trim(),text:a.vText.replace(/\s+$/,""),zeilen:!!a.vZeilen},aussagen:a.aussagen.map(s=>s.text.trim())};
+   if(a.kontext.trim())q.kontext=a.kontext.trim();
+   if(a.mText.trim())q.material={titel:a.mTitel.trim(),text:a.mText.replace(/\s+$/,""),quelle:a.mQuelle.trim()};
+   return q;}),
+  updatedAt:serverTimestamp(),updatedBy:currentUser.uid};
+ // Lösung, Begründungen, klassische Aufgabenstellung und Checkliste liegen nur bei den Lehrkräften.
+ const loesung={aufgaben:e.aufgaben.map(a=>({richtig:a.aussagen.map(s=>!!s.richtig),erklaerung:a.aussagen.map(s=>(s.erklaerung||"").trim())})),klassisch:e.klassisch.trim(),checkliste:e.checkliste,updatedAt:serverTimestamp()};
+ try{
+  let id=e.id;
+  if(id)await setDoc(doc(db,"checkouts",id),daten,{merge:true});
+  else{const r=await addDoc(collection(db,"checkouts"),{...daten,createdAt:serverTimestamp(),createdBy:currentUser.uid});id=r.id;}
+  await setDoc(doc(db,"checkoutLoesungen",id),loesung);
+  toast("Check-Out-Test gespeichert.");closeModal();await render();
+ }catch(err){console.error("Check-out speichern:",err);toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+// Situation mit Zeilennummern (wie in Prüfungsaufgaben).
+function coSituationHTML(v,pdf=false,nummeriert=true,ohneTitel=false){
+ const E=pdf?escPDF:esc;
+ const zeilen=String(v?.text||"").split(/\r?\n/);
+ const titel=!ohneTitel&&v?.titel?`<div class="co-sit-titel">Situation: ${E(v.titel)}</div>`:"";
+ if(!nummeriert)return`<div class="co-situation co-sit-frei">${titel}${zeilen.filter(z=>z.trim()).map(z=>`<p style="margin:0 0 8px;line-height:1.6">${E(z)}</p>`).join("")}</div>`;
+ return`<div class="co-situation">${titel}
+  <table class="co-sit-tab"style="border-collapse:collapse;width:100%">${zeilen.map((z,k)=>`<tr><td class="co-sit-nr"style="width:28px;vertical-align:top;color:#8a99a3;font-size:12px;padding:2px 8px 2px 0;text-align:right">${k+1}</td><td style="padding:2px 0;line-height:1.55">${E(z)||"&nbsp;"}</td></tr>`).join("")}</table></div>`;
+}
+// Absätze (Zeilenumbruch = neuer Absatz).
+function coAbsaetzeHTML(t,pdf=false){const E=pdf?escPDF:esc;return String(t||"").split(/\r?\n/).filter(z=>z.trim()).map(z=>`<p style="margin:0 0 8px;line-height:1.6">${E(z)}</p>`).join("");}
+// Ausgangslage einer Aufgabe: Fallvignette, Material, Zusatz, Einleitungssatz (ohne die Aussagen).
+function coFallHTML(q,pdf=false){
+ const E=pdf?escPDF:esc;
+ const v=q.vignette?.text?q.vignette:null,m=q.material?.text?q.material:null;
+ return`${v?`<div class="kp-vig"><div class="kp-label">📖 Fallvignette${v.titel?` · ${E(v.titel)}`:""}</div>${coSituationHTML(v,pdf,!!v.zeilen,true)}</div>`:""}
+  ${m?`<div class="kp-mat"><div class="kp-label">📎 Material${m.titel?` · ${E(m.titel)}`:""}</div>${coAbsaetzeHTML(m.text,pdf)}${m.quelle?`<div class="kp-quelle">${E(m.quelle)}</div>`:""}</div>`:""}
+  <div class="kp-frage">${q.kontext?`<div class="kp-kontext">${coAbsaetzeHTML(q.kontext,pdf)}</div>`:""}<strong class="kp-stamm">${E(q.stamm)}</strong>
+  <div class="kp-anleitung">Entscheiden Sie bei den Aussagen 1–4, ob sie jeweils <b>richtig oder falsch</b> sind.</div></div>`;
+}
+// Ältere Check-outs haben eine gemeinsame Situation über allen Aufgaben.
+function coGemeinsameSituation(co){return co?.vignette?.text&&!(co.aufgaben||[]).some(a=>a.vignette?.text)?co.vignette:null;}
+// Export für den ISB-Aufgabenpool: Situation, klassische Aufgabenstellung,
+// K-Prim-Aufgaben mit Lösung (X). Dateiname INHALT_KPRIM_SCHULNUMMER.
+function coPoolExport(art){
+ const e=coEditor;if(!e)return;
+ const nr=prompt("Schulnummer für den Dateinamen (INHALT_KPRIM_SCHULNUMMER):",localStorage.getItem("coSchulnummer")||"");
+ if(nr===null)return;
+ try{localStorage.setItem("coSchulnummer",nr.trim());}catch(x){}
+ const inhalt=((e.titel||"Inhalt").trim().split(/\s+/).find(w=>w.length>3)||"Inhalt").replace(/[^A-Za-zÄÖÜäöüß0-9-]/g,"");
+ const name=`${inhalt}_KPRIM_${nr.trim()||"0000"}`;
+ const be=CHECKOUT_BE_NACH_FEHLERN[0];
+ const aufg=e.aufgaben.map((a,i)=>`<h3 style="margin:18px 0 4px">Aufgabe ${i+1}: K-Prim-Aufgabe</h3>
+  <h4 style="margin:8px 0 4px">Situation${a.vTitel?`: ${escPDF(a.vTitel)}`:""}</h4>${coSituationHTML({text:a.vText},true,!!a.vZeilen,true)}
+  ${a.mText.trim()?`<h4 style="margin:8px 0 4px">Material${a.mTitel?`: ${escPDF(a.mTitel)}`:""}</h4>${coAbsaetzeHTML(a.mText,true)}${a.mQuelle?`<p style="font-size:11px;color:#666">${escPDF(a.mQuelle)}</p>`:""}`:""}
+  ${a.kontext.trim()?coAbsaetzeHTML(a.kontext,true):""}
+  <p style="margin:0 0 6px">Entscheiden Sie bei den Aussagen 1–4, ob sie jeweils richtig oder falsch sind.</p>
+  <p style="margin:0 0 6px"><b>${escPDF(a.stamm)}</b></p>
+  <table style="width:100%;border-collapse:collapse" border="1" cellpadding="6"><tr><th style="width:60px">richtig</th><th style="width:60px">falsch</th><th style="text-align:left">Aussage</th></tr>
+  ${a.aussagen.map((s,j)=>`<tr><td style="text-align:center">${s.richtig?"X":""}</td><td style="text-align:center">${s.richtig?"":"X"}</td><td>${j+1}. ${escPDF(s.text)}</td></tr>`).join("")}</table>
+  <p style="text-align:right;margin:4px 0 0">____ / ${be} BE</p>`).join("");
+ const body=`<p><b>Lernbereich:</b> LB ${e.lbNum} · Pädagogik/Psychologie 11</p>
+  ${e.klassisch.trim()?`<h2>Klassische Aufgabenstellung</h2><p>${escPDF(e.klassisch)}</p>`:""}
+  <h2>K-Prim-Aufgaben (mit Lösung)</h2>${aufg}
+  <p style="font-size:11px;color:#666;margin-top:14px">Wertung je Aufgabe: 4 richtige Entscheidungen = ${be} BE, 3 = ${CHECKOUT_BE_NACH_FEHLERN[1]} BE, 2 = ${CHECKOUT_BE_NACH_FEHLERN[2]} BE, weniger = 0 BE.</p>`;
+ if(art==="word"){
+  const html=`<html><head><meta charset="utf-8"><title>${escPDF(name)}</title></head><body style="font-family:Arial,sans-serif;font-size:11pt"><h1>${escPDF(e.titel||name)}</h1>${body}</body></html>`;
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff",html],{type:"application/msword"}));a.download=name+".doc";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
+  toast(`${name}.doc wird heruntergeladen.`);
+ }else openToolPrintWindow(name,body,`${e.titel||""} · als PDF sichern und unter „${name}“ in mebis hochladen`);
+}
+async function coLoeschen(id){
+ if(!isTeacher())return;
+ if(!confirm("Diesen Check-out wirklich löschen? Abgaben und Ergebnisse dazu werden ebenfalls gelöscht."))return;
+ try{
+  const ab=await getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)));
+  await Promise.all(ab.docs.map(d=>deleteDoc(d.ref)));
+  await deleteDoc(doc(db,"checkoutLoesungen",id)).catch(()=>{});
+  await deleteDoc(doc(db,"checkouts",id));
+  toast("Check-out gelöscht.");closeModal();await render();
+ }catch(e){console.error(e);toast("Konnte nicht gelöscht werden.");}
+}
+
+// ---- Live schalten / beenden / auswerten (Lehrkraft) ----
+async function coLiveStarten(id){
+ if(!isTeacher())return;
+ if(!confirm("Check-out jetzt LIVE freischalten? Alle Schüler:innen können ihn dann sofort öffnen."))return;
+ try{await updateDoc(doc(db,"checkouts",id),{status:"live",liveAt:serverTimestamp()});toast("Check-out ist live.");await openCheckoutMonitor(id);}
+ catch(e){console.error(e);toast("Konnte nicht freigeschaltet werden.");}
+}
+function coUnsubAll(){if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}}
+async function openCheckoutMonitor(id){
+ if(!isTeacher())return;
+ coUnsubAll();
+ let co=null,students=[];
+ try{const c=await getDoc(doc(db,"checkouts",id));co=c.exists()?{id,...c.data()}:null;students=await getAllUsersForLernstand();}catch(e){}
+ if(!co){toast("Nicht gefunden.");return}
+ const n=(co.aufgaben||[]).length*4;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUT · LIVE-ÜBERSICHT</div>
+  <h2>${esc(co.titel)}</h2>
+  <div id="coMonitor"><p style="color:var(--muted)">Lädt …</p></div>
+  <div class="form-actions"style="margin-top:14px">
+   <button class="secondary"onclick="closeModal()">Schließen</button>
+   ${co.status==="live"?`<button class="primary"style="background:#d9534f"onclick="coBeenden('${id}')">■ Live beenden & auswerten</button>`:`<button class="secondary"onclick="openCheckoutErgebnisse('${id}')">Ergebnisse</button>`}
+  </div>`);
+ window.__coUnsub=onSnapshot(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)),snap=>{
+  const box=$("coMonitor");if(!box){coUnsubAll();return}
+  const ab={};snap.docs.forEach(d=>{const x=d.data();ab[x.uid]=x;});
+  const abgegeben=Object.values(ab).filter(a=>a.abgegeben).length;
+  box.innerHTML=`<p style="font-size:14px"><b>${abgegeben}</b> abgegeben · <b>${Object.keys(ab).length-abgegeben}</b> in Bearbeitung · <b>${students.length-Object.keys(ab).length}</b> noch nicht gestartet</p>
+   <div class="co-monitor">${students.map(s=>{const a=ab[s.uid];const k=a?Object.keys(a.antworten||{}).length:0;
+    return`<div class="co-mon-zeile ${a?.abgegeben?"ab":a?"lauf":"nicht"}"><span>${esc(s.displayName||s.email||"")}</span><small>${a?.abgegeben?"abgegeben ✓":a?`${k}/${n} beantwortet`:"noch nicht gestartet"}</small></div>`;}).join("")}</div>`;
+ },e=>console.error("Check-out-Monitor:",e));
+}
+async function coBeenden(id){
+ if(!isTeacher())return;
+ if(!confirm("Check-out jetzt beenden? Danach kann niemand mehr etwas ändern und die App wertet automatisch aus."))return;
+ coUnsubAll();
+ try{
+  await updateDoc(doc(db,"checkouts",id),{status:"beendet",endAt:serverTimestamp()});
+  toast("Beendet – wird ausgewertet …");
+  await coAuswerten(id);
+  await openCheckoutErgebnisse(id);
+ }catch(e){console.error("Check-out beenden:",e);toast("Konnte nicht beendet werden.");}
+}
+async function coAuswerten(id){
+ const [c,l,ab]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutLoesungen",id)),getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)))]);
+ if(!c.exists()||!l.exists())throw new Error("Check-out oder Lösung fehlt");
+ const co=c.data(),lo=l.data();
+ await Promise.all(ab.docs.map(d=>{const x=d.data();const erg=coBewerten(co,lo,x.antworten||{});
+  return updateDoc(d.ref,{...erg,ausgewertet:true,abgegeben:true,ausgewertetAm:serverTimestamp()});}));
+ await updateDoc(doc(db,"checkouts",id),{ausgewertetAm:serverTimestamp(),teilnehmer:ab.size,maxBE:(co.aufgaben||[]).length*CHECKOUT_BE_NACH_FEHLERN[0]});
+ toast(`${ab.size} Abgaben ausgewertet.`);
+}
+async function coNeuAuswerten(id){
+ if(!confirm("Alle Abgaben dieses Check-outs neu auswerten (z. B. nach einer Korrektur der Lösung)?"))return;
+ try{await coAuswerten(id);await openCheckoutErgebnisse(id);}catch(e){console.error(e);toast("Konnte nicht ausgewertet werden.");}
+}
+
+// ---- Test bearbeiten (Schüler:in) ----
+async function openCheckoutTest(id){
+ coUnsubAll();
+ let co=null,a=null;
+ try{
+  const c=await getDoc(doc(db,"checkouts",id));co=c.exists()?{id,...c.data()}:null;
+  const s=await getDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`));a=s.exists()?s.data():null;
+ }catch(e){console.error(e);}
+ if(!co){toast("Dieser Check-out ist nicht verfügbar.");return}
+ if(co.status!=="live"){toast("Dieser Check-out ist nicht (mehr) freigeschaltet.");return}
+ if(a?.abgegeben){toast("Du hast bereits abgegeben.");return}
+ const ant=a?.antworten||{};
+ const c=PP_FARBEN[co.lbNum]||"#4a90d9";
+ const glob=coGemeinsameSituation(co);
+ modal(`<div id="coTest"class="kp-test">
+  <div class="kicker"style="color:${c}">🏁 CHECK-OUT · LB ${esc(co.lbNum)} · ${coDatum(co.datum)}</div>
+  <h2>${esc(co.titel)}</h2>
+  <div class="kp-fortschritt"><div class="kp-balken"><i id="coBalken"style="background:${c}"></i></div><span id="coStand"></span></div>
+  <details class="kp-hilfe"><summary>So funktioniert der Test</summary>
+   <p>Lies zu jeder Aufgabe zuerst die Fallvignette. Entscheide dann bei <b>jeder</b> der 4 Aussagen, ob sie richtig oder falsch ist. Eine leere Aussage zählt als Fehler. Deine Antworten werden automatisch gespeichert.</p>
+   <p class="kp-wertung">Wertung je Aufgabe: 4 richtig = ${CHECKOUT_BE_NACH_FEHLERN[0]} BE · 3 richtig = ${CHECKOUT_BE_NACH_FEHLERN[1]} BE · 2 richtig = ${CHECKOUT_BE_NACH_FEHLERN[2]} BE · weniger = 0 BE</p></details>
+  ${glob?`<div class="kp-vig"style="border-left-color:${c}"><div class="kp-label">📖 Situation</div>${coSituationHTML(glob,false,true,false)}</div>`:""}
+  ${(co.aufgaben||[]).map((q,i)=>`<section class="kp-karte"style="--c:${c}">
+   <header class="kp-kopf"><span class="kp-nummer">${i+1}</span><div><b>Aufgabe ${i+1} von ${(co.aufgaben||[]).length}</b><small>bis zu ${CHECKOUT_BE_NACH_FEHLERN[0]} BE</small></div><span class="kp-fort">0/4</span></header>
+   ${coFallHTML(q)}
+   <div class="kp-liste">${(q.aussagen||[]).map((t,j)=>`<div class="kp-zeile"><span class="kp-num">${j+1}</span><p class="kp-text">${esc(t)}</p>
+    <div class="kp-wahl"role="radiogroup"aria-label="Aussage ${j+1}">${[["r","✓ Richtig"],["f","✗ Falsch"]].map(([v,l])=>`<label class="kp-opt ${v}"><input type="radio"name="coT${i}_${j}"value="${v}"aria-label="Aussage ${j+1}: ${v==="r"?"richtig":"falsch"}"${ant[`${i}_${j}`]===v?" checked":""} onchange="coAntwort('${id}','${i}_${j}','${v}')"><span>${l}</span></label>`).join("")}</div></div>`).join("")}</div>
+  </section>`).join("")}
+  <div class="co-test-fuss"><span id="coStand2"></span><button class="primary"onclick="coAbgeben('${id}')">Abgeben</button></div>
+ </div>`);
+ coStandAktualisieren(co);
+ // Beendet die Lehrkraft den Test, wird die Bearbeitung sofort gesperrt.
+ window.__coUnsub=onSnapshot(doc(db,"checkouts",id),snap=>{
+  if(!$("coTest")){coUnsubAll();return}
+  const x=snap.data();
+  if(x&&x.status!=="live"){coUnsubAll();$("coTest").innerHTML=`<h2>Der Check-out wurde beendet.</h2><p>Deine gespeicherten Antworten werden gewertet. Das Ergebnis erscheint in deinem Lernweg.</p><div class="form-actions"><button class="primary"onclick="closeModal();render()">OK</button></div>`;}
+ });
+}
+function coStandAktualisieren(co){
+ const n=document.querySelectorAll("#coTest .kp-zeile").length||(co?.aufgaben||[]).length*4;
+ const k=document.querySelectorAll('#coTest input[type="radio"]:checked').length;
+ const t=`${k} von ${n} Aussagen beantwortet`;
+ const el=$("coStand");if(el)el.textContent=t;
+ const e2=$("coStand2");if(e2)e2.textContent=t;
+ const b=$("coBalken");if(b)b.style.width=(n?k/n*100:0)+"%";
+ document.querySelectorAll("#coTest .kp-karte").forEach(c=>{
+  const kk=c.querySelectorAll('input[type="radio"]:checked').length,f=c.querySelector(".kp-fort");
+  if(f){f.textContent=kk+"/4";f.classList.toggle("voll",kk===4);}
+ });
+ document.querySelectorAll("#coTest .kp-zeile").forEach(z=>z.classList.toggle("beantwortet",!!z.querySelector('input:checked')));
+}
+async function coAntwort(id,key,wert){
+ coStandAktualisieren();
+ try{
+  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",antworten:{[key]:wert},updatedAt:serverTimestamp()},{merge:true});
+ }catch(e){console.error("Antwort speichern:",e);toast(e?.code==="permission-denied"?"Der Check-out ist nicht mehr freigeschaltet – Antwort nicht gespeichert.":"Antwort konnte nicht gespeichert werden – Verbindung prüfen.");}
+}
+async function coAbgeben(id){
+ const alle=document.querySelectorAll("#coTest .kp-zeile").length;
+ const k=document.querySelectorAll('#coTest input[type="radio"]:checked').length;
+ if(k<alle&&!confirm(`Du hast ${alle-k} Aussage(n) noch nicht beantwortet – diese zählen als Fehler. Trotzdem abgeben?`))return;
+ if(k===alle&&!confirm("Jetzt endgültig abgeben? Danach kannst du nichts mehr ändern."))return;
+ try{
+  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",abgegeben:true,abgegebenAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
+  coUnsubAll();closeModal();toast("Abgegeben ✓");await render();
+  showMotivationsBild(true,"abgabe");
+ }catch(e){console.error(e);toast("Konnte nicht abgegeben werden.");}
+}
+
+// ---- Ergebnisse ----
+function coAufgabeErgebnisHTML(q,i,erg,pdf=false,mitFall=true){
+ const E=pdf?escPDF:esc;
+ const r=erg?.auswertung?.[i];
+ const zeichen=v=>v==="r"?"richtig":v==="f"?"falsch":"nicht beantwortet";
+ if(pdf){
+  const hatErk=!!r?.erklaerung?.some(x=>x);
+  return`<div class="item"><b>${i+1}. ${E(q.stamm)}</b>${r?` <span style="float:right">${r.be} BE · ${r.fehler} Fehler</span>`:""}
+   <table class="co-erg-tab"style="width:100%;border-collapse:collapse;margin-top:6px;font-size:13px"><thead><tr><th style="text-align:left">Aussage</th><th>angekreuzt</th><th>Lösung</th><th></th>${hatErk?`<th style="text-align:left">Begründung</th>`:""}</tr></thead><tbody>
+   ${(q.aussagen||[]).map((t,j)=>`<tr><td>${j+1}. ${E(t)}</td><td style="text-align:center">${zeichen(r?.angekreuzt?.[j])}</td><td style="text-align:center">${r?(r.loesung?.[j]?"richtig":"falsch"):"–"}</td><td style="text-align:center">${r?(r.korrekt?.[j]?"✓":"✗"):""}</td>${hatErk?`<td>${E(r?.erklaerung?.[j]||"")}</td>`:""}</tr>`).join("")}
+   </tbody></table></div>`;
+ }
+ const fall=mitFall&&(q.vignette?.text||q.material?.text)?`<details class="kp-fall"><summary>📖 Fallvignette${q.material?.text?" und Material":""} anzeigen</summary>${coFallHTML(q,false)}</details>`:`<div class="kp-frage"><strong class="kp-stamm">${E(q.stamm)}</strong></div>`;
+ return`<section class="kp-karte kp-erg"><header class="kp-kopf"><span class="kp-nummer">${i+1}</span><div><b>Aufgabe ${i+1}</b>${r?`<small>${r.fehler===0?"alles richtig":r.fehler+(r.fehler===1?" Fehler":" Fehler")}</small>`:""}</div>${r?`<span class="kp-be${r.be===CHECKOUT_BE_NACH_FEHLERN[0]?" voll":""}">${r.be} BE</span>`:""}</header>
+  ${fall}
+  <div class="kp-liste">${(q.aussagen||[]).map((t,j)=>{const ok=r?.korrekt?.[j];const ang=r?.angekreuzt?.[j];return`<div class="kp-zeile kp-ergz ${r?(ok?"ok":"nein"):""}"><span class="kp-num">${r?(ok?"✓":"✗"):j+1}</span>
+   <div class="kp-text"><p>${E(t)}</p>${r?`<div class="kp-chips"><span class="kp-chip">Deine Antwort: <b>${zeichen(ang)}</b></span><span class="kp-chip loes">Lösung: <b>${r.loesung?.[j]?"richtig":"falsch"}</b></span></div>${r.erklaerung?.[j]?`<div class="kp-erk">💡 ${E(r.erklaerung[j])}</div>`:""}`:""}</div></div>`;}).join("")}</div></section>`;
+}
+function coSummeHTML(erg){return erg?.ausgewertet?`<b>${erg.be} von ${erg.maxBE} BE (${String(erg.prozent).replace(".",",")} %) · ${npText(erg.notenpunkte)}</b>`:"nicht ausgewertet";}
+async function openCheckoutMeinErgebnis(id){
+ try{
+  const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`))]);
+  const co=c.data(),erg=a.exists()?a.data():null;
+  modal(`<button class="modal-close"onclick="closeModal()">×</button>
+   <div class="kicker">🏁 CHECK-OUT · DEIN ERGEBNIS</div><h2>${esc(co.titel)}</h2>
+   <div class="co-summe">${coSummeHTML(erg)}</div>
+   ${coGemeinsameSituation(co)?`<div class="co-vignette"style="border-left-color:${PP_FARBEN[co.lbNum]||"#4a90d9"}">${coSituationHTML(co.vignette)}</div>`:""}
+   ${(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg)).join("")}
+   <div class="form-actions"><button class="secondary"onclick="coPdfSchueler('${id}')">PDF herunterladen</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+ }catch(e){console.error(e);toast("Konnte nicht geladen werden.");}
+}
+async function coLadeErgebnisse(id){
+ const [c,ab,students]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDocs(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id))),getAllUsersForLernstand()]);
+ const co={id,...c.data()};const abgaben={};ab.docs.forEach(d=>{const x=d.data();abgaben[x.uid]=x;});
+ return{co,abgaben,students};
+}
+async function openCheckoutErgebnisse(id){
+ if(!isTeacher())return;
+ let d;try{d=await coLadeErgebnisse(id);}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
+ const {co,abgaben,students}=d;
+ const erg=Object.values(abgaben).filter(a=>a.ausgewertet);
+ const schnitt=erg.length?(erg.reduce((s,a)=>s+a.notenpunkte,0)/erg.length).toFixed(1).replace(".",","):"–";
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUT · ERGEBNISSE · NUR LEHRKRÄFTE</div><h2>${esc(co.titel)}</h2>
+  <p style="font-size:13px;color:var(--muted)">${coDatum(co.datum)} · ${erg.length} ausgewertet · Klassenschnitt ${schnitt} Punkte</p>
+  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>Ergebnis</th></tr></thead>
+  <tbody>${students.map(s=>{const a=abgaben[s.uid];
+   if(!a)return`<tr><td>${esc(s.displayName||s.email||"")}</td><td colspan="${(co.aufgaben||[]).length+2}"style="color:var(--muted)">nicht teilgenommen</td></tr>`;
+   if(!a.ausgewertet)return`<tr><td>${esc(s.displayName||s.email||"")}</td><td colspan="${(co.aufgaben||[]).length+2}">noch nicht ausgewertet</td></tr>`;
+   return`<tr style="cursor:pointer"onclick="openCheckoutSchuelerErgebnis('${id}','${s.uid}')"><td>${esc(s.displayName||s.email||"")}</td>${(a.auswertung||[]).map(r=>`<td style="text-align:center"title="${r.fehler} Fehler">${r.be}</td>`).join("")}<td style="text-align:center">${a.be}/${a.maxBE}</td><td><b>${npText(a.notenpunkte)}</b></td></tr>`;}).join("")}</tbody></table></div>
+  <div class="form-actions"style="margin-top:14px">
+   <button class="secondary"onclick="coNeuAuswerten('${id}')">Neu auswerten</button>
+   <button class="secondary"onclick="coLoeschen('${id}')">Löschen</button>
+   <button class="primary"onclick="coPdfKlasse('${id}')">PDF Klasse</button>
+   <button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+async function openCheckoutSchuelerErgebnis(id,uid){
+ let d;try{d=await coLadeErgebnisse(id);}catch(e){return}
+ const a=d.abgaben[uid],s=d.students.find(x=>x.uid===uid);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUT · ${esc(s?.displayName||s?.email||"")}</div><h2>${esc(d.co.titel)}</h2>
+  <div class="co-summe">${coSummeHTML(a)}</div>
+  ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a)).join("")}
+  <div class="form-actions"><button class="secondary"onclick="openCheckoutErgebnisse('${id}')">← Zurück</button><button class="secondary"onclick="coPdfSchueler('${id}','${uid}')">PDF</button></div>`);
+}
+
+// ---- PDF (Druckfenster „Als PDF sichern") ----
+function coPdfBlock(co,erg,name){
+ return`<div class="item"style="background:#f5f7f8"><strong>${escPDF(name)}</strong><div>${erg?.ausgewertet?`${erg.be} von ${erg.maxBE} BE (${String(erg.prozent).replace(".",",")} %) · <b>${npText(erg.notenpunkte)}</b>`:"nicht teilgenommen"}</div></div>
+  ${erg?.ausgewertet?(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg,true)).join(""):""}`;
+}
+function coVignettePdf(co){
+ const g=coGemeinsameSituation(co);
+ if(g)return`<div class="item">${coSituationHTML(g,true)}</div>`;
+ return(co.aufgaben||[]).map((q,i)=>`<div class="item"><b>Aufgabe ${i+1}</b>${coFallHTML({...q,stamm:""},true).replace(/<strong class="kp-stamm"><\/strong>/,"").replace(/<div class="kp-anleitung">.*?<\/div>/,"")}</div>`).join("");
+}
+async function coPdfSchueler(id,uid){
+ uid=uid||currentUser.uid;
+ try{
+  const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${uid}`))]);
+  const co=c.data(),erg=a.exists()?a.data():null;
+  openToolPrintWindow(`${co.titel} – Ergebnis`,coVignettePdf(co)+coPdfBlock(co,erg,erg?.name||profile?.displayName||""),`F11Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)}`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+async function coPdfKlasse(id){
+ if(!isTeacher())return;
+ try{
+  const {co,abgaben,students}=await coLadeErgebnisse(id);
+  const tabelle=`<table><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>
+   ${students.map(s=>{const a=abgaben[s.uid];return`<tr><td>${escPDF(s.displayName||s.email||"")}</td>${a?.ausgewertet?(a.auswertung||[]).map(r=>`<td>${r.be}</td>`).join("")+`<td>${a.be}/${a.maxBE}</td><td>${String(a.prozent).replace(".",",")}</td><td><b>${npText(a.notenpunkte)}</b></td>`:`<td colspan="${(co.aufgaben||[]).length+3}">nicht teilgenommen</td>`}</tr>`;}).join("")}</tbody></table>`;
+  const einzel=students.filter(s=>abgaben[s.uid]?.ausgewertet).map(s=>`<div style="break-before:page">${coPdfBlock(co,abgaben[s.uid],s.displayName||s.email||"")}</div>`).join("");
+  openToolPrintWindow(`${co.titel} – Ergebnisse der Klasse`,`<h2>Übersicht</h2>${tabelle}<div style="break-before:page"></div>${coVignettePdf(co)}${einzel}`,`F11Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)} · Wertung je Aufgabe ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+
+// ---- Kurzarbeit-Ersatz: 7 aus 10 ----
+async function openCheckoutAuswahl(){
+ const d=await ladeCheckoutDaten();
+ if(!coAuswahlStatus(d.einst).offen){toast("Die Auswahl ist gerade nicht freigeschaltet.");return}
+ const pool=coPool(d.checkouts,d.einst).filter(c=>d.meineAbgaben[c.id]?.ausgewertet);
+ const gewaehlt=new Set(d.auswahl?.ids||[]);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 KURZARBEIT-ERSATZ</div><h2>Wähle ${d.einst.anzahlWaehlen} Tests aus deiner Bibliothek</h2>
+  <p style="font-size:13px;color:var(--muted);margin-top:0">Der Durchschnitt der Notenpunkte deiner Auswahl ersetzt eine Kurzarbeit. Ab ,5 wird aufgerundet.</p>
+  ${pool.length<d.einst.anzahlWaehlen?`<div class="empty">Du hast erst ${pool.length} gewertete Check-outs – du brauchst mindestens ${d.einst.anzahlWaehlen}.</div>`:""}
+  <div class="list"id="coAuswahlListe">${pool.map(c=>{const a=d.meineAbgaben[c.id];return`<label class="list-item co-wahl"><input type="checkbox"value="${c.id}"data-np="${a.notenpunkte}"${gewaehlt.has(c.id)?" checked":""} onchange="coAuswahlStand(${d.einst.anzahlWaehlen})"><div style="flex:1"><strong>${esc(c.titel)}</strong><small>LB ${esc(c.lbNum)} · ${coDatum(c.datum)}</small></div><b>${npText(a.notenpunkte)}</b></label>`;}).join("")}</div>
+  <div class="co-test-fuss"><span id="coAuswahlStand"></span><button class="primary"onclick="coAuswahlSpeichern(${d.einst.anzahlWaehlen})">Auswahl speichern</button></div>`);
+ coAuswahlStand(d.einst.anzahlWaehlen);
+}
+function coAuswahlStand(soll){
+ const boxen=[...document.querySelectorAll("#coAuswahlListe input:checked")];
+ const nps=boxen.map(b=>Number(b.dataset.np)||0);
+ const el=$("coAuswahlStand");if(!el)return;
+ const schnitt=nps.length?nps.reduce((a,b)=>a+b,0)/nps.length:0;
+ el.innerHTML=`${nps.length} von ${soll} gewählt${nps.length?` · Ø ${schnitt.toFixed(1).replace(".",",")} → <b>${npText(coRundenAuf(schnitt))}</b>`:""}`;
+ el.style.color=nps.length===soll?"#3e7a2a":"var(--muted)";
+}
+async function coAuswahlSpeichern(soll){
+ const ids=[...document.querySelectorAll("#coAuswahlListe input:checked")].map(b=>b.value);
+ if(ids.length!==soll){toast(`Bitte genau ${soll} Check-outs auswählen.`);return}
+ try{
+  await setDoc(doc(db,"checkoutAuswahl",currentUser.uid),{uid:currentUser.uid,name:profile?.displayName||currentUser.email||"",ids,updatedAt:serverTimestamp()});
+  toast("Auswahl gespeichert.");closeModal();await render();showMotivationsBild(false,"haken","coauswahl");
+ }catch(e){console.error(e);toast(e?.code==="permission-denied"?"Die Auswahl ist nicht (mehr) freigeschaltet.":"Konnte nicht gespeichert werden.");}
+}
+// Alle Daten einer Person für die PDFs (Schüler:in: nur eigene, Lehrkraft: jede Person).
+async function coLadeSchueler(uid){
+ uid=uid||currentUser.uid;
+ const [cs,ab,aw]=await Promise.all([
+  getDocs(query(collection(db,"checkouts"),where("status","==","beendet"))),
+  getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",uid))),
+  getDoc(doc(db,"checkoutAuswahl",uid))
+ ]);
+ const checkouts=cs.docs.map(x=>({id:x.id,...x.data()})).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||""))||tsSek(a.createdAt)-tsSek(b.createdAt));
+ const abgaben={};let name="";
+ ab.docs.forEach(x=>{const a=x.data();abgaben[a.checkoutId]=a;if(!name&&a.name)name=a.name;});
+ if(!name&&uid===currentUser.uid)name=profile?.displayName||"";
+ return{uid,name,checkouts,abgaben,auswahl:aw.exists()?aw.data():null};
+}
+// Tag, an dem der Test gemacht wurde (Abgabe), sonst das Datum des Check-outs.
+function coTestDatum(co,a){const d=coTsDatum(a?.abgegebenAt);return d?d.toLocaleDateString("de-DE"):coDatum(co.datum);}
+function coProz(x){return String(Math.round(x*10)/10).replace(".",",");}
+// Ein Respizienz-Blatt: alle Angaben zur Ablage der gewählten Tests einer Person.
+function coRespizienzHTML(name,tests,abgaben,einst){
+ const zeilen=tests.map(c=>({c,a:abgaben[c.id]})).filter(x=>x.a?.ausgewertet);
+ if(!zeilen.length)return`<div class="item"><strong>${escPDF(name)}</strong><div>Keine ausgewerteten Tests in der Auswahl.</div></div>`;
+ const nA=Math.max(...zeilen.map(x=>(x.a.auswertung||[]).length));
+ const e=coErsatz(zeilen.map(x=>x.c.id),abgaben);
+ const gesamtProz=e.maxBE?e.be/e.maxBE*100:0;
+ const kopfA=Array.from({length:nA},(_,k)=>`<th>A${k+1}</th>`).join("");
+ const zl=zeilen.map((x,i)=>{const a=x.a,p=Number(a.prozent)||0;
+  return`<tr><td>${i+1}</td><td>${escPDF(coTestDatum(x.c,a))}</td><td>${escPDF(x.c.titel||"Check-out")}</td><td>LB ${escPDF(x.c.lbNum||"")}</td>${Array.from({length:nA},(_,k)=>`<td style="text-align:center">${a.auswertung?.[k]?a.auswertung[k].be:"–"}</td>`).join("")}<td style="text-align:center"><b>${a.be}</b></td><td style="text-align:center">${a.maxBE}</td><td style="text-align:center">${coProz(p)}</td><td style="text-align:center"><b>${a.notenpunkte}</b></td><td style="width:70px"><div style="background:#e6ebef;height:9px;border-radius:5px"><div style="width:${Math.max(0,Math.min(100,p))}%;height:9px;border-radius:5px;background:#5a7f99"></div></div></td></tr>`;}).join("");
+ const summe=`<tr style="border-top:2px solid #999"><td colspan="${4+nA}"><b>Gesamt (${zeilen.length} Tests)</b></td><td style="text-align:center"><b>${e.be}</b></td><td style="text-align:center"><b>${e.maxBE}</b></td><td style="text-align:center"><b>${coProz(gesamtProz)}</b></td><td style="text-align:center"><b>Ø ${e.schnitt.toFixed(2).replace(".",",")}</b></td><td></td></tr>`;
+ const schl=FOSBOS_SCHLUESSEL.map(([np,min])=>`${np}: ab ${min} %`).join(" · ");
+ return`<div class="item"style="background:#f5f7f8"><strong style="font-size:15px">${escPDF(name)}</strong>
+  <div>F11Sb · FOSBOS Weilheim · Pädagogik/Psychologie · Schuljahr 2026/27</div>
+  <div>Kurzarbeit-Ersatz: ${zeilen.length} von der Schülerin / dem Schüler gewählte Check-outs (jeweils ${nA} K-Prim-Aufgaben)</div></div>
+ <table style="font-size:11.5px"><thead><tr><th>Nr.</th><th>Datum</th><th>Check-out</th><th>LB</th>${kopfA}<th>BE</th><th>max.</th><th>%</th><th>NP</th><th>Verteilung</th></tr></thead><tbody>${zl}${summe}</tbody></table>
+ <div class="item"style="margin-top:12px"><div><b>Ergebnis:</b> Durchschnitt der Notenpunkte ${e.schnitt.toFixed(2).replace(".",",")}, gerundet (ab ,5 wird aufgerundet): <b style="font-size:15px">${escPDF(npText(e.np))}</b></div>
+  <div>Summe der Bewertungseinheiten: ${e.be} von ${e.maxBE} BE (${coProz(gesamtProz)} %), zur Information.</div></div>
+ <div style="font-size:10.5px;color:#666;margin-top:6px">A1–A${nA}: Bewertungseinheiten (BE) je K-Prim-Aufgabe, ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern, sonst 0 BE. BE = erreichte, max. = mögliche Bewertungseinheiten des Tests. Notenpunkte nach dem P/P-Bewertungsschlüssel (FOSBOS Bayern, Stand 13.09.2022): ${schl}, darunter 0.</div>
+ <div style="margin-top:26px;font-size:12px">Respizienz: Datum ______________ &nbsp;&nbsp; Unterschrift ______________________</div>`;
+}
+async function coPdfRespizienz(uid){
+ try{
+  const s=await coLadeSchueler(uid);
+  const ids=s.auswahl?.ids||[];
+  if(!ids.length){toast("Es liegt noch keine Auswahl vor.");return}
+  const tests=ids.map(id=>s.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
+  openToolPrintWindow(`Respizienz – ${s.name||"Schüler:in"}`,coRespizienzHTML(s.name||"Schüler:in",tests,s.abgaben),`F11Sb · Pädagogik/Psychologie · Kurzarbeit-Ersatz · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+// Alle Ergebnisse einer Person: Übersicht + jeder Test mit Aufgaben und Lösung.
+async function coPdfSchuelerAlle(uid){
+ try{
+  const s=await coLadeSchueler(uid);
+  const mit=s.checkouts.filter(c=>s.abgaben[c.id]);
+  if(!mit.length){toast("Es liegen noch keine Ergebnisse vor.");return}
+  const tab=`<table style="font-size:12px"><thead><tr><th>Datum</th><th>Check-out</th><th>LB</th><th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>${mit.map(c=>{const a=s.abgaben[c.id];return`<tr><td>${escPDF(coTestDatum(c,a))}</td><td>${escPDF(c.titel||"")}</td><td>LB ${escPDF(c.lbNum||"")}</td>${a.ausgewertet?`<td>${a.be}/${a.maxBE}</td><td>${coProz(Number(a.prozent)||0)}</td><td><b>${escPDF(npText(a.notenpunkte))}</b></td>`:`<td colspan="3">noch nicht ausgewertet</td>`}</tr>`;}).join("")}</tbody></table>`;
+  const einzel=mit.filter(c=>s.abgaben[c.id].ausgewertet).map(c=>`<div style="break-before:page"><h2>${escPDF(c.titel||"")} · ${escPDF(coTestDatum(c,s.abgaben[c.id]))}</h2>${coVignettePdf(c)}${coPdfBlock(c,s.abgaben[c.id],s.name)}</div>`).join("");
+  openToolPrintWindow(`Check-out-Ergebnisse – ${s.name||"Schüler:in"}`,`<div class="item"style="background:#f5f7f8"><strong>${escPDF(s.name||"Schüler:in")}</strong><div>${mit.length} Check-outs</div></div>${tab}${einzel}`,`F11Sb · Pädagogik/Psychologie · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+async function coPdfRespizienzKlasse(){
+ if(!isTeacher())return;
+ try{
+  const {d,students,abgaben,auswahl}=await coLadeKlasse();
+  const mit=students.filter(x=>(auswahl[x.uid]?.ids||[]).length);
+  if(!mit.length){toast("Noch keine Auswahl vorhanden.");return}
+  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(x.displayName||x.email||"")).join(", ");
+  const seiten=mit.map(x=>{
+   const ab=abgaben[x.uid]||{};
+   const tests=(auswahl[x.uid].ids||[]).map(id=>d.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
+   return`<div style="break-before:page">${coRespizienzHTML(x.displayName||x.email||"Schüler:in",tests,ab)}</div>`;
+  }).join("");
+  const uebersicht=`<h2>Übersicht Kurzarbeit-Ersatz</h2><table><thead><tr><th>Schüler:in</th><th>BE gesamt</th><th>Ø Notenpunkte</th><th>Ersatznote</th></tr></thead><tbody>${mit.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td>${escPDF(x.displayName||x.email||"")}</td><td>${e?`${e.be}/${e.maxBE}`:"–"}</td><td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?escPDF(npText(e.np)):"–"}</b></td></tr>`;}).join("")}</tbody></table>${ohne?`<p class="empty">Keine Auswahl: ${ohne}</p>`:""}`;
+  openToolPrintWindow("Respizienz – Kurzarbeit-Ersatz (Klasse)",uebersicht+seiten,`F11Sb · Pädagogik/Psychologie · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+async function coPdfErsatzSchueler(){return coPdfRespizienz(currentUser.uid);}
+async function openCheckoutEinstellungen(){
+ if(!isTeacher())return;
+ const d=await ladeCheckoutDaten();const e=d.einst;
+ const tag=t=>{const x=coTsDatum(t);return x?`${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,"0")}-${String(x.getDate()).padStart(2,"0")}`:"";};
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 KURZARBEIT-ERSATZ · EINSTELLUNGEN</div><h2>Check-outs als Kurzarbeit-Ersatz</h2>
+  <div class="form">
+   <label>Wie viele Tests wählen die Schüler:innen aus ihrer Bibliothek aus?<input id="coEWaehlen"type="number"min="1"max="30"value="${e.anzahlWaehlen}"></label>
+   <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <label style="flex:1;min-width:150px">Auswahl ab (Datum)<input id="coEAb"type="date"value="${esc(tag(e.auswahlAb))}"></label>
+    <label style="flex:1;min-width:150px">Auswahl bis (optional)<input id="coEBis"type="date"value="${esc(tag(e.auswahlBis))}"></label>
+   </div>
+   <label class="check"><input id="coEOffen"type="checkbox"${e.auswahlOffen?" checked":""}> Auswahl sofort öffnen, unabhängig vom Datum</label>
+   <p style="font-size:12px;color:var(--muted)">Ab dem Datum „ab“ können die Schüler:innen aus allen beendeten Check-outs, die für den Ersatz zählen, ihre ${e.anzahlWaehlen} Tests wählen. Nach dem Datum „bis“ ist die Auswahl eingefroren. Aktuell: ${esc(coAuswahlStatus(e).text)}</p>
+   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="coEinstellungenSpeichern()">Speichern</button></div>
+  </div>`);
+}
+async function coEinstellungenSpeichern(){
+ const anzahlWaehlen=Math.max(1,Math.min(30,Number($("coEWaehlen").value)||7));
+ const ab=$("coEAb").value,bis=$("coEBis").value;
+ if(ab&&bis&&bis<ab){toast("„Bis“ darf nicht vor „ab“ liegen.");return}
+ try{
+  await setDoc(doc(db,"checkoutEinstellungen","pp"),{anzahlWaehlen,auswahlOffen:$("coEOffen").checked,
+   auswahlAb:ab?new Date(ab+"T00:00:00"):null,auswahlBis:bis?new Date(bis+"T23:59:59"):null,updatedAt:serverTimestamp()},{merge:true});
+  toast("Gespeichert.");closeModal();await render();
+ }catch(e){console.error(e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+}
+async function coLadeKlasse(){
+ const d=await ladeCheckoutDaten();
+ const pool=coPool(d.checkouts,d.einst);
+ const [students,ab,aw]=await Promise.all([getAllUsersForLernstand(),getDocs(collection(db,"checkoutAbgaben")),getDocs(collection(db,"checkoutAuswahl"))]);
+ const abgaben={};ab.docs.forEach(x=>{const a=x.data();(abgaben[a.uid]=abgaben[a.uid]||{})[a.checkoutId]=a;});
+ const auswahl={};aw.docs.forEach(x=>{auswahl[x.id]=x.data();});
+ return{d,pool,students,abgaben,auswahl};
+}
+async function openCheckoutKlassenuebersicht(){
+ if(!isTeacher())return;
+ let k;try{k=await coLadeKlasse();}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
+ const {pool,students,abgaben,auswahl,d}=k;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🏁 CHECK-OUTS · ERGEBNISSE JE SCHÜLER:IN</div><h2>Ergebnisse und Kurzarbeit-Ersatz</h2>
+  <p style="font-size:12px;color:var(--muted);margin-top:0">Zahlen = Notenpunkte je Check-out (Spalten nach Datum). Grün markiert = von der Schülerin / dem Schüler für den Ersatz gewählt (${d.einst.anzahlWaehlen} Tests). PDF Ergebnisse = alle Tests der Person, PDF Respizienz = die gewählten Tests mit allen Angaben zur Ablage.</p>
+  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th><th>PDF</th></tr></thead>
+  <tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
+   return`<tr><td>${esc(s.displayName||s.email||"")}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td style="white-space:nowrap"><button class="secondary"style="font-size:11px"onclick="coPdfSchuelerAlle('${s.uid}')">Ergebnisse</button> <button class="secondary"style="font-size:11px"onclick="coPdfRespizienz('${s.uid}')"${e?"":" disabled"}>Respizienz</button></td></tr>`;}).join("")}</tbody></table></div>
+  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button><button class="secondary"onclick="coPdfErsatzKlasse()">PDF Übersicht Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+}
+async function coPdfErsatzKlasse(){
+ if(!isTeacher())return;
+ try{
+  const {pool,students,abgaben,auswahl,d}=await coLadeKlasse();
+  const legende=`<div class="item">${pool.map((c,i)=>`${i+1}: ${escPDF(c.titel)} (${coDatum(c.datum)})`).join(" · ")}</div>`;
+  const tab=`<table><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th>${i+1}</th>`).join("")}<th>Ø Auswahl</th><th>Ersatznote</th></tr></thead><tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
+   return`<tr><td>${escPDF(s.displayName||s.email||"")}</td>${pool.map(c=>`<td>${a[c.id]?.ausgewertet?(w.has(c.id)?`<b>[${a[c.id].notenpunkte}]</b>`:a[c.id].notenpunkte):"–"}</td>`).join("")}<td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table>`;
+  openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs (Klasse)",legende+tab,`F11Sb · Pädagogik/Psychologie · [x] = gewählt · ${d.einst.anzahlWaehlen} Tests je Schüler:in`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+Object.assign(window,{coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
+ openCheckoutTest,coAntwort,coAbgeben,openCheckoutMeinErgebnis,openCheckoutErgebnisse,openCheckoutSchuelerErgebnis,coPdfSchueler,coPdfKlasse,
+ openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfRespizienz,coPdfRespizienzKlasse,coPdfSchuelerAlle});
 
 async function renderFachDetail(){
  if(!activeFach)return await renderFaecherUebersicht();
- const fach=F12SB_LEHRPLAN_FAECHER.find(f=>f.key===activeFach);
- const taskcardLinks=await ladeTaskcardLinks();
+ const fach=F11SB_FAECHER.find(f=>f.key===activeFach);
+ const timeline=combinedTimeline(activeFach);
+ const wochenItems=timeline.filter(t=>t.kind==="woche");
+ const fortschritte=await Promise.all(wochenItems.map(async w=>({id:w.id,f:await getLehrplanFortschritt(w.id)})));
+ const fortschrittMap={};fortschritte.forEach(x=>fortschrittMap[x.id]=x.f);
+ const praktikumsAuftraege=await getPraktikumsAuftraege();
+ const heute=new Date().toISOString().slice(0,10);
+ const erledigtCount=wochenItems.filter(w=>fortschrittMap[w.id]?.abgeschlossen).length;
+ const fortschrittProzent=wochenItems.length?Math.round(erledigtCount/wochenItems.length*100):0;
+ const naechsteIdx=timeline.findIndex(item=>item.kind==="woche"&&!fortschrittMap[item.id]?.abgeschlossen);
 
- return`<button class="secondary"onclick="closeFach()">← Zurück</button>
- ${pageHead("LERNPFAD",fach?.label||"Fach","Der Zeitstrahl zeigt, wann welches Thema drankommt – zum reinen Orientieren, nichts zum Anklicken.",isTeacher()?`<button class="secondary"onclick="openLehrplanKlassenuebersicht('${activeFach}')"> Klassenübersicht</button>`:"")}
- ${horizontalerZeitstrahlHTML()}
- ${lernbereichKachelnHTML(taskcardLinks)}
+ if(activeFach==="paedagogik")return await renderPaedagogikPhasenZeitstrahl(fach,fortschrittMap,heute);
+
+ return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
+ ${pageHead("LERNPFAD",fach?.label||"Fach",`Dein Weg durchs Schuljahr – ${erledigtCount} von ${wochenItems.length} Wochen geschafft.`,isTeacher()?`<button class="secondary"onclick="openLehrplanKlassenuebersicht('${activeFach}')"> Klassenübersicht</button>`:"")}
+ <style>
+ .lernpfad{position:relative;margin:20px 0 10px;padding-left:44px}
+ .lp-linie-hinter{position:absolute;left:20px;top:6px;bottom:6px;width:5px;background:#e2eaf0;border-radius:3px}
+ .lp-linie-vorne{position:absolute;left:20px;top:6px;width:5px;background:linear-gradient(180deg,#3fa66a,#5cc98a);border-radius:3px;transition:height .4s}
+ .lp-node{position:relative;margin-bottom:20px}
+ .lp-punkt{position:absolute;left:-44px;top:0;width:40px;height:40px;border-radius:50%;background:#fff;border:3px solid #b8c4cc;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;z-index:2;transition:.2s}
+ .lp-punkt.lp-done{background:#3fa66a;border-color:#3fa66a;color:#fff}
+ .lp-punkt.lp-projekt{border-color:#3fa66a;color:#3fa66a}
+ .lp-punkt.lp-einzel{border-color:#e0a324;color:#e0a324}
+ .lp-punkt.lp-aktuell{transform:scale(1.15);box-shadow:0 0 0 5px rgba(22,136,207,.25)}
+ .lp-karte{background:#fff;border:1px solid var(--line,#e2eaf0);border-radius:14px;padding:14px 16px;cursor:pointer;transition:.15s}
+ .lp-karte:hover{transform:translateX(4px);box-shadow:0 6px 16px rgba(23,56,79,.1)}
+ .lp-karte-date{font-size:11px;color:var(--muted)}
+ .lb-badge{font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;border:1.5px solid;white-space:nowrap}
+ .lp-karte strong{display:block;font-size:13px;margin-top:2px}
+ .lp-karte small{display:block;color:var(--muted);font-size:11px;margin-top:4px;line-height:1.4}
+ .lp-typ-pill{margin-top:8px;display:inline-block;font-size:10px}
+ .lp-legende{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;padding:10px 14px;background:#f7fafc;border-radius:10px;font-size:11px;color:var(--muted)}
+ .lp-legende-item{display:flex;align-items:center;gap:6px}
+ .lp-legende-dot{width:14px;height:14px;border-radius:50%;border:2px solid;display:inline-block;flex:0 0 auto}
+ .lp-legende-raute{border-radius:4px;transform:rotate(45deg);width:12px;height:12px;font-size:7px;display:flex;align-items:center;justify-content:center}
+ .lp-legende-raute i{transform:rotate(-45deg);font-style:normal}
+ .lp-waypoint{position:relative;margin:26px 0}
+ .lp-waypoint-punkt{position:absolute;left:-44px;top:0;width:40px;height:40px;border-radius:10px;background:var(--soft-blue);border:3px solid #4a90d9;display:flex;align-items:center;justify-content:center;font-size:17px;transform:rotate(45deg);z-index:2}
+ .lp-waypoint-punkt span{transform:rotate(-45deg);display:block}
+ .lp-waypoint-karte{background:#fff;border-left:4px solid #4a90d9;border-radius:12px;padding:10px 14px;font-size:12px;cursor:pointer;transition:.15s}
+ .lp-waypoint-karte:hover{transform:translateX(4px)}
+ .lp-waypoint-karte strong{display:block;font-size:12.5px}
+ .lp-block-head{position:relative;margin:30px 0 14px;padding-left:2px}
+ .lp-block-head::before{content:"";position:absolute;left:-44px;top:50%;width:24px;height:2px;background:#b8c4cc}
+ .lp-block-head strong{font-size:13px;color:#17384f;text-transform:uppercase;letter-spacing:.03em}
+ .lp-block-head small{color:var(--muted);margin-left:6px}
+ .lp-heute{position:relative;margin:6px 0 24px;display:flex;align-items:center;gap:10px}
+ .lp-heute::before{content:"";position:absolute;left:-44px;top:50%;width:34px;height:3px;background:#d9534f}
+ .lp-heute-pill{background:#d9534f;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;letter-spacing:.02em}
+ .lp-heute-linie{flex:1;height:2px;background:repeating-linear-gradient(90deg,#d9534f 0 6px,transparent 6px 12px)}
+ @media(max-width:600px){.lernpfad{padding-left:38px}.lp-punkt,.lp-waypoint-punkt{left:-38px;width:34px;height:34px}.lp-block-head::before,.lp-heute::before{left:-38px;width:20px}}
+ </style>
+ <div class="lp-legende">
+ <span class="lp-legende-item"><span class="pill"style="background:#3fa66a;color:#fff;font-size:10px"> Projekt</span></span>
+ <span class="lp-legende-item"><span class="pill"style="background:#e0a324;color:#fff;font-size:10px"> Einzelthema</span></span>
+ </div>
+ <div class="lp-legende"style="margin-top:6px">
+ ${[1,2,3,4].map(n=>`<span class="lp-legende-item"><span class="lb-badge"style="background:${LERNBEREICH_FARBEN[n].bg};border-color:${LERNBEREICH_FARBEN[n].border};color:${LERNBEREICH_FARBEN[n].text}">Lernbereich ${n}</span></span>`).join("")}
+ </div>
+ <div class="lernpfad">
+ <div class="lp-linie-hinter"></div>
+ <div class="lp-linie-vorne"style="height:${fortschrittProzent}%"></div>
+ ${(()=>{let lastBlock=null;let heuteEingefuegt=false;const heuteHTML=`<div class="lp-heute"><span class="lp-heute-pill"> HEUTE</span><span class="lp-heute-linie"></span></div>`;return timeline.map((item,idx)=>{
+ let heuteMarkerHTML="";
+ if(!heuteEingefuegt&&item.start>=heute){heuteMarkerHTML=heuteHTML;heuteEingefuegt=true;}
+ if(item.kind==="praktikum"){
+ const auftrag=praktikumsAuftraege[item.id];
+ return`${heuteMarkerHTML}<div class="lp-waypoint">
+ <div class="lp-waypoint-punkt"><span>${item.icon||"🏥"}</span></div>
+ <div class="lp-waypoint-karte"onclick="openPraktikumsphaseAuftragForm('${item.id}')">
+ <span class="lp-karte-date">${esc(fmtDateOnly(item.start))}–${esc(fmtDateOnly(item.end))}</span>
+ <strong>${esc(item.titel)}</strong>
+ <small>${auftrag?` ${esc(auftrag.titel)}`:"Noch kein Auftrag eingetragen – antippen zum Eintragen"}</small>
+ </div>
+ </div>`;
+ }
+ const block=findUnterrichtsblock(activeFach,item.start);
+ let blockHeadHTML="";
+ if(block&&block.id!==lastBlock){
+ blockHeadHTML=`<div class="lp-block-head"><strong>${esc(block.titel)}</strong><small>${esc(block.stunden)} Std.</small></div>`;
+ lastBlock=block.id;
+ }
+ const fortschritt=fortschrittMap[item.id]||{abgeschlossen:false};
+ const aktuell=idx===naechsteIdx;
+ return`${heuteMarkerHTML}${blockHeadHTML}<div class="lp-node">
+ <div class="lp-punkt lp-${item.typ}${fortschritt.abgeschlossen?" lp-done":""}${aktuell?" lp-aktuell":""}">${fortschritt.abgeschlossen?"✓":item.typ==="projekt"?"":""}</div>
+ <div class="lp-karte"style="border-top:4px solid ${lernbereichAkzentfarbe(item.lb)}"onclick="openWocheDetail('${activeFach}','${item.id}')">
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
+ ${lernbereichBadgeHTML(item.lb)}
+ <span class="lp-karte-date">${esc(fmtDateOnly(item.start))}–${esc(fmtDateOnly(item.end))}</span>
+ </div>
+ <strong>${esc(item.thema)}</strong>
+ <small>${esc(item.planung.slice(0,90))}${item.planung.length>90?"…":""}</small>
+ <span class="pill lp-typ-pill"style="background:${item.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${item.typ==="projekt"?" Projekt":" Einzelthema"}</span>
+ </div>
+ </div>`;
+ }).join("")+(heuteEingefuegt?"":heuteHTML)})()||`<div class="empty"><strong>Für dieses Fach ist noch kein Lernpfad hinterlegt.</strong>Sobald die Jahresplanung vorliegt, erscheinen hier die einzelnen Stationen.</div>`}
+ </div>
  ${footer()}`;
 }
 window.renderFaecherUebersicht=renderFaecherUebersicht;
@@ -3394,13 +6400,15 @@ function showWocheTab(tabId){
 }
 window.showWocheTab=showWocheTab;
 
-async function openWocheDetail(fach,wocheId){
+async function openWocheDetail(fach,wocheId,startTabOverride){
+ if(istStundeneinheit(wocheId))return openAptDetail(wocheId);
  const woche=lehrplanWocheById(fach,wocheId);
  if(!woche){toast("Diese Woche wurde nicht gefunden.");return}
- const [auftrag,materialien,teams,produkte,fortschritt,lsTasks,lsAttempts]=await Promise.all([
- getLehrplanAuftrag(wocheId),getLehrplanMaterialien(wocheId),getLehrplanTeams(wocheId),
+ const [auftrag,materialien,teams,produkte,fortschritt,lsTasks,lsAttempts,basischeckFragen,meinBasischeck]=await Promise.all([
+ getLehrplanAuftrag(wocheId),getLehrplanMaterialien(wocheId),getLehrplanTeams(teamAnchorFor(wocheId)),
  getLehrplanProdukte(wocheId),getLehrplanFortschritt(wocheId),
- getLernstandTasks().catch(()=>[]),getMyLernstandAttempts().catch(()=>[])
+ getLernstandTasks().catch(()=>[]),getMyLernstandAttempts().catch(()=>[]),
+ getBasischeckFragen(wocheId),getMyBasischeckVersuch(wocheId)
  ]);
  // Verknüpfung mit der Lernstandsmessung: dieselben Aufgaben, gefiltert
  // nach dem Lernbereich dieser Woche (z. B. "LB 3" → "lb3"). Kein eigener
@@ -3412,7 +6420,7 @@ async function openWocheDetail(fach,wocheId){
  const ziele=(LEHRPLAN_ZIELE_VORSCHLAG[wocheId]||[]).map((text,i)=>({id:`z${i}`,text}));
  const alleErfuellt=ziele.length>0 && ziele.every(z=>fortschritt.zieleErfuellt?.[z.id]);
  const meinTeam=teams.find(t=>(t.mitgliederUids||[]).includes(currentUser.uid));
- const fachLbl=F12SB_FAECHER.find(f=>f.key===fach)?.label||fach;
+ const fachLbl=F11SB_FAECHER.find(f=>f.key===fach)?.label||fach;
  const meinProdukt=produkte.some(p=>p.uid===currentUser.uid);
 
  // Fortschritt: jeder Arbeitsschritt bekommt einen eigenen Haken, damit
@@ -3420,41 +6428,51 @@ async function openWocheDetail(fach,wocheId){
  const schritte=[
  {label:"Auftrag gelesen",done:!!fortschritt.auftragGelesen,tab:"ziele"},
  {label:"Material erhalten",done:!!fortschritt.materialErhalten,tab:"material"},
- ...(woche.typ==="projekt"?[{label:"Team gebildet",done:!!meinTeam,tab:"team"}]:[]),
+ ...(basischeckFragen.length?[{label:"Basis-Check",done:!!meinBasischeck,tab:"basischeck"}]:[]),
+ ...(wocheHatTeam(woche)?[{label:"Team gebildet",done:!!meinTeam,tab:"team"}]:[]),
+  ...(woche.interaktiv?[{label:"Interaktive Stunde",done:!!fortschritt.experimentErledigt,tab:"ziele"}]:[]),
  {label:"Lernprodukt",done:meinProdukt,tab:"produkte"},
- {label:"Überprüfung",done:lernstandBearbeitet,tab:"lernstand"},
+ {label:"Abschluss-Check",done:lernstandBearbeitet,tab:"lernstand"},
  {label:"Selbsteinschätzung",done:alleErfuellt,tab:"selbsteinschaetzung"},
  {label:"Fertig",done:!!fortschritt.abgeschlossen,tab:"selbsteinschaetzung"}
  ];
  let aktivIdx=schritte.findIndex(s=>!s.done);
  if(aktivIdx===-1)aktivIdx=schritte.length-1;
- const startTab=schritte[Math.min(aktivIdx,schritte.length-1)].tab;
+ const startTab=startTabOverride||schritte[Math.min(aktivIdx,schritte.length-1)].tab;
+ // Pädagogik/Psychologie: kleiner Fortschrittskopf + Querverlinkung ins APT
+ const ppKopf=fach==="paedagogik"?await ppEinheitKopfHTML(wocheId):"";
+ const aptLinks=fach==="paedagogik"?PP_EINHEITEN.filter(a=>a.typ==="apt"&&(a.bezug||[]).includes(wocheId)):[];
 
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ ${ppKopf}
  <div class="kicker">${esc(fachLbl)} · ${esc(woche.lb)} · ${esc(fmtDateOnly(woche.start))}–${esc(fmtDateOnly(woche.end))}</div>
  <h2>${esc(woche.thema)}</h2>
- <span class="pill"style="background:${woche.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${woche.typ==="projekt"?"Projektarbeit":"Selbstlern-/Eigenarbeit"}</span>
+ <span class="pill"style="background:${woche.interaktiv?"#3F7FC1":woche.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${woche.interaktiv?"Interaktive Einstiegsstunde":woche.typ==="projekt"?"Projektarbeit":"Selbstlern-/Eigenarbeit"}</span>
  <p style="margin-top:10px;color:var(--muted)">${esc(woche.planung)}</p>
  ${woche.praxis?`<div class="card"style="border-left:4px solid #4a90d9;margin-top:10px;padding:10px 12px"><strong style="font-size:12px"> Praxistransfer</strong><small style="display:block;margin-top:4px">${esc(woche.praxis)}</small></div>`:""}
+ ${aptLinks.length?`<div class="pp-bezug-box"style="--c:${lernbereichAkzentfarbe(woche.lb)}">🎓 <b>Wird im Abschlussprüfungs-Training vertieft:</b> ${aptLinks.map(a=>`<a href="javascript:void 0"onclick="openAptDetail('${a.id}')">${esc(a.thema)}</a>`).join(" · ")}</div>`:""}
 
  <div class="wd-stepper">
  ${schritte.map((s,i)=>`<div class="wd-step${s.done?" wd-step-done":""}${i===aktivIdx&&!s.done?" wd-step-aktiv":""}">
  <div class="wd-step-dot">${s.done?"✓":i+1}</div><small>${esc(s.label)}</small>
  </div>${i<schritte.length-1?`<div class="wd-step-line${schritte[i+1].done||s.done?" wd-step-line-done":""}"></div>`:""}`).join("")}
  </div>
+ ${isTeacher()?(()=>{const ph=projektPhaseByWoche(wocheId);return`<div style="margin:-10px 0 16px;display:flex;gap:8px;flex-wrap:wrap"><button class="secondary"style="font-size:11px"onclick="openWochenLiveUebersicht('${fach}','${wocheId}')"> Live-Übersicht: Wo steht die Klasse gerade?</button>${ph?`<button class="primary"style="font-size:11px"onclick="openPhasenLiveUebersicht('${ph.id}')"> Projekt-Live-Übersicht (${esc(ph.titel)})</button>`:""}</div>`;})():""}
 
  <div class="wd-tabs">
  <button type="button"class="wd-tab"data-tab="ziele"onclick="showWocheTab('ziele')"> Lernziele und Aufgaben</button>
  <button type="button"class="wd-tab"data-tab="material"onclick="showWocheTab('material')"> Lernmaterialien</button>
- <button type="button"class="wd-tab"data-tab="team"onclick="showWocheTab('team')"> ${woche.typ==="projekt"?"Team":"(Team)"}</button>
+ ${basischeckFragen.length||isTeacher()?`<button type="button"class="wd-tab"data-tab="basischeck"onclick="showWocheTab('basischeck')"> Basis-Check</button>`:""}
+ <button type="button"class="wd-tab"data-tab="team"onclick="showWocheTab('team')"> ${wocheHatTeam(woche)?"Team":"(Team)"}</button>
  <button type="button"class="wd-tab"data-tab="produkte"onclick="showWocheTab('produkte')"> Lernprodukte</button>
- <button type="button"class="wd-tab"data-tab="lernstand"onclick="showWocheTab('lernstand')"> Überprüfung des Lernstandes</button>
+ <button type="button"class="wd-tab"data-tab="lernstand"onclick="showWocheTab('lernstand')"> Abschluss-Check</button>
  <button type="button"class="wd-tab"data-tab="selbsteinschaetzung"onclick="showWocheTab('selbsteinschaetzung')"> Selbsteinschätzung</button>
  </div>
 
  <div class="wd-panel"id="wdPanel_ziele">
+ ${woche.interaktiv?await stundeKarteHTML(fortschritt):""}
  <div class="wd-ziele-info">
- <strong> Lernziele laut Lehrplan</strong> <small>(${esc(woche.lb)}, LehrplanPLUS FOS 12 Pädagogik/Psychologie)</small>
+ <strong> Lernziele laut Lehrplan</strong> <small>(${esc(woche.lb)}, LehrplanPLUS FOS 11 Pädagogik/Psychologie)</small>
  <ul>${ziele.map(z=>`<li>${esc(z.text)}</li>`).join("")||"<li>Für dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</li>"}</ul>
  </div>
 
@@ -3470,7 +6488,7 @@ async function openWocheDetail(fach,wocheId){
  </div>`
  :!auftrag?`<div class="empty">Für diese Woche wurde noch kein Arbeitsauftrag eingetragen.</div>`
  :`<div class="card"style="border-left:4px solid #4a90d9"><strong>${esc(auftrag.titel)}</strong>${auftrag.beschreibung?`<p style="margin:6px 0 0;white-space:pre-wrap">${esc(auftrag.beschreibung)}</p>`:""}</div>`}
- ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.auftragGelesen?"checked":""}onchange="toggleAuftragGelesen('${fach}','${wocheId}',this.checked)"><span> Auftrag gelesen, Ziele sind mir klar</span></label>`:""}
+ ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.auftragGelesen?"checked":""} onchange="toggleAuftragGelesen('${fach}','${wocheId}',this.checked)"><span> Auftrag gelesen, Ziele sind mir klar</span></label>`:""}
  <p style="font-size:11px;color:var(--muted);margin:16px 0 6px">Bevor es losgeht:</p>
  ${miniToolRow([["🧭","Lernpfad","lernpfad"],["🤔","Metakognition","metakognition"]])}
  </div>
@@ -3490,12 +6508,82 @@ async function openWocheDetail(fach,wocheId){
  </div>`).join("")||`<div class="empty">Noch keine Lernmaterialien eingestellt.</div>`}</div>
  <p style="font-size:11px;color:var(--muted);margin-top:12px">Zum Bearbeiten des Materials:</p>
  ${miniToolRow([["🗂️","Karteikarten & Timer","lernwerkzeuge"],["🤖","KI zum Lernen","ki-lernen"],["🔗","Lernressourcen","ressourcen"],["⏱️","Uhr & Timer","uhr-timer"]])}
- ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.materialErhalten?"checked":""}onchange="toggleMaterialErhalten('${fach}','${wocheId}',this.checked)"><span> Materialien erhalten/gesichtet</span></label>`:""}
+ ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.materialErhalten?"checked":""} onchange="toggleMaterialErhalten('${fach}','${wocheId}',this.checked)"><span> Materialien erhalten/gesichtet</span></label>`:""}
+ </div>
+
+ <div class="wd-panel"id="wdPanel_basischeck">
+ <p style="color:var(--muted);margin-top:0;font-size:12px">Kurzer Check direkt nach dem Material: bis zu 3 Fragen, die zeigen, ob die Grundidee angekommen ist.</p>
+ ${isTeacher()?`<div class="form">
+ ${[0,1,2].map(i=>{
+ const f=basischeckFragen[i]||{};
+ const typ=f.typ||"mc";
+ return`<div class="card"style="margin-bottom:10px;background:#f7fafc">
+ <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+ <label style="flex:1;min-width:200px">Frage ${i+1}${i>0?" (optional)":""}<input id="bcFrage${i}"type="text"value="${esc(f.text||"")}"placeholder="z. B. Was versteht man unter …?"></label>
+ <label style="width:190px">Fragetyp<select id="bcTyp${i}"onchange="basischeckTypToggle(${i})">
+ <option value="mc"${typ==="mc"?" selected":""}>Multiple Choice</option>
+ <option value="kprim"${typ==="kprim"?" selected":""}>K-Prim (richtig/falsch je Aussage)</option>
+ <option value="offen"${typ==="offen"?" selected":""}>Offene Frage</option>
+ </select></label>
+ </div>
+
+ <div id="bcMcBereich${i}"style="display:${typ==="mc"?"block":"none"};margin-top:8px">
+ <div class="grid grid-2">
+ ${[0,1,2].map(j=>`<label>Antwort ${j+1}${j>1?" (optional)":""}<input id="bcOpt${i}_${j}"type="text"value="${esc(f.optionen?.[j]||"")}"></label>`).join("")}
+ </div>
+ <label style="margin-top:6px">Richtige Antwort<select id="bcRichtig${i}">
+ ${[0,1,2].map(j=>`<option value="${j}"${f.richtig===j?" selected":""}>Antwort ${j+1}</option>`).join("")}
+ </select></label>
+ </div>
+
+ <div id="bcKprimBereich${i}"style="display:${typ==="kprim"?"block":"none"};margin-top:8px">
+ <label style="margin-bottom:8px">Fallvignette / Einleitungstext (optional – steht über der Tabelle)<textarea id="bcVignette${i}"rows="3"placeholder="z. B. kurze Fallbeschreibung, auf die sich die Aussagen beziehen">${esc(f.vignette||"")}</textarea></label>
+<p style="font-size:11px;color:var(--muted);margin:0 0 6px">Bis zu 4 Aussagen, jeweils als richtig oder falsch markieren. Nur „alles richtig" zählt als bestanden.</p>
+ ${[0,1,2,3].map(j=>{const s=f.statements?.[j]||{};return`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+ <input id="bcStatement${i}_${j}"type="text"value="${esc(s.text||"")}"placeholder="Aussage ${j+1}${j>1?" (optional)":""}"style="flex:1">
+ <select id="bcStatementRichtig${i}_${j}"style="width:90px">
+ <option value="true"${s.correct?" selected":""}>richtig</option>
+ <option value="false"${s.correct===false?" selected":""}>falsch</option>
+ </select>
+ </div>`;}).join("")}
+ </div>
+
+ <div id="bcOffenBereich${i}"style="display:${typ==="offen"?"block":"none"};margin-top:8px">
+ <label>Erwartete Stichworte (kommagetrennt – beliebig viele, ALLE müssen in der Antwort vorkommen, damit sie als richtig gilt)<input id="bcStichworte${i}"type="text"value="${esc((f.stichworte||[]).join(", "))}"placeholder="z. B. Sozialisation, Erziehung, Werte"></label>
+ </div>
+ </div>`;
+ }).join("")}
+ <button class="primary"onclick="saveBasischeckFragen('${fach}','${wocheId}')">Basis-Check speichern</button>
+ </div>`
+ :!basischeckFragen.length?`<div class="empty">Für diese Woche wurde noch kein Basis-Check eingerichtet.</div>`
+ :meinBasischeck?`<div class="card"style="background:${ampelFarbe(meinBasischeck.ampel)}1a;border-left:4px solid ${ampelFarbe(meinBasischeck.ampel)}">
+ <strong>${meinBasischeck.richtig} von ${meinBasischeck.gesamt} richtig</strong>
+ <p style="margin:6px 0 0;color:var(--muted)">${esc(basischeckAmpelText(meinBasischeck.ampel))}</p>
+ </div>`
+ :`<div class="form">
+ ${basischeckFragen.map((f,i)=>{
+ const typ=f.typ||"mc";
+ return`<div class="card"style="margin-bottom:10px">
+ ${typ==="kprim"?kprimFrageKopfHTML(i+1,f.text,f.vignette):`<strong style="display:block;margin-bottom:8px">${i+1}. ${esc(f.text)}</strong>`}
+ ${typ==="mc"?f.optionen.map((o,j)=>`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:4px"><input type="radio"name="bcQ${i}"value="${j}"> <span>${esc(o)}</span></label>`).join(""):""}
+ ${typ==="kprim"?kprimTabelleHTML(`bcKp${i}`,f.statements.map(x=>x.text)):""}
+ ${typ==="offen"?`<textarea id="bcOffenAntwort${i}"rows="3"placeholder="Deine Antwort …"></textarea>`:""}
+ </div>`;
+ }).join("")}
+ <button class="primary"onclick="submitBasischeck('${fach}','${wocheId}')">Basis-Check abgeben</button>
+ </div>`}
  </div>
 
  <div class="wd-panel"id="wdPanel_team">
- <p style="color:var(--muted);margin-top:0">Team/Gruppe${woche.typ==="projekt"?" – für dieses Projekt vorgesehen":" – freiwillig (deshalb in Klammern)"}. Passende Mitstreiter:innen findest du auch über die Kompetenzwerkstatt.</p>
- <div class="list">${teams.map(t=>{const inTeam=(t.mitgliederUids||[]).includes(currentUser.uid);return`<div class="list-item"><div><strong>${esc(t.teamName)}</strong><small>${esc((t.mitgliederNamen||[]).join(", ")||"Noch niemand")}</small></div><div style="display:flex;gap:6px">${inTeam?`<button class="secondary"onclick="leaveLehrplanTeam('${t.id}','${fach}','${wocheId}')">Verlassen</button>`:`<button class="primary"onclick="joinLehrplanTeam('${t.id}','${fach}','${wocheId}')">Beitreten</button>`}${isTeacher()?`<button class="secondary"onclick="deleteLehrplanTeam('${t.id}','${fach}','${wocheId}')">Auflösen</button>`:""}</div></div>`}).join("")||`<div class="empty">Noch keine Teams gebildet.</div>`}</div>
+ <p style="color:var(--muted);margin-top:0">Team/Gruppe${wocheHatTeam(woche)?" – für dieses Projekt vorgesehen":" – freiwillig (deshalb in Klammern)"}. Passende Mitstreiter:innen findest du auch über die Kompetenzwerkstatt.</p>
+ <div class="list">${teams.map(t=>{
+ const inTeam=(t.mitgliederUids||[]).includes(currentUser.uid);
+ const phase=projektPhaseByWoche(wocheId);
+ const zeigtMeilensteine=phase&&!phase.einstieg&&phase.notwendigeWochen.includes(wocheId);
+ return`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
+ <div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(t.teamName)}</strong><small>${esc((t.mitgliederNamen||[]).join(", ")||"Noch niemand")}</small></div><div style="display:flex;gap:6px">${inTeam?`<button class="secondary"onclick="leaveLehrplanTeam('${t.id}','${fach}','${wocheId}')">Verlassen</button>`:`<button class="primary"onclick="joinLehrplanTeam('${t.id}','${fach}','${wocheId}')">Beitreten</button>`}${isTeacher()?`<button class="secondary"onclick="deleteLehrplanTeam('${t.id}','${fach}','${wocheId}')">Auflösen</button>`:""}</div></div>
+ ${zeigtMeilensteine&&(inTeam||isTeacher())?`<div><button class="secondary"style="font-size:12px"onclick="openMeilensteinModal('${phase.id}','${t.id}',{fach:'${fach}',woche:'${wocheId}'})">★ Meilensteine & ${inTeam?"meine Beiträge":"Beiträge ansehen"}</button></div>`:""}
+ </div>`}).join("")||`<div class="empty">Noch keine Teams gebildet.</div>`}</div>
  ${!meinTeam?`<div class="form-actions"style="margin-top:10px"><input id="neuTeamName"type="text"placeholder="Team-Name"style="flex:1"><button class="primary"onclick="createLehrplanTeam('${fach}','${wocheId}')">＋ Team gründen</button></div>`:""}
  ${miniToolRow([["🌟","Kompetenzwerkstatt","kompetenz"],["🤝","Kollaborations-Tools","kollaboration"]])}
  </div>
@@ -3533,9 +6621,9 @@ async function openWocheDetail(fach,wocheId){
 
  <div class="wd-panel"id="wdPanel_selbsteinschaetzung">
  <p style="color:var(--muted);margin-top:0">Schätz dich jetzt zum Schluss selbst ein: Welche Lernziele hast du wirklich erreicht?</p>
- <div class="list">${ziele.map(z=>`<div class="list-item"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;flex:1"><input type="checkbox"${fortschritt.zieleErfuellt?.[z.id]?"checked":""}onchange="toggleZielErfuellt('${fach}','${wocheId}','${z.id}',this.checked)"><span>${esc(z.text)}</span></label></div>`).join("")||`<div class="empty">Für dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</div>`}</div>
+ <div class="list">${ziele.map(z=>`<div class="list-item"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;flex:1"><input type="checkbox"${fortschritt.zieleErfuellt?.[z.id]?"checked":""} onchange="toggleZielErfuellt('${fach}','${wocheId}','${z.id}',this.checked)"><span>${esc(z.text)}</span></label></div>`).join("")||`<div class="empty">Für dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</div>`}</div>
  ${ziele.length?`<div class="form-actions"style="margin-top:12px">
- <button class="primary"${fortschritt.abgeschlossen?"disabled":""}onclick="markWocheAbgeschlossen('${fach}','${wocheId}')">${fortschritt.abgeschlossen?"✓ Woche abgeschlossen":alleErfuellt?"✓ Woche als abgeschlossen markieren":" Erst alle Ziele erfüllen"}</button>
+ <button class="primary"${fortschritt.abgeschlossen?"disabled":""} onclick="markWocheAbgeschlossen('${fach}','${wocheId}')">${fortschritt.abgeschlossen?"✓ Woche abgeschlossen":alleErfuellt?"✓ Woche als abgeschlossen markieren":" Erst alle Ziele erfüllen"}</button>
  </div>`:""}
  <p style="font-size:11px;color:var(--muted);margin-top:16px">Zur Vertiefung deiner Reflexion:</p>
  ${miniToolRow([["🤔","Metakognition","metakognition"],["🧭","Lernpfad aktualisieren","lernpfad"],["💬","Lerncoaching","lerncoaching"]])}
@@ -3557,13 +6645,14 @@ async function renderLernwerkstatt(){
  {title:"Dich selbst einschätzen",color:"#4a90d9",items:[
  [" ","Lernstrategien-Check","Kein Lerntyp-Test – dein Strategien-Profil in 25 Fragen.","lernstrategien"],
  [" ","Metakognitive Lernstrategien","Über das eigene Lernen nachdenken – klick dich durch.","metakognition"],
- [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"]
+ [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"],
+ [" ","Lernstandsmessung","Kurz prüfen: Wo stehe ich und was ist mein nächster Schritt?","lernstand"]
  ]},
  {title:"Konkret lernen & üben",color:"#3fa66a",items:[
  [" ","Lernmethoden","Planung, Lernen, Zusammenarbeit und Reflexion.","methoden"],
  [" ","Lern-Werkzeuge","Karteikarten, Fokus-Timer und Glossar zum selbstständigen Lernen.","lernwerkzeuge"],
  [" ","Uhr & Timer","Aktuelle Uhrzeit im Blick, plus frei einstellbarer Timer für alle.","uhr-timer"],
- [" ","Fachaufsatz-Training","Fachaufsatz Pädagogik/Psychologie Baustein für Baustein üben.","fachaufsatz"],
+ [" ","Fachaufsatz-Training","Fachaufsatz Pädagogik/Psychologie an echten Prüfungsaufgaben üben.","fachaufsatz"],
  [" ","Zuordnungsübungen","Begriff und Erklärung zuordnen, per Knopfdruck selbst überprüfen.","zuordnung"],
  [" ","Tools für Zusammenarbeit","Padlet, Wortwolke & Co. für Gruppenarbeit und Unterricht.","kollaboration"],
  [" ","Lernressourcen","TaskCard, KI, Videos, ByCS/mebis, Canva und LearningApps.","ressourcen"],
@@ -3572,21 +6661,17 @@ async function renderLernwerkstatt(){
  ]},
  {title:"Unterstützung holen",color:"#e0a324",items:[
  [" ","Lerncoaching","Individuelle Begleitung und Kontakt zu einer Lehrkraft.","lerncoaching"],
- [" ","Fragen & Hilfe","Antworten rund um die F12Sb und das Lernen.","fragenhilfe"]
+ [" ","Fragen & Hilfe","Antworten rund um die F11Sb und das Lernen.","fragenhilfe"]
  ]}
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
  <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
- <div class="card tile"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
- <button type="button"onclick="openFach('paedagogik')"style="background:none;border:none;padding:0;text-align:left;cursor:pointer;flex:1;min-width:0">
- <strong style="font-size:16px;display:block">Pädagogik und Psychologie</strong>
- <small style="display:block">Lehrplan-Zeitstrahl: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
- <span class="tile-label"style="color:#4a90d9">LEHRPLAN</span>
- </button>
- <button type="button"class="secondary"onclick="go('ressourcen')"style="flex:0 0 auto;white-space:nowrap">Lernressourcen →</button>
- </div>
- ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}">
-<strong>${x[1]}</strong><small>${x[2]}</small><span class="tile-label"style="color:${g.color}">${g.title}</span></a>`).join("")}</div>`).join("")}
+ <a class="card tile"href="#faecher"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px">
+ <span class="emoji"></span><strong style="font-size:16px">Fächer 11. Klasse</strong>
+ <small>Lehrplan-Zeitstrahl je Fach: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
+ </a>
+ ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
+<strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
  ${footer()}`;
 }
 
@@ -3610,9 +6695,9 @@ async function renderKollaborationsTools(){
  ["","Team gesucht","Pinnwand für Gruppenfindung: Wer sucht noch Mitstreiter:innen?","teamgesucht",true],
  ["✅","Gemeinsame Checkliste","Meilensteine im Projekt oder Praktikum gemeinsam abhaken.","checkliste",true]
  ];
- const toolTile=t=>`<a class="card tile"href="#${t[3]}">
+ const toolTile=t=>`<a class="card tile"href="#${t[3]}"><span class="emoji">${t[0]}</span>
 <strong>${t[1]}</strong><small>${t[2]}</small>${!t[4]?`<span class="badge"style="margin-top:8px">IN VORBEREITUNG</span>`:""}</a>`;
- return`${pageHead("ZUSAMMENARBEIT","Tools für Zusammenarbeit","Kostenlose, direkt in die F12Sb integrierte Tools für Gruppenarbeit, Brainstorming und Unterricht – ganz ohne externe Anmeldung.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>`)}
+ return`${pageHead("ZUSAMMENARBEIT","Tools für Zusammenarbeit","Kostenlose, direkt in die F11Sb integrierte Tools für Gruppenarbeit, Brainstorming und Unterricht – ganz ohne externe Anmeldung.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>`)}
  <h3 style="margin:0 0 10px">🔴 Live im Unterricht</h3>
  <div class="grid grid-3">${liveTools.map(toolTile).join("")}</div>
  <h3 style="margin:22px 0 10px"> Projektorganisation</h3>
@@ -3678,11 +6763,12 @@ async function renderWortwolkeUebersicht(){
  return`${pageHead("ZUSAMMENARBEIT","Wortwolke","Spontane Stichwort-Sammlung – ideal für Einstieg, Brainstorming oder Blitzlicht im Unterricht.",`<button class="secondary"onclick="go('kollaboration')">← Tools für Zusammenarbeit</button>
  <button class="primary"onclick="openWordcloudForm()">＋ Neue Wortwolke</button>`)}
  <div class="grid grid-3">${clouds.map(c=>`
- <div class="card tile"style="cursor:pointer;text-align:left"onclick="openWordcloud('${c.id}')">
- <div style="display:flex;justify-content:flex-end;gap:6px;margin-bottom:6px">
- <button class="secondary"style="padding:4px 10px;font-size:12px"onclick="event.stopPropagation();downloadWordcloudPDF('${c.id}')">PDF</button>
- ${canManage?`<button class="secondary"style="padding:4px 10px;font-size:12px"onclick="event.stopPropagation();deleteWordcloud('${c.id}')">Löschen</button>`:""}
+ <div class="card tile"style="cursor:pointer;text-align:left;position:relative"onclick="openWordcloud('${c.id}')">
+ <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+ <button class="secondary"style="padding:4px 10px;font-size:12px"onclick="event.stopPropagation();downloadWordcloudPDF('${c.id}')"> PDF</button>
+ ${canManage?`<button class="secondary"style="padding:4px 10px;font-size:12px"onclick="event.stopPropagation();deleteWordcloud('${c.id}')"> Löschen</button>`:""}
  </div>
+ <span class="emoji"></span>
  <strong>${esc(c.title||"Wortwolke")}</strong>
  <small>${esc(c.description||"")||"Frage oder Impuls für die Klasse."}</small>
  </div>`).join("")||`<div class="empty"><strong>Noch keine Wortwolke.</strong>Starte die erste Frage für die Klasse.</div>`}
@@ -3820,7 +6906,7 @@ async function downloadWordcloudPDF(wordcloudId){
  </style>${wordcloudCloudHTML(items)}`;
  openToolPrintWindow(
  "Wortwolke – "+(cloud.title||"Wortwolke"),
- body,"F12Sb · Wortwolke"+(cloud.description?" · "+cloud.description:"")
+ body,"F11Sb · Wortwolke"+(cloud.description?" · "+cloud.description:"")
  );
  }catch(e){console.error("Wortwolke PDF:",e);toast("Die Wortwolke konnte nicht als PDF geöffnet werden.")}
 }
@@ -4012,7 +7098,7 @@ async function downloadKanbanPDF(boardId){
  }).join("");
  openToolPrintWindow(
  "Kanban-Board – "+(board.title||"Kanban-Board"),
- body,"F12Sb · Kanban-Board"+(board.description?" · "+board.description:"")
+ body,"F11Sb · Kanban-Board"+(board.description?" · "+board.description:"")
  );
  }catch(e){console.error("Kanban PDF:",e);toast("Das Kanban-Board konnte nicht als PDF geöffnet werden.")}
 }
@@ -4252,7 +7338,7 @@ async function downloadTermPollPDF(pollId){
  </div>`).join(""):`<p class="empty">Keine Terminvorschläge.</p>`;
  openToolPrintWindow(
  "Terminfindung – "+(poll.title||"Terminfindung"),
- body,"F12Sb · Terminfindung · "+votes.length+"Stimme(n) insgesamt"+(poll.description?" · "+poll.description:"")
+ body,"F11Sb · Terminfindung · "+votes.length+"Stimme(n) insgesamt"+(poll.description?" · "+poll.description:"")
  );
  }catch(e){console.error("Terminfindung PDF:",e);toast("Die Terminfindung konnte nicht als PDF geöffnet werden.")}
 }
@@ -4310,7 +7396,7 @@ async function downloadTeamAdsPDF(){
  ${interested.length?`<small>Interessiert: ${interested.map(i=>escPDF(i.name)).join(",")}</small>`:""}
  </div>`;
  }).join(""):`<p class="empty">Noch kein Gesuch.</p>`;
- openToolPrintWindow("Team gesucht",body,"F12Sb · Übersicht aller offenen Gesuche");
+ openToolPrintWindow("Team gesucht",body,"F11Sb · Übersicht aller offenen Gesuche");
  }catch(e){console.error("Team gesucht PDF:",e);toast("Die Übersicht konnte nicht als PDF geöffnet werden.")}
 }
 
@@ -4598,7 +7684,7 @@ async function downloadChecklistPDF(checklistId){
  </div>`).join(""):`<p class="empty">Noch keine Einträge.</p>`;
  openToolPrintWindow(
  "Checkliste – "+(list.title||"Checkliste"),
- body,"F12Sb · Gemeinsame Checkliste · "+done+"von"+items.length+"erledigt"+(list.description?" · "+list.description:"")
+ body,"F11Sb · Gemeinsame Checkliste · "+done+"von"+items.length+"erledigt"+(list.description?" · "+list.description:"")
  );
  }catch(e){console.error("Checkliste PDF:",e);toast("Die Checkliste konnte nicht als PDF geöffnet werden.")}
 }
@@ -4875,7 +7961,7 @@ async function downloadAmpelPDF(roundId){
  </tbody></table>`;
  openToolPrintWindow(
  "Verständnis-Ampel – "+(round.title||"Runde"),
- body,"F12Sb · Verständnis-Ampel · "+total+"Antwort(en)"+(round.description?" · "+round.description:"")
+ body,"F11Sb · Verständnis-Ampel · "+total+"Antwort(en)"+(round.description?" · "+round.description:"")
  );
  }catch(e){console.error("Ampel PDF:",e);toast("Die Runde konnte nicht als PDF geöffnet werden.")}
 }
@@ -5093,7 +8179,7 @@ async function downloadPollPDF(pollId){
  </tbody></table>`;
  openToolPrintWindow(
  "Live-Umfrage – "+(poll.question||"Umfrage"),
- body,"F12Sb · Live-Umfrage · "+total+"Stimme(n)"+(poll.description?" · "+poll.description:"")
+ body,"F11Sb · Live-Umfrage · "+total+"Stimme(n)"+(poll.description?" · "+poll.description:"")
  );
  }catch(e){console.error("Umfrage PDF:",e);toast("Die Umfrage konnte nicht als PDF geöffnet werden.")}
 }
@@ -5263,7 +8349,7 @@ async function renderLernWerkzeuge(){
  ["","Glossar","Gemeinsames Nachschlagewerk für Fachbegriffe – von der Klasse befüllt.","glossar",true]
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lern-Werkzeuge","Kostenlose Werkzeuge fürs eigene Lernen – Wiederholen, Fokussieren und Nachschlagen.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>`)}
- <div class="grid grid-3">${tools.map(t=>`<a class="card tile"href="#${t[3]}">
+ <div class="grid grid-3">${tools.map(t=>`<a class="card tile"href="#${t[3]}"><span class="emoji">${t[0]}</span>
 <strong>${t[1]}</strong><small>${t[2]}</small></a>`).join("")}</div>
  ${footer()}`;
 }
@@ -5740,7 +8826,7 @@ async function downloadDeckPDF(deckId){
  </div>`).join(""):`<p class="empty">Noch keine Karten.</p>`;
  openToolPrintWindow(
  "Karteikarten – "+(deck.title||"Deck"),
- body,"F12Sb · Karteikarten · "+cards.length+"Karte(n)"+(deck.description?" · "+deck.description:"")
+ body,"F11Sb · Karteikarten · "+cards.length+"Karte(n)"+(deck.description?" · "+deck.description:"")
  );
  }catch(e){console.error("Karteikarten PDF:",e);toast("Das Deck konnte nicht als PDF geöffnet werden.")}
 }
@@ -5776,6 +8862,16 @@ async function uploadCampusDatei(file,pfadPrefix){
  if(e?.code==="storage/unknown"||e?.code==="storage/retry-limit-exceeded")throw new Error("Firebase Storage antwortet nicht – ist Storage im Firebase-Projekt bereits aktiviert (Konsole → Storage → Erste Schritte)?");
  throw new Error(`Upload fehlgeschlagen (${e?.code||e?.message||"unbekannter Fehler"}).`);
  }
+}
+// Löscht eine hochgeladene Datei wieder aus Firebase Storage. Nimmt die
+// Download-URL (so steht sie in den Firestore-Dokumenten). Fehler werden
+// nur protokolliert, damit das Löschen des Eintrags nicht daran scheitert.
+async function deleteCampusDatei(url){
+ if(!url||!/firebasestorage\.googleapis\.com|\.firebasestorage\.app|appspot\.com/.test(url))return;
+ try{
+  if(!storage)await loadFirebase();
+  await deleteObject(storageRef(storage,url));
+ }catch(e){if(e?.code!=="storage/object-not-found")console.warn("Datei aus Storage löschen:",e);}
 }
 function dateiIstBild(name){return /\.(jpe?g|png|gif|webp|svg)$/i.test(name||"")}
 function dateiIstVideo(name){return /\.(mp4|webm|mov|m4v)$/i.test(name||"")}
@@ -6110,18 +9206,19 @@ async function downloadGlossaryPDF(){
  <strong>${escPDF(g.term)}</strong>
  <div>${escPDF(g.definition)}</div>
  </div>`).join(""):`<p class="empty">Noch keine Begriffe.</p>`;
- openToolPrintWindow("Glossar",body,"F12Sb · Fachbegriffe-Glossar · "+entries.length+"Begriff(e)");
+ openToolPrintWindow("Glossar",body,"F11Sb · Fachbegriffe-Glossar · "+entries.length+"Begriff(e)");
  }catch(e){console.error("Glossar PDF:",e);toast("Das Glossar konnte nicht als PDF geöffnet werden.")}
 }
 
 /* =========================================================
  FACHAUFSATZ-TRAINING – Fachaufsatz Pädagogik/Psychologie.
- Vereinfachtes Modell (statt Bausteine): pro Fallbeispiel EINE
- Aufgabenstellung (echte alte Prüfungsaufgabe), EIN Theorieteil zur
- Beantwortung, und EIN zusammenhängender Antwortraum je Schüler:in.
- Fallbeispiele können als Text und/oder als Link zu einer bereits
- gehosteten PDF (z. B. Google Drive) hinterlegt werden – kein
- eigener Datei-Upload, damit kein Firebase Storage nötig ist.
+ Vereinfachtes Modell (statt Bausteine): pro Aufgabe EINE
+ Aufgabenstellung (echte alte Prüfungs-/Schulaufgabe), EIN
+ Theorieteil zur Beantwortung, und EIN zusammenhängender
+ Antwortraum je Schüler:in. Aufgaben können als Text und/oder
+ als Link zu einer bereits gehosteten PDF (z. B. Google Drive)
+ hinterlegt werden – kein eigener Datei-Upload, damit kein
+ Firebase Storage nötig ist.
  Collections: "essayCases" (Aufgaben, für alle sichtbar) und
  "essayEntries" (eigene Übungstexte, PRIVAT – nur die schreibende
  Person und Lehrkräfte dürfen sie lesen, exakt wie beim
@@ -6131,6 +9228,9 @@ async function downloadGlossaryPDF(){
  einen Kommentar zurück. Echte automatische Bewertung würde eine
  kostenpflichtige externe KI benötigen – dafür gibt es die
  Vorkorrektur über einen fobizz-Assistenten (Kopieren + Link).
+ Die vier Lernbereiche bleiben die der 11. Klasse (11.1–11.4 nach
+ LehrplanPLUS FOS 11 Pädagogik/Psychologie), unabhängig davon,
+ welche Lernbereiche in der F12Sb dafür verwendet werden.
  ========================================================= */
 let activeEssayCaseId=null;
 // Kriterien und Tipp orientieren sich an "Unterrichten, Korrigieren und
@@ -6149,14 +9249,21 @@ const ESSAY_KRITERIEN=[
 const ESSAY_KRITERIEN_FLAT=ESSAY_KRITERIEN.flatMap(g=>g.punkte);
 const ESSAY_VERGLEICHSFRAGEN=["Hast du die Fachbegriffe ähnlich korrekt und vollständig verwendet?","Ist dein Fallbezug ähnlich konkret (Textstelle/Verhalten benannt)?","Ist deine Darstellung ähnlich klar strukturiert?"];
 const essayLernbereiche=[
- ["1","Entwicklung"],
- ["2","Persönlichkeit und Identität"],
- ["3","Soziale Arbeit"],
- ["4","Kommunikation"]
+ ["11.1","Pädagogik/Psychologie als Wissenschaft"],
+ ["11.2","Grundlagen des Erlebens, Verhaltens, Handelns"],
+ ["11.3","Erziehungs- und Bildungsprozesse"],
+ ["11.4","Lernen als steuerbarer Prozess"]
 ];
 function essayLernbereichLabel(code){
  const found=essayLernbereiche.find(l=>l[0]===code);
- return found?`Lernbereich ${found[0]} – ${found[1]}`:(code||"Ohne Lernbereich");
+ return found?`${found[0]} – ${found[1]}`:(code||"Ohne Lernbereich");
+}
+// Die Lernbereich-Farben (LERNBEREICH_FARBEN) sind nach Nummer 1–4
+// indiziert; die 11Sb-Lernbereichs-Codes lauten aber "11.1"–"11.4",
+// daher hier die Position in essayLernbereiche als Farb-Nummer nehmen.
+function essayLernbereichNummer(code){
+ const idx=essayLernbereiche.findIndex(l=>l[0]===code);
+ return idx>=0?idx+1:1;
 }
 // Berechnet aus der Selbsteinschätzung eine Ampel: grün = alle Kriterien
 // erfüllt, gelb = teilweise, rot = größtenteils nicht erfüllt,
@@ -6189,7 +9296,7 @@ async function getAllEssayEntriesForCase(caseId){
 }
 
 function essayCaseTileHTML(c){
- const farbe=LERNBEREICH_FARBEN[Number(c.lernbereich)]?.border||"#b8c4cc";
+ const farbe=LERNBEREICH_FARBEN[essayLernbereichNummer(c.lernbereich)]?.border||"#b8c4cc";
  return`<div class="card tile"style="cursor:pointer;text-align:left;border-left:4px solid ${farbe}"onclick="openEssayCase('${c.id}')">
  <strong>${esc(c.title||"Aufgabe")}</strong>
  <small>${esc(c.quelle||"")||"Fachaufsatz-Training"}</small>
@@ -6202,13 +9309,13 @@ async function renderFachaufsatzUebersicht(){
  const ungrouped=cases.filter(c=>!c.lernbereich||!essayLernbereiche.some(l=>l[0]===c.lernbereich));
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Fachaufsatz-Training","Fachaufsatz in Pädagogik/Psychologie an echten Prüfungsaufgaben üben.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
  ${isTeacher()?`<button class="primary"onclick="openEssayCaseForm()">＋ Neue Aufgabe</button>`:""}`)}
- <div class="notice"><strong>So funktioniert's:</strong><p style="margin-bottom:0">Jede Aufgabe basiert auf einer echten alten Prüfungsaufgabe: 1. Aufgabenstellung lesen, 2. Theorie zur Beantwortung lesen, 3. im Antwortraum deinen Fachaufsatz schreiben, danach die Erfolgskriterien nach dem echten Bewertungsbogen selbst ankreuzen, optional per fobizz-Assistent eine schnelle KI-Vorkorrektur holen und bei Bedarf zur Lehrkraft zur Korrektur einreichen. Deine Übungstexte sind privat – nur du selbst und Lehrkräfte sehen sie, nicht deine Mitschüler:innen.</p></div>
+ <div class="notice"><strong>So funktioniert's:</strong><p style="margin-bottom:0">Jede Aufgabe basiert auf einer echten alten Prüfungs- oder Schulaufgabe: 1. Aufgabenstellung lesen, 2. Theorie zur Beantwortung lesen, 3. im Antwortraum deinen Fachaufsatz schreiben, danach die Erfolgskriterien nach dem echten Bewertungsbogen selbst ankreuzen, optional per fobizz-Assistent eine schnelle KI-Vorkorrektur holen und bei Bedarf zur Lehrkraft zur Korrektur einreichen. Deine Übungstexte sind privat – nur du selbst und Lehrkräfte sehen sie, nicht deine Mitschüler:innen.</p></div>
  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
- ${essayLernbereiche.map(([code,label])=>{const c=LERNBEREICH_FARBEN[Number(code)];return`<span class="pill"style="background:${c.bg};color:${c.text}">Lernbereich ${esc(code)} · ${esc(label)}</span>`;}).join("")}
+ ${essayLernbereiche.map(([code,label])=>{const c=LERNBEREICH_FARBEN[essayLernbereichNummer(code)];return`<span class="pill"style="background:${c.bg};color:${c.text}">${esc(code)} · ${esc(label)}</span>`;}).join("")}
  </div>
  ${!cases.length?`<div class="card empty"style="text-align:center"><strong>Noch keine Übungsaufgaben</strong><p style="margin-bottom:0">${isTeacher()?"Lege oben die erste Prüfungsaufgabe zum Üben an.":"Deine Lehrkraft stellt hier bald die ersten Prüfungsaufgaben zum Üben ein."}</p></div>`:""}
  ${grouped.map(g=>`
- <h3 style="margin:20px 0 10px">Lernbereich ${esc(g.code)} – ${esc(g.label)}</h3>
+ <h3 style="margin:20px 0 10px">${esc(g.code)} – ${esc(g.label)}</h3>
  <div class="grid grid-3">${g.cases.map(essayCaseTileHTML).join("")}</div>`).join("")}
  ${ungrouped.length?`<h3 style="margin:20px 0 10px">Ohne Lernbereich</h3><div class="grid grid-3">${ungrouped.map(essayCaseTileHTML).join("")}</div>`:""}
  ${footer()}`;
@@ -6289,12 +9396,12 @@ function openEssayCaseForm(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
  <div class="kicker">FACHAUFSATZ-TRAINING</div>
  <h2>Neue Aufgabe</h2>
- <p style="color:var(--muted);font-size:13px;margin-top:-4px">Lade die Aufgabenstellung einer echten (alten) Abschlussprüfung hoch, dazu den Theorieteil, der zur Beantwortung nötig ist – als PDF-Link (z. B. Google Drive) und/oder als Text. Die Schüler:innen sehen dann: 1. Aufgabenstellung, 2. Theorie als Lehrtext, 3. Raum zur Beantwortung mit Selbsteinschätzung und fobizz-Vorkorrektur.</p>
+ <p style="color:var(--muted);font-size:13px;margin-top:-4px">Lade die Aufgabenstellung einer echten (alten) Prüfungs- oder Schulaufgabe hoch, dazu den Theorieteil, der zur Beantwortung nötig ist – als PDF-Link (z. B. Google Drive) und/oder als Text. Die Schüler:innen sehen dann: 1. Aufgabenstellung, 2. Theorie als Lehrtext, 3. Raum zur Beantwortung mit Selbsteinschätzung und fobizz-Vorkorrektur.</p>
  <div class="form">
- <label>Titel<input id="ecTitle"maxlength="150"placeholder="z. B. Fachabiturprüfung PäPsy 2023, Aufgabe 2"></label>
- <label>Lernbereich<select id="ecLernbereich">${essayLernbereiche.map(([code,label])=>`<option value="${code}">Lernbereich ${esc(code)} – ${esc(label)}</option>`).join("")}</select></label>
- <label>Quelle (optional)<input id="ecQuelle"maxlength="200"placeholder="z. B. Abschlussprüfung 2023, Nachtermin"></label>
- <label>Aufgabenstellung<textarea id="ecFrage"rows="6"maxlength="4000"placeholder="Die vollständige Aufgabenstellung (inkl. Fallbeispiel/Material, falls Teil der Prüfungsaufgabe) …"></textarea></label>
+ <label>Titel<input id="ecTitle"maxlength="150"placeholder="z. B. Schulaufgabe PäPsy 2024, Aufgabe 2"></label>
+ <label>Lernbereich<select id="ecLernbereich">${essayLernbereiche.map(([code,label])=>`<option value="${code}">${esc(code)} – ${esc(label)}</option>`).join("")}</select></label>
+ <label>Quelle (optional)<input id="ecQuelle"maxlength="200"placeholder="z. B. Schulaufgabe 2024, 2. Halbjahr"></label>
+ <label>Aufgabenstellung<textarea id="ecFrage"rows="6"maxlength="4000"placeholder="Die vollständige Aufgabenstellung (inkl. Fallbeispiel/Material, falls Teil der Aufgabe) …"></textarea></label>
  <label>Theorie als PDF (Lehrtext, z. B. Google Drive-Link) – wird den Schüler:innen als Lehrtext zur Verfügung gestellt<input id="ecTheoriePdfUrl"type="url"placeholder="https://…"></label>
  <label>Theorie zur Beantwortung als Text (optional, zusätzlich zur PDF oder allein)<textarea id="ecTheorieinhalt"rows="6"maxlength="6000"placeholder="Stichpunkte/Zusammenfassung, falls kein PDF-Lehrtext oder zusätzlich dazu …"></textarea></label>
  <label>Link zu weiteren Materialien (optional, z. B. Google Drive)<input id="ecPdfUrl"type="url"placeholder="https://…"></label>
@@ -6524,10 +9631,30 @@ async function downloadEssayPDF(caseId){
  </div>`;
  openToolPrintWindow(
  "Fachaufsatz – "+(c.title||"Aufgabe"),
- body,"F12Sb · Fachaufsatz-Training"+(c.quelle?" · "+c.quelle:"")
+ body,"F11Sb · Fachaufsatz-Training"+(c.quelle?" · "+c.quelle:"")
  );
  }catch(e){console.error("Fachaufsatz PDF:",e);toast("Der Aufsatz konnte nicht als PDF geöffnet werden.")}
 }
+
+// ---- Kleine, generische TaskCard-Link-Ablage (aktuell nur für den
+// fobizz-Assistenten im Fachaufsatz-Training genutzt) ----------------------
+async function ladeTaskcardLinks(){
+ try{
+  const s=await getDocs(collection(db,"taskcardLinks"));
+  const map={};s.docs.forEach(d=>map[d.id]=d.data());
+  return map;
+ }catch(e){console.error("TaskCard-Links laden:",e);return{};}
+}
+async function taskcardLinkBearbeiten(lbKey,aktuell){
+ const url=prompt("Link hinterlegen:",aktuell||"https://");
+ if(url===null)return;
+ try{
+  await setDoc(doc(db,"taskcardLinks",lbKey),{url:url.trim(),updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
+  await render();toast("Link gespeichert.");
+ }catch(e){console.error(e);toast("Konnte nicht gespeichert werden.");}
+}
+window.taskcardLinkBearbeiten=taskcardLinkBearbeiten;
+
 
 
 
@@ -6686,7 +9813,7 @@ async function renderForum(){
  <a class="card tile"href="#forum-board"style="min-height:180px;background:#fff;border-left:4px solid #4a90d9">
  <span class="emoji"></span>
  <strong>Forum</strong>
- <small>Gemeinsam denken, fragen, austauschen und unterstützen – für die ganze F12Sb sichtbar.</small>
+ <small>Gemeinsam denken, fragen, austauschen und unterstützen – für die ganze F11Sb sichtbar.</small>
  </a>
  <a class="card tile"href="#forum-nachrichten"style="min-height:180px;background:#fff;border-left:4px solid #1a9b8e">
  <span class="emoji"></span>
@@ -6713,7 +9840,9 @@ Infos</span><span class="chip"> Ideen</span><span class="chip"> Projekte</span><
 <input class="search"id="forumSearch"placeholder="Beiträge durchsuchen …"></div>
  <div class="list"id="forumList">${posts.map(postHTML).join("")||`<div class="empty"><strong>Noch keine
 Beiträge</strong>Schreibe den ersten Beitrag.</div>`}</div>
- ${footer()}`;
+ <div class="card"style="margin-top:12px;border-left:4px solid #3fa66a"><h3> Campus hilft</h3><p>Du kannst anderen bei einem
+Thema helfen? Teile dein Wissen.</p><button class="secondary"style="margin-top:10px"onclick="openHelpForm()">Hilfe
+anbieten</button></div>${footer()}`;
 }
 
 /* ---------------------------------------------------------
@@ -6781,7 +9910,7 @@ async function renderForumMessages(){
  <button class="secondary"title="Unterhaltung aus meiner Übersicht entfernen"onclick="event.stopPropagation();deleteConversation('${c.otherUid}','${esc(c.otherName||"")}')">Löschen</button>
  </div>
  </div>
- </article>`).join("")||`<div class="empty"><strong>Noch keine Nachrichten.</strong><p>Schreibe jemandem aus der F12Sb eine persönliche Nachricht.</p></div>`}
+ </article>`).join("")||`<div class="empty"><strong>Noch keine Nachrichten.</strong><p>Schreibe jemandem aus der F11Sb eine persönliche Nachricht.</p></div>`}
  </div>${footer()}`;
 }
 
@@ -7034,7 +10163,7 @@ async function getBoardPosts(boardId){
 
 async function renderPinnwandUebersicht(){
  const boards=await getBoards();
- return`${pageHead("ZUSAMMENARBEIT","Pinnwand","Digitale Pinnwände für Ideen, Brainstorming und Gruppenarbeit – im Raster, für die ganze F12Sb sichtbar.",`<button class="primary"onclick="openBoardForm()">＋ Neue Pinnwand</button>`)}
+ return`${pageHead("ZUSAMMENARBEIT","Pinnwand","Digitale Pinnwände für Ideen, Brainstorming und Gruppenarbeit – im Raster, für die ganze F11Sb sichtbar.",`<button class="primary"onclick="openBoardForm()">＋ Neue Pinnwand</button>`)}
  <div class="grid grid-3">${boards.map(b=>`
  <div class="card tile"style="cursor:pointer;text-align:left"onclick="openBoard('${b.id}')">
  <span class="emoji"></span>
@@ -7162,6 +10291,7 @@ async function deleteBoard(id){
  try{
  const posts=await getBoardPosts(id);
  await Promise.all(posts.map(p=>deleteDoc(doc(db,"boardPosts",p.id))));
+ await Promise.all(posts.map(p=>deleteCampusDatei(p.url)));
  await deleteDoc(doc(db,"boards",id));
  if(activeBoardId===id)activeBoardId=null;
  go("pinnwand");
@@ -7182,7 +10312,7 @@ async function downloadBoardPDF(boardId){
  </div>`).join(""):`<p class="empty">Noch keine Notizen.</p>`;
  openToolPrintWindow(
  "Pinnwand – "+(board.title||"Pinnwand"),
- body,"F12Sb · Pinnwand"+(board.description?" · "+board.description:"")
+ body,"F11Sb · Pinnwand"+(board.description?" · "+board.description:"")
  );
  }catch(e){console.error("Pinnwand PDF:",e);toast("Die Pinnwand konnte nicht als PDF geöffnet werden.")}
 }
@@ -7260,7 +10390,12 @@ async function addBoardPost(){
 async function deleteBoardPost(id){
  if(!isApproved())return;
  if(!confirm("Diese Notiz wirklich entfernen?"))return;
- try{await deleteDoc(doc(db,"boardPosts",id));await render();toast("Notiz entfernt.");}
+ try{
+  const alt=await getDoc(doc(db,"boardPosts",id));
+  const altUrl=alt.exists()?alt.data().url:"";
+  await deleteDoc(doc(db,"boardPosts",id));
+  await deleteCampusDatei(altUrl);
+  await render();toast("Notiz entfernt.");}
  catch(e){console.error("Notiz löschen:",e);toast("Notiz konnte nicht entfernt werden.")}
 }
 
@@ -7847,7 +10982,7 @@ function openJournalPrintWindow(title,students){
  const studentSections=students.map(student=>`
  <section class="student-section">
  <h1>${escPDF(student.name)}</h1>
- <div class="meta">F12Sb · Persönliches Lernjournal</div>
+ <div class="meta">F11Sb · Persönliches Lernjournal</div>
  ${student.entries.length
  ? student.entries.map(j=>`
  <article class="entry">
@@ -8006,7 +11141,7 @@ async function downloadAllJournalsPDF(){
 
  closeModal();
  openJournalPrintWindow(
- "F12Sb – Lernjournale",
+ "F11Sb – Lernjournale",
  students
  );
  }catch(e){
@@ -8335,24 +11470,12 @@ async function toggleResilienzSchatz(skillId){
   showMotivationsBild(false,"reflexion","rs:"+skillId);
  if(btn){btn.className="primary schatz-btn-active";btn.textContent="★ In der Schatzkiste"}
  }
- await refreshTreasureCount();
  }catch(e){
  console.error("Resilienz-Schatzkiste ändern:",e);
  toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");
  }finally{
  resilienzSchatzInFlight.delete(skillId);
  }
-}
-// Aktualisiert die "X Schätze gespeichert"-Anzeige auf der Kachel sofort,
-// ohne die ganze Resilienz-Seite neu zu laden (verhindert, dass eine
-// laufende Übung dabei unterbrochen wird).
-async function refreshTreasureCount(){
- const badge=document.querySelector(".treasure-count");
- if(!badge)return;
- try{
- const favorites=await getMyResilienzSchaetze();
- badge.textContent=`${favorites.length} Schätze gespeichert`;
- }catch(e){console.error("Schatzkisten-Zähler aktualisieren:",e)}
 }
 async function openResilienzSchatzkiste(){
  const favorites=await getMyResilienzSchaetze();
@@ -8370,7 +11493,6 @@ async function removeFromResilienzSchatzkiste(skillId){
  await deleteDoc(doc(db,"resilienzSchaetze",`${currentUser.uid}_${skillId}`));
  toast("Aus der Schatzkiste entfernt.");
  await openResilienzSchatzkiste();
- await refreshTreasureCount();
  }catch(e){
  console.error("Aus Schatzkiste entfernen:",e);
  toast("Konnte nicht entfernt werden.");
@@ -8432,7 +11554,7 @@ function resilienzCheckin(name){try{localStorage.setItem("campus_resilienz_"+nam
 
 async function renderFragenHilfe(){
  const faqs=[
- ["Was ist die F12Sb?","Die F12Sb verbindet selbstständiges Lernen, Projekte, Praxis, Kompetenzentwicklung und Gemeinschaft. Du arbeitest zunehmend eigenverantwortlich und kannst deinen Lernweg aktiv mitgestalten."],
+ ["Was ist die F11Sb?","Die F11Sb verbindet selbstständiges Lernen, Projekte, Praxis, Kompetenzentwicklung und Gemeinschaft. Du arbeitest zunehmend eigenverantwortlich und kannst deinen Lernweg aktiv mitgestalten."],
  ["Wie funktioniert das Lernen?","Du setzt Ziele, planst deine nächsten Schritte, bearbeitest Lernaufträge und reflektierst deinen Lernweg. Die Lernwerkstatt unterstützt dich dabei mit Methoden, Lernressourcen, Lernimpulsen und KI-Angeboten."],
  ["Wo finde ich meine Aufgaben?","Im Campus-Kompass findest du deine persönlichen Aufgaben, Projekte, Ziele und deinen aktuellen Lernweg."],
  ["Was ist die Lernwerkstatt?","Die Lernwerkstatt ist dein Bereich für selbstständiges Lernen. Dort findest du Lernpfade, Lernressourcen, Lernimpulse, Lernstandsmessungen, KI zum Lernen und diese Fragen-&-Hilfe-Seite."],
@@ -8441,15 +11563,15 @@ async function renderFragenHilfe(){
  ["Was ist Deeper Learning?","Deeper Learning bedeutet, dass du Wissen nicht nur aufnimmst, sondern es verstehst, anwendest, auf neue Situationen überträgst, Probleme löst, gemeinsam arbeitest und deine Ergebnisse reflektierst."],
  ["Was ist ein Lernjournal?","Im Lernjournal hältst du deinen Lernweg fest: Was habe ich gelernt? Was hat funktioniert? Wo gab es Schwierigkeiten? Was ist mein nächster Schritt?"],
  ["Was sind Lernstandsmessungen?","Sie helfen dir zu erkennen, wo du bei deinen Kompetenzen stehst und woran du als Nächstes arbeiten solltest. Die Ergebnisse können deine Kompetenzentwicklung sichtbar machen."],
- ["Wo finde ich Termine?","Im Campus-Kalender findest du die wichtigen Termine der F12Sb. Dort sind auch die Schulferien von Bayern für das Schuljahr 2026/27 markiert."],
- ["Was mache ich bei Fragen zur F12Sb?","Wenn deine Frage hier nicht beantwortet wird, wende dich an deine Lehrkraft bzw. das Klassenteam. Die Seite soll dir zunächst schnelle Orientierung zu F12Sb und Lernen geben."]
+ ["Wo finde ich Termine?","Im Campus-Kalender findest du die wichtigen Termine der F11Sb. Dort sind auch die Schulferien von Bayern für das Schuljahr 2026/27 markiert."],
+ ["Was mache ich bei Fragen zur F11Sb?","Wenn deine Frage hier nicht beantwortet wird, wende dich an deine Lehrkraft bzw. das Klassenteam. Die Seite soll dir zunächst schnelle Orientierung zu F11Sb und Lernen geben."]
  ];
 
- return`${pageHead("ORIENTIERUNG","Fragen & Hilfe","Antworten rund um die F12Sb, selbstständiges Lernen und deinen Lernweg.")}
+ return`${pageHead("ORIENTIERUNG","Fragen & Hilfe","Antworten rund um die F11Sb, selbstständiges Lernen und deinen Lernweg.")}
  <div class="card"style="margin-bottom:16px;border-left:4px solid #3fa66a">
  <span class="badge"> ORIENTIERUNG</span>
  <h2>Du hast eine Frage?</h2>
- <p>Hier findest du schnelle Antworten zu den wichtigsten Fragen rund um die F12Sb und das Lernen. Nutze die Themen als erste Orientierung.</p>
+ <p>Hier findest du schnelle Antworten zu den wichtigsten Fragen rund um die F11Sb und das Lernen. Nutze die Themen als erste Orientierung.</p>
  </div>
  <div class="grid grid-2">
  ${faqs.map(([q,a])=>`<details class="card"style="margin:0 0 12px">
@@ -8459,6 +11581,418 @@ async function renderFragenHilfe(){
  </div>
  ${footer()}`;
 }
+
+function renderPraxisFragen(){
+ return Promise.resolve(`${pageHead('fpA · EIGENES TOOL','Fragen aus der Praxis','Fragen aus dem Praktikum – getrennt von Theorie-Praxis-Transfer-Aufträgen.',`<button class="primary"onclick="openFPAQuestionForm()">＋ Frage eintragen</button>`)}<div class="card"><h2> Fragen aus der Praxis</h2><p>Dieses Tool ist vollständig von Theorie-Praxis-Transfer-Aufträgen und KI-Innovationspartnerschaften getrennt.</p><div id="fpaQuestionsPage"class="empty">Lade Einträge …</div></div>${footer()}`);
+}
+function renderPraxisProjekte(){
+ return Promise.resolve(`${pageHead('fpA · EIGENES TOOL','Projekte in der Praxis','Praxisprojekte – getrennt von Theorie-Praxis-Transfer-Aufträgen.',`<button class="primary"onclick="openFPAProjectForm()">＋ Projekt eintragen</button>`)}<div class="card"><h2> Projekte in der Praxis</h2><p>Dieses Tool ist vollständig eigenständig.</p><div id="fpaProjectsPage"class="empty">Lade Einträge …</div></div>${footer()}`);
+}
+
+async function renderPraktikum(){
+ let assignments=[], questions=[], projects=[];
+ let challenges=[],solutions=[],results=[];
+ try{assignments=await getCollection("practice","createdAt",true)}catch(e){console.error(e)}
+ try{questions=await getCollection("fpaQuestions","createdAt",true)}catch(e){console.error(e)}
+ try{projects=await getCollection("fpaProjects","createdAt",true)}catch(e){console.error(e)}
+ try{challenges=await getCollection("kiChallenges","createdAt",true)}catch(e){console.error(e)}
+ try{solutions=await getCollection("kiSolutions","createdAt",true)}catch(e){console.error(e)}
+ try{results=await getCollection("kiResults","createdAt",true)}catch(e){console.error(e)}
+
+ assignments=assignments.filter(p=>p.module==="fpa" && p.type==="teacherAssignment");
+ const praktikumsAuftraege=await getPraktikumsAuftraege();
+ const meineBerichte=isTeacher()?{}:await getMeinePraktikumsberichte();
+
+ return`${pageHead("SCHULE ↔ PRAXIS","fpA","Theorie-Praxis-Transfer-Aufträge und eigenständige Werkzeuge für die fachpraktische Ausbildung.",
+ isTeacher()?`<button class="primary"onclick="openPracticeForm()">＋ Theorie-Praxis-Transfer-Auftrag</button>`:"")}
+ <style>
+ .fpa-main{margin-bottom:18px}
+ .fpa-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+ .fpa-tool{min-height:185px;cursor:pointer;transition:.15s;text-align:left;color:var(--ink);font:inherit}
+ .fpa-tool:hover{transform:translateY(-2px)}
+ .fpa-tool .emoji{font-size:30px;display:block;margin-bottom:10px}
+ .fpa-tool strong{display:block;font-size:14px;color:var(--blue-dark);margin:0 0 6px}
+ .fpa-tool small{display:block;font-size:12px;color:var(--muted);line-height:1.5}
+ .fpa-count{margin-top:14px}
+ .ki-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+ .ki-card{min-height:255px;cursor:pointer;transition:.15s;text-align:left;color:var(--ink);font:inherit}
+ .ki-card:hover{transform:translateY(-2px)}
+ .ki-card h2{font-size:16px;line-height:1.3;color:var(--blue-dark);margin:0 0 8px;font-weight:800}
+ .ki-card p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
+ .ki-step{font-size:27px;font-weight:800;margin-bottom:10px;color:var(--blue)}
+ .ki-action{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
+ .ki-process{margin-bottom:16px}
+ .ki-process h3{font-size:16px;color:var(--blue-dark);margin:0 0 4px}
+ .ki-process .grid strong{font-size:13px;color:var(--blue-dark)}
+ .ki-process .grid small{font-size:12px;color:var(--muted);line-height:1.5}
+ @media(max-width:850px){.fpa-tools{grid-template-columns:1fr}.ki-grid{grid-template-columns:1fr}}
+ .pk-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;margin-bottom:22px}
+ .pk-zeitstrahl{position:relative;padding-left:26px;margin:10px 0 0}
+ .pk-kennzahlen{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+ .pk-kz{background:#fff;border:1px solid var(--line,#e2eaf0);border-radius:12px;padding:16px 12px;text-align:center;cursor:pointer;transition:.15s}
+ .pk-kz:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(23,56,79,.08)}
+ .pk-kz strong{display:block;font-size:24px;color:var(--blue-dark)}
+ .pk-kz small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+ @media(max-width:800px){.pk-split{grid-template-columns:1fr}}
+ .pk-zeitstrahl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line,#e2eaf0)}
+ .pk-node{position:relative;border-radius:10px;background:#fff;border:1px solid var(--line,#e2eaf0);margin-bottom:8px;transition:.15s}
+ .pk-node::before{content:"";position:absolute;left:-21px;top:20px;width:11px;height:11px;border-radius:50%;background:#fff;border:2.5px solid var(--blue);z-index:1}
+ .pk-node.pk-laufend::before{border-color:#e8890c}
+ .pk-node.pk-vorbei::before{border-color:#3fa66a}
+ .pk-summary{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;list-style:none}
+ .pk-summary::-webkit-details-marker{display:none}
+ .pk-summary:hover{background:#f7fafc}
+ .pk-icon{font-size:18px;flex:0 0 auto}
+ .pk-info{flex:1;min-width:0}
+ .pk-info strong{display:block;font-size:13px}
+ .pk-info small{display:block;color:var(--muted);font-size:11px;margin-top:3px;line-height:1.5}
+ .pk-ampeln{display:flex;gap:5px;flex:0 0 auto}
+ .pk-ampel-dot{width:13px;height:13px;border-radius:50%;display:inline-block;border:1.5px solid rgba(0,0,0,.08)}
+ .pk-body{padding:0 12px 12px 40px}
+ .pk-body small{display:block;color:var(--muted);font-size:11px;line-height:1.6}
+ </style>
+
+ <div class="kicker">PRAKTIKUMSPHASEN & BLOCKBERICHTE 2026/27</div>
+ <div class="pk-split">
+ <div class="pk-zeitstrahl">${PRAKTIKUMSPHASEN.map(p=>{
+ const heute=new Date().toISOString().slice(0,10);
+ const status=heute>=p.start&&heute<=p.end?"laufend":heute>p.end?"vorbei":"kommend";
+ const frist=letzterDonnerstagVorOrAm(p.end);
+ const typen=praktikumsberichtTypenFuerPhase(p.id);
+ const eigeneAmpeln=typen.map(t=>{
+ const eintrag=meineBerichte[`${p.id}_${t.typ}`];
+ return`<span class="pk-ampel-dot"style="background:${ampelFarbe(eintrag?.ampel)}"title="${t.label}: ${eintrag?ampelText(eintrag.ampel):"noch nicht hochgeladen"}"></span>`;
+ }).join("");
+ const rahmenfarbe=p.bereich==="Erziehungsbereich"?"#3fa66a":p.bereich==="Pflegebereich"?"#4a90d9":"#b8c4cc";
+ return`<details class="pk-node pk-${status}"style="border-left:4px solid ${rahmenfarbe}">
+ <summary class="pk-summary">
+ <span class="pk-icon">${p.icon}</span>
+ <div class="pk-info">
+ <strong>${esc(p.titel)}</strong>
+ <small>${esc(fmtDateOnly(p.start))}–${esc(fmtDateOnly(p.end))}</small>
+ </div>
+ ${isTeacher()?"":`<div class="pk-ampeln">${eigeneAmpeln}</div>`}
+ </summary>
+ <div class="pk-body">
+ <small>Abgabe Blockbericht + Arbeitszeiten-Nachweis: <strong>${esc(fmtDateOnly(frist))}, 19 Uhr</strong></small>
+ ${typen.length>1?`<small>Abgabe Einschätzungsbogen: <strong>${esc(fmtDateOnly(einschaetzungFrist(p.id)))}, 19 Uhr</strong></small>`:""}
+ <button class="secondary"style="margin-top:8px;font-size:11px"onclick="${isTeacher()?`openLehrkraftPraktikumsUebersicht('${p.id}')`:`openPraktikumsblockDetail('${p.id}')`}">${isTeacher()?"Klassenübersicht öffnen":"Berichte hochladen/ansehen"} →</button>
+ </div>
+ </details>`;
+ }).join("")}
+ ${isTeacher()?`<div style="margin:10px 0 0 26px"><button class="secondary"onclick="openPraktikumsGesamtuebersicht()"style="font-size:11px"> Ampel-Gesamtübersicht (alle Blöcke) & PDF-Export</button></div>`:""}
+ </div>
+ <div class="pk-kennzahlen">
+ <a class="card pk-kz"href="taetigkeitsnachweis.pdf"download style="text-decoration:none">
+ <strong style="font-size:15px"> PDF</strong><small>Tätigkeitsnachweis</small>
+ </a>
+ <a class="card pk-kz"href="einschaetzungsbogen.pdf"download style="text-decoration:none">
+ <strong style="font-size:15px"> PDF</strong><small>Einschätzungsbogen</small>
+ </a>
+ <a class="card pk-kz"href="fehlzeitentabelle.pdf"download style="text-decoration:none">
+ <strong style="font-size:15px"> PDF</strong><small>Fehlzeitentabelle (Anlage zum Tätigkeitsnachweis)</small>
+ </a>
+ </div>
+ </div>
+
+ <div class="grid grid-4"style="margin-bottom:22px;gap:10px">
+ <button type="button"class="card pk-kz"onclick="closeModal();const el=document.getElementById('fpaAuftraegeAnker');if(el){el.open=true;el.scrollIntoView({behavior:'smooth'})}">
+ <strong>${assignments.length}</strong><small> Theorie-Praxis-Transfer-Aufträge</small>
+ </button>
+ <button type="button"class="card pk-kz"onclick="openFPAQuestions()">
+ <strong>${questions.length}</strong><small> Fragen aus der Praxis</small>
+ </button>
+ <button type="button"class="card pk-kz"onclick="openFPAProjects()">
+ <strong>${projects.length}</strong><small> Projekte in der Praxis</small>
+ </button>
+ <button type="button"class="card pk-kz"onclick="go('ki')">
+ <strong>${challenges.length}</strong><small> KI-Challenges</small>
+ </button>
+ </div>
+
+ <details class="noten-collapsible"id="fpaAuftraegeAnker"style="margin-bottom:16px">
+ <summary>BEREICH 1 · LEHRKRAFT → SCHÜLER: Theorie-Praxis-Transfer-Aufträge (${assignments.length})</summary>
+ <div class="card"style="margin-top:8px;border-left:4px solid #4a90d9">
+ <p style="margin-top:0">Hier erscheinen ausschließlich fpA-Theorie-Praxis-Transfer-Aufträge der Lehrkraft: beobachten, bearbeiten, durchführen.</p>
+ <div class="grid grid-2">
+ ${assignments.map(p=>`<article class="card">
+ <span class="pill ${p.state==="offen"?"orange":"green"}">${esc(p.state||"offen")}</span>
+ <h3>${esc(p.title||"Theorie-Praxis-Transfer-Auftrag")}</h3>
+ <p>${esc(p.text||"")}</p>
+ <small>${esc(p.date||"")}</small>
+ ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('practice','${p.id}','Theorie-Praxis-Transfer-Auftrag')">Löschen</button></div>`:""}
+ </article>`).join("")||`<div class="empty">Noch keine Theorie-Praxis-Transfer-Aufträge vorhanden.</div>`}
+ </div>
+ </div>
+ </details>
+
+ <div class="kicker"style="margin:26px 0 8px">BEREICH 2 · KI-INNOVATIONSPARTNERSCHAFTEN</div>
+ <div class="ki-grid">
+ <div class="card ki-card"style="background:#fff;border-left:2px solid #1688cf">
+ <div class="ki-step">1</div>
+ <h2>Praxisproblem<br>Herausforderungen im Praktikumsbetrieb</h2>
+ <p>Ein realer Bedarf wird beschrieben: Betriebe tragen konkrete Herausforderungen ein, gesammelt in einer Bibliothek.</p>
+ <div class="ki-action">
+ <span class="pill">${challenges.length} Einträge</span>
+ <button type="button"class="secondary"style="font-size:11px"onclick="openKIChallengesLibrary()">Öffnen →</button>
+ ${isTeacher()?`<button type="button"class="primary"style="font-size:11px"onclick="openKIChallengeForm()">＋ Praxisproblem eintragen</button>`:""}
+ </div>
+ </div>
+ <button class="card ki-card"style="background:#fff;border-left:2px solid #1a9b8e"onclick="openKISolutionsLibrary()">
+ <div class="ki-step">2</div>
+ <h2>Schülerteam / Schüler<br>löst Herausforderung</h2>
+ <p>Ein Schülerteam bearbeitet die Herausforderung: Team, Aufgaben und KI-Einsatz werden dokumentiert.</p>
+ <div class="ki-action"><span class="pill">${solutions.length} Bearbeitungen</span><span class="pill">Öffnen →</span></div>
+ </button>
+ <button class="card ki-card"style="background:#fff;border-left:2px solid #3fa66a"onclick="openKIResultsLibrary()">
+ <div class="ki-step">3</div>
+ <h2>Ergebnisse<br>Ideen & Produkte</h2>
+ <p>Die Lösung wird dokumentiert: entstandene Ideen, Konzepte, Prototypen und Produkte werden gesammelt.</p>
+ <div class="ki-action"><span class="pill">${results.length} Ergebnisse</span><span class="pill">Öffnen →</span></div>
+ </button>
+ </div>
+ ${footer()}`;
+}
+
+function openFPAQuestions(){
+ let a=[];
+ getCollection("fpaQuestions","createdAt",true).then(rows=>{
+ a=rows;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">fpA · FRAGEN</div><h2> Fragen aus der Praxis</h2>
+ <div class="list">${a.map(q=>`<div class="card"style="margin-bottom:10px">
+ <small>${esc(q.createdAt?fmtDate(q.createdAt):"")}</small><h3>${esc(q.title||"Frage")}</h3>
+ <p>${esc(q.text||"")}</p><span class="pill">${esc(q.studentName||"")}</span>
+ ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('fpaQuestions','${q.id}','Praxisfrage')">Löschen</button></div>`:""}
+ </div>`).join("")||`<div class="empty">Noch keine Fragen.</div>`}</div>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
+ <button class="primary"onclick="closeModal();setTimeout(openFPAQuestionForm,50)">＋ Frage eintragen</button></div>`);
+ }).catch(e=>{console.error(e);toast("Fragen konnten nicht geladen werden.")});
+}
+function openFPAQuestionForm(){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">fpA · FRAGEN</div><h2>Frage aus der Praxis eintragen</h2>
+ <div class="form">
+ <label>Titel / kurze Frage<input id="fpaQTitle"required></label>
+ <label>Meine Frage<textarea id="fpaQText"rows="5"required></textarea></label>
+ <label>Kontext aus dem Praktikum<textarea id="fpaQContext"rows="3"></textarea></label>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
+ <button class="primary"onclick="saveFPAQuestion()">Speichern</button></div>
+ </div>`);
+}
+async function saveFPAQuestion(){
+ const title=$("fpaQTitle")?.value.trim()||"", textQ=$("fpaQText")?.value.trim()||"";
+ if(!title||!textQ){toast("Bitte Titel und Frage ausfüllen.");return}
+ try{
+ await addDoc(collection(db,"fpaQuestions"),{
+ module:"fpa",type:"question",title,text:textQ,context:$("fpaQContext")?.value.trim()||"",
+ studentName:profile?.displayName||currentUser?.email||"Campus-Mitglied",
+ createdBy:currentUser.uid,createdAt:serverTimestamp()
+ });
+ closeModal();await render();toast("Frage gespeichert.");
+ }catch(e){console.error(e);toast("Frage konnte nicht gespeichert werden: "+(e.code||"Fehler"))}
+}
+
+function openFPAProjects(){
+ getCollection("fpaProjects","createdAt",true).then(a=>{
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">fpA · PROJEKTE</div><h2> Projekte in der Praxis</h2>
+ <div class="list">${a.map(p=>`<div class="card"style="margin-bottom:10px">
+ <span class="pill">${esc(p.status||"offen")}</span><h3>${esc(p.title||"Praxisprojekt")}</h3>
+ <p>${esc(p.description||"")}</p><p><b>Team:</b> ${esc(p.team||"—")} · <b>Praxispartner:</b> ${esc(p.partner||"—")}</p>
+ ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('fpaProjects','${p.id}','Praxisprojekt')">Löschen</button></div>`:""}
+ </div>`).join("")||`<div class="empty">Noch keine Praxisprojekte.</div>`}</div>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
+ <button class="primary"onclick="closeModal();setTimeout(openFPAProjectForm,50)">＋ Projekt eintragen</button></div>`);
+ }).catch(e=>{console.error(e);toast("Projekte konnten nicht geladen werden.")});
+}
+function openFPAProjectForm(){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">fpA · PROJEKT</div><h2>Praxisprojekt eintragen</h2>
+ <div class="form">
+ <label>Projektname<input id="fpaPTitle"required></label>
+ <label>Team / Schüler<input id="fpaPTeam"></label>
+ <label>Praxispartner<input id="fpaPPartner"></label>
+ <label>Beschreibung<textarea id="fpaPDescription"rows="4"></textarea></label>
+ <label>Ziel<textarea id="fpaPGoal"rows="3"></textarea></label>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
+ <button class="primary"onclick="saveFPAProject()">Speichern</button></div>
+ </div>`);
+}
+async function saveFPAProject(){
+ const title=$("fpaPTitle")?.value.trim()||"";if(!title){toast("Bitte einen Projektnamen eingeben.");return}
+ try{
+ await addDoc(collection(db,"fpaProjects"),{
+ module:"fpa",title,team:$("fpaPTeam")?.value.trim()||"",
+ partner:$("fpaPPartner")?.value.trim()||"",description:$("fpaPDescription")?.value.trim()||"",
+ goal:$("fpaPGoal")?.value.trim()||"",status:"offen",
+ createdBy:currentUser.uid,createdAt:serverTimestamp()
+ });
+ closeModal();await render();toast("Praxisprojekt gespeichert.");
+ }catch(e){console.error(e);toast("Projekt konnte nicht gespeichert werden: "+(e.code||"Fehler"))}
+}
+
+async function renderKI(){
+ let challenges=[],solutions=[],results=[];
+ try{challenges=await getCollection("kiChallenges","createdAt",true)}catch(e){console.error(e)}
+ try{solutions=await getCollection("kiSolutions","createdAt",true)}catch(e){console.error(e)}
+ try{results=await getCollection("kiResults","createdAt",true)}catch(e){console.error(e)}
+
+ return`${pageHead("INNOVATIONSPARTNERSCHAFT","KI-Innovationspartnerschaften","Praxisproblem → Schülerteam → Ergebnis.",`<button class="primary"onclick="openKIChallengeForm()">＋ Praxisproblem eintragen</button>`)}
+ <style>
+ .ki-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+ .ki-card{min-height:255px;cursor:pointer;transition:.15s;text-align:left;color:var(--ink);font:inherit}
+ .ki-card:hover{transform:translateY(-2px)}
+ .ki-card h2{font-size:16px;line-height:1.3;color:var(--blue-dark);margin:0 0 8px;font-weight:800}
+ .ki-card p{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
+ .ki-step{font-size:27px;font-weight:800;margin-bottom:10px;color:var(--blue)}
+ .ki-action{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
+ .ki-process{margin-bottom:16px}
+ .ki-process h3{font-size:16px;color:var(--blue-dark);margin:0 0 4px}
+ .ki-process .grid strong{font-size:13px;color:var(--blue-dark)}
+ .ki-process .grid small{font-size:12px;color:var(--muted);line-height:1.5}
+ @media(max-width:850px){.ki-grid{grid-template-columns:1fr}}
+ </style>
+ <div class="ki-grid">
+ <button class="card ki-card"style="background:#fff;border-left:2px solid #1688cf"onclick="openKIChallengesLibrary()">
+ <div class="ki-step">1</div>
+ <h2>Praxisproblem<br>Herausforderungen im Praktikumsbetrieb</h2>
+ <p>Ein realer Bedarf wird beschrieben: Betriebe tragen konkrete Herausforderungen ein, gesammelt in einer Bibliothek.</p>
+ <div class="ki-action"><span class="pill">${challenges.length} Einträge</span><span class="pill">Öffnen →</span></div>
+ </button>
+ <button class="card ki-card"style="background:#fff;border-left:2px solid #1a9b8e"onclick="openKISolutionsLibrary()">
+ <div class="ki-step">2</div>
+ <h2>Schülerteam / Schüler<br>löst Herausforderung</h2>
+ <p>Ein Schülerteam bearbeitet die Herausforderung: Team, Aufgaben und KI-Einsatz werden dokumentiert.</p>
+ <div class="ki-action"><span class="pill">${solutions.length} Bearbeitungen</span><span class="pill">Öffnen →</span></div>
+ </button>
+ <button class="card ki-card"style="background:#fff;border-left:2px solid #3fa66a"onclick="openKIResultsLibrary()">
+ <div class="ki-step">3</div>
+ <h2>Ergebnisse<br>Ideen & Produkte</h2>
+ <p>Die Lösung wird dokumentiert: entstandene Ideen, Konzepte, Prototypen und Produkte werden gesammelt.</p>
+ <div class="ki-action"><span class="pill">${results.length} Ergebnisse</span><span class="pill">Öffnen →</span></div>
+ </button>
+ </div>${footer()}`;
+}
+
+function openKIChallengeForm(){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">1 · PRAXISPROBLEM</div>
+ <h2>Herausforderung eintragen</h2><div class="form">
+ <label>Betrieb / Einrichtung<input id="kiCompany"required></label>
+ <label>Ansprechperson<input id="kiContact"></label>
+ <label>Titel des Praxisproblems<input id="kiTitle"required></label>
+ <label>Herausforderung<textarea id="kiDescription"rows="5"required></textarea></label>
+ <label>Betroffene / Zielgruppe<textarea id="kiTarget"rows="3"></textarea></label>
+ <label>Gewünschter Nutzen<textarea id="kiGoal"rows="3"></textarea></label>
+ <label>Datenschutz / Rahmenbedingungen<textarea id="kiPrivacy"rows="3"></textarea></label>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
+ <button class="primary"onclick="saveKIChallenge()">Speichern</button></div></div>`);
+}
+async function saveKIChallenge(){
+ const title=$("kiTitle")?.value.trim()||"", desc=$("kiDescription")?.value.trim()||"";
+ if(!title||!desc){toast("Bitte Titel und Herausforderung ausfüllen.");return}
+ try{
+ await addDoc(collection(db,"kiChallenges"),{
+ module:"kiInnovationspartnerschaften",company:$("kiCompany")?.value.trim()||"",
+ contact:$("kiContact")?.value.trim()||"",title,description:desc,
+ target:$("kiTarget")?.value.trim()||"",goal:$("kiGoal")?.value.trim()||"",
+ privacy:$("kiPrivacy")?.value.trim()||"",status:"offen",
+ createdBy:currentUser.uid,createdAt:serverTimestamp()
+ });
+ closeModal();await render();toast("Praxisproblem gespeichert.");
+ }catch(e){console.error("KI Herausforderung:",e);toast("Speichern fehlgeschlagen: "+(e.code||"Fehler"))}
+}
+function openKIChallengesLibrary(){
+ getCollection("kiChallenges","createdAt",true).then(a=>{
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">1 · PRAXISPROBLEM</div>
+ <h2>Bibliothek der Herausforderungen</h2>
+ <div class="list">${a.map(c=>`<div class="card"style="margin-bottom:10px">
+ <span class="pill">${esc(c.status||"offen")}</span><h3>${esc(c.title||"Herausforderung")}</h3>
+ <small>${esc(c.company||"")}</small><p>${esc(c.description||"")}</p>
+ ${isTeacher()?`<button class="secondary"onclick="deleteCampusEntry('kiChallenges','${c.id}','Herausforderung')">Löschen</button>`:""}
+ <button class="primary"onclick="openKITakeChallenge('${c.id}')">Herausforderung übernehmen</button>
+ </div>`).join("")||`<div class="empty">Noch keine Herausforderungen.</div>`}</div>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
+ <button class="primary"onclick="closeModal();setTimeout(openKIChallengeForm,50)">＋ Neue Herausforderung</button></div>`);
+ }).catch(e=>{console.error(e);toast("Herausforderungen konnten nicht geladen werden.")});
+}
+function openKITakeChallenge(id){
+ getCollection("kiChallenges","createdAt",true).then(a=>{
+ const c=a.find(x=>x.id===id);if(!c){toast("Herausforderung nicht gefunden.");return}
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">2 · ENTWICKLUNG</div>
+ <h2>${esc(c.title)}</h2><p>${esc(c.description)}</p><div class="form">
+ <label>Einzelperson oder Team<select id="kiMode"><option value="team">Schülerteam</option><option value="single">Einzelschüler/in</option></select></label>
+ <label>Name / Team<input id="kiTeam"required></label><label>Mitglieder<textarea id="kiMembers"rows="3"></textarea></label>
+ <label>Wer macht was?<textarea id="kiRoles"rows="4"></textarea></label>
+ <label>Geplanter KI-Einsatz<textarea id="kiAI"rows="4"></textarea></label>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
+ <button class="primary"onclick="saveKISolution('${c.id}')">Bearbeitung speichern</button></div></div>`);
+ }).catch(e=>{console.error(e);toast("Herausforderung konnte nicht geöffnet werden.")});
+}
+async function saveKISolution(challengeId){
+ const team=$("kiTeam")?.value.trim()||"";if(!team){toast("Bitte Name oder Team eintragen.");return}
+ try{
+ await addDoc(collection(db,"kiSolutions"),{
+ module:"kiInnovationspartnerschaften",challengeId,mode:$("kiMode")?.value||"team",
+ team,members:$("kiMembers")?.value.trim()||"",roles:$("kiRoles")?.value.trim()||"",
+ aiUse:$("kiAI")?.value.trim()||"",status:"in Bearbeitung",
+ createdBy:currentUser.uid,createdAt:serverTimestamp()
+ });
+ closeModal();await render();showMotivationsBild(false,"lernen");toast("Bearbeitung gespeichert.");
+ }catch(e){console.error("KI Lösung:",e);toast("Speichern fehlgeschlagen: "+(e.code||"Fehler"))}
+}
+function openKISolutionsLibrary(){
+ getCollection("kiSolutions","createdAt",true).then(a=>{
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">2 · ENTWICKLUNG</div>
+ <h2>Schülerteams & Lösungsentwicklung</h2>
+ <div class="list">${a.map(s=>`<div class="card"style="margin-bottom:10px">
+ <span class="pill">${esc(s.status||"in Bearbeitung")}</span><h3>${esc(s.team||"Schüler/in")}</h3>
+ <p><b>Mitglieder:</b> ${esc(s.members||"—")}</p><p><b>Wer macht was:</b> ${esc(s.roles||"—")}</p>
+ <p><b>KI-Einsatz:</b> ${esc(s.aiUse||"—")}</p>
+ ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('kiSolutions','${s.id}','Bearbeitung')">Löschen</button></div>`:""}
+ </div>`).join("")||`<div class="empty">Noch keine Bearbeitungen.</div>`}</div>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
+ <button class="primary"onclick="closeModal();setTimeout(openKIChallengesLibrary,50)">＋ Herausforderung auswählen</button></div>`);
+ }).catch(e=>{console.error(e);toast("Bearbeitungen konnten nicht geladen werden.")});
+}
+function openKIResultForm(){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">3 · ERGEBNIS</div>
+ <h2>Ergebnis dokumentieren</h2><div class="form">
+ <label>Titel<input id="kiResultTitle"required></label>
+ <label>Art<select id="kiResultType"><option>Idee</option><option>Konzept</option><option>Prototyp</option><option>Produkt</option><option>Material</option><option>Prompt / KI-Workflow</option><option>Sonstiges</option></select></label>
+ <label>Beschreibung<textarea id="kiResultDescription"rows="5"></textarea></label>
+ <label>Schülerteam / Schüler<input id="kiResultTeam"></label><label>Praxispartner<input id="kiResultPartner"></label>
+ <label>Link zum Ergebnis<input id="kiResultLink"></label>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button>
+ <button class="primary"onclick="saveKIResult()">Ergebnis speichern</button></div></div>`);
+}
+async function saveKIResult(){
+ const title=$("kiResultTitle")?.value.trim()||"";if(!title){toast("Bitte einen Titel eingeben.");return}
+ try{
+ await addDoc(collection(db,"kiResults"),{
+ module:"kiInnovationspartnerschaften",title,type:$("kiResultType")?.value||"Idee",
+ description:$("kiResultDescription")?.value.trim()||"",team:$("kiResultTeam")?.value.trim()||"",
+ partner:$("kiResultPartner")?.value.trim()||"",link:$("kiResultLink")?.value.trim()||"",
+ createdBy:currentUser.uid,createdAt:serverTimestamp()
+ });
+ closeModal();await render();toast("Ergebnis gespeichert.");
+ }catch(e){console.error("KI Ergebnis:",e);toast("Speichern fehlgeschlagen: "+(e.code||"Fehler"))}
+}
+function openKIResultsLibrary(){
+ getCollection("kiResults","createdAt",true).then(a=>{
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">3 · ERGEBNIS</div>
+ <h2>Ergebnisse, Ideen & Produkte</h2>
+ <div class="list">${a.map(r=>`<div class="card"style="margin-bottom:10px">
+ <span class="pill">${esc(r.type||"Ergebnis")}</span><h3>${esc(r.title||"Ergebnis")}</h3>
+ <p>${esc(r.description||"")}</p><p><b>Team:</b> ${esc(r.team||"—")} · <b>Praxispartner:</b> ${esc(r.partner||"—")}</p>
+ ${r.link?`<a href="${esc(r.link)}"target="_blank"rel="noopener">Ergebnis öffnen →</a>`:""}
+ ${isTeacher()?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="deleteCampusEntry('kiResults','${r.id}','Ergebnis')">Löschen</button></div>`:""}
+ </div>`).join("")||`<div class="empty">Noch keine Ergebnisse.</div>`}</div>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
+ <button class="primary"onclick="closeModal();setTimeout(openKIResultForm,50)">＋ Ergebnis eintragen</button></div>`);
+ }).catch(e=>{console.error(e);toast("Ergebnisse konnten nicht geladen werden.")});
+}
+
 
 /* =========================================================
  KALENDER-EXPORT FÜRS HANDY (.ics)
@@ -8472,7 +12006,7 @@ function escapeICS(text){
 }
 
 function buildICS(events,calName){
- const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//F12Sb//Kalender//DE","CALSCALE:GREGORIAN",`X-WR-CALNAME:${escapeICS(calName||"F12Sb Kalender")}`];
+ const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//F11Sb//Kalender//DE","CALSCALE:GREGORIAN",`X-WR-CALNAME:${escapeICS(calName||"F11Sb Kalender")}`];
  const stamp=new Date().toISOString().replace(/[-:]/g,"").split(".")[0]+"Z";
  events.forEach((e,i)=>{
  const raw=e.start||e.date||e.startDate;
@@ -8486,7 +12020,7 @@ function buildICS(events,calName){
  nd.setDate(nd.getDate()+1);
  const dtEnd=`${nd.getFullYear()}${String(nd.getMonth()+1).padStart(2,"0")}${String(nd.getDate()).padStart(2,"0")}`;
  lines.push("BEGIN:VEVENT");
- lines.push(`UID:${e.id||("ck-"+i+"-"+dt)}@f12sb-weilheim`);
+ lines.push(`UID:${e.id||("ck-"+i+"-"+dt)}@f11sb-weilheim`);
  lines.push(`DTSTAMP:${stamp}`);
  lines.push(`DTSTART;VALUE=DATE:${dt}`);
  lines.push(`DTEND;VALUE=DATE:${dtEnd}`);
@@ -8530,13 +12064,7 @@ async function exportCampusCalendarICS(){
  const ferienRangeEvents=ferienZeitraeume.map(([start,end,label])=>(
  {start,rangeEnd:end,title:label,description:"Schulferien in Bayern"}
  ));
- const pruefungsTermineICS=[
- ["2027-05-12","Deutsch – Fachabiturprüfung"],
- ["2027-05-14","Profilfach (Pädagogik/Psychologie) – Fachabiturprüfung"],
- ["2027-06-01","Englisch – Fachabiturprüfung"],
- ["2027-06-03","Mathematik – Fachabiturprüfung"]
- ].map(([start,title])=>({start,title,description:"Zentraler Prüfungstermin lt. Kultusministerium."}));
- downloadICS([...events,...birthdayEvents,...ferienRangeEvents,...pruefungsTermineICS],"campuskalender.ics","F12Sb Kalender");
+ downloadICS([...events,...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F11Sb Kalender");
  toast("Kalender wird heruntergeladen – Datei öffnen, um sie zum Handy-Kalender hinzuzufügen.");
  }catch(e){console.error("Kalender-Export:",e);toast("Der Kalender konnte nicht exportiert werden.")}
 }
@@ -8549,7 +12077,7 @@ function exportCalendarDayICS(y,m,d){
  return !isNaN(x)&&x.getFullYear()===y&&x.getMonth()===m&&x.getDate()===d;
  });
  if(!day.length){toast("An diesem Tag gibt es keinen Termin zum Exportieren.");return}
- downloadICS(day,`termin-${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}.ics`,"F12Sb Termin");
+ downloadICS(day,`termin-${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}.ics`,"F11Sb Termin");
 }
 
 async function renderKalender(){
@@ -8559,7 +12087,16 @@ async function renderKalender(){
  try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){console.error("Kalender calendar:",e)}
  }
 
- const typeMeta=CAL_EVENT_TYPES;
+ const typeMeta={
+ schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
+ kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
+ projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
+ referat:{label:"Referat",className:"cal-yellow"},
+ praesentation:{label:"Präsentation",className:"cal-purple"},
+ sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
+ geburtstag:{label:"Geburtstag",className:"cal-birthday"},
+ ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
+ };
 
  // Schulferien Bayern – Schuljahr 2026/27.
  const ferienZeitraeume=[
@@ -8584,21 +12121,9 @@ async function renderKalender(){
  });
  }
  });
- // Schriftliche Fachabiturprüfung 2027 – zentrale Prüfungstermine für alle
- // FOSBOS Bayern (Bekanntmachung des Kultusministeriums, BayMBl. 2025 Nr. 320).
- const pruefungsTermine=[
- ["2027-05-12","Deutsch – Fachabiturprüfung"],
- ["2027-05-14","Profilfach (Pädagogik/Psychologie) – Fachabiturprüfung"],
- ["2027-06-01","Englisch – Fachabiturprüfung"],
- ["2027-06-03","Mathematik – Fachabiturprüfung"]
- ];
- const pruefungsEvents=pruefungsTermine.map(([datum,titel])=>({
- start:datum,type:"pruefung",title:titel,
- description:"Zentraler Prüfungstermin lt. Kultusministerium – gilt für alle Beruflichen Oberschulen Bayerns."
- }));
  let birthdayEvents=[];
  try{birthdayEvents=await getBirthdayEvents()}catch(e){console.error("Kalender Geburtstage:",e)}
- events=[...events,...birthdayEvents,...ferienEvents,...pruefungsEvents];
+ events=[...events,...birthdayEvents,...ferienEvents];
 
  const normalizeType=e=>{
  const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
@@ -8647,7 +12172,7 @@ async function renderKalender(){
  };
 
  window._campusCalendarEvents=events;
- const addButton=isTeacher()?'<button id="calendarAddBtn"class="primary"type="button">＋ Termin eintragen</button><button class="secondary"type="button"onclick="importSchultermine()"> Schultermine 26/27 eintragen</button>':"";
+ const addButton=isTeacher()?'<button id="calendarAddBtn"class="primary"type="button">＋ Termin eintragen</button>':"";
  const birthdayButton='<button id="calendarBirthdayBtn"class="secondary"type="button"> Meinen Geburtstag eintragen</button>';
  const exportButton='<button class="secondary"type="button"onclick="exportCampusCalendarICS()"> Kalender aufs Handy exportieren</button>';
  const legend=Object.entries(typeMeta).map(([k,v])=>
@@ -8666,23 +12191,10 @@ async function renderKalender(){
  .cal-num{display:block;font-size:14px;flex:0 0 auto}
  .cal-event-type{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:9.5px;line-height:1.25;margin-top:4px;font-weight:700;word-break:break-word}
  .cal-count{position:absolute;right:5px;bottom:5px;font-size:10px;background:rgba(255,255,255,.8);border-radius:10px;padding:1px 5px}
- .cal-blue{background:#dbeafe!important}.cal-red{background:#fee2e2!important}.cal-green{background:#dcfce7!important}.cal-teal{background:#ccfbf1!important}
+ .cal-blue{background:#dbeafe!important}.cal-red{background:#fee2e2!important}.cal-green{background:#dcfce7!important}
  .cal-yellow{background:#fef3c7!important}.cal-purple{background:#ede9fe!important}.cal-grey{background:#e5e7eb!important}
  .cal-holiday{background:#e3f5da!important;border-color:#8bc34a!important}
  .cal-birthday{background:#ffe4ec!important;border-color:#f472b6!important}
- .cal-gold{background:#fdf0c8!important;border-color:#d4a017!important;font-weight:700!important}
- .cal-orange{background:#ffedd5!important;border-color:#fb923c!important}
- .cal-indigo{background:#e0e7ff!important;border-color:#818cf8!important}
- .cal-sand{background:#f1e4d3!important;border-color:#b08968!important}
- .cal-lime{background:#ecfccb!important;border-color:#84cc16!important}
- .cal-fuchsia{background:#fae8ff!important;border-color:#d946ef!important}
- .cal-sky{background:#bae6fd!important;border-color:#0ea5e9!important}
- .cal-amber{background:#fde68a!important;border-color:#f59e0b!important}
- .cal-rose{background:#fecdd3!important;border-color:#fb7185!important}
- .cal-cyan{background:#cffafe!important;border-color:#22d3ee!important}
- .cal-emerald{background:#d1fae5!important;border-color:#34d399!important}
- .cal-slate{background:#cbd5e1!important;border-color:#64748b!important}
- .cal-violet{background:#e9d5ff!important;border-color:#a855f7!important}
  .cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
  .cal-legend-item{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#fff;font-size:12px}
  .cal-legend-dot{width:13px;height:13px;border-radius:3px;border:1px solid rgba(0,0,0,.12)}
@@ -8752,9 +12264,9 @@ async function getBirthdayEvents(){
  if(!mm||!dd)return null;
  const dateStr=`${yearFor(mm)}-${String(mm).padStart(2,"0")}-${String(dd).padStart(2,"0")}`;
  return {
- uid:u.uid,start:dateStr,type:"geburtstag",
+ start:dateStr,type:"geburtstag",
  title:` ${u.displayName||u.email||"Campus-Mitglied"} hat Geburtstag`,
- description:"Herzlichen Glückwunsch von der ganzen F12Sb!"
+ description:"Herzlichen Glückwunsch von der ganzen F11Sb!"
  };
  }).filter(Boolean);
  }catch(e){console.error("Geburtstage laden:",e);return []}
@@ -8784,20 +12296,6 @@ async function removeBirthday(){
 }
 window.removeBirthday=removeBirthday;
 
-async function adminRemoveBirthday(uid){
- if(!isTeacher()){toast("Nur Lehrkräfte können fremde Geburtstage entfernen.");return}
- if(!confirm("Diesen Geburtstag wirklich entfernen?"))return;
- try{
- await updateDoc(doc(db,"users",uid),{birthday:"",updatedAt:serverTimestamp()});
- toast("Geburtstag entfernt.");
- await render();
- }catch(e){
- console.error("Geburtstag (fremd) löschen:",e);
- toast(e?.code==="permission-denied"?"Firebase verweigert das Entfernen. Bitte die Firestore-Regeln prüfen.":"Konnte nicht entfernt werden.");
- }
-}
-window.adminRemoveBirthday=adminRemoveBirthday;
-
 async function saveBirthday(){
  const val=$("birthdayInput")?.value||"";
  if(!val){toast("Bitte ein Datum auswählen.");return}
@@ -8813,95 +12311,20 @@ async function saveBirthday(){
  }
 }
 
-const CAL_EVENT_TYPES={
- // bestehende Terminarten
- schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
- kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
- kprim:{label:"KPrim-Test",className:"cal-teal"},
- projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
- referat:{label:"Referat",className:"cal-yellow"},
- praesentation:{label:"Präsentation",className:"cal-purple"},
- // neue Terminarten (Schulkalender 26/27)
- gemeinschaftstag:{label:"Gemeinschaftstag",className:"cal-orange"},
- digitaltag:{label:"Digitaltag",className:"cal-indigo"},
- notenschluss:{label:"Notenschluss",className:"cal-sand"},
- weihnachtsfeier:{label:"Weihnachtsfeier",className:"cal-lime"},
- theaterbesuch:{label:"Theaterbesuch",className:"cal-fuchsia"},
- muendl_pruefungen:{label:"Mündliche Prüfungen",className:"cal-sky"},
- abi_zeugnis:{label:"Abitur-Zeugnisverleihung",className:"cal-amber"},
- rueckgabe_streichvorschlag:{label:"Rückgabe Streichvorschlag",className:"cal-rose"},
- anmeldung_muendl:{label:"Anmeldung mündl. Prüfung",className:"cal-cyan"},
- anmeldung_einsicht:{label:"Anmeldung Einsichtnahme",className:"cal-emerald"},
- notenbekanntgabe_ap:{label:"Notenbekanntgabe Abschlussprüfung",className:"cal-slate"},
- elternabend:{label:"Elternabend",className:"cal-violet"},
- // automatische Einträge
- sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
- geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"},
- pruefung:{label:"Abschlussprüfung",className:"cal-gold"}
-};
-// Reihenfolge der Auswahl im Formular (ohne automatische Einträge)
-const CAL_SELECT_KEYS=["schulaufgabe","kurzarbeit","kprim","projektvorstellung","referat","praesentation",
- "gemeinschaftstag","digitaltag","notenschluss","weihnachtsfeier","theaterbesuch","muendl_pruefungen",
- "abi_zeugnis","rueckgabe_streichvorschlag","anmeldung_muendl","anmeldung_einsicht","notenbekanntgabe_ap","elternabend","sonstiges"];
-function calTypeOptionsHTML(){
- return CAL_SELECT_KEYS.map(k=>`<option value="${k}">${k==="sonstiges"?"Sonstiger Termin / frei wählbar":esc(CAL_EVENT_TYPES[k].label)}</option>`).join("");
-}
-
 function calendarTypeMeta(e){
  const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
  const key=raw==="präsentation"?"praesentation":raw;
- return CAL_EVENT_TYPES[key]||CAL_EVENT_TYPES.sonstiges;
+ return ({
+ schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
+ kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
+ projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
+ referat:{label:"Referat",className:"cal-yellow"},
+ praesentation:{label:"Präsentation",className:"cal-purple"},
+ sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
+ geburtstag:{label:"Geburtstag",className:"cal-birthday"},
+ ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
+ })[key]||{label:"Sonstiger Termin",className:"cal-grey"};
 }
-
-// Einmaliger Import der Schultermine 26/27 (Terminkalender FOSBOS Weilheim, Stand 09/2026).
-// Feste Dokument-IDs: mehrfaches Klicken erzeugt keine Dubletten. Jeder Eintrag ist ein
-// normaler Kalendereintrag und kann von Lehrkräften/Admin wie gewohnt bearbeitet und gelöscht werden.
-const SEED_SCHULTERMINE_2627=[
- ["2026-09-25","gemeinschaftstag","Gemeinschaftstag","","Gemeinschaftstag für alle Klassen"],
- ["2026-10-08","elternabend","Elternabend","17:00","17:00 Uhr Wahl Elternbeirat\n17:30 Uhr Klassenelternversammlung\nIm Anschluss 1. Elternbeiratssitzung"],
- ["2026-10-28","theaterbesuch","Theaterbesuch","","4.–6. Stunde: Theaterbesuch für alle 13. Klassen und zusätzliche 12. Klassen"],
- ["2026-10-29","digitaltag","1. Digitaltag","",""],
- ["2026-11-23","digitaltag","2. Digitaltag","",""],
- ["2026-12-23","weihnachtsfeier","Weihnachtsfeier der SMV","08:30",""],
- ["2027-01-22","notenschluss","Notenschluss Jahrgangsstufe 12 und 13","","Für 12/I und 13/I"],
- ["2027-03-16","digitaltag","3. Digitaltag","",""],
- ["2027-04-29","notenschluss","Notenschluss Jahrgangsstufe 12/13","",""],
- ["2027-06-23","notenbekanntgabe_ap","Notenbekanntgabe Abschlussprüfung","16:00","16:00 Uhr Jgst. 12/13: Klassenleitungsstunde. Notenbekanntgabe der Abschlussprüfungsergebnisse durch die Klassenleitung. Letzte Informationsmöglichkeit bei Herrn Avdullahi zum Streichvorschlag."],
- ["2027-06-23","anmeldung_muendl","Anmeldung zur mündlichen Prüfung","16:30","16:30–17:00 Uhr im Sekretariat"],
- ["2027-06-23","anmeldung_einsicht","Anmeldung zur Einsichtnahme in die Prüfungsarbeiten","16:30","16:30–17:00 Uhr im Sekretariat"],
- ["2027-06-24","anmeldung_muendl","Letztmögliche Anmeldung zur mündlichen Prüfung","08:30","Persönlich im Sekretariat"],
- ["2027-06-24","anmeldung_einsicht","Letztmögliche Anmeldung zur Einsichtnahme in die Prüfungsarbeiten","08:30","Persönlich im Sekretariat"],
- ["2027-06-25","muendl_pruefungen","Bekanntgabe Zeitplan mündliche Prüfungen","10:00","10:00–13:00 Uhr","F010"],
- ["2027-06-25","rueckgabe_streichvorschlag","Rückgabe Streichvorschlag","","Bis 12:00 Uhr: späteste Rückgabe des unterschriebenen Streichvorschlags an die Klassenleitung oder deren Vertretung"],
- ["2027-06-28","muendl_pruefungen","Mündliche Prüfungen","","Nach speziellem Zeitplan (28.–30.06.2027)"],
- ["2027-06-29","muendl_pruefungen","Mündliche Prüfungen","","Nach speziellem Zeitplan (28.–30.06.2027)"],
- ["2027-06-30","muendl_pruefungen","Mündliche Prüfungen","","Nach speziellem Zeitplan (28.–30.06.2027)"],
- ["2027-07-09","abi_zeugnis","Abitur-Zeugnisverleihung 2027","",""]
-];
-async function importSchultermine(){
- if(!isTeacher()){toast("Nur Lehrkräfte können Termine importieren.");return}
- if(!confirm("Die Schultermine 2026/27 (Gemeinschaftstag, Digitaltage, Notenschluss, Prüfungstermine …) jetzt in den Kalender eintragen? Bereits vorhandene Einträge werden nicht doppelt angelegt.")) return;
- let neu=0,vorhanden=0;
- try{
-  for(const [date,type,title,time,description,location=""] of SEED_SCHULTERMINE_2627){
-   const id=`schultermin26_${date}_${type}${title.startsWith("Letztmöglich")?"_letzte":""}${title.startsWith("Bekanntgabe Zeitplan")?"_zeitplan":""}`;
-   const ref=doc(db,"events",id);
-   const snap=await getDoc(ref);
-   if(snap.exists()){vorhanden++;continue}
-   await setDoc(ref,{title,date,start:date,type,time,location,description,
-    createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
-    createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
-   neu++;
-  }
-  toast(`${neu} Termine eingetragen${vorhanden?` (${vorhanden} schon vorhanden)`:""}.`);
-  await render();
- }catch(e){
-  console.error("Schultermine importieren:",e);
-  toast(e?.code==="permission-denied"?"Firebase verweigert das Eintragen. Bitte die Firestore-Regeln prüfen.":"Die Termine konnten nicht eingetragen werden.");
- }
-}
-window.importSchultermine=importSchultermine;
 
 function openCalendarDay(y,m,d){
  const events=window._campusCalendarEvents||[];
@@ -8921,12 +12344,9 @@ function openCalendarDay(y,m,d){
  ${e.time?`<p><strong>Uhrzeit:</strong> ${esc(e.time)}</p>`:""}
  ${e.location?`<p><strong>Ort:</strong> ${esc(e.location)}</p>`:""}
  <p style="white-space:pre-wrap">${esc(e.description||e.text||"")}</p>
- ${isTeacher() && e.id && e.type!=="ferien" && e.type!=="geburtstag" && e.type!=="pruefung"?`<div class="form-actions"style="margin-top:10px">
+ ${isTeacher() && e.id && e.type!=="ferien"?`<div class="form-actions"style="margin-top:10px">
  <button class="secondary"onclick="editCalendarEntry('${e.collection||"events"}','${e.id}','${esc(String(e.title||e.name||"").replace(/\n/g,"\\n"))}','${esc(String(e.type||"sonstiges"))}','${esc(String(e.date||e.start||"").slice(0,10))}','${esc(String(e.time||""))}','${esc(String(e.location||"").replace(/\n/g,"\\n"))}','${esc(String(e.description||e.text||"").replace(/\n/g,"\\n"))}')">Bearbeiten</button>
  <button class="secondary"onclick="deleteCalendarEntry('${e.collection||"events"}','${e.id}')">Termin löschen</button>
- </div>`:""}
- ${e.type==="geburtstag" && e.uid && (e.uid===currentUser.uid||isTeacher())?`<div class="form-actions"style="margin-top:10px">
- <button class="secondary"onclick="${e.uid===currentUser.uid?"removeBirthday()":`adminRemoveBirthday('${e.uid}')`}">Termin löschen</button>
  </div>`:""}
  </div>`;
  }).join("")||`<div class="empty">An diesem Tag ist noch kein Termin eingetragen.</div>`}</div>
@@ -9384,7 +12804,7 @@ nächste Schritt sinnvoll sein kann.</p>
 
 
 /* =========================================================
- F12Sb – LERNIMPULSE
+ F11Sb – LERNIMPULSE
  Zwei Zugänge:
  1. Gezielte Auswahl
  2. Lern-Glücksrad
@@ -9452,10 +12872,10 @@ const lernImpulse=[
 ];
 
 function lernImpulseDone(){
- try{return JSON.parse(localStorage.getItem("f12sb_lernimpulse_done")||"[]")}catch(e){return []}
+ try{return JSON.parse(localStorage.getItem("f11sb_lernimpulse_done")||"[]")}catch(e){return []}
 }
 function lernImpulseSaveDone(ids){
- try{localStorage.setItem("f12sb_lernimpulse_done",JSON.stringify(ids))}catch(e){}
+ try{localStorage.setItem("f11sb_lernimpulse_done",JSON.stringify(ids))}catch(e){}
 }
 function lernImpulseCategory(id){return lernImpulseKategorien.find(x=>x.id===id)}
 function renderLernimpulsCard(i){
@@ -9552,7 +12972,7 @@ window.completeLernimpuls=completeLernimpuls;
 
 
 /* =========================================================
- F12Sb – LERNSTANDSMESSUNG PP 11
+ F11Sb – LERNSTANDSMESSUNG PP 11
  26 Lernstandsmessungen
  5 identische Kompetenzdimensionen × 3 Punkte = 15 Punkte
  ========================================================= */
@@ -10294,7 +13714,7 @@ async function downloadLernstandResultPDF(id){
  return`<div class="item"><strong>${escPDF(String(i+1)+"."+q.label)} · ${q.points} P.</strong><div><em>Aufgabe:</em> ${escPDF(q.prompt||"")}</div><div style="margin-top:6px"><em>Musterlösung:</em><br>${escPDF(q.solution||"Noch keine Musterlösung hinterlegt.").replace(/\n/g,"<br>")}</div></div>`;
  }).join("");
  openToolPrintWindow(
- "Lernstandsmessung – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(scoreLine)}</strong></div>`+body,"F12Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
+ "Lernstandsmessung – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(scoreLine)}</strong></div>`+body,"F11Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
  );
  }catch(e){console.error("Lernstand PDF:",e);toast("Das PDF konnte nicht erstellt werden.")}
 }
@@ -10386,7 +13806,7 @@ async function downloadLernstandTeacherPDF(attemptId){
  }).join("");
  const scoreLine=a.status==="bewertet"?`Gesamt: ${a.total}/${max} Punkte (${lernstandStatusText(a.total,max)})`:`Gesamt bisher: ${Number(a.total)||0}/${max} Punkte (noch nicht vollständig bewertet)`;
  openToolPrintWindow(
- "Bewertungsbericht – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(a.displayName||"Schüler/in")} · Versuch ${a.attempt}/3</strong><br>${escPDF(scoreLine)}${a.feedback?`<br><em>Rückmeldung:</em> ${escPDF(a.feedback)}`:""}</div>`+body,"F12Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
+ "Bewertungsbericht – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(a.displayName||"Schüler/in")} · Versuch ${a.attempt}/3</strong><br>${escPDF(scoreLine)}${a.feedback?`<br><em>Rückmeldung:</em> ${escPDF(a.feedback)}`:""}</div>`+body,"F11Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
  );
  }catch(e){console.error("Lernstand-Bewertungsbericht PDF:",e);toast("Das PDF konnte nicht erstellt werden.")}
 }
@@ -10485,9 +13905,8 @@ async function render(){
  glossar:renderGlossar,
  fachaufsatz:renderFachaufsatzUebersicht,"fachaufsatz-board":renderFachaufsatzBoard,
  projekte:renderProjekte,kompetenz:renderKompetenz,journal:renderLernjournalRoute,
- resilienz:renderResilienz,fragenhilfe:renderFragenHilfe,
- kalender:renderKalender,team:renderTeam,
- leistungsnachweis:renderAlternativerLeistungsnachweis,
+ praktikum:renderPraktikum,resilienz:renderResilienz,praxisfragen:renderPraxisFragen,fragenhilfe:renderFragenHilfe,
+ praxisprojekte:renderPraxisProjekte,ki:renderKI,kalender:renderKalender,team:renderTeam,
  impulse:renderLernimpulse,lernstand:renderLernstand,
  kompetenzprofil:()=>modulePlaceholder("Kompetenzprofil"),methoden:renderLernmethoden,lernstrategien:renderLernstrategienTest,metakognition:renderMetakognition,
  lerncoaching:renderLerncoaching
@@ -10586,7 +14005,7 @@ entwickelt. Die übrige Campus-App bleibt dabei unverändert.</p></div>${footer(
 
 
 /* =========================================================
- F12Sb – MODAL BRIDGE
+ F11Sb – MODAL BRIDGE
  app.js wird als ES-Modul geladen. Funktionen aus einem
  ES-Modul sind nicht automatisch window-global.
  Die bestehenden Modal-Formulare verwenden jedoch inline
@@ -10639,9 +14058,24 @@ window.setUserStatus=setUserStatus;
 window.setUserRole=setUserRole;
 window.openPostForm=openPostForm;
 window.openPracticeForm=openPracticeForm;
+window.openFPAQuestions=openFPAQuestions;
+window.openFPAQuestionForm=openFPAQuestionForm;
+window.saveFPAQuestion=saveFPAQuestion;
+window.openFPAProjects=openFPAProjects;
+window.openFPAProjectForm=openFPAProjectForm;
+window.saveFPAProject=saveFPAProject;
+window.openKIChallengeForm=openKIChallengeForm;
+window.openKIChallengesLibrary=openKIChallengesLibrary;
+window.openKITakeChallenge=openKITakeChallenge;
+window.openKISolutionsLibrary=openKISolutionsLibrary;
+window.openKIResultForm=openKIResultForm;
+window.openKIResultsLibrary=openKIResultsLibrary;
 window.openKILearningLinkForm=openKILearningLinkForm;
 window.saveKILearningLink=saveKILearningLink;
 window.deleteKILearningLink=deleteKILearningLink;
+window.saveKIChallenge=saveKIChallenge;
+window.saveKISolution=saveKISolution;
+window.saveKIResult=saveKIResult;
 window.resilienzImpuls=resilienzImpuls;
 window.openResonanzatmung=openResonanzatmung;
 window.startResilienzSkill=startResilienzSkill;
@@ -10946,7 +14380,7 @@ Date().toISOString()})});await render()}catch(e){toast("Antwort konnte nicht ges
 function focusComment(id){setTimeout(()=>{const e=$("comment-"+id);if(e)
 {e.focus();e.scrollIntoView({behavior:"smooth",block:"center"});}},80)}
 async function deleteNews(id){
- if(!isTeacher()){toast("Nur Lehrkräfte können News löschen.");return}
+ if(!isAdmin()){toast("Nur der Admin kann News löschen.");return}
  if(!confirm("News wirklich löschen?"))return;
  try{await deleteDoc(doc(db,"news",id));await render();toast("News gelöscht.")}catch(e){console.error(e);toast("News konnte nicht gelöscht werden.")}
 }
@@ -11198,16 +14632,16 @@ async function addCompetence(){
 }
 
 function openPracticeForm(){
- if(!isTeacher()){toast("Nur Lehrkräfte können Praxisaufträge erstellen.");return}
+ if(!isTeacher()){toast("Nur Lehrkräfte können Theorie-Praxis-Transfer-Aufträge erstellen.");return}
  modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">PRAXIS</div>
-<h2>Praxisauftrag</h2><div class="form"><label>Titel<input id="rTitle"></label><label>Datum<input id="rDate"type="date"></label>
+<h2>Theorie-Praxis-Transfer-Auftrag</h2><div class="form"><label>Titel<input id="rTitle"></label><label>Datum<input id="rDate"type="date"></label>
 <label>Beschreibung<textarea id="rText"rows="4"></textarea></label><div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addPractice()">Speichern</button></div></div>`)}
 async function addPractice(){
- if(!isTeacher()){toast("Nur Lehrkräfte können Praxisaufträge erstellen.");return}
+ if(!isTeacher()){toast("Nur Lehrkräfte können Theorie-Praxis-Transfer-Aufträge erstellen.");return}
  try{await addDoc(collection(db,"practice"),
-{module:"fachreferat",type:"teacherAssignment",title:$("rTitle").value.trim()||"Praxisauftrag",date:cleanDateInput($("rDate").value),state:"offen",text:$("rText").value.trim()
+{module:"fpa",type:"teacherAssignment",title:$("rTitle").value.trim()||"Theorie-Praxis-Transfer-Auftrag",date:cleanDateInput($("rDate").value),state:"offen",text:$("rText").value.trim()
 ||"Beschreibung ergänzen",createdBy:currentUser.uid,createdAt:serverTimestamp()});closeModal();await
-render();toast("fpA-Praxisauftrag gespeichert.")}catch(e){console.error(e);toast("fpA-Praxisauftrag konnte nicht gespeichert werden.")}}
+render();toast("fpA-Theorie-Praxis-Transfer-Auftrag gespeichert.")}catch(e){console.error(e);toast("fpA-Theorie-Praxis-Transfer-Auftrag konnte nicht gespeichert werden.")}}
 
 function openCalendarForm(){
  if(!isTeacher()){toast("Nur Lehrkräfte können Termine eintragen.");return}
@@ -11216,7 +14650,14 @@ function openCalendarForm(){
  <div class="form">
  <label>Titel *<input id="calTitle"type="text"placeholder="z. B. Schulaufgabe Pädagogik"required></label>
  <label>Terminart *
- <select id="calType">${calTypeOptionsHTML()}</select>
+ <select id="calType">
+ <option value="schulaufgabe">Schulaufgabe</option>
+ <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="projektvorstellung">Projektvorstellung</option>
+ <option value="referat">Referat</option>
+ <option value="praesentation">Präsentation</option>
+ <option value="sonstiges">Sonstiger Termin / frei wählbar</option>
+ </select>
  </label>
  <label>Datum *<input id="calDate"type="date"required></label>
  <label>Uhrzeit<input id="calTime"type="time"></label>
@@ -11266,7 +14707,14 @@ function editCalendarEntry(collectionName,id,title,type,date,time,location,descr
  <div class="form">
  <label>Titel *<input id="calTitle"type="text"value="${esc(title||"")}"required></label>
  <label>Terminart *
- <select id="calType">${calTypeOptionsHTML()}</select>
+ <select id="calType">
+ <option value="schulaufgabe">Schulaufgabe</option>
+ <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="projektvorstellung">Projektvorstellung</option>
+ <option value="referat">Referat</option>
+ <option value="praesentation">Präsentation</option>
+ <option value="sonstiges">Sonstiger Termin / frei wählbar</option>
+ </select>
  </label>
  <label>Datum *<input id="calDate"type="date"value="${esc(date||"")}"required></label>
  <label>Uhrzeit<input id="calTime"type="time"value="${esc(time||"")}"></label>
