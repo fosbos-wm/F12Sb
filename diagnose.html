@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>F12Sb Diagnose</title>
+<style>
+body{font:16px/1.45 system-ui,Arial,sans-serif;margin:0;padding:16px;max-width:760px;margin-inline:auto;background:#f4f7fb;color:#12233a}
+h1{font-size:22px;margin:0 0 6px}
+p.small{color:#4a5b73;margin:0 0 14px;font-size:14px}
+label{display:block;margin:8px 0}
+input{width:100%;box-sizing:border-box;padding:10px;font-size:16px;border:1px solid #9fb3cc;border-radius:8px}
+button{margin-top:10px;padding:12px 18px;font-size:16px;border:0;border-radius:8px;background:#3d8fd0;color:#fff;cursor:pointer}
+#out{margin-top:16px;background:#fff;border:1px solid #cdd8e6;border-radius:10px;padding:12px;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+.ok{color:#0a7a2f;font-weight:700}.bad{color:#b3261e;font-weight:700}.info{color:#5a6b82}
+</style>
+</head>
+<body>
+<h1>F12Sb – Diagnose</h1>
+<p class="small">Testet Schritt für Schritt, woran die Anmeldung scheitert. Passwort wird nur an Firebase geschickt und nirgends gespeichert. Danach bitte den gesamten Text unten als Screenshot schicken.</p>
+
+<label>E-Mail<input id="e" type="email" autocomplete="email"></label>
+<label>Passwort<input id="p" type="password" autocomplete="current-password"></label>
+<button id="go" type="button">Test starten</button>
+
+<div id="out">Bereit. Erst E-Mail und Passwort eintragen, dann „Test starten“.</div>
+
+<script type="module">
+const out=document.getElementById('out');
+const lines=[];
+function log(kind,text){lines.push(`<span class="${kind}">${kind==='ok'?'OK  ':kind==='bad'?'FEHLER ':'    '}</span>${String(text).replace(/</g,'&lt;')}`);out.innerHTML=lines.join('\n')}
+const withTimeout=(p,ms,label)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(Object.assign(new Error(label+' nach '+ms/1000+' s ohne Antwort'),{code:'timeout'})),ms))]);
+
+const firebaseConfig={apiKey:"AIzaSyB_q4BaOGXaxLLL_fYB1MNA0HO2llAeG_s",authDomain:"f12sb-9f3db.firebaseapp.com",projectId:"f12sb-9f3db",storageBucket:"f12sb-9f3db.firebasestorage.app",messagingSenderId:"85936724696",appId:"1:85936724696:web:aa5be7604fd580e4add5ad"};
+
+document.getElementById('go').addEventListener('click',async()=>{
+  lines.length=0;
+  const email=document.getElementById('e').value.trim(), pw=document.getElementById('p').value;
+  log('info','Zeit: '+new Date().toLocaleString('de-DE'));
+  log('info','Seite: '+location.href);
+  log('info','Browser: '+navigator.userAgent);
+  log('info','Online laut Browser: '+navigator.onLine);
+  log('info','Firebase-Projekt in diesem Test: '+firebaseConfig.projectId);
+
+  // 1) Welche Version liefert der Server wirklich aus?
+  try{
+    const h=await (await fetch('index.html?x='+Date.now(),{cache:'no-store'})).text();
+    const m=h.match(/app\.js\?v=([0-9a-z]+)/i);
+    log(m&&m[1]>='20260930d'?'ok':'bad','index.html auf dem Server nennt app.js Version: '+(m?m[1]:'nicht gefunden')+' (erwartet: 20260930d)');
+    const a=await (await fetch('app.js?x='+Date.now(),{cache:'no-store'})).text();
+    log(a.includes('if($("helpQuick"))')?'ok':'bad','app.js auf dem Server enthält die helpQuick-Korrektur: '+a.includes('if($("helpQuick"))'));
+    log(a.includes('f12sb-9f3db')&&!a.includes('f11sb-62bae')?'ok':'bad','app.js auf dem Server nutzt Projekt f12sb-9f3db: '+(a.includes('f12sb-9f3db')&&!a.includes('f11sb-62bae')));
+  }catch(e){log('bad','Server-Dateien konnten nicht geprüft werden: '+e.message)}
+
+  // 2) Firebase-SDK laden
+  let appMod,authMod,fsMod;
+  try{
+    [appMod,authMod,fsMod]=await withTimeout(Promise.all([
+      import('https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js'),
+      import('https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js')]),15000,'Laden des Firebase-SDK');
+    log('ok','Firebase-SDK von gstatic.com geladen');
+  }catch(e){log('bad','Firebase-SDK konnte nicht geladen werden ('+(e.code||e.name)+'): '+e.message+'\n     -> Netzwerk/Schulfilter blockiert vermutlich www.gstatic.com');return}
+
+  const app=appMod.initializeApp(firebaseConfig);
+  const auth=authMod.getAuth(app);
+  const db=fsMod.getFirestore(app);
+
+  // 3) Anmeldung
+  let user;
+  try{
+    const cred=await withTimeout(authMod.signInWithEmailAndPassword(auth,email,pw),20000,'Anmeldung');
+    user=cred.user;
+    log('ok','Anmeldung bei Firebase Authentication erfolgreich. UID = '+user.uid);
+  }catch(e){
+    log('bad','Anmeldung fehlgeschlagen: '+(e.code||e.name)+' – '+e.message);
+    const hints={
+      'auth/invalid-credential':'E-Mail oder Passwort passen nicht zu einem Konto in Projekt f12sb-9f3db (Konto fehlt dort oder Passwort falsch).',
+      'auth/user-not-found':'Kein Konto mit dieser E-Mail in Projekt f12sb-9f3db.',
+      'auth/wrong-password':'Passwort falsch.',
+      'auth/operation-not-allowed':'E-Mail/Passwort-Anmeldung ist in Firebase (Authentication -> Anmeldemethode) nicht aktiviert.',
+      'auth/unauthorized-domain':'Diese Domain fehlt unter Authentication -> Einstellungen -> Autorisierte Domains.',
+      'auth/api-key-not-valid.-please-pass-a-valid-api-key.':'API-Schlüssel ungültig/eingeschränkt (Google Cloud Console -> Anmeldedaten).',
+      'auth/network-request-failed':'Netzwerk blockiert die Verbindung zu Firebase.',
+      'auth/too-many-requests':'Zu viele Versuche – einige Minuten warten.',
+      'timeout':'Keine Antwort von Firebase – Netzwerk/Filter blockiert vermutlich identitytoolkit.googleapis.com.'};
+    if(hints[e.code])log('info','     -> '+hints[e.code]);
+    return;
+  }
+
+  // 4) Profil lesen (das macht die App direkt nach der Anmeldung)
+  try{
+    const snap=await withTimeout(fsMod.getDoc(fsMod.doc(db,'users',user.uid)),15000,'Lesen von users/'+user.uid);
+    if(!snap.exists()){
+      log('bad','Es gibt KEIN Dokument users/'+user.uid+' im Projekt f12sb-9f3db.\n     -> Die App würde jetzt ein neues Dokument mit status "pending" anlegen. Vorhandenes Profil hat eine andere UID.');
+    }else{
+      const d=snap.data();
+      log('ok','Profil gelesen: role = '+d.role+', status = '+d.status+', Name = '+(d.displayName||'?'));
+      log(d.status==='approved'?'ok':'bad','status ist "approved": '+(d.status==='approved'));
+    }
+  }catch(e){
+    log('bad','Profil lesen fehlgeschlagen: '+(e.code||e.name)+' – '+e.message);
+    if(e.code==='permission-denied')log('info','     -> Firestore-Regeln im Projekt f12sb-9f3db sind nicht (korrekt) veröffentlicht.');
+    if(e.code==='timeout'||e.code==='unavailable')log('info','     -> Verbindung zu Firestore wird blockiert (Netzwerk/Filter/Datenbank nicht angelegt).');
+    if(e.code==='not-found')log('info','     -> Firestore-Datenbank existiert im Projekt nicht.');
+    return;
+  }
+
+  // 5) Eine typische Lesefrage wie bei der Startseite
+  try{
+    const q=await withTimeout(fsMod.getDocs(fsMod.query(fsMod.collection(db,'events'),fsMod.limit(1))),15000,'Lesen von events');
+    log('ok','Beispiel-Abfrage (events) erfolgreich, Treffer: '+q.size);
+  }catch(e){log('bad','Beispiel-Abfrage (events) fehlgeschlagen: '+(e.code||e.name)+' – '+e.message)}
+
+  try{await authMod.signOut(auth)}catch(_){}
+  log('info','\nFertig. Bitte diesen ganzen Text als Screenshot schicken.');
+});
+</script>
+</body>
+</html>
