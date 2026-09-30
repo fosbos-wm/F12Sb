@@ -2,7 +2,7 @@ let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, 
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
-*/ const firebaseConfig = { apiKey: "AIzaSyBKRUQz7x0hA8_GxJ4qi-61veKrS3GQqCA", authDomain: "f11sb-62bae.firebaseapp.com", projectId: "f11sb-62bae", storageBucket: "f11sb-62bae.firebasestorage.app", messagingSenderId: "579105646323", appId: "1:579105646323:web:3bfb668a90cb37540e3986", measurementId: "G-20SRP6BE9K" }; /* =========================================================
+*/ const firebaseConfig = { apiKey: "AIzaSyB_q4BaOGXaxLLL_fYB1MNA0HO2llAeG_s", authDomain: "f12sb-9f3db.firebaseapp.com", projectId: "f12sb-9f3db", storageBucket: "f12sb-9f3db.firebasestorage.app", messagingSenderId: "85936724696", appId: "1:85936724696:web:aa5be7604fd580e4add5ad" }; /* =========================================================
  F11Sb MASTER – STABILE MODULREGISTRY
  Die Master-App selbst enthält keine Pflicht-Imports
  von Zusatzmodulen. Module werden erst beim Öffnen geladen.
