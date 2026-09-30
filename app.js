@@ -1139,14 +1139,26 @@ async function renderKlassenteam(){
 // Die 7 benoteten Fächer der F12Sb (Sozialwesen). Das Wahlpflichtfach
 // ist reiner Förderunterricht, wird nicht benotet und taucht daher hier
 // bewusst nicht auf.
+// Fächer der Jahrgangsstufe 12 (Fachoberschule, Ausbildungsrichtung Sozialwesen) nach
+// FOBOSO Anlage 1 Nr. 1.1 und 1.3: Religionslehre/Ethik 2, Deutsch 4, Englisch 4,
+// Politik und Gesellschaft 2, Mathematik 4, Sport 2 (nicht einbringungsfähig, § 35 Abs. 4),
+// Pädagogik/Psychologie 5, Sozialwirtschaft und Recht 3, Biologie 2, Soziologie 2
+// sowie zwei Wahlpflichtfächer zu je 2 Wochenstunden (§ 12 Abs. 2 FOBOSO).
+const WPF_AUSWAHL={wpf1:"",wpf2:""};
+function wpfLabel(key){const n=WPF_AUSWAHL[key];return n?`Wahlpflichtfach: ${n}`:`Wahlpflichtfach ${key==="wpf1"?1:2}`;}
 const F11SB_FAECHER=[
- {key:"deutsch",label:"Deutsch"},
- {key:"englisch",label:"Englisch"},
- {key:"geschichte",label:"Geschichte"},
- {key:"mathematik",label:"Mathematik"},
- {key:"paedagogik",label:"Pädagogik/Psychologie"},
- {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht"},
- {key:"chemie",label:"Chemie"}
+ {key:"religion",label:"Religionslehre / Ethik",std:2},
+ {key:"deutsch",label:"Deutsch",std:4},
+ {key:"englisch",label:"Englisch",std:4},
+ {key:"mathematik",label:"Mathematik",std:4},
+ {key:"politik",label:"Politik und Gesellschaft",std:2},
+ {key:"sport",label:"Sport",std:2},
+ {key:"paedagogik",label:"Pädagogik/Psychologie",std:5},
+ {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht",std:3},
+ {key:"biologie",label:"Biologie",std:2},
+ {key:"soziologie",label:"Soziologie",std:2},
+ {key:"wpf1",get label(){return wpfLabel("wpf1")},std:2},
+ {key:"wpf2",get label(){return wpfLabel("wpf2")},std:2}
 ];
 
 // ============================================================
@@ -2565,9 +2577,10 @@ async function getMeineNoten(){
  if(!db||!currentUser)return {entries:{}};
  try{
  const snap=await getDoc(doc(db,"noten",currentUser.uid));
- if(!snap.exists())return {entries:{}};
+ if(!snap.exists()){WPF_AUSWAHL.wpf1="";WPF_AUSWAHL.wpf2="";return {entries:{}};}
  const d=snap.data();
- return {entries:d.entries||{}};
+ WPF_AUSWAHL.wpf1=d.wpf?.wpf1||"";WPF_AUSWAHL.wpf2=d.wpf?.wpf2||"";
+ return {entries:d.entries||{},wpf:d.wpf||{},abschluss:d.abschluss||{}};
  }catch(e){console.error("Noten laden:",e);return {entries:{}}}
 }
 // FPA (fachpraktische Ausbildung) bleibt ein einfacher Notentopf – dafür gilt
@@ -2738,7 +2751,7 @@ async function openNotenDetail(fach,hj){
  const liste=notenListe(noten,fach,hj);
  const avg=notenDurchschnitt(liste);
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"1. HALBJAHR":"2. HALBJAHR"}</div>
+ <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"HALBJAHR 12/1":"HALBJAHR 12/2"}</div>
  <h2>${esc(fachLabel(fach))}</h2>
  <p style="color:var(--muted)">Die fachpraktische Ausbildung wird separat bewertet (§8 FOBOSO) – trag hier die einzelnen Bewertungen ein.</p>
  <div class="notice"style="margin-bottom:14px"><strong style="font-size:22px">${avg===null?"—":avg+" Punkte"}</strong><small style="display:block;color:var(--muted)">Durchschnitt aus ${liste.length} ${liste.length===1?"Eintrag":"Einträgen"}</small></div>
@@ -2756,7 +2769,7 @@ async function openNotenDetail(fach,hj){
  const sSchnitt=sonstigeSchnitt(sonst);
  const ergebnis=berechneHalbjahresergebnis(noten,fach,hj);
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"1. HALBJAHR":"2. HALBJAHR"}</div>
+ <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"HALBJAHR 12/1":"HALBJAHR 12/2"}</div>
  <h2>${esc(fachLabel(fach))}</h2>
  <p style="color:var(--muted)">Nach § 21 Abs. 1 FOBOSO: Der (gewichtete) Durchschnitt der sonstigen Leistungen zählt genauso viel wie jede Schulaufgabe.</p>
  <div class="notice"style="margin-bottom:14px">
@@ -2810,97 +2823,242 @@ window.addNotenEintrag=addNotenEintrag;
 window.deleteNotenEintrag=deleteNotenEintrag;
 window.resetMeineNoten=resetMeineNoten;
 
-// ---- Bestehens-Rechner nach §8, §21 Abs. 3, §22 Abs. 1 Nr. 2 FOBOSO -------
-// Hinweis: Dies ist ausschließlich eine Orientierungshilfe (wie die
-// entsprechenden "ohne Gewähr"-Tools der Schulen selbst). Die tatsächliche
-// Entscheidung trifft die Klassenkonferenz/Schulleitung anhand einer
-// pädagogischen Gesamtwürdigung, nicht rein rechnerisch. Verwendet wird
-// jeweils der Durchschnitt aller schriftlichen/mündlichen Einzelnoten.
-function checkFoboso21(punkte){
- const n=punkte.length;
- if(!n)return{passed:null,rule:null};
- const sum=punkte.reduce((a,b)=>a+b,0);
- const zero=punkte.filter(p=>p===0).length;
- const oneToThree=punkte.filter(p=>p>=1&&p<=3).length;
- const atLeastFour=punkte.filter(p=>p>=4).length;
- if(zero===0&&oneToThree===0)return{passed:true,rule:"a"};
- if(zero===1&&oneToThree===0&&atLeastFour===n-1&&sum>=6*n)return{passed:true,rule:"d"};
- if(zero===0&&oneToThree===1&&atLeastFour===n-1&&sum>=5*n)return{passed:true,rule:"b"};
- if(zero===0&&oneToThree===2&&atLeastFour===n-2&&sum>=6*n)return{passed:true,rule:"c"};
- return{passed:false,rule:null};
+// ---- Jahrgangsstufe 12: Zulassung zur Abschlussprüfung und Abschlussergebnis ----
+// Grundlage (alle Angaben ohne Gewähr, Orientierungshilfe): Fachober- und Berufsoberschulordnung
+// (FOBOSO, GVBl. 2017 S. 451, BayRS 2236-7-1-K), abrufbar unter https://www.gesetze-bayern.de/Content/Document/BayFOBOSO
+//  § 12 Abs. 2   zwei Wahlpflichtfächer in Jgst. 12 · § 16 Fachreferat in Jgst. 12 · § 19 Abs. 6 Rundung
+//  § 21          Halbjahresergebnisse · § 31 Abs. 2 Ausschluss von der Abschlussprüfung
+//  § 32          Prüfungsfächer Deutsch, Englisch, Mathematik, Profilfach 1 (Pädagogik/Psychologie)
+//  § 35          Prüfungs- und Abschlussergebnis, Bestehen (Abs. 2 bis 5 und 9) · Anlage 1 Stundentafel, Wahlpflichtfächer
+const WPF_SOZIALWESEN_12=[
+ {name:"Sozialpsychologie",art:"profilvertiefend",ein:true},
+ {name:"Spektrum der Gesundheit",art:"profilvertiefend",ein:true},
+ {name:"Französisch (fortgeführt)",art:"profilerweiternd",ein:true},
+ {name:"Spanisch (fortgeführt)",art:"profilerweiternd",ein:true},
+ {name:"Mathematik Additum",art:"profilerweiternd",ein:true},
+ {name:"Aspekte der Physik",art:"profilerweiternd",ein:true},
+ {name:"English Book Club",art:"profilerweiternd",ein:true},
+ {name:"Internationale Politik",art:"profilerweiternd",ein:true},
+ {name:"Informatik",art:"profilerweiternd",ein:true},
+ {name:"International Business Studies",art:"profilerweiternd",ein:true},
+ {name:"Studier- und Arbeitstechniken",art:"profilerweiternd",ein:false},
+ {name:"Kunst",art:"profilerweiternd",ein:false},
+ {name:"Musik",art:"profilerweiternd",ein:false},
+ {name:"Szenisches Gestalten",art:"profilerweiternd",ein:false}
+];
+function wpfInfo(name){return WPF_SOZIALWESEN_12.find(w=>w.name===name)||null;}
+function fachEinbringungsfaehig(key){
+ if(key==="sport")return false;
+ if(key==="wpf1"||key==="wpf2"){const n=WPF_AUSWAHL[key];return n?wpfInfo(n)?.ein!==false:true;}
+ return true;
 }
-function berechneBestehen(noten){
- const faecherHJ1=F11SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj1"));
- const faecherHJ2=F11SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj2"));
- const fpaHj1=notenDurchschnitt(notenListe(noten,"fpa","hj1")),fpaHj2=notenDurchschnitt(notenListe(noten,"fpa","hj2"));
- const vollHJ1=faecherHJ1.every(p=>Number.isFinite(p))&&Number.isFinite(fpaHj1);
- const vollJahr=vollHJ1&&faecherHJ2.every(p=>Number.isFinite(p))&&Number.isFinite(fpaHj2);
+const AB_LAUFEN_WEITER=["deutsch","englisch","mathematik","paedagogik","sozialwirtschaft"]; // Jgst. 11 und 12: zählen 11/2, 12/1, 12/2
+const AB_ENDEN_11=[{key:"geschichte",label:"Geschichte"},{key:"chemie",label:"Chemie"}];      // enden mit Jgst. 11: zählen 11/1 und 11/2
+const AB_PRUEFUNGSFAECHER=["deutsch","englisch","mathematik","paedagogik"];
+const AB_ANZAHL_HJ=25; // § 35 Abs. 5 Satz 1 Nr. 4
+function abNum(v){return Number.isFinite(v)?v:null;}
+function abPunkte(n){return Number.isFinite(n)?`${n}`:"–";}
 
- let probezeit=null;
- if(vollHJ1){
- const fachCheck=checkFoboso21(faecherHJ1);
- const fpaOk=fpaHj1>=4;
- probezeit={passed:fachCheck.passed&&fpaOk,fachCheck,fpaOk};
- }
- let jahr=null;
- if(vollJahr){
- // Jahrespunktzahl nach § 21 Abs. 2 FOBOSO: Durchschnitt der beiden
- // (bereits gerundeten) Halbjahresergebnisse, danach erneut gerundet.
- const jahrespunkte=F11SB_FAECHER.map((f,i)=>foboso19Runden((faecherHJ1[i]+faecherHJ2[i])/2));
- const fachCheck=checkFoboso21(jahrespunkte);
- const fpaOk=fpaHj1>=4&&fpaHj2>=4&&(fpaHj1+fpaHj2)>=10;
- jahr={passed:fachCheck.passed&&fpaOk,fachCheck,fpaOk,jahrespunkte};
- }
- return{probezeit,jahr,vollHJ1,vollJahr};
-}
-// Einfache Orientierung "was fehlt noch": für jedes noch unter 4 liegende
-// oder fehlende Fach wird angezeigt, welcher Wert für die einfachste
-// Bestehens-Variante (Regel a: alle Fächer ≥4) fehlen würde.
-function wasFehltNochHJ1(noten){
- const liste=F11SB_FAECHER.map(f=>{
- const p=berechneHalbjahresergebnis(noten,f.key,"hj1");
- if(!Number.isFinite(p)){
- const hatSA=schulaufgabenListe(noten,f.key,"hj1").length>0;
- const hatSonst=sonstigeListe(noten,f.key,"hj1").length>0;
- const fehlt=!hatSA&&!hatSonst?"Schulaufgabe und sonstige Leistungen fehlen noch":!hatSA?"Schulaufgabe fehlt noch":"Sonstige Leistungen fehlen noch";
- return{label:f.label,status:"fehlt",text:fehlt};
- }
- if(p===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
- if(p<4)return{label:f.label,status:"kritisch",text:`Aktuell ${p} Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-p} Punkte`};
- return{label:f.label,status:"ok",text:`${p} Punkte`};
+// Zulassung: Ausschluss u. a. bei 0 Punkten in einem Halbjahresergebnis (§ 31 Abs. 2 Satz 1 Nr. 1).
+function zulassungPruefen(noten){
+ const zeilen=F11SB_FAECHER.map(f=>{
+  const p1=berechneHalbjahresergebnis(noten,f.key,"hj1"),p2=berechneHalbjahresergebnis(noten,f.key,"hj2");
+  const ein=fachEinbringungsfaehig(f.key);
+  let status="offen",text="noch kein Halbjahresergebnis";
+  const vorh=[p1,p2].filter(Number.isFinite);
+  if(vorh.length){
+   if(vorh.includes(0)){status="ausschluss";text="0 Punkte – Ausschluss von der Abschlussprüfung";}
+   else if(vorh.some(p=>p<4)){status="kritisch";text="unter 4 Punkte";}
+   else{status="ok";text="in Ordnung";}
+  }
+  return{key:f.key,label:f.label,p1,p2,status,text,ein};
  });
- const fpaP=notenDurchschnitt(notenListe(noten,"fpa","hj1"));
- if(fpaP===null)liste.push({label:"Fachpraktische Ausbildung",status:"fehlt",text:"Note fehlt noch"});
- else if(fpaP===0)liste.push({label:"Fachpraktische Ausbildung",status:"ungenuegend",text:"0 Punkte – mind. 4 Punkte nötig"});
- else if(fpaP<4)liste.push({label:"Fachpraktische Ausbildung",status:"kritisch",text:`Aktuell ${fpaP} Punkte – mind. 4 Punkte nötig`});
- else liste.push({label:"Fachpraktische Ausbildung",status:"ok",text:`${fpaP} Punkte`});
- return liste;
+ const ausgeschlossen=zeilen.some(z=>z.status==="ausschluss");
+ const vollstaendig=zeilen.every(z=>Number.isFinite(z.p1)&&Number.isFinite(z.p2));
+ return{zeilen,ausgeschlossen,vollstaendig};
 }
-// Analoge Übersicht fürs ganze Schuljahr: Jahrespunktzahl je Fach (Durchschnitt
-// der beiden Halbjahresergebnisse) plus fpA mit eigener Jahresregel (§8 FOBOSO).
-function wasFehltNochJahr(noten){
- const liste=F11SB_FAECHER.map(f=>{
- const p1=berechneHalbjahresergebnis(noten,f.key,"hj1");
- const p2=berechneHalbjahresergebnis(noten,f.key,"hj2");
- if(!Number.isFinite(p1)||!Number.isFinite(p2)){
- const fehlt=!Number.isFinite(p1)&&!Number.isFinite(p2)?"HJ1 und HJ2 fehlen noch":!Number.isFinite(p1)?"HJ1 fehlt noch":"HJ2 fehlt noch";
- return{label:f.label,status:"fehlt",text:fehlt};
- }
- const jp=foboso19Runden((p1+p2)/2);
- if(jp===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
- if(jp<4)return{label:f.label,status:"kritisch",text:`Aktuell ${jp} Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-jp} Punkte`};
- return{label:f.label,status:"ok",text:`${jp} Punkte im Jahr`};
+
+// Abschlussergebnis der Fachabiturprüfung an der FOS (§ 35 Abs. 2, 3, 4, 5 und 9).
+function berechneAbschluss(noten){
+ const ab=noten.abschluss||{};
+ const fehlt=[],pool=[];
+ const add=(fach,label,hj,p)=>{if(Number.isFinite(p))pool.push({fach,label,hj,punkte:p});else fehlt.push(`${label} ${hj}`);};
+ F11SB_FAECHER.forEach(f=>{
+  if(!fachEinbringungsfaehig(f.key))return;
+  if((f.key==="wpf1"||f.key==="wpf2")&&!WPF_AUSWAHL[f.key]){fehlt.push(`${f.label} (noch nicht gewählt)`);return;}
+  if(AB_LAUFEN_WEITER.includes(f.key))add(f.key,f.label,"11/2",abNum(ab.j11?.[f.key]?.h2));
+  add(f.key,f.label,"12/1",berechneHalbjahresergebnis(noten,f.key,"hj1"));
+  add(f.key,f.label,"12/2",berechneHalbjahresergebnis(noten,f.key,"hj2"));
  });
- const fpa1=notenDurchschnitt(notenListe(noten,"fpa","hj1"));
- const fpa2=notenDurchschnitt(notenListe(noten,"fpa","hj2"));
- if(fpa1===null||fpa2===null){
- liste.push({label:"Fachpraktische Ausbildung",status:"fehlt",text:fpa1===null&&fpa2===null?"HJ1 und HJ2 fehlen noch":fpa1===null?"HJ1 fehlt noch":"HJ2 fehlt noch"});
+ AB_ENDEN_11.forEach(f=>{add(f.key,f.label,"11/1",abNum(ab.j11?.[f.key]?.h1));add(f.key,f.label,"11/2",abNum(ab.j11?.[f.key]?.h2));});
+ const fpa1=abNum(ab.fpa?.h1),fpa2=abNum(ab.fpa?.h2);
+ if(fpa1===null)fehlt.push("Fachpraktische Ausbildung 11/1");
+ if(fpa2===null)fehlt.push("Fachpraktische Ausbildung 11/2");
+ const ref=abNum(ab.referat?.punkte);
+ if(ref===null)fehlt.push("Fachreferat");
+ if(fehlt.length)return{stufe:"unvollstaendig",fehlt,pool};
+
+ // Streichergebnisse: je Fach höchstens ein Halbjahresergebnis (§ 35 Abs. 4 Satz 3); hier die günstigste Auswahl.
+ const dropCount=pool.length-AB_ANZAHL_HJ;
+ if(dropCount<0)return{stufe:"zuwenig",pool,fehlt:[`nur ${pool.length} einbringungsfähige Halbjahresergebnisse (25 nötig)`]};
+ const proFach={};
+ pool.forEach(e=>{const c=proFach[e.fach];if(!c||e.punkte<c.punkte)proFach[e.fach]=e;});
+ const kandidaten=Object.values(proFach).sort((a,b)=>a.punkte-b.punkte);
+ const streich=kandidaten.slice(0,dropCount);
+ if(streich.length<dropCount)return{stufe:"zuwenig",pool,fehlt:["zu wenige Fächer, um genug Halbjahresergebnisse zu streichen"]};
+ const gestrichen=new Set(streich);
+ const eingebracht=pool.filter(e=>!gestrichen.has(e));
+
+ // Prüfungsergebnisse (§ 35 Abs. 2): schriftlich 2-fach, mündlich 1-fach, kaufmännisch gerundet.
+ const pe={};const peFehlt=[];
+ AB_PRUEFUNGSFAECHER.forEach(k=>{
+  const s=abNum(ab.pruefung?.[k]?.s),m=abNum(ab.pruefung?.[k]?.m);
+  const label=F11SB_FAECHER.find(f=>f.key===k).label;
+  if(s===null){peFehlt.push(`${label} (Prüfung)`);pe[k]=null;return;}
+  if(k==="englisch"&&m===null){peFehlt.push("Englisch mündlich (Pflicht, § 33 Abs. 1)");pe[k]=null;return;}
+  pe[k]=m===null?s:foboso19Runden((2*s+m)/3);
+ });
+
+ // Gesamtergebnisse (§ 35 Abs. 3): Halbjahresergebnisse einfach, Prüfungsergebnis dreifach.
+ const ge=[];
+ const fachKeys=[...new Set(eingebracht.map(e=>e.fach))];
+ fachKeys.forEach(k=>{
+  const hj=eingebracht.filter(e=>e.fach===k).map(e=>e.punkte);
+  const label=eingebracht.find(e=>e.fach===k).label;
+  const istPruef=AB_PRUEFUNGSFAECHER.includes(k);
+  let wert,vorlaeufig=false;
+  if(istPruef&&pe[k]!==null&&pe[k]!==undefined)wert=foboso19Runden((hj.reduce((a,b)=>a+b,0)+3*pe[k])/(hj.length+3));
+  else{wert=foboso19Runden(hj.reduce((a,b)=>a+b,0)/hj.length);vorlaeufig=istPruef;}
+  ge.push({label,wert,vorlaeufig});
+ });
+ ge.push({label:"Fachpraktische Ausbildung",wert:foboso19Runden((fpa1+fpa2)/2)});
+ ge.push({label:`Fachreferat${ab.referat?.fach?` (${ab.referat.fach})`:""}`,wert:ref});
+
+ // Punktesumme: 4 Prüfungsergebnisse dreifach + 2 fpA-Halbjahre + Fachreferat + 25 Halbjahresergebnisse = 40 Leistungen.
+ const summeHJ=eingebracht.reduce((a,e)=>a+e.punkte,0)+fpa1+fpa2+ref;
+ const pruefOk=peFehlt.length===0;
+ const summe=summeHJ+(pruefOk?AB_PRUEFUNGSFAECHER.reduce((a,k)=>a+3*pe[k],0):0);
+ const zaehle=p=>p===0?2:p<4?1:0; // § 35 Abs. 9 Satz 2: 0 Punkte zählen zweifach
+ const nGE=ge.filter(g=>!g.vorlaeufig||pruefOk).reduce((a,g)=>a+zaehle(g.wert),0);
+ const nPE=pruefOk?AB_PRUEFUNGSFAECHER.reduce((a,k)=>a+zaehle(pe[k]),0):null;
+ const res={stufe:pruefOk?"komplett":"zwischenstand",streich,ge,pe,peFehlt,summe,summeHJ,nGE,nPE,eingebracht:eingebracht.length,maxSumme:40*15};
+ if(pruefOk){
+  const grenze=nGE===1?200:nGE===2?240:0;
+  const ok1=nPE<=2&&nGE<=2;
+  const ok2=nGE===0||summe>=grenze;
+  res.grenze=grenze;res.bestanden=ok1&&ok2;
+  res.grund=!ok1?(nPE>2?"mehr als zwei Prüfungsergebnisse unter 4 Punkten":"mehr als zwei Gesamtergebnisse unter 4 Punkten"):!ok2?`Punktesumme ${summe} liegt unter der geforderten Mindestsumme von ${grenze}`:"alle Bedingungen nach § 35 Abs. 9 erfüllt";
+ }
+ return res;
+}
+function berechneBestehen(noten){return{zulassung:zulassungPruefen(noten),abschluss:berechneAbschluss(noten)};}
+
+// Anzeige im Kompass (Noten): Zulassung und Abschlussergebnis.
+function abschlussBlockHTML(noten,bestehen){
+ const z=bestehen.zulassung,a=bestehen.abschluss;
+ const farbe=s=>s==="ok"?"var(--soft-green)":s==="kritisch"?"var(--soft-orange)":s==="ausschluss"?"#fbdada":"#f7fafc";
+ const zeileZ=z.zeilen.map(x=>`<div class="card"style="padding:8px 10px;background:${farbe(x.status)}"><strong style="font-size:12px">${esc(x.label)}${x.ein?"":" · zählt nicht zur Note"}</strong><small style="display:block">12/1: ${abPunkte(x.p1)} · 12/2: ${abPunkte(x.p2)} · ${esc(x.text)}</small></div>`).join("");
+ const zulassungKopf=z.ausgeschlossen?`<strong style="font-size:15px">Nach aktueller Punktlage ausgeschlossen</strong>`
+  :z.vollstaendig?`<strong style="font-size:15px">Nach aktueller Punktlage zugelassen</strong>`
+  :`<strong style="font-size:15px">Noch nicht alle Halbjahresergebnisse vorhanden</strong>`;
+ let abschlussKopf="";
+ if(a.stufe==="unvollstaendig"||a.stufe==="zuwenig"){
+  const liste=a.fehlt.slice(0,10).map(x=>esc(x)).join(", ")+(a.fehlt.length>10?` … (+${a.fehlt.length-10})`:"");
+  abschlussKopf=`<p style="margin:0 0 8px">Für die Berechnung fehlen noch Angaben: ${liste}.</p>`;
  }else{
- const ok=fpa1>=4&&fpa2>=4&&(fpa1+fpa2)>=10;
- liste.push({label:"Fachpraktische Ausbildung",status:ok?"ok":(fpa1===0||fpa2===0)?"ungenuegend":"kritisch",text:`HJ1: ${fpa1} · HJ2: ${fpa2} Punkte (Summe ${fpa1+fpa2}, mind. 10 nötig)`});
+  const ges=a.ge.map(g=>`<tr><td>${esc(g.label)}</td><td style="text-align:center">${g.wert}${g.vorlaeufig?" <small>(ohne Prüfung)</small>":""}</td></tr>`).join("");
+  const str=a.streich.map(s=>`${esc(s.label)} ${s.hj} (${s.punkte})`).join(", ")||"keine";
+  const status=a.stufe==="komplett"
+   ?`<strong style="font-size:15px">${a.bestanden?"Fachabitur nach aktueller Punktlage bestanden":"Fachabitur nach aktueller Punktlage nicht bestanden"}</strong><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">Punktesumme ${a.summe} von ${a.maxSumme} · ${esc(a.grund)}</p>`
+   :`<strong style="font-size:15px">Zwischenstand ohne Prüfungsergebnisse</strong><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">Es fehlen: ${a.peFehlt.map(x=>esc(x)).join(", ")}. Halbjahresleistungen bisher ${a.summeHJ} Punkte (28 von 40 Leistungen, ohne die dreifachen Prüfungsergebnisse).</p>`;
+  abschlussKopf=`${status}
+   <p style="margin:10px 0 4px;font-size:12px"><b>Günstigste Streichung</b> (je Fach höchstens ein Halbjahresergebnis): ${str}</p>
+   <div style="overflow-x:auto"><table class="noten-table noten-table-kompakt"><thead><tr><th>Gesamtergebnis</th><th>Punkte</th></tr></thead><tbody>${ges}</tbody></table></div>`;
  }
- return liste;
+ return`<div class="grid grid-2"style="margin-top:16px;gap:12px">
+  <details class="noten-collapsible">
+   <summary> Zulassung zur Abschlussprüfung</summary>
+   <div class="notice">
+    ${zulassungKopf}
+    <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Ausgeschlossen ist, wer ein Halbjahresergebnis mit 0 Punkten hat, wer mehr als fünf Unterrichtstage unentschuldigt versäumt hat oder wessen Abschluss rechnerisch nicht mehr erreichbar ist (§ 31 Abs. 2 FOBOSO).</p>
+    <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${zeileZ}</div>
+    <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach § 31 FOBOSO – <strong>ohne Gewähr</strong>. Die Entscheidung trifft der Prüfungsausschuss.</p>
+   </div>
+  </details>
+  <details class="noten-collapsible">
+   <summary> Abschlussergebnis und Bestehen der Fachabiturprüfung</summary>
+   <div class="notice">
+    ${abschlussKopf}
+    <div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="openAbschlussAngaben()">Angaben ergänzen</button></div>
+    <p style="margin:12px 0 0;font-size:12px;color:var(--muted)">Bestanden ist die Prüfung, wenn höchstens zwei Prüfungsergebnisse und höchstens zwei Gesamtergebnisse unter 4 Punkten liegen (0 Punkte zählen doppelt) und bei einem Gesamtergebnis unter 4 Punkten mindestens 200, bei zweien mindestens 240 Punkte erreicht werden (§ 35 Abs. 9 FOBOSO). Eingebracht werden die dreifachen Prüfungsergebnisse in Deutsch, Englisch, Mathematik und Pädagogik/Psychologie, beide Halbjahre der fachpraktischen Ausbildung, das Fachreferat und 25 Halbjahresergebnisse (§ 35 Abs. 5).</p>
+    <p style="margin-top:8px;font-size:11px;color:var(--muted)">Orientierungshilfe nach § 35 FOBOSO – <strong>ohne Gewähr</strong>. Die Entscheidung trifft der Prüfungsausschuss.</p>
+   </div>
+  </details>
+ </div>`;
 }
+
+// Wahlpflichtfächer wählen (§ 12 Abs. 2 FOBOSO: in Jgst. 12 zwei Fächer).
+function wpfAuswahlHTML(){
+ const opt=key=>{
+  const aktuell=WPF_AUSWAHL[key];
+  const gruppe=art=>`<optgroup label="${art==="profilvertiefend"?"Profilvertiefend":"Profilerweiternd"}">${WPF_SOZIALWESEN_12.filter(w=>w.art===art).map(w=>`<option value="${esc(w.name)}"${aktuell===w.name?" selected":""}>${esc(w.name)}${w.ein?"":" (zählt nicht zur Note)"}</option>`).join("")}</optgroup>`;
+  return`<select onchange="setWpf('${key}',this.value)"><option value="">– bitte wählen –</option>${gruppe("profilvertiefend")}${gruppe("profilerweiternd")}</select>`;
+ };
+ return`<div class="noten-wpf"style="margin:0 0 12px;padding:10px 12px;border:1px solid var(--line,#e2eaf0);border-radius:10px;background:#fff">
+  <strong style="display:block;font-size:13px;margin-bottom:6px">Meine zwei Wahlpflichtfächer</strong>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px">
+   <label style="font-size:11px">Wahlpflichtfach 1${opt("wpf1")}</label>
+   <label style="font-size:11px">Wahlpflichtfach 2${opt("wpf2")}</label>
+  </div>
+  <small style="display:block;margin-top:6px;color:var(--muted)">In der Jahrgangsstufe 12 müssen zwei Wahlpflichtfächer belegt werden (§ 12 Abs. 2 FOBOSO). Einbringungsfähige Fächer zählen zu den Noten (Anlage 1 FOBOSO).</small>
+ </div>`;
+}
+async function setWpf(key,name){
+ const andere=key==="wpf1"?"wpf2":"wpf1";
+ if(name&&WPF_AUSWAHL[andere]===name){toast("Die zwei Wahlpflichtfächer müssen verschieden sein.");await render();return}
+ try{
+  await updateNotenDoc(data=>{data.wpf=data.wpf||{};data.wpf[key]=name||"";});
+  WPF_AUSWAHL[key]=name||"";
+  await render();toast("Gespeichert.");
+ }catch(e){console.error("Wahlpflichtfach speichern:",e);toast("Konnte nicht gespeichert werden.");}
+}
+window.setWpf=setWpf;
+
+// Zusätzliche Angaben für das Abschlussergebnis: Zeugnis Jgst. 11, fpA, Fachreferat, Prüfungsergebnisse.
+async function openAbschlussAngaben(){
+ const noten=await getMeineNoten();
+ const ab=noten.abschluss||{};
+ const inp=(id,v)=>`<input id="${id}"type="number"min="0"max="15"value="${Number.isFinite(v)?v:""}"placeholder="0–15"style="width:70px">`;
+ const z=(label,inner)=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line,#e2eaf0)"><span style="font-size:13px">${label}</span><span style="display:flex;gap:6px;align-items:center">${inner}</span></div>`;
+ const fl=k=>F11SB_FAECHER.find(f=>f.key===k).label;
+ const refFaecher=F11SB_FAECHER.filter(f=>fachEinbringungsfaehig(f.key)&&(!f.key.startsWith("wpf")||WPF_AUSWAHL[f.key]));
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">ABSCHLUSSERGEBNIS · ANGABEN ERGÄNZEN</div>
+  <h2>Zeugnis Jgst. 11, Fachreferat, Prüfungen</h2>
+  <p style="font-size:12px;color:var(--muted);margin-top:0">Punkte 0–15. Leere Felder zählen als „noch nicht vorhanden“. Die Werte siehst nur du.</p>
+  <h3 style="margin:10px 0 4px;font-size:14px">Halbjahresergebnisse Jahrgangsstufe 11</h3>
+  ${AB_LAUFEN_WEITER.map(k=>z(fl(k)+" · 11/2",inp(`abJ11_${k}_h2`,ab.j11?.[k]?.h2))).join("")}
+  ${AB_ENDEN_11.map(f=>z(f.label+" · 11/1 und 11/2",inp(`abJ11_${f.key}_h1`,ab.j11?.[f.key]?.h1)+inp(`abJ11_${f.key}_h2`,ab.j11?.[f.key]?.h2))).join("")}
+  ${z("Fachpraktische Ausbildung · 11/1 und 11/2",inp("abFpa_h1",ab.fpa?.h1)+inp("abFpa_h2",ab.fpa?.h2))}
+  <h3 style="margin:14px 0 4px;font-size:14px">Fachreferat (Jahrgangsstufe 12, § 16 FOBOSO)</h3>
+  ${z(`<select id="abRefFach"style="max-width:190px"><option value="">Fach wählen</option>${refFaecher.map(f=>`<option value="${esc(f.label)}"${ab.referat?.fach===f.label?" selected":""}>${esc(f.label)}</option>`).join("")}</select>`,inp("abRefP",ab.referat?.punkte))}
+  <h3 style="margin:14px 0 4px;font-size:14px">Abschlussprüfung (nach den Prüfungen eintragen)</h3>
+  ${AB_PRUEFUNGSFAECHER.map(k=>z(fl(k),`<label style="font-size:11px">schriftlich ${inp(`abPr_${k}_s`,ab.pruefung?.[k]?.s)}</label><label style="font-size:11px">mündlich ${inp(`abPr_${k}_m`,ab.pruefung?.[k]?.m)}</label>`)).join("")}
+  <small style="display:block;margin-top:6px;color:var(--muted)">Englisch: die mündliche Prüfung ist Pflicht. In den anderen Fächern nur ausfüllen, wenn du eine mündliche Prüfung abgelegt hast (Wertung schriftlich 2 : mündlich 1, § 35 Abs. 2 FOBOSO).</small>
+  <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="saveAbschlussAngaben()">Speichern</button></div>`);
+}
+async function saveAbschlussAngaben(){
+ const num=id=>{const v=$(id)?.value;if(v===""||v==null)return null;const n=parseInt(v,10);return Number.isFinite(n)?Math.max(0,Math.min(15,n)):null;};
+ const neu={j11:{},fpa:{h1:num("abFpa_h1"),h2:num("abFpa_h2")},referat:{fach:$("abRefFach")?.value||"",punkte:num("abRefP")},pruefung:{}};
+ AB_LAUFEN_WEITER.forEach(k=>{neu.j11[k]={h2:num(`abJ11_${k}_h2`)};});
+ AB_ENDEN_11.forEach(f=>{neu.j11[f.key]={h1:num(`abJ11_${f.key}_h1`),h2:num(`abJ11_${f.key}_h2`)};});
+ AB_PRUEFUNGSFAECHER.forEach(k=>{neu.pruefung[k]={s:num(`abPr_${k}_s`),m:num(`abPr_${k}_m`)};});
+ try{
+  await updateNotenDoc(data=>{data.abschluss=neu;});
+  closeModal();await render();toast("Gespeichert.");
+ }catch(e){console.error("Abschluss-Angaben speichern:",e);toast("Konnte nicht gespeichert werden.");}
+}
+window.openAbschlussAngaben=openAbschlussAngaben;window.saveAbschlussAngaben=saveAbschlussAngaben;
 
 // ---- Praktikumsberichte (Blockberichte): Tätigkeitsnachweis + Einschätzungsbogen ----
 // Einschätzungsbogen ist nur bei den ersten beiden Blöcken je Ausbildungsrichtung
@@ -3429,10 +3587,10 @@ function printNotenPDF(noten,bestehen){
  const win=window.open("","_blank","width=800,height=800");
  if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
  const fmt=(fach,hj)=>{const erg=berechneHalbjahresergebnis(noten,fach,hj);const sa=schulaufgabenListe(noten,fach,hj).length,so=sonstigeListe(noten,fach,hj).length;return erg===null?"—":`${erg} Punkte (${sa} SA, ${so} sonst.)`};
- const fmtFpa=hj=>{const l=notenListe(noten,"fpa",hj);const a=notenDurchschnitt(l);return a===null?"—":`${a} (${l.length} ${l.length===1?"Note":"Noten"})`};
- const rows=F11SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
- const fpaRow=`<tr><td><em>Fachpraktische Ausbildung</em></td><td>${fmtFpa("hj1")}</td><td>${fmtFpa("hj2")}</td></tr>`;
- const statusText=(label,r)=>!r?`${label}: noch nicht alle Noten eingetragen.`:`${label}: ${r.passed?"nach aktueller Punktlage bestanden":"nach aktueller Punktlage nicht bestanden"}.`;
+ const rows=F11SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}${fachEinbringungsfaehig(f.key)?"":" <small>(zählt nicht zur Note)</small>"}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
+ const z=bestehen.zulassung,a=bestehen.abschluss;
+ const zText=z.ausgeschlossen?"Zulassung zur Abschlussprüfung: nach aktueller Punktlage ausgeschlossen (0 Punkte in einem Halbjahresergebnis).":z.vollstaendig?"Zulassung zur Abschlussprüfung: nach aktueller Punktlage zugelassen.":"Zulassung zur Abschlussprüfung: noch nicht alle Halbjahresergebnisse vorhanden.";
+ const aText=a.stufe==="komplett"?`Fachabitur: nach aktueller Punktlage ${a.bestanden?"bestanden":"nicht bestanden"} (Punktesumme ${a.summe} von ${a.maxSumme}).`:a.stufe==="zwischenstand"?"Fachabitur: Zwischenstand, Prüfungsergebnisse fehlen noch.":"Fachabitur: für die Berechnung fehlen noch Angaben.";
  win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Noten – F12Sb</title>
  <style>
  @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.55;margin:0}
@@ -3445,13 +3603,13 @@ function printNotenPDF(noten,bestehen){
  </style></head><body>
  <div class="print-note">Persönliche Notenübersicht. Im Druckdialog „Als PDF sichern“ auswählen.</div>
  <h1>Meine Noten – F12Sb</h1>
- <div class="meta">Punkte 0–15 je Fach und Halbjahr</div>
- <table><thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead><tbody>${rows}${fpaRow}</tbody></table>
+ <div class="meta">Jahrgangsstufe 12 · Punkte 0–15 je Fach und Halbjahr</div>
+ <table><thead><tr><th>Fach</th><th>12/1</th><th>12/2</th></tr></thead><tbody>${rows}</tbody></table>
  <div class="status">
- <strong>${statusText("Probezeit (Stand HJ1)",bestehen.probezeit)}</strong><br>
- <strong>${statusText("Bestehen des Schuljahres",bestehen.jahr)}</strong>
+ <strong>${escPDF(zText)}</strong><br>
+ <strong>${escPDF(aText)}</strong>
  </div>
- <p class="disclaimer">Diese Berechnung ist ausschließlich eine Orientierungshilfe nach §8, §21 Abs. 3, §22 Abs. 1 Nr. 2 FOBOSO – ohne Gewähr. Die tatsächliche Entscheidung trifft die Klassenkonferenz/Schulleitung anhand einer pädagogischen Gesamtwürdigung.</p>
+ <p class="disclaimer">Orientierungshilfe nach §§ 21, 31 und 35 FOBOSO – ohne Gewähr. Die Entscheidung trifft der Prüfungsausschuss.</p>
  <script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script>
  </body></html>`);
  win.document.close();
@@ -3527,23 +3685,23 @@ async function renderKompass(){
  <h2 style="margin-top:0"> Meine Noten</h2>
  <p style="color:var(--muted);font-size:12px">Halbjahresergebnis nach § 21 Abs. 1 FOBOSO. Diese Ansicht sieht ausschließlich du selbst, nicht einmal Lehrkräfte.</p>
 
+ ${wpfAuswahlHTML()}
  <div class="noten-split">
  <div class="noten-eintragen-kachel">
  <strong style="display:block;font-size:13px;margin-bottom:8px"> Note eintragen</strong>
  <label style="font-size:11px">Fach<select id="notenSchnellFach">
  ${F11SB_FAECHER.map(f=>`<option value="${f.key}">${f.label}</option>`).join("")}
- <option value="fpa">Fachpraktische Ausbildung</option>
  </select></label>
  <label style="font-size:11px;margin-top:8px;display:block">Halbjahr<select id="notenSchnellHj">
- <option value="hj1">1. Halbjahr</option>
- <option value="hj2">2. Halbjahr</option>
+ <option value="hj1">Halbjahr 12/1</option>
+ <option value="hj2">Halbjahr 12/2</option>
  </select></label>
  <button class="primary"style="margin-top:10px;width:100%"onclick="openNotenSchnellzugriff()">Öffnen →</button>
  </div>
 
  <div class="noten-uebersicht">
  <div style="overflow-x:auto"><table class="noten-table noten-table-kompakt">
- <thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead>
+ <thead><tr><th>Fach</th><th>12/1</th><th>12/2</th></tr></thead>
  <tbody>
  ${F11SB_FAECHER.map(f=>{
  const erg1=berechneHalbjahresergebnis(noten,f.key,"hj1");
@@ -3555,21 +3713,12 @@ async function renderKompass(){
  const werte=w.join(", ");
  return erg!==null?`<strong>${erg}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
  };
- return`<tr><td>${f.label}</td>
+ return`<tr><td>${f.label}${fachEinbringungsfaehig(f.key)?"":" <small>(zählt nicht)</small>"}</td>
  <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('${f.key}','hj1')">${zelle(erg1,w1)}</button></td>
  <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('${f.key}','hj2')">${zelle(erg2,w2)}</button></td>
  </tr>`;
  }).join("")}
- ${(()=>{const l1=notenListe(noten,"fpa","hj1"),a1=notenDurchschnitt(l1),l2=notenListe(noten,"fpa","hj2"),a2=notenDurchschnitt(l2);
- const zelleFpa=(a,l)=>{
- if(!l.length)return"–";
- const werte=l.map(e=>e.value).join(", ");
- return a!==null&&l.length>1?`<strong>${a}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
- };
- return`<tr class="noten-fpa"><td><em>fpA</em></td>
- <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fpa','hj1')">${zelleFpa(a1,l1)}</button></td>
- <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fpa','hj2')">${zelleFpa(a2,l2)}</button></td>
- </tr>`;})()}
+
  </tbody></table></div>
  <p style="font-size:10px;color:var(--muted);margin:6px 0 0">Fett = Halbjahresergebnis nach FOBOSO (braucht Schulaufgabe UND sonstige Leistungen). In Klammern/ohne Klammer: die einzelnen eingetragenen Werte.</p>
  <div class="form-actions"style="margin-top:10px">
@@ -3579,28 +3728,7 @@ async function renderKompass(){
  </div>
  </div>
 
- <div class="grid grid-2"style="margin-top:16px;gap:12px">
- <details class="noten-collapsible">
- <summary> Probezeit-Status (HJ1)</summary>
- <div class="notice">
- ${!bestehen.vollHJ1?`<p style="margin:0">Trag alle Noten des 1. Halbjahrs ein (inkl. fachpraktischer Ausbildung), um deinen endgültigen Stand zu sehen.</p>`
- :`<strong style="font-size:15px">${bestehen.probezeit.passed?" Probezeit nach aktueller Punktlage bestanden":" Probezeit nach aktueller Punktlage nicht bestanden"}</strong>
- <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Fachpraktische Ausbildung HJ1: ${bestehen.probezeit.fpaOk?"✓ mind. 4 Punkte":"✗ unter 4 Punkten"} · Fächer-Regel: ${bestehen.probezeit.fachCheck.passed?`erfüllt (Variante ${bestehen.probezeit.fachCheck.rule})`:"nicht erfüllt"}</p>`}
- <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochHJ1(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
- <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §8, §21 Abs. 3 FOBOSO – <strong>ohne Gewähr</strong>. Die tatsächliche Entscheidung trifft die Klassenkonferenz.</p>
- </div>
- </details>
- <details class="noten-collapsible">
- <summary> Bestehen des Schuljahres</summary>
- <div class="notice">
- ${!bestehen.vollJahr?`<p style="margin:0">Trag alle Noten beider Halbjahre ein (inkl. fachpraktischer Ausbildung), um deinen endgültigen Stand zu sehen.</p>`
- :`<strong style="font-size:15px">${bestehen.jahr.passed?" Schuljahr nach aktueller Punktlage bestanden":" Schuljahr nach aktueller Punktlage nicht bestanden"}</strong>
- <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Fachpraktische Ausbildung: ${bestehen.jahr.fpaOk?"✓ Bedingungen erfüllt":"✗ Bedingungen nicht erfüllt"} · Fächer-Regel: ${bestehen.jahr.fachCheck.passed?`erfüllt (Variante ${bestehen.jahr.fachCheck.rule})`:"nicht erfüllt"}</p>`}
- <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochJahr(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
- <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §22 Abs. 1 Nr. 2, §21 Abs. 3 FOBOSO – <strong>ohne Gewähr</strong>. Die tatsächliche Entscheidung trifft die Klassenkonferenz.</p>
- </div>
- </details>
- </div>
+ ${abschlussBlockHTML(noten,bestehen)}
  </div>
 
  <div class="kicker"style="margin:22px 0 8px">AUFGABEN & PROJEKTE</div>
@@ -6576,7 +6704,7 @@ async function coPdfErsatzKlasse(){
   openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs (Klasse)",legende+tab,`F12Sb · Pädagogik/Psychologie · [x] = gewählt · ${d.einst.anzahlWaehlen} Tests je Schüler:in`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
-Object.assign(window,{coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
+Object.assign(window,{coBankEinsetzen,coVorlageWaehlen,coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
  openCheckoutTest,coAntwort,coAbgeben,openCheckoutMeinErgebnis,openCheckoutErgebnisse,openCheckoutSchuelerErgebnis,coPdfSchueler,coPdfKlasse,
  openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfRespizienz,coPdfRespizienzKlasse,coPdfSchuelerAlle});
 
