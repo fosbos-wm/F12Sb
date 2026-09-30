@@ -1,0 +1,33 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Nur freigeschaltete Campus-Mitglieder dürfen Dateien lesen/hochladen.
+    // Greift auf denselben "approved"-Status wie die Firestore-Regeln zu.
+    function isApproved() {
+      return request.auth != null
+        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+        && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.status == 'approved';
+    }
+
+    // Lernprodukte im Lehrplan-Zeitstrahl (F12Sb) – max. 15 MB je Datei.
+    match /lehrplanProdukte/{wocheId}/{fileName} {
+      allow read: if isApproved();
+      allow write: if isApproved() && request.resource.size < 15 * 1024 * 1024;
+      allow delete: if isApproved();
+    }
+
+    // Pinnwand-Notizen – max. 15 MB je Datei.
+    match /boardPosts/{boardId}/{fileName} {
+      allow read: if isApproved();
+      allow write: if isApproved() && request.resource.size < 15 * 1024 * 1024;
+      allow delete: if isApproved();
+    }
+
+    // Alles andere ist gesperrt.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
