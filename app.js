@@ -3923,6 +3923,26 @@ async function renderUnterrichtPP(){
 }
 window.renderUnterrichtPP=renderUnterrichtPP;
 
+// Lernbereich des nächsten (bzw. heutigen) Unterrichtstags laut Stoffverteilungsplan.
+function pp12LbFuerDatum(iso){
+ const e=PP12_PLAN.find(x=>x.lb>0&&x.d>=iso)||[...PP12_PLAN].reverse().find(x=>x.lb>0);
+ return e?e.lb:1;
+}
+
+// ============================================================
+// ALTERNATIVER LEISTUNGSNACHWEIS (K-Prim-Check-outs, Kurzarbeit-Ersatz)
+// Logik und Design wie in der F11Sb; Inhalte: Lernbereiche der 12. Klasse.
+// ============================================================
+async function renderLeistungsnachweis(){
+ const d=await ladeCheckoutDaten();
+ return`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
+ ${pageHead("UNTERRICHT PÄDAGOGIK UND PSYCHOLOGIE","Alternativer Leistungsnachweis",`Wöchentliche K-Prim-Tests. Am Ende wählst du die ${d.einst.anzahlWaehlen} Check-outs aus, die als Kurzarbeit-Ersatz zählen.`,"")}
+ ${checkoutLiveBannerHTML(d)}
+ ${checkoutSektionHTML(d)}
+ ${footer()}`;
+}
+window.renderLeistungsnachweis=renderLeistungsnachweis;
+
 async function renderFaecherUebersicht(){
  return`${pageHead("LEHRPLAN & LERNINHALTE","Fächer 11. Klasse","Wähle ein Fach, um den Lehrplan-Zeitstrahl mit Themen, Aufträgen und Material zu öffnen.","")}
  <div class="grid grid-4">${F11SB_FAECHER.map(f=>{
@@ -5320,7 +5340,7 @@ function checkoutSektionHTML(d){
    <div class="co-aktion">${coAuswahlStatus(d.einst).offen?`<button class="primary"onclick="openCheckoutAuswahl()">${d.auswahl?"Auswahl ändern":`${d.einst.anzahlWaehlen} auswählen`}</button>`:`<small style="color:var(--muted)">${esc(coAuswahlStatus(d.einst).text)}</small>`}${d.auswahl?`<button class="secondary"onclick="coPdfErsatzSchueler()">PDF</button>`:""}</div></div>`;
  }
  return`<div class="card co-karte">
-  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Check-Out-Test live frei: eine Fallvignette mit 3–5 K-Prim-Aufgaben. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
+  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Test live frei: 3 K-Prim-Aufgaben mit je einer Fallvignette. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
    ${lehrer?`<button class="primary"onclick="openCheckoutEditor()">＋ Neuer Check-out</button>`:""}</div>
   <div class="co-liste">${zeilen||`<div class="empty">${lehrer?"Noch kein Check-out angelegt.":"Noch kein Check-out freigeschaltet."}</div>`}</div>
   ${ersatz}
@@ -5345,389 +5365,457 @@ function checkoutLiveBannerHTML(d){
 // „erklaerung“ ist eine kurze Begründung, die Schüler:innen erst NACH der Auswertung sehen.
 const CO_AUFGABENBANK=[
  {
-  "id": "tim-max",
-  "titel": "Tim und Max – Alltagspsychologie",
+  "id": "freud-instanzen",
+  "titel": "Freud: Instanzenmodell im Alltag",
   "lbNum": 1,
   "vignette": {
-   "titel": "Kindergarten „Wirbelwind“",
-   "text": "Sie absolvieren Ihr Praktikum im Kindergarten „Wirbelwind“ in Wendelstein. Seit Beginn Ihres Praktikums vor drei Wochen beobachten Sie immer wieder zwei Geschwisterkinder, die beide in Ihrer Gruppe sind. Der 3-jährige Max ist neu in den Kindergarten gekommen und hält sich fast immer in der Nähe seines Bruders Tim auf, der mit seinen fünf Jahren zu den Vorschulkindern gehört. Er will, dass Tim immer nur mit ihm spielt. Sie beobachten immer wieder, wie Tim genervt die Augen verdreht und versucht, Max abzuschütteln, zum Beispiel indem er zu ihm sagt, dass er sich mal andere Kinder zum Spielen suchen soll oder indem er einfach davonrennt. Daraufhin lässt Max immer den Kopf und die Schultern hängen, Tränen laufen ihm über die Wangen und er streckt seinen Arm nach Tim aus. Regelmäßig hat dies zur Folge, dass Tim dann einlenkt, seinem Bruder den Arm um die Schultern legt und ihn dann doch mit sich nimmt. Ihnen tun beide irgendwie leid und Sie erzählen der Erzieherin Moni davon.",
-   "zeilen": false
-  },
-  "kontext": "Pädagogische/psychologische Kompetenz bedeutet auch, fachlich fundierte Einschätzungen vorzunehmen und begründetes Handeln abzuleiten.\nIm Teamgespräch nimmt die Erzieherin Moni Bezug zu Ihren Beobachtungen im Alltag. Da Tim häufig genervt reagiert, wenn Max seine Nähe sucht und dabei die Augen verdreht oder weggeht, stellt sie fest: „Tim mag seinen Bruder einfach nicht!“",
-  "stamm": "Diese Aussage ist alltagstheoretisch, wenn …",
-  "aussagen": [
-   {
-    "text": "… Monis Schlussfolgerung sich aus einem umfassenden Bestand von fachlichen Eindrücken, die sie im Laufe ihres langjährigen beruflichen Alltags zufällig angesammelt hat, bildet.",
-    "richtig": true,
-    "erklaerung": "Fehlende Systematik"
-   },
-   {
-    "text": "… Monis Aussage sich als gesichertes Ergebnis einstufen lässt, da die Information durch mehrere Elterngespräche zur sozial-emotionalen Entwicklung sowie wiederholte gezielte Beobachtungen mit einem Beobachtungsbogen gewonnen wurde.",
-    "richtig": false,
-    "erklaerung": "Systematik: gezielte, wiederholte Beobachtung spricht für eine wissenschaftliche Aussage"
-   },
-   {
-    "text": "… Monis Kollegin Sarah aufgrund ihrer langjährigen Berufserfahrung durch die Beobachtung der gleichen Spielsituationen zwischen den Brüdern die Emotion von Tim als natürliches Wetteifern unter Brüdern deutet.",
-    "richtig": true,
-    "erklaerung": "Subjektivität"
-   },
-   {
-    "text": "… Monis Erkenntnis aus mehreren geplanten Beobachtungen aus den letzten zwei Kindergartenjahren stammt, in denen sie bei allen wiederholt konfliktreiche Situationen zwischen den zwei Brüdern beobachten konnte.",
-    "richtig": false,
-    "erklaerung": "Keine unzulässige Verallgemeinerung/Allgemeingültigkeit"
-   }
-  ]
- },
- {
-  "id": "hannes",
-  "titel": "Hannes und Herr Kluge – wissenschaftliche Kriterien",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Fallbeispiel: Hannes",
-   "text": "Hannes (3,5 Jahre) ist seit 3 Monaten in der Kindergartengruppe „Sternchen“ und hat sich\nmittlerweile gut eingewöhnt. Doch seit zwei Wochen fällt Erzieher Martin Kluge sein Verhalten\nauf: Hannes zwickt die anderen Kinder und wird schnell wütend, wenn er ein Spielzeug nicht\nsofort bekommen kann. Einmal hat er sogar gesehen, wie Hannes einem Mädchen ins Gesicht\ngespuckt hat. Herr Kluge zieht die Notbremse und holt die Eltern von Hannes Jung zum\nGespräch in die Einrichtung.\nHerr Kluge: „Nun, da ich Ihnen den Fall geschildert habe, müssen wir überlegen, wie wir mit dem\naggressiven Verhalten von Hannes umgehen.“\nFrau Jung: „Ist er denn wirklich so aggressiv? Die Kinderpflegerin Fatima meinte neulich zu mir,\nsie erlebe ihn eher als ausgeglichenen, neugierigen Jungen.“\nHerr Kluge: „Ich sehe das anders. Und aus diesem Grund müssen wir handeln. Letztens waren\nwir zu zweit in der Puppenecke und er hat so wütend auf die Puppen eingeschlagen und – ja,\nauch wenn Sie das jetzt nicht glauben wollen, genau so war es – das hat mir echt Angst\ngemacht. Sehen Sie doch: Wenn Hannes sein aggressives Verhalten nicht bald in den Griff\nbekommt, wird aus ihm später ein gewalttätiger Schläger! Während meiner Ausbildung hatten\nwir auch so ein Kind in der Gruppe, er zeigte das gleiche Verhalten wie Hannes – der sitzt jetzt\nim Gefängnis.“\nHerr Jung: „Also, ich weiß nicht. Gibt es da vielleicht so etwas wie einen Aggressions-Test oder\nFragebogen, den man dazu durchführen könnte? Dann wüssten wir genauer, ob…“\nHerr Kluge (unterbrochen): „Ach, da brauche ich keinen Test, sowas kann ich selbst einschätzen.\nDafür arbeite ich lange genug! Vertrauen Sie mir.“\nDie Personen verabreden sich zu einem weiteren Treffen und Herr und Frau Jung gehen\nbedrückt und unsicher aus der Einrichtung.",
-   "zeilen": true
-  },
-  "kontext": "Fachkräfte in der pädagogischen Arbeit sind angewiesen, stets nur wissenschaftlich fundierte Aussagen und Entscheidungen zu treffen.",
-  "stamm": "Herr Kluge würde Hannes‘ Fall nach wissenschaftlichen Kriterien beurteilen, wenn …",
-  "aussagen": [
-   {
-    "text": "… neben ihm auch der Vater Gewalthandlungen von Hannes beobachtet hätten, da dann das Merkmal der Objektivität vorliegen würde.",
-    "richtig": false,
-    "erklaerung": ""
-   },
-   {
-    "text": "… er Beweise für die in Z. 15‒17 getätigte Aussage vorlegen könnte, um eine objektive Einschätzung zu treffen.",
-    "richtig": false,
-    "erklaerung": ""
-   },
-   {
-    "text": "… er sich selbst einen Aggressionstest ausdenken und mit Hannes durchführen würde. Das Vorgehen wäre systematisch und die Aussagen daraus allgemeingültig.",
-    "richtig": false,
-    "erklaerung": ""
-   },
-   {
-    "text": "… er und Fatima Hannes‘ Verhalten über mehrere Wochen beobachten und systematisch dokumentieren würden, um nachvollziehbare und vergleichbare Aussagen zu Hannes tätigen zu können.",
-    "richtig": true,
-    "erklaerung": ""
-   }
-  ]
- },
- {
-  "id": "schlaf",
-  "titel": "Schlaf und Experiment – Studie",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Lernnachmittag vor der Schulaufgabe",
-   "text": "Am Tag vor der nächsten Schulaufgabe in Mathematik treffen Sie sich am Nachmittag mit Ihren Schulfreundinnen Larissa, Klara und Tina zum Lernen.\nKlara begrüßt Sie gar nicht richtig, sondern meint gleich zu Larissa: „Mensch du siehst aber gar nicht gut aus. Bist du krank?“\nLarissa erwidert darauf: „Nein, ich schlafe nur unglaublich schlecht. Seit mein Freund bei mir eingezogen ist und wir jede Nacht nebeneinander schlafen, mach ich nachts kaum noch ein Auge zu.“\nKlara nickt zustimmend: „Das kann ich mir gut vorstellen. Ich schlafe auch richtig schlecht, wenn jemand neben mir liegt. Es ist viel besser alleine zu schlafen. Wenn man nämlich alleine schläft, steigt die Leistungsfähigkeit des Menschen spürbar an. Durch die Bewegungen, die dein Partner nachts macht, wird auch dein Schlaf gestört. Heute solltest du unbedingt alleine schlafen, damit du für die Schulaufgabe morgen fit bist.“\nTina runzelt die Stirn und meint: „Also das glaube ich nicht.“\nLarissa wirft ein: „Doch, das macht echt Sinn. Solange ich nämlich noch meine 8 Stunden jede Nacht durchgeschlafen habe, hat mir auch niemand unterstellt, ich sähe krank aus. Da konnte ich mich nachts richtig erholen und war viel fitter.“\nTina gibt zu: „Ja, es stimmt schon, dass sich die Schlafqualität und Schlafdauer darauf auswirkt, wie du von anderen wahrgenommen wirst. Dazu habe ich erst vor kurzem etwas gelesen. Aber, dass es an deinem Freund liegt, dass du schlecht schläfst, das kann ich mir nicht vorstellen. Ich liege auch neben meinem Partner und ich schlafe richtig gut. Aber wartet mal, ich zeige euch noch kurz die Studie, die ich da gelesen habe. Danach müssen wir aber unbedingt mit Mathe anfangen.“",
-   "zeilen": false
-  },
-  "kontext": "Tina meint, dass die Schlafqualität und die Schlafdauer eine Auswirkung auf die wahrgenommene Gesundheit, Attraktivität und Müdigkeit einer Person haben. Sie bezieht sich dabei auf eine experimentelle Studie (vgl. Material). Jedes Experiment muss die Kriterien Willkürlichkeit, Variierbarkeit und Wiederholbarkeit erfüllen, um als wissenschaftliche Methode anerkannt zu sein.",
-  "material": {
-   "titel": "Schönheitsschlaf: Experimentelle Studie zur wahrgenommenen Gesundheit und Attraktivität von Menschen mit Schlafentzug",
-   "text": "Die experimentelle Studie „Schönheitsschlaf: Wahrgenommene Gesundheit und Attraktivität von Menschen mit Schlafentzug“ untersuchte, ob Personen nach einer Nacht mit Schlafentzug im Vergleich zu einer normalen Nachtruhe als weniger gesund, weniger attraktiv und müder wahrgenommen werden. Die Untersuchung wurde in einem Schlaflabor in Stockholm, Schweden, durchgeführt. An der Studie nahmen 23 gesunde Erwachsene im Alter von 18 bis 31 Jahren teil, die fotografiert wurden, sowie 65 ungeschulte Beobachter im Alter von 18 bis 61 Jahren, die diese Fotos bewerteten. Die Teilnehmer wurden nach einer normalen Nachtruhe von acht Stunden sowie nach einer Phase des Schlafentzugs fotografiert. Der Schlafentzug bestand aus 31 Stunden Wachsein nach einer Nacht mit verkürzter Schlafdauer. Anschließend wurden die Fotos in zufälliger Reihenfolge den Beobachtern präsentiert. Diese bewerteten die wahrgenommene Gesundheit, Attraktivität und Müdigkeit der abgebildeten Personen […]. Teilnehmer mit Schlafentzug wurden als weniger gesund wahrgenommen als nach einer normalen Nachtruhe […]. Zudem wirkten sie deutlich müder […] und etwas weniger attraktiv […].\nZusammenfassend verdeutlichen die Ergebnisse, dass Schlafentzug das äußere Erscheinungsbild beeinflusst und dazu führt, dass Menschen als weniger gesund, weniger attraktiv und müder wahrgenommen werden.",
-   "quelle": "Quelle: BMJ 2010; 341 doi. Veröffentlicht am: 15. Dezember 2010. Internetpublikation unter: https://www-bmj-com.translate.goog/content/341/bmj.c6614?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=de&_x_tr_pto=sc, aufgerufen am 11.06.2026."
-  },
-  "stamm": "Beurteilen Sie die folgenden Aussagen zur geschilderten Studie.",
-  "aussagen": [
-   {
-    "text": "Die geschilderte Studie erfüllt das Kriterium der Willkürlichkeit, da die Schlafdauer für jede Person zufällig gewählt worden ist.",
-    "richtig": false,
-    "erklaerung": ""
-   },
-   {
-    "text": "Die geschilderte Studie erfüllt das Kriterium der Variierbarkeit, da die Schlafbedingungen (normale Nachtruhe vs. Schlafentzug) systematisch variiert worden sind.",
-    "richtig": true,
-    "erklaerung": ""
-   },
-   {
-    "text": "Die geschilderte Studie erfüllt das Kriterium der Wiederholbarkeit, da das Schlaflaborprozedere und der Ablauf der Fotodarbietung genau beschrieben worden sind.",
-    "richtig": true,
-    "erklaerung": ""
-   },
-   {
-    "text": "Die geschilderte Studie bestätigt Tinas Aussage, dass Schlafqualität und Schlafdauer eine Auswirkung auf die wahrgenommene Gesundheit, Attraktivität und Müdigkeit einer Person haben.",
-    "richtig": false,
-    "erklaerung": ""
-   }
-  ]
- },
- {
-  "id": "luan-a",
-  "titel": "Luan und ADHS – Variante A",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Erziehungsberatungsstelle",
-   "text": "Frau Müller kommt mit ihrem 5-jährigen Sohn Luan in die Erziehungsberatungsstelle, da sie mit der Erziehung ihres sehr lebhaften und aufbrausenden Sohnes überfordert ist. Frau Müller berichtet der Sozialpädagogin, dass ihr Sohn bei jeder Kleinigkeit ausflippe. Neulich, als ihre Freundin zu Besuch war, schmiss er vor lauter Wut einen Teller auf den Boden, weil er kein weiteres Stück Kuchen bekam. Ihre Freundin habe ihr nun empfohlen, sich Hilfe bei einer Beratungsstelle zu holen. Die Freundin sei sich sicher, Luan würde ADHS haben, schließlich sei er so aggressiv wie der Sohn der Nachbarin. Und der habe schließlich auch ADHS. Außerdem würde er ja auch gar nicht folgen. Das wäre ja wohl auch typisch für Kinder mit ADHS. Luans Erzieherin sieht das Ganze aber weniger dramatisch. Er könne sich in der Gruppe doch sehr gut an Regeln halten.",
+   "titel": "Jugendtreff",
+   "text": "Im Jugendtreff einer Kleinstadt steht der 15-jährige Jonas am Buffet vor dem letzten Stück Pizza. Er hat großen Hunger und möchte sofort zugreifen. Dann fällt ihm auf, dass seine Freundin Lea noch nichts gegessen hat. Er denkt: „Das wäre unfair“, und der Gedanke ist ihm unangenehm. Schließlich teilt er das Stück, gibt Lea eine Hälfte und isst die andere selbst. Die Sozialarbeiterin Frau Kraus beobachtet die Szene und bespricht sie später im Team.",
    "zeilen": false
   },
   "kontext": "",
-  "stamm": "Die Sozialpädagogin gibt eine wissenschaftsbasierte Einschätzung zu Luan ab, wenn …",
-  "pruefen": "Im Word-Dokument war keine Lösung angekreuzt. Die Lösung wurde aus dem Inhalt abgeleitet – bitte fachlich prüfen.",
+  "stamm": "Jonas’ Verhalten lässt sich mit dem Instanzenmodell nach Freud fachlich zutreffend erklären, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… sie die Vermutung der Freundin aufgrund der Ähnlichkeit zum Nachbarskind als Bestätigung für eine ADHS-Diagnose übernimmt.",
+    "text": "… sein spontaner Wunsch nach sofortiger Bedürfnisbefriedigung dem Es zugeordnet wird, das nach dem Lustprinzip arbeitet.",
+    "richtig": true,
+    "erklaerung": "Das Es strebt nach unmittelbarer Befriedigung der Triebe (Lustprinzip)."
+   },
+   {
+    "text": "… seine Hemmung vor dem Zugreifen als Leistung des Es eingeordnet wird, das Gebote und Verbote vertritt.",
     "richtig": false,
-    "erklaerung": ""
+    "erklaerung": "Gebote und Verbote vertritt das Über-Ich; das Es kennt keine Normen."
    },
    {
-    "text": "… sie eine differenzierte Verhaltensbeobachtung in verschiedenen Lebenswelten (z. B. Schule, Zuhause) durchführt.",
+    "text": "… die Überlegung, dass Zugreifen unfair wäre, dem Über-Ich zugeschrieben wird, das moralische Normen vertritt.",
     "richtig": true,
-    "erklaerung": ""
+    "erklaerung": "Das Über-Ich enthält verinnerlichte Normen und Werte (Gewissen)."
    },
    {
-    "text": "… sie standardisierte Fragebögen oder klinische Interviews zur Erhebung der Symptomatik einsetzt.",
+    "text": "… die Entscheidung zum Teilen als Leistung des Ichs gilt, das zwischen Es, Über-Ich und Realität vermittelt.",
     "richtig": true,
-    "erklaerung": ""
-   },
-   {
-    "text": "… sie eine interdisziplinäre Zusammenarbeit mit Lehrkräften, Eltern und medizinischem Fachpersonal anstrebt, um ein ganzheitliches Bild zu erhalten.",
-    "richtig": true,
-    "erklaerung": ""
+    "erklaerung": "Das Ich arbeitet nach dem Realitätsprinzip und vermittelt zwischen den Ansprüchen der anderen Instanzen."
    }
   ]
  },
  {
-  "id": "luan-b",
-  "titel": "Luan und ADHS – Variante B",
+  "id": "freud-psychosexuell",
+  "titel": "Freud: Psychosexuelle Entwicklung und Fixierung",
   "lbNum": 1,
   "vignette": {
-   "titel": "Erziehungsberatungsstelle",
-   "text": "Frau Müller kommt mit ihrem 5-jährigen Sohn Luan in die Erziehungsberatungsstelle, da sie mit der Erziehung ihres sehr lebhaften und aufbrausenden Sohnes überfordert ist. Frau Müller berichtet der Sozialpädagogin, dass ihr Sohn bei jeder Kleinigkeit ausflippe. Neulich, als ihre Freundin zu Besuch war, schmiss er vor lauter Wut einen Teller auf den Boden, weil er kein weiteres Stück Kuchen bekam. Ihre Freundin habe ihr nun empfohlen, sich Hilfe bei einer Beratungsstelle zu holen. Die Freundin sei sich sicher, Luan würde ADHS haben, schließlich sei er so aggressiv wie der Sohn der Nachbarin. Und der habe schließlich auch ADHS. Außerdem würde er ja auch gar nicht folgen. Das wäre ja wohl auch typisch für Kinder mit ADHS. Luans Erzieherin sieht das Ganze aber weniger dramatisch. Er könne sich in der Gruppe doch sehr gut an Regeln halten.",
+   "titel": "Kinderkrippe",
+   "text": "In der Kinderkrippe „Regenbogen“ wird die zweijährige Mia seit einigen Wochen an die Toilette herangeführt. Ihre Eltern wünschen, dass Mia bis zum Sommer trocken ist, und bestehen auf festen Toilettenzeiten. Mia tobt beim Malen mit Fingerfarben gerne im Matsch, wehrt sich aber gegen das Sitzen auf der Toilette und hält den Stuhlgang zurück. Die Erzieherin Frau Yilmaz spricht die Situation im Elterngespräch an.",
    "zeilen": false
   },
   "kontext": "",
-  "stamm": "Die Sozialpädagogin gibt eine wissenschaftsbasierte Einschätzung zu Luan ab, wenn …",
-  "pruefen": "Im Word-Dokument war keine Lösung angekreuzt. Die Lösung wurde aus dem Inhalt abgeleitet – bitte fachlich prüfen.",
+  "stamm": "Mias Situation wird mit der psychosexuellen Entwicklung nach Freud fachlich zutreffend beschrieben, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… sie ausgewertete Fragebögen von den wichtigen Bezugspersonen (Mutter, Vater, Erzieherinnen) mit einbezieht.",
+    "text": "… Mias Alter und die Sauberkeitserziehung auf die anale Phase verweisen, in der die Kontrolle über die Ausscheidung bedeutsam wird.",
     "richtig": true,
-    "erklaerung": ""
+    "erklaerung": "In der analen Phase steht nach Freud die Kontrolle der Ausscheidung im Mittelpunkt."
    },
    {
-    "text": "… sie ihre Einschätzung auf die detaillierten Schilderungen der Mutter stützt, da diese Luan im Alltag intensiv erlebt.",
+    "text": "… eine Fixierung bedeutet, dass ein Kind eine Phase erfolgreich abgeschlossen hat und danach in die nächste Phase wechselt.",
     "richtig": false,
-    "erklaerung": ""
+    "erklaerung": "Fixierung heißt, dass die Entwicklung in einer Phase verharrt, z. B. durch Überbefriedigung oder Frustration."
    },
    {
-    "text": "… sie einen standardisierten Beobachtungsbogen verwendet, um Luans Verhalten über einen längeren Zeitraum zu erfassen.",
+    "text": "… Mia sich in der phallischen Phase befindet, weil sie ihre Umwelt aktiv mit den Händen erkundet.",
+    "richtig": false,
+    "erklaerung": "Die phallische Phase betrifft das Alter von etwa drei bis sechs Jahren; Mia befindet sich in der analen Phase."
+   },
+   {
+    "text": "… die Phasen nach Freud in einer festgelegten Reihenfolge ablaufen, sodass die orale Phase der analen Phase vorausgeht.",
     "richtig": true,
-    "erklaerung": ""
-   },
-   {
-    "text": "… sie die Einschätzung aufgrund des Vorfalls mit dem auf den Boden geschmissenen Teller trifft, weil dieser sehr eindrücklich ist.",
-    "richtig": false,
-    "erklaerung": ""
+    "erklaerung": "Reihenfolge nach Freud: oral, anal, phallisch, Latenz, genital."
    }
   ]
  },
  {
-  "id": "erz-wiss-praxis",
-  "titel": "Erziehungswissenschaft und Erziehungspraxis",
+  "id": "freud-abwehr",
+  "titel": "Freud: Abwehrmechanismen erkennen",
   "lbNum": 1,
   "vignette": {
-   "titel": "Kindertagesstätte „Sonnenhügel“",
-   "zeilen": false,
-   "text": "Sie absolvieren Ihr Praktikum in der Kindertagesstätte „Sonnenhügel“. Im Teamgespräch berichtet die Gruppenleiterin Frau Kaiser, dass sich einige Kinder morgens schwer von ihren Eltern lösen. Ihre Kollegin Lea liest daraufhin in einer Fachzeitschrift eine Studie, die in zahlreichen Einrichtungen durchgeführt wurde und einen Zusammenhang zwischen gleichbleibenden Verabschiedungen und der Eingewöhnung beschreibt. Am folgenden Tag führt Frau Kaiser probeweise einen kurzen, immer gleichen Ablauf für den Abschied ein. Nach zwei Wochen stellt sie im Team fest, dass sich zwei Kinder inzwischen leichter von ihren Eltern trennen."
+   "titel": "Kindertagesstätte",
+   "text": "Nach der Geburt seiner Schwester Lena nässt der vierjährige Ben in der Kindertagesstätte wieder ein, obwohl er schon seit Monaten trocken war, und verlangt nach dem Fläschchen. Außerdem behauptet er gegenüber der Erzieherin Frau Schmid, die anderen Kinder seien gemein zu ihm, obwohl er es ist, der ihnen die Bausteine wegnimmt. Auf Fragen nach seiner Schwester erzählt er kaum etwas und wechselt schnell das Thema.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Die Situation wird fachlich zutreffend eingeordnet, wenn …",
+  "stamm": "Bens Verhalten wird mithilfe der Abwehrmechanismen nach Freud fachlich zutreffend eingeordnet, wenn …",
   "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… die von Lea gelesene Studie als Erziehungswissenschaft gilt, weil sie Erkenntnisse systematisch gewinnt und über den Einzelfall hinaus formuliert.",
+    "text": "… das Einnässen und der Wunsch nach dem Fläschchen als Regression gedeutet werden, also als Rückfall auf eine frühere Entwicklungsstufe.",
     "richtig": true,
-    "erklaerung": "Erziehungswissenschaft untersucht Erziehung systematisch und formuliert verallgemeinerbare Aussagen."
+    "erklaerung": "Regression: Rückkehr zu früheren, als sicherer erlebten Verhaltensweisen."
    },
    {
-    "text": "… das Vorgehen von Frau Kaiser als Erziehungswissenschaft gilt, weil damit ein konkretes Problem in der Gruppe gelöst werden soll.",
-    "richtig": false,
-    "erklaerung": "Konkretes erzieherisches Handeln im Alltag ist Erziehungspraxis, nicht Erziehungswissenschaft."
-   },
-   {
-    "text": "… die Erfahrung mit zwei Kindern für Frau Kaiser ausreicht, um eine für die gesamte Frühpädagogik gültige Gesetzmäßigkeit zu formulieren.",
-    "richtig": false,
-    "erklaerung": "Einzelfallerfahrungen aus der Praxis erlauben keine allgemeingültige Aussage (unzulässige Verallgemeinerung)."
-   },
-   {
-    "text": "… Frau Kaiser durch die Übertragung von Forschungsergebnissen auf ihre Gruppe eine theoriegeleitete Erziehungspraxis gestaltet.",
+    "text": "… Bens Vorwurf gegenüber den anderen Kindern als Projektion gilt, bei der eigene Impulse anderen zugeschrieben werden.",
     "richtig": true,
-    "erklaerung": "Erziehungspraxis nutzt wissenschaftliche Erkenntnisse als Grundlage für das eigene Handeln."
+    "erklaerung": "Projektion: Eigene, unerwünschte Impulse werden auf andere Personen übertragen."
+   },
+   {
+    "text": "… sein Themenwechsel als Identifikation gilt, bei der er Eigenschaften seiner Schwester übernimmt.",
+    "richtig": false,
+    "erklaerung": "Identifikation bedeutet die Übernahme von Eigenschaften einer Person; ein Themenwechsel erfüllt diese Bedeutung nicht."
+   },
+   {
+    "text": "… Abwehrmechanismen bewusst und planvoll eingesetzt werden, damit Konflikte mit anderen Personen gelöst werden.",
+    "richtig": false,
+    "erklaerung": "Abwehrmechanismen laufen unbewusst ab und helfen dem Ich, Angst aus inneren Konflikten zu bewältigen."
    }
   ]
  },
  {
-  "id": "erz-bildung",
-  "titel": "Erziehung und Bildung",
+  "id": "freud-abwehr-fall",
+  "titel": "Freud: Abwehr in der Wohngruppe",
   "lbNum": 1,
   "vignette": {
-   "titel": "Hort „Bunte Welt“",
-   "zeilen": false,
-   "text": "In Ihrem Praktikum im Hort „Bunte Welt“ beobachten Sie die zwölfjährige Mira. Aus eigenem Antrieb baut sie in der Freispielzeit aus Holzresten eine Murmelbahn, probiert verschiedene Neigungen aus, verwirft eine Idee und erklärt später einem jüngeren Kind, warum die Kugel schneller wird. Erzieher Herr Gruber hatte zuvor das Werkmaterial bereitgestellt und mit den Kindern vereinbart, dass Werkzeuge nach der Arbeit zurückgeräumt werden. Als Mira ihr Werkzeug liegen lässt, erinnert er sie freundlich an diese Absprache. Daraufhin räumt sie auf."
+   "titel": "Wohngruppe",
+   "text": "Die 16-jährige Sarah lebt in einer Wohngruppe der Jugendhilfe. Seit dem Tod ihres Großvaters spricht sie in Gesprächen mit der Betreuerin Frau Dietz nie über ihn. Fragt man sie nach den Ferien bei ihm, sagt sie, sie könne sich an nichts mehr erinnern. Bei Streit in der Gruppe wird sie laut und wirft anderen vor, sie würden sie provozieren, obwohl die Gruppe sie eher in Ruhe lässt. Als ein Mitbewohner ihr seinen Kummer anvertraut, tröstet sie ihn mit genau den Worten, die früher ihr Großvater für sie hatte.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Erziehung und Bildung werden in der Situation zutreffend unterschieden, wenn …",
+  "stamm": "Sarahs Verhalten lässt sich mit Abwehrmechanismen nach Freud fachlich zutreffend deuten, wenn …",
   "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… die Erinnerung von Herrn Gruber als Bildungsvorgang gilt, weil sie das Kind zu neuem Wissen führt.",
-    "richtig": false,
-    "erklaerung": "Die Erinnerung ist absichtsvolles Einwirken einer Fachkraft und damit eine Erziehungshandlung."
-   },
-   {
-    "text": "… Miras Erproben und Verbessern ihrer Konstruktion als Bildung gilt, da sie sich durch eigene Tätigkeit Wissen und Fähigkeiten aneignet.",
+    "text": "… ihre fehlende Erinnerung an die Ferien beim Großvater als Verdrängung schmerzlicher Inhalte aus dem Bewusstsein eingeordnet wird.",
     "richtig": true,
-    "erklaerung": "Bildung ist die aktive Auseinandersetzung des Menschen mit der Welt und seine Selbstentwicklung."
+    "erklaerung": "Verdrängung: Belastende Inhalte werden unbewusst aus dem Bewusstsein ferngehalten."
    },
    {
-    "text": "… Bildung erst dann entsteht, wenn eine Fachkraft die Lerninhalte plant und die Kinder gezielt anleitet.",
+    "text": "… ihr Vorwurf der Provokation als Identifikation gilt, bei der sie Eigenschaften anderer Personen für sich übernimmt.",
     "richtig": false,
-    "erklaerung": "Bildung geht vom Kind aus (Selbstbildung); Fachkräfte können sie anregen, müssen sie aber nicht steuern."
+    "erklaerung": "Wer eigene Impulse anderen zuschreibt, nutzt die Projektion; Identifikation meint die Übernahme fremder Eigenschaften."
    },
    {
-    "text": "… das Aufräumen als Erziehung gilt, weil das Ergebnis erwünscht ist, unabhängig davon, ob die Fachkraft eine Absicht verfolgt.",
+    "text": "… das Trösten mit den Worten des Großvaters als Identifikation gilt, bei der Eigenschaften einer Bezugsperson übernommen werden.",
+    "richtig": true,
+    "erklaerung": "Identifikation: Übernahme von Eigenschaften oder Verhaltensweisen einer wichtigen Person."
+   },
+   {
+    "text": "… ihr lautes Verhalten im Streit als Fixierung gilt, weil sie als Kleinkind in der phallischen Phase verharrt sei.",
     "richtig": false,
-    "erklaerung": "Erziehung ist durch die Absicht der Erziehenden bestimmt, das Verhalten oder die Fähigkeiten anderer zu beeinflussen."
+    "erklaerung": "Aus dem lauten Verhalten allein lässt sich keine Fixierung ableiten; Hinweise auf eine Phase fehlen im Fall."
    }
   ]
  },
  {
-  "id": "erz-ziele-handlungen",
-  "titel": "Erziehungsziele und Erziehungshandlungen",
+  "id": "freud-wuerdigung",
+  "titel": "Freud: Kritische Würdigung der Theorie",
   "lbNum": 1,
   "vignette": {
-   "titel": "Kindergarten „Regenbogen“",
-   "zeilen": false,
-   "text": "Im Leitbild des Kindergartens „Regenbogen“ hat das Team festgehalten, dass die Kinder zu selbstständigen und rücksichtsvollen Menschen heranwachsen sollen. In der Gruppe der Vierjährigen beobachten Sie mehrere Situationen. Beim Anziehen im Flur wartet Erzieherin Frau Dimitrova, bis Jonas selbst versucht, den Reißverschluss zu schließen, und lobt ihn danach für seinen Versuch. Kurz darauf entreißt Emma einem anderen Kind die Puppe. Frau Dimitrova geht zu ihr, beschreibt ruhig, dass das Kind traurig ist, und schlägt vor, gemeinsam eine zweite Puppe zu suchen. Die Vertretungskraft dagegen nimmt Emma die Puppe ab, stellt sie ins Regal und schickt das Mädchen in die Leseecke."
+   "titel": "Teamsitzung im Kinderhaus",
+   "text": "In einer Teamsitzung des Kinderhauses „Sonnenschein“ diskutieren die pädagogischen Fachkräfte, ob die psychoanalytische Theorie nach Freud kindliches Verhalten gut erklärt. Die Praktikantin Jana berichtet, Freuds Annahmen seien vor allem in Behandlungen erwachsener Patientinnen und Patienten entstanden. Der Erzieher Tobias meint, man könne nicht überprüfen, ob ein Kind tatsächlich einen unbewussten Konflikt austrägt. Die Kollegin Fatma hält dagegen, die Theorie gebe dennoch wichtige Anregungen für den Umgang mit Kindern, zum Beispiel durch den Blick auf frühe Erfahrungen.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Erziehungshandlungen und Erziehungsziele des Teams passen zusammen, wenn …",
+  "stamm": "Der Erklärungswert der psychoanalytischen Theorie wird fachlich zutreffend gewürdigt, wenn …",
   "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… das geduldige Abwarten und das anschließende Lob die Eigeninitiative des Jungen stärken und damit Selbstständigkeit fördern.",
+    "text": "… die mangelnde empirische Überprüfbarkeit der psychosexuellen Phasen als Schwäche der Theorie benannt wird.",
     "richtig": true,
-    "erklaerung": "Ermutigung und Lob nach eigenem Versuch unterstützen das Ziel Selbstständigkeit."
+    "erklaerung": "Unbewusste Vorgänge und Phasen lassen sich kaum empirisch überprüfen; das ist ein zentraler Kritikpunkt."
    },
    {
-    "text": "… das schweigende Wegnehmen der Puppe Rücksichtnahme aufbaut, weil das Kind die Folge seines Handelns spürt.",
+    "text": "… die Datengrundlage aus systematischen Beobachtungen gesunder Kinder als Stärke der Theorie hervorgehoben wird.",
     "richtig": false,
-    "erklaerung": "Eine Maßnahme ohne Erklärung fördert eher Gehorsam; für Rücksichtnahme braucht das Kind Einsicht in die Gefühle des anderen."
+    "erklaerung": "Freud stützte sich überwiegend auf Behandlungen erwachsener Patienten, nicht auf systematische Kinderbeobachtung."
    },
    {
-    "text": "… das ruhige Beschreiben der Gefühle des Gegenübers einen Perspektivwechsel anregt und so zur Rücksichtnahme beiträgt.",
-    "richtig": true,
-    "erklaerung": "Das Benennen der Gefühle macht die Sicht des anderen zugänglich und unterstützt das Ziel Rücksichtnahme."
+    "text": "… die Bekanntheit der Theorie und ihr Einfluss auf Therapien als Beleg für ihre empirische Bestätigung gelten.",
+    "richtig": false,
+    "erklaerung": "Bekanntheit und Einfluss ersetzen keine empirische Überprüfung."
    },
    {
-    "text": "… Frau Dimitrova die Ziele des Leitbilds in konkrete Erziehungshandlungen übersetzt und sich daran im Vorgehen orientiert.",
+    "text": "… der Hinweis auf die Bedeutung früher Kindheitserfahrungen als bleibender Beitrag der Theorie anerkannt wird.",
     "richtig": true,
-    "erklaerung": "Erziehungsziele geben Orientierung und werden durch passende Erziehungshandlungen umgesetzt."
+    "erklaerung": "Die Betonung früher Erfahrungen für die Persönlichkeitsentwicklung gilt als wichtiger Impuls der Psychoanalyse."
    }
   ]
  },
  {
-  "id": "paed-beziehung",
-  "titel": "Pädagogische Beziehung",
+  "id": "freud-erziehung",
+  "titel": "Freud: Folgerungen für die Erziehung",
   "lbNum": 1,
   "vignette": {
-   "titel": "Ganztagsbetreuung einer Grundschule",
-   "zeilen": false,
-   "text": "Sie absolvieren Ihr Praktikum in der Ganztagsbetreuung einer Grundschule. Der achtjährige Felix ist seit dem Schulwechsel zurückhaltend und wartet in der Hausaufgabenzeit meist ab. Betreuerin Frau Öztürk begrüßt ihn morgens mit Namen, setzt sich zu ihm und fragt, woran er gerade arbeitet. Als er eine Rechenaufgabe falsch löst, bemerkt sie seine Unsicherheit und sagt ruhig, Fehler gehörten zum Üben dazu. Dann zeigt sie ihm einen anderen Lösungsweg. Sie bringt ihm wie versprochen am Freitag ein Schachspiel mit und erklärt ihm, dass sie zwischendurch auch andere Kinder unterstützen muss. Nach einigen Wochen bittet Felix von sich aus eine Mitschülerin um Hilfe."
+   "titel": "Krippe „Kleine Wichtel“",
+   "text": "Die Eltern des zweieinhalbjährigen Noah drängen die Erzieherin Frau Keller, Noah müsse bis zum Sommer „sauber“ sein. Sie loben ihn nur, wenn er die Toilette benutzt, und schimpfen bei Missgeschicken. Frau Keller schlägt vor, Noah das Tempo selbst bestimmen zu lassen, Missgeschicke gelassen zu nehmen und Noahs Freude am Matschen und Spielen nicht einzuschränken.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Frau Öztürk gestaltet die pädagogische Beziehung förderlich, wenn …",
+  "stamm": "Frau Kellers Vorschlag ist aus psychoanalytischer Sicht nach Freud fachlich zutreffend begründet, wenn …",
   "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… sie Felix durch persönliche Begrüßung und Interesse an seiner Arbeit Wertschätzung entgegenbringt und ihm damit Sicherheit vermittelt.",
-    "richtig": true,
-    "erklaerung": "Wertschätzung ist ein zentrales Merkmal einer förderlichen Beziehung."
-   },
-   {
-    "text": "… sie ihre Zusage einhält und ihre begrenzte Zeit offen darlegt, sodass Felix sich auf sie verlassen kann.",
-    "richtig": true,
-    "erklaerung": "Verlässlichkeit und Echtheit schaffen Vertrauen."
-   },
-   {
-    "text": "… sie Felix bei Schwierigkeiten sofort die Lösung vorgibt, weil eine förderliche Beziehung das Kind vor Misserfolgen bewahren soll.",
+    "text": "… Zwang und Strafe bei der Sauberkeitserziehung die Persönlichkeitsentwicklung nach Freud nicht beeinflussen.",
     "richtig": false,
-    "erklaerung": "Eine förderliche Beziehung unterstützt die Selbstständigkeit und lässt Fehler als Lernchance zu."
+    "erklaerung": "Nach Freud können Zwang und Strafe zu einer Fixierung und zu prägenden Persönlichkeitszügen führen."
    },
    {
-    "text": "… sie sein Unbehagen wahrnimmt und sich in seine Lage einfühlt, bevor sie eine alternative Vorgehensweise vorschlägt.",
+    "text": "… eine gelassene Haltung bei Missgeschicken das Risiko einer Fixierung in der analen Phase verringern soll.",
     "richtig": true,
-    "erklaerung": "Einfühlungsvermögen (Empathie) ist ein Merkmal einer förderlichen Beziehung."
+    "erklaerung": "Gelassenheit vermeidet Überforderung und Frustration in dieser Phase."
+   },
+   {
+    "text": "… Noahs Freude am Matschen und Spielen als Teil der Phase akzeptiert wird, statt sie zu unterbinden.",
+    "richtig": true,
+    "erklaerung": "Die Befriedigung phasentypischer Bedürfnisse gilt als Voraussetzung für eine gelingende Entwicklung."
+   },
+   {
+    "text": "… ein ausgewogenes Maß an Befriedigung und Begrenzung in der analen Phase als Voraussetzung für eine gelingende Entwicklung gilt.",
+    "richtig": true,
+    "erklaerung": "Weder Überbefriedigung noch Frustration fördern die Entwicklung; ein ausgewogenes Maß verringert das Risiko einer Fixierung."
    }
   ]
  },
  {
-  "id": "erz-einrichtungen",
-  "titel": "Einrichtungen der Erziehung",
+  "id": "bindung-phasen",
+  "titel": "Bindung: Begriff und Phasen der Bindungsentwicklung",
   "lbNum": 1,
   "vignette": {
-   "titel": "Wohngruppe „Brückenhaus“",
-   "zeilen": false,
-   "text": "In Ihrem Praktikum in der Wohngruppe „Brückenhaus“ lernen Sie die zehnjährige Sofia kennen. Sie lebt seit vier Monaten dort, weil ihre Mutter schwer erkrankt ist und ihr Vater die Betreuung nicht übernehmen kann. Die Wohngruppe sichert Versorgung, Tagesstruktur und Beziehungsangebote. Sofia besucht vormittags die Grundschule. An zwei Nachmittagen pro Woche geht sie in den Hort in der Nachbarschaft und macht dort ihre Hausaufgaben. Am Wochenende besucht sie ihre Mutter im Krankenhaus."
+   "titel": "Krippe „Sonnenkäfer“",
+   "text": "Die zehn Monate alte Amira besucht seit zwei Wochen die Krippe „Sonnenkäfer“. Sie streckt die Arme nur nach ihren Eltern aus und beginnt zu weinen, als die Nachbarin sie auf den Arm nehmen möchte. Als ihre Mutter den Raum verlässt, protestiert Amira laut. Sobald die Mutter zurückkommt, beruhigt sie sich rasch. Die Bezugserzieherin Frau Albrecht notiert diese Beobachtungen für das Entwicklungsgespräch.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Die Einrichtungen werden fachlich zutreffend zugeordnet, wenn …",
+  "stamm": "Amiras Verhalten wird mit der Bindungsentwicklung fachlich zutreffend beschrieben, wenn …",
   "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… die Wohngruppe als familienersetzende Einrichtung gilt, weil sie Aufgaben der Familie im Lebensalltag des Mädchens übernimmt.",
-    "richtig": true,
-    "erklaerung": "Heimerziehung und Wohngruppen ersetzen die Familie, wenn Kinder dort nicht leben können."
-   },
-   {
-    "text": "… der Hort als familienergänzende Einrichtung gilt, da er Begleitung und Förderung neben dem Elternhaus anbietet.",
-    "richtig": true,
-    "erklaerung": "Der Hort begleitet Schulkinder in der Freizeit und unterstützt die Familie, ohne sie zu ersetzen."
-   },
-   {
-    "text": "… die Schule als familienersetzende Einrichtung gilt, weil sie den Kindern verpflichtende Bildungsangebote macht.",
+    "text": "… ihre Bindungsentwicklung als abgeschlossen gilt, weil sie eine feste Bevorzugung ihrer Eltern zeigt.",
     "richtig": false,
-    "erklaerung": "Die Schule hat einen Bildungs- und Erziehungsauftrag, ersetzt die Familie aber nicht."
+    "erklaerung": "Die Bindungsentwicklung verläuft über mehrere Phasen bis ins Kleinkindalter; die Bevorzugung markiert eine mittlere Phase."
    },
    {
-    "text": "… Wohngruppe und Hort dieselbe Zielgruppe haben, weil beide Angebote sich an Kinder in familiären Krisen richten.",
+    "text": "… der Protest bei der Trennung als Zeichen einer gestörten Bindung eingeordnet wird, weil Trennungsschmerz nicht normal sei.",
     "richtig": false,
-    "erklaerung": "Der Hort richtet sich an Schulkinder allgemein; die Wohngruppe an Kinder, die vorübergehend oder dauerhaft nicht in ihrer Familie leben können."
+    "erklaerung": "Trennungsprotest zeigt, dass eine Bindung besteht, und gehört zur Entwicklung."
+   },
+   {
+    "text": "… das Weinen bei der Nachbarin als Hinweis gilt, dass Amira zwischen vertrauten und fremden Personen unterscheidet.",
+    "richtig": true,
+    "erklaerung": "Fremdeln zeigt, dass ein Kind Bindungspersonen von Fremden unterscheidet."
+   },
+   {
+    "text": "… Bindung als dauerhaftes emotionales Band zu bestimmten Personen verstanden wird, das Nähe und Sicherheit vermittelt.",
+    "richtig": true,
+    "erklaerung": "Bindung ist eine enge, emotionale Beziehung, die Schutz und Sicherheit bietet."
    }
   ]
  },
  {
-  "id": "erleben-verhalten-handeln",
-  "titel": "Erleben, Verhalten und Handeln in der Praxis",
+  "id": "bindung-typologie",
+  "titel": "Bindung: Bindungstypen nach Ainsworth",
   "lbNum": 1,
   "vignette": {
-   "titel": "Grundschulklasse",
-   "zeilen": false,
-   "text": "In Ihrem Praktikum in einer Grundschulklasse beobachten Sie den siebenjährigen Leon. Bei der Rückgabe der Mathematikarbeit senkt er den Blick, zerknüllt das Blatt und schiebt es in seinen Ranzen. Später erzählt er der Lehrerin Frau Brandt, dass er Sorge hatte, seine Eltern könnten schimpfen. Frau Brandt setzt sich in der Pause zu ihm, bespricht Lernwege mit ihm und vereinbart, die nächste Arbeit gemeinsam vorzubereiten. Leon entschließt sich daraufhin, täglich zehn Minuten zu üben, und legt dafür einen Plan an."
+   "titel": "Kindertagesstätte, Bringsituation",
+   "text": "Bei einer Beobachtung in der Kindertagesstätte „Villa Kunterbunt“ fallen drei Zweijährige in der Abschiedssituation auf. Lukas weint beim Abschied kurz, lässt sich von der Erzieherin trösten und spielt nach wenigen Minuten weiter. Bei der Abholung läuft er freudig zu seiner Mutter. Mara zeigt beim Abschied kaum eine Reaktion, spielt für sich und wendet sich bei der Abholung ab, als die Mutter sie aufnehmen will. Jonas klammert sich beim Abschied fest, weint lange und ist bei der Abholung kaum zu beruhigen. Er sucht die Nähe der Mutter und wehrt sie zugleich mit den Armen ab.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Die Situation wird fachlich zutreffend beschrieben, wenn …",
+  "stamm": "Die Kinder lassen sich den Bindungstypen nach Ainsworth fachlich zutreffend zuordnen, wenn …",
   "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… das Zerknüllen des Blattes als beobachtbares Verhalten eingeordnet wird, weil Außenstehende es unmittelbar wahrnehmen können.",
+    "text": "… Lukas als sicher gebunden gilt, weil er Trost annimmt und bei der Abholung die Nähe der Mutter sucht.",
     "richtig": true,
-    "erklaerung": "Verhalten umfasst alle von außen beobachtbaren Äußerungen."
+    "erklaerung": "Sicher gebundene Kinder nutzen die Bindungsperson als Trostquelle und begrüßen sie bei der Wiedervereinigung."
    },
    {
-    "text": "… Leons Sorge als Verhalten eingeordnet wird, weil er sie einer Erwachsenen mitteilt und sie damit für andere sichtbar wird.",
+    "text": "… Mara als unsicher-vermeidend gebunden gilt, weil sie Nähe zur Bindungsperson meidet und Gefühle kaum zeigt.",
+    "richtig": true,
+    "erklaerung": "Unsicher-vermeidende Kinder meiden Nähe und wirken bei Trennung kaum belastet."
+   },
+   {
+    "text": "… Jonas als sicher gebunden gilt, weil er intensiv auf die Trennung reagiert.",
     "richtig": false,
-    "erklaerung": "Die Sorge ist Erleben und nur ihm selbst zugänglich. Beobachtbar ist seine Mitteilung darüber."
+    "erklaerung": "Jonas sucht Nähe und wehrt sie zugleich ab; das entspricht dem unsicher-ambivalenten Typ."
    },
    {
-    "text": "… Leons Entschluss, nach Plan zu üben, als Handeln gilt, da er bewusst und mit Absicht ein Ziel verfolgt.",
+    "text": "… die Bindungstypen aus dem Verhalten der Kinder bei Trennung und Wiedervereinigung abgeleitet werden.",
     "richtig": true,
-    "erklaerung": "Handeln ist bewusstes, zielgerichtetes Verhalten mit einer Absicht."
+    "erklaerung": "Ainsworths „Fremde Situation“ erfasst das Verhalten bei Trennung und Wiedervereinigung."
+   }
+  ]
+ },
+ {
+  "id": "bindung-foerderung",
+  "titel": "Bindung: Eingewöhnung und Förderung",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Krippe „Sonnenkäfer“, Eingewöhnung",
+   "text": "In der Krippe „Sonnenkäfer“ beginnt die 14 Monate alte Leonie ihre Eingewöhnung. Die Leitung plant, dass ihre Mutter nur kurz im Raum bleibt und am zweiten Tag mehrere Stunden weggeht, damit Leonie schnell selbstständig wird. Die Bezugserzieherin Frau Vogel schlägt stattdessen vor, dass die Mutter zunächst dabei bleibt. Frau Vogel baut langsam die Rolle der Bezugsperson auf, und die Trennungszeiten werden schrittweise verlängert.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Frau Vogels Vorschlag wird aus bindungstheoretischer Sicht fachlich zutreffend begründet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… eine rasche Trennung die Bindung an die Mutter stärkt, weil Kinder dadurch früh Selbstständigkeit lernen.",
+    "richtig": false,
+    "erklaerung": "Eine zu schnelle Trennung kann Stress auslösen und den Aufbau einer sicheren Bindung erschweren."
    },
    {
-    "text": "… die Beschäftigung mit Leons Sorge der Psychologie zuzuordnen ist, während die Frage nach Frau Brandts absichtsvoller Unterstützung Gegenstand der Pädagogik ist.",
+    "text": "… Frau Vogels feinfühliges Verhalten den Aufbau einer sekundären Bindungsbeziehung zu Leonie unterstützt.",
     "richtig": true,
-    "erklaerung": "Psychologie untersucht Erleben und Verhalten; die Pädagogik untersucht Erziehung als absichtsvolle Einwirkung."
+    "erklaerung": "Feinfühligkeit und Verlässlichkeit fördern eine sekundäre Bindung zur Erzieherin."
+   },
+   {
+    "text": "… die Eingewöhnung als gelungen gilt, sobald Leonie nicht mehr weint, unabhängig von der Beziehung zur Erzieherin.",
+    "richtig": false,
+    "erklaerung": "Entscheidend ist eine vertrauensvolle Beziehung, nicht nur das Ausbleiben von Tränen."
+   },
+   {
+    "text": "… Bindungen zu Erzieherinnen die Bindung an die Eltern ersetzen, sodass diese an Bedeutung verlieren.",
+    "richtig": false,
+    "erklaerung": "Sekundäre Bindungen ergänzen die Bindung an die Eltern, sie ersetzen sie nicht."
+   }
+  ]
+ },
+ {
+  "id": "determinismus-versprecher",
+  "titel": "Freud: Psychischer Determinismus – Versprecher",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kindertagesstätte „Regenbogen“",
+   "text": "In der Kindertagesstätte „Regenbogen“ begrüßt die Erzieherin Frau Bauer beim Elternabend den Vater Herrn Lang versehentlich mit „Herr Kurz“. Kurz zuvor hatte es zwischen beiden einen Konflikt um die Abholzeiten gegeben. Frau Bauer ist verlegen und erklärt, sie sei an diesem Tag müde und zerstreut gewesen. Die Praktikantin Mara fragt im Team, wie Freud den Versprecher deuten würde.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Die Situation wird mit dem psychischen Determinismus nach Freud fachlich zutreffend gedeutet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Frau Bauers Hinweis auf Müdigkeit und Zerstreuung als ausreichende Ursache für den Versprecher gilt.",
+    "richtig": false,
+    "erklaerung": "Freud betrachtete Versprecher nicht als Folge von Müdigkeit oder Zerstreuung, sondern als von unbewussten seelischen Kräften bestimmt."
+   },
+   {
+    "text": "… der Versprecher als Fehlleistung gilt, hinter der eine unbewusste Absicht oder ein unbewusstes Motiv stehen kann.",
+    "richtig": true,
+    "erklaerung": "Nach dem psychischen Determinismus hat auch eine scheinbar zufällige Fehlleistung eine seelische Ursache."
+   },
+   {
+    "text": "… die Annahme zur Lehre gehört, dass Verhalten bei Kenntnis sämtlicher wirkender Ursachen sicher vorhersagbar wäre.",
+    "richtig": true,
+    "erklaerung": "Freud hielt Verhalten bei Kenntnis aller Ursachen für vorhersagbar; er selbst beschäftigte sich aber nur mit der Erklärung."
+   },
+   {
+    "text": "… Freud aus dem Konflikt um die Abholzeiten sicher vorhersagt, wann sich Frau Bauer erneut verspricht.",
+    "richtig": false,
+    "erklaerung": "Freud beschäftigte sich nicht mit der Vorhersage von Verhalten, sondern nur mit dessen Erklärung."
+   }
+  ]
+ },
+ {
+  "id": "determinismus-symptom-grenzen",
+  "titel": "Freud: Psychischer Determinismus – Symptom und Grenzen",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Tagespflege für Senioren",
+   "text": "In der Tagespflege für Senioren erlebt die Praktikantin Jana zwei Gäste. Frau Hartmann (78) klagt seit dem Wegzug ihrer Tochter ins Ausland über Magenschmerzen, die der Hausarzt organisch nicht erklären kann. Herr Kern (81) ist an Alzheimer erkrankt und nennt beim Mittagessen den Vornamen seiner Frau nicht mehr. Jana überlegt, was sich mit Freuds psychischem Determinismus erklären lässt und was nicht.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Der psychische Determinismus nach Freud wird auf die Situation fachlich zutreffend angewendet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Frau Hartmann den Zusammenhang zwischen dem Wegzug ihrer Tochter und den Schmerzen in der Regel selbst sofort erkennt.",
+    "richtig": false,
+    "erklaerung": "Die seelischen Prozesse, die Verhalten bestimmen, sind der Person selten bewusst."
+   },
+   {
+    "text": "… Frau Hartmanns Magenschmerzen als Symptom gelten, das mit einem persönlichen Lebensereignis bedeutungsvoll zusammenhängen kann.",
+    "richtig": true,
+    "erklaerung": "Symptome wie Magen- oder Rückenschmerzen treten nach Freud nicht zufällig auf, sondern hängen mit der Lebensgeschichte zusammen."
+   },
+   {
+    "text": "… Herrn Kerns Vergessen des Namens als Fehlleistung mit einem unbewussten Motiv gedeutet wird.",
+    "richtig": false,
+    "erklaerung": "Freud sieht Grenzen: Nicht jedes Verhalten lässt sich durch Unbewusstes erklären. Bei Alzheimer liegt eine Erkrankung vor."
+   },
+   {
+    "text": "… das Ziel psychoanalytischer Forschung darin besteht, die unbewussten Ursachen aufzuspüren und bewusst zu machen.",
+    "richtig": true,
+    "erklaerung": "Wenn Verhaltensweisen eine Bedeutung haben, sucht die Psychoanalyse nach den unbewussten, determinierenden Kräften."
+   }
+  ]
+ },
+ {
+  "id": "trieb-begriff",
+  "titel": "Freud: Triebquelle, Triebziel und Triebobjekt",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kita, nach dem Morgenkreis",
+   "text": "Der vierjährige Luca sitzt nach dem Morgenkreis in der Kita unruhig am Tisch. Sein Magen knurrt, er hat seit dem Aufstehen nichts gegessen. Er holt seine Brotdose, isst ein Käsebrot und wirkt danach entspannt und zufrieden. Die Erzieherin Frau Yilmaz meint, mit Nudeln oder einem Schokoriegel wäre Luca ebenfalls satt geworden.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Lucas Verhalten wird mit dem Triebbegriff nach Freud fachlich zutreffend beschrieben, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… das Knurren des Magens und der Hunger als körperlicher Vorgang der Triebquelle zugeordnet werden.",
+    "richtig": true,
+    "erklaerung": "Die Triebquelle ist ein körperlicher Vorgang in einem Organ oder Körperteil, z. B. Hunger."
+   },
+   {
+    "text": "… das Käsebrot als Triebziel gilt, da das Triebziel das Objekt ist, an dem die Triebhandlung vollzogen wird.",
+    "richtig": false,
+    "erklaerung": "Das Käsebrot ist das Triebobjekt. Das Triebziel ist die Befriedigung."
+   },
+   {
+    "text": "… Luca seinen Hunger nur mit Brot stillen kann, weil die Triebquelle das Triebobjekt festlegt.",
+    "richtig": false,
+    "erklaerung": "Ausschlaggebend ist, wie gut sich ein Objekt zur Befriedigung eignet; auch Nudeln oder Schokolade kommen infrage."
+   },
+   {
+    "text": "… die nachlassende Anspannung nach dem Essen das Triebziel darstellt, die Aufhebung des Reizzustandes an der Triebquelle.",
+    "richtig": true,
+    "erklaerung": "Das Triebziel ist die Befriedigung, die durch die Aufhebung des Reizzustandes an der Triebquelle erreicht wird."
+   }
+  ]
+ },
+ {
+  "id": "trieb-haupttriebe",
+  "titel": "Freud: Lebenstrieb und Todestrieb",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kinderhaus „Sonnenschein“",
+   "text": "Im Kinderhaus „Sonnenschein“ beobachtet die Erzieherin Frau Keller die Geschwister Lena (5) und Tom (4). Lena hängt sehr an ihrer Mutter, weint bei jeder Verabschiedung kurz und freut sich bei der Abholung. Tom baut im Sandkasten mit Begeisterung Burgen und tritt sie später lachend wieder zusammen, auch die Burgen anderer Kinder. Dabei wirkt er sichtlich zufrieden.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Das Verhalten der Geschwister wird mit der Trieblehre nach Freud (ab 1920) fachlich zutreffend gedeutet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Lenas enge Bindung an ihre Mutter als frühe Objektbesetzung gilt, da ihre Libido auf eine andere Person gerichtet ist.",
+    "richtig": true,
+    "erklaerung": "Die Ausrichtung der Libido auf andere Personen bezeichnet die Psychoanalyse als Objektbesetzung; die Bindung an die Mutter ist ein Beispiel für eine frühe Objektbesetzung."
+   },
+   {
+    "text": "… Toms Lust am Zerstören als Äußerungsform des Lebenstriebes gilt, dessen Antriebskraft Libido heißt.",
+    "richtig": false,
+    "erklaerung": "Lust am Zerstören ist eine Äußerungsform des Todestriebes (Thanatos). Die Libido ist die Energie des Lebenstriebes (Eros)."
+   },
+   {
+    "text": "… Toms Zertreten der Burgen als nach außen gerichtete Destrudo gilt, die Energie des Todestriebes.",
+    "richtig": true,
+    "erklaerung": "Die Energie des Todestriebes heißt Destrudo und kann als Aggression oder Zerstörungswille nach außen gerichtet sein."
+   },
+   {
+    "text": "… Lebens- und Todestrieb verschränkt wirken, ohne dass einer der beiden Triebe dauerhaft vorherrscht.",
+    "richtig": true,
+    "erklaerung": "Die Haupttriebe arbeiten gegeneinander, sind aber in der Regel verschränkt. Nur bei krankhaften Zuständen zerfällt die Verschränkung."
    }
   ]
  }
@@ -5735,36 +5823,36 @@ const CO_AUFGABENBANK=[
 // Vorlage = Check-out mit genau 3 Aufgaben aus der Bank; wird am passenden Freitag per Klick eingesetzt.
 const CHECKOUT_VORLAGEN=[
  {
-  "id": "lb1-woche1",
-  "titel": "Alltags- und Wissenschaftstheorie",
+  "id": "aln-1",
+  "titel": "Freud: Instanzen, psychosexuelle Entwicklung, Abwehr",
   "lbNum": 1,
   "datum": "2026-10-09",
   "aufgaben": [
-   "tim-max",
-   "hannes",
-   "schlaf"
+   "freud-instanzen",
+   "freud-psychosexuell",
+   "freud-abwehr"
   ]
  },
  {
-  "id": "lb1-woche2",
-  "titel": "Gegenstand der Pädagogik und Erziehung",
+  "id": "aln-2",
+  "titel": "Freud: Abwehr, kritische Würdigung, Erziehung",
   "lbNum": 1,
   "datum": "2026-10-16",
   "aufgaben": [
-   "erz-wiss-praxis",
-   "erz-bildung",
-   "erz-ziele-handlungen"
+   "freud-abwehr-fall",
+   "freud-wuerdigung",
+   "freud-erziehung"
   ]
  },
  {
-  "id": "lb1-woche3",
-  "titel": "Beziehung, Einrichtungen und Gegenstand der Psychologie",
+  "id": "aln-3",
+  "titel": "Bindung: Phasen, Typen, Förderung",
   "lbNum": 1,
   "datum": "2026-10-23",
   "aufgaben": [
-   "paed-beziehung",
-   "erz-einrichtungen",
-   "erleben-verhalten-handeln"
+   "bindung-phasen",
+   "bindung-typologie",
+   "bindung-foerderung"
   ]
  }
 ];
@@ -5838,8 +5926,7 @@ async function openCheckoutEditor(id,vorgabe){
   }catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
  }else{
   const heute=new Date().toISOString().slice(0,10);
-  const lauf=PROJEKT_PHASEN.find(p=>heute>=p.start&&heute<=p.end)||PROJEKT_PHASEN.find(p=>heute<p.start)||PROJEKT_PHASEN[0];
-  coEditor={id:null,titel:"",lbNum:lauf.lbNum,datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:[coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe()]};
+  coEditor={id:null,titel:"",lbNum:pp12LbFuerDatum(heute),datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:[coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe()]};
   if(vorgabe?.datum)coEditor.datum=vorgabe.datum;
   if(vorgabe?.lbNum)coEditor.lbNum=vorgabe.lbNum;
   const vl=vorgabe?.vorlage?CHECKOUT_VORLAGEN.find(v=>v.id===vorgabe.vorlage):null;
@@ -5965,13 +6052,12 @@ function coVorlageWaehlen(){
 function coEditorAufgabe(d){coEditorLesen();if(d>0&&coEditor.aufgaben.length<CHECKOUT_MAX_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());if(d<0&&coEditor.aufgaben.length>CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.pop();coEditorRender();}
 function coEditorVorschlag(){
  coEditorLesen();
- const ph=PROJEKT_PHASEN.find(p=>p.lbNum===coEditor.lbNum);
- const kp=PP_EINHEITEN.filter(e=>ph&&(ph.trainingWochen.includes(e.id)||ph.notwendigeWochen.includes(e.id))).flatMap(e=>e.kprim||[]).slice(0,CHECKOUT_MAX_AUFGABEN);
+ const kp=CO_AUFGABENBANK.filter(b=>b.lbNum===coEditor.lbNum).slice(0,CHECKOUT_MAX_AUFGABEN);
  if(!kp.length){toast("Für diesen Lernbereich gibt es keine Vorschläge.");return}
- if(!confirm(`${kp.length} K-Prim-Aufgaben aus den App-Vorschlägen einsetzen? Bestehende Aufgaben werden ersetzt.`))return;
- coEditor.aufgaben=kp.map(k=>coAufgabeNorm({stamm:k.frage||"",aussagen:[0,1,2,3].map(j=>({text:k.statements?.[j]?.text||"",richtig:!!k.statements?.[j]?.correct}))}));
+ if(!confirm(`${kp.length} K-Prim-Aufgaben aus der Aufgabenbank einsetzen? Bestehende Aufgaben werden ersetzt.`))return;
+ coEditor.aufgaben=kp.map(b=>coAufgabeAusBank(b.id));
  while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
- coEditorRender();toast("Eingesetzt – bitte je Aufgabe eine Fallvignette ergänzen und die Aussagen auf den Fall zuschneiden.");
+ coEditorRender();toast("Eingesetzt – bitte prüfen und speichern.");
 }
 // Textvorlage (aus Word kopiert) oder JSON einlesen.
 function coEditorImport(){
@@ -6872,10 +6958,26 @@ async function renderLernwerkstatt(){
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
  <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
- <a class="card tile"href="#unterricht-pp"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px">
+ <style>
+ .pp12-kachel{position:relative;margin-bottom:22px}
+ .pp12-kachel>.tile{margin-bottom:0!important;padding-right:52%}
+ .pp12-aln{position:absolute;top:50%;right:22px;transform:translateY(-50%);max-width:calc(48% - 28px);display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 24px;border-radius:999px;background:linear-gradient(135deg,#2f7fc6,#3d8fd0 55%,#58a8e2);color:#fff;font-weight:600;font-size:15px;line-height:1.2;text-align:center;text-decoration:none;box-shadow:0 6px 16px rgba(47,127,198,.28);transition:transform .15s,box-shadow .15s}
+ .pp12-aln span{font-size:18px;transition:transform .15s}
+ .pp12-aln:hover{transform:translateY(calc(-50% - 2px));box-shadow:0 10px 22px rgba(47,127,198,.36)}
+ .pp12-aln:hover span{transform:translateX(3px)}
+ @media (max-width:760px){
+  .pp12-kachel>.tile{padding-right:16px}
+  .pp12-aln{position:static;transform:none;max-width:none;margin-top:10px;display:flex}
+  .pp12-aln:hover{transform:none}
+ }
+</style>
+<div class="pp12-kachel">
+ <a class="card tile"href="#unterricht-pp"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px">
  <span class="emoji"></span><strong style="font-size:16px">Unterricht Pädagogik und Psychologie</strong>
  <small>Stoffverteilungsplan 12. Klasse: die Themen jeder Unterrichtsstunde über das ganze Schuljahr.</small>
  </a>
+ <a class="pp12-aln"href="#leistungsnachweis">Alternativer Leistungsnachweis <span aria-hidden="true">→</span></a>
+</div>
  ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
 <strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
  ${footer()}`;
@@ -14097,7 +14199,7 @@ async function render(){
  const p=location.hash.replace("#","")||"start";
  const pages={
  start:renderStart,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
- faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,
+ faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,leistungsnachweis:renderLeistungsnachweis,
  ressourcen:renderRessourcenRoute,lernpfad:renderLernpfadRoute,forum:renderForum,"forum-board":renderForumBoard,"forum-nachrichten":renderForumMessages,
  pinnwand:renderPinnwandUebersicht,"pinnwand-board":renderPinnwandBoard,
  kollaboration:renderKollaborationsTools,
