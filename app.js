@@ -3497,21 +3497,18 @@ async function miniKalenderHTML(){
  <small style="display:block;margin-top:6px;color:var(--muted);font-size:10px">Zum vollständigen Campus-Kalender →</small>`;
 }
 async function renderStart(){
- let tasks=[],projects=[],news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
- try{[tasks,projects,news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("tasks","deadline",false),getCollection("projects"),getCollection("news"),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
+ let news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
+ try{[news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("news"),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
  const miniKalender=await miniKalenderHTML();
  const coBanner=await checkoutStartBannerHTML();
- const praktikumsphase=aktuellePraktikumsphase();
- const praktikumsAuftraegeMap=await getPraktikumsAuftraege().catch(()=>({}));
- const aktuellerPraktikumsauftrag=(praktikumsphase?.status==="laufend")?praktikumsAuftraegeMap[praktikumsphase.id]:null;
  const upcomingDate=nextCalendar?.start||nextCalendar?.date||nextCalendar?.startDate;
  const upcomingDateText=upcomingDate?.seconds?new Date(upcomingDate.seconds*1000).toLocaleDateString("de-DE"):String(upcomingDate||"").slice(0,10);
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
  const newsAction=(isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:"")
  +(isTeacher()?`<button class="secondary"onclick="openUserManagement()"> Benutzer verwalten</button>`:"");
  return`${coBanner}<section class="hero"><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
-verbinden wir Lernen, Projekte, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
-</div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button><button class="secondary"onclick="go('forum')">Campus-Forum</button></div></section>
+verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
+</div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button></div></section>
  <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
  <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
 class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isAdmin()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
@@ -3523,7 +3520,7 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  :`<div class="list-item"><div><strong>${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}</strong><small>${esc(birthdayInfo.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))} · ${birthdayInfo.days===1?"morgen":`in ${birthdayInfo.days} Tagen`}</small></div><span class="pill"style="background:${personColor(birthdayInfo.people[0].uid).border};color:#fff">Nächste(r)</span></div>`
  }</div>
  </div>
- <div class="grid grid-3"style="margin-bottom:20px;gap:20px">
+ <div class="grid grid-2"style="margin-bottom:20px;gap:20px">
  <div class="card card-compact"style="text-align:center">
  <h3 style="margin:0 0 6px"> Uhrzeit</h3>
  <div style="display:flex;justify-content:center">${analogClockSVG(64)}</div>
@@ -3533,17 +3530,7 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  <h3 style="margin:0 0 8px"> Kalender</h3>
  <div id="miniKalenderWrap">${miniKalender}</div>
  </div>
- ${praktikumsphase?`<a class="card card-compact"href="#praktikum"style="border-left:4px solid #e0a324;display:block;text-decoration:none;color:inherit">
- <h3 style="margin:0 0 6px"> ${praktikumsphase.status==="laufend"?"Praktikum läuft gerade":"Nächstes Praktikum"}</h3>
- <strong style="display:block">${esc(praktikumsphase.titel)}</strong>
- <small style="display:block;margin-top:4px">${esc(fmtDateOnly(praktikumsphase.start))}–${esc(fmtDateOnly(praktikumsphase.end))} · ${esc(praktikumsphase.bereich)}</small>
- </a>`:`<div class="card card-compact"style="border-left:4px solid #e0a324"><h3 style="margin:0">Praktikum</h3><small>Aktuell keine Phase hinterlegt.</small></div>`}
  </div>
- ${aktuellerPraktikumsauftrag?`<a class="card"href="#praktikum"style="display:block;text-decoration:none;color:inherit;border-left:4px solid #e0a324;margin-bottom:16px">
- <span class="pill"style="background:#e8890c;color:#fff">fpA Auftrag</span>
- <strong style="display:block;margin-top:8px;font-size:15px">${esc(aktuellerPraktikumsauftrag.titel)}</strong>
- ${aktuellerPraktikumsauftrag.beschreibung?`<small style="display:block;margin-top:4px;color:var(--muted)">${esc(aktuellerPraktikumsauftrag.beschreibung.slice(0,140))}${aktuellerPraktikumsauftrag.beschreibung.length>140?"…":""}</small>`:""}
- </a>`:""}
  ${(()=>{ensureGlobalClock();return"";})()}
  <div class="card"style="margin-top:16px;margin-bottom:16px">
  <div class="kicker">STUNDENPLAN</div>
@@ -3562,14 +3549,12 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  </div>
  ${pageHead("ÜBERSICHT","Unser Campus","Die wichtigsten Bereiche auf einen Blick.",newsAction)}
  <div class="grid grid-4">
- ${tile(" ","Campus-Kompass","Dein persönlicher Lern- und Projektüberblick.","kompass")}
+ ${tile(" ","Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Wochenplanung und Noten.","kompass")}
  ${tile(" ","Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt")}
- ${tile(" ","Campus-Forum","Austauschen, fragen, helfen und gemeinsam denken.","forum")}
- ${tile(" ","Projekte","Projektteams, Ziele, Fortschritt und Ergebnisse.","projekte")}
- ${tile(" ","Kompetenzwerkstatt","Kompetenzen sichtbar machen und entwickeln.","kompetenz")}
- ${tile(" ","Lernjournal","Lernweg, Reflexionen und nächste Schritte.","journal")}
- ${tile(" ","fpA","Theorie-Praxis-Transfer-Aufträge und Reflexion.","praktikum")}
- ${tile(" ","KI-Innovationslabor","KI-Ideen und Innovationspartnerschaften.","ki")}</div>
+ ${tile(" ","Unterricht Pädagogik und Psychologie","Stoffverteilungsplan der 12. Klasse.","unterricht-pp")}
+ ${tile(" ","Alternativer Leistungsnachweis","K-Prim-Check-outs und Kurzarbeit-Ersatz.","leistungsnachweis")}
+ ${tile(" ","Resilienz & Respressi","Stress regulieren und Stärken aufbauen.","resilienz")}
+ ${tile(" ","Campus-Kalender","Termine, Ferien und Leistungsnachweise im Blick.","kalender")}</div>
 </div>${footer()}`;
 }
 async function getRecentForumActivityCount(days){
@@ -3637,9 +3622,6 @@ function printWochenplanPDF(entries){
 window.printNotenPDF=printNotenPDF;window.printWochenplanPDF=printWochenplanPDF;
 
 async function renderKompass(){
- const tasks=await getCollection("tasks","deadline",false), projects=await getCollection("projects");
- const projectDeadlines=projects.filter(p=>p.deadline).sort((a,b)=>String(a.deadline).localeCompare(String(b.deadline)));
- const todayStr=new Date().toISOString().slice(0,10);
  const [unreadCount,forumActivity,wochenplan,noten]=await Promise.all([
  getUnreadMessageCount().catch(()=>0),
  getRecentForumActivityCount(3),
@@ -3650,7 +3632,7 @@ async function renderKompass(){
  const offenePlanung=wochenplan.filter(w=>!w.done);
  const erledigtePlanung=wochenplan.filter(w=>w.done);
 
- return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Aufgaben, Noten und Projekte.",`<button class="primary"onclick="openTaskForm()">＋ Aufgabe</button>`)}
+ return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Wochenplanung und Noten.","")}
 
  ${(unreadCount>0||forumActivity>0)?`<div class="kompass-alerts">
  ${unreadCount>0?`<a href="#forum-nachrichten"class="pill kompass-alert-msg"> ${unreadCount} neue Nachricht${unreadCount===1?"":"en"}</a>`:""}
@@ -3731,57 +3713,8 @@ async function renderKompass(){
  ${abschlussBlockHTML(noten,bestehen)}
  </div>
 
- <div class="kicker"style="margin:22px 0 8px">AUFGABEN & PROJEKTE</div>
- <div class="grid grid-3"><div class="card stat"><b>${tasks.filter(t=>t.ownerUid===currentUser.uid).length}</b><span>Meine
-Aufgaben</span></div><div class="card stat"><b>${projects.length}</b><span>Projekte</span></div><div class="card stat">
-<b>${profile?.role==="teacher"?"Lehrkraft":profile?.role==="admin"?"Admin":"Schüler/in"}</b><span>Rolle</span></div></div>
- <div class="grid grid-3"style="margin-top:12px">
- <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #4a90d9"onclick="openMeineAufgabenModal()">
- <span class="emoji"></span><strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
- </button>
- <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #9b59b6"onclick="openProjektFristenModal()">
- <span class="emoji"></span><strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
- </button>
- <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #1a9b8e"onclick="openAktuelleProjekteModal()">
- <span class="emoji"></span><strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
- </button>
- </div>
 </div>${footer()}`;
 }
-async function openMeineAufgabenModal(){
- let tasks=[];
- try{tasks=await getCollection("tasks","deadline",false)}catch(e){}
- const meine=tasks.filter(t=>t.ownerUid===currentUser.uid);
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEIN KOMPASS</div><h2> Meine Aufgaben</h2>
- <div class="list">${meine.map(taskHTML).join("")||`<div class="empty"><strong>Noch keine Aufgaben</strong>Lege deine erste Aufgabe an.</div>`}</div>
- <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="closeModal();openTaskForm()">＋ Aufgabe</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
-}
-async function openProjektFristenModal(){
- let projects=[];
- try{projects=await getCollection("projects")}catch(e){}
- const todayStr=new Date().toISOString().slice(0,10);
- const projectDeadlines=projects.filter(p=>p.deadline).sort((a,b)=>String(a.deadline).localeCompare(String(b.deadline)));
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEIN KOMPASS</div><h2> Meine Projektfristen</h2>
- <p style="color:var(--muted);font-size:12px">Dein persönlicher Überblick über Projekt-Abgabetermine – erscheint bewusst nicht im allgemeinen Campus-Kalender.</p>
- <div class="list">${projectDeadlines.map(p=>{
- const overdue=String(p.deadline)<todayStr;
- return`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.team||"")}</small></div><span class="pill${overdue?"":"green"}">${overdue?"überfällig · ":""}${esc(fmtDateOnly(p.deadline))}</span></div>`;
- }).join("")||`<div class="empty">Noch keine Projekt-Fristen eingetragen.</div>`}</div>
- <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
-}
-async function openAktuelleProjekteModal(){
- let projects=[];
- try{projects=await getCollection("projects")}catch(e){}
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEIN KOMPASS</div><h2> Meine Projekte</h2>
- <div class="list">${projects.map(p=>`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.team||"")} · ${esc(p.partner||"")}</small></div><span class="pill">${Number(p.progress||0)}%</span></div>`).join("")||`<div class="empty">Noch keine Projekte.</div>`}</div>
- <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
-}
-window.openMeineAufgabenModal=openMeineAufgabenModal;
-window.openProjektFristenModal=openProjektFristenModal;
-window.openAktuelleProjekteModal=openAktuelleProjekteModal;
 function taskHTML(t){return`<div class="list-item"><div><strong>${esc(t.title)}</strong><small>Verantwortlich:
 ${esc(t.ownerName||"")} · Deadline: ${esc(t.deadline||"—")} · Nächster Schritt: ${esc(t.next||"—")}</small></div><div
 class="traffic">${statusDot(t.status)}<span class="pill">${statusLabel[t.status]||"—"}</span></div></div>`}
