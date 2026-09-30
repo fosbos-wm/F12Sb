@@ -3717,6 +3717,212 @@ async function openLehrplanKlassenuebersicht(fach){
 }
 window.openLehrplanKlassenuebersicht=openLehrplanKlassenuebersicht;
 
+// ============================================================
+// UNTERRICHT PÄDAGOGIK UND PSYCHOLOGIE · STOFFVERTEILUNGSPLAN 12. KLASSE
+// Balkenansicht: je Unterrichtstag ein Balken (Mo 1 Std., Mi 2 Std.,
+// Fr 2 Std. = 5 Std./Woche). Themen ändern: nur die Liste PP12_PLAN anpassen.
+// ============================================================
+const PP12_LB={
+ 1:{kurz:"LB 1",titel:"Entwicklung",farbe:"#3F7FC1"},
+ 2:{kurz:"LB 2",titel:"Persönlichkeit und Identität",farbe:"#8A64B8"},
+ 3:{kurz:"LB 3",titel:"Soziale Arbeit",farbe:"#3C9A6B"},
+ 4:{kurz:"LB 4",titel:"Kommunikation",farbe:"#C9773A"}
+};
+const PP12_TYP={
+ wdh:{label:"Wiederholung / Übung",farbe:"#6B7C93"},
+ leistung:{label:"Leistungsnachweis",farbe:"#C0392B"},
+ training:{label:"Prüfungstraining",farbe:"#B8860B"},
+ pruefung:{label:"Abschlussprüfung",farbe:"#1F2D3D"}
+};
+// Unterrichtstage der 12. Klasse: Montag 1 Std., Mittwoch 2 Std., Freitag 2 Std. = 5 Std. pro Woche.
+const PP12_FERIEN=[
+ {start:"2026-11-02",end:"2026-11-06",titel:"Herbstferien"},
+ {start:"2026-12-24",end:"2027-01-08",titel:"Weihnachtsferien"},
+ {start:"2027-02-08",end:"2027-02-12",titel:"Frühjahrsferien"},
+ {start:"2027-03-22",end:"2027-04-02",titel:"Osterferien"}
+];
+const PP12_FREI={"2026-11-18":"Buß- und Bettag (unterrichtsfrei)","2027-01-06":"Hl. Drei Könige"};
+const PP12_START="2026-10-02";
+const PP12_PLAN=[
+ {"d":"2026-10-02","h":2,"lb":1,"typ":"stoff","t":"Freud: Instanzenmodell (Es, Ich, Über-Ich)"},
+ {"d":"2026-10-05","h":1,"lb":1,"typ":"stoff","t":"Freud: Psychosexuelle Entwicklung I – orale und anale Phase"},
+ {"d":"2026-10-07","h":2,"lb":1,"typ":"stoff","t":"Freud: Psychosexuelle Entwicklung II – phallische Phase, Latenz, genitale Phase; Fixierung"},
+ {"d":"2026-10-09","h":2,"lb":1,"typ":"stoff","t":"Freud: Abwehrmechanismen (Verdrängung, Projektion, Fixierung, Regression, Identifikation)"},
+ {"d":"2026-10-12","h":1,"lb":1,"typ":"wdh","t":"Freud: Abwehrmechanismen an Fallbeispielen üben"},
+ {"d":"2026-10-14","h":2,"lb":1,"typ":"stoff","t":"Freud: Kritische Würdigung (Erklärungswert, empirische Überprüfbarkeit) und Konsequenzen für die Erziehung"},
+ {"d":"2026-10-16","h":2,"lb":1,"typ":"wdh","t":"Freud: Fallanalyse und Übung"},
+ {"d":"2026-10-19","h":1,"lb":1,"typ":"stoff","t":"Bindung: Bindungsbegriff und Phasen der Bindungsentwicklung"},
+ {"d":"2026-10-21","h":2,"lb":1,"typ":"stoff","t":"Bindung: Bindungstypologie (sicher, unsicher-vermeidend, unsicher-ambivalent, desorganisiert)"},
+ {"d":"2026-10-23","h":2,"lb":1,"typ":"wdh","t":"Bindungstypen an Fallbeispielen; eigene Bindungsstile reflektieren"},
+ {"d":"2026-10-26","h":1,"lb":1,"typ":"stoff","t":"Primäre und sekundäre Bindungsbeziehungen (Jugend- und Erwachsenenalter nach Ahnert)"},
+ {"d":"2026-10-28","h":2,"lb":1,"typ":"stoff","t":"Frühpädagogische Überlegungen zur Förderung gelungener Bindung"},
+ {"d":"2026-10-30","h":2,"lb":1,"typ":"wdh","t":"Bindung: Anwendung auf pädagogische Situationen"},
+ {"d":"2026-11-09","h":1,"lb":1,"typ":"stoff","t":"Lebensspannentheorie nach Baltes: Grundannahmen"},
+ {"d":"2026-11-11","h":2,"lb":1,"typ":"stoff","t":"Entwicklungsanforderungen im Jugendalter (ca. 11–18 Jahre)"},
+ {"d":"2026-11-13","h":2,"lb":1,"typ":"stoff","t":"Entwicklungsanforderungen im frühen Erwachsenenalter (ca. 18–28 Jahre)"},
+ {"d":"2026-11-16","h":1,"lb":1,"typ":"leistung","t":"Kurzarbeit (Freud, Bindung)"},
+ {"d":"2026-11-20","h":2,"lb":1,"typ":"stoff","t":"Vulnerabilität und Resilienz I: Risikofaktoren, Vulnerabilität, Begriff Resilienz"},
+ {"d":"2026-11-23","h":1,"lb":1,"typ":"stoff","t":"Resilienz II: Schutzfaktoren (soziale Unterstützung, Peerkontakte, Selbstwertgefühl, Selbstwirksamkeit)"},
+ {"d":"2026-11-25","h":2,"lb":1,"typ":"wdh","t":"Resilienz: Fallbeispiele; Entwicklungseinflüsse der eigenen Biografie reflektieren"},
+ {"d":"2026-11-27","h":2,"lb":1,"typ":"wdh","t":"LB 1 Entwicklung: Gesamtüberblick, Wiederholung und Übung"},
+ {"d":"2026-11-30","h":1,"lb":2,"typ":"stoff","t":"Persönlichkeit: Begriff und zentrale Merkmale (Stabilität, Veränderbarkeit, Einzigartigkeit)"},
+ {"d":"2026-12-02","h":2,"lb":2,"typ":"stoff","t":"Persönlichkeitsstruktur: Big Five nach Costa und McCrae, Persönlichkeitsinventare"},
+ {"d":"2026-12-04","h":2,"lb":2,"typ":"stoff","t":"Rogers I: Aktualisierungstendenz, organismischer Bewertungsprozess, Bewertungsbedingungen"},
+ {"d":"2026-12-07","h":1,"lb":2,"typ":"stoff","t":"Rogers II: Selbst und Selbstkonzept (Real- und Idealselbst)"},
+ {"d":"2026-12-09","h":2,"lb":2,"typ":"stoff","t":"Rogers III: Kongruenz und Inkongruenz, Wahrnehmungsverzerrung und -verleugnung, Selbstachtung"},
+ {"d":"2026-12-11","h":2,"lb":2,"typ":"wdh","t":"Rogers: Bedeutung für Erziehung, Beratung und Therapie; Übung"},
+ {"d":"2026-12-14","h":1,"lb":2,"typ":"wdh","t":"Wiederholung zur Schulaufgabe 1"},
+ {"d":"2026-12-16","h":2,"lb":0,"typ":"leistung","t":"Schulaufgabe 1 (LB 1 Entwicklung, Big Five, Rogers)"},
+ {"d":"2026-12-18","h":2,"lb":2,"typ":"stoff","t":"Bandura I: sozialkognitive Theorie – Überzeugungen und Erwartungen"},
+ {"d":"2026-12-21","h":1,"lb":2,"typ":"stoff","t":"Bandura II: Selbstwirksamkeits-, Ergebnis- und Kompetenzerwartungen"},
+ {"d":"2026-12-23","h":2,"lb":0,"typ":"wdh","t":"Rückgabe und Besprechung der Schulaufgabe 1"},
+ {"d":"2027-01-11","h":1,"lb":2,"typ":"stoff","t":"Bandura III: Selbstregulation (Self-Evaluative- und Self-Efficacy-Mechanismen)"},
+ {"d":"2027-01-13","h":2,"lb":2,"typ":"wdh","t":"Theorienvergleich: Freud – Rogers – Bandura, Anwendung auf Fälle"},
+ {"d":"2027-01-15","h":2,"lb":2,"typ":"stoff","t":"Identität: Begriff, Identitätsmodell nach Marcia I"},
+ {"d":"2027-01-18","h":1,"lb":2,"typ":"stoff","t":"Marcia II: vier Identitätszustände (diffus, übernommen, Moratorium, erarbeitet)"},
+ {"d":"2027-01-20","h":2,"lb":2,"typ":"stoff","t":"Marcia am Beispiel (z. B. berufliche Identität); Bewusstsein, Selbstreflexion und Identität"},
+ {"d":"2027-01-22","h":2,"lb":2,"typ":"wdh","t":"LB 2 Persönlichkeit und Identität: Wiederholung und Übung"},
+ {"d":"2027-01-25","h":1,"lb":3,"typ":"stoff","t":"Berufsfeld Soziale Arbeit: Überblick, Studien- und Berufsmöglichkeiten"},
+ {"d":"2027-01-27","h":2,"lb":3,"typ":"stoff","t":"Aufgabenbereiche Sozialer Arbeit: Sozialhilfe, Gesundheits- und Altenhilfe, Kinder- und Jugendhilfe"},
+ {"d":"2027-01-29","h":2,"lb":3,"typ":"stoff","t":"Einzelhilfe I: verhaltensorientiertes Konzept – Analyse"},
+ {"d":"2027-02-01","h":1,"lb":3,"typ":"stoff","t":"Einzelhilfe II: Planung"},
+ {"d":"2027-02-03","h":2,"lb":3,"typ":"stoff","t":"Einzelhilfe III: Verhaltensmodifikation auf Grundlage einer Lerntheorie"},
+ {"d":"2027-02-05","h":2,"lb":3,"typ":"stoff","t":"Einzelhilfe IV: Evaluation; Handlungskonzept für einen Fall"},
+ {"d":"2027-02-15","h":1,"lb":3,"typ":"wdh","t":"Einzelhilfe: Fallübung"},
+ {"d":"2027-02-17","h":2,"lb":3,"typ":"stoff","t":"Life Model nach Germain/Gitterman I: Ökologie, Transaktion, Anpassung"},
+ {"d":"2027-02-19","h":2,"lb":3,"typ":"stoff","t":"Life Model II: Habitat, Nische, Lebens-Stress, Coping, Ressourcen"},
+ {"d":"2027-02-22","h":1,"lb":3,"typ":"wdh","t":"Life Model: Fallanwendung"},
+ {"d":"2027-02-24","h":2,"lb":3,"typ":"stoff","t":"Lebensweltorientierung nach Thiersch I: Begriff Lebenswelt, Dimensionen der Analyse"},
+ {"d":"2027-02-26","h":2,"lb":3,"typ":"stoff","t":"Thiersch II: Struktur- und Handlungsmaximen (Prävention, Alltagsnähe, Partizipation, Vernetzung u. a.)"},
+ {"d":"2027-03-01","h":1,"lb":3,"typ":"wdh","t":"Wiederholung zur Schulaufgabe 2 (Soziale Arbeit)"},
+ {"d":"2027-03-03","h":2,"lb":0,"typ":"leistung","t":"Schulaufgabe 2 (LB 2 Persönlichkeit und Identität, LB 3 Soziale Arbeit)"},
+ {"d":"2027-03-05","h":2,"lb":4,"typ":"stoff","t":"Soziale Kommunikation und Interaktion: Begriffe, Organon-Modell nach Bühler"},
+ {"d":"2027-03-08","h":1,"lb":4,"typ":"stoff","t":"Watzlawick: Grundlagen der Kommunikationstheorie im Überblick"},
+ {"d":"2027-03-10","h":2,"lb":0,"typ":"wdh","t":"Rückgabe und Besprechung der Schulaufgabe 2"},
+ {"d":"2027-03-12","h":2,"lb":4,"typ":"stoff","t":"Axiome 1 und 2: Kommunikationsstörungen (Inhalts- und Beziehungsaspekt)"},
+ {"d":"2027-03-15","h":1,"lb":4,"typ":"stoff","t":"Axiom 3: Interpunktion – Kommunikationsstörungen, selbsterfüllende Prophezeiung"},
+ {"d":"2027-03-17","h":2,"lb":4,"typ":"stoff","t":"Axiom 4: digitale und analoge Modalität – Kommunikationsstörungen"},
+ {"d":"2027-03-19","h":2,"lb":4,"typ":"stoff","t":"Axiom 5: symmetrische Eskalation, starre Komplementarität"},
+ {"d":"2027-04-05","h":1,"lb":4,"typ":"wdh","t":"Kommunikationsstörungen an Fallbeispielen (Privatleben, Schule, Beruf)"},
+ {"d":"2027-04-07","h":2,"lb":4,"typ":"stoff","t":"Gelungene Kommunikation nach Watzlawick; Strategien zur Vermeidung von Störungen"},
+ {"d":"2027-04-09","h":2,"lb":4,"typ":"stoff","t":"Kommunikationstechniken: Metakommunikation, Ich-Botschaften, aktives Zuhören, Feedback"},
+ {"d":"2027-04-12","h":1,"lb":4,"typ":"wdh","t":"Kommunikationstechniken üben: Konfliktgespräch (Rollenspiel)"},
+ {"d":"2027-04-14","h":2,"lb":4,"typ":"stoff","t":"Interkulturelle Kommunikation: Werte und Normen, verbale und nonverbale Codes, Nähe und Distanz"},
+ {"d":"2027-04-16","h":2,"lb":4,"typ":"stoff","t":"Kommunikation in digitalen Medien: Kommunikationsverlauf und Gefährdungen (z. B. Cybermobbing)"},
+ {"d":"2027-04-19","h":1,"lb":4,"typ":"wdh","t":"LB 4 Kommunikation: Wiederholung und Übung"},
+ {"d":"2027-04-21","h":2,"lb":0,"typ":"wdh","t":"Vernetzung der Lernbereiche 1–4: Theorien vergleichen, Fallanalysen"},
+ {"d":"2027-04-23","h":2,"lb":0,"typ":"wdh","t":"Wiederholung Jgst. 11 (I): Wahrnehmung, Gedächtnis, Emotion, Motivation"},
+ {"d":"2027-04-26","h":1,"lb":0,"typ":"wdh","t":"Wiederholung Jgst. 11 (II): Lernen, Erziehung, Wissenschaft"},
+ {"d":"2027-04-28","h":2,"lb":0,"typ":"wdh","t":"Letzte Wiederholung – Stoff abgeschlossen (2 Wochen vor der ersten Abschlussprüfung)"},
+ {"d":"2027-04-30","h":2,"lb":0,"typ":"training","t":"Prüfungstraining 1: Aufgabenformate und Vorgehensweise"},
+ {"d":"2027-05-03","h":1,"lb":0,"typ":"training","t":"Prüfungstraining 2: Fallanalyse üben"},
+ {"d":"2027-05-05","h":2,"lb":0,"typ":"training","t":"Prüfungstraining 3: Probeprüfung"},
+ {"d":"2027-05-07","h":2,"lb":0,"typ":"training","t":"Prüfungstraining 4: Besprechung der Probeprüfung"},
+ {"d":"2027-05-10","h":1,"lb":0,"typ":"training","t":"Prüfungstraining 5: offene Fragen und letzte Wiederholung"},
+ {"d":"2027-05-12","h":2,"lb":0,"typ":"pruefung","t":"Abschlussprüfung Deutsch (erste schriftliche Prüfung)"},
+ {"d":"2027-05-14","h":2,"lb":0,"typ":"pruefung","t":"Abschlussprüfung Pädagogik/Psychologie"}
+];
+
+function pp12Add(iso,n){const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
+function pp12Montag(iso){const d=new Date(iso+"T12:00:00Z");const w=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-w);return d.toISOString().slice(0,10);}
+function pp12KW(iso){const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+3-((d.getUTCDay()+6)%7));const j=new Date(Date.UTC(d.getUTCFullYear(),0,4));return 1+Math.round(((d-j)/86400000-3+((j.getUTCDay()+6)%7))/7);}
+function pp12Datum(iso){return iso.slice(8,10)+"."+iso.slice(5,7)+".";}
+function pp12Ferien(iso){return PP12_FERIEN.find(f=>f.start<=iso&&f.end>=iso)||null;}
+function pp12BarFarbe(e){return e.typ==="stoff"?(PP12_LB[e.lb]?.farbe||"#6B7C93"):(PP12_TYP[e.typ]?.farbe||"#6B7C93");}
+function pp12BarTag(e){
+ if(e.typ==="stoff")return`${PP12_LB[e.lb].kurz} · ${PP12_LB[e.lb].titel}`;
+ const t=PP12_TYP[e.typ]?.label||"";
+ return e.lb&&PP12_LB[e.lb]?`${t} · ${PP12_LB[e.lb].kurz}`:t;
+}
+
+async function renderUnterrichtPP(){
+ const heute=new Date().toISOString().slice(0,10);
+ const tageName={0:"Mo",2:"Mi",4:"Fr"};
+ const byDate={};PP12_PLAN.forEach(e=>byDate[e.d]=e);
+ const letzterTag=PP12_PLAN[PP12_PLAN.length-1].d;
+ const ersterMo=pp12Montag(PP12_START),letzterMo=pp12Montag(letzterTag);
+ const stoffStd={1:0,2:0,3:0,4:0};
+ PP12_PLAN.forEach(e=>{if(e.typ==="stoff")stoffStd[e.lb]+=e.h;});
+ const gesamtBisStoffEnde=PP12_PLAN.filter(e=>e.d<="2027-04-28").reduce((s,e)=>s+e.h,0);
+ let rows="",m=ersterMo;const ferienGezeigt={};
+ while(m<=letzterMo){
+  const slots=[0,2,4].map(off=>({off,d:pp12Add(m,off),e:byDate[pp12Add(m,off)]||null}));
+  const fr=pp12Ferien(m);
+  const ganzeWocheFerien=!slots.some(s=>s.e)&&fr&&pp12Ferien(pp12Add(m,4));
+  if(ganzeWocheFerien){
+   if(!ferienGezeigt[fr.titel]){
+    ferienGezeigt[fr.titel]=1;
+    rows+=`<div class="pp12-ferien">${esc(fr.titel)} · ${pp12Datum(fr.start)}–${pp12Datum(fr.end)}${fr.end.slice(0,4)}</div>`;
+   }
+   m=pp12Add(m,7);continue;
+  }
+  const wochenStd=slots.reduce((s,x)=>s+(x.e?x.e.h:0),0);
+  const istJetzt=heute>=m&&heute<=pp12Add(m,6);
+  const cells=slots.map(s=>{
+   const span=s.off===0?1:2;
+   if(s.e){
+    const e=s.e,c=pp12BarFarbe(e),istHeute=e.d===heute;
+    return`<div class="pp12-bar s${span}${istHeute?" heute":""}"style="--c:${c}">
+     <div class="pp12-kopf"><span>${tageName[s.off]} ${pp12Datum(e.d)}</span><span>${e.h} Std.</span></div>
+     <div class="pp12-titel">${esc(e.t)}</div>
+     <div class="pp12-tag">${esc(pp12BarTag(e))}</div>
+    </div>`;
+   }
+   const fe=pp12Ferien(s.d),grund=fe?fe.titel:(PP12_FREI[s.d]||(s.d<PP12_START?"vor Planbeginn":"kein Unterricht"));
+   return`<div class="pp12-leer s${span}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><small>${esc(grund)}</small></div>`;
+  }).join("");
+  rows+=`<div class="pp12-woche${istJetzt?" jetzt":""}">
+   <div class="pp12-wlabel"><strong>KW ${pp12KW(m)}</strong><span>${pp12Datum(m)}–${pp12Datum(pp12Add(m,4))}</span><em>${wochenStd} Std.${istJetzt?" · diese Woche":""}</em></div>
+   <div class="pp12-tage">${cells}</div>
+  </div>`;
+  m=pp12Add(m,7);
+ }
+ const legende=[
+  ...Object.entries(PP12_LB).map(([k,v])=>`<span class="pp12-chip"style="--c:${v.farbe}">${v.kurz} · ${esc(v.titel)}</span>`),
+  ...Object.values(PP12_TYP).map(v=>`<span class="pp12-chip"style="--c:${v.farbe}">${esc(v.label)}</span>`)
+ ].join("");
+ const lbKarten=Object.entries(PP12_LB).map(([k,v])=>`<div class="pp12-stat"style="--c:${v.farbe}"><strong>${stoffStd[k]} Std.</strong><small>${v.kurz} · ${esc(v.titel)}</small></div>`).join("");
+ return`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
+ ${pageHead("UNTERRICHT","Unterricht Pädagogik und Psychologie","Stoffverteilungsplan 12. Klasse über das ganze Schuljahr: jede Unterrichtsstunde ein Balken, pro Woche 5 Stunden (Mo 1 Std., Mi 2 Std., Fr 2 Std.).","")}
+ <style>
+  .pp12-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}
+  .pp12-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 12px}
+  .pp12-stat{background:#fff;border:1px solid #dbe4ec;border-left:5px solid var(--c);border-radius:10px;padding:10px 12px}
+  .pp12-stat strong{display:block;font-size:18px}.pp12-stat small{color:#51627a}
+  .pp12-legende{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+  .pp12-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2b3a4f;background:#fff;border:1px solid #dbe4ec;border-radius:999px;padding:4px 10px}
+  .pp12-chip::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+  .pp12-woche{display:grid;grid-template-columns:132px 1fr;gap:10px;align-items:stretch;margin:0 0 10px;padding:6px;border-radius:12px}
+  .pp12-woche.jetzt{background:#eaf3fc;outline:2px solid #3d8fd0}
+  .pp12-wlabel{display:flex;flex-direction:column;justify-content:center;font-size:13px;color:#51627a}
+  .pp12-wlabel strong{color:#12233a;font-size:14px}.pp12-wlabel em{font-style:normal;font-weight:600;color:#12233a;margin-top:2px}
+  .pp12-tage{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .s1{grid-column:span 1}.s2{grid-column:span 2}
+  .pp12-bar{background:#fff;background:color-mix(in srgb,var(--c) 13%,#fff);border:1px solid color-mix(in srgb,var(--c) 40%,#fff);border-left:6px solid var(--c);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px;min-height:92px}
+  .pp12-bar.heute{box-shadow:0 0 0 3px #3d8fd0}
+  .pp12-kopf{display:flex;justify-content:space-between;font-size:11px;color:#51627a;font-weight:600}
+  .pp12-titel{font-size:13px;line-height:1.3;color:#12233a;font-weight:600}
+  .pp12-tag{margin-top:auto;font-size:11px;color:var(--c);font-weight:700}
+  .pp12-leer{border:1px dashed #c6d2df;border-radius:8px;padding:8px 10px;background:repeating-linear-gradient(45deg,#f6f8fb,#f6f8fb 8px,#eef2f7 8px,#eef2f7 16px);display:flex;flex-direction:column;justify-content:center;min-height:92px}
+  .pp12-leer span{font-size:11px;color:#6b7c93;font-weight:600}.pp12-leer small{color:#7d8da3}
+  .pp12-ferien{margin:4px 0 12px 142px;padding:10px 14px;border-radius:10px;background:#fff7e0;border:1px dashed #e0b84a;color:#7a5b00;font-weight:600;font-size:14px}
+  @media (max-width:760px){
+   .pp12-woche{grid-template-columns:1fr}.pp12-wlabel{flex-direction:row;gap:10px;align-items:baseline;flex-wrap:wrap}
+   .pp12-tage{grid-template-columns:1fr}.s1,.s2{grid-column:auto}
+   .pp12-ferien{margin-left:0}.pp12-bar,.pp12-leer{min-height:0}
+  }
+ </style>
+ <div class="pp12-stats">${lbKarten}<div class="pp12-stat"style="--c:#6B7C93"><strong>${gesamtBisStoffEnde} Std.</strong><small>gesamt bis 28.04.2027 (Stoff abgeschlossen)</small></div></div>
+ <div class="pp12-info">
+  <div class="card"><strong>Leistungsnachweise</strong><p style="margin:6px 0 0">Kurzarbeit 16.11.2026 · Schulaufgabe 1 am 16.12.2026 · Schulaufgabe 2 am 03.03.2027</p></div>
+  <div class="card"><strong>Abschlussprüfung 2027</strong><p style="margin:6px 0 0">Deutsch 12.05.2027 (erste Prüfung) · Pädagogik/Psychologie 14.05.2027. Stoff fertig am 28.04.2027, danach Prüfungstraining.</p></div>
+ </div>
+ <div class="pp12-legende">${legende}</div>
+ ${rows}
+ ${footer()}`;
+}
+window.renderUnterrichtPP=renderUnterrichtPP;
+
 async function renderFaecherUebersicht(){
  return`${pageHead("LEHRPLAN & LERNINHALTE","Fächer 11. Klasse","Wähle ein Fach, um den Lehrplan-Zeitstrahl mit Themen, Aufträgen und Material zu öffnen.","")}
  <div class="grid grid-4">${F11SB_FAECHER.map(f=>{
@@ -6666,9 +6872,9 @@ async function renderLernwerkstatt(){
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
  <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
- <a class="card tile"href="#faecher"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px">
- <span class="emoji"></span><strong style="font-size:16px">Fächer 11. Klasse</strong>
- <small>Lehrplan-Zeitstrahl je Fach: Themen, Aufträge, Material, Teams und Produkte – Schritt für Schritt durchs Schuljahr.</small>
+ <a class="card tile"href="#unterricht-pp"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px">
+ <span class="emoji"></span><strong style="font-size:16px">Unterricht Pädagogik und Psychologie</strong>
+ <small>Stoffverteilungsplan 12. Klasse: die Themen jeder Unterrichtsstunde über das ganze Schuljahr.</small>
  </a>
  ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
 <strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
@@ -13887,7 +14093,7 @@ async function render(){
  const p=location.hash.replace("#","")||"start";
  const pages={
  start:renderStart,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
- faecher:renderFaecherUebersicht,fach:renderFachDetail,
+ faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,
  ressourcen:renderRessourcenRoute,lernpfad:renderLernpfadRoute,forum:renderForum,"forum-board":renderForumBoard,"forum-nachrichten":renderForumMessages,
  pinnwand:renderPinnwandUebersicht,"pinnwand-board":renderPinnwandBoard,
  kollaboration:renderKollaborationsTools,
@@ -13913,7 +14119,7 @@ async function render(){
  };
  const fn=pages[p]||renderStart;
  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",
- a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-"))));
+ a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || (a.dataset.page==="lernwerkstatt" && ["unterricht-pp","faecher","fach"].includes(p))));
  const content=$("content");
  if(!content)return;
  // Never leave a blank page while a module is loading.
