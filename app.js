@@ -730,7 +730,7 @@ $("logoutBtn").onclick=async()=>{
  try{await loadFirebase();await signOut(auth)}catch(e){console.error(e)}
 };
 $("menuBtn").onclick=()=>$("sidebar").classList.toggle("open");
-$("helpQuick").onclick=openHelpForm;
+if($("helpQuick"))$("helpQuick").onclick=openHelpForm;
 $("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
 
 async function getCollection(name,sortField="createdAt",desc=true){
