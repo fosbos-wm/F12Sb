@@ -6080,6 +6080,7 @@ function coEditorPruefen(){
  p.pro.forEach((x,i)=>{const el=$(`coHinw${i}`);if(el)el.innerHTML=`<b>${x.richtig} richtig · ${4-x.richtig} falsch</b> ${coPruefChips(x)}`;});
  const g=$("coHinwGlob");if(g)g.innerHTML=p.glob.map(t=>`<div class="co-hinweis">⚠ ${esc(t)}</div>`).join("");
  const n=coEditor.checkliste.filter(Boolean).length,cs=$("coClStand");if(cs)cs.textContent=`${n}/${CO_CHECKLISTE.length} bestätigt`;
+ coEditor.aufgaben.forEach((q,i)=>[0,1,2,3].forEach(j=>{const row=$(`coRow${i}_${j}`),sel=$(`coR${i}_${j}`);if(row&&sel){row.classList.toggle("co-aus-r",sel.value==="r");row.classList.toggle("co-aus-f",sel.value!=="r");}}));
 }
 function coEditorRender(){
  coEditor.aufgaben=coEditor.aufgaben.map(coAufgabeNorm);
@@ -6094,6 +6095,26 @@ function coEditorRender(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 CHECK-OUT-TEST · ${e.id?"ENTWURF BEARBEITEN":"NEU ANLEGEN"} · NUR LEHRKRÄFTE</div>
   <h2>K-Prim-Test anlegen</h2>
+  <style>
+   .co-legende{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+   .co-legende span{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid transparent}
+   .co-l-vig{background:#eaf3fc;border-color:#c9def4}.co-l-stamm{background:#fff5dc;border-color:#f0dca4}.co-l-aus{background:#f1ecfa;border-color:#d9cdf0}
+   .co-bankleiste{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;margin:6px 0 4px;background:#f4f6f8;border-radius:10px;font-size:12px;color:#51627a}
+   .co-bankleiste select{flex:1;min-width:200px}
+   .co-sec{border-radius:12px;padding:12px 14px;margin:12px 0;border:1px solid transparent}
+   .co-sec-kopf{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:700;font-size:14px;margin-bottom:8px;color:#12233a}
+   .co-sec-kopf small{font-weight:400;color:#5b6b7d;font-size:12px}
+   .co-sec-nr{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex:none}
+   .co-sec-vig{background:#eaf3fc;border-color:#c9def4}.co-sec-vig .co-sec-nr{background:#3d8fd0}
+   .co-sec-stamm{background:#fff5dc;border-color:#f0dca4}.co-sec-stamm .co-sec-nr{background:#d9a21b}
+   .co-sec-aus{background:#f1ecfa;border-color:#d9cdf0}.co-sec-aus .co-sec-nr{background:#8a64b8}
+   .co-sec input:not([type=checkbox]),.co-sec textarea,.co-sec select{background:#fff}
+   .co-sec .co-ed-aussage{background:#fff;border-radius:10px;padding:8px 10px;margin:8px 0;border-left:5px solid #c7d0d6}
+   .co-sec .co-aus-r{border-left-color:#3fa66a}.co-sec .co-aus-f{border-left-color:#d9534f}
+   .co-sec .co-aus-r select{background:#e3f4e8;border-color:#9fd3ae;color:#1f6a3a;font-weight:600}
+   .co-sec .co-aus-f select{background:#fbe6e6;border-color:#e8b1b1;color:#9a2f2f;font-weight:600}
+  </style>
+  <div class="co-legende"><span class="co-l-vig">1 Fallvignette</span><span class="co-l-stamm">2 Einleitungssatz</span><span class="co-l-aus">3 Die 4 Aussagen</span></div>
   <p class="co-ed-intro">Jeder Freitagstest hat genau <b>${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben</b>. Jede Aufgabe beginnt mit ihrer eigenen <b>Fallvignette</b> (optional mit Material), dann folgen Einleitungssatz und 4 Aussagen. Wertung je Aufgabe: 4 richtig = ${be[0]} BE · 3 = ${be[1]} BE · 2 = ${be[2]} BE · sonst 0.</p>
   <div class="form">
    ${!e.id&&CHECKOUT_VORLAGEN.length?`<div class="co-ed-vorlage"><b>📋 Vorlage:</b> <select id="coVorlage"onchange="coVorlageWaehlen()"><option value="">Ganzen Test aus Vorlage einsetzen …</option>${CHECKOUT_VORLAGEN.map(v=>`<option value="${esc(v.id)}">${esc(v.titel)} (LB ${v.lbNum} · ${esc(coDatum(v.datum))})</option>`).join("")}</select></div>`:""}
@@ -6109,22 +6130,29 @@ function coEditorRender(){
    <small class="co-ed-tipp">Erst die richtige(n) Aussage(n) formulieren, dann plausible Distraktoren. Aussagen ähnlich lang und gleich gebaut. Die Begründung sehen Schüler:innen erst nach der Auswertung.</small>
    ${e.aufgaben.map((a,i)=>`<div class="card co-ed-aufgabe">
     <div class="co-ed-kopf"><b>Aufgabe ${i+1}</b><span id="coHinw${i}"><b>${p.pro[i].richtig} richtig · ${4-p.pro[i].richtig} falsch</b> ${coPruefChips(p.pro[i])}</span></div>
-    <select id="coBank${i}"class="co-ed-bank"onchange="coBankEinsetzen(${i})">${bankOpt}</select>
+    <div class="co-bankleiste"><span>Aufgabe aus der Bank laden:</span><select id="coBank${i}"class="co-ed-bank"onchange="coBankEinsetzen(${i})">${bankOpt}</select></div>
     ${a.pruefen?`<div class="co-hinweis">⚠ ${esc(a.pruefen)}</div>`:""}
-    <div class="co-ed-abschn">📖 Fallvignette</div>
-    <label>Überschrift<input id="coVT${i}"value="${esc(a.vTitel)}"placeholder="z. B. Kindergarten „Wirbelwind“"></label>
-    <label>Text<textarea id="coVX${i}"rows="6"placeholder="Situation ohne Hinweise auf die Lösung.">${esc(a.vText)}</textarea></label>
-    <label class="check"><input id="coVZ${i}"type="checkbox"${a.vZeilen?" checked":""}> Zeilen nummerieren (jeder Zeilenumbruch = neue Zeile, für Verweise wie „Z. 15–17“)</label>
-    <details class="co-ed-details"${a.mText?" open":""}><summary>📎 Material (optional, z. B. Studie oder Text)</summary>
-     <label>Titel<input id="coMT${i}"value="${esc(a.mTitel)}"></label>
-     <label>Text<textarea id="coMX${i}"rows="5">${esc(a.mText)}</textarea></label>
-     <label>Quelle<input id="coMQ${i}"value="${esc(a.mQuelle)}"></label>
-    </details>
-    <div class="co-ed-abschn">❓ Aufgabe</div>
-    <label>Zusatz zur Situation <span class="co-opt">optional</span><textarea id="coKo${i}"rows="2"placeholder="z. B. Ein Teamgespräch, ein Zitat oder ein Hinweis zur Aufgabe">${esc(a.kontext)}</textarea></label>
-    <label>Einleitungssatz<input id="coStamm${i}"value="${esc(a.stamm)}"oninput="coEditorPruefen()"placeholder="z. B. Diese Aussage ist alltagstheoretisch, wenn …"></label>
-    ${a.aussagen.map((s,j)=>`<div class="co-ed-aussage"><span>${j+1}</span><div style="flex:1;display:flex;flex-direction:column;gap:4px"><textarea id="coA${i}_${j}"rows="2"oninput="coEditorPruefen()"placeholder="Aussage ${j+1}">${esc(s.text)}</textarea><input id="coE${i}_${j}"value="${esc(s.erklaerung)}"placeholder="Begründung (optional, erst nach der Auswertung sichtbar)"></div>
-     <select id="coR${i}_${j}"onchange="coEditorPruefen()"><option value="r"${s.richtig?" selected":""}>richtig</option><option value="f"${!s.richtig?" selected":""}>falsch</option></select></div>`).join("")}
+    <section class="co-sec co-sec-vig">
+     <div class="co-sec-kopf"><span class="co-sec-nr">1</span>Fallvignette <small>die Situation, auf die sich alle 4 Aussagen beziehen</small></div>
+     <label>Überschrift<input id="coVT${i}"value="${esc(a.vTitel)}"placeholder="z. B. Kindergarten „Wirbelwind“"></label>
+     <label>Text<textarea id="coVX${i}"rows="6"placeholder="Situation ohne Hinweise auf die Lösung.">${esc(a.vText)}</textarea></label>
+     <label class="check"><input id="coVZ${i}"type="checkbox"${a.vZeilen?" checked":""}> Zeilen nummerieren (jeder Zeilenumbruch = neue Zeile, für Verweise wie „Z. 15–17“)</label>
+     <details class="co-ed-details"${a.mText?" open":""}><summary>📎 Material (optional, z. B. Studie oder Text)</summary>
+      <label>Titel<input id="coMT${i}"value="${esc(a.mTitel)}"></label>
+      <label>Text<textarea id="coMX${i}"rows="5">${esc(a.mText)}</textarea></label>
+      <label>Quelle<input id="coMQ${i}"value="${esc(a.mQuelle)}"></label>
+     </details>
+    </section>
+    <section class="co-sec co-sec-stamm">
+     <div class="co-sec-kopf"><span class="co-sec-nr">2</span>Einleitungssatz <small>der Satzanfang, den jede der 4 Aussagen fortführt</small></div>
+     <label>Einleitungssatz<input id="coStamm${i}"value="${esc(a.stamm)}"oninput="coEditorPruefen()"placeholder="z. B. Diese Aussage ist alltagstheoretisch, wenn …"></label>
+     <label>Zusatz zur Situation <span class="co-opt">optional</span><textarea id="coKo${i}"rows="2"placeholder="z. B. Ein Teamgespräch, ein Zitat oder ein Hinweis zur Aufgabe">${esc(a.kontext)}</textarea></label>
+    </section>
+    <section class="co-sec co-sec-aus">
+     <div class="co-sec-kopf"><span class="co-sec-nr">3</span>Die 4 Aussagen <small>je Aussage „richtig“ oder „falsch“ festlegen</small></div>
+     ${a.aussagen.map((s,j)=>`<div id="coRow${i}_${j}"class="co-ed-aussage co-aus-row ${s.richtig?"co-aus-r":"co-aus-f"}"><span>${j+1}</span><div style="flex:1;display:flex;flex-direction:column;gap:4px"><textarea id="coA${i}_${j}"rows="2"oninput="coEditorPruefen()"placeholder="Aussage ${j+1}">${esc(s.text)}</textarea><input id="coE${i}_${j}"value="${esc(s.erklaerung)}"placeholder="Begründung (optional, erst nach der Auswertung sichtbar)"></div>
+      <select id="coR${i}_${j}"onchange="coEditorPruefen()"><option value="r"${s.richtig?" selected":""}>richtig</option><option value="f"${!s.richtig?" selected":""}>falsch</option></select></div>`).join("")}
+    </section>
    </div>`).join("")}
    <div id="coHinwGlob">${p.glob.map(t=>`<div class="co-hinweis">⚠ ${esc(t)}</div>`).join("")}</div>
    <div class="form-actions">
