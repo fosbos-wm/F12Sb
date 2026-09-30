@@ -730,6 +730,41 @@ service cloud.firestore {
     }
 
     // ---------------------------------------------------------
+    // TEAM-WHITEBOARD (unendliche Arbeitsfläche, live im Team)
+    // Alle freigeschalteten Mitglieder sehen die Boards, legen Elemente an
+    // und bearbeiten/verschieben sie gemeinsam. Löschen dürfen nur die
+    // Urheber:in des Elements und Lehrkräfte.
+    // ---------------------------------------------------------
+    match /whiteboards/{id} {
+      allow read: if isApproved();
+      allow create: if isApproved()
+        && request.resource.data.createdBy == request.auth.uid;
+      allow update: if isTeacher()
+        || (isApproved() && resource.data.createdBy == request.auth.uid);
+      allow delete: if isTeacher();
+    }
+
+    match /whiteboardItems/{id} {
+      allow read: if isApproved();
+      allow create: if isApproved()
+        && request.resource.data.authorUid == request.auth.uid;
+      allow update: if isApproved()
+        && request.resource.data.boardId == resource.data.boardId
+        && request.resource.data.authorUid == resource.data.authorUid;
+      allow delete: if isTeacher()
+        || (isApproved() && resource.data.authorUid == request.auth.uid);
+    }
+
+    // Online-Anzeige: ein Dokument je Person und Board ("<boardId>_<uid>").
+    match /whiteboardPresence/{id} {
+      allow read: if isApproved();
+      allow create, update: if isApproved()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.boardId + '_' + request.auth.uid;
+      allow delete: if isApproved() && resource.data.uid == request.auth.uid;
+    }
+
+    // ---------------------------------------------------------
     // Deny everything not explicitly listed above.
     // ---------------------------------------------------------
     match /{document=**} {
