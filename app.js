@@ -28,7 +28,7 @@ function authError(err){
  const map={
  "auth/invalid-credential":"E-Mail oder Passwort ist nicht korrekt.","auth/email-already-in-use":"Für diese E-Mail existiert bereits ein Konto.","auth/weak-password":"Das Passwort muss mindestens 6 Zeichen haben.","auth/invalid-email":"Bitte eine gültige E-Mail-Adresse eingeben.","auth/too-many-requests":"Zu viele Versuche. Bitte später erneut versuchen."
  };
- $("authError").textContent=map[err?.code]||"Anmeldung konnte nicht durchgeführt werden.";
+ $("authError").textContent=map[err?.code]||("Anmeldung konnte nicht durchgeführt werden."+(err?.code?" ("+err.code+")":""));
 }
 function modal(html){$("modal").innerHTML=html;$("modalBackdrop").hidden=false}
 function closeModal(){$("modalBackdrop").hidden=true;if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}if(ppDirty){ppDirty=false;if(activeFach==="paedagogik")render();}}
@@ -14762,6 +14762,7 @@ async function init(){
  clearListeners();
  currentUser=user;
  if(!user){profile=null;showAuth();return}
+ $("authError").textContent="Angemeldet – Profil wird geladen …";
  try{
  await ensureProfile(user);
 
@@ -14785,7 +14786,7 @@ if(profile.status === "blocked"){
 
  showApp();
 }
- catch(e){console.error(e);showAuth();$("authError").textContent="Benutzerprofil konnte nicht geladen werden."}
+ catch(e){console.error(e);showAuth();$("authError").textContent="Benutzerprofil konnte nicht geladen werden."+(e?.code?" ("+e.code+")":"")}
  });
  }catch(e){
  console.error("Firebase konnte nicht geladen werden:",e);
