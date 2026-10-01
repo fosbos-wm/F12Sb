@@ -755,7 +755,19 @@ service cloud.firestore {
         || (isApproved() && resource.data.authorUid == request.auth.uid);
     }
 
-    // Online-Anzeige: ein Dokument je Person und Board ("<boardId>_<uid>").
+    // Bilder im Whiteboard: eigenes Dokument je Bild (verkleinertes JPEG als Text),
+    // damit das Verschieben des Bildes nur das kleine Element-Dokument überträgt.
+    match /whiteboardImages/{id} {
+      allow read: if isApproved();
+      allow create: if isApproved()
+        && request.resource.data.authorUid == request.auth.uid
+        && request.resource.data.data is string
+        && request.resource.data.data.size() < 900000;
+      allow delete: if isTeacher()
+        || (isApproved() && resource.data.authorUid == request.auth.uid);
+    }
+
+    // Online-Anzeige und Mauszeiger: ein Dokument je Person und Board ("<boardId>_<uid>").
     match /whiteboardPresence/{id} {
       allow read: if isApproved();
       allow create, update: if isApproved()
