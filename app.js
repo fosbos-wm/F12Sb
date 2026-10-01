@@ -7558,7 +7558,7 @@ function wbFehlerText(code){
 }
 function wbKarteKopf(id){
  let h=0;const s=String(id);for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;
- const f=[0,1,2].map(n=>WB_FARBEN[(h>>(n*3))%WB_FARBEN.length]);
+ const f=[0,1,2].map(n=>WB_FARBEN[Math.abs(Math.trunc((h>>>(n*3))%WB_FARBEN.length))]||WB_FARBEN[0]);
  return`<div class="wb-karte-kopf"style="background:linear-gradient(135deg,${f[0].soft},#f6f9fc 70%)">
   <span style="left:16px;top:18px;width:54px;height:44px;background:${f[0].soft};transform:rotate(-6deg)"></span>
   <span style="left:84px;top:40px;width:62px;height:40px;background:${f[1].soft};transform:rotate(4deg)"></span>
