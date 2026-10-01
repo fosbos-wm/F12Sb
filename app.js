@@ -7023,25 +7023,26 @@ window.openWocheDetail=openWocheDetail;
 
 async function renderLernwerkstatt(){
  const groups=[
- {title:"Dich selbst einschätzen",color:"#4a90d9",items:[
+ {title:"Mein Lernen planen und verstehen",sub:"Ich will mein Lernen in die Hand nehmen.",color:"#4a90d9",items:[
+ [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"],
  [" ","Lernstrategien-Check","Kein Lerntyp-Test – dein Strategien-Profil in 25 Fragen.","lernstrategien"],
  [" ","Metakognitive Lernstrategien","Über das eigene Lernen nachdenken – klick dich durch.","metakognition"],
- [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"],
- [" ","Lernstandsmessung","Kurz prüfen: Wo stehe ich und was ist mein nächster Schritt?","lernstand"]
+ [" ","Lernmethoden","Planung, Lernen, Zusammenarbeit und Reflexion.","methoden"]
  ]},
- {title:"Konkret lernen & üben",color:"#3fa66a",items:[
- [" ","Lernmethoden","Planung, Lernen, Zusammenarbeit und Reflexion.","methoden"],
- [" ","Lern-Werkzeuge","Karteikarten, Fokus-Timer und Glossar zum selbstständigen Lernen.","lernwerkzeuge"],
- [" ","Uhr & Timer","Aktuelle Uhrzeit im Blick, plus frei einstellbarer Timer für alle.","uhr-timer"],
+ {title:"Üben und festigen",sub:"Ich will üben und mich auf Prüfungen vorbereiten.",color:"#3fa66a",items:[
  [" ","Fachaufsatz-Training","Fachaufsatz Pädagogik/Psychologie an echten Prüfungsaufgaben üben.","fachaufsatz"],
  [" ","Zuordnungsübungen","Begriff und Erklärung zuordnen, per Knopfdruck selbst überprüfen.","zuordnung"],
+ [" ","Lern-Werkzeuge","Karteikarten, Fokus-Timer und Glossar zum selbstständigen Lernen.","lernwerkzeuge"],
+ [" ","Uhr & Timer","Aktuelle Uhrzeit im Blick, plus frei einstellbarer Timer für alle.","uhr-timer"]
+ ]},
+ {title:"Gemeinsam arbeiten",sub:"Wir arbeiten im Team und tauschen uns aus.",color:"#8a64b8",items:[
  [" ","Team-Whiteboard","Gemeinsam auf einer unendlichen Fläche arbeiten – Notizen, Formen, Pfeile, Zeichnungen.","whiteboard"],
  [" ","Tools für Zusammenarbeit","Padlet, Wortwolke & Co. für Gruppenarbeit und Unterricht.","kollaboration"],
- [" ","Lernressourcen","TaskCard, KI, Videos, ByCS/mebis, Canva und LearningApps.","ressourcen"],
- [" ","KI zum Lernen","KI als Lernpartner nutzen – bereitgestellte KI-Angebote der Lehrkräfte.","ki-lernen"],
  [" ","Lernimpulse","Kurze Impulse für Reflexion und Deeper Learning.","impulse"]
  ]},
- {title:"Unterstützung holen",color:"#e0a324",items:[
+ {title:"Material, KI und Hilfe",sub:"Ich brauche Material oder Unterstützung.",color:"#e0a324",items:[
+ [" ","Lernressourcen","TaskCard, KI, Videos, ByCS/mebis, Canva und LearningApps.","ressourcen"],
+ [" ","KI zum Lernen","KI als Lernpartner nutzen – bereitgestellte KI-Angebote der Lehrkräfte.","ki-lernen"],
  [" ","Lerncoaching","Individuelle Begleitung und Kontakt zu einer Lehrkraft.","lerncoaching"],
  [" ","Fragen & Hilfe","Antworten rund um die F12Sb und das Lernen.","fragenhilfe"]
  ]}
@@ -7068,7 +7069,7 @@ async function renderLernwerkstatt(){
  </a>
  <a class="pp12-aln"href="#leistungsnachweis">Alternativer Leistungsnachweis <span aria-hidden="true">→</span></a>
 </div>
- ${groups.map(g=>`<div class="kicker"style="margin:22px 0 10px">${g.title}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
+ ${groups.map(g=>`<div class="kicker"style="margin:26px 0 4px">${g.title}</div><div style="margin:0 0 10px;font-size:13px;color:var(--muted)">${g.sub}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
 <strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
  ${footer()}`;
 }
