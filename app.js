@@ -7298,6 +7298,7 @@ async function renderLernwerkstatt(){
  [" ","Uhr & Timer","Aktuelle Uhrzeit im Blick, plus frei einstellbarer Timer für alle.","uhr-timer"]
  ]},
  {title:"Gemeinsam arbeiten",sub:"Wir arbeiten im Team und tauschen uns aus.",color:"#8a64b8",items:[
+ [" ","Digitale Tafel","Die Tafel für den Unterricht: Seiten, Karten, Timer, Würfel, Lostopf und mehr.","tafel"],
  [" ","Team-Whiteboard","Gemeinsam auf einer unendlichen Fläche arbeiten – Notizen, Formen, Pfeile, Zeichnungen.","whiteboard"],
  [" ","Tools für Zusammenarbeit","Padlet, Wortwolke & Co. für Gruppenarbeit und Unterricht.","kollaboration"],
  [" ","Lernimpulse","Kurze Impulse für Reflexion und Deeper Learning.","impulse"]
@@ -7482,6 +7483,22 @@ const WB_CSS=`<style>
 .wb-cursor svg{display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
 .wb-cursor span{position:absolute;left:14px;top:16px;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .wb-meldung{position:absolute;left:50%;top:64px;transform:translateX(-50%);max-width:min(560px,calc(100% - 32px));background:#fdecea;color:#8a1f17;border:1px solid #f1b0aa;border-radius:12px;padding:10px 14px;font-size:13px;line-height:1.4;z-index:9;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.wb-leiste{display:none}
+.wb-wrap.wb-tafelmodus:not(.wb-ro) .wb-leiste{display:flex;position:absolute;left:50%;bottom:12px;transform:translateX(-50%);gap:2px;align-items:flex-end;background:#fff;border-radius:18px;padding:6px 8px;box-shadow:0 10px 30px rgba(24,67,96,.22);border:1px solid var(--line);z-index:7;max-width:calc(100% - 24px);overflow-x:auto}
+.wb-lb{flex:none;min-width:52px;border:0;background:transparent;border-radius:12px;color:#3a4a5c;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 6px 5px;font-size:11px;font-weight:600;transition:background .12s}
+.wb-lb:hover{background:#eef4fa}.wb-lb.on{background:#2f7fc6;color:#fff}
+.wb-lb-trenn{flex:none;width:1px;align-self:stretch;background:var(--line);margin:4px 6px}
+.wb-wrap.wb-tafelmodus:not(.wb-ro) .wb-tools{display:none}
+.wb-wrap.wb-tafelmodus:not(.wb-ro).wb-tools-offen .wb-tools{display:flex}
+.wb-wrap.wb-tafelmodus .wb-props{bottom:96px}
+.wb-wrap.wb-tafelmodus .wb-folgenbanner{bottom:auto;top:70px}
+.wb-wrap.wb-tafelmodus .wb-seite-btn{min-width:44px;height:44px;font-size:16px;border-radius:12px}
+.wb-wrap.wb-tafelmodus .wb-seiten{gap:8px;padding:6px}
+.wb-wrap.wb-tafelmodus .wb-hinweis{color:#fff;opacity:.9}.wb-wrap.wb-tafelmodus .wb-hinweis b{color:#fff}
+.wb-hgmenu{min-width:0;padding:10px}
+.wb-hg-reihe{display:flex;gap:8px;padding:2px 4px}
+.wb-hg{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #c9d4de;padding:0;cursor:pointer}
+.wb-hg.on{box-shadow:0 0 0 3px #2f7fc6}
 .wb-hinweis{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);text-align:center;color:#7a8c9c;pointer-events:none;max-width:320px}
 .wb-hinweis b{display:block;font-size:18px;color:#51657a;margin-bottom:6px}
 .wb-card,.wb-tool,.wb-qr,.wb-link,.wb-datei,.wb-video{background:#fff;border-radius:14px;box-shadow:0 8px 20px rgba(40,50,70,.16),0 1px 3px rgba(40,50,70,.1);border:1px solid #dbe4ec;overflow:hidden;display:flex;flex-direction:column}
@@ -7533,6 +7550,7 @@ const WB_CSS=`<style>
 .wb-menu-gitter{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .wb-menu .wb-menu-gitter button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;text-align:center;font-size:12px;width:auto}
 @media(max-width:760px){
+ .wb-wrap.wb-tafelmodus.wb-tools-offen .wb-tools{bottom:92px}
  .wb-seiten{top:56px;left:8px;max-width:calc(100% - 16px)}
  .wb-wrap{height:calc(100vh - 200px);min-height:480px}
  .wb-tools{left:50%;top:auto;bottom:12px;transform:translateX(-50%);flex-direction:row;max-width:calc(100% - 16px);overflow-x:auto}
@@ -7565,40 +7583,48 @@ function wbKarteKopf(id){
   <span style="left:160px;top:16px;width:46px;height:46px;background:${f[2].soft};border-radius:50%"></span>
   <span style="right:18px;bottom:14px;width:70px;height:8px;background:${f[1].dark};opacity:.35;border-radius:4px"></span></div>`;
 }
-async function renderWhiteboardUebersicht(){
- const boards=await getWhiteboards();
- const kopf=pageHead("ZUSAMMENARBEIT","Team-Whiteboard","Gemeinsam auf einer unendlichen Fläche arbeiten: Haftnotizen, Text, Formen, Pfeile und Zeichnungen – alle sehen Änderungen live.",
-  `<button class="primary"onclick="openWhiteboardForm()">＋ Neues Whiteboard</button>`);
- if(boards===null)return`${WB_CSS}${kopf}<div class="empty"><strong>Whiteboards konnten nicht geladen werden.</strong>${esc(wbFehlerText(wbLadeFehler))}<br><small>Tipp: Auf der Seite diagnose.html lässt sich das genau prüfen.</small></div>${footer()}`;
+async function renderTafelUebersicht(){return renderWhiteboardUebersicht("tafel");}
+async function renderWhiteboardUebersicht(modus){
+ const istTafel=modus==="tafel";
+ const alle=await getWhiteboards();
+ const boards=alle===null?null:(istTafel?alle.filter(b=>b.art==="tafel"):alle.filter(b=>b.art!=="tafel"));
+ const kopf=istTafel
+  ?pageHead("UNTERRICHT","Digitale Tafel","Die Tafel für deinen Unterricht: Seiten, Karten, Bilder, Videos und Werkzeuge wie Timer, Würfel, Lostopf und Ampel. Lehrkräfte gestalten, alle anderen sehen live zu.",
+    isTeacher()?`<button class="primary"onclick="openWhiteboardForm('tafel')">＋ Neue Tafel</button>`:"")
+  :pageHead("ZUSAMMENARBEIT","Team-Whiteboard","Gemeinsam auf einer unendlichen Fläche arbeiten: Haftnotizen, Text, Formen, Pfeile und Zeichnungen – alle sehen Änderungen live.",
+    `<button class="primary"onclick="openWhiteboardForm()">＋ Neues Whiteboard</button>`);
+ if(boards===null)return`${WB_CSS}${kopf}<div class="empty"><strong>${istTafel?"Tafeln":"Whiteboards"} konnten nicht geladen werden.</strong>${esc(wbFehlerText(wbLadeFehler))}<br><small>Tipp: Auf der Seite diagnose.html lässt sich das genau prüfen.</small></div>${footer()}`;
  return`${WB_CSS}${kopf}
  <div class="wb-gitter">${boards.map(b=>`<button type="button"class="wb-karte"onclick="openWhiteboard('${b.id}')">
   ${wbKarteKopf(b.id)}
   <div class="wb-karte-text"><strong>${esc(b.title||"Whiteboard")}</strong>
-  <small>${esc(b.description||"")||"Gemeinsame Arbeitsfläche."}</small>
+  <small>${esc(b.description||"")||(b.art==="tafel"?"Tafel für den Unterricht.":"Gemeinsame Arbeitsfläche.")}</small>
   <small>${b.art==="tafel"?'<b class="wb-art-chip"style="margin:0 6px 0 0">Tafel</b>':""}Angelegt von ${esc(b.createdByName||"Campus-Mitglied")} · ${esc(fmtDate(b.createdAt))}</small></div></button>`).join("")}</div>
- ${boards.length?"":`<div class="empty"><strong>Noch kein Whiteboard.</strong>Lege das erste Whiteboard für dein Team oder ein Thema an.</div>`}
+ ${boards.length?"":(istTafel?`<div class="empty"><strong>Noch keine Tafel.</strong>${isTeacher()?"Lege die erste Tafel für eine Unterrichtsstunde an.":"Sobald deine Lehrkraft eine Tafel anlegt, erscheint sie hier."}</div>`:`<div class="empty"><strong>Noch kein Whiteboard.</strong>Lege das erste Whiteboard für dein Team oder ein Thema an.</div>`)}
  ${footer()}`;
 }
 function openWhiteboard(id){activeWhiteboardId=id;go("whiteboard-board")}
-function closeWhiteboard(){activeWhiteboardId=null;go("whiteboard")}
-function openWhiteboardForm(){
+function closeWhiteboard(){const art=wb&&wb.board&&wb.board.art;activeWhiteboardId=null;go(art==="tafel"?"tafel":"whiteboard")}
+let wbFormArt="";
+function openWhiteboardForm(artVorgabe){
  if(!isApproved()){toast("Nur freigeschaltete Nutzer können ein Whiteboard anlegen.");return}
+ wbFormArt=artVorgabe==="tafel"&&isTeacher()?"tafel":"";
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">TEAM-WHITEBOARD</div><h2>Neues Whiteboard</h2>
-  <p>Eine Arbeitsfläche mit mehreren Seiten, Karten und Unterrichts-Werkzeugen.</p>
+  <div class="kicker">${wbFormArt?"DIGITALE TAFEL":"TEAM-WHITEBOARD"}</div><h2>${wbFormArt?"Neue Tafel":"Neues Whiteboard"}</h2>
+  <p>${wbFormArt?"Eine Tafel für den Unterricht, die du vorbereiten und präsentieren kannst. Schüler:innen sehen zu.":"Eine Arbeitsfläche mit mehreren Seiten, Karten und Unterrichts-Werkzeugen."}</p>
   <div class="form">
-   ${isTeacher()?`<label>Art<select id="wbNeuArt"><option value="team">Team-Whiteboard – alle arbeiten mit</option><option value="tafel">Tafel – nur Lehrkräfte bearbeiten, Schüler:innen sehen zu</option></select></label>`:""}
-   <label>Titel<input id="wbNeuTitel"maxlength="120"placeholder="z. B. Projektteam 3 – Ideensammlung"></label>
+   ${isTeacher()&&!wbFormArt?`<label>Art<select id="wbNeuArt"><option value="team">Team-Whiteboard – alle arbeiten mit</option><option value="tafel">Tafel – nur Lehrkräfte bearbeiten, Schüler:innen sehen zu</option></select></label>`:""}
+   <label>Titel<input id="wbNeuTitel"maxlength="120"placeholder="${wbFormArt?"z. B. Freud – Instanzenmodell":"z. B. Projektteam 3 – Ideensammlung"}"></label>
    <label>Kurzbeschreibung<textarea id="wbNeuBeschr"rows="3"maxlength="300"placeholder="Wofür ist dieses Whiteboard gedacht?"></textarea></label>
-   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addWhiteboard()">Whiteboard anlegen</button></div>
+   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addWhiteboard()">${wbFormArt?"Tafel anlegen":"Whiteboard anlegen"}</button></div>
   </div>`);
 }
 async function addWhiteboard(){
  const title=$("wbNeuTitel")?.value.trim()||"",description=$("wbNeuBeschr")?.value.trim()||"";
  if(!title){toast("Bitte einen Titel eingeben.");return}
  try{
-  const art=(isTeacher()&&$("wbNeuArt")?.value==="tafel")?"tafel":"team";
-  const r=await addDoc(collection(db,"whiteboards"),{title,description,art,schreibschutz:art==="tafel",seiten:1,createdBy:currentUser.uid,
+  const art=(isTeacher()&&(wbFormArt==="tafel"||$("wbNeuArt")?.value==="tafel"))?"tafel":"team";
+  const r=await addDoc(collection(db,"whiteboards"),{title,description,art,schreibschutz:art==="tafel",seiten:1,bg:art==="tafel"?"blau":"weiss",createdBy:currentUser.uid,
    createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",createdAt:serverTimestamp()});
   closeModal();openWhiteboard(r.id);
  }catch(e){
@@ -7634,8 +7660,8 @@ async function renderWhiteboardBoard(){
  return`${WB_CSS}
  <div class="wb-seite">
   <div class="wb-kopf">
-   <button class="secondary"type="button"id="wbZurueck">← Whiteboards</button>
-   <div><h1>${esc(board.title||"Whiteboard")}${board.art==="tafel"?'<span class="wb-art-chip">Tafel</span>':""}</h1><small>${esc(board.description||"")||"Gemeinsame Arbeitsfläche"}</small></div>
+   <button class="secondary"type="button"id="wbZurueck">← ${board.art==="tafel"?"Tafeln":"Whiteboards"}</button>
+   <div><h1>${esc(board.title||"Whiteboard")}${board.art==="tafel"?'<span class="wb-art-chip">Tafel</span>':""}</h1><small>${esc(board.description||"")||(board.art==="tafel"?"Tafel für den Unterricht":"Gemeinsame Arbeitsfläche")}</small></div>
    ${kann?`<button class="secondary"type="button"id="wbUmbenennen">Umbenennen</button>`:""}
    <button class="secondary"type="button"id="wbSchutz"hidden></button>
    ${isTeacher()?`<button class="secondary"type="button"id="wbLoeschen">Löschen</button>`:""}
@@ -7645,7 +7671,7 @@ async function renderWhiteboardBoard(){
    <div class="wb-stage wb-cur-select"id="wbStage">
     <div class="wb-world"id="wbWorld"><div id="wbItems"></div><svg class="wb-svg"id="wbSvg"xmlns="http://www.w3.org/2000/svg"><g id="wbSelG"></g><g id="wbVorschau"></g></svg></div>
     <div class="wb-cursors"id="wbCursors"></div>
-    <div class="wb-hinweis"id="wbHinweis"><b>Leere Fläche</b>Doppelklick erstellt eine Haftnotiz. Die Werkzeuge findest du links, Vorlagen oben rechts.</div>
+    <div class="wb-hinweis"id="wbHinweis">${board.art==="tafel"?"<b>Leere Tafel</b>Wähle unten eine Karte oder ein Werkzeug. Mit den Seiten oben baust du deine Stunde auf.":"<b>Leere Fläche</b>Doppelklick erstellt eine Haftnotiz. Die Werkzeuge findest du links, Vorlagen oben rechts."}</div>
    </div>
    <div class="wb-tools"id="wbTools">${WB_WERKZEUGE.map(([t,tip],i)=>`${i===2||i===4?'<div class="wb-trenn"></div>':""}<button type="button"class="wb-btn${t==="select"?" on":""}"data-tool="${t}"title="${tip}">${wbIcon(t)}</button>`).join("")}<div class="wb-trenn"></div><button type="button"class="wb-btn"id="wbBild"title="Bild einfügen (I) – auch per Einfügen oder Ziehen">${wbIcon("bild")}</button><button type="button"class="wb-btn"id="wbKartenBtn"title="Karten und Werkzeuge: Text, Video, Link, QR-Code, Timer, Würfel, Lostopf …">${wbIcon("karten")}</button><input type="file"id="wbBildInput"accept="image/*"hidden><input type="file"id="wbDateiInput"hidden></div>
    <div class="wb-oben">
@@ -7656,6 +7682,7 @@ async function renderWhiteboardBoard(){
     ${btn("wbFolgen","Alle folgen mir (Lehrkraft)","folgen",' hidden')}
     ${btn("wbNamen","Namen an Notizen ein/aus","user")}
     <button type="button"class="wb-btn on"id="wbCursorAn"title="Mauszeiger der anderen ein/aus">${wbIcon("cursor")}</button>
+    ${btn("wbHg","Hintergrundfarbe","palette",' hidden')}
     ${btn("wbTpl","Vorlagen","tpl")}
     ${btn("wbExport","Als Bild speichern (PNG)","down")}
     ${btn("wbVoll","Vollbild","full")}
@@ -7663,8 +7690,18 @@ async function renderWhiteboardBoard(){
    </div>
    <div class="wb-seiten"id="wbSeiten"hidden></div>
    <div class="wb-folgenbanner"id="wbFolgenBanner"hidden><span>Du folgst der Lehrkraft</span><button type="button"id="wbFolgenStop">Stoppen</button></div>
+   <div class="wb-leiste"id="wbLeiste">
+    <button type="button"class="wb-lb"data-leiste="werkzeuge"title="Zeichen- und Formwerkzeuge ein- oder ausblenden">${wbIcon("shape",24)}<span>Werkzeuge</span></button>
+    <button type="button"class="wb-lb on"data-tool="select"title="Auswählen und verschieben (V)">${wbIcon("select",24)}<span>Auswählen</span></button>
+    <button type="button"class="wb-lb"data-tool="pen"title="Zeichnen (P)">${wbIcon("pen",24)}<span>Stift</span></button>
+    <span class="wb-lb-trenn"></span>
+    ${WB_KARTEN.map(x=>`<button type="button"class="wb-lb"data-karte="${x.k}">${wbIcon(x.ic,24)}<span>${x.n}</span></button>`).join("")}
+    <span class="wb-lb-trenn"></span>
+    ${WB_TOOLKARTEN.map(x=>`<button type="button"class="wb-lb"data-karte="${x.k}">${wbIcon(x.ic,24)}<span>${x.n}</span></button>`).join("")}
+   </div>
    <div class="wb-props"id="wbProps"hidden></div>
    <div class="wb-menu wb-kartenmenu"id="wbKartenMenu"hidden></div>
+   <div class="wb-menu wb-hgmenu"id="wbHgMenu"hidden></div>
    <div class="wb-menu"id="wbFormMenu"hidden></div>
    <div class="wb-menu"id="wbTplMenu"hidden></div>
   </div>
@@ -7724,13 +7761,28 @@ function wbWelt(cx,cy){
  return{x:(cx-r.left-wb.view.x)/wb.view.k,y:(cy-r.top-wb.view.y)/wb.view.k};
 }
 function wbBuehne(){const r=wb.stage.getBoundingClientRect();return{w:r.width||wb.stage.clientWidth||900,h:r.height||wb.stage.clientHeight||600};}
+const WB_HG=[
+ {k:"weiss",n:"Weiß",c:"#f6f9fc"},{k:"blau",n:"Blau",c:"#8fb8e8"},{k:"koralle",n:"Koralle",c:"#ef8b84"},
+ {k:"gruen",n:"Grün",c:"#8fd0a8"},{k:"gelb",n:"Gelb",c:"#f3d675"},{k:"lila",n:"Lila",c:"#b9a6e6"},{k:"dunkel",n:"Dunkel",c:"#2f3d4c"}
+];
+function wbHintergrund(){
+ const v=wb.view,bg=WB_HG.find(x=>x.k===wb.board.bg)||WB_HG[0];
+ wb.stage.style.backgroundColor=bg.c;
+ if(bg.k==="weiss"){
+  const g=(v.k<0.45?48:24)*v.k;
+  wb.stage.style.backgroundImage="radial-gradient(#c3d0dd 1.3px, transparent 1.4px)";
+  wb.stage.style.backgroundSize=`${g}px ${g}px`;
+  wb.stage.style.backgroundPosition=`${v.x}px ${v.y}px`;
+ }else{
+  const hell=bg.k==="dunkel"?"rgba(255,255,255,.07)":"rgba(255,255,255,.16)";
+  wb.stage.style.backgroundImage=`repeating-linear-gradient(135deg, ${hell} 0 2px, transparent 2px 24px)`;
+  wb.stage.style.backgroundSize="auto";wb.stage.style.backgroundPosition="0 0";
+ }
+}
 function wbAnsichtSetzen(){
  const v=wb.view;
  wb.world.style.transform=`translate(${v.x}px,${v.y}px) scale(${v.k})`;
- const g=(v.k<0.45?48:24)*v.k;
- wb.stage.style.backgroundImage="radial-gradient(#c3d0dd 1.3px, transparent 1.4px)";
- wb.stage.style.backgroundSize=`${g}px ${g}px`;
- wb.stage.style.backgroundPosition=`${v.x}px ${v.y}px`;
+ wbHintergrund();
  const z=$("wbZoomTxt");if(z)z.textContent=`${Math.round(v.k*100)} %`;
  wbAnsicht[wb.id+"#"+wb.seite]={...v};
  if(wb.fuehrt)wbFuehrungSenden();
@@ -8061,7 +8113,7 @@ function wbBearbeitenEnde(speichern){
 function wbSetzeWerkzeug(t){
  if(wb.editing)wbBearbeitenEnde(true);
  wb.tool=t;
- document.querySelectorAll("#wbTools .wb-btn").forEach(b=>b.classList.toggle("on",b.dataset.tool===t));
+ document.querySelectorAll("#wbTools .wb-btn, #wbLeiste [data-tool]").forEach(b=>b.classList.toggle("on",b.dataset.tool===t));
  wb.stage.className=`wb-stage wb-cur-${t}`;
  $("wbFormMenu").hidden=true;$("wbTplMenu").hidden=true;
  if(t!=="select"&&["note","text","shape","line","pen","frame"].indexOf(t)>-1&&wb.sel.size)wbAuswahlSetzen([]);
@@ -8650,6 +8702,24 @@ function initWhiteboardBoard(id){
   if(f){e.preventDefault();wbBildDatei(f);}
  });
  on(stage,"click",wbKlick);
+ on($("wbLeiste"),"click",e=>{
+  const b=e.target.closest("button");if(!b||wb.ro)return;
+  if(b.dataset.tool)wbSetzeWerkzeug(b.dataset.tool);
+  else if(b.dataset.karte)wbKarteEinfuegen(b.dataset.karte);
+  else if(b.dataset.leiste==="werkzeuge"){wb.wrap.classList.toggle("wb-tools-offen");b.classList.toggle("on",wb.wrap.classList.contains("wb-tools-offen"));}
+ });
+ on($("wbHg"),"click",()=>{
+  const m=$("wbHgMenu");if(!m.hidden){m.hidden=true;return;}
+  m.innerHTML=`<div class="wb-menu-titel">Hintergrund</div><div class="wb-hg-reihe">${WB_HG.map(x=>`<button type="button"class="wb-hg${x.k===(wb.board.bg||"weiss")?" on":""}"data-hg="${x.k}"title="${x.n}"style="background:${x.c}"></button>`).join("")}</div>`;
+  m.hidden=false;
+  const r=$("wbHg").getBoundingClientRect(),w=wb.wrap.getBoundingClientRect();
+  m.style.right=Math.max(8,w.right-r.right)+"px";m.style.left="auto";m.style.top=(r.bottom-w.top+8)+"px";
+ });
+ on($("wbHgMenu"),"click",async e=>{
+  const b=e.target.closest("[data-hg]");if(!b)return;
+  $("wbHgMenu").hidden=true;
+  try{await updateDoc(doc(db,"whiteboards",wb.id),{bg:b.dataset.hg});}catch(err){wbFehler(err);}
+ });
  on($("wbKartenBtn"),"click",()=>{const m=$("wbKartenMenu");if(m.hidden)wbKartenMenuAuf();else m.hidden=true;});
  on($("wbKartenMenu"),"click",e=>{const b=e.target.closest("[data-karte]");if(b)wbKarteEinfuegen(b.dataset.karte);});
  on($("wbDateiInput"),"change",e=>{const f=e.target.files&&e.target.files[0];if(f)wbDateiHochladen(f);e.target.value="";});
@@ -8744,6 +8814,7 @@ WB_ICONS.lostopf='<path d="M6 8h12l-1 11H7zM5 8h14M9 5h6"/>';
 WB_ICONS.ampel='<rect x="8" y="3" width="8" height="18" rx="3"/><circle cx="12" cy="8" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="16" r="1.4"/>';
 WB_ICONS.folgen='<circle cx="12" cy="12" r="2.5"/><path d="M6.5 12a5.5 5.5 0 0111 0M3 12a9 9 0 0118 0"/>';
 WB_ICONS.seite='<path d="M6 3h9l4 4v14H6z"/>';
+WB_ICONS.palette='<path d="M12 3a9 9 0 100 18c1.4 0 2-.9 2-1.8 0-1.2-1-1.6-1-2.7 0-.9.7-1.5 1.6-1.5H17a4 4 0 004-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7.5" r="1"/><circle cx="14.5" cy="7.5" r="1"/>';
 
 const WB_KARTEN=[
  {k:"card",n:"Text",ic:"text",w:300,h:240},{k:"image",n:"Bild",ic:"bild"},{k:"video",n:"Video",ic:"video",w:380,h:300},
@@ -8831,6 +8902,9 @@ function wbBoardGeaendert(){
  const b=wb.board;
  wb.ro=b.schreibschutz===true&&!isTeacher();
  wb.wrap.classList.toggle("wb-ro",wb.ro);
+ wb.wrap.classList.toggle("wb-tafelmodus",b.art==="tafel");
+ const hgb=$("wbHg");if(hgb)hgb.hidden=!wbBoardVerwalter();
+ wbHintergrund();
  wb.fuehrt=!!(b.folgen&&b.fuehrer===currentUser.uid);
  const sb=$("wbSchutz");if(sb){sb.hidden=!wbBoardVerwalter();sb.textContent=b.schreibschutz?"Mitarbeit: nur Lehrkräfte":"Mitarbeit: alle";}
  const fb=$("wbFolgen");if(fb){fb.hidden=!isTeacher();fb.classList.toggle("on",!!b.folgen&&wb.fuehrt);}
@@ -16363,7 +16437,7 @@ async function render(){
  ressourcen:renderRessourcenRoute,lernpfad:renderLernpfadRoute,forum:renderForum,"forum-board":renderForumBoard,"forum-nachrichten":renderForumMessages,
  pinnwand:renderPinnwandUebersicht,"pinnwand-board":renderPinnwandBoard,
  kollaboration:renderKollaborationsTools,
- whiteboard:renderWhiteboardUebersicht,"whiteboard-board":renderWhiteboardBoard,
+ whiteboard:renderWhiteboardUebersicht,tafel:renderTafelUebersicht,"whiteboard-board":renderWhiteboardBoard,
  wortwolke:renderWortwolkeUebersicht,"wortwolke-board":renderWortwolkeBoard,
  kanban:renderKanbanUebersicht,"kanban-board":renderKanbanBoard,
  terminfindung:renderTerminfindungUebersicht,"terminfindung-board":renderTerminfindungBoard,
@@ -16386,7 +16460,7 @@ async function render(){
  };
  const fn=pages[p]||renderStart;
  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",
- a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || (a.dataset.page==="lernwerkstatt" && ["unterricht-pp","faecher","fach","whiteboard","whiteboard-board","didaktik"].includes(p))));
+ a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || (a.dataset.page==="lernwerkstatt" && ["unterricht-pp","faecher","fach","whiteboard","whiteboard-board","didaktik","tafel"].includes(p))));
  const content=$("content");
  if(!content)return;
  // Never leave a blank page while a module is loading.
