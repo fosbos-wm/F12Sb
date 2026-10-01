@@ -730,15 +730,22 @@ service cloud.firestore {
     }
 
     // ---------------------------------------------------------
-    // TEAM-WHITEBOARD (unendliche Arbeitsfläche, live im Team)
-    // Alle freigeschalteten Mitglieder sehen die Boards, legen Elemente an
-    // und bearbeiten/verschieben sie gemeinsam. Löschen dürfen nur die
-    // Urheber:in des Elements und Lehrkräfte.
+    // TEAM-WHITEBOARD UND TAFEL (unendliche Arbeitsfläche, live im Team)
+    // Art "team": alle freigeschalteten Mitglieder bearbeiten gemeinsam.
+    // Art "tafel": Lehrkräfte bearbeiten, Schüler:innen sehen zu, solange
+    // "schreibschutz" gesetzt ist. Löschen dürfen nur die Urheber:in des
+    // Elements und Lehrkräfte.
     // ---------------------------------------------------------
+    function wbOffen(boardId) {
+      return isTeacher()
+        || get(/databases/$(database)/documents/whiteboards/$(boardId)).data.get('schreibschutz', false) == false;
+    }
+
     match /whiteboards/{id} {
       allow read: if isApproved();
       allow create: if isApproved()
-        && request.resource.data.createdBy == request.auth.uid;
+        && request.resource.data.createdBy == request.auth.uid
+        && (request.resource.data.get('art', 'team') != 'tafel' || isTeacher());
       allow update: if isTeacher()
         || (isApproved() && resource.data.createdBy == request.auth.uid);
       allow delete: if isTeacher();
@@ -747,12 +754,15 @@ service cloud.firestore {
     match /whiteboardItems/{id} {
       allow read: if isApproved();
       allow create: if isApproved()
-        && request.resource.data.authorUid == request.auth.uid;
+        && request.resource.data.authorUid == request.auth.uid
+        && wbOffen(request.resource.data.boardId);
       allow update: if isApproved()
         && request.resource.data.boardId == resource.data.boardId
-        && request.resource.data.authorUid == resource.data.authorUid;
+        && request.resource.data.authorUid == resource.data.authorUid
+        && wbOffen(resource.data.boardId);
       allow delete: if isTeacher()
-        || (isApproved() && resource.data.authorUid == request.auth.uid);
+        || (isApproved() && resource.data.authorUid == request.auth.uid
+            && wbOffen(resource.data.boardId));
     }
 
     // Bilder im Whiteboard: eigenes Dokument je Bild (verkleinertes JPEG als Text),
@@ -762,7 +772,8 @@ service cloud.firestore {
       allow create: if isApproved()
         && request.resource.data.authorUid == request.auth.uid
         && request.resource.data.data is string
-        && request.resource.data.data.size() < 900000;
+        && request.resource.data.data.size() < 900000
+        && wbOffen(request.resource.data.boardId);
       allow delete: if isTeacher()
         || (isApproved() && resource.data.authorUid == request.auth.uid);
     }
@@ -774,6 +785,20 @@ service cloud.firestore {
         && request.resource.data.uid == request.auth.uid
         && id == request.resource.data.boardId + '_' + request.auth.uid;
       allow delete: if isApproved() && resource.data.uid == request.auth.uid;
+    }
+
+    // ---------------------------------------------------------
+    // UNTERRICHT: Tafel je Stunde und Didaktik-Hinweise (Deeper Learning, UDL)
+    // Lesen dürfen alle freigeschalteten Mitglieder, ändern nur Lehrkräfte.
+    // ---------------------------------------------------------
+    match /lehrplanTafeln/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+
+    match /didaktikHinweise/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
     }
 
     // ---------------------------------------------------------

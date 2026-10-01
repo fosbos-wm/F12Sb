@@ -3501,6 +3501,7 @@ async function renderStart(){
  try{[news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("news"),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
  const miniKalender=await miniKalenderHTML();
  const coBanner=await checkoutStartBannerHTML();
+ const naechsteStunde=await pp12NaechsteStundeHtml().catch(()=>"");
  const upcomingDate=nextCalendar?.start||nextCalendar?.date||nextCalendar?.startDate;
  const upcomingDateText=upcomingDate?.seconds?new Date(upcomingDate.seconds*1000).toLocaleDateString("de-DE"):String(upcomingDate||"").slice(0,10);
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
@@ -3509,6 +3510,7 @@ async function renderStart(){
  return`${coBanner}<section class="hero"><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
 </div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button></div></section>
+ ${pp12CssBausteine()}${naechsteStunde}
  <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
  <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
 class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isAdmin()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
@@ -3896,7 +3898,248 @@ function pp12BarTag(e){
  return e.lb&&PP12_LB[e.lb]?`${t} · ${PP12_LB[e.lb].kurz}`:t;
 }
 
+// ============================================================
+// DIDAKTIK-HINWEISE (Deeper Learning + UDL) UND TAFEL-VERKNÜPFUNG IM ZEITSTRAHL
+// Grundlage: Deeper-Learning-Phasen nach Sliwka & Klopsch (2022), UDL-Leitlinien 3.0 (CAST 2024).
+// Alle Texte sind eigene, verkürzte Formulierungen. Hinweise sind freiwillig und ausblendbar.
+// Sammlungen: lehrplanTafeln (Stunde → Tafel), didaktikHinweise (Korrekturen der Vorbelegung).
+// ============================================================
+const PP12_PHASEN={
+ 1:{kurz:"I",name:"Instruktion und Aneignung",schueler:"Aneignen",
+  was:"Wissen wird aufgebaut: durch Input, durch die Arbeit mit Material oder an einem Lernort. Am Ende wird das Wissensfundament nachgewiesen.",
+  rolle:"Wegbereiter:in für den Aufbau des Wissens.",ziel:"Schlüsselkonzepte tief verstehen und ein stabiles Wissensfundament aufbauen.",
+  fuerSchueler:"Du baust Wissen auf: lesen, ausprobieren, nachfragen.",
+  tools:[["Alternativer Leistungsnachweis","leistungsnachweis"],["Zuordnungsübungen","zuordnung"]]},
+ 2:{kurz:"II",name:"Ko-Konstruktion und Ko-Kreation",schueler:"Gemeinsam erarbeiten",
+  was:"Die Lernenden arbeiten selbstorganisiert, meist im Team, an komplexen Aufgaben. Sie wählen eigene Wege und bekommen dialogisches Feedback.",
+  rolle:"Flexible Lernunterstützer:in mit adaptiver Expertise.",ziel:"Überfachliche Kompetenzen und tiefes Fachwissen entwickeln, Selbststeuerung üben.",
+  fuerSchueler:"Ihr arbeitet im Team an einer Aufgabe und entscheidet selbst, wie ihr sie löst.",
+  tools:[["Team-Whiteboard","whiteboard"],["Pinnwand","pinnwand"]]},
+ 3:{kurz:"III",name:"Authentische Leistung",schueler:"Zeigen",
+  was:"Ergebnisse werden (schul-)öffentlich gezeigt. Danach reflektieren alle über Arbeitsprozess, Ergebnis, Zusammenarbeit und entdeckte Stärken.",
+  rolle:"Einschätzer:in und Feedbackgeber:in.",ziel:"Ergebnisse zeigen, Zuwachs sichtbar machen und über das eigene Lernen nachdenken.",
+  fuerSchueler:"Du zeigst, was du kannst, und denkst über dein Lernen nach.",
+  tools:[["Fachaufsatz-Training","fachaufsatz"],["Lernimpulse","impulse"]]}
+};
+const PP12_UDL={
+ W:{name:"Warum und Wollen",col:"#2e7d4f",leit:"Engagement (UDL 7–9)",frage:"Können Lernende wählen, und sehen sie, warum das für sie zählt?",bsp:"Fallvignette aus Kita oder Wohngruppe; Wahl zwischen Check-out, Whiteboard und Fachaufsatz."},
+ D:{name:"Darstellung",col:"#6f4fa0",leit:"Darstellung von Informationen (UDL 1–3)",frage:"Gibt es den Inhalt in mehr als einer Form, zum Beispiel Text, Skizze, Beispiel oder Audio?",bsp:"Text plus Skizze des Modells und eine Alltagsszene zum selben Begriff."},
+ A:{name:"Ausdruck",col:"#1d6fa5",leit:"Handlung und Ausdruck (UDL 4–6)",frage:"Dürfen die Lernenden ihr Können auf mehreren Wegen zeigen?",bsp:"Skizze, Stichwortliste oder Sprachnachricht; Ergebnis am Team-Whiteboard."}
+};
+let PP12_CACHE={tafeln:{},hinweise:{},geladen:0};
+async function pp12DatenLaden(erzwingen){
+ if(!erzwingen&&Date.now()-PP12_CACHE.geladen<60000)return;
+ try{
+  const [a,b]=await Promise.all([getDocs(collection(db,"lehrplanTafeln")),getDocs(collection(db,"didaktikHinweise"))]);
+  PP12_CACHE.tafeln=Object.fromEntries(a.docs.map(d=>[d.id,d.data()]));
+  PP12_CACHE.hinweise=Object.fromEntries(b.docs.map(d=>[d.id,d.data()]));
+  PP12_CACHE.geladen=Date.now();
+ }catch(e){console.error("Unterrichtsdaten laden:",e);}
+}
+function pp12HinweiseAn(){try{return localStorage.getItem("pp12Hinweise")!=="aus";}catch(e){return true;}}
+async function pp12HinweiseSchalter(){
+ try{localStorage.setItem("pp12Hinweise",pp12HinweiseAn()?"aus":"an");}catch(e){}
+ await render();
+}
+// Vorbelegung je Stunde; Korrekturen der Lehrkraft (didaktikHinweise) haben Vorrang.
+function pp12Didaktik(e){
+ if(!e||e.typ==="pruefung")return null;
+ let ph=1,u="";
+ if(e.typ==="stoff"){ph=1;u="D";}
+ else if(e.typ==="leistung"){ph=1;u="";}
+ else if(e.typ==="training"){ph=2;u="A";}
+ else if(/Rückgabe/i.test(e.t)){ph=3;u="A";}
+ else if(/Fall|Anwendung|Rollenspiel|Vernetzung|Theorienvergleich|Übung/i.test(e.t)&&!/Wiederholung/i.test(e.t)){ph=2;u="WA";}
+ const o=PP12_CACHE.hinweise[e.d];
+ if(o){if(o.ph>=1&&o.ph<=3)ph=o.ph;if(typeof o.u==="string")u=o.u;}
+ return{ph,u,eigen:!!o};
+}
+function pp12DidHtml(e){
+ const d=pp12Didaktik(e);if(!d||!pp12HinweiseAn())return"";
+ const tip="Didaktik-Hinweis öffnen";
+ if(isTeacher())return`<button type="button"class="pp12-did"onclick="pp12Detail('${e.d}')"title="${tip}"><span class="pp12-phase pp12-ph${d.ph}">${PP12_PHASEN[d.ph].kurz}</span><span class="pp12-dots">${["W","D","A"].map(k=>`<i class="pp12-dot${d.u.includes(k)?" an":""}"style="--c:${PP12_UDL[k].col}"title="${PP12_UDL[k].name}${d.u.includes(k)?" – vorgesehen":" – hier möglich"}">${k}</i>`).join("")}</span></button>`;
+ return`<button type="button"class="pp12-did"onclick="pp12Detail('${e.d}')"title="${tip}"><span class="pp12-phase pp12-ph${d.ph} pp12-wort">${PP12_PHASEN[d.ph].schueler}</span></button>`;
+}
+function pp12TafelHtml(e){
+ if(e.typ==="pruefung")return"";
+ const t=PP12_CACHE.tafeln[e.d];
+ if(!t&&!isTeacher())return"";
+ return`<button type="button"class="pp12-tafel${t?" da":""}"onclick="pp12Tafel('${e.d}')"title="${t?"Tafel dieser Stunde öffnen":"Tafel für diese Stunde anlegen"}">${wbIcon("frame",14)}<span>Tafel${t?"":" anlegen"}</span></button>`;
+}
+let pp12Beschaeftigt=false;
+async function pp12Tafel(datum){
+ const t=PP12_CACHE.tafeln[datum];
+ if(t&&t.boardId){openWhiteboard(t.boardId);return;}
+ if(!isTeacher()||pp12Beschaeftigt)return;
+ pp12Beschaeftigt=true;
+ try{
+  const e=PP12_PLAN.find(x=>x.d===datum);
+  const titel=`${datum.slice(8,10)}.${datum.slice(5,7)}. ${e?e.t:"Unterricht"}`.slice(0,120);
+  const r=await addDoc(collection(db,"whiteboards"),{title:titel,description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,
+   createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+  await setDoc(doc(db,"lehrplanTafeln",datum),{boardId:r.id,titel,createdBy:currentUser.uid,createdAt:serverTimestamp()});
+  PP12_CACHE.tafeln[datum]={boardId:r.id,titel};
+  openWhiteboard(r.id);
+ }catch(err){
+  console.error("Stunden-Tafel:",err);
+  toast(err?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln prüfen.":"Die Tafel konnte nicht angelegt werden.");
+ }finally{pp12Beschaeftigt=false;}
+}
+function pp12Schritte(ph){
+ return`<div class="pp12-schritte">${[1,2,3].map(n=>`<div class="pp12-schritt${n===ph?" an":""}"><span>${n}</span><small>${PP12_PHASEN[n].schueler}</small></div>`).join("")}</div>`;
+}
+function pp12Detail(datum){
+ const e=PP12_PLAN.find(x=>x.d===datum);const d=pp12Didaktik(e);if(!e||!d)return;
+ const P=PP12_PHASEN[d.ph];
+ const wann=`${datum.slice(8,10)}.${datum.slice(5,7)}.`;
+ if(!isTeacher()){
+  modal(`<button class="modal-close"onclick="closeModal()">×</button>
+   <div class="kicker">HEUTE IM UNTERRICHT · ${wann}</div><h2>${esc(e.t)}</h2>
+   ${pp12Schritte(d.ph)}
+   <p style="font-size:15px;line-height:1.5"><strong>${esc(P.schueler)}:</strong> ${esc(P.fuerSchueler)}</p>
+   <div class="form-actions"><button class="primary"onclick="closeModal()">Alles klar</button></div>`);
+  return;
+ }
+ const udlZeilen=Object.entries(PP12_UDL).map(([k,v])=>`<div class="pp12-udlzeile"style="--c:${v.col}"><span class="pp12-udlpunkt">${k}</span><div><strong>${esc(v.name)}</strong> <small>${esc(v.leit)}</small><br>${esc(v.frage)}<br><small>Beispiel: ${esc(v.bsp)}</small></div></div>`).join("");
+ const tools=P.tools.map(([n,r])=>`<a class="secondary"href="#${r}"onclick="closeModal()"style="display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px">${esc(n)}</a>`).join("");
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">DIDAKTIK-HINWEIS · ${wann}</div><h2 style="margin-bottom:4px">${esc(e.t)}</h2>
+  <p style="margin:0 0 12px;font-size:12px;color:var(--muted)">${d.eigen?"Von dir angepasst.":"Vorschlag – du kannst ihn ändern."} Alles ist freiwillig.</p>
+  <div class="pp12-modalgrid">
+   <section><h3>Phase wählen</h3>
+    <div class="pp12-phasenwahl">${[1,2,3].map(n=>`<button type="button"class="pp12-pw${n===d.ph?" an":""}"data-ph="${n}"><span class="pp12-phase pp12-ph${n}">${PP12_PHASEN[n].kurz}</span>${esc(PP12_PHASEN[n].name)}</button>`).join("")}</div>
+    <p id="pp12PhaseText"style="font-size:13px;line-height:1.5"></p>
+    <div id="pp12Tools"style="display:flex;gap:8px;flex-wrap:wrap"></div></section>
+   <section><h3>UDL-Optionen in dieser Stunde</h3>
+    <div class="pp12-udlwahl">${Object.entries(PP12_UDL).map(([k,v])=>`<button type="button"class="pp12-uw${d.u.includes(k)?" an":""}"data-u="${k}"style="--c:${v.col}"><i>${k}</i>${esc(v.name)}</button>`).join("")}</div>
+    ${udlZeilen}</section>
+  </div>
+  <div class="form-actions"style="margin-top:12px">${d.eigen?`<button class="secondary"type="button"id="pp12Reset">Auf Vorschlag zurücksetzen</button>`:""}<button class="secondary"type="button"onclick="closeModal()">Abbrechen</button><button class="primary"type="button"id="pp12Speichern">Speichern</button></div>`);
+ let ph=d.ph,u=new Set(d.u.split("").filter(Boolean));
+ const zeige=()=>{
+  const p=PP12_PHASEN[ph];
+  $("pp12PhaseText").innerHTML=`<strong>Was passiert:</strong> ${esc(p.was)}<br><strong>Deine Rolle:</strong> ${esc(p.rolle)}<br><strong>Ziel der Schüler:innen:</strong> ${esc(p.ziel)}`;
+  $("pp12Tools").innerHTML=p.tools.map(([n,r])=>`<a href="#${r}"onclick="closeModal()"style="display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px">${esc(n)} →</a>`).join("");
+  document.querySelectorAll(".pp12-pw").forEach(b=>b.classList.toggle("an",Number(b.dataset.ph)===ph));
+  document.querySelectorAll(".pp12-uw").forEach(b=>b.classList.toggle("an",u.has(b.dataset.u)));
+ };
+ zeige();
+ document.querySelectorAll(".pp12-pw").forEach(b=>b.addEventListener("click",()=>{ph=Number(b.dataset.ph);zeige();}));
+ document.querySelectorAll(".pp12-uw").forEach(b=>b.addEventListener("click",()=>{const k=b.dataset.u;if(u.has(k))u.delete(k);else u.add(k);zeige();}));
+ $("pp12Speichern").addEventListener("click",async()=>{
+  try{
+   await setDoc(doc(db,"didaktikHinweise",datum),{ph,u:["W","D","A"].filter(k=>u.has(k)).join(""),by:currentUser.uid,updatedAt:serverTimestamp()});
+   closeModal();await pp12DatenLaden(true);await render();toast("Gespeichert.");
+  }catch(err){console.error("Didaktik speichern:",err);toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+ });
+ const rs=$("pp12Reset");if(rs)rs.addEventListener("click",async()=>{
+  try{await deleteDoc(doc(db,"didaktikHinweise",datum));closeModal();await pp12DatenLaden(true);await render();toast("Zurückgesetzt.");}catch(err){toast("Konnte nicht zurückgesetzt werden.");}
+ });
+}
+// Jahresbogen: Stundenanteile je Lernbereich und Phase (aus den Balken berechnet)
+function pp12Jahresbogen(){
+ const sum={1:[0,0,0],2:[0,0,0],3:[0,0,0],4:[0,0,0]};
+ PP12_PLAN.forEach(e=>{if(!e.lb||!PP12_LB[e.lb])return;const d=pp12Didaktik(e);if(d)sum[e.lb][d.ph-1]+=e.h;});
+ const zeilen=[1,2,3,4].map(lb=>{
+  const [a,b,c]=sum[lb],t=a+b+c||1;
+  const seg=(h,cls)=>h?`<div class="pp12-jb ${cls}"style="flex:${h}"title="${h} Std.">${cls==="p1"?"I":cls==="p2"?"II":"III"}</div>`:"";
+  const hinweis=c===0?"Phase III fehlt noch":(b===0?"Phase II fehlt noch":"");
+  return`<div class="pp12-jbzeile"><span style="color:${PP12_LB[lb].farbe}">${esc(PP12_LB[lb].kurz+" · "+PP12_LB[lb].titel)}</span><div class="pp12-jbbalken">${seg(a,"p1")}${seg(b,"p2")}${seg(c,"p3")}</div>${hinweis?`<em class="pp12-jbhinweis">${hinweis}</em>`:"<em></em>"}</div>`;
+ }).join("");
+ return`<section class="pp12-jahresbogen"><h2>Jahresbogen: Wo steht welche Tiefe?</h2><p>Stunden je Lernbereich nach Phase. Ein Hinweis heißt nur: Hier wäre eine Phase noch möglich.</p>${zeilen}</section>`;
+}
+function pp12DidLegende(){
+ if(!pp12HinweiseAn())return"";
+ const phasen=[1,2,3].map(n=>`<span class="pp12-lg"><span class="pp12-phase pp12-ph${n}">${PP12_PHASEN[n].kurz}</span>${isTeacher()?esc(PP12_PHASEN[n].name):esc(PP12_PHASEN[n].schueler)}</span>`).join("");
+ const udl=isTeacher()?Object.entries(PP12_UDL).map(([k,v])=>`<span class="pp12-lg"><i class="pp12-dot an"style="--c:${v.col}">${k}</i>${esc(v.name)}</span>`).join("")+`<span class="pp12-lg pp12-lgklein">gefüllt = vorgesehen · leer = hier möglich</span>`:"";
+ return`<div class="pp12-legende pp12-didlegende"><b>Didaktik</b>${phasen}${udl}</div>`;
+}
+// „Nächste Stunde“ für die Startseite
+async function pp12NaechsteStundeHtml(){
+ await pp12DatenLaden();
+ const heute=new Date().toISOString().slice(0,10);
+ const e=PP12_PLAN.find(x=>x.d>=heute&&x.typ!=="pruefung");
+ if(!e)return"";
+ const d=pp12Didaktik(e),tag=({1:"Mo",3:"Mi",5:"Fr"})[new Date(e.d+"T12:00:00Z").getUTCDay()]||"";
+ const t=PP12_CACHE.tafeln[e.d];
+ return`<section class="card"style="margin:0 0 18px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+  <div style="min-width:240px;flex:1"><div class="kicker">${e.d===heute?"HEUTE":"NÄCHSTE STUNDE"} · ${tag} ${e.d.slice(8,10)}.${e.d.slice(5,7)}.</div><h2 style="margin:4px 0 0;font-size:20px">${esc(e.t)}</h2></div>
+  ${d&&pp12HinweiseAn()?pp12Schritte(d.ph):""}
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="primary"href="#unterricht-pp"style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;font-weight:700">Zum Stoffplan</a>${t?`<button class="secondary"type="button"onclick="pp12Tafel('${e.d}')">Tafel öffnen</button>`:""}</div></section>`;
+}
+
+// ---- Didaktik-Kompass (Orientierung für Lehrkräfte) ----
+const DK_SAETZE=[
+ "Jeder Lernbereich durchläuft die drei Phasen: Aneignen, Gemeinsam erarbeiten, Zeigen.",
+ "Pro Einheit gibt es mindestens eine Option aus jeder UDL-Spalte: Warum und Wollen, Darstellung, Ausdruck.",
+ "Am Ende reflektieren die Schüler:innen ihren Lernweg."
+];
+const DK_UDL=[
+ ["Zugang",[["7","W","Interesse und Identität","Können Lernende wählen und sehen, warum das für sie zählt?","Wahl zwischen Check-out, Whiteboard und Fachaufsatz."],["1","D","Wahrnehmung","Lässt sich die Darstellung anpassen oder anders zeigen?","Zeitstrahl und Whiteboard zeigen Inhalte auch visuell."],["4","A","Zugang zu Material und Umgebung","Ist alles gut erreichbar und barrierearm nutzbar?","Die App läuft im Browser auf Handy, Tablet und PC."]]],
+ ["Unterstützung",[["8","W","Anstrengung und Ausdauer","Gibt es klare Ziele, passende Herausforderung und Rückmeldung?","Begründungen nach jedem Check-out, Teamarbeit am Whiteboard."],["2","D","Sprache und Symbole","Sind Fachbegriffe erklärt und mehrfach dargestellt?","Skizze, Beispiel und Alltagsszene zum selben Begriff."],["5","A","Ausdruck und Kommunikation","Dürfen Lernende ihr Können auf mehreren Wegen zeigen?","Text, Skizze, Bild, Pfeile und Zeichnung am Whiteboard."]]],
+ ["Selbststeuerung",[["9","W","Emotionale Kompetenz","Sprechen wir über Erwartungen, Motivation und Gefühle?","Resilienz & Respressi mit Stressregler und Übungen."],["3","D","Wissensaufbau","Wird Neues mit Vorwissen verknüpft und auf Neues übertragen?","Fallvignetten zum Übertragen, Stoffplan zeigt Zusammenhänge."],["6","A","Strategien und Selbststeuerung","Können Lernende Ziele setzen und ihren Lernprozess steuern?","Wochenplanung und Noten im Campus-Kompass."]]]
+];
+async function renderDidaktikKompass(){
+ const phasen=[1,2,3].map(n=>{const p=PP12_PHASEN[n];return`<article class="dk-karte"><span class="pp12-phase pp12-ph${n}">${p.kurz}</span><h3>${esc(p.name)}</h3><p>${esc(p.was)}</p><p class="dk-rolle"><b>Deine Rolle:</b> ${esc(p.rolle)}</p><p><b>Ziel der Schüler:innen:</b> ${esc(p.ziel)}</p><p class="dk-app"><b>Das hilft in der App:</b> ${p.tools.map(t=>esc(t[0])).join(", ")}.</p></article>`;}).join("");
+ const udl=DK_UDL.map(([zeile,felder])=>`<div class="dk-zeile"><div class="dk-label">${zeile}</div>${felder.map(([nr,k,t,f,b])=>`<div class="dk-feld"style="--c:${PP12_UDL[k].col}"><div class="dk-fkopf"><span>${nr}</span><b>${esc(t)}</b></div><p>${esc(f)}</p><p class="dk-bsp"><b>In der F12Sb:</b> ${esc(b)}</p></div>`).join("")}</div>`).join("");
+ const kopfzeile=`<div class="dk-zeile dk-kopf"><div></div>${Object.values(PP12_UDL).map(v=>`<div class="dk-spalte"style="background:${v.col}"><b>${esc(v.name)}</b><small>${esc(v.leit)}</small></div>`).join("")}</div>`;
+ return`<button class="secondary"onclick="go('unterricht-pp')">← Unterricht</button>
+ ${pageHead("UNTERRICHT · ORIENTIERUNG FÜR LEHRKRÄFTE","Didaktik-Kompass","Zwei Modelle, ein Ziel: Alle Schüler:innen bekommen Zugang, Wahl und Tiefe im Lernen. Alles ist freiwillig und kann angepasst werden.",`<button class="secondary"onclick="pp12KompassDrucken()">Als A4 drucken</button>`)}
+ <style>
+  .dk-saetze{display:grid;gap:10px;margin:0 0 6px}.dk-satz{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.45}
+  .dk-satz span{width:34px;height:34px;border-radius:50%;background:#075a9d;color:#fff;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+  .dk-hinweis{display:inline-block;font-size:11px;font-weight:700;color:#7a4b00;background:#fff3d6;border:1px solid #f0d28a;border-radius:10px;padding:3px 10px;margin-left:10px;vertical-align:middle}
+  .dk-h2{margin:28px 0 6px;font-size:21px}.dk-sub{margin:0 0 14px;color:var(--muted);max-width:820px;line-height:1.5;font-size:13px}
+  .dk-karten{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .dk-karte{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}.dk-karte h3{margin:0;font-size:16px}.dk-karte p{margin:0;font-size:13px;line-height:1.5}
+  .dk-rolle{background:#eef4fa;border-radius:10px;padding:8px 10px}.dk-app{color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:auto!important}
+  .dk-zeile{display:grid;grid-template-columns:110px repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px}.dk-label{display:flex;align-items:center;font-weight:700;font-size:13px}
+  .dk-spalte{color:#fff;border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}.dk-spalte small{opacity:.95}
+  .dk-feld{border-radius:12px;padding:12px 14px;background:color-mix(in srgb,var(--c) 11%,#fff);border:1px solid color-mix(in srgb,var(--c) 38%,#fff);display:flex;flex-direction:column;gap:6px}
+  .dk-feld p{margin:0;font-size:13px;line-height:1.45}.dk-bsp{color:var(--muted);font-size:12px!important}
+  .dk-fkopf{display:flex;align-items:center;gap:8px}.dk-fkopf span{width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .dk-quellen{margin:22px 0 0;font-size:12px;color:var(--muted);line-height:1.55;max-width:900px}
+  @media(max-width:900px){.dk-zeile{grid-template-columns:1fr}.dk-kopf{display:none}.dk-label{margin-top:8px}}
+ </style>
+ ${pp12CssBausteine()}
+ <h2 class="dk-h2"style="margin-top:6px">Das ist uns wichtig<span class="dk-hinweis">Vorschlag – das Kollegium legt fest, was gilt</span></h2>
+ <div class="dk-saetze">${DK_SAETZE.map((t,i)=>`<div class="dk-satz"><span>${i+1}</span><div>${esc(t)}</div></div>`).join("")}</div>
+ <h2 class="dk-h2">Deeper Learning: drei Phasen</h2>
+ <p class="dk-sub">Die Instruktion bleibt wichtig. Sie ist Phase I und kein Gegensatz zum vertieften Lernen. Es geht darum, dass nach dem Wissensaufbau auch Anwenden, Gestalten und Reflektieren vorkommen. Davor steht die gemeinsame Planung im Team (Ko-Design).</p>
+ <div class="dk-karten">${phasen}</div>
+ <h2 class="dk-h2">UDL: neun Leitlinien als Optionen-Karte</h2>
+ <p class="dk-sub">Die Fragen helfen bei der Planung. Eine Option aus jeder Spalte genügt für den Anfang.</p>
+ ${kopfzeile}${udl}
+ <p class="dk-quellen">Quellen: Sliwka, A. und Klopsch, B. (2022): Deeper Learning in der Schule. CAST (2024): Universal Design for Learning Guidelines 3.0, deutsche Fassung. Die Texte auf dieser Seite sind eigene, verkürzte Formulierungen.</p>
+ ${footer()}`;
+}
+function pp12KompassDrucken(){
+ const phasen=[1,2,3].map(n=>{const p=PP12_PHASEN[n];return`<div class="item"><b>Phase ${p.kurz}: ${escPDF(p.name)}</b><div>${escPDF(p.was)}</div><div><b>Deine Rolle:</b> ${escPDF(p.rolle)}</div><div><b>Ziel der Schüler:innen:</b> ${escPDF(p.ziel)}</div></div>`;}).join("");
+ const udl=DK_UDL.map(([z,f])=>`<tr><th>${escPDF(z)}</th>${f.map(x=>`<td><b>${escPDF(x[0])} · ${escPDF(x[2])}</b><br>${escPDF(x[3])}<br><small>${escPDF(x[4])}</small></td>`).join("")}</tr>`).join("");
+ openToolPrintWindow("Didaktik-Kompass",
+  `<h2>Das ist uns wichtig (Vorschlag)</h2>${DK_SAETZE.map((t,i)=>`<div class="item">${i+1}. ${escPDF(t)}</div>`).join("")}
+   <h2>Deeper Learning: drei Phasen</h2>${phasen}
+   <h2>UDL: Optionen-Karte</h2><table><tr><th></th><th>Warum und Wollen</th><th>Darstellung</th><th>Ausdruck</th></tr>${udl}</table>
+   <p class="meta">Quellen: Sliwka und Klopsch (2022); CAST (2024), UDL Guidelines 3.0. Eigene verkürzte Formulierungen.</p>`,
+  "F12Sb · Unterricht Pädagogik und Psychologie");
+}
+function pp12CssBausteine(){
+ return`<style>
+  .pp12-phase{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:22px;padding:0 8px;border-radius:11px;font-size:11px;font-weight:700;border:1.5px solid #17384f;white-space:nowrap}
+  .pp12-ph1{background:#fff;color:#17384f}.pp12-ph2{background:#c3d4e2;color:#17384f}.pp12-ph3{background:#17384f;color:#fff}
+  .pp12-wort{font-size:11px}
+  .pp12-dots{display:inline-flex;gap:4px}
+  .pp12-dot{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;box-sizing:border-box;font-style:normal;font-size:10px;font-weight:700;background:#fff;border:1.5px dashed var(--c);color:var(--c)}
+  .pp12-dot.an{background:var(--c);border:1.5px solid var(--c);color:#fff}
+  .pp12-schritte{display:flex;gap:8px}.pp12-schritt{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:84px;font-size:11px;color:#51657a;text-align:center}
+  .pp12-schritt span{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:2px solid #b9c8d6;background:#fff;font-weight:700}
+  .pp12-schritt.an span{background:#075a9d;border-color:#075a9d;color:#fff}.pp12-schritt.an small{color:#17384f;font-weight:700}
+ </style>`;
+}
+Object.assign(window,{pp12Detail,pp12Tafel,pp12HinweiseSchalter,pp12KompassDrucken});
+
 async function renderUnterrichtPP(){
+ await pp12DatenLaden();
  const heute=new Date().toISOString().slice(0,10);
  const tageName={0:"Mo",2:"Mi",4:"Fr"};
  const byDate={};PP12_PLAN.forEach(e=>byDate[e.d]=e);
@@ -3927,6 +4170,7 @@ async function renderUnterrichtPP(){
      <div class="pp12-kopf"><span>${tageName[s.off]} ${pp12Datum(e.d)}</span><span>${e.h} Std.</span></div>
      <div class="pp12-titel">${esc(e.t)}</div>
      <div class="pp12-tag">${esc(pp12BarTag(e))}</div>
+     <div class="pp12-fuss">${pp12DidHtml(e)}${pp12TafelHtml(e)}</div>
     </div>`;
    }
    const fe=pp12Ferien(s.d),grund=fe?fe.titel:(PP12_FREI[s.d]||(s.d<PP12_START?"vor Planbeginn":"kein Unterricht"));
@@ -3944,8 +4188,23 @@ async function renderUnterrichtPP(){
  ].join("");
  const lbKarten=Object.entries(PP12_LB).map(([k,v])=>`<div class="pp12-stat"style="--c:${v.farbe}"><strong>${stoffStd[k]} Std.</strong><small>${v.kurz} · ${esc(v.titel)}</small></div>`).join("");
  return`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
- ${pageHead("UNTERRICHT","Unterricht Pädagogik und Psychologie","Stoffverteilungsplan 12. Klasse über das ganze Schuljahr: jede Unterrichtsstunde ein Balken, pro Woche 5 Stunden (Mo 1 Std., Mi 2 Std., Fr 2 Std.).","")}
+ ${pageHead("UNTERRICHT","Unterricht Pädagogik und Psychologie","Stoffverteilungsplan 12. Klasse über das ganze Schuljahr: jede Unterrichtsstunde ein Balken, pro Woche 5 Stunden (Mo 1 Std., Mi 2 Std., Fr 2 Std.).",`<button class="secondary"type="button"onclick="pp12HinweiseSchalter()"aria-pressed="${pp12HinweiseAn()}">Didaktik-Hinweise: ${pp12HinweiseAn()?"an":"aus"}</button>${isTeacher()?`<button class="secondary"type="button"onclick="go('didaktik')">Didaktik-Kompass</button>`:""}`)}
  <style>
+  .pp12-fuss{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+  .pp12-did{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;padding:2px;cursor:pointer;border-radius:8px}.pp12-did:hover{background:rgba(255,255,255,.7)}
+  .pp12-tafel{display:inline-flex;align-items:center;gap:4px;min-height:26px;padding:0 9px;border-radius:13px;border:1.5px dashed #6b7c93;background:#fff;color:#3a4a5c;font-size:11px;font-weight:700;cursor:pointer}
+  .pp12-tafel.da{border:1.5px solid #075a9d;background:#075a9d;color:#fff}
+  .pp12-legende.pp12-didlegende{align-items:center;margin:0 0 14px}.pp12-lg{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2b3a4f}.pp12-lgklein{color:#6b7c93}
+  .pp12-jahresbogen{background:#fff;border:1px solid #dbe4ec;border-radius:14px;padding:16px 18px;margin:0 0 16px}.pp12-jahresbogen h2{margin:0 0 4px;font-size:17px}.pp12-jahresbogen p{margin:0 0 10px;font-size:12px;color:#51657a}
+  .pp12-jbzeile{display:grid;grid-template-columns:240px minmax(0,1fr) 170px;gap:12px;align-items:center;margin:6px 0;font-size:13px;font-weight:700}
+  .pp12-jbbalken{display:flex;height:28px;border-radius:6px;overflow:hidden;border:1.5px solid #17384f}.pp12-jb{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border-right:1.5px solid #17384f}.pp12-jb:last-child{border-right:0}
+  .pp12-jb.p1{background:#fff;color:#17384f}.pp12-jb.p2{background:#c3d4e2;color:#17384f}.pp12-jb.p3{background:#17384f;color:#fff}
+  .pp12-jbhinweis{font-style:normal;font-size:12px;font-weight:400;color:#7a4b00;background:#fff3d6;border:1px solid #f0d28a;border-radius:8px;padding:3px 8px}
+  .pp12-modalgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.pp12-modalgrid h3{margin:0 0 8px;font-size:14px}
+  .pp12-phasenwahl{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.pp12-pw{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:10px;border:2px solid #dbe4ec;background:#fff;text-align:left;font-weight:700;font-size:13px;color:#17384f}.pp12-pw.an{border-color:#075a9d;background:#eaf3fc}
+  .pp12-udlwahl{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.pp12-uw{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border-radius:999px;border:2px dashed var(--c);background:#fff;font-weight:700;font-size:13px;color:var(--c)}.pp12-uw i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1.5px dashed var(--c);display:inline-flex;align-items:center;justify-content:center;font-size:11px}.pp12-uw.an{background:var(--c);border:2px solid var(--c);color:#fff}.pp12-uw.an i{background:#fff;border:1.5px solid #fff;color:var(--c)}
+  .pp12-udlzeile{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--c) 11%,#fff);margin:6px 0;font-size:13px;line-height:1.4}.pp12-udlpunkt{width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center}.pp12-udlzeile small{color:#51657a}
+  @media(max-width:900px){.pp12-jbzeile{grid-template-columns:1fr}}
   .pp12-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}
   .pp12-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 12px}
   .pp12-stat{background:#fff;border:1px solid #dbe4ec;border-left:5px solid var(--c);border-radius:10px;padding:10px 12px}
@@ -3978,6 +4237,9 @@ async function renderUnterrichtPP(){
   <div class="card"><strong>Leistungsnachweise</strong><p style="margin:6px 0 0">Kurzarbeit 16.11.2026 · Schulaufgabe 1 am 16.12.2026 · Schulaufgabe 2 am 03.03.2027</p></div>
   <div class="card"><strong>Abschlussprüfung 2027</strong><p style="margin:6px 0 0">Deutsch 12.05.2027 (erste Prüfung) · Pädagogik/Psychologie 14.05.2027. Stoff fertig am 28.04.2027, danach Prüfungstraining.</p></div>
  </div>
+ ${pp12HinweiseAn()?pp12CssBausteine():""}
+ ${isTeacher()&&pp12HinweiseAn()?pp12Jahresbogen():""}
+ ${pp12DidLegende()}
  <div class="pp12-legende">${legende}</div>
  ${rows}
  ${footer()}`;
@@ -7131,7 +7393,7 @@ const WB_WERKZEUGE=[
 const WB_FORMEN=[["rect","Rechteck"],["ellipse","Kreis / Ellipse"],["diamond","Raute"],["triangle","Dreieck"]];
 const WB_STANDARD={
  note:{w:200,h:160,fs:18,c:"gelb"},text:{w:260,h:52,fs:26,c:"grau"},shape:{w:190,h:120,fs:20,c:"blau",sw:3},
- frame:{w:420,h:300,fs:22,c:"grau"},image:{w:320,h:240,c:"grau"},line:{c:"grau",sw:4,arrow:true},stroke:{c:"grau",sw:4}
+ frame:{w:420,h:300,fs:22,c:"grau"},image:{w:320,h:240,c:"grau"},card:{w:300,h:240,fs:18,c:"grau"},line:{c:"grau",sw:4,arrow:true},stroke:{c:"grau",sw:4}
 };
 const WB_MAX_CURSOR=12; // ab so vielen gleichzeitig Online-Personen werden keine Mauszeiger mehr übertragen (spart Datenverkehr)
 const WB_VORLAGEN=[
@@ -7221,7 +7483,54 @@ const WB_CSS=`<style>
 .wb-cursor span{position:absolute;left:14px;top:16px;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .wb-hinweis{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);text-align:center;color:#7a8c9c;pointer-events:none;max-width:320px}
 .wb-hinweis b{display:block;font-size:18px;color:#51657a;margin-bottom:6px}
+.wb-card,.wb-tool,.wb-qr,.wb-link,.wb-datei,.wb-video{background:#fff;border-radius:14px;box-shadow:0 8px 20px rgba(40,50,70,.16),0 1px 3px rgba(40,50,70,.1);border:1px solid #dbe4ec;overflow:hidden;display:flex;flex-direction:column}
+.wb-image{display:flex;flex-direction:column}
+.wb-kopf{flex:none;height:38px;display:flex;align-items:center;padding:0 12px;background:var(--ks,#e9edf1);color:var(--kc,#3a4a5c);font-weight:700;font-size:14px;border-bottom:1px solid rgba(0,0,0,.06);min-width:0}
+.wb-kopf-txt,.wb-tool-kopf{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;outline:none;min-width:30px}
+.wb-kopf-txt:empty::before{content:attr(data-ph);opacity:.5;font-weight:400}
+.wb-karte-body{flex:1;min-height:0;padding:12px 14px;overflow:hidden}
+.wb-card .wb-txt{padding:12px 14px;height:auto;flex:1;min-height:0}
+.wb-bildflaeche{position:relative;flex:1;min-height:0}
+.wb-tool-body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center}
+.wb-t-gross{font-size:42px;font-weight:700;color:#17384f;line-height:1.1;font-variant-numeric:tabular-nums}
+.wb-t-sozial,.wb-t-los{font-size:30px}
+.wb-t-klein{font-size:12px;color:#6c8190}
+.wb-t-reihe{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center}
+.wb-t-zahl{font-size:13px;font-weight:700;color:#17384f}
+.wb-t-btn{min-height:34px;padding:0 12px;border-radius:9px;border:1px solid #c9d4de;background:#fff;color:#17384f;font-weight:700;font-size:13px;cursor:pointer}
+.wb-t-btn:hover{background:#eef4fa}.wb-t-btn.an,.wb-t-haupt{background:#2f7fc6;color:#fff;border-color:#2f7fc6;text-decoration:none;display:inline-flex;align-items:center}
+.wb-t-haupt:hover{background:#2a6fb0}
+.wb-fertig .wb-t-zeit{color:#d9534f;animation:wbblink .6s infinite alternate}
+@keyframes wbblink{from{opacity:1}to{opacity:.25}}
+.wb-wuerfel{display:inline-grid;grid-template-columns:repeat(3,1fr);gap:4px;width:70px;height:70px;padding:9px;border-radius:12px;background:#fff;border:2px solid #17384f}
+.wb-wuerfel i{border-radius:50%}.wb-wuerfel i.an{background:#17384f}
+.wb-t-wuerfel{display:flex;gap:12px}
+.wb-rollen .wb-wuerfel{animation:wbroll .6s}
+@keyframes wbroll{0%{transform:rotate(0)}100%{transform:rotate(540deg)}}
+.wb-t-ampel{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:18px;background:#2a3846}
+.wb-t-licht{width:54px;height:54px;border-radius:50%;border:0;background:var(--c);opacity:.2;cursor:pointer;padding:0}
+.wb-t-licht.an{opacity:1;box-shadow:0 0 18px var(--c)}
+.wb-t-gruppen{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;width:100%;max-height:170px;overflow:auto;text-align:left}
+.wb-t-gr{background:#f3f8fc;border-radius:8px;padding:6px 8px;font-size:12px;display:flex;flex-direction:column;gap:2px}
+.wb-qr-body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.wb-qr-body svg{width:100%;max-height:calc(100% - 24px);aspect-ratio:1}
+.wb-url{word-break:break-all;text-align:center}
+.wb-video-body{padding:0}.wb-video-body iframe{width:100%;height:100%;border:0}
+.wb-video-start{width:100%;height:100%;border:0;background:#17384f;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-size:14px;font-weight:700}
+.wb-link-body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.wb-seiten{position:absolute;left:50%;top:12px;transform:translateX(-50%);display:flex;gap:6px;background:#fff;padding:5px;border-radius:14px;box-shadow:0 8px 24px rgba(24,67,96,.16);border:1px solid var(--line);z-index:6;max-width:calc(100% - 330px);overflow-x:auto}
+.wb-seite-btn{min-width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:#3a4a5c;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.wb-seite-btn.on{background:#2f7fc6;color:#fff}.wb-seite-btn:hover:not(.on){background:#eef4fa}
+.wb-folgenbanner{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:#17384f;color:#fff;border-radius:999px;padding:8px 8px 8px 16px;display:flex;gap:10px;align-items:center;z-index:7;font-size:13px}
+.wb-folgenbanner button{border:0;border-radius:999px;padding:6px 12px;background:#fff;color:#17384f;font-weight:700}
+.wb-wrap.wb-ro .wb-tools,.wb-wrap.wb-ro .wb-props,.wb-wrap.wb-ro #wbUndo,.wb-wrap.wb-ro #wbTpl,.wb-wrap.wb-ro #wbNamen{display:none}
+.wb-art-chip{display:inline-block;margin-left:8px;padding:2px 10px;border-radius:999px;background:#17384f;color:#fff;font-size:12px;font-weight:700;vertical-align:middle}
+.wb-kartenmenu{width:min(380px,calc(100% - 100px));padding:10px}
+.wb-menu-titel{font-size:11px;font-weight:700;letter-spacing:.1em;color:#6c8190;margin:6px 6px;text-transform:uppercase}
+.wb-menu-gitter{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.wb-menu .wb-menu-gitter button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;text-align:center;font-size:12px;width:auto}
 @media(max-width:760px){
+ .wb-seiten{top:56px;max-width:calc(100% - 16px)}
  .wb-wrap{height:calc(100vh - 200px);min-height:480px}
  .wb-tools{left:50%;top:auto;bottom:12px;transform:translateX(-50%);flex-direction:row;max-width:calc(100% - 16px);overflow-x:auto}
  .wb-btn{width:38px;height:38px;flex:none}
@@ -7256,7 +7565,7 @@ async function renderWhiteboardUebersicht(){
   ${wbKarteKopf(b.id)}
   <div class="wb-karte-text"><strong>${esc(b.title||"Whiteboard")}</strong>
   <small>${esc(b.description||"")||"Gemeinsame Arbeitsfläche."}</small>
-  <small>Angelegt von ${esc(b.createdByName||"Campus-Mitglied")} · ${esc(fmtDate(b.createdAt))}</small></div></button>`).join("")}</div>
+  <small>${b.art==="tafel"?'<b class="wb-art-chip"style="margin:0 6px 0 0">Tafel</b>':""}Angelegt von ${esc(b.createdByName||"Campus-Mitglied")} · ${esc(fmtDate(b.createdAt))}</small></div></button>`).join("")}</div>
  ${boards.length?"":`<div class="empty"><strong>Noch kein Whiteboard.</strong>Lege das erste Whiteboard für dein Team oder ein Thema an.</div>`}
  ${footer()}`;
 }
@@ -7266,8 +7575,9 @@ function openWhiteboardForm(){
  if(!isApproved()){toast("Nur freigeschaltete Nutzer können ein Whiteboard anlegen.");return}
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">TEAM-WHITEBOARD</div><h2>Neues Whiteboard</h2>
-  <p>Eine gemeinsame Arbeitsfläche für dein Team. Alle freigeschalteten Mitglieder können mitarbeiten.</p>
+  <p>Eine Arbeitsfläche mit mehreren Seiten, Karten und Unterrichts-Werkzeugen.</p>
   <div class="form">
+   ${isTeacher()?`<label>Art<select id="wbNeuArt"><option value="team">Team-Whiteboard – alle arbeiten mit</option><option value="tafel">Tafel – nur Lehrkräfte bearbeiten, Schüler:innen sehen zu</option></select></label>`:""}
    <label>Titel<input id="wbNeuTitel"maxlength="120"placeholder="z. B. Projektteam 3 – Ideensammlung"></label>
    <label>Kurzbeschreibung<textarea id="wbNeuBeschr"rows="3"maxlength="300"placeholder="Wofür ist dieses Whiteboard gedacht?"></textarea></label>
    <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addWhiteboard()">Whiteboard anlegen</button></div>
@@ -7277,7 +7587,8 @@ async function addWhiteboard(){
  const title=$("wbNeuTitel")?.value.trim()||"",description=$("wbNeuBeschr")?.value.trim()||"";
  if(!title){toast("Bitte einen Titel eingeben.");return}
  try{
-  const r=await addDoc(collection(db,"whiteboards"),{title,description,createdBy:currentUser.uid,
+  const art=(isTeacher()&&$("wbNeuArt")?.value==="tafel")?"tafel":"team";
+  const r=await addDoc(collection(db,"whiteboards"),{title,description,art,schreibschutz:art==="tafel",seiten:1,createdBy:currentUser.uid,
    createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",createdAt:serverTimestamp()});
   closeModal();openWhiteboard(r.id);
  }catch(e){
@@ -7309,12 +7620,14 @@ async function renderWhiteboardBoard(){
  if(!board){activeWhiteboardId=null;toast("Dieses Whiteboard wurde nicht gefunden.");return await renderWhiteboardUebersicht();}
  const btn=(id,tip,icon,extra)=>`<button type="button"class="wb-btn"id="${id}"title="${tip}"${extra||""}>${wbIcon(icon)}</button>`;
  const kann=isTeacher()||board.createdBy===currentUser.uid;
+ wbBoardCache=board;
  return`${WB_CSS}
  <div class="wb-seite">
   <div class="wb-kopf">
    <button class="secondary"type="button"id="wbZurueck">← Whiteboards</button>
-   <div><h1>${esc(board.title||"Whiteboard")}</h1><small>${esc(board.description||"")||"Gemeinsame Arbeitsfläche"}</small></div>
+   <div><h1>${esc(board.title||"Whiteboard")}${board.art==="tafel"?'<span class="wb-art-chip">Tafel</span>':""}</h1><small>${esc(board.description||"")||"Gemeinsame Arbeitsfläche"}</small></div>
    ${kann?`<button class="secondary"type="button"id="wbUmbenennen">Umbenennen</button>`:""}
+   <button class="secondary"type="button"id="wbSchutz"hidden></button>
    ${isTeacher()?`<button class="secondary"type="button"id="wbLoeschen">Löschen</button>`:""}
    <div class="wb-online"id="wbOnline"></div>
   </div>
@@ -7324,12 +7637,13 @@ async function renderWhiteboardBoard(){
     <div class="wb-cursors"id="wbCursors"></div>
     <div class="wb-hinweis"id="wbHinweis"><b>Leere Fläche</b>Doppelklick erstellt eine Haftnotiz. Die Werkzeuge findest du links, Vorlagen oben rechts.</div>
    </div>
-   <div class="wb-tools"id="wbTools">${WB_WERKZEUGE.map(([t,tip],i)=>`${i===2||i===4?'<div class="wb-trenn"></div>':""}<button type="button"class="wb-btn${t==="select"?" on":""}"data-tool="${t}"title="${tip}">${wbIcon(t)}</button>`).join("")}<div class="wb-trenn"></div><button type="button"class="wb-btn"id="wbBild"title="Bild einfügen (I) – auch per Einfügen oder Ziehen">${wbIcon("bild")}</button><input type="file"id="wbBildInput"accept="image/*"hidden></div>
+   <div class="wb-tools"id="wbTools">${WB_WERKZEUGE.map(([t,tip],i)=>`${i===2||i===4?'<div class="wb-trenn"></div>':""}<button type="button"class="wb-btn${t==="select"?" on":""}"data-tool="${t}"title="${tip}">${wbIcon(t)}</button>`).join("")}<div class="wb-trenn"></div><button type="button"class="wb-btn"id="wbBild"title="Bild einfügen (I) – auch per Einfügen oder Ziehen">${wbIcon("bild")}</button><button type="button"class="wb-btn"id="wbKartenBtn"title="Karten und Werkzeuge: Text, Video, Link, QR-Code, Timer, Würfel, Lostopf …">${wbIcon("karten")}</button><input type="file"id="wbBildInput"accept="image/*"hidden><input type="file"id="wbDateiInput"hidden></div>
    <div class="wb-oben">
     ${btn("wbUndo","Rückgängig (Strg+Z)","undo")}
     ${btn("wbZoomMinus","Verkleinern (−)","minus")}<span class="wb-zoom"id="wbZoomTxt">100 %</span>${btn("wbZoomPlus","Vergrößern (+)","plus")}
     ${btn("wbFit","Alles anzeigen (0)","fit")}
     <span class="wb-trenn"style="width:1px;height:24px;margin:0"></span>
+    ${btn("wbFolgen","Alle folgen mir (Lehrkraft)","folgen",' hidden')}
     ${btn("wbNamen","Namen an Notizen ein/aus","user")}
     <button type="button"class="wb-btn on"id="wbCursorAn"title="Mauszeiger der anderen ein/aus">${wbIcon("cursor")}</button>
     ${btn("wbTpl","Vorlagen","tpl")}
@@ -7337,7 +7651,10 @@ async function renderWhiteboardBoard(){
     ${btn("wbVoll","Vollbild","full")}
     ${btn("wbHilfe","Hilfe und Tastenkürzel","help")}
    </div>
+   <div class="wb-seiten"id="wbSeiten"hidden></div>
+   <div class="wb-folgenbanner"id="wbFolgenBanner"hidden><span>Du folgst der Lehrkraft</span><button type="button"id="wbFolgenStop">Stoppen</button></div>
    <div class="wb-props"id="wbProps"hidden></div>
+   <div class="wb-menu wb-kartenmenu"id="wbKartenMenu"hidden></div>
    <div class="wb-menu"id="wbFormMenu"hidden></div>
    <div class="wb-menu"id="wbTplMenu"hidden></div>
   </div>
@@ -7372,7 +7689,7 @@ function wbBox(it){
 function wbItemAn(pt,ausser){
  let best=null;
  wb.items.forEach(it=>{
-  if(it.id===ausser||wbIstSvg(it)||it.type==="frame")return;
+  if(it.id===ausser||wbIstSvg(it)||it.type==="frame"||!wbSichtbar(it))return;
   if(pt.x>=it.x&&pt.x<=it.x+it.w&&pt.y>=it.y&&pt.y<=it.y+it.h&&(!best||(it.z||0)>(best.z||0)))best=it;
  });
  return best;
@@ -7388,6 +7705,9 @@ function wbLinienFuer(id){
  if(wb.sel.size)wbSelSvg();
 }
 function wbIstSvg(it){return it.type==="stroke"||it.type==="line";}
+function wbSichtbar(it){return (it.seite||1)===wb.seite;}
+function wbSeitenItems(){return [...wb.items.values()].filter(wbSichtbar);}
+function wbKopfH(it){return it.type==="image"&&(wb.board.art==="tafel"||it.titel)?38:0;}
 function wbDarfLoeschen(it){return isTeacher()||it.authorUid===currentUser.uid;}
 function wbWelt(cx,cy){
  const r=wb.stage.getBoundingClientRect();
@@ -7402,7 +7722,8 @@ function wbAnsichtSetzen(){
  wb.stage.style.backgroundSize=`${g}px ${g}px`;
  wb.stage.style.backgroundPosition=`${v.x}px ${v.y}px`;
  const z=$("wbZoomTxt");if(z)z.textContent=`${Math.round(v.k*100)} %`;
- wbAnsicht[wb.id]={...v};
+ wbAnsicht[wb.id+"#"+wb.seite]={...v};
+ if(wb.fuehrt)wbFuehrungSenden();
  wbSelSvg();
  if(wb.cursorEls&&wb.cursorEls.size)wbCursorZeichnen(true);
 }
@@ -7416,7 +7737,7 @@ function wbZoomBei(cx,cy,faktor){
 }
 function wbMitteZoom(faktor){const r=wb.stage.getBoundingClientRect();wbZoomBei(r.left+(r.width||900)/2,r.top+(r.height||600)/2,faktor);}
 function wbAlleAnzeigen(){
- const items=[...wb.items.values()];const s=wbBuehne();
+ const items=wbSeitenItems();const s=wbBuehne();
  if(!items.length){wb.view={x:s.w/2,y:s.h/2,k:1};wbAnsichtSetzen();return;}
  let x1=1e9,y1=1e9,x2=-1e9,y2=-1e9;
  items.forEach(it=>{const b=wbBox(it);x1=Math.min(x1,b.x);y1=Math.min(y1,b.y);x2=Math.max(x2,b.x+b.w);y2=Math.max(y2,b.y+b.h);});
@@ -7446,7 +7767,7 @@ function wbUpdateDrosselt(id,felder){
 function wbErzeugen(teil,opt){
  const std=WB_STANDARD[teil.type==="stroke"?"stroke":teil.type]||{};
  const ref=doc(collection(db,"whiteboardItems"));
- const daten={boardId:wb.id,c:std.c||"grau",fs:std.fs||18,z:Date.now()+(opt?.zOffset||0),
+ const daten={boardId:wb.id,seite:wb.seite||1,c:std.c||"grau",fs:std.fs||18,z:Date.now()+(opt?.zOffset||0),
   authorUid:currentUser.uid,authorName:profile?.displayName||currentUser.email||"Mitglied",
   ...std,...teil,createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
  delete daten.id;
@@ -7500,6 +7821,7 @@ function wbFormSvg(it){
  return`<svg class="wb-shapesvg"viewBox="0 0 100 100"preserveAspectRatio="none">${el}</svg>`;
 }
 function wbDomFuellen(el,it){
+ if(WB_KARTENTYPEN.includes(it.type)){wbKartenFuellen(el,it);return;}
  const f=wbFarbe(it.c);
  el.style.left=it.x+"px";el.style.top=it.y+"px";el.style.width=it.w+"px";el.style.height=it.h+"px";
  if(el.dataset.bau!==`${it.type}|${it.shape||""}|${it.c}|${it.sw||""}`){
@@ -7543,6 +7865,7 @@ function wbSvgFuellen(g,it){
 }
 function wbZeichne(id){
  const it=wb.items.get(id);if(!it)return;
+ if(!wbSichtbar(it)){wbEntfernenDom(id);return;}
  if(wbIstSvg(it)){
   let g=wb.svgEls.get(id);
   if(!g){g=document.createElementNS(WB_NS,"g");g.setAttribute("data-id",id);wb.svg.insertBefore(g,wb.selG);wb.svgEls.set(id,g);}
@@ -7564,7 +7887,7 @@ function wbZ(){
  liste.filter(wbIstSvg).forEach(it=>{const g=wb.svgEls.get(it.id);if(g)wb.svg.insertBefore(g,wb.selG);});
 }
 function wbNachAenderung(){
- const h=$("wbHinweis");if(h)h.hidden=wb.items.size>0;
+ const h=$("wbHinweis");if(h)h.hidden=wbSeitenItems().length>0||wb.ro;
  wbSelSvg();wbPropsZeichnen();
 }
 
@@ -7593,7 +7916,7 @@ function wbSelSvg(){
 }
 function wbTrefferLinie(pt){
  const tol=10/wb.view.k;let best=null;
- [...wb.items.values()].filter(wbIstSvg).sort((a,b)=>(b.z||0)-(a.z||0)).some(it=>{
+ [...wb.items.values()].filter(i=>wbIstSvg(i)&&wbSichtbar(i)).sort((a,b)=>(b.z||0)-(a.z||0)).some(it=>{
   const n=wbAbstand(it,pt);if(n<=tol+((it.sw||4)/2)){best=it;return true;}return false;
  });
  return best;
@@ -7631,7 +7954,7 @@ function wbPropsZeichnen(){
  if(!typen.size){box.hidden=true;box.innerHTML="";return;}
  const aktFarbe=sel.length?sel[0].c:(wb.farben[wb.tool]||"grau");
  const hatSw=["stroke","line","shape"].some(t=>typen.has(t));
- const hatFs=["note","text","shape","frame"].some(t=>typen.has(t));
+ const hatFs=["note","text","shape","frame","card"].some(t=>typen.has(t));
  const hatPfeil=typen.has("line");
  const aktSw=sel.length?(sel[0].sw||WB_STANDARD[sel[0].type]?.sw||4):(wb.sw[wb.tool]||4);
  let html=`<div class="wb-gruppe">${WB_FARBEN.map(f=>`<button type="button"class="wb-sw${f.k===aktFarbe?" on":""}"data-farbe="${f.k}"title="${f.k}"style="background:${f.soft};box-shadow:0 0 0 1px ${f.dark}55${f.k===aktFarbe?",0 0 0 3px #2f7fc6":""}"></button>`).join("")}</div>`;
@@ -7664,7 +7987,7 @@ function wbEigenschaftKlick(e){
   wbPropsZeichnen();
  }else if(b.dataset.fs){
   const d=Number(b.dataset.fs);
-  wbAufAuswahl(it=>["note","text","shape","frame"].includes(it.type)?{fs:wbBegrenzen((it.fs||18)+d,10,96)}:{});
+  wbAufAuswahl(it=>["note","text","shape","frame","card"].includes(it.type)?{fs:wbBegrenzen((it.fs||18)+d,10,96)}:{});
  }else if(b.dataset.pfeil){
   const an=![...wb.sel].map(id=>wb.items.get(id)).some(i=>i?.arrow);
   wbAufAuswahl(it=>it.type==="line"?{arrow:an}:{});
@@ -7689,27 +8012,28 @@ function wbDuplizieren(){
 }
 
 // ---- Texte bearbeiten ----
-function wbBearbeitenStart(id){
- const it=wb.items.get(id),el=wb.els.get(id);if(!it||!el||wbIstSvg(it))return;
- const t=el.querySelector(".wb-txt");if(!t)return;
+function wbBearbeitenStart(id,feld){
+ feld=feld||"text";
+ const it=wb.items.get(id),el=wb.els.get(id);if(!it||!el||wbIstSvg(it)||wb.ro)return;
+ const t=el.querySelector(feld==="titel"?".wb-kopf-txt":".wb-txt");if(!t)return;
  if(wb.editing&&wb.editing!==id)wbBearbeitenEnde(true);
- wb.editing=id;wb.lokal.add(id);wb.textVorher=it.text||"";
+ wb.editing=id;wb.editFeld=feld;wb.lokal.add(id);wb.textVorher=it[feld]||"";
  t.setAttribute("contenteditable","true");t.focus();
  const r=document.createRange();r.selectNodeContents(t);const s=window.getSelection();if(s){s.removeAllRanges();s.addRange(r);}
 }
 function wbBearbeitenEnde(speichern){
  const id=wb.editing;if(!id)return;
- const it=wb.items.get(id),el=wb.els.get(id);wb.editing=null;
+ const it=wb.items.get(id),el=wb.els.get(id),feld=wb.editFeld||"text";wb.editing=null;
  setTimeout(()=>wb.lokal.delete(id),400);
  if(!it||!el)return;
- const t=el.querySelector(".wb-txt");if(!t)return;
+ const t=el.querySelector(feld==="titel"?".wb-kopf-txt":".wb-txt");if(!t)return;
  t.setAttribute("contenteditable","false");
  const neu=speichern?(t.innerText||t.textContent||"").replace(/\u00a0/g," ").replace(/\n+$/,""):wb.textVorher;
  t.textContent=neu;
  if(neu!==wb.textVorher){
   const alt=wb.textVorher;
-  wbUpdate(id,{text:neu});
-  wbUndoPush(async()=>{const x=wb.items.get(id);if(x){x.text=alt;wbZeichne(id);}await updateDoc(doc(db,"whiteboardItems",id),{text:alt,updatedAt:serverTimestamp()}).catch(()=>{});});
+  wbUpdate(id,{[feld]:neu});
+  wbUndoPush(async()=>{const x=wb.items.get(id);if(x){x[feld]=alt;wbZeichne(id);}await updateDoc(doc(db,"whiteboardItems",id),{[feld]:alt,updatedAt:serverTimestamp()}).catch(()=>{});});
  }
 }
 
@@ -7725,7 +8049,7 @@ function wbSetzeWerkzeug(t){
 }
 function wbRadieren(pt){
  const tol=12/wb.view.k;const treffer=[];
- wb.items.forEach(it=>{if(wbIstSvg(it)&&wbAbstand(it,pt)<=tol+(it.sw||4)/2)treffer.push(it.id);});
+ wb.items.forEach(it=>{if(wbIstSvg(it)&&wbSichtbar(it)&&wbAbstand(it,pt)<=tol+(it.sw||4)/2)treffer.push(it.id);});
  if(treffer.length){
   const eigene=treffer.filter(id=>wbDarfLoeschen(wb.items.get(id)));
   if(!eigene.length){if(!wb.radierHinweis){wb.radierHinweis=true;toast("Zeichnungen anderer Personen kann nur eine Lehrkraft radieren.");}return;}
@@ -7739,7 +8063,7 @@ function wbDown(e){
  const pid=e.pointerId??1;wb.pointers.set(pid,{x:e.clientX,y:e.clientY});
  if(wb.pointers.size>=2){wbPinchStart();return;}
  if(e.button===2)return;
- if(e.target.closest?.('.wb-txt[contenteditable="true"]'))return;
+ if(e.target.closest?.('[contenteditable="true"]'))return;
  if(wb.editing)wbBearbeitenEnde(true);
  $("wbFormMenu").hidden=true;$("wbTplMenu").hidden=true;
  const pt=wbWelt(e.clientX,e.clientY);
@@ -7747,6 +8071,8 @@ function wbDown(e){
  if(wb.tool==="hand"||e.button===1||wb.space){
   wb.aktion={t:"pan",sx:e.clientX,sy:e.clientY,vx:wb.view.x,vy:wb.view.y};wb.stage.style.cursor="grabbing";e.preventDefault();return;
  }
+ if(e.target.closest?.("[data-act],[data-aktion],a,.wb-video-start")){return;}
+ if(wb.ro){wb.aktion={t:"pan",sx:e.clientX,sy:e.clientY,vx:wb.view.x,vy:wb.view.y};e.preventDefault();return;}
  const tool=wb.tool;
  if(tool==="select"){
   const ep=e.target.closest?.("[data-ep]");
@@ -7811,9 +8137,9 @@ function wbMove(e){
  }
  if(a.t==="resize"){
   const it=wb.items.get(a.id);if(!it)return;
-  const min=it.type==="text"?{w:80,h:32}:{w:60,h:40};
+  const min=it.type==="text"?{w:80,h:32}:(WB_KARTENTYPEN.includes(it.type)?{w:150,h:100}:{w:60,h:40});
   const f={w:Math.round(Math.max(min.w,a.w0+(e.clientX-a.sx)/k)),h:Math.round(Math.max(min.h,a.h0+(e.clientY-a.sy)/k))};
-  if(it.type==="image"&&it.ar)f.h=Math.max(30,Math.round(f.w/it.ar));
+  if(it.type==="image"&&it.ar)f.h=Math.max(30,Math.round(f.w/it.ar)+wbKopfH(it));
   Object.assign(it,f);wbZeichne(a.id);wbUpdateDrosselt(a.id,f);return;
  }
  if(a.t==="ep"){
@@ -7891,7 +8217,7 @@ function wbUp(e){
   if(x2-x1<4&&y2-y1<4)return;
   const v=wb.view;const wx1=(x1-v.x)/v.k,wy1=(y1-v.y)/v.k,wx2=(x2-v.x)/v.k,wy2=(y2-v.y)/v.k;
   const ids=new Set(a.shift?a.vorher:[]);
-  wb.items.forEach(it=>{const b=wbBox(it);if(b.x<=wx2&&b.x+b.w>=wx1&&b.y<=wy2&&b.y+b.h>=wy1)ids.add(it.id);});
+  wb.items.forEach(it=>{if(!wbSichtbar(it))return;const b=wbBox(it);if(b.x<=wx2&&b.x+b.w>=wx1&&b.y<=wy2&&b.y+b.h>=wy1)ids.add(it.id);});
   wbAuswahlSetzen(ids);return;
  }
  if(a.t==="klick"){
@@ -7959,11 +8285,15 @@ function wbRad(e){
  wbZoomBei(e.clientX,e.clientY,Math.exp(-e.deltaY*(e.ctrlKey?0.01:0.0015)));
 }
 function wbDoppel(e){
- if(!wb||wb.tool!=="select")return;
+ if(!wb||wb.ro||wb.tool!=="select")return;
  const itemEl=e.target.closest?.(".wb-item");
  if(itemEl){
   const it=wb.items.get(itemEl.dataset.id);
-  if(it&&!wbIstSvg(it)){wbAuswahlSetzen([it.id]);wbBearbeitenStart(it.id);}
+  if(it&&!wbIstSvg(it)){
+   if(it.type==="tool"){wbToolBearbeiten(it.id);return;}
+   wbAuswahlSetzen([it.id]);
+   wbBearbeitenStart(it.id,e.target.closest?.(".wb-kopf-txt")?"titel":"text");
+  }
   return;
  }
  if(wbTrefferLinie(wbWelt(e.clientX,e.clientY)))return;
@@ -7985,13 +8315,14 @@ function wbTaste(e){
  if(tippt||!$("modalBackdrop").hidden)return;
  const ctrl=e.ctrlKey||e.metaKey;
  if(e.code==="Space"){wb.space=true;e.preventDefault();return;}
+ if(wb.ro&&!(e.key==="Escape"||e.key==="+"||e.key==="="||e.key==="-"||e.key==="0"))return;
  if(ctrl&&e.key.toLowerCase()==="z"){e.preventDefault();wbRueckgaengig();return;}
  if(ctrl&&e.key.toLowerCase()==="d"){e.preventDefault();wbDuplizieren();return;}
- if(ctrl&&e.key.toLowerCase()==="a"){e.preventDefault();wbAuswahlSetzen([...wb.items.keys()]);return;}
+ if(ctrl&&e.key.toLowerCase()==="a"){e.preventDefault();wbAuswahlSetzen(wbSeitenItems().map(i=>i.id));return;}
  if(ctrl&&e.key.toLowerCase()==="c"){wb.zwischen=[...wb.sel].map(id=>({...wb.items.get(id)}));return;}
  if(ctrl&&e.key.toLowerCase()==="v"){
   if(!wb.zwischen||!wb.zwischen.length)return;e.preventDefault();
-  const neu=wb.zwischen.map((it,i)=>{const {id,createdAt,updatedAt,authorUid,authorName,...rest}=it;const k={...rest,x:rest.x+40,y:rest.y+40};if(rest.type==="line"){k.x2=rest.x2+40;k.y2=rest.y2+40;k.a=null;k.b=null;}return wbErzeugen(k,{zOffset:i});});
+  const neu=wb.zwischen.map((it,i)=>{const {id,createdAt,updatedAt,authorUid,authorName,...rest}=it;const k={...rest,seite:wb.seite,x:rest.x+40,y:rest.y+40};if(rest.type==="line"){k.x2=rest.x2+40;k.y2=rest.y2+40;k.a=null;k.b=null;}return wbErzeugen(k,{zOffset:i});});
   wbAuswahlSetzen(neu);wbUndoPush(async()=>{await wbLoeschenIds(neu,true);});return;
  }
  if(e.key==="Delete"||e.key==="Backspace"){if(wb.sel.size){e.preventDefault();wbLoeschenIds([...wb.sel]);}return;}
@@ -8065,15 +8396,15 @@ function wbUmbruch(ctx,text,maxW){
 }
 async function wbExport(){
  const bilderMap=new Map();
- await Promise.all([...wb.items.values()].filter(i=>i.type==="image").map(it=>new Promise(res=>{
+ await Promise.all(wbSeitenItems().filter(i=>i.type==="image").map(it=>new Promise(res=>{
   const d=wb.bilder.get(it.imgId);if(!d){res();return;}
   const im=new Image();im.onload=()=>{bilderMap.set(it.id,im);res();};im.onerror=()=>res();im.src=d;
  })));
  wbExportZeichnen(bilderMap);
 }
 function wbExportZeichnen(bilderMap){
- const items=[...wb.items.values()];
- if(!items.length){toast("Das Whiteboard ist noch leer.");return}
+ const items=wbSeitenItems();
+ if(!items.length){toast("Diese Seite ist noch leer.");return}
  let x1=1e9,y1=1e9,x2=-1e9,y2=-1e9;
  items.forEach(it=>{const b=wbBox(it);x1=Math.min(x1,b.x);y1=Math.min(y1,b.y);x2=Math.max(x2,b.x+b.w);y2=Math.max(y2,b.y+b.h);});
  const pad=48,W=x2-x1+pad*2,H=y2-y1+pad*2+22;
@@ -8094,6 +8425,17 @@ function wbExportZeichnen(bilderMap){
   if(it.type==="frame"){rr(it.x,it.y,it.w,it.h,14);c.fillStyle=f.soft+"59";c.fill();c.setLineDash([8,6]);c.lineWidth=2;c.strokeStyle=f.dark;c.stroke();c.setLineDash([]);c.font=`bold ${it.fs||22}px Arial, sans-serif`;c.fillStyle=f.dark;c.textAlign="left";c.textBaseline="top";c.fillText(it.text||"",it.x+14,it.y+10);}
   else if(it.type==="note"){c.save();c.shadowColor="rgba(40,50,70,.25)";c.shadowBlur=10;c.shadowOffsetY=4;rr(it.x,it.y,it.w,it.h,6);c.fillStyle=f.soft;c.fill();c.restore();text(it,"#1f2d3d",false);c.font="10px Arial";c.fillStyle="rgba(31,45,61,.55)";c.textAlign="left";c.fillText(wbKurz(it.authorName),it.x+12,it.y+it.h-14);}
   else if(it.type==="text"){text(it,f.dark,false);}
+  else if(["card","tool","qr","link","video","datei"].includes(it.type)){
+   c.save();c.shadowColor="rgba(40,50,70,.2)";c.shadowBlur=8;c.shadowOffsetY=3;rr(it.x,it.y,it.w,it.h,12);c.fillStyle="#fff";c.fill();c.restore();
+   c.save();rr(it.x,it.y,it.w,it.h,12);c.clip();c.fillStyle=f.soft;c.fillRect(it.x,it.y,it.w,34);c.restore();
+   c.fillStyle=f.dark;c.font="bold 14px Arial, sans-serif";c.textAlign="left";c.textBaseline="middle";
+   c.fillText(it.type==="tool"?(wbToolDef(it.tool)?.titel||""):(it.titel||""),it.x+14,it.y+17);c.textBaseline="top";
+   if(it.type==="card"){text({...it,y:it.y+34,h:it.h-34},"#1f2d3d",false);}
+   else if(it.type==="qr"&&wbSichereUrl(it.url)){
+    try{const q=WB_QR(0,"M");q.addData(wbSichereUrl(it.url));q.make();const n=q.getModuleCount(),sz=Math.min(it.w-30,it.h-60),cs=sz/n,ox=it.x+(it.w-sz)/2,oy=it.y+44;
+     c.fillStyle="#111";for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(q.isDark(r,k))c.fillRect(ox+k*cs,oy+r*cs,cs+0.5,cs+0.5);}catch(e){}
+   }else{c.fillStyle="#51657a";c.font="14px Arial, sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillText(String(wbToolKurz(it)).slice(0,60),it.x+it.w/2,it.y+it.h/2+10);}
+  }
   else if(it.type==="image"){
    c.save();c.shadowColor="rgba(40,50,70,.25)";c.shadowBlur=10;c.shadowOffsetY=4;rr(it.x,it.y,it.w,it.h,10);c.fillStyle="#e9edf1";c.fill();c.restore();
    const im=bilderMap&&bilderMap.get(it.id);
@@ -8166,8 +8508,8 @@ async function wbBildEinfuegen(data,bw,bh,pt){
  const ref=doc(collection(db,"whiteboardImages"));
  await setDoc(ref,{boardId:wb.id,data,authorUid:currentUser.uid,createdAt:serverTimestamp()});
  wb.bilder.set(ref.id,data);
- const ar=bw/bh,w=Math.min(360,Math.max(120,bw)),h=Math.max(30,Math.round(w/ar));
- const id=wbErzeugen({type:"image",imgId:ref.id,ar,x:Math.round(c.x-w/2),y:Math.round(c.y-h/2),w,h});
+ const ar=bw/bh,w=Math.min(360,Math.max(120,bw)),kh=wb.board.art==="tafel"?38:0,h=Math.max(30,Math.round(w/ar))+kh;
+ const id=wbErzeugen({type:"image",imgId:ref.id,ar,titel:wb.board.art==="tafel"?"":undefined,x:Math.round(c.x-w/2),y:Math.round(c.y-h/2),w,h});
  wbUndoPush(async()=>{await wbLoeschenIds([id],true);});
  wbSetzeWerkzeug("select");wbAuswahlSetzen([id]);
  return id;
@@ -8219,6 +8561,19 @@ function wbCursorZeichnen(ohneAnim){
  wb.cursorEls.forEach((el,uid)=>{if(!aktiv.has(uid)){el.remove();wb.cursorEls.delete(uid);}});
 }
 
+function wbToolKurz(it){
+ if(it.type!=="tool")return it.type==="link"||it.type==="video"?(it.url||""):(it.name||"");
+ switch(it.tool){
+  case"timer":return wbZeitText(it.lauf?it.ende-Date.now():(it.rest||0)*1000);
+  case"stoppuhr":return wbZeitText((it.acc||0)+(it.lauf?Date.now()-it.start:0),true);
+  case"wuerfel":return(it.werte||[1]).join("   ");
+  case"sozial":return WB_SOZIAL[it.form]||"";
+  case"ampel":return(WB_AMPEL[it.licht]||[0,""])[1];
+  case"lostopf":return it.aktuell||"";
+  case"gruppen":return(it.ergebnis||[]).map((g,i)=>`G${i+1}: ${g.join(", ")}`).join(" | ");
+  default:return"";
+ }
+}
 // ---- Online-Anzeige ----
 function wbOnlineZeichnen(){
  const box=$("wbOnline");if(!box||!wb)return;
@@ -8235,13 +8590,14 @@ function wbPresenzSchreiben(){
 function initWhiteboardBoard(id){
  wbStop();
  const stage=$("wbStage");if(!stage)return;
- wb={id,board:{},stage,wrap:$("wbWrap"),world:$("wbWorld"),itemsEl:$("wbItems"),svg:$("wbSvg"),selG:$("wbSelG"),
-  view:wbAnsicht[id]?{...wbAnsicht[id]}:null,tool:"select",form:"rect",arrowNeu:true,
+ wb={id,stage,wrap:$("wbWrap"),world:$("wbWorld"),itemsEl:$("wbItems"),svg:$("wbSvg"),selG:$("wbSelG"),
+  view:wbAnsicht[id+"#1"]?{...wbAnsicht[id+"#1"]}:null,seite:1,board:(wbBoardCache&&wbBoardCache.id===id)?wbBoardCache:{},tool:"select",form:"rect",arrowNeu:true,
   farben:{note:"gelb",text:"grau",shape:"blau",line:"grau",pen:"grau",frame:"grau"},
   sw:{line:4,pen:4,shape:3},items:new Map(),els:new Map(),svgEls:new Map(),sel:new Set(),lokal:new Set(),
   undo:[],drossel:{},pointers:new Map(),aktion:null,pinch:null,editing:null,space:false,praesenz:new Map(),timers:[],handler:[],erstesLaden:true,
+  ro:false,editFeld:"text",videoAn:new Set(),folgenAus:false,fuehrt:false,letzteFuehrung:null,fuehrTimer:null,kartenZaehler:0,
   bilder:new Map(),bilderLaden:new Set(),cursorAn:true,cursorT:0,cursorWeg:true,cursorEls:new Map(),zielId:null,animTimer:null};
- getDoc(doc(db,"whiteboards",id)).then(s=>{if(wb&&wb.id===id&&s.exists())wb.board={id,...s.data()};}).catch(()=>{});
+
  if(!wb.view){const s=wbBuehne();wb.view={x:s.w/2,y:s.h/2,k:1};}
  wbAnsichtSetzen();
  const on=(el,ev,fn,opt)=>{el.addEventListener(ev,fn,opt);wb.handler.push([el,ev,fn,opt]);};
@@ -8258,14 +8614,26 @@ function initWhiteboardBoard(id){
  on($("wbBild"),"click",()=>$("wbBildInput").click());
  on($("wbBildInput"),"change",e=>{const f=e.target.files&&e.target.files[0];if(f)wbBildDatei(f);e.target.value="";});
  on(document,"paste",e=>{
-  if(!wb||wb.editing)return;const t=e.target;
+  if(!wb||wb.editing||wb.ro)return;const t=e.target;
   if(t&&(wbEditierbar(t)||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))return;
   const f=[...(e.clipboardData&&e.clipboardData.files?e.clipboardData.files:[])].find(x=>/^image\//.test(x.type));
   if(f){e.preventDefault();wbBildDatei(f);}
  });
+ on(stage,"click",wbKlick);
+ on($("wbKartenBtn"),"click",()=>{const m=$("wbKartenMenu");if(m.hidden)wbKartenMenuAuf();else m.hidden=true;});
+ on($("wbKartenMenu"),"click",e=>{const b=e.target.closest("[data-karte]");if(b)wbKarteEinfuegen(b.dataset.karte);});
+ on($("wbDateiInput"),"change",e=>{const f=e.target.files&&e.target.files[0];if(f)wbDateiHochladen(f);e.target.value="";});
+ on($("wbSeiten"),"click",e=>{
+  const b=e.target.closest("[data-seite]");if(!b)return;
+  const v=b.dataset.seite;
+  if(v==="neu")wbSeiteNeu();else if(v==="weg")wbSeiteLoeschen();else wbSeiteWechseln(Number(v));
+ });
+ const sb=$("wbSchutz");if(sb)on(sb,"click",wbSchutzUmschalten);
+ on($("wbFolgen"),"click",wbFolgenUmschalten);
+ on($("wbFolgenStop"),"click",()=>{wb.folgenAus=true;$("wbFolgenBanner").hidden=true;toast("Du folgst der Lehrkraft nicht mehr.");});
  on(stage,"dragover",e=>e.preventDefault());
  on(stage,"drop",e=>{
-  e.preventDefault();
+  e.preventDefault();if(wb.ro)return;
   const fl=[...(e.dataTransfer&&e.dataTransfer.files?e.dataTransfer.files:[])].filter(x=>/^image\//.test(x.type)).slice(0,5);
   const pt=wbWelt(e.clientX,e.clientY);fl.forEach((x,i)=>wbBildDatei(x,{x:pt.x+i*30,y:pt.y+i*30}));
  });
@@ -8290,6 +8658,11 @@ function initWhiteboardBoard(id){
  });
  const lo=$("wbLoeschen");if(lo)on(lo,"click",()=>wbBoardLoeschen(id));
  wbUndoKnopf();wbPropsZeichnen();
+ wb.boardUnsub=onSnapshot(doc(db,"whiteboards",id),s=>{
+  if(!wb||wb.id!==id)return;
+  if(s.exists()){wb.board={id,...s.data()};wbBoardGeaendert();}
+ },()=>{});
+ wbBoardGeaendert();
  // Live-Daten
  wb.unsub=onSnapshot(query(collection(db,"whiteboardItems"),where("boardId","==",id)),snap=>{
   if(!wb||wb.id!==id)return;
@@ -8300,25 +8673,418 @@ function initWhiteboardBoard(id){
    wb.items.set(iid,{id:iid,...ch.doc.data()});wbZeichne(iid);
   });
   wbZ();wbNachAenderung();
-  if(wb.erstesLaden){wb.erstesLaden=false;if(!wbAnsicht[id]&&wb.items.size)wbAlleAnzeigen();}
+  if(wb.erstesLaden){wb.erstesLaden=false;if(!wbAnsicht[id+"#"+wb.seite]&&wbSeitenItems().length)wbAlleAnzeigen();}
  },e=>wbFehler(e));
  wb.praesUnsub=onSnapshot(query(collection(db,"whiteboardPresence"),where("boardId","==",id)),snap=>{
   if(!wb||wb.id!==id)return;
   wb.praesenz=new Map(snap.docs.map(d=>[d.id,d.data()]));wbOnlineZeichnen();wbCursorZeichnen();
  },()=>{});
  wbPresenzSchreiben();
- wb.timers.push(setInterval(wbPresenzSchreiben,25000),setInterval(wbOnlineZeichnen,15000),setInterval(()=>wbCursorZeichnen(),4000));
+ wb.timers.push(setInterval(wbPresenzSchreiben,25000),setInterval(wbOnlineZeichnen,15000),setInterval(()=>wbCursorZeichnen(),4000),setInterval(wbToolTick,250));
 }
 function wbStop(){
  if(!wb)return;
  const w=wb;wb=null;
- try{w.unsub&&w.unsub();}catch(e){}try{w.praesUnsub&&w.praesUnsub();}catch(e){}
+ try{w.boardUnsub&&w.boardUnsub();}catch(e){}if(w.fuehrTimer)clearTimeout(w.fuehrTimer);try{w.unsub&&w.unsub();}catch(e){}try{w.praesUnsub&&w.praesUnsub();}catch(e){}
  w.timers.forEach(t=>clearInterval(t));
  w.handler.forEach(([el,ev,fn,opt])=>{try{el.removeEventListener(ev,fn,opt);}catch(e){}});
  Object.values(w.drossel).forEach(z=>{if(z.timer)clearTimeout(z.timer);});
  document.body.style.overflow="";
  try{deleteDoc(doc(db,"whiteboardPresence",`${w.id}_${currentUser.uid}`)).catch(()=>{});}catch(e){}
 }
+
+// ============================================================
+// TAFEL-FUNKTIONEN: Seiten, Karten mit Titelzeile, Unterrichts-Werkzeuge,
+// Präsentationsmodus (Nur-Ansicht für Schüler:innen) und „Alle folgen mir“.
+// ============================================================
+let wbBoardCache=null;   // vom Seitenaufbau übergeben, damit Rechte sofort gelten
+
+WB_ICONS.karten='<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/>';
+WB_ICONS.video='<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/>';
+WB_ICONS.link='<path d="M10 14a4 4 0 005.6 0l3-3a4 4 0 00-5.6-5.6l-1 1M14 10a4 4 0 00-5.6 0l-3 3a4 4 0 005.6 5.6l1-1"/>';
+WB_ICONS.datei='<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/>';
+WB_ICONS.qr='<rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h2v2h-2zM18 14h2M14 18h2M18 18h2v2"/>';
+WB_ICONS.wuerfel='<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="15" r="1"/><circle cx="12" cy="12" r="1"/>';
+WB_ICONS.stoppuhr='<circle cx="12" cy="13" r="7"/><path d="M12 13V9M9 3h6M12 3v3"/>';
+WB_ICONS.timer='<path d="M7 4h10M7 20h10M8 4c0 5 4 5 4 8s-4 3-4 8M16 4c0 5-4 5-4 8s4 3 4 8"/>';
+WB_ICONS.uhr='<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>';
+WB_ICONS.sozial='<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 20a5 5 0 0110 0M11 20a5 5 0 0110 0"/>';
+WB_ICONS.gruppen='<circle cx="12" cy="8" r="3"/><circle cx="6" cy="11" r="2.4"/><circle cx="18" cy="11" r="2.4"/><path d="M7 20a5 5 0 0110 0"/>';
+WB_ICONS.lostopf='<path d="M6 8h12l-1 11H7zM5 8h14M9 5h6"/>';
+WB_ICONS.ampel='<rect x="8" y="3" width="8" height="18" rx="3"/><circle cx="12" cy="8" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="16" r="1.4"/>';
+WB_ICONS.folgen='<circle cx="12" cy="12" r="2.5"/><path d="M6.5 12a5.5 5.5 0 0111 0M3 12a9 9 0 0118 0"/>';
+WB_ICONS.seite='<path d="M6 3h9l4 4v14H6z"/>';
+
+const WB_KARTEN=[
+ {k:"card",n:"Text",ic:"text",w:300,h:240},{k:"image",n:"Bild",ic:"bild"},{k:"video",n:"Video",ic:"video",w:380,h:300},
+ {k:"link",n:"Link",ic:"link",w:320,h:150},{k:"datei",n:"Datei",ic:"datei",w:300,h:150},{k:"qr",n:"QR-Code",ic:"qr",w:240,h:300}
+];
+const WB_TOOLKARTEN=[
+ {k:"wuerfel",n:"Würfel",ic:"wuerfel",w:240,h:200,titel:"Würfel",start:{anz:1,werte:[1],ts:0}},
+ {k:"stoppuhr",n:"Stoppuhr",ic:"stoppuhr",w:300,h:200,titel:"Stoppuhr",start:{lauf:false,start:0,acc:0}},
+ {k:"timer",n:"Timer",ic:"timer",w:300,h:230,titel:"Timer",start:{dauer:300,rest:300,lauf:false,ende:0}},
+ {k:"uhr",n:"Uhr",ic:"uhr",w:280,h:150,titel:"Uhr",start:{}},
+ {k:"sozial",n:"Sozialform",ic:"sozial",w:320,h:220,titel:"Sozialform",start:{form:"einzel"}},
+ {k:"gruppen",n:"Gruppen",ic:"gruppen",w:380,h:300,titel:"Gruppen einteilen",start:{liste:[],n:4,ergebnis:[]}},
+ {k:"lostopf",n:"Lostopf",ic:"lostopf",w:320,h:260,titel:"Lostopf",start:{liste:[],gezogen:[],aktuell:""}},
+ {k:"ampel",n:"Ampel",ic:"ampel",w:160,h:340,titel:"Ampel",start:{licht:"rot"}}
+];
+const WB_SOZIAL={einzel:"Einzelarbeit",partner:"Partnerarbeit",gruppe:"Gruppenarbeit",plenum:"Plenum"};
+const WB_AMPEL={rot:["#d9534f","Ruhe · Einzelarbeit"],gelb:["#f0b429","leise · Partnerarbeit"],gruen:["#3fa66a","Gruppenarbeit · Gespräch"]};
+const WB_KARTENTYPEN=["card","video","link","datei","qr","tool","image"];
+
+// ---- QR-Code (qrcode-generator 1.4.4, MIT-Lizenz, © Kazuhiko Arase) ----
+const WB_QR=(function(){var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],f={},c=function(t,r){o=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(i=4*e+17),l(0,0),l(i-7,0),l(0,i-7),s(),h(),d(t,r),e>=7&&v(t),null==a&&(a=p(e,n,u)),w(a,r)},l=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||i<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||i<=r+n||(o[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},h=function(){for(var t=8;t<i-8;t+=1)null==o[t][6]&&(o[t][6]=t%2==0);for(var r=8;r<i-8;r+=1)null==o[6][r]&&(o[6][r]=r%2==0)},s=function(){for(var t=B.getPatternPosition(e),r=0;r<t.length;r+=1)for(var n=0;n<t.length;n+=1){var i=t[r],a=t[n];if(null==o[i][a])for(var u=-2;u<=2;u+=1)for(var f=-2;f<=2;f+=1)o[i+u][a+f]=-2==u||2==u||-2==f||2==f||0==u&&0==f}},v=function(t){for(var r=B.getBCHTypeNumber(e),n=0;n<18;n+=1){var a=!t&&1==(r>>n&1);o[Math.floor(n/3)][n%3+i-8-3]=a}for(n=0;n<18;n+=1){a=!t&&1==(r>>n&1);o[n%3+i-8-3][Math.floor(n/3)]=a}},d=function(t,r){for(var e=n<<3|r,a=B.getBCHTypeInfo(e),u=0;u<15;u+=1){var f=!t&&1==(a>>u&1);u<6?o[u][8]=f:u<8?o[u+1][8]=f:o[i-15+u][8]=f}for(u=0;u<15;u+=1){f=!t&&1==(a>>u&1);u<8?o[8][i-u-1]=f:u<9?o[8][15-u-1+1]=f:o[8][15-u-1]=f}o[i-8][8]=!t},w=function(t,r){for(var e=-1,n=i-1,a=7,u=0,f=B.getMaskFunction(r),c=i-1;c>0;c-=2)for(6==c&&(c-=1);;){for(var g=0;g<2;g+=1)if(null==o[n][c-g]){var l=!1;u<t.length&&(l=1==(t[u]>>>a&1)),f(n,c-g)&&(l=!l),o[n][c-g]=l,-1==(a-=1)&&(u+=1,a=7)}if((n+=e)<0||i<=n){n-=e,e=-e;break}}},p=function(t,r,e){for(var n=A.getRSBlocks(t,r),o=b(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=k(i[u],l.getLength()-1).mod(l);for(a[u]=new Array(l.getLength()-1),g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=s>=0?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};f.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=M(t);break;case"Alphanumeric":e=x(t);break;case"Byte":e=m(t);break;case"Kanji":e=L(t);break;default:throw"mode:"+r}u.push(e),a=null},f.isDark=function(t,r){if(t<0||i<=t||r<0||i<=r)throw t+","+r;return o[t][r]},f.getModuleCount=function(){return i},f.make=function(){if(e<1){for(var t=1;t<40;t++){for(var r=A.getRSBlocks(t,n),o=b(),i=0;i<u.length;i++){var a=u[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var g=0;for(i=0;i<r.length;i++)g+=r[i].dataCount;if(o.getLengthInBits()<=8*g)break}e=t}c(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){c(!0,e);var n=B.getLostPoint(f);(0==e||t>n)&&(t=n,r=e)}return r}())},f.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<f.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<f.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=f.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},f.createSvgTag=function(t,r,e,n){var o={};"object"==typeof arguments[0]&&(t=(o=arguments[0]).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,c,g=f.getModuleCount()*t+2*r,l="";for(c="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",l+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',l+=o.scalable?"":' width="'+g+'px" height="'+g+'px"',l+=' viewBox="0 0 '+g+" "+g+'" ',l+=' preserveAspectRatio="xMinYMin meet"',l+=n.text||e.text?' role="img" aria-labelledby="'+y([n.id,e.id].join(" ").trim())+'"':"",l+=">",l+=n.text?'<title id="'+y(n.id)+'">'+y(n.text)+"</title>":"",l+=e.text?'<description id="'+y(e.id)+'">'+y(e.text)+"</description>":"",l+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',l+='<path d="',a=0;a<f.getModuleCount();a+=1)for(u=a*t+r,i=0;i<f.getModuleCount();i+=1)f.isDark(a,i)&&(l+="M"+(i*t+r)+","+u+c);return l+='" stroke="transparent" fill="black"/>',l+="</svg>"},f.createDataURL=function(t,r){t=t||2,r=void 0===r?4*t:r;var e=f.getModuleCount()*t+2*r,n=r,o=e-r;return I(e,e,function(r,e){if(n<=r&&r<o&&n<=e&&e<o){var i=Math.floor((r-n)/t),a=Math.floor((e-n)/t);return f.isDark(a,i)?0:1}return 1})},f.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=f.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=f.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=y(e),o+='"'),o+="/>"};var y=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return f.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*f.getModuleCount()+2*t,u=t,c=a-t,g={"██":"█","█ ":"▀"," █":"▄","  ":" "},l={"██":"▀","█ ":"▀"," █":" ","  ":" "},h="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<c&&u<=r&&r<c&&f.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<c&&u<=r+1&&r+1<c&&f.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",h+=t<1&&r+1>=c?l[i]:g[i];h+="\n"}return a%2&&t>0?h.substring(0,h.length-a-1)+Array(a+1).join("▀"):h.substring(0,h.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=f.getModuleCount()*t+2*r,u=r,c=a-r,g=Array(t+1).join("██"),l=Array(t+1).join("  "),h="",s="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),s="",n=0;n<a;n+=1)i=1,u<=n&&n<c&&u<=e&&e<c&&f.isDark(o,Math.floor((n-u)/t))&&(i=0),s+=i?g:l;for(o=0;o<t;o+=1)h+=s+"\n"}return h.substring(0,h.length-1)},f.renderTo2dContext=function(t,r){r=r||2;for(var e=f.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=f.isDark(n,o)?"black":"white",t.fillRect(n*r,o*r,r,r)},f};t.stringToBytes=(t.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,t.createStringToBytes=function(t,r){var e=function(){for(var e=S(t),n=function(){var t=e.read();if(-1==t)throw"eof";return t},o=0,i={};;){var a=e.read();if(-1==a)break;var u=n(),f=n()<<8|n();i[String.fromCharCode(a<<8|u)]=f,o+=1}if(o!=r)throw o+" != "+r;return i}(),n="?".charCodeAt(0);return function(t){for(var r=[],o=0;o<t.length;o+=1){var i=t.charCodeAt(o);if(i<128)r.push(i);else{var a=e[t.charAt(o)];"number"==typeof a?(255&a)==a?r.push(a):(r.push(a>>>8),r.push(255&a)):r.push(n)}}return r}};var r,e,n,o,i,a=1,u=2,f=4,c=8,g={L:1,M:0,Q:3,H:2},l=0,h=1,s=2,v=3,d=4,w=5,p=6,y=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],e=1335,n=7973,i=function(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r},(o={}).getBCHTypeInfo=function(t){for(var r=t<<10;i(r)-i(e)>=0;)r^=e<<i(r)-i(e);return 21522^(t<<10|r)},o.getBCHTypeNumber=function(t){for(var r=t<<12;i(r)-i(n)>=0;)r^=n<<i(r)-i(n);return t<<12|r},o.getPatternPosition=function(t){return r[t-1]},o.getMaskFunction=function(t){switch(t){case l:return function(t,r){return(t+r)%2==0};case h:return function(t,r){return t%2==0};case s:return function(t,r){return r%3==0};case v:return function(t,r){return(t+r)%3==0};case d:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case w:return function(t,r){return t*r%2+t*r%3==0};case p:return function(t,r){return(t*r%2+t*r%3)%2==0};case y:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},o.getErrorCorrectPolynomial=function(t){for(var r=k([1],0),e=0;e<t;e+=1)r=r.multiply(k([1,C.gexp(e)],0));return r},o.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case f:case c:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case f:return 16;case c:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case f:return 16;case c:return 12;default:throw"mode:"+t}}},o.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);i>5&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},o),C=function(){for(var t=new Array(256),r=new Array(256),e=0;e<8;e+=1)t[e]=1<<e;for(e=8;e<256;e+=1)t[e]=t[e-4]^t[e-5]^t[e-6]^t[e-8];for(e=0;e<255;e+=1)r[t[e]]=e;var n={glog:function(t){if(t<1)throw"glog("+t+")";return r[t]},gexp:function(r){for(;r<0;)r+=255;for(;r>=256;)r-=255;return t[r]}};return n}();function k(t,r){if(void 0===t.length)throw t.length+"/"+r;var e=function(){for(var e=0;e<t.length&&0==t[e];)e+=1;for(var n=new Array(t.length-e+r),o=0;o<t.length-e;o+=1)n[o]=t[o+e];return n}(),n={getAt:function(t){return e[t]},getLength:function(){return e.length},multiply:function(t){for(var r=new Array(n.getLength()+t.getLength()-1),e=0;e<n.getLength();e+=1)for(var o=0;o<t.getLength();o+=1)r[e+o]^=C.gexp(C.glog(n.getAt(e))+C.glog(t.getAt(o)));return k(r,0)},mod:function(t){if(n.getLength()-t.getLength()<0)return n;for(var r=C.glog(n.getAt(0))-C.glog(t.getAt(0)),e=new Array(n.getLength()),o=0;o<n.getLength();o+=1)e[o]=n.getAt(o);for(o=0;o<t.getLength();o+=1)e[o]^=C.gexp(C.glog(t.getAt(o))+r);return k(e,0).mod(t)}};return n}var A=function(){var t=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],r=function(t,r){var e={};return e.totalCount=t,e.dataCount=r,e},e={};return e.getRSBlocks=function(e,n){var o=function(r,e){switch(e){case g.L:return t[4*(r-1)+0];case g.M:return t[4*(r-1)+1];case g.Q:return t[4*(r-1)+2];case g.H:return t[4*(r-1)+3];default:return}}(e,n);if(void 0===o)throw"bad rs block @ typeNumber:"+e+"/errorCorrectionLevel:"+n;for(var i=o.length/3,a=[],u=0;u<i;u+=1)for(var f=o[3*u+0],c=o[3*u+1],l=o[3*u+2],h=0;h<f;h+=1)a.push(r(c,l));return a},e}(),b=function(){var t=[],r=0,e={getBuffer:function(){return t},getAt:function(r){var e=Math.floor(r/8);return 1==(t[e]>>>7-r%8&1)},put:function(t,r){for(var n=0;n<r;n+=1)e.putBit(1==(t>>>r-n-1&1))},getLengthInBits:function(){return r},putBit:function(e){var n=Math.floor(r/8);t.length<=n&&t.push(0),e&&(t[n]|=128>>>r%8),r+=1}};return e},M=function(t){var r=a,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+2<r.length;)t.put(o(r.substring(n,n+3)),10),n+=3;n<r.length&&(r.length-n==1?t.put(o(r.substring(n,n+1)),4):r.length-n==2&&t.put(o(r.substring(n,n+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return n},x=function(t){var r=u,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+1<r.length;)t.put(45*o(r.charAt(n))+o(r.charAt(n+1)),11),n+=2;n<r.length&&t.put(o(r.charAt(n)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return n},m=function(r){var e=f,n=t.stringToBytes(r),o={getMode:function(){return e},getLength:function(t){return n.length},write:function(t){for(var r=0;r<n.length;r+=1)t.put(n[r],8)}};return o},L=function(r){var e=c,n=t.stringToBytesFuncs.SJIS;if(!n)throw"sjis not supported.";!function(){var t=n("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=n(r),i={getMode:function(){return e},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return i},D=function(){var t=[],r={writeByte:function(r){t.push(255&r)},writeShort:function(t){r.writeByte(t),r.writeByte(t>>>8)},writeBytes:function(t,e,n){e=e||0,n=n||t.length;for(var o=0;o<n;o+=1)r.writeByte(t[o+e])},writeString:function(t){for(var e=0;e<t.length;e+=1)r.writeByte(t.charCodeAt(e))},toByteArray:function(){return t},toString:function(){var r="";r+="[";for(var e=0;e<t.length;e+=1)e>0&&(r+=","),r+=t[e];return r+="]"}};return r},S=function(t){var r=t,e=0,n=0,o=0,i={read:function(){for(;o<8;){if(e>=r.length){if(0==o)return-1;throw"unexpected end of file./"+o}var t=r.charAt(e);if(e+=1,"="==t)return o=0,-1;t.match(/^\s$/)||(n=n<<6|a(t.charCodeAt(0)),o+=6)}var i=n>>>o-8&255;return o-=8,i}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return i},I=function(t,r,e){for(var n=function(t,r){var e=t,n=r,o=new Array(t*r),i={setPixel:function(t,r,n){o[r*e+t]=n},write:function(t){t.writeString("GIF87a"),t.writeShort(e),t.writeShort(n),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(e),t.writeShort(n),t.writeByte(0);var r=a(2);t.writeByte(2);for(var o=0;r.length-o>255;)t.writeByte(255),t.writeBytes(r,o,255),o+=255;t.writeByte(r.length-o),t.writeBytes(r,o,r.length-o),t.writeByte(0),t.writeString(";")}},a=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,i=u(),a=0;a<r;a+=1)i.add(String.fromCharCode(a));i.add(String.fromCharCode(r)),i.add(String.fromCharCode(e));var f,c,g,l=D(),h=(f=l,c=0,g=0,{write:function(t,r){if(t>>>r!=0)throw"length over";for(;c+r>=8;)f.writeByte(255&(t<<c|g)),r-=8-c,t>>>=8-c,g=0,c=0;g|=t<<c,c+=r},flush:function(){c>0&&f.writeByte(g)}});h.write(r,n);var s=0,v=String.fromCharCode(o[s]);for(s+=1;s<o.length;){var d=String.fromCharCode(o[s]);s+=1,i.contains(v+d)?v+=d:(h.write(i.indexOf(v),n),i.size()<4095&&(i.size()==1<<n&&(n+=1),i.add(v+d)),v=d)}return h.write(i.indexOf(v),n),h.write(e,n),h.flush(),l.toByteArray()},u=function(){var t={},r=0,e={add:function(n){if(e.contains(n))throw"dup key:"+n;t[n]=r,r+=1},size:function(){return r},indexOf:function(r){return t[r]},contains:function(r){return void 0!==t[r]}};return e};return i}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=D();n.write(a);for(var u=function(){var t=0,r=0,e=0,n="",o={},i=function(t){n+=String.fromCharCode(a(63&t))},a=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return o.writeByte=function(n){for(t=t<<8|255&n,r+=8,e+=1;r>=6;)i(t>>>r-6),r-=6},o.flush=function(){if(r>0&&(i(t<<6-r),t=0,r=0),e%3!=0)for(var o=3-e%3,a=0;a<o;a+=1)n+="="},o.toString=function(){return n},o}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return t}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||n>=57344?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}(function(){return qrcode});;return qrcode;})();
+function wbQrSvg(url){
+ try{
+  const q=WB_QR(0,"M");q.addData(String(url));q.make();
+  const n=q.getModuleCount(),m=2;let d="";
+  for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(q.isDark(r,c))d+=`M${c+m} ${r+m}h1v1h-1z`;
+  return`<svg viewBox="0 0 ${n+m*2} ${n+m*2}" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg" aria-label="QR-Code"><rect width="100%" height="100%" fill="#fff"/><path d="${d}" fill="#111"/></svg>`;
+ }catch(e){return"";}
+}
+function wbSichereUrl(u){
+ const t=String(u||"").trim();if(!t)return"";
+ const m=/^https?:\/\//i.test(t)?t:("https://"+t);
+ try{const x=new URL(m);return(x.protocol==="http:"||x.protocol==="https:")?x.href:"";}catch(e){return"";}
+}
+function wbYoutubeId(u){
+ const m=String(u||"").match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,15})/);
+ return m?m[1]:"";
+}
+
+// ---- Seiten ----
+function wbBoardVerwalter(){return isTeacher()||(wb&&wb.board&&wb.board.createdBy===currentUser.uid);}
+function wbSeitenZahl(){let n=wb.board.seiten||1;wb.items.forEach(it=>{if((it.seite||1)>n)n=it.seite;});return Math.min(10,Math.max(1,n));}
+function wbSeitenLeiste(){
+ const box=$("wbSeiten");if(!box||!wb)return;
+ const n=wbSeitenZahl(),darf=wbBoardVerwalter()&&!wb.ro;
+ let h="";
+ if(n>1||darf)for(let i=1;i<=n;i++)h+=`<button type="button"class="wb-seite-btn${i===wb.seite?" on":""}"data-seite="${i}"title="Seite ${i}">${i}</button>`;
+ if(darf&&n<10)h+=`<button type="button"class="wb-seite-btn wb-seite-neu"data-seite="neu"title="Neue Seite">+</button>`;
+ if(isTeacher()&&n>1&&wb.seite===n)h+=`<button type="button"class="wb-seite-btn wb-seite-weg"data-seite="weg"title="Letzte Seite löschen">${wbIcon("trash",16)}</button>`;
+ box.innerHTML=h;box.hidden=!h;
+}
+function wbSeiteWechseln(n){
+ if(!wb||n===wb.seite)return;
+ wbBearbeitenEnde(true);
+ wbAnsicht[wb.id+"#"+wb.seite]={...wb.view};
+ wb.seite=n;wb.sel=new Set();
+ wb.els.forEach(el=>el.remove());wb.els.clear();
+ wb.svgEls.forEach(g=>g.remove());wb.svgEls.clear();
+ wb.items.forEach((it,id)=>wbZeichne(id));
+ wbZ();
+ const v=wbAnsicht[wb.id+"#"+n],s=wbBuehne();
+ wb.view=v?{...v}:{x:s.w/2,y:s.h/2,k:1};
+ wbAnsichtSetzen();wbSeitenLeiste();wbNachAenderung();
+ if(!v&&wbSeitenItems().length)wbAlleAnzeigen();
+ wbFuehrungSenden();
+}
+async function wbSeiteNeu(){
+ const n=wbSeitenZahl();if(n>=10)return;
+ try{await updateDoc(doc(db,"whiteboards",wb.id),{seiten:n+1});wb.board.seiten=n+1;wbSeiteWechseln(n+1);}catch(e){wbFehler(e);}
+}
+async function wbSeiteLoeschen(){
+ const n=wbSeitenZahl();if(n<2||wb.seite!==n)return;
+ const items=[...wb.items.values()].filter(i=>(i.seite||1)===n);
+ if(!confirm(`Seite ${n} mit ${items.length} Element${items.length===1?"":"en"} wirklich löschen?`))return;
+ try{
+  await Promise.all(items.map(i=>deleteDoc(doc(db,"whiteboardItems",i.id))));
+  await updateDoc(doc(db,"whiteboards",wb.id),{seiten:n-1});wb.board.seiten=n-1;
+  wbSeiteWechseln(n-1);
+ }catch(e){wbFehler(e);}
+}
+
+// ---- Board-Eigenschaften (Nur-Ansicht, „Alle folgen mir“) ----
+function wbBoardGeaendert(){
+ if(!wb)return;
+ const b=wb.board;
+ wb.ro=b.schreibschutz===true&&!isTeacher();
+ wb.wrap.classList.toggle("wb-ro",wb.ro);
+ wb.fuehrt=!!(b.folgen&&b.fuehrer===currentUser.uid);
+ const sb=$("wbSchutz");if(sb){sb.hidden=!wbBoardVerwalter();sb.textContent=b.schreibschutz?"Mitarbeit: nur Lehrkräfte":"Mitarbeit: alle";}
+ const fb=$("wbFolgen");if(fb){fb.hidden=!isTeacher();fb.classList.toggle("on",!!b.folgen&&wb.fuehrt);}
+ const fo=$("wbFolgenBtn");if(fo)fo.hidden=!isTeacher();
+ wbSeitenLeiste();
+ const ban=$("wbFolgenBanner");
+ if(b.folgen&&b.fuehrer&&b.fuehrer!==currentUser.uid&&!wb.folgenAus){
+  if(ban)ban.hidden=false;
+  const f=b.fuehrung;
+  if(f&&f.ts!==wb.letzteFuehrung){
+   wb.letzteFuehrung=f.ts;
+   if(f.seite&&f.seite!==wb.seite)wbSeiteWechseln(f.seite);
+   const s=wbBuehne(),k=wbBegrenzen(s.w/(f.w||s.w),0.1,4);
+   wb.view={k,x:s.w/2-f.cx*k,y:s.h/2-f.cy*k};wbAnsichtSetzen();
+  }
+ }else if(ban)ban.hidden=true;
+ wbNachAenderung();
+}
+function wbFuehrungSenden(){
+ if(!wb||!wb.fuehrt)return;
+ if(wb.fuehrTimer)return;
+ wb.fuehrTimer=setTimeout(()=>{
+  if(!wb)return;wb.fuehrTimer=null;
+  const s=wbBuehne(),c=wbWeltMitte();
+  updateDoc(doc(db,"whiteboards",wb.id),{fuehrung:{seite:wb.seite,cx:Math.round(c.x),cy:Math.round(c.y),w:Math.round(s.w/wb.view.k),ts:Date.now()}}).catch(()=>{});
+ },700);
+}
+async function wbSchutzUmschalten(){
+ try{await updateDoc(doc(db,"whiteboards",wb.id),{schreibschutz:!wb.board.schreibschutz});}catch(e){wbFehler(e);}
+}
+async function wbFolgenUmschalten(){
+ const an=!(wb.board.folgen&&wb.board.fuehrer===currentUser.uid);
+ try{
+  await updateDoc(doc(db,"whiteboards",wb.id),an?{folgen:true,fuehrer:currentUser.uid}:{folgen:false});
+  toast(an?"Alle Betrachter:innen folgen jetzt deiner Ansicht.":"Folgen beendet.");
+  if(an){wb.fuehrt=true;wbFuehrungSenden();}
+ }catch(e){wbFehler(e);}
+}
+
+// ---- Karten und Werkzeuge: Darstellung ----
+function wbToolDef(k){return WB_TOOLKARTEN.find(t=>t.k===k);}
+function wbKopfHtml(it,editierbar){
+ const titel=it.type==="tool"?(wbToolDef(it.tool)?.titel||"Werkzeug"):(it.titel||"");
+ if(it.type==="tool")return`<div class="wb-kopf"><span class="wb-tool-kopf">${esc(titel)}</span></div>`;
+ return`<div class="wb-kopf"><span class="wb-kopf-txt"data-ph="${it.type==="card"?"Titel (Doppelklick)":"Titel"}">${esc(titel)}</span></div>`;
+}
+function wbWuerfelHtml(wert){
+ const P={1:[5],2:[1,9],3:[1,5,9],4:[1,3,7,9],5:[1,3,5,7,9],6:[1,3,4,6,7,9]}[wert]||[5];
+ let z="";for(let i=1;i<=9;i++)z+=`<i${P.includes(i)?' class="an"':""}></i>`;
+ return`<span class="wb-wuerfel">${z}</span>`;
+}
+function wbToolBody(it){
+ const t=it.tool;
+ if(t==="uhr")return`<div class="wb-t-gross wb-t-zeit">--:--:--</div><div class="wb-t-klein wb-t-datum"></div>`;
+ if(t==="timer"){
+  const lauf=!!it.lauf;
+  return`<div class="wb-t-gross wb-t-zeit">--:--</div>
+  <div class="wb-t-reihe"><button type="button"class="wb-t-btn"data-act="minus"title="1 Minute weniger">−1</button><button type="button"class="wb-t-btn wb-t-haupt"data-act="${lauf?"pause":"start"}">${lauf?"Pause":"Start"}</button><button type="button"class="wb-t-btn"data-act="plus"title="1 Minute mehr">+1</button><button type="button"class="wb-t-btn"data-act="reset">Zurück</button></div>`;
+ }
+ if(t==="stoppuhr")return`<div class="wb-t-gross wb-t-zeit">00:00.0</div><div class="wb-t-reihe"><button type="button"class="wb-t-btn wb-t-haupt"data-act="${it.lauf?"stop":"start"}">${it.lauf?"Stopp":"Start"}</button><button type="button"class="wb-t-btn"data-act="reset">Zurück</button></div>`;
+ if(t==="wuerfel"){
+  const w=(it.werte&&it.werte.length)?it.werte:[1];
+  const roll=Date.now()-(it.ts||0)<1200?" wb-rollen":"";
+  return`<div class="wb-t-wuerfel${roll}">${w.map(wbWuerfelHtml).join("")}</div><div class="wb-t-reihe"><button type="button"class="wb-t-btn wb-t-haupt"data-act="roll">Würfeln</button><button type="button"class="wb-t-btn${(it.anz||1)===1?" an":""}"data-act="eins">1</button><button type="button"class="wb-t-btn${it.anz===2?" an":""}"data-act="zwei">2</button></div>`;
+ }
+ if(t==="sozial"){
+  const f=WB_SOZIAL[it.form]?it.form:"einzel";
+  return`<div class="wb-t-gross wb-t-sozial">${esc(WB_SOZIAL[f])}</div><div class="wb-t-reihe">${Object.entries(WB_SOZIAL).map(([k,n])=>`<button type="button"class="wb-t-btn${k===f?" an":""}"data-act="form:${k}">${esc(n)}</button>`).join("")}</div>`;
+ }
+ if(t==="ampel"){
+  const l=WB_AMPEL[it.licht]?it.licht:"rot";
+  return`<div class="wb-t-ampel">${["rot","gelb","gruen"].map(k=>`<button type="button"class="wb-t-licht${k===l?" an":""}"data-act="licht:${k}"style="--c:${WB_AMPEL[k][0]}"aria-label="${k}"></button>`).join("")}</div><div class="wb-t-klein">${esc(WB_AMPEL[l][1])}</div>`;
+ }
+ if(t==="lostopf"){
+  const rest=(it.liste||[]).filter(x=>!(it.gezogen||[]).includes(x)).length;
+  return`<div class="wb-t-gross wb-t-los">${esc(it.aktuell||(it.liste&&it.liste.length?"?":"Namen fehlen"))}</div><div class="wb-t-klein">${it.liste&&it.liste.length?`${rest} von ${it.liste.length} noch im Topf`:"Doppelklick: Namen eintragen"}</div>
+  <div class="wb-t-reihe"><button type="button"class="wb-t-btn wb-t-haupt"data-act="ziehen">Ziehen</button><button type="button"class="wb-t-btn"data-act="zurueck">Zurücklegen</button><button type="button"class="wb-t-btn"data-act="namen">Namen</button></div>`;
+ }
+ if(t==="gruppen"){
+  const erg=it.ergebnis||[];
+  return`<div class="wb-t-gruppen">${erg.length?erg.map((g,i)=>`<div class="wb-t-gr"><b>Gruppe ${i+1}</b>${g.map(n=>`<span>${esc(n)}</span>`).join("")}</div>`).join(""):`<div class="wb-t-klein">${it.liste&&it.liste.length?"Auf „Mischen“ klicken.":"Doppelklick: Namen eintragen"}</div>`}</div>
+  <div class="wb-t-reihe"><button type="button"class="wb-t-btn"data-act="minus">−</button><span class="wb-t-zahl">${it.n||4} Gruppen</span><button type="button"class="wb-t-btn"data-act="plus">+</button><button type="button"class="wb-t-btn wb-t-haupt"data-act="mischen">Mischen</button><button type="button"class="wb-t-btn"data-act="namen">Namen</button></div>`;
+ }
+ return"";
+}
+function wbKartenFuellen(el,it){
+ const f=wbFarbe(it.c);
+ el.style.left=it.x+"px";el.style.top=it.y+"px";el.style.width=it.w+"px";el.style.height=it.h+"px";
+ el.style.setProperty("--kc",f.dark);el.style.setProperty("--ks",f.soft);
+ el.title=it.authorName?`von ${it.authorName}`:"";
+ let inner="";
+ const kopf=(it.type==="image"&&!wbKopfH(it))?"":wbKopfHtml(it);
+ if(it.type==="card")inner=`${kopf}<div class="wb-txt wb-karte-body"style="font-size:${it.fs||18}px"></div>`;
+ else if(it.type==="image")inner=`${kopf}<div class="wb-bildflaeche"><span class="wb-laden">Bild wird geladen …</span></div>`;
+ else if(it.type==="tool")inner=`${kopf}<div class="wb-karte-body wb-tool-body">${wbToolBody(it)}</div>`;
+ else if(it.type==="qr"){const u=wbSichereUrl(it.url);inner=`${kopf}<div class="wb-karte-body wb-qr-body">${u?wbQrSvg(u)+`<div class="wb-t-klein wb-url">${esc(u.replace(/^https?:\/\//,""))}</div>`:'<div class="wb-t-klein">Doppelklick: Link eintragen</div>'}</div>`;}
+ else if(it.type==="link"){const u=wbSichereUrl(it.url);inner=`${kopf}<div class="wb-karte-body wb-link-body">${u?`<div class="wb-t-klein wb-url">${esc(u.replace(/^https?:\/\//,""))}</div><a class="wb-t-btn wb-t-haupt wb-oeffnen"href="${esc(u)}"target="_blank"rel="noopener noreferrer">Link öffnen</a>`:'<div class="wb-t-klein">Doppelklick: Link eintragen</div>'}</div>`;}
+ else if(it.type==="datei"){const u=wbSichereUrl(it.url);inner=`${kopf}<div class="wb-karte-body wb-link-body"><div class="wb-t-klein wb-url">${esc(it.name||"Datei")}</div>${u?`<a class="wb-t-btn wb-t-haupt wb-oeffnen"href="${esc(u)}"target="_blank"rel="noopener noreferrer">Öffnen</a>`:""}</div>`;}
+ else if(it.type==="video"){
+  const id=wbYoutubeId(it.url),u=wbSichereUrl(it.url);
+  if(id&&wb.videoAn.has(it.id))inner=`${kopf}<div class="wb-karte-body wb-video-body"><iframe src="https://www.youtube-nocookie.com/embed/${id}"title="Video"allow="accelerometer;encrypted-media;picture-in-picture"allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`;
+  else if(id)inner=`${kopf}<div class="wb-karte-body wb-video-body"><button type="button"class="wb-video-start"data-vid="${esc(it.id)}">${wbIcon("video",34)}<span>Video abspielen</span></button></div>`;
+  else if(u)inner=`${kopf}<div class="wb-karte-body wb-link-body"><div class="wb-t-klein wb-url">${esc(u.replace(/^https?:\/\//,""))}</div><a class="wb-t-btn wb-t-haupt wb-oeffnen"href="${esc(u)}"target="_blank"rel="noopener noreferrer">Video öffnen</a></div>`;
+  else inner=`${kopf}<div class="wb-karte-body wb-link-body"><div class="wb-t-klein">Doppelklick: YouTube-Link eintragen</div></div>`;
+ }
+ const schluessel=inner;
+ if(el.dataset.kbau!==schluessel){
+  const ersetzt=!(el.querySelector("iframe")&&el.dataset.kbau&&el.dataset.kbau.includes("<iframe")&&schluessel.includes("<iframe")&&el.dataset.kvid===it.url);
+  el.dataset.kbau=schluessel;el.dataset.kvid=it.url||"";
+  if(ersetzt)el.innerHTML=inner+'<div class="wb-rs"data-rs="1"></div>';
+ }
+ if(it.type==="card"){const t=el.querySelector(".wb-txt");if(t&&wb.editing!==it.id)t.textContent=it.text||"";}
+ const kt=el.querySelector(".wb-kopf-txt");if(kt&&!(wb.editing===it.id&&wb.editFeld==="titel"))kt.textContent=it.titel||"";
+ if(it.type==="image"){
+  const daten=wb.bilder.get(it.imgId);
+  if(daten){
+   const fl=el.querySelector(".wb-bildflaeche");
+   if(fl){let im=fl.querySelector("img");if(!im){im=document.createElement("img");im.draggable=false;im.alt="";fl.insertBefore(im,fl.firstChild);const l=fl.querySelector(".wb-laden");if(l)l.remove();}
+   if(im.getAttribute("src")!==daten)im.setAttribute("src",daten);}
+  }else wbBildLaden(it.imgId);
+ }
+ wbToolTick();
+}
+
+// ---- Werkzeuge: Zeitanzeige (läuft lokal, Zustand liegt als Zeitstempel im Dokument) ----
+function wbZeitText(ms,zehntel){
+ ms=Math.max(0,ms);const s=Math.floor(ms/1000),m=Math.floor(s/60),r=s%60;
+ return`${String(m).padStart(2,"0")}:${String(r).padStart(2,"0")}${zehntel?"."+Math.floor((ms%1000)/100):""}`;
+}
+function wbPiep(){
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const c=wb.audio||(wb.audio=new AC());
+  [0,0.28,0.56].forEach(t=>{const o=c.createOscillator(),g=c.createGain();o.frequency.value=880;g.gain.value=0.15;o.connect(g);g.connect(c.destination);o.start(c.currentTime+t);o.stop(c.currentTime+t+0.18);});
+ }catch(e){}
+}
+function wbToolTick(){
+ if(!wb||!wb.itemsEl)return;
+ wb.itemsEl.querySelectorAll(".wb-tool[data-id]").forEach(el=>{
+  const it=wb.items.get(el.dataset.id);if(!it)return;
+  const z=el.querySelector(".wb-t-zeit");if(!z)return;
+  const jetzt=Date.now();
+  if(it.tool==="uhr"){
+   const d=new Date();z.textContent=d.toLocaleTimeString("de-DE");
+   const dt=el.querySelector(".wb-t-datum");if(dt)dt.textContent=d.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"});
+  }else if(it.tool==="timer"){
+   const rest=it.lauf?(it.ende-jetzt):(it.rest||0)*1000;
+   z.textContent=wbZeitText(rest);
+   const fertig=it.lauf&&rest<=0;
+   el.classList.toggle("wb-fertig",fertig);
+   if(fertig&&el.dataset.piep!==String(it.ende)){el.dataset.piep=String(it.ende);wbPiep();}
+  }else if(it.tool==="stoppuhr"){
+   z.textContent=wbZeitText((it.acc||0)+(it.lauf?jetzt-it.start:0),true);
+  }
+ });
+}
+function wbToolAktion(it,act){
+ const t=it.tool,jetzt=Date.now();
+ if(t==="timer"){
+  if(act==="start"){const rest=(it.rest>0?it.rest:it.dauer)||300;wbUpdate(it.id,{lauf:true,rest,ende:jetzt+rest*1000});}
+  else if(act==="pause"){wbUpdate(it.id,{lauf:false,rest:Math.max(0,Math.round((it.ende-jetzt)/1000))});}
+  else if(act==="reset"){wbUpdate(it.id,{lauf:false,rest:it.dauer||300,ende:0});}
+  else if(act==="plus"||act==="minus"){const d=wbBegrenzen((it.dauer||300)+(act==="plus"?60:-60),60,5400);wbUpdate(it.id,it.lauf?{dauer:d}:{dauer:d,rest:d});}
+ }else if(t==="stoppuhr"){
+  if(act==="start")wbUpdate(it.id,{lauf:true,start:jetzt});
+  else if(act==="stop")wbUpdate(it.id,{lauf:false,acc:(it.acc||0)+jetzt-it.start});
+  else if(act==="reset")wbUpdate(it.id,{lauf:false,acc:0,start:0});
+ }else if(t==="wuerfel"){
+  const anz=act==="eins"?1:act==="zwei"?2:(it.anz||1);
+  const werte=Array.from({length:anz},()=>1+Math.floor(Math.random()*6));
+  wbUpdate(it.id,act==="roll"?{anz,werte,ts:jetzt}:{anz,werte});
+ }else if(t==="sozial"&&act.startsWith("form:"))wbUpdate(it.id,{form:act.slice(5)});
+ else if(t==="ampel"&&act.startsWith("licht:"))wbUpdate(it.id,{licht:act.slice(6)});
+ else if(t==="lostopf"){
+  if(act==="namen"){wbNamenModal(it.id);return;}
+  if(act==="zurueck")wbUpdate(it.id,{gezogen:[],aktuell:""});
+  else if(act==="ziehen"){
+   const pool=(it.liste||[]).filter(x=>!(it.gezogen||[]).includes(x));
+   if(!(it.liste||[]).length){wbNamenModal(it.id);return;}
+   if(!pool.length){toast("Alle Namen sind gezogen. „Zurücklegen“ füllt den Topf wieder.");return;}
+   const n=pool[Math.floor(Math.random()*pool.length)];
+   wbUpdate(it.id,{aktuell:n,gezogen:[...(it.gezogen||[]),n]});
+  }
+ }else if(t==="gruppen"){
+  if(act==="namen"){wbNamenModal(it.id);return;}
+  if(act==="plus"||act==="minus")wbUpdate(it.id,{n:wbBegrenzen((it.n||4)+(act==="plus"?1:-1),2,12)});
+  else if(act==="mischen"){
+   const l=[...(it.liste||[])];if(!l.length){wbNamenModal(it.id);return;}
+   for(let i=l.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[l[i],l[j]]=[l[j],l[i]];}
+   const n=Math.min(it.n||4,l.length),erg=Array.from({length:n},()=>[]);
+   l.forEach((x,i)=>erg[i%n].push(x));wbUpdate(it.id,{ergebnis:erg});
+  }
+ }
+}
+function wbKlick(e){
+ if(!wb)return;
+ const v=e.target.closest?.(".wb-video-start");
+ if(v){wb.videoAn.add(v.dataset.vid);wbZeichne(v.dataset.vid);return;}
+ const b=e.target.closest?.("[data-act]");if(!b)return;
+ const el=b.closest(".wb-item");if(!el||wb.ro)return;
+ const it=wb.items.get(el.dataset.id);if(!it)return;
+ e.preventDefault();e.stopPropagation();
+ wbToolAktion(it,b.dataset.act);
+}
+
+// ---- Eingabefenster (Namen, Links) ----
+function wbNamenModal(id){
+ const it=wb.items.get(id);if(!it||wb.ro)return;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">${esc((wbToolDef(it.tool)?.titel||"Werkzeug").toUpperCase())}</div><h2>Namen eintragen</h2>
+  <p style="margin-top:0">Ein Name pro Zeile. Die Namen bleiben nur auf dieser Tafel.</p>
+  <textarea id="wbNamenText"rows="10"style="width:100%;font:inherit">${esc((it.liste||[]).join("\n"))}</textarea>
+  <div class="form-actions"style="margin-top:10px"><button class="secondary"type="button"id="wbNamenKlasse">Klasse laden</button><button class="secondary"type="button"onclick="closeModal()">Abbrechen</button><button class="primary"type="button"id="wbNamenOk">Speichern</button></div>`);
+ $("wbNamenKlasse").addEventListener("click",async()=>{
+  try{
+   const s=await getDocs(collection(db,"users"));
+   const n=s.docs.map(d=>d.data()).filter(u=>u.status==="approved"&&u.role==="student").map(u=>wbKurz(u.displayName)||u.displayName).filter(Boolean).sort((a,b)=>a.localeCompare(b,"de"));
+   $("wbNamenText").value=n.join("\n");toast(`${n.length} Namen geladen. Prüfe die Liste und speichere.`);
+  }catch(e){toast("Die Klassenliste konnte nicht geladen werden.");}
+ });
+ $("wbNamenOk").addEventListener("click",()=>{
+  const liste=$("wbNamenText").value.split("\n").map(x=>x.trim()).filter(Boolean).slice(0,60);
+  wbUpdate(id,{liste,gezogen:[],aktuell:"",ergebnis:[]});closeModal();
+ });
+}
+function wbToolBearbeiten(id){
+ const it=wb.items.get(id);if(!it||wb.ro)return;
+ if(it.type==="tool"){if(it.tool==="lostopf"||it.tool==="gruppen")wbNamenModal(id);return;}
+ if(!["qr","link","video"].includes(it.type))return;
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">${it.type==="qr"?"QR-CODE":it.type==="video"?"VIDEO":"LINK"}</div><h2>${it.type==="video"?"YouTube-Link":"Internetadresse"} eintragen</h2>
+  <div class="form"><label>Link<input id="wbUrl"placeholder="https://…"value="${esc(it.url||"")}"></label>
+  <label>Titel (optional)<input id="wbUrlTitel"maxlength="80"value="${esc(it.titel||"")}"></label>
+  <div class="form-actions"><button class="secondary"type="button"onclick="closeModal()">Abbrechen</button><button class="primary"type="button"id="wbUrlOk">Speichern</button></div></div>`);
+ setTimeout(()=>{const i=$("wbUrl");if(i)i.focus();},50);
+ $("wbUrlOk").addEventListener("click",()=>{
+  const roh=$("wbUrl").value.trim(),u=wbSichereUrl(roh);
+  if(roh&&!u){toast("Das ist keine gültige Internetadresse.");return}
+  wbUpdate(id,{url:u,titel:$("wbUrlTitel").value.trim()});closeModal();
+ });
+}
+
+// ---- Einfügen aus dem Menü ----
+function wbKartenMenuAuf(){
+ const m=$("wbKartenMenu"),b=$("wbKartenBtn");
+ const knopf=(k,n,ic)=>`<button type="button"data-karte="${k}">${wbIcon(ic,26)}<span>${n}</span></button>`;
+ m.innerHTML=`<div class="wb-menu-titel">Karten</div><div class="wb-menu-gitter">${WB_KARTEN.map(x=>knopf(x.k,x.n,x.ic)).join("")}</div>
+  <div class="wb-menu-titel">Werkzeuge für den Unterricht</div><div class="wb-menu-gitter">${WB_TOOLKARTEN.map(x=>knopf(x.k,x.n,x.ic)).join("")}</div>`;
+ const r=b.getBoundingClientRect(),w=wb.wrap.getBoundingClientRect();
+ m.style.left=(r.right-w.left+10)+"px";m.style.top=Math.max(8,Math.min(r.top-w.top-150,w.height-m.offsetHeight-8))+"px";m.hidden=false;
+}
+function wbKarteEinfuegen(k){
+ $("wbKartenMenu").hidden=true;
+ if(wb.ro)return;
+ if(k==="image"){$("wbBildInput").click();return;}
+ if(k==="datei"){$("wbDateiInput").click();return;}
+ const c=wbWeltMitte(),off=((wb.kartenZaehler=(wb.kartenZaehler||0)+1)%5)*26;
+ const def=WB_KARTEN.find(x=>x.k===k)||WB_TOOLKARTEN.find(x=>x.k===k);if(!def)return;
+ const istTool=!!WB_TOOLKARTEN.find(x=>x.k===k);
+ const teil={type:istTool?"tool":k,x:Math.round(c.x-def.w/2+off),y:Math.round(c.y-def.h/2+off),w:def.w,h:def.h,c:"grau"};
+ if(istTool){teil.tool=k;Object.assign(teil,JSON.parse(JSON.stringify(def.start)));}
+ else if(k==="card"){teil.titel="";teil.text="";}
+ else if(k==="video"){teil.titel="Video";teil.url="";}
+ else if(k==="link"){teil.titel="Link";teil.url="";}
+ else if(k==="qr"){teil.titel="QR-Code";teil.url="";}
+ const id=wbErzeugen(teil);
+ wbUndoPush(async()=>{await wbLoeschenIds([id],true);});
+ wbSetzeWerkzeug("select");wbAuswahlSetzen([id]);
+ if(k==="card")wbBearbeitenStart(id,"text");
+ else if(["video","link","qr"].includes(k))wbToolBearbeiten(id);
+ else if(k==="lostopf"||k==="gruppen")wbNamenModal(id);
+}
+async function wbDateiHochladen(datei){
+ if(!datei||wb.ro)return;
+ try{
+  toast("Datei wird hochgeladen …");
+  const up=await uploadCampusDatei(datei,`whiteboardDateien/${wb.id}`);
+  const c=wbWeltMitte(),def=WB_KARTEN.find(x=>x.k==="datei");
+  const id=wbErzeugen({type:"datei",x:Math.round(c.x-def.w/2),y:Math.round(c.y-def.h/2),w:def.w,h:def.h,c:"grau",titel:datei.name.slice(0,60),name:datei.name,url:up.url});
+  wbUndoPush(async()=>{await wbLoeschenIds([id],true);});
+  wbSetzeWerkzeug("select");wbAuswahlSetzen([id]);toast("Datei eingefügt.");
+ }catch(e){console.error("Datei:",e);toast(e&&e.message?e.message:"Die Datei konnte nicht hochgeladen werden.");}
+}
+
 Object.assign(window,{openWhiteboard,closeWhiteboard,openWhiteboardForm,addWhiteboard});
 
 /* =========================================================
@@ -15539,7 +16305,7 @@ async function render(){
  const p=location.hash.replace("#","")||"start";
  const pages={
  start:renderStart,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
- faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,leistungsnachweis:renderLeistungsnachweis,
+ faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,leistungsnachweis:renderLeistungsnachweis,didaktik:renderDidaktikKompass,
  ressourcen:renderRessourcenRoute,lernpfad:renderLernpfadRoute,forum:renderForum,"forum-board":renderForumBoard,"forum-nachrichten":renderForumMessages,
  pinnwand:renderPinnwandUebersicht,"pinnwand-board":renderPinnwandBoard,
  kollaboration:renderKollaborationsTools,
@@ -15566,7 +16332,7 @@ async function render(){
  };
  const fn=pages[p]||renderStart;
  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",
- a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || (a.dataset.page==="lernwerkstatt" && ["unterricht-pp","faecher","fach","whiteboard","whiteboard-board"].includes(p))));
+ a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || (a.dataset.page==="lernwerkstatt" && ["unterricht-pp","faecher","fach","whiteboard","whiteboard-board","didaktik"].includes(p))));
  const content=$("content");
  if(!content)return;
  // Never leave a blank page while a module is loading.
