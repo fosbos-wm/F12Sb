@@ -7481,6 +7481,7 @@ const WB_CSS=`<style>
 .wb-cursors.wb-ohneanim .wb-cursor{transition:none}
 .wb-cursor svg{display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
 .wb-cursor span{position:absolute;left:14px;top:16px;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.wb-meldung{position:absolute;left:50%;top:64px;transform:translateX(-50%);max-width:min(560px,calc(100% - 32px));background:#fdecea;color:#8a1f17;border:1px solid #f1b0aa;border-radius:12px;padding:10px 14px;font-size:13px;line-height:1.4;z-index:9;box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .wb-hinweis{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);text-align:center;color:#7a8c9c;pointer-events:none;max-width:320px}
 .wb-hinweis b{display:block;font-size:18px;color:#51657a;margin-bottom:6px}
 .wb-card,.wb-tool,.wb-qr,.wb-link,.wb-datei,.wb-video{background:#fff;border-radius:14px;box-shadow:0 8px 20px rgba(40,50,70,.16),0 1px 3px rgba(40,50,70,.1);border:1px solid #dbe4ec;overflow:hidden;display:flex;flex-direction:column}
@@ -7518,11 +7519,13 @@ const WB_CSS=`<style>
 .wb-video-body{padding:0}.wb-video-body iframe{width:100%;height:100%;border:0}
 .wb-video-start{width:100%;height:100%;border:0;background:#17384f;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-size:14px;font-weight:700}
 .wb-link-body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-.wb-seiten{position:absolute;left:50%;top:12px;transform:translateX(-50%);display:flex;gap:6px;background:#fff;padding:5px;border-radius:14px;box-shadow:0 8px 24px rgba(24,67,96,.16);border:1px solid var(--line);z-index:6;max-width:calc(100% - 330px);overflow-x:auto}
+.wb-seiten{position:absolute;left:12px;top:12px;display:flex;gap:6px;background:#fff;padding:5px;border-radius:14px;box-shadow:0 8px 24px rgba(24,67,96,.16);border:1px solid var(--line);z-index:6;max-width:calc(100% - 640px);overflow-x:auto}
+@media(max-width:1180px){.wb-seiten{top:70px;max-width:calc(100% - 100px);left:72px}}
 .wb-seite-btn{min-width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:#3a4a5c;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:none}
 .wb-seite-btn.on{background:#2f7fc6;color:#fff}.wb-seite-btn:hover:not(.on){background:#eef4fa}
 .wb-folgenbanner{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:#17384f;color:#fff;border-radius:999px;padding:8px 8px 8px 16px;display:flex;gap:10px;align-items:center;z-index:7;font-size:13px}
 .wb-folgenbanner button{border:0;border-radius:999px;padding:6px 12px;background:#fff;color:#17384f;font-weight:700}
+.wb-wrap.wb-ro .wb-t-btn,.wb-wrap.wb-ro .wb-t-licht{pointer-events:none;opacity:.5}
 .wb-wrap.wb-ro .wb-tools,.wb-wrap.wb-ro .wb-props,.wb-wrap.wb-ro #wbUndo,.wb-wrap.wb-ro #wbTpl,.wb-wrap.wb-ro #wbNamen{display:none}
 .wb-art-chip{display:inline-block;margin-left:8px;padding:2px 10px;border-radius:999px;background:#17384f;color:#fff;font-size:12px;font-weight:700;vertical-align:middle}
 .wb-kartenmenu{width:min(380px,calc(100% - 100px));padding:10px}
@@ -7530,7 +7533,7 @@ const WB_CSS=`<style>
 .wb-menu-gitter{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .wb-menu .wb-menu-gitter button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;text-align:center;font-size:12px;width:auto}
 @media(max-width:760px){
- .wb-seiten{top:56px;max-width:calc(100% - 16px)}
+ .wb-seiten{top:56px;left:8px;max-width:calc(100% - 16px)}
  .wb-wrap{height:calc(100vh - 200px);min-height:480px}
  .wb-tools{left:50%;top:auto;bottom:12px;transform:translateX(-50%);flex-direction:row;max-width:calc(100% - 16px);overflow-x:auto}
  .wb-btn{width:38px;height:38px;flex:none}
@@ -7540,11 +7543,18 @@ const WB_CSS=`<style>
 </style>`;
 
 // ------------------------------------------------------------ Übersicht
+let wbLadeFehler="";
 async function getWhiteboards(){
  try{
   const snap=await getDocs(collection(db,"whiteboards"));
+  wbLadeFehler="";
   return snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
- }catch(e){console.error("Whiteboards laden:",e);return null;}
+ }catch(e){console.error("Whiteboards laden:",e);wbLadeFehler=(e&&(e.code||e.name))||"unbekannt";return null;}
+}
+function wbFehlerText(code){
+ if(code==="permission-denied")return"Firebase verweigert den Zugriff (permission-denied). Die Firestore-Regeln für Whiteboard und Tafel sind noch nicht veröffentlicht oder fehlerhaft eingefügt.";
+ if(code==="unavailable"||code==="deadline-exceeded")return`Keine Verbindung zu Firebase (${code}). Bitte Netzwerk prüfen und neu laden.`;
+ return`Es ist ein Fehler aufgetreten (${code||"unbekannt"}).`;
 }
 function wbKarteKopf(id){
  let h=0;const s=String(id);for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;
@@ -7559,7 +7569,7 @@ async function renderWhiteboardUebersicht(){
  const boards=await getWhiteboards();
  const kopf=pageHead("ZUSAMMENARBEIT","Team-Whiteboard","Gemeinsam auf einer unendlichen Fläche arbeiten: Haftnotizen, Text, Formen, Pfeile und Zeichnungen – alle sehen Änderungen live.",
   `<button class="primary"onclick="openWhiteboardForm()">＋ Neues Whiteboard</button>`);
- if(boards===null)return`${WB_CSS}${kopf}<div class="empty"><strong>Whiteboards konnten nicht geladen werden.</strong>Bitte die Firestore-Regeln für das Whiteboard veröffentlichen (siehe Hinweis in der Anleitung).</div>${footer()}`;
+ if(boards===null)return`${WB_CSS}${kopf}<div class="empty"><strong>Whiteboards konnten nicht geladen werden.</strong>${esc(wbFehlerText(wbLadeFehler))}<br><small>Tipp: Auf der Seite diagnose.html lässt sich das genau prüfen.</small></div>${footer()}`;
  return`${WB_CSS}${kopf}
  <div class="wb-gitter">${boards.map(b=>`<button type="button"class="wb-karte"onclick="openWhiteboard('${b.id}')">
   ${wbKarteKopf(b.id)}
@@ -7593,7 +7603,7 @@ async function addWhiteboard(){
   closeModal();openWhiteboard(r.id);
  }catch(e){
   console.error("Whiteboard anlegen:",e);
-  toast(e?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln prüfen.":"Whiteboard konnte nicht angelegt werden.");
+  toast(e?.code==="permission-denied"?"Firebase verweigert das Anlegen (permission-denied). Bitte die Firestore-Regeln prüfen.":`Whiteboard konnte nicht angelegt werden (${(e&&(e.code||e.name))||"unbekannt"}).`);
  }
 }
 async function wbBoardLoeschen(id){
@@ -7749,12 +7759,21 @@ function wbAlleAnzeigen(){
 function wbWeltMitte(){const s=wbBuehne();return{x:(s.w/2-wb.view.x)/wb.view.k,y:(s.h/2-wb.view.y)/wb.view.k};}
 
 // ---- Schreiben (mit Fehlerhinweis) ----
+function wbMeldung(text){
+ const w=$("wbWrap");if(!w)return;
+ let m=$("wbMeldung");
+ if(!m){m=document.createElement("div");m.id="wbMeldung";m.className="wb-meldung";w.appendChild(m);}
+ m.textContent=text;m.hidden=!text;
+}
 function wbFehler(e){
  console.error("Whiteboard:",e);
+ if(e&&e.code==="permission-denied")wbMeldung("Zugriff verweigert (permission-denied): Die Firestore-Regeln für Whiteboard und Tafel sind nicht (richtig) veröffentlicht. Änderungen werden nicht gespeichert.");
  const t=Date.now();if(t-(wb?.letzterFehler||0)<4000)return;if(wb)wb.letzterFehler=t;
  toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln für das Whiteboard veröffentlichen.":"Das hat nicht geklappt. Bitte erneut versuchen.");
 }
+function wbSauber(o){const r={};Object.keys(o).forEach(k=>{if(o[k]!==undefined)r[k]=o[k];});return r;}
 function wbUpdate(id,felder){
+ felder=wbSauber(felder);
  const it=wb.items.get(id);if(it)Object.assign(it,felder);
  return updateDoc(doc(db,"whiteboardItems",id),{...felder,updatedAt:serverTimestamp()}).catch(wbFehler);
 }
@@ -7771,6 +7790,7 @@ function wbErzeugen(teil,opt){
   authorUid:currentUser.uid,authorName:profile?.displayName||currentUser.email||"Mitglied",
   ...std,...teil,createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
  delete daten.id;
+ Object.keys(daten).forEach(k=>{if(daten[k]===undefined)delete daten[k];});
  wb.items.set(ref.id,{id:ref.id,...daten});wbZeichne(ref.id);wbZ();wbNachAenderung();
  setDoc(ref,daten).catch(e=>{wb.items.delete(ref.id);wbEntfernenDom(ref.id);wbFehler(e);});
  return ref.id;
@@ -8064,6 +8084,14 @@ function wbDown(e){
  if(wb.pointers.size>=2){wbPinchStart();return;}
  if(e.button===2)return;
  if(e.target.closest?.('[contenteditable="true"]'))return;
+ // Eigene Doppelklick-Erkennung: Der Browser meldet kein dblclick, wenn pointerdown abgebrochen wird.
+ {
+  const jetzt=Date.now(),l=wb.letzterDown;
+  if(l&&!l.bewegt&&jetzt-l.t<400&&Math.hypot(e.clientX-l.x,e.clientY-l.y)<12&&e.button!==1&&wb.tool==="select"&&!e.target.closest?.("[data-act],a,.wb-video-start,.wb-rs,[data-ep]")){
+   wb.letzterDown=null;wb.dblT=Date.now();wbDoppel({target:e.target,clientX:e.clientX,clientY:e.clientY});e.preventDefault();return;
+  }
+  wb.letzterDown={t:jetzt,x:e.clientX,y:e.clientY,bewegt:false};
+ }
  if(wb.editing)wbBearbeitenEnde(true);
  $("wbFormMenu").hidden=true;$("wbTplMenu").hidden=true;
  const pt=wbWelt(e.clientX,e.clientY);
@@ -8117,6 +8145,7 @@ function wbDown(e){
 }
 function wbMove(e){
  if(!wb)return;
+ if(wb.letzterDown&&!wb.letzterDown.bewegt&&Math.hypot(e.clientX-wb.letzterDown.x,e.clientY-wb.letzterDown.y)>5)wb.letzterDown.bewegt=true;
  const pid=e.pointerId??1;if(wb.pointers.has(pid))wb.pointers.set(pid,{x:e.clientX,y:e.clientY});
  if(wb.pointers.size>=2&&wb.pinch){wbPinchBewegen();return;}
  const a=wb.aktion;if(!a)return;
@@ -8504,12 +8533,12 @@ function wbBildVorbereiten(datei){
  });
 }
 async function wbBildEinfuegen(data,bw,bh,pt){
- const c=pt||wbWeltMitte();
  const ref=doc(collection(db,"whiteboardImages"));
  await setDoc(ref,{boardId:wb.id,data,authorUid:currentUser.uid,createdAt:serverTimestamp()});
  wb.bilder.set(ref.id,data);
  const ar=bw/bh,w=Math.min(360,Math.max(120,bw)),kh=wb.board.art==="tafel"?38:0,h=Math.max(30,Math.round(w/ar))+kh;
- const id=wbErzeugen({type:"image",imgId:ref.id,ar,titel:wb.board.art==="tafel"?"":undefined,x:Math.round(c.x-w/2),y:Math.round(c.y-h/2),w,h});
+ const pos=pt?{x:Math.round(pt.x-w/2),y:Math.round(pt.y-h/2)}:wbFreiePosition(w,h);
+ const id=wbErzeugen({type:"image",imgId:ref.id,ar,titel:wb.board.art==="tafel"?"":undefined,x:pos.x,y:pos.y,w,h});
  wbUndoPush(async()=>{await wbLoeschenIds([id],true);});
  wbSetzeWerkzeug("select");wbAuswahlSetzen([id]);
  return id;
@@ -8602,7 +8631,8 @@ function initWhiteboardBoard(id){
  wbAnsichtSetzen();
  const on=(el,ev,fn,opt)=>{el.addEventListener(ev,fn,opt);wb.handler.push([el,ev,fn,opt]);};
  on(stage,"pointerdown",wbDown);on(window,"pointermove",wbMove);on(window,"pointerup",wbUp);on(window,"pointercancel",wbUp);
- on(stage,"wheel",wbRad,{passive:false});on(stage,"dblclick",wbDoppel);on(stage,"contextmenu",e=>e.preventDefault());
+ on(stage,"wheel",wbRad,{passive:false});on(stage,"contextmenu",e=>e.preventDefault());
+ on(stage,"dblclick",e=>{if(Date.now()-(wb.dblT||0)<700)return;wbDoppel(e);});
  on(document,"keydown",wbTaste);on(document,"keyup",wbTasteLos);
  on(stage,"pointermove",e=>{if(wb)wbCursorSenden(wbWelt(e.clientX,e.clientY));});
  on(stage,"pointerleave",()=>wbCursorSenden(null,true));
@@ -8661,7 +8691,7 @@ function initWhiteboardBoard(id){
  wb.boardUnsub=onSnapshot(doc(db,"whiteboards",id),s=>{
   if(!wb||wb.id!==id)return;
   if(s.exists()){wb.board={id,...s.data()};wbBoardGeaendert();}
- },()=>{});
+ },e=>wbFehler(e));
  wbBoardGeaendert();
  // Live-Daten
  wb.unsub=onSnapshot(query(collection(db,"whiteboardItems"),where("boardId","==",id)),snap=>{
@@ -8674,7 +8704,7 @@ function initWhiteboardBoard(id){
   });
   wbZ();wbNachAenderung();
   if(wb.erstesLaden){wb.erstesLaden=false;if(!wbAnsicht[id+"#"+wb.seite]&&wbSeitenItems().length)wbAlleAnzeigen();}
- },e=>wbFehler(e));
+ },e=>{wbFehler(e);if(!(e&&e.code==="permission-denied"))wbMeldung(`Die Elemente konnten nicht geladen werden (${(e&&(e.code||e.name))||"unbekannt"}).`);});
  wb.praesUnsub=onSnapshot(query(collection(db,"whiteboardPresence"),where("boardId","==",id)),snap=>{
   if(!wb||wb.id!==id)return;
   wb.praesenz=new Map(snap.docs.map(d=>[d.id,d.data()]));wbOnlineZeichnen();wbCursorZeichnen();
@@ -9049,18 +9079,41 @@ function wbKartenMenuAuf(){
  const knopf=(k,n,ic)=>`<button type="button"data-karte="${k}">${wbIcon(ic,26)}<span>${n}</span></button>`;
  m.innerHTML=`<div class="wb-menu-titel">Karten</div><div class="wb-menu-gitter">${WB_KARTEN.map(x=>knopf(x.k,x.n,x.ic)).join("")}</div>
   <div class="wb-menu-titel">Werkzeuge für den Unterricht</div><div class="wb-menu-gitter">${WB_TOOLKARTEN.map(x=>knopf(x.k,x.n,x.ic)).join("")}</div>`;
+ m.hidden=false;
  const r=b.getBoundingClientRect(),w=wb.wrap.getBoundingClientRect();
- m.style.left=(r.right-w.left+10)+"px";m.style.top=Math.max(8,Math.min(r.top-w.top-150,w.height-m.offsetHeight-8))+"px";m.hidden=false;
+ m.style.left=(r.right-w.left+10)+"px";
+ const hoch=Math.min(m.offsetHeight,w.height-16);
+ m.style.maxHeight=(w.height-16)+"px";m.style.overflowY="auto";
+ m.style.top=Math.max(8,Math.min(r.top-w.top-hoch/2,w.height-hoch-8))+"px";
+}
+// Freie Stelle nahe der Bildschirmmitte für neue Karten (ohne bestehende zu überdecken).
+function wbFreiePosition(w,h){
+ const c=wbWeltMitte(),s=wbBuehne(),k=wb.view.k;
+ const sicht={x0:-wb.view.x/k,y0:-wb.view.y/k,x1:(s.w-wb.view.x)/k,y1:(s.h-wb.view.y)/k};
+ const belegt=wbSeitenItems().filter(i=>!wbIstSvg(i)&&i.type!=="frame").map(i=>({x:i.x-14,y:i.y-14,w:(i.w||0)+28,h:(i.h||0)+28}));
+ const frei=(x,y)=>belegt.every(b=>x+w<=b.x||b.x+b.w<=x||y+h<=b.y||b.y+b.h<=y);
+ const drin=(x,y)=>x>=sicht.x0+90/k&&y>=sicht.y0+70/k&&x+w<=sicht.x1-20/k&&y+h<=sicht.y1-90/k;
+ const sx=w+24,sy=h+24,kand=[];
+ for(let gy=-4;gy<=4;gy++)for(let gx=-5;gx<=5;gx++)kand.push({x:c.x-w/2+gx*sx,y:c.y-h/2+gy*sy,d:gx*gx*0.7+gy*gy});
+ kand.sort((a,b)=>a.d-b.d);
+ const f=kand.find(q=>frei(q.x,q.y)&&drin(q.x,q.y))||kand.find(q=>frei(q.x,q.y));
+ return f?{x:Math.round(f.x),y:Math.round(f.y)}:{x:Math.round(c.x-w/2),y:Math.round(c.y-h/2)};
+}
+function wbAufKarteZentrieren(x,y,w,h){
+ const s=wbBuehne(),k=wb.view.k;
+ const x0=-wb.view.x/k,y0=-wb.view.y/k,x1=(s.w-wb.view.x)/k,y1=(s.h-wb.view.y)/k;
+ if(x>=x0+90/k&&y>=y0+70/k&&x+w<=x1-20/k&&y+h<=y1-90/k)return;
+ wb.view={...wb.view,x:s.w/2-(x+w/2)*k,y:s.h/2-(y+h/2)*k};wbAnsichtSetzen();
 }
 function wbKarteEinfuegen(k){
  $("wbKartenMenu").hidden=true;
  if(wb.ro)return;
  if(k==="image"){$("wbBildInput").click();return;}
  if(k==="datei"){$("wbDateiInput").click();return;}
- const c=wbWeltMitte(),off=((wb.kartenZaehler=(wb.kartenZaehler||0)+1)%5)*26;
  const def=WB_KARTEN.find(x=>x.k===k)||WB_TOOLKARTEN.find(x=>x.k===k);if(!def)return;
  const istTool=!!WB_TOOLKARTEN.find(x=>x.k===k);
- const teil={type:istTool?"tool":k,x:Math.round(c.x-def.w/2+off),y:Math.round(c.y-def.h/2+off),w:def.w,h:def.h,c:"grau"};
+ const pos=wbFreiePosition(def.w,def.h);
+ const teil={type:istTool?"tool":k,x:pos.x,y:pos.y,w:def.w,h:def.h,c:"grau"};
  if(istTool){teil.tool=k;Object.assign(teil,JSON.parse(JSON.stringify(def.start)));}
  else if(k==="card"){teil.titel="";teil.text="";}
  else if(k==="video"){teil.titel="Video";teil.url="";}
@@ -9069,6 +9122,7 @@ function wbKarteEinfuegen(k){
  const id=wbErzeugen(teil);
  wbUndoPush(async()=>{await wbLoeschenIds([id],true);});
  wbSetzeWerkzeug("select");wbAuswahlSetzen([id]);
+ wbAufKarteZentrieren(teil.x,teil.y,teil.w,teil.h);
  if(k==="card")wbBearbeitenStart(id,"text");
  else if(["video","link","qr"].includes(k))wbToolBearbeiten(id);
  else if(k==="lostopf"||k==="gruppen")wbNamenModal(id);
@@ -9078,8 +9132,8 @@ async function wbDateiHochladen(datei){
  try{
   toast("Datei wird hochgeladen …");
   const up=await uploadCampusDatei(datei,`whiteboardDateien/${wb.id}`);
-  const c=wbWeltMitte(),def=WB_KARTEN.find(x=>x.k==="datei");
-  const id=wbErzeugen({type:"datei",x:Math.round(c.x-def.w/2),y:Math.round(c.y-def.h/2),w:def.w,h:def.h,c:"grau",titel:datei.name.slice(0,60),name:datei.name,url:up.url});
+  const def=WB_KARTEN.find(x=>x.k==="datei"),pos=wbFreiePosition(def.w,def.h);
+  const id=wbErzeugen({type:"datei",x:pos.x,y:pos.y,w:def.w,h:def.h,c:"grau",titel:datei.name.slice(0,60),name:datei.name,url:up.url});
   wbUndoPush(async()=>{await wbLoeschenIds([id],true);});
   wbSetzeWerkzeug("select");wbAuswahlSetzen([id]);toast("Datei eingefügt.");
  }catch(e){console.error("Datei:",e);toast(e&&e.message?e.message:"Die Datei konnte nicht hochgeladen werden.");}

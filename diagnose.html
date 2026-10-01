@@ -50,6 +50,8 @@ document.getElementById('go').addEventListener('click',async()=>{
     const a=await (await fetch('app.js?x='+Date.now(),{cache:'no-store'})).text();
     log(a.includes('if($("helpQuick"))')?'ok':'bad','app.js auf dem Server enthält die helpQuick-Korrektur: '+a.includes('if($("helpQuick"))'));
     log(a.includes('f12sb-9f3db')&&!a.includes('f11sb-62bae')?'ok':'bad','app.js auf dem Server nutzt Projekt f12sb-9f3db: '+(a.includes('f12sb-9f3db')&&!a.includes('f11sb-62bae')));
+    log(a.includes('wbSeiteWechseln')?'ok':'bad','app.js auf dem Server enthält Whiteboard und Tafel (neueste Version): '+a.includes('wbSeiteWechseln'));
+    log(a.includes('renderDidaktikKompass')?'ok':'bad','app.js auf dem Server enthält den Didaktik-Kompass: '+a.includes('renderDidaktikKompass'));
   }catch(e){log('bad','Server-Dateien konnten nicht geprüft werden: '+e.message)}
 
   // 2) Firebase-SDK laden
@@ -89,12 +91,13 @@ document.getElementById('go').addEventListener('click',async()=>{
   }
 
   // 4) Profil lesen (das macht die App direkt nach der Anmeldung)
+  let rolle=null;
   try{
     const snap=await withTimeout(fsMod.getDoc(fsMod.doc(db,'users',user.uid)),15000,'Lesen von users/'+user.uid);
     if(!snap.exists()){
       log('bad','Es gibt KEIN Dokument users/'+user.uid+' im Projekt f12sb-9f3db.\n     -> Die App würde jetzt ein neues Dokument mit status "pending" anlegen. Vorhandenes Profil hat eine andere UID.');
     }else{
-      const d=snap.data();
+      const d=snap.data();rolle=d.role;
       log('ok','Profil gelesen: role = '+d.role+', status = '+d.status+', Name = '+(d.displayName||'?'));
       log(d.status==='approved'?'ok':'bad','status ist "approved": '+(d.status==='approved'));
     }
@@ -111,6 +114,30 @@ document.getElementById('go').addEventListener('click',async()=>{
     const q=await withTimeout(fsMod.getDocs(fsMod.query(fsMod.collection(db,'events'),fsMod.limit(1))),15000,'Lesen von events');
     log('ok','Beispiel-Abfrage (events) erfolgreich, Treffer: '+q.size);
   }catch(e){log('bad','Beispiel-Abfrage (events) fehlgeschlagen: '+(e.code||e.name)+' – '+e.message)}
+
+  // 6) Whiteboard, Tafel und Didaktik: Lese- und Schreibtests mit den echten Regeln
+  log('info','\nWhiteboard und Tafel:');
+  const lesen=[['whiteboards','Whiteboards'],['whiteboardItems','Elemente'],['whiteboardImages','Bilder'],['whiteboardPresence','Online-Anzeige'],['lehrplanTafeln','Tafeln je Stunde'],['didaktikHinweise','Didaktik-Hinweise']];
+  let regelFehler=false;
+  for(const [col,name] of lesen){
+    try{const q=await withTimeout(fsMod.getDocs(fsMod.query(fsMod.collection(db,col),fsMod.limit(1))),15000,'Lesen von '+col);log('ok',name+' ('+col+') lesen: möglich');}
+    catch(e){regelFehler=regelFehler||e.code==='permission-denied';log('bad',name+' ('+col+') lesen: '+(e.code||e.name)+' – '+e.message);}
+  }
+  try{
+    const ref=fsMod.doc(db,'whiteboardPresence','diagnose_'+user.uid);
+    await withTimeout(fsMod.setDoc(ref,{boardId:'diagnose',uid:user.uid,name:'Diagnose',seen:Date.now()}),15000,'Schreibtest');
+    log('ok','Schreiben (Online-Anzeige) möglich');
+    await fsMod.deleteDoc(ref).catch(()=>{});
+  }catch(e){regelFehler=regelFehler||e.code==='permission-denied';log('bad','Schreiben (Online-Anzeige): '+(e.code||e.name)+' – '+e.message);}
+  if(rolle==='teacher'||rolle==='admin'){
+    try{
+      const ref=await withTimeout(fsMod.addDoc(fsMod.collection(db,'whiteboards'),{title:'Diagnose (wird gelöscht)',description:'',art:'tafel',schreibschutz:true,seiten:1,createdBy:user.uid,createdByName:'Diagnose',createdAt:fsMod.serverTimestamp()}),15000,'Tafel anlegen');
+      log('ok','Tafel anlegen (Lehrkraft): möglich');
+      await fsMod.deleteDoc(ref).catch(()=>{});
+    }catch(e){regelFehler=regelFehler||e.code==='permission-denied';log('bad','Tafel anlegen (Lehrkraft): '+(e.code||e.name)+' – '+e.message);}
+  }
+  if(regelFehler)log('info','     -> Mindestens ein Zugriff wurde verweigert: Die Firestore-Regeln für Whiteboard, Tafel und Didaktik fehlen oder sind fehlerhaft eingefügt. Den Block aus whiteboard-regeln-einfuegen.txt direkt über „Deny everything not explicitly listed above“ einfügen und Veröffentlichen klicken.');
+  else log('ok','Whiteboard-Regeln scheinen in Ordnung zu sein.');
 
   try{await authMod.signOut(auth)}catch(_){}
   log('info','\nFertig. Bitte diesen ganzen Text als Screenshot schicken.');
