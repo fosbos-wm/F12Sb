@@ -3486,7 +3486,7 @@ async function miniKalenderHTML(){
  const monday=new Date(today);monday.setDate(today.getDate()-((today.getDay()+6)%7));
  const days=Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return d});
  const dateKey=d=>d.toISOString().slice(0,10);
- const eventDates=new Set(events.map(e=>String(e.start||e.date||"").slice(0,10)));
+ const eventDates=new Set([...events,...abschlusspruefungEvents()].map(e=>String(e.start||e.date||"").slice(0,10)));
  const birthdayDates=new Set(birthdayEvents.map(e=>String(e.start||"").slice(0,10)));
  const wt=["Mo","Di","Mi","Do","Fr","Sa","So"];
  return `<a href="#kalender"class="mini-kalender">
@@ -4050,8 +4050,8 @@ function pp12Jahresbogen(){
 }
 function pp12DidLegende(){
  if(!pp12HinweiseAn())return"";
- const phasen=[1,2,3].map(n=>`<span class="pp12-lg"><span class="pp12-phase pp12-ph${n}">${PP12_PHASEN[n].kurz}</span>${isTeacher()?esc(PP12_PHASEN[n].name):esc(PP12_PHASEN[n].schueler)}</span>`).join("");
- const udl=isTeacher()?Object.entries(PP12_UDL).map(([k,v])=>`<span class="pp12-lg"><i class="pp12-dot an"style="--c:${v.col}">${k}</i>${esc(v.name)}</span>`).join("")+`<span class="pp12-lg pp12-lgklein">gefüllt = vorgesehen · leer = hier möglich</span>`:"";
+ const phasen=[1,2,3].map(n=>`<span class="pp12-lg">${isTeacher()?esc(PP12_PHASEN[n].name):esc(PP12_PHASEN[n].schueler)}</span>`).join("");
+ const udl=isTeacher()?Object.entries(PP12_UDL).map(([k,v])=>`<span class="pp12-lg">${esc(v.name)}</span>`).join("")+`<span class="pp12-lg pp12-lgklein">gefüllt = vorgesehen · leer = hier möglich</span>`:"";
  return`<div class="pp12-legende pp12-didlegende"><b>Didaktik</b>${phasen}${udl}</div>`;
 }
 // „Nächste Stunde“ für die Startseite
@@ -4504,7 +4504,7 @@ function ppKprimBereichHTML(ph,teil,coDaten,heute){
     <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${coDatum(c.datum)} · ${t?`${t.n} ausgewertet · Ø ${(t.summe/t.n).toFixed(1).replace(".",",")} Punkte`:"noch keine Auswertung"}</small></div>
     <div class="co-aktion"><button class="secondary"onclick="openCheckoutErgebnisse('${c.id}')">Ergebnisse</button><button class="secondary"onclick="coPdfKlasse('${c.id}')">PDF Klasse</button></div></div>`;}).join("")||`<div class="empty">Noch kein Check-out beendet. Die Ergebnisse erscheinen hier, sobald du einen Test beendet hast.</div>`}</div>`;
   ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>Schüler:innen wählen ${d.einst.anzahlWaehlen} Tests aus ihrer Bibliothek · ${esc(coAuswahlStatus(d.einst).text)}</small></div>
-   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="primary"onclick="openCheckoutKlassenuebersicht()">Ergebnisse je Schüler:in</button><button class="secondary"onclick="openRespizienzDialog()">🖨 Respizienz-Ausdruck</button></div></div>`;
+   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="primary"onclick="openCheckoutKlassenuebersicht()">Ergebnisse je Schüler:in</button><button class="secondary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button></div></div>`;
  }else{
   const fertig=(d.checkouts||[]).filter(c=>d.meineAbgaben?.[c.id]?.abgegeben);
   mitte=`<div class="kicker pp-kp-h">MEINE ABGESCHLOSSENEN CHECK-OUTS (${fertig.length})</div>
@@ -4523,7 +4523,6 @@ function ppKprimBereichHTML(ph,teil,coDaten,heute){
  }
  return`<div class="card co-karte pp-kp">
   <div class="co-kopf"><div><h3>🏁 K-Prim-Aufgaben · Check-out am Freitag</h3><small>Jeden Freitag ein Test mit 3 K-Prim-Aufgaben (je 4 Aussagen richtig oder falsch) zu den Themen der Woche${themen?` (${esc(themen)})`:""}. Deine Lehrkraft schaltet ihn live frei, ausgewertet wird in Notenpunkten nach dem P/P-Bewertungsschlüssel.</small></div></div>
-  ${lehrer?"":coBewertungsInfoHTML(d.einst.anzahlWaehlen)}
   <div class="kicker pp-kp-h">FREITAGE IN DIESER ETAPPE</div>
   <div class="co-liste">${fr}</div>
   ${mitte}
@@ -5655,7 +5654,7 @@ function checkoutSektionHTML(d){
  let ersatz="";
  if(lehrer){
   ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>${pool.length} Check-outs beendet · Schüler:innen wählen ${d.einst.anzahlWaehlen} aus · ${esc(coAuswahlStatus(d.einst).text)}</small></div>
-   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="secondary"onclick="openCheckoutKlassenuebersicht()">Klassenübersicht</button><button class="primary"onclick="openRespizienzDialog()">🖨 Respizienz-Ausdruck</button></div></div>`;
+   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="secondary"onclick="openCheckoutKlassenuebersicht()">Klassenübersicht</button></div></div>`;
  }else{
   const aByCo=d.meineAbgaben;
   const gewertet=pool.filter(c=>aByCo[c.id]?.ausgewertet);
@@ -5666,7 +5665,6 @@ function checkoutSektionHTML(d){
  return`<div class="card co-karte">
   <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Test live frei: 3 K-Prim-Aufgaben mit je einer Fallvignette. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
    ${lehrer?`<button class="primary"onclick="openCheckoutEditor()">＋ Neuer Check-out</button>`:""}</div>
-  ${lehrer?"":coBewertungsInfoHTML(d.einst.anzahlWaehlen)}
   <div class="co-liste">${zeilen||`<div class="empty">${lehrer?"Noch kein Check-out angelegt.":"Noch kein Check-out freigeschaltet."}</div>`}</div>
   ${ersatz}
  </div>`;
@@ -6614,8 +6612,6 @@ async function openCheckoutTest(id){
  if(!co){toast("Dieser Check-out ist nicht verfügbar.");return}
  if(co.status!=="live"){toast("Dieser Check-out ist nicht (mehr) freigeschaltet.");return}
  if(a?.abgegeben){toast("Du hast bereits abgegeben.");return}
- let anzahlW=7;
- try{const e=await getDoc(doc(db,"checkoutEinstellungen","pp"));if(e.exists())anzahlW=Number(e.data().anzahlWaehlen)||7;}catch(e){}
  const ant=a?.antworten||{};
  const c=PP_FARBEN[co.lbNum]||"#4a90d9";
  const glob=coGemeinsameSituation(co);
@@ -6625,8 +6621,7 @@ async function openCheckoutTest(id){
   <div class="kp-fortschritt"><div class="kp-balken"><i id="coBalken"style="background:${c}"></i></div><span id="coStand"></span></div>
   <details class="kp-hilfe"><summary>So funktioniert der Test</summary>
    <p>Lies zu jeder Aufgabe zuerst die Fallvignette. Entscheide dann bei <b>jeder</b> der 4 Aussagen, ob sie richtig oder falsch ist. Eine leere Aussage zählt als Fehler. Deine Antworten werden automatisch gespeichert.</p>
-   </details>
-  ${coBewertungsInfoHTML(anzahlW,true)}
+   <p class="kp-wertung">Wertung je Aufgabe: 4 richtig = ${CHECKOUT_BE_NACH_FEHLERN[0]} BE · 3 richtig = ${CHECKOUT_BE_NACH_FEHLERN[1]} BE · 2 richtig = ${CHECKOUT_BE_NACH_FEHLERN[2]} BE · weniger = 0 BE</p></details>
   ${glob?`<div class="kp-vig"style="border-left-color:${c}"><div class="kp-label">📖 Situation</div>${coSituationHTML(glob,false,true,false)}</div>`:""}
   ${(co.aufgaben||[]).map((q,i)=>`<section class="kp-karte"style="--c:${c}">
    <header class="kp-kopf"><span class="kp-nummer">${i+1}</span><div><b>Aufgabe ${i+1} von ${(co.aufgaben||[]).length}</b><small>bis zu ${CHECKOUT_BE_NACH_FEHLERN[0]} BE</small></div><span class="kp-fort">0/4</span></header>
@@ -6701,7 +6696,6 @@ async function openCheckoutMeinErgebnis(id){
   modal(`<button class="modal-close"onclick="closeModal()">×</button>
    <div class="kicker">🏁 CHECK-OUT · DEIN ERGEBNIS</div><h2>${esc(co.titel)}</h2>
    <div class="co-summe">${coSummeHTML(erg)}</div>
-   ${coRechenwegHTML(erg)}
    ${coGemeinsameSituation(co)?`<div class="co-vignette"style="border-left-color:${PP_FARBEN[co.lbNum]||"#4a90d9"}">${coSituationHTML(co.vignette)}</div>`:""}
    ${(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg)).join("")}
    <div class="form-actions"><button class="secondary"onclick="coPdfSchueler('${id}')">PDF herunterladen</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
@@ -6738,7 +6732,6 @@ async function openCheckoutSchuelerErgebnis(id,uid){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 CHECK-OUT · ${esc(s?.displayName||s?.email||"")}</div><h2>${esc(d.co.titel)}</h2>
   <div class="co-summe">${coSummeHTML(a)}</div>
-  ${coRechenwegHTML(a)}
   ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a)).join("")}
   <div class="form-actions"><button class="secondary"onclick="openCheckoutErgebnisse('${id}')">← Zurück</button><button class="secondary"onclick="coPdfSchueler('${id}','${uid}')">PDF</button></div>`);
 }
@@ -6772,100 +6765,6 @@ async function coPdfKlasse(id){
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
 
-// ============================================================
-// BEWERTUNG DER K-PRIM-TESTS
-// (1) Hinweise für Schüler:innen: Schema, Höchstpunktzahl, Notenschlüssel, Rechenweg
-// (2) Bausteine für den Respizienz-Ausdruck der Lehrkraft (siehe weiter unten)
-// Grundlage: FOSBOS-Vorgabe „Entscheidungsbasierte Aufgaben“ – je Aufgabe 4 Aussagen:
-// 4 richtig = 4 BE, 3 richtig = 2 BE, 2 richtig = 1 BE, weniger = 0 BE.
-// Umrechnung in Notenpunkte nach dem P/P-Bewertungsschlüssel (FOSBOS Bayern, Stand 13.09.2022).
-// ============================================================
-const CO_FACH="Pädagogik/Psychologie",CO_KLASSE="F12Sb",CO_SCHULE="FOSBOS Weilheim",CO_SCHULJAHR="2026/27";
-const CO_ZELLE="padding:3px 6px;border:1px solid #d5dee5;font-size:11.5px";
-// 3 Aufgaben × 4 BE = 12 BE je Test
-function coMaxBE(){return CHECKOUT_MAX_AUFGABEN*CHECKOUT_BE_NACH_FEHLERN[0];}
-function coSchemaZeilen(){
- const be=CHECKOUT_BE_NACH_FEHLERN;
- return[["vier richtige Entscheidungen",be[0]],["drei richtige Entscheidungen",be[1]],["zwei richtige Entscheidungen",be[2]],["weniger als zwei richtige Entscheidungen",be[3]]];
-}
-// Für jede mögliche BE-Summe (0 … max) Prozent und Notenpunkte – gleiche Rechnung wie in coBewerten.
-function coBeZuNp(maxBE){
- const r=[];
- for(let be=0;be<=maxBE;be++){const p=maxBE?Math.round(be/maxBE*1000)/10:0;r.push({be,prozent:p,np:notenpunkteAusProzent(p)});}
- return r;
-}
-function coSchemaTabelleHTML(){
- return`<table style="border-collapse:collapse;width:auto;margin:6px 0"><tbody>${coSchemaZeilen().map(([t,be])=>`<tr><td style="${CO_ZELLE};text-align:left">${t}</td><td style="${CO_ZELLE};text-align:center;white-space:nowrap"><b>${be} BE</b></td></tr>`).join("")}</tbody></table>`;
-}
-// BE → Prozent → Notenpunkte (markBE hebt die eigene Spalte hervor)
-function coBeTabelleHTML(maxBE,markBE){
- const z=coBeZuNp(maxBE);
- const st=`${CO_ZELLE};text-align:center;white-space:nowrap`;
- const mk=be=>be===markBE?"background:#dcebf8;font-weight:800;":"";
- const kopf=`<tr><th style="${st};text-align:left;background:#f1f5f8">BE</th>${z.map(x=>`<th style="${st};background:#f1f5f8;${mk(x.be)}">${x.be}</th>`).join("")}</tr>`;
- const pr=`<tr><td style="${st};text-align:left">Prozent</td>${z.map(x=>`<td style="${st};${mk(x.be)}">${String(x.prozent).replace(".",",")}</td>`).join("")}</tr>`;
- const np=`<tr><td style="${st};text-align:left"><b>Notenpunkte</b></td>${z.map(x=>`<td style="${st};${mk(x.be)}"><b>${x.np}</b></td>`).join("")}</tr>`;
- return`<div style="overflow-x:auto;margin:6px 0;break-inside:avoid"><table style="border-collapse:collapse;width:auto"><tbody>${kopf}${pr}${np}</tbody></table></div>`;
-}
-// P/P-Bewertungsschlüssel: Prozent → Notenpunkte
-function coProzentSchluesselHTML(){
- const z=[...FOSBOS_SCHLUESSEL,[0,0]];
- const st=`${CO_ZELLE};text-align:center;white-space:nowrap`;
- const unterste=FOSBOS_SCHLUESSEL[FOSBOS_SCHLUESSEL.length-1][1];
- const half=Math.ceil(z.length/2);
- const block=teil=>`<tr><th style="${st};text-align:left;background:#f1f5f8">Notenpunkte</th>${teil.map(([np])=>`<th style="${st};background:#f1f5f8">${np}</th>`).join("")}</tr>
-  <tr><td style="${st};text-align:left">Prozent</td>${teil.map(([np,min])=>`<td style="${st}">${np===0?"&lt; "+unterste:"ab "+min}</td>`).join("")}</tr>`;
- return`<div style="overflow-x:auto;margin:6px 0;break-inside:avoid"><table style="border-collapse:collapse;width:auto"><tbody>${block(z.slice(0,half))}${block(z.slice(half))}</tbody></table></div>`;
-}
-// Hinweise für Schüler:innen: so wird der Test bewertet
-function coBewertungsInfoHTML(anzahl,offen){
- anzahl=Number(anzahl)||7;
- const max=coMaxBE(),be0=CHECKOUT_BE_NACH_FEHLERN[0];
- return`<details class="kp-hilfe co-bew"${offen?" open":""}><summary>📏 So wird bewertet</summary>
-  <p>Jeder Test besteht aus ${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben. Bei jeder Aufgabe entscheidest du für 4 Aussagen, ob sie in Bezug auf die Situation richtig oder falsch sind. Eine nicht beantwortete Aussage zählt als Fehler.</p>
-  <p style="margin-bottom:0"><b>Bewertung pro Aufgabe</b> (BE = Bewertungseinheiten):</p>
-  ${coSchemaTabelleHTML()}
-  <p><b>Pro Test gibt es höchstens ${max} BE</b> (${CHECKOUT_MAX_AUFGABEN} Aufgaben × ${be0} BE). Die BE werden in Prozent und dann in Notenpunkte (0–15) umgerechnet, nach dem P/P-Bewertungsschlüssel (FOSBOS Bayern):</p>
-  ${coBeTabelleHTML(max)}
-  <p>Kurzarbeit-Ersatz: Am Ende wählst du <b>${anzahl} deiner Tests</b> aus. Der Durchschnitt ihrer Notenpunkte ersetzt eine Kurzarbeit; ab ,5 wird aufgerundet.</p>
-  <details><summary>Bewertungsschlüssel in Prozent</summary>${coProzentSchluesselHTML()}</details>
- </details>`;
-}
-// Rechenweg zum eigenen Ergebnis (Schüler:in und Lehrkraft)
-function coRechenwegHTML(erg){
- if(!erg?.ausgewertet)return"";
- const teile=(erg.auswertung||[]).map((r,i)=>`Aufgabe ${i+1}: ${4-r.fehler} richtig → <b>${r.be} BE</b>`).join(" · ");
- return`<div class="co-bew-weg"><div>${teile}</div><div>Summe: <b>${erg.be} von ${erg.maxBE} BE</b> = ${String(erg.prozent).replace(".",",")} % → <b>${esc(npText(erg.notenpunkte))}</b></div>${coBeTabelleHTML(Number(erg.maxBE)||coMaxBE(),erg.be)}</div>`;
-}
-// Lernbereich als Text (z. B. „LB 1 · Entwicklung“)
-function coLbText(n){const l=PP12_LB[n];return l?`LB ${n} · ${l.titel}`:(n?`LB ${n}`:"");}
-// Unterrichtsstunden der Testwoche (Mo–Fr) laut Stoffverteilungsplan; ohne Treffer (Ferien): die letzten 3 Stunden davor.
-function coStundenInhalte(c){
- const fr=c?.datum;if(!fr)return[];
- const lehr=e=>e.typ==="stoff"||e.typ==="wdh"||e.typ==="training";
- const von=pp12Montag(fr);
- let l=PP12_PLAN.filter(e=>lehr(e)&&e.d>=von&&e.d<=fr);
- if(!l.length)l=PP12_PLAN.filter(e=>lehr(e)&&e.d<fr).slice(-3);
- return l;
-}
-function coStundeText(e){
- const wt=["So","Mo","Di","Mi","Do","Fr","Sa"][new Date(e.d+"T12:00:00Z").getUTCDay()];
- return`${wt} ${pp12Datum(e.d)} (${e.h} Std.): ${e.t}`;
-}
-// Klassendurchschnitte: je Test (alle ausgewerteten Abgaben) und für den Kurzarbeit-Ersatz (gewählte Tests)
-function coKlassenStat(checkouts,abgaben,auswahl,uids){
- const proTest={};
- checkouts.forEach(c=>{
-  const l=uids.map(u=>abgaben[u]?.[c.id]).filter(a=>a?.ausgewertet);
-  if(!l.length)return;
-  const mw=k=>l.reduce((x,a)=>x+(Number(a[k])||0),0)/l.length;
-  proTest[c.id]={n:l.length,np:mw("notenpunkte"),be:mw("be"),maxBE:Number(l[0].maxBE)||coMaxBE()};
- });
- const er=uids.filter(u=>(auswahl[u]?.ids||[]).length).map(u=>coErsatz(auswahl[u].ids,abgaben[u]||{})).filter(Boolean);
- const ersatz=er.length?{n:er.length,np:er.reduce((x,e)=>x+e.np,0)/er.length,schnitt:er.reduce((x,e)=>x+e.schnitt,0)/er.length}:null;
- return{proTest,ersatz};
-}
-
 // ---- Kurzarbeit-Ersatz: 7 aus 10 ----
 async function openCheckoutAuswahl(){
  const d=await ladeCheckoutDaten();
@@ -6875,7 +6774,6 @@ async function openCheckoutAuswahl(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 KURZARBEIT-ERSATZ</div><h2>Wähle ${d.einst.anzahlWaehlen} Tests aus deiner Bibliothek</h2>
   <p style="font-size:13px;color:var(--muted);margin-top:0">Der Durchschnitt der Notenpunkte deiner Auswahl ersetzt eine Kurzarbeit. Ab ,5 wird aufgerundet.</p>
-  ${coBewertungsInfoHTML(d.einst.anzahlWaehlen)}
   ${pool.length<d.einst.anzahlWaehlen?`<div class="empty">Du hast erst ${pool.length} gewertete Check-outs – du brauchst mindestens ${d.einst.anzahlWaehlen}.</div>`:""}
   <div class="list"id="coAuswahlListe">${pool.map(c=>{const a=d.meineAbgaben[c.id];return`<label class="list-item co-wahl"><input type="checkbox"value="${c.id}"data-np="${a.notenpunkte}"${gewaehlt.has(c.id)?" checked":""} onchange="coAuswahlStand(${d.einst.anzahlWaehlen})"><div style="flex:1"><strong>${esc(c.titel)}</strong><small>LB ${esc(c.lbNum)} · ${coDatum(c.datum)}</small></div><b>${npText(a.notenpunkte)}</b></label>`;}).join("")}</div>
   <div class="co-test-fuss"><span id="coAuswahlStand"></span><button class="primary"onclick="coAuswahlSpeichern(${d.einst.anzahlWaehlen})">Auswahl speichern</button></div>`);
@@ -6914,154 +6812,35 @@ async function coLadeSchueler(uid){
 // Tag, an dem der Test gemacht wurde (Abgabe), sonst das Datum des Check-outs.
 function coTestDatum(co,a){const d=coTsDatum(a?.abgegebenAt);return d?d.toLocaleDateString("de-DE"):coDatum(co.datum);}
 function coProz(x){return String(Math.round(x*10)/10).replace(".",",");}
-// ============================================================
-// RESPIZIENZ-AUSDRUCK (Lehrkraft) – eigener Ausdruck für die Ablage
-// Je Schüler:in: Name, Klasse, Fach, Lernbereich + Inhalte der Unterrichtsstunden je Test,
-// Ergebnisse der gewählten Tests (je Aufgabe, max. 12 BE), Gesamtergebnis, Klassendurchschnitt,
-// Notenschlüssel sowie Durchführung und Hintergründe des K-Prim-Tests.
-// ============================================================
-function coRespizienzHintergrundHTML(einst,anzPool){
- const E=escPDF,max=coMaxBE(),be0=CHECKOUT_BE_NACH_FEHLERN[0];
- const soll=Number(einst?.anzahlWaehlen)||7,gesamt=Number(einst?.anzahlGesamt)||10;
- const li="margin:0 0 4px";
- return`<div>
-  <h3 style="font-size:13px;margin:16px 0 6px;border-bottom:1.5px solid #1f4d73;padding-bottom:3px;break-after:avoid">Durchführung und Hintergrund des K-Prim-Tests</h3>
-  <ul style="font-size:11.5px;margin:0 0 8px 16px;padding:0;line-height:1.45">
-   <li style="${li}"><b>Aufgabenformat (entscheidungsbasierte Aufgaben):</b> Jeder Test (Check-out) enthält ${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben zu unterschiedlichen Kompetenzen bzw. Inhalten des Lehrplans. Jede Aufgabe besteht aus einer Fallvignette (Situationsbeschreibung), einem Einleitungssatz und 4 Aussagen. Für jede Aussage ist zu entscheiden, ob sie in Bezug auf die Situation richtig oder falsch ist.</li>
-   <li style="${li}"><b>Durchführung:</b> Der Test findet am Ende der Unterrichtswoche (Freitag) statt. Die Lehrkraft schaltet ihn in der Testsituation live frei; die Antworten werden laufend gespeichert. Abgegeben wird durch die Schülerin / den Schüler, spätestens mit dem Beenden des Tests durch die Lehrkraft. Eine nicht beantwortete Aussage zählt als Fehler. Die Lösungen sind getrennt gespeichert und nur für Lehrkräfte lesbar; die Auswertung erfolgt automatisch.</li>
-   <li style="${li}"><b>Bewertung je Aufgabe:</b> ${coSchemaZeilen().map(([t,b])=>`${t}: ${b} BE`).join(" · ")}.</li>
-   <li style="${li}"><b>Höchstpunktzahl:</b> ${CHECKOUT_MAX_AUFGABEN} Aufgaben × ${be0} BE = <b>maximal ${max} BE (Punkte) je Test</b>. Die BE werden in Prozent und nach dem P/P-Bewertungsschlüssel in Notenpunkte (0–15) umgerechnet.</li>
-   <li style="${li}"><b>Kurzarbeit-Ersatz:</b> Vorgesehen sind ${gesamt} Tests${anzPool?` (bisher ${anzPool} beendet)`:""}. Jede Schülerin / jeder Schüler wählt ${soll} davon aus. Der Durchschnitt der Notenpunkte der ${soll} gewählten Tests ersetzt eine Kurzarbeit; ab ,5 wird aufgerundet.</li>
-  </ul>
-  <div style="break-inside:avoid"><div style="font-size:11.5px;font-weight:700;margin:6px 0 0">Umrechnung BE → Notenpunkte (bei ${max} BE je Test)</div>
-  ${coBeTabelleHTML(max)}</div>
-  <div style="break-inside:avoid"><div style="font-size:11.5px;font-weight:700;margin:6px 0 0">P/P-Bewertungsschlüssel (Prozent → Notenpunkte)</div>
-  ${coProzentSchluesselHTML()}</div>
-  <div style="font-size:10px;color:#666;margin-top:4px">Quellen: FOSBOS-Vorgabe „Entscheidungsbasierte Aufgaben“; Bewertungsschlüssel lt. „Unterrichten, Korrigieren und Bewerten im Fach Pädagogik/Psychologie an der Beruflichen Oberschule Bayern“ (Stand 13.09.2022).</div>
- </div>`;
-}
 // Ein Respizienz-Blatt: alle Angaben zur Ablage der gewählten Tests einer Person.
-// ctx: {stat (Klassendurchschnitte), mitHintergrund, lehrkraft, anzPool}
-function coRespizienzHTML(name,tests,abgaben,einst,ctx){
- ctx=ctx||{};
- const E=escPDF,stat=ctx.stat||null;
- const soll=Number(einst?.anzahlWaehlen)||7,max=coMaxBE();
+function coRespizienzHTML(name,tests,abgaben,einst){
  const zeilen=tests.map(c=>({c,a:abgaben[c.id]})).filter(x=>x.a?.ausgewertet);
- const zell="padding:4px 5px;border:1px solid #cfd8de;font-size:11px;vertical-align:top";
- const feld=(l,v)=>`<td style="${zell};background:#f1f5f8;width:19%"><b>${l}</b></td><td style="${zell};width:31%">${v}</td>`;
- const kopf=`<div style="break-inside:avoid">
-  <div style="font-size:10.5px;letter-spacing:.06em;color:#1f4d73;font-weight:700">RESPIZIENZ · ALTERNATIVER LEISTUNGSNACHWEIS (KURZARBEIT-ERSATZ)</div>
-  <div style="font-size:19px;font-weight:800;margin:2px 0 8px">${E(name)}</div>
-  <table style="border-collapse:collapse;width:100%"><tbody>
-   <tr>${feld("Schule",E(CO_SCHULE))}${feld("Klasse",E(CO_KLASSE))}</tr>
-   <tr>${feld("Fach",E(CO_FACH))}${feld("Schuljahr",E(CO_SCHULJAHR))}</tr>
-   <tr>${feld("Leistungsnachweis","Check-outs (K-Prim-Tests) als Ersatz für eine Kurzarbeit")}${feld("Lehrkraft",E(ctx.lehrkraft||"–"))}</tr>
-  </tbody></table></div>`;
- const hint=ctx.mitHintergrund===false?"":coRespizienzHintergrundHTML(einst,ctx.anzPool);
- if(!zeilen.length)return`${kopf}<div class="item" style="margin-top:12px">Keine ausgewerteten Tests in der Auswahl.</div>${hint}`;
- const nA=Math.max(...zeilen.map(x=>(x.a.auswertung||[]).length),CHECKOUT_MAX_AUFGABEN);
+ if(!zeilen.length)return`<div class="item"><strong>${escPDF(name)}</strong><div>Keine ausgewerteten Tests in der Auswahl.</div></div>`;
+ const nA=Math.max(...zeilen.map(x=>(x.a.auswertung||[]).length));
  const e=coErsatz(zeilen.map(x=>x.c.id),abgaben);
  const gesamtProz=e.maxBE?e.be/e.maxBE*100:0;
- const th=`${zell};background:#f1f5f8;text-align:center`;
- const kopfA=Array.from({length:nA},(_,k)=>`<th style="${th}">A${k+1}</th>`).join("");
- const zl=zeilen.map((x,i)=>{
-  const a=x.a,p=Number(a.prozent)||0,st=stat?.proTest?.[x.c.id];
-  return`<tr style="break-inside:avoid"><td style="${zell};text-align:center">${i+1}</td><td style="${zell};white-space:nowrap">${E(coTestDatum(x.c,a))}</td>
-   <td style="${zell}"><b>${E(x.c.titel||"Check-out")}</b><div style="color:#555;font-size:10px">${E(coLbText(x.c.lbNum))}</div></td>
-   ${Array.from({length:nA},(_,k)=>`<td style="${zell};text-align:center">${a.auswertung?.[k]?a.auswertung[k].be:"–"}</td>`).join("")}
-   <td style="${zell};text-align:center;white-space:nowrap"><b>${a.be}</b> / ${a.maxBE}</td><td style="${zell};text-align:center">${coProz(p)}</td><td style="${zell};text-align:center"><b>${a.notenpunkte}</b></td>
-   ${stat?`<td style="${zell};text-align:center;color:#444">${st?coProz(st.be):"–"}</td><td style="${zell};text-align:center;color:#444">${st?coProz(st.np):"–"}</td>`:""}</tr>`;}).join("");
- const summe=`<tr style="border-top:2px solid #777;background:#f7fafc"><td style="${zell}" colspan="${3+nA}"><b>Gesamt (${zeilen.length} ${zeilen.length===1?"Test":"Tests"})</b></td>
-  <td style="${zell};text-align:center;white-space:nowrap"><b>${e.be}</b> / ${e.maxBE}</td><td style="${zell};text-align:center"><b>${coProz(gesamtProz)}</b></td><td style="${zell};text-align:center"><b>Ø ${e.schnitt.toFixed(2).replace(".",",")}</b></td>${stat?`<td style="${zell}"></td><td style="${zell}"></td>`:""}</tr>`;
- const tabelle=`<h3 style="font-size:13px;margin:16px 0 6px;border-bottom:1.5px solid #1f4d73;padding-bottom:3px">Ergebnisse der ${zeilen.length} gewählten Tests (je Test max. ${max} BE)</h3>
-  <table style="border-collapse:collapse;width:100%"><thead><tr><th style="${th}">Nr.</th><th style="${th}">Datum</th><th style="${th};text-align:left">Check-out · Lernbereich</th>${kopfA}<th style="${th}">BE</th><th style="${th}">%</th><th style="${th}">NP</th>${stat?`<th style="${th}" title="Klassendurchschnitt BE">Ø Kl. BE</th><th style="${th}" title="Klassendurchschnitt Notenpunkte">Ø Kl. NP</th>`:""}</tr></thead><tbody>${zl}${summe}</tbody></table>
-  <div style="font-size:10px;color:#666;margin-top:3px">A1–A${nA}: Bewertungseinheiten (BE) je K-Prim-Aufgabe · BE = erreichte / mögliche BE · NP = Notenpunkte${stat?" · Ø Kl. = Klassendurchschnitt dieses Tests (alle ausgewerteten Abgaben)":""}.</div>`;
- const warn=zeilen.length!==soll?`<div style="color:#b03a2e;font-weight:700;font-size:11.5px;margin-top:6px">⚠ Vorgesehen sind ${soll} gewählte Tests, ausgewertet vorhanden: ${zeilen.length}.</div>`:"";
- const kl=stat?.ersatz?`<div>Klassendurchschnitt Kurzarbeit-Ersatz: <b>Ø ${stat.ersatz.np.toFixed(2).replace(".",",")} Notenpunkte</b> (Durchschnitt der Ersatz-Notenpunkte; n = ${stat.ersatz.n} Schüler:innen mit Auswahl)</div>`:"";
- const ergebnis=`<div style="border:2px solid #1f4d73;border-radius:10px;padding:10px 14px;margin:12px 0 0;break-inside:avoid;background:#f7fafc">
-  <div style="font-weight:800;margin-bottom:3px">Gesamtergebnis Kurzarbeit-Ersatz</div>
-  <div>Durchschnitt der Notenpunkte der ${zeilen.length} Tests: ${e.schnitt.toFixed(2).replace(".",",")} → gerundet (ab ,5 wird aufgerundet): <b style="font-size:16px">${E(npText(e.np))}</b></div>
-  <div style="font-size:11.5px">Summe der Bewertungseinheiten: ${e.be} von ${e.maxBE} BE (${coProz(gesamtProz)} %), zur Information.</div>
-  ${kl?`<div style="font-size:11.5px;margin-top:2px">${kl}</div>`:""}${warn}</div>`;
- const inh=zeilen.map((x,i)=>{
-  const c=x.c,st=coStundenInhalte(c);
-  return`<div style="border-left:4px solid ${PP_FARBEN[c.lbNum]||"#8a99a3"};padding:3px 10px;margin:0 0 6px;break-inside:avoid;font-size:11.5px;line-height:1.4">
-   <div><b>Test ${i+1}: ${E(c.titel||"Check-out")}</b> · ${E(coTestDatum(c,x.a))}</div>
-   <div>Fach: ${E(CO_FACH)} · Lernbereich: <b>${E(coLbText(c.lbNum)||"–")}</b></div>
-   <div style="color:#444">${st.length?st.map(t=>E(coStundeText(t))).join("<br>"):"Keine Unterrichtsstunden im Stoffverteilungsplan hinterlegt."}</div></div>`;}).join("");
- const inhalte=`<h3 style="font-size:13px;margin:16px 0 6px;border-bottom:1.5px solid #1f4d73;padding-bottom:3px">Lernbereich und Inhalte der Unterrichtsstunden je Test</h3>${inh}
-  <div style="font-size:10px;color:#666">Inhalte laut Stoffverteilungsplan Pädagogik/Psychologie, Jgst. 12 (Unterrichtsstunden der Woche des Check-outs).</div>`;
- const unterschrift=`<div style="margin-top:34px;display:flex;gap:40px;break-inside:avoid;font-size:11px"><div style="flex:1;border-top:1px solid #444;padding-top:3px">Lehrkraft${ctx.lehrkraft?` (${E(ctx.lehrkraft)})`:""} · Datum, Unterschrift</div><div style="flex:1;border-top:1px solid #444;padding-top:3px">Respizienz · Datum, Unterschrift</div></div>`;
- return`${kopf}${tabelle}${ergebnis}${inhalte}${hint}${unterschrift}`;
+ const kopfA=Array.from({length:nA},(_,k)=>`<th>A${k+1}</th>`).join("");
+ const zl=zeilen.map((x,i)=>{const a=x.a,p=Number(a.prozent)||0;
+  return`<tr><td>${i+1}</td><td>${escPDF(coTestDatum(x.c,a))}</td><td>${escPDF(x.c.titel||"Check-out")}</td><td>LB ${escPDF(x.c.lbNum||"")}</td>${Array.from({length:nA},(_,k)=>`<td style="text-align:center">${a.auswertung?.[k]?a.auswertung[k].be:"–"}</td>`).join("")}<td style="text-align:center"><b>${a.be}</b></td><td style="text-align:center">${a.maxBE}</td><td style="text-align:center">${coProz(p)}</td><td style="text-align:center"><b>${a.notenpunkte}</b></td><td style="width:70px"><div style="background:#e6ebef;height:9px;border-radius:5px"><div style="width:${Math.max(0,Math.min(100,p))}%;height:9px;border-radius:5px;background:#5a7f99"></div></div></td></tr>`;}).join("");
+ const summe=`<tr style="border-top:2px solid #999"><td colspan="${4+nA}"><b>Gesamt (${zeilen.length} Tests)</b></td><td style="text-align:center"><b>${e.be}</b></td><td style="text-align:center"><b>${e.maxBE}</b></td><td style="text-align:center"><b>${coProz(gesamtProz)}</b></td><td style="text-align:center"><b>Ø ${e.schnitt.toFixed(2).replace(".",",")}</b></td><td></td></tr>`;
+ const schl=FOSBOS_SCHLUESSEL.map(([np,min])=>`${np}: ab ${min} %`).join(" · ");
+ return`<div class="item"style="background:#f5f7f8"><strong style="font-size:15px">${escPDF(name)}</strong>
+  <div>F12Sb · FOSBOS Weilheim · Pädagogik/Psychologie · Schuljahr 2026/27</div>
+  <div>Kurzarbeit-Ersatz: ${zeilen.length} von der Schülerin / dem Schüler gewählte Check-outs (jeweils ${nA} K-Prim-Aufgaben)</div></div>
+ <table style="font-size:11.5px"><thead><tr><th>Nr.</th><th>Datum</th><th>Check-out</th><th>LB</th>${kopfA}<th>BE</th><th>max.</th><th>%</th><th>NP</th><th>Verteilung</th></tr></thead><tbody>${zl}${summe}</tbody></table>
+ <div class="item"style="margin-top:12px"><div><b>Ergebnis:</b> Durchschnitt der Notenpunkte ${e.schnitt.toFixed(2).replace(".",",")}, gerundet (ab ,5 wird aufgerundet): <b style="font-size:15px">${escPDF(npText(e.np))}</b></div>
+  <div>Summe der Bewertungseinheiten: ${e.be} von ${e.maxBE} BE (${coProz(gesamtProz)} %), zur Information.</div></div>
+ <div style="font-size:10.5px;color:#666;margin-top:6px">A1–A${nA}: Bewertungseinheiten (BE) je K-Prim-Aufgabe, ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern, sonst 0 BE. BE = erreichte, max. = mögliche Bewertungseinheiten des Tests. Notenpunkte nach dem P/P-Bewertungsschlüssel (FOSBOS Bayern, Stand 13.09.2022): ${schl}, darunter 0.</div>
+ <div style="margin-top:26px;font-size:12px">Respizienz: Datum ______________ &nbsp;&nbsp; Unterschrift ______________________</div>`;
 }
-// Aufruf durch die Lehrkraft: ganze Klasse (Übersicht + ein Blatt je Person) oder eine einzelne Person.
-async function coRespizienzDrucken(opt){
- if(!isTeacher())return;
- opt=opt||{};
- try{
-  const {d,students,abgaben,auswahl}=await coLadeKlasse();
-  const beendet=d.checkouts.filter(c=>c.status==="beendet");
-  const stat=coKlassenStat(beendet,abgaben,auswahl,students.map(s=>s.uid));
-  const ctx={stat,mitHintergrund:opt.mitHintergrund!==false,lehrkraft:profile?.displayName||"",anzPool:coPool(d.checkouts,d.einst).length};
-  const mit=students.filter(x=>(auswahl[x.uid]?.ids||[]).length);
-  const liste=opt.uid?mit.filter(x=>x.uid===opt.uid):mit;
-  if(!liste.length){toast(opt.uid?"Für diese Person liegt noch keine Auswahl vor.":"Noch keine Auswahl vorhanden.");return}
-  const sortiert=ids=>ids.map(id=>d.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
-  const heute=new Date().toLocaleDateString("de-DE");
-  const blatt=x=>coRespizienzHTML(x.displayName||x.email||"Schüler:in",sortiert(auswahl[x.uid].ids||[]),abgaben[x.uid]||{},d.einst,ctx);
-  if(opt.uid){
-   const x=liste[0];
-   openToolPrintWindow(`Respizienz – ${x.displayName||x.email||"Schüler:in"}`,blatt(x),`${CO_KLASSE} · ${CO_FACH} · Kurzarbeit-Ersatz · erstellt am ${heute}`);
-   return;
-  }
-  const seiten=liste.map(x=>`<div style="break-before:page">${blatt(x)}</div>`).join("");
-  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(x.displayName||x.email||"")).join(", ");
-  const E=escPDF,zs="padding:4px 6px;border:1px solid #cfd8de;font-size:11.5px";
-  const zeilenTab=liste.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td style="${zs}">${E(x.displayName||x.email||"")}</td><td style="${zs};text-align:center">${e?`${e.be} / ${e.maxBE}`:"–"}</td><td style="${zs};text-align:center">${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td style="${zs};text-align:center"><b>${e?E(npText(e.np)):"–"}</b></td></tr>`;}).join("");
-  const klRow=stat.ersatz?`<tr style="border-top:2px solid #777;background:#f7fafc"><td style="${zs}"><b>Klassendurchschnitt (n = ${stat.ersatz.n})</b></td><td style="${zs}"></td><td style="${zs};text-align:center"><b>Ø ${stat.ersatz.schnitt.toFixed(2).replace(".",",")}</b></td><td style="${zs};text-align:center"><b>Ø ${stat.ersatz.np.toFixed(2).replace(".",",")}</b></td></tr>`:"";
-  const testTab=beendet.filter(c=>stat.proTest[c.id]).map((c,i)=>{const t=stat.proTest[c.id];return`<tr><td style="${zs};text-align:center">${i+1}</td><td style="${zs}">${E(coDatum(c.datum))}</td><td style="${zs}">${E(c.titel||"Check-out")}<div style="font-size:10px;color:#555">${E(coLbText(c.lbNum))}</div></td><td style="${zs};text-align:center">${t.n}</td><td style="${zs};text-align:center">${coProz(t.be)} / ${t.maxBE}</td><td style="${zs};text-align:center"><b>${coProz(t.np)}</b></td></tr>`;}).join("");
-  const uebersicht=`<div style="font-size:10.5px;letter-spacing:.06em;color:#1f4d73;font-weight:700">RESPIZIENZ · ALTERNATIVER LEISTUNGSNACHWEIS (KURZARBEIT-ERSATZ)</div>
-   <div style="font-size:12px;margin:2px 0 8px">${E(CO_SCHULE)} · Klasse ${E(CO_KLASSE)} · ${E(CO_FACH)} · Schuljahr ${E(CO_SCHULJAHR)}</div>
-   <h2>Übersicht Kurzarbeit-Ersatz</h2>
-   <table style="border-collapse:collapse;width:100%"><thead><tr><th style="${zs};background:#f1f5f8;text-align:left">Schüler:in</th><th style="${zs};background:#f1f5f8">BE gesamt</th><th style="${zs};background:#f1f5f8">Ø Notenpunkte</th><th style="${zs};background:#f1f5f8">Ersatznote</th></tr></thead><tbody>${zeilenTab}${klRow}</tbody></table>
-   ${ohne?`<p class="empty" style="font-size:11.5px">Keine Auswahl: ${ohne}</p>`:""}
-   <h2>Klassendurchschnitt je Check-out</h2>
-   <table style="border-collapse:collapse;width:100%"><thead><tr><th style="${zs};background:#f1f5f8">Nr.</th><th style="${zs};background:#f1f5f8;text-align:left">Datum</th><th style="${zs};background:#f1f5f8;text-align:left">Check-out · Lernbereich</th><th style="${zs};background:#f1f5f8">Teilnehmer:innen</th><th style="${zs};background:#f1f5f8">Ø BE</th><th style="${zs};background:#f1f5f8">Ø Notenpunkte</th></tr></thead><tbody>${testTab||`<tr><td style="${zs}" colspan="6">Noch keine ausgewerteten Check-outs.</td></tr>`}</tbody></table>`;
-  openToolPrintWindow("Respizienz – Kurzarbeit-Ersatz (Klasse)",uebersicht+seiten,`${CO_KLASSE} · ${CO_FACH} · erstellt am ${heute}`);
- }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
-}
-// Schüler:in: PDF der eigenen Auswahl (ohne Klassendurchschnitt). Lehrkraft mit uid: vollständige Respizienz.
 async function coPdfRespizienz(uid){
- if(isTeacher()&&uid)return coRespizienzDrucken({uid});
  try{
-  const [s,d]=await Promise.all([coLadeSchueler(uid),ladeCheckoutDaten()]);
+  const s=await coLadeSchueler(uid);
   const ids=s.auswahl?.ids||[];
   if(!ids.length){toast("Es liegt noch keine Auswahl vor.");return}
   const tests=ids.map(id=>s.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
-  openToolPrintWindow(`Respizienz – ${s.name||"Schüler:in"}`,coRespizienzHTML(s.name||"Schüler:in",tests,s.abgaben,d.einst,{lehrkraft:"",anzPool:coPool(d.checkouts,d.einst).length}),`${CO_KLASSE} · ${CO_FACH} · Kurzarbeit-Ersatz · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
+  openToolPrintWindow(`Respizienz – ${s.name||"Schüler:in"}`,coRespizienzHTML(s.name||"Schüler:in",tests,s.abgaben),`F12Sb · Pädagogik/Psychologie · Kurzarbeit-Ersatz · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
-}
-// Dialog: Respizienz-Ausdruck gezielt starten (ganze Klasse oder eine Person)
-async function openRespizienzDialog(){
- if(!isTeacher())return;
- let k;try{k=await coLadeKlasse();}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
- const {students,auswahl,d}=k;
- const mit=students.filter(x=>(auswahl[x.uid]?.ids||[]).length);
- const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length);
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🖨 RESPIZIENZ-AUSDRUCK · NUR LEHRKRÄFTE</div><h2>Respizienz für den Kurzarbeit-Ersatz</h2>
-  <p style="font-size:13px;color:var(--muted);margin-top:0">Eigener Ausdruck für die Ablage. Je Schüler:in enthält er: Name, Klasse und Fach, Lernbereich und Inhalte der Unterrichtsstunden je Test, die Ergebnisse der ${d.einst.anzahlWaehlen} gewählten Tests (je Aufgabe, max. ${coMaxBE()} BE je Test) mit Gesamtergebnis, den Klassendurchschnitt, den Notenschlüssel sowie Durchführung und Hintergründe des K-Prim-Tests.</p>
-  <div class="form">
-   <label>Für wen?<select id="respWer"><option value="">Ganze Klasse (${mit.length} mit Auswahl)</option>${mit.map(x=>`<option value="${esc(x.uid)}">${esc(x.displayName||x.email||"")}</option>`).join("")}</select></label>
-   <label class="check"><input id="respHint"type="checkbox"checked> Durchführung, Hintergründe und Notenschlüssel auf jedem Blatt mit ausdrucken</label>
-   ${ohne.length?`<p style="font-size:12px;color:var(--muted)">Noch keine Auswahl: ${ohne.map(x=>esc(x.displayName||x.email||"")).join(", ")}</p>`:""}
-   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="coRespizienzStarten()"${mit.length?"":" disabled"}>Ausdruck erstellen</button></div>
-  </div>`);
-}
-function coRespizienzStarten(){
- const uid=$("respWer")?.value||"",h=$("respHint")?.checked!==false;
- closeModal();
- return coRespizienzDrucken({uid:uid||null,mitHintergrund:h});
 }
 // Alle Ergebnisse einer Person: Übersicht + jeder Test mit Aufgaben und Lösung.
 async function coPdfSchuelerAlle(uid){
@@ -7074,7 +6853,22 @@ async function coPdfSchuelerAlle(uid){
   openToolPrintWindow(`Check-out-Ergebnisse – ${s.name||"Schüler:in"}`,`<div class="item"style="background:#f5f7f8"><strong>${escPDF(s.name||"Schüler:in")}</strong><div>${mit.length} Check-outs</div></div>${tab}${einzel}`,`F12Sb · Pädagogik/Psychologie · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
-async function coPdfRespizienzKlasse(){return coRespizienzDrucken({});}
+async function coPdfRespizienzKlasse(){
+ if(!isTeacher())return;
+ try{
+  const {d,students,abgaben,auswahl}=await coLadeKlasse();
+  const mit=students.filter(x=>(auswahl[x.uid]?.ids||[]).length);
+  if(!mit.length){toast("Noch keine Auswahl vorhanden.");return}
+  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(x.displayName||x.email||"")).join(", ");
+  const seiten=mit.map(x=>{
+   const ab=abgaben[x.uid]||{};
+   const tests=(auswahl[x.uid].ids||[]).map(id=>d.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
+   return`<div style="break-before:page">${coRespizienzHTML(x.displayName||x.email||"Schüler:in",tests,ab)}</div>`;
+  }).join("");
+  const uebersicht=`<h2>Übersicht Kurzarbeit-Ersatz</h2><table><thead><tr><th>Schüler:in</th><th>BE gesamt</th><th>Ø Notenpunkte</th><th>Ersatznote</th></tr></thead><tbody>${mit.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td>${escPDF(x.displayName||x.email||"")}</td><td>${e?`${e.be}/${e.maxBE}`:"–"}</td><td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?escPDF(npText(e.np)):"–"}</b></td></tr>`;}).join("")}</tbody></table>${ohne?`<p class="empty">Keine Auswahl: ${ohne}</p>`:""}`;
+  openToolPrintWindow("Respizienz – Kurzarbeit-Ersatz (Klasse)",uebersicht+seiten,`F12Sb · Pädagogik/Psychologie · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
 async function coPdfErsatzSchueler(){return coPdfRespizienz(currentUser.uid);}
 async function openCheckoutEinstellungen(){
  if(!isTeacher())return;
@@ -7121,7 +6915,7 @@ async function openCheckoutKlassenuebersicht(){
   <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th><th>PDF</th></tr></thead>
   <tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
    return`<tr><td>${esc(s.displayName||s.email||"")}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td style="white-space:nowrap"><button class="secondary"style="font-size:11px"onclick="coPdfSchuelerAlle('${s.uid}')">Ergebnisse</button> <button class="secondary"style="font-size:11px"onclick="coPdfRespizienz('${s.uid}')"${e?"":" disabled"}>Respizienz</button></td></tr>`;}).join("")}</tbody></table></div>
-  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="openRespizienzDialog()">🖨 Respizienz-Ausdruck</button><button class="secondary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button><button class="secondary"onclick="coPdfErsatzKlasse()">PDF Übersicht Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button><button class="secondary"onclick="coPdfErsatzKlasse()">PDF Übersicht Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
 }
 async function coPdfErsatzKlasse(){
  if(!isTeacher())return;
@@ -7135,7 +6929,7 @@ async function coPdfErsatzKlasse(){
 }
 Object.assign(window,{coBankEinsetzen,coVorlageWaehlen,coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
  openCheckoutTest,coAntwort,coAbgeben,openCheckoutMeinErgebnis,openCheckoutErgebnisse,openCheckoutSchuelerErgebnis,coPdfSchueler,coPdfKlasse,
- openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfRespizienz,coPdfRespizienzKlasse,coPdfSchuelerAlle,openRespizienzDialog,coRespizienzStarten,coRespizienzDrucken});
+ openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfRespizienz,coPdfRespizienzKlasse,coPdfSchuelerAlle});
 
 async function renderFachDetail(){
  if(!activeFach)return await renderFaecherUebersicht();
@@ -14794,6 +14588,49 @@ function downloadICS(events,filename,calName){
  setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},0);
 }
 
+// ---- Campus-Kalender: gemeinsame Terminarten, Prüfungstermine, Typ-Erkennung ----
+const CAL_TYPE_META={
+ schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
+ kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
+ kprim:{label:"KPrim-Test",className:"cal-kprim"},
+ projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
+ referat:{label:"Referat",className:"cal-yellow"},
+ praesentation:{label:"Präsentation",className:"cal-purple"},
+ elternabend:{label:"Elternabend",className:"cal-eltern"},
+ digitaltag:{label:"Digitaltag",className:"cal-digital"},
+ abschlusspruefung:{label:"Abschlussprüfung",className:"cal-gold"},
+ sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
+ geburtstag:{label:"Geburtstag",className:"cal-birthday"},
+ ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
+};
+// Abschlussprüfung FOS 12 Bayern 2027 (Quelle: km.bayern.de / bfbn.de/termine)
+const ABSCHLUSSPRUEFUNG_2027=[
+ ["2027-05-12","Abschlussprüfung Deutsch","Schriftliche Abschlussprüfung FOS 12 (Fachabitur) in Deutsch."],
+ ["2027-05-14","Abschlussprüfung Profilfach (Pädagogik/Psychologie)","Schriftliche Abschlussprüfung FOS 12 im Profilfach (4. Prüfungsfach)."],
+ ["2027-06-01","Abschlussprüfung Englisch","Schriftliche Abschlussprüfung FOS 12 (Fachabitur) in Englisch."],
+ ["2027-06-03","Abschlussprüfung Mathematik","Schriftliche Abschlussprüfung FOS 12 (Fachabitur) in Mathematik."]
+];
+function abschlusspruefungEvents(){
+ const ev=ABSCHLUSSPRUEFUNG_2027.map(([d,t,desc])=>({start:d,type:"abschlusspruefung",title:t,description:desc}));
+ // Mündliche Gruppenprüfung Englisch: Zeitraum 12.–30.04.2027 (genauer Termin laut Schulplan), nur Werktage
+ for(let d=new Date("2027-04-12T12:00:00");d<=new Date("2027-04-30T12:00:00");d.setDate(d.getDate()+1)){
+  if(d.getDay()===0||d.getDay()===6)continue;
+  ev.push({start:d.toISOString().slice(0,10),type:"abschlusspruefung",title:"Abschlussprüfung Englisch mündlich (Gruppenprüfung)",description:"Zeitraum der mündlichen Gruppenprüfung Englisch: 12.–30.04.2027. Dein genauer Termin steht im Prüfungsplan der Schule."});
+ }
+ return ev;
+}
+// Ältere Einträge, die als „Sonstiges“ gespeichert wurden, anhand des Titels der passenden Terminart zuordnen
+function calendarEffectiveType(e){
+ const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
+ const key=raw==="präsentation"?"praesentation":raw;
+ if(key!=="sonstiges"&&CAL_TYPE_META[key])return key;
+ const t=String(e?.title||e?.name||"");
+ if(/elternabend/i.test(t))return"elternabend";
+ if(/digitaltag/i.test(t))return"digitaltag";
+ if(/k-?prim/i.test(t))return"kprim";
+ return CAL_TYPE_META[key]?key:"sonstiges";
+}
+
 async function exportCampusCalendarICS(){
  try{
  let events=[];
@@ -14815,7 +14652,7 @@ async function exportCampusCalendarICS(){
  const ferienRangeEvents=ferienZeitraeume.map(([start,end,label])=>(
  {start,rangeEnd:end,title:label,description:"Schulferien in Bayern"}
  ));
- downloadICS([...events,...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F12Sb Kalender");
+ downloadICS([...events,...abschlusspruefungEvents(),...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F12Sb Kalender");
  toast("Kalender wird heruntergeladen – Datei öffnen, um sie zum Handy-Kalender hinzuzufügen.");
  }catch(e){console.error("Kalender-Export:",e);toast("Der Kalender konnte nicht exportiert werden.")}
 }
@@ -14838,16 +14675,7 @@ async function renderKalender(){
  try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){console.error("Kalender calendar:",e)}
  }
 
- const typeMeta={
- schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
- kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
- projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
- referat:{label:"Referat",className:"cal-yellow"},
- praesentation:{label:"Präsentation",className:"cal-purple"},
- sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
- geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
- };
+ const typeMeta=CAL_TYPE_META;
 
  // Schulferien Bayern – Schuljahr 2026/27.
  const ferienZeitraeume=[
@@ -14874,12 +14702,9 @@ async function renderKalender(){
  });
  let birthdayEvents=[];
  try{birthdayEvents=await getBirthdayEvents()}catch(e){console.error("Kalender Geburtstage:",e)}
- events=[...events,...birthdayEvents,...ferienEvents];
+ events=[...abschlusspruefungEvents(),...events,...birthdayEvents,...ferienEvents];
 
- const normalizeType=e=>{
- const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
- return raw==="präsentation"?"praesentation":(typeMeta[raw]?raw:"sonstiges");
- };
+ const normalizeType=e=>calendarEffectiveType(e);
  const dateVal=e=>{
  const raw=e?.start||e?.date||e?.startDate;
  if(!raw)return null;
@@ -14946,6 +14771,10 @@ async function renderKalender(){
  .cal-yellow{background:#fef3c7!important}.cal-purple{background:#ede9fe!important}.cal-grey{background:#e5e7eb!important}
  .cal-holiday{background:#e3f5da!important;border-color:#8bc34a!important}
  .cal-birthday{background:#ffe4ec!important;border-color:#f472b6!important}
+ .cal-gold{background:#f5c542!important;border-color:#a16207!important;color:#3b2a00}
+ .cal-eltern{background:#fed7aa!important;border-color:#ea580c!important}
+ .cal-digital{background:#a5f3fc!important;border-color:#0891b2!important}
+ .cal-kprim{background:#f5d0fe!important;border-color:#c026d3!important}
  .cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
  .cal-legend-item{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#fff;font-size:12px}
  .cal-legend-dot{width:13px;height:13px;border-radius:3px;border:1px solid rgba(0,0,0,.12)}
@@ -15063,18 +14892,7 @@ async function saveBirthday(){
 }
 
 function calendarTypeMeta(e){
- const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
- const key=raw==="präsentation"?"praesentation":raw;
- return ({
- schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
- kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
- projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
- referat:{label:"Referat",className:"cal-yellow"},
- praesentation:{label:"Präsentation",className:"cal-purple"},
- sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
- geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
- })[key]||{label:"Sonstiger Termin",className:"cal-grey"};
+ return CAL_TYPE_META[calendarEffectiveType(e)]||CAL_TYPE_META.sonstiges;
 }
 
 function openCalendarDay(y,m,d){
@@ -15096,7 +14914,7 @@ function openCalendarDay(y,m,d){
  ${e.location?`<p><strong>Ort:</strong> ${esc(e.location)}</p>`:""}
  <p style="white-space:pre-wrap">${esc(e.description||e.text||"")}</p>
  ${isTeacher() && e.id && e.type!=="ferien"?`<div class="form-actions"style="margin-top:10px">
- <button class="secondary"onclick="editCalendarEntry('${e.collection||"events"}','${e.id}','${esc(String(e.title||e.name||"").replace(/\n/g,"\\n"))}','${esc(String(e.type||"sonstiges"))}','${esc(String(e.date||e.start||"").slice(0,10))}','${esc(String(e.time||""))}','${esc(String(e.location||"").replace(/\n/g,"\\n"))}','${esc(String(e.description||e.text||"").replace(/\n/g,"\\n"))}')">Bearbeiten</button>
+ <button class="secondary"onclick="editCalendarEntry('${e.collection||"events"}','${e.id}','${esc(String(e.title||e.name||"").replace(/\n/g,"\\n"))}','${esc(calendarEffectiveType(e))}','${esc(String(e.date||e.start||"").slice(0,10))}','${esc(String(e.time||""))}','${esc(String(e.location||"").replace(/\n/g,"\\n"))}','${esc(String(e.description||e.text||"").replace(/\n/g,"\\n"))}')">Bearbeiten</button>
  <button class="secondary"onclick="deleteCalendarEntry('${e.collection||"events"}','${e.id}')">Termin löschen</button>
  </div>`:""}
  </div>`;
@@ -17409,9 +17227,12 @@ function openCalendarForm(){
  <select id="calType">
  <option value="schulaufgabe">Schulaufgabe</option>
  <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="kprim">KPrim-Test</option>
  <option value="projektvorstellung">Projektvorstellung</option>
  <option value="referat">Referat</option>
  <option value="praesentation">Präsentation</option>
+ <option value="elternabend">Elternabend</option>
+ <option value="digitaltag">Digitaltag</option>
  <option value="sonstiges">Sonstiger Termin / frei wählbar</option>
  </select>
  </label>
@@ -17466,9 +17287,12 @@ function editCalendarEntry(collectionName,id,title,type,date,time,location,descr
  <select id="calType">
  <option value="schulaufgabe">Schulaufgabe</option>
  <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="kprim">KPrim-Test</option>
  <option value="projektvorstellung">Projektvorstellung</option>
  <option value="referat">Referat</option>
  <option value="praesentation">Präsentation</option>
+ <option value="elternabend">Elternabend</option>
+ <option value="digitaltag">Digitaltag</option>
  <option value="sonstiges">Sonstiger Termin / frei wählbar</option>
  </select>
  </label>
