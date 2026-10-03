@@ -136,6 +136,26 @@ document.getElementById('go').addEventListener('click',async()=>{
       await fsMod.deleteDoc(ref).catch(()=>{});
     }catch(e){regelFehler=regelFehler||e.code==='permission-denied';log('bad','Tafel anlegen (Lehrkraft): '+(e.code||e.name)+' – '+e.message);}
   }
+  // 7) Zusatzmodule im Unterricht-Plan (ppModule): genau der Zugriff, der beim Speichern eines Moduls passiert
+  log('info','\nZusatzmodule im Unterricht-Plan:');
+  let modulFehler=false;
+  for(const [col,name] of [['ppModule','Zusatzmodule'],['lehrplanPlan','Plan-Verschiebungen'],['ppKursFortschritt','Kurs-Fortschritt'],['ppStundenAntworten','Check-out-Antworten']]){
+    try{await withTimeout(fsMod.getDocs(fsMod.query(fsMod.collection(db,col),fsMod.limit(1))),15000,'Lesen von '+col);log('ok',name+' ('+col+') lesen: möglich');}
+    catch(e){modulFehler=modulFehler||e.code==='permission-denied';log('bad',name+' ('+col+') lesen: '+(e.code||e.name)+' – '+e.message);}
+  }
+  if(rolle==='teacher'||rolle==='admin'){
+    try{
+      const ref=await withTimeout(fsMod.addDoc(fsMod.collection(db,'ppModule'),{modul:'selbstlern',titel:'Diagnose (wird gelöscht)',lb:1,start:'2026-10-05',dauer:'45',kursId:'eigen',createdBy:user.uid,createdAt:fsMod.serverTimestamp()}),15000,'Modul anlegen');
+      log('ok','Zusatzmodul anlegen (Lehrkraft): möglich. Das Speichern in der App sollte jetzt funktionieren.');
+      await fsMod.deleteDoc(ref).catch(()=>{});
+    }catch(e){
+      modulFehler=modulFehler||e.code==='permission-denied';
+      log('bad','Zusatzmodul anlegen (Lehrkraft): '+(e.code||e.name)+' – '+e.message);
+    }
+  }else{
+    log('bad','Die Rolle in users/'+user.uid+' ist "'+rolle+'". Zum Anlegen von Modulen muss sie "teacher" oder "admin" sein.');
+  }
+  if(modulFehler)log('info','     -> Die Regel für ppModule ist im Projekt f12sb-9f3db NICHT veröffentlicht (oder wurde im falschen Projekt veröffentlicht). Firebase-Konsole des Projekts f12sb-9f3db -> Firestore Database -> Regeln: den Inhalt von firestore.rules einfügen und auf „Veröffentlichen“ klicken. Danach prüfen, dass in den Regeln das Wort ppModule vorkommt.');
   if(regelFehler)log('info','     -> Mindestens ein Zugriff wurde verweigert: Die Firestore-Regeln für Whiteboard, Tafel und Didaktik fehlen oder sind fehlerhaft eingefügt. Den Block aus whiteboard-regeln-einfuegen.txt direkt über „Deny everything not explicitly listed above“ einfügen und Veröffentlichen klicken.');
   else log('ok','Whiteboard-Regeln scheinen in Ordnung zu sein.');
 
