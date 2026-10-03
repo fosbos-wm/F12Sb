@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Übungskurs Instanzenmodell: ICH-Stärke, ICH-Schwäche, Angst und Abwehr</title>
+<style>
+:root{
+  --paper:#f3f8fc; --card:#FFFFFF; --ink:#17384f; --soft:#6c8190;
+  --line:#dce7ef; --accent:#1688cf; --accent-ink:#FFFFFF; --accent-soft:#e8f3fc;
+  --hl:#cfe8fb; --hl-ink:#075a9d; --margin:#82b83b; --blue-dark:#075a9d;
+  --ok:#2f8f4e; --ok-bg:#e3f4e8; --bad:#d92c34; --bad-bg:#fdecea; --sel:#fff6d8;
+  --shadow:0 8px 24px rgba(24,67,96,.08);
+  --grid:rgba(0,0,0,0);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;min-height:100%;color:var(--ink);background-color:var(--paper);
+  font:400 16px/1.55 Arial,Helvetica,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+[hidden]{display:none!important}
+h1,h2,h3{font-family:Arial,Arial,system-ui,sans-serif;line-height:1.15;margin:0 0 .6em;letter-spacing:-.01em}
+h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:800}
+h2{font-size:clamp(1.5rem,3.6vw,2rem);font-weight:800}
+h3{font-size:1.2rem;font-weight:600}
+p{margin:0 0 .9em;max-width:68ch}
+.hl{background:linear-gradient(transparent 55%,var(--hl) 55%,var(--hl) 92%,transparent 92%);padding:0 .15em;color:var(--ink)}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.app{display:grid;grid-template-columns:250px minmax(0,1fr);gap:0;max-width:1120px;margin:0 auto;min-height:100vh}
+nav.tabs{position:sticky;top:0;align-self:start;padding:28px 18px 24px 14px;height:100vh;overflow:auto}
+.brand{font:800 1.15rem/1.1 Arial,system-ui,sans-serif;margin:0 0 4px}
+.brand-sub{font-size:.85rem;color:var(--soft);margin:0 0 18px}
+.tab{display:block;width:100%;text-align:left;font:inherit;font-size:.95rem;color:var(--ink);background:var(--card);
+  border:1.5px solid var(--line);border-right-width:0;border-radius:10px 0 0 10px;padding:9px 12px 9px 14px;margin:0 0 8px;cursor:pointer;
+  transform:translateX(0);transition:transform .15s ease,background .15s ease}
+.tab:hover{transform:translateX(-4px)}
+.tab[aria-current="page"]{background:var(--hl);color:var(--hl-ink);font-weight:700;border-color:var(--ink);transform:translateX(-8px)}
+.tab .done{float:right;color:var(--ok);font-weight:700}
+.meter{height:6px;background:var(--line);border-radius:3px;margin:16px 0 6px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.meter-l{font-size:.8rem;color:var(--soft)}
+
+main{padding:34px 28px 80px 34px;border-left:2px solid var(--margin);background:linear-gradient(90deg,color-mix(in srgb,var(--paper) 88%,transparent),transparent 40%);min-width:0}
+.sec{max-width:760px}
+.title{margin-bottom:.5em}
+.two{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.art{width:min(220px,34vw);height:auto;color:var(--ink)}
+.lead{font-size:1.05rem}
+
+.btn{font:700 1rem/1 Arial,system-ui,sans-serif;background:var(--accent);color:var(--accent-ink);border:2px solid var(--accent);
+  border-radius:8px;padding:12px 18px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none;transform:none}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink);box-shadow:none}
+.btn.small{font-size:.9rem;padding:9px 13px;box-shadow:2px 2px 0 var(--ink)}
+.btn.big{font-size:1.15rem;padding:18px 22px;width:100%;text-align:center;line-height:1.3}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 0}
+
+.card{background:var(--card);border:1.5px solid var(--ink);border-radius:6px;padding:18px 20px;margin:0 0 18px;box-shadow:4px 4px 0 var(--line)}
+.note{background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:14px 14px 14px 3px;padding:12px 16px;margin:0 0 16px;max-width:68ch}
+.note strong{color:var(--ink)}
+.soft{color:var(--soft);font-size:.92rem}
+details{margin:22px 0 0;border:1.5px dashed var(--line);border-radius:6px;padding:10px 14px;background:var(--card)}
+summary{cursor:pointer;font-weight:700}
+ul.clean{margin:0 0 .9em;padding-left:1.2em}
+ul.clean li{margin:.25em 0}
+
+/* Dialog */
+.scene{font-style:italic;color:var(--soft)}
+.chat{display:flex;flex-direction:column;gap:12px;margin:18px 0}
+.bubble{max-width:82%;padding:12px 16px;border:1.5px solid var(--accent);background:var(--accent-soft);border-radius:16px 16px 16px 3px;animation:pop .25s ease-out}
+.bubble.r{align-self:flex-end;border-radius:16px 16px 3px 16px;background:var(--card);border-color:var(--ink)}
+.bubble b{display:block;font-size:.8rem;color:var(--soft);margin-bottom:2px}
+@keyframes pop{from{transform:translateY(6px);opacity:0}to{transform:none;opacity:1}}
+
+/* Stepper */
+.steps{display:flex;gap:0;margin:0 0 22px;border:1.5px solid var(--ink);border-radius:6px;overflow:hidden;background:var(--card)}
+.steps li{list-style:none;flex:1;padding:8px 10px;font-size:.9rem;text-align:center;border-right:1.5px solid var(--ink);color:var(--soft)}
+.steps li:last-child{border-right:0}
+.steps li.on{background:var(--hl);color:var(--hl-ink);font-weight:700}
+.steps li.past{color:var(--ok);font-weight:700}
+.steps{padding:0;margin-left:0}
+
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 6px}
+.gbtn{font:inherit;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:8px;padding:14px 16px;cursor:pointer;color:var(--ink)}
+.gbtn b{display:block;font-size:1.05rem}
+.gbtn[aria-pressed="true"]{border-color:var(--ink);background:var(--sel);box-shadow:3px 3px 0 var(--ink)}
+.check{display:flex;gap:10px;align-items:flex-start;margin:6px 0}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent)}
+
+/* Timer */
+.timer{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.ringbox{position:relative;width:150px;height:150px;flex:none}
+.ring{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:9}
+.ring-bg{stroke:var(--line)}
+.ring-fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+.time{position:absolute;inset:0;display:grid;place-items:center;font:800 2rem Arial,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.words{list-style:none;margin:0;padding:0;columns:2;column-gap:44px;font:600 1.5rem/1.7 Arial,system-ui,sans-serif}
+.words li{break-inside:avoid}
+.banner{border:2px solid var(--ink);background:var(--sel);border-radius:6px;padding:10px 14px;font-weight:700;margin:0 0 16px}
+textarea{width:100%;min-height:170px;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:4px;padding:12px;resize:vertical;line-height:1.7;
+  background-image:repeating-linear-gradient(transparent,transparent 1.65em,var(--grid) 1.65em,var(--grid) calc(1.65em + 1px));background-attachment:local}
+textarea[readonly]{opacity:.85}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{font:inherit;font-size:.95rem;padding:4px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.chip.hit{background:var(--ok-bg);border-color:var(--ok);color:var(--ink)}
+.chip.miss{background:transparent;border-style:dashed;color:var(--soft)}
+.big-n{font:800 3rem/1 Arial,system-ui,sans-serif}
+
+/* Ergebnisse */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grp h3{display:flex;justify-content:space-between;align-items:baseline}
+.grp .avg{font:800 1.8rem/1 Arial,system-ui,sans-serif}
+.bar{height:22px;background:var(--line);border-radius:3px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.grp.b .bar i{background:var(--margin)}
+.chip.x{cursor:pointer}
+.chip.x:hover{text-decoration:line-through}
+.addrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+select,input[type=number]{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:4px;padding:8px 10px}
+input[type=number]{width:5.5em}
+
+/* Slides */
+.deck{border:1.5px solid var(--ink);border-radius:6px;background:var(--card);box-shadow:5px 5px 0 var(--line);margin:8px 0 18px;overflow:hidden}
+.slide{padding:26px 26px 22px;min-height:340px}
+.prog{display:flex;gap:2px;padding:0;background:var(--ink)}
+.prog i{flex:1;height:8px;background:var(--line);opacity:.35}
+.prog i.on{background:var(--hl);opacity:1}
+.deckbar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-top:1.5px solid var(--ink);font-size:.9rem}
+.slide h2{margin-bottom:.4em}
+.icon{width:110px;height:110px;color:var(--accent);flex:none}
+.split{display:flex;gap:24px;align-items:center;justify-content:space-between}
+.flip{width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--accent-soft);border:2px dashed var(--accent);border-radius:8px;padding:18px;cursor:pointer;margin:8px 0}
+.flip.open{border-style:solid;background:var(--sel)}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cols2 .card{margin:0;box-shadow:none}
+
+/* Tasks */
+.task{margin:6px 0 0}
+.q-text{font-weight:700;max-width:none;font-size:1.05rem}
+.opts{display:grid;gap:8px;margin:10px 0 12px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);cursor:pointer}
+.opt:hover{border-color:var(--ink)}
+.opt input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent)}
+.opt.ok{background:var(--ok-bg);border-color:var(--ok)}
+.opt.bad{background:var(--bad-bg);border-color:var(--bad)}
+.fb{min-height:1.4em;margin:8px 0 0;font-weight:700}
+.fb.good{color:var(--ok)}.fb.wrong{color:var(--bad)}.fb.warn{color:var(--soft)}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0}
+.gaptext{line-height:2.5;max-width:none}
+.gap{display:inline-block;vertical-align:middle;min-width:9.5em;min-height:2.2rem;margin:0 3px;border:2px dashed var(--soft);border-radius:6px;background:var(--paper);padding:0;text-align:center;line-height:1.5}
+.gap.over{background:var(--sel)}
+.gap.ok{border-style:solid;border-color:var(--ok)}
+.gap.bad{border-style:solid;border-color:var(--bad)}
+.gap .tok{margin:2px}
+.bank,.items{display:flex;flex-wrap:wrap;gap:8px;min-height:2.6rem;padding:10px;border:1.5px solid var(--line);border-radius:6px;background:var(--paper);margin:12px 0 0}
+.tok{font:700 .95rem/1.3 Arial,system-ui,sans-serif;color:var(--ink);background:var(--card);border:1.5px solid var(--ink);border-radius:6px;padding:6px 11px;cursor:grab;box-shadow:2px 2px 0 var(--line);text-align:left}
+.tok.sel{background:var(--sel);box-shadow:0 0 0 3px var(--accent)}
+.tok.drag{opacity:.4}
+.tok.ok{background:var(--ok-bg);border-color:var(--ok)}
+.tok.bad{background:var(--bad-bg);border-color:var(--bad)}
+.tok.st{font-weight:400;font-size:.92rem;max-width:100%}
+.zones{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0}
+.zone{border:2px dashed var(--soft);border-radius:6px;padding:10px;min-height:150px;background:var(--paper)}
+.zone.over{background:var(--sel)}
+.zone h3{font-size:1rem;margin-bottom:8px}
+.zone .items{border:0;background:transparent;padding:0;margin:0;flex-direction:column;align-items:stretch}
+.sumtab{width:100%;border-collapse:collapse;margin:8px 0}
+.sumtab td{padding:8px 4px;border-bottom:1px solid var(--line)}
+.sumtab td:last-child{text-align:right;font-weight:700;white-space:nowrap}
+.total{display:flex;align-items:center;gap:12px;margin:12px 0}
+.total .bar{flex:1;margin:0}
+.choose{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 20px}
+.cbtn{font:inherit;text-align:center;color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:20px 12px;cursor:pointer;box-shadow:4px 4px 0 var(--line)}
+.cbtn .n{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 8px;border:3px solid var(--ink);border-radius:50%;font:800 1.6rem Arial,system-ui,sans-serif}
+.cbtn[aria-pressed="true"]{background:var(--sel)}
+.scen{margin:0 0 16px}
+.scen .card{margin:0}
+.solution{background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:6px;padding:14px 16px;margin:14px 0}
+.solution h3{font-size:1.05rem}
+.pts{font:800 1.4rem Arial,system-ui,sans-serif}
+.done-card{background:var(--accent-soft);border:2px solid var(--accent);border-radius:8px;padding:22px 24px;margin:20px 0}
+.done-card h2{margin-bottom:.3em}
+.qpart{margin:0 0 26px}
+.qpart>h3{margin-top:22px}
+.qitem{margin:0 0 16px;padding:0 0 14px;border-bottom:1px solid var(--line)}
+.qitem:last-child{border-bottom:0}
+
+/* App-Look (wie die F11Sb-WebApp): heller Grund, weiße Karten, weiche Schatten, keine Rasterlinien */
+h1,h2,h3{letter-spacing:0;color:var(--ink)}
+.hl{background:linear-gradient(transparent 64%,var(--hl) 64%);padding:0 .1em}
+main{border-left:0;background:none;padding:30px 30px 80px}
+main:focus,main:focus-visible{outline:none}
+nav.tabs{border-right:1px solid var(--line);background:#fff}
+.brand{color:var(--blue-dark);font-size:1.15rem}
+.tab{border:1px solid var(--line);border-radius:10px;transform:none!important;box-shadow:none}
+.tab:hover{border-color:var(--accent);background:#f3f9ff}
+.tab[aria-current="page"]{background:var(--hl);color:var(--hl-ink);border-color:var(--accent)}
+.meter{background:var(--line)}
+.btn{border:1px solid var(--accent);border-radius:10px;box-shadow:none;transform:none!important;font-size:.95rem;padding:12px 18px}
+.btn:hover{filter:brightness(.94)}
+.btn[disabled]{filter:none}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn.small{font-size:.85rem;padding:9px 13px;box-shadow:none}
+.btn.big{font-size:1.05rem;padding:16px 20px}
+.card{border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.note{border:1px solid #b9d9f1;border-radius:12px}
+.banner{border:1px solid #f0d28a;border-radius:12px;background:var(--sel)}
+details{border:1px dashed #b9c8d6;border-radius:12px}
+.steps{border:1px solid var(--line);border-radius:12px}
+.steps li{border-right:1px solid var(--line)}
+.steps li:last-child{border-right:0}
+.gbtn{border:1.5px solid var(--line);border-radius:12px}
+.gbtn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:none}
+textarea{background-image:none;border:1px solid var(--line);border-radius:10px;line-height:1.55}
+select,input[type=number]{border:1px solid var(--line);border-radius:8px}
+.chip{border:1px solid var(--line)}
+.bar{border-radius:6px}
+.deck{border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.prog{background:var(--line)}
+.prog i{background:#fff;opacity:1}
+.prog i.on{background:var(--accent)}
+.deckbar{border-top:1px solid var(--line)}
+.flip{border:1.5px dashed var(--accent);border-radius:12px}
+.flip.open{border-style:solid}
+.cols2 .card{box-shadow:none}
+.opt{border:1px solid var(--line);border-radius:10px}
+.opt:hover{border-color:var(--accent)}
+.gap{border:2px dashed #9db0c0;border-radius:8px}
+.bank,.items{border:1px solid var(--line);border-radius:10px}
+.tok{border:1px solid #b9c8d6;border-radius:8px;box-shadow:none}
+.tok.sel{box-shadow:0 0 0 3px #b9d9f1}
+.zone{border:2px dashed #b9c8d6;border-radius:10px}
+.cbtn{border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.cbtn .n{border:3px solid var(--accent);color:var(--blue-dark)}
+.cbtn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.solution{border:1px solid #b9d9f1;border-radius:12px}
+.done-card{border:1px solid #9fd3ae;background:var(--ok-bg);border-radius:14px}
+.ring-fg{stroke:var(--accent)}
+.grp.b .bar i{background:var(--margin)}
+
+@media (max-width:820px){
+  .app{grid-template-columns:1fr}
+  nav.tabs{position:static;height:auto;padding:14px 14px 4px;overflow:visible}
+  .tabs-list{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;-webkit-overflow-scrolling:touch}
+  .tab{width:auto;white-space:nowrap;margin:0;border-right-width:1.5px;border-radius:999px;transform:none!important}
+  .tab .done{float:none;margin-left:6px}
+  .brand-sub,.meter,.meter-l{display:none}
+  main{border-left:0;border-top:0;padding:22px 16px 70px;background:none}
+  .two{grid-template-columns:1fr}
+  .art{display:none}
+  .cmp,.zones,.cols2,.choice,.choose{grid-template-columns:1fr}
+  .words{columns:1}
+  .bubble{max-width:94%}
+  .split{flex-direction:column;align-items:flex-start}
+  .steps li{font-size:.75rem;padding:8px 4px}
+  .gap{min-width:7em}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.skizze{width:100%;table-layout:fixed;overflow-wrap:anywhere;border-collapse:collapse;margin:8px 0 4px;font-size:.95rem;background:#fff}
+.skizze th,.skizze td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.skizze th{background:var(--accent-soft);color:var(--ink)}
+.skizze th:first-child,.skizze td:first-child{width:28%}.skizze td:first-child{font-weight:700}
+.skizze ul{margin:0;padding-left:1.1em}.skizze li{margin:2px 0}
+.skizze tr.skopt td{background:#fafcfd}
+.skizze .tag{display:inline-block;font-size:.75rem;font-weight:700;color:var(--hl-ink);background:var(--hl);border-radius:999px;padding:1px 8px;margin-left:4px}
+.dl-card{display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:#fff;border:1.5px solid var(--accent);border-radius:12px;padding:14px 18px;margin:18px 0}
+.dl-card p{margin:0;flex:1 1 260px}
+.dl-card a.btn{text-decoration:none;display:inline-block}
+
+/* Übungskurs: Ergänzungen */
+.fall{border-left:6px solid var(--accent)}
+.fall h3{margin-top:0}
+.merke{background:var(--accent-soft);border:1px solid #bcdcf3;border-radius:14px;padding:12px 16px;margin:14px 0}
+.merke strong{color:var(--hl-ink)}
+.task+.task{margin-top:18px}
+.aufg{margin:26px 0 8px}
+.aufg h3{margin:0 0 4px}
+.aufg .tag{display:inline-block;font-size:.75rem;font-weight:700;color:var(--hl-ink);background:var(--hl);border-radius:999px;padding:2px 10px;margin-right:6px;vertical-align:middle}
+.opt.why{display:block;background:transparent;border:0;padding:2px 12px 8px 34px;color:var(--soft);font-size:.92rem}
+.kp-row{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0;background:#fff}
+.kp-row .kp-t{margin:0 0 6px}
+.kp-row .kp-o{display:flex;gap:10px;flex-wrap:wrap}
+.kp-row .kp-o label{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;background:var(--accent-soft)}
+.kp-row.ok{border-color:#9fd3ae;background:var(--ok-bg)}.kp-row.bad{border-color:#eab2b0;background:var(--bad-bg)}
+.kp-row .kp-w{margin:6px 0 0;font-size:.92rem;color:var(--soft)}
+.vig{background:#fff;border:1.5px solid var(--accent);border-radius:14px;padding:14px 18px;margin:16px 0}
+.vig h3{margin:0 0 6px;color:var(--hl-ink)}
+.bep{background:var(--accent-soft);border:1.5px solid #bcdcf3;border-radius:14px;padding:12px 16px;margin:14px 0}
+.bep table{border-collapse:collapse;margin-top:6px}.bep td,.bep th{border:1px solid #bcdcf3;padding:4px 10px;text-align:center;background:#fff}
+.nav-row{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 8px}
+@media (max-width:820px){.app{grid-template-columns:minmax(0,1fr)}nav.tabs{min-width:0;max-width:100%}.tabs-list{max-width:100%}.bep table{display:block;overflow-x:auto;max-width:100%}.skizze{font-size:.88rem}}
+textarea.frei{min-height:130px}
+</style>
+</head>
+<body>
+
+<noscript><p style="padding:24px">Diese Lerneinheit benötigt JavaScript.</p></noscript>
+<div class="app">
+  <nav class="tabs" aria-label="Abschnitte">
+    <p class="brand">Übungskurs Instanzenmodell</p>
+    <p class="brand-sub">Pädagogik/Psychologie · Ich-Stärke, Ich-Schwäche, Angst, Abwehr</p>
+    <div class="tabs-list" id="tabs"></div>
+    <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+    <div class="meter-l" id="meterl"></div>
+  </nav>
+  <main id="main" tabindex="-1">
+
+  <section class="sec" id="s-start">
+    <h1 class="title"><span class="hl">Übungskurs Instanzenmodell</span></h1>
+    <div class="two"><div>
+      <p class="lead">Willkommen im Übungskurs „ICH-Stärke, ICH-Schwäche, Angst und Abwehr“.</p>
+      <p>Hier üben Sie, das Instanzenmodell nach Freud auf Alltagssituationen anzuwenden. Sie wiederholen zuerst die Dynamik von ES, ÜBER-ICH und ICH und arbeiten danach mit den Begriffen ICH-Stärke und ICH-Schwäche, den Formen der Angst und den Abwehrmechanismen.</p>
+      <p>Ein Fall begleitet Sie durch den ganzen Kurs: ein Morgen, an dem Sie nicht aufstehen möchten. So erkennen Sie die Begriffe in einer Situation wieder, die Sie selbst kennen.</p>
+      <div class="merke"><strong>So arbeiten Sie:</strong> Jede Aufgabe prüfen Sie mit „Überprüfen“. Danach können Sie sich die Lösung ansehen oder die Aufgabe wiederholen. Bei Schreibaufgaben vergleichen Sie Ihren Text mit einer Musterlösung und prüfen sich selbst. Am Ende wartet ein Übungstest im Format des Check-out-Wochentests (4 Aufgaben, 16 Bewertungseinheiten).</div>
+      <p class="soft">Voraussetzung: Sie kennen das Instanzenmodell (ES, ICH, ÜBER-ICH). Falls nicht, bearbeiten Sie zuerst den Kurs „Freud: Instanzenmodell“.</p>
+      <div class="row"><button class="btn" type="button" data-go="instanz">Start</button></div>
+    </div><svg class="art" viewBox="0 0 240 240" fill="none" stroke="#17384f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M120 40v150"/><path d="M82 202h76"/><path d="M48 72h144"/><circle cx="120" cy="40" r="9" fill="#cfe8fb"/><path d="M48 72l-26 54h52z"/><path d="M192 72l-26 54h52z"/><path d="M22 126h52"/><path d="M166 126h52"/></svg></div>
+  </section>
+
+  <section class="sec" id="s-instanz" hidden>
+    <h1 class="title"><span class="hl">1 · Instanzenmodell und Dynamik</span></h1>
+    <div class="card fall"><h3>Lernsituation</h3>
+      <p>Es ist 6 Uhr morgens. Neuer Tag, altes Problem: Ihr Wecker klingelt, es ist Zeit aufzustehen. Die Schule ruft, aber Sie sind noch lange nicht ausgeschlafen, denn Sie haben gestern mit Ihrem Freund wieder einmal zu lange gezockt.</p></div>
+    <p>Im Kopf melden sich mehrere Stimmen. Nach Freud lassen sie sich drei Instanzen und der Realität zuordnen. Ordnen Sie in der ersten Aufgabe zu, was in dieser Situation in Ihrem Kopf passiert.</p>
+    <div class="aufg"><h3><span class="tag">Aufgabe 1.1</span>Die Dynamik im Kopf</h3></div><div data-task="gap1"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 1.2</span>Wer spricht hier?</h3></div><div data-task="sort1"></div>
+    <div class="merke"><strong>Merke:</strong> Das <b>ES</b> meldet Wünsche an (Lustprinzip). Das <b>ÜBER-ICH</b> bewertet sie nach verinnerlichten Normen (Moralprinzip). Das <b>ICH</b> prüft die Realität, wägt ab und entscheidet (Realitätsprinzip).</div>
+    <div class="nav-row"><button class="btn ghost" type="button" data-go="start">Zurück</button><button class="btn" type="button" data-go="ich">Weiter zu ICH-Stärke und ICH-Schwäche</button></div>
+  </section>
+
+  <section class="sec" id="s-ich" hidden>
+    <h1 class="title"><span class="hl">2 · ICH-Stärke und ICH-Schwäche</span></h1>
+    <div class="merke"><strong>ICH-Stärke:</strong> Das ICH schafft es, die Anforderungen von ES, ÜBER-ICH und Realität in einem stetigen Gleichgewicht zu halten.<br><strong>ICH-Schwäche:</strong> Das ICH schafft das nicht und gibt fast ausschließlich einer der drei nach. Je nachdem, wem das ICH nachgibt, unterscheidet man die ICH-Schwäche bezüglich des ES, bezüglich der Realität und bezüglich des ÜBER-ICH.</div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 2.1</span>Formen der ICH-Schwäche erkennen</h3></div><div data-task="sort2"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 2.2</span>Das ICH: richtige Aussagen wählen</h3></div><div data-task="multi1"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 2.3</span>ICH-Stärke entwickeln</h3></div><div data-task="multi2"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 2.4</span>ICH-Stärke oder ICH-Schwäche?</h3></div><div data-task="mc_ich1"></div>
+    <div data-task="mc_ich2"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 2.5</span>Begründen Sie schriftlich</h3></div><div data-task="free_ich"></div>
+    <div class="nav-row"><button class="btn ghost" type="button" data-go="instanz">Zurück</button><button class="btn" type="button" data-go="angst">Weiter zu Angst</button></div>
+  </section>
+
+  <section class="sec" id="s-angst" hidden>
+    <h1 class="title"><span class="hl">3 · Angst</span></h1>
+    <div class="merke"><strong>Kann das ICH kein Gleichgewicht</strong> zwischen ES, ÜBER-ICH und Realität herstellen, entwickelt es <b>Ängste</b>. Je nachdem, woher die Bedrohung kommt, unterscheidet man drei Formen:</div>
+    <table class="skizze"><thead><tr><th>Form</th><th>Angst vor …</th><th>Beispiel</th></tr></thead><tbody>
+      <tr><td>Realangst</td><td>der Realität</td><td>Angst vor realen Folgen, zum Beispiel einer Attestpflicht</td></tr>
+      <tr><td>Gewissensangst</td><td>den Forderungen des ÜBER-ICH</td><td>Schuldgefühle und schlechtes Gewissen nach einem Regelverstoß</td></tr>
+      <tr><td>Neurotische Angst</td><td>den Forderungen (Impulsen) des ES</td><td>Angst, die Kontrolle zu verlieren und nur noch zu tun, wozu man Lust hat</td></tr></tbody></table>
+    <div class="card fall"><h3>Fall: Sie sind heute einfach liegen geblieben</h3>
+      <p>Stellen Sie sich vor, Sie haben sich entschieden, heute auszuschlafen und nicht in die Schule zu gehen. Die Folgen dieser Entscheidung begleiten Sie den ganzen Tag. Ordnen Sie in der folgenden Aufgabe zu, um welche Form der Angst es sich jeweils handelt.</p></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 3.1</span>Formen der Angst im Fall</h3></div><div data-task="gap2"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 3.2</span>Weitere Beispiele zuordnen</h3></div><div data-task="sort3"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 3.3</span>Wie entsteht Angst?</h3></div><div data-task="mc_angst"></div>
+    <div class="nav-row"><button class="btn ghost" type="button" data-go="ich">Zurück</button><button class="btn" type="button" data-go="abwehr">Weiter zu Abwehr</button></div>
+  </section>
+
+  <section class="sec" id="s-abwehr" hidden>
+    <h1 class="title"><span class="hl">4 · Abwehr</span></h1>
+    <div class="merke"><strong>Zur Abwehr von Angst</strong> setzt das ICH <b>Abwehrmechanismen</b> ein. Sie laufen unbewusst ab, entlasten kurzfristig und verzerren die Wahrnehmung. Fünf wichtige Mechanismen: <b>Verdrängung, Projektion, Identifikation, Regression, Fixierung</b>.</div>
+    <p>Der Fall läuft weiter: Sie sind liegen geblieben und müssen sich abends der Familie stellen. Wählen Sie jeweils aus, welcher Abwehrmechanismus im Beispiel vorliegt.</p>
+    <div class="aufg"><h3><span class="tag">Aufgabe 4.1</span>Beispiel 1</h3></div><div data-task="mc_abw0"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 4.1</span>Beispiel 2</h3></div><div data-task="mc_abw1"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 4.1</span>Beispiel 3</h3></div><div data-task="mc_abw2"></div>
+    <div class="aufg"><h3><span class="tag">Zusatz</span>Zwei weitere Beispiele</h3></div>
+    <div data-task="mc_abw3"></div><div data-task="mc_abw4"></div>
+    <div class="note">Sie haben die Abwehrmechanismen den Beispielen zugeordnet. Begründen Sie nun das Vorliegen des Mechanismus in jedem der drei Fallbeispiele mit Fachwissen, indem Sie kurze Texte schreiben. Danach sehen Sie eine Musterbegründung.</div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 4.2</span>Begründung: Beispiel 1</h3></div><div data-task="free_abw0"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 4.2</span>Begründung: Beispiel 2</h3></div><div data-task="free_abw1"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 4.2</span>Begründung: Beispiel 3</h3></div><div data-task="free_abw2"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 4.3</span>Definitionen zuordnen</h3></div><div data-task="sort4"></div>
+    <div class="aufg"><h3><span class="tag">Aufgabe 4.4</span>Abwehrmechanismen: richtige Aussagen wählen</h3></div><div data-task="multi3"></div>
+    <div class="nav-row"><button class="btn ghost" type="button" data-go="angst">Zurück</button><button class="btn" type="button" data-go="test">Weiter zum Übungstest</button></div>
+  </section>
+
+  <section class="sec" id="s-test" hidden>
+    <h1 class="title"><span class="hl">Übungstest</span></h1>
+    <div class="bep"><strong>Bepunktung – bitte vorab lesen</strong>
+      <p style="margin:6px 0 0">Der Test besteht aus <b>2 Fallvignetten mit je 2 K-Prim-Aufgaben</b>, also 4 Aufgaben mit je 4 Aussagen. Sie entscheiden bei <b>jeder</b> Aussage, ob sie richtig oder falsch ist. Eine nicht beantwortete Aussage zählt als Fehler.</p>
+      <p style="margin:6px 0 0"><b>Je Aufgabe:</b> 4 richtig = 4 BE · 3 richtig = 2 BE · 2 richtig = 1 BE · weniger = 0 BE. <b>Insgesamt:</b> bis zu 16 Bewertungseinheiten (BE). Umrechnung in Notenpunkte (NP) nach dem P/P-Bewertungsschlüssel:</p>
+      <div id="npTab"></div></div>
+    <div id="testBox"></div>
+    <div id="bilanz"></div>
+    <div class="nav-row"><button class="btn ghost" type="button" data-go="abwehr">Zurück</button></div>
+  </section>
+
+  </main>
+</div>
+
+<script>
+/* ---------- Helfer ---------- */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+function h(tag,attrs={},...kids){
+  const e=document.createElement(tag);
+  for(const [k,v] of Object.entries(attrs||{})){
+    if(v==null) continue;
+    if(typeof v==='boolean'&&k.startsWith('aria-')){ e.setAttribute(k,String(v)); continue; }
+    if(v===false) continue;
+    if(k==='class') e.className=v;
+    else if(k==='html') e.innerHTML=v;
+    else if(k.startsWith('on')) e.addEventListener(k.slice(2),v);
+    else e.setAttribute(k,v===true?'':v);
+  }
+  for(const kid of kids.flat()){ if(kid==null||kid===false) continue; e.append(kid.nodeType?kid:document.createTextNode(kid)); }
+  return e;
+}
+
+/* ---------- Übungskurs: Daten ---------- */
+const D={"gap1": {"tpl": "Nach der kurzen Nacht möchten Sie am liebsten weiterschlafen. [[0]]<br><br>Sie prüfen, was passieren könnte: Die Klassenlehrerin hat angekündigt, dass häufiges Fehlen eine Attestpflicht nach sich zieht. [[1]]<br><br>Eine Attestpflicht wäre tatsächlich unangenehm, und die Lehrerin merkt sich Fehlzeiten genau. [[2]]<br><br>Außerdem hören Sie im Kopf den Satz Ihrer Eltern: „Wer lange feiern kann, kann auch früh aufstehen!“ Sie bekommen ein schlechtes Gewissen. [[3]]<br><br>Sie überlegen hin und her, ob Sie aufstehen oder liegen bleiben. [[4]]", "bank": ["Das ES meldet einen Wunsch beim ICH an.", "Das ICH überprüft die Realität.", "Realität: drohende Konsequenzen", "Das ÜBER-ICH bewertet den Wunsch des ES.", "Das ICH wägt ab."], "accepts": [["Das ES meldet einen Wunsch beim ICH an."], ["Das ICH überprüft die Realität."], ["Realität: drohende Konsequenzen"], ["Das ÜBER-ICH bewertet den Wunsch des ES."], ["Das ICH wägt ab."]]}, "sort1": {"cats": [["es", "ES"], ["ich", "ICH"], ["ue", "ÜBER-ICH"]], "items": [["Ich habe keine Lust aufzustehen, ich will einfach liegen bleiben!", "es"], ["Ich will jetzt sofort noch eine Runde zocken!", "es"], ["Wenn ich gleich aufstehe, bin ich rechtzeitig da, und heute Abend gehe ich früher ins Bett.", "ich"], ["Ich frage nach, wie streng die Lehrkraft Fehlzeiten kontrolliert, bevor ich mich entscheide.", "ich"], ["Schwänzen gehört sich nicht, und wer zuverlässig ist, kommt pünktlich.", "ue"], ["Ich dürfte meinen Eltern nicht mehr unter die Augen treten, wenn ich so faul bin.", "ue"]]}, "sort2": {"cats": [["es", "ICH-Schwäche bzgl. des ES"], ["re", "ICH-Schwäche bzgl. der Realität"], ["ue", "ICH-Schwäche bzgl. des ÜBER-ICH"]], "items": [["Sie gehen nur zur Schule, weil Sie die Attestpflicht und die Kommentare der Klassenlehrerin fürchten.", "re"], ["Sie schalten den Wecker aus, drehen sich um und schlafen weiter, wie an so vielen anderen Tagen.", "es"], ["Sie stehen auf, weil Pflicht eben Pflicht ist und Sie sonst ein schlechtes Gewissen plagt, obwohl Sie völlig erschöpft sind.", "ue"], ["Jonas gibt sein ganzes Monatsgeld sofort für ein Spiel aus, obwohl die Handyrechnung noch offen ist.", "es"], ["Mara stimmt jeder Forderung ihres Chefs zu, weil sie Ärger und eine Kündigung fürchtet, obwohl sie es anders sieht.", "re"], ["Tim lernt jeden Abend bis spät, obwohl er krank ist, weil er sich sonst als Versager fühlt.", "ue"]]}, "multi1": {"q": "Das ICH …", "items": [["… kann die Befriedigung der Wünsche des ES auf einen geeigneten Zeitpunkt verschieben.", true, "Das ICH richtet sich nach der Realität und kann Wünsche aufschieben."], ["… gibt der Instanz mit den besten „Argumenten“ nach.", false, "Das ICH wägt ab und sucht einen Ausgleich. Es gibt nicht einfach der Instanz mit den besten Argumenten nach."], ["… ist wie ein Steuermann.", true, "Das Bild vom Steuermann beschreibt, wie das ICH die Anforderungen von ES, ÜBER-ICH und Realität lenkt."], ["… entsteht, weil in der Realität ein direkter Lustgewinn nicht immer möglich ist.", true, "Das ICH entwickelt sich, weil die Realität Wünsche nicht immer sofort erfüllt."], ["… will Konflikte vermeiden.", true, "Das ICH versucht, Konflikte zwischen ES, ÜBER-ICH und Realität auszugleichen oder zu vermeiden."], ["… ist von Beginn an vorhanden.", false, "Von Beginn an ist das ES vorhanden. Das ICH entwickelt sich erst im Lauf der ersten Lebensjahre."]]}, "multi2": {"q": "Ein starkes ICH entwickelt sich, wenn …", "items": [["… ein Kind lernt, sich mit willkürlichen Reaktionen der Erziehungsperson auseinanderzusetzen.", false, "Willkürliche Reaktionen verunsichern. Ein starkes ICH braucht verlässliche, nachvollziehbare Rückmeldungen."], ["… ein Kind Möglichkeiten erhält, die Welt zu erkunden und mithilfe seiner kognitiven Fähigkeiten zu üben, Entscheidungen zu treffen.", true, "Entscheidungen üben stärkt das ICH."], ["… die Forderungen des ES von Anfang an möglichst abgewehrt werden.", false, "Wenn das ES dauernd abgewehrt wird, lernt das ICH keinen Ausgleich. Es muss Wünsche abwägen, nicht verbieten."], ["… es sich im Rahmen angemessener Freiheiten und Grenzen immer wieder bewusst mit den Anforderungen der Realität auseinandersetzen muss.", true, "Freiheiten und Grenzen zusammen fördern ein ausgeglichenes ICH."], ["… Erwachsene dem Kind in allen Situationen die Entscheidung abnehmen.", false, "Wer nie selbst entscheidet, kann das Abwägen nicht üben."], ["… Erwachsene dem Kind altersgemäße Aufgaben zutrauen und Grenzen verlässlich setzen.", true, "Zutrauen und verlässliche Grenzen sind eine gute Grundlage für ein starkes ICH."]]}, "mc_ich1": {"q": "Wann spricht man nach Freud von einer ICH-Stärke?", "opts": ["Wenn das ICH die Anforderungen von ES, ÜBER-ICH und Realität in einem stetigen Gleichgewicht halten kann.", "Wenn das ICH fast ausschließlich den Wünschen des ES nachgibt.", "Wenn das ÜBER-ICH alle Wünsche des ES unterdrückt.", "Wenn die Realität keine Anforderungen mehr stellt."], "correct": 0, "why": "ICH-Stärke bedeutet, die drei Anforderungen ausgewogen zu berücksichtigen. Das Nachgeben gegenüber nur einer Seite ist dagegen eine ICH-Schwäche."}, "mc_ich2": {"q": "Welche Aussage beschreibt eine ICH-Schwäche?", "opts": ["Das ICH wägt ab und sucht einen Kompromiss zwischen den Anforderungen.", "Das ICH gibt fast ausschließlich einer der drei Instanzen nach.", "Das ICH verschiebt die Befriedigung eines Wunsches auf einen besseren Zeitpunkt.", "Das ICH beurteilt die Situation nach der Realität."], "correct": 1, "why": "Von ICH-Schwäche spricht man, wenn das ICH fast nur dem ES, dem ÜBER-ICH oder der Realität nachgibt."}, "free_ich": {"id": "ich", "q": "Erklären Sie in drei bis vier Sätzen, woran Sie im Verhalten „Sie schalten den Wecker aus, drehen sich um und schlafen weiter“ eine ICH-Schwäche erkennen.", "hint": "Nennen Sie, welcher Instanz das ICH nachgibt, und begründen Sie das mit der Beschreibung des Verhaltens.", "muster": "Hier liegt eine ICH-Schwäche bezüglich des ES vor. Eine ICH-Schwäche zeigt sich, wenn das ICH die Anforderungen von ES, ÜBER-ICH und Realität nicht im Gleichgewicht halten kann, sondern fast ausschließlich einer Instanz nachgibt. Im Beispiel setzt sich der Wunsch des ES durch, weiterzuschlafen. Die Person wägt weder die möglichen Folgen des Fehlens (Realität) noch ihre Pflichten (ÜBER-ICH) ab. Das passiert nicht nur heute, sondern an vielen Tagen.", "krit": ["Ich habe benannt, dass es sich um eine ICH-Schwäche bezüglich des ES handelt.", "Ich habe ICH-Schwäche erklärt (fast nur einer Instanz nachgeben).", "Ich habe am Verhalten belegt, dass dem Wunsch des ES nachgegeben wird."]}, "gap2": {"tpl": "Den ganzen restlichen Tag quälen Sie schlimme Befürchtungen. Hoffentlich ruft die Lehrkraft Sie morgen nicht vor der ganzen Klasse auf. Oder sie stellt besonders schwere Fragen. Wenn Sie an mögliche spöttische Kommentare denken, wird Ihnen ganz mulmig. [[0]]<br><br>Nach dem Aufstehen überkommt Sie Verzweiflung: „Jetzt habe ich es wieder nicht geschafft, mich gegen meine Müdigkeit durchzusetzen! Werde ich es je schaffen, mich zusammenzureißen? Ich kann doch nicht immer nur tun, wozu ich gerade Lust habe!“ [[1]]<br><br>Beim Aufstehen fühlen Sie sich schlecht. Sie haben zwar etwas Schlaf nachgeholt, aber mit schlechtem Gewissen bezahlt. Als Ihre Schwester mittags erschöpft aus der Schule kommt, fühlen Sie sich noch schuldiger und werfen sich vor, Ihre Pflichten nicht ernst genug zu nehmen. [[2]]", "bank": ["Realangst: Angst vor der Realität", "Gewissensangst: Angst vor den Forderungen des ÜBER-ICH", "Neurotische Angst: Angst vor den Forderungen des ES"], "accepts": [["Realangst: Angst vor der Realität"], ["Neurotische Angst: Angst vor den Forderungen des ES"], ["Gewissensangst: Angst vor den Forderungen des ÜBER-ICH"]]}, "sort3": {"cats": [["re", "Realangst"], ["ge", "Gewissensangst"], ["ne", "Neurotische Angst"]], "items": [["Lena fürchtet beim Vorstellungsgespräch, abgelehnt zu werden.", "re"], ["Auf dem Heimweg im Dunkeln hat Paul Angst vor einem Überfall.", "re"], ["Nach der Lüge gegenüber ihrer Freundin quält Sara ein schlechtes Gewissen.", "ge"], ["Kai schämt sich und fürchtet, ein schlechter Mensch zu sein, weil er seine Eltern angeschrien hat.", "ge"], ["Mia hat panische Angst, auf der Party die Kontrolle zu verlieren und etwas Unüberlegtes zu tun.", "ne"], ["Ben fürchtet, seine Wut könnte ihn überwältigen, obwohl es keinen konkreten Anlass gibt.", "ne"]]}, "mc_angst": {"q": "Wie entsteht Angst nach dem Instanzenmodell von Freud?", "opts": ["Das ICH kann kein Gleichgewicht zwischen ES, ÜBER-ICH und Realität herstellen.", "Das ES wird vom ÜBER-ICH vollständig ausgeschaltet.", "Die Realität stellt zum ersten Mal Anforderungen an das ES.", "Das ICH gibt alle Entscheidungen an die Eltern ab."], "correct": 0, "why": "Gelingt dem ICH der Ausgleich nicht, entwickelt es Ängste. Je nach Quelle unterscheidet man Realangst, Gewissensangst und neurotische Angst."}, "mc_abw": [{"q": "Sie haben die Schule geschwänzt und den nötigen Schlaf nachgeholt. Beim Abendessen fragt Ihr Vater, wie der Tag gelaufen sei und ob etwas Besonderes passiert sei. „Nö“, sagen Sie, „eigentlich alles wie immer!“", "opts": ["Fixierung", "Projektion", "Identifikation", "Regression", "Verdrängung"], "correct": 4, "why": "Das belastende Ereignis (Schwänzen) wird aus dem Bewusstsein geschoben und kommt im Gespräch nicht mehr vor. Das ist Verdrängung."}, {"q": "Später am Abend geraten Sie mit Ihrer Schwester aneinander, nachdem sie einen Kommentar zum Blaumachen gemacht hat. Sie fahren sie an: „Du bist ja wohl die, die hier nichts auf die Reihe bekommt! Ständig bist du auf Partys, trinkst, wie es dir gefällt, und kriegst im Unterricht kaum etwas mit!“", "opts": ["Regression", "Verdrängung", "Identifikation", "Fixierung", "Projektion"], "correct": 4, "why": "Die eigenen, unangenehmen Eigenschaften (nichts auf die Reihe bekommen) werden der Schwester zugeschrieben. Das ist Projektion."}, {"q": "Sie legen nach: „Außerdem ist es gar nicht wichtig, immer das zu tun, was man von uns erwartet. Unser Mathelehrer hat uns erzählt, dass er in seiner Schulzeit auch ständig blaugemacht hat. Und jetzt ist er Schulleiter! So mach ich das auch!“", "opts": ["Identifikation", "Verdrängung", "Fixierung", "Projektion", "Regression"], "correct": 0, "why": "Sie übernehmen das Verhalten einer Person, die Sie bewundern, und fühlen sich dadurch entlastet. Das ist Identifikation."}, {"q": "Nach einer verpatzten Präsentation legt sich Alex mit dem alten Kuscheltier ins Bett, lässt sich von den Eltern bekochen und trösten wie ein kleines Kind.", "opts": ["Verdrängung", "Regression", "Projektion", "Identifikation", "Fixierung"], "correct": 1, "why": "Unter Druck fällt Alex in ein früheres Verhalten zurück, das Sicherheit gegeben hat. Das ist Regression."}, {"q": "Nina (24) wohnt weiter bei ihren Eltern, lässt sich die Wäsche machen und lehnt jeden Auszug ab, weil ihr die Verantwortung des Erwachsenseins Angst macht. Sie verhält sich noch wie mit 15.", "opts": ["Projektion", "Fixierung", "Verdrängung", "Regression", "Identifikation"], "correct": 1, "why": "Nina hält an einer früheren Entwicklungsstufe fest, weil der nächste Schritt Angst macht. Das ist Fixierung."}], "free_abw": [{"id": "abw1", "q": "Begründen Sie mit Fachwissen, dass im ersten Beispiel („Nö, eigentlich alles wie immer!“) eine Verdrängung vorliegt.", "hint": "Erklären Sie zuerst den Abwehrmechanismus, belegen Sie ihn dann am Beispiel und nennen Sie die Angst, die abgewehrt wird.", "muster": "Bei der Verdrängung werden unangenehme Gedanken, Erinnerungen oder Handlungen aus dem Bewusstsein ins Unbewusste geschoben, um Angst und Schuldgefühle zu vermeiden. Im Beispiel ist das Schwänzen mit einem schlechten Gewissen verbunden. Die Person erzählt dem Vater nichts davon und das Ereignis taucht im Gespräch nicht mehr auf. So wird die Gewissensangst abgewehrt, ohne dass das Problem gelöst ist.", "krit": ["Ich habe Verdrängung fachsprachlich erklärt (ins Unbewusste schieben).", "Ich habe das Beispiel belegt (Schwänzen taucht im Gespräch nicht mehr auf).", "Ich habe die abgewehrte Angst genannt (Gewissensangst, Schuldgefühle)."]}, {"id": "abw2", "q": "Begründen Sie mit Fachwissen, dass im zweiten Beispiel („Du bist ja wohl die, die hier nichts auf die Reihe bekommt!“) eine Projektion vorliegt.", "hint": "Erklären Sie zuerst den Abwehrmechanismus, belegen Sie ihn dann am Beispiel und nennen Sie die Entlastung.", "muster": "Bei der Projektion werden eigene unangenehme Eigenschaften oder Gefühle auf andere Personen übertragen. Im Beispiel wirft die Person der Schwester vor, nichts auf die Reihe zu bekommen, obwohl sie selbst die Schule geschwänzt hat und ihr eigenes Versagen nicht aushalten kann. Indem sie die Eigenschaft bei der Schwester sieht, muss sie sich nicht mit sich selbst auseinandersetzen und wehrt Schuldgefühle ab.", "krit": ["Ich habe Projektion fachsprachlich erklärt (eigene Eigenschaften anderen zuschreiben).", "Ich habe das Beispiel belegt (Vorwurf an die Schwester trotz eigenem Verhalten).", "Ich habe die Entlastung genannt (Schuldgefühle abwehren)."]}, {"id": "abw3", "q": "Begründen Sie mit Fachwissen, dass im dritten Beispiel („So mach ich das auch!“) eine Identifikation vorliegt.", "hint": "Erklären Sie zuerst den Abwehrmechanismus, belegen Sie ihn dann am Beispiel und nennen Sie die Entlastung.", "muster": "Bei der Identifikation übernimmt eine Person Eigenschaften, Werte oder Verhaltensweisen einer Person, die sie bewundert, um sich sicherer zu fühlen. Im Beispiel orientiert sich die Person am Mathelehrer, der trotz seines Blaumachens Schulleiter wurde, und sagt „So mach ich das auch!“. Dadurch wird das eigene Fehlverhalten gerechtfertigt, und die Angst vor Konsequenzen und Schuldgefühle werden verringert.", "krit": ["Ich habe Identifikation fachsprachlich erklärt (Verhalten einer bewunderten Person übernehmen).", "Ich habe das Beispiel belegt (Orientierung am Mathelehrer).", "Ich habe die Entlastung genannt (Rechtfertigung, weniger Angst)."]}], "sort4": {"cats": [["ve", "Verdrängung"], ["pr", "Projektion"], ["id", "Identifikation"], ["re", "Regression"], ["fi", "Fixierung"]], "items": [["Unangenehme Gedanken oder Erinnerungen werden ins Unbewusste geschoben.", "ve"], ["Eigene unerwünschte Eigenschaften werden anderen Personen zugeschrieben.", "pr"], ["Eigenschaften einer bewunderten Person werden übernommen.", "id"], ["Unter Druck fällt ein Mensch in frühere Verhaltensweisen zurück.", "re"], ["Das ICH hält an einer früheren Entwicklungsstufe fest, weil der nächste Schritt Angst macht.", "fi"]]}, "multi3": {"q": "Abwehrmechanismen …", "items": [["… laufen unbewusst ab.", true, "Die Person merkt in der Regel nicht, dass sie sich schützt."], ["… dienen dem Schutz des ICH vor Angst.", true, "Sie sollen Angst und innere Konflikte abwehren."], ["… werden bewusst geplant, um andere zu täuschen.", false, "Abwehrmechanismen laufen unbewusst ab. Sie sind keine geplanten Täuschungen."], ["… verzerren die Wahrnehmung der Wirklichkeit oder der eigenen Gefühle.", true, "Um Angst zu vermeiden, wird die Wahrnehmung verändert."], ["… entlasten kurzfristig, lösen den Konflikt aber nicht.", true, "Der Konflikt bleibt bestehen und kann sich verschärfen, wenn ein Mechanismus ständig eingesetzt wird."], ["… lösen innere Konflikte dauerhaft, sodass keine Angst mehr auftritt.", false, "Abwehrmechanismen lösen den Konflikt nicht, sie verschieben ihn nur."]]}, "test": {"vigs": [{"titel": "Der Morgen danach", "text": "Nora (17) hat bis spät in die Nacht für eine Klausur gelernt. Als um 6 Uhr der Wecker klingelt, ist sie völlig erschöpft. Sie schaltet das Gerät aus und schläft weiter. Gegen Mittag wacht sie auf. Sie hat ein flaues Gefühl im Bauch, denn sie hat die erste Stunde verpasst, in der ihre strenge Lehrerin Hausaufgaben abfragt. Außerdem hört sie die Stimme ihrer Mutter: „Anständige Schülerinnen fehlen nicht einfach.“ Nora nimmt sich vor, so etwas nie wieder zu tun. Am nächsten Tag steht sie schon um halb sechs auf, obwohl sie kaum geschlafen hat, und schleppt sich in die Schule, weil sie sich sonst als Versagerin fühlen würde.", "aufgaben": [{"stamm": "Noras Verhalten wird nach Freud zutreffend beschrieben, wenn …", "aus": [["… ihr Weiterschlafen auf eine ICH-Schwäche gegenüber dem ES hinweist.", true, "Das ICH gibt dem Wunsch des ES nach Ruhe nach."], ["… ihr Aufstehen am nächsten Tag trotz Erschöpfung auf eine ICH-Schwäche gegenüber dem ÜBER-ICH hinweist.", true, "Die verinnerlichte Norm und die Angst, eine Versagerin zu sein, setzen sich gegen die Bedürfnisse durch."], ["… das abwechselnde Nachgeben gegenüber beiden Instanzen als ausgewogenes Gleichgewicht gilt.", false, "Wer mal der einen, mal der anderen Instanz nachgibt, hält kein Gleichgewicht. Es setzt sich jeweils eine Seite durch."], ["… eine ICH-Stärke vorläge, wenn sie Müdigkeit, Pflichtgefühl und die Folgen des Fehlens abwägend zu einer tragfähigen Entscheidung verbinden könnte.", true, "ICH-Stärke bedeutet, die Anforderungen von ES, ÜBER-ICH und Realität auszugleichen."]]}, {"stamm": "Die Ängste von Nora lassen sich nach Freud zutreffend zuordnen, wenn …", "aus": [["… das flaue Gefühl vor der Abfrage durch die Lehrerin als Realangst gedeutet wird.", true, "Die Lehrerin und mögliche Folgen sind eine reale Bedrohung."], ["… das Gefühl, eine Versagerin zu sein, als Gewissensangst gedeutet wird.", true, "Die Angst richtet sich auf die Forderungen des ÜBER-ICH."], ["… die Stimme der Mutter als Beleg für neurotische Angst gilt.", false, "Die verinnerlichte Stimme der Mutter gehört zum ÜBER-ICH. Neurotische Angst richtet sich auf Impulse des ES."], ["… Angst entsteht, weil das ÜBER-ICH zu schwach ausgeprägt ist.", false, "Angst entsteht, wenn das ICH keinen Ausgleich zwischen ES, ÜBER-ICH und Realität herstellen kann, nicht weil eine Instanz zu schwach wäre."]]}]}, {"titel": "Die Ausrede", "text": "Ben (18) hat zum dritten Mal in diesem Monat den Unterricht geschwänzt. Als sein Vater beim Abendessen nach dem Schultag fragt, antwortet Ben: „Alles normal.“ Später streitet er mit seiner jüngeren Schwester, die ihn auf das viele Fehlen anspricht. Er schreit sie an: „Du bist doch diejenige, die immer lügt und nie ehrlich ist!“ Dabei hat die Schwester nie gelogen. Nach dem Streit liegt er im Bett, umklammert sein altes Kuscheltier und lässt sich von der Mutter Tee ans Bett bringen wie früher als Kind. Seinem Freund erzählt er: „Unser Sportlehrer hat früher auch ständig blaugemacht, und jetzt trainiert er eine Profimannschaft. Ich mach das genauso.“", "aufgaben": [{"stamm": "Die Abwehrmechanismen in Bens Verhalten werden zutreffend benannt, wenn …", "aus": [["… seine Antwort an den Vater als Verdrängung bezeichnet wird.", true, "Das belastende Schwänzen wird aus dem Gespräch ferngehalten."], ["… der Vorwurf an die Schwester als Projektion bezeichnet wird.", true, "Ben schreibt seiner Schwester eine Eigenschaft zu, die er bei sich nicht sehen will."], ["… sein Verhalten mit dem Kuscheltier als Identifikation bezeichnet wird.", false, "Der Rückfall in kindliches Verhalten ist Regression."], ["… seine Orientierung am Sportlehrer als Regression bezeichnet wird.", false, "Die Übernahme des Verhaltens einer bewunderten Person ist Identifikation."]]}, {"stamm": "Die Abwehrmechanismen bei Ben sind nach Freud zutreffend eingeordnet, wenn …", "aus": [["… sie unbewusst ablaufen, sodass Ben nicht bemerkt, dass er sich schützt.", true, "Abwehrmechanismen wirken unbewusst."], ["… sie ihm kurzfristig Entlastung verschaffen, den zugrunde liegenden Konflikt aber nicht beseitigen.", true, "Abwehr entlastet, löst das Problem aber nicht."], ["… sie als bewusste Lügen gelten, mit denen er andere täuschen will.", false, "Abwehrmechanismen sind keine geplanten Täuschungen, sie laufen unbewusst ab."], ["… sie den Konflikt lösen, sodass keine weitere Abwehr mehr nötig ist.", false, "Der Konflikt bleibt bestehen, deshalb kann der Mechanismus immer wieder nötig werden."]]}]}]}};
+const store={
+  get(k,d){try{const v=localStorage.getItem('uebung-instanzen:'+k);return v==null?d:JSON.parse(v);}catch(e){return d;}},
+  set(k,v){try{localStorage.setItem('uebung-instanzen:'+k,JSON.stringify(v));}catch(e){}}
+};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const fmt=n=>(Math.round(n*10)/10).toFixed(1).replace('.',',');
+/* Bewertungsschlüssel P/P (FOSBOS Bayern): Notenpunkte aus Prozent */
+const KEY=[[96,15],[91,14],[86,13],[81,12],[76,11],[71,10],[66,9],[61,8],[56,7],[51,6],[46,5],[41,4],[34,3],[27,2],[20,1]];
+function notenpunkte(p,max){const pct=max?p/max*100:0;for(const [t,n] of KEY) if(pct>=t-1e-9) return n;return 0;}
+
+
+/* ---------- Navigation ---------- */
+const SECTIONS=[['start','Start'],['instanz','1 · Instanzenmodell'],['ich','2 · ICH-Stärke und ICH-Schwäche'],['angst','3 · Angst'],['abwehr','4 · Abwehr'],['test','Übungstest']];
+let visited=new Set(store.get('visited',[]));
+let current='start';
+function renderTabs(){
+  const box=$('#tabs'); box.replaceChildren();
+  SECTIONS.forEach(([id,label])=>{
+    box.append(h('button',{class:'tab',type:'button','aria-current':id===current?'page':false,onclick:()=>go(id)},label,
+      (visited.has(id)&&id!==current)?h('span',{class:'done','aria-label':'besucht'},'✓'):null));
+  });
+  const n=SECTIONS.filter(([id])=>visited.has(id)).length;
+  $('#meter').style.width=(n/SECTIONS.length*100)+'%';
+  $('#meterl').textContent=n+' von '+SECTIONS.length+' Abschnitten besucht';
+}
+function go(id){
+  if(!SECTIONS.some(x=>x[0]===id))id='start';
+  current=id;
+  SECTIONS.forEach(([s])=>{const el=$('#s-'+s);if(el)el.hidden=(s!==id);});
+  visited.add(id);store.set('visited',[...visited]);
+  renderTabs();
+  if(id==='test')refreshBilanz();
+  window.scrollTo({top:0});
+  const m=$('#main');if(m)m.focus({preventScroll:true});
+}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-go]');if(b){e.preventDefault();go(b.dataset.go);}});
+/* ---------- Drag&Drop / Tipp-Zuordnung ---------- */
+function dnd({pool,zones,tokens,onClear}){
+  const loc={},btn={};let sel=null,locked=false;
+  const holder=id=>id==='pool'?pool:zones[id].el;
+  const api={loc,btn,onClear};
+  function refresh(){tokens.forEach(t=>btn[t.id].classList.toggle('sel',sel===t.id));}
+  function clear(){tokens.forEach(t=>btn[t.id].classList.remove('ok','bad'));api.onClear&&api.onClear();}
+  function place(tid,zid){
+    if(zid!=='pool'){
+      const cap=zones[zid].cap;
+      if(cap){const occ=tokens.filter(t=>loc[t.id]===zid&&t.id!==tid);
+        while(occ.length>=cap){const ev=occ.shift();loc[ev.id]='pool';pool.append(btn[ev.id]);}}
+    }
+    loc[tid]=zid;holder(zid).append(btn[tid]);sel=null;clear();refresh();
+  }
+  tokens.forEach(t=>{
+    const b=h('button',{class:'tok'+(t.st?' st':''),type:'button',draggable:'true'},t.text);
+    btn[t.id]=b;loc[t.id]='pool';pool.append(b);
+    b.addEventListener('click',e=>{
+      e.stopPropagation();if(locked)return;
+      const at=loc[t.id];
+      if(at==='pool'){sel=sel===t.id?null:t.id;refresh();}
+      else if(sel){place(sel,at);}
+      else place(t.id,'pool');
+    });
+    b.addEventListener('dragstart',e=>{if(locked){e.preventDefault();return;}e.dataTransfer.setData('text/plain',t.id);e.dataTransfer.effectAllowed='move';b.classList.add('drag');});
+    b.addEventListener('dragend',()=>b.classList.remove('drag'));
+  });
+  Object.entries(zones).forEach(([zid,z])=>{
+    const hit=z.hit||z.el;
+    hit.addEventListener('click',()=>{if(!locked&&sel)place(sel,zid);});
+    hit.addEventListener('dragover',e=>{if(!locked){e.preventDefault();hit.classList.add('over');}});
+    hit.addEventListener('dragleave',()=>hit.classList.remove('over'));
+    hit.addEventListener('drop',e=>{e.preventDefault();hit.classList.remove('over');if(locked)return;const id=e.dataTransfer.getData('text/plain');if(btn[id])place(id,zid);});
+  });
+  pool.addEventListener('dragover',e=>{if(!locked)e.preventDefault();});
+  pool.addEventListener('drop',e=>{e.preventDefault();if(locked)return;const id=e.dataTransfer.getData('text/plain');if(btn[id])place(id,'pool');});
+  api.place=place;
+  api.lock=v=>{locked=v;tokens.forEach(t=>{btn[t.id].draggable=!v;btn[t.id].style.cursor=v?'default':'';});};
+  api.reset=()=>{tokens.forEach(t=>{loc[t.id]='pool';pool.append(btn[t.id]);});sel=null;clear();refresh();};
+  api.mark=(tid,ok)=>btn[tid].classList.add(ok?'ok':'bad');
+  return api;
+}
+
+/* ---------- Aufgabentypen ---------- */
+let uid=0;
+function ctlRow(t,{retry=true,solve=true}){
+  const bCheck=h('button',{class:'btn',type:'button',onclick:()=>t.check()},'Überprüfen');
+  const bSolve=h('button',{class:'btn ghost',type:'button',hidden:true,onclick:()=>t.solve()},'Lösung anzeigen');
+  const bAgain=h('button',{class:'btn ghost',type:'button',hidden:true,onclick:()=>t.reset()},'Wiederholen');
+  t._ui=(checked)=>{bCheck.hidden=checked;bSolve.hidden=!(checked&&solve);bAgain.hidden=!(checked&&retry);};
+  t._ui(false);
+  return h('div',{class:'ctl'},bCheck,bSolve,bAgain);
+}
+function mcTask({q,opts,correct,why,mix=true,retry=true,solve=true,onCheck}){
+  const name='mc'+(++uid);
+  const order=mix?shuffle(opts.map((_,i)=>i)):opts.map((_,i)=>i);
+  const el=h('div',{class:'task'});
+  if(q) el.append(h('p',{class:'q-text'},q));
+  const group=h('div',{class:'opts',role:'radiogroup','aria-label':q||'Antworten'});
+  const labels=order.map(i=>{
+    const id=name+'-'+i; const inp=h('input',{type:'radio',name,id,value:i});
+    const lab=h('label',{class:'opt',for:id},inp,h('span',{},opts[i])); group.append(lab); return {i,inp,lab};
+  });
+  const fb=h('p',{class:'fb',role:'status','aria-live':'polite'});
+  const t={el,max:1,score:0,checked:false};
+  t.check=()=>{
+    const s=labels.find(l=>l.inp.checked);
+    if(!s){fb.textContent='Wählen Sie zuerst eine Antwort.';fb.className='fb warn';return;}
+    t.checked=true;t.score=s.i===correct?1:0;
+    labels.forEach(l=>{l.inp.disabled=true;l.lab.classList.toggle('ok',l.i===correct&&(t.score===1||t._shown));l.lab.classList.toggle('bad',l===s&&s.i!==correct);});
+    fb.className='fb '+(t.score?'good':'wrong');
+    fb.textContent=(t.score?'Richtig. ':'Nicht ganz. ')+(why||'');
+    t._ui(true);onCheck&&onCheck(t);
+  };
+  t.solve=()=>{ if(!t.checked) t.check(); if(!t.checked) return; t._shown=true; labels.forEach(l=>l.lab.classList.toggle('ok',l.i===correct)); fb.textContent='Richtige Antwort markiert. '+(why||''); };
+  t.reset=()=>{t.checked=false;t.score=0;t._shown=false;labels.forEach(l=>{l.inp.disabled=false;l.inp.checked=false;l.lab.classList.remove('ok','bad');});fb.textContent='';fb.className='fb';t._ui(false);onCheck&&onCheck(t);};
+  el.append(group,ctlRow(t,{retry,solve}),fb);
+  return t;
+}
+function gapTask({tpl,bank,accepts,retry=true,solve=true,onCheck}){
+  const el=h('div',{class:'task'});
+  const p=h('p',{class:'gaptext'});
+  const zones={},ids=[];
+  tpl.split(/\[\[(\d+)\]\]/).forEach((s,i)=>{
+    if(i%2===0){ s.split('<br>').forEach((seg,k)=>{ if(k) p.append(h('br')); if(seg) p.append(seg); }); return; }
+    const n=+s; const g=h('span',{class:'gap',role:'button',tabindex:'0','aria-label':'Lücke '+(n+1)});
+    g.addEventListener('keydown',e=>{ if(e.target===g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();g.click();} });
+    zones['g'+n]={el:g,cap:1}; ids.push(n); p.append(g);
+  });
+  const pool=h('div',{class:'bank','aria-label':'Wortvorrat'});
+  const tokens=shuffle(bank).map((text,i)=>({id:'t'+i,text}));
+  const eng=dnd({pool,zones,tokens,onClear:()=>Object.values(zones).forEach(z=>z.el.classList.remove('ok','bad'))});
+  const fb=h('p',{class:'fb',role:'status','aria-live':'polite'});
+  const t={el,max:ids.length,score:0,checked:false};
+  const tokenIn=n=>tokens.find(x=>eng.loc[x.id]==='g'+n);
+  t.check=()=>{
+    if(ids.every(n=>!tokenIn(n))){fb.textContent='Ziehen Sie zuerst Wörter in die Lücken. Am Handy: Wort antippen, dann die Lücke antippen.';fb.className='fb warn';return;}
+    let sc=0;
+    ids.forEach(n=>{const tok=tokenIn(n);const ok=!!tok&&accepts[n].includes(tok.text);if(ok)sc++;zones['g'+n].el.classList.add(ok?'ok':'bad');if(tok)eng.mark(tok.id,ok);});
+    t.checked=true;t.score=sc;eng.lock(true);
+    fb.className='fb '+(sc===t.max?'good':'wrong');fb.textContent=sc+' von '+t.max+' Lücken richtig.';
+    t._ui(true);onCheck&&onCheck(t);
+  };
+  t.solve=()=>{
+    if(!t.checked) t.check(); if(!t.checked) return;
+    eng.lock(false);eng.reset();
+    ids.forEach(n=>{const tok=tokens.find(x=>eng.loc[x.id]==='pool'&&accepts[n].includes(x.text));if(tok)eng.place(tok.id,'g'+n);});
+    ids.forEach(n=>{zones['g'+n].el.classList.add('ok');const tok=tokenIn(n);if(tok)eng.mark(tok.id,true);});
+    eng.lock(true);fb.className='fb good';fb.textContent='Lösung eingeblendet. Ihr Ergebnis: '+t.score+' von '+t.max+'.';
+  };
+  t.reset=()=>{eng.lock(false);eng.reset();t.checked=false;t.score=0;fb.textContent='';fb.className='fb';t._ui(false);onCheck&&onCheck(t);};
+  el.append(h('p',{class:'soft'},'Ziehen Sie die Wörter in die Lücken. Am Handy: Wort antippen, dann die Lücke antippen. Ein gesetztes Wort tippen Sie an, um es zurückzulegen.'),p,pool,ctlRow(t,{retry,solve}),fb);
+  return t;
+}
+function sortTask({items,cats,retry=true,solve=true,onCheck}){
+  const el=h('div',{class:'task'});
+  const zones={},zwrap=h('div',{class:'zones'});
+  cats.forEach(c=>{
+    const list=h('div',{class:'items'});
+    const col=h('div',{class:'zone',tabindex:'0','aria-label':c.label},h('h3',{},c.label),list);
+    col.addEventListener('keydown',e=>{if(e.target===col&&(e.key==='Enter'||e.key===' ')){e.preventDefault();col.click();}});
+    zones[c.id]={el:list,hit:col,cap:0};zwrap.append(col);
+  });
+  const pool=h('div',{class:'bank','aria-label':'Aussagen'});
+  const tokens=shuffle(items).map((it,i)=>({id:'s'+i,text:it.text,cat:it.cat,st:true}));
+  const eng=dnd({pool,zones,tokens,onClear:()=>{}});
+  const fb=h('p',{class:'fb',role:'status','aria-live':'polite'});
+  const t={el,max:items.length,score:0,checked:false};
+  t.check=()=>{
+    if(tokens.some(x=>eng.loc[x.id]==='pool')){fb.textContent='Ordnen Sie zuerst alle Aussagen einer Kategorie zu.';fb.className='fb warn';return;}
+    let sc=0;tokens.forEach(x=>{const ok=eng.loc[x.id]===x.cat;if(ok)sc++;eng.mark(x.id,ok);});
+    t.checked=true;t.score=sc;eng.lock(true);
+    fb.className='fb '+(sc===t.max?'good':'wrong');fb.textContent=sc+' von '+t.max+' Aussagen richtig zugeordnet.';
+    t._ui(true);onCheck&&onCheck(t);
+  };
+  t.solve=()=>{ if(!t.checked) t.check(); if(!t.checked) return; eng.lock(false);tokens.forEach(x=>eng.place(x.id,x.cat));tokens.forEach(x=>eng.mark(x.id,true));eng.lock(true);fb.className='fb good';fb.textContent='Lösung eingeblendet. Ihr Ergebnis: '+t.score+' von '+t.max+'.'; };
+  t.reset=()=>{eng.lock(false);eng.reset();t.checked=false;t.score=0;fb.textContent='';fb.className='fb';t._ui(false);onCheck&&onCheck(t);};
+  el.append(h('p',{class:'soft'},'Ziehen Sie die Aussagen in die passende Kategorie. Am Handy: Aussage antippen, dann die Kategorie antippen.'),zwrap,pool,ctlRow(t,{retry,solve}),fb);
+  return t;
+}
+
+
+/* ---------- Neue Aufgabentypen ---------- */
+function multiTask({q,items,retry=true,solve=true,onCheck}){
+  const name='mu'+(++uid);
+  const el=h('div',{class:'task'});
+  if(q) el.append(h('p',{class:'q-text'},q));
+  el.append(h('p',{class:'soft'},'Wählen Sie jeweils die richtigen Aussagen. Mehrere Antworten sind möglich.'));
+  const group=h('div',{class:'opts'});
+  const rows=items.map(([text,ok,why],i)=>{
+    const inp=h('input',{type:'checkbox',id:name+'-'+i});
+    const lab=h('label',{class:'opt',for:name+'-'+i},inp,h('span',{},text));
+    const w=h('div',{class:'opt why',hidden:true},why||'');
+    group.append(lab,w);return{inp,lab,ok,w};
+  });
+  const fb=h('p',{class:'fb',role:'status','aria-live':'polite'});
+  const t={el,max:items.length,score:0,checked:false};
+  t.check=()=>{
+    if(rows.every(r=>!r.inp.checked)){fb.textContent='Wählen Sie zuerst mindestens eine Aussage.';fb.className='fb warn';return;}
+    let sc=0;
+    rows.forEach(r=>{const ok=r.inp.checked===r.ok;if(ok)sc++;r.inp.disabled=true;r.lab.classList.toggle('ok',ok);r.lab.classList.toggle('bad',!ok);r.w.hidden=false;});
+    t.checked=true;t.score=sc;
+    fb.className='fb '+(sc===t.max?'good':'wrong');fb.textContent=sc+' von '+t.max+' Aussagen richtig beurteilt.';
+    t._ui(true);onCheck&&onCheck(t);
+  };
+  t.solve=()=>{
+    if(!t.checked)t.check();if(!t.checked)return;
+    rows.forEach(r=>{r.inp.checked=r.ok;r.lab.classList.remove('bad');r.lab.classList.add('ok');r.w.hidden=false;});
+    fb.className='fb good';fb.textContent='Richtige Aussagen markiert. Ihr Ergebnis: '+t.score+' von '+t.max+'.';
+  };
+  t.reset=()=>{rows.forEach(r=>{r.inp.disabled=false;r.inp.checked=false;r.lab.classList.remove('ok','bad');r.w.hidden=true;});t.checked=false;t.score=0;fb.textContent='';fb.className='fb';t._ui(false);onCheck&&onCheck(t);};
+  el.append(group,ctlRow(t,{retry,solve}),fb);
+  return t;
+}
+function freeTask({id,q,hint,muster,krit,onCheck}){
+  const el=h('div',{class:'task'});
+  el.append(h('p',{class:'q-text'},q),h('p',{class:'soft'},hint||''));
+  const ta=h('textarea',{class:'frei','aria-label':q,placeholder:'Ihre Antwort …'});
+  ta.value=store.get('f_'+id,'');
+  ta.addEventListener('input',()=>{store.set('f_'+id,ta.value);upd();});
+  const sol=h('div',{class:'solution',hidden:true});
+  const fb=h('p',{class:'fb',role:'status','aria-live':'polite'});
+  const t={el,max:krit.length,score:0,checked:false};
+  const bMuster=h('button',{class:'btn',type:'button',onclick:()=>zeige(true)},'Musterlösung anzeigen');
+  const bOhne=h('button',{class:'btn ghost',type:'button',onclick:()=>zeige(false)},'Ohne eigenen Text ansehen');
+  function upd(){}
+  function zeige(mitText){
+    if(mitText&&ta.value.trim().length<40){fb.textContent='Schreiben Sie zuerst Ihre eigene Antwort (mindestens ein bis zwei Sätze).';fb.className='fb warn';return;}
+    fb.textContent='';fb.className='fb';
+    bMuster.hidden=true;bOhne.hidden=true;sol.hidden=false;ta.readOnly=true;
+    const boxes=krit.map(k=>{const c=h('input',{type:'checkbox'});return{c,l:h('label',{class:'check'},c,h('span',{},k))};});
+    const out=h('p',{class:'fb',role:'status','aria-live':'polite'});
+    const fertig=h('button',{class:'btn',type:'button',onclick:()=>{
+      const n=boxes.filter(b=>b.c.checked).length;boxes.forEach(b=>b.c.disabled=true);fertig.hidden=true;
+      t.checked=true;t.score=n;out.className='fb '+(n===t.max?'good':'info');
+      out.textContent=n===t.max?'Alle '+t.max+' Punkte hatten Sie. Das ist eine vollständige Begründung.':n+' von '+t.max+' Punkten hatten Sie. Ergänzen Sie das Fehlende in Ihrem Text.';
+      again.hidden=false;onCheck&&onCheck(t);}},'Selbstcheck abschließen');
+    const again=h('button',{class:'btn ghost',type:'button',hidden:true,onclick:()=>t.reset()},'Wiederholen');
+    sol.replaceChildren(h('h3',{},'Musterlösung'),h('p',{},muster),h('p',{class:'soft'},mitText?'Vergleichen Sie mit Ihrem Text und haken Sie ab, was Sie schon hatten:':'Prüfen Sie nach dem Lesen, was Sie selbst hätten schreiben können:'),...boxes.map(b=>b.l),h('div',{class:'ctl'},fertig,again),out);
+  }
+  t.solve=()=>{if(sol.hidden)zeige(false);};
+  t.reset=()=>{sol.hidden=true;sol.replaceChildren();ta.readOnly=false;bMuster.hidden=false;bOhne.hidden=false;t.checked=false;t.score=0;fb.textContent='';fb.className='fb';upd();onCheck&&onCheck(t);};
+  t._ui=()=>{};
+  upd();
+  el.append(ta,h('div',{class:'ctl'},bMuster,bOhne),fb,sol);
+  return t;
+}
+const BE_NACH_FEHLERN=[4,2,1,0,0];
+function kprimTask({stamm,aus,onCheck}){
+  const name='kp'+(++uid);
+  const el=h('div',{class:'task'});
+  el.append(h('p',{class:'q-text'},h('b',{},stamm)));
+  const rows=aus.map(([text,ok,why],i)=>{
+    const rn=name+'_'+i;
+    const rt=h('input',{type:'radio',name:rn,value:'r',id:rn+'r'}),rf=h('input',{type:'radio',name:rn,value:'f',id:rn+'f'});
+    const w=h('p',{class:'kp-w',hidden:true},why||'');
+    const row=h('div',{class:'kp-row'},h('p',{class:'kp-t'},text),
+      h('div',{class:'kp-o'},h('label',{for:rn+'r'},rt,'richtig'),h('label',{for:rn+'f'},rf,'falsch')),w);
+    return{rt,rf,ok,row,w};
+  });
+  const fb=h('p',{class:'fb',role:'status','aria-live':'polite'});
+  const t={el,max:4,score:0,checked:false,fehler:0};
+  t.check=()=>{
+    const offen=rows.some(r=>!r.rt.checked&&!r.rf.checked);
+    if(offen){fb.textContent='Bitte beurteilen Sie alle vier Aussagen.';fb.className='fb warn';return;}
+    let f=0;
+    rows.forEach(r=>{const ant=r.rt.checked;const ok=ant===r.ok;if(!ok)f++;r.rt.disabled=r.rf.disabled=true;r.row.classList.toggle('ok',ok);r.row.classList.toggle('bad',!ok);r.w.hidden=false;});
+    t.fehler=f;t.checked=true;t.score=BE_NACH_FEHLERN[Math.min(f,4)];
+    fb.className='fb '+(f===0?'good':'wrong');fb.textContent=(4-f)+' von 4 Aussagen richtig: '+t.score+' BE.';
+    onCheck&&onCheck(t);
+  };
+  t.reset=()=>{rows.forEach(r=>{r.rt.checked=r.rf.checked=false;r.rt.disabled=r.rf.disabled=false;r.row.classList.remove('ok','bad');r.w.hidden=true;});t.checked=false;t.score=0;t.fehler=0;fb.textContent='';fb.className='fb';onCheck&&onCheck(t);};
+  el.append(...rows.map(r=>r.row),fb);
+  return t;
+}
+
+/* ---------- Aufgaben aufbauen ---------- */
+const PRAK=[];
+const regPrak=(name,t)=>{PRAK.push([name,t]);return t;};
+const onP=()=>refreshBilanz();
+const TASKS={};
+const cats=c=>c.map(([id,label])=>({id,label}));
+const sortT=(k)=>sortTask({items:D[k].items.map(([text,cat])=>({text,cat})),cats:cats(D[k].cats),onCheck:onP});
+TASKS.gap1=regPrak('1.1 Dynamik im Kopf',gapTask({tpl:D.gap1.tpl,bank:D.gap1.bank,accepts:D.gap1.accepts,onCheck:onP}));
+TASKS.sort1=regPrak('1.2 Wer spricht hier?',sortT('sort1'));
+TASKS.sort2=regPrak('2.1 Formen der ICH-Schwäche',sortT('sort2'));
+TASKS.multi1=regPrak('2.2 Das ICH',multiTask({q:D.multi1.q,items:D.multi1.items,onCheck:onP}));
+TASKS.multi2=regPrak('2.3 Starkes ICH entwickeln',multiTask({q:D.multi2.q,items:D.multi2.items,onCheck:onP}));
+TASKS.mc_ich1=regPrak('2.4 ICH-Stärke',mcTask({q:D.mc_ich1.q,opts:D.mc_ich1.opts,correct:D.mc_ich1.correct,why:D.mc_ich1.why,onCheck:onP}));
+TASKS.mc_ich2=regPrak('2.4 ICH-Schwäche',mcTask({q:D.mc_ich2.q,opts:D.mc_ich2.opts,correct:D.mc_ich2.correct,why:D.mc_ich2.why,onCheck:onP}));
+TASKS.free_ich=regPrak('2.5 Begründung ICH-Schwäche',freeTask({...D.free_ich,onCheck:onP}));
+TASKS.gap2=regPrak('3.1 Formen der Angst',gapTask({tpl:D.gap2.tpl,bank:D.gap2.bank,accepts:D.gap2.accepts,onCheck:onP}));
+TASKS.sort3=regPrak('3.2 Angst zuordnen',sortT('sort3'));
+TASKS.mc_angst=regPrak('3.3 Entstehung der Angst',mcTask({q:D.mc_angst.q,opts:D.mc_angst.opts,correct:D.mc_angst.correct,why:D.mc_angst.why,onCheck:onP}));
+D.mc_abw.forEach((m,i)=>{TASKS['mc_abw'+i]=regPrak('4.1 Abwehr, Beispiel '+(i+1),mcTask({q:m.q,opts:m.opts,correct:m.correct,why:m.why,onCheck:onP}));});
+D.free_abw.forEach((f,i)=>{TASKS['free_abw'+i]=regPrak('4.2 Begründung '+(i+1),freeTask({...f,onCheck:onP}));});
+TASKS.sort4=regPrak('4.3 Definitionen',sortT('sort4'));
+TASKS.multi3=regPrak('4.4 Abwehrmechanismen',multiTask({q:D.multi3.q,items:D.multi3.items,onCheck:onP}));
+$$('[data-task]').forEach(m=>{const t=TASKS[m.dataset.task];if(t)m.replaceWith(t.el);});
+
+/* ---------- Bilanz und Übungstest ---------- */
+function refreshBilanz(){
+  const box=$('#bilanz');if(!box)return;
+  const got=PRAK.reduce((a,[,t])=>a+t.score,0),max=PRAK.reduce((a,[,t])=>a+t.max,0);
+  const offen=PRAK.filter(([,t])=>!t.checked).length;
+  box.replaceChildren(
+    h('h2',{style:'margin-top:34px'},'Ihre Übungsbilanz'),
+    h('p',{class:'soft'},'Alle Aufgaben aus den Abschnitten 1 bis 4. Das ist nur eine Übersicht, die Punkte zählen nicht für eine Note.'),
+    h('table',{class:'sumtab'},h('tbody',{},PRAK.map(([n,t])=>h('tr',{},h('td',{},n),h('td',{},t.checked?t.score+' / '+t.max:'offen'))))),
+    h('div',{class:'total'},h('span',{},'Übungspunkte'),h('div',{class:'bar'},h('i',{style:'width:'+(max?got/max*100:0)+'%'})),h('span',{class:'pts'},got+' / '+max)),
+    offen?h('p',{class:'soft'},offen+' Aufgabe'+(offen===1?'':'n')+' noch offen.'):h('p',{class:'soft'},'Alle Aufgaben bearbeitet.'),
+    h('div',{class:'ctl'},
+      h('button',{class:'btn ghost',type:'button',onclick:()=>{PRAK.forEach(([,t])=>{if(t.checked)t.solve&&t.solve();});refreshBilanz();}},'Alle Lösungen anzeigen'),
+      h('button',{class:'btn ghost',type:'button',onclick:()=>{PRAK.forEach(([,t])=>t.reset());refreshBilanz();}},'Alle Übungen wiederholen')));
+}
+(function buildTest(){
+  // Umrechnungstabelle BE -> NP
+  const npTab=$('#npTab');
+  const be=[...Array(17).keys()].reverse();
+  npTab.append(h('table',{},h('tbody',{},
+    h('tr',{},h('th',{},'BE'),...be.map(b=>h('td',{},String(b)))),
+    h('tr',{},h('th',{},'NP'),...be.map(b=>h('td',{},String(notenpunkte(b,16))))))));
+  const tests=[];const box=$('#testBox');
+  const status=h('div',{id:'testStatus'});
+  const upd=()=>{
+    const n=tests.length,fertig=tests.filter(t=>t.checked).length;
+    const got=tests.reduce((a,t)=>a+(t.checked?t.score:0),0),max=n*4;
+    const np=notenpunkte(got,max);
+    status.replaceChildren(
+      h('table',{class:'sumtab'},h('tbody',{},tests.map((t,i)=>h('tr',{},h('td',{},'Aufgabe '+(i+1)),h('td',{},t.checked?t.score+' / 4 BE':'offen'))))),
+      h('div',{class:'total'},h('span',{},'Gesamt'),h('div',{class:'bar'},h('i',{style:'width:'+(got/max*100)+'%'})),h('span',{class:'pts'},got+' / '+max+' BE')),
+      fertig===n?h('div',{class:'done-card'},h('h2',{},'Übungstest abgeschlossen'),
+        h('p',{},h('strong',{},got+' von '+max+' Bewertungseinheiten (BE) · '+String(Math.round(got/max*1000)/10).replace('.',',')+' % · '+np+' Notenpunkte')),
+        h('p',{class:'soft'},'Umrechnung nach dem P/P-Bewertungsschlüssel, nur als Orientierung. Lesen Sie die Begründungen bei den Aussagen, die falsch waren.'),
+        downloadKarte(),
+        h('div',{class:'ctl'},h('button',{class:'btn ghost',type:'button',onclick:()=>{tests.forEach(t=>t.reset());}},'Test wiederholen'))):
+      h('p',{class:'soft'},fertig+' von '+n+' Aufgaben abgegeben. Die Auswertung erscheint hier, sobald alle vier Aufgaben geprüft sind.'));
+  };
+  D.test.vigs.forEach((v,vi)=>{
+    box.append(h('div',{class:'vig'},h('h3',{},'Fallvignette '+(vi+1)+(v.titel?': '+v.titel:'')),h('p',{style:'margin:0'},v.text),h('p',{class:'soft',style:'margin:6px 0 0'},'Diese Fallvignette gilt für Aufgabe '+(vi*2+1)+' und '+(vi*2+2)+'.')));
+    v.aufgaben.forEach((a,ai)=>{
+      const nr=vi*2+ai+1;
+      const t=kprimTask({stamm:a.stamm,aus:a.aus,onCheck:upd});tests.push(t);
+      const wrap=h('div',{class:'qitem'},h('p',{class:'soft'},'Aufgabe '+nr+' von 4'),t.el,
+        h('div',{class:'ctl'},h('button',{class:'btn',type:'button',onclick:()=>t.check()},'Überprüfen'),h('button',{class:'btn ghost',type:'button',onclick:()=>t.reset()},'Wiederholen')));
+      box.append(wrap);
+    });
+  });
+  box.append(status);upd();
+  window.__test=tests;
+})();
+function downloadKarte(){
+  return h('div',{class:'dl-card'},
+    h('p',{html:'<strong>Zusammenfassung zum Mitnehmen:</strong> Das Wichtigste zu ICH-Stärke, ICH-Schwäche, Angst und Abwehr auf einer Seite.'}),
+    h('a',{class:'btn',href:'zusammenfassung-instanzenmodell-uebung.pdf',download:'Zusammenfassung-ICH-Staerke-Abwehr.pdf',target:'_blank',rel:'noopener'},'Zusammenfassung herunterladen (PDF)'));
+}
+renderTabs();
+go('start');
+
+</script>
+</body>
+</html>
