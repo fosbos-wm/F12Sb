@@ -1,0 +1,276 @@
+{
+ "titel": "Freud: Abwehrmechanismen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "In diesem Selbstlernkurs lernst du fünf **Abwehrmechanismen** nach Freud kennen und erkennst sie in Fallbeispielen. Plane etwa 35 bis 45 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 1 · Entwicklung",
+   "titel": "Die Lernsituation: Wenn die Angst zu groß wird",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Selina hat morgen eine wichtige Präsentation. Sie hat Angst, sich zu blamieren. Seit Tagen räumt sie lieber ihr Zimmer auf, als sich vorzubereiten. Auf die Frage ihrer Mutter, wie es laufe, sagt sie: „Mir ist das völlig egal.“ Beim Abendessen schnauzt sie ihren Bruder an: „Du bist ja immer so nervös!“"
+    },
+    {
+     "typ": "text",
+     "text": "Selina ist nicht „unehrlich“. Nach Freud wirken in ihr **Abwehrmechanismen**: Sie schützen das Ich vor Gefühlen, die es nicht aushält. Das geschieht **unbewusst**, Selina merkt es selbst nicht."
+    },
+    {
+     "typ": "text",
+     "text": "**Das lernst du in diesem Kurs:**\n- was Abwehrmechanismen sind und wozu sie dienen\n- fünf Abwehrmechanismen: **Verdrängung, Projektion, Fixierung, Regression, Identifikation**\n- sie an Fallbeispielen zu erkennen"
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Freud beschreibt Abwehrmechanismen als Schutzstrategien des **Ichs**. Seine Tochter **Anna Freud** hat sie später weiter ausgearbeitet."
+    }
+   ]
+  },
+  {
+   "kicker": "Grundlagen",
+   "titel": "Wozu dienen Abwehrmechanismen?",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Das Ich steht, wie du aus dem Instanzenmodell weißt, zwischen den Forderungen von **Es** und **Über-Ich** und der **Realität**. Wird der Druck zu groß, entstehen **Angst** oder **Schuldgefühle**. Das Ich schützt sich davor mit **Abwehrmechanismen**."
+    },
+    {
+     "typ": "text",
+     "text": "**Merkmale von Abwehrmechanismen:**\n- Sie wirken **unbewusst**.\n- Sie dienen dem **Schutz des Ichs** vor Angst und innerem Konflikt.\n- Sie **verzerren** die Wahrnehmung der Wirklichkeit oder der eigenen Gefühle.\n- Sie entlasten **kurzfristig**, können auf Dauer aber **Probleme verursachen**, wenn sie ständig eingesetzt werden."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Abwehrmechanismus** = unbewusste Schutzstrategie des Ichs, mit der Angst, Schuldgefühle und innere Konflikte abgewehrt werden."
+    },
+    {
+     "typ": "mc",
+     "frage": "Wodurch unterscheidet sich ein Abwehrmechanismus von einer bewussten Entscheidung?",
+     "optionen": [
+      "Er geschieht unbewusst, die Person merkt nicht, dass sie sich schützt.",
+      "Er wird gezielt geplant, um andere zu täuschen.",
+      "Er löst innere Konflikte endgültig.",
+      "Er tritt nur bei psychisch kranken Menschen auf."
+     ],
+     "richtig": 0,
+     "erklaerung": "Abwehrmechanismen wirken unbewusst. Sie entlasten kurzfristig, lösen den Konflikt aber nicht. Sie kommen bei allen Menschen vor."
+    }
+   ]
+  },
+  {
+   "kicker": "Mechanismen 1 und 2",
+   "titel": "Verdrängung und Projektion",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "**Verdrängung:** Unangenehme Gedanken, Erinnerungen oder Wünsche werden **ins Unbewusste verschoben**, damit sie nicht mehr belasten. Beispiel: Ein Mann kann sich an einen schlimmen Unfall nicht mehr erinnern, obwohl er ihn erlebt hat."
+    },
+    {
+     "typ": "text",
+     "text": "**Projektion:** Eigene unerwünschte Gefühle oder Eigenschaften werden **anderen Personen zugeschrieben**. Man erkennt bei anderen, was man bei sich selbst nicht wahrhaben will. Beispiel: Selina ist selbst nervös und wirft ihrem Bruder vor: „Du bist ja immer so nervös!“"
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Verdrängung:** unangenehme Inhalte ins Unbewusste schieben. **Projektion:** eigene Gefühle oder Eigenschaften anderen zuschreiben."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne Beispiel und Abwehrmechanismus zu.",
+     "paare": [
+      [
+       "Eine Frau vergisst die Beerdigung ihres Vaters, obwohl sie den Termin seit Wochen kannte.",
+       "Verdrängung"
+      ],
+      [
+       "Ein Schüler, der selbst schummeln wollte, wirft seinem Sitznachbarn vor, er wolle abschreiben.",
+       "Projektion"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Mechanismen 3 bis 5",
+   "titel": "Fixierung, Regression und Identifikation",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "**Fixierung:** Das Ich hält an einer **früheren Entwicklungsstufe** fest, weil der nächste Schritt Angst macht. Beispiel: Ein Jugendlicher möchte nicht erwachsen werden, lehnt Verantwortung ab und verhält sich weiter wie ein Kind."
+    },
+    {
+     "typ": "text",
+     "text": "**Regression:** Unter Stress fällt ein Mensch **in frühere Verhaltensweisen** zurück, die ihm Sicherheit gaben. Beispiel: Nach einer Streiterei fängt ein Erwachsener an, mit Türen zu knallen und zu schmollen wie ein Kind."
+    },
+    {
+     "typ": "text",
+     "text": "**Identifikation:** Ein Mensch übernimmt **Eigenschaften oder Verhaltensweisen einer anderen Person**, die er bewundert oder die ihn bedroht. Dadurch fühlt er sich stärker und sicherer. Beispiel: Ein Kind ahmt seinen Vater nach und übernimmt dessen Werte."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Fixierung:** Festhalten an früherer Stufe. **Regression:** Rückfall in früheres Verhalten unter Stress. **Identifikation:** Übernahme von Eigenschaften einer anderen Person."
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze die Definitionen.",
+     "text": "Bei der {{Regression}} fällt ein Mensch unter Stress in frühere Verhaltensweisen zurück. Bei der {{Identifikation}} übernimmt er Eigenschaften einer anderen Person. Bei der {{Fixierung}} hält das Ich an einer früheren Entwicklungsstufe fest.",
+     "woerter": [
+      "Regression",
+      "Identifikation",
+      "Fixierung",
+      "Projektion",
+      "Verdrängung"
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Üben",
+   "titel": "Abwehrmechanismen erkennen",
+   "bloecke": [
+    {
+     "typ": "sortieren",
+     "titel": "Welcher Abwehrmechanismus liegt vor?",
+     "hinweis": "Ordne jedes Beispiel dem passenden Mechanismus zu.",
+     "kategorien": [
+      {
+       "name": "Verdrängung",
+       "items": [
+        "Ein Schüler „vergisst“ den Termin, an dem er seine schlechte Note erfahren soll."
+       ]
+      },
+      {
+       "name": "Projektion",
+       "items": [
+        "Eine Mitschülerin wirft anderen Eifersucht vor, obwohl sie selbst eifersüchtig ist."
+       ]
+      },
+      {
+       "name": "Regression",
+       "items": [
+        "Ein Student lutscht nach einer verpatzten Prüfung am Daumen und verlangt nach seiner Kuscheldecke."
+       ]
+      },
+      {
+       "name": "Identifikation",
+       "items": [
+        "Ein Jugendlicher übernimmt den Kleidungsstil und die Ausdrucksweise seines Idols."
+       ]
+      },
+      {
+       "name": "Fixierung",
+       "items": [
+        "Eine junge Frau lehnt es ab, auszuziehen, und lässt sich von den Eltern weiter wie früher versorgen."
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Tom hat seinen besten Freund beim Abschreiben erwischt und ist wütend. Später sagt er zu einer Lehrkraft: „Alle in der Klasse schreiben ab.“ Obwohl Tom selbst schon oft abgeschrieben hat. Welcher Abwehrmechanismus liegt am ehesten vor?",
+     "optionen": [
+      "Verdrängung",
+      "Projektion",
+      "Regression",
+      "Identifikation"
+     ],
+     "richtig": 1,
+     "erklaerung": "Tom schreibt anderen eine Eigenschaft zu, die er bei sich selbst nicht wahrhaben will. Das ist Projektion."
+    }
+   ]
+  },
+  {
+   "kicker": "Anwenden",
+   "titel": "Fallanalyse: Selina",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fall",
+     "text": "Selina hat morgen eine Präsentation. Ihre Angst vor Blamage ist groß. Sie räumt lieber ihr Zimmer auf, als sich vorzubereiten. Als ihre Mutter nachfragt, sagt sie: „Mir ist das völlig egal.“ Beim Abendessen sagt sie zu ihrem Bruder: „Du bist ja immer so nervös!“ Am Abend verkriecht sie sich mit ihrem alten Kuschelhasen unter der Decke."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Das Verhalten von Selina wird nach Freud zutreffend gedeutet, wenn …",
+     "aussagen": [
+      {
+       "text": "… ihr Satz „Du bist ja immer so nervös!“ als Projektion verstanden wird.",
+       "richtig": true,
+       "erklaerung": "Selina schreibt ihrem Bruder die eigene Nervosität zu."
+      },
+      {
+       "text": "… der Rückzug mit dem Kuschelhasen als Regression gedeutet wird.",
+       "richtig": true,
+       "erklaerung": "Unter Stress greift Selina auf ein früheres, sicheres Verhalten zurück."
+      },
+      {
+       "text": "… ihr Satz „Mir ist das völlig egal.“ als bewusste, nüchterne Einschätzung ihrer Gefühle gilt.",
+       "richtig": false,
+       "erklaerung": "Der Satz ist eher ein Zeichen dafür, dass Selina ihre Angst abwehrt. Das geschieht unbewusst, sie selbst merkt es nicht."
+      },
+      {
+       "text": "… die Abwehrmechanismen das Ich vor Angst schützen, das Problem der Präsentation aber nicht lösen.",
+       "richtig": true,
+       "erklaerung": "Abwehrmechanismen entlasten kurzfristig, lösen den Konflikt aber nicht."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beschreiben Sie zwei Abwehrmechanismen, die bei Selina erkennbar sind, und belegen Sie diese am Fall.",
+     "hinweis": "Schreibe 4 bis 6 Sätze. Erkläre zuerst jeden Mechanismus, belege ihn dann am Fall.",
+     "muster": "Abwehrmechanismen sind unbewusste Schutzstrategien des Ichs vor Angst und innerem Konflikt. Bei Selina ist die Projektion erkennbar. Bei der Projektion werden eigene Gefühle anderen zugeschrieben. Selina ist selbst nervös und sagt zu ihrem Bruder: „Du bist ja immer so nervös!“ Außerdem zeigt sich eine Regression. Dabei fällt ein Mensch unter Stress in frühere Verhaltensweisen zurück. Selina verkriecht sich mit ihrem Kuschelhasen unter der Decke wie ein Kind. Beide Mechanismen entlasten kurzfristig, lösen das Problem der Präsentation aber nicht.",
+     "kriterien": [
+      "Ich habe Abwehrmechanismus allgemein erklärt (unbewusst, Schutz des Ichs).",
+      "Ich habe die Projektion erklärt und am Fall belegt.",
+      "Ich habe die Regression erklärt und am Fall belegt.",
+      "Ich habe erwähnt, dass die Mechanismen nur kurzfristig entlasten."
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Zum Mitnehmen",
+   "titel": "Das Wichtigste auf einen Blick",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Wiederholung: Ordne Begriff und Kurzdefinition zu.",
+     "paare": [
+      [
+       "Verdrängung",
+       "unangenehme Inhalte ins Unbewusste schieben"
+      ],
+      [
+       "Projektion",
+       "eigene Gefühle anderen zuschreiben"
+      ],
+      [
+       "Regression",
+       "Rückfall in früheres Verhalten unter Stress"
+      ],
+      [
+       "Identifikation",
+       "Übernahme von Eigenschaften einer anderen Person"
+      ],
+      [
+       "Fixierung",
+       "Festhalten an einer früheren Entwicklungsstufe"
+      ]
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Das nimmst du mit",
+     "text": "**Abwehrmechanismen** sind unbewusste Schutzstrategien des Ichs. Sie entlasten kurzfristig und verzerren die Wahrnehmung. Wichtige Beispiele: **Verdrängung, Projektion, Fixierung, Regression, Identifikation**."
+    },
+    {
+     "typ": "text",
+     "text": "**Ausblick:** Im Unterricht übst du die Abwehrmechanismen an weiteren Fallbeispielen. Danach beurteilst du die Theorie Freuds: Erklärungswert, Überprüfbarkeit und Konsequenzen für die Erziehung."
+    }
+   ]
+  }
+ ]
+}

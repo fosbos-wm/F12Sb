@@ -1,0 +1,280 @@
+{
+ "titel": "Freud: Psychosexuelle Entwicklung und Fixierung",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "In diesem Selbstlernkurs lernst du die **fünf Phasen der psychosexuellen Entwicklung** nach Freud kennen und wendest den Begriff **Fixierung** an einem Fall an. Plane etwa 35 bis 45 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 1 · Entwicklung",
+   "titel": "Die Lernsituation: Woher kommen Gewohnheiten?",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In einer Lerngruppe erzählen sich Schüler:innen von ihren Gewohnheiten. Manche davon kommen ihnen selbst ein wenig rätselhaft vor."
+    },
+    {
+     "typ": "notizen",
+     "beschriftung": "Aussagen aus der Lerngruppe",
+     "items": [
+      "„Wenn ich Stress habe, kaue ich an meinen Fingernägeln.“",
+      "„Mein Schreibtisch muss immer exakt aufgeräumt sein, sonst werde ich unruhig.“",
+      "„Ich rauche eigentlich nur, wenn ich nervös bin.“"
+     ]
+    },
+    {
+     "typ": "text",
+     "text": "Sigmund Freud vermutete, dass solche Gewohnheiten mit den **ersten Lebensjahren** zu tun haben. Er entwickelte die Theorie der **psychosexuellen Entwicklung**: In jeder Phase der Kindheit steht ein anderer Körperbereich im Mittelpunkt der Lust, und jede Phase stellt das Kind vor eine eigene Aufgabe."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Mit **psychosexuell** meint Freud nicht nur Sexualität im engen Sinn, sondern **Lust und Triebenergie** im Allgemeinen. Die Triebenergie nennt er **Libido**."
+    },
+    {
+     "typ": "text",
+     "text": "**Das lernst du in diesem Kurs:**\n- die fünf Phasen und ihre Merkmale\n- was **Fixierung** bedeutet und welche Folgen sie haben kann\n- die Theorie auf Beispiele anzuwenden"
+    }
+   ]
+  },
+  {
+   "kicker": "Überblick",
+   "titel": "Libido, erogene Zonen und fünf Phasen",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Nach Freud ist die **Libido** die Energie des Lusttriebs. Sie richtet sich in jeder Phase auf eine andere **erogene Zone**, also auf einen Körperbereich, der Lust vermittelt. Die Entwicklung verläuft in einer **festen Reihenfolge**:"
+    },
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe die Phasen in die richtige Reihenfolge.",
+     "hinweis": "Verschiebe die Phasen mit den Pfeilen und prüfe.",
+     "absaetze": [
+      "orale Phase (ca. 0 bis 1,5 Jahre)",
+      "anale Phase (ca. 1,5 bis 3 Jahre)",
+      "phallische Phase (ca. 3 bis 6 Jahre)",
+      "Latenzphase (ca. 6 Jahre bis zur Pubertät)",
+      "genitale Phase (ab der Pubertät)"
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Die Altersangaben sind **Richtwerte**. Wichtig ist die **Reihenfolge** der Phasen und das jeweilige Hauptthema."
+    }
+   ]
+  },
+  {
+   "kicker": "Phase 1 und 2",
+   "titel": "Die orale und die anale Phase",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "**Orale Phase (ca. 0 bis 1,5 Jahre):** Die erogene Zone ist der **Mund**. Das Kind gewinnt Lust durch Saugen, Trinken, Lutschen und Beißen. Es ist völlig **abhängig** von seinen Bezugspersonen. Die wichtige Erfahrung lautet: Meine Bedürfnisse werden erfüllt, und ich kann mich auf andere verlassen."
+    },
+    {
+     "typ": "text",
+     "text": "**Anale Phase (ca. 1,5 bis 3 Jahre):** Die erogene Zone ist der **After mit der Ausscheidung**. Das Kind lernt, seine Ausscheidung zu **kontrollieren** (Sauberkeitserziehung). Dabei erlebt es zum ersten Mal einen deutlichen Konflikt zwischen seinem Trieb und den **Forderungen der Umwelt**. Die wichtige Erfahrung: Ich kann selbst bestimmen und mich beherrschen."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne Phase und Merkmal zu.",
+     "paare": [
+      [
+       "orale Phase",
+       "Lust durch Saugen und Lutschen, Abhängigkeit von Bezugspersonen"
+      ],
+      [
+       "anale Phase",
+       "Kontrolle der Ausscheidung, Sauberkeitserziehung, erster Konflikt mit der Umwelt"
+      ]
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Oral:** Mund, Saugen, Abhängigkeit. **Anal:** Ausscheidung, Kontrolle, Sauberkeitserziehung."
+    }
+   ]
+  },
+  {
+   "kicker": "Phase 3 bis 5",
+   "titel": "Phallische Phase, Latenz und genitale Phase",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "**Phallische Phase (ca. 3 bis 6 Jahre):** Die erogene Zone sind die **Geschlechtsorgane**. Kinder entdecken Geschlechtsunterschiede und interessieren sich für ihren Körper. Nach Freud entwickelt der Junge starke Zuneigung zur Mutter und sieht den Vater als Rivalen (**Ödipuskomplex**). Für Mädchen beschreibt Freud eine ähnliche Entwicklung mit umgekehrten Rollen. Der Konflikt löst sich, indem das Kind sich mit dem gleichgeschlechtlichen Elternteil **identifiziert** und dessen Normen übernimmt. So entsteht das **Über-Ich**."
+    },
+    {
+     "typ": "text",
+     "text": "**Latenzphase (ca. 6 Jahre bis zur Pubertät):** Das sexuelle Interesse tritt in den Hintergrund. Die Energie fließt in **Schule, Lernen, Freundschaften und Hobbys**. Die Zeit gilt als Phase relativer Ruhe."
+    },
+    {
+     "typ": "text",
+     "text": "**Genitale Phase (ab der Pubertät):** Die Sexualität reift. Jugendliche lösen sich von den Eltern ab und suchen **Partner:innen**. Nach Freud ist das Ziel eine reife, auf andere Menschen gerichtete Liebesfähigkeit."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Phallisch:** Geschlechtsorgane, Ödipuskomplex, Identifikation, Entstehung des Über-Ichs. **Latenz:** Ruhe, Schule, Freundschaften. **Genital:** Reife Sexualität, Ablösung von den Eltern, Partnerwahl."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Zu welcher Phase passt die Aussage?",
+     "hinweis": "Ordne jede Aussage einer Phase zu.",
+     "kategorien": [
+      {
+       "name": "oral",
+       "items": [
+        "Das Kind lutscht am Daumen und erlebt dabei Lust."
+       ]
+      },
+      {
+       "name": "anal",
+       "items": [
+        "Das Kind lernt, auf die Toilette zu gehen, und erlebt dabei den Konflikt mit den Eltern."
+       ]
+      },
+      {
+       "name": "phallisch",
+       "items": [
+        "Das Kind identifiziert sich mit dem Vater und übernimmt dessen Normen."
+       ]
+      },
+      {
+       "name": "Latenz",
+       "items": [
+        "Das Kind konzentriert sich auf Schule und Freundschaften."
+       ]
+      },
+      {
+       "name": "genital",
+       "items": [
+        "Der Jugendliche löst sich von den Eltern ab und sucht eine Partnerin."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Fixierung",
+   "titel": "Wenn die Entwicklung stecken bleibt",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Jede Phase bringt Lust und Konflikte. Wird ein Kind in einer Phase **stark frustriert** (zu wenig Befriedigung) oder **überbefriedigt** (zu viel Verwöhnung), bleibt ein Teil der Libido dort „hängen“. Freud nennt das **Fixierung**."
+    },
+    {
+     "typ": "text",
+     "text": "Die Fixierung kann sich im Erwachsenenalter in **Persönlichkeitszügen** und Gewohnheiten zeigen:\n- **oral fixiert:** zum Beispiel Rauchen, Nägelkauen, übermäßiges Essen, ständiges Reden, starke Abhängigkeit von anderen\n- **anal fixiert:** zum Beispiel Ordnungsliebe bis zur Pedanterie, Sparsamkeit bis zum Geiz, Starrsinn"
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Fixierung** = ein Teil der Libido bleibt an eine Phase gebunden, weil das Kind dort zu stark frustriert oder überbefriedigt wurde. Spätere Gewohnheiten und Persönlichkeitszüge können darauf zurückgeführt werden."
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze die Aussagen zur Fixierung.",
+     "text": "Bei einer {{Fixierung}} bleibt ein Teil der Libido an eine Phase gebunden. Wer als Erwachsener ständig an den Nägeln kaut oder raucht, zeigt nach Freud ein Verhalten, das auf die {{orale}} Phase zurückgeht. Pedanterie und Geiz weisen auf die {{anale}} Phase hin.",
+     "woerter": [
+      "Fixierung",
+      "Regression",
+      "orale",
+      "anale",
+      "phallische",
+      "genitale"
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Hinweis",
+     "text": "Eine Theorie wie die von Freud ist ein **Erklärungsversuch**. Ob Gewohnheiten wirklich so entstehen, lässt sich nicht beweisen. Im Unterricht werden die Stärken und Grenzen der Theorie später beurteilt (kritische Würdigung)."
+    }
+   ]
+  },
+  {
+   "kicker": "Anwenden",
+   "titel": "Fall: Jonas und seine Gewohnheiten",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fall",
+     "text": "Jonas (19) arbeitet als Praktikant in einer Bank. Er ist für seine Ordnung bekannt: Jeder Stift liegt an seinem Platz, und Ordner beschriftet er farbig. Er hasst es, Geld auszugeben, und verschiebt Käufe monatelang. Seine Mutter erzählt, Jonas sei schon als Kleinkind sehr stolz gewesen, wenn er seine Ausscheidung kontrollieren konnte. Die Eltern hätten damals großen Wert auf Sauberkeit und frühe Kontrolle gelegt."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Das Verhalten von Jonas wird nach Freud zutreffend erklärt, wenn …",
+     "aussagen": [
+      {
+       "text": "… Jonas Merkmale einer analen Fixierung zeigt.",
+       "richtig": true,
+       "erklaerung": "Ordnungsliebe, Sparsamkeit und Kontrolle sind typische Merkmale einer analen Fixierung nach Freud."
+      },
+      {
+       "text": "… die frühe Sauberkeitserziehung als Konflikt zwischen Trieb und Forderung der Umwelt gedeutet wird.",
+       "richtig": true,
+       "erklaerung": "In der analen Phase erlebt das Kind erstmals den Konflikt zwischen Trieb und Umwelt."
+      },
+      {
+       "text": "… sein Verhalten auf eine Fixierung in der oralen Phase hinweist.",
+       "richtig": false,
+       "erklaerung": "Die genannten Merkmale gehören zur analen Phase, nicht zur oralen."
+      },
+      {
+       "text": "… Jonas’ Verhalten als abschließender Beweis dafür gilt, dass die Theorie stimmt.",
+       "richtig": false,
+       "erklaerung": "Ein Fallbeispiel kann die Theorie veranschaulichen, aber nicht beweisen."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erklären Sie das Verhalten von Jonas mithilfe der Theorie der psychosexuellen Entwicklung.",
+     "hinweis": "Schreibe 4 bis 6 Sätze: Phase, Fixierung, Beleg am Fall.",
+     "muster": "Nach Freud durchläuft ein Kind fünf Phasen der psychosexuellen Entwicklung. In der analen Phase (ca. 1,5 bis 3 Jahre) lernt es, die Ausscheidung zu kontrollieren, und erlebt einen Konflikt zwischen Trieb und Forderung der Umwelt. Wird ein Kind in dieser Phase stark frustriert oder überbefriedigt, kann es zu einer Fixierung kommen, die sich später in Ordnungsliebe, Sparsamkeit und Starrsinn zeigt. Bei Jonas passen die Ordnung und das Zurückhalten von Geld zu einer analen Fixierung. Die frühe Sauberkeitserziehung durch die Eltern kann dafür die Ursache sein.",
+     "kriterien": [
+      "Ich habe die anale Phase und ihr Merkmal genannt (Kontrolle der Ausscheidung, Konflikt mit der Umwelt).",
+      "Ich habe Fixierung erklärt (Libido bleibt gebunden durch Frustration oder Überbefriedigung).",
+      "Ich habe das Verhalten von Jonas als Beleg angeführt (Ordnung, Sparsamkeit).",
+      "Ich habe die Sauberkeitserziehung als mögliche Ursache genannt."
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Zum Mitnehmen",
+   "titel": "Das Wichtigste auf einen Blick",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Wiederholung: Ordne die Phase der erogenen Zone zu.",
+     "paare": [
+      [
+       "orale Phase",
+       "Mund"
+      ],
+      [
+       "anale Phase",
+       "Ausscheidung und Schließmuskel"
+      ],
+      [
+       "phallische Phase",
+       "Geschlechtsorgane"
+      ]
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Das nimmst du mit",
+     "text": "**Psychosexuelle Entwicklung nach Freud:** Die Libido richtet sich nacheinander auf **Mund** (oral), **Ausscheidung** (anal) und **Geschlechtsorgane** (phallisch). Es folgen **Latenz** und **genitale Phase**. Bei **Fixierung** bleibt Libido an eine Phase gebunden, weil das Kind dort zu stark frustriert oder überbefriedigt wurde."
+    },
+    {
+     "typ": "text",
+     "text": "**Ausblick:** Wie das Ich mit Konflikten und Angst umgeht, zeigt der Kurs **Freud: Abwehrmechanismen**. Dort begegnet dir die Fixierung als Abwehrmechanismus wieder."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,303 @@
+{
+ "titel": "Freud: Instanzenmodell (Es, Ich, Über-Ich)",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "In diesem Selbstlernkurs lernst du das **Instanzenmodell** von Sigmund Freud kennen und wendest es an einem Beispiel an. Plane etwa 30 bis 40 Minuten ein. Die Aufgaben geben dir sofort Rückmeldung.",
+ "abschnitte": [
+  {
+   "kicker": "LB 1 · Entwicklung",
+   "titel": "Die Lernsituation: Wer entscheidet in mir?",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Tim (17) kommt vom Training nach Hause. In der Küche steht ein Stück Kuchen, das seine Schwester für den Geburtstag am nächsten Tag gebacken hat. Tim hat großen Hunger. In seinem Kopf melden sich mehrere Stimmen."
+    },
+    {
+     "typ": "notizen",
+     "beschriftung": "Tims Gedanken",
+     "items": [
+      "„Ich will das Stück jetzt, sofort!“",
+      "„Das gehört mir nicht. Das gehört sich nicht.“",
+      "„Ich esse erst eine Brotzeit und frage meine Schwester später, ob ich ein Stück abbekomme.“"
+     ]
+    },
+    {
+     "typ": "text",
+     "text": "Alle drei Gedanken gehören zu Tim und stehen doch im Widerspruch. Der Psychoanalytiker **Sigmund Freud** (1856–1939) erklärt das mit einem Modell der Persönlichkeit: dem **Instanzenmodell**. Es beschreibt, wie sich im Inneren eines Menschen verschiedene Kräfte gegenüberstehen."
+    },
+    {
+     "typ": "text",
+     "text": "**Das lernst du in diesem Kurs:**\n- die drei Instanzen Es, Ich und Über-Ich und ihre Aufgaben\n- nach welchen Prinzipien sie arbeiten\n- wie ein innerer Konflikt entsteht\n- das Modell an einem Beispiel anzuwenden"
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Freud geht davon aus, dass ein großer Teil des Erlebens und Verhaltens **unbewusst** gesteuert wird. Das Instanzenmodell ist sein Vorschlag, wie man diese inneren Kräfte ordnen kann."
+    }
+   ]
+  },
+  {
+   "kicker": "Instanz 1",
+   "titel": "Das Es: der Antrieb",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Das **Es** ist die älteste Instanz. Es ist von Geburt an vorhanden und arbeitet vollständig **unbewusst**. Im Es liegen die **Triebe** und Bedürfnisse eines Menschen, zum Beispiel Hunger, Durst, Lust und Aggression."
+    },
+    {
+     "typ": "text",
+     "text": "Das Es folgt dem **Lustprinzip**: Es will Bedürfnisse **sofort und ohne Rücksicht** befriedigen. Es kennt weder Zeit noch Moral noch die Regeln der Umwelt. Ein Säugling, der schreit, bis er satt ist, zeigt das Es in Reinform."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Es** = angeborene Triebe und Bedürfnisse · unbewusst · **Lustprinzip** (sofortige Befriedigung)."
+    },
+    {
+     "typ": "situation",
+     "label": "Rückbezug zu Tim",
+     "text": "In der Küche meldet sich bei Tim der Gedanke: „Ich will das Stück jetzt, sofort!“"
+    },
+    {
+     "typ": "mc",
+     "frage": "Woran erkennst du in Tims Gedanken „Ich will das Stück jetzt, sofort!“ das Es?",
+     "optionen": [
+      "Tim denkt an die Regeln seiner Familie.",
+      "Tim will sein Bedürfnis sofort und ohne Rücksicht befriedigen.",
+      "Tim plant, wie er den Kuchen später fair teilt.",
+      "Tim fühlt Schuld, weil er das Stück Kuchen essen möchte."
+     ],
+     "richtig": 1,
+     "erklaerung": "Das Es folgt dem Lustprinzip. Sofortige Befriedigung ohne Rücksicht auf Regeln oder Folgen ist sein Kennzeichen. Die anderen Antworten gehören zum Über-Ich (Regeln, Schuld) und zum Ich (Planen)."
+    }
+   ]
+  },
+  {
+   "kicker": "Instanz 2",
+   "titel": "Das Über-Ich: das Gewissen",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Das **Über-Ich** entsteht in den ersten Lebensjahren (etwa bis zum 5. oder 6. Lebensjahr). Kinder übernehmen dabei die **Normen und Werte** ihrer Eltern und der Gesellschaft: Was ist erlaubt, was ist verboten, was ist gut, was ist schlecht? Diese Regeln werden **verinnerlicht**, das Kind braucht dann nicht mehr bei jeder Handlung eine Erziehungsperson."
+    },
+    {
+     "typ": "text",
+     "text": "Das Über-Ich arbeitet nach dem **Moralitätsprinzip**. Es bewertet Gedanken und Handlungen und meldet sich mit **Schuldgefühlen** oder einem **schlechten Gewissen**, wenn jemand gegen die verinnerlichten Regeln verstößt. Es besteht aus dem **Gewissen** (Verbote) und dem **Ich-Ideal** (Vorstellung davon, wie man sein möchte). Auch das Über-Ich ist zum großen Teil unbewusst."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Über-Ich** = verinnerlichte Normen und Werte · Gewissen und Ich-Ideal · **Moralitätsprinzip** (Schuldgefühl bei Verstoß)."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Gedanken von Tim der richtigen Instanz zu.",
+     "paare": [
+      [
+       "„Ich esse das Stück jetzt, sofort.“",
+       "Es"
+      ],
+      [
+       "„Das gehört mir nicht. Das gehört sich nicht.“",
+       "Über-Ich"
+      ],
+      [
+       "„Ich frage später meine Schwester.“",
+       "Ich"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Instanz 3",
+   "titel": "Das Ich: der Vermittler",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Das **Ich** entwickelt sich im Lauf der ersten Lebensjahre aus dem Es. Es ist die Instanz, die **wahrnimmt, denkt, plant und entscheidet**. Das Ich ist **bewusst**, teilweise auch vorbewusst oder unbewusst."
+    },
+    {
+     "typ": "text",
+     "text": "Das Ich folgt dem **Realitätsprinzip**: Es prüft, was in der Wirklichkeit möglich und sinnvoll ist. Es kann Bedürfnisse **aufschieben** und nach einem Weg suchen, der Es, Über-Ich und die Anforderungen der Umwelt berücksichtigt. Das Ich ist der **Vermittler** zwischen den Wünschen des Es, den Forderungen des Über-Ichs und der Realität."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Ich** = denkt, plant, entscheidet · überwiegend bewusst · **Realitätsprinzip** (Bedürfnisse realistisch und angemessen befriedigen, Aufschub möglich)."
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze die Merkmale der drei Instanzen.",
+     "text": "Das {{Es}} folgt dem Lustprinzip und ist {{unbewusst}}. Das {{Über-Ich}} folgt dem Moralitätsprinzip und meldet sich mit Schuldgefühlen. Das {{Ich}} folgt dem Realitätsprinzip und vermittelt zwischen den anderen Instanzen.",
+     "woerter": [
+      "Es",
+      "Ich",
+      "Über-Ich",
+      "unbewusst",
+      "bewusst",
+      "Gewissen"
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Zusammenspiel",
+   "titel": "Wenn die Instanzen im Konflikt stehen",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Es und Über-Ich wollen meist **Gegensätzliches**: Das Es drängt auf Befriedigung, das Über-Ich verlangt Verzicht. Das Ich steht **in der Mitte** und muss einen Kompromiss finden, der auch zur Realität passt."
+    },
+    {
+     "typ": "schema",
+     "links": "Es\n(Lustprinzip)",
+     "rechts": "Über-Ich\n(Moralitätsprinzip)",
+     "mitte": [
+      "Ich vermittelt",
+      "Realitätsprinzip"
+     ],
+     "beschriftung": "Das Ich vermittelt zwischen Es, Über-Ich und der Realität."
+    },
+    {
+     "typ": "text",
+     "text": "Gelingt dem Ich dieser Ausgleich, spricht man von einem **starken Ich**. Wird das Ich vom Es oder vom Über-Ich überwältigt, entstehen **innere Konflikte** und **Angst**. Das Ich schützt sich dann oft mit **Abwehrmechanismen** (dazu gibt es einen eigenen Kurs)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Starkes Ich:** findet einen Kompromiss zwischen Es, Über-Ich und Realität. **Innerer Konflikt:** Das Ich gerät zwischen den Forderungen von Es und Über-Ich unter Druck."
+    },
+    {
+     "typ": "mc",
+     "frage": "Was ist die wichtigste Aufgabe des Ichs im Instanzenmodell?",
+     "optionen": [
+      "Es sorgt dafür, dass alle Triebe sofort befriedigt werden.",
+      "Es speichert die Regeln der Eltern und Gesellschaft.",
+      "Es vermittelt zwischen Es, Über-Ich und Realität.",
+      "Es entsteht erst im Erwachsenenalter und löst das Über-Ich ab."
+     ],
+     "richtig": 2,
+     "erklaerung": "Das Ich vermittelt zwischen den Wünschen des Es, den Normen des Über-Ichs und der Realität. Das Befriedigen aller Triebe gehört zum Es, das Speichern der Regeln zum Über-Ich."
+    }
+   ]
+  },
+  {
+   "kicker": "Üben",
+   "titel": "Aussagen den Instanzen zuordnen",
+   "bloecke": [
+    {
+     "typ": "sortieren",
+     "titel": "Welche Instanz ist gemeint?",
+     "hinweis": "Ordne jede Aussage der passenden Instanz zu.",
+     "kategorien": [
+      {
+       "name": "Es",
+       "items": [
+        "Bedürfnisse sollen sofort befriedigt werden.",
+        "Angeborene Triebe wie Hunger und Aggression sind hier angesiedelt."
+       ]
+      },
+      {
+       "name": "Ich",
+       "items": [
+        "Es plant, wie ein Wunsch auf angemessene Weise erfüllt werden kann.",
+        "Es kann Befriedigung aufschieben, weil es die Wirklichkeit prüft."
+       ]
+      },
+      {
+       "name": "Über-Ich",
+       "items": [
+        "Hier sind Normen und Werte der Eltern verinnerlicht.",
+        "Bei Verstößen gegen Regeln kommt es zu Schuldgefühlen."
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Mia sitzt abends vor dem Fernseher. Sie weiß, dass sie für die Prüfung lernen müsste. Ein Teil von ihr möchte unbedingt die nächste Folge sehen. Ein anderer Teil sagt: „Gute Schüler vertrödeln keine Zeit.“ Schließlich entscheidet sie sich, eine Stunde zu lernen und danach eine Folge zu schauen.\nDas Verhalten von Mia wird nach Freud richtig gedeutet, wenn …",
+     "aussagen": [
+      {
+       "text": "… der Wunsch nach der Folge vom Es ausgeht, das nach sofortiger Befriedigung strebt.",
+       "richtig": true,
+       "erklaerung": "Das Es will Bedürfnisse unmittelbar erfüllen."
+      },
+      {
+       "text": "… der Gedanke an gute Schüler vom Über-Ich stammt, das verinnerlichte Normen vertritt.",
+       "richtig": true,
+       "erklaerung": "Das Über-Ich enthält verinnerlichte Werte und bewertet das Verhalten."
+      },
+      {
+       "text": "… Mias Entscheidung für Lernen und danach eine Folge vom Es getroffen wird.",
+       "richtig": false,
+       "erklaerung": "Die Abwägung und die Entscheidung gehören zum Ich, das zwischen Es und Über-Ich vermittelt."
+      },
+      {
+       "text": "… das Ich hier einen Kompromiss findet, der Wunsch und Pflicht zeitlich ordnet.",
+       "richtig": true,
+       "erklaerung": "Das Ich vermittelt nach dem Realitätsprinzip und schiebt die Befriedigung auf."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Anwenden",
+   "titel": "Das Modell am Beispiel erklären",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Auftrag",
+     "text": "Zurück zu Tim und dem Kuchen: Er nimmt sich ein Brot, schreibt seiner Schwester eine Nachricht und fragt, ob er ein Stück vom Kuchen essen darf."
+    },
+    {
+     "typ": "frei",
+     "frage": "Erläutern Sie mithilfe des Instanzenmodells von Freud, welche Instanzen in Tim wirken und wie sein Verhalten zustande kommt.",
+     "hinweis": "Schreibe 4 bis 6 Sätze: Nenne zu jeder Instanz das Merkmal und belege es mit Tims Verhalten.",
+     "muster": "Nach Freud besteht die Persönlichkeit aus Es, Über-Ich und Ich. Das Es ist angeboren und unbewusst und strebt nach dem Lustprinzip sofort nach Befriedigung. Bei Tim zeigt sich das im Wunsch, das Stück Kuchen sofort zu essen. Das Über-Ich enthält die verinnerlichten Normen und Werte und meldet sich mit Schuldgefühlen. Tims Gedanke, dass das Stück ihm nicht gehört, stammt vom Über-Ich. Das Ich vermittelt nach dem Realitätsprinzip zwischen beiden Instanzen und der Realität. Tim isst zuerst ein Brot und fragt seine Schwester, damit sein Hunger gestillt wird, ohne gegen die Regel zu verstoßen.",
+     "kriterien": [
+      "Ich habe alle drei Instanzen genannt (Es, Über-Ich, Ich).",
+      "Ich habe zu jeder Instanz das Prinzip genannt (Lustprinzip, Moralitätsprinzip, Realitätsprinzip).",
+      "Ich habe zu jeder Instanz einen Beleg aus Tims Verhalten angeführt.",
+      "Ich habe gezeigt, dass das Ich zwischen Es, Über-Ich und Realität vermittelt."
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Zum Mitnehmen",
+   "titel": "Das Wichtigste auf einen Blick",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Wiederholung: Ordne die Instanz dem Prinzip zu.",
+     "paare": [
+      [
+       "Es",
+       "Lustprinzip"
+      ],
+      [
+       "Ich",
+       "Realitätsprinzip"
+      ],
+      [
+       "Über-Ich",
+       "Moralitätsprinzip"
+      ]
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Das nimmst du mit",
+     "text": "**Instanzenmodell nach Freud:** Die Persönlichkeit besteht aus drei Instanzen. Das **Es** (angeboren, unbewusst, Triebe, Lustprinzip), das **Über-Ich** (verinnerlichte Normen und Werte, Gewissen, Moralitätsprinzip) und das **Ich** (denkt, plant, vermittelt, Realitätsprinzip)."
+    },
+    {
+     "typ": "text",
+     "text": "**Ausblick:** Wenn das Ich zwischen Es und Über-Ich unter Druck gerät, entsteht Angst. Wie das Ich sich davor schützt, behandelt der Kurs **Freud: Abwehrmechanismen**. Wie sich das Es in der Kindheit über die Entwicklungsphasen zeigt, behandelt der Kurs **Freud: Psychosexuelle Entwicklung**."
+    }
+   ]
+  }
+ ]
+}

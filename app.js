@@ -4330,7 +4330,7 @@ const PPM_EXP_TEILE=[
 function ppmExpMinuten(teile){return PPM_EXP_TEILE.filter(t=>(teile||[]).includes(t.k)).reduce((n,t)=>n+t.min,0);}
 function ppmExpTeile(m){return Array.isArray(m&&m.teile)&&m.teile.length?m.teile:PPM_EXP_TEILE.map(t=>t.k);}
 // Fertige Einarbeitungs-Inhalte (einarbeitung/inhalte/<id>.json); wählbar im Selbstlernkurs.
-const PPM_EA_IDS=["fa01","pp01","pp02","pp03","pp1a1","pp1a2","pp1a3","pp1a4","pp06","pp07","pp2a1","pp10","pp11","pp15","pp16"];
+const PPM_EA_IDS=["f12-fa01","f12-freud1","f12-freud2","f12-freud3"]; // Dateien liegen in einarbeitung/inhalte/<ID>.json (12. Klasse)
 // Einheitliche Bezeichnung: Inhalt · Modulart · LB1 (LB nur, wenn bekannt)
 function ppmBez(inhalt,modul,lb){const T=PPM_TYPEN[modul];return[inhalt,T?T.art:"",lb?"LB"+lb:""].filter(Boolean).join(" · ");}
 // Modulart und Lernbereich einer Einarbeitung: zuerst die Angaben in der JSON-Datei ("modulart", "lb"),
@@ -6347,9 +6347,9 @@ async function einarbeitungInfo(id){
   const res=await fetch(`einarbeitung/inhalte/${encodeURIComponent(id)}.json`,{cache:"no-cache"});
   if(res.ok){
    const j=await res.json();
-   const ARTEN=["mc","lueckentext","zuordnung","sortieren","kprim","frei"];
+   const ARTEN=["mc","lueckentext","zuordnung","sortieren","kprim","frei","reihenfolge","strukturstreifen"];
    const zahl=(j.abschnitte||[]).reduce((n,x)=>n+(x.aufgaben||[]).length+(x.bloecke||[]).filter(b=>ARTEN.includes(b.typ)).length,0);
-   r={titel:j.titel||"",entwurf:!!j.entwurf,aufgaben:zahl};
+   r={titel:j.titel||"",entwurf:!!j.entwurf,aufgaben:zahl,modulart:j.modulart||"",lb:j.lb||0};
   }
  }catch(e){r=null;}
  einarbeitungCache[id]=r;return r;
@@ -6562,6 +6562,7 @@ async function closeEinarbeitung(still){
  $("einarbeitungOverlay")?.remove();document.body.classList.remove("exp-offen");
  if(einarbeitungHandler){window.removeEventListener("message",einarbeitungHandler);einarbeitungHandler=null;}
  const id=einarbeitungWoche;einarbeitungWoche=null;
+ if(!still&&window.__eaRueck){const cb=window.__eaRueck;window.__eaRueck=null;einarbeitungGeaendert=false;await cb();return;}
  if(!still&&id&&einarbeitungGeaendert){einarbeitungGeaendert=false;await openAptDetail(id,"einarbeitung");}
 }
 async function einarbeitungSpeichern(id,patch){

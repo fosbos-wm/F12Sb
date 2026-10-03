@@ -1,0 +1,444 @@
+{
+ "titel": "Basiskurs Fachaufsatztraining: Aufbau eines Fachaufsatzes (Instanzenmodell nach Freud)",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "In diesem Basiskurs lernst du am Thema **Instanzenmodell nach Freud**, wie ein Fachaufsatz aufgebaut ist. Du arbeitest selbstständig, Seite für Seite. Die Aufgaben geben dir sofort Rückmeldung. Plane etwa 45 bis 60 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "Basiskurs Fachaufsatztraining",
+   "titel": "Die Ausgangssituation",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Lea (17) hat morgen eine Kurzarbeit in Pädagogik/Psychologie. Am Abend laden ihre Freunde zu einem Spieleabend ein. Lea möchte unbedingt hin. Gleichzeitig denkt sie: „Wer nicht lernt, verdient keine gute Note.“ Nach einigem Überlegen entscheidet sie sich, zuerst eine Stunde zu lernen und danach für eine Stunde zu ihren Freunden zu gehen."
+    },
+    {
+     "typ": "situation",
+     "label": "Arbeitsauftrag",
+     "text": "Erläutern Sie das Instanzenmodell nach Freud am Beispiel von Lea."
+    },
+    {
+     "typ": "text",
+     "text": "Prüfungsaufgaben sind in der Sie-Form formuliert. Damit du dich daran gewöhnst, steht der Arbeitsauftrag hier genauso wie in der Prüfung."
+    },
+    {
+     "typ": "text",
+     "text": "Du sollst nicht nur sagen, **was** das Instanzenmodell ist, sondern es auch **am Beispiel** zeigen. Das Ergebnis ist ein Fachaufsatz: ein zusammenhängender Text, der in Absätzen aufgebaut ist."
+    },
+    {
+     "typ": "text",
+     "text": "**Das lernst du in diesem Kurs:**\n- aus welchen Bausteinen ein Fachaufsatz besteht und in welcher Reihenfolge sie stehen\n- Theorie und Anwendung zu unterscheiden\n- wozu Überleitungen da sind\n- einen eigenen Fachaufsatz mit Strukturhilfe zu schreiben"
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Ein Fachaufsatz besteht aus **Bausteinen**. Wer die Bausteine kennt, weiß bei jeder Aufgabe, was als Nächstes kommt."
+    },
+    {
+     "typ": "text",
+     "text": "**Voraussetzung:** Du solltest das Instanzenmodell kennen. Wenn nicht, bearbeite zuerst den Kurs **Freud: Instanzenmodell (Es, Ich, Über-Ich)**."
+    }
+   ]
+  },
+  {
+   "kicker": "Erster Versuch",
+   "titel": "Aufgabe 1: Ordne die Absätze",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Unten stehen die Absätze eines Fachaufsatzes zum Arbeitsauftrag von der letzten Seite. Sie sind durcheinander geraten. Du kennst die Bausteine noch nicht? Das ist in Ordnung. Überlege, was ein Leser zuerst wissen muss und was auf wessen Ergebnis aufbaut."
+    },
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe die Absätze in die richtige Reihenfolge, um einen strukturierten Fachaufsatz zu erhalten.",
+     "hinweis": "Verschiebe die Absätze mit den Pfeilen. Nach dem Überprüfen siehst du, welche Absätze schon richtig stehen.",
+     "absaetze": [
+      "Im Folgenden soll das Instanzenmodell nach Freud am Beispiel von Lea erläutert werden.",
+      "Sigmund Freud versteht die Persönlichkeit des Menschen als Zusammenspiel von drei Instanzen: Es, Über-Ich und Ich. Diese Instanzen wirken zum großen Teil unbewusst und stehen oft in einem Spannungsverhältnis zueinander.",
+      "Das Es ist angeboren und arbeitet unbewusst. Es enthält die Triebe und Bedürfnisse des Menschen und folgt dem Lustprinzip: Es verlangt sofortige Befriedigung, ohne Rücksicht auf Realität oder Moral.",
+      "Im Beispiel wird das Es von Lea deutlich in ihrem Wunsch, sofort zum Spieleabend zu gehen. Dieses Bedürfnis nach Spaß und Gemeinschaft drängt auf unmittelbare Erfüllung, obwohl die Kurzarbeit bevorsteht.",
+      "Dem Es steht jedoch eine Instanz gegenüber, die Forderungen an den Menschen stellt: das Über-Ich.",
+      "Das Über-Ich entsteht in der Kindheit durch die Verinnerlichung der Normen und Werte der Eltern und der Gesellschaft. Es arbeitet nach dem Moralitätsprinzip und meldet sich mit Schuldgefühlen, wenn gegen diese Normen verstoßen wird.",
+      "Im Beispiel zeigt sich das Über-Ich in Leas Gedanken, dass nur gute Vorbereitung eine gute Note verdient. Hier wirkt eine verinnerlichte Leistungsnorm, die bei fehlender Vorbereitung ein schlechtes Gewissen auslösen würde.",
+      "Zwischen den Wünschen des Es und den Forderungen des Über-Ichs muss eine dritte Instanz vermitteln: das Ich.",
+      "Das Ich entwickelt sich aus dem Es, ist überwiegend bewusst und folgt dem Realitätsprinzip. Es nimmt die Wirklichkeit wahr, plant und vermittelt zwischen Es, Über-Ich und Realität, indem es Befriedigung aufschiebt oder angemessene Wege sucht.",
+      "Im Beispiel wird das Ich von Lea darin deutlich, dass sie abwägt und einen Kompromiss findet: Sie lernt zunächst eine Stunde und geht danach zu ihren Freunden. So wird das Bedürfnis des Es erfüllt, ohne dass das Über-Ich verletzt wird."
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Auflösung",
+   "titel": "So ist ein Fachaufsatz aufgebaut",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Hier siehst du denselben Fachaufsatz in der richtigen Reihenfolge. Die farbige Überschrift nennt den **Baustein**, den der Absatz erfüllt. Die Farbe zeigt, zu welcher Instanz er gehört."
+    },
+    {
+     "typ": "aufbau",
+     "legende": [
+      {
+       "name": "Einleitung und Überleitungen",
+       "farbe": "pfirsich"
+      },
+      {
+       "name": "Es",
+       "farbe": "rot"
+      },
+      {
+       "name": "Über-Ich",
+       "farbe": "blau"
+      },
+      {
+       "name": "Ich",
+       "farbe": "gelb"
+      }
+     ],
+     "zeilen": [
+      {
+       "label": "Themafrage aufgreifen",
+       "farbe": "pfirsich",
+       "text": "Im Folgenden soll das Instanzenmodell nach Freud am Beispiel von Lea erläutert werden."
+      },
+      {
+       "label": "Definition: Instanzenmodell",
+       "farbe": "pfirsich",
+       "text": "Sigmund Freud versteht die Persönlichkeit des Menschen als Zusammenspiel von drei Instanzen: Es, Über-Ich und Ich. Diese Instanzen wirken zum großen Teil unbewusst und stehen oft in einem Spannungsverhältnis zueinander."
+      },
+      {
+       "label": "Theorieaspekte zum Es",
+       "farbe": "rot",
+       "text": "Das Es ist angeboren und arbeitet unbewusst. Es enthält die Triebe und Bedürfnisse des Menschen und folgt dem Lustprinzip: Es verlangt sofortige Befriedigung, ohne Rücksicht auf Realität oder Moral."
+      },
+      {
+       "label": "Anwendung und Rückbezug zum Es",
+       "farbe": "rot",
+       "text": "Im Beispiel wird das Es von Lea deutlich in ihrem Wunsch, sofort zum Spieleabend zu gehen. Dieses Bedürfnis nach Spaß und Gemeinschaft drängt auf unmittelbare Erfüllung, obwohl die Kurzarbeit bevorsteht."
+      },
+      {
+       "label": "Überleitung zum Über-Ich",
+       "farbe": "pfirsich",
+       "text": "Dem Es steht jedoch eine Instanz gegenüber, die Forderungen an den Menschen stellt: das Über-Ich."
+      },
+      {
+       "label": "Theorieaspekte zum Über-Ich",
+       "farbe": "blau",
+       "text": "Das Über-Ich entsteht in der Kindheit durch die Verinnerlichung der Normen und Werte der Eltern und der Gesellschaft. Es arbeitet nach dem Moralitätsprinzip und meldet sich mit Schuldgefühlen, wenn gegen diese Normen verstoßen wird."
+      },
+      {
+       "label": "Anwendung und Rückbezug zum Über-Ich",
+       "farbe": "blau",
+       "text": "Im Beispiel zeigt sich das Über-Ich in Leas Gedanken, dass nur gute Vorbereitung eine gute Note verdient. Hier wirkt eine verinnerlichte Leistungsnorm, die bei fehlender Vorbereitung ein schlechtes Gewissen auslösen würde."
+      },
+      {
+       "label": "Überleitung zum Ich",
+       "farbe": "pfirsich",
+       "text": "Zwischen den Wünschen des Es und den Forderungen des Über-Ichs muss eine dritte Instanz vermitteln: das Ich."
+      },
+      {
+       "label": "Theorieaspekte zum Ich",
+       "farbe": "gelb",
+       "text": "Das Ich entwickelt sich aus dem Es, ist überwiegend bewusst und folgt dem Realitätsprinzip. Es nimmt die Wirklichkeit wahr, plant und vermittelt zwischen Es, Über-Ich und Realität, indem es Befriedigung aufschiebt oder angemessene Wege sucht."
+      },
+      {
+       "label": "Anwendung und Rückbezug zum Ich",
+       "farbe": "gelb",
+       "text": "Im Beispiel wird das Ich von Lea darin deutlich, dass sie abwägt und einen Kompromiss findet: Sie lernt zunächst eine Stunde und geht danach zu ihren Freunden. So wird das Bedürfnis des Es erfüllt, ohne dass das Über-Ich verletzt wird."
+      }
+     ]
+    },
+    {
+     "typ": "text",
+     "text": "**Drei Dinge fallen auf:**"
+    },
+    {
+     "typ": "text",
+     "text": "- Der Aufsatz **beginnt** mit der Themafrage und einer Definition. So weiß der Leser, worum es geht.\n- Zu **jeder Instanz** gehört ein Paar: erst die **Theorie**, dann die **Anwendung mit Rückbezug** auf das Beispiel.\n- **Überleitungen** verbinden die Instanzen, damit ein zusammenhängender Gedankengang entsteht."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Aufbau: Themafrage aufgreifen → Definition → für jeden Teilaspekt: Theorie → Anwendung und Rückbezug → Überleitung zum nächsten Teilaspekt."
+    }
+   ]
+  },
+  {
+   "kicker": "Üben",
+   "titel": "Aufgabe 2: Bausteine erkennen",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Jetzt bestimmst du selbst, welche Aufgabe ein Satz im Fachaufsatz hat. Die Sätze stammen aus dem Aufsatz zu Lea."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Welchem Baustein gehört der Satz an?",
+     "hinweis": "Ordne jede Aussage dem passenden Baustein zu.",
+     "kategorien": [
+      {
+       "name": "Themafrage",
+       "items": [
+        "Im Folgenden soll das Instanzenmodell nach Freud am Beispiel von Lea erläutert werden."
+       ]
+      },
+      {
+       "name": "Definition",
+       "items": [
+        "Sigmund Freud versteht die Persönlichkeit des Menschen als Zusammenspiel von drei Instanzen: Es, Über-Ich und Ich."
+       ]
+      },
+      {
+       "name": "Theorie",
+       "items": [
+        "Das Es ist angeboren und arbeitet unbewusst.",
+        "Das Über-Ich entsteht in der Kindheit durch die Verinnerlichung der Normen und Werte der Eltern und der Gesellschaft."
+       ]
+      },
+      {
+       "name": "Anwendung",
+       "items": [
+        "Im Beispiel wird das Es von Lea deutlich in ihrem Wunsch, sofort zum Spieleabend zu gehen.",
+        "Im Beispiel wird das Ich von Lea darin deutlich, dass sie abwägt und einen Kompromiss findet."
+       ]
+      },
+      {
+       "name": "Überleitung",
+       "items": [
+        "Dem Es steht jedoch eine Instanz gegenüber, die Forderungen an den Menschen stellt: das Über-Ich.",
+        "Zwischen den Wünschen des Es und den Forderungen des Über-Ichs muss eine dritte Instanz vermitteln: das Ich."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Vertiefen",
+   "titel": "Theorie und Anwendung unterscheiden",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Die meisten Punkte gehen in Prüfungen verloren, weil Theorie und Anwendung vermischt werden. Dabei sind die Unterschiede klar:"
+    },
+    {
+     "typ": "text",
+     "text": "- **Theorie:** allgemein, gilt für alle Menschen, nutzt Fachbegriffe, nennt keine Namen aus der Situation.\n- **Anwendung mit Rückbezug:** konkret, bezieht sich auf die Person in der Situation und zeigt, **wo im Beispiel** der Fachbegriff erkennbar wird."
+    },
+    {
+     "typ": "merke",
+     "label": "Formulierungen für den Rückbezug",
+     "text": "„Im Beispiel wird … deutlich in …“ · „… zeigt sich in …“ · „In der Situation wird … darin deutlich, dass …“"
+    },
+    {
+     "typ": "text",
+     "text": "**Woran erkennst du, dass eine Anwendung gefragt ist?** Achte auf die Wörter „am Beispiel“:\n- „Erläutern Sie das Instanzenmodell **am Beispiel von** Lea.“\n- „Zeigen Sie das Über-Ich … **am Beispiel eines Schülers** … auf.“"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile die Aussagen zum Aufbau eines Fachaufsatzes.",
+     "aussagen": [
+      {
+       "text": "Ein Theorieabsatz gilt allgemein und kommt ohne den Namen der Person aus der Situation aus.",
+       "richtig": true,
+       "erklaerung": "Die Theorie ist unabhängig vom Beispiel und gilt für alle Menschen."
+      },
+      {
+       "text": "Steht in der Aufgabe „am Beispiel von Lea“, genügt es, die Theorie vollständig zu schreiben.",
+       "richtig": false,
+       "erklaerung": "„Am Beispiel“ verlangt zusätzlich die Anwendung mit Rückbezug auf die Situation."
+      },
+      {
+       "text": "Beim Rückbezug zeige ich, woran man den Fachbegriff im Beispiel erkennt.",
+       "richtig": true,
+       "erklaerung": "Der Rückbezug verknüpft Theorie und Beispiel, zum Beispiel: „Im Beispiel wird das Es deutlich in Leas Wunsch …“"
+      },
+      {
+       "text": "Die Anwendung wiederholt einfach die Definition mit anderen Worten.",
+       "richtig": false,
+       "erklaerung": "Die Anwendung bleibt konkret: Sie nennt, was die Person in der Situation denkt oder tut."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Aufgabe hat eine Überleitung im Fachaufsatz?",
+     "optionen": [
+      "Sie fasst den gesamten Aufsatz noch einmal zusammen.",
+      "Sie verbindet den bisherigen Gedanken mit dem nächsten und macht den roten Faden sichtbar.",
+      "Sie ersetzt die Theorie, wenn man den Fachbegriff nicht mehr weiß.",
+      "Sie liefert ein weiteres Beispiel aus dem Alltag."
+     ],
+     "richtig": 1,
+     "erklaerung": "Der Satz „Dem Es steht jedoch eine Instanz gegenüber …“ führt vom Es zum Über-Ich. So liest sich der Text als zusammenhängender Gedankengang und nicht wie eine Aufzählung."
+    }
+   ]
+  },
+  {
+   "kicker": "Fachsprache",
+   "titel": "Theorie sicher beherrschen",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Für den Theorie-Baustein brauchst du die Fachbegriffe **vollständig und fachsprachlich**. Teste dich:"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne jeder Instanz die passende Erklärung zu.",
+     "paare": [
+      [
+       "Es",
+       "angeboren, unbewusst, Triebe und Bedürfnisse, Lustprinzip"
+      ],
+      [
+       "Über-Ich",
+       "verinnerlichte Normen und Werte, Gewissen, Moralitätsprinzip, Schuldgefühle"
+      ],
+      [
+       "Ich",
+       "überwiegend bewusst, vermittelt zwischen Es, Über-Ich und Realität, Realitätsprinzip"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Anwendungsabsatz zum Es. Achte darauf, wie der Rückbezug zur Theorie hergestellt wird.",
+     "text": "Im Beispiel wird das {{Es}} von Lea deutlich in ihrem {{Wunsch}}, sofort zum Spieleabend zu gehen. Dieses Bedürfnis drängt auf {{unmittelbare}} Erfüllung, obwohl die {{Kurzarbeit}} bevorsteht.",
+     "woerter": [
+      "Es",
+      "Wunsch",
+      "unmittelbare",
+      "Kurzarbeit",
+      "Gewissen",
+      "Ich",
+      "spätere"
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Selbst schreiben",
+   "titel": "Einen Baustein selbst schreiben",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Du schreibst jetzt zum ersten Mal selbst: ein Baustein-Paar aus **Theorie** und **Anwendung mit Rückbezug**."
+    },
+    {
+     "typ": "situation",
+     "label": "Aufgabenstellung",
+     "text": "Zeigen Sie das **ÜBER-ICH** als Instanz nach Freud am Beispiel eines Schülers auf, der in der Pause das Pausenbrot eines Mitschülers an sich nehmen möchte, aber sofort ein schlechtes Gewissen bekommt und es liegen lässt."
+    },
+    {
+     "typ": "frei",
+     "frage": "Formulieren Sie das ÜBER-ICH als Instanz aus. Achten Sie darauf, zunächst den Theorieaspekt vollständig und fachsprachlich wiederzugeben. Im zweiten Schritt erfolgt die Anwendung mit Rückbezug zum Theorieaspekt.",
+     "hinweis": "Schreibe in ganzen Sätzen, erst die Theorie, dann die Anwendung. Danach siehst du eine Musterlösung und prüfst dich mit sechs Fragen.",
+     "muster": "Das Über-Ich entsteht in der Kindheit dadurch, dass ein Mensch die Normen und Werte seiner Eltern und der Gesellschaft verinnerlicht. Es arbeitet nach dem Moralitätsprinzip und bewertet Gedanken und Handlungen. Verstößt jemand gegen die verinnerlichten Normen, meldet sich das Über-Ich mit Schuldgefühlen oder einem schlechten Gewissen. Hier im Beispiel zeigt sich das Über-Ich darin, dass der Schüler sofort ein schlechtes Gewissen bekommt, als er das Pausenbrot nehmen möchte. Die verinnerlichte Norm, dass man fremdes Eigentum nicht nimmt, hält ihn davon ab, und er legt das Brot zurück.",
+     "kriterien": [
+      "Ich habe die Entstehung des Über-Ichs genannt (Verinnerlichung der Normen von Eltern und Gesellschaft).",
+      "Ich habe das Prinzip genannt (Moralitätsprinzip).",
+      "Ich habe die Wirkung genannt (Schuldgefühle, schlechtes Gewissen).",
+      "Ich habe die Situation des Schülers eingebunden (er bekommt ein schlechtes Gewissen).",
+      "Ich habe die verinnerlichte Norm im Beispiel benannt (fremdes Eigentum nicht nehmen).",
+      "Ich habe die Anwendung mit einem Rückbezug eingeleitet (z. B. „Hier im Beispiel zeigt sich …“)."
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Der ganze Fachaufsatz",
+   "titel": "Aufgabe 3: Fachaufsatz mit Strukturstreifen",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Jetzt kommt alles zusammen. Du schreibst einen vollständigen Fachaufsatz. Die farbigen Streifen zeigen dir den Aufbau, genau wie auf der Auflösungsseite. Die Farben bedeuten: **Rot** = Es, **Blau** = Über-Ich, **Gelb** = Ich, **Pfirsich** = Einleitung und Überleitungen."
+    },
+    {
+     "typ": "strukturstreifen",
+     "titel": "Formulieren Sie einen Fachaufsatz zum Instanzenmodell nach Freud aus.",
+     "aufgabe": "Erläutern Sie das Instanzenmodell nach Freud am Beispiel eines Schülers, der nachts noch Serien schauen möchte, obwohl er am nächsten Morgen eine Präsentation halten muss.",
+     "felder": [
+      {
+       "titel": "Aufgreifen der Themafrage",
+       "farbe": "pfirsich",
+       "hilfe": "Greife die Aufgabenstellung in einem Satz mit eigenen Worten auf: Was soll woran gezeigt werden?",
+       "muster": "Im Folgenden soll das Instanzenmodell nach Freud am Beispiel eines Schülers erläutert werden, der nachts noch Serien schauen möchte, obwohl er am nächsten Morgen eine Präsentation halten muss."
+      },
+      {
+       "titel": "Definition: Instanzenmodell",
+       "farbe": "pfirsich",
+       "hilfe": "Nenne, wer das Modell entwickelt hat, und die drei Instanzen. Erwähne, dass sie zum großen Teil unbewusst wirken.",
+       "muster": "Sigmund Freud versteht die Persönlichkeit des Menschen als Zusammenspiel von drei Instanzen: Es, Über-Ich und Ich. Diese Instanzen wirken zum großen Teil unbewusst und stehen oft in einem Spannungsverhältnis zueinander."
+      },
+      {
+       "titel": "Theorieaspekte zum Es",
+       "farbe": "rot",
+       "hilfe": "Wann ist das Es da? Wo wirkt es (bewusst oder unbewusst)? Was enthält es? Nach welchem Prinzip arbeitet es?",
+       "muster": "Das Es ist angeboren und arbeitet unbewusst. Es enthält die Triebe und Bedürfnisse des Menschen und folgt dem Lustprinzip: Es verlangt sofortige Befriedigung, ohne Rücksicht auf Realität oder Moral."
+      },
+      {
+       "titel": "Anwendung und Rückbezug zum Es",
+       "farbe": "rot",
+       "hilfe": "Welches Bedürfnis hat der Schüler? Wie zeigt sich das sofortige Bedürfnis? Knüpfe an die Theorie an („Im Beispiel wird … deutlich in …“).",
+       "muster": "Im Beispiel wird das Es des Schülers deutlich in seinem Wunsch, sofort die nächste Folge zu sehen. Das Bedürfnis nach Unterhaltung drängt auf unmittelbare Erfüllung, obwohl die Präsentation am nächsten Morgen bevorsteht."
+      },
+      {
+       "titel": "Überleitung zum Über-Ich",
+       "farbe": "pfirsich",
+       "hilfe": "Ein Satz, der vom Es zum Über-Ich führt: Welche Instanz stellt dem Es etwas entgegen?",
+       "muster": "Dem Es steht jedoch eine Instanz gegenüber, die Forderungen an den Menschen stellt: das Über-Ich."
+      },
+      {
+       "titel": "Theorieaspekte zum Über-Ich",
+       "farbe": "blau",
+       "hilfe": "Wie entsteht es? Welche Normen enthält es? Nach welchem Prinzip arbeitet es? Was passiert bei einem Verstoß?",
+       "muster": "Das Über-Ich entsteht in der Kindheit durch die Verinnerlichung der Normen und Werte der Eltern und der Gesellschaft. Es arbeitet nach dem Moralitätsprinzip und meldet sich mit Schuldgefühlen, wenn gegen diese Normen verstoßen wird."
+      },
+      {
+       "titel": "Anwendung und Rückbezug zum Über-Ich",
+       "farbe": "blau",
+       "hilfe": "Welche verinnerlichte Regel erkennst du beim Schüler? Welches Gefühl meldet sich?",
+       "muster": "Im Beispiel zeigt sich das Über-Ich in dem Gedanken des Schülers, dass man vor einer Präsentation vorbereitet und ausgeschlafen sein sollte. Diese verinnerlichte Norm löst bei weiterem Serienschauen ein schlechtes Gewissen aus."
+      },
+      {
+       "titel": "Überleitung zum Ich",
+       "farbe": "pfirsich",
+       "hilfe": "Ein Satz, der zum Ich führt: Wer vermittelt zwischen den beiden gegensätzlichen Forderungen?",
+       "muster": "Zwischen den Wünschen des Es und den Forderungen des Über-Ichs muss eine dritte Instanz vermitteln: das Ich."
+      },
+      {
+       "titel": "Theorieaspekte zum Ich",
+       "farbe": "gelb",
+       "hilfe": "Wie entsteht das Ich? Ist es bewusst oder unbewusst? Nach welchem Prinzip arbeitet es? Was ist seine Aufgabe?",
+       "muster": "Das Ich entwickelt sich aus dem Es, ist überwiegend bewusst und folgt dem Realitätsprinzip. Es nimmt die Wirklichkeit wahr, plant und vermittelt zwischen Es, Über-Ich und Realität, indem es Befriedigung aufschiebt oder angemessene Wege sucht."
+      },
+      {
+       "titel": "Anwendung und Rückbezug zum Ich",
+       "farbe": "gelb",
+       "hilfe": "Wie entscheidet sich der Schüler? Welchen Kompromiss findet er, und wie schiebt er das Bedürfnis auf?",
+       "muster": "Im Beispiel wird das Ich des Schülers darin deutlich, dass er die Folgen abwägt und eine Lösung findet: Er schaut noch eine Folge und geht dann schlafen. So wird das Bedürfnis des Es zum Teil erfüllt, ohne dass die Präsentation und das Über-Ich zu kurz kommen."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Abschluss",
+   "titel": "Erkläre es in eigenen Worten",
+   "bloecke": [
+    {
+     "typ": "frei",
+     "frage": "Erkläre in eigenen Worten: Warum folgt im Fachaufsatz auf jeden Theorieaspekt ein Absatz mit Anwendung und Rückbezug? Und wozu braucht der Text Überleitungen?",
+     "hinweis": "Schreibe drei bis fünf Sätze.",
+     "muster": "Mit dem Theorieaspekt zeige ich, dass ich den Fachbegriff vollständig und fachsprachlich verstanden habe. Mit der Anwendung und dem Rückbezug beweise ich, dass ich ihn auf den konkreten Fall übertragen kann. Genau das verlangt die Formulierung „am Beispiel“ in der Aufgabenstellung. Die Überleitungen verbinden die Instanzen zu einem zusammenhängenden Gedankengang, damit der Aufsatz nicht wie eine bloße Aufzählung wirkt."
+    },
+    {
+     "typ": "merke",
+     "label": "Das nimmst du mit",
+     "text": "Jeder Fachaufsatz folgt demselben Grundgerüst: **Themafrage aufgreifen → Definition → Theorie → Anwendung und Rückbezug → Überleitung** (und das für jeden Teilaspekt der Aufgabe). Im Abschlussprüfungstraining wendest du dieses Gerüst auf weitere Themen an."
+    }
+   ]
+  }
+ ]
+}
