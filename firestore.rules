@@ -796,6 +796,12 @@ service cloud.firestore {
       allow create, update, delete: if isTeacher();
     }
 
+    // Verschobene Stunden im Stoffverteilungsplan (Unterricht Pädagogik/Psychologie): ein Dokument "pp12".
+    match /lehrplanPlan/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+
     match /didaktikHinweise/{id} {
       allow read: if isApproved();
       allow create, update, delete: if isTeacher();

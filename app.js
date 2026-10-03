@@ -3899,6 +3899,202 @@ function pp12BarTag(e){
 }
 
 // ============================================================
+// PLAN VERSCHIEBEN (nur Lehrkräfte): einzelne Stunden oder alles ab einer Stunde um einen Unterrichtstag.
+// Grundlage ist die feste Liste PP12_BASIS (= PP12_PLAN oben). Änderungen liegen in Firestore: lehrplanPlan/pp12.
+// Die Stundenzahl gehört zum Termin (Mo 1, Mi 2, Fr 2). Leistungsnachweise und Prüfungen bleiben auf ihrem Datum.
+// ============================================================
+const PP12_BASIS=PP12_PLAN.map(e=>({...e,id:e.d}));
+PP12_PLAN.forEach(e=>{e.id=e.d;});
+const PP12_SLOT_H=Object.fromEntries(PP12_BASIS.map(e=>[e.d,e.h]));
+const PP12_SLOTSET=new Set(PP12_BASIS.map(e=>e.d));
+const PP12_FIX=e=>e.typ==="leistung"||e.typ==="pruefung";
+const PP12_MSLOTS=PP12_BASIS.filter(e=>!PP12_FIX(e)).map(e=>e.d);
+let PP12_OVER={datum:{},park:[],eigene:{},parkTafeln:{}};
+let PP12_PARK=[];
+function pp12Modell(over){
+ const reg={};
+ PP12_BASIS.filter(e=>!PP12_FIX(e)).forEach(e=>{reg[e.id]={...e};});
+ Object.entries(over.eigene||{}).forEach(([id,e])=>{reg[id]={id,t:e.t,lb:e.lb||0,typ:e.typ||"wdh",eigen:true};});
+ const park=(over.park||[]).filter(id=>reg[id]);
+ const arr=PP12_MSLOTS.map(()=>null);
+ for(const id of Object.keys(reg)){
+  if(park.includes(id))continue;
+  const d=(over.datum&&over.datum[id])||(reg[id].eigen?null:id);
+  const i=PP12_MSLOTS.indexOf(d);
+  if(i<0||arr[i])return null;
+  arr[i]=id;
+ }
+ return{reg,park,arr};
+}
+function pp12PlanBauen(m){
+ const out=PP12_BASIS.filter(PP12_FIX).map(e=>({...e}));
+ m.arr.forEach((id,i)=>{if(!id)return;const e=m.reg[id],d=PP12_MSLOTS[i];out.push({...e,d,h:PP12_SLOT_H[d],id});});
+ return out.sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+}
+function pp12Anwenden(over){
+ over=over||{};
+ let m=pp12Modell(over);
+ if(!m){console.warn("Gespeicherte Planänderung passt nicht zum Grundplan und wird ignoriert.");over={};m=pp12Modell(over);}
+ PP12_OVER={datum:over.datum||{},park:over.park||[],eigene:over.eigene||{},parkTafeln:over.parkTafeln||{}};
+ PP12_PLAN.splice(0,PP12_PLAN.length,...pp12PlanBauen(m));
+ PP12_PARK=m.park.map(id=>m.reg[id]);
+}
+const pp12Kopie=m=>({reg:{...m.reg},park:m.park.slice(),arr:m.arr.slice()});
+// Diese Stunde mit der Nachbarstunde tauschen (auch auf einen freien Termin).
+function pp12Tausch(m,id,dir){
+ const a=m.arr,i=a.indexOf(id),j=i+dir;
+ if(i<0||j<0||j>=a.length)return{fehler:"Weiter geht es nicht: In dieser Richtung gibt es keinen weiteren Unterrichtstermin."};
+ [a[i],a[j]]=[a[j],a[i]];
+ return{m};
+}
+// Diese und alle folgenden Stunden um einen Unterrichtstag verschieben. Die Verschiebung endet am ersten freien Termin.
+function pp12Ab(m,id,dir){
+ const a=m.arr,n=a.length,i=a.indexOf(id);
+ if(i<0)return{fehler:"Stunde nicht gefunden."};
+ if(dir>0){
+  let j=i+1;while(j<n&&a[j]!==null)j++;
+  let geparkt=null;
+  if(j>=n){geparkt=a[n-1];j=n-1;}
+  for(let k=j;k>i;k--)a[k]=a[k-1];
+  a[i]=null;
+  if(geparkt)m.park.push(geparkt);
+  return{m,geparkt};
+ }
+ if(i===0||a[i-1]!==null)return{fehler:"Davor ist kein freier Termin. Verschiebe zuerst die Stunden davor weiter nach hinten oder nutze ‹ › an einer einzelnen Stunde."};
+ let j=i;while(j<n&&a[j]!==null)j++;
+ for(let k=i;k<j;k++)a[k-1]=a[k];
+ a[j-1]=null;
+ return{m};
+}
+function pp12DatumVon(m,id){const i=m.arr.indexOf(id);return i<0?null:PP12_MSLOTS[i];}
+// Speichert den neuen Plan und nimmt die Tafeln der Stunden mit (Tafeln hängen am Datum).
+async function pp12Speichern(neu,alt){
+ const over={datum:{},park:neu.park.slice(),eigene:{},parkTafeln:{}};
+ neu.arr.forEach((id,i)=>{if(id)over.datum[id]=PP12_MSLOTS[i];});
+ Object.values(neu.reg).forEach(e=>{if(e.eigen)over.eigene[e.id]={t:e.t,lb:e.lb||0,typ:e.typ||"wdh"};});
+ const T=PP12_CACHE.tafeln,final={},betroffen=new Set(),parkT={...(PP12_OVER.parkTafeln||{})};
+ const ids=new Set([...Object.keys(neu.reg),...Object.keys(alt.reg)]);
+ ids.forEach(id=>{
+  const o=pp12DatumVon(alt,id),n=neu.reg[id]?pp12DatumVon(neu,id):null;
+  if(o===n)return;
+  if(o)betroffen.add(o);if(n)betroffen.add(n);
+  const data=o?T[o]:parkT[id];
+  if(!o)delete parkT[id];
+  if(data){if(n)final[n]=data;else if(neu.reg[id])parkT[id]=data;}
+ });
+ over.parkTafeln=Object.fromEntries(Object.entries(parkT).filter(([id])=>neu.reg[id]&&neu.park.includes(id)));
+ await setDoc(doc(db,"lehrplanPlan","pp12"),{...over,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
+ for(const d of betroffen){
+  if(final[d]){await setDoc(doc(db,"lehrplanTafeln",d),final[d]);T[d]=final[d];}
+  else if(T[d]){await deleteDoc(doc(db,"lehrplanTafeln",d));delete T[d];}
+ }
+ pp12Anwenden(over);
+}
+async function pp12Aendern(fn,erfolg){
+ if(!isTeacher()||pp12Beschaeftigt)return;
+ pp12Beschaeftigt=true;
+ try{
+  await pp12DatenLaden(true);
+  const alt=pp12Modell(PP12_OVER);
+  if(!alt){toast("Der gespeicherte Plan passt nicht zum Grundplan. Bitte „Plan zurücksetzen“ nutzen.");return;}
+  const neu=pp12Kopie(alt);
+  const r=fn(neu,alt);
+  if(!r||r.fehler){toast(r&&r.fehler?r.fehler:"Nichts geändert.");return;}
+  if(r.frage&&!confirm(r.frage))return;
+  await pp12Speichern(r.m||neu,alt);
+  await render();
+  if(erfolg)toast(erfolg);
+ }catch(err){
+  console.error("Plan verschieben:",err);
+  toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln (lehrplanPlan) veröffentlichen.":"Der Plan konnte nicht geändert werden.");
+ }finally{pp12Beschaeftigt=false;}
+}
+const pp12Titel=(m,id)=>{const e=m.reg[id];return e?e.t:"";};
+// Einzelne Stunde einen Unterrichtstag früher (-1) oder später (+1)
+function pp12Eine(id,dir){
+ return pp12Aendern((m)=>pp12Tausch(m,id,dir),dir<0?"Stunde einen Unterrichtstag vorgezogen.":"Stunde einen Unterrichtstag nach hinten gelegt.");
+}
+// Diese und alle folgenden Stunden einen Unterrichtstag früher (-1) oder später (+1)
+function pp12AbHier(id,dir){
+ return pp12Aendern((m)=>{
+  const r=pp12Ab(m,id,dir);
+  if(r.geparkt)r.frage="Es gibt keinen freien Termin mehr im Plan. Die letzte verschiebbare Stunde („"+pp12Titel(m,r.geparkt)+"“) wird deshalb zurückgestellt. Du findest sie unten unter „Zurückgestellte Stunden“ und kannst sie wieder einplanen. Fortfahren?";
+  return r;
+ },dir<0?"Alles ab dieser Stunde einen Unterrichtstag vorgezogen.":"Alles ab dieser Stunde einen Unterrichtstag nach hinten geschoben.");
+}
+// Ein Klick: ab der nächsten Stunde (nach heute) alles einen Unterrichtstag zurück bzw. wieder vor
+function pp12NaechsteStundeId(){
+ const heute=new Date().toISOString().slice(0,10);
+ const e=PP12_PLAN.find(x=>!PP12_FIX(x)&&x.id&&x.d>heute);
+ return e?e.id:null;
+}
+function pp12Gesamt(dir){
+ if(dir>0){
+  const id=pp12NaechsteStundeId();
+  if(!id){toast("Es gibt keine weitere Stunde nach heute, die verschoben werden könnte.");return;}
+  return pp12AbHier(id,1);
+ }
+ const heute=new Date().toISOString().slice(0,10);
+ return pp12Aendern((m)=>{
+  const g=m.arr.findIndex((id,i)=>id===null&&PP12_MSLOTS[i]>heute);
+  if(g<0)return{fehler:"Es gibt keinen freien Termin zum Aufholen."};
+  const i=m.arr.findIndex((id,k)=>k>g&&id!==null);
+  if(i<0)return{fehler:"Hinter dem freien Termin folgt keine Stunde mehr."};
+  return pp12Ab(m,m.arr[i],-1);
+ },"Der freie Termin wurde aufgeholt: Alles ab der nächsten Stunde ist einen Unterrichtstag früher.");
+}
+// Freien Termin (Reserve) mit einer Fortsetzungsstunde füllen
+function pp12ReserveFuellen(datum){
+ const vorher=[...PP12_PLAN].reverse().find(x=>x.d<datum&&x.lb>0&&!PP12_FIX(x));
+ const t=prompt("Titel der Stunde (z. B. Fortsetzung des letzten Themas):",vorher?("Fortsetzung: "+vorher.t).slice(0,140):"Fortsetzung");
+ if(t===null||!t.trim())return;
+ return pp12Aendern((m)=>{
+  const i=PP12_MSLOTS.indexOf(datum);
+  if(i<0||m.arr[i]!==null)return{fehler:"Dieser Termin ist nicht mehr frei."};
+  const id="x"+Date.now().toString(36);
+  m.reg[id]={id,t:t.trim().slice(0,140),lb:vorher?vorher.lb:0,typ:"wdh",eigen:true};
+  m.arr[i]=id;
+  return{m};
+ },"Stunde eingetragen.");
+}
+function pp12EigeneLoeschen(id){
+ return pp12Aendern((m)=>{
+  const i=m.arr.indexOf(id);
+  if(i>=0)m.arr[i]=null;
+  m.park=m.park.filter(x=>x!==id);
+  delete m.reg[id];
+  return{m,frage:"Diese selbst eingetragene Stunde entfernen? Der Termin wird wieder frei."};
+ },"Stunde entfernt.");
+}
+function pp12Einplanen(id){
+ const heute=new Date().toISOString().slice(0,10);
+ return pp12Aendern((m)=>{
+  let i=m.arr.findIndex((x,k)=>x===null&&PP12_MSLOTS[k]>=heute);
+  if(i<0)i=m.arr.findIndex(x=>x===null);
+  if(i<0)return{fehler:"Es gibt keinen freien Termin. Schiebe zuerst mit ‹ › Stunden vor, damit ein Termin frei wird."};
+  m.park=m.park.filter(x=>x!==id);
+  m.arr[i]=id;
+  return{m};
+ },"Stunde wieder eingeplant.");
+}
+function pp12Zuruecksetzen(){
+ return pp12Aendern((m,alt)=>{
+  const b=pp12Modell({});
+  return{m:b,frage:"Den ganzen Plan auf den ursprünglichen Stand zurücksetzen? Alle Verschiebungen und selbst eingetragenen Stunden gehen verloren. Die Tafeln wandern mit ihren Stunden zurück."};
+ },"Plan zurückgesetzt.");
+}
+function pp12CtlHtml(e){
+ if(!isTeacher()||PP12_FIX(e)||!e.id)return"";
+ return`<div class="pp12-ctl"data-id="${esc(e.id)}"role="group"aria-label="Stunde verschieben"><button type="button"data-p12="e-1"title="Nur diese Stunde einen Unterrichtstag früher"aria-label="Diese Stunde früher">‹</button><button type="button"data-p12="e1"title="Nur diese Stunde einen Unterrichtstag später"aria-label="Diese Stunde später">›</button><span class="pp12-ctl-sep"></span><button type="button"data-p12="a-1"title="Diese und alle folgenden Stunden einen Unterrichtstag früher"aria-label="Diese und alle folgenden Stunden früher">‹‹</button><button type="button"data-p12="a1"title="Diese und alle folgenden Stunden einen Unterrichtstag später"aria-label="Diese und alle folgenden Stunden später">››</button>${e.eigen?`<button type="button"data-p12="x"title="Selbst eingetragene Stunde entfernen"aria-label="Stunde entfernen">✕</button>`:""}</div>`;
+}
+if(typeof document!=="undefined")document.addEventListener("click",ev=>{
+ const b=ev.target&&ev.target.closest?ev.target.closest("[data-p12]"):null;if(!b)return;
+ const id=b.parentElement&&b.parentElement.dataset.id,k=b.dataset.p12;if(!id)return;
+ if(k==="e-1")pp12Eine(id,-1);else if(k==="e1")pp12Eine(id,1);else if(k==="a-1")pp12AbHier(id,-1);else if(k==="a1")pp12AbHier(id,1);else if(k==="x")pp12EigeneLoeschen(id);
+});
+Object.assign(window,{pp12Eine,pp12AbHier,pp12Gesamt,pp12ReserveFuellen,pp12EigeneLoeschen,pp12Einplanen,pp12Zuruecksetzen});
+
+// ============================================================
 // DIDAKTIK-HINWEISE (Deeper Learning + UDL) UND TAFEL-VERKNÜPFUNG IM ZEITSTRAHL
 // Grundlage: Deeper-Learning-Phasen nach Sliwka & Klopsch (2022), UDL-Leitlinien 3.0 (CAST 2024).
 // Alle Texte sind eigene, verkürzte Formulierungen. Hinweise sind freiwillig und ausblendbar.
@@ -3932,6 +4128,8 @@ async function pp12DatenLaden(erzwingen){
  try{
   const a=await getDocs(collection(db,"lehrplanTafeln"));
   PP12_CACHE.tafeln=Object.fromEntries(a.docs.map(d=>[d.id,d.data()]));
+  try{const p=await getDoc(doc(db,"lehrplanPlan","pp12"));pp12Anwenden(p.exists()?p.data():{});}
+  catch(e){console.warn("Planänderungen laden:",e);}
   PP12_CACHE.geladen=Date.now();
  }catch(e){console.error("Unterrichtsdaten laden:",e);}
 }
@@ -4043,8 +4241,41 @@ function pp12CssBausteine(){
 }
 Object.assign(window,{pp12Tafel,pp12KompassDrucken});
 
+// Zählt die Lernressourcen je Art (TaskCard, Canva, KI …) für die Kachel „Lernressourcen“ im Unterricht-Bereich.
+const PP12_RES={geladen:0,zaehler:null};
+async function pp12RessourcenZaehlen(){
+ if(PP12_RES.zaehler&&Date.now()-PP12_RES.geladen<60000)return PP12_RES.zaehler;
+ const art=r=>{
+  const raw=String(r.type??r.category??"external").toLowerCase();
+  if(raw.includes("task"))return"taskcard";
+  if(raw.includes("canva"))return"canva";
+  if(raw.includes("learningapps")||raw.includes("learning apps"))return"learningapps";
+  if(raw.includes("bycs")||raw.includes("mebis"))return"bycs";
+  if(raw.includes("video"))return"video";
+  if(raw.includes("ki"))return"ki";
+  return"weitere";
+ };
+ const z={taskcard:0,canva:0,ki:0,video:0,bycs:0,learningapps:0,weitere:0},gesehen=new Set();
+ try{
+  for(const name of["lernressourcen","resources"]){
+   try{
+    const snap=await getDocs(collection(db,name));
+    snap.docs.forEach(d=>{
+     const r=d.data(),key=[String(r.title??r.name??"").trim().toLowerCase(),String(r.url??r.link??"").trim().toLowerCase()].join("|");
+     if(!key.replace(/\|/g,"")||gesehen.has(key))return;
+     gesehen.add(key);z[art(r)]++;
+    });
+   }catch(e){console.warn("Lernressourcen zählen:",name,e);}
+  }
+ }catch(e){console.error(e);}
+ PP12_RES.zaehler=z;PP12_RES.geladen=Date.now();
+ return z;
+}
 async function renderUnterrichtPP(){
  await pp12DatenLaden();
+ const resZ=await pp12RessourcenZaehlen();
+ const resLabel={taskcard:["TaskCard","TaskCards"],canva:["Canva","Canva"],ki:["KI-Angebot","KI-Angebote"],video:["Video","Videos"],bycs:["ByCS / mebis","ByCS / mebis"],learningapps:["LearningApps","LearningApps"],weitere:["weiterer Link","weitere Links"]};
+ const resChips=Object.entries(resZ).filter(([,n])=>n>0).map(([k,n])=>`<span class="chip">${n} ${resLabel[k][n===1?0:1]}</span>`).join("");
  const heute=new Date().toISOString().slice(0,10);
  const tageName={0:"Mo",2:"Mi",4:"Fr"};
  const byDate={};PP12_PLAN.forEach(e=>byDate[e.d]=e);
@@ -4076,9 +4307,13 @@ async function renderUnterrichtPP(){
      <div class="pp12-titel">${esc(e.t)}</div>
      <div class="pp12-tag">${esc(pp12BarTag(e))}</div>
      <div class="pp12-fuss">${pp12TafelHtml(e)}</div>
+     ${pp12CtlHtml(e)}
     </div>`;
    }
    const fe=pp12Ferien(s.d),grund=fe?fe.titel:(PP12_FREI[s.d]||(s.d<PP12_START?"vor Planbeginn":"kein Unterricht"));
+   if(!fe&&PP12_MSLOTS.includes(s.d)){
+    return`<div class="pp12-reserve s${span}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><strong>Reserve</strong><small>freier Termin${isTeacher()?"":" – Zeit zum Vertiefen oder Wiederholen"}</small>${isTeacher()?`<button type="button"class="pp12-res-btn"onclick="pp12ReserveFuellen('${s.d}')">＋ Stunde eintragen</button>`:""}</div>`;
+   }
    return`<div class="pp12-leer s${span}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><small>${esc(grund)}</small></div>`;
   }).join("");
   rows+=`<div class="pp12-woche${istJetzt?" jetzt":""}">
@@ -4091,6 +4326,17 @@ async function renderUnterrichtPP(){
   ...Object.entries(PP12_LB).map(([k,v])=>`<span class="pp12-chip"style="--c:${v.farbe}">${v.kurz} · ${esc(v.titel)}</span>`),
   ...Object.values(PP12_TYP).map(v=>`<span class="pp12-chip"style="--c:${v.farbe}">${esc(v.label)}</span>`)
  ].join("");
+ const nid=pp12NaechsteStundeId(),ne=nid?PP12_PLAN.find(x=>x.id===nid):null;
+ const neTag=ne?({1:"Mo",3:"Mi",5:"Fr"})[new Date(ne.d+"T12:00:00Z").getUTCDay()]||"":"";
+ const tool=isTeacher()?`<div class="card pp12-tool"><strong>Planung verschieben</strong>
+  <p>Thema nicht fertig geworden? Ein Klick schiebt ${ne?`ab der nächsten Stunde (${neTag} ${pp12Datum(ne.d)}: ${esc(ne.t)})`:"ab der nächsten Stunde"} alles um einen Unterrichtstag nach hinten. Der frei werdende Termin ist die Reserve für die Fortsetzung des Themas.</p>
+  <div class="pp12-tool-row">
+   <button type="button"class="secondary"onclick="pp12Gesamt(-1)">‹ Planung einen Tag vor</button>
+   <button type="button"class="primary"onclick="pp12Gesamt(1)">Planung einen Tag zurück ›</button>
+   <button type="button"class="text-button"onclick="pp12Zuruecksetzen()">Plan zurücksetzen</button>
+  </div>
+  <small>An jeder Stunde: <b>‹ ›</b> = nur diese Stunde einen Unterrichtstag früher oder später · <b>‹‹ ››</b> = diese und alle folgenden Stunden. Leistungsnachweise und Prüfungen bleiben auf ihrem Datum, die Stundenzahl richtet sich nach dem Termin (Mo 1, Mi 2, Fr 2).</small></div>`:"";
+ const parkHtml=isTeacher()&&PP12_PARK.length?`<div class="card"style="margin-top:12px"><strong>Zurückgestellte Stunden</strong><p style="margin:6px 0">Diese Stunden haben aktuell keinen Termin.</p>${PP12_PARK.map(e=>`<div class="pp12-park"><span>${esc(e.t)}</span><button type="button"class="secondary"onclick="pp12Einplanen('${esc(e.id)}')">Wieder einplanen</button></div>`).join("")}</div>`:"";
  const lbKarten=Object.entries(PP12_LB).map(([k,v])=>`<div class="pp12-stat"style="--c:${v.farbe}"><strong>${stoffStd[k]} Std.</strong><small>${v.kurz} · ${esc(v.titel)}</small></div>`).join("");
  return`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
  ${pageHead("UNTERRICHT","Unterricht Pädagogik und Psychologie","Stoffverteilungsplan 12. Klasse über das ganze Schuljahr: jede Unterrichtsstunde ein Balken, pro Woche 5 Stunden (Mo 1 Std., Mi 2 Std., Fr 2 Std.).",`${isTeacher()?`<button class="secondary"type="button"onclick="go('didaktik')">Didaktik-Kompass</button>`:""}`)}
@@ -4131,6 +4377,15 @@ async function renderUnterrichtPP(){
   .pp12-leer{border:1px dashed #c6d2df;border-radius:8px;padding:8px 10px;background:repeating-linear-gradient(45deg,#f6f8fb,#f6f8fb 8px,#eef2f7 8px,#eef2f7 16px);display:flex;flex-direction:column;justify-content:center;min-height:92px}
   .pp12-leer span{font-size:11px;color:#6b7c93;font-weight:600}.pp12-leer small{color:#7d8da3}
   .pp12-ferien{margin:4px 0 12px 142px;padding:10px 14px;border-radius:10px;background:#fff7e0;border:1px dashed #e0b84a;color:#7a5b00;font-weight:600;font-size:14px}
+  .pp12-ctl{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:4px}
+  .pp12-ctl button{min-width:30px;height:28px;padding:0 7px;border:1.5px solid #9db3c8;background:#fff;border-radius:8px;font:inherit;font-size:14px;font-weight:800;color:#2f5f8a;cursor:pointer;line-height:1}
+  .pp12-ctl button:hover{background:#f0f7ff;border-color:#2f7fc6}
+  .pp12-ctl-sep{width:1px;height:18px;background:#c6d2df;margin:0 2px}
+  .pp12-reserve{border:2px dashed #3fa66a;border-radius:8px;padding:8px 10px;background:#f1faf4;display:flex;flex-direction:column;gap:3px;min-height:92px}
+  .pp12-reserve span{font-size:11px;color:#51627a;font-weight:600}.pp12-reserve strong{color:#2e7d4f;font-size:14px}.pp12-reserve small{color:#4a6b57}
+  .pp12-res-btn{margin-top:auto;align-self:flex-start;border:1.5px solid #3fa66a;background:#fff;color:#2e7d4f;border-radius:8px;padding:4px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+  .pp12-tool{margin:12px 0}.pp12-tool p{margin:6px 0 10px}.pp12-tool-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+  .pp12-park{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:6px 0;border-top:1px solid #e0e7ef}
   @media (max-width:760px){
    .pp12-woche{grid-template-columns:1fr}.pp12-wlabel{flex-direction:row;gap:10px;align-items:baseline;flex-wrap:wrap}
    .pp12-tage{grid-template-columns:1fr}.s1,.s2{grid-column:auto}
@@ -4141,9 +4396,17 @@ async function renderUnterrichtPP(){
  <div class="pp12-info">
   <div class="card"><strong>Leistungsnachweise</strong><p style="margin:6px 0 0">Kurzarbeit 16.11.2026 · Schulaufgabe 1 am 16.12.2026 · Schulaufgabe 2 am 03.03.2027</p></div>
   <div class="card"><strong>Abschlussprüfung 2027</strong><p style="margin:6px 0 0">Deutsch 12.05.2027 (erste Prüfung) · Pädagogik/Psychologie 14.05.2027. Stoff fertig am 28.04.2027, danach Prüfungstraining.</p></div>
+  <a class="card"href="#ressourcen"style="display:block;text-decoration:none;color:inherit;border-left:4px solid #3fa66a"aria-label="Zu den Lernressourcen">
+   <strong>Lernressourcen</strong>
+   <p style="margin:6px 0 0">Hier liegen die TaskCard-Links, Canva, KI-Angebote, Videos, ByCS/mebis und LearningApps.</p>
+   ${resChips?`<div class="chips"style="margin-top:8px">${resChips}</div>`:""}
+   <p style="margin:8px 0 0;font-weight:700;color:#2f7fc6">Zur Lernressourcen-Bibliothek →</p>
+  </a>
  </div>
+ ${tool}
  <div class="pp12-legende">${legende}</div>
  ${rows}
+ ${parkHtml}
  ${footer()}`;
 }
 window.renderUnterrichtPP=renderUnterrichtPP;
