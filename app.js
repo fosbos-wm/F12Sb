@@ -176,7 +176,7 @@ function showRegisterForm(){
  Nur freigeschaltete Lehrkräfte/Admins dürfen Ressourcen
  erstellen. Die bestehende Anzeige bleibt unverändert.
  ========================================================= */
-window.openLernressourceForm=async function(){
+window.openLernressourceForm=async function(vorgabeTyp){
  if(!isTeacher()){
  toast("Nur freigeschaltete Lehrkräfte können Lernressourcen anlegen.");
  return;
@@ -215,6 +215,7 @@ window.openLernressourceForm=async function(){
  <button class="primary"type="button"id="lrSave">Lernressource anlegen</button>
  </div>
  </div>`);
+ if(typeof vorgabeTyp==="string"){const sel=document.getElementById("lrType");if(sel&&[...sel.options].some(o=>o.value===vorgabeTyp))sel.value=vorgabeTyp;}
 
  const save=document.getElementById("lrSave");
  if(!save)return;
@@ -417,18 +418,39 @@ async function renderRessourcenRoute(){
 
  const card=r=>{
  const type=typeOf(r),t=types[type],tags=tagsOf(r),url=urlOf(r);
- return`<article class="card resource-card"data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}">
- <div class="resource-head"><span class="resource-icon">${t.icon}</span><span class="pill">${esc(t.label)}</span></div>
+ const editCall=`editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')`;
+ const meta=[subjectOf(r),...tags.map(x=>"#"+x)].filter(Boolean).join(" · ");
+ return`<article class="card resource-card res-tile"data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}"title="${esc(titleOf(r))}">
+ <div class="res-top"><span class="resource-icon">${t.icon}</span><span class="pill">${esc(t.label)}</span>${canEdit?`<span class="res-edit"><button type="button"class="res-ico"title="Bearbeiten"aria-label="Lernressource bearbeiten"onclick="${editCall}">✎</button><button type="button"class="res-ico"title="Löschen"aria-label="Lernressource löschen"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">🗑</button></span>`:""}</div>
  <h3>${esc(titleOf(r))}</h3>
- ${descOf(r)?`<p>${esc(descOf(r))}</p>`:""}
- ${subjectOf(r)?`<div class="resource-meta"> ${esc(subjectOf(r))}</div>`:""}
- ${tags.length?`<div class="chips">${tags.map(x=>`<span class="chip">#${esc(x)}</span>`).join("")}</div>`:""}
- ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">${t.icon} Lernressource öffnen →</button>`:`<div class="notice">Für diese Ressource ist noch kein Link hinterlegt.</div>`}
- ${canEdit?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')">Bearbeiten</button><button class="secondary"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">Löschen</button></div>`:""}
+ ${descOf(r)?`<p class="res-desc">${esc(descOf(r))}</p>`:""}
+ ${meta?`<div class="res-meta">${esc(meta)}</div>`:""}
+ ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">Öffnen →</button>`:`<div class="notice"style="margin-top:auto;font-size:12px">Noch kein Link hinterlegt.</div>`}
  </article>`;
  };
+ const plusKachel=typ=>canEdit?`<button type="button"class="res-plus"onclick="window.openLernressourceForm('${typ}')"aria-label="Neue Lernressource anlegen"><span class="big">＋</span><span>Neue Lernressource</span></button>`:"";
+ const resCss=`<style>
+ .res-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+ .res-tile{aspect-ratio:1/1;min-height:0!important;padding:12px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+ .res-top{display:flex;align-items:center;gap:6px;min-height:32px}
+ .res-top .resource-icon{font-size:22px;line-height:1}
+ .res-top .pill{font-size:11px;padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+ .res-edit{margin-left:auto;display:flex;gap:4px;flex:none}
+ .res-ico{width:30px;height:30px;border-radius:8px;border:1.5px solid #c6d2df;background:#fff;cursor:pointer;font-size:14px;line-height:1;padding:0}
+ .res-ico:hover{background:#f0f7ff;border-color:#2f7fc6}
+ .res-tile h3{margin:2px 0 0;font-size:15px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+ .res-desc{margin:0;font-size:12.5px;line-height:1.35;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .res-meta{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .res-tile .resource-open{margin-top:auto;padding:8px 10px;font-size:13px;min-height:0}
+ .res-plus{aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px dashed #b9c8d6;border-radius:16px;background:#fff;color:#3a4a5c;font:inherit;font-weight:700;font-size:14px;cursor:pointer;padding:10px;text-align:center}
+ .res-plus .big{font-size:40px;line-height:1;color:#2f7fc6}
+ .res-plus:hover{border-color:#2f7fc6;background:#f3f9ff}
+ @media(max-width:1100px){.res-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+ @media(max-width:720px){.res-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+ @media(max-width:460px){.res-grid{grid-template-columns:1fr}.res-tile,.res-plus{aspect-ratio:auto;min-height:170px!important}}
+ </style>`;
 
- return`${pageHead("LERNWERKSTATT","Lernressourcen-Bibliothek","Finde passende Lernmaterialien, digitale Angebote und externe Lernwege – zentral für Schüler und Lehrkräfte.",addButton)}
+ return`${resCss}${pageHead("LERNWERKSTATT","Lernressourcen-Bibliothek","Finde passende Lernmaterialien, digitale Angebote und externe Lernwege – zentral für Schüler und Lehrkräfte.",addButton)}
  <div class="card"style="border-left:4px solid #3fa66a">
  <span class="badge"> DEINE LERNBIBLIOTHEK</span>
  <h2>Passende Ressource auswählen</h2>
@@ -438,7 +460,7 @@ async function renderRessourcenRoute(){
  ${Object.entries(grouped).map(([type,list])=>{
  if(!list.length)return"";
  const t=types[type];
- return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div><div class="grid grid-3">${list.map(card).join("")}</div></section>`;
+ return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div><div class="res-grid">${list.map(card).join("")}${plusKachel(type)}</div></section>`;
  }).join("")}
  ${resources.length?`<div class="notice"style="margin-top:16px"> ${resources.length} Lernressource${resources.length===1?"":"n"} verfügbar.</div>`:`<div class="card empty"style="margin-top:12px"><strong>Noch keine Lernressourcen vorhanden.</strong><p>Lege z. B. eine TaskCard, einen KI-Link, ein Video oder einen ByCS-/mebis-Link an.</p>${canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Erste Lernressource anlegen</button>`:""}</div>`}
  ${footer()}`;
@@ -4241,6 +4263,1091 @@ function pp12CssBausteine(){
 }
 Object.assign(window,{pp12Tafel,pp12KompassDrucken});
 
+
+// ============================================================
+// ZUSATZMODULE im Unterricht-Plan (nur Lehrkräfte legen sie an): Abschlussprüfungstraining, Selbstlernkurs, Check-Out-Wochentest.
+// Gleiche Oberflächen wie im Modulplan der F11Sb, hier je Schulwoche unter den Unterrichtsstunden (Plus-Zeichen).
+// Sammlungen in Firestore: ppModule, ppStundenAntworten, ppKursFortschritt.
+// ============================================================
+const PPM_ZUSATZ=["apt","selbstlern","kprim"];
+// Schulwochen der 12. Klasse (Montag als ID). Wochen, die ganz in den Ferien liegen, entfallen.
+const SCHULWOCHEN_12=(()=>{
+ const out=[],letzter=PP12_PLAN[PP12_PLAN.length-1].d;
+ for(let m=pp12Montag(PP12_START);m<=pp12Montag(letzter);m=pp12Add(m,7)){
+  const fr=pp12Add(m,4);
+  if(pp12Ferien(m)&&pp12Ferien(fr))continue;
+  out.push({id:m,start:m,end:fr});
+ }
+ return out;
+})();
+function sw12ById(id){return SCHULWOCHEN_12.find(w=>w.id===id)||null;}
+const PPM_TYPEN={
+ projekt:{icon:"🔬",name:"Ein Projekt durchführen",kurz:"Projekt",art:"Projekt",text:"Team-Projekt mit Meilensteinen anlegen."},
+ stunde:{icon:"🧭",name:"Unterrichtsstunde nach dem Deeper-Learning-Konzept",kurz:"Stunde",art:"Deeper-Learning-Einheit",text:"Mit Digitaler Tafel, Material (PDF, Film, Audio, Bilder, Links) und einem Check-out mit offener Frage."},
+ apt:{icon:"🎓",name:"Abschlussprüfungstraining",kurz:"Prüfungstraining",art:"Abschlussprüfungstraining",text:"Prüfungsfrage, relevanter Inhalt, Bearbeitung durch die Schüler:innen und Vergleich mit der Lösung."},
+ kprim:{icon:"🏁",name:"Check-Out-Wochentest",kurz:"Check-Out",art:"Check-Out-Wochentest",text:"Wochentest mit 2 Fallvignetten und 4 K-Prim-Aufgaben (16 BE), automatisch ausgewertet."},
+ selbstlern:{icon:"🎒",name:"Selbstlernkurs",kurz:"Selbstlernkurs",art:"Selbstlernkurs",text:"Schüler:innen bearbeiten den Kurs selbstständig von A bis Z."},
+ experiment:{icon:"🧪",name:"Experiment (interaktive Einheit)",kurz:"Experiment",art:"Experiment",text:"„Das Experiment“ als interaktive Einheit. Du wählst selbst, welche Teile dabei sind."}
+};
+const PPM_EINHEITEN={experiment:{icon:"🧪",name:"Das Experiment – interaktive Stunde",text:"Kaugummi-Versuch in Kleingruppen, Klassenvergleich, Merkmale eines Experiments und Abschlussquiz."}};
+// Dauer eines Moduls: eine Unterrichtsstunde (45 Min.), Doppelstunde, 120 oder 180 Minuten,
+// oder eine bis drei ganze Wochen. Minutenmodule gehören zu der Woche, in der sie beginnen.
+const PPM_DAUERN=[
+ {k:"15",name:"15 Minuten",lang:"15 Minuten (z. B. K-Prim-Test)",min:15,wochen:1},
+ {k:"45",name:"1 Stunde",lang:"1 Unterrichtsstunde (45 Minuten)",min:45,wochen:1},
+ {k:"90",name:"2 Stunden",lang:"2 Unterrichtsstunden (Doppelstunde, 90 Minuten)",min:90,wochen:1},
+ {k:"135",name:"3 Stunden",lang:"3 Unterrichtsstunden (135 Minuten)",min:135,wochen:1},
+ {k:"180",name:"4 Stunden",lang:"4 Unterrichtsstunden (180 Minuten)",min:180,wochen:1},
+ {k:"120",name:"120 Minuten",lang:"120 Minuten (bisher)",min:120,wochen:1,alt:true},
+ {k:"w1",name:"1 Woche",lang:"1 Woche",wochen:1},
+ {k:"w2",name:"2 Wochen",lang:"2 Wochen",wochen:2},
+ {k:"w3",name:"3 Wochen",lang:"3 Wochen",wochen:3}
+];
+// Pro Schulwoche stehen 6,3 Unterrichtsstunden zu je 45 Minuten (285 Minuten) zur Verfügung. Wochen mit Praktikum (fpA-Blöcke)
+// und Ferien sind gesperrt. Eine ganze Woche (1 bis 3 Wochen) belegt die Woche vollständig.
+const PPM_STD_PRO_WOCHE="6,3",PPM_MIN_PRO_STUNDE=45,PPM_MIN_PRO_WOCHE=285; // 6 Stunden + 15 Minuten (z. B. K-Prim-Test) = 285 Minuten = 6,3 Stunden
+const PPM_DAUER_STANDARD={projekt:"90",stunde:"90",experiment:"90",apt:"90",kprim:"45",selbstlern:"90"};
+function ppmDauerKey(m){
+ if(m&&PPM_DAUERN.some(d=>d.k===m.dauer))return m.dauer;
+ const n=Math.max(1,Number(m&&m.wochen)||1);
+ return "w"+n;       // ältere Module: Wochenzahl bleibt erhalten (auch über 3 Wochen)
+}
+function ppmDauerDef(m){
+ const k=ppmDauerKey(m);
+ return PPM_DAUERN.find(d=>d.k===k)||{k,name:k.slice(1)+" Wochen",lang:k.slice(1)+" Wochen",wochen:Number(k.slice(1))||1};
+}
+function ppmDauerText(m){return ppmDauerDef(m).name;}
+// Teile der interaktiven Einheit „Das Experiment“ (aus experiment/das-experiment.html).
+// Die Minuten sind Richtwerte (die ganze Einheit ist als Doppelstunde gedacht).
+const PPM_EXP_TEILE=[
+ {k:"einstieg",name:"Einstieg: Lernsituation",min:10,text:"Gespräch zweier Schülerinnen über das Lernen mit Kaugummi."},
+ {k:"experiment",name:"Experiment durchführen",min:25,text:"Wörter-Experiment in Kleingruppen mit Vorbereitung, Lernphase, Pause und Auswertung."},
+ {k:"ergebnisse",name:"Ergebnisse vergleichen",min:10,text:"Anonymer Klassenvergleich der beiden Gruppen.",braucht:"experiment"},
+ {k:"merkmale",name:"Merkmale des Experiments",min:15,text:"Willkürlichkeit, Variierbarkeit und Wiederholbarkeit."},
+ {k:"anwendung",name:"Anwendung",min:15,text:"Szenarien: Ist das ein Experiment?"},
+ {k:"abschluss",name:"Abschlussquiz",min:10,text:"Aufgaben zum Abschluss; danach gilt die Einheit als gemacht."}
+];
+function ppmExpMinuten(teile){return PPM_EXP_TEILE.filter(t=>(teile||[]).includes(t.k)).reduce((n,t)=>n+t.min,0);}
+function ppmExpTeile(m){return Array.isArray(m&&m.teile)&&m.teile.length?m.teile:PPM_EXP_TEILE.map(t=>t.k);}
+// Fertige Einarbeitungs-Inhalte (einarbeitung/inhalte/<id>.json); wählbar im Selbstlernkurs.
+const PPM_EA_IDS=["fa01","pp01","pp02","pp03","pp1a1","pp1a2","pp1a3","pp1a4","pp06","pp07","pp2a1","pp10","pp11","pp15","pp16"];
+// Einheitliche Bezeichnung: Inhalt · Modulart · LB1 (LB nur, wenn bekannt)
+function ppmBez(inhalt,modul,lb){const T=PPM_TYPEN[modul];return[inhalt,T?T.art:"",lb?"LB"+lb:""].filter(Boolean).join(" · ");}
+// Modulart und Lernbereich einer Einarbeitung: zuerst die Angaben in der JSON-Datei ("modulart", "lb"),
+// sonst aus der Inhaltsliste (PP_EINHEITEN): Prüfungstraining = apt, alle anderen = Selbstlernkurs.
+function ppmEaMeta(id,info){
+ const e=(typeof PP_EINHEITEN!=="undefined"?PP_EINHEITEN:[]).find(x=>x.id===id)||null;
+ const art=(info&&info.modulart&&PPM_TYPEN[info.modulart])?info.modulart:(e&&e.typ==="apt"?"apt":"selbstlern");
+ const lb=(info&&Number(info.lb))||(e&&Number(String(e.phase||"").replace(/\D/g,"")))||0;
+ return{art,lb};
+}
+async function ppmEaListe(){
+ const r=await Promise.all(PPM_EA_IDS.map(async id=>{const i=await einarbeitungInfo(id);if(!i)return null;const m=ppmEaMeta(id,i);return{id,titel:i.titel,entwurf:i.entwurf,art:m.art,lb:m.lb};}));
+ return r.filter(Boolean);
+}
+const PPM={liste:[],geladen:0,fehler:"",meine:{kurs:{},stunde:{},ea:{}}};
+let activePPModul=null;
+
+const PPM_KURSE={
+ "psych-gegenstand":{titel:"Gegenstand der Psychologie: Erleben und Verhalten",
+  text:"Selbstlernkurs für LB 1: Erleben und Verhalten unterscheiden, an Beispielen üben und im Experiment anwenden.",
+  schritte:[
+   {id:"s1",typ:"ziele",titel:"Das lernst du",items:["Ich kann Erleben und Verhalten als Gegenstand der Psychologie definieren und voneinander abgrenzen.","Ich kann an Alltags- und Praxisbeispielen zeigen, welche Anteile beobachtbar (Verhalten) und welche nur erschließbar bzw. erfragbar (Erleben) sind.","Ich kann für ein Beispiel-Experiment festlegen, welches Verhalten beobachtet und wie das Erleben erfasst wird (z. B. durch Befragung)."]},
+   {id:"s2",typ:"text",titel:"Ausarbeitung: Erleben und Verhalten",text:
+`## Psychologie: die Wissenschaft von Erleben und Verhalten
+Die Psychologie untersucht, wie Menschen **erleben** und wie sie sich **verhalten**. Beides gehört zusammen, wird aber unterschiedlich erfasst.
+
+## Erleben
+Erleben umfasst die **inneren Vorgänge** einer Person: Wahrnehmen, Denken, Fühlen, Erinnern und Wollen. Sie sind nur der Person selbst unmittelbar zugänglich. Andere können sie nicht sehen, sondern nur **erfragen** oder aus dem Verhalten **erschließen**.
+- Beispiel: Nora hat Angst vor der nächsten Mathearbeit.
+
+## Verhalten
+Verhalten ist alles, was **von außen beobachtbar** ist: Bewegungen, Körperhaltung, Mimik, Sprechen und Handeln.
+- Beispiel: Nora sitzt still am Platz, schaut auf ihre Hände und seufzt.
+
+## Wie hängt beides zusammen?
+Erleben und Verhalten beeinflussen sich gegenseitig. Angst (Erleben) kann zu Rückzug (Verhalten) führen. Umgekehrt kann ein bestimmtes Verhalten, etwa Lächeln, das Erleben verändern. Aus beobachtetem Verhalten lassen sich nur **Vermutungen** über das Erleben ableiten.
+
+## Wichtig für die Praxis
+- Erst beschreiben, was man sieht (Verhalten), dann vorsichtig deuten (Erleben).
+- Ob eine Deutung stimmt, klärt man oft nur durch Nachfragen.`},
+   {id:"s3",typ:"zuordnen",titel:"Interaktive Aufgabe: Erleben oder Verhalten?",frage:"Ordne jede Aussage zu. Du bekommst sofort eine Rückmeldung.",kategorien:["Erleben","Verhalten"],items:[
+    {t:"Nora hat Angst vor der nächsten Arbeit.",k:0,e:"Angst ist ein innerer Vorgang, den nur Nora selbst unmittelbar kennt."},
+    {t:"Nora seufzt leise.",k:1,e:"Seufzen kann man hören, es ist beobachtbar."},
+    {t:"Ben freut sich auf die Pause.",k:0,e:"Freude ist ein Gefühl, also Erleben."},
+    {t:"Ben rennt als Erster aus dem Raum.",k:1,e:"Rennen ist eine beobachtbare Handlung."},
+    {t:"Lena erinnert sich an ihren ersten Schultag.",k:0,e:"Erinnern läuft innen ab und ist von außen nicht zu sehen."},
+    {t:"Lena erzählt ihrer Freundin vom ersten Schultag.",k:1,e:"Sprechen ist beobachtbares Verhalten."},
+    {t:"Tom ist wütend.",k:0,e:"Wut ist ein Gefühl, das nur Tom selbst direkt erlebt."},
+    {t:"Tom schlägt mit der Faust auf den Tisch.",k:1,e:"Die Handlung ist von außen sichtbar."},
+    {t:"Mia überlegt, wie sie die Aufgabe löst.",k:0,e:"Denken ist ein innerer Vorgang."},
+    {t:"Mia runzelt die Stirn.",k:1,e:"Mimik lässt sich beobachten."}]},
+   {id:"s4",typ:"text",titel:"Wie kommt man an das Erleben heran?",text:
+`## Beobachten und Befragen
+Verhalten kann man **systematisch beobachten**: Was genau tut die Person, wie oft, in welcher Situation?
+
+Erleben erfasst man vor allem durch **Befragung**, zum Beispiel mit einem Interview oder einem Fragebogen. Zusätzlich kann man es vorsichtig aus dem Verhalten **erschließen**.
+
+## Im Experiment
+In einem Experiment legt man fest, **welches Verhalten beobachtet** wird (zum Beispiel die Anzahl erinnerter Wörter) und **wie das Erleben erfasst** wird (zum Beispiel durch eine Befragung nach der Anstrengung).`},
+   {id:"s5",typ:"experiment",titel:"Interaktive Aufgabe: Das Experiment",text:"Du führst den Kaugummi-Versuch in Kleingruppen durch, vergleichst die Ergebnisse der Klasse und beantwortest ein kurzes Abschlussquiz."},
+   {id:"s6",typ:"selbsttest",titel:"Selbsttest: Das habe ich verstanden",fragen:[
+    {frage:"Erkläre den Unterschied zwischen Erleben und Verhalten.",loesung:"Verhalten ist von außen beobachtbar, zum Beispiel Sprechen, Mimik oder Bewegung. Erleben sind innere Vorgänge wie Wahrnehmen, Denken und Fühlen, die nur die Person selbst unmittelbar kennt."},
+    {frage:"Nenne je ein Beispiel für Erleben und für Verhalten aus deinem Praktikum.",loesung:"Individuelle Lösung. Beispiel: Erleben: Ein Kind fühlt sich ausgeschlossen. Verhalten: Es steht allein am Rand und schaut zu. Das Erleben ist nicht beobachtbar, sondern nur erfragbar oder erschließbar."},
+    {frage:"Wie lässt sich das Erleben einer Person erfassen?",loesung:"Durch Befragung, etwa Interview oder Fragebogen, oder indem man es vorsichtig aus beobachtbarem Verhalten erschließt."}]},
+   {id:"s7",typ:"abschluss",titel:"Geschafft",text:"Du hast den Selbstlernkurs abgeschlossen. Du kannst Erleben und Verhalten unterscheiden und auf Beispiele anwenden."}
+  ]}
+};
+function ppmKursSchritte(m){
+ if(Array.isArray(m.schritte)&&m.schritte.length)return m.schritte;
+ return (PPM_KURSE[m.kursId]||{}).schritte||[];
+}
+async function ppmLaden(erzwingen){
+ if(!erzwingen&&Date.now()-PPM.geladen<30000)return;
+ try{
+  const s=await getDocs(collection(db,"ppModule"));
+  PPM.liste=s.docs.map(d=>({id:d.id,...d.data()}));PPM.fehler="";
+ }catch(e){console.error("Module laden:",e);PPM.fehler=(e&&(e.code||e.name))||"unbekannt";PPM.liste=[];}
+ PPM.geladen=Date.now();
+ PPM.liste.sort((a,b)=>(ppmSwIndex(a.start)-ppmSwIndex(b.start))||((a.ord||0)-(b.ord||0))||(tsSek(a.createdAt)-tsSek(b.createdAt)));
+}
+function ppmSwIndex(id){return SCHULWOCHEN_12.findIndex(w=>w.id===id);}
+function ppmWochen(m){const i=ppmSwIndex(m.start);if(i<0)return[];return SCHULWOCHEN_12.slice(i,i+ppmDauerDef(m).wochen);}
+function ppmStd(min){return String(Math.round(min/PPM_MIN_PRO_STUNDE*10)/10).replace(".",",");} // Minuten → Unterrichtsstunden (à 45 Min.)
+// Belegte Minuten je Schulwoche. Experiment-Einheiten innerhalb eines Projekts zählen zur Projektzeit.
+function ppmLast(ohneId){
+ const last={};SCHULWOCHEN_12.forEach(w=>{last[w.id]={min:0,liste:[]};});
+ PPM.liste.forEach(m=>{
+  if(m.id===ohneId||m.projektId)return;
+  const d=ppmDauerDef(m);
+  if(d.min){const w=last[m.start];if(w){w.min+=d.min;w.liste.push(m);}}
+  else ppmWochen(m).forEach(w=>{last[w.id].min+=PPM_MIN_PRO_WOCHE;last[w.id].liste.push(m);});
+ });
+ return last;
+}
+function ppmPruefen(startId,dauerKey,ohneId){
+ if(ppmSwIndex(startId)<0)return{ok:false,zeilen:[],fehler:"Bitte eine Schulwoche wählen."};
+ return{ok:true,zeilen:[]}; // Zusatzmodule liegen zusätzlich zu den Unterrichtsstunden: keine Stundengrenze
+}
+function ppmKapaHtml(p){
+ if(p.fehler)return`<span style="color:#b3261e">${esc(p.fehler)}</span>`;
+ let vorher=null;
+ return p.zeilen.map(z=>{
+  const sprung=vorher&&(new Date(z.w.start)-new Date(vorher.end))>4*86400000;vorher=z.w;
+  const txt=`${fmtKurz(z.w.start)}–${fmtKurz(z.w.end)}: ${ppmStd(z.belegt)} von ${PPM_STD_PRO_WOCHE} Stunden belegt`+(z.ok?` → danach ${ppmStd(z.belegt+z.neu)} von ${PPM_STD_PRO_WOCHE} Stunden`:` – nicht genug Platz (frei: ${ppmStd(Math.max(0,z.frei))} Stunden)`);
+  return`${sprung?`<span style="color:#7a4b00">↷ dazwischen Praktikum oder Ferien</span><br>`:""}<span style="color:${z.ok?"#1f6a3a":"#b3261e"}">${z.ok?"✓":"✗"} ${esc(txt)}</span>`;
+ }).join("<br>");
+}
+function ppmIso(d){return d.toISOString().slice(0,10);}
+function ppmPlusTage(iso,n){const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return ppmIso(d);}
+// Alle Wochen des Schuljahres in der Reihenfolge: Schulwoche oder gesperrter Block (Praktikum, Ferien).
+function ppmZeitleiste(){
+ const out=[];let cur=null;
+ for(let start="2026-10-05";start<="2027-07-30";start=ppmPlusTage(start,7)){
+  const fr=ppmPlusTage(start,4),sw=SCHULWOCHEN_12.find(w=>w.start===start);
+  if(sw){out.push({art:"woche",w:sw});cur=null;continue;}
+  const pr=PRAKTIKUMSPHASEN.find(x=>x.start<=fr&&x.end>=start);
+  const fe=pr?null:FERIEN_2026_27.find(x=>x.start<=fr&&x.end>=start);
+  const key=pr?pr.id:(fe?fe.titel:"frei");
+  if(cur&&cur.key===key){cur.n++;cur.bis=fr;continue;}
+  cur={art:"block",key,kind:pr?"praktikum":(fe?"ferien":"frei"),titel:pr?pr.titel:(fe?fe.titel:"Unterrichtsfrei"),icon:pr?pr.icon:"🌴",von:pr?pr.start:(fe?fe.start:start),bis:pr?pr.end:(fe?fe.end:fr),n:1};
+  out.push(cur);
+ }
+ return out;
+}
+function ppmFuerTeil(lb,teil){return PPM.liste.find(m=>m.modul===teil&&Number(m.lb)===Number(lb));}
+function ppmById(id){return PPM.liste.find(m=>m.id===id)||null;}
+function ppmFarbe(m){return PP_FARBEN[m.lb]||"#8a99a3";}
+function ppmMd(t){
+ const zeilen=String(t||"").split("\n");let html="",liste=false;
+ const inl=x=>esc(x).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
+ zeilen.forEach(z=>{
+  const l=z.trim();
+  if(l.startsWith("- ")){if(!liste){html+="<ul>";liste=true;}html+=`<li>${inl(l.slice(2))}</li>`;return;}
+  if(liste){html+="</ul>";liste=false;}
+  if(l.startsWith("## "))html+=`<h3>${inl(l.slice(3))}</h3>`;
+  else if(l)html+=`<p>${inl(l)}</p>`;
+ });
+ if(liste)html+="</ul>";
+ return html;
+}
+async function ppmMeineLaden(){
+ if(isTeacher())return;
+ try{
+  const [a,b]=await Promise.all([
+   getDocs(query(collection(db,"ppKursFortschritt"),where("uid","==",currentUser.uid))),
+   getDocs(query(collection(db,"ppStundenAntworten"),where("uid","==",currentUser.uid)))]);
+  PPM.meine.kurs=Object.fromEntries(a.docs.map(d=>[d.data().modulId,d.data()]));
+  PPM.meine.stunde=Object.fromEntries(b.docs.map(d=>[d.data().modulId,d.data()]));
+  PPM.meine.ea={};PPM.meine.exp=await getLehrplanFortschritt(experimentWocheId());
+  for(const m of PPM.liste.filter(x=>String(x.kursId||"").startsWith("ea:"))){const id=m.kursId.slice(3);PPM.meine.ea[id]=await getLehrplanFortschritt(id);}
+ }catch(e){console.error("Eigener Fortschritt:",e);}
+}
+function ppmDocId(m){return`${m.id}_${currentUser.uid}`;}
+function ppmName(){return profile?.displayName||currentUser.email||"Schüler:in";}
+
+// ------------------------------------------------------------ Modulplan
+// Fortschritt der angemeldeten Person je Modul: {done, frac (0..1)} oder null, wenn für das Modul kein Stand erfasst wird.
+function ppmFort(m){
+ if(isTeacher())return null;
+ try{
+  if(m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){const f=PPM.meine.ea[m.kursId.slice(3)]||{},a=f.einarbeitungAufgaben,done=!!f.einarbeitungAbgeschlossen;return{done,frac:done?1:(a&&a.gesamt?a.richtig/a.gesamt:0)};}
+  if(m.modul==="experiment"||(m.modul==="projekt"&&ppmProjektDirekt(m))){const f=PPM.meine.exp||{},done=!!f.experimentErledigt;return{done,frac:done?1:0};}
+  if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(x=>x.typ!=="abschluss"),f=PPM.meine.kurs[m.id],n=f?sch.filter(x=>f.erledigt&&f.erledigt[x.id]).length:0,done=!!sch.length&&n===sch.length;return{done,frac:sch.length?n/sch.length:0};}
+  if(m.modul==="apt"){const f=PPM.meine.stunde[m.id]||{},done=!!f.aptBewertung;return{done,frac:done?1:(f.aptAbgegeben?2/3:(f.aptAntwort?1/3:0))};}
+  if(m.modul==="stunde"){const f=PPM.meine.stunde[m.id],fr=m.fragen||[];if(f&&f.fertig)return{done:true,frac:1};const n=f?(f.gezeigt||[]).filter(Boolean).length:0;return{done:false,frac:fr.length?n/fr.length:0};}
+  if(m.modul==="kprim"){const d=PPM.co;if(!d||!m.checkoutId)return null;const c=(d.checkouts||[]).find(x=>x.id===m.checkoutId);if(!c)return null;const a=(d.meineAbgaben||{})[c.id],done=!!(a&&a.abgegeben);return{done,frac:done?1:(a?0.5:0)};}
+ }catch(e){console.error("Fortschritt:",e);}
+ return null;
+}
+function ppmKW(w){const d=new Date(w.start+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+3-((d.getUTCDay()+6)%7));const j=new Date(Date.UTC(d.getUTCFullYear(),0,4));return 1+Math.round(((d-j)/86400000-3+((j.getUTCDay()+6)%7))/7);}
+function ppmStatus(m){
+ if(isTeacher())return"";
+ if(m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){const f=PPM.meine.ea[m.kursId.slice(3)]||{},a=f.einarbeitungAufgaben;return`<span class="ppm-status${f.einarbeitungAbgeschlossen?" ok":""}">${f.einarbeitungAbgeschlossen?"abgeschlossen ✓":(a&&a.gesamt?`${a.richtig}/${a.gesamt} Aufgaben`:"noch offen")}</span>`;}
+ if(m.modul==="experiment"||(m.modul==="projekt"&&ppmProjektDirekt(m))){const f=PPM.meine.exp||{};return`<span class="ppm-status${f.experimentErledigt?" ok":""}">${f.experimentErledigt?"gemacht ✓":"noch offen"}</span>`;}
+ if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(s=>s.typ!=="abschluss"),f=PPM.meine.kurs[m.id];const n=f?sch.filter(s=>f.erledigt&&f.erledigt[s.id]).length:0;return`<span class="ppm-status${n===sch.length&&sch.length?" ok":""}">${n}/${sch.length} Schritte</span>`;}
+ if(m.modul==="apt"){const f=PPM.meine.stunde[m.id]||{};return`<span class="ppm-status${f.aptAbgegeben?" ok":""}">${f.aptBewertung?"verglichen ✓":(f.aptAbgegeben?"abgegeben":(f.aptAntwort?"in Arbeit":"noch offen"))}</span>`;}
+ if(m.modul==="stunde"){const f=PPM.meine.stunde[m.id];if(f&&f.fertig)return`<span class="ppm-status ok">fertig ✓</span>`;const fr=m.fragen||[];if(!fr.length)return"";const n=f?(f.gezeigt||[]).filter(Boolean).length:0;return`<span class="ppm-status${n===fr.length?" ok":""}">Check-out ${n}/${fr.length}</span>`;}
+ if(m.modul==="kprim"){const p=ppmFort(m);if(p)return`<span class="ppm-status${p.done?" ok":""}">${p.done?"abgegeben ✓":(p.frac>0?"in Arbeit":"noch offen")}</span>`;}
+ return"";
+}
+// Lehrkraft: Modul um eine Schulwoche früher oder später legen (überspringt Praktikum und Ferien automatisch).
+function ppmMoveHTML(m){
+ const i=ppmSwIndex(m.start),n=SCHULWOCHEN_12.length;
+ const sibs=PPM.liste.filter(x=>x.start===m.start),p=sibs.findIndex(x=>x.id===m.id);
+ const erste=i<=0&&p<=0,letzte=(i<0||i>=n-1)&&p>=sibs.length-1;
+ return`<span class="ppm-mv"><button type="button" data-ppm="reihenfolge" data-id="${esc(m.id)}" data-d="-1" title="Ein Modul nach vorn (am Wochenanfang: in die vorherige Woche)" aria-label="Modul nach vorn"${erste?" disabled":""}>&lt;</button><button type="button" data-ppm="reihenfolge" data-id="${esc(m.id)}" data-d="1" title="Ein Modul nach hinten (am Wochenende: in die nächste Woche)" aria-label="Modul nach hinten"${letzte?" disabled":""}>&gt;</button></span>`;
+}
+async function ppmReihenfolge(m,d){
+ const sibs=PPM.liste.filter(x=>x.start===m.start),i=sibs.findIndex(x=>x.id===m.id),j=i+d;
+ if(i<0)return;
+ if(j<0||j>=sibs.length){await ppmVerschieben(m,d);return;}
+ const y=window.scrollY,l=sibs.slice();[l[i],l[j]]=[l[j],l[i]];
+ try{
+  for(let k=0;k<l.length;k++){const o=(k+1)*10;if((l[k].ord||0)!==o)await updateDoc(doc(db,"ppModule",l[k].id),{ord:o,updatedAt:serverTimestamp()});}
+  await ppmLaden(true);await render();
+  try{window.scrollTo(0,y);}catch(e){}
+ }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Reihenfolge konnte nicht geändert werden.");}
+}
+async function ppmVerschieben(m,d){
+ const i=ppmSwIndex(m.start),n=i+d;
+ if(i<0||n<0||n>=SCHULWOCHEN_12.length){toast("Weiter verschieben geht nicht.");return;}
+ const neu=SCHULWOCHEN_12[n];
+ if(!m.projektId){
+  const pr=ppmPruefen(neu.id,ppmDauerKey(m),m.id);
+  if(!pr.ok){toast(pr.fehler||`In der Woche ${fmtKurz(neu.start)}–${fmtKurz(neu.end)} ist nicht genug Platz.`);return;}
+ }
+ const y=window.scrollY;
+ try{
+  const ziel=PPM.liste.filter(x=>x.start===neu.id&&x.id!==m.id).map(x=>x.ord||0);
+  const ord=d<0?(ziel.length?Math.max(...ziel):0)+10:(ziel.length?Math.min(...ziel):0)-10;
+  await updateDoc(doc(db,"ppModule",m.id),{start:neu.id,ord,updatedAt:serverTimestamp()});
+  if(m.modul==="projekt"){ // Einheiten im Projekt wandern mit
+   for(const x of PPM.liste.filter(z=>z.projektId===m.id)){
+    const j=ppmSwIndex(x.start)+d;
+    if(j>=0&&j<SCHULWOCHEN_12.length)await updateDoc(doc(db,"ppModule",x.id),{start:SCHULWOCHEN_12[j].id,updatedAt:serverTimestamp()});
+   }
+  }
+  await ppmLaden(true);await render();
+  try{window.scrollTo(0,y);}catch(e){}
+  toast(`Verschoben auf ${fmtKurz(neu.start)}–${fmtKurz(neu.end)}.`);
+ }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Konnte nicht verschoben werden.");}
+}
+// Kartenbreite: 4 Spalten je Woche. Module bis 2 Stunden (inkl. 15 Min., 1 Std., 2 Std.) sind gleich breit (1 Spalte),
+// 3 bis 4 Stunden nehmen 2 Spalten, ganze Wochen oder mehr als 4 Stunden die volle Zeilenbreite.
+function ppmSpalten(m){const mi=ppmDauerDef(m).min||PPM_MIN_PRO_WOCHE;return mi<=120?1:(mi<=180?2:4);}
+function ppmKarteHTML(m,fortsetzung){
+ const T=PPM_TYPEN[m.modul]||PPM_TYPEN.projekt,c=ppmFarbe(m);
+ if(fortsetzung)return`<div class="ppm-fort" style="--c:${c}" data-ppm="oeffnen" data-id="${esc(m.id)}">↳ ${T.icon} ${esc(m.titel||T.name)} <small>läuft weiter</small></div>`;
+ const einh=(m.einheiten||[]).map(e=>`<span class="ppm-chip">${(PPM_EINHEITEN[e.typ]||{}).icon||""} ${esc((PPM_EINHEITEN[e.typ]||{}).name||e.typ).replace("– interaktive Stunde","")}</span>`).join("");
+ const exp=m.modul==="experiment"?`<span class="ppm-chip">${ppmExpTeile(m).length} von ${PPM_EXP_TEILE.length} Teilen · ca. ${ppmExpMinuten(ppmExpTeile(m))} Min.</span>`:"";
+ const proj=m.projektId?`<span class="ppm-chip">Einheit im Projekt</span>`:"";
+ const fo=ppmFort(m);
+ return`<div class="ppm-karte${isTeacher()?" mit-mv":""}${fo?(fo.done?" ppm-st-done":fo.frac>0?" ppm-st-teil":" ppm-st-offen"):""}" style="--c:${c};--sp:${ppmSpalten(m)}" data-ppm="oeffnen" data-id="${esc(m.id)}" tabindex="0" role="button">
+  <span class="ppm-ic">${T.icon}</span>
+  <span class="ppm-txt"><b>${esc(m.titel||T.name)}</b><small>${esc(T.art||T.kurz)} · LB${m.lb} · ${esc(ppmDauerText(m))}</small>${ppmStatus(m)}${fo&&!fo.done?`<span class="ppm-mini" title="${Math.round(fo.frac*100)} % geschafft"><i style="width:${Math.round(fo.frac*100)}%"></i></span>`:""}${proj}${exp}${einh}${isTeacher()?ppmMoveHTML(m):""}</span>
+  ${fo&&fo.done?`<span class="ppm-haken-k" aria-label="geschafft">✓</span>`:""}${isTeacher()?`<button type="button" class="ppm-edit" data-ppm="bearbeiten" data-id="${esc(m.id)}" title="Modul bearbeiten">✎</button>`:""}
+ </div>`;
+}
+const PPM_CSS=`<style>
+.ppm-legende{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:0 0 18px}
+.ppm-typ{display:flex;flex-direction:column;gap:4px;text-align:left;padding:12px 14px;border-radius:14px;border:1.5px dashed #b9c8d6;background:#fff;cursor:pointer;font:inherit;color:inherit}
+.ppm-typ:hover{border-color:#2f7fc6;background:#f3f9ff}.ppm-typ b{font-size:14px}.ppm-typ small{color:var(--muted);line-height:1.35}
+.ppm-woche{display:grid;grid-template-columns:128px minmax(0,1fr);gap:12px;margin:0 0 10px;padding:8px;border-radius:12px}
+.ppm-woche.jetzt{background:#eaf3fc;outline:2px solid #3d8fd0}
+.ppm-wl{display:flex;flex-direction:column;justify-content:center;font-size:13px;color:var(--muted)}.ppm-wl b{color:var(--ink);font-size:14px}
+.ppm-reihe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:stretch}
+.ppm-karte{position:relative;display:flex;gap:8px;min-width:0;grid-column:span var(--sp,1);padding:10px 10px 10px 12px;border-radius:12px;background:color-mix(in srgb,var(--c) 11%,#fff);border:1px solid color-mix(in srgb,var(--c) 38%,#fff);border-left:6px solid var(--c);cursor:pointer;text-align:left}
+.ppm-karte:hover{box-shadow:0 6px 18px rgba(24,67,96,.14)}.ppm-ic{font-size:22px}
+.ppm-txt{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}.ppm-txt b{font-size:14px;line-height:1.3;padding-right:26px;overflow-wrap:anywhere}.ppm-txt small{color:var(--muted)}
+.ppm-edit{position:absolute;right:6px;top:6px;border:0;background:#fff;border-radius:8px;width:28px;height:28px;color:#3a4a5c;cursor:pointer}
+.ppm-fort{min-width:0;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--c) 8%,#fff);border:1px dashed var(--c);font-size:12px;cursor:pointer}
+.ppm-karte.mit-mv{padding-bottom:50px}.ppm-mv{position:absolute;left:-6px;right:0;bottom:10px;display:flex;justify-content:center;gap:10px}.ppm-mv button{font:inherit;font-size:16px;line-height:1;font-weight:800;min-width:44px;height:30px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;border:1.5px solid #b9c8d6;background:#fff;color:#2f5f8a;cursor:pointer}.ppm-mv button:hover:not(:disabled){border-color:#2f7fc6;background:#f3f9ff}.ppm-mv button:disabled{opacity:.35;cursor:not-allowed}
+.ppm-mini{display:block;height:6px;border-radius:4px;background:#dbe4ec;overflow:hidden;margin-top:6px}.ppm-mini i{display:block;height:100%;background:#3d8fd0}
+.ppm-karte.ppm-st-done{background:color-mix(in srgb,#3fa66a 13%,#fff);border-color:#9fd3ae}
+.ppm-haken-k{position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;background:#3fa66a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.ppm-nach{font-size:11px;font-weight:700;color:#b3261e}
+.ppm-stand .ppm-next{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.ppm-chip{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff;border:1px solid #c9d4de;width:max-content;max-width:100%}
+.ppm-status{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff3d6;border:1px solid #f0d28a;color:#7a4b00;width:max-content}.ppm-status.ok{background:#e3f4e8;border-color:#9fd3ae;color:#1f6a3a}
+.ppm-neu{align-self:center;border:1.5px dashed #b9c8d6;background:#fff;border-radius:12px;min-height:44px;padding:0 14px;font-weight:700;color:#3a4a5c;cursor:pointer}
+.ppm-leer{color:var(--muted);font-size:13px;align-self:center}
+.ppm-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 14px}.ppm-box h2{margin:0 0 8px;font-size:18px}.ppm-box h3{margin:12px 0 4px;font-size:15px}.ppm-box p{margin:6px 0;line-height:1.5}
+.ppm-kopf{border-left:6px solid var(--c);}
+.ppm-zeile{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}.ppm-zeile:last-child{border:0}
+.ppm-btn{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px;color:var(--ink);cursor:pointer;text-decoration:none}
+.ppm-btn.primaer{background:#2f7fc6;border-color:#2f7fc6;color:#fff}.ppm-btn.klein{min-height:34px;padding:0 10px;font-size:12px}
+.ppm-frage{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 12px;background:#fbfdff}.ppm-frage textarea{width:100%;min-height:80px;font:inherit}
+.ppm-loesung{margin-top:8px;padding:10px 12px;border-radius:10px;background:#e3f4e8;border:1px solid #9fd3ae;line-height:1.45}
+.ppm-bew{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.ppm-bew button{min-height:36px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:#fff;font-weight:700;font-size:12px;cursor:pointer}.ppm-bew button.an{border-color:#2f7fc6;background:#eaf3fc}
+.ppm-schritt{border:1px solid var(--line);border-radius:14px;margin:0 0 10px;background:#fff;overflow:hidden}.ppm-schritt.gesperrt{opacity:.55}
+.ppm-skopf{display:flex;gap:12px;align-items:center;padding:12px 14px}.ppm-snr{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#17384f;color:#fff;font-weight:700;font-size:13px;flex:none}.ppm-schritt.fertig .ppm-snr{background:#3fa66a}
+.ppm-sbody{padding:2px 16px 16px}.ppm-sbody h3{margin:12px 0 4px}.ppm-sbody p,.ppm-sbody li{line-height:1.55}
+.ppm-zu{display:flex;flex-direction:column;gap:8px}.ppm-zui{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-radius:10px;background:#f6f9fc;border:1px solid var(--line)}.ppm-zui.richtig{background:#e3f4e8;border-color:#9fd3ae}.ppm-zui.falsch{background:#fdecea;border-color:#f1b0aa}
+.ppm-bar{height:10px;border-radius:6px;background:#e2eaf0;overflow:hidden;margin:6px 0 14px}.ppm-bar i{display:block;height:100%;background:linear-gradient(90deg,#3fa66a,#5cc98a)}
+.ppm-phasen{display:flex;gap:8px;margin:8px 0}.ppm-ph{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--muted);text-align:center}.ppm-ph span{width:32px;height:32px;border-radius:50%;border:2px solid #b9c8d6;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700}.ppm-ph.an span{background:#075a9d;border-color:#075a9d;color:#fff}.ppm-ph.an{color:var(--ink);font-weight:700}
+.ppm-mat{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}.ppm-mat:last-child{border:0}
+.ppm-kap{height:8px;border-radius:5px;background:#e2eaf0;overflow:hidden;margin:6px 0 2px}.ppm-kap i{display:block;height:100%;background:#3d8fd0}.ppm-kap.voll i{background:#3fa66a}.ppm-kap.ueber i{background:#d9534f}
+.ppm-wl small.kapa{font-size:11px}
+.ppm-block{display:flex;gap:12px;align-items:center;margin:0 0 10px;padding:10px 14px;border-radius:12px;background:repeating-linear-gradient(135deg,#f3f5f8 0 8px,#eaeef3 8px 16px);color:#51657a;font-size:13px}
+.ppm-block.praktikum{border-left:6px solid #b08a4a}.ppm-block.ferien,.ppm-block.frei{border-left:6px solid #7fb7c9}
+.ppm-zeitbox .ppm-balken{margin:10px 0}.ppm-bar-jahr i{background:linear-gradient(90deg,#8a64b8,#b49be0)}
+.ppm-leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}.ppm-leg i{display:inline-block;width:14px;height:8px;border-radius:4px;margin-right:5px;vertical-align:middle}
+.ppm-teile{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:12px;background:#fff8e8;border:1px solid #f0d28a}
+.ppm-teile label.check{align-items:flex-start;gap:8px;margin:0}.ppm-teileinfo{font-size:13px;margin-top:4px}
+.ppm-kapahint{font-size:12px;line-height:1.5;padding:8px 10px;border-radius:10px;background:#f6f9fc;border:1px solid var(--line)}
+.ppm-details summary{cursor:pointer;font-weight:700;font-size:16px;padding:2px 0}
+.ppm-tafel .wb-kopf{display:none}.ppm-tafel .wb-wrap{height:min(72vh,680px);min-height:420px}
+.ppm-fertig{display:flex;align-items:center;gap:12px;width:100%;margin-top:6px;padding:14px 16px;border-radius:12px;border:2px solid #b9c8d6;background:#fff;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;text-align:left}
+.ppm-fertig:hover{border-color:#2f7fc6}.ppm-fertig.an{border-color:#3fa66a;background:#e3f4e8;color:#1f6a3a}
+.ppm-haken{width:28px;height:28px;border-radius:8px;border:2px solid #8aa0b3;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:18px;flex:none}.ppm-fertig.an .ppm-haken{background:#3fa66a;border-color:#3fa66a;color:#fff}
+@media(max-width:760px){.ppm-woche{grid-template-columns:1fr}.ppm-reihe{grid-template-columns:repeat(2,minmax(0,1fr))}.ppm-karte{grid-column:1/-1}}
+</style>`;
+
+async function renderPPModulplan(){
+ await ppmLaden();await ppmMeineLaden();
+ const co=await ladeCheckoutDaten().catch(()=>null);
+ PPM.co=co;
+ const heute=new Date().toISOString().slice(0,10),lehrer=isTeacher();
+ const last=ppmLast();
+ const proWoche={},fort={},legacy={};
+ PPM.liste.forEach(m=>{
+  (proWoche[m.start]=proWoche[m.start]||[]).push(m);
+  ppmWochen(m).slice(1).forEach(w=>{(fort[w.id]=fort[w.id]||[]).push(m);});
+  (m.einheiten||[]).forEach(e=>{if(e.woche&&e.woche!==m.start)(legacy[e.woche]=legacy[e.woche]||[]).push({m,e});});
+ });
+ const gesamt=SCHULWOCHEN_12.length*PPM_MIN_PRO_WOCHE;
+ const belegt=SCHULWOCHEN_12.reduce((n,w)=>n+Math.min(PPM_MIN_PRO_WOCHE,last[w.id].min),0);
+ const proz=gesamt?Math.round(belegt/gesamt*100):0;
+ const vergangen=SCHULWOCHEN_12.filter(w=>w.end<heute).length,jahrProz=Math.round(vergangen/SCHULWOCHEN_12.length*100);
+ const blockWochen=ppmZeitleiste().filter(z=>z.art==="block").reduce((n,z)=>n+z.n,0);
+ const zeitBox=`<div class="ppm-box ppm-zeitbox"><h2>Zeitstruktur</h2>
+  <p>Pro Schulwoche stehen <b>${PPM_STD_PRO_WOCHE} Unterrichtsstunden</b> (je ${PPM_MIN_PRO_STUNDE} Minuten) zur Verfügung. In den <b>Praktikumsblöcken (fpA)</b> und in den Ferien ist kein Unterricht, dort lässt sich nichts planen. Das Schuljahr hat <b>${SCHULWOCHEN_12.length} Schulwochen</b> (${blockWochen} Wochen Praktikum und Ferien dazwischen).</p>
+  <div class="ppm-balken"><span><b>Verplant:</b> ${ppmStd(belegt)} von ${ppmStd(gesamt)} Unterrichtsstunden (${proz} %)</span><div class="ppm-bar" role="progressbar" aria-valuenow="${proz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${proz}%"></i></div></div>
+  <div class="ppm-balken"><span><b>Schuljahr:</b> ${vergangen} von ${SCHULWOCHEN_12.length} Schulwochen vorbei (${jahrProz} %)</span><div class="ppm-bar ppm-bar-jahr" role="progressbar" aria-valuenow="${jahrProz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${jahrProz}%"></i></div></div>
+  <div class="ppm-leg"><span><i style="background:#3d8fd0"></i>Woche teilweise belegt</span><span><i style="background:#3fa66a"></i>Woche voll (6,3 Stunden)</span><span><i style="background:#d9534f"></i>Woche überbucht</span><span>🏫 🏥 Praktikum (gesperrt)</span><span>🌴 Ferien (gesperrt)</span></div></div>`;
+ const legende=lehrer?`<div class="ppm-legende">${Object.entries(PPM_TYPEN).filter(([k])=>k!=="experiment").map(([k,T])=>`<button type="button" class="ppm-typ" data-ppm="neu" data-typ="${k}"><b>${T.icon} ${esc(T.name)}</b><small>${esc(T.text)}</small></button>`).join("")}</div>`:"";
+ const zeilen=ppmZeitleiste().map(z=>{
+  if(z.art==="block"){
+   const darin=z.kind==="praktikum"?FERIEN_2026_27.filter(f=>f.start<=z.bis&&f.end>=z.von).map(f=>f.titel):[];
+   return`<div class="ppm-block ${z.kind}"><span style="font-size:22px">${z.icon}</span><div><b>${esc(z.titel)}</b><br><small>${fmtKurz(z.von)}–${fmtKurz(z.bis)} · ${z.n} Woche${z.n===1?"":"n"} · gesperrt, kein Unterricht${darin.length?` · darin: ${esc(darin.join(", "))}`:""}</small></div></div>`;
+  }
+  const w=z.w,mm=proWoche[w.id]||[],ff=fort[w.id]||[],ee=legacy[w.id]||[];
+  if(!lehrer&&!mm.length&&!ff.length&&!ee.length)return"";
+  const jetzt=heute>=w.start&&heute<=w.end,min=last[w.id].min,pct=Math.min(100,Math.round(min/PPM_MIN_PRO_WOCHE*100)),cls=min>PPM_MIN_PRO_WOCHE?"ueber":(min===PPM_MIN_PRO_WOCHE?"voll":"");
+  const kw=ppmKW(w);
+  const stW=lehrer?[]:mm.map(ppmFort).filter(Boolean),nOkW=stW.filter(x=>x.done).length,pzW=stW.length?Math.round(nOkW/stW.length*100):0;
+  const wochenFort=stW.length?`<div class="ppm-kap voll" title="${nOkW} von ${stW.length} Modulen geschafft"><i style="width:${pzW}%"></i></div><small class="kapa">${nOkW===stW.length?"alles geschafft ✓":nOkW+" von "+stW.length+" geschafft"}</small>${w.end<heute&&nOkW<stW.length?`<small class="ppm-nach">${stW.length-nOkW} noch offen</small>`:""}`:"";
+  return`<div class="ppm-woche${jetzt?" jetzt":""}" data-w="${w.id}"><div class="ppm-wl"><b>KW ${kw}</b><span>${fmtKurz(w.start)}–${fmtKurz(w.end)}</span>${jetzt?`<em style="font-style:normal;font-weight:700;color:#075a9d">diese Woche</em>`:""}
+    ${lehrer?`<div class="ppm-kap ${cls}" title="${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Unterrichtsstunden belegt"><i style="width:${pct}%"></i></div><small class="kapa">${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Stunden${min>PPM_MIN_PRO_WOCHE?" · überbucht":(min===PPM_MIN_PRO_WOCHE?" · voll":"")}</small>`:wochenFort}</div>
+   <div class="ppm-reihe">${mm.map(m=>ppmKarteHTML(m,false)).join("")}${ff.map(m=>ppmKarteHTML(m,true)).join("")}${ee.map(x=>`<span class="ppm-fort" style="--c:${ppmFarbe(x.m)}" data-ppm="oeffnen" data-id="${esc(x.m.id)}">${(PPM_EINHEITEN[x.e.typ]||{}).icon||""} Einheit: ${esc((PPM_EINHEITEN[x.e.typ]||{}).name||x.e.typ)}</span>`).join("")}
+   ${lehrer?(min<PPM_MIN_PRO_WOCHE?`<button type="button" class="ppm-neu" data-ppm="neu" data-woche="${w.id}">＋ Modul</button>`:`<span class="ppm-leer"${min>PPM_MIN_PRO_WOCHE?' style="color:#b3261e;font-weight:700"':""}>${min>PPM_MIN_PRO_WOCHE?`Woche überbucht: ${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Stunden, bitte ein Modul verschieben oder kürzen`:"Woche voll"}</span>`):(mm.length||ff.length||ee.length?"":`<span class="ppm-leer">–</span>`)}</div></div>`;
+ }).join("");
+ const alleSt=lehrer?[]:PPM.liste.map(m=>({m,p:ppmFort(m)})).filter(x=>x.p);
+ const nGes=alleSt.length,nOk=alleSt.filter(x=>x.p.done).length,pzGes=nGes?Math.round(nOk/nGes*100):0;
+ const jw=SCHULWOCHEN_12.find(w=>heute>=w.start&&heute<=w.end)||SCHULWOCHEN_12.find(w=>w.start>heute),jIdx=jw?ppmSwIndex(jw.id):SCHULWOCHEN_12.length;
+ const offen=alleSt.filter(x=>!x.p.done);
+ const jetztX=offen.find(x=>ppmSwIndex(x.m.start)<=jIdx),naechstX=jetztX||offen[0];
+ const nxLabel=jetztX?(ppmSwIndex(jetztX.m.start)<jIdx?"Noch offen aus einer früheren Woche":"Jetzt dran"):"Als Nächstes";
+ const standBox=nGes?`<div class="ppm-box ppm-stand"><h2>Dein Stand</h2>
+  <div class="ppm-balken"><span><b>${nOk} von ${nGes}</b> Modulen geschafft (${pzGes} %)</span><div class="ppm-bar" role="progressbar" aria-valuenow="${pzGes}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pzGes}%"></i></div></div>
+  ${naechstX?`<div class="ppm-next"><span>${nxLabel}: <b>${esc(naechstX.m.titel||(PPM_TYPEN[naechstX.m.modul]||{}).name||"")}</b> <small style="color:var(--muted)">(KW ${ppmKW(sw12ById(naechstX.m.start)||{start:heute})})</small></span><button type="button" class="ppm-btn klein primaer" data-ppm="oeffnen" data-id="${esc(naechstX.m.id)}">Öffnen</button></div>`:`<p style="margin:6px 0 0"><b>Alles geschafft ✓</b></p>`}</div>`:"";
+ const leer=!PPM.liste.length;
+ const fehler=PPM.fehler?`<div class="empty"><strong>Der Modulplan konnte nicht geladen werden.</strong>${esc(PPM.fehler==="permission-denied"?"Firebase verweigert den Zugriff (permission-denied). Die Firestore-Regeln für den Modulplan sind noch nicht veröffentlicht.":"Fehler: "+PPM.fehler)}</div>`:"";
+ const coBox=co?`${checkoutLiveBannerHTML(co)}<details class="ppm-box ppm-details"><summary>Check-outs (K-Prim-Tests)</summary><div style="margin-top:10px">${checkoutSektionHTML(co)}</div></details>`:"";
+ return`<button class="secondary" onclick="closeFach()">← Zurück zu den Fächern</button>
+ ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Modulplan",lehrer?"Plane Woche für Woche, welches Modul in welchem Lernbereich dran ist. Wähle unten ein Modul oder klicke bei einer Woche auf „＋ Modul“.":"Dein Plan durchs Schuljahr: Klicke ein Modul an, um loszulegen.",
+  lehrer?`<button class="secondary" onclick="openProjektGesamtcheck()">🔬 Projekt-Gesamtcheck</button> <button class="secondary" onclick="openFachaufsatzTrainingCheck()">🎓 APT-Gesamtcheck</button>`:"")}
+ ${PPM_CSS}${fehler}${coBox}${standBox}${legende}
+ ${leer&&lehrer&&!PPM.fehler?`<div class="ppm-box"><h2>Noch kein Plan</h2><p>Du kannst von vorn beginnen oder den bisherigen Ablauf (je Lernbereich ein Projekt und ein Prüfungstraining, dazu das Experiment als Einheit im ersten Projekt) als Startpunkt übernehmen. Danach lässt sich jedes Modul ändern, verschieben oder löschen.</p><button type="button" class="ppm-btn primaer" data-ppm="standard">Bisherigen Ablauf als Plan übernehmen</button></div>`:""}
+ ${leer&&!lehrer&&!PPM.fehler?`<div class="empty"><strong>Noch kein Plan.</strong>Deine Lehrkraft hat noch keine Module geplant.</div>`:""}
+ ${zeilen}
+ ${footer()}`;
+}
+// ------------------------------------------------------------ Modul anlegen/ändern
+// „＋ Modul“ in einer Woche: erst eines der fünf Module wählen, dann öffnet sich der Dialog.
+function ppmTypWahl(woche){
+ if(!isTeacher())return;
+ const sw=woche?sw12ById(woche):null;
+ const typen=Object.entries(PPM_TYPEN).filter(([k])=>PPM_ZUSATZ.includes(k));
+ modal(`<button class="modal-close" onclick="closeModal()">×</button>
+  <div class="kicker">MODUL HINZUFÜGEN</div><h2>Welches Modul möchtest du einplanen?</h2>
+  ${sw?`<p style="color:var(--muted);margin:0 0 10px">Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}</p>`:""}
+  <div class="ppm-legende" style="grid-template-columns:1fr">${typen.map(([k,T])=>`<button type="button" class="ppm-typ" data-ppm="neu" data-typ="${k}"${woche?` data-woche="${esc(woche)}"`:""}><b>${T.icon} ${esc(T.name)}</b><small>${esc(T.text)}</small></button>`).join("")}</div>
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button></div>`);
+}
+// Projekt: öffnet direkt „Das Experiment“ (Standard im Lernbereich mit Einstieg) oder die Projektseite mit Teams und Meilensteinen.
+function ppmProjektDirekt(m){
+ if(m&&m.direkt==="experiment")return true;
+ if(m&&m.direkt==="projekt")return false;
+ const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(m&&m.lb));
+ return !!(ph&&ph.einstieg);
+}
+function ppmDateiTyp(f){
+ const n=(f&&f.name)||"",t=(f&&f.type)||"";
+ if(/^image\//.test(t)||dateiIstBild(n))return"bild";
+ if(/^video\//.test(t)||dateiIstVideo(n))return"video";
+ if(/^audio\//.test(t)||dateiIstAudio(n))return"audio";
+ return"pdf";
+}
+const PPM_MAT_INFO={pdf:["📄","PDF"],bild:["🖼️","Bild"],video:["🎬","Film"],audio:["🎧","Audio"],link:["🔗","Webseite"]};
+function ppmWochenOptionen(sel){
+ return SCHULWOCHEN_12.map(w=>`<option value="${w.id}"${w.id===sel?" selected":""}>${fmtKurz(w.start)}–${fmtKurz(w.end)}</option>`).join("");
+}
+async function ppmDialog(id,typ,woche,opt){
+ opt=opt||{};
+ const bearb=id?ppmById(id):null;
+ const t=bearb?bearb.modul:typ;if(!PPM_TYPEN[t]||(!bearb&&!PPM_ZUSATZ.includes(t)))return;
+ const T=PPM_TYPEN[t];
+ const projektId=bearb?bearb.projektId:opt.projektId;
+ const projekt=projektId?ppmById(projektId):null;
+ const heute=new Date().toISOString().slice(0,10);
+ const erste=SCHULWOCHEN_12.find(w=>w.end>=heute)||SCHULWOCHEN_12[0];
+ const projWochen=projekt?ppmWochen(projekt):null;
+ const start=bearb?bearb.start:(woche&&(!projWochen||projWochen.some(w=>w.id===woche))?woche:(projWochen?projWochen[0].id:erste.id));
+ let checkouts=[];
+ if(t==="kprim"){try{checkouts=(await ladeCheckoutDaten()).checkouts||[];}catch(e){}}
+ const ea=t==="selbstlern"?await ppmEaListe():[];
+ const lb0=bearb?bearb.lb:(projekt?projekt.lb:1);
+ const lbOpt=[1,2,3,4].map(n=>`<option value="${n}"${n===lb0?" selected":""}>Lernbereich ${n} · ${esc((PP12_LB[n]||{}).titel||"")}</option>`).join("");
+ const ph0=PROJEKT_PHASEN.find(p=>p.lbNum===lb0);
+ const dauer0=bearb?ppmDauerKey(bearb):PPM_DAUER_STANDARD[t];
+ const dauerListe=PPM_DAUERN.filter(d=>d.min).filter(d=>!d.alt||d.k===dauer0);
+ const dauerOpt=(()=>{const l=dauerListe.some(d=>d.k===dauer0)?dauerListe:[...dauerListe,{k:dauer0,lang:dauer0.slice(1)+" Wochen (bisher)"}];return l.map(d=>`<option value="${d.k}"${d.k===dauer0?" selected":""}>${esc(d.lang)}</option>`).join("");})();
+ const last=ppmLast(bearb?bearb.id:null);
+ const wochenListe=projWochen||SCHULWOCHEN_12;
+ const wochenOpt=wochenListe.map(w=>`<option value="${w.id}"${w.id===start?" selected":""}>KW ${ppmKW(w)} · ${fmtKurz(w.start)}–${fmtKurz(w.end)}</option>`).join("");
+ let extra="";
+ if(t==="projekt"){
+  const dir0=ppmProjektDirekt(bearb||{lb:lb0});
+  extra=`<label>Beim Aufrufen öffnet sich<select id="ppmDirekt"><option value="experiment"${dir0?" selected":""}>direkt „Das Experiment“ (interaktive Stunde)</option><option value="projekt"${dir0?"":" selected"}>die Projektseite mit Teams und Meilensteinen</option></select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">Team-Projekt mit Meilensteinen anlegen: Das Projekt nutzt die Meilensteine und die Teams des Lernbereichs.</p>`;
+ }
+ if(t==="apt")extra=`<p style="font-size:13px;color:var(--muted);margin:0">Die Frage aus der Abschlussprüfung, den relevanten Inhalt und die Lösung gestaltest du danach direkt auf der Modulseite.</p>`;
+ if(t==="stunde")extra=`<label>Phase im Deeper-Learning-Konzept<select id="ppmPhase">${[1,2,3].map(n=>`<option value="${n}"${(bearb?bearb.phase:2)===n?" selected":""}>${PP12_PHASEN[n].kurz} · ${esc(PP12_PHASEN[n].name)}</option>`).join("")}</select></label>
+  ${bearb?"":`<p style="font-size:13px;color:var(--muted);margin:0">Zu jeder Stunde wird automatisch eine Digitale Tafel angelegt.</p>`}`;
+ if(t==="kprim")extra=`<label>Check-out verknüpfen<select id="ppmCheckout"><option value="">Noch keinen (später verknüpfen)</option>${checkouts.map(c=>`<option value="${esc(c.id)}"${bearb&&bearb.checkoutId===c.id?" selected":""}>${esc(c.titel||"Check-out")} · K-Prim-Aufgabensatz${c.datum?" · "+esc(c.datum):""}</option>`).join("")}</select></label>`;
+ if(t==="experiment"){
+  const gew=bearb?ppmExpTeile(bearb):PPM_EXP_TEILE.map(x=>x.k);
+  extra=`<div class="ppm-teile"><b style="font-size:13px">Teile der Einheit wählen</b>
+   ${PPM_EXP_TEILE.map(tl=>`<label class="check"><input type="checkbox" class="ppmTeil" value="${tl.k}"${gew.includes(tl.k)?" checked":""}><span><b>${esc(tl.name)}</b> <small>(ca. ${tl.min} Min.)</small><br><small style="color:var(--muted)">${esc(tl.text)}</small></span></label>`).join("")}
+   <div id="ppmTeileInfo" class="ppm-teileinfo"></div></div>
+   ${projekt?`<p style="font-size:13px;color:var(--muted);margin:0">Diese Einheit gehört zum Projekt „${esc(projekt.titel)}“ und zählt zur Projektzeit.</p>`:""}`;
+ }
+ if(t==="selbstlern"){
+  const alt=bearb&&bearb.kursId==="psych-gegenstand";
+  const aktuell=bearb&&String(bearb.kursId||"").startsWith("ea:")?bearb.kursId.slice(3):"";
+  const passend=ea.filter(e=>e.art==="selbstlern"||e.id===aktuell).sort((x,y)=>(x.lb||9)-(y.lb||9)||String(x.titel).localeCompare(String(y.titel),"de"));
+  const lbGruppen=[...new Set(passend.map(e=>e.lb||0))];
+  const eaOpt=lbGruppen.map(n=>`<optgroup label="${n?"Lernbereich "+n:"Lernbereich offen"}">${passend.filter(e=>(e.lb||0)===n).map(e=>`<option value="ea:${esc(e.id)}" data-lb="${e.lb||""}"${bearb&&bearb.kursId==="ea:"+e.id?" selected":""}>${esc(ppmBez(e.titel||e.id,e.art,e.lb))}${e.entwurf?" (Entwurf)":""}</option>`).join("")}</optgroup>`).join("");
+  extra=`<label>Kurs (nur Selbstlernkurse)<select id="ppmKurs">
+   ${eaOpt}
+   <optgroup label="Weitere">${alt?`<option value="psych-gegenstand" selected>${esc(PPM_KURSE["psych-gegenstand"].titel)} (Kurzfassung von Claude)</option>`:""}<option value="eigen"${bearb&&bearb.kursId==="eigen"?" selected":""}>Eigener Kurs (selbst gestalten)</option></optgroup></select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">${passend.length?"Hier erscheinen nur Selbstlernkurse. Weitere fertige Inhalte kommen automatisch dazu, sobald ihre Datei im Ordner einarbeitung/inhalte im Repo liegt.":"Noch keine fertigen Selbstlernkurse gefunden. Du kannst einen eigenen Kurs gestalten."}</p>`;
+ }
+ modal(`<button class="modal-close" onclick="closeModal()">×</button>
+  <div class="kicker">${T.icon} ${esc(T.kurz.toUpperCase())}</div><h2>${bearb?"Modul bearbeiten":esc(T.name)}</h2>
+  <div class="form">
+   <label>Lernbereich<select id="ppmLb"${projekt?" disabled":""}>${lbOpt}</select></label>
+   <label>Titel<input id="ppmTitel" maxlength="120" value="${esc(bearb?bearb.titel:"")}" placeholder="${esc(t==="projekt"&&ph0?ph0.titel:(t==="experiment"?"Das Experiment":T.name))}"></label>
+   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label>Beginn (Schulwoche)<select id="ppmStart">${wochenOpt}</select></label>
+   <label>Dauer<select id="ppmDauer">${dauerOpt}</select></label></div>
+   <div id="ppmKapa" class="ppm-kapahint"></div>
+   ${extra}
+   <label>Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
+   <div class="form-actions">${bearb?`<button class="secondary" type="button" id="ppmLoeschen">Modul löschen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
+  </div>`);
+ const lbSel=$("ppmLb"),ti=$("ppmTitel"),btn=$("ppmSpeichern");
+ const teileGewaehlt=()=>[...document.querySelectorAll(".ppmTeil")].filter(c=>c.checked).map(c=>c.value);
+ const aktualisieren=()=>{
+  const dk=$("ppmDauer").value;
+  let ok=true;
+  if(projekt){$("ppmKapa").innerHTML=`<span style="color:#1f6a3a">✓ Einheit im Projekt: zählt zur Projektzeit, kein eigener Platz nötig.</span>`;}
+  else{const pr=ppmPruefen($("ppmStart").value,dk,bearb?bearb.id:null);ok=pr.ok;$("ppmKapa").innerHTML=ppmKapaHtml(pr);}
+  if(t==="experiment"){
+   const g=teileGewaehlt(),min=ppmExpMinuten(g),d=PPM_DAUERN.find(x=>x.k===dk),info=$("ppmTeileInfo");
+   let txt=`Gewählt: ${g.length} von ${PPM_EXP_TEILE.length} Teilen, ca. ${min} Min.`;
+   if(d&&d.min)txt+=min<=d.min?` · passt in ${d.min} Minuten`:` · <span style="color:#b3261e">länger als die eingeplanten ${d.min} Minuten</span>`;
+   if(!g.length){txt=`<span style="color:#b3261e">Bitte mindestens einen Teil wählen.</span>`;ok=false;}
+   info.innerHTML=txt;
+  }
+  btn.disabled=!ok;btn.title=ok?"":"In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).";
+ };
+ if(t==="selbstlern"){const ks=$("ppmKurs");if(ks)ks.addEventListener("change",()=>{const o=ks.options[ks.selectedIndex],n=o&&o.dataset.lb;if(n&&!lbSel.disabled)lbSel.value=n;});}
+ if(t==="projekt"&&!bearb)lbSel.addEventListener("change",()=>{const x=PROJEKT_PHASEN.find(y=>y.lbNum===Number(lbSel.value));ti.placeholder=x?x.titel:T.name;const d=$("ppmDirekt");if(d)d.value=(x&&x.einstieg)?"experiment":"projekt";});
+ $("ppmStart").addEventListener("change",aktualisieren);$("ppmDauer").addEventListener("change",aktualisieren);
+ document.querySelectorAll(".ppmTeil").forEach(c=>c.addEventListener("change",()=>{
+  const box=[...document.querySelectorAll(".ppmTeil")],get=k=>box.find(x=>x.value===k);
+  if(c.value==="ergebnisse"&&c.checked)get("experiment").checked=true;
+  if(c.value==="experiment"&&!c.checked)get("ergebnisse").checked=false;
+  aktualisieren();
+ }));
+ aktualisieren();
+ btn.addEventListener("click",async()=>{
+  const lb=Number(lbSel.value),pr=projekt?{ok:true}:ppmPruefen($("ppmStart").value,$("ppmDauer").value,bearb?bearb.id:null);
+  if(!pr.ok){toast("In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).");return;}
+  const dk=$("ppmDauer").value,def=PPM_DAUERN.find(d=>d.k===dk);
+  const daten={modul:t,lb,titel:ti.value.trim(),start:$("ppmStart").value,dauer:dk,wochen:def?def.wochen:(Number(dk.slice(1))||1),notiz:$("ppmNotiz").value.trim()};
+  if(!daten.titel){const x=PROJEKT_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":"Selbstlernkurs · LB"+lb);}
+  if(projektId)daten.projektId=projektId;
+  if(t==="projekt"&&$("ppmDirekt"))daten.direkt=$("ppmDirekt").value;
+  if(t==="stunde")daten.phase=Number($("ppmPhase").value);
+  if(t==="kprim")daten.checkoutId=$("ppmCheckout").value||"";
+  if(t==="experiment"){
+   daten.teile=PPM_EXP_TEILE.map(x=>x.k).filter(k=>teileGewaehlt().includes(k));
+   const min=ppmExpMinuten(daten.teile);
+   if(def&&def.min&&min>def.min&&!confirm(`Die gewählten Teile brauchen etwa ${min} Minuten, eingeplant sind ${def.min}. Trotzdem speichern?`))return;
+  }
+  if(t==="selbstlern"){
+   daten.kursId=$("ppmKurs").value;
+   if(!ti.value.trim()){
+    if(daten.kursId.startsWith("ea:")){const e=ea.find(x=>"ea:"+x.id===daten.kursId);daten.titel=(e&&e.titel)||daten.titel;}
+    else if(PPM_KURSE[daten.kursId])daten.titel=PPM_KURSE[daten.kursId].titel;
+   }
+  }
+  try{
+   if(bearb){await updateDoc(doc(db,"ppModule",bearb.id),{...daten,updatedAt:serverTimestamp()});}
+   else{
+    const basis={...daten,createdBy:currentUser.uid,createdAt:serverTimestamp()};
+    if(t==="projekt")basis.einheiten=[];
+    if(t==="stunde"){basis.material=[];basis.fragen=[];basis.tafelId=await ppmTafelAnlegen(daten.titel);}
+    if(t==="selbstlern"&&daten.kursId==="eigen")basis.schritte=[{id:"s1",typ:"text",titel:"Erster Schritt",text:"## Willkommen\nHier beginnt dein Kurs."},{id:"s2",typ:"abschluss",titel:"Geschafft",text:"Du hast den Kurs abgeschlossen."}];
+    await addDoc(collection(db,"ppModule"),basis);
+   }
+   closeModal();await ppmLaden(true);await render();toast("Modul gespeichert.");
+  }catch(e){ppmFehler(e,"Das Modul konnte nicht gespeichert werden");}
+ });
+ const lo=$("ppmLoeschen");
+ if(lo)lo.addEventListener("click",async()=>{
+  if(!confirm("Dieses Modul wirklich löschen? Fortschritte der Klasse bleiben in der Datenbank erhalten, sind aber nicht mehr sichtbar."))return;
+  try{
+   if(bearb.modul==="projekt"){for(const x of PPM.liste.filter(y=>y.projektId===bearb.id))await deleteDoc(doc(db,"ppModule",x.id));}
+   await deleteDoc(doc(db,"ppModule",bearb.id));closeModal();activePPModul=null;await ppmLaden(true);await render();toast("Modul gelöscht.");
+  }catch(e){ppmFehler(e,"Löschen nicht möglich");}
+ });
+}
+function ppmFehler(e,text){
+ console.error("Modulplaner:",e);
+ toast(e&&e.code==="permission-denied"?`${text}: Firebase verweigert den Zugriff (permission-denied). Bitte die Firestore-Regeln prüfen.`:`${text} (${(e&&(e.code||e.name))||"unbekannt"}).`);
+}
+async function ppmTafelAnlegen(titel){
+ const r=await addDoc(collection(db,"whiteboards"),{title:String(titel).slice(0,120),description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,bg:"blau",createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+ return r.id;
+}
+async function ppmStandardplan(){
+ if(PPM.liste.length&&!confirm("Es gibt schon Module. Den bisherigen Ablauf trotzdem zusätzlich anlegen?"))return;
+ try{
+  for(const ph of PROJEKT_PHASEN){
+   const basis={lb:ph.lbNum,createdBy:currentUser.uid,createdAt:serverTimestamp()};
+   const pr=await addDoc(collection(db,"ppModule"),{...basis,modul:"projekt",titel:ph.einstieg?"Einstieg: Das Experiment":ph.titel,start:ph.projektSchulwochen[0],wochen:ph.projektSchulwochen.length,dauer:"w"+ph.projektSchulwochen.length,einheiten:[]});
+   if(ph.einstieg)await addDoc(collection(db,"ppModule"),{...basis,modul:"experiment",titel:"Das Experiment",projektId:pr.id,start:ph.projektSchulwochen[0],wochen:1,dauer:"90",teile:PPM_EXP_TEILE.map(t=>t.k)});
+   await addDoc(collection(db,"ppModule"),{...basis,modul:"apt",titel:"Prüfungstraining "+ph.lb,start:ph.aptSchulwochen[0],wochen:ph.aptSchulwochen.length,dauer:"w"+ph.aptSchulwochen.length});
+  }
+  await ppmLaden(true);await render();toast("Plan angelegt.");
+ }catch(e){ppmFehler(e,"Plan konnte nicht angelegt werden");}
+}
+// ------------------------------------------------------------ Modulseiten
+async function ppmModulSeite(m){
+ await ppmMeineLaden();
+ if(m.modul==="projekt")return await ppmProjektSeite(m);
+ if(m.modul==="stunde")return await ppmStundeSeite(m);
+ if(m.modul==="kprim")return await ppmKprimSeite(m);
+ if(m.modul==="apt")return await ppmAptSeite(m);
+ if(m.modul==="experiment")return await ppmExperimentSeite(m);
+ if(m.modul==="selbstlern"){
+  if(String(m.kursId||"").startsWith("ea:"))return await ppmEaSeite(m);
+  return await ppmKursSeite(m);
+ }
+ return"";
+}
+// ---- Experiment (interaktive Einheit mit wählbaren Teilen) ----
+async function ppmExperimentSeite(m){
+ const lehrer=isTeacher(),teile=ppmExpTeile(m),min=ppmExpMinuten(teile);
+ const f=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
+ const done=!!f.experimentErledigt,d=ppmDauerDef(m);
+ const projekt=m.projektId?ppmById(m.projektId):null;
+ const liste=PPM_EXP_TEILE.map(t=>{const an=teile.includes(t.k);return`<div class="ppm-zeile" style="opacity:${an?1:.45}"><span style="font-size:20px">${an?"✓":"–"}</span><div style="flex:1;min-width:200px"><b>${esc(t.name)}</b><br><small style="color:var(--muted)">${esc(t.text)}</small></div><small>${an?"ca. "+t.min+" Min.":"nicht dabei"}</small></div>`;}).join("");
+ const passt=!d.min||min<=d.min;
+ return`${ppmKopf(m,projekt?`<p style="color:var(--muted)">Einheit im Projekt „${esc(projekt.titel)}“</p>`:"")}
+ <div class="ppm-box"><h2>Das Experiment · interaktive Einheit</h2>
+  <p>Gewählte Teile: <b>${teile.length} von ${PPM_EXP_TEILE.length}</b>, Zeitbedarf etwa <b>${min} Minuten</b>${d.min?` (eingeplant: ${d.min} Minuten${passt?"":`, <span style="color:#b3261e">das reicht nicht ganz</span>`})`:""}.</p>
+  ${liste}
+  <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+   <button type="button" class="ppm-btn primaer" data-ppm="experiment" data-id="${esc(m.id)}">${lehrer?"Einheit öffnen (Vorschau)":done?"Einheit wiederholen":"Einheit starten"}</button>
+   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}</div></div>
+ ${footer()}`;
+}
+// ---- Selbstlernkurs mit fertiger Einarbeitung (einarbeitung/inhalte/<id>.json) ----
+async function ppmEaSeite(m){
+ const lehrer=isTeacher(),id=String(m.kursId).slice(3);
+ const info=await einarbeitungInfo(id);
+ const f=await getLehrplanFortschritt(id).catch(()=>({}));
+ const ok=!!f.einarbeitungAbgeschlossen,aufg=f.einarbeitungAufgaben;
+ const proz=aufg&&aufg.gesamt?Math.round(aufg.richtig/aufg.gesamt*100):0;
+ return`${ppmKopf(m,`<p style="color:var(--muted)">${esc((info&&info.titel)||id)}</p>`)}
+ <div class="ppm-box"><h2>Selbstlernkurs</h2>
+  ${info?`<p>Du klickst dich Seite für Seite selbstständig durch den Kurs. Es gibt ${info.aufgaben} Aufgabe${info.aufgaben===1?"":"n"} mit Rückmeldung. Dein Stand wird gespeichert.</p>`:`<p class="ppm-leer">Für diesen Kurs wurde die Inhaltsdatei <code>einarbeitung/inhalte/${esc(id)}.json</code> nicht gefunden.</p>`}
+  ${lehrer?"":`<div class="ppm-balken"><b>${ok?"Kurs abgeschlossen ✓":"Noch nicht abgeschlossen"}</b>${aufg&&aufg.gesamt?`<br><small style="color:var(--muted)">Aufgaben: ${aufg.richtig} von ${aufg.gesamt} richtig</small><div class="ppm-bar"><i style="width:${proz}%"></i></div>`:""}</div>`}
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">${info?`<button type="button" class="ppm-btn primaer" data-ppm="ea-start" data-ea="${esc(id)}">${lehrer?"Kurs öffnen (Vorschau)":ok?"Kurs wiederholen":(aufg?"Kurs fortsetzen":"Kurs starten")}</button>`:""}
+   ${lehrer?`<button type="button" class="ppm-btn" data-ppm="ea-stand" data-ea="${esc(id)}">Stand der Klasse ansehen</button>`:""}</div></div>
+ ${footer()}`;
+}
+function ppmKopf(m,unter,extraBtn){
+ const T=PPM_TYPEN[m.modul],c=ppmFarbe(m),w=ppmWochen(m);
+ const zeit=w.length?`${fmtKurz(w[0].start)}–${fmtKurz(w[w.length-1].end)}`:"";
+ return`<button class="secondary" data-ppm="plan">← Unterricht</button>
+ ${PPM_CSS}
+ <div class="ppm-box ppm-kopf" style="--c:${c}"><div class="kicker" style="color:${c}">${T.icon} ${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit} · ${esc(ppmDauerDef(m).lang.toUpperCase())}</div>
+  <h1 style="margin:4px 0 6px;font-size:26px">${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
+  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${extraBtn||""}</div>`:""}</div>`;
+}
+// ---- Projekt ----
+async function ppmProjektSeite(m){
+ const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(m.lb));
+ const lehrer=isTeacher();
+ const f=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
+ const done=!!f.experimentErledigt;
+ const eig=PPM.liste.filter(x=>x.projektId===m.id);
+ const eigZeilen=eig.map(x=>{const sw=sw12ById(x.start),teile=ppmExpTeile(x);
+  return`<div class="ppm-zeile"><span style="font-size:26px">🧪</span><div style="flex:1;min-width:200px"><b>${esc(x.titel||"Das Experiment")}</b><br><small style="color:var(--muted)">${esc(ppmDauerText(x))} · ${teile.length} von ${PPM_EXP_TEILE.length} Teilen${sw?` · Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}`:""}</small></div>
+   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}
+   <button type="button" class="ppm-btn primaer" data-ppm="oeffnen" data-id="${esc(x.id)}">Einheit öffnen</button>
+   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(x.id)}" title="Einheit bearbeiten">✎</button>`:""}</div>`;}).join("");
+ const alt=(m.einheiten||[]).map((e,i)=>{
+  const def=PPM_EINHEITEN[e.typ];if(!def)return"";
+  const sw=sw12ById(e.woche);
+  return`<div class="ppm-zeile"><span style="font-size:26px">${def.icon}</span><div style="flex:1;min-width:200px"><b>${esc(def.name)}</b><br><small style="color:var(--muted)">${esc(def.text)}${sw?` · Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}`:""}</small></div>
+   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}
+   <button type="button" class="ppm-btn primaer" data-ppm="experiment">${lehrer?"Stunde öffnen":done?"Stunde wiederholen":"Stunde starten"}</button>
+   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="einheit-weg" data-id="${esc(m.id)}" data-i="${i}" title="Einheit entfernen">✕</button>`:""}</div>`;}).join("");
+ const ms=ph&&ph.meilensteine&&ph.meilensteine.length?`<h3>Meilensteine im Team</h3><ol style="margin:4px 0 0 18px;line-height:1.55">${ph.meilensteine.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:"";
+ return`${ppmKopf(m)}
+ <div class="ppm-box"><h2>Projekt</h2>${ph&&ph.auftrag?`<p>${esc(ph.auftrag.titel)}</p>`:`<p>Projekt zu Lernbereich ${m.lb}.</p>`}${ms}
+  <div style="margin-top:12px"><button type="button" class="ppm-btn primaer" data-ppm="projekt-oeffnen" data-lb="${m.lb}">Zum Projekt: Teams und Meilensteine →</button></div></div>
+ <div class="ppm-box"><h2>Einheiten im Projekt</h2>
+  <p style="color:var(--muted);font-size:13px">Einheiten sind kleine Bausteine, die du immer wieder zwischendurch einfügen kannst. Sie zählen zur Projektzeit.</p>
+  ${eigZeilen}${alt}${!eig.length&&!alt?`<p class="ppm-leer">Noch keine Einheit eingefügt.</p>`:""}
+  ${lehrer?`<div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="einheit-neu" data-id="${esc(m.id)}">＋ Experiment-Einheit einfügen</button></div>`:""}</div>
+ ${footer()}`;
+}
+// ---- K-Prim-Test ----
+async function ppmKprimSeite(m){
+ const d=await ladeCheckoutDaten();const lehrer=isTeacher();
+ const c=(d.checkouts||[]).find(x=>x.id===m.checkoutId);
+ let karte=`<p class="ppm-leer">${lehrer?"Noch kein Check-out verknüpft. Lege einen an oder verknüpfe einen vorhandenen über „Modul bearbeiten“.":"Deine Lehrkraft hat noch keinen Test freigeschaltet."}</p>`;
+ if(c){
+  const mein=d.meineAbgaben&&d.meineAbgaben[c.id];
+  const live=c.status==="live",beendet=c.status==="beendet";
+  karte=`<div class="ppm-zeile"><span style="font-size:26px">🏁</span><div style="flex:1;min-width:200px"><b>${esc(c.titel||"Check-out")}</b><br><small style="color:var(--muted)">${esc(c.datum||"")} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben · Status: ${esc(c.status||"Entwurf")}</small></div>
+   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="editor" data-id="${esc(c.id)}">Bearbeiten</button>${live?`<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="monitor" data-id="${esc(c.id)}">Live-Übersicht</button>`:""}`
+    :(live&&!(mein&&mein.abgegeben)?`<button type="button" class="ppm-btn primaer" data-ppm="co" data-aktion="test" data-id="${esc(c.id)}">Test starten</button>`:(mein&&mein.ausgewertet?`<button type="button" class="ppm-btn primaer" data-ppm="co" data-aktion="ergebnis" data-id="${esc(c.id)}">Mein Ergebnis</button>`:`<span class="ppm-status">${beendet?"beendet":"noch nicht freigeschaltet"}</span>`))}</div>`;
+ }
+ return`${ppmKopf(m,"",lehrer?`<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="neu">＋ Neuen Check-out anlegen</button>`:"")}
+ <div class="ppm-box"><h2>Check-Out-Wochentest</h2><p>Der Test hat <b>2 Fallvignetten mit je 2 K-Prim-Aufgaben</b> (4 Aufgaben mit je 4 Aussagen, zusammen 16 Bewertungseinheiten). Du entscheidest bei jeder Aussage, ob sie richtig oder falsch ist. Die Bepunktung (BE und Notenpunkte) steht oben im Test, die Auswertung kommt automatisch.</p>${karte}</div>
+ ${checkoutLiveBannerHTML(d)}${footer()}`;
+}
+// ---- Unterrichtsstunde ----
+// Aufbau: Name der Stunde · Digitale Tafel (eingeblendet, zur Orientierung) · Material
+// (PDF, Film, Audio, Bild, Link) · Check-out mit offenen Fragen und Haken „fertig“.
+function ppmMaterialHTML(x,i,m,lehrer){
+ const typ=PPM_MAT_INFO[x.typ]?x.typ:"link",info=PPM_MAT_INFO[typ];
+ let vorschau="";
+ if(typ==="bild")vorschau=`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer"><img src="${esc(x.url)}" alt="${esc(x.titel||x.name||"Bild")}" style="max-width:100%;max-height:320px;border-radius:10px;margin-top:8px;display:block"></a>`;
+ if(typ==="video")vorschau=`<video controls preload="metadata" src="${esc(x.url)}" style="width:100%;max-height:360px;border-radius:10px;margin-top:8px;background:#000"></video>`;
+ if(typ==="audio")vorschau=`<audio controls preload="metadata" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>`;
+ return`<div class="ppm-mat" style="flex-wrap:wrap"><span style="font-size:22px">${info[0]}</span><div style="flex:1;min-width:160px"><b>${esc(x.titel||x.name||"Material")}</b><br><small style="color:var(--muted)">${info[1]}</small></div>
+  <a class="ppm-btn klein" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">Öffnen</a>${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="mat-weg" data-id="${esc(m.id)}" data-i="${i}" title="Entfernen">✕</button>`:""}
+  ${vorschau?`<div style="flex-basis:100%">${vorschau}</div>`:""}</div>`;
+}
+async function ppmStundeSeite(m){
+ const lehrer=isTeacher(),P=PP12_PHASEN[m.phase||2];
+ const mat=m.material||[],fr=m.fragen||[];
+ const mein=PPM.meine.stunde[m.id]||{};
+ const schritte=`<div class="ppm-phasen">${[1,2,3].map(n=>`<div class="ppm-ph${n===(m.phase||2)?" an":""}"><span>${n}</span>${esc(PP12_PHASEN[n].schueler)}</div>`).join("")}</div>`;
+ // Digitale Tafel direkt auf der Seite einblenden
+ let tafel="";
+ if(m.tafelId){
+  const vorher=activeWhiteboardId;
+  try{
+   activeWhiteboardId=m.tafelId;
+   const html=await renderWhiteboardBoard();
+   if(html&&html.indexOf('id="wbStage"')>-1){
+    tafel=`<div class="ppm-tafel">${html}</div>
+     <div class="ppm-zeile" style="border:0;padding-bottom:0"><button type="button" class="ppm-btn klein" data-ppm="tafel" data-id="${esc(m.tafelId)}">↗ Tafel im Vollbild öffnen</button></div>`;
+    window.__ppmNachRender=()=>{if($("wbStage"))initWhiteboardBoard(m.tafelId);};
+   }
+  }catch(e){console.error("Tafel einbetten:",e);}
+  activeWhiteboardId=vorher;
+  if(!tafel)tafel=`<p class="ppm-leer">Die Tafel konnte nicht geladen werden.</p><button type="button" class="ppm-btn primaer" data-ppm="tafel" data-id="${esc(m.tafelId)}">🖥 Digitale Tafel öffnen</button>`;
+ }else tafel=lehrer?`<button type="button" class="ppm-btn primaer" data-ppm="tafel-neu" data-id="${esc(m.id)}">＋ Digitale Tafel anlegen</button>`:`<span class="ppm-leer">Die Tafel wird von deiner Lehrkraft vorbereitet.</span>`;
+ const matListe=mat.map((x,i)=>ppmMaterialHTML(x,i,m,lehrer)).join("");
+ let check="";
+ if(lehrer){
+  check=`<div id="ppmFragenEdit">${fr.map((q,i)=>`<div class="ppm-frage"><b>Frage ${i+1}</b><textarea data-ppm-frage="${i}" placeholder="Offene Frage">${esc(q.frage||"")}</textarea><textarea data-ppm-loesung="${i}" placeholder="Lösungsantwort (Musterlösung)" style="margin-top:6px">${esc(q.loesung||"")}</textarea><button type="button" class="ppm-btn klein" data-ppm="frage-weg" data-i="${i}" style="margin-top:6px">Frage entfernen</button></div>`).join("")||`<p class="ppm-leer">Noch keine Frage.</p>`}</div>
+   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="frage-neu" data-id="${esc(m.id)}">＋ Frage</button><button type="button" class="ppm-btn primaer" data-ppm="fragen-speichern" data-id="${esc(m.id)}">Fragen speichern</button><button type="button" class="ppm-btn" data-ppm="antworten-ansehen" data-id="${esc(m.id)}">Antworten der Klasse ansehen</button></div>`;
+ }else{
+  check=(fr.length?fr.map((q,i)=>{
+   const gezeigt=(mein.gezeigt||[])[i],bew=(mein.bewertung||[])[i];
+   return`<div class="ppm-frage"><b>${i+1}. ${esc(q.frage)}</b>
+    <textarea data-ppm-antwort="${i}" placeholder="Deine Antwort in eigenen Worten …"${gezeigt?" readonly":""}>${esc((mein.antworten||[])[i]||"")}</textarea>
+    ${gezeigt?`<div class="ppm-loesung"><b>Lösung:</b><br>${esc(q.loesung||"")}</div>
+     <div class="ppm-bew"><span style="align-self:center;font-size:12px">Meine Antwort war:</span>${[["ja","passt"],["teils","teilweise"],["nein","noch nicht"]].map(([k,t])=>`<button type="button" class="${bew===k?"an":""}" data-ppm="bewerten" data-id="${esc(m.id)}" data-i="${i}" data-k="${k}">${t}</button>`).join("")}</div>`
+     :`<div style="margin-top:8px"><button type="button" class="ppm-btn" data-ppm="loesung" data-id="${esc(m.id)}" data-i="${i}">Lösung anzeigen</button></div>`}</div>`;
+  }).join(""):`<p class="ppm-leer">Zu dieser Stunde gibt es keine Check-out-Frage.</p>`)
+  +`<button type="button" class="ppm-fertig${mein.fertig?" an":""}" data-ppm="fertig" data-id="${esc(m.id)}" aria-pressed="${mein.fertig?"true":"false"}"><span class="ppm-haken">${mein.fertig?"✓":""}</span>${mein.fertig?"Ich bin fertig – Check-out abgehakt":"Ich bin mit dem Check-out fertig"}</button>`;
+ }
+ return`${ppmKopf(m,schritte)}
+ ${lehrer?`<div class="ppm-box"><h2>Name der Stunde</h2><div class="ppm-zeile" style="border:0"><input id="ppmStundeTitel" maxlength="120" value="${esc(m.titel||"")}" placeholder="z. B. Gegenstand der Psychologie" style="flex:1;min-width:220px;min-height:42px;padding:0 12px;border:1px solid var(--line);border-radius:10px;font:inherit"><button type="button" class="ppm-btn primaer" data-ppm="stunde-name" data-id="${esc(m.id)}">Name speichern</button></div></div>`:""}
+ <div class="ppm-box"><h2>Digitale Tafel</h2><p style="color:var(--muted);font-size:13px">Zur Orientierung: Hier läuft die Stunde mit Impulsen, Aufgaben und Werkzeugen.</p>${tafel}</div>
+ <div class="ppm-box"><h2>Material</h2>${matListe||`<p class="ppm-leer">Noch kein Material.</p>`}
+  ${lehrer?`<div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="mat-datei" data-id="${esc(m.id)}">＋ Datei hochladen (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-ppm="mat-link" data-id="${esc(m.id)}">＋ Link oder Webseite</button><input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div><p style="color:var(--muted);font-size:12px;margin:0">Dateien bis 15 MB. Größere Filme am besten als Link (z. B. Mediathek) einfügen.</p>`:""}</div>
+ <div class="ppm-box"><h2>Check-out</h2>${lehrer?`<p style="color:var(--muted);font-size:13px">Offene Frage mit Lösung. Die Schüler:innen schreiben ihre Antwort, lassen sich dann die Lösung anzeigen und setzen am Ende den Haken „fertig“.</p>`:`<p style="color:var(--muted);font-size:13px">Schreibe zuerst deine Antwort. Danach lässt du dir die Lösung anzeigen, vergleichst und setzt unten den Haken.</p>`}${check}</div>
+ ${lehrer?`<div class="ppm-box"><h2>Für dich als Lehrkraft</h2><p><b>Phase ${P.kurz} · ${esc(P.name)}</b></p><p>${esc(P.was)}</p><p><b>Deine Rolle:</b> ${esc(P.rolle)}</p></div>`:""}
+ ${footer()}`;
+}
+// ---- Abschlussprüfungstraining ----
+// Vier Schritte: ① Frage aus der Abschlussprüfung · ② Relevanter Inhalt · ③ Bearbeitung durch die Schüler:innen · ④ Vergleich mit der Lösung.
+// Lehrkraft gestaltet ①, ② und ④ direkt auf dieser Seite. Antworten liegen in ppStundenAntworten (Felder aptAntwort, aptAbgegeben, aptBewertung).
+function ppmAptDateiHTML(d,m,feld,lehrer){
+ if(!d||!d.url)return"";
+ return`<div style="margin:8px 0">${dateiEmbedHTML(d.url,d.name)}${lehrer?` <button type="button" class="ppm-btn klein" data-ppm="apt-datei-weg" data-id="${esc(m.id)}" data-feld="${feld}">Datei entfernen</button>`:""}</div>`;
+}
+async function ppmAptSeite(m){
+ const lehrer=isTeacher(),mein=PPM.meine.stunde[m.id]||{};
+ const mat=m.material||[];
+ const abgegeben=!!mein.aptAbgegeben;
+ const nr=(n,t,sub)=>`<div style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span class="ppm-snr">${n}</span><div><h2 style="margin:0">${t}</h2>${sub?`<small style="color:var(--muted)">${sub}</small>`:""}</div></div>`;
+ const speichern=`<div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" data-ppm="apt-speichern" data-id="${esc(m.id)}">Speichern</button></div>`;
+ const kopfInfo=`<div class="ppm-phasen">${[["1","Prüfungsfrage"],["2","Relevanter Inhalt"],["3","Meine Bearbeitung"],["4","Vergleich mit Lösung"]].map(([n,t],i)=>`<div class="ppm-ph${lehrer||i<2||(i===2)||(i===3&&abgegeben)?" an":""}"><span>${n}</span>${t}</div>`).join("")}</div>`;
+ // ① Frage
+ const s1=lehrer?`${nr(1,"Frage aus der Abschlussprüfung","Text und/oder Datei (PDF, Bild).")}
+   <textarea id="aptFrage" rows="6" style="width:100%;font:inherit" placeholder="Prüfungsfrage einfügen …">${esc(m.frage||"")}</textarea>
+   ${ppmAptDateiHTML(m.frageDatei,m,"frage",true)}
+   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-datei" data-id="${esc(m.id)}" data-feld="frage">＋ Datei zur Frage</button></div>${speichern}`
+  :`${nr(1,"Frage aus der Abschlussprüfung")}${m.frage||(m.frageDatei&&m.frageDatei.url)?`${m.frage?`<p style="white-space:pre-wrap;font-size:15px;line-height:1.55">${esc(m.frage)}</p>`:""}${ppmAptDateiHTML(m.frageDatei,m,"frage",false)}`:`<p class="ppm-leer">Deine Lehrkraft stellt die Frage hier bereit.</p>`}`;
+ // ② Relevanter Inhalt
+ const s2=lehrer?`${nr(2,"Relevanter Inhalt","Was Schüler:innen wissen müssen, um die Frage zu beantworten. Mit „- “ entstehen Aufzählungen, mit **fett** Hervorhebungen.")}
+   <textarea id="aptInhalt" rows="7" style="width:100%;font:inherit" placeholder="Wichtige Begriffe, Modelle, Merkmale …">${esc(m.inhalt||"")}</textarea>
+   ${mat.map((x,i)=>ppmMaterialHTML(x,i,m,true)).join("")}
+   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="mat-datei" data-id="${esc(m.id)}">＋ Datei (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-ppm="mat-link" data-id="${esc(m.id)}">＋ Link</button><input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div>${speichern}`
+  :`${nr(2,"Relevanter Inhalt")}${m.inhalt?`<div style="line-height:1.55">${ppmMd(m.inhalt)}</div>`:""}${mat.map((x,i)=>ppmMaterialHTML(x,i,m,false)).join("")}${!m.inhalt&&!mat.length?`<p class="ppm-leer">Noch kein Inhalt hinterlegt.</p>`:""}`;
+ // ③ Bearbeitung
+ const s3=lehrer?`${nr(3,"Bearbeitung durch die Schüler:innen","So sehen es die Schüler:innen: ein Antwortfeld, dann „Abgeben und vergleichen“.")}
+   <textarea rows="4" disabled placeholder="Hier schreiben die Schüler:innen ihre Antwort …" style="width:100%;font:inherit;opacity:.7"></textarea>
+   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-antworten" data-id="${esc(m.id)}">Antworten der Klasse ansehen</button></div>`
+  :`${nr(3,"Meine Bearbeitung","Schreibe deine Antwort auf die Prüfungsfrage, bevor du die Lösung siehst.")}
+   <textarea id="aptAntwort" rows="10" style="width:100%;font:inherit"${abgegeben?" readonly":""} placeholder="Deine Antwort …">${esc(mein.aptAntwort||"")}</textarea>
+   <div class="ppm-zeile" style="border:0">${abgegeben?`<button type="button" class="ppm-btn" data-ppm="apt-wieder" data-id="${esc(m.id)}">Antwort überarbeiten</button>`
+    :`<button type="button" class="ppm-btn" data-ppm="apt-zwischen" data-id="${esc(m.id)}">Zwischenspeichern</button><button type="button" class="ppm-btn primaer" data-ppm="apt-abgeben" data-id="${esc(m.id)}">Abgeben und mit der Lösung vergleichen</button>`}</div>`;
+ // ④ Vergleich
+ const bew=mein.aptBewertung;
+ const loesungBox=`<div class="ppm-loesung"><b>Lösung</b>${m.loesung?`<div style="line-height:1.5">${ppmMd(m.loesung)}</div>`:`<p class="ppm-leer">Noch keine Lösung hinterlegt.</p>`}${ppmAptDateiHTML(m.loesungDatei,m,"loesung",lehrer)}</div>`;
+ const s4=lehrer?`${nr(4,"Vergleich mit der Lösung","Wird erst nach dem Abgeben sichtbar.")}
+   <textarea id="aptLoesung" rows="7" style="width:100%;font:inherit" placeholder="Musterlösung / Erwartungshorizont …">${esc(m.loesung||"")}</textarea>
+   ${ppmAptDateiHTML(m.loesungDatei,m,"loesung",true)}
+   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-datei" data-id="${esc(m.id)}" data-feld="loesung">＋ Datei zur Lösung</button></div>${speichern}`
+  :`${nr(4,"Vergleich mit der Lösung")}${abgegeben?`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+     <div class="ppm-frage" style="margin:0"><b>Meine Antwort</b><p style="white-space:pre-wrap;line-height:1.5">${esc(mein.aptAntwort||"–")}</p></div>${loesungBox}</div>
+    <div class="ppm-bew"><span style="align-self:center;font-size:12px">Meine Antwort stimmt mit der Lösung überein:</span>${[["ja","ganz"],["teils","teilweise"],["nein","noch nicht"]].map(([k,t])=>`<button type="button" class="${bew===k?"an":""}" data-ppm="apt-bewerten" data-id="${esc(m.id)}" data-k="${k}">${t}</button>`).join("")}</div>`
+   :`<p class="ppm-leer">Die Lösung erscheint, sobald du deine Bearbeitung abgegeben hast.</p>`}`;
+ const alt=(()=>{const ph=PROJEKT_PHASEN.find(x=>x.lbNum===Number(m.lb));return ph?`<div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn klein" data-ppm="apt-alt" data-lb="${m.lb}">Bisherige Ansicht: Prüfungsinhalte mit je 4 Schritten →</button></div>`:"";})();
+ return`${ppmKopf(m,kopfInfo)}
+ <div class="ppm-box">${s1}</div><div class="ppm-box">${s2}</div><div class="ppm-box">${s3}</div><div class="ppm-box">${s4}</div>${alt}${footer()}`;
+}
+async function ppmAptAntwortenDialog(m){
+ let docs=[];
+ try{docs=(await getDocs(query(collection(db,"ppStundenAntworten"),where("modulId","==",m.id)))).docs.map(d=>d.data()).filter(d=>d.aptAntwort||d.aptAbgegeben);}catch(e){ppmFehler(e,"Antworten konnten nicht geladen werden");return;}
+ const bt={ja:"ganz",teils:"teilweise",nein:"noch nicht"};
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">ABSCHLUSSPRÜFUNGSTRAINING</div><h2>Antworten der Klasse</h2>
+  <p>${docs.length} Bearbeitung${docs.length===1?"":"en"}, ${docs.filter(d=>d.aptAbgegeben).length} abgegeben.</p>
+  ${docs.map(d=>`<details style="margin:8px 0"><summary><b>${esc(d.name||"Schüler:in")}</b>${d.aptAbgegeben?" · abgegeben":" · in Arbeit"}${d.aptBewertung?" · Selbsteinschätzung: "+bt[d.aptBewertung]:""}</summary><p style="white-space:pre-wrap">${esc(d.aptAntwort||"–")}</p></details>`).join("")||`<p class="ppm-leer">Noch keine Antworten.</p>`}`);
+}
+// ---- Selbstlernkurs ----
+function ppmZuordnenHTML(s,f,gesperrt){
+ const antw=((f.zuordnung||{})[s.id])||{};
+ return`<p>${esc(s.frage||"")}</p><div class="ppm-zu">${s.items.map((it,i)=>{
+  const a=antw[i];const stat=a===undefined?"":(a===it.k?"richtig":"falsch");
+  return`<div class="ppm-zui ${stat}"><span style="flex:1;min-width:200px">${esc(it.t)}</span>
+   ${s.kategorien.map((k,j)=>`<button type="button" class="ppm-btn klein${a===j?" primaer":""}" data-ppm="zuordnen" data-s="${esc(s.id)}" data-i="${i}" data-k="${j}"${gesperrt?" disabled":""}>${esc(k)}</button>`).join("")}
+   ${stat==="richtig"?`<span>✓</span>`:stat==="falsch"?`<span>✗</span>`:""}
+   ${stat?`<small style="flex-basis:100%;color:var(--muted)">${esc(it.e||"")}</small>`:""}</div>`;
+ }).join("")}</div>`;
+}
+function ppmSchrittFertig(s,f){
+ if(!f)return false;
+ return !!(f.erledigt&&f.erledigt[s.id]);
+}
+async function ppmKursSeite(m){
+ const lehrer=isTeacher(),schritte=ppmKursSchritte(m),c=ppmFarbe(m);
+ let f=PPM.meine.kurs[m.id]||{erledigt:{},zuordnung:{},antworten:{}};
+ const exp=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
+ const zaehl=schritte.filter(s=>s.typ!=="abschluss");
+ const fertigN=zaehl.filter(s=>ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt)).length;
+ const proz=zaehl.length?Math.round(fertigN/zaehl.length*100):0;
+ let offenIdx=schritte.findIndex(s=>s.typ!=="abschluss"&&!(ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt)));
+ if(offenIdx<0)offenIdx=schritte.length-1;
+ const teile=schritte.map((s,i)=>{
+  const fertig=s.typ==="abschluss"?(offenIdx===schritte.length-1&&fertigN===zaehl.length):(ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt));
+  const gesperrt=!lehrer&&i>offenIdx;
+  const offen=lehrer||i===offenIdx;
+  let body="";
+  if(offen){
+   if(s.typ==="ziele")body=`<ul>${(s.items||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
+   else if(s.typ==="text")body=ppmMd(s.text);
+   else if(s.typ==="zuordnen")body=ppmZuordnenHTML(s,f,lehrer);
+   else if(s.typ==="experiment")body=`<p>${esc(s.text||"")}</p><button type="button" class="ppm-btn primaer" data-ppm="experiment">${exp.experimentErledigt?"Aufgabe wiederholen":"Interaktive Aufgabe starten"}</button>`;
+   else if(s.typ==="link")body=`<p>${esc(s.text||"")}</p><a class="ppm-btn primaer" href="${esc(s.url||"#")}" target="_blank" rel="noopener noreferrer">Öffnen</a>`;
+   else if(s.typ==="selbsttest")body=(s.fragen||[]).map((q,j)=>{
+    const g=((f.gezeigt||{})[s.id]||[])[j],a=((f.antworten||{})[s.id]||[])[j]||"";
+    return`<div class="ppm-frage"><b>${j+1}. ${esc(q.frage)}</b><textarea data-ppm-kursantwort="${esc(s.id)}" data-j="${j}" placeholder="Deine Antwort …"${g||lehrer?" readonly":""}>${esc(a)}</textarea>
+     ${g||lehrer?`<div class="ppm-loesung"><b>Lösungsantwort:</b><br>${esc(q.loesung||"")}</div>`:`<div style="margin-top:8px"><button type="button" class="ppm-btn" data-ppm="kurs-loesung" data-s="${esc(s.id)}" data-j="${j}">Lösung zeigen</button></div>`}</div>`;}).join("");
+   else if(s.typ==="abschluss")body=`<p>${esc(s.text||"")}</p>`;
+   // Erledigt-Knopf nur für Lesestationen
+   if(!lehrer&&["ziele","text","link"].includes(s.typ)&&!fertig)body+=`<div style="margin-top:12px"><button type="button" class="ppm-btn primaer" data-ppm="schritt-fertig" data-s="${esc(s.id)}">Erledigt ✓ – weiter</button></div>`;
+  }
+  const status=fertig?"✓":String(i+1);
+  return`<div class="ppm-schritt${fertig?" fertig":""}${gesperrt?" gesperrt":""}"><div class="ppm-skopf"><span class="ppm-snr">${status}</span><div style="flex:1"><b>${esc(s.titel||"Schritt")}</b>${gesperrt?`<br><small style="color:var(--muted)">Schließe zuerst den vorherigen Schritt ab.</small>`:""}</div></div>${offen?`<div class="ppm-sbody">${body}</div>`:""}</div>`;
+ }).join("");
+ const kursTitel=(PPM_KURSE[m.kursId]||{}).titel||"Eigener Kurs";
+ let lehrerBox="";
+ if(lehrer){
+  lehrerBox=`<div class="ppm-box"><h2>Für dich als Lehrkraft</h2><p>Dieser Kurs läuft ohne dich: Die Schüler:innen arbeiten Schritt für Schritt, jeder Schritt öffnet sich erst, wenn der vorherige erledigt ist. Du siehst hier alle Schritte offen.</p>
+   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="kurs-stand" data-id="${esc(m.id)}">Stand der Klasse ansehen</button>${m.kursId==="eigen"?`<button type="button" class="ppm-btn" data-ppm="kurs-bearbeiten" data-id="${esc(m.id)}">Kurs bearbeiten</button>`:`<button type="button" class="ppm-btn" data-ppm="kurs-kopie" data-id="${esc(m.id)}">Als eigenen Kurs kopieren und anpassen</button>`}</div>
+   ${m.kursId==="psych-gegenstand"?`<p style="font-size:12px;color:var(--muted)">Ausarbeitung, Zuordnungsaufgabe und Selbsttest sind von Claude erstellt. Bitte fachlich prüfen.</p>`:""}</div>`;
+ }
+ return`${ppmKopf(m,`<p style="color:var(--muted)">${esc(kursTitel)}</p>`)}
+ ${lehrer?"":`<div class="ppm-box"><b>Dein Fortschritt: ${fertigN} von ${zaehl.length} Schritten</b><div class="ppm-bar"><i style="width:${proz}%"></i></div><small style="color:var(--muted)">Du arbeitest den Kurs selbstständig von oben nach unten durch.</small></div>`}
+ ${lehrerBox}${teile}${footer()}`;
+}
+
+// ---- Schreiben (Schüler:in) ----
+async function ppmStundeSchreiben(m,teil){
+ const alt=PPM.meine.stunde[m.id]||{modulId:m.id,uid:currentUser.uid,name:ppmName(),antworten:[],gezeigt:[],bewertung:[]};
+ const neu={...alt,...teil,modulId:m.id,uid:currentUser.uid,name:ppmName(),updatedAt:serverTimestamp()};
+ await setDoc(doc(db,"ppStundenAntworten",ppmDocId(m)),neu);
+ PPM.meine.stunde[m.id]=neu;
+}
+async function ppmKursSchreiben(m,fn){
+ const alt=PPM.meine.kurs[m.id]||{modulId:m.id,uid:currentUser.uid,name:ppmName(),erledigt:{},zuordnung:{},antworten:{},gezeigt:{}};
+ const neu=JSON.parse(JSON.stringify({...alt,erledigt:alt.erledigt||{},zuordnung:alt.zuordnung||{},antworten:alt.antworten||{},gezeigt:alt.gezeigt||{}}));
+ fn(neu);neu.modulId=m.id;neu.uid=currentUser.uid;neu.name=ppmName();neu.updatedAt=serverTimestamp();
+ await setDoc(doc(db,"ppKursFortschritt",ppmDocId(m)),neu);
+ PPM.meine.kurs[m.id]=neu;
+}
+function ppmArr(a,n){const r=Array.isArray(a)?[...a]:[];while(r.length<n)r.push(null);return r;}
+
+// ---- Klick- und Eingabebehandlung (delegiert) ----
+async function ppmKlick(e){
+ const b=e.target.closest&&e.target.closest("[data-ppm]");
+ if(!b)return;
+ const aktion=b.dataset.ppm,id=b.dataset.id,m=id?ppmById(id):(activePPModul?ppmById(activePPModul):null);
+ if(b.classList.contains("ppm-karte")&&e.target.closest(".ppm-edit"))return;
+ const refresh=async()=>{await render();};
+ try{
+  if(aktion==="oeffnen"){ppmOeffnen(id);return;}
+  if(aktion==="plan"){activePPModul=null;await refresh();return;}
+  if(aktion==="neu"){if(!isTeacher())return;if(!b.dataset.typ){ppmTypWahl(b.dataset.woche||null);return;}await ppmDialog(null,b.dataset.typ,b.dataset.woche||null);return;}
+  if(aktion==="bearbeiten"){e.stopPropagation();if(!isTeacher())return;await ppmDialog(id);return;}
+  if(aktion==="reihenfolge"){e.stopPropagation();if(!isTeacher()||!m)return;await ppmReihenfolge(m,Number(b.dataset.d)||0);return;}
+  if(aktion==="verschieben"){e.stopPropagation();if(!isTeacher()||!m)return;await ppmVerschieben(m,Number(b.dataset.d)||0);return;}
+  if(aktion==="standard"){await ppmStandardplan();return;}
+  if(aktion==="experiment"){openExperimentStunde(m&&m.modul==="experiment"?ppmExpTeile(m):null);return;}
+  if(aktion==="ea-start"){window.__eaRueck=async()=>{await render();};openEinarbeitung(b.dataset.ea);return;}
+  if(aktion==="ea-stand"){await ppmEaStandDialog(b.dataset.ea);return;}
+  if(aktion==="projekt-oeffnen"){const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(b.dataset.lb));if(ph){activePPModul=null;activePhaseDetail=ph.id+":projekt";await refresh();}return;}
+  if(aktion==="tafel"){openWhiteboard(id);return;}
+  if(aktion==="tafel-neu"&&m){const t=await ppmTafelAnlegen(m.titel);await updateDoc(doc(db,"ppModule",m.id),{tafelId:t});await ppmLaden(true);openWhiteboard(t);return;}
+  if(aktion==="einheit-neu"&&m){await ppmDialog(null,"experiment",null,{projektId:m.id});return;}
+  if(aktion==="einheit-weg"&&m){const l=[...(m.einheiten||[])];l.splice(Number(b.dataset.i),1);await updateDoc(doc(db,"ppModule",m.id),{einheiten:l});await ppmLaden(true);await refresh();return;}
+  if(aktion==="co"){
+   const a=b.dataset.aktion;
+   if(a==="neu")openCheckoutEditor();
+   else if(a==="editor")openCheckoutEditor(id);
+   else if(a==="monitor")openCheckoutMonitor(id);
+   else if(a==="test")openCheckoutTest(id);
+   else if(a==="ergebnis")openCheckoutMeinErgebnis(id);
+   return;
+  }
+  // --- Stunde ---
+  if(aktion==="mat-datei"){const inp=$("ppmDatei");inp.click();inp.onchange=async ev=>{const f=ev.target.files&&ev.target.files[0];if(!f)return;
+    try{toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(f,`ppMaterial/${m.id}`),typ=ppmDateiTyp(f);
+     await updateDoc(doc(db,"ppModule",m.id),{material:[...(m.material||[]),{typ,titel:f.name.replace(/\.[a-z0-9]{2,5}$/i,""),name:f.name,url:up.url}]});await ppmLaden(true);await refresh();toast("Material hinzugefügt.");}
+    catch(err){toast(err&&err.message?err.message:"Upload nicht möglich.");}
+    ev.target.value="";};return;}
+  if(aktion==="mat-link"){
+   modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">MATERIAL</div><h2>Webseite oder Link hinzufügen</h2><div class="form"><label>Adresse<input id="ppmUrl" placeholder="https://…"></label><label>Titel<input id="ppmUrlTitel" maxlength="100"></label><div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmUrlOk">Hinzufügen</button></div></div>`);
+   $("ppmUrlOk").addEventListener("click",async()=>{
+    const u=wbSichereUrl($("ppmUrl").value);if(!u){toast("Das ist keine gültige Internetadresse.");return}
+    await updateDoc(doc(db,"ppModule",m.id),{material:[...(m.material||[]),{typ:"link",titel:$("ppmUrlTitel").value.trim()||u.replace(/^https?:\/\//,""),url:u}]});closeModal();await ppmLaden(true);await refresh();});
+   return;}
+  if(aktion==="mat-weg"&&m){const l=[...(m.material||[])];const weg=l.splice(Number(b.dataset.i),1)[0];if(weg&&weg.typ!=="link")deleteCampusDatei(weg.url);await updateDoc(doc(db,"ppModule",m.id),{material:l});await ppmLaden(true);await refresh();return;}
+  if(aktion==="apt-speichern"&&m&&isTeacher()){
+   const t={updatedAt:serverTimestamp()};
+   if($("aptFrage"))t.frage=$("aptFrage").value.trim();
+   if($("aptInhalt"))t.inhalt=$("aptInhalt").value.trim();
+   if($("aptLoesung"))t.loesung=$("aptLoesung").value.trim();
+   await updateDoc(doc(db,"ppModule",m.id),t);await ppmLaden(true);await refresh();toast("Gespeichert.");return;}
+  if(aktion==="apt-datei"&&m&&isTeacher()){
+   const feld=b.dataset.feld,inp=document.createElement("input");inp.type="file";inp.accept="application/pdf,.pdf,image/*";
+   inp.onchange=async()=>{const f=inp.files&&inp.files[0];if(!f)return;
+    try{toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(f,`ppMaterial/${m.id}`);
+     if(m[feld+"Datei"]&&m[feld+"Datei"].url)deleteCampusDatei(m[feld+"Datei"].url);
+     await updateDoc(doc(db,"ppModule",m.id),{[feld+"Datei"]:{url:up.url,name:f.name}});await ppmLaden(true);await refresh();toast("Datei hinzugefügt.");}
+    catch(err){toast(err&&err.message?err.message:"Upload nicht möglich.");}};
+   inp.click();return;}
+  if(aktion==="apt-datei-weg"&&m&&isTeacher()){
+   const feld=b.dataset.feld;if(m[feld+"Datei"]&&m[feld+"Datei"].url)deleteCampusDatei(m[feld+"Datei"].url);
+   await updateDoc(doc(db,"ppModule",m.id),{[feld+"Datei"]:null});await ppmLaden(true);await refresh();return;}
+  if(aktion==="apt-antworten"&&m&&isTeacher()){await ppmAptAntwortenDialog(m);return;}
+  if(aktion==="apt-alt"){const ph=PROJEKT_PHASEN.find(x=>x.lbNum===Number(b.dataset.lb));if(ph){activePPModul=null;activePhaseDetail=ph.id+":apt";await refresh();}return;}
+  if(aktion==="apt-zwischen"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptAntwort:($("aptAntwort")||{}).value||""});toast("Zwischengespeichert.");await refresh();return;}
+  if(aktion==="apt-abgeben"&&m&&!isTeacher()){
+   const t=(($("aptAntwort")||{}).value||"").trim();
+   if(!t){toast("Bitte schreibe zuerst deine Antwort.");return;}
+   await ppmStundeSchreiben(m,{aptAntwort:t,aptAbgegeben:true});await refresh();return;}
+  if(aktion==="apt-wieder"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptAbgegeben:false,aptBewertung:null});await refresh();return;}
+  if(aktion==="apt-bewerten"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptBewertung:b.dataset.k});await refresh();return;}
+  if(aktion==="stunde-name"&&m&&isTeacher()){const t=($("ppmStundeTitel").value||"").trim();if(!t){toast("Bitte einen Namen eingeben.");return;}await updateDoc(doc(db,"ppModule",m.id),{titel:t.slice(0,120)});await ppmLaden(true);await refresh();toast("Name gespeichert.");return;}
+  if(aktion==="fertig"&&m&&!isTeacher()){
+   const n=(m.fragen||[]).length,alt=PPM.meine.stunde[m.id]||{},antw=ppmArr(alt.antworten,n);
+   document.querySelectorAll("[data-ppm-antwort]").forEach(t=>{antw[Number(t.dataset.ppmAntwort)]=t.value;});
+   await ppmStundeSchreiben(m,{antworten:antw.map(x=>x||""),gezeigt:ppmArr(alt.gezeigt,n).map(x=>!!x),bewertung:ppmArr(alt.bewertung,n).map(x=>x||null),fertig:!alt.fertig});
+   await refresh();return;}
+  if(aktion==="frage-neu"&&m){ppmFragenLesen(m);const l=[...(m.fragen||[]),{frage:"",loesung:""}];m.fragen=l;await refresh();return;}
+  if(aktion==="frage-weg"&&m){ppmFragenLesen(m);const l=[...(m.fragen||[])];l.splice(Number(b.dataset.i),1);m.fragen=l;await refresh();return;}
+  if(aktion==="fragen-speichern"&&m){ppmFragenLesen(m);const l=(m.fragen||[]).filter(q=>(q.frage||"").trim());await updateDoc(doc(db,"ppModule",m.id),{fragen:l});await ppmLaden(true);await refresh();toast("Fragen gespeichert.");return;}
+  if(aktion==="antworten-ansehen"&&m){await ppmAntwortenDialog(m);return;}
+  if(aktion==="loesung"&&m&&!isTeacher()){
+   const i=Number(b.dataset.i),n=(m.fragen||[]).length;
+   const antw=ppmArr((PPM.meine.stunde[m.id]||{}).antworten,n),gz=ppmArr((PPM.meine.stunde[m.id]||{}).gezeigt,n),bw=ppmArr((PPM.meine.stunde[m.id]||{}).bewertung,n);
+   document.querySelectorAll("[data-ppm-antwort]").forEach(t=>{antw[Number(t.dataset.ppmAntwort)]=t.value;});
+   gz[i]=true;await ppmStundeSchreiben(m,{antworten:antw.map(x=>x||""),gezeigt:gz.map(x=>!!x),bewertung:bw.map(x=>x||null)});await refresh();return;}
+  if(aktion==="bewerten"&&m&&!isTeacher()){
+   const i=Number(b.dataset.i),n=(m.fragen||[]).length,alt=PPM.meine.stunde[m.id]||{};
+   const bw=ppmArr(alt.bewertung,n);bw[i]=b.dataset.k;
+   await ppmStundeSchreiben(m,{antworten:ppmArr(alt.antworten,n).map(x=>x||""),gezeigt:ppmArr(alt.gezeigt,n).map(x=>!!x),bewertung:bw.map(x=>x||null)});await refresh();return;}
+  // --- Kurs ---
+  if(aktion==="schritt-fertig"&&m){await ppmKursSchreiben(m,d=>{d.erledigt[b.dataset.s]=true;});await refresh();return;}
+  if(aktion==="zuordnen"&&m){
+   const s=ppmKursSchritte(m).find(x=>x.id===b.dataset.s);if(!s)return;
+   await ppmKursSchreiben(m,d=>{d.zuordnung[s.id]=d.zuordnung[s.id]||{};d.zuordnung[s.id][b.dataset.i]=Number(b.dataset.k);
+    const a=d.zuordnung[s.id];if(s.items.every((it,i)=>a[i]===it.k))d.erledigt[s.id]=true;});
+   await refresh();return;}
+  if(aktion==="kurs-loesung"&&m){
+   const s=ppmKursSchritte(m).find(x=>x.id===b.dataset.s);if(!s)return;const j=Number(b.dataset.j);
+   const tas=[...document.querySelectorAll(`[data-ppm-kursantwort="${s.id}"]`)];
+   await ppmKursSchreiben(m,d=>{d.antworten[s.id]=ppmArr(d.antworten[s.id],s.fragen.length);tas.forEach(t=>{d.antworten[s.id][Number(t.dataset.j)]=t.value;});
+    d.gezeigt[s.id]=ppmArr(d.gezeigt[s.id],s.fragen.length);d.gezeigt[s.id][j]=true;
+    if(s.fragen.every((q,k)=>d.gezeigt[s.id][k]))d.erledigt[s.id]=true;});
+   await refresh();return;}
+  if(aktion==="kurs-stand"&&m){await ppmKursStandDialog(m);return;}
+  if(aktion==="kurs-kopie"&&m){
+   if(!confirm("Den Kurs als eigenen Kurs kopieren? Du kannst ihn danach frei bearbeiten."))return;
+   await updateDoc(doc(db,"ppModule",m.id),{kursId:"eigen",schritte:JSON.parse(JSON.stringify(ppmKursSchritte(m)))});await ppmLaden(true);await refresh();toast("Kurs kopiert.");return;}
+  if(aktion==="kurs-bearbeiten"&&m){await ppmKursEditor(m);return;}
+ }catch(err){ppmFehler(err,"Das hat nicht geklappt");}
+}
+function ppmFragenLesen(m){
+ const fr=[...(m.fragen||[])];
+ document.querySelectorAll("[data-ppm-frage]").forEach(t=>{const i=Number(t.dataset.ppmFrage);fr[i]={...(fr[i]||{}),frage:t.value};});
+ document.querySelectorAll("[data-ppm-loesung]").forEach(t=>{const i=Number(t.dataset.ppmLoesung);fr[i]={...(fr[i]||{}),loesung:t.value};});
+ m.fragen=fr;
+}
+function ppmOeffnen(id){
+ const m=ppmById(id);if(!m)return;
+ activePPModul=id;
+ if(location.hash!=="#unterricht-pp")location.hash="#unterricht-pp";else render();
+}
+async function ppmAntwortenDialog(m){
+ let docs=[];
+ try{docs=(await getDocs(query(collection(db,"ppStundenAntworten"),where("modulId","==",m.id)))).docs.map(d=>d.data());}catch(e){ppmFehler(e,"Antworten konnten nicht geladen werden");return;}
+ const fr=m.fragen||[];
+ const stat=fr.map((q,i)=>{const z={ja:0,teils:0,nein:0};docs.forEach(d=>{const k=(d.bewertung||[])[i];if(z[k]!==undefined)z[k]++;});return`<tr><td>${i+1}. ${esc(q.frage)}</td><td>${z.ja}</td><td>${z.teils}</td><td>${z.nein}</td></tr>`;}).join("");
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">CHECK-OUT</div><h2>Antworten der Klasse</h2>
+  <p>${docs.length} Person${docs.length===1?"":"en"} haben geantwortet, ${docs.filter(d=>d.fertig).length} davon haben den Haken „fertig“ gesetzt.</p>
+  ${fr.length?`<table class="noten-table"><thead><tr><th>Frage</th><th>passt</th><th>teilweise</th><th>noch nicht</th></tr></thead><tbody>${stat}</tbody></table>`:""}
+  ${docs.map(d=>`<details style="margin:8px 0"><summary><b>${esc(d.name||"Schüler:in")}</b>${d.fertig?" · fertig ✓":""}</summary>${fr.map((q,i)=>`<p><b>${i+1}.</b> ${esc((d.antworten||[])[i]||"–")}</p>`).join("")}</details>`).join("")}`);
+}
+async function ppmEaStandDialog(id){
+ if(!isTeacher())return;
+ try{
+  const info=await einarbeitungInfo(id),k=await ladeStundeKlasse(id);
+  const zeilen=k.students.map(u=>{const f=k.fs[u.uid],a=f&&f.einarbeitungAufgaben;
+   return`<tr><td>${esc(u.displayName||u.email||"Schüler:in")}</td><td>${f&&f.einarbeitungAbgeschlossen?"✓ abgeschlossen":(f?"begonnen":"–")}</td><td>${a&&a.gesamt?`${a.richtig} von ${a.gesamt}`:"–"}</td></tr>`;}).join("");
+  const fertig=k.students.filter(u=>k.fs[u.uid]&&k.fs[u.uid].einarbeitungAbgeschlossen).length;
+  modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Stand der Klasse</h2>
+   <p>${esc((info&&info.titel)||id)}: ${fertig} von ${k.students.length} haben den Kurs abgeschlossen.</p>
+   <table class="noten-table"><thead><tr><th>Name</th><th>Stand</th><th>Aufgaben richtig</th></tr></thead><tbody>${zeilen}</tbody></table>`);
+ }catch(e){ppmFehler(e,"Stand konnte nicht geladen werden");}
+}
+async function ppmKursStandDialog(m){
+ let docs=[];
+ try{docs=(await getDocs(query(collection(db,"ppKursFortschritt"),where("modulId","==",m.id)))).docs.map(d=>d.data());}catch(e){ppmFehler(e,"Stand konnte nicht geladen werden");return;}
+ const sch=ppmKursSchritte(m).filter(s=>s.typ!=="abschluss");
+ const zeilen=sch.map(s=>`<tr><td>${esc(s.titel)}</td><td>${docs.filter(d=>d.erledigt&&d.erledigt[s.id]).length} von ${docs.length}</td></tr>`).join("");
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Stand der Klasse</h2>
+  <p>${docs.length} Person${docs.length===1?"":"en"} haben begonnen.</p>
+  <table class="noten-table"><thead><tr><th>Schritt</th><th>erledigt</th></tr></thead><tbody>${zeilen}</tbody></table>
+  ${docs.map(d=>{const n=sch.filter(s=>d.erledigt&&d.erledigt[s.id]).length;return`<div class="ppm-zeile"><b style="flex:1">${esc(d.name||"Schüler:in")}</b><span>${n}/${sch.length}</span></div>`;}).join("")}`);
+}
+async function ppmKursEditor(m){
+ const sch=JSON.parse(JSON.stringify(ppmKursSchritte(m)));
+ const zeichne=()=>{
+  $("ppmKe").innerHTML=sch.map((s,i)=>`<div class="ppm-frage"><div class="ppm-zeile" style="padding:0 0 6px"><b style="flex:1">${i+1}. ${esc(s.typ)}</b>
+   <button type="button" class="ppm-btn klein" data-k="hoch" data-i="${i}">↑</button><button type="button" class="ppm-btn klein" data-k="runter" data-i="${i}">↓</button><button type="button" class="ppm-btn klein" data-k="weg" data-i="${i}">✕</button></div>
+   <input data-f="titel" data-i="${i}" value="${esc(s.titel||"")}" placeholder="Titel" style="width:100%;margin-bottom:6px">
+   ${["text","abschluss","link","experiment"].includes(s.typ)?`<textarea data-f="text" data-i="${i}" rows="5" style="width:100%" placeholder="Text (## Überschrift, - Liste, **fett**)">${esc(s.text||"")}</textarea>`:""}
+   ${s.typ==="link"?`<input data-f="url" data-i="${i}" value="${esc(s.url||"")}" placeholder="https://…" style="width:100%;margin-top:6px">`:""}
+   ${s.typ==="selbsttest"?`<textarea data-f="fragen" data-i="${i}" rows="6" style="width:100%" placeholder="Pro Frage zwei Zeilen: Frage | Lösungsantwort">${esc((s.fragen||[]).map(q=>q.frage+" | "+q.loesung).join("\n"))}</textarea>`:""}
+   ${s.typ==="ziele"?`<textarea data-f="items" data-i="${i}" rows="4" style="width:100%" placeholder="Ein Ziel pro Zeile">${esc((s.items||[]).join("\n"))}</textarea>`:""}
+   ${s.typ==="zuordnen"?`<small style="color:var(--muted)">Interaktive Zuordnung (nicht im Editor änderbar, nur verschieben oder löschen).</small>`:""}</div>`).join("");
+ };
+ const lesen=()=>{document.querySelectorAll("#ppmKe [data-f]").forEach(el=>{const i=Number(el.dataset.i),f=el.dataset.f;if(!sch[i])return;
+   if(f==="fragen")sch[i].fragen=el.value.split("\n").map(z=>z.split("|")).filter(p=>p[0].trim()).map(p=>({frage:p[0].trim(),loesung:(p[1]||"").trim()}));
+   else if(f==="items")sch[i].items=el.value.split("\n").map(x=>x.trim()).filter(Boolean);
+   else sch[i][f]=el.value;});};
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Kurs bearbeiten</h2>
+  <div id="ppmKe"></div>
+  <div class="ppm-zeile">${[["text","＋ Text"],["link","＋ Link"],["selbsttest","＋ Selbsttest"],["ziele","＋ Ziele"],["experiment","＋ Experiment"]].map(([k,t])=>`<button type="button" class="ppm-btn klein" data-add="${k}">${t}</button>`).join("")}</div>
+  <div class="form-actions" style="margin-top:12px"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmKeOk">Speichern</button></div>`);
+ zeichne();
+ $("ppmKe").addEventListener("click",ev=>{const b=ev.target.closest("[data-k]");if(!b)return;lesen();const i=Number(b.dataset.i);
+  if(b.dataset.k==="weg")sch.splice(i,1);else if(b.dataset.k==="hoch"&&i>0)[sch[i-1],sch[i]]=[sch[i],sch[i-1]];else if(b.dataset.k==="runter"&&i<sch.length-1)[sch[i+1],sch[i]]=[sch[i],sch[i+1]];zeichne();});
+ document.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click",()=>{lesen();const k=b.dataset.add,id="s"+Date.now().toString(36);
+  const neu={id,typ:k,titel:{text:"Neuer Text",link:"Material",selbsttest:"Selbsttest",ziele:"Das lernst du",experiment:"Interaktive Aufgabe: Das Experiment"}[k]};
+  if(k==="text")neu.text="## Überschrift\nText …";if(k==="link"){neu.url="";neu.text="";}if(k==="selbsttest")neu.fragen=[{frage:"",loesung:""}];if(k==="ziele")neu.items=[];if(k==="experiment")neu.text="Du führst den Versuch durch und beantwortest ein kurzes Quiz.";
+  const ab=sch.findIndex(s=>s.typ==="abschluss");sch.splice(ab<0?sch.length:ab,0,neu);zeichne();}));
+ $("ppmKeOk").addEventListener("click",async()=>{lesen();
+  try{await updateDoc(doc(db,"ppModule",m.id),{schritte:sch.filter(s=>s.typ!=="selbsttest"||(s.fragen||[]).length),kursId:"eigen"});closeModal();await ppmLaden(true);await render();toast("Kurs gespeichert.");}catch(e){ppmFehler(e,"Kurs konnte nicht gespeichert werden");}});
+}
+// Zusatzmodule einer Schulwoche (Karten wie in der F11Sb) mit Plus-Zeichen für Lehrkräfte
+function pp12ZusatzHtml(wochenId){
+ const l=PPM.liste.filter(x=>x.start===wochenId&&PPM_ZUSATZ.includes(x.modul));
+ const lehrer=isTeacher();
+ if(!l.length&&!lehrer)return"";
+ return`<div class="pp12-zusatz"><div class="pp12-zlabel">Zusatzmodule${l.length?"":" · noch keine in dieser Woche"}</div><div class="ppm-reihe">${l.map(x=>ppmKarteHTML(x,false)).join("")}${lehrer?`<button type="button" class="ppm-neu" data-ppm="neu" data-woche="${esc(wochenId)}" title="Zusatzmodul hinzufügen" aria-label="Zusatzmodul hinzufügen">＋ Zusatzmodul</button>`:""}</div></div>`;
+}
+
 // Zählt die Lernressourcen je Art (TaskCard, Canva, KI …) für die Kachel „Lernressourcen“ im Unterricht-Bereich.
 const PP12_RES={geladen:0,zaehler:null};
 async function pp12RessourcenZaehlen(){
@@ -4273,6 +5380,9 @@ async function pp12RessourcenZaehlen(){
 }
 async function renderUnterrichtPP(){
  await pp12DatenLaden();
+ await ppmLaden();
+ if(activePPModul){const pm=ppmById(activePPModul);if(pm)return await ppmModulSeite(pm);activePPModul=null;}
+ await ppmMeineLaden();
  const resZ=await pp12RessourcenZaehlen();
  const resLabel={taskcard:["TaskCard","TaskCards"],canva:["Canva","Canva"],ki:["KI-Angebot","KI-Angebote"],video:["Video","Videos"],bycs:["ByCS / mebis","ByCS / mebis"],learningapps:["LearningApps","LearningApps"],weitere:["weiterer Link","weitere Links"]};
  const resChips=Object.entries(resZ).filter(([,n])=>n>0).map(([k,n])=>`<span class="chip">${n} ${resLabel[k][n===1?0:1]}</span>`).join("");
@@ -4318,7 +5428,7 @@ async function renderUnterrichtPP(){
   }).join("");
   rows+=`<div class="pp12-woche${istJetzt?" jetzt":""}">
    <div class="pp12-wlabel"><strong>KW ${pp12KW(m)}</strong><span>${pp12Datum(m)}–${pp12Datum(pp12Add(m,4))}</span><em>${wochenStd} Std.${istJetzt?" · diese Woche":""}</em></div>
-   <div class="pp12-tage">${cells}</div>
+   <div class="pp12-rechts"><div class="pp12-tage">${cells}</div>${pp12ZusatzHtml(m)}</div>
   </div>`;
   m=pp12Add(m,7);
  }
@@ -4339,6 +5449,7 @@ async function renderUnterrichtPP(){
  const parkHtml=isTeacher()&&PP12_PARK.length?`<div class="card"style="margin-top:12px"><strong>Zurückgestellte Stunden</strong><p style="margin:6px 0">Diese Stunden haben aktuell keinen Termin.</p>${PP12_PARK.map(e=>`<div class="pp12-park"><span>${esc(e.t)}</span><button type="button"class="secondary"onclick="pp12Einplanen('${esc(e.id)}')">Wieder einplanen</button></div>`).join("")}</div>`:"";
  const lbKarten=Object.entries(PP12_LB).map(([k,v])=>`<div class="pp12-stat"style="--c:${v.farbe}"><strong>${stoffStd[k]} Std.</strong><small>${v.kurz} · ${esc(v.titel)}</small></div>`).join("");
  return`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
+ ${PPM_CSS}
  ${pageHead("UNTERRICHT","Unterricht Pädagogik und Psychologie","Stoffverteilungsplan 12. Klasse über das ganze Schuljahr: jede Unterrichtsstunde ein Balken, pro Woche 5 Stunden (Mo 1 Std., Mi 2 Std., Fr 2 Std.).",`${isTeacher()?`<button class="secondary"type="button"onclick="go('didaktik')">Didaktik-Kompass</button>`:""}`)}
  <style>
   .pp12-fuss{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
@@ -4386,6 +5497,9 @@ async function renderUnterrichtPP(){
   .pp12-res-btn{margin-top:auto;align-self:flex-start;border:1.5px solid #3fa66a;background:#fff;color:#2e7d4f;border-radius:8px;padding:4px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
   .pp12-tool{margin:12px 0}.pp12-tool p{margin:6px 0 10px}.pp12-tool-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
   .pp12-park{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:6px 0;border-top:1px solid #e0e7ef}
+  .pp12-rechts{min-width:0}
+  .pp12-zusatz{margin-top:6px;padding:6px 8px;border-radius:10px;background:rgba(255,255,255,.65);border:1px dashed #b9c8d6}
+  .pp12-zlabel{font-size:11px;font-weight:700;color:#51627a;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
   @media (max-width:760px){
    .pp12-woche{grid-template-columns:1fr}.pp12-wlabel{flex-direction:row;gap:10px;align-items:baseline;flex-wrap:wrap}
    .pp12-tage{grid-template-columns:1fr}.s1,.s2{grid-column:auto}
@@ -5705,7 +6819,7 @@ const CHECKOUT_BE_NACH_FEHLERN=[4,2,1,0,0];
 // 15: 100–96 · 14: 95–91 · … · 3: 40–34 · 2: 33–27 · 1: 26–20 · 0: 19–0.
 // Zwischenwerte werden nicht aufgerundet (z. B. 95,5 % → 14 Punkte).
 const FOSBOS_SCHLUESSEL=[[15,96],[14,91],[13,86],[12,81],[11,76],[10,71],[9,66],[8,61],[7,56],[6,51],[5,46],[4,41],[3,34],[2,27],[1,20]];
-const CHECKOUT_MIN_AUFGABEN=3,CHECKOUT_MAX_AUFGABEN=3; // immer genau 3 K-Prim-Aufgaben je Check-out
+const CHECKOUT_MIN_AUFGABEN=4,CHECKOUT_MAX_AUFGABEN=4; // immer genau 4 K-Prim-Aufgaben je Check-out: 2 Fallvignetten, jede für 2 Aufgaben, zusammen 16 BE
 function notenpunkteAusProzent(p){for(const [np,min] of FOSBOS_SCHLUESSEL)if(p>=min)return np;return 0;}
 function noteAusNotenpunkten(np){return np>=13?1:np>=10?2:np>=7?3:np>=4?4:np>=1?5:6;}
 function npText(np){return`${np} Punkte (${noteAusNotenpunkten(np)})`;}
@@ -6311,7 +7425,7 @@ const CO_AUFGABENBANK=[
  }
 ];
 // Vorlage = Check-out mit genau 3 Aufgaben aus der Bank; wird am passenden Freitag per Klick eingesetzt.
-const CHECKOUT_VORLAGEN=[
+const CHECKOUT_VORLAGEN_ALLE=[
  {
   "id": "aln-1",
   "titel": "Freud: Instanzen, psychosexuelle Entwicklung, Abwehr",
@@ -6346,6 +7460,8 @@ const CHECKOUT_VORLAGEN=[
   ]
  }
 ];
+// Angeboten werden nur Vorlagen im neuen Aufbau (genau 4 Aufgaben: 2 Fallvignetten, je 2 Aufgaben). Ältere Vorlagen mit 3 Aufgaben bleiben im Code.
+const CHECKOUT_VORLAGEN=CHECKOUT_VORLAGEN_ALLE.filter(v=>(v.aufgaben||[]).length===CHECKOUT_MAX_AUFGABEN);
 let coEditor=null;
 const CO_CHECKLISTE=[
  ["Situation","Situationsbeschreibung adäquat (anwendungsorientierte Informationen)"],
@@ -6416,7 +7532,7 @@ async function openCheckoutEditor(id,vorgabe){
   }catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
  }else{
   const heute=new Date().toISOString().slice(0,10);
-  coEditor={id:null,titel:"",lbNum:pp12LbFuerDatum(heute),datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:[coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe()]};
+  coEditor={id:null,titel:"",lbNum:pp12LbFuerDatum(heute),datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:[coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe()]};
   if(vorgabe?.datum)coEditor.datum=vorgabe.datum;
   if(vorgabe?.lbNum)coEditor.lbNum=vorgabe.lbNum;
   const vl=vorgabe?.vorlage?CHECKOUT_VORLAGEN.find(v=>v.id===vorgabe.vorlage):null;
@@ -6434,6 +7550,8 @@ function coEditorLesen(){
   stamm:v(`coStamm${i}`),kontext:v(`coKo${i}`),vTitel:v(`coVT${i}`),vText:v(`coVX${i}`),vZeilen:!!$(`coVZ${i}`)?.checked,
   mTitel:v(`coMT${i}`),mText:v(`coMX${i}`),mQuelle:v(`coMQ${i}`),
   aussagen:[0,1,2,3].map(j=>({text:v(`coA${i}_${j}`),richtig:$(`coR${i}_${j}`)?.value==="r",erklaerung:v(`coE${i}_${j}`)}))}));
+ // Eine Fallvignette für je 2 Aufgaben: Aufgabe 1 und 3 geben sie vor, Aufgabe 2 und 4 übernehmen sie.
+ coEditor.aufgaben.forEach((a,i)=>{if(i%2===1){const q=coEditor.aufgaben[i-1];a.vTitel=q.vTitel;a.vText=q.vText;a.vZeilen=q.vZeilen;}});
 }
 // Aktualisiert nur die Hinweise (beim Tippen), ohne das Formular neu zu zeichnen.
 function coEditorPruefen(){
@@ -6477,7 +7595,7 @@ function coEditorRender(){
    .co-sec .co-aus-f select{background:#fbe6e6;border-color:#e8b1b1;color:#9a2f2f;font-weight:600}
   </style>
   <div class="co-legende"><span class="co-l-vig">1 Fallvignette</span><span class="co-l-stamm">2 Einleitungssatz</span><span class="co-l-aus">3 Die 4 Aussagen</span></div>
-  <p class="co-ed-intro">Jeder Freitagstest hat genau <b>${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben</b>. Jede Aufgabe beginnt mit ihrer eigenen <b>Fallvignette</b> (optional mit Material), dann folgen Einleitungssatz und 4 Aussagen. Wertung je Aufgabe: 4 richtig = ${be[0]} BE · 3 = ${be[1]} BE · 2 = ${be[2]} BE · sonst 0.</p>
+  <p class="co-ed-intro">Jeder Check-out-Wochentest besteht aus <b>${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben</b> mit <b>2 Fallvignetten, jede für 2 Aufgaben</b> (Aufgabe 1+2 und 3+4). Jede Aufgabe hat einen Einleitungssatz und 4 Aussagen. Wertung je Aufgabe in Bewertungseinheiten (BE): 4 richtig = ${be[0]} BE · 3 = ${be[1]} BE · 2 = ${be[2]} BE · sonst 0. Gesamt <b>${CHECKOUT_MAX_AUFGABEN*be[0]} BE</b>, umgerechnet in Notenpunkte (0–15).</p>
   <div class="form">
    ${!e.id&&CHECKOUT_VORLAGEN.length?`<div class="co-ed-vorlage"><b>📋 Vorlage:</b> <select id="coVorlage"onchange="coVorlageWaehlen()"><option value="">Ganzen Test aus Vorlage einsetzen …</option>${CHECKOUT_VORLAGEN.map(v=>`<option value="${esc(v.id)}">${esc(v.titel)} (LB ${v.lbNum} · ${esc(coDatum(v.datum))})</option>`).join("")}</select></div>`:""}
    <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -6494,17 +7612,17 @@ function coEditorRender(){
     <div class="co-ed-kopf"><b>Aufgabe ${i+1}</b><span id="coHinw${i}"><b>${p.pro[i].richtig} richtig · ${4-p.pro[i].richtig} falsch</b> ${coPruefChips(p.pro[i])}</span></div>
     <div class="co-bankleiste"><span>Aufgabe aus der Bank laden:</span><select id="coBank${i}"class="co-ed-bank"onchange="coBankEinsetzen(${i})">${bankOpt}</select></div>
     ${a.pruefen?`<div class="co-hinweis">⚠ ${esc(a.pruefen)}</div>`:""}
-    <section class="co-sec co-sec-vig">
-     <div class="co-sec-kopf"><span class="co-sec-nr">1</span>Fallvignette <small>die Situation, auf die sich alle 4 Aussagen beziehen</small></div>
+    ${i%2===0?`<section class="co-sec co-sec-vig">
+     <div class="co-sec-kopf"><span class="co-sec-nr">1</span>Fallvignette <small>gilt für Aufgabe ${i+1} und ${i+2}: die Situation, auf die sich alle Aussagen beider Aufgaben beziehen</small></div>
      <label>Überschrift<input id="coVT${i}"value="${esc(a.vTitel)}"placeholder="z. B. Kindergarten „Wirbelwind“"></label>
-     <label>Text<textarea id="coVX${i}"rows="6"placeholder="Situation ohne Hinweise auf die Lösung.">${esc(a.vText)}</textarea></label>
+     <label>Text<textarea id="coVX${i}"rows="6"placeholder="Situation ohne Hinweise auf die Lösung."oninput="coEditorPruefen()">${esc(a.vText)}</textarea></label>
      <label class="check"><input id="coVZ${i}"type="checkbox"${a.vZeilen?" checked":""}> Zeilen nummerieren (jeder Zeilenumbruch = neue Zeile, für Verweise wie „Z. 15–17“)</label>
-     <details class="co-ed-details"${a.mText?" open":""}><summary>📎 Material (optional, z. B. Studie oder Text)</summary>
-      <label>Titel<input id="coMT${i}"value="${esc(a.mTitel)}"></label>
-      <label>Text<textarea id="coMX${i}"rows="5">${esc(a.mText)}</textarea></label>
-      <label>Quelle<input id="coMQ${i}"value="${esc(a.mQuelle)}"></label>
-     </details>
-    </section>
+    </section>`:`<div class="co-hinweis ok"style="margin:8px 0">📖 Es gilt die Fallvignette von Aufgabe ${i} (eine Fallvignette für je 2 Aufgaben).</div>`}
+    <details class="co-ed-details"${a.mText?" open":""}><summary>📎 Material zu Aufgabe ${i+1} (optional, z. B. Studie oder Text)</summary>
+     <label>Titel<input id="coMT${i}"value="${esc(a.mTitel)}"></label>
+     <label>Text<textarea id="coMX${i}"rows="5">${esc(a.mText)}</textarea></label>
+     <label>Quelle<input id="coMQ${i}"value="${esc(a.mQuelle)}"></label>
+    </details>
     <section class="co-sec co-sec-stamm">
      <div class="co-sec-kopf"><span class="co-sec-nr">2</span>Einleitungssatz <small>der Satzanfang, den jede der 4 Aussagen fortführt</small></div>
      <label>Einleitungssatz<input id="coStamm${i}"value="${esc(a.stamm)}"oninput="coEditorPruefen()"placeholder="z. B. Diese Aussage ist alltagstheoretisch, wenn …"></label>
@@ -6523,7 +7641,7 @@ function coEditorRender(){
 
    <details class="co-ed-details"><summary><span class="co-ed-schritt-inline">②</span> Checkliste (ISB) · <span id="coClStand">${e.checkliste.filter(Boolean).length}/${CO_CHECKLISTE.length} bestätigt</span></summary><div class="co-cl-liste">${cl}</div></details>
    <details class="co-ed-details"><summary>Aus Word einfügen (Textvorlage)</summary>
-    <p style="font-size:12px;color:var(--muted);margin:6px 0">Text in dieser Form einfügen – R = richtig, F = falsch. Eine SITUATION gilt für alle Aufgaben, die du danach noch anpassen kannst:</p>
+    <p style="font-size:12px;color:var(--muted);margin:6px 0">Text in dieser Form einfügen – R = richtig, F = falsch. Eine SITUATION gilt zunächst für alle Aufgaben. Für Aufgabe 3 und 4 passt du sie danach an:</p>
     <pre class="co-vorlage">TITEL: Kommunikation in der Lerngruppe
 LB: 4
 SITUATION: Schwierige Kommunikation in der Lerngruppe
@@ -6556,7 +7674,7 @@ function coBankEinsetzen(i){
  const belegt=a.vText.trim()||a.stamm.trim()||a.aussagen.some(x=>x.text.trim());
  if(belegt&&!confirm(`Aufgabe ${i+1} wird durch die Aufgabe aus der Bank ersetzt. Fortfahren?`)){coEditorRender();return}
  coEditor.aufgaben[i]=coAufgabeAusBank(id);
- coEditorRender();toast("Aufgabe eingesetzt – bitte prüfen.");
+ coEditorRender();toast(i%2===1?"Aufgabe eingesetzt. Es gilt die Fallvignette von Aufgabe "+i+": bitte Einleitungssatz und Aussagen darauf abstimmen.":"Aufgabe eingesetzt – bitte prüfen. Die Fallvignette gilt auch für Aufgabe "+(i+2)+".");
 }
 function coVorlageWaehlen(){
  coEditorLesen();
@@ -6572,7 +7690,7 @@ function coEditorVorschlag(){
  coEditorLesen();
  const kp=CO_AUFGABENBANK.filter(b=>b.lbNum===coEditor.lbNum).slice(0,CHECKOUT_MAX_AUFGABEN);
  if(!kp.length){toast("Für diesen Lernbereich gibt es keine Vorschläge.");return}
- if(!confirm(`${kp.length} K-Prim-Aufgaben aus der Aufgabenbank einsetzen? Bestehende Aufgaben werden ersetzt.`))return;
+ if(!confirm(`${kp.length} K-Prim-Aufgaben aus der Aufgabenbank einsetzen? Bestehende Aufgaben werden ersetzt. Aufgabe 2 und 4 übernehmen die Fallvignette von Aufgabe 1 und 3.`))return;
  coEditor.aufgaben=kp.map(b=>coAufgabeAusBank(b.id));
  while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
  coEditorRender();toast("Eingesetzt – bitte prüfen und speichern.");
@@ -6660,13 +7778,18 @@ function coSituationHTML(v,pdf=false,nummeriert=true,ohneTitel=false){
 // Absätze (Zeilenumbruch = neuer Absatz).
 function coAbsaetzeHTML(t,pdf=false){const E=pdf?escPDF:esc;return String(t||"").split(/\r?\n/).filter(z=>z.trim()).map(z=>`<p style="margin:0 0 8px;line-height:1.6">${E(z)}</p>`).join("");}
 // Ausgangslage einer Aufgabe: Fallvignette, Material, Zusatz, Einleitungssatz (ohne die Aussagen).
-function coFallHTML(q,pdf=false){
+function coFallHTML(q,pdf=false,fuer=""){
  const E=pdf?escPDF:esc;
  const v=q.vignette?.text?q.vignette:null,m=q.material?.text?q.material:null;
- return`${v?`<div class="kp-vig"><div class="kp-label">📖 Fallvignette${v.titel?` · ${E(v.titel)}`:""}</div>${coSituationHTML(v,pdf,!!v.zeilen,true)}</div>`:""}
+ return`${v?`<div class="kp-vig"><div class="kp-label">📖 Fallvignette${v.titel?` · ${E(v.titel)}`:""}${fuer?` · gilt für ${E(fuer)}`:""}</div>${coSituationHTML(v,pdf,!!v.zeilen,true)}</div>`:""}
   ${m?`<div class="kp-mat"><div class="kp-label">📎 Material${m.titel?` · ${E(m.titel)}`:""}</div>${coAbsaetzeHTML(m.text,pdf)}${m.quelle?`<div class="kp-quelle">${E(m.quelle)}</div>`:""}</div>`:""}
   <div class="kp-frage">${q.kontext?`<div class="kp-kontext">${coAbsaetzeHTML(q.kontext,pdf)}</div>`:""}<strong class="kp-stamm">${E(q.stamm)}</strong>
   <div class="kp-anleitung">Entscheiden Sie bei den Aussagen 1–4, ob sie jeweils <b>richtig oder falsch</b> sind.</div></div>`;
+}
+// Zwei Aufgaben teilen sich eine Fallvignette (Aufgabe 1+2, 3+4). Hat eine Aufgabe dieselbe Vignette wie die davor, wird sie nur einmal gezeigt.
+function coVigWiederholt(aufgaben,i){
+ const v=aufgaben?.[i]?.vignette,w=aufgaben?.[i-1]?.vignette;
+ return i>0&&!!v?.text&&!!w?.text&&v.text===w.text&&(v.titel||"")===(w.titel||"");
 }
 // Ältere Check-outs haben eine gemeinsame Situation über allen Aufgaben.
 function coGemeinsameSituation(co){return co?.vignette?.text&&!(co.aufgaben||[]).some(a=>a.vignette?.text)?co.vignette:null;}
@@ -6789,13 +7912,13 @@ async function openCheckoutTest(id){
   <h2>${esc(co.titel)}</h2>
   <div class="kp-fortschritt"><div class="kp-balken"><i id="coBalken"style="background:${c}"></i></div><span id="coStand"></span></div>
   <details class="kp-hilfe"><summary>So funktioniert der Test</summary>
-   <p>Lies zu jeder Aufgabe zuerst die Fallvignette. Entscheide dann bei <b>jeder</b> der 4 Aussagen, ob sie richtig oder falsch ist. Eine leere Aussage zählt als Fehler. Deine Antworten werden automatisch gespeichert.</p>
+   <p>Der Test besteht aus <b>2 Fallvignetten mit je 2 Aufgaben</b> (zusammen ${(co.aufgaben||[]).length} Aufgaben). Lies zuerst die Fallvignette. Entscheide dann bei <b>jeder</b> der 4 Aussagen, ob sie richtig oder falsch ist. Eine leere Aussage zählt als Fehler. Deine Antworten werden automatisch gespeichert.</p>
    </details>
   ${coBewertungsInfoHTML(anzahlW,true)}
   ${glob?`<div class="kp-vig"style="border-left-color:${c}"><div class="kp-label">📖 Situation</div>${coSituationHTML(glob,false,true,false)}</div>`:""}
   ${(co.aufgaben||[]).map((q,i)=>`<section class="kp-karte"style="--c:${c}">
    <header class="kp-kopf"><span class="kp-nummer">${i+1}</span><div><b>Aufgabe ${i+1} von ${(co.aufgaben||[]).length}</b><small>bis zu ${CHECKOUT_BE_NACH_FEHLERN[0]} BE</small></div><span class="kp-fort">0/4</span></header>
-   ${coFallHTML(q)}
+   ${coFallHTML(coVigWiederholt(co.aufgaben,i)?{...q,vignette:null}:q,false,(!coVigWiederholt(co.aufgaben,i)&&coVigWiederholt(co.aufgaben,i+1))?`Aufgabe ${i+1} und ${i+2}`:"")}
    <div class="kp-liste">${(q.aussagen||[]).map((t,j)=>`<div class="kp-zeile"><span class="kp-num">${j+1}</span><p class="kp-text">${esc(t)}</p>
     <div class="kp-wahl"role="radiogroup"aria-label="Aussage ${j+1}">${[["r","✓ Richtig"],["f","✗ Falsch"]].map(([v,l])=>`<label class="kp-opt ${v}"><input type="radio"name="coT${i}_${j}"value="${v}"aria-label="Aussage ${j+1}: ${v==="r"?"richtig":"falsch"}"${ant[`${i}_${j}`]===v?" checked":""} onchange="coAntwort('${id}','${i}_${j}','${v}')"><span>${l}</span></label>`).join("")}</div></div>`).join("")}</div>
   </section>`).join("")}
@@ -6858,7 +7981,7 @@ function coAufgabeErgebnisHTML(q,i,erg,pdf=false,mitFall=true){
   <div class="kp-liste">${(q.aussagen||[]).map((t,j)=>{const ok=r?.korrekt?.[j];const ang=r?.angekreuzt?.[j];return`<div class="kp-zeile kp-ergz ${r?(ok?"ok":"nein"):""}"><span class="kp-num">${r?(ok?"✓":"✗"):j+1}</span>
    <div class="kp-text"><p>${E(t)}</p>${r?`<div class="kp-chips"><span class="kp-chip">Deine Antwort: <b>${zeichen(ang)}</b></span><span class="kp-chip loes">Lösung: <b>${r.loesung?.[j]?"richtig":"falsch"}</b></span></div>${r.erklaerung?.[j]?`<div class="kp-erk">💡 ${E(r.erklaerung[j])}</div>`:""}`:""}</div></div>`;}).join("")}</div></section>`;
 }
-function coSummeHTML(erg){return erg?.ausgewertet?`<b>${erg.be} von ${erg.maxBE} BE (${String(erg.prozent).replace(".",",")} %) · ${npText(erg.notenpunkte)}</b>`:"nicht ausgewertet";}
+function coSummeHTML(erg){return erg?.ausgewertet?`<b>${erg.be} von ${erg.maxBE} Bewertungseinheiten (BE) · ${String(erg.prozent).replace(".",",")} % · ${npText(erg.notenpunkte)}</b>`:"nicht ausgewertet";}
 async function openCheckoutMeinErgebnis(id){
  try{
   const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`))]);
@@ -6868,7 +7991,7 @@ async function openCheckoutMeinErgebnis(id){
    <div class="co-summe">${coSummeHTML(erg)}</div>
    ${coRechenwegHTML(erg)}
    ${coGemeinsameSituation(co)?`<div class="co-vignette"style="border-left-color:${PP_FARBEN[co.lbNum]||"#4a90d9"}">${coSituationHTML(co.vignette)}</div>`:""}
-   ${(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg)).join("")}
+   ${(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg,false,!coVigWiederholt(co.aufgaben,i))).join("")}
    <div class="form-actions"><button class="secondary"onclick="coPdfSchueler('${id}')">PDF herunterladen</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
  }catch(e){console.error(e);toast("Konnte nicht geladen werden.");}
 }
@@ -6904,7 +8027,7 @@ async function openCheckoutSchuelerErgebnis(id,uid){
   <div class="kicker">🏁 CHECK-OUT · ${esc(s?.displayName||s?.email||"")}</div><h2>${esc(d.co.titel)}</h2>
   <div class="co-summe">${coSummeHTML(a)}</div>
   ${coRechenwegHTML(a)}
-  ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a)).join("")}
+  ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a,false,!coVigWiederholt(d.co.aufgaben,i))).join("")}
   <div class="form-actions"><button class="secondary"onclick="openCheckoutErgebnisse('${id}')">← Zurück</button><button class="secondary"onclick="coPdfSchueler('${id}','${uid}')">PDF</button></div>`);
 }
 
@@ -6916,7 +8039,7 @@ function coPdfBlock(co,erg,name){
 function coVignettePdf(co){
  const g=coGemeinsameSituation(co);
  if(g)return`<div class="item">${coSituationHTML(g,true)}</div>`;
- return(co.aufgaben||[]).map((q,i)=>`<div class="item"><b>Aufgabe ${i+1}</b>${coFallHTML({...q,stamm:""},true).replace(/<strong class="kp-stamm"><\/strong>/,"").replace(/<div class="kp-anleitung">.*?<\/div>/,"")}</div>`).join("");
+ return(co.aufgaben||[]).map((q,i)=>coVigWiederholt(co.aufgaben,i)?"":`<div class="item"><b>${coVigWiederholt(co.aufgaben,i+1)?`Aufgabe ${i+1} und ${i+2}`:`Aufgabe ${i+1}`}</b>${coFallHTML({...q,stamm:""},true).replace(/<strong class="kp-stamm"><\/strong>/,"").replace(/<div class="kp-anleitung">.*?<\/div>/,"")}</div>`).join("");
 }
 async function coPdfSchueler(id,uid){
  uid=uid||currentUser.uid;

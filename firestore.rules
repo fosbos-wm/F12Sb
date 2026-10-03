@@ -808,6 +808,42 @@ service cloud.firestore {
     }
 
     // ---------------------------------------------------------
+    // ZUSATZMODULE IM UNTERRICHT-PLAN (12. Klasse)
+    // Lehrkräfte legen Abschlussprüfungstraining, Selbstlernkurs und Check-Out-Wochentest je Woche an, alle sehen den Plan.
+    // ---------------------------------------------------------
+    match /ppModule/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+
+    // Check-out zur Unterrichtsstunde (offene Fragen): ein Dokument je Person
+    // und Modul, ID "<modulId>_<uid>". Lesen: die Person selbst und Lehrkräfte.
+    match /ppStundenAntworten/{id} {
+      allow read: if isApproved()
+        && (resource.data.uid == request.auth.uid || isTeacher());
+      allow create: if isApproved()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.modulId + '_' + request.auth.uid;
+      allow update: if isApproved()
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeacher();
+    }
+
+    // Fortschritt im Selbstlernkurs: ein Dokument je Person und Modul.
+    match /ppKursFortschritt/{id} {
+      allow read: if isApproved()
+        && (resource.data.uid == request.auth.uid || isTeacher());
+      allow create: if isApproved()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.modulId + '_' + request.auth.uid;
+      allow update: if isApproved()
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeacher();
+    }
+
+    // ---------------------------------------------------------
     // Deny everything not explicitly listed above.
     // ---------------------------------------------------------
     match /{document=**} {
