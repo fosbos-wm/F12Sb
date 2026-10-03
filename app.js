@@ -3877,23 +3877,17 @@ const PP12_PLAN=[
  {"d":"2027-02-17","h":2,"lb":3,"typ":"stoff","t":"Life Model nach Germain/Gitterman I: Ökologie, Transaktion, Anpassung"},
  {"d":"2027-02-19","h":2,"lb":3,"typ":"stoff","t":"Life Model II: Habitat, Nische, Lebens-Stress, Coping, Ressourcen"},
  {"d":"2027-02-22","h":1,"lb":3,"typ":"wdh","t":"Life Model: Fallanwendung"},
- {"d":"2027-02-24","h":2,"lb":3,"typ":"stoff","t":"Lebensweltorientierung nach Thiersch I: Begriff Lebenswelt, Dimensionen der Analyse"},
- {"d":"2027-02-26","h":2,"lb":3,"typ":"stoff","t":"Thiersch II: Struktur- und Handlungsmaximen (Prävention, Alltagsnähe, Partizipation, Vernetzung u. a.)"},
  {"d":"2027-03-01","h":1,"lb":3,"typ":"wdh","t":"Wiederholung zur Schulaufgabe 2 (Soziale Arbeit)"},
  {"d":"2027-03-03","h":2,"lb":0,"typ":"leistung","t":"Schulaufgabe 2 (LB 2 Persönlichkeit und Identität, LB 3 Soziale Arbeit)"},
  {"d":"2027-03-05","h":2,"lb":4,"typ":"stoff","t":"Soziale Kommunikation und Interaktion: Begriffe, Organon-Modell nach Bühler"},
  {"d":"2027-03-08","h":1,"lb":4,"typ":"stoff","t":"Watzlawick: Grundlagen der Kommunikationstheorie im Überblick"},
  {"d":"2027-03-10","h":2,"lb":0,"typ":"wdh","t":"Rückgabe und Besprechung der Schulaufgabe 2"},
- {"d":"2027-03-12","h":2,"lb":4,"typ":"stoff","t":"Axiome 1 und 2: Kommunikationsstörungen (Inhalts- und Beziehungsaspekt)"},
- {"d":"2027-03-15","h":1,"lb":4,"typ":"stoff","t":"Axiom 3: Interpunktion – Kommunikationsstörungen, selbsterfüllende Prophezeiung"},
- {"d":"2027-03-17","h":2,"lb":4,"typ":"stoff","t":"Axiom 4: digitale und analoge Modalität – Kommunikationsstörungen"},
- {"d":"2027-03-19","h":2,"lb":4,"typ":"stoff","t":"Axiom 5: symmetrische Eskalation, starre Komplementarität"},
+ {"d":"2027-03-12","h":2,"lb":4,"typ":"stoff","t":"Axiome 1 bis 3: Kommunikationsstörungen (Inhalts- und Beziehungsaspekt, Interpunktion, selbsterfüllende Prophezeiung)"},
+ {"d":"2027-03-17","h":2,"lb":4,"typ":"stoff","t":"Axiome 4 und 5: digitale und analoge Modalität, symmetrische Eskalation, starre Komplementarität – Kommunikationsstörungen"},
  {"d":"2027-04-05","h":1,"lb":4,"typ":"wdh","t":"Kommunikationsstörungen an Fallbeispielen (Privatleben, Schule, Beruf)"},
  {"d":"2027-04-07","h":2,"lb":4,"typ":"stoff","t":"Gelungene Kommunikation nach Watzlawick; Strategien zur Vermeidung von Störungen"},
  {"d":"2027-04-09","h":2,"lb":4,"typ":"stoff","t":"Kommunikationstechniken: Metakommunikation, Ich-Botschaften, aktives Zuhören, Feedback"},
  {"d":"2027-04-12","h":1,"lb":4,"typ":"wdh","t":"Kommunikationstechniken üben: Konfliktgespräch (Rollenspiel)"},
- {"d":"2027-04-14","h":2,"lb":4,"typ":"stoff","t":"Interkulturelle Kommunikation: Werte und Normen, verbale und nonverbale Codes, Nähe und Distanz"},
- {"d":"2027-04-16","h":2,"lb":4,"typ":"stoff","t":"Kommunikation in digitalen Medien: Kommunikationsverlauf und Gefährdungen (z. B. Cybermobbing)"},
  {"d":"2027-04-19","h":1,"lb":4,"typ":"wdh","t":"LB 4 Kommunikation: Wiederholung und Übung"},
  {"d":"2027-04-21","h":2,"lb":0,"typ":"wdh","t":"Vernetzung der Lernbereiche 1–4: Theorien vergleichen, Fallanalysen"},
  {"d":"2027-04-23","h":2,"lb":0,"typ":"wdh","t":"Wiederholung Jgst. 11 (I): Wahrnehmung, Gedächtnis, Emotion, Motivation"},
@@ -3927,10 +3921,22 @@ function pp12BarTag(e){
 // ============================================================
 const PP12_BASIS=PP12_PLAN.map(e=>({...e,id:e.d}));
 PP12_PLAN.forEach(e=>{e.id=e.d;});
-const PP12_SLOT_H=Object.fromEntries(PP12_BASIS.map(e=>[e.d,e.h]));
-const PP12_SLOTSET=new Set(PP12_BASIS.map(e=>e.d));
 const PP12_FIX=e=>e.typ==="leistung"||e.typ==="pruefung";
-const PP12_MSLOTS=PP12_BASIS.filter(e=>!PP12_FIX(e)).map(e=>e.d);
+// Alle Unterrichtstermine (Mo 1 Std., Mi 2 Std., Fr 2 Std.) von Planbeginn bis zur letzten Prüfung, ohne Ferien und freie Tage.
+// Termine ohne Eintrag sind Puffer/Reserve.
+const PP12_ALLE_TERMINE=(()=>{
+ const out=[],ende=PP12_BASIS.reduce((m,e)=>e.d>m?e.d:m,PP12_START);
+ for(let d=PP12_START;d<=ende;d=pp12Add(d,1)){
+  const w=(new Date(d+"T12:00:00Z").getUTCDay()+6)%7;
+  if(w!==0&&w!==2&&w!==4)continue;
+  if(pp12Ferien(d)||PP12_FREI[d])continue;
+  out.push(d);
+ }
+ return out;
+})();
+const PP12_SLOT_H=Object.fromEntries(PP12_ALLE_TERMINE.map(d=>[d,(new Date(d+"T12:00:00Z").getUTCDay()+6)%7===0?1:2]));
+const PP12_FIXTERMINE=new Set(PP12_BASIS.filter(PP12_FIX).map(e=>e.d));
+const PP12_MSLOTS=PP12_ALLE_TERMINE.filter(d=>!PP12_FIXTERMINE.has(d));
 let PP12_OVER={datum:{},park:[],eigene:{},parkTafeln:{}};
 let PP12_PARK=[];
 function pp12Modell(over){
@@ -4073,7 +4079,7 @@ function pp12ReserveFuellen(datum){
  return pp12Aendern((m)=>{
   const i=PP12_MSLOTS.indexOf(datum);
   if(i<0||m.arr[i]!==null)return{fehler:"Dieser Termin ist nicht mehr frei."};
-  const id="x"+Date.now().toString(36);
+  const id="x"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
   m.reg[id]={id,t:t.trim().slice(0,140),lb:vorher?vorher.lb:0,typ:"wdh",eigen:true};
   m.arr[i]=id;
   return{m};
@@ -5340,6 +5346,8 @@ async function ppmKursEditor(m){
  $("ppmKeOk").addEventListener("click",async()=>{lesen();
   try{await updateDoc(doc(db,"ppModule",m.id),{schritte:sch.filter(s=>s.typ!=="selbsttest"||(s.fragen||[]).length),kursId:"eigen"});closeModal();await ppmLaden(true);await render();toast("Kurs gespeichert.");}catch(e){ppmFehler(e,"Kurs konnte nicht gespeichert werden");}});
 }
+if(!window.__ppmKlickGebunden){window.__ppmKlickGebunden=true;document.addEventListener("click",ppmKlick);}
+
 // Zusatzmodule einer Schulwoche (Karten wie in der F11Sb) mit Plus-Zeichen für Lehrkräfte
 function pp12ZusatzHtml(wochenId){
  const l=PPM.liste.filter(x=>x.start===wochenId&&PPM_ZUSATZ.includes(x.modul));
@@ -5407,6 +5415,7 @@ async function renderUnterrichtPP(){
    m=pp12Add(m,7);continue;
   }
   const wochenStd=slots.reduce((s,x)=>s+(x.e?x.e.h:0),0);
+  const reserveStd=slots.reduce((s,x)=>s+(!x.e&&!pp12Ferien(x.d)&&PP12_MSLOTS.includes(x.d)?(PP12_SLOT_H[x.d]||0):0),0);
   const istJetzt=heute>=m&&heute<=pp12Add(m,6);
   const cells=slots.map(s=>{
    const span=s.off===0?1:2;
@@ -5427,7 +5436,7 @@ async function renderUnterrichtPP(){
    return`<div class="pp12-leer s${span}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><small>${esc(grund)}</small></div>`;
   }).join("");
   rows+=`<div class="pp12-woche${istJetzt?" jetzt":""}">
-   <div class="pp12-wlabel"><strong>KW ${pp12KW(m)}</strong><span>${pp12Datum(m)}–${pp12Datum(pp12Add(m,4))}</span><em>${wochenStd} Std.${istJetzt?" · diese Woche":""}</em></div>
+   <div class="pp12-wlabel"><strong>KW ${pp12KW(m)}</strong><span>${pp12Datum(m)}–${pp12Datum(pp12Add(m,4))}</span><em>${wochenStd} Std.${reserveStd?` + ${reserveStd} Std. Reserve`:""}${istJetzt?" · diese Woche":""}</em></div>
    <div class="pp12-rechts"><div class="pp12-tage">${cells}</div>${pp12ZusatzHtml(m)}</div>
   </div>`;
   m=pp12Add(m,7);
@@ -17994,6 +18003,7 @@ async function render(){
  if(p==="whiteboard-board"&&activeWhiteboardId){
  initWhiteboardBoard(activeWhiteboardId);
  }
+ if(typeof window.__ppmNachRender==="function"){const nr=window.__ppmNachRender;window.__ppmNachRender=null;try{nr();}catch(e){console.error("Nachrender:",e);}}
  if(p==="kanban-board"&&activeKanbanId){
  subscribeKanbanLive(activeKanbanId);
  }
