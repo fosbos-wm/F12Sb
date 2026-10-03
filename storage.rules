@@ -25,6 +25,13 @@ service firebase.storage {
       allow delete: if isApproved();
     }
 
+    // Dateien und PowerPoint-Präsentationen auf Tafeln und Whiteboards – max. 15 MB je Datei.
+    match /whiteboardDateien/{boardId}/{fileName} {
+      allow read: if isApproved();
+      allow write: if isApproved() && request.resource.size < 15 * 1024 * 1024;
+      allow delete: if isApproved();
+    }
+
     // Alles andere ist gesperrt.
     match /{allPaths=**} {
       allow read, write: if false;
