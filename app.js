@@ -431,7 +431,8 @@ async function renderRessourcenRoute(){
  const plusKachel=typ=>canEdit?`<button type="button"class="res-plus"onclick="window.openLernressourceForm('${typ}')"aria-label="Neue Lernressource anlegen"><span class="big">＋</span><span>Neue Lernressource</span></button>`:"";
  const resCss=`<style>
  .res-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
- .res-tile{aspect-ratio:1/1;min-height:0!important;padding:12px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+ .res-tile{min-height:250px;padding:14px;display:flex;flex-direction:column;gap:8px}
+ .res-tile>*{flex-shrink:0}
  .res-top{display:flex;align-items:center;gap:6px;min-height:32px}
  .res-top .resource-icon{font-size:22px;line-height:1}
  .res-top .pill{font-size:11px;padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
@@ -439,15 +440,15 @@ async function renderRessourcenRoute(){
  .res-ico{width:30px;height:30px;border-radius:8px;border:1.5px solid #c6d2df;background:#fff;cursor:pointer;font-size:14px;line-height:1;padding:0}
  .res-ico:hover{background:#f0f7ff;border-color:#2f7fc6}
  .res-tile h3{margin:2px 0 0;font-size:15px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
- .res-desc{margin:0;font-size:12.5px;line-height:1.35;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .res-desc{margin:0;font-size:12.5px;line-height:1.35;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
  .res-meta{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  .res-tile .resource-open{margin-top:auto;padding:8px 10px;font-size:13px;min-height:0}
- .res-plus{aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px dashed #b9c8d6;border-radius:16px;background:#fff;color:#3a4a5c;font:inherit;font-weight:700;font-size:14px;cursor:pointer;padding:10px;text-align:center}
+ .res-plus{min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px dashed #b9c8d6;border-radius:16px;background:#fff;color:#3a4a5c;font:inherit;font-weight:700;font-size:14px;cursor:pointer;padding:10px;text-align:center}
  .res-plus .big{font-size:40px;line-height:1;color:#2f7fc6}
  .res-plus:hover{border-color:#2f7fc6;background:#f3f9ff}
  @media(max-width:1100px){.res-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
  @media(max-width:720px){.res-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
- @media(max-width:460px){.res-grid{grid-template-columns:1fr}.res-tile,.res-plus{aspect-ratio:auto;min-height:170px!important}}
+ @media(max-width:460px){.res-grid{grid-template-columns:1fr}.res-tile,.res-plus{min-height:170px}}
  </style>`;
 
  return`${resCss}${pageHead("LERNWERKSTATT","Lernressourcen-Bibliothek","Finde passende Lernmaterialien, digitale Angebote und externe Lernwege – zentral für Schüler und Lehrkräfte.",addButton)}
