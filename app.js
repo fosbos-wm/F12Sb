@@ -18211,6 +18211,35 @@ async function saveLernstandTask(id){
 window.openLernstand=openLernstand;window.submitLernstand=submitLernstand;window.openLernstandEditor=openLernstandEditor;window.openLernstandTaskEditor=openLernstandTaskEditor;window.saveLernstandTask=saveLernstandTask;window.openLernstandTeacherOverview=openLernstandTeacherOverview;window.openLernstandStudent=openLernstandStudent;window.openLernstandTeacherAttempt=openLernstandTeacherAttempt;window.saveLernstandGrade=saveLernstandGrade;window.filterLernstandStudents=filterLernstandStudents;window.openLernstandResult=openLernstandResult;window.downloadLernstandResultPDF=downloadLernstandResultPDF;window.downloadLernstandTeacherPDF=downloadLernstandTeacherPDF;
 
 let __campusRenderSeq=0;
+// ---- Navigation: Verlauf und „Zurück“-Button auf jeder Seite ----
+// Jede Seite (Schüler und Lehrkräfte) bekommt oben einen „← Zurück“-Knopf, der zur vorherigen Ebene bzw. Funktion führt.
+// Eigene Zurück-Knöpfe einer Seite (z. B. „← Unterricht“) bleiben erhalten; dann wird kein zweiter Knopf eingefügt.
+let NAV_STACK=[],NAV_CUR=null,NAV_SKIP=false;
+function navSnap(p){return{p,a:activeBoardId,b:activeFach,c:activePhaseDetail,d:activePPModul,e:activeWhiteboardId,f:activeWordcloudId,g:activeKanbanId,h:activeTermPollId,i:activeChecklistId,j:activeAmpelId,k:activePollId,l:activeZuordnungId,m:activeDeckId,n:activeEssayCaseId,o:activeConversationUid,q:activeConversationName};}
+function navVerfolgen(p){
+ const n=navSnap(p),k=JSON.stringify(n);
+ if(NAV_SKIP){NAV_SKIP=false;NAV_CUR={n,k};return;}
+ if(NAV_CUR&&NAV_CUR.k===k)return;   // gleiche Seite (z. B. nur neu geladen): nichts merken
+ if(NAV_CUR){NAV_STACK.push(NAV_CUR.n);if(NAV_STACK.length>50)NAV_STACK.shift();}
+ NAV_CUR={n,k};
+}
+function navZurueck(){
+ const v=NAV_STACK.pop();
+ if(!v){go("start");return;}
+ NAV_SKIP=true;
+ activeBoardId=v.a;activeFach=v.b;activePhaseDetail=v.c;activePPModul=v.d;activeWhiteboardId=v.e;activeWordcloudId=v.f;activeKanbanId=v.g;activeTermPollId=v.h;activeChecklistId=v.i;activeAmpelId=v.j;activePollId=v.k;activeZuordnungId=v.l;activeDeckId=v.m;activeEssayCaseId=v.n;activeConversationUid=v.o;activeConversationName=v.q;
+ if(location.hash!=="#"+v.p)location.hash=v.p;else render();
+}
+window.navZurueck=navZurueck;
+function navZurueckLeiste(content,p,html){
+ if(p==="start"||p==="whiteboard-board")return;   // Startseite: nichts zurück; Board-Ansicht hat eigenen Zurück-Knopf
+ if(/<button[^>]*>\s*(?:\u2190|&larr;)/.test(String(html||"").slice(0,3500)))return;   // Seite hat schon einen eigenen Zurück-Knopf
+ if(!document.getElementById("navBackCss")){const st=document.createElement("style");st.id="navBackCss";st.textContent=".nav-back-bar{margin:0 0 12px}.nav-back{font-size:13px;padding:6px 14px;border-radius:999px}";document.head.appendChild(st);}
+ const hatVerlauf=NAV_STACK.length>0;
+ const bar=document.createElement("div");bar.className="nav-back-bar";
+ bar.innerHTML=`<button type="button" class="secondary nav-back" onclick="${hatVerlauf?"navZurueck()":"go('start')"}">\u2190 ${hatVerlauf?"Zurück":"Startseite"}</button>`;
+ content.insertBefore(bar,content.firstChild);
+}
 async function render(){
  if(!currentUser)return;
  if(typeof wbStop==="function")wbStop();
@@ -18219,6 +18248,7 @@ async function render(){
  if(liveUnsubMiniKalender){liveUnsubMiniKalender();liveUnsubMiniKalender=null;}
  const seq=++__campusRenderSeq;
  const p=location.hash.replace("#","")||"start";
+ navVerfolgen(p);
  const pages={
  start:renderStart,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
  faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,leistungsnachweis:renderLeistungsnachweis,didaktik:renderDidaktikKompass,
@@ -18260,6 +18290,7 @@ async function render(){
  ]);
  if(seq!==__campusRenderSeq)return;
  content.innerHTML=html||`<div class="card"><h3>Keine Inhalte vorhanden.</h3></div>`;
+ navZurueckLeiste(content,p,html);
  window.scrollTo(0,0);
  if(p==="kompetenz"){
  $("competencySearch")?.addEventListener("input",filterCompetencyNetwork);
