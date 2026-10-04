@@ -15508,6 +15508,7 @@ async function renderResilienz(){
  <div class="kicker">RESPRESSI · MINI-ÜBUNGEN</div>
  <h2> Deine Resilienz-Skills</h2>
  <p>Jede Übung dauert nur wenige Minuten und kann direkt ausprobiert werden.</p>
+ <div class="res-legende"style="display:flex;flex-wrap:wrap;gap:6px 16px;margin:2px 0 14px;font-size:12px;color:var(--muted)">${[["Regulation","Atmung und Erregung beruhigen"],["Körper","über Körper und Sinne ankommen"],["Gedanken","Abstand gewinnen, Gedanken ordnen"],["Ressourcen","Stärken und Positives aktivieren"],["Beziehungen","Unterstützung nutzen"]].map(([t,x])=>{const c=resilienzTagColor(t);return`<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:12px;height:12px;border-radius:4px;flex:none;background:${c.pill};border:2px solid ${c.border}"></span><b>${t}</b> · ${x}</span>`}).join("")}</div>
  <div class="res-grid">${skills.map(x=>{const c=resilienzTagColor(x.tag);return`
  <button class="card res-card"style="background:${c.bg};border-left:4px solid ${c.border}"onclick="startResilienzSkill('${x.id}')">
  <h3>${x.title}</h3><p>${x.desc}</p><span class="pill res-tag"style="background:${c.pill}">${x.tag}</span>
