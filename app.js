@@ -15361,7 +15361,21 @@ async function renderResilienz(){
  {id:"zeitreise",icon:"",title:"Der Zeitreisende",desc:"Eine Situation aus zeitlichem Abstand betrachten",tag:"Gedanken"},
  {id:"sinne",icon:"",title:"5-4-3-2-1",desc:"Mit allen Sinnen im Hier und Jetzt ankommen",tag:"Körper"},
  {id:"wachstum",icon:"",title:"Die Wachstumsbrille",desc:"Eine Schwierigkeit als Übung statt als Bedrohung sehen",tag:"Gedanken"},
- {id:"nametrick",icon:"",title:"Der Name-Trick",desc:"Mit dir selbst wie mit einer anderen Person sprechen",tag:"Regulation"}
+ {id:"nametrick",icon:"",title:"Der Name-Trick",desc:"Mit dir selbst wie mit einer anderen Person sprechen",tag:"Regulation"},
+ {id:"pause",icon:"",title:"Bewusste Pause",desc:"kurz unterbrechen",tag:"Regulation"},
+ {id:"seufzer",icon:"",title:"Seufzer-Atmung",desc:"doppelt ein, lang aus",tag:"Regulation"},
+ {id:"faeuste",icon:"",title:"Fäuste ballen und lösen",desc:"Anspannung bewusst loslassen",tag:"Körper"},
+ {id:"schultern",icon:"",title:"Schultern lockern",desc:"hochziehen und fallen lassen",tag:"Körper"},
+ {id:"gehen",icon:"",title:"Kurzer Gang",desc:"Bewegung gegen Anspannung",tag:"Körper"},
+ {id:"natur",icon:"",title:"Raus an die frische Luft",desc:"kurz Natur wahrnehmen",tag:"Körper"},
+ {id:"schritt",icon:"",title:"Der nächste kleine Schritt",desc:"Aufgabe in ein Stück zerlegen",tag:"Gedanken"},
+ {id:"kopfleer",icon:"",title:"Kopf leer schreiben",desc:"Gedanken aufs Papier bringen",tag:"Gedanken"},
+ {id:"kontrollkreis",icon:"",title:"Kontrollkreis",desc:"Beeinflussbares von Nicht-Beeinflussbarem trennen",tag:"Gedanken"},
+ {id:"danke",icon:"",title:"Dankeschön senden",desc:"Wertschätzung ausdrücken",tag:"Beziehungen"},
+ {id:"ortsicher",icon:"",title:"Sicherer Ort",desc:"an einen guten Ort denken",tag:"Ressourcen"},
+ {id:"lied",icon:"",title:"Dein Lied",desc:"Musik bewusst hören",tag:"Ressourcen"},
+ {id:"hilfe",icon:"",title:"Hilfe annehmen",desc:"eine konkrete Bitte formulieren",tag:"Beziehungen"},
+ {id:"gefuehl",icon:"",title:"Gefühl benennen",desc:"dem Gefühl einen Namen geben",tag:"Regulation"}
  ];
  const favorites=await getMyResilienzSchaetze();
  const favCount=favorites.length;
@@ -15530,14 +15544,33 @@ function updateResilienzStress(value){
  fill.style.height=`${v*10}%`;
  fill.style.background=stressFarbe(v);
  }
- const ids=v<=2?["fokus","ressource","leicht"]:v<=5?["boden","bewegung","fokus","kontakt"]:v<=7?["atem","boden","distanz","bewegung"]:["atem","boden","pause","kontakt"];
+ const st=RESILIENZ_STUFEN[Math.max(0,Math.min(10,v))];
  const hint=$("resStressHint");
  if(hint)hint.style.display=v===0?"":"none";
- if(box)box.innerHTML=v===0?"":ids.slice(0,3).map(id=>{
- const s=resilienzSkillData(id);
- return`<button class="primary"style="margin:4px"onclick="startResilienzSkill('${id}')">${s[0]} ${s[1]}</button>`;
- }).join("");
+ if(box&&v===0)box.innerHTML="";   // bei Stress-Level null gibt es nur den Hinweis, keine Übungen
+ else if(box){
+  const btn=(id,cls)=>{const x=resilienzSkillData(id);return`<button class="${cls}"style="margin:4px 6px 4px 0"onclick="startResilienzSkill('${id}')">${x[0]} ${x[1]}</button>`;};
+  box.innerHTML=`<p style="margin:0 0 8px;font-size:13px;color:var(--muted)">${st.text}</p>
+  <div><b style="font-size:12px">Zuerst ausprobieren</b><br>${st.ids.slice(0,3).map(id=>btn(id,"primary")).join("")}</div>
+  <div style="margin-top:8px"><b style="font-size:12px">Weitere Ideen für diese Stufe</b><br>${st.ids.slice(3).map(id=>btn(id,"secondary")).join("")}</div>
+  ${v>=9?`<p style="margin:10px 0 0;font-size:12px;color:var(--muted)">Wenn der Stress sehr hoch ist oder lange anhält: Sprich mit einer Vertrauensperson, der Schulberatung oder deiner Lehrkraft.</p>`:""}`;
+ }
 }
+// Vorschläge je Stress-Stufe (0–10): je 6 Übungen, die ersten drei passen am besten. Jede Stufe hat eine eigene Auswahl:
+// niedrig = Ressourcen stärken und vorbeugen, mittel = Gedanken ordnen, hoch = Körper und Atmung beruhigen, sehr hoch = schnell stabilisieren.
+const RESILIENZ_STUFEN=[
+ {text:"Du bist ruhig. Gute Gelegenheit, Kraftquellen zu füllen.",ids:["gutedinge","danke","lied","ortsicher","wachstum","natur"]},
+ {text:"Entspannt. Kleine Dinge, die dich stärken und gut gelaunt halten.",ids:["ressource","gutedinge","natur","lied","gehen","mitgefuehl"]},
+ {text:"Leicht angespannt. Aufmerksamkeit und Bewegung bringen Leichtigkeit.",ids:["fokus","ressource","leicht","gehen","schritt","bewegung"]},
+ {text:"Leichte Anspannung. Blick weiten und die nächsten Schritte sortieren.",ids:["bewegung","fokus","schritt","kontrollkreis","natur","leicht"]},
+ {text:"Etwas Druck. Gedanken ordnen und ins Handeln kommen.",ids:["kontrollkreis","schritt","kopfleer","fokus","kontakt","gehen"]},
+ {text:"Spürbar angespannt. Ankommen, Gedanken sortieren, Unterstützung bedenken.",ids:["boden","kopfleer","kontakt","zeitreise","schultern","fokus"]},
+ {text:"Deutlich angespannt. Körper lockern und Abstand zur Situation gewinnen.",ids:["schultern","boden","distanz","zeitreise","hilfe","nametrick"]},
+ {text:"Hoher Stress. Erst den Körper und die Atmung beruhigen, dann Abstand.",ids:["atem","schultern","distanz","faeuste","gefuehl","mitgefuehl"]},
+ {text:"Sehr hoher Stress. Atmung und Körper stehen jetzt an erster Stelle.",ids:["seufzer","atem","faeuste","gefuehl","summen","distanz"]},
+ {text:"Sehr hoher Stress. Jetzt zählt schnelle Beruhigung, such dir eine Übung aus.",ids:["seufzer","boden","sinne","summen","pause","kontakt"]},
+ {text:"Höchster Stress. Klein anfangen: kurz innehalten, ankommen, dann atmen und Unterstützung suchen.",ids:["pause","sinne","seufzer","atem","boden","hilfe"]}
+];
 function resilienzSkillData(id){
  const d={
  atem:["","Resonanzatmung","4 Sekunden ein · 6 Sekunden aus"],
@@ -15555,11 +15588,24 @@ function resilienzSkillData(id){
  sinne:["","5-4-3-2-1","alle Sinne nutzen"],
  wachstum:["","Die Wachstumsbrille","Schwierigkeit als Übung sehen"],
  nametrick:["","Der Name-Trick","mit dir wie mit anderen sprechen"],
- pause:["","Bewusste Pause","kurz unterbrechen"]
+ pause:["","Bewusste Pause","kurz unterbrechen"],
+ seufzer:["","Seufzer-Atmung","doppelt ein, lang aus"],
+ faeuste:["","Fäuste ballen und lösen","Anspannung bewusst loslassen"],
+ schultern:["","Schultern lockern","hochziehen und fallen lassen"],
+ gehen:["","Kurzer Gang","Bewegung gegen Anspannung"],
+ natur:["","Raus an die frische Luft","kurz Natur wahrnehmen"],
+ schritt:["","Der nächste kleine Schritt","Aufgabe in ein Stück zerlegen"],
+ kopfleer:["","Kopf leer schreiben","Gedanken aufs Papier bringen"],
+ kontrollkreis:["","Kontrollkreis","Beeinflussbares von Nicht-Beeinflussbarem trennen"],
+ danke:["","Dankeschön senden","Wertschätzung ausdrücken"],
+ ortsicher:["","Sicherer Ort","an einen guten Ort denken"],
+ lied:["","Dein Lied","Musik bewusst hören"],
+ hilfe:["","Hilfe annehmen","eine konkrete Bitte formulieren"],
+ gefuehl:["","Gefühl benennen","dem Gefühl einen Namen geben"]
  }; return d[id]||d.atem;
 }
 function resilienzImpuls(){
- const ids=["atem","boden","distanz","leicht","bewegung","summen","ressource","kontakt","fokus","gutedinge","mitgefuehl","zeitreise","sinne","wachstum","nametrick"];
+ const ids=["atem","boden","distanz","leicht","bewegung","summen","ressource","kontakt","fokus","gutedinge","mitgefuehl","zeitreise","sinne","wachstum","nametrick","seufzer","faeuste","schultern","gehen","natur","schritt","kopfleer","kontrollkreis","danke","ortsicher","lied","hilfe","gefuehl"];
  startResilienzSkill(ids[Math.floor(Math.random()*ids.length)]);
 }
 async function startResilienzSkill(id){
@@ -15579,9 +15625,24 @@ async function startResilienzSkill(id){
  zeitreise:["Frag dich: Wie wichtig wird mir das in 10 Minuten erscheinen? In 10 Monaten? In 10 Jahren?","Was verändert sich durch den Blick aus der Zukunft?","z. B. „In 10 Jahren wird das vermutlich kaum noch eine Rolle spielen …“"],
  sinne:["Finde: 5 Dinge, die du siehst. 4 Dinge, die du hörst. 3 Dinge, die du spürst. 2 Dinge, die du riechst. 1 Ding, das du schmeckst (oder dir vorstellst).","Was ist dir dabei aufgefallen?","z. B. „Ich bin ruhiger geworden, während ich gesucht habe …“"],
  wachstum:["Setz dir gedanklich eine „Wachstumsbrille“ auf: Was könntest du aus dieser Situation lernen, egal wie sie ausgeht?","Was nimmst du zum Lernen mit?","z. B. „Ich merke, dass ich mehr aushalte, als ich dachte …“"],
- nametrick:["Sprich innerlich mit dir selbst, als wärst du eine andere Person – nutze deinen eigenen Namen statt „ich“. Z. B.: „[Name], das schaffst du.“","Wie hat sich das angefühlt?","z. B. „Es fühlte sich klarer und ruhiger an …“"]
+ nametrick:["Sprich innerlich mit dir selbst, als wärst du eine andere Person – nutze deinen eigenen Namen statt „ich“. Z. B.: „[Name], das schaffst du.“","Wie hat sich das angefühlt?","z. B. „Es fühlte sich klarer und ruhiger an …“"],
+ pause:["Halte kurz an, was du gerade tust. Lass die Schultern sinken und atme dreimal langsam aus. Sag dir: „Eine Minute Pause ist erlaubt.“ Danach entscheidest du, was als Nächstes dran ist.","Was hat dir die kurze Pause gebracht?","z. B. „Ich bin etwas ruhiger und weiß, was als Nächstes dran ist …“"],
+ seufzer:["Atme durch die Nase tief ein und gleich noch ein kleines Stück nach. Atme dann langsam und lange durch den Mund aus, wie bei einem Seufzer. Wiederhole das drei- bis fünfmal.","Wie fühlt sich dein Körper nach den Seufzern an?","z. B. „Meine Brust ist weiter, ich bin etwas ruhiger …“"],
+ faeuste:["Balle beide Hände fünf Sekunden lang fest zu Fäusten, dann öffne sie und lass sie ganz locker. Spüre den Unterschied. Wiederhole das dreimal. Wenn du magst, kannst du das auch mit den Schultern oder Beinen machen.","Was spürst du, wenn die Spannung nachlässt?","z. B. „Die Hände sind warm und schwer, es wird lockerer …“"],
+ schultern:["Ziehe beim Einatmen die Schultern zu den Ohren hoch, halte kurz und lass sie beim Ausatmen fallen. Kreise sie danach fünfmal langsam nach hinten.","Wie fühlen sich Nacken und Schultern jetzt an?","z. B. „Der Nacken ist weicher, die Schultern liegen tiefer …“"],
+ gehen:["Steh auf und geh fünf Minuten, im Flur, auf dem Schulhof oder um den Block. Spüre bei jedem Schritt den Boden und zähle 20 Schritte. Schau dabei nach vorn.","Was hat sich beim Gehen verändert?","z. B. „Mein Kopf ist freier geworden …“"],
+ natur:["Geh ans Fenster oder nach draußen. Schau dir zwei Minuten lang bewusst Himmel, Pflanzen oder Licht an. Nimm drei Dinge wahr, die du schön oder angenehm findest.","Welche drei Dinge hast du wahrgenommen?","1. … 2. … 3. …"],
+ schritt:["Schreibe auf, was dich gerade belastet. Wähle dann nur den nächsten kleinen Schritt, der in fünf Minuten machbar ist, und lege fest, wann du ihn machst.","Was ist dein nächster kleiner Schritt?","z. B. „Ich öffne das Heft und schreibe die erste Überschrift …“"],
+ kopfleer:["Schreibe zwei Minuten lang alles auf, was dir durch den Kopf geht, ohne es zu ordnen oder zu bewerten. Markiere danach, was du heute wirklich angehen musst.","Was musst du heute wirklich angehen?","z. B. „Nur das Referat vorbereiten, der Rest kann warten …“"],
+ kontrollkreis:["Zeichne zwei Kreise. Schreibe in den inneren Kreis, was du in dieser Situation selbst beeinflussen kannst, in den äußeren, was nicht in deiner Hand liegt. Entscheide dich für eine Sache aus dem inneren Kreis.","Welche Sache aus deinem inneren Kreis gehst du an?","z. B. „Ich kann mich vorbereiten, aber nicht, wie streng bewertet wird …“"],
+ danke:["Überlege, wem du gerade danken könntest, auch für eine Kleinigkeit. Schreibe in zwei Sätzen, wofür. Du entscheidest selbst, ob du die Nachricht abschickst.","Wem dankst du und wofür?","z. B. „Danke, dass du mir gestern zugehört hast …“"],
+ ortsicher:["Schließe die Augen, wenn es sich gut anfühlt, und stell dir einen Ort vor, an dem du dich wohl und sicher fühlst, echt oder erfunden. Nimm wahr, was du dort siehst, hörst und spürst.","Wie sieht dein Ort aus und wie fühlt es sich dort an?","z. B. „Am See, es ist warm und ganz still …“"],
+ lied:["Such dir ein Lied, das dir guttut, und höre es einmal ganz bewusst: Welche Instrumente hörst du, welche Stelle magst du am liebsten, was passiert in deinem Körper?","Was hast du beim Hören bemerkt?","z. B. „Mein Atem ist langsamer geworden …“"],
+ hilfe:["Überlege, wobei dir gerade Unterstützung helfen würde, und formuliere eine konkrete Bitte in einem Satz: Wen fragst du, wonach genau und bis wann? Du entscheidest selbst, ob du sie aussprichst.","Wie lautet deine Bitte?","z. B. „Kannst du mir morgen in der Pause beim Lernplan helfen?“"],
+ gefuehl:["Benenne das Gefühl, das gerade da ist, mit einem Wort, zum Beispiel Wut, Angst, Überforderung oder Enttäuschung. Gib ihm eine Stärke von 0 bis 10 und sag dir: „Das ist gerade da, und es darf da sein.“","Welches Gefühl ist da und wie stark ist es?","z. B. „Überforderung, etwa 7 …“"]
  };
  const t=tasks[id];
+ if(!t){toast("Diese Übung ist noch nicht verfügbar.");return;}
  let saved=false;
  try{const snap=await getDoc(doc(db,"resilienzSchaetze",`${currentUser.uid}_${id}`));saved=snap.exists()}catch(e){console.error("Schatzkiste-Status prüfen:",e)}
  modal(`<button class="modal-close"type="button"data-close-impuls-modal aria-label="Impuls schließen">×</button>
@@ -15611,7 +15672,8 @@ const RESILIENZ_SKILL_TAGS={
  atem:"Regulation",boden:"Körper",distanz:"Gedanken",leicht:"Körper",bewegung:"Körper",
  summen:"Regulation",ressource:"Ressourcen",kontakt:"Beziehungen",fokus:"Gedanken",
  gutedinge:"Ressourcen",mitgefuehl:"Gedanken",zeitreise:"Gedanken",sinne:"Körper",
- wachstum:"Gedanken",nametrick:"Regulation"
+ wachstum:"Gedanken",nametrick:"Regulation",
+ pause:"Regulation",seufzer:"Regulation",faeuste:"Körper",schultern:"Körper",gehen:"Körper",natur:"Körper",schritt:"Gedanken",kopfleer:"Gedanken",kontrollkreis:"Gedanken",danke:"Beziehungen",ortsicher:"Ressourcen",lied:"Ressourcen",hilfe:"Beziehungen",gefuehl:"Regulation"
 };
 function resilienzTagColor(tag){
  const hue=RESILIENZ_TAG_HUES[tag]??200;
