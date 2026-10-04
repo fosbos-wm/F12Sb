@@ -816,6 +816,7 @@ async function getUpcomingCampusCalendarEvent(){
  const d=new Date(String(raw).slice(0,10)+"T00:00:00");
  return isNaN(d)?null:d;
  };
+ events=[...events,...calFesteTermine()];
  return events.map(e=>({e,d:eventDate(e)})).filter(x=>x.d&&x.d>=today).sort((a,b)=>a.d-b.d)[0]?.e||null;
 }
 
@@ -3498,6 +3499,7 @@ async function miniKalenderHTML(){
  if(!events.length){try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){}}
  let birthdayEvents=[];
  try{birthdayEvents=await getBirthdayEvents()}catch(e){}
+ events=[...events,...calFesteTermine()];
  // Dieselben Schulferien-Zeiträume wie im vollständigen Campus-Kalender.
  const ferienZeitraeume=[
  ["2026-08-03","2026-09-14"],["2026-11-02","2026-11-06"],["2026-12-24","2027-01-08"],
@@ -16212,7 +16214,7 @@ async function exportCampusCalendarICS(){
  const ferienRangeEvents=ferienZeitraeume.map(([start,end,label])=>(
  {start,rangeEnd:end,title:label,description:"Schulferien in Bayern"}
  ));
- downloadICS([...events,...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F12Sb Kalender");
+ downloadICS([...events,...calFesteTermine(),...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F12Sb Kalender");
  toast("Kalender wird heruntergeladen – Datei öffnen, um sie zum Handy-Kalender hinzuzufügen.");
  }catch(e){console.error("Kalender-Export:",e);toast("Der Kalender konnte nicht exportiert werden.")}
 }
@@ -16228,6 +16230,40 @@ function exportCalendarDayICS(y,m,d){
  downloadICS(day,`termin-${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}.ics`,"F12Sb Termin");
 }
 
+// Terminarten mit Farbklasse (gemeinsam für Übersicht, Tagesansicht und Legende)
+const CAL_TYPEN={
+ schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
+ kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
+ kprim:{label:"K-Prim-Test",className:"cal-indigo"},
+ projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
+ referat:{label:"Referat",className:"cal-yellow"},
+ praesentation:{label:"Präsentation",className:"cal-purple"},
+ pruefung:{label:"Abschlussprüfung (schriftlich)",className:"cal-gold"},
+ notenschluss:{label:"Notenschluss",className:"cal-rose"},
+ elternabend:{label:"Elternabend",className:"cal-orange"},
+ digitaltag:{label:"Digitaltag",className:"cal-teal"},
+ sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
+ geburtstag:{label:"Geburtstag",className:"cal-birthday"},
+ ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
+};
+// Feste Termine (nicht bearbeitbar): zentrale schriftliche Abschlussprüfungen FOS 12 Bayern 2027 und Termine der FOSBOS Weilheim.
+function calFesteTermine(){
+ const P="Zentraler Prüfungstermin der schriftlichen Abschlussprüfung FOS 12 in Bayern 2027.";
+ return[
+  {start:"2026-10-08",type:"elternabend",title:"Klassenelternversammlung (Elternabend)",time:"17:30",description:"Um 17:00 Uhr Wahl des Elternbeirats, im Anschluss an die Versammlung die 1. Elternbeiratssitzung."},
+  {start:"2026-10-29",type:"digitaltag",title:"1. Digitaltag",description:"Digitaltag der FOSBOS Weilheim."},
+  {start:"2027-05-12",type:"pruefung",title:"Abschlussprüfung Deutsch (schriftlich)",description:P},
+  {start:"2027-05-14",type:"pruefung",title:"Abschlussprüfung Pädagogik/Psychologie (schriftlich, Profilfach)",description:P},
+  {start:"2027-06-01",type:"pruefung",title:"Abschlussprüfung Englisch (schriftlich)",description:P},
+  {start:"2027-06-03",type:"pruefung",title:"Abschlussprüfung Mathematik (schriftlich)",description:P}
+ ];
+}
+// Kurzform für die Monatsübersicht: Vorname und Initial des Nachnamens
+function calKurzName(n){
+ const t=String(n||"").trim().split(/\s+/).filter(Boolean);
+ if(!t.length)return"";
+ return t.length>1?`${t[0]} ${t[t.length-1][0]}.`:t[0];
+}
 async function renderKalender(){
  let events=[];
  try{events=(await getCollection("events","start",false)).map(e=>({...e,collection:"events"}))}catch(e){console.error("Kalender events:",e)}
@@ -16235,16 +16271,7 @@ async function renderKalender(){
  try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){console.error("Kalender calendar:",e)}
  }
 
- const typeMeta={
- schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
- kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
- projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
- referat:{label:"Referat",className:"cal-yellow"},
- praesentation:{label:"Präsentation",className:"cal-purple"},
- sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
- geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
- };
+ const typeMeta=CAL_TYPEN;
 
  // Schulferien Bayern – Schuljahr 2026/27.
  const ferienZeitraeume=[
@@ -16271,7 +16298,7 @@ async function renderKalender(){
  });
  let birthdayEvents=[];
  try{birthdayEvents=await getBirthdayEvents()}catch(e){console.error("Kalender Geburtstage:",e)}
- events=[...events,...birthdayEvents,...ferienEvents];
+ events=[...events,...calFesteTermine(),...birthdayEvents,...ferienEvents];
 
  const normalizeType=e=>{
  const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
@@ -16306,9 +16333,15 @@ async function renderKalender(){
  const ds=eventsForDay(y,m,d);
  const firstType=ds.length?normalizeType(ds[0]):"";
  const meta=firstType?typeMeta[firstType]:null;
- cells.push(`<button type="button"class="cal-day ${meta?`has-event ${meta.className}`:""}"onclick="openCalendarDay(${y},${m},${d})">
+ // Geburtstage: Namen statt „Geburtstag“; Prüfungen: Fach statt Terminart
+ const gebDs=firstType==="geburtstag"?ds.filter(x=>normalizeType(x)==="geburtstag"):[];
+ let zellText=meta?meta.label:"",zeigt=1;
+ if(gebDs.length){zellText=gebDs.map(x=>calKurzName(x.person)).filter(Boolean).join(", ")||meta.label;zeigt=gebDs.length;}
+ else if(firstType==="pruefung"&&ds[0].title){zellText=String(ds[0].title).replace(/^Abschlussprüfung\s+/,"");}
+ const tip=ds.map(x=>x.person||x.title||x.name||"").filter(Boolean).join(" · ");
+ cells.push(`<button type="button"class="cal-day ${meta?`has-event ${meta.className}`:""}"title="${esc(tip)}"onclick="openCalendarDay(${y},${m},${d})">
  <span class="cal-num">${d}</span>
- ${meta?`<span class="cal-event-type">${esc(meta.label)}</span>${ds.length>1?`<span class="cal-count">+${ds.length-1}</span>`:""}`:""}
+ ${meta?`<span class="cal-event-type">${esc(zellText)}</span>${ds.length>zeigt?`<span class="cal-count">+${ds.length-zeigt}</span>`:""}`:""}
  </button>`);
  }
  while(cells.length%7)cells.push('<div class="cal-day empty"></div>');
@@ -16343,6 +16376,11 @@ async function renderKalender(){
  .cal-yellow{background:#fef3c7!important}.cal-purple{background:#ede9fe!important}.cal-grey{background:#e5e7eb!important}
  .cal-holiday{background:#e3f5da!important;border-color:#8bc34a!important}
  .cal-birthday{background:#ffe4ec!important;border-color:#f472b6!important}
+ .cal-gold{background:#f6c945!important;border-color:#b8860b!important}.cal-gold .cal-event-type{color:#4a3500}
+ .cal-orange{background:#ffe0c2!important;border-color:#f08a24!important}
+ .cal-teal{background:#c9f2ea!important;border-color:#16a394!important}
+ .cal-indigo{background:#d9dcff!important;border-color:#5560e0!important}
+ .cal-rose{background:#f6c3cb!important;border-color:#b3263e!important}
  .cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
  .cal-legend-item{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#fff;font-size:12px}
  .cal-legend-dot{width:13px;height:13px;border-radius:3px;border:1px solid rgba(0,0,0,.12)}
@@ -16413,6 +16451,7 @@ async function getBirthdayEvents(){
  const dateStr=`${yearFor(mm)}-${String(mm).padStart(2,"0")}-${String(dd).padStart(2,"0")}`;
  return {
  start:dateStr,type:"geburtstag",
+ person:u.displayName||u.email||"Campus-Mitglied",
  title:` ${u.displayName||u.email||"Campus-Mitglied"} hat Geburtstag`,
  description:"Herzlichen Glückwunsch von der ganzen F12Sb!"
  };
@@ -16462,16 +16501,7 @@ async function saveBirthday(){
 function calendarTypeMeta(e){
  const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
  const key=raw==="präsentation"?"praesentation":raw;
- return ({
- schulaufgabe:{label:"Schulaufgabe",className:"cal-blue"},
- kurzarbeit:{label:"Kurzarbeit",className:"cal-red"},
- projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
- referat:{label:"Referat",className:"cal-yellow"},
- praesentation:{label:"Präsentation",className:"cal-purple"},
- sonstiges:{label:"Sonstiger Termin",className:"cal-grey"},
- geburtstag:{label:"Geburtstag",className:"cal-birthday"},
- ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
- })[key]||{label:"Sonstiger Termin",className:"cal-grey"};
+ return CAL_TYPEN[key]||CAL_TYPEN.sonstiges;
 }
 
 function openCalendarDay(y,m,d){
@@ -18807,9 +18837,14 @@ function openCalendarForm(){
  <select id="calType">
  <option value="schulaufgabe">Schulaufgabe</option>
  <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="kprim">K-Prim-Test</option>
  <option value="projektvorstellung">Projektvorstellung</option>
  <option value="referat">Referat</option>
  <option value="praesentation">Präsentation</option>
+ <option value="pruefung">Abschlussprüfung (schriftlich)</option>
+ <option value="notenschluss">Notenschluss</option>
+ <option value="elternabend">Elternabend</option>
+ <option value="digitaltag">Digitaltag</option>
  <option value="sonstiges">Sonstiger Termin / frei wählbar</option>
  </select>
  </label>
@@ -18864,9 +18899,14 @@ function editCalendarEntry(collectionName,id,title,type,date,time,location,descr
  <select id="calType">
  <option value="schulaufgabe">Schulaufgabe</option>
  <option value="kurzarbeit">Kurzarbeit</option>
+ <option value="kprim">K-Prim-Test</option>
  <option value="projektvorstellung">Projektvorstellung</option>
  <option value="referat">Referat</option>
  <option value="praesentation">Präsentation</option>
+ <option value="pruefung">Abschlussprüfung (schriftlich)</option>
+ <option value="notenschluss">Notenschluss</option>
+ <option value="elternabend">Elternabend</option>
+ <option value="digitaltag">Digitaltag</option>
  <option value="sonstiges">Sonstiger Termin / frei wählbar</option>
  </select>
  </label>
