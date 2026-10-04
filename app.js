@@ -9062,7 +9062,7 @@ const WB_CSS=`<style>
 .wb-hg.on{box-shadow:0 0 0 3px #2f7fc6}
 .wb-hinweis{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);text-align:center;color:#7a8c9c;pointer-events:none;max-width:320px}
 .wb-hinweis b{display:block;font-size:18px;color:#51657a;margin-bottom:6px}
-.wb-card,.wb-tool,.wb-qr,.wb-link,.wb-datei,.wb-video{background:#fff;border-radius:14px;box-shadow:0 8px 20px rgba(40,50,70,.16),0 1px 3px rgba(40,50,70,.1);border:1px solid #dbe4ec;overflow:hidden;display:flex;flex-direction:column}
+.wb-card,.wb-tool,.wb-qr,.wb-link,.wb-embed,.wb-datei,.wb-video{background:#fff;border-radius:14px;box-shadow:0 8px 20px rgba(40,50,70,.16),0 1px 3px rgba(40,50,70,.1);border:1px solid #dbe4ec;overflow:hidden;display:flex;flex-direction:column}
 .wb-image{display:flex;flex-direction:column}
 .wb-kopf{flex:none;height:38px;display:flex;align-items:center;padding:0 12px;background:var(--ks,#e9edf1);color:var(--kc,#3a4a5c);font-weight:700;font-size:14px;border-bottom:1px solid rgba(0,0,0,.06);min-width:0}
 .wb-kopf-txt,.wb-tool-kopf{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;outline:none;min-width:30px}
@@ -9094,8 +9094,8 @@ const WB_CSS=`<style>
 .wb-qr-body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
 .wb-qr-body svg{width:100%;max-height:calc(100% - 24px);aspect-ratio:1}
 .wb-url{word-break:break-all;text-align:center}
-.wb-video-body{padding:0}.wb-video-body iframe{width:100%;height:100%;border:0}
-.wb-embed{position:absolute}.wb-embed .wb-kopf{padding-right:44px}.wb-embed-body iframe{background:#fff}
+.wb-video-body{padding:0;display:flex}.wb-video-body iframe{width:100%;height:100%;flex:1;border:0}
+.wb-embed .wb-kopf{padding-right:44px}.wb-embed-body iframe{background:#fff}
 .wb-embed-neu{position:absolute;right:8px;top:6px;width:26px;height:26px;border-radius:8px;background:#fff;color:#2f5f8a;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;text-decoration:none;border:1px solid #c9d4de;z-index:2}
 .wb-embed-neu:hover{background:#f0f7ff;border-color:#2f7fc6}
 .wb-embed-hinweis{font-weight:400;opacity:.75}
@@ -10725,13 +10725,15 @@ function wbToolBearbeiten(id){
  if(!["qr","link","video","embed"].includes(it.type))return;
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">${it.type==="qr"?"QR-CODE":it.type==="video"?"VIDEO":it.type==="embed"?"WEBSEITE":"LINK"}</div><h2>${it.type==="video"?"YouTube-Link":it.type==="embed"?"Webseite einbetten":"Internetadresse"} eintragen</h2>
-  ${it.type==="embed"?`<p style="margin:0 0 8px;font-size:13px;color:#51657a">Die Seite erscheint als Rahmen auf der Tafel und wird erst nach Klick auf „Webseite laden“ geöffnet. Nicht jede Seite erlaubt das Einbetten (häufig geblockt: Google, Wikipedia, viele Nachrichtenseiten). Dann bleibt der Rahmen leer; über den Pfeil ↗ oben rechts öffnest du die Seite in einem neuen Tab.</p>`:""}
+  ${it.type==="embed"?`<p style="margin:0 0 8px;font-size:13px;color:#51657a">Du kannst die Adresse oder den kompletten iframe-Code einfügen (die App übernimmt dann die Adresse daraus). Die Seite erscheint als Rahmen auf der Tafel und wird erst nach Klick auf „Webseite laden“ geöffnet. Nicht jede Seite erlaubt das Einbetten (häufig geblockt: Google, Wikipedia, viele Nachrichtenseiten). Dann bleibt der Rahmen leer; über den Pfeil ↗ oben rechts öffnest du die Seite in einem neuen Tab.</p>`:""}
   <div class="form"><label>Link<input id="wbUrl"placeholder="https://…"value="${esc(it.url||"")}"></label>
   <label>Titel (optional)<input id="wbUrlTitel"maxlength="80"value="${esc(it.titel||"")}"></label>
   <div class="form-actions"><button class="secondary"type="button"onclick="closeModal()">Abbrechen</button><button class="primary"type="button"id="wbUrlOk">Speichern</button></div></div>`);
  setTimeout(()=>{const i=$("wbUrl");if(i)i.focus();},50);
  $("wbUrlOk").addEventListener("click",()=>{
-  const roh=$("wbUrl").value.trim(),u=it.type==="embed"?wbEmbedUrl(roh):wbSichereUrl(roh);
+  let roh=$("wbUrl").value.trim();
+  if(it.type==="embed"){const fm=roh.match(/<iframe[^>]*?\ssrc\s*=\s*["']([^"']+)["']/i);if(fm)roh=fm[1].replace(/&amp;/g,"&").trim();}
+  const u=it.type==="embed"?wbEmbedUrl(roh):wbSichereUrl(roh);
   if(roh&&!u){toast("Das ist keine gültige Internetadresse.");return}
   wbUpdate(id,{url:u,titel:$("wbUrlTitel").value.trim()});closeModal();
  });
