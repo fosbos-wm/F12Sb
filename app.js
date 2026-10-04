@@ -725,21 +725,37 @@ $("loginForm").addEventListener("submit",async e=>{
  await signInWithEmailAndPassword(auth,$("loginEmail").value.trim(),$("loginPassword").value);
  }catch(err){console.error(err);authError(err)}
 });
+let registerLaeuft=false;
 $("registerForm").addEventListener("submit",async e=>{
- e.preventDefault();$("authError").textContent="";
+ e.preventDefault();
+ if(registerLaeuft)return; // Doppelklick/Enter doppelt: zweite Anfrage würde sonst „E-Mail schon vorhanden“ melden
+ $("authError").textContent="";
  const pw=$("registerPassword").value;
  if(pw!==$("registerPassword2").value){$("authError").textContent="Die Passwörter stimmen nicht überein.";return}
  if(pw.length<8||!/[A-Za-zÄÖÜäöüß]/.test(pw)||!/[0-9]/.test(pw)){$("authError").textContent="Das Passwort muss mindestens 8 Zeichen lang sein und Buchstaben UND Zahlen enthalten.";return}
  if(!configReady){$("authError").textContent="Firebase ist noch nicht konfiguriert.";return}
  const {firstName,lastName}=getRegisterNameFields();
  if(!firstName||!lastName){$("authError").textContent="Bitte Vorname und Nachname angeben.";return}
+ registerLaeuft=true;
+ const btn=e.target.querySelector('button[type="submit"]'),btnText=btn?btn.textContent:"";
+ if(btn){btn.disabled=true;btn.textContent="Konto wird erstellt …";}
+ const email=$("registerEmail").value.trim();
  try{
  await loadFirebase();
- const cred=await createUserWithEmailAndPassword(auth,$("registerEmail").value.trim(),pw);
+ const cred=await createUserWithEmailAndPassword(auth,email,pw);
  const fullName=`${firstName} ${lastName}`.trim();
  await updateProfile(cred.user,{displayName:fullName});
  await ensureProfile(cred.user,fullName,{firstName,lastName});
- }catch(err){console.error(err);authError(err)}
+ }catch(err){
+  console.error(err);
+  // Das Konto wurde gerade eben von dieser Anmeldung selbst angelegt: keine irreführende Fehlermeldung zeigen
+  const cu=auth&&auth.currentUser;
+  if(err&&err.code==="auth/email-already-in-use"&&cu&&cu.email&&cu.email.toLowerCase()===email.toLowerCase())return;
+  authError(err);
+ }finally{
+  registerLaeuft=false;
+  if(btn){btn.disabled=false;btn.textContent=btnText;}
+ }
 });
 $("forgotBtn").onclick=async()=>{
  const email=$("loginEmail").value.trim();
