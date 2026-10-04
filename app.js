@@ -8988,6 +8988,9 @@ const WB_CSS=`<style>
 .wb-gitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .wb-karte{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;padding:0;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 8px rgba(24,67,96,.06)}
 .wb-karte:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(24,67,96,.14)}
+.wb-karte-wrap{position:relative;display:flex}.wb-karte-wrap>.wb-karte{flex:1;min-width:0}
+.wb-karte-del{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;border:1px solid #c9d4de;background:#fff;color:#b3261e;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;box-shadow:0 2px 8px rgba(24,67,96,.18);z-index:2}
+.wb-karte-del:hover{background:#fdecec;border-color:#b3261e}
 .wb-karte-kopf{height:96px;position:relative;background-size:cover}
 .wb-karte-kopf span{position:absolute;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
 .wb-karte-text{padding:12px 14px 14px}.wb-karte-text strong{display:block;font-size:16px;color:var(--ink)}.wb-karte-text small{display:block;color:var(--muted);margin-top:4px}
@@ -9163,11 +9166,12 @@ async function renderWhiteboardUebersicht(modus){
     `<button class="primary"onclick="openWhiteboardForm()">＋ Neues Whiteboard</button>`);
  if(boards===null)return`${WB_CSS}${kopf}<div class="empty"><strong>${istTafel?"Tafeln":"Whiteboards"} konnten nicht geladen werden.</strong>${esc(wbFehlerText(wbLadeFehler))}<br><small>Tipp: Auf der Seite diagnose.html lässt sich das genau prüfen.</small></div>${footer()}`;
  return`${WB_CSS}${kopf}
- <div class="wb-gitter">${boards.map(b=>`<button type="button"class="wb-karte"onclick="openWhiteboard('${b.id}')">
+ <div class="wb-gitter">${boards.map(b=>`<div class="wb-karte-wrap"><button type="button"class="wb-karte"onclick="openWhiteboard('${b.id}')">
   ${wbKarteKopf(b.id)}
   <div class="wb-karte-text"><strong>${esc(b.title||"Whiteboard")}</strong>
   <small>${esc(b.description||"")||(b.art==="tafel"?"Tafel für den Unterricht.":"Gemeinsame Arbeitsfläche.")}</small>
-  <small>${b.art==="tafel"?'<b class="wb-art-chip"style="margin:0 6px 0 0">Tafel</b>':""}Angelegt von ${esc(b.createdByName||"Campus-Mitglied")} · ${esc(fmtDate(b.createdAt))}</small></div></button>`).join("")}</div>
+  <small>${b.art==="tafel"?'<b class="wb-art-chip"style="margin:0 6px 0 0">Tafel</b>':""}Angelegt von ${esc(b.createdByName||"Campus-Mitglied")} · ${esc(fmtDate(b.createdAt))}</small></div></button>
+  ${isTeacher()?`<button type="button"class="wb-karte-del"title="${b.art==="tafel"?"Tafel":"Whiteboard"} löschen"aria-label="${b.art==="tafel"?"Tafel":"Whiteboard"} löschen"onclick="wbBoardLoeschen('${b.id}','${b.art==="tafel"?"tafel":"team"}')">${wbIcon("papierkorb",18)}</button>`:""}</div>`).join("")}</div>
  ${boards.length?"":(istTafel?`<div class="empty"><strong>Noch keine Tafel.</strong>${isTeacher()?"Lege die erste Tafel für eine Unterrichtsstunde an.":"Sobald deine Lehrkraft eine Tafel anlegt, erscheint sie hier."}</div>`:`<div class="empty"><strong>Noch kein Whiteboard.</strong>Lege das erste Whiteboard für dein Team oder ein Thema an.</div>`)}
  ${footer()}`;
 }
@@ -9200,9 +9204,11 @@ async function addWhiteboard(){
   toast(e?.code==="permission-denied"?"Firebase verweigert das Anlegen (permission-denied). Bitte die Firestore-Regeln prüfen.":`Whiteboard konnte nicht angelegt werden (${(e&&(e.code||e.name))||"unbekannt"}).`);
  }
 }
-async function wbBoardLoeschen(id){
- if(!isTeacher()){toast("Nur Lehrkräfte können ein Whiteboard löschen.");return}
- if(!confirm("Dieses Whiteboard mit allen Elementen wirklich löschen?"))return;
+async function wbBoardLoeschen(id,artVorgabe){
+ if(!isTeacher()){toast("Nur Lehrkräfte können ein Whiteboard oder eine Tafel löschen.");return}
+ const art=artVorgabe||(wb&&wb.id===id&&wb.board&&wb.board.art)||"team";
+ const istTafel=art==="tafel";
+ if(!confirm(istTafel?"Diese Tafel mit allen Seiten und Elementen wirklich löschen? Das lässt sich nicht rückgängig machen.":"Dieses Whiteboard mit allen Elementen wirklich löschen? Das lässt sich nicht rückgängig machen."))return;
  try{
   const snap=await getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",id)));
   await Promise.all(snap.docs.map(d=>deleteDoc(doc(db,"whiteboardItems",d.id))));
@@ -9210,8 +9216,29 @@ async function wbBoardLoeschen(id){
   await Promise.all(bs.docs.map(d=>deleteDoc(doc(db,"whiteboardImages",d.id))));
   const ps=await getDocs(query(collection(db,"whiteboardPresence"),where("boardId","==",id)));
   await Promise.all(ps.docs.map(d=>deleteDoc(doc(db,"whiteboardPresence",d.id)).catch(()=>{})));
+  // Verknüpfungen lösen, damit nirgends eine Tafel angezeigt wird, die es nicht mehr gibt
+  try{
+   // Stunden im Unterricht-Plan (Termin → Tafel)
+   const ts=await getDocs(query(collection(db,"lehrplanTafeln"),where("boardId","==",id)));
+   await Promise.all(ts.docs.map(d=>deleteDoc(doc(db,"lehrplanTafeln",d.id))));
+   ts.docs.forEach(d=>{if(PP12_CACHE&&PP12_CACHE.tafeln)delete PP12_CACHE.tafeln[d.id];});
+   // zurückgestellte Stunden mit Tafel
+   const pl=await getDoc(doc(db,"lehrplanPlan","pp12"));
+   if(pl.exists()){
+    const pt=pl.data().parkTafeln||{};
+    const rest=Object.fromEntries(Object.entries(pt).filter(([,t])=>!(t&&t.boardId===id)));
+    if(Object.keys(rest).length!==Object.keys(pt).length){
+     await updateDoc(doc(db,"lehrplanPlan","pp12"),{parkTafeln:rest});
+     if(PP12_OVER)PP12_OVER.parkTafeln=rest;
+    }
+   }
+   // Module im Modulplan
+   const ms=await getDocs(query(collection(db,"ppModule"),where("tafelId","==",id)));
+   await Promise.all(ms.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{tafelId:""})));
+   if(ms.docs.length&&typeof ppmLaden==="function")await ppmLaden(true);
+  }catch(e){console.warn("Tafel-Verknüpfungen lösen:",e);}
   await deleteDoc(doc(db,"whiteboards",id));
-  activeWhiteboardId=null;go("whiteboard");toast("Whiteboard gelöscht.");
+  activeWhiteboardId=null;go(istTafel?"tafel":"whiteboard");toast(istTafel?"Tafel gelöscht.":"Whiteboard gelöscht.");
  }catch(e){console.error("Whiteboard löschen:",e);toast("Konnte nicht vollständig gelöscht werden.");}
 }
 
@@ -10371,6 +10398,7 @@ let wbBoardCache=null;   // vom Seitenaufbau übergeben, damit Rechte sofort gel
 WB_ICONS.karten='<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/>';
 WB_ICONS.video='<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/>';
 WB_ICONS.web='<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>';
+WB_ICONS.papierkorb='<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>';
 WB_ICONS.link='<path d="M10 14a4 4 0 005.6 0l3-3a4 4 0 00-5.6-5.6l-1 1M14 10a4 4 0 00-5.6 0l-3 3a4 4 0 005.6 5.6l1-1"/>';
 WB_ICONS.datei='<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/>';
 WB_ICONS.qr='<rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h2v2h-2zM18 14h2M14 18h2M18 18h2v2"/>';
@@ -10818,7 +10846,7 @@ async function wbDateiHochladen(datei){
  }catch(e){console.error("Datei:",e);toast(e&&e.message?e.message:"Die Datei konnte nicht hochgeladen werden.");}
 }
 
-Object.assign(window,{openWhiteboard,closeWhiteboard,openWhiteboardForm,addWhiteboard});
+Object.assign(window,{openWhiteboard,closeWhiteboard,openWhiteboardForm,addWhiteboard,wbBoardLoeschen});
 
 /* =========================================================
  TOOLS FÜR ZUSAMMENARBEIT – Übersichtsseite in der Lernwerkstatt.
