@@ -10386,7 +10386,7 @@ WB_ICONS.palette='<path d="M12 3a9 9 0 100 18c1.4 0 2-.9 2-1.8 0-1.2-1-1.6-1-2.7
 
 const WB_KARTEN=[
  {k:"card",n:"Text",ic:"text",w:300,h:240},{k:"image",n:"Bild",ic:"bild"},{k:"video",n:"Video",ic:"video",w:380,h:300},
- {k:"link",n:"Link",ic:"link",w:320,h:150},{k:"embed",n:"Webseite",ic:"web",w:520,h:380},{k:"datei",n:"Datei",ic:"datei",w:300,h:150},{k:"qr",n:"QR-Code",ic:"qr",w:240,h:300}
+ {k:"link",n:"Link",ic:"link",w:320,h:150},{k:"embed",n:"Webseite",ic:"web",w:840,h:560},{k:"datei",n:"Datei",ic:"datei",w:300,h:150},{k:"qr",n:"QR-Code",ic:"qr",w:240,h:300}
 ];
 const WB_TOOLKARTEN=[
  {k:"wuerfel",n:"Würfel",ic:"wuerfel",w:240,h:200,titel:"Würfel",start:{anz:1,werte:[1],ts:0}},
@@ -10604,6 +10604,15 @@ function wbKartenFuellen(el,it){
   const ersetzt=!(el.querySelector("iframe")&&el.dataset.kbau&&el.dataset.kbau.includes("<iframe")&&schluessel.includes("<iframe")&&el.dataset.kvid===it.url);
   el.dataset.kbau=schluessel;el.dataset.kvid=it.url||"";
   if(ersetzt)el.innerHTML=inner+'<div class="wb-rs"data-rs="1"></div>';
+ }
+ if(it.type==="embed"){
+  // Viele Seiten (z. B. fobizz Digitale Tafel) brauchen mindestens ca. 768 px Breite. Ist die Karte schmaler, wird die Seite in 800 px Breite gerendert und verkleinert angezeigt.
+  const fr=el.querySelector(".wb-embed-body iframe");
+  if(fr){
+   const MIN=800,k=it.w<MIN?it.w/MIN:1;
+   if(k<1){fr.style.width=MIN+"px";fr.style.height=Math.round((it.h-38)/k)+"px";fr.style.transform="scale("+k+")";fr.style.transformOrigin="0 0";fr.style.flex="none";}
+   else{fr.style.width="";fr.style.height="";fr.style.transform="";fr.style.transformOrigin="";fr.style.flex="";}
+  }
  }
  if(it.type==="card"){const t=el.querySelector(".wb-txt");if(t&&wb.editing!==it.id)t.textContent=it.text||"";}
  const kt=el.querySelector(".wb-kopf-txt");if(kt&&!(wb.editing===it.id&&wb.editFeld==="titel"))kt.textContent=it.titel||"";
