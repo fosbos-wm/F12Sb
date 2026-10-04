@@ -4837,9 +4837,38 @@ async function ppmDialog(id,typ,woche,opt){
    <div id="ppmKapa" class="ppm-kapahint"></div>
    ${extra}
    <label>Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
+   <div id="ppmMatBox" class="ppm-matbox"></div>
    <div class="form-actions">${bearb?`<button class="secondary" type="button" id="ppmLoeschen">Modul löschen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
   </div>`);
  const lbSel=$("ppmLb"),ti=$("ppmTitel"),btn=$("ppmSpeichern");
+  // ---- Material anhängen (Dateien und Links), wird beim Speichern übernommen ----
+  const matBest=[...((bearb&&bearb.material)||[])];   // schon am Modul hängende Materialien
+  const matNeu=[];                                     // neu hinzugefügt: {typ,titel,url} (Link) oder {typ,titel,file}
+  const matWegUrls=[];                                 // entfernte Dateien, werden nach dem Speichern aus dem Speicher gelöscht
+  let matLinkOffen=false,matHochgeladen=[];
+  const matRender=()=>{
+   const box=$("ppmMatBox");if(!box)return;
+   const zeile=(x,attr)=>{const inf=PPM_MAT_INFO[x.typ]||PPM_MAT_INFO.link;return`<div class="ppm-mat" style="flex-wrap:wrap"><span style="font-size:20px">${inf[0]}</span><div style="flex:1;min-width:140px"><b>${esc(x.titel||x.name||"Material")}</b><br><small style="color:var(--muted)">${inf[1]}${x.file?" · wird beim Speichern hochgeladen":""}</small></div><button type="button" class="ppm-btn klein" ${attr} title="Entfernen" aria-label="Material entfernen">✕</button></div>`;};
+   box.innerHTML=`<b style="font-size:14px">Material anhängen (optional)</b>
+    ${matBest.map((x,i)=>zeile(x,`data-mb="${i}"`)).join("")}${matNeu.map((x,i)=>zeile(x,`data-mn="${i}"`)).join("")}
+    <div class="ppm-zeile" style="border:0;padding:6px 0 0"><button type="button" class="ppm-btn" data-mat="datei">📎 Datei (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-mat="link">🔗 Link</button><input type="file" id="ppmMatInput" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div>
+    ${matLinkOffen?`<div style="display:grid;gap:8px;margin-top:6px"><input id="ppmMatUrl" placeholder="https://…" aria-label="Adresse"><input id="ppmMatUrlTitel" maxlength="100" placeholder="Titel (optional)" aria-label="Titel"><div><button type="button" class="ppm-btn primaer" data-mat="link-ok">Link hinzufügen</button> <button type="button" class="ppm-btn" data-mat="link-x">Abbrechen</button></div></div>`:""}
+    <small style="color:var(--muted)">Dateien bis 15 MB. Das Material erscheint auf der Modulseite für die Klasse.</small>`;
+  };
+  matRender();
+  $("ppmMatBox").addEventListener("click",ev=>{
+   const b=ev.target.closest("button");if(!b)return;
+   if(b.dataset.mb!==undefined){const x=matBest.splice(Number(b.dataset.mb),1)[0];if(x&&x.typ!=="link"&&x.url)matWegUrls.push(x.url);matRender();return;}
+   if(b.dataset.mn!==undefined){matNeu.splice(Number(b.dataset.mn),1);matRender();return;}
+   const a=b.dataset.mat;
+   if(a==="datei"){const inp=$("ppmMatInput");inp.onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;
+     if(f.size>DATEI_MAX_BYTES){toast("Datei ist zu groß (max. 15 MB).");e.target.value="";return;}
+     matNeu.push({typ:ppmDateiTyp(f),titel:f.name.replace(/\.[a-z0-9]{2,5}$/i,""),name:f.name,file:f});matRender();};inp.click();return;}
+   if(a==="link"){matLinkOffen=true;matRender();const u=$("ppmMatUrl");if(u)u.focus();return;}
+   if(a==="link-x"){matLinkOffen=false;matRender();return;}
+   if(a==="link-ok"){const u=wbSichereUrl($("ppmMatUrl").value);if(!u){toast("Das ist keine gültige Internetadresse.");return;}
+     matNeu.push({typ:"link",titel:$("ppmMatUrlTitel").value.trim()||u.replace(/^https?:\/\//,""),url:u});matLinkOffen=false;matRender();return;}
+  });
  const teileGewaehlt=()=>[...document.querySelectorAll(".ppmTeil")].filter(c=>c.checked).map(c=>c.value);
  const aktualisieren=()=>{
   const dk=$("ppmDauer").value;
@@ -4888,16 +4917,26 @@ async function ppmDialog(id,typ,woche,opt){
    }
   }
   try{
-   if(bearb){await updateDoc(doc(db,"ppModule",bearb.id),{...daten,updatedAt:serverTimestamp()});}
+   // Neue Dateien hochladen (bei einem Fehler wird nichts gespeichert, das Fenster bleibt offen)
+   const matNeuFertig=[];
+   matHochgeladen=[];
+   if(matNeu.some(x=>x.file))toast("Material wird hochgeladen …");
+   for(const x of matNeu){
+    if(x.file){const up=await uploadCampusDatei(x.file,`ppMaterial/${bearb?bearb.id:"neu"}`);matHochgeladen.push(up.url);matNeuFertig.push({typ:x.typ,titel:x.titel,name:x.name,url:up.url});}
+    else matNeuFertig.push({typ:x.typ,titel:x.titel,url:x.url});
+   }
+   const matAlle=[...matBest,...matNeuFertig];
+   if(matAlle.length||(bearb&&(bearb.material||[]).length))daten.material=matAlle;
+   if(bearb){await updateDoc(doc(db,"ppModule",bearb.id),{...daten,updatedAt:serverTimestamp()});matWegUrls.forEach(u=>deleteCampusDatei(u));}
    else{
     const basis={...daten,createdBy:currentUser.uid,createdAt:serverTimestamp()};
     if(t==="projekt")basis.einheiten=[];
-    if(t==="stunde"){basis.material=[];basis.fragen=[];basis.tafelId=await ppmTafelAnlegen(daten.titel);}
+    if(t==="stunde"){basis.material=daten.material||[];basis.fragen=[];basis.tafelId=await ppmTafelAnlegen(daten.titel);}
     if(t==="selbstlern"&&daten.kursId==="eigen")basis.schritte=[{id:"s1",typ:"text",titel:"Erster Schritt",text:"## Willkommen\nHier beginnt dein Kurs."},{id:"s2",typ:"abschluss",titel:"Geschafft",text:"Du hast den Kurs abgeschlossen."}];
     await addDoc(collection(db,"ppModule"),basis);
    }
    closeModal();await ppmLaden(true);await render();toast("Modul gespeichert.");
-  }catch(e){ppmFehler(e,"Das Modul konnte nicht gespeichert werden");}
+  }catch(e){matHochgeladen.forEach(u=>deleteCampusDatei(u));matHochgeladen=[];ppmFehler(e,"Das Modul konnte nicht gespeichert werden");}
  });
  const lo=$("ppmLoeschen");
  if(lo)lo.addEventListener("click",async()=>{
@@ -4910,7 +4949,7 @@ async function ppmDialog(id,typ,woche,opt){
 }
 function ppmFehler(e,text){
  console.error("Modulplaner:",e);
- toast(e&&e.code==="permission-denied"?`${text}: Firebase verweigert den Zugriff (permission-denied). Bitte die Firestore-Regeln prüfen.`:`${text} (${(e&&(e.code||e.name))||"unbekannt"}).`);
+ toast(e&&e.code==="permission-denied"?`${text}: Firebase verweigert den Zugriff (permission-denied). Bitte die Firestore-Regeln prüfen.`:`${text}: ${(e&&(e.code||(e.message&&e.message.length<220?e.message:e.name)))||"unbekannt"}`);
 }
 async function ppmTafelAnlegen(titel){
  const r=await addDoc(collection(db,"whiteboards"),{title:String(titel).slice(0,120),description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,bg:"blau",createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
@@ -4974,6 +5013,14 @@ async function ppmEaSeite(m){
    ${lehrer?`<button type="button" class="ppm-btn" data-ppm="ea-stand" data-ea="${esc(id)}">Stand der Klasse ansehen</button>`:""}</div></div>
  ${footer()}`;
 }
+// Material eines Moduls (Dateien und Links) unter der Kopfzeile; Stunde und Prüfungstraining zeigen es in eigenen Bereichen.
+function ppmMaterialBox(m){
+ if(m.modul==="stunde"||m.modul==="apt")return"";
+ const mat=m.material||[];
+ if(!mat.length)return"";
+ const lehrer=isTeacher();
+ return`<div class="ppm-box"><h2>Material</h2>${mat.map((x,i)=>ppmMaterialHTML(x,i,m,lehrer)).join("")}${lehrer?'<input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden>':""}</div>`;
+}
 function ppmKopf(m,unter,extraBtn){
  const T=PPM_TYPEN[m.modul],c=ppmFarbe(m),w=ppmWochen(m);
  const zeit=w.length?`${fmtKurz(w[0].start)}–${fmtKurz(w[w.length-1].end)}`:"";
@@ -4981,7 +5028,7 @@ function ppmKopf(m,unter,extraBtn){
  ${PPM_CSS}
  <div class="ppm-box ppm-kopf" style="--c:${c}"><div class="kicker" style="color:${c}">${T.icon} ${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit} · ${esc(ppmDauerDef(m).lang.toUpperCase())}</div>
   <h1 style="margin:4px 0 6px;font-size:26px">${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
-  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${extraBtn||""}</div>`:""}</div>`;
+  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${extraBtn||""}</div>`:""}</div>${ppmMaterialBox(m)}`;
 }
 // ---- Projekt ----
 async function ppmProjektSeite(m){
