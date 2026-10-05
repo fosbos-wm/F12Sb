@@ -16419,12 +16419,65 @@ const CAL_TYPEN={
  geburtstag:{label:"Geburtstag",className:"cal-birthday"},
  ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
 };
+// Schulaufgaben (SA) und Kurzarbeiten (KA) der F12Sb aus Schuljahr 26/27 (laut Leistungsnachweis-Plan, Stand 05.10.2026).
+// Format: [Datum, Typ, Kurzname für die Monatsansicht, Fach (voll), Kürzel Lehrkraft]
+function calLeistungsnachweise(){
+ const L=[
+  ["2026-10-15","schulaufgabe","Deutsch","Deutsch","Gw"],
+  ["2026-10-22","kurzarbeit","Mathe","Mathematik","Sd"],
+  ["2026-10-27","kurzarbeit","SoWi","Sozialwirtschaft und Recht","So"],
+  ["2026-10-30","kurzarbeit","P/P","Pädagogik/Psychologie","Ta"],
+  ["2026-11-09","kurzarbeit","Std-At","Studier- und Arbeitstechniken (WPF_Std-At_I)","Gw"],
+  ["2026-11-10","kurzarbeit","PuG","Politik und Gesellschaft","Sai"],
+  ["2026-11-11","kurzarbeit","Ethik","Ethik (ET4_F12Sa_Sb_Ua)","Wa"],
+  ["2026-11-11","kurzarbeit","ev. Reli","Evang. Religionslehre (R_Evangelisch)","Sm"],
+  ["2026-11-11","kurzarbeit","kath. Reli","Kath. Religionslehre (K5_F12Sb_Ua)","Kg"],
+  ["2026-11-16","kurzarbeit","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
+  ["2026-11-16","kurzarbeit","Sp I","Spanisch (WPF_Sp_12_I)","Ge"],
+  ["2026-11-16","kurzarbeit","Sp Ia","Spanisch (WPF_Sp_12_Ia)","Os"],
+  ["2026-11-17","kurzarbeit","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
+  ["2026-11-17","kurzarbeit","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
+  ["2026-11-17","kurzarbeit","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"],
+  ["2026-11-20","schulaufgabe","P/P","Pädagogik/Psychologie","Ta"],
+  ["2026-11-25","schulaufgabe","Englisch","Englisch","Rt"],
+  ["2026-12-09","schulaufgabe","Mathe","Mathematik","Sd"],
+  ["2026-12-14","schulaufgabe","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
+  ["2026-12-14","schulaufgabe","Sp I","Spanisch (WPF_Sp_12_I)","Ge"],
+  ["2026-12-14","schulaufgabe","Sp Ia","Spanisch (WPF_Sp_12_Ia)","Os"],
+  ["2026-12-15","schulaufgabe","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
+  ["2026-12-15","schulaufgabe","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
+  ["2026-12-15","schulaufgabe","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"],
+  ["2027-01-28","kurzarbeit","Mathe","Mathematik","Sd"],
+  ["2027-02-17","kurzarbeit","kath. Reli","Kath. Religionslehre (K5_F12Sb_Ua)","Kg"],
+  ["2027-02-22","kurzarbeit","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
+  ["2027-02-22","kurzarbeit","Sp I","Spanisch (WPF_Sp_12_I)","Ge"],
+  ["2027-02-22","kurzarbeit","Sp Ia","Spanisch (WPF_Sp_12_Ia)","Os"],
+  ["2027-02-23","kurzarbeit","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
+  ["2027-02-23","kurzarbeit","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
+  ["2027-02-23","kurzarbeit","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"],
+  ["2027-03-08","schulaufgabe","Mathe","Mathematik","Sd"],
+  ["2027-03-10","schulaufgabe","Mathe","Mathematik","Sd"],
+  ["2027-03-11","schulaufgabe","Englisch","Englisch","Rt"],
+  ["2027-04-12","schulaufgabe","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
+  ["2027-04-12","schulaufgabe","Sp I","Spanisch (WPF_Sp_12_I)","Ge"],
+  ["2027-04-12","schulaufgabe","Sp Ia","Spanisch (WPF_Sp_12_Ia)","Os"],
+  ["2027-04-13","schulaufgabe","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
+  ["2027-04-13","schulaufgabe","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
+  ["2027-04-13","schulaufgabe","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"]
+ ];
+ return L.map(([start,type,kurz,fach,lk])=>({
+  start,type,kurz,fach,
+  title:(type==="schulaufgabe"?"Schulaufgabe (SA) in ":"Kurzarbeit (KA) in ")+fach,
+  description:(type==="schulaufgabe"?"Schulaufgabe":"Kurzarbeit (Gewicht 2)")+" in "+fach+" · Lehrkraft: "+lk
+ }));
+}
 // Feste Termine (nicht bearbeitbar): zentrale schriftliche Abschlussprüfungen FOS 12 Bayern 2027 und Termine der FOSBOS Weilheim.
 function calFesteTermine(){
  const P="Zentraler Prüfungstermin der schriftlichen Abschlussprüfung FOS 12 in Bayern 2027.";
  return[
   {start:"2026-10-08",type:"elternabend",title:"Klassenelternversammlung (Elternabend)",time:"17:30",description:"Um 17:00 Uhr Wahl des Elternbeirats, im Anschluss an die Versammlung die 1. Elternbeiratssitzung."},
   {start:"2026-10-29",type:"digitaltag",title:"1. Digitaltag",description:"Digitaltag der FOSBOS Weilheim."},
+  ...calLeistungsnachweise(),
   {start:"2027-05-12",type:"pruefung",title:"Abschlussprüfung Deutsch (schriftlich)",description:P},
   {start:"2027-05-14",type:"pruefung",title:"Abschlussprüfung Pädagogik/Psychologie (schriftlich, Profilfach)",description:P},
   {start:"2027-06-01",type:"pruefung",title:"Abschlussprüfung Englisch (schriftlich)",description:P},
@@ -16511,6 +16564,11 @@ async function renderKalender(){
  let zellText=meta?meta.label:"",zeigt=1;
  if(gebDs.length){zellText=gebDs.map(x=>calKurzName(x.person)).filter(Boolean).join(", ")||meta.label;zeigt=gebDs.length;}
  else if(firstType==="pruefung"&&ds[0].title){zellText=String(ds[0].title).replace(/^Abschlussprüfung\s+/,"");}
+  else if((firstType==="schulaufgabe"||firstType==="kurzarbeit")){
+   const gleich=ds.filter(x=>normalizeType(x)===firstType);
+   const faecher=gleich.map(x=>x.kurz||x.fach||"").filter(Boolean);
+   if(faecher.length){zellText=(firstType==="schulaufgabe"?"SA ":"KA ")+faecher.join(", ");zeigt=gleich.length;}
+  }
  const tip=ds.map(x=>x.person||x.title||x.name||"").filter(Boolean).join(" · ");
  cells.push(`<button type="button"class="cal-day ${meta?`has-event ${meta.className}`:""}"title="${esc(tip)}"onclick="openCalendarDay(${y},${m},${d})">
  <span class="cal-num">${d}</span>
@@ -16561,7 +16619,7 @@ async function renderKalender(){
  </style>
  <div class="card"style="margin-bottom:16px">
  <strong>Campus-Kalender</strong>
- <p>Termine werden im gemeinsamen Kalender gespeichert. Klicke auf einen Tag, um die Details zu sehen.</p>
+ <p>Termine werden im gemeinsamen Kalender gespeichert. Klicke auf einen Tag, um die Details zu sehen. <b>SA</b> = Schulaufgabe (blau), <b>KA</b> = Kurzarbeit (rot) – dahinter steht das Fach.</p>
  <div class="cal-legend">${legend}</div>
  </div>
  <div class="cal-months">${months.map(x=>monthHTML(x.y,x.m,x.name)).join("")}</div>${footer()}`;
