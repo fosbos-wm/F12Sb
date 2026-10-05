@@ -9193,11 +9193,23 @@ const WB_CSS=`<style>
  .wb-props{bottom:68px;max-width:calc(100% - 16px)}
  .wb-oben{right:8px;top:8px}.wb-oben .wb-btn{width:34px;height:34px}
 }
-/* Farb- und Eigenschaftenleiste: ab Tablet-Breite senkrecht am rechten Rand statt unten in der Mitte */
+/* Leisten ohne Überschneidung: feste Zonen statt senkrechtem Zentrieren.
+   Oben: Seiten (links) und Ansicht (rechts) · links: Werkzeuge · rechts: Farben/Eigenschaften · unten: Tafelleiste */
 @media(min-width:761px){
- .wb-props,.wb-wrap.wb-tafelmodus .wb-props{left:auto;right:14px;bottom:auto;top:50%;transform:translateY(-50%);flex-direction:column;flex-wrap:nowrap;gap:8px;padding:10px 8px;max-width:none;max-height:calc(100% - 190px);overflow-y:auto}
+ .wb-wrap{--wb-oben:76px;--wb-unten:12px}
+ .wb-wrap.wb-tafelmodus:not(.wb-ro){--wb-unten:108px}
+ .wb-tools{box-sizing:border-box;top:var(--wb-oben);transform:none;max-height:calc(100% - var(--wb-oben) - var(--wb-unten));overflow-y:auto;scrollbar-width:thin}
+ .wb-tools>*{flex:none}
+ .wb-props,.wb-wrap.wb-tafelmodus .wb-props{box-sizing:border-box;left:auto;right:12px;bottom:auto;top:var(--wb-oben);transform:none;flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:8px;padding:10px 8px;max-width:none;max-height:calc(100% - var(--wb-oben) - var(--wb-unten));overflow-y:auto;scrollbar-width:thin}
+ .wb-props>*{flex:none}
  .wb-props .wb-gruppe{display:grid;grid-template-columns:repeat(2,34px);gap:6px;justify-items:center;padding:0 0 8px;margin:0;border-right:0;border-bottom:1px solid var(--line)}
  .wb-props .wb-gruppe:last-child{border:0;padding:0}
+}
+@media(max-width:760px){
+ .wb-oben{max-width:calc(100% - 16px);overflow-x:auto;box-sizing:border-box}
+ .wb-wrap.wb-tafelmodus:not(.wb-ro) .wb-props{bottom:108px}
+ .wb-wrap.wb-tafelmodus:not(.wb-ro).wb-tools-offen .wb-tools{bottom:108px}
+ .wb-wrap.wb-tafelmodus:not(.wb-ro).wb-tools-offen .wb-props{bottom:166px}
 }
 </style>`;
 
