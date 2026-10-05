@@ -5637,10 +5637,7 @@ async function renderUnterrichtPP(){
    .pp12-ferien{margin-left:0}.pp12-bar,.pp12-leer{min-height:0}
   }
  </style>
- <div class="pp12-stats">${lbKarten}<div class="pp12-stat"style="--c:#6B7C93"><strong>${gesamtBisStoffEnde} Std.</strong><small>gesamt bis 28.04.2027 (Stoff abgeschlossen)</small></div></div>
  <div class="pp12-info">
-  <div class="card"><strong>Leistungsnachweise</strong><p style="margin:6px 0 0">Kurzarbeit 16.11.2026 · Schulaufgabe 1 am 16.12.2026 · Schulaufgabe 2 am 03.03.2027</p></div>
-  <div class="card"><strong>Abschlussprüfung 2027</strong><p style="margin:6px 0 0">Deutsch 12.05.2027 (erste Prüfung) · Pädagogik/Psychologie 14.05.2027. Stoff fertig am 28.04.2027, danach Prüfungstraining.</p></div>
   <a class="card"href="#ressourcen"style="display:block;text-decoration:none;color:inherit;border-left:4px solid #3fa66a"aria-label="Zu den Lernressourcen">
    <strong>Lernressourcen</strong>
    <p style="margin:6px 0 0">Hier liegen die TaskCard-Links, Canva, KI-Angebote, Videos, ByCS/mebis und LearningApps.</p>
