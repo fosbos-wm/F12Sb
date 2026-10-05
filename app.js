@@ -9193,6 +9193,12 @@ const WB_CSS=`<style>
  .wb-props{bottom:68px;max-width:calc(100% - 16px)}
  .wb-oben{right:8px;top:8px}.wb-oben .wb-btn{width:34px;height:34px}
 }
+/* Farb- und Eigenschaftenleiste: ab Tablet-Breite senkrecht am rechten Rand statt unten in der Mitte */
+@media(min-width:761px){
+ .wb-props,.wb-wrap.wb-tafelmodus .wb-props{left:auto;right:14px;bottom:auto;top:50%;transform:translateY(-50%);flex-direction:column;flex-wrap:nowrap;gap:8px;padding:10px 8px;max-width:none;max-height:calc(100% - 190px);overflow-y:auto}
+ .wb-props .wb-gruppe{display:grid;grid-template-columns:repeat(2,34px);gap:6px;justify-items:center;padding:0 0 8px;margin:0;border-right:0;border-bottom:1px solid var(--line)}
+ .wb-props .wb-gruppe:last-child{border:0;padding:0}
+}
 </style>`;
 
 // ------------------------------------------------------------ Übersicht
