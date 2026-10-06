@@ -8935,7 +8935,7 @@ function renderQrCode(){
  <div class="grid grid-2"style="gap:16px;align-items:start">
   <div class="card"><div class="form">
    <label>Link (Adresse)<input id="qrUrl"type="url"inputmode="url"autocomplete="off"placeholder="https://…"onkeydown="if(event.key==='Enter')qrErzeugen()"></label>
-   <label>Beschriftung unter dem Code (optional)<input id="qrText"maxlength="60"placeholder="z. B. Padlet ${kl}"></label>
+   <label>Beschriftung unter dem Code (optional)<input id="qrText"maxlength="60"placeholder="z. B. Padlet 12Sb"></label>
    <label>Farbe<select id="qrFarbe"><option value="#000000">Schwarz</option><option value="#0f3d6e">Dunkelblau</option></select></label>
    ${lehrer?`<label style="display:flex;gap:8px;align-items:center"><input type="checkbox"id="qrLogo"checked style="width:auto"> Schullogo in der Mitte</label>`:""}
    <div class="form-actions"><button class="primary"onclick="qrErzeugen()">QR-Code erstellen</button></div>
