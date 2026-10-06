@@ -833,7 +833,7 @@ async function getUpcomingCampusCalendarEvent(){
  const d=new Date(String(raw).slice(0,10)+"T00:00:00");
  return isNaN(d)?null:d;
  };
- events=[...events,...calFesteTermine()];
+ await calAusgeblendetLaden();events=[...events,...calFesteTermine()];
  return events.map(e=>({e,d:eventDate(e)})).filter(x=>x.d&&x.d>=today).sort((a,b)=>a.d-b.d)[0]?.e||null;
 }
 
@@ -3516,7 +3516,7 @@ async function miniKalenderHTML(){
  if(!events.length){try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){}}
  let birthdayEvents=[];
  try{birthdayEvents=await getBirthdayEvents()}catch(e){}
- events=[...events,...calFesteTermine()];
+ await calAusgeblendetLaden();events=[...events,...calFesteTermine()];
  // Dieselben Schulferien-Zeiträume wie im vollständigen Campus-Kalender.
  const ferienZeitraeume=[
  ["2026-08-03","2026-09-14"],["2026-11-02","2026-11-06"],["2026-12-24","2027-01-08"],
@@ -8938,7 +8938,7 @@ function renderQrCode(){
    <label>Beschriftung unter dem Code (optional)<input id="qrText"maxlength="60"placeholder="z. B. Padlet 12Sb"></label>
    <label>Farbe<select id="qrFarbe"><option value="#000000">Schwarz</option><option value="#0f3d6e">Dunkelblau</option></select></label>
    ${lehrer?`<label style="display:flex;gap:8px;align-items:center"><input type="checkbox"id="qrLogo"checked style="width:auto"> Schullogo in der Mitte</label>`:""}
-   <div class="form-actions"><button class="primary"onclick="qrErzeugen()">QR-Code erstellen</button></div>
+   <div class="form-actions"><button class="primary"onclick="qrErzeugen()">QR-Code erstellen</button><button class="secondary"onclick="qrLoeschen()">Löschen</button></div>
    <p style="font-size:12px;color:var(--muted);margin:0">Tipp: Teste den Code vor dem Ausdrucken mit der Handykamera. Der Link muss ohne Anmeldung erreichbar sein.${lehrer?" Mit Logo bleibt der Code scanbar, weil eine hohe Fehlerkorrektur verwendet wird.":""}</p>
   </div></div>
   <div class="card"style="text-align:center">
@@ -8947,6 +8947,7 @@ function renderQrCode(){
    <div id="qrAktionen"hidden style="display:none;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px">
     <button class="primary"onclick="qrHerunterladen()">PNG herunterladen</button>
     <button class="secondary"onclick="qrKopieren()">In Zwischenablage kopieren</button>
+    <button class="secondary"onclick="qrLoeschen()">QR-Code löschen</button>
    </div>
   </div>
  </div>
@@ -9005,7 +9006,15 @@ async function qrKopieren(){
   toast("QR-Code in die Zwischenablage kopiert.");
  }catch(e){toast("Kopieren wird hier nicht unterstützt. Bitte den QR-Code herunterladen.");}
 }
-window.qrErzeugen=qrErzeugen;window.qrHerunterladen=qrHerunterladen;window.qrKopieren=qrKopieren;
+function qrLoeschen(){
+ const cv=$("qrCanvas");
+ if(cv){cv.width=1;cv.height=1;cv.style.display="none";}
+ const leer=$("qrLeer");if(leer)leer.style.display="";
+ const akt=$("qrAktionen");if(akt){akt.hidden=true;akt.style.display="none";}
+ ["qrUrl","qrText"].forEach(id=>{const e=$(id);if(e)e.value="";});
+ qrLetzt=null;
+}
+window.qrLoeschen=qrLoeschen;window.qrErzeugen=qrErzeugen;window.qrHerunterladen=qrHerunterladen;window.qrKopieren=qrKopieren;
 
 async function renderLernwerkstatt(){
  const groups=[
@@ -16569,10 +16578,43 @@ function calLeistungsnachweise(){
  }));
 }
 // Feste Termine (nicht bearbeitbar): zentrale schriftliche Abschlussprüfungen FOS 12 Bayern 2027 und Termine der FOSBOS Weilheim.
+// ---- Feste (im Code hinterlegte) Termine löschen = ausblenden ----
+// Gespeichert in taskcardLinks/kalender_ausgeblendet (Lehrkräfte schreiben, alle lesen).
+let calAusgeblendetSet=new Set(),calAusgeblendetZeit=0;
+function calFixKey(e){let h=5381;const t=`${e.start}|${e.type}|${e.title}`;for(let i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return"fx"+(h>>>0).toString(16);}
+async function calAusgeblendetLaden(erzwingen){
+ if(!erzwingen&&Date.now()-calAusgeblendetZeit<15000)return calAusgeblendetSet;
+ try{const d=await getDoc(doc(db,"taskcardLinks","kalender_ausgeblendet"));calAusgeblendetSet=new Set(d.exists()?(d.data().keys||[]):[]);calAusgeblendetZeit=Date.now();}
+ catch(e){console.error("Kalender ausgeblendet laden:",e);}
+ return calAusgeblendetSet;
+}
 function calFesteTermine(){
+ return calFesteTermineRoh().map(e=>({...e,fixKey:calFixKey(e)})).filter(e=>!calAusgeblendetSet.has(e.fixKey));
+}
+async function calFixAusblenden(key){
+ if(!isTeacher()){toast("Nur Lehrkräfte können Termine löschen.");return}
+ if(!confirm("Termin wirklich löschen?"))return;
+ try{
+  const aktuell=await calAusgeblendetLaden(true);
+  const keys=[...new Set([...aktuell,key])];
+  await setDoc(doc(db,"taskcardLinks","kalender_ausgeblendet"),{keys,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
+  calAusgeblendetSet=new Set(keys);calAusgeblendetZeit=Date.now();
+  closeModal();await render();toast("Termin gelöscht.");
+ }catch(e){console.error("Fester Termin löschen:",e);toast("Termin konnte nicht gelöscht werden.");}
+}
+async function calFixWiederherstellen(){
+ if(!isTeacher())return;
+ if(!confirm("Alle gelöschten festen Termine wieder anzeigen?"))return;
+ try{
+  await setDoc(doc(db,"taskcardLinks","kalender_ausgeblendet"),{keys:[],updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
+  calAusgeblendetSet=new Set();calAusgeblendetZeit=Date.now();
+  await render();toast("Feste Termine wiederhergestellt.");
+ }catch(e){console.error("Feste Termine wiederherstellen:",e);toast("Konnte nicht wiederhergestellt werden.");}
+}
+window.calFixAusblenden=calFixAusblenden;window.calFixWiederherstellen=calFixWiederherstellen;
+function calFesteTermineRoh(){
  const P="Zentraler Prüfungstermin der schriftlichen Abschlussprüfung FOS 12 in Bayern 2027.";
  return[
-  {start:"2026-10-08",type:"elternabend",title:"Klassenelternversammlung (Elternabend)",time:"17:30",description:"Um 17:00 Uhr Wahl des Elternbeirats, im Anschluss an die Versammlung die 1. Elternbeiratssitzung."},
   {start:"2026-10-29",type:"digitaltag",title:"1. Digitaltag",description:"Digitaltag der FOSBOS Weilheim."},
   ...calLeistungsnachweise(),
   {start:"2027-05-12",type:"pruefung",title:"Abschlussprüfung Deutsch (schriftlich)",description:P},
@@ -16621,7 +16663,7 @@ async function renderKalender(){
  });
  let birthdayEvents=[];
  try{birthdayEvents=await getBirthdayEvents()}catch(e){console.error("Kalender Geburtstage:",e)}
- events=[...events,...calFesteTermine(),...birthdayEvents,...ferienEvents];
+ await calAusgeblendetLaden();events=[...events,...calFesteTermine(),...birthdayEvents,...ferienEvents];
 
  const normalizeType=e=>{
  const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
@@ -16716,7 +16758,7 @@ async function renderKalender(){
  </style>
  <div class="card"style="margin-bottom:16px">
  <strong>Campus-Kalender</strong>
- <p>Termine werden im gemeinsamen Kalender gespeichert. Klicke auf einen Tag, um die Details zu sehen. <b>SA</b> = Schulaufgabe (blau), <b>KA</b> = Kurzarbeit (rot) – dahinter steht das Fach.</p>
+ <p>Termine werden im gemeinsamen Kalender gespeichert. Klicke auf einen Tag, um die Details zu sehen. <b>SA</b> = Schulaufgabe (blau), <b>KA</b> = Kurzarbeit (rot) – dahinter steht das Fach.</p>${isTeacher()&&calAusgeblendetSet.size?`<p style="margin:6px 0 0"><button class="secondary"onclick="calFixWiederherstellen()">Gelöschte feste Termine wiederherstellen (${calAusgeblendetSet.size})</button></p>`:""}
  <div class="cal-legend">${legend}</div>
  </div>
  <div class="cal-months">${months.map(x=>monthHTML(x.y,x.m,x.name)).join("")}</div>${footer()}`;
@@ -16854,6 +16896,7 @@ function openCalendarDay(y,m,d){
  <button class="secondary"onclick="editCalendarEntry('${e.collection||"events"}','${e.id}','${esc(String(e.title||e.name||"").replace(/\n/g,"\\n"))}','${esc(String(e.type||"sonstiges"))}','${esc(String(e.date||e.start||"").slice(0,10))}','${esc(String(e.time||""))}','${esc(String(e.location||"").replace(/\n/g,"\\n"))}','${esc(String(e.description||e.text||"").replace(/\n/g,"\\n"))}')">Bearbeiten</button>
  <button class="secondary"onclick="deleteCalendarEntry('${e.collection||"events"}','${e.id}')">Termin löschen</button>
  </div>`:""}
+ ${isTeacher() && e.fixKey?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="calFixAusblenden('${e.fixKey}')">Termin löschen</button></div>`:""}
  </div>`;
  }).join("")||`<div class="empty">An diesem Tag ist noch kein Termin eingetragen.</div>`}</div>
  <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button>
