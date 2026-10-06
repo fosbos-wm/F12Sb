@@ -5567,14 +5567,6 @@ async function renderUnterrichtPP(){
  ].join("");
  const nid=pp12NaechsteStundeId(),ne=nid?PP12_PLAN.find(x=>x.id===nid):null;
  const neTag=ne?({1:"Mo",3:"Mi",5:"Fr"})[new Date(ne.d+"T12:00:00Z").getUTCDay()]||"":"";
- const tool=isTeacher()?`<div class="card pp12-tool"><strong>Planung verschieben</strong>
-  <p>Thema nicht fertig geworden? Ein Klick schiebt ${ne?`ab der nächsten Stunde (${neTag} ${pp12Datum(ne.d)}: ${esc(ne.t)})`:"ab der nächsten Stunde"} alles um einen Unterrichtstag nach hinten. Der frei werdende Termin ist die Reserve für die Fortsetzung des Themas.</p>
-  <div class="pp12-tool-row">
-   <button type="button"class="secondary"onclick="pp12Gesamt(-1)">‹ Planung einen Tag vor</button>
-   <button type="button"class="primary"onclick="pp12Gesamt(1)">Planung einen Tag zurück ›</button>
-   <button type="button"class="text-button"onclick="pp12Zuruecksetzen()">Plan zurücksetzen</button>
-  </div>
-  <small>An jeder Stunde: <b>‹ ›</b> = nur diese Stunde einen Unterrichtstag früher oder später · <b>‹‹ ››</b> = diese und alle folgenden Stunden · <b>＋</b> = neue Stunde vor dieser einfügen · <b>✕</b> = Stunde entfernen (Termin wird frei). Leistungsnachweise und Prüfungen bleiben auf ihrem Datum, die Stundenzahl richtet sich nach dem Termin (Mo 1, Mi 2, Fr 2).</small></div>`:"";
  const parkHtml=isTeacher()&&PP12_PARK.length?`<div class="card"style="margin-top:12px"><strong>Zurückgestellte Stunden</strong><p style="margin:6px 0">Diese Stunden haben aktuell keinen Termin.</p>${PP12_PARK.map(e=>`<div class="pp12-park"><span>${esc(e.t)}</span><button type="button"class="secondary"onclick="pp12Einplanen('${esc(e.id)}')">Wieder einplanen</button></div>`).join("")}</div>`:"";
  const wegListe=(PP12_OVER.weg||[]).map(id=>PP12_BASIS.find(e=>e.id===id)).filter(Boolean);
  const wegHtml=isTeacher()&&wegListe.length?`<div class="card"style="margin-top:12px"><strong>Entfernte Stunden</strong><p style="margin:6px 0">Diese Stunden des Grundplans hast du aus dem Plan genommen.</p>${wegListe.map(e=>`<div class="pp12-park"><span>${esc(e.t)}</span><button type="button"class="secondary"onclick="pp12Wiederherstellen('${esc(e.id)}')">Wiederherstellen</button></div>`).join("")}</div>`:"";
@@ -5645,7 +5637,7 @@ async function renderUnterrichtPP(){
    <p style="margin:8px 0 0;font-weight:700;color:#2f7fc6">Zur Lernressourcen-Bibliothek →</p>
   </a>
  </div>
- ${tool}
+ ${isTeacher()?`<p style="margin:0 0 8px"><button type="button"class="text-button"onclick="pp12Zuruecksetzen()">Plan zurücksetzen</button></p>`:""}
  <div class="pp12-legende">${legende}</div>
  ${rows}
  ${parkHtml}
