@@ -4269,7 +4269,7 @@ async function pp12NaechsteStundeHtml(){
  const t=PP12_CACHE.tafeln[e.d];
  return`<section class="card"style="margin:0 0 18px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
   <div style="min-width:240px;flex:1"><div class="kicker">${e.d===heute?"HEUTE":"NÄCHSTE STUNDE"} · ${tag} ${e.d.slice(8,10)}.${e.d.slice(5,7)}.</div><h2 style="margin:4px 0 0;font-size:20px">${esc(e.t)}</h2></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="primary"href="#unterricht-pp"style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;font-weight:700">Zum Stoffplan</a>${t?`<button class="secondary"type="button"onclick="pp12Tafel('${e.d}')">Tafel öffnen</button>`:""}</div></section>`;
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="primary"href="#unterricht-pp"style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;font-weight:700">Zur Wochenplanung PP</a>${t?`<button class="secondary"type="button"onclick="pp12Tafel('${e.d}')">Tafel öffnen</button>`:""}</div></section>`;
 }
 
 // ---- Didaktik-Kompass (Orientierung für Lehrkräfte) ----
