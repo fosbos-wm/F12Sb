@@ -16435,7 +16435,6 @@ function calLeistungsnachweise(){
   ["2026-11-17","kurzarbeit","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
   ["2026-11-17","kurzarbeit","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
   ["2026-11-17","kurzarbeit","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"],
-  ["2026-11-20","schulaufgabe","P/P","Pädagogik/Psychologie","Ta"],
   ["2026-11-25","schulaufgabe","Englisch","Englisch","Rt"],
   ["2026-12-09","schulaufgabe","Mathe","Mathematik","Sd"],
   ["2026-12-14","schulaufgabe","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
