@@ -1,1 +1,66 @@
-[]
+[
+ {
+  "id": "f12-freud-starkes-ich",
+  "thema": "Starkes und schwaches Ich",
+  "unter": "Freud · Instanzenmodell",
+  "datum": "2026-10-07",
+  "frage": "Was unterscheidet ein starkes von einem schwachen Ich – und was bedeutet das für das Verhalten einer Person?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "ICH-STÄRKE\n• Gleichgewicht zwischen Persönlichkeitsinstanzen und Realität\n• Das Ich kann sich gegenüber den beiden Instanzen und der Realität durchsetzen\n• Das Ich kann die Anforderungen der beiden Instanzen und der Realität in Einklang bringen\n\n→ Person ist selbstbestimmt in ihrem Verhalten"
+   },
+   {
+    "c": "rosa",
+    "text": "ICH-SCHWÄCHE\n• Persönlichkeitsinstanzen stehen zueinander bzw. mit der Realität in einem Ungleichgewicht\n• Das Ich ist einer der beiden Instanzen bzw. der Realität unterlegen\n• Dem Ich gelingt es nicht, zwischen den Forderungen der beiden anderen Instanzen und der Realität zu vermitteln\n\n→ Person ist fremdbestimmt in ihrem Verhalten"
+   }
+  ],
+  "mitte": "Ich",
+  "begriffe": [
+   "Es",
+   "Über-Ich",
+   "Realität"
+  ],
+  "zusammen": "Gleichgewicht → Ich-Stärke → selbstbestimmt\nUngleichgewicht → Ich-Schwäche → fremdbestimmt",
+  "fall": "Fall (Kita): Der fünfjährige Tim will sofort weiter mit dem Bagger spielen (Es), weiß aber, dass vor dem Mittagessen aufgeräumt wird (Über-Ich).\n\nStarkes Ich: Tim vereinbart „noch fünf Minuten, dann räume ich auf“ und hält sich daran → selbstbestimmt.\n\nSchwaches Ich: Tim wird nur von dem gesteuert, was gerade am stärksten drückt (Wutanfall oder Gehorsam aus Angst) → fremdbestimmt.",
+  "anker": [
+   "Ich kann Ich-Stärke und Ich-Schwäche mit je zwei Merkmalen beschreiben.",
+   "Ich kann erklären, warum das Ich zwischen Es, Über-Ich und Realität vermittelt.",
+   "Ich kann an einem Beispiel zeigen, wann eine Person selbst- bzw. fremdbestimmt handelt."
+  ]
+ },
+ {
+  "id": "f12-freud-instanzenmodell",
+  "thema": "Freud: Instanzenmodell (Es, Ich, Über-Ich)",
+  "unter": "LB 1 · Entwicklung · Freud",
+  "datum": "2026-10-02",
+  "frage": "Wie erklärt Freud das Verhalten eines Menschen durch das Zusammenspiel von Es, Ich und Über-Ich?",
+  "wissen": [
+   {
+    "c": "rosa",
+    "text": "ES\n• von Geburt an vorhanden, unbewusst\n• Triebe und Bedürfnisse\n• Lustprinzip: will sofortige Befriedigung, kennt weder Regeln noch Zeit"
+   },
+   {
+    "c": "blau",
+    "text": "ICH\n• entwickelt sich im Kontakt mit der Umwelt, teils bewusst\n• Realitätsprinzip: prüft, was möglich und sinnvoll ist\n• vermittelt zwischen Es, Über-Ich und Realität und sucht Kompromisse"
+   },
+   {
+    "c": "lila",
+    "text": "ÜBER-ICH\n• verinnerlichte Normen, Werte und Verbote (Eltern, Gesellschaft)\n• Gewissen und Ich-Ideal\n• Moralprinzip: Schuldgefühle bei Verstößen, Stolz bei Einhalten"
+   }
+  ],
+  "mitte": "Ich",
+  "begriffe": [
+   "Es",
+   "Über-Ich",
+   "Realität"
+  ],
+  "zusammen": "Es drängt („Ich will!“), Über-Ich bremst („Du darfst nicht!“), die Realität setzt Grenzen. Das Ich vermittelt – aus diesem Zusammenspiel entsteht das Verhalten.",
+  "fall": "Fall (Kita): Mia (4) sieht Schokolade im Regal und will sie sofort (Es). Sie erinnert sich: „Süßes gibt es erst nach dem Essen“ (Über-Ich). Das Ich wägt ab: Mia fragt die Erzieherin, ob sie nach dem Mittagessen ein Stück bekommt (Kompromiss mit der Realität).",
+  "anker": [
+   "Ich kann Es, Ich und Über-Ich mit je einem Prinzip und einem Merkmal beschreiben.",
+   "Ich kann an einem Fallbeispiel zuordnen, welche Instanz gerade „spricht“.",
+   "Ich kann erklären, was das Ich vermittelt und warum innere Konflikte entstehen."
+  ]
+ }
+]
