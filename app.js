@@ -4241,7 +4241,7 @@ function pp12TafelHtml(e){
  if(e.typ==="pruefung")return"";
  const t=PP12_CACHE.tafeln[e.d]&&PP12_CACHE.tafeln[e.d].boardId?PP12_CACHE.tafeln[e.d]:null;
  if(!t&&!isTeacher())return"";
- return`<button type="button"class="pp12-tafel${t?" da":""}"onclick="pp12Tafel('${e.d}')"title="${t?"Tafel dieser Stunde öffnen":"Tafel für diese Stunde anlegen"}">${wbIcon("frame",14)}<span>Tafel${t?"":" anlegen"}</span></button>`;
+ return`<button type="button"class="pp12-tafel${t?" da":""}"onclick="pp12Tafel('${e.d}')"title="${t?"Roter Faden dieser Stunde öffnen":"Roter Faden für diese Stunde anlegen"}">${wbIcon("frame",14)}<span>Roter Faden${t?"":" anlegen"}</span></button>`;
 }
 let pp12Beschaeftigt=false;
 async function pp12Tafel(datum){
@@ -4272,7 +4272,7 @@ async function pp12NaechsteStundeHtml(){
  const t=PP12_CACHE.tafeln[e.d]&&PP12_CACHE.tafeln[e.d].boardId;
  return`<section class="card"style="margin:0 0 18px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
   <div style="min-width:240px;flex:1"><div class="kicker">${e.d===heute?"HEUTE":"NÄCHSTE STUNDE"} · ${tag} ${e.d.slice(8,10)}.${e.d.slice(5,7)}.</div><h2 style="margin:4px 0 0;font-size:20px">${esc(e.t)}</h2></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="primary"href="#unterricht-pp"style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;font-weight:700">Zur Wochenplanung PP</a>${t?`<button class="secondary"type="button"onclick="pp12Tafel('${e.d}')">Tafel öffnen</button>`:""}</div></section>`;
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="primary"href="#unterricht-pp"style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;font-weight:700">Zur Wochenplanung PP</a>${t?`<button class="secondary"type="button"onclick="pp12Tafel('${e.d}')">Roter Faden öffnen</button>`:""}</div></section>`;
 }
 
 // ---- Didaktik-Kompass (Orientierung für Lehrkräfte) ----
@@ -20443,7 +20443,7 @@ function lbModulPills(m){
  if(LB_AUSGENOMMEN.includes(m.modul))return"";
  const lehrer=isTeacher(),hatT=!!m.tafelId,hatL=!!m.lernBoardId,hatW=!!m.whiteboardId,id=esc(m.id);
  const p=[];
- if(hatT||lehrer)p.push(lbPill("Tafel"+(hatT?"":" anlegen"),LB_ICON.tafel,hatT,`data-ppm="lb-tafel" data-id="${id}"`,hatT?"Digitale Tafel öffnen (nur Lehrkräfte ändern sie)":"Digitale Tafel anlegen"));
+ if(hatT||lehrer)p.push(lbPill("Roter Faden"+(hatT?"":" anlegen"),LB_ICON.tafel,hatT,`data-ppm="lb-tafel" data-id="${id}"`,hatT?"Roter Faden (digitale Tafel) öffnen, nur Lehrkräfte ändern ihn":"Roter Faden (digitale Tafel) anlegen"));
  if(hatL||lehrer)p.push(lbPill("Lernübersicht"+(hatL?"":" anlegen"),LB_ICON.lern,hatL,`data-ppm="lb-lern" data-id="${id}"`,hatL?(lehrer?"Lernübersicht (Vorlage) öffnen":"Meine Lernübersicht öffnen"):"Lernübersicht als Whiteboard anlegen"));
  if(lehrer)p.push(lbPill("⇄ zuordnen","",false,`data-ppm="lb-zuordnen" data-id="${id}"`,"Eine vorhandene Lernübersicht diesem Modul zuordnen"));
  if(hatW||lehrer)p.push(lbPill("Whiteboard"+(hatW?"":" anlegen"),LB_ICON.wb,hatW,`data-ppm="lb-wb" data-id="${id}"`,hatW?"Whiteboard öffnen":"Whiteboard anlegen"));
@@ -20451,7 +20451,7 @@ function lbModulPills(m){
 }
 function lbModulBar(m){
  const p=lbModulPills(m);
- return p?`<div class="ppm-box lb-leiste"><b>Tafel, Lernübersicht und Whiteboard</b>${p}</div>`:"";
+ return p?`<div class="ppm-box lb-leiste"><b>Roter Faden, Lernübersicht und Whiteboard</b>${p}</div>`:"";
 }
 async function lbModulTafel(m){
  if(m.tafelId){openWhiteboard(m.tafelId);return;}
