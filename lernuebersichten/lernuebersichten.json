@@ -62,38 +62,5 @@
    "Ich kann an einem Fallbeispiel zuordnen, welche Instanz gerade „spricht“.",
    "Ich kann erklären, was das Ich vermittelt und warum innere Konflikte entstehen."
   ]
- },
- {
-  "id": "f12-freud-grundformen-angst",
-  "thema": "Grundformen der Angst",
-  "unter": "LB 12.1 · Freud · Instanzenmodell",
-  "frage": "Welche drei Grundformen der Angst unterscheidet Sigmund Freud – und wovor „fürchtet“ sich das Ich jeweils?",
-  "wissen": [
-   {
-    "c": "gruen",
-    "text": "MORALISCHE ANGST\n(„Gewissensangst“)\n• Angst vor Forderungen des Über-Ichs\n• Das Ich „fürchtet“ sich vor den Forderungen des Über-Ich, was mit Schuldgefühlen, Selbstvorwürfen und Gewissensbissen verbunden ist"
-   },
-   {
-    "c": "gelb",
-    "text": "REALITÄTSANGST\n(„Realangst“)\n• Angst vor der Realität\n• Das Ich „fürchtet“ sich vor den Konsequenzen der Realität, die auf die Befriedigung von Wünschen folgt bzw. folgen würde (z. B. negative Sanktionen, öffentliche Verurteilung)"
-   },
-   {
-    "c": "rosa",
-    "text": "NEUROTISCHE ANGST\n\n• Angst vor den Ansprüchen des Es\n• Das Ich „fürchtet“ von den Ansprüchen des Es überwältigt oder gar vernichtet zu werden"
-   }
-  ],
-  "mitte": "Ich",
-  "begriffe": [
-   "Über-Ich",
-   "Realität",
-   "Es"
-  ],
-  "zusammen": "Ungleichgewicht der Instanzen → Angst (Funktion des Ich)\nÜber-Ich: moralische Angst · Realität: Realitätsangst · Es: neurotische Angst",
-  "fall": "Fall: Herr Treuberg, seit neun Jahren verheiratet, lernt auf einer Party eine junge Dame kennen, die ihm gefällt. Er würde gerne näheren Kontakt aufnehmen.\n\n• Er würde gegen moralische Prinzipien verstoßen → Gewissensbisse, Schuldgefühle → moralische Angst\n• Er erschrickt, dass er ohne Schuldgefühle intimen Kontakt aufnehmen könnte → Wunsch bedrohlich → neurotische Angst\n• Er glaubt, an Ansehen einzubüßen und belächelt zu werden → Reaktion der Umwelt bedrohlich → Realitätsangst",
-  "anker": [
-   "Ich kann Angst definieren: Funktion des Ich, die vor drohenden Gefahren warnen und die Person zu Handlungen veranlassen soll, die die Angst reduzieren.",
-   "Ich kann die drei Grundformen nennen und je einer Instanz zuordnen (Über-Ich, Realität, Es).",
-   "Ich kann an einem Fall zuordnen, welche Form der Angst vorliegt."
-  ]
  }
 ]
