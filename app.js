@@ -5321,6 +5321,7 @@ async function ppmKlick(e){
   if(aktion==="projekt-oeffnen"){const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(b.dataset.lb));if(ph){activePPModul=null;activePhaseDetail=ph.id+":projekt";await refresh();}return;}
   if(aktion==="lb-tafel"&&m){await lbModulTafel(m);await refresh();return;}
   if(aktion==="lb-lern"&&m){await lbModulLern(m);return;}
+  if(aktion==="lb-zuordnen"&&m){await lbZuordnenDialog("m",m.id);return;}
   if(aktion==="lb-wb"&&m){await lbModulWb(m);return;}
   if(aktion==="tafel"){openWhiteboard(id);return;}
   if(aktion==="tafel-neu"&&m){const t=await ppmTafelAnlegen(m.titel);await updateDoc(doc(db,"ppModule",m.id),{tafelId:t});await ppmLaden(true);openWhiteboard(t);return;}
@@ -20298,8 +20299,44 @@ async function lbOrdnerHtml(){
   ${liste.length?`<div class="grid grid-3">${karten}</div>`:`<div class="card empty"><strong>Noch keine Lernübersicht.</strong><p>${lehrer?"Lege oben eine neue an oder hänge sie an eine Stunde bzw. ein Modul.":"Deine Lehrkraft legt sie nach und nach an."}</p></div>`}</section>`;
  }catch(err){console.warn("Ordner Lernübersichten:",err);return"";}
 }
+// ---- Zuordnen: vorhandene Lernübersicht einer Stunde oder einem Modul zuweisen ----
+async function lbZuordnenDialog(q,ref){
+ if(!isTeacher())return;
+ let liste=[];
+ try{
+  const snap=await getDocs(query(collection(db,"whiteboards"),where("lernVorlage","==",true)));
+  liste=snap.docs.map(d=>({id:d.id,titel:String(d.data().title||"Lernübersicht").replace(/\s*–\s*Lernübersicht$/,"")})).sort((a,b)=>a.titel.localeCompare(b.titel,"de"));
+ }catch(err){console.error("Lernübersichten laden:",err);toast("Die Lernübersichten konnten nicht geladen werden.");return;}
+ const aktuell=q==="z"?((PP12_CACHE.tafeln[ref]||{}).lernBoardId||""):((ppmById(ref)||{}).lernBoardId||"");
+ window.__lbZ={q,ref};
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">LERNÜBERSICHT</div><h2>Lernübersicht zuordnen</h2>
+  <p style="color:var(--muted);font-size:13px">Wähle die Lernübersicht, die an dieser ${q==="z"?"Stunde":"diesem Modul"} hängen soll. Schüler:innen sehen sie dann dort.</p>
+  <input type="search" placeholder="Suchen …" oninput="lbZFilter(this.value)" style="width:100%;box-sizing:border-box;min-height:40px;padding:0 12px;border:1px solid var(--line);border-radius:10px;font:inherit;margin:0 0 10px">
+  <div id="lbZListe" style="display:grid;gap:8px;max-height:46vh;overflow:auto">${liste.map(b=>`<button type="button" class="secondary" data-t="${esc(b.titel.toLowerCase())}" style="text-align:left${b.id===aktuell?";border:2px solid #075a9d":""}" onclick="lbZuordnenSetzen('${esc(b.id)}')">${b.id===aktuell?"✓ ":""}${esc(b.titel)}</button>`).join("")||`<p class="ppm-leer">Noch keine Lernübersicht vorhanden. Lege sie über „Lernübersicht anlegen“ oder im Ordner Lernübersichten an.</p>`}</div>
+  <div class="form-actions" style="margin-top:12px"><button class="secondary" type="button" onclick="lbZuordnenSetzen('')">Zuordnung lösen</button><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button></div>`);
+}
+function lbZFilter(v){
+ const t=String(v||"").trim().toLowerCase();
+ document.querySelectorAll("#lbZListe [data-t]").forEach(b=>{b.style.display=!t||b.dataset.t.includes(t)?"":"none";});
+}
+async function lbZuordnenSetzen(id){
+ const z=window.__lbZ;if(!z||!isTeacher())return;
+ try{
+  if(z.q==="z"){
+   await setDoc(doc(db,"lehrplanTafeln",z.ref),{lernBoardId:id},{merge:true});
+   PP12_CACHE.tafeln[z.ref]={...(PP12_CACHE.tafeln[z.ref]||{}),lernBoardId:id};
+  }else{
+   await updateDoc(doc(db,"ppModule",z.ref),{lernBoardId:id});await ppmLaden(true);
+  }
+  closeModal();await render();toast(id?"Lernübersicht zugeordnet.":"Zuordnung gelöst.");
+ }catch(err){
+  console.error("Zuordnen:",err);
+  toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Das hat nicht geklappt.");
+ }
+}
+async function pp12LernZuordnen(d){await lbZuordnenDialog("z",d);}
 // ---- Lernübersichten aus der Repo-Datei bereitstellen ----
-// Datei: lernuebersichten/lernuebersichten.json (Liste von Einträgen: id, thema, unter, datum (optional, nur F12Sb), frage, wissen, mitte, begriffe, zusammen, fall, anker)
+// Datei: lernuebersichten/lernuebersichten.json (Liste von Einträgen: id, thema, unter, datum (optional, nur F12Sb), modul (optional: Modultitel oder Liste von Titeln), frage, wissen, mitte, begriffe, zusammen, fall, anker)
 async function lbBereitstellen(){
  if(!isTeacher())return;
  let liste;
@@ -20327,6 +20364,14 @@ async function lbBereitstellen(){
     bid=r.id;neu++;
    }
    await lbItemsSchreiben(bid,lbLernItems(0,0,e.thema,e));
+   if(e.modul&&typeof ppmLaden==="function"){
+    await ppmLaden(true);
+    const namen=(Array.isArray(e.modul)?e.modul:[e.modul]).map(x=>String(x).trim().toLowerCase());
+    for(const m of PPM.liste){
+     if(LB_AUSGENOMMEN.includes(m.modul))continue;
+     if(namen.includes(String(lbModulTitel(m)).trim().toLowerCase()))await updateDoc(doc(db,"ppModule",m.id),{lernBoardId:bid});
+    }
+   }
    if(e.datum&&typeof PP12_CACHE!=="undefined"){
     await setDoc(doc(db,"lehrplanTafeln",e.datum),{lernBoardId:bid},{merge:true});
     PP12_CACHE.tafeln[e.datum]={...(PP12_CACHE.tafeln[e.datum]||{}),lernBoardId:bid};
@@ -20353,7 +20398,7 @@ async function lbOrdnerNeu(beispiel){
 function pp12BausteineHtml(e){
  if(typeof PP12_CACHE==="undefined"||!(e.typ==="stoff"||e.typ==="wdh"))return"";
  const t=PP12_CACHE.tafeln[e.d]||{},lehrer=isTeacher(),hatL=!!t.lernBoardId,hatW=!!t.whiteboardId;
- return`${hatL||lehrer?lbPill("Lernübersicht"+(hatL?"":" anlegen"),LB_ICON.lern,hatL,`onclick="pp12Lern('${e.d}')"`,hatL?(lehrer?"Lernübersicht (Vorlage) öffnen":"Meine Lernübersicht öffnen"):"Lernübersicht für diese Stunde als Whiteboard anlegen"):""}${hatW||lehrer?lbPill("Whiteboard"+(hatW?"":" anlegen"),LB_ICON.wb,hatW,`onclick="pp12Wb('${e.d}')"`,hatW?"Whiteboard zu dieser Stunde öffnen":"Whiteboard für diese Stunde anlegen"):""}`;
+ return`${hatL||lehrer?lbPill("Lernübersicht"+(hatL?"":" anlegen"),LB_ICON.lern,hatL,`onclick="pp12Lern('${e.d}')"`,hatL?(lehrer?"Lernübersicht (Vorlage) öffnen":"Meine Lernübersicht öffnen"):"Lernübersicht für diese Stunde als Whiteboard anlegen"):""}${lehrer?lbPill("⇄ zuordnen","",false,`onclick="pp12LernZuordnen('${e.d}')"`,"Eine vorhandene Lernübersicht dieser Stunde zuordnen"):""}${hatW||lehrer?lbPill("Whiteboard"+(hatW?"":" anlegen"),LB_ICON.wb,hatW,`onclick="pp12Wb('${e.d}')"`,hatW?"Whiteboard zu dieser Stunde öffnen":"Whiteboard für diese Stunde anlegen"):""}`;
 }
 function lbStundeTitel(d){
  const e=(typeof PP12_PLAN!=="undefined"?PP12_PLAN:[]).find(x=>x.d===d);
@@ -20400,6 +20445,7 @@ function lbModulPills(m){
  const p=[];
  if(hatT||lehrer)p.push(lbPill("Tafel"+(hatT?"":" anlegen"),LB_ICON.tafel,hatT,`data-ppm="lb-tafel" data-id="${id}"`,hatT?"Digitale Tafel öffnen (nur Lehrkräfte ändern sie)":"Digitale Tafel anlegen"));
  if(hatL||lehrer)p.push(lbPill("Lernübersicht"+(hatL?"":" anlegen"),LB_ICON.lern,hatL,`data-ppm="lb-lern" data-id="${id}"`,hatL?(lehrer?"Lernübersicht (Vorlage) öffnen":"Meine Lernübersicht öffnen"):"Lernübersicht als Whiteboard anlegen"));
+ if(lehrer)p.push(lbPill("⇄ zuordnen","",false,`data-ppm="lb-zuordnen" data-id="${id}"`,"Eine vorhandene Lernübersicht diesem Modul zuordnen"));
  if(hatW||lehrer)p.push(lbPill("Whiteboard"+(hatW?"":" anlegen"),LB_ICON.wb,hatW,`data-ppm="lb-wb" data-id="${id}"`,hatW?"Whiteboard öffnen":"Whiteboard anlegen"));
  return p.length?`<span class="lb-pills">${p.join("")}</span>`:"";
 }
@@ -20441,4 +20487,4 @@ async function wbExportPdf(){
  wb.pdfModus=true;
  try{await wbExport();}finally{wb.pdfModus=false;}
 }
-Object.assign(window,{pp12Lern:typeof pp12Lern==="function"?pp12Lern:undefined,pp12Wb:typeof pp12Wb==="function"?pp12Wb:undefined,lbOrdnerOeffnen,lbOrdnerNeu,lbBereitstellen});
+Object.assign(window,{pp12Lern:typeof pp12Lern==="function"?pp12Lern:undefined,pp12Wb:typeof pp12Wb==="function"?pp12Wb:undefined,lbOrdnerOeffnen,lbOrdnerNeu,lbBereitstellen,lbZuordnenDialog,lbZuordnenSetzen,lbZFilter,pp12LernZuordnen});
