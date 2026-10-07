@@ -20291,14 +20291,48 @@ async function lbOrdnerHtml(){
   const liste=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
   const lehrer=isTeacher();
   const meine=lehrer?{}:Object.fromEntries(await Promise.all(liste.map(async b=>{try{const s=await getDoc(doc(db,"ppLernuebersicht",b.id+"_"+currentUser.uid));return[b.id,s.exists()];}catch(e){return[b.id,false];}})));
-  const karten=liste.map(b=>`<button type="button" class="card" style="text-align:left;cursor:pointer;border-left:4px solid #2f7fc6;font:inherit" onclick="lbOrdnerOeffnen('${esc(b.id)}')">
+  const karten=liste.map(b=>`<div style="position:relative"><button type="button" class="card" style="width:100%;height:100%;box-sizing:border-box;text-align:left;cursor:pointer;border-left:4px solid #2f7fc6;font:inherit${lehrer?";padding-right:52px":""}" onclick="lbOrdnerOeffnen('${esc(b.id)}')">
    <strong>${esc(String(b.title||"Lernübersicht").replace(/\s*–\s*Lernübersicht$/,""))}</strong><br>
-   <small style="color:var(--muted)">${lehrer?"Vorlage öffnen und bearbeiten":(meine[b.id]?"Meine Kopie weiterbearbeiten ✓":"Eigene Kopie anlegen und ergänzen")}</small></button>`).join("");
+   <small style="color:var(--muted)">${lehrer?"Vorlage öffnen und bearbeiten":(meine[b.id]?"Meine Kopie weiterbearbeiten ✓":"Eigene Kopie anlegen und ergänzen")}</small></button>${lehrer?`<button type="button" class="secondary" title="Lernübersicht löschen" aria-label="Lernübersicht löschen" style="position:absolute;top:8px;right:8px;min-height:36px;padding:0 10px" onclick="lbOrdnerLoeschen('${esc(b.id)}')">🗑</button>`:""}</div>`).join("");
   return`<section class="resource-section" id="lernuebersichten"><div class="section-head"><div><div class="kicker">📁 ORDNER</div><h2>Lernübersichten</h2></div><span class="pill">${liste.length}</span></div>
   <p style="color:var(--muted);margin:0 0 10px">Hier liegen alle Lernübersichten als Whiteboard. ${lehrer?"Du gestaltest sie, die Schüler:innen ergänzen sie in ihrer eigenen Kopie.":"Beim Öffnen bekommst du deine eigene Kopie: ergänze Notizen, Bilder und Zeichnungen und speichere sie als PDF."}</p>
   ${lehrer?`<div class="form-actions" style="margin:0 0 12px"><button type="button" class="secondary" onclick="lbOrdnerNeu(false)">＋ Neue Lernübersicht (5 Bausteine)</button><button type="button" class="secondary" onclick="lbOrdnerNeu(true)">＋ Beispiel: Starkes und schwaches Ich</button><button type="button" class="primary" onclick="lbBereitstellen()">⬇ Lernübersichten aus Datei bereitstellen</button></div>`:""}
   ${liste.length?`<div class="grid grid-3">${karten}</div>`:`<div class="card empty"><strong>Noch keine Lernübersicht.</strong><p>${lehrer?"Lege oben eine neue an oder hänge sie an eine Stunde bzw. ein Modul.":"Deine Lehrkraft legt sie nach und nach an."}</p></div>`}</section>`;
  }catch(err){console.warn("Ordner Lernübersichten:",err);return"";}
+}
+// ---- Lernübersicht löschen (Vorlage samt Schüler-Kopien und Verknüpfungen) ----
+async function lbOrdnerLoeschen(id){
+ if(!isTeacher())return;
+ let kopien=[];
+ try{kopien=(await getDocs(query(collection(db,"ppLernuebersicht"),where("lernId","==",id)))).docs;}catch(e){console.warn("Kopien lesen:",e);}
+ if(!confirm("Diese Lernübersicht wirklich löschen?"+(kopien.length?"\n\nAuch die "+kopien.length+" Kopie"+(kopien.length===1?"":"n")+" der Schüler:innen mit deren Notizen werden gelöscht.":"")+"\n\nDas lässt sich nicht rückgängig machen."))return;
+ const boardWeg=async bid=>{
+  for(const c of["whiteboardItems","whiteboardImages","whiteboardPresence"]){
+   const sn=await getDocs(query(collection(db,c),where("boardId","==",bid)));
+   for(let i=0;i<sn.docs.length;i+=20)await Promise.all(sn.docs.slice(i,i+20).map(d=>deleteDoc(doc(db,c,d.id)).catch(()=>{})));
+  }
+  await deleteDoc(doc(db,"whiteboards",bid));
+ };
+ try{
+  toast("Wird gelöscht …");
+  for(const k of kopien){
+   try{const bid=k.data().boardId;if(bid)await boardWeg(bid);}catch(e){console.warn("Kopie löschen:",e);}
+   try{await deleteDoc(doc(db,"ppLernuebersicht",k.id));}catch(e){console.warn(e);}
+  }
+  try{
+   const ml=await getDocs(query(collection(db,"ppModule"),where("lernBoardId","==",id)));
+   await Promise.all(ml.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{lernBoardId:""})));
+   if(ml.docs.length&&typeof ppmLaden==="function")await ppmLaden(true);
+   const lw=await getDocs(query(collection(db,"lehrplanTafeln"),where("lernBoardId","==",id)));
+   await Promise.all(lw.docs.map(d=>updateDoc(doc(db,"lehrplanTafeln",d.id),{lernBoardId:""})));
+   lw.docs.forEach(d=>{if(typeof PP12_CACHE!=="undefined"&&PP12_CACHE.tafeln&&PP12_CACHE.tafeln[d.id])PP12_CACHE.tafeln[d.id].lernBoardId="";});
+  }catch(e){console.warn("Verknüpfungen lösen:",e);}
+  await boardWeg(id);
+  await render();toast("Lernübersicht gelöscht.");
+ }catch(err){
+  console.error("Lernübersicht löschen:",err);
+  toast(err?.code==="permission-denied"?"Firebase verweigert das Löschen. Bitte die Firestore-Regeln prüfen.":"Konnte nicht vollständig gelöscht werden.");
+ }
 }
 // ---- Zuordnen: vorhandenen Roten Faden, eine Lernübersicht oder ein Whiteboard einer Stunde bzw. einem Modul zuweisen ----
 const LB_Z_TABS=[["tafel","Roter Faden"],["lern","Lernübersicht"],["wb","Whiteboard"]];
@@ -20539,4 +20573,4 @@ async function wbExportPdf(){
  wb.pdfModus=true;
  try{await wbExport();}finally{wb.pdfModus=false;}
 }
-Object.assign(window,{pp12Lern:typeof pp12Lern==="function"?pp12Lern:undefined,pp12Wb:typeof pp12Wb==="function"?pp12Wb:undefined,lbOrdnerOeffnen,lbOrdnerNeu,lbBereitstellen,lbZuordnenDialog,lbZuordnenSetzen,lbZFilter,lbZTab,pp12LernZuordnen,lbLoesenDialog,lbLoesen,pp12Loesen});
+Object.assign(window,{pp12Lern:typeof pp12Lern==="function"?pp12Lern:undefined,pp12Wb:typeof pp12Wb==="function"?pp12Wb:undefined,lbOrdnerOeffnen,lbOrdnerNeu,lbBereitstellen,lbOrdnerLoeschen,lbZuordnenDialog,lbZuordnenSetzen,lbZFilter,lbZTab,pp12LernZuordnen,lbLoesenDialog,lbLoesen,pp12Loesen});
