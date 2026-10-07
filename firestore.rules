@@ -843,6 +843,34 @@ service cloud.firestore {
       allow delete: if isTeacher();
     }
 
+    // Lernrallye: Stand je Person und Rallye (Antworten, freigeschaltete Stationen), ID "<modulId>_<uid>".
+    // Lesen: die Person selbst und Lehrkräfte.
+    match /ppRallyeStand/{id} {
+      allow read: if isApproved()
+        && (isTeacher()
+            || id.matches('.*_' + request.auth.uid)
+            || (resource != null && resource.data.uid == request.auth.uid));
+      allow create: if isApproved()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.modulId + '_' + request.auth.uid;
+      allow update: if isApproved()
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeacher();
+    }
+
+    // Lernrallye: Punkte für die Rangliste (Kurzname, Team, Punkte). Alle freigeschalteten Nutzer:innen dürfen lesen.
+    match /ppRallyeRang/{id} {
+      allow read: if isApproved();
+      allow create: if isApproved()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.modulId + '_' + request.auth.uid;
+      allow update: if isApproved()
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeacher();
+    }
+
     // ---------------------------------------------------------
     // Deny everything not explicitly listed above.
     // ---------------------------------------------------------

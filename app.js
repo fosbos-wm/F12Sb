@@ -4348,7 +4348,7 @@ Object.assign(window,{pp12Tafel,pp12KompassDrucken});
 // Gleiche Oberflächen wie im Modulplan der F11Sb, hier je Schulwoche unter den Unterrichtsstunden (Plus-Zeichen).
 // Sammlungen in Firestore: ppModule, ppStundenAntworten, ppKursFortschritt.
 // ============================================================
-const PPM_ZUSATZ=["apt","selbstlern","kprim"];
+const PPM_ZUSATZ=["apt","selbstlern","kprim","rallye"];
 // Schulwochen der 12. Klasse (Montag als ID). Wochen, die ganz in den Ferien liegen, entfallen.
 const SCHULWOCHEN_12=(()=>{
  const out=[],letzter=PP12_PLAN[PP12_PLAN.length-1].d;
@@ -4366,7 +4366,8 @@ const PPM_TYPEN={
  apt:{icon:"🎓",name:"Abschlussprüfungstraining",kurz:"Prüfungstraining",art:"Abschlussprüfungstraining",text:"Prüfungsfrage, relevanter Inhalt, Bearbeitung durch die Schüler:innen und Vergleich mit der Lösung."},
  kprim:{icon:"🏁",name:"Check-Out-Wochentest",kurz:"Check-Out",art:"Check-Out-Wochentest",text:"Wochentest mit 2 Fallvignetten und 4 K-Prim-Aufgaben (16 BE), automatisch ausgewertet."},
  selbstlern:{icon:"🎒",name:"Selbstlernkurs",kurz:"Selbstlernkurs",art:"Selbstlernkurs",text:"Schüler:innen bearbeiten den Kurs selbstständig von A bis Z."},
- experiment:{icon:"🧪",name:"Experiment (interaktive Einheit)",kurz:"Experiment",art:"Experiment",text:"„Das Experiment“ als interaktive Einheit. Du wählst selbst, welche Teile dabei sind."}
+ experiment:{icon:"🧪",name:"Experiment (interaktive Einheit)",kurz:"Experiment",art:"Experiment",text:"„Das Experiment“ als interaktive Einheit. Du wählst selbst, welche Teile dabei sind."},
+ rallye:{icon:"🚩",name:"Lernrallye",kurz:"Lernrallye",art:"Lernrallye",text:"Stationen mit Aufgaben, per QR-Code oder der Reihe nach, einzeln oder in Teams, mit Punkten und Rangliste."}
 };
 const PPM_EINHEITEN={experiment:{icon:"🧪",name:"Das Experiment – interaktive Stunde",text:"Kaugummi-Versuch in Kleingruppen, Klassenvergleich, Merkmale eines Experiments und Abschlussquiz."}};
 // Dauer eines Moduls: eine Unterrichtsstunde (45 Min.), Doppelstunde, 120 oder 180 Minuten,
@@ -4385,7 +4386,7 @@ const PPM_DAUERN=[
 // Pro Schulwoche stehen 6,3 Unterrichtsstunden zu je 45 Minuten (285 Minuten) zur Verfügung. Wochen mit Praktikum (fpA-Blöcke)
 // und Ferien sind gesperrt. Eine ganze Woche (1 bis 3 Wochen) belegt die Woche vollständig.
 const PPM_STD_PRO_WOCHE="6,3",PPM_MIN_PRO_STUNDE=45,PPM_MIN_PRO_WOCHE=285; // 6 Stunden + 15 Minuten (z. B. K-Prim-Test) = 285 Minuten = 6,3 Stunden
-const PPM_DAUER_STANDARD={projekt:"90",stunde:"90",experiment:"90",apt:"90",kprim:"45",selbstlern:"90"};
+const PPM_DAUER_STANDARD={projekt:"90",stunde:"90",experiment:"90",apt:"90",kprim:"45",selbstlern:"90",rallye:"90"};
 function ppmDauerKey(m){
  if(m&&PPM_DAUERN.some(d=>d.k===m.dauer))return m.dauer;
  const n=Math.max(1,Number(m&&m.wochen)||1);
@@ -4558,6 +4559,7 @@ async function ppmMeineLaden(){
    getDocs(query(collection(db,"ppStundenAntworten"),where("uid","==",currentUser.uid)))]);
   PPM.meine.kurs=Object.fromEntries(a.docs.map(d=>[d.data().modulId,d.data()]));
   PPM.meine.stunde=Object.fromEntries(b.docs.map(d=>[d.data().modulId,d.data()]));
+  if(PPM.liste.some(x=>x.modul==="rallye")){try{const q=await getDocs(query(collection(db,"ppRallyeStand"),where("uid","==",currentUser.uid)));q.docs.forEach(d=>{const x=d.data();x.frei=x.frei||{};x.erg=x.erg||{};LR.stand[x.modulId]=x;});}catch(e){console.error("Rallye-Stand:",e);}}
   PPM.meine.ea={};PPM.meine.exp=await getLehrplanFortschritt(experimentWocheId());
   for(const m of PPM.liste.filter(x=>String(x.kursId||"").startsWith("ea:"))){const id=m.kursId.slice(3);PPM.meine.ea[id]=await getLehrplanFortschritt(id);}
  }catch(e){console.error("Eigener Fortschritt:",e);}
@@ -4575,6 +4577,7 @@ function ppmFort(m){
   if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(x=>x.typ!=="abschluss"),f=PPM.meine.kurs[m.id],n=f?sch.filter(x=>f.erledigt&&f.erledigt[x.id]).length:0,done=!!sch.length&&n===sch.length;return{done,frac:sch.length?n/sch.length:0};}
   if(m.modul==="apt"){const f=PPM.meine.stunde[m.id]||{},done=!!f.aptBewertung;return{done,frac:done?1:(f.aptAbgegeben?2/3:(f.aptAntwort?1/3:0))};}
   if(m.modul==="stunde"){const f=PPM.meine.stunde[m.id],fr=m.fragen||[];if(f&&f.fertig)return{done:true,frac:1};const n=f?(f.gezeigt||[]).filter(Boolean).length:0;return{done:false,frac:fr.length?n/fr.length:0};}
+  if(m.modul==="rallye"){const p=lrFortschritt(m);return p.n?{done:p.done,frac:p.frac}:null;}
   if(m.modul==="kprim"){const d=PPM.co;if(!d||!m.checkoutId)return null;const c=(d.checkouts||[]).find(x=>x.id===m.checkoutId);if(!c)return null;const a=(d.meineAbgaben||{})[c.id],done=!!(a&&a.abgegeben);return{done,frac:done?1:(a?0.5:0)};}
  }catch(e){console.error("Fortschritt:",e);}
  return null;
@@ -4587,6 +4590,7 @@ function ppmStatus(m){
  if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(s=>s.typ!=="abschluss"),f=PPM.meine.kurs[m.id];const n=f?sch.filter(s=>f.erledigt&&f.erledigt[s.id]).length:0;return`<span class="ppm-status${n===sch.length&&sch.length?" ok":""}">${n}/${sch.length} Schritte</span>`;}
  if(m.modul==="apt"){const f=PPM.meine.stunde[m.id]||{};return`<span class="ppm-status${f.aptAbgegeben?" ok":""}">${f.aptBewertung?"verglichen ✓":(f.aptAbgegeben?"abgegeben":(f.aptAntwort?"in Arbeit":"noch offen"))}</span>`;}
  if(m.modul==="stunde"){const f=PPM.meine.stunde[m.id];if(f&&f.fertig)return`<span class="ppm-status ok">fertig ✓</span>`;const fr=m.fragen||[];if(!fr.length)return"";const n=f?(f.gezeigt||[]).filter(Boolean).length:0;return`<span class="ppm-status${n===fr.length?" ok":""}">Check-out ${n}/${fr.length}</span>`;}
+ if(m.modul==="rallye"){const p=lrFortschritt(m);if(!p.n)return"";return`<span class="ppm-status${p.done?" ok":""}">${p.done?"alle Stationen ✓":p.f+" von "+p.n+" Stationen"}</span>`;}
  if(m.modul==="kprim"){const p=ppmFort(m);if(p)return`<span class="ppm-status${p.done?" ok":""}">${p.done?"abgegeben ✓":(p.frac>0?"in Arbeit":"noch offen")}</span>`;}
  return"";
 }
@@ -4826,6 +4830,11 @@ async function ppmDialog(id,typ,woche,opt){
  if(t==="stunde")extra=`<label>Phase im Deeper-Learning-Konzept<select id="ppmPhase">${[1,2,3].map(n=>`<option value="${n}"${(bearb?bearb.phase:2)===n?" selected":""}>${PP12_PHASEN[n].kurz} · ${esc(PP12_PHASEN[n].name)}</option>`).join("")}</select></label>
   ${bearb?"":`<p style="font-size:13px;color:var(--muted);margin:0">Zu jeder Stunde wird automatisch eine Digitale Tafel angelegt.</p>`}`;
  if(t==="kprim")extra=`<label>Check-out verknüpfen<select id="ppmCheckout"><option value="">Noch keinen (später verknüpfen)</option>${checkouts.map(c=>`<option value="${esc(c.id)}"${bearb&&bearb.checkoutId===c.id?" selected":""}>${esc(c.titel||"Check-out")} · K-Prim-Aufgabensatz${c.datum?" · "+esc(c.datum):""}</option>`).join("")}</select></label>`;
+ if(t==="rallye"){
+  extra=`<label>Wie spielen die Schüler:innen?<select id="ppmRModus"><option value="einzeln"${bearb&&bearb.rModus==="team"?"":" selected"}>Einzeln: Jede Person sammelt eigene Punkte</option><option value="team"${bearb&&bearb.rModus==="team"?" selected":""}>In Teams: Die Punkte zählen für das Team</option></select></label>
+   <label>Freischaltung der Stationen<select id="ppmRFrei">${Object.entries(LR_FREISCHALTUNG).map(([k,v])=>`<option value="${k}"${(bearb&&bearb.rFreischaltung||"qr")===k?" selected":""}>${esc(v)}</option>`).join("")}</select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">${bearb?"":"Die Stationen legst du danach auf der Modulseite an. "}Für die Rallye braucht jedes Handy Internet. Eine Kartenansicht und einen Offline-Modus gibt es nicht.</p>`;
+ }
  if(t==="experiment"){
   const gew=bearb?ppmExpTeile(bearb):PPM_EXP_TEILE.map(x=>x.k);
   extra=`<div class="ppm-teile"><b style="font-size:13px">Teile der Einheit wählen</b>
@@ -4916,7 +4925,7 @@ async function ppmDialog(id,typ,woche,opt){
   if(!pr.ok){toast("In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).");return;}
   const dk=$("ppmDauer").value,def=PPM_DAUERN.find(d=>d.k===dk);
   const daten={modul:t,lb,titel:ti.value.trim(),start:$("ppmStart").value,dauer:dk,wochen:def?def.wochen:(Number(dk.slice(1))||1),notiz:$("ppmNotiz").value.trim()};
-  if(!daten.titel){const x=PROJEKT_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":"Selbstlernkurs · LB"+lb);}
+  if(!daten.titel){const x=PROJEKT_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":t==="rallye"?"Lernrallye · LB"+lb:"Selbstlernkurs · LB"+lb);}
   if(projektId)daten.projektId=projektId;
   if(t==="projekt"&&$("ppmDirekt"))daten.direkt=$("ppmDirekt").value;
   if(t==="stunde")daten.phase=Number($("ppmPhase").value);
@@ -4926,6 +4935,7 @@ async function ppmDialog(id,typ,woche,opt){
    const min=ppmExpMinuten(daten.teile);
    if(def&&def.min&&min>def.min&&!confirm(`Die gewählten Teile brauchen etwa ${min} Minuten, eingeplant sind ${def.min}. Trotzdem speichern?`))return;
   }
+  if(t==="rallye"){daten.rModus=$("ppmRModus").value;daten.rFreischaltung=$("ppmRFrei").value;}
   if(t==="selbstlern"){
    daten.kursId=$("ppmKurs").value;
    if(!ti.value.trim()){
@@ -4949,6 +4959,7 @@ async function ppmDialog(id,typ,woche,opt){
     const basis={...daten,createdBy:currentUser.uid,createdAt:serverTimestamp()};
     if(t==="projekt")basis.einheiten=[];
     if(t==="stunde"){basis.material=daten.material||[];basis.fragen=[];basis.tafelId=await ppmTafelAnlegen(daten.titel);}
+    if(t==="rallye"){basis.stationen=[];basis.rAktiv=false;}
     if(t==="selbstlern"&&daten.kursId==="eigen")basis.schritte=[{id:"s1",typ:"text",titel:"Erster Schritt",text:"## Willkommen\nHier beginnt dein Kurs."},{id:"s2",typ:"abschluss",titel:"Geschafft",text:"Du hast den Kurs abgeschlossen."}];
     await addDoc(collection(db,"ppModule"),basis);
    }
@@ -4989,6 +5000,7 @@ async function ppmModulSeite(m){
  await ppmMeineLaden();
  if(m.modul==="projekt")return await ppmProjektSeite(m);
  if(m.modul==="stunde")return await ppmStundeSeite(m);
+ if(m.modul==="rallye")return await ppmRallyeSeite(m);
  if(m.modul==="kprim")return await ppmKprimSeite(m);
  if(m.modul==="apt")return await ppmAptSeite(m);
  if(m.modul==="experiment")return await ppmExperimentSeite(m);
@@ -5948,6 +5960,535 @@ function ppNaechsterSchrittHTML(fortschrittMap,heute){
   ${rueckstand.length?`<p style="font-size:12px;color:#b3541e;margin:10px 0 0">⚠︎ Noch offen aus früheren Abschnitten: ${rueckstand.map(x=>`<a href="javascript:void 0"onclick="openPhaseDetail('${x.ph.id}:${x.teil}')">${esc(x.ph.lb)} ${ppTeilName(x.teil,x.ph)} (${offen(x).length})</a>`).join(", ")}</p>`:""}
  </div>`;
 }
+
+// ============================================================
+// LERNRALLYE (Modul „Lernrallye“)
+// Stationen mit Aufgaben, optional per QR-Code freigeschaltet, einzeln oder in Teams, mit Punkten und Rangliste.
+// Sammlungen: ppModule (Rallye samt Stationen), ppRallyeStand (je Person und Rallye, privat), ppRallyeRang (Punkte für die Rangliste).
+// Link in den QR-Codes: <App-Adresse>?lr=<Modul-ID>.<Stationscode>. Keine Karte, kein Offline-Modus.
+// ============================================================
+const LR_TYPEN={
+ info:{icon:"ℹ️",name:"Info-Station",text:"Text zum Lesen, ohne Bewertung."},
+ wahl:{icon:"🔘",name:"Auswahlfrage",text:"Eine richtige Antwort aus mehreren."},
+ kprim:{icon:"✅",name:"K-Prim-Aufgabe",text:"Vier Aussagen: richtig oder falsch."},
+ text:{icon:"✏️",name:"Kurze Antwort",text:"Ein Wort oder eine Zahl, automatisch geprüft."},
+ zuordnen:{icon:"🔗",name:"Zuordnen",text:"Begriffe den passenden Erklärungen zuordnen."},
+ frei:{icon:"💬",name:"Freitext",text:"Eigene Antwort schreiben, die Lehrkraft liest sie."}
+};
+const LR_PUNKTE_STD={info:0,wahl:10,kprim:12,text:10,zuordnen:10,frei:5};
+const LR_FREISCHALTUNG={offen:"Alle Stationen sind von Anfang an offen",reihe:"Die Stationen der Reihe nach",qr:"Mit QR-Code an der Station (Code scannen oder eingeben)"};
+const LR={stand:{},sicht:null,pending:null};
+const LR_ALPHABET="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+function lrCodeNeu(m){
+ const vorhanden=new Set((m.stationen||[]).map(s=>s.code));
+ for(let v=0;v<200;v++){let c="LR-";for(let i=0;i<5;i++)c+=LR_ALPHABET[Math.floor(Math.random()*LR_ALPHABET.length)];if(!vorhanden.has(c))return c;}
+ return"LR-"+Date.now().toString(36).toUpperCase().slice(-5);
+}
+function lrNorm(s){return String(s==null?"":s).toLowerCase().replace(/ß/g,"ss").normalize("NFKD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();}
+function lrTeamKey(t){return lrNorm(t).replace(/ /g,"-").slice(0,40);}
+function lrKurzname(n){
+ let s=String(n||"").trim();if(s.includes("@"))s=s.split("@")[0];
+ const t=s.split(/\s+/).filter(Boolean);
+ if(t.length>1)return t[0]+" "+t[t.length-1][0].toUpperCase()+".";
+ return t[0]||"Schüler:in";
+}
+function lrMischen(liste,saat){ // gleichbleibende Reihenfolge je Station
+ let h=0;String(saat).split("").forEach(c=>{h=(h*31+c.charCodeAt(0))>>>0;});
+ const a=liste.map((x,i)=>({x,i,k:0}));
+ a.forEach(o=>{h=(h*1664525+1013904223)>>>0;o.k=h;});
+ a.sort((p,q)=>p.k-q.k);return a;
+}
+function lrStation(m,sid){return(m.stationen||[]).find(s=>s.id===sid)||null;}
+function lrMax(m){return(m.stationen||[]).reduce((n,s)=>n+(Number(s.punkte)||0),0);}
+// Bewertung einer Antwort. Ergebnis: {p,max,ok} (ok=null bei Info und Freitext).
+function lrBewerten(st,ant){
+ const max=Number(st.punkte)||0;
+ if(st.typ==="info")return{p:0,max,ok:null};
+ if(st.typ==="frei")return{p:max,max,ok:null};
+ if(st.typ==="wahl"){const ok=Number(ant)===Number(st.richtig);return{p:ok?max:0,max,ok};}
+ if(st.typ==="text"){const a=lrNorm(ant);const ok=!!a&&(st.antworten||[]).some(x=>lrNorm(x)===a);return{p:ok?max:0,max,ok};}
+ if(st.typ==="kprim"){
+  const a=st.aussagen||[],n=a.length;
+  const r=a.filter((x,i)=>!!(ant||[])[i]===!!x.ok).length;
+  const f=r===n?1:(r===n-1?0.5:(r===n-2?0.25:0));
+  return{p:Math.round(max*f),max,ok:r===n,richtig:r,von:n};
+ }
+ if(st.typ==="zuordnen"){
+  const n=(st.paare||[]).length,r=(st.paare||[]).filter((x,i)=>Number((ant||[])[i])===i).length;
+  return{p:n?Math.round(max*r/n):0,max,ok:r===n,richtig:r,von:n};
+ }
+ return{p:0,max,ok:null};
+}
+async function lrStandLaden(m){
+ if(isTeacher())return null;
+ const id=m.id+"_"+currentUser.uid;
+ let d=null;
+ try{const s=await getDoc(doc(db,"ppRallyeStand",id));d=s.exists()?s.data():null;}catch(e){console.error("Rallye-Stand:",e);}
+ d=d||{modulId:m.id,uid:currentUser.uid,name:ppmName(),team:"",teamKey:"",frei:{},erg:{}};
+ d.frei=d.frei||{};d.erg=d.erg||{};
+ LR.stand[m.id]=d;return d;
+}
+async function lrSpeichern(m,s){
+ s.modulId=m.id;s.uid=currentUser.uid;s.name=ppmName();s.teamKey=lrTeamKey(s.team||"");
+ const punkte=Object.values(s.erg||{}).reduce((n,x)=>n+(Number(x.p)||0),0);
+ const fertig=Object.keys(s.erg||{}).length;
+ s.updatedAt=serverTimestamp();
+ const id=m.id+"_"+currentUser.uid;
+ await setDoc(doc(db,"ppRallyeStand",id),s);
+ await setDoc(doc(db,"ppRallyeRang",id),{modulId:m.id,uid:currentUser.uid,name:lrKurzname(ppmName()),team:s.team||"",teamKey:s.teamKey,punkte,max:lrMax(m),fertig,gesamt:(m.stationen||[]).length,updatedAt:serverTimestamp()});
+ LR.stand[m.id]=s;
+}
+function lrFortschritt(m){
+ const s=LR.stand[m.id]||{},n=(m.stationen||[]).length,f=Object.keys(s.erg||{}).length;
+ return{n,f,done:n>0&&f>=n,frac:n?f/n:0};
+}
+// Ist die Station für die Person bedienbar?
+function lrOffen(m,s,idx){
+ const st=m.stationen[idx];
+ if(s.erg&&s.erg[st.id])return true;
+ const f=m.rFreischaltung||"offen";
+ if(f==="qr")return !!(s.frei&&s.frei[st.id]);
+ if(f==="reihe")return idx===0||!!(s.erg&&s.erg[m.stationen[idx-1].id]);
+ return true;
+}
+function lrBaseUrl(){return location.origin+location.pathname;}
+function lrLinkAus(text){ // liest „lr=<Modul>.<Code>“ aus einem Link oder einen reinen Code
+ const t=String(text||"").trim();let wert=t;
+ try{const u=new URL(t);if(u.searchParams.get("lr"))wert=u.searchParams.get("lr");}catch(e){}
+ const teile=wert.split(".");
+ if(teile.length>=2)return{modulId:teile[0],code:teile.slice(1).join(".").toUpperCase()};
+ if(/^LR-/i.test(wert))return{modulId:null,code:wert.toUpperCase()};
+ if(/^[A-Za-z0-9]{15,30}$/.test(wert))return{modulId:wert,code:""};
+ return{modulId:null,code:wert.toUpperCase()};
+}
+// Link aus dem QR-Code: Rallye zur Person öffnen, Code merken.
+async function lrLinkVerarbeiten(){
+ let roh="";
+ try{roh=new URLSearchParams(location.search).get("lr")||"";}catch(e){}
+ if(!roh)return;
+ const l=lrLinkAus(roh);
+ try{const u=new URL(location.href);u.searchParams.delete("lr");history.replaceState(null,"",u.pathname+(u.search||"")+u.hash);}catch(e){}
+ if(!l.modulId)return;
+ await ppmLaden(true);
+ const m=ppmById(l.modulId);
+ if(!m||m.modul!=="rallye"){toast("Diese Lernrallye wurde nicht gefunden.");return;}
+ LR.pending={modulId:m.id,code:l.code||""};
+ LR.sicht=null;activePPModul=m.id;
+ const ziel=typeof SCHULWOCHEN_12!=="undefined"?"#unterricht-pp":"#fach"; // F12Sb: Unterricht-Plan, F11Sb: Fach Pädagogik
+ if(ziel==="#fach")activeFach="paedagogik";
+ if(location.hash!==ziel)location.hash=ziel;else render();
+}
+const LR_CSS=`<style>
+.lr-st{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;margin:0 0 8px}
+.lr-st.zu{background:#f4f6f8;color:#7b8794}.lr-st.fertig{background:#eaf7ee;border-color:#9fd3ae}
+.lr-st .lr-ic{font-size:22px}.lr-st small{color:var(--muted)}
+.lr-aufg{margin:10px 0 0}.lr-opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1.5px solid #c9d4de;border-radius:12px;margin:0 0 8px;background:#fff;cursor:pointer;line-height:1.4}
+.lr-opt input{margin-top:3px}.lr-opt.richtig{border-color:#3fa66a;background:#e8f6ee}.lr-opt.falsch{border-color:#d9534f;background:#fdeceb}
+.lr-aus{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.lr-aus:last-child{border:0}
+.lr-zuo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:center;margin:0 0 8px}
+.lr-zuo select,.lr-zuo .lr-l{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid #c9d4de;background:#fff}
+.lr-zuo .richtig{border-color:#3fa66a;background:#e8f6ee}.lr-zuo .falsch{border-color:#d9534f;background:#fdeceb}
+.lr-rueck{padding:12px 14px;border-radius:12px;margin:12px 0 0;line-height:1.5}.lr-rueck.ok{background:#e8f6ee;border:1px solid #9fd3ae}.lr-rueck.nein{background:#fdeceb;border:1px solid #efb3b0}.lr-rueck.teil{background:#fff5dd;border:1px solid #f0d28a}.lr-rueck.neutral{background:#eef4fa;border:1px solid #c5d6e6}
+.lr-punkte{display:inline-flex;gap:6px;align-items:baseline;font-weight:800;font-size:22px}.lr-punkte small{font-size:13px;font-weight:600;color:var(--muted)}
+.lr-rang{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border-radius:10px}.lr-rang.ich{background:#eaf3fc;outline:2px solid #3d8fd0}
+.lr-rang b.pl{display:inline-flex;width:28px;height:28px;border-radius:50%;background:#17384f;color:#fff;align-items:center;justify-content:center;font-size:13px}
+.lr-code{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.lr-code input{font:inherit;padding:10px 12px;border-radius:10px;border:1.5px solid #c9d4de;text-transform:uppercase;width:150px}
+.lr-video{width:100%;max-height:60vh;border-radius:12px;background:#000}
+.lr-form label{display:block;margin:8px 0 2px;font-weight:700;font-size:13px}.lr-form textarea,.lr-form input[type=text],.lr-form input[type=number],.lr-form select{width:100%;font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid #c9d4de;box-sizing:border-box}
+.lr-zeilen{display:grid;gap:6px}.lr-zeile{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center}.lr-zeile.zwei{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+</style>`;
+
+// ------------------------------------------------------------ Modulseite
+async function ppmRallyeSeite(m){
+ const lehrer=isTeacher();
+ const stationen=m.stationen||[];
+ const modus=m.rModus==="team"?"team":"einzeln",frei=m.rFreischaltung||"offen";
+ const sicht=LR.sicht&&LR.sicht.modulId===m.id?LR.sicht:null;
+ let stand=null;
+ if(!lehrer){
+  stand=await lrStandLaden(m);
+  if(LR.pending&&LR.pending.modulId===m.id){
+   const p=LR.pending;LR.pending=null;
+   if(m.rAktiv&&p.code&&frei==="qr"){
+    const i=stationen.findIndex(s=>s.code===p.code);
+    if(i<0)toast("Dieser Code passt zu keiner Station.");
+    else if(modus==="team"&&!stand.team)toast("Wähle zuerst dein Team. Danach scannst du den Code noch einmal.");
+    else{stand.frei[stationen[i].id]=true;try{await lrSpeichern(m,stand);}catch(e){ppmFehler(e,"Station konnte nicht freigeschaltet werden");}LR.sicht={modulId:m.id,sid:stationen[i].id};return await ppmRallyeSeite(m);}
+   }
+  }
+ }
+ const unter=`<p style="color:var(--muted);margin:4px 0 8px">${modus==="team"?"In Teams":"Einzeln"} · ${stationen.length} Station${stationen.length===1?"":"en"} · ${lrMax(m)} Punkte${lehrer||m.rAktiv?"":" · noch nicht gestartet"}</p>`;
+ const kopf=ppmKopf(m,unter);
+ if(sicht){
+  const idx=stationen.findIndex(s=>s.id===sicht.sid);
+  if(idx>=0&&(lehrer||(m.rAktiv&&lrOffen(m,stand,idx))))return`${LR_CSS}${kopf}${lrStationHTML(m,stand,idx,lehrer,sicht)}${footer()}`;
+  LR.sicht=null;
+ }
+ const rang=await lrRangHTML(m,stand);
+ if(lehrer)return`${LR_CSS}${kopf}${lrLehrerHTML(m)}${rang}${footer()}`;
+ // ---- Schüler:innen ----
+ if(!m.rAktiv)return`${LR_CSS}${kopf}<div class="ppm-box"><h2>Gleich geht es los</h2><p class="ppm-leer">Die Lernrallye startet, sobald deine Lehrkraft sie freigibt. Danach lädst du diese Seite neu.</p></div>${rang}${footer()}`;
+ if(modus==="team"&&!stand.team)return`${LR_CSS}${kopf}${await lrTeamWahlHTML(m)}${footer()}`;
+ const fo=lrFortschritt(m);
+ const punkte=Object.values(stand.erg).reduce((n,x)=>n+(Number(x.p)||0),0);
+ const zeilen=stationen.map((st,i)=>{
+  const T=LR_TYPEN[st.typ]||LR_TYPEN.info,e=stand.erg[st.id],offen=lrOffen(m,stand,i);
+  const sub=e?`✓ ${e.p} von ${e.max} Punkten`:(offen?`${esc(T.name)} · ${Number(st.punkte)||0} Punkte`:(frei==="qr"?"🔒 Code an der Station scannen":"🔒 Erst die Station davor lösen"));
+  return`<div class="lr-st${e?" fertig":(offen?"":" zu")}"><span class="ppm-snr">${i+1}</span><span class="lr-ic">${T.icon}</span><div style="flex:1;min-width:150px"><b>${esc(offen?st.titel:(frei==="qr"?"Station "+(i+1):st.titel))}</b><br><small>${sub}</small></div>${offen?`<button type="button" class="ppm-btn${e?"":" primaer"}" data-lr="station" data-sid="${esc(st.id)}">${e?"Ansehen":"Öffnen"}</button>`:""}</div>`;
+ }).join("");
+ const codeBox=frei==="qr"?`<div class="ppm-box"><h2>Station freischalten</h2><p style="color:var(--muted);font-size:13px">Scanne den QR-Code an der Station oder gib den Code ein, der unter dem QR-Code steht.</p>
+  <div class="lr-code"><button type="button" class="ppm-btn primaer" data-lr="scan">📷 QR-Code scannen</button><input id="lrCode" maxlength="12" placeholder="LR-XXXXX" autocomplete="off" aria-label="Stationscode"><button type="button" class="ppm-btn" data-lr="code">Freischalten</button></div></div>`:"";
+ return`${LR_CSS}${kopf}
+ <div class="ppm-box"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div class="lr-punkte">${punkte}<small>von ${lrMax(m)} Punkten</small></div><div><b>${fo.f} von ${fo.n} Stationen</b>${modus==="team"?`<br><small style="color:var(--muted)">Team: ${esc(stand.team)}</small>`:""}</div>${fo.done?`<span class="ppm-status ok">Alle Stationen geschafft ✓</span>`:""}</div></div>
+ ${codeBox}
+ <div class="ppm-box"><h2>Stationen</h2>${zeilen||`<p class="ppm-leer">Noch keine Stationen.</p>`}</div>
+ ${rang}${footer()}`;
+}
+async function lrTeamWahlHTML(m){
+ let teams=[];
+ try{const q=await getDocs(query(collection(db,"ppRallyeRang"),where("modulId","==",m.id)));const map={};q.docs.forEach(d=>{const x=d.data();if(x.team)map[x.teamKey]=x.team;});teams=Object.values(map).sort((a,b)=>a.localeCompare(b,"de"));}catch(e){console.error("Teams:",e);}
+ return`<div class="ppm-box"><h2>Dein Team</h2><p style="color:var(--muted);font-size:13px">Trage dich in ein Team ein. Alle Mitglieder spielen auf ihrem eigenen Handy, die Punkte zählen für das Team.</p>
+  ${teams.length?`<p><b>Teams, die es schon gibt</b></p><div style="display:flex;gap:8px;flex-wrap:wrap">${teams.map(t=>`<button type="button" class="ppm-btn" data-lr="team" data-team="${esc(t)}">${esc(t)}</button>`).join("")}</div><p style="margin:14px 0 4px"><b>Oder ein neues Team gründen</b></p>`:`<p><b>Neues Team gründen</b></p>`}
+  <div class="lr-code"><input id="lrTeamName" maxlength="30" placeholder="Teamname" style="text-transform:none;width:220px" autocomplete="off"><button type="button" class="ppm-btn primaer" data-lr="team-neu">Team anlegen</button></div></div>`;
+}
+// ---- Rangliste ----
+async function lrRangHTML(m,stand){
+ let liste=[];
+ try{const q=await getDocs(query(collection(db,"ppRallyeRang"),where("modulId","==",m.id)));liste=q.docs.map(d=>d.data());}catch(e){console.error("Rangliste:",e);return"";}
+ if(!liste.length)return`<div class="ppm-box"><h2>Rangliste</h2><p class="ppm-leer">Noch niemand hat Punkte.</p></div>`;
+ const lehrer=isTeacher(),meine=currentUser.uid;
+ let zeilen=[];
+ if(m.rModus==="team"){
+  const g={};
+  liste.forEach(x=>{const k=x.teamKey||"ohne";(g[k]=g[k]||{name:x.team||"ohne Team",summe:0,n:0,mein:false})});
+  liste.forEach(x=>{const k=x.teamKey||"ohne",t=g[k];t.summe+=Number(x.punkte)||0;t.n++;if(x.uid===meine)t.mein=true;});
+  zeilen=Object.values(g).map(t=>({name:t.name,wert:Math.round(t.summe/t.n*10)/10,sub:`${t.n} Person${t.n===1?"":"en"} · Ø Punkte pro Person`,ich:t.mein}));
+ }else{
+  zeilen=liste.map(x=>({name:x.name||"Schüler:in",wert:Number(x.punkte)||0,sub:`${x.fertig||0} von ${x.gesamt||0} Stationen`,ich:x.uid===meine}));
+ }
+ zeilen.sort((a,b)=>b.wert-a.wert);
+ let platz=0,letzt=null;
+ zeilen.forEach((z,i)=>{if(z.wert!==letzt){platz=i+1;letzt=z.wert;}z.platz=platz;});
+ const zeigen=zeilen.filter((z,i)=>i<10||z.ich);
+ return`<div class="ppm-box"><h2>Rangliste${m.rModus==="team"?" der Teams":""}</h2>
+  ${zeigen.map(z=>`<div class="lr-rang${z.ich?" ich":""}"><b class="pl">${z.platz}</b><div><b>${esc(z.name)}${z.ich&&!lehrer?" (du)":""}</b><br><small style="color:var(--muted)">${esc(z.sub)}</small></div><span class="lr-punkte" style="font-size:18px">${z.wert}<small>Punkte</small></span></div>`).join("")}
+  <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn klein" data-lr="neu-laden">↻ Rangliste aktualisieren</button></div></div>`;
+}
+// ---- Station spielen ----
+function lrStationHTML(m,stand,idx,lehrer,sicht){
+ const st=m.stationen[idx],T=LR_TYPEN[st.typ]||LR_TYPEN.info;
+ const e=lehrer?(sicht.erg||null):(stand.erg||{})[st.id];
+ const gesperrt=!!e;
+ const ant=e?e.a:null;
+ let aufgabe="";
+ if(st.typ==="wahl"){
+  aufgabe=(st.optionen||[]).map((o,i)=>{
+   const kl=e?(i===Number(st.richtig)?" richtig":(Number(ant)===i?" falsch":"")):"";
+   return`<label class="lr-opt${kl}"><input type="radio" name="lrW" value="${i}"${e&&Number(ant)===i?" checked":""}${gesperrt?" disabled":""}><span>${esc(o)}</span></label>`;}).join("");
+ }else if(st.typ==="kprim"){
+  aufgabe=(st.aussagen||[]).map((a,i)=>{
+   const w=e?!!(ant||[])[i]:null,ok=e?(!!w===!!a.ok):null;
+   return`<div class="lr-opt${e?(ok?" richtig":" falsch"):""}" style="cursor:default;flex-wrap:wrap"><span style="flex:1;min-width:200px"><b>${i+1}.</b> ${esc(a.t)}</span>
+    <span style="display:flex;gap:14px"><label><input type="radio" name="lrK${i}" value="1"${e&&w===true?" checked":""}${gesperrt?" disabled":""}> richtig</label><label><input type="radio" name="lrK${i}" value="0"${e&&w===false?" checked":""}${gesperrt?" disabled":""}> falsch</label></span>${e&&!ok?`<span style="flex-basis:100%;font-size:13px">Richtig wäre: <b>${a.ok?"richtig":"falsch"}</b></span>`:""}</div>`;}).join("");
+ }else if(st.typ==="text"){
+  aufgabe=`<input id="lrT" type="text" maxlength="120" autocomplete="off" placeholder="Deine Antwort" value="${esc(e?ant:"")}"${gesperrt?" disabled":""} style="width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:1.5px solid #c9d4de;box-sizing:border-box">`;
+ }else if(st.typ==="zuordnen"){
+  const opt=lrMischen((st.paare||[]).map(p=>p.r),st.id);
+  aufgabe=(st.paare||[]).map((p,i)=>{
+   const g=e?(ant||[])[i]:"";
+   return`<div class="lr-zuo"><div class="lr-l${e?(Number(g)===i?" richtig":" falsch"):""}">${esc(p.l)}</div><select id="lrZ${i}" class="${e?(Number(g)===i?"richtig":"falsch"):""}"${gesperrt?" disabled":""}><option value="">– wählen –</option>${opt.map(o=>`<option value="${o.i}"${e&&String(g)===String(o.i)?" selected":""}>${esc(o.x)}</option>`).join("")}</select></div>${e&&Number(g)!==i?`<p style="margin:-4px 0 8px;font-size:13px">Richtig wäre: <b>${esc(p.r)}</b></p>`:""}`;}).join("");
+ }else if(st.typ==="frei"){
+  aufgabe=`<textarea id="lrF" rows="6" maxlength="3000" placeholder="Deine Antwort …" style="width:100%;font:inherit;padding:10px 12px;border-radius:10px;border:1.5px solid #c9d4de;box-sizing:border-box"${gesperrt?" disabled":""}>${esc(e?ant:"")}</textarea>`;
+ }
+ let rueck="";
+ if(e){
+  if(st.typ==="info")rueck="";
+  else if(st.typ==="frei")rueck=`<div class="lr-rueck neutral"><b>Abgegeben ✓</b> Deine Lehrkraft liest deine Antwort.${st.erklaerung?`<br><br><b>Musterlösung:</b><br>${esc(st.erklaerung).replace(/\n/g,"<br>")}`:""}</div>`;
+  else{
+   const korrekt=st.typ==="text"?`<br>Richtig ist: <b>${esc((st.antworten||[])[0]||"")}</b>`:"";
+   rueck=`<div class="lr-rueck ${e.ok?"ok":(e.p>0?"teil":"nein")}"><b>${e.ok?"Richtig ✓":(e.p>0?"Teilweise richtig":"Nicht ganz")}</b> · ${e.p} von ${e.max} Punkten${e.ok?"":korrekt}${st.erklaerung?`<br><br>${esc(st.erklaerung).replace(/\n/g,"<br>")}`:""}</div>`;
+  }
+ }
+ const knopf=gesperrt?"":(st.typ==="info"?`<button type="button" class="ppm-btn primaer" data-lr="pruefen" data-sid="${esc(st.id)}">Gelesen, weiter</button>`:`<button type="button" class="ppm-btn primaer" data-lr="pruefen" data-sid="${esc(st.id)}">Antwort prüfen</button>`);
+ const naechste=idx+1<m.stationen.length?m.stationen[idx+1]:null;
+ return`<div class="ppm-box"><div style="display:flex;gap:10px;align-items:center;margin-bottom:6px"><span class="ppm-snr">${idx+1}</span><div><div class="kicker" style="margin:0">${T.icon} ${esc(T.name.toUpperCase())}${st.typ!=="info"?" · "+(Number(st.punkte)||0)+" PUNKTE":""}</div><h2 style="margin:2px 0 0">${esc(st.titel)}</h2></div></div>
+  ${lehrer?`<p class="ppm-status">Vorschau: Die Antwort wird nicht gespeichert.</p>`:""}
+  ${st.text?`<div style="line-height:1.55">${ppmMd(st.text)}</div>`:""}
+  ${st.frage?`<p style="font-weight:700;font-size:16px;line-height:1.45;margin:14px 0 6px">${esc(st.frage)}</p>`:""}
+  <div class="lr-aufg">${aufgabe}</div>${rueck}
+  <div class="ppm-zeile" style="border:0;margin-top:8px">${knopf}<button type="button" class="ppm-btn" data-lr="zurueck">← Zur Stationenliste</button>${gesperrt&&naechste&&(lehrer||lrOffen(m,stand,idx+1))?`<button type="button" class="ppm-btn primaer" data-lr="station" data-sid="${esc(naechste.id)}">Nächste Station →</button>`:""}</div></div>`;
+}
+function lrAntwortLesen(st){
+ if(st.typ==="info")return{ok:true,a:null};
+ if(st.typ==="wahl"){const c=document.querySelector('input[name="lrW"]:checked');return c?{ok:true,a:Number(c.value)}:{ok:false};}
+ if(st.typ==="kprim"){const a=[];for(let i=0;i<(st.aussagen||[]).length;i++){const c=document.querySelector(`input[name="lrK${i}"]:checked`);if(!c)return{ok:false};a.push(c.value==="1");}return{ok:true,a};}
+ if(st.typ==="text"){const v=($("lrT")?.value||"").trim();return v?{ok:true,a:v}:{ok:false};}
+ if(st.typ==="zuordnen"){const a=[];for(let i=0;i<(st.paare||[]).length;i++){const v=$("lrZ"+i)?.value;if(v===""||v==null)return{ok:false};a.push(Number(v));}return{ok:true,a};}
+ if(st.typ==="frei"){const v=($("lrF")?.value||"").trim();return v?{ok:true,a:v}:{ok:false};}
+ return{ok:false};
+}
+// ---- Lehrkraft ----
+function lrLehrerHTML(m){
+ const stationen=m.stationen||[],frei=m.rFreischaltung||"offen";
+ const zeilen=stationen.map((st,i)=>{
+  const T=LR_TYPEN[st.typ]||LR_TYPEN.info;
+  return`<div class="lr-st"><span class="ppm-snr">${i+1}</span><span class="lr-ic">${T.icon}</span><div style="flex:1;min-width:160px"><b>${esc(st.titel)}</b><br><small>${esc(T.name)}${st.typ!=="info"?" · "+(Number(st.punkte)||0)+" Punkte":""}${frei==="qr"?" · Code: <b style=\"white-space:nowrap\">"+esc(st.code)+"</b>":""}</small></div>
+   <button type="button" class="ppm-btn klein" data-lr="station" data-sid="${esc(st.id)}">Ausprobieren</button>
+   <button type="button" class="ppm-btn klein" data-lr="st-auf" data-sid="${esc(st.id)}" title="Nach oben"${i===0?" disabled":""}>↑</button>
+   <button type="button" class="ppm-btn klein" data-lr="st-ab" data-sid="${esc(st.id)}" title="Nach unten"${i===stationen.length-1?" disabled":""}>↓</button>
+   <button type="button" class="ppm-btn klein" data-lr="st-edit" data-sid="${esc(st.id)}" title="Station bearbeiten">✎</button>
+   <button type="button" class="ppm-btn klein" data-lr="st-weg" data-sid="${esc(st.id)}" title="Station löschen">✕</button></div>`;
+ }).join("");
+ return`<div class="ppm-box"><h2>Steuerung</h2>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="ppm-status${m.rAktiv?" ok":""}">${m.rAktiv?"Rallye läuft":"Rallye noch nicht gestartet"}</span>
+   <button type="button" class="ppm-btn ${m.rAktiv?"":"primaer"}" data-lr="aktiv">${m.rAktiv?"Rallye beenden":"▶ Rallye starten"}</button>
+   <button type="button" class="ppm-btn" data-lr="auswertung">📊 Auswertung</button>${frei==="qr"?`<button type="button" class="ppm-btn" data-lr="qr-druck">🖨 QR-Codes drucken</button>`:""}</div>
+  <p style="color:var(--muted);font-size:13px;margin:8px 0 0">Freischaltung: ${esc(LR_FREISCHALTUNG[frei])}. Einstellungen änderst du über „Modul bearbeiten“. Schüler:innen sehen die Rallye erst, wenn du sie startest.</p></div>
+ <div class="ppm-box"><h2>Stationen</h2>${zeilen||`<p class="ppm-leer">Noch keine Station. Lege die erste an.</p>`}
+  <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" data-lr="st-neu">＋ Station hinzufügen</button></div></div>`;
+}
+async function lrStationenSpeichern(m,liste){
+ try{await updateDoc(doc(db,"ppModule",m.id),{stationen:liste,updatedAt:serverTimestamp()});await ppmLaden(true);await render();}
+ catch(e){ppmFehler(e,"Stationen konnten nicht gespeichert werden");}
+}
+function lrStationDialog(m,sid){
+ const alt=sid?lrStation(m,sid):null;
+ const st=alt?JSON.parse(JSON.stringify(alt)):{id:"s"+Date.now().toString(36),titel:"",typ:"wahl",punkte:LR_PUNKTE_STD.wahl,text:"",frage:"",optionen:["","","",""],richtig:0,aussagen:[{t:"",ok:true},{t:"",ok:true},{t:"",ok:false},{t:"",ok:false}],antworten:[],paare:[{l:"",r:""},{l:"",r:""},{l:"",r:""},{l:"",r:""}],erklaerung:"",code:lrCodeNeu(m)};
+ let angezeigt=st.typ; // Art der Station, die gerade im Formular steht
+ const lesen=()=>{ // Eingaben aus dem Formular in st übernehmen
+  const v=id=>$(id)?$(id).value:undefined;
+  const t=angezeigt;
+  if($("lrsTitel")){st.titel=v("lrsTitel");st.typ=v("lrsTyp");st.punkte=Math.max(0,Math.min(100,Number(v("lrsPunkte"))||0));st.text=v("lrsText");}
+  if($("lrsFrage"))st.frage=v("lrsFrage");
+  if($("lrsErkl"))st.erklaerung=v("lrsErkl");
+  if(t==="wahl"){st.optionen=[0,1,2,3,4,5].map(i=>v("lrsO"+i)||"");const r=document.querySelector('input[name="lrsR"]:checked');st.richtig=r?Number(r.value):0;}
+  if(t==="kprim")st.aussagen=[0,1,2,3].map(i=>({t:v("lrsA"+i)||"",ok:v("lrsAok"+i)!=="0"}));
+  if(t==="text")st.antworten=String(v("lrsAnt")||"").split("\n").map(x=>x.trim()).filter(Boolean);
+  if(t==="zuordnen")st.paare=[0,1,2,3,4,5].map(i=>({l:v("lrsL"+i)||"",r:v("lrsRr"+i)||""}));
+ };
+ const zeichne=()=>{
+  angezeigt=st.typ;
+  const opt=[0,1,2,3,4,5].map(i=>(st.optionen||[])[i]||"");
+  const paare=[0,1,2,3,4,5].map(i=>(st.paare||[])[i]||{l:"",r:""});
+  const aus=[0,1,2,3].map(i=>(st.aussagen||[])[i]||{t:"",ok:true});
+  let typ="";
+  if(st.typ==="info")typ=`<p style="font-size:13px;color:var(--muted)">Eine Info-Station gibt nur Text. Die Schüler:innen bestätigen, dass sie sie gelesen haben.</p>`;
+  if(st.typ==="wahl")typ=`<label>Frage</label><textarea id="lrsFrage" rows="2">${esc(st.frage||"")}</textarea>
+   <label>Antworten (leere Zeilen werden ignoriert, den Punkt bei der richtigen Antwort setzen)</label><div class="lr-zeilen">${opt.map((o,i)=>`<div class="lr-zeile"><input type="radio" name="lrsR" value="${i}"${Number(st.richtig)===i?" checked":""} title="richtig"><input type="text" id="lrsO${i}" maxlength="200" value="${esc(o)}" placeholder="Antwort ${i+1}"><span></span></div>`).join("")}</div>`;
+  if(st.typ==="kprim")typ=`<label>Einleitungssatz oder Frage</label><textarea id="lrsFrage" rows="2" placeholder="Die Aussage wird zutreffend beurteilt, wenn …">${esc(st.frage||"")}</textarea>
+   <label>Vier Aussagen mit Lösung</label><div class="lr-zeilen">${aus.map((a,i)=>`<div class="lr-zeile"><b>${i+1}.</b><input type="text" id="lrsA${i}" maxlength="300" value="${esc(a.t)}" placeholder="Aussage ${i+1}"><select id="lrsAok${i}" style="width:auto"><option value="1"${a.ok?" selected":""}>richtig</option><option value="0"${a.ok?"":" selected"}>falsch</option></select></div>`).join("")}</div>
+   <p style="font-size:13px;color:var(--muted)">Punkte wie im K-Prim-Test: alle vier richtig = volle Punktzahl, drei richtig = die Hälfte, zwei richtig = ein Viertel, sonst keine.</p>`;
+  if(st.typ==="text")typ=`<label>Frage</label><textarea id="lrsFrage" rows="2">${esc(st.frage||"")}</textarea>
+   <label>Richtige Antworten (eine pro Zeile, die erste wird als Lösung gezeigt)</label><textarea id="lrsAnt" rows="3" placeholder="Gruppendynamik&#10;Gruppen-Dynamik">${esc((st.antworten||[]).join("\n"))}</textarea>
+   <p style="font-size:13px;color:var(--muted)">Groß- und Kleinschreibung, Satzzeichen und Umlaut-Schreibweisen (ä/ae) werden nicht unterschieden.</p>`;
+  if(st.typ==="zuordnen")typ=`<label>Auftrag</label><textarea id="lrsFrage" rows="2" placeholder="Ordne jedem Begriff die passende Erklärung zu.">${esc(st.frage||"")}</textarea>
+   <label>Paare (links der Begriff, rechts die passende Erklärung; mindestens 2)</label><div class="lr-zeilen">${paare.map((p,i)=>`<div class="lr-zeile zwei"><input type="text" id="lrsL${i}" maxlength="150" value="${esc(p.l)}" placeholder="Begriff ${i+1}"><input type="text" id="lrsRr${i}" maxlength="200" value="${esc(p.r)}" placeholder="passende Erklärung"></div>`).join("")}</div>`;
+  if(st.typ==="frei")typ=`<label>Frage</label><textarea id="lrsFrage" rows="2">${esc(st.frage||"")}</textarea>
+   <p style="font-size:13px;color:var(--muted)">Für den Freitext gibt es die volle Punktzahl, sobald eine Antwort abgegeben ist. Du siehst die Antworten in der Auswertung.</p>`;
+  modal(`${LR_CSS}<button class="modal-close" onclick="closeModal()">×</button>
+   <div class="kicker">🚩 LERNRALLYE</div><h2>${alt?"Station bearbeiten":"Neue Station"}</h2>
+   <div class="lr-form">
+    <label>Titel der Station</label><input type="text" id="lrsTitel" maxlength="100" value="${esc(st.titel)}" placeholder="z. B. Am Eingang der Aula">
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px"><div><label>Art der Station</label><select id="lrsTyp">${Object.entries(LR_TYPEN).map(([k,T])=>`<option value="${k}"${k===st.typ?" selected":""}>${T.icon} ${esc(T.name)}</option>`).join("")}</select></div>
+     <div><label>Punkte</label><input type="number" id="lrsPunkte" min="0" max="100" value="${Number(st.punkte)||0}"></div></div>
+    <label>Text zur Station (Information oder Auftrag, mit „- “ entstehen Aufzählungen)</label><textarea id="lrsText" rows="4">${esc(st.text||"")}</textarea>
+    ${typ}
+    ${st.typ!=="info"?`<label>Rückmeldung nach der Antwort (Erklärung, bei Freitext die Musterlösung)</label><textarea id="lrsErkl" rows="3">${esc(st.erklaerung||"")}</textarea>`:""}
+    <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="lrsSpeichern">Speichern</button></div>
+   </div>`);
+  $("lrsTyp").addEventListener("change",()=>{
+   const alter=angezeigt;lesen();
+   if((st.punkte===LR_PUNKTE_STD[alter])||!st.punkte)st.punkte=LR_PUNKTE_STD[st.typ];
+   zeichne();
+  });
+  $("lrsSpeichern").addEventListener("click",async()=>{
+   lesen();
+   st.titel=String(st.titel||"").trim();
+   if(!st.titel){toast("Bitte einen Titel eingeben.");return;}
+   if(st.typ==="wahl"){
+    const o=(st.optionen||[]).map((x,i)=>({x:String(x).trim(),i})).filter(a=>a.x);
+    if(o.length<2){toast("Bitte mindestens zwei Antworten eingeben.");return;}
+    if(!o.some(a=>a.i===Number(st.richtig))){toast("Bitte markiere eine ausgefüllte Antwort als richtig.");return;}
+    const neu=o.map(a=>a.x);st.richtig=o.findIndex(a=>a.i===Number(st.richtig));st.optionen=neu;
+   }
+   if(st.typ==="kprim"){
+    if(st.aussagen.some(a=>!String(a.t).trim())){toast("Bitte alle vier Aussagen ausfüllen.");return;}
+    st.aussagen=st.aussagen.map(a=>({t:String(a.t).trim(),ok:!!a.ok}));
+   }
+   if(st.typ==="text"&&!st.antworten.length){toast("Bitte mindestens eine richtige Antwort eingeben.");return;}
+   if(st.typ==="zuordnen"){
+    st.paare=st.paare.map(p=>({l:String(p.l).trim(),r:String(p.r).trim()})).filter(p=>p.l||p.r);
+    if(st.paare.length<2||st.paare.some(p=>!p.l||!p.r)){toast("Bitte mindestens zwei vollständige Paare eingeben.");return;}
+   }
+   if(["wahl","kprim","text","zuordnen","frei"].includes(st.typ)&&!String(st.frage||"").trim()&&!String(st.text||"").trim()){toast("Bitte eine Frage oder einen Text eingeben.");return;}
+   const liste=[...(m.stationen||[])];
+   const i=liste.findIndex(x=>x.id===st.id);
+   if(i>=0)liste[i]=st;else liste.push(st);
+   closeModal();await lrStationenSpeichern(m,liste);toast("Station gespeichert.");
+  });
+ };
+ zeichne();
+}
+// ---- Auswertung (Lehrkraft) ----
+async function lrAuswertungDialog(m){
+ let docs=[];
+ try{docs=(await getDocs(query(collection(db,"ppRallyeStand"),where("modulId","==",m.id)))).docs.map(d=>({id:d.id,...d.data()}));}catch(e){ppmFehler(e,"Auswertung konnte nicht geladen werden");return;}
+ const stationen=m.stationen||[];
+ docs.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||""),"de"));
+ const punkte=d=>Object.values(d.erg||{}).reduce((n,x)=>n+(Number(x.p)||0),0);
+ const personen=docs.map(d=>`<div class="lr-aus"><div><b>${esc(d.name||"Schüler:in")}</b>${d.team?` <small style="color:var(--muted)">· Team ${esc(d.team)}</small>`:""}<br><small style="color:var(--muted)">${Object.keys(d.erg||{}).length} von ${stationen.length} Stationen</small></div><b>${punkte(d)} / ${lrMax(m)}</b><button type="button" class="ppm-btn klein" data-lr="reset" data-doc="${esc(d.id)}" title="Stand dieser Person zurücksetzen">↺</button></div>`).join("")||`<p class="ppm-leer">Noch niemand hat gespielt.</p>`;
+ const proStation=stationen.map((st,i)=>{
+  const erg=docs.map(d=>({d,e:(d.erg||{})[st.id]})).filter(x=>x.e);
+  const richtig=erg.filter(x=>x.e.ok===true).length,falsch=erg.filter(x=>x.e.ok===false).length;
+  const T=LR_TYPEN[st.typ]||LR_TYPEN.info;
+  const antw=(st.typ==="frei"||st.typ==="text")?erg.map(x=>`<li><b>${esc(x.d.name||"")}:</b> ${esc(String(x.e.a||"")).replace(/\n/g,"<br>")}</li>`).join(""):"";
+  return`<div style="margin:0 0 10px"><b>${i+1}. ${esc(st.titel)}</b> <small style="color:var(--muted)">${T.icon} ${esc(T.name)} · ${erg.length} Antwort${erg.length===1?"":"en"}${st.typ!=="info"&&st.typ!=="frei"?` · ${richtig} ganz richtig, ${falsch} nicht ganz richtig`:""}</small>${antw?`<ul style="margin:4px 0 0 18px;font-size:13px">${antw}</ul>`:""}</div>`;
+ }).join("");
+ modal(`${LR_CSS}<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">🚩 LERNRALLYE</div><h2>Auswertung</h2>
+  <div class="lr-form"><h3 style="margin:8px 0 4px;font-size:15px">Personen</h3>${personen}<h3 style="margin:14px 0 4px;font-size:15px">Stationen</h3>${proStation||`<p class="ppm-leer">Keine Stationen.</p>`}
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Schließen</button></div></div>`);
+}
+// ---- QR-Codes drucken ----
+function lrQrDataUrl(text){
+ const qr=qrcode(0,"M");qr.addData(text);qr.make();
+ const n=qr.getModuleCount(),rand=4,g=n+2*rand,z=Math.max(6,Math.ceil(900/g)),s=g*z;
+ const cv=document.createElement("canvas");cv.width=cv.height=s;
+ const c=cv.getContext("2d");c.fillStyle="#fff";c.fillRect(0,0,s,s);c.fillStyle="#000";
+ for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(qr.isDark(r,k))c.fillRect((k+rand)*z,(r+rand)*z,z,z);
+ return cv.toDataURL("image/png");
+}
+function lrQrDruck(m){
+ const win=window.open("","_blank","width=900,height=800");
+ if(!win){toast("Das Druckfenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return;}
+ const basis=lrBaseUrl();
+ const blatt=(titel,unter,url,code)=>{let bild="";try{bild=lrQrDataUrl(url);}catch(e){return`<section><h1>${escPDF(titel)}</h1><p>Der Link ist zu lang für einen QR-Code.</p></section>`;}
+  return`<section><div class="kl">Lernrallye · ${escPDF(m.titel||"")}</div><h1>${escPDF(titel)}</h1><img src="${bild}" alt="QR-Code"><p class="un">${escPDF(unter)}</p>${code?`<p class="cd">${escPDF(code)}</p>`:""}</section>`;};
+ const seiten=[blatt("Start der Lernrallye","Mit der Handy-Kamera scannen, dann in der Campus-App anmelden.",basis+"?lr="+m.id,"")]
+  .concat((m.stationen||[]).map((st,i)=>blatt(`Station ${i+1}`,"QR-Code scannen oder diesen Code in der Lernrallye eingeben:",basis+"?lr="+m.id+"."+st.code,st.code)));
+ win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>QR-Codes Lernrallye</title><style>
+ @page{size:A4;margin:14mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#111}
+ section{page-break-after:always;text-align:center;padding-top:14mm}section:last-child{page-break-after:auto}
+ .kl{font-size:14pt;color:#555}h1{font-size:34pt;margin:6mm 0 8mm}img{width:120mm;height:120mm}
+ .un{font-size:14pt;margin:6mm 0 2mm}.cd{font-size:30pt;font-weight:700;letter-spacing:.08em;margin:0}
+ .bar{background:#f3f3f3;padding:10px 12px;border-radius:8px;margin:8px;font-size:13px}@media print{.bar{display:none}}
+ </style></head><body><div class="bar"><button onclick="window.print()" style="font-size:15px;padding:8px 14px">🖨 Drucken</button> Je eine Seite pro Station, die erste Seite ist der Start der Rallye. Die Stationen können auch kleiner ausgeschnitten werden.</div>${seiten.join("")}</body></html>`);
+ win.document.close();
+}
+// ---- QR-Code scannen ----
+let lrJsQrPromise=null;
+function lrJsQr(){
+ if(window.jsQR)return Promise.resolve(window.jsQR);
+ if(!lrJsQrPromise)lrJsQrPromise=new Promise((ok,nein)=>{const s=document.createElement("script");s.src="jsQR.js?v=1";s.onload=()=>ok(window.jsQR);s.onerror=()=>{lrJsQrPromise=null;nein(new Error("jsQR"));};document.head.appendChild(s);});
+ return lrJsQrPromise;
+}
+async function lrScannen(m,stand){
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast("Dieses Gerät kann hier nicht scannen. Gib den Code unter dem QR-Code ein.");return;}
+ let stream=null,lauf=true;
+ const ende=()=>{lauf=false;if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}window.__lrScanStop=null;};
+ window.__lrScanStop=ende;
+ modal(`${LR_CSS}<button class="modal-close" id="lrScanX">×</button><div class="kicker">📷 SCANNEN</div><h2>QR-Code an der Station scannen</h2><video id="lrVideo" class="lr-video" playsinline muted></video><canvas id="lrCanvas" hidden></canvas><p id="lrScanInfo" style="color:var(--muted);font-size:13px">Halte die Kamera auf den QR-Code. Der Browser fragt, ob die Kamera benutzt werden darf.</p><div class="form-actions"><button class="secondary" type="button" id="lrScanAb">Abbrechen</button></div>`);
+ const zu=()=>{ende();closeModal();};
+ $("lrScanX").onclick=zu;$("lrScanAb").onclick=zu;
+ try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});}
+ catch(e){ende();$("lrScanInfo").textContent="Die Kamera ist nicht freigegeben. Erlaube die Kamera im Browser oder gib den Code unter dem QR-Code ein.";return;}
+ const v=$("lrVideo");v.srcObject=stream;try{await v.play();}catch(e){}
+ let det=null;
+ if("BarcodeDetector" in window){try{det=new BarcodeDetector({formats:["qr_code"]});}catch(e){det=null;}}
+ let jq=null;
+ if(!det){try{jq=await lrJsQr();}catch(e){ende();$("lrScanInfo").textContent="Der Scanner konnte nicht geladen werden. Gib den Code unter dem QR-Code ein.";return;}}
+ const cv=$("lrCanvas"),cx=cv.getContext("2d",{willReadFrequently:true});
+ const gefunden=async roh=>{
+  ende();closeModal();
+  const l=lrLinkAus(roh);
+  if(l.modulId&&l.modulId!==m.id){toast("Dieser QR-Code gehört zu einer anderen Lernrallye.");return;}
+  await lrCodeEinloesen(m,stand,l.code);
+ };
+ const schleife=async()=>{
+  if(!lauf)return;
+  if($("modalBackdrop").hidden||!$("lrVideo")){ende();return;}
+  try{
+   if(det){const r=await det.detect(v);if(r&&r[0]&&r[0].rawValue){await gefunden(r[0].rawValue);return;}}
+   else if(v.videoWidth){
+    const w=Math.min(480,v.videoWidth),h=Math.round(w*v.videoHeight/v.videoWidth);cv.width=w;cv.height=h;cx.drawImage(v,0,0,w,h);
+    const r=jq(cx.getImageData(0,0,w,h).data,w,h,{inversionAttempts:"dontInvert"});
+    if(r&&r.data){await gefunden(r.data);return;}
+   }
+  }catch(e){}
+  setTimeout(schleife,det?120:200);
+ };
+ schleife();
+}
+async function lrCodeEinloesen(m,stand,codeRoh){
+ const code=String(codeRoh||"").trim().toUpperCase();
+ if(!code){toast("Bitte einen Code eingeben.");return;}
+ const i=(m.stationen||[]).findIndex(s=>String(s.code).toUpperCase()===code);
+ if(i<0){toast("Dieser Code passt zu keiner Station.");return;}
+ try{
+  stand.frei[m.stationen[i].id]=true;
+  await lrSpeichern(m,stand);
+  LR.sicht={modulId:m.id,sid:m.stationen[i].id};
+  await render();
+ }catch(e){ppmFehler(e,"Station konnte nicht freigeschaltet werden");}
+}
+// ---- Klicks der Lernrallye ----
+async function lrKlick(e){
+ const b=e.target.closest&&e.target.closest("[data-lr]");
+ if(!b)return;
+ const a=b.dataset.lr;
+ const m=activePPModul?ppmById(activePPModul):null;
+ if(a==="reset"){ // im Auswertungs-Fenster: Stand einer Person zurücksetzen
+  if(!isTeacher())return;
+  if(!confirm("Den Stand dieser Person in der Rallye wirklich zurücksetzen?"))return;
+  try{const id=b.dataset.doc;await deleteDoc(doc(db,"ppRallyeStand",id));await deleteDoc(doc(db,"ppRallyeRang",id));toast("Zurückgesetzt.");closeModal();if(m)await lrAuswertungDialog(m);}catch(err){ppmFehler(err,"Zurücksetzen nicht möglich");}
+  return;
+ }
+ if(!m||m.modul!=="rallye")return;
+ const lehrer=isTeacher(),stand=LR.stand[m.id];
+ try{
+  if(a==="station"){
+   const sid=b.dataset.sid;LR.sicht={modulId:m.id,sid};await render();window.scrollTo(0,0);return;
+  }
+  if(a==="zurueck"){LR.sicht=null;await render();return;}
+  if(a==="neu-laden"){await render();return;}
+  if(a==="pruefen"){
+   const st=lrStation(m,b.dataset.sid);if(!st)return;
+   const r=lrAntwortLesen(st);
+   if(!r.ok){toast(st.typ==="kprim"?"Bitte alle vier Aussagen beantworten.":st.typ==="zuordnen"?"Bitte jedem Begriff eine Erklärung zuordnen.":"Bitte zuerst eine Antwort geben.");return;}
+   const erg={...lrBewerten(st,r.a),a:r.a,zeit:Date.now()};
+   if(lehrer){LR.sicht={modulId:m.id,sid:st.id,erg};await render();return;}
+   if(!m.rAktiv){toast("Die Rallye ist beendet.");return;}
+   stand.erg[st.id]=erg;
+   await lrSpeichern(m,stand);
+   await render();return;
+  }
+  if(a==="team"||a==="team-neu"){
+   if(lehrer)return;
+   const name=a==="team"?b.dataset.team:($("lrTeamName")?.value||"").trim().replace(/\s+/g," ");
+   if(!name){toast("Bitte einen Teamnamen eingeben.");return;}
+   stand.team=name;await lrSpeichern(m,stand);await render();return;
+  }
+  if(a==="code"){if(!lehrer)await lrCodeEinloesen(m,stand,$("lrCode")?.value);return;}
+  if(a==="scan"){if(!lehrer)await lrScannen(m,stand);return;}
+  if(!lehrer)return;
+  if(a==="aktiv"){await updateDoc(doc(db,"ppModule",m.id),{rAktiv:!m.rAktiv,updatedAt:serverTimestamp()});await ppmLaden(true);await render();toast(m.rAktiv?"Die Rallye ist beendet.":"Die Rallye läuft.");return;}
+  if(a==="st-neu"){lrStationDialog(m,null);return;}
+  if(a==="st-edit"){lrStationDialog(m,b.dataset.sid);return;}
+  if(a==="st-weg"){
+   const st=lrStation(m,b.dataset.sid);if(!st)return;
+   if(!confirm(`Die Station „${st.titel}“ wirklich löschen? Bereits gesammelte Punkte bleiben in der Rangliste stehen.`))return;
+   await lrStationenSpeichern(m,(m.stationen||[]).filter(x=>x.id!==st.id));return;
+  }
+  if(a==="st-auf"||a==="st-ab"){
+   const l=[...(m.stationen||[])],i=l.findIndex(x=>x.id===b.dataset.sid),j=a==="st-auf"?i-1:i+1;
+   if(i<0||j<0||j>=l.length)return;
+   [l[i],l[j]]=[l[j],l[i]];await lrStationenSpeichern(m,l);return;
+  }
+  if(a==="auswertung"){await lrAuswertungDialog(m);return;}
+  if(a==="qr-druck"){lrQrDruck(m);return;}
+ }catch(err){ppmFehler(err,"Aktion nicht möglich");}
+}
+if(!window.__lrKlickGebunden){window.__lrKlickGebunden=true;document.addEventListener("click",lrKlick);}
 
 async function renderPaedagogikPhasenZeitstrahl(fach,fortschrittMap,heute){
  const meineTeams=await ladePPTeams();
@@ -19373,6 +19914,7 @@ if(profile.status === "blocked"){
  }
 
  showApp();
+ lrLinkVerarbeiten().catch(e=>console.error("Rallye-Link:",e));
 }
  catch(e){console.error(e);showAuth();$("authError").textContent="Benutzerprofil konnte nicht geladen werden."+(e?.code?" ("+e.code+")":"")}
  });
