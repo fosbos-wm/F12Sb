@@ -20360,7 +20360,7 @@ async function lbZuordnenDialog(q,ref,tab){
 }
 function lbZRender(){
  const z=window.__lbZ,el=$("lbZInner");if(!z||!el)return;
- const tabs=z.q==="z"?LB_Z_TABS:LB_Z_TABS.filter(t=>t[0]!=="wb");const tab=z.tab,liste=z.daten[tab]||[],aktuell=lbZAktuell(tab),name=(LB_Z_TABS.find(t=>t[0]===tab)||[])[1];
+ const tabs=LB_Z_TABS.filter(t=>t[0]!=="wb");const tab=z.tab,liste=z.daten[tab]||[],aktuell=lbZAktuell(tab),name=(LB_Z_TABS.find(t=>t[0]===tab)||[])[1];
  el.innerHTML=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px">${tabs.map(t=>{const n=lbZAktuell(t[0])?" ✓":"";return`<button type="button" class="${t[0]===tab?"primary":"secondary"}" onclick="lbZTab('${t[0]}')">${t[1]}${n} <small>(${z.daten[t[0]].length})</small></button>`}).join("")}</div>
   <input type="search" placeholder="Suchen …" oninput="lbZFilter(this.value)" style="width:100%;box-sizing:border-box;min-height:40px;padding:0 12px;border:1px solid var(--line);border-radius:10px;font:inherit;margin:0 0 10px">
   <div id="lbZListe" style="display:grid;gap:8px;max-height:44vh;overflow:auto">${liste.map(b=>`<button type="button" class="secondary" data-t="${esc(b.titel.toLowerCase())}" style="text-align:left${b.id===aktuell?";border:2px solid #075a9d":""}" onclick="lbZuordnenSetzen('${esc(b.id)}')">${b.id===aktuell?"✓ ":""}${esc(b.titel)}</button>`).join("")||`<p class="ppm-leer">Noch kein vorbereitetes Board dieser Art vorhanden.</p>`}</div>
@@ -20391,7 +20391,7 @@ async function pp12LernZuordnen(d){await lbZuordnenDialog("z",d);}
 // ---- Entfernen: Roter Faden, Lernübersicht oder Whiteboard von einer Stunde bzw. einem Modul lösen ----
 // Das Whiteboard selbst bleibt erhalten (Löschen: im Menü „Tafeln“ bzw. „Whiteboards“ über den Papierkorb).
 function lbLoesenFelder(q,ref){
- if(q==="z"){const t=(PP12_CACHE.tafeln[ref]||{});return[["Roter Faden","boardId",t.boardId],["Lernübersicht","lernBoardId",t.lernBoardId],["Whiteboard","whiteboardId",t.whiteboardId]];}
+ if(q==="z"){const t=(PP12_CACHE.tafeln[ref]||{});return[["Roter Faden","boardId",t.boardId],["Lernübersicht","lernBoardId",t.lernBoardId]];}
  const m=ppmById(ref)||{};return[["Roter Faden","tafelId",m.tafelId],["Lernübersicht","lernBoardId",m.lernBoardId]];
 }
 function lbLoesenDialog(q,ref){
@@ -20483,7 +20483,7 @@ async function lbOrdnerNeu(beispiel){
 function pp12BausteineHtml(e){
  if(typeof PP12_CACHE==="undefined"||!(e.typ==="stoff"||e.typ==="wdh"))return"";
  const t=PP12_CACHE.tafeln[e.d]||{},lehrer=isTeacher(),hatL=!!t.lernBoardId,hatW=!!t.whiteboardId;
- return`${hatL||lehrer?lbPill("Lernübersicht"+(hatL?"":" anlegen"),LB_ICON.lern,hatL,`onclick="pp12Lern('${e.d}')"`,hatL?(lehrer?"Lernübersicht (Vorlage) öffnen":"Meine Lernübersicht öffnen"):"Lernübersicht für diese Stunde als Whiteboard anlegen"):""}${lehrer?lbPill("⇄ zuordnen","",false,`onclick="pp12LernZuordnen('${e.d}')"`,"Roten Faden, Lernübersicht oder Whiteboard dieser Stunde zuordnen"):""}${lehrer&&(t.boardId||hatL||hatW)?lbPill("✕ entfernen","",false,`onclick="pp12Loesen('${e.d}')"`,"Roter Faden, Lernübersicht oder Whiteboard von dieser Stunde lösen"):""}${hatW||lehrer?lbPill("Whiteboard"+(hatW?"":" anlegen"),LB_ICON.wb,hatW,`onclick="pp12Wb('${e.d}')"`,hatW?"Whiteboard zu dieser Stunde öffnen":"Whiteboard für diese Stunde anlegen"):""}`;
+ return`${hatL||lehrer?lbPill("Lernübersicht"+(hatL?"":" anlegen"),LB_ICON.lern,hatL,`onclick="pp12Lern('${e.d}')"`,hatL?(lehrer?"Lernübersicht (Vorlage) öffnen":"Meine Lernübersicht öffnen"):"Lernübersicht für diese Stunde als Whiteboard anlegen"):""}${lehrer?lbPill("⇄ zuordnen","",false,`onclick="pp12LernZuordnen('${e.d}')"`,"Roten Faden oder Lernübersicht dieser Stunde zuordnen"):""}${lehrer&&(t.boardId||hatL)?lbPill("✕ entfernen","",false,`onclick="pp12Loesen('${e.d}')"`,"Roter Faden oder Lernübersicht von dieser Stunde lösen"):""}`;
 }
 function lbStundeTitel(d){
  const e=(typeof PP12_PLAN!=="undefined"?PP12_PLAN:[]).find(x=>x.d===d);
