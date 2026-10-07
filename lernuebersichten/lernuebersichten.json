@@ -702,5 +702,354 @@
     "text": "Meine Eselsbrücke / mein Beispiel:"
    }
   ]
+ },
+ {
+  "id": "f12-freud-topographisch",
+  "thema": "Die Schichten des Bewusstseins",
+  "unter": "LB 12.1 · Freud · Topographisches Modell",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Die Schichten des Bewusstseins"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "Topographisches Modell (Schichtenmodell) des psychischen Apparats · Freud"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 1200,
+    "h": 520,
+    "c": "blau",
+    "text": "① DER EISBERG · über der Wasserlinie bewusst, darunter vorbewusst und unbewusst"
+   },
+   {
+    "type": "shape",
+    "shape": "ellipse",
+    "x": -730,
+    "y": -545,
+    "w": 540,
+    "h": 470,
+    "c": "blau",
+    "fs": 20,
+    "text": ""
+   },
+   {
+    "type": "note",
+    "x": -690,
+    "y": -510,
+    "w": 460,
+    "h": 80,
+    "c": "gruen",
+    "fs": 26,
+    "text": "Das Bewusste"
+   },
+   {
+    "type": "note",
+    "x": -690,
+    "y": -350,
+    "w": 460,
+    "h": 80,
+    "c": "gelb",
+    "fs": 26,
+    "text": "Das Vorbewusste"
+   },
+   {
+    "type": "note",
+    "x": -690,
+    "y": -190,
+    "w": 460,
+    "h": 80,
+    "c": "rosa",
+    "fs": 26,
+    "text": "Das Unbewusste"
+   },
+   {
+    "type": "line",
+    "x": -980,
+    "y": -390,
+    "x2": -30,
+    "y2": -390,
+    "c": "blau",
+    "sw": 4,
+    "arrow": false
+   },
+   {
+    "type": "note",
+    "x": -990,
+    "y": -360,
+    "w": 250,
+    "h": 150,
+    "c": "lila",
+    "fs": 20,
+    "text": "Träume, Symptome, Assoziationen, Fehlleistungen"
+   },
+   {
+    "type": "line",
+    "x": -690,
+    "y": -150,
+    "x2": -865,
+    "y2": -210,
+    "c": "grau",
+    "sw": 4,
+    "arrow": true
+   },
+   {
+    "type": "note",
+    "x": -90,
+    "y": -330,
+    "w": 270,
+    "h": 120,
+    "c": "gelb",
+    "fs": 20,
+    "text": "Aufmerksamkeit (evtl. auch Schlüsselreiz)"
+   },
+   {
+    "type": "line",
+    "x": -230,
+    "y": -310,
+    "x2": -90,
+    "y2": -290,
+    "c": "grau",
+    "sw": 4,
+    "arrow": true
+   },
+   {
+    "type": "line",
+    "x": -20,
+    "y": -330,
+    "x2": -230,
+    "y2": -470,
+    "c": "grau",
+    "sw": 4,
+    "arrow": true
+   },
+   {
+    "type": "frame",
+    "x": 230,
+    "y": -580,
+    "w": 770,
+    "h": 520,
+    "c": "gruen",
+    "text": "② WIE GELANGT ETWAS INS BEWUSSTSEIN?"
+   },
+   {
+    "type": "note",
+    "x": 250,
+    "y": -520,
+    "w": 730,
+    "h": 130,
+    "c": "gelb",
+    "fs": 21,
+    "text": "Vorbewusstes → Bewusstes\nDurch Aufmerksamkeit (evtl. auch durch einen Schlüsselreiz) wird ein Inhalt bewusst."
+   },
+   {
+    "type": "note",
+    "x": 250,
+    "y": -370,
+    "w": 730,
+    "h": 150,
+    "c": "lila",
+    "fs": 21,
+    "text": "Unbewusstes → Bewusstes\nUnbewusste Inhalte melden sich indirekt: in Träumen, Symptomen, Assoziationen und Fehlleistungen."
+   },
+   {
+    "type": "note",
+    "x": 250,
+    "y": -200,
+    "w": 730,
+    "h": 120,
+    "c": "tuerkis",
+    "fs": 21,
+    "text": "MERKBILD\nWie beim Eisberg: Man sieht nur die Spitze – der größte Teil liegt unter Wasser."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -30,
+    "w": 2000,
+    "h": 350,
+    "c": "orange",
+    "text": "③ DIE DREI SCHICHTEN IM STECKBRIEF"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 25,
+    "w": 640,
+    "h": 280,
+    "c": "gruen",
+    "fs": 20,
+    "text": "DAS BEWUSSTE\nInhalte, die ich in diesem Moment wahrnehme und über die ich nachdenke.\n\nBeispiel: Ich lese gerade diesen Satz."
+   },
+   {
+    "type": "note",
+    "x": -330,
+    "y": 25,
+    "w": 640,
+    "h": 280,
+    "c": "gelb",
+    "fs": 20,
+    "text": "DAS VORBEWUSSTE\nInhalte, die gerade nicht bewusst sind, aber durch Aufmerksamkeit (evtl. auch durch einen Schlüsselreiz) leicht bewusst gemacht werden können.\n\nBeispiel: Meine Handynummer – nach kurzem Überlegen fällt sie mir ein."
+   },
+   {
+    "type": "note",
+    "x": 320,
+    "y": 25,
+    "w": 660,
+    "h": 280,
+    "c": "rosa",
+    "fs": 20,
+    "text": "DAS UNBEWUSSTE\nInhalte, die nicht bewusst erfahren werden können. Sie zeigen sich nur indirekt, z. B. in Träumen, Symptomen, Assoziationen und Fehlleistungen.\n\nBeispiel: Ein verdrängtes Kindheitserlebnis."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 350,
+    "w": 1000,
+    "h": 330,
+    "c": "lila",
+    "text": "④ DAS UNBEWUSSTE · zwei Aspekte"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 405,
+    "w": 480,
+    "h": 255,
+    "c": "rosa",
+    "fs": 21,
+    "text": "DESKRIPTIVER ASPEKT\nAuf unbewusste Inhalte kann nur geschlossen werden, denn sie können nicht bewusst erfahren werden."
+   },
+   {
+    "type": "note",
+    "x": -480,
+    "y": 405,
+    "w": 460,
+    "h": 255,
+    "c": "lila",
+    "fs": 21,
+    "text": "DYNAMISCHER ASPEKT\nUnbewusste Inhalte drängen ins Bewusstsein und müssen mit aktiver Gegenkraft (Gegenbesetzung) im Unbewussten gehalten werden."
+   },
+   {
+    "type": "frame",
+    "x": 30,
+    "y": 350,
+    "w": 970,
+    "h": 330,
+    "c": "tuerkis",
+    "text": "⑤ WO LIEGT ES? · bewusst, vorbewusst oder unbewusst?"
+   },
+   {
+    "type": "note",
+    "x": 50,
+    "y": 405,
+    "w": 290,
+    "h": 150,
+    "c": "gelb",
+    "fs": 19,
+    "text": "a) Ich höre gerade meiner Lehrerin zu."
+   },
+   {
+    "type": "note",
+    "x": 50,
+    "y": 565,
+    "w": 290,
+    "h": 55,
+    "c": "grau",
+    "fs": 19,
+    "text": "Meine Antwort:  "
+   },
+   {
+    "type": "note",
+    "x": 360,
+    "y": 405,
+    "w": 290,
+    "h": 150,
+    "c": "gelb",
+    "fs": 19,
+    "text": "b) Der Name meiner ersten Lehrerin fällt mir ein, als ich ein Foto sehe."
+   },
+   {
+    "type": "note",
+    "x": 360,
+    "y": 565,
+    "w": 290,
+    "h": 55,
+    "c": "grau",
+    "fs": 19,
+    "text": "Meine Antwort:  "
+   },
+   {
+    "type": "note",
+    "x": 670,
+    "y": 405,
+    "w": 290,
+    "h": 150,
+    "c": "gelb",
+    "fs": 19,
+    "text": "c) Ein Mensch versteht nicht, warum er immer wieder dasselbe träumt."
+   },
+   {
+    "type": "note",
+    "x": 670,
+    "y": 565,
+    "w": 290,
+    "h": 55,
+    "c": "grau",
+    "fs": 19,
+    "text": "Meine Antwort:  "
+   },
+   {
+    "type": "text",
+    "x": 50,
+    "y": 630,
+    "w": 930,
+    "h": 30,
+    "fs": 16,
+    "text": "Lösung (erst selbst überlegen!): a) bewusst · b) vorbewusst · c) unbewusst"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 710,
+    "w": 2000,
+    "h": 150,
+    "c": "grau",
+    "text": "⑥ MEIN LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 755,
+    "w": 960,
+    "h": 95,
+    "c": "gelb",
+    "fs": 19,
+    "text": "Das kann ich am Ende: die drei Schichten mit Beispiel erklären · sagen, wie etwas ins Bewusstsein gelangt · deskriptiven und dynamischen Aspekt des Unbewussten erklären"
+   },
+   {
+    "type": "note",
+    "x": 20,
+    "y": 755,
+    "w": 960,
+    "h": 95,
+    "c": "grau",
+    "fs": 20,
+    "text": "Meine Eselsbrücke / mein Beispiel:"
+   }
+  ]
  }
 ]
