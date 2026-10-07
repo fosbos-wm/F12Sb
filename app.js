@@ -458,6 +458,7 @@ async function renderRessourcenRoute(){
  <p>TaskCards, KI-Lernangebote, Videos, ByCS/mebis, Canva und LearningApps sowie weitere Webseiten an einem Ort.</p>
  <div class="chips"><span class="chip"> TaskCard</span><span class="chip"> KI</span><span class="chip"> Video</span><span class="chip"> ByCS / mebis</span><span class="chip"> Canva</span><span class="chip"> LearningApps</span><span class="chip"> Webseite</span></div>
  </div>
+ ${await lbOrdnerHtml()}
  ${Object.entries(grouped).map(([type,list])=>{
  if(!list.length)return"";
  const t=types[type];
@@ -2380,16 +2381,17 @@ function praktikumsAmpelDotHTMLGeneric(ampel,titel){
  return`<span class="ampel-dot"style="background:${ampelFarbe(ampel)}"title="${esc(titel||"")}"></span>`;
 }
 function subscribeWochenLive(fach,wocheId,woche){
- liveUnsubscribe=onSnapshot(
+ const u1=onSnapshot(
  query(collection(db,"lehrplanFortschritt"),where("wocheId","==",wocheId)),
  snap=>{wochenLiveState.fortschritt=snap.docs.map(d=>d.data());renderWochenLiveTable(fach,wocheId,woche);},
  e=>console.error("Wochen-Live-Update (Fortschritt):",e)
  );
- onSnapshot(
+ const u2=onSnapshot(
  query(collection(db,"basischeckVersuche"),where("wocheId","==",wocheId)),
  snap=>{wochenLiveState.basischeck=snap.docs.map(d=>d.data());renderWochenLiveTable(fach,wocheId,woche);},
  e=>console.error("Wochen-Live-Update (Basis-Check):",e)
  );
+ liveUnsubscribe=()=>{try{u1();}catch(e){}try{u2();}catch(e){}};
 }
 async function openWochenLiveUebersicht(fach,wocheId){
  if(!isTeacher()){toast("Nur Lehrkräfte können die Live-Übersicht öffnen.");return}
@@ -2540,16 +2542,17 @@ function renderPhasenLiveTable(phase){
  }).join("")||`<tr><td colspan="6">Keine Schüler:innen gefunden.</td></tr>`;
 }
 function subscribePhasenLive(phase){
- liveUnsubscribe=onSnapshot(
+ const u1=onSnapshot(
  query(collection(db,"lehrplanFortschritt"),where("wocheId","in",phase.notwendigeWochen.length?phase.notwendigeWochen:["_none_"])),
  snap=>{phasenLiveState.fortschritt=snap.docs.map(d=>d.data());renderPhasenLiveTable(phase);},
  e=>console.error("Phasen-Live-Update:",e)
  );
- onSnapshot(
+ const u2=onSnapshot(
  query(collection(db,"lehrplanTeams"),where("wocheId","==",phase.projektWocheId)),
  snap=>{phasenLiveState.teams=snap.docs.map(d=>({id:d.id,...d.data()}));renderPhasenLiveTable(phase);},
  e=>console.error("Phasen-Live-Update (Teams):",e)
  );
+ liveUnsubscribe=()=>{try{u1();}catch(e){}try{u2();}catch(e){}};
 }
 async function openPhasenLiveUebersicht(phaseId){
  if(!isTeacher()){toast("Nur Lehrkräfte können die Live-Übersicht öffnen.");return}
@@ -6827,6 +6830,7 @@ function openExperimentStunde(){
  ov.innerHTML=`<div class="exp-leiste"><b>🧪 Das Experiment · interaktive Stunde</b><button type="button"class="secondary"onclick="closeExperimentStunde()">✕ Schließen</button></div><iframe id="experimentFrame"title="Das Experiment – interaktive Stunde"src="${EXPERIMENT_URL}"></iframe>`;
  document.body.appendChild(ov);
  document.body.classList.add("exp-offen");
+ if(experimentHandler){window.removeEventListener("message",experimentHandler);}
  experimentHandler=ev=>{experimentNachricht(ev);};
  window.addEventListener("message",experimentHandler);
 }
@@ -7226,6 +7230,7 @@ function openEinarbeitung(wocheId){
  const ov=document.createElement("div");ov.id="einarbeitungOverlay";ov.className="exp-overlay";
  ov.innerHTML=`<div class="exp-leiste"><b>📖 Einarbeitung</b><button type="button"class="secondary"onclick="closeEinarbeitung()">✕ Schließen</button></div><iframe id="einarbeitungFrame"title="Einarbeitung"src="einarbeitung/player.html?id=${encodeURIComponent(wocheId)}"></iframe>`;
  document.body.appendChild(ov);document.body.classList.add("exp-offen");
+ if(einarbeitungHandler){window.removeEventListener("message",einarbeitungHandler);}
  einarbeitungHandler=ev=>{einarbeitungNachricht(ev);};
  window.addEventListener("message",einarbeitungHandler);
 }
@@ -8531,7 +8536,7 @@ async function openCheckoutMonitor(id){
    <button class="secondary"onclick="closeModal()">Schließen</button>
    ${co.status==="live"?`<button class="primary"style="background:#d9534f"onclick="coBeenden('${id}')">■ Live beenden & auswerten</button>`:`<button class="secondary"onclick="openCheckoutErgebnisse('${id}')">Ergebnisse</button>`}
   </div>`);
- window.__coUnsub=onSnapshot(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)),snap=>{
+ coUnsubAll();window.__coUnsub=onSnapshot(query(collection(db,"checkoutAbgaben"),where("checkoutId","==",id)),snap=>{
   const box=$("coMonitor");if(!box){coUnsubAll();return}
   const ab={};snap.docs.forEach(d=>{const x=d.data();ab[x.uid]=x;});
   const abgegeben=Object.values(ab).filter(a=>a.abgegeben).length;
@@ -8600,7 +8605,7 @@ async function openCheckoutTest(id){
  </div>`);
  coStandAktualisieren(co);
  // Beendet die Lehrkraft den Test, wird die Bearbeitung sofort gesperrt.
- window.__coUnsub=onSnapshot(doc(db,"checkouts",id),snap=>{
+ coUnsubAll();window.__coUnsub=onSnapshot(doc(db,"checkouts",id),snap=>{
   if(!$("coTest")){coUnsubAll();return}
   const x=snap.data();
   if(x&&x.status!=="live"){coUnsubAll();$("coTest").innerHTML=`<h2>Der Check-out wurde beendet.</h2><p>Deine gespeicherten Antworten werden gewertet. Das Ergebnis erscheint in deinem Lernweg.</p><div class="form-actions"><button class="primary"onclick="closeModal();render()">OK</button></div>`;}
@@ -11036,13 +11041,13 @@ function wbBildVorbereiten(datei){
   const url=URL.createObjectURL(datei),img=new Image();
   img.onload=()=>{
    URL.revokeObjectURL(url);
-   let max=1400,q=0.82;
+   let max=1200,q=0.78;
    for(let i=0;i<7;i++){
     const f=Math.min(1,max/Math.max(img.width,img.height));
     const c=document.createElement("canvas");c.width=Math.max(1,Math.round(img.width*f));c.height=Math.max(1,Math.round(img.height*f));
     const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);
     const out=c.toDataURL("image/jpeg",q);
-    if(out.length<700000){resolve({data:out,w:c.width,h:c.height});return;}
+    if(out.length<450000){resolve({data:out,w:c.width,h:c.height});return;}
     max=Math.round(max*0.75);q=Math.max(0.55,q-0.06);
    }
    reject(new Error("Bild zu groß"));
@@ -11065,6 +11070,7 @@ async function wbBildEinfuegen(data,bw,bh,pt){
 async function wbBildDatei(datei,pt){
  if(!datei||!/^image\//.test(datei.type||"")){toast("Bitte eine Bilddatei wählen.");return}
  if(datei.size>15*1024*1024){toast("Das Bild ist zu groß (maximal 15 MB).");return}
+ if(!isTeacher()&&wb&&[...wb.items.values()].filter(i=>i.type==="image").length>=12){toast("Auf diesem Whiteboard sind schon 12 Bilder. Bitte erst eines löschen.");return}
  try{
   toast("Bild wird verarbeitet …");
   const b=await wbBildVorbereiten(datei);
@@ -20195,7 +20201,7 @@ async function lbMeineKopie(vorlageId,titel){
   if(!v.exists()){toast("Die Lernübersicht der Lehrkraft gibt es nicht mehr.");return;}
   toast("Deine eigene Lernübersicht wird angelegt …");
   const vd=v.data(),name=profile?.displayName||currentUser.email||"Schüler:in";
-  const nb=await addDoc(collection(db,"whiteboards"),{title:("Meine Lernübersicht: "+(titel||vd.title||"")).slice(0,120),description:"Eigene Kopie der Lernübersicht",art:"lern",schreibschutz:false,seiten:vd.seiten||1,bg:vd.bg||"weiss",lernVon:currentUser.uid,vorlageId,createdBy:currentUser.uid,createdByName:name,createdAt:serverTimestamp()});
+  const nb=await addDoc(collection(db,"whiteboards"),{title:("Meine Lernübersicht: "+String(titel||vd.title||"").replace(/\s*–\s*Lernübersicht$/,"")).slice(0,120),description:"Eigene Kopie der Lernübersicht",art:"lern",schreibschutz:false,seiten:vd.seiten||1,bg:vd.bg||"weiss",lernVon:currentUser.uid,vorlageId,createdBy:currentUser.uid,createdByName:name,createdAt:serverTimestamp()});
   const [its,ims]=await Promise.all([getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",vorlageId))),getDocs(query(collection(db,"whiteboardImages"),where("boardId","==",vorlageId)))]);
   const idMap=new Map();
   its.docs.forEach(d=>idMap.set(d.id,doc(collection(db,"whiteboardItems")).id));
@@ -20216,9 +20222,132 @@ async function lbMeineKopie(vorlageId,titel){
   toast(err?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln prüfen.":"Deine Lernübersicht konnte nicht angelegt werden.");
  }finally{lbBusy=false;}
 }
-async function lbVorlageAnlegen(titel,beschr){
+// ---- Das Lernübersicht-Whiteboard: fünf Bausteine ----
+// ① Kernfrage · ② Kernwissen · ③ Zusammenhänge · ④ Beispiel/Fall · ⑤ Lernanker
+// Koordinaten um den Mittelpunkt (x,y). Ohne Inhalt entsteht die leere Vorlage mit Hilfetexten.
+const LB_BEISPIEL={
+ thema:"Starkes und schwaches Ich",unter:"Instanzenmodell nach Freud",
+ frage:"Was unterscheidet ein starkes von einem schwachen Ich – und was bedeutet das für das Verhalten einer Person?",
+ wissen:[
+  {c:"gruen",text:"ICH-STÄRKE\n• Gleichgewicht zwischen Persönlichkeitsinstanzen und Realität\n• Das Ich kann sich gegenüber den beiden Instanzen und der Realität durchsetzen\n• Das Ich kann die Anforderungen der beiden Instanzen und der Realität in Einklang bringen\n\n→ Person ist selbstbestimmt in ihrem Verhalten"},
+  {c:"rosa",text:"ICH-SCHWÄCHE\n• Persönlichkeitsinstanzen stehen zueinander bzw. mit der Realität in einem Ungleichgewicht\n• Das Ich ist einer der beiden Instanzen bzw. der Realität unterlegen\n• Dem Ich gelingt es nicht, zwischen den Forderungen der beiden anderen Instanzen und der Realität zu vermitteln\n\n→ Person ist fremdbestimmt in ihrem Verhalten"}],
+ mitte:"Ich",begriffe:["Es","Über-Ich","Realität"],
+ zusammen:"Gleichgewicht → Ich-Stärke → selbstbestimmt\nUngleichgewicht → Ich-Schwäche → fremdbestimmt",
+ fall:"Fall (Kita): Der fünfjährige Tim will sofort weiter mit dem Bagger spielen (Es), weiß aber, dass vor dem Mittagessen aufgeräumt wird (Über-Ich).\n\nStarkes Ich: Tim vereinbart „noch fünf Minuten, dann räume ich auf“ und hält sich daran → selbstbestimmt.\n\nSchwaches Ich: Tim wird nur von dem gesteuert, was gerade am stärksten drückt (Wutanfall oder Gehorsam aus Angst) → fremdbestimmt.",
+ anker:["Ich kann Ich-Stärke und Ich-Schwäche mit je zwei Merkmalen beschreiben.","Ich kann erklären, warum das Ich zwischen Es, Über-Ich und Realität vermittelt.","Ich kann an einem Beispiel zeigen, wann eine Person selbst- bzw. fremdbestimmt handelt."]
+};
+function lbLernItems(x,y,thema,bsp){
+ const L=[],f=(px,py,w,h,c,text)=>L.push({type:"frame",x:x+px,y:y+py,w,h,c,text}),
+  n=(px,py,w,h,c,text,fs)=>L.push({type:"note",x:x+px,y:y+py,w,h,c,fs:fs||18,text}),
+  t=(px,py,w,h,fs,text)=>L.push({type:"text",x:x+px,y:y+py,w,h,fs,text}),
+  s=(px,py,w,h,c,text)=>L.push({type:"shape",shape:"ellipse",x:x+px,y:y+py,w,h,c,fs:20,text}),
+  l=(x1,y1,x2,y2)=>L.push({type:"line",x:x+x1,y:y+y1,x2:x+x2,y2:y+y2,c:"grau",sw:4,arrow:true});
+ const B=bsp===true?LB_BEISPIEL:(bsp||null);
+ t(-1000,-700,2000,70,44,"Lernübersicht: "+(bsp?B.thema:(thema||"Thema der Stunde")));
+ t(-1000,-632,2000,36,20,bsp?B.unter:"Fach · Lernbereich · Datum");
+ f(-1000,-580,2000,230,"blau","① KERNFRAGE · Was ist das Thema?");
+ f(-1000,-320,1180,600,"gruen","② KERNWISSEN · Was muss ich wissen?");
+ f(200,-320,800,600,"orange","③ ZUSAMMENHÄNGE · Wie hängt es zusammen?");
+ f(-1000,310,1180,430,"lila","④ BEISPIEL / FALL · Wie sieht es in der Praxis aus?");
+ f(200,310,800,430,"tuerkis","⑤ LERNANKER · Was muss ich am Ende aus dem Kopf können?");
+ n(-980,-520,1960,150,"gelb",bsp?B.frage:"Schreibe die Leitfrage der Stunde in einem Satz.",bsp?26:22);
+ if(bsp){const k=B.wissen.length,w=Math.floor((1140-20*(k-1))/k);B.wissen.forEach((x,i)=>n(-980+i*(w+20),-250,w,520,x.c||"gelb",x.text,k>2?20:23));}
+ else{["Kernbegriff 1: Definition in eigenen Worten","Kernbegriff 2: Merkmale, Beispiele","Kernbegriff 3: Wichtiges im Überblick"].forEach((tx,i)=>n(-980+i*390,-250,370,520,"gelb",tx,20));}
+ s(490,-80,220,120,"blau",bsp?(B.mitte||"Ich"):"Thema");
+ const bg=bsp?(B.begriffe||["Es","Über-Ich","Realität"]):["Begriff A","Begriff B","Begriff C"],fa=bsp?["rosa","lila","tuerkis"]:["gelb","gelb","gelb"];
+ s(230,-250,230,100,fa[0],bg[0]);s(740,-250,230,100,fa[1],bg[1]);s(490,90,220,90,fa[2],bg[2]);
+ l(520,-55,400,-150);l(680,-55,800,-150);l(600,40,600,90);
+ n(220,195,760,80,"gelb",bsp?B.zusammen:"Zusammenhang in einem Satz: … führt zu … , weil …",19);
+ n(-980,370,1140,340,"gelb",bsp?B.fall:"Ein Fall aus Kita, Schule oder Alltag: Was passiert? Wie zeigt sich das Thema? Was würde eine Fachkraft tun?",bsp?23:20);
+ (bsp?B.anker.slice(0,3):["Das kann ich aus dem Kopf: …","Das kann ich aus dem Kopf: …","Das kann ich aus dem Kopf: …"]).forEach((tx,i,arr)=>{const w=Math.floor((770-10*(arr.length-1))/arr.length);n(215+i*(w+10),370,w,340,"gelb",tx,bsp?21:19);});
+ return L;
+}
+// Vorlagen-Menü im Whiteboard (Lehrkräfte): beide Fassungen einfügen
+if(typeof WB_VORLAGEN!=="undefined"&&!WB_VORLAGEN.some(v=>v.name==="Lernübersicht (5 Bausteine)")){
+ WB_VORLAGEN.unshift({name:"Beispiel: Starkes und schwaches Ich",beschr:"Ausgefüllte Lernübersicht mit fünf Bausteinen",items:(x,y)=>lbLernItems(x,y,"",true)});
+ WB_VORLAGEN.unshift({name:"Lernübersicht (5 Bausteine)",beschr:"Kernfrage, Kernwissen, Zusammenhänge, Beispiel, Lernanker",items:(x,y)=>lbLernItems(x,y,"",false)});
+}
+async function lbItemsSchreiben(boardId,items){
+ const name=profile?.displayName||currentUser.email||"Lehrkraft",jobs=[];
+ items.forEach((teil,n)=>{
+  const std=WB_STANDARD[teil.type]||{};
+  const d={boardId,seite:1,c:std.c||"grau",fs:std.fs||18,z:Date.now()+n,authorUid:currentUser.uid,authorName:name,...std,...teil,createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+  Object.keys(d).forEach(k=>{if(d[k]===undefined)delete d[k];});
+  jobs.push(()=>setDoc(doc(collection(db,"whiteboardItems")),d));
+ });
+ for(let i=0;i<jobs.length;i+=20)await Promise.all(jobs.slice(i,i+20).map(f=>f()));
+}
+async function lbVorlageAnlegen(titel,beschr,beispiel){
  const r=await addDoc(collection(db,"whiteboards"),{title:(titel+" – Lernübersicht").slice(0,120),description:beschr,art:"tafel",schreibschutz:true,seiten:1,bg:"weiss",lernVorlage:true,createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+ await lbItemsSchreiben(r.id,lbLernItems(0,0,titel,!!beispiel));
  return r.id;
+}
+// ---- Ordner „Lernübersichten“ (in den Lernressourcen) ----
+async function lbOrdnerHtml(){
+ try{
+  const snap=await getDocs(query(collection(db,"whiteboards"),where("lernVorlage","==",true)));
+  const liste=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+  const lehrer=isTeacher();
+  const meine=lehrer?{}:Object.fromEntries(await Promise.all(liste.map(async b=>{try{const s=await getDoc(doc(db,"ppLernuebersicht",b.id+"_"+currentUser.uid));return[b.id,s.exists()];}catch(e){return[b.id,false];}})));
+  const karten=liste.map(b=>`<button type="button" class="card" style="text-align:left;cursor:pointer;border-left:4px solid #2f7fc6;font:inherit" onclick="lbOrdnerOeffnen('${esc(b.id)}')">
+   <strong>${esc(String(b.title||"Lernübersicht").replace(/\s*–\s*Lernübersicht$/,""))}</strong><br>
+   <small style="color:var(--muted)">${lehrer?"Vorlage öffnen und bearbeiten":(meine[b.id]?"Meine Kopie weiterbearbeiten ✓":"Eigene Kopie anlegen und ergänzen")}</small></button>`).join("");
+  return`<section class="resource-section" id="lernuebersichten"><div class="section-head"><div><div class="kicker">📁 ORDNER</div><h2>Lernübersichten</h2></div><span class="pill">${liste.length}</span></div>
+  <p style="color:var(--muted);margin:0 0 10px">Hier liegen alle Lernübersichten als Whiteboard. ${lehrer?"Du gestaltest sie, die Schüler:innen ergänzen sie in ihrer eigenen Kopie.":"Beim Öffnen bekommst du deine eigene Kopie: ergänze Notizen, Bilder und Zeichnungen und speichere sie als PDF."}</p>
+  ${lehrer?`<div class="form-actions" style="margin:0 0 12px"><button type="button" class="secondary" onclick="lbOrdnerNeu(false)">＋ Neue Lernübersicht (5 Bausteine)</button><button type="button" class="secondary" onclick="lbOrdnerNeu(true)">＋ Beispiel: Starkes und schwaches Ich</button><button type="button" class="primary" onclick="lbBereitstellen()">⬇ Lernübersichten aus Datei bereitstellen</button></div>`:""}
+  ${liste.length?`<div class="grid grid-3">${karten}</div>`:`<div class="card empty"><strong>Noch keine Lernübersicht.</strong><p>${lehrer?"Lege oben eine neue an oder hänge sie an eine Stunde bzw. ein Modul.":"Deine Lehrkraft legt sie nach und nach an."}</p></div>`}</section>`;
+ }catch(err){console.warn("Ordner Lernübersichten:",err);return"";}
+}
+// ---- Lernübersichten aus der Repo-Datei bereitstellen ----
+// Datei: lernuebersichten/lernuebersichten.json (Liste von Einträgen: id, thema, unter, datum (optional, nur F12Sb), frage, wissen, mitte, begriffe, zusammen, fall, anker)
+async function lbBereitstellen(){
+ if(!isTeacher())return;
+ let liste;
+ try{
+  const r=await fetch("lernuebersichten/lernuebersichten.json?v="+Date.now());
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  liste=await r.json();
+ }catch(err){console.error("Lernübersichten-Datei:",err);toast("Die Datei lernuebersichten/lernuebersichten.json wurde nicht gefunden.");return;}
+ if(!Array.isArray(liste)||!liste.length){toast("Die Datei enthält keine Lernübersichten.");return;}
+ if(!confirm(liste.length+" Lernübersicht"+(liste.length===1?"":"en")+" bereitstellen? Bereits bereitgestellte werden mit dem Inhalt aus der Datei überschrieben (deine Änderungen an diesen Whiteboards gehen verloren). Eigene Kopien der Schüler:innen bleiben unverändert."))return;
+ let neu=0,akt=0,fehler=0;
+ for(const e of liste){
+  try{
+   if(!e.id||!e.thema)throw new Error("id oder thema fehlt");
+   const alt=await getDocs(query(collection(db,"whiteboards"),where("lernKey","==",e.id)));
+   let bid;
+   if(alt.docs.length){
+    bid=alt.docs[0].id;
+    const its=await getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",bid)));
+    for(let i=0;i<its.docs.length;i+=20)await Promise.all(its.docs.slice(i,i+20).map(d=>deleteDoc(doc(db,"whiteboardItems",d.id))));
+    await updateDoc(doc(db,"whiteboards",bid),{title:(e.thema+" – Lernübersicht").slice(0,120)});
+    akt++;
+   }else{
+    const r=await addDoc(collection(db,"whiteboards"),{title:(e.thema+" – Lernübersicht").slice(0,120),description:"Lernübersicht: Zusammenfassung der Lehrkraft, Schüler:innen bekommen eine eigene Kopie zum Ergänzen",art:"tafel",schreibschutz:true,seiten:1,bg:"weiss",lernVorlage:true,lernKey:e.id,createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+    bid=r.id;neu++;
+   }
+   await lbItemsSchreiben(bid,lbLernItems(0,0,e.thema,e));
+   if(e.datum&&typeof PP12_CACHE!=="undefined"){
+    await setDoc(doc(db,"lehrplanTafeln",e.datum),{lernBoardId:bid},{merge:true});
+    PP12_CACHE.tafeln[e.datum]={...(PP12_CACHE.tafeln[e.datum]||{}),lernBoardId:bid};
+   }
+  }catch(err){fehler++;console.error("Lernübersicht bereitstellen:",e&&e.id,err);}
+ }
+ toast(`Lernübersichten: ${neu} neu, ${akt} aktualisiert${fehler?`, ${fehler} Fehler (Konsole)`:""}.`);
+ await render();
+}
+async function lbOrdnerOeffnen(id){
+ if(isTeacher()){openWhiteboard(id);return;}
+ try{const s=await getDoc(doc(db,"whiteboards",id));await lbMeineKopie(id,s.exists()?s.data().title:"");}catch(e){toast("Das hat nicht geklappt.");}
+}
+async function lbOrdnerNeu(beispiel){
+ if(!isTeacher())return;
+ let titel="Starkes und schwaches Ich";
+ if(!beispiel){titel=(prompt("Thema der Lernübersicht, z. B. „Das Instanzenmodell nach Freud“:","")||"").trim();if(!titel)return;}
+ try{
+  const id=await lbVorlageAnlegen(titel,"Lernübersicht: Zusammenfassung der Lehrkraft, Schüler:innen bekommen eine eigene Kopie zum Ergänzen",beispiel);
+  openWhiteboard(id);
+ }catch(err){console.error("Lernübersicht anlegen:",err);toast(err?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln prüfen.":"Die Lernübersicht konnte nicht angelegt werden.");}
 }
 // ---- Zeitstrahl-Stunde (F12Sb): Lernübersicht und Whiteboard neben der Tafel ----
 function pp12BausteineHtml(e){
@@ -20312,4 +20441,4 @@ async function wbExportPdf(){
  wb.pdfModus=true;
  try{await wbExport();}finally{wb.pdfModus=false;}
 }
-Object.assign(window,{pp12Lern:typeof pp12Lern==="function"?pp12Lern:undefined,pp12Wb:typeof pp12Wb==="function"?pp12Wb:undefined});
+Object.assign(window,{pp12Lern:typeof pp12Lern==="function"?pp12Lern:undefined,pp12Wb:typeof pp12Wb==="function"?pp12Wb:undefined,lbOrdnerOeffnen,lbOrdnerNeu,lbBereitstellen});

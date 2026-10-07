@@ -737,8 +737,10 @@ service cloud.firestore {
     // Elements und Lehrkräfte.
     // ---------------------------------------------------------
     function wbOffen(boardId) {
+      // Eine Tafel (art "tafel") verändern ausschließlich Lehrkräfte, unabhängig vom Schreibschutz.
       return isTeacher()
-        || get(/databases/$(database)/documents/whiteboards/$(boardId)).data.get('schreibschutz', false) == false;
+        || (get(/databases/$(database)/documents/whiteboards/$(boardId)).data.get('art', 'team') != 'tafel'
+            && get(/databases/$(database)/documents/whiteboards/$(boardId)).data.get('schreibschutz', false) == false);
     }
 
     match /whiteboards/{id} {
@@ -828,6 +830,21 @@ service cloud.firestore {
         && resource.data.uid == request.auth.uid
         && request.resource.data.uid == request.auth.uid;
       allow delete: if isTeacher();
+    }
+
+    // Lernübersicht: Die Lehrkraft legt die Vorlage im Modul bzw. in der Stunde an (ppModule / lehrplanTafeln).
+    // Jede Person hat darin ihre eigene Fassung mit Ergänzungen und Notizen: ein Dokument je Person, ID "<lernId>_<uid>".
+    // Lesen: die Person selbst und Lehrkräfte.
+    match /ppLernuebersicht/{id} {
+      allow read: if isApproved()
+        && (isTeacher() || id.matches('.*_' + request.auth.uid));
+      allow create: if isApproved()
+        && request.resource.data.uid == request.auth.uid
+        && id == request.resource.data.lernId + '_' + request.auth.uid;
+      allow update: if isApproved()
+        && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isTeacher() || (isApproved() && resource.data.uid == request.auth.uid);
     }
 
     // Fortschritt im Selbstlernkurs: ein Dokument je Person und Modul.
