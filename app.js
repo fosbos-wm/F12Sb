@@ -5514,7 +5514,7 @@ function ppmDndStart(){
  const k=ppmDnd.k;if(!k||ppmDnd.aktiv)return;
  ppmDnd.aktiv=true;
  const r=k.getBoundingClientRect(),g=k.cloneNode(true);
- g.classList.add("ppm-geist");g.removeAttribute("data-ppm");
+ g.classList.add("ppm-geist","z"+ppmZoomLesen());g.removeAttribute("data-ppm");
  g.style.width=r.width+"px";g.style.left=r.left+"px";g.style.top=r.top+"px";
  ppmDnd.ox=ppmDnd.px-r.left;ppmDnd.oy=ppmDnd.py-r.top;
  document.body.appendChild(g);ppmDnd.geist=g;
@@ -5531,7 +5531,7 @@ function ppmDndStart(){
 function ppmDndZiel(){
  const g=ppmDnd.geist;if(!g)return;
  g.style.left=(ppmDnd.px-ppmDnd.ox)+"px";g.style.top=(ppmDnd.py-ppmDnd.oy)+"px";
- const el=document.elementFromPoint(ppmDnd.px,ppmDnd.py),w=el&&el.closest?el.closest(".ppm-woche[data-w]"):null;
+ const el=document.elementFromPoint(ppmDnd.px,ppmDnd.py),w=el&&el.closest?el.closest(".ppm-woche[data-w],.pp12-woche[data-w]"):null;
  document.querySelectorAll(".ppm-ziel,.ppm-vor,.ppm-ende").forEach(x=>x.classList.remove("ppm-ziel","ppm-vor","ppm-ende"));
  ppmDnd.ziel=null;ppmDnd.vor=null;
  if(!w)return;
@@ -5556,7 +5556,7 @@ async function ppmDndAblegen(id,zielW,vorId){
   if(!pr.ok){toast(pr.fehler||`In der Woche ${fmtKurz(neu.start)}–${fmtKurz(neu.end)} ist nicht genug Platz.`);return;}
  }
  // Reihenfolge der Zielwoche so, wie sie gerade angezeigt wird, mit dem gezogenen Modul an der Ablagestelle
- const zeile=document.querySelector(`.ppm-woche[data-w="${zielW}"] .ppm-reihe`);
+ const zeile=document.querySelector(`.ppm-woche[data-w="${zielW}"] .ppm-reihe,.pp12-woche[data-w="${zielW}"] .ppm-reihe`);
  let ids=zeile?[...zeile.querySelectorAll(".ppm-karte[data-id]")].map(c=>c.dataset.id).filter(x=>x!==id):PPM.liste.filter(x=>x.start===zielW&&x.id!==id).map(x=>x.id);
  const pos=vorId?ids.indexOf(vorId):-1;
  if(pos>=0)ids.splice(pos,0,id);else ids.push(id);
@@ -5622,6 +5622,94 @@ if(!window.__ppmDndGebunden){
 }
 
 
+// ---- Stunden im Unterricht-Plan per Drag and Drop verschieben ----
+// Die Stunde wird an den Zieltermin gelegt, die Stunden dazwischen rücken je einen Unterrichtstag nach (wie bei ‹ › über mehrere Termine).
+const p12Dnd={k:null,id:null,x:0,y:0,px:0,py:0,aktiv:false,geist:null,timer:0,touch:false,ziel:null,raf:0,ptr:null,ox:0,oy:0};
+function p12DndAuf(){
+ clearTimeout(p12Dnd.timer);cancelAnimationFrame(p12Dnd.raf);
+ if(p12Dnd.geist)p12Dnd.geist.remove();
+ if(p12Dnd.k)p12Dnd.k.classList.remove("p12-zieh");
+ document.querySelectorAll(".p12-ziel").forEach(x=>x.classList.remove("p12-ziel"));
+ document.body.classList.remove("ppm-dnd-an");
+ Object.assign(p12Dnd,{k:null,id:null,aktiv:false,geist:null,timer:0,ziel:null,raf:0,ptr:null});
+}
+function p12DndStart(){
+ const k=p12Dnd.k;if(!k||p12Dnd.aktiv)return;
+ p12Dnd.aktiv=true;
+ const r=k.getBoundingClientRect(),g=k.cloneNode(true);
+ g.classList.add("p12-geist");g.removeAttribute("data-sid");g.removeAttribute("data-slot");
+ g.style.width=r.width+"px";g.style.left=r.left+"px";g.style.top=r.top+"px";
+ p12Dnd.ox=p12Dnd.px-r.left;p12Dnd.oy=p12Dnd.py-r.top;
+ document.body.appendChild(g);p12Dnd.geist=g;
+ k.classList.add("p12-zieh");document.body.classList.add("ppm-dnd-an");
+ try{if(navigator.vibrate&&p12Dnd.touch)navigator.vibrate(15);}catch(e){}
+ const lauf=()=>{
+  if(!p12Dnd.aktiv)return;
+  const y=p12Dnd.py,h=window.innerHeight;
+  if(y<80)window.scrollBy(0,-14);else if(y>h-80)window.scrollBy(0,14);
+  p12DndZiel();p12Dnd.raf=requestAnimationFrame(lauf);
+ };
+ p12Dnd.raf=requestAnimationFrame(lauf);
+}
+function p12DndZiel(){
+ const g=p12Dnd.geist;if(!g)return;
+ g.style.left=(p12Dnd.px-p12Dnd.ox)+"px";g.style.top=(p12Dnd.py-p12Dnd.oy)+"px";
+ document.querySelectorAll(".p12-ziel").forEach(x=>x.classList.remove("p12-ziel"));
+ p12Dnd.ziel=null;
+ const el=document.elementFromPoint(p12Dnd.px,p12Dnd.py),z=el&&el.closest?el.closest("[data-slot]"):null;
+ if(!z||z===p12Dnd.k)return;
+ z.classList.add("p12-ziel");p12Dnd.ziel=z.dataset.slot;
+}
+async function p12DndAblegen(id,slot){
+ if(!isTeacher()||!slot)return;
+ await pp12Aendern(m=>{
+  const a=m.arr,i=a.indexOf(id),j=PP12_MSLOTS.indexOf(slot);
+  if(i<0||j<0)return{fehler:"Dieser Termin ist nicht verfügbar."};
+  if(i===j)return{fehler:"Die Stunde liegt schon dort."};
+  const t=a[i];
+  if(j<i){for(let k=i;k>j;k--)a[k]=a[k-1];}else{for(let k=i;k<j;k++)a[k]=a[k+1];}
+  a[j]=t;
+  return{m};
+ },"Stunde verschoben.");
+}
+if(!window.__p12DndGebunden){
+ window.__p12DndGebunden=true;
+ document.addEventListener("pointerdown",e=>{
+  if(p12Dnd.k||ppmDnd.k||!isTeacher()||(e.pointerType==="mouse"&&e.button!==0))return;
+  const k=e.target.closest&&e.target.closest(".pp12-bar[data-sid]");
+  if(!k||e.target.closest("button,a,input,select,textarea"))return;
+  Object.assign(p12Dnd,{k,id:k.dataset.sid,x:e.clientX,y:e.clientY,px:e.clientX,py:e.clientY,touch:e.pointerType!=="mouse",ptr:e.pointerId,aktiv:false});
+  if(p12Dnd.touch)p12Dnd.timer=setTimeout(p12DndStart,380);
+ });
+ document.addEventListener("pointermove",e=>{
+  if(!p12Dnd.k||e.pointerId!==p12Dnd.ptr)return;
+  p12Dnd.px=e.clientX;p12Dnd.py=e.clientY;
+  const weg=Math.hypot(e.clientX-p12Dnd.x,e.clientY-p12Dnd.y);
+  if(!p12Dnd.aktiv){
+   if(p12Dnd.touch){if(weg>10)p12DndAuf();}
+   else if(weg>8)p12DndStart();
+   return;
+  }
+  e.preventDefault();
+ });
+ document.addEventListener("touchmove",e=>{if(p12Dnd.aktiv)e.preventDefault();},{passive:false});
+ const ende=async(e,abbruch)=>{
+  if(!p12Dnd.k||(e.pointerId!==undefined&&e.pointerId!==p12Dnd.ptr))return;
+  const war=p12Dnd.aktiv,id=p12Dnd.id;
+  if(war&&!abbruch)p12DndZiel();
+  const ziel=p12Dnd.ziel;
+  p12DndAuf();
+  if(!war)return;
+  const stopp=ev=>{ev.stopPropagation();ev.preventDefault();};
+  document.addEventListener("click",stopp,{capture:true,once:true});
+  setTimeout(()=>document.removeEventListener("click",stopp,{capture:true}),350);
+  if(!abbruch&&ziel)await p12DndAblegen(id,ziel);
+ };
+ document.addEventListener("pointerup",e=>ende(e,false));
+ document.addEventListener("pointercancel",e=>ende(e,true));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&p12Dnd.k)ende({},true);});
+}
+
 // Zusatzmodule einer Schulwoche (Karten wie in der F11Sb) mit Plus-Zeichen für Lehrkräfte
 function pp12ZusatzHtml(wochenId){
  const l=PPM.liste.filter(x=>x.start===wochenId&&PPM_ZUSATZ.includes(x.modul));
@@ -5660,6 +5748,70 @@ async function pp12RessourcenZaehlen(){
  PP12_RES.zaehler=z;PP12_RES.geladen=Date.now();
  return z;
 }
+// ---- Zoom im Unterricht-Plan: Normal / Kompakt / Übersicht, dazu Verschieben per Drag and Drop ----
+function ppmZoomLesen(){try{const z=Number(localStorage.getItem("pp12Zoom"));return z>=1&&z<=3?z:1;}catch(e){return 1;}}
+function ppmZoomSetzen(z){
+ z=Math.max(1,Math.min(3,Math.round(z)));
+ try{localStorage.setItem("pp12Zoom",String(z));}catch(e){}
+ const p=document.querySelector(".pp12-plan");if(!p)return;
+ const mitte=window.innerHeight/2;let anker=null,off=0;
+ for(const w of p.querySelectorAll(".pp12-woche,.pp12-ferien")){const r=w.getBoundingClientRect();if(r.bottom>=mitte){anker=w;off=r.top;break;}}
+ p.classList.remove("z1","z2","z3");p.classList.add("z"+z);
+ p.querySelectorAll("[data-p12zoom]").forEach(b=>{const an=Number(b.dataset.p12zoom)===z;b.classList.toggle("an",an);b.setAttribute("aria-pressed",an?"true":"false");});
+ if(anker){const r=anker.getBoundingClientRect();window.scrollBy(0,r.top-off);}
+}
+const ppmZoomRad={warte:false};
+if(!window.__pp12ZoomGebunden){
+ window.__pp12ZoomGebunden=true;
+ window.addEventListener("wheel",e=>{
+  if(!(e.ctrlKey||e.metaKey)||!e.target.closest||!e.target.closest(".pp12-plan"))return;
+  e.preventDefault();
+  const z=ppmZoomLesen(),n=e.deltaY>0?z+1:z-1;
+  if(n!==z&&n>=1&&n<=3&&!ppmZoomRad.warte){ppmZoomRad.warte=true;setTimeout(()=>{ppmZoomRad.warte=false;},350);ppmZoomSetzen(n);}
+ },{passive:false});
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-p12zoom]");if(b)ppmZoomSetzen(Number(b.dataset.p12zoom)||1);});
+}
+function ppmZoomLeisteHTML(){
+ const z=ppmZoomLesen(),b=(n,t)=>`<button type="button" class="ppm-zb${z===n?" an":""}" data-p12zoom="${n}" aria-pressed="${z===n}">${t}</button>`;
+ return`<div class="ppm-zoomleiste"><b>Ansicht</b>${b(1,"Normal")}${b(2,"Kompakt")}${b(3,"Übersicht")}<small>${isTeacher()?"Zum Verschieben in „Übersicht“ wechseln: Stunden und Zusatzmodule lassen sich per Drag and Drop ziehen. ":""}Strg + Mausrad zoomt ebenfalls.</small></div>`;
+}
+const PP12_ZOOM_CSS=(()=>{
+ const K2=":is(.pp12-plan.z2 .ppm-karte,.ppm-karte.ppm-geist.z2)",K3=":is(.pp12-plan.z3 .ppm-karte,.ppm-karte.ppm-geist.z3)";
+ return`
+  .ppm-zoomleiste{position:sticky;top:0;z-index:30;display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;margin:0 0 10px;border-radius:12px;background:#fff;border:1px solid #dbe4ec;box-shadow:0 4px 14px rgba(24,67,96,.10)}
+  .ppm-zoomleiste small{color:#6b7c93;font-size:12px;flex:1 1 220px}
+  .ppm-zb{min-height:36px;padding:0 14px;border-radius:999px;border:1.5px solid #b9c8d6;background:#fff;font:inherit;font-size:13px;font-weight:700;color:#3a4a5c;cursor:pointer}
+  .ppm-zb.an{background:#075a9d;border-color:#075a9d;color:#fff}
+  .pp12-bar[data-sid]{cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+  .pp12-bar.p12-zieh{opacity:.3}.p12-geist{position:fixed!important;z-index:9999;pointer-events:none;opacity:.92;box-shadow:0 14px 34px rgba(24,67,96,.35);transform:rotate(1.5deg);margin:0}
+  [data-slot].p12-ziel{outline:3px dashed #3fa66a;outline-offset:1px;background-color:#eef7ee}
+  .pp12-woche.ppm-ziel{background:#eef7ee;outline:2px dashed #3fa66a}
+  .pp12-plan.z2 .pp12-woche{padding:4px 6px;margin:0 0 6px;grid-template-columns:110px 1fr}
+  .pp12-plan.z2 .pp12-bar{min-height:0;padding:5px 8px;gap:2px}.pp12-plan.z2 .pp12-titel{font-size:12px}
+  .pp12-plan.z2 .pp12-tag,.pp12-plan.z2 .pp12-fuss,.pp12-plan.z2 .pp12-res-btn{display:none}
+  .pp12-plan.z2 .pp12-leer,.pp12-plan.z2 .pp12-reserve{min-height:0;padding:5px 8px}
+  .pp12-plan.z2 .pp12-zusatz{margin-top:4px;padding:4px 6px}.pp12-plan.z2 .pp12-zlabel{display:none}
+  .pp12-plan.z2 .pp12-ferien{margin-left:120px;padding:6px 12px}
+  ${K2}{padding:6px 8px 6px 10px}${K2} .ppm-txt b{font-size:13px}${K2} .ppm-txt small{font-size:11px}
+  ${K2} .ppm-status,${K2} .ppm-mini,${K2} .ppm-chip,${K2} .lb-pills,${K2} .ppm-mv{display:none!important}${K2} .ppm-edit{height:22px;padding:0 6px;font-size:11px}
+  .pp12-plan.z3 .pp12-woche{padding:3px 6px;margin:0 0 3px;gap:8px;grid-template-columns:64px 1fr;border-radius:8px}
+  .pp12-plan.z3 .pp12-wlabel{font-size:10px;line-height:1.25}.pp12-plan.z3 .pp12-wlabel strong{font-size:12px}.pp12-plan.z3 .pp12-wlabel em{display:none}
+  .pp12-plan.z3 .pp12-tage{gap:4px}
+  .pp12-plan.z3 .pp12-bar{min-height:0;padding:3px 6px;gap:1px;border-left-width:5px;border-radius:6px}
+  .pp12-plan.z3 .pp12-kopf{font-size:9px}.pp12-plan.z3 .pp12-kopf span:last-child{display:none}
+  .pp12-plan.z3 .pp12-titel{font-size:11px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pp12-plan.z3 .pp12-tag,.pp12-plan.z3 .pp12-fuss,.pp12-plan.z3 .pp12-ctl,.pp12-plan.z3 .pp12-res-btn,.pp12-plan.z3 .pp12-reserve small,.pp12-plan.z3 .pp12-leer small{display:none}
+  .pp12-plan.z3 .pp12-leer,.pp12-plan.z3 .pp12-reserve{min-height:0;padding:3px 6px;border-radius:6px;gap:0}.pp12-plan.z3 .pp12-reserve strong{font-size:11px}
+  .pp12-plan.z3 .pp12-zusatz{margin-top:3px;padding:3px 5px;display:flex;gap:6px;align-items:center}.pp12-plan.z3 .pp12-zlabel{display:none}
+  .pp12-plan.z3 .ppm-reihe{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:4px;flex:1}
+  .pp12-plan.z3 .ppm-neu{font-size:0;min-height:24px;padding:0 10px;border-radius:8px}.pp12-plan.z3 .ppm-neu::before{content:"＋";font-size:14px}
+  ${K3}{grid-column:auto;padding:3px 6px 3px 8px;border-left-width:5px;border-radius:8px;min-height:26px;align-items:center}
+  ${K3} .ppm-txt{gap:0}${K3} .ppm-txt b{font-size:11px;line-height:1.2;padding-right:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  ${K3} .ppm-txt small,${K3} .ppm-status,${K3} .ppm-mini,${K3} .ppm-chip,${K3} .lb-pills,${K3} .ppm-mv,${K3} .ppm-edit,${K3} .ppm-ic{display:none!important}
+  ${K3} .ppm-haken-k{width:16px;height:16px;font-size:10px;right:3px;top:3px}
+  .pp12-plan.z3 .pp12-ferien{margin:3px 0 3px 72px;padding:3px 10px;font-size:11px}
+  @media (max-width:760px){.pp12-plan.z2 .pp12-woche,.pp12-plan.z3 .pp12-woche{grid-template-columns:1fr}.pp12-plan.z3 .pp12-tage,.pp12-plan.z2 .pp12-tage{grid-template-columns:1fr}.pp12-plan.z2 .pp12-ferien,.pp12-plan.z3 .pp12-ferien{margin-left:0}}`;
+})();
 async function renderUnterrichtPP(){
  await pp12DatenLaden();
  await ppmLaden();
@@ -5695,7 +5847,8 @@ async function renderUnterrichtPP(){
    const span=s.off===0?1:2;
    if(s.e){
     const e=s.e,c=pp12BarFarbe(e),istHeute=e.d===heute;
-    return`<div class="pp12-bar s${span}${istHeute?" heute":""}"style="--c:${c}">
+    const ziehbar=isTeacher()&&!PP12_FIX(e)&&e.id;
+    return`<div class="pp12-bar s${span}${istHeute?" heute":""}"style="--c:${c}"${ziehbar?` data-sid="${esc(e.id)}" data-slot="${e.d}"`:""}>
      <div class="pp12-kopf"><span>${tageName[s.off]} ${pp12Datum(e.d)}</span><span>${e.h} Std.</span></div>
      <div class="pp12-titel">${esc(e.t)}</div>
      <div class="pp12-tag">${esc(pp12BarTag(e))}</div>
@@ -5705,11 +5858,11 @@ async function renderUnterrichtPP(){
    }
    const fe=pp12Ferien(s.d),grund=fe?fe.titel:(PP12_FREI[s.d]||(s.d<PP12_START?"vor Planbeginn":"kein Unterricht"));
    if(!fe&&PP12_MSLOTS.includes(s.d)){
-    return`<div class="pp12-reserve s${span}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><strong>Reserve</strong><small>freier Termin${isTeacher()?"":" – Zeit zum Vertiefen oder Wiederholen"}</small>${isTeacher()?`<button type="button"class="pp12-res-btn"onclick="pp12ReserveFuellen('${s.d}')">＋ Stunde eintragen</button>`:""}</div>`;
+    return`<div class="pp12-reserve s${span}" data-slot="${s.d}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><strong>Reserve</strong><small>freier Termin${isTeacher()?"":" – Zeit zum Vertiefen oder Wiederholen"}</small>${isTeacher()?`<button type="button"class="pp12-res-btn"onclick="pp12ReserveFuellen('${s.d}')">＋ Stunde eintragen</button>`:""}</div>`;
    }
    return`<div class="pp12-leer s${span}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><small>${esc(grund)}</small></div>`;
   }).join("");
-  rows+=`<div class="pp12-woche${istJetzt?" jetzt":""}">
+  rows+=`<div class="pp12-woche${istJetzt?" jetzt":""}" data-w="${m}">
    <div class="pp12-wlabel"><strong>KW ${pp12KW(m)}</strong><span>${pp12Datum(m)}–${pp12Datum(pp12Add(m,4))}</span><em>${wochenStd} Std.${reserveStd?` + ${reserveStd} Std. Reserve`:""}${istJetzt?" · diese Woche":""}</em></div>
    <div class="pp12-rechts"><div class="pp12-tage">${cells}</div>${pp12ZusatzHtml(m)}</div>
   </div>`;
@@ -5777,6 +5930,7 @@ async function renderUnterrichtPP(){
   .pp12-rechts{min-width:0}
   .pp12-zusatz{margin-top:6px;padding:6px 8px;border-radius:10px;background:rgba(255,255,255,.65);border:1px dashed #b9c8d6}
   .pp12-zlabel{font-size:11px;font-weight:700;color:#51627a;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+  ${PP12_ZOOM_CSS}
   @media (max-width:760px){
    .pp12-woche{grid-template-columns:1fr}.pp12-wlabel{flex-direction:row;gap:10px;align-items:baseline;flex-wrap:wrap}
    .pp12-tage{grid-template-columns:1fr}.s1,.s2{grid-column:auto}
@@ -5793,7 +5947,7 @@ async function renderUnterrichtPP(){
  </div>
  ${isTeacher()?`<p style="margin:0 0 8px"><button type="button"class="text-button"onclick="pp12Zuruecksetzen()">Plan zurücksetzen</button></p>`:""}
  <div class="pp12-legende">${legende}</div>
- ${rows}
+ <div class="pp12-plan z${ppmZoomLesen()}">${ppmZoomLeisteHTML()}${rows}</div>
  ${parkHtml}
  ${wegHtml}
  ${footer()}`;
