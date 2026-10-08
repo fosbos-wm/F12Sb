@@ -7665,7 +7665,7 @@ async function ladeCheckoutDaten(){
   try{const e=await getDoc(doc(db,"checkoutEinstellungen","pp"));einst=e.exists()?e.data():{};}catch(e){}
   const meineAbgaben={};let auswahl=null;const stat={};
   if(lehrer){
-   try{(await getDocs(collection(db,"checkoutAbgaben"))).docs.forEach(x=>{const a=x.data();if(!a.ausgewertet)return;const t=(stat[a.checkoutId]=stat[a.checkoutId]||{n:0,summe:0});t.n++;t.summe+=Number(a.notenpunkte)||0;});}catch(e){console.error("Check-out-Statistik:",e);}
+   try{const klasseUids=new Set((await getAllUsersForLernstand()).map(u=>u.uid));(await getDocs(collection(db,"checkoutAbgaben"))).docs.forEach(x=>{const a=x.data();if(!a.ausgewertet||!klasseUids.has(a.uid))return;const t=(stat[a.checkoutId]=stat[a.checkoutId]||{n:0,summe:0});t.n++;t.summe+=Number(a.notenpunkte)||0;});}catch(e){console.error("Check-out-Statistik:",e);}
   }
   if(!lehrer){
    const s=await getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));
@@ -11759,7 +11759,7 @@ function wbNamenModal(id){
  $("wbNamenKlasse").addEventListener("click",async()=>{
   try{
    const s=await getDocs(collection(db,"users"));
-   const n=s.docs.map(d=>d.data()).filter(u=>u.status==="approved"&&u.role==="student").map(u=>wbKurz(u.displayName)||u.displayName).filter(Boolean).sort((a,b)=>a.localeCompare(b,"de"));
+   const n=s.docs.map(d=>d.data()).filter(u=>u.status==="approved"&&u.role==="student"&&istKlasse12Sb(u)).map(u=>wbKurz(u.displayName)||u.displayName).filter(Boolean).sort((a,b)=>a.localeCompare(b,"de"));
    $("wbNamenText").value=n.join("\n");toast(`${n.length} Namen geladen. Prüfe die Liste und speichere.`);
   }catch(e){toast("Die Klassenliste konnte nicht geladen werden.");}
  });
@@ -13416,7 +13416,7 @@ async function renderZufallspicker(){
 async function pickRandomStudent(){
  try{
  const snap=await getDocs(collection(db,"users"));
- const students=snap.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved");
+ const students=snap.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&u.role!=="teacher"&&u.role!=="admin"&&istKlasse12Sb(u));
  const remaining=students.filter(u=>!pickedStudentUids.includes(u.uid));
  const pool=remaining.length?remaining:students;
  if(!pool.length){toast("Keine freigeschalteten Klassenmitglieder gefunden.");return}
@@ -18945,12 +18945,35 @@ function lernstandBar(points,max=3){
  return`<span class="ls-mini-bar"><i style="width:${Math.round(p/max*100)}%"></i></span>`;
 }
 
+// ---- Klassenliste 12Sb (Nachname, Vorname) ----
+// Nur diese Personen zählen in Lernständen, Ergebnissen, Check-outs und Auslosungen als Schüler:innen.
+// Alle anderen Konten sind Lehrkräfte (oder Testkonten) und tauchen dort nicht auf.
+// Ein Namensteil mit * am Ende gilt als Wortanfang (bei gekürzten Nachnamen).
+// Neue Schüler:innen: hier eine Zeile ergänzen, z. B. ["Mustermann","Max"].
+const KLASSE_12SB=[
+ ["Abou","El","Ibrahim"],["Atanasov","Pavel"],["Dekinger","Florian"],["Dreher","Paula"],["Eckert","Johanna"],
+ ["Felber","Greta"],["Fleischhac*","Sophia"],["Köhler","Mia"],["Kubesch","Mia"],["Landua","Lukas"],
+ ["Lange","Katharina"],["Lautner","Sophia"],["Nagel","Sophia"],["Ostler","Sophie"],["Randow","Amelia"],
+ ["Richter","Laura"],["Rudolph","Alia"],["Rüggeberg","Amina"],["Schiller","Ronja"],["Sepp","Cosima"],
+ ["Spöttel","Laura"],["Süß","Clara"],["Süß","Maya"]
+];
+function klassenNamensteile(s){
+ return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
+  .replace(/ß/g,"ss").replace(/ae/g,"a").replace(/oe/g,"o").replace(/ue/g,"u").split(/[^a-z*]+/).filter(Boolean);
+}
+const KLASSE_12SB_TEILE=KLASSE_12SB.map(e=>klassenNamensteile(e.join(" ")));
+// true, wenn der Anzeigename alle Namensteile eines Listeneintrags enthält (Reihenfolge egal, Akzente egal, ü = ue, ö = oe, ä = ae)
+function istKlasse12Sb(u){
+ const teile=klassenNamensteile((u&&(u.displayName||u.name))||"").map(x=>x.replace(/\*/g,""));
+ if(!teile.length)return false;
+ return KLASSE_12SB_TEILE.some(e=>e.every(x=>x.endsWith("*")?teile.some(t=>t.startsWith(x.slice(0,-1))):teile.includes(x)));
+}
 async function getAllUsersForLernstand(){
  if(!isTeacher()) throw new Error("Nur Lehrkräfte dürfen die Schülerübersicht öffnen.");
  try{
  const snap=await getDocs(collection(db,"users"));
  return snap.docs.map(d=>({uid:d.id,...d.data()}))
- .filter(u=>u.role!=="teacher"&&u.role!=="admin")
+ .filter(u=>u.role!=="teacher"&&u.role!=="admin"&&istKlasse12Sb(u))
  .sort((a,b)=>String(a.displayName||a.email||"").localeCompare(String(b.displayName||b.email||""),"de"));
  }catch(e){
  console.error("Schülerliste Lernstand:",e);
