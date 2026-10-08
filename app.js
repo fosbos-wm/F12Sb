@@ -8384,7 +8384,147 @@ const CO_AUFGABENBANK=[
     "erklaerung": "Die Haupttriebe arbeiten gegeneinander, sind aber in der Regel verschränkt. Nur bei krankhaften Zuständen zerfällt die Verschränkung."
    }
   ]
- }
+ },
+ {
+ "id": "ich-instanzen-fall",
+ "titel": "Freud: Instanzen im Alltag (Wohnheim)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Wohnheim Sonnenhof",
+  "zeilen": false,
+  "text": "Im Wohnheim „Sonnenhof“ steht der 16-jährige Kerem abends allein in der Küche. Auf der Arbeitsplatte liegen Süßigkeiten, die für den Gruppenabend am Wochenende gekauft wurden. Kerem hat großen Heißhunger und greift nach der Tüte. Da hört er den Betreuer im Flur, und ihm fällt ein, dass er den anderen versprochen hat, die Vorräte nicht anzurühren. Er legt die Tüte zurück und isst einen Apfel. Am nächsten Morgen erzählt er der Sozialpädagogin Frau Weiß, dass er in der Nacht von einem verschlossenen Raum geträumt habe. Auf ihre Frage, was ihn am Abend beschäftigt habe, fällt ihm ein, dass sein Vater früher Süßigkeiten als Belohnung verteilte. Frau Weiß weiß aus der Akte, dass diese Belohnungen mit Streit endeten. Zu diesem Streit fällt Kerem nichts ein; er spürt nur ein unangenehmes Ziehen im Bauch."
+ },
+ "kontext": "",
+ "stamm": "Kerems Verhalten in der Küche lässt sich mit dem Instanzenmodell nach Freud fachlich zutreffend deuten, wenn …",
+ "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… die Erinnerung an das Versprechen dem Ich zugeordnet wird, weil das Ich die moralischen Gebote der Gemeinschaft vertritt.",
+   "richtig": false,
+   "erklaerung": "Gebote und Verbote vertritt das Über-Ich (Moralitätsprinzip). Das Ich vermittelt zwischen den Instanzen und der Realität."
+  },
+  {
+   "text": "… der Heißhunger als Anspruch des Es verstanden wird, das nach dem Lustprinzip auf unmittelbare Befriedigung drängt.",
+   "richtig": true,
+   "erklaerung": "Das Es enthält die Triebe, Wünsche und Bedürfnisse und folgt dem Lustprinzip."
+  },
+  {
+   "text": "… die Entscheidung für den Apfel als Lösung gilt, bei der das Es seinen Anspruch nach dem Moralitätsprinzip durchgesetzt hat.",
+   "richtig": false,
+   "erklaerung": "Das Es folgt dem Lustprinzip. Das Moralitätsprinzip gehört zum Über-Ich."
+  },
+  {
+   "text": "… der Betreuer im Flur als Teil der Außenwelt gilt, an dem sich das Ich bei seiner Abwägung nach dem Realitätsprinzip ausrichtet.",
+   "richtig": true,
+   "erklaerung": "Das Ich vermittelt zwischen Es, Über-Ich und den Anforderungen der Realität (Realitätsprinzip)."
+  }
+ ]
+},
+ {
+ "id": "ich-topisch-fall",
+ "titel": "Freud: Schichten des Bewusstseins (topisches Modell)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Wohnheim Sonnenhof",
+  "zeilen": false,
+  "text": "Im Wohnheim „Sonnenhof“ steht der 16-jährige Kerem abends allein in der Küche. Auf der Arbeitsplatte liegen Süßigkeiten, die für den Gruppenabend am Wochenende gekauft wurden. Kerem hat großen Heißhunger und greift nach der Tüte. Da hört er den Betreuer im Flur, und ihm fällt ein, dass er den anderen versprochen hat, die Vorräte nicht anzurühren. Er legt die Tüte zurück und isst einen Apfel. Am nächsten Morgen erzählt er der Sozialpädagogin Frau Weiß, dass er in der Nacht von einem verschlossenen Raum geträumt habe. Auf ihre Frage, was ihn am Abend beschäftigt habe, fällt ihm ein, dass sein Vater früher Süßigkeiten als Belohnung verteilte. Frau Weiß weiß aus der Akte, dass diese Belohnungen mit Streit endeten. Zu diesem Streit fällt Kerem nichts ein; er spürt nur ein unangenehmes Ziehen im Bauch."
+ },
+ "kontext": "",
+ "stamm": "Die Schilderung am nächsten Morgen lässt sich mit dem topischen Modell (Schichten des Bewusstseins) fachlich zutreffend erklären, wenn …",
+ "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… die Erinnerung an die Belohnungen des Vaters als vorbewusster Inhalt gilt, der durch die Nachfrage ins Bewusstsein gelangte.",
+   "richtig": true,
+   "erklaerung": "Vorbewusste Inhalte können durch Aufmerksamkeit, eventuell auch durch einen Schlüsselreiz, bewusst werden."
+  },
+  {
+   "text": "… das unangenehme Ziehen im Bauch zeigt, dass unbewusste Inhalte direkt bewusst erfahren werden können.",
+   "richtig": false,
+   "erklaerung": "Nach dem deskriptiven Aspekt kann auf unbewusste Inhalte nur geschlossen werden; sie können nicht bewusst erfahren werden."
+  },
+  {
+   "text": "… der Traum als Hinweis auf Unbewusstes verstanden wird, auf das sich nur indirekt schließen lässt.",
+   "richtig": true,
+   "erklaerung": "Träume, Symptome, Assoziationen und Fehlleistungen sind Wege, auf denen sich Unbewusstes bemerkbar macht (deskriptiver Aspekt)."
+  },
+  {
+   "text": "… die fehlende Erinnerung an den Streit durch eine aktive Gegenkraft erklärt wird, die den Inhalt im Unbewussten hält.",
+   "richtig": true,
+   "erklaerung": "Nach dem dynamischen Aspekt drängen unbewusste Inhalte ins Bewusstsein und werden durch Gegenbesetzung im Unbewussten gehalten."
+  }
+ ]
+},
+ {
+ "id": "ich-staerke-schwaeche-fall",
+ "titel": "Freud: Ich-Stärke und Ich-Schwäche (Ferienlager)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Ferienlager",
+  "zeilen": false,
+  "text": "Im Ferienlager der Jugendhilfe beobachtet die Erzieherin Frau Roth drei Vierzehnjährige. Pauls Vater stellt viele Gebote auf und bestraft Regelverstöße streng. Paul fragt vor jeder Entscheidung nach Erlaubnis und lässt eigene Wünsche kaum erkennen. Emmas Eltern setzten keine Regeln und achteten nicht auf Absprachen. Emma nimmt sich sofort, was sie möchte, und reagiert auf ein „Nein“ mit Wutausbrüchen. Tim erlebte zu Hause Aufgaben, die er bewältigen konnte, und klare Grenzen. Am Lagerfeuer möchte Tim als Erster zum Grill, merkt aber, dass die Jüngeren schon länger warten. Er sagt: „Ich bin gleich dran, das halte ich aus“, und stellt sich hinten an."
+ },
+ "kontext": "",
+ "stamm": "Das Verhalten der drei Jugendlichen lässt sich nach Freud fachlich zutreffend beurteilen, wenn …",
+ "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… Paul als ich-stark gilt, weil er sich an den Geboten orientiert und so ein Gleichgewicht der Instanzen erreicht.",
+   "richtig": false,
+   "erklaerung": "Bei Paul beherrscht das Über-Ich das Ich; eigene Bedürfnisse werden unterdrückt. Das ist eine Ich-Schwäche."
+  },
+  {
+   "text": "… Emmas Verhalten als Ich-Schwäche gilt, bei der das Es das Ich beherrscht und Triebwünsche ungehemmt befriedigt werden.",
+   "richtig": true,
+   "erklaerung": "Herrscht das Es vor, werden die Triebwünsche exzessiv befriedigt; das Ich kann nicht ausgleichen."
+  },
+  {
+   "text": "… Tims Bereitschaft zu warten als Ich-Schwäche gilt, weil er seinen Wunsch der Realität unterordnet.",
+   "richtig": false,
+   "erklaerung": "Wünsche zurückstellen und aufschieben zu können, ist ein Kennzeichen von Ich-Stärke."
+  },
+  {
+   "text": "… Pauls Verhalten als selbstbestimmt gilt, weil sein Ich die Forderungen des Über-Ichs gegenüber der Realität durchsetzt.",
+   "richtig": false,
+   "erklaerung": "Ist das Ich einer Instanz unterlegen, ist die Person fremdbestimmt in ihrem Verhalten."
+  }
+ ]
+},
+ {
+ "id": "ich-erziehung-fall",
+ "titel": "Freud: Erzieherverhalten und Ich-Stärke",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Ferienlager",
+  "zeilen": false,
+  "text": "Im Ferienlager der Jugendhilfe beobachtet die Erzieherin Frau Roth drei Vierzehnjährige. Pauls Vater stellt viele Gebote auf und bestraft Regelverstöße streng. Paul fragt vor jeder Entscheidung nach Erlaubnis und lässt eigene Wünsche kaum erkennen. Emmas Eltern setzten keine Regeln und achteten nicht auf Absprachen. Emma nimmt sich sofort, was sie möchte, und reagiert auf ein „Nein“ mit Wutausbrüchen. Tim erlebte zu Hause Aufgaben, die er bewältigen konnte, und klare Grenzen. Am Lagerfeuer möchte Tim als Erster zum Grill, merkt aber, dass die Jüngeren schon länger warten. Er sagt: „Ich bin gleich dran, das halte ich aus“, und stellt sich hinten an."
+ },
+ "kontext": "",
+ "stamm": "Aus den Erziehungsbedingungen der drei Jugendlichen lassen sich nach Freud fachlich zutreffende Schlüsse ziehen, wenn …",
+ "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… Emmas Erziehungsbedingungen als Grundlage für ein besonders starkes Über-Ich gelten, weil Führung gefehlt hat.",
+   "richtig": false,
+   "erklaerung": "Wenig Führung führt zu einem schwächeren Über-Ich, sodass die Ansprüche des Es maßlos werden können."
+  },
+  {
+   "text": "… der strenge, regelreiche Erziehungsstil in Pauls Familie als Bedingung für ein zu starkes Über-Ich gilt.",
+   "richtig": true,
+   "erklaerung": "Je mehr Gebote, Verbote und Lenkung, desto stärker bildet sich das Über-Ich aus (z. B. autoritärer Stil)."
+  },
+  {
+   "text": "… Tims Erfolgserlebnisse und Grenzen als Bedingungen gelten, die Kompetenz- und Kontrollerwartung und damit Ich-Stärke fördern.",
+   "richtig": true,
+   "erklaerung": "Bewältigbare Aufgaben, Zuwendung und Grenzen stärken das Ich; das Kind kennt seine Möglichkeiten und seine Grenzen."
+  },
+  {
+   "text": "… Enttäuschungen aus der Erziehung herausgehalten werden müssen, damit Bewältigungskompetenz entsteht.",
+   "richtig": false,
+   "erklaerung": "Dosierte Frustrationen führen tendenziell zu Bewältigungskompetenz, sofern das Angenehme überwiegt."
+  }
+ ]
+}
 ];
 // Vorlage = Check-out mit genau 3 Aufgaben aus der Bank; wird am passenden Freitag per Klick eingesetzt.
 const CHECKOUT_VORLAGEN_ALLE=[
@@ -8419,6 +8559,18 @@ const CHECKOUT_VORLAGEN_ALLE=[
    "bindung-phasen",
    "bindung-typologie",
    "bindung-foerderung"
+  ]
+ },
+ {
+  "id": "aln-ich",
+  "titel": "Freud: Instanzen, Schichten des Bewusstseins, Ich-Stärke und Ich-Schwäche",
+  "lbNum": 1,
+  "datum": "2026-10-30",
+  "aufgaben": [
+   "ich-instanzen-fall",
+   "ich-topisch-fall",
+   "ich-staerke-schwaeche-fall",
+   "ich-erziehung-fall"
   ]
  }
 ];
