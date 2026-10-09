@@ -19259,7 +19259,7 @@ function lernstandBar(points,max=3){
 const KLASSE_12SB=[
  ["Abou","El","Ibrahim"],["Atanasov","Pavel"],["Dekinger","Florian"],["Dreher","Paula"],["Eckert","Johanna"],
  ["Felber","Greta"],["Fleischhac*","Sophia"],["Köhler","Mia"],["Kubesch","Mia"],["Landua","Lukas"],
- ["Lange","Katharina"],["Lautner","Sophia"],["Nagel","Sophia"],["Ostler","Sophie"],["Randow","Amelia"],
+ ["Lange","Katharina"],["Lautner","Sophia"],["Nagel","Sophia"],["Ostler","Sophie"],["Randow","Amelia"],["Randow","Clay"],
  ["Richter","Laura"],["Rudolph","Alia"],["Rüggeberg","Amina"],["Schiller","Ronja"],["Sepp","Cosima"],
  ["Spöttel","Laura"],["Süß","Clara"],["Süß","Maya"]
 ];
