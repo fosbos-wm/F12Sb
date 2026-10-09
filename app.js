@@ -3551,7 +3551,7 @@ async function renderStart(){
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
  const newsAction=(isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:"")
  +(isTeacher()?`<button class="secondary"onclick="openUserManagement()"> Benutzer verwalten</button>`:"");
- return`${coBanner}<section class="hero"><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
+ return`${coBanner}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
 </div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button></div></section>
  ${pp12CssBausteine()}${naechsteStunde}
@@ -8519,9 +8519,9 @@ const CO_AUFGABENBANK=[
    "erklaerung": "Bewältigbare Aufgaben, Zuwendung und Grenzen stärken das Ich; das Kind kennt seine Möglichkeiten und seine Grenzen."
   },
   {
-   "text": "… Enttäuschungen aus der Erziehung herausgehalten werden müssen, damit Bewältigungskompetenz entsteht.",
+   "text": "… Pauls Erziehung als Weg zur Ich-Stärke gilt, weil die vielen Gebote ein Gleichgewicht der Instanzen sichern.",
    "richtig": false,
-   "erklaerung": "Dosierte Frustrationen führen tendenziell zu Bewältigungskompetenz, sofern das Angenehme überwiegt."
+   "erklaerung": "Viele Gebote und viel Lenkung stärken das Über-Ich. Beherrscht es das Ich, werden eigene Bedürfnisse unterdrückt: Das ist eine Ich-Schwäche, kein Gleichgewicht."
   }
  ]
 }
