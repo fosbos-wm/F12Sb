@@ -1,4 +1,4 @@
-let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = Promise.all([ import("https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js"), import("https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js"), import("https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js"), import("https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js") ]).then(([appMod, authMod, fsMod, storageMod])=>{ ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment}=fsMod); ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db) db=getFirestore(app); if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }); return firebaseReadyPromise; } /*
+let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = import("./firebase-local.js?v=20261010b").then((fbMod)=>{ const appMod=fbMod, authMod=fbMod, fsMod=fbMod, storageMod={getStorage:fbMod.getStorage,ref:fbMod.ref,uploadBytes:fbMod.uploadBytes,getDownloadURL:fbMod.getDownloadURL,deleteObject:fbMod.deleteObject}; ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile,deleteUser}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment}=fsMod); ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db) db=getFirestore(app); if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }); return firebaseReadyPromise; } /*
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
@@ -35,7 +35,7 @@ function closeModal(){$("modalBackdrop").hidden=true;if(window.__coUnsub){try{wi
 function pageHead(k,h,p,actions=""){return`<div class="page-head"><div><div class="kicker">${k}</div><h1>${h}</h1><p>${p}</p>
 </div><div class="actions">${actions}</div></div>`}
 function footer(){return`<div class="footer"><span>F12Sb 26/27 · FOSBOS Weilheim</span><span>Gemeinsam · offen ·
-respektvoll</span><span><button type="button"onclick="showImpressum()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Impressum</button></span></div>`}
+respektvoll</span><span><button type="button"onclick="showImpressum()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Impressum</button> · <button type="button"onclick="showDatenschutz()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Datenschutz</button></span></div>`}
 
 /* =========================================================
  IMPRESSUM – Angaben gemäß § 5 TMG, übernommen von der
@@ -77,12 +77,171 @@ function showImpressum(){
 
  <div class="notice">
  <strong>Hinweis zur F12Sb-App</strong>
- <p style="margin-bottom:0">Diese App ist ein Unterrichts-/Klassenprojekt und kein offizielles IT-Angebot der Schulverwaltung. Die obigen Angaben entsprechen denen der offiziellen Schul-Website (fos-bos-weilheim.de). Für Rückfragen zu dieser App wende dich zusätzlich an die betreuende Lehrkraft. Eine ausführliche Datenschutzerklärung für die App selbst steht noch aus.</p>
+ <p style="margin-bottom:0">Diese App ist ein Unterrichts-/Klassenprojekt und kein offizielles IT-Angebot der Schulverwaltung. Die obigen Angaben entsprechen denen der offiziellen Schul-Website (fos-bos-weilheim.de). Für Rückfragen zu dieser App wende dich zusätzlich an die betreuende Lehrkraft. Die <a href="#"onclick="closeModal();showDatenschutz();return false">Datenschutzerklärung</a> findest du hier.</p>
  </div>
 
  <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button></div>
  </div>`);
 }
+
+/* =========================================================
+ DATENSCHUTZ: Erklärung, Datenauskunft/-export, Löschung
+ ========================================================= */
+const DS_APP="F12Sb";
+const DS_HINWEIS_FREITEXT="🔒 Bitte hier keine sensiblen Daten eintragen (Gesundheit, Familie, Religion, Herkunft, Konflikte) – weder über dich noch über andere.";
+function dsHinweis(){return`<small class="ds-hinweis"style="display:block;margin:4px 0 8px;color:var(--muted,#5b6b7a)">${DS_HINWEIS_FREITEXT}</small>`}
+
+/* Sammlungen mit personenbezogenen Daten: [Sammlung, Feld, selbst löschbar?]
+   "id" = Dokument-ID ist die UID (Abfrage über getDoc). */
+const DS_DATEN=[
+ ["journal","uid",1],["competencies","uid",1],["lernpfade","uid",1],["resilienzSchaetze","uid",1],
+ ["heimatorte","uid",1],["steckbriefe","uid",1],["wochenplanung","uid",1],["noten","id",1],
+ ["essayEntries","uid",1],["essayCases","createdBy",1],
+ ["ppStundenAntworten","uid",1],["ppLernuebersicht","uid",1],["ppKursFortschritt","uid",1],
+ ["ppRallyeStand","uid",1],["ppRallyeRang","uid",1],
+ ["lehrplanFortschritt","uid",1],["lehrplanProdukte","uid",1],["lehrplanTeams","createdBy",1],
+ ["messages","fromUid",1],["posts","authorUid",1],["boardPosts","authorUid",1],
+ ["tasks","createdBy",1],["projects","createdBy",1],["wordcloudEntries","authorUid",1],
+ ["kanbanCards","createdBy",1],["checklistItems","createdBy",1],["termVotes","uid",1],
+ ["pollVotes","uid",1],["ampelResponses","uid",1],["teamAds","authorUid",1],
+ ["flashcards","createdBy",1],["glossaryEntries","createdBy",1],
+ ["whiteboardItems","authorUid",1],["whiteboardImages","authorUid",1],["whiteboardPresence","uid",1],
+ ["randomPickerLists","createdBy",1],
+ /* Leistungsnachweise bleiben als schulische Unterlagen bei der Schule: nur Lehrkraft/Admin löscht */
+ ["checkoutAbgaben","uid",0],["checkoutAuswahl","id",0],["lernstandVersuche","uid",0]
+];
+async function dsLesen(uid,c,feld){
+ if(feld==="id"){const s=await getDoc(doc(db,c,uid));return s.exists()?[{id:s.id,data:s.data()}]:[]}
+ const q=await getDocs(query(collection(db,c),where(feld,"==",uid)));
+ return q.docs.map(d=>({id:d.id,data:d.data()}));
+}
+async function dsSammeln(uid){
+ const out={},fehler=[];
+ for(const [c,feld] of DS_DATEN){
+  try{const l=await dsLesen(uid,c,feld);if(l.length)out[c]=l}catch(e){fehler.push(c)}
+ }
+ return{out,fehler};
+}
+async function dsExport(){
+ try{
+  toast("Daten werden zusammengestellt …");
+  const uid=currentUser.uid;
+  const {out,fehler}=await dsSammeln(uid);
+  let konto=null;try{const s=await getDoc(doc(db,"users",uid));konto=s.exists()?s.data():null}catch(e){}
+  const pack={app:DS_APP,exportiertAm:new Date().toISOString(),konto,daten:out,nichtAbrufbar:fehler};
+  const blob=new Blob([JSON.stringify(pack,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download=`${DS_APP}-meine-daten.json`;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+  toast("Datei „"+DS_APP+"-meine-daten.json“ wurde erstellt.");
+ }catch(e){console.error(e);toast("Export nicht möglich.")}
+}
+/* Löscht die Daten einer Person; gibt {geloescht, gesperrt:[Sammlungen]} zurück. */
+async function dsLoeschen(uid,{alsAdmin=false}={}){
+ let geloescht=0;const gesperrt=[];
+ for(const [c,feld,selbst] of DS_DATEN){
+  if(!alsAdmin&&!selbst)continue;
+  if(feld==="id"){try{await deleteDoc(doc(db,c,uid))}catch(e){gesperrt.push(c)}continue}
+  try{
+   const l=await dsLesen(uid,c,feld);
+   for(const d of l){try{await deleteDoc(doc(db,c,d.id));geloescht++}catch(e){if(!gesperrt.includes(c))gesperrt.push(c)}}
+  }catch(e){if(!gesperrt.includes(c))gesperrt.push(c)}
+ }
+ return{geloescht,gesperrt};
+}
+async function dsMeineDatenLoeschen(){
+ const t=prompt("Alle deine Daten in der "+DS_APP+" werden endgültig gelöscht (Journal, Pläne, Beiträge, Konto …). Leistungsnachweise (Check-out, Lernstandsmessung) bleiben als schulische Unterlagen bei der Schule.\n\nZur Bestätigung bitte LÖSCHEN eingeben:");
+ if(t!=="LÖSCHEN")return;
+ try{
+  toast("Daten werden gelöscht …");
+  const uid=currentUser.uid;
+  const r=await dsLoeschen(uid);
+  /* Konto zuletzt: erst danach verlieren die Regeln die Freigabe */
+  let kontoWeg=false;
+  try{await deleteDoc(doc(db,"users",uid));kontoWeg=true}catch(e){console.error(e)}
+  try{if(kontoWeg&&auth.currentUser)await deleteUser(auth.currentUser)}catch(e){console.error(e)}
+  alert(r.geloescht+" Einträge gelöscht."+(kontoWeg?" Dein Konto wurde entfernt.":" Das Konto konnte nicht entfernt werden – bitte die Lehrkraft informieren.")+(r.gesperrt.length?"\nNicht löschbar: "+r.gesperrt.join(", "):""));
+  try{await signOut(auth)}catch(e){}
+  location.reload();
+ }catch(e){console.error(e);toast("Löschen nicht vollständig möglich.")}
+}
+async function dsKlasseLoeschen(){
+ if(!isAdmin()){toast("Nur Admin.");return}
+ const mitKonten=confirm("Schuljahresende: Alle Schüler-Daten dieser App löschen.\n\nOK = Daten UND Konten (Profile) löschen\nAbbrechen = zurück");
+ if(!mitKonten)return;
+ const t=prompt("Dies kann nicht rückgängig gemacht werden. Bitte vorher die Daten sichern.\nZur Bestätigung KLASSE LÖSCHEN eingeben:");
+ if(t!=="KLASSE LÖSCHEN")return;
+ try{
+  toast("Klasse wird gelöscht – bitte warten …");
+  const us=await getDocs(query(collection(db,"users"),where("role","==","student")));
+  let n=0,gesperrt=new Set(),personen=0;
+  for(const u of us.docs){
+   const r=await dsLoeschen(u.id,{alsAdmin:true});n+=r.geloescht;r.gesperrt.forEach(x=>gesperrt.add(x));personen++;
+   try{await deleteDoc(doc(db,"users",u.id))}catch(e){gesperrt.add("users")}
+  }
+  closeModal();
+  alert(personen+" Schüler-Konten bearbeitet, "+n+" Einträge gelöscht."+(gesperrt.size?"\n\nNicht per Admin löschbar (privat bzw. nur durch die Person selbst, z. B. Nachrichten, Resilienz-Schatzkiste, Wochenplanung): "+[...gesperrt].join(", ")+"\nDiese Daten sind für niemanden einsehbar; sie lassen sich in der Firebase-Konsole (Firestore) löschen.":"")+"\n\nWichtig: Die Anmeldekonten selbst bitte in der Firebase-Konsole unter Authentication löschen.");
+ }catch(e){console.error(e);toast("Löschen nicht vollständig möglich.")}
+}
+function showDatenschutz(){
+ const angemeldet=!!(typeof currentUser!=="undefined"&&currentUser&&typeof profile!=="undefined"&&profile&&profile.status==="approved");
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">RECHTLICHES</div>
+ <h2>Datenschutzerklärung</h2>
+ <div class="form"style="gap:12px;font-size:.95em;line-height:1.5">
+ <div class="notice"><strong>Entwurf</strong><p style="margin-bottom:0">Diese Erklärung wird vom Datenschutzbeauftragten der Schule geprüft und kann sich noch ändern.</p></div>
+
+ <p><strong>1. Verantwortlicher</strong><br>
+ Staatliche Fachoberschule und Berufsoberschule Weilheim, Kerschensteinerstraße 2, 82362 Weilheim i.OB, vertreten durch den Schulleiter Christian Dick, OStD. Telefon +49 881 9239-43, E-Mail 0897.Sekretariat@schule.bayern.de.</p>
+
+ <p><strong>2. Datenschutzbeauftragter</strong><br>
+ Niklas Hilber, <a href="mailto:niklas.hilber@schule.bayern.de">niklas.hilber@schule.bayern.de</a></p>
+
+ <p><strong>3. Zweck und Rechtsgrundlage</strong><br>
+ Die ${DS_APP}-App unterstützt den Unterricht (Lernpläne, Lernjournal, Übungen, Check-outs, Zusammenarbeit). Die Verarbeitung erfolgt zur Erfüllung des schulischen Bildungs- und Erziehungsauftrags (Art. 6 Abs. 1 Buchst. e DSGVO i. V. m. Art. 4 BayDSG und Art. 85 BayEUG). Freiwillige Angaben (z. B. Steckbrief, Geburtstag, Herkunftsort) beruhen auf deiner Einwilligung (Art. 6 Abs. 1 Buchst. a DSGVO); du kannst sie jederzeit löschen oder widerrufen.</p>
+
+ <p><strong>4. Welche Daten werden verarbeitet?</strong></p>
+ <ul style="margin:0 0 0 18px">
+ <li>Konto: Vor- und Nachname, E-Mail-Adresse, Rolle und Freigabestatus, Anmeldezeitpunkt</li>
+ <li>Lern- und Arbeitsdaten: Lernjournal, Lernpfad, Kompetenzen, Wochenplanung, Noten (nur für dich sichtbar), Übungs- und Aufsatztexte, Antworten in Check-outs und Lernstandsmessungen, Fortschritte, abgegebene Dateien</li>
+ <li>Zusammenarbeit: Beiträge, Nachrichten, Pinnwand, Whiteboards, Umfragen und Abstimmungen</li>
+ <li>Freiwillig: Steckbrief, Geburtstag (Tag und Monat), Herkunftsort</li>
+ <li>Technisch: IP-Adresse und Geräteinformationen bei jedem Aufruf (siehe Punkt 5)</li>
+ </ul>
+ <p>Bitte trage keine sensiblen Daten (Gesundheit, Familie, Religion, Herkunft, Konflikte) in Freitextfelder ein.</p>
+
+ <p><strong>5. Empfänger und Dienstleister</strong><br>
+ <em>Google Firebase</em> (Google Cloud EMEA Limited / Google LLC): Anmeldung, Datenbank (Firestore) und Dateispeicher. Die Daten werden in einem Rechenzentrum von Google gespeichert; eine Verarbeitung durch das US-Unternehmen Google LLC ist dabei nicht ausgeschlossen. Grundlage der Übermittlung sind der Angemessenheitsbeschluss zum EU-US Data Privacy Framework bzw. Standardvertragsklauseln.<br>
+ <em>GitHub Pages</em> (GitHub Inc., Microsoft): Auslieferung der Webseite. Dabei wird deine IP-Adresse verarbeitet.<br>
+ <em>Eingebettete Inhalte</em> (YouTube, Vimeo, WebUntis): Erst wenn du solche Inhalte öffnest, wird eine Verbindung zum jeweiligen Anbieter aufgebaut und deine IP-Adresse übermittelt.<br>
+ Die Software der App wird von dieser Seite selbst ausgeliefert, es werden keine Schriftarten, Tracker oder Werbedienste von Dritten geladen.</p>
+
+ <p><strong>6. Cookies und lokaler Speicher</strong><br>
+ Die App setzt keine Tracking-Cookies. Im Browser werden nur Einstellungen gespeichert (z. B. Ansichtsgröße) sowie die technisch nötige Anmeldung.</p>
+
+ <p><strong>7. Speicherdauer</strong><br>
+ Deine Daten werden gelöscht, wenn du die Klasse verlässt, spätestens zum Ende des Schuljahres. Du kannst deine Daten jederzeit selbst löschen (siehe unten). Leistungsnachweise (Check-outs, Lernstandsmessungen) werden nach den schulrechtlichen Aufbewahrungsfristen als Unterlagen der Schule behandelt.</p>
+
+ <p><strong>8. Wer sieht was?</strong><br>
+ Lehrkräfte sehen deine Lern- und Arbeitsdaten sowie Abgaben. Mitschüler:innen sehen nur, was du in gemeinsamen Bereichen (Forum, Pinnwand, Whiteboard, Steckbrief) veröffentlichst. Noten, Wochenplanung, Resilienz-Schatzkiste und Nachrichten sind für Lehrkräfte nicht einsehbar.</p>
+
+ <p><strong>9. Deine Rechte</strong><br>
+ Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO). Wende dich dazu an die Schule oder den Datenschutzbeauftragten. Du hast außerdem das Recht auf Beschwerde beim Bayerischen Landesbeauftragten für den Datenschutz, Wagmüllerstraße 18, 80538 München, <a href="https://www.datenschutz-bayern.de"target="_blank"rel="noopener">www.datenschutz-bayern.de</a>.</p>
+
+ ${angemeldet?`<div class="card"style="padding:12px">
+ <strong>Meine Daten</strong>
+ <p style="margin:6px 0 10px">Lade alle deine gespeicherten Daten herunter oder lösche sie samt Konto.</p>
+ <div class="form-actions"style="justify-content:flex-start;gap:8px;flex-wrap:wrap">
+ <button class="secondary"type="button"onclick="dsExport()">⬇ Meine Daten herunterladen</button>
+ <button class="secondary"type="button"onclick="dsMeineDatenLoeschen()">🗑 Meine Daten &amp; Konto löschen</button>
+ ${isAdmin()?`<button class="secondary"type="button"onclick="dsKlasseLoeschen()">🗑 Schuljahresende: Klasse löschen (Admin)</button>`:""}
+ </div></div>`:""}
+
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button></div>
+ </div>`);
+}
+window.showDatenschutz=showDatenschutz;window.dsExport=dsExport;window.dsMeineDatenLoeschen=dsMeineDatenLoeschen;window.dsKlasseLoeschen=dsKlasseLoeschen;
+
 
 function tile(icon,title,text,target){return`<a class="card tile"href="#${target}"><span class="emoji">${icon}</span>
 <strong>${title}</strong><small>${text}</small></a>`}
@@ -1102,7 +1261,7 @@ function openSteckbriefForm(existing){
  <div class="form">
  <label>Das mag ich (Hobbys, Interessen)<textarea id="sbMag"rows="2"maxlength="200">${esc(existing?.mag||"")}</textarea></label>
  <label>Darin bin ich gut / dabei kann ich helfen<textarea id="sbGutDarin"rows="2"maxlength="200">${esc(existing?.gutDarin||"")}</textarea></label>
- <label>Ein Fakt über mich (optional)<textarea id="sbFakt"rows="2"maxlength="200">${esc(existing?.fakt||"")}</textarea></label>
+ <label>Ein Fakt über mich (optional)<textarea id="sbFakt"rows="2"maxlength="200">${esc(existing?.fakt||"")}</textarea></label>${dsHinweis()}
  <div class="form-actions">
  <button class="secondary"onclick="closeModal()">Abbrechen</button>
  ${existing?`<button class="secondary"onclick="deleteSteckbrief()">Löschen</button>`:""}
@@ -15526,7 +15685,7 @@ async function renderConversationView(){
  <span><strong>Antwort an ${esc(messageReplyTo.fromName)}:</strong> ${esc((messageReplyTo.text||"").slice(0,120))}</span>
  <button class="secondary"onclick="cancelMessageReply()"></button></div>`:""}
  <div class="comment-box"style="margin-top:10px;flex-direction:column;align-items:stretch;gap:8px">
- <textarea id="messageComposeText"rows="2"placeholder="Nachricht schreiben …"></textarea>
+ <textarea id="messageComposeText"rows="2"placeholder="Nachricht schreiben …"></textarea>${dsHinweis()}
  <div style="display:flex;justify-content:space-between;align-items:center">
  ${emojiPickerHTML("messageComposeText","emojiPickerMessage")}
  <button class="primary"onclick="sendMessage()">Senden</button>
@@ -16226,7 +16385,7 @@ async function renderJournal(){
 
  <label>Titel
  <input id="jTitle"type="text"placeholder="z. B. Mein Lernfortschritt heute">
- </label>
+ </label>${dsHinweis()}
 
  <label class="full">Woran habe ich heute gearbeitet?
  <textarea id="jWorkedOn"rows="3"placeholder="Thema, Aufgabe, Projekt oder Lernziel …"></textarea>
@@ -20073,7 +20232,7 @@ function openPostForm(defaultType="question"){
 schreiben</h2><div class="form"><label>Kategorie<select id="pType"><option value="question"
 ${defaultType==="question"?"selected":""}> Frage</option><option value="info" ${defaultType==="info"?"selected":""}>
 Info</option><option value="idea" ${defaultType==="idea"?"selected":""}> Idee</option><option value="project">
-Projekt</option><option value="practice"> Praxis</option></select></label><label>Beitrag<textarea id="pText"rows="5"placeholder="Was möchtest du teilen?"required></textarea></label><div style="margin-top:-8px;margin-bottom:10px">${emojiPickerHTML("pText","emojiPickerPost")}</div><div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addPost()">Veröffentlichen</button></div></div>`);
+Projekt</option><option value="practice"> Praxis</option></select></label><label>Beitrag<textarea id="pText"rows="5"placeholder="Was möchtest du teilen?"required></textarea></label>${dsHinweis()}<div style="margin-top:-8px;margin-bottom:10px">${emojiPickerHTML("pText","emojiPickerPost")}</div><div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addPost()">Veröffentlichen</button></div></div>`);
 }
 async function addPost(){
  const text=$("pText").value.trim();if(!text){toast("Bitte Beitrag eingeben.");return}

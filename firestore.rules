@@ -64,10 +64,12 @@ service cloud.firestore {
           isSelf(uid)
           && request.resource.data.role == resource.data.role
           && request.resource.data.status == resource.data.status
+          && request.resource.data.uid == resource.data.uid
         );
 
       // Deleting accounts is an administrative action.
-      allow delete: if isAdmin();
+      // Löschen: Admin oder die Person selbst (Recht auf Löschung, Art. 17 DSGVO).
+      allow delete: if isAdmin() || isSelf(uid);
     }
 
     // ---------------------------------------------------------
@@ -130,7 +132,9 @@ service cloud.firestore {
     // Person selbst darf ihre eigenen Noten lesen/ändern – nicht einmal
     // Lehrkräfte oder Admins (genau wie die Resilienz-Schatzkiste).
     match /noten/{uid} {
-      allow read, delete: if isApproved() && uid == request.auth.uid;
+      allow read: if isApproved() && uid == request.auth.uid;
+      // Löschen: die Person selbst; Admin nur löschen (nicht lesen), z. B. zum Schuljahresende.
+      allow delete: if isApproved() && (uid == request.auth.uid || isAdmin());
       allow create, update: if isApproved() && uid == request.auth.uid
         && request.resource.data.uid == request.auth.uid;
     }
@@ -150,7 +154,7 @@ service cloud.firestore {
       allow read: if isApproved();
       allow create, update: if isApproved() && uid == request.auth.uid
         && request.resource.data.uid == request.auth.uid;
-      allow delete: if isApproved() && uid == request.auth.uid;
+      allow delete: if isApproved() && (uid == request.auth.uid || isAdmin());
     }
 
     // ---------------------------------------------------------
@@ -500,7 +504,7 @@ service cloud.firestore {
       allow read: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
       allow create: if isApproved() && request.resource.data.uid == request.auth.uid;
       allow update: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
-      allow delete: if isApproved() && resource.data.uid == request.auth.uid;
+      allow delete: if isApproved() && (resource.data.uid == request.auth.uid || isAdmin());
     }
 
     // TaskCard-Links je Lernbereich (4 Kacheln unter dem Zeitstrahl).
@@ -829,7 +833,7 @@ service cloud.firestore {
       allow update: if isApproved()
         && resource.data.uid == request.auth.uid
         && request.resource.data.uid == request.auth.uid;
-      allow delete: if isTeacher();
+      allow delete: if isTeacher() || (isApproved() && resource.data.uid == request.auth.uid);
     }
 
     // Lernübersicht: Die Lehrkraft legt die Vorlage im Modul bzw. in der Stunde an (ppModule / lehrplanTafeln).
@@ -837,7 +841,9 @@ service cloud.firestore {
     // Lesen: die Person selbst und Lehrkräfte.
     match /ppLernuebersicht/{id} {
       allow read: if isApproved()
-        && (isTeacher() || id.matches('.*_' + request.auth.uid));
+        && (isTeacher()
+            || id.matches('.*_' + request.auth.uid)
+            || (resource != null && resource.data.uid == request.auth.uid));
       allow create: if isApproved()
         && request.resource.data.uid == request.auth.uid
         && id == request.resource.data.lernId + '_' + request.auth.uid;
@@ -857,7 +863,7 @@ service cloud.firestore {
       allow update: if isApproved()
         && resource.data.uid == request.auth.uid
         && request.resource.data.uid == request.auth.uid;
-      allow delete: if isTeacher();
+      allow delete: if isTeacher() || (isApproved() && resource.data.uid == request.auth.uid);
     }
 
     // Lernrallye: Stand je Person und Rallye (Antworten, freigeschaltete Stationen), ID "<modulId>_<uid>".
@@ -873,7 +879,7 @@ service cloud.firestore {
       allow update: if isApproved()
         && resource.data.uid == request.auth.uid
         && request.resource.data.uid == request.auth.uid;
-      allow delete: if isTeacher();
+      allow delete: if isTeacher() || (isApproved() && resource.data.uid == request.auth.uid);
     }
 
     // Lernrallye: Punkte für die Rangliste (Kurzname, Team, Punkte). Alle freigeschalteten Nutzer:innen dürfen lesen.
@@ -885,7 +891,7 @@ service cloud.firestore {
       allow update: if isApproved()
         && resource.data.uid == request.auth.uid
         && request.resource.data.uid == request.auth.uid;
-      allow delete: if isTeacher();
+      allow delete: if isTeacher() || (isApproved() && resource.data.uid == request.auth.uid);
     }
 
     // ---------------------------------------------------------
