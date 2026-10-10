@@ -60,6 +60,10 @@ function showImpressum(){
  Fax: +49 881 9239-40<br>
  E-Mail: 0897.Sekretariat@schule.bayern.de</p>
 
+ <p><strong>Datenschutzbeauftragter der Schule</strong><br>
+ Niklas Hilber<br>
+ E-Mail: <a href="mailto:niklas.hilber@schule.bayern.de">niklas.hilber@schule.bayern.de</a></p>
+
  <p><strong>Aufsichtsbehörde</strong><br>
  Bayerisches Staatsministerium für Unterricht und Kultus<br>
  Salvatorstraße 2<br>
