@@ -106,7 +106,7 @@ const DS_DATEN=[
  ["pollVotes","uid",1],["ampelResponses","uid",1],["teamAds","authorUid",1],
  ["flashcards","createdBy",1],["glossaryEntries","createdBy",1],
  ["whiteboardItems","authorUid",1],["whiteboardImages","authorUid",1],["whiteboardPresence","uid",1],
- ["randomPickerLists","createdBy",1],
+ ["randomPickerLists","createdBy",1],["profilePublic","id",1],
  /* Leistungsnachweise bleiben als schulische Unterlagen bei der Schule: nur Lehrkraft/Admin löscht */
  ["checkoutAbgaben","uid",0],["checkoutAuswahl","id",0],["lernstandVersuche","uid",0]
 ];
@@ -203,7 +203,7 @@ function showDatenschutz(){
  <p><strong>4. Welche Daten werden verarbeitet?</strong></p>
  <ul style="margin:0 0 0 18px">
  <li>Konto: Vor- und Nachname, E-Mail-Adresse, Rolle und Freigabestatus, Anmeldezeitpunkt</li>
- <li>Lern- und Arbeitsdaten: Lernjournal, Lernpfad, Kompetenzen, Wochenplanung, Noten (nur für dich sichtbar), Übungs- und Aufsatztexte, Antworten in Check-outs und Lernstandsmessungen, Fortschritte, abgegebene Dateien</li>
+ <li>Lern- und Arbeitsdaten: Lernjournal, Lernpfad, Kompetenzen, Wochenplanung, Übungs- und Aufsatztexte, Antworten in Check-outs und Lernstandsmessungen, Fortschritte, abgegebene Dateien</li>
  <li>Zusammenarbeit: Beiträge, Nachrichten, Pinnwand, Whiteboards, Umfragen und Abstimmungen</li>
  <li>Freiwillig: Steckbrief, Geburtstag (Tag und Monat), Herkunftsort</li>
  <li>Technisch: IP-Adresse und Geräteinformationen bei jedem Aufruf (siehe Punkt 5)</li>
@@ -223,7 +223,7 @@ function showDatenschutz(){
  Deine Daten werden gelöscht, wenn du die Klasse verlässt, spätestens zum Ende des Schuljahres. Du kannst deine Daten jederzeit selbst löschen (siehe unten). Leistungsnachweise (Check-outs, Lernstandsmessungen) werden nach den schulrechtlichen Aufbewahrungsfristen als Unterlagen der Schule behandelt.</p>
 
  <p><strong>8. Wer sieht was?</strong><br>
- Lehrkräfte sehen deine Lern- und Arbeitsdaten sowie Abgaben. Mitschüler:innen sehen nur, was du in gemeinsamen Bereichen (Forum, Pinnwand, Whiteboard, Steckbrief) veröffentlichst. Noten, Wochenplanung, Resilienz-Schatzkiste und Nachrichten sind für Lehrkräfte nicht einsehbar.</p>
+ Lehrkräfte sehen deine Lern- und Arbeitsdaten sowie Abgaben. Mitschüler:innen sehen nur, was du in gemeinsamen Bereichen (Forum, Pinnwand, Whiteboard, Steckbrief) veröffentlichst. Wochenplanung, Resilienz-Schatzkiste und Nachrichten sind für Lehrkräfte nicht einsehbar. Der Notenrechner speichert nichts.</p>
 
  <p><strong>9. Deine Rechte</strong><br>
  Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO). Wende dich dazu an die Schule oder den Datenschutzbeauftragten. Du hast außerdem das Recht auf Beschwerde beim Bayerischen Landesbeauftragten für den Datenschutz, Wagmüllerstraße 18, 80538 München, <a href="https://www.datenschutz-bayern.de"target="_blank"rel="noopener">www.datenschutz-bayern.de</a>.</p>
@@ -303,7 +303,26 @@ role:"student",status:"pending",createdAt:serverTimestamp()
  });
  }
  const s=await getDoc(ref);profile=s.data();
+ notenLiveZuruecksetzen();try{deleteDoc(doc(db,"noten",user.uid)).catch(()=>{})}catch(e){}
+ syncProfilPublic();if(isTeacher())syncProfilePublicAlle();
 }
+
+/* Öffentliches Kurzprofil (Name, Rolle, Geburtstag) – damit die vollständigen Konten (E-Mail usw.) nur für die Person selbst und Lehrkräfte lesbar sind. */
+function profilPublicDaten(u,uid){return{uid:uid,displayName:u.displayName||"",firstName:u.firstName||"",lastName:u.lastName||"",role:u.role||"student",status:u.status||"pending",birthday:u.birthday||"",updatedAt:serverTimestamp()}}
+async function syncProfilPublic(){
+ try{if(!profile||!currentUser)return;await setDoc(doc(db,"profilePublic",currentUser.uid),profilPublicDaten(profile,currentUser.uid))}catch(e){console.warn("Kurzprofil:",e)}
+}
+async function syncProfilePublicAlle(){
+ try{
+  if(!isTeacher())return;
+  const heute=new Date().toISOString().slice(0,10);
+  try{if(localStorage.getItem("profilPublicSync")===heute)return}catch(e){}
+  const s=await getDocs(collection(db,"users"));
+  for(const d of s.docs){try{await setDoc(doc(db,"profilePublic",d.id),profilPublicDaten(d.data(),d.id))}catch(e){}}
+  try{localStorage.setItem("profilPublicSync",heute)}catch(e){}
+ }catch(e){console.warn("Kurzprofile:",e)}
+}
+
 
 // Liest Vorname/Nachname aus dem Registrierungsformular.
 // Unterstützt sowohl separate Felder (registerFirstName/registerLastName)
@@ -930,6 +949,7 @@ $("forgotBtn").onclick=async()=>{
 };
 if($("motivBtn"))$("motivBtn").onclick=motivUmschalten;
 $("logoutBtn").onclick=async()=>{
+ notenLiveZuruecksetzen();
  try{await loadFirebase();await signOut(auth)}catch(e){console.error(e)}
 };
 $("menuBtn").onclick=()=>$("sidebar").classList.toggle("open");
@@ -1235,7 +1255,7 @@ function personColor(uid){
 }
 async function getAllBirthdaysSorted(){
  try{
- const snap=await getDocs(collection(db,"users"));
+ const snap=await getDocs(collection(db,"profilePublic"));
  const users=snap.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&u.birthday);
  const today=new Date();today.setHours(0,0,0,0);
  return users.map(u=>{
@@ -2779,15 +2799,13 @@ function webUntisEmbedHTML(heightPx,openByDefault){
 }
 
 // ---- Noten (0–15 Punkte je Fach, getrennt nach Halbjahr) ------------------
+window.addEventListener("pagehide",()=>{try{notenLiveZuruecksetzen()}catch(e){}});
+let NOTEN_LIVE={entries:{},wpf:{},abschluss:{}};
+function notenLiveZuruecksetzen(){NOTEN_LIVE={entries:{},wpf:{},abschluss:{}};try{WPF_AUSWAHL.wpf1="";WPF_AUSWAHL.wpf2=""}catch(e){}}
+/* Live-Rechner: Die Noten liegen nur im Arbeitsspeicher dieser Sitzung und werden nirgends gespeichert. */
 async function getMeineNoten(){
- if(!db||!currentUser)return {entries:{}};
- try{
- const snap=await getDoc(doc(db,"noten",currentUser.uid));
- if(!snap.exists()){WPF_AUSWAHL.wpf1="";WPF_AUSWAHL.wpf2="";return {entries:{}};}
- const d=snap.data();
- WPF_AUSWAHL.wpf1=d.wpf?.wpf1||"";WPF_AUSWAHL.wpf2=d.wpf?.wpf2||"";
- return {entries:d.entries||{},wpf:d.wpf||{},abschluss:d.abschluss||{}};
- }catch(e){console.error("Noten laden:",e);return {entries:{}}}
+ try{WPF_AUSWAHL.wpf1=NOTEN_LIVE.wpf?.wpf1||"";WPF_AUSWAHL.wpf2=NOTEN_LIVE.wpf?.wpf2||""}catch(e){}
+ return {entries:NOTEN_LIVE.entries||{},wpf:NOTEN_LIVE.wpf||{},abschluss:NOTEN_LIVE.abschluss||{}};
 }
 // FPA (fachpraktische Ausbildung) bleibt ein einfacher Notentopf – dafür gilt
 // eine eigene Regel (§8 FOBOSO), keine Schulaufgabe/sonstige-Leistungen-Logik.
@@ -2860,14 +2878,8 @@ function sonstigeLeistungLabel(type){
  return "Schriftlich (Stegreif/KA)";
 }
 async function updateNotenDoc(mutator){
- const ref=doc(db,"noten",currentUser.uid);
- const snap=await getDoc(ref);
- const data=snap.exists()?snap.data():{uid:currentUser.uid,entries:{}};
- data.entries=data.entries||{};
- mutator(data);
- data.uid=currentUser.uid;
- data.updatedAt=serverTimestamp();
- await setDoc(ref,data);
+ NOTEN_LIVE.entries=NOTEN_LIVE.entries||{};
+ mutator(NOTEN_LIVE);
 }
 async function addSchulaufgabe(fach,hj){
  const value=$("saNeuValue")?.value;
@@ -3008,13 +3020,11 @@ async function openNotenDetail(fach,hj){
  `);
 }
 async function resetMeineNoten(){
- if(!confirm("Wirklich alle eigenen Noten zurücksetzen? Das kann nicht rückgängig gemacht werden."))return;
- try{
- await deleteDoc(doc(db,"noten",currentUser.uid));
+ if(!confirm("Alle eingegebenen Noten verwerfen?"))return;
+ notenLiveZuruecksetzen();
  closeModal();
  await render();
  toast("Noten zurückgesetzt.");
- }catch(e){console.error("Noten zurücksetzen:",e);toast("Konnte nicht zurückgesetzt werden.")}
 }
 window.addSchulaufgabe=addSchulaufgabe;window.deleteSchulaufgabe=deleteSchulaufgabe;
 window.addSonstigeLeistung=addSonstigeLeistung;window.deleteSonstigeLeistung=deleteSonstigeLeistung;
@@ -3874,7 +3884,7 @@ async function renderKompass(){
  <div class="kicker"style="margin:22px 0 8px">PERSÖNLICH · NUR FÜR DICH SICHTBAR</div>
  <div class="card">
  <h2 style="margin-top:0"> Meine Noten</h2>
- <p style="color:var(--muted);font-size:12px">Halbjahresergebnis nach § 21 Abs. 1 FOBOSO. Diese Ansicht sieht ausschließlich du selbst, nicht einmal Lehrkräfte.</p>
+ <p style="color:var(--muted);font-size:12px">Halbjahresergebnis nach § 21 Abs. 1 FOBOSO. <strong>Live-Rechner: Es wird nichts gespeichert.</strong> Deine Eingaben bleiben nur, solange du die App geöffnet hast, und sind nach dem Neuladen oder Abmelden weg.</p>
 
  ${wpfAuswahlHTML()}
  <div class="noten-split">
@@ -12227,7 +12237,7 @@ function wbNamenModal(id){
   <div class="form-actions"style="margin-top:10px"><button class="secondary"type="button"id="wbNamenKlasse">Klasse laden</button><button class="secondary"type="button"onclick="closeModal()">Abbrechen</button><button class="primary"type="button"id="wbNamenOk">Speichern</button></div>`);
  $("wbNamenKlasse").addEventListener("click",async()=>{
   try{
-   const s=await getDocs(collection(db,"users"));
+   const s=await getDocs(collection(db,"profilePublic"));
    const n=s.docs.map(d=>d.data()).filter(u=>u.status==="approved"&&u.role==="student"&&istKlasse12Sb(u)).map(u=>wbKurz(u.displayName)||u.displayName).filter(Boolean).sort((a,b)=>a.localeCompare(b,"de"));
    $("wbNamenText").value=n.join("\n");toast(`${n.length} Namen geladen. Prüfe die Liste und speichere.`);
   }catch(e){toast("Die Klassenliste konnte nicht geladen werden.");}
@@ -13884,7 +13894,7 @@ async function renderZufallspicker(){
 
 async function pickRandomStudent(){
  try{
- const snap=await getDocs(collection(db,"users"));
+ const snap=await getDocs(collection(db,"profilePublic"));
  const students=snap.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&u.role!=="teacher"&&u.role!=="admin"&&istKlasse12Sb(u));
  const remaining=students.filter(u=>!pickedStudentUids.includes(u.uid));
  const pool=remaining.length?remaining:students;
@@ -15516,7 +15526,7 @@ async function getUnreadMessageCount(){
 
 async function getApprovedUserDirectory(){
  try{
- const snap=await getDocs(collection(db,"users"));
+ const snap=await getDocs(collection(db,"profilePublic"));
  return snap.docs.map(d=>({uid:d.id,...d.data()}))
  .filter(u=>u.uid!==currentUser.uid && u.status==="approved")
  .sort((a,b)=>String(a.displayName||a.email||"").localeCompare(String(b.displayName||b.email||""),"de"));
@@ -16491,7 +16501,7 @@ async function getTeacherJournalData(){
 
  await Promise.all(uids.map(async uid=>{
  try{
- const us=await getDoc(doc(db,"users",uid));
+ const us=await getDoc(doc(db,"profilePublic",uid));
  if(us.exists()){
  const u=us.data();
  users[uid]=u.displayName||u.email||uid;
@@ -18067,7 +18077,7 @@ async function renderKalender(){
 // Geburtstag(e), basierend auf users/{uid}.birthday ("MM-DD").
 async function getUpcomingBirthdayInfo(){
  try{
- const snap=await getDocs(collection(db,"users"));
+ const snap=await getDocs(collection(db,"profilePublic"));
  const users=snap.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&u.birthday);
  if(!users.length)return null;
  const today=new Date();today.setHours(0,0,0,0);
@@ -18098,7 +18108,7 @@ async function getUpcomingBirthdayInfo(){
 
 async function getBirthdayEvents(){
  try{
- const snap=await getDocs(collection(db,"users"));
+ const snap=await getDocs(collection(db,"profilePublic"));
  // Angezeigter Zeitraum: September 2026 bis August 2027.
  const yearFor=mm=>mm>=9?2026:2027; // Sept–Dez 2026, Jan–Aug 2027
  return snap.docs
@@ -18137,7 +18147,7 @@ async function removeBirthday(){
  if(!confirm("Deinen eingetragenen Geburtstag wirklich wieder entfernen?"))return;
  try{
  await updateDoc(doc(db,"users",currentUser.uid),{birthday:"",updatedAt:serverTimestamp()});
- if(profile)profile.birthday="";
+ if(profile)profile.birthday="";await syncProfilPublic();
  closeModal();toast("Geburtstag entfernt.");await render();
  }catch(e){console.error("Geburtstag löschen:",e);toast("Konnte nicht entfernt werden.")}
 }
@@ -18149,7 +18159,7 @@ async function saveBirthday(){
  const mmdd=val.slice(5,10); // "MM-DD"const btn=$("birthdaySaveBtn");if(btn){btn.disabled=true;btn.textContent="Speichert …"}
  try{
  await updateDoc(doc(db,"users",currentUser.uid),{birthday:mmdd,updatedAt:serverTimestamp()});
- if(profile)profile.birthday=mmdd;
+ if(profile)profile.birthday=mmdd;await syncProfilPublic();
  closeModal();toast("Geburtstag gespeichert.");await render();
  }catch(e){
  console.error("Geburtstag speichern:",e);
@@ -20670,7 +20680,7 @@ async function init(){
  onAuthStateChanged(auth,async user=>{
  clearListeners();
  currentUser=user;
- if(!user){profile=null;showAuth();return}
+ if(!user){profile=null;notenLiveZuruecksetzen();showAuth();return}
  $("authError").textContent="Angemeldet – Profil wird geladen …";
  try{
  await ensureProfile(user);

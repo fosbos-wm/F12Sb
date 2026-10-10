@@ -35,11 +35,10 @@ service cloud.firestore {
     // USERS / ACCOUNTS
     // ---------------------------------------------------------
     match /users/{uid} {
-      // A user may always read their own profile.
-      // Any approved user may read other profiles – this is needed so
-      // students/teachers can find each other by name to start a
-      // personal conversation (Campus-Forum → Nachrichten).
-      allow read: if isSelf(uid) || isApproved();
+      // Das vollständige Konto (E-Mail, Geburtstag …) lesen nur die Person
+      // selbst und Lehrkräfte. Namen für Verzeichnis, Nachrichten und
+      // Geburtstagsliste stehen im Kurzprofil (profilePublic, siehe unten).
+      allow read: if isSelf(uid) || isTeacher();
 
       // Public registration can only create a student in pending state.
       allow create: if isSelf(uid)
@@ -69,6 +68,24 @@ service cloud.firestore {
 
       // Deleting accounts is an administrative action.
       // Löschen: Admin oder die Person selbst (Recht auf Löschung, Art. 17 DSGVO).
+      allow delete: if isAdmin() || isSelf(uid);
+    }
+
+    // ---------------------------------------------------------
+    // KURZPROFIL (Datensparsamkeit): nur Anzeigename, Rolle, Status und
+    // Geburtstag (MM-TT) – für alle freigeschalteten Nutzer lesbar.
+    // Die Person pflegt es selbst (Rolle/Status müssen zum Konto passen),
+    // Lehrkräfte gleichen es für alle Konten ab.
+    // ---------------------------------------------------------
+    match /profilePublic/{uid} {
+      allow read: if isApproved();
+      allow create, update: if request.resource.data.keys()
+            .hasOnly(['uid','displayName','firstName','lastName','role','status','birthday','updatedAt'])
+        && request.resource.data.uid == uid
+        && (isTeacher()
+            || (isSelf(uid) && userExists()
+                && request.resource.data.role == get(/databases/$(database)/documents/users/$(uid)).data.role
+                && request.resource.data.status == get(/databases/$(database)/documents/users/$(uid)).data.status));
       allow delete: if isAdmin() || isSelf(uid);
     }
 
