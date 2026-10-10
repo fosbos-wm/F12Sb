@@ -4590,7 +4590,7 @@ const PPM_EXP_TEILE=[
 function ppmExpMinuten(teile){return PPM_EXP_TEILE.filter(t=>(teile||[]).includes(t.k)).reduce((n,t)=>n+t.min,0);}
 function ppmExpTeile(m){return Array.isArray(m&&m.teile)&&m.teile.length?m.teile:PPM_EXP_TEILE.map(t=>t.k);}
 // Fertige Einarbeitungs-Inhalte (einarbeitung/inhalte/<id>.json); wählbar im Selbstlernkurs.
-const PPM_EA_IDS=["f12-fa01","f12-freud1","f12-freud2","f12-freud3"]; // Dateien liegen in einarbeitung/inhalte/<ID>.json (12. Klasse)
+const PPM_EA_IDS=["f12-fa01","f12-freud1","f12-freud2","f12-freud3","fa01","fa02"]; // Dateien liegen in einarbeitung/inhalte/<ID>.json (12. Klasse)
 // Einheitliche Bezeichnung: Inhalt · Modulart · LB1 (LB nur, wenn bekannt)
 function ppmBez(inhalt,modul,lb){const T=PPM_TYPEN[modul];return[inhalt,T?T.art:"",lb?"LB"+lb:""].filter(Boolean).join(" · ");}
 // Modulart und Lernbereich einer Einarbeitung: zuerst die Angaben in der JSON-Datei ("modulart", "lb"),
