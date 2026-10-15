@@ -6716,7 +6716,7 @@ function lrLehrerHTML(m){
    <button type="button" class="ppm-btn" data-lr="auswertung">📊 Auswertung</button>${frei==="qr"?`<button type="button" class="ppm-btn" data-lr="qr-druck">🖨 QR-Codes drucken</button>`:""}</div>
   <p style="color:var(--muted);font-size:13px;margin:8px 0 0">Freischaltung: ${esc(LR_FREISCHALTUNG[frei])}. Einstellungen änderst du über „Modul bearbeiten“. Schüler:innen sehen die Rallye erst, wenn du sie startest.</p></div>
  <div class="ppm-box"><h2>Stationen</h2>${zeilen||`<p class="ppm-leer">Noch keine Station. Lege die erste an.</p>`}
-  <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" data-lr="st-neu">＋ Station hinzufügen</button></div></div>`;
+  <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" data-lr="st-neu">＋ Station hinzufügen</button><button type="button" class="ppm-btn" data-lr="st-vorlage">📥 Stationen aus Vorlage laden</button></div></div>`;
 }
 async function lrStationenSpeichern(m,liste){
  try{await updateDoc(doc(db,"ppModule",m.id),{stationen:liste,updatedAt:serverTimestamp()});await ppmLaden(true);await render();}
@@ -6901,6 +6901,50 @@ async function lrCodeEinloesen(m,stand,codeRoh){
   await render();
  }catch(e){ppmFehler(e,"Station konnte nicht freigeschaltet werden");}
 }
+// ---- Vorlagen: Stationen aus der Datei lernrallye/vorlagen.json laden (Lehrkraft) ----
+let LR_VORLAGEN=[];
+function lrPunkteListe(l){return(l||[]).reduce((n,x)=>n+(Number(x.punkte)||0),0);}
+async function lrVorlageDialog(m){
+ let liste=[];
+ try{
+  const r=await fetch("lernrallye/vorlagen.json?v="+Date.now());
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  const j=await r.json();liste=Array.isArray(j.vorlagen)?j.vorlagen:[];
+ }catch(e){console.error("Rallye-Vorlagen:",e);toast("Die Datei lernrallye/vorlagen.json wurde nicht gefunden.");return;}
+ LR_VORLAGEN=liste;
+ const hat=(m.stationen||[]).length>0;
+ modal(`${LR_CSS}<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">🚩 LERNRALLYE</div><h2>Stationen aus Vorlage laden</h2>
+  <div class="lr-form"><p style="color:var(--muted);font-size:13px;margin:0 0 8px">Die Stationen kommen aus der Datei lernrallye/vorlagen.json. Sie erhalten neue Codes und lassen sich danach wie gewohnt bearbeiten.</p>
+  <label style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="lrVEinst" checked style="width:auto"> Titel und Einstellungen der Vorlage übernehmen (Teams, Freischaltung)</label>
+  ${liste.map((v,i)=>`<div class="lr-st"><div style="flex:1;min-width:180px"><b>${esc(v.titel||"Vorlage")}</b><br><small>${esc(v.unter||"")}${v.unter?" · ":""}${(v.stationen||[]).length} Stationen · ${lrPunkteListe(v.stationen)} Punkte</small></div>
+   <button type="button" class="ppm-btn klein primaer" data-lr="vorlage" data-i="${i}" data-wie="neu">${hat?"Ersetzen":"Laden"}</button>${hat?`<button type="button" class="ppm-btn klein" data-lr="vorlage" data-i="${i}" data-wie="plus">Anhängen</button>`:""}</div>`).join("")||`<p class="ppm-leer">Die Datei enthält keine Vorlagen.</p>`}
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Schließen</button></div></div>`);
+}
+async function lrVorlageAnlegen(m,i,anhaengen){
+ const v=LR_VORLAGEN[i];if(!v||!Array.isArray(v.stationen))return;
+ if(!anhaengen&&(m.stationen||[]).length&&!confirm("Die vorhandenen Stationen dieser Rallye werden ersetzt. Bereits gesammelte Punkte bleiben in der Rangliste stehen. Fortfahren?"))return;
+ const liste=anhaengen?[...(m.stationen||[])]:[];
+ const tmp={stationen:liste},stamp=Date.now().toString(36);
+ v.stationen.forEach((s,k)=>{
+  const st=JSON.parse(JSON.stringify(s));
+  st.id="s"+stamp+k.toString(36)+Math.floor(Math.random()*1296).toString(36);
+  st.punkte=Math.max(0,Math.min(100,Number(st.punkte)||0));
+  st.text=st.text||"";st.frage=st.frage||"";st.erklaerung=st.erklaerung||"";
+  st.optionen=st.optionen||[];st.aussagen=st.aussagen||[];st.antworten=st.antworten||[];st.paare=st.paare||[];
+  st.richtig=Number(st.richtig)||0;
+  st.code=lrCodeNeu(tmp);
+  liste.push(st);
+ });
+ const daten={stationen:liste,updatedAt:serverTimestamp()};
+ if($("lrVEinst")&&$("lrVEinst").checked){
+  if(v.titel)daten.titel=v.titel;
+  if(v.rModus)daten.rModus=v.rModus;
+  if(v.rFreischaltung)daten.rFreischaltung=v.rFreischaltung;
+ }
+ await updateDoc(doc(db,"ppModule",m.id),daten);
+ LR.sicht=null;closeModal();await ppmLaden(true);await render();
+ toast(`${v.stationen.length} Stationen ${anhaengen?"angehängt":"geladen"}.`);
+}
 // ---- Klicks der Lernrallye ----
 async function lrKlick(e){
  const b=e.target.closest&&e.target.closest("[data-lr]");
@@ -6943,6 +6987,8 @@ async function lrKlick(e){
   if(!lehrer)return;
   if(a==="aktiv"){await updateDoc(doc(db,"ppModule",m.id),{rAktiv:!m.rAktiv,updatedAt:serverTimestamp()});await ppmLaden(true);await render();toast(m.rAktiv?"Die Rallye ist beendet.":"Die Rallye läuft.");return;}
   if(a==="st-neu"){lrStationDialog(m,null);return;}
+  if(a==="st-vorlage"){await lrVorlageDialog(m);return;}
+  if(a==="vorlage"){await lrVorlageAnlegen(m,Number(b.dataset.i),b.dataset.wie==="plus");return;}
   if(a==="st-edit"){lrStationDialog(m,b.dataset.sid);return;}
   if(a==="st-weg"){
    const st=lrStation(m,b.dataset.sid);if(!st)return;

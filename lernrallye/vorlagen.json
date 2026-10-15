@@ -1,0 +1,550 @@
+{
+ "hinweis": "Vorlagen für das Modul „Lernrallye“ (Lehrkraft: Modul öffnen, „Stationen aus Vorlage laden“).",
+ "vorlagen": [
+  {
+   "id": "psychosexuell-e1",
+   "titel": "Lernrallye · Psychosexuelle Entwicklung · Etappe 1: Grundlagen und orale Phase",
+   "unter": "LB 12.1 · Stunde 1",
+   "rModus": "team",
+   "rFreischaltung": "offen",
+   "stationen": [
+    {
+     "titel": "Start: So läuft die Rallye",
+     "typ": "info",
+     "punkte": 0,
+     "text": "## So läuft die Rallye\n- Ihr arbeitet in Teams. Jede Person spielt auf dem eigenen Handy, die Punkte zählen für das Team.\n- An den Stationen im Schulhaus liegen die **Lehrtexte auf Papier**. Lest sie dort, die Aufgaben löst ihr hier in der App.\n- Jede Station hat eine **Aufgabe** (Antwort schreiben, danach seht ihr die Musterlösung) und **zwei Kontrollfragen**.\n- Eure Ergebnisse tragt ihr auf dem **Laufzettel** (Übersichtsblatt) ein.\n- Beim Wechselsignal eurer Lehrkraft geht ihr zur nächsten Station.",
+     "frage": ""
+    },
+    {
+     "titel": "Station 1 · Grundbegriffe: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext M2 (liegt an der Station)\n\n## Aufgaben\n- Lies M2. Formuliere in eigenen Worten für den Kasten Grundbegriffe auf dem Laufzettel: Libido, erogene Zone, primärer Narzissmus, Objektbesetzung.\n- Erkläre in einem Satz, warum Freud mit „sexuell“ nicht nur die Genitalien meint.\n- Begründe, warum die Sexualität eines Kindes nach M2 „autoerotisch“ ist.\n\n**Zusatz für schnelle Teams:** Was ist nach M2 genetisch festgelegt und was hängt von Umwelt und Erziehung ab?",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Libido: Energieform, die sexuellem Genuss zugrunde liegt, weit gefasst als „Liebesmacht“.\n„Sexuell“: sinnlicher Genuss an verschiedenen Körperzonen, nicht nur an den Genitalien.\nErogene Zone: Körperteil als Quelle von Lustempfinden und Triebbefriedigung.\nPrimärer Narzissmus: Die Libido ist auf den eigenen Körper bzw. das eigene Ich bezogen.\nObjektbesetzung: Die Libido richtet sich auf andere Personen und Gegenstände.\nAutoerotisch: Das Kind hat nur seinen eigenen Körper als Befriedigungsmöglichkeit.\nZusatz: Der Verlauf ist genetisch festgelegt, die Art des Durchlaufens hängt von Umwelt, Bezugspersonen und Erziehung ab."
+    },
+    {
+     "titel": "Station 1 · Kontrollfrage 1",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Was bezeichnet Freud als Libido?",
+     "optionen": [
+      "Die Abwehr unerwünschter Triebe",
+      "Die Energieform, die sexuellem Genuss zugrunde liegt, im weiten Sinn als „Liebesmacht“",
+      "Ein Körperteil, über den Lust entsteht"
+     ],
+     "richtig": 1,
+     "erklaerung": "Libido ist die Energieform, die sexuellem Genuss zugrunde liegt. Freud fasst sie weit als „Liebesmacht“ (Selbstliebe, Eltern- und Kindesliebe, Freundschaft, Menschenliebe)."
+    },
+    {
+     "titel": "Station 1 · Kontrollfrage 2",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Wovon hängt die Art, wie ein Kind die Entwicklung durchläuft, nach M2 ab?",
+     "optionen": [
+      "Der Verlauf ist genetisch festgelegt; die Art des Durchlaufens hängt von Umwelt, Bezugspersonen und Erziehung ab",
+      "Allein von den Genen",
+      "Allein vom Alter der Eltern"
+     ],
+     "richtig": 0,
+     "erklaerung": "Der Verlauf der Libidoentwicklung ist genetisch festgelegt. Wie ein Mensch ihn durchläuft, hängt von Umwelt, Bezugspersonen und Erziehung ab."
+    },
+    {
+     "titel": "Station 2 · Orale Phase: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext M4 (liegt an der Station)\n\n## Aufgaben\n- Lies M4. Trage in der Spalte „Orale Phase“ des Laufzettels ein: Erogene Zone, Kennzeichen der Phase, Aufgaben der Phase (Stichpunkte).\n- Unterstreiche im Text, wie Urvertrauen entsteht, und nenne drei Bedingungen.\n\n**Zusatz für schnelle Teams:** Erkläre in zwei Sätzen, warum in der oralen Phase das „Es“ dominiert.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Erogene Zone: Mundzone und alles, was damit zusammenhängt (Saugen, Schlucken, Beißen, Lutschen, Nahrungsaufnahme), auch Haut und Sinnesorgane.\nKennzeichen: reines Triebwesen, das „Es“ dominiert, Wünsche des Einverleibens.\nAufgaben: Urvertrauen entwickeln, Beziehung zur Umwelt aufbauen.\nBedingungen für Urvertrauen: uneingeschränkte emotionale Befriedigung, ausreichende soziale Kontakte, viel geistige und motorische Stimulation."
+    },
+    {
+     "titel": "Station 2 · Kontrollfrage 3",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Welche erogene Zone steht in der oralen Phase im Mittelpunkt?",
+     "optionen": [
+      "Die Afterschleimhaut",
+      "Die Geschlechtsteile",
+      "Die Mundzone und alles, was mit ihr unmittelbar zusammenhängt"
+     ],
+     "richtig": 2,
+     "erklaerung": "Erogene Zone der oralen Phase ist die Mundzone mit allem, was damit zusammenhängt (Saugen, Schlucken, Beißen, Lutschen, Nahrungsaufnahme)."
+    },
+    {
+     "titel": "Station 2 · Kontrollfrage 4",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Was steht in der oralen Phase im Vordergrund?",
+     "optionen": [
+      "Die Bewältigung des Ödipuskonflikts",
+      "Der Aufbau des Urvertrauens und der Beziehung zur Umwelt",
+      "Die Sauberkeitserziehung"
+     ],
+     "richtig": 1,
+     "erklaerung": "In der oralen Phase steht der Aufbau der Beziehung zur Umwelt im Vordergrund. Gelingt er, entsteht Urvertrauen."
+    },
+    {
+     "titel": "Station 3 · Fall zur oralen Phase: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext M4 (liegt an der Station)\n\n**Fall:** Lena (8 Monate) wird meist hektisch und ohne Blickkontakt gefüttert. Ihre Mutter ist beruflich überfordert und mal sehr zugewandt, mal tagelang abwesend. Lena weint viel, schreckt bei fremden Personen zurück und beschäftigt sich kaum mit neuem Spielzeug.\n\n## Aufgaben\n- Belege mit M4, welche Bedingungen im Fall ein Urmisstrauen begünstigen.\n- Beschreibe mögliche Folgen für Lenas weitere Entwicklung.\n- Trage in der Spalte „Orale Phase“ des Laufzettels ein: Förderung der Entwicklung, mögliche Störungen, Persönlichkeitsmerkmale (jeweils positiv und negativ).\n\n**Zusatz für schnelle Teams:** Gib der Mutter drei konkrete Tipps, die zu M4 passen.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Belege im Fall: wechselndes Zuwendungsverhalten, Überforderung der Mutter, fehlerhafte Wahrnehmung der Signale (hektisch, ohne Blickkontakt).\nFolgen: Angst, geringe Frustrationstoleranz, pessimistisches Lebensgefühl, Bindungsschwäche, Selbstwertprobleme, gehemmtes Lernen.\nLaufzettel Orale Phase: Förderung = angemessene Befriedigung oraler Bedürfnisse, emotionale Zuwendung, feste Bezugsperson, Hautkontakt, Kontakt über alle Sinne.\nStörungen = Urmisstrauen, später Depressionen, Hospitalismus, Süchte.\nPersönlichkeitsmerkmale = optimistische bzw. pessimistische Lebensgrundeinstellung; Mut, Vertrauen bzw. Minderwertigkeitsgefühle, Misstrauen."
+    },
+    {
+     "titel": "Station 3 · Kontrollfrage 5",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall:** Lena (8 Monate) wird meist hektisch und ohne Blickkontakt gefüttert. Ihre Mutter ist beruflich überfordert und mal sehr zugewandt, mal tagelang abwesend. Lena weint viel, schreckt bei fremden Personen zurück und beschäftigt sich kaum mit neuem Spielzeug.",
+     "frage": "Welche Bedingung im Fall begünstigt nach M4 ein Urmisstrauen?",
+     "optionen": [
+      "Zu früh beginnende Reinlichkeitserziehung",
+      "Zu enge Bindung an den Vater",
+      "Wechselndes Zuwendungsverhalten und Überforderung der Mutter"
+     ],
+     "richtig": 2,
+     "erklaerung": "M4 nennt als Bedingungen unter anderem ein ständig variierendes Zuwendungsverhalten, eine Überforderung der Mutter und eine fehlerhafte Wahrnehmung der kindlichen Signale."
+    },
+    {
+     "titel": "Station 3 · Kontrollfrage 6",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall:** Lena (8 Monate) wird meist hektisch und ohne Blickkontakt gefüttert. Ihre Mutter ist beruflich überfordert und mal sehr zugewandt, mal tagelang abwesend. Lena weint viel, schreckt bei fremden Personen zurück und beschäftigt sich kaum mit neuem Spielzeug.",
+     "frage": "Welche Folge beschreibt M4 für ein Kind mit Urmisstrauen?",
+     "optionen": [
+      "Es ist nicht bereit, Unbekanntes zu erforschen; seine Lernmöglichkeiten werden gehemmt",
+      "Es entwickelt besonderen Mut gegenüber Fremden",
+      "Es entwickelt Reinlichkeitszwang"
+     ],
+     "richtig": 0,
+     "erklaerung": "Ein Kind mit Urmisstrauen verschließt sich, ist nicht willens, Unbekanntes zu erforschen, und wird dadurch in seinen Lernmöglichkeiten gehemmt."
+    }
+   ]
+  },
+  {
+   "id": "psychosexuell-e2",
+   "titel": "Lernrallye · Psychosexuelle Entwicklung · Etappe 2: Anale und phallische Phase",
+   "unter": "LB 12.1 · Stunde 2",
+   "rModus": "team",
+   "rFreischaltung": "offen",
+   "stationen": [
+    {
+     "titel": "Start: So läuft die Rallye",
+     "typ": "info",
+     "punkte": 0,
+     "text": "## So läuft die Rallye\n- Ihr arbeitet in Teams. Jede Person spielt auf dem eigenen Handy, die Punkte zählen für das Team.\n- An den Stationen im Schulhaus liegen die **Lehrtexte auf Papier**. Lest sie dort, die Aufgaben löst ihr hier in der App.\n- Jede Station hat eine **Aufgabe** (Antwort schreiben, danach seht ihr die Musterlösung) und **zwei Kontrollfragen**.\n- Eure Ergebnisse tragt ihr auf dem **Laufzettel** (Übersichtsblatt) ein.\n- Beim Wechselsignal eurer Lehrkraft geht ihr zur nächsten Station.",
+     "frage": ""
+    },
+    {
+     "titel": "Station 4 · Anale Phase: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext M5 (liegt an der Station)\n\n## Aufgaben\n- Lies M5. Trage in der Spalte „Anale Phase“ des Laufzettels ein: Erogene Zone, Kennzeichen der Phase, Aufgaben der Phase.\n- Erkläre, was nach M5 durch die Reinlichkeitserziehung „im übertragenen Sinne“ gelernt wird.\n- Beschreibe, woran man in der analen Phase die beginnende Ich-Entwicklung und das Streben nach Autonomie erkennt.\n\n**Zusatz für schnelle Teams:** Welche Persönlichkeitsmerkmale entstehen nach M5, wenn das Kind das Hergeben als lustvoll erlebt, und welche im anderen Fall?",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Erogene Zone: Afterschleimhaut, Ausscheidungsorgane, -vorgang und -produkt; Hergeben und Zurückhalten; Spielen mit Sand, Brei, Matsch.\nKennzeichen: Ausscheidungsvorgang im Mittelpunkt, Schmutzlust, Ich-Entwicklung, Thema Geben und Nehmen.\nAufgaben: Sauberkeitserziehung, Annahme des eigenen Körpers, Selbständigkeit, zunehmende Ablösung von der Bezugsperson.\nÜbertragener Sinn: Hergeben und Festhalten.\nZusatz: Lustvolles Hergeben führt zu Freude an Leistung und Annahme des Körpers, sonst zu Geiz, Verweigerung, Zurückhalten von Leistung oder angstbesetztem Leistungszwang."
+    },
+    {
+     "titel": "Station 4 · Kontrollfrage 7",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "In welchem Lebensalter liegt die anale Phase?",
+     "optionen": [
+      "Im 1. Lebensjahr",
+      "Im 4. und 5. Lebensjahr",
+      "Im 2. und 3. Lebensjahr"
+     ],
+     "richtig": 2,
+     "erklaerung": "Die anale Phase erstreckt sich auf das 2. und 3. Lebensjahr."
+    },
+    {
+     "titel": "Station 4 · Kontrollfrage 8",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Was wird nach M5 durch die Reinlichkeitserziehung im übertragenen Sinne gelernt?",
+     "optionen": [
+      "Sublimierung von Triebwünschen",
+      "Die gesamte Thematik des Hergebens und Festhaltens",
+      "Verzicht auf den gegengeschlechtlichen Elternteil"
+     ],
+     "richtig": 1,
+     "erklaerung": "Mit der Reinlichkeitserziehung wird im übertragenen Sinne die gesamte Thematik des Hergebens und Festhaltens gelernt."
+    },
+    {
+     "titel": "Station 5 · Phallische Phase: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext M6 (liegt an der Station)\n\n## Aufgaben\n- Lies M6. Trage in der Spalte „Phallische Phase“ des Laufzettels ein: Erogene Zone, Kennzeichen der Phase, Aufgaben der Phase.\n- Erkläre den Ödipus-Konflikt in eigenen Worten: Beteiligte, Alter, Gefühle des Kindes, gesunde Bewältigung.\n- Unterscheide Ödipus-Konflikt und Ödipuskomplex.\n\n**Zusatz für schnelle Teams:** Nenne zwei Annahmen Freuds in M6 (z. B. zu Kastrationsangst oder Penisneid) und erkläre, warum sie aus heutiger Sicht kritisch betrachtet werden.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Erogene Zone: Geschlechtsteile; Zeigen, Spielen, Betrachten (Schau- und Zeigelust).\nKennzeichen: sexuelle Neugierde, Über-Ich-Entwicklung, Ödipuskonflikt.\nAufgaben: Identifikation mit der Geschlechterrolle, Grenzen akzeptieren, Ödipuskonflikt bewältigen.\nÖdipus-Konflikt: unbewusstes Dreiecksverhältnis im 4. und 5. Lebensjahr; Liebeswunsch gegenüber dem gegengeschlechtlichen, Todeswunsch gegenüber dem gleichgeschlechtlichen Elternteil; Bewältigung durch Verzicht und Identifizierung.\nÖdipuskomplex: Der Konflikt bleibt bestehen, der Erwachsene löst sich nicht vom Elternteil und bejaht die Geschlechtsrolle nicht.\nZusatz: Die Annahmen zu Kastrationsangst und Penisneid sind nicht empirisch belegt, an der Anatomie festgemacht und werten Frauen ab."
+    },
+    {
+     "titel": "Station 5 · Kontrollfrage 9",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Wie wird der ödipale Konflikt nach M6 gesund bewältigt?",
+     "optionen": [
+      "Durch verstärkte Rivalität mit dem gleichgeschlechtlichen Elternteil",
+      "Durch Bestrafung des Kindes",
+      "Durch Verzicht auf den gegengeschlechtlichen Elternteil und Identifizierung mit dem gleichgeschlechtlichen"
+     ],
+     "richtig": 2,
+     "erklaerung": "Gesund bewältigt wird der Konflikt durch den Verzicht auf den gegengeschlechtlichen Elternteil und die Identifizierung mit dem gleichgeschlechtlichen."
+    },
+    {
+     "titel": "Station 5 · Kontrollfrage 10",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Was geschieht nach M6 in der phallischen Phase mit dem Über-Ich?",
+     "optionen": [
+      "Es entsteht erst in der Pubertät",
+      "Es wird in der Latenzzeit aufgelöst",
+      "Es entwickelt sich durch die Übernahme geschlechtlicher Moralbegriffe und elterlicher Wertvorstellungen"
+     ],
+     "richtig": 2,
+     "erklaerung": "In der phallischen Phase kommt es zur Übernahme geschlechtlicher Moralbegriffe, und das Über-Ich entwickelt sich (elterliche Wertvorstellungen werden verinnerlicht)."
+    },
+    {
+     "titel": "Station 6 · Erziehungsfälle: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext M5 und M6 (liegt an der Station)\n\n**Fall A (anale Phase):** Tim (2;6) soll nach dem Willen seiner Eltern bis zum 2. Geburtstag windelfrei sein. Wenn er einnässt, schimpfen sie und rümpfen die Nase. Sandkasten und Fingerfarben sind verboten, weil er sich schmutzig macht. Tim wird still und gehorsam.\n\n**Fall B (phallische Phase):** Jonas (5) sagt: „Wenn ich groß bin, heirate ich Mama, und Papa muss ausziehen.“ Der Vater reagiert gekränkt und weist ihn kalt zurück. Zu Hause gibt es häufig Streit.\n\n## Aufgaben\n- Fall A: Benenne die Erziehungsfehler mit M5. Trage ein: Förderung, Störungen, Persönlichkeitsmerkmale (Spalte „Anale Phase“).\n- Fall B: Benenne Konflikt und ungünstige Bedingungen mit M6. Trage ein: Förderung, Störungen, Persönlichkeitsmerkmale (Spalte „Phallische Phase“).\n\n**Zusatz für schnelle Teams:** Formuliere für beide Fälle je einen Tipp an die Eltern.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Fall A: Fehler sind der zu frühe, zu strenge Beginn, Schimpfen, die negative Bewertung der Ausscheidung und verbotene Spiele.\nFolgen: Unselbständigkeit, Gefügigkeit, Konformismus, Reinlichkeitsfanatismus, Waschzwang, Schuldgefühle, Ablehnung des eigenen Körpers.\nFörderung: nicht zu früh, mit Geduld, Lob und Zuneigung, Sand- und Fingerfarbenspiele, Impulse des Wollens unterstützen.\nFall B: Ödipus-Konflikt. Ungünstig sind Zurückweisung, Streit und ein angespanntes Familienklima.\nFörderung: positive Beziehung, entspanntes angstfreies Familienklima, Vorbildwirkung, Verhalten nicht überbewerten.\nStörungen: Ödipuskomplex, Nichtbejahung der Geschlechtsrolle, Phobien, Minderwertigkeitskomplex.\nPersönlichkeitsmerkmale: Über- bzw. Unterlegenheitsgefühle, Bejahung bzw. Verneinung der Geschlechtsrolle."
+    },
+    {
+     "titel": "Station 6 · Kontrollfrage 11",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall A (anale Phase):** Tim (2;6) soll nach dem Willen seiner Eltern bis zum 2. Geburtstag windelfrei sein. Wenn er einnässt, schimpfen sie und rümpfen die Nase. Sandkasten und Fingerfarben sind verboten, weil er sich schmutzig macht. Tim wird still und gehorsam.",
+     "frage": "Fall A: Was fördert nach M5 die Entwicklung in der analen Phase?",
+     "optionen": [
+      "Früher, strenger Beginn der Reinlichkeitserziehung",
+      "Negative Bewertung der Ausscheidungsprodukte",
+      "Geduld, Lob und Anerkennung, Unterstützung der Impulse des eigenen Wollens und Planens"
+     ],
+     "richtig": 2,
+     "erklaerung": "Förderlich sind Geduld, Lob, Anerkennung und Zuneigung sowie die Unterstützung der Impulse des eigenen Wollens und Planens. Zu frühe, zu strenge Reinlichkeitserziehung und negative Bewertung schaden."
+    },
+    {
+     "titel": "Station 6 · Kontrollfrage 12",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall B (phallische Phase):** Jonas (5) sagt: „Wenn ich groß bin, heirate ich Mama, und Papa muss ausziehen.“ Der Vater reagiert gekränkt und weist ihn kalt zurück. Zu Hause gibt es häufig Streit.",
+     "frage": "Fall B: Was hilft nach M6, einen ungünstigen Verlauf des Ödipus-Konfliktes zu verhindern?",
+     "optionen": [
+      "Jonas verbieten, über seine Gefühle zu sprechen",
+      "Eine positive Beziehung zum Kind und ein entspanntes, angstfreies, emotional getragenes Familienklima",
+      "Jonas für seinen Wunsch bestrafen"
+     ],
+     "richtig": 1,
+     "erklaerung": "Eine positive Beziehung zum Kind und ein entspanntes, angstfreies, emotional getragenes Familienklima können einen ungünstigen Verlauf des Ödipus-Konfliktes verhindern."
+    }
+   ]
+  },
+  {
+   "id": "psychosexuell-e3",
+   "titel": "Lernrallye · Psychosexuelle Entwicklung · Etappe 3: Latenz, genitale Phase und Störungen",
+   "unter": "LB 12.1 · Stunde 3",
+   "rModus": "team",
+   "rFreischaltung": "offen",
+   "stationen": [
+    {
+     "titel": "Start: So läuft die Rallye",
+     "typ": "info",
+     "punkte": 0,
+     "text": "## So läuft die Rallye\n- Ihr arbeitet in Teams. Jede Person spielt auf dem eigenen Handy, die Punkte zählen für das Team.\n- An den Stationen im Schulhaus liegen die **Lehrtexte auf Papier**. Lest sie dort, die Aufgaben löst ihr hier in der App.\n- Jede Station hat eine **Aufgabe** (Antwort schreiben, danach seht ihr die Musterlösung) und **zwei Kontrollfragen**.\n- Eure Ergebnisse tragt ihr auf dem **Laufzettel** (Übersichtsblatt) ein.\n- Beim Wechselsignal eurer Lehrkraft geht ihr zur nächsten Station.",
+     "frage": ""
+    },
+    {
+     "titel": "Station 7 · Latenzzeit: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext M7 (Teil „Die Latenzzeit“) (liegt an der Station)\n\n## Aufgaben\n- Lies M7. Trage in der Spalte „Latenzphase“ des Laufzettels ein: Erogene Zone, Kennzeichen der Phase, Aufgaben der Phase.\n- Erkläre mit M7, warum Freud die Latenz einen „Idealtypus“ nennt.\n- Ordne zu und finde je ein Beispiel: **Verdrängung** (sexuelle Strebungen werden aus dem Bewusstsein gedrängt), **Reaktionsbildung** (z. B. Ekel, Scham, moralische Ansprüche), **Sublimierung** (Triebenergie wird auf sozial anerkannte Ziele wie Lernen, Sport, Musik gelenkt).\n\n**Zusatz für schnelle Teams:** Wie verändern sich Ich und Über-Ich in der Latenzzeit, und was passiert mit den ödipalen Wünschen?",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Erogene Zone: Die sexuellen Wünsche ruhen, verschwinden aber nicht völlig.\nKennzeichen: Es, Ich und Über-Ich arbeiten zusammen, Abwehrmechanismen bilden sich aus, Sachinteresse, das Kind wirkt unsexuell.\nAufgaben: Verzicht auf unmittelbare Lustbefriedigung, Lernen (Schule), Sublimierung.\nIdealtypus: Die reale Entwicklung weicht meist davon ab, es gibt Durchbrüche der Sexualäußerung.\nBeispiele: Verdrängung (sexuelle Neugier wird „vergessen“), Reaktionsbildung (Ekel bei Küssen), Sublimierung (Eifer beim Lernen oder Sport).\nZusatz: Ich und Über-Ich werden stärker, die ödipalen Wünsche werden teilweise aufgegeben, aufgelöst oder verdrängt."
+    },
+    {
+     "titel": "Station 7 · Kontrollfrage 13",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Was bezeichnet Freud als Latenzzeit?",
+     "optionen": [
+      "Eine Phase intensivster Triebbefriedigung",
+      "Die Phase der Ausbildung des Urvertrauens",
+      "Den Zeitraum etwa zwischen dem 6. und dem 11. bis 12. Lebensjahr, in dem die manifeste Sexualisierung der kindlichen Beziehungen abnimmt"
+     ],
+     "richtig": 2,
+     "erklaerung": "Die Latenzzeit liegt etwa zwischen dem 6. und dem 11. bis 12. Lebensjahr. Die manifeste Sexualisierung der kindlichen Beziehungen nimmt ab."
+    },
+    {
+     "titel": "Station 7 · Kontrollfrage 14",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Welche Fähigkeit erwirbt das Kind in der Latenzzeit durch das starke Ich?",
+     "optionen": [
+      "Kastrationsangst",
+      "Urvertrauen",
+      "Sublimierung: Triebenergie auf andere Ziele lenken"
+     ],
+     "richtig": 2,
+     "erklaerung": "Das starke Ich hilft dem Kind, Triebimpulse zu kontrollieren. Mit neuen Befriedigungsmöglichkeiten erwirbt es die Fähigkeit zur Sublimierung."
+    },
+    {
+     "titel": "Station 8 · Genitale Phase: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext M7 (Teil „Die genitale Phase“) (liegt an der Station)\n\n## Aufgaben\n- Lies M7. Trage in der Spalte „Genitale Phase“ des Laufzettels ein: Erogene Zone, Kennzeichen der Phase, Aufgaben der Phase.\n- Vergleiche in zwei Sätzen Latenzzeit und genitale Phase (Stichwort: relatives Gleichgewicht).\n- Erkläre „Genitalprimat“ in eigenen Worten.\n\n**Zusatz für schnelle Teams:** Im Text steht „geniale Phase“. Welcher Fachbegriff ist gemeint? Erkläre, warum er zur Phase passt.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Erogene Zone: Sexualorgane; Küssen, Streicheln, Petting, Geschlechtsverkehr mit einem Partner; Selbststimulierung.\nKennzeichen: Sexualpartner wird gesucht, intensive Auseinandersetzung mit Körperlichkeit, Diskussion von Wertefragen.\nAufgaben: Partnerschaft, angemessene Befriedigung sexueller Lust, Fortpflanzung.\nVergleich: Das relative Gleichgewicht der Latenz wird durch die Pubertät aufgehoben, genitale Triebregungen werden intensiver.\nGenitalprimat: Alle erogenen Zonen sind den Genitalien untergeordnet.\nZusatz: „Geniale Phase“ ist ein Tippfehler im Lehrtext, gemeint ist die genitale Phase."
+    },
+    {
+     "titel": "Station 8 · Kontrollfrage 15",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Was bedeutet Genitalprimat nach M7?",
+     "optionen": [
+      "Die Mundzone steht wieder im Vordergrund",
+      "Die erogenen Zonen werden den Genitalien untergeordnet",
+      "Das Über-Ich beherrscht die Triebe vollständig"
+     ],
+     "richtig": 1,
+     "erklaerung": "Genitalprimat heißt: Die erogenen Zonen werden den Genitalien untergeordnet."
+    },
+    {
+     "titel": "Station 8 · Kontrollfrage 16",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Wodurch wird das relative Gleichgewicht der Latenzzeit aufgehoben?",
+     "optionen": [
+      "Durch die biologischen Veränderungen der Pubertät",
+      "Durch den Schulbeginn",
+      "Durch die Reinlichkeitserziehung"
+     ],
+     "richtig": 0,
+     "erklaerung": "Das relative Gleichgewicht der Latenzzeit wird von den biologischen Veränderungen der Pubertät aufgehoben."
+    },
+    {
+     "titel": "Station 9 · Förderung, Störung, Fixierung, Regression: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** Lehrtext Kartensatz (siehe nächste Seite) und Infokarte (liegt an der Station)\n\n**Infokarte:** **Fixierung** = Ein Teil der Libido bleibt an eine frühere Phase gebunden, zum Beispiel weil dort Bedürfnisse zu stark versagt oder übermäßig befriedigt wurden. **Regression** = Unter Belastung fällt eine Person auf Verhaltensweisen einer früheren Phase zurück (z. B. Daumenlutschen oder Einnässen nach der Geburt eines Geschwisters).\n\n## Aufgaben\n- Sortiert die 10 Karten nach „Förderung“ und „Mögliche Störungen“ sowie nach „Latenzphase“ und „Genitale Phase“. Zwei Karten gehören nicht dazu: Sortiert sie aus und begründet.\n- Trage das Ergebnis in die Spalten „Latenzphase“ und „Genitale Phase“ des Laufzettels ein.\n- Ergänze auf dem Laufzettel die Zeile „Fixierung bedeutet … / Regression bedeutet …“ und nenne je ein Beispiel.\n\n**Zusatz für schnelle Teams:** Auf dem Übersichtsblatt steht, Störungen seien „immer“ auf Fixierung oder Regression zurückzuführen. Prüfe kritisch, ob diese Aussage so allgemein haltbar ist.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Latenzphase, Förderung: Sachinteresse fördern, liebevolles Klima, Unterstützung bei der Bewältigung innerer Konflikte.\nLatenzphase, Störung: Probleme im Zusammenleben (z. B. Verzicht auf unmittelbare Bedürfnisbefriedigung nicht möglich).\nGenitale Phase, Förderung: partnerschaftliche Interaktion und Kommunikation, Offenheit für alle Fragen, Reibungsfläche bieten.\nGenitale Phase, Störung: Störungen der Beziehungsfähigkeit.\nAussortiert: „Reinlichkeitserziehung nicht zu früh beginnen“ (anale Phase) und „intensiver Hautkontakt“ (orale Phase).\nZusatz: „Immer“ ist zu absolut. Störungen sind meist mehrfach bedingt (Anlage, Bindung, Umwelt, belastende Erlebnisse). Freuds Modell ist ein Erklärungsansatz unter mehreren."
+    },
+    {
+     "titel": "Station 9 · Karten zuordnen",
+     "typ": "zuordnen",
+     "punkte": 10,
+     "text": "",
+     "frage": "Ordne vier der Karten der passenden Spalte zu.",
+     "paare": [
+      {
+       "l": "Sachinteresse fördern",
+       "r": "Latenzphase · Förderung"
+      },
+      {
+       "l": "Probleme im Zusammenleben (Verzicht auf unmittelbare Bedürfnisbefriedigung nicht möglich)",
+       "r": "Latenzphase · Störung"
+      },
+      {
+       "l": "partnerschaftliche Interaktion und Kommunikation",
+       "r": "Genitale Phase · Förderung"
+      },
+      {
+       "l": "Störungen der Beziehungsfähigkeit",
+       "r": "Genitale Phase · Störung"
+      }
+     ],
+     "erklaerung": "Weitere Karten: „liebevolles Klima“ und „Unterstützung bei inneren Konflikten“ fördern die Latenzzeit, „Offenheit für alle Fragen“ und „Reibungsfläche bieten“ die genitale Phase."
+    },
+    {
+     "titel": "Station 9 · Kontrollfrage 17",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Welche Karte gehört zur Förderung in der Latenzzeit?",
+     "optionen": [
+      "Intensiver Hautkontakt",
+      "Frühe Reinlichkeitserziehung",
+      "Sachinteresse fördern"
+     ],
+     "richtig": 2,
+     "erklaerung": "Zur Förderung in der Latenzzeit gehört, das Sachinteresse zu fördern. Hautkontakt gehört zur oralen, die Reinlichkeitserziehung zur analen Phase."
+    },
+    {
+     "titel": "Station 9 · Kontrollfrage 18",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "",
+     "frage": "Was bedeutet Regression?",
+     "optionen": [
+      "Die Bindung der Libido an eine frühere Phase",
+      "Die Umlenkung der Triebenergie auf andere Ziele",
+      "Der Rückfall auf Verhaltensweisen einer früheren Phase unter Belastung"
+     ],
+     "richtig": 2,
+     "erklaerung": "Regression ist der Rückfall auf Verhaltensweisen einer früheren Phase unter Belastung. Die Bindung der Libido an eine frühere Phase heißt Fixierung."
+    }
+   ]
+  },
+  {
+   "id": "psychosexuell-e4",
+   "titel": "Lernrallye · Psychosexuelle Entwicklung · Etappe 4: Fallanalysen und Abgleich",
+   "unter": "LB 12.1 · Stunde 4",
+   "rModus": "team",
+   "rFreischaltung": "offen",
+   "stationen": [
+    {
+     "titel": "Start: So läuft die Rallye",
+     "typ": "info",
+     "punkte": 0,
+     "text": "## So läuft die Rallye\n- Ihr arbeitet in Teams. Jede Person spielt auf dem eigenen Handy, die Punkte zählen für das Team.\n- An den Stationen im Schulhaus liegen die **Fälle auf Papier**. Als Nachschlagewerk dient euer eigener Laufzettel.\n- Jede Station hat eine **Aufgabe** (Antwort schreiben, danach seht ihr die Musterlösung) und **zwei Kontrollfragen**.\n- Eure Ergebnisse tragt ihr auf dem **Laufzettel** (Übersichtsblatt) ein.\n- Beim Wechselsignal eurer Lehrkraft geht ihr zur nächsten Station.",
+     "frage": ""
+    },
+    {
+     "titel": "Station 10A · Fallanalyse A: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** dein Laufzettel\n\n**Fall A.** Nele (4;6) fragt ihre Mutter, warum ihr Bruder „anders gebaut“ ist, und will später „genau wie Mama“ sein. Sie sagt, sie heirate den Papa. Die Eltern antworten ruhig und ohne Aufregung und achten darauf, dass das Thema nicht überbewertet wird.\n\n## Aufgaben\n- Bestimme die Phase und belege sie mit zwei Merkmalen aus deinem Laufzettel.\n- Leite ab, was die Entwicklung fördert.\n- Nenne eine mögliche Störung, wenn die Entwicklung ungünstig verläuft.\n\n**Zusatz für schnelle Teams:** Formuliere eine Beratungsempfehlung an die Eltern in zwei Sätzen.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Phase: phallische Phase (sexuelle Neugierde, Identifikation mit der Geschlechtsrolle, Ödipus-Konflikt).\nFörderung: Vorbild der Eltern, entspanntes Familienklima, das Thema nicht überbewerten.\nMögliche Störung: Ödipuskomplex, Nichtbejahung der Geschlechtsrolle."
+    },
+    {
+     "titel": "Station 10A · Kontrollfrage 19",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall A.** Nele (4;6) fragt ihre Mutter, warum ihr Bruder „anders gebaut“ ist, und will später „genau wie Mama“ sein. Sie sagt, sie heirate den Papa. Die Eltern antworten ruhig und ohne Aufregung und achten darauf, dass das Thema nicht überbewertet wird.",
+     "frage": "Welcher Phase ist Nele zuzuordnen?",
+     "optionen": [
+      "Orale Phase",
+      "Phallische Phase",
+      "Genitale Phase"
+     ],
+     "richtig": 1,
+     "erklaerung": "Neles Alter (4;6), die sexuelle Neugier, der Wunsch, wie die Mutter zu sein, und der Heiratswunsch gegenüber dem Vater zeigen die phallische Phase."
+    },
+    {
+     "titel": "Station 10A · Kontrollfrage 20",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall A.** Nele (4;6) fragt ihre Mutter, warum ihr Bruder „anders gebaut“ ist, und will später „genau wie Mama“ sein. Sie sagt, sie heirate den Papa. Die Eltern antworten ruhig und ohne Aufregung und achten darauf, dass das Thema nicht überbewertet wird.",
+     "frage": "Was fördert Neles Entwicklung?",
+     "optionen": [
+      "Das Verbot aller Fragen zum Körper",
+      "Strenge Bestrafung des Heiratswunsches",
+      "Das Vorbild der Eltern, ein entspanntes Familienklima und Gelassenheit, ohne das Thema überzubewerten"
+     ],
+     "richtig": 2,
+     "erklaerung": "Förderlich sind das Vorbild der Eltern, ein entspanntes Familienklima und die gelassene Reaktion, die das Thema nicht überbewertet."
+    },
+    {
+     "titel": "Station 10B · Fallanalyse B: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** dein Laufzettel\n\n**Fall B.** Leo (9) lernt begeistert Fußballergebnisse und Dinosaurier-Fakten auswendig. Über Mädchen sagt er: „Bäh, ekelig!“ Seine Lehrerin lobt sein Sachinteresse, zu Hause herrscht ein liebevolles Klima.\n\n## Aufgaben\n- Bestimme die Phase und belege sie mit zwei Merkmalen aus deinem Laufzettel.\n- Leite ab, was die Entwicklung fördert.\n- Nenne eine mögliche Störung, wenn die Entwicklung ungünstig verläuft.\n\n**Zusatz für schnelle Teams:** Formuliere eine Beratungsempfehlung an die Eltern in zwei Sätzen.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Phase: Latenzphase (Sachinteresse, Reaktionsbildung „Ekel“, Sublimierung durch Lernen).\nFörderung: Sachinteresse fördern, liebevolles Klima.\nMögliche Störung: Probleme im Zusammenleben."
+    },
+    {
+     "titel": "Station 10B · Kontrollfrage 21",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall B.** Leo (9) lernt begeistert Fußballergebnisse und Dinosaurier-Fakten auswendig. Über Mädchen sagt er: „Bäh, ekelig!“ Seine Lehrerin lobt sein Sachinteresse, zu Hause herrscht ein liebevolles Klima.",
+     "frage": "Welcher Phase ist Leo zuzuordnen?",
+     "optionen": [
+      "Anale Phase",
+      "Genitale Phase",
+      "Latenzphase"
+     ],
+     "richtig": 2,
+     "erklaerung": "Sachinteresse, Lernen und die Abwehr des anderen Geschlechts („bäh“) sind typisch für die Latenzphase (6. bis ca. 12. Lebensjahr)."
+    },
+    {
+     "titel": "Station 10B · Kontrollfrage 22",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall B.** Leo (9) lernt begeistert Fußballergebnisse und Dinosaurier-Fakten auswendig. Über Mädchen sagt er: „Bäh, ekelig!“ Seine Lehrerin lobt sein Sachinteresse, zu Hause herrscht ein liebevolles Klima.",
+     "frage": "Welche Begriffe passen zu Leos Verhalten?",
+     "optionen": [
+      "Fixierung und Ödipuskomplex",
+      "Sublimierung (Lernen, Sachinteresse) und Reaktionsbildung (Ekel)",
+      "Urmisstrauen und Regression"
+     ],
+     "richtig": 1,
+     "erklaerung": "Das Lernen ist Sublimierung, der Ekel gegenüber Mädchen eine Reaktionsbildung. Beides sind typische Merkmale der Latenzzeit."
+    },
+    {
+     "titel": "Station 10C · Fallanalyse C: Aufgaben",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "**Material:** dein Laufzettel\n\n**Fall C.** Mia (14) ist zum ersten Mal verliebt und streitet mit den Eltern über Regeln und Werte. Die Eltern hören zu, bleiben im Gespräch und bieten Reibungsfläche. Nach einer Trennung schläft Mia eine Woche lang wieder mit ihrem alten Kuscheltier und lutscht am Daumen.\n\n## Aufgaben\n- Bestimme die Phase und belege sie mit zwei Merkmalen aus deinem Laufzettel.\n- Leite ab, was die Entwicklung fördert.\n- Nenne eine mögliche Störung, wenn die Entwicklung ungünstig verläuft.\n\n**Zusatz für schnelle Teams:** Formuliere eine Beratungsempfehlung an die Eltern in zwei Sätzen.",
+     "frage": "Schreibe deine Ergebnisse in Stichpunkten auf und trage sie in deinen Laufzettel ein. Danach siehst du die Musterlösung.",
+     "erklaerung": "Phase: genitale Phase (Verliebtheit, Diskussion von Werten und Regeln).\nFörderung: Offenheit für alle Fragen, Reibungsfläche bieten, partnerschaftliche Kommunikation.\nMögliche Störung: Störungen der Beziehungsfähigkeit.\nKuscheltier und Daumenlutschen nach der Trennung sind Regression."
+    },
+    {
+     "titel": "Station 10C · Kontrollfrage 23",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall C.** Mia (14) ist zum ersten Mal verliebt und streitet mit den Eltern über Regeln und Werte. Die Eltern hören zu, bleiben im Gespräch und bieten Reibungsfläche. Nach einer Trennung schläft Mia eine Woche lang wieder mit ihrem alten Kuscheltier und lutscht am Daumen.",
+     "frage": "Welcher Phase ist Mia zuzuordnen?",
+     "optionen": [
+      "Phallische Phase",
+      "Latenzphase",
+      "Genitale Phase"
+     ],
+     "richtig": 2,
+     "erklaerung": "Verliebtheit, Streit über Regeln und Wertefragen sowie die Suche nach Partnerschaft sind typisch für die genitale Phase (ab Pubertät)."
+    },
+    {
+     "titel": "Station 10C · Kontrollfrage 24",
+     "typ": "wahl",
+     "punkte": 10,
+     "text": "**Fall C.** Mia (14) ist zum ersten Mal verliebt und streitet mit den Eltern über Regeln und Werte. Die Eltern hören zu, bleiben im Gespräch und bieten Reibungsfläche. Nach einer Trennung schläft Mia eine Woche lang wieder mit ihrem alten Kuscheltier und lutscht am Daumen.",
+     "frage": "Wie heißt Mias Rückfall in kindliche Verhaltensweisen nach der Trennung?",
+     "optionen": [
+      "Sublimierung",
+      "Regression",
+      "Fixierung"
+     ],
+     "richtig": 1,
+     "erklaerung": "Der Rückfall in kindliche Verhaltensweisen unter Belastung heißt Regression."
+    },
+    {
+     "titel": "Station 11 · Abgleich mit dem Übersichtsblatt",
+     "typ": "info",
+     "punkte": 0,
+     "text": "## So geht der Abgleich\n- Holt das Original-Übersichtsblatt „Die Phasen der psychosexuellen Entwicklung nach Sigmund Freud“ bei eurer Lehrkraft.\n- Vergleicht Zelle für Zelle mit eurem Laufzettel und ergänzt Fehlendes in einer zweiten Farbe.\n- Ergänzt die Zeile „Grundlegung von Persönlichkeitsmerkmalen“ und den Schlusssatz zu Fixierung und Regression.",
+     "frage": ""
+    },
+    {
+     "titel": "Station 11 · Die wichtigsten Ergänzungen",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "Markiert die **drei Ergänzungen**, die euch am wichtigsten sind.",
+     "frage": "Nenne die drei wichtigsten Ergänzungen und begründe deine Wahl in einem Satz.",
+     "erklaerung": "Individuelle Antworten. Typische Ergänzungen sind Begriffe, die nur im Übersichtsblatt stehen, zum Beispiel Hospitalismus, Süchte, Welteroberungstendenz und Schmutzlust."
+    },
+    {
+     "titel": "Station 11 · Gruppenduell: zwei Prüfungsfragen",
+     "typ": "frei",
+     "punkte": 5,
+     "text": "Für das Gruppenduell im Plenum entwickelt jedes Team zwei Prüfungsfragen mit Lösung: **eine Wissensfrage und eine Fallfrage**.",
+     "frage": "Schreibe eure beiden Fragen mit Lösung auf.",
+     "erklaerung": "Beispiele: Wissensfrage „Welche erogene Zone steht in der analen Phase im Mittelpunkt?“ (Afterschleimhaut). Fallfrage: Ein Kind (2;6) weigert sich beharrlich, das Töpfchen zu benutzen. Ordne die Phase zu und nenne zwei Fördermaßnahmen."
+    }
+   ]
+  }
+ ]
+}
