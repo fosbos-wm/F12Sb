@@ -13,7 +13,8 @@ Immer wenn eine Reihe voll ist, hält das Spiel an und stellt pro Reihe eine Fra
 - Falsch: Reihe löst sich trotzdem auf, keine Punkte. Die Karte kommt nach 3 weiteren Fragen erneut.
 - Mehrere Reihen gleichzeitig: eine Frage pro Reihe.
 - Spielende: Zusammenfassung "Das solltest du wiederholen".
-- Steuerung: Pfeiltasten, Leertaste = fallen lassen, P = Pause; auf dem Handy die Tasten unter dem Feld.
+- Steuerung per Klick oder Tipp: Ein Klick auf das Spielfeld dreht den Block um 90 Grad. Nach links oder rechts ziehen verschiebt ihn (ein Feld pro Feldbreite), nach unten wischen lässt ihn fallen. Zusätzlich gibt es die Tasten unter dem Feld (Links, Drehen, Rechts, Schneller, Fallen); ein Klick auf sie ist genau ein Schritt, Halten wiederholt ihn.
+- Steuerung per Tastatur: Pfeiltasten, Leertaste = fallen lassen, P = Pause.
 
 ## Karten ergänzen
 In `aufgaben.json` unter dem passenden Thema in `karten` anhängen:
