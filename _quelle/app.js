@@ -4538,7 +4538,7 @@ Object.assign(window,{pp12Tafel,pp12KompassDrucken});
 // Gleiche Oberflächen wie im Modulplan der F11Sb, hier je Schulwoche unter den Unterrichtsstunden (Plus-Zeichen).
 // Sammlungen in Firestore: ppModule, ppStundenAntworten, ppKursFortschritt.
 // ============================================================
-const PPM_ZUSATZ=["apt","selbstlern","kprim","rallye"];
+const PPM_ZUSATZ=["apt","selbstlern","kprim","rallye","blockfall"];
 // Schulwochen der 12. Klasse (Montag als ID). Wochen, die ganz in den Ferien liegen, entfallen.
 const SCHULWOCHEN_12=(()=>{
  const out=[],letzter=PP12_PLAN[PP12_PLAN.length-1].d;
@@ -4557,7 +4557,8 @@ const PPM_TYPEN={
  kprim:{icon:"🏁",name:"Check-Out-Wochentest",kurz:"Check-Out",art:"Check-Out-Wochentest",text:"Wochentest mit 2 Fallvignetten und 4 K-Prim-Aufgaben (16 BE), automatisch ausgewertet."},
  selbstlern:{icon:"🎒",name:"Selbstlernkurs",kurz:"Selbstlernkurs",art:"Selbstlernkurs",text:"Schüler:innen bearbeiten den Kurs selbstständig von A bis Z."},
  experiment:{icon:"🧪",name:"Experiment (interaktive Einheit)",kurz:"Experiment",art:"Experiment",text:"„Das Experiment“ als interaktive Einheit. Du wählst selbst, welche Teile dabei sind."},
- rallye:{icon:"🚩",name:"Lernrallye",kurz:"Lernrallye",art:"Lernrallye",text:"Stationen mit Aufgaben, per QR-Code oder der Reihe nach, einzeln oder in Teams, mit Punkten und Rangliste."}
+ rallye:{icon:"🚩",name:"Lernrallye",kurz:"Lernrallye",art:"Lernrallye",text:"Stationen mit Aufgaben, per QR-Code oder der Reihe nach, einzeln oder in Teams, mit Punkten und Rangliste."},
+ blockfall:{icon:"🧱",name:"Blockfall (Lernspiel)",kurz:"Blockfall",art:"Lernspiel",text:"Tetris-Lernspiel: Mit jeder vollen Reihe wird ein Begriff oder eine Definition abgefragt. Die Fragen stammen aus den Lehrtexten."}
 };
 const PPM_EINHEITEN={experiment:{icon:"🧪",name:"Das Experiment – interaktive Stunde",text:"Kaugummi-Versuch in Kleingruppen, Klassenvergleich, Merkmale eines Experiments und Abschlussquiz."}};
 // Dauer eines Moduls: eine Unterrichtsstunde (45 Min.), Doppelstunde, 120 oder 180 Minuten,
@@ -4576,7 +4577,7 @@ const PPM_DAUERN=[
 // Pro Schulwoche stehen 6,3 Unterrichtsstunden zu je 45 Minuten (285 Minuten) zur Verfügung. Wochen mit Praktikum (fpA-Blöcke)
 // und Ferien sind gesperrt. Eine ganze Woche (1 bis 3 Wochen) belegt die Woche vollständig.
 const PPM_STD_PRO_WOCHE="6,3",PPM_MIN_PRO_STUNDE=45,PPM_MIN_PRO_WOCHE=285; // 6 Stunden + 15 Minuten (z. B. K-Prim-Test) = 285 Minuten = 6,3 Stunden
-const PPM_DAUER_STANDARD={projekt:"90",stunde:"90",experiment:"90",apt:"90",kprim:"45",selbstlern:"90",rallye:"90"};
+const PPM_DAUER_STANDARD={projekt:"90",stunde:"90",experiment:"90",apt:"90",kprim:"45",selbstlern:"90",rallye:"90",blockfall:"45"};
 function ppmDauerKey(m){
  if(m&&PPM_DAUERN.some(d=>d.k===m.dauer))return m.dauer;
  const n=Math.max(1,Number(m&&m.wochen)||1);
@@ -5009,6 +5010,7 @@ async function ppmDialog(id,typ,woche,opt){
  let checkouts=[];
  if(t==="kprim"){try{checkouts=(await ladeCheckoutDaten()).checkouts||[];}catch(e){}}
  const ea=t==="selbstlern"?await ppmEaListe():[];
+ const bfT=t==="blockfall"?await ppmBlockfallThemen():[];
  const lb0=bearb?bearb.lb:(projekt?projekt.lb:1);
  const lbOpt=[1,2,3,4].map(n=>`<option value="${n}"${n===lb0?" selected":""}>Lernbereich ${n} · ${esc((PP12_LB[n]||{}).titel||"")}</option>`).join("");
  const ph0=PROJEKT_PHASEN.find(p=>p.lbNum===lb0);
@@ -5039,6 +5041,12 @@ async function ppmDialog(id,typ,woche,opt){
    ${PPM_EXP_TEILE.map(tl=>`<label class="check"><input type="checkbox" class="ppmTeil" value="${tl.k}"${gew.includes(tl.k)?" checked":""}><span><b>${esc(tl.name)}</b> <small>(ca. ${tl.min} Min.)</small><br><small style="color:var(--muted)">${esc(tl.text)}</small></span></label>`).join("")}
    <div id="ppmTeileInfo" class="ppm-teileinfo"></div></div>
    ${projekt?`<p style="font-size:13px;color:var(--muted);margin:0">Diese Einheit gehört zum Projekt „${esc(projekt.titel)}“ und zählt zur Projektzeit.</p>`:""}`;
+ }
+ if(t==="blockfall"){
+  const gew=bearb&&Array.isArray(bearb.themen)&&bearb.themen.length?bearb.themen:bfT.map(x=>x.id);
+  extra=`<div class="ppm-teile"><b style="font-size:13px">Themenpakete im Spiel</b>
+   ${bfT.length?bfT.map(x=>`<label class="check"><input type="checkbox" class="ppmBfTh" value="${esc(x.id)}"${gew.includes(x.id)?" checked":""}><span><b>${esc(x.titel)}</b> <small>(${x.n} Karten)</small></span></label>`).join(""):`<p style="color:#b3261e;font-size:13px;margin:0">Die Datei blockfall/aufgaben.json wurde nicht gefunden.</p>`}</div>
+   <p style="font-size:13px;color:var(--muted);margin:0">Mit jeder vollen Reihe stellt das Spiel eine Frage zu einem Begriff oder einer Definition. Die Fragen liegen in der Datei blockfall/aufgaben.json.</p>`;
  }
  if(t==="selbstlern"){
   const alt=bearb&&bearb.kursId==="psych-gegenstand";
@@ -5123,7 +5131,7 @@ async function ppmDialog(id,typ,woche,opt){
   if(!pr.ok){toast("In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).");return;}
   const dk=$("ppmDauer").value,def=PPM_DAUERN.find(d=>d.k===dk);
   const daten={modul:t,lb,titel:ti.value.trim(),start:$("ppmStart").value,dauer:dk,wochen:def?def.wochen:(Number(dk.slice(1))||1),notiz:$("ppmNotiz").value.trim()};
-  if(!daten.titel){const x=PROJEKT_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":t==="rallye"?"Lernrallye · LB"+lb:"Selbstlernkurs · LB"+lb);}
+  if(!daten.titel){const x=PROJEKT_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":t==="rallye"?"Lernrallye · LB"+lb:t==="blockfall"?"Blockfall":"Selbstlernkurs · LB"+lb);}
   if(projektId)daten.projektId=projektId;
   if(t==="projekt"&&$("ppmDirekt"))daten.direkt=$("ppmDirekt").value;
   if(t==="stunde")daten.phase=Number($("ppmPhase").value);
@@ -5134,6 +5142,11 @@ async function ppmDialog(id,typ,woche,opt){
    if(def&&def.min&&min>def.min&&!confirm(`Die gewählten Teile brauchen etwa ${min} Minuten, eingeplant sind ${def.min}. Trotzdem speichern?`))return;
   }
   if(t==="rallye"){daten.rModus=$("ppmRModus").value;daten.rFreischaltung=$("ppmRFrei").value;}
+  if(t==="blockfall"){
+   const th=[...document.querySelectorAll(".ppmBfTh")].filter(c=>c.checked).map(c=>c.value);
+   if(bfT.length&&!th.length){toast("Bitte mindestens ein Themenpaket wählen.");return;}
+   daten.themen=th.length===bfT.length?[]:th;   // leer = alle Themenpakete
+  }
   if(t==="selbstlern"){
    daten.kursId=$("ppmKurs").value;
    if(!ti.value.trim()){
@@ -5199,6 +5212,7 @@ async function ppmModulSeite(m){
  if(m.modul==="projekt")return await ppmProjektSeite(m);
  if(m.modul==="stunde")return await ppmStundeSeite(m);
  if(m.modul==="rallye")return await ppmRallyeSeite(m);
+ if(m.modul==="blockfall")return await ppmBlockfallSeite(m);
  if(m.modul==="kprim")return await ppmKprimSeite(m);
  if(m.modul==="apt")return await ppmAptSeite(m);
  if(m.modul==="experiment")return await ppmExperimentSeite(m);
@@ -5207,6 +5221,34 @@ async function ppmModulSeite(m){
   return await ppmKursSeite(m);
  }
  return"";
+}
+// ---- Blockfall (Lernspiel: Tetris mit Fragen zu Begriffen und Definitionen) ----
+// Spiel: blockfall/blockfall.html, Fragen: blockfall/aufgaben.json (Themenpakete mit Begriff und Definition).
+let PPM_BF_CACHE=null;
+async function ppmBlockfallThemen(){
+ if(PPM_BF_CACHE)return PPM_BF_CACHE;
+ try{
+  const r=await fetch("blockfall/aufgaben.json?v="+Date.now());
+  if(!r.ok)throw new Error(r.status);
+  const j=await r.json();
+  PPM_BF_CACHE=(j.themen||[]).map(t=>({id:t.id,titel:t.titel,n:(t.karten||[]).length,lb:t.lb||""}));
+ }catch(e){console.error("Blockfall-Aufgaben:",e);return[];}
+ return PPM_BF_CACHE;
+}
+async function ppmBlockfallSeite(m){
+ const lehrer=isTeacher(),th=await ppmBlockfallThemen();
+ const auswahl=Array.isArray(m.themen)&&m.themen.length?m.themen:null;
+ const gew=auswahl?th.filter(t=>auswahl.includes(t.id)):th;
+ const n=gew.reduce((s,t)=>s+t.n,0);
+ const url="blockfall/blockfall.html"+(auswahl?"?themen="+encodeURIComponent(auswahl.join(",")):"");
+ const liste=gew.map(t=>`<div class="ppm-zeile"><div style="flex:1;min-width:200px"><b>${esc(t.titel)}</b></div><small>${t.n} Karten</small></div>`).join("");
+ return`${ppmKopf(m,"")}
+ <div class="ppm-box"><h2>Blockfall</h2>
+  <p>Du spielst Tetris. Sobald eine Reihe voll ist, hält das Spiel an und fragt dich einen Begriff oder eine Definition ab, für jede Reihe eine Frage. Richtige Antworten bringen Punkte. Falsche Karten kommen später noch einmal und stehen am Ende in deiner Wiederholungsliste.</p>
+  ${gew.length?`<p><b>${n} Karten</b> in ${gew.length} Themenpaket${gew.length===1?"":"en"}:</p>${liste}`:`<p class="ppm-leer">Die Aufgaben wurden nicht gefunden. Es fehlt die Datei <code>blockfall/aufgaben.json</code> im Repo.</p>`}
+  <div style="margin-top:12px"><a class="ppm-btn primaer" href="${esc(url)}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">${lehrer?"Spiel öffnen (Vorschau)":"Blockfall starten"}</a></div>
+  ${lehrer?`<p style="font-size:13px;color:var(--muted);margin:10px 0 0">Neue Fragen ergänzt du in der Datei blockfall/aufgaben.json (Anleitung in blockfall/README.md). Welche Themenpakete im Spiel vorkommen, stellst du über „Modul bearbeiten“ ein.</p>`:""}</div>
+ ${footer()}`;
 }
 // ---- Experiment (interaktive Einheit mit wählbaren Teilen) ----
 async function ppmExperimentSeite(m){
