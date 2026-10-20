@@ -41,10 +41,24 @@ service cloud.firestore {
       allow read: if isSelf(uid) || isTeacher();
 
       // Public registration can only create a student in pending state.
-      allow create: if isSelf(uid)
-        && request.resource.data.role == 'student'
-        && request.resource.data.status == 'pending'
-        && request.resource.data.uid == uid;
+      // (a) Lehrkräfte registrieren sich mit E-Mail und warten auf Freischaltung.
+      // (b) Schüler:innen richten sich mit einem einmaligen Zugangscode ein
+      //     (Pseudonym statt Name, keine E-Mail). Der Code wird im selben
+      //     Schreibvorgang als benutzt markiert (getAfter).
+      allow create: if (isSelf(uid)
+          && request.resource.data.role == 'student'
+          && request.resource.data.status == 'pending'
+          && request.resource.data.uid == uid)
+        || (isSelf(uid)
+          && request.resource.data.role == 'student'
+          && request.resource.data.status == 'approved'
+          && request.resource.data.uid == uid
+          && request.resource.data.keys().hasOnly(['uid','email','firstName','lastName','displayName','pseudonym','role','status','code','createdAt'])
+          && request.resource.data.code is string
+          && exists(/databases/$(database)/documents/einladungen/$(request.resource.data.code))
+          && get(/databases/$(database)/documents/einladungen/$(request.resource.data.code)).data.used == false
+          && getAfter(/databases/$(database)/documents/einladungen/$(request.resource.data.code)).data.used == true
+          && getAfter(/databases/$(database)/documents/einladungen/$(request.resource.data.code)).data.usedBy == request.auth.uid);
 
       // Admins may manage all user fields.
       // Teachers may only manage the status of student accounts.
@@ -69,6 +83,27 @@ service cloud.firestore {
       // Deleting accounts is an administrative action.
       // Löschen: Admin oder die Person selbst (Recht auf Löschung, Art. 17 DSGVO).
       allow delete: if isAdmin() || isSelf(uid);
+    }
+
+    // ---------------------------------------------------------
+    // EINLADUNGSCODES (Zugangskarten): Lehrkräfte erzeugen sie, Schüler:innen
+    // lösen sie einmalig ein. Einzelabruf nur mit Kenntnis des Codes, die
+    // Liste aller Codes sehen nur Lehrkräfte.
+    // ---------------------------------------------------------
+    match /einladungen/{code} {
+      allow get: if signedIn();
+      allow list: if isTeacher();
+      allow create: if isTeacher()
+        && request.resource.data.used == false
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.keys().hasOnly(['used','createdBy','createdAt','klasse']);
+      allow update: if isTeacher()
+        || (signedIn()
+          && resource.data.used == false
+          && request.resource.data.used == true
+          && request.resource.data.usedBy == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['used','usedBy','usedAt']));
+      allow delete: if isTeacher();
     }
 
     // ---------------------------------------------------------
