@@ -1,0 +1,58 @@
+{
+ "titel": "Theorievergleich: Determinismus und Trieblehre",
+ "anleitung": "Ordne jede Karte der passenden Grundannahme der psychoanalytischen Theorie zu.",
+ "spalten": [
+  "Psychischer Determinismus",
+  "Psychoanalytische Trieblehre"
+ ],
+ "karten": [
+  {
+   "t": "Jedes Verhalten ist seelisch bedingt und hat eine Ursache",
+   "s": 0
+  },
+  {
+   "t": "Versprecher und Fehlleistungen sind nicht zufällig",
+   "s": 0
+  },
+  {
+   "t": "Verhalten lässt sich aus der individuellen Lebensgeschichte erschließen",
+   "s": 0
+  },
+  {
+   "t": "Ursache: seelischer Prozess, Wirkung: Erleben und Verhalten",
+   "s": 0
+  },
+  {
+   "t": "Ein häufig verlegter Ehering kann auf einen unbewussten Wunsch hinweisen",
+   "s": 0
+  },
+  {
+   "t": "Ziel der Forschung: die Bedeutung hinter dem Verhalten finden",
+   "s": 0
+  },
+  {
+   "t": "Verhalten wird durch Triebe erzeugt und gesteuert",
+   "s": 1
+  },
+  {
+   "t": "Ein Trieb besteht aus Triebquelle, Triebobjekt und Triebziel",
+   "s": 1
+  },
+  {
+   "t": "Lebenstrieb Eros mit der Energie Libido",
+   "s": 1
+  },
+  {
+   "t": "Todestrieb Thanatos mit der Energie Destrudo",
+   "s": 1
+  },
+  {
+   "t": "Das Triebziel ist die Befriedigung, also der Abbau von Spannung",
+   "s": 1
+  },
+  {
+   "t": "Das Triebobjekt ist das, wodurch der Trieb sein Ziel erreicht",
+   "s": 1
+  }
+ ]
+}

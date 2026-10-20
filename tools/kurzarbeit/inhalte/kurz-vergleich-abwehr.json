@@ -1,0 +1,58 @@
+{
+ "titel": "Theorievergleich: Projektion und Identifikation",
+ "anleitung": "Ordne jede Karte dem passenden Abwehrmechanismus zu.",
+ "spalten": [
+  "Projektion",
+  "Identifikation"
+ ],
+ "karten": [
+  {
+   "t": "Eigene unannehmbare Impulse werden anderen zugeschrieben",
+   "s": 0
+  },
+  {
+   "t": "„Nicht ich tue etwas Unerlaubtes, sondern du!“",
+   "s": 0
+  },
+  {
+   "t": "Eine Frau mit unbewusstem Wunsch nach einem Seitensprung bezichtigt ihren Mann der Untreue",
+   "s": 0
+  },
+  {
+   "t": "Schuldgefühle werden verringert, indem Fehlverhalten nach außen verlagert wird",
+   "s": 0
+  },
+  {
+   "t": "Wer sich nicht aggressiv erleben will, erlebt andere als aggressiv",
+   "s": 0
+  },
+  {
+   "t": "Der andere wird für das eigene Fehlverhalten bekämpft oder bestraft",
+   "s": 0
+  },
+  {
+   "t": "Gleichsetzung mit einer Person oder Institution von höherem Rang",
+   "s": 1
+  },
+  {
+   "t": "Ein Kind mit Dunkelangst fühlt sich als Superman",
+   "s": 1
+  },
+  {
+   "t": "Das Selbstwertgefühl wird erhöht und die Angst bekämpft",
+   "s": 1
+  },
+  {
+   "t": "Ein Fan übernimmt Verhalten und Meinungen eines Sängers",
+   "s": 1
+  },
+  {
+   "t": "Identifikation mit dem Aggressor, z. B. beim Stockholm-Syndrom",
+   "s": 1
+  },
+  {
+   "t": "Das Kind identifiziert sich mit dem gleichgeschlechtlichen Elternteil",
+   "s": 1
+  }
+ ]
+}

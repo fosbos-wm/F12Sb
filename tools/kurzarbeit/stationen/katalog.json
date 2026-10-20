@@ -1,0 +1,380 @@
+[
+ {
+  "id": "kurz-zuordnung-psychoanalyse",
+  "titel": "Kurzarbeit: Zuordnung Psychoanalyse",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "10 Begriffe von Determinismus bis Realitätsprinzip den Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=kurz-zuordnung-psychoanalyse",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-zuordnung-entwicklung",
+  "titel": "Kurzarbeit: Zuordnung Entwicklung",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Merkmale des Entwicklungsbegriffs und die drei Bedingungen mit Beispielen verbinden.",
+  "datei": "zuordnung.html?set=kurz-zuordnung-entwicklung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-zuordnung-wechselwirkung",
+  "titel": "Kurzarbeit: Zuordnung Wirkbeziehungen",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Fallbeispiele den sechs Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung zuordnen.",
+  "datei": "zuordnung.html?set=kurz-zuordnung-wechselwirkung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-memory-psychoanalyse",
+  "titel": "Kurzarbeit: Memory Psychoanalyse",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Instanzen, Abwehrmechanismen und Angstformen mit ihren Erklärungen aufdecken.",
+  "datei": "memory.html?set=kurz-memory-psychoanalyse",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-memory-entwicklung",
+  "titel": "Kurzarbeit: Memory Entwicklung",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Begriffe der Entwicklungspsychologie mit Erklärungen paaren.",
+  "datei": "memory.html?set=kurz-memory-entwicklung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-blockfall-instanzen",
+  "titel": "Kurzarbeit: Blockfall Es, Ich, Über-Ich",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Fallende Aussagen unter Zeitdruck der richtigen Instanz zuordnen.",
+  "datei": "blockfall.html?set=kurz-blockfall-instanzen",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-blockfall-angst",
+  "titel": "Kurzarbeit: Blockfall Formen der Angst",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Fallbeispiele Realangst, moralischer und neurotischer Angst zuordnen.",
+  "datei": "blockfall.html?set=kurz-blockfall-angst",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-blockfall-entwicklung",
+  "titel": "Kurzarbeit: Blockfall Anlage, Umwelt, Selbststeuerung",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Aussagen und Beispiele den drei Entwicklungsbedingungen zuordnen.",
+  "datei": "blockfall.html?set=kurz-blockfall-entwicklung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-blockfall-bewusstsein",
+  "titel": "Kurzarbeit: Blockfall Schichten des Bewusstseins",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Bewusst, vorbewusst oder unbewusst? Beispiele sortieren.",
+  "datei": "blockfall.html?set=kurz-blockfall-bewusstsein",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-vergleich-ich",
+  "titel": "Kurzarbeit: Theorievergleich Ich-Stärke und Ich-Schwäche",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "12 Karten in zwei Spalten sortieren.",
+  "datei": "vergleich.html?set=kurz-vergleich-ich",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-vergleich-modelle",
+  "titel": "Kurzarbeit: Theorievergleich Topisches und strukturelles Modell",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Die beiden Modelle des psychischen Apparats unterscheiden.",
+  "datei": "vergleich.html?set=kurz-vergleich-modelle",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-vergleich-abwehr",
+  "titel": "Kurzarbeit: Theorievergleich Projektion und Identifikation",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Merkmale und Beispiele den Abwehrmechanismen zuordnen.",
+  "datei": "vergleich.html?set=kurz-vergleich-abwehr",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-vergleich-grundannahmen",
+  "titel": "Kurzarbeit: Theorievergleich Determinismus und Trieblehre",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Die Grundannahmen der psychoanalytischen Theorie trennen.",
+  "datei": "vergleich.html?set=kurz-vergleich-grundannahmen",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-vergleich-einfluesse",
+  "titel": "Kurzarbeit: Theorievergleich Fördernde und hemmende Einflüsse",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Erziehungseinflüsse auf die Entwicklung sortieren.",
+  "datei": "vergleich.html?set=kurz-vergleich-einfluesse",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-luecken-abwehr",
+  "titel": "Kurzarbeit: Tafelbild Abwehr",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Das Tafelbild zur Abwehr mit Fachbegriffen vervollständigen.",
+  "datei": "luecken.html?set=kurz-luecken-abwehr",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-luecken-angst",
+  "titel": "Kurzarbeit: Tafelbild Grundformen der Angst",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Den Text zu den Grundformen der Angst ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-angst",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-luecken-begriff",
+  "titel": "Kurzarbeit: Tafelbild Begriff Entwicklung",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Die sechs Merkmale des Entwicklungsbegriffs ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-begriff",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-luecken-bedingungen",
+  "titel": "Kurzarbeit: Tafelbild Bedingungen der Entwicklung",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Anlage, Umwelt, Selbststeuerung und ihr Zusammenwirken ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-bedingungen",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-luecken-schichten",
+  "titel": "Kurzarbeit: Tafelbild Schichten des Bewusstseins",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Das topische Modell mit deskriptivem und dynamischem Aspekt ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-schichten",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-luecken-trieb",
+  "titel": "Kurzarbeit: Tafelbild Determinismus und Trieblehre",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Die Grundannahmen der psychoanalytischen Theorie ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-trieb",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ]
+ },
+ {
+  "id": "kurz-kprim-psychoanalyse",
+  "titel": "Kurzarbeit: K-Prim Psychoanalytische Theorie",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Vier Aufgaben mit je vier Aussagen: trifft zu oder nicht?",
+  "datei": "kprim.html?set=kurz-kprim-psychoanalyse",
+  "ergebnis": true,
+  "parameter": []
+ },
+ {
+  "id": "kurz-kprim-entwicklung",
+  "titel": "Kurzarbeit: K-Prim Entwicklungspsychologie",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Vier Aufgaben mit je vier Aussagen: trifft zu oder nicht?",
+  "datei": "kprim.html?set=kurz-kprim-entwicklung",
+  "ergebnis": true,
+  "parameter": []
+ }
+]

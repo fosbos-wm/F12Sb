@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Teststation</title><link rel="stylesheet" href="css/ts.css"></head>
+<body>
+<div class="wrap">
+ <div class="top"><div class="brand"><span class="led on"></span><div>Kurzarbeit<small>Vorbereitung: interaktive Übungen</small></div></div></div>
+ <div class="row" style="margin-bottom:14px"><label>Team (für die Rangliste)<select id="team"></select></label><span class="muted small">Tippe auf eine Übung, sie startet sofort.</span></div>
+ <div class="grid" id="grid" aria-live="polite"></div>
+ <p class="muted small" style="margin-top:20px">Keine Anmeldung, keine Namen, keine Daten an einen Server.</p>
+</div>
+<script type="module">
+import {esc,ls,loadKatalog,cleanId} from "./js/ts-core.js";
+const $=id=>document.getElementById(id),q=new URLSearchParams(location.search);
+$("team").innerHTML=Array.from({length:30},(_,i)=>`<option value="${i+1}">Team ${i+1}</option>`).join("");
+let t=+ls.get("ts-team")||+q.get("t")||1;$("team").value=Math.min(30,Math.max(1,t));
+$("team").addEventListener("change",()=>{ls.set("ts-team",$("team").value);draw()});
+let kat=[];
+const sel=(q.get("auswahl")||"").split(",").map(cleanId).filter(Boolean);
+function link(s){
+  const u=new URLSearchParams({s:s.id,t:$("team").value});
+  (s.parameter||[]).forEach(p=>{const v=q.get(p.name);if(v&&/^[A-Za-z0-9]{1,6}$/.test(v))u.set(p.name,v)});
+  if(sel.length)u.set("auswahl",sel.join(","));
+  return "station.html?"+u;
+}
+function draw(){
+  const list=sel.length?sel.map(id=>kat.find(s=>s.id===id)).filter(Boolean):kat;
+  $("grid").innerHTML=list.map((s,i)=>`<a class="station" href="${link(s)}" style="text-decoration:none;color:inherit"><span class="no">ÜBUNG ${String(i+1).padStart(2,"0")}</span><b>${esc(s.titel)}</b><span class="muted small">${esc(s.beschreibung||"")}</span><span><span class="tag">${esc(s.fach||"")}</span></span></a>`).join("")||`<div class="msg err">Keine Übungen gefunden.</div>`;
+}
+loadKatalog().then(k=>{kat=k;draw()}).catch(()=>{$("grid").innerHTML=`<div class="msg err">Die Übungen konnten nicht geladen werden. Prüfe die Verbindung.</div>`});
+</script></body></html>

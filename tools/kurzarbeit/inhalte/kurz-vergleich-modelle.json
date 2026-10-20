@@ -1,0 +1,58 @@
+{
+ "titel": "Theorievergleich: Topisches und strukturelles Modell",
+ "anleitung": "Ordne jede Karte dem passenden Modell des psychischen Apparats zu.",
+ "spalten": [
+  "Topisches Modell (Schichten des Bewusstseins)",
+  "Strukturelles Modell (Instanzen und Dynamik)"
+ ],
+ "karten": [
+  {
+   "t": "Unterscheidet Bewusstes, Vorbewusstes und Unbewusstes",
+   "s": 0
+  },
+  {
+   "t": "Bild des Eisbergs: Nur die Spitze liegt über der Wasserlinie",
+   "s": 0
+  },
+  {
+   "t": "Deskriptiver Aspekt: Auf unbewusste Inhalte kann nur geschlossen werden",
+   "s": 0
+  },
+  {
+   "t": "Dynamischer Aspekt: Unbewusstes drängt ins Bewusstsein und wird mit Gegenbesetzung gehalten",
+   "s": 0
+  },
+  {
+   "t": "Fragt: Wie zugänglich ist ein seelischer Inhalt für das Bewusstsein?",
+   "s": 0
+  },
+  {
+   "t": "Aufmerksamkeit oder ein Schlüsselreiz holt Vorbewusstes ins Bewusstsein",
+   "s": 0
+  },
+  {
+   "t": "Unterscheidet Es, Ich und Über-Ich",
+   "s": 1
+  },
+  {
+   "t": "Die Instanzen folgen Lust-, Realitäts- und Moralitätsprinzip",
+   "s": 1
+  },
+  {
+   "t": "Das Ich vermittelt zwischen Es, Über-Ich und Realität",
+   "s": 1
+  },
+  {
+   "t": "Das Über-Ich bewertet die Wünsche des Es",
+   "s": 1
+  },
+  {
+   "t": "Fragt: Welche seelische Kraft steuert das Verhalten?",
+   "s": 1
+  },
+  {
+   "t": "Ein Ungleichgewicht der Instanzen führt zu Angst",
+   "s": 1
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "titel": "Blockfall: Welche Form der Angst?",
+ "anleitung": "Ordne jede Situation einer Grundform der Angst zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Realangst",
+  "Moralische Angst",
+  "Neurotische Angst"
+ ],
+ "items": [
+  {
+   "t": "Er fürchtet, bei der Täuschung erwischt und bestraft zu werden.",
+   "k": 0
+  },
+  {
+   "t": "Sie lässt den Plan fallen, weil sie öffentliche Verurteilung fürchtet.",
+   "k": 0
+  },
+  {
+   "t": "Er befürchtet, vor seinen Angestellten an Ansehen zu verlieren.",
+   "k": 0
+  },
+  {
+   "t": "Er schwänzt nicht, weil ihm ein Verweis und ein Elterngespräch drohen.",
+   "k": 0
+  },
+  {
+   "t": "Nach dem Gedanken an Betrug quälen sie Schuldgefühle.",
+   "k": 1
+  },
+  {
+   "t": "Er macht sich Selbstvorwürfe, weil er gegen eigene Prinzipien verstoßen hat.",
+   "k": 1
+  },
+  {
+   "t": "Sie hat Gewissensbisse, obwohl niemand etwas bemerkt hat.",
+   "k": 1
+  },
+  {
+   "t": "Er erlebt sein Selbstwertgefühl bedroht, weil er seinem Ideal nicht entspricht.",
+   "k": 1
+  },
+  {
+   "t": "Er fürchtet, von seinen aggressiven Impulsen überwältigt zu werden.",
+   "k": 2
+  },
+  {
+   "t": "Sie erschrickt über die Stärke ihres Verlangens und fürchtet, es könnte sie vernichten.",
+   "k": 2
+  },
+  {
+   "t": "Er hat Panik, seinen Triebwünschen ausgeliefert zu sein, ohne dass äußerlich etwas droht.",
+   "k": 2
+  },
+  {
+   "t": "Angst vor Überwältigung durch das Es, z. B. bei einer entstehenden Schizophrenie",
+   "k": 2
+  },
+  {
+   "t": "Sie fürchtet die Konsequenzen, wenn ihr Wunsch in der Realität bekannt würde.",
+   "k": 0
+  },
+  {
+   "t": "Er sieht sich vom strengen Über-Ich bedroht und fühlt sich minderwertig.",
+   "k": 1
+  },
+  {
+   "t": "Sie fürchtet, die Kontrolle über ihre Triebe zu verlieren.",
+   "k": 2
+  }
+ ]
+}

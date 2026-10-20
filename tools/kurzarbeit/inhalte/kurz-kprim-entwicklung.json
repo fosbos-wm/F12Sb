@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Entwicklungspsychologie",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Begriff Entwicklung treffen zu?",
+   "statements": [
+    {
+     "text": "Die Veränderungen treten in einer nicht umkehrbaren Reihenfolge auf.",
+     "richtig": true
+    },
+    {
+     "text": "Entwicklung ist auf ein Ziel hin gerichtet.",
+     "richtig": true
+    },
+    {
+     "text": "Entwicklung endet mit dem Erwachsenwerden.",
+     "richtig": false
+    },
+    {
+     "text": "Die einzelnen Veränderungen verlaufen unabhängig voneinander.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Bedingungen der Entwicklung treffen zu?",
+   "statements": [
+    {
+     "text": "Die Anlage wird bei der Befruchtung festgelegt.",
+     "richtig": true
+    },
+    {
+     "text": "Umwelt meint nur Einflüsse nach der Geburt.",
+     "richtig": false
+    },
+    {
+     "text": "Selbststeuerung bedeutet, dass das Individuum als aktives Wesen Entwicklung von sich aus herbeiführt.",
+     "richtig": true
+    },
+    {
+     "text": "„Angeboren“ und „vererbt“ bedeuten dasselbe.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Zusammenwirken treffen zu?",
+   "statements": [
+    {
+     "text": "Die Frage nach den Wirkanteilen von Anlage und Umwelt gilt aus wissenschaftlicher Sicht als nicht beantwortbar.",
+     "richtig": true
+    },
+    {
+     "text": "Eineiige Zwillinge mit gleicher strenger Erziehung entwickeln zwangsläufig gleiche Persönlichkeitsmerkmale.",
+     "richtig": false
+    },
+    {
+     "text": "Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
+     "richtig": true
+    },
+    {
+     "text": "Anlage und Selbststeuerung beeinflussen sich nicht gegenseitig.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Einflüssen auf die Entwicklung treffen zu?",
+   "statements": [
+    {
+     "text": "Einflüsse wirken oft erst in der Kombination.",
+     "richtig": true
+    },
+    {
+     "text": "Sichere Bindung gilt als entwicklungsfördernd.",
+     "richtig": true
+    },
+    {
+     "text": "Autoritäre Erziehung gilt als entwicklungsfördernd.",
+     "richtig": false
+    },
+    {
+     "text": "Eine Entwicklungsstörung liegt auch dann vor, wenn die Entwicklung genau dem Alter entspricht.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

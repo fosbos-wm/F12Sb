@@ -1,0 +1,38 @@
+{
+ "titel": "Memory: Psychoanalyse",
+ "anleitung": "Finde zu jedem Begriff die passende Erklärung.",
+ "paare": [
+  [
+   "Es",
+   "Lustprinzip: fordert sofortige Triebbefriedigung"
+  ],
+  [
+   "Ich",
+   "Realitätsprinzip: vermittelt zwischen Es, Über-Ich und Realität"
+  ],
+  [
+   "Über-Ich",
+   "Moralitätsprinzip: bewertet die Wünsche des Es"
+  ],
+  [
+   "Verdrängung",
+   "Grundlegender Abwehrmechanismus"
+  ],
+  [
+   "Projektion",
+   "Eigene Impulse werden anderen zugeschrieben"
+  ],
+  [
+   "Identifikation",
+   "Gleichsetzung mit einer höhergestellten Person"
+  ],
+  [
+   "Realangst",
+   "Angst vor den Konsequenzen der Realität"
+  ],
+  [
+   "Neurotische Angst",
+   "Angst vor Überwältigung durch das Es"
+  ]
+ ]
+}
