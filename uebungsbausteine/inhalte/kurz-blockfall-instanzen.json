@@ -1,0 +1,95 @@
+{
+ "titel": "Blockfall: Es, Ich oder Über-Ich?",
+ "anleitung": "Ordne Fälle und Aussagen der passenden Persönlichkeitsinstanz zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Es",
+  "Ich",
+  "Über-Ich"
+ ],
+ "items": [
+  {
+   "t": "„Ich will das jetzt – sofort!“",
+   "k": 0,
+   "f": 1
+  },
+  {
+   "t": "Triebimpulse verlangen unmittelbare Befriedigung",
+   "k": 0
+  },
+  {
+   "t": "Folgt dem Lustprinzip",
+   "k": 0
+  },
+  {
+   "t": "Meldet Wünsche und Bedürfnisse beim Ich an",
+   "k": 0
+  },
+  {
+   "t": "Der Wunsch, den Sitznachbarn zu schlagen, steigt plötzlich auf",
+   "k": 0,
+   "f": 1
+  },
+  {
+   "t": "Enthält die ursprünglichen Triebansprüche",
+   "k": 0
+  },
+  {
+   "t": "„Ich esse nach der Prüfung, jetzt lerne ich erst.“",
+   "k": 1,
+   "f": 1
+  },
+  {
+   "t": "Überprüft die Realität",
+   "k": 1
+  },
+  {
+   "t": "Vermittelt zwischen Es, Über-Ich und Realität",
+   "k": 1
+  },
+  {
+   "t": "Folgt dem Realitätsprinzip",
+   "k": 1
+  },
+  {
+   "t": "Entscheidet, ob ein Wunsch verwirklicht oder abgewehrt wird",
+   "k": 1
+  },
+  {
+   "t": "Reagiert mit Angst auf drohende Gefahren",
+   "k": 1
+  },
+  {
+   "t": "Sucht einen sozial akzeptierten Weg zur Bedürfnisbefriedigung",
+   "k": 1
+  },
+  {
+   "t": "„Das gehört sich nicht!“ als innere Stimme",
+   "k": 2,
+   "f": 1
+  },
+  {
+   "t": "Bewertet die Wünsche des Es",
+   "k": 2
+  },
+  {
+   "t": "Enthält auch das Ich-Ideal",
+   "k": 2
+  },
+  {
+   "t": "Folgt dem Moralitätsprinzip",
+   "k": 2
+  },
+  {
+   "t": "Verinnerlichte Normen und Verbote der Eltern",
+   "k": 2
+  },
+  {
+   "t": "Löst Schuldgefühle und Gewissensbisse aus",
+   "k": 2
+  },
+  {
+   "t": "Gibt dem Ich Anweisung, welche Wünsche zugelassen werden",
+   "k": 2
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "titel": "Theorievergleich: Entwicklungsfördernde und hemmende Einflüsse",
+ "anleitung": "Ordne jede Karte der passenden Spalte zu. Beachte: Einflüsse wirken oft erst in der Kombination.",
+ "spalten": [
+  "Entwicklungsfördernde Erziehungseinflüsse",
+  "Entwicklungshemmende Erziehungseinflüsse"
+ ],
+ "karten": [
+  {
+   "t": "Sichere Bindung",
+   "s": 0
+  },
+  {
+   "t": "Hohe Wertschätzung",
+   "s": 0
+  },
+  {
+   "t": "Verstehen des Kindes",
+   "s": 0
+  },
+  {
+   "t": "Fördernde, nicht-dirigierende Einzeltätigkeiten",
+   "s": 0
+  },
+  {
+   "t": "Autoritative Erziehung",
+   "s": 0
+  },
+  {
+   "t": "Verlässliche Zuwendung mit Erfolgserlebnissen",
+   "s": 0
+  },
+  {
+   "t": "Fehlformen in der Erziehung",
+   "s": 1
+  },
+  {
+   "t": "Familiäre Faktoren, z. B. dauerhafte Konflikte",
+   "s": 1
+  },
+  {
+   "t": "Individuelle belastende Erlebnisse",
+   "s": 1
+  },
+  {
+   "t": "Autoritärer oder vernachlässigender Erziehungsstil",
+   "s": 1
+  },
+  {
+   "t": "Dauerhafte Überbehütung",
+   "s": 1
+  },
+  {
+   "t": "Fehlende emotionale Zuwendung",
+   "s": 1
+  }
+ ]
+}

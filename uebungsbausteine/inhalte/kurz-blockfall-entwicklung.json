@@ -1,0 +1,89 @@
+{
+ "titel": "Blockfall: Anlage, Umwelt oder Selbststeuerung?",
+ "anleitung": "Ordne Fälle und Aussagen der passenden Entwicklungsbedingung zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Anlage",
+  "Umwelt",
+  "Selbststeuerung"
+ ],
+ "items": [
+  {
+   "t": "Wird bei der Befruchtung durch die Chromosomen festgelegt",
+   "k": 0
+  },
+  {
+   "t": "Das „Programm der Entwicklung“",
+   "k": 0
+  },
+  {
+   "t": "Legt Werdemöglichkeiten fest, die entfaltet werden müssen",
+   "k": 0
+  },
+  {
+   "t": "Verantwortlich für sensible Phasen",
+   "k": 0
+  },
+  {
+   "t": "Endogene Entwicklungsbedingung",
+   "k": 0
+  },
+  {
+   "t": "Eineiige Zwillinge haben dieselbe genetische Ausstattung",
+   "k": 0,
+   "f": 1
+  },
+  {
+   "t": "Klima und Landschaft, in der ein Kind aufwächst",
+   "k": 1,
+   "f": 1
+  },
+  {
+   "t": "Sprache, Sitten und Wertvorstellungen der Gesellschaft",
+   "k": 1,
+   "f": 1
+  },
+  {
+   "t": "Der „Schrittmacher der Entwicklung“",
+   "k": 1
+  },
+  {
+   "t": "Alle direkten und indirekten Einflüsse von außen",
+   "k": 1
+  },
+  {
+   "t": "Der Erziehungsstil der Eltern",
+   "k": 1,
+   "f": 1
+  },
+  {
+   "t": "Exogene Entwicklungsbedingung",
+   "k": 1
+  },
+  {
+   "t": "Der „Gestalter der Entwicklung“",
+   "k": 2
+  },
+  {
+   "t": "Das Individuum führt als aktives Wesen Entwicklung von sich aus herbei",
+   "k": 2
+  },
+  {
+   "t": "Ein Jugendlicher setzt sich selbst Ziele und trainiert dafür",
+   "k": 2,
+   "f": 1
+  },
+  {
+   "t": "Ein Kind sucht sich bewusst neue Herausforderungen",
+   "k": 2,
+   "f": 1
+  },
+  {
+   "t": "Autonome Entwicklungsbedingung",
+   "k": 2
+  },
+  {
+   "t": "Eigene Entscheidungen beeinflussen den weiteren Lebensweg",
+   "k": 2
+  }
+ ]
+}

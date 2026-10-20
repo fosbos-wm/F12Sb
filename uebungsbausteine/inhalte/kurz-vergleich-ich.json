@@ -1,0 +1,58 @@
+{
+ "titel": "Theorievergleich: Starkes und schwaches Ich",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Ich-Stärke",
+  "Ich-Schwäche"
+ ],
+ "karten": [
+  {
+   "t": "Gleichgewicht zwischen den Persönlichkeitsinstanzen und der Realität",
+   "s": 0
+  },
+  {
+   "t": "Das Ich kann sich gegenüber den Instanzen und der Realität durchsetzen",
+   "s": 0
+  },
+  {
+   "t": "Das Ich bringt die Anforderungen von Es, Über-Ich und Realität in Einklang",
+   "s": 0
+  },
+  {
+   "t": "Die Person ist selbstbestimmt in ihrem Verhalten",
+   "s": 0
+  },
+  {
+   "t": "Wünsche können verwirklicht, aber auch zurückgestellt werden",
+   "s": 0
+  },
+  {
+   "t": "Gefördert durch Zuwendung, Erfolgserlebnisse und dosierte Frustrationen",
+   "s": 0
+  },
+  {
+   "t": "Die Persönlichkeitsinstanzen stehen im Ungleichgewicht",
+   "s": 1
+  },
+  {
+   "t": "Das Ich ist einer Instanz oder der Realität unterlegen",
+   "s": 1
+  },
+  {
+   "t": "Dem Ich gelingt es nicht, zwischen den Forderungen zu vermitteln",
+   "s": 1
+  },
+  {
+   "t": "Die Person ist fremdbestimmt in ihrem Verhalten",
+   "s": 1
+  },
+  {
+   "t": "Mögliche Folge eines zu starken Über-Ichs bei autoritärer oder überbehütender Erziehung",
+   "s": 1
+  },
+  {
+   "t": "Herrscht das Es vor, werden Triebwünsche exzessiv befriedigt",
+   "s": 1
+  }
+ ]
+}

@@ -1,0 +1,662 @@
+[
+ {
+  "id": "kurz-zuordnung-psychoanalyse",
+  "titel": "Zuordnung Psychoanalyse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "10 Fachbegriffe von Determinismus bis Realitätsprinzip in ihrer Bedeutung verstehen und zuordnen.",
+  "datei": "zuordnung.html?set=kurz-zuordnung-psychoanalyse",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Zuordnung"
+  ]
+ },
+ {
+  "id": "kurz-memory-psychoanalyse",
+  "titel": "Memory Psychoanalyse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Instanzen, Abwehrmechanismen und Angstformen mit ihren Erklärungen aufdecken.",
+  "datei": "memory.html?set=kurz-memory-psychoanalyse",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Memory"
+  ]
+ },
+ {
+  "id": "kurz-blockfall-instanzen",
+  "titel": "Blockfall Es, Ich, Über-Ich",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fälle und Aussagen unter Zeitdruck der richtigen Instanz zuordnen.",
+  "datei": "blockfall.html?set=kurz-blockfall-instanzen",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Blockfall"
+  ]
+ },
+ {
+  "id": "kurz-blockfall-angst",
+  "titel": "Blockfall Formen der Angst",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbeispiele der Realangst, moralischen und neurotischen Angst zuordnen.",
+  "datei": "blockfall.html?set=kurz-blockfall-angst",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Blockfall"
+  ]
+ },
+ {
+  "id": "kurz-blockfall-bewusstsein",
+  "titel": "Blockfall Schichten des Bewusstseins",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fälle und Aussagen den Schichten des Bewusstseins zuordnen.",
+  "datei": "blockfall.html?set=kurz-blockfall-bewusstsein",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Blockfall"
+  ]
+ },
+ {
+  "id": "kurz-vergleich-ich",
+  "titel": "Theorievergleich Ich-Stärke und Ich-Schwäche",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "12 Karten in zwei Spalten sortieren.",
+  "datei": "vergleich.html?set=kurz-vergleich-ich",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Theorievergleich"
+  ]
+ },
+ {
+  "id": "kurz-vergleich-modelle",
+  "titel": "Theorievergleich Topisches und strukturelles Modell",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die beiden Modelle des psychischen Apparats unterscheiden.",
+  "datei": "vergleich.html?set=kurz-vergleich-modelle",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Theorievergleich"
+  ]
+ },
+ {
+  "id": "kurz-vergleich-abwehr",
+  "titel": "Theorievergleich Projektion und Identifikation",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Merkmale und Beispiele den Abwehrmechanismen zuordnen.",
+  "datei": "vergleich.html?set=kurz-vergleich-abwehr",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Theorievergleich"
+  ]
+ },
+ {
+  "id": "kurz-vergleich-grundannahmen",
+  "titel": "Theorievergleich Determinismus und Trieblehre",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Grundannahmen der psychoanalytischen Theorie trennen.",
+  "datei": "vergleich.html?set=kurz-vergleich-grundannahmen",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Theorievergleich"
+  ]
+ },
+ {
+  "id": "kurz-luecken-abwehr",
+  "titel": "Lückentext Abwehr",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Den Text zur Abwehr mit Fachbegriffen vervollständigen.",
+  "datei": "luecken.html?set=kurz-luecken-abwehr",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Lückentext"
+  ]
+ },
+ {
+  "id": "kurz-luecken-angst",
+  "titel": "Lückentext Grundformen der Angst",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Den Text zu den Grundformen der Angst ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-angst",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Lückentext"
+  ]
+ },
+ {
+  "id": "kurz-luecken-schichten",
+  "titel": "Lückentext Schichten des Bewusstseins",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das topische Modell mit deskriptivem und dynamischem Aspekt ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-schichten",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Lückentext"
+  ]
+ },
+ {
+  "id": "kurz-luecken-trieb",
+  "titel": "Lückentext Determinismus und Trieblehre",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Grundannahmen der psychoanalytischen Theorie ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-trieb",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Lückentext"
+  ]
+ },
+ {
+  "id": "kurz-kprim-psychoanalyse",
+  "titel": "K-Prim Psychoanalytische Theorie",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Vier Aufgaben mit je vier Aussagen: trifft zu oder nicht?",
+  "datei": "kprim.html?set=kurz-kprim-psychoanalyse",
+  "ergebnis": true,
+  "parameter": [],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "K-Prim"
+  ]
+ },
+ {
+  "id": "kurz-tetris-psychoanalyse",
+  "titel": "Begriffe-Tetris Psychoanalyse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Volle Reihe, Frage: Was bedeutet der Fachbegriff, und welcher Begriff passt zum Fall? Psychoanalyse von Determinismus bis Ich-Schwäche.",
+  "datei": "tetris.html?set=kurz-tetris-psychoanalyse",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Spielnummer",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   },
+   {
+    "name": "fragen",
+    "label": "Fragen pro Spiel",
+    "typ": "wahl",
+    "optionen": [
+     "8",
+     "12",
+     "16"
+    ],
+    "standard": "12"
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Begriffe-Tetris"
+  ]
+ },
+ {
+  "id": "kurz-rennen-psychoanalyse",
+  "titel": "Wichtel-Schubkarrenrennen Psychoanalyse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "2 bis 8 Teams treten gleichzeitig an: Bedeutung von Fachbegriffen und Fälle zur Psychoanalyse.",
+  "datei": "rennen.html?set=kurz-rennen-psychoanalyse",
+  "ergebnis": false,
+  "parameter": [],
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)",
+   "Wichtel-Schubkarrenrennen"
+  ]
+ },
+ {
+  "id": "kurz-zuordnung-entwicklung",
+  "titel": "Zuordnung Entwicklung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Merkmale des Entwicklungsbegriffs und die drei Bedingungen mit Beispielen verbinden.",
+  "datei": "zuordnung.html?set=kurz-zuordnung-entwicklung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Zuordnung"
+  ]
+ },
+ {
+  "id": "kurz-zuordnung-wechselwirkung",
+  "titel": "Zuordnung Wirkbeziehungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fälle den sechs Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung zuordnen.",
+  "datei": "zuordnung.html?set=kurz-zuordnung-wechselwirkung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Zuordnung"
+  ]
+ },
+ {
+  "id": "kurz-memory-entwicklung",
+  "titel": "Memory Entwicklung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe der Entwicklungspsychologie mit Erklärungen paaren.",
+  "datei": "memory.html?set=kurz-memory-entwicklung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Memory"
+  ]
+ },
+ {
+  "id": "kurz-blockfall-entwicklung",
+  "titel": "Blockfall Anlage, Umwelt, Selbststeuerung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fälle und Aussagen den drei Entwicklungsbedingungen zuordnen.",
+  "datei": "blockfall.html?set=kurz-blockfall-entwicklung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Blockfall"
+  ]
+ },
+ {
+  "id": "kurz-vergleich-einfluesse",
+  "titel": "Theorievergleich Fördernde und hemmende Einflüsse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Erziehungseinflüsse auf die Entwicklung sortieren.",
+  "datei": "vergleich.html?set=kurz-vergleich-einfluesse",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Theorievergleich"
+  ]
+ },
+ {
+  "id": "kurz-luecken-begriff",
+  "titel": "Lückentext Begriff Entwicklung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die sechs Merkmale des Entwicklungsbegriffs ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-begriff",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Lückentext"
+  ]
+ },
+ {
+  "id": "kurz-luecken-bedingungen",
+  "titel": "Lückentext Bedingungen der Entwicklung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Anlage, Umwelt, Selbststeuerung und ihr Zusammenwirken ergänzen.",
+  "datei": "luecken.html?set=kurz-luecken-bedingungen",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Lückentext"
+  ]
+ },
+ {
+  "id": "kurz-kprim-entwicklung",
+  "titel": "K-Prim Entwicklungspsychologie",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Vier Aufgaben mit je vier Aussagen: trifft zu oder nicht?",
+  "datei": "kprim.html?set=kurz-kprim-entwicklung",
+  "ergebnis": true,
+  "parameter": [],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "K-Prim"
+  ]
+ },
+ {
+  "id": "kurz-tetris-entwicklung",
+  "titel": "Begriffe-Tetris Entwicklung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Volle Reihe, Frage: Bedeutung von Fachbegriffen und Fälle zuordnen. Entwicklung, Anlage, Umwelt, Erziehungseinflüsse.",
+  "datei": "tetris.html?set=kurz-tetris-entwicklung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Spielnummer",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   },
+   {
+    "name": "fragen",
+    "label": "Fragen pro Spiel",
+    "typ": "wahl",
+    "optionen": [
+     "8",
+     "12",
+     "16"
+    ],
+    "standard": "12"
+   }
+  ],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Begriffe-Tetris"
+  ]
+ },
+ {
+  "id": "kurz-rennen-entwicklung",
+  "titel": "Wichtel-Schubkarrenrennen Entwicklung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "2 bis 8 Teams treten gleichzeitig an: Fachbegriffe und Fälle zu Entwicklung und Wirkbeziehungen.",
+  "datei": "rennen.html?set=kurz-rennen-entwicklung",
+  "ergebnis": false,
+  "parameter": [],
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung",
+   "Wichtel-Schubkarrenrennen"
+  ]
+ },
+ {
+  "id": "kurz-tetris-alles",
+  "titel": "Begriffe-Tetris Alle Fachbegriffe",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "87 Fachbegriffe und Fälle gemischt: Reihen schaffen, Begriffe verstehen und auf Fälle anwenden.",
+  "datei": "tetris.html?set=kurz-tetris-alles",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Spielnummer",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   },
+   {
+    "name": "fragen",
+    "label": "Fragen pro Spiel",
+    "typ": "wahl",
+    "optionen": [
+     "8",
+     "12",
+     "16"
+    ],
+    "standard": "12"
+   }
+  ],
+  "thema": "Alle Bereiche gemischt",
+  "pfad": [
+   "LB 1",
+   "Alle Bereiche gemischt",
+   "Begriffe-Tetris"
+  ]
+ },
+ {
+  "id": "kurz-rennen-alles",
+  "titel": "Wichtel-Schubkarrenrennen Alle Bereiche",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "2 bis 8 Teams, Fragen zu Fachbegriffen und Fällen aus allen Bereichen von LB 1 gemischt.",
+  "datei": "rennen.html?set=kurz-rennen-alles",
+  "ergebnis": false,
+  "parameter": [],
+  "thema": "Alle Bereiche gemischt",
+  "pfad": [
+   "LB 1",
+   "Alle Bereiche gemischt",
+   "Wichtel-Schubkarrenrennen"
+  ]
+ }
+]

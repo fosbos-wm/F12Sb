@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Psychoanalytische Theorie",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum psychischen Determinismus treffen zu?",
+   "statements": [
+    {
+     "text": "Auch Versprecher haben nach Freud seelische Ursachen.",
+     "richtig": true
+    },
+    {
+     "text": "Verhalten lässt sich aus der individuellen Lebensgeschichte erschließen.",
+     "richtig": true
+    },
+    {
+     "text": "Freud wollte vor allem zukünftiges Verhalten vorhersagen, nicht erklären.",
+     "richtig": false
+    },
+    {
+     "text": "Nach Freud ist jedes menschliche Verhalten durch unbewusste Faktoren erklärbar, auch das Vergessen eines Alzheimer-Kranken.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Instanzenmodell treffen zu?",
+   "statements": [
+    {
+     "text": "Das Ich vermittelt zwischen Es, Über-Ich und Realität.",
+     "richtig": true
+    },
+    {
+     "text": "Das Über-Ich folgt dem Lustprinzip.",
+     "richtig": false
+    },
+    {
+     "text": "Das Es meldet Wünsche und Bedürfnisse beim Ich an.",
+     "richtig": true
+    },
+    {
+     "text": "Das Ich-Ideal gehört zum Es.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Angst und Abwehr treffen zu?",
+   "statements": [
+    {
+     "text": "Angst ist eine Funktion des Ich, die vor drohenden Gefahren warnt.",
+     "richtig": true
+    },
+    {
+     "text": "Die Verdrängung ist ein Abwehrmechanismus unter vielen, aber nicht der grundlegende.",
+     "richtig": false
+    },
+    {
+     "text": "Bei der Projektion werden eigene Impulse anderen zugeschrieben.",
+     "richtig": true
+    },
+    {
+     "text": "Bei der Identifikation wird Angst abgewehrt, indem man sich bewusst von einer höhergestellten Person abgrenzt.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu starkem und schwachem Ich treffen zu?",
+   "statements": [
+    {
+     "text": "Ein starkes Ich kann Wünsche auch zurückstellen und aufschieben.",
+     "richtig": true
+    },
+    {
+     "text": "Eine autoritäre Erziehung fördert in der Regel ein starkes Ich.",
+     "richtig": false
+    },
+    {
+     "text": "Dosierte Frustrationen können Bewältigungskompetenz fördern, sofern das Angenehme überwiegt.",
+     "richtig": true
+    },
+    {
+     "text": "Bei einer Ich-Schwäche ist die Person selbstbestimmt in ihrem Verhalten.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

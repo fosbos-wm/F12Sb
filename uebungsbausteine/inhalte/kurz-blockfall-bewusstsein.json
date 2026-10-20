@@ -1,0 +1,68 @@
+{
+ "titel": "Blockfall: Die Schichten des Bewusstseins",
+ "anleitung": "Ordne Fälle und Aussagen der passenden Schicht des Bewusstseins zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Bewusste",
+  "Vorbewusste",
+  "Unbewusste"
+ ],
+ "items": [
+  {
+   "t": "Ich merke gerade, dass ich müde bin.",
+   "k": 0,
+   "f": 1
+  },
+  {
+   "t": "Im Moment denke ich an die Hausaufgabe.",
+   "k": 0,
+   "f": 1
+  },
+  {
+   "t": "Meine Aufmerksamkeit richtet sich auf das Gespräch.",
+   "k": 0,
+   "f": 1
+  },
+  {
+   "t": "Die Telefonnummer der Freundin fällt mir ein, sobald ich nach ihr gefragt werde.",
+   "k": 1,
+   "f": 1
+  },
+  {
+   "t": "Was ich gestern zu Mittag gegessen habe, kann ich mir mit Aufmerksamkeit ins Bewusstsein rufen.",
+   "k": 1,
+   "f": 1
+  },
+  {
+   "t": "Ein Schlüsselreiz lässt eine halb vergessene Erinnerung auftauchen.",
+   "k": 1,
+   "f": 1
+  },
+  {
+   "t": "Eine verdrängte traumatische Kindheitserfahrung",
+   "k": 2,
+   "f": 1
+  },
+  {
+   "t": "Ein Versprecher, dessen Ursache der Person nicht bewusst ist",
+   "k": 2,
+   "f": 1
+  },
+  {
+   "t": "Angst auslösende Triebwünsche, die abgewehrt werden",
+   "k": 2
+  },
+  {
+   "t": "Inhalte, auf die nur geschlossen werden kann (deskriptiver Aspekt)",
+   "k": 2
+  },
+  {
+   "t": "Inhalte, die mit Gegenbesetzung zurückgehalten werden (dynamischer Aspekt)",
+   "k": 2
+  },
+  {
+   "t": "Der verlegte Ehering als Ausdruck eines unbewussten Wunsches",
+   "k": 2,
+   "f": 1
+  }
+ ]
+}

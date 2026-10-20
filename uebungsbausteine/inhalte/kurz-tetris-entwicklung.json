@@ -1,0 +1,429 @@
+{
+"titel": "Begriffe-Tetris: Entwicklung",
+"art": "bedeutung",
+"anleitung": "Lass die Blöcke fallen und fülle waagrechte Reihen. Jede volle Reihe stellt eine Frage: Was bedeutet der Fachbegriff, und welcher Fachbegriff passt zu einem Fall?",
+"karten": [
+{
+"begriff": "Entwicklung (psychologisch)",
+"bedeutung": "Gerichtete, zeitlich geordnete Reihe von zusammenhängenden Veränderungen des Erlebens und Verhaltens im Laufe des Lebens.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Gerichtete Reihe von Veränderungen",
+"bedeutung": "Die Veränderungen sind immer auf ein Ziel hin gerichtet, z. B. sich fortbewegen zu können.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Zusammenhang der Veränderungen",
+"bedeutung": "Die Veränderungen treten nicht unabhängig auf, sondern bauen aufeinander auf, z. B. Strampeln, Kriechen, Gehen.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Logische Reihenfolge",
+"bedeutung": "Nicht umkehrbare Abfolge von Veränderungen in der Entwicklung, z. B. erst krabbeln, dann gehen.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Lebensalterbezogenheit",
+"bedeutung": "Die in einer Reihenfolge ablaufenden Veränderungen lassen sich bestimmten Altersspannen zuordnen.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Anlage (endogene Bedingungen)",
+"bedeutung": "Genetische Ausstattung eines Lebewesens, die bei der Befruchtung festgelegt wird.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Vererbung",
+"bedeutung": "Übertragung der Anlagen nach bestimmten Erbgesetzen.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Genetik",
+"bedeutung": "Wissenschaft von der Vererbung.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Sensible Phasen",
+"bedeutung": "Zeitspannen, in denen ein Lebewesen bestimmte Verhaltensweisen und Persönlichkeitsmerkmale optimal erwerben kann.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Vererbt",
+"bedeutung": "Ein Individuum hat von seinen Eltern bestimmte Erbanlagen erhalten.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Angeboren",
+"bedeutung": "Bei der Geburt vorhanden: alle vererbten und alle im vorgeburtlichen Leben erworbenen Eigenschaften.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Erworben",
+"bedeutung": "Durch Umwelteinflüsse zustande gekommen.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Umwelt (exogene Bedingungen)",
+"bedeutung": "Alle direkten und indirekten Einflüsse von außen, denen ein Lebewesen von der Befruchtung bis zum Tod ausgesetzt ist.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Natürliche Umwelt",
+"bedeutung": "Die belebte und unbelebte Natur, z. B. Landschaft, Klima, Ernährung sowie Tages- und Jahreszeiten.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Kulturelle Umwelt",
+"bedeutung": "Die vom Menschen geschaffene oder veränderte Welt, z. B. Sprache, Normen, Massenmedien und Spielzeug.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Ökonomische Umwelt",
+"bedeutung": "Die wirtschaftlichen Gegebenheiten, in denen eine Person lebt, z. B. Wohnverhältnisse und Vermögen.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Soziale Umwelt",
+"bedeutung": "Der Mensch in seinen Organisationsformen und Beziehungen, z. B. Familie, Freundeskreis, Kindergarten und Schule.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Selbststeuerung (autogene Bedingungen)",
+"bedeutung": "Alle Kräfte, mit denen das Individuum als aktives Wesen von sich aus Entwicklungsprozesse herbeiführt und beeinflusst.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Entwicklungspsychologie",
+"bedeutung": "Beschäftigt sich mit den Veränderungen des Erlebens und Verhaltens im Laufe der Zeit, ihren Ursachen und den Aufgaben, die das Individuum lösen muss.",
+"t": "Entwicklung und Entwicklungsbedingungen"
+},
+{
+"begriff": "Entwicklungsstörung",
+"bedeutung": "Entwicklung verzögert sich in einem oder mehreren Teilbereichen und/oder weicht erheblich von der altersentsprechenden Entwicklung ab.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Sichere Bindung",
+"bedeutung": "Enge, relativ dauerhafte, stark emotionale Beziehung zwischen Kind und Bindungsperson; Voraussetzung für positive Entwicklung.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Hohe Wertschätzung",
+"bedeutung": "Zeigt sich in Achtung, Anerkennung und Wohlwollen, ausgedrückt durch Zuwendung, Interesse, Aufmerksamkeit und Freundlichkeit.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Verstehen",
+"bedeutung": "Einfühlen in die innere Welt eines anderen: Wahrnehmung und vorstellungsmäßige Vergegenwärtigung seiner subjektiven Welt.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Fördernde nicht-dirigierende Einzeltätigkeiten",
+"bedeutung": "Alle Tätigkeiten und Aktivitäten, die der Wertschätzung, dem Verstehen und der Echtheit entsprechen (Tausch/Tausch).",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Autoritative Erziehung",
+"bedeutung": "Hohe Wertschätzung, hohe aber realistische Anforderungen, klare begründbare Regeln, Grenzen setzen, Eigenständigkeit fördern.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Sachliche Begründung erzieherischer Maßnahmen",
+"bedeutung": "Maßnahmen sind für das Wohlergehen, zur Abwendung von Schaden oder zur Förderung nötig, nicht Willkür des Erziehers.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Fehlformen in der Erziehung (entwicklungshemmend)",
+"bedeutung": "Ablehnung, Vernachlässigung, Laissez-faire, Überbehütung, Verwöhnung, inkonsequente Maßnahmen oder Überforderung.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Familiäre Faktoren",
+"bedeutung": "Disharmonische Familienatmosphäre, Beziehungsstörungen oder Gewalt zwischen den Eltern, ungünstige Geschwisterkonstellation.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Individuelle Erlebnisse des Kindes",
+"bedeutung": "Z. B. Misshandlungen, Trennung der Eltern, Verlust einer Bezugsperson, Unfälle oder vermeintliche Minderwertigkeit.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+},
+{
+"begriff": "Zusammenspiel der Ursachen",
+"bedeutung": "Selten löst nur eine Ursache eine Entwicklungsstörung aus; meist entsteht sie erst durch das Zusammenspiel mehrerer Ursachen.",
+"t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+}
+],
+"faelle": [
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Wird bei der Befruchtung durch die Chromosomen festgelegt",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Das „Programm der Entwicklung“",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Legt Werdemöglichkeiten fest, die entfaltet werden müssen",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Verantwortlich für sensible Phasen",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Endogene Entwicklungsbedingung",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Eineiige Zwillinge haben dieselbe genetische Ausstattung",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Klima und Landschaft, in der ein Kind aufwächst",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Sprache, Sitten und Wertvorstellungen der Gesellschaft",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Der „Schrittmacher der Entwicklung“",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Alle direkten und indirekten Einflüsse von außen",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Der Erziehungsstil der Eltern",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Exogene Entwicklungsbedingung",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Der „Gestalter der Entwicklung“",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Das Individuum führt als aktives Wesen Entwicklung von sich aus herbei",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Ein Jugendlicher setzt sich selbst Ziele und trainiert dafür",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Ein Kind sucht sich bewusst neue Herausforderungen",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Autonome Entwicklungsbedingung",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Eigene Entscheidungen beeinflussen den weiteren Lebensweg",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein sehr geräuschempfindliches Kind leidet in einer lauten Wohnung stärker als seine Geschwister.",
+"o": [
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Wirksamkeit von Umwelteinflüssen.",
+"Die Selbststeuerung beeinflusst die Entfaltung der Anlagen."
+],
+"r": 2
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Gute Ernährung und Förderung lassen eine vorhandene sportliche Begabung erst zur Entfaltung kommen.",
+"o": [
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Wirksamkeit von Umwelteinflüssen."
+],
+"r": 1
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein Kind, das ständig ermutigt wird, setzt sich selbst immer höhere Ziele.",
+"o": [
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Wirksamkeit von Umwelteinflüssen.",
+"Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen."
+],
+"r": 1
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein Jugendlicher sucht sich bewusst einen Freundeskreis, der ihn fördert, und meidet belastende Einflüsse.",
+"o": [
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Wirksamkeit von Umwelteinflüssen.",
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen."
+],
+"r": 3
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein Mädchen mit Lesebegabung liest aus eigenem Antrieb täglich und baut seine Begabung so aus.",
+"o": [
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
+"Die Selbststeuerung beeinflusst die Entfaltung der Anlagen."
+],
+"r": 3
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein sehr impulsives, lebhaftes Kind tut sich schwerer, sein Verhalten selbst zu steuern und durchzuhalten.",
+"o": [
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
+"Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen."
+],
+"r": 0
+}
+]
+}

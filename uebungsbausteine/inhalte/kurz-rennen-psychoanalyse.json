@@ -1,0 +1,1309 @@
+{
+"titel": "Wichtel-Rennen: Psychoanalyse (Freud)",
+"anleitung": "Alle Fragen aus der Psychoanalyse: Determinismus, Trieblehre, Instanzen, Angst, Abwehr, Bewusstsein.",
+"fragen": [
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Jedes Verhalten hat seelische Ursachen und lässt sich aus der Lebensgeschichte erschließen.«",
+"o": [
+"Triebziel",
+"Triebobjekt",
+"Projektion",
+"Psychischer Determinismus"
+],
+"r": 3
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Versprecher oder Vergessen als Ausdruck unbewusster Absichten.«",
+"o": [
+"Über-Ich",
+"Fehlleistung",
+"Triebobjekt",
+"Eros"
+],
+"r": 1
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Körperlicher Spannungszustand, aus dem der Trieb entsteht.«",
+"o": [
+"Triebquelle",
+"Über-Ich",
+"Verdrängung",
+"Triebobjekt"
+],
+"r": 0
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Person oder Gegenstand, durch den der Trieb sein Ziel erreicht.«",
+"o": [
+"Realitätsprinzip",
+"Realangst",
+"Psychischer Determinismus",
+"Triebobjekt"
+],
+"r": 3
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Befriedigung, also der Abbau der Spannung.«",
+"o": [
+"Es",
+"Über-Ich",
+"Eros",
+"Triebziel"
+],
+"r": 3
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Lebenstrieb, dessen Energie Libido heißt.«",
+"o": [
+"Fehlleistung",
+"Eros",
+"Realitätsprinzip",
+"Gegenbesetzung"
+],
+"r": 1
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Todestrieb, dessen Energie Destrudo heißt.«",
+"o": [
+"Thanatos",
+"Eros",
+"Über-Ich",
+"Realitätsprinzip"
+],
+"r": 0
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Aktive Gegenkraft, die unbewusste Inhalte im Unbewussten hält.«",
+"o": [
+"Realitätsprinzip",
+"Gegenbesetzung",
+"Neurotische Angst",
+"Triebziel"
+],
+"r": 1
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Teil des Über-Ichs: Vorstellung davon, wie man sein möchte.«",
+"o": [
+"Über-Ich",
+"Gegenbesetzung",
+"Ich-Ideal",
+"Fehlleistung"
+],
+"r": 2
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Das Ich prüft die Realität und schiebt Wünsche notfalls auf.«",
+"o": [
+"Neurotische Angst",
+"Realitätsprinzip",
+"Ich",
+"Ich-Ideal"
+],
+"r": 1
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Lustprinzip: fordert sofortige Triebbefriedigung«",
+"o": [
+"Ich-Ideal",
+"Fehlleistung",
+"Es",
+"Verdrängung"
+],
+"r": 2
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Realitätsprinzip: vermittelt zwischen Es, Über-Ich und Realität«",
+"o": [
+"Eros",
+"Verdrängung",
+"Thanatos",
+"Ich"
+],
+"r": 3
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Moralitätsprinzip: bewertet die Wünsche des Es«",
+"o": [
+"Realangst",
+"Psychischer Determinismus",
+"Über-Ich",
+"Projektion"
+],
+"r": 2
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Grundlegender Abwehrmechanismus«",
+"o": [
+"Realitätsprinzip",
+"Fehlleistung",
+"Identifikation",
+"Verdrängung"
+],
+"r": 3
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Eigene Impulse werden anderen zugeschrieben«",
+"o": [
+"Triebziel",
+"Ich",
+"Projektion",
+"Triebquelle"
+],
+"r": 2
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Gleichsetzung mit einer höhergestellten Person«",
+"o": [
+"Identifikation",
+"Triebziel",
+"Eros",
+"Verdrängung"
+],
+"r": 0
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Angst vor den Konsequenzen der Realität«",
+"o": [
+"Gegenbesetzung",
+"Realangst",
+"Identifikation",
+"Thanatos"
+],
+"r": 1
+},
+{
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Angst vor Überwältigung durch das Es«",
+"o": [
+"Triebobjekt",
+"Ich",
+"Neurotische Angst",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »„Ich will das jetzt – sofort!“«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Triebimpulse verlangen unmittelbare Befriedigung«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Folgt dem Lustprinzip«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Meldet Wünsche und Bedürfnisse beim Ich an«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Der Wunsch, den Sitznachbarn zu schlagen, steigt plötzlich auf«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Enthält die ursprünglichen Triebansprüche«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »„Ich esse nach der Prüfung, jetzt lerne ich erst.“«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Überprüft die Realität«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Vermittelt zwischen Es, Über-Ich und Realität«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Folgt dem Realitätsprinzip«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Entscheidet, ob ein Wunsch verwirklicht oder abgewehrt wird«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Reagiert mit Angst auf drohende Gefahren«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Sucht einen sozial akzeptierten Weg zur Bedürfnisbefriedigung«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »„Das gehört sich nicht!“ als innere Stimme«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Bewertet die Wünsche des Es«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Enthält auch das Ich-Ideal«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Folgt dem Moralitätsprinzip«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Verinnerlichte Normen und Verbote der Eltern«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Löst Schuldgefühle und Gewissensbisse aus«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Gibt dem Ich Anweisung, welche Wünsche zugelassen werden«",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Er fürchtet, bei der Täuschung erwischt und bestraft zu werden.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Sie lässt den Plan fallen, weil sie öffentliche Verurteilung fürchtet.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Er befürchtet, vor seinen Angestellten an Ansehen zu verlieren.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Er schwänzt nicht, weil ihm ein Verweis und ein Elterngespräch drohen.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Nach dem Gedanken an Betrug quälen sie Schuldgefühle.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Er macht sich Selbstvorwürfe, weil er gegen eigene Prinzipien verstoßen hat.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Sie hat Gewissensbisse, obwohl niemand etwas bemerkt hat.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Er erlebt sein Selbstwertgefühl bedroht, weil er seinem Ideal nicht entspricht.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Er fürchtet, von seinen aggressiven Impulsen überwältigt zu werden.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Sie erschrickt über die Stärke ihres Verlangens und fürchtet, es könnte sie vernichten.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Er hat Panik, seinen Triebwünschen ausgeliefert zu sein, ohne dass äußerlich etwas droht.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Angst vor Überwältigung durch das Es, z. B. bei einer entstehenden Schizophrenie«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Sie fürchtet die Konsequenzen, wenn ihr Wunsch in der Realität bekannt würde.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Er sieht sich vom strengen Über-Ich bedroht und fühlt sich minderwertig.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Sie fürchtet, die Kontrolle über ihre Triebe zu verlieren.«",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Ich merke gerade, dass ich müde bin.«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Im Moment denke ich an die Hausaufgabe.«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Meine Aufmerksamkeit richtet sich auf das Gespräch.«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Die Telefonnummer der Freundin fällt mir ein, sobald ich nach ihr gefragt werde.«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Was ich gestern zu Mittag gegessen habe, kann ich mir mit Aufmerksamkeit ins Bewusstsein rufen.«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Ein Schlüsselreiz lässt eine halb vergessene Erinnerung auftauchen.«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Eine verdrängte traumatische Kindheitserfahrung«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Ein Versprecher, dessen Ursache der Person nicht bewusst ist«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Angst auslösende Triebwünsche, die abgewehrt werden«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Inhalte, auf die nur geschlossen werden kann (deskriptiver Aspekt)«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Inhalte, die mit Gegenbesetzung zurückgehalten werden (dynamischer Aspekt)«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Der verlegte Ehering als Ausdruck eines unbewussten Wunsches«",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Gleichgewicht zwischen den Persönlichkeitsinstanzen und der Realität«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 0
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Das Ich kann sich gegenüber den Instanzen und der Realität durchsetzen«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 0
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Das Ich bringt die Anforderungen von Es, Über-Ich und Realität in Einklang«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 0
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Die Person ist selbstbestimmt in ihrem Verhalten«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 0
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Wünsche können verwirklicht, aber auch zurückgestellt werden«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 0
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Gefördert durch Zuwendung, Erfolgserlebnisse und dosierte Frustrationen«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 0
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Die Persönlichkeitsinstanzen stehen im Ungleichgewicht«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 1
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Das Ich ist einer Instanz oder der Realität unterlegen«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 1
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Dem Ich gelingt es nicht, zwischen den Forderungen zu vermitteln«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 1
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Die Person ist fremdbestimmt in ihrem Verhalten«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 1
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Mögliche Folge eines zu starken Über-Ichs bei autoritärer oder überbehütender Erziehung«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 1
+},
+{
+"c": "Starkes und schwaches Ich",
+"f": "Zu welcher Seite gehört: »Herrscht das Es vor, werden Triebwünsche exzessiv befriedigt«?",
+"o": [
+"Ich-Stärke",
+"Ich-Schwäche"
+],
+"r": 1
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Unterscheidet Bewusstes, Vorbewusstes und Unbewusstes«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 0
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Bild des Eisbergs: Nur die Spitze liegt über der Wasserlinie«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 0
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Deskriptiver Aspekt: Auf unbewusste Inhalte kann nur geschlossen werden«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 0
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Dynamischer Aspekt: Unbewusstes drängt ins Bewusstsein und wird mit Gegenbesetzung gehalten«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 0
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Fragt: Wie zugänglich ist ein seelischer Inhalt für das Bewusstsein?«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 0
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Aufmerksamkeit oder ein Schlüsselreiz holt Vorbewusstes ins Bewusstsein«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 0
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Unterscheidet Es, Ich und Über-Ich«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 1
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Die Instanzen folgen Lust-, Realitäts- und Moralitätsprinzip«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 1
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Das Ich vermittelt zwischen Es, Über-Ich und Realität«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 1
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Das Über-Ich bewertet die Wünsche des Es«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 1
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Fragt: Welche seelische Kraft steuert das Verhalten?«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 1
+},
+{
+"c": "Topisches und strukturelles Modell",
+"f": "Zu welcher Seite gehört: »Ein Ungleichgewicht der Instanzen führt zu Angst«?",
+"o": [
+"Topisches Modell (Schichten des Bewusstseins)",
+"Strukturelles Modell (Instanzen und Dynamik)"
+],
+"r": 1
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Eigene unannehmbare Impulse werden anderen zugeschrieben«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 0
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »„Nicht ich tue etwas Unerlaubtes, sondern du!“«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 0
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Eine Frau mit unbewusstem Wunsch nach einem Seitensprung bezichtigt ihren Mann der Untreue«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 0
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Schuldgefühle werden verringert, indem Fehlverhalten nach außen verlagert wird«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 0
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Wer sich nicht aggressiv erleben will, erlebt andere als aggressiv«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 0
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Der andere wird für das eigene Fehlverhalten bekämpft oder bestraft«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 0
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Gleichsetzung mit einer Person oder Institution von höherem Rang«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 1
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Ein Kind mit Dunkelangst fühlt sich als Superman«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 1
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Das Selbstwertgefühl wird erhöht und die Angst bekämpft«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 1
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Ein Fan übernimmt Verhalten und Meinungen eines Sängers«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 1
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Identifikation mit dem Aggressor, z. B. beim Stockholm-Syndrom«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 1
+},
+{
+"c": "Projektion und Identifikation",
+"f": "Zu welcher Seite gehört: »Das Kind identifiziert sich mit dem gleichgeschlechtlichen Elternteil«?",
+"o": [
+"Projektion",
+"Identifikation"
+],
+"r": 1
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Jedes Verhalten ist seelisch bedingt und hat eine Ursache«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 0
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Versprecher und Fehlleistungen sind nicht zufällig«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 0
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Verhalten lässt sich aus der individuellen Lebensgeschichte erschließen«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 0
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Ursache: seelischer Prozess, Wirkung: Erleben und Verhalten«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 0
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Ein häufig verlegter Ehering kann auf einen unbewussten Wunsch hinweisen«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 0
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Ziel der Forschung: die Bedeutung hinter dem Verhalten finden«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 0
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Verhalten wird durch Triebe erzeugt und gesteuert«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 1
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Ein Trieb besteht aus Triebquelle, Triebobjekt und Triebziel«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 1
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Lebenstrieb Eros mit der Energie Libido«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 1
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Todestrieb Thanatos mit der Energie Destrudo«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 1
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Das Triebziel ist die Befriedigung, also der Abbau von Spannung«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 1
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Zu welcher Seite gehört: »Das Triebobjekt ist das, wodurch der Trieb sein Ziel erreicht«?",
+"o": [
+"Psychischer Determinismus",
+"Psychoanalytische Trieblehre"
+],
+"r": 1
+},
+{
+"c": "Welche Aussagen zum psychischen Determinismus treffen zu?",
+"f": "Trifft diese Aussage zu? »Auch Versprecher haben nach Freud seelische Ursachen.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 0
+},
+{
+"c": "Welche Aussagen zum psychischen Determinismus treffen zu?",
+"f": "Trifft diese Aussage zu? »Verhalten lässt sich aus der individuellen Lebensgeschichte erschließen.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 0
+},
+{
+"c": "Welche Aussagen zum psychischen Determinismus treffen zu?",
+"f": "Trifft diese Aussage zu? »Freud wollte vor allem zukünftiges Verhalten vorhersagen, nicht erklären.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 1
+},
+{
+"c": "Welche Aussagen zum psychischen Determinismus treffen zu?",
+"f": "Trifft diese Aussage zu? »Nach Freud ist jedes menschliche Verhalten durch unbewusste Faktoren erklärbar, auch das Vergessen eines Alzheimer-Kranken.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 1
+},
+{
+"c": "Welche Aussagen zum Instanzenmodell treffen zu?",
+"f": "Trifft diese Aussage zu? »Das Ich vermittelt zwischen Es, Über-Ich und Realität.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 0
+},
+{
+"c": "Welche Aussagen zum Instanzenmodell treffen zu?",
+"f": "Trifft diese Aussage zu? »Das Über-Ich folgt dem Lustprinzip.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 1
+},
+{
+"c": "Welche Aussagen zum Instanzenmodell treffen zu?",
+"f": "Trifft diese Aussage zu? »Das Es meldet Wünsche und Bedürfnisse beim Ich an.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 0
+},
+{
+"c": "Welche Aussagen zum Instanzenmodell treffen zu?",
+"f": "Trifft diese Aussage zu? »Das Ich-Ideal gehört zum Es.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 1
+},
+{
+"c": "Welche Aussagen zu Angst und Abwehr treffen zu?",
+"f": "Trifft diese Aussage zu? »Angst ist eine Funktion des Ich, die vor drohenden Gefahren warnt.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 0
+},
+{
+"c": "Welche Aussagen zu Angst und Abwehr treffen zu?",
+"f": "Trifft diese Aussage zu? »Die Verdrängung ist ein Abwehrmechanismus unter vielen, aber nicht der grundlegende.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 1
+},
+{
+"c": "Welche Aussagen zu Angst und Abwehr treffen zu?",
+"f": "Trifft diese Aussage zu? »Bei der Projektion werden eigene Impulse anderen zugeschrieben.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 0
+},
+{
+"c": "Welche Aussagen zu Angst und Abwehr treffen zu?",
+"f": "Trifft diese Aussage zu? »Bei der Identifikation wird Angst abgewehrt, indem man sich bewusst von einer höhergestellten Person abgrenzt.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 1
+},
+{
+"c": "Welche Aussagen zu starkem und schwachem Ich treffen zu?",
+"f": "Trifft diese Aussage zu? »Ein starkes Ich kann Wünsche auch zurückstellen und aufschieben.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 0
+},
+{
+"c": "Welche Aussagen zu starkem und schwachem Ich treffen zu?",
+"f": "Trifft diese Aussage zu? »Eine autoritäre Erziehung fördert in der Regel ein starkes Ich.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 1
+},
+{
+"c": "Welche Aussagen zu starkem und schwachem Ich treffen zu?",
+"f": "Trifft diese Aussage zu? »Dosierte Frustrationen können Bewältigungskompetenz fördern, sofern das Angenehme überwiegt.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 0
+},
+{
+"c": "Welche Aussagen zu starkem und schwachem Ich treffen zu?",
+"f": "Trifft diese Aussage zu? »Bei einer Ich-Schwäche ist die Person selbstbestimmt in ihrem Verhalten.«",
+"o": [
+"Trifft zu",
+"Trifft nicht zu"
+],
+"r": 1
+},
+{
+"c": "Die Abwehr",
+"f": "Welches Wort fehlt? »Dort wirken _____, Konflikte und traumatische Erfahrungen weiter.«",
+"o": [
+"Regression",
+"Verdrängung",
+"Bewusste",
+"Ängste"
+],
+"r": 3
+},
+{
+"c": "Die Abwehr",
+"f": "Welches Wort fehlt? »Die _____ hält diese Inhalte mit einer Gegenkraft zurück.«",
+"o": [
+"Unbewusste",
+"Identifikation",
+"Verdrängung",
+"Abwehr"
+],
+"r": 3
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welches Wort fehlt? »Aufmerksamkeit oder ein _____ kann Vorbewusstes ins Bewusstsein holen.«",
+"o": [
+"Vorbewusste",
+"Schlüsselreiz",
+"Realitätsprinzip",
+"Bewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"f": "Welches Wort fehlt? »Der _____ Aspekt besagt: Auf unbewusste Inhalte kann nur geschlossen werden, denn sie können nicht bewusst erfahren werden.«",
+"o": [
+"Gegenbesetzung",
+"deskriptive",
+"Vorbewusste",
+"Fixierung"
+],
+"r": 1
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Welches Wort fehlt? »Der psychische _____ besagt: Jedes Verhalten ist seelisch bedingt und lässt sich aus der individuellen Lebensgeschichte eines Menschen erschließen.«",
+"o": [
+"Gegenbesetzung",
+"Determinismus",
+"Thanatos",
+"Moralität"
+],
+"r": 1
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Welches Wort fehlt? »Ursache ist ein _____ Prozess, Wirkung sind Erleben und Verhalten.«",
+"o": [
+"seelischer",
+"Gegenbesetzung",
+"Determinismus",
+"Triebquelle"
+],
+"r": 0
+},
+{
+"c": "Determinismus und Trieblehre",
+"f": "Welches Wort fehlt? »Nach der psychoanalytischen Trieblehre wird menschliches Verhalten durch _____ erzeugt und gesteuert.«",
+"o": [
+"Moralität",
+"Triebe",
+"Eros",
+"seelischer"
+],
+"r": 1
+}
+]
+}
