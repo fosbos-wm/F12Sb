@@ -1,6 +1,6 @@
 {
  "titel": "Blockfall: Es, Ich oder Über-Ich?",
- "anleitung": "Der Block fällt. Tippe die Spalte an, zu der er gehört, bevor er unten ankommt.",
+ "anleitung": "Ordne Fälle und Aussagen der passenden Persönlichkeitsinstanz zu, bevor der Block unten ankommt.",
  "kategorien": [
   "Es",
   "Ich",
@@ -9,7 +9,8 @@
  "items": [
   {
    "t": "„Ich will das jetzt – sofort!“",
-   "k": 0
+   "k": 0,
+   "f": 1
   },
   {
    "t": "Triebimpulse verlangen unmittelbare Befriedigung",
@@ -25,7 +26,8 @@
   },
   {
    "t": "Der Wunsch, den Sitznachbarn zu schlagen, steigt plötzlich auf",
-   "k": 0
+   "k": 0,
+   "f": 1
   },
   {
    "t": "Enthält die ursprünglichen Triebansprüche",
@@ -33,7 +35,8 @@
   },
   {
    "t": "„Ich esse nach der Prüfung, jetzt lerne ich erst.“",
-   "k": 1
+   "k": 1,
+   "f": 1
   },
   {
    "t": "Überprüft die Realität",
@@ -61,7 +64,8 @@
   },
   {
    "t": "„Das gehört sich nicht!“ als innere Stimme",
-   "k": 2
+   "k": 2,
+   "f": 1
   },
   {
    "t": "Bewertet die Wünsche des Es",

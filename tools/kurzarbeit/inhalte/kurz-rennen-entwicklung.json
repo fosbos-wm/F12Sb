@@ -3,7 +3,7 @@
 "anleitung": "Alle Fragen zur Entwicklung: Begriff, Anlage, Umwelt, Selbststeuerung, Wirkbeziehungen, Einflüsse.",
 "fragen": [
 {
-"f": "Welcher Begriff passt? »Entwicklung geschieht im Laufe des Lebens, von der Zeugung bis zum Tod.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Entwicklung geschieht im Laufe des Lebens, von der Zeugung bis zum Tod.«",
 "o": [
 "Logische Reihenfolge",
 "Lebensalterbezogenheit",
@@ -13,7 +13,7 @@
 "r": 3
 },
 {
-"f": "Welcher Begriff passt? »Erleben und Verhalten verändern sich im Laufe der Zeit.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Erleben und Verhalten verändern sich im Laufe der Zeit.«",
 "o": [
 "Zusammenhängende Veränderung",
 "Selbststeuerung",
@@ -23,7 +23,7 @@
 "r": 3
 },
 {
-"f": "Welcher Begriff passt? »Strampeln, Kriechen und Gehen bauen aufeinander auf.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Strampeln, Kriechen und Gehen bauen aufeinander auf.«",
 "o": [
 "Lebensalterbezogenheit",
 "Selbststeuerung",
@@ -33,7 +33,7 @@
 "r": 3
 },
 {
-"f": "Welcher Begriff passt? »Viele Kinder krabbeln, bevor sie gehen können: nicht umkehrbar.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Viele Kinder krabbeln, bevor sie gehen können: nicht umkehrbar.«",
 "o": [
 "Lebensalterbezogenheit",
 "endogen",
@@ -43,7 +43,7 @@
 "r": 2
 },
 {
-"f": "Welcher Begriff passt? »Veränderungen lassen sich bestimmten Altersspannen zuordnen.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Veränderungen lassen sich bestimmten Altersspannen zuordnen.«",
 "o": [
 "Umwelt",
 "Anlage",
@@ -53,7 +53,7 @@
 "r": 3
 },
 {
-"f": "Welcher Begriff passt? »Motorische Veränderungen dienen dem Ziel, sich fortzubewegen und die Umwelt zu erkunden.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Motorische Veränderungen dienen dem Ziel, sich fortzubewegen und die Umwelt zu erkunden.«",
 "o": [
 "Gerichtetheit",
 "Lebensalterbezogenheit",
@@ -63,7 +63,7 @@
 "r": 0
 },
 {
-"f": "Welcher Begriff passt? »Genetische Ausstattung, bei der Befruchtung festgelegt: das „Programm der Entwicklung“.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Genetische Ausstattung, bei der Befruchtung festgelegt: das „Programm der Entwicklung“.«",
 "o": [
 "Lebensalterbezogenheit",
 "Anlage",
@@ -73,7 +73,7 @@
 "r": 1
 },
 {
-"f": "Welcher Begriff passt? »Alle direkten und indirekten Einflüsse von außen: der „Schrittmacher der Entwicklung“.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Alle direkten und indirekten Einflüsse von außen: der „Schrittmacher der Entwicklung“.«",
 "o": [
 "Umwelt",
 "Logische Reihenfolge",
@@ -83,7 +83,7 @@
 "r": 0
 },
 {
-"f": "Welcher Begriff passt? »Das Individuum als aktives Wesen führt Entwicklung von sich aus herbei: der „Gestalter“.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Das Individuum als aktives Wesen führt Entwicklung von sich aus herbei: der „Gestalter“.«",
 "o": [
 "Logische Reihenfolge",
 "Umwelt",
@@ -93,7 +93,7 @@
 "r": 3
 },
 {
-"f": "Welcher Begriff passt? »Zeitspanne, in der bestimmte Fähigkeiten besonders gut erworben werden können.«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »Zeitspanne, in der bestimmte Fähigkeiten besonders gut erworben werden können.«",
 "o": [
 "erworben",
 "Sensible Phase",
@@ -104,7 +104,7 @@
 },
 {
 "c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
-"f": "Welche Wirkbeziehung zeigt dieses Beispiel? »Ein sehr geräuschempfindliches Kind leidet in einer lauten Wohnung stärker als seine Geschwister.«",
+"f": "Welche Wirkbeziehung zeigt dieser Fall? »Ein sehr geräuschempfindliches Kind leidet in einer lauten Wohnung stärker als seine Geschwister.«",
 "o": [
 "Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
 "Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen.",
@@ -115,7 +115,7 @@
 },
 {
 "c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
-"f": "Welche Wirkbeziehung zeigt dieses Beispiel? »Gute Ernährung und Förderung lassen eine vorhandene sportliche Begabung erst zur Entfaltung kommen.«",
+"f": "Welche Wirkbeziehung zeigt dieser Fall? »Gute Ernährung und Förderung lassen eine vorhandene sportliche Begabung erst zur Entfaltung kommen.«",
 "o": [
 "Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen.",
 "Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
@@ -126,7 +126,7 @@
 },
 {
 "c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
-"f": "Welche Wirkbeziehung zeigt dieses Beispiel? »Ein Kind, das ständig ermutigt wird, setzt sich selbst immer höhere Ziele.«",
+"f": "Welche Wirkbeziehung zeigt dieser Fall? »Ein Kind, das ständig ermutigt wird, setzt sich selbst immer höhere Ziele.«",
 "o": [
 "Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
 "Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen.",
@@ -137,7 +137,7 @@
 },
 {
 "c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
-"f": "Welche Wirkbeziehung zeigt dieses Beispiel? »Ein Jugendlicher sucht sich bewusst einen Freundeskreis, der ihn fördert, und meidet belastende Einflüsse.«",
+"f": "Welche Wirkbeziehung zeigt dieser Fall? »Ein Jugendlicher sucht sich bewusst einen Freundeskreis, der ihn fördert, und meidet belastende Einflüsse.«",
 "o": [
 "Die Selbststeuerung beeinflusst die Entfaltung der Anlagen.",
 "Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
@@ -148,7 +148,7 @@
 },
 {
 "c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
-"f": "Welche Wirkbeziehung zeigt dieses Beispiel? »Ein Mädchen mit Lesebegabung liest aus eigenem Antrieb täglich und baut seine Begabung so aus.«",
+"f": "Welche Wirkbeziehung zeigt dieser Fall? »Ein Mädchen mit Lesebegabung liest aus eigenem Antrieb täglich und baut seine Begabung so aus.«",
 "o": [
 "Die Selbststeuerung beeinflusst die Entfaltung der Anlagen.",
 "Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
@@ -159,7 +159,7 @@
 },
 {
 "c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
-"f": "Welche Wirkbeziehung zeigt dieses Beispiel? »Ein sehr impulsives, lebhaftes Kind tut sich schwerer, sein Verhalten selbst zu steuern und durchzuhalten.«",
+"f": "Welche Wirkbeziehung zeigt dieser Fall? »Ein sehr impulsives, lebhaftes Kind tut sich schwerer, sein Verhalten selbst zu steuern und durchzuhalten.«",
 "o": [
 "Die Selbststeuerung beeinflusst die Entfaltung der Anlagen.",
 "Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
@@ -169,7 +169,7 @@
 "r": 3
 },
 {
-"f": "Welcher Begriff passt? »von innen kommend: genetische Faktoren«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »von innen kommend: genetische Faktoren«",
 "o": [
 "endogen",
 "Zusammenhängende Veränderung",
@@ -179,7 +179,7 @@
 "r": 0
 },
 {
-"f": "Welcher Begriff passt? »von außen kommend: Umweltfaktoren«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »von außen kommend: Umweltfaktoren«",
 "o": [
 "angeboren",
 "endogen",
@@ -189,7 +189,7 @@
 "r": 3
 },
 {
-"f": "Welcher Begriff passt? »bei der Geburt vorhanden, auch vorgeburtlich Erworbenes«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »bei der Geburt vorhanden, auch vorgeburtlich Erworbenes«",
 "o": [
 "Zusammenhängende Veränderung",
 "exogen",
@@ -199,7 +199,7 @@
 "r": 2
 },
 {
-"f": "Welcher Begriff passt? »durch Umwelteinflüsse zustande gekommen«",
+"f": "Welcher Fachbegriff passt zu dieser Bedeutung? »durch Umwelteinflüsse zustande gekommen«",
 "o": [
 "erworben",
 "angeboren",
@@ -210,7 +210,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Wird bei der Befruchtung durch die Chromosomen festgelegt«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Wird bei der Befruchtung durch die Chromosomen festgelegt«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -220,7 +220,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Das „Programm der Entwicklung“«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Das „Programm der Entwicklung“«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -230,7 +230,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Legt Werdemöglichkeiten fest, die entfaltet werden müssen«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Legt Werdemöglichkeiten fest, die entfaltet werden müssen«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -240,7 +240,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Verantwortlich für sensible Phasen«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Verantwortlich für sensible Phasen«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -250,7 +250,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Endogene Entwicklungsbedingung«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Endogene Entwicklungsbedingung«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -260,7 +260,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Eineiige Zwillinge haben dieselbe genetische Ausstattung«",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Eineiige Zwillinge haben dieselbe genetische Ausstattung«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -270,7 +270,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Klima und Landschaft, in der ein Kind aufwächst«",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Klima und Landschaft, in der ein Kind aufwächst«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -280,7 +280,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Sprache, Sitten und Wertvorstellungen der Gesellschaft«",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Sprache, Sitten und Wertvorstellungen der Gesellschaft«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -290,7 +290,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Der „Schrittmacher der Entwicklung“«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Der „Schrittmacher der Entwicklung“«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -300,7 +300,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Alle direkten und indirekten Einflüsse von außen«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Alle direkten und indirekten Einflüsse von außen«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -310,7 +310,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Der Erziehungsstil der Eltern«",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Der Erziehungsstil der Eltern«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -320,7 +320,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Exogene Entwicklungsbedingung«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Exogene Entwicklungsbedingung«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -330,7 +330,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Der „Gestalter der Entwicklung“«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Der „Gestalter der Entwicklung“«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -340,7 +340,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Das Individuum führt als aktives Wesen Entwicklung von sich aus herbei«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Das Individuum führt als aktives Wesen Entwicklung von sich aus herbei«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -350,7 +350,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Ein Jugendlicher setzt sich selbst Ziele und trainiert dafür«",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Ein Jugendlicher setzt sich selbst Ziele und trainiert dafür«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -360,7 +360,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Ein Kind sucht sich bewusst neue Herausforderungen«",
+"f": "Welcher Fachbegriff passt zu diesem Fall? »Ein Kind sucht sich bewusst neue Herausforderungen«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -370,7 +370,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Autonome Entwicklungsbedingung«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Autonome Entwicklungsbedingung«",
 "o": [
 "Anlage",
 "Umwelt",
@@ -380,7 +380,7 @@
 },
 {
 "c": "Anlage, Umwelt oder Selbststeuerung?",
-"f": "Wie ist diese Aussage einzuordnen? »Eigene Entscheidungen beeinflussen den weiteren Lebensweg«",
+"f": "Welcher Fachbegriff trifft auf diese Aussage zu? »Eigene Entscheidungen beeinflussen den weiteren Lebensweg«",
 "o": [
 "Anlage",
 "Umwelt",

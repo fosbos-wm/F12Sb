@@ -57,14 +57,14 @@ table.res td{border-top:1px solid var(--line);padding:6px 4px;vertical-align:top
  <h1 id="ttl">Begriffe-Tetris</h1><p class="sub" id="anl"></p>
  <div id="loadmsg" class="small">Wird geladen ...</div>
  <div class="row">
-  <label class="sel">Abgefragt wird <select id="mode"><option value="mix">Begriff und Definition gemischt</option><option value="b2d">Zum Begriff die Definition finden</option><option value="d2b">Zur Definition den Begriff finden</option></select></label>
+  <label class="sel">Abgefragt wird <select id="mode"><option value="mix">Alle Fragearten gemischt</option><option value="fall">Fälle den Fachbegriffen zuordnen</option><option value="b2d">Bedeutung zum Fachbegriff finden</option><option value="d2b">Fachbegriff zur Bedeutung finden</option></select></label>
   <label class="sel">Startgeschwindigkeit <select id="speed"><option value="1">Langsam</option><option value="3">Mittel</option><option value="5">Schnell</option></select></label>
  </div>
  <div class="row"><button id="btnStart" class="btn" disabled>Spiel starten</button><span id="count" class="small"></span><span id="best" class="small"></span></div>
  <h2 style="margin-top:14px">So funktioniert es</h2>
  <ul class="how">
   <li>Die Blöcke fallen von oben. Drehe und verschiebe sie, damit sich waagrechte Reihen vollständig füllen.</li>
-  <li>Ist eine Reihe voll, hält das Spiel an und stellt dir eine Frage zu einem Fachbegriff. Richtig gibt Punkte. Die Reihe löst sich in jedem Fall auf.</li>
+  <li>Ist eine Reihe voll, hält das Spiel an. Du zeigst, ob du einen Fachbegriff verstehst: Was bedeutet er, und welcher Fachbegriff passt zu einem Fall? Richtig gibt Punkte, die Reihe löst sich in jedem Fall auf.</li>
   <li>Falsch beantwortete Karten kommen später noch einmal und stehen am Ende in deiner Wiederholungsliste.</li>
   <li>Das Spiel endet nach der letzten Frage oder wenn die Blöcke oben anstoßen.</li>
  </ul>
@@ -103,7 +103,7 @@ var $=function(id){return document.getElementById(id);};
 var cvs=$("board"), ctx=cvs.getContext("2d");
 var ncvs=$("next"), nctx=ncvs.getContext("2d");
 
-var DATA=null,TS=false,SEED=1,NQ=12,RP,RQ,T0=0;
+var ART="Bedeutung",DATA=null,TS=false,SEED=1,NQ=12,RP,RQ,T0=0;
 var S={}; // game state
 
 /* ---------- helpers ---------- */
@@ -122,13 +122,18 @@ function loadData(){
   var nq=parseInt(q.get("fragen"),10);NQ=(nq>=4&&nq<=40)?nq:12;
   fetch("../inhalte/"+set+".json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){
     DATA=d;$("ttl").textContent=d.titel;$("anl").textContent=d.anleitung||"";
-    $("count").textContent=d.karten.length+" Karten, "+NQ+" Fragen pro Spiel";
+    ART=d.art==="definition"?"Definition":"Bedeutung";$("count").textContent=d.karten.length+" Fachbegriffe, "+(d.faelle||[]).length+" Fälle, "+NQ+" Fragen pro Spiel";
     $("loadmsg").classList.add("hidden");$("btnStart").disabled=d.karten.length<8;
   }).catch(function(){var m=$("loadmsg");m.className="err";m.textContent="Die Übung konnte nicht geladen werden.";});
 }
 
 /* ---------- cards / questions ---------- */
-function buildCards(){return DATA.karten.map(function(k,i){return {id:"k"+i,topic:k.t||"x",begriff:k.begriff,definition:k.definition};});}
+function buildCards(){
+  var m=$("mode").value,out=[];
+  if(m!=="fall")DATA.karten.forEach(function(k,i){out.push({id:"k"+i,topic:k.t||"x",begriff:k.begriff,def:k.bedeutung||k.definition});});
+  if(m==="mix"||m==="fall")(DATA.faelle||[]).forEach(function(f,i){out.push({id:"f"+i,topic:f.c||"x",isFall:true,fall:!!f.fall,q:f,begriff:f.o[f.r],def:f.f});});
+  return out;
+}
 function nextCard(){
   var q=S.retry;
   for(var i=0;i<q.length;i++){if(q[i].wait<=0){var c=q.splice(i,1)[0].card;return c;}}
@@ -139,11 +144,17 @@ function nextCard(){
 }
 function makeQuestion(){
   var card=nextCard();S.last=card;
+  if(card.isFall){
+    var opts0=shuffle(card.q.o.map(function(t,i){return {text:t,right:i===card.q.r};}));
+    return {card:card,dir:"fall",opts:opts0};
+  }
   var mode=$("mode").value;
-  var dir=mode==="mix"?(RQ()<.5?"b2d":"d2b"):mode;
-  var key=dir==="b2d"?"definition":"begriff";
-  var same=shuffle(S.cards.filter(function(c){return c.id!==card.id&&c.topic===card.topic;}));
-  var other=shuffle(S.cards.filter(function(c){return c.id!==card.id&&c.topic!==card.topic;}));
+  var dir=(mode==="mix"||mode==="fall")?(RQ()<.5?"b2d":"d2b"):mode;
+  var key=dir==="b2d"?"def":"begriff";
+  var base=S.cards.filter(function(c){return !c.isFall;});
+  if(base.length<4)base=DATA.karten.map(function(k,i){return {id:"k"+i,topic:k.t||"x",begriff:k.begriff,def:k.bedeutung||k.definition};});
+  var same=shuffle(base.filter(function(c){return c.id!==card.id&&c.topic===card.topic;}));
+  var other=shuffle(base.filter(function(c){return c.id!==card.id&&c.topic!==card.topic;}));
   var pool=same.concat(other),wrong=[],seen={};seen[card[key]]=1;
   for(var i=0;i<pool.length&&wrong.length<3;i++){if(!seen[pool[i][key]]){seen[pool[i][key]]=1;wrong.push(pool[i]);}}
   var opts=shuffle([{text:card[key],right:true}].concat(wrong.map(function(w){return {text:w[key],right:false};})));
@@ -269,8 +280,9 @@ function askNext(){
   var d=$("dlg");d.textContent="";
   var meta=el("div","qmeta");meta.appendChild(el("span",null,"Frage "+(S.asked+1)+" von "+NQ+(S.full.length>1?" · Reihe "+(S.qi+1)+" von "+S.full.length:"")));
   meta.appendChild(el("span",null,curQ.card.topic==="x"?"":curQ.card.topic));d.appendChild(meta);
-  d.appendChild(el("div","qtype",curQ.dir==="b2d"?"Welche Definition gehört zu diesem Begriff?":"Welcher Begriff gehört zu dieser Definition?"));
-  d.appendChild(el("p","qtext",curQ.dir==="b2d"?curQ.card.begriff:curQ.card.definition));
+  var qt=curQ.dir==="fall"?(curQ.card.fall?"Welcher Fachbegriff passt zu diesem Fall?":"Welcher Fachbegriff trifft auf diese Aussage zu?"):curQ.dir==="b2d"?("Welche "+ART+" hat dieser Fachbegriff?"):("Welcher Fachbegriff passt zu dieser "+ART+"?");
+  d.appendChild(el("div","qtype",qt));
+  d.appendChild(el("p","qtext",curQ.dir==="d2b"||curQ.dir==="fall"?curQ.card.def:curQ.card.begriff));
   var box=el("div","opts");box.id="opts";
   curQ.opts.forEach(function(o,i){
     var b=el("button","opt");b.type="button";b.dataset.i=i;
@@ -299,7 +311,7 @@ function answer(i){
   [].forEach.call(btns,function(b,k){b.disabled=true;if(curQ.opts[k].right)b.classList.add("ok");else if(k===i)b.classList.add("bad");});
   var fb=$("fb");fb.className="fb "+(ok?"ok":"bad");fb.textContent="";
   fb.appendChild(el("b",null,ok?"Richtig, die Reihe löst sich auf.":"Nicht ganz, die Reihe löst sich trotzdem auf."));
-  fb.appendChild(el("span",null,card.begriff+": "+card.definition));
+  fb.appendChild(el("span",null,card.isFall?("Richtig: "+card.begriff):(card.begriff+": "+card.def)));
   if(!ok)fb.appendChild(el("div","small","Diese Karte kommt später noch einmal."));
   var nb=$("nb");nb.classList.remove("hidden");
   nb.textContent=(S.qi+1>=S.full.length||S.asked>=NQ)?"Reihe auflösen":"Weiter";
@@ -353,7 +365,7 @@ function gameOver(done){
   if(list.length){
     d.appendChild(el("h2",null,"Das solltest du wiederholen"));
     var t=el("table","res");
-    list.forEach(function(r){var tr=el("tr");tr.appendChild(el("td",null,r.card.begriff));tr.appendChild(el("td",null,r.card.definition));t.appendChild(tr);});
+    list.forEach(function(r){var tr=el("tr");tr.appendChild(el("td",null,r.card.begriff));tr.appendChild(el("td",null,r.card.isFall?((r.card.fall?"Fall: ":"Aussage: ")+r.card.def):r.card.def));t.appendChild(tr);});
     d.appendChild(t);
   }else if(S.asked>0){
     d.appendChild(el("p",null,"Keine offenen Fehler. Alle Karten, bei denen du dich geirrt hast, hast du später richtig beantwortet."));

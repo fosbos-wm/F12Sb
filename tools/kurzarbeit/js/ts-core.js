@@ -32,3 +32,15 @@ export function cleanParams(station, src) {
   return out;
 }
 export const cleanId = s => String(s || "").toLowerCase().replace(/[^a-z0-9\-]/g, "").slice(0, 40);
+
+/* Gliederung: Fach (Ordner) > Thema (Unterordner) > Übungen. Reihenfolge wie im Katalog. */
+export function gruppiere(kat){
+  const fs=[];
+  kat.forEach(s=>{
+    const fn=s.fach||"Weitere",tn=s.thema||"Allgemein";
+    let f=fs.find(x=>x.fach===fn);if(!f){f={fach:fn,themen:[],n:0};fs.push(f)}
+    let t=f.themen.find(x=>x.thema===tn);if(!t){t={thema:tn,items:[]};f.themen.push(t)}
+    t.items.push(s);f.n++;
+  });
+  return fs;
+}

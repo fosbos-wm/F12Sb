@@ -1,291 +1,811 @@
 {
 "titel": "Begriffe-Tetris: Psychoanalyse",
-"anleitung": "Lass die Blöcke fallen und fülle waagrechte Reihen. Jede volle Reihe stellt eine Frage zu einem Fachbegriff.",
+"art": "bedeutung",
+"anleitung": "Lass die Blöcke fallen und fülle waagrechte Reihen. Jede volle Reihe stellt eine Frage: Was bedeutet der Fachbegriff, und welcher Fachbegriff passt zu einem Fall?",
 "karten": [
 {
 "begriff": "Psychischer Determinismus",
-"definition": "Freuds Annahme, dass jedes Verhalten seelische Ursachen hat und nichts im Seelenleben zufällig ist.",
+"bedeutung": "Freuds Annahme, dass jedes Verhalten seelische Ursachen hat und nichts im Seelenleben zufällig ist.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Fehlleistung",
-"definition": "Alltäglicher Fehler wie ein Versprecher, der nach Freud von unbewussten seelischen Kräften bestimmt ist.",
+"bedeutung": "Alltäglicher Fehler wie ein Versprecher, der nach Freud von unbewussten seelischen Kräften bestimmt ist.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Triebquelle",
-"definition": "Körperlicher Vorgang in einem Organ oder Körperteil als Voraussetzung eines Triebs, z. B. Hunger.",
+"bedeutung": "Körperlicher Vorgang in einem Organ oder Körperteil als Voraussetzung eines Triebs, z. B. Hunger.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Triebziel",
-"definition": "Die Befriedigung, die durch Aufhebung des Reizzustands an der Triebquelle erreicht wird.",
+"bedeutung": "Die Befriedigung, die durch Aufhebung des Reizzustands an der Triebquelle erreicht wird.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Triebobjekt",
-"definition": "Das, woran sich die Triebhandlung vollzieht, z. B. Personen, Körperteile oder Gegenstände.",
+"bedeutung": "Das, woran sich die Triebhandlung vollzieht, z. B. Personen, Körperteile oder Gegenstände.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Lebenstrieb (Eros)",
-"definition": "Trieb mit dem Ziel der Selbst- und Arterhaltung, des Überlebens und der Fortpflanzung.",
+"bedeutung": "Trieb mit dem Ziel der Selbst- und Arterhaltung, des Überlebens und der Fortpflanzung.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Libido",
-"definition": "Psychische Energie des Lebenstriebs, die auf Lustgewinn gerichtet ist.",
+"bedeutung": "Psychische Energie des Lebenstriebs, die auf Lustgewinn gerichtet ist.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Objektbesetzung",
-"definition": "Ausrichtung der Libido auf andere Personen und Gegenstände, z. B. die frühe Bindung des Kindes an die Mutter.",
+"bedeutung": "Ausrichtung der Libido auf andere Personen und Gegenstände, z. B. die frühe Bindung des Kindes an die Mutter.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Todestrieb (Thanatos)",
-"definition": "Trieb, der auf die Auflösung des Lebens in den anorganischen Zustand zielt, z. B. Destruktivität und Aggression.",
+"bedeutung": "Trieb, der auf die Auflösung des Lebens in den anorganischen Zustand zielt, z. B. Destruktivität und Aggression.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Destrudo",
-"definition": "Psychische Energie des Todestriebs, gerichtet gegen die eigene Person oder nach außen gegen andere.",
+"bedeutung": "Psychische Energie des Todestriebs, gerichtet gegen die eigene Person oder nach außen gegen andere.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Topisches Modell",
-"definition": "Modell des psychischen Apparats mit den Schichten Bewusstes, Vorbewusstes und Unbewusstes.",
+"bedeutung": "Modell des psychischen Apparats mit den Schichten Bewusstes, Vorbewusstes und Unbewusstes.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Das Vorbewusste",
-"definition": "Inhalte, die gerade nicht bewusst sind, aber durch Aufmerksamkeit oder einen Schlüsselreiz ins Bewusstsein geholt werden können.",
+"bedeutung": "Inhalte, die gerade nicht bewusst sind, aber durch Aufmerksamkeit oder einen Schlüsselreiz ins Bewusstsein geholt werden können.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Deskriptiver Aspekt des Unbewussten",
-"definition": "Auf unbewusste Inhalte kann nur geschlossen werden, denn sie können nicht bewusst erfahren werden.",
+"bedeutung": "Auf unbewusste Inhalte kann nur geschlossen werden, denn sie können nicht bewusst erfahren werden.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Dynamischer Aspekt des Unbewussten",
-"definition": "Unbewusste Inhalte drängen ins Bewusstsein und müssen mit aktiver Gegenkraft im Unbewussten gehalten werden.",
+"bedeutung": "Unbewusste Inhalte drängen ins Bewusstsein und müssen mit aktiver Gegenkraft im Unbewussten gehalten werden.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Gegenbesetzung",
-"definition": "Aktive Gegenkraft, die unbewusste Inhalte im Unbewussten hält.",
+"bedeutung": "Aktive Gegenkraft, die unbewusste Inhalte im Unbewussten hält.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Es",
-"definition": "Älteste, angeborene und unbewusste Instanz der Triebe, Wünsche und Bedürfnisse; von Geburt an vorhanden.",
+"bedeutung": "Älteste, angeborene und unbewusste Instanz der Triebe, Wünsche und Bedürfnisse; von Geburt an vorhanden.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Ich",
-"definition": "Instanz der bewussten Auseinandersetzung mit der Realität; vermittelt zwischen Es, Über-Ich und Außenwelt.",
+"bedeutung": "Instanz der bewussten Auseinandersetzung mit der Realität; vermittelt zwischen Es, Über-Ich und Außenwelt.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Über-Ich",
-"definition": "Instanz der verinnerlichten Wert- und Normvorstellungen, das Gewissen; entsteht erst im Laufe der Sozialisation.",
+"bedeutung": "Instanz der verinnerlichten Wert- und Normvorstellungen, das Gewissen; entsteht erst im Laufe der Sozialisation.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Lustprinzip",
-"definition": "Prinzip des Es: sofortige Triebbefriedigung und Vermeidung von Schmerz und Frustration („Ich will!“).",
+"bedeutung": "Prinzip des Es: sofortige Triebbefriedigung und Vermeidung von Schmerz und Frustration („Ich will!“).",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Realitätsprinzip",
-"definition": "Prinzip des Ich: Kompromiss zwischen den ungehemmten Triebansprüchen und den Anforderungen der Außenwelt.",
+"bedeutung": "Prinzip des Ich: Kompromiss zwischen den ungehemmten Triebansprüchen und den Anforderungen der Außenwelt.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Moralitätsprinzip",
-"definition": "Prinzip des Über-Ich: Es soll getan werden, was im moralischen Sinne „richtig“ ist („Du sollst!“).",
+"bedeutung": "Prinzip des Über-Ich: Es soll getan werden, was im moralischen Sinne „richtig“ ist („Du sollst!“).",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Ich-Ideal",
-"definition": "Teil des Über-Ich, der danach strebt, die Idealvorstellung der eigenen Person zu verwirklichen.",
+"bedeutung": "Teil des Über-Ich, der danach strebt, die Idealvorstellung der eigenen Person zu verwirklichen.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Dynamik der Persönlichkeit",
-"definition": "Ständiges Mit- und Gegeneinander von Es, Ich und Über-Ich: Es meldet Wünsche, Über-Ich bewertet, Ich vermittelt.",
+"bedeutung": "Ständiges Mit- und Gegeneinander von Es, Ich und Über-Ich: Es meldet Wünsche, Über-Ich bewertet, Ich vermittelt.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Funktion des Es in der Dynamik",
-"definition": "Es kündigt bestimmte Wünsche oder Bedürfnisse beim Ich an.",
+"bedeutung": "Es kündigt bestimmte Wünsche oder Bedürfnisse beim Ich an.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Funktion des Über-Ich in der Dynamik",
-"definition": "Es bewertet die Wünsche des Es und gibt dem Ich Anweisung, ob sie zugelassen werden dürfen.",
+"bedeutung": "Es bewertet die Wünsche des Es und gibt dem Ich Anweisung, ob sie zugelassen werden dürfen.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Funktion des Ich in der Dynamik",
-"definition": "Es vermittelt zwischen Über-Ich und Es und überprüft die Realität, ob Befriedigung möglich ist.",
+"bedeutung": "Es vermittelt zwischen Über-Ich und Es und überprüft die Realität, ob Befriedigung möglich ist.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Angst (psychoanalytisch)",
-"definition": "Reaktion des Ich auf eine bevorstehende oder aktuelle Bedrohung; warnt vor Gefahren und veranlasst Handlungen, die sie verringern.",
+"bedeutung": "Reaktion des Ich auf eine bevorstehende oder aktuelle Bedrohung; warnt vor Gefahren und veranlasst Handlungen, die sie verringern.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Realangst",
-"definition": "Das Ich fürchtet die Konsequenzen der Realität, die auf die Befriedigung von Wünschen folgen, z. B. öffentliche Verurteilung.",
+"bedeutung": "Das Ich fürchtet die Konsequenzen der Realität, die auf die Befriedigung von Wünschen folgen, z. B. öffentliche Verurteilung.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Gewissensangst (moralische Angst)",
-"definition": "Das Ich fürchtet die Forderungen des Über-Ich: Schuldgefühle, Selbstvorwürfe und Gewissensbisse.",
+"bedeutung": "Das Ich fürchtet die Forderungen des Über-Ich: Schuldgefühle, Selbstvorwürfe und Gewissensbisse.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Neurotische Angst",
-"definition": "Das Ich fürchtet, von den Ansprüchen des Es überwältigt oder vernichtet zu werden.",
+"bedeutung": "Das Ich fürchtet, von den Ansprüchen des Es überwältigt oder vernichtet zu werden.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Abwehrmechanismus",
-"definition": "Unbewusster Schutz des Ich vor Angst, die aus dem Konflikt zwischen Es, Über-Ich und Realität entsteht.",
+"bedeutung": "Unbewusster Schutz des Ich vor Angst, die aus dem Konflikt zwischen Es, Über-Ich und Realität entsteht.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Verdrängung",
-"definition": "Unangenehme Gedanken, Erinnerungen oder Impulse werden aus dem Bewusstsein ins Unbewusste verbannt und wirken dort weiter.",
+"bedeutung": "Unangenehme Gedanken, Erinnerungen oder Impulse werden aus dem Bewusstsein ins Unbewusste verbannt und wirken dort weiter.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Projektion",
-"definition": "Eigene, nicht akzeptierte Wünsche oder Gefühle werden anderen Personen zugeschrieben und dort bekämpft.",
+"bedeutung": "Eigene, nicht akzeptierte Wünsche oder Gefühle werden anderen Personen zugeschrieben und dort bekämpft.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Identifikation",
-"definition": "Selbstwert wird erhöht und Angst bekämpft durch Gleichsetzung mit einer Person oder Institution von höherem Rang.",
+"bedeutung": "Selbstwert wird erhöht und Angst bekämpft durch Gleichsetzung mit einer Person oder Institution von höherem Rang.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Identifikation mit dem Aggressor",
-"definition": "Man gleicht sich dem Angreifer an, um sich von der eigenen Aggression zu „befreien“.",
+"bedeutung": "Man gleicht sich dem Angreifer an, um sich von der eigenen Aggression zu „befreien“.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Stockholm-Syndrom",
-"definition": "Opfer von Geiselnahmen bauen ein positives emotionales Verhältnis zu ihren Entführern auf.",
+"bedeutung": "Opfer von Geiselnahmen bauen ein positives emotionales Verhältnis zu ihren Entführern auf.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Fixierung",
-"definition": "Verhaftetbleiben an Erlebens- und Verhaltensweisen oder Objekten, die zu einer bestimmten Entwicklungsphase gehören.",
+"bedeutung": "Verhaftetbleiben an Erlebens- und Verhaltensweisen oder Objekten, die zu einer bestimmten Entwicklungsphase gehören.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Regression",
-"definition": "Zurückfallen auf Erlebens- und Verhaltensweisen einer früheren Entwicklungsphase, z. B. Einnässen nach der Geburt eines Geschwisters.",
+"bedeutung": "Zurückfallen auf Erlebens- und Verhaltensweisen einer früheren Entwicklungsphase, z. B. Einnässen nach der Geburt eines Geschwisters.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Ich-Stärke",
-"definition": "Das Ich bringt die Anforderungen von Es, Über-Ich und Realität in Einklang und kann sich durchsetzen; die Instanzen sind im Gleichgewicht.",
+"bedeutung": "Das Ich bringt die Anforderungen von Es, Über-Ich und Realität in Einklang und kann sich durchsetzen; die Instanzen sind im Gleichgewicht.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Ich-Schwäche",
-"definition": "Unfähigkeit des Ich, einen Ausgleich zwischen Es, Über-Ich und Realität herzustellen; die Person verhält sich eher fremdbestimmt.",
+"bedeutung": "Unfähigkeit des Ich, einen Ausgleich zwischen Es, Über-Ich und Realität herzustellen; die Person verhält sich eher fremdbestimmt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Das Es siegt über das Ich",
-"definition": "Das Über-Ich ist zu schwach; Triebwünsche werden im Übermaß befriedigt.",
+"bedeutung": "Das Über-Ich ist zu schwach; Triebwünsche werden im Übermaß befriedigt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Das Über-Ich siegt über das Ich",
-"definition": "Das Über-Ich ist zu stark; die Wünsche und Bedürfnisse des Es werden weitgehend unterdrückt.",
+"bedeutung": "Das Über-Ich ist zu stark; die Wünsche und Bedürfnisse des Es werden weitgehend unterdrückt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Die Realität siegt über das Ich",
-"definition": "Das Ich wird von den Erwartungen der Realität beherrscht; eigene Bedürfnisse werden unterdrückt oder verdrängt.",
+"bedeutung": "Das Ich wird von den Erwartungen der Realität beherrscht; eigene Bedürfnisse werden unterdrückt oder verdrängt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Kompetenz- und Kontrollerwartung",
-"definition": "Das Kind weiß, dass es etwas bewirken kann; sie entwickelt sich durch Erfolgserlebnisse bei bewältigbaren Aufgaben.",
+"bedeutung": "Das Kind weiß, dass es etwas bewirken kann; sie entwickelt sich durch Erfolgserlebnisse bei bewältigbaren Aufgaben.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Frustrationstoleranz",
-"definition": "Fähigkeit, Enttäuschungen zu ertragen; entsteht durch dosierte Frustrationen, wenn das Angenehme überwiegt.",
+"bedeutung": "Fähigkeit, Enttäuschungen zu ertragen; entsteht durch dosierte Frustrationen, wenn das Angenehme überwiegt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Ich-Funktionen",
-"definition": "Fähigkeiten wie Sprache, Intelligenz, Denken, Gedächtnis, motorische Fähigkeiten und Mut, die zur Ich-Stärke gefördert werden.",
+"bedeutung": "Fähigkeiten wie Sprache, Intelligenz, Denken, Gedächtnis, motorische Fähigkeiten und Mut, die zur Ich-Stärke gefördert werden.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Zu starkes Über-Ich",
-"definition": "Entsteht bei viel Lenkung, Geboten und Verboten, z. B. im autoritären und im überbehütenden Erziehungsstil.",
+"bedeutung": "Entsteht bei viel Lenkung, Geboten und Verboten, z. B. im autoritären und im überbehütenden Erziehungsstil.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Zu schwaches Über-Ich",
-"definition": "Entsteht bei laissez-fairem, inkonsequentem oder vernachlässigendem Erzieherverhalten; die Ansprüche des Es werden maßlos.",
+"bedeutung": "Entsteht bei laissez-fairem, inkonsequentem oder vernachlässigendem Erzieherverhalten; die Ansprüche des Es werden maßlos.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Fehlformen in der Erziehung",
-"definition": "Z. B. Ablehnung, Vernachlässigung, Überbehütung und Verwöhnung; sie begünstigen seelische Fehlentwicklungen.",
+"bedeutung": "Z. B. Ablehnung, Vernachlässigung, Überbehütung und Verwöhnung; sie begünstigen seelische Fehlentwicklungen.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Ungleichgewicht der Persönlichkeit (Erklärungsansatz 1)",
-"definition": "Fehlformen führen zu einem Ungleichgewicht von Ich, Es, Über-Ich und Realität, dann zu Angst und zu Abwehrmechanismen.",
+"bedeutung": "Fehlformen führen zu einem Ungleichgewicht von Ich, Es, Über-Ich und Realität, dann zu Angst und zu Abwehrmechanismen.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Konflikte in der Libidoentwicklung (Erklärungsansatz 2)",
-"definition": "Triebwünsche einer Phase werden nicht oder über die Maßen befriedigt; mögliche Folgen sind Fixierung oder Regression.",
+"bedeutung": "Triebwünsche einer Phase werden nicht oder über die Maßen befriedigt; mögliche Folgen sind Fixierung oder Regression.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Kennzeichen eines geschwächten Ich",
-"definition": "Die Realität wird verleugnet oder verfälscht wahrgenommen, daher werden Probleme nicht realitätsgetreu gelöst.",
+"bedeutung": "Die Realität wird verleugnet oder verfälscht wahrgenommen, daher werden Probleme nicht realitätsgetreu gelöst.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Triebfrustration",
-"definition": "Erleben einer Enttäuschung, wenn die Befriedigung wichtiger Bedürfnisse fortwährend verhindert wird.",
+"bedeutung": "Erleben einer Enttäuschung, wenn die Befriedigung wichtiger Bedürfnisse fortwährend verhindert wird.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Ursache von Triebfrustration",
-"definition": "Unzureichende Befriedigung, z. B. bei stark autoritärem oder vernachlässigendem Erzieherverhalten.",
+"bedeutung": "Unzureichende Befriedigung, z. B. bei stark autoritärem oder vernachlässigendem Erzieherverhalten.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Exzessive Befriedigung",
-"definition": "Triebwünsche werden über die Maßen befriedigt, z. B. bei verwöhnendem, überbehütendem oder verzärtelndem Verhalten.",
+"bedeutung": "Triebwünsche werden über die Maßen befriedigt, z. B. bei verwöhnendem, überbehütendem oder verzärtelndem Verhalten.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Orale Fixierung",
-"definition": "Fixierung in der oralen Phase, die sich z. B. in Rauchen sowie übermäßigem Essen oder Trinken zeigen kann.",
+"bedeutung": "Fixierung in der oralen Phase, die sich z. B. in Rauchen sowie übermäßigem Essen oder Trinken zeigen kann.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Kummerspeck",
-"definition": "Übermäßiges Essen bei Liebeskummer; Rückfall in die Wünsche der oralen Phase, also eine Regression.",
+"bedeutung": "Übermäßiges Essen bei Liebeskummer; Rückfall in die Wünsche der oralen Phase, also eine Regression.",
 "t": "Seelische Fehlentwicklung"
+}
+],
+"faelle": [
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 1,
+"f": "„Ich will das jetzt – sofort!“",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Triebimpulse verlangen unmittelbare Befriedigung",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Folgt dem Lustprinzip",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Meldet Wünsche und Bedürfnisse beim Ich an",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 1,
+"f": "Der Wunsch, den Sitznachbarn zu schlagen, steigt plötzlich auf",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Enthält die ursprünglichen Triebansprüche",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 1,
+"f": "„Ich esse nach der Prüfung, jetzt lerne ich erst.“",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Überprüft die Realität",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Vermittelt zwischen Es, Über-Ich und Realität",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Folgt dem Realitätsprinzip",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Entscheidet, ob ein Wunsch verwirklicht oder abgewehrt wird",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Reagiert mit Angst auf drohende Gefahren",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Sucht einen sozial akzeptierten Weg zur Bedürfnisbefriedigung",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 1,
+"f": "„Das gehört sich nicht!“ als innere Stimme",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Bewertet die Wünsche des Es",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Enthält auch das Ich-Ideal",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Folgt dem Moralitätsprinzip",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Verinnerlichte Normen und Verbote der Eltern",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Löst Schuldgefühle und Gewissensbisse aus",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Gibt dem Ich Anweisung, welche Wünsche zugelassen werden",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er fürchtet, bei der Täuschung erwischt und bestraft zu werden.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie lässt den Plan fallen, weil sie öffentliche Verurteilung fürchtet.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er befürchtet, vor seinen Angestellten an Ansehen zu verlieren.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er schwänzt nicht, weil ihm ein Verweis und ein Elterngespräch drohen.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Nach dem Gedanken an Betrug quälen sie Schuldgefühle.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er macht sich Selbstvorwürfe, weil er gegen eigene Prinzipien verstoßen hat.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie hat Gewissensbisse, obwohl niemand etwas bemerkt hat.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er erlebt sein Selbstwertgefühl bedroht, weil er seinem Ideal nicht entspricht.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er fürchtet, von seinen aggressiven Impulsen überwältigt zu werden.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie erschrickt über die Stärke ihres Verlangens und fürchtet, es könnte sie vernichten.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er hat Panik, seinen Triebwünschen ausgeliefert zu sein, ohne dass äußerlich etwas droht.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 0,
+"f": "Angst vor Überwältigung durch das Es, z. B. bei einer entstehenden Schizophrenie",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie fürchtet die Konsequenzen, wenn ihr Wunsch in der Realität bekannt würde.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er sieht sich vom strengen Über-Ich bedroht und fühlt sich minderwertig.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie fürchtet, die Kontrolle über ihre Triebe zu verlieren.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Ich merke gerade, dass ich müde bin.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Im Moment denke ich an die Hausaufgabe.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Meine Aufmerksamkeit richtet sich auf das Gespräch.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Die Telefonnummer der Freundin fällt mir ein, sobald ich nach ihr gefragt werde.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Was ich gestern zu Mittag gegessen habe, kann ich mir mit Aufmerksamkeit ins Bewusstsein rufen.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Ein Schlüsselreiz lässt eine halb vergessene Erinnerung auftauchen.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Eine verdrängte traumatische Kindheitserfahrung",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Ein Versprecher, dessen Ursache der Person nicht bewusst ist",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 0,
+"f": "Angst auslösende Triebwünsche, die abgewehrt werden",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 0,
+"f": "Inhalte, auf die nur geschlossen werden kann (deskriptiver Aspekt)",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 0,
+"f": "Inhalte, die mit Gegenbesetzung zurückgehalten werden (dynamischer Aspekt)",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Der verlegte Ehering als Ausdruck eines unbewussten Wunsches",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
 }
 ]
 }

@@ -1,6 +1,6 @@
 {
  "titel": "Blockfall: Anlage, Umwelt oder Selbststeuerung?",
- "anleitung": "Welche Entwicklungsbedingung ist gemeint? Tippe die Spalte an, bevor der Block unten ankommt.",
+ "anleitung": "Ordne Fälle und Aussagen der passenden Entwicklungsbedingung zu, bevor der Block unten ankommt.",
  "kategorien": [
   "Anlage",
   "Umwelt",
@@ -29,15 +29,18 @@
   },
   {
    "t": "Eineiige Zwillinge haben dieselbe genetische Ausstattung",
-   "k": 0
+   "k": 0,
+   "f": 1
   },
   {
    "t": "Klima und Landschaft, in der ein Kind aufwächst",
-   "k": 1
+   "k": 1,
+   "f": 1
   },
   {
    "t": "Sprache, Sitten und Wertvorstellungen der Gesellschaft",
-   "k": 1
+   "k": 1,
+   "f": 1
   },
   {
    "t": "Der „Schrittmacher der Entwicklung“",
@@ -49,7 +52,8 @@
   },
   {
    "t": "Der Erziehungsstil der Eltern",
-   "k": 1
+   "k": 1,
+   "f": 1
   },
   {
    "t": "Exogene Entwicklungsbedingung",
@@ -65,11 +69,13 @@
   },
   {
    "t": "Ein Jugendlicher setzt sich selbst Ziele und trainiert dafür",
-   "k": 2
+   "k": 2,
+   "f": 1
   },
   {
    "t": "Ein Kind sucht sich bewusst neue Herausforderungen",
-   "k": 2
+   "k": 2,
+   "f": 1
   },
   {
    "t": "Autonome Entwicklungsbedingung",

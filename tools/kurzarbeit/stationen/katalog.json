@@ -1,9 +1,9 @@
 [
  {
   "id": "kurz-zuordnung-psychoanalyse",
-  "titel": "Kurzarbeit: Zuordnung Psychoanalyse",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "10 Begriffe von Determinismus bis Realitätsprinzip den Erklärungen zuordnen.",
+  "titel": "Zuordnung Psychoanalyse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "10 Fachbegriffe von Determinismus bis Realitätsprinzip in ihrer Bedeutung verstehen und zuordnen.",
   "datei": "zuordnung.html?set=kurz-zuordnung-psychoanalyse",
   "ergebnis": true,
   "parameter": [
@@ -16,12 +16,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-zuordnung-entwicklung",
-  "titel": "Kurzarbeit: Zuordnung Entwicklung",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Zuordnung Entwicklung",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Merkmale des Entwicklungsbegriffs und die drei Bedingungen mit Beispielen verbinden.",
   "datei": "zuordnung.html?set=kurz-zuordnung-entwicklung",
   "ergebnis": true,
@@ -35,13 +39,17 @@
     "standard": 1
    }
   ],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-zuordnung-wechselwirkung",
-  "titel": "Kurzarbeit: Zuordnung Wirkbeziehungen",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Fallbeispiele den sechs Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung zuordnen.",
+  "titel": "Zuordnung Wirkbeziehungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fälle den sechs Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung zuordnen.",
   "datei": "zuordnung.html?set=kurz-zuordnung-wechselwirkung",
   "ergebnis": true,
   "parameter": [
@@ -54,12 +62,16 @@
     "standard": 1
    }
   ],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-memory-psychoanalyse",
-  "titel": "Kurzarbeit: Memory Psychoanalyse",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Memory Psychoanalyse",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Instanzen, Abwehrmechanismen und Angstformen mit ihren Erklärungen aufdecken.",
   "datei": "memory.html?set=kurz-memory-psychoanalyse",
   "ergebnis": true,
@@ -73,12 +85,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-memory-entwicklung",
-  "titel": "Kurzarbeit: Memory Entwicklung",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Memory Entwicklung",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Begriffe der Entwicklungspsychologie mit Erklärungen paaren.",
   "datei": "memory.html?set=kurz-memory-entwicklung",
   "ergebnis": true,
@@ -92,13 +108,17 @@
     "standard": 1
    }
   ],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-blockfall-instanzen",
-  "titel": "Kurzarbeit: Blockfall Es, Ich, Über-Ich",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Fallende Aussagen unter Zeitdruck der richtigen Instanz zuordnen.",
+  "titel": "Blockfall Es, Ich, Über-Ich",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fälle und Aussagen unter Zeitdruck der richtigen Instanz zuordnen.",
   "datei": "blockfall.html?set=kurz-blockfall-instanzen",
   "ergebnis": true,
   "parameter": [
@@ -111,13 +131,17 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-blockfall-angst",
-  "titel": "Kurzarbeit: Blockfall Formen der Angst",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Fallbeispiele Realangst, moralischer und neurotischer Angst zuordnen.",
+  "titel": "Blockfall Formen der Angst",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbeispiele der Realangst, moralischen und neurotischen Angst zuordnen.",
   "datei": "blockfall.html?set=kurz-blockfall-angst",
   "ergebnis": true,
   "parameter": [
@@ -130,13 +154,17 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-blockfall-entwicklung",
-  "titel": "Kurzarbeit: Blockfall Anlage, Umwelt, Selbststeuerung",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Aussagen und Beispiele den drei Entwicklungsbedingungen zuordnen.",
+  "titel": "Blockfall Anlage, Umwelt, Selbststeuerung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fälle und Aussagen den drei Entwicklungsbedingungen zuordnen.",
   "datei": "blockfall.html?set=kurz-blockfall-entwicklung",
   "ergebnis": true,
   "parameter": [
@@ -149,13 +177,17 @@
     "standard": 1
    }
   ],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-blockfall-bewusstsein",
-  "titel": "Kurzarbeit: Blockfall Schichten des Bewusstseins",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Bewusst, vorbewusst oder unbewusst? Beispiele sortieren.",
+  "titel": "Blockfall Schichten des Bewusstseins",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fälle und Aussagen den Schichten des Bewusstseins zuordnen.",
   "datei": "blockfall.html?set=kurz-blockfall-bewusstsein",
   "ergebnis": true,
   "parameter": [
@@ -168,12 +200,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-vergleich-ich",
-  "titel": "Kurzarbeit: Theorievergleich Ich-Stärke und Ich-Schwäche",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Theorievergleich Ich-Stärke und Ich-Schwäche",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "12 Karten in zwei Spalten sortieren.",
   "datei": "vergleich.html?set=kurz-vergleich-ich",
   "ergebnis": true,
@@ -187,12 +223,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-vergleich-modelle",
-  "titel": "Kurzarbeit: Theorievergleich Topisches und strukturelles Modell",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Theorievergleich Topisches und strukturelles Modell",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Die beiden Modelle des psychischen Apparats unterscheiden.",
   "datei": "vergleich.html?set=kurz-vergleich-modelle",
   "ergebnis": true,
@@ -206,12 +246,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-vergleich-abwehr",
-  "titel": "Kurzarbeit: Theorievergleich Projektion und Identifikation",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Theorievergleich Projektion und Identifikation",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Merkmale und Beispiele den Abwehrmechanismen zuordnen.",
   "datei": "vergleich.html?set=kurz-vergleich-abwehr",
   "ergebnis": true,
@@ -225,12 +269,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-vergleich-grundannahmen",
-  "titel": "Kurzarbeit: Theorievergleich Determinismus und Trieblehre",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Theorievergleich Determinismus und Trieblehre",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Die Grundannahmen der psychoanalytischen Theorie trennen.",
   "datei": "vergleich.html?set=kurz-vergleich-grundannahmen",
   "ergebnis": true,
@@ -244,12 +292,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-vergleich-einfluesse",
-  "titel": "Kurzarbeit: Theorievergleich Fördernde und hemmende Einflüsse",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Theorievergleich Fördernde und hemmende Einflüsse",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Erziehungseinflüsse auf die Entwicklung sortieren.",
   "datei": "vergleich.html?set=kurz-vergleich-einfluesse",
   "ergebnis": true,
@@ -263,12 +315,16 @@
     "standard": 1
    }
   ],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-luecken-abwehr",
-  "titel": "Kurzarbeit: Lückentext Abwehr",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Lückentext Abwehr",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Den Text zur Abwehr mit Fachbegriffen vervollständigen.",
   "datei": "luecken.html?set=kurz-luecken-abwehr",
   "ergebnis": true,
@@ -282,12 +338,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-luecken-angst",
-  "titel": "Kurzarbeit: Lückentext Grundformen der Angst",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Lückentext Grundformen der Angst",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Den Text zu den Grundformen der Angst ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-angst",
   "ergebnis": true,
@@ -301,12 +361,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-luecken-begriff",
-  "titel": "Kurzarbeit: Lückentext Begriff Entwicklung",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Lückentext Begriff Entwicklung",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Die sechs Merkmale des Entwicklungsbegriffs ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-begriff",
   "ergebnis": true,
@@ -320,12 +384,16 @@
     "standard": 1
    }
   ],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-luecken-bedingungen",
-  "titel": "Kurzarbeit: Lückentext Bedingungen der Entwicklung",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Lückentext Bedingungen der Entwicklung",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Anlage, Umwelt, Selbststeuerung und ihr Zusammenwirken ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-bedingungen",
   "ergebnis": true,
@@ -339,12 +407,16 @@
     "standard": 1
    }
   ],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-luecken-schichten",
-  "titel": "Kurzarbeit: Lückentext Schichten des Bewusstseins",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Lückentext Schichten des Bewusstseins",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Das topische Modell mit deskriptivem und dynamischem Aspekt ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-schichten",
   "ergebnis": true,
@@ -358,12 +430,16 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-luecken-trieb",
-  "titel": "Kurzarbeit: Lückentext Determinismus und Trieblehre",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "Lückentext Determinismus und Trieblehre",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Die Grundannahmen der psychoanalytischen Theorie ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-trieb",
   "ergebnis": true,
@@ -377,33 +453,45 @@
     "standard": 1
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-kprim-psychoanalyse",
-  "titel": "Kurzarbeit: K-Prim Psychoanalytische Theorie",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "K-Prim Psychoanalytische Theorie",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Vier Aufgaben mit je vier Aussagen: trifft zu oder nicht?",
   "datei": "kprim.html?set=kurz-kprim-psychoanalyse",
   "ergebnis": true,
   "parameter": [],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-kprim-entwicklung",
-  "titel": "Kurzarbeit: K-Prim Entwicklungspsychologie",
-  "fach": "Vorbereitung auf die Kurzarbeit",
+  "titel": "K-Prim Entwicklungspsychologie",
+  "fach": "Pädagogik/Psychologie",
   "beschreibung": "Vier Aufgaben mit je vier Aussagen: trifft zu oder nicht?",
   "datei": "kprim.html?set=kurz-kprim-entwicklung",
   "ergebnis": true,
   "parameter": [],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-tetris-psychoanalyse",
-  "titel": "Kurzarbeit: Begriffe-Tetris Psychoanalyse",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Volle Reihe, Fachbegriff-Frage: 57 Definitionen von Determinismus bis Ich-Schwäche.",
+  "titel": "Begriffe-Tetris Psychoanalyse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Volle Reihe, Frage: Was bedeutet der Fachbegriff, und welcher Begriff passt zum Fall? Psychoanalyse von Determinismus bis Ich-Schwäche.",
   "datei": "tetris.html?set=kurz-tetris-psychoanalyse",
   "ergebnis": true,
   "parameter": [
@@ -427,13 +515,17 @@
     "standard": "12"
    }
   ],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-tetris-entwicklung",
-  "titel": "Kurzarbeit: Begriffe-Tetris Entwicklung",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Volle Reihe, Fachbegriff-Frage: 30 Definitionen zu Entwicklung und Erziehungseinflüssen.",
+  "titel": "Begriffe-Tetris Entwicklung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Volle Reihe, Frage: Bedeutung von Fachbegriffen und Fälle zuordnen. Entwicklung, Anlage, Umwelt, Erziehungseinflüsse.",
   "datei": "tetris.html?set=kurz-tetris-entwicklung",
   "ergebnis": true,
   "parameter": [
@@ -457,13 +549,17 @@
     "standard": "12"
    }
   ],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-tetris-alles",
-  "titel": "Kurzarbeit: Begriffe-Tetris Alle Fachbegriffe",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Alle 87 Fachbegriffe gemischt: Reihen schaffen, Definitionen wissen.",
+  "titel": "Begriffe-Tetris Alle Fachbegriffe",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "87 Fachbegriffe und Fälle gemischt: Reihen schaffen, Begriffe verstehen und auf Fälle anwenden.",
   "datei": "tetris.html?set=kurz-tetris-alles",
   "ergebnis": true,
   "parameter": [
@@ -487,36 +583,52 @@
     "standard": "12"
    }
   ],
-  "thema": "Alle Bereiche gemischt"
+  "thema": "Alle Bereiche gemischt",
+  "pfad": [
+   "LB 1",
+   "Alle Bereiche gemischt"
+  ]
  },
  {
   "id": "kurz-rennen-psychoanalyse",
-  "titel": "Kurzarbeit: Wichtel-Schubkarrenrennen Psychoanalyse",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Zwei Teams treten gegeneinander an: Richtig antworten, Schubkarre ein Stück weiter.",
+  "titel": "Wichtel-Schubkarrenrennen Psychoanalyse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Teams treten gleichzeitig an: Bedeutung von Fachbegriffen und Fälle zur Psychoanalyse.",
   "datei": "rennen.html?set=kurz-rennen-psychoanalyse",
   "ergebnis": false,
   "parameter": [],
-  "thema": "Psychoanalyse (Freud)"
+  "thema": "Psychoanalyse (Freud)",
+  "pfad": [
+   "LB 1",
+   "Psychoanalyse (Freud)"
+  ]
  },
  {
   "id": "kurz-rennen-entwicklung",
-  "titel": "Kurzarbeit: Wichtel-Schubkarrenrennen Entwicklung",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Zwei Teams treten gegeneinander an: Fragen zu Entwicklung und Wirkbeziehungen.",
+  "titel": "Wichtel-Schubkarrenrennen Entwicklung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Teams treten gleichzeitig an: Fachbegriffe und Fälle zu Entwicklung und Wirkbeziehungen.",
   "datei": "rennen.html?set=kurz-rennen-entwicklung",
   "ergebnis": false,
   "parameter": [],
-  "thema": "Entwicklung"
+  "thema": "Entwicklung",
+  "pfad": [
+   "LB 1",
+   "Entwicklung"
+  ]
  },
  {
   "id": "kurz-rennen-alles",
-  "titel": "Kurzarbeit: Wichtel-Schubkarrenrennen Alle Bereiche",
-  "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Zwei Teams, Fragen aus allen Bereichen der Kurzarbeit gemischt.",
+  "titel": "Wichtel-Schubkarrenrennen Alle Bereiche",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Teams, Fragen zu Fachbegriffen und Fällen aus allen Bereichen von LB 1 gemischt.",
   "datei": "rennen.html?set=kurz-rennen-alles",
   "ergebnis": false,
   "parameter": [],
-  "thema": "Alle Bereiche gemischt"
+  "thema": "Alle Bereiche gemischt",
+  "pfad": [
+   "LB 1",
+   "Alle Bereiche gemischt"
+  ]
  }
 ]

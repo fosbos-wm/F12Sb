@@ -6,14 +6,17 @@
  --ra:#c62f2f;--rb:#1f6fb8;--sky1:#9fd3f2;--sky2:#e8f5fb;--dim:1}
 @media (prefers-color-scheme:dark){:root{--bg:#0f171c;--panel:#17232a;--fg:#e6eff3;--muted:#9bb0ba;--line:#2a3b44;--pri:#5fb8d9;--pri-ink:#062029;--soft:#1d3039;--ok:#6fd49b;--ok-soft:#163626;--bad:#f2928b;--bad-soft:#3a1b19;--ra:#ff7b72;--rb:#6db6ff;--sky1:#1b3550;--sky2:#35506a;--dim:.72}}
 *{box-sizing:border-box}html,body{margin:0}
-body{background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:10px max(10px,env(safe-area-inset-left,0))}
-main{max-width:980px;margin:0 auto}
+body{background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:0;height:100vh;height:100dvh;overflow:hidden}
+.app{height:100vh;height:100dvh;display:flex;flex-direction:column;gap:8px;padding:8px max(10px,env(safe-area-inset-left,0));max-width:1600px;margin:0 auto}
+.hd{display:flex;align-items:center;gap:12px;flex:none}.hd>div{flex:1;min-width:0}.hd h1{margin:0}.hd .sub{margin:0}.playing .hd .sub{display:none}
+.left{display:contents}
+.scenebox{flex:none;aspect-ratio:900/340;width:100%;border-radius:14px;border:2px solid var(--line);overflow:hidden;background:linear-gradient(var(--sky1) 0 52%,#6aa84f 52%)}
 h1{font-size:1.2rem;margin:0 0 2px}.sub{color:var(--muted);margin:0 0 10px;font-size:.92rem}
 button{font:inherit;color:inherit;cursor:pointer}
 .b{font-weight:700;border-radius:12px;border:2px solid var(--pri);background:var(--pri);color:var(--pri-ink);padding:11px 22px}
 .b.alt{background:var(--panel);color:var(--fg);border-color:var(--line)}
 [hidden]{display:none!important}:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
-#scene{width:100%;height:auto;display:block;border-radius:14px;border:2px solid var(--line);background:var(--sky2)}
+#scene{width:100%;height:100%;display:block}
 .sky1{stop-color:var(--sky1)}.sky2{stop-color:var(--sky2)}
 .dim{filter:brightness(var(--dim))}
 .wich{transition:transform 1.25s cubic-bezier(.45,.05,.3,1)}
@@ -31,8 +34,16 @@ button{font:inherit;color:inherit;cursor:pointer}
 .cloud{animation:drift 60s linear infinite}.cloud.c2{animation-duration:90s;animation-delay:-30s}
 @keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(1020px)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
-.board{display:flex;gap:10px;margin:10px 0}
-.chip{flex:1;display:flex;align-items:center;gap:10px;background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:8px 12px}
+.qban{background:linear-gradient(135deg,#0b4a63,#1d86a8);color:#fff;border-radius:14px;padding:10px 20px;margin:0;flex:0 0 auto;height:clamp(92px,17vh,150px);overflow:auto;display:flex;flex-direction:column;justify-content:center;gap:4px;border-left:10px solid #f2b705;box-shadow:0 4px 14px rgba(0,0,0,.18);transition:opacity .45s,transform .45s}
+.qban.off{display:none}
+.qban.gone{opacity:0;transform:translateY(-10px);pointer-events:none}
+.qban .kick{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#bfe6f4}
+.qban .qt{font-size:clamp(1.25rem,3.4vw,2rem);font-weight:800;line-height:1.25;margin:0;color:#fff}
+.board{display:flex;gap:10px;margin:0;flex:none}
+.stage{flex:1 1 0;overflow:auto;min-height:130px}
+.fbslot{min-height:64px;margin-top:8px}.fbslot .fb{margin:0;padding:8px 14px}
+.nxrow{margin:8px 0 0;display:flex;gap:10px}
+.chip{flex:1;display:flex;align-items:center;gap:10px;background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:5px 12px}
 .chip .dot{width:18px;height:18px;border-radius:50%;flex:none}
 .chip b{font-size:1.05rem}.chip .st{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:800;font-size:1.2rem}
 .chip.turn{border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 25%,transparent)}
@@ -42,7 +53,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .ctx{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.03em;text-transform:uppercase;margin-bottom:4px}
 .qt{font-size:1.2rem;font-weight:700;line-height:1.35;margin:0 0 12px}
 .opts{display:grid;gap:8px}
-.opt{display:flex;gap:10px;text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:12px 14px;line-height:1.35;font-size:1.02rem}
+.opt{display:flex;gap:10px;text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:9px 12px;line-height:1.3;font-size:1rem}
 .opt:hover:not(:disabled){border-color:var(--pri)}
 .opt .k{flex:none;width:26px;height:26px;border-radius:7px;background:var(--soft);font-size:.82rem;font-weight:800;display:flex;align-items:center;justify-content:center}
 .opt.ok{border-color:var(--ok);background:var(--ok-soft)}.opt.bad{border-color:var(--bad);background:var(--bad-soft)}
@@ -56,13 +67,22 @@ button{font:inherit;color:inherit;cursor:pointer}
 .simgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.simcol{display:grid;gap:8px;align-content:start}
 .simh{display:flex;align-items:center;gap:8px;border-bottom:4px solid;padding-bottom:6px}.simh .dot{width:14px;height:14px;border-radius:50%}.simst{margin-left:auto;font-size:.82rem;color:var(--muted);font-weight:700}
 .opt.pick{border-color:var(--pri);background:var(--soft)}
+@media (min-aspect-ratio:5/4) and (min-width:820px){
+ .app{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:8px 12px;align-content:stretch}
+ .hd{grid-column:1/-1}
+ .left{display:flex;flex-direction:column;gap:8px;min-height:0;min-width:0}
+ .qban{flex:1 1 auto;height:auto;min-height:92px}
+ .qban .qt{font-size:clamp(1.3rem,2.7vw,2.3rem)}
+ .stage{min-height:0}
+}
 @media (max-width:640px){.simgrid{grid-template-columns:1fr}}
-@media (max-width:560px){.names{grid-template-columns:1fr}.board{flex-direction:column}}
-</style></head><body><main>
-<h1 id="t">Wichtel-Schubkarrenrennen</h1><p class="sub" id="a"></p>
-<svg id="scene" viewBox="0 0 900 340" role="img" aria-label="Zwei Wichtel mit Schubkarren auf einer Rennbahn vor dem Hohenpeißenberg und den Alpen bei Weilheim"></svg>
-<div class="board" id="board" hidden></div>
-<div id="stage">
+@media (max-width:560px){.names{grid-template-columns:1fr}.chip{padding:4px 8px}.chip b{font-size:.9rem}.chip .st{font-size:1rem}}
+</style></head><body><main class="app" id="app">
+<div class="hd"><div><h1 id="t">Wichtel-Schubkarrenrennen</h1><p class="sub" id="a"></p></div><button class="b alt" id="fs" type="button" title="Vollbild (Taste F)">⛶ Vollbild</button></div>
+<div class="left"><div class="qban gone off" id="qban" aria-live="polite"></div>
+<div class="scenebox"><svg id="scene" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Zwei Wichtel mit Schubkarren auf einer Rennbahn vor dem Hohenpeißenberg und den Alpen bei Weilheim"></svg></div>
+<div class="board" id="board" hidden></div></div>
+<div id="stage" class="stage">
  <div class="card" id="start">
   <b>Zwei Teams, ein Rennen.</b>
   <p style="margin:6px 0 0">Die Teams sind abwechselnd dran. Wer richtig antwortet, schiebt die Schubkarre ein Stück weiter. Wer zuerst im Ziel ist, gewinnt.</p>
@@ -156,6 +176,12 @@ function say(i,txt,cls,ms){const w=$("w"+i);w.querySelector(".bt").textContent=t
 function move(i,steps){const w=$("w"+i);w.classList.add("moving","happy");setX(i,steps);setTimeout(()=>w.classList.remove("moving","happy"),1300)}
 
 /* ---------- Spiel ---------- */
+function banner(kick,ctx,text,color){
+ const b=$("qban");b.style.borderLeftColor=color||"#f2b705";
+ b.innerHTML=`<span class="kick">${esc(kick)}${ctx?" · "+esc(ctx):""}</span><p class="qt">${esc(text)}</p>`;
+ b.classList.remove("gone","off");
+}
+const hideBanner=()=>$("qban").classList.add("gone");
 let DATA=null,Q=[],c=[0,0],turn=0,names=["Team Rot","Team Blau"],answered=false,cur=null;
 const SEED=+QS.get("spiel")||0;
 function load(){fetch("../inhalte/"+SET+".json").then(r=>r.json()).then(d=>{DATA=d;$("t").textContent=d.titel;$("a").textContent=d.anleitung;$("cnt").textContent=d.fragen.length+" Fragen im Pool";$("go").disabled=d.fragen.length<20}).catch(()=>{$("a").innerHTML='<span class="err">Die Übung konnte nicht geladen werden.</span>'})}
@@ -165,7 +191,7 @@ function chips(){
 }
 let over=false,mode="sim",ans=[null,null],t0=0,roundDone=false;
 function begin(){
- mode=document.querySelector("input[name=mode]:checked").value;
+ $("app").classList.add("playing");mode=document.querySelector("input[name=mode]:checked").value;
  names=[$("n0").value.trim()||"Team Rot",$("n1").value.trim()||"Team Blau"];
  const r=rng((SEED||Math.floor(Math.random()*999)+1)*31+7);
  const seen=new Set();Q=sh(DATA.fragen,r).filter(q=>!seen.has(q.f)&&seen.add(q.f)).slice(0,40).map(q=>{const idx=q.o.map((t,k)=>({t,ok:k===q.r}));return {c:q.c,f:q.f,o:sh(idx,r)}});
@@ -173,18 +199,20 @@ function begin(){
 }
 function ask(){
  cur=Q[turn];answered=false;const i=turn%2;chips();
- $("stage").innerHTML=`<div class="card"><div class="turnbar"><span class="dot" style="background:${COL[i]}"></span>${esc(names[i])} ist dran – ${i===0?"die linke Schubkarre":"die rechte Schubkarre"}</div>${cur.c?`<div class="ctx">${esc(cur.c)}</div>`:""}<p class="qt">${esc(cur.f)}</p><div class="opts">${cur.o.map((o,k)=>`<button class="opt" type="button" data-k="${k}"><span class="k">${k+1}</span><span>${esc(o.t)}</span></button>`).join("")}</div><div id="fb"></div></div>`;
+ banner("Frage "+(turn+1),cur.c,cur.f,COL[i]);
+ $("stage").innerHTML=`<div class="card"><div class="turnbar"><span class="dot" style="background:${COL[i]}"></span>${esc(names[i])} ist dran – ${i===0?"die linke Schubkarre":"die rechte Schubkarre"}</div><div class="opts">${cur.o.map((o,k)=>`<button class="opt" type="button" data-k="${k}"><span class="k">${k+1}</span><span>${esc(o.t)}</span></button>`).join("")}</div><div id="fb" class="fbslot"></div><p class="nxrow"><button class="b" id="nx" type="button" disabled>Weiter</button></p></div>`;
  document.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>answer(+b.dataset.k)));
+ $("nx").addEventListener("click",next);
 }
 function answer(k){
- if(answered)return;answered=true;const i=turn%2,ok=cur.o[k].ok;
+ if(answered)return;answered=true;hideBanner();const i=turn%2,ok=cur.o[k].ok;
  document.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;if(cur.o[j].ok)b.classList.add("ok");else if(j===k)b.classList.add("bad")});
  const pick=a=>a[Math.floor(Math.random()*a.length)];
  if(ok){c[i]++;move(i,c[i]);say(i,"Juhu!","happy",1700)}else{const w=$("w"+i);w.classList.add("oops");say(i,"Hoppla!","",1700);setTimeout(()=>w.classList.remove("oops"),1500)}
  const right=cur.o.find(o=>o.ok).t;
  const last=turn%2===1;
- $("fb").innerHTML=`<div class="fb ${ok?"ok":"bad"}">${ok?pick(RIGHT):pick(WRONG)}${ok?"":`<small>Richtig wäre gewesen: ${esc(right)}</small>`}</div><p style="margin:12px 0 0"><button class="b" id="nx" type="button">Weiter</button></p>`;
- chips();$("nx").focus();$("nx").addEventListener("click",next);
+ $("fb").innerHTML=`<div class="fb ${ok?"ok":"bad"}">${ok?pick(RIGHT):pick(WRONG)}${ok?"":`<small>Richtig wäre gewesen: ${esc(right)}</small>`}</div>`;
+ chips();$("nx").disabled=false;$("nx").focus();
 }
 function next(){
  if(mode==="sim"){nextSim();return}
@@ -195,7 +223,7 @@ function next(){
  turn++;ask();
 }
 function finish(){
- over=true;chips();const a=c[0],b=c[1],w=a>b?0:b>a?1:-1;
+ over=true;$("qban").classList.add("off");chips();const a=c[0],b=c[1],w=a>b?0:b>a?1:-1;
  if(w>=0){$("w"+w).classList.add("win");setX(w,GOAL)}
  $("stage").innerHTML=`<div class="card"><p class="end">${w<0?"Unentschieden – Zielfoto!":esc(names[w])+" gewinnt das Rennen!"}</p><p style="margin:0 0 12px">${esc(names[0])}: ${a} richtig · ${esc(names[1])}: ${b} richtig · ${turn+1} Fragen gespielt.</p><button class="b" id="again" type="button">Noch ein Rennen</button></div>`;
  $("again").addEventListener("click",()=>{document.querySelectorAll(".win").forEach(e=>e.classList.remove("win"));begin()});
@@ -204,9 +232,11 @@ function finish(){
 function askSim(){
  cur=Q[turn];ans=[null,null];roundDone=false;t0=Date.now();chips();
  const col=i=>`<div class="simcol" data-team="${i}"><div class="simh" style="border-color:${COL[i]}"><span class="dot" style="background:${COL[i]}"></span><b>${esc(names[i])}</b><span class="simst" id="ss${i}">Wählt ...</span></div>${cur.o.map((o,k)=>`<button class="opt" type="button" data-team="${i}" data-k="${k}"><span class="k">${i===0?k+1:[7,8,9,0][k]}</span><span>${esc(o.t)}</span></button>`).join("")}</div>`;
- $("stage").innerHTML=`<div class="card"><div class="turnbar">Frage ${turn+1} · beide Teams antworten gleichzeitig</div>${cur.c?`<div class="ctx">${esc(cur.c)}</div>`:""}<p class="qt">${esc(cur.f)}</p><div class="simgrid">${col(0)}${col(1)}</div><div id="fb"></div><p style="margin:12px 0 0"><button class="b alt" id="force" type="button" hidden>Auflösen</button></p></div>`;
+ banner("Frage "+(turn+1)+" · beide Teams gleichzeitig",cur.c,cur.f);
+ $("stage").innerHTML=`<div class="card"><div class="simgrid">${col(0)}${col(1)}</div><div id="fb" class="fbslot"></div><p class="nxrow"><button class="b" id="nx" type="button" disabled>Weiter</button><button class="b alt" id="force" type="button" hidden>Auflösen</button></p></div>`;
  document.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>answerSim(+b.dataset.team,+b.dataset.k)));
  $("force").addEventListener("click",()=>resolveSim());
+ $("nx").addEventListener("click",next);
 }
 function answerSim(i,k){
  if(roundDone||ans[i]!==null||!cur||k>=cur.o.length)return;
@@ -216,7 +246,7 @@ function answerSim(i,k){
  if(ans[0]&&ans[1])resolveSim();else $("force").hidden=false;
 }
 function resolveSim(){
- if(roundDone)return;roundDone=true;$("force").hidden=true;
+ if(roundDone)return;roundDone=true;hideBanner();$("force").hidden=true;
  const pick=a=>a[Math.floor(Math.random()*a.length)];
  const okIdx=cur.o.findIndex(o=>o.ok),res=[0,1].map(i=>ans[i]&&ans[i].k===okIdx);
  document.querySelectorAll(".opt").forEach(b=>{const i=+b.dataset.team,j=+b.dataset.k;b.disabled=true;b.classList.remove("pick");
@@ -224,8 +254,8 @@ function resolveSim(){
  [0,1].forEach(i=>{$("ss"+i).textContent=!ans[i]?"keine Antwort":res[i]?"richtig"+(ans[i].t?" · "+(ans[i].t/1000).toFixed(1).replace(".",",")+" s":""):"falsch";
   if(res[i]){c[i]++;move(i,c[i]);say(i,"Juhu!","happy",1700)}else{const w=$("w"+i);w.classList.add("oops");say(i,"Hoppla!","",1700);setTimeout(()=>w.classList.remove("oops"),1500)}});
  const txt=res[0]&&res[1]?"Beide richtig, die Schubkarren rollen!":res[0]||res[1]?esc(names[res[0]?0:1])+" ist vorn dran: "+pick(RIGHT):"Keiner richtig. "+pick(WRONG);
- $("fb").innerHTML=`<div class="fb ${res[0]||res[1]?"ok":"bad"}">${txt}<small>Richtig: ${esc(cur.o[okIdx].t)}</small></div><p style="margin:12px 0 0"><button class="b" id="nx" type="button">Weiter</button></p>`;
- chips();$("nx").focus();$("nx").addEventListener("click",next);
+ $("fb").innerHTML=`<div class="fb ${res[0]||res[1]?"ok":"bad"}">${txt}<small>Richtig: ${esc(cur.o[okIdx].t)}</small></div>`;
+ chips();$("nx").disabled=false;$("nx").focus();
  window.__res=res;
 }
 function nextSim(){
@@ -242,12 +272,16 @@ function nextSim(){
 document.addEventListener("keydown",e=>{
  if(!cur||over)return;const n=parseInt(e.key,10);
  if(mode==="sim"){
-  if(e.key==="Enter"&&roundDone&&$("nx")){$("nx").click();e.preventDefault();return}
+  if(e.key==="Enter"&&roundDone&&$("nx")&&!$("nx").disabled){$("nx").click();e.preventDefault();return}
   const m={"1":[0,0],"2":[0,1],"3":[0,2],"4":[0,3],"7":[1,0],"8":[1,1],"9":[1,2],"0":[1,3]}[e.key];
   if(m){answerSim(m[0],m[1]);e.preventDefault()}return}
  if(!answered&&n>=1&&n<=cur.o.length){answer(n-1);e.preventDefault()}
  else if(answered&&(e.key==="Enter")&&$("nx")){$("nx").click();e.preventDefault()}
 });
+function toggleFs(){const d=document,el=d.documentElement;if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.webkitExitFullscreen).call(d)}else{const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f)try{const r=f.call(el);if(r&&r.catch)r.catch(()=>{})}catch(x){}}}
+if(!(document.fullscreenEnabled||document.webkitFullscreenEnabled))$("fs").hidden=true;
+$("fs").addEventListener("click",toggleFs);
+document.addEventListener("keydown",e=>{if((e.key==="f"||e.key==="F")&&!/INPUT|TEXTAREA/.test((e.target||{}).tagName||"")){toggleFs();e.preventDefault()}});
 window.Rennen={cur:()=>cur,c:()=>c};
 scene();load();$("go").addEventListener("click",begin);
 </script></main></body></html>

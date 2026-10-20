@@ -1,441 +1,1231 @@
 {
-"titel": "Begriffe-Tetris: Alle Fachbegriffe zur Kurzarbeit",
-"anleitung": "Lass die Blöcke fallen und fülle waagrechte Reihen. Jede volle Reihe stellt eine Frage zu einem Fachbegriff.",
+"titel": "Begriffe-Tetris: Alle Fachbegriffe zu LB 1",
+"art": "bedeutung",
+"anleitung": "Lass die Blöcke fallen und fülle waagrechte Reihen. Jede volle Reihe stellt eine Frage: Was bedeutet der Fachbegriff, und welcher Fachbegriff passt zu einem Fall?",
 "karten": [
 {
 "begriff": "Psychischer Determinismus",
-"definition": "Freuds Annahme, dass jedes Verhalten seelische Ursachen hat und nichts im Seelenleben zufällig ist.",
+"bedeutung": "Freuds Annahme, dass jedes Verhalten seelische Ursachen hat und nichts im Seelenleben zufällig ist.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Fehlleistung",
-"definition": "Alltäglicher Fehler wie ein Versprecher, der nach Freud von unbewussten seelischen Kräften bestimmt ist.",
+"bedeutung": "Alltäglicher Fehler wie ein Versprecher, der nach Freud von unbewussten seelischen Kräften bestimmt ist.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Triebquelle",
-"definition": "Körperlicher Vorgang in einem Organ oder Körperteil als Voraussetzung eines Triebs, z. B. Hunger.",
+"bedeutung": "Körperlicher Vorgang in einem Organ oder Körperteil als Voraussetzung eines Triebs, z. B. Hunger.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Triebziel",
-"definition": "Die Befriedigung, die durch Aufhebung des Reizzustands an der Triebquelle erreicht wird.",
+"bedeutung": "Die Befriedigung, die durch Aufhebung des Reizzustands an der Triebquelle erreicht wird.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Triebobjekt",
-"definition": "Das, woran sich die Triebhandlung vollzieht, z. B. Personen, Körperteile oder Gegenstände.",
+"bedeutung": "Das, woran sich die Triebhandlung vollzieht, z. B. Personen, Körperteile oder Gegenstände.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Lebenstrieb (Eros)",
-"definition": "Trieb mit dem Ziel der Selbst- und Arterhaltung, des Überlebens und der Fortpflanzung.",
+"bedeutung": "Trieb mit dem Ziel der Selbst- und Arterhaltung, des Überlebens und der Fortpflanzung.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Libido",
-"definition": "Psychische Energie des Lebenstriebs, die auf Lustgewinn gerichtet ist.",
+"bedeutung": "Psychische Energie des Lebenstriebs, die auf Lustgewinn gerichtet ist.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Objektbesetzung",
-"definition": "Ausrichtung der Libido auf andere Personen und Gegenstände, z. B. die frühe Bindung des Kindes an die Mutter.",
+"bedeutung": "Ausrichtung der Libido auf andere Personen und Gegenstände, z. B. die frühe Bindung des Kindes an die Mutter.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Todestrieb (Thanatos)",
-"definition": "Trieb, der auf die Auflösung des Lebens in den anorganischen Zustand zielt, z. B. Destruktivität und Aggression.",
+"bedeutung": "Trieb, der auf die Auflösung des Lebens in den anorganischen Zustand zielt, z. B. Destruktivität und Aggression.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Destrudo",
-"definition": "Psychische Energie des Todestriebs, gerichtet gegen die eigene Person oder nach außen gegen andere.",
+"bedeutung": "Psychische Energie des Todestriebs, gerichtet gegen die eigene Person oder nach außen gegen andere.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Topisches Modell",
-"definition": "Modell des psychischen Apparats mit den Schichten Bewusstes, Vorbewusstes und Unbewusstes.",
+"bedeutung": "Modell des psychischen Apparats mit den Schichten Bewusstes, Vorbewusstes und Unbewusstes.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Das Vorbewusste",
-"definition": "Inhalte, die gerade nicht bewusst sind, aber durch Aufmerksamkeit oder einen Schlüsselreiz ins Bewusstsein geholt werden können.",
+"bedeutung": "Inhalte, die gerade nicht bewusst sind, aber durch Aufmerksamkeit oder einen Schlüsselreiz ins Bewusstsein geholt werden können.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Deskriptiver Aspekt des Unbewussten",
-"definition": "Auf unbewusste Inhalte kann nur geschlossen werden, denn sie können nicht bewusst erfahren werden.",
+"bedeutung": "Auf unbewusste Inhalte kann nur geschlossen werden, denn sie können nicht bewusst erfahren werden.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Dynamischer Aspekt des Unbewussten",
-"definition": "Unbewusste Inhalte drängen ins Bewusstsein und müssen mit aktiver Gegenkraft im Unbewussten gehalten werden.",
+"bedeutung": "Unbewusste Inhalte drängen ins Bewusstsein und müssen mit aktiver Gegenkraft im Unbewussten gehalten werden.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Gegenbesetzung",
-"definition": "Aktive Gegenkraft, die unbewusste Inhalte im Unbewussten hält.",
+"bedeutung": "Aktive Gegenkraft, die unbewusste Inhalte im Unbewussten hält.",
 "t": "Grundannahmen der Psychoanalyse"
 },
 {
 "begriff": "Es",
-"definition": "Älteste, angeborene und unbewusste Instanz der Triebe, Wünsche und Bedürfnisse; von Geburt an vorhanden.",
+"bedeutung": "Älteste, angeborene und unbewusste Instanz der Triebe, Wünsche und Bedürfnisse; von Geburt an vorhanden.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Ich",
-"definition": "Instanz der bewussten Auseinandersetzung mit der Realität; vermittelt zwischen Es, Über-Ich und Außenwelt.",
+"bedeutung": "Instanz der bewussten Auseinandersetzung mit der Realität; vermittelt zwischen Es, Über-Ich und Außenwelt.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Über-Ich",
-"definition": "Instanz der verinnerlichten Wert- und Normvorstellungen, das Gewissen; entsteht erst im Laufe der Sozialisation.",
+"bedeutung": "Instanz der verinnerlichten Wert- und Normvorstellungen, das Gewissen; entsteht erst im Laufe der Sozialisation.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Lustprinzip",
-"definition": "Prinzip des Es: sofortige Triebbefriedigung und Vermeidung von Schmerz und Frustration („Ich will!“).",
+"bedeutung": "Prinzip des Es: sofortige Triebbefriedigung und Vermeidung von Schmerz und Frustration („Ich will!“).",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Realitätsprinzip",
-"definition": "Prinzip des Ich: Kompromiss zwischen den ungehemmten Triebansprüchen und den Anforderungen der Außenwelt.",
+"bedeutung": "Prinzip des Ich: Kompromiss zwischen den ungehemmten Triebansprüchen und den Anforderungen der Außenwelt.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Moralitätsprinzip",
-"definition": "Prinzip des Über-Ich: Es soll getan werden, was im moralischen Sinne „richtig“ ist („Du sollst!“).",
+"bedeutung": "Prinzip des Über-Ich: Es soll getan werden, was im moralischen Sinne „richtig“ ist („Du sollst!“).",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Ich-Ideal",
-"definition": "Teil des Über-Ich, der danach strebt, die Idealvorstellung der eigenen Person zu verwirklichen.",
+"bedeutung": "Teil des Über-Ich, der danach strebt, die Idealvorstellung der eigenen Person zu verwirklichen.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Dynamik der Persönlichkeit",
-"definition": "Ständiges Mit- und Gegeneinander von Es, Ich und Über-Ich: Es meldet Wünsche, Über-Ich bewertet, Ich vermittelt.",
+"bedeutung": "Ständiges Mit- und Gegeneinander von Es, Ich und Über-Ich: Es meldet Wünsche, Über-Ich bewertet, Ich vermittelt.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Funktion des Es in der Dynamik",
-"definition": "Es kündigt bestimmte Wünsche oder Bedürfnisse beim Ich an.",
+"bedeutung": "Es kündigt bestimmte Wünsche oder Bedürfnisse beim Ich an.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Funktion des Über-Ich in der Dynamik",
-"definition": "Es bewertet die Wünsche des Es und gibt dem Ich Anweisung, ob sie zugelassen werden dürfen.",
+"bedeutung": "Es bewertet die Wünsche des Es und gibt dem Ich Anweisung, ob sie zugelassen werden dürfen.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Funktion des Ich in der Dynamik",
-"definition": "Es vermittelt zwischen Über-Ich und Es und überprüft die Realität, ob Befriedigung möglich ist.",
+"bedeutung": "Es vermittelt zwischen Über-Ich und Es und überprüft die Realität, ob Befriedigung möglich ist.",
 "t": "Instanzen und Dynamik der Persönlichkeit"
 },
 {
 "begriff": "Angst (psychoanalytisch)",
-"definition": "Reaktion des Ich auf eine bevorstehende oder aktuelle Bedrohung; warnt vor Gefahren und veranlasst Handlungen, die sie verringern.",
+"bedeutung": "Reaktion des Ich auf eine bevorstehende oder aktuelle Bedrohung; warnt vor Gefahren und veranlasst Handlungen, die sie verringern.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Realangst",
-"definition": "Das Ich fürchtet die Konsequenzen der Realität, die auf die Befriedigung von Wünschen folgen, z. B. öffentliche Verurteilung.",
+"bedeutung": "Das Ich fürchtet die Konsequenzen der Realität, die auf die Befriedigung von Wünschen folgen, z. B. öffentliche Verurteilung.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Gewissensangst (moralische Angst)",
-"definition": "Das Ich fürchtet die Forderungen des Über-Ich: Schuldgefühle, Selbstvorwürfe und Gewissensbisse.",
+"bedeutung": "Das Ich fürchtet die Forderungen des Über-Ich: Schuldgefühle, Selbstvorwürfe und Gewissensbisse.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Neurotische Angst",
-"definition": "Das Ich fürchtet, von den Ansprüchen des Es überwältigt oder vernichtet zu werden.",
+"bedeutung": "Das Ich fürchtet, von den Ansprüchen des Es überwältigt oder vernichtet zu werden.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Abwehrmechanismus",
-"definition": "Unbewusster Schutz des Ich vor Angst, die aus dem Konflikt zwischen Es, Über-Ich und Realität entsteht.",
+"bedeutung": "Unbewusster Schutz des Ich vor Angst, die aus dem Konflikt zwischen Es, Über-Ich und Realität entsteht.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Verdrängung",
-"definition": "Unangenehme Gedanken, Erinnerungen oder Impulse werden aus dem Bewusstsein ins Unbewusste verbannt und wirken dort weiter.",
+"bedeutung": "Unangenehme Gedanken, Erinnerungen oder Impulse werden aus dem Bewusstsein ins Unbewusste verbannt und wirken dort weiter.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Projektion",
-"definition": "Eigene, nicht akzeptierte Wünsche oder Gefühle werden anderen Personen zugeschrieben und dort bekämpft.",
+"bedeutung": "Eigene, nicht akzeptierte Wünsche oder Gefühle werden anderen Personen zugeschrieben und dort bekämpft.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Identifikation",
-"definition": "Selbstwert wird erhöht und Angst bekämpft durch Gleichsetzung mit einer Person oder Institution von höherem Rang.",
+"bedeutung": "Selbstwert wird erhöht und Angst bekämpft durch Gleichsetzung mit einer Person oder Institution von höherem Rang.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Identifikation mit dem Aggressor",
-"definition": "Man gleicht sich dem Angreifer an, um sich von der eigenen Aggression zu „befreien“.",
+"bedeutung": "Man gleicht sich dem Angreifer an, um sich von der eigenen Aggression zu „befreien“.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Stockholm-Syndrom",
-"definition": "Opfer von Geiselnahmen bauen ein positives emotionales Verhältnis zu ihren Entführern auf.",
+"bedeutung": "Opfer von Geiselnahmen bauen ein positives emotionales Verhältnis zu ihren Entführern auf.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Fixierung",
-"definition": "Verhaftetbleiben an Erlebens- und Verhaltensweisen oder Objekten, die zu einer bestimmten Entwicklungsphase gehören.",
+"bedeutung": "Verhaftetbleiben an Erlebens- und Verhaltensweisen oder Objekten, die zu einer bestimmten Entwicklungsphase gehören.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Regression",
-"definition": "Zurückfallen auf Erlebens- und Verhaltensweisen einer früheren Entwicklungsphase, z. B. Einnässen nach der Geburt eines Geschwisters.",
+"bedeutung": "Zurückfallen auf Erlebens- und Verhaltensweisen einer früheren Entwicklungsphase, z. B. Einnässen nach der Geburt eines Geschwisters.",
 "t": "Angst und Abwehrmechanismen"
 },
 {
 "begriff": "Ich-Stärke",
-"definition": "Das Ich bringt die Anforderungen von Es, Über-Ich und Realität in Einklang und kann sich durchsetzen; die Instanzen sind im Gleichgewicht.",
+"bedeutung": "Das Ich bringt die Anforderungen von Es, Über-Ich und Realität in Einklang und kann sich durchsetzen; die Instanzen sind im Gleichgewicht.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Ich-Schwäche",
-"definition": "Unfähigkeit des Ich, einen Ausgleich zwischen Es, Über-Ich und Realität herzustellen; die Person verhält sich eher fremdbestimmt.",
+"bedeutung": "Unfähigkeit des Ich, einen Ausgleich zwischen Es, Über-Ich und Realität herzustellen; die Person verhält sich eher fremdbestimmt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Das Es siegt über das Ich",
-"definition": "Das Über-Ich ist zu schwach; Triebwünsche werden im Übermaß befriedigt.",
+"bedeutung": "Das Über-Ich ist zu schwach; Triebwünsche werden im Übermaß befriedigt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Das Über-Ich siegt über das Ich",
-"definition": "Das Über-Ich ist zu stark; die Wünsche und Bedürfnisse des Es werden weitgehend unterdrückt.",
+"bedeutung": "Das Über-Ich ist zu stark; die Wünsche und Bedürfnisse des Es werden weitgehend unterdrückt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Die Realität siegt über das Ich",
-"definition": "Das Ich wird von den Erwartungen der Realität beherrscht; eigene Bedürfnisse werden unterdrückt oder verdrängt.",
+"bedeutung": "Das Ich wird von den Erwartungen der Realität beherrscht; eigene Bedürfnisse werden unterdrückt oder verdrängt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Kompetenz- und Kontrollerwartung",
-"definition": "Das Kind weiß, dass es etwas bewirken kann; sie entwickelt sich durch Erfolgserlebnisse bei bewältigbaren Aufgaben.",
+"bedeutung": "Das Kind weiß, dass es etwas bewirken kann; sie entwickelt sich durch Erfolgserlebnisse bei bewältigbaren Aufgaben.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Frustrationstoleranz",
-"definition": "Fähigkeit, Enttäuschungen zu ertragen; entsteht durch dosierte Frustrationen, wenn das Angenehme überwiegt.",
+"bedeutung": "Fähigkeit, Enttäuschungen zu ertragen; entsteht durch dosierte Frustrationen, wenn das Angenehme überwiegt.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Ich-Funktionen",
-"definition": "Fähigkeiten wie Sprache, Intelligenz, Denken, Gedächtnis, motorische Fähigkeiten und Mut, die zur Ich-Stärke gefördert werden.",
+"bedeutung": "Fähigkeiten wie Sprache, Intelligenz, Denken, Gedächtnis, motorische Fähigkeiten und Mut, die zur Ich-Stärke gefördert werden.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Zu starkes Über-Ich",
-"definition": "Entsteht bei viel Lenkung, Geboten und Verboten, z. B. im autoritären und im überbehütenden Erziehungsstil.",
+"bedeutung": "Entsteht bei viel Lenkung, Geboten und Verboten, z. B. im autoritären und im überbehütenden Erziehungsstil.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Zu schwaches Über-Ich",
-"definition": "Entsteht bei laissez-fairem, inkonsequentem oder vernachlässigendem Erzieherverhalten; die Ansprüche des Es werden maßlos.",
+"bedeutung": "Entsteht bei laissez-fairem, inkonsequentem oder vernachlässigendem Erzieherverhalten; die Ansprüche des Es werden maßlos.",
 "t": "Ich-Stärke und Ich-Schwäche"
 },
 {
 "begriff": "Fehlformen in der Erziehung",
-"definition": "Z. B. Ablehnung, Vernachlässigung, Überbehütung und Verwöhnung; sie begünstigen seelische Fehlentwicklungen.",
+"bedeutung": "Z. B. Ablehnung, Vernachlässigung, Überbehütung und Verwöhnung; sie begünstigen seelische Fehlentwicklungen.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Ungleichgewicht der Persönlichkeit (Erklärungsansatz 1)",
-"definition": "Fehlformen führen zu einem Ungleichgewicht von Ich, Es, Über-Ich und Realität, dann zu Angst und zu Abwehrmechanismen.",
+"bedeutung": "Fehlformen führen zu einem Ungleichgewicht von Ich, Es, Über-Ich und Realität, dann zu Angst und zu Abwehrmechanismen.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Konflikte in der Libidoentwicklung (Erklärungsansatz 2)",
-"definition": "Triebwünsche einer Phase werden nicht oder über die Maßen befriedigt; mögliche Folgen sind Fixierung oder Regression.",
+"bedeutung": "Triebwünsche einer Phase werden nicht oder über die Maßen befriedigt; mögliche Folgen sind Fixierung oder Regression.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Kennzeichen eines geschwächten Ich",
-"definition": "Die Realität wird verleugnet oder verfälscht wahrgenommen, daher werden Probleme nicht realitätsgetreu gelöst.",
+"bedeutung": "Die Realität wird verleugnet oder verfälscht wahrgenommen, daher werden Probleme nicht realitätsgetreu gelöst.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Triebfrustration",
-"definition": "Erleben einer Enttäuschung, wenn die Befriedigung wichtiger Bedürfnisse fortwährend verhindert wird.",
+"bedeutung": "Erleben einer Enttäuschung, wenn die Befriedigung wichtiger Bedürfnisse fortwährend verhindert wird.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Ursache von Triebfrustration",
-"definition": "Unzureichende Befriedigung, z. B. bei stark autoritärem oder vernachlässigendem Erzieherverhalten.",
+"bedeutung": "Unzureichende Befriedigung, z. B. bei stark autoritärem oder vernachlässigendem Erzieherverhalten.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Exzessive Befriedigung",
-"definition": "Triebwünsche werden über die Maßen befriedigt, z. B. bei verwöhnendem, überbehütendem oder verzärtelndem Verhalten.",
+"bedeutung": "Triebwünsche werden über die Maßen befriedigt, z. B. bei verwöhnendem, überbehütendem oder verzärtelndem Verhalten.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Orale Fixierung",
-"definition": "Fixierung in der oralen Phase, die sich z. B. in Rauchen sowie übermäßigem Essen oder Trinken zeigen kann.",
+"bedeutung": "Fixierung in der oralen Phase, die sich z. B. in Rauchen sowie übermäßigem Essen oder Trinken zeigen kann.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Kummerspeck",
-"definition": "Übermäßiges Essen bei Liebeskummer; Rückfall in die Wünsche der oralen Phase, also eine Regression.",
+"bedeutung": "Übermäßiges Essen bei Liebeskummer; Rückfall in die Wünsche der oralen Phase, also eine Regression.",
 "t": "Seelische Fehlentwicklung"
 },
 {
 "begriff": "Entwicklung (psychologisch)",
-"definition": "Gerichtete, zeitlich geordnete Reihe von zusammenhängenden Veränderungen des Erlebens und Verhaltens im Laufe des Lebens.",
+"bedeutung": "Gerichtete, zeitlich geordnete Reihe von zusammenhängenden Veränderungen des Erlebens und Verhaltens im Laufe des Lebens.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Gerichtete Reihe von Veränderungen",
-"definition": "Die Veränderungen sind immer auf ein Ziel hin gerichtet, z. B. sich fortbewegen zu können.",
+"bedeutung": "Die Veränderungen sind immer auf ein Ziel hin gerichtet, z. B. sich fortbewegen zu können.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Zusammenhang der Veränderungen",
-"definition": "Die Veränderungen treten nicht unabhängig auf, sondern bauen aufeinander auf, z. B. Strampeln, Kriechen, Gehen.",
+"bedeutung": "Die Veränderungen treten nicht unabhängig auf, sondern bauen aufeinander auf, z. B. Strampeln, Kriechen, Gehen.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Logische Reihenfolge",
-"definition": "Nicht umkehrbare Abfolge von Veränderungen in der Entwicklung, z. B. erst krabbeln, dann gehen.",
+"bedeutung": "Nicht umkehrbare Abfolge von Veränderungen in der Entwicklung, z. B. erst krabbeln, dann gehen.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Lebensalterbezogenheit",
-"definition": "Die in einer Reihenfolge ablaufenden Veränderungen lassen sich bestimmten Altersspannen zuordnen.",
+"bedeutung": "Die in einer Reihenfolge ablaufenden Veränderungen lassen sich bestimmten Altersspannen zuordnen.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Anlage (endogene Bedingungen)",
-"definition": "Genetische Ausstattung eines Lebewesens, die bei der Befruchtung festgelegt wird.",
+"bedeutung": "Genetische Ausstattung eines Lebewesens, die bei der Befruchtung festgelegt wird.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Vererbung",
-"definition": "Übertragung der Anlagen nach bestimmten Erbgesetzen.",
+"bedeutung": "Übertragung der Anlagen nach bestimmten Erbgesetzen.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Genetik",
-"definition": "Wissenschaft von der Vererbung.",
+"bedeutung": "Wissenschaft von der Vererbung.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Sensible Phasen",
-"definition": "Zeitspannen, in denen ein Lebewesen bestimmte Verhaltensweisen und Persönlichkeitsmerkmale optimal erwerben kann.",
+"bedeutung": "Zeitspannen, in denen ein Lebewesen bestimmte Verhaltensweisen und Persönlichkeitsmerkmale optimal erwerben kann.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Vererbt",
-"definition": "Ein Individuum hat von seinen Eltern bestimmte Erbanlagen erhalten.",
+"bedeutung": "Ein Individuum hat von seinen Eltern bestimmte Erbanlagen erhalten.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Angeboren",
-"definition": "Bei der Geburt vorhanden: alle vererbten und alle im vorgeburtlichen Leben erworbenen Eigenschaften.",
+"bedeutung": "Bei der Geburt vorhanden: alle vererbten und alle im vorgeburtlichen Leben erworbenen Eigenschaften.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Erworben",
-"definition": "Durch Umwelteinflüsse zustande gekommen.",
+"bedeutung": "Durch Umwelteinflüsse zustande gekommen.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Umwelt (exogene Bedingungen)",
-"definition": "Alle direkten und indirekten Einflüsse von außen, denen ein Lebewesen von der Befruchtung bis zum Tod ausgesetzt ist.",
+"bedeutung": "Alle direkten und indirekten Einflüsse von außen, denen ein Lebewesen von der Befruchtung bis zum Tod ausgesetzt ist.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Natürliche Umwelt",
-"definition": "Die belebte und unbelebte Natur, z. B. Landschaft, Klima, Ernährung sowie Tages- und Jahreszeiten.",
+"bedeutung": "Die belebte und unbelebte Natur, z. B. Landschaft, Klima, Ernährung sowie Tages- und Jahreszeiten.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Kulturelle Umwelt",
-"definition": "Die vom Menschen geschaffene oder veränderte Welt, z. B. Sprache, Normen, Massenmedien und Spielzeug.",
+"bedeutung": "Die vom Menschen geschaffene oder veränderte Welt, z. B. Sprache, Normen, Massenmedien und Spielzeug.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Ökonomische Umwelt",
-"definition": "Die wirtschaftlichen Gegebenheiten, in denen eine Person lebt, z. B. Wohnverhältnisse und Vermögen.",
+"bedeutung": "Die wirtschaftlichen Gegebenheiten, in denen eine Person lebt, z. B. Wohnverhältnisse und Vermögen.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Soziale Umwelt",
-"definition": "Der Mensch in seinen Organisationsformen und Beziehungen, z. B. Familie, Freundeskreis, Kindergarten und Schule.",
+"bedeutung": "Der Mensch in seinen Organisationsformen und Beziehungen, z. B. Familie, Freundeskreis, Kindergarten und Schule.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Selbststeuerung (autogene Bedingungen)",
-"definition": "Alle Kräfte, mit denen das Individuum als aktives Wesen von sich aus Entwicklungsprozesse herbeiführt und beeinflusst.",
+"bedeutung": "Alle Kräfte, mit denen das Individuum als aktives Wesen von sich aus Entwicklungsprozesse herbeiführt und beeinflusst.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Entwicklungspsychologie",
-"definition": "Beschäftigt sich mit den Veränderungen des Erlebens und Verhaltens im Laufe der Zeit, ihren Ursachen und den Aufgaben, die das Individuum lösen muss.",
+"bedeutung": "Beschäftigt sich mit den Veränderungen des Erlebens und Verhaltens im Laufe der Zeit, ihren Ursachen und den Aufgaben, die das Individuum lösen muss.",
 "t": "Entwicklung und Entwicklungsbedingungen"
 },
 {
 "begriff": "Entwicklungsstörung",
-"definition": "Entwicklung verzögert sich in einem oder mehreren Teilbereichen und/oder weicht erheblich von der altersentsprechenden Entwicklung ab.",
+"bedeutung": "Entwicklung verzögert sich in einem oder mehreren Teilbereichen und/oder weicht erheblich von der altersentsprechenden Entwicklung ab.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Sichere Bindung",
-"definition": "Enge, relativ dauerhafte, stark emotionale Beziehung zwischen Kind und Bindungsperson; Voraussetzung für positive Entwicklung.",
+"bedeutung": "Enge, relativ dauerhafte, stark emotionale Beziehung zwischen Kind und Bindungsperson; Voraussetzung für positive Entwicklung.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Hohe Wertschätzung",
-"definition": "Zeigt sich in Achtung, Anerkennung und Wohlwollen, ausgedrückt durch Zuwendung, Interesse, Aufmerksamkeit und Freundlichkeit.",
+"bedeutung": "Zeigt sich in Achtung, Anerkennung und Wohlwollen, ausgedrückt durch Zuwendung, Interesse, Aufmerksamkeit und Freundlichkeit.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Verstehen",
-"definition": "Einfühlen in die innere Welt eines anderen: Wahrnehmung und vorstellungsmäßige Vergegenwärtigung seiner subjektiven Welt.",
+"bedeutung": "Einfühlen in die innere Welt eines anderen: Wahrnehmung und vorstellungsmäßige Vergegenwärtigung seiner subjektiven Welt.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Fördernde nicht-dirigierende Einzeltätigkeiten",
-"definition": "Alle Tätigkeiten und Aktivitäten, die der Wertschätzung, dem Verstehen und der Echtheit entsprechen (Tausch/Tausch).",
+"bedeutung": "Alle Tätigkeiten und Aktivitäten, die der Wertschätzung, dem Verstehen und der Echtheit entsprechen (Tausch/Tausch).",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Autoritative Erziehung",
-"definition": "Hohe Wertschätzung, hohe aber realistische Anforderungen, klare begründbare Regeln, Grenzen setzen, Eigenständigkeit fördern.",
+"bedeutung": "Hohe Wertschätzung, hohe aber realistische Anforderungen, klare begründbare Regeln, Grenzen setzen, Eigenständigkeit fördern.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Sachliche Begründung erzieherischer Maßnahmen",
-"definition": "Maßnahmen sind für das Wohlergehen, zur Abwendung von Schaden oder zur Förderung nötig, nicht Willkür des Erziehers.",
+"bedeutung": "Maßnahmen sind für das Wohlergehen, zur Abwendung von Schaden oder zur Förderung nötig, nicht Willkür des Erziehers.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Fehlformen in der Erziehung (entwicklungshemmend)",
-"definition": "Ablehnung, Vernachlässigung, Laissez-faire, Überbehütung, Verwöhnung, inkonsequente Maßnahmen oder Überforderung.",
+"bedeutung": "Ablehnung, Vernachlässigung, Laissez-faire, Überbehütung, Verwöhnung, inkonsequente Maßnahmen oder Überforderung.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Familiäre Faktoren",
-"definition": "Disharmonische Familienatmosphäre, Beziehungsstörungen oder Gewalt zwischen den Eltern, ungünstige Geschwisterkonstellation.",
+"bedeutung": "Disharmonische Familienatmosphäre, Beziehungsstörungen oder Gewalt zwischen den Eltern, ungünstige Geschwisterkonstellation.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Individuelle Erlebnisse des Kindes",
-"definition": "Z. B. Misshandlungen, Trennung der Eltern, Verlust einer Bezugsperson, Unfälle oder vermeintliche Minderwertigkeit.",
+"bedeutung": "Z. B. Misshandlungen, Trennung der Eltern, Verlust einer Bezugsperson, Unfälle oder vermeintliche Minderwertigkeit.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
 },
 {
 "begriff": "Zusammenspiel der Ursachen",
-"definition": "Selten löst nur eine Ursache eine Entwicklungsstörung aus; meist entsteht sie erst durch das Zusammenspiel mehrerer Ursachen.",
+"bedeutung": "Selten löst nur eine Ursache eine Entwicklungsstörung aus; meist entsteht sie erst durch das Zusammenspiel mehrerer Ursachen.",
 "t": "Entwicklungsfördernde und -hemmende Erziehungseinflüsse"
+}
+],
+"faelle": [
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 1,
+"f": "„Ich will das jetzt – sofort!“",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Triebimpulse verlangen unmittelbare Befriedigung",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Folgt dem Lustprinzip",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Meldet Wünsche und Bedürfnisse beim Ich an",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 1,
+"f": "Der Wunsch, den Sitznachbarn zu schlagen, steigt plötzlich auf",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Enthält die ursprünglichen Triebansprüche",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 0
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 1,
+"f": "„Ich esse nach der Prüfung, jetzt lerne ich erst.“",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Überprüft die Realität",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Vermittelt zwischen Es, Über-Ich und Realität",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Folgt dem Realitätsprinzip",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Entscheidet, ob ein Wunsch verwirklicht oder abgewehrt wird",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Reagiert mit Angst auf drohende Gefahren",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Sucht einen sozial akzeptierten Weg zur Bedürfnisbefriedigung",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 1
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 1,
+"f": "„Das gehört sich nicht!“ als innere Stimme",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Bewertet die Wünsche des Es",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Enthält auch das Ich-Ideal",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Folgt dem Moralitätsprinzip",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Verinnerlichte Normen und Verbote der Eltern",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Löst Schuldgefühle und Gewissensbisse aus",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Es, Ich oder Über-Ich?",
+"fall": 0,
+"f": "Gibt dem Ich Anweisung, welche Wünsche zugelassen werden",
+"o": [
+"Es",
+"Ich",
+"Über-Ich"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er fürchtet, bei der Täuschung erwischt und bestraft zu werden.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie lässt den Plan fallen, weil sie öffentliche Verurteilung fürchtet.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er befürchtet, vor seinen Angestellten an Ansehen zu verlieren.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er schwänzt nicht, weil ihm ein Verweis und ein Elterngespräch drohen.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Nach dem Gedanken an Betrug quälen sie Schuldgefühle.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er macht sich Selbstvorwürfe, weil er gegen eigene Prinzipien verstoßen hat.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie hat Gewissensbisse, obwohl niemand etwas bemerkt hat.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er erlebt sein Selbstwertgefühl bedroht, weil er seinem Ideal nicht entspricht.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er fürchtet, von seinen aggressiven Impulsen überwältigt zu werden.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie erschrickt über die Stärke ihres Verlangens und fürchtet, es könnte sie vernichten.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er hat Panik, seinen Triebwünschen ausgeliefert zu sein, ohne dass äußerlich etwas droht.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 0,
+"f": "Angst vor Überwältigung durch das Es, z. B. bei einer entstehenden Schizophrenie",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie fürchtet die Konsequenzen, wenn ihr Wunsch in der Realität bekannt würde.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 0
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Er sieht sich vom strengen Über-Ich bedroht und fühlt sich minderwertig.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 1
+},
+{
+"c": "Welche Form der Angst?",
+"fall": 1,
+"f": "Sie fürchtet, die Kontrolle über ihre Triebe zu verlieren.",
+"o": [
+"Realangst",
+"Moralische Angst",
+"Neurotische Angst"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Ich merke gerade, dass ich müde bin.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Im Moment denke ich an die Hausaufgabe.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Meine Aufmerksamkeit richtet sich auf das Gespräch.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 0
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Die Telefonnummer der Freundin fällt mir ein, sobald ich nach ihr gefragt werde.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Was ich gestern zu Mittag gegessen habe, kann ich mir mit Aufmerksamkeit ins Bewusstsein rufen.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Ein Schlüsselreiz lässt eine halb vergessene Erinnerung auftauchen.",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 1
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Eine verdrängte traumatische Kindheitserfahrung",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Ein Versprecher, dessen Ursache der Person nicht bewusst ist",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 0,
+"f": "Angst auslösende Triebwünsche, die abgewehrt werden",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 0,
+"f": "Inhalte, auf die nur geschlossen werden kann (deskriptiver Aspekt)",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 0,
+"f": "Inhalte, die mit Gegenbesetzung zurückgehalten werden (dynamischer Aspekt)",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Die Schichten des Bewusstseins",
+"fall": 1,
+"f": "Der verlegte Ehering als Ausdruck eines unbewussten Wunsches",
+"o": [
+"Bewusste",
+"Vorbewusste",
+"Unbewusste"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Wird bei der Befruchtung durch die Chromosomen festgelegt",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Das „Programm der Entwicklung“",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Legt Werdemöglichkeiten fest, die entfaltet werden müssen",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Verantwortlich für sensible Phasen",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Endogene Entwicklungsbedingung",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Eineiige Zwillinge haben dieselbe genetische Ausstattung",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 0
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Klima und Landschaft, in der ein Kind aufwächst",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Sprache, Sitten und Wertvorstellungen der Gesellschaft",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Der „Schrittmacher der Entwicklung“",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Alle direkten und indirekten Einflüsse von außen",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Der Erziehungsstil der Eltern",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Exogene Entwicklungsbedingung",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 1
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Der „Gestalter der Entwicklung“",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Das Individuum führt als aktives Wesen Entwicklung von sich aus herbei",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Ein Jugendlicher setzt sich selbst Ziele und trainiert dafür",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 1,
+"f": "Ein Kind sucht sich bewusst neue Herausforderungen",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Autonome Entwicklungsbedingung",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Anlage, Umwelt oder Selbststeuerung?",
+"fall": 0,
+"f": "Eigene Entscheidungen beeinflussen den weiteren Lebensweg",
+"o": [
+"Anlage",
+"Umwelt",
+"Selbststeuerung"
+],
+"r": 2
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein sehr geräuschempfindliches Kind leidet in einer lauten Wohnung stärker als seine Geschwister.",
+"o": [
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Wirksamkeit von Umwelteinflüssen.",
+"Die Selbststeuerung beeinflusst die Entfaltung der Anlagen."
+],
+"r": 2
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Gute Ernährung und Förderung lassen eine vorhandene sportliche Begabung erst zur Entfaltung kommen.",
+"o": [
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Wirksamkeit von Umwelteinflüssen."
+],
+"r": 1
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein Kind, das ständig ermutigt wird, setzt sich selbst immer höhere Ziele.",
+"o": [
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Wirksamkeit von Umwelteinflüssen.",
+"Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen."
+],
+"r": 1
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein Jugendlicher sucht sich bewusst einen Freundeskreis, der ihn fördert, und meidet belastende Einflüsse.",
+"o": [
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Wirksamkeit von Umwelteinflüssen.",
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen."
+],
+"r": 3
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein Mädchen mit Lesebegabung liest aus eigenem Antrieb täglich und baut seine Begabung so aus.",
+"o": [
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
+"Die Selbststeuerung beeinflusst die Entfaltung der Anlagen."
+],
+"r": 3
+},
+{
+"c": "Wirkbeziehungen von Anlage, Umwelt und Selbststeuerung",
+"fall": 1,
+"f": "Ein sehr impulsives, lebhaftes Kind tut sich schwerer, sein Verhalten selbst zu steuern und durchzuhalten.",
+"o": [
+"Die Anlage beeinflusst die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Art und Weise der Selbststeuerung.",
+"Die Umweltfaktoren beeinflussen die Entfaltung der Anlagen.",
+"Die Selbststeuerung beeinflusst die Wirksamkeit von Umwelteinflüssen."
+],
+"r": 0
 }
 ]
 }
