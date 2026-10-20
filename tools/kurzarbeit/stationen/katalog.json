@@ -15,7 +15,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-zuordnung-entwicklung",
@@ -33,7 +34,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Entwicklung"
  },
  {
   "id": "kurz-zuordnung-wechselwirkung",
@@ -51,7 +53,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Entwicklung"
  },
  {
   "id": "kurz-memory-psychoanalyse",
@@ -69,7 +72,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-memory-entwicklung",
@@ -87,7 +91,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Entwicklung"
  },
  {
   "id": "kurz-blockfall-instanzen",
@@ -105,7 +110,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-blockfall-angst",
@@ -123,7 +129,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-blockfall-entwicklung",
@@ -141,7 +148,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Entwicklung"
  },
  {
   "id": "kurz-blockfall-bewusstsein",
@@ -159,7 +167,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-vergleich-ich",
@@ -177,7 +186,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-vergleich-modelle",
@@ -195,7 +205,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-vergleich-abwehr",
@@ -213,7 +224,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-vergleich-grundannahmen",
@@ -231,7 +243,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-vergleich-einfluesse",
@@ -249,13 +262,14 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Entwicklung"
  },
  {
   "id": "kurz-luecken-abwehr",
-  "titel": "Kurzarbeit: Tafelbild Abwehr",
+  "titel": "Kurzarbeit: Lückentext Abwehr",
   "fach": "Vorbereitung auf die Kurzarbeit",
-  "beschreibung": "Das Tafelbild zur Abwehr mit Fachbegriffen vervollständigen.",
+  "beschreibung": "Den Text zur Abwehr mit Fachbegriffen vervollständigen.",
   "datei": "luecken.html?set=kurz-luecken-abwehr",
   "ergebnis": true,
   "parameter": [
@@ -267,11 +281,12 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-luecken-angst",
-  "titel": "Kurzarbeit: Tafelbild Grundformen der Angst",
+  "titel": "Kurzarbeit: Lückentext Grundformen der Angst",
   "fach": "Vorbereitung auf die Kurzarbeit",
   "beschreibung": "Den Text zu den Grundformen der Angst ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-angst",
@@ -285,11 +300,12 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-luecken-begriff",
-  "titel": "Kurzarbeit: Tafelbild Begriff Entwicklung",
+  "titel": "Kurzarbeit: Lückentext Begriff Entwicklung",
   "fach": "Vorbereitung auf die Kurzarbeit",
   "beschreibung": "Die sechs Merkmale des Entwicklungsbegriffs ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-begriff",
@@ -303,11 +319,12 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Entwicklung"
  },
  {
   "id": "kurz-luecken-bedingungen",
-  "titel": "Kurzarbeit: Tafelbild Bedingungen der Entwicklung",
+  "titel": "Kurzarbeit: Lückentext Bedingungen der Entwicklung",
   "fach": "Vorbereitung auf die Kurzarbeit",
   "beschreibung": "Anlage, Umwelt, Selbststeuerung und ihr Zusammenwirken ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-bedingungen",
@@ -321,11 +338,12 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Entwicklung"
  },
  {
   "id": "kurz-luecken-schichten",
-  "titel": "Kurzarbeit: Tafelbild Schichten des Bewusstseins",
+  "titel": "Kurzarbeit: Lückentext Schichten des Bewusstseins",
   "fach": "Vorbereitung auf die Kurzarbeit",
   "beschreibung": "Das topische Modell mit deskriptivem und dynamischem Aspekt ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-schichten",
@@ -339,11 +357,12 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-luecken-trieb",
-  "titel": "Kurzarbeit: Tafelbild Determinismus und Trieblehre",
+  "titel": "Kurzarbeit: Lückentext Determinismus und Trieblehre",
   "fach": "Vorbereitung auf die Kurzarbeit",
   "beschreibung": "Die Grundannahmen der psychoanalytischen Theorie ergänzen.",
   "datei": "luecken.html?set=kurz-luecken-trieb",
@@ -357,7 +376,8 @@
     "max": 99,
     "standard": 1
    }
-  ]
+  ],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-kprim-psychoanalyse",
@@ -366,7 +386,8 @@
   "beschreibung": "Vier Aufgaben mit je vier Aussagen: trifft zu oder nicht?",
   "datei": "kprim.html?set=kurz-kprim-psychoanalyse",
   "ergebnis": true,
-  "parameter": []
+  "parameter": [],
+  "thema": "Psychoanalyse (Freud)"
  },
  {
   "id": "kurz-kprim-entwicklung",
@@ -375,6 +396,127 @@
   "beschreibung": "Vier Aufgaben mit je vier Aussagen: trifft zu oder nicht?",
   "datei": "kprim.html?set=kurz-kprim-entwicklung",
   "ergebnis": true,
-  "parameter": []
+  "parameter": [],
+  "thema": "Entwicklung"
+ },
+ {
+  "id": "kurz-tetris-psychoanalyse",
+  "titel": "Kurzarbeit: Begriffe-Tetris Psychoanalyse",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Volle Reihe, Fachbegriff-Frage: 57 Definitionen von Determinismus bis Ich-Schwäche.",
+  "datei": "tetris.html?set=kurz-tetris-psychoanalyse",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Spielnummer",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   },
+   {
+    "name": "fragen",
+    "label": "Fragen pro Spiel",
+    "typ": "wahl",
+    "optionen": [
+     "8",
+     "12",
+     "16"
+    ],
+    "standard": "12"
+   }
+  ],
+  "thema": "Psychoanalyse (Freud)"
+ },
+ {
+  "id": "kurz-tetris-entwicklung",
+  "titel": "Kurzarbeit: Begriffe-Tetris Entwicklung",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Volle Reihe, Fachbegriff-Frage: 30 Definitionen zu Entwicklung und Erziehungseinflüssen.",
+  "datei": "tetris.html?set=kurz-tetris-entwicklung",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Spielnummer",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   },
+   {
+    "name": "fragen",
+    "label": "Fragen pro Spiel",
+    "typ": "wahl",
+    "optionen": [
+     "8",
+     "12",
+     "16"
+    ],
+    "standard": "12"
+   }
+  ],
+  "thema": "Entwicklung"
+ },
+ {
+  "id": "kurz-tetris-alles",
+  "titel": "Kurzarbeit: Begriffe-Tetris Alle Fachbegriffe",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Alle 87 Fachbegriffe gemischt: Reihen schaffen, Definitionen wissen.",
+  "datei": "tetris.html?set=kurz-tetris-alles",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Spielnummer",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   },
+   {
+    "name": "fragen",
+    "label": "Fragen pro Spiel",
+    "typ": "wahl",
+    "optionen": [
+     "8",
+     "12",
+     "16"
+    ],
+    "standard": "12"
+   }
+  ],
+  "thema": "Alle Bereiche gemischt"
+ },
+ {
+  "id": "kurz-rennen-psychoanalyse",
+  "titel": "Kurzarbeit: Wichtel-Schubkarrenrennen Psychoanalyse",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Zwei Teams treten gegeneinander an: Richtig antworten, Schubkarre ein Stück weiter.",
+  "datei": "rennen.html?set=kurz-rennen-psychoanalyse",
+  "ergebnis": false,
+  "parameter": [],
+  "thema": "Psychoanalyse (Freud)"
+ },
+ {
+  "id": "kurz-rennen-entwicklung",
+  "titel": "Kurzarbeit: Wichtel-Schubkarrenrennen Entwicklung",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Zwei Teams treten gegeneinander an: Fragen zu Entwicklung und Wirkbeziehungen.",
+  "datei": "rennen.html?set=kurz-rennen-entwicklung",
+  "ergebnis": false,
+  "parameter": [],
+  "thema": "Entwicklung"
+ },
+ {
+  "id": "kurz-rennen-alles",
+  "titel": "Kurzarbeit: Wichtel-Schubkarrenrennen Alle Bereiche",
+  "fach": "Vorbereitung auf die Kurzarbeit",
+  "beschreibung": "Zwei Teams, Fragen aus allen Bereichen der Kurzarbeit gemischt.",
+  "datei": "rennen.html?set=kurz-rennen-alles",
+  "ergebnis": false,
+  "parameter": [],
+  "thema": "Alle Bereiche gemischt"
  }
 ]

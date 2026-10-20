@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Tafelbild ergänzen</title>
+<title>Lückentext</title>
 <style>
 :root{--bg:#f2f5f7;--panel:#fff;--fg:#14222c;--muted:#566872;--line:#d3dde3;--pri:#0e5a77;--pri-ink:#fff;--soft:#e3eef3;--ok:#1b7f4b;--ok-soft:#d9f0e2;--bad:#b3261e;--bad-soft:#f9dedc;--warn:#8a5a00;--warn-soft:#fff1cf}
 @media (prefers-color-scheme:dark){:root{--bg:#0f171c;--panel:#17232a;--fg:#e6eff3;--muted:#9bb0ba;--line:#2a3b44;--pri:#5fb8d9;--pri-ink:#062029;--soft:#1d3039;--ok:#6fd49b;--ok-soft:#163626;--bad:#ff9a92;--bad-soft:#40201e;--warn:#f0c060;--warn-soft:#3a2f12;color-scheme:dark}}
@@ -20,7 +20,7 @@ button{font:inherit;color:inherit}
 .chip{padding:8px 14px;border-radius:999px;border:2px solid var(--line);background:var(--panel);cursor:pointer;font-weight:600}
 .chip.sel{border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 30%,transparent)}
 </style></head><body>
-<h1 id="t">Tafelbild ergänzen</h1><p class="sub" id="a"></p>
+<h1 id="t">Lückentext</h1><p class="sub" id="a"></p>
 <div class="txt" id="txt"></div><div class="bank" id="bank" aria-label="Wortspeicher"></div>
 <div class="bar"><button class="b" id="chk" disabled type="button">Prüfen</button><button class="b alt" id="re" type="button">Von vorn</button><span class="stat" id="st"></span></div>
 <div id="m" role="status"></div>
@@ -61,7 +61,7 @@ function gap(g){
 $("chk").addEventListener("click",()=>{
   tries++;res={};let ok=0;G.forEach((w,g)=>{res[g]=chips.find(x=>x.id===fill[g]).w===w;if(res[g])ok++});
   if(first===null)first=ok;
-  if(ok===G.length){done=true;clearInterval(tick);secs=Math.round((Date.now()-t0)/1000);draw();$("m").innerHTML=`<div class="msg">Das Tafelbild ist vollständig! ${tries===1?"Gleich beim ersten Versuch.":"Nach "+tries+" Prüfungen."}${HINT}</div>`;report(first,G.length,tries,secs)}
+  if(ok===G.length){done=true;clearInterval(tick);secs=Math.round((Date.now()-t0)/1000);draw();$("m").innerHTML=`<div class="msg">Der Text ist vollständig! ${tries===1?"Gleich beim ersten Versuch.":"Nach "+tries+" Prüfungen."}${HINT}</div>`;report(first,G.length,tries,secs)}
   else{draw();$("m").innerHTML=`<div class="msg n">${ok} von ${G.length} Lücken richtig. Falsche sind rot: tippe sie an, um das Wort zurückzulegen.</div>`}
 });
 $("re").addEventListener("click",()=>{if(!TS){const q=new URLSearchParams(location.search);q.set("spiel",String(Math.floor(Math.random()*99)+1));history.replaceState(null,"","?"+q);location.reload();return}init()});
