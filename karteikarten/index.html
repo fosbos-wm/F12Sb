@@ -83,7 +83,7 @@ var QS=new URLSearchParams(location.search);
 var erlaubt=(QS.get("lb")||"1,2,3,4").split(",").map(Number).filter(function(n){return n>=1&&n<=4});
 if(!erlaubt.length)erlaubt=[1,2,3,4];
 var LBN={1:"Grundbegriffe",2:"Kognition, Gedächtnis, Emotion, Motivation",3:"Erziehung und Bildung",4:"Lernen"};
-var KEY="kk11-v1",st={};
+var KEY=window.KK_KEY||"kk11-v1",st={};
 try{st=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){st={}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
 var S={lb:erlaubt[0],thema:"",ueben:false,misch:false,rev:false,i:0,flip:false,order:[]};
