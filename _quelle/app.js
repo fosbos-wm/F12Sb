@@ -10577,27 +10577,6 @@ async function renderLernwerkstatt(){
  ]}
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
- <div class="kicker"style="margin-bottom:10px">LEHRPLAN & LERNINHALTE</div>
- <style>
- .pp12-kachel{position:relative;margin-bottom:22px}
- .pp12-kachel>.tile{margin-bottom:0!important;padding-right:52%}
- .pp12-aln{position:absolute;top:50%;right:22px;transform:translateY(-50%);max-width:calc(48% - 28px);display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 24px;border-radius:999px;background:linear-gradient(135deg,#2f7fc6,#3d8fd0 55%,#58a8e2);color:#fff;font-weight:600;font-size:15px;line-height:1.2;text-align:center;text-decoration:none;box-shadow:0 6px 16px rgba(47,127,198,.28);transition:transform .15s,box-shadow .15s}
- .pp12-aln span{font-size:18px;transition:transform .15s}
- .pp12-aln:hover{transform:translateY(calc(-50% - 2px));box-shadow:0 10px 22px rgba(47,127,198,.36)}
- .pp12-aln:hover span{transform:translateX(3px)}
- @media (max-width:760px){
-  .pp12-kachel>.tile{padding-right:16px}
-  .pp12-aln{position:static;transform:none;max-width:none;margin-top:10px;display:flex}
-  .pp12-aln:hover{transform:none}
- }
-</style>
-<div class="pp12-kachel">
- <a class="card tile"href="#unterricht-pp"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px">
- <span class="emoji"></span><strong style="font-size:16px">Unterricht Pädagogik und Psychologie</strong>
- <small>Stoffverteilungsplan 12. Klasse: die Themen jeder Unterrichtsstunde über das ganze Schuljahr.</small>
- </a>
- <a class="pp12-aln"href="#leistungsnachweis">Alternativer Leistungsnachweis <span aria-hidden="true">→</span></a>
-</div>
  ${groups.map(g=>`<div class="kicker"style="margin:26px 0 4px">${g.title}</div><div style="margin:0 0 10px;font-size:13px;color:var(--muted)">${g.sub}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
 <strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
  ${footer()}`;
@@ -20020,7 +19999,7 @@ async function render(){
  if(["fach","faecher","start","lernstaende","kw-thema","kw-projekt","kw-checkouts","kw-fortschritt","unterricht-pp"].includes(p)&&typeof ppmLaden==="function")await ppmLaden().catch(()=>{});
  const pages={
  start:renderKachelwand,news:renderStart,"kw-thema":renderKwThema,"kw-projekt":renderKwProjekt,"kw-checkouts":renderKwCheckouts,lernstaende:renderKwCheckouts,"kw-fortschritt":renderKwFortschritt,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
- faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,leistungsnachweis:renderLeistungsnachweis,didaktik:renderDidaktikKompass,
+ faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,leistungsnachweis:renderKwCheckouts,didaktik:renderDidaktikKompass,
  ressourcen:renderRessourcenRoute,lernpfad:renderLernpfadRoute,forum:renderForum,"forum-board":renderForumBoard,"forum-nachrichten":renderForumMessages,
  pinnwand:renderPinnwandUebersicht,"pinnwand-board":renderPinnwandBoard,
  kollaboration:renderKollaborationsTools,
@@ -21175,7 +21154,7 @@ async function renderKwCheckouts(){
  const co=KW.co,lehrer=isTeacher();
  return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
-  <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>KPrim-Tests und weitere Check-out-Tests mit Ergebnis, dazu die Lernstandsmessung.</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button>`:""}</div></header>
+  <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>KPrim-Tests und weitere Check-out-Tests mit Ergebnis, dazu die Lernstandsmessung. Hier liegt auch der Alternative Leistungsnachweis: Du wählst die Check-outs, die als Kurzarbeit-Ersatz zählen.</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button>`:""}</div></header>
   ${co?`${checkoutLiveBannerHTML(co)}<div class="kw-card">${checkoutSektionHTML(co)}</div>`:`<div class="empty"><strong>Check-outs konnten nicht geladen werden.</strong>Bitte später erneut versuchen.</div>`}
  </div>${footer()}`;
 }
