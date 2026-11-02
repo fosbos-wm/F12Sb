@@ -24,16 +24,50 @@ window.openPhaseDetail=openPhaseDetail;window.closePhaseDetail=closePhaseDetail;
 function toast(t){const
 x=$("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove("show"),
 2500)}
+/* =========================================================
+ PSEUDONYM-ANMELDUNG (Datenschutz)
+ Keine Klarnamen, keine echten E-Mail-Adressen: Anmeldung mit Pseudonym + Passwort,
+ Registrierung nur mit Zugangscode der Lehrkraft. Intern wird das Pseudonym als
+ technische Adresse (…@pseudonym.f12sb.invalid) an Firebase Auth übergeben.
+ ========================================================= */
+const PSEUDO_DOMAIN="pseudonym.f12sb.invalid";let codeRegPromise=null;
+function pseudoSlug(p){return String(p||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ß/g,"ss").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}
+function pseudoMail(p){return pseudoSlug(p)+"@"+PSEUDO_DOMAIN}
+function pseudoGueltig(p){p=String(p||"").trim();return p.length>=3&&p.length<=20&&/^[A-Za-zÄÖÜäöüß0-9 _.\-]+$/.test(p)&&pseudoSlug(p).length>=3}
+function anzeigeName(u,cu){
+ const p=u||{};
+ if(p.pseudonym)return p.pseudonym;
+ const id=String(p.uid||(cu&&cu.uid)||p.id||"").slice(0,4).toUpperCase();
+ return (p.role==="teacher"||p.role==="admin"?"Lehrkraft ":"Lernende/r ")+id;
+}
+function pseudonymWaehlenModal(){
+ modal(`<div class="kicker">DATENSCHUTZ</div><h2>Wähle dein Pseudonym</h2>
+ <p>In der App werden keine Klarnamen mehr angezeigt. Wähle ein Pseudonym (3 bis 20 Zeichen), unter dem dich Lehrkraft und Klasse sehen. Bitte <b>keinen echten Namen</b>. Dein Vor- und Nachname und deine E-Mail-Adresse werden danach aus deinem Profil gelöscht.</p>
+ <div class="form"><label>Pseudonym<input id="pseudoNeu" maxlength="20" autocomplete="off"></label>
+ <div id="pseudoFehler" class="auth-error"></div>
+ <div class="form-actions"><button class="primary" onclick="pseudonymSpeichern()">Speichern</button></div></div>`);
+}
+async function pseudonymSpeichern(){
+ const v=$("pseudoNeu").value.trim();
+ if(!pseudoGueltig(v)){$("pseudoFehler").textContent="3 bis 20 Zeichen: Buchstaben, Ziffern, Leerzeichen, - _ .";return}
+ try{
+  await updateDoc(doc(db,"users",currentUser.uid),{pseudonym:v,displayName:v,firstName:"",lastName:"",email:""});
+  profile={...profile,pseudonym:v,displayName:v,firstName:"",lastName:"",email:""};
+  await syncProfilPublic();
+  $("userName").textContent=v;closeModal();toast("Pseudonym gespeichert.");render();
+ }catch(e){console.error(e);$("pseudoFehler").textContent="Speichern nicht möglich. Bitte erneut versuchen."}
+}
+window.pseudonymSpeichern=pseudonymSpeichern;
 function authError(err){
  const map={
- "auth/invalid-credential":"E-Mail oder Passwort ist nicht korrekt.","auth/email-already-in-use":"Für diese E-Mail existiert bereits ein Konto.","auth/weak-password":"Das Passwort muss mindestens 6 Zeichen haben.","auth/invalid-email":"Bitte eine gültige E-Mail-Adresse eingeben.","auth/too-many-requests":"Zu viele Versuche. Bitte später erneut versuchen."
+ "rc-ungueltig":"Pseudonym oder Wiederherstellungscode stimmt nicht.","rc-passwort":"Das Passwort konnte nicht geändert werden. Bitte versuche es später noch einmal.","auth/invalid-credential":"Pseudonym oder Passwort ist nicht korrekt.","auth/email-already-in-use":"Dieses Pseudonym ist schon vergeben. Bitte wähle ein anderes.","auth/weak-password":"Das Passwort muss mindestens 6 Zeichen haben.","auth/invalid-email":"Bitte ein gültiges Pseudonym eingeben.","auth/too-many-requests":"Zu viele Versuche. Bitte später erneut versuchen."
  };
- $("authError").textContent=map[err?.code]||("Anmeldung konnte nicht durchgeführt werden."+(err?.code?" ("+err.code+")":""));
+ $("authError").textContent=map[err?.code]||"Anmeldung konnte nicht durchgeführt werden.";
 }
 function modal(html){$("modal").innerHTML=html;$("modalBackdrop").hidden=false}
 function closeModal(){$("modalBackdrop").hidden=true;if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}if(ppDirty){ppDirty=false;if(activeFach==="paedagogik")render();}}
-function pageHead(k,h,p,actions=""){return`<div class="page-head"><div><div class="kicker">${k}</div><h1>${h}</h1><p>${p}</p>
-</div><div class="actions">${actions}</div></div>`}
+function pageHead(k,h,p,actions=""){return`<header class="kw-kopf page-head" style="--c:#3A8FD4;--t:#1F6FB2"><div><div class="kicker">${k}</div><h1>${h}</h1><p>${p}</p>
+</div><div class="actions">${actions}</div></header>`}
 function footer(){return`<div class="footer"><span>F12Sb 26/27 · FOSBOS Weilheim</span><span>Gemeinsam · offen ·
 respektvoll</span><span><button type="button"onclick="showImpressum()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Impressum</button> · <button type="button"onclick="showDatenschutz()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Datenschutz</button></span></div>`}
 
@@ -202,7 +236,7 @@ function showDatenschutz(){
 
  <p><strong>4. Welche Daten werden verarbeitet?</strong></p>
  <ul style="margin:0 0 0 18px">
- <li>Konto: Vor- und Nachname, E-Mail-Adresse, Rolle und Freigabestatus, Anmeldezeitpunkt</li>
+ <li>Konto: selbst gewähltes Pseudonym (kein Klarname, keine E-Mail-Adresse), Rolle und Freigabestatus, Anmeldezeitpunkt</li>
  <li>Lern- und Arbeitsdaten: Lernjournal, Lernpfad, Kompetenzen, Wochenplanung, Übungs- und Aufsatztexte, Antworten in Check-outs und Lernstandsmessungen, Fortschritte, abgegebene Dateien</li>
  <li>Zusammenarbeit: Beiträge, Nachrichten, Pinnwand, Whiteboards, Umfragen und Abstimmungen</li>
  <li>Freiwillig: Steckbrief, Geburtstag (Tag und Monat), Herkunftsort</li>
@@ -282,7 +316,9 @@ function showAuth(){
 }
 function showApp(){
  $("authScreen").hidden=true;$("app").hidden=false;$("logoutBtn").hidden=false;
- $("userName").textContent=profile?.displayName||currentUser?.email||"Campus";
+ $("userName").textContent=anzeigeName(profile,currentUser);
+ if($("recoveryBtn"))$("recoveryBtn").hidden=!(profile?.pseudonym&&String(currentUser?.email||"").endsWith("@"+PSEUDO_DOMAIN));
+
  motivButtonAktualisieren();
  updateTeacherTeamNav();
  render();
@@ -292,23 +328,23 @@ function clearListeners(){unsubscribers.forEach(u=>u&&u());unsubscribers=[]}
 async function ensureProfile(user, displayName="", extra={}){
  const ref=doc(db,"users",user.uid), snap=await getDoc(ref);
  if(!snap.exists()){
- const firstName=(extra.firstName||"").trim();
- const lastName=(extra.lastName||"").trim();
- const finalName=(firstName||lastName)?`${firstName} ${lastName}`.trim():(displayName||user.displayName||"Campus-Mitglied");
+ const ps=(extra.pseudonym||"").trim();
  await setDoc(ref,{
- uid:user.uid,email:user.email||"",
- firstName,lastName,
- displayName:finalName,
-role:"student",status:"pending",createdAt:serverTimestamp()
+ uid:user.uid,pseudonym:ps,displayName:ps,
+ role:"student",status:"pending",zugangscode:extra.zugangscode||"",createdAt:serverTimestamp()
  });
  }
  const s=await getDoc(ref);profile=s.data();
+ /* Altkonten: Klarnamen und E-Mail aus dem Profil entfernen, sobald ein Pseudonym gesetzt ist */
+ if(profile&&profile.pseudonym&&(profile.firstName||profile.lastName||profile.email||profile.displayName!==profile.pseudonym||profile.zugangscode)){
+  try{await updateDoc(ref,{firstName:"",lastName:"",email:"",zugangscode:"",displayName:profile.pseudonym});const s2=await getDoc(ref);profile=s2.data()}catch(e){console.warn("Profil bereinigen:",e)}
+ }
  notenLiveZuruecksetzen();try{deleteDoc(doc(db,"noten",user.uid)).catch(()=>{})}catch(e){}
  syncProfilPublic();if(isTeacher())syncProfilePublicAlle();
 }
 
 /* Öffentliches Kurzprofil (Name, Rolle, Geburtstag) – damit die vollständigen Konten (E-Mail usw.) nur für die Person selbst und Lehrkräfte lesbar sind. */
-function profilPublicDaten(u,uid){return{uid:uid,displayName:u.displayName||"",firstName:u.firstName||"",lastName:u.lastName||"",role:u.role||"student",status:u.status||"pending",birthday:u.birthday||"",updatedAt:serverTimestamp()}}
+function profilPublicDaten(u,uid){return{uid:uid,displayName:u.pseudonym||"",firstName:"",lastName:"",role:u.role||"student",status:u.status||"pending",birthday:"",updatedAt:serverTimestamp()}}
 async function syncProfilPublic(){
  try{if(!profile||!currentUser)return;await setDoc(doc(db,"profilePublic",currentUser.uid),profilPublicDaten(profile,currentUser.uid))}catch(e){console.warn("Kurzprofil:",e)}
 }
@@ -324,32 +360,18 @@ async function syncProfilePublicAlle(){
 }
 
 
-// Liest Vorname/Nachname aus dem Registrierungsformular.
-// Unterstützt sowohl separate Felder (registerFirstName/registerLastName)
-// als auch – als Rückfallebene – das bisherige einzelne Namensfeld
-// (registerName), das dann am ersten Leerzeichen aufgeteilt wird.
-function getRegisterNameFields(){
- const firstEl=$("registerFirstName"), lastEl=$("registerLastName");
- if(firstEl && lastEl){
- return {firstName:firstEl.value.trim(), lastName:lastEl.value.trim()};
- }
- const full=($("registerName")?.value||"").trim();
- const parts=full.split(/\s+/).filter(Boolean);
- return {firstName:parts[0]||"", lastName:parts.slice(1).join(" ")||""};
-}
-
 function showLoginForm(){
  $("loginTab").classList.add("active");
  $("registerTab").classList.remove("active");
  $("loginForm").hidden=false;
- $("registerForm").hidden=true;
+ $("registerForm").hidden=true;$("resetForm").hidden=true;
  $("authError").textContent="";
 }
 function showRegisterForm(){
  $("registerTab").classList.add("active");
  $("loginTab").classList.remove("active");
  $("loginForm").hidden=true;
- $("registerForm").hidden=false;
+ $("registerForm").hidden=false;$("resetForm").hidden=true;
  $("authError").textContent="";
 }
 
@@ -425,7 +447,7 @@ window.openLernressourceForm=async function(vorgabeTyp){
  await addDoc(collection(db,"lernressourcen"),{
  title,type,url,description,subject,tags,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.displayName||currentUser.email||"Lehrkraft",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp(),
  updatedAt:serverTimestamp()
  });
@@ -834,7 +856,7 @@ async function addLernpfadCheckin(){
  try{
  await addDoc(collection(db,"lernpfade"),{
  uid:currentUser.uid,
- name:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ name:anzeigeName(profile,currentUser),
  topic,standort,strategy,strategyDetail,outcome:"",
  createdAt:serverTimestamp()
  });
@@ -906,7 +928,9 @@ $("loginForm").addEventListener("submit",async e=>{
  if(!configReady){$("authError").textContent="Firebase ist noch nicht konfiguriert.";return}
  try{
  await loadFirebase();
- await signInWithEmailAndPassword(auth,$("loginEmail").value.trim(),$("loginPassword").value);
+ const kennung=$("loginEmail").value.trim();
+ /* Pseudonym ohne @ -> technische Adresse; Lehrkräfte mit bestehendem Konto dürfen ihre E-Mail weiter nutzen */
+ await signInWithEmailAndPassword(auth,kennung.includes("@")?kennung:pseudoMail(kennung),$("loginPassword").value);
  }catch(err){console.error(err);authError(err)}
 });
 let registerLaeuft=false;
@@ -918,23 +942,26 @@ $("registerForm").addEventListener("submit",async e=>{
  if(pw!==$("registerPassword2").value){$("authError").textContent="Die Passwörter stimmen nicht überein.";return}
  if(pw.length<8||!/[A-Za-zÄÖÜäöüß]/.test(pw)||!/[0-9]/.test(pw)){$("authError").textContent="Das Passwort muss mindestens 8 Zeichen lang sein und Buchstaben UND Zahlen enthalten.";return}
  if(!configReady){$("authError").textContent="Firebase ist noch nicht konfiguriert.";return}
- const {firstName,lastName}=getRegisterNameFields();
- if(!firstName||!lastName){$("authError").textContent="Bitte Vorname und Nachname angeben.";return}
- registerLaeuft=true;
+ const pseudonym=$("registerPseudonym").value.trim(),code=$("registerCode").value.trim();
+ if(!pseudoGueltig(pseudonym)){$("authError").textContent="Das Pseudonym braucht 3 bis 20 Zeichen (Buchstaben, Ziffern, Leerzeichen, - _ .). Bitte keinen echten Namen verwenden.";return}
+ if(!code){$("authError").textContent="Bitte den Zugangscode deiner Lehrkraft eingeben.";return}
+ registerLaeuft=true;let neuerCode="";
  const btn=e.target.querySelector('button[type="submit"]'),btnText=btn?btn.textContent:"";
  if(btn){btn.disabled=true;btn.textContent="Konto wird erstellt …";}
- const email=$("registerEmail").value.trim();
  try{
  await loadFirebase();
- const cred=await createUserWithEmailAndPassword(auth,email,pw);
- const fullName=`${firstName} ${lastName}`.trim();
- await updateProfile(cred.user,{displayName:fullName});
- await ensureProfile(cred.user,fullName,{firstName,lastName});
+ /* onAuthStateChanged wartet, bis Profil und Wiederherstellungscode gespeichert sind */
+ codeRegPromise=(async()=>{
+  const cred=await createUserWithEmailAndPassword(auth,pseudoMail(pseudonym),pw);
+  try{await updateProfile(cred.user,{displayName:pseudonym})}catch(_){}
+  await ensureProfile(cred.user,pseudonym,{pseudonym,zugangscode:code});
+  try{neuerCode=rcNeu();await rcSpeichern(cred.user,pw,neuerCode)}catch(err){neuerCode="";console.warn("Wiederherstellungscode:",err)}
+ })();
+ try{await codeRegPromise}finally{codeRegPromise=null}
+ if(neuerCode)rcAnzeigen(neuerCode);else toast("Konto erstellt. Der Wiederherstellungscode konnte nicht gespeichert werden (Firestore-Regeln veröffentlicht?).");
  }catch(err){
   console.error(err);
-  // Das Konto wurde gerade eben von dieser Anmeldung selbst angelegt: keine irreführende Fehlermeldung zeigen
-  const cu=auth&&auth.currentUser;
-  if(err&&err.code==="auth/email-already-in-use"&&cu&&cu.email&&cu.email.toLowerCase()===email.toLowerCase())return;
+  if(err&&err.code==="permission-denied"){try{const cu=auth&&auth.currentUser;if(cu)await deleteUser(cu)}catch(e2){}$("authError").textContent="Der Zugangscode stimmt nicht.";return}
   authError(err);
  }finally{
   registerLaeuft=false;
@@ -942,12 +969,97 @@ $("registerForm").addEventListener("submit",async e=>{
  }
 });
 $("forgotBtn").onclick=async()=>{
- const email=$("loginEmail").value.trim();
- if(!email){$("authError").textContent="Bitte zuerst deine E-Mail-Adresse eingeben.";return}
- try{await loadFirebase();await sendPasswordResetEmail(auth,email);toast("E-Mail zum Zurücksetzen wurde versendet.")}catch(err)
-{console.error(err);authError(err)}
+ const k=$("loginEmail").value.trim();
+ if(k.includes("@")){try{await loadFirebase();await sendPasswordResetEmail(auth,k);toast("E-Mail zum Zurücksetzen wurde versendet.")}catch(err){console.error(err);authError(err)}return}
+ showResetForm(k);
 };
+function showResetForm(pseudo){
+ $("loginTab").classList.remove("active");$("registerTab").classList.remove("active");
+ $("loginForm").hidden=true;$("registerForm").hidden=true;$("resetForm").hidden=false;
+ $("resetPseudo").value=pseudo||"";$("authError").textContent="";
+}
+$("resetBackBtn").addEventListener("click",showLoginForm);
+/* ---- Wiederherstellungscode (wie 11Sb_2627) ----
+   Das Passwort wird im Browser mit dem Code (PBKDF2 + AES-GCM) verschlüsselt und nur als unlesbarer Block in Firestore (pwRecovery) abgelegt.
+   Mit Pseudonym + Code lässt sich der Block entschlüsseln; danach wird ein neues Passwort gesetzt. */
+const RC_ALPHA="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+function rcNeu(){const b=crypto.getRandomValues(new Uint8Array(12));let t="";for(const x of b)t+=RC_ALPHA[x%32];return t.replace(/(.{4})(?=.)/g,"$1-")}
+function rcNormal(c){return String(c||"").toUpperCase().replace(/[^A-Z0-9]/g,"")}
+const rcB64=u=>btoa(String.fromCharCode(...u)),rcUn64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function rcKey(code,salt){
+ const k=await crypto.subtle.importKey("raw",new TextEncoder().encode(rcNormal(code)),"PBKDF2",false,["deriveKey"]);
+ return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:250000,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
+}
+async function rcSpeichern(user,pw,code){
+ const slug=String(user.email||"").split("@")[0];
+ if(!slug)throw new Error("kein Pseudonym-Konto");
+ const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+ const ct=new Uint8Array(await crypto.subtle.encrypt({name:"AES-GCM",iv},await rcKey(code,salt),new TextEncoder().encode(pw)));
+ await setDoc(doc(db,"pwRecovery",slug),{uid:user.uid,v:1,salt:rcB64(salt),iv:rcB64(iv),ct:rcB64(ct),updatedAt:serverTimestamp()});
+}
+function rcAnzeigen(code){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">WIEDERHERSTELLUNGSCODE</div><h2>Bitte jetzt notieren</h2>
+ <p>Mit diesem Code kannst du dein Passwort selbst zurücksetzen, falls du es vergisst (Anmeldung → „Passwort vergessen?“). Er wird <b>nur jetzt</b> angezeigt. Bewahre ihn getrennt vom Passwort auf.</p>
+ <div style="font:700 26px/1.2 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;padding:16px;background:#f3f8fc;border:1px solid var(--line);border-radius:12px;text-align:center;user-select:all">${esc(code)}</div>
+ <div class="form-actions"><button class="secondary"onclick="navigator.clipboard&&navigator.clipboard.writeText('${esc(code)}').then(()=>toast('Code kopiert.'))">Kopieren</button><button class="primary"onclick="closeModal()">Ich habe den Code notiert</button></div>`);
+}
+async function rcZuruecksetzen(pseudo,code,neuPw){
+ await loadFirebase();
+ const snap=await getDoc(doc(db,"pwRecovery",pseudoSlug(pseudo)));
+ if(!snap.exists())throw {code:"rc-ungueltig"};
+ const d=snap.data();let alt;
+ try{alt=new TextDecoder().decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:rcUn64(d.iv)},await rcKey(code,rcUn64(d.salt)),rcUn64(d.ct)))}catch(_){throw {code:"rc-ungueltig"}}
+ const email=pseudoMail(pseudo);
+ const cred=await signInWithEmailAndPassword(auth,email,alt);
+ const idToken=await cred.user.getIdToken();
+ const r=await fetch("https://identitytoolkit.googleapis.com/v1/accounts:update?key="+encodeURIComponent(firebaseConfig.apiKey),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({idToken,password:neuPw,returnSecureToken:false})});
+ if(!r.ok)throw {code:"rc-passwort"};
+ await signInWithEmailAndPassword(auth,email,neuPw);
+ await rcSpeichern(auth.currentUser,neuPw,code);
+}
+let resetLaeuft=false;
+$("resetForm").addEventListener("submit",async e=>{
+ e.preventDefault();$("authError").textContent="";
+ if(resetLaeuft)return;
+ const pseudo=$("resetPseudo").value.trim(),code=$("resetCode").value,pw=$("resetPw").value;
+ if(pseudoSlug(pseudo).length<3){$("authError").textContent="Bitte dein Pseudonym eingeben.";return}
+ if(rcNormal(code).length!==12){$("authError").textContent="Der Code hat 12 Zeichen (XXXX-XXXX-XXXX).";return}
+ if(pw!==$("resetPw2").value){$("authError").textContent="Die Passwörter stimmen nicht überein.";return}
+ if(pw.length<8||!/[A-Za-zÄÖÜäöüß]/.test(pw)||!/[0-9]/.test(pw)){$("authError").textContent="Das Passwort muss mindestens 8 Zeichen lang sein und Buchstaben UND Zahlen enthalten.";return}
+ if(pseudoSlug(pw)===pseudoSlug(pseudo)){$("authError").textContent="Das Passwort darf nicht dem Pseudonym entsprechen.";return}
+ if(!configReady){$("authError").textContent="Firebase ist noch nicht konfiguriert.";return}
+ resetLaeuft=true;
+ const btn=e.target.querySelector('button[type="submit"]'),txt=btn?btn.textContent:"";
+ if(btn){btn.disabled=true;btn.textContent="Wird zurückgesetzt …"}
+ try{
+  codeRegPromise=rcZuruecksetzen(pseudo,code,pw);
+  try{await codeRegPromise}finally{codeRegPromise=null}
+  $("resetPw").value="";$("resetPw2").value="";$("resetCode").value="";
+  toast("Passwort geändert. Du bist angemeldet.");
+ }catch(err){console.error(err);try{await signOut(auth)}catch(_){}authError(err)}
+ finally{resetLaeuft=false;if(btn){btn.disabled=false;btn.textContent=txt}}
+});
+/* Für angemeldete Konten mit Pseudonym: Code erzeugen bzw. erneuern (z. B. für Altkonten) */
+function rcDialog(){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">PASSWORT-CODE</div><h2>Wiederherstellungscode erzeugen</h2>
+ <p>Mit dem Code kannst du dein Passwort selbst zurücksetzen. Ein bisheriger Code wird dadurch ungültig. Zur Sicherheit bitte kurz dein aktuelles Passwort eingeben.</p>
+ <div class="form"><label>Aktuelles Passwort<input id="rcPw"type="password"autocomplete="current-password"></label><div id="rcFehler"style="color:#b3261e;font-size:13px;min-height:18px"></div>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="rcErzeugen()">Code erzeugen</button></div></div>`);
+}
+async function rcErzeugen(){
+ const pw=$("rcPw")?.value||"",f=$("rcFehler");
+ if(!pw){if(f)f.textContent="Bitte dein aktuelles Passwort eingeben.";return}
+ try{
+  const u=auth.currentUser;
+  if(!u||!String(u.email||"").endsWith("@"+PSEUDO_DOMAIN))throw new Error("x");
+  await signInWithEmailAndPassword(auth,u.email,pw);
+  const code=rcNeu();await rcSpeichern(auth.currentUser,pw,code);
+  rcAnzeigen(code);
+ }catch(err){console.error(err);if(f)f.textContent=(err&&String(err.code||"").startsWith("auth/"))?"Das Passwort stimmt nicht.":"Der Code konnte nicht gespeichert werden (Firestore-Regeln veröffentlicht?)."}
+}
+window.rcDialog=rcDialog;window.rcErzeugen=rcErzeugen;
 if($("motivBtn"))$("motivBtn").onclick=motivUmschalten;
+if($("recoveryBtn"))$("recoveryBtn").addEventListener("click",rcDialog);
 $("logoutBtn").onclick=async()=>{
  notenLiveZuruecksetzen();
  try{await loadFirebase();await signOut(auth)}catch(e){console.error(e)}
@@ -1032,16 +1144,22 @@ async function getUpcomingCampusCalendarEvent(){
 }
 
 
+async function zugangscodeSpeichern(){
+ const c=($("zugangscodeFeld").value||"").trim();
+ if(c.length<6){toast("Der Zugangscode braucht mindestens 6 Zeichen.");return}
+ try{await setDoc(doc(db,"config","zugang"),{code:c,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});toast("Zugangscode gespeichert.")}catch(e){console.error(e);toast("Der Code konnte nicht gespeichert werden (nur Admin).")}
+}
+window.zugangscodeSpeichern=zugangscodeSpeichern;
 async function openUserManagement(){
  if(!isTeacher()){toast("Nur Lehrkräfte können Benutzer verwalten.");return}
  try{
  const snap=await getDocs(collection(db,"users"));
  let users=snap.docs.map(d=>({uid:d.id,...d.data()}))
- .sort((a,b)=>String(a.displayName||a.email||"").localeCompare(String(b.displayName||b.email||""),"de"));
+ .sort((a,b)=>String(anzeigeName(a)).localeCompare(String(anzeigeName(b)),"de"));
  if(!isAdmin()) users=users.filter(u=>u.role==="student");
  const rows=users.map(u=>{
  const status=u.status||"pending";
- const name=esc(u.displayName||u.email||u.uid);
+ const name=esc(anzeigeName(u)||u.uid);
  const roleLabel=u.role==="admin"?"Admin":u.role==="teacher"?"Lehrkraft":"Schüler/in";
  const canManageStatus=(u.role!=="admin") && (u.role==="student" || isAdmin());
  const actions=(u.role==="student" || isAdmin()) ?`
@@ -1058,7 +1176,7 @@ async function openUserManagement(){
  </div>`:"";
  return`<div class="list-item"style="align-items:flex-start;gap:12px">
  <div style="min-width:0;flex:1"><strong>${name}</strong>
- <small>${esc(u.email||"")} · ${roleLabel} · <span class="pill">${esc(status)}</span></small></div>
+ <small>${roleLabel} · <span class="pill">${esc(status)}</span></small></div>
  ${actions}
  </div>`;
  }).join("");
@@ -1069,6 +1187,7 @@ async function openUserManagement(){
  <p>${isAdmin()
  ?"Verwalte Freigaben und Rollen. Dein eigenes Admin-Konto kann hier nicht auf eine andere Rolle gesetzt werden."
  :"Hier kannst du Schülerkonten freischalten, sperren oder reaktivieren."}</p>
+ ${isAdmin()?`<div class="ppm-box" style="margin:0 0 10px"><b>Zugangscode für neue Konten</b><div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap"><input id="zugangscodeFeld" maxlength="40" placeholder="Code, den du der Klasse mitteilst" style="flex:1;min-width:180px"><button class="secondary" onclick="zugangscodeSpeichern()">Code speichern</button></div><small style="color:var(--muted)">Nur wer diesen Code kennt, kann ein Konto anlegen. Danach schaltest du das Konto hier frei.</small></div>`:""}
  <div class="list">${rows||`<div class="empty">Keine passenden Benutzer vorhanden.</div>`}</div>
  <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button></div>
  `);
@@ -1210,7 +1329,7 @@ async function saveHeimatort(){
  if(!ort){toast("Bitte einen Ort auswählen.");return}
  try{
  await setDoc(doc(db,"heimatorte",currentUser.uid),{
- uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ uid:currentUser.uid,name:anzeigeName(profile,currentUser),
  ort,createdAt:serverTimestamp()
  });
  toast("Eingetragen! Danke fürs Mitmachen.");
@@ -1274,7 +1393,7 @@ async function getAllBirthdaysSorted(){
  let next=new Date(today.getFullYear(),mm-1,dd);
  if(next<today)next=new Date(today.getFullYear()+1,mm-1,dd);
  const days=Math.round((next-today)/86400000);
- return {name:u.displayName||u.email||"Campus-Mitglied",uid:u.uid,date:next,days,isToday:days===0};
+ return {name:anzeigeName(u),uid:u.uid,date:next,days,isToday:days===0};
  }).sort((a,b)=>a.days-b.days);
  }catch(e){console.error("Geburtstage laden:",e);return []}
 }
@@ -1307,7 +1426,7 @@ async function saveSteckbrief(){
  if(!mag&&!gutDarin&&!fakt){toast("Bitte mindestens ein Feld ausfüllen.");return}
  try{
  await setDoc(doc(db,"steckbriefe",currentUser.uid),{
- uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ uid:currentUser.uid,name:anzeigeName(profile,currentUser),
  mag,gutDarin,fakt,updatedAt:serverTimestamp()
  });
  closeModal();await render();showMotivationsBild(false,"ich");toast("Steckbrief gespeichert.");
@@ -1514,7 +1633,7 @@ function swById(id){return SCHULWOCHEN_PP.find(w=>w.id===id)||null;}
 
 // Vier ausbalancierte Lernbereichsfarben (gleiche Helligkeit/Sättigung,
 // nur der Farbton wechselt) – Blau, Violett, Grün, Terrakotta.
-const PP_FARBEN={1:"#3F7FC1",2:"#8A64B8",3:"#3C9A6B",4:"#C9773A"};
+const PP_FARBEN={1:"#2F6AAA",2:"#7650A5",3:"#2E7D57",4:"#B5622A"};
 
 // Reihenfolge = zeitliche Reihenfolge im Schuljahr (Umbau: LB 1 ist nur noch
 // die interaktive Einstiegsstunde „Das Experiment“ + Prüfungstraining in
@@ -2015,7 +2134,7 @@ async function createLehrplanTeam(fach,wocheId){
  const teamName=$("neuTeamName")?.value.trim();
  if(!teamName){toast("Bitte einen Team-Namen eingeben.");return}
  try{
- await addDoc(collection(db,"lehrplanTeams"),{wocheId:teamAnchorFor(wocheId),fach,teamName,mitgliederUids:[currentUser.uid],mitgliederNamen:[profile?.displayName||"Ich"],createdBy:currentUser.uid,createdAt:serverTimestamp()});
+ await addDoc(collection(db,"lehrplanTeams"),{wocheId:teamAnchorFor(wocheId),fach,teamName,mitgliederUids:[currentUser.uid],mitgliederNamen:[anzeigeName(profile,currentUser)],createdBy:currentUser.uid,createdAt:serverTimestamp()});
  await reopenDetail(fach,wocheId);
  toast("Team erstellt – du bist Mitglied!");
   showMotivationsBild(false,"team");
@@ -2044,7 +2163,7 @@ async function joinLehrplanTeam(teamId,fach,wocheId){
  if(!snap.exists())return;
  const d=snap.data();
  if((d.mitgliederUids||[]).includes(currentUser.uid)){toast("Du bist schon in diesem Team.");return}
- await updateDoc(ref,{mitgliederUids:[...(d.mitgliederUids||[]),currentUser.uid],mitgliederNamen:[...(d.mitgliederNamen||[]),profile?.displayName||"Mitglied"]});
+ await updateDoc(ref,{mitgliederUids:[...(d.mitgliederUids||[]),currentUser.uid],mitgliederNamen:[...(d.mitgliederNamen||[]),anzeigeName(profile,currentUser)]});
  await reopenDetail(fach,wocheId);
  toast("Team beigetreten!");
   showMotivationsBild(false,"team");
@@ -2206,7 +2325,7 @@ async function msBeitragSpeichern(phId,teamId,i){
  const ref=doc(db,"meilensteinBeitraege",`${teamId}_${i}_${currentUser.uid}`);
  try{
   const alt=await getDoc(ref);const altDaten=alt.exists()?alt.data():{};
-  const patch={teamId,phaseId:phId,index:i,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",text,link,updatedAt:serverTimestamp()};
+  const patch={teamId,phaseId:phId,index:i,uid:currentUser.uid,name:anzeigeName(profile,currentUser),text,link,updatedAt:serverTimestamp()};
   let altUrlLoeschen="";
   if(file){toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(file,`meilensteinBeitraege/${teamId}`);patch.dateiUrl=up.url;patch.dateiName=up.name;altUrlLoeschen=altDaten.dateiUrl||"";}
   else if(weg){patch.dateiUrl="";patch.dateiName="";altUrlLoeschen=altDaten.dateiUrl||"";}
@@ -2277,7 +2396,7 @@ async function openProjektGesamtcheck(){
  // Warteschlange: Meilensteine, die auf Bestätigung warten
  const warten=[];
  PROJEKT_PHASEN.forEach(ph=>d.teams.filter(t=>t.phaseId===ph.id).forEach(t=>(ph.bestaetigung||[]).forEach(i=>{const st=msStatus(ph,t,d.beitraege,i);if(st.zustand==="wartet")warten.push({ph,t,i,st});})));
- const rows=d.students.map(s=>`<tr><td style="padding:8px">${esc(s.displayName||s.email||"Schüler/in")}</td>${PROJEKT_PHASEN.map(ph=>{
+ const rows=d.students.map(s=>`<tr><td style="padding:8px">${esc(anzeigeName(s))}</td>${PROJEKT_PHASEN.map(ph=>{
   const z=pgZelle(d,s,ph);
   if(ph.einstieg){
    const sch=ppEinstiegSchritte(ph,id=>d.fortschritt.find(x=>x.uid===s.uid&&x.wocheId===id));
@@ -2317,7 +2436,7 @@ async function openProjektSchuelerDetail(uid,phId){
  const z=pgZelle(d,s,ph);
  msKontext={phId,teamId:z.team?.id,ansicht:"schueler",uid};
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker"style="color:${ppFarbe(ph)}">${esc(ph.lb)} · PROJEKT · ${esc(s.displayName||s.email||"")}</div>
+  <div class="kicker"style="color:${ppFarbe(ph)}">${esc(ph.lb)} · PROJEKT · ${esc(anzeigeName(s))}</div>
   <h2>${esc(ph.titel)}</h2>
   <h3 class="apt-h3">${ph.einstieg?"Einstiegsinhalte (persönlich)":"Projektinhalte (persönlich)"}</h3>
   <div class="list">${ph.notwendigeWochen.map(id=>{const e=lehrplanWocheById("paedagogik",id);const f=d.fortschritt.find(x=>x.uid===uid&&x.wocheId===id)||{};
@@ -2348,7 +2467,7 @@ async function addLehrplanProdukt(fach,wocheId){
  const up=await uploadCampusDatei(file,`lehrplanProdukte/${wocheId}`);
  dateiUrl=up.url;dateiName=up.name;
  }
- await addDoc(collection(db,"lehrplanProdukte"),{wocheId,fach,uid:currentUser.uid,name:profile?.displayName||"Campus-Mitglied",titel,inhalt,dateiUrl,dateiName,createdAt:serverTimestamp()});
+ await addDoc(collection(db,"lehrplanProdukte"),{wocheId,fach,uid:currentUser.uid,name:anzeigeName(profile,currentUser),titel,inhalt,dateiUrl,dateiName,createdAt:serverTimestamp()});
  if(lehrplanWocheById(fach,wocheId)?.typ==="apt"&&!isTeacher()){await aptSetzen(wocheId,{produktHochgeladen:true},{tab:"produkt"});return}
  await reopenDetail(fach,wocheId);
  showMotivationsBild(false,"abgabe");
@@ -2518,7 +2637,7 @@ async function submitBasischeck(fach,wocheId){
  try{
  await setDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${wocheId}`),{
  uid:currentUser.uid,wocheId,fach,antworten:ergebnisse.map(e=>e.antwort),richtig,gesamt:fragen.length,ampel,
- name:profile?.displayName||currentUser?.email||"Schüler/in",createdAt:serverTimestamp()
+ name:anzeigeName(profile,currentUser),createdAt:serverTimestamp()
  });
  toast(`${richtig} von ${fragen.length} richtig.`);
  if(lehrplanWocheById(fach,wocheId)?.typ==="apt"){await aptSetzen(wocheId,{basischeckErledigt:true},{tab:"basischeck"});return}
@@ -2561,7 +2680,7 @@ function renderWochenLiveTable(fach,wocheId,woche){
  const letzteAktivitaet=f.updatedAt?.seconds?new Date(f.updatedAt.seconds*1000):null;
  const tageInaktiv=letzteAktivitaet?Math.floor((Date.now()-letzteAktivitaet.getTime())/86400000):null;
  return`<tr>
- <td>${esc(s.displayName||s.email||"Schüler/in")}</td>
+ <td>${esc(anzeigeName(s))}</td>
  <td>${position} / ${gesamtSchritte}</td>
  <td style="text-align:center">${st.hatBasischeck?praktikumsAmpelDotHTMLGeneric(bc?.ampel,bc?basischeckAmpelText(bc.ampel):"Noch nicht bearbeitet"):"–"}</td>
  <td style="text-align:center">${relevanteTasks.length?ampelDotHTML(lernstandOk?lernstandStatus((st.lsAttempts.find(a=>a.uid===s.uid&&relevanteTasks.some(t=>t.id===a.taskId))?.total)||0,relevanteTasks.length?lernstandMaxPoints(relevanteTasks[0].id):15):null):"–"}</td>
@@ -2643,7 +2762,7 @@ async function openAbschlussCheckQualitaet(fach,wocheId){
  const bearbeitet=proAufgabe.filter(Boolean);
  const summe=bearbeitet.reduce((sum,a)=>sum+(Number(a.total)||0),0);
  const max=relevanteTasks.reduce((sum,t)=>sum+lernstandMaxPoints(t.id),0);
- return {name:s.displayName||s.email||"Schüler/in",summe,max,bearbeitet:bearbeitet.length,gesamt:relevanteTasks.length,attempts:bearbeitet};
+ return {name:anzeigeName(s),summe,max,bearbeitet:bearbeitet.length,gesamt:relevanteTasks.length,attempts:bearbeitet};
  });
  const bearbeiteteZeilen=zeilen.filter(z=>z.bearbeitet>0);
  const klassenschnitt=bearbeiteteZeilen.length?(bearbeiteteZeilen.reduce((s,z)=>s+z.summe,0)/bearbeiteteZeilen.length):0;
@@ -2725,7 +2844,7 @@ function renderPhasenLiveTable(phase){
  .map(f=>f.updatedAt?.seconds?new Date(f.updatedAt.seconds*1000):null).filter(Boolean).sort((a,b)=>b-a)[0];
  const tageInaktiv=letzteAktivitaet?Math.floor((Date.now()-letzteAktivitaet.getTime())/86400000):null;
  return`<tr>
- <td>${esc(s.displayName||s.email||"Schüler/in")}</td>
+ <td>${esc(anzeigeName(s))}</td>
  <td style="text-align:center"><span class="ampel-dot"style="background:${inhaltsAmpelFarbe(fertigeWochen,phase.notwendigeWochen.length)}"title="${fertigeWochen} von ${phase.notwendigeWochen.length} notwendigen Wochen"></span> ${fertigeWochen}/${phase.notwendigeWochen.length}</td>
  <td style="text-align:center"><span class="ampel-dot"style="background:${phase.einstieg?(stundeFertig?"#3fa66a":"#c7d0d6"):meilensteinAmpelFarbe(idx,phase.meilensteine.length)}"title="${esc(meilensteinLabel)}"></span></td>
  <td style="font-size:12px;color:var(--muted)">${esc(phase.einstieg?"–":(team?.teamName||"kein Team"))}</td>
@@ -3347,7 +3466,7 @@ async function uploadPraktikumsbericht(phaseId,typ){
  const up=await uploadCampusDatei(file,`praktikumsberichte/${phaseId}_${typ}`);
  const docId=`${currentUser.uid}_${phaseId}_${typ}`;
  await setDoc(doc(db,"praktikumsberichte",docId),{
- uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",
+ uid:currentUser.uid,name:anzeigeName(profile,currentUser),
  phaseId,typ,dateiUrl:up.url,dateiName:up.name,hochgeladenAm:serverTimestamp(),
  ampel:null,unterschriftBetreuer:null,stempelBetrieb:null,unterschriftSchueler:null,ausfuehrlichkeit:null
  },{merge:true});
@@ -3475,7 +3594,7 @@ async function openLehrkraftPraktikumsUebersicht(phaseId){
  <div style="overflow-x:auto"><table class="ls-matrix">
  <thead><tr><th>Schüler:in</th>${typen.map(t=>`<th>${esc(t.label)}</th>`).join("")}</tr></thead>
  <tbody>${students.map(s=>`<tr>
- <td>${esc(s.displayName||s.email||"Schüler/in")}</td>
+ <td>${esc(anzeigeName(s))}</td>
  ${typen.map(t=>{
  const eintrag=alleBerichte.find(b=>b.uid===s.uid&&b.phaseId===phaseId&&b.typ===t.typ);
  if(!eintrag)return`<td style="text-align:center;color:var(--muted)">–</td>`;
@@ -3507,7 +3626,7 @@ async function ladeGesamtAmpelMatrix(){
  });
  });
  const zeilen=students.map(s=>({
- name:s.displayName||s.email||"Schüler/in",
+ name:anzeigeName(s),
  werte:spalten.map(sp=>alleBerichte.find(b=>b.uid===s.uid&&b.phaseId===sp.phaseId&&b.typ===sp.typ)?.ampel||null)
  }));
  return{spalten,zeilen};
@@ -3996,7 +4115,7 @@ async function openLehrplanKlassenuebersicht(fach){
  <div style="overflow-x:auto"><table class="ls-matrix">
  <thead><tr><th>Schüler:in</th><th>Wochen</th><th>LB 1</th><th>LB 2</th><th>LB 3</th><th>LB 4</th></tr></thead>
  <tbody>${rows.map(r=>`<tr>
- <td>${esc(r.s.displayName||r.s.email||"Schüler/in")}</td>
+ <td>${esc(anzeigeName(r.s))}</td>
  <td>${r.abgeschlossen} / ${wochenGesamt}</td>
  ${r.ampeln.map(a=>`<td style="text-align:center">${ampelDotHTML(a)}</td>`).join("")}
  </tr>`).join("")||`<tr><td colspan="6">Keine Schüler:innen gefunden.</td></tr>`}</tbody>
@@ -4439,7 +4558,7 @@ async function pp12Tafel(datum){
   const e=PP12_PLAN.find(x=>x.d===datum);
   const titel=`${datum.slice(8,10)}.${datum.slice(5,7)}. ${e?e.t:"Unterricht"}`.slice(0,120);
   const r=await addDoc(collection(db,"whiteboards"),{title:titel,description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,
-   createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+   createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
   await lbRfAlteWeg(PP12_CACHE.tafeln[datum]);
   await setDoc(doc(db,"lehrplanTafeln",datum),{boardId:r.id,rfTyp:"",rfUrl:"",rfTitel:"",titel,createdBy:currentUser.uid,createdAt:serverTimestamp()},{merge:true});
   PP12_CACHE.tafeln[datum]={...(PP12_CACHE.tafeln[datum]||{}),boardId:r.id,titel};
@@ -4756,7 +4875,7 @@ async function ppmMeineLaden(){
  }catch(e){console.error("Eigener Fortschritt:",e);}
 }
 function ppmDocId(m){return`${m.id}_${currentUser.uid}`;}
-function ppmName(){return profile?.displayName||currentUser.email||"Schüler:in";}
+function ppmName(){return anzeigeName(profile,currentUser);}
 
 // ------------------------------------------------------------ Modulplan
 // Fortschritt der angemeldeten Person je Modul: {done, frac (0..1)} oder null, wenn für das Modul kein Stand erfasst wird.
@@ -4839,7 +4958,7 @@ function ppmKarteHTML(m,fortsetzung){
  const fo=ppmFort(m);
  return`<div class="ppm-karte${isTeacher()?" ppm-ziehbar":""}${fo?(fo.done?" ppm-st-done":fo.frac>0?" ppm-st-teil":" ppm-st-offen"):""}" style="--c:${c};--sp:${ppmSpalten(m)}" data-ppm="oeffnen" data-id="${esc(m.id)}" tabindex="0" role="button">
   <span class="ppm-ic">${T.icon}</span>
-  <span class="ppm-txt"><b>${esc(m.titel||T.name)}</b><small>${esc(T.art||T.kurz)} · LB${m.lb} · ${esc(ppmDauerText(m))}</small>${ppmStatus(m)}${fo&&!fo.done?`<span class="ppm-mini" title="${Math.round(fo.frac*100)} % geschafft"><i style="width:${Math.round(fo.frac*100)}%"></i></span>`:""}${proj}${exp}${einh}${lbModulPills(m)}</span>
+  <span class="ppm-txt"><b>${esc(m.titel||T.name)}</b><span class="chip ${({projekt:"prj",experiment:"prj",selbstlern:"slk",einfuehrung:"slk",stunde:"std",rallye:"ral",kprim:"chk",apt:"ueb"})[m.modul]||"chk"}">${esc(T.kurz)}</span><small>LB ${m.lb} · ${esc(ppmDauerText(m))}</small>${ppmStatus(m)}${fo&&!fo.done?`<span class="ppm-mini" title="${Math.round(fo.frac*100)} % geschafft"><i style="width:${Math.round(fo.frac*100)}%"></i></span>`:""}${proj}${exp}${einh}${lbModulPills(m)}</span>
   ${fo&&fo.done?`<span class="ppm-haken-k" aria-label="geschafft">✓</span>`:""}${isTeacher()?`<button type="button" class="ppm-edit" data-ppm="bearbeiten" data-id="${esc(m.id)}" title="Modul bearbeiten">✎</button>`:""}
  </div>`;
 }
@@ -5025,7 +5144,7 @@ async function ppmDialog(id,typ,woche,opt){
  const bfT=t==="blockfall"?await ppmBlockfallThemen():[];
  const lb0=bearb?bearb.lb:(projekt?projekt.lb:1);
  const lbOpt=[1,2,3,4].map(n=>`<option value="${n}"${n===lb0?" selected":""}>Lernbereich ${n} · ${esc((PP12_LB[n]||{}).titel||"")}</option>`).join("");
- const ph0=PROJEKT_PHASEN.find(p=>p.lbNum===lb0);
+ const ph0=KW_PHASEN.find(p=>p.lbNum===lb0);
  const dauer0=bearb?ppmDauerKey(bearb):PPM_DAUER_STANDARD[t];
  const dauerListe=PPM_DAUERN.filter(d=>d.min).filter(d=>!d.alt||d.k===dauer0);
  const dauerOpt=(()=>{const l=dauerListe.some(d=>d.k===dauer0)?dauerListe:[...dauerListe,{k:dauer0,lang:dauer0.slice(1)+" Wochen (bisher)"}];return l.map(d=>`<option value="${d.k}"${d.k===dauer0?" selected":""}>${esc(d.lang)}</option>`).join("");})();
@@ -5080,6 +5199,7 @@ async function ppmDialog(id,typ,woche,opt){
    <label>Dauer<select id="ppmDauer">${dauerOpt}</select></label></div>
    <div id="ppmKapa" class="ppm-kapahint"></div>
    ${extra}
+    <details class="ppm-details"${(bearb&&(bearb.themen||[]).length)||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen gehört der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${KW_THEMEN.map(e=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${e.id}"${((bearb&&bearb.themen)||[]).includes(e.id)||window.__kwThemaNeu===e.id?" checked":""}> LB ${e.lbNum} · Nr. ${esc(e.nr)} · ${esc(kwKurz(e))}</label>`).join("")}</div></details>
    <label>Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
    <div id="ppmMatBox" class="ppm-matbox"></div>
    <div class="form-actions">${bearb?`<button class="secondary" type="button" id="ppmLoeschen">Modul löschen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
@@ -5129,7 +5249,7 @@ async function ppmDialog(id,typ,woche,opt){
   btn.disabled=!ok;btn.title=ok?"":"In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).";
  };
  if(t==="selbstlern"){const ks=$("ppmKurs");if(ks)ks.addEventListener("change",()=>{const o=ks.options[ks.selectedIndex],n=o&&o.dataset.lb;if(n&&!lbSel.disabled)lbSel.value=n;});}
- if(t==="projekt"&&!bearb)lbSel.addEventListener("change",()=>{const x=PROJEKT_PHASEN.find(y=>y.lbNum===Number(lbSel.value));ti.placeholder=x?x.titel:T.name;const d=$("ppmDirekt");if(d)d.value=(x&&x.einstieg)?"experiment":"projekt";});
+ if(t==="projekt"&&!bearb)lbSel.addEventListener("change",()=>{const x=KW_PHASEN.find(y=>y.lbNum===Number(lbSel.value));ti.placeholder=x?x.titel:T.name;const d=$("ppmDirekt");if(d)d.value=(x&&x.einstieg)?"experiment":"projekt";});
  $("ppmStart").addEventListener("change",aktualisieren);$("ppmDauer").addEventListener("change",aktualisieren);
  document.querySelectorAll(".ppmTeil").forEach(c=>c.addEventListener("change",()=>{
   const box=[...document.querySelectorAll(".ppmTeil")],get=k=>box.find(x=>x.value===k);
@@ -5143,7 +5263,8 @@ async function ppmDialog(id,typ,woche,opt){
   if(!pr.ok){toast("In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).");return;}
   const dk=$("ppmDauer").value,def=PPM_DAUERN.find(d=>d.k===dk);
   const daten={modul:t,lb,titel:ti.value.trim(),start:$("ppmStart").value,dauer:dk,wochen:def?def.wochen:(Number(dk.slice(1))||1),notiz:$("ppmNotiz").value.trim()};
-  if(!daten.titel){const x=PROJEKT_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":t==="rallye"?"Lernrallye · LB"+lb:t==="blockfall"?"Blockfall":"Selbstlernkurs · LB"+lb);}
+  if(!daten.titel){const x=KW_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":t==="rallye"?"Lernrallye · LB"+lb:t==="blockfall"?"Blockfall":"Selbstlernkurs · LB"+lb);}
+  daten.themen=[...document.querySelectorAll(".ppmThemaCb:checked")].map(c=>c.value);window.__kwThemaNeu=null;
   if(projektId)daten.projektId=projektId;
   if(t==="projekt"&&$("ppmDirekt"))daten.direkt=$("ppmDirekt").value;
   if(t==="stunde")daten.phase=Number($("ppmPhase").value);
@@ -5203,7 +5324,7 @@ function ppmFehler(e,text){
  toast(e&&e.code==="permission-denied"?`${text}: Firebase verweigert den Zugriff (permission-denied). Bitte die Firestore-Regeln prüfen.`:`${text}: ${(e&&(e.code||(e.message&&e.message.length<220?e.message:e.name)))||"unbekannt"}`);
 }
 async function ppmTafelAnlegen(titel){
- const r=await addDoc(collection(db,"whiteboards"),{title:String(titel).slice(0,120),description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,bg:"blau",createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+ const r=await addDoc(collection(db,"whiteboards"),{title:String(titel).slice(0,120),description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,bg:"blau",createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
  return r.id;
 }
 async function ppmStandardplan(){
@@ -5323,10 +5444,10 @@ function ppmMaterialBox(m){
 function ppmKopf(m,unter,extraBtn){
  const T=PPM_TYPEN[m.modul],c=ppmFarbe(m),w=ppmWochen(m);
  const zeit=w.length?`${fmtKurz(w[0].start)}–${fmtKurz(w[w.length-1].end)}`:"";
- return`<button class="secondary" data-ppm="plan">← Unterricht</button>
+ return`<div class="kw-links"><button class="secondary" onclick="go('start')">← Lernlandkarte</button><button class="secondary" data-ppm="plan">← Unterricht</button></div>
  ${PPM_CSS}
- <div class="ppm-box ppm-kopf" style="--c:${c}"><div class="kicker" style="color:${c}">${T.icon} ${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit} · ${esc(ppmDauerDef(m).lang.toUpperCase())}</div>
-  <h1 style="margin:4px 0 6px;font-size:26px">${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
+ <div class="ppm-box ppm-kopf kw-kopf" style="--c:${c};--t:${c}"><div class="kicker">${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit} · ${esc(ppmDauerDef(m).lang.toUpperCase())}</div>
+  <h1>${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
   ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${extraBtn||""}</div>`:""}</div>${lbModulBar(m)}${ppmMaterialBox(m)}`;
 }
 // ---- Projekt ----
@@ -5708,7 +5829,7 @@ async function ppmEaStandDialog(id){
  try{
   const info=await einarbeitungInfo(id),k=await ladeStundeKlasse(id);
   const zeilen=k.students.map(u=>{const f=k.fs[u.uid],a=f&&f.einarbeitungAufgaben;
-   return`<tr><td>${esc(u.displayName||u.email||"Schüler:in")}</td><td>${f&&f.einarbeitungAbgeschlossen?"✓ abgeschlossen":(f?"begonnen":"–")}</td><td>${a&&a.gesamt?`${a.richtig} von ${a.gesamt}`:"–"}</td></tr>`;}).join("");
+   return`<tr><td>${esc(anzeigeName(u))}</td><td>${f&&f.einarbeitungAbgeschlossen?"✓ abgeschlossen":(f?"begonnen":"–")}</td><td>${a&&a.gesamt?`${a.richtig} von ${a.gesamt}`:"–"}</td></tr>`;}).join("");
   const fertig=k.students.filter(u=>k.fs[u.uid]&&k.fs[u.uid].einarbeitungAbgeschlossen).length;
   modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Stand der Klasse</h2>
    <p>${esc((info&&info.titel)||id)}: ${fertig} von ${k.students.length} haben den Kurs abgeschlossen.</p>
@@ -6070,7 +6191,7 @@ const PP12_ZOOM_CSS=(()=>{
 async function renderUnterrichtPP(){
  await pp12DatenLaden();
  await ppmLaden();
- if(activePPModul){const pm=ppmById(activePPModul);if(pm)return await ppmModulSeite(pm);activePPModul=null;}
+ if(activePPModul){const pm=ppmById(activePPModul);if(pm){const kf=KW_FARBEN[pm.lb]||{c:"#3A8FD4",t:"#2B7BBF"};return`<div class="kwp kwm" style="--lbc:${kf.c};--lbt:${kf.t}">`+await ppmModulSeite(pm)+`</div>`;}activePPModul=null;}
  await ppmMeineLaden();
  const resZ=await pp12RessourcenZaehlen();
  const resLabel={taskcard:["TaskCard","TaskCards"],canva:["Canva","Canva"],ki:["KI-Angebot","KI-Angebote"],video:["Video","Videos"],bycs:["ByCS / mebis","ByCS / mebis"],learningapps:["LearningApps","LearningApps"],weitere:["weiterer Link","weitere Links"]};
@@ -7359,7 +7480,7 @@ function ppEinstiegInhaltHTML(ph,fortschrittMap,c,stunde){
    const schueler=stunde.students||[];
    const n=schueler.filter(x=>stunde.erledigt.has(x.uid)).length;
    lehrer=`<div class="kicker"style="margin:18px 0 8px">WER HAT DIE STUNDE GEMACHT? · ${n} von ${schueler.length}</div>
-   <div class="pp-stunde-liste">${schueler.map(x=>{const ok=stunde.erledigt.has(x.uid);return`<span class="pp-stunde-chip${ok?" ok":""}">${ok?"✓":"–"} ${esc(x.displayName||x.email||"Schüler/in")}</span>`;}).join("")||`<div class="empty">Keine Schüler:innen gefunden.</div>`}</div>
+   <div class="pp-stunde-liste">${schueler.map(x=>{const ok=stunde.erledigt.has(x.uid);return`<span class="pp-stunde-chip${ok?" ok":""}">${ok?"✓":"–"} ${esc(anzeigeName(x))}</span>`;}).join("")||`<div class="empty">Keine Schüler:innen gefunden.</div>`}</div>
    <small style="color:var(--muted)">Als gemacht gilt die Stunde, sobald das Abschlussquiz vollständig bearbeitet wurde.</small>`;
   }else lehrer=`<div class="empty">Der Stand der Klasse konnte nicht geladen werden.</div>`;
  }
@@ -7709,7 +7830,7 @@ async function openAptDetail(wocheId,tab){
     const f=klasse.fs[st.uid]||null,sc=aptSchritte(f);
     const wu=f?.besprechungGewuenscht&&!f?.besprechungErledigt;
     const ea=f?.einarbeitungAufgaben;
-    return`<tr><td>${esc(st.displayName||st.email||"Schüler/in")}</td>
+    return`<tr><td>${esc(anzeigeName(st))}</td>
      <td><span class="apt-dots">${sc.map((d,i)=>`<span class="apt-dot${d?" an":""}"style="${d?`background:${c};border-color:${c}`:""}"title="${esc(APT_SCHRITT_LABELS[i])}">${d?"✓":i+1}</span>`).join("")}</span></td>
      <td style="font-size:12px">${f?.einarbeitungAbgeschlossen?`${esc(stDatum(f.einarbeitungAm))}${ea?.gesamt?` · ${ea.richtig}/${ea.gesamt}`:""}`:"–"}</td>
      <td>${wu?`<span title="Besprechung gewünscht">💬</span>`:""}</td>
@@ -7787,7 +7908,7 @@ async function openStundeSchueler(wocheId,uid,zurueck){
    f.feedbackErledigt?`eingearbeitet${f.feedbackAm?` am ${stDatum(f.feedbackAm)}`:""}`:"offen"
   ];
   modal(`<button class="modal-close"onclick="closeModal()">×</button>
-   <div class="kicker"style="color:${c}">${esc(e?.lb||"")} · ${esc(st?.displayName||st?.email||"")}</div>
+   <div class="kicker"style="color:${c}">${esc(e?.lb||"")} · ${esc(anzeigeName(st))}</div>
    <h2>${esc(e?.thema||wocheId)}</h2>
    <div class="list">${sc.map((d,i)=>`<div class="list-item"><div><strong>${d?"✓":"○"} ${esc(APT_SCHRITT_LABELS[i])}</strong><small>${esc(info[i])}</small></div></div>`).join("")}</div>
    ${(f.aufsatzText||"").trim()?`<h3 class="apt-h3">Aufsatztext</h3><div class="card"style="padding:10px 14px;font-size:13px;white-space:pre-wrap;line-height:1.5">${esc(f.aufsatzText)}</div>`:""}
@@ -8040,12 +8161,12 @@ async function openFachaufsatzTrainingCheck(lbId,filter){
   <p style="color:var(--muted);font-size:12px;margin:6px 0">Je Inhalt 4 Schritte: ① Prüfungsfrage · ② Einarbeitung · ③ Fachaufsatz üben · ④ Feedback. 💬 = Besprechung gewünscht. Zelle antippen für Details. Zeitbudget: ${esc(budget.text)}.</p>
   <div style="overflow-x:auto"><table class="ls-matrix apt-matrix">
    <thead><tr><th>Schüler:in</th>${ph.trainingWochen.map(id=>`<th title="${esc(lehrplanWocheById("paedagogik",id)?.thema||"")}">${esc(ppKurz(lehrplanWocheById("paedagogik",id)))}</th>`).join("")}<th>Stand</th></tr></thead>
-   <tbody>${gefiltert.map(r=>`<tr><td>${esc(r.s.displayName||r.s.email||"Schüler/in")}</td>
+   <tbody>${gefiltert.map(r=>`<tr><td>${esc(anzeigeName(r.s))}</td>
     ${r.zellen.map(z=>`<td class="apt-zelle"onclick="openAptSchuelerDetail('${r.s.uid}','${z.id}')"><span class="apt-dots">${z.schritte.map((dn,i)=>dot(dn,i,z.z4)).join("")}</span></td>`).join("")}
     <td style="white-space:nowrap"><b>${r.prozent} %</b>${r.tempo?` <span class="pp-tempo"style="background:${r.tempo.farbe}">${esc(r.tempo.txt)}</span>`:""}</td></tr>`).join("")||`<tr><td colspan="${ph.trainingWochen.length+2}">Niemand in dieser Auswahl.</td></tr>`}</tbody>
   </table></div>
   <h3 style="margin:18px 0 6px">💬 ${esc(ph.lb)}: Besprechung gewünscht (${warten.length})</h3>
-  <div class="list">${warten.map(f=>{const e=lehrplanWocheById("paedagogik",f.wocheId),st=d.students.find(x=>x.uid===f.uid);return`<div class="list-item"style="cursor:pointer"onclick="openAptSchuelerDetail('${f.uid}','${f.wocheId}')"><div><strong>${esc(st?.displayName||st?.email||"Schüler/in")}</strong><small>${esc(e?.thema||f.wocheId)}${f.besprechungAm?" · "+esc(stDatum(f.besprechungAm)):""}</small></div><span>→</span></div>`;}).join("")||`<div class="empty">Keine offenen Besprechungswünsche.</div>`}</div>
+  <div class="list">${warten.map(f=>{const e=lehrplanWocheById("paedagogik",f.wocheId),st=d.students.find(x=>x.uid===f.uid);return`<div class="list-item"style="cursor:pointer"onclick="openAptSchuelerDetail('${f.uid}','${f.wocheId}')"><div><strong>${esc(anzeigeName(st))}</strong><small>${esc(e?.thema||f.wocheId)}${f.besprechungAm?" · "+esc(stDatum(f.besprechungAm)):""}</small></div><span>→</span></div>`;}).join("")||`<div class="empty">Keine offenen Besprechungswünsche.</div>`}</div>
   <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
 }
 window.openFachaufsatzTrainingCheck=openFachaufsatzTrainingCheck;
@@ -8206,7 +8327,7 @@ function checkoutSektionHTML(d){
    <div class="co-aktion">${coAuswahlStatus(d.einst).offen?`<button class="primary"onclick="openCheckoutAuswahl()">${d.auswahl?"Auswahl ändern":`${d.einst.anzahlWaehlen} auswählen`}</button>`:`<small style="color:var(--muted)">${esc(coAuswahlStatus(d.einst).text)}</small>`}${d.auswahl?`<button class="secondary"onclick="coPdfErsatzSchueler()">PDF</button>`:""}</div></div>`;
  }
  return`<div class="card co-karte">
-  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Test live frei: 3 K-Prim-Aufgaben mit je einer Fallvignette. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
+  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Test live frei: 4 K-Prim-Aufgaben, je eine Fallvignette für 2 Aufgaben. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
    ${lehrer?`<button class="primary"onclick="openCheckoutEditor()">＋ Neuer Check-out</button>`:""}</div>
   ${lehrer?"":coBewertungsInfoHTML(d.einst.anzahlWaehlen)}
   <div class="co-liste">${zeilen||`<div class="empty">${lehrer?"Noch kein Check-out angelegt.":"Noch kein Check-out freigeschaltet."}</div>`}</div>
@@ -9280,7 +9401,7 @@ async function openCheckoutMonitor(id){
   const abgegeben=Object.values(ab).filter(a=>a.abgegeben).length;
   box.innerHTML=`<p style="font-size:14px"><b>${abgegeben}</b> abgegeben · <b>${Object.keys(ab).length-abgegeben}</b> in Bearbeitung · <b>${students.length-Object.keys(ab).length}</b> noch nicht gestartet</p>
    <div class="co-monitor">${students.map(s=>{const a=ab[s.uid];const k=a?Object.keys(a.antworten||{}).length:0;
-    return`<div class="co-mon-zeile ${a?.abgegeben?"ab":a?"lauf":"nicht"}"><span>${esc(s.displayName||s.email||"")}</span><small>${a?.abgegeben?"abgegeben ✓":a?`${k}/${n} beantwortet`:"noch nicht gestartet"}</small></div>`;}).join("")}</div>`;
+    return`<div class="co-mon-zeile ${a?.abgegeben?"ab":a?"lauf":"nicht"}"><span>${esc(anzeigeName(s))}</span><small>${a?.abgegeben?"abgegeben ✓":a?`${k}/${n} beantwortet`:"noch nicht gestartet"}</small></div>`;}).join("")}</div>`;
  },e=>console.error("Check-out-Monitor:",e));
 }
 async function coBeenden(id){
@@ -9365,7 +9486,7 @@ function coStandAktualisieren(co){
 async function coAntwort(id,key,wert){
  coStandAktualisieren();
  try{
-  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",antworten:{[key]:wert},updatedAt:serverTimestamp()},{merge:true});
+  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:anzeigeName(profile,currentUser),antworten:{[key]:wert},updatedAt:serverTimestamp()},{merge:true});
  }catch(e){console.error("Antwort speichern:",e);toast(e?.code==="permission-denied"?"Der Check-out ist nicht mehr freigeschaltet – Antwort nicht gespeichert.":"Antwort konnte nicht gespeichert werden – Verbindung prüfen.");}
 }
 async function coAbgeben(id){
@@ -9374,7 +9495,7 @@ async function coAbgeben(id){
  if(k<alle&&!confirm(`Du hast ${alle-k} Aussage(n) noch nicht beantwortet – diese zählen als Fehler. Trotzdem abgeben?`))return;
  if(k===alle&&!confirm("Jetzt endgültig abgeben? Danach kannst du nichts mehr ändern."))return;
  try{
-  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Schüler/in",abgegeben:true,abgegebenAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
+  await setDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`),{checkoutId:id,uid:currentUser.uid,name:anzeigeName(profile,currentUser),abgegeben:true,abgegebenAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
   coUnsubAll();closeModal();toast("Abgegeben ✓");await render();
   showMotivationsBild(true,"abgabe");
  }catch(e){console.error(e);toast("Konnte nicht abgegeben werden.");}
@@ -9428,9 +9549,9 @@ async function openCheckoutErgebnisse(id){
   <p style="font-size:13px;color:var(--muted)">${coDatum(co.datum)} · ${erg.length} ausgewertet · Klassenschnitt ${schnitt} Punkte</p>
   <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>Ergebnis</th></tr></thead>
   <tbody>${students.map(s=>{const a=abgaben[s.uid];
-   if(!a)return`<tr><td>${esc(s.displayName||s.email||"")}</td><td colspan="${(co.aufgaben||[]).length+2}"style="color:var(--muted)">nicht teilgenommen</td></tr>`;
-   if(!a.ausgewertet)return`<tr><td>${esc(s.displayName||s.email||"")}</td><td colspan="${(co.aufgaben||[]).length+2}">noch nicht ausgewertet</td></tr>`;
-   return`<tr style="cursor:pointer"onclick="openCheckoutSchuelerErgebnis('${id}','${s.uid}')"><td>${esc(s.displayName||s.email||"")}</td>${(a.auswertung||[]).map(r=>`<td style="text-align:center"title="${r.fehler} Fehler">${r.be}</td>`).join("")}<td style="text-align:center">${a.be}/${a.maxBE}</td><td><b>${npText(a.notenpunkte)}</b></td></tr>`;}).join("")}</tbody></table></div>
+   if(!a)return`<tr><td>${esc(anzeigeName(s))}</td><td colspan="${(co.aufgaben||[]).length+2}"style="color:var(--muted)">nicht teilgenommen</td></tr>`;
+   if(!a.ausgewertet)return`<tr><td>${esc(anzeigeName(s))}</td><td colspan="${(co.aufgaben||[]).length+2}">noch nicht ausgewertet</td></tr>`;
+   return`<tr style="cursor:pointer"onclick="openCheckoutSchuelerErgebnis('${id}','${s.uid}')"><td>${esc(anzeigeName(s))}</td>${(a.auswertung||[]).map(r=>`<td style="text-align:center"title="${r.fehler} Fehler">${r.be}</td>`).join("")}<td style="text-align:center">${a.be}/${a.maxBE}</td><td><b>${npText(a.notenpunkte)}</b></td></tr>`;}).join("")}</tbody></table></div>
   <div class="form-actions"style="margin-top:14px">
    <button class="secondary"onclick="coNeuAuswerten('${id}')">Neu auswerten</button>
    <button class="secondary"onclick="coLoeschen('${id}')">Löschen</button>
@@ -9441,7 +9562,7 @@ async function openCheckoutSchuelerErgebnis(id,uid){
  let d;try{d=await coLadeErgebnisse(id);}catch(e){return}
  const a=d.abgaben[uid],s=d.students.find(x=>x.uid===uid);
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 CHECK-OUT · ${esc(s?.displayName||s?.email||"")}</div><h2>${esc(d.co.titel)}</h2>
+  <div class="kicker">🏁 CHECK-OUT · ${esc(anzeigeName(s))}</div><h2>${esc(d.co.titel)}</h2>
   <div class="co-summe">${coSummeHTML(a)}</div>
   ${coRechenwegHTML(a)}
   ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a,false,!coVigWiederholt(d.co.aufgaben,i))).join("")}
@@ -9587,7 +9708,7 @@ async function coPdfSchueler(id,uid){
  try{
   const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${uid}`))]);
   const co=c.data(),erg=a.exists()?a.data():null;
-  openToolPrintWindow(`${co.titel} – Ergebnis`,coVignettePdf(co)+coPdfBlock(co,erg,erg?.name||profile?.displayName||""),`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)}`);
+  openToolPrintWindow(`${co.titel} – Ergebnis`,coVignettePdf(co)+coPdfBlock(co,erg,erg?.name||anzeigeName(profile,currentUser)),`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)}`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
 async function coPdfKlasse(id){
@@ -9595,8 +9716,8 @@ async function coPdfKlasse(id){
  try{
   const {co,abgaben,students}=await coLadeErgebnisse(id);
   const tabelle=`<table><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>
-   ${students.map(s=>{const a=abgaben[s.uid];return`<tr><td>${escPDF(s.displayName||s.email||"")}</td>${a?.ausgewertet?(a.auswertung||[]).map(r=>`<td>${r.be}</td>`).join("")+`<td>${a.be}/${a.maxBE}</td><td>${String(a.prozent).replace(".",",")}</td><td><b>${npText(a.notenpunkte)}</b></td>`:`<td colspan="${(co.aufgaben||[]).length+3}">nicht teilgenommen</td>`}</tr>`;}).join("")}</tbody></table>`;
-  const einzel=students.filter(s=>abgaben[s.uid]?.ausgewertet).map(s=>`<div style="break-before:page">${coPdfBlock(co,abgaben[s.uid],s.displayName||s.email||"")}</div>`).join("");
+   ${students.map(s=>{const a=abgaben[s.uid];return`<tr><td>${escPDF(anzeigeName(s))}</td>${a?.ausgewertet?(a.auswertung||[]).map(r=>`<td>${r.be}</td>`).join("")+`<td>${a.be}/${a.maxBE}</td><td>${String(a.prozent).replace(".",",")}</td><td><b>${npText(a.notenpunkte)}</b></td>`:`<td colspan="${(co.aufgaben||[]).length+3}">nicht teilgenommen</td>`}</tr>`;}).join("")}</tbody></table>`;
+  const einzel=students.filter(s=>abgaben[s.uid]?.ausgewertet).map(s=>`<div style="break-before:page">${coPdfBlock(co,abgaben[s.uid],anzeigeName(s))}</div>`).join("");
   openToolPrintWindow(`${co.titel} – Ergebnisse der Klasse`,`<h2>Übersicht</h2>${tabelle}<div style="break-before:page"></div>${coVignettePdf(co)}${einzel}`,`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)} · Wertung je Aufgabe ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
@@ -9722,7 +9843,7 @@ async function coAuswahlSpeichern(soll){
  const ids=[...document.querySelectorAll("#coAuswahlListe input:checked")].map(b=>b.value);
  if(ids.length!==soll){toast(`Bitte genau ${soll} Check-outs auswählen.`);return}
  try{
-  await setDoc(doc(db,"checkoutAuswahl",currentUser.uid),{uid:currentUser.uid,name:profile?.displayName||currentUser.email||"",ids,updatedAt:serverTimestamp()});
+  await setDoc(doc(db,"checkoutAuswahl",currentUser.uid),{uid:currentUser.uid,name:anzeigeName(profile,currentUser),ids,updatedAt:serverTimestamp()});
   toast("Auswahl gespeichert.");closeModal();await render();showMotivationsBild(false,"haken","coauswahl");
  }catch(e){console.error(e);toast(e?.code==="permission-denied"?"Die Auswahl ist nicht (mehr) freigeschaltet.":"Konnte nicht gespeichert werden.");}
 }
@@ -9737,7 +9858,7 @@ async function coLadeSchueler(uid){
  const checkouts=cs.docs.map(x=>({id:x.id,...x.data()})).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||""))||tsSek(a.createdAt)-tsSek(b.createdAt));
  const abgaben={};let name="";
  ab.docs.forEach(x=>{const a=x.data();abgaben[a.checkoutId]=a;if(!name&&a.name)name=a.name;});
- if(!name&&uid===currentUser.uid)name=profile?.displayName||"";
+ if(!name&&uid===currentUser.uid)name=anzeigeName(profile,currentUser);
  return{uid,name,checkouts,abgaben,auswahl:aw.exists()?aw.data():null};
 }
 // Tag, an dem der Test gemacht wurde (Abgabe), sonst das Datum des Check-outs.
@@ -9831,22 +9952,22 @@ async function coRespizienzDrucken(opt){
   const {d,students,abgaben,auswahl}=await coLadeKlasse();
   const beendet=d.checkouts.filter(c=>c.status==="beendet");
   const stat=coKlassenStat(beendet,abgaben,auswahl,students.map(s=>s.uid));
-  const ctx={stat,mitHintergrund:opt.mitHintergrund!==false,lehrkraft:profile?.displayName||"",anzPool:coPool(d.checkouts,d.einst).length};
+  const ctx={stat,mitHintergrund:opt.mitHintergrund!==false,lehrkraft:anzeigeName(profile,currentUser),anzPool:coPool(d.checkouts,d.einst).length};
   const mit=students.filter(x=>(auswahl[x.uid]?.ids||[]).length);
   const liste=opt.uid?mit.filter(x=>x.uid===opt.uid):mit;
   if(!liste.length){toast(opt.uid?"Für diese Person liegt noch keine Auswahl vor.":"Noch keine Auswahl vorhanden.");return}
   const sortiert=ids=>ids.map(id=>d.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
   const heute=new Date().toLocaleDateString("de-DE");
-  const blatt=x=>coRespizienzHTML(x.displayName||x.email||"Schüler:in",sortiert(auswahl[x.uid].ids||[]),abgaben[x.uid]||{},d.einst,ctx);
+  const blatt=x=>coRespizienzHTML(anzeigeName(x),sortiert(auswahl[x.uid].ids||[]),abgaben[x.uid]||{},d.einst,ctx);
   if(opt.uid){
    const x=liste[0];
-   openToolPrintWindow(`Respizienz – ${x.displayName||x.email||"Schüler:in"}`,blatt(x),`${CO_KLASSE} · ${CO_FACH} · Kurzarbeit-Ersatz · erstellt am ${heute}`);
+   openToolPrintWindow(`Respizienz – ${anzeigeName(x)}`,blatt(x),`${CO_KLASSE} · ${CO_FACH} · Kurzarbeit-Ersatz · erstellt am ${heute}`);
    return;
   }
   const seiten=liste.map(x=>`<div style="break-before:page">${blatt(x)}</div>`).join("");
-  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(x.displayName||x.email||"")).join(", ");
+  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(anzeigeName(x))).join(", ");
   const E=escPDF,zs="padding:4px 6px;border:1px solid #cfd8de;font-size:11.5px";
-  const zeilenTab=liste.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td style="${zs}">${E(x.displayName||x.email||"")}</td><td style="${zs};text-align:center">${e?`${e.be} / ${e.maxBE}`:"–"}</td><td style="${zs};text-align:center">${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td style="${zs};text-align:center"><b>${e?E(npText(e.np)):"–"}</b></td></tr>`;}).join("");
+  const zeilenTab=liste.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td style="${zs}">${E(anzeigeName(x))}</td><td style="${zs};text-align:center">${e?`${e.be} / ${e.maxBE}`:"–"}</td><td style="${zs};text-align:center">${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td style="${zs};text-align:center"><b>${e?E(npText(e.np)):"–"}</b></td></tr>`;}).join("");
   const klRow=stat.ersatz?`<tr style="border-top:2px solid #777;background:#f7fafc"><td style="${zs}"><b>Klassendurchschnitt (n = ${stat.ersatz.n})</b></td><td style="${zs}"></td><td style="${zs};text-align:center"><b>Ø ${stat.ersatz.schnitt.toFixed(2).replace(".",",")}</b></td><td style="${zs};text-align:center"><b>Ø ${stat.ersatz.np.toFixed(2).replace(".",",")}</b></td></tr>`:"";
   const testTab=beendet.filter(c=>stat.proTest[c.id]).map((c,i)=>{const t=stat.proTest[c.id];return`<tr><td style="${zs};text-align:center">${i+1}</td><td style="${zs}">${E(coDatum(c.datum))}</td><td style="${zs}">${E(c.titel||"Check-out")}<div style="font-size:10px;color:#555">${E(coLbText(c.lbNum))}</div></td><td style="${zs};text-align:center">${t.n}</td><td style="${zs};text-align:center">${coProz(t.be)} / ${t.maxBE}</td><td style="${zs};text-align:center"><b>${coProz(t.np)}</b></td></tr>`;}).join("");
   const uebersicht=`<div style="font-size:10.5px;letter-spacing:.06em;color:#1f4d73;font-weight:700">RESPIZIENZ · ALTERNATIVER LEISTUNGSNACHWEIS (KURZARBEIT-ERSATZ)</div>
@@ -9881,9 +10002,9 @@ async function openRespizienzDialog(){
   <div class="kicker">🖨 RESPIZIENZ-AUSDRUCK · NUR LEHRKRÄFTE</div><h2>Respizienz für den Kurzarbeit-Ersatz</h2>
   <p style="font-size:13px;color:var(--muted);margin-top:0">Eigener Ausdruck für die Ablage. Je Schüler:in enthält er: Name, Klasse und Fach, Lernbereich und Inhalte der Unterrichtsstunden je Test, die Ergebnisse der ${d.einst.anzahlWaehlen} gewählten Tests (je Aufgabe, max. ${coMaxBE()} BE je Test) mit Gesamtergebnis, den Klassendurchschnitt, den Notenschlüssel sowie Durchführung und Hintergründe des K-Prim-Tests.</p>
   <div class="form">
-   <label>Für wen?<select id="respWer"><option value="">Ganze Klasse (${mit.length} mit Auswahl)</option>${mit.map(x=>`<option value="${esc(x.uid)}">${esc(x.displayName||x.email||"")}</option>`).join("")}</select></label>
+   <label>Für wen?<select id="respWer"><option value="">Ganze Klasse (${mit.length} mit Auswahl)</option>${mit.map(x=>`<option value="${esc(x.uid)}">${esc(anzeigeName(x))}</option>`).join("")}</select></label>
    <label class="check"><input id="respHint"type="checkbox"checked> Durchführung, Hintergründe und Notenschlüssel auf jedem Blatt mit ausdrucken</label>
-   ${ohne.length?`<p style="font-size:12px;color:var(--muted)">Noch keine Auswahl: ${ohne.map(x=>esc(x.displayName||x.email||"")).join(", ")}</p>`:""}
+   ${ohne.length?`<p style="font-size:12px;color:var(--muted)">Noch keine Auswahl: ${ohne.map(x=>esc(anzeigeName(x))).join(", ")}</p>`:""}
    <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="coRespizienzStarten()"${mit.length?"":" disabled"}>Ausdruck erstellen</button></div>
   </div>`);
 }
@@ -9949,7 +10070,7 @@ async function openCheckoutKlassenuebersicht(){
   <p style="font-size:12px;color:var(--muted);margin-top:0">Zahlen = Notenpunkte je Check-out (Spalten nach Datum). Grün markiert = von der Schülerin / dem Schüler für den Ersatz gewählt (${d.einst.anzahlWaehlen} Tests). PDF Ergebnisse = alle Tests der Person, PDF Respizienz = die gewählten Tests mit allen Angaben zur Ablage.</p>
   <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th><th>PDF</th></tr></thead>
   <tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
-   return`<tr><td>${esc(s.displayName||s.email||"")}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td style="white-space:nowrap"><button class="secondary"style="font-size:11px"onclick="coPdfSchuelerAlle('${s.uid}')">Ergebnisse</button> <button class="secondary"style="font-size:11px"onclick="coPdfRespizienz('${s.uid}')"${e?"":" disabled"}>Respizienz</button></td></tr>`;}).join("")}</tbody></table></div>
+   return`<tr><td>${esc(anzeigeName(s))}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td style="white-space:nowrap"><button class="secondary"style="font-size:11px"onclick="coPdfSchuelerAlle('${s.uid}')">Ergebnisse</button> <button class="secondary"style="font-size:11px"onclick="coPdfRespizienz('${s.uid}')"${e?"":" disabled"}>Respizienz</button></td></tr>`;}).join("")}</tbody></table></div>
   <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="openRespizienzDialog()">🖨 Respizienz-Ausdruck</button><button class="secondary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button><button class="secondary"onclick="coPdfErsatzKlasse()">PDF Übersicht Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
 }
 async function coPdfErsatzKlasse(){
@@ -9958,7 +10079,7 @@ async function coPdfErsatzKlasse(){
   const {pool,students,abgaben,auswahl,d}=await coLadeKlasse();
   const legende=`<div class="item">${pool.map((c,i)=>`${i+1}: ${escPDF(c.titel)} (${coDatum(c.datum)})`).join(" · ")}</div>`;
   const tab=`<table><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th>${i+1}</th>`).join("")}<th>Ø Auswahl</th><th>Ersatznote</th></tr></thead><tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
-   return`<tr><td>${escPDF(s.displayName||s.email||"")}</td>${pool.map(c=>`<td>${a[c.id]?.ausgewertet?(w.has(c.id)?`<b>[${a[c.id].notenpunkte}]</b>`:a[c.id].notenpunkte):"–"}</td>`).join("")}<td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table>`;
+   return`<tr><td>${escPDF(anzeigeName(s))}</td>${pool.map(c=>`<td>${a[c.id]?.ausgewertet?(w.has(c.id)?`<b>[${a[c.id].notenpunkte}]</b>`:a[c.id].notenpunkte):"–"}</td>`).join("")}<td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table>`;
   openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs (Klasse)",legende+tab,`F12Sb · Pädagogik/Psychologie · [x] = gewählt · ${d.einst.anzahlWaehlen} Tests je Schüler:in`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
@@ -10797,7 +10918,7 @@ async function addWhiteboard(){
  try{
   const art=(isTeacher()&&(wbFormArt==="tafel"||$("wbNeuArt")?.value==="tafel"))?"tafel":"team";
   const r=await addDoc(collection(db,"whiteboards"),{title,description,art,schreibschutz:art==="tafel",seiten:1,bg:art==="tafel"?"blau":"weiss",createdBy:currentUser.uid,
-   createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",createdAt:serverTimestamp()});
+   createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
   closeModal();openWhiteboard(r.id);
  }catch(e){
   console.error("Whiteboard anlegen:",e);
@@ -11048,7 +11169,7 @@ function wbErzeugen(teil,opt){
  const std=WB_STANDARD[teil.type==="stroke"?"stroke":teil.type]||{};
  const ref=doc(collection(db,"whiteboardItems"));
  const daten={boardId:wb.id,seite:wb.seite||1,c:std.c||"grau",fs:std.fs||18,z:Date.now()+(opt?.zOffset||0),
-  authorUid:currentUser.uid,authorName:profile?.displayName||currentUser.email||"Mitglied",
+  authorUid:currentUser.uid,authorName:anzeigeName(profile,currentUser),
   ...std,...teil,createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
  delete daten.id;
  Object.keys(daten).forEach(k=>{if(daten[k]===undefined)delete daten[k];});
@@ -11828,7 +11949,7 @@ function wbCursorSenden(pt,weg){
  if(!weg&&jetzt-wb.cursorT<700)return;
  if(weg&&wb.cursorWeg)return;
  wb.cursorT=jetzt;wb.cursorWeg=!!weg;
- setDoc(doc(db,"whiteboardPresence",`${wb.id}_${currentUser.uid}`),{boardId:wb.id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Mitglied",seen:jetzt,cx:weg?null:Math.round(pt.x),cy:weg?null:Math.round(pt.y),cs:jetzt},{merge:true}).catch(()=>{});
+ setDoc(doc(db,"whiteboardPresence",`${wb.id}_${currentUser.uid}`),{boardId:wb.id,uid:currentUser.uid,name:anzeigeName(profile,currentUser),seen:jetzt,cx:weg?null:Math.round(pt.x),cy:weg?null:Math.round(pt.y),cs:jetzt},{merge:true}).catch(()=>{});
 }
 function wbCursorZeichnen(ohneAnim){
  if(!wb)return;
@@ -11875,7 +11996,7 @@ function wbOnlineZeichnen(){
 }
 function wbPresenzSchreiben(){
  if(!wb)return;
- setDoc(doc(db,"whiteboardPresence",`${wb.id}_${currentUser.uid}`),{boardId:wb.id,uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Mitglied",seen:Date.now()},{merge:true}).catch(()=>{});
+ setDoc(doc(db,"whiteboardPresence",`${wb.id}_${currentUser.uid}`),{boardId:wb.id,uid:currentUser.uid,name:anzeigeName(profile,currentUser),seen:Date.now()},{merge:true}).catch(()=>{});
 }
 
 // ---- Start und Ende ----
@@ -12366,7 +12487,7 @@ function wbNamenModal(id){
  $("wbNamenKlasse").addEventListener("click",async()=>{
   try{
    const s=await getDocs(collection(db,"profilePublic"));
-   const n=s.docs.map(d=>d.data()).filter(u=>u.status==="approved"&&u.role==="student"&&istKlasse12Sb(u)).map(u=>wbKurz(u.displayName)||u.displayName).filter(Boolean).sort((a,b)=>a.localeCompare(b,"de"));
+   const n=s.docs.map(d=>d.data()).filter(u=>u.status==="approved"&&u.role==="student"&&istKlasse12Sb(u)).map(u=>anzeigeName(u)).filter(Boolean).sort((a,b)=>a.localeCompare(b,"de"));
    $("wbNamenText").value=n.join("\n");toast(`${n.length} Namen geladen. Prüfe die Liste und speichere.`);
   }catch(e){toast("Die Klassenliste konnte nicht geladen werden.");}
  });
@@ -12639,7 +12760,7 @@ async function addWordcloud(){
  await addDoc(collection(db,"wordclouds"),{
  title,description,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Wortwolke gestartet.");
@@ -12848,7 +12969,7 @@ async function addKanbanBoard(){
  await addDoc(collection(db,"kanbanBoards"),{
  title,description,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Kanban-Board angelegt.");
@@ -12921,7 +13042,7 @@ async function addKanbanCard(){
  await addDoc(collection(db,"kanbanCards"),{
  boardId:activeKanbanId,title,description,assignedTo,status:"offen",
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp(),updatedAt:serverTimestamp()
  });
  closeModal();await render();toast("Aufgabe angelegt.");showMotivationsBild(false,"team");
@@ -13075,7 +13196,7 @@ async function addTermPoll(){
  await addDoc(collection(db,"termPolls"),{
  title,description,slots,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Terminfindung gestartet.");
@@ -13091,7 +13212,7 @@ async function saveTermVote(pollId){
  try{
  await setDoc(doc(db,"termVotes",`${pollId}_${currentUser.uid}`),{
  pollId,uid:currentUser.uid,
- name:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ name:anzeigeName(profile,currentUser),
  slotIds:checked,
  updatedAt:serverTimestamp()
  });
@@ -13218,7 +13339,7 @@ async function addTeamAd(){
  await addDoc(collection(db,"teamAds"),{
  title,description,spotsNeeded,
  authorUid:currentUser.uid,
- authorName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ authorName:anzeigeName(profile,currentUser),
  interested:[],
  createdAt:serverTimestamp()
  });
@@ -13238,7 +13359,7 @@ async function toggleTeamInterest(id){
  const data=snap.data()||{};
  const interested=Array.isArray(data.interested)?data.interested:[];
  const already=interested.find(i=>i.uid===currentUser.uid);
- const me={uid:currentUser.uid,name:profile?.displayName||currentUser.email||"Campus-Mitglied"};
+ const me={uid:currentUser.uid,name:anzeigeName(profile,currentUser)};
  if(already) await updateDoc(ref,{interested:arrayRemove(already)});
  else await updateDoc(ref,{interested:arrayUnion(me)});
  await render();
@@ -13295,7 +13416,7 @@ async function submitReport(){
  targetPreview:target.preview,
  reason,resolved:false,
  reportedBy:currentUser.uid,
- reportedByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ reportedByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();
@@ -13439,7 +13560,7 @@ async function addChecklist(){
  await addDoc(collection(db,"checklists"),{
  title,description,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Checkliste angelegt.");
@@ -13503,7 +13624,7 @@ async function addChecklistItem(){
  await addDoc(collection(db,"checklistItems"),{
  checklistId:activeChecklistId,text,done:false,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Eintrag hinzugefügt.");showMotivationsBild(false,"team");
@@ -13519,7 +13640,7 @@ async function toggleChecklistItem(id,checked){
  await updateDoc(doc(db,"checklistItems",id),{
  done:Boolean(checked),
  doneBy:checked?currentUser.uid:"",
- doneByName:checked?(profile?.displayName||currentUser.email||"Campus-Mitglied"):"",
+ doneByName:checked?(anzeigeName(profile,currentUser)):"",
  updatedAt:serverTimestamp()
  });
  await render();
@@ -13668,7 +13789,7 @@ async function addAmpelRound(){
  await addDoc(collection(db,"ampelRounds"),{
  title,description,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Runde gestartet.");
@@ -13712,7 +13833,7 @@ async function setAmpelResponse(roundId,value){
  try{
  await setDoc(doc(db,"ampelResponses",`${roundId}_${currentUser.uid}`),{
  roundId,uid:currentUser.uid,
- name:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ name:anzeigeName(profile,currentUser),
  value,updatedAt:serverTimestamp()
  });
  await render();
@@ -13882,7 +14003,7 @@ async function addPoll(){
  await addDoc(collection(db,"polls"),{
  question,description,options,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Umfrage gestartet.");
@@ -13929,7 +14050,7 @@ async function savePollVote(pollId){
  try{
  await setDoc(doc(db,"pollVotes",`${pollId}_${currentUser.uid}`),{
  pollId,uid:currentUser.uid,
- name:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ name:anzeigeName(profile,currentUser),
  optionId:checked.value,updatedAt:serverTimestamp()
  });
  await render();
@@ -14030,7 +14151,7 @@ async function pickRandomStudent(){
  const pick=pool[Math.floor(Math.random()*pool.length)];
  if(!remaining.length)pickedStudentUids=[];
  pickedStudentUids.push(pick.uid);
- lastPickedStudentName=pick.displayName||pick.email||"Campus-Mitglied";
+ lastPickedStudentName=anzeigeName(pick);
  await render();
  }catch(e){console.error("Zufallsauswahl:",e);toast("Auswahl war nicht möglich.")}
 }
@@ -14067,7 +14188,7 @@ async function addRandomList(){
  await addDoc(collection(db,"randomPickerLists"),{
  title,items,lastPick:"",
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Liste angelegt.");
@@ -14335,7 +14456,7 @@ async function addZuordnung(){
  await addDoc(collection(db,"zuordnungen"),{
  title,description,paare,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Lehrkraft",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Zuordnungsübung angelegt.");
@@ -14482,7 +14603,7 @@ async function addDeck(){
  await addDoc(collection(db,"flashcardDecks"),{
  title,description,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Deck angelegt.");showMotivationsBild(false,"lernen");
@@ -14559,7 +14680,7 @@ async function addCard(){
  await addDoc(collection(db,"flashcards"),{
  deckId:activeDeckId,front,back,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();studyOrder=[];await render();showMotivationsBild(false,"lernen");toast("Karte hinzugefügt.");
@@ -14944,7 +15065,7 @@ async function addGlossaryEntry(){
  await addDoc(collection(db,"glossaryEntries"),{
  term,definition,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();showMotivationsBild(false,"lernen");toast("Begriff hinzugefügt.");
@@ -15220,7 +15341,7 @@ async function addEssayCase(){
  await addDoc(collection(db,"essayCases"),{
  title,lernbereich,quelle,aufgabenstellung,theoriePdfUrl,theorieinhalt,pdfUrl,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Lehrkraft",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Aufgabe angelegt.");
@@ -15252,7 +15373,7 @@ async function saveEssayEntry(caseId){
  try{
  await setDoc(doc(db,"essayEntries",`${caseId}_${currentUser.uid}`),{
  caseId,uid:currentUser.uid,
- name:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ name:anzeigeName(profile,currentUser),
  text,selfCheck,selfCheckAt:serverTimestamp(),updatedAt:serverTimestamp()
  },{merge:true});
  await render();
@@ -15395,7 +15516,7 @@ async function submitTeacherFeedback(){
  try{
  await updateDoc(doc(db,"essayEntries",id),{
  feedback,
- feedbackBy:profile?.displayName||currentUser.email||"Lehrkraft",
+ feedbackBy:anzeigeName(profile,currentUser),
  feedbackAt:serverTimestamp(),
  feedbackRequested:false
  });
@@ -15657,7 +15778,7 @@ async function getApprovedUserDirectory(){
  const snap=await getDocs(collection(db,"profilePublic"));
  return snap.docs.map(d=>({uid:d.id,...d.data()}))
  .filter(u=>u.uid!==currentUser.uid && u.status==="approved")
- .sort((a,b)=>String(a.displayName||a.email||"").localeCompare(String(b.displayName||b.email||""),"de"));
+ .sort((a,b)=>String(anzeigeName(a)).localeCompare(String(anzeigeName(b)),"de"));
  }catch(e){console.error("Nutzerverzeichnis:",e);return []}
 }
 
@@ -15741,7 +15862,7 @@ async function openNewMessagePicker(){
  <div class="form">
  <label>Empfänger:in<select id="messageRecipientSelect">
  <option value="">Bitte auswählen …</option>
- ${users.map(u=>`<option value="${u.uid}">${esc(u.displayName||u.email||"Campus-Mitglied")} ${u.role==="teacher"?"(Lehrkraft)":u.role==="admin"?"(Admin)":"(Schüler/in)"}</option>`).join("")}
+ ${users.map(u=>`<option value="${u.uid}">${esc(anzeigeName(u))} ${u.role==="teacher"?"(Lehrkraft)":u.role==="admin"?"(Admin)":"(Schüler/in)"}</option>`).join("")}
  </select></label>
  <div class="form-actions">
  <button class="secondary"onclick="closeModal()">Abbrechen</button>
@@ -15773,7 +15894,7 @@ async function openConversation(otherUid){
  const users=window.__messageDirectory||await getApprovedUserDirectory();
  const other=users.find(u=>u.uid===otherUid);
  activeConversationUid=otherUid;
- activeConversationName=other?.displayName||other?.email||"Campus-Mitglied";
+ activeConversationName=anzeigeName(other);
  messageReplyTo=null;editingMessageId=null;
  closeModal();
  await markConversationRead(otherUid);
@@ -15900,7 +16021,7 @@ async function sendMessage(){
  const convId=conversationIdFor(currentUser.uid,activeConversationUid);
  await addDoc(collection(db,"messages"),{
  conversationId:convId,
- fromUid:currentUser.uid,fromName:profile?.displayName||currentUser?.email||"Campus-Mitglied",
+ fromUid:currentUser.uid,fromName:anzeigeName(profile,currentUser),
  toUid:activeConversationUid,toName:activeConversationName||"Campus-Mitglied",
  text,
  replyToId:messageReplyTo?.id||null,
@@ -16066,7 +16187,7 @@ async function addBoard(){
  await addDoc(collection(db,"boards"),{
  title,description,
  createdBy:currentUser.uid,
- createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Pinnwand angelegt.");
@@ -16168,7 +16289,7 @@ async function addBoardPost(){
  await addDoc(collection(db,"boardPosts"),{
  boardId:activeBoardId,text,url,mediaType,color,
  authorUid:currentUser.uid,
- authorName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ authorName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp()
  });
  closeModal();await render();showMotivationsBild(false,"team");toast("Notiz angeheftet.");
@@ -16323,7 +16444,7 @@ function openCompetencyHelp(uid,name,competency){
 }
 async function createCompetencyHelpPost(uid,name,competency){
  const text=$("competencyHelpMessage")?.value.trim();if(!text){toast("Bitte kurz beschreiben, wobei du Hilfe brauchst.");return}
- try{await addDoc(collection(db,"posts"),{authorUid:currentUser.uid,authorName:profile?.displayName||currentUser?.email||"Campus-Mitglied",type:"question",text:"Hilfe gesucht bei „"+competency+"“ – @"+name+": "+text,likes:0,comments:[],createdAt:serverTimestamp()});closeModal();toast("Hilfeanfrage wurde im Campus-Forum erstellt.");}
+ try{await addDoc(collection(db,"posts"),{authorUid:currentUser.uid,authorName:anzeigeName(profile,currentUser),type:"question",text:"Hilfe gesucht bei „"+competency+"“ – @"+name+": "+text,likes:0,comments:[],createdAt:serverTimestamp()});closeModal();toast("Hilfeanfrage wurde im Campus-Forum erstellt.");}
  catch(e){console.error(e);toast("Hilfeanfrage konnte nicht erstellt werden.")}
 }
 async function renderJournal(){
@@ -16632,7 +16753,7 @@ async function getTeacherJournalData(){
  const us=await getDoc(doc(db,"profilePublic",uid));
  if(us.exists()){
  const u=us.data();
- users[uid]=u.displayName||u.email||uid;
+ users[uid]=anzeigeName(u)||uid;
  }
  }catch(e){
  console.warn("Profil konnte nicht geladen werden:",uid,e);
@@ -17644,7 +17765,7 @@ async function saveFPAQuestion(){
  try{
  await addDoc(collection(db,"fpaQuestions"),{
  module:"fpa",type:"question",title,text:textQ,context:$("fpaQContext")?.value.trim()||"",
- studentName:profile?.displayName||currentUser?.email||"Campus-Mitglied",
+ studentName:anzeigeName(profile,currentUser),
  createdBy:currentUser.uid,createdAt:serverTimestamp()
  });
  closeModal();await render();toast("Frage gespeichert.");
@@ -18213,7 +18334,7 @@ async function getUpcomingBirthdayInfo(){
 
  const todayPeople=users.filter(u=>String(u.birthday)===todayMMDD);
  if(todayPeople.length){
- const people=todayPeople.map(u=>({name:u.displayName||u.email||"Campus-Mitglied",uid:u.uid}));
+ const people=todayPeople.map(u=>({name:anzeigeName(u),uid:u.uid}));
  return {isToday:true,people,names:people.map(p=>p.name)};
  }
 
@@ -18225,7 +18346,7 @@ async function getUpcomingBirthdayInfo(){
  let next=new Date(today.getFullYear(),mm-1,dd);
  if(next<today)next=new Date(today.getFullYear()+1,mm-1,dd);
  const days=Math.round((next-today)/86400000);
- const person={name:u.displayName||u.email||"Campus-Mitglied",uid:u.uid};
+ const person={name:anzeigeName(u),uid:u.uid};
  if(days<bestDays){bestDays=days;bestGroup=[person];bestDate=next}
  else if(days===bestDays)bestGroup.push(person);
  });
@@ -18249,8 +18370,8 @@ async function getBirthdayEvents(){
  const dateStr=`${yearFor(mm)}-${String(mm).padStart(2,"0")}-${String(dd).padStart(2,"0")}`;
  return {
  start:dateStr,type:"geburtstag",
- person:u.displayName||u.email||"Campus-Mitglied",
- title:` ${u.displayName||u.email||"Campus-Mitglied"} hat Geburtstag`,
+ person:anzeigeName(u),
+ title:` ${anzeigeName(u)} hat Geburtstag`,
  description:"Herzlichen Glückwunsch von der ganzen F12Sb!"
  };
  }).filter(Boolean);
@@ -18433,7 +18554,7 @@ async function saveClassTeamUpdate(){
  date:$("ctDate")?.value||new Date().toISOString().slice(0,10),
  type:$("ctType")?.value||"info",title,text:body,
  followUp:$("ctFollowUp")?.value.trim()||"",
- authorUid:currentUser.uid,authorName:profile?.displayName||currentUser?.email||"Lehrkraft",
+ authorUid:currentUser.uid,authorName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp(),updatedAt:serverTimestamp()
  });
  closeModal();await render();toast("Information für das Klassenteam gespeichert.");
@@ -19552,36 +19673,16 @@ function lernstandBar(points,max=3){
  return`<span class="ls-mini-bar"><i style="width:${Math.round(p/max*100)}%"></i></span>`;
 }
 
-// ---- Klassenliste 12Sb (Nachname, Vorname) ----
-// Nur diese Personen zählen in Lernständen, Ergebnissen, Check-outs und Auslosungen als Schüler:innen.
-// Alle anderen Konten sind Lehrkräfte (oder Testkonten) und tauchen dort nicht auf.
-// Ein Namensteil mit * am Ende gilt als Wortanfang (bei gekürzten Nachnamen).
-// Neue Schüler:innen: hier eine Zeile ergänzen, z. B. ["Mustermann","Max"].
-const KLASSE_12SB=[
- ["Abou","El","Ibrahim"],["Atanasov","Pavel"],["Dekinger","Florian"],["Dreher","Paula"],["Eckert","Johanna"],
- ["Felber","Greta"],["Fleischhac*","Sophia"],["Köhler","Mia"],["Kubesch","Mia"],["Landua","Lukas"],
- ["Lange","Katharina"],["Lautner","Sophia"],["Nagel","Sophia"],["Ostler","Sophie"],["Randow","Amelia"],["Randow","Clay"],
- ["Richter","Laura"],["Rudolph","Alia"],["Rüggeberg","Amina"],["Schiller","Ronja"],["Sepp","Cosima"],
- ["Spöttel","Laura"],["Süß","Clara"],["Süß","Maya"]
-];
-function klassenNamensteile(s){
- return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
-  .replace(/ß/g,"ss").replace(/ae/g,"a").replace(/oe/g,"o").replace(/ue/g,"u").split(/[^a-z*]+/).filter(Boolean);
-}
-const KLASSE_12SB_TEILE=KLASSE_12SB.map(e=>klassenNamensteile(e.join(" ")));
-// true, wenn der Anzeigename alle Namensteile eines Listeneintrags enthält (Reihenfolge egal, Akzente egal, ü = ue, ö = oe, ä = ae)
-function istKlasse12Sb(u){
- const teile=klassenNamensteile((u&&(u.displayName||u.name))||"").map(x=>x.replace(/\*/g,""));
- if(!teile.length)return false;
- return KLASSE_12SB_TEILE.some(e=>e.every(x=>x.endsWith("*")?teile.some(t=>t.startsWith(x.slice(0,-1))):teile.includes(x)));
-}
+// ---- Klassenzugehörigkeit (Datenschutz: keine Namenslisten im Code) ----
+// Schüler:innen sind alle freigeschalteten Konten mit der Rolle "student". Lehrkräfte und Admins tauchen in Lernständen und Auswertungen nicht auf.
+function istKlasse12Sb(u){return !!u&&u.role!=="teacher"&&u.role!=="admin"}
 async function getAllUsersForLernstand(){
  if(!isTeacher()) throw new Error("Nur Lehrkräfte dürfen die Schülerübersicht öffnen.");
  try{
  const snap=await getDocs(collection(db,"users"));
  return snap.docs.map(d=>({uid:d.id,...d.data()}))
  .filter(u=>u.role!=="teacher"&&u.role!=="admin"&&istKlasse12Sb(u))
- .sort((a,b)=>String(a.displayName||a.email||"").localeCompare(String(b.displayName||b.email||""),"de"));
+ .sort((a,b)=>String(anzeigeName(a)).localeCompare(String(anzeigeName(b)),"de"));
  }catch(e){
  console.error("Schülerliste Lernstand:",e);
  return [];
@@ -19750,7 +19851,7 @@ async function submitLernstand(taskId,attempt){
  });
  if(missingOpen){toast("Bitte beantworte alle offenen Fragen, bevor du abgibst.");return}
  try{
- await addDoc(collection(db,"lernstandVersuche"),{uid:currentUser.uid,displayName:profile?.displayName||currentUser?.email||"Schüler/in",taskId:t.id,title:t.title,nr:t.nr,learningArea:t.learningArea,attempt,answers,competencies,kprimFeedback,total:autoPoints,status:"abgegeben",createdAt:serverTimestamp()});
+ await addDoc(collection(db,"lernstandVersuche"),{uid:currentUser.uid,displayName:anzeigeName(profile,currentUser),taskId:t.id,title:t.title,nr:t.nr,learningArea:t.learningArea,attempt,answers,competencies,kprimFeedback,total:autoPoints,status:"abgegeben",createdAt:serverTimestamp()});
  closeModal();
  showMotivationsBild(false,"abgabe");
  showLernstandSubmitFeedback(t,kprimFeedback,attempt);
@@ -19772,7 +19873,7 @@ async function openLernstandTeacherOverview(){
  const tasks=await getLernstandTasks(),students=await getAllUsersForLernstand(),attempts=await getAllLernstandAttempts();
  const completedFor=s=>tasks.filter(t=>attempts.some(a=>a.uid===s.uid&&a.taskId===t.id)).length;
  const gradedFor=s=>tasks.filter(t=>attempts.some(a=>a.uid===s.uid&&a.taskId===t.id&&a.status==="bewertet")).length;
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> LEHRKRAFT</div><h2>Schülerübersicht</h2><p>Hier siehst du, wer welche Lernstandsmessungen bereits abgegeben oder bewertet hat. Klicke einen Schüler an, um alle Details und die Kompetenzentwicklung zu öffnen.</p><div class="toolbar"><input class="search"id="lsStudentSearch"placeholder="Schüler/in suchen …"oninput="filterLernstandStudents()"></div><div class="ls-student-grid"id="lsStudentGrid">${students.map(s=>`<div class="ls-student-row"data-student-name="${esc((s.displayName||s.email||"").toLowerCase())}"><div><strong>${esc(s.displayName||s.email||"Schüler/in")}</strong><small>${completedFor(s)}/${tasks.length} Messungen abgegeben · ${gradedFor(s)}/${tasks.length} bewertet</small></div><button class="primary"onclick="openLernstandStudent('${s.uid}')">Einblick →</button></div>`).join("")||`<div class="empty">Keine Schülerprofile gefunden.</div>`}</div><div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> LEHRKRAFT</div><h2>Schülerübersicht</h2><p>Hier siehst du, wer welche Lernstandsmessungen bereits abgegeben oder bewertet hat. Klicke einen Schüler an, um alle Details und die Kompetenzentwicklung zu öffnen.</p><div class="toolbar"><input class="search"id="lsStudentSearch"placeholder="Schüler/in suchen …"oninput="filterLernstandStudents()"></div><div class="ls-student-grid"id="lsStudentGrid">${students.map(s=>`<div class="ls-student-row"data-student-name="${esc((anzeigeName(s)).toLowerCase())}"><div><strong>${esc(anzeigeName(s))}</strong><small>${completedFor(s)}/${tasks.length} Messungen abgegeben · ${gradedFor(s)}/${tasks.length} bewertet</small></div><button class="primary"onclick="openLernstandStudent('${s.uid}')">Einblick →</button></div>`).join("")||`<div class="empty">Keine Schülerprofile gefunden.</div>`}</div><div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
 }
 function filterLernstandStudents(){const q=($('lsStudentSearch')?.value||'').toLowerCase().trim();document.querySelectorAll('#lsStudentGrid .ls-student-row').forEach(r=>r.hidden=!!q&&!r.dataset.studentName.includes(q))}
 
@@ -19784,7 +19885,7 @@ async function openLernstandStudent(uid){
  const graded=attempts.filter(a=>a.status==="bewertet");
  const seriesByComp=LERNSTAND_COMPETENCIES.map(c=>({c,series:graded.map(a=>Number(a.competencies?.[c.id]??0))}));
  const avg=graded.length?((graded.reduce((n,a)=>n+((Number(a.total||0))/lernstandMaxPoints(a.taskId)),0)/graded.length)*100).toFixed(0):"—";
- modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> SCHÜLER · INDIVIDUELLER LERNSTAND</div><h2>${esc(s.displayName||s.email||"Schüler/in")}</h2><div class="ls-teacher-stats"><div class="card stat"><b>${attempts.length}</b><span>Versuche</span></div><div class="card stat"><b>${graded.length}</b><span>Bewertet</span></div><div class="card stat"><b>${avg}${avg==="—"?"":" %"}</b><span>Ø Erreichte Punkte</span></div><div class="card stat"><b>${graded.length?"Ja":"Nein"}</b><span>Kompetenzprofil</span></div></div><div class="ls-detail-grid"style="margin-top:14px"><section class="card"><div class="kicker">KOMPETENZENTWICKLUNG</div><h3>Fünf Dimensionen</h3>${seriesByComp.map(x=>{const last=x.series.length?x.series[x.series.length-1]:null;return`<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;gap:8px"><strong>${esc(x.c.label)}</strong><span>${last===null?"—":last+"/3"}</span></div>${last===null?"":lernstandBar(last,3)}</div>`}).join("")}</section><section class="card"><div class="kicker">FORTSCHRITT</div><h3>Lernstandsmessungen</h3><div class="ls-overview-scroll"><table class="ls-matrix"><thead><tr><th>#</th><th>Thema</th><th>Status</th><th>Punkte</th><th></th></tr></thead><tbody>${latestByTask.map(x=>`<tr><td>${x.t.nr}</td><td>${esc(x.t.title)}</td><td>${x.a?lernstandStatusPill(x.a.status):lernstandStatusPill("offen")}</td><td class="num">${x.a?.status==="bewertet"?`${x.a.total}/${lernstandMaxPoints(x.t.id)}`:"—"}</td><td>${x.a?`<button class="secondary"onclick="openLernstandTeacherAttempt('${x.a.id}')">Details</button>`:""}</td></tr>`).join("")}</tbody></table></div></section></div><div class="form-actions"><button class="secondary"onclick="openLernstandTeacherOverview()">← Schülerübersicht</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker"> SCHÜLER · INDIVIDUELLER LERNSTAND</div><h2>${esc(anzeigeName(s))}</h2><div class="ls-teacher-stats"><div class="card stat"><b>${attempts.length}</b><span>Versuche</span></div><div class="card stat"><b>${graded.length}</b><span>Bewertet</span></div><div class="card stat"><b>${avg}${avg==="—"?"":" %"}</b><span>Ø Erreichte Punkte</span></div><div class="card stat"><b>${graded.length?"Ja":"Nein"}</b><span>Kompetenzprofil</span></div></div><div class="ls-detail-grid"style="margin-top:14px"><section class="card"><div class="kicker">KOMPETENZENTWICKLUNG</div><h3>Fünf Dimensionen</h3>${seriesByComp.map(x=>{const last=x.series.length?x.series[x.series.length-1]:null;return`<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;gap:8px"><strong>${esc(x.c.label)}</strong><span>${last===null?"—":last+"/3"}</span></div>${last===null?"":lernstandBar(last,3)}</div>`}).join("")}</section><section class="card"><div class="kicker">FORTSCHRITT</div><h3>Lernstandsmessungen</h3><div class="ls-overview-scroll"><table class="ls-matrix"><thead><tr><th>#</th><th>Thema</th><th>Status</th><th>Punkte</th><th></th></tr></thead><tbody>${latestByTask.map(x=>`<tr><td>${x.t.nr}</td><td>${esc(x.t.title)}</td><td>${x.a?lernstandStatusPill(x.a.status):lernstandStatusPill("offen")}</td><td class="num">${x.a?.status==="bewertet"?`${x.a.total}/${lernstandMaxPoints(x.t.id)}`:"—"}</td><td>${x.a?`<button class="secondary"onclick="openLernstandTeacherAttempt('${x.a.id}')">Details</button>`:""}</td></tr>`).join("")}</tbody></table></div></section></div><div class="form-actions"><button class="secondary"onclick="openLernstandTeacherOverview()">← Schülerübersicht</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
 }
 
 // Lehrkraft-PDF: vollständiger Bewertungsbericht mit den tatsächlichen
@@ -19882,7 +19983,7 @@ let __campusRenderSeq=0;
 // Jede Seite (Schüler und Lehrkräfte) bekommt oben einen „← Zurück“-Knopf, der zur vorherigen Ebene bzw. Funktion führt.
 // Eigene Zurück-Knöpfe einer Seite (z. B. „← Unterricht“) bleiben erhalten; dann wird kein zweiter Knopf eingefügt.
 let NAV_STACK=[],NAV_CUR=null,NAV_SKIP=false;
-function navSnap(p){return{p,a:activeBoardId,b:activeFach,c:activePhaseDetail,d:activePPModul,e:activeWhiteboardId,f:activeWordcloudId,g:activeKanbanId,h:activeTermPollId,i:activeChecklistId,j:activeAmpelId,k:activePollId,l:activeZuordnungId,m:activeDeckId,n:activeEssayCaseId,o:activeConversationUid,q:activeConversationName};}
+function navSnap(p){return{p,a:activeBoardId,b:activeFach,c:activePhaseDetail,d:activePPModul,e:activeWhiteboardId,f:activeWordcloudId,g:activeKanbanId,h:activeTermPollId,i:activeChecklistId,j:activeAmpelId,k:activePollId,l:activeZuordnungId,m:activeDeckId,n:activeEssayCaseId,o:activeConversationUid,q:activeConversationName,r:activeKwThema,t:activeKwLb};}
 function navVerfolgen(p){
  const n=navSnap(p),k=JSON.stringify(n);
  if(NAV_SKIP){NAV_SKIP=false;NAV_CUR={n,k};return;}
@@ -19892,19 +19993,19 @@ function navVerfolgen(p){
 }
 function navZurueck(){
  const v=NAV_STACK.pop();
- if(!v){go("start");return;}
+ if(!v){go("news");return;}
  NAV_SKIP=true;
- activeBoardId=v.a;activeFach=v.b;activePhaseDetail=v.c;activePPModul=v.d;activeWhiteboardId=v.e;activeWordcloudId=v.f;activeKanbanId=v.g;activeTermPollId=v.h;activeChecklistId=v.i;activeAmpelId=v.j;activePollId=v.k;activeZuordnungId=v.l;activeDeckId=v.m;activeEssayCaseId=v.n;activeConversationUid=v.o;activeConversationName=v.q;
+ activeBoardId=v.a;activeFach=v.b;activePhaseDetail=v.c;activePPModul=v.d;activeWhiteboardId=v.e;activeWordcloudId=v.f;activeKanbanId=v.g;activeTermPollId=v.h;activeChecklistId=v.i;activeAmpelId=v.j;activePollId=v.k;activeZuordnungId=v.l;activeDeckId=v.m;activeEssayCaseId=v.n;activeConversationUid=v.o;activeConversationName=v.q;activeKwThema=v.r;activeKwLb=v.t;
  if(location.hash!=="#"+v.p)location.hash=v.p;else render();
 }
 window.navZurueck=navZurueck;
 function navZurueckLeiste(content,p,html){
- if(p==="start"||p==="whiteboard-board")return;   // Startseite: nichts zurück; Board-Ansicht hat eigenen Zurück-Knopf
+ if(p==="start"||p==="news"||p==="whiteboard-board")return;   // Startseite: nichts zurück; Board-Ansicht hat eigenen Zurück-Knopf
  if(/<button[^>]*>\s*(?:\u2190|&larr;)/.test(String(html||"").slice(0,3500)))return;   // Seite hat schon einen eigenen Zurück-Knopf
  if(!document.getElementById("navBackCss")){const st=document.createElement("style");st.id="navBackCss";st.textContent=".nav-back-bar{margin:0 0 12px}.nav-back{font-size:13px;padding:6px 14px;border-radius:999px}";document.head.appendChild(st);}
  const hatVerlauf=NAV_STACK.length>0;
  const bar=document.createElement("div");bar.className="nav-back-bar";
- bar.innerHTML=`<button type="button" class="secondary nav-back" onclick="${hatVerlauf?"navZurueck()":"go('start')"}">\u2190 ${hatVerlauf?"Zurück":"Startseite"}</button>`;
+ bar.innerHTML=`<button type="button" class="secondary nav-back" onclick="${hatVerlauf?"navZurueck()":"go('start')"}">\u2190 ${hatVerlauf?"Zurück":"Lernlandkarte"}</button>`;
  content.insertBefore(bar,content.firstChild);
 }
 async function render(){
@@ -19914,10 +20015,11 @@ async function render(){
  if(liveUnsubHeimat){liveUnsubHeimat();liveUnsubHeimat=null;}
  if(liveUnsubMiniKalender){liveUnsubMiniKalender();liveUnsubMiniKalender=null;}
  const seq=++__campusRenderSeq;
- const p=location.hash.replace("#","")||"start";
+ const p=location.hash.replace("#","")||"news";
  navVerfolgen(p);
+ if(["fach","faecher","start","lernstaende","kw-thema","kw-projekt","kw-checkouts","kw-fortschritt","unterricht-pp"].includes(p)&&typeof ppmLaden==="function")await ppmLaden().catch(()=>{});
  const pages={
- start:renderStart,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
+ start:renderKachelwand,news:renderStart,"kw-thema":renderKwThema,"kw-projekt":renderKwProjekt,"kw-checkouts":renderKwCheckouts,lernstaende:renderKwCheckouts,"kw-fortschritt":renderKwFortschritt,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
  faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,leistungsnachweis:renderLeistungsnachweis,didaktik:renderDidaktikKompass,
  ressourcen:renderRessourcenRoute,lernpfad:renderLernpfadRoute,forum:renderForum,"forum-board":renderForumBoard,"forum-nachrichten":renderForumMessages,
  pinnwand:renderPinnwandUebersicht,"pinnwand-board":renderPinnwandBoard,
@@ -19943,7 +20045,7 @@ async function render(){
  kompetenzprofil:()=>modulePlaceholder("Kompetenzprofil"),methoden:renderLernmethoden,lernstrategien:renderLernstrategienTest,metakognition:renderMetakognition,
  lerncoaching:renderLerncoaching
  };
- const fn=pages[p]||renderStart;
+ const fn=pages[p]||renderKachelwand;
  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",
  a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || (a.dataset.page==="lernwerkstatt" && ["unterricht-pp","faecher","fach","whiteboard","whiteboard-board","didaktik","tafel"].includes(p))));
  const content=$("content");
@@ -20316,7 +20418,7 @@ value="red">Handlungsbedarf</option></select></label><label>Nächste Schritte<te
 class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addTask()">Speichern</button></div></div>`);
 }
 async function addTask(){
- try{await addDoc(collection(db,"tasks"),{title:$("fTitle").value.trim()||"Neue Aufgabe",ownerName:$("fOwner").value.trim()||profile.displayName,ownerUid:currentUser.uid,deadline:cleanDateInput($("fDeadline").
+ try{await addDoc(collection(db,"tasks"),{title:$("fTitle").value.trim()||"Neue Aufgabe",ownerName:$("fOwner").value.trim()||anzeigeName(profile,currentUser),ownerUid:currentUser.uid,deadline:cleanDateInput($("fDeadline").
 value),status:$("fStatus").value,next:$("fNext").value.trim()||"Nächsten Schritt festlegen",createdBy:currentUser.uid,createdAt:serverTimestamp()});closeModal();await render();toast("Aufgabe gespeichert.");showMotivationsBild(false,"planung")}catch(e){toast("Speichern nicht möglich.");console.error(e)}
 }
 function openNewsForm(){
@@ -20328,7 +20430,7 @@ async function addNews(){
  if(!isTeacher()){toast("Nur Lehrkräfte können News veröffentlichen.");return}
  const title=$("newsTitle")?.value.trim()||"",text=$("newsText")?.value.trim()||"";
  if(!title||!text){toast("Bitte Überschrift und News eingeben.");return}
- try{await addDoc(collection(db,"news"),{authorUid:currentUser.uid,authorName:profile?.displayName||currentUser?.email||"Lehrkraft",title,text,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});closeModal();await render();toast("News veröffentlicht.")}catch(e){console.error(e);toast("News konnte nicht veröffentlicht werden.")}
+ try{await addDoc(collection(db,"news"),{authorUid:currentUser.uid,authorName:anzeigeName(profile,currentUser),title,text,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});closeModal();await render();toast("News veröffentlicht.")}catch(e){console.error(e);toast("News konnte nicht veröffentlicht werden.")}
 }
 
 // ---- Emoji-Picker (wiederverwendbar für Forum-Beiträge und Nachrichten) --
@@ -20375,7 +20477,7 @@ Projekt</option><option value="practice"> Praxis</option></select></label><label
 async function addPost(){
  const text=$("pText").value.trim();if(!text){toast("Bitte Beitrag eingeben.");return}
  try{await addDoc(collection(db,"posts"),
-{authorUid:currentUser.uid,authorName:profile.displayName,type:$("pType").value,text,likes:0,comments:
+{authorUid:currentUser.uid,authorName:anzeigeName(profile,currentUser),type:$("pType").value,text,likes:0,comments:
 [],createdAt:serverTimestamp()});closeModal();await render();toast("Beitrag veröffentlicht.");showMotivationsBild(false,"team")}catch(e){toast("Beitrag konnte nicht gespeichert werden.");console.error(e)}
 }
 async function likePost(id){
@@ -20411,7 +20513,7 @@ async function likePost(id){
  }
 } async function commentPost(id){
  const input=$("comment-"+id), text=input.value.trim();if(!text)return;
- try{await updateDoc(doc(db,"posts",id),{comments:arrayUnion({uid:currentUser.uid,name:profile.displayName,text,createdAt:new
+ try{await updateDoc(doc(db,"posts",id),{comments:arrayUnion({uid:currentUser.uid,name:anzeigeName(profile,currentUser),text,createdAt:new
 Date().toISOString()})});await render()}catch(e){toast("Antwort konnte nicht gespeichert werden.")}
 }
 function focusComment(id){setTimeout(()=>{const e=$("comment-"+id);if(e)
@@ -20512,7 +20614,7 @@ async function addJournal(){
  try{
  await addDoc(collection(db,"journal"),{
  uid:currentUser.uid,
- displayName:profile?.displayName||currentUser?.email||"Campus-Mitglied",
+ displayName:anzeigeName(profile,currentUser),
  title,
  journalDate,
  goalAchieved,
@@ -20616,7 +20718,7 @@ async function printJournalEntry(id){
  "Lernjournal – "+(j.title||"Reflexion"),
  [{
  uid:currentUser.uid,
- name:profile?.displayName||currentUser?.email||"Schüler/in",
+ name:anzeigeName(profile,currentUser),
  entries:[j]
  }]
  );
@@ -20638,7 +20740,7 @@ async function printMyJournals(){
  "Meine Lernjournale",
  [{
  uid:currentUser.uid,
- name:profile?.displayName||currentUser?.email||"Schüler/in",
+ name:anzeigeName(profile,currentUser),
  entries
  }]
  );
@@ -20663,7 +20765,7 @@ function openCompetenceForm(){
 async function addCompetence(){
  const name=$("cName")?.value.trim();if(!name){toast("Bitte eine Kompetenz eintragen.");return}
  try{
- await addDoc(collection(db,"competencies"),{uid:currentUser.uid,ownerName:profile?.displayName||currentUser?.email||"Campus-Mitglied",name,category:$("cCategory").value,level:Math.max(1,Math.min(5,Number($("cLevel").value)||1)),description:$("cDescription").value.trim()||"",canHelp:Boolean($("cCanHelp").checked),helpText:$("cHelpText").value.trim()||"",createdAt:serverTimestamp()});
+ await addDoc(collection(db,"competencies"),{uid:currentUser.uid,ownerName:anzeigeName(profile,currentUser),name,category:$("cCategory").value,level:Math.max(1,Math.min(5,Number($("cLevel").value)||1)),description:$("cDescription").value.trim()||"",canHelp:Boolean($("cCanHelp").checked),helpText:$("cHelpText").value.trim()||"",createdAt:serverTimestamp()});
  closeModal();await render();showMotivationsBild(false,"ich");toast("Kompetenz ins Netzwerk aufgenommen.");
  }catch(e){console.error("Kompetenz speichern:",e);toast("Kompetenz konnte nicht gespeichert werden.")}
 }
@@ -20721,7 +20823,7 @@ async function addCalendar(){
  if(!title){toast("Bitte einen Titel eingeben.");return}
  if(!date){toast("Bitte ein Datum auswählen.");return}
  const payload={title,date,start:date,type,time,location,description,
- createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Campus-Mitglied",
+ createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),
  createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
  const btn=$("calendarSaveBtn");if(btn){btn.disabled=true;btn.textContent="Speichert …"}
  try{
@@ -20810,6 +20912,7 @@ async function init(){
  currentUser=user;
  if(!user){profile=null;notenLiveZuruecksetzen();showAuth();return}
  $("authError").textContent="Angemeldet – Profil wird geladen …";
+ if(codeRegPromise){try{await codeRegPromise}catch(e){return}}
  try{
  await ensureProfile(user);
 
@@ -20832,6 +20935,7 @@ if(profile.status === "blocked"){
  }
 
  showApp();
+ if(!profile.pseudonym)pseudonymWaehlenModal();
  lrLinkVerarbeiten().catch(e=>console.error("Rallye-Link:",e));
 }
  catch(e){console.error(e);showAuth();$("authError").textContent="Benutzerprofil konnte nicht geladen werden."+(e?.code?" ("+e.code+")":"")}
@@ -20842,6 +20946,344 @@ if(profile.status === "blocked"){
  $("authError").textContent="Firebase konnte nicht geladen werden. Der Reiter „Konto erstellen“ sollte trotzdem funktionieren.";
  }
 }
+
+/* =========================================================
+ KACHELWAND – Startseite der F12Sb (nur Pädagogik/Psychologie)
+ Startseite: vier Lernbereichs-Kacheln mit Bausteinen und Fortschrittsbalken.
+ Projektseite (kw-projekt), Themenseite (kw-thema), Sammlung der Check-outs (kw-checkouts),
+ Lehrkräfte-Übersicht „Erledigt?“ (kw-fortschritt).
+ Datenquellen: KW_PHASEN / KW_THEMEN (Lehrplan), ppModule (Bausteine der Lehrkräfte),
+ lehrplanMaterialien (Dateien je Thema), lehrplanFortschritt, checkouts, lernstand*.
+ ========================================================= */
+// ---- Lehrplan 12. Klasse (LehrplanPLUS FOS, Pädagogik/Psychologie, Fassung gültig ab 2018/19) ----
+// Vier Lernbereiche; die Themen folgen den Inhalten des Lehrplans. Zeiträume ergeben sich aus dem Stoffverteilungsplan (PP12_PLAN).
+const KW_THEMEN=[
+ {id:"t12_1_1",lbNum:1,nr:"1",kurz:"Entwicklungsbegriff und Entwicklungsbedingungen",thema:"Entwicklungsbegriff und Entwicklungsbedingungen: Anlage, Umwelt, Selbststeuerung",planung:"Merkmale von Entwicklung beschreiben; Anlage, Umwelt und Selbststeuerung mit ihren Wechselwirkungen erläutern; entwicklungsfördernde und -hemmende Erziehungseinflüsse analysieren."},
+ {id:"t12_1_2",lbNum:1,nr:"2",kurz:"Freud: Instanzenmodell",thema:"Psychoanalytische Entwicklungstheorie nach Freud: topografisches Modell, Trieblehre, Instanzenmodell",planung:"Topografisches Modell, Trieblehre und Instanzenmodell (Es, Ich, Über-Ich) erklären."},
+ {id:"t12_1_3",lbNum:1,nr:"3",kurz:"Freud: Psychosexuelle Entwicklung",thema:"Freud: Psychosexuelle und Persönlichkeitsentwicklung",planung:"Phasen der psychosexuellen Entwicklung und Fixierung erklären; Konsequenzen für die Erziehung ableiten."},
+ {id:"t12_1_4",lbNum:1,nr:"4",kurz:"Freud: Abwehrmechanismen",thema:"Freud: Abwehrmechanismen als Ich-Funktion",planung:"Verdrängung, Projektion, Fixierung, Regression und Identifikation an Fallbeispielen erkennen und erklären."},
+ {id:"t12_1_5",lbNum:1,nr:"5",kurz:"Freud: Kritische Würdigung",thema:"Freud: Kritische Würdigung der Theorie",planung:"Erklärungswert und Grenzen der Theorie aufzeigen, z. B. fehlende empirische Überprüfbarkeit der psychosexuellen Entwicklung."},
+ {id:"t12_1_6",lbNum:1,nr:"6",kurz:"Bindung: Begriff, Phasen, Typen",thema:"Sozialemotionale Entwicklung: Bindungsbegriff, Phasen der Bindungsentwicklung, Bindungstypologie",planung:"Bindungsbegriff, Phasen der Bindungsentwicklung und Bindungstypen unterscheiden; eigene Bindungsstile reflektieren."},
+ {id:"t12_1_7",lbNum:1,nr:"7",kurz:"Primäre und sekundäre Bindungen",thema:"Primäre und sekundäre Bindungsbeziehungen (Jugend und Erwachsenenalter nach Ahnert)",planung:"Bindungsbeziehungen in Jugend und Erwachsenenalter nach Ahnert beschreiben."},
+ {id:"t12_1_8",lbNum:1,nr:"8",kurz:"Bindungsförderung (Frühpädagogik)",thema:"Frühpädagogische Überlegungen zur Förderung gelungener Bindung",planung:"Frühpädagogische Ansätze zur Bindungsförderung betrachten und auf pädagogische Situationen anwenden."},
+ {id:"t12_1_9",lbNum:1,nr:"9",kurz:"Lebensspanne nach Baltes",thema:"Entwicklungsanforderungen in der Lebensspanne nach Baltes (Jugend, frühes Erwachsenenalter)",planung:"Entwicklungsanforderungen aus einem Lebensabschnitt benennen und Handlungskonsequenzen für Lebensführung und pädagogische Situationen ableiten."},
+ {id:"t12_1_10",lbNum:1,nr:"10",kurz:"Vulnerabilität und Resilienz",thema:"Vulnerabilität und Resilienz: Schutzfaktoren",planung:"Risikofaktoren, Vulnerabilität und Resilienz erklären; Schutzfaktoren wie soziale Unterstützung, Peerkontakte, Selbstwertgefühl und Selbstwirksamkeit nennen."},
+ {id:"t12_2_1",lbNum:2,nr:"1",kurz:"Persönlichkeit: Begriff und Merkmale",thema:"Persönlichkeit: Begriff und Merkmale (Stabilität, Veränderbarkeit, Einzigartigkeit)",planung:"Stabilität, Veränderbarkeit und Einzigartigkeit als Merkmale der Persönlichkeit erkennen."},
+ {id:"t12_2_2",lbNum:2,nr:"2",kurz:"Big Five",thema:"Persönlichkeitsstruktur: Big Five nach Costa und McCrae, Persönlichkeitsinventare",planung:"Die Big Five zur Beschreibung der Persönlichkeitsstruktur nutzen und ihre Bedeutung für Erleben und Verhalten deuten."},
+ {id:"t12_2_3",lbNum:2,nr:"3",kurz:"Rogers: Aktualisierung und Bewertung",thema:"Personenzentrierte Theorie nach Rogers: Aktualisierungstendenz, organismischer Bewertungsprozess, Bewertungsbedingungen",planung:"Aktualisierungstendenz, organismischen Bewertungsprozess und Bewertungsbedingungen erklären."},
+ {id:"t12_2_4",lbNum:2,nr:"4",kurz:"Rogers: Selbstkonzept, Kongruenz",thema:"Rogers: Selbst und Selbstkonzept, Kongruenz und Inkongruenz, Selbstachtung",planung:"Real- und Idealselbst, Kongruenz und Inkongruenz, Wahrnehmungsverzerrung und -verleugnung erklären; Bedeutung für Erziehung, Beratung und Therapie."},
+ {id:"t12_2_5",lbNum:2,nr:"5",kurz:"Bandura: Erwartungen",thema:"Sozialkognitive Theorie nach Bandura: Überzeugungen, Selbstwirksamkeits-, Ergebnis- und Kompetenzerwartungen",planung:"Überzeugungen und die drei Erwartungsarten unterscheiden und an Beispielen anwenden."},
+ {id:"t12_2_6",lbNum:2,nr:"6",kurz:"Bandura: Selbstregulation",thema:"Bandura: Selbstregulation (Self-Evaluative- und Self-Efficacy-Mechanismen)",planung:"Selbstregulation erklären und die Veränderbarkeit von Selbstwirksamkeitserwartungen erkennen."},
+ {id:"t12_2_7",lbNum:2,nr:"7",kurz:"Identität und Marcia",thema:"Identitätsfindung: Begriff Identität, Identitätsmodell nach Marcia",planung:"Diffuse, übernommene, Moratorium und erarbeitete Identität am Beispiel aus dem Jugendalter verdeutlichen."},
+ {id:"t12_3_1",lbNum:3,nr:"1",kurz:"Berufsfeld und Aufgabenbereiche",thema:"Aufgabenbereiche Sozialer Arbeit: Sozialhilfe, Gesundheits- und Altenhilfe, Kinder- und Jugendhilfe",planung:"Berufsfeld Soziale Arbeit überblicken und Aufgabenbereiche unterscheiden."},
+ {id:"t12_3_2",lbNum:3,nr:"2",kurz:"Verhaltensorientierte Einzelhilfe",thema:"Verhaltensorientiertes Konzept der Einzelhilfe: Analyse, Planung, Verhaltensmodifikation, Evaluation",planung:"Für eine psychosoziale Problemstellung ein Handlungskonzept auf Grundlage einer Lerntheorie entwickeln."},
+ {id:"t12_3_3",lbNum:3,nr:"3",kurz:"Life Model",thema:"Life Model nach Germain und Gitterman: Ökologie, Transaktion, Anpassung, Lebensstress, Coping, Ressourcen",planung:"Austausch- und Anpassungsprozesse zwischen Mensch und Umwelt erläutern; Ressourcen und Coping nutzen."},
+ {id:"t12_3_4",lbNum:3,nr:"4",kurz:"Thiersch: Lebenswelt und Analyse",thema:"Lebensweltorientierte Soziale Arbeit nach Thiersch: Lebenswelt und Dimensionen der Analyse",planung:"Erfahrene Zeit, erfahrenen Raum, soziale Bezüge, Bewältigungsaufgaben und Hilfe zur Selbsthilfe an einem Fall analysieren."},
+ {id:"t12_3_5",lbNum:3,nr:"5",kurz:"Thiersch: Handlungsmaximen",thema:"Thiersch: Struktur- und Handlungsmaximen",planung:"Prävention, Alltagsnähe, Regionalisierung, Integration, Partizipation und Vernetzung erklären und anwenden."},
+ {id:"t12_4_1",lbNum:4,nr:"1",kurz:"Kommunikation, Interaktion, Organon-Modell",thema:"Soziale Kommunikation und Interaktion; Organon-Modell nach Bühler",planung:"Begriffe soziale Kommunikation und soziale Interaktion unterscheiden; Funktionen von Kommunikation am Organon-Modell erklären."},
+ {id:"t12_4_2",lbNum:4,nr:"2",kurz:"Watzlawick: Axiome 1 bis 3",thema:"Kommunikationstheorie nach Watzlawick: Axiome 1 bis 3 und ihre Störungen",planung:"Situationen mit den ersten drei Axiomen analysieren und Entstehung von Kommunikationsstörungen erklären."},
+ {id:"t12_4_3",lbNum:4,nr:"3",kurz:"Watzlawick: Axiome 4 und 5",thema:"Watzlawick: Axiome 4 und 5, gelungene Kommunikation",planung:"Digitale und analoge Modalität sowie symmetrische und komplementäre Beziehungen analysieren; gelungene Kommunikation beschreiben."},
+ {id:"t12_4_4",lbNum:4,nr:"4",kurz:"Kommunikationstechniken",thema:"Kommunikationstechniken: Metakommunikation, Ich-Botschaften, aktives Zuhören, Feedback",planung:"Techniken für erfolgreiche Konfliktgespräche aufzeigen und das eigene Kommunikationsverhalten reflektieren."},
+ {id:"t12_4_5",lbNum:4,nr:"5",kurz:"Kulturelle Unterschiede",thema:"Missverständnisse durch kulturspezifische Unterschiede in der Kommunikation",planung:"Werte, Normen, verbale und nonverbale Codes sowie kulturelle Ausdrucksformen in interkulturellen Situationen verständnisvoll berücksichtigen."},
+ {id:"t12_4_6",lbNum:4,nr:"6",kurz:"Kommunikation in digitalen Medien",thema:"Kommunikation in digitalen Medien: Besonderheiten und Gefährdungen",planung:"Besonderheiten digitaler Kommunikation erklären; Gefährdungen wie Datenmissbrauch, Cybermobbing und Vernachlässigung realer Beziehungen erkennen."}
+].map(e=>({...e,phase:"lb"+e.lbNum}));
+const KW_PROJEKTTITEL={1:"Lernrallye: Psychosexuelle Entwicklung",2:"Mein Selbstkonzept: Persönlichkeit und Identität untersucht",3:"Soziale Arbeit in der Region: Arbeitsfeld erkunden",4:"Kommunikation im Alltag analysieren"};
+const KW_PHASEN=[1,2,3,4].map(n=>{
+ const tage=PP12_BASIS.filter(e=>e.lb===n).map(e=>e.d).sort();
+ const start=tage[0]||PP12_START,end=tage[tage.length-1]||start;
+ return{id:"lb"+n,lb:"LB "+n,lbNum:n,lbTitel:PP12_LB[n].titel,titel:KW_PROJEKTTITEL[n],start,end,projektStart:start,projektEnde:end,
+  startSw:pp12Montag(start),notwendigeWochen:[],projektWocheId:"team_lb"+n,meilensteine:[]};
+});
+const KW_FARBEN={1:{c:"#2F6AAA",bg:"#E4EEF9",t:"#25588F"},2:{c:"#7650A5",bg:"#EEE7F7",t:"#5E3E8A"},3:{c:"#2E7D57",bg:"#E0F2E8",t:"#1F6B47"},4:{c:"#B5622A",bg:"#FAEBDD",t:"#8A4A1D"}};
+const KW={mat:{},fort:{},co:null,geladen:0};
+let activeKwThema=null,activeKwLb=null;
+// Reihenfolge der Dateien auf jeder Themenseite (immer gleich)
+const KW_KAT=[
+ {key:"lehrtext",label:"Lehrtexte",hint:"Texte zum Nachlesen und Erarbeiten"},
+ {key:"checkin",label:"Check-In",hint:"Einstiegstest: Was weißt du schon?"},
+ {key:"arbeitsblatt",label:"Arbeitsblätter",hint:"Zum Bearbeiten im Unterricht"},
+ {key:"uebung",label:"Übungsaufgaben",hint:"Zum Üben und Festigen"},
+ {key:"vertiefung",label:"Vertiefungsaufgaben",hint:"In drei Schwierigkeitsgraden",stufen:[["vertiefung1","Stufe 1 · grundlegend"],["vertiefung2","Stufe 2 · erweitert"],["vertiefung3","Stufe 3 · anspruchsvoll"]]},
+ {key:"tafel",label:"Digitale Tafeln",hint:"Tafelbilder zur Stunde",board:true},
+ {key:"lernuebersicht",label:"Lernübersichten",hint:"Das Wichtigste auf einen Blick",board:true}
+];
+const KW_BAUSTEINE={selbstlern:["Selbstlernkurs","slk"],stunde:["Deeper-Learning-Einheit","std"],rallye:["Lernrallye","ral"],kprim:["KPrim-Test / Check-out","chk"],apt:["Prüfungstraining","ueb"],einfuehrung:["Einführung","slk"]};
+function kwKurz(e){return e.kurz||e.thema}
+function kwThemenVonPhase(ph){return KW_THEMEN.filter(e=>e.phase===ph.id)}
+function kwThemaById(id){return KW_THEMEN.find(e=>e.id===id)||null}
+function kwPhase(lbNum){return KW_PHASEN.find(p=>p.lbNum===Number(lbNum))||null}
+function kwFarbe(lbNum){return KW_FARBEN[lbNum]||KW_FARBEN[1]}
+async function kwLaden(){
+ await ppmLaden().catch(()=>{});
+ KW.mat={};KW.fort={};
+ try{(await getDocs(collection(db,"lehrplanMaterialien"))).docs.forEach(d=>{const x={id:d.id,...d.data()};(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)})}catch(e){console.warn("Material:",e)}
+ if(!isTeacher()){
+  try{(await getDocs(query(collection(db,"lehrplanFortschritt"),where("uid","==",currentUser.uid)))).docs.forEach(d=>{KW.fort[d.id.slice(currentUser.uid.length+1)]=d.data()})}catch(e){console.warn("Fortschritt:",e)}
+  await ppmMeineLaden().catch(()=>{});
+ }
+ KW.co=await ladeCheckoutDaten().catch(()=>null);PPM.co=KW.co;
+ KW.geladen=Date.now();
+}
+function kwModuleThema(id){return PPM.liste.filter(m=>m.modul!=="projekt"&&m.modul!=="experiment"&&(m.themen||[]).includes(id))}
+function kwModuleLb(lb){return PPM.liste.filter(m=>Number(m.lb)===Number(lb)&&m.modul!=="projekt"&&m.modul!=="experiment")}
+function kwErledigt(id){const f=KW.fort[id];return !!(f&&f.abgeschlossen)}
+function kwBloecke(){
+ const out=[];let cur=null;
+ ppmZeitleiste().forEach(z=>{
+  if(z.art==="woche"){if(!cur){cur={nr:out.length+1,von:z.w.start,bis:z.w.end,n:0};out.push(cur)}cur.bis=z.w.end;cur.n++}
+  else cur=null;
+ });
+ return out;
+}
+function kwBlockText(von,bis){
+ const b=kwBloecke().filter(x=>x.von<=bis&&x.bis>=von).map(x=>x.nr);
+ return b.length?(b.length>1?"Block "+b[0]+(b.length>2?"–":" + ")+b[b.length-1]:"Block "+b[0]):"";
+}
+function kwHeroHTML(){
+ const heute=new Date().toISOString().slice(0,10),bl=kwBloecke();
+ const tage=(a,b)=>Math.round((new Date(b+"T12:00:00Z")-new Date(a+"T12:00:00Z"))/86400000);
+ const d=new Date();const wt=["So","Mo","Di","Mi","Do","Fr","Sa"][d.getDay()];
+ const kopf=`HEUTE · ${wt} ${d.getDate()}.${d.getMonth()+1}.`;
+ const jetzt=bl.find(b=>b.von<=heute&&b.bis>=heute),next=bl.find(b=>b.von>heute);
+ let zeile,zahl,einheit;
+ if(jetzt){zeile=`Aktueller Schulblock: Block ${jetzt.nr} bis ${fmtKurz(jetzt.bis)}`;zahl=Math.max(0,tage(heute,jetzt.bis));einheit="Tage noch"}
+ else if(next){const pr=null,fe=PP12_FERIEN.find(f=>f.start<=heute&&f.end>=heute);
+  zeile=`Nächster Schulblock: Block ${next.nr} ab ${fmtKurz(next.von)}`;zahl=tage(heute,next.von);einheit="Tage"
+  ;return`<div class="kw-hero"><div><div class="kw-hero-k">${kopf}${pr?" · "+esc(pr.titel).toUpperCase():(fe?" · "+esc(fe.titel).toUpperCase():"")}</div><div class="kw-hero-t">${zeile}</div></div><div class="kw-hero-z"><b>${zahl}</b><span>${einheit}</span></div></div>`}
+ else{zeile="Das Schuljahr ist beendet";zahl="";einheit=""}
+ return`<div class="kw-hero"><div><div class="kw-hero-k">${kopf}</div><div class="kw-hero-t">${zeile}</div></div>${zahl!==""?`<div class="kw-hero-z"><b>${zahl}</b><span>${einheit}</span></div>`:""}</div>`;
+}
+function kwKachelHTML(ph,lehrer){
+ const F=kwFarbe(ph.lbNum),themen=kwThemenVonPhase(ph),heute=new Date().toISOString().slice(0,10);
+ const n=themen.length;
+ const fertig=lehrer?themen.filter(e=>(KW.mat[e.id]||[]).length||kwModuleThema(e.id).length).length:themen.filter(e=>kwErledigt(e.id)).length;
+ const proz=n?Math.round(fertig/n*100):0;
+ const status=lehrer?"":(fertig===n&&n?"geschafft":(ph.start<=heute&&ph.end>=heute?"läuft gerade":(ph.start>heute?(proz?"begonnen":"folgt"):"offen")));
+ const naechst=!lehrer&&KW_PHASEN.filter(p=>p.end>=heute).sort((a,b)=>a.start.localeCompare(b.start))[0]===ph&&ph.start>heute;
+ const projM=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);
+ const projTitel=(projM&&projM.titel)||ph.titel;
+ // Bausteine, die die Lehrkräfte vorbereitet haben
+ const z={};kwModuleLb(ph.lbNum).forEach(m=>{z[m.modul]=(z[m.modul]||0)+1});
+ const nCo=KW.co&&KW.co.checkouts?KW.co.checkouts.filter(c=>Number(c.lbNum)===ph.lbNum).length:0;
+ if(nCo&&!z.kprim)z.kprim=nCo;
+ const chips=Object.entries(z).map(([k,v])=>{const b=KW_BAUSTEINE[k];return b?`<span class="chip ${b[1]}">${v} ${esc(b[0])}</span>`:""}).join("")||`<span class="kw-leer">Noch keine Bausteine vorbereitet</span>`;
+ const rows=themen.map(e=>{
+  const ok=!lehrer&&kwErledigt(e.id),nm=(KW.mat[e.id]||[]).length+kwModuleThema(e.id).length;
+  return`<button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx${ok?" d":""}"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span>${nm?`<small>${nm}</small>`:""}</button>`;
+ }).join("");
+ return`<article class="kw-tile${naechst?" kw-next":""}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
+  <header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${status?`<span class="kw-st">${naechst?"als Nächstes":status}</span>`:""}</header>
+  <button type="button" class="kw-proj" data-kw="projekt" data-lb="${ph.lbNum}"><span class="chip prj">Projekt</span><b>${esc(projTitel)}</b><small>${fmtKurz(ph.projektStart)}–${fmtKurz(ph.projektEnde)}</small></button>
+  <div class="kw-lab">${n} THEMEN · ${lehrer?fertig+" MIT MATERIAL":fertig+" ERLEDIGT"}</div>
+  <div class="kw-rows">${rows}</div>
+  <div class="kw-lab">BAUSTEINE DER LEHRKRÄFTE</div>
+  <div class="kw-chips">${chips}</div>
+  <footer class="kw-fuss"><div class="kw-bar" role="progressbar" aria-valuenow="${proz}" aria-valuemin="0" aria-valuemax="100" aria-label="${lehrer?"Vorbereitung":"Fortschritt"} Lernbereich ${ph.lbNum}"><i style="width:${proz}%"></i></div><span>${lehrer?"Vorbereitet":"Fortschritt"} ${proz} %</span></footer>
+ </article>`;
+}
+async function renderKachelwand(){
+ await kwLaden();
+ const lehrer=isTeacher();
+ const alle=KW_PHASEN.flatMap(kwThemenVonPhase);
+ const fertig=lehrer?alle.filter(e=>(KW.mat[e.id]||[]).length||kwModuleThema(e.id).length).length:alle.filter(e=>kwErledigt(e.id)).length;
+ const p=alle.length?Math.round(fertig/alle.length*100):0;
+ const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
+ const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#DCE9F5" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#3A8FD4" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
+ const links=lehrer
+  ?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände und Check-outs</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Campus-News und Termine</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
+  :`<button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Campus-News und Termine</button>`;
+ return`<div class="kw" id="kwRoot">
+  ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Lernlandkarte","Dein Weg durch das Schuljahr: vier Lernbereiche mit Projekt, Themen und Bausteinen.")}
+  <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
+  <div class="kw-links">${links}</div>
+  <div class="kw-wand">${KW_PHASEN.map(ph=>kwKachelHTML(ph,lehrer)).join("")}</div>
+ </div>${footer()}`;
+}
+/* ------------------------------------------------ Projektseite */
+async function renderKwProjekt(){
+ await kwLaden();
+ const ph=kwPhase(activeKwLb);if(!ph)return await renderKachelwand();
+ const F=kwFarbe(ph.lbNum),lehrer=isTeacher();
+ const pm=PPM.liste.filter(m=>(m.modul==="projekt"||m.modul==="experiment")&&Number(m.lb)===ph.lbNum);
+ const projM=pm.find(m=>m.modul==="projekt"&&!m.projektId);
+ const dateien=[];
+ pm.forEach(m=>(m.material||[]).forEach(x=>dateien.push({titel:x.titel||x.name||"Material",url:x.url,typ:x.typ})));
+ [ph.projektWocheId,...ph.notwendigeWochen].forEach(wid=>(KW.mat[wid]||[]).forEach(x=>dateien.push({titel:x.titel,url:x.url,typ:x.kategorie,id:x.id,wid})));
+ const themen=KW_THEMEN.filter(e=>e.phase===ph.id&&true);
+ const auftrag=ph.auftrag?`<div class="kw-card"><h3>Auftrag</h3><div class="kw-text">${esc(ph.auftrag.text||"").replace(/\n/g,"<br>")}</div></div>`:"";
+ const ms=(ph.meilensteine||[]).length?`<div class="kw-card"><h3>Meilensteine</h3><ol class="kw-ms">${ph.meilensteine.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`:"";
+ const dl=dateien.length?dateien.map(d=>kwDateiHTML(d.titel,d.url,d.id,d.wid)).join(""):`<div class="kw-leer">${lehrer?"Noch keine Projektdateien. Lade sie im Projektbaustein oder in den Themen hoch.":"Deine Lehrkraft hat noch keine Dateien eingestellt."}</div>`;
+ const start=ph.einstieg?`<button class="primary" data-kw="exp">Interaktive Stunde „Das Experiment“ starten</button>`:`<button class="primary" data-kw="projektstart" data-lb="${ph.lbNum}">${lehrer?"Projektseite öffnen":"Projekt starten"}</button>`;
+ return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
+  <button class="secondary" data-kw="wand">← Lernlandkarte</button>
+  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.projektStart,ph.projektEnde)||"")} · ${fmtKurz(ph.projektStart)}–${fmtKurz(ph.projektEnde)}</small><h1>${esc((projM&&projM.titel)||ph.titel)}</h1><p>${esc(ph.lbTitel)} · Projekt</p><div class="kw-aktionen">${start}</div></header>
+  ${auftrag}${ms}
+  <div class="kw-card"><h3>Dateien zum Projekt</h3><div class="kw-dateien">${dl}</div></div>
+  <div class="kw-card"><h3>Dafür brauchst du diese Themen</h3><div class="kw-rows">${themen.map(e=>`<button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx${kwErledigt(e.id)?" d":""}"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span></button>`).join("")||`<div class="kw-leer">Keine Themen hinterlegt.</div>`}</div></div>
+ </div>${footer()}`;
+}
+/* ------------------------------------------------ Themenseite */
+function kwDateiHTML(titel,url,id,wid){
+ const del=isTeacher()&&id?`<button type="button" class="kw-del" data-kw="matweg" data-id="${esc(id)}" data-w="${esc(wid)}" aria-label="Löschen">×</button>`:"";
+ let a;
+ if(String(url||"").startsWith("board:"))a=`<button type="button" class="kw-datei" data-kw="board" data-id="${esc(url.slice(6))}"><span>${esc(titel)}</span><small>Tafel öffnen</small></button>`;
+ else a=`<a class="kw-datei" href="${esc(url||"#")}" target="_blank" rel="noopener"><span>${esc(titel)}</span><small>${/^https?:\/\/[^/]*firebasestorage/.test(url||"")?"Datei":"Link"} öffnen</small></a>`;
+ return`<div class="kw-dz">${a}${del}</div>`;
+}
+function kwSekHTML(titel,hint,inner,addKat,lehrer,extraBtn){
+ return`<section class="kw-card kw-sek"><div class="kw-sek-kopf"><div><h3>${esc(titel)}</h3>${hint?`<small>${esc(hint)}</small>`:""}</div>${lehrer&&addKat?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${addKat}">+ hinzufügen</button>`:""}</div>${extraBtn||""}${inner}</section>`;
+}
+async function renderKwThema(){
+ await kwLaden();
+ const e=kwThemaById(activeKwThema);if(!e)return await renderKachelwand();
+ const ph=KW_PHASEN.find(p=>p.id===e.phase),F=kwFarbe(ph.lbNum),lehrer=isTeacher();
+ const mats=KW.mat[e.id]||[];
+ const liste=kat=>{const l=mats.filter(m=>m.kategorie===kat);return l.length?l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join(""):`<div class="kw-leer">${lehrer?"Noch nichts eingestellt.":"Noch nichts eingestellt."}</div>`};
+ const secs=KW_KAT.map(k=>{
+  let inner;
+  if(k.stufen)inner=k.stufen.map(([key,l])=>`<div class="kw-stufe"><b>${esc(l)}</b>${liste(key)}${lehrer?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${key}">+ hinzufügen</button>`:""}</div>`).join("");
+  else inner=`<div class="kw-dateien">${liste(k.key)}</div>`;
+  let extra="";
+  
+  return kwSekHTML(k.label,k.hint,inner,k.stufen?null:k.key,lehrer,extra);
+ }).join("");
+ // Variante der Lerneinheit mit Start
+ const mod=kwModuleThema(e.id);
+ const ea=await einarbeitungInfo(e.id).catch(()=>null);
+ const eaF=!lehrer?(await getLehrplanFortschritt(e.id)):{};
+ const karten=[];
+ if(ea&&!ea.entwurf)karten.push(`<div class="kw-baust"><span class="chip slk">Selbstlernkurs</span><b>${esc(ea.titel||kwKurz(e))}</b><small>${eaF.einarbeitungAbgeschlossen?"abgeschlossen":(ea.aufgaben?ea.aufgaben+" Aufgaben":"")}</small><button class="primary" data-kw="ea" data-id="${esc(e.id)}">${eaF.einarbeitungAbgeschlossen?"Nochmal ansehen":"Starten"}</button></div>`);
+ mod.forEach(m=>{const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);
+  karten.push(`<div class="kw-baust"><span class="chip ${T[1]}">${esc(T[0])}</span><b>${esc(m.titel||T[0])}</b><small>${f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):(m.start&&sw12ById(m.start)?"ab "+fmtKurz(sw12ById(m.start).start):"")}</small><button class="primary" data-kw="modul" data-id="${esc(m.id)}">${lehrer?"Öffnen":"Starten"}</button></div>`)});
+ const lerneinheit=kwSekHTML("Lerneinheit","Selbstlernkurs, Deeper-Learning-Stunde, Lernrallye oder anderes",
+  karten.length?`<div class="kw-baustliste">${karten.join("")}</div>`:`<div class="kw-leer">Für dieses Thema ist noch keine Lerneinheit ausgewählt.</div>`,null,lehrer,
+  lehrer?`<div class="kw-aktionen"><button class="secondary" data-kw="modulneu" data-id="${esc(e.id)}">Baustein einplanen</button><button class="secondary" data-kw="modulwahl" data-id="${esc(e.id)}">Vorhandenes Modul zuordnen</button></div>`:"");
+ // Check-out am Ende
+ const cos=KW.co&&KW.co.checkouts?KW.co.checkouts.filter(c=>Number(c.lbNum)===ph.lbNum):[];
+ const coInner=cos.length?cos.map(c=>{const a=(KW.co.meineAbgaben||{})[c.id];return`<div class="kw-dz"><button type="button" class="kw-datei" data-kw="checkouts"><span>${esc(coTitelAnzeige(c)||"Check-out")}</span><small>${a&&a.abgegeben?"abgegeben":(c.status==="live"?"läuft jetzt":(c.status==="beendet"?"beendet":"angelegt"))}</small></button></div>`}).join(""):`<div class="kw-leer">Die Lehrkraft legt den Check-out am Ende des Themas an.</div>`;
+ const checkout=kwSekHTML("Check-out","Abschlusstest der Lehrkraft am Ende des Themas",`<div class="kw-dateien">${coInner}</div>`,null,lehrer,`<div class="kw-aktionen"><button class="secondary" data-kw="checkouts">${lehrer?"Check-outs verwalten":"Alle meine Check-outs"}</button><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button></div>`);
+ const fertigBtn=lehrer?"":`<button type="button" class="kw-fertig${kwErledigt(e.id)?" an":""}" data-kw="fertig" data-id="${esc(e.id)}"><i class="kw-bx${kwErledigt(e.id)?" d":""}"></i>${kwErledigt(e.id)?"Thema erledigt":"Als erledigt markieren"}</button>`;
+ return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
+  <button class="secondary" data-kw="wand">← Lernlandkarte</button>
+  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p><div class="kw-aktionen">${fertigBtn}</div></header>
+  ${secs}${lerneinheit}${checkout}
+ </div>${footer()}`;
+}
+/* ------------------------------------------------ Sammlung der Check-outs (Schülerseite) */
+async function renderKwCheckouts(){
+ await kwLaden();
+ const co=KW.co,lehrer=isTeacher();
+ return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
+  <button class="secondary" data-kw="wand">← Lernlandkarte</button>
+  <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>KPrim-Tests und weitere Check-out-Tests mit Ergebnis, dazu die Lernstandsmessung.</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button>`:""}</div></header>
+  ${co?`${checkoutLiveBannerHTML(co)}<div class="kw-card">${checkoutSektionHTML(co)}</div>`:`<div class="empty"><strong>Check-outs konnten nicht geladen werden.</strong>Bitte später erneut versuchen.</div>`}
+ </div>${footer()}`;
+}
+/* ------------------------------------------------ Lehrkräfte: Haben alle ordentlich abgeschlossen? */
+async function renderKwFortschritt(){
+ if(!isTeacher())return await renderKachelwand();
+ await kwLaden();
+ const [us,kf,rs,sa,lf]=await Promise.all([
+  getDocs(collection(db,"users")),getDocs(collection(db,"ppKursFortschritt")).catch(()=>({docs:[]})),
+  getDocs(collection(db,"ppRallyeStand")).catch(()=>({docs:[]})),getDocs(collection(db,"ppStundenAntworten")).catch(()=>({docs:[]})),
+  getDocs(collection(db,"lehrplanFortschritt")).catch(()=>({docs:[]}))]);
+ const schueler=us.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse12Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"));
+ const K={},R={},S={},L={};
+ kf.docs.forEach(d=>{const x=d.data();K[x.modulId+"_"+x.uid]=x});rs.docs.forEach(d=>{const x=d.data();R[x.modulId+"_"+x.uid]=x});
+ sa.docs.forEach(d=>{const x=d.data();S[x.modulId+"_"+x.uid]=x});lf.docs.forEach(d=>{L[d.id]=d.data()});
+ const mods=PPM.liste.filter(m=>["selbstlern","rallye","einfuehrung","apt","stunde"].includes(m.modul)).sort((a,b)=>(Number(a.lb)-Number(b.lb))||(ppmSwIndex(a.start)-ppmSwIndex(b.start)));
+ // Zelle: {t:Text, k:"ok"|"teil"|"flach"|"offen"}
+ const zelle=(m,u)=>{
+  try{
+   if(m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){const f=L[u.uid+"_"+m.kursId.slice(3)]||{},a=f.einarbeitungAufgaben;
+    if(f.einarbeitungAbgeschlossen){const q=a&&a.gesamt?a.richtig/a.gesamt:1;return q<0.6?{t:`fertig, aber nur ${a.richtig}/${a.gesamt} richtig`,k:"flach"}:{t:a&&a.gesamt?`fertig · ${a.richtig}/${a.gesamt}`:"fertig",k:"ok"}}
+    return a?{t:`begonnen · ${a.richtig}/${a.gesamt}`,k:"teil"}:{t:"offen",k:"offen"}}
+   if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(x=>x.typ!=="abschluss"),f=K[m.id+"_"+u.uid],n=f?sch.filter(x=>f.erledigt&&f.erledigt[x.id]).length:0;return n===sch.length&&sch.length?{t:"fertig",k:"ok"}:(n?{t:`${n}/${sch.length} Schritte`,k:"teil"}:{t:"offen",k:"offen"})}
+   if(m.modul==="rallye"){const s=R[m.id+"_"+u.uid]||{},n=(m.stationen||[]).length,f=Object.keys(s.erg||{}).length;
+    if(!f)return{t:"offen",k:"offen"};const richtig=Object.values(s.erg||{}).filter(x=>x&&(x.richtig===true||x.ok===true)).length;
+    return f>=n&&n?{t:`alle ${n} Stationen`,k:"ok"}:{t:`${f}/${n} Stationen`,k:"teil"}}
+   if(m.modul==="einfuehrung"){const ids=m.kurse||[];if(!ids.length)return{t:"–",k:"offen"};const n=ids.filter(id=>(L[u.uid+"_"+id]||{}).einarbeitungAbgeschlossen).length;return n===ids.length?{t:"fertig",k:"ok"}:(n?{t:`${n}/${ids.length} Kurse`,k:"teil"}:{t:"offen",k:"offen"})}
+   if(m.modul==="apt"){const f=S[m.id+"_"+u.uid]||{};return f.aptBewertung?{t:"verglichen",k:"ok"}:(f.aptAbgegeben?{t:"abgegeben",k:"teil"}:(f.aptAntwort?{t:"in Arbeit",k:"teil"}:{t:"offen",k:"offen"}))}
+   if(m.modul==="stunde"){const f=S[m.id+"_"+u.uid];return f&&f.fertig?{t:"fertig",k:"ok"}:(f?{t:"in Arbeit",k:"teil"}:{t:"offen",k:"offen"})}
+  }catch(e){}
+  return{t:"–",k:"offen"};
+ };
+ const kopf=mods.map(m=>{const T=KW_BAUSTEINE[m.modul]||["",""];return`<th><span class="chip ${T[1]}">${esc(T[0])}</span><br><small>LB ${esc(m.lb)} · ${esc(m.titel||"")}</small></th>`}).join("");
+ const zeilen=schueler.map(u=>`<tr><th scope="row">${esc(anzeigeName(u))}</th>${mods.map(m=>{const z=zelle(m,u);return`<td class="kw-z ${z.k}">${esc(z.t)}</td>`}).join("")}</tr>`).join("");
+ return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
+  <button class="secondary" data-kw="wand">← Lernlandkarte</button>
+  <header class="kw-kopf"><small>FÜR LEHRKRÄFTE</small><h1>Erledigt? Selbstlernkurse und Lernrallyes</h1><p>Grün: ordentlich abgeschlossen. Orange: begonnen oder nur flüchtig bearbeitet (fertig, aber weniger als 60 % richtig). Grau: noch offen. Lehrkräfte-Konten erscheinen hier nicht.</p></header>
+  <div class="kw-card"><div class="kw-tabwrap">${mods.length&&schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th>${kopf}</tr></thead><tbody>${zeilen}</tbody></table>`:`<div class="kw-leer">Noch keine passenden Bausteine oder freigeschaltete Schüler:innen.</div>`}</div></div>
+  <div class="kw-card"><h3>Weitere Stellen</h3><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung (alle Aufgaben, Versuche)</button><button class="secondary" data-kw="checkouts">Check-out-Ergebnisse</button></div></div>
+ </div>${footer()}`;
+}
+/* ------------------------------------------------ Dateien am Thema anlegen */
+async function kwMatForm(kat){
+ const e=kwThemaById(activeKwThema);if(!e||!isTeacher())return;
+ const def=KW_KAT.find(k=>k.key===kat||(k.stufen||[]).some(s=>s[0]===kat));
+ const stufe=def&&def.stufen?def.stufen.find(s=>s[0]===kat):null;
+ const istBoard=!!(def&&def.board);
+ let boards=[];if(istBoard){try{boards=await getCollection("whiteboards","createdAt",true,200)}catch(x){}}
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">${esc(kwKurz(e)).toUpperCase()}</div><h2>${esc(def?def.label:"Datei")}${stufe?" · "+esc(stufe[1]):""} hinzufügen</h2>
+  <div class="form"><label>Titel<input id="kwTitel" maxlength="120"></label>
+  ${istBoard?`<label>Vorhandene Tafel wählen<select id="kwBoard"><option value="">– keine –</option>${boards.map(b=>`<option value="${esc(b.id)}">${esc(b.title||"Tafel")}</option>`).join("")}</select></label>`:""}
+  <label>Datei hochladen (max. 15 MB)<input id="kwDatei" type="file"></label>
+  <label>oder Link<input id="kwLink" type="url" placeholder="https://"></label>
+  <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button><button class="primary" id="kwSave">Speichern</button></div></div>`);
+ $("kwSave").onclick=async()=>{
+  const titel=$("kwTitel").value.trim(),f=$("kwDatei").files[0],link=$("kwLink").value.trim(),bd=$("kwBoard")?$("kwBoard").value:"";
+  if(!titel){toast("Bitte einen Titel eingeben.");return}
+  if(!f&&!link&&!bd){toast("Bitte Datei, Link oder Tafel angeben.");return}
+  try{
+   let url=bd?"board:"+bd:link,dateiName="";
+   if(f){toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(f,`ppMaterial/thema_${e.id}`);url=up.url;dateiName=up.name}
+   await addDoc(collection(db,"lehrplanMaterialien"),{wocheId:e.id,fach:"paedagogik",kategorie:kat,titel,url,dateiName,createdBy:currentUser.uid,createdAt:serverTimestamp()});
+   closeModal();toast("Gespeichert.");render();
+  }catch(err){console.error(err);toast(err&&err.message?err.message:"Konnte nicht gespeichert werden.")}
+ };
+}
+async function kwModulWaehlen(themaId){
+ await ppmLaden(true);
+ const e=kwThemaById(themaId),ph=KW_PHASEN.find(p=>p.id===e.phase);
+ const l=PPM.liste.filter(m=>m.modul!=="projekt"&&m.modul!=="experiment"&&Number(m.lb)===ph.lbNum);
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">LERNEINHEIT ZUORDNEN</div><h2>${esc(kwKurz(e))}</h2>
+  <p>Setze einen Haken bei jedem Baustein des Lernbereichs, der zu diesem Thema gehört.</p>
+  <div class="form">${l.map(m=>`<label class="check"><input type="checkbox" class="kwMod" value="${esc(m.id)}"${(m.themen||[]).includes(themaId)?" checked":""}> ${esc((KW_BAUSTEINE[m.modul]||[m.modul])[0])}: ${esc(m.titel||"")}</label>`).join("")||`<div class="kw-leer">In diesem Lernbereich gibt es noch keine Bausteine. Plane zuerst einen ein.</div>`}
+  <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button><button class="primary" id="kwModSave">Speichern</button></div></div>`);
+ $("kwModSave").onclick=async()=>{
+  try{for(const c of document.querySelectorAll(".kwMod")){const m=ppmById(c.value),h=new Set(m.themen||[]);c.checked?h.add(themaId):h.delete(themaId);await updateDoc(doc(db,"ppModule",m.id),{themen:[...h],updatedAt:serverTimestamp()})}
+   closeModal();await ppmLaden(true);toast("Zugeordnet.");render()}catch(err){console.error(err);toast("Konnte nicht gespeichert werden.")}
+ };
+}
+/* ------------------------------------------------ Klicks */
+document.addEventListener("click",async ev=>{
+ const b=ev.target.closest&&ev.target.closest("[data-kw]");if(!b||!currentUser)return;
+ const a=b.dataset.kw,id=b.dataset.id;
+ try{
+  if(a==="thema"){activeKwThema=id;go("kw-thema")}
+  else if(a==="projekt"){activeKwLb=Number(b.dataset.lb);go("kw-projekt")}
+  else if(a==="wand")go("start");
+  else if(a==="checkouts")go("lernstaende");
+  else if(a==="fortschritt")go("kw-fortschritt");
+  else if(a==="matadd")kwMatForm(b.dataset.kat);
+  else if(a==="matweg"){if(!confirm("Diese Datei wirklich entfernen?"))return;await deleteDoc(doc(db,"lehrplanMaterialien",id));toast("Entfernt.");render()}
+  else if(a==="board")openWhiteboard(id);
+  else if(a==="checkin"){const e=kwThemaById(id);const fr=await getBasischeckFragen(id);if(!fr.length){toast("Für dieses Thema ist noch kein Check-In hinterlegt.");return}window.__eaRueck=null;e.typ==="apt"?openAptDetail(id,"basischeck"):openWocheDetail("paedagogik",id,"basischeck")}
+  else if(a==="alt"){const e=kwThemaById(id);e.typ==="apt"?openAptDetail(id):openWocheDetail("paedagogik",id)}
+  else if(a==="ea"){window.__eaRueck=async()=>{await render()};openEinarbeitung(id)}
+  else if(a==="modul")ppmOeffnen(id);
+  else if(a==="modulneu"){const e=kwThemaById(id),ph=KW_PHASEN.find(p=>p.id===e.phase);window.__kwThemaNeu=id;ppmTypWahl(ph.startSw)}
+  else if(a==="modulwahl")kwModulWaehlen(id);
+  else if(a==="projektstart"){const ph=kwPhase(b.dataset.lb);const pm=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);if(pm)ppmOeffnen(pm.id);else toast(isTeacher()?"Lege das Projekt im Unterricht-Plan über das Plus-Zeichen als Modul „Projekt“ an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}
+  else if(a==="exp"){activeFach="paedagogik";openExperimentStunde(null)}
+  else if(a==="fertig"){
+   const neu=!kwErledigt(id);
+   await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${id}`),{uid:currentUser.uid,wocheId:id,fach:"paedagogik",abgeschlossen:neu,updatedAt:serverTimestamp()},{merge:true});
+   if(neu)showMotivationsBild(true,"abgabe");render();
+  }
+ }catch(err){console.error("Kachelwand:",err);toast("Das hat nicht geklappt. Bitte erneut versuchen.")}
+});
+
 init();
 
 
@@ -20961,7 +21403,7 @@ async function lbMeineKopie(vorlageId,titel){
   const v=await getDoc(doc(db,"whiteboards",vorlageId));
   if(!v.exists()){toast("Die Lernübersicht der Lehrkraft gibt es nicht mehr.");return;}
   toast("Deine eigene Lernübersicht wird angelegt …");
-  const vd=v.data(),name=profile?.displayName||currentUser.email||"Schüler:in";
+  const vd=v.data(),name=anzeigeName(profile,currentUser);
   const nb=await addDoc(collection(db,"whiteboards"),{title:("Meine Lernübersicht: "+String(titel||vd.title||"").replace(/\s*–\s*Lernübersicht$/,"")).slice(0,120),description:"Eigene Kopie der Lernübersicht",art:"lern",schreibschutz:false,seiten:vd.seiten||1,bg:vd.bg||"weiss",lernVon:currentUser.uid,vorlageId,createdBy:currentUser.uid,createdByName:name,createdAt:serverTimestamp()});
   const [its,ims]=await Promise.all([getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",vorlageId))),getDocs(query(collection(db,"whiteboardImages"),where("boardId","==",vorlageId)))]);
   const idMap=new Map();
@@ -21031,7 +21473,7 @@ if(typeof WB_VORLAGEN!=="undefined"&&!WB_VORLAGEN.some(v=>v.name==="Lernübersic
  WB_VORLAGEN.unshift({name:"Lernübersicht (5 Bausteine)",beschr:"Kernfrage, Kernwissen, Zusammenhänge, Beispiel, Lernanker",items:(x,y)=>lbLernItems(x,y,"",false)});
 }
 async function lbItemsSchreiben(boardId,items){
- const name=profile?.displayName||currentUser.email||"Lehrkraft",jobs=[];
+ const name=anzeigeName(profile,currentUser),jobs=[];
  items.forEach((teil,n)=>{
   const std=WB_STANDARD[teil.type]||{};
   const d={boardId,seite:1,c:std.c||"grau",fs:std.fs||18,z:Date.now()+n,authorUid:currentUser.uid,authorName:name,...std,...teil,createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
@@ -21041,7 +21483,7 @@ async function lbItemsSchreiben(boardId,items){
  for(let i=0;i<jobs.length;i+=20)await Promise.all(jobs.slice(i,i+20).map(f=>f()));
 }
 async function lbVorlageAnlegen(titel,beschr,beispiel){
- const r=await addDoc(collection(db,"whiteboards"),{title:(titel+" – Lernübersicht").slice(0,120),description:beschr,art:"tafel",schreibschutz:true,seiten:1,bg:"weiss",lernVorlage:true,createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+ const r=await addDoc(collection(db,"whiteboards"),{title:(titel+" – Lernübersicht").slice(0,120),description:beschr,art:"tafel",schreibschutz:true,seiten:1,bg:"weiss",lernVorlage:true,createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
  await lbItemsSchreiben(r.id,lbLernItems(0,0,titel,!!beispiel));
  return r.id;
 }
@@ -21219,7 +21661,7 @@ async function lbBereitstellen(){
     await updateDoc(doc(db,"whiteboards",bid),{title:(e.thema+" – Lernübersicht").slice(0,120)});
     akt++;
    }else{
-    const r=await addDoc(collection(db,"whiteboards"),{title:(e.thema+" – Lernübersicht").slice(0,120),description:"Lernübersicht: Zusammenfassung der Lehrkraft, Schüler:innen bekommen eine eigene Kopie zum Ergänzen",art:"tafel",schreibschutz:true,seiten:1,bg:"weiss",lernVorlage:true,lernKey:e.id,createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+    const r=await addDoc(collection(db,"whiteboards"),{title:(e.thema+" – Lernübersicht").slice(0,120),description:"Lernübersicht: Zusammenfassung der Lehrkraft, Schüler:innen bekommen eine eigene Kopie zum Ergänzen",art:"tafel",schreibschutz:true,seiten:1,bg:"weiss",lernVorlage:true,lernKey:e.id,createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
     bid=r.id;neu++;
    }
    await lbItemsSchreiben(bid,lbLernItems(0,0,e.thema,e));
@@ -21288,7 +21730,7 @@ async function pp12Wb(d){
  if(!isTeacher()||pp12Beschaeftigt)return;
  pp12Beschaeftigt=true;
  try{
-  const r=await addDoc(collection(db,"whiteboards"),{title:(lbStundeTitel(d)+" – Whiteboard").slice(0,120),description:"Gemeinsames Whiteboard zur Unterrichtsstunde",art:"team",schreibschutz:false,seiten:1,bg:"weiss",createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+  const r=await addDoc(collection(db,"whiteboards"),{title:(lbStundeTitel(d)+" – Whiteboard").slice(0,120),description:"Gemeinsames Whiteboard zur Unterrichtsstunde",art:"team",schreibschutz:false,seiten:1,bg:"weiss",createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
   await setDoc(doc(db,"lehrplanTafeln",d),{whiteboardId:r.id},{merge:true});
   PP12_CACHE.tafeln[d]={...t,whiteboardId:r.id};
   openWhiteboard(r.id);
@@ -21412,7 +21854,7 @@ function lbRfNeuerTab(){if(window.__lbRfUrl)window.open(window.__lbRfUrl,"_blank
 async function lbModulWb(m){
  if(m.whiteboardId){openWhiteboard(m.whiteboardId);return;}
  if(!isTeacher())return;
- const r=await addDoc(collection(db,"whiteboards"),{title:(lbModulTitel(m)+" – Whiteboard").slice(0,120),description:"Gemeinsames Whiteboard zum Modul",art:"team",schreibschutz:false,seiten:1,bg:"weiss",createdBy:currentUser.uid,createdByName:profile?.displayName||currentUser.email||"Lehrkraft",createdAt:serverTimestamp()});
+ const r=await addDoc(collection(db,"whiteboards"),{title:(lbModulTitel(m)+" – Whiteboard").slice(0,120),description:"Gemeinsames Whiteboard zum Modul",art:"team",schreibschutz:false,seiten:1,bg:"weiss",createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
  await updateDoc(doc(db,"ppModule",m.id),{whiteboardId:r.id});await ppmLaden(true);openWhiteboard(r.id);
 }
 async function lbModulLern(m){

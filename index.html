@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://securetoken.googleapis.com" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20261017a">
+<link rel="stylesheet" href="styles.css?v=20261102a">
 
 <!-- App-Icon fürs Homescreen (Handy/iPad) -->
 <link rel="manifest" href="manifest.json">
@@ -26,7 +26,7 @@
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="#start">
+  <a class="brand" href="#news">
     <img src="logo.jpg" alt="Fachoberschule Berufsoberschule Weilheim">
     <div class="brand-divider"></div>
     <div class="brand-copy">
@@ -38,6 +38,7 @@
   <div class="user-area">
     <span id="userName" class="user-name"></span>
     <button class="ghost-icon" id="motivBtn" hidden type="button" title="Motivations-Hinweise ein oder aus">✨</button>
+    <button class="ghost-icon" id="recoveryBtn" hidden type="button" title="Code erzeugen, mit dem du dein Passwort selbst zurücksetzen kannst">Passwort-Code</button>
     <button class="ghost-icon" id="logoutBtn" hidden>Abmelden</button>
     <button class="menu-btn" id="menuBtn">☰</button>
   </div>
@@ -54,15 +55,25 @@
       <button id="registerTab" class="auth-tab">Konto erstellen</button>
     </div>
     <form id="loginForm" class="form auth-form">
-      <label>E-Mail-Adresse<input id="loginEmail" type="email" autocomplete="email" required></label>
+      <label>Pseudonym<input id="loginEmail" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
       <label>Passwort<input id="loginPassword" type="password" autocomplete="current-password" required></label>
       <button class="primary wide" type="submit">Anmelden</button>
-      <button class="text-button" type="button" id="forgotBtn">Passwort vergessen?</button>
+      <button class="text-button" type="button" id="forgotBtn">Passwort vergessen? Mit Wiederherstellungscode zurücksetzen</button>
+    </form>
+    <form id="resetForm" class="form auth-form" hidden>
+      <p style="margin:0 0 10px;color:var(--muted);font-size:14px">Gib dein Pseudonym und den Wiederherstellungscode ein, den du bei der Registrierung erhalten hast.</p>
+      <label>Dein Pseudonym<input id="resetPseudo" maxlength="20" autocomplete="username" autocapitalize="off" required></label>
+      <label>Wiederherstellungscode<input id="resetCode" maxlength="16" autocomplete="off" autocapitalize="characters" placeholder="XXXX-XXXX-XXXX" required></label>
+      <label>Neues Passwort<input id="resetPw" type="password" minlength="8" autocomplete="new-password" required></label>
+      <label>Neues Passwort wiederholen<input id="resetPw2" type="password" minlength="8" autocomplete="new-password" required></label>
+      <small style="display:block;margin-top:-10px;margin-bottom:10px;color:var(--muted)">Mindestens 8 Zeichen, davon Buchstaben UND Zahlen.</small>
+      <button class="primary wide" type="submit">Passwort zurücksetzen</button>
+      <button class="text-button" type="button" id="resetBackBtn">Zurück zur Anmeldung</button>
     </form>
     <form id="registerForm" class="form auth-form" hidden>
-      <label>Vorname<input id="registerFirstName" maxlength="40" autocomplete="given-name" required></label>
-      <label>Nachname<input id="registerLastName" maxlength="40" autocomplete="family-name" required></label>
-      <label>E-Mail-Adresse<input id="registerEmail" type="email" autocomplete="email" required></label>
+      <label>Pseudonym (kein echter Name)<input id="registerPseudonym" maxlength="20" autocomplete="off" required></label>
+      <small style="display:block;margin-top:-10px;margin-bottom:10px;color:var(--muted)">3 bis 20 Zeichen. So siehst du aus und so sehen dich Klasse und Lehrkraft. Merke dir dein Pseudonym und dein Passwort gut.</small>
+      <label>Zugangscode der Lehrkraft<input id="registerCode" maxlength="40" autocomplete="off" required></label>
       <label>Passwort<input id="registerPassword" type="password" minlength="8" autocomplete="new-password" required></label>
       <small style="display:block;margin-top:-10px;margin-bottom:10px;color:var(--muted)">Mindestens 8 Zeichen, davon Buchstaben UND Zahlen.</small>
       <label>Passwort wiederholen<input id="registerPassword2" type="password" minlength="8" autocomplete="new-password" required></label>
@@ -80,7 +91,9 @@
     <aside class="sidebar" id="sidebar">
       <div class="side-title">CAMPUS</div>
       <nav>
-        <a href="#start" data-page="start" class="nav-link active">Startseite</a>
+        <a href="#news" data-page="news" class="nav-link active">News und Termine</a>
+        <a href="#start" data-page="start" class="nav-link">Lernlandkarte</a>
+        <a href="#lernstaende" data-page="lernstaende" class="nav-link">Lernstände</a>
         <a href="#kompass" data-page="kompass" class="nav-link">Mein Campus-Kompass</a>
         <a href="#lernwerkstatt" data-page="lernwerkstatt" class="nav-link">Lernwerkstatt</a>
         <a href="#resilienz" data-page="resilienz" class="nav-link">Resilienz & Respressi</a>
@@ -96,7 +109,7 @@
 <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" id="modal"></div></div>
 <div class="toast" id="toast"></div>
 
-<script type="module" src="app.js?v=20261021a"></script>
+<script type="module" src="app.js?v=20261102a"></script>
 <script>
 /* Ladehinweis: erscheint, wenn die App nach 15 Sekunden noch nicht mit Firebase verbunden ist */
 (function(){

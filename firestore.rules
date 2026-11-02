@@ -41,10 +41,13 @@ service cloud.firestore {
       allow read: if isSelf(uid) || isTeacher();
 
       // Public registration can only create a student in pending state.
+      // Registrierung nur mit dem Zugangscode der Lehrkraft (config/zugang).
       allow create: if isSelf(uid)
         && request.resource.data.role == 'student'
         && request.resource.data.status == 'pending'
-        && request.resource.data.uid == uid;
+        && request.resource.data.uid == uid
+        && exists(/databases/$(database)/documents/config/zugang)
+        && request.resource.data.zugangscode == get(/databases/$(database)/documents/config/zugang).data.code;
 
       // Admins may manage all user fields.
       // Teachers may only manage the status of student accounts.
@@ -77,6 +80,25 @@ service cloud.firestore {
     // Die Person pflegt es selbst (Rolle/Status müssen zum Konto passen),
     // Lehrkräfte gleichen es für alle Konten ab.
     // ---------------------------------------------------------
+    // Zugangscode für neue Konten: nur Admin liest/schreibt (die Prüfung läuft in den Regeln selbst).
+    // Passwort-Wiederherstellung für Pseudonym-Konten: der Block enthält das Passwort NUR verschlüsselt
+    // (Schlüssel = Wiederherstellungscode, wird nie gespeichert). Einzelne Blöcke müssen vor der Anmeldung
+    // lesbar sein, Auflisten nicht. Schreiben darf nur das Konto, dessen technische Adresse zum Dokumentnamen passt.
+    match /pwRecovery/{slug} {
+      allow get: if true;
+      allow list: if false;
+      allow create, update: if signedIn()
+        && request.auth.token.email == slug + '@pseudonym.f12sb.invalid'
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['uid','v','salt','iv','ct','updatedAt']);
+      allow delete: if isAdmin()
+        || (signedIn() && request.auth.token.email == slug + '@pseudonym.f12sb.invalid');
+    }
+
+    match /config/{id} {
+      allow read, write: if isAdmin();
+    }
+
     match /profilePublic/{uid} {
       allow read: if isApproved();
       allow create, update: if request.resource.data.keys()
