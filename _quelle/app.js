@@ -2709,16 +2709,47 @@ t12_4_6:[
 ["K","Eine Nachricht „Na toll.“ wird als Vorwurf verstanden, war aber ironisch gemeint.",["+Es fehlt der Tonfall als analoges Signal.","-Digitale Kommunikation hat keine Missverständnisse.","+Emojis können helfen, aber nicht alles ersetzen."]]]
 };
 
+const CHECKIN_TAGS_12={
+t12_1_1:["Merkmale von Entwicklung","Anlage","Umwelt","Selbststeuerung","Wechselwirkung im Fall"],
+t12_1_2:["Topografisches Modell","Es (Lustprinzip)","Ich (Realitätsprinzip)","Über-Ich","Instanzen im Fall"],
+t12_1_3:["Orale Phase","Reihenfolge der Phasen","Fixierung","Orale Fixierung","Phasen im Fall"],
+t12_1_4:["Verdrängung","Projektion","Regression","Identifikation","Abwehrmechanismus im Fall"],
+t12_1_5:["Kritik an Freud","Stärken der Theorie","Kritik Triebtheorie","Überprüfbarkeit","Würdigung im Fall"],
+t12_1_6:["Begriff Bindung","Sichere Bindung","Unsicher-vermeidend","Ainsworth","Bindungstyp im Fall"],
+t12_1_7:["Bindung im Jugendalter","Bindung im Erwachsenenalter","Primäre Bindung","Eltern im Jugendalter","Peers im Fall"],
+t12_1_8:["Eingewöhnung","Feinfühligkeit","Bezugserzieherin","Eltern bei Eingewöhnung","Feinfühligkeit im Fall"],
+t12_1_9:["Lebensspannen-Entwicklung","Anforderung Jugend","Anforderung frühes Erwachsenenalter","Gewinne und Verluste","Anforderungen im Fall"],
+t12_1_10:["Resilienz","Vulnerabilität","Schutzfaktor","Risikofaktor","Resilienz im Fall"],
+t12_2_1:["Stabilität","Einzigartigkeit","Veränderbarkeit","Begriff Persönlichkeit","Merkmale im Fall"],
+t12_2_2:["Big Five Dimensionen","Extraversion","Gewissenhaftigkeit","Neurotizismus","Big Five im Fall"],
+t12_2_3:["Aktualisierungstendenz","Organismischer Bewertungsprozess","Bewertungsbedingungen","Bedingungslose Wertschätzung","Bewertungsbedingungen im Fall"],
+t12_2_4:["Realselbst","Idealselbst","Kongruenz","Inkongruenz","Wahrnehmungsverzerrung im Fall"],
+t12_2_5:["Selbstwirksamkeitserwartung","Ergebniserwartung","Hohe Selbstwirksamkeit","Ergebniserwartung erkennen","Erwartungen im Fall"],
+t12_2_6:["Selbstregulation","Erfolgserfahrung","Stellvertretende Erfahrung","Veränderbarkeit","Selbstwirksamkeit im Fall"],
+t12_2_7:["Dimensionen Marcia","Erarbeitete Identität","Moratorium","Übernommene Identität","Identitätsstatus im Fall"],
+t12_3_1:["Sozialhilfe","Kinder- und Jugendhilfe","Altenhilfe","Gesundheitshilfe","Aufgabenbereich im Fall"],
+t12_3_2:["Schritte des Konzepts","Analyse","Verhaltensmodifikation","Evaluation","Konzept im Fall"],
+t12_3_3:["Transaktion","Coping","Lebensstress","Ressourcen","Life Model im Fall"],
+t12_3_4:["Lebensweltorientierung","Erfahrener Raum","Erfahrene Zeit","Hilfe zur Selbsthilfe","Lebenswelt im Fall"],
+t12_3_5:["Prävention","Partizipation","Regionalisierung","Alltagsnähe","Maxime im Fall"],
+t12_4_1:["Soziale Kommunikation","Interaktion","Signalfunktion","Symptomfunktion","Organon-Modell im Fall"],
+t12_4_2:["Erstes Axiom","Zweites Axiom","Interpunktion","Kommunikationsstörung","Axiome im Fall"],
+t12_4_3:["Digitale Modalität","Analoge Modalität","Symmetrische Beziehung","Komplementäre Beziehung","Beziehung im Fall"],
+t12_4_4:["Metakommunikation","Ich-Botschaft","Aktives Zuhören","Feedback","Technik im Fall"],
+t12_4_5:["Normen und Werte","Blickkontakt","Nonverbale Codes","Interkulturelles Verhalten","Missverständnis im Fall"],
+t12_4_6:["Fehlende nonverbale Signale","Cybermobbing","Datenmissbrauch","Reale Beziehungen","Digitale Kommunikation im Fall"]
+};
 // Standard-Check-Ins (5 Fragen je Thema). Eine in Firebase gespeicherte Fassung hat Vorrang.
 function checkinHash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function checkinAusBank(id){
  const b=CHECKIN_12[id];if(!b)return[];
- return b.map(q=>{
-  if(q[0]==="K")return{typ:"kprim",text:q[1],statements:q[2].map(s=>({text:s.slice(1),correct:s[0]==="+"}))};
+ return b.map((q,qi)=>{
+  const tag=(CHECKIN_TAGS_12[id]||[])[qi]||"";
+  if(q[0]==="K")return{typ:"kprim",text:q[1],tag,statements:q[2].map(s=>({text:s.slice(1),correct:s[0]==="+"}))};
   const opts=q.slice(1).map((t,i)=>({t,r:i===0}));
   const k=checkinHash(q[0])%opts.length;
   const o=opts.slice(k).concat(opts.slice(0,k));
-  return{typ:"mc",text:q[0],optionen:o.map(x=>x.t),richtig:o.findIndex(x=>x.r)};
+  return{typ:"mc",text:q[0],tag,optionen:o.map(x=>x.t),richtig:o.findIndex(x=>x.r)};
  });
 }
 async function getBasischeckFragen(wocheId){
@@ -21350,11 +21381,36 @@ function lsThemaName(id){const e=kwThemaById(id);if(!e)return String(id);const l
 const LS_AMP={gruen:["#2E7D57","grün"],orange:["#E0A800","gelb"],rot:["#C0392B","rot"]};
 function lsAmpelPunkt(a,t){const f=(LS_AMP[a]||["#C5CCD3"])[0];return`<i class="ls-dot" style="background:${f}" title="${esc(t||"")}"></i>`}
 function lsThemenLb(n){const p=kwPhase(n);return p?kwThemenVonPhase(p):[]}
+function lsUnsicher(x){
+ const fr=(LT.fr||{})[x.wocheId]||[],out=[];
+ fr.forEach((f,i)=>{
+  const an=(x.antworten||[])[i],typ=f.typ||"mc";let ok;
+  if(typ==="mc")ok=an===f.richtig;
+  else if(typ==="kprim"){const s=String(an||"");ok=f.statements.every((st,k)=>(s[k]==="r")===st.correct)}
+  else return;
+  if(!ok)out.push(f.tag||(String(f.text).slice(0,45)+"…"));
+ });
+ return out;
+}
+function lsTopUnsicher(id,max){
+ const m={};(LT.ci||[]).filter(x=>x.wocheId===id).forEach(x=>lsUnsicher(x).forEach(t=>m[t]=(m[t]||0)+1));
+ return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,max);
+}
 function lsThemaDetail(id){
- const e=kwThemaById(id);
- const zeilen=LT.schueler.map(u=>{const x=(LT.ci||[]).find(y=>y.uid===u.uid&&y.wocheId===id);
-  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td>${x?`${lsAmpelPunkt(x.ampel)} ${x.richtig} von ${x.gesamt} richtig`:`<span style="color:var(--muted)">noch nicht gemacht</span>`}</td></tr>`}).join("");
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">CHECK-IN</div><h2>${esc(e?kwKurz(e):id)}</h2><div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Ergebnis</th></tr></thead><tbody>${zeilen||`<tr><td>Noch keine Schüler:innen.</td></tr>`}</tbody></table></div>`);
+ const e=kwThemaById(id),N=LT.schueler.length;
+ const cs=(LT.ci||[]).filter(x=>x.wocheId===id);
+ const rang={rot:0,orange:1,gruen:2};
+ const liste=LT.schueler.map(u=>({u,x:cs.find(y=>y.uid===u.uid)})).sort((p,q)=>(p.x?rang[p.x.ampel]??1:3)-(q.x?rang[q.x.ampel]??1:3)||anzeigeName(p.u).localeCompare(anzeigeName(q.u),"de"));
+ const g=k=>cs.filter(x=>x.ampel===k).length;
+ const top=lsTopUnsicher(id,6);
+ const zeilen=liste.map(({u,x})=>{
+  if(!x)return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td><span style="color:var(--muted)">noch nicht gemacht</span></td><td></td></tr>`;
+  const uns=lsUnsicher(x);
+  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td style="white-space:nowrap">${lsAmpelPunkt(x.ampel)} ${x.richtig} von ${x.gesamt} richtig</td><td>${uns.length?esc(uns.join(" · ")):`<span style="color:var(--muted)">–</span>`}</td></tr>`}).join("");
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">CHECK-IN</div><h2>${esc(e?kwKurz(e):id)}</h2>
+ <p style="margin:2px 0 12px;font-size:13px;color:var(--muted)">${cs.length} von ${N} haben den Check-In gemacht · <b style="color:#2E7D57">${g("gruen")} grün</b> · <b style="color:#B38600">${g("orange")} gelb</b> · <b style="color:#C0392B">${g("rot")} rot</b></p>
+ ${top.length?`<div class="ls-unsbox"><b>Hier ist die Klasse noch unsicher</b><ul>${top.map(([t,n])=>`<li>${esc(t)} <small>${n} von ${cs.length}</small></li>`).join("")}</ul></div>`:(cs.length?`<div class="ls-unsbox ok"><b>Keine auffälligen Lücken</b></div>`:"")}
+ <div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Ergebnis</th><th>Noch unsicher bei</th></tr></thead><tbody>${zeilen||`<tr><td>Noch keine Schüler:innen.</td></tr>`}</tbody></table></div>`);
 }
 function lsUebersichtHTML(ci,co,abgaben){
  const rows=LT.schueler.map(u=>{
@@ -21372,7 +21428,7 @@ function lsDetail(uid){
  const ci=(LT.ci||[]).filter(x=>x.uid===uid),ab=(LT.abgaben||[]).filter(x=>x.uid===uid),co=(KW.co&&KW.co.checkouts)||[];
  const lb=[1,2,3,4].map(n=>{
   const ph=kwPhase(n),F=kwFarbe(n);
-  const th=lsThemenLb(n).map(e=>{const x=ci.find(y=>y.wocheId===e.id);return`<li>${x?lsAmpelPunkt(x.ampel):lsAmpelPunkt("")} ${esc(kwKurz(e))}: ${x?`${x.richtig} von ${x.gesamt} richtig`:"Check-In offen"}</li>`}).join("");
+  const th=lsThemenLb(n).map(e=>{const x=ci.find(y=>y.wocheId===e.id);return`<li>${x?lsAmpelPunkt(x.ampel):lsAmpelPunkt("")} ${esc(kwKurz(e))}: ${x?`${x.richtig} von ${x.gesamt} richtig${lsUnsicher(x).length?" · unsicher: "+esc(lsUnsicher(x).join(", ")):""}`:"Check-In offen"}</li>`}).join("");
   const cs=co.filter(c=>Number(c.lbNum)===n).map(c=>{const a=ab.find(x=>x.checkoutId===c.id);return`<li>Check-out ${esc(coTitelAnzeige(c)||"")}: ${a?(a.ausgewertet?`${a.be} BE · ${a.notenpunkte} NP`:(a.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen")):"nicht teilgenommen"}</li>`}).join("");
   const ts=LT.tests.filter(t=>Number(t.lb)===n).map(t=>{const a=LT.alle.find(x=>x.testId===t.id&&x.uid===uid);return`<li>Test ${esc(t.titel)}: ${esc(ltStatus(t,a))}</li>`}).join("");
   return`<h3 style="color:${F.t};margin:14px 0 4px">LB ${n}${ph?" · "+esc(ph.lbTitel):""}</h3><ul>${th||"<li>keine Themen</li>"}${cs}${ts}</ul>`}).join("");
@@ -21421,7 +21477,7 @@ function lsLbBlock(n,ci,co,abgaben,lehrer){
   if(lehrer){
    const g=k=>mine.filter(x=>x.ampel===k).length,n3=mine.length;
    const bar=n3?`<span class="ls-bar" title="grün ${g("gruen")} · gelb ${g("orange")} · rot ${g("rot")}">${["gruen","orange","rot"].map(k=>g(k)?`<i style="flex:${g(k)};background:${LS_AMP[k][0]}">${g(k)}</i>`:"").join("")}</span>`:`<span class="ls-bar leer"></span>`;
-   return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}</span>${bar}<small>${n3} von ${N}</small><button class="secondary kw-add" data-ls="thema" data-id="${esc(e.id)}">Wer?</button></div>`;
+   return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}${(()=>{const t=lsTopUnsicher(e.id,2);return t.length?`<small class="ls-uns">Unsicher: ${esc(t.map(x=>x[0]).join(" · "))}</small>`:""})()}</span>${bar}<small>${n3} von ${N}</small><button class="secondary kw-add" data-ls="thema" data-id="${esc(e.id)}">Wer?</button></div>`;
   }
   const x=mine[0];
   return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}</span>${x?`${lsAmpelPunkt(x.ampel)}<small>${x.richtig} von ${x.gesamt} richtig</small>`:`<small class="ls-offen">Check-In offen</small>`}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(e.id)}">${x?"Ansehen":"Starten"}</button></div>`;
@@ -21438,6 +21494,8 @@ async function renderKwCheckouts(){
  let abgaben=[];
  if(lehrer){try{abgaben=(await getDocs(collection(db,"checkoutAbgaben"))).docs.map(d=>d.data())}catch(e){}}
  LT.abgaben=abgaben;
+ LT.fr={};
+ if(lehrer){const ids=[1,2,3,4].flatMap(n=>lsThemenLb(n).map(e=>e.id));await Promise.all(ids.map(async id=>{LT.fr[id]=await getBasischeckFragen(id)}))}
  const nav=[1,2,3,4].map(n=>{const ph=kwPhase(n),F=kwFarbe(n);return ph?`<a class="ls-nav" href="#" data-ls="sprung" data-lb="${n}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><small>LB ${n}</small><b>${esc(ph.lbTitel)}</b></a>`:""}).join("");
  const bloecke=[1,2,3,4].map(n=>lsLbBlock(n,ci,co,abgaben,lehrer)).join("");
  const verw=co?`<details class="kw-card ls-verw"><summary><b>Check-outs verwalten und Kurzarbeit-Ersatz</b> <small>${lehrer?"neuen Check-out anlegen, Einstellungen, Klassenübersicht":"deine Auswahl für den Kurzarbeit-Ersatz"}</small></summary>${checkoutSektionHTML(co)}</details>`:"";
