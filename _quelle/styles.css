@@ -889,3 +889,22 @@ body.exp-offen{overflow:hidden}
 /* Heute-Karte im Logo-Grün */
 .kw-hero{background:#F1F8E8;border:1px solid #d9eac0;border-left:6px solid #82b83b}
 .kw-hero-k{color:#4d7a1c}.kw-hero-z{border-color:#d9eac0;color:#4d7a1c}
+
+/* ===== Lernstände nach Lernbereichen ===== */
+.ls-navwrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 14px}
+.ls-nav{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--t);background:var(--bg);border:1px solid color-mix(in srgb,var(--c) 30%,#fff);border-top:5px solid var(--c);border-radius:14px;padding:9px 12px}
+.ls-nav small{font-size:11px;font-weight:800;letter-spacing:.06em}.ls-nav b{font-size:14px;line-height:1.2}
+.ls-lb{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin:0 0 14px}
+.ls-lbk{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:color-mix(in srgb,var(--c) 60%,#fff);color:#10261f;padding:12px 16px;border-top:5px solid var(--c)}
+.ls-lbk small{font-size:11px;font-weight:800;letter-spacing:.06em}.ls-lbk b{font-size:17px;flex:1;min-width:160px}.ls-lbk span{font-size:12px;font-weight:800;background:#fff;color:var(--t);border-radius:99px;padding:3px 11px}
+.ls-sek{padding:10px 16px 12px;border-top:1px solid var(--line)}.ls-sek:first-of-type{border-top:0}
+.ls-sek h4{margin:0 0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ls-th{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.ls-th:last-child{border-bottom:0}.ls-th em{font-style:normal;font-size:11px;font-weight:800;color:var(--muted);min-width:34px}
+.ls-tn{flex:1;min-width:0}.ls-th small{color:var(--muted);font-size:12px;white-space:nowrap}.ls-offen{color:#8a6a00!important}
+.ls-dot{display:inline-block;width:12px;height:12px;border-radius:50%;flex:none}
+.ls-bar{display:flex;width:150px;height:18px;border-radius:99px;overflow:hidden;background:#EEF1F4;flex:none}.ls-bar i{font:700 11px/18px Arial,sans-serif;font-style:normal;color:#fff;text-align:center}
+.ls-zeile{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}.ls-zeile:last-child{border-bottom:0}
+.ls-t{flex:1;min-width:200px}.ls-t b{display:block;font-size:14px}.ls-t small{color:var(--muted);font-size:12px}.ls-a{display:flex;gap:6px;flex-wrap:wrap}
+details.kw-card>summary{cursor:pointer;list-style:none}details.kw-card>summary small{color:var(--muted);margin-left:6px}details.kw-card[open]>summary{margin-bottom:10px}
+@media(max-width:800px){.ls-navwrap{grid-template-columns:repeat(2,minmax(0,1fr))}.ls-bar{width:90px}}

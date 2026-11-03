@@ -21347,24 +21347,89 @@ async function lsCheckInsLaden(){
  }catch(e){console.warn("Check-Ins:",e);return[]}
 }
 function lsThemaName(id){const e=kwThemaById(id);if(!e)return String(id);const lb=e.lbNum||String(e.phase||"").replace("lb","");return`LB ${lb} · ${kwKurz(e)}`}
+const LS_AMP={gruen:["#2E7D57","grün"],orange:["#E0A800","gelb"],rot:["#C0392B","rot"]};
+function lsAmpelPunkt(a,t){const f=(LS_AMP[a]||["#C5CCD3"])[0];return`<i class="ls-dot" style="background:${f}" title="${esc(t||"")}"></i>`}
+function lsThemenLb(n){const p=kwPhase(n);return p?kwThemenVonPhase(p):[]}
+function lsThemaDetail(id){
+ const e=kwThemaById(id);
+ const zeilen=LT.schueler.map(u=>{const x=(LT.ci||[]).find(y=>y.uid===u.uid&&y.wocheId===id);
+  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td>${x?`${lsAmpelPunkt(x.ampel)} ${x.richtig} von ${x.gesamt} richtig`:`<span style="color:var(--muted)">noch nicht gemacht</span>`}</td></tr>`}).join("");
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">CHECK-IN</div><h2>${esc(e?kwKurz(e):id)}</h2><div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Ergebnis</th></tr></thead><tbody>${zeilen||`<tr><td>Noch keine Schüler:innen.</td></tr>`}</tbody></table></div>`);
+}
 function lsUebersichtHTML(ci,co,abgaben){
- const cos=(co&&co.checkouts||[]).filter(c=>c.status==="live"||c.status==="beendet");
  const rows=LT.schueler.map(u=>{
-  const c=ci.filter(x=>x.uid===u.uid),p=c.reduce((s,x)=>s+(x.gesamt?x.richtig/x.gesamt:0),0);
+  const c=ci.filter(x=>x.uid===u.uid);
   const a=abgaben.filter(x=>x.uid===u.uid&&x.abgegeben),aw=abgaben.filter(x=>x.uid===u.uid&&x.ausgewertet);
   const np=aw.length?(aw.reduce((s,x)=>s+(Number(x.notenpunkte)||0),0)/aw.length).toFixed(1).replace(".",","):"–";
   const t=LT.alle.filter(x=>x.uid===u.uid&&x.abgegeben);
-  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td>${c.length?`${c.length} Check-In${c.length===1?"":"s"} · Ø ${Math.round(p/c.length*100)} % richtig`:"–"}</td><td>${a.length} von ${cos.length} abgegeben · Ø ${np} NP</td><td>${t.length} von ${LT.tests.length}</td><td><button type="button" class="secondary kw-add" data-ls="detail" data-uid="${esc(u.uid)}">Details</button></td></tr>`;
+  const pu=["gruen","orange","rot"].map(k=>{const n=c.filter(x=>x.ampel===k).length;return n?`${lsAmpelPunkt(k)}${n} `:""}).join("");
+  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td>${c.length?`${c.length} · ${pu}`:"–"}</td><td>${a.length} abgegeben · Ø ${np} NP</td><td>${t.length}</td><td><button type="button" class="secondary kw-add" data-ls="detail" data-uid="${esc(u.uid)}">Details</button></td></tr>`;
  }).join("");
- return`<div class="kw-card"><h3>Alles Geleistete im Überblick</h3><div class="kw-tabwrap">${LT.schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Check-Ins</th><th>Check-outs und KPrim-Tests</th><th>Digitale Tests</th><th></th></tr></thead><tbody>${rows}</tbody></table>`:`<div class="kw-leer">Noch keine freigeschalteten Schüler:innen.</div>`}</div><small>NP = Notenpunkte. Lehrkräfte-Konten erscheinen hier nicht.</small></div>`;
+ return`<details class="kw-card ls-lern"><summary><b>Nach Lernenden</b> <small>Alles, was eine einzelne Person geleistet hat</small></summary><div class="kw-tabwrap">${LT.schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Check-Ins</th><th>Check-outs und K-Prim-Tests</th><th>Digitale Tests</th><th></th></tr></thead><tbody>${rows}</tbody></table>`:`<div class="kw-leer">Noch keine freigeschalteten Schüler:innen.</div>`}</div><small>NP = Notenpunkte. Lehrkräfte-Konten erscheinen hier nicht.</small></details>`;
 }
 function lsDetail(uid){
  const u=LT.schueler.find(x=>x.uid===uid)||{uid};
  const ci=(LT.ci||[]).filter(x=>x.uid===uid),ab=(LT.abgaben||[]).filter(x=>x.uid===uid),co=(KW.co&&KW.co.checkouts)||[];
- const l1=ci.length?ci.map(x=>`<li>${esc(lsThemaName(x.wocheId))}: ${x.richtig} von ${x.gesamt} richtig</li>`).join(""):"<li>noch kein Check-In</li>";
- const l2=co.map(c=>{const a=ab.find(x=>x.checkoutId===c.id);return`<li>${esc(coTitelAnzeige(c)||"Check-out")}: ${a?(a.ausgewertet?`${a.be} BE · ${a.notenpunkte} NP`:(a.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen")):"nicht teilgenommen"}</li>`}).join("")||"<li>keine Check-outs</li>";
- const l3=LT.tests.map(t=>{const a=LT.alle.find(x=>x.testId===t.id&&x.uid===uid);return`<li>${esc(t.titel)}: ${esc(ltStatus(t,a))}</li>`}).join("")||"<li>keine Tests</li>";
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">LERNSTÄNDE</div><h2>${esc(anzeigeName(u))}</h2><h3>Check-Ins</h3><ul>${l1}</ul><h3>Check-outs und KPrim-Tests</h3><ul>${l2}</ul><h3>Digitale Tests</h3><ul>${l3}</ul>`);
+ const lb=[1,2,3,4].map(n=>{
+  const ph=kwPhase(n),F=kwFarbe(n);
+  const th=lsThemenLb(n).map(e=>{const x=ci.find(y=>y.wocheId===e.id);return`<li>${x?lsAmpelPunkt(x.ampel):lsAmpelPunkt("")} ${esc(kwKurz(e))}: ${x?`${x.richtig} von ${x.gesamt} richtig`:"Check-In offen"}</li>`}).join("");
+  const cs=co.filter(c=>Number(c.lbNum)===n).map(c=>{const a=ab.find(x=>x.checkoutId===c.id);return`<li>Check-out ${esc(coTitelAnzeige(c)||"")}: ${a?(a.ausgewertet?`${a.be} BE · ${a.notenpunkte} NP`:(a.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen")):"nicht teilgenommen"}</li>`}).join("");
+  const ts=LT.tests.filter(t=>Number(t.lb)===n).map(t=>{const a=LT.alle.find(x=>x.testId===t.id&&x.uid===uid);return`<li>Test ${esc(t.titel)}: ${esc(ltStatus(t,a))}</li>`}).join("");
+  return`<h3 style="color:${F.t};margin:14px 0 4px">LB ${n}${ph?" · "+esc(ph.lbTitel):""}</h3><ul>${th||"<li>keine Themen</li>"}${cs}${ts}</ul>`}).join("");
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">LERNSTÄNDE</div><h2>${esc(anzeigeName(u))}</h2>${lb}`);
+}
+function lsCoZeile(c,d,lehrer,abgaben){
+ const a=d.meineAbgaben[c.id];
+ const st=c.status==="live"?`<span class="co-chip live"><span class="co-live-punkt"></span>läuft</span>`:c.status==="beendet"?`<span class="co-chip fertig">beendet</span>`:`<span class="co-chip entwurf">Entwurf</span>`;
+ let info="",rechts="";
+ if(lehrer){
+  const ab=abgaben.filter(x=>x.checkoutId===c.id&&x.abgegeben),aw=abgaben.filter(x=>x.checkoutId===c.id&&x.ausgewertet);
+  info=`${ab.length} von ${LT.schueler.length} abgegeben${aw.length?` · Ø ${(aw.reduce((s,x)=>s+(Number(x.notenpunkte)||0),0)/aw.length).toFixed(1).replace(".",",")} NP`:""}`;
+  rechts=c.status==="entwurf"?`<button class="secondary"onclick="openCheckoutEditor('${c.id}')">Bearbeiten</button><button class="primary"onclick="coLiveStarten('${c.id}')">▶ Live freischalten</button>`
+   :c.status==="live"?`<button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button>`
+   :`<button class="secondary"onclick="openCheckoutErgebnisse('${c.id}')">Ergebnisse</button>`;
+ }else{
+  info=a?.ausgewertet?`${npText(a.notenpunkte)}`:a?.abgegeben?"abgegeben, wird ausgewertet":c.status==="live"?"läuft jetzt":"nicht teilgenommen";
+  rechts=c.status==="live"?(a?.abgegeben?`<span class="co-chip fertig">abgegeben ✓</span>`:`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Starten"}</button>`)
+   :a?.ausgewertet?`<button class="secondary"onclick="openCheckoutMeinErgebnis('${c.id}')">Ansehen</button>`:"";
+ }
+ return`<div class="ls-zeile"><span class="chip slk">Check-out</span><div class="ls-t"><b>${esc(coTitelAnzeige(c)||"Check-out")}</b><small>${coDatum(c.datum)} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben · ${info}</small></div>${st}<div class="ls-a">${rechts}</div></div>`;
+}
+function lsTestZeile(t,lehrer){
+ const a=lehrer?null:LT.abg[t.id],n=lehrer?LT.alle.filter(x=>x.testId===t.id&&x.abgegeben).length:0;
+ const rechts=lehrer
+  ?`<button class="primary" data-ls="erg" data-id="${esc(t.id)}">Ergebnisse</button><button class="secondary" data-ls="testedit" data-id="${esc(t.id)}">Bearbeiten</button><button class="secondary" data-ls="toggle" data-id="${esc(t.id)}">${t.status==="geschlossen"?"Wieder öffnen":"Schließen"}</button><button class="secondary" data-ls="testweg" data-id="${esc(t.id)}">Löschen</button>`
+  :`<button class="primary" data-ls="open" data-id="${esc(t.id)}">${a&&a.abgegeben?"Ansehen":(t.status==="geschlossen"?"Ansehen":"Test starten")}</button>`;
+ return`<div class="ls-zeile"><span class="chip ueb">Digitaler Test</span><div class="ls-t"><b>${esc(t.titel)}</b><small>${ltBE(t)} BE${t.ki?" · mit KI-Vorkorrektur":""} · ${lehrer?`${n} von ${LT.schueler.length} abgegeben`:esc(ltStatus(t,a))}${t.status==="geschlossen"?" · geschlossen":""}</small></div><div class="ls-a">${rechts}</div></div>`;
+}
+function lsLbBlock(n,ci,co,abgaben,lehrer){
+ const ph=kwPhase(n),F=kwFarbe(n);if(!ph)return"";
+ const themen=lsThemenLb(n),N=LT.schueler.length;
+ const cos=((co&&co.checkouts)||[]).filter(c=>Number(c.lbNum)===n);
+ const tests=LT.tests.filter(t=>Number(t.lb)===n&&(lehrer||t.status!=="entwurf"));
+ // Kopfzahlen
+ let chip;
+ if(lehrer){
+  const v=ci.filter(x=>themen.some(e=>e.id===x.wocheId)).length;
+  chip=`Check-Ins ${v} von ${themen.length*N}`;
+ }else{
+  const v=themen.filter(e=>ci.some(x=>x.wocheId===e.id)).length;
+  chip=`Check-Ins ${v} von ${themen.length}`;
+ }
+ const zeilen=themen.map(e=>{
+  const mine=ci.filter(x=>x.wocheId===e.id);
+  if(lehrer){
+   const g=k=>mine.filter(x=>x.ampel===k).length,n3=mine.length;
+   const bar=n3?`<span class="ls-bar" title="grün ${g("gruen")} · gelb ${g("orange")} · rot ${g("rot")}">${["gruen","orange","rot"].map(k=>g(k)?`<i style="flex:${g(k)};background:${LS_AMP[k][0]}">${g(k)}</i>`:"").join("")}</span>`:`<span class="ls-bar leer"></span>`;
+   return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}</span>${bar}<small>${n3} von ${N}</small><button class="secondary kw-add" data-ls="thema" data-id="${esc(e.id)}">Wer?</button></div>`;
+  }
+  const x=mine[0];
+  return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}</span>${x?`${lsAmpelPunkt(x.ampel)}<small>${x.richtig} von ${x.gesamt} richtig</small>`:`<small class="ls-offen">Check-In offen</small>`}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(e.id)}">${x?"Ansehen":"Starten"}</button></div>`;
+ }).join("");
+ const nachweise=cos.map(c=>lsCoZeile(c,co,lehrer,abgaben)).join("")+tests.map(t=>lsTestZeile(t,lehrer)).join("");
+ return`<section class="ls-lb" id="ls-lb${n}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="ls-lbk"><small>LB ${n}</small><b>${esc(ph.lbTitel)}</b><span>${chip}</span></header>
+  <div class="ls-sek"><h4>Check-Ins nach Thema</h4>${zeilen||`<div class="kw-leer">Keine Themen.</div>`}</div>
+  <div class="ls-sek"><h4>Check-outs, K-Prim-Tests und digitale Tests</h4>${nachweise||`<div class="kw-leer">Zu diesem Lernbereich gibt es noch keinen Nachweis.</div>`}</div></section>`;
 }
 async function renderKwCheckouts(){
  await kwLaden();await ltLaden();
@@ -21373,28 +21438,17 @@ async function renderKwCheckouts(){
  let abgaben=[];
  if(lehrer){try{abgaben=(await getDocs(collection(db,"checkoutAbgaben"))).docs.map(d=>d.data())}catch(e){}}
  LT.abgaben=abgaben;
- // Check-Ins
- let ciHTML;
- if(lehrer){
-  const m={};ci.forEach(x=>{const t=(m[x.wocheId]=m[x.wocheId]||{n:0,p:0});t.n++;t.p+=x.gesamt?x.richtig/x.gesamt:0});
-  ciHTML=Object.keys(m).length?`<div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Thema</th><th>Teilgenommen</th><th>Ø richtig</th></tr></thead><tbody>${Object.entries(m).map(([id,t])=>`<tr><th scope="row">${esc(lsThemaName(id))}</th><td>${t.n}</td><td>${Math.round(t.p/t.n*100)} %</td></tr>`).join("")}</tbody></table></div>`:`<div class="kw-leer">Noch keine Check-Ins gemacht.</div>`;
- }else{
-  ciHTML=ci.length?`<div class="kw-rows">${ci.map(x=>`<div class="kw-row"><i class="kw-bx d"></i><span>${esc(lsThemaName(x.wocheId))}</span><small>${x.richtig} von ${x.gesamt} richtig</small></div>`).join("")}</div>`:`<div class="kw-leer">Du hast noch keinen Check-In gemacht. Du findest ihn auf der Seite des Themas in der Lernlandkarte.</div>`;
- }
- // Tests
- const tl=LT.tests.filter(t=>lehrer||t.status!=="entwurf").map(t=>{
-  const a=lehrer?null:LT.abg[t.id],n=lehrer?LT.alle.filter(x=>x.testId===t.id&&x.abgegeben).length:0;
-  return`<div class="kw-baust"><span class="chip ueb">LB ${esc(t.lb)}</span><b>${esc(t.titel)}</b><small>${ltBE(t)} BE${t.ki?" · mit KI-Vorkorrektur":""} · ${lehrer?`${n} von ${LT.schueler.length} abgegeben`:esc(ltStatus(t,a))}${t.status==="geschlossen"?" · geschlossen":""}</small>${lehrer
-   ?`<div class="kw-aktionen"><button class="primary" data-ls="erg" data-id="${esc(t.id)}">Ergebnisse</button><button class="secondary" data-ls="testedit" data-id="${esc(t.id)}">Bearbeiten</button><button class="secondary" data-ls="toggle" data-id="${esc(t.id)}">${t.status==="geschlossen"?"Wieder öffnen":"Schließen"}</button><button class="secondary" data-ls="testweg" data-id="${esc(t.id)}">Löschen</button></div>`
-   :`<button class="primary" data-ls="open" data-id="${esc(t.id)}">${a&&a.abgegeben?"Ansehen":(t.status==="geschlossen"?"Ansehen":"Test starten")}</button>`}</div>`}).join("");
- const testHTML=`<div class="kw-card"><h3>Digitale Tests mit KI-Vorkorrektur</h3><small>Offene Fragen am Bildschirm beantworten. Auf Wunsch gibt es vor der Abgabe eine KI-Vorkorrektur über den Assistenten der Schule.</small>${tl?`<div class="kw-baustliste" style="margin-top:10px">${tl}</div>`:`<div class="kw-leer" style="margin-top:10px">Noch kein Test angelegt.</div>`}${lehrer?`<div class="kw-aktionen" style="margin-top:10px"><button class="primary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button></div>`:""}</div>`;
+ const nav=[1,2,3,4].map(n=>{const ph=kwPhase(n),F=kwFarbe(n);return ph?`<a class="ls-nav" href="#" data-ls="sprung" data-lb="${n}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><small>LB ${n}</small><b>${esc(ph.lbTitel)}</b></a>`:""}).join("");
+ const bloecke=[1,2,3,4].map(n=>lsLbBlock(n,ci,co,abgaben,lehrer)).join("");
+ const verw=co?`<details class="kw-card ls-verw"><summary><b>Check-outs verwalten und Kurzarbeit-Ersatz</b> <small>${lehrer?"neuen Check-out anlegen, Einstellungen, Klassenübersicht":"deine Auswahl für den Kurzarbeit-Ersatz"}</small></summary>${checkoutSektionHTML(co)}</details>`:"";
  return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
-  <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>Alle Check-Ins, Check-outs und KPrim-Tests, digitale Tests und die Lernstandsmessung an einem Ort. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button>`:""}</div></header>
+  <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>Geordnet nach Lernbereichen: Check-Ins je Thema, Check-outs, K-Prim-Tests und digitale Tests. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button>`:""}</div></header>
+  ${co?checkoutLiveBannerHTML(co):""}
+  <div class="ls-navwrap">${nav}</div>
+  ${bloecke}
   ${lehrer?lsUebersichtHTML(ci,co,abgaben):""}
-  <div class="kw-card"><h3>Check-Ins</h3><small>Kurze Einstiegstests zu den Themen</small>${ciHTML}</div>
-  <div class="kw-card"><h3>Check-outs und KPrim-Tests</h3>${co?`${checkoutLiveBannerHTML(co)}${checkoutSektionHTML(co)}`:`<div class="kw-leer">Check-outs konnten nicht geladen werden.</div>`}</div>
-  ${testHTML}
+  ${verw}
  </div>${footer()}`;
 }
 function ltForm(id){
@@ -21472,6 +21526,8 @@ document.addEventListener("click",async ev=>{
   else if(a==="open")ltOeffnen(id);
   else if(a==="erg")ltErgebnisse(id);
   else if(a==="detail")lsDetail(b.dataset.uid);
+  else if(a==="thema")lsThemaDetail(id);
+  else if(a==="sprung"){ev.preventDefault();document.getElementById("ls-lb"+b.dataset.lb)?.scrollIntoView({behavior:"smooth",block:"start"})}
   else if(a==="kilink")taskcardLinkBearbeiten("fobizz_test",LT.kiUrl);
   else if(a==="toggle"){const t=LT.tests.find(x=>x.id===id);await updateDoc(doc(db,"lernTests",id),{status:t.status==="geschlossen"?"offen":"geschlossen"});render()}
   else if(a==="testweg"){if(!confirm("Diesen Test wirklich löschen? Die Abgaben bleiben gespeichert."))return;await deleteDoc(doc(db,"lernTests",id));toast("Gelöscht.");render()}
