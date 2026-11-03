@@ -886,3 +886,6 @@ body.exp-offen{overflow:hidden}
 .kw-hero-z{background:#fff;border:1px solid #cfe2f3;color:#1F6FB2}
 .kw-th{background:color-mix(in srgb,var(--c) 60%,#fff);color:#10261f}
 .kw-th small,.kw-th b{color:#10261f}
+/* Heute-Karte im Logo-Grün */
+.kw-hero{background:#F1F8E8;border:1px solid #d9eac0;border-left:6px solid #82b83b}
+.kw-hero-k{color:#4d7a1c}.kw-hero-z{border-color:#d9eac0;color:#4d7a1c}
