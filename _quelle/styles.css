@@ -911,3 +911,6 @@ details.kw-card>summary{cursor:pointer;list-style:none}details.kw-card>summary s
 .ls-th .ls-uns{display:block;white-space:normal;color:#8A4A1D;font-size:11.5px;margin-top:2px}
 .ls-unsbox{background:#FFF6E5;border:1px solid #f0d9a8;border-left:5px solid #E0A800;border-radius:12px;padding:10px 14px;margin:0 0 12px;font-size:13.5px}
 .ls-unsbox ul{margin:6px 0 0;padding-left:18px}.ls-unsbox li small{color:var(--muted);margin-left:6px}.ls-unsbox.ok{background:#EAF6EE;border-color:#bfe0cb;border-left-color:#2E7D57}
+details.ls-lb>summary{list-style:none;cursor:pointer}details.ls-lb>summary::-webkit-details-marker{display:none}
+.ls-pf{font-style:normal;font-size:16px;transition:transform .15s}details.ls-lb:not([open]) .ls-pf{transform:rotate(-90deg)}
+details.ls-lb:not([open])>summary.ls-lbk{border-radius:0 0 0 0}

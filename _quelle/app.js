@@ -21483,9 +21483,9 @@ function lsLbBlock(n,ci,co,abgaben,lehrer){
   return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}</span>${x?`${lsAmpelPunkt(x.ampel)}<small>${x.richtig} von ${x.gesamt} richtig</small>`:`<small class="ls-offen">Check-In offen</small>`}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(e.id)}">${x?"Ansehen":"Starten"}</button></div>`;
  }).join("");
  const nachweise=cos.map(c=>lsCoZeile(c,co,lehrer,abgaben)).join("")+tests.map(t=>lsTestZeile(t,lehrer)).join("");
- return`<section class="ls-lb" id="ls-lb${n}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="ls-lbk"><small>LB ${n}</small><b>${esc(ph.lbTitel)}</b><span>${chip}</span></header>
+ return`<details class="ls-lb" id="ls-lb${n}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><summary class="ls-lbk"><small>LB ${n}</small><b>${esc(ph.lbTitel)}</b><span>${chip}</span><i class="ls-pf" aria-hidden="true">▾</i></summary>
   <div class="ls-sek"><h4>Check-Ins nach Thema</h4>${zeilen||`<div class="kw-leer">Keine Themen.</div>`}</div>
-  <div class="ls-sek"><h4>Check-outs, K-Prim-Tests und digitale Tests</h4>${nachweise||`<div class="kw-leer">Zu diesem Lernbereich gibt es noch keinen Nachweis.</div>`}</div></section>`;
+  <div class="ls-sek"><h4>Check-outs, K-Prim-Tests und digitale Tests</h4>${nachweise||`<div class="kw-leer">Zu diesem Lernbereich gibt es noch keinen Nachweis.</div>`}</div></details>`;
 }
 async function renderKwCheckouts(){
  await kwLaden();await ltLaden();
@@ -21504,6 +21504,7 @@ async function renderKwCheckouts(){
   <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>Geordnet nach Lernbereichen: Check-Ins je Thema, Check-outs, K-Prim-Tests und digitale Tests. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button>`:""}</div></header>
   ${co?checkoutLiveBannerHTML(co):""}
   <div class="ls-navwrap">${nav}</div>
+  <div class="kw-aktionen" style="margin:0 0 10px"><button class="secondary" data-ls="alle" data-auf="1">Alle aufklappen</button><button class="secondary" data-ls="alle" data-auf="0">Alle zuklappen</button></div>
   ${bloecke}
   ${lehrer?lsUebersichtHTML(ci,co,abgaben):""}
   ${verw}
@@ -21585,7 +21586,8 @@ document.addEventListener("click",async ev=>{
   else if(a==="erg")ltErgebnisse(id);
   else if(a==="detail")lsDetail(b.dataset.uid);
   else if(a==="thema")lsThemaDetail(id);
-  else if(a==="sprung"){ev.preventDefault();document.getElementById("ls-lb"+b.dataset.lb)?.scrollIntoView({behavior:"smooth",block:"start"})}
+  else if(a==="sprung"){ev.preventDefault();const el=document.getElementById("ls-lb"+b.dataset.lb);if(el){el.open=true;el.scrollIntoView({behavior:"smooth",block:"start"})}}
+  else if(a==="alle"){const auf=b.dataset.auf==="1";document.querySelectorAll("details.ls-lb").forEach(x=>x.open=auf)}
   else if(a==="kilink")taskcardLinkBearbeiten("fobizz_test",LT.kiUrl);
   else if(a==="toggle"){const t=LT.tests.find(x=>x.id===id);await updateDoc(doc(db,"lernTests",id),{status:t.status==="geschlossen"?"offen":"geschlossen"});render()}
   else if(a==="testweg"){if(!confirm("Diesen Test wirklich löschen? Die Abgaben bleiben gespeichert."))return;await deleteDoc(doc(db,"lernTests",id));toast("Gelöscht.");render()}
