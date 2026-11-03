@@ -40,14 +40,24 @@ service cloud.firestore {
       // Geburtstagsliste stehen im Kurzprofil (profilePublic, siehe unten).
       allow read: if isSelf(uid) || isTeacher();
 
-      // Public registration can only create a student in pending state.
-      // Registrierung nur mit dem Zugangscode der Lehrkraft (config/zugang).
-      allow create: if isSelf(uid)
-        && request.resource.data.role == 'student'
-        && request.resource.data.status == 'pending'
-        && request.resource.data.uid == uid
-        && exists(/databases/$(database)/documents/config/zugang)
-        && request.resource.data.zugangscode == get(/databases/$(database)/documents/config/zugang).data.code;
+      // Neue Konten entstehen auf zwei Wegen:
+      // (a) Lehrkräfte registrieren sich mit Pseudonym und warten auf Freischaltung (Status pending).
+      // (b) Schüler:innen richten sich mit einem einmaligen Zugangscode ein (Karte der Lehrkraft).
+      //     Der Code wird im selben Schreibvorgang als benutzt markiert (getAfter).
+      allow create: if (isSelf(uid)
+          && request.resource.data.role == 'student'
+          && request.resource.data.status == 'pending'
+          && request.resource.data.uid == uid)
+        || (isSelf(uid)
+          && request.resource.data.role == 'student'
+          && request.resource.data.status == 'approved'
+          && request.resource.data.uid == uid
+          && request.resource.data.keys().hasOnly(['uid','email','firstName','lastName','displayName','pseudonym','role','status','code','createdAt'])
+          && request.resource.data.code is string
+          && exists(/databases/$(database)/documents/einladungen/$(request.resource.data.code))
+          && get(/databases/$(database)/documents/einladungen/$(request.resource.data.code)).data.used == false
+          && getAfter(/databases/$(database)/documents/einladungen/$(request.resource.data.code)).data.used == true
+          && getAfter(/databases/$(database)/documents/einladungen/$(request.resource.data.code)).data.usedBy == request.auth.uid);
 
       // Admins may manage all user fields.
       // Teachers may only manage the status of student accounts.
@@ -93,6 +103,23 @@ service cloud.firestore {
         && request.resource.data.keys().hasOnly(['uid','v','salt','iv','ct','updatedAt']);
       allow delete: if isAdmin()
         || (signedIn() && request.auth.token.email == slug + '@pseudonym.f12sb.invalid');
+    }
+
+    // Zugangskarten: einmalige Codes, von Lehrkräften erzeugt, von Schüler:innen bei der Einrichtung eingelöst.
+    match /einladungen/{code} {
+      allow get: if signedIn();
+      allow list: if isTeacher();
+      allow create: if isTeacher()
+        && request.resource.data.used == false
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.keys().hasOnly(['used','createdBy','createdAt','klasse']);
+      allow update: if isTeacher()
+        || (signedIn()
+          && resource.data.used == false
+          && request.resource.data.used == true
+          && request.resource.data.usedBy == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['used','usedBy','usedAt']));
+      allow delete: if isTeacher();
     }
 
     match /config/{id} {
