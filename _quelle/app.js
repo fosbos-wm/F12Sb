@@ -2,8 +2,8 @@ let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, 
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
-*/ const firebaseConfig = { apiKey: "AIzaSyBKRUQz7x0hA8_GxJ4qi-61veKrS3GQqCA", authDomain: "f11sb-62bae.firebaseapp.com", projectId: "f11sb-62bae", storageBucket: "f11sb-62bae.firebasestorage.app", messagingSenderId: "579105646323", appId: "1:579105646323:web:3bfb668a90cb37540e3986", measurementId: "G-20SRP6BE9K" }; /* =========================================================
- F11Sb MASTER – STABILE MODULREGISTRY
+*/ const firebaseConfig = { apiKey: "AIzaSyB_q4BaOGXaxLLL_fYB1MNA0HO2llAeG_s", authDomain: "f12sb-9f3db.firebaseapp.com", projectId: "f12sb-9f3db", storageBucket: "f12sb-9f3db.firebasestorage.app", messagingSenderId: "85936724696", appId: "1:85936724696:web:aa5be7604fd580e4add5ad" }; /* =========================================================
+ F12Sb MASTER – STABILE MODULREGISTRY
  Die Master-App selbst enthält keine Pflicht-Imports
  von Zusatzmodulen. Module werden erst beim Öffnen geladen.
  ========================================================= */ const CAMPUS_MODULES={ lernpfad:{label:"Persönlicher Lernpfad",route:"lernpfad",ready:true}, lernressourcen:{label:"Lernressourcen",route:"ressourcen",ready:true}, lernjournal:{label:"Lernjournal",route:"journal",ready:true}, lernmethoden:{label:"Lernmethoden",route:"methoden",ready:true}, lernimpulse:{label:"Lernimpulse",route:"impulse",ready:false}, lernstand:{label:"Lernstandsmessung",route:"lernstand",ready:true}, lerncoaching:{label:"Lerncoaching",route:"lerncoaching",ready:false}, resilienz:{label:"Resilienz & Respressi",route:"resilienz",ready:false}, kompetenz:{label:"Kompetenzwerkstatt",route:"kompetenz",ready:true}, forum:{label:"Campus-Forum",route:"forum",ready:true}, pinnwand:{label:"Pinnwand",route:"pinnwand",ready:true}, kollaboration:{label:"Tools für Zusammenarbeit",route:"kollaboration",ready:true}, wortwolke:{label:"Wortwolke",route:"wortwolke",ready:true}, kanban:{label:"Kanban-Board",route:"kanban",ready:true}, terminfindung:{label:"Terminfindung",route:"terminfindung",ready:true}, teamgesucht:{label:"Team gesucht",route:"teamgesucht",ready:true}, checkliste:{label:"Gemeinsame Checkliste",route:"checkliste",ready:true}, ampel:{label:"Verständnis-Ampel",route:"ampel",ready:true}, umfrage:{label:"Live-Umfrage",route:"umfrage",ready:true}, zufallspicker:{label:"Wer ist dran?",route:"zufallspicker",ready:true}, lernwerkzeuge:{label:"Lern-Werkzeuge",route:"lernwerkzeuge",ready:true}, karteikarten:{label:"Karteikarten",route:"karteikarten",ready:true},"fokus-timer":{label:"Fokus-Timer",route:"fokus-timer",ready:true}, glossar:{label:"Glossar",route:"glossar",ready:true}, projekte:{label:"Projekte",route:"projekte",ready:true}, praxis:{label:"fpA",route:"praktikum",ready:true}, ki:{label:"KI-Innovationslabor",route:"ki",ready:true}, kalender:{label:"Campus-Kalender",route:"kalender",ready:true}, kompetenzprofil:{label:"Kompetenzprofil",route:"kompetenzprofil",ready:false}, team:{label:"Lehrkräfte Klassenteam",route:"team",ready:true} }; const configReady = !Object.values(firebaseConfig).some(v => String(v).includes("HIER_") || String(v).includes("DEIN-PROJEKT")); let app=null, auth=null, db=null; const $=id=>document.getElementById(id); const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
@@ -15,7 +15,7 @@ let activeFach=null;
 let activePhaseDetail=null;
 let ppDirty=false; // Zeitstrahl nach Änderungen im Modal neu zeichnen
 function openFach(fach){activeFach=fach;activePhaseDetail=null;go("fach")}
-function closeFach(){activeFach=null;activePhaseDetail=null;go("lernwerkstatt")}
+function closeFach(){activeFach=null;activePhaseDetail=null;go("faecher")}
 function openPhaseDetail(phaseId){activePhaseDetail=phaseId;render()}
 function closePhaseDetail(){activePhaseDetail=null;render()}
 window.openFach=openFach;window.closeFach=closeFach;
@@ -24,14 +24,13 @@ window.openPhaseDetail=openPhaseDetail;window.closePhaseDetail=closePhaseDetail;
 function toast(t){const
 x=$("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove("show"),
 2500)}
-
 /* =========================================================
  PSEUDONYM-ANMELDUNG (Datenschutz)
  Keine Klarnamen, keine echten E-Mail-Adressen: Anmeldung mit Pseudonym + Passwort,
  Registrierung nur mit Zugangscode der Lehrkraft. Intern wird das Pseudonym als
- technische Adresse (…@pseudonym.f11sb.invalid) an Firebase Auth übergeben.
+ technische Adresse (…@pseudonym.f12sb.invalid) an Firebase Auth übergeben.
  ========================================================= */
-const PSEUDO_DOMAIN="pseudonym.f11sb.invalid";let codeRegPromise=null;
+const PSEUDO_DOMAIN="pseudonym.f12sb.invalid";let codeRegPromise=null;
 function pseudoSlug(p){return String(p||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ß/g,"ss").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}
 function pseudoMail(p){return pseudoSlug(p)+"@"+PSEUDO_DOMAIN}
 function pseudoGueltig(p){p=String(p||"").trim();return p.length>=3&&p.length<=20&&/^[A-Za-zÄÖÜäöüß0-9 _.\-]+$/.test(p)&&pseudoSlug(p).length>=3}
@@ -69,7 +68,7 @@ function modal(html){$("modal").innerHTML=html;$("modalBackdrop").hidden=false}
 function closeModal(){$("modalBackdrop").hidden=true;if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}if(ppDirty){ppDirty=false;if(activeFach==="paedagogik")render();}}
 function pageHead(k,h,p,actions=""){return`<header class="kw-kopf page-head" style="--c:#4B5563;--t:#1F2937"><div><div class="kicker">${k}</div><h1>${h}</h1><p>${p}</p>
 </div><div class="actions">${actions}</div></header>`}
-function footer(){return`<div class="footer"><span>F11Sb 26/27 · FOSBOS Weilheim</span><span>Gemeinsam · offen ·
+function footer(){return`<div class="footer"><span>F12Sb 26/27 · FOSBOS Weilheim</span><span>Gemeinsam · offen ·
 respektvoll</span><span><button type="button"onclick="showImpressum()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Impressum</button> · <button type="button"onclick="showDatenschutz()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Datenschutz</button></span></div>`}
 
 /* =========================================================
@@ -111,7 +110,7 @@ function showImpressum(){
  Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
  <div class="notice">
- <strong>Hinweis zur F11Sb-App</strong>
+ <strong>Hinweis zur F12Sb-App</strong>
  <p style="margin-bottom:0">Diese App ist ein Unterrichts-/Klassenprojekt und kein offizielles IT-Angebot der Schulverwaltung. Die obigen Angaben entsprechen denen der offiziellen Schul-Website (fos-bos-weilheim.de). Für Rückfragen zu dieser App wende dich zusätzlich an die betreuende Lehrkraft. Die <a href="#"onclick="closeModal();showDatenschutz();return false">Datenschutzerklärung</a> findest du hier.</p>
  </div>
 
@@ -122,7 +121,7 @@ function showImpressum(){
 /* =========================================================
  DATENSCHUTZ: Erklärung, Datenauskunft/-export, Löschung
  ========================================================= */
-const DS_APP="F11Sb";
+const DS_APP="F12Sb";
 const DS_HINWEIS_FREITEXT="🔒 Bitte hier keine sensiblen Daten eintragen (Gesundheit, Familie, Religion, Herkunft, Konflikte) – weder über dich noch über andere.";
 function dsHinweis(){return`<small class="ds-hinweis"style="display:block;margin:4px 0 8px;color:var(--muted,#5b6b7a)">${DS_HINWEIS_FREITEXT}</small>`}
 
@@ -248,7 +247,7 @@ function showDatenschutz(){
  <p><strong>5. Empfänger und Dienstleister</strong><br>
  <em>Google Firebase</em> (Google Cloud EMEA Limited / Google LLC): Anmeldung, Datenbank (Firestore) und Dateispeicher. Die Daten werden in einem Rechenzentrum von Google gespeichert; eine Verarbeitung durch das US-Unternehmen Google LLC ist dabei nicht ausgeschlossen. Grundlage der Übermittlung sind der Angemessenheitsbeschluss zum EU-US Data Privacy Framework bzw. Standardvertragsklauseln.<br>
  <em>GitHub Pages</em> (GitHub Inc., Microsoft): Auslieferung der Webseite. Dabei wird deine IP-Adresse verarbeitet.<br>
- <em>Eingebettete Inhalte</em> (YouTube, Vimeo): Erst wenn du solche Inhalte öffnest, wird eine Verbindung zum jeweiligen Anbieter aufgebaut und deine IP-Adresse übermittelt.<br>
+ <em>Eingebettete Inhalte</em> (YouTube, Vimeo, WebUntis): Erst wenn du solche Inhalte öffnest, wird eine Verbindung zum jeweiligen Anbieter aufgebaut und deine IP-Adresse übermittelt.<br>
  Die Software der App wird von dieser Seite selbst ausgeliefert, es werden keine Schriftarten, Tracker oder Werbedienste von Dritten geladen.</p>
 
  <p><strong>6. Cookies und lokaler Speicher</strong><br>
@@ -381,7 +380,7 @@ function showRegisterForm(){
  Nur freigeschaltete Lehrkräfte/Admins dürfen Ressourcen
  erstellen. Die bestehende Anzeige bleibt unverändert.
  ========================================================= */
-window.openLernressourceForm=async function(){
+window.openLernressourceForm=async function(vorgabeTyp){
  if(!isTeacher()){
  toast("Nur freigeschaltete Lehrkräfte können Lernressourcen anlegen.");
  return;
@@ -420,6 +419,7 @@ window.openLernressourceForm=async function(){
  <button class="primary"type="button"id="lrSave">Lernressource anlegen</button>
  </div>
  </div>`);
+ if(typeof vorgabeTyp==="string"){const sel=document.getElementById("lrType");if(sel&&[...sel.options].some(o=>o.value===vorgabeTyp))sel.value=vorgabeTyp;}
 
  const save=document.getElementById("lrSave");
  if(!save)return;
@@ -622,18 +622,40 @@ async function renderRessourcenRoute(){
 
  const card=r=>{
  const type=typeOf(r),t=types[type],tags=tagsOf(r),url=urlOf(r);
- return`<article class="card resource-card"data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}">
- <div class="resource-head"><span class="resource-icon">${t.icon}</span><span class="pill">${esc(t.label)}</span></div>
+ const editCall=`editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')`;
+ const meta=[subjectOf(r),...tags.map(x=>"#"+x)].filter(Boolean).join(" · ");
+ return`<article class="card resource-card res-tile"data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}"title="${esc(titleOf(r))}">
+ <div class="res-top"><span class="resource-icon">${t.icon}</span><span class="pill">${esc(t.label)}</span>${canEdit?`<span class="res-edit"><button type="button"class="res-ico"title="Bearbeiten"aria-label="Lernressource bearbeiten"onclick="${editCall}">✎</button><button type="button"class="res-ico"title="Löschen"aria-label="Lernressource löschen"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">🗑</button></span>`:""}</div>
  <h3>${esc(titleOf(r))}</h3>
- ${descOf(r)?`<p>${esc(descOf(r))}</p>`:""}
- ${subjectOf(r)?`<div class="resource-meta"> ${esc(subjectOf(r))}</div>`:""}
- ${tags.length?`<div class="chips">${tags.map(x=>`<span class="chip">#${esc(x)}</span>`).join("")}</div>`:""}
- ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">${t.icon} Lernressource öffnen →</button>`:`<div class="notice">Für diese Ressource ist noch kein Link hinterlegt.</div>`}
- ${canEdit?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')">Bearbeiten</button><button class="secondary"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">Löschen</button></div>`:""}
+ ${descOf(r)?`<p class="res-desc">${esc(descOf(r))}</p>`:""}
+ ${meta?`<div class="res-meta">${esc(meta)}</div>`:""}
+ ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">Öffnen →</button>`:`<div class="notice"style="margin-top:auto;font-size:12px">Noch kein Link hinterlegt.</div>`}
  </article>`;
  };
+ const plusKachel=typ=>canEdit?`<button type="button"class="res-plus"onclick="window.openLernressourceForm('${typ}')"aria-label="Neue Lernressource anlegen"><span class="big">＋</span><span>Neue Lernressource</span></button>`:"";
+ const resCss=`<style>
+ .res-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+ .res-tile{min-height:250px;padding:14px;display:flex;flex-direction:column;gap:8px}
+ .res-tile>*{flex-shrink:0}
+ .res-top{display:flex;align-items:center;gap:6px;min-height:32px}
+ .res-top .resource-icon{font-size:22px;line-height:1}
+ .res-top .pill{font-size:11px;padding:2px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+ .res-edit{margin-left:auto;display:flex;gap:4px;flex:none}
+ .res-ico{width:30px;height:30px;border-radius:8px;border:1.5px solid #c6d2df;background:#fff;cursor:pointer;font-size:14px;line-height:1;padding:0}
+ .res-ico:hover{background:#f0f7ff;border-color:#2f7fc6}
+ .res-tile h3{margin:2px 0 0;font-size:15px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+ .res-desc{margin:0;font-size:12.5px;line-height:1.35;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .res-meta{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .res-tile .resource-open{margin-top:auto;padding:8px 10px;font-size:13px;min-height:0}
+ .res-plus{min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px dashed #b9c8d6;border-radius:16px;background:#fff;color:#3a4a5c;font:inherit;font-weight:700;font-size:14px;cursor:pointer;padding:10px;text-align:center}
+ .res-plus .big{font-size:40px;line-height:1;color:#2f7fc6}
+ .res-plus:hover{border-color:#2f7fc6;background:#f3f9ff}
+ @media(max-width:1100px){.res-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+ @media(max-width:720px){.res-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+ @media(max-width:460px){.res-grid{grid-template-columns:1fr}.res-tile,.res-plus{min-height:170px}}
+ </style>`;
 
- return`${pageHead("LERNWERKSTATT","Lernressourcen-Bibliothek","Finde passende Lernmaterialien, digitale Angebote und externe Lernwege – zentral für Schüler und Lehrkräfte.",addButton)}
+ return`${resCss}${pageHead("LERNWERKSTATT","Lernressourcen-Bibliothek","Finde passende Lernmaterialien, digitale Angebote und externe Lernwege – zentral für Schüler und Lehrkräfte.",addButton)}
  <div class="card"style="border-left:4px solid #3fa66a">
  <span class="badge"> DEINE LERNBIBLIOTHEK</span>
  <h2>Passende Ressource auswählen</h2>
@@ -644,7 +666,7 @@ async function renderRessourcenRoute(){
  ${Object.entries(grouped).map(([type,list])=>{
  if(!list.length)return"";
  const t=types[type];
- return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div><div class="grid grid-3">${list.map(card).join("")}</div></section>`;
+ return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div><div class="res-grid">${list.map(card).join("")}${plusKachel(type)}</div></section>`;
  }).join("")}
  ${resources.length?`<div class="notice"style="margin-top:16px"> ${resources.length} Lernressource${resources.length===1?"":"n"} verfügbar.</div>`:`<div class="card empty"style="margin-top:12px"><strong>Noch keine Lernressourcen vorhanden.</strong><p>Lege z. B. eine TaskCard, einen KI-Link, ein Video oder einen ByCS-/mebis-Link an.</p>${canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Erste Lernressource anlegen</button>`:""}</div>`}
  ${footer()}`;
@@ -1043,7 +1065,7 @@ $("logoutBtn").onclick=async()=>{
  try{await loadFirebase();await signOut(auth)}catch(e){console.error(e)}
 };
 $("menuBtn").onclick=()=>$("sidebar").classList.toggle("open");
-$("helpQuick").onclick=openHelpForm;
+if($("helpQuick"))$("helpQuick").onclick=openHelpForm;
 $("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
 
 const GC_LAUFEND={};
@@ -1464,29 +1486,32 @@ async function renderKlassenteam(){
 }
 
 // ============================================================
-// STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F11Sb
+// STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F12Sb
 // ============================================================
 
-// Die 7 benoteten Fächer der F11Sb (Sozialwesen). Das Wahlpflichtfach
+// Die 7 benoteten Fächer der F12Sb (Sozialwesen). Das Wahlpflichtfach
 // ist reiner Förderunterricht, wird nicht benotet und taucht daher hier
 // bewusst nicht auf.
+// Fächer der Jahrgangsstufe 12 (Fachoberschule, Ausbildungsrichtung Sozialwesen) nach
+// FOBOSO Anlage 1 Nr. 1.1 und 1.3: Religionslehre/Ethik 2, Deutsch 4, Englisch 4,
+// Politik und Gesellschaft 2, Mathematik 4, Sport 2 (nicht einbringungsfähig, § 35 Abs. 4),
+// Pädagogik/Psychologie 5, Sozialwirtschaft und Recht 3, Biologie 2, Soziologie 2
+// sowie zwei Wahlpflichtfächer zu je 2 Wochenstunden (§ 12 Abs. 2 FOBOSO).
+const WPF_AUSWAHL={wpf1:"",wpf2:""};
+function wpfLabel(key){const n=WPF_AUSWAHL[key];return n?`Wahlpflichtfach: ${n}`:`Wahlpflichtfach ${key==="wpf1"?1:2}`;}
 const F11SB_FAECHER=[
- {key:"deutsch",label:"Deutsch"},
- {key:"englisch",label:"Englisch"},
- {key:"geschichte",label:"Geschichte"},
- {key:"mathematik",label:"Mathematik"},
- {key:"paedagogik",label:"Pädagogik/Psychologie"},
- {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht"},
- {key:"chemie",label:"Chemie"}
-];
-// Fächer-Übersicht und Lehrplan-Zeitstrahl nach der Stundentafel FOS 11: zusätzlich der Wahlpflichtbereich
-// (Förderunterricht, nicht benotet und deshalb NICHT in F11SB_FAECHER, das die Notenberechnung speist).
-const F11SB_LEHRPLAN_FAECHER=[...F11SB_FAECHER,{key:"foerder",label:"Wahlpflichtbereich (Förderunterricht)"}];
-// Gruppen wie in der Stundentafel; fpA ist eine eigene Ausbildung mit eigenem Bereich (Route „praktikum“).
-const F11SB_FACHGRUPPEN=[
- {title:"Allgemeinbildende Fächer",keys:["deutsch","englisch","mathematik","geschichte"]},
- {title:"Profilfächer",keys:["paedagogik","sozialwirtschaft","chemie"]},
- {title:"Profilerweiternde Wahlpflichtfächer",keys:["foerder"]}
+ {key:"religion",label:"Religionslehre / Ethik",std:2},
+ {key:"deutsch",label:"Deutsch",std:4},
+ {key:"englisch",label:"Englisch",std:4},
+ {key:"mathematik",label:"Mathematik",std:4},
+ {key:"politik",label:"Politik und Gesellschaft",std:2},
+ {key:"sport",label:"Sport",std:2},
+ {key:"paedagogik",label:"Pädagogik/Psychologie",std:5},
+ {key:"sozialwirtschaft",label:"Sozialwirtschaft und Recht",std:3},
+ {key:"biologie",label:"Biologie",std:2},
+ {key:"soziologie",label:"Soziologie",std:2},
+ {key:"wpf1",get label(){return wpfLabel("wpf1")},std:2},
+ {key:"wpf2",get label(){return wpfLabel("wpf2")},std:2}
 ];
 
 // ============================================================
@@ -1497,12 +1522,12 @@ const F11SB_FACHGRUPPEN=[
 // und Praktikumszeit 2026/2027" der FOSBOS Weilheim übernommen (nur 6 Blöcke,
 // nicht 7 – vorherige Annahme war hier ungenau).
 const PRAKTIKUMSPHASEN=[
- {id:"pr1",start:"2026-09-15",end:"2026-10-02",titel:"Praktikum – B-Block – Erziehung (Block 1)",bereich:"Erziehungsbereich",icon:""},
- {id:"pr2",start:"2026-10-26",end:"2026-11-20",titel:"Praktikum – B-Block – Erziehung (Block 2)",bereich:"Erziehungsbereich",icon:""},
- {id:"pr3",start:"2026-12-14",end:"2027-01-15",titel:"Praktikum – B-Block – Erziehung (Block 3)",bereich:"Erziehungsbereich",icon:""},
- {id:"pr4",start:"2027-02-15",end:"2027-03-05",titel:"Praktikum – B-Block – Pflege (Block 1)",bereich:"Pflegebereich",icon:""},
- {id:"pr5",start:"2027-04-19",end:"2027-05-07",titel:"Praktikum – B-Block – Pflege (Block 2)",bereich:"Pflegebereich",icon:""},
- {id:"pr6",start:"2027-06-14",end:"2027-07-09",titel:"Praktikum – B-Block – Pflege (Block 3)",bereich:"Pflegebereich",icon:""}
+ {id:"pr1",start:"2026-09-15",end:"2026-10-02",titel:"Praktikum – B-Block – Erziehung (Block 1)",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr2",start:"2026-10-26",end:"2026-11-20",titel:"Praktikum – B-Block – Erziehung (Block 2)",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr3",start:"2026-12-14",end:"2027-01-15",titel:"Praktikum – B-Block – Erziehung (Block 3)",bereich:"Erziehungsbereich",icon:"🏫"},
+ {id:"pr4",start:"2027-02-15",end:"2027-03-05",titel:"Praktikum – B-Block – Pflege (Block 1)",bereich:"Pflegebereich",icon:"🏥"},
+ {id:"pr5",start:"2027-04-19",end:"2027-05-07",titel:"Praktikum – B-Block – Pflege (Block 2)",bereich:"Pflegebereich",icon:"🏥"},
+ {id:"pr6",start:"2027-06-14",end:"2027-07-09",titel:"Praktikum – B-Block – Pflege (Block 3)",bereich:"Pflegebereich",icon:"🏥"}
 ];
 
 // Aufträge je Praktikumsphase: von Lehrkräften gepflegt, überall live
@@ -1678,8 +1703,7 @@ const PROJEKT_PHASEN=PROJEKT_PHASEN_ROH.map(ph=>{
   aptStart:aw[0].start,aptEnde:aw[aw.length-1].end,
   start:pw[0].start,end:aw[aw.length-1].end};
 });
-const PROJEKT_VORLAGEN_PH={}; // Phasenobjekte der Projektvorlagen (projekte/<id>.json), s. bepPh()
-function projektPhaseById(id){return PROJEKT_PHASEN.find(p=>p.id===id)||PROJEKT_VORLAGEN_PH[id]||null;}
+function projektPhaseById(id){return PROJEKT_PHASEN.find(p=>p.id===id)||null;}
 function projektPhaseByWoche(wocheId){return PROJEKT_PHASEN.find(p=>p.notwendigeWochen.includes(wocheId)||p.trainingWochen.includes(wocheId))||null;}
 // LB 1 ist nur die interaktive Einstiegsstunde: kein Team, keine Meilensteine.
 function wocheHatTeam(woche){return woche?.typ==="projekt"&&!projektPhaseByWoche(woche.id)?.einstieg;}
@@ -1706,14 +1730,14 @@ const PP_EINHEITEN=[
   praxis:"Kaugummi-Versuch in Kleingruppen (Gruppe A ohne, Gruppe B mit Kaugummi); die Ergebnisse werden anonym mit der Klasse verglichen.",
   ziele:["Ich kann das Experiment als wissenschaftliche Methode beschreiben (Hypothese, unabhängige und abhängige Variable, Versuchs- und Kontrollgruppe).","Ich kann die Kennzeichen Willkürlichkeit, Variierbarkeit und Wiederholbarkeit erklären und an einem Beispiel erkennen und begründen.","Ich kann Ergebnisse eines Experiments vergleichen und kritisch beurteilen, ob sie sich verallgemeinern lassen."]},
  // ---------- LB 1 · Abschlussprüfungs-Training ----------
- {id:"pp1a1",phase:"lb1",typ:"apt",nr:"2, 6",bezug:["pp01","pp02"],thema:"Gegenstand der Pädagogik: Erziehungspraxis, Erziehungswissenschaft und die fünf Gegenstandsbereiche",
-  planung:"Erziehungspraxis und Erziehungswissenschaft als Teile der Pädagogik unterscheiden; die fünf Gegenstandsbereiche der Pädagogik (Erziehungswirklichkeit) kennen und an Beispielen zuordnen.",
-  ziele:["Ich kann Pädagogik als Oberbegriff für Erziehungspraxis und Erziehungswissenschaft erklären und beide voneinander unterscheiden.","Ich kann die fünf Gegenstandsbereiche der Pädagogik nennen und Beispiele aus der Praxis den Bereichen zuordnen.","Ich kann den Gegenstand der Pädagogik von dem der Psychologie abgrenzen und Wechselwirkungen aufzeigen."],
-  pruefung:"Grenzen Sie die Erziehungswissenschaft von der Erziehungspraxis ab und erläutern Sie an einem Beispiel aus Ihrem Praktikum, wie sich beide Bereiche gegenseitig beeinflussen. Ordnen Sie Ihr Beispiel einem der fünf Gegenstandsbereiche der Pädagogik zu.",
+ {id:"pp1a1",phase:"lb1",typ:"apt",nr:"2, 6",bezug:["pp01","pp02"],thema:"Gegenstand der Pädagogik: Erziehungswissenschaft, Erziehungspraxis, Erziehung und Bildung",
+  planung:"Erziehungswissenschaft (Theorie) und Erziehungspraxis unterscheiden und aufeinander beziehen; Erziehung und Bildung definieren und abgrenzen.",
+  ziele:["Ich kann Erziehungswissenschaft und Erziehungspraxis als Gegenstand der Pädagogik unterscheiden und ihren Zusammenhang erläutern.","Ich kann die Begriffe Erziehung und Bildung definieren und voneinander abgrenzen.","Ich kann den Gegenstand der Pädagogik von dem der Psychologie abgrenzen und Wechselwirkungen aufzeigen."],
+  pruefung:"Grenzen Sie die Erziehungswissenschaft von der Erziehungspraxis ab und erläutern Sie an einem Beispiel aus Ihrem Praktikum, wie sich beide Bereiche gegenseitig beeinflussen. Unterscheiden Sie dabei die Begriffe Erziehung und Bildung.",
   kprim:[{frage:"Welche Aussagen zum Gegenstand der Pädagogik treffen zu?",statements:[
-   {text:"Die Erziehungswissenschaft untersucht, wie Erziehung abläuft und wirkt, und begründet Theorien.",correct:true},
-   {text:"Erziehungspraxis meint das tatsächliche erzieherische Handeln mit erzieherischer Absicht, z. B. in Familie oder Kita.",correct:true},
-   {text:"Erziehung findet ausschließlich in der Familie statt, deshalb gehören Schulen und Kitas nicht zum Gegenstand der Pädagogik.",correct:false},
+   {text:"Die Erziehungswissenschaft beschreibt, erklärt und reflektiert Erziehungsvorgänge systematisch.",correct:true},
+   {text:"Erziehungspraxis meint das konkrete erzieherische Handeln, z. B. in Familie oder Kita.",correct:true},
+   {text:"Bildung ist ausschließlich das, was von außen durch Erziehende bewirkt wird.",correct:false},
    {text:"Die Pädagogik befasst sich ausschließlich mit dem Erleben und Verhalten einzelner Personen.",correct:false}]}]},
  {id:"pp1a2",phase:"lb1",typ:"apt",nr:"3",bezug:[],thema:"Ziele und Handlungen der Erziehung",
   planung:"Erziehungsziele (Herkunft, Funktion) und Erziehungshandlungen bzw. -maßnahmen aufeinander beziehen.",
@@ -2276,11 +2300,11 @@ async function openMsBeitrag(phId,teamId,i,ansicht){
  let b=null;
  try{const s=await getDoc(doc(db,"meilensteinBeitraege",`${teamId}_${i}_${currentUser.uid}`));b=s.exists()?s.data():null;}catch(e){}
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker"style="color:${ppFarbe(ph)}">${esc(ph.lb)} · PROJEKT-MEILENSTEIN${ph.beitragHinweis?"":` ${i+1}/${ph.meilensteine.length}`}</div>
+  <div class="kicker"style="color:${ppFarbe(ph)}">${esc(ph.lb)} · PROJEKT-MEILENSTEIN ${i+1}/${ph.meilensteine.length}</div>
   <h2>${esc(ph.meilensteine[i])}</h2>
   <p style="color:var(--muted);font-size:13px;margin-top:0">Was hast <b>du</b> zu diesem Meilenstein beigetragen? Der Meilenstein gilt erst als erreicht, wenn alle aus eurem Team ihren Beitrag eingetragen haben${msBrauchtBestaetigung(ph,i)?" und eure Lehrkraft ihn bestätigt hat":""}.</p>
   <div class="form">
-   <label>Mein Beitrag<textarea id="msText"rows="4"maxlength="1500"placeholder="${esc((ph.beitragHinweis&&ph.beitragHinweis[i])||"z. B. Ich habe die Hypothese mit UV und AV formuliert und die Kontrollgruppe geplant.")}">${esc(b?.text||"")}</textarea></label>
+   <label>Mein Beitrag<textarea id="msText"rows="4"maxlength="1500"placeholder="z. B. Ich habe die Hypothese mit UV und AV formuliert und die Kontrollgruppe geplant.">${esc(b?.text||"")}</textarea></label>
    <label>Link (optional)<input id="msLink"type="url"value="${esc(b?.link||"")}"placeholder="https://…"></label>
    <label>Datei (optional, max. 15 MB)<input id="msDatei"type="file"></label>
    ${b?.dateiUrl?`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a class="pill"href="${esc(b.dateiUrl)}"target="_blank"rel="noopener">${esc(b.dateiName||"Datei")} ↗</a><label class="check"style="font-size:12px"><input id="msDateiWeg"type="checkbox"> Datei löschen</label></div>`:""}
@@ -2897,7 +2921,7 @@ function webUntisEmbedHTML(heightPx,openByDefault){
  const url=webUntisUrl();
  return `<details class="untis-embed"${openByDefault?"open":""}>
  <summary> Stundenplan anzeigen/ausblenden</summary>
- <iframe src="${url}"loading="lazy"style="width:100%;height:${heightPx}px;border:1px solid var(--line,#e2eaf0);border-radius:10px;background:#fff"class="untis-iframe"title="Stundenplan F11Sb (WebUntis)"></iframe>
+ <iframe src="${url}"loading="lazy"style="width:100%;height:${heightPx}px;border:1px solid var(--line,#e2eaf0);border-radius:10px;background:#fff"class="untis-iframe"title="Stundenplan F12Sb (WebUntis)"></iframe>
  <div class="untis-fallback"><small>Wird der Stundenplan oben nicht angezeigt? Manche Schulnetzwerke blockieren die Einbettung.</small>
  <a href="${url}"target="_blank"rel="noopener"class="pill"> Stundenplan in WebUntis öffnen ↗</a></div>
  </details>`;
@@ -3074,7 +3098,7 @@ async function openNotenDetail(fach,hj){
  const liste=notenListe(noten,fach,hj);
  const avg=notenDurchschnitt(liste);
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"1. HALBJAHR":"2. HALBJAHR"}</div>
+ <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"HALBJAHR 12/1":"HALBJAHR 12/2"}</div>
  <h2>${esc(fachLabel(fach))}</h2>
  <p style="color:var(--muted)">Die fachpraktische Ausbildung wird separat bewertet (§8 FOBOSO) – trag hier die einzelnen Bewertungen ein.</p>
  <div class="notice"style="margin-bottom:14px"><strong style="font-size:22px">${avg===null?"—":avg+" Punkte"}</strong><small style="display:block;color:var(--muted)">Durchschnitt aus ${liste.length} ${liste.length===1?"Eintrag":"Einträgen"}</small></div>
@@ -3092,7 +3116,7 @@ async function openNotenDetail(fach,hj){
  const sSchnitt=sonstigeSchnitt(sonst);
  const ergebnis=berechneHalbjahresergebnis(noten,fach,hj);
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"1. HALBJAHR":"2. HALBJAHR"}</div>
+ <div class="kicker">MEINE NOTEN · ${hj==="hj1"?"HALBJAHR 12/1":"HALBJAHR 12/2"}</div>
  <h2>${esc(fachLabel(fach))}</h2>
  <p style="color:var(--muted)">Nach § 21 Abs. 1 FOBOSO: Der (gewichtete) Durchschnitt der sonstigen Leistungen zählt genauso viel wie jede Schulaufgabe.</p>
  <div class="notice"style="margin-bottom:14px">
@@ -3144,97 +3168,242 @@ window.addNotenEintrag=addNotenEintrag;
 window.deleteNotenEintrag=deleteNotenEintrag;
 window.resetMeineNoten=resetMeineNoten;
 
-// ---- Bestehens-Rechner nach §8, §21 Abs. 3, §22 Abs. 1 Nr. 2 FOBOSO -------
-// Hinweis: Dies ist ausschließlich eine Orientierungshilfe (wie die
-// entsprechenden "ohne Gewähr"-Tools der Schulen selbst). Die tatsächliche
-// Entscheidung trifft die Klassenkonferenz/Schulleitung anhand einer
-// pädagogischen Gesamtwürdigung, nicht rein rechnerisch. Verwendet wird
-// jeweils der Durchschnitt aller schriftlichen/mündlichen Einzelnoten.
-function checkFoboso21(punkte){
- const n=punkte.length;
- if(!n)return{passed:null,rule:null};
- const sum=punkte.reduce((a,b)=>a+b,0);
- const zero=punkte.filter(p=>p===0).length;
- const oneToThree=punkte.filter(p=>p>=1&&p<=3).length;
- const atLeastFour=punkte.filter(p=>p>=4).length;
- if(zero===0&&oneToThree===0)return{passed:true,rule:"a"};
- if(zero===1&&oneToThree===0&&atLeastFour===n-1&&sum>=6*n)return{passed:true,rule:"d"};
- if(zero===0&&oneToThree===1&&atLeastFour===n-1&&sum>=5*n)return{passed:true,rule:"b"};
- if(zero===0&&oneToThree===2&&atLeastFour===n-2&&sum>=6*n)return{passed:true,rule:"c"};
- return{passed:false,rule:null};
+// ---- Jahrgangsstufe 12: Zulassung zur Abschlussprüfung und Abschlussergebnis ----
+// Grundlage (alle Angaben ohne Gewähr, Orientierungshilfe): Fachober- und Berufsoberschulordnung
+// (FOBOSO, GVBl. 2017 S. 451, BayRS 2236-7-1-K), abrufbar unter https://www.gesetze-bayern.de/Content/Document/BayFOBOSO
+//  § 12 Abs. 2   zwei Wahlpflichtfächer in Jgst. 12 · § 16 Fachreferat in Jgst. 12 · § 19 Abs. 6 Rundung
+//  § 21          Halbjahresergebnisse · § 31 Abs. 2 Ausschluss von der Abschlussprüfung
+//  § 32          Prüfungsfächer Deutsch, Englisch, Mathematik, Profilfach 1 (Pädagogik/Psychologie)
+//  § 35          Prüfungs- und Abschlussergebnis, Bestehen (Abs. 2 bis 5 und 9) · Anlage 1 Stundentafel, Wahlpflichtfächer
+const WPF_SOZIALWESEN_12=[
+ {name:"Sozialpsychologie",art:"profilvertiefend",ein:true},
+ {name:"Spektrum der Gesundheit",art:"profilvertiefend",ein:true},
+ {name:"Französisch (fortgeführt)",art:"profilerweiternd",ein:true},
+ {name:"Spanisch (fortgeführt)",art:"profilerweiternd",ein:true},
+ {name:"Mathematik Additum",art:"profilerweiternd",ein:true},
+ {name:"Aspekte der Physik",art:"profilerweiternd",ein:true},
+ {name:"English Book Club",art:"profilerweiternd",ein:true},
+ {name:"Internationale Politik",art:"profilerweiternd",ein:true},
+ {name:"Informatik",art:"profilerweiternd",ein:true},
+ {name:"International Business Studies",art:"profilerweiternd",ein:true},
+ {name:"Studier- und Arbeitstechniken",art:"profilerweiternd",ein:false},
+ {name:"Kunst",art:"profilerweiternd",ein:false},
+ {name:"Musik",art:"profilerweiternd",ein:false},
+ {name:"Szenisches Gestalten",art:"profilerweiternd",ein:false}
+];
+function wpfInfo(name){return WPF_SOZIALWESEN_12.find(w=>w.name===name)||null;}
+function fachEinbringungsfaehig(key){
+ if(key==="sport")return false;
+ if(key==="wpf1"||key==="wpf2"){const n=WPF_AUSWAHL[key];return n?wpfInfo(n)?.ein!==false:true;}
+ return true;
 }
-function berechneBestehen(noten){
- const faecherHJ1=F11SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj1"));
- const faecherHJ2=F11SB_FAECHER.map(f=>berechneHalbjahresergebnis(noten,f.key,"hj2"));
- const fpaHj1=notenDurchschnitt(notenListe(noten,"fpa","hj1")),fpaHj2=notenDurchschnitt(notenListe(noten,"fpa","hj2"));
- const vollHJ1=faecherHJ1.every(p=>Number.isFinite(p))&&Number.isFinite(fpaHj1);
- const vollJahr=vollHJ1&&faecherHJ2.every(p=>Number.isFinite(p))&&Number.isFinite(fpaHj2);
+const AB_LAUFEN_WEITER=["deutsch","englisch","mathematik","paedagogik","sozialwirtschaft"]; // Jgst. 11 und 12: zählen 11/2, 12/1, 12/2
+const AB_ENDEN_11=[{key:"geschichte",label:"Geschichte"},{key:"chemie",label:"Chemie"}];      // enden mit Jgst. 11: zählen 11/1 und 11/2
+const AB_PRUEFUNGSFAECHER=["deutsch","englisch","mathematik","paedagogik"];
+const AB_ANZAHL_HJ=25; // § 35 Abs. 5 Satz 1 Nr. 4
+function abNum(v){return Number.isFinite(v)?v:null;}
+function abPunkte(n){return Number.isFinite(n)?`${n}`:"–";}
 
- let probezeit=null;
- if(vollHJ1){
- const fachCheck=checkFoboso21(faecherHJ1);
- const fpaOk=fpaHj1>=4;
- probezeit={passed:fachCheck.passed&&fpaOk,fachCheck,fpaOk};
- }
- let jahr=null;
- if(vollJahr){
- // Jahrespunktzahl nach § 21 Abs. 2 FOBOSO: Durchschnitt der beiden
- // (bereits gerundeten) Halbjahresergebnisse, danach erneut gerundet.
- const jahrespunkte=F11SB_FAECHER.map((f,i)=>foboso19Runden((faecherHJ1[i]+faecherHJ2[i])/2));
- const fachCheck=checkFoboso21(jahrespunkte);
- const fpaOk=fpaHj1>=4&&fpaHj2>=4&&(fpaHj1+fpaHj2)>=10;
- jahr={passed:fachCheck.passed&&fpaOk,fachCheck,fpaOk,jahrespunkte};
- }
- return{probezeit,jahr,vollHJ1,vollJahr};
-}
-// Einfache Orientierung "was fehlt noch": für jedes noch unter 4 liegende
-// oder fehlende Fach wird angezeigt, welcher Wert für die einfachste
-// Bestehens-Variante (Regel a: alle Fächer ≥4) fehlen würde.
-function wasFehltNochHJ1(noten){
- const liste=F11SB_FAECHER.map(f=>{
- const p=berechneHalbjahresergebnis(noten,f.key,"hj1");
- if(!Number.isFinite(p)){
- const hatSA=schulaufgabenListe(noten,f.key,"hj1").length>0;
- const hatSonst=sonstigeListe(noten,f.key,"hj1").length>0;
- const fehlt=!hatSA&&!hatSonst?"Schulaufgabe und sonstige Leistungen fehlen noch":!hatSA?"Schulaufgabe fehlt noch":"Sonstige Leistungen fehlen noch";
- return{label:f.label,status:"fehlt",text:fehlt};
- }
- if(p===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
- if(p<4)return{label:f.label,status:"kritisch",text:`Aktuell ${p} Punkte – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-p} Punkte`};
- return{label:f.label,status:"ok",text:`${p} Punkte`};
+// Zulassung: Ausschluss u. a. bei 0 Punkten in einem Halbjahresergebnis (§ 31 Abs. 2 Satz 1 Nr. 1).
+function zulassungPruefen(noten){
+ const zeilen=F11SB_FAECHER.map(f=>{
+  const p1=berechneHalbjahresergebnis(noten,f.key,"hj1"),p2=berechneHalbjahresergebnis(noten,f.key,"hj2");
+  const ein=fachEinbringungsfaehig(f.key);
+  let status="offen",text="noch kein Halbjahresergebnis";
+  const vorh=[p1,p2].filter(Number.isFinite);
+  if(vorh.length){
+   if(vorh.includes(0)){status="ausschluss";text="0 Punkte – Ausschluss von der Abschlussprüfung";}
+   else if(vorh.some(p=>p<4)){status="kritisch";text="unter 4 Punkte";}
+   else{status="ok";text="in Ordnung";}
+  }
+  return{key:f.key,label:f.label,p1,p2,status,text,ein};
  });
- const fpaP=notenDurchschnitt(notenListe(noten,"fpa","hj1"));
- if(fpaP===null)liste.push({label:"Fachpraktische Ausbildung",status:"fehlt",text:"Note fehlt noch"});
- else if(fpaP===0)liste.push({label:"Fachpraktische Ausbildung",status:"ungenuegend",text:"0 Punkte – mind. 4 Punkte nötig"});
- else if(fpaP<4)liste.push({label:"Fachpraktische Ausbildung",status:"kritisch",text:`Aktuell ${fpaP} Punkte – mind. 4 Punkte nötig`});
- else liste.push({label:"Fachpraktische Ausbildung",status:"ok",text:`${fpaP} Punkte`});
- return liste;
+ const ausgeschlossen=zeilen.some(z=>z.status==="ausschluss");
+ const vollstaendig=zeilen.every(z=>Number.isFinite(z.p1)&&Number.isFinite(z.p2));
+ return{zeilen,ausgeschlossen,vollstaendig};
 }
-// Analoge Übersicht fürs ganze Schuljahr: Jahrespunktzahl je Fach (Durchschnitt
-// der beiden Halbjahresergebnisse) plus fpA mit eigener Jahresregel (§8 FOBOSO).
-function wasFehltNochJahr(noten){
- const liste=F11SB_FAECHER.map(f=>{
- const p1=berechneHalbjahresergebnis(noten,f.key,"hj1");
- const p2=berechneHalbjahresergebnis(noten,f.key,"hj2");
- if(!Number.isFinite(p1)||!Number.isFinite(p2)){
- const fehlt=!Number.isFinite(p1)&&!Number.isFinite(p2)?"HJ1 und HJ2 fehlen noch":!Number.isFinite(p1)?"HJ1 fehlt noch":"HJ2 fehlt noch";
- return{label:f.label,status:"fehlt",text:fehlt};
- }
- const jp=foboso19Runden((p1+p2)/2);
- if(jp===0)return{label:f.label,status:"ungenuegend",text:`0 Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch 4 Punkte`};
- if(jp<4)return{label:f.label,status:"kritisch",text:`Aktuell ${jp} Punkte im Jahr – für die einfache Variante (alle Fächer ≥4) fehlen noch ${4-jp} Punkte`};
- return{label:f.label,status:"ok",text:`${jp} Punkte im Jahr`};
+
+// Abschlussergebnis der Fachabiturprüfung an der FOS (§ 35 Abs. 2, 3, 4, 5 und 9).
+function berechneAbschluss(noten){
+ const ab=noten.abschluss||{};
+ const fehlt=[],pool=[];
+ const add=(fach,label,hj,p)=>{if(Number.isFinite(p))pool.push({fach,label,hj,punkte:p});else fehlt.push(`${label} ${hj}`);};
+ F11SB_FAECHER.forEach(f=>{
+  if(!fachEinbringungsfaehig(f.key))return;
+  if((f.key==="wpf1"||f.key==="wpf2")&&!WPF_AUSWAHL[f.key]){fehlt.push(`${f.label} (noch nicht gewählt)`);return;}
+  if(AB_LAUFEN_WEITER.includes(f.key))add(f.key,f.label,"11/2",abNum(ab.j11?.[f.key]?.h2));
+  add(f.key,f.label,"12/1",berechneHalbjahresergebnis(noten,f.key,"hj1"));
+  add(f.key,f.label,"12/2",berechneHalbjahresergebnis(noten,f.key,"hj2"));
  });
- const fpa1=notenDurchschnitt(notenListe(noten,"fpa","hj1"));
- const fpa2=notenDurchschnitt(notenListe(noten,"fpa","hj2"));
- if(fpa1===null||fpa2===null){
- liste.push({label:"Fachpraktische Ausbildung",status:"fehlt",text:fpa1===null&&fpa2===null?"HJ1 und HJ2 fehlen noch":fpa1===null?"HJ1 fehlt noch":"HJ2 fehlt noch"});
+ AB_ENDEN_11.forEach(f=>{add(f.key,f.label,"11/1",abNum(ab.j11?.[f.key]?.h1));add(f.key,f.label,"11/2",abNum(ab.j11?.[f.key]?.h2));});
+ const fpa1=abNum(ab.fpa?.h1),fpa2=abNum(ab.fpa?.h2);
+ if(fpa1===null)fehlt.push("Fachpraktische Ausbildung 11/1");
+ if(fpa2===null)fehlt.push("Fachpraktische Ausbildung 11/2");
+ const ref=abNum(ab.referat?.punkte);
+ if(ref===null)fehlt.push("Fachreferat");
+ if(fehlt.length)return{stufe:"unvollstaendig",fehlt,pool};
+
+ // Streichergebnisse: je Fach höchstens ein Halbjahresergebnis (§ 35 Abs. 4 Satz 3); hier die günstigste Auswahl.
+ const dropCount=pool.length-AB_ANZAHL_HJ;
+ if(dropCount<0)return{stufe:"zuwenig",pool,fehlt:[`nur ${pool.length} einbringungsfähige Halbjahresergebnisse (25 nötig)`]};
+ const proFach={};
+ pool.forEach(e=>{const c=proFach[e.fach];if(!c||e.punkte<c.punkte)proFach[e.fach]=e;});
+ const kandidaten=Object.values(proFach).sort((a,b)=>a.punkte-b.punkte);
+ const streich=kandidaten.slice(0,dropCount);
+ if(streich.length<dropCount)return{stufe:"zuwenig",pool,fehlt:["zu wenige Fächer, um genug Halbjahresergebnisse zu streichen"]};
+ const gestrichen=new Set(streich);
+ const eingebracht=pool.filter(e=>!gestrichen.has(e));
+
+ // Prüfungsergebnisse (§ 35 Abs. 2): schriftlich 2-fach, mündlich 1-fach, kaufmännisch gerundet.
+ const pe={};const peFehlt=[];
+ AB_PRUEFUNGSFAECHER.forEach(k=>{
+  const s=abNum(ab.pruefung?.[k]?.s),m=abNum(ab.pruefung?.[k]?.m);
+  const label=F11SB_FAECHER.find(f=>f.key===k).label;
+  if(s===null){peFehlt.push(`${label} (Prüfung)`);pe[k]=null;return;}
+  if(k==="englisch"&&m===null){peFehlt.push("Englisch mündlich (Pflicht, § 33 Abs. 1)");pe[k]=null;return;}
+  pe[k]=m===null?s:foboso19Runden((2*s+m)/3);
+ });
+
+ // Gesamtergebnisse (§ 35 Abs. 3): Halbjahresergebnisse einfach, Prüfungsergebnis dreifach.
+ const ge=[];
+ const fachKeys=[...new Set(eingebracht.map(e=>e.fach))];
+ fachKeys.forEach(k=>{
+  const hj=eingebracht.filter(e=>e.fach===k).map(e=>e.punkte);
+  const label=eingebracht.find(e=>e.fach===k).label;
+  const istPruef=AB_PRUEFUNGSFAECHER.includes(k);
+  let wert,vorlaeufig=false;
+  if(istPruef&&pe[k]!==null&&pe[k]!==undefined)wert=foboso19Runden((hj.reduce((a,b)=>a+b,0)+3*pe[k])/(hj.length+3));
+  else{wert=foboso19Runden(hj.reduce((a,b)=>a+b,0)/hj.length);vorlaeufig=istPruef;}
+  ge.push({label,wert,vorlaeufig});
+ });
+ ge.push({label:"Fachpraktische Ausbildung",wert:foboso19Runden((fpa1+fpa2)/2)});
+ ge.push({label:`Fachreferat${ab.referat?.fach?` (${ab.referat.fach})`:""}`,wert:ref});
+
+ // Punktesumme: 4 Prüfungsergebnisse dreifach + 2 fpA-Halbjahre + Fachreferat + 25 Halbjahresergebnisse = 40 Leistungen.
+ const summeHJ=eingebracht.reduce((a,e)=>a+e.punkte,0)+fpa1+fpa2+ref;
+ const pruefOk=peFehlt.length===0;
+ const summe=summeHJ+(pruefOk?AB_PRUEFUNGSFAECHER.reduce((a,k)=>a+3*pe[k],0):0);
+ const zaehle=p=>p===0?2:p<4?1:0; // § 35 Abs. 9 Satz 2: 0 Punkte zählen zweifach
+ const nGE=ge.filter(g=>!g.vorlaeufig||pruefOk).reduce((a,g)=>a+zaehle(g.wert),0);
+ const nPE=pruefOk?AB_PRUEFUNGSFAECHER.reduce((a,k)=>a+zaehle(pe[k]),0):null;
+ const res={stufe:pruefOk?"komplett":"zwischenstand",streich,ge,pe,peFehlt,summe,summeHJ,nGE,nPE,eingebracht:eingebracht.length,maxSumme:40*15};
+ if(pruefOk){
+  const grenze=nGE===1?200:nGE===2?240:0;
+  const ok1=nPE<=2&&nGE<=2;
+  const ok2=nGE===0||summe>=grenze;
+  res.grenze=grenze;res.bestanden=ok1&&ok2;
+  res.grund=!ok1?(nPE>2?"mehr als zwei Prüfungsergebnisse unter 4 Punkten":"mehr als zwei Gesamtergebnisse unter 4 Punkten"):!ok2?`Punktesumme ${summe} liegt unter der geforderten Mindestsumme von ${grenze}`:"alle Bedingungen nach § 35 Abs. 9 erfüllt";
+ }
+ return res;
+}
+function berechneBestehen(noten){return{zulassung:zulassungPruefen(noten),abschluss:berechneAbschluss(noten)};}
+
+// Anzeige im Kompass (Noten): Zulassung und Abschlussergebnis.
+function abschlussBlockHTML(noten,bestehen){
+ const z=bestehen.zulassung,a=bestehen.abschluss;
+ const farbe=s=>s==="ok"?"var(--soft-green)":s==="kritisch"?"var(--soft-orange)":s==="ausschluss"?"#fbdada":"#f7fafc";
+ const zeileZ=z.zeilen.map(x=>`<div class="card"style="padding:8px 10px;background:${farbe(x.status)}"><strong style="font-size:12px">${esc(x.label)}${x.ein?"":" · zählt nicht zur Note"}</strong><small style="display:block">12/1: ${abPunkte(x.p1)} · 12/2: ${abPunkte(x.p2)} · ${esc(x.text)}</small></div>`).join("");
+ const zulassungKopf=z.ausgeschlossen?`<strong style="font-size:15px">Nach aktueller Punktlage ausgeschlossen</strong>`
+  :z.vollstaendig?`<strong style="font-size:15px">Nach aktueller Punktlage zugelassen</strong>`
+  :`<strong style="font-size:15px">Noch nicht alle Halbjahresergebnisse vorhanden</strong>`;
+ let abschlussKopf="";
+ if(a.stufe==="unvollstaendig"||a.stufe==="zuwenig"){
+  const liste=a.fehlt.slice(0,10).map(x=>esc(x)).join(", ")+(a.fehlt.length>10?` … (+${a.fehlt.length-10})`:"");
+  abschlussKopf=`<p style="margin:0 0 8px">Für die Berechnung fehlen noch Angaben: ${liste}.</p>`;
  }else{
- const ok=fpa1>=4&&fpa2>=4&&(fpa1+fpa2)>=10;
- liste.push({label:"Fachpraktische Ausbildung",status:ok?"ok":(fpa1===0||fpa2===0)?"ungenuegend":"kritisch",text:`HJ1: ${fpa1} · HJ2: ${fpa2} Punkte (Summe ${fpa1+fpa2}, mind. 10 nötig)`});
+  const ges=a.ge.map(g=>`<tr><td>${esc(g.label)}</td><td style="text-align:center">${g.wert}${g.vorlaeufig?" <small>(ohne Prüfung)</small>":""}</td></tr>`).join("");
+  const str=a.streich.map(s=>`${esc(s.label)} ${s.hj} (${s.punkte})`).join(", ")||"keine";
+  const status=a.stufe==="komplett"
+   ?`<strong style="font-size:15px">${a.bestanden?"Fachabitur nach aktueller Punktlage bestanden":"Fachabitur nach aktueller Punktlage nicht bestanden"}</strong><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">Punktesumme ${a.summe} von ${a.maxSumme} · ${esc(a.grund)}</p>`
+   :`<strong style="font-size:15px">Zwischenstand ohne Prüfungsergebnisse</strong><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">Es fehlen: ${a.peFehlt.map(x=>esc(x)).join(", ")}. Halbjahresleistungen bisher ${a.summeHJ} Punkte (28 von 40 Leistungen, ohne die dreifachen Prüfungsergebnisse).</p>`;
+  abschlussKopf=`${status}
+   <p style="margin:10px 0 4px;font-size:12px"><b>Günstigste Streichung</b> (je Fach höchstens ein Halbjahresergebnis): ${str}</p>
+   <div style="overflow-x:auto"><table class="noten-table noten-table-kompakt"><thead><tr><th>Gesamtergebnis</th><th>Punkte</th></tr></thead><tbody>${ges}</tbody></table></div>`;
  }
- return liste;
+ return`<div class="grid grid-2"style="margin-top:16px;gap:12px">
+  <details class="noten-collapsible">
+   <summary> Zulassung zur Abschlussprüfung</summary>
+   <div class="notice">
+    ${zulassungKopf}
+    <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Ausgeschlossen ist, wer ein Halbjahresergebnis mit 0 Punkten hat, wer mehr als fünf Unterrichtstage unentschuldigt versäumt hat oder wessen Abschluss rechnerisch nicht mehr erreichbar ist (§ 31 Abs. 2 FOBOSO).</p>
+    <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${zeileZ}</div>
+    <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach § 31 FOBOSO – <strong>ohne Gewähr</strong>. Die Entscheidung trifft der Prüfungsausschuss.</p>
+   </div>
+  </details>
+  <details class="noten-collapsible">
+   <summary> Abschlussergebnis und Bestehen der Fachabiturprüfung</summary>
+   <div class="notice">
+    ${abschlussKopf}
+    <div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="openAbschlussAngaben()">Angaben ergänzen</button></div>
+    <p style="margin:12px 0 0;font-size:12px;color:var(--muted)">Bestanden ist die Prüfung, wenn höchstens zwei Prüfungsergebnisse und höchstens zwei Gesamtergebnisse unter 4 Punkten liegen (0 Punkte zählen doppelt) und bei einem Gesamtergebnis unter 4 Punkten mindestens 200, bei zweien mindestens 240 Punkte erreicht werden (§ 35 Abs. 9 FOBOSO). Eingebracht werden die dreifachen Prüfungsergebnisse in Deutsch, Englisch, Mathematik und Pädagogik/Psychologie, beide Halbjahre der fachpraktischen Ausbildung, das Fachreferat und 25 Halbjahresergebnisse (§ 35 Abs. 5).</p>
+    <p style="margin-top:8px;font-size:11px;color:var(--muted)">Orientierungshilfe nach § 35 FOBOSO – <strong>ohne Gewähr</strong>. Die Entscheidung trifft der Prüfungsausschuss.</p>
+   </div>
+  </details>
+ </div>`;
 }
+
+// Wahlpflichtfächer wählen (§ 12 Abs. 2 FOBOSO: in Jgst. 12 zwei Fächer).
+function wpfAuswahlHTML(){
+ const opt=key=>{
+  const aktuell=WPF_AUSWAHL[key];
+  const gruppe=art=>`<optgroup label="${art==="profilvertiefend"?"Profilvertiefend":"Profilerweiternd"}">${WPF_SOZIALWESEN_12.filter(w=>w.art===art).map(w=>`<option value="${esc(w.name)}"${aktuell===w.name?" selected":""}>${esc(w.name)}${w.ein?"":" (zählt nicht zur Note)"}</option>`).join("")}</optgroup>`;
+  return`<select onchange="setWpf('${key}',this.value)"><option value="">– bitte wählen –</option>${gruppe("profilvertiefend")}${gruppe("profilerweiternd")}</select>`;
+ };
+ return`<div class="noten-wpf"style="margin:0 0 12px;padding:10px 12px;border:1px solid var(--line,#e2eaf0);border-radius:10px;background:#fff">
+  <strong style="display:block;font-size:13px;margin-bottom:6px">Meine zwei Wahlpflichtfächer</strong>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px">
+   <label style="font-size:11px">Wahlpflichtfach 1${opt("wpf1")}</label>
+   <label style="font-size:11px">Wahlpflichtfach 2${opt("wpf2")}</label>
+  </div>
+  <small style="display:block;margin-top:6px;color:var(--muted)">In der Jahrgangsstufe 12 müssen zwei Wahlpflichtfächer belegt werden (§ 12 Abs. 2 FOBOSO). Einbringungsfähige Fächer zählen zu den Noten (Anlage 1 FOBOSO).</small>
+ </div>`;
+}
+async function setWpf(key,name){
+ const andere=key==="wpf1"?"wpf2":"wpf1";
+ if(name&&WPF_AUSWAHL[andere]===name){toast("Die zwei Wahlpflichtfächer müssen verschieden sein.");await render();return}
+ try{
+  await updateNotenDoc(data=>{data.wpf=data.wpf||{};data.wpf[key]=name||"";});
+  WPF_AUSWAHL[key]=name||"";
+  await render();toast("Gespeichert.");
+ }catch(e){console.error("Wahlpflichtfach speichern:",e);toast("Konnte nicht gespeichert werden.");}
+}
+window.setWpf=setWpf;
+
+// Zusätzliche Angaben für das Abschlussergebnis: Zeugnis Jgst. 11, fpA, Fachreferat, Prüfungsergebnisse.
+async function openAbschlussAngaben(){
+ const noten=await getMeineNoten();
+ const ab=noten.abschluss||{};
+ const inp=(id,v)=>`<input id="${id}"type="number"min="0"max="15"value="${Number.isFinite(v)?v:""}"placeholder="0–15"style="width:70px">`;
+ const z=(label,inner)=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line,#e2eaf0)"><span style="font-size:13px">${label}</span><span style="display:flex;gap:6px;align-items:center">${inner}</span></div>`;
+ const fl=k=>F11SB_FAECHER.find(f=>f.key===k).label;
+ const refFaecher=F11SB_FAECHER.filter(f=>fachEinbringungsfaehig(f.key)&&(!f.key.startsWith("wpf")||WPF_AUSWAHL[f.key]));
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">ABSCHLUSSERGEBNIS · ANGABEN ERGÄNZEN</div>
+  <h2>Zeugnis Jgst. 11, Fachreferat, Prüfungen</h2>
+  <p style="font-size:12px;color:var(--muted);margin-top:0">Punkte 0–15. Leere Felder zählen als „noch nicht vorhanden“. Die Werte siehst nur du.</p>
+  <h3 style="margin:10px 0 4px;font-size:14px">Halbjahresergebnisse Jahrgangsstufe 11</h3>
+  ${AB_LAUFEN_WEITER.map(k=>z(fl(k)+" · 11/2",inp(`abJ11_${k}_h2`,ab.j11?.[k]?.h2))).join("")}
+  ${AB_ENDEN_11.map(f=>z(f.label+" · 11/1 und 11/2",inp(`abJ11_${f.key}_h1`,ab.j11?.[f.key]?.h1)+inp(`abJ11_${f.key}_h2`,ab.j11?.[f.key]?.h2))).join("")}
+  ${z("Fachpraktische Ausbildung · 11/1 und 11/2",inp("abFpa_h1",ab.fpa?.h1)+inp("abFpa_h2",ab.fpa?.h2))}
+  <h3 style="margin:14px 0 4px;font-size:14px">Fachreferat (Jahrgangsstufe 12, § 16 FOBOSO)</h3>
+  ${z(`<select id="abRefFach"style="max-width:190px"><option value="">Fach wählen</option>${refFaecher.map(f=>`<option value="${esc(f.label)}"${ab.referat?.fach===f.label?" selected":""}>${esc(f.label)}</option>`).join("")}</select>`,inp("abRefP",ab.referat?.punkte))}
+  <h3 style="margin:14px 0 4px;font-size:14px">Abschlussprüfung (nach den Prüfungen eintragen)</h3>
+  ${AB_PRUEFUNGSFAECHER.map(k=>z(fl(k),`<label style="font-size:11px">schriftlich ${inp(`abPr_${k}_s`,ab.pruefung?.[k]?.s)}</label><label style="font-size:11px">mündlich ${inp(`abPr_${k}_m`,ab.pruefung?.[k]?.m)}</label>`)).join("")}
+  <small style="display:block;margin-top:6px;color:var(--muted)">Englisch: die mündliche Prüfung ist Pflicht. In den anderen Fächern nur ausfüllen, wenn du eine mündliche Prüfung abgelegt hast (Wertung schriftlich 2 : mündlich 1, § 35 Abs. 2 FOBOSO).</small>
+  <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="saveAbschlussAngaben()">Speichern</button></div>`);
+}
+async function saveAbschlussAngaben(){
+ const num=id=>{const v=$(id)?.value;if(v===""||v==null)return null;const n=parseInt(v,10);return Number.isFinite(n)?Math.max(0,Math.min(15,n)):null;};
+ const neu={j11:{},fpa:{h1:num("abFpa_h1"),h2:num("abFpa_h2")},referat:{fach:$("abRefFach")?.value||"",punkte:num("abRefP")},pruefung:{}};
+ AB_LAUFEN_WEITER.forEach(k=>{neu.j11[k]={h2:num(`abJ11_${k}_h2`)};});
+ AB_ENDEN_11.forEach(f=>{neu.j11[f.key]={h1:num(`abJ11_${f.key}_h1`),h2:num(`abJ11_${f.key}_h2`)};});
+ AB_PRUEFUNGSFAECHER.forEach(k=>{neu.pruefung[k]={s:num(`abPr_${k}_s`),m:num(`abPr_${k}_m`)};});
+ try{
+  await updateNotenDoc(data=>{data.abschluss=neu;});
+  closeModal();await render();toast("Gespeichert.");
+ }catch(e){console.error("Abschluss-Angaben speichern:",e);toast("Konnte nicht gespeichert werden.");}
+}
+window.openAbschlussAngaben=openAbschlussAngaben;window.saveAbschlussAngaben=saveAbschlussAngaben;
 
 // ---- Praktikumsberichte (Blockberichte): Tätigkeitsnachweis + Einschätzungsbogen ----
 // Einschätzungsbogen ist nur bei den ersten beiden Blöcken je Ausbildungsrichtung
@@ -3504,7 +3673,7 @@ async function printPraktikumsGesamtPDF(){
  @media print{.print-note{display:none}}
  </style></head><body>
  <div class="print-note">Im Druckdialog „Als PDF sichern“ auswählen.</div>
- <h1>Praktikumsberichte – Ampel-Gesamtsicht F11Sb</h1>
+ <h1>Praktikumsberichte – Ampel-Gesamtsicht F12Sb</h1>
  <div class="meta">TN = Tätigkeitsnachweis, EB = Einschätzungsbogen · Stand: ${new Date().toLocaleDateString("de-DE")}</div>
  <table><thead><tr><th>Schüler:in</th>${head}</tr></thead><tbody>${rows}</tbody></table>
  <div class="legende">🟩 pünktlich &amp; vollständig &nbsp; 🟧 unvollständig &nbsp; 🟥 zu spät/fehlerhaft &nbsp; ⬜ noch offen</div>
@@ -3673,72 +3842,21 @@ async function miniKalenderHTML(){
  </a>
  <small style="display:block;margin-top:6px;color:var(--muted);font-size:10px">Zum vollständigen Campus-Kalender →</small>`;
 }
-// ---- Startseite: „Das steht für dich an“ (nur Schüler:innen) ----
-// Sammelt aus vorhandenen Daten, was für die angemeldete Person offen ist:
-// P/P-Module bis einschließlich dieser Woche, fehlende Blockberichte, fällige Einträge der Wochenplanung.
-async function anstehendBoxHTML(wochenplan){
- if(!currentUser||!isApproved()||isTeacher())return"";
- const heute=new Date().toISOString().slice(0,10);
- const plusTage=(iso,n)=>{const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);};
- const zeilen=[];
- // 1) P/P-Modulplan
- try{
-  await ppmLaden();await ppmMeineLaden();
-  if(!PPM.co)PPM.co=await ladeCheckoutDaten().catch(()=>null);
-  let jIdx=-1;SCHULWOCHEN_PP.forEach((w,i)=>{if(w.start<=heute)jIdx=i;});
-  const jw=SCHULWOCHEN_PP[jIdx],inWoche=!!(jw&&heute<=jw.end);
-  const offen=PPM.liste.map(m=>({m,p:ppmFort(m),i:ppmSwIndex(m.start)})).filter(x=>x.p&&!x.p.done&&x.i>=0&&x.i<=jIdx);
-  offen.slice(0,4).forEach(x=>{
-   const alt=!(inWoche&&x.i===jIdx),sw=swById(x.m.start),T=PPM_TYPEN[x.m.modul]||{};
-   zeilen.push({ord:alt?1:2,html:`<div class="an-zeile${alt?" spaet":""}"><span class="an-icon">${T.icon||"📘"}</span><div><b>${esc(ppmTitel(x.m)||T.name||"Modul")}</b><small>Pädagogik/Psychologie · ${alt?`noch offen aus KW ${sw?ppmKW(sw):""}`:"diese Woche"}${x.p.frac>0?` · ${Math.round(x.p.frac*100)} % geschafft`:""}</small></div><button type="button"class="secondary"data-ppm="oeffnen"data-id="${esc(x.m.id)}">Öffnen</button></div>`});
-  });
-  if(offen.length>4)zeilen.push({ord:3,html:`<div class="an-zeile"><span class="an-icon">➕</span><div><b>${offen.length-4} weitere Module offen</b><small>Pädagogik/Psychologie</small></div><button type="button"class="secondary"onclick="openFach('paedagogik')">Zum Modulplan</button></div>`});
- }catch(e){console.error("Anstehend (Module):",e);}
- // 2) Blockberichte: laufender Block und Block, der in den letzten 14 Tagen endete
- try{
-  const phasen=PRAKTIKUMSPHASEN.filter(p=>p.start<=heute&&plusTage(p.end,14)>=heute);
-  if(phasen.length){
-   const meine=await getMeinePraktikumsberichte();
-   phasen.forEach(p=>praktikumsberichtTypenFuerPhase(p.id).forEach(t=>{
-    if(meine[`${p.id}_${t.typ}`])return;
-    const frist=t.typ==="einschaetzung"?einschaetzungFrist(p.id):praktikumsberichtFristISO(p.id);
-    const spaet=!!frist&&frist<heute,bald=!!frist&&!spaet&&frist<=plusTage(heute,3);
-    zeilen.push({ord:spaet?0:(bald?1:2),html:`<div class="an-zeile${spaet?" spaet":""}"><span class="an-icon">${p.icon||"📄"}</span><div><b>${esc(t.label)} hochladen</b><small>${esc(p.titel)}${frist?` · ${spaet?"Frist war am":"Abgabe bis"} ${esc(fmtDateOnly(frist))}`:""}</small></div><button type="button"class="secondary"onclick="go('praktikum')">Zum Bericht</button></div>`});
-   }));
-  }
- }catch(e){console.error("Anstehend (Berichte):",e);}
- // 3) Wochenplanung: überfällig oder in den nächsten 7 Tagen fällig
- try{
-  (wochenplan||[]).filter(w=>!w.done&&w.dueDate&&w.dueDate<=plusTage(heute,7)).slice(0,3).forEach(w=>{
-   const spaet=w.dueDate<heute,fach=F11SB_FAECHER.find(f=>f.key===w.subject)?.label;
-   zeilen.push({ord:spaet?1:2,html:`<div class="an-zeile${spaet?" spaet":""}"><span class="an-icon">🗓️</span><div><b>${esc(w.title)}</b><small>Wochenplanung${fach?` · ${esc(fach)}`:""} · ${spaet?"war fällig am":"fällig am"} ${esc(fmtDateOnly(w.dueDate))}</small></div><button type="button"class="secondary"onclick="toggleWochenplanDone('${esc(w.id)}',false)">Erledigt ✓</button></div>`});
-  });
- }catch(e){console.error("Anstehend (Wochenplanung):",e);}
- zeilen.sort((a,b)=>a.ord-b.ord);
- let zu=false;try{zu=localStorage.getItem("f11sb_anstehend_zu")==="1";}catch(e){}
- const n=zeilen.length;
- return`<details class="card an-box"${zu?"":" open"} ontoggle="try{localStorage.setItem('f11sb_anstehend_zu',this.open?'0':'1')}catch(e){}"><summary><span><span class="kicker">DEIN ÜBERBLICK</span><h2>Das steht für dich an</h2></span><span class="pill${n?"":" green"}">${n?`${n} offen`:"alles erledigt ✓"}</span><span class="an-pfeil" aria-hidden="true">▾</span></summary>${n?zeilen.map(z=>z.html).join(""):`<p class="an-leer">Aktuell ist nichts offen. ✓</p>`}</details>`;
-}
 async function renderStart(){
- let tasks=[],projects=[],news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
- try{[tasks,projects,news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("tasks","deadline",false),getCollection("projects"),getCollection("news","createdAt",true,10),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
+ let news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
+ try{[news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("news","createdAt",true,10),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
  const miniKalender=await miniKalenderHTML();
  const coBanner=await checkoutStartBannerHTML();
- const anstehend=await anstehendBoxHTML(wochenplan);
- const offenBox=await offeneModuleBoxHTML();
- const praktikumsphase=aktuellePraktikumsphase();
- const praktikumsAuftraegeMap=await getPraktikumsAuftraege().catch(()=>({}));
- const aktuellerPraktikumsauftrag=(praktikumsphase?.status==="laufend")?praktikumsAuftraegeMap[praktikumsphase.id]:null;
+ const naechsteStunde=await pp12NaechsteStundeHtml().catch(()=>"");
  const upcomingDate=nextCalendar?.start||nextCalendar?.date||nextCalendar?.startDate;
  const upcomingDateText=upcomingDate?.seconds?new Date(upcomingDate.seconds*1000).toLocaleDateString("de-DE"):String(upcomingDate||"").slice(0,10);
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
  
- return`${coBanner}<section class="hero"><div><span class="badge"> F11Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
-verbinden wir Lernen, Projekte, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
+ return`${coBanner}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
+verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
 </div></section>
  ${isTeacher()?`<div class="card"style="margin-bottom:16px;border-left:4px solid #4B5563"><div class="kicker">VERWALTUNG</div><h3 style="margin:2px 0 10px">Für Lehrkräfte</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button><button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button></div></div>`:""}
- ${anstehend}
- ${offenBox}
+ ${pp12CssBausteine()}${naechsteStunde}
  <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
  <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
 class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small>${esc(p.text)} · ${fmtDate(p.createdAt)}</small>`:`<small>${fmtDate(p.createdAt)}</small>`}</div><div style="display:flex;align-items:center;gap:8px"><span class="pill">Info</span>${isAdmin()?`<button class="secondary"onclick="deleteNews('${p.id}')">Löschen</button>`:""}</div>
@@ -3750,7 +3868,7 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  :`<div class="list-item"><div><strong>${birthdayInfo.people.map(p=>{const c=personColor(p.uid);return`<span style="color:${c.text}">${esc(p.name)}</span>`}).join(" & ")}</strong><small>${esc(birthdayInfo.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))} · ${birthdayInfo.days===1?"morgen":`in ${birthdayInfo.days} Tagen`}</small></div><span class="pill"style="background:${personColor(birthdayInfo.people[0].uid).border};color:#fff">Nächste(r)</span></div>`
  }</div>
  </div>
- <div class="grid grid-3"style="margin-bottom:20px;gap:20px">
+ <div class="grid grid-2"style="margin-bottom:20px;gap:20px">
  <div class="card card-compact"style="text-align:center">
  <h3 style="margin:0 0 6px"> Uhrzeit</h3>
  <div style="display:flex;justify-content:center">${analogClockSVG(64)}</div>
@@ -3760,61 +3878,19 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  <h3 style="margin:0 0 8px"> Kalender</h3>
  <div id="miniKalenderWrap">${miniKalender}</div>
  </div>
- ${praktikumsphase?`<a class="card card-compact"href="#praktikum"style="border-left:4px solid #e0a324;display:block;text-decoration:none;color:inherit">
- <h3 style="margin:0 0 6px"> ${praktikumsphase.status==="laufend"?"Praktikum läuft gerade":"Nächstes Praktikum"}</h3>
- <strong style="display:block">${esc(praktikumsphase.titel)}</strong>
- <small style="display:block;margin-top:4px">${esc(fmtDateOnly(praktikumsphase.start))}–${esc(fmtDateOnly(praktikumsphase.end))} · ${esc(praktikumsphase.bereich)}</small>
- </a>`:`<div class="card card-compact"style="border-left:4px solid #e0a324"><h3 style="margin:0">Praktikum</h3><small>Aktuell keine Phase hinterlegt.</small></div>`}
  </div>
- ${aktuellerPraktikumsauftrag?`<a class="card"href="#praktikum"style="display:block;text-decoration:none;color:inherit;border-left:4px solid #e0a324;margin-bottom:16px">
- <span class="pill"style="background:#e8890c;color:#fff">fpA Auftrag</span>
- <strong style="display:block;margin-top:8px;font-size:15px">${esc(aktuellerPraktikumsauftrag.titel)}</strong>
- ${aktuellerPraktikumsauftrag.beschreibung?`<small style="display:block;margin-top:4px;color:var(--muted)">${esc(aktuellerPraktikumsauftrag.beschreibung.slice(0,140))}${aktuellerPraktikumsauftrag.beschreibung.length>140?"…":""}</small>`:""}
- </a>`:""}
  ${(()=>{ensureGlobalClock();return"";})()}
  <div class="card"style="margin-top:16px;margin-bottom:16px">
- <div class="kicker">WOCHENPLANUNG</div>
- <h2 style="margin-top:4px">Meine Woche</h2>
- <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+ <div class="kicker">STUNDENPLAN</div>
+ <h2 style="margin-top:4px">Aktueller Stundenplan</h2>
+ ${webUntisEmbedHTML(300)}
+ <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
  <input id="quickWpInput"type="text"maxlength="140"placeholder="Was steht diese Woche an? Kurz eintragen …"style="flex:1;min-width:220px">
  <button class="primary"onclick="quickAddWochenplan()">＋ Zur Wochenplanung</button>
  </div>
  ${wochenplan.length?`<div class="list"style="margin-top:10px">${wochenplan.filter(w=>!w.done).slice(0,3).map(w=>`<div class="list-item"><div><strong>${esc(w.title)}</strong>${w.subject?`<small>${esc(F11SB_FAECHER.find(f=>f.key===w.subject)?.label||"")}</small>`:""}</div><span class="pill">${w.scope==="monat"?"Monat":"Woche"}</span></div>`).join("")}</div>`:""}
  </div>
 </div>${footer()}`;
-}
-// ---- Startseite: „Noch offen im Modulplan“, nach Schulwochen geordnet (nur Schüler:innen) ----
-// Zeigt für jede Schulwoche bis einschließlich dieser Woche, welche der von den Lehrkräften angelegten Module
-// (Stunden, Übungen, Selbstlernkurse, Tests, Projekte …) die angemeldete Person noch nicht gemacht hat.
-// Rechnet mit ppmFort() wie der Modulplan selbst. Module über mehrere Wochen (z. B. Projekte) stehen in der Woche,
-// in der sie gerade laufen, danach in ihrer letzten Woche. Zuerst kommt diese Woche, dann die früheren Wochen.
-async function offeneModuleBoxHTML(){
- if(!currentUser||!isApproved()||isTeacher())return"";
- try{
-  if(!PPM.geladen){await ppmLaden();await ppmMeineLaden();}
-  if(!PPM.co)PPM.co=await ladeCheckoutDaten().catch(()=>null);
-  const heute=new Date().toISOString().slice(0,10);
-  const proWoche={};
-  PPM.liste.forEach(m=>{
-   const p=ppmFort(m);if(!p)return;
-   const bisher=ppmWochen(m).filter(w=>w.start<=heute);
-   if(!bisher.length)return; // noch nicht begonnen
-   const w=bisher[bisher.length-1];
-   (proWoche[w.id]=proWoche[w.id]||[]).push({m,p});
-  });
-  const wochen=SCHULWOCHEN_PP.filter(w=>proWoche[w.id]);
-  if(!wochen.length)return"";
-  const gruppen=wochen.map(w=>{const alle=proWoche[w.id];return{w,alle,offen:alle.filter(x=>!x.p.done),jetzt:heute<=w.end};}).filter(g=>g.offen.length||g.jetzt).reverse();
-  const n=gruppen.reduce((s,g)=>s+g.offen.length,0);
-  const kopf=g=>{const k=g.offen.length;return`<div class="ofm-wkopf"><b>KW ${ppmKW(g.w)}</b><span>${esc(fmtKurz(g.w.start))}–${esc(fmtKurz(g.w.end))}</span>${g.jetzt?`<em>diese Woche</em>`:""}${k?`<em${g.jetzt?"":' class="spaet"'}>${g.jetzt?`${k} von ${g.alle.length} offen`:`${k} noch offen`}</em>`:`<em class="ok">alles geschafft ✓</em>`}</div>`;};
-  const zeile=x=>{
-   const T=PPM_TYPEN[x.m.modul]||{},lw=ppmWochen(x.m),letzte=lw[lw.length-1],laeuft=lw.length>1&&!!letzte&&letzte.end>=heute,proz=Math.round(x.p.frac*100);
-   return`<div class="ofm-zeile"style="--c:${ppmFarbe(x.m)}"><span class="ofm-balken"aria-hidden="true"></span><div><b>${esc(ppmTitel(x.m)||T.name||"Modul")}</b><small>${esc(T.art||T.kurz||"Modul")}${x.m.lb?` · LB${esc(x.m.lb)}`:""} · ${esc(ppmDauerText(x.m))}${x.m.projektId?" · Einheit im Projekt":""}${laeuft?` · läuft bis KW ${ppmKW(letzte)}`:""}</small><span class="ofm-st">${proz>0?`${proz} % geschafft`:"noch nicht begonnen"}</span>${proz>0?`<span class="ofm-bar"role="progressbar"aria-valuenow="${proz}"aria-valuemin="0"aria-valuemax="100"><i style="width:${proz}%"></i></span>`:""}</div><button type="button"class="secondary"data-ppm="oeffnen"data-id="${esc(x.m.id)}">Öffnen</button></div>`;
-  };
-  let zu=false;try{zu=localStorage.getItem("f11sb_offen_modulplan_zu")==="1";}catch(e){}
-  const inhalt=gruppen.length?gruppen.map(g=>`<div class="ofm-woche">${kopf(g)}${g.offen.map(zeile).join("")}</div>`).join(""):`<p class="an-leer">Du bist im Modulplan auf dem aktuellen Stand.</p>`;
-  return`<details class="card ofm-box"${zu?"":" open"} ontoggle="try{localStorage.setItem('f11sb_offen_modulplan_zu',this.open?'0':'1')}catch(e){}"><summary><span><span class="kicker">NACH SCHULWOCHEN</span><h2>Noch offen im Modulplan</h2></span><span class="pill${n?"":" green"}">${n?`${n} offen`:"alles erledigt ✓"}</span><span class="an-pfeil"aria-hidden="true">▾</span></summary>${inhalt}<div style="margin-top:12px"><button type="button"class="secondary"onclick="openFach('paedagogik')">Zum Modulplan →</button></div></details>`;
- }catch(e){console.error("Offene Module:",e);return"";}
 }
 async function getRecentForumActivityCount(days){
  try{
@@ -3831,11 +3907,11 @@ function printNotenPDF(noten,bestehen){
  const win=window.open("","_blank","width=800,height=800");
  if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
  const fmt=(fach,hj)=>{const erg=berechneHalbjahresergebnis(noten,fach,hj);const sa=schulaufgabenListe(noten,fach,hj).length,so=sonstigeListe(noten,fach,hj).length;return erg===null?"—":`${erg} Punkte (${sa} SA, ${so} sonst.)`};
- const fmtFpa=hj=>{const l=notenListe(noten,"fpa",hj);const a=notenDurchschnitt(l);return a===null?"—":`${a} (${l.length} ${l.length===1?"Note":"Noten"})`};
- const rows=F11SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
- const fpaRow=`<tr><td><em>Fachpraktische Ausbildung</em></td><td>${fmtFpa("hj1")}</td><td>${fmtFpa("hj2")}</td></tr>`;
- const statusText=(label,r)=>!r?`${label}: noch nicht alle Noten eingetragen.`:`${label}: ${r.passed?"nach aktueller Punktlage bestanden":"nach aktueller Punktlage nicht bestanden"}.`;
- win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Noten – F11Sb</title>
+ const rows=F11SB_FAECHER.map(f=>`<tr><td>${escPDF(f.label)}${fachEinbringungsfaehig(f.key)?"":" <small>(zählt nicht zur Note)</small>"}</td><td>${fmt(f.key,"hj1")}</td><td>${fmt(f.key,"hj2")}</td></tr>`).join("");
+ const z=bestehen.zulassung,a=bestehen.abschluss;
+ const zText=z.ausgeschlossen?"Zulassung zur Abschlussprüfung: nach aktueller Punktlage ausgeschlossen (0 Punkte in einem Halbjahresergebnis).":z.vollstaendig?"Zulassung zur Abschlussprüfung: nach aktueller Punktlage zugelassen.":"Zulassung zur Abschlussprüfung: noch nicht alle Halbjahresergebnisse vorhanden.";
+ const aText=a.stufe==="komplett"?`Fachabitur: nach aktueller Punktlage ${a.bestanden?"bestanden":"nicht bestanden"} (Punktesumme ${a.summe} von ${a.maxSumme}).`:a.stufe==="zwischenstand"?"Fachabitur: Zwischenstand, Prüfungsergebnisse fehlen noch.":"Fachabitur: für die Berechnung fehlen noch Angaben.";
+ win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Meine Noten – F12Sb</title>
  <style>
  @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.55;margin:0}
  h1{font-size:24px;margin:0 0 4px}.meta{color:#666;font-size:12px;margin-bottom:20px}
@@ -3846,14 +3922,14 @@ function printNotenPDF(noten,bestehen){
  @media print{.print-note{display:none}}
  </style></head><body>
  <div class="print-note">Persönliche Notenübersicht. Im Druckdialog „Als PDF sichern“ auswählen.</div>
- <h1>Meine Noten – F11Sb</h1>
- <div class="meta">Punkte 0–15 je Fach und Halbjahr</div>
- <table><thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead><tbody>${rows}${fpaRow}</tbody></table>
+ <h1>Meine Noten – F12Sb</h1>
+ <div class="meta">Jahrgangsstufe 12 · Punkte 0–15 je Fach und Halbjahr</div>
+ <table><thead><tr><th>Fach</th><th>12/1</th><th>12/2</th></tr></thead><tbody>${rows}</tbody></table>
  <div class="status">
- <strong>${statusText("Probezeit (Stand HJ1)",bestehen.probezeit)}</strong><br>
- <strong>${statusText("Bestehen des Schuljahres",bestehen.jahr)}</strong>
+ <strong>${escPDF(zText)}</strong><br>
+ <strong>${escPDF(aText)}</strong>
  </div>
- <p class="disclaimer">Diese Berechnung ist ausschließlich eine Orientierungshilfe nach §8, §21 Abs. 3, §22 Abs. 1 Nr. 2 FOBOSO – ohne Gewähr. Die tatsächliche Entscheidung trifft die Klassenkonferenz/Schulleitung anhand einer pädagogischen Gesamtwürdigung.</p>
+ <p class="disclaimer">Orientierungshilfe nach §§ 21, 31 und 35 FOBOSO – ohne Gewähr. Die Entscheidung trifft der Prüfungsausschuss.</p>
  <script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script>
  </body></html>`);
  win.document.close();
@@ -3862,7 +3938,7 @@ function printWochenplanPDF(entries){
  const win=window.open("","_blank","width=800,height=800");
  if(!win){toast("Das PDF-Fenster wurde vom Browser blockiert. Bitte Pop-ups erlauben.");return}
  const rows=entries.map(w=>`<tr><td>${w.done?"✓":""}</td><td>${escPDF(w.title)}</td><td>${w.subject?escPDF(F11SB_FAECHER.find(f=>f.key===w.subject)?.label||""):"—"}</td><td>${w.scope==="monat"?"Monat":"Woche"}</td><td>${escPDF(w.dueDate||"—")}</td></tr>`).join("");
- win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Wochenplanung – F11Sb</title>
+ win.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Wochenplanung – F12Sb</title>
  <style>
  @page{size:A4;margin:18mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.55;margin:0}
  h1{font-size:24px;margin:0 0 16px}
@@ -3872,7 +3948,7 @@ function printWochenplanPDF(entries){
  @media print{.print-note{display:none}}
  </style></head><body>
  <div class="print-note">Persönliche Wochen-/Monatsplanung. Im Druckdialog „Als PDF sichern“ auswählen.</div>
- <h1>Meine Wochen-/Monatsplanung – F11Sb</h1>
+ <h1>Meine Wochen-/Monatsplanung – F12Sb</h1>
  <table><thead><tr><th>Erl.</th><th>Was steht an</th><th>Fach</th><th>Zeitraum</th><th>Termin</th></tr></thead><tbody>${rows||"<tr><td colspan=5>Noch keine Einträge.</td></tr>"}</tbody></table>
  <script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script>
  </body></html>`);
@@ -3881,9 +3957,6 @@ function printWochenplanPDF(entries){
 window.printNotenPDF=printNotenPDF;window.printWochenplanPDF=printWochenplanPDF;
 
 async function renderKompass(){
- const tasks=await getCollection("tasks","deadline",false), projects=await getCollection("projects");
- const projectDeadlines=projects.filter(p=>p.deadline).sort((a,b)=>String(a.deadline).localeCompare(String(b.deadline)));
- const todayStr=new Date().toISOString().slice(0,10);
  const [unreadCount,forumActivity,wochenplan,noten]=await Promise.all([
  getUnreadMessageCount().catch(()=>0),
  getRecentForumActivityCount(3),
@@ -3894,16 +3967,22 @@ async function renderKompass(){
  const offenePlanung=wochenplan.filter(w=>!w.done);
  const erledigtePlanung=wochenplan.filter(w=>w.done);
 
- return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Aufgaben, Noten und Projekte.",`<button class="primary"onclick="openTaskForm()">＋ Aufgabe</button>`)}
+ return`${pageHead("PERSÖNLICH","Mein Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Wochenplanung und Noten.","")}
 
  ${(unreadCount>0||forumActivity>0)?`<div class="kompass-alerts">
  ${unreadCount>0?`<a href="#forum-nachrichten"class="pill kompass-alert-msg"> ${unreadCount} neue Nachricht${unreadCount===1?"":"en"}</a>`:""}
  ${forumActivity>0?`<a href="#forum-board"class="pill kompass-alert-forum"> ${forumActivity} neue${forumActivity===1?"r":""} Forum-Beitrag${forumActivity===1?"":"e"} (3 Tage)</a>`:""}
  </div>`:""}
 
- <div class="kicker"style="margin:6px 0 8px">WOCHEN-/MONATSPLANUNG</div>
+ <div class="kicker"style="margin-top:6px">ORIENTIERUNG</div>
+ <div class="card"style="margin-top:8px">
+ <h2 style="margin-top:0"> Aktueller Stundenplan</h2>
+ ${webUntisEmbedHTML(360)}
+ </div>
+
+ <div class="kicker"style="margin:22px 0 8px">WOCHEN-/MONATSPLANUNG</div>
  <div class="card">
- <p style="color:var(--muted);margin-top:0">Was steht diese Woche oder diesen Monat an? Nur du siehst deine eigene Planung.</p>
+ <p style="color:var(--muted);margin-top:0">Orientiere dich am Stundenplan oben: Was steht diese Woche oder diesen Monat an? Nur du siehst deine eigene Planung.</p>
  <div class="form-actions"style="margin-bottom:10px">
  <button class="primary"onclick="openWochenplanForm(null)">＋ Neuer Planungspunkt</button>
  ${wochenplan.length?`<button class="secondary"onclick="printWochenplanPDF(${JSON.stringify(wochenplan).replace(/"/g,"&quot;")})"> Als PDF</button>`:""}
@@ -3923,23 +4002,23 @@ async function renderKompass(){
  <h2 style="margin-top:0"> Meine Noten</h2>
  <p style="color:var(--muted);font-size:12px">Halbjahresergebnis nach § 21 Abs. 1 FOBOSO. <strong>Live-Rechner: Es wird nichts gespeichert.</strong> Deine Eingaben bleiben nur, solange du die App geöffnet hast, und sind nach dem Neuladen oder Abmelden weg.</p>
 
+ ${wpfAuswahlHTML()}
  <div class="noten-split">
  <div class="noten-eintragen-kachel">
  <strong style="display:block;font-size:13px;margin-bottom:8px"> Note eintragen</strong>
  <label style="font-size:11px">Fach<select id="notenSchnellFach">
  ${F11SB_FAECHER.map(f=>`<option value="${f.key}">${f.label}</option>`).join("")}
- <option value="fpa">Fachpraktische Ausbildung</option>
  </select></label>
  <label style="font-size:11px;margin-top:8px;display:block">Halbjahr<select id="notenSchnellHj">
- <option value="hj1">1. Halbjahr</option>
- <option value="hj2">2. Halbjahr</option>
+ <option value="hj1">Halbjahr 12/1</option>
+ <option value="hj2">Halbjahr 12/2</option>
  </select></label>
  <button class="primary"style="margin-top:10px;width:100%"onclick="openNotenSchnellzugriff()">Öffnen →</button>
  </div>
 
  <div class="noten-uebersicht">
  <div style="overflow-x:auto"><table class="noten-table noten-table-kompakt">
- <thead><tr><th>Fach</th><th>HJ1</th><th>HJ2</th></tr></thead>
+ <thead><tr><th>Fach</th><th>12/1</th><th>12/2</th></tr></thead>
  <tbody>
  ${F11SB_FAECHER.map(f=>{
  const erg1=berechneHalbjahresergebnis(noten,f.key,"hj1");
@@ -3951,21 +4030,12 @@ async function renderKompass(){
  const werte=w.join(", ");
  return erg!==null?`<strong>${erg}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
  };
- return`<tr><td>${f.label}</td>
+ return`<tr><td>${f.label}${fachEinbringungsfaehig(f.key)?"":" <small>(zählt nicht)</small>"}</td>
  <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('${f.key}','hj1')">${zelle(erg1,w1)}</button></td>
  <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('${f.key}','hj2')">${zelle(erg2,w2)}</button></td>
  </tr>`;
  }).join("")}
- ${(()=>{const l1=notenListe(noten,"fpa","hj1"),a1=notenDurchschnitt(l1),l2=notenListe(noten,"fpa","hj2"),a2=notenDurchschnitt(l2);
- const zelleFpa=(a,l)=>{
- if(!l.length)return"–";
- const werte=l.map(e=>e.value).join(", ");
- return a!==null&&l.length>1?`<strong>${a}</strong><br><small style="font-weight:400">(${werte})</small>`:werte;
- };
- return`<tr class="noten-fpa"><td><em>fpA</em></td>
- <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fpa','hj1')">${zelleFpa(a1,l1)}</button></td>
- <td><button type="button"class="secondary noten-cell-btn"onclick="openNotenDetail('fpa','hj2')">${zelleFpa(a2,l2)}</button></td>
- </tr>`;})()}
+
  </tbody></table></div>
  <p style="font-size:10px;color:var(--muted);margin:6px 0 0">Fett = Halbjahresergebnis nach FOBOSO (braucht Schulaufgabe UND sonstige Leistungen). In Klammern/ohne Klammer: die einzelnen eingetragenen Werte.</p>
  <div class="form-actions"style="margin-top:10px">
@@ -3975,81 +4045,11 @@ async function renderKompass(){
  </div>
  </div>
 
- <div class="grid grid-2"style="margin-top:16px;gap:12px">
- <details class="noten-collapsible">
- <summary> Probezeit-Status (HJ1)</summary>
- <div class="notice">
- ${!bestehen.vollHJ1?`<p style="margin:0">Trag alle Noten des 1. Halbjahrs ein (inkl. fachpraktischer Ausbildung), um deinen endgültigen Stand zu sehen.</p>`
- :`<strong style="font-size:15px">${bestehen.probezeit.passed?" Probezeit nach aktueller Punktlage bestanden":" Probezeit nach aktueller Punktlage nicht bestanden"}</strong>
- <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Fachpraktische Ausbildung HJ1: ${bestehen.probezeit.fpaOk?"✓ mind. 4 Punkte":"✗ unter 4 Punkten"} · Fächer-Regel: ${bestehen.probezeit.fachCheck.passed?`erfüllt (Variante ${bestehen.probezeit.fachCheck.rule})`:"nicht erfüllt"}</p>`}
- <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochHJ1(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
- <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §8, §21 Abs. 3 FOBOSO – <strong>ohne Gewähr</strong>. Die tatsächliche Entscheidung trifft die Klassenkonferenz.</p>
- </div>
- </details>
- <details class="noten-collapsible">
- <summary> Bestehen des Schuljahres</summary>
- <div class="notice">
- ${!bestehen.vollJahr?`<p style="margin:0">Trag alle Noten beider Halbjahre ein (inkl. fachpraktischer Ausbildung), um deinen endgültigen Stand zu sehen.</p>`
- :`<strong style="font-size:15px">${bestehen.jahr.passed?" Schuljahr nach aktueller Punktlage bestanden":" Schuljahr nach aktueller Punktlage nicht bestanden"}</strong>
- <p style="margin:8px 0 0;font-size:12px;color:var(--muted)">Fachpraktische Ausbildung: ${bestehen.jahr.fpaOk?"✓ Bedingungen erfüllt":"✗ Bedingungen nicht erfüllt"} · Fächer-Regel: ${bestehen.jahr.fachCheck.passed?`erfüllt (Variante ${bestehen.jahr.fachCheck.rule})`:"nicht erfüllt"}</p>`}
- <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">${wasFehltNochJahr(noten).map(x=>`<div class="card"style="padding:8px 10px;background:${x.status==="ok"?"var(--soft-green)":x.status==="kritisch"?"var(--soft-orange)":x.status==="ungenuegend"?"#fbdada":"#f7fafc"}"><strong style="font-size:12px">${esc(x.label)}</strong><small style="display:block">${esc(x.text)}</small></div>`).join("")}</div>
- <p style="margin-top:14px;font-size:11px;color:var(--muted)">Orientierungshilfe nach §22 Abs. 1 Nr. 2, §21 Abs. 3 FOBOSO – <strong>ohne Gewähr</strong>. Die tatsächliche Entscheidung trifft die Klassenkonferenz.</p>
- </div>
- </details>
- </div>
+ ${abschlussBlockHTML(noten,bestehen)}
  </div>
 
- <div class="kicker"style="margin:22px 0 8px">AUFGABEN & PROJEKTE</div>
- <div class="grid grid-3"><div class="card stat"><b>${tasks.filter(t=>t.ownerUid===currentUser.uid).length}</b><span>Meine
-Aufgaben</span></div><div class="card stat"><b>${projects.length}</b><span>Projekte</span></div><div class="card stat">
-<b>${profile?.role==="teacher"?"Lehrkraft":profile?.role==="admin"?"Admin":"Schüler/in"}</b><span>Rolle</span></div></div>
- <div class="grid grid-3"style="margin-top:12px">
- <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #4a90d9"onclick="openMeineAufgabenModal()">
- <span class="emoji"></span><strong>Meine Aufgaben</strong><small>${tasks.filter(t=>t.ownerUid===currentUser.uid).length} offen</small>
- </button>
- <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #9b59b6"onclick="openProjektFristenModal()">
- <span class="emoji"></span><strong>Meine Projektfristen</strong><small>${projectDeadlines.length} Termine</small>
- </button>
- <button type="button"class="card tile-square"style="background:#fff;border-left:2px solid #1a9b8e"onclick="openAktuelleProjekteModal()">
- <span class="emoji"></span><strong>Meine Projekte</strong><small>${projects.length} Projekte</small>
- </button>
- </div>
 </div>${footer()}`;
 }
-async function openMeineAufgabenModal(){
- let tasks=[];
- try{tasks=await getCollection("tasks","deadline",false)}catch(e){}
- const meine=tasks.filter(t=>t.ownerUid===currentUser.uid);
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEIN KOMPASS</div><h2> Meine Aufgaben</h2>
- <div class="list">${meine.map(taskHTML).join("")||`<div class="empty"><strong>Noch keine Aufgaben</strong>Lege deine erste Aufgabe an.</div>`}</div>
- <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="closeModal();openTaskForm()">＋ Aufgabe</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
-}
-async function openProjektFristenModal(){
- let projects=[];
- try{projects=await getCollection("projects")}catch(e){}
- const todayStr=new Date().toISOString().slice(0,10);
- const projectDeadlines=projects.filter(p=>p.deadline).sort((a,b)=>String(a.deadline).localeCompare(String(b.deadline)));
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEIN KOMPASS</div><h2> Meine Projektfristen</h2>
- <p style="color:var(--muted);font-size:12px">Dein persönlicher Überblick über Projekt-Abgabetermine – erscheint bewusst nicht im allgemeinen Campus-Kalender.</p>
- <div class="list">${projectDeadlines.map(p=>{
- const overdue=String(p.deadline)<todayStr;
- return`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.team||"")}</small></div><span class="pill${overdue?"":"green"}">${overdue?"überfällig · ":""}${esc(fmtDateOnly(p.deadline))}</span></div>`;
- }).join("")||`<div class="empty">Noch keine Projekt-Fristen eingetragen.</div>`}</div>
- <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
-}
-async function openAktuelleProjekteModal(){
- let projects=[];
- try{projects=await getCollection("projects")}catch(e){}
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">MEIN KOMPASS</div><h2> Meine Projekte</h2>
- <div class="list">${projects.map(p=>`<div class="list-item"><div><strong>${esc(p.title)}</strong><small>${esc(p.team||"")} · ${esc(p.partner||"")}</small></div><span class="pill">${Number(p.progress||0)}%</span></div>`).join("")||`<div class="empty">Noch keine Projekte.</div>`}</div>
- <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
-}
-window.openMeineAufgabenModal=openMeineAufgabenModal;
-window.openProjektFristenModal=openProjektFristenModal;
-window.openAktuelleProjekteModal=openAktuelleProjekteModal;
 function taskHTML(t){return`<div class="list-item"><div><strong>${esc(t.title)}</strong><small>Verantwortlich:
 ${esc(t.ownerName||"")} · Deadline: ${esc(t.deadline||"—")} · Nächster Schritt: ${esc(t.next||"—")}</small></div><div
 class="traffic">${statusDot(t.status)}<span class="pill">${statusLabel[t.status]||"—"}</span></div></div>`}
@@ -4062,7 +4062,7 @@ function ampelDotHTML(status){
 }
 async function openLehrplanKlassenuebersicht(fach){
  if(!isTeacher()){toast("Nur Lehrkräfte können die Klassenübersicht öffnen.");return}
- const fachLbl=F11SB_LEHRPLAN_FAECHER.find(f=>f.key===fach)?.label||fach;
+ const fachLbl=F11SB_FAECHER.find(f=>f.key===fach)?.label||fach;
  const wochenGesamt=(LEHRPLAN_WOCHEN[fach]||[]).length;
  let students=[],fortschrittDocs=[],lsTasks=[],allAttempts=[];
  try{
@@ -4114,9 +4114,384 @@ async function openLehrplanKlassenuebersicht(fach){
 window.openLehrplanKlassenuebersicht=openLehrplanKlassenuebersicht;
 
 // ============================================================
-// DIDAKTIK-KOMPASS (Deeper Learning + UDL) – Orientierung für Lehrkräfte
+// UNTERRICHT PÄDAGOGIK UND PSYCHOLOGIE · STOFFVERTEILUNGSPLAN 12. KLASSE
+// Balkenansicht: je Unterrichtstag ein Balken (Mo 1 Std., Mi 2 Std.,
+// Fr 2 Std. = 5 Std./Woche). Themen ändern: nur die Liste PP12_PLAN anpassen.
+// ============================================================
+const PP12_LB={
+ 1:{kurz:"LB 1",titel:"Entwicklung",farbe:"#3F7FC1"},
+ 2:{kurz:"LB 2",titel:"Persönlichkeit und Identität",farbe:"#8A64B8"},
+ 3:{kurz:"LB 3",titel:"Soziale Arbeit",farbe:"#3C9A6B"},
+ 4:{kurz:"LB 4",titel:"Kommunikation",farbe:"#C9773A"}
+};
+const PP12_TYP={
+ wdh:{label:"Wiederholung / Übung",farbe:"#6B7C93"},
+ leistung:{label:"Leistungsnachweis",farbe:"#C0392B"},
+ training:{label:"Prüfungstraining",farbe:"#B8860B"},
+ pruefung:{label:"Abschlussprüfung",farbe:"#1F2D3D"}
+};
+// Unterrichtstage der 12. Klasse: Montag 1 Std., Mittwoch 2 Std., Freitag 2 Std. = 5 Std. pro Woche.
+const PP12_FERIEN=[
+ {start:"2026-11-02",end:"2026-11-06",titel:"Herbstferien"},
+ {start:"2026-12-24",end:"2027-01-08",titel:"Weihnachtsferien"},
+ {start:"2027-02-08",end:"2027-02-12",titel:"Frühjahrsferien"},
+ {start:"2027-03-22",end:"2027-04-02",titel:"Osterferien"}
+];
+const PP12_FREI={"2026-11-18":"Buß- und Bettag (unterrichtsfrei)","2027-01-06":"Hl. Drei Könige"};
+const PP12_START="2026-10-02";
+const PP12_PLAN=[
+ {"d":"2026-10-02","h":2,"lb":1,"typ":"stoff","t":"Freud: Instanzenmodell (Es, Ich, Über-Ich)"},
+ {"d":"2026-10-05","h":1,"lb":1,"typ":"stoff","t":"Freud: Psychosexuelle Entwicklung I – orale und anale Phase"},
+ {"d":"2026-10-07","h":2,"lb":1,"typ":"stoff","t":"Freud: Psychosexuelle Entwicklung II – phallische Phase, Latenz, genitale Phase; Fixierung"},
+ {"d":"2026-10-09","h":2,"lb":1,"typ":"stoff","t":"Freud: Abwehrmechanismen (Verdrängung, Projektion, Fixierung, Regression, Identifikation)"},
+ {"d":"2026-10-12","h":1,"lb":1,"typ":"wdh","t":"Freud: Abwehrmechanismen an Fallbeispielen üben"},
+ {"d":"2026-10-14","h":2,"lb":1,"typ":"stoff","t":"Freud: Kritische Würdigung (Erklärungswert, empirische Überprüfbarkeit) und Konsequenzen für die Erziehung"},
+ {"d":"2026-10-16","h":2,"lb":1,"typ":"wdh","t":"Freud: Fallanalyse und Übung"},
+ {"d":"2026-10-19","h":1,"lb":1,"typ":"stoff","t":"Bindung: Bindungsbegriff und Phasen der Bindungsentwicklung"},
+ {"d":"2026-10-21","h":2,"lb":1,"typ":"stoff","t":"Bindung: Bindungstypologie (sicher, unsicher-vermeidend, unsicher-ambivalent, desorganisiert)"},
+ {"d":"2026-10-23","h":2,"lb":1,"typ":"wdh","t":"Bindungstypen an Fallbeispielen; eigene Bindungsstile reflektieren"},
+ {"d":"2026-10-26","h":1,"lb":1,"typ":"stoff","t":"Primäre und sekundäre Bindungsbeziehungen (Jugend- und Erwachsenenalter nach Ahnert)"},
+ {"d":"2026-10-28","h":2,"lb":1,"typ":"stoff","t":"Frühpädagogische Überlegungen zur Förderung gelungener Bindung"},
+ {"d":"2026-10-30","h":2,"lb":1,"typ":"wdh","t":"Bindung: Anwendung auf pädagogische Situationen"},
+ {"d":"2026-11-09","h":1,"lb":1,"typ":"stoff","t":"Lebensspannentheorie nach Baltes: Grundannahmen"},
+ {"d":"2026-11-11","h":2,"lb":1,"typ":"stoff","t":"Entwicklungsanforderungen im Jugendalter (ca. 11–18 Jahre)"},
+ {"d":"2026-11-13","h":2,"lb":1,"typ":"stoff","t":"Entwicklungsanforderungen im frühen Erwachsenenalter (ca. 18–28 Jahre)"},
+ {"d":"2026-11-16","h":1,"lb":1,"typ":"leistung","t":"Kurzarbeit (Freud, Bindung)"},
+ {"d":"2026-11-20","h":2,"lb":1,"typ":"stoff","t":"Vulnerabilität und Resilienz I: Risikofaktoren, Vulnerabilität, Begriff Resilienz"},
+ {"d":"2026-11-23","h":1,"lb":1,"typ":"stoff","t":"Resilienz II: Schutzfaktoren (soziale Unterstützung, Peerkontakte, Selbstwertgefühl, Selbstwirksamkeit)"},
+ {"d":"2026-11-25","h":2,"lb":1,"typ":"wdh","t":"Resilienz: Fallbeispiele; Entwicklungseinflüsse der eigenen Biografie reflektieren"},
+ {"d":"2026-11-27","h":2,"lb":1,"typ":"wdh","t":"LB 1 Entwicklung: Gesamtüberblick, Wiederholung und Übung"},
+ {"d":"2026-11-30","h":1,"lb":2,"typ":"stoff","t":"Persönlichkeit: Begriff und zentrale Merkmale (Stabilität, Veränderbarkeit, Einzigartigkeit)"},
+ {"d":"2026-12-02","h":2,"lb":2,"typ":"stoff","t":"Persönlichkeitsstruktur: Big Five nach Costa und McCrae, Persönlichkeitsinventare"},
+ {"d":"2026-12-04","h":2,"lb":2,"typ":"stoff","t":"Rogers I: Aktualisierungstendenz, organismischer Bewertungsprozess, Bewertungsbedingungen"},
+ {"d":"2026-12-07","h":1,"lb":2,"typ":"stoff","t":"Rogers II: Selbst und Selbstkonzept (Real- und Idealselbst)"},
+ {"d":"2026-12-09","h":2,"lb":2,"typ":"stoff","t":"Rogers III: Kongruenz und Inkongruenz, Wahrnehmungsverzerrung und -verleugnung, Selbstachtung"},
+ {"d":"2026-12-11","h":2,"lb":2,"typ":"wdh","t":"Rogers: Bedeutung für Erziehung, Beratung und Therapie; Übung"},
+ {"d":"2026-12-14","h":1,"lb":2,"typ":"wdh","t":"Wiederholung zur Schulaufgabe 1"},
+ {"d":"2026-12-16","h":2,"lb":0,"typ":"leistung","t":"Schulaufgabe 1 (LB 1 Entwicklung, Big Five, Rogers)"},
+ {"d":"2026-12-18","h":2,"lb":2,"typ":"stoff","t":"Bandura I: sozialkognitive Theorie – Überzeugungen und Erwartungen"},
+ {"d":"2026-12-21","h":1,"lb":2,"typ":"stoff","t":"Bandura II: Selbstwirksamkeits-, Ergebnis- und Kompetenzerwartungen"},
+ {"d":"2026-12-23","h":2,"lb":0,"typ":"wdh","t":"Rückgabe und Besprechung der Schulaufgabe 1"},
+ {"d":"2027-01-11","h":1,"lb":2,"typ":"stoff","t":"Bandura III: Selbstregulation (Self-Evaluative- und Self-Efficacy-Mechanismen)"},
+ {"d":"2027-01-13","h":2,"lb":2,"typ":"wdh","t":"Theorienvergleich: Freud – Rogers – Bandura, Anwendung auf Fälle"},
+ {"d":"2027-01-15","h":2,"lb":2,"typ":"stoff","t":"Identität: Begriff, Identitätsmodell nach Marcia I"},
+ {"d":"2027-01-18","h":1,"lb":2,"typ":"stoff","t":"Marcia II: vier Identitätszustände (diffus, übernommen, Moratorium, erarbeitet)"},
+ {"d":"2027-01-20","h":2,"lb":2,"typ":"stoff","t":"Marcia am Beispiel (z. B. berufliche Identität); Bewusstsein, Selbstreflexion und Identität"},
+ {"d":"2027-01-22","h":2,"lb":2,"typ":"wdh","t":"LB 2 Persönlichkeit und Identität: Wiederholung und Übung"},
+ {"d":"2027-01-25","h":1,"lb":3,"typ":"stoff","t":"Berufsfeld Soziale Arbeit: Überblick, Studien- und Berufsmöglichkeiten"},
+ {"d":"2027-01-27","h":2,"lb":3,"typ":"stoff","t":"Aufgabenbereiche Sozialer Arbeit: Sozialhilfe, Gesundheits- und Altenhilfe, Kinder- und Jugendhilfe"},
+ {"d":"2027-01-29","h":2,"lb":3,"typ":"stoff","t":"Einzelhilfe I: verhaltensorientiertes Konzept – Analyse"},
+ {"d":"2027-02-01","h":1,"lb":3,"typ":"stoff","t":"Einzelhilfe II: Planung"},
+ {"d":"2027-02-03","h":2,"lb":3,"typ":"stoff","t":"Einzelhilfe III: Verhaltensmodifikation auf Grundlage einer Lerntheorie"},
+ {"d":"2027-02-05","h":2,"lb":3,"typ":"stoff","t":"Einzelhilfe IV: Evaluation; Handlungskonzept für einen Fall"},
+ {"d":"2027-02-15","h":1,"lb":3,"typ":"wdh","t":"Einzelhilfe: Fallübung"},
+ {"d":"2027-02-17","h":2,"lb":3,"typ":"stoff","t":"Life Model nach Germain/Gitterman I: Ökologie, Transaktion, Anpassung"},
+ {"d":"2027-02-19","h":2,"lb":3,"typ":"stoff","t":"Life Model II: Habitat, Nische, Lebens-Stress, Coping, Ressourcen"},
+ {"d":"2027-02-22","h":1,"lb":3,"typ":"wdh","t":"Life Model: Fallanwendung"},
+ {"d":"2027-03-01","h":1,"lb":3,"typ":"wdh","t":"Wiederholung zur Schulaufgabe 2 (Soziale Arbeit)"},
+ {"d":"2027-03-03","h":2,"lb":0,"typ":"leistung","t":"Schulaufgabe 2 (LB 2 Persönlichkeit und Identität, LB 3 Soziale Arbeit)"},
+ {"d":"2027-03-05","h":2,"lb":4,"typ":"stoff","t":"Soziale Kommunikation und Interaktion: Begriffe, Organon-Modell nach Bühler"},
+ {"d":"2027-03-08","h":1,"lb":4,"typ":"stoff","t":"Watzlawick: Grundlagen der Kommunikationstheorie im Überblick"},
+ {"d":"2027-03-10","h":2,"lb":0,"typ":"wdh","t":"Rückgabe und Besprechung der Schulaufgabe 2"},
+ {"d":"2027-03-12","h":2,"lb":4,"typ":"stoff","t":"Axiome 1 bis 3: Kommunikationsstörungen (Inhalts- und Beziehungsaspekt, Interpunktion, selbsterfüllende Prophezeiung)"},
+ {"d":"2027-03-17","h":2,"lb":4,"typ":"stoff","t":"Axiome 4 und 5: digitale und analoge Modalität, symmetrische Eskalation, starre Komplementarität – Kommunikationsstörungen"},
+ {"d":"2027-04-05","h":1,"lb":4,"typ":"wdh","t":"Kommunikationsstörungen an Fallbeispielen (Privatleben, Schule, Beruf)"},
+ {"d":"2027-04-07","h":2,"lb":4,"typ":"stoff","t":"Gelungene Kommunikation nach Watzlawick; Strategien zur Vermeidung von Störungen"},
+ {"d":"2027-04-09","h":2,"lb":4,"typ":"stoff","t":"Kommunikationstechniken: Metakommunikation, Ich-Botschaften, aktives Zuhören, Feedback"},
+ {"d":"2027-04-12","h":1,"lb":4,"typ":"wdh","t":"Kommunikationstechniken üben: Konfliktgespräch (Rollenspiel)"},
+ {"d":"2027-04-19","h":1,"lb":4,"typ":"wdh","t":"LB 4 Kommunikation: Wiederholung und Übung"},
+ {"d":"2027-04-21","h":2,"lb":0,"typ":"wdh","t":"Vernetzung der Lernbereiche 1–4: Theorien vergleichen, Fallanalysen"},
+ {"d":"2027-04-23","h":2,"lb":0,"typ":"wdh","t":"Wiederholung Jgst. 11 (I): Wahrnehmung, Gedächtnis, Emotion, Motivation"},
+ {"d":"2027-04-26","h":1,"lb":0,"typ":"wdh","t":"Wiederholung Jgst. 11 (II): Lernen, Erziehung, Wissenschaft"},
+ {"d":"2027-04-28","h":2,"lb":0,"typ":"wdh","t":"Letzte Wiederholung – Stoff abgeschlossen (2 Wochen vor der ersten Abschlussprüfung)"},
+ {"d":"2027-04-30","h":2,"lb":0,"typ":"training","t":"Prüfungstraining 1: Aufgabenformate und Vorgehensweise"},
+ {"d":"2027-05-03","h":1,"lb":0,"typ":"training","t":"Prüfungstraining 2: Fallanalyse üben"},
+ {"d":"2027-05-05","h":2,"lb":0,"typ":"training","t":"Prüfungstraining 3: Probeprüfung"},
+ {"d":"2027-05-07","h":2,"lb":0,"typ":"training","t":"Prüfungstraining 4: Besprechung der Probeprüfung"},
+ {"d":"2027-05-10","h":1,"lb":0,"typ":"training","t":"Prüfungstraining 5: offene Fragen und letzte Wiederholung"},
+ {"d":"2027-05-12","h":2,"lb":0,"typ":"pruefung","t":"Abschlussprüfung Deutsch (erste schriftliche Prüfung)"},
+ {"d":"2027-05-14","h":2,"lb":0,"typ":"pruefung","t":"Abschlussprüfung Pädagogik/Psychologie"}
+];
+
+function pp12Add(iso,n){const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
+function pp12Montag(iso){const d=new Date(iso+"T12:00:00Z");const w=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-w);return d.toISOString().slice(0,10);}
+function pp12KW(iso){const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+3-((d.getUTCDay()+6)%7));const j=new Date(Date.UTC(d.getUTCFullYear(),0,4));return 1+Math.round(((d-j)/86400000-3+((j.getUTCDay()+6)%7))/7);}
+function pp12Datum(iso){return iso.slice(8,10)+"."+iso.slice(5,7)+".";}
+function pp12Ferien(iso){return PP12_FERIEN.find(f=>f.start<=iso&&f.end>=iso)||null;}
+function pp12BarFarbe(e){return e.typ==="stoff"?(PP12_LB[e.lb]?.farbe||"#6B7C93"):(PP12_TYP[e.typ]?.farbe||"#6B7C93");}
+function pp12BarTag(e){
+ if(e.typ==="stoff")return`${PP12_LB[e.lb].kurz} · ${PP12_LB[e.lb].titel}`;
+ const t=PP12_TYP[e.typ]?.label||"";
+ return e.lb&&PP12_LB[e.lb]?`${t} · ${PP12_LB[e.lb].kurz}`:t;
+}
+
+// ============================================================
+// PLAN VERSCHIEBEN (nur Lehrkräfte): einzelne Stunden oder alles ab einer Stunde um einen Unterrichtstag.
+// Grundlage ist die feste Liste PP12_BASIS (= PP12_PLAN oben). Änderungen liegen in Firestore: lehrplanPlan/pp12.
+// Die Stundenzahl gehört zum Termin (Mo 1, Mi 2, Fr 2). Leistungsnachweise und Prüfungen bleiben auf ihrem Datum.
+// ============================================================
+const PP12_BASIS=PP12_PLAN.map(e=>({...e,id:e.d}));
+PP12_PLAN.forEach(e=>{e.id=e.d;});
+const PP12_FIX=e=>e.typ==="leistung"||e.typ==="pruefung";
+// Alle Unterrichtstermine (Mo 1 Std., Mi 2 Std., Fr 2 Std.) von Planbeginn bis zur letzten Prüfung, ohne Ferien und freie Tage.
+// Termine ohne Eintrag sind Puffer/Reserve.
+const PP12_ALLE_TERMINE=(()=>{
+ const out=[],ende=PP12_BASIS.reduce((m,e)=>e.d>m?e.d:m,PP12_START);
+ for(let d=PP12_START;d<=ende;d=pp12Add(d,1)){
+  const w=(new Date(d+"T12:00:00Z").getUTCDay()+6)%7;
+  if(w!==0&&w!==2&&w!==4)continue;
+  if(pp12Ferien(d)||PP12_FREI[d])continue;
+  out.push(d);
+ }
+ return out;
+})();
+const PP12_SLOT_H=Object.fromEntries(PP12_ALLE_TERMINE.map(d=>[d,(new Date(d+"T12:00:00Z").getUTCDay()+6)%7===0?1:2]));
+const PP12_FIXTERMINE=new Set(PP12_BASIS.filter(PP12_FIX).map(e=>e.d));
+const PP12_MSLOTS=PP12_ALLE_TERMINE.filter(d=>!PP12_FIXTERMINE.has(d));
+let PP12_OVER={datum:{},park:[],eigene:{},weg:[],parkTafeln:{}};
+let PP12_PARK=[];
+function pp12Modell(over){
+ const reg={};
+ const weg=(over.weg||[]).filter(id=>PP12_BASIS.some(e=>e.id===id&&!PP12_FIX(e)));
+ PP12_BASIS.filter(e=>!PP12_FIX(e)&&!weg.includes(e.id)).forEach(e=>{reg[e.id]={...e};});
+ Object.entries(over.eigene||{}).forEach(([id,e])=>{reg[id]={id,t:e.t,lb:e.lb||0,typ:e.typ||"wdh",eigen:true};});
+ const park=(over.park||[]).filter(id=>reg[id]);
+ const arr=PP12_MSLOTS.map(()=>null);
+ for(const id of Object.keys(reg)){
+  if(park.includes(id))continue;
+  const d=(over.datum&&over.datum[id])||(reg[id].eigen?null:id);
+  const i=PP12_MSLOTS.indexOf(d);
+  if(i<0||arr[i])return null;
+  arr[i]=id;
+ }
+ return{reg,park,arr,weg};
+}
+function pp12PlanBauen(m){
+ const out=PP12_BASIS.filter(PP12_FIX).map(e=>({...e}));
+ m.arr.forEach((id,i)=>{if(!id)return;const e=m.reg[id],d=PP12_MSLOTS[i];out.push({...e,d,h:PP12_SLOT_H[d],id});});
+ return out.sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
+}
+function pp12Anwenden(over){
+ over=over||{};
+ let m=pp12Modell(over);
+ if(!m){console.warn("Gespeicherte Planänderung passt nicht zum Grundplan und wird ignoriert.");over={};m=pp12Modell(over);}
+ PP12_OVER={datum:over.datum||{},park:over.park||[],eigene:over.eigene||{},weg:over.weg||[],parkTafeln:over.parkTafeln||{}};
+ PP12_PLAN.splice(0,PP12_PLAN.length,...pp12PlanBauen(m));
+ PP12_PARK=m.park.map(id=>m.reg[id]);
+}
+const pp12Kopie=m=>({reg:{...m.reg},park:m.park.slice(),arr:m.arr.slice(),weg:(m.weg||[]).slice()});
+// Diese Stunde mit der Nachbarstunde tauschen (auch auf einen freien Termin).
+function pp12Tausch(m,id,dir){
+ const a=m.arr,i=a.indexOf(id),j=i+dir;
+ if(i<0||j<0||j>=a.length)return{fehler:"Weiter geht es nicht: In dieser Richtung gibt es keinen weiteren Unterrichtstermin."};
+ [a[i],a[j]]=[a[j],a[i]];
+ return{m};
+}
+// Diese und alle folgenden Stunden um einen Unterrichtstag verschieben. Die Verschiebung endet am ersten freien Termin.
+function pp12Ab(m,id,dir){
+ const a=m.arr,n=a.length,i=a.indexOf(id);
+ if(i<0)return{fehler:"Stunde nicht gefunden."};
+ if(dir>0){
+  let j=i+1;while(j<n&&a[j]!==null)j++;
+  let geparkt=null;
+  if(j>=n){geparkt=a[n-1];j=n-1;}
+  for(let k=j;k>i;k--)a[k]=a[k-1];
+  a[i]=null;
+  if(geparkt)m.park.push(geparkt);
+  return{m,geparkt};
+ }
+ if(i===0||a[i-1]!==null)return{fehler:"Davor ist kein freier Termin. Verschiebe zuerst die Stunden davor weiter nach hinten oder nutze ‹ › an einer einzelnen Stunde."};
+ let j=i;while(j<n&&a[j]!==null)j++;
+ for(let k=i;k<j;k++)a[k-1]=a[k];
+ a[j-1]=null;
+ return{m};
+}
+function pp12DatumVon(m,id){const i=m.arr.indexOf(id);return i<0?null:PP12_MSLOTS[i];}
+// Speichert den neuen Plan und nimmt die Tafeln der Stunden mit (Tafeln hängen am Datum).
+async function pp12Speichern(neu,alt){
+ const over={datum:{},park:neu.park.slice(),eigene:{},weg:(neu.weg||[]).slice(),parkTafeln:{}};
+ neu.arr.forEach((id,i)=>{if(id)over.datum[id]=PP12_MSLOTS[i];});
+ Object.values(neu.reg).forEach(e=>{if(e.eigen)over.eigene[e.id]={t:e.t,lb:e.lb||0,typ:e.typ||"wdh"};});
+ const T=PP12_CACHE.tafeln,final={},betroffen=new Set(),parkT={...(PP12_OVER.parkTafeln||{})};
+ const ids=new Set([...Object.keys(neu.reg),...Object.keys(alt.reg)]);
+ ids.forEach(id=>{
+  const o=pp12DatumVon(alt,id),n=neu.reg[id]?pp12DatumVon(neu,id):null;
+  if(o===n)return;
+  if(o)betroffen.add(o);if(n)betroffen.add(n);
+  const data=o?T[o]:parkT[id];
+  if(!o)delete parkT[id];
+  if(data){if(n)final[n]=data;else if(neu.reg[id])parkT[id]=data;}
+ });
+ over.parkTafeln=Object.fromEntries(Object.entries(parkT).filter(([id])=>neu.reg[id]&&neu.park.includes(id)));
+ await setDoc(doc(db,"lehrplanPlan","pp12"),{...over,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
+ for(const d of betroffen){
+  if(final[d]){await setDoc(doc(db,"lehrplanTafeln",d),final[d]);T[d]=final[d];}
+  else if(T[d]){await deleteDoc(doc(db,"lehrplanTafeln",d));delete T[d];}
+ }
+ pp12Anwenden(over);
+}
+async function pp12Aendern(fn,erfolg){
+ if(!isTeacher()||pp12Beschaeftigt)return;
+ pp12Beschaeftigt=true;
+ try{
+  await pp12DatenLaden(true);
+  const alt=pp12Modell(PP12_OVER);
+  if(!alt){toast("Der gespeicherte Plan passt nicht zum Grundplan. Bitte „Plan zurücksetzen“ nutzen.");return;}
+  const neu=pp12Kopie(alt);
+  const r=fn(neu,alt);
+  if(!r||r.fehler){toast(r&&r.fehler?r.fehler:"Nichts geändert.");return;}
+  if(r.frage&&!confirm(r.frage))return;
+  await pp12Speichern(r.m||neu,alt);
+  await render();
+  if(erfolg)toast(erfolg);
+ }catch(err){
+  console.error("Plan verschieben:",err);
+  toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln (lehrplanPlan) veröffentlichen.":"Der Plan konnte nicht geändert werden.");
+ }finally{pp12Beschaeftigt=false;}
+}
+const pp12Titel=(m,id)=>{const e=m.reg[id];return e?e.t:"";};
+// Einzelne Stunde einen Unterrichtstag früher (-1) oder später (+1)
+function pp12Eine(id,dir){
+ return pp12Aendern((m)=>pp12Tausch(m,id,dir),dir<0?"Stunde einen Unterrichtstag vorgezogen.":"Stunde einen Unterrichtstag nach hinten gelegt.");
+}
+// Diese und alle folgenden Stunden einen Unterrichtstag früher (-1) oder später (+1)
+function pp12AbHier(id,dir){
+ return pp12Aendern((m)=>{
+  const r=pp12Ab(m,id,dir);
+  if(r.geparkt)r.frage="Es gibt keinen freien Termin mehr im Plan. Die letzte verschiebbare Stunde („"+pp12Titel(m,r.geparkt)+"“) wird deshalb zurückgestellt. Du findest sie unten unter „Zurückgestellte Stunden“ und kannst sie wieder einplanen. Fortfahren?";
+  return r;
+ },dir<0?"Alles ab dieser Stunde einen Unterrichtstag vorgezogen.":"Alles ab dieser Stunde einen Unterrichtstag nach hinten geschoben.");
+}
+// Ein Klick: ab der nächsten Stunde (nach heute) alles einen Unterrichtstag zurück bzw. wieder vor
+function pp12NaechsteStundeId(){
+ const heute=new Date().toISOString().slice(0,10);
+ const e=PP12_PLAN.find(x=>!PP12_FIX(x)&&x.id&&x.d>heute);
+ return e?e.id:null;
+}
+function pp12Gesamt(dir){
+ if(dir>0){
+  const id=pp12NaechsteStundeId();
+  if(!id){toast("Es gibt keine weitere Stunde nach heute, die verschoben werden könnte.");return;}
+  return pp12AbHier(id,1);
+ }
+ const heute=new Date().toISOString().slice(0,10);
+ return pp12Aendern((m)=>{
+  const g=m.arr.findIndex((id,i)=>id===null&&PP12_MSLOTS[i]>heute);
+  if(g<0)return{fehler:"Es gibt keinen freien Termin zum Aufholen."};
+  const i=m.arr.findIndex((id,k)=>k>g&&id!==null);
+  if(i<0)return{fehler:"Hinter dem freien Termin folgt keine Stunde mehr."};
+  return pp12Ab(m,m.arr[i],-1);
+ },"Der freie Termin wurde aufgeholt: Alles ab der nächsten Stunde ist einen Unterrichtstag früher.");
+}
+// Freien Termin (Reserve) mit einer Fortsetzungsstunde füllen
+function pp12ReserveFuellen(datum){
+ const vorher=[...PP12_PLAN].reverse().find(x=>x.d<datum&&x.lb>0&&!PP12_FIX(x));
+ const t=prompt("Titel der Stunde (z. B. Fortsetzung des letzten Themas):",vorher?("Fortsetzung: "+vorher.t).slice(0,140):"Fortsetzung");
+ if(t===null||!t.trim())return;
+ return pp12Aendern((m)=>{
+  const i=PP12_MSLOTS.indexOf(datum);
+  if(i<0||m.arr[i]!==null)return{fehler:"Dieser Termin ist nicht mehr frei."};
+  const id="x"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  m.reg[id]={id,t:t.trim().slice(0,140),lb:vorher?vorher.lb:0,typ:"wdh",eigen:true};
+  m.arr[i]=id;
+  return{m};
+ },"Stunde eingetragen.");
+}
+// Jede Stunde (außer Leistungsnachweisen und Prüfungen) aus dem Plan entfernen. Der Termin wird frei (Reserve).
+// Stunden aus dem Grundplan landen unter „Entfernte Stunden“ und lassen sich wiederherstellen; selbst eingetragene Stunden sind danach weg.
+function pp12Loeschen(id){
+ const e=PP12_PLAN.find(x=>x.id===id);
+ const hatTafel=!!(e&&PP12_CACHE.tafeln[e.d]&&PP12_CACHE.tafeln[e.d].boardId);
+ return pp12Aendern((m)=>{
+  const r=m.reg[id];
+  if(!r)return{fehler:"Stunde nicht gefunden."};
+  const i=m.arr.indexOf(id);
+  if(i>=0)m.arr[i]=null;
+  m.park=m.park.filter(x=>x!==id);
+  if(!r.eigen&&!m.weg.includes(id))m.weg.push(id);
+  delete m.reg[id];
+  return{m,frage:"Stunde „"+r.t+"“ aus dem Plan entfernen? Der Termin wird frei (Reserve)."+(hatTafel?" Die Tafel wird von dieser Stunde gelöst, das Whiteboard selbst bleibt erhalten.":"")+(r.eigen?"":" Du kannst sie unten unter „Entfernte Stunden“ wiederherstellen.")};
+ },"Stunde entfernt.");
+}
+// Eine entfernte Stunde des Grundplans zurückholen: auf den Ursprungstermin, wenn frei, sonst auf den nächsten freien Termin
+function pp12Wiederherstellen(id){
+ const heute=new Date().toISOString().slice(0,10);
+ return pp12Aendern((m)=>{
+  const b=PP12_BASIS.find(e=>e.id===id&&!PP12_FIX(e));
+  if(!b)return{fehler:"Diese Stunde gibt es im Grundplan nicht."};
+  m.weg=m.weg.filter(x=>x!==id);
+  m.reg[id]={...b};
+  let i=PP12_MSLOTS.indexOf(id);
+  if(i<0||m.arr[i]!==null){
+   i=m.arr.findIndex((x,k)=>x===null&&PP12_MSLOTS[k]>=heute);
+   if(i<0)i=m.arr.findIndex(x=>x===null);
+  }
+  if(i<0)m.park.push(id);else m.arr[i]=id;
+  return{m};
+ },"Stunde wiederhergestellt.");
+}
+// Neue Stunde vor eine bestehende setzen: diese und alle folgenden Stunden rücken bis zum nächsten freien Termin um einen Unterrichtstag nach hinten
+function pp12Einfuegen(id){
+ const t=prompt("Titel der neuen Stunde. Sie steht danach an diesem Termin, die bisherige Stunde und alle folgenden rücken um einen Unterrichtstag nach hinten:","");
+ if(t===null||!t.trim())return;
+ return pp12Aendern((m)=>{
+  const i=m.arr.indexOf(id);
+  if(i<0)return{fehler:"Stunde nicht gefunden."};
+  const lb=m.reg[id]?m.reg[id].lb:0;
+  let geparkt=null;
+  const r=pp12Ab(m,id,1);
+  if(r.fehler)return r;
+  geparkt=r.geparkt;
+  const nid="x"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  m.reg[nid]={id:nid,t:t.trim().slice(0,140),lb:lb||0,typ:"wdh",eigen:true};
+  m.arr[i]=nid;
+  const out={m};
+  if(geparkt)out.frage="Es gibt keinen freien Termin mehr im Plan. Die letzte verschiebbare Stunde („"+pp12Titel(m,geparkt)+"“) wird deshalb zurückgestellt. Fortfahren?";
+  return out;
+ },"Stunde eingefügt.");
+}
+function pp12EigeneLoeschen(id){
+ return pp12Aendern((m)=>{
+  const i=m.arr.indexOf(id);
+  if(i>=0)m.arr[i]=null;
+  m.park=m.park.filter(x=>x!==id);
+  delete m.reg[id];
+  return{m,frage:"Diese selbst eingetragene Stunde entfernen? Der Termin wird wieder frei."};
+ },"Stunde entfernt.");
+}
+function pp12Einplanen(id){
+ const heute=new Date().toISOString().slice(0,10);
+ return pp12Aendern((m)=>{
+  let i=m.arr.findIndex((x,k)=>x===null&&PP12_MSLOTS[k]>=heute);
+  if(i<0)i=m.arr.findIndex(x=>x===null);
+  if(i<0)return{fehler:"Es gibt keinen freien Termin. Schiebe zuerst mit ‹ › Stunden vor, damit ein Termin frei wird."};
+  m.park=m.park.filter(x=>x!==id);
+  m.arr[i]=id;
+  return{m};
+ },"Stunde wieder eingeplant.");
+}
+function pp12Zuruecksetzen(){
+ return pp12Aendern((m,alt)=>{
+  const b=pp12Modell({});
+  return{m:b,frage:"Den ganzen Plan auf den ursprünglichen Stand zurücksetzen? Alle Verschiebungen und selbst eingetragenen Stunden gehen verloren. Die Tafeln wandern mit ihren Stunden zurück."};
+ },"Plan zurückgesetzt.");
+}
+function pp12CtlHtml(e){
+ if(!isTeacher()||PP12_FIX(e)||!e.id)return"";
+ return`<div class="pp12-ctl"data-id="${esc(e.id)}"role="group"aria-label="Stunde verschieben"><button type="button"data-p12="e-1"title="Nur diese Stunde einen Unterrichtstag früher"aria-label="Diese Stunde früher">‹</button><button type="button"data-p12="e1"title="Nur diese Stunde einen Unterrichtstag später"aria-label="Diese Stunde später">›</button><span class="pp12-ctl-sep"></span><button type="button"data-p12="a-1"title="Diese und alle folgenden Stunden einen Unterrichtstag früher"aria-label="Diese und alle folgenden Stunden früher">‹‹</button><button type="button"data-p12="a1"title="Diese und alle folgenden Stunden einen Unterrichtstag später"aria-label="Diese und alle folgenden Stunden später">››</button><span class="pp12-ctl-sep"></span><button type="button"data-p12="ins"title="Neue Stunde vor dieser einfügen (diese und alle folgenden rücken nach hinten)"aria-label="Neue Stunde davor einfügen">＋</button><button type="button"data-p12="x"title="Diese Stunde aus dem Plan entfernen"aria-label="Stunde entfernen">✕</button></div>`;
+}
+if(typeof document!=="undefined")document.addEventListener("click",ev=>{
+ const b=ev.target&&ev.target.closest?ev.target.closest("[data-p12]"):null;if(!b)return;
+ const id=b.parentElement&&b.parentElement.dataset.id,k=b.dataset.p12;if(!id)return;
+ if(k==="e-1")pp12Eine(id,-1);else if(k==="e1")pp12Eine(id,1);else if(k==="a-1")pp12AbHier(id,-1);else if(k==="a1")pp12AbHier(id,1);else if(k==="ins")pp12Einfuegen(id);else if(k==="x")pp12Loeschen(id);
+});
+Object.assign(window,{pp12Eine,pp12AbHier,pp12Gesamt,pp12ReserveFuellen,pp12EigeneLoeschen,pp12Loeschen,pp12Wiederherstellen,pp12Einfuegen,pp12Einplanen,pp12Zuruecksetzen});
+
+// ============================================================
+// DIDAKTIK-HINWEISE (Deeper Learning + UDL) UND TAFEL-VERKNÜPFUNG IM ZEITSTRAHL
 // Grundlage: Deeper-Learning-Phasen nach Sliwka & Klopsch (2022), UDL-Leitlinien 3.0 (CAST 2024).
 // Alle Texte sind eigene, verkürzte Formulierungen. Hinweise sind freiwillig und ausblendbar.
+// Sammlung: lehrplanTafeln (Stunde → Tafel).
 // ============================================================
 const PP12_PHASEN={
  1:{kurz:"I",name:"Instruktion und Aneignung",schueler:"Aneignen",
@@ -4140,11 +4515,59 @@ const PP12_UDL={
  D:{name:"Darstellung",col:"#6f4fa0",leit:"Darstellung von Informationen (UDL 1–3)",frage:"Gibt es den Inhalt in mehr als einer Form, zum Beispiel Text, Skizze, Beispiel oder Audio?",bsp:"Text plus Skizze des Modells und eine Alltagsszene zum selben Begriff."},
  A:{name:"Ausdruck",col:"#1d6fa5",leit:"Handlung und Ausdruck (UDL 4–6)",frage:"Dürfen die Lernenden ihr Können auf mehreren Wegen zeigen?",bsp:"Skizze, Stichwortliste oder Sprachnachricht; Ergebnis am Team-Whiteboard."}
 };
-function pp12HinweiseAn(){try{return localStorage.getItem("pp12Hinweise")!=="aus";}catch(e){return true;}}
-async function pp12HinweiseSchalter(){
- try{localStorage.setItem("pp12Hinweise",pp12HinweiseAn()?"aus":"an");}catch(e){}
- await render();
+let PP12_CACHE={tafeln:{},geladen:0};
+async function pp12DatenLaden(erzwingen){
+ if(!erzwingen&&Date.now()-PP12_CACHE.geladen<60000)return;
+ try{
+  const a=await getDocs(collection(db,"lehrplanTafeln"));
+  PP12_CACHE.tafeln=Object.fromEntries(a.docs.map(d=>[d.id,d.data()]));
+  try{const p=await getDoc(doc(db,"lehrplanPlan","pp12"));pp12Anwenden(p.exists()?p.data():{});}
+  catch(e){console.warn("Planänderungen laden:",e);}
+  PP12_CACHE.geladen=Date.now();
+ }catch(e){console.error("Unterrichtsdaten laden:",e);}
 }
+function pp12TafelHtml(e){
+ if(e.typ==="pruefung")return"";
+ const t=PP12_CACHE.tafeln[e.d]&&(PP12_CACHE.tafeln[e.d].boardId||PP12_CACHE.tafeln[e.d].rfUrl)?PP12_CACHE.tafeln[e.d]:null;
+ if(!t&&!isTeacher())return"";
+ return`<button type="button"class="pp12-tafel${t?" da":""}"onclick="pp12Tafel('${e.d}')"title="${t?(t.rfTyp==="pdf"?"Roter Faden (PDF) öffnen":t.rfTyp==="web"?"Roter Faden (Webseite) öffnen":"Roter Faden dieser Stunde öffnen"):"Roter Faden anlegen: digitale Tafel, PDF oder Webseite"}">${wbIcon("frame",14)}<span>Roter Faden${t?"":" anlegen"}</span></button>`;
+}
+let pp12Beschaeftigt=false;
+async function pp12Tafel(datum){
+ const t=PP12_CACHE.tafeln[datum];
+ if(t&&t.rfUrl){lbRfOeffnen(t);return;}
+ if(t&&t.boardId){openWhiteboard(t.boardId);return;}
+ if(!isTeacher()||pp12Beschaeftigt)return;
+ if(!window.__lbRfDirekt){lbRfDialog("z",datum);return;}
+ window.__lbRfDirekt=false;
+ pp12Beschaeftigt=true;
+ try{
+  const e=PP12_PLAN.find(x=>x.d===datum);
+  const titel=`${datum.slice(8,10)}.${datum.slice(5,7)}. ${e?e.t:"Unterricht"}`.slice(0,120);
+  const r=await addDoc(collection(db,"whiteboards"),{title:titel,description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,
+   createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
+  await lbRfAlteWeg(PP12_CACHE.tafeln[datum]);
+  await setDoc(doc(db,"lehrplanTafeln",datum),{boardId:r.id,rfTyp:"",rfUrl:"",rfTitel:"",titel,createdBy:currentUser.uid,createdAt:serverTimestamp()},{merge:true});
+  PP12_CACHE.tafeln[datum]={...(PP12_CACHE.tafeln[datum]||{}),boardId:r.id,titel};
+  openWhiteboard(r.id);
+ }catch(err){
+  console.error("Stunden-Tafel:",err);
+  toast(err?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln prüfen.":"Die Tafel konnte nicht angelegt werden.");
+ }finally{pp12Beschaeftigt=false;}
+}
+// „Nächste Stunde“ für die Startseite
+async function pp12NaechsteStundeHtml(){
+ await pp12DatenLaden();
+ const heute=new Date().toISOString().slice(0,10);
+ const e=PP12_PLAN.find(x=>x.d>=heute&&x.typ!=="pruefung");
+ if(!e)return"";
+ const tag=({1:"Mo",3:"Mi",5:"Fr"})[new Date(e.d+"T12:00:00Z").getUTCDay()]||"";
+ const t=PP12_CACHE.tafeln[e.d]&&PP12_CACHE.tafeln[e.d].boardId;
+ return`<section class="card"style="margin:0 0 18px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+  <div style="min-width:240px;flex:1"><div class="kicker">${e.d===heute?"HEUTE":"NÄCHSTE STUNDE"} · ${tag} ${e.d.slice(8,10)}.${e.d.slice(5,7)}.</div><h2 style="margin:4px 0 0;font-size:20px">${esc(e.t)}</h2></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="primary"href="#unterricht-pp"style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;font-weight:700">Zur Wochenplanung PP</a>${t?`<button class="secondary"type="button"onclick="pp12Tafel('${e.d}')">Roter Faden öffnen</button>`:""}</div></section>`;
+}
+
 // ---- Didaktik-Kompass (Orientierung für Lehrkräfte) ----
 const DK_SAETZE=[
  "Jeder Lernbereich durchläuft die drei Phasen: Aneignen, Gemeinsam erarbeiten, Zeigen.",
@@ -4158,9 +4581,9 @@ const DK_UDL=[
 ];
 async function renderDidaktikKompass(){
  const phasen=[1,2,3].map(n=>{const p=PP12_PHASEN[n];return`<article class="dk-karte"><span class="pp12-phase pp12-ph${n}">${p.kurz}</span><h3>${esc(p.name)}</h3><p>${esc(p.was)}</p><p class="dk-rolle"><b>Deine Rolle:</b> ${esc(p.rolle)}</p><p><b>Ziel der Schüler:innen:</b> ${esc(p.ziel)}</p><p class="dk-app"><b>Das hilft in der App:</b> ${p.tools.map(t=>esc(t[0])).join(", ")}.</p></article>`;}).join("");
- const udl=DK_UDL.map(([zeile,felder])=>`<div class="dk-zeile"><div class="dk-label">${zeile}</div>${felder.map(([nr,k,t,f,b])=>`<div class="dk-feld"style="--c:${PP12_UDL[k].col}"><div class="dk-fkopf"><span>${nr}</span><b>${esc(t)}</b></div><p>${esc(f)}</p><p class="dk-bsp"><b>In der F11Sb:</b> ${esc(b)}</p></div>`).join("")}</div>`).join("");
+ const udl=DK_UDL.map(([zeile,felder])=>`<div class="dk-zeile"><div class="dk-label">${zeile}</div>${felder.map(([nr,k,t,f,b])=>`<div class="dk-feld"style="--c:${PP12_UDL[k].col}"><div class="dk-fkopf"><span>${nr}</span><b>${esc(t)}</b></div><p>${esc(f)}</p><p class="dk-bsp"><b>In der F12Sb:</b> ${esc(b)}</p></div>`).join("")}</div>`).join("");
  const kopfzeile=`<div class="dk-zeile dk-kopf"><div></div>${Object.values(PP12_UDL).map(v=>`<div class="dk-spalte"style="background:${v.col}"><b>${esc(v.name)}</b><small>${esc(v.leit)}</small></div>`).join("")}</div>`;
- return`<button class="secondary"onclick="openFach('paedagogik')">← Zurück zum Modulplan</button>
+ return`<button class="secondary"onclick="go('unterricht-pp')">← Unterricht</button>
  ${pageHead("UNTERRICHT · ORIENTIERUNG FÜR LEHRKRÄFTE","Didaktik-Kompass","Zwei Modelle, ein Ziel: Alle Schüler:innen bekommen Zugang, Wahl und Tiefe im Lernen. Alles ist freiwillig und kann angepasst werden.",`<button class="secondary"onclick="pp12KompassDrucken()">Als A4 drucken</button>`)}
  <style>
   .dk-saetze{display:grid;gap:10px;margin:0 0 6px}.dk-satz{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.45}
@@ -4198,7 +4621,7 @@ function pp12KompassDrucken(){
    <h2>Deeper Learning: drei Phasen</h2>${phasen}
    <h2>UDL: Optionen-Karte</h2><table><tr><th></th><th>Warum und Wollen</th><th>Darstellung</th><th>Ausdruck</th></tr>${udl}</table>
    <p class="meta">Quellen: Sliwka und Klopsch (2022); CAST (2024), UDL Guidelines 3.0. Eigene verkürzte Formulierungen.</p>`,
-  "F11Sb · Pädagogik/Psychologie");
+  "F12Sb · Unterricht Pädagogik und Psychologie");
 }
 function pp12CssBausteine(){
  return`<style>
@@ -4213,13 +4636,1718 @@ function pp12CssBausteine(){
   .pp12-schritt.an span{background:#075a9d;border-color:#075a9d;color:#fff}.pp12-schritt.an small{color:#17384f;font-weight:700}
  </style>`;
 }
+Object.assign(window,{pp12Tafel,pp12KompassDrucken});
 
-Object.assign(window,{pp12HinweiseSchalter,pp12KompassDrucken});
+
+// ============================================================
+// ZUSATZMODULE im Unterricht-Plan (nur Lehrkräfte legen sie an): Abschlussprüfungstraining, Selbstlernkurs, Check-Out-Wochentest.
+// Gleiche Oberflächen wie im Modulplan der F11Sb, hier je Schulwoche unter den Unterrichtsstunden (Plus-Zeichen).
+// Sammlungen in Firestore: ppModule, ppStundenAntworten, ppKursFortschritt.
+// ============================================================
+const PPM_ZUSATZ=["apt","selbstlern","kprim","rallye","blockfall"];
+// Schulwochen der 12. Klasse (Montag als ID). Wochen, die ganz in den Ferien liegen, entfallen.
+const SCHULWOCHEN_12=(()=>{
+ const out=[],letzter=PP12_PLAN[PP12_PLAN.length-1].d;
+ for(let m=pp12Montag(PP12_START);m<=pp12Montag(letzter);m=pp12Add(m,7)){
+  const fr=pp12Add(m,4);
+  if(pp12Ferien(m)&&pp12Ferien(fr))continue;
+  out.push({id:m,start:m,end:fr});
+ }
+ return out;
+})();
+function sw12ById(id){return SCHULWOCHEN_12.find(w=>w.id===id)||null;}
+const PPM_TYPEN={
+ projekt:{icon:"🔬",name:"Ein Projekt durchführen",kurz:"Projekt",art:"Projekt",text:"Team-Projekt mit Meilensteinen anlegen."},
+ stunde:{icon:"🧭",name:"Unterrichtsstunde nach dem Deeper-Learning-Konzept",kurz:"Stunde",art:"Deeper-Learning-Einheit",text:"Mit Digitaler Tafel, Material (PDF, Film, Audio, Bilder, Links) und einem Check-out mit offener Frage."},
+ apt:{icon:"🎓",name:"Abschlussprüfungstraining",kurz:"Prüfungstraining",art:"Abschlussprüfungstraining",text:"Prüfungsfrage, relevanter Inhalt, Bearbeitung durch die Schüler:innen und Vergleich mit der Lösung."},
+ kprim:{icon:"🏁",name:"Check-Out-Wochentest",kurz:"Check-Out",art:"Check-Out-Wochentest",text:"Wochentest mit 2 Fallvignetten und 4 K-Prim-Aufgaben (16 BE), automatisch ausgewertet."},
+ selbstlern:{icon:"🎒",name:"Selbstlernkurs",kurz:"Selbstlernkurs",art:"Selbstlernkurs",text:"Schüler:innen bearbeiten den Kurs selbstständig von A bis Z."},
+ experiment:{icon:"🧪",name:"Experiment (interaktive Einheit)",kurz:"Experiment",art:"Experiment",text:"„Das Experiment“ als interaktive Einheit. Du wählst selbst, welche Teile dabei sind."},
+ rallye:{icon:"🚩",name:"Lernrallye",kurz:"Lernrallye",art:"Lernrallye",text:"Stationen mit Aufgaben, per QR-Code oder der Reihe nach, einzeln oder in Teams, mit Punkten und Rangliste."},
+ blockfall:{icon:"🧱",name:"Blockfall (Lernspiel)",kurz:"Blockfall",art:"Lernspiel",text:"Tetris-Lernspiel: Mit jeder vollen Reihe wird ein Begriff oder eine Definition abgefragt. Die Fragen stammen aus den Lehrtexten."}
+};
+const PPM_EINHEITEN={experiment:{icon:"🧪",name:"Das Experiment – interaktive Stunde",text:"Kaugummi-Versuch in Kleingruppen, Klassenvergleich, Merkmale eines Experiments und Abschlussquiz."}};
+// Dauer eines Moduls: eine Unterrichtsstunde (45 Min.), Doppelstunde, 120 oder 180 Minuten,
+// oder eine bis drei ganze Wochen. Minutenmodule gehören zu der Woche, in der sie beginnen.
+const PPM_DAUERN=[
+ {k:"15",name:"15 Minuten",lang:"15 Minuten (z. B. K-Prim-Test)",min:15,wochen:1},
+ {k:"45",name:"1 Stunde",lang:"1 Unterrichtsstunde (45 Minuten)",min:45,wochen:1},
+ {k:"90",name:"2 Stunden",lang:"2 Unterrichtsstunden (Doppelstunde, 90 Minuten)",min:90,wochen:1},
+ {k:"135",name:"3 Stunden",lang:"3 Unterrichtsstunden (135 Minuten)",min:135,wochen:1},
+ {k:"180",name:"4 Stunden",lang:"4 Unterrichtsstunden (180 Minuten)",min:180,wochen:1},
+ {k:"120",name:"120 Minuten",lang:"120 Minuten (bisher)",min:120,wochen:1,alt:true},
+ {k:"w1",name:"1 Woche",lang:"1 Woche",wochen:1},
+ {k:"w2",name:"2 Wochen",lang:"2 Wochen",wochen:2},
+ {k:"w3",name:"3 Wochen",lang:"3 Wochen",wochen:3}
+];
+// Pro Schulwoche stehen 6,3 Unterrichtsstunden zu je 45 Minuten (285 Minuten) zur Verfügung. Wochen mit Praktikum (fpA-Blöcke)
+// und Ferien sind gesperrt. Eine ganze Woche (1 bis 3 Wochen) belegt die Woche vollständig.
+const PPM_STD_PRO_WOCHE="6,3",PPM_MIN_PRO_STUNDE=45,PPM_MIN_PRO_WOCHE=285; // 6 Stunden + 15 Minuten (z. B. K-Prim-Test) = 285 Minuten = 6,3 Stunden
+const PPM_DAUER_STANDARD={projekt:"90",stunde:"90",experiment:"90",apt:"90",kprim:"45",selbstlern:"90",rallye:"90",blockfall:"45"};
+function ppmDauerKey(m){
+ if(m&&PPM_DAUERN.some(d=>d.k===m.dauer))return m.dauer;
+ const n=Math.max(1,Number(m&&m.wochen)||1);
+ return "w"+n;       // ältere Module: Wochenzahl bleibt erhalten (auch über 3 Wochen)
+}
+function ppmDauerDef(m){
+ const k=ppmDauerKey(m);
+ return PPM_DAUERN.find(d=>d.k===k)||{k,name:k.slice(1)+" Wochen",lang:k.slice(1)+" Wochen",wochen:Number(k.slice(1))||1};
+}
+function ppmDauerText(m){return ppmDauerDef(m).name;}
+// Teile der interaktiven Einheit „Das Experiment“ (aus experiment/das-experiment.html).
+// Die Minuten sind Richtwerte (die ganze Einheit ist als Doppelstunde gedacht).
+const PPM_EXP_TEILE=[
+ {k:"einstieg",name:"Einstieg: Lernsituation",min:10,text:"Gespräch zweier Schülerinnen über das Lernen mit Kaugummi."},
+ {k:"experiment",name:"Experiment durchführen",min:25,text:"Wörter-Experiment in Kleingruppen mit Vorbereitung, Lernphase, Pause und Auswertung."},
+ {k:"ergebnisse",name:"Ergebnisse vergleichen",min:10,text:"Anonymer Klassenvergleich der beiden Gruppen.",braucht:"experiment"},
+ {k:"merkmale",name:"Merkmale des Experiments",min:15,text:"Willkürlichkeit, Variierbarkeit und Wiederholbarkeit."},
+ {k:"anwendung",name:"Anwendung",min:15,text:"Szenarien: Ist das ein Experiment?"},
+ {k:"abschluss",name:"Abschlussquiz",min:10,text:"Aufgaben zum Abschluss; danach gilt die Einheit als gemacht."}
+];
+function ppmExpMinuten(teile){return PPM_EXP_TEILE.filter(t=>(teile||[]).includes(t.k)).reduce((n,t)=>n+t.min,0);}
+function ppmExpTeile(m){return Array.isArray(m&&m.teile)&&m.teile.length?m.teile:PPM_EXP_TEILE.map(t=>t.k);}
+// Fertige Einarbeitungs-Inhalte (einarbeitung/inhalte/<id>.json); wählbar im Selbstlernkurs.
+const PPM_EA_IDS=["f12-fa01","f12-freud1","f12-freud2","f12-freud3","fa01","fa02"]; // Dateien liegen in einarbeitung/inhalte/<ID>.json (12. Klasse)
+// Einheitliche Bezeichnung: Inhalt · Modulart · LB1 (LB nur, wenn bekannt)
+function ppmBez(inhalt,modul,lb){const T=PPM_TYPEN[modul];return[inhalt,T?T.art:"",lb?"LB"+lb:""].filter(Boolean).join(" · ");}
+// Modulart und Lernbereich einer Einarbeitung: zuerst die Angaben in der JSON-Datei ("modulart", "lb"),
+// sonst aus der Inhaltsliste (PP_EINHEITEN): Prüfungstraining = apt, alle anderen = Selbstlernkurs.
+function ppmEaMeta(id,info){
+ const e=(typeof PP_EINHEITEN!=="undefined"?PP_EINHEITEN:[]).find(x=>x.id===id)||null;
+ const art=(info&&info.modulart&&PPM_TYPEN[info.modulart])?info.modulart:(e&&e.typ==="apt"?"apt":"selbstlern");
+ const lb=(info&&Number(info.lb))||(e&&Number(String(e.phase||"").replace(/\D/g,"")))||0;
+ return{art,lb};
+}
+async function ppmEaListe(){
+ const r=await Promise.all(PPM_EA_IDS.map(async id=>{const i=await einarbeitungInfo(id);if(!i)return null;const m=ppmEaMeta(id,i);return{id,titel:i.titel,entwurf:i.entwurf,art:m.art,lb:m.lb};}));
+ return r.filter(Boolean);
+}
+const PPM={liste:[],geladen:0,fehler:"",meine:{kurs:{},stunde:{},ea:{}}};
+let activePPModul=null;
+
+const PPM_KURSE={
+ "psych-gegenstand":{titel:"Gegenstand der Psychologie: Erleben und Verhalten",
+  text:"Selbstlernkurs für LB 1: Erleben und Verhalten unterscheiden, an Beispielen üben und im Experiment anwenden.",
+  schritte:[
+   {id:"s1",typ:"ziele",titel:"Das lernst du",items:["Ich kann Erleben und Verhalten als Gegenstand der Psychologie definieren und voneinander abgrenzen.","Ich kann an Alltags- und Praxisbeispielen zeigen, welche Anteile beobachtbar (Verhalten) und welche nur erschließbar bzw. erfragbar (Erleben) sind.","Ich kann für ein Beispiel-Experiment festlegen, welches Verhalten beobachtet und wie das Erleben erfasst wird (z. B. durch Befragung)."]},
+   {id:"s2",typ:"text",titel:"Ausarbeitung: Erleben und Verhalten",text:
+`## Psychologie: die Wissenschaft von Erleben und Verhalten
+Die Psychologie untersucht, wie Menschen **erleben** und wie sie sich **verhalten**. Beides gehört zusammen, wird aber unterschiedlich erfasst.
+
+## Erleben
+Erleben umfasst die **inneren Vorgänge** einer Person: Wahrnehmen, Denken, Fühlen, Erinnern und Wollen. Sie sind nur der Person selbst unmittelbar zugänglich. Andere können sie nicht sehen, sondern nur **erfragen** oder aus dem Verhalten **erschließen**.
+- Beispiel: Nora hat Angst vor der nächsten Mathearbeit.
+
+## Verhalten
+Verhalten ist alles, was **von außen beobachtbar** ist: Bewegungen, Körperhaltung, Mimik, Sprechen und Handeln.
+- Beispiel: Nora sitzt still am Platz, schaut auf ihre Hände und seufzt.
+
+## Wie hängt beides zusammen?
+Erleben und Verhalten beeinflussen sich gegenseitig. Angst (Erleben) kann zu Rückzug (Verhalten) führen. Umgekehrt kann ein bestimmtes Verhalten, etwa Lächeln, das Erleben verändern. Aus beobachtetem Verhalten lassen sich nur **Vermutungen** über das Erleben ableiten.
+
+## Wichtig für die Praxis
+- Erst beschreiben, was man sieht (Verhalten), dann vorsichtig deuten (Erleben).
+- Ob eine Deutung stimmt, klärt man oft nur durch Nachfragen.`},
+   {id:"s3",typ:"zuordnen",titel:"Interaktive Aufgabe: Erleben oder Verhalten?",frage:"Ordne jede Aussage zu. Du bekommst sofort eine Rückmeldung.",kategorien:["Erleben","Verhalten"],items:[
+    {t:"Nora hat Angst vor der nächsten Arbeit.",k:0,e:"Angst ist ein innerer Vorgang, den nur Nora selbst unmittelbar kennt."},
+    {t:"Nora seufzt leise.",k:1,e:"Seufzen kann man hören, es ist beobachtbar."},
+    {t:"Ben freut sich auf die Pause.",k:0,e:"Freude ist ein Gefühl, also Erleben."},
+    {t:"Ben rennt als Erster aus dem Raum.",k:1,e:"Rennen ist eine beobachtbare Handlung."},
+    {t:"Lena erinnert sich an ihren ersten Schultag.",k:0,e:"Erinnern läuft innen ab und ist von außen nicht zu sehen."},
+    {t:"Lena erzählt ihrer Freundin vom ersten Schultag.",k:1,e:"Sprechen ist beobachtbares Verhalten."},
+    {t:"Tom ist wütend.",k:0,e:"Wut ist ein Gefühl, das nur Tom selbst direkt erlebt."},
+    {t:"Tom schlägt mit der Faust auf den Tisch.",k:1,e:"Die Handlung ist von außen sichtbar."},
+    {t:"Mia überlegt, wie sie die Aufgabe löst.",k:0,e:"Denken ist ein innerer Vorgang."},
+    {t:"Mia runzelt die Stirn.",k:1,e:"Mimik lässt sich beobachten."}]},
+   {id:"s4",typ:"text",titel:"Wie kommt man an das Erleben heran?",text:
+`## Beobachten und Befragen
+Verhalten kann man **systematisch beobachten**: Was genau tut die Person, wie oft, in welcher Situation?
+
+Erleben erfasst man vor allem durch **Befragung**, zum Beispiel mit einem Interview oder einem Fragebogen. Zusätzlich kann man es vorsichtig aus dem Verhalten **erschließen**.
+
+## Im Experiment
+In einem Experiment legt man fest, **welches Verhalten beobachtet** wird (zum Beispiel die Anzahl erinnerter Wörter) und **wie das Erleben erfasst** wird (zum Beispiel durch eine Befragung nach der Anstrengung).`},
+   {id:"s5",typ:"experiment",titel:"Interaktive Aufgabe: Das Experiment",text:"Du führst den Kaugummi-Versuch in Kleingruppen durch, vergleichst die Ergebnisse der Klasse und beantwortest ein kurzes Abschlussquiz."},
+   {id:"s6",typ:"selbsttest",titel:"Selbsttest: Das habe ich verstanden",fragen:[
+    {frage:"Erkläre den Unterschied zwischen Erleben und Verhalten.",loesung:"Verhalten ist von außen beobachtbar, zum Beispiel Sprechen, Mimik oder Bewegung. Erleben sind innere Vorgänge wie Wahrnehmen, Denken und Fühlen, die nur die Person selbst unmittelbar kennt."},
+    {frage:"Nenne je ein Beispiel für Erleben und für Verhalten aus deinem Praktikum.",loesung:"Individuelle Lösung. Beispiel: Erleben: Ein Kind fühlt sich ausgeschlossen. Verhalten: Es steht allein am Rand und schaut zu. Das Erleben ist nicht beobachtbar, sondern nur erfragbar oder erschließbar."},
+    {frage:"Wie lässt sich das Erleben einer Person erfassen?",loesung:"Durch Befragung, etwa Interview oder Fragebogen, oder indem man es vorsichtig aus beobachtbarem Verhalten erschließt."}]},
+   {id:"s7",typ:"abschluss",titel:"Geschafft",text:"Du hast den Selbstlernkurs abgeschlossen. Du kannst Erleben und Verhalten unterscheiden und auf Beispiele anwenden."}
+  ]}
+};
+function ppmKursSchritte(m){
+ if(Array.isArray(m.schritte)&&m.schritte.length)return m.schritte;
+ return (PPM_KURSE[m.kursId]||{}).schritte||[];
+}
+async function ppmLaden(erzwingen){
+ if(!erzwingen&&Date.now()-PPM.geladen<30000)return;
+ try{
+  const s=await getDocs(collection(db,"ppModule"));
+  PPM.liste=s.docs.map(d=>({id:d.id,...d.data()}));PPM.fehler="";
+ }catch(e){console.error("Module laden:",e);PPM.fehler=(e&&(e.code||e.name))||"unbekannt";PPM.liste=[];}
+ PPM.geladen=Date.now();
+ PPM.liste.sort((a,b)=>(ppmSwIndex(a.start)-ppmSwIndex(b.start))||((a.ord||0)-(b.ord||0))||(tsSek(a.createdAt)-tsSek(b.createdAt)));
+}
+function ppmSwIndex(id){return SCHULWOCHEN_12.findIndex(w=>w.id===id);}
+function ppmWochen(m){const i=ppmSwIndex(m.start);if(i<0)return[];return SCHULWOCHEN_12.slice(i,i+ppmDauerDef(m).wochen);}
+function ppmStd(min){return String(Math.round(min/PPM_MIN_PRO_STUNDE*10)/10).replace(".",",");} // Minuten → Unterrichtsstunden (à 45 Min.)
+// Belegte Minuten je Schulwoche. Experiment-Einheiten innerhalb eines Projekts zählen zur Projektzeit.
+function ppmLast(ohneId){
+ const last={};SCHULWOCHEN_12.forEach(w=>{last[w.id]={min:0,liste:[]};});
+ PPM.liste.forEach(m=>{
+  if(m.id===ohneId||m.projektId)return;
+  const d=ppmDauerDef(m);
+  if(d.min){const w=last[m.start];if(w){w.min+=d.min;w.liste.push(m);}}
+  else ppmWochen(m).forEach(w=>{last[w.id].min+=PPM_MIN_PRO_WOCHE;last[w.id].liste.push(m);});
+ });
+ return last;
+}
+function ppmPruefen(startId,dauerKey,ohneId){
+ if(ppmSwIndex(startId)<0)return{ok:false,zeilen:[],fehler:"Bitte eine Schulwoche wählen."};
+ return{ok:true,zeilen:[]}; // Zusatzmodule liegen zusätzlich zu den Unterrichtsstunden: keine Stundengrenze
+}
+function ppmKapaHtml(p){
+ if(p.fehler)return`<span style="color:#b3261e">${esc(p.fehler)}</span>`;
+ let vorher=null;
+ return p.zeilen.map(z=>{
+  const sprung=vorher&&(new Date(z.w.start)-new Date(vorher.end))>4*86400000;vorher=z.w;
+  const txt=`${fmtKurz(z.w.start)}–${fmtKurz(z.w.end)}: ${ppmStd(z.belegt)} von ${PPM_STD_PRO_WOCHE} Stunden belegt`+(z.ok?` → danach ${ppmStd(z.belegt+z.neu)} von ${PPM_STD_PRO_WOCHE} Stunden`:` – nicht genug Platz (frei: ${ppmStd(Math.max(0,z.frei))} Stunden)`);
+  return`${sprung?`<span style="color:#7a4b00">↷ dazwischen Praktikum oder Ferien</span><br>`:""}<span style="color:${z.ok?"#1f6a3a":"#b3261e"}">${z.ok?"✓":"✗"} ${esc(txt)}</span>`;
+ }).join("<br>");
+}
+function ppmIso(d){return d.toISOString().slice(0,10);}
+function ppmPlusTage(iso,n){const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return ppmIso(d);}
+// Alle Wochen des Schuljahres in der Reihenfolge: Schulwoche oder gesperrter Block (Praktikum, Ferien).
+function ppmZeitleiste(){
+ const out=[];let cur=null;
+ for(let start="2026-10-05";start<="2027-07-30";start=ppmPlusTage(start,7)){
+  const fr=ppmPlusTage(start,4),sw=SCHULWOCHEN_12.find(w=>w.start===start);
+  if(sw){out.push({art:"woche",w:sw});cur=null;continue;}
+  const pr=PRAKTIKUMSPHASEN.find(x=>x.start<=fr&&x.end>=start);
+  const fe=pr?null:FERIEN_2026_27.find(x=>x.start<=fr&&x.end>=start);
+  const key=pr?pr.id:(fe?fe.titel:"frei");
+  if(cur&&cur.key===key){cur.n++;cur.bis=fr;continue;}
+  cur={art:"block",key,kind:pr?"praktikum":(fe?"ferien":"frei"),titel:pr?pr.titel:(fe?fe.titel:"Unterrichtsfrei"),icon:pr?pr.icon:"🌴",von:pr?pr.start:(fe?fe.start:start),bis:pr?pr.end:(fe?fe.end:fr),n:1};
+  out.push(cur);
+ }
+ return out;
+}
+function ppmFuerTeil(lb,teil){return PPM.liste.find(m=>m.modul===teil&&Number(m.lb)===Number(lb));}
+function ppmById(id){return PPM.liste.find(m=>m.id===id)||null;}
+function ppmFarbe(m){return PP_FARBEN[m.lb]||"#8a99a3";}
+function ppmMd(t){
+ const zeilen=String(t||"").split("\n");let html="",liste=false;
+ const inl=x=>esc(x).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
+ zeilen.forEach(z=>{
+  const l=z.trim();
+  if(l.startsWith("- ")){if(!liste){html+="<ul>";liste=true;}html+=`<li>${inl(l.slice(2))}</li>`;return;}
+  if(liste){html+="</ul>";liste=false;}
+  if(l.startsWith("## "))html+=`<h3>${inl(l.slice(3))}</h3>`;
+  else if(l)html+=`<p>${inl(l)}</p>`;
+ });
+ if(liste)html+="</ul>";
+ return html;
+}
+async function ppmMeineLaden(){
+ if(isTeacher())return;
+ try{
+  const [a,b]=await Promise.all([
+   getDocs(query(collection(db,"ppKursFortschritt"),where("uid","==",currentUser.uid))),
+   getDocs(query(collection(db,"ppStundenAntworten"),where("uid","==",currentUser.uid)))]);
+  PPM.meine.kurs=Object.fromEntries(a.docs.map(d=>[d.data().modulId,d.data()]));
+  PPM.meine.stunde=Object.fromEntries(b.docs.map(d=>[d.data().modulId,d.data()]));
+  if(PPM.liste.some(x=>x.modul==="rallye")){try{const q=await getDocs(query(collection(db,"ppRallyeStand"),where("uid","==",currentUser.uid)));q.docs.forEach(d=>{const x=d.data();x.frei=x.frei||{};x.erg=x.erg||{};LR.stand[x.modulId]=x;});}catch(e){console.error("Rallye-Stand:",e);}}
+  PPM.meine.ea={};PPM.meine.exp=await getLehrplanFortschritt(experimentWocheId());
+  for(const m of PPM.liste.filter(x=>String(x.kursId||"").startsWith("ea:"))){const id=m.kursId.slice(3);PPM.meine.ea[id]=await getLehrplanFortschritt(id);}
+ }catch(e){console.error("Eigener Fortschritt:",e);}
+}
+function ppmDocId(m){return`${m.id}_${currentUser.uid}`;}
+function ppmName(){return anzeigeName(profile,currentUser);}
+
+// ------------------------------------------------------------ Modulplan
+// Fortschritt der angemeldeten Person je Modul: {done, frac (0..1)} oder null, wenn für das Modul kein Stand erfasst wird.
+function ppmFort(m){
+ if(isTeacher())return null;
+ try{
+  if(m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){const f=PPM.meine.ea[m.kursId.slice(3)]||{},a=f.einarbeitungAufgaben,done=!!f.einarbeitungAbgeschlossen;return{done,frac:done?1:(a&&a.gesamt?a.richtig/a.gesamt:0)};}
+  if(m.modul==="experiment"||(m.modul==="projekt"&&ppmProjektDirekt(m))){const f=PPM.meine.exp||{},done=!!f.experimentErledigt;return{done,frac:done?1:0};}
+  if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(x=>x.typ!=="abschluss"),f=PPM.meine.kurs[m.id],n=f?sch.filter(x=>f.erledigt&&f.erledigt[x.id]).length:0,done=!!sch.length&&n===sch.length;return{done,frac:sch.length?n/sch.length:0};}
+  if(m.modul==="apt"){const f=PPM.meine.stunde[m.id]||{},done=!!f.aptBewertung;return{done,frac:done?1:(f.aptAbgegeben?2/3:(f.aptAntwort?1/3:0))};}
+  if(m.modul==="stunde"){const f=PPM.meine.stunde[m.id],fr=m.fragen||[];if(f&&f.fertig)return{done:true,frac:1};const n=f?(f.gezeigt||[]).filter(Boolean).length:0;return{done:false,frac:fr.length?n/fr.length:0};}
+  if(m.modul==="rallye"){const p=lrFortschritt(m);return p.n?{done:p.done,frac:p.frac}:null;}
+  if(m.modul==="kprim"){const d=PPM.co;if(!d||!m.checkoutId)return null;const c=(d.checkouts||[]).find(x=>x.id===m.checkoutId);if(!c)return null;const a=(d.meineAbgaben||{})[c.id],done=!!(a&&a.abgegeben);return{done,frac:done?1:(a?0.5:0)};}
+ }catch(e){console.error("Fortschritt:",e);}
+ return null;
+}
+function ppmKW(w){const d=new Date(w.start+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+3-((d.getUTCDay()+6)%7));const j=new Date(Date.UTC(d.getUTCFullYear(),0,4));return 1+Math.round(((d-j)/86400000-3+((j.getUTCDay()+6)%7))/7);}
+function ppmStatus(m){
+ if(isTeacher())return"";
+ if(m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){const f=PPM.meine.ea[m.kursId.slice(3)]||{},a=f.einarbeitungAufgaben;return`<span class="ppm-status${f.einarbeitungAbgeschlossen?" ok":""}">${f.einarbeitungAbgeschlossen?"abgeschlossen ✓":(a&&a.gesamt?`${a.richtig}/${a.gesamt} Aufgaben`:"noch offen")}</span>`;}
+ if(m.modul==="experiment"||(m.modul==="projekt"&&ppmProjektDirekt(m))){const f=PPM.meine.exp||{};return`<span class="ppm-status${f.experimentErledigt?" ok":""}">${f.experimentErledigt?"gemacht ✓":"noch offen"}</span>`;}
+ if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(s=>s.typ!=="abschluss"),f=PPM.meine.kurs[m.id];const n=f?sch.filter(s=>f.erledigt&&f.erledigt[s.id]).length:0;return`<span class="ppm-status${n===sch.length&&sch.length?" ok":""}">${n}/${sch.length} Schritte</span>`;}
+ if(m.modul==="apt"){const f=PPM.meine.stunde[m.id]||{};return`<span class="ppm-status${f.aptAbgegeben?" ok":""}">${f.aptBewertung?"verglichen ✓":(f.aptAbgegeben?"abgegeben":(f.aptAntwort?"in Arbeit":"noch offen"))}</span>`;}
+ if(m.modul==="stunde"){const f=PPM.meine.stunde[m.id];if(f&&f.fertig)return`<span class="ppm-status ok">fertig ✓</span>`;const fr=m.fragen||[];if(!fr.length)return"";const n=f?(f.gezeigt||[]).filter(Boolean).length:0;return`<span class="ppm-status${n===fr.length?" ok":""}">Check-out ${n}/${fr.length}</span>`;}
+ if(m.modul==="rallye"){const p=lrFortschritt(m);if(!p.n)return"";return`<span class="ppm-status${p.done?" ok":""}">${p.done?"alle Stationen ✓":p.f+" von "+p.n+" Stationen"}</span>`;}
+ if(m.modul==="kprim"){const p=ppmFort(m);if(p)return`<span class="ppm-status${p.done?" ok":""}">${p.done?"abgegeben ✓":(p.frac>0?"in Arbeit":"noch offen")}</span>`;}
+ return"";
+}
+// Lehrkraft: Modul um eine Schulwoche früher oder später legen (überspringt Praktikum und Ferien automatisch).
+function ppmMoveHTML(m){
+ const i=ppmSwIndex(m.start),n=SCHULWOCHEN_12.length;
+ const sibs=PPM.liste.filter(x=>x.start===m.start),p=sibs.findIndex(x=>x.id===m.id);
+ const erste=i<=0&&p<=0,letzte=(i<0||i>=n-1)&&p>=sibs.length-1;
+ return`<span class="ppm-mv"><button type="button" data-ppm="reihenfolge" data-id="${esc(m.id)}" data-d="-1" title="Ein Modul nach vorn (am Wochenanfang: in die vorherige Woche)" aria-label="Modul nach vorn"${erste?" disabled":""}>&lt;</button><button type="button" data-ppm="reihenfolge" data-id="${esc(m.id)}" data-d="1" title="Ein Modul nach hinten (am Wochenende: in die nächste Woche)" aria-label="Modul nach hinten"${letzte?" disabled":""}>&gt;</button></span>`;
+}
+async function ppmReihenfolge(m,d){
+ const sibs=PPM.liste.filter(x=>x.start===m.start),i=sibs.findIndex(x=>x.id===m.id),j=i+d;
+ if(i<0)return;
+ if(j<0||j>=sibs.length){await ppmVerschieben(m,d);return;}
+ const y=window.scrollY,l=sibs.slice();[l[i],l[j]]=[l[j],l[i]];
+ try{
+  for(let k=0;k<l.length;k++){const o=(k+1)*10;if((l[k].ord||0)!==o)await updateDoc(doc(db,"ppModule",l[k].id),{ord:o,updatedAt:serverTimestamp()});}
+  await ppmLaden(true);await render();
+  try{window.scrollTo(0,y);}catch(e){}
+ }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Reihenfolge konnte nicht geändert werden.");}
+}
+async function ppmVerschieben(m,d){
+ const i=ppmSwIndex(m.start),n=i+d;
+ if(i<0||n<0||n>=SCHULWOCHEN_12.length){toast("Weiter verschieben geht nicht.");return;}
+ const neu=SCHULWOCHEN_12[n];
+ if(!m.projektId){
+  const pr=ppmPruefen(neu.id,ppmDauerKey(m),m.id);
+  if(!pr.ok){toast(pr.fehler||`In der Woche ${fmtKurz(neu.start)}–${fmtKurz(neu.end)} ist nicht genug Platz.`);return;}
+ }
+ const y=window.scrollY;
+ try{
+  const ziel=PPM.liste.filter(x=>x.start===neu.id&&x.id!==m.id).map(x=>x.ord||0);
+  const ord=d<0?(ziel.length?Math.max(...ziel):0)+10:(ziel.length?Math.min(...ziel):0)-10;
+  await updateDoc(doc(db,"ppModule",m.id),{start:neu.id,ord,updatedAt:serverTimestamp()});
+  if(m.modul==="projekt"){ // Einheiten im Projekt wandern mit
+   for(const x of PPM.liste.filter(z=>z.projektId===m.id)){
+    const j=ppmSwIndex(x.start)+d;
+    if(j>=0&&j<SCHULWOCHEN_12.length)await updateDoc(doc(db,"ppModule",x.id),{start:SCHULWOCHEN_12[j].id,updatedAt:serverTimestamp()});
+   }
+  }
+  await ppmLaden(true);await render();
+  try{window.scrollTo(0,y);}catch(e){}
+  toast(`Verschoben auf ${fmtKurz(neu.start)}–${fmtKurz(neu.end)}.`);
+ }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Konnte nicht verschoben werden.");}
+}
+// Kartenbreite: 4 Spalten je Woche. Module bis 2 Stunden (inkl. 15 Min., 1 Std., 2 Std.) sind gleich breit (1 Spalte),
+// 3 bis 4 Stunden nehmen 2 Spalten, ganze Wochen oder mehr als 4 Stunden die volle Zeilenbreite.
+function ppmSpalten(m){const mi=ppmDauerDef(m).min||PPM_MIN_PRO_WOCHE;return mi<=120?1:(mi<=180?2:4);}
+function ppmKarteHTML(m,fortsetzung){
+ const T=PPM_TYPEN[m.modul]||PPM_TYPEN.projekt,c=ppmFarbe(m);
+ if(fortsetzung)return`<div class="ppm-fort" style="--c:${c}" data-ppm="oeffnen" data-id="${esc(m.id)}">↳ ${T.icon} ${esc(m.titel||T.name)} <small>läuft weiter</small></div>`;
+ const einh=(m.einheiten||[]).map(e=>`<span class="ppm-chip">${(PPM_EINHEITEN[e.typ]||{}).icon||""} ${esc((PPM_EINHEITEN[e.typ]||{}).name||e.typ).replace("– interaktive Stunde","")}</span>`).join("");
+ const exp=m.modul==="experiment"?`<span class="ppm-chip">${ppmExpTeile(m).length} von ${PPM_EXP_TEILE.length} Teilen · ca. ${ppmExpMinuten(ppmExpTeile(m))} Min.</span>`:"";
+ const proj=m.projektId?`<span class="ppm-chip">Einheit im Projekt</span>`:"";
+ const fo=ppmFort(m);
+ return`<div class="ppm-karte${isTeacher()?" ppm-ziehbar":""}${fo?(fo.done?" ppm-st-done":fo.frac>0?" ppm-st-teil":" ppm-st-offen"):""}" style="--c:${c};--sp:${ppmSpalten(m)}" data-ppm="oeffnen" data-id="${esc(m.id)}" tabindex="0" role="button">
+  <span class="ppm-ic">${T.icon}</span>
+  <span class="ppm-txt"><b>${esc(m.titel||T.name)}</b><span class="chip ${({projekt:"prj",experiment:"prj",selbstlern:"slk",einfuehrung:"slk",stunde:"std",rallye:"ral",kprim:"chk",apt:"ueb"})[m.modul]||"chk"}">${esc(T.kurz)}</span><small>LB ${m.lb} · ${esc(ppmDauerText(m))}</small>${ppmStatus(m)}${fo&&!fo.done?`<span class="ppm-mini" title="${Math.round(fo.frac*100)} % geschafft"><i style="width:${Math.round(fo.frac*100)}%"></i></span>`:""}${proj}${exp}${einh}${lbModulPills(m)}</span>
+  ${fo&&fo.done?`<span class="ppm-haken-k" aria-label="geschafft">✓</span>`:""}${isTeacher()?`<button type="button" class="ppm-edit" data-ppm="bearbeiten" data-id="${esc(m.id)}" title="Modul bearbeiten">✎</button>`:""}
+ </div>`;
+}
+const PPM_CSS=`<style>
+.lb-pills{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}.lb-leiste{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.lb-pill{display:inline-flex;align-items:center;gap:4px;min-height:26px;padding:0 9px;border-radius:13px;border:1.5px dashed #6b7c93;background:#fff;color:#3a4a5c;font:inherit;font-size:11px;font-weight:700;cursor:pointer}
+.lb-pill.da{border:1.5px solid #075a9d;background:#075a9d;color:#fff}
+.ppm-karte.ppm-ziehbar{cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.ppm-karte.ppm-zieh{opacity:.3}.ppm-geist{position:fixed!important;z-index:9999;pointer-events:none;opacity:.92;box-shadow:0 14px 34px rgba(24,67,96,.35);transform:rotate(1.5deg);margin:0}
+body.ppm-dnd-an{cursor:grabbing;-webkit-user-select:none;user-select:none}
+.ppm-woche.ppm-ziel{background:#eef7ee;outline:2px dashed #3fa66a}
+.ppm-karte.ppm-vor{box-shadow:-7px 0 0 -1px #3fa66a}.ppm-karte.ppm-ende{box-shadow:7px 0 0 -1px #3fa66a}
+.ppm-legende{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:0 0 18px}
+.ppm-typ{display:flex;flex-direction:column;gap:4px;text-align:left;padding:12px 14px;border-radius:14px;border:1.5px dashed #b9c8d6;background:#fff;cursor:pointer;font:inherit;color:inherit}
+.ppm-typ:hover{border-color:#2f7fc6;background:#f3f9ff}.ppm-typ b{font-size:14px}.ppm-typ small{color:var(--muted);line-height:1.35}
+.ppm-woche{display:grid;grid-template-columns:128px minmax(0,1fr);gap:12px;margin:0 0 10px;padding:8px;border-radius:12px}
+.ppm-woche.jetzt{background:#eaf3fc;outline:2px solid #3d8fd0}
+.ppm-wl{display:flex;flex-direction:column;justify-content:center;font-size:13px;color:var(--muted)}.ppm-wl b{color:var(--ink);font-size:14px}
+.ppm-reihe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:stretch}
+.ppm-karte{position:relative;display:flex;gap:8px;min-width:0;grid-column:span var(--sp,1);padding:10px 10px 10px 12px;border-radius:12px;background:color-mix(in srgb,var(--c) 11%,#fff);border:1px solid color-mix(in srgb,var(--c) 38%,#fff);border-left:6px solid var(--c);cursor:pointer;text-align:left}
+.ppm-karte:hover{box-shadow:0 6px 18px rgba(24,67,96,.14)}.ppm-ic{font-size:22px}
+.ppm-txt{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}.ppm-txt b{font-size:14px;line-height:1.3;padding-right:26px;overflow-wrap:anywhere}.ppm-txt small{color:var(--muted)}
+.ppm-edit{position:absolute;right:6px;top:6px;border:0;background:#fff;border-radius:8px;width:28px;height:28px;color:#3a4a5c;cursor:pointer}
+.ppm-fort{min-width:0;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--c) 8%,#fff);border:1px dashed var(--c);font-size:12px;cursor:pointer}
+.ppm-karte.mit-mv{padding-bottom:50px}.ppm-mv{position:absolute;left:-6px;right:0;bottom:10px;display:flex;justify-content:center;gap:10px}.ppm-mv button{font:inherit;font-size:16px;line-height:1;font-weight:800;min-width:44px;height:30px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;border:1.5px solid #b9c8d6;background:#fff;color:#2f5f8a;cursor:pointer}.ppm-mv button:hover:not(:disabled){border-color:#2f7fc6;background:#f3f9ff}.ppm-mv button:disabled{opacity:.35;cursor:not-allowed}
+.ppm-mini{display:block;height:6px;border-radius:4px;background:#dbe4ec;overflow:hidden;margin-top:6px}.ppm-mini i{display:block;height:100%;background:#3d8fd0}
+.ppm-karte.ppm-st-done{background:color-mix(in srgb,#3fa66a 13%,#fff);border-color:#9fd3ae}
+.ppm-haken-k{position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;background:#3fa66a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.ppm-nach{font-size:11px;font-weight:700;color:#b3261e}
+.ppm-stand .ppm-next{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.ppm-chip{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff;border:1px solid #c9d4de;width:max-content;max-width:100%}
+.ppm-status{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff3d6;border:1px solid #f0d28a;color:#7a4b00;width:max-content}.ppm-status.ok{background:#e3f4e8;border-color:#9fd3ae;color:#1f6a3a}
+.ppm-neu{align-self:center;border:1.5px dashed #b9c8d6;background:#fff;border-radius:12px;min-height:44px;padding:0 14px;font-weight:700;color:#3a4a5c;cursor:pointer}
+.ppm-leer{color:var(--muted);font-size:13px;align-self:center}
+.ppm-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 14px}.ppm-box h2{margin:0 0 8px;font-size:18px}.ppm-box h3{margin:12px 0 4px;font-size:15px}.ppm-box p{margin:6px 0;line-height:1.5}
+.ppm-kopf{border-left:6px solid var(--c);}
+/* ---- Farbbalance: jeder Bereich hat seine eigene ruhige Akzentfarbe ---- */
+.ppm-sek{--s:#2f79b7;border-left:6px solid var(--s);border-color:color-mix(in srgb,var(--s) 28%,#fff);border-left-color:var(--s);background:color-mix(in srgb,var(--s) 6%,#fff)}
+.ppm-sek>h2,.ppm-sek>summary{color:color-mix(in srgb,var(--s) 85%,#000)}
+.ppm-sek .ppm-btn.primaer{background:var(--s);border-color:var(--s)}
+.ppm-sek .ppm-bar i{background:var(--s)}
+.ppm-sek.s-faden{--s:#7b5ea7}.ppm-sek.s-material{--s:#c98318}.ppm-sek.s-lernen{--s:#2f79b7}
+.ppm-sek.s-pruefen{--s:#1f9a8a}.ppm-sek.s-team{--s:#c25a7c}.ppm-sek.s-lehrer{--s:#6b7c93}.ppm-sek.s-warn{--s:#c4513f}
+.ppm-kopf{background:color-mix(in srgb,var(--c) 9%,#fff);border-color:color-mix(in srgb,var(--c) 30%,#fff);border-left-color:var(--c)}
+.ppm-kopf h1{color:#1d2b3a}
+.ppm-sek .lb-pill{background:#fff}
+.ppm-sek.s-faden .lb-pill.da{background:var(--s);border-color:var(--s)}
+
+.ppm-zeile{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}.ppm-zeile:last-child{border:0}
+.ppm-btn{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px;color:var(--ink);cursor:pointer;text-decoration:none}
+.ppm-btn.primaer{background:#2f7fc6;border-color:#2f7fc6;color:#fff}.ppm-btn.klein{min-height:34px;padding:0 10px;font-size:12px}
+.ppm-frage{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 12px;background:#fbfdff}.ppm-frage textarea{width:100%;min-height:80px;font:inherit}
+.ppm-loesung{margin-top:8px;padding:10px 12px;border-radius:10px;background:#e3f4e8;border:1px solid #9fd3ae;line-height:1.45}
+.ppm-bew{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.ppm-bew button{min-height:36px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:#fff;font-weight:700;font-size:12px;cursor:pointer}.ppm-bew button.an{border-color:#2f7fc6;background:#eaf3fc}
+.ppm-schritt{border:1px solid var(--line);border-radius:14px;margin:0 0 10px;background:#fff;overflow:hidden}.ppm-schritt.gesperrt{opacity:.55}
+.ppm-skopf{display:flex;gap:12px;align-items:center;padding:12px 14px}.ppm-snr{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#17384f;color:#fff;font-weight:700;font-size:13px;flex:none}.ppm-schritt.fertig .ppm-snr{background:#3fa66a}
+.ppm-sbody{padding:2px 16px 16px}.ppm-sbody h3{margin:12px 0 4px}.ppm-sbody p,.ppm-sbody li{line-height:1.55}
+.ppm-zu{display:flex;flex-direction:column;gap:8px}.ppm-zui{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-radius:10px;background:#f6f9fc;border:1px solid var(--line)}.ppm-zui.richtig{background:#e3f4e8;border-color:#9fd3ae}.ppm-zui.falsch{background:#fdecea;border-color:#f1b0aa}
+.ppm-bar{height:10px;border-radius:6px;background:#e2eaf0;overflow:hidden;margin:6px 0 14px}.ppm-bar i{display:block;height:100%;background:linear-gradient(90deg,#3fa66a,#5cc98a)}
+.ppm-phasen{display:flex;gap:8px;margin:8px 0}.ppm-ph{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--muted);text-align:center}.ppm-ph span{width:32px;height:32px;border-radius:50%;border:2px solid #b9c8d6;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700}.ppm-ph.an span{background:#075a9d;border-color:#075a9d;color:#fff}.ppm-ph.an{color:var(--ink);font-weight:700}
+.ppm-mat{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}.ppm-mat:last-child{border:0}
+.ppm-kap{height:8px;border-radius:5px;background:#e2eaf0;overflow:hidden;margin:6px 0 2px}.ppm-kap i{display:block;height:100%;background:#3d8fd0}.ppm-kap.voll i{background:#3fa66a}.ppm-kap.ueber i{background:#d9534f}
+.ppm-wl small.kapa{font-size:11px}
+.ppm-block{display:flex;gap:12px;align-items:center;margin:0 0 10px;padding:10px 14px;border-radius:12px;background:repeating-linear-gradient(135deg,#f3f5f8 0 8px,#eaeef3 8px 16px);color:#51657a;font-size:13px}
+.ppm-block.praktikum{border-left:6px solid #b08a4a}.ppm-block.ferien,.ppm-block.frei{border-left:6px solid #7fb7c9}
+.ppm-zeitbox .ppm-balken{margin:10px 0}.ppm-bar-jahr i{background:linear-gradient(90deg,#8a64b8,#b49be0)}
+.ppm-leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}.ppm-leg i{display:inline-block;width:14px;height:8px;border-radius:4px;margin-right:5px;vertical-align:middle}
+.ppm-teile{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:12px;background:#fff8e8;border:1px solid #f0d28a}
+.ppm-teile label.check{align-items:flex-start;gap:8px;margin:0}.ppm-teileinfo{font-size:13px;margin-top:4px}
+.ppm-kapahint{font-size:12px;line-height:1.5;padding:8px 10px;border-radius:10px;background:#f6f9fc;border:1px solid var(--line)}
+.ppm-details summary{cursor:pointer;font-weight:700;font-size:16px;padding:2px 0}
+.ppm-tafel .wb-kopf{display:none}.ppm-tafel .wb-wrap{height:min(72vh,680px);min-height:420px}
+.ppm-fertig{display:flex;align-items:center;gap:12px;width:100%;margin-top:6px;padding:14px 16px;border-radius:12px;border:2px solid #b9c8d6;background:#fff;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;text-align:left}
+.ppm-fertig:hover{border-color:#2f7fc6}.ppm-fertig.an{border-color:#3fa66a;background:#e3f4e8;color:#1f6a3a}
+.ppm-haken{width:28px;height:28px;border-radius:8px;border:2px solid #8aa0b3;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:18px;flex:none}.ppm-fertig.an .ppm-haken{background:#3fa66a;border-color:#3fa66a;color:#fff}
+@media(max-width:760px){.ppm-woche{grid-template-columns:1fr}.ppm-reihe{grid-template-columns:repeat(2,minmax(0,1fr))}.ppm-karte{grid-column:1/-1}}
+</style>`;
+
+async function renderPPModulplan(){
+ await ppmLaden();await ppmMeineLaden();
+ const co=await ladeCheckoutDaten().catch(()=>null);
+ PPM.co=co;
+ const heute=new Date().toISOString().slice(0,10),lehrer=isTeacher();
+ const last=ppmLast();
+ const proWoche={},fort={},legacy={};
+ PPM.liste.forEach(m=>{
+  (proWoche[m.start]=proWoche[m.start]||[]).push(m);
+  ppmWochen(m).slice(1).forEach(w=>{(fort[w.id]=fort[w.id]||[]).push(m);});
+  (m.einheiten||[]).forEach(e=>{if(e.woche&&e.woche!==m.start)(legacy[e.woche]=legacy[e.woche]||[]).push({m,e});});
+ });
+ const gesamt=SCHULWOCHEN_12.length*PPM_MIN_PRO_WOCHE;
+ const belegt=SCHULWOCHEN_12.reduce((n,w)=>n+Math.min(PPM_MIN_PRO_WOCHE,last[w.id].min),0);
+ const proz=gesamt?Math.round(belegt/gesamt*100):0;
+ const vergangen=SCHULWOCHEN_12.filter(w=>w.end<heute).length,jahrProz=Math.round(vergangen/SCHULWOCHEN_12.length*100);
+ const blockWochen=ppmZeitleiste().filter(z=>z.art==="block").reduce((n,z)=>n+z.n,0);
+ const zeitBox=`<div class="ppm-box ppm-zeitbox"><h2>Zeitstruktur</h2>
+  <p>Pro Schulwoche stehen <b>${PPM_STD_PRO_WOCHE} Unterrichtsstunden</b> (je ${PPM_MIN_PRO_STUNDE} Minuten) zur Verfügung. In den <b>Praktikumsblöcken (fpA)</b> und in den Ferien ist kein Unterricht, dort lässt sich nichts planen. Das Schuljahr hat <b>${SCHULWOCHEN_12.length} Schulwochen</b> (${blockWochen} Wochen Praktikum und Ferien dazwischen).</p>
+  <div class="ppm-balken"><span><b>Verplant:</b> ${ppmStd(belegt)} von ${ppmStd(gesamt)} Unterrichtsstunden (${proz} %)</span><div class="ppm-bar" role="progressbar" aria-valuenow="${proz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${proz}%"></i></div></div>
+  <div class="ppm-balken"><span><b>Schuljahr:</b> ${vergangen} von ${SCHULWOCHEN_12.length} Schulwochen vorbei (${jahrProz} %)</span><div class="ppm-bar ppm-bar-jahr" role="progressbar" aria-valuenow="${jahrProz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${jahrProz}%"></i></div></div>
+  <div class="ppm-leg"><span><i style="background:#3d8fd0"></i>Woche teilweise belegt</span><span><i style="background:#3fa66a"></i>Woche voll (6,3 Stunden)</span><span><i style="background:#d9534f"></i>Woche überbucht</span><span>🏫 🏥 Praktikum (gesperrt)</span><span>🌴 Ferien (gesperrt)</span></div></div>`;
+ const legende=lehrer?`<div class="ppm-legende">${Object.entries(PPM_TYPEN).filter(([k])=>k!=="experiment").map(([k,T])=>`<button type="button" class="ppm-typ" data-ppm="neu" data-typ="${k}"><b>${T.icon} ${esc(T.name)}</b><small>${esc(T.text)}</small></button>`).join("")}</div>`:"";
+ const zeilen=ppmZeitleiste().map(z=>{
+  if(z.art==="block"){
+   const darin=z.kind==="praktikum"?FERIEN_2026_27.filter(f=>f.start<=z.bis&&f.end>=z.von).map(f=>f.titel):[];
+   return`<div class="ppm-block ${z.kind}"><span style="font-size:22px">${z.icon}</span><div><b>${esc(z.titel)}</b><br><small>${fmtKurz(z.von)}–${fmtKurz(z.bis)} · ${z.n} Woche${z.n===1?"":"n"} · gesperrt, kein Unterricht${darin.length?` · darin: ${esc(darin.join(", "))}`:""}</small></div></div>`;
+  }
+  const w=z.w,mm=proWoche[w.id]||[],ff=fort[w.id]||[],ee=legacy[w.id]||[];
+  if(!lehrer&&!mm.length&&!ff.length&&!ee.length)return"";
+  const jetzt=heute>=w.start&&heute<=w.end,min=last[w.id].min,pct=Math.min(100,Math.round(min/PPM_MIN_PRO_WOCHE*100)),cls=min>PPM_MIN_PRO_WOCHE?"ueber":(min===PPM_MIN_PRO_WOCHE?"voll":"");
+  const kw=ppmKW(w);
+  const stW=lehrer?[]:mm.map(ppmFort).filter(Boolean),nOkW=stW.filter(x=>x.done).length,pzW=stW.length?Math.round(nOkW/stW.length*100):0;
+  const wochenFort=stW.length?`<div class="ppm-kap voll" title="${nOkW} von ${stW.length} Modulen geschafft"><i style="width:${pzW}%"></i></div><small class="kapa">${nOkW===stW.length?"alles geschafft ✓":nOkW+" von "+stW.length+" geschafft"}</small>${w.end<heute&&nOkW<stW.length?`<small class="ppm-nach">${stW.length-nOkW} noch offen</small>`:""}`:"";
+  return`<div class="ppm-woche${jetzt?" jetzt":""}" data-w="${w.id}"><div class="ppm-wl"><b>KW ${kw}</b><span>${fmtKurz(w.start)}–${fmtKurz(w.end)}</span>${jetzt?`<em style="font-style:normal;font-weight:700;color:#075a9d">diese Woche</em>`:""}
+    ${lehrer?`<div class="ppm-kap ${cls}" title="${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Unterrichtsstunden belegt"><i style="width:${pct}%"></i></div><small class="kapa">${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Stunden${min>PPM_MIN_PRO_WOCHE?" · überbucht":(min===PPM_MIN_PRO_WOCHE?" · voll":"")}</small>`:wochenFort}</div>
+   <div class="ppm-reihe">${mm.map(m=>ppmKarteHTML(m,false)).join("")}${ff.map(m=>ppmKarteHTML(m,true)).join("")}${ee.map(x=>`<span class="ppm-fort" style="--c:${ppmFarbe(x.m)}" data-ppm="oeffnen" data-id="${esc(x.m.id)}">${(PPM_EINHEITEN[x.e.typ]||{}).icon||""} Einheit: ${esc((PPM_EINHEITEN[x.e.typ]||{}).name||x.e.typ)}</span>`).join("")}
+   ${lehrer?(min<PPM_MIN_PRO_WOCHE?`<button type="button" class="ppm-neu" data-ppm="neu" data-woche="${w.id}">＋ Modul</button>`:`<span class="ppm-leer"${min>PPM_MIN_PRO_WOCHE?' style="color:#b3261e;font-weight:700"':""}>${min>PPM_MIN_PRO_WOCHE?`Woche überbucht: ${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Stunden, bitte ein Modul verschieben oder kürzen`:"Woche voll"}</span>`):(mm.length||ff.length||ee.length?"":`<span class="ppm-leer">–</span>`)}</div></div>`;
+ }).join("");
+ const alleSt=lehrer?[]:PPM.liste.map(m=>({m,p:ppmFort(m)})).filter(x=>x.p);
+ const nGes=alleSt.length,nOk=alleSt.filter(x=>x.p.done).length,pzGes=nGes?Math.round(nOk/nGes*100):0;
+ const jw=SCHULWOCHEN_12.find(w=>heute>=w.start&&heute<=w.end)||SCHULWOCHEN_12.find(w=>w.start>heute),jIdx=jw?ppmSwIndex(jw.id):SCHULWOCHEN_12.length;
+ const offen=alleSt.filter(x=>!x.p.done);
+ const jetztX=offen.find(x=>ppmSwIndex(x.m.start)<=jIdx),naechstX=jetztX||offen[0];
+ const nxLabel=jetztX?(ppmSwIndex(jetztX.m.start)<jIdx?"Noch offen aus einer früheren Woche":"Jetzt dran"):"Als Nächstes";
+ const standBox=nGes?`<div class="ppm-box ppm-stand"><h2>Dein Stand</h2>
+  <div class="ppm-balken"><span><b>${nOk} von ${nGes}</b> Modulen geschafft (${pzGes} %)</span><div class="ppm-bar" role="progressbar" aria-valuenow="${pzGes}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pzGes}%"></i></div></div>
+  ${naechstX?`<div class="ppm-next"><span>${nxLabel}: <b>${esc(naechstX.m.titel||(PPM_TYPEN[naechstX.m.modul]||{}).name||"")}</b> <small style="color:var(--muted)">(KW ${ppmKW(sw12ById(naechstX.m.start)||{start:heute})})</small></span><button type="button" class="ppm-btn klein primaer" data-ppm="oeffnen" data-id="${esc(naechstX.m.id)}">Öffnen</button></div>`:`<p style="margin:6px 0 0"><b>Alles geschafft ✓</b></p>`}</div>`:"";
+ const leer=!PPM.liste.length;
+ const fehler=PPM.fehler?`<div class="empty"><strong>Der Modulplan konnte nicht geladen werden.</strong>${esc(PPM.fehler==="permission-denied"?"Firebase verweigert den Zugriff (permission-denied). Die Firestore-Regeln für den Modulplan sind noch nicht veröffentlicht.":"Fehler: "+PPM.fehler)}</div>`:"";
+ const coBox=co?`${checkoutLiveBannerHTML(co)}<details class="ppm-box ppm-details"><summary>Check-outs (K-Prim-Tests)</summary><div style="margin-top:10px">${checkoutSektionHTML(co)}</div></details>`:"";
+ return`<button class="secondary" onclick="closeFach()">← Zurück zu den Fächern</button>
+ ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Modulplan",lehrer?"Plane Woche für Woche, welches Modul in welchem Lernbereich dran ist. Wähle unten ein Modul oder klicke bei einer Woche auf „＋ Modul“.":"Dein Plan durchs Schuljahr: Klicke ein Modul an, um loszulegen.",
+  lehrer?`<button class="secondary" onclick="openProjektGesamtcheck()">🔬 Projekt-Gesamtcheck</button> <button class="secondary" onclick="openFachaufsatzTrainingCheck()">🎓 APT-Gesamtcheck</button>`:"")}
+ ${PPM_CSS}${fehler}${coBox}${standBox}${legende}
+ ${leer&&lehrer&&!PPM.fehler?`<div class="ppm-box"><h2>Noch kein Plan</h2><p>Du kannst von vorn beginnen oder den bisherigen Ablauf (je Lernbereich ein Projekt und ein Prüfungstraining, dazu das Experiment als Einheit im ersten Projekt) als Startpunkt übernehmen. Danach lässt sich jedes Modul ändern, verschieben oder löschen.</p><button type="button" class="ppm-btn primaer" data-ppm="standard">Bisherigen Ablauf als Plan übernehmen</button></div>`:""}
+ ${leer&&!lehrer&&!PPM.fehler?`<div class="empty"><strong>Noch kein Plan.</strong>Deine Lehrkraft hat noch keine Module geplant.</div>`:""}
+ ${zeilen}
+ ${footer()}`;
+}
+// ------------------------------------------------------------ Modul anlegen/ändern
+// „＋ Modul“ in einer Woche: erst eines der fünf Module wählen, dann öffnet sich der Dialog.
+function ppmTypWahl(woche){
+ if(!isTeacher())return;
+ const sw=woche?sw12ById(woche):null;
+ const typen=Object.entries(PPM_TYPEN).filter(([k])=>PPM_ZUSATZ.includes(k));
+ modal(`<button class="modal-close" onclick="closeModal()">×</button>
+  <div class="kicker">MODUL HINZUFÜGEN</div><h2>Welches Modul möchtest du einplanen?</h2>
+  ${sw?`<p style="color:var(--muted);margin:0 0 10px">Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}</p>`:""}
+  <div class="ppm-legende" style="grid-template-columns:1fr">${typen.map(([k,T])=>`<button type="button" class="ppm-typ" data-ppm="neu" data-typ="${k}"${woche?` data-woche="${esc(woche)}"`:""}><b>${T.icon} ${esc(T.name)}</b><small>${esc(T.text)}</small></button>`).join("")}</div>
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button></div>`);
+}
+// Projekt: öffnet direkt „Das Experiment“ (Standard im Lernbereich mit Einstieg) oder die Projektseite mit Teams und Meilensteinen.
+function ppmProjektDirekt(m){
+ if(m&&m.direkt==="experiment")return true;
+ if(m&&m.direkt==="projekt")return false;
+ const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(m&&m.lb));
+ return !!(ph&&ph.einstieg);
+}
+function ppmDateiTyp(f){
+ const n=(f&&f.name)||"",t=(f&&f.type)||"";
+ if(/^image\//.test(t)||dateiIstBild(n))return"bild";
+ if(/^video\//.test(t)||dateiIstVideo(n))return"video";
+ if(/^audio\//.test(t)||dateiIstAudio(n))return"audio";
+ return"pdf";
+}
+const PPM_MAT_INFO={pdf:["📄","PDF"],bild:["🖼️","Bild"],video:["🎬","Film"],audio:["🎧","Audio"],link:["🔗","Webseite"]};
+function ppmWochenOptionen(sel){
+ return SCHULWOCHEN_12.map(w=>`<option value="${w.id}"${w.id===sel?" selected":""}>${fmtKurz(w.start)}–${fmtKurz(w.end)}</option>`).join("");
+}
+async function ppmDialog(id,typ,woche,opt){
+ opt=opt||{};
+ const bearb=id?ppmById(id):null;
+ const t=bearb?bearb.modul:typ;if(!PPM_TYPEN[t]||(!bearb&&!PPM_ZUSATZ.includes(t)))return;
+ const T=PPM_TYPEN[t];
+ const projektId=bearb?bearb.projektId:opt.projektId;
+ const projekt=projektId?ppmById(projektId):null;
+ const heute=new Date().toISOString().slice(0,10);
+ const erste=SCHULWOCHEN_12.find(w=>w.end>=heute)||SCHULWOCHEN_12[0];
+ const projWochen=projekt?ppmWochen(projekt):null;
+ const start=bearb?bearb.start:(woche&&(!projWochen||projWochen.some(w=>w.id===woche))?woche:(projWochen?projWochen[0].id:erste.id));
+ let checkouts=[];
+ if(t==="kprim"){try{checkouts=(await ladeCheckoutDaten()).checkouts||[];}catch(e){}}
+ const ea=t==="selbstlern"?await ppmEaListe():[];
+ const bfT=t==="blockfall"?await ppmBlockfallThemen():[];
+ const lb0=bearb?bearb.lb:(projekt?projekt.lb:1);
+ const lbOpt=[1,2,3,4].map(n=>`<option value="${n}"${n===lb0?" selected":""}>Lernbereich ${n} · ${esc((PP12_LB[n]||{}).titel||"")}</option>`).join("");
+ const ph0=KW_PHASEN.find(p=>p.lbNum===lb0);
+ const dauer0=bearb?ppmDauerKey(bearb):PPM_DAUER_STANDARD[t];
+ const dauerListe=PPM_DAUERN.filter(d=>d.min).filter(d=>!d.alt||d.k===dauer0);
+ const dauerOpt=(()=>{const l=dauerListe.some(d=>d.k===dauer0)?dauerListe:[...dauerListe,{k:dauer0,lang:dauer0.slice(1)+" Wochen (bisher)"}];return l.map(d=>`<option value="${d.k}"${d.k===dauer0?" selected":""}>${esc(d.lang)}</option>`).join("");})();
+ const last=ppmLast(bearb?bearb.id:null);
+ const wochenListe=projWochen||SCHULWOCHEN_12;
+ const wochenOpt=wochenListe.map(w=>`<option value="${w.id}"${w.id===start?" selected":""}>KW ${ppmKW(w)} · ${fmtKurz(w.start)}–${fmtKurz(w.end)}</option>`).join("");
+ let extra="";
+ if(t==="projekt"){
+  const dir0=ppmProjektDirekt(bearb||{lb:lb0});
+  extra=`<label>Beim Aufrufen öffnet sich<select id="ppmDirekt"><option value="experiment"${dir0?" selected":""}>direkt „Das Experiment“ (interaktive Stunde)</option><option value="projekt"${dir0?"":" selected"}>die Projektseite mit Teams und Meilensteinen</option></select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">Team-Projekt mit Meilensteinen anlegen: Das Projekt nutzt die Meilensteine und die Teams des Lernbereichs.</p>`;
+ }
+ if(t==="apt")extra=`<p style="font-size:13px;color:var(--muted);margin:0">Die Frage aus der Abschlussprüfung, den relevanten Inhalt und die Lösung gestaltest du danach direkt auf der Modulseite.</p>`;
+ if(t==="stunde")extra=`<label>Phase im Deeper-Learning-Konzept<select id="ppmPhase">${[1,2,3].map(n=>`<option value="${n}"${(bearb?bearb.phase:2)===n?" selected":""}>${PP12_PHASEN[n].kurz} · ${esc(PP12_PHASEN[n].name)}</option>`).join("")}</select></label>
+  ${bearb?"":`<p style="font-size:13px;color:var(--muted);margin:0">Zu jeder Stunde wird automatisch eine Digitale Tafel angelegt.</p>`}`;
+ if(t==="kprim")extra=`<label>Check-out verknüpfen<select id="ppmCheckout"><option value="">Noch keinen (später verknüpfen)</option>${checkouts.map(c=>`<option value="${esc(c.id)}"${bearb&&bearb.checkoutId===c.id?" selected":""}>${esc(c.titel||"Check-out")} · K-Prim-Aufgabensatz${c.datum?" · "+esc(c.datum):""}</option>`).join("")}</select></label>`;
+ if(t==="rallye"){
+  extra=`<label>Wie spielen die Schüler:innen?<select id="ppmRModus"><option value="einzeln"${bearb&&bearb.rModus==="team"?"":" selected"}>Einzeln: Jede Person sammelt eigene Punkte</option><option value="team"${bearb&&bearb.rModus==="team"?" selected":""}>In Teams: Die Punkte zählen für das Team</option></select></label>
+   <label>Freischaltung der Stationen<select id="ppmRFrei">${Object.entries(LR_FREISCHALTUNG).map(([k,v])=>`<option value="${k}"${(bearb&&bearb.rFreischaltung||"qr")===k?" selected":""}>${esc(v)}</option>`).join("")}</select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">${bearb?"":"Die Stationen legst du danach auf der Modulseite an. "}Für die Rallye braucht jedes Handy Internet. Eine Kartenansicht und einen Offline-Modus gibt es nicht.</p>`;
+ }
+ if(t==="experiment"){
+  const gew=bearb?ppmExpTeile(bearb):PPM_EXP_TEILE.map(x=>x.k);
+  extra=`<div class="ppm-teile"><b style="font-size:13px">Teile der Einheit wählen</b>
+   ${PPM_EXP_TEILE.map(tl=>`<label class="check"><input type="checkbox" class="ppmTeil" value="${tl.k}"${gew.includes(tl.k)?" checked":""}><span><b>${esc(tl.name)}</b> <small>(ca. ${tl.min} Min.)</small><br><small style="color:var(--muted)">${esc(tl.text)}</small></span></label>`).join("")}
+   <div id="ppmTeileInfo" class="ppm-teileinfo"></div></div>
+   ${projekt?`<p style="font-size:13px;color:var(--muted);margin:0">Diese Einheit gehört zum Projekt „${esc(projekt.titel)}“ und zählt zur Projektzeit.</p>`:""}`;
+ }
+ if(t==="blockfall"){
+  const gew=bearb&&Array.isArray(bearb.themen)&&bearb.themen.length?bearb.themen:bfT.map(x=>x.id);
+  extra=`<div class="ppm-teile"><b style="font-size:13px">Themenpakete im Spiel</b>
+   ${bfT.length?bfT.map(x=>`<label class="check"><input type="checkbox" class="ppmBfTh" value="${esc(x.id)}"${gew.includes(x.id)?" checked":""}><span><b>${esc(x.titel)}</b> <small>(${x.n} Karten)</small></span></label>`).join(""):`<p style="color:#b3261e;font-size:13px;margin:0">Die Datei blockfall/aufgaben.json wurde nicht gefunden.</p>`}</div>
+   <p style="font-size:13px;color:var(--muted);margin:0">Mit jeder vollen Reihe stellt das Spiel eine Frage zu einem Begriff oder einer Definition. Die Fragen liegen in der Datei blockfall/aufgaben.json.</p>`;
+ }
+ if(t==="selbstlern"){
+  const alt=bearb&&bearb.kursId==="psych-gegenstand";
+  const aktuell=bearb&&String(bearb.kursId||"").startsWith("ea:")?bearb.kursId.slice(3):"";
+  const passend=ea.filter(e=>e.art==="selbstlern"||e.id===aktuell).sort((x,y)=>(x.lb||9)-(y.lb||9)||String(x.titel).localeCompare(String(y.titel),"de"));
+  const lbGruppen=[...new Set(passend.map(e=>e.lb||0))];
+  const eaOpt=lbGruppen.map(n=>`<optgroup label="${n?"Lernbereich "+n:"Lernbereich offen"}">${passend.filter(e=>(e.lb||0)===n).map(e=>`<option value="ea:${esc(e.id)}" data-lb="${e.lb||""}"${bearb&&bearb.kursId==="ea:"+e.id?" selected":""}>${esc(ppmBez(e.titel||e.id,e.art,e.lb))}${e.entwurf?" (Entwurf)":""}</option>`).join("")}</optgroup>`).join("");
+  extra=`<label>Kurs (nur Selbstlernkurse)<select id="ppmKurs">
+   ${eaOpt}
+   <optgroup label="Weitere">${alt?`<option value="psych-gegenstand" selected>${esc(PPM_KURSE["psych-gegenstand"].titel)} (Kurzfassung von Claude)</option>`:""}<option value="eigen"${bearb&&bearb.kursId==="eigen"?" selected":""}>Eigener Kurs (selbst gestalten)</option></optgroup></select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">${passend.length?"Hier erscheinen nur Selbstlernkurse. Weitere fertige Inhalte kommen automatisch dazu, sobald ihre Datei im Ordner einarbeitung/inhalte im Repo liegt.":"Noch keine fertigen Selbstlernkurse gefunden. Du kannst einen eigenen Kurs gestalten."}</p>`;
+ }
+ modal(`<button class="modal-close" onclick="closeModal()">×</button>
+  <div class="kicker">${T.icon} ${esc(T.kurz.toUpperCase())}</div><h2>${bearb?"Modul bearbeiten":esc(T.name)}</h2>
+  <div class="form">
+   <label>Lernbereich<select id="ppmLb"${projekt?" disabled":""}>${lbOpt}</select></label>
+   <label>Titel<input id="ppmTitel" maxlength="120" value="${esc(bearb?bearb.titel:"")}" placeholder="${esc(t==="projekt"&&ph0?ph0.titel:(t==="experiment"?"Das Experiment":T.name))}"></label>
+   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label>Beginn (Schulwoche)<select id="ppmStart">${wochenOpt}</select></label>
+   <label>Dauer<select id="ppmDauer">${dauerOpt}</select></label></div>
+   <div id="ppmKapa" class="ppm-kapahint"></div>
+   ${extra}
+    <details class="ppm-details"${(bearb&&(bearb.themen||[]).length)||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen gehört der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${KW_THEMEN.map(e=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${e.id}"${((bearb&&bearb.themen)||[]).includes(e.id)||window.__kwThemaNeu===e.id?" checked":""}> LB ${e.lbNum} · Nr. ${esc(e.nr)} · ${esc(kwKurz(e))}</label>`).join("")}</div></details>
+   <label>Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
+   <div id="ppmMatBox" class="ppm-matbox"></div>
+   <div class="form-actions">${bearb?`<button class="secondary" type="button" id="ppmLoeschen">Modul löschen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
+  </div>`);
+ const lbSel=$("ppmLb"),ti=$("ppmTitel"),btn=$("ppmSpeichern");
+  // ---- Material anhängen (Dateien und Links), wird beim Speichern übernommen ----
+  const matBest=[...((bearb&&bearb.material)||[])];   // schon am Modul hängende Materialien
+  const matNeu=[];                                     // neu hinzugefügt: {typ,titel,url} (Link) oder {typ,titel,file}
+  const matWegUrls=[];                                 // entfernte Dateien, werden nach dem Speichern aus dem Speicher gelöscht
+  let matLinkOffen=false,matHochgeladen=[];
+  const matRender=()=>{
+   const box=$("ppmMatBox");if(!box)return;
+   const zeile=(x,attr)=>{const inf=PPM_MAT_INFO[x.typ]||PPM_MAT_INFO.link;return`<div class="ppm-mat" style="flex-wrap:wrap"><span style="font-size:20px">${inf[0]}</span><div style="flex:1;min-width:140px"><b>${esc(x.titel||x.name||"Material")}</b><br><small style="color:var(--muted)">${inf[1]}${x.file?" · wird beim Speichern hochgeladen":""}</small></div><button type="button" class="ppm-btn klein" ${attr} title="Entfernen" aria-label="Material entfernen">✕</button></div>`;};
+   box.innerHTML=`<b style="font-size:14px">Material anhängen (optional)</b>
+    ${matBest.map((x,i)=>zeile(x,`data-mb="${i}"`)).join("")}${matNeu.map((x,i)=>zeile(x,`data-mn="${i}"`)).join("")}
+    <div class="ppm-zeile" style="border:0;padding:6px 0 0"><button type="button" class="ppm-btn" data-mat="datei">📎 Datei (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-mat="link">🔗 Link</button><input type="file" id="ppmMatInput" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div>
+    ${matLinkOffen?`<div style="display:grid;gap:8px;margin-top:6px"><input id="ppmMatUrl" placeholder="https://…" aria-label="Adresse"><input id="ppmMatUrlTitel" maxlength="100" placeholder="Titel (optional)" aria-label="Titel"><div><button type="button" class="ppm-btn primaer" data-mat="link-ok">Link hinzufügen</button> <button type="button" class="ppm-btn" data-mat="link-x">Abbrechen</button></div></div>`:""}
+    <small style="color:var(--muted)">Dateien bis 15 MB. Das Material erscheint auf der Modulseite für die Klasse.</small>`;
+  };
+  matRender();
+  $("ppmMatBox").addEventListener("click",ev=>{
+   const b=ev.target.closest("button");if(!b)return;
+   if(b.dataset.mb!==undefined){const x=matBest.splice(Number(b.dataset.mb),1)[0];if(x&&x.typ!=="link"&&x.url)matWegUrls.push(x.url);matRender();return;}
+   if(b.dataset.mn!==undefined){matNeu.splice(Number(b.dataset.mn),1);matRender();return;}
+   const a=b.dataset.mat;
+   if(a==="datei"){const inp=$("ppmMatInput");inp.onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;
+     if(f.size>DATEI_MAX_BYTES){toast("Datei ist zu groß (max. 15 MB).");e.target.value="";return;}
+     matNeu.push({typ:ppmDateiTyp(f),titel:f.name.replace(/\.[a-z0-9]{2,5}$/i,""),name:f.name,file:f});matRender();};inp.click();return;}
+   if(a==="link"){matLinkOffen=true;matRender();const u=$("ppmMatUrl");if(u)u.focus();return;}
+   if(a==="link-x"){matLinkOffen=false;matRender();return;}
+   if(a==="link-ok"){const u=wbSichereUrl($("ppmMatUrl").value);if(!u){toast("Das ist keine gültige Internetadresse.");return;}
+     matNeu.push({typ:"link",titel:$("ppmMatUrlTitel").value.trim()||u.replace(/^https?:\/\//,""),url:u});matLinkOffen=false;matRender();return;}
+  });
+ const teileGewaehlt=()=>[...document.querySelectorAll(".ppmTeil")].filter(c=>c.checked).map(c=>c.value);
+ const aktualisieren=()=>{
+  const dk=$("ppmDauer").value;
+  let ok=true;
+  if(projekt){$("ppmKapa").innerHTML=`<span style="color:#1f6a3a">✓ Einheit im Projekt: zählt zur Projektzeit, kein eigener Platz nötig.</span>`;}
+  else{const pr=ppmPruefen($("ppmStart").value,dk,bearb?bearb.id:null);ok=pr.ok;$("ppmKapa").innerHTML=ppmKapaHtml(pr);}
+  if(t==="experiment"){
+   const g=teileGewaehlt(),min=ppmExpMinuten(g),d=PPM_DAUERN.find(x=>x.k===dk),info=$("ppmTeileInfo");
+   let txt=`Gewählt: ${g.length} von ${PPM_EXP_TEILE.length} Teilen, ca. ${min} Min.`;
+   if(d&&d.min)txt+=min<=d.min?` · passt in ${d.min} Minuten`:` · <span style="color:#b3261e">länger als die eingeplanten ${d.min} Minuten</span>`;
+   if(!g.length){txt=`<span style="color:#b3261e">Bitte mindestens einen Teil wählen.</span>`;ok=false;}
+   info.innerHTML=txt;
+  }
+  btn.disabled=!ok;btn.title=ok?"":"In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).";
+ };
+ if(t==="selbstlern"){const ks=$("ppmKurs");if(ks)ks.addEventListener("change",()=>{const o=ks.options[ks.selectedIndex],n=o&&o.dataset.lb;if(n&&!lbSel.disabled)lbSel.value=n;});}
+ if(t==="projekt"&&!bearb)lbSel.addEventListener("change",()=>{const x=KW_PHASEN.find(y=>y.lbNum===Number(lbSel.value));ti.placeholder=x?x.titel:T.name;const d=$("ppmDirekt");if(d)d.value=(x&&x.einstieg)?"experiment":"projekt";});
+ $("ppmStart").addEventListener("change",aktualisieren);$("ppmDauer").addEventListener("change",aktualisieren);
+ document.querySelectorAll(".ppmTeil").forEach(c=>c.addEventListener("change",()=>{
+  const box=[...document.querySelectorAll(".ppmTeil")],get=k=>box.find(x=>x.value===k);
+  if(c.value==="ergebnisse"&&c.checked)get("experiment").checked=true;
+  if(c.value==="experiment"&&!c.checked)get("ergebnisse").checked=false;
+  aktualisieren();
+ }));
+ aktualisieren();
+ btn.addEventListener("click",async()=>{
+  const lb=Number(lbSel.value),pr=projekt?{ok:true}:ppmPruefen($("ppmStart").value,$("ppmDauer").value,bearb?bearb.id:null);
+  if(!pr.ok){toast("In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).");return;}
+  const dk=$("ppmDauer").value,def=PPM_DAUERN.find(d=>d.k===dk);
+  const daten={modul:t,lb,titel:ti.value.trim(),start:$("ppmStart").value,dauer:dk,wochen:def?def.wochen:(Number(dk.slice(1))||1),notiz:$("ppmNotiz").value.trim()};
+  if(!daten.titel){const x=KW_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":t==="rallye"?"Lernrallye · LB"+lb:t==="blockfall"?"Blockfall":"Selbstlernkurs · LB"+lb);}
+  daten.themen=[...document.querySelectorAll(".ppmThemaCb:checked")].map(c=>c.value);window.__kwThemaNeu=null;
+  if(projektId)daten.projektId=projektId;
+  if(t==="projekt"&&$("ppmDirekt"))daten.direkt=$("ppmDirekt").value;
+  if(t==="stunde")daten.phase=Number($("ppmPhase").value);
+  if(t==="kprim")daten.checkoutId=$("ppmCheckout").value||"";
+  if(t==="experiment"){
+   daten.teile=PPM_EXP_TEILE.map(x=>x.k).filter(k=>teileGewaehlt().includes(k));
+   const min=ppmExpMinuten(daten.teile);
+   if(def&&def.min&&min>def.min&&!confirm(`Die gewählten Teile brauchen etwa ${min} Minuten, eingeplant sind ${def.min}. Trotzdem speichern?`))return;
+  }
+  if(t==="rallye"){daten.rModus=$("ppmRModus").value;daten.rFreischaltung=$("ppmRFrei").value;}
+  if(t==="blockfall"){
+   const th=[...document.querySelectorAll(".ppmBfTh")].filter(c=>c.checked).map(c=>c.value);
+   if(bfT.length&&!th.length){toast("Bitte mindestens ein Themenpaket wählen.");return;}
+   daten.themen=th.length===bfT.length?[]:th;   // leer = alle Themenpakete
+  }
+  if(t==="selbstlern"){
+   daten.kursId=$("ppmKurs").value;
+   if(!ti.value.trim()){
+    if(daten.kursId.startsWith("ea:")){const e=ea.find(x=>"ea:"+x.id===daten.kursId);daten.titel=(e&&e.titel)||daten.titel;}
+    else if(PPM_KURSE[daten.kursId])daten.titel=PPM_KURSE[daten.kursId].titel;
+   }
+  }
+  try{
+   // Neue Dateien hochladen (bei einem Fehler wird nichts gespeichert, das Fenster bleibt offen)
+   const matNeuFertig=[];
+   matHochgeladen=[];
+   if(matNeu.some(x=>x.file))toast("Material wird hochgeladen …");
+   for(const x of matNeu){
+    if(x.file){const up=await uploadCampusDatei(x.file,`ppMaterial/${bearb?bearb.id:"neu"}`);matHochgeladen.push(up.url);matNeuFertig.push({typ:x.typ,titel:x.titel,name:x.name,url:up.url});}
+    else matNeuFertig.push({typ:x.typ,titel:x.titel,url:x.url});
+   }
+   const matAlle=[...matBest,...matNeuFertig];
+   if(matAlle.length||(bearb&&(bearb.material||[]).length))daten.material=matAlle;
+   if(bearb){await updateDoc(doc(db,"ppModule",bearb.id),{...daten,updatedAt:serverTimestamp()});matWegUrls.forEach(u=>deleteCampusDatei(u));}
+   else{
+    const basis={...daten,createdBy:currentUser.uid,createdAt:serverTimestamp()};
+    if(t==="projekt")basis.einheiten=[];
+    if(t==="stunde"){basis.material=daten.material||[];basis.fragen=[];basis.tafelId=await ppmTafelAnlegen(daten.titel);}
+    if(t==="rallye"){basis.stationen=[];basis.rAktiv=false;}
+    if(t==="selbstlern"&&daten.kursId==="eigen")basis.schritte=[{id:"s1",typ:"text",titel:"Erster Schritt",text:"## Willkommen\nHier beginnt dein Kurs."},{id:"s2",typ:"abschluss",titel:"Geschafft",text:"Du hast den Kurs abgeschlossen."}];
+    await addDoc(collection(db,"ppModule"),basis);
+   }
+   closeModal();await ppmLaden(true);await render();toast("Modul gespeichert.");
+  }catch(e){matHochgeladen.forEach(u=>deleteCampusDatei(u));matHochgeladen=[];ppmFehler(e,"Das Modul konnte nicht gespeichert werden");}
+ });
+ const lo=$("ppmLoeschen");
+ if(lo)lo.addEventListener("click",async()=>{
+  if(!confirm("Dieses Modul wirklich löschen? Fortschritte der Klasse bleiben in der Datenbank erhalten, sind aber nicht mehr sichtbar."))return;
+  try{
+   if(bearb.modul==="projekt"){for(const x of PPM.liste.filter(y=>y.projektId===bearb.id))await deleteDoc(doc(db,"ppModule",x.id));}
+   await deleteDoc(doc(db,"ppModule",bearb.id));closeModal();activePPModul=null;await ppmLaden(true);await render();toast("Modul gelöscht.");
+  }catch(e){ppmFehler(e,"Löschen nicht möglich");}
+ });
+}
+function ppmFehler(e,text){
+ console.error("Modulplaner:",e);
+ toast(e&&e.code==="permission-denied"?`${text}: Firebase verweigert den Zugriff (permission-denied). Bitte die Firestore-Regeln prüfen.`:`${text}: ${(e&&(e.code||(e.message&&e.message.length<220?e.message:e.name)))||"unbekannt"}`);
+}
+async function ppmTafelAnlegen(titel){
+ const r=await addDoc(collection(db,"whiteboards"),{title:String(titel).slice(0,120),description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,bg:"blau",createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
+ return r.id;
+}
+async function ppmStandardplan(){
+ if(PPM.liste.length&&!confirm("Es gibt schon Module. Den bisherigen Ablauf trotzdem zusätzlich anlegen?"))return;
+ try{
+  for(const ph of PROJEKT_PHASEN){
+   const basis={lb:ph.lbNum,createdBy:currentUser.uid,createdAt:serverTimestamp()};
+   const pr=await addDoc(collection(db,"ppModule"),{...basis,modul:"projekt",titel:ph.einstieg?"Einstieg: Das Experiment":ph.titel,start:ph.projektSchulwochen[0],wochen:ph.projektSchulwochen.length,dauer:"w"+ph.projektSchulwochen.length,einheiten:[]});
+   if(ph.einstieg)await addDoc(collection(db,"ppModule"),{...basis,modul:"experiment",titel:"Das Experiment",projektId:pr.id,start:ph.projektSchulwochen[0],wochen:1,dauer:"90",teile:PPM_EXP_TEILE.map(t=>t.k)});
+   await addDoc(collection(db,"ppModule"),{...basis,modul:"apt",titel:"Prüfungstraining "+ph.lb,start:ph.aptSchulwochen[0],wochen:ph.aptSchulwochen.length,dauer:"w"+ph.aptSchulwochen.length});
+  }
+  await ppmLaden(true);await render();toast("Plan angelegt.");
+ }catch(e){ppmFehler(e,"Plan konnte nicht angelegt werden");}
+}
+// ------------------------------------------------------------ Modulseiten
+
+// Farbbalance: ordnet jedem Bereich einer Modulseite eine Akzentfarbe zu
+function ppmSekFarben(h){
+ if(!h||typeof h!=="string")return h;
+ const k=t=>{t=t.toLowerCase();
+  if(/lehrkraft|name der stunde/.test(t))return"s-lehrer";
+  if(/datenschutz/.test(t))return"s-warn";
+  if(/^material/.test(t))return"s-material";
+  if(/check-?out|k-prim|wo stehe|dein stand|zeitstruktur|zeitplan|rangliste|checkliste|bewertet/.test(t))return"s-pruefen";
+  if(/team|wer macht|messe/.test(t))return"s-team";
+  return"s-lernen";};
+ h=h.replace(/<div class="lb-leiste-x"/g,'<div');
+ h=h.replace(/<div class="ppm-box lb-leiste"/g,'<div class="ppm-box ppm-sek s-faden lb-leiste"');
+ h=h.replace(/<div class="ppm-box((?: [a-z-]+)*)">\s*<h2>([^<]*)/g,(a,c,t)=>`<div class="ppm-box ppm-sek ${k(t)}${c}"><h2>${t}`);
+ h=h.replace(/<details class="ppm-box ppm-details"([^>]*)><summary>([^<]*)/g,(a,o,t)=>`<details class="ppm-box ppm-details ppm-sek ${k(t)}"${o}><summary>${t}`);
+ return h;
+}
+async function ppmModulSeite(m){return ppmSekFarben(await ppmModulSeiteRoh(m));}
+async function ppmModulSeiteRoh(m){
+ await ppmMeineLaden();
+ if(m.modul==="projekt")return await ppmProjektSeite(m);
+ if(m.modul==="stunde")return await ppmStundeSeite(m);
+ if(m.modul==="rallye")return await ppmRallyeSeite(m);
+ if(m.modul==="blockfall")return await ppmBlockfallSeite(m);
+ if(m.modul==="kprim")return await ppmKprimSeite(m);
+ if(m.modul==="apt")return await ppmAptSeite(m);
+ if(m.modul==="experiment")return await ppmExperimentSeite(m);
+ if(m.modul==="selbstlern"){
+  if(String(m.kursId||"").startsWith("ea:"))return await ppmEaSeite(m);
+  return await ppmKursSeite(m);
+ }
+ return"";
+}
+// ---- Blockfall (Lernspiel: Tetris mit Fragen zu Begriffen und Definitionen) ----
+// Spiel: blockfall/blockfall.html, Fragen: blockfall/aufgaben.json (Themenpakete mit Begriff und Definition).
+let PPM_BF_CACHE=null;
+async function ppmBlockfallThemen(){
+ if(PPM_BF_CACHE)return PPM_BF_CACHE;
+ try{
+  const r=await fetch("blockfall/aufgaben.json?v="+Date.now());
+  if(!r.ok)throw new Error(r.status);
+  const j=await r.json();
+  PPM_BF_CACHE=(j.themen||[]).map(t=>({id:t.id,titel:t.titel,n:(t.karten||[]).length,lb:t.lb||""}));
+ }catch(e){console.error("Blockfall-Aufgaben:",e);return[];}
+ return PPM_BF_CACHE;
+}
+async function ppmBlockfallSeite(m){
+ const lehrer=isTeacher(),th=await ppmBlockfallThemen();
+ const auswahl=Array.isArray(m.themen)&&m.themen.length?m.themen:null;
+ const gew=auswahl?th.filter(t=>auswahl.includes(t.id)):th;
+ const n=gew.reduce((s,t)=>s+t.n,0);
+ const url="blockfall/blockfall.html"+(auswahl?"?themen="+encodeURIComponent(auswahl.join(",")):"");
+ const liste=gew.map(t=>`<div class="ppm-zeile"><div style="flex:1;min-width:200px"><b>${esc(t.titel)}</b></div><small>${t.n} Karten</small></div>`).join("");
+ return`${ppmKopf(m,"")}
+ <div class="ppm-box"><h2>Blockfall</h2>
+  <p>Du spielst Tetris. Sobald eine Reihe voll ist, hält das Spiel an und fragt dich einen Begriff oder eine Definition ab, für jede Reihe eine Frage. Richtige Antworten bringen Punkte. Falsche Karten kommen später noch einmal und stehen am Ende in deiner Wiederholungsliste.</p>
+  ${gew.length?`<p><b>${n} Karten</b> in ${gew.length} Themenpaket${gew.length===1?"":"en"}:</p>${liste}`:`<p class="ppm-leer">Die Aufgaben wurden nicht gefunden. Es fehlt die Datei <code>blockfall/aufgaben.json</code> im Repo.</p>`}
+  <div style="margin-top:12px"><a class="ppm-btn primaer" href="${esc(url)}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">${lehrer?"Spiel öffnen (Vorschau)":"Blockfall starten"}</a></div>
+  ${lehrer?`<p style="font-size:13px;color:var(--muted);margin:10px 0 0">Neue Fragen ergänzt du in der Datei blockfall/aufgaben.json (Anleitung in blockfall/README.md). Welche Themenpakete im Spiel vorkommen, stellst du über „Modul bearbeiten“ ein.</p>`:""}</div>
+ ${footer()}`;
+}
+// ---- Experiment (interaktive Einheit mit wählbaren Teilen) ----
+async function ppmExperimentSeite(m){
+ const lehrer=isTeacher(),teile=ppmExpTeile(m),min=ppmExpMinuten(teile);
+ const f=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
+ const done=!!f.experimentErledigt,d=ppmDauerDef(m);
+ const projekt=m.projektId?ppmById(m.projektId):null;
+ const liste=PPM_EXP_TEILE.map(t=>{const an=teile.includes(t.k);return`<div class="ppm-zeile" style="opacity:${an?1:.45}"><span style="font-size:20px">${an?"✓":"–"}</span><div style="flex:1;min-width:200px"><b>${esc(t.name)}</b><br><small style="color:var(--muted)">${esc(t.text)}</small></div><small>${an?"ca. "+t.min+" Min.":"nicht dabei"}</small></div>`;}).join("");
+ const passt=!d.min||min<=d.min;
+ return`${ppmKopf(m,projekt?`<p style="color:var(--muted)">Einheit im Projekt „${esc(projekt.titel)}“</p>`:"")}
+ <div class="ppm-box"><h2>Das Experiment · interaktive Einheit</h2>
+  <p>Gewählte Teile: <b>${teile.length} von ${PPM_EXP_TEILE.length}</b>, Zeitbedarf etwa <b>${min} Minuten</b>${d.min?` (eingeplant: ${d.min} Minuten${passt?"":`, <span style="color:#b3261e">das reicht nicht ganz</span>`})`:""}.</p>
+  ${liste}
+  <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+   <button type="button" class="ppm-btn primaer" data-ppm="experiment" data-id="${esc(m.id)}">${lehrer?"Einheit öffnen (Vorschau)":done?"Einheit wiederholen":"Einheit starten"}</button>
+   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}</div></div>
+ ${footer()}`;
+}
+// ---- Selbstlernkurs mit fertiger Einarbeitung (einarbeitung/inhalte/<id>.json) ----
+async function ppmEaSeite(m){
+ const lehrer=isTeacher(),id=String(m.kursId).slice(3);
+ const info=await einarbeitungInfo(id);
+ const f=await getLehrplanFortschritt(id).catch(()=>({}));
+ const ok=!!f.einarbeitungAbgeschlossen,aufg=f.einarbeitungAufgaben;
+ const proz=aufg&&aufg.gesamt?Math.round(aufg.richtig/aufg.gesamt*100):0;
+ return`${ppmKopf(m,`<p style="color:var(--muted)">${esc((info&&info.titel)||id)}</p>`)}
+ <div class="ppm-box"><h2>Selbstlernkurs</h2>
+  ${info?`<p>Du klickst dich Seite für Seite selbstständig durch den Kurs. Es gibt ${info.aufgaben} Aufgabe${info.aufgaben===1?"":"n"} mit Rückmeldung. Dein Stand wird gespeichert.</p>`:`<p class="ppm-leer">Für diesen Kurs wurde die Inhaltsdatei <code>einarbeitung/inhalte/${esc(id)}.json</code> nicht gefunden.</p>`}
+  ${lehrer?"":`<div class="ppm-balken"><b>${ok?"Kurs abgeschlossen ✓":"Noch nicht abgeschlossen"}</b>${aufg&&aufg.gesamt?`<br><small style="color:var(--muted)">Aufgaben: ${aufg.richtig} von ${aufg.gesamt} richtig</small><div class="ppm-bar"><i style="width:${proz}%"></i></div>`:""}</div>`}
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">${info?`<button type="button" class="ppm-btn primaer" data-ppm="ea-start" data-ea="${esc(id)}">${lehrer?"Kurs öffnen (Vorschau)":ok?"Kurs wiederholen":(aufg?"Kurs fortsetzen":"Kurs starten")}</button>`:""}
+   ${lehrer?`<button type="button" class="ppm-btn" data-ppm="ea-stand" data-ea="${esc(id)}">Stand der Klasse ansehen</button>`:""}</div></div>
+ ${footer()}`;
+}
+// Material eines Moduls (Dateien und Links) unter der Kopfzeile; Stunde und Prüfungstraining zeigen es in eigenen Bereichen.
+function ppmMaterialBox(m){
+ if(m.modul==="stunde"||m.modul==="apt")return"";
+ const mat=m.material||[];
+ if(!mat.length)return"";
+ const lehrer=isTeacher();
+ return`<div class="ppm-box"><h2>Material</h2>${mat.map((x,i)=>ppmMaterialHTML(x,i,m,lehrer)).join("")}${lehrer?'<input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden>':""}</div>`;
+}
+function ppmKopf(m,unter,extraBtn){
+ const T=PPM_TYPEN[m.modul],c=ppmFarbe(m),w=ppmWochen(m);
+ const zeit=w.length?`${fmtKurz(w[0].start)}–${fmtKurz(w[w.length-1].end)}`:"";
+ return`<div class="kw-links"><button class="secondary" onclick="go('start')">← Lernlandkarte</button><button class="secondary" data-ppm="plan">← Unterricht</button></div>
+ ${PPM_CSS}
+ <div class="ppm-box ppm-kopf kw-kopf" style="--c:${c};--t:${c}"><div class="kicker">${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit} · ${esc(ppmDauerDef(m).lang.toUpperCase())}</div>
+  <h1>${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
+  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${extraBtn||""}</div>`:""}</div>${lbModulBar(m)}${ppmMaterialBox(m)}`;
+}
+// ---- Projekt ----
+async function ppmProjektSeite(m){
+ const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(m.lb));
+ const lehrer=isTeacher();
+ const f=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
+ const done=!!f.experimentErledigt;
+ const eig=PPM.liste.filter(x=>x.projektId===m.id);
+ const eigZeilen=eig.map(x=>{const sw=sw12ById(x.start),teile=ppmExpTeile(x);
+  return`<div class="ppm-zeile"><span style="font-size:26px">🧪</span><div style="flex:1;min-width:200px"><b>${esc(x.titel||"Das Experiment")}</b><br><small style="color:var(--muted)">${esc(ppmDauerText(x))} · ${teile.length} von ${PPM_EXP_TEILE.length} Teilen${sw?` · Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}`:""}</small></div>
+   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}
+   <button type="button" class="ppm-btn primaer" data-ppm="oeffnen" data-id="${esc(x.id)}">Einheit öffnen</button>
+   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(x.id)}" title="Einheit bearbeiten">✎</button>`:""}</div>`;}).join("");
+ const alt=(m.einheiten||[]).map((e,i)=>{
+  const def=PPM_EINHEITEN[e.typ];if(!def)return"";
+  const sw=sw12ById(e.woche);
+  return`<div class="ppm-zeile"><span style="font-size:26px">${def.icon}</span><div style="flex:1;min-width:200px"><b>${esc(def.name)}</b><br><small style="color:var(--muted)">${esc(def.text)}${sw?` · Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}`:""}</small></div>
+   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}
+   <button type="button" class="ppm-btn primaer" data-ppm="experiment">${lehrer?"Stunde öffnen":done?"Stunde wiederholen":"Stunde starten"}</button>
+   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="einheit-weg" data-id="${esc(m.id)}" data-i="${i}" title="Einheit entfernen">✕</button>`:""}</div>`;}).join("");
+ const ms=ph&&ph.meilensteine&&ph.meilensteine.length?`<h3>Meilensteine im Team</h3><ol style="margin:4px 0 0 18px;line-height:1.55">${ph.meilensteine.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:"";
+ return`${ppmKopf(m)}
+ <div class="ppm-box"><h2>Projekt</h2>${ph&&ph.auftrag?`<p>${esc(ph.auftrag.titel)}</p>`:`<p>Projekt zu Lernbereich ${m.lb}.</p>`}${ms}
+  <div style="margin-top:12px"><button type="button" class="ppm-btn primaer" data-ppm="projekt-oeffnen" data-lb="${m.lb}">Zum Projekt: Teams und Meilensteine →</button></div></div>
+ <div class="ppm-box"><h2>Einheiten im Projekt</h2>
+  <p style="color:var(--muted);font-size:13px">Einheiten sind kleine Bausteine, die du immer wieder zwischendurch einfügen kannst. Sie zählen zur Projektzeit.</p>
+  ${eigZeilen}${alt}${!eig.length&&!alt?`<p class="ppm-leer">Noch keine Einheit eingefügt.</p>`:""}
+  ${lehrer?`<div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="einheit-neu" data-id="${esc(m.id)}">＋ Experiment-Einheit einfügen</button></div>`:""}</div>
+ ${footer()}`;
+}
+// ---- K-Prim-Test ----
+async function ppmKprimSeite(m){
+ const d=await ladeCheckoutDaten();const lehrer=isTeacher();
+ const c=(d.checkouts||[]).find(x=>x.id===m.checkoutId);
+ let karte=`<p class="ppm-leer">${lehrer?"Noch kein Check-out verknüpft. Lege einen an oder verknüpfe einen vorhandenen über „Modul bearbeiten“.":"Deine Lehrkraft hat noch keinen Test freigeschaltet."}</p>`;
+ if(c){
+  const mein=d.meineAbgaben&&d.meineAbgaben[c.id];
+  const live=c.status==="live",beendet=c.status==="beendet";
+  karte=`<div class="ppm-zeile"><span style="font-size:26px">🏁</span><div style="flex:1;min-width:200px"><b>${esc(c.titel||"Check-out")}</b><br><small style="color:var(--muted)">${esc(c.datum||"")} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben · Status: ${esc(c.status||"Entwurf")}</small></div>
+   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="druck" data-id="${esc(c.id)}">🖨 Test ausdrucken</button><button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="druck-l" data-id="${esc(c.id)}">🖨 Test mit Lösung</button><button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="editor" data-id="${esc(c.id)}">Bearbeiten</button>${live?`<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="monitor" data-id="${esc(c.id)}">Live-Übersicht</button>`:""}`
+    :(live&&!(mein&&mein.abgegeben)?`<button type="button" class="ppm-btn primaer" data-ppm="co" data-aktion="test" data-id="${esc(c.id)}">Test starten</button>`:(mein&&mein.ausgewertet?`<button type="button" class="ppm-btn primaer" data-ppm="co" data-aktion="ergebnis" data-id="${esc(c.id)}">Mein Ergebnis</button>`:`<span class="ppm-status">${beendet?"beendet":"noch nicht freigeschaltet"}</span>`))}</div>`;
+ }
+ return`${ppmKopf(m,"",lehrer?`<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="neu">＋ Neuen Check-out anlegen</button>`:"")}
+ <div class="ppm-box"><h2>Check-Out-Wochentest</h2><p>Der Test hat <b>2 Fallvignetten mit je 2 K-Prim-Aufgaben</b> (4 Aufgaben mit je 4 Aussagen, zusammen 16 Bewertungseinheiten). Du entscheidest bei jeder Aussage, ob sie richtig oder falsch ist. Die Bepunktung (BE und Notenpunkte) steht oben im Test, die Auswertung kommt automatisch.</p>${karte}</div>
+ ${checkoutLiveBannerHTML(d)}${footer()}`;
+}
+// ---- Unterrichtsstunde ----
+// Aufbau: Name der Stunde · Digitale Tafel (eingeblendet, zur Orientierung) · Material
+// (PDF, Film, Audio, Bild, Link) · Check-out mit offenen Fragen und Haken „fertig“.
+function ppmMaterialHTML(x,i,m,lehrer){
+ const typ=PPM_MAT_INFO[x.typ]?x.typ:"link",info=PPM_MAT_INFO[typ];
+ let vorschau="";
+ if(typ==="bild")vorschau=`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer"><img src="${esc(x.url)}" alt="${esc(x.titel||x.name||"Bild")}" style="max-width:100%;max-height:320px;border-radius:10px;margin-top:8px;display:block"></a>`;
+ if(typ==="video")vorschau=`<video controls preload="metadata" src="${esc(x.url)}" style="width:100%;max-height:360px;border-radius:10px;margin-top:8px;background:#000"></video>`;
+ if(typ==="audio")vorschau=`<audio controls preload="metadata" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>`;
+ return`<div class="ppm-mat" style="flex-wrap:wrap"><span style="font-size:22px">${info[0]}</span><div style="flex:1;min-width:160px"><b>${esc(x.titel||x.name||"Material")}</b><br><small style="color:var(--muted)">${info[1]}</small></div>
+  <a class="ppm-btn klein" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">Öffnen</a>${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="mat-weg" data-id="${esc(m.id)}" data-i="${i}" title="Entfernen">✕</button>`:""}
+  ${vorschau?`<div style="flex-basis:100%">${vorschau}</div>`:""}</div>`;
+}
+async function ppmStundeSeite(m){
+ const lehrer=isTeacher(),P=PP12_PHASEN[m.phase||2];
+ const mat=m.material||[],fr=m.fragen||[];
+ const mein=PPM.meine.stunde[m.id]||{};
+ const schritte=`<div class="ppm-phasen">${[1,2,3].map(n=>`<div class="ppm-ph${n===(m.phase||2)?" an":""}"><span>${n}</span>${esc(PP12_PHASEN[n].schueler)}</div>`).join("")}</div>`;
+ // Digitale Tafel direkt auf der Seite einblenden
+ let tafel="";
+ if(m.tafelId){
+  const vorher=activeWhiteboardId;
+  try{
+   activeWhiteboardId=m.tafelId;
+   const html=await renderWhiteboardBoard();
+   if(html&&html.indexOf('id="wbStage"')>-1){
+    tafel=`<div class="ppm-tafel">${html}</div>
+     <div class="ppm-zeile" style="border:0;padding-bottom:0"><button type="button" class="ppm-btn klein" data-ppm="tafel" data-id="${esc(m.tafelId)}">↗ Tafel im Vollbild öffnen</button></div>`;
+    window.__ppmNachRender=()=>{if($("wbStage"))initWhiteboardBoard(m.tafelId);};
+   }
+  }catch(e){console.error("Tafel einbetten:",e);}
+  activeWhiteboardId=vorher;
+  if(!tafel)tafel=`<p class="ppm-leer">Die Tafel konnte nicht geladen werden.</p><button type="button" class="ppm-btn primaer" data-ppm="tafel" data-id="${esc(m.tafelId)}">🖥 Digitale Tafel öffnen</button>`;
+ }else tafel=lehrer?`<button type="button" class="ppm-btn primaer" data-ppm="tafel-neu" data-id="${esc(m.id)}">＋ Digitale Tafel anlegen</button>`:`<span class="ppm-leer">Die Tafel wird von deiner Lehrkraft vorbereitet.</span>`;
+ const matListe=mat.map((x,i)=>ppmMaterialHTML(x,i,m,lehrer)).join("");
+ let check="";
+ if(lehrer){
+  check=`<div id="ppmFragenEdit">${fr.map((q,i)=>`<div class="ppm-frage"><b>Frage ${i+1}</b><textarea data-ppm-frage="${i}" placeholder="Offene Frage">${esc(q.frage||"")}</textarea><textarea data-ppm-loesung="${i}" placeholder="Lösungsantwort (Musterlösung)" style="margin-top:6px">${esc(q.loesung||"")}</textarea><button type="button" class="ppm-btn klein" data-ppm="frage-weg" data-i="${i}" style="margin-top:6px">Frage entfernen</button></div>`).join("")||`<p class="ppm-leer">Noch keine Frage.</p>`}</div>
+   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="frage-neu" data-id="${esc(m.id)}">＋ Frage</button><button type="button" class="ppm-btn primaer" data-ppm="fragen-speichern" data-id="${esc(m.id)}">Fragen speichern</button><button type="button" class="ppm-btn" data-ppm="antworten-ansehen" data-id="${esc(m.id)}">Antworten der Klasse ansehen</button></div>`;
+ }else{
+  check=(fr.length?fr.map((q,i)=>{
+   const gezeigt=(mein.gezeigt||[])[i],bew=(mein.bewertung||[])[i];
+   return`<div class="ppm-frage"><b>${i+1}. ${esc(q.frage)}</b>
+    <textarea data-ppm-antwort="${i}" placeholder="Deine Antwort in eigenen Worten …"${gezeigt?" readonly":""}>${esc((mein.antworten||[])[i]||"")}</textarea>
+    ${gezeigt?`<div class="ppm-loesung"><b>Lösung:</b><br>${esc(q.loesung||"")}</div>
+     <div class="ppm-bew"><span style="align-self:center;font-size:12px">Meine Antwort war:</span>${[["ja","passt"],["teils","teilweise"],["nein","noch nicht"]].map(([k,t])=>`<button type="button" class="${bew===k?"an":""}" data-ppm="bewerten" data-id="${esc(m.id)}" data-i="${i}" data-k="${k}">${t}</button>`).join("")}</div>`
+     :`<div style="margin-top:8px"><button type="button" class="ppm-btn" data-ppm="loesung" data-id="${esc(m.id)}" data-i="${i}">Lösung anzeigen</button></div>`}</div>`;
+  }).join(""):`<p class="ppm-leer">Zu dieser Stunde gibt es keine Check-out-Frage.</p>`)
+  +`<button type="button" class="ppm-fertig${mein.fertig?" an":""}" data-ppm="fertig" data-id="${esc(m.id)}" aria-pressed="${mein.fertig?"true":"false"}"><span class="ppm-haken">${mein.fertig?"✓":""}</span>${mein.fertig?"Ich bin fertig – Check-out abgehakt":"Ich bin mit dem Check-out fertig"}</button>`;
+ }
+ return`${ppmKopf(m,schritte)}
+ ${lehrer?`<div class="ppm-box"><h2>Name der Stunde</h2><div class="ppm-zeile" style="border:0"><input id="ppmStundeTitel" maxlength="120" value="${esc(m.titel||"")}" placeholder="z. B. Gegenstand der Psychologie" style="flex:1;min-width:220px;min-height:42px;padding:0 12px;border:1px solid var(--line);border-radius:10px;font:inherit"><button type="button" class="ppm-btn primaer" data-ppm="stunde-name" data-id="${esc(m.id)}">Name speichern</button></div></div>`:""}
+ <div class="ppm-box"><h2>Digitale Tafel</h2><p style="color:var(--muted);font-size:13px">Zur Orientierung: Hier läuft die Stunde mit Impulsen, Aufgaben und Werkzeugen.</p>${tafel}</div>
+ <div class="ppm-box"><h2>Material</h2>${matListe||`<p class="ppm-leer">Noch kein Material.</p>`}
+  ${lehrer?`<div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="mat-datei" data-id="${esc(m.id)}">＋ Datei hochladen (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-ppm="mat-link" data-id="${esc(m.id)}">＋ Link oder Webseite</button><input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div><p style="color:var(--muted);font-size:12px;margin:0">Dateien bis 15 MB. Größere Filme am besten als Link (z. B. Mediathek) einfügen.</p>`:""}</div>
+ <div class="ppm-box"><h2>Check-out</h2>${lehrer?`<p style="color:var(--muted);font-size:13px">Offene Frage mit Lösung. Die Schüler:innen schreiben ihre Antwort, lassen sich dann die Lösung anzeigen und setzen am Ende den Haken „fertig“.</p>`:`<p style="color:var(--muted);font-size:13px">Schreibe zuerst deine Antwort. Danach lässt du dir die Lösung anzeigen, vergleichst und setzt unten den Haken.</p>`}${check}</div>
+ ${lehrer?`<div class="ppm-box"><h2>Für dich als Lehrkraft</h2><p><b>Phase ${P.kurz} · ${esc(P.name)}</b></p><p>${esc(P.was)}</p><p><b>Deine Rolle:</b> ${esc(P.rolle)}</p></div>`:""}
+ ${footer()}`;
+}
+// ---- Abschlussprüfungstraining ----
+// Vier Schritte: ① Frage aus der Abschlussprüfung · ② Relevanter Inhalt · ③ Bearbeitung durch die Schüler:innen · ④ Vergleich mit der Lösung.
+// Lehrkraft gestaltet ①, ② und ④ direkt auf dieser Seite. Antworten liegen in ppStundenAntworten (Felder aptAntwort, aptAbgegeben, aptBewertung).
+function ppmAptDateiHTML(d,m,feld,lehrer){
+ if(!d||!d.url)return"";
+ return`<div style="margin:8px 0">${dateiEmbedHTML(d.url,d.name)}${lehrer?` <button type="button" class="ppm-btn klein" data-ppm="apt-datei-weg" data-id="${esc(m.id)}" data-feld="${feld}">Datei entfernen</button>`:""}</div>`;
+}
+async function ppmAptSeite(m){
+ const lehrer=isTeacher(),mein=PPM.meine.stunde[m.id]||{};
+ const mat=m.material||[];
+ const abgegeben=!!mein.aptAbgegeben;
+ const nr=(n,t,sub)=>`<div style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span class="ppm-snr">${n}</span><div><h2 style="margin:0">${t}</h2>${sub?`<small style="color:var(--muted)">${sub}</small>`:""}</div></div>`;
+ const speichern=`<div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" data-ppm="apt-speichern" data-id="${esc(m.id)}">Speichern</button></div>`;
+ const kopfInfo=`<div class="ppm-phasen">${[["1","Prüfungsfrage"],["2","Relevanter Inhalt"],["3","Meine Bearbeitung"],["4","Vergleich mit Lösung"]].map(([n,t],i)=>`<div class="ppm-ph${lehrer||i<2||(i===2)||(i===3&&abgegeben)?" an":""}"><span>${n}</span>${t}</div>`).join("")}</div>`;
+ // ① Frage
+ const s1=lehrer?`${nr(1,"Frage aus der Abschlussprüfung","Text und/oder Datei (PDF, Bild).")}
+   <textarea id="aptFrage" rows="6" style="width:100%;font:inherit" placeholder="Prüfungsfrage einfügen …">${esc(m.frage||"")}</textarea>
+   ${ppmAptDateiHTML(m.frageDatei,m,"frage",true)}
+   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-datei" data-id="${esc(m.id)}" data-feld="frage">＋ Datei zur Frage</button></div>${speichern}`
+  :`${nr(1,"Frage aus der Abschlussprüfung")}${m.frage||(m.frageDatei&&m.frageDatei.url)?`${m.frage?`<p style="white-space:pre-wrap;font-size:15px;line-height:1.55">${esc(m.frage)}</p>`:""}${ppmAptDateiHTML(m.frageDatei,m,"frage",false)}`:`<p class="ppm-leer">Deine Lehrkraft stellt die Frage hier bereit.</p>`}`;
+ // ② Relevanter Inhalt
+ const s2=lehrer?`${nr(2,"Relevanter Inhalt","Was Schüler:innen wissen müssen, um die Frage zu beantworten. Mit „- “ entstehen Aufzählungen, mit **fett** Hervorhebungen.")}
+   <textarea id="aptInhalt" rows="7" style="width:100%;font:inherit" placeholder="Wichtige Begriffe, Modelle, Merkmale …">${esc(m.inhalt||"")}</textarea>
+   ${mat.map((x,i)=>ppmMaterialHTML(x,i,m,true)).join("")}
+   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="mat-datei" data-id="${esc(m.id)}">＋ Datei (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-ppm="mat-link" data-id="${esc(m.id)}">＋ Link</button><input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div>${speichern}`
+  :`${nr(2,"Relevanter Inhalt")}${m.inhalt?`<div style="line-height:1.55">${ppmMd(m.inhalt)}</div>`:""}${mat.map((x,i)=>ppmMaterialHTML(x,i,m,false)).join("")}${!m.inhalt&&!mat.length?`<p class="ppm-leer">Noch kein Inhalt hinterlegt.</p>`:""}`;
+ // ③ Bearbeitung
+ const s3=lehrer?`${nr(3,"Bearbeitung durch die Schüler:innen","So sehen es die Schüler:innen: ein Antwortfeld, dann „Abgeben und vergleichen“.")}
+   <textarea rows="4" disabled placeholder="Hier schreiben die Schüler:innen ihre Antwort …" style="width:100%;font:inherit;opacity:.7"></textarea>
+   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-antworten" data-id="${esc(m.id)}">Antworten der Klasse ansehen</button></div>`
+  :`${nr(3,"Meine Bearbeitung","Schreibe deine Antwort auf die Prüfungsfrage, bevor du die Lösung siehst.")}
+   <textarea id="aptAntwort" rows="10" style="width:100%;font:inherit"${abgegeben?" readonly":""} placeholder="Deine Antwort …">${esc(mein.aptAntwort||"")}</textarea>
+   <div class="ppm-zeile" style="border:0">${abgegeben?`<button type="button" class="ppm-btn" data-ppm="apt-wieder" data-id="${esc(m.id)}">Antwort überarbeiten</button>`
+    :`<button type="button" class="ppm-btn" data-ppm="apt-zwischen" data-id="${esc(m.id)}">Zwischenspeichern</button><button type="button" class="ppm-btn primaer" data-ppm="apt-abgeben" data-id="${esc(m.id)}">Abgeben und mit der Lösung vergleichen</button>`}</div>`;
+ // ④ Vergleich
+ const bew=mein.aptBewertung;
+ const loesungBox=`<div class="ppm-loesung"><b>Lösung</b>${m.loesung?`<div style="line-height:1.5">${ppmMd(m.loesung)}</div>`:`<p class="ppm-leer">Noch keine Lösung hinterlegt.</p>`}${ppmAptDateiHTML(m.loesungDatei,m,"loesung",lehrer)}</div>`;
+ const s4=lehrer?`${nr(4,"Vergleich mit der Lösung","Wird erst nach dem Abgeben sichtbar.")}
+   <textarea id="aptLoesung" rows="7" style="width:100%;font:inherit" placeholder="Musterlösung / Erwartungshorizont …">${esc(m.loesung||"")}</textarea>
+   ${ppmAptDateiHTML(m.loesungDatei,m,"loesung",true)}
+   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-datei" data-id="${esc(m.id)}" data-feld="loesung">＋ Datei zur Lösung</button></div>${speichern}`
+  :`${nr(4,"Vergleich mit der Lösung")}${abgegeben?`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+     <div class="ppm-frage" style="margin:0"><b>Meine Antwort</b><p style="white-space:pre-wrap;line-height:1.5">${esc(mein.aptAntwort||"–")}</p></div>${loesungBox}</div>
+    <div class="ppm-bew"><span style="align-self:center;font-size:12px">Meine Antwort stimmt mit der Lösung überein:</span>${[["ja","ganz"],["teils","teilweise"],["nein","noch nicht"]].map(([k,t])=>`<button type="button" class="${bew===k?"an":""}" data-ppm="apt-bewerten" data-id="${esc(m.id)}" data-k="${k}">${t}</button>`).join("")}</div>`
+   :`<p class="ppm-leer">Die Lösung erscheint, sobald du deine Bearbeitung abgegeben hast.</p>`}`;
+ const alt=(()=>{const ph=PROJEKT_PHASEN.find(x=>x.lbNum===Number(m.lb));return ph?`<div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn klein" data-ppm="apt-alt" data-lb="${m.lb}">Bisherige Ansicht: Prüfungsinhalte mit je 4 Schritten →</button></div>`:"";})();
+ return`${ppmKopf(m,kopfInfo)}
+ <div class="ppm-box">${s1}</div><div class="ppm-box">${s2}</div><div class="ppm-box">${s3}</div><div class="ppm-box">${s4}</div>${alt}${footer()}`;
+}
+async function ppmAptAntwortenDialog(m){
+ let docs=[];
+ try{docs=(await getDocs(query(collection(db,"ppStundenAntworten"),where("modulId","==",m.id)))).docs.map(d=>d.data()).filter(d=>d.aptAntwort||d.aptAbgegeben);}catch(e){ppmFehler(e,"Antworten konnten nicht geladen werden");return;}
+ const bt={ja:"ganz",teils:"teilweise",nein:"noch nicht"};
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">ABSCHLUSSPRÜFUNGSTRAINING</div><h2>Antworten der Klasse</h2>
+  <p>${docs.length} Bearbeitung${docs.length===1?"":"en"}, ${docs.filter(d=>d.aptAbgegeben).length} abgegeben.</p>
+  ${docs.map(d=>`<details style="margin:8px 0"><summary><b>${esc(d.name||"Schüler:in")}</b>${d.aptAbgegeben?" · abgegeben":" · in Arbeit"}${d.aptBewertung?" · Selbsteinschätzung: "+bt[d.aptBewertung]:""}</summary><p style="white-space:pre-wrap">${esc(d.aptAntwort||"–")}</p></details>`).join("")||`<p class="ppm-leer">Noch keine Antworten.</p>`}`);
+}
+// ---- Selbstlernkurs ----
+function ppmZuordnenHTML(s,f,gesperrt){
+ const antw=((f.zuordnung||{})[s.id])||{};
+ return`<p>${esc(s.frage||"")}</p><div class="ppm-zu">${s.items.map((it,i)=>{
+  const a=antw[i];const stat=a===undefined?"":(a===it.k?"richtig":"falsch");
+  return`<div class="ppm-zui ${stat}"><span style="flex:1;min-width:200px">${esc(it.t)}</span>
+   ${s.kategorien.map((k,j)=>`<button type="button" class="ppm-btn klein${a===j?" primaer":""}" data-ppm="zuordnen" data-s="${esc(s.id)}" data-i="${i}" data-k="${j}"${gesperrt?" disabled":""}>${esc(k)}</button>`).join("")}
+   ${stat==="richtig"?`<span>✓</span>`:stat==="falsch"?`<span>✗</span>`:""}
+   ${stat?`<small style="flex-basis:100%;color:var(--muted)">${esc(it.e||"")}</small>`:""}</div>`;
+ }).join("")}</div>`;
+}
+function ppmSchrittFertig(s,f){
+ if(!f)return false;
+ return !!(f.erledigt&&f.erledigt[s.id]);
+}
+async function ppmKursSeite(m){
+ const lehrer=isTeacher(),schritte=ppmKursSchritte(m),c=ppmFarbe(m);
+ let f=PPM.meine.kurs[m.id]||{erledigt:{},zuordnung:{},antworten:{}};
+ const exp=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
+ const zaehl=schritte.filter(s=>s.typ!=="abschluss");
+ const fertigN=zaehl.filter(s=>ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt)).length;
+ const proz=zaehl.length?Math.round(fertigN/zaehl.length*100):0;
+ let offenIdx=schritte.findIndex(s=>s.typ!=="abschluss"&&!(ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt)));
+ if(offenIdx<0)offenIdx=schritte.length-1;
+ const teile=schritte.map((s,i)=>{
+  const fertig=s.typ==="abschluss"?(offenIdx===schritte.length-1&&fertigN===zaehl.length):(ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt));
+  const gesperrt=!lehrer&&i>offenIdx;
+  const offen=lehrer||i===offenIdx;
+  let body="";
+  if(offen){
+   if(s.typ==="ziele")body=`<ul>${(s.items||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
+   else if(s.typ==="text")body=ppmMd(s.text);
+   else if(s.typ==="zuordnen")body=ppmZuordnenHTML(s,f,lehrer);
+   else if(s.typ==="experiment")body=`<p>${esc(s.text||"")}</p><button type="button" class="ppm-btn primaer" data-ppm="experiment">${exp.experimentErledigt?"Aufgabe wiederholen":"Interaktive Aufgabe starten"}</button>`;
+   else if(s.typ==="link")body=`<p>${esc(s.text||"")}</p><a class="ppm-btn primaer" href="${esc(s.url||"#")}" target="_blank" rel="noopener noreferrer">Öffnen</a>`;
+   else if(s.typ==="selbsttest")body=(s.fragen||[]).map((q,j)=>{
+    const g=((f.gezeigt||{})[s.id]||[])[j],a=((f.antworten||{})[s.id]||[])[j]||"";
+    return`<div class="ppm-frage"><b>${j+1}. ${esc(q.frage)}</b><textarea data-ppm-kursantwort="${esc(s.id)}" data-j="${j}" placeholder="Deine Antwort …"${g||lehrer?" readonly":""}>${esc(a)}</textarea>
+     ${g||lehrer?`<div class="ppm-loesung"><b>Lösungsantwort:</b><br>${esc(q.loesung||"")}</div>`:`<div style="margin-top:8px"><button type="button" class="ppm-btn" data-ppm="kurs-loesung" data-s="${esc(s.id)}" data-j="${j}">Lösung zeigen</button></div>`}</div>`;}).join("");
+   else if(s.typ==="abschluss")body=`<p>${esc(s.text||"")}</p>`;
+   // Erledigt-Knopf nur für Lesestationen
+   if(!lehrer&&["ziele","text","link"].includes(s.typ)&&!fertig)body+=`<div style="margin-top:12px"><button type="button" class="ppm-btn primaer" data-ppm="schritt-fertig" data-s="${esc(s.id)}">Erledigt ✓ – weiter</button></div>`;
+  }
+  const status=fertig?"✓":String(i+1);
+  return`<div class="ppm-schritt${fertig?" fertig":""}${gesperrt?" gesperrt":""}"><div class="ppm-skopf"><span class="ppm-snr">${status}</span><div style="flex:1"><b>${esc(s.titel||"Schritt")}</b>${gesperrt?`<br><small style="color:var(--muted)">Schließe zuerst den vorherigen Schritt ab.</small>`:""}</div></div>${offen?`<div class="ppm-sbody">${body}</div>`:""}</div>`;
+ }).join("");
+ const kursTitel=(PPM_KURSE[m.kursId]||{}).titel||"Eigener Kurs";
+ let lehrerBox="";
+ if(lehrer){
+  lehrerBox=`<div class="ppm-box"><h2>Für dich als Lehrkraft</h2><p>Dieser Kurs läuft ohne dich: Die Schüler:innen arbeiten Schritt für Schritt, jeder Schritt öffnet sich erst, wenn der vorherige erledigt ist. Du siehst hier alle Schritte offen.</p>
+   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="kurs-stand" data-id="${esc(m.id)}">Stand der Klasse ansehen</button>${m.kursId==="eigen"?`<button type="button" class="ppm-btn" data-ppm="kurs-bearbeiten" data-id="${esc(m.id)}">Kurs bearbeiten</button>`:`<button type="button" class="ppm-btn" data-ppm="kurs-kopie" data-id="${esc(m.id)}">Als eigenen Kurs kopieren und anpassen</button>`}</div>
+   ${m.kursId==="psych-gegenstand"?`<p style="font-size:12px;color:var(--muted)">Ausarbeitung, Zuordnungsaufgabe und Selbsttest sind von Claude erstellt. Bitte fachlich prüfen.</p>`:""}</div>`;
+ }
+ return`${ppmKopf(m,`<p style="color:var(--muted)">${esc(kursTitel)}</p>`)}
+ ${lehrer?"":`<div class="ppm-box"><b>Dein Fortschritt: ${fertigN} von ${zaehl.length} Schritten</b><div class="ppm-bar"><i style="width:${proz}%"></i></div><small style="color:var(--muted)">Du arbeitest den Kurs selbstständig von oben nach unten durch.</small></div>`}
+ ${lehrerBox}${teile}${footer()}`;
+}
+
+// ---- Schreiben (Schüler:in) ----
+async function ppmStundeSchreiben(m,teil){
+ const alt=PPM.meine.stunde[m.id]||{modulId:m.id,uid:currentUser.uid,name:ppmName(),antworten:[],gezeigt:[],bewertung:[]};
+ const neu={...alt,...teil,modulId:m.id,uid:currentUser.uid,name:ppmName(),updatedAt:serverTimestamp()};
+ await setDoc(doc(db,"ppStundenAntworten",ppmDocId(m)),neu);
+ PPM.meine.stunde[m.id]=neu;
+}
+async function ppmKursSchreiben(m,fn){
+ const alt=PPM.meine.kurs[m.id]||{modulId:m.id,uid:currentUser.uid,name:ppmName(),erledigt:{},zuordnung:{},antworten:{},gezeigt:{}};
+ const neu=JSON.parse(JSON.stringify({...alt,erledigt:alt.erledigt||{},zuordnung:alt.zuordnung||{},antworten:alt.antworten||{},gezeigt:alt.gezeigt||{}}));
+ fn(neu);neu.modulId=m.id;neu.uid=currentUser.uid;neu.name=ppmName();neu.updatedAt=serverTimestamp();
+ await setDoc(doc(db,"ppKursFortschritt",ppmDocId(m)),neu);
+ PPM.meine.kurs[m.id]=neu;
+}
+function ppmArr(a,n){const r=Array.isArray(a)?[...a]:[];while(r.length<n)r.push(null);return r;}
+
+// ---- Klick- und Eingabebehandlung (delegiert) ----
+async function ppmKlick(e){
+ const b=e.target.closest&&e.target.closest("[data-ppm]");
+ if(!b)return;
+ const aktion=b.dataset.ppm,id=b.dataset.id,m=id?ppmById(id):(activePPModul?ppmById(activePPModul):null);
+ if(b.classList.contains("ppm-karte")&&e.target.closest(".ppm-edit"))return;
+ const refresh=async()=>{await render();};
+ try{
+  if(aktion==="oeffnen"){ppmOeffnen(id);return;}
+  if(aktion==="plan"){activePPModul=null;await refresh();return;}
+  if(aktion==="neu"){if(!isTeacher())return;if(!b.dataset.typ){ppmTypWahl(b.dataset.woche||null);return;}await ppmDialog(null,b.dataset.typ,b.dataset.woche||null);return;}
+  if(aktion==="bearbeiten"){e.stopPropagation();if(!isTeacher())return;await ppmDialog(id);return;}
+  if(aktion==="reihenfolge"){e.stopPropagation();if(!isTeacher()||!m)return;await ppmReihenfolge(m,Number(b.dataset.d)||0);return;}
+  if(aktion==="verschieben"){e.stopPropagation();if(!isTeacher()||!m)return;await ppmVerschieben(m,Number(b.dataset.d)||0);return;}
+  if(aktion==="standard"){await ppmStandardplan();return;}
+  if(aktion==="experiment"){openExperimentStunde(m&&m.modul==="experiment"?ppmExpTeile(m):null);return;}
+  if(aktion==="ea-start"){window.__eaRueck=async()=>{await render();};openEinarbeitung(b.dataset.ea);return;}
+  if(aktion==="ea-stand"){await ppmEaStandDialog(b.dataset.ea);return;}
+  if(aktion==="projekt-oeffnen"){const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(b.dataset.lb));if(ph){activePPModul=null;activePhaseDetail=ph.id+":projekt";await refresh();}return;}
+  if(aktion==="lb-tafel"&&m){await lbModulTafel(m);await refresh();return;}
+  if(aktion==="lb-lern"&&m){await lbModulLern(m);return;}
+  if(aktion==="lb-zuordnen"&&m){await lbZuordnenDialog("m",m.id);return;}
+  if(aktion==="lb-loesen"&&m){lbLoesenDialog("m",m.id);return;}
+  if(aktion==="lb-wb"&&m){await lbModulWb(m);return;}
+  if(aktion==="tafel"){openWhiteboard(id);return;}
+  if(aktion==="tafel-neu"&&m){const t=await ppmTafelAnlegen(m.titel);await updateDoc(doc(db,"ppModule",m.id),{tafelId:t});await ppmLaden(true);openWhiteboard(t);return;}
+  if(aktion==="einheit-neu"&&m){await ppmDialog(null,"experiment",null,{projektId:m.id});return;}
+  if(aktion==="einheit-weg"&&m){const l=[...(m.einheiten||[])];l.splice(Number(b.dataset.i),1);await updateDoc(doc(db,"ppModule",m.id),{einheiten:l});await ppmLaden(true);await refresh();return;}
+  if(aktion==="co"){
+   const a=b.dataset.aktion;
+   if(a==="neu")openCheckoutEditor();
+   else if(a==="editor")openCheckoutEditor(id);
+   else if(a==="monitor")openCheckoutMonitor(id);
+   else if(a==="druck")coTestDruckId(id);
+   else if(a==="druck-l")coTestDruckId(id,true);
+   else if(a==="test")openCheckoutTest(id);
+   else if(a==="ergebnis")openCheckoutMeinErgebnis(id);
+   return;
+  }
+  // --- Stunde ---
+  if(aktion==="mat-datei"){const inp=$("ppmDatei");inp.click();inp.onchange=async ev=>{const f=ev.target.files&&ev.target.files[0];if(!f)return;
+    try{toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(f,`ppMaterial/${m.id}`),typ=ppmDateiTyp(f);
+     await updateDoc(doc(db,"ppModule",m.id),{material:[...(m.material||[]),{typ,titel:f.name.replace(/\.[a-z0-9]{2,5}$/i,""),name:f.name,url:up.url}]});await ppmLaden(true);await refresh();toast("Material hinzugefügt.");}
+    catch(err){toast(err&&err.message?err.message:"Upload nicht möglich.");}
+    ev.target.value="";};return;}
+  if(aktion==="mat-link"){
+   modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">MATERIAL</div><h2>Webseite oder Link hinzufügen</h2><div class="form"><label>Adresse<input id="ppmUrl" placeholder="https://…"></label><label>Titel<input id="ppmUrlTitel" maxlength="100"></label><div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmUrlOk">Hinzufügen</button></div></div>`);
+   $("ppmUrlOk").addEventListener("click",async()=>{
+    const u=wbSichereUrl($("ppmUrl").value);if(!u){toast("Das ist keine gültige Internetadresse.");return}
+    await updateDoc(doc(db,"ppModule",m.id),{material:[...(m.material||[]),{typ:"link",titel:$("ppmUrlTitel").value.trim()||u.replace(/^https?:\/\//,""),url:u}]});closeModal();await ppmLaden(true);await refresh();});
+   return;}
+  if(aktion==="mat-weg"&&m){const l=[...(m.material||[])];const weg=l.splice(Number(b.dataset.i),1)[0];if(weg&&weg.typ!=="link")deleteCampusDatei(weg.url);await updateDoc(doc(db,"ppModule",m.id),{material:l});await ppmLaden(true);await refresh();return;}
+  if(aktion==="apt-speichern"&&m&&isTeacher()){
+   const t={updatedAt:serverTimestamp()};
+   if($("aptFrage"))t.frage=$("aptFrage").value.trim();
+   if($("aptInhalt"))t.inhalt=$("aptInhalt").value.trim();
+   if($("aptLoesung"))t.loesung=$("aptLoesung").value.trim();
+   await updateDoc(doc(db,"ppModule",m.id),t);await ppmLaden(true);await refresh();toast("Gespeichert.");return;}
+  if(aktion==="apt-datei"&&m&&isTeacher()){
+   const feld=b.dataset.feld,inp=document.createElement("input");inp.type="file";inp.accept="application/pdf,.pdf,image/*";
+   inp.onchange=async()=>{const f=inp.files&&inp.files[0];if(!f)return;
+    try{toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(f,`ppMaterial/${m.id}`);
+     if(m[feld+"Datei"]&&m[feld+"Datei"].url)deleteCampusDatei(m[feld+"Datei"].url);
+     await updateDoc(doc(db,"ppModule",m.id),{[feld+"Datei"]:{url:up.url,name:f.name}});await ppmLaden(true);await refresh();toast("Datei hinzugefügt.");}
+    catch(err){toast(err&&err.message?err.message:"Upload nicht möglich.");}};
+   inp.click();return;}
+  if(aktion==="apt-datei-weg"&&m&&isTeacher()){
+   const feld=b.dataset.feld;if(m[feld+"Datei"]&&m[feld+"Datei"].url)deleteCampusDatei(m[feld+"Datei"].url);
+   await updateDoc(doc(db,"ppModule",m.id),{[feld+"Datei"]:null});await ppmLaden(true);await refresh();return;}
+  if(aktion==="apt-antworten"&&m&&isTeacher()){await ppmAptAntwortenDialog(m);return;}
+  if(aktion==="apt-alt"){const ph=PROJEKT_PHASEN.find(x=>x.lbNum===Number(b.dataset.lb));if(ph){activePPModul=null;activePhaseDetail=ph.id+":apt";await refresh();}return;}
+  if(aktion==="apt-zwischen"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptAntwort:($("aptAntwort")||{}).value||""});toast("Zwischengespeichert.");await refresh();return;}
+  if(aktion==="apt-abgeben"&&m&&!isTeacher()){
+   const t=(($("aptAntwort")||{}).value||"").trim();
+   if(!t){toast("Bitte schreibe zuerst deine Antwort.");return;}
+   await ppmStundeSchreiben(m,{aptAntwort:t,aptAbgegeben:true});await refresh();return;}
+  if(aktion==="apt-wieder"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptAbgegeben:false,aptBewertung:null});await refresh();return;}
+  if(aktion==="apt-bewerten"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptBewertung:b.dataset.k});await refresh();return;}
+  if(aktion==="stunde-name"&&m&&isTeacher()){const t=($("ppmStundeTitel").value||"").trim();if(!t){toast("Bitte einen Namen eingeben.");return;}await updateDoc(doc(db,"ppModule",m.id),{titel:t.slice(0,120)});await ppmLaden(true);await refresh();toast("Name gespeichert.");return;}
+  if(aktion==="fertig"&&m&&!isTeacher()){
+   const n=(m.fragen||[]).length,alt=PPM.meine.stunde[m.id]||{},antw=ppmArr(alt.antworten,n);
+   document.querySelectorAll("[data-ppm-antwort]").forEach(t=>{antw[Number(t.dataset.ppmAntwort)]=t.value;});
+   await ppmStundeSchreiben(m,{antworten:antw.map(x=>x||""),gezeigt:ppmArr(alt.gezeigt,n).map(x=>!!x),bewertung:ppmArr(alt.bewertung,n).map(x=>x||null),fertig:!alt.fertig});
+   await refresh();return;}
+  if(aktion==="frage-neu"&&m){ppmFragenLesen(m);const l=[...(m.fragen||[]),{frage:"",loesung:""}];m.fragen=l;await refresh();return;}
+  if(aktion==="frage-weg"&&m){ppmFragenLesen(m);const l=[...(m.fragen||[])];l.splice(Number(b.dataset.i),1);m.fragen=l;await refresh();return;}
+  if(aktion==="fragen-speichern"&&m){ppmFragenLesen(m);const l=(m.fragen||[]).filter(q=>(q.frage||"").trim());await updateDoc(doc(db,"ppModule",m.id),{fragen:l});await ppmLaden(true);await refresh();toast("Fragen gespeichert.");return;}
+  if(aktion==="antworten-ansehen"&&m){await ppmAntwortenDialog(m);return;}
+  if(aktion==="loesung"&&m&&!isTeacher()){
+   const i=Number(b.dataset.i),n=(m.fragen||[]).length;
+   const antw=ppmArr((PPM.meine.stunde[m.id]||{}).antworten,n),gz=ppmArr((PPM.meine.stunde[m.id]||{}).gezeigt,n),bw=ppmArr((PPM.meine.stunde[m.id]||{}).bewertung,n);
+   document.querySelectorAll("[data-ppm-antwort]").forEach(t=>{antw[Number(t.dataset.ppmAntwort)]=t.value;});
+   gz[i]=true;await ppmStundeSchreiben(m,{antworten:antw.map(x=>x||""),gezeigt:gz.map(x=>!!x),bewertung:bw.map(x=>x||null)});await refresh();return;}
+  if(aktion==="bewerten"&&m&&!isTeacher()){
+   const i=Number(b.dataset.i),n=(m.fragen||[]).length,alt=PPM.meine.stunde[m.id]||{};
+   const bw=ppmArr(alt.bewertung,n);bw[i]=b.dataset.k;
+   await ppmStundeSchreiben(m,{antworten:ppmArr(alt.antworten,n).map(x=>x||""),gezeigt:ppmArr(alt.gezeigt,n).map(x=>!!x),bewertung:bw.map(x=>x||null)});await refresh();return;}
+  // --- Kurs ---
+  if(aktion==="schritt-fertig"&&m){await ppmKursSchreiben(m,d=>{d.erledigt[b.dataset.s]=true;});await refresh();return;}
+  if(aktion==="zuordnen"&&m){
+   const s=ppmKursSchritte(m).find(x=>x.id===b.dataset.s);if(!s)return;
+   await ppmKursSchreiben(m,d=>{d.zuordnung[s.id]=d.zuordnung[s.id]||{};d.zuordnung[s.id][b.dataset.i]=Number(b.dataset.k);
+    const a=d.zuordnung[s.id];if(s.items.every((it,i)=>a[i]===it.k))d.erledigt[s.id]=true;});
+   await refresh();return;}
+  if(aktion==="kurs-loesung"&&m){
+   const s=ppmKursSchritte(m).find(x=>x.id===b.dataset.s);if(!s)return;const j=Number(b.dataset.j);
+   const tas=[...document.querySelectorAll(`[data-ppm-kursantwort="${s.id}"]`)];
+   await ppmKursSchreiben(m,d=>{d.antworten[s.id]=ppmArr(d.antworten[s.id],s.fragen.length);tas.forEach(t=>{d.antworten[s.id][Number(t.dataset.j)]=t.value;});
+    d.gezeigt[s.id]=ppmArr(d.gezeigt[s.id],s.fragen.length);d.gezeigt[s.id][j]=true;
+    if(s.fragen.every((q,k)=>d.gezeigt[s.id][k]))d.erledigt[s.id]=true;});
+   await refresh();return;}
+  if(aktion==="kurs-stand"&&m){await ppmKursStandDialog(m);return;}
+  if(aktion==="kurs-kopie"&&m){
+   if(!confirm("Den Kurs als eigenen Kurs kopieren? Du kannst ihn danach frei bearbeiten."))return;
+   await updateDoc(doc(db,"ppModule",m.id),{kursId:"eigen",schritte:JSON.parse(JSON.stringify(ppmKursSchritte(m)))});await ppmLaden(true);await refresh();toast("Kurs kopiert.");return;}
+  if(aktion==="kurs-bearbeiten"&&m){await ppmKursEditor(m);return;}
+ }catch(err){ppmFehler(err,"Das hat nicht geklappt");}
+}
+function ppmFragenLesen(m){
+ const fr=[...(m.fragen||[])];
+ document.querySelectorAll("[data-ppm-frage]").forEach(t=>{const i=Number(t.dataset.ppmFrage);fr[i]={...(fr[i]||{}),frage:t.value};});
+ document.querySelectorAll("[data-ppm-loesung]").forEach(t=>{const i=Number(t.dataset.ppmLoesung);fr[i]={...(fr[i]||{}),loesung:t.value};});
+ m.fragen=fr;
+}
+function ppmOeffnen(id){
+ const m=ppmById(id);if(!m)return;
+ activePPModul=id;
+ if(location.hash!=="#unterricht-pp")location.hash="#unterricht-pp";else render();
+}
+async function ppmAntwortenDialog(m){
+ let docs=[];
+ try{docs=(await getDocs(query(collection(db,"ppStundenAntworten"),where("modulId","==",m.id)))).docs.map(d=>d.data());}catch(e){ppmFehler(e,"Antworten konnten nicht geladen werden");return;}
+ const fr=m.fragen||[];
+ const stat=fr.map((q,i)=>{const z={ja:0,teils:0,nein:0};docs.forEach(d=>{const k=(d.bewertung||[])[i];if(z[k]!==undefined)z[k]++;});return`<tr><td>${i+1}. ${esc(q.frage)}</td><td>${z.ja}</td><td>${z.teils}</td><td>${z.nein}</td></tr>`;}).join("");
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">CHECK-OUT</div><h2>Antworten der Klasse</h2>
+  <p>${docs.length} Person${docs.length===1?"":"en"} haben geantwortet, ${docs.filter(d=>d.fertig).length} davon haben den Haken „fertig“ gesetzt.</p>
+  ${fr.length?`<table class="noten-table"><thead><tr><th>Frage</th><th>passt</th><th>teilweise</th><th>noch nicht</th></tr></thead><tbody>${stat}</tbody></table>`:""}
+  ${docs.map(d=>`<details style="margin:8px 0"><summary><b>${esc(d.name||"Schüler:in")}</b>${d.fertig?" · fertig ✓":""}</summary>${fr.map((q,i)=>`<p><b>${i+1}.</b> ${esc((d.antworten||[])[i]||"–")}</p>`).join("")}</details>`).join("")}`);
+}
+async function ppmEaStandDialog(id){
+ if(!isTeacher())return;
+ try{
+  const info=await einarbeitungInfo(id),k=await ladeStundeKlasse(id);
+  const zeilen=k.students.map(u=>{const f=k.fs[u.uid],a=f&&f.einarbeitungAufgaben;
+   return`<tr><td>${esc(anzeigeName(u))}</td><td>${f&&f.einarbeitungAbgeschlossen?"✓ abgeschlossen":(f?"begonnen":"–")}</td><td>${a&&a.gesamt?`${a.richtig} von ${a.gesamt}`:"–"}</td></tr>`;}).join("");
+  const fertig=k.students.filter(u=>k.fs[u.uid]&&k.fs[u.uid].einarbeitungAbgeschlossen).length;
+  modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Stand der Klasse</h2>
+   <p>${esc((info&&info.titel)||id)}: ${fertig} von ${k.students.length} haben den Kurs abgeschlossen.</p>
+   <table class="noten-table"><thead><tr><th>Name</th><th>Stand</th><th>Aufgaben richtig</th></tr></thead><tbody>${zeilen}</tbody></table>`);
+ }catch(e){ppmFehler(e,"Stand konnte nicht geladen werden");}
+}
+async function ppmKursStandDialog(m){
+ let docs=[];
+ try{docs=(await getDocs(query(collection(db,"ppKursFortschritt"),where("modulId","==",m.id)))).docs.map(d=>d.data());}catch(e){ppmFehler(e,"Stand konnte nicht geladen werden");return;}
+ const sch=ppmKursSchritte(m).filter(s=>s.typ!=="abschluss");
+ const zeilen=sch.map(s=>`<tr><td>${esc(s.titel)}</td><td>${docs.filter(d=>d.erledigt&&d.erledigt[s.id]).length} von ${docs.length}</td></tr>`).join("");
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Stand der Klasse</h2>
+  <p>${docs.length} Person${docs.length===1?"":"en"} haben begonnen.</p>
+  <table class="noten-table"><thead><tr><th>Schritt</th><th>erledigt</th></tr></thead><tbody>${zeilen}</tbody></table>
+  ${docs.map(d=>{const n=sch.filter(s=>d.erledigt&&d.erledigt[s.id]).length;return`<div class="ppm-zeile"><b style="flex:1">${esc(d.name||"Schüler:in")}</b><span>${n}/${sch.length}</span></div>`;}).join("")}`);
+}
+async function ppmKursEditor(m){
+ const sch=JSON.parse(JSON.stringify(ppmKursSchritte(m)));
+ const zeichne=()=>{
+  $("ppmKe").innerHTML=sch.map((s,i)=>`<div class="ppm-frage"><div class="ppm-zeile" style="padding:0 0 6px"><b style="flex:1">${i+1}. ${esc(s.typ)}</b>
+   <button type="button" class="ppm-btn klein" data-k="hoch" data-i="${i}">↑</button><button type="button" class="ppm-btn klein" data-k="runter" data-i="${i}">↓</button><button type="button" class="ppm-btn klein" data-k="weg" data-i="${i}">✕</button></div>
+   <input data-f="titel" data-i="${i}" value="${esc(s.titel||"")}" placeholder="Titel" style="width:100%;margin-bottom:6px">
+   ${["text","abschluss","link","experiment"].includes(s.typ)?`<textarea data-f="text" data-i="${i}" rows="5" style="width:100%" placeholder="Text (## Überschrift, - Liste, **fett**)">${esc(s.text||"")}</textarea>`:""}
+   ${s.typ==="link"?`<input data-f="url" data-i="${i}" value="${esc(s.url||"")}" placeholder="https://…" style="width:100%;margin-top:6px">`:""}
+   ${s.typ==="selbsttest"?`<textarea data-f="fragen" data-i="${i}" rows="6" style="width:100%" placeholder="Pro Frage zwei Zeilen: Frage | Lösungsantwort">${esc((s.fragen||[]).map(q=>q.frage+" | "+q.loesung).join("\n"))}</textarea>`:""}
+   ${s.typ==="ziele"?`<textarea data-f="items" data-i="${i}" rows="4" style="width:100%" placeholder="Ein Ziel pro Zeile">${esc((s.items||[]).join("\n"))}</textarea>`:""}
+   ${s.typ==="zuordnen"?`<small style="color:var(--muted)">Interaktive Zuordnung (nicht im Editor änderbar, nur verschieben oder löschen).</small>`:""}</div>`).join("");
+ };
+ const lesen=()=>{document.querySelectorAll("#ppmKe [data-f]").forEach(el=>{const i=Number(el.dataset.i),f=el.dataset.f;if(!sch[i])return;
+   if(f==="fragen")sch[i].fragen=el.value.split("\n").map(z=>z.split("|")).filter(p=>p[0].trim()).map(p=>({frage:p[0].trim(),loesung:(p[1]||"").trim()}));
+   else if(f==="items")sch[i].items=el.value.split("\n").map(x=>x.trim()).filter(Boolean);
+   else sch[i][f]=el.value;});};
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Kurs bearbeiten</h2>
+  <div id="ppmKe"></div>
+  <div class="ppm-zeile">${[["text","＋ Text"],["link","＋ Link"],["selbsttest","＋ Selbsttest"],["ziele","＋ Ziele"],["experiment","＋ Experiment"]].map(([k,t])=>`<button type="button" class="ppm-btn klein" data-add="${k}">${t}</button>`).join("")}</div>
+  <div class="form-actions" style="margin-top:12px"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmKeOk">Speichern</button></div>`);
+ zeichne();
+ $("ppmKe").addEventListener("click",ev=>{const b=ev.target.closest("[data-k]");if(!b)return;lesen();const i=Number(b.dataset.i);
+  if(b.dataset.k==="weg")sch.splice(i,1);else if(b.dataset.k==="hoch"&&i>0)[sch[i-1],sch[i]]=[sch[i],sch[i-1]];else if(b.dataset.k==="runter"&&i<sch.length-1)[sch[i+1],sch[i]]=[sch[i],sch[i+1]];zeichne();});
+ document.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click",()=>{lesen();const k=b.dataset.add,id="s"+Date.now().toString(36);
+  const neu={id,typ:k,titel:{text:"Neuer Text",link:"Material",selbsttest:"Selbsttest",ziele:"Das lernst du",experiment:"Interaktive Aufgabe: Das Experiment"}[k]};
+  if(k==="text")neu.text="## Überschrift\nText …";if(k==="link"){neu.url="";neu.text="";}if(k==="selbsttest")neu.fragen=[{frage:"",loesung:""}];if(k==="ziele")neu.items=[];if(k==="experiment")neu.text="Du führst den Versuch durch und beantwortest ein kurzes Quiz.";
+  const ab=sch.findIndex(s=>s.typ==="abschluss");sch.splice(ab<0?sch.length:ab,0,neu);zeichne();}));
+ $("ppmKeOk").addEventListener("click",async()=>{lesen();
+  try{await updateDoc(doc(db,"ppModule",m.id),{schritte:sch.filter(s=>s.typ!=="selbsttest"||(s.fragen||[]).length),kursId:"eigen"});closeModal();await ppmLaden(true);await render();toast("Kurs gespeichert.");}catch(e){ppmFehler(e,"Kurs konnte nicht gespeichert werden");}});
+}
+if(!window.__ppmKlickGebunden){window.__ppmKlickGebunden=true;document.addEventListener("click",ppmKlick);}
+// ---- Module per Drag-and-drop verschieben (nur Lehrkraft): Maus = ziehen, Touch = lange drücken und ziehen ----
+const ppmDnd={k:null,id:null,x:0,y:0,px:0,py:0,aktiv:false,geist:null,timer:0,touch:false,ziel:null,vor:null,raf:0,ptr:null};
+function ppmDndAufraeumen(){
+ clearTimeout(ppmDnd.timer);cancelAnimationFrame(ppmDnd.raf);
+ if(ppmDnd.geist)ppmDnd.geist.remove();
+ document.querySelectorAll(".ppm-zieh,.ppm-ziel,.ppm-vor,.ppm-ende").forEach(el=>el.classList.remove("ppm-zieh","ppm-ziel","ppm-vor","ppm-ende"));
+ document.body.classList.remove("ppm-dnd-an");
+ Object.assign(ppmDnd,{k:null,id:null,aktiv:false,geist:null,timer:0,ziel:null,vor:null,raf:0,ptr:null});
+}
+function ppmDndStart(){
+ const k=ppmDnd.k;if(!k||ppmDnd.aktiv)return;
+ ppmDnd.aktiv=true;
+ const r=k.getBoundingClientRect(),g=k.cloneNode(true);
+ g.classList.add("ppm-geist","z"+ppmZoomLesen());g.removeAttribute("data-ppm");
+ g.style.width=r.width+"px";g.style.left=r.left+"px";g.style.top=r.top+"px";
+ ppmDnd.ox=ppmDnd.px-r.left;ppmDnd.oy=ppmDnd.py-r.top;
+ document.body.appendChild(g);ppmDnd.geist=g;
+ k.classList.add("ppm-zieh");document.body.classList.add("ppm-dnd-an");
+ try{if(navigator.vibrate&&ppmDnd.touch)navigator.vibrate(15);}catch(e){}
+ const lauf=()=>{
+  if(!ppmDnd.aktiv)return;
+  const y=ppmDnd.py,h=window.innerHeight;
+  if(y<80)window.scrollBy(0,-14);else if(y>h-80)window.scrollBy(0,14);
+  ppmDndZiel();ppmDnd.raf=requestAnimationFrame(lauf);
+ };
+ ppmDnd.raf=requestAnimationFrame(lauf);
+}
+function ppmDndZiel(){
+ const g=ppmDnd.geist;if(!g)return;
+ g.style.left=(ppmDnd.px-ppmDnd.ox)+"px";g.style.top=(ppmDnd.py-ppmDnd.oy)+"px";
+ const el=document.elementFromPoint(ppmDnd.px,ppmDnd.py),w=el&&el.closest?el.closest(".ppm-woche[data-w],.pp12-woche[data-w]"):null;
+ document.querySelectorAll(".ppm-ziel,.ppm-vor,.ppm-ende").forEach(x=>x.classList.remove("ppm-ziel","ppm-vor","ppm-ende"));
+ ppmDnd.ziel=null;ppmDnd.vor=null;
+ if(!w)return;
+ const reihe=w.querySelector(".ppm-reihe");if(!reihe)return;
+ w.classList.add("ppm-ziel");ppmDnd.ziel=w.dataset.w;
+ const karten=[...reihe.querySelectorAll(".ppm-karte[data-id]")].filter(c=>c!==ppmDnd.k);
+ let vor=null;
+ for(const c of karten){
+  const r=c.getBoundingClientRect();
+  if(ppmDnd.py<r.top||(ppmDnd.py<=r.bottom&&ppmDnd.px<r.left+r.width/2)){vor=c;break;}
+ }
+ if(vor){vor.classList.add("ppm-vor");ppmDnd.vor=vor.dataset.id;}
+ else if(karten.length)karten[karten.length-1].classList.add("ppm-ende");
+}
+async function ppmDndAblegen(id,zielW,vorId){
+ const m=ppmById(id);if(!m||!zielW||!isTeacher())return;
+ const iAlt=ppmSwIndex(m.start),iNeu=ppmSwIndex(zielW);
+ if(iNeu<0){toast("Hier lässt sich nichts planen.");return;}
+ const d=iNeu-iAlt,neu=SCHULWOCHEN_PP[iNeu];
+ if(d!==0&&!m.projektId){
+  const pr=ppmPruefen(neu.id,ppmDauerKey(m),m.id);
+  if(!pr.ok){toast(pr.fehler||`In der Woche ${fmtKurz(neu.start)}–${fmtKurz(neu.end)} ist nicht genug Platz.`);return;}
+ }
+ // Reihenfolge der Zielwoche so, wie sie gerade angezeigt wird, mit dem gezogenen Modul an der Ablagestelle
+ const zeile=document.querySelector(`.ppm-woche[data-w="${zielW}"] .ppm-reihe,.pp12-woche[data-w="${zielW}"] .ppm-reihe`);
+ let ids=zeile?[...zeile.querySelectorAll(".ppm-karte[data-id]")].map(c=>c.dataset.id).filter(x=>x!==id):PPM.liste.filter(x=>x.start===zielW&&x.id!==id).map(x=>x.id);
+ const pos=vorId?ids.indexOf(vorId):-1;
+ if(pos>=0)ids.splice(pos,0,id);else ids.push(id);
+ if(d===0){const alt=zeile?[...zeile.querySelectorAll(".ppm-karte[data-id]")].map(c=>c.dataset.id):[];if(alt.join("|")===ids.join("|"))return;}
+ const y=window.scrollY;
+ try{
+  for(let k=0;k<ids.length;k++){
+   const x=ppmById(ids[k]);if(!x)continue;
+   const o=(k+1)*10,upd={};
+   if((x.ord||0)!==o)upd.ord=o;
+   if(x.id===id&&d!==0)upd.start=neu.id;
+   if(Object.keys(upd).length)await updateDoc(doc(db,"ppModule",x.id),{...upd,updatedAt:serverTimestamp()});
+  }
+  if(d!==0&&m.modul==="projekt"){ // Einheiten im Projekt wandern mit
+   for(const x of PPM.liste.filter(z=>z.projektId===m.id)){
+    const j=ppmSwIndex(x.start)+d;
+    if(j>=0&&j<SCHULWOCHEN_PP.length)await updateDoc(doc(db,"ppModule",x.id),{start:SCHULWOCHEN_PP[j].id,updatedAt:serverTimestamp()});
+   }
+  }
+  await ppmLaden(true);await render();
+  try{window.scrollTo(0,y);}catch(e){}
+  if(d!==0)toast(`Verschoben auf ${fmtKurz(neu.start)}–${fmtKurz(neu.end)}.`);
+ }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Konnte nicht verschoben werden.");}
+}
+if(!window.__ppmDndGebunden){
+ window.__ppmDndGebunden=true;
+ document.addEventListener("pointerdown",e=>{
+  if(ppmDnd.k||!isTeacher()||(e.pointerType==="mouse"&&e.button!==0))return;
+  const k=e.target.closest&&e.target.closest(".ppm-reihe > .ppm-karte[data-id]");
+  if(!k||e.target.closest("button,a,input,select,textarea,.lb-pill"))return;
+  Object.assign(ppmDnd,{k,id:k.dataset.id,x:e.clientX,y:e.clientY,px:e.clientX,py:e.clientY,touch:e.pointerType!=="mouse",ptr:e.pointerId,aktiv:false});
+  if(ppmDnd.touch)ppmDnd.timer=setTimeout(ppmDndStart,380);
+ });
+ document.addEventListener("pointermove",e=>{
+  if(!ppmDnd.k||e.pointerId!==ppmDnd.ptr)return;
+  ppmDnd.px=e.clientX;ppmDnd.py=e.clientY;
+  const weg=Math.hypot(e.clientX-ppmDnd.x,e.clientY-ppmDnd.y);
+  if(!ppmDnd.aktiv){
+   if(ppmDnd.touch){if(weg>10)ppmDndAufraeumen();} // Finger bewegt sich vor Ablauf der Wartezeit: normales Scrollen
+   else if(weg>8)ppmDndStart();
+   return;
+  }
+  e.preventDefault();
+ });
+ document.addEventListener("touchmove",e=>{if(ppmDnd.aktiv)e.preventDefault();},{passive:false});
+ document.addEventListener("contextmenu",e=>{if(ppmDnd.k&&ppmDnd.touch)e.preventDefault();});
+ const ende=async(e,abbruch)=>{
+  if(!ppmDnd.k||(e.pointerId!==undefined&&e.pointerId!==ppmDnd.ptr))return;
+  const war=ppmDnd.aktiv,id=ppmDnd.id;
+  if(war&&!abbruch)ppmDndZiel();
+  const ziel=ppmDnd.ziel,vor=ppmDnd.vor;
+  ppmDndAufraeumen();
+  if(!war)return;
+  // den Klick, der auf das Loslassen folgt, nicht als „Modul öffnen“ werten
+  const stopp=ev=>{ev.stopPropagation();ev.preventDefault();};
+  document.addEventListener("click",stopp,{capture:true,once:true});
+  setTimeout(()=>document.removeEventListener("click",stopp,{capture:true}),350);
+  if(!abbruch&&ziel)await ppmDndAblegen(id,ziel,vor);
+ };
+ document.addEventListener("pointerup",e=>ende(e,false));
+ document.addEventListener("pointercancel",e=>ende(e,true));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&ppmDnd.k)ende({},true);});
+}
+
+
+// ---- Stunden im Unterricht-Plan per Drag and Drop verschieben ----
+// Die Stunde wird an den Zieltermin gelegt, die Stunden dazwischen rücken je einen Unterrichtstag nach (wie bei ‹ › über mehrere Termine).
+const p12Dnd={k:null,id:null,x:0,y:0,px:0,py:0,aktiv:false,geist:null,timer:0,touch:false,ziel:null,raf:0,ptr:null,ox:0,oy:0};
+function p12DndAuf(){
+ clearTimeout(p12Dnd.timer);cancelAnimationFrame(p12Dnd.raf);
+ if(p12Dnd.geist)p12Dnd.geist.remove();
+ if(p12Dnd.k)p12Dnd.k.classList.remove("p12-zieh");
+ document.querySelectorAll(".p12-ziel").forEach(x=>x.classList.remove("p12-ziel"));
+ document.body.classList.remove("ppm-dnd-an");
+ Object.assign(p12Dnd,{k:null,id:null,aktiv:false,geist:null,timer:0,ziel:null,raf:0,ptr:null});
+}
+function p12DndStart(){
+ const k=p12Dnd.k;if(!k||p12Dnd.aktiv)return;
+ p12Dnd.aktiv=true;
+ const r=k.getBoundingClientRect(),g=k.cloneNode(true);
+ g.classList.add("p12-geist");g.removeAttribute("data-sid");g.removeAttribute("data-slot");
+ g.style.width=r.width+"px";g.style.left=r.left+"px";g.style.top=r.top+"px";
+ p12Dnd.ox=p12Dnd.px-r.left;p12Dnd.oy=p12Dnd.py-r.top;
+ document.body.appendChild(g);p12Dnd.geist=g;
+ k.classList.add("p12-zieh");document.body.classList.add("ppm-dnd-an");
+ try{if(navigator.vibrate&&p12Dnd.touch)navigator.vibrate(15);}catch(e){}
+ const lauf=()=>{
+  if(!p12Dnd.aktiv)return;
+  const y=p12Dnd.py,h=window.innerHeight;
+  if(y<80)window.scrollBy(0,-14);else if(y>h-80)window.scrollBy(0,14);
+  p12DndZiel();p12Dnd.raf=requestAnimationFrame(lauf);
+ };
+ p12Dnd.raf=requestAnimationFrame(lauf);
+}
+function p12DndZiel(){
+ const g=p12Dnd.geist;if(!g)return;
+ g.style.left=(p12Dnd.px-p12Dnd.ox)+"px";g.style.top=(p12Dnd.py-p12Dnd.oy)+"px";
+ document.querySelectorAll(".p12-ziel").forEach(x=>x.classList.remove("p12-ziel"));
+ p12Dnd.ziel=null;
+ const el=document.elementFromPoint(p12Dnd.px,p12Dnd.py),z=el&&el.closest?el.closest("[data-slot]"):null;
+ if(!z||z===p12Dnd.k)return;
+ z.classList.add("p12-ziel");p12Dnd.ziel=z.dataset.slot;
+}
+async function p12DndAblegen(id,slot){
+ if(!isTeacher()||!slot)return;
+ await pp12Aendern(m=>{
+  const a=m.arr,i=a.indexOf(id),j=PP12_MSLOTS.indexOf(slot);
+  if(i<0||j<0)return{fehler:"Dieser Termin ist nicht verfügbar."};
+  if(i===j)return{fehler:"Die Stunde liegt schon dort."};
+  const t=a[i];
+  if(j<i){for(let k=i;k>j;k--)a[k]=a[k-1];}else{for(let k=i;k<j;k++)a[k]=a[k+1];}
+  a[j]=t;
+  return{m};
+ },"Stunde verschoben.");
+}
+if(!window.__p12DndGebunden){
+ window.__p12DndGebunden=true;
+ document.addEventListener("pointerdown",e=>{
+  if(p12Dnd.k||ppmDnd.k||!isTeacher()||(e.pointerType==="mouse"&&e.button!==0))return;
+  const k=e.target.closest&&e.target.closest(".pp12-bar[data-sid]");
+  if(!k||e.target.closest("button,a,input,select,textarea"))return;
+  Object.assign(p12Dnd,{k,id:k.dataset.sid,x:e.clientX,y:e.clientY,px:e.clientX,py:e.clientY,touch:e.pointerType!=="mouse",ptr:e.pointerId,aktiv:false});
+  if(p12Dnd.touch)p12Dnd.timer=setTimeout(p12DndStart,380);
+ });
+ document.addEventListener("pointermove",e=>{
+  if(!p12Dnd.k||e.pointerId!==p12Dnd.ptr)return;
+  p12Dnd.px=e.clientX;p12Dnd.py=e.clientY;
+  const weg=Math.hypot(e.clientX-p12Dnd.x,e.clientY-p12Dnd.y);
+  if(!p12Dnd.aktiv){
+   if(p12Dnd.touch){if(weg>10)p12DndAuf();}
+   else if(weg>8)p12DndStart();
+   return;
+  }
+  e.preventDefault();
+ });
+ document.addEventListener("touchmove",e=>{if(p12Dnd.aktiv)e.preventDefault();},{passive:false});
+ const ende=async(e,abbruch)=>{
+  if(!p12Dnd.k||(e.pointerId!==undefined&&e.pointerId!==p12Dnd.ptr))return;
+  const war=p12Dnd.aktiv,id=p12Dnd.id;
+  if(war&&!abbruch)p12DndZiel();
+  const ziel=p12Dnd.ziel;
+  p12DndAuf();
+  if(!war)return;
+  const stopp=ev=>{ev.stopPropagation();ev.preventDefault();};
+  document.addEventListener("click",stopp,{capture:true,once:true});
+  setTimeout(()=>document.removeEventListener("click",stopp,{capture:true}),350);
+  if(!abbruch&&ziel)await p12DndAblegen(id,ziel);
+ };
+ document.addEventListener("pointerup",e=>ende(e,false));
+ document.addEventListener("pointercancel",e=>ende(e,true));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&p12Dnd.k)ende({},true);});
+}
+
+// Zusatzmodule einer Schulwoche (Karten wie in der F11Sb) mit Plus-Zeichen für Lehrkräfte
+function pp12ZusatzHtml(wochenId){
+ const l=PPM.liste.filter(x=>x.start===wochenId&&PPM_ZUSATZ.includes(x.modul));
+ const lehrer=isTeacher();
+ if(!l.length&&!lehrer)return"";
+ return`<div class="pp12-zusatz"><div class="pp12-zlabel">Zusatzmodule${l.length?"":" · noch keine in dieser Woche"}</div><div class="ppm-reihe">${l.map(x=>ppmKarteHTML(x,false)).join("")}${lehrer?`<button type="button" class="ppm-neu" data-ppm="neu" data-woche="${esc(wochenId)}" title="Zusatzmodul hinzufügen" aria-label="Zusatzmodul hinzufügen">＋ Zusatzmodul</button>`:""}</div></div>`;
+}
+
+// Zählt die Lernressourcen je Art (TaskCard, Canva, KI …) für die Kachel „Lernressourcen“ im Unterricht-Bereich.
+const PP12_RES={geladen:0,zaehler:null};
+async function pp12RessourcenZaehlen(){
+ if(PP12_RES.zaehler&&Date.now()-PP12_RES.geladen<60000)return PP12_RES.zaehler;
+ const art=r=>{
+  const raw=String(r.type??r.category??"external").toLowerCase();
+  if(raw.includes("task"))return"taskcard";
+  if(raw.includes("canva"))return"canva";
+  if(raw.includes("learningapps")||raw.includes("learning apps"))return"learningapps";
+  if(raw.includes("bycs")||raw.includes("mebis"))return"bycs";
+  if(raw.includes("video"))return"video";
+  if(raw.includes("ki"))return"ki";
+  return"weitere";
+ };
+ const z={taskcard:0,canva:0,ki:0,video:0,bycs:0,learningapps:0,weitere:0},gesehen=new Set();
+ try{
+  for(const name of["lernressourcen","resources"]){
+   try{
+    const snap=await getDocs(collection(db,name));
+    snap.docs.forEach(d=>{
+     const r=d.data(),key=[String(r.title??r.name??"").trim().toLowerCase(),String(r.url??r.link??"").trim().toLowerCase()].join("|");
+     if(!key.replace(/\|/g,"")||gesehen.has(key))return;
+     gesehen.add(key);z[art(r)]++;
+    });
+   }catch(e){console.warn("Lernressourcen zählen:",name,e);}
+  }
+ }catch(e){console.error(e);}
+ PP12_RES.zaehler=z;PP12_RES.geladen=Date.now();
+ return z;
+}
+// ---- Zoom im Unterricht-Plan: Normal / Kompakt / Übersicht, dazu Verschieben per Drag and Drop ----
+function ppmZoomLesen(){try{const z=Number(localStorage.getItem("pp12Zoom"));return z>=1&&z<=3?z:1;}catch(e){return 1;}}
+function ppmZoomSetzen(z){
+ z=Math.max(1,Math.min(3,Math.round(z)));
+ try{localStorage.setItem("pp12Zoom",String(z));}catch(e){}
+ const p=document.querySelector(".pp12-plan");if(!p)return;
+ const mitte=window.innerHeight/2;let anker=null,off=0;
+ for(const w of p.querySelectorAll(".pp12-woche,.pp12-ferien")){const r=w.getBoundingClientRect();if(r.bottom>=mitte){anker=w;off=r.top;break;}}
+ p.classList.remove("z1","z2","z3");p.classList.add("z"+z);
+ p.querySelectorAll("[data-p12zoom]").forEach(b=>{const an=Number(b.dataset.p12zoom)===z;b.classList.toggle("an",an);b.setAttribute("aria-pressed",an?"true":"false");});
+ if(anker){const r=anker.getBoundingClientRect();window.scrollBy(0,r.top-off);}
+}
+const ppmZoomRad={warte:false};
+if(!window.__pp12ZoomGebunden){
+ window.__pp12ZoomGebunden=true;
+ window.addEventListener("wheel",e=>{
+  if(!(e.ctrlKey||e.metaKey)||!e.target.closest||!e.target.closest(".pp12-plan"))return;
+  e.preventDefault();
+  const z=ppmZoomLesen(),n=e.deltaY>0?z+1:z-1;
+  if(n!==z&&n>=1&&n<=3&&!ppmZoomRad.warte){ppmZoomRad.warte=true;setTimeout(()=>{ppmZoomRad.warte=false;},350);ppmZoomSetzen(n);}
+ },{passive:false});
+ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-p12zoom]");if(b)ppmZoomSetzen(Number(b.dataset.p12zoom)||1);});
+}
+function ppmZoomLeisteHTML(){
+ const z=ppmZoomLesen(),b=(n,t)=>`<button type="button" class="ppm-zb${z===n?" an":""}" data-p12zoom="${n}" aria-pressed="${z===n}">${t}</button>`;
+ return`<div class="ppm-zoomleiste"><b>Ansicht</b>${b(1,"Normal")}${b(2,"Kompakt")}${b(3,"Übersicht")}<small>${isTeacher()?"Zum Verschieben in „Übersicht“ wechseln: Stunden und Zusatzmodule lassen sich per Drag and Drop ziehen. ":""}Strg + Mausrad zoomt ebenfalls.</small></div>`;
+}
+const PP12_ZOOM_CSS=(()=>{
+ const K2=":is(.pp12-plan.z2 .ppm-karte,.ppm-karte.ppm-geist.z2)",K3=":is(.pp12-plan.z3 .ppm-karte,.ppm-karte.ppm-geist.z3)";
+ return`
+  .ppm-zoomleiste{position:sticky;top:0;z-index:30;display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;margin:0 0 10px;border-radius:12px;background:#fff;border:1px solid #dbe4ec;box-shadow:0 4px 14px rgba(24,67,96,.10)}
+  .ppm-zoomleiste small{color:#6b7c93;font-size:12px;flex:1 1 220px}
+  .ppm-zb{min-height:36px;padding:0 14px;border-radius:999px;border:1.5px solid #b9c8d6;background:#fff;font:inherit;font-size:13px;font-weight:700;color:#3a4a5c;cursor:pointer}
+  .ppm-zb.an{background:#075a9d;border-color:#075a9d;color:#fff}
+  .pp12-bar[data-sid]{cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+  .pp12-bar.p12-zieh{opacity:.3}.p12-geist{position:fixed!important;z-index:9999;pointer-events:none;opacity:.92;box-shadow:0 14px 34px rgba(24,67,96,.35);transform:rotate(1.5deg);margin:0}
+  [data-slot].p12-ziel{outline:3px dashed #3fa66a;outline-offset:1px;background-color:#eef7ee}
+  .pp12-woche.ppm-ziel{background:#eef7ee;outline:2px dashed #3fa66a}
+  .pp12-plan.z2 .pp12-woche{padding:4px 6px;margin:0 0 6px;grid-template-columns:110px 1fr}
+  .pp12-plan.z2 .pp12-bar{min-height:0;padding:5px 8px;gap:2px}.pp12-plan.z2 .pp12-titel{font-size:12px}
+  .pp12-plan.z2 .pp12-tag,.pp12-plan.z2 .pp12-fuss,.pp12-plan.z2 .pp12-res-btn{display:none}
+  .pp12-plan.z2 .pp12-leer,.pp12-plan.z2 .pp12-reserve{min-height:0;padding:5px 8px}
+  .pp12-plan.z2 .pp12-zusatz{margin-top:4px;padding:4px 6px}.pp12-plan.z2 .pp12-zlabel{display:none}
+  .pp12-plan.z2 .pp12-ferien{margin-left:120px;padding:6px 12px}
+  ${K2}{padding:6px 8px 6px 10px}${K2} .ppm-txt b{font-size:13px}${K2} .ppm-txt small{font-size:11px}
+  ${K2} .ppm-status,${K2} .ppm-mini,${K2} .ppm-chip,${K2} .lb-pills,${K2} .ppm-mv{display:none!important}${K2} .ppm-edit{height:22px;padding:0 6px;font-size:11px}
+  .pp12-plan.z3 .pp12-woche{padding:3px 6px;margin:0 0 3px;gap:8px;grid-template-columns:64px 1fr;border-radius:8px}
+  .pp12-plan.z3 .pp12-wlabel{font-size:10px;line-height:1.25}.pp12-plan.z3 .pp12-wlabel strong{font-size:12px}.pp12-plan.z3 .pp12-wlabel em{display:none}
+  .pp12-plan.z3 .pp12-tage{gap:4px}
+  .pp12-plan.z3 .pp12-bar{min-height:0;padding:3px 6px;gap:1px;border-left-width:5px;border-radius:6px}
+  .pp12-plan.z3 .pp12-kopf{font-size:9px}.pp12-plan.z3 .pp12-kopf span:last-child{display:none}
+  .pp12-plan.z3 .pp12-titel{font-size:11px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pp12-plan.z3 .pp12-tag,.pp12-plan.z3 .pp12-fuss,.pp12-plan.z3 .pp12-ctl,.pp12-plan.z3 .pp12-res-btn,.pp12-plan.z3 .pp12-reserve small,.pp12-plan.z3 .pp12-leer small{display:none}
+  .pp12-plan.z3 .pp12-leer,.pp12-plan.z3 .pp12-reserve{min-height:0;padding:3px 6px;border-radius:6px;gap:0}.pp12-plan.z3 .pp12-reserve strong{font-size:11px}
+  .pp12-plan.z3 .pp12-zusatz{margin-top:3px;padding:3px 5px;display:flex;gap:6px;align-items:center}.pp12-plan.z3 .pp12-zlabel{display:none}
+  .pp12-plan.z3 .ppm-reihe{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:4px;flex:1}
+  .pp12-plan.z3 .ppm-neu{font-size:0;min-height:24px;padding:0 10px;border-radius:8px}.pp12-plan.z3 .ppm-neu::before{content:"＋";font-size:14px}
+  ${K3}{grid-column:auto;padding:3px 6px 3px 8px;border-left-width:5px;border-radius:8px;min-height:26px;align-items:center}
+  ${K3} .ppm-txt{gap:0}${K3} .ppm-txt b{font-size:11px;line-height:1.2;padding-right:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  ${K3} .ppm-txt small,${K3} .ppm-status,${K3} .ppm-mini,${K3} .ppm-chip,${K3} .lb-pills,${K3} .ppm-mv,${K3} .ppm-edit,${K3} .ppm-ic{display:none!important}
+  ${K3} .ppm-haken-k{width:16px;height:16px;font-size:10px;right:3px;top:3px}
+  .pp12-plan.z3 .pp12-ferien{margin:3px 0 3px 72px;padding:3px 10px;font-size:11px}
+  @media (max-width:760px){.pp12-plan.z2 .pp12-woche,.pp12-plan.z3 .pp12-woche{grid-template-columns:1fr}.pp12-plan.z3 .pp12-tage,.pp12-plan.z2 .pp12-tage{grid-template-columns:1fr}.pp12-plan.z2 .pp12-ferien,.pp12-plan.z3 .pp12-ferien{margin-left:0}}`;
+})();
+async function renderUnterrichtPP(){
+ await pp12DatenLaden();
+ await ppmLaden();
+ if(activePPModul){const pm=ppmById(activePPModul);if(pm){const kf=KW_FARBEN[pm.lb]||{c:"#4B5563",t:"#1F2937"};return`<div class="kwp kwm" style="--lbc:${kf.c};--lbt:${kf.t}">`+await ppmModulSeite(pm)+`</div>`;}activePPModul=null;}
+ await ppmMeineLaden();
+ const resZ=await pp12RessourcenZaehlen();
+ const resLabel={taskcard:["TaskCard","TaskCards"],canva:["Canva","Canva"],ki:["KI-Angebot","KI-Angebote"],video:["Video","Videos"],bycs:["ByCS / mebis","ByCS / mebis"],learningapps:["LearningApps","LearningApps"],weitere:["weiterer Link","weitere Links"]};
+ const resChips=Object.entries(resZ).filter(([,n])=>n>0).map(([k,n])=>`<span class="chip">${n} ${resLabel[k][n===1?0:1]}</span>`).join("");
+ const heute=new Date().toISOString().slice(0,10);
+ const tageName={0:"Mo",2:"Mi",4:"Fr"};
+ const byDate={};PP12_PLAN.forEach(e=>byDate[e.d]=e);
+ const letzterTag=PP12_PLAN[PP12_PLAN.length-1].d;
+ const ersterMo=pp12Montag(PP12_START),letzterMo=pp12Montag(letzterTag);
+ const stoffStd={1:0,2:0,3:0,4:0};
+ PP12_PLAN.forEach(e=>{if(e.typ==="stoff")stoffStd[e.lb]+=e.h;});
+ const gesamtBisStoffEnde=PP12_PLAN.filter(e=>e.d<="2027-04-28").reduce((s,e)=>s+e.h,0);
+ let rows="",m=ersterMo;const ferienGezeigt={};
+ while(m<=letzterMo){
+  const slots=[0,2,4].map(off=>({off,d:pp12Add(m,off),e:byDate[pp12Add(m,off)]||null}));
+  const fr=pp12Ferien(m);
+  const ganzeWocheFerien=!slots.some(s=>s.e)&&fr&&pp12Ferien(pp12Add(m,4));
+  if(ganzeWocheFerien){
+   if(!ferienGezeigt[fr.titel]){
+    ferienGezeigt[fr.titel]=1;
+    rows+=`<div class="pp12-ferien">${esc(fr.titel)} · ${pp12Datum(fr.start)}–${pp12Datum(fr.end)}${fr.end.slice(0,4)}</div>`;
+   }
+   m=pp12Add(m,7);continue;
+  }
+  const wochenStd=slots.reduce((s,x)=>s+(x.e?x.e.h:0),0);
+  const reserveStd=slots.reduce((s,x)=>s+(!x.e&&!pp12Ferien(x.d)&&PP12_MSLOTS.includes(x.d)?(PP12_SLOT_H[x.d]||0):0),0);
+  const istJetzt=heute>=m&&heute<=pp12Add(m,6);
+  const cells=slots.map(s=>{
+   const span=s.off===0?1:2;
+   if(s.e){
+    const e=s.e,c=pp12BarFarbe(e),istHeute=e.d===heute;
+    const ziehbar=isTeacher()&&!PP12_FIX(e)&&e.id;
+    return`<div class="pp12-bar s${span}${istHeute?" heute":""}"style="--c:${c}"${ziehbar?` data-sid="${esc(e.id)}" data-slot="${e.d}"`:""}>
+     <div class="pp12-kopf"><span>${tageName[s.off]} ${pp12Datum(e.d)}</span><span>${e.h} Std.</span></div>
+     <div class="pp12-titel">${esc(e.t)}</div>
+     <div class="pp12-tag">${esc(pp12BarTag(e))}</div>
+     <div class="pp12-fuss">${pp12TafelHtml(e)}${pp12BausteineHtml(e)}</div>
+     ${pp12CtlHtml(e)}
+    </div>`;
+   }
+   const fe=pp12Ferien(s.d),grund=fe?fe.titel:(PP12_FREI[s.d]||(s.d<PP12_START?"vor Planbeginn":"kein Unterricht"));
+   if(!fe&&PP12_MSLOTS.includes(s.d)){
+    return`<div class="pp12-reserve s${span}" data-slot="${s.d}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><strong>Reserve</strong><small>freier Termin${isTeacher()?"":" – Zeit zum Vertiefen oder Wiederholen"}</small>${isTeacher()?`<button type="button"class="pp12-res-btn"onclick="pp12ReserveFuellen('${s.d}')">＋ Stunde eintragen</button>`:""}</div>`;
+   }
+   return`<div class="pp12-leer s${span}"><span>${tageName[s.off]} ${pp12Datum(s.d)}</span><small>${esc(grund)}</small></div>`;
+  }).join("");
+  rows+=`<div class="pp12-woche${istJetzt?" jetzt":""}" data-w="${m}">
+   <div class="pp12-wlabel"><strong>KW ${pp12KW(m)}</strong><span>${pp12Datum(m)}–${pp12Datum(pp12Add(m,4))}</span><em>${wochenStd} Std.${reserveStd?` + ${reserveStd} Std. Reserve`:""}${istJetzt?" · diese Woche":""}</em></div>
+   <div class="pp12-rechts"><div class="pp12-tage">${cells}</div>${pp12ZusatzHtml(m)}</div>
+  </div>`;
+  m=pp12Add(m,7);
+ }
+ const legende=[
+  ...Object.entries(PP12_LB).map(([k,v])=>`<span class="pp12-chip"style="--c:${v.farbe}">${v.kurz} · ${esc(v.titel)}</span>`),
+  ...Object.values(PP12_TYP).map(v=>`<span class="pp12-chip"style="--c:${v.farbe}">${esc(v.label)}</span>`)
+ ].join("");
+ const nid=pp12NaechsteStundeId(),ne=nid?PP12_PLAN.find(x=>x.id===nid):null;
+ const neTag=ne?({1:"Mo",3:"Mi",5:"Fr"})[new Date(ne.d+"T12:00:00Z").getUTCDay()]||"":"";
+ const parkHtml=isTeacher()&&PP12_PARK.length?`<div class="card"style="margin-top:12px"><strong>Zurückgestellte Stunden</strong><p style="margin:6px 0">Diese Stunden haben aktuell keinen Termin.</p>${PP12_PARK.map(e=>`<div class="pp12-park"><span>${esc(e.t)}</span><button type="button"class="secondary"onclick="pp12Einplanen('${esc(e.id)}')">Wieder einplanen</button></div>`).join("")}</div>`:"";
+ const wegListe=(PP12_OVER.weg||[]).map(id=>PP12_BASIS.find(e=>e.id===id)).filter(Boolean);
+ const wegHtml=isTeacher()&&wegListe.length?`<div class="card"style="margin-top:12px"><strong>Entfernte Stunden</strong><p style="margin:6px 0">Diese Stunden des Grundplans hast du aus dem Plan genommen.</p>${wegListe.map(e=>`<div class="pp12-park"><span>${esc(e.t)}</span><button type="button"class="secondary"onclick="pp12Wiederherstellen('${esc(e.id)}')">Wiederherstellen</button></div>`).join("")}</div>`:"";
+ const lbKarten=Object.entries(PP12_LB).map(([k,v])=>`<div class="pp12-stat"style="--c:${v.farbe}"><strong>${stoffStd[k]} Std.</strong><small>${v.kurz} · ${esc(v.titel)}</small></div>`).join("");
+ return`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
+ ${PPM_CSS}
+ ${pageHead("UNTERRICHT","Unterricht Pädagogik und Psychologie","Stoffverteilungsplan 12. Klasse über das ganze Schuljahr: jede Unterrichtsstunde ein Balken, pro Woche 5 Stunden (Mo 1 Std., Mi 2 Std., Fr 2 Std.).",`${isTeacher()?`<button class="secondary"type="button"onclick="go('didaktik')">Didaktik-Kompass</button>`:""}`)}
+ <style>
+  .pp12-fuss{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+  .pp12-did{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;padding:2px;cursor:pointer;border-radius:8px}.pp12-did:hover{background:rgba(255,255,255,.7)}
+  .pp12-tafel{display:inline-flex;align-items:center;gap:4px;min-height:26px;padding:0 9px;border-radius:13px;border:1.5px dashed #6b7c93;background:#fff;color:#3a4a5c;font-size:11px;font-weight:700;cursor:pointer}
+  .pp12-tafel.da{border:1.5px solid #075a9d;background:#075a9d;color:#fff}
+  .pp12-legende.pp12-didlegende{align-items:center;margin:0 0 14px}.pp12-lg{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2b3a4f}.pp12-lgklein{color:#6b7c93}
+  .pp12-jahresbogen{background:#fff;border:1px solid #dbe4ec;border-radius:14px;padding:16px 18px;margin:0 0 16px}.pp12-jahresbogen h2{margin:0 0 4px;font-size:17px}.pp12-jahresbogen p{margin:0 0 10px;font-size:12px;color:#51657a}
+  .pp12-jbzeile{display:grid;grid-template-columns:240px minmax(0,1fr) 170px;gap:12px;align-items:center;margin:6px 0;font-size:13px;font-weight:700}
+  .pp12-jbbalken{display:flex;height:28px;border-radius:6px;overflow:hidden;border:1.5px solid #17384f}.pp12-jb{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border-right:1.5px solid #17384f}.pp12-jb:last-child{border-right:0}
+  .pp12-jb.p1{background:#fff;color:#17384f}.pp12-jb.p2{background:#c3d4e2;color:#17384f}.pp12-jb.p3{background:#17384f;color:#fff}
+  .pp12-jbhinweis{font-style:normal;font-size:12px;font-weight:400;color:#7a4b00;background:#fff3d6;border:1px solid #f0d28a;border-radius:8px;padding:3px 8px}
+  .pp12-modalgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.pp12-modalgrid h3{margin:0 0 8px;font-size:14px}
+  .pp12-phasenwahl{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.pp12-pw{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:10px;border:2px solid #dbe4ec;background:#fff;text-align:left;font-weight:700;font-size:13px;color:#17384f}.pp12-pw.an{border-color:#075a9d;background:#eaf3fc}
+  .pp12-udlwahl{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.pp12-uw{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border-radius:999px;border:2px dashed var(--c);background:#fff;font-weight:700;font-size:13px;color:var(--c)}.pp12-uw i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1.5px dashed var(--c);display:inline-flex;align-items:center;justify-content:center;font-size:11px}.pp12-uw.an{background:var(--c);border:2px solid var(--c);color:#fff}.pp12-uw.an i{background:#fff;border:1.5px solid #fff;color:var(--c)}
+  .pp12-udlzeile{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--c) 11%,#fff);margin:6px 0;font-size:13px;line-height:1.4}.pp12-udlpunkt{width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center}.pp12-udlzeile small{color:#51657a}
+  @media(max-width:900px){.pp12-jbzeile{grid-template-columns:1fr}}
+  .pp12-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}
+  .pp12-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 12px}
+  .pp12-stat{background:#fff;border:1px solid #dbe4ec;border-left:5px solid var(--c);border-radius:10px;padding:10px 12px}
+  .pp12-stat strong{display:block;font-size:18px}.pp12-stat small{color:#51627a}
+  .pp12-legende{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+  .pp12-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#2b3a4f;background:#fff;border:1px solid #dbe4ec;border-radius:999px;padding:4px 10px}
+  .pp12-chip::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+  .pp12-woche{display:grid;grid-template-columns:132px 1fr;gap:10px;align-items:stretch;margin:0 0 10px;padding:6px;border-radius:12px}
+  .pp12-woche.jetzt{background:#eaf3fc;outline:2px solid #3d8fd0}
+  .pp12-wlabel{display:flex;flex-direction:column;justify-content:center;font-size:13px;color:#51627a}
+  .pp12-wlabel strong{color:#12233a;font-size:14px}.pp12-wlabel em{font-style:normal;font-weight:600;color:#12233a;margin-top:2px}
+  .pp12-tage{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .s1{grid-column:span 1}.s2{grid-column:span 2}
+  .pp12-bar{background:#fff;background:color-mix(in srgb,var(--c) 13%,#fff);border:1px solid color-mix(in srgb,var(--c) 40%,#fff);border-left:6px solid var(--c);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px;min-height:92px}
+  .pp12-bar.heute{box-shadow:0 0 0 3px #3d8fd0}
+  .pp12-kopf{display:flex;justify-content:space-between;font-size:11px;color:#51627a;font-weight:600}
+  .pp12-titel{font-size:13px;line-height:1.3;color:#12233a;font-weight:600}
+  .pp12-tag{margin-top:auto;font-size:11px;color:var(--c);font-weight:700}
+  .pp12-leer{border:1px dashed #c6d2df;border-radius:8px;padding:8px 10px;background:repeating-linear-gradient(45deg,#f6f8fb,#f6f8fb 8px,#eef2f7 8px,#eef2f7 16px);display:flex;flex-direction:column;justify-content:center;min-height:92px}
+  .pp12-leer span{font-size:11px;color:#6b7c93;font-weight:600}.pp12-leer small{color:#7d8da3}
+  .pp12-ferien{margin:4px 0 12px 142px;padding:10px 14px;border-radius:10px;background:#fff7e0;border:1px dashed #e0b84a;color:#7a5b00;font-weight:600;font-size:14px}
+  .pp12-ctl{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:4px}
+  .pp12-ctl button{min-width:30px;height:28px;padding:0 7px;border:1.5px solid #9db3c8;background:#fff;border-radius:8px;font:inherit;font-size:14px;font-weight:800;color:#2f5f8a;cursor:pointer;line-height:1}
+  .pp12-ctl button:hover{background:#f0f7ff;border-color:#2f7fc6}
+  .pp12-ctl-sep{width:1px;height:18px;background:#c6d2df;margin:0 2px}
+  .pp12-reserve{border:2px dashed #3fa66a;border-radius:8px;padding:8px 10px;background:#f1faf4;display:flex;flex-direction:column;gap:3px;min-height:92px}
+  .pp12-reserve span{font-size:11px;color:#51627a;font-weight:600}.pp12-reserve strong{color:#2e7d4f;font-size:14px}.pp12-reserve small{color:#4a6b57}
+  .pp12-res-btn{margin-top:auto;align-self:flex-start;border:1.5px solid #3fa66a;background:#fff;color:#2e7d4f;border-radius:8px;padding:4px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+  .pp12-tool{margin:12px 0}.pp12-tool p{margin:6px 0 10px}.pp12-tool-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+  .pp12-park{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:6px 0;border-top:1px solid #e0e7ef}
+  .pp12-rechts{min-width:0}
+  .pp12-zusatz{margin-top:6px;padding:6px 8px;border-radius:10px;background:rgba(255,255,255,.65);border:1px dashed #b9c8d6}
+  .pp12-zlabel{font-size:11px;font-weight:700;color:#51627a;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+  ${PP12_ZOOM_CSS}
+  @media (max-width:760px){
+   .pp12-woche{grid-template-columns:1fr}.pp12-wlabel{flex-direction:row;gap:10px;align-items:baseline;flex-wrap:wrap}
+   .pp12-tage{grid-template-columns:1fr}.s1,.s2{grid-column:auto}
+   .pp12-ferien{margin-left:0}.pp12-bar,.pp12-leer{min-height:0}
+  }
+ </style>
+ <div class="pp12-info">
+  <a class="card"href="#ressourcen"style="display:block;text-decoration:none;color:inherit;border-left:4px solid #3fa66a"aria-label="Zu den Lernressourcen">
+   <strong>Lernressourcen</strong>
+   <p style="margin:6px 0 0">Hier liegen die TaskCard-Links, Canva, KI-Angebote, Videos, ByCS/mebis und LearningApps.</p>
+   ${resChips?`<div class="chips"style="margin-top:8px">${resChips}</div>`:""}
+   <p style="margin:8px 0 0;font-weight:700;color:#2f7fc6">Zur Lernressourcen-Bibliothek →</p>
+  </a>
+ </div>
+ ${isTeacher()?`<p style="margin:0 0 8px"><button type="button"class="text-button"onclick="pp12Zuruecksetzen()">Plan zurücksetzen</button></p>`:""}
+ <div class="pp12-legende">${legende}</div>
+ <div class="pp12-plan z${ppmZoomLesen()}">${ppmZoomLeisteHTML()}${rows}</div>
+ ${parkHtml}
+ ${wegHtml}
+ ${footer()}`;
+}
+window.renderUnterrichtPP=renderUnterrichtPP;
+
+// Lernbereich des nächsten (bzw. heutigen) Unterrichtstags laut Stoffverteilungsplan.
+function pp12LbFuerDatum(iso){
+ const e=PP12_PLAN.find(x=>x.lb>0&&x.d>=iso)||[...PP12_PLAN].reverse().find(x=>x.lb>0);
+ return e?e.lb:1;
+}
+
+// ============================================================
+// ALTERNATIVER LEISTUNGSNACHWEIS (K-Prim-Check-outs, Kurzarbeit-Ersatz)
+// Logik und Design wie in der F11Sb; Inhalte: Lernbereiche der 12. Klasse.
+// ============================================================
+async function renderLeistungsnachweis(){
+ const d=await ladeCheckoutDaten();
+ return`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
+ ${pageHead("UNTERRICHT PÄDAGOGIK UND PSYCHOLOGIE","Alternativer Leistungsnachweis",`Wöchentliche K-Prim-Tests. Am Ende wählst du die ${d.einst.anzahlWaehlen} Check-outs aus, die als Kurzarbeit-Ersatz zählen.`,"")}
+ ${checkoutLiveBannerHTML(d)}
+ ${checkoutSektionHTML(d)}
+ ${footer()}`;
+}
+window.renderLeistungsnachweis=renderLeistungsnachweis;
 
 async function renderFaecherUebersicht(){
- // In der F11Sb gibt es nur noch Pädagogik/Psychologie: Die frühere Fächerübersicht führt direkt in den Modulplan.
- activeFach="paedagogik";activePhaseDetail=null;
- return await renderFachDetail();
+ return`${pageHead("LEHRPLAN & LERNINHALTE","Fächer 11. Klasse","Wähle ein Fach, um den Lehrplan-Zeitstrahl mit Themen, Aufträgen und Material zu öffnen.","")}
+ <div class="grid grid-4">${F11SB_FAECHER.map(f=>{
+ const wochen=LEHRPLAN_WOCHEN[f.key]||[];
+ const c=personColor(f.key);
+ return`<button class="card tile"style="background:#fff;border-left:4px solid ${c.border};text-align:left"onclick="openFach('${f.key}')">
+ <strong style="font-size:15px;color:${c.text}">${f.label}</strong>
+ <small style="display:block;margin-top:6px">${f.key==="paedagogik"?"4 Lernbereiche · Projekt + Abschlussprüfungs-Training":wochen.length?`${wochen.length} Lehrplan-Wochen hinterlegt`:"Lehrplan-Zeitstrahl folgt"}</small>
+ </button>`;
+ }).join("")}</div>
+ ${footer()}`;
 }
 
 // ============================================================
@@ -4248,11 +6376,7 @@ function aptSchritte(f){f=f||{};return[
 ];}
 // Stundeninhalte mit den 4 Schritten: alle Prüfungstrainings-Einheiten und die Einstiegsinhalte.
 function istStundeneinheit(id){const e=lehrplanWocheById("paedagogik",id);return e?.typ==="apt"||PROJEKT_PHASEN.some(p=>p.einstieg&&p.notwendigeWochen.includes(id));}
-function ppTeilWochen(ph,teil){
- const pm=(typeof ppmFuerTeil==="function")?ppmFuerTeil(ph.lbNum,teil):null;
- if(pm){const w=ppmWochen(pm);if(w.length)return w;}
- return(teil==="projekt"?ph.projektSchulwochen:ph.aptSchulwochen).map(swById);
-}
+function ppTeilWochen(ph,teil){return(teil==="projekt"?ph.projektSchulwochen:ph.aptSchulwochen).map(swById);}
 function ppTeilName(teil,ph){return teil==="projekt"?(ph?.einstieg?"Einstieg":"Projekt"):"Abschlussprüfungs-Training";}
 function ppTeilIcon(teil,ph){return teil==="projekt"?(ph?.einstieg?"🧪":"🔬"):"🎓";}
 
@@ -4433,15 +6557,14 @@ function ppKprimBereichHTML(ph,teil,coDaten,heute){
   let rechts="";
   if(co)rechts=coAktionHTML(co,d);
   else if(lehrer){
-   const vls=CHECKOUT_VORLAGEN.filter(v=>v.datum===w.end);
-   rechts=vls.map((vl,k)=>`<button class="${k===0?"primary":"secondary"}"onclick="openCheckoutEditor(null,{datum:'${w.end}',lbNum:${ph.lbNum},vorlage:'${vl.id}'})">📋 Vorlage „${esc(vl.titel)}“ einsetzen</button>`).join("")
-    +`<button class="${vls.length?"secondary":"primary"}"onclick="openCheckoutEditor(null,{datum:'${w.end}',lbNum:${ph.lbNum}})">＋ Check-out anlegen</button>`;
+   const vl=CHECKOUT_VORLAGEN.find(v=>v.datum===w.end);
+   rechts=(vl?`<button class="primary"onclick="openCheckoutEditor(null,{datum:'${w.end}',lbNum:${ph.lbNum},vorlage:'${vl.id}'})">📋 Vorlage „${esc(vl.titel)}“ einsetzen</button>`:"")
+    +`<button class="${vl?"secondary":"primary"}"onclick="openCheckoutEditor(null,{datum:'${w.end}',lbNum:${ph.lbNum}})">＋ Check-out anlegen</button>`;
   }
   else rechts=`<small style="color:var(--muted)">${vorbei?"kein Check-out":"Deine Lehrkraft schaltet ihn am Freitag frei."}</small>`;
-  if(lehrer&&(co||CHECKOUT_VORLAGEN.some(v=>v.datum===w.end)))rechts=`<button class="secondary"onclick="openKprimVorschau(0,'${w.end}')">👁 Vorschau</button>`+rechts;
   const st=co&&lehrer&&co.status==="beendet"&&stat[co.id]?` · ${stat[co.id].n} ausgewertet · Ø ${(stat[co.id].summe/stat[co.id].n).toFixed(1).replace(".",",")} Punkte`:"";
   return`<div class="co-zeile"><span class="co-lb">Fr ${fmtKurz(w.end)}</span>
-   <div class="co-titel"><b>${co?esc(coTitelAnzeige(co)||"Check-out"):"Check-out"}</b><small>${co?`${(co.aufgaben||[]).length} K-Prim-Aufgaben${st}`:(()=>{const v0=CHECKOUT_VORLAGEN.find(v=>v.datum===w.end);return v0?`Vorlage: ${esc(coLabel(v0))} · ${(v0.aufgaben||[]).length} K-Prim-Aufgaben: ${esc(coVorlageInhalte(v0).join(" · "))}`:(CHECKOUT_MAX_AUFGABEN+" K-Prim-Aufgaben zu den Themen der Woche");})()}</small></div>
+   <div class="co-titel"><b>${co?esc(co.titel||"Check-out"):"Check-out"}</b><small>${co?`${(co.aufgaben||[]).length} K-Prim-Aufgaben${st}`:"3 K-Prim-Aufgaben zu den Themen der Woche"}</small></div>
    ${co?coStatChip(co,d):""}<div class="co-aktion">${rechts}</div></div>`;
  }).join("");
  // --- Bibliothek bzw. Ergebnisse ---
@@ -4450,16 +6573,16 @@ function ppKprimBereichHTML(ph,teil,coDaten,heute){
   const beendet=(d.checkouts||[]).filter(c=>c.status==="beendet");
   mitte=`<div class="kicker pp-kp-h">ERGEBNISSE · ALLE BEENDETEN CHECK-OUTS (${beendet.length})</div>
    <div class="co-liste">${beendet.map(c=>{const t=stat[c.id];return`<div class="co-zeile"><span class="co-lb">LB ${esc(c.lbNum||"")}</span>
-    <div class="co-titel"><b>${esc(coTitelAnzeige(c)||"Check-out")}</b><small>${coDatum(c.datum)} · ${t?`${t.n} ausgewertet · Ø ${(t.summe/t.n).toFixed(1).replace(".",",")} Punkte`:"noch keine Auswertung"}</small></div>
+    <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${coDatum(c.datum)} · ${t?`${t.n} ausgewertet · Ø ${(t.summe/t.n).toFixed(1).replace(".",",")} Punkte`:"noch keine Auswertung"}</small></div>
     <div class="co-aktion"><button class="secondary"onclick="openCheckoutErgebnisse('${c.id}')">Ergebnisse</button><button class="secondary"onclick="coPdfKlasse('${c.id}')">PDF Klasse</button></div></div>`;}).join("")||`<div class="empty">Noch kein Check-out beendet. Die Ergebnisse erscheinen hier, sobald du einen Test beendet hast.</div>`}</div>`;
   ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>Schüler:innen wählen ${d.einst.anzahlWaehlen} Tests aus ihrer Bibliothek · ${esc(coAuswahlStatus(d.einst).text)}</small></div>
-   <div class="co-aktion"><button class="primary"onclick="openKprimUebersicht()">🗂 Alle Freitage &amp; Vorschau</button><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="secondary"onclick="openCheckoutKlassenuebersicht()">Ergebnisse je Schüler:in</button><button class="secondary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button></div></div>`;
+   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="primary"onclick="openCheckoutKlassenuebersicht()">Ergebnisse je Schüler:in</button><button class="secondary"onclick="openRespizienzDialog()">🖨 Respizienz-Ausdruck</button></div></div>`;
  }else{
   const fertig=(d.checkouts||[]).filter(c=>d.meineAbgaben?.[c.id]?.abgegeben);
   mitte=`<div class="kicker pp-kp-h">MEINE ABGESCHLOSSENEN CHECK-OUTS (${fertig.length})</div>
    <div class="co-liste">${fertig.map(c=>{const a=d.meineAbgaben[c.id];
     return`<div class="co-zeile"><span class="co-lb">LB ${esc(c.lbNum||"")}</span>
-     <div class="co-titel"><b>${esc(coTitelAnzeige(c)||"Check-out")}</b><small>${esc(coTestDatum(c,a))}${a.ausgewertet?` · ${a.be} von ${a.maxBE} BE`:""}</small></div>
+     <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${esc(coTestDatum(c,a))}${a.ausgewertet?` · ${a.be} von ${a.maxBE} BE`:""}</small></div>
      <div class="co-aktion">${a.ausgewertet?`<b class="co-np">${esc(npText(a.notenpunkte))}</b><button class="secondary"onclick="openCheckoutMeinErgebnis('${c.id}')">Ansehen</button><button class="secondary"onclick="coPdfSchueler('${c.id}')">PDF</button>`:`<small style="color:var(--muted)">wird ausgewertet …</small>`}</div></div>`;}).join("")||`<div class="empty">Noch kein Check-out abgeschlossen. Deine erledigten Tests erscheinen hier und bilden deine Bibliothek.</div>`}</div>`;
   const pool=coPool(d.checkouts,d.einst).filter(c=>d.meineAbgaben?.[c.id]?.ausgewertet);
   const status=coAuswahlStatus(d.einst);
@@ -4471,7 +6594,8 @@ function ppKprimBereichHTML(ph,teil,coDaten,heute){
    <div class="co-aktion">${aktion}${d.auswahl?`<button class="secondary"onclick="coPdfRespizienz()">PDF Auswahl</button>`:""}${fertig.length?`<button class="secondary"onclick="coPdfSchuelerAlle()">PDF alle Ergebnisse</button>`:""}</div></div>`;
  }
  return`<div class="card co-karte pp-kp">
-  <div class="co-kopf"><div><h3>🏁 K-Prim-Aufgaben · Check-out am Freitag</h3><small>Ein Test besteht aus einer Fallvignette und ${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben (je 4 Aussagen richtig oder falsch) zu den Themen der Woche${themen?` (${esc(themen)})`:""}. Deine Lehrkraft schaltet ihn live frei, ausgewertet wird in Notenpunkten nach dem P/P-Bewertungsschlüssel.</small></div></div>
+  <div class="co-kopf"><div><h3>🏁 K-Prim-Aufgaben · Check-out am Freitag</h3><small>Jeden Freitag ein Test mit 3 K-Prim-Aufgaben (je 4 Aussagen richtig oder falsch) zu den Themen der Woche${themen?` (${esc(themen)})`:""}. Deine Lehrkraft schaltet ihn live frei, ausgewertet wird in Notenpunkten nach dem P/P-Bewertungsschlüssel.</small></div></div>
+  ${lehrer?"":coBewertungsInfoHTML(d.einst.anzahlWaehlen)}
   <div class="kicker pp-kp-h">FREITAGE IN DIESER ETAPPE</div>
   <div class="co-liste">${fr}</div>
   ${mitte}
@@ -4496,2034 +6620,6 @@ function ppNaechsterSchrittHTML(fortschrittMap,heute){
   ${rueckstand.length?`<p style="font-size:12px;color:#b3541e;margin:10px 0 0">⚠︎ Noch offen aus früheren Abschnitten: ${rueckstand.map(x=>`<a href="javascript:void 0"onclick="openPhaseDetail('${x.ph.id}:${x.teil}')">${esc(x.ph.lb)} ${ppTeilName(x.teil,x.ph)} (${offen(x).length})</a>`).join(", ")}</p>`:""}
  </div>`;
 }
-
-// ============================================================
-// MODULPLANER · Pädagogik/Psychologie (11. Klasse)
-// Lehrkräfte planen Woche für Woche frei, mit fünf Modulen:
-//  1 Projekt · 2 Unterrichtsstunde (Deeper Learning) · 3 Abschlussprüfungstraining
-//  4 K-Prim-Aufgabentest · 5 Selbstlernkurs
-// Sammlungen: ppModule (Plan), ppStundenAntworten, ppKursFortschritt (je Person).
-// Projekt und Prüfungstraining nutzen weiter die bestehenden Ansichten
-// (Teams, Meilensteine, 4 Schritte); die Wochen kommen jetzt aus dem Plan.
-// ============================================================
-const PPM_TYPEN={
- projekt:{icon:"",name:"Ein Projekt durchführen",kurz:"Projekt",art:"Projekt",text:"Team-Projekt mit Meilensteinen anlegen."},
- stunde:{icon:"",name:"Unterrichtsstunde nach dem Deeper-Learning-Konzept",kurz:"Stunde",art:"Deeper-Learning-Einheit",text:"Mit Digitaler Tafel, Material (PDF, Film, Audio, Bilder, Links) und einem Check-out mit offener Frage."},
- apt:{icon:"",name:"Abschlussprüfungstraining",kurz:"Prüfungstraining",art:"Abschlussprüfungstraining",text:"Prüfungsfrage, relevanter Inhalt, Bearbeitung durch die Schüler:innen und Vergleich mit der Lösung."},
- kprim:{icon:"",name:"K-Prim-Aufgabentest",kurz:"K-Prim-Test",art:"K-Prim-Aufgabensatz",text:"Check-out mit K-Prim-Aufgaben, automatisch ausgewertet."},
- selbstlern:{icon:"",name:"Selbstlernkurs",kurz:"Selbstlernkurs",art:"Selbstlernkurs",text:"Schüler:innen bearbeiten den Kurs selbstständig von A bis Z."},
- experiment:{icon:"",name:"Experiment (interaktive Einheit)",kurz:"Experiment",art:"Experiment",text:"„Das Experiment“ als interaktive Einheit. Du wählst selbst, welche Teile dabei sind."},
- einfuehrung:{icon:"",name:"Einführung in den Lernbereich",kurz:"Einführung",art:"Einführung in den Lernbereich",text:"Thema wählen: Die Digitale Tafel mit Vorlagen und die passenden Selbstlernkurse sind sofort vorbereitet."},
- rallye:{icon:"",name:"Lernrallye",kurz:"Lernrallye",art:"Lernrallye",text:"Stationen mit Aufgaben, per QR-Code oder der Reihe nach, einzeln oder in Teams, mit Punkten und Rangliste."}
-};
-// Themen für „Einführung in den Lernbereich“: Tafel-Vorlagen (Seiten in der Reihenfolge) und verknüpfte Selbstlernkurse (Einheiten-IDs aus einarbeitung/inhalte).
-// Weitere Themen lassen sich hier einfach ergänzen.
-const PPM_EINF_THEMEN={
- gegenstand:{titel:"Gegenstand der Psychologie und Pädagogik",
-  text:"Tafel mit 2 Seiten (Einstieg „Was ist Psychologie?“, „Psychologie oder Pädagogik?“) und die Selbstlernkurse zu Psychologie und Pädagogik.",
-  tafel:["Einstieg: Was ist Psychologie?","Psychologie oder Pädagogik?"],
-  kurse:["pp01","pp1a1"],
-  ablauf:["Tafel, Seite 1: Post-its gemeinsam einordnen (Lehrkraft bedient die Tafel), eigenes Post-it im Whiteboard des Moduls schreiben (ca. 30 Min.)","Selbstlernkurs „Gegenstand der Psychologie“ (Erleben und Verhalten)","Selbstlernkurs „Gegenstand der Pädagogik“ (Erziehungspraxis, Erziehungswissenschaft, fünf Gegenstandsbereiche)","Tafel, Seite 2: „Psychologie oder Pädagogik?“ zuordnen und Beispiele aus dem Praktikum ergänzen (ca. 20 Min.)"]},
- eigen:{titel:"Eigenes Thema (leere Tafel)",text:"Leere Digitale Tafel, die du selbst gestaltest. Kurse gibt es keine.",tafel:[],kurse:[],ablauf:[]}
-};
-const PPM_EINHEITEN={experiment:{icon:"",name:"Das Experiment – interaktive Stunde",text:"Kaugummi-Versuch in Kleingruppen, Klassenvergleich, Merkmale eines Experiments und Abschlussquiz."}};
-// Dauer eines Moduls: eine Unterrichtsstunde (45 Min.), Doppelstunde, 120 oder 180 Minuten,
-// oder eine bis drei ganze Wochen. Minutenmodule gehören zu der Woche, in der sie beginnen.
-const PPM_DAUERN=[
- {k:"15",name:"15 Minuten",lang:"15 Minuten (z. B. K-Prim-Test)",min:15,wochen:1},
- {k:"45",name:"1 Stunde",lang:"1 Unterrichtsstunde (45 Minuten)",min:45,wochen:1},
- {k:"90",name:"2 Stunden",lang:"2 Unterrichtsstunden (Doppelstunde, 90 Minuten)",min:90,wochen:1},
- {k:"135",name:"3 Stunden",lang:"3 Unterrichtsstunden (135 Minuten)",min:135,wochen:1},
- {k:"180",name:"4 Stunden",lang:"4 Unterrichtsstunden (180 Minuten)",min:180,wochen:1},
- {k:"120",name:"120 Minuten",lang:"120 Minuten (bisher)",min:120,wochen:1,alt:true},
- {k:"w1",name:"1 Woche",lang:"1 Woche",wochen:1},
- {k:"w2",name:"2 Wochen",lang:"2 Wochen",wochen:2},
- {k:"w3",name:"3 Wochen",lang:"3 Wochen",wochen:3}
-];
-// Pro Schulwoche stehen 6,3 Unterrichtsstunden zu je 45 Minuten (285 Minuten) zur Verfügung. Wochen mit Praktikum (fpA-Blöcke)
-// und Ferien sind gesperrt. Eine ganze Woche (1 bis 3 Wochen) belegt die Woche vollständig.
-const PPM_STD_PRO_WOCHE="6,3",PPM_MIN_PRO_STUNDE=45,PPM_MIN_PRO_WOCHE=285; // 6 Stunden + 15 Minuten (z. B. K-Prim-Test) = 285 Minuten = 6,3 Stunden
-const PPM_DAUER_STANDARD={projekt:"w3",stunde:"90",experiment:"90",apt:"w1",kprim:"45",selbstlern:"w1",einfuehrung:"135",rallye:"90"};
-function ppmDauerKey(m){
- if(m&&PPM_DAUERN.some(d=>d.k===m.dauer))return m.dauer;
- const n=Math.max(1,Number(m&&m.wochen)||1);
- return "w"+n;       // ältere Module: Wochenzahl bleibt erhalten (auch über 3 Wochen)
-}
-function ppmDauerDef(m){
- const k=ppmDauerKey(m);
- return PPM_DAUERN.find(d=>d.k===k)||{k,name:k.slice(1)+" Wochen",lang:k.slice(1)+" Wochen",wochen:Number(k.slice(1))||1};
-}
-function ppmDauerText(m){return ppmDauerDef(m).name;}
-// Teile der interaktiven Einheit „Das Experiment“ (aus experiment/das-experiment.html).
-// Die Minuten sind Richtwerte (die ganze Einheit ist als Doppelstunde gedacht).
-const PPM_EXP_TEILE=[
- {k:"einstieg",name:"Einstieg: Lernsituation",min:10,text:"Gespräch zweier Schülerinnen über das Lernen mit Kaugummi."},
- {k:"experiment",name:"Experiment durchführen",min:25,text:"Wörter-Experiment in Kleingruppen mit Vorbereitung, Lernphase, Pause und Auswertung."},
- {k:"ergebnisse",name:"Ergebnisse vergleichen",min:10,text:"Anonymer Klassenvergleich der beiden Gruppen.",braucht:"experiment"},
- {k:"merkmale",name:"Merkmale des Experiments",min:15,text:"Willkürlichkeit, Variierbarkeit und Wiederholbarkeit."},
- {k:"anwendung",name:"Anwendung",min:15,text:"Szenarien: Ist das ein Experiment?"},
- {k:"abschluss",name:"Abschlussquiz",min:10,text:"Aufgaben zum Abschluss; danach gilt die Einheit als gemacht."}
-];
-function ppmExpMinuten(teile){return PPM_EXP_TEILE.filter(t=>(teile||[]).includes(t.k)).reduce((n,t)=>n+t.min,0);}
-function ppmExpTeile(m){return Array.isArray(m&&m.teile)&&m.teile.length?m.teile:PPM_EXP_TEILE.map(t=>t.k);}
-// Fertige Einarbeitungs-Inhalte (einarbeitung/inhalte/<id>.json); wählbar im Selbstlernkurs.
-const PPM_EA_IDS=["fa01","fa02","pp01","pp02","pp03","pp1a1","pp1a2","pp1a3","pp1a4","pp04a","pp04b","pp04c","pp04d","pp05","pp06","pp07","pp21a","pp21b","pp2a1","pp10","pp11","pp15","pp16"];
-// Einheitliche Bezeichnung: Inhalt · Modulart · LB1 (LB nur, wenn bekannt)
-function ppmBez(inhalt,modul,lb){const T=PPM_TYPEN[modul];return[inhalt,T?T.art:"",lb?"LB"+lb:""].filter(Boolean).join(" · ");}
-// Modulart und Lernbereich einer Einarbeitung: zuerst die Angaben in der JSON-Datei ("modulart", "lb"),
-// sonst aus der Inhaltsliste (PP_EINHEITEN): Prüfungstraining = apt, alle anderen = Selbstlernkurs.
-function ppmEaMeta(id,info){
- const e=(typeof PP_EINHEITEN!=="undefined"?PP_EINHEITEN:[]).find(x=>x.id===id)||null;
- const art=(info&&info.modulart&&PPM_TYPEN[info.modulart])?info.modulart:(e&&e.typ==="apt"?"apt":"selbstlern");
- const lb=(info&&Number(info.lb))||(e&&Number(String(e.phase||"").replace(/\D/g,"")))||0;
- return{art,lb};
-}
-// Einheitliche Beschriftung aller Selbstlernkurse: „LB1 · Nr. 1 · Titel“ (Nr. = Nummer des Inhalts im Lehrplan,
-// aus PP_EINHEITEN oder dem Feld "nr" in der JSON-Datei). Ausnahme: Basiskurs Fachaufsatz (fa01) bleibt wie bisher.
-function ppmEaNr(id,info){
- const e=(typeof PP_EINHEITEN!=="undefined"?PP_EINHEITEN:[]).find(x=>x.id===id);
- return String((info&&info.nr)||(e&&e.nr)||"").trim();
-}
-function ppmEaLabel(id,info){
- const titel=(info&&info.titel)||id,meta=ppmEaMeta(id,info);
- if(id==="fa01")return ppmBez(titel,meta.art,meta.lb);
- const nr=ppmEaNr(id,info);
- return[meta.lb?"LB"+meta.lb:"",nr?"Nr. "+nr:"",titel].filter(Boolean).join(" · ");
-}
-// Angezeigter Modultitel: Bei Selbstlernkursen mit unverändertem Kurstitel die einheitliche Beschriftung zeigen (auch bei älteren Modulen).
-function ppmTitel(m){
- if(m&&m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){
-  const id=m.kursId.slice(3),i=einarbeitungCache[id];
-  if(i&&id!=="fa01"&&m.titel===i.titel)return ppmEaLabel(id,i);
- }
- if(m&&m.modul==="kprim"){const v=CHECKOUT_VORLAGEN_ALLE.find(x=>x.titel===m.titel||coLabel(x)===m.titel);if(v)return coLabel(v);}
- return(m&&m.titel)||"";
-}
-async function ppmEaListe(){
- const r=await Promise.all(PPM_EA_IDS.map(async id=>{const i=await einarbeitungInfo(id);if(!i)return null;const m=ppmEaMeta(id,i);return{id,titel:i.titel,entwurf:i.entwurf,art:m.art,lb:m.lb,nr:i.nr||""};}));
- return r.filter(Boolean);
-}
-const PPM={liste:[],geladen:0,fehler:"",meine:{kurs:{},stunde:{},ea:{}},bep:{},bepV:{}};
-let activePPModul=null;
-
-const PPM_KURSE={
- "psych-gegenstand":{titel:"Gegenstand der Psychologie: Erleben und Verhalten",
-  text:"Selbstlernkurs für LB 1: Erleben und Verhalten unterscheiden, an Beispielen üben und im Experiment anwenden.",
-  schritte:[
-   {id:"s1",typ:"ziele",titel:"Das lernst du",items:["Ich kann Erleben und Verhalten als Gegenstand der Psychologie definieren und voneinander abgrenzen.","Ich kann an Alltags- und Praxisbeispielen zeigen, welche Anteile beobachtbar (Verhalten) und welche nur erschließbar bzw. erfragbar (Erleben) sind.","Ich kann für ein Beispiel-Experiment festlegen, welches Verhalten beobachtet und wie das Erleben erfasst wird (z. B. durch Befragung)."]},
-   {id:"s2",typ:"text",titel:"Ausarbeitung: Erleben und Verhalten",text:
-`## Psychologie: die Wissenschaft von Erleben und Verhalten
-Die Psychologie untersucht, wie Menschen **erleben** und wie sie sich **verhalten**. Beides gehört zusammen, wird aber unterschiedlich erfasst.
-
-## Erleben
-Erleben umfasst die **inneren Vorgänge** einer Person: Wahrnehmen, Denken, Fühlen, Erinnern und Wollen. Sie sind nur der Person selbst unmittelbar zugänglich. Andere können sie nicht sehen, sondern nur **erfragen** oder aus dem Verhalten **erschließen**.
-- Beispiel: Nora hat Angst vor der nächsten Mathearbeit.
-
-## Verhalten
-Verhalten ist alles, was **von außen beobachtbar** ist: Bewegungen, Körperhaltung, Mimik, Sprechen und Handeln.
-- Beispiel: Nora sitzt still am Platz, schaut auf ihre Hände und seufzt.
-
-## Wie hängt beides zusammen?
-Erleben und Verhalten beeinflussen sich gegenseitig. Angst (Erleben) kann zu Rückzug (Verhalten) führen. Umgekehrt kann ein bestimmtes Verhalten, etwa Lächeln, das Erleben verändern. Aus beobachtetem Verhalten lassen sich nur **Vermutungen** über das Erleben ableiten.
-
-## Wichtig für die Praxis
-- Erst beschreiben, was man sieht (Verhalten), dann vorsichtig deuten (Erleben).
-- Ob eine Deutung stimmt, klärt man oft nur durch Nachfragen.`},
-   {id:"s3",typ:"zuordnen",titel:"Interaktive Aufgabe: Erleben oder Verhalten?",frage:"Ordne jede Aussage zu. Du bekommst sofort eine Rückmeldung.",kategorien:["Erleben","Verhalten"],items:[
-    {t:"Nora hat Angst vor der nächsten Arbeit.",k:0,e:"Angst ist ein innerer Vorgang, den nur Nora selbst unmittelbar kennt."},
-    {t:"Nora seufzt leise.",k:1,e:"Seufzen kann man hören, es ist beobachtbar."},
-    {t:"Ben freut sich auf die Pause.",k:0,e:"Freude ist ein Gefühl, also Erleben."},
-    {t:"Ben rennt als Erster aus dem Raum.",k:1,e:"Rennen ist eine beobachtbare Handlung."},
-    {t:"Lena erinnert sich an ihren ersten Schultag.",k:0,e:"Erinnern läuft innen ab und ist von außen nicht zu sehen."},
-    {t:"Lena erzählt ihrer Freundin vom ersten Schultag.",k:1,e:"Sprechen ist beobachtbares Verhalten."},
-    {t:"Tom ist wütend.",k:0,e:"Wut ist ein Gefühl, das nur Tom selbst direkt erlebt."},
-    {t:"Tom schlägt mit der Faust auf den Tisch.",k:1,e:"Die Handlung ist von außen sichtbar."},
-    {t:"Mia überlegt, wie sie die Aufgabe löst.",k:0,e:"Denken ist ein innerer Vorgang."},
-    {t:"Mia runzelt die Stirn.",k:1,e:"Mimik lässt sich beobachten."}]},
-   {id:"s4",typ:"text",titel:"Wie kommt man an das Erleben heran?",text:
-`## Beobachten und Befragen
-Verhalten kann man **systematisch beobachten**: Was genau tut die Person, wie oft, in welcher Situation?
-
-Erleben erfasst man vor allem durch **Befragung**, zum Beispiel mit einem Interview oder einem Fragebogen. Zusätzlich kann man es vorsichtig aus dem Verhalten **erschließen**.
-
-## Im Experiment
-In einem Experiment legt man fest, **welches Verhalten beobachtet** wird (zum Beispiel die Anzahl erinnerter Wörter) und **wie das Erleben erfasst** wird (zum Beispiel durch eine Befragung nach der Anstrengung).`},
-   {id:"s5",typ:"experiment",titel:"Interaktive Aufgabe: Das Experiment",text:"Du führst den Kaugummi-Versuch in Kleingruppen durch, vergleichst die Ergebnisse der Klasse und beantwortest ein kurzes Abschlussquiz."},
-   {id:"s6",typ:"selbsttest",titel:"Selbsttest: Das habe ich verstanden",fragen:[
-    {frage:"Erkläre den Unterschied zwischen Erleben und Verhalten.",loesung:"Verhalten ist von außen beobachtbar, zum Beispiel Sprechen, Mimik oder Bewegung. Erleben sind innere Vorgänge wie Wahrnehmen, Denken und Fühlen, die nur die Person selbst unmittelbar kennt."},
-    {frage:"Nenne je ein Beispiel für Erleben und für Verhalten aus deinem Praktikum.",loesung:"Individuelle Lösung. Beispiel: Erleben: Ein Kind fühlt sich ausgeschlossen. Verhalten: Es steht allein am Rand und schaut zu. Das Erleben ist nicht beobachtbar, sondern nur erfragbar oder erschließbar."},
-    {frage:"Wie lässt sich das Erleben einer Person erfassen?",loesung:"Durch Befragung, etwa Interview oder Fragebogen, oder indem man es vorsichtig aus beobachtbarem Verhalten erschließt."}]},
-   {id:"s7",typ:"abschluss",titel:"Geschafft",text:"Du hast den Selbstlernkurs abgeschlossen. Du kannst Erleben und Verhalten unterscheiden und auf Beispiele anwenden."}
-  ]}
-};
-function ppmKursSchritte(m){
- if(Array.isArray(m.schritte)&&m.schritte.length)return m.schritte;
- return (PPM_KURSE[m.kursId]||{}).schritte||[];
-}
-async function ppmLaden(erzwingen){
- if(!erzwingen&&Date.now()-PPM.geladen<30000)return;
- try{
-  const s=await getDocs(collection(db,"ppModule"));
-  PPM.liste=s.docs.map(d=>({id:d.id,...d.data()}));PPM.fehler="";
- }catch(e){console.error("Module laden:",e);PPM.fehler=(e&&(e.code||e.name))||"unbekannt";PPM.liste=[];}
- try{await Promise.all([...new Set(PPM.liste.filter(m=>m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")).map(m=>m.kursId.slice(3)))].map(id=>einarbeitungInfo(id)));}catch(e){console.error("Kursinfos laden:",e);}
- PPM.geladen=Date.now();
- PPM.liste.sort((a,b)=>(ppmSwIndex(a.start)-ppmSwIndex(b.start))||((a.ord||0)-(b.ord||0))||(tsSek(a.createdAt)-tsSek(b.createdAt)));
-}
-function ppmSwIndex(id){return SCHULWOCHEN_PP.findIndex(w=>w.id===id);}
-function ppmWochen(m){const i=ppmSwIndex(m.start);if(i<0)return[];return SCHULWOCHEN_PP.slice(i,i+ppmDauerDef(m).wochen);}
-function ppmStd(min){return String(Math.round(min/PPM_MIN_PRO_STUNDE*10)/10).replace(".",",");} // Minuten → Unterrichtsstunden (à 45 Min.)
-// Belegte Minuten je Schulwoche. Experiment-Einheiten innerhalb eines Projekts zählen zur Projektzeit.
-// Projekte über ganze Wochen laufen auf einer eigenen „Projektspur“: Sie belegen keine der 6,3 Stunden,
-// daneben bleibt in jeder Woche eine normale Zeile für Selbstlernkurse und andere Module.
-function ppmIstSpur(m){return !!m&&m.modul==="projekt"&&!m.projektId&&!ppmDauerDef(m).min;}
-function ppmLast(ohneId){
- const last={};SCHULWOCHEN_PP.forEach(w=>{last[w.id]={min:0,liste:[],spur:[]};});
- PPM.liste.forEach(m=>{
-  if(m.id===ohneId||m.projektId)return;
-  if(ppmIstSpur(m)){ppmWochen(m).forEach(w=>{last[w.id].spur.push(m);});return;}
-  const d=ppmDauerDef(m);
-  if(d.min){const w=last[m.start];if(w){w.min+=d.min;w.liste.push(m);}}
-  else ppmWochen(m).forEach(w=>{last[w.id].min+=PPM_MIN_PRO_WOCHE;last[w.id].liste.push(m);});
- });
- return last;
-}
-function ppmPruefen(startId,dauerKey,ohneId,modul){
- const d=PPM_DAUERN.find(x=>x.k===dauerKey)||{k:dauerKey,wochen:Number(String(dauerKey).slice(1))||1};
- const i=ppmSwIndex(startId);
- if(i<0)return{ok:false,zeilen:[],fehler:"Bitte eine Schulwoche wählen."};
- const last=ppmLast(ohneId),zeilen=[];
- if(d.min){
-  const w=SCHULWOCHEN_PP[i],belegt=last[w.id].min,frei=PPM_MIN_PRO_WOCHE-belegt;
-  zeilen.push({w,belegt,neu:d.min,frei,ok:frei>=d.min});
- }else{
-  const ws=SCHULWOCHEN_PP.slice(i,i+d.wochen);
-  if(ws.length<d.wochen)return{ok:false,zeilen:[],fehler:`Ab dieser Woche gibt es nur noch ${ws.length} Schulwoche${ws.length===1?"":"n"}.`};
-  if(modul==="projekt")ws.forEach(w=>{const a=last[w.id].spur[0];zeilen.push({w,spur:true,konflikt:a?ppmTitel(a):"",belegt:last[w.id].min,neu:0,frei:PPM_MIN_PRO_WOCHE-last[w.id].min,ok:!a});});
-  else ws.forEach(w=>{const belegt=last[w.id].min;zeilen.push({w,belegt,neu:PPM_MIN_PRO_WOCHE,frei:PPM_MIN_PRO_WOCHE-belegt,ok:belegt===0});});
- }
- return{ok:zeilen.every(z=>z.ok),zeilen};
-}
-function ppmKapaHtml(p){
- if(p.fehler)return`<span style="color:#b3261e">${esc(p.fehler)}</span>`;
- let vorher=null;
- return p.zeilen.map(z=>{
-  const sprung=vorher&&(new Date(z.w.start)-new Date(vorher.end))>4*86400000;vorher=z.w;
-  if(z.spur){
-   const t2=`${fmtKurz(z.w.start)}–${fmtKurz(z.w.end)}: `+(z.ok?"Projektspur frei, die 6,3 Stunden der Woche bleiben für andere Module":`hier läuft schon ein Projekt${z.konflikt?` („${z.konflikt}“)`:""}`);
-   return`${sprung?`<span style="color:#7a4b00">↷ dazwischen Praktikum oder Ferien</span><br>`:""}<span style="color:${z.ok?"#1f6a3a":"#b3261e"}">${z.ok?"✓":"✗"} ${esc(t2)}</span>`;
-  }
-  const txt=`${fmtKurz(z.w.start)}–${fmtKurz(z.w.end)}: ${ppmStd(z.belegt)} von ${PPM_STD_PRO_WOCHE} Stunden belegt`+(z.ok?` → danach ${ppmStd(z.belegt+z.neu)} von ${PPM_STD_PRO_WOCHE} Stunden`:` – nicht genug Platz (frei: ${ppmStd(Math.max(0,z.frei))} Stunden)`);
-  return`${sprung?`<span style="color:#7a4b00">↷ dazwischen Praktikum oder Ferien</span><br>`:""}<span style="color:${z.ok?"#1f6a3a":"#b3261e"}">${z.ok?"✓":"✗"} ${esc(txt)}</span>`;
- }).join("<br>");
-}
-function ppmIso(d){return d.toISOString().slice(0,10);}
-function ppmPlusTage(iso,n){const d=new Date(iso+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+n);return ppmIso(d);}
-// Alle Wochen des Schuljahres in der Reihenfolge: Schulwoche oder gesperrter Block (Praktikum, Ferien).
-function ppmZeitleiste(){
- const out=[];let cur=null;
- for(let start="2026-10-05";start<="2027-07-30";start=ppmPlusTage(start,7)){
-  const fr=ppmPlusTage(start,4),sw=SCHULWOCHEN_PP.find(w=>w.start===start);
-  if(sw){out.push({art:"woche",w:sw});cur=null;continue;}
-  const pr=PRAKTIKUMSPHASEN.find(x=>x.start<=fr&&x.end>=start);
-  const fe=pr?null:FERIEN_2026_27.find(x=>x.start<=fr&&x.end>=start);
-  const key=pr?pr.id:(fe?fe.titel:"frei");
-  if(cur&&cur.key===key){cur.n++;cur.bis=fr;continue;}
-  cur={art:"block",key,kind:pr?"praktikum":(fe?"ferien":"frei"),titel:pr?pr.titel:(fe?fe.titel:"Unterrichtsfrei"),icon:pr?pr.icon:"",von:pr?pr.start:(fe?fe.start:start),bis:pr?pr.end:(fe?fe.end:fr),n:1};
-  out.push(cur);
- }
- return out;
-}
-function ppmFuerTeil(lb,teil){return PPM.liste.find(m=>m.modul===teil&&Number(m.lb)===Number(lb));}
-function ppmById(id){return PPM.liste.find(m=>m.id===id)||null;}
-function ppmFarbe(m){return PP_FARBEN[m.lb]||"#8a99a3";}
-function ppmMd(t){
- const zeilen=String(t||"").split("\n");let html="",liste=false;
- const inl=x=>esc(x).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
- zeilen.forEach(z=>{
-  const l=z.trim();
-  if(l.startsWith("- ")){if(!liste){html+="<ul>";liste=true;}html+=`<li>${inl(l.slice(2))}</li>`;return;}
-  if(liste){html+="</ul>";liste=false;}
-  if(l.startsWith("## "))html+=`<h3>${inl(l.slice(3))}</h3>`;
-  else if(l)html+=`<p>${inl(l)}</p>`;
- });
- if(liste)html+="</ul>";
- return html;
-}
-async function ppmMeineLaden(){
- if(isTeacher())return;
- try{
-  const [a,b]=await Promise.all([
-   getDocs(query(collection(db,"ppKursFortschritt"),where("uid","==",currentUser.uid))),
-   getDocs(query(collection(db,"ppStundenAntworten"),where("uid","==",currentUser.uid)))]);
-  PPM.meine.kurs=Object.fromEntries(a.docs.map(d=>[d.data().modulId,d.data()]));
-  PPM.meine.stunde=Object.fromEntries(b.docs.map(d=>[d.data().modulId,d.data()]));
-  if(PPM.liste.some(x=>x.modul==="rallye")){try{const q=await getDocs(query(collection(db,"ppRallyeStand"),where("uid","==",currentUser.uid)));q.docs.forEach(d=>{const x=d.data();x.frei=x.frei||{};x.erg=x.erg||{};LR.stand[x.modulId]=x;});}catch(e){console.error("Rallye-Stand:",e);}}
-  PPM.meine.ea={};PPM.meine.exp=await getLehrplanFortschritt(experimentWocheId());
-  for(const m of PPM.liste.filter(x=>String(x.kursId||"").startsWith("ea:"))){const id=m.kursId.slice(3);PPM.meine.ea[id]=await getLehrplanFortschritt(id);}
-  for(const m of PPM.liste.filter(x=>x.modul==="einfuehrung"))for(const id of (m.kurse||[]))if(!PPM.meine.ea[id])PPM.meine.ea[id]=await getLehrplanFortschritt(id);
- }catch(e){console.error("Eigener Fortschritt:",e);}
-}
-function ppmDocId(m){return`${m.id}_${currentUser.uid}`;}
-function ppmName(){return anzeigeName(profile,currentUser);}
-
-// ------------------------------------------------------------ Modulplan
-// Fortschritt der angemeldeten Person je Modul: {done, frac (0..1)} oder null, wenn für das Modul kein Stand erfasst wird.
-function ppmFort(m){
- if(isTeacher())return null;
- try{
-  if(m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){const f=PPM.meine.ea[m.kursId.slice(3)]||{},a=f.einarbeitungAufgaben,done=!!f.einarbeitungAbgeschlossen;return{done,frac:done?1:(a&&a.gesamt?a.richtig/a.gesamt:0)};}
-  if(m.modul==="rallye"){const p=lrFortschritt(m);return p.n?{done:p.done,frac:p.frac}:null;}
-  if(m.modul==="einfuehrung"){const ids=m.kurse||[];if(!ids.length)return null;const n=ids.filter(id=>(PPM.meine.ea[id]||{}).einarbeitungAbgeschlossen).length;return{done:n===ids.length,frac:n/ids.length};}
-  if(m.modul==="projekt"&&m.vorlage)return bepFort(m);
-  if(m.modul==="experiment"||(m.modul==="projekt"&&ppmProjektDirekt(m))){const f=PPM.meine.exp||{},done=!!f.experimentErledigt;return{done,frac:done?1:0};}
-  if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(x=>x.typ!=="abschluss"),f=PPM.meine.kurs[m.id],n=f?sch.filter(x=>f.erledigt&&f.erledigt[x.id]).length:0,done=!!sch.length&&n===sch.length;return{done,frac:sch.length?n/sch.length:0};}
-  if(m.modul==="apt"){const f=PPM.meine.stunde[m.id]||{},done=!!f.aptBewertung;return{done,frac:done?1:(f.aptAbgegeben?2/3:(f.aptAntwort?1/3:0))};}
-  if(m.modul==="stunde"){const f=PPM.meine.stunde[m.id],fr=m.fragen||[];if(f&&f.fertig)return{done:true,frac:1};const n=f?(f.gezeigt||[]).filter(Boolean).length:0;return{done:false,frac:fr.length?n/fr.length:0};}
-  if(m.modul==="kprim"){const d=PPM.co;if(!d||!m.checkoutId)return null;const c=(d.checkouts||[]).find(x=>x.id===m.checkoutId);if(!c)return null;const a=(d.meineAbgaben||{})[c.id],done=!!(a&&a.abgegeben);return{done,frac:done?1:(a?0.5:0)};}
- }catch(e){console.error("Fortschritt:",e);}
- return null;
-}
-function ppmKW(w){const d=new Date(w.start+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+3-((d.getUTCDay()+6)%7));const j=new Date(Date.UTC(d.getUTCFullYear(),0,4));return 1+Math.round(((d-j)/86400000-3+((j.getUTCDay()+6)%7))/7);}
-function ppmStatus(m){
- if(isTeacher())return"";
- if(m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){const f=PPM.meine.ea[m.kursId.slice(3)]||{},a=f.einarbeitungAufgaben;return`<span class="ppm-status${f.einarbeitungAbgeschlossen?" ok":""}">${f.einarbeitungAbgeschlossen?"abgeschlossen ✓":(a&&a.gesamt?`${a.richtig}/${a.gesamt} Aufgaben`:"noch offen")}</span>`;}
- if(m.modul==="projekt"&&m.vorlage)return bepStatusHTML(m);
- if(m.modul==="experiment"||(m.modul==="projekt"&&ppmProjektDirekt(m))){const f=PPM.meine.exp||{};return`<span class="ppm-status${f.experimentErledigt?" ok":""}">${f.experimentErledigt?"gemacht ✓":"noch offen"}</span>`;}
- if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(s=>s.typ!=="abschluss"),f=PPM.meine.kurs[m.id];const n=f?sch.filter(s=>f.erledigt&&f.erledigt[s.id]).length:0;return`<span class="ppm-status${n===sch.length&&sch.length?" ok":""}">${n}/${sch.length} Schritte</span>`;}
- if(m.modul==="apt"){const f=PPM.meine.stunde[m.id]||{};return`<span class="ppm-status${f.aptAbgegeben?" ok":""}">${f.aptBewertung?"verglichen ✓":(f.aptAbgegeben?"abgegeben":(f.aptAntwort?"in Arbeit":"noch offen"))}</span>`;}
- if(m.modul==="stunde"){const f=PPM.meine.stunde[m.id];if(f&&f.fertig)return`<span class="ppm-status ok">fertig ✓</span>`;const fr=m.fragen||[];if(!fr.length)return"";const n=f?(f.gezeigt||[]).filter(Boolean).length:0;return`<span class="ppm-status${n===fr.length?" ok":""}">Check-out ${n}/${fr.length}</span>`;}
- if(m.modul==="rallye"){const p=lrFortschritt(m);if(!p.n)return"";return`<span class="ppm-status${p.done?" ok":""}">${p.done?"alle Stationen ✓":p.f+" von "+p.n+" Stationen"}</span>`;}
- if(m.modul==="einfuehrung"){const ids=m.kurse||[];if(!ids.length)return"";const n=ids.filter(id=>(PPM.meine.ea[id]||{}).einarbeitungAbgeschlossen).length;return`<span class="ppm-status${n===ids.length?" ok":""}">${n===ids.length?"Kurse fertig ✓":n+"/"+ids.length+" Kurse"}</span>`;}
- if(m.modul==="kprim"){const p=ppmFort(m);if(p)return`<span class="ppm-status${p.done?" ok":""}">${p.done?"abgegeben ✓":(p.frac>0?"in Arbeit":"noch offen")}</span>`;}
- return"";
-}
-// Lehrkraft: Modul um eine Schulwoche früher oder später legen (überspringt Praktikum und Ferien automatisch).
-function ppmMoveHTML(m){
- const i=ppmSwIndex(m.start),n=SCHULWOCHEN_PP.length;
- const sibs=PPM.liste.filter(x=>x.start===m.start),p=sibs.findIndex(x=>x.id===m.id);
- const erste=i<=0&&p<=0,letzte=(i<0||i>=n-1)&&p>=sibs.length-1;
- return`<span class="ppm-mv"><button type="button" data-ppm="reihenfolge" data-id="${esc(m.id)}" data-d="-1" title="Ein Modul nach vorn (am Wochenanfang: in die vorherige Woche)" aria-label="Modul nach vorn"${erste?" disabled":""}>&lt;</button><button type="button" data-ppm="reihenfolge" data-id="${esc(m.id)}" data-d="1" title="Ein Modul nach hinten (am Wochenende: in die nächste Woche)" aria-label="Modul nach hinten"${letzte?" disabled":""}>&gt;</button></span>`;
-}
-async function ppmReihenfolge(m,d){
- const sibs=PPM.liste.filter(x=>x.start===m.start),i=sibs.findIndex(x=>x.id===m.id),j=i+d;
- if(i<0)return;
- if(j<0||j>=sibs.length){await ppmVerschieben(m,d);return;}
- const y=window.scrollY,l=sibs.slice();[l[i],l[j]]=[l[j],l[i]];
- try{
-  for(let k=0;k<l.length;k++){const o=(k+1)*10;if((l[k].ord||0)!==o)await updateDoc(doc(db,"ppModule",l[k].id),{ord:o,updatedAt:serverTimestamp()});}
-  await ppmLaden(true);await render();
-  try{window.scrollTo(0,y);}catch(e){}
- }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Reihenfolge konnte nicht geändert werden.");}
-}
-async function ppmVerschieben(m,d){
- const i=ppmSwIndex(m.start),n=i+d;
- if(i<0||n<0||n>=SCHULWOCHEN_PP.length){toast("Weiter verschieben geht nicht.");return;}
- const neu=SCHULWOCHEN_PP[n];
- if(!m.projektId){
-  const pr=ppmPruefen(neu.id,ppmDauerKey(m),m.id,m.modul);
-  if(!pr.ok){toast(pr.fehler||`In der Woche ${fmtKurz(neu.start)}–${fmtKurz(neu.end)} ist nicht genug Platz.`);return;}
- }
- const y=window.scrollY;
- try{
-  const ziel=PPM.liste.filter(x=>x.start===neu.id&&x.id!==m.id).map(x=>x.ord||0);
-  const ord=d<0?(ziel.length?Math.max(...ziel):0)+10:(ziel.length?Math.min(...ziel):0)-10;
-  await updateDoc(doc(db,"ppModule",m.id),{start:neu.id,ord,updatedAt:serverTimestamp()});
-  if(m.modul==="projekt"){ // Einheiten im Projekt wandern mit
-   for(const x of PPM.liste.filter(z=>z.projektId===m.id)){
-    const j=ppmSwIndex(x.start)+d;
-    if(j>=0&&j<SCHULWOCHEN_PP.length)await updateDoc(doc(db,"ppModule",x.id),{start:SCHULWOCHEN_PP[j].id,updatedAt:serverTimestamp()});
-   }
-  }
-  await ppmLaden(true);await render();
-  try{window.scrollTo(0,y);}catch(e){}
-  toast(`Verschoben auf ${fmtKurz(neu.start)}–${fmtKurz(neu.end)}.`);
- }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Konnte nicht verschoben werden.");}
-}
-// Kartenbreite: 4 Spalten je Woche. Module bis 2 Stunden (inkl. 15 Min., 1 Std., 2 Std.) sind gleich breit (1 Spalte),
-// 3 bis 4 Stunden nehmen 2 Spalten, ganze Wochen oder mehr als 4 Stunden die volle Zeilenbreite.
-function ppmSpalten(m){const mi=ppmDauerDef(m).min||PPM_MIN_PRO_WOCHE;return mi<=120?1:(mi<=180?2:4);}
-function ppmKarteHTML(m,fortsetzung){
- const T=PPM_TYPEN[m.modul]||PPM_TYPEN.projekt,c=ppmFarbe(m);
- if(fortsetzung)return`<div class="ppm-fort" style="--c:${c}" data-ppm="oeffnen" data-id="${esc(m.id)}">↳ ${T.icon} ${esc(ppmTitel(m)||T.name)} <small>läuft weiter</small></div>`;
- const einh=(m.einheiten||[]).map(e=>`<span class="ppm-chip">${(PPM_EINHEITEN[e.typ]||{}).icon||""} ${esc((PPM_EINHEITEN[e.typ]||{}).name||e.typ).replace("– interaktive Stunde","")}</span>`).join("");
- const exp=m.modul==="experiment"?`<span class="ppm-chip">${ppmExpTeile(m).length} von ${PPM_EXP_TEILE.length} Teilen · ca. ${ppmExpMinuten(ppmExpTeile(m))} Min.</span>`:"";
- const proj=m.projektId?`<span class="ppm-chip">Einheit im Projekt</span>`:"";
- const fo=ppmFort(m);
- return`<div class="ppm-karte${isTeacher()?" ppm-ziehbar":""}${fo?(fo.done?" ppm-st-done":fo.frac>0?" ppm-st-teil":" ppm-st-offen"):""}" style="--c:${c};--sp:${ppmSpalten(m)}" data-ppm="oeffnen" data-id="${esc(m.id)}" tabindex="0" role="button">
-    <span class="ppm-txt"><b>${esc(ppmTitel(m)||T.name)}</b><span class="chip ${({projekt:"prj",experiment:"prj",selbstlern:"slk",einfuehrung:"slk",stunde:"std",rallye:"ral",kprim:"chk",apt:"ueb"})[m.modul]||"chk"}">${esc(T.kurz)}</span><small>LB ${m.lb} · ${esc(ppmDauerText(m))}</small>${ppmStatus(m)}${fo&&!fo.done?`<span class="ppm-mini" title="${Math.round(fo.frac*100)} % geschafft"><i style="width:${Math.round(fo.frac*100)}%"></i></span>`:""}${proj}${exp}${einh}${m.modul==="projekt"&&m.vorlage?bepKachelHTML(m):""}${lbModulPills(m)}</span>
-  ${fo&&fo.done?`<span class="ppm-haken-k" aria-label="geschafft">✓</span>`:""}${isTeacher()?`<button type="button" class="ppm-edit" data-ppm="bearbeiten" data-id="${esc(m.id)}" title="Modul bearbeiten">Ändern</button>`:""}
- </div>`;
-}
-// ---- Zoom im Modulplan: Normal / Kompakt / Übersicht (zum Verschieben über weite Strecken) ----
-function ppmZoomLesen(){try{const z=Number(localStorage.getItem("ppmZoom"));return z>=1&&z<=3?z:1;}catch(e){return 1;}}
-function ppmZoomSetzen(z){
- z=Math.max(1,Math.min(3,Math.round(z)));
- try{localStorage.setItem("ppmZoom",String(z));}catch(e){}
- const p=document.querySelector(".ppm-plan");if(!p)return;
- // die Woche in der Bildschirmmitte merken, damit sie nach dem Umschalten an gleicher Stelle bleibt
- const mitte=window.innerHeight/2;let anker=null,off=0;
- for(const w of p.querySelectorAll(".ppm-woche,.ppm-block")){const r=w.getBoundingClientRect();if(r.bottom>=mitte){anker=w;off=r.top;break;}}
- p.classList.remove("z1","z2","z3");p.classList.add("z"+z);
- p.querySelectorAll("[data-ppm=zoom]").forEach(b=>{const an=Number(b.dataset.z)===z;b.classList.toggle("an",an);b.setAttribute("aria-pressed",an?"true":"false");});
- if(anker){const r=anker.getBoundingClientRect();window.scrollBy(0,r.top-off);}
-}
-if(!window.__ppmZoomRad){
- window.__ppmZoomRad=true;
- window.addEventListener("wheel",e=>{
-  if(!(e.ctrlKey||e.metaKey)||!e.target.closest||!e.target.closest(".ppm-plan"))return;
-  e.preventDefault();
-  const z=ppmZoomLesen(),n=e.deltaY>0?z+1:z-1;
-  if(n!==z&&n>=1&&n<=3&&!ppmZoomRad.warte){ppmZoomRad.warte=true;setTimeout(()=>{ppmZoomRad.warte=false;},350);ppmZoomSetzen(n);}
- },{passive:false});
-}
-const ppmZoomRad={warte:false};
-function ppmZoomLeisteHTML(){
- const z=ppmZoomLesen(),b=(n,t)=>`<button type="button" class="ppm-zb${z===n?" an":""}" data-ppm="zoom" data-z="${n}" aria-pressed="${z===n}">${t}</button>`;
- return`<div class="ppm-zoomleiste"><b>Ansicht</b>${b(1,"Normal")}${b(2,"Kompakt")}${b(3,"Übersicht")}<small>${isTeacher()?"Zum Verschieben in „Übersicht“ wechseln, Modul ziehen und in der gewünschten Woche loslassen. ":""}Strg + Mausrad zoomt ebenfalls.</small></div>`;
-}
-const PPM_ZOOM_CSS=(()=>{
- const K2=":is(.ppm-plan.z2 .ppm-karte,.ppm-karte.ppm-geist.z2)",K3=":is(.ppm-plan.z3 .ppm-karte,.ppm-karte.ppm-geist.z3)";
- return`
-.ppm-wi{min-width:0;display:flex;flex-direction:column;gap:8px}.ppm-spurreihe{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;padding-bottom:8px;border-bottom:1.5px dashed #b9c8d6}.ppm-spurreihe .ppm-karte{grid-column:auto}.ppm-spurreihe .ppm-fort{width:100%}
-.ppm-zoomleiste{position:sticky;top:0;z-index:30;display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 10px;margin:0 0 10px;border-radius:12px;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(24,67,96,.10)}
-.ppm-zoomleiste small{color:var(--muted);font-size:12px;flex:1 1 220px}
-.ppm-zb{min-height:36px;padding:0 14px;border-radius:999px;border:1.5px solid #b9c8d6;background:#fff;font:inherit;font-size:13px;font-weight:700;color:#3a4a5c;cursor:pointer}
-.ppm-zb.an{background:#075a9d;border-color:#075a9d;color:#fff}
-.ppm-plan.z2 .ppm-woche{padding:5px 8px;margin:0 0 6px;grid-template-columns:104px minmax(0,1fr)}
-.ppm-plan.z2 .ppm-reihe{gap:6px}
-${K2}{padding:6px 8px 6px 10px}
-${K2} .ppm-txt{gap:1px}${K2} .ppm-txt b{font-size:13px}${K2} .ppm-txt small{font-size:11px}
-${K2} .ppm-status,${K2} .ppm-mini,${K2} .ppm-chip,${K2} .lb-pills,${K2} .bep-kachel,${K2} .ppm-mv{display:none!important}
-${K2}.mit-mv{padding-bottom:6px}
-${K2} .ppm-edit{height:22px;padding:0 6px;font-size:11px}
-.ppm-plan.z2 .ppm-neu{min-height:32px}.ppm-plan.z2 .ppm-block{padding:6px 12px;margin:0 0 6px}
-.ppm-plan.z3 .ppm-woche{padding:3px 6px;margin:0 0 3px;gap:8px;grid-template-columns:70px minmax(0,1fr);border-radius:8px}
-.ppm-plan.z3 .ppm-wl{font-size:10px;line-height:1.25}.ppm-plan.z3 .ppm-wl b{font-size:12px}
-.ppm-plan.z3 .ppm-wl em,.ppm-plan.z3 .ppm-wl small{display:none}
-.ppm-plan.z3 .ppm-kap{margin:2px 0 0;height:5px}
-.ppm-plan.z3 .ppm-reihe{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px}
-${K3}{grid-column:auto;padding:4px 6px 4px 8px;border-left-width:5px;border-radius:8px;min-height:30px;align-items:center}
-${K3} .ppm-txt{gap:0}${K3} .ppm-txt b{font-size:11px;line-height:1.2;padding-right:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-${K3} .ppm-txt small,${K3} .ppm-status,${K3} .ppm-mini,${K3} .ppm-chip,${K3} .lb-pills,${K3} .bep-kachel,${K3} .ppm-mv,${K3} .ppm-edit,${K3} .ppm-ic{display:none!important}
-${K3}.mit-mv{padding-bottom:4px}
-${K3} .ppm-haken-k{width:16px;height:16px;font-size:10px;right:3px;top:3px}
-.ppm-plan.z3 .ppm-fort{font-size:10px;padding:3px 6px}
-.ppm-plan.z3 .ppm-neu{font-size:0;min-height:26px;padding:0 10px;border-radius:8px}.ppm-plan.z3 .ppm-neu::before{content:"＋";font-size:14px}
-.ppm-plan.z3 .ppm-leer{font-size:10px}
-.ppm-plan.z3 .ppm-block{padding:3px 10px;margin:0 0 3px;border-radius:8px;font-size:11px}.ppm-plan.z3 .ppm-block small{display:none}.ppm-plan.z3 .ppm-block span{font-size:14px!important}
-.ppm-plan.z3 .ppm-woche.ppm-ziel{outline-width:3px}
-@media(max-width:760px){.ppm-plan.z3 .ppm-woche{grid-template-columns:1fr}.ppm-plan.z3 .ppm-reihe{grid-template-columns:repeat(2,minmax(0,1fr))}.ppm-plan.z2 .ppm-woche{grid-template-columns:1fr}}`;
-})();
-const PPM_CSS=`<style>
-${PPM_ZOOM_CSS}
-.lb-pills{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}.lb-leiste{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.lb-pill{display:inline-flex;align-items:center;gap:4px;min-height:26px;padding:0 9px;border-radius:13px;border:1.5px dashed #6b7c93;background:#fff;color:#3a4a5c;font:inherit;font-size:11px;font-weight:700;cursor:pointer}
-.lb-pill.da{border:1.5px solid #075a9d;background:#075a9d;color:#fff}
-.ppm-karte.ppm-ziehbar{cursor:grab;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.ppm-karte.ppm-zieh{opacity:.3}.ppm-geist{position:fixed!important;z-index:9999;pointer-events:none;opacity:.92;box-shadow:0 14px 34px rgba(24,67,96,.35);transform:rotate(1.5deg);margin:0}
-body.ppm-dnd-an{cursor:grabbing;-webkit-user-select:none;user-select:none}
-.ppm-woche.ppm-ziel{background:#eef7ee;outline:2px dashed #3fa66a}
-.ppm-karte.ppm-vor{box-shadow:-7px 0 0 -1px #3fa66a}.ppm-karte.ppm-ende{box-shadow:7px 0 0 -1px #3fa66a}
-.ppm-legende{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:0 0 18px}
-.ppm-typ{display:flex;flex-direction:column;gap:4px;text-align:left;padding:12px 14px;border-radius:14px;border:1.5px dashed #b9c8d6;background:#fff;cursor:pointer;font:inherit;color:inherit}
-.ppm-typ:hover{border-color:#2f7fc6;background:#f3f9ff}.ppm-typ b{font-size:14px}.ppm-typ small{color:var(--muted);line-height:1.35}
-.ppm-woche{display:grid;grid-template-columns:128px minmax(0,1fr);gap:12px;margin:0 0 10px;padding:8px;border-radius:12px}
-.ppm-woche.jetzt{background:#eaf3fc;outline:2px solid #3d8fd0}
-.ppm-wl{display:flex;flex-direction:column;justify-content:center;font-size:13px;color:var(--muted)}.ppm-wl b{color:var(--ink);font-size:14px}
-.ppm-reihe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:stretch}
-.ppm-karte{position:relative;display:flex;gap:8px;min-width:0;grid-column:span var(--sp,1);padding:10px 10px 10px 12px;border-radius:12px;background:color-mix(in srgb,var(--c) 11%,#fff);border:1px solid color-mix(in srgb,var(--c) 38%,#fff);border-left:6px solid var(--c);cursor:pointer;text-align:left}
-.ppm-karte:hover{box-shadow:0 6px 18px rgba(24,67,96,.14)}.ppm-ic{font-size:22px}
-.ppm-txt{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}.ppm-txt b{font-size:14px;line-height:1.3;padding-right:26px;overflow-wrap:anywhere}.ppm-txt small{color:var(--muted)}
-.ppm-edit{position:absolute;right:6px;top:6px;border:0;background:#fff;border-radius:8px;height:28px;padding:0 10px;font:inherit;font-size:12px;font-weight:700;color:#3a4a5c;cursor:pointer}.ppm-ziehbar .ppm-txt b{padding-right:64px}
-.ppm-fort{min-width:0;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--c) 8%,#fff);border:1px dashed var(--c);font-size:12px;cursor:pointer}
-.ppm-karte.mit-mv{padding-bottom:50px}.ppm-mv{position:absolute;left:-6px;right:0;bottom:10px;display:flex;justify-content:center;gap:10px}.ppm-mv button{font:inherit;font-size:16px;line-height:1;font-weight:800;min-width:44px;height:30px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;border:1.5px solid #b9c8d6;background:#fff;color:#2f5f8a;cursor:pointer}.ppm-mv button:hover:not(:disabled){border-color:#2f7fc6;background:#f3f9ff}.ppm-mv button:disabled{opacity:.35;cursor:not-allowed}
-.ppm-mini{display:block;height:6px;border-radius:4px;background:#dbe4ec;overflow:hidden;margin-top:6px}.ppm-mini i{display:block;height:100%;background:#3d8fd0}
-.ppm-karte.ppm-st-done{background:color-mix(in srgb,#3fa66a 13%,#fff);border-color:#9fd3ae}
-.ppm-haken-k{position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;background:#3fa66a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
-.ppm-nach{font-size:11px;font-weight:700;color:#b3261e}
-.ppm-stand .ppm-next{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
-.ppm-chip{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff;border:1px solid #c9d4de;width:max-content;max-width:100%}
-.ppm-status{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff3d6;border:1px solid #f0d28a;color:#7a4b00;width:max-content}.ppm-status.ok{background:#e3f4e8;border-color:#9fd3ae;color:#1f6a3a}
-.ppm-neu{align-self:center;border:1.5px dashed #b9c8d6;background:#fff;border-radius:12px;min-height:44px;padding:0 14px;font-weight:700;color:#3a4a5c;cursor:pointer}
-.ppm-leer{color:var(--muted);font-size:13px;align-self:center}
-.ppm-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 14px}.ppm-box h2{margin:0 0 8px;font-size:18px}.ppm-box h3{margin:12px 0 4px;font-size:15px}.ppm-box p{margin:6px 0;line-height:1.5}
-.ppm-kopf{border-left:6px solid var(--c);}
-.ppm-zeile{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line)}.ppm-zeile:last-child{border:0}
-.ppm-btn{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px;color:var(--ink);cursor:pointer;text-decoration:none}
-.ppm-btn.primaer{background:#2f7fc6;border-color:#2f7fc6;color:#fff}.ppm-btn.klein{min-height:34px;padding:0 10px;font-size:12px}
-.ppm-frage{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 12px;background:#fbfdff}.ppm-frage textarea{width:100%;min-height:80px;font:inherit}
-.ppm-loesung{margin-top:8px;padding:10px 12px;border-radius:10px;background:#e3f4e8;border:1px solid #9fd3ae;line-height:1.45}
-.ppm-bew{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.ppm-bew button{min-height:36px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:#fff;font-weight:700;font-size:12px;cursor:pointer}.ppm-bew button.an{border-color:#2f7fc6;background:#eaf3fc}
-.ppm-schritt{border:1px solid var(--line);border-radius:14px;margin:0 0 10px;background:#fff;overflow:hidden}.ppm-schritt.gesperrt{opacity:.55}
-.ppm-skopf{display:flex;gap:12px;align-items:center;padding:12px 14px}.ppm-snr{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#17384f;color:#fff;font-weight:700;font-size:13px;flex:none}.ppm-schritt.fertig .ppm-snr{background:#3fa66a}
-.ppm-sbody{padding:2px 16px 16px}.ppm-sbody h3{margin:12px 0 4px}.ppm-sbody p,.ppm-sbody li{line-height:1.55}
-.ppm-zu{display:flex;flex-direction:column;gap:8px}.ppm-zui{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-radius:10px;background:#f6f9fc;border:1px solid var(--line)}.ppm-zui.richtig{background:#e3f4e8;border-color:#9fd3ae}.ppm-zui.falsch{background:#fdecea;border-color:#f1b0aa}
-.ppm-bar{height:10px;border-radius:6px;background:#e2eaf0;overflow:hidden;margin:6px 0 14px}.ppm-bar i{display:block;height:100%;background:linear-gradient(90deg,#3fa66a,#5cc98a)}
-.ppm-phasen{display:flex;gap:8px;margin:8px 0}.ppm-ph{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--muted);text-align:center}.ppm-ph span{width:32px;height:32px;border-radius:50%;border:2px solid #b9c8d6;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700}.ppm-ph.an span{background:#075a9d;border-color:#075a9d;color:#fff}.ppm-ph.an{color:var(--ink);font-weight:700}
-.ppm-mat{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}.ppm-mat:last-child{border:0}
-.ppm-kap{height:8px;border-radius:5px;background:#e2eaf0;overflow:hidden;margin:6px 0 2px}.ppm-kap i{display:block;height:100%;background:#3d8fd0}.ppm-kap.voll i{background:#3fa66a}.ppm-kap.ueber i{background:#d9534f}
-.ppm-wl small.kapa{font-size:11px}
-.ppm-block{display:flex;gap:12px;align-items:center;margin:0 0 10px;padding:10px 14px;border-radius:12px;background:repeating-linear-gradient(135deg,#f3f5f8 0 8px,#eaeef3 8px 16px);color:#51657a;font-size:13px}
-.ppm-block.praktikum{border-left:6px solid #b08a4a}.ppm-block.ferien,.ppm-block.frei{border-left:6px solid #7fb7c9}
-.ppm-zeitbox .ppm-balken{margin:10px 0}.ppm-bar-jahr i{background:linear-gradient(90deg,#8a64b8,#b49be0)}
-.ppm-leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}.ppm-leg i{display:inline-block;width:14px;height:8px;border-radius:4px;margin-right:5px;vertical-align:middle}
-.ppm-teile{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:12px;background:#fff8e8;border:1px solid #f0d28a}
-.ppm-teile label.check{align-items:flex-start;gap:8px;margin:0}.ppm-teileinfo{font-size:13px;margin-top:4px}
-.ppm-kapahint{font-size:12px;line-height:1.5;padding:8px 10px;border-radius:10px;background:#f6f9fc;border:1px solid var(--line)}
-.ppm-form{gap:12px}
-.ppm-sek{display:flex;flex-direction:column;gap:10px;padding:12px 14px 14px;border-radius:14px;border:1px solid var(--c-rand);border-left:6px solid var(--c-strip);background:var(--c-bg)}
-.ppm-sek-kopf{font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--c-strip);margin:0}
-.ppm-sek select,.ppm-sek input:not([type=checkbox]):not([type=file]),.ppm-sek textarea{background:#fff}
-.ppm-sek .ppm-kapahint{background:#fff;border-color:var(--c-rand)}
-.ppm-sek .ppm-teile{background:#fff8e8}
-.ppm-sek-1{--c-strip:#1688cf;--c-bg:#eef6fd;--c-rand:#cfe3f4}
-.ppm-sek-2{--c-strip:#3f9a4a;--c-bg:#eff8ec;--c-rand:#cfe6c6}
-.ppm-sek-3{--c-strip:#7a58c4;--c-bg:#f4f0fb;--c-rand:#ddd2f2}
-.ppm-sek-4{--c-strip:#d98a1f;--c-bg:#fff6e6;--c-rand:#f3dcaa}
-.ppm-sek-5{--c-strip:#1f9a96;--c-bg:#eaf7f6;--c-rand:#c3e5e3}
-.ppm-sek .ppm-matbox{display:flex;flex-direction:column;gap:2px}
-.ppm-sek .ppm-mat{border-bottom-color:var(--c-rand)}
-.ppm-form .form-actions{position:sticky;bottom:-24px;margin:2px -24px -24px;padding:12px 24px;background:linear-gradient(#fff0,#fff 30%);border-top:1px solid var(--line);border-radius:0 0 15px 15px}
-@media(max-width:520px){.ppm-form .form-actions{bottom:-18px;margin:2px -14px -18px;padding:12px 14px}.ppm-sek{padding:10px 10px 12px}}
-.ppm-details summary{cursor:pointer;font-weight:700;font-size:16px;padding:2px 0}
-.ppm-tafel .wb-kopf{display:none}.ppm-tafel .wb-wrap{height:min(72vh,680px);min-height:420px}
-.ppm-fertig{display:flex;align-items:center;gap:12px;width:100%;margin-top:6px;padding:14px 16px;border-radius:12px;border:2px solid #b9c8d6;background:#fff;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;text-align:left}
-.ppm-fertig:hover{border-color:#2f7fc6}.ppm-fertig.an{border-color:#3fa66a;background:#e3f4e8;color:#1f6a3a}
-.ppm-haken{width:28px;height:28px;border-radius:8px;border:2px solid #8aa0b3;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:18px;flex:none}.ppm-fertig.an .ppm-haken{background:#3fa66a;border-color:#3fa66a;color:#fff}
-@media(max-width:760px){.ppm-woche{grid-template-columns:1fr}.ppm-reihe{grid-template-columns:repeat(2,minmax(0,1fr))}.ppm-karte{grid-column:1/-1}}
-.bep-sub{color:var(--muted);margin:0 0 4px;font-size:15px}
-.bep-kachel{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.bep-leiste{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap}
-.bep-pt{font-style:normal;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;border:2px solid #b9c8d6;background:#fff;color:#51657a}
-.bep-pt.praktikum{border-style:dashed;background:#fff7ea;border-color:#d9a85a;color:#8a5a12}
-.bep-pt.jetzt{box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 40%,#fff);border-color:var(--c);color:var(--ink)}
-.bep-pt.fertig{background:#3fa66a;border-color:#3fa66a;color:#fff}
-.bep-chips{display:flex;flex-wrap:wrap;gap:6px}
-.ppm-chip.bep-warn{background:#fff3d6;border-color:#f0d28a;color:#7a4b00}.ppm-chip.bep-rot{background:#fdecea;border-color:#f1b0aa;color:#9b1c14}
-.bep-blick{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:0 0 14px}
-.bep-tile{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line)}
-.bep-tile b{font-size:15px}.bep-tile small{color:var(--muted);line-height:1.4}.bep-ti{font-size:24px}
-.bep-hinweis{margin:10px 0;padding:10px 12px;border-radius:12px;background:#eef6fd;border:1px solid #cfe3f4;line-height:1.5}
-.bep-rot-box{background:#fdecea;border-color:#f1b0aa}
-.bep-bsp{color:var(--muted);font-size:14px}.bep-klein{font-size:12px;color:var(--muted);line-height:1.5;margin:6px 0}
-.bep-gruppe{margin:12px 0 4px;font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#6b7c93}
-.bep-bz{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:#fff;margin:0 0 6px}
-.bep-bz.vergeben{background:#f6f9fc}
-.bep-kap{flex:none;min-width:38px;height:30px;padding:0 6px;border-radius:8px;background:#17384f;color:#fff;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center}
-.bep-tabwrap{overflow-x:auto}
-.bep-tab{width:100%;border-collapse:collapse;font-size:14px}.bep-tab th{text-align:left;font-size:12px;color:var(--muted);padding:6px 8px;border-bottom:2px solid var(--line)}.bep-tab td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
-.bep-teamtab input,.bep-teamtab select{box-sizing:border-box;min-width:0;width:100%;min-height:36px;font:inherit;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:#fff}.bep-teamtab tr.ich{background:#f3f9ff}
-.bep-ampeln{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
-.bep-amp{display:inline-flex;flex-direction:column;align-items:center;gap:1px;min-width:42px;padding:4px 6px;border-radius:10px;border:2px solid #c7d0d6;background:#fff;font-size:11px}.bep-amp i{font-style:normal;font-size:14px;font-weight:800}
-.bep-amp.erreicht{border-color:#3fa66a;background:#e3f4e8;color:#1f6a3a}.bep-amp.wartet{border-color:#e0a324;background:#fff3d6}.bep-amp.zurueck{border-color:#d9534f;background:#fdecea}
-.bep-next{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:14px 16px;border-radius:14px;background:#eaf3fc;border:2px solid #3d8fd0;margin-top:10px}
-.bep-next>div{display:flex;flex-direction:column;gap:3px;min-width:200px;flex:1}.bep-next small{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#2f5f8a}.bep-next b{font-size:17px}.bep-next em{font-style:normal;font-weight:700}
-.bep-next.warn{background:#fff6e6;border-color:#e0a324}.bep-next.rot{background:#fdecea;border-color:#d9534f}.bep-next.fertig{background:#e3f4e8;border-color:#3fa66a}
-.bep-zone{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin:16px 0 8px;padding:8px 12px;border-radius:10px;font-size:14px}
-.bep-zone.schule{background:#eaf3fc;border-left:6px solid #3d8fd0}.bep-zone.praktikum{background:#fff7ea;border-left:6px solid #d9a85a}.bep-zone span{color:var(--muted);font-size:13px}
-.bep-zeit{display:block}
-.bep-ph{border:1px solid var(--line);border-left:6px solid #3d8fd0;border-radius:14px;background:#fff;padding:12px 14px;margin:0 0 10px}.bep-ph.praktikum{border-left-color:#d9a85a}
-.bep-ph.jetzt{box-shadow:0 0 0 3px #bfdcf5}
-.bep-ph-kopf{display:flex;gap:12px;align-items:center}.bep-ph-kopf b{font-size:16px;display:block}.bep-ph-kopf small{color:var(--muted)}
-.bep-nr{flex:none;width:32px;height:32px;border-radius:50%;background:#17384f;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
-.bep-jetzt{flex:none;padding:3px 10px;border-radius:999px;background:#075a9d;color:#fff;font-size:12px;font-weight:800}
-.bep-lab{margin:12px 0 4px;font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#6b7c93}
-.bep-aufg{list-style:none;margin:0;padding:0}.bep-a{padding:3px 0}
-.bep-chk{display:flex;gap:10px;align-items:flex-start;cursor:pointer;line-height:1.45}.bep-chk input{width:20px;height:20px;margin-top:1px;flex:none}
-.bep-chk-zeile{padding:6px 0;border-bottom:1px solid var(--line)}
-.bep-dot{color:#6b7c93;margin-right:8px}
-.bep-ms{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:#f6f9fc;border:1px solid var(--line);margin:6px 0}
-.bep-ms.erreicht{background:#eef9f1;border-color:#9fd3ae}.bep-ms.wartet{background:#fff8e8;border-color:#f0d28a}.bep-ms.zurueck{background:#fdf1ef;border-color:#f1b0aa}
-.bep-ms-ic{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
-.bep-ms-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}.bep-ms-kopf{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.bep-ms-text{color:var(--muted)}.bep-inh summary{cursor:pointer;font-size:13px;font-weight:700;color:#2f5f8a}.bep-inh ul{margin:4px 0 0 18px;padding:0;line-height:1.5;font-size:13px}
-.bep-frist{font-size:13px;font-weight:700}.bep-frist.warn{color:#9a6200}.bep-frist.rot{color:#b3261e}
-.bep-ds{background:#fff8e8;border-color:#f0d28a;border-left:6px solid #e0a324}.bep-ds ul{margin:6px 0 0 18px;padding:0;line-height:1.55}
-.bep-mat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-.bep-matk{display:flex;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#fbfdff}.bep-matk div{display:flex;flex-direction:column;gap:2px}.bep-matk small{color:var(--muted);line-height:1.4}.bep-matk em{font-style:normal;font-size:11px;font-weight:800;color:#2f5f8a}
-.bep-zwei{display:grid;grid-template-columns:1fr 1fr;gap:12px}.bep-spalte{padding:12px 14px;border-radius:12px}.bep-spalte h3{margin:0 0 6px}.bep-spalte ul{margin:0 0 0 18px;padding:0;line-height:1.55}
-.bep-spalte.team{background:#f4f0fb;border:1px solid #ddd2f2}.bep-spalte.einzeln{background:#eff8ec;border:1px solid #cfe6c6}
-.bep-formate{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:10px 0}.bep-fmt{display:flex;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line)}.bep-fmt div{display:flex;flex-direction:column;gap:2px}.bep-fmt small{color:var(--muted);line-height:1.4}
-.bep-lehrer{border-left:6px solid #075a9d}
-.bep-zahlen{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 10px}.bep-zahlen div{flex:1;min-width:110px;padding:10px 12px;border-radius:12px;background:#f6f9fc;border:1px solid var(--line);display:flex;flex-direction:column}.bep-zahlen b{font-size:22px}.bep-zahlen small{color:var(--muted)}.bep-zahlen .warn{background:#fff3d6;border-color:#f0d28a}
-.bep-matrix{width:100%;border-collapse:collapse;font-size:13px}.bep-matrix th{padding:6px 4px;text-align:center;font-size:12px;border-bottom:2px solid var(--line)}.bep-matrix th small{display:block;font-weight:400;color:var(--muted)}.bep-matrix th:first-child{text-align:left}
-.bep-tn{padding:6px 8px;min-width:200px}.bep-tn small{display:block;color:var(--muted)}
-.bep-z{text-align:center;padding:4px;border:1px solid #fff;background:#eef1f4}.bep-z b{display:block}.bep-z small{color:var(--muted);font-size:11px}
-.bep-z.erreicht{background:#dff3e5;color:#1f6a3a}.bep-z.wartet{background:#fff0c9}.bep-z.zurueck{background:#fbe0dd}.bep-z.ueber{outline:2px solid #d9534f;outline-offset:-2px}
-.bep-wq{padding:10px 12px;border-radius:12px;background:#fff8e8;border:1px solid #f0d28a;margin:6px 0}
-.bep-td{border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;background:#fff}.bep-td summary{cursor:pointer}
-.bep-termine{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;margin:8px 0}
-.bep-termin{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:6px 10px;border:1px solid var(--line);border-radius:10px}.bep-termin span{display:flex;flex-direction:column}.bep-termin small{color:var(--muted)}.bep-termin input{min-height:36px;font:inherit}
-@media(max-width:760px){.bep-zwei{grid-template-columns:1fr}.bep-ms{flex-wrap:wrap}.ms-aktion{width:100%}.bep-teamtab thead{display:none}.bep-teamtab td{display:block;border:0;padding:4px 8px}.bep-teamtab td::before{content:attr(data-l);display:block;font-size:11px;color:var(--muted)}.bep-teamtab tr{display:block;border-bottom:1px solid var(--line);padding:6px 0}}
-.bep-leg{color:var(--muted);font-size:11px}
-</style>`;
-
-async function renderPPModulplan(){
- await ppmLaden();await ppmMeineLaden();
- await Promise.all(PPM.liste.filter(m=>m.modul==="projekt"&&m.vorlage).map(m=>bepVorlage(m.vorlage)));
- await bepAlleLaden();
- const co=await ladeCheckoutDaten().catch(()=>null);
- PPM.co=co;
- const heute=new Date().toISOString().slice(0,10),lehrer=isTeacher();
- const last=ppmLast();
- const proWoche={},fort={},legacy={};
- PPM.liste.forEach(m=>{
-  (proWoche[m.start]=proWoche[m.start]||[]).push(m);
-  ppmWochen(m).slice(1).forEach(w=>{(fort[w.id]=fort[w.id]||[]).push(m);});
-  (m.einheiten||[]).forEach(e=>{if(e.woche&&e.woche!==m.start)(legacy[e.woche]=legacy[e.woche]||[]).push({m,e});});
- });
- const gesamt=SCHULWOCHEN_PP.length*PPM_MIN_PRO_WOCHE;
- const belegt=SCHULWOCHEN_PP.reduce((n,w)=>n+Math.min(PPM_MIN_PRO_WOCHE,last[w.id].min),0);
- const proz=gesamt?Math.round(belegt/gesamt*100):0;
- const vergangen=SCHULWOCHEN_PP.filter(w=>w.end<heute).length,jahrProz=Math.round(vergangen/SCHULWOCHEN_PP.length*100);
- const blockWochen=ppmZeitleiste().filter(z=>z.art==="block").reduce((n,z)=>n+z.n,0);
- const zeitBox=`<div class="ppm-box ppm-zeitbox"><h2>Zeitstruktur</h2>
-  <p>Pro Schulwoche stehen <b>${PPM_STD_PRO_WOCHE} Unterrichtsstunden</b> (je ${PPM_MIN_PRO_STUNDE} Minuten) zur Verfügung. In den <b>Praktikumsblöcken (fpA)</b> und in den Ferien ist kein Unterricht, dort lässt sich nichts planen. Projekte über ganze Wochen laufen auf einer eigenen <b>Projektspur</b> (oberste Zeile der Woche): Sie belegen keine der 6,3 Stunden, daneben lassen sich in jeder Woche normal Selbstlernkurse und andere Module planen. Das Schuljahr hat <b>${SCHULWOCHEN_PP.length} Schulwochen</b> (${blockWochen} Wochen Praktikum und Ferien dazwischen).</p>
-  <div class="ppm-balken"><span><b>Verplant:</b> ${ppmStd(belegt)} von ${ppmStd(gesamt)} Unterrichtsstunden (${proz} %)</span><div class="ppm-bar" role="progressbar" aria-valuenow="${proz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${proz}%"></i></div></div>
-  <div class="ppm-balken"><span><b>Schuljahr:</b> ${vergangen} von ${SCHULWOCHEN_PP.length} Schulwochen vorbei (${jahrProz} %)</span><div class="ppm-bar ppm-bar-jahr" role="progressbar" aria-valuenow="${jahrProz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${jahrProz}%"></i></div></div>
-  <div class="ppm-leg"><span><i style="background:#3d8fd0"></i>Woche teilweise belegt</span><span><i style="background:#3fa66a"></i>Woche voll (6,3 Stunden)</span><span><i style="background:#d9534f"></i>Woche überbucht</span><span>  Praktikum (gesperrt)</span><span> Ferien (gesperrt)</span></div></div>`;
- const legende=lehrer?`<div class="ppm-legende">${Object.entries(PPM_TYPEN).filter(([k])=>k!=="experiment").map(([k,T])=>`<button type="button" class="ppm-typ" data-ppm="neu" data-typ="${k}"><b>${T.icon} ${esc(T.name)}</b><small>${esc(T.text)}</small></button>`).join("")}</div>`:"";
- const zeilen=ppmZeitleiste().map(z=>{
-  if(z.art==="block"){
-   const darin=z.kind==="praktikum"?FERIEN_2026_27.filter(f=>f.start<=z.bis&&f.end>=z.von).map(f=>f.titel):[];
-   return`<div class="ppm-block ${z.kind}"><span style="font-size:22px">${z.icon}</span><div><b>${esc(z.titel)}</b><br><small>${fmtKurz(z.von)}–${fmtKurz(z.bis)} · ${z.n} Woche${z.n===1?"":"n"} · gesperrt, kein Unterricht${darin.length?` · darin: ${esc(darin.join(", "))}`:""}</small></div></div>`;
-  }
-  const w=z.w,mm=proWoche[w.id]||[],ff=fort[w.id]||[],ee=legacy[w.id]||[];
-  if(!lehrer&&!mm.length&&!ff.length&&!ee.length)return"";
-  const jetzt=heute>=w.start&&heute<=w.end,min=last[w.id].min,pct=Math.min(100,Math.round(min/PPM_MIN_PRO_WOCHE*100)),cls=min>PPM_MIN_PRO_WOCHE?"ueber":(min===PPM_MIN_PRO_WOCHE?"voll":"");
-  const kw=ppmKW(w);
-  const spurM=mm.filter(ppmIstSpur),normM=mm.filter(m=>!ppmIstSpur(m)),ffS=ff.filter(ppmIstSpur),ffN=ff.filter(m=>!ppmIstSpur(m));
-  const spurZeile=(spurM.length||ffS.length)?`<div class="ppm-spurreihe">${spurM.map(m=>ppmKarteHTML(m,false)).join("")}${ffS.map(m=>ppmKarteHTML(m,true)).join("")}</div>`:"";
-  const stW=lehrer?[]:mm.map(ppmFort).filter(Boolean),nOkW=stW.filter(x=>x.done).length,pzW=stW.length?Math.round(nOkW/stW.length*100):0;
-  const wochenFort=stW.length?`<div class="ppm-kap voll" title="${nOkW} von ${stW.length} Modulen geschafft"><i style="width:${pzW}%"></i></div><small class="kapa">${nOkW===stW.length?"alles geschafft ✓":nOkW+" von "+stW.length+" geschafft"}</small>${w.end<heute&&nOkW<stW.length?`<small class="ppm-nach">${stW.length-nOkW} noch offen</small>`:""}`:"";
-  return`<div class="ppm-woche${jetzt?" jetzt":""}" data-w="${w.id}"><div class="ppm-wl"><b>KW ${kw}</b><span>${fmtKurz(w.start)}–${fmtKurz(w.end)}</span>${jetzt?`<em style="font-style:normal;font-weight:700;color:#075a9d">diese Woche</em>`:""}
-    ${lehrer?`<div class="ppm-kap ${cls}" title="${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Unterrichtsstunden belegt"><i style="width:${pct}%"></i></div><small class="kapa">${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Stunden${min>PPM_MIN_PRO_WOCHE?" · überbucht":(min===PPM_MIN_PRO_WOCHE?" · voll":"")}</small>`:wochenFort}</div>
-   <div class="ppm-wi">${spurZeile}<div class="ppm-reihe">${normM.map(m=>ppmKarteHTML(m,false)).join("")}${ffN.map(m=>ppmKarteHTML(m,true)).join("")}${ee.map(x=>`<span class="ppm-fort" style="--c:${ppmFarbe(x.m)}" data-ppm="oeffnen" data-id="${esc(x.m.id)}">${(PPM_EINHEITEN[x.e.typ]||{}).icon||""} Einheit: ${esc((PPM_EINHEITEN[x.e.typ]||{}).name||x.e.typ)}</span>`).join("")}
-   ${lehrer?(min<PPM_MIN_PRO_WOCHE?`<button type="button" class="ppm-neu" data-ppm="neu" data-woche="${w.id}">＋ Modul</button>`:`<span class="ppm-leer"${min>PPM_MIN_PRO_WOCHE?' style="color:#b3261e;font-weight:700"':""}>${min>PPM_MIN_PRO_WOCHE?`Woche überbucht: ${ppmStd(min)} von ${PPM_STD_PRO_WOCHE} Stunden, bitte ein Modul verschieben oder kürzen`:"Woche voll"}</span>`):(normM.length||ffN.length||ee.length||spurM.length||ffS.length?"":`<span class="ppm-leer">–</span>`)}</div></div></div>`;
- }).join("");
- const alleSt=lehrer?[]:PPM.liste.map(m=>({m,p:ppmFort(m)})).filter(x=>x.p);
- const nGes=alleSt.length,nOk=alleSt.filter(x=>x.p.done).length,pzGes=nGes?Math.round(nOk/nGes*100):0;
- const jw=SCHULWOCHEN_PP.find(w=>heute>=w.start&&heute<=w.end)||SCHULWOCHEN_PP.find(w=>w.start>heute),jIdx=jw?ppmSwIndex(jw.id):SCHULWOCHEN_PP.length;
- const offen=alleSt.filter(x=>!x.p.done);
- const jetztX=offen.find(x=>ppmSwIndex(x.m.start)<=jIdx),naechstX=jetztX||offen[0];
- const nxLabel=jetztX?(ppmSwIndex(jetztX.m.start)<jIdx?"Noch offen aus einer früheren Woche":"Jetzt dran"):"Als Nächstes";
- const standBox=nGes?`<div class="ppm-box ppm-stand"><h2>Dein Stand</h2>
-  <div class="ppm-balken"><span><b>${nOk} von ${nGes}</b> Modulen geschafft (${pzGes} %)</span><div class="ppm-bar" role="progressbar" aria-valuenow="${pzGes}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pzGes}%"></i></div></div>
-  ${naechstX?`<div class="ppm-next"><span>${nxLabel}: <b>${esc(naechstX.m.titel||(PPM_TYPEN[naechstX.m.modul]||{}).name||"")}</b> <small style="color:var(--muted)">(KW ${ppmKW(swById(naechstX.m.start)||{start:heute})})</small></span><button type="button" class="ppm-btn klein primaer" data-ppm="oeffnen" data-id="${esc(naechstX.m.id)}">Öffnen</button></div>`:`<p style="margin:6px 0 0"><b>Alles geschafft ✓</b></p>`}</div>`:"";
- const leer=!PPM.liste.length;
- const fehler=PPM.fehler?`<div class="empty"><strong>Der Modulplan konnte nicht geladen werden.</strong>${esc(PPM.fehler==="permission-denied"?"Firebase verweigert den Zugriff (permission-denied). Die Firestore-Regeln für den Modulplan sind noch nicht veröffentlicht.":"Fehler: "+PPM.fehler)}</div>`:"";
- const coBox=co?`${checkoutLiveBannerHTML(co)}<details class="ppm-box ppm-details"><summary>Check-outs (K-Prim-Tests)</summary><div style="margin-top:10px">${checkoutSektionHTML(co)}</div></details>`:"";
- return`<div class="kwp"><div class="kw-links"><button class="secondary" onclick="go('start')">← Lernlandkarte</button><button class="secondary" onclick="closeFach()">Lernwerkstatt</button></div>
- <header class="kw-kopf" style="--c:#4B5563;--t:#1F2937"><small>PÄDAGOGIK/PSYCHOLOGIE · PLANUNG</small><h1>Modulplanung</h1><p>${lehrer?"Plane Woche für Woche, welcher Baustein in welchem Lernbereich dran ist. Klicke bei einer Woche auf „＋ Modul“ oder wähle unten einen Bausteintyp.":"Dein Plan durchs Schuljahr: Klicke einen Baustein an, um loszulegen."}</p>${lehrer?`<div class="kw-aktionen"><button class="secondary" onclick="openProjektGesamtcheck()">Projekt-Gesamtcheck</button><button class="secondary" onclick="openFachaufsatzTrainingCheck()">APT-Gesamtcheck</button><button class="secondary" onclick="go('didaktik')">Didaktik-Kompass</button></div>`:""}</header>
- ${PPM_CSS}${fehler}${coBox}${standBox}${legende}
- ${leer&&lehrer&&!PPM.fehler?`<div class="ppm-box"><h2>Noch kein Plan</h2><p>Du kannst von vorn beginnen oder den bisherigen Ablauf (je Lernbereich ein Projekt und ein Prüfungstraining, dazu das Experiment als Einheit im ersten Projekt) als Startpunkt übernehmen. Danach lässt sich jedes Modul ändern, verschieben oder löschen.</p><button type="button" class="ppm-btn primaer" data-ppm="standard">Bisherigen Ablauf als Plan übernehmen</button></div>`:""}
- ${leer&&!lehrer&&!PPM.fehler?`<div class="empty"><strong>Noch kein Plan.</strong>Deine Lehrkraft hat noch keine Module geplant.</div>`:""}
- <div class="ppm-plan z${ppmZoomLesen()}">${ppmZoomLeisteHTML()}${zeilen}</div>
- </div>${footer()}`;
-}
-// ------------------------------------------------------------ Modul anlegen/ändern
-// „＋ Modul“ in einer Woche: erst eines der fünf Module wählen, dann öffnet sich der Dialog.
-function ppmTypWahl(woche){
- if(!isTeacher())return;
- const sw=woche?swById(woche):null;
- const typen=Object.entries(PPM_TYPEN).filter(([k])=>k!=="experiment");
- modal(`<button class="modal-close" onclick="closeModal()">×</button>
-  <div class="kicker">MODUL HINZUFÜGEN</div><h2>Welches Modul möchtest du einplanen?</h2>
-  ${sw?`<p style="color:var(--muted);margin:0 0 10px">Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}</p>`:""}
-  <div class="ppm-legende" style="grid-template-columns:1fr">${typen.map(([k,T])=>`<button type="button" class="ppm-typ" data-ppm="neu" data-typ="${k}"${woche?` data-woche="${esc(woche)}"`:""}><b>${T.icon} ${esc(T.name)}</b><small>${esc(T.text)}</small></button>`).join("")}</div>
-  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button></div>`);
-}
-// Projekt: öffnet direkt „Das Experiment“ (Standard im Lernbereich mit Einstieg) oder die Projektseite mit Teams und Meilensteinen.
-function ppmProjektDirekt(m){
- if(m&&m.vorlage)return false;
- if(m&&m.direkt==="experiment")return true;
- if(m&&m.direkt==="projekt")return false;
- const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(m&&m.lb));
- return !!(ph&&ph.einstieg);
-}
-function ppmDateiTyp(f){
- const n=(f&&f.name)||"",t=(f&&f.type)||"";
- if(/^image\//.test(t)||dateiIstBild(n))return"bild";
- if(/^video\//.test(t)||dateiIstVideo(n))return"video";
- if(/^audio\//.test(t)||dateiIstAudio(n))return"audio";
- return"pdf";
-}
-const PPM_MAT_INFO={pdf:["","PDF"],bild:["","Bild"],video:["","Film"],audio:["","Audio"],link:["","Webseite"]};
-function ppmWochenOptionen(sel){
- return SCHULWOCHEN_PP.map(w=>`<option value="${w.id}"${w.id===sel?" selected":""}>${fmtKurz(w.start)}–${fmtKurz(w.end)}</option>`).join("");
-}
-// Check-out für ein K-Prim-Modul: Auswahl nach Lernbereich geordnet. Angelegte Check-outs und noch nicht angelegte Vorlagen stehen gemeinsam in den Gruppen.
-function ppmCheckoutOptionen(checkouts,gewaehlt){
- const lbs=[1,2,3,4];
- const gruppe=(label,items)=>items.length?`<optgroup label="${esc(label)}">${items.join("")}</optgroup>`:"";
- const stat=c=>c.status==="live"?"läuft":c.status==="beendet"?"beendet":"Entwurf";
- let html='<option value="">Noch keinen (später verknüpfen)</option>';
- const verteilt=new Set();
- lbs.forEach(n=>{
-  const lbT=(PROJEKT_PHASEN.find(p=>p.lbNum===n)||{}).lbTitel||"";
-  const ex=checkouts.filter(c=>Number(c.lbNum)===n).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
-  ex.forEach(c=>verteilt.add(c.id));
-  const exOpt=ex.map(c=>`<option value="${esc(c.id)}"${c.id===gewaehlt?" selected":""}>${esc(coTitelAnzeige(c)||"Check-out")} · angelegt (${stat(c)}${c.datum?" · "+esc(coDatum(c.datum)):""})</option>`);
-  // Vorlagen, aus denen es noch keinen Check-out gibt
-  const vl=CHECKOUT_VORLAGEN.filter(v=>Number(v.lbNum)===n&&!ex.some(c=>coTitelAnzeige(c)===coLabel(v))).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||""))||(a.nr||0)-(b.nr||0));
-  const vlOpt=vl.map(v=>`<option value="vorlage:${esc(v.id)}">${esc(coLabel(v))} · Vorlage: ${esc(coVorlageInhalte(v).join(" + "))}</option>`);
-  html+=gruppe(`Lernbereich ${n}${lbT?" · "+lbT:""}`,[...exOpt,...vlOpt]);
- });
- const rest=checkouts.filter(c=>!verteilt.has(c.id));
- html+=gruppe("Ohne Lernbereich",rest.map(c=>`<option value="${esc(c.id)}"${c.id===gewaehlt?" selected":""}>${esc(coTitelAnzeige(c)||"Check-out")} · angelegt (${stat(c)})</option>`));
- return html;
-}
-// Legt aus einer Vorlage einen Check-out-Entwurf an (wie „Speichern“ im Editor) und gibt die ID zurück.
-async function coAusVorlageAnlegen(v,datum){
- const au=v.aufgaben.map(coAufgabeAusBank);
- const a0=au[0];
- if(!v.eigeneVignetten)au.forEach((a,i)=>{if(i>0){a.vTitel=a0.vTitel;a.vText=a0.vText;a.vZeilen=a0.vZeilen;}});
- const daten={titel:coLabel(v),lbNum:v.lbNum,datum:datum||v.datum,zaehlt:true,status:"entwurf",vignette:null,
-  aufgaben:au.map(a=>{
-   const q={stamm:a.stamm.trim(),vignette:{titel:a.vTitel.trim(),text:a.vText.replace(/\s+$/,""),zeilen:!!a.vZeilen},aussagen:a.aussagen.map(x=>x.text.trim())};
-   if(a.kontext.trim())q.kontext=a.kontext.trim();
-   if(a.mText.trim())q.material={titel:a.mTitel.trim(),text:a.mText.replace(/\s+$/,""),quelle:a.mQuelle.trim()};
-   return q;}),
-  updatedAt:serverTimestamp(),updatedBy:currentUser.uid};
- const loesung={aufgaben:au.map(a=>({richtig:a.aussagen.map(x=>!!x.richtig),erklaerung:a.aussagen.map(x=>(x.erklaerung||"").trim())})),klassisch:v.klassisch||"",checkliste:[],updatedAt:serverTimestamp()};
- const r=await addDoc(collection(db,"checkouts"),{...daten,createdAt:serverTimestamp(),createdBy:currentUser.uid});
- await setDoc(doc(db,"checkoutLoesungen",r.id),loesung);
- return r.id;
-}
-async function ppmDialog(id,typ,woche,opt){
- opt=opt||{};
- const bearb=id?ppmById(id):null;
- const t=bearb?bearb.modul:typ;if(!PPM_TYPEN[t])return;
- const T=PPM_TYPEN[t];
- const projektId=bearb?bearb.projektId:opt.projektId;
- const projekt=projektId?ppmById(projektId):null;
- const heute=new Date().toISOString().slice(0,10);
- const erste=SCHULWOCHEN_PP.find(w=>w.end>=heute)||SCHULWOCHEN_PP[0];
- const projWochen=projekt?ppmWochen(projekt):null;
- const start=bearb?bearb.start:(woche&&(!projWochen||projWochen.some(w=>w.id===woche))?woche:(projWochen?projWochen[0].id:erste.id));
- let checkouts=[];
- if(t==="kprim"){try{checkouts=(await ladeCheckoutDaten()).checkouts||[];}catch(e){}}
- const ea=t==="selbstlern"?await ppmEaListe():[];
- const vorlagen=t==="projekt"?(await Promise.all(BEP_VORLAGEN_IDS.map(bepVorlage))).filter(Boolean):[];
- const lb0=bearb?bearb.lb:(projekt?projekt.lb:1);
- const lbOpt=[1,2,3,4].map(n=>`<option value="${n}"${n===lb0?" selected":""}>Lernbereich ${n} · ${esc((PROJEKT_PHASEN.find(p=>p.lbNum===n)||{}).lbTitel||"")}</option>`).join("");
- const ph0=PROJEKT_PHASEN.find(p=>p.lbNum===lb0);
- const dauer0=bearb?ppmDauerKey(bearb):PPM_DAUER_STANDARD[t];
- const dauerListe=(projekt?PPM_DAUERN.filter(d=>d.min):PPM_DAUERN).filter(d=>!d.alt||d.k===dauer0);
- const dauerOpt=(()=>{const l=dauerListe.some(d=>d.k===dauer0)?dauerListe:[...dauerListe,{k:dauer0,lang:dauer0.slice(1)+" Wochen (bisher)"}];return l.map(d=>`<option value="${d.k}"${d.k===dauer0?" selected":""}>${esc(d.lang)}</option>`).join("");})();
- const last=ppmLast(bearb?bearb.id:null);
- const wochenListe=projWochen||SCHULWOCHEN_PP;
- const wochenOpt=wochenListe.map(w=>{const frei=Math.max(0,PPM_MIN_PRO_WOCHE-last[w.id].min);return`<option value="${w.id}"${w.id===start?" selected":""}>${fmtKurz(w.start)}–${fmtKurz(w.end)}${projekt?"":` · frei: ${ppmStd(frei)} Stunden`}</option>`;}).join("");
- let extra="";
- if(t==="projekt"){
-  const dir0=ppmProjektDirekt(bearb||{lb:lb0});
-  extra=`<label>Beim Aufrufen öffnet sich<select id="ppmDirekt"><option value="experiment"${dir0?" selected":""}>direkt „Das Experiment“ (interaktive Stunde)</option><option value="projekt"${dir0?"":" selected"}>die Projektseite mit Teams und Meilensteinen</option></select></label>
-   ${vorlagen.length?`<label>Projektvorlage<select id="ppmVorlage"><option value="">Keine: Standardprojekt des Lernbereichs</option>${vorlagen.map(x=>`<option value="${esc(x.id)}"${bearb&&bearb.vorlage===x.id?" selected":""}>${esc(x.titel)}</option>`).join("")}</select></label>
-   <p style="font-size:13px;color:var(--muted);margin:0">Mit Vorlage entsteht eine eigene Projektseite mit Teamwahl, Zeitplan, Fristen, Material und Teamübersicht. Empfohlen: Dauer 2 Wochen (Schulwoche, dann der Praktikumsblock, dann Schulwoche).</p>`:""}
-   <p style="font-size:13px;color:var(--muted);margin:0">Team-Projekt mit Meilensteinen anlegen: Das Projekt nutzt die Meilensteine und die Teams des Lernbereichs.</p>`;
- }
- if(t==="apt")extra=`<p style="font-size:13px;color:var(--muted);margin:0">Die Frage aus der Abschlussprüfung, den relevanten Inhalt und die Lösung gestaltest du danach direkt auf der Modulseite.</p>`;
- if(t==="stunde")extra=`<label>Phase im Deeper-Learning-Konzept<select id="ppmPhase">${[1,2,3].map(n=>`<option value="${n}"${(bearb?bearb.phase:2)===n?" selected":""}>${PP12_PHASEN[n].kurz} · ${esc(PP12_PHASEN[n].name)}</option>`).join("")}</select></label>
-  ${bearb?"":`<p style="font-size:13px;color:var(--muted);margin:0">Zu jeder Stunde wird automatisch eine Digitale Tafel angelegt.</p>`}`;
- if(t==="einfuehrung"){
-  const th0=(bearb&&bearb.thema)||"gegenstand";
-  extra=`<label>Thema<select id="ppmThema"${bearb?" disabled":""}>${Object.entries(PPM_EINF_THEMEN).map(([k,v])=>`<option value="${k}"${k===th0?" selected":""}>${esc(v.titel)}</option>`).join("")}</select></label>
-   <p style="font-size:13px;color:var(--muted);margin:0">${bearb?"Das Thema lässt sich nach dem Anlegen nicht mehr ändern. Tafel und Kurse bleiben, wie sie angelegt wurden.":"Beim Speichern entsteht die Digitale Tafel mit den Vorlagen automatisch, die passenden Selbstlernkurse werden verknüpft."}</p>
-   ${Object.values(PPM_EINF_THEMEN).map(v=>`<p style="font-size:12px;color:var(--muted);margin:0"><b>${esc(v.titel)}:</b> ${esc(v.text)}</p>`).join("")}`;
- }
- if(t==="kprim")extra=`<label>Check-out verknüpfen<select id="ppmCheckout">${ppmCheckoutOptionen(checkouts,bearb&&bearb.checkoutId)}</select></label>
-   <p style="font-size:13px;color:var(--muted);margin:0">Die K-Prim-Tests stehen nach Lernbereich geordnet zur Auswahl. Eine „Vorlage“ wird beim Speichern automatisch als Check-out-Entwurf angelegt und mit diesem Modul verknüpft; freischalten kannst du ihn danach auf der Modulseite.</p>`;
- if(t==="rallye"){
-  extra=`<label>Wie spielen die Schüler:innen?<select id="ppmRModus"><option value="einzeln"${bearb&&bearb.rModus==="team"?"":" selected"}>Einzeln: Jede Person sammelt eigene Punkte</option><option value="team"${bearb&&bearb.rModus==="team"?" selected":""}>In Teams: Die Punkte zählen für das Team</option></select></label>
-   <label>Freischaltung der Stationen<select id="ppmRFrei">${Object.entries(LR_FREISCHALTUNG).map(([k,v])=>`<option value="${k}"${(bearb&&bearb.rFreischaltung||"qr")===k?" selected":""}>${esc(v)}</option>`).join("")}</select></label>
-   <p style="font-size:13px;color:var(--muted);margin:0">${bearb?"":"Die Stationen legst du danach auf der Modulseite an. "}Für die Rallye braucht jedes Handy Internet. Eine Kartenansicht und einen Offline-Modus gibt es nicht.</p>`;
- }
- if(t==="experiment"){
-  const gew=bearb?ppmExpTeile(bearb):PPM_EXP_TEILE.map(x=>x.k);
-  extra=`<div class="ppm-teile"><b style="font-size:13px">Teile der Einheit wählen</b>
-   ${PPM_EXP_TEILE.map(tl=>`<label class="check"><input type="checkbox" class="ppmTeil" value="${tl.k}"${gew.includes(tl.k)?" checked":""}><span><b>${esc(tl.name)}</b> <small>(ca. ${tl.min} Min.)</small><br><small style="color:var(--muted)">${esc(tl.text)}</small></span></label>`).join("")}
-   <div id="ppmTeileInfo" class="ppm-teileinfo"></div></div>
-   ${projekt?`<p style="font-size:13px;color:var(--muted);margin:0">Diese Einheit gehört zum Projekt „${esc(projekt.titel)}“ und zählt zur Projektzeit.</p>`:""}`;
- }
- if(t==="selbstlern"){
-  const alt=bearb&&bearb.kursId==="psych-gegenstand";
-  const aktuell=bearb&&String(bearb.kursId||"").startsWith("ea:")?bearb.kursId.slice(3):"";
-  const passend=ea.filter(e=>e.art==="selbstlern"||e.id===aktuell).sort((x,y)=>(x.lb||9)-(y.lb||9)||(parseInt(ppmEaNr(x.id,x))||99)-(parseInt(ppmEaNr(y.id,y))||99)||String(x.id).localeCompare(String(y.id)));
-  const lbGruppen=[...new Set(passend.map(e=>e.lb||0))];
-  const eaOpt=lbGruppen.map(n=>`<optgroup label="${n?"Lernbereich "+n:"Lernbereich offen"}">${passend.filter(e=>(e.lb||0)===n).map(e=>`<option value="ea:${esc(e.id)}" data-lb="${e.lb||""}"${bearb&&bearb.kursId==="ea:"+e.id?" selected":""}>${esc(ppmEaLabel(e.id,{titel:e.titel,nr:e.nr,lb:e.lb,modulart:e.art}))}${e.entwurf?" (Entwurf)":""}</option>`).join("")}</optgroup>`).join("");
-  extra=`<label>Kurs (nur Selbstlernkurse)<select id="ppmKurs">
-   ${eaOpt}
-   <optgroup label="Weitere">${alt?`<option value="psych-gegenstand" selected>${esc(PPM_KURSE["psych-gegenstand"].titel)} (Kurzfassung von Claude)</option>`:""}<option value="eigen"${bearb&&bearb.kursId==="eigen"?" selected":""}>Eigener Kurs (selbst gestalten)</option></optgroup></select></label>
-   <p style="font-size:13px;color:var(--muted);margin:0">${passend.length?"Hier erscheinen nur Selbstlernkurse. Weitere fertige Inhalte kommen automatisch dazu, sobald ihre Datei im Ordner einarbeitung/inhalte im Repo liegt.":"Noch keine fertigen Selbstlernkurse gefunden. Du kannst einen eigenen Kurs gestalten."}</p>`;
- }
- modal(`<button class="modal-close" onclick="closeModal()">×</button>
-  <div class="kicker">${T.icon} ${esc(T.kurz.toUpperCase())}</div><h2>${bearb?"Modul bearbeiten":esc(T.name)}</h2>
-  <div class="form ppm-form">
-   <div class="ppm-sek ppm-sek-1"><p class="ppm-sek-kopf">1 Worum geht es?</p>
-    <label>Lernbereich<select id="ppmLb"${projekt?" disabled":""}>${lbOpt}</select></label>
-    <label>Titel<input id="ppmTitel" maxlength="120" value="${esc(bearb?bearb.titel:"")}" placeholder="${esc(t==="projekt"&&ph0?ph0.titel:(t==="experiment"?"Das Experiment":T.name))}"></label>
-   </div>
-   <div class="ppm-sek ppm-sek-2"><p class="ppm-sek-kopf">2 Wann und wie lange?</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label>Beginn (Schulwoche)<select id="ppmStart">${wochenOpt}</select></label>
-    <label>Dauer<select id="ppmDauer">${dauerOpt}</select></label></div>
-    <div id="ppmKapa" class="ppm-kapahint"></div>
-   </div>
-   ${extra?`<div class="ppm-sek ppm-sek-3"><p class="ppm-sek-kopf">3 Inhalt</p>${extra}</div>`:""}
-   <div class="ppm-sek ppm-sek-4"><p class="ppm-sek-kopf">4 Für die Klasse</p>
-    <details class="ppm-details"${(bearb&&(bearb.themen||[]).length)||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen gehört der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${PP_EINHEITEN.map(e=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${e.id}"${((bearb&&bearb.themen)||[]).includes(e.id)||window.__kwThemaNeu===e.id?" checked":""}> ${esc(e.lb)} · Nr. ${esc(e.nr)} · ${esc(kwKurz(e))}</label>`).join("")}</div></details>
-    <label>Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
-   </div>
-   <div class="ppm-sek ppm-sek-5"><p class="ppm-sek-kopf">5 Material</p>
-    <div id="ppmMatBox" class="ppm-matbox"></div>
-   </div>
-   <div class="form-actions">${bearb?`<button class="secondary" type="button" id="ppmLoeschen">Modul löschen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
-  </div>`);
- const lbSel=$("ppmLb"),ti=$("ppmTitel"),btn=$("ppmSpeichern");
-  // ---- Material anhängen (Dateien und Links), wird beim Speichern übernommen ----
-  const matBest=[...((bearb&&bearb.material)||[])];   // schon am Modul hängende Materialien
-  const matNeu=[];                                     // neu hinzugefügt: {typ,titel,url} (Link) oder {typ,titel,file}
-  const matWegUrls=[];                                 // entfernte Dateien, werden nach dem Speichern aus dem Speicher gelöscht
-  let matLinkOffen=false,matHochgeladen=[];
-  const matRender=()=>{
-   const box=$("ppmMatBox");if(!box)return;
-   const zeile=(x,attr)=>{const inf=PPM_MAT_INFO[x.typ]||PPM_MAT_INFO.link;return`<div class="ppm-mat" style="flex-wrap:wrap"><span style="font-size:20px">${inf[0]}</span><div style="flex:1;min-width:140px"><b>${esc(x.titel||x.name||"Material")}</b><br><small style="color:var(--muted)">${inf[1]}${x.file?" · wird beim Speichern hochgeladen":""}</small></div><button type="button" class="ppm-btn klein" ${attr} title="Entfernen" aria-label="Material entfernen">✕</button></div>`;};
-   box.innerHTML=`<b style="font-size:14px">Material anhängen (optional)</b>
-    ${matBest.map((x,i)=>zeile(x,`data-mb="${i}"`)).join("")}${matNeu.map((x,i)=>zeile(x,`data-mn="${i}"`)).join("")}
-    <div class="ppm-zeile" style="border:0;padding:6px 0 0"><button type="button" class="ppm-btn" data-mat="datei"> Datei (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-mat="link"> Link</button><input type="file" id="ppmMatInput" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div>
-    ${matLinkOffen?`<div style="display:grid;gap:8px;margin-top:6px"><input id="ppmMatUrl" placeholder="https://…" aria-label="Adresse"><input id="ppmMatUrlTitel" maxlength="100" placeholder="Titel (optional)" aria-label="Titel"><div><button type="button" class="ppm-btn primaer" data-mat="link-ok">Link hinzufügen</button> <button type="button" class="ppm-btn" data-mat="link-x">Abbrechen</button></div></div>`:""}
-    <small style="color:var(--muted)">Dateien bis 15 MB. Das Material erscheint auf der Modulseite für die Klasse.</small>`;
-  };
-  matRender();
-  $("ppmMatBox").addEventListener("click",ev=>{
-   const b=ev.target.closest("button");if(!b)return;
-   if(b.dataset.mb!==undefined){const x=matBest.splice(Number(b.dataset.mb),1)[0];if(x&&x.typ!=="link"&&x.url)matWegUrls.push(x.url);matRender();return;}
-   if(b.dataset.mn!==undefined){matNeu.splice(Number(b.dataset.mn),1);matRender();return;}
-   const a=b.dataset.mat;
-   if(a==="datei"){const inp=$("ppmMatInput");inp.onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;
-     if(f.size>DATEI_MAX_BYTES){toast("Datei ist zu groß (max. 15 MB).");e.target.value="";return;}
-     matNeu.push({typ:ppmDateiTyp(f),titel:f.name.replace(/\.[a-z0-9]{2,5}$/i,""),name:f.name,file:f});matRender();};inp.click();return;}
-   if(a==="link"){matLinkOffen=true;matRender();const u=$("ppmMatUrl");if(u)u.focus();return;}
-   if(a==="link-x"){matLinkOffen=false;matRender();return;}
-   if(a==="link-ok"){const u=wbSichereUrl($("ppmMatUrl").value);if(!u){toast("Das ist keine gültige Internetadresse.");return;}
-     matNeu.push({typ:"link",titel:$("ppmMatUrlTitel").value.trim()||u.replace(/^https?:\/\//,""),url:u});matLinkOffen=false;matRender();return;}
-  });
- const teileGewaehlt=()=>[...document.querySelectorAll(".ppmTeil")].filter(c=>c.checked).map(c=>c.value);
- const aktualisieren=()=>{
-  const dk=$("ppmDauer").value;
-  let ok=true;
-  if(projekt){$("ppmKapa").innerHTML=`<span style="color:#1f6a3a">✓ Einheit im Projekt: zählt zur Projektzeit, kein eigener Platz nötig.</span>`;}
-  else{const pr=ppmPruefen($("ppmStart").value,dk,bearb?bearb.id:null,t);ok=pr.ok;$("ppmKapa").innerHTML=ppmKapaHtml(pr);}
-  if(t==="experiment"){
-   const g=teileGewaehlt(),min=ppmExpMinuten(g),d=PPM_DAUERN.find(x=>x.k===dk),info=$("ppmTeileInfo");
-   let txt=`Gewählt: ${g.length} von ${PPM_EXP_TEILE.length} Teilen, ca. ${min} Min.`;
-   if(d&&d.min)txt+=min<=d.min?` · passt in ${d.min} Minuten`:` · <span style="color:#b3261e">länger als die eingeplanten ${d.min} Minuten</span>`;
-   if(!g.length){txt=`<span style="color:#b3261e">Bitte mindestens einen Teil wählen.</span>`;ok=false;}
-   info.innerHTML=txt;
-  }
-  btn.disabled=!ok;btn.title=ok?"":"In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).";
- };
- if(t==="selbstlern"){const ks=$("ppmKurs");if(ks)ks.addEventListener("change",()=>{const o=ks.options[ks.selectedIndex],n=o&&o.dataset.lb;if(n&&!lbSel.disabled)lbSel.value=n;});}
- if(t==="projekt"&&!bearb)lbSel.addEventListener("change",()=>{const x=PROJEKT_PHASEN.find(y=>y.lbNum===Number(lbSel.value));ti.placeholder=x?x.titel:T.name;const d=$("ppmDirekt");if(d)d.value=(x&&x.einstieg)?"experiment":"projekt";});
- $("ppmStart").addEventListener("change",aktualisieren);$("ppmDauer").addEventListener("change",aktualisieren);
- const vSel=$("ppmVorlage");
- if(vSel)vSel.addEventListener("change",()=>{const x=vorlagen.find(y=>y.id===vSel.value);if(x){ti.placeholder=x.titel;if(!bearb&&x.dauerEmpfohlen&&[...$("ppmDauer").options].some(o=>o.value===x.dauerEmpfohlen))$("ppmDauer").value=x.dauerEmpfohlen;}aktualisieren();});
- document.querySelectorAll(".ppmTeil").forEach(c=>c.addEventListener("change",()=>{
-  const box=[...document.querySelectorAll(".ppmTeil")],get=k=>box.find(x=>x.value===k);
-  if(c.value==="ergebnisse"&&c.checked)get("experiment").checked=true;
-  if(c.value==="experiment"&&!c.checked)get("ergebnisse").checked=false;
-  aktualisieren();
- }));
- aktualisieren();
- btn.addEventListener("click",async()=>{
-  const lb=Number(lbSel.value),pr=projekt?{ok:true}:ppmPruefen($("ppmStart").value,$("ppmDauer").value,bearb?bearb.id:null,t);
-  if(!pr.ok){toast(pr.zeilen&&pr.zeilen[0]&&pr.zeilen[0].spur?"In dieser Zeit läuft schon ein anderes Projekt.":"In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).");return;}
-  const dk=$("ppmDauer").value,def=PPM_DAUERN.find(d=>d.k===dk);
-  const daten={modul:t,lb,titel:ti.value.trim(),start:$("ppmStart").value,dauer:dk,wochen:def?def.wochen:(Number(dk.slice(1))||1),notiz:$("ppmNotiz").value.trim()};
-  if(!daten.titel){const x=PROJEKT_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":t==="rallye"?"Lernrallye · LB"+lb:"Selbstlernkurs · LB"+lb);}
-  if(t==="einfuehrung"){
-   daten.thema=$("ppmThema").value;
-   const th=PPM_EINF_THEMEN[daten.thema]||PPM_EINF_THEMEN.eigen;
-   if(!ti.value.trim())daten.titel="Einführung: "+th.titel;
-   if(!bearb)daten.kurse=[...th.kurse];
-  }
-  daten.themen=[...document.querySelectorAll(".ppmThemaCb:checked")].map(c=>c.value);window.__kwThemaNeu=null;
-  if(projektId)daten.projektId=projektId;
-  if(t==="projekt"&&$("ppmDirekt"))daten.direkt=$("ppmDirekt").value;
-  if(t==="projekt"&&$("ppmVorlage")){daten.vorlage=$("ppmVorlage").value;if(daten.vorlage&&!ti.value.trim()){const vv=vorlagen.find(y=>y.id===daten.vorlage);if(vv)daten.titel=vv.titel;}}
-  if(t==="stunde")daten.phase=Number($("ppmPhase").value);
-  if(t==="kprim"){
-    const sel=$("ppmCheckout").value||"";
-    daten.checkoutId=sel;
-    try{
-     if(sel.startsWith("vorlage:")){
-      const v=CHECKOUT_VORLAGEN.find(x=>x.id===sel.slice(8));
-      if(!v){toast("Vorlage nicht gefunden.");return;}
-      const wk=SCHULWOCHEN_PP.find(w=>w.id===daten.start);
-      daten.checkoutId=await coAusVorlageAnlegen(v,wk?wk.end:v.datum);
-      if(!ti.value.trim())daten.titel=coLabel(v);
-     }else if(sel&&!ti.value.trim()){
-      const c=checkouts.find(x=>x.id===sel);if(c&&c.titel)daten.titel=c.titel;
-     }
-    }catch(err){console.error("Check-out aus Vorlage:",err);toast("Der Check-out konnte nicht angelegt werden.");return;}
-   }
-  if(t==="experiment"){
-   daten.teile=PPM_EXP_TEILE.map(x=>x.k).filter(k=>teileGewaehlt().includes(k));
-   const min=ppmExpMinuten(daten.teile);
-   if(def&&def.min&&min>def.min&&!confirm(`Die gewählten Teile brauchen etwa ${min} Minuten, eingeplant sind ${def.min}. Trotzdem speichern?`))return;
-  }
-  if(t==="rallye"){daten.rModus=$("ppmRModus").value;daten.rFreischaltung=$("ppmRFrei").value;}
-  if(t==="selbstlern"){
-   daten.kursId=$("ppmKurs").value;
-   if(!ti.value.trim()){
-    if(daten.kursId.startsWith("ea:")){const e=ea.find(x=>"ea:"+x.id===daten.kursId);if(e)daten.titel=e.id==="fa01"?(e.titel||daten.titel):ppmEaLabel(e.id,{titel:e.titel,nr:e.nr,lb:e.lb,modulart:e.art});}
-    else if(PPM_KURSE[daten.kursId])daten.titel=PPM_KURSE[daten.kursId].titel;
-   }
-  }
-  try{
-   // Neue Dateien hochladen (bei einem Fehler wird nichts gespeichert, das Fenster bleibt offen)
-   const matNeuFertig=[];
-   matHochgeladen=[];
-   if(matNeu.some(x=>x.file))toast("Material wird hochgeladen …");
-   for(const x of matNeu){
-    if(x.file){const up=await uploadCampusDatei(x.file,`ppMaterial/${bearb?bearb.id:"neu"}`);matHochgeladen.push(up.url);matNeuFertig.push({typ:x.typ,titel:x.titel,name:x.name,url:up.url});}
-    else matNeuFertig.push({typ:x.typ,titel:x.titel,url:x.url});
-   }
-   const matAlle=[...matBest,...matNeuFertig];
-   if(matAlle.length||(bearb&&(bearb.material||[]).length))daten.material=matAlle;
-   if(bearb){await updateDoc(doc(db,"ppModule",bearb.id),{...daten,updatedAt:serverTimestamp()});matWegUrls.forEach(u=>deleteCampusDatei(u));}
-   else{
-    const basis={...daten,createdBy:currentUser.uid,createdAt:serverTimestamp()};
-    if(t==="projekt")basis.einheiten=[];
-    if(t==="stunde"){basis.material=daten.material||[];basis.fragen=[];basis.tafelId=await ppmTafelAnlegen(daten.titel);}
-    if(t==="einfuehrung"){basis.material=daten.material||[];basis.tafelId=await ppmTafelMitVorlagen(daten.titel,(PPM_EINF_THEMEN[daten.thema]||PPM_EINF_THEMEN.eigen).tafel);}
-    if(t==="rallye"){basis.stationen=[];basis.rAktiv=false;}
-    if(t==="selbstlern"&&daten.kursId==="eigen")basis.schritte=[{id:"s1",typ:"text",titel:"Erster Schritt",text:"## Willkommen\nHier beginnt dein Kurs."},{id:"s2",typ:"abschluss",titel:"Geschafft",text:"Du hast den Kurs abgeschlossen."}];
-    await addDoc(collection(db,"ppModule"),basis);
-   }
-   closeModal();await ppmLaden(true);await render();toast("Modul gespeichert.");
-  }catch(e){matHochgeladen.forEach(u=>deleteCampusDatei(u));matHochgeladen=[];ppmFehler(e,"Das Modul konnte nicht gespeichert werden");}
- });
- const lo=$("ppmLoeschen");
- if(lo)lo.addEventListener("click",async()=>{
-  if(!confirm("Dieses Modul wirklich löschen? Fortschritte der Klasse bleiben in der Datenbank erhalten, sind aber nicht mehr sichtbar."))return;
-  try{
-   if(bearb.modul==="projekt"){for(const x of PPM.liste.filter(y=>y.projektId===bearb.id))await deleteDoc(doc(db,"ppModule",x.id));}
-   await deleteDoc(doc(db,"ppModule",bearb.id));closeModal();activePPModul=null;await ppmLaden(true);await render();toast("Modul gelöscht.");
-  }catch(e){ppmFehler(e,"Löschen nicht möglich");}
- });
-}
-function ppmFehler(e,text){
- console.error("Modulplaner:",e);
- toast(e&&e.code==="permission-denied"?`${text}: Firebase verweigert den Zugriff (permission-denied). Bitte die Firestore-Regeln prüfen.`:`${text}: ${(e&&(e.code||(e.message&&e.message.length<220?e.message:e.name)))||"unbekannt"}`);
-}
-async function ppmTafelAnlegen(titel){
- const r=await addDoc(collection(db,"whiteboards"),{title:String(titel).slice(0,120),description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,bg:"blau",createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
- return r.id;
-}
-// Tafel für „Einführung in den Lernbereich“: je Vorlage eine Seite, Mitarbeit für alle geöffnet.
-async function ppmTafelMitVorlagen(titel,namen){
- const von=anzeigeName(profile,currentUser);
- const r=await addDoc(collection(db,"whiteboards"),{title:String(titel).slice(0,120),description:"Tafel zur Einführung in den Lernbereich",art:"tafel",schreibschutz:true,seiten:Math.max(1,namen.length),bg:"blau",createdBy:currentUser.uid,createdByName:von,createdAt:serverTimestamp()});
- const t0=Date.now(),jobs=[];
- namen.forEach((name,i)=>{
-  const v=WB_VORLAGEN.find(x=>x.name===name);if(!v)return;
-  v.items(0,0).forEach((t,n)=>{
-   const std=WB_STANDARD[t.type]||{};
-   const d={boardId:r.id,seite:i+1,c:std.c||"grau",fs:std.fs||18,z:t0+i*100+n,authorUid:currentUser.uid,authorName:von,...std,...t,createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
-   Object.keys(d).forEach(k=>{if(d[k]===undefined)delete d[k];});
-   jobs.push(setDoc(doc(collection(db,"whiteboardItems")),d));
-  });
- });
- await Promise.all(jobs);
- return r.id;
-}
-async function ppmStandardplan(){
- if(PPM.liste.length&&!confirm("Es gibt schon Module. Den bisherigen Ablauf trotzdem zusätzlich anlegen?"))return;
- try{
-  for(const ph of PROJEKT_PHASEN){
-   const basis={lb:ph.lbNum,createdBy:currentUser.uid,createdAt:serverTimestamp()};
-   const pr=await addDoc(collection(db,"ppModule"),{...basis,modul:"projekt",titel:ph.einstieg?"Einstieg: Das Experiment":ph.titel,start:ph.projektSchulwochen[0],wochen:ph.projektSchulwochen.length,dauer:"w"+ph.projektSchulwochen.length,einheiten:[]});
-   if(ph.einstieg)await addDoc(collection(db,"ppModule"),{...basis,modul:"experiment",titel:"Das Experiment",projektId:pr.id,start:ph.projektSchulwochen[0],wochen:1,dauer:"90",teile:PPM_EXP_TEILE.map(t=>t.k)});
-   await addDoc(collection(db,"ppModule"),{...basis,modul:"apt",titel:"Prüfungstraining "+ph.lb,start:ph.aptSchulwochen[0],wochen:ph.aptSchulwochen.length,dauer:"w"+ph.aptSchulwochen.length});
-  }
-  await ppmLaden(true);await render();toast("Plan angelegt.");
- }catch(e){ppmFehler(e,"Plan konnte nicht angelegt werden");}
-}
-// ------------------------------------------------------------ Modulseiten
-async function ppmModulSeite(m){
- await ppmMeineLaden();
- if(m.modul==="projekt"){if(m.vorlage){const v=await bepVorlage(m.vorlage);if(v)return await ppmProjektVorlageSeite(m,v);}return await ppmProjektSeite(m);}
- if(m.modul==="stunde")return await ppmStundeSeite(m);
- if(m.modul==="einfuehrung")return await ppmEinfuehrungSeite(m);
- if(m.modul==="rallye")return await ppmRallyeSeite(m);
- if(m.modul==="kprim")return await ppmKprimSeite(m);
- if(m.modul==="apt")return await ppmAptSeite(m);
- if(m.modul==="experiment")return await ppmExperimentSeite(m);
- if(m.modul==="selbstlern"){
-  if(String(m.kursId||"").startsWith("ea:"))return await ppmEaSeite(m);
-  return await ppmKursSeite(m);
- }
- return"";
-}
-// ---- Experiment (interaktive Einheit mit wählbaren Teilen) ----
-async function ppmExperimentSeite(m){
- const lehrer=isTeacher(),teile=ppmExpTeile(m),min=ppmExpMinuten(teile);
- const f=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
- const done=!!f.experimentErledigt,d=ppmDauerDef(m);
- const projekt=m.projektId?ppmById(m.projektId):null;
- const liste=PPM_EXP_TEILE.map(t=>{const an=teile.includes(t.k);return`<div class="ppm-zeile" style="opacity:${an?1:.45}"><span style="font-size:20px">${an?"✓":"–"}</span><div style="flex:1;min-width:200px"><b>${esc(t.name)}</b><br><small style="color:var(--muted)">${esc(t.text)}</small></div><small>${an?"ca. "+t.min+" Min.":"nicht dabei"}</small></div>`;}).join("");
- const passt=!d.min||min<=d.min;
- return`${ppmKopf(m,projekt?`<p style="color:var(--muted)">Einheit im Projekt „${esc(projekt.titel)}“</p>`:"")}
- <div class="ppm-box"><h2>Das Experiment · interaktive Einheit</h2>
-  <p>Gewählte Teile: <b>${teile.length} von ${PPM_EXP_TEILE.length}</b>, Zeitbedarf etwa <b>${min} Minuten</b>${d.min?` (eingeplant: ${d.min} Minuten${passt?"":`, <span style="color:#b3261e">das reicht nicht ganz</span>`})`:""}.</p>
-  ${liste}
-  <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-   <button type="button" class="ppm-btn primaer" data-ppm="experiment" data-id="${esc(m.id)}">${lehrer?"Einheit öffnen (Vorschau)":done?"Einheit wiederholen":"Einheit starten"}</button>
-   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}</div></div>
- ${footer()}`;
-}
-// ---- Selbstlernkurs mit fertiger Einarbeitung (einarbeitung/inhalte/<id>.json) ----
-async function ppmEaSeite(m){
- const lehrer=isTeacher(),id=String(m.kursId).slice(3);
- const info=await einarbeitungInfo(id);
- const f=await getLehrplanFortschritt(id).catch(()=>({}));
- const ok=!!f.einarbeitungAbgeschlossen,aufg=f.einarbeitungAufgaben;
- const proz=aufg&&aufg.gesamt?Math.round(aufg.richtig/aufg.gesamt*100):0;
- return`${ppmKopf(m,`<p style="color:var(--muted)">${esc((info&&info.titel)||id)}</p>`)}
- <div class="ppm-box"><h2>Selbstlernkurs</h2>
-  ${info?`<p>Du klickst dich Seite für Seite selbstständig durch den Kurs. Es gibt ${info.aufgaben} Aufgabe${info.aufgaben===1?"":"n"} mit Rückmeldung. Dein Stand wird gespeichert.</p>`:`<p class="ppm-leer">Für diesen Kurs wurde die Inhaltsdatei <code>einarbeitung/inhalte/${esc(id)}.json</code> nicht gefunden.</p>`}
-  ${lehrer?"":`<div class="ppm-balken"><b>${ok?"Kurs abgeschlossen ✓":"Noch nicht abgeschlossen"}</b>${aufg&&aufg.gesamt?`<br><small style="color:var(--muted)">Aufgaben: ${aufg.richtig} von ${aufg.gesamt} richtig</small><div class="ppm-bar"><i style="width:${proz}%"></i></div>`:""}</div>`}
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">${info?`<button type="button" class="ppm-btn primaer" data-ppm="ea-start" data-ea="${esc(id)}">${lehrer?"Kurs öffnen (Vorschau)":ok?"Kurs wiederholen":(aufg?"Kurs fortsetzen":"Kurs starten")}</button>`:""}
-   ${lehrer?`<button type="button" class="ppm-btn" data-ppm="ea-stand" data-ea="${esc(id)}">Stand der Klasse ansehen</button>`:""}</div></div>
- ${footer()}`;
-}
-// Material eines Moduls (Dateien und Links) unter der Kopfzeile; Stunde und Prüfungstraining zeigen es in eigenen Bereichen.
-function ppmMaterialBox(m){
- if(m.modul==="stunde"||m.modul==="apt")return"";
- const mat=m.material||[];
- if(!mat.length)return"";
- const lehrer=isTeacher();
- return`<div class="ppm-box"><h2>Material</h2>${mat.map((x,i)=>ppmMaterialHTML(x,i,m,lehrer)).join("")}${lehrer?'<input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden>':""}</div>`;
-}
-function ppmKopf(m,unter,extraBtn){
- const T=PPM_TYPEN[m.modul],c=ppmFarbe(m),w=ppmWochen(m);
- const zeit=w.length?`${fmtKurz(w[0].start)}–${fmtKurz(w[w.length-1].end)}`:"";
- return`<div class="kw-links"><button class="secondary" onclick="go('start')">← Lernlandkarte</button><button class="secondary" data-ppm="plan">← Modulplan</button></div>
- ${PPM_CSS}
- <div class="ppm-box ppm-kopf kw-kopf" style="--c:${c};--t:${c}"><div class="kicker">${T.icon} ${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit} · ${esc(ppmDauerDef(m).lang.toUpperCase())}</div>
-  <h1>${esc(ppmTitel(m)||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
-  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${extraBtn||""}</div>`:""}</div>${lbModulBar(m)}${ppmMaterialBox(m)}`;
-}
-// ---- Projekt ----
-async function ppmProjektSeite(m){
- const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(m.lb));
- const lehrer=isTeacher();
- const f=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
- const done=!!f.experimentErledigt;
- const eig=PPM.liste.filter(x=>x.projektId===m.id);
- const eigZeilen=eig.map(x=>{const sw=swById(x.start),teile=ppmExpTeile(x);
-  return`<div class="ppm-zeile"><div style="flex:1;min-width:200px"><b>${esc(x.titel||"Das Experiment")}</b><br><small style="color:var(--muted)">${esc(ppmDauerText(x))} · ${teile.length} von ${PPM_EXP_TEILE.length} Teilen${sw?` · Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}`:""}</small></div>
-   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}
-   <button type="button" class="ppm-btn primaer" data-ppm="oeffnen" data-id="${esc(x.id)}">Einheit öffnen</button>
-   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(x.id)}" title="Einheit bearbeiten">Ändern</button>`:""}</div>`;}).join("");
- const alt=(m.einheiten||[]).map((e,i)=>{
-  const def=PPM_EINHEITEN[e.typ];if(!def)return"";
-  const sw=swById(e.woche);
-  return`<div class="ppm-zeile"><span style="font-size:26px">${def.icon}</span><div style="flex:1;min-width:200px"><b>${esc(def.name)}</b><br><small style="color:var(--muted)">${esc(def.text)}${sw?` · Woche ${fmtKurz(sw.start)}–${fmtKurz(sw.end)}`:""}</small></div>
-   ${lehrer?"":`<span class="ppm-status${done?" ok":""}">${done?"gemacht ✓":"noch offen"}</span>`}
-   <button type="button" class="ppm-btn primaer" data-ppm="experiment">${lehrer?"Stunde öffnen":done?"Stunde wiederholen":"Stunde starten"}</button>
-   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="einheit-weg" data-id="${esc(m.id)}" data-i="${i}" title="Einheit entfernen">✕</button>`:""}</div>`;}).join("");
- const ms=ph&&ph.meilensteine&&ph.meilensteine.length?`<h3>Meilensteine im Team</h3><ol style="margin:4px 0 0 18px;line-height:1.55">${ph.meilensteine.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`:"";
- return`${ppmKopf(m)}
- <div class="ppm-box"><h2>Projekt</h2>${ph&&ph.auftrag?`<p>${esc(ph.auftrag.titel)}</p>`:`<p>Projekt zu Lernbereich ${m.lb}.</p>`}${ms}
-  ${ph&&!ph.einstieg?`<div style="margin-top:12px"><button type="button" class="ppm-btn primaer" data-ppm="projekt-oeffnen" data-lb="${m.lb}">Zum Projekt: Teams und Meilensteine →</button></div>`:""}</div>
- <div class="ppm-box"><h2>Einheiten im Projekt</h2>
-  <p style="color:var(--muted);font-size:13px">Einheiten sind kleine Bausteine, die du immer wieder zwischendurch einfügen kannst. Sie zählen zur Projektzeit.</p>
-  ${eigZeilen}${alt}${!eig.length&&!alt?`<p class="ppm-leer">Noch keine Einheit eingefügt.</p>`:""}
-  ${lehrer?`<div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="einheit-neu" data-id="${esc(m.id)}">＋ Experiment-Einheit einfügen</button></div>`:""}</div>
- ${footer()}`;
-}
-// ============================================================
-// PROJEKTVORLAGE · Team-Projekt mit Zeitplan, Material und Teamstand
-// ------------------------------------------------------------
-// Inhalte stehen in projekte/<id>.json (z. B. projekte/bep-in-aktion.json) und lassen sich dort
-// ohne Programmieren ändern. Ein Projekt-Modul bekommt die Vorlage über das Feld "vorlage"
-// (Modul bearbeiten → 3 Inhalt → Projektvorlage).
-// Teams: Collection lehrplanTeams (wocheId "vorlage_<modulId>"), Beiträge: meilensteinBeitraege,
-// Bestätigung durch die Lehrkraft: Feld msPruefung am Team. Persönliche Haken (Aufgaben, Checkliste)
-// liegen im Dokument ppKursFortschritt des Moduls. Termine der Lehrkraft: Feld "termine" am Modul.
-// Meilenstein 0 = „Team gebildet“ (automatisch), M1 bis Mn = Index 1 bis n.
-// ============================================================
-const BEP_VORLAGEN_IDS=["bep-in-aktion"];
-async function bepVorlage(id){
- if(!id)return null;
- if(id in PPM.bepV)return PPM.bepV[id];
- let v=null;
- try{const r=await fetch(`projekte/${encodeURIComponent(id)}.json`,{cache:"no-cache"});if(r.ok)v=await r.json();}catch(e){v=null;}
- PPM.bepV[id]=v;return v;
-}
-function bepHeute(){return new Date().toISOString().slice(0,10);}
-function bepTagText(iso){if(!iso)return"";const T=["So","Mo","Di","Mi","Do","Fr","Sa"];return T[new Date(iso+"T12:00:00Z").getUTCDay()]+", "+fmtKurz(iso);}
-function bepTageBis(iso){return Math.round((new Date(iso+"T12:00:00Z")-new Date(bepHeute()+"T12:00:00Z"))/86400000);}
-function bepTageText(n){return n<0?`seit ${-n} Tag${n===-1?"":"en"} überfällig`:n===0?"heute":n===1?"morgen":`in ${n} Tagen`;}
-// Zeitraum des Moduls: erste und letzte Schulwoche, dazwischen der Praktikumsblock (falls vorhanden)
-function bepZeitraum(m){
- const w=ppmWochen(m);if(!w.length)return null;
- const w1=w[0],wL=w[w.length-1];
- const pr=w.length>1?PRAKTIKUMSPHASEN.filter(p=>p.start>w1.end&&p.end<wL.start):[];
- return{w1:w1.start,w1Ende:w1.end,wL:wL.start,wLEnde:wL.end,einWoche:w.length===1,
-  p1:pr.length?pr[0].start:null,pEnde:pr.length?pr[pr.length-1].end:null,
-  ferien:pr.length?FERIEN_2026_27.filter(f=>f.start<=pr[pr.length-1].end&&f.end>=pr[0].start).map(f=>f.titel):[]};
-}
-function bepAnker(z,a){
- if(!z||!a)return null;
- const basis=a[0]==="w1"?z.w1:a[0]==="wL"?z.wL:a[0]==="p1"?z.p1:a[0]==="pEnde"?z.pEnde:null;
- return basis?ppmPlusTage(basis,Number(a[1])||0):null;
-}
-// Frist eines Meilensteins (i = 1 bis n): zuerst der Termin der Lehrkraft, sonst der Standard aus der Vorlage
-function bepFrist(m,v,i){
- const t=m.termine&&m.termine[i];
- if(t&&/^\d{4}-\d{2}-\d{2}$/.test(t))return t;
- const x=v.meilensteine[i-1];
- return x?bepAnker(bepZeitraum(m),x.faellig):null;
-}
-function bepPhasenZeit(m,p){
- const z=bepZeitraum(m);let von=bepAnker(z,p.zeit.von),bis=bepAnker(z,p.zeit.bis);
- if(z&&z.pEnde&&p.ort==="praktikum"&&von){if(von>z.pEnde)von=bis=null;else if(bis>z.pEnde)bis=z.pEnde;}
- return{von,bis};
-}
-function bepPhasenText(m,p){
- const t=bepPhasenZeit(m,p);
- if(!t.von||!t.bis)return"Termin folgt";
- return t.von===t.bis?bepTagText(t.von):`${fmtKurz(t.von)}–${fmtKurz(t.bis)}`;
-}
-function bepPhaseJetzt(m,p){const t=bepPhasenZeit(m,p),h=bepHeute();return!!(t.von&&t.bis&&h>=t.von&&h<=t.bis);}
-// Phasenobjekt im Format der Projekt-Meilensteine (msListeHTML, openMsBeitrag, msPruefen)
-function bepPh(m,v){
- const ph={id:v.id,lb:v.kurz||"Projekt",lbNum:Number(m.lb)||v.lb||2,titel:v.titel,projektWocheId:"vorlage_"+m.id,einstieg:false,
-  meilensteine:["Team gebildet",...v.meilensteine.map(x=>x.kurz+" · "+x.titel)],
-  bestaetigung:v.meilensteine.map((x,i)=>x.bestaetigung==="lehrkraft"?i+1:-1).filter(i=>i>0),
-  beitragHinweis:["",...v.meilensteine.map(x=>x.beitragHinweis||"")],notwendigeWochen:[],trainingWochen:[]};
- PROJEKT_VORLAGEN_PH[v.id]=ph;return ph;
-}
-async function bepLaden(m){
- const v=await bepVorlage(m.vorlage);if(!v)return null;
- bepPh(m,v);
- const teams=await getLehrplanTeams("vorlage_"+m.id);
- const beitraege=await getMeilensteinBeitraege(teams.map(t=>t.id));
- const team=currentUser?(teams.find(t=>(t.mitgliederUids||[]).includes(currentUser.uid))||null):null;
- return PPM.bep[m.id]={v,teams,beitraege,team};
-}
-async function bepAlleLaden(){
- await Promise.all(PPM.liste.filter(m=>m.modul==="projekt"&&m.vorlage).map(m=>bepLaden(m).catch(e=>{console.error("Projektvorlage laden:",e);return null;})));
-}
-function bepHatBeitrag(d,teamId,i,uid){return d.beitraege.some(b=>b.teamId===teamId&&Number(b.index)===i&&b.uid===uid);}
-function bepEigene(m){
- const d=PPM.bep[m.id],g=d?d.v.meilensteine.length:0;
- if(!d||!d.team)return{n:0,g};
- let n=0;for(let i=1;i<=g;i++)if(bepHatBeitrag(d,d.team.id,i,currentUser.uid))n++;
- return{n,g};
-}
-function bepFort(m){
- if(isTeacher())return null;
- const d=PPM.bep[m.id];if(!d)return{done:false,frac:0};
- const e=bepEigene(m);return{done:!!e.g&&e.n===e.g,frac:e.g?e.n/e.g:0};
-}
-function bepStatusHTML(m){
- const d=PPM.bep[m.id];if(!d)return"";
- if(!d.team)return`<span class="ppm-status">noch kein Team</span>`;
- const e=bepEigene(m);return`<span class="ppm-status${e.n===e.g?" ok":""}">${e.n}/${e.g} Meilensteine</span>`;
-}
-// nächster Meilenstein, zu dem die angemeldete Person noch etwas einreichen muss (oder der zurückgegeben wurde)
-function bepNaechster(m){
- const d=PPM.bep[m.id];if(!d||!d.team)return null;
- const ph=bepPh(m,d.v);
- for(let i=1;i<=d.v.meilensteine.length;i++){
-  const st=msStatus(ph,d.team,d.beitraege,i);
-  if(!bepHatBeitrag(d,d.team.id,i,currentUser.uid)||st.zustand==="zurueck")return i;
- }
- return null;
-}
-function bepFristKlasse(fr,erreicht){
- if(!fr||erreicht)return"";
- const n=bepTageBis(fr);return n<0?"rot":n<=2?"warn":"";
-}
-// Zusatzzeilen auf der Modulkachel im Modulplan
-function bepKachelHTML(m){
- const d=PPM.bep[m.id];if(!d)return"";
- const v=d.v,h=bepHeute(),lehrer=isTeacher(),ph=bepPh(m,v);
- const punkte=v.phasen.map(p=>{
-  const jetzt=bepPhaseJetzt(m,p);
-  const fertig=!lehrer&&d.team&&p.ms.every(i=>bepHatBeitrag(d,d.team.id,i,currentUser.uid));
-  return`<i class="bep-pt ${p.ort}${jetzt?" jetzt":""}${fertig?" fertig":""}" title="${esc(p.nr+". "+p.name+(p.ort==="praktikum"?" (Praktikum)":" (Schule)"))}">${fertig?"✓":p.nr}</i>`;
- }).join("");
- const leiste=`<span class="bep-leiste" aria-label="Die ${v.phasen.length} Phasen des Projekts">${punkte}</span>`;
- let chips="";
- if(lehrer){
-  let warten=0,ueber=0;
-  d.teams.forEach(t=>v.meilensteine.forEach((x,k)=>{const i=k+1,st=msStatus(ph,t,d.beitraege,i);if(st.zustand==="wartet")warten++;const f=bepFrist(m,v,i);if(f&&f<h&&st.zustand!=="erreicht")ueber++;}));
-  chips=`<span class="ppm-chip"> ${d.teams.length} Team${d.teams.length===1?"":"s"}</span>${warten?`<span class="ppm-chip bep-warn">${warten} warten auf dich</span>`:""}${ueber?`<span class="ppm-chip bep-rot">${ueber} Meilenstein${ueber===1?"":"e"} überfällig</span>`:""}`;
- }else if(!d.team){
-  chips=`<span class="ppm-chip bep-rot">Noch kein Team: jetzt eins bilden</span>`;
- }else{
-  const i=bepNaechster(m),f=i?bepFrist(m,v,i):null;
-  chips=`<span class="ppm-chip"> ${esc(d.team.teamName||"Team")}</span>`+(i?`<span class="ppm-chip ${bepFristKlasse(f)==="rot"?"bep-rot":bepFristKlasse(f)==="warn"?"bep-warn":""}">Als Nächstes: ${esc(v.meilensteine[i-1].kurz)}${f?" · fällig "+esc(bepTagText(f)):""}</span>`:`<span class="ppm-chip">Alle Beiträge eingereicht ✓</span>`);
- }
- return`<span class="bep-kachel">${leiste}<small class="bep-leg">Phase 1–2 Schule · 3–4 Praktikum · 5–6 Schule</small><span class="bep-chips">${chips}</span></span>`;
-}
-
-// ------------------------------------------------------------ Team
-async function bepTeamNeu(mId,idx){
- const m=ppmById(mId);if(!m)return;
- const v=await bepVorlage(m.vorlage),d=await bepLaden(m);if(!v||!d)return;
- if(d.team){toast("Du bist schon in einem Team.");return;}
- const b=v.bereiche[idx];if(!b)return;
- if(d.teams.some(t=>t.bereichKap===b.kap)){toast("Dieser Bereich ist schon vergeben. Tritt dem Team bei.");await render();return;}
- try{
-  await addDoc(collection(db,"lehrplanTeams"),{wocheId:"vorlage_"+m.id,fach:"paedagogik",teamName:b.name,bereichKap:b.kap,bereichName:b.name,
-   mitgliederUids:[currentUser.uid],mitgliederNamen:[anzeigeName(profile,currentUser)],createdBy:currentUser.uid,createdAt:serverTimestamp()});
-  toast("Team gegründet. Du bist Mitglied.");showMotivationsBild(false,"team");await render();
- }catch(e){ppmFehler(e,"Das Team konnte nicht gegründet werden");}
-}
-async function bepTeamBeitreten(mId,teamId){
- const m=ppmById(mId);if(!m)return;
- const v=await bepVorlage(m.vorlage),d=await bepLaden(m);if(!v||!d)return;
- if(d.team){toast("Du bist schon in einem Team. Verlasse es zuerst.");return;}
- const max=(v.teamGroesse&&v.teamGroesse.max)||3;
- try{
-  const ref=doc(db,"lehrplanTeams",teamId),s=await getDoc(ref);if(!s.exists())return;
-  const x=s.data();
-  if((x.mitgliederUids||[]).length>=max){toast(`Das Team ist voll (${max} Personen).`);await render();return;}
-  await updateDoc(ref,{mitgliederUids:[...(x.mitgliederUids||[]),currentUser.uid],mitgliederNamen:[...(x.mitgliederNamen||[]),anzeigeName(profile,currentUser)]});
-  toast("Team beigetreten!");showMotivationsBild(false,"team");await render();
- }catch(e){ppmFehler(e,"Beitreten nicht möglich");}
-}
-async function bepTeamVerlassen(mId,teamId){
- if(!confirm("Dieses Team wirklich verlassen? Deine bisherigen Beiträge bleiben gespeichert."))return;
- try{
-  const ref=doc(db,"lehrplanTeams",teamId),s=await getDoc(ref);if(!s.exists())return;
-  const x=s.data(),uids=[...(x.mitgliederUids||[])],namen=[...(x.mitgliederNamen||[])],k=uids.indexOf(currentUser.uid);
-  if(k>-1){uids.splice(k,1);namen.splice(k,1);}
-  await updateDoc(ref,{mitgliederUids:uids,mitgliederNamen:namen});
-  if(!uids.length){try{await deleteDoc(ref);}catch(e){}}
-  toast("Team verlassen.");await render();
- }catch(e){ppmFehler(e,"Verlassen nicht möglich");}
-}
-async function bepTeamAufloesen(mId,teamId){
- if(!confirm("Dieses Team wirklich auflösen? Die Beiträge der Mitglieder gehen für dieses Team verloren."))return;
- try{await deleteDoc(doc(db,"lehrplanTeams",teamId));toast("Team aufgelöst.");await render();}
- catch(e){ppmFehler(e,"Auflösen nicht möglich");}
-}
-const BEP_TEAMFELD={rolle:u=>`rollen.${u}`,art:u=>`stellen.${u}.art`,alter:u=>`stellen.${u}.alter`,stelle:u=>`stellen.${u}.stelle`};
-async function bepTeamFeld(teamId,feld,wert){
- const f=BEP_TEAMFELD[feld];if(!f)return;
- try{await updateDoc(doc(db,"lehrplanTeams",teamId),{[f(currentUser.uid)]:String(wert||"").trim().slice(0,80)});toast("Gespeichert.");}
- catch(e){ppmFehler(e,"Das konnte nicht gespeichert werden");}
-}
-async function bepAufgabeHaken(mId,key,an){
- const m=ppmById(mId);if(!m)return;
- try{await ppmKursSchreiben(m,d=>{d.bepAufg=d.bepAufg||{};if(an)d.bepAufg[key]=true;else delete d.bepAufg[key];});}
- catch(e){ppmFehler(e,"Der Haken konnte nicht gespeichert werden");}
-}
-async function bepCheckHaken(mId,key,an){
- const m=ppmById(mId);if(!m)return;
- const n=document.querySelectorAll(".bep-chk-j:checked").length,z=$("bepChkN");if(z)z.textContent=n;
- try{await ppmKursSchreiben(m,d=>{d.bepCheck=d.bepCheck||{};if(an)d.bepCheck[key]=true;else delete d.bepCheck[key];});}
- catch(e){ppmFehler(e,"Der Haken konnte nicht gespeichert werden");}
-}
-async function bepTermineSpeichern(mId,zuruecksetzen){
- if(!isTeacher())return;
- const m=ppmById(mId);if(!m)return;const v=await bepVorlage(m.vorlage);if(!v)return;
- const t={};
- if(!zuruecksetzen)v.meilensteine.forEach((x,k)=>{const el=$("bepT"+(k+1));if(el&&el.value)t[k+1]=el.value;});
- try{await updateDoc(doc(db,"ppModule",m.id),{termine:t,updatedAt:serverTimestamp()});await ppmLaden(true);toast(zuruecksetzen?"Termine auf Standard zurückgesetzt.":"Termine gespeichert.");await render();}
- catch(e){ppmFehler(e,"Termine konnten nicht gespeichert werden");}
-}
-Object.assign(window,{bepTeamNeu,bepTeamBeitreten,bepTeamVerlassen,bepTeamAufloesen,bepTeamFeld,bepAufgabeHaken,bepCheckHaken,bepTermineSpeichern});
-
-// ------------------------------------------------------------ Modulseite
-function bepNamenListe(team){return(team.mitgliederNamen||[]).map(n=>esc(wbKurz?wbKurz(n)||n:n)).join(", ");}
-function bepBlickHTML(v){
- return`<div class="bep-blick">${v.blick.map(b=>`<div class="bep-tile"><b>${esc(b.titel)}</b><small>${esc(b.text)}</small></div>`).join("")}</div>`;
-}
-function bepAuftragHTML(v){
- return`<div class="ppm-box"><h2>Dein Auftrag</h2><p>${esc(v.auftrag)}</p><p>${esc(v.teamText)}</p>
-  <div class="bep-hinweis"><b>Worauf es ankommt.</b> ${esc(v.worauf)}</div>
-  <p class="bep-bsp"><b>Beispiel:</b> ${esc(v.beispiel)}</p></div>`;
-}
-// Teamwahl: elf Bildungsbereiche, jeder genau einmal
-function bepTeamWahlHTML(m,v,d){
- const max=(v.teamGroesse&&v.teamGroesse.max)||3;
- let gruppe="";
- const zeilen=v.bereiche.map((b,idx)=>{
-  const t=d.teams.find(x=>x.bereichKap===b.kap),n=t?(t.mitgliederUids||[]).length:0;
-  const kopf=b.gruppe!==gruppe?`<div class="bep-gruppe">${esc(b.gruppe)}</div>`:"";gruppe=b.gruppe;
-  const akt=!t?`<button type="button" class="ppm-btn klein primaer" onclick="bepTeamNeu('${m.id}',${idx})">Team gründen</button>`
-   :n>=max?`<span class="ppm-status">voll (${n}/${max})</span>`
-   :`<button type="button" class="ppm-btn klein primaer" onclick="bepTeamBeitreten('${m.id}','${t.id}')">Beitreten (${n}/${max})</button>`;
-  return`${kopf}<div class="bep-bz${t?" vergeben":""}"><span class="bep-kap">${esc(b.kap)}</span><div style="flex:1;min-width:0"><b>${esc(b.name)}</b>${t?`<br><small>Team: ${bepNamenListe(t)}</small>`:`<br><small>noch frei</small>`}</div>${akt}</div>`;
- }).join("");
- return`<div class="ppm-box bep-teamwahl"><h2> Schritt 1: Such dir dein Team</h2>
-  <p>Jedes Team arbeitet an <b>einem</b> Bildungsbereich des BayBEP (${v.teamGroesse.min}–${max} Personen). Ist dein Wunschbereich noch frei, gründest du das Team. Ist schon ein Team da und noch Platz, trittst du bei.</p>
-  <p class="bep-klein">${esc(v.bereichHinweis)}</p>${zeilen}</div>`;
-}
-function bepTeamBoxHTML(m,v,d,lehrer){
- const t=d.team;if(!t)return"";
- const ich=currentUser.uid,max=(v.teamGroesse&&v.teamGroesse.max)||3;
- const st=t.stellen||{},ro=t.rollen||{};
- const zeilen=(t.mitgliederUids||[]).map((u,k)=>{
-  const mine=u===ich,s=st[u]||{};
-  const rolle=mine?`<select onchange="bepTeamFeld('${t.id}','rolle',this.value)" aria-label="Meine Rolle"><option value="">– Rolle wählen –</option>${v.rollen.map(r=>`<option${ro[u]===r?" selected":""}>${esc(r)}</option>`).join("")}</select>`:esc(ro[u]||"–");
-  const art=mine?`<select onchange="bepTeamFeld('${t.id}','art',this.value)" aria-label="Krippe oder Kindergarten"><option value="">–</option>${v.einrichtungen.map(r=>`<option${s.art===r?" selected":""}>${esc(r)}</option>`).join("")}</select>`:esc(s.art||"–");
-  const alter=mine?`<input maxlength="30" value="${esc(s.alter||"")}" placeholder="z. B. 3–4 Jahre" onchange="bepTeamFeld('${t.id}','alter',this.value)" aria-label="Altersgruppe">`:esc(s.alter||"–");
-  const stelle=mine?`<input maxlength="60" value="${esc(s.stelle||"")}" placeholder="Einrichtung" onchange="bepTeamFeld('${t.id}','stelle',this.value)" aria-label="Praktikumsstelle">`:esc(s.stelle||"–");
-  return`<tr${mine?' class="ich"':""}><td data-l="Name"><b>${esc((t.mitgliederNamen||[])[k]||"Mitglied")}</b>${mine?" (ich)":""}</td><td data-l="Rolle im Team">${rolle}</td><td data-l="Praktikumsstelle">${stelle}</td><td data-l="Krippe / Kiga">${art}</td><td data-l="Altersgruppe">${alter}</td></tr>`;
- }).join("");
- const verlassen=!lehrer?`<button type="button" class="ppm-btn klein" onclick="bepTeamVerlassen('${m.id}','${t.id}')">Team verlassen</button>`:"";
- return`<div class="ppm-box"><h2> Mein Team: ${esc(t.bereichKap?t.bereichKap+" ":"")}${esc(t.bereichName||t.teamName||"")}</h2>
-  <div class="bep-tabwrap"><table class="bep-tab bep-teamtab"><thead><tr><th>Name</th><th>Rolle im Team</th><th>Praktikumsstelle</th><th>Krippe / Kiga</th><th>Altersgruppe</th></tr></thead><tbody>${zeilen}</tbody></table></div>
-  <p class="bep-klein">Rollen im Team: ${v.rollen.map(esc).join(", ")}. Trage deine Rolle und deine Praktikumsstelle ein. Keine Namen von Kindern!</p>
-  <div class="ppm-zeile" style="border:0;padding-bottom:0">${(t.mitgliederUids||[]).length<max?`<small>Es ist noch Platz für ${max-(t.mitgliederUids||[]).length} Person${max-(t.mitgliederUids||[]).length===1?"":"en"}.</small>`:""}${verlassen}</div></div>`;
-}
-// „Wo stehe ich?“ für Schüler:innen
-function bepWoStehIchHTML(m,v,d){
- const ph=bepPh(m,v),e=bepEigene(m),h=bepHeute();
- if(!d.team)return"";
- const i=bepNaechster(m),f=i?bepFrist(m,v,i):null,x=i?v.meilensteine[i-1]:null;
- const jetzt=v.phasen.filter(p=>bepPhaseJetzt(m,p));
- const z=bepZeitraum(m);
- let lage="";
- if(z&&h<z.w1)lage=`Das Projekt startet am ${esc(bepTagText(z.w1))}.`;
- else if(jetzt.length)lage=`Jetzt läuft: ${jetzt.map(p=>`<b>Phase ${p.nr} · ${esc(p.name)}</b>`).join(" und ")} (${jetzt[0].ort==="praktikum"?"im Praktikum":"in der Schule"}).`;
- const proz=e.g?Math.round(e.n/e.g*100):0;
- const ampel=v.meilensteine.map((mx,k)=>{const j=k+1,s=msStatus(ph,d.team,d.beitraege,j),Z=MS_ZUSTAND[s.zustand],meine=bepHatBeitrag(d,d.team.id,j,currentUser.uid);
-  return`<span class="bep-amp ${s.zustand}" title="${esc(mx.kurz+" · "+mx.titel+": "+(s.zustand==="erreicht"?"erreicht":meine?"dein Beitrag ist da, "+Z.t:"dein Beitrag fehlt"))}"><b>${esc(mx.kurz)}</b><i>${s.zustand==="erreicht"?"✓":meine?"●":"○"}</i></span>`;}).join("");
- const warte=v.meilensteine.map((mx,k)=>({mx,j:k+1,s:msStatus(ph,d.team,d.beitraege,k+1)})).filter(o=>o.s.zustand==="offen"&&bepHatBeitrag(d,d.team.id,o.j,currentUser.uid)&&o.s.fehlend.length);
- return`<div class="ppm-box bep-wo"><h2>Wo stehe ich?</h2>
-  ${lage?`<p>${lage}</p>`:""}
-  <div class="ppm-balken"><span><b>${e.n} von ${e.g}</b> Meilensteinen hast du eingereicht (${proz} %)</span><div class="ppm-bar" role="progressbar" aria-valuenow="${proz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${proz}%"></i></div></div>
-  <div class="bep-ampeln" aria-label="Stand der Meilensteine">${ampel}</div>
-  <p class="bep-klein">✓ erreicht (Team komplett${""}) · ● dein Beitrag ist eingereicht · ○ dein Beitrag fehlt noch</p>
-  ${x?`<div class="bep-next ${bepFristKlasse(f)}"><div><small>Dein nächster Schritt</small><b>${esc(x.kurz)} · ${esc(x.titel)}</b><span>${esc(x.text)}</span>${f?`<em> fällig ${esc(bepTagText(f))} · ${esc(bepTageText(bepTageBis(f)))}</em>`:""}</div><button type="button" class="ppm-btn primaer" onclick="openMsBeitrag('${v.id}','${d.team.id}',${i},'seite')">Beitrag eintragen</button></div>`
-   :`<div class="bep-next fertig"><div><b>Alle Beiträge sind eingereicht ✓</b><span>Schau unten bei den Meilensteinen, ob deine Lehrkraft etwas zurückgegeben hat.</span></div></div>`}
-  ${warte.length?`<p class="bep-klein">Dein Beitrag liegt vor, aber im Team fehlt noch etwas: ${warte.map(o=>`<b>${esc(o.mx.kurz)}</b> (${esc(o.s.fehlend.map(f=>f.name).join(", "))})`).join("; ")}.</p>`:""}</div>`;
-}
-function bepMsZeile(m,v,ph,d,i,lehrer){
- const x=v.meilensteine[i-1],fr=bepFrist(m,v,i);
- const team=d.team;
- let Z,st=null,erreicht=false,statusText="",aktion="",personen="",mein="";
- if(lehrer){
-  const n=d.teams.filter(t=>msStatus(ph,t,d.beitraege,i).zustand==="erreicht").length;
-  erreicht=d.teams.length>0&&n===d.teams.length;
-  Z=erreicht?MS_ZUSTAND.erreicht:MS_ZUSTAND.offen;
-  const warten=d.teams.filter(t=>msStatus(ph,t,d.beitraege,i).zustand==="wartet").length;
-  statusText=`${n} von ${d.teams.length} Teams erreicht${warten?` · ${warten} warten auf deine Bestätigung`:""}`;
- }else if(team){
-  st=msStatus(ph,team,d.beitraege,i);Z=MS_ZUSTAND[st.zustand];erreicht=st.zustand==="erreicht";
-  const meiner=st.beitraege.find(b=>b.uid===currentUser.uid);
-  statusText=Z.t+(st.zustand==="offen"&&st.fehlend.length?` · es fehlt noch: ${st.fehlend.map(f=>f.name).join(", ")}`:"");
-  personen=`<div class="ms-personen">${(team.mitgliederUids||[]).map((u,k)=>{const b=st.beitraege.find(y=>y.uid===u);return`<span class="ms-person${b?" ok":""}" title="${esc(b?b.text:"noch kein Beitrag")}">${b?"✓":"○"} ${esc((team.mitgliederNamen||[])[k]||"Mitglied")}</span>`;}).join("")}</div>`;
-  if(st.pruefung&&st.pruefung.kommentar&&st.zustand==="zurueck")personen+=`<div class="ms-kommentar"><b>Rückmeldung der Lehrkraft:</b> ${esc(st.pruefung.kommentar)}</div>`;
-  if(meiner)mein=`<div class="ms-meiner"><b>Dein Beitrag:</b> ${esc(meiner.text)}${msLinksHTML(meiner)}</div>`;
-  aktion=`<button type="button" class="ppm-btn klein ${meiner?"":"primaer"}" onclick="openMsBeitrag('${v.id}','${team.id}',${i},'seite')">${meiner?"Beitrag ändern":"Beitrag eintragen"}</button>`;
- }else{
-  Z=MS_ZUSTAND.offen;statusText="Bilde zuerst ein Team.";
- }
- const tage=fr?bepTageBis(fr):null,fk=bepFristKlasse(fr,erreicht);
- return`<div class="bep-ms ${st?st.zustand:(erreicht?"erreicht":"offen")}">
-  <span class="bep-ms-ic" style="border-color:${Z.f};color:${erreicht?"#fff":Z.f};background:${erreicht?Z.f:"#fff"}">${Z.i}</span>
-  <div class="bep-ms-body">
-   <div class="bep-ms-kopf"><b>${esc(x.kurz)} · ${esc(x.titel)}</b><span class="ppm-chip">${esc(x.wer)}</span>${x.bestaetigung==="lehrkraft"?`<span class="ppm-chip">Lehrkraft bestätigt</span>`:""}</div>
-   <small class="bep-ms-text">${esc(x.text)}</small>
-   <details class="bep-inh"><summary>Das gehört hinein</summary><ul>${x.inhalt.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></details>
-   ${fr?`<div class="bep-frist ${fk}"> fällig ${esc(bepTagText(fr))}${erreicht?"":" · "+esc(bepTageText(tage))}</div>`:`<div class="bep-frist"> Termin folgt</div>`}
-   <small class="ms-status" style="color:${Z.f}">${esc(statusText)}</small>
-   ${personen}${mein}
-  </div>
-  <div class="ms-aktion">${aktion}</div></div>`;
-}
-function bepZeitplanHTML(m,v,d,lehrer,aufg){
- const ph=bepPh(m,v),z=bepZeitraum(m);
- let zoneIdx=-1,letzterOrt="";
- const html=v.phasen.map(p=>{
-  let kopf="";
-  if(p.ort!==letzterOrt){
-   zoneIdx++;letzterOrt=p.ort;
-   if(p.ort==="schule"){
-    const von=zoneIdx===0?(z&&z.w1):(z&&z.wL),bis=zoneIdx===0?(z&&z.w1Ende):(z&&z.wLEnde);
-    kopf=`<div class="bep-zone schule"><b>Schule</b><span>${von?`${esc(fmtKurz(von))}–${esc(fmtKurz(bis))}`:""}</span></div>`;
-   }else{
-    kopf=`<div class="bep-zone praktikum"><b>Praktikum (Krippe oder Kindergarten)</b><span>${z&&z.p1?`${esc(fmtKurz(z.p1))}–${esc(fmtKurz(z.pEnde))}${z.ferien.length?` · darin: ${esc(z.ferien.join(", "))}`:""}`:"Zeitraum noch offen"}</span></div>`;
-   }
-  }
-  const jetzt=bepPhaseJetzt(m,p);
-  const af=p.aufgaben.map((a,j)=>{
-   const key=`p${p.nr}_${j}`,an=!!aufg[key];
-   return lehrer?`<li class="bep-a"><span class="bep-dot">▪</span><span>${esc(a)}</span></li>`
-    :`<li class="bep-a"><label class="bep-chk"><input type="checkbox"${an?" checked":""} onchange="bepAufgabeHaken('${m.id}','${key}',this.checked)"><span>${esc(a)}</span></label></li>`;
-  }).join("");
-  return`${kopf}<div class="bep-ph ${p.ort}${jetzt?" jetzt":""}">
-   <div class="bep-ph-kopf"><span class="bep-nr">${p.nr}</span><div style="flex:1;min-width:0"><b>${esc(p.name)}</b><small>${esc(p.wer)} · ${esc(bepPhasenText(m,p))}</small></div>${jetzt?`<span class="bep-jetzt">jetzt</span>`:""}</div>
-   <p class="bep-lab">Aufgaben${lehrer?"":" (zum Abhaken)"}</p><ul class="bep-aufg">${af}</ul>
-   <p class="bep-lab">Ergebnis (Meilenstein)</p>${p.ms.map(i=>bepMsZeile(m,v,ph,d,i,lehrer)).join("")}
-  </div>`;
- }).join("");
- const warn=z&&z.einWoche?`<div class="bep-hinweis bep-rot-box"><b>Hinweis für die Planung:</b> Dieses Modul ist nur eine Woche lang. Das Projekt braucht <b>zwei Schulwochen</b> mit dem Praktikumsblock dazwischen. Stelle bei „Modul bearbeiten“ die Dauer auf 2 Wochen.</div>`:"";
- return`<div class="ppm-box"><h2>Zeitplan: Phasen, Aufgaben und Meilensteine</h2>
-  <p>Das Projekt dauert vier Wochen: eine Schulwoche zur Vorbereitung, der Praktikumsblock für Planung vor Ort und Durchführung und eine Schulwoche für Auswertung und Präsentation. Hake Erledigtes ab. Die Fristen siehst du bei jedem Meilenstein.</p>
-  ${warn}<div class="bep-zeit">${html}</div><p class="bep-klein">${esc(v.verschiebung)}</p></div>`;
-}
-function bepDatenschutzHTML(v){
- return`<div class="ppm-box bep-ds"><h2> Datenschutz und Sicherheit: bitte unbedingt beachten</h2><ul>${v.datenschutz.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></div>`;
-}
-function bepMaterialHTML(v){
- return`<div class="ppm-box"><h2>Das brauchst du für das Projekt</h2>
-  <div class="bep-mat">${v.material.map(x=>`<div class="bep-matk"><div><b>${esc(x.titel)}</b><small>${esc(x.text)}</small><em>${esc(x.phase)}</em></div></div>`).join("")}</div></div>`;
-}
-function bepWerHTML(v){
- return`<div class="ppm-box"><h2>Wer macht was?</h2><div class="bep-zwei">
-  <div class="bep-spalte team"><h3>Gemeinsam im Team</h3><ul>${v.teamEinzeln.gemeinsam.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></div>
-  <div class="bep-spalte einzeln"><h3>Jede/r einzeln</h3><ul>${v.teamEinzeln.einzeln.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></div></div></div>`;
-}
-function bepReferenzHTML(v,lehrer,chk,m){
- const aus=v.ausarbeitung,me=v.messe,bw=v.bewertung;
- const nChk=Object.keys(chk).filter(k=>chk[k]).length;
- return`<details class="ppm-box ppm-details"><summary>Die schriftliche Ausarbeitung (Einzelnote)</summary><div style="margin-top:10px"><p>${esc(aus.umfang)} Gliedere so:</p>
-   <div class="bep-tabwrap"><table class="bep-tab"><thead><tr><th>Teil</th><th>Inhalt und Leitfragen</th><th>Umfang</th></tr></thead><tbody>${aus.teile.map(t=>`<tr><td data-l="Teil"><b>${esc(t.teil)}</b></td><td data-l="Inhalt">${esc(t.inhalt)}</td><td data-l="Umfang">${esc(t.umfang)}</td></tr>`).join("")}</tbody></table></div></div></details>
-  <details class="ppm-box ppm-details"><summary>So präsentierst du: die BEP-Messe</summary><div style="margin-top:10px"><p>${esc(me.text)}</p>
-   <div class="bep-formate">${me.formate.map(f=>`<div class="bep-fmt"><span class="bep-kap">${esc(f.k)}</span><div><b>${esc(f.name)}</b><small>${esc(f.text)}</small></div></div>`).join("")}</div>
-   <div class="bep-hinweis"><b>${esc(me.pflicht.split(":")[0])}:</b>${esc(me.pflicht.slice(me.pflicht.indexOf(":")+1))}</div>
-   <h3>Abgabe auf einen Blick</h3><ol>${v.abgabe.map(a=>`<li>${esc(a)}</li>`).join("")}</ol></div></details>
-  <details class="ppm-box ppm-details"><summary>So wird bewertet</summary><div style="margin-top:10px"><p>${esc(bw.text)}</p>
-   <div class="bep-tabwrap"><table class="bep-tab"><thead><tr><th>Kriterium</th><th>Darauf achte ich</th><th>Punkte</th></tr></thead><tbody>${bw.kriterien.map(k=>`<tr><td data-l="Kriterium"><b>${esc(k.k)}</b></td><td data-l="Darauf achte ich">${esc(k.text)}</td><td data-l="Punkte"><b>${k.bonus?"+ ":""}${k.p}</b></td></tr>`).join("")}</tbody></table></div></div></details>
-  <details class="ppm-box ppm-details"${lehrer?"":" open"}><summary>Checkliste vor der Abgabe${lehrer?"":` (<span id="bepChkN">${nChk}</span> von ${v.checkliste.length})`}</summary><div style="margin-top:10px">
-   ${v.checkliste.map((a,j)=>`<label class="bep-chk bep-chk-zeile"><input type="checkbox" class="bep-chk-j"${chk["c"+j]?" checked":""}${lehrer?" disabled":""} onchange="bepCheckHaken('${m.id}','c${j}',this.checked)"><span>${esc(a)}</span></label>`).join("")}
-   <div class="bep-hinweis" style="margin-top:10px"><b>Auf den Punkt gebracht:</b> ${esc(v.punkt)}</div></div></details>`;
-}
-// ---- Lehrkraft: Teamstand, Bestätigungen, Termine ----
-async function bepLehrerHTML(m,v,d){
- const ph=bepPh(m,v),h=bepHeute();
- let students=[];try{students=await getAllUsersForLernstand();}catch(e){console.error(e);}
- const imTeam=new Set(d.teams.flatMap(t=>t.mitgliederUids||[]));
- const ohne=students.filter(s=>!imTeam.has(s.uid));
- const warten=[];
- d.teams.forEach(t=>ph.bestaetigung.forEach(i=>{const st=msStatus(ph,t,d.beitraege,i);if(st.zustand==="wartet")warten.push({t,i,st});}));
- const kopfZellen=v.meilensteine.map((x,k)=>{const f=bepFrist(m,v,k+1);return`<th title="${esc(x.titel)}">${esc(x.kurz)}<small>${f?esc(fmtKurz(f)):""}</small></th>`;}).join("");
- const zeilen=d.teams.slice().sort((a,b)=>String(a.bereichKap||"").localeCompare(String(b.bereichKap||""),"de",{numeric:true})).map(t=>{
-  const zellen=v.meilensteine.map((x,k)=>{
-   const i=k+1,st=msStatus(ph,t,d.beitraege,i),Z=MS_ZUSTAND[st.zustand],f=bepFrist(m,v,i);
-   const n=(t.mitgliederUids||[]).length-st.fehlend.length,ueber=f&&f<h&&st.zustand!=="erreicht";
-   return`<td class="bep-z ${st.zustand}${ueber?" ueber":""}" title="${esc(x.kurz+": "+Z.t+(ueber?" (Frist verstrichen)":""))}"><b>${st.zustand==="erreicht"?"✓":Z.i}</b><small>${n}/${(t.mitgliederUids||[]).length}</small></td>`;
-  }).join("");
-  return`<tr><td class="bep-tn"><b>${esc(t.bereichKap||"")}</b> ${esc(t.bereichName||t.teamName||"")}<small>${bepNamenListe(t)}</small></td>${zellen}</tr>`;
- }).join("");
- const matrix=d.teams.length?`<div class="bep-tabwrap"><table class="bep-matrix"><thead><tr><th>Team (Bildungsbereich)</th>${kopfZellen}</tr></thead><tbody>${zeilen}</tbody></table></div>
-   <p class="bep-klein">✓ erreicht · wartet auf deine Bestätigung · ↩ zurückgegeben · ○ offen (darunter: Beiträge vorhanden / Teamgröße). Rot umrandet: Frist ist verstrichen.</p>`
-  :`<p class="ppm-leer">Noch hat sich kein Team gebildet.</p>`;
- const frei=v.bereiche.filter(b=>!d.teams.some(t=>t.bereichKap===b.kap));
- const queue=warten.length?warten.map(w=>`<div class="bep-wq"><b>${esc(w.t.bereichKap||"")} ${esc(w.t.bereichName||w.t.teamName||"")}</b> · ${esc(v.meilensteine[w.i-1].kurz)} ${esc(v.meilensteine[w.i-1].titel)}
-   <div class="ms-beitraege">${w.st.beitraege.map(b=>`<div><b>${esc(b.name||"")}:</b> ${esc(b.text||"")}${msLinksHTML(b)}</div>`).join("")}</div>
-   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><button class="ppm-btn klein primaer" onclick="msPruefen('${v.id}','${w.t.id}',${w.i},true,'seite')">✓ Bestätigen</button><button class="ppm-btn klein" onclick="msPruefen('${v.id}','${w.t.id}',${w.i},false,'seite')">↩ Zurückgeben</button></div></div>`).join("")
-  :`<p class="ppm-leer">Gerade wartet nichts auf deine Bestätigung.</p>`;
- const teamDetails=d.teams.map(t=>`<details class="bep-td"><summary><b>${esc(t.bereichKap||"")} ${esc(t.bereichName||t.teamName||"")}</b> · ${bepNamenListe(t)}</summary>
-   ${msListeHTML(ph,t,d.beitraege,"seite")}
-   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn klein" onclick="bepTeamAufloesen('${m.id}','${t.id}')">Team auflösen</button></div></details>`).join("");
- const termine=v.meilensteine.map((x,k)=>{const i=k+1,eig=m.termine&&m.termine[i]||"",std=bepAnker(bepZeitraum(m),x.faellig);
-  return`<label class="bep-termin"><span><b>${esc(x.kurz)}</b> ${esc(x.titel)}<small>Standard: ${std?esc(bepTagText(std)):"–"}</small></span><input type="date" id="bepT${i}" value="${esc(eig)}"></label>`;}).join("");
- return`<div class="ppm-box bep-lehrer"><h2>Für dich als Lehrkraft: Teamstand</h2>
-  <div class="bep-zahlen"><div><b>${d.teams.length}</b><small>Teams</small></div><div><b>${students.length-ohne.length}/${students.length}</b><small>Schüler:innen im Team</small></div><div class="${warten.length?"warn":""}"><b>${warten.length}</b><small>warten auf dich</small></div><div><b>${frei.length}</b><small>Bereiche noch frei</small></div></div>
-  <h3>Wartet auf deine Bestätigung</h3>${queue}
-  <h3>Stand aller Teams</h3>${matrix}
-  ${ohne.length?`<h3>Noch ohne Team (${ohne.length})</h3><p>${ohne.map(s=>esc(anzeigeName(s))).join(", ")}</p>`:(students.length?`<p><b>Alle Schüler:innen haben ein Team ✓</b></p>`:"")}
-  ${frei.length?`<p class="bep-klein"><b>Noch freie Bereiche:</b> ${frei.map(b=>esc(b.kap+" "+b.name)).join(" · ")}</p>`:""}
-  ${teamDetails?`<h3>Teams im Einzelnen (Beiträge ansehen, bestätigen, zurückgeben)</h3>${teamDetails}`:""}
-  <details class="ppm-details" style="margin-top:12px"><summary>Termine festlegen</summary><div style="margin-top:8px"><p class="bep-klein">Die Fristen ergeben sich aus der Lage des Moduls im Plan. Hier kannst du sie überschreiben. Leer lassen = Standard.</p><div class="bep-termine">${termine}</div>
-   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" onclick="bepTermineSpeichern('${m.id}')">Termine speichern</button><button type="button" class="ppm-btn" onclick="bepTermineSpeichern('${m.id}',true)">Alle auf Standard zurücksetzen</button></div></div></details></div>`;
-}
-async function ppmProjektVorlageSeite(m,v){
- const lehrer=isTeacher();
- const d=(await bepLaden(m))||{v,teams:[],beitraege:[],team:null};
- const meinK=PPM.meine.kurs[m.id]||{};
- const aufg=meinK.bepAufg||{},chk=meinK.bepCheck||{};
- const kopf=ppmKopf(m,`<p class="bep-sub">${esc(v.untertitel)}</p>`);
- const mitMaterial=(m.material||[]).length;
- return`${kopf}
- ${bepBlickHTML(v)}
- ${lehrer?await bepLehrerHTML(m,v,d):(d.team?bepWoStehIchHTML(m,v,d):bepTeamWahlHTML(m,v,d))}
- ${!lehrer&&d.team?bepTeamBoxHTML(m,v,d,lehrer):""}
- ${bepAuftragHTML(v)}
- ${bepZeitplanHTML(m,v,d,lehrer,aufg)}
- ${bepDatenschutzHTML(v)}
- ${bepMaterialHTML(v)}
- ${mitMaterial?"":(lehrer?`<p class="bep-klein">Tipp: Das Projektblatt (Word oder PDF) kannst du unter „Modul bearbeiten“ → 5 Material anhängen. Es erscheint dann oben auf dieser Seite.</p>`:"")}
- ${bepWerHTML(v)}
- ${bepReferenzHTML(v,lehrer,chk,m)}
- ${footer()}`;
-}
-
-// ---- K-Prim-Test ----
-async function ppmKprimSeite(m){
- const d=await ladeCheckoutDaten();const lehrer=isTeacher();
- const c=(d.checkouts||[]).find(x=>x.id===m.checkoutId);
- let karte=`<p class="ppm-leer">${lehrer?"Noch kein Check-out verknüpft. Lege einen an oder verknüpfe einen über „Modul bearbeiten“ (dort stehen die K-Prim-Tests nach Lernbereich geordnet).":"Deine Lehrkraft hat noch keinen Test freigeschaltet."}</p>`;
- if(c){
-  const mein=d.meineAbgaben&&d.meineAbgaben[c.id];
-  const live=c.status==="live",beendet=c.status==="beendet";
-  karte=`<div class="ppm-zeile"><div style="flex:1;min-width:200px"><b>${esc(coTitelAnzeige(c)||"Check-out")}</b><br><small style="color:var(--muted)">${esc(c.datum||"")} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben · Status: ${esc(c.status||"Entwurf")}</small></div>
-   ${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="druck" data-id="${esc(c.id)}"> Test ausdrucken</button><button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="druck-l" data-id="${esc(c.id)}"> Test mit Lösung</button><button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="editor" data-id="${esc(c.id)}">Bearbeiten</button>${live?`<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="monitor" data-id="${esc(c.id)}">Live-Übersicht</button>`:""}`
-    :(live&&!(mein&&mein.abgegeben)?`<button type="button" class="ppm-btn primaer" data-ppm="co" data-aktion="test" data-id="${esc(c.id)}">Test starten</button>`:(mein&&mein.ausgewertet?`<button type="button" class="ppm-btn primaer" data-ppm="co" data-aktion="ergebnis" data-id="${esc(c.id)}">Mein Ergebnis</button>`:`<span class="ppm-status">${beendet?"beendet":"noch nicht freigeschaltet"}</span>`))}</div>`;
- }
- return`${ppmKopf(m,"",lehrer?`${c?"":`<button type="button" class="ppm-btn klein primaer" data-ppm="bearbeiten" data-id="${esc(m.id)}"> Check-out verknüpfen</button>`}<button type="button" class="ppm-btn klein" data-ppm="co" data-aktion="neu">＋ Neuen Check-out anlegen</button>`:"")}
- <div class="ppm-box"><h2>K-Prim-Aufgabentest</h2><p>Eine Fallvignette mit ${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben zu je 4 Aussagen. Du entscheidest bei jeder Aussage, ob sie richtig oder falsch ist. Die Bepunktung (BE und Notenpunkte) steht oben im Test, die Auswertung kommt automatisch.</p>${karte}</div>
- ${checkoutLiveBannerHTML(d)}${checkoutSektionHTML(d)}${footer()}`;
-}
-// ---- Unterrichtsstunde ----
-// Aufbau: Name der Stunde · Digitale Tafel (eingeblendet, zur Orientierung) · Material
-// (PDF, Film, Audio, Bild, Link) · Check-out mit offenen Fragen und Haken „fertig“.
-function ppmMaterialHTML(x,i,m,lehrer){
- const typ=PPM_MAT_INFO[x.typ]?x.typ:"link",info=PPM_MAT_INFO[typ];
- let vorschau="";
- if(typ==="bild")vorschau=`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer"><img src="${esc(x.url)}" alt="${esc(x.titel||x.name||"Bild")}" style="max-width:100%;max-height:320px;border-radius:10px;margin-top:8px;display:block"></a>`;
- if(typ==="video")vorschau=`<video controls preload="metadata" src="${esc(x.url)}" style="width:100%;max-height:360px;border-radius:10px;margin-top:8px;background:#000"></video>`;
- if(typ==="audio")vorschau=`<audio controls preload="metadata" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>`;
- return`<div class="ppm-mat" style="flex-wrap:wrap"><span style="font-size:22px">${info[0]}</span><div style="flex:1;min-width:160px"><b>${esc(x.titel||x.name||"Material")}</b><br><small style="color:var(--muted)">${info[1]}</small></div>
-  <a class="ppm-btn klein" href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">Öffnen</a>${lehrer?`<button type="button" class="ppm-btn klein" data-ppm="mat-weg" data-id="${esc(m.id)}" data-i="${i}" title="Entfernen">✕</button>`:""}
-  ${vorschau?`<div style="flex-basis:100%">${vorschau}</div>`:""}</div>`;
-}
-async function ppmStundeSeite(m){
- const lehrer=isTeacher(),P=PP12_PHASEN[m.phase||2];
- const mat=m.material||[],fr=m.fragen||[];
- const mein=PPM.meine.stunde[m.id]||{};
- const schritte=`<div class="ppm-phasen">${[1,2,3].map(n=>`<div class="ppm-ph${n===(m.phase||2)?" an":""}"><span>${n}</span>${esc(PP12_PHASEN[n].schueler)}</div>`).join("")}</div>`;
- // Digitale Tafel direkt auf der Seite einblenden
- let tafel="";
- if(m.tafelId){
-  const vorher=activeWhiteboardId;
-  try{
-   activeWhiteboardId=m.tafelId;
-   const html=await renderWhiteboardBoard();
-   if(html&&html.indexOf('id="wbStage"')>-1){
-    tafel=`<div class="ppm-tafel">${html}</div>
-     <div class="ppm-zeile" style="border:0;padding-bottom:0"><button type="button" class="ppm-btn klein" data-ppm="tafel" data-id="${esc(m.tafelId)}">↗ Tafel im Vollbild öffnen</button></div>`;
-    window.__ppmNachRender=()=>{if($("wbStage"))initWhiteboardBoard(m.tafelId);};
-   }
-  }catch(e){console.error("Tafel einbetten:",e);}
-  activeWhiteboardId=vorher;
-  if(!tafel)tafel=`<p class="ppm-leer">Die Tafel konnte nicht geladen werden.</p><button type="button" class="ppm-btn primaer" data-ppm="tafel" data-id="${esc(m.tafelId)}"> Digitale Tafel öffnen</button>`;
- }else tafel=lehrer?`<button type="button" class="ppm-btn primaer" data-ppm="tafel-neu" data-id="${esc(m.id)}">＋ Digitale Tafel anlegen</button>`:`<span class="ppm-leer">Die Tafel wird von deiner Lehrkraft vorbereitet.</span>`;
- const matListe=mat.map((x,i)=>ppmMaterialHTML(x,i,m,lehrer)).join("");
- let check="";
- if(lehrer){
-  check=`<div id="ppmFragenEdit">${fr.map((q,i)=>`<div class="ppm-frage"><b>Frage ${i+1}</b><textarea data-ppm-frage="${i}" placeholder="Offene Frage">${esc(q.frage||"")}</textarea><textarea data-ppm-loesung="${i}" placeholder="Lösungsantwort (Musterlösung)" style="margin-top:6px">${esc(q.loesung||"")}</textarea><button type="button" class="ppm-btn klein" data-ppm="frage-weg" data-i="${i}" style="margin-top:6px">Frage entfernen</button></div>`).join("")||`<p class="ppm-leer">Noch keine Frage.</p>`}</div>
-   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="frage-neu" data-id="${esc(m.id)}">＋ Frage</button><button type="button" class="ppm-btn primaer" data-ppm="fragen-speichern" data-id="${esc(m.id)}">Fragen speichern</button><button type="button" class="ppm-btn" data-ppm="antworten-ansehen" data-id="${esc(m.id)}">Antworten der Klasse ansehen</button></div>`;
- }else{
-  check=(fr.length?fr.map((q,i)=>{
-   const gezeigt=(mein.gezeigt||[])[i],bew=(mein.bewertung||[])[i];
-   return`<div class="ppm-frage"><b>${i+1}. ${esc(q.frage)}</b>
-    <textarea data-ppm-antwort="${i}" placeholder="Deine Antwort in eigenen Worten …"${gezeigt?" readonly":""}>${esc((mein.antworten||[])[i]||"")}</textarea>
-    ${gezeigt?`<div class="ppm-loesung"><b>Lösung:</b><br>${esc(q.loesung||"")}</div>
-     <div class="ppm-bew"><span style="align-self:center;font-size:12px">Meine Antwort war:</span>${[["ja","passt"],["teils","teilweise"],["nein","noch nicht"]].map(([k,t])=>`<button type="button" class="${bew===k?"an":""}" data-ppm="bewerten" data-id="${esc(m.id)}" data-i="${i}" data-k="${k}">${t}</button>`).join("")}</div>`
-     :`<div style="margin-top:8px"><button type="button" class="ppm-btn" data-ppm="loesung" data-id="${esc(m.id)}" data-i="${i}">Lösung anzeigen</button></div>`}</div>`;
-  }).join(""):`<p class="ppm-leer">Zu dieser Stunde gibt es keine Check-out-Frage.</p>`)
-  +`<button type="button" class="ppm-fertig${mein.fertig?" an":""}" data-ppm="fertig" data-id="${esc(m.id)}" aria-pressed="${mein.fertig?"true":"false"}"><span class="ppm-haken">${mein.fertig?"✓":""}</span>${mein.fertig?"Ich bin fertig – Check-out abgehakt":"Ich bin mit dem Check-out fertig"}</button>`;
- }
- return`${ppmKopf(m,schritte)}
- ${lehrer?`<div class="ppm-box"><h2>Name der Stunde</h2><div class="ppm-zeile" style="border:0"><input id="ppmStundeTitel" maxlength="120" value="${esc(m.titel||"")}" placeholder="z. B. Gegenstand der Psychologie" style="flex:1;min-width:220px;min-height:42px;padding:0 12px;border:1px solid var(--line);border-radius:10px;font:inherit"><button type="button" class="ppm-btn primaer" data-ppm="stunde-name" data-id="${esc(m.id)}">Name speichern</button></div></div>`:""}
- <div class="ppm-box"><h2>Digitale Tafel</h2><p style="color:var(--muted);font-size:13px">Zur Orientierung: Hier läuft die Stunde mit Impulsen, Aufgaben und Werkzeugen.</p>${tafel}</div>
- <div class="ppm-box"><h2>Material</h2>${matListe||`<p class="ppm-leer">Noch kein Material.</p>`}
-  ${lehrer?`<div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="mat-datei" data-id="${esc(m.id)}">＋ Datei hochladen (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-ppm="mat-link" data-id="${esc(m.id)}">＋ Link oder Webseite</button><input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div><p style="color:var(--muted);font-size:12px;margin:0">Dateien bis 15 MB. Größere Filme am besten als Link (z. B. Mediathek) einfügen.</p>`:""}</div>
- <div class="ppm-box"><h2>Check-out</h2>${lehrer?`<p style="color:var(--muted);font-size:13px">Offene Frage mit Lösung. Die Schüler:innen schreiben ihre Antwort, lassen sich dann die Lösung anzeigen und setzen am Ende den Haken „fertig“.</p>`:`<p style="color:var(--muted);font-size:13px">Schreibe zuerst deine Antwort. Danach lässt du dir die Lösung anzeigen, vergleichst und setzt unten den Haken.</p>`}${check}</div>
- ${lehrer?`<div class="ppm-box"><h2>Für dich als Lehrkraft</h2><p><b>Phase ${P.kurz} · ${esc(P.name)}</b></p><p>${esc(P.was)}</p><p><b>Deine Rolle:</b> ${esc(P.rolle)}</p></div>`:""}
- ${footer()}`;
-}
-// ---- Einführung in den Lernbereich: Tafel (mehrere Seiten) + Selbstlernkurse zum gewählten Thema ----
-async function ppmEinfuehrungSeite(m){
- const lehrer=isTeacher(),th=PPM_EINF_THEMEN[m.thema]||PPM_EINF_THEMEN.eigen;
- const kursIds=Array.isArray(m.kurse)?m.kurse:th.kurse;
- let tafel="";
- if(m.tafelId){
-  const vorher=activeWhiteboardId;
-  try{
-   activeWhiteboardId=m.tafelId;
-   const html=await renderWhiteboardBoard();
-   if(html&&html.indexOf('id="wbStage"')>-1){
-    tafel=`<div class="ppm-tafel">${html}</div>
-     <div class="ppm-zeile" style="border:0;padding-bottom:0"><button type="button" class="ppm-btn klein" data-ppm="tafel" data-id="${esc(m.tafelId)}">↗ Tafel im Vollbild öffnen</button></div>`;
-    window.__ppmNachRender=()=>{if($("wbStage"))initWhiteboardBoard(m.tafelId);};
-   }
-  }catch(e){console.error("Tafel einbetten:",e);}
-  activeWhiteboardId=vorher;
-  if(!tafel)tafel=`<p class="ppm-leer">Die Tafel konnte nicht geladen werden.</p><button type="button" class="ppm-btn primaer" data-ppm="tafel" data-id="${esc(m.tafelId)}"> Digitale Tafel öffnen</button>`;
- }else tafel=lehrer?`<button type="button" class="ppm-btn primaer" data-ppm="tafel-neu" data-id="${esc(m.id)}">＋ Digitale Tafel anlegen</button>`:`<span class="ppm-leer">Die Tafel wird von deiner Lehrkraft vorbereitet.</span>`;
- const kurse=await Promise.all(kursIds.map(async id=>{const info=await einarbeitungInfo(id);const f=lehrer?{}:await getLehrplanFortschritt(id).catch(()=>({}));return{id,info,f};}));
- const kursHtml=kurse.length?kurse.map(({id,info,f},i)=>{
-  const ok=!!f.einarbeitungAbgeschlossen,aufg=f.einarbeitungAufgaben;
-  const stand=lehrer?"":` · ${ok?"abgeschlossen ✓":(aufg&&aufg.gesamt?aufg.richtig+" von "+aufg.gesamt+" richtig":"noch offen")}`;
-  return`<div class="ppm-zeile"><span class="ppm-snr">${i+1}</span><div style="flex:1;min-width:200px"><b>${esc(info?ppmEaLabel(id,info):id)}</b><br><small style="color:var(--muted)">${info?info.aufgaben+" Aufgabe"+(info.aufgaben===1?"":"n")+stand:"Inhaltsdatei einarbeitung/inhalte/"+esc(id)+".json nicht gefunden"}</small></div>
-   ${info?`<button type="button" class="ppm-btn primaer" data-ppm="ea-start" data-ea="${esc(id)}">${lehrer?"Kurs öffnen (Vorschau)":ok?"Kurs wiederholen":(aufg?"Kurs fortsetzen":"Kurs starten")}</button>`:""}
-   ${lehrer&&info?`<button type="button" class="ppm-btn" data-ppm="ea-stand" data-ea="${esc(id)}">Stand der Klasse</button>`:""}</div>`;
- }).join(""):`<p class="ppm-leer">Zu diesem Thema gibt es keine Selbstlernkurse.</p>`;
- const schritte=`<div class="ppm-phasen"><div class="ppm-ph an"><span>1</span>Tafel: Was denke ich?</div><div class="ppm-ph an"><span>2</span>Selbstlernkurse</div><div class="ppm-ph an"><span>3</span>Tafel: Zusammenhang</div></div>`;
- return`${ppmKopf(m,`<p style="color:var(--muted);margin:4px 0 8px">${esc(th.titel)}</p>${schritte}`)}
- <div class="ppm-box"><h2>Digitale Tafel</h2><p style="color:var(--muted);font-size:13px">Arbeite auf den Seiten der Tafel: erst deine erste Einschätzung, am Ende die Zusammenhänge. Mit den Zahlenknöpfen (1, 2) wechselst du die Seite.</p>${tafel}</div>
- <div class="ppm-box"><h2>Selbstlernkurse</h2><p style="color:var(--muted);font-size:13px">Du klickst dich Seite für Seite durch. Dein Stand wird gespeichert.</p>${kursHtml}</div>
- ${lehrer&&(th.ablauf||[]).length?`<div class="ppm-box"><h2>Für dich als Lehrkraft</h2><p><b>Ablauf-Vorschlag</b></p><ol style="margin:4px 0 0 18px;line-height:1.55">${th.ablauf.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`:""}
- ${footer()}`;
-}
-// ---- Abschlussprüfungstraining ----
-// Vier Schritte: 1 Frage aus der Abschlussprüfung · 2 Relevanter Inhalt · 3 Bearbeitung durch die Schüler:innen · 4 Vergleich mit der Lösung.
-// Lehrkraft gestaltet 1, 2 und 4 direkt auf dieser Seite. Antworten liegen in ppStundenAntworten (Felder aptAntwort, aptAbgegeben, aptBewertung).
-function ppmAptDateiHTML(d,m,feld,lehrer){
- if(!d||!d.url)return"";
- return`<div style="margin:8px 0">${dateiEmbedHTML(d.url,d.name)}${lehrer?` <button type="button" class="ppm-btn klein" data-ppm="apt-datei-weg" data-id="${esc(m.id)}" data-feld="${feld}">Datei entfernen</button>`:""}</div>`;
-}
-async function ppmAptSeite(m){
- const lehrer=isTeacher(),mein=PPM.meine.stunde[m.id]||{};
- const mat=m.material||[];
- const abgegeben=!!mein.aptAbgegeben;
- const nr=(n,t,sub)=>`<div style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span class="ppm-snr">${n}</span><div><h2 style="margin:0">${t}</h2>${sub?`<small style="color:var(--muted)">${sub}</small>`:""}</div></div>`;
- const speichern=`<div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" data-ppm="apt-speichern" data-id="${esc(m.id)}">Speichern</button></div>`;
- const kopfInfo=`<div class="ppm-phasen">${[["1","Prüfungsfrage"],["2","Relevanter Inhalt"],["3","Meine Bearbeitung"],["4","Vergleich mit Lösung"]].map(([n,t],i)=>`<div class="ppm-ph${lehrer||i<2||(i===2)||(i===3&&abgegeben)?" an":""}"><span>${n}</span>${t}</div>`).join("")}</div>`;
- // 1 Frage
- const s1=lehrer?`${nr(1,"Frage aus der Abschlussprüfung","Text und/oder Datei (PDF, Bild).")}
-   <textarea id="aptFrage" rows="6" style="width:100%;font:inherit" placeholder="Prüfungsfrage einfügen …">${esc(m.frage||"")}</textarea>
-   ${ppmAptDateiHTML(m.frageDatei,m,"frage",true)}
-   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-datei" data-id="${esc(m.id)}" data-feld="frage">＋ Datei zur Frage</button></div>${speichern}`
-  :`${nr(1,"Frage aus der Abschlussprüfung")}${m.frage||(m.frageDatei&&m.frageDatei.url)?`${m.frage?`<p style="white-space:pre-wrap;font-size:15px;line-height:1.55">${esc(m.frage)}</p>`:""}${ppmAptDateiHTML(m.frageDatei,m,"frage",false)}`:`<p class="ppm-leer">Deine Lehrkraft stellt die Frage hier bereit.</p>`}`;
- // 2 Relevanter Inhalt
- const s2=lehrer?`${nr(2,"Relevanter Inhalt","Was Schüler:innen wissen müssen, um die Frage zu beantworten. Mit „- “ entstehen Aufzählungen, mit **fett** Hervorhebungen.")}
-   <textarea id="aptInhalt" rows="7" style="width:100%;font:inherit" placeholder="Wichtige Begriffe, Modelle, Merkmale …">${esc(m.inhalt||"")}</textarea>
-   ${mat.map((x,i)=>ppmMaterialHTML(x,i,m,true)).join("")}
-   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="mat-datei" data-id="${esc(m.id)}">＋ Datei (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-ppm="mat-link" data-id="${esc(m.id)}">＋ Link</button><input type="file" id="ppmDatei" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div>${speichern}`
-  :`${nr(2,"Relevanter Inhalt")}${m.inhalt?`<div style="line-height:1.55">${ppmMd(m.inhalt)}</div>`:""}${mat.map((x,i)=>ppmMaterialHTML(x,i,m,false)).join("")}${!m.inhalt&&!mat.length?`<p class="ppm-leer">Noch kein Inhalt hinterlegt.</p>`:""}`;
- // 3 Bearbeitung
- const s3=lehrer?`${nr(3,"Bearbeitung durch die Schüler:innen","So sehen es die Schüler:innen: ein Antwortfeld, dann „Abgeben und vergleichen“.")}
-   <textarea rows="4" disabled placeholder="Hier schreiben die Schüler:innen ihre Antwort …" style="width:100%;font:inherit;opacity:.7"></textarea>
-   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-antworten" data-id="${esc(m.id)}">Antworten der Klasse ansehen</button></div>`
-  :`${nr(3,"Meine Bearbeitung","Schreibe deine Antwort auf die Prüfungsfrage, bevor du die Lösung siehst.")}
-   <textarea id="aptAntwort" rows="10" style="width:100%;font:inherit"${abgegeben?" readonly":""} placeholder="Deine Antwort …">${esc(mein.aptAntwort||"")}</textarea>
-   <div class="ppm-zeile" style="border:0">${abgegeben?`<button type="button" class="ppm-btn" data-ppm="apt-wieder" data-id="${esc(m.id)}">Antwort überarbeiten</button>`
-    :`<button type="button" class="ppm-btn" data-ppm="apt-zwischen" data-id="${esc(m.id)}">Zwischenspeichern</button><button type="button" class="ppm-btn primaer" data-ppm="apt-abgeben" data-id="${esc(m.id)}">Abgeben und mit der Lösung vergleichen</button>`}</div>`;
- // 4 Vergleich
- const bew=mein.aptBewertung;
- const loesungBox=`<div class="ppm-loesung"><b>Lösung</b>${m.loesung?`<div style="line-height:1.5">${ppmMd(m.loesung)}</div>`:`<p class="ppm-leer">Noch keine Lösung hinterlegt.</p>`}${ppmAptDateiHTML(m.loesungDatei,m,"loesung",lehrer)}</div>`;
- const s4=lehrer?`${nr(4,"Vergleich mit der Lösung","Wird erst nach dem Abgeben sichtbar.")}
-   <textarea id="aptLoesung" rows="7" style="width:100%;font:inherit" placeholder="Musterlösung / Erwartungshorizont …">${esc(m.loesung||"")}</textarea>
-   ${ppmAptDateiHTML(m.loesungDatei,m,"loesung",true)}
-   <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn" data-ppm="apt-datei" data-id="${esc(m.id)}" data-feld="loesung">＋ Datei zur Lösung</button></div>${speichern}`
-  :`${nr(4,"Vergleich mit der Lösung")}${abgegeben?`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
-     <div class="ppm-frage" style="margin:0"><b>Meine Antwort</b><p style="white-space:pre-wrap;line-height:1.5">${esc(mein.aptAntwort||"–")}</p></div>${loesungBox}</div>
-    <div class="ppm-bew"><span style="align-self:center;font-size:12px">Meine Antwort stimmt mit der Lösung überein:</span>${[["ja","ganz"],["teils","teilweise"],["nein","noch nicht"]].map(([k,t])=>`<button type="button" class="${bew===k?"an":""}" data-ppm="apt-bewerten" data-id="${esc(m.id)}" data-k="${k}">${t}</button>`).join("")}</div>`
-   :`<p class="ppm-leer">Die Lösung erscheint, sobald du deine Bearbeitung abgegeben hast.</p>`}`;
- const alt="";
- return`${ppmKopf(m,kopfInfo)}
- <div class="ppm-box">${s1}</div><div class="ppm-box">${s2}</div><div class="ppm-box">${s3}</div><div class="ppm-box">${s4}</div>${alt}${footer()}`;
-}
-async function ppmAptAntwortenDialog(m){
- let docs=[];
- try{docs=(await getDocs(query(collection(db,"ppStundenAntworten"),where("modulId","==",m.id)))).docs.map(d=>d.data()).filter(d=>d.aptAntwort||d.aptAbgegeben);}catch(e){ppmFehler(e,"Antworten konnten nicht geladen werden");return;}
- const bt={ja:"ganz",teils:"teilweise",nein:"noch nicht"};
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">ABSCHLUSSPRÜFUNGSTRAINING</div><h2>Antworten der Klasse</h2>
-  <p>${docs.length} Bearbeitung${docs.length===1?"":"en"}, ${docs.filter(d=>d.aptAbgegeben).length} abgegeben.</p>
-  ${docs.map(d=>`<details style="margin:8px 0"><summary><b>${esc(d.name||"Schüler:in")}</b>${d.aptAbgegeben?" · abgegeben":" · in Arbeit"}${d.aptBewertung?" · Selbsteinschätzung: "+bt[d.aptBewertung]:""}</summary><p style="white-space:pre-wrap">${esc(d.aptAntwort||"–")}</p></details>`).join("")||`<p class="ppm-leer">Noch keine Antworten.</p>`}`);
-}
-// ---- Selbstlernkurs ----
-function ppmZuordnenHTML(s,f,gesperrt){
- const antw=((f.zuordnung||{})[s.id])||{};
- return`<p>${esc(s.frage||"")}</p><div class="ppm-zu">${s.items.map((it,i)=>{
-  const a=antw[i];const stat=a===undefined?"":(a===it.k?"richtig":"falsch");
-  return`<div class="ppm-zui ${stat}"><span style="flex:1;min-width:200px">${esc(it.t)}</span>
-   ${s.kategorien.map((k,j)=>`<button type="button" class="ppm-btn klein${a===j?" primaer":""}" data-ppm="zuordnen" data-s="${esc(s.id)}" data-i="${i}" data-k="${j}"${gesperrt?" disabled":""}>${esc(k)}</button>`).join("")}
-   ${stat==="richtig"?`<span>✓</span>`:stat==="falsch"?`<span>✗</span>`:""}
-   ${stat?`<small style="flex-basis:100%;color:var(--muted)">${esc(it.e||"")}</small>`:""}</div>`;
- }).join("")}</div>`;
-}
-function ppmSchrittFertig(s,f){
- if(!f)return false;
- return !!(f.erledigt&&f.erledigt[s.id]);
-}
-async function ppmKursSeite(m){
- const lehrer=isTeacher(),schritte=ppmKursSchritte(m),c=ppmFarbe(m);
- let f=PPM.meine.kurs[m.id]||{erledigt:{},zuordnung:{},antworten:{}};
- const exp=await getLehrplanFortschritt(experimentWocheId()).catch(()=>({}));
- const zaehl=schritte.filter(s=>s.typ!=="abschluss");
- const fertigN=zaehl.filter(s=>ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt)).length;
- const proz=zaehl.length?Math.round(fertigN/zaehl.length*100):0;
- let offenIdx=schritte.findIndex(s=>s.typ!=="abschluss"&&!(ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt)));
- if(offenIdx<0)offenIdx=schritte.length-1;
- const teile=schritte.map((s,i)=>{
-  const fertig=s.typ==="abschluss"?(offenIdx===schritte.length-1&&fertigN===zaehl.length):(ppmSchrittFertig(s,f)||(s.typ==="experiment"&&exp.experimentErledigt));
-  const gesperrt=!lehrer&&i>offenIdx;
-  const offen=lehrer||i===offenIdx;
-  let body="";
-  if(offen){
-   if(s.typ==="ziele")body=`<ul>${(s.items||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
-   else if(s.typ==="text")body=ppmMd(s.text);
-   else if(s.typ==="zuordnen")body=ppmZuordnenHTML(s,f,lehrer);
-   else if(s.typ==="experiment")body=`<p>${esc(s.text||"")}</p><button type="button" class="ppm-btn primaer" data-ppm="experiment">${exp.experimentErledigt?"Aufgabe wiederholen":"Interaktive Aufgabe starten"}</button>`;
-   else if(s.typ==="link")body=`<p>${esc(s.text||"")}</p><a class="ppm-btn primaer" href="${esc(s.url||"#")}" target="_blank" rel="noopener noreferrer">Öffnen</a>`;
-   else if(s.typ==="selbsttest")body=(s.fragen||[]).map((q,j)=>{
-    const g=((f.gezeigt||{})[s.id]||[])[j],a=((f.antworten||{})[s.id]||[])[j]||"";
-    return`<div class="ppm-frage"><b>${j+1}. ${esc(q.frage)}</b><textarea data-ppm-kursantwort="${esc(s.id)}" data-j="${j}" placeholder="Deine Antwort …"${g||lehrer?" readonly":""}>${esc(a)}</textarea>
-     ${g||lehrer?`<div class="ppm-loesung"><b>Lösungsantwort:</b><br>${esc(q.loesung||"")}</div>`:`<div style="margin-top:8px"><button type="button" class="ppm-btn" data-ppm="kurs-loesung" data-s="${esc(s.id)}" data-j="${j}">Lösung zeigen</button></div>`}</div>`;}).join("");
-   else if(s.typ==="abschluss")body=`<p>${esc(s.text||"")}</p>`;
-   // Erledigt-Knopf nur für Lesestationen
-   if(!lehrer&&["ziele","text","link"].includes(s.typ)&&!fertig)body+=`<div style="margin-top:12px"><button type="button" class="ppm-btn primaer" data-ppm="schritt-fertig" data-s="${esc(s.id)}">Erledigt ✓ – weiter</button></div>`;
-  }
-  const status=fertig?"✓":String(i+1);
-  return`<div class="ppm-schritt${fertig?" fertig":""}${gesperrt?" gesperrt":""}"><div class="ppm-skopf"><span class="ppm-snr">${status}</span><div style="flex:1"><b>${esc(s.titel||"Schritt")}</b>${gesperrt?`<br><small style="color:var(--muted)">Schließe zuerst den vorherigen Schritt ab.</small>`:""}</div></div>${offen?`<div class="ppm-sbody">${body}</div>`:""}</div>`;
- }).join("");
- const kursTitel=(PPM_KURSE[m.kursId]||{}).titel||"Eigener Kurs";
- let lehrerBox="";
- if(lehrer){
-  lehrerBox=`<div class="ppm-box"><h2>Für dich als Lehrkraft</h2><p>Dieser Kurs läuft ohne dich: Die Schüler:innen arbeiten Schritt für Schritt, jeder Schritt öffnet sich erst, wenn der vorherige erledigt ist. Du siehst hier alle Schritte offen.</p>
-   <div class="ppm-zeile"><button type="button" class="ppm-btn" data-ppm="kurs-stand" data-id="${esc(m.id)}">Stand der Klasse ansehen</button>${m.kursId==="eigen"?`<button type="button" class="ppm-btn" data-ppm="kurs-bearbeiten" data-id="${esc(m.id)}">Kurs bearbeiten</button>`:`<button type="button" class="ppm-btn" data-ppm="kurs-kopie" data-id="${esc(m.id)}">Als eigenen Kurs kopieren und anpassen</button>`}</div>
-   ${m.kursId==="psych-gegenstand"?`<p style="font-size:12px;color:var(--muted)">Ausarbeitung, Zuordnungsaufgabe und Selbsttest sind von Claude erstellt. Bitte fachlich prüfen.</p>`:""}</div>`;
- }
- return`${ppmKopf(m,`<p style="color:var(--muted)">${esc(kursTitel)}</p>`)}
- ${lehrer?"":`<div class="ppm-box"><b>Dein Fortschritt: ${fertigN} von ${zaehl.length} Schritten</b><div class="ppm-bar"><i style="width:${proz}%"></i></div><small style="color:var(--muted)">Du arbeitest den Kurs selbstständig von oben nach unten durch.</small></div>`}
- ${lehrerBox}${teile}${footer()}`;
-}
-
-// ---- Schreiben (Schüler:in) ----
-async function ppmStundeSchreiben(m,teil){
- const alt=PPM.meine.stunde[m.id]||{modulId:m.id,uid:currentUser.uid,name:ppmName(),antworten:[],gezeigt:[],bewertung:[]};
- const neu={...alt,...teil,modulId:m.id,uid:currentUser.uid,name:ppmName(),updatedAt:serverTimestamp()};
- await setDoc(doc(db,"ppStundenAntworten",ppmDocId(m)),neu);
- PPM.meine.stunde[m.id]=neu;
-}
-async function ppmKursSchreiben(m,fn){
- const alt=PPM.meine.kurs[m.id]||{modulId:m.id,uid:currentUser.uid,name:ppmName(),erledigt:{},zuordnung:{},antworten:{},gezeigt:{}};
- const neu=JSON.parse(JSON.stringify({...alt,erledigt:alt.erledigt||{},zuordnung:alt.zuordnung||{},antworten:alt.antworten||{},gezeigt:alt.gezeigt||{}}));
- fn(neu);neu.modulId=m.id;neu.uid=currentUser.uid;neu.name=ppmName();neu.updatedAt=serverTimestamp();
- await setDoc(doc(db,"ppKursFortschritt",ppmDocId(m)),neu);
- PPM.meine.kurs[m.id]=neu;
-}
-function ppmArr(a,n){const r=Array.isArray(a)?[...a]:[];while(r.length<n)r.push(null);return r;}
-
-// ---- Klick- und Eingabebehandlung (delegiert) ----
-async function ppmKlick(e){
- const b=e.target.closest&&e.target.closest("[data-ppm]");
- if(!b)return;
- const aktion=b.dataset.ppm,id=b.dataset.id,m=id?ppmById(id):(activePPModul?ppmById(activePPModul):null);
- if(b.classList.contains("ppm-karte")&&e.target.closest(".ppm-edit"))return;
- const refresh=async()=>{await render();};
- try{
-  if(aktion==="zoom"){ppmZoomSetzen(Number(b.dataset.z)||1);return;}
-  if(aktion==="oeffnen"){ppmOeffnen(id);return;}
-  if(aktion==="plan"){activePPModul=null;await refresh();return;}
-  if(aktion==="neu"){if(!isTeacher())return;if(!b.dataset.typ){ppmTypWahl(b.dataset.woche||null);return;}await ppmDialog(null,b.dataset.typ,b.dataset.woche||null);return;}
-  if(aktion==="bearbeiten"){e.stopPropagation();if(!isTeacher())return;await ppmDialog(id);return;}
-  if(aktion==="reihenfolge"){e.stopPropagation();if(!isTeacher()||!m)return;await ppmReihenfolge(m,Number(b.dataset.d)||0);return;}
-  if(aktion==="verschieben"){e.stopPropagation();if(!isTeacher()||!m)return;await ppmVerschieben(m,Number(b.dataset.d)||0);return;}
-  if(aktion==="standard"){await ppmStandardplan();return;}
-  if(aktion==="experiment"){openExperimentStunde(m&&m.modul==="experiment"?ppmExpTeile(m):null);return;}
-  if(aktion==="ea-start"){window.__eaRueck=async()=>{await render();};openEinarbeitung(b.dataset.ea);return;}
-  if(aktion==="ea-stand"){await ppmEaStandDialog(b.dataset.ea);return;}
-  if(aktion==="projekt-oeffnen"){const ph=PROJEKT_PHASEN.find(p=>p.lbNum===Number(b.dataset.lb));if(ph&&!ph.einstieg){activePPModul=null;activePhaseDetail=ph.id+":projekt";await refresh();}return;}
-  if(aktion==="lb-tafel"&&m){await lbModulTafel(m);await refresh();return;}
-  if(aktion==="lb-lern"&&m){await lbModulLern(m);return;}
-  if(aktion==="lb-zuordnen"&&m){await lbZuordnenDialog("m",m.id);return;}
-  if(aktion==="lb-loesen"&&m){lbLoesenDialog("m",m.id);return;}
-  if(aktion==="lb-wb"&&m){await lbModulWb(m);return;}
-  if(aktion==="tafel"){openWhiteboard(id);return;}
-  if(aktion==="tafel-neu"&&m){const t=await ppmTafelAnlegen(m.titel);await updateDoc(doc(db,"ppModule",m.id),{tafelId:t});await ppmLaden(true);openWhiteboard(t);return;}
-  if(aktion==="einheit-neu"&&m){await ppmDialog(null,"experiment",null,{projektId:m.id});return;}
-  if(aktion==="einheit-weg"&&m){const l=[...(m.einheiten||[])];l.splice(Number(b.dataset.i),1);await updateDoc(doc(db,"ppModule",m.id),{einheiten:l});await ppmLaden(true);await refresh();return;}
-  if(aktion==="co"){
-   const a=b.dataset.aktion;
-   if(a==="neu")openCheckoutEditor();
-   else if(a==="editor")openCheckoutEditor(id);
-   else if(a==="monitor")openCheckoutMonitor(id);
-   else if(a==="druck")coTestDruckId(id);
-   else if(a==="druck-l")coTestDruckId(id,true);
-   else if(a==="test")openCheckoutTest(id);
-   else if(a==="ergebnis")openCheckoutMeinErgebnis(id);
-   return;
-  }
-  // --- Stunde ---
-  if(aktion==="mat-datei"){const inp=$("ppmDatei");inp.click();inp.onchange=async ev=>{const f=ev.target.files&&ev.target.files[0];if(!f)return;
-    try{toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(f,`ppMaterial/${m.id}`),typ=ppmDateiTyp(f);
-     await updateDoc(doc(db,"ppModule",m.id),{material:[...(m.material||[]),{typ,titel:f.name.replace(/\.[a-z0-9]{2,5}$/i,""),name:f.name,url:up.url}]});await ppmLaden(true);await refresh();toast("Material hinzugefügt.");}
-    catch(err){toast(err&&err.message?err.message:"Upload nicht möglich.");}
-    ev.target.value="";};return;}
-  if(aktion==="mat-link"){
-   modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">MATERIAL</div><h2>Webseite oder Link hinzufügen</h2><div class="form"><label>Adresse<input id="ppmUrl" placeholder="https://…"></label><label>Titel<input id="ppmUrlTitel" maxlength="100"></label><div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmUrlOk">Hinzufügen</button></div></div>`);
-   $("ppmUrlOk").addEventListener("click",async()=>{
-    const u=wbSichereUrl($("ppmUrl").value);if(!u){toast("Das ist keine gültige Internetadresse.");return}
-    await updateDoc(doc(db,"ppModule",m.id),{material:[...(m.material||[]),{typ:"link",titel:$("ppmUrlTitel").value.trim()||u.replace(/^https?:\/\//,""),url:u}]});closeModal();await ppmLaden(true);await refresh();});
-   return;}
-  if(aktion==="mat-weg"&&m){const l=[...(m.material||[])];const weg=l.splice(Number(b.dataset.i),1)[0];if(weg&&weg.typ!=="link")deleteCampusDatei(weg.url);await updateDoc(doc(db,"ppModule",m.id),{material:l});await ppmLaden(true);await refresh();return;}
-  if(aktion==="apt-speichern"&&m&&isTeacher()){
-   const t={updatedAt:serverTimestamp()};
-   if($("aptFrage"))t.frage=$("aptFrage").value.trim();
-   if($("aptInhalt"))t.inhalt=$("aptInhalt").value.trim();
-   if($("aptLoesung"))t.loesung=$("aptLoesung").value.trim();
-   await updateDoc(doc(db,"ppModule",m.id),t);await ppmLaden(true);await refresh();toast("Gespeichert.");return;}
-  if(aktion==="apt-datei"&&m&&isTeacher()){
-   const feld=b.dataset.feld,inp=document.createElement("input");inp.type="file";inp.accept="application/pdf,.pdf,image/*";
-   inp.onchange=async()=>{const f=inp.files&&inp.files[0];if(!f)return;
-    try{toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(f,`ppMaterial/${m.id}`);
-     if(m[feld+"Datei"]&&m[feld+"Datei"].url)deleteCampusDatei(m[feld+"Datei"].url);
-     await updateDoc(doc(db,"ppModule",m.id),{[feld+"Datei"]:{url:up.url,name:f.name}});await ppmLaden(true);await refresh();toast("Datei hinzugefügt.");}
-    catch(err){toast(err&&err.message?err.message:"Upload nicht möglich.");}};
-   inp.click();return;}
-  if(aktion==="apt-datei-weg"&&m&&isTeacher()){
-   const feld=b.dataset.feld;if(m[feld+"Datei"]&&m[feld+"Datei"].url)deleteCampusDatei(m[feld+"Datei"].url);
-   await updateDoc(doc(db,"ppModule",m.id),{[feld+"Datei"]:null});await ppmLaden(true);await refresh();return;}
-  if(aktion==="apt-antworten"&&m&&isTeacher()){await ppmAptAntwortenDialog(m);return;}
-  if(aktion==="apt-zwischen"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptAntwort:($("aptAntwort")||{}).value||""});toast("Zwischengespeichert.");await refresh();return;}
-  if(aktion==="apt-abgeben"&&m&&!isTeacher()){
-   const t=(($("aptAntwort")||{}).value||"").trim();
-   if(!t){toast("Bitte schreibe zuerst deine Antwort.");return;}
-   await ppmStundeSchreiben(m,{aptAntwort:t,aptAbgegeben:true});await refresh();return;}
-  if(aktion==="apt-wieder"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptAbgegeben:false,aptBewertung:null});await refresh();return;}
-  if(aktion==="apt-bewerten"&&m&&!isTeacher()){await ppmStundeSchreiben(m,{aptBewertung:b.dataset.k});await refresh();return;}
-  if(aktion==="stunde-name"&&m&&isTeacher()){const t=($("ppmStundeTitel").value||"").trim();if(!t){toast("Bitte einen Namen eingeben.");return;}await updateDoc(doc(db,"ppModule",m.id),{titel:t.slice(0,120)});await ppmLaden(true);await refresh();toast("Name gespeichert.");return;}
-  if(aktion==="fertig"&&m&&!isTeacher()){
-   const n=(m.fragen||[]).length,alt=PPM.meine.stunde[m.id]||{},antw=ppmArr(alt.antworten,n);
-   document.querySelectorAll("[data-ppm-antwort]").forEach(t=>{antw[Number(t.dataset.ppmAntwort)]=t.value;});
-   await ppmStundeSchreiben(m,{antworten:antw.map(x=>x||""),gezeigt:ppmArr(alt.gezeigt,n).map(x=>!!x),bewertung:ppmArr(alt.bewertung,n).map(x=>x||null),fertig:!alt.fertig});
-   await refresh();return;}
-  if(aktion==="frage-neu"&&m){ppmFragenLesen(m);const l=[...(m.fragen||[]),{frage:"",loesung:""}];m.fragen=l;await refresh();return;}
-  if(aktion==="frage-weg"&&m){ppmFragenLesen(m);const l=[...(m.fragen||[])];l.splice(Number(b.dataset.i),1);m.fragen=l;await refresh();return;}
-  if(aktion==="fragen-speichern"&&m){ppmFragenLesen(m);const l=(m.fragen||[]).filter(q=>(q.frage||"").trim());await updateDoc(doc(db,"ppModule",m.id),{fragen:l});await ppmLaden(true);await refresh();toast("Fragen gespeichert.");return;}
-  if(aktion==="antworten-ansehen"&&m){await ppmAntwortenDialog(m);return;}
-  if(aktion==="loesung"&&m&&!isTeacher()){
-   const i=Number(b.dataset.i),n=(m.fragen||[]).length;
-   const antw=ppmArr((PPM.meine.stunde[m.id]||{}).antworten,n),gz=ppmArr((PPM.meine.stunde[m.id]||{}).gezeigt,n),bw=ppmArr((PPM.meine.stunde[m.id]||{}).bewertung,n);
-   document.querySelectorAll("[data-ppm-antwort]").forEach(t=>{antw[Number(t.dataset.ppmAntwort)]=t.value;});
-   gz[i]=true;await ppmStundeSchreiben(m,{antworten:antw.map(x=>x||""),gezeigt:gz.map(x=>!!x),bewertung:bw.map(x=>x||null)});await refresh();return;}
-  if(aktion==="bewerten"&&m&&!isTeacher()){
-   const i=Number(b.dataset.i),n=(m.fragen||[]).length,alt=PPM.meine.stunde[m.id]||{};
-   const bw=ppmArr(alt.bewertung,n);bw[i]=b.dataset.k;
-   await ppmStundeSchreiben(m,{antworten:ppmArr(alt.antworten,n).map(x=>x||""),gezeigt:ppmArr(alt.gezeigt,n).map(x=>!!x),bewertung:bw.map(x=>x||null)});await refresh();return;}
-  // --- Kurs ---
-  if(aktion==="schritt-fertig"&&m){await ppmKursSchreiben(m,d=>{d.erledigt[b.dataset.s]=true;});await refresh();return;}
-  if(aktion==="zuordnen"&&m){
-   const s=ppmKursSchritte(m).find(x=>x.id===b.dataset.s);if(!s)return;
-   await ppmKursSchreiben(m,d=>{d.zuordnung[s.id]=d.zuordnung[s.id]||{};d.zuordnung[s.id][b.dataset.i]=Number(b.dataset.k);
-    const a=d.zuordnung[s.id];if(s.items.every((it,i)=>a[i]===it.k))d.erledigt[s.id]=true;});
-   await refresh();return;}
-  if(aktion==="kurs-loesung"&&m){
-   const s=ppmKursSchritte(m).find(x=>x.id===b.dataset.s);if(!s)return;const j=Number(b.dataset.j);
-   const tas=[...document.querySelectorAll(`[data-ppm-kursantwort="${s.id}"]`)];
-   await ppmKursSchreiben(m,d=>{d.antworten[s.id]=ppmArr(d.antworten[s.id],s.fragen.length);tas.forEach(t=>{d.antworten[s.id][Number(t.dataset.j)]=t.value;});
-    d.gezeigt[s.id]=ppmArr(d.gezeigt[s.id],s.fragen.length);d.gezeigt[s.id][j]=true;
-    if(s.fragen.every((q,k)=>d.gezeigt[s.id][k]))d.erledigt[s.id]=true;});
-   await refresh();return;}
-  if(aktion==="kurs-stand"&&m){await ppmKursStandDialog(m);return;}
-  if(aktion==="kurs-kopie"&&m){
-   if(!confirm("Den Kurs als eigenen Kurs kopieren? Du kannst ihn danach frei bearbeiten."))return;
-   await updateDoc(doc(db,"ppModule",m.id),{kursId:"eigen",schritte:JSON.parse(JSON.stringify(ppmKursSchritte(m)))});await ppmLaden(true);await refresh();toast("Kurs kopiert.");return;}
-  if(aktion==="kurs-bearbeiten"&&m){await ppmKursEditor(m);return;}
- }catch(err){ppmFehler(err,"Das hat nicht geklappt");}
-}
-function ppmFragenLesen(m){
- const fr=[...(m.fragen||[])];
- document.querySelectorAll("[data-ppm-frage]").forEach(t=>{const i=Number(t.dataset.ppmFrage);fr[i]={...(fr[i]||{}),frage:t.value};});
- document.querySelectorAll("[data-ppm-loesung]").forEach(t=>{const i=Number(t.dataset.ppmLoesung);fr[i]={...(fr[i]||{}),loesung:t.value};});
- m.fragen=fr;
-}
-function ppmOeffnen(id){
- const m=ppmById(id);if(!m)return;
- if(m.modul==="projekt"&&ppmProjektDirekt(m)){
-  const kind=PPM.liste.find(x=>x.projektId===m.id&&x.modul==="experiment");
-  // Hängt Material am Projekt oder an der Experiment-Einheit, öffnet sich zuerst die Modulseite mit der Material-Box (dort startet man auch die Einheit)
-  const matId=(m.material||[]).length?m.id:(kind&&(kind.material||[]).length?kind.id:null);
-  if(matId){activePPModul=matId;activeFach="paedagogik";if(location.hash!=="#fach")location.hash="#fach";else render();return;}
-  activePPModul=null;activePhaseDetail=null;activeFach="paedagogik";
-  openExperimentStunde(kind?ppmExpTeile(kind):null);
-  return;
- }
- activePPModul=id;
- activeFach="paedagogik";
- if(location.hash!=="#fach")location.hash="#fach";else render();
-}
-async function ppmAntwortenDialog(m){
- let docs=[];
- try{docs=(await getDocs(query(collection(db,"ppStundenAntworten"),where("modulId","==",m.id)))).docs.map(d=>d.data());}catch(e){ppmFehler(e,"Antworten konnten nicht geladen werden");return;}
- const fr=m.fragen||[];
- const stat=fr.map((q,i)=>{const z={ja:0,teils:0,nein:0};docs.forEach(d=>{const k=(d.bewertung||[])[i];if(z[k]!==undefined)z[k]++;});return`<tr><td>${i+1}. ${esc(q.frage)}</td><td>${z.ja}</td><td>${z.teils}</td><td>${z.nein}</td></tr>`;}).join("");
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">CHECK-OUT</div><h2>Antworten der Klasse</h2>
-  <p>${docs.length} Person${docs.length===1?"":"en"} haben geantwortet, ${docs.filter(d=>d.fertig).length} davon haben den Haken „fertig“ gesetzt.</p>
-  ${fr.length?`<table class="noten-table"><thead><tr><th>Frage</th><th>passt</th><th>teilweise</th><th>noch nicht</th></tr></thead><tbody>${stat}</tbody></table>`:""}
-  ${docs.map(d=>`<details style="margin:8px 0"><summary><b>${esc(d.name||"Schüler:in")}</b>${d.fertig?" · fertig ✓":""}</summary>${fr.map((q,i)=>`<p><b>${i+1}.</b> ${esc((d.antworten||[])[i]||"–")}</p>`).join("")}</details>`).join("")}`);
-}
-async function ppmEaStandDialog(id){
- if(!isTeacher())return;
- try{
-  const info=await einarbeitungInfo(id),k=await ladeStundeKlasse(id);
-  const zeilen=k.students.map(u=>{const f=k.fs[u.uid],a=f&&f.einarbeitungAufgaben;
-   return`<tr><td>${esc(anzeigeName(u))}</td><td>${f&&f.einarbeitungAbgeschlossen?"✓ abgeschlossen":(f?"begonnen":"–")}</td><td>${a&&a.gesamt?`${a.richtig} von ${a.gesamt}`:"–"}</td></tr>`;}).join("");
-  const fertig=k.students.filter(u=>k.fs[u.uid]&&k.fs[u.uid].einarbeitungAbgeschlossen).length;
-  modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Stand der Klasse</h2>
-   <p>${esc((info&&info.titel)||id)}: ${fertig} von ${k.students.length} haben den Kurs abgeschlossen.</p>
-   <table class="noten-table"><thead><tr><th>Name</th><th>Stand</th><th>Aufgaben richtig</th></tr></thead><tbody>${zeilen}</tbody></table>`);
- }catch(e){ppmFehler(e,"Stand konnte nicht geladen werden");}
-}
-async function ppmKursStandDialog(m){
- let docs=[];
- try{docs=(await getDocs(query(collection(db,"ppKursFortschritt"),where("modulId","==",m.id)))).docs.map(d=>d.data());}catch(e){ppmFehler(e,"Stand konnte nicht geladen werden");return;}
- const sch=ppmKursSchritte(m).filter(s=>s.typ!=="abschluss");
- const zeilen=sch.map(s=>`<tr><td>${esc(s.titel)}</td><td>${docs.filter(d=>d.erledigt&&d.erledigt[s.id]).length} von ${docs.length}</td></tr>`).join("");
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Stand der Klasse</h2>
-  <p>${docs.length} Person${docs.length===1?"":"en"} haben begonnen.</p>
-  <table class="noten-table"><thead><tr><th>Schritt</th><th>erledigt</th></tr></thead><tbody>${zeilen}</tbody></table>
-  ${docs.map(d=>{const n=sch.filter(s=>d.erledigt&&d.erledigt[s.id]).length;return`<div class="ppm-zeile"><b style="flex:1">${esc(d.name||"Schüler:in")}</b><span>${n}/${sch.length}</span></div>`;}).join("")}`);
-}
-async function ppmKursEditor(m){
- const sch=JSON.parse(JSON.stringify(ppmKursSchritte(m)));
- const zeichne=()=>{
-  $("ppmKe").innerHTML=sch.map((s,i)=>`<div class="ppm-frage"><div class="ppm-zeile" style="padding:0 0 6px"><b style="flex:1">${i+1}. ${esc(s.typ)}</b>
-   <button type="button" class="ppm-btn klein" data-k="hoch" data-i="${i}">↑</button><button type="button" class="ppm-btn klein" data-k="runter" data-i="${i}">↓</button><button type="button" class="ppm-btn klein" data-k="weg" data-i="${i}">✕</button></div>
-   <input data-f="titel" data-i="${i}" value="${esc(s.titel||"")}" placeholder="Titel" style="width:100%;margin-bottom:6px">
-   ${["text","abschluss","link","experiment"].includes(s.typ)?`<textarea data-f="text" data-i="${i}" rows="5" style="width:100%" placeholder="Text (## Überschrift, - Liste, **fett**)">${esc(s.text||"")}</textarea>`:""}
-   ${s.typ==="link"?`<input data-f="url" data-i="${i}" value="${esc(s.url||"")}" placeholder="https://…" style="width:100%;margin-top:6px">`:""}
-   ${s.typ==="selbsttest"?`<textarea data-f="fragen" data-i="${i}" rows="6" style="width:100%" placeholder="Pro Frage zwei Zeilen: Frage | Lösungsantwort">${esc((s.fragen||[]).map(q=>q.frage+" | "+q.loesung).join("\n"))}</textarea>`:""}
-   ${s.typ==="ziele"?`<textarea data-f="items" data-i="${i}" rows="4" style="width:100%" placeholder="Ein Ziel pro Zeile">${esc((s.items||[]).join("\n"))}</textarea>`:""}
-   ${s.typ==="zuordnen"?`<small style="color:var(--muted)">Interaktive Zuordnung (nicht im Editor änderbar, nur verschieben oder löschen).</small>`:""}</div>`).join("");
- };
- const lesen=()=>{document.querySelectorAll("#ppmKe [data-f]").forEach(el=>{const i=Number(el.dataset.i),f=el.dataset.f;if(!sch[i])return;
-   if(f==="fragen")sch[i].fragen=el.value.split("\n").map(z=>z.split("|")).filter(p=>p[0].trim()).map(p=>({frage:p[0].trim(),loesung:(p[1]||"").trim()}));
-   else if(f==="items")sch[i].items=el.value.split("\n").map(x=>x.trim()).filter(Boolean);
-   else sch[i][f]=el.value;});};
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">SELBSTLERNKURS</div><h2>Kurs bearbeiten</h2>
-  <div id="ppmKe"></div>
-  <div class="ppm-zeile">${[["text","＋ Text"],["link","＋ Link"],["selbsttest","＋ Selbsttest"],["ziele","＋ Ziele"],["experiment","＋ Experiment"]].map(([k,t])=>`<button type="button" class="ppm-btn klein" data-add="${k}">${t}</button>`).join("")}</div>
-  <div class="form-actions" style="margin-top:12px"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmKeOk">Speichern</button></div>`);
- zeichne();
- $("ppmKe").addEventListener("click",ev=>{const b=ev.target.closest("[data-k]");if(!b)return;lesen();const i=Number(b.dataset.i);
-  if(b.dataset.k==="weg")sch.splice(i,1);else if(b.dataset.k==="hoch"&&i>0)[sch[i-1],sch[i]]=[sch[i],sch[i-1]];else if(b.dataset.k==="runter"&&i<sch.length-1)[sch[i+1],sch[i]]=[sch[i],sch[i+1]];zeichne();});
- document.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click",()=>{lesen();const k=b.dataset.add,id="s"+Date.now().toString(36);
-  const neu={id,typ:k,titel:{text:"Neuer Text",link:"Material",selbsttest:"Selbsttest",ziele:"Das lernst du",experiment:"Interaktive Aufgabe: Das Experiment"}[k]};
-  if(k==="text")neu.text="## Überschrift\nText …";if(k==="link"){neu.url="";neu.text="";}if(k==="selbsttest")neu.fragen=[{frage:"",loesung:""}];if(k==="ziele")neu.items=[];if(k==="experiment")neu.text="Du führst den Versuch durch und beantwortest ein kurzes Quiz.";
-  const ab=sch.findIndex(s=>s.typ==="abschluss");sch.splice(ab<0?sch.length:ab,0,neu);zeichne();}));
- $("ppmKeOk").addEventListener("click",async()=>{lesen();
-  try{await updateDoc(doc(db,"ppModule",m.id),{schritte:sch.filter(s=>s.typ!=="selbsttest"||(s.fragen||[]).length),kursId:"eigen"});closeModal();await ppmLaden(true);await render();toast("Kurs gespeichert.");}catch(e){ppmFehler(e,"Kurs konnte nicht gespeichert werden");}});
-}
-if(!window.__ppmKlickGebunden){window.__ppmKlickGebunden=true;document.addEventListener("click",ppmKlick);}
-// ---- Module per Drag-and-drop verschieben (nur Lehrkraft): Maus = ziehen, Touch = lange drücken und ziehen ----
-const ppmDnd={k:null,id:null,x:0,y:0,px:0,py:0,aktiv:false,geist:null,timer:0,touch:false,ziel:null,vor:null,raf:0,ptr:null};
-function ppmDndAufraeumen(){
- clearTimeout(ppmDnd.timer);cancelAnimationFrame(ppmDnd.raf);
- if(ppmDnd.geist)ppmDnd.geist.remove();
- document.querySelectorAll(".ppm-zieh,.ppm-ziel,.ppm-vor,.ppm-ende").forEach(el=>el.classList.remove("ppm-zieh","ppm-ziel","ppm-vor","ppm-ende"));
- document.body.classList.remove("ppm-dnd-an");
- Object.assign(ppmDnd,{k:null,id:null,aktiv:false,geist:null,timer:0,ziel:null,vor:null,raf:0,ptr:null});
-}
-function ppmDndStart(){
- const k=ppmDnd.k;if(!k||ppmDnd.aktiv)return;
- ppmDnd.aktiv=true;
- const r=k.getBoundingClientRect(),g=k.cloneNode(true);
- g.classList.add("ppm-geist","z"+ppmZoomLesen());g.removeAttribute("data-ppm");
- g.style.width=r.width+"px";g.style.left=r.left+"px";g.style.top=r.top+"px";
- ppmDnd.ox=ppmDnd.px-r.left;ppmDnd.oy=ppmDnd.py-r.top;
- document.body.appendChild(g);ppmDnd.geist=g;
- k.classList.add("ppm-zieh");document.body.classList.add("ppm-dnd-an");
- try{if(navigator.vibrate&&ppmDnd.touch)navigator.vibrate(15);}catch(e){}
- const lauf=()=>{
-  if(!ppmDnd.aktiv)return;
-  const y=ppmDnd.py,h=window.innerHeight;
-  if(y<80)window.scrollBy(0,-14);else if(y>h-80)window.scrollBy(0,14);
-  ppmDndZiel();ppmDnd.raf=requestAnimationFrame(lauf);
- };
- ppmDnd.raf=requestAnimationFrame(lauf);
-}
-function ppmDndZiel(){
- const g=ppmDnd.geist;if(!g)return;
- g.style.left=(ppmDnd.px-ppmDnd.ox)+"px";g.style.top=(ppmDnd.py-ppmDnd.oy)+"px";
- const el=document.elementFromPoint(ppmDnd.px,ppmDnd.py),w=el&&el.closest?el.closest(".ppm-woche[data-w]"):null;
- document.querySelectorAll(".ppm-ziel,.ppm-vor,.ppm-ende").forEach(x=>x.classList.remove("ppm-ziel","ppm-vor","ppm-ende"));
- ppmDnd.ziel=null;ppmDnd.vor=null;
- if(!w)return;
- const reihe=w.querySelector(".ppm-reihe");if(!reihe)return;
- w.classList.add("ppm-ziel");ppmDnd.ziel=w.dataset.w;
- const karten=[...reihe.querySelectorAll(".ppm-karte[data-id]")].filter(c=>c!==ppmDnd.k);
- let vor=null;
- for(const c of karten){
-  const r=c.getBoundingClientRect();
-  if(ppmDnd.py<r.top||(ppmDnd.py<=r.bottom&&ppmDnd.px<r.left+r.width/2)){vor=c;break;}
- }
- if(vor){vor.classList.add("ppm-vor");ppmDnd.vor=vor.dataset.id;}
- else if(karten.length)karten[karten.length-1].classList.add("ppm-ende");
-}
-async function ppmDndAblegen(id,zielW,vorId){
- const m=ppmById(id);if(!m||!zielW||!isTeacher())return;
- const iAlt=ppmSwIndex(m.start),iNeu=ppmSwIndex(zielW);
- if(iNeu<0){toast("Hier lässt sich nichts planen.");return;}
- const d=iNeu-iAlt,neu=SCHULWOCHEN_PP[iNeu];
- if(d!==0&&!m.projektId){
-  const pr=ppmPruefen(neu.id,ppmDauerKey(m),m.id,m.modul);
-  if(!pr.ok){toast(pr.fehler||`In der Woche ${fmtKurz(neu.start)}–${fmtKurz(neu.end)} ist nicht genug Platz.`);return;}
- }
- // Reihenfolge der Zielwoche so, wie sie gerade angezeigt wird, mit dem gezogenen Modul an der Ablagestelle
- const zeile=document.querySelector(`.ppm-woche[data-w="${zielW}"] .ppm-reihe`);
- let ids=zeile?[...zeile.querySelectorAll(".ppm-karte[data-id]")].map(c=>c.dataset.id).filter(x=>x!==id):PPM.liste.filter(x=>x.start===zielW&&x.id!==id).map(x=>x.id);
- const pos=vorId?ids.indexOf(vorId):-1;
- if(pos>=0)ids.splice(pos,0,id);else ids.push(id);
- if(d===0){const alt=zeile?[...zeile.querySelectorAll(".ppm-karte[data-id]")].map(c=>c.dataset.id):[];if(alt.join("|")===ids.join("|"))return;}
- const y=window.scrollY;
- try{
-  for(let k=0;k<ids.length;k++){
-   const x=ppmById(ids[k]);if(!x)continue;
-   const o=(k+1)*10,upd={};
-   if((x.ord||0)!==o)upd.ord=o;
-   if(x.id===id&&d!==0)upd.start=neu.id;
-   if(Object.keys(upd).length)await updateDoc(doc(db,"ppModule",x.id),{...upd,updatedAt:serverTimestamp()});
-  }
-  if(d!==0&&m.modul==="projekt"){ // Einheiten im Projekt wandern mit
-   for(const x of PPM.liste.filter(z=>z.projektId===m.id)){
-    const j=ppmSwIndex(x.start)+d;
-    if(j>=0&&j<SCHULWOCHEN_PP.length)await updateDoc(doc(db,"ppModule",x.id),{start:SCHULWOCHEN_PP[j].id,updatedAt:serverTimestamp()});
-   }
-  }
-  await ppmLaden(true);await render();
-  try{window.scrollTo(0,y);}catch(e){}
-  if(d!==0)toast(`Verschoben auf ${fmtKurz(neu.start)}–${fmtKurz(neu.end)}.`);
- }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Konnte nicht verschoben werden.");}
-}
-if(!window.__ppmDndGebunden){
- window.__ppmDndGebunden=true;
- document.addEventListener("pointerdown",e=>{
-  if(ppmDnd.k||!isTeacher()||(e.pointerType==="mouse"&&e.button!==0))return;
-  const k=e.target.closest&&e.target.closest(".ppm-reihe > .ppm-karte[data-id],.ppm-spurreihe > .ppm-karte[data-id]");
-  if(!k||e.target.closest("button,a,input,select,textarea,.lb-pill"))return;
-  Object.assign(ppmDnd,{k,id:k.dataset.id,x:e.clientX,y:e.clientY,px:e.clientX,py:e.clientY,touch:e.pointerType!=="mouse",ptr:e.pointerId,aktiv:false});
-  if(ppmDnd.touch)ppmDnd.timer=setTimeout(ppmDndStart,380);
- });
- document.addEventListener("pointermove",e=>{
-  if(!ppmDnd.k||e.pointerId!==ppmDnd.ptr)return;
-  ppmDnd.px=e.clientX;ppmDnd.py=e.clientY;
-  const weg=Math.hypot(e.clientX-ppmDnd.x,e.clientY-ppmDnd.y);
-  if(!ppmDnd.aktiv){
-   if(ppmDnd.touch){if(weg>10)ppmDndAufraeumen();} // Finger bewegt sich vor Ablauf der Wartezeit: normales Scrollen
-   else if(weg>8)ppmDndStart();
-   return;
-  }
-  e.preventDefault();
- });
- document.addEventListener("touchmove",e=>{if(ppmDnd.aktiv)e.preventDefault();},{passive:false});
- document.addEventListener("contextmenu",e=>{if(ppmDnd.k&&ppmDnd.touch)e.preventDefault();});
- const ende=async(e,abbruch)=>{
-  if(!ppmDnd.k||(e.pointerId!==undefined&&e.pointerId!==ppmDnd.ptr))return;
-  const war=ppmDnd.aktiv,id=ppmDnd.id;
-  if(war&&!abbruch)ppmDndZiel();
-  const ziel=ppmDnd.ziel,vor=ppmDnd.vor;
-  ppmDndAufraeumen();
-  if(!war)return;
-  // den Klick, der auf das Loslassen folgt, nicht als „Modul öffnen“ werten
-  const stopp=ev=>{ev.stopPropagation();ev.preventDefault();};
-  document.addEventListener("click",stopp,{capture:true,once:true});
-  setTimeout(()=>document.removeEventListener("click",stopp,{capture:true}),350);
-  if(!abbruch&&ziel)await ppmDndAblegen(id,ziel,vor);
- };
- document.addEventListener("pointerup",e=>ende(e,false));
- document.addEventListener("pointercancel",e=>ende(e,true));
- document.addEventListener("keydown",e=>{if(e.key==="Escape"&&ppmDnd.k)ende({},true);});
-}
-
 
 // ============================================================
 // LERNRALLYE (Modul „Lernrallye“)
@@ -6810,7 +6906,7 @@ function lrLehrerHTML(m){
    <button type="button" class="ppm-btn" data-lr="auswertung">📊 Auswertung</button>${frei==="qr"?`<button type="button" class="ppm-btn" data-lr="qr-druck">🖨 QR-Codes drucken</button>`:""}</div>
   <p style="color:var(--muted);font-size:13px;margin:8px 0 0">Freischaltung: ${esc(LR_FREISCHALTUNG[frei])}. Einstellungen änderst du über „Modul bearbeiten“. Schüler:innen sehen die Rallye erst, wenn du sie startest.</p></div>
  <div class="ppm-box"><h2>Stationen</h2>${zeilen||`<p class="ppm-leer">Noch keine Station. Lege die erste an.</p>`}
-  <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" data-lr="st-neu">＋ Station hinzufügen</button></div></div>`;
+  <div class="ppm-zeile" style="border:0"><button type="button" class="ppm-btn primaer" data-lr="st-neu">＋ Station hinzufügen</button><button type="button" class="ppm-btn" data-lr="st-vorlage">📥 Stationen aus Vorlage laden</button></div></div>`;
 }
 async function lrStationenSpeichern(m,liste){
  try{await updateDoc(doc(db,"ppModule",m.id),{stationen:liste,updatedAt:serverTimestamp()});await ppmLaden(true);await render();}
@@ -6995,6 +7091,50 @@ async function lrCodeEinloesen(m,stand,codeRoh){
   await render();
  }catch(e){ppmFehler(e,"Station konnte nicht freigeschaltet werden");}
 }
+// ---- Vorlagen: Stationen aus der Datei lernrallye/vorlagen.json laden (Lehrkraft) ----
+let LR_VORLAGEN=[];
+function lrPunkteListe(l){return(l||[]).reduce((n,x)=>n+(Number(x.punkte)||0),0);}
+async function lrVorlageDialog(m){
+ let liste=[];
+ try{
+  const r=await fetch("lernrallye/vorlagen.json?v="+Date.now());
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  const j=await r.json();liste=Array.isArray(j.vorlagen)?j.vorlagen:[];
+ }catch(e){console.error("Rallye-Vorlagen:",e);toast("Die Datei lernrallye/vorlagen.json wurde nicht gefunden.");return;}
+ LR_VORLAGEN=liste;
+ const hat=(m.stationen||[]).length>0;
+ modal(`${LR_CSS}<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">🚩 LERNRALLYE</div><h2>Stationen aus Vorlage laden</h2>
+  <div class="lr-form"><p style="color:var(--muted);font-size:13px;margin:0 0 8px">Die Stationen kommen aus der Datei lernrallye/vorlagen.json. Sie erhalten neue Codes und lassen sich danach wie gewohnt bearbeiten.</p>
+  <label style="display:flex;gap:8px;align-items:center;margin:0 0 10px"><input type="checkbox" id="lrVEinst" checked style="width:auto"> Titel und Einstellungen der Vorlage übernehmen (Teams, Freischaltung)</label>
+  ${liste.map((v,i)=>`<div class="lr-st"><div style="flex:1;min-width:180px"><b>${esc(v.titel||"Vorlage")}</b><br><small>${esc(v.unter||"")}${v.unter?" · ":""}${(v.stationen||[]).length} Stationen · ${lrPunkteListe(v.stationen)} Punkte</small></div>
+   <button type="button" class="ppm-btn klein primaer" data-lr="vorlage" data-i="${i}" data-wie="neu">${hat?"Ersetzen":"Laden"}</button>${hat?`<button type="button" class="ppm-btn klein" data-lr="vorlage" data-i="${i}" data-wie="plus">Anhängen</button>`:""}</div>`).join("")||`<p class="ppm-leer">Die Datei enthält keine Vorlagen.</p>`}
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Schließen</button></div></div>`);
+}
+async function lrVorlageAnlegen(m,i,anhaengen){
+ const v=LR_VORLAGEN[i];if(!v||!Array.isArray(v.stationen))return;
+ if(!anhaengen&&(m.stationen||[]).length&&!confirm("Die vorhandenen Stationen dieser Rallye werden ersetzt. Bereits gesammelte Punkte bleiben in der Rangliste stehen. Fortfahren?"))return;
+ const liste=anhaengen?[...(m.stationen||[])]:[];
+ const tmp={stationen:liste},stamp=Date.now().toString(36);
+ v.stationen.forEach((s,k)=>{
+  const st=JSON.parse(JSON.stringify(s));
+  st.id="s"+stamp+k.toString(36)+Math.floor(Math.random()*1296).toString(36);
+  st.punkte=Math.max(0,Math.min(100,Number(st.punkte)||0));
+  st.text=st.text||"";st.frage=st.frage||"";st.erklaerung=st.erklaerung||"";
+  st.optionen=st.optionen||[];st.aussagen=st.aussagen||[];st.antworten=st.antworten||[];st.paare=st.paare||[];
+  st.richtig=Number(st.richtig)||0;
+  st.code=lrCodeNeu(tmp);
+  liste.push(st);
+ });
+ const daten={stationen:liste,updatedAt:serverTimestamp()};
+ if($("lrVEinst")&&$("lrVEinst").checked){
+  if(v.titel)daten.titel=v.titel;
+  if(v.rModus)daten.rModus=v.rModus;
+  if(v.rFreischaltung)daten.rFreischaltung=v.rFreischaltung;
+ }
+ await updateDoc(doc(db,"ppModule",m.id),daten);
+ LR.sicht=null;closeModal();await ppmLaden(true);await render();
+ toast(`${v.stationen.length} Stationen ${anhaengen?"angehängt":"geladen"}.`);
+}
 // ---- Klicks der Lernrallye ----
 async function lrKlick(e){
  const b=e.target.closest&&e.target.closest("[data-lr]");
@@ -7037,6 +7177,8 @@ async function lrKlick(e){
   if(!lehrer)return;
   if(a==="aktiv"){await updateDoc(doc(db,"ppModule",m.id),{rAktiv:!m.rAktiv,updatedAt:serverTimestamp()});await ppmLaden(true);await render();toast(m.rAktiv?"Die Rallye ist beendet.":"Die Rallye läuft.");return;}
   if(a==="st-neu"){lrStationDialog(m,null);return;}
+  if(a==="st-vorlage"){await lrVorlageDialog(m);return;}
+  if(a==="vorlage"){await lrVorlageAnlegen(m,Number(b.dataset.i),b.dataset.wie==="plus");return;}
   if(a==="st-edit"){lrStationDialog(m,b.dataset.sid);return;}
   if(a==="st-weg"){
    const st=lrStation(m,b.dataset.sid);if(!st)return;
@@ -7055,27 +7197,23 @@ async function lrKlick(e){
 if(!window.__lrKlickGebunden){window.__lrKlickGebunden=true;document.addEventListener("click",lrKlick);}
 
 async function renderPaedagogikPhasenZeitstrahl(fach,fortschrittMap,heute){
- await ppmLaden();
- if(activePPModul){
-  const pm=ppmById(activePPModul);
-  if(pm){const kf=KW_FARBEN[pm.lb]||{c:"#4B5563",t:"#1F2937"};return`<div class="kwp kwm" style="--lbc:${kf.c};--lbt:${kf.t}">`+await ppmModulSeite(pm)+`</div>`;}
-  activePPModul=null;
- }
  const meineTeams=await ladePPTeams();
  if(activePhaseDetail){
   const [phId,teil]=String(activePhaseDetail).split(":");
   const ph=projektPhaseById(phId);
-  if(ph&&!ph.einstieg&&teil!=="apt"){
+  if(ph){
    const extra={coDaten:await ladeCheckoutDaten()};
-   return renderPPTeilAnsicht(ph,"projekt",fortschrittMap,meineTeams,heute,extra);
+   if(ph.einstieg&&teil!=="apt"&&isTeacher())extra.stunde=await ladeStundenStatus(ph);
+   return renderPPTeilAnsicht(ph,teil==="apt"?"apt":"projekt",fortschrittMap,meineTeams,heute,extra);
   }
   activePhaseDetail=null;
  }
- return await renderPPModulplan();
+ const coDaten=await ladeCheckoutDaten();
+ return renderPPJahresuebersicht(fortschrittMap,meineTeams,heute,coDaten);
 }
 
 // Kurznamen der Inhalte für die kompakte Lernweg-Ansicht.
-const PP_KURZ={pp01:"Erleben und Verhalten",pp02:"Wissenschaftliche Aussagen",pp03:"Das Experiment",pp1a1:"Gegenstand der Pädagogik",pp1a2:"Ziele der Erziehung",pp1a3:"Erziehungsbeziehung",pp1a4:"Einrichtungen",pp04:"Merkmale von Erziehung",pp05:"Baumrind",pp06:"Mündigkeit (Roth)",pp07:"BayBEP",pp09:"Wahrnehmung",pp2p2:"Mehrspeichermodell",pp12:"Lernstrategien",pp2a1:"Gedächtnis (Markowitsch)",pp10:"Emotion",pp11:"Motivation (Weiner)",pp4p1:"Begriff Lernen",pp13:"Pawlow",pp14:"Thorndike und Skinner",pp15:"Bandura",pp16:"Medien und Lernen"};
+const PP_KURZ={pp01:"Erleben und Verhalten",pp02:"Wissenschaftliche Aussagen",pp03:"Das Experiment",pp1a1:"Erziehung und Bildung",pp1a2:"Ziele der Erziehung",pp1a3:"Erziehungsbeziehung",pp1a4:"Einrichtungen",pp04:"Merkmale von Erziehung",pp05:"Baumrind",pp06:"Mündigkeit (Roth)",pp07:"BayBEP",pp09:"Wahrnehmung",pp2p2:"Mehrspeichermodell",pp12:"Lernstrategien",pp2a1:"Gedächtnis (Markowitsch)",pp10:"Emotion",pp11:"Motivation (Weiner)",pp4p1:"Begriff Lernen",pp13:"Pawlow",pp14:"Thorndike und Skinner",pp15:"Bandura",pp16:"Medien und Lernen"};
 function ppKurz(e){return e?(PP_KURZ[e.id]||e.thema):"";}
 // ---- Ebene 1: Lernweg mit 8 Stationen ----
 // Alle Teile in Zeitreihenfolge (Projekt, APT je Lernbereich).
@@ -7195,7 +7333,7 @@ function renderPPJahresuebersicht(fortschrittMap,meineTeams,heute,coDaten){
  const gesamtProzent=gesamt.g?Math.round(gesamt.e/gesamt.g*100):0;
  const teile=ppAlleTeile(),aktIdx=ppAktuellerIndex(heute),akt=teile[aktIdx];
  const unter=isTeacher()?"Acht Stationen durchs Schuljahr: je Lernbereich ein Projekt und ein Prüfungstraining.":`Acht Stationen durchs Schuljahr. Der Ring zeigt, wie viel du geschafft hast – ${gesamtProzent} % deines Jahres.`;
- return`<button class="secondary"onclick="closeFach()">← Zurück zur Lernwerkstatt</button>
+ return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
  ${pageHead("LERNPFAD","Pädagogik/Psychologie",unter,isTeacher()?`<button class="secondary"onclick="openProjektGesamtcheck()">🔬 Projekt-Gesamtcheck</button> <button class="secondary"onclick="openFachaufsatzTrainingCheck()">🎓 APT-Gesamtcheck</button>`:"")}
  ${checkoutLiveBannerHTML(coDaten)}
  <div class="card pp-weg-card">
@@ -7222,11 +7360,17 @@ function renderPPTeilAnsicht(ph,teil,fortschrittMap,meineTeams,heute,extra={}){
  const t=ppSaettigung(fs.prozent);
  const anderer=teil==="projekt"?"apt":"projekt";
  const kopf=`<div class="card pp-teilkopf"style="border-left:5px solid ${c}">
+  <div class="pp-teilkopf-farbe"style="background-color:${ppMix(c,t)};color:${t>0.55?"#fff":"#17384f"}${teil==="apt"?";background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.16) 0 6px,transparent 6px 12px)":""}"><span>${ppTeilIcon(teil,ph)}</span><b>${fs.prozent}%</b></div>
   <div style="flex:1;min-width:220px">
    <div class="kicker"style="color:${c}">${esc(ph.lb)} · ${ppTeilName(teil,ph).toUpperCase()} · ${fmtKurz(wochen[0].start)}–${fmtKurz(wochen[wochen.length-1].end)}</div>
-   <h2 style="margin:4px 0">${esc(ph.titel)}</h2>
+   <h2 style="margin:4px 0">${esc(teil==="projekt"?ph.titel:"Abschlussprüfungs-Training "+ph.lb)}</h2>
+   <div class="pp-budget"style="font-size:13px">⏳ ${esc(budget.text)} ${tempo?`<span class="pp-tempo"style="background:${tempo.farbe}">${esc(tempo.txt)}</span>`:""}</div>
+   <div class="pp-balken"><div style="width:${fs.prozent}%;background:${c}"></div><i style="left:${Math.round(budget.soll*100)}%"title="Hier solltest du laut Zeitbudget ungefähr stehen"></i></div>
+   <small style="color:var(--muted)">Balken = dein Fortschritt · Strich = Soll laut Zeitbudget</small>
+   ${ppWochenZellenHTML(wochen,c,heute)}
   </div>
  </div>`;
+ const quer=`<button type="button"class="pp-quer"style="--c:${ppFarbe(ph)}"onclick="openPhaseDetail('${ph.id}:${anderer}')">${ppTeilIcon(anderer,ph)} Zum ${anderer==="apt"?"Abschlussprüfungs-Training":ppTeilName("projekt",ph)} ${esc(ph.lb)} wechseln →</button>`;
 
  let inhalt="";
  if(teil==="projekt"&&ph.einstieg){
@@ -7267,9 +7411,10 @@ function renderPPTeilAnsicht(ph,teil,fortschrittMap,meineTeams,heute,extra={}){
    </div>`;}).join("")}</div>
   <p style="font-size:11px;color:var(--muted);margin-top:10px">① Prüfungsfrage · ② Inhalte & Aufgabeneingrenzung · ③ Basis-Check · ④ Lernprodukt hochladen & Vorkorrektur umsetzen. Den K-Prim-Test schreibst du als 🏁 Check-out am Ende der Woche.</p>`;
  }
- return`<button class="secondary"onclick="closePhaseDetail()">← Zurück zum Unterrichtsplan</button>
+ return`<button class="secondary"onclick="closePhaseDetail()">← Zurück zum Zeitstrahl</button>
+ ${ppMiniZeitstrahlHTML(fortschrittMap,meineTeams,heute,`${ph.id}:${teil}`,extra.coDaten)}
  ${kopf}
- <div class="card"style="margin-top:14px">${inhalt}</div>
+ <div class="card"style="margin-top:14px">${quer}${inhalt}</div>
  ${ppKprimBereichHTML(ph,teil,extra.coDaten,heute)}
  ${footer()}`;
 }
@@ -7372,12 +7517,11 @@ async function stundeKarteHTML(f){
 const EXPERIMENT_URL="experiment/das-experiment.html";
 let experimentHandler=null;
 function experimentWocheId(){return projektPhaseById("lb1")?.stundeWocheId||"pp03";}
-function openExperimentStunde(teile){
+function openExperimentStunde(){
  closeExperimentStunde(true);
- const quelle=EXPERIMENT_URL+(Array.isArray(teile)&&teile.length?`?teile=${encodeURIComponent(teile.join(","))}`:"");
  const ov=document.createElement("div");
  ov.id="experimentOverlay";ov.className="exp-overlay";
- ov.innerHTML=`<div class="exp-leiste"><b>🧪 Das Experiment · interaktive Stunde</b><button type="button"class="secondary"onclick="closeExperimentStunde()">✕ Schließen</button></div><iframe id="experimentFrame"title="Das Experiment – interaktive Stunde"src="${quelle}"></iframe>`;
+ ov.innerHTML=`<div class="exp-leiste"><b>🧪 Das Experiment · interaktive Stunde</b><button type="button"class="secondary"onclick="closeExperimentStunde()">✕ Schließen</button></div><iframe id="experimentFrame"title="Das Experiment – interaktive Stunde"src="${EXPERIMENT_URL}"></iframe>`;
  document.body.appendChild(ov);
  document.body.classList.add("exp-offen");
  if(experimentHandler){window.removeEventListener("message",experimentHandler);}
@@ -7574,7 +7718,7 @@ async function einarbeitungInfo(id){
    const j=await res.json();
    const ARTEN=["mc","lueckentext","zuordnung","sortieren","kprim","frei","reihenfolge","strukturstreifen"];
    const zahl=(j.abschnitte||[]).reduce((n,x)=>n+(x.aufgaben||[]).length+(x.bloecke||[]).filter(b=>ARTEN.includes(b.typ)).length,0);
-   r={titel:j.titel||"",entwurf:!!j.entwurf,aufgaben:zahl,modulart:j.modulart||"",lb:j.lb||0,nr:j.nr?String(j.nr):""};
+   r={titel:j.titel||"",entwurf:!!j.entwurf,aufgaben:zahl,modulart:j.modulart||"",lb:j.lb||0};
   }
  }catch(e){r=null;}
  einarbeitungCache[id]=r;return r;
@@ -8023,7 +8167,7 @@ window.openAptSchuelerDetail=openAptSchuelerDetail;
 // ============================================================
 // CHECK-OUT · K-Prim-Test zum Wochenabschluss (Pädagogik/Psychologie)
 // ------------------------------------------------------------
-// Ablauf: Lehrkraft legt einen Check-out an (1 Fallvignette + 2 K-Prim-
+// Ablauf: Lehrkraft legt einen Check-out an (Fallvignette + 3–5 K-Prim-
 // Aufgaben) → schaltet ihn in der Testsituation LIVE → Schüler:innen
 // bearbeiten ihn (Antworten werden laufend gespeichert) → Lehrkraft
 // beendet LIVE → die App wertet automatisch aus (Bewertungseinheiten →
@@ -8046,7 +8190,7 @@ const CHECKOUT_BE_NACH_FEHLERN=[4,2,1,0,0];
 // 15: 100–96 · 14: 95–91 · … · 3: 40–34 · 2: 33–27 · 1: 26–20 · 0: 19–0.
 // Zwischenwerte werden nicht aufgerundet (z. B. 95,5 % → 14 Punkte).
 const FOSBOS_SCHLUESSEL=[[15,96],[14,91],[13,86],[12,81],[11,76],[10,71],[9,66],[8,61],[7,56],[6,51],[5,46],[4,41],[3,34],[2,27],[1,20]];
-const CHECKOUT_MIN_AUFGABEN=4,CHECKOUT_MAX_AUFGABEN=4; // immer 1 Fallvignette + genau 4 K-Prim-Aufgaben je Check-out (Test = 4er-Paket)
+const CHECKOUT_MIN_AUFGABEN=4,CHECKOUT_MAX_AUFGABEN=4; // immer genau 4 K-Prim-Aufgaben je Check-out: 2 Fallvignetten, jede für 2 Aufgaben, zusammen 16 BE
 function notenpunkteAusProzent(p){for(const [np,min] of FOSBOS_SCHLUESSEL)if(p>=min)return np;return 0;}
 function noteAusNotenpunkten(np){return np>=13?1:np>=10?2:np>=7?3:np>=4?4:np>=1?5:6;}
 function npText(np){return`${np} Punkte (${noteAusNotenpunkten(np)})`;}
@@ -8084,7 +8228,7 @@ async function ladeCheckoutDaten(){
   try{const e=await getDoc(doc(db,"checkoutEinstellungen","pp"));einst=e.exists()?e.data():{};}catch(e){}
   const meineAbgaben={};let auswahl=null;const stat={};
   if(lehrer){
-   try{(await getDocs(collection(db,"checkoutAbgaben"))).docs.forEach(x=>{const a=x.data();if(!a.ausgewertet)return;const t=(stat[a.checkoutId]=stat[a.checkoutId]||{n:0,summe:0});t.n++;t.summe+=Number(a.notenpunkte)||0;});}catch(e){console.error("Check-out-Statistik:",e);}
+   try{const klasseUids=new Set((await getAllUsersForLernstand()).map(u=>u.uid));(await getDocs(collection(db,"checkoutAbgaben"))).docs.forEach(x=>{const a=x.data();if(!a.ausgewertet||!klasseUids.has(a.uid))return;const t=(stat[a.checkoutId]=stat[a.checkoutId]||{n:0,summe:0});t.n++;t.summe+=Number(a.notenpunkte)||0;});}catch(e){console.error("Check-out-Statistik:",e);}
   }
   if(!lehrer){
    const s=await getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));
@@ -8126,8 +8270,8 @@ async function checkoutStartBannerHTML(){
   const s=await getDocs(query(collection(db,"checkouts"),where("status","==","live")));
   if(s.empty)return"";
   const co={id:s.docs[0].id,...s.docs[0].data()};
-  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(coTitelAnzeige(co)||"")}</b><small>Live-Übersicht öffnen, um den Stand zu sehen und den Test zu beenden.</small></div><button class="primary"onclick="openCheckoutMonitor('${co.id}')">Live-Übersicht</button></div>`;
-  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(coTitelAnzeige(co)||"")}</b><small>Deine Lehrkraft hat den Test freigeschaltet.</small></div><button class="primary"onclick="openCheckoutTest('${co.id}')">Jetzt starten</button></div>`;
+  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(co.titel||"")}</b><small>Live-Übersicht öffnen, um den Stand zu sehen und den Test zu beenden.</small></div><button class="primary"onclick="openCheckoutMonitor('${co.id}')">Live-Übersicht</button></div>`;
+  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(co.titel||"")}</b><small>Deine Lehrkraft hat den Test freigeschaltet.</small></div><button class="primary"onclick="openCheckoutTest('${co.id}')">Jetzt starten</button></div>`;
  }catch(e){return"";}
 }
 
@@ -8152,7 +8296,7 @@ function checkoutSektionHTML(d){
   }
   return`<div class="co-zeile"style="--c:${lbFarbe(c.lbNum)}">
    <span class="co-lb">LB ${esc(c.lbNum||"")}</span>
-   <div class="co-titel"><b>${esc(coTitelAnzeige(c)||"Check-out")}</b><small>${coDatum(c.datum)} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben${c.zaehlt===false?" · zählt nicht für den Kurzarbeit-Ersatz":""}</small></div>
+   <div class="co-titel"><b>${esc(c.titel||"Check-out")}</b><small>${coDatum(c.datum)} · ${(c.aufgaben||[]).length} K-Prim-Aufgaben${c.zaehlt===false?" · zählt nicht für den Kurzarbeit-Ersatz":""}</small></div>
    ${statusChip(c)}
    <div class="co-aktion">${rechts}</div>
   </div>`;
@@ -8161,7 +8305,7 @@ function checkoutSektionHTML(d){
  let ersatz="";
  if(lehrer){
   ersatz=`<div class="co-ersatz"><div><b>Kurzarbeit-Ersatz</b><small>${pool.length} Check-outs beendet · Schüler:innen wählen ${d.einst.anzahlWaehlen} aus · ${esc(coAuswahlStatus(d.einst).text)}</small></div>
-   <div class="co-aktion"><button class="primary"onclick="openKprimUebersicht()">🗂 Alle Freitage &amp; Vorschau</button><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="secondary"onclick="openCheckoutKlassenuebersicht()">Klassenübersicht</button></div></div>`;
+   <div class="co-aktion"><button class="secondary"onclick="openCheckoutEinstellungen()">Einstellungen</button><button class="secondary"onclick="openCheckoutKlassenuebersicht()">Klassenübersicht</button><button class="primary"onclick="openRespizienzDialog()">🖨 Respizienz-Ausdruck</button></div></div>`;
  }else{
   const aByCo=d.meineAbgaben;
   const gewertet=pool.filter(c=>aByCo[c.id]?.ausgewertet);
@@ -8170,8 +8314,9 @@ function checkoutSektionHTML(d){
    <div class="co-aktion">${coAuswahlStatus(d.einst).offen?`<button class="primary"onclick="openCheckoutAuswahl()">${d.auswahl?"Auswahl ändern":`${d.einst.anzahlWaehlen} auswählen`}</button>`:`<small style="color:var(--muted)">${esc(coAuswahlStatus(d.einst).text)}</small>`}${d.auswahl?`<button class="secondary"onclick="coPdfErsatzSchueler()">PDF</button>`:""}</div></div>`;
  }
  return`<div class="card co-karte">
-  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Check-Out-Test live frei: eine Fallvignette mit ${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben. Die Bepunktung steht vorab im Test. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
+  <div class="co-kopf"><div><h3>🏁 Check-out – K-Prim-Test zum Wochenabschluss</h3><small>Am Ende der Woche schaltet deine Lehrkraft den Test live frei: 4 K-Prim-Aufgaben, je eine Fallvignette für 2 Aufgaben. Ausgewertet wird automatisch in FOSBOS-Notenpunkten.</small></div>
    ${lehrer?`<button class="primary"onclick="openCheckoutEditor()">＋ Neuer Check-out</button>`:""}</div>
+  ${lehrer?"":coBewertungsInfoHTML(d.einst.anzahlWaehlen)}
   <div class="co-liste">${zeilen||`<div class="empty">${lehrer?"Noch kein Check-out angelegt.":"Noch kein Check-out freigeschaltet."}</div>`}</div>
   ${ersatz}
  </div>`;
@@ -8181,13 +8326,13 @@ function checkoutLiveBannerHTML(d){
  if(!live.length)return"";
  return live.map(c=>{
   const a=d.meineAbgaben[c.id];
-  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(coTitelAnzeige(c)||"")}</b><small>Beenden, sobald alle fertig sind – danach wird automatisch ausgewertet.</small></div><button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button></div>`;
-  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(coTitelAnzeige(c)||"")}</b><small>${a?.abgegeben?"Du hast abgegeben. Das Ergebnis siehst du, sobald deine Lehrkraft den Test beendet.":"Deine Lehrkraft hat den Test freigeschaltet: 1 Fallvignette, "+(c.aufgaben||[]).length+" Aufgaben, bis zu "+(c.aufgaben||[]).length*CHECKOUT_BE_NACH_FEHLERN[0]+" BE (die Bepunktung steht oben im Test)."}</small></div>${a?.abgegeben?"":`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Jetzt starten"}</button>`}</div>`;
+  if(isTeacher())return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(c.titel||"")}</b><small>Beenden, sobald alle fertig sind – danach wird automatisch ausgewertet.</small></div><button class="primary"onclick="openCheckoutMonitor('${c.id}')">Live-Übersicht</button></div>`;
+  return`<div class="co-banner"><span class="co-live-punkt"></span><div><b>Check-out läuft: ${esc(c.titel||"")}</b><small>${a?.abgegeben?"Du hast abgegeben. Das Ergebnis siehst du, sobald deine Lehrkraft den Test beendet.":"Deine Lehrkraft hat den Test freigeschaltet."}</small></div>${a?.abgegeben?"":`<button class="primary"onclick="openCheckoutTest('${c.id}')">${a?"Weiter":"Jetzt starten"}</button>`}</div>`;
  }).join("");
 }
 
 // ---- Editor (Lehrkraft): strukturiert nach der ISB-Vorgabe für K-Prim ----
-// ① Situation (Vignette) → ② 2 K-Prim-Aufgaben (Einleitungssatz + genau
+// ① Situation (Vignette) → ② 3–5 K-Prim-Aufgaben (Einleitungssatz + genau
 // 4 Aussagen) → ③ Checkliste. Automatische Hinweise prüfen, was sich prüfen
 // lässt (Längen, absolute/vage Begriffe, doppelte Verneinung, Muster).
 // ---- Aufgabenbank und Vorlagen für Check-outs -------------------------------
@@ -8195,2110 +8340,652 @@ function checkoutLiveBannerHTML(d){
 // „erklaerung“ ist eine kurze Begründung, die Schüler:innen erst NACH der Auswertung sehen.
 const CO_AUFGABENBANK=[
  {
-  "id": "paed-beziehung",
-  "titel": "Pädagogische Beziehung",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Ganztagsbetreuung einer Grundschule",
-   "zeilen": false,
-   "text": "Sie absolvieren Ihr Praktikum in der Ganztagsbetreuung einer Grundschule. Der achtjährige Felix ist seit dem Schulwechsel zurückhaltend. Betreuerin Frau Öztürk begrüßt ihn morgens mit Namen und fragt, woran er gerade arbeitet. Löst er eine Aufgabe falsch, bemerkt sie seine Unsicherheit, sagt ruhig, Fehler gehörten zum Üben dazu, und zeigt ihm einen anderen Weg. Sie bringt ihm wie versprochen ein Schachspiel mit und erklärt, dass sie auch andere Kinder unterstützen muss. Nach einigen Wochen bittet Felix von sich aus eine Mitschülerin um Hilfe."
-  },
-  "kontext": "",
-  "stamm": "Frau Öztürk gestaltet die pädagogische Beziehung förderlich, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… sie Felix durch persönliche Begrüßung und Interesse an seiner Arbeit Wertschätzung entgegenbringt und ihm damit Sicherheit vermittelt.",
-    "richtig": true,
-    "erklaerung": "Wertschätzung ist ein zentrales Merkmal einer förderlichen Beziehung."
-   },
-   {
-    "text": "… sie ihre Zusage einhält und ihre begrenzte Zeit offen darlegt, sodass Felix sich auf sie verlassen kann.",
-    "richtig": true,
-    "erklaerung": "Verlässlichkeit und Echtheit schaffen Vertrauen."
-   },
-   {
-    "text": "… sie Felix bei Schwierigkeiten sofort die Lösung vorgibt, weil eine förderliche Beziehung das Kind vor Misserfolgen bewahren soll.",
-    "richtig": false,
-    "erklaerung": "Eine förderliche Beziehung unterstützt die Selbstständigkeit und lässt Fehler als Lernchance zu."
-   },
-   {
-    "text": "… sie sein Unbehagen wahrnimmt und sich in seine Lage einfühlt, bevor sie eine alternative Vorgehensweise vorschlägt.",
-    "richtig": true,
-    "erklaerung": "Einfühlungsvermögen (Empathie) ist ein Merkmal einer förderlichen Beziehung."
-   }
-  ]
- },
- {
-  "id": "erz-einrichtungen",
-  "titel": "Einrichtungen der Erziehung",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Wohngruppe „Brückenhaus“",
-   "zeilen": false,
-   "text": "In Ihrem Praktikum in der Wohngruppe „Brückenhaus“ lernen Sie die zehnjährige Sofia kennen. Sie lebt seit vier Monaten dort, weil ihre Mutter schwer erkrankt ist und ihr Vater die Betreuung nicht übernehmen kann. Die Wohngruppe sichert Versorgung, Tagesstruktur und Beziehungsangebote. Sofia besucht vormittags die Grundschule. An zwei Nachmittagen pro Woche geht sie in den Hort in der Nachbarschaft und macht dort ihre Hausaufgaben. Am Wochenende besucht sie ihre Mutter im Krankenhaus."
-  },
-  "kontext": "",
-  "stamm": "Die Einrichtungen werden fachlich zutreffend zugeordnet, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… die Wohngruppe als familienersetzende Einrichtung gilt, weil sie Aufgaben der Familie im Lebensalltag des Mädchens übernimmt.",
-    "richtig": true,
-    "erklaerung": "Heimerziehung und Wohngruppen ersetzen die Familie, wenn Kinder dort nicht leben können."
-   },
-   {
-    "text": "… der Hort als familienergänzende Einrichtung gilt, da er Begleitung und Förderung neben dem Elternhaus anbietet.",
-    "richtig": true,
-    "erklaerung": "Der Hort begleitet Schulkinder in der Freizeit und unterstützt die Familie, ohne sie zu ersetzen."
-   },
-   {
-    "text": "… die Schule als familienersetzende Einrichtung gilt, weil sie den Kindern verpflichtende Bildungsangebote macht.",
-    "richtig": false,
-    "erklaerung": "Die Schule hat einen Bildungs- und Erziehungsauftrag, ersetzt die Familie aber nicht."
-   },
-   {
-    "text": "… Wohngruppe und Hort dieselbe Zielgruppe haben, weil beide Angebote sich an Kinder in familiären Krisen richten.",
-    "richtig": false,
-    "erklaerung": "Der Hort richtet sich an Schulkinder allgemein; die Wohngruppe an Kinder, die vorübergehend oder dauerhaft nicht in ihrer Familie leben können."
-   }
-  ]
- },
- {
-  "id": "erleben-verhalten-handeln",
-  "titel": "Erleben, Verhalten und Handeln in der Praxis",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Grundschulklasse",
-   "zeilen": false,
-   "text": "In Ihrem Praktikum in einer Grundschulklasse beobachten Sie den siebenjährigen Leon. Bei der Rückgabe der Mathematikarbeit senkt er den Blick, zerknüllt das Blatt und schiebt es in seinen Ranzen. Später erzählt er der Lehrerin Frau Brandt, dass er Sorge hatte, seine Eltern könnten schimpfen. Frau Brandt setzt sich in der Pause zu ihm, bespricht Lernwege mit ihm und vereinbart, die nächste Arbeit gemeinsam vorzubereiten. Leon entschließt sich daraufhin, täglich zehn Minuten zu üben, und legt dafür einen Plan an."
-  },
-  "kontext": "",
-  "stamm": "Die Situation wird fachlich zutreffend beschrieben, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… das Zerknüllen des Blattes als beobachtbares Verhalten eingeordnet wird, weil Außenstehende es unmittelbar wahrnehmen können.",
-    "richtig": true,
-    "erklaerung": "Verhalten umfasst alle von außen beobachtbaren Äußerungen."
-   },
-   {
-    "text": "… Leons Sorge als Verhalten eingeordnet wird, weil er sie einer Erwachsenen mitteilt und sie damit für andere sichtbar wird.",
-    "richtig": false,
-    "erklaerung": "Die Sorge ist Erleben und nur ihm selbst zugänglich. Beobachtbar ist seine Mitteilung darüber."
-   },
-   {
-    "text": "… Leons Entschluss, nach Plan zu üben, als Handeln gilt, da er bewusst und mit Absicht ein Ziel verfolgt.",
-    "richtig": true,
-    "erklaerung": "Handeln ist bewusstes, zielgerichtetes Verhalten mit einer Absicht."
-   },
-   {
-    "text": "… die Beschäftigung mit Leons Sorge der Psychologie zuzuordnen ist, während die Frage nach Frau Brandts absichtsvoller Unterstützung Gegenstand der Pädagogik ist.",
-    "richtig": true,
-    "erklaerung": "Psychologie untersucht Erleben und Verhalten; die Pädagogik untersucht Erziehung als absichtsvolle Einwirkung."
-   }
-  ]
- },
- {
-  "id": "paed-bereiche-jugendtreff",
-  "titel": "Die Gegenstandsbereiche der Pädagogik im Jugendtreff",
+  "id": "freud-instanzen",
+  "titel": "Freud: Instanzenmodell im Alltag",
   "lbNum": 1,
   "vignette": {
    "titel": "Jugendtreff",
-   "zeilen": false,
-   "text": "In Ihrem Praktikum im Jugendtreff bietet Sozialpädagoge Herr Yilmaz einen Kochabend an. Die Jugendlichen dürfen das Menü selbst mitbestimmen. Als der 15-jährige Jan abfällig über eine Mitschülerin spricht, weist Herr Yilmaz ihn ruhig darauf hin, wie das bei ihr ankommt. Jan nimmt den Hinweis an, weil er Herrn Yilmaz vertraut."
+   "text": "Im Jugendtreff einer Kleinstadt steht der 15-jährige Jonas am Buffet vor dem letzten Stück Pizza. Er hat großen Hunger und möchte sofort zugreifen. Dann fällt ihm auf, dass seine Freundin Lea noch nichts gegessen hat. Er denkt: „Das wäre unfair“, und der Gedanke ist ihm unangenehm. Schließlich teilt er das Stück, gibt Lea eine Hälfte und isst die andere selbst. Die Sozialarbeiterin Frau Kraus beobachtet die Szene und bespricht sie später im Team.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Die Situation wird fachlich zutreffend den Gegenstandsbereichen der Pädagogik zugeordnet, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach dem PDF „Gegenstand der Pädagogik“ (fünf Gegenstandsbereiche). Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… der Hinweis an Jan und seine Reaktion dem Bereich „Beziehung zwischen Erzieher und zu Erziehendem“ zugeordnet werden, weil das Vertrauen zu Herrn Yilmaz beeinflusst, ob Jan den Hinweis annimmt.",
-    "richtig": true,
-    "erklaerung": "Erziehung geschieht zwischen Menschen. Vertrauen erleichtert es, Kritik und Unterstützung anzunehmen."
-   },
-   {
-    "text": "… der Jugendtreff als „Einrichtung der Erziehung“ gilt, da er Jugendlichen Räume für Mitbestimmung und Freizeit bietet.",
-    "richtig": true,
-    "erklaerung": "Jugendarbeit schafft Räume für Mitbestimmung und Freizeit. Der Jugendtreff ist eine Einrichtung der Erziehung."
-   },
-   {
-    "text": "… der Hinweis an Jan dem Bereich „Einrichtungen der Erziehung“ zugeordnet wird, weil er im Jugendtreff stattfindet.",
-    "richtig": false,
-    "erklaerung": "Der Hinweis ist eine erzieherische Handlung mit einer Absicht und gehört zu „Ziele und Handlungen der Erziehung“. Die Einrichtung ist der Jugendtreff selbst."
-   },
-   {
-    "text": "… Erziehung im Jugendtreff nicht zur Pädagogik zählt, weil Erziehung nur in der Familie stattfindet.",
-    "richtig": false,
-    "erklaerung": "Erziehung findet auch in Einrichtungen wie Kita, Schule oder Jugendzentrum statt und ist Gegenstand der Pädagogik."
-   }
-  ]
- },
- {
-  "id": "erz-wiss-praxis-kinderhaus",
-  "titel": "Erziehungswissenschaft und Erziehungspraxis im Kinderhaus",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Kinderhaus",
-   "zeilen": false,
-   "text": "Im Team des Kinderhauses, in dem Sie Ihr Praktikum absolvieren, wird ein Fachartikel gelesen, der verschiedene Erziehungsstile untersucht und Ergebnisse aus mehreren Studien zusammenfasst. Leiterin Frau Roth erkennt, dass ihr eigener Umgang mit Grenzen von den Erfahrungen ihrer Kindheit geprägt ist. Sie entwickelt mit dem Team einen Leitfaden zum Grenzensetzen und wertet ihn nach drei Monaten in einer Teamsitzung aus."
-  },
-  "kontext": "",
-  "stamm": "Erziehungswissenschaft und Erziehungspraxis werden fachlich zutreffend zugeordnet, wenn …",
+  "stamm": "Jonas’ Verhalten lässt sich mit dem Instanzenmodell nach Freud fachlich zutreffend erklären, wenn …",
   "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… die gelesene Veröffentlichung als Erziehungswissenschaft gilt, da sie Erziehung systematisch erforscht und begründete, verallgemeinerbare Aussagen anbietet.",
+    "text": "… sein spontaner Wunsch nach sofortiger Bedürfnisbefriedigung dem Es zugeordnet wird, das nach dem Lustprinzip arbeitet.",
     "richtig": true,
-    "erklaerung": "Erziehungswissenschaft gewinnt systematisch Erkenntnisse über Erziehung."
+    "erklaerung": "Das Es strebt nach unmittelbarer Befriedigung der Triebe (Lustprinzip)."
    },
    {
-    "text": "… die Auswertung im Team als Erziehungswissenschaft gilt, weil dort Beobachtungen aus einer einzigen Einrichtung gesammelt werden.",
+    "text": "… seine Hemmung vor dem Zugreifen als Leistung des Es eingeordnet wird, das Gebote und Verbote vertritt.",
     "richtig": false,
-    "erklaerung": "Die Teamauswertung ist Reflexion der Praxis; für allgemeingültige Aussagen reichen Erfahrungen aus einer Einrichtung nicht."
+    "erklaerung": "Gebote und Verbote vertritt das Über-Ich; das Es kennt keine Normen."
    },
    {
-    "text": "… Frau Roths Selbstreflexion zeigt, dass Erziehungspraxis auch von der eigenen Biografie der Erziehenden beeinflusst wird.",
+    "text": "… die Überlegung, dass Zugreifen unfair wäre, dem Über-Ich zugeschrieben wird, das moralische Normen vertritt.",
     "richtig": true,
-    "erklaerung": "Erziehungspraxis wird auch von eigenen Erfahrungen und Alltagstheorien geprägt."
+    "erklaerung": "Das Über-Ich enthält verinnerlichte Normen und Werte (Gewissen)."
    },
    {
-    "text": "… das gemeinsam entwickelte Regelwerk als Erziehungspraxis gilt, weil es das Handeln im Alltag der Kinder gestaltet.",
+    "text": "… die Entscheidung zum Teilen als Leistung des Ichs gilt, das zwischen Es, Über-Ich und Realität vermittelt.",
     "richtig": true,
-    "erklaerung": "Erziehungspraxis ist konkretes erzieherisches Handeln im Alltag."
+    "erklaerung": "Das Ich arbeitet nach dem Realitätsprinzip und vermittelt zwischen den Ansprüchen der anderen Instanzen."
    }
   ]
  },
  {
-  "id": "erz-ziele-klassendienst",
-  "titel": "Erziehungsziele und Erziehungshandlungen in der Ganztagsklasse",
+  "id": "freud-psychosexuell",
+  "titel": "Freud: Psychosexuelle Entwicklung und Fixierung",
   "lbNum": 1,
   "vignette": {
-   "titel": "Ganztagsklasse",
-   "zeilen": false,
-   "text": "In der Ganztagsklasse, in der Sie Ihr Praktikum absolvieren, hat das Team das Erziehungsziel „Verantwortungsbewusstsein“ vereinbart. Lehrer Herr Baum überträgt den Kindern reihum das Amt des Klassendienstes und bespricht freitags mit ihnen, was gut geklappt hat. Kollegin Frau Sander prüft täglich, ob die Tafel gewischt wurde, und teilt den Dienst bei Mängeln kommentarlos neu zu. Viele Eltern wünschen sich vor allem gute Noten."
+   "titel": "Kinderkrippe",
+   "text": "In der Kinderkrippe „Regenbogen“ wird die zweijährige Mia seit einigen Wochen an die Toilette herangeführt. Ihre Eltern wünschen, dass Mia bis zum Sommer trocken ist, und bestehen auf festen Toilettenzeiten. Mia tobt beim Malen mit Fingerfarben gerne im Matsch, wehrt sich aber gegen das Sitzen auf der Toilette und hält den Stuhlgang zurück. Die Erzieherin Frau Yilmaz spricht die Situation im Elterngespräch an.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Erziehungsziele und Erziehungshandlungen werden fachlich zutreffend aufeinander bezogen, wenn …",
+  "stamm": "Mias Situation wird mit der psychosexuellen Entwicklung nach Freud fachlich zutreffend beschrieben, wenn …",
   "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… die Übertragung eines Amtes mit anschließender Besprechung das gemeinsam festgelegte Ziel unterstützt, weil die Kinder Verantwortung erproben und reflektieren.",
+    "text": "… Mias Alter und die Sauberkeitserziehung auf die anale Phase verweisen, in der die Kontrolle über die Ausscheidung bedeutsam wird.",
     "richtig": true,
-    "erklaerung": "Selbst Verantwortung übernehmen und darüber sprechen fördert Verantwortungsbewusstsein."
+    "erklaerung": "In der analen Phase steht nach Freud die Kontrolle der Ausscheidung im Mittelpunkt."
    },
    {
-    "text": "… die tägliche Kontrolle mit Neuzuteilung verantwortliches Handeln aufbaut, da die Kinder klare Folgen erleben.",
+    "text": "… eine Fixierung bedeutet, dass ein Kind eine Phase erfolgreich abgeschlossen hat und danach in die nächste Phase wechselt.",
     "richtig": false,
-    "erklaerung": "Fremdkontrolle ohne Gespräch fördert eher Anpassung als eigene Verantwortung."
+    "erklaerung": "Fixierung heißt, dass die Entwicklung in einer Phase verharrt, z. B. durch Überbefriedigung oder Frustration."
    },
    {
-    "text": "… der Wunsch der Eltern automatisch zum verbindlichen Erziehungsziel der Klasse wird, obwohl das Team eigene Ziele festgelegt hat.",
+    "text": "… Mia sich in der phallischen Phase befindet, weil sie ihre Umwelt aktiv mit den Händen erkundet.",
     "richtig": false,
-    "erklaerung": "Erziehungsziele stammen aus mehreren Quellen (z. B. Eltern, Gesellschaft, Einrichtung) und werden abgewogen."
+    "erklaerung": "Die phallische Phase betrifft das Alter von etwa drei bis sechs Jahren; Mia befindet sich in der analen Phase."
    },
    {
-    "text": "… das gemeinsame Ziel den Lehrkräften Orientierung bietet und einen Maßstab liefert, an dem sich die Wirkung ihrer Maßnahmen beurteilen lässt.",
+    "text": "… die Phasen nach Freud in einer festgelegten Reihenfolge ablaufen, sodass die orale Phase der analen Phase vorausgeht.",
     "richtig": true,
-    "erklaerung": "Erziehungsziele geben Orientierung und dienen als Bewertungsmaßstab."
+    "erklaerung": "Reihenfolge nach Freud: oral, anal, phallisch, Latenz, genital."
    }
   ]
  },
  {
-  "id": "psy-nora",
-  "titel": "Gegenstand der Psychologie: Verhalten und Erleben",
+  "id": "freud-abwehr",
+  "titel": "Freud: Abwehrmechanismen erkennen",
   "lbNum": 1,
   "vignette": {
-   "titel": "Grundschule",
-   "zeilen": false,
-   "text": "Im Praktikum in einer Grundschule beobachten Sie die achtjährige Nora nach der Mathematikarbeit: Sie sitzt still am Platz, schaut auf ihre Hände und seufzt leise. Auf die Nachfrage der Lehrerin antwortet sie: „Ich habe Angst, dass ich wieder schlecht bin.“ Ihre Banknachbarin flüstert: „Nora ärgert sich bestimmt.“"
+   "titel": "Kindertagesstätte",
+   "text": "Nach der Geburt seiner Schwester Lena nässt der vierjährige Ben in der Kindertagesstätte wieder ein, obwohl er schon seit Monaten trocken war, und verlangt nach dem Fläschchen. Außerdem behauptet er gegenüber der Erzieherin Frau Schmid, die anderen Kinder seien gemein zu ihm, obwohl er es ist, der ihnen die Bausteine wegnimmt. Auf Fragen nach seiner Schwester erzählt er kaum etwas und wechselt schnell das Thema.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Die Situation wird fachlich zutreffend beschrieben, wenn …",
-  "pruefen": "Neu erstellt (Claude) auf Basis der Lehrtexte (PDF 01–05) und der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "stamm": "Bens Verhalten wird mithilfe der Abwehrmechanismen nach Freud fachlich zutreffend eingeordnet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… das Seufzen und der Blick auf die Hände als Verhalten gelten, weil Außenstehende beides wahrnehmen können.",
+    "text": "… das Einnässen und der Wunsch nach dem Fläschchen als Regression gedeutet werden, also als Rückfall auf eine frühere Entwicklungsstufe.",
     "richtig": true,
-    "erklaerung": "Verhalten umfasst alle Äußerungen, die andere von außen beobachten können (z. B. Sprechen, Körperbewegungen, Mimik)."
+    "erklaerung": "Regression: Rückkehr zu früheren, als sicherer erlebten Verhaltensweisen."
    },
    {
-    "text": "… Noras Angst als Verhalten gilt, da sie diese ausspricht und dadurch anderen zugänglich macht.",
+    "text": "… Bens Vorwurf gegenüber den anderen Kindern als Projektion gilt, bei der eigene Impulse anderen zugeschrieben werden.",
+    "richtig": true,
+    "erklaerung": "Projektion: Eigene, unerwünschte Impulse werden auf andere Personen übertragen."
+   },
+   {
+    "text": "… sein Themenwechsel als Identifikation gilt, bei der er Eigenschaften seiner Schwester übernimmt.",
     "richtig": false,
-    "erklaerung": "Die Angst ist Erleben, das nur Nora selbst wahrnehmen kann. Beobachtbar ist ihre Äußerung darüber, also Verhalten."
+    "erklaerung": "Identifikation bedeutet die Übernahme von Eigenschaften einer Person; ein Themenwechsel erfüllt diese Bedeutung nicht."
    },
    {
-    "text": "… die Bemerkung der Mitschülerin als Vermutung über Noras Erleben gilt, die nur Nora selbst bestätigen oder korrigieren kann.",
-    "richtig": true,
-    "erklaerung": "Erleben wird nur durch Selbstbeobachtung zugänglich; Fremdbeobachtung kann es allenfalls erschließen."
-   },
-   {
-    "text": "… Noras Gefühl und ihr sichtbares Verhalten als zwei Seiten desselben psychischen Geschehens gelten, die gleichzeitig auftreten.",
-    "richtig": true,
-    "erklaerung": "Erleben und Verhalten laufen nicht nacheinander ab, sondern gleichzeitig und hängen eng zusammen."
+    "text": "… Abwehrmechanismen bewusst und planvoll eingesetzt werden, damit Konflikte mit anderen Personen gelöst werden.",
+    "richtig": false,
+    "erklaerung": "Abwehrmechanismen laufen unbewusst ab und helfen dem Ich, Angst aus inneren Konflikten zu bewältigen."
    }
   ]
  },
  {
-  "id": "paed-lehner",
-  "titel": "Gegenstand der Pädagogik",
+  "id": "freud-abwehr-fall",
+  "titel": "Freud: Abwehr in der Wohngruppe",
   "lbNum": 1,
   "vignette": {
-   "titel": "Studie und Schulalltag",
-   "zeilen": false,
-   "text": "Die Erziehungswissenschaftlerin Frau Dr. Lehner untersucht in einer Studie, wie sich das Vertrauen von Jugendlichen zu ihrer Lehrkraft darauf auswirkt, ob sie Kritik annehmen. Lehrer Herr Schulz führt in seiner achten Klasse Rückmeldegespräche ein, in denen er jedem Kind ein persönliches Lernziel vorschlägt. Im Praktikum lesen Sie den Studienbericht und Herrn Schulz’ Erfahrungsnotizen."
+   "titel": "Wohngruppe",
+   "text": "Die 16-jährige Sarah lebt in einer Wohngruppe der Jugendhilfe. Seit dem Tod ihres Großvaters spricht sie in Gesprächen mit der Betreuerin Frau Dietz nie über ihn. Fragt man sie nach den Ferien bei ihm, sagt sie, sie könne sich an nichts mehr erinnern. Bei Streit in der Gruppe wird sie laut und wirft anderen vor, sie würden sie provozieren, obwohl die Gruppe sie eher in Ruhe lässt. Als ein Mitbewohner ihr seinen Kummer anvertraut, tröstet sie ihn mit genau den Worten, die früher ihr Großvater für sie hatte.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Pädagogik wird fachlich zutreffend eingeordnet, wenn …",
-  "pruefen": "Neu erstellt (Claude) auf Basis der Lehrtexte (PDF 01–05) und der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "stamm": "Sarahs Verhalten lässt sich mit Abwehrmechanismen nach Freud fachlich zutreffend deuten, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… Frau Dr. Lehners Studie der Erziehungswissenschaft und Herrn Schulz’ Gesprächsangebote der Erziehungspraxis zugeordnet werden.",
+    "text": "… ihre fehlende Erinnerung an die Ferien beim Großvater als Verdrängung schmerzlicher Inhalte aus dem Bewusstsein eingeordnet wird.",
     "richtig": true,
-    "erklaerung": "Erziehungswissenschaft untersucht, wie Erziehung abläuft und wirkt. Erziehungspraxis ist das tatsächliche erzieherische Handeln mit erzieherischer Absicht."
+    "erklaerung": "Verdrängung: Belastende Inhalte werden unbewusst aus dem Bewusstsein ferngehalten."
    },
    {
-    "text": "… die Frage nach der Wirkung des Vertrauensverhältnisses auf die Akzeptanz von Kritik dem Bereich „Beziehung zwischen Erzieher und zu Erziehendem“ zugeordnet wird.",
-    "richtig": true,
-    "erklaerung": "Vertrauen prägt die Beziehung und beeinflusst, ob Kritik oder Unterstützung angenommen wird."
-   },
-   {
-    "text": "… Herrn Schulz’ Gespräche der Erziehungswissenschaft zugerechnet werden, weil sie geplant sind und mit Zielen verbunden werden.",
+    "text": "… ihr Vorwurf der Provokation als Identifikation gilt, bei der sie Eigenschaften anderer Personen für sich übernimmt.",
     "richtig": false,
-    "erklaerung": "Geplantes erzieherisches Handeln mit Absicht ist Erziehungspraxis. Erziehungswissenschaft untersucht Erziehung."
+    "erklaerung": "Wer eigene Impulse anderen zuschreibt, nutzt die Projektion; Identifikation meint die Übernahme fremder Eigenschaften."
    },
    {
-    "text": "… die vorgeschlagenen Lernziele dem Bereich „Ziele und Handlungen der Erziehung“ zugeordnet werden, weil sie festlegen, wohin die Erziehung führen soll.",
+    "text": "… das Trösten mit den Worten des Großvaters als Identifikation gilt, bei der Eigenschaften einer Bezugsperson übernommen werden.",
     "richtig": true,
-    "erklaerung": "Erziehung verfolgt Ziele; aus ihnen ergeben sich konkrete Handlungen wie Gespräche oder Regeln."
+    "erklaerung": "Identifikation: Übernahme von Eigenschaften oder Verhaltensweisen einer wichtigen Person."
+   },
+   {
+    "text": "… ihr lautes Verhalten im Streit als Fixierung gilt, weil sie als Kleinkind in der phallischen Phase verharrt sei.",
+    "richtig": false,
+    "erklaerung": "Aus dem lauten Verhalten allein lässt sich keine Fixierung ableiten; Hinweise auf eine Phase fehlen im Fall."
    }
   ]
  },
  {
-  "id": "alltag-bauer",
-  "titel": "Alltagstheorie und wissenschaftliche Aussagen",
+  "id": "freud-wuerdigung",
+  "titel": "Freud: Kritische Würdigung der Theorie",
   "lbNum": 1,
   "vignette": {
-   "titel": "Lehrerkonferenz",
-   "zeilen": false,
-   "text": "In der Lehrerkonferenz sagt Frau Bauer: „Kinder, die viel fernsehen, sind aggressiver. Bei meinen drei Söhnen war das so.“ Herr Tan entgegnet, er kenne eine Studie, in der 300 Kinder mit einem standardisierten Bogen beobachtet wurden. Zwei geschulte Beobachterinnen kamen unabhängig voneinander zu gleichen Einschätzungen. Die Studie beschreibt einen wahrscheinlichen Zusammenhang und nennt einzelne Ausnahmen."
+   "titel": "Teamsitzung im Kinderhaus",
+   "text": "In einer Teamsitzung des Kinderhauses „Sonnenschein“ diskutieren die pädagogischen Fachkräfte, ob die psychoanalytische Theorie nach Freud kindliches Verhalten gut erklärt. Die Praktikantin Jana berichtet, Freuds Annahmen seien vor allem in Behandlungen erwachsener Patientinnen und Patienten entstanden. Der Erzieher Tobias meint, man könne nicht überprüfen, ob ein Kind tatsächlich einen unbewussten Konflikt austrägt. Die Kollegin Fatma hält dagegen, die Theorie gebe dennoch wichtige Anregungen für den Umgang mit Kindern, zum Beispiel durch den Blick auf frühe Erfahrungen.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Die beiden Aussagen werden fachlich zutreffend beurteilt, wenn …",
-  "pruefen": "Neu erstellt (Claude) auf Basis der Lehrtexte (PDF 01–05) und der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "stamm": "Der Erklärungswert der psychoanalytischen Theorie wird fachlich zutreffend gewürdigt, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… Frau Bauers Aussage als überprüfbar gilt, weil sie ihre drei Söhne über viele Jahre genau verfolgt hat.",
-    "richtig": false,
-    "erklaerung": "Überprüfbar heißt, dass andere die Aussage und ihre Gewinnung nachvollziehen und wiederholen können. Persönliche Erfahrung erfüllt das nicht."
-   },
-   {
-    "text": "… Frau Bauers Aussage als Alltagstheorie gilt, weil sie aus persönlicher Erfahrung stammt und auf Kinder allgemein übertragen wird.",
+    "text": "… die mangelnde empirische Überprüfbarkeit der psychosexuellen Phasen als Schwäche der Theorie benannt wird.",
     "richtig": true,
-    "erklaerung": "Alltagstheorien sind subjektiv, nicht systematisch gewonnen und verallgemeinern oft unzulässig („von einem auf alle“)."
+    "erklaerung": "Unbewusste Vorgänge und Phasen lassen sich kaum empirisch überprüfen; das ist ein zentraler Kritikpunkt."
    },
    {
-    "text": "… die übereinstimmenden Ergebnisse der zwei unabhängigen Auswertenden das Merkmal der Objektivität stützen.",
-    "richtig": true,
-    "erklaerung": "Objektiv bedeutet: Verschiedene Forscher kommen bei gleichem Sachverhalt und gleichen Bedingungen zum gleichen Ergebnis."
-   },
-   {
-    "text": "… die Studie ihren wissenschaftlichen Anspruch verliert, weil manche Kinder vom beschriebenen Befund abweichen und nur Wahrscheinlichkeiten angegeben werden.",
+    "text": "… die Datengrundlage aus systematischen Beobachtungen gesunder Kinder als Stärke der Theorie hervorgehoben wird.",
     "richtig": false,
-    "erklaerung": "Absolute Aussagen über Menschen sind kaum möglich. Wissenschaftliche Aussagen sind Wahrscheinlichkeitsaussagen, Ausnahmen bleiben möglich."
+    "erklaerung": "Freud stützte sich überwiegend auf Behandlungen erwachsener Patienten, nicht auf systematische Kinderbeobachtung."
+   },
+   {
+    "text": "… die Bekanntheit der Theorie und ihr Einfluss auf Therapien als Beleg für ihre empirische Bestätigung gelten.",
+    "richtig": false,
+    "erklaerung": "Bekanntheit und Einfluss ersetzen keine empirische Überprüfung."
+   },
+   {
+    "text": "… der Hinweis auf die Bedeutung früher Kindheitserfahrungen als bleibender Beitrag der Theorie anerkannt wird.",
+    "richtig": true,
+    "erklaerung": "Die Betonung früher Erfahrungen für die Persönlichkeitsentwicklung gilt als wichtiger Impuls der Psychoanalyse."
    }
   ]
  },
  {
-  "id": "exp-pausen",
-  "titel": "Das Experiment",
+  "id": "freud-erziehung",
+  "titel": "Freud: Folgerungen für die Erziehung",
   "lbNum": 1,
   "vignette": {
-   "titel": "Schulpsychologische Studie",
-   "zeilen": false,
-   "text": "Eine Schulpsychologin möchte wissen, ob eine Bewegungspause den Lernerfolg verbessert. Sie legt selbst fest, dass in zwei achten Klassen nach 45 Minuten Unterricht zehn Minuten lang entweder Bewegung (Klasse A) oder Ruhe (Klasse B) stattfindet, und zählt danach, wie viele Rechenaufgaben die Lernenden in fünf Minuten lösen. Im nächsten Schuljahr führt sie denselben Ablauf mit zwei weiteren Klassen durch."
+   "titel": "Krippe „Kleine Wichtel“",
+   "text": "Die Eltern des zweieinhalbjährigen Noah drängen die Erzieherin Frau Keller, Noah müsse bis zum Sommer „sauber“ sein. Sie loben ihn nur, wenn er die Toilette benutzt, und schimpfen bei Missgeschicken. Frau Keller schlägt vor, Noah das Tempo selbst bestimmen zu lassen, Missgeschicke gelassen zu nehmen und Noahs Freude am Matschen und Spielen nicht einzuschränken.",
+   "zeilen": false
   },
   "kontext": "",
-  "stamm": "Das Vorgehen wird fachlich zutreffend beschrieben, wenn …",
-  "pruefen": "Neu erstellt (Claude) auf Basis der Lehrtexte (PDF 01–05) und der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "stamm": "Frau Kellers Vorschlag ist aus psychoanalytischer Sicht nach Freud fachlich zutreffend begründet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
   "aussagen": [
    {
-    "text": "… die Festlegung von Zeitpunkt, Länge und Art der Pause durch die Psychologin dem Kriterium der Willkürlichkeit entspricht.",
+    "text": "… Zwang und Strafe bei der Sauberkeitserziehung die Persönlichkeitsentwicklung nach Freud nicht beeinflussen.",
+    "richtig": false,
+    "erklaerung": "Nach Freud können Zwang und Strafe zu einer Fixierung und zu prägenden Persönlichkeitszügen führen."
+   },
+   {
+    "text": "… eine gelassene Haltung bei Missgeschicken das Risiko einer Fixierung in der analen Phase verringern soll.",
     "richtig": true,
-    "erklaerung": "Willkürlichkeit bedeutet, dass der Forscher Bedingungen, Situation, Ort und Zeit selbst bestimmen kann."
+    "erklaerung": "Gelassenheit vermeidet Überforderung und Frustration in dieser Phase."
    },
    {
-    "text": "… die spätere Wiederholung mit anderen Lerngruppen als Variierbarkeit gilt, weil derselbe Ablauf erneut umgesetzt wird.",
-    "richtig": false,
-    "erklaerung": "Das erneute Durchführen ist Wiederholbarkeit. Variierbarkeit meint das Verändern der Bedingungen (hier Bewegung oder Ruhe)."
+    "text": "… Noahs Freude am Matschen und Spielen als Teil der Phase akzeptiert wird, statt sie zu unterbinden.",
+    "richtig": true,
+    "erklaerung": "Die Befriedigung phasentypischer Bedürfnisse gilt als Voraussetzung für eine gelingende Entwicklung."
    },
    {
-    "text": "… es sich um ein Laborexperiment handelt, weil die Psychologin die Bedingungen selbst bestimmt.",
-    "richtig": false,
-    "erklaerung": "Die Untersuchung findet im Schulalltag statt und ist daher ein Feldexperiment. Das Laborexperiment findet unter kontrollierten Bedingungen im Labor statt."
-   },
-   {
-    "text": "… das Vorgehen als Beobachtung gilt, weil die Psychologin das Verhalten der Lerngruppen im Schulalltag aufzeichnet.",
-    "richtig": false,
-    "erklaerung": "Sie führt die Situation absichtlich selbst herbei. Das unterscheidet ein Experiment von einer bloßen Beobachtung."
+    "text": "… ein ausgewogenes Maß an Befriedigung und Begrenzung in der analen Phase als Voraussetzung für eine gelingende Entwicklung gilt.",
+    "richtig": true,
+    "erklaerung": "Weder Überbefriedigung noch Frustration fördern die Entwicklung; ein ausgewogenes Maß verringert das Risiko einer Fixierung."
    }
   ]
- }
+ },
+ {
+  "id": "bindung-phasen",
+  "titel": "Bindung: Begriff und Phasen der Bindungsentwicklung",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Krippe „Sonnenkäfer“",
+   "text": "Die zehn Monate alte Amira besucht seit zwei Wochen die Krippe „Sonnenkäfer“. Sie streckt die Arme nur nach ihren Eltern aus und beginnt zu weinen, als die Nachbarin sie auf den Arm nehmen möchte. Als ihre Mutter den Raum verlässt, protestiert Amira laut. Sobald die Mutter zurückkommt, beruhigt sie sich rasch. Die Bezugserzieherin Frau Albrecht notiert diese Beobachtungen für das Entwicklungsgespräch.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Amiras Verhalten wird mit der Bindungsentwicklung fachlich zutreffend beschrieben, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… ihre Bindungsentwicklung als abgeschlossen gilt, weil sie eine feste Bevorzugung ihrer Eltern zeigt.",
+    "richtig": false,
+    "erklaerung": "Die Bindungsentwicklung verläuft über mehrere Phasen bis ins Kleinkindalter; die Bevorzugung markiert eine mittlere Phase."
+   },
+   {
+    "text": "… der Protest bei der Trennung als Zeichen einer gestörten Bindung eingeordnet wird, weil Trennungsschmerz nicht normal sei.",
+    "richtig": false,
+    "erklaerung": "Trennungsprotest zeigt, dass eine Bindung besteht, und gehört zur Entwicklung."
+   },
+   {
+    "text": "… das Weinen bei der Nachbarin als Hinweis gilt, dass Amira zwischen vertrauten und fremden Personen unterscheidet.",
+    "richtig": true,
+    "erklaerung": "Fremdeln zeigt, dass ein Kind Bindungspersonen von Fremden unterscheidet."
+   },
+   {
+    "text": "… Bindung als dauerhaftes emotionales Band zu bestimmten Personen verstanden wird, das Nähe und Sicherheit vermittelt.",
+    "richtig": true,
+    "erklaerung": "Bindung ist eine enge, emotionale Beziehung, die Schutz und Sicherheit bietet."
+   }
+  ]
+ },
+ {
+  "id": "bindung-typologie",
+  "titel": "Bindung: Bindungstypen nach Ainsworth",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kindertagesstätte, Bringsituation",
+   "text": "Bei einer Beobachtung in der Kindertagesstätte „Villa Kunterbunt“ fallen drei Zweijährige in der Abschiedssituation auf. Lukas weint beim Abschied kurz, lässt sich von der Erzieherin trösten und spielt nach wenigen Minuten weiter. Bei der Abholung läuft er freudig zu seiner Mutter. Mara zeigt beim Abschied kaum eine Reaktion, spielt für sich und wendet sich bei der Abholung ab, als die Mutter sie aufnehmen will. Jonas klammert sich beim Abschied fest, weint lange und ist bei der Abholung kaum zu beruhigen. Er sucht die Nähe der Mutter und wehrt sie zugleich mit den Armen ab.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Die Kinder lassen sich den Bindungstypen nach Ainsworth fachlich zutreffend zuordnen, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Lukas als sicher gebunden gilt, weil er Trost annimmt und bei der Abholung die Nähe der Mutter sucht.",
+    "richtig": true,
+    "erklaerung": "Sicher gebundene Kinder nutzen die Bindungsperson als Trostquelle und begrüßen sie bei der Wiedervereinigung."
+   },
+   {
+    "text": "… Mara als unsicher-vermeidend gebunden gilt, weil sie Nähe zur Bindungsperson meidet und Gefühle kaum zeigt.",
+    "richtig": true,
+    "erklaerung": "Unsicher-vermeidende Kinder meiden Nähe und wirken bei Trennung kaum belastet."
+   },
+   {
+    "text": "… Jonas als sicher gebunden gilt, weil er intensiv auf die Trennung reagiert.",
+    "richtig": false,
+    "erklaerung": "Jonas sucht Nähe und wehrt sie zugleich ab; das entspricht dem unsicher-ambivalenten Typ."
+   },
+   {
+    "text": "… die Bindungstypen aus dem Verhalten der Kinder bei Trennung und Wiedervereinigung abgeleitet werden.",
+    "richtig": true,
+    "erklaerung": "Ainsworths „Fremde Situation“ erfasst das Verhalten bei Trennung und Wiedervereinigung."
+   }
+  ]
+ },
+ {
+  "id": "bindung-foerderung",
+  "titel": "Bindung: Eingewöhnung und Förderung",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Krippe „Sonnenkäfer“, Eingewöhnung",
+   "text": "In der Krippe „Sonnenkäfer“ beginnt die 14 Monate alte Leonie ihre Eingewöhnung. Die Leitung plant, dass ihre Mutter nur kurz im Raum bleibt und am zweiten Tag mehrere Stunden weggeht, damit Leonie schnell selbstständig wird. Die Bezugserzieherin Frau Vogel schlägt stattdessen vor, dass die Mutter zunächst dabei bleibt. Frau Vogel baut langsam die Rolle der Bezugsperson auf, und die Trennungszeiten werden schrittweise verlängert.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Frau Vogels Vorschlag wird aus bindungstheoretischer Sicht fachlich zutreffend begründet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… eine rasche Trennung die Bindung an die Mutter stärkt, weil Kinder dadurch früh Selbstständigkeit lernen.",
+    "richtig": false,
+    "erklaerung": "Eine zu schnelle Trennung kann Stress auslösen und den Aufbau einer sicheren Bindung erschweren."
+   },
+   {
+    "text": "… Frau Vogels feinfühliges Verhalten den Aufbau einer sekundären Bindungsbeziehung zu Leonie unterstützt.",
+    "richtig": true,
+    "erklaerung": "Feinfühligkeit und Verlässlichkeit fördern eine sekundäre Bindung zur Erzieherin."
+   },
+   {
+    "text": "… die Eingewöhnung als gelungen gilt, sobald Leonie nicht mehr weint, unabhängig von der Beziehung zur Erzieherin.",
+    "richtig": false,
+    "erklaerung": "Entscheidend ist eine vertrauensvolle Beziehung, nicht nur das Ausbleiben von Tränen."
+   },
+   {
+    "text": "… Bindungen zu Erzieherinnen die Bindung an die Eltern ersetzen, sodass diese an Bedeutung verlieren.",
+    "richtig": false,
+    "erklaerung": "Sekundäre Bindungen ergänzen die Bindung an die Eltern, sie ersetzen sie nicht."
+   }
+  ]
+ },
+ {
+  "id": "determinismus-versprecher",
+  "titel": "Freud: Psychischer Determinismus – Versprecher",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kindertagesstätte „Regenbogen“",
+   "text": "In der Kindertagesstätte „Regenbogen“ begrüßt die Erzieherin Frau Bauer beim Elternabend den Vater Herrn Lang versehentlich mit „Herr Kurz“. Kurz zuvor hatte es zwischen beiden einen Konflikt um die Abholzeiten gegeben. Frau Bauer ist verlegen und erklärt, sie sei an diesem Tag müde und zerstreut gewesen. Die Praktikantin Mara fragt im Team, wie Freud den Versprecher deuten würde.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Die Situation wird mit dem psychischen Determinismus nach Freud fachlich zutreffend gedeutet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Frau Bauers Hinweis auf Müdigkeit und Zerstreuung als ausreichende Ursache für den Versprecher gilt.",
+    "richtig": false,
+    "erklaerung": "Freud betrachtete Versprecher nicht als Folge von Müdigkeit oder Zerstreuung, sondern als von unbewussten seelischen Kräften bestimmt."
+   },
+   {
+    "text": "… der Versprecher als Fehlleistung gilt, hinter der eine unbewusste Absicht oder ein unbewusstes Motiv stehen kann.",
+    "richtig": true,
+    "erklaerung": "Nach dem psychischen Determinismus hat auch eine scheinbar zufällige Fehlleistung eine seelische Ursache."
+   },
+   {
+    "text": "… die Annahme zur Lehre gehört, dass Verhalten bei Kenntnis sämtlicher wirkender Ursachen sicher vorhersagbar wäre.",
+    "richtig": true,
+    "erklaerung": "Freud hielt Verhalten bei Kenntnis aller Ursachen für vorhersagbar; er selbst beschäftigte sich aber nur mit der Erklärung."
+   },
+   {
+    "text": "… Freud aus dem Konflikt um die Abholzeiten sicher vorhersagt, wann sich Frau Bauer erneut verspricht.",
+    "richtig": false,
+    "erklaerung": "Freud beschäftigte sich nicht mit der Vorhersage von Verhalten, sondern nur mit dessen Erklärung."
+   }
+  ]
+ },
+ {
+  "id": "determinismus-symptom-grenzen",
+  "titel": "Freud: Psychischer Determinismus – Symptom und Grenzen",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Tagespflege für Senioren",
+   "text": "In der Tagespflege für Senioren erlebt die Praktikantin Jana zwei Gäste. Frau Hartmann (78) klagt seit dem Wegzug ihrer Tochter ins Ausland über Magenschmerzen, die der Hausarzt organisch nicht erklären kann. Herr Kern (81) ist an Alzheimer erkrankt und nennt beim Mittagessen den Vornamen seiner Frau nicht mehr. Jana überlegt, was sich mit Freuds psychischem Determinismus erklären lässt und was nicht.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Der psychische Determinismus nach Freud wird auf die Situation fachlich zutreffend angewendet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Frau Hartmann den Zusammenhang zwischen dem Wegzug ihrer Tochter und den Schmerzen in der Regel selbst sofort erkennt.",
+    "richtig": false,
+    "erklaerung": "Die seelischen Prozesse, die Verhalten bestimmen, sind der Person selten bewusst."
+   },
+   {
+    "text": "… Frau Hartmanns Magenschmerzen als Symptom gelten, das mit einem persönlichen Lebensereignis bedeutungsvoll zusammenhängen kann.",
+    "richtig": true,
+    "erklaerung": "Symptome wie Magen- oder Rückenschmerzen treten nach Freud nicht zufällig auf, sondern hängen mit der Lebensgeschichte zusammen."
+   },
+   {
+    "text": "… Herrn Kerns Vergessen des Namens als Fehlleistung mit einem unbewussten Motiv gedeutet wird.",
+    "richtig": false,
+    "erklaerung": "Freud sieht Grenzen: Nicht jedes Verhalten lässt sich durch Unbewusstes erklären. Bei Alzheimer liegt eine Erkrankung vor."
+   },
+   {
+    "text": "… das Ziel psychoanalytischer Forschung darin besteht, die unbewussten Ursachen aufzuspüren und bewusst zu machen.",
+    "richtig": true,
+    "erklaerung": "Wenn Verhaltensweisen eine Bedeutung haben, sucht die Psychoanalyse nach den unbewussten, determinierenden Kräften."
+   }
+  ]
+ },
+ {
+  "id": "trieb-begriff",
+  "titel": "Freud: Triebquelle, Triebziel und Triebobjekt",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kita, nach dem Morgenkreis",
+   "text": "Der vierjährige Luca sitzt nach dem Morgenkreis in der Kita unruhig am Tisch. Sein Magen knurrt, er hat seit dem Aufstehen nichts gegessen. Er holt seine Brotdose, isst ein Käsebrot und wirkt danach entspannt und zufrieden. Die Erzieherin Frau Yilmaz meint, mit Nudeln oder einem Schokoriegel wäre Luca ebenfalls satt geworden.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Lucas Verhalten wird mit dem Triebbegriff nach Freud fachlich zutreffend beschrieben, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… das Knurren des Magens und der Hunger als körperlicher Vorgang der Triebquelle zugeordnet werden.",
+    "richtig": true,
+    "erklaerung": "Die Triebquelle ist ein körperlicher Vorgang in einem Organ oder Körperteil, z. B. Hunger."
+   },
+   {
+    "text": "… das Käsebrot als Triebziel gilt, da das Triebziel das Objekt ist, an dem die Triebhandlung vollzogen wird.",
+    "richtig": false,
+    "erklaerung": "Das Käsebrot ist das Triebobjekt. Das Triebziel ist die Befriedigung."
+   },
+   {
+    "text": "… Luca seinen Hunger nur mit Brot stillen kann, weil die Triebquelle das Triebobjekt festlegt.",
+    "richtig": false,
+    "erklaerung": "Ausschlaggebend ist, wie gut sich ein Objekt zur Befriedigung eignet; auch Nudeln oder Schokolade kommen infrage."
+   },
+   {
+    "text": "… die nachlassende Anspannung nach dem Essen das Triebziel darstellt, die Aufhebung des Reizzustandes an der Triebquelle.",
+    "richtig": true,
+    "erklaerung": "Das Triebziel ist die Befriedigung, die durch die Aufhebung des Reizzustandes an der Triebquelle erreicht wird."
+   }
+  ]
+ },
+ {
+  "id": "trieb-haupttriebe",
+  "titel": "Freud: Lebenstrieb und Todestrieb",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Kinderhaus „Sonnenschein“",
+   "text": "Im Kinderhaus „Sonnenschein“ beobachtet die Erzieherin Frau Keller die Geschwister Lena (5) und Tom (4). Lena hängt sehr an ihrer Mutter, weint bei jeder Verabschiedung kurz und freut sich bei der Abholung. Tom baut im Sandkasten mit Begeisterung Burgen und tritt sie später lachend wieder zusammen, auch die Burgen anderer Kinder. Dabei wirkt er sichtlich zufrieden.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Das Verhalten der Geschwister wird mit der Trieblehre nach Freud (ab 1920) fachlich zutreffend gedeutet, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Lenas enge Bindung an ihre Mutter als frühe Objektbesetzung gilt, da ihre Libido auf eine andere Person gerichtet ist.",
+    "richtig": true,
+    "erklaerung": "Die Ausrichtung der Libido auf andere Personen bezeichnet die Psychoanalyse als Objektbesetzung; die Bindung an die Mutter ist ein Beispiel für eine frühe Objektbesetzung."
+   },
+   {
+    "text": "… Toms Lust am Zerstören als Äußerungsform des Lebenstriebes gilt, dessen Antriebskraft Libido heißt.",
+    "richtig": false,
+    "erklaerung": "Lust am Zerstören ist eine Äußerungsform des Todestriebes (Thanatos). Die Libido ist die Energie des Lebenstriebes (Eros)."
+   },
+   {
+    "text": "… Toms Zertreten der Burgen als nach außen gerichtete Destrudo gilt, die Energie des Todestriebes.",
+    "richtig": true,
+    "erklaerung": "Die Energie des Todestriebes heißt Destrudo und kann als Aggression oder Zerstörungswille nach außen gerichtet sein."
+   },
+   {
+    "text": "… Lebens- und Todestrieb verschränkt wirken, ohne dass einer der beiden Triebe dauerhaft vorherrscht.",
+    "richtig": true,
+    "erklaerung": "Die Haupttriebe arbeiten gegeneinander, sind aber in der Regel verschränkt. Nur bei krankhaften Zuständen zerfällt die Verschränkung."
+   }
+  ]
+ },
+ {
+ "id": "ich-instanzen-fall",
+ "titel": "Freud: Instanzen im Alltag (Wohnheim)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Wohnheim Sonnenhof",
+  "zeilen": false,
+  "text": "Im Wohnheim „Sonnenhof“ steht der 16-jährige Kerem abends allein in der Küche. Auf der Arbeitsplatte liegen Süßigkeiten, die für den Gruppenabend am Wochenende gekauft wurden. Kerem hat großen Heißhunger und greift nach der Tüte. Da hört er den Betreuer im Flur, und ihm fällt ein, dass er den anderen versprochen hat, die Vorräte nicht anzurühren. Er legt die Tüte zurück und isst einen Apfel. Am nächsten Morgen erzählt er der Sozialpädagogin Frau Weiß, dass er in der Nacht von einem verschlossenen Raum geträumt habe. Auf ihre Frage, was ihn am Abend beschäftigt habe, fällt ihm ein, dass sein Vater früher Süßigkeiten als Belohnung verteilte. Frau Weiß weiß aus der Akte, dass diese Belohnungen mit Streit endeten. Zu diesem Streit fällt Kerem nichts ein; er spürt nur ein unangenehmes Ziehen im Bauch."
+ },
+ "kontext": "",
+ "stamm": "Kerems Verhalten in der Küche lässt sich mit dem Instanzenmodell nach Freud fachlich zutreffend deuten, wenn …",
+ "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… die Erinnerung an das Versprechen dem Ich zugeordnet wird, weil das Ich die moralischen Gebote der Gemeinschaft vertritt.",
+   "richtig": false,
+   "erklaerung": "Gebote und Verbote vertritt das Über-Ich (Moralitätsprinzip). Das Ich vermittelt zwischen den Instanzen und der Realität."
+  },
+  {
+   "text": "… der Heißhunger als Anspruch des Es verstanden wird, das nach dem Lustprinzip auf unmittelbare Befriedigung drängt.",
+   "richtig": true,
+   "erklaerung": "Das Es enthält die Triebe, Wünsche und Bedürfnisse und folgt dem Lustprinzip."
+  },
+  {
+   "text": "… die Entscheidung für den Apfel als Lösung gilt, bei der das Es seinen Anspruch nach dem Moralitätsprinzip durchgesetzt hat.",
+   "richtig": false,
+   "erklaerung": "Das Es folgt dem Lustprinzip. Das Moralitätsprinzip gehört zum Über-Ich."
+  },
+  {
+   "text": "… der Betreuer im Flur als Teil der Außenwelt gilt, an dem sich das Ich bei seiner Abwägung nach dem Realitätsprinzip ausrichtet.",
+   "richtig": true,
+   "erklaerung": "Das Ich vermittelt zwischen Es, Über-Ich und den Anforderungen der Realität (Realitätsprinzip)."
+  }
+ ]
+},
+ {
+ "id": "ich-topisch-fall",
+ "titel": "Freud: Schichten des Bewusstseins (topisches Modell)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Wohnheim Sonnenhof",
+  "zeilen": false,
+  "text": "Im Wohnheim „Sonnenhof“ steht der 16-jährige Kerem abends allein in der Küche. Auf der Arbeitsplatte liegen Süßigkeiten, die für den Gruppenabend am Wochenende gekauft wurden. Kerem hat großen Heißhunger und greift nach der Tüte. Da hört er den Betreuer im Flur, und ihm fällt ein, dass er den anderen versprochen hat, die Vorräte nicht anzurühren. Er legt die Tüte zurück und isst einen Apfel. Am nächsten Morgen erzählt er der Sozialpädagogin Frau Weiß, dass er in der Nacht von einem verschlossenen Raum geträumt habe. Auf ihre Frage, was ihn am Abend beschäftigt habe, fällt ihm ein, dass sein Vater früher Süßigkeiten als Belohnung verteilte. Frau Weiß weiß aus der Akte, dass diese Belohnungen mit Streit endeten. Zu diesem Streit fällt Kerem nichts ein; er spürt nur ein unangenehmes Ziehen im Bauch."
+ },
+ "kontext": "",
+ "stamm": "Die Schilderung am nächsten Morgen lässt sich mit dem topischen Modell (Schichten des Bewusstseins) fachlich zutreffend erklären, wenn …",
+ "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… die Erinnerung an die Belohnungen des Vaters als vorbewusster Inhalt gilt, der durch die Nachfrage ins Bewusstsein gelangte.",
+   "richtig": true,
+   "erklaerung": "Vorbewusste Inhalte können durch Aufmerksamkeit, eventuell auch durch einen Schlüsselreiz, bewusst werden."
+  },
+  {
+   "text": "… das unangenehme Ziehen im Bauch zeigt, dass unbewusste Inhalte direkt bewusst erfahren werden können.",
+   "richtig": false,
+   "erklaerung": "Nach dem deskriptiven Aspekt kann auf unbewusste Inhalte nur geschlossen werden; sie können nicht bewusst erfahren werden."
+  },
+  {
+   "text": "… der Traum als Hinweis auf Unbewusstes verstanden wird, auf das sich nur indirekt schließen lässt.",
+   "richtig": true,
+   "erklaerung": "Träume, Symptome, Assoziationen und Fehlleistungen sind Wege, auf denen sich Unbewusstes bemerkbar macht (deskriptiver Aspekt)."
+  },
+  {
+   "text": "… die fehlende Erinnerung an den Streit durch eine aktive Gegenkraft erklärt wird, die den Inhalt im Unbewussten hält.",
+   "richtig": true,
+   "erklaerung": "Nach dem dynamischen Aspekt drängen unbewusste Inhalte ins Bewusstsein und werden durch Gegenbesetzung im Unbewussten gehalten."
+  }
+ ]
+},
+ {
+ "id": "ich-staerke-schwaeche-fall",
+ "titel": "Freud: Ich-Stärke und Ich-Schwäche (Ferienlager)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Ferienlager",
+  "zeilen": false,
+  "text": "Im Ferienlager der Jugendhilfe beobachtet die Erzieherin Frau Roth drei Vierzehnjährige. Pauls Vater stellt viele Gebote auf und bestraft Regelverstöße streng. Paul fragt vor jeder Entscheidung nach Erlaubnis und lässt eigene Wünsche kaum erkennen. Emmas Eltern setzten keine Regeln und achteten nicht auf Absprachen. Emma nimmt sich sofort, was sie möchte, und reagiert auf ein „Nein“ mit Wutausbrüchen. Tim erlebte zu Hause Aufgaben, die er bewältigen konnte, und klare Grenzen. Am Lagerfeuer möchte Tim als Erster zum Grill, merkt aber, dass die Jüngeren schon länger warten. Er sagt: „Ich bin gleich dran, das halte ich aus“, und stellt sich hinten an."
+ },
+ "kontext": "",
+ "stamm": "Das Verhalten der drei Jugendlichen lässt sich nach Freud fachlich zutreffend beurteilen, wenn …",
+ "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… Paul als ich-stark gilt, weil er sich an den Geboten orientiert und so ein Gleichgewicht der Instanzen erreicht.",
+   "richtig": false,
+   "erklaerung": "Bei Paul beherrscht das Über-Ich das Ich; eigene Bedürfnisse werden unterdrückt. Das ist eine Ich-Schwäche."
+  },
+  {
+   "text": "… Emmas Verhalten als Ich-Schwäche gilt, bei der das Es das Ich beherrscht und Triebwünsche ungehemmt befriedigt werden.",
+   "richtig": true,
+   "erklaerung": "Herrscht das Es vor, werden die Triebwünsche exzessiv befriedigt; das Ich kann nicht ausgleichen."
+  },
+  {
+   "text": "… Tims Bereitschaft zu warten als Ich-Schwäche gilt, weil er seinen Wunsch der Realität unterordnet.",
+   "richtig": false,
+   "erklaerung": "Wünsche zurückstellen und aufschieben zu können, ist ein Kennzeichen von Ich-Stärke."
+  },
+  {
+   "text": "… Pauls Verhalten als selbstbestimmt gilt, weil sein Ich die Forderungen des Über-Ichs gegenüber der Realität durchsetzt.",
+   "richtig": false,
+   "erklaerung": "Ist das Ich einer Instanz unterlegen, ist die Person fremdbestimmt in ihrem Verhalten."
+  }
+ ]
+},
+ {
+ "id": "ich-erziehung-fall",
+ "titel": "Freud: Erzieherverhalten und Ich-Stärke",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Ferienlager",
+  "zeilen": false,
+  "text": "Im Ferienlager der Jugendhilfe beobachtet die Erzieherin Frau Roth drei Vierzehnjährige. Pauls Vater stellt viele Gebote auf und bestraft Regelverstöße streng. Paul fragt vor jeder Entscheidung nach Erlaubnis und lässt eigene Wünsche kaum erkennen. Emmas Eltern setzten keine Regeln und achteten nicht auf Absprachen. Emma nimmt sich sofort, was sie möchte, und reagiert auf ein „Nein“ mit Wutausbrüchen. Tim erlebte zu Hause Aufgaben, die er bewältigen konnte, und klare Grenzen. Am Lagerfeuer möchte Tim als Erster zum Grill, merkt aber, dass die Jüngeren schon länger warten. Er sagt: „Ich bin gleich dran, das halte ich aus“, und stellt sich hinten an."
+ },
+ "kontext": "",
+ "stamm": "Aus den Erziehungsbedingungen der drei Jugendlichen lassen sich nach Freud fachlich zutreffende Schlüsse ziehen, wenn …",
+ "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… Emmas Erziehungsbedingungen als Grundlage für ein besonders starkes Über-Ich gelten, weil Führung gefehlt hat.",
+   "richtig": false,
+   "erklaerung": "Wenig Führung führt zu einem schwächeren Über-Ich, sodass die Ansprüche des Es maßlos werden können."
+  },
+  {
+   "text": "… der strenge, regelreiche Erziehungsstil in Pauls Familie als Bedingung für ein zu starkes Über-Ich gilt.",
+   "richtig": true,
+   "erklaerung": "Je mehr Gebote, Verbote und Lenkung, desto stärker bildet sich das Über-Ich aus (z. B. autoritärer Stil)."
+  },
+  {
+   "text": "… Tims Erfolgserlebnisse und Grenzen als Bedingungen gelten, die Kompetenz- und Kontrollerwartung und damit Ich-Stärke fördern.",
+   "richtig": true,
+   "erklaerung": "Bewältigbare Aufgaben, Zuwendung und Grenzen stärken das Ich; das Kind kennt seine Möglichkeiten und seine Grenzen."
+  },
+  {
+   "text": "… Pauls Erziehung als Weg zur Ich-Stärke gilt, weil die vielen Gebote ein Gleichgewicht der Instanzen sichern.",
+   "richtig": false,
+   "erklaerung": "Viele Gebote und viel Lenkung stärken das Über-Ich. Beherrscht es das Ich, werden eigene Bedürfnisse unterdrückt: Das ist eine Ich-Schwäche, kein Gleichgewicht."
+  }
+ ]
+}
 ];
-
-// ---- Aufgabensatz LB 1: eine Fallvignette + 2 K-Prim-Aufgaben (beide Aufgaben beziehen sich auf dieselbe Situation) ----
-CO_AUFGABENBANK.push({
- "id": "lb1-pause-alltag",
- "titel": "Alltagstheorie und wissenschaftliche Aussagen (Pause und Konzentration)",
- "lbNum": 1,
- "vignette": {
-  "titel": "Pause und Konzentration im Ganztag",
-  "zeilen": false,
-  "text": "Sie absolvieren Ihr Praktikum in der Ganztagsbetreuung einer Grundschule. Betreuerin Frau Kern sagt im Team: „Nach zwanzig Berufsjahren weiß ich: Wenn Kinder vor den Hausaufgaben toben dürfen, arbeiten sie danach ruhiger. Bei meinen eigenen Kindern war das so, also gilt das auch für andere Kinder.“\n\nDie Schulpsychologin Frau Dr. Maurer will das genauer wissen. Sie teilt 24 Kinder der dritten Klassen per Los in zwei gleich große Gruppen. An einem Dienstag um 13 Uhr bearbeiten beide Gruppen im selben Raum 15 Minuten lang dieselbe Rechenaufgabe. Gruppe 1 hatte zuvor zehn Minuten Bewegung auf dem Schulhof, Gruppe 2 zehn Minuten Ruhe mit einem Hörbuch. Frau Dr. Maurer hat vorab einen Beobachtungsbogen festgelegt: Auf einer Strichliste zählt sie je fünf Minuten, wie oft ein Kind den Blick von der Aufgabe löst, aufsteht oder ein anderes Kind anspricht. Alle Schritte hält sie schriftlich fest.\n\nEine Kollegin führt den Versuch in der folgenden Woche mit anderen Kindern nach diesem Protokoll durch. Beide Male zeigt Gruppe 1 weniger Unterbrechungen als Gruppe 2. Frau Kern meint dazu: „Das habe ich schon immer gewusst.“"
- },
- "kontext": "",
- "stamm": "Die Aussagen der Betreuerin und das Vorgehen der Psychologin werden fachlich zutreffend eingeordnet, wenn …",
- "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
- "aussagen": [
-  {
-   "text": "… die Betreuerin von ihr bekannten Einzelfällen auf fremde Personen schließt und damit unzulässig verallgemeinert.",
-   "richtig": true,
-   "erklaerung": "Der Schluss von persönlich bekannten Einzelfällen auf andere ist eine unzulässige Verallgemeinerung. Das ist typisch für die Alltagstheorie."
-  },
-  {
-   "text": "… einzelne abweichende Kinder das Ergebnis der Psychologin als wissenschaftliche Aussage ungültig machen.",
-   "richtig": false,
-   "erklaerung": "Wissenschaftliche Aussagen sind Wahrscheinlichkeitsaussagen. Einzelne Ausnahmen bleiben möglich und machen sie nicht ungültig."
-  },
-  {
-   "text": "… die Kollegin bei gleichem Vorgehen zum selben Ergebnis gelangt, was für die Objektivität der Untersuchung spricht.",
-   "richtig": true,
-   "erklaerung": "Objektiv heißt: Verschiedene Forschende kommen bei gleichem Sachverhalt und gleichen Bedingungen zum gleichen Ergebnis."
-  },
-  {
-   "text": "… die langjährige Dauer der Beobachtungen die Annahme der Betreuerin zu einer wissenschaftlichen Erkenntnis macht.",
-   "richtig": false,
-   "erklaerung": "Lange persönliche Erfahrung bleibt Alltagstheorie. Wissenschaftliche Erkenntnisse entstehen systematisch nach klaren Regeln und Methoden."
-  }
- ]
-},{
- "id": "lb1-pause-experiment",
- "titel": "Das Experiment (Pause und Konzentration)",
- "lbNum": 1,
- "vignette": {
-  "titel": "Pause und Konzentration im Ganztag",
-  "zeilen": false,
-  "text": "Sie absolvieren Ihr Praktikum in der Ganztagsbetreuung einer Grundschule. Betreuerin Frau Kern sagt im Team: „Nach zwanzig Berufsjahren weiß ich: Wenn Kinder vor den Hausaufgaben toben dürfen, arbeiten sie danach ruhiger. Bei meinen eigenen Kindern war das so, also gilt das auch für andere Kinder.“\n\nDie Schulpsychologin Frau Dr. Maurer will das genauer wissen. Sie teilt 24 Kinder der dritten Klassen per Los in zwei gleich große Gruppen. An einem Dienstag um 13 Uhr bearbeiten beide Gruppen im selben Raum 15 Minuten lang dieselbe Rechenaufgabe. Gruppe 1 hatte zuvor zehn Minuten Bewegung auf dem Schulhof, Gruppe 2 zehn Minuten Ruhe mit einem Hörbuch. Frau Dr. Maurer hat vorab einen Beobachtungsbogen festgelegt: Auf einer Strichliste zählt sie je fünf Minuten, wie oft ein Kind den Blick von der Aufgabe löst, aufsteht oder ein anderes Kind anspricht. Alle Schritte hält sie schriftlich fest.\n\nEine Kollegin führt den Versuch in der folgenden Woche mit anderen Kindern nach diesem Protokoll durch. Beide Male zeigt Gruppe 1 weniger Unterbrechungen als Gruppe 2. Frau Kern meint dazu: „Das habe ich schon immer gewusst.“"
- },
- "kontext": "",
- "stamm": "Die Untersuchung der Psychologin wird fachlich zutreffend beschrieben, wenn …",
- "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
- "aussagen": [
-  {
-   "text": "… mit dem Beobachtungsbogen das innere Erleben der Kinder während der Aufgabe unmittelbar erfasst wird.",
-   "richtig": false,
-   "erklaerung": "Erleben ist von außen nicht beobachtbar. Der Beobachtungsbogen erfasst Verhalten, also das, was andere von außen wahrnehmen."
-  },
-  {
-   "text": "… die Psychologin Ort, Zeitpunkt und Bedingungen der Untersuchung selbst bestimmt, was der Willkürlichkeit entspricht.",
-   "richtig": true,
-   "erklaerung": "Willkürlichkeit: Die Forscherin bestimmt Bedingungen, Situation, Ort und Zeit selbst."
-  },
-  {
-   "text": "… sie gezielt die Tätigkeit vor der Arbeitsphase zwischen den Gruppen verändert, was der Variierbarkeit entspricht.",
-   "richtig": true,
-   "erklaerung": "Variierbarkeit: Gezielt wird die Bedingung verändert, deren Wirkung beobachtet werden soll. Alles andere bleibt gleich."
-  },
-  {
-   "text": "… mit vorab festgelegten Kategorien und einer Skala beobachtbare Verhaltensweisen vergleichbar gemacht werden.",
-   "richtig": true,
-   "erklaerung": "Kategoriensystem und Skala gehören zu den Voraussetzungen eines Experiments: Sie legen fest, was beobachtet wird, und machen die Werte vergleichbar."
-  }
- ]
-});
-// Vorlage = Check-out mit 1 Fallvignette und genau 2 Aufgaben aus der Bank; wird am passenden Freitag per Klick eingesetzt.
+// Vorlage = Check-out mit genau 3 Aufgaben aus der Bank; wird am passenden Freitag per Klick eingesetzt.
 const CHECKOUT_VORLAGEN_ALLE=[
  {
-  "id": "lb1-satz1",
-  "titel": "Alltagstheorie, wissenschaftliche Aussagen und Experiment",
-  "lbNum": 1,
-  "datum": "2026-10-23",
-  "aufgaben": [
-   "lb1-pause-alltag",
-   "lb1-pause-experiment"
-  ]
- },
- {
-  "id": "lb1-woche1",
-  "titel": "Erleben und Verhalten, Alltagstheorie und Experiment",
+  "id": "aln-1",
+  "titel": "Freud: Instanzen, psychosexuelle Entwicklung, Abwehr",
   "lbNum": 1,
   "datum": "2026-10-09",
   "aufgaben": [
-   "psy-nora",
-   "alltag-bauer",
-   "exp-pausen"
+   "freud-instanzen",
+   "freud-psychosexuell",
+   "freud-abwehr"
   ]
  },
  {
-  "id": "lb1-woche2",
-  "titel": "Gegenstand der Pädagogik, Erziehung und Erziehungsziele",
+  "id": "aln-2",
+  "titel": "Freud: Abwehr, kritische Würdigung, Erziehung",
   "lbNum": 1,
   "datum": "2026-10-16",
   "aufgaben": [
-   "paed-lehner",
-   "paed-bereiche-jugendtreff",
-   "erz-ziele-klassendienst"
+   "freud-abwehr-fall",
+   "freud-wuerdigung",
+   "freud-erziehung"
   ]
  },
  {
-  "id": "lb1-woche3",
-  "titel": "Beziehung, Einrichtungen und Gegenstand der Psychologie",
+  "id": "aln-3",
+  "titel": "Bindung: Phasen, Typen, Förderung",
   "lbNum": 1,
   "datum": "2026-10-23",
   "aufgaben": [
-   "paed-beziehung",
-   "erz-einrichtungen",
-   "erleben-verhalten-handeln"
+   "bindung-phasen",
+   "bindung-typologie",
+   "bindung-foerderung"
+  ]
+ },
+ {
+  "id": "aln-ich",
+  "titel": "Freud: Instanzen, Schichten des Bewusstseins, Ich-Stärke und Ich-Schwäche",
+  "lbNum": 1,
+  "datum": "2026-10-30",
+  "aufgaben": [
+   "ich-instanzen-fall",
+   "ich-topisch-fall",
+   "ich-staerke-schwaeche-fall",
+   "ich-erziehung-fall"
   ]
  }
 ];
-// Angeboten werden nur Vorlagen im neuen Aufbau (1 Fallvignette + genau 2 Aufgaben). Ältere Vorlagen mit 3 Aufgaben bleiben im Code, werden aber nicht mehr angeboten.
-// ---- K-Prim-Tests LB 1 (Inhalte: Gegenstand der Psychologie und der Pädagogik, Alltagstheorie, Merkmale wissenschaftlicher Aussagen, Experiment) ----
-// Aufbau wie alle Check-outs: 1 Fallvignette + genau 4 K-Prim-Aufgaben mit je 4 Aussagen (alle Aufgaben eines Tests teilen sich dieselbe Fallvignette).
-CO_AUFGABENBANK.push(...[
- {
-  "id": "kp-lb1-psychologie",
-  "titel": "Gegenstand der Psychologie",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Jugendtreff",
-   "zeilen": false,
-   "text": "Im Praktikum in einem Jugendtreff begleiten Sie die 16-jährige Jana. Sie soll beim Sommerfest die Begrüßung übernehmen. Kurz vor dem Auftritt knetet sie ihre Finger, ihre Stimme zittert leicht und sie flüstert der Betreuerin Frau Albers zu, dass sie sich vor dem Mikrofon fürchtet. Frau Albers bleibt neben ihr stehen, bespricht mit ihr die ersten Sätze und lobt ihren Mut. Nach der Begrüßung erzählt Jana, dass sie stolz auf sich ist. In der Teamsitzung am nächsten Tag berichtet die Betreuerin Moni von den Brüdern Tim (16) und Max (13): Tim reagiere häufig genervt, wenn Max seine Nähe suche, verdrehe dann die Augen oder gehe weg. Moni stellt fest: „Tim mag seinen Bruder einfach nicht!“ Ihre Kollegin Sarah, die seit vielen Jahren im Jugendtreff arbeitet, hat dieselben Situationen zwischen den Brüdern beobachtet. Anschließend spricht der Betreuer Herr Kluge über den 15-jährigen Hannes, der in den letzten Wochen mehrfach Mitjugendliche geschubst hat. Herr Kluge möchte Hannes’ Fall fachlich beurteilen, bevor das Team entscheidet. Seine Kollegin Fatima unterstützt ihn dabei."
-  },
-  "kontext": "",
-  "stamm": "Janas Situation wird fachlich zutreffend beschrieben, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… die Psychologie untersucht, wie sich ihr Seelenleben in Verhalten und Erleben zeigt, weil sich der Begriff „Seele“ wissenschaftlich nicht genau fassen lässt.",
-    "richtig": true,
-    "erklaerung": "Genau so begründet der Text den Gegenstand der Psychologie."
-   },
-   {
-    "text": "… die Betreuerin Janas Erleben unmittelbar durch Fremdbeobachtung erforschen kann, da sich Erleben ebenso von außen beobachten lässt wie Verhalten.",
-    "richtig": false,
-    "erklaerung": "Erleben ist nur durch Selbstbeobachtung zugänglich; Fremdbeobachtung gilt für das Verhalten."
-   },
-   {
-    "text": "… der Begriff „Erleben“ in der Psychologie nur auf Menschen bezogen wird, weil das innere Erleben von Tieren nicht wissenschaftlich erforscht werden kann.",
-    "richtig": true,
-    "erklaerung": "Bei Tieren kann das innere Erleben nicht wissenschaftlich erforscht werden."
-   },
-   {
-    "text": "… Jana zuerst etwas erlebt und erst danach ein Verhalten zeigt, da beide Vorgänge zeitlich nacheinander und getrennt voneinander ablaufen.",
-    "richtig": false,
-    "erklaerung": "Verhalten und Erleben laufen gleichzeitig ab und sind zwei Seiten desselben psychischen Geschehens."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-paedagogik",
-  "titel": "Gegenstand der Pädagogik",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Jugendtreff",
-   "zeilen": false,
-   "text": "Im Praktikum in einem Jugendtreff begleiten Sie die 16-jährige Jana. Sie soll beim Sommerfest die Begrüßung übernehmen. Kurz vor dem Auftritt knetet sie ihre Finger, ihre Stimme zittert leicht und sie flüstert der Betreuerin Frau Albers zu, dass sie sich vor dem Mikrofon fürchtet. Frau Albers bleibt neben ihr stehen, bespricht mit ihr die ersten Sätze und lobt ihren Mut. Nach der Begrüßung erzählt Jana, dass sie stolz auf sich ist. In der Teamsitzung am nächsten Tag berichtet die Betreuerin Moni von den Brüdern Tim (16) und Max (13): Tim reagiere häufig genervt, wenn Max seine Nähe suche, verdrehe dann die Augen oder gehe weg. Moni stellt fest: „Tim mag seinen Bruder einfach nicht!“ Ihre Kollegin Sarah, die seit vielen Jahren im Jugendtreff arbeitet, hat dieselben Situationen zwischen den Brüdern beobachtet. Anschließend spricht der Betreuer Herr Kluge über den 15-jährigen Hannes, der in den letzten Wochen mehrfach Mitjugendliche geschubst hat. Herr Kluge möchte Hannes’ Fall fachlich beurteilen, bevor das Team entscheidet. Seine Kollegin Fatima unterstützt ihn dabei."
-  },
-  "kontext": "",
-  "stamm": "Die Situation wird fachlich zutreffend eingeordnet, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… das Gespräch der Betreuerin mit Jana als Erziehungswissenschaft eingeordnet wird, weil es das wissenschaftliche Nachdenken über Erziehung darstellt.",
-    "richtig": false,
-    "erklaerung": "Das Gespräch ist Erziehungspraxis (tatsächliches erzieherisches Handeln). Die Erziehungswissenschaft denkt wissenschaftlich über Erziehung nach."
-   },
-   {
-    "text": "… Erziehungspraxis und Erziehungswissenschaft gemeinsam als Pädagogik bezeichnet werden, weil dieser Begriff beide Bereiche umfasst.",
-    "richtig": true,
-    "erklaerung": "Pädagogik ist der Oberbegriff für Erziehungspraxis und Erziehungswissenschaft."
-   },
-   {
-    "text": "… die Betreuerin Jana beeinflusst und zugleich auf deren Äußerungen und Gefühle reagiert, weil Erziehung keine Einbahnstraße ist.",
-    "richtig": true,
-    "erklaerung": "Erziehung wirkt in beide Richtungen: Erziehende beeinflussen, reagieren aber auch auf das Verhalten der zu Erziehenden."
-   },
-   {
-    "text": "… Janas Entwicklung als Zusammenspiel von Anlagen und Umwelt verstanden wird, weil heute eine Festlegung allein durch die Gene als überholt gilt.",
-    "richtig": true,
-    "erklaerung": "Heute wird von einem Zusammenspiel von Anlagen und Umwelt ausgegangen."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-alltagstheorie",
-  "titel": "Alltagstheorie",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Jugendtreff",
-   "zeilen": false,
-   "text": "Im Praktikum in einem Jugendtreff begleiten Sie die 16-jährige Jana. Sie soll beim Sommerfest die Begrüßung übernehmen. Kurz vor dem Auftritt knetet sie ihre Finger, ihre Stimme zittert leicht und sie flüstert der Betreuerin Frau Albers zu, dass sie sich vor dem Mikrofon fürchtet. Frau Albers bleibt neben ihr stehen, bespricht mit ihr die ersten Sätze und lobt ihren Mut. Nach der Begrüßung erzählt Jana, dass sie stolz auf sich ist. In der Teamsitzung am nächsten Tag sagt der Betreuer Herr Weber: „Jugendliche mit älteren Geschwistern sind schüchtern, das habe ich bei Jana und zwei weiteren Jugendlichen gesehen.“ Seine Kollegin Frau Demir verweist auf eine Studie: Das Forschungsteam legte Fragestellung, Methode und Ablauf vorab fest und beschrieb das Vorgehen so genau, dass andere die Untersuchung wiederholen können."
-  },
-  "kontext": "",
-  "stamm": "Herrn Webers Schlussfolgerung wird fachlich zutreffend eingeordnet, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… seine Überlegung als Alltagstheorie gilt, die auch als Privattheorie bezeichnet wird.",
-    "richtig": true,
-    "erklaerung": "Begriffsklärung im Text: Alltagstheorie wird auch Privattheorie genannt."
-   },
-   {
-    "text": "… Sprichwörter als sichere Grundlage für Erklärungen gelten, weil sie sich über Generationen bewährt haben und deshalb zutreffen.",
-    "richtig": false,
-    "erklaerung": "Sprichwörter klingen überzeugend, müssen aber nicht mit der Wirklichkeit übereinstimmen und können in die Irre führen."
-   },
-   {
-    "text": "… seine Schlussfolgerung aus persönlichen Erfahrungen mit Jana und weiteren Jugendlichen entstanden ist.",
-    "richtig": true,
-    "erklaerung": "Alltagstheorien entstehen aus persönlichen Erfahrungen."
-   },
-   {
-    "text": "… Menschen eine Alltagstheorie trotz möglicher Fehlschlüsse nutzen, weil sie Orientierung gibt und Unsicherheit verringert.",
-    "richtig": true,
-    "erklaerung": "Jeder Mensch braucht eine Alltagstheorie, da sie wichtige Aufgaben erfüllt, auch wenn sie in die Irre führen kann."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-merkmale",
-  "titel": "Merkmale wissenschaftlicher Aussagen",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Jugendtreff",
-   "zeilen": false,
-   "text": "Im Praktikum in einem Jugendtreff begleiten Sie die 16-jährige Jana. Sie soll beim Sommerfest die Begrüßung übernehmen. Kurz vor dem Auftritt knetet sie ihre Finger, ihre Stimme zittert leicht und sie flüstert der Betreuerin Frau Albers zu, dass sie sich vor dem Mikrofon fürchtet. Frau Albers bleibt neben ihr stehen, bespricht mit ihr die ersten Sätze und lobt ihren Mut. Nach der Begrüßung erzählt Jana, dass sie stolz auf sich ist. In der Teamsitzung am nächsten Tag sagt der Betreuer Herr Weber: „Jugendliche mit älteren Geschwistern sind schüchtern, das habe ich bei Jana und zwei weiteren Jugendlichen gesehen.“ Seine Kollegin Frau Demir verweist auf eine Studie: Das Forschungsteam legte Fragestellung, Methode und Ablauf vorab fest und beschrieb das Vorgehen so genau, dass andere die Untersuchung wiederholen können."
-  },
-  "kontext": "",
-  "stamm": "Die Aussagen von Herrn Weber und Frau Demir werden fachlich zutreffend beurteilt, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… eine Aussage als allgemeingültig gilt, weil sie auf die in ihr genannten Personen oder Gruppen zutrifft.",
-    "richtig": true,
-    "erklaerung": "Definition des Merkmals Allgemeingültigkeit im Text."
-   },
-   {
-    "text": "… Aussagen über Menschen als Wahrscheinlichkeitsaussagen verstanden werden, bei denen Einzelausnahmen möglich bleiben.",
-    "richtig": true,
-    "erklaerung": "Absolute Aussagen über Menschen sind kaum möglich; deshalb spricht man von Wahrscheinlichkeitsaussagen."
-   },
-   {
-    "text": "… eine Aussage als objektiv gilt, weil Forschende bei gleichem Sachverhalt zu unterschiedlichen Ergebnissen kommen dürfen.",
-    "richtig": false,
-    "erklaerung": "Objektivität heißt: Gleiche Bedingungen führen bei allen Forschenden zum gleichen Ergebnis."
-   },
-   {
-    "text": "… zwischen Alltagstheorie und wissenschaftlicher Theorie eine scharfe Grenze gezogen wird, die nur ein Entweder-oder zulässt.",
-    "richtig": false,
-    "erklaerung": "Die Grenze ist nicht absolut; ein reines Entweder-oder gibt es nicht."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-alltagstheorie-moni",
-  "titel": "Alltagstheorie im Teamgespräch",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Jugendtreff",
-   "zeilen": false,
-   "text": "Im Praktikum in einem Jugendtreff begleiten Sie die 16-jährige Jana. Sie soll beim Sommerfest die Begrüßung übernehmen. Kurz vor dem Auftritt knetet sie ihre Finger, ihre Stimme zittert leicht und sie flüstert der Betreuerin Frau Albers zu, dass sie sich vor dem Mikrofon fürchtet. Frau Albers bleibt neben ihr stehen, bespricht mit ihr die ersten Sätze und lobt ihren Mut. Nach der Begrüßung erzählt Jana, dass sie stolz auf sich ist. In der Teamsitzung am nächsten Tag berichtet die Betreuerin Moni von den Brüdern Tim (16) und Max (13): Tim reagiere häufig genervt, wenn Max seine Nähe suche, verdrehe dann die Augen oder gehe weg. Moni stellt fest: „Tim mag seinen Bruder einfach nicht!“ Ihre Kollegin Sarah, die seit vielen Jahren im Jugendtreff arbeitet, hat dieselben Situationen zwischen den Brüdern beobachtet. Anschließend spricht der Betreuer Herr Kluge über den 15-jährigen Hannes, der in den letzten Wochen mehrfach Mitjugendliche geschubst hat. Herr Kluge möchte Hannes’ Fall fachlich beurteilen, bevor das Team entscheidet. Seine Kollegin Fatima unterstützt ihn dabei."
-  },
-  "kontext": "",
-  "stamm": "Monis Aussage „Tim mag seinen Bruder einfach nicht!“ ist alltagstheoretisch, wenn …",
-  "pruefen": "Aus deinem Word-Dokument (entscheidungsbasierte Aufgaben) übernommen und an die gemeinsame Fallvignette angepasst. Bitte fachlich prüfen.",
-  "aussagen": [
-   {
-    "text": "… Monis Schlussfolgerung auf einem Bestand an Eindrücken beruht, die sie im Laufe ihres beruflichen Alltags zufällig angesammelt hat.",
-    "richtig": true,
-    "erklaerung": "Zufällig angesammelte Eindrücke sind nicht systematisch gewonnen. Fehlende Systematik ist ein Merkmal der Alltagstheorie."
-   },
-   {
-    "text": "… Monis Aussage sich als gesichertes Ergebnis einstufen lässt, weil die Information aus mehreren Elterngesprächen zur sozial-emotionalen Entwicklung und aus wiederholten, gezielten Beobachtungen mit einem Beobachtungsbogen stammt.",
-    "richtig": false,
-    "erklaerung": "Geplante Gespräche und wiederholte gezielte Beobachtungen mit einem Beobachtungsbogen sind systematisch. Das spräche für eine wissenschaftliche Vorgehensweise, nicht für eine Alltagstheorie."
-   },
-   {
-    "text": "… Monis Kollegin Sarah aufgrund ihrer langjährigen Berufserfahrung dieselben Situationen zwischen den Brüdern beobachtet und Tims Verhalten als natürliches Wetteifern unter Brüdern deutet.",
-    "richtig": true,
-    "erklaerung": "Gleiche Beobachtung, unterschiedliche Deutung: Das zeigt Subjektivität, ein Merkmal der Alltagstheorie. Wissenschaftliche Aussagen sind objektiv, weil alle Forschenden bei gleichen Bedingungen zum gleichen Ergebnis kommen."
-   },
-   {
-    "text": "… Monis Erkenntnis aus mehreren geplanten Beobachtungen der letzten zwei Jahre stammt, in denen sie bei Tim und Max wiederholt konfliktreiche Situationen beobachten konnte.",
-    "richtig": false,
-    "erklaerung": "Mehrere geplante, wiederholte Beobachtungen sind keine zufällige Einzelerfahrung. Sie sprechen gegen eine unzulässige Verallgemeinerung und gegen eine Alltagstheorie."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-wissenschaft-hannes",
-  "titel": "Wissenschaftliche Beurteilung im Fall Hannes",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Jugendtreff",
-   "zeilen": false,
-   "text": "Im Praktikum in einem Jugendtreff begleiten Sie die 16-jährige Jana. Sie soll beim Sommerfest die Begrüßung übernehmen. Kurz vor dem Auftritt knetet sie ihre Finger, ihre Stimme zittert leicht und sie flüstert der Betreuerin Frau Albers zu, dass sie sich vor dem Mikrofon fürchtet. Frau Albers bleibt neben ihr stehen, bespricht mit ihr die ersten Sätze und lobt ihren Mut. Nach der Begrüßung erzählt Jana, dass sie stolz auf sich ist. In der Teamsitzung am nächsten Tag berichtet die Betreuerin Moni von den Brüdern Tim (16) und Max (13): Tim reagiere häufig genervt, wenn Max seine Nähe suche, verdrehe dann die Augen oder gehe weg. Moni stellt fest: „Tim mag seinen Bruder einfach nicht!“ Ihre Kollegin Sarah, die seit vielen Jahren im Jugendtreff arbeitet, hat dieselben Situationen zwischen den Brüdern beobachtet. Anschließend spricht der Betreuer Herr Kluge über den 15-jährigen Hannes, der in den letzten Wochen mehrfach Mitjugendliche geschubst hat. Herr Kluge möchte Hannes’ Fall fachlich beurteilen, bevor das Team entscheidet. Seine Kollegin Fatima unterstützt ihn dabei."
-  },
-  "kontext": "",
-  "stamm": "Herr Kluge würde Hannes’ Fall nach wissenschaftlichen Kriterien beurteilen, wenn …",
-  "pruefen": "Aus deinem Word-Dokument (entscheidungsbasierte Aufgaben) übernommen und an die gemeinsame Fallvignette angepasst. Bitte fachlich prüfen.",
-  "aussagen": [
-   {
-    "text": "… neben ihm auch Hannes’ Vater dessen Gewalthandlungen beobachtet hätte, da dann das Merkmal der Objektivität vorläge.",
-    "richtig": false,
-    "erklaerung": "Zwei Personen mit eigenen Eindrücken ergeben noch keine Objektivität. Objektiv heißt: Bei gleichem Sachverhalt und gleichen Bedingungen kommen alle Forschenden mit demselben Vorgehen zum gleichen Ergebnis."
-   },
-   {
-    "text": "… er einzelne Vorfälle als Beweise dafür vorlegen könnte, dass Hannes gewalttätig ist, um damit eine objektive Einschätzung zu treffen.",
-    "richtig": false,
-    "erklaerung": "Einzelne Vorfälle sind zufällige Einzelbeobachtungen und ersetzen kein planmäßiges, überprüfbares Vorgehen. Von einzelnen Vorfällen auf eine allgemeine Eigenschaft zu schließen, wäre eine unzulässige Verallgemeinerung."
-   },
-   {
-    "text": "… er sich selbst einen Aggressionstest ausdenken und mit Hannes durchführen würde, denn das Vorgehen wäre systematisch und die Aussagen daraus wären allgemeingültig.",
-    "richtig": false,
-    "erklaerung": "Ein selbst erdachter, nicht überprüfter Test macht das Vorgehen nicht wissenschaftlich. Allgemeingültigkeit lässt sich nicht aus einem Einzelfall mit einem ungeprüften Verfahren ableiten."
-   },
-   {
-    "text": "… er und Fatima Hannes’ Verhalten über mehrere Wochen beobachten und systematisch dokumentieren würden, um nachvollziehbare und vergleichbare Aussagen zu Hannes treffen zu können.",
-    "richtig": true,
-    "erklaerung": "Geplantes, dokumentiertes Beobachten über einen längeren Zeitraum macht das Vorgehen systematisch, überprüfbar und nachvollziehbar."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-experiment",
-  "titel": "Das Experiment",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Klassenzimmer",
-   "zeilen": false,
-   "text": "Die Lehrerin Frau Yilmaz möchte herausfinden, ob Bewegungspausen die Konzentration ihrer Schülerinnen und Schüler verbessern. In zwei neunten Klassen bestimmt sie selbst, wann, wo und wie lange die Pause stattfindet: In der ersten Woche dauert sie 5 Minuten, in der zweiten 15 Minuten. Danach beobachtet sie, wie konzentriert die Klassen arbeiten, und wiederholt das Vorgehen an mehreren Dienstagen."
-  },
-  "kontext": "",
-  "stamm": "Die Untersuchung von Frau Yilmaz wird fachlich zutreffend beschrieben, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… sie als Experiment gilt, weil ein Vorgang absichtlich und planmäßig herbeigeführt wird, um ihn gezielt zu beobachten.",
-    "richtig": true,
-    "erklaerung": "Definition des Experiments im Text."
-   },
-   {
-    "text": "… Willkürlichkeit als Kriterium des Experiments bedeutet, dass die Forscherin zufällig und ohne Plan vorgeht.",
-    "richtig": false,
-    "erklaerung": "Willkürlichkeit heißt, dass die Forscherin Bedingungen, Situation, Ort und Zeit selbst bestimmen kann."
-   },
-   {
-    "text": "… es sich um ein Laborexperiment handelt, da dieses in der natürlichen Umgebung der Personen stattfindet.",
-    "richtig": false,
-    "erklaerung": "Das beschreibt das Feldexperiment. Das Laborexperiment findet unter kontrollierten Bedingungen im Labor statt."
-   },
-   {
-    "text": "… Beobachtung, Experiment, Test und Befragung zu den wichtigsten empirischen Methoden zählen.",
-    "richtig": true,
-    "erklaerung": "Aufzählung unter „Auf den Punkt gebracht“ im Text."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-experiment-methoden",
-  "titel": "Experiment: Feldexperiment, Beobachtung und Messung",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Klassenzimmer",
-   "zeilen": false,
-   "text": "Die Lehrerin Frau Yilmaz möchte herausfinden, ob Bewegungspausen die Konzentration ihrer Schülerinnen und Schüler verbessern. In zwei neunten Klassen bestimmt sie selbst, wann, wo und wie lange die Pause stattfindet: In der ersten Woche dauert sie 5 Minuten, in der zweiten 15 Minuten. Danach beobachtet sie, wie konzentriert die Klassen arbeiten, und wiederholt das Vorgehen an mehreren Dienstagen."
-  },
-  "kontext": "",
-  "stamm": "Das Vorgehen wird fachlich zutreffend eingeordnet, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… die Untersuchung als Feldexperiment gilt, weil sie in der natürlichen Umgebung der Klassen stattfindet.",
-    "richtig": true,
-    "erklaerung": "Ein Feldexperiment findet in der natürlichen Umgebung statt, hier im Klassenzimmer."
-   },
-   {
-    "text": "… bloßes Beobachten vorhandener Situationen als Experiment gilt, weil dabei eine Bedingung gezielt verändert wird.",
-    "richtig": false,
-    "erklaerung": "Bei der Beobachtung greift die Forscherin nicht ein; beim Experiment führt sie die Situation selbst herbei."
-   },
-   {
-    "text": "… ein Kategoriensystem festlegt, welche Merkmale des Arbeitsverhaltens beobachtet werden sollen.",
-    "richtig": true,
-    "erklaerung": "Ein Kategoriensystem fasst zusammen, welche Merkmale beobachtet werden sollen."
-   },
-   {
-    "text": "… eine Skala die erhobenen Werte vergleichbar macht, etwa als Anzahl der Ablenkungen je Zeitabschnitt.",
-    "richtig": true,
-    "erklaerung": "Eine Skala (Zahlen oder Ratingskala) macht die Werte einer Untersuchung vergleichbar."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-experiment-kriterien",
-  "titel": "Experiment: Kriterien am Beispiel",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Klassenzimmer",
-   "zeilen": false,
-   "text": "Die Lehrerin Frau Yilmaz möchte herausfinden, ob Bewegungspausen die Konzentration ihrer Schülerinnen und Schüler verbessern. In zwei neunten Klassen bestimmt sie selbst, wann, wo und wie lange die Pause stattfindet: In der ersten Woche dauert sie 5 Minuten, in der zweiten 15 Minuten. Danach beobachtet sie, wie konzentriert die Klassen arbeiten, und wiederholt das Vorgehen an mehreren Dienstagen."
-  },
-  "kontext": "",
-  "stamm": "Die Untersuchung von Frau Yilmaz wird anhand der Kriterien des Experiments zutreffend beschrieben, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… die Willkürlichkeit erfüllt ist, weil sie Zeitpunkt, Ort und Dauer der Pause selbst festlegt.",
-    "richtig": true,
-    "erklaerung": "Willkürlichkeit heißt, dass die Forscherin Bedingungen, Situation, Ort und Zeit selbst bestimmen kann."
-   },
-   {
-    "text": "… die Variierbarkeit erfüllt ist, weil sie die Dauer der Pause von 5 auf 15 Minuten verändert.",
-    "richtig": true,
-    "erklaerung": "Variierbarkeit: Die Forscherin verändert die Bedingung (hier die Pausenlänge)."
-   },
-   {
-    "text": "… die Wiederholung an mehreren Dienstagen das Kriterium der Variierbarkeit belegt.",
-    "richtig": false,
-    "erklaerung": "Das Wiederholen des Vorgehens belegt die Wiederholbarkeit, nicht die Variierbarkeit."
-   },
-   {
-    "text": "… ein Vorgang als Experiment gilt, wenn Willkürlichkeit, Variierbarkeit und Wiederholbarkeit zusammen erfüllt sind.",
-    "richtig": true,
-    "erklaerung": "Dies sind die drei Kriterien des Experiments."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-experiment-ursache",
-  "titel": "Experiment: Labor, Feld und Ursache-Wirkung",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Klassenzimmer",
-   "zeilen": false,
-   "text": "Die Lehrerin Frau Yilmaz möchte herausfinden, ob Bewegungspausen die Konzentration ihrer Schülerinnen und Schüler verbessern. In zwei neunten Klassen bestimmt sie selbst, wann, wo und wie lange die Pause stattfindet: In der ersten Woche dauert sie 5 Minuten, in der zweiten 15 Minuten. Danach beobachtet sie, wie konzentriert die Klassen arbeiten, und wiederholt das Vorgehen an mehreren Dienstagen."
-  },
-  "kontext": "",
-  "stamm": "Das Vorgehen wird im Vergleich verschiedener Methoden zutreffend eingeordnet, wenn …",
-  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App. Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… sich durch bloßes Beobachten unterschiedlicher Pausen klären lässt, ob die Pause die Konzentration verursacht.",
-    "richtig": false,
-    "erklaerung": "Beim bloßen Beobachten legt die Forscherin die Bedingungen nicht selbst fest. Zusammenhänge werden sichtbar, die Ursache bleibt unklar."
-   },
-   {
-    "text": "… ein Feldexperiment im Vergleich zum Laborexperiment genauere Vorhersagen für das Verhalten im Alltag erlaubt.",
-    "richtig": true,
-    "erklaerung": "Der Vorteil des Feldexperiments ist die genauere Vorhersage für echtes Alltagsverhalten."
-   },
-   {
-    "text": "… das Experiment es erlaubt, Ursache-Wirkung-Zusammenhänge zu prüfen, weil die Forscherin Bedingungen gezielt verändert.",
-    "richtig": true,
-    "erklaerung": "Weil die Bedingungen gezielt verändert werden, lassen sich Ursache und Wirkung prüfen."
-   },
-   {
-    "text": "… ein Laborexperiment Störfaktoren besser kontrollieren kann als ein Feldexperiment im Alltag.",
-    "richtig": true,
-    "erklaerung": "Der Vorteil des Laborexperiments ist die bessere Kontrolle von Störfaktoren."
-   }
-  ]
- }
-]);
-CHECKOUT_VORLAGEN_ALLE.unshift(...[
- {
-  "id": "kp-lb1-test1",
-  "titel": "Gegenstand der Psychologie und der Pädagogik, Alltagstheorie und wissenschaftliche Aussagen",
-  "lbNum": 1,
-  "nr": 1,
-  "datum": "2026-10-16",
-  "aufgaben": [
-   "kp-lb1-psychologie",
-   "kp-lb1-paedagogik",
-   "kp-lb1-alltagstheorie-moni",
-   "kp-lb1-wissenschaft-hannes"
-  ]
- },
- {
-  "id": "kp-lb1-test2",
-  "titel": "Das Experiment: Kriterien, Labor und Feld, Beobachtung und Messung",
-  "lbNum": 1,
-  "nr": 2,
-  "datum": "2026-10-23",
-  "aufgaben": [
-   "kp-lb1-experiment",
-   "kp-lb1-experiment-methoden",
-   "kp-lb1-experiment-kriterien",
-   "kp-lb1-experiment-ursache"
-  ]
- }
-]);
-// Lernbereich 3: Freitagstests 1–7 (je 1 Fallvignette + 4 K-Prim-Aufgaben, aus den Word-Dokumenten „Freitagstest_0X“).
-CO_AUFGABENBANK.push(...[
- {
-  "id": "lb3-ft1-a1",
-  "titel": "Soziale Interaktion",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Finns erste Wochen in der Krippe",
-   "zeilen": false,
-   "text": "Finn (2;6) ist neu in der Krippengruppe „Kleine Füchse“. Am ersten Tag klammert er sich beim Abschied an seine Mutter und weint laut. Als sie gegangen ist, wirft er Bauklötze nach den anderen Kindern. Der Erzieher Herr Yıldız sagt zunächst streng: „Finn, das tut weh!“ Finn schreit noch lauter.\n\nHerr Yıldız ändert daraufhin sein Vorgehen. Er hockt sich auf Finns Augenhöhe, spricht leise und summt ein Lied, das Finns Mutter ihm verraten hat. Finn wird ruhiger und lehnt sich nach einer Weile an ihn. In den folgenden Wochen holt Finn Herrn Yıldız jeden Morgen zum Spielen ab und lässt sich von ihm trösten, wenn er hinfällt.\n\nIm Teamgespräch erzählt Herr Yıldız: „Finn hat mir beigebracht, geduldiger zu sein. Ich habe gemerkt, dass Schimpfen bei ihm gar nichts bringt.“ Seine Kollegin Frau Berger widerspricht: „Erziehung heißt, dass ich dem Kind sage, was es tun soll. Wie das Kind darauf reagiert, ist seine Sache – deshalb muss ich mein Verhalten doch nicht ändern.“"
-  },
-  "kontext": "",
-  "stamm": "Das Geschehen zwischen Herrn Yıldız und Finn wird fachlich zutreffend als soziale Interaktion beschrieben, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 1“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… die Interaktion erst in dem Moment beginnt, in dem Herr Yıldız ein ausdrückliches Erziehungsziel formuliert.",
-    "richtig": false,
-    "erklaerung": "Interaktion beginnt mit dem wechselseitigen Verhalten, unabhängig davon, ob ein Ziel ausgesprochen wird. Schon die strenge Ermahnung und Finns Schreien sind Interaktion."
-   },
-   {
-    "text": "… Finns Schreien und das veränderte Vorgehen von Herrn Yıldız als wechselseitig aufeinander bezogenes Verhalten gedeutet werden.",
-    "richtig": true,
-    "erklaerung": "Soziale Interaktion ist wechselseitig aufeinander bezogenes Verhalten: Finns Schreien löst eine Veränderung bei Herrn Yıldız aus, diese wiederum beruhigt Finn."
-   },
-   {
-    "text": "… davon ausgegangen wird, dass nur Herr Yıldız Einfluss nimmt, während Finn lediglich auf die Maßnahmen des Erziehers reagiert.",
-    "richtig": false,
-    "erklaerung": "Beide beeinflussen und steuern sich gegenseitig. Finn bringt Herrn Yıldız dazu, sein Verhalten zu ändern – er ist also nicht nur Reagierender."
-   },
-   {
-    "text": "… das Hinhocken auf Augenhöhe als Reaktion von Herrn Yıldız auf Finns Verhalten verstanden wird.",
-    "richtig": true,
-    "erklaerung": "Herr Yıldız stimmt seine Handlung auf Finns Reaktion ab. Aktion und Reaktion greifen ineinander."
-   }
-  ]
- },
- {
-  "id": "lb3-ft1-a2",
-  "titel": "Aussage von Frau Berger",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Finns erste Wochen in der Krippe",
-   "zeilen": false,
-   "text": "Finn (2;6) ist neu in der Krippengruppe „Kleine Füchse“. Am ersten Tag klammert er sich beim Abschied an seine Mutter und weint laut. Als sie gegangen ist, wirft er Bauklötze nach den anderen Kindern. Der Erzieher Herr Yıldız sagt zunächst streng: „Finn, das tut weh!“ Finn schreit noch lauter.\n\nHerr Yıldız ändert daraufhin sein Vorgehen. Er hockt sich auf Finns Augenhöhe, spricht leise und summt ein Lied, das Finns Mutter ihm verraten hat. Finn wird ruhiger und lehnt sich nach einer Weile an ihn. In den folgenden Wochen holt Finn Herrn Yıldız jeden Morgen zum Spielen ab und lässt sich von ihm trösten, wenn er hinfällt.\n\nIm Teamgespräch erzählt Herr Yıldız: „Finn hat mir beigebracht, geduldiger zu sein. Ich habe gemerkt, dass Schimpfen bei ihm gar nichts bringt.“ Seine Kollegin Frau Berger widerspricht: „Erziehung heißt, dass ich dem Kind sage, was es tun soll. Wie das Kind darauf reagiert, ist seine Sache – deshalb muss ich mein Verhalten doch nicht ändern.“"
-  },
-  "kontext": "",
-  "stamm": "Die Aussage von Frau Berger wird aus pädagogischer Sicht zutreffend beurteilt, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 1“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… ihr zugestimmt wird, weil der zu Erziehende seine Lernprozesse selbst bewältigen muss und der Erzieher sich daher nicht nach ihm richten muss.",
-    "richtig": false,
-    "erklaerung": "Der zu Erziehende muss die Lernprozesse zwar selbst bewältigen, der Erzieher orientiert sich aber gerade deshalb an dessen Alter, Interessen und Fähigkeiten."
-   },
-   {
-    "text": "… darauf hingewiesen wird, dass sich ein Erzieher an Alter, Interessen und Fähigkeiten des Kindes orientieren muss.",
-    "richtig": true,
-    "erklaerung": "Erziehung gelingt nur, wenn der Erzieher seine Handlungen auf den zu Erziehenden abstimmt – genau das tut Herr Yıldız."
-   },
-   {
-    "text": "… ergänzt wird, dass der Erziehungsprozess auch den Erzieher verändert, wie Herrn Yıldız’ gewachsene Geduld zeigt.",
-    "richtig": true,
-    "erklaerung": "Merksatz: Der Prozess der Erziehung verändert sowohl den zu Erziehenden als auch den Erzieher selbst."
-   },
-   {
-    "text": "… festgestellt wird, dass sie Erziehung als einseitigen Vorgang versteht und die Wechselseitigkeit außer Acht lässt.",
-    "richtig": true,
-    "erklaerung": "Frau Berger sieht nur die Einwirkung des Erziehers. Erziehung ist aber ein Wechselspiel von Aktion und Reaktion."
-   }
-  ]
- },
- {
-  "id": "lb3-ft1-a3",
-  "titel": "Bedeutung der Beziehung",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Finns erste Wochen in der Krippe",
-   "zeilen": false,
-   "text": "Finn (2;6) ist neu in der Krippengruppe „Kleine Füchse“. Am ersten Tag klammert er sich beim Abschied an seine Mutter und weint laut. Als sie gegangen ist, wirft er Bauklötze nach den anderen Kindern. Der Erzieher Herr Yıldız sagt zunächst streng: „Finn, das tut weh!“ Finn schreit noch lauter.\n\nHerr Yıldız ändert daraufhin sein Vorgehen. Er hockt sich auf Finns Augenhöhe, spricht leise und summt ein Lied, das Finns Mutter ihm verraten hat. Finn wird ruhiger und lehnt sich nach einer Weile an ihn. In den folgenden Wochen holt Finn Herrn Yıldız jeden Morgen zum Spielen ab und lässt sich von ihm trösten, wenn er hinfällt.\n\nIm Teamgespräch erzählt Herr Yıldız: „Finn hat mir beigebracht, geduldiger zu sein. Ich habe gemerkt, dass Schimpfen bei ihm gar nichts bringt.“ Seine Kollegin Frau Berger widerspricht: „Erziehung heißt, dass ich dem Kind sage, was es tun soll. Wie das Kind darauf reagiert, ist seine Sache – deshalb muss ich mein Verhalten doch nicht ändern.“"
-  },
-  "kontext": "",
-  "stamm": "Die Bedeutung der Beziehung zwischen Herrn Yıldız und Finn wird fachlich zutreffend beschrieben, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 1“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… angenommen wird, dass eine tragfähige Bindung nur zu den Eltern möglich ist und Fachkräfte deshalb Distanz wahren sollten.",
-    "richtig": false,
-    "erklaerung": "Finn baut erkennbar eine Bindung zu Herrn Yıldız auf (abholen, trösten lassen). Auch Fachkräfte können wichtige Bezugspersonen sein."
-   },
-   {
-    "text": "… die emotionale Beziehung als angenehme Begleiterscheinung gilt, die für den Erfolg der Erziehung jedoch nebensächlich ist.",
-    "richtig": false,
-    "erklaerung": "Die Beziehung ist keine Nebensache, sondern zentrale Bedingung für den Erziehungserfolg."
-   },
-   {
-    "text": "… die gelungene Eingewöhnung als Voraussetzung dafür gesehen wird, dass spätere Erziehungsmaßnahmen bei Finn Wirkung zeigen können.",
-    "richtig": true,
-    "erklaerung": "Der Erfolg der Erziehung hängt in hohem Maße von einer positiven emotionalen Beziehung ab. Wo die Beziehung nicht stimmt, hat Erziehung wenig Chancen."
-   },
-   {
-    "text": "… mit Brisch argumentiert wird, dass Bindung für kleine Kinder eine Art emotionale Nahrung darstellt.",
-    "richtig": true,
-    "erklaerung": "Brisch: „Bindung ist emotionale Nahrung, die uns am Leben hält. […] Wenn kleine Kinder keine Bindung haben, gedeihen sie nicht.“"
-   }
-  ]
- },
- {
-  "id": "lb3-ft1-a4",
-  "titel": "Rollen zuordnen",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Finns erste Wochen in der Krippe",
-   "zeilen": false,
-   "text": "Finn (2;6) ist neu in der Krippengruppe „Kleine Füchse“. Am ersten Tag klammert er sich beim Abschied an seine Mutter und weint laut. Als sie gegangen ist, wirft er Bauklötze nach den anderen Kindern. Der Erzieher Herr Yıldız sagt zunächst streng: „Finn, das tut weh!“ Finn schreit noch lauter.\n\nHerr Yıldız ändert daraufhin sein Vorgehen. Er hockt sich auf Finns Augenhöhe, spricht leise und summt ein Lied, das Finns Mutter ihm verraten hat. Finn wird ruhiger und lehnt sich nach einer Weile an ihn. In den folgenden Wochen holt Finn Herrn Yıldız jeden Morgen zum Spielen ab und lässt sich von ihm trösten, wenn er hinfällt.\n\nIm Teamgespräch erzählt Herr Yıldız: „Finn hat mir beigebracht, geduldiger zu sein. Ich habe gemerkt, dass Schimpfen bei ihm gar nichts bringt.“ Seine Kollegin Frau Berger widerspricht: „Erziehung heißt, dass ich dem Kind sage, was es tun soll. Wie das Kind darauf reagiert, ist seine Sache – deshalb muss ich mein Verhalten doch nicht ändern.“"
-  },
-  "kontext": "",
-  "stamm": "Die Rollen in der Fallvignette werden fachlich zutreffend zugeordnet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 1“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… Frau Berger allein deshalb als Erzieherin gilt, weil sie eine pädagogische Ausbildung abgeschlossen hat.",
-    "richtig": false,
-    "erklaerung": "Die Rolle „Erzieher“ ergibt sich aus der Absicht, Lernprozesse zu unterstützen, nicht aus dem Berufsabschluss."
-   },
-   {
-    "text": "… Finns Mutter nicht als Erzieherin gelten kann, da Eltern keine pädagogischen Fachkräfte sind.",
-    "richtig": false,
-    "erklaerung": "Auch Eltern sind Erzieher, wenn sie Lernprozesse ihres Kindes herbeiführen oder unterstützen."
-   },
-   {
-    "text": "… Herr Yıldız als Erzieher bezeichnet wird, weil er bei Finn Lernprozesse auslösen und unterstützen will.",
-    "richtig": true,
-    "erklaerung": "Der Erzieher ist die Person, die Lernprozesse herbeiführen und unterstützen will."
-   },
-   {
-    "text": "… Finn als passiver Empfänger gilt, an dem die Erziehung lediglich vollzogen wird.",
-    "richtig": false,
-    "erklaerung": "Der zu Erziehende muss die Lernprozesse selbst vollbringen und beeinflusst den Erzieher aktiv mit."
-   }
-  ]
- },
- {
-  "id": "lb3-ft2-a1",
-  "titel": "Soziale Kommunikation",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Ein Morgen im Stuhlkreis",
-   "zeilen": false,
-   "text": "Im Kindergarten „Löwenzahn“ beginnt der Morgenkreis. Die Kinder reden durcheinander. Die Erzieherin Frau Lang legt den Zeigefinger an die Lippen und hebt die andere Hand. Fast alle Kinder werden still und heben ebenfalls die Hand. Als es ruhig ist, zeigt Frau Lang lächelnd den Daumen nach oben.\n\nNur Emil, der erst seit einer Woche in der Gruppe ist, lacht, legt ebenfalls den Finger an die Lippen und macht dabei Pupsgeräusche. Frau Lang setzt sich neben ihn und erklärt: „Wenn ich das mache, heißt das: Jetzt sind alle leise und hören zu.“ Am nächsten Tag reagiert Emil sofort auf das Zeichen.\n\nSpäter erzählt die vierjährige Lea, dass ihr Hase gestorben ist. Frau Lang sagt „Oh, das ist schön, dass du das erzählst“, schaut dabei aber auf ihr Diensthandy, weil eine Nachricht der Leitung eingeht. Lea bricht mitten im Satz ab und spricht für den Rest des Morgens kaum noch.\n\nDie Praktikantin Jana notiert in ihrem Beobachtungsbogen: „Frau Lang hat zu Lea nichts Unfreundliches gesagt. Also hat sie Lea auch nichts Negatives mitgeteilt.“"
-  },
-  "kontext": "",
-  "stamm": "Die Szene wird mit dem Begriff „soziale Kommunikation“ fachlich zutreffend erfasst, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 2“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… soziale Kommunikation als der Teil der Interaktion gilt, in dem Informationen vermittelt, aufgenommen und ausgetauscht werden.",
-    "richtig": true,
-    "erklaerung": "Das entspricht der Definition: Soziale Kommunikation ist derjenige Teil einer sozialen Interaktion, in dem Informationen ausgetauscht werden."
-   },
-   {
-    "text": "… Frau Langs Blick auf das Handy als Information gewertet wird, die Lea etwas über die Aufmerksamkeit der Erzieherin mitteilt.",
-    "richtig": true,
-    "erklaerung": "In einer Beziehung sagt jedes Verhalten etwas aus. Der Blick aufs Handy signalisiert: Ich bin gerade nicht bei dir."
-   },
-   {
-    "text": "… nur die gesprochenen Worte von Frau Lang als Kommunikation gelten, ihr übriges Verhalten dagegen nicht.",
-    "richtig": false,
-    "erklaerung": "Auch Mimik, Gestik, Blickrichtung und Schweigen teilen etwas mit und gehören zur Kommunikation."
-   },
-   {
-    "text": "… soziale Interaktion und soziale Kommunikation als gleichbedeutende Begriffe ohne inhaltlichen Unterschied verwendet werden.",
-    "richtig": false,
-    "erklaerung": "Kommunikation ist ein Teil der Interaktion (Informationsaustausch), nicht dasselbe. Interaktion ist der Oberbegriff."
-   }
-  ]
- },
- {
-  "id": "lb3-ft2-a2",
-  "titel": "Janas Beobachtungsbogen",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Ein Morgen im Stuhlkreis",
-   "zeilen": false,
-   "text": "Im Kindergarten „Löwenzahn“ beginnt der Morgenkreis. Die Kinder reden durcheinander. Die Erzieherin Frau Lang legt den Zeigefinger an die Lippen und hebt die andere Hand. Fast alle Kinder werden still und heben ebenfalls die Hand. Als es ruhig ist, zeigt Frau Lang lächelnd den Daumen nach oben.\n\nNur Emil, der erst seit einer Woche in der Gruppe ist, lacht, legt ebenfalls den Finger an die Lippen und macht dabei Pupsgeräusche. Frau Lang setzt sich neben ihn und erklärt: „Wenn ich das mache, heißt das: Jetzt sind alle leise und hören zu.“ Am nächsten Tag reagiert Emil sofort auf das Zeichen.\n\nSpäter erzählt die vierjährige Lea, dass ihr Hase gestorben ist. Frau Lang sagt „Oh, das ist schön, dass du das erzählst“, schaut dabei aber auf ihr Diensthandy, weil eine Nachricht der Leitung eingeht. Lea bricht mitten im Satz ab und spricht für den Rest des Morgens kaum noch.\n\nDie Praktikantin Jana notiert in ihrem Beobachtungsbogen: „Frau Lang hat zu Lea nichts Unfreundliches gesagt. Also hat sie Lea auch nichts Negatives mitgeteilt.“"
-  },
-  "kontext": "",
-  "stamm": "Janas Notiz im Beobachtungsbogen wird fachlich zutreffend kritisiert, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 2“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… betont wird, dass das Wort „schön“ die Botschaft des Wegschauens vollständig aufhebt.",
-    "richtig": false,
-    "erklaerung": "Die freundlichen Worte heben die nonverbale Botschaft nicht auf. Zudem passt „schön“ inhaltlich nicht zu Leas trauriger Nachricht."
-   },
-   {
-    "text": "… ergänzt wird, dass widersprüchliche verbale und nonverbale Signale die Deutung für ein Kind erschweren.",
-    "richtig": true,
-    "erklaerung": "Worte und Verhalten senden unterschiedliche Botschaften. Das Kind muss deuten, welche gilt – meist wirkt die nonverbale stärker."
-   },
-   {
-    "text": "… darauf verwiesen wird, dass in einer Beziehung jedes Verhalten etwas aussagt – auch Wegschauen.",
-    "richtig": true,
-    "erklaerung": "Selbst Schweigen oder Wegschauen teilt dem anderen etwas mit. Jana betrachtet nur die Worte."
-   },
-   {
-    "text": "… erklärt wird, dass Leas Verstummen eine Reaktion auf eine nonverbale Botschaft von Frau Lang ist.",
-    "richtig": true,
-    "erklaerung": "Lea hat das Wegschauen als Desinteresse gedeutet und reagiert darauf mit Rückzug."
-   }
-  ]
- },
- {
-  "id": "lb3-ft2-a3",
-  "titel": "Symbolischer Interaktionismus",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Ein Morgen im Stuhlkreis",
-   "zeilen": false,
-   "text": "Im Kindergarten „Löwenzahn“ beginnt der Morgenkreis. Die Kinder reden durcheinander. Die Erzieherin Frau Lang legt den Zeigefinger an die Lippen und hebt die andere Hand. Fast alle Kinder werden still und heben ebenfalls die Hand. Als es ruhig ist, zeigt Frau Lang lächelnd den Daumen nach oben.\n\nNur Emil, der erst seit einer Woche in der Gruppe ist, lacht, legt ebenfalls den Finger an die Lippen und macht dabei Pupsgeräusche. Frau Lang setzt sich neben ihn und erklärt: „Wenn ich das mache, heißt das: Jetzt sind alle leise und hören zu.“ Am nächsten Tag reagiert Emil sofort auf das Zeichen.\n\nSpäter erzählt die vierjährige Lea, dass ihr Hase gestorben ist. Frau Lang sagt „Oh, das ist schön, dass du das erzählst“, schaut dabei aber auf ihr Diensthandy, weil eine Nachricht der Leitung eingeht. Lea bricht mitten im Satz ab und spricht für den Rest des Morgens kaum noch.\n\nDie Praktikantin Jana notiert in ihrem Beobachtungsbogen: „Frau Lang hat zu Lea nichts Unfreundliches gesagt. Also hat sie Lea auch nichts Negatives mitgeteilt.“"
-  },
-  "kontext": "",
-  "stamm": "Die Szene mit Emil wird im Sinne des symbolischen Interaktionismus zutreffend gedeutet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 2“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… angenommen wird, dass Gesten im Gegensatz zu Wörtern keine Symbole im Sinne des symbolischen Interaktionismus sind.",
-    "richtig": false,
-    "erklaerung": "Zu den Symbolen zählen Sprache, Mimik, Gestik, Körperkontakt und Musik. Gesten sind also Symbole."
-   },
-   {
-    "text": "… erkannt wird, dass der Finger an den Lippen nur wirkt, wenn alle Beteiligten ihm dieselbe Bedeutung zuschreiben.",
-    "richtig": true,
-    "erklaerung": "Symbole funktionieren nur, wenn sie für alle Beteiligten die gleiche Bedeutung haben. Emil kannte die Bedeutung noch nicht."
-   },
-   {
-    "text": "… Frau Langs Erklärung als Schritt verstanden wird, mit Emil eine gemeinsame Bedeutung des Zeichens herzustellen.",
-    "richtig": true,
-    "erklaerung": "Durch die Erklärung lernt Emil die Bedeutung des Symbols. Am nächsten Tag funktioniert die Verständigung."
-   },
-   {
-    "text": "… Emils Lachen als bewusste Missachtung der Gruppenregel und damit als absichtliches Störverhalten eingeordnet wird.",
-    "richtig": false,
-    "erklaerung": "Emil hat das Zeichen anders gedeutet (als Spiel), weil ihm die gemeinsame Bedeutung fehlte. Von bewusster Missachtung kann man nicht ausgehen."
-   }
-  ]
- },
- {
-  "id": "lb3-ft2-a4",
-  "titel": "Erziehung nach Mollenhauer",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Ein Morgen im Stuhlkreis",
-   "zeilen": false,
-   "text": "Im Kindergarten „Löwenzahn“ beginnt der Morgenkreis. Die Kinder reden durcheinander. Die Erzieherin Frau Lang legt den Zeigefinger an die Lippen und hebt die andere Hand. Fast alle Kinder werden still und heben ebenfalls die Hand. Als es ruhig ist, zeigt Frau Lang lächelnd den Daumen nach oben.\n\nNur Emil, der erst seit einer Woche in der Gruppe ist, lacht, legt ebenfalls den Finger an die Lippen und macht dabei Pupsgeräusche. Frau Lang setzt sich neben ihn und erklärt: „Wenn ich das mache, heißt das: Jetzt sind alle leise und hören zu.“ Am nächsten Tag reagiert Emil sofort auf das Zeichen.\n\nSpäter erzählt die vierjährige Lea, dass ihr Hase gestorben ist. Frau Lang sagt „Oh, das ist schön, dass du das erzählst“, schaut dabei aber auf ihr Diensthandy, weil eine Nachricht der Leitung eingeht. Lea bricht mitten im Satz ab und spricht für den Rest des Morgens kaum noch.\n\nDie Praktikantin Jana notiert in ihrem Beobachtungsbogen: „Frau Lang hat zu Lea nichts Unfreundliches gesagt. Also hat sie Lea auch nichts Negatives mitgeteilt.“"
-  },
-  "kontext": "",
-  "stamm": "Frau Langs Handeln entspricht der Auffassung von Erziehung nach Mollenhauer, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 2“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… sie Erziehung vor allem als einseitige Weitergabe von Anweisungen an die Gruppe versteht.",
-    "richtig": false,
-    "erklaerung": "Mollenhauer betont den wechselseitigen, symbolisch vermittelten Austausch, nicht einseitige Anweisungen."
-   },
-   {
-    "text": "… sie den Interpretationsprozess abschließt, indem sie jedem Verhalten der Kinder eine feste Bedeutung zuweist.",
-    "richtig": false,
-    "erklaerung": "Zwischen Erzieher und zu Erziehendem besteht ein ständiger wechselseitiger Interpretationsprozess, der nicht einseitig abgeschlossen werden kann."
-   },
-   {
-    "text": "… sie davon ausgeht, dass ihre Zeichen von den Kindern nicht gedeutet werden müssen, weil sie eindeutig sind.",
-    "richtig": false,
-    "erklaerung": "Jede Handlung muss vom anderen gedeutet werden – das zeigt gerade Emils Missverständnis."
-   },
-   {
-    "text": "… sie eine Kommunikationsstruktur schafft, in der die Kinder Fähigkeiten wie Zuhören und Abwarten erwerben können.",
-    "richtig": true,
-    "erklaerung": "Mollenhauer: Erziehung ist kommunikatives Handeln, dessen Ziel eine Kommunikationsstruktur ist, die den Erwerb von Fähigkeiten ermöglicht."
-   }
-  ]
- },
- {
-  "id": "lb3-ft3-a1",
-  "titel": "Lernsituationen einordnen",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Ein Abend bei Familie Öztürk",
-   "zeilen": false,
-   "text": "Herr Öztürk übt seit zwei Wochen jeden Abend mit seinem Sohn Mats (5) das Zähneputzen. Er zeigt ihm die Bewegungen, lässt ihn dann allein putzen und schaut nur noch zu. Er sagt: „Mats soll bis zur Einschulung selbstständig sein. Das ist mir wichtig.“\n\nMats lernt aber auch noch anderes: Er singt die Melodie einer Joghurt-Werbung mit, die er im Fernsehen aufgeschnappt hat. Und als ihm im Kindergarten ein Turm umfällt, ruft er laut ein Schimpfwort, das sein Vater neulich beim Autofahren benutzt hat. Herr Öztürk ist entsetzt: „Das hat er sicher nicht von mir!“\n\nMats’ Mutter sieht das gelassen: „Ich erziehe eigentlich gar nicht. Ich lasse ihn einfach groß werden – Kinder lernen sowieso alles von allein.“\n\nDie Großmutter, die am Wochenende auf Mats aufpasst, meint: „Hauptsache, er putzt heute Abend die Zähne. Notfalls putze ich sie ihm eben selbst, damit es schnell geht.“"
-  },
-  "kontext": "",
-  "stamm": "Die Lernsituationen in der Fallvignette werden fachlich zutreffend eingeordnet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 3“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… festgehalten wird, dass Mats den Lernprozess beim Zähneputzen trotz der Unterstützung selbst bewältigen muss.",
-    "richtig": true,
-    "erklaerung": "Der Erzieher unterstützt, der zu Erziehende muss die Lernprozesse aber selbst vollbringen – der Vater schaut daher nur noch zu."
-   },
-   {
-    "text": "… das abendliche Üben des Zähneputzens als Erziehung gilt, weil der Vater den Lernprozess absichtlich herbeiführt.",
-    "richtig": true,
-    "erklaerung": "Erziehung ist beabsichtigte Lernhilfe: Der Vater führt den Lernprozess bewusst und absichtlich herbei."
-   },
-   {
-    "text": "… das Mitsingen der Werbemelodie als Erziehung gewertet wird, da Mats dabei etwas Neues lernt.",
-    "richtig": false,
-    "erklaerung": "Nicht jedes Lernen ist Erziehung. Es fehlt ein Erzieher, der den Lernprozess mit einem Erziehungsziel herbeiführt."
-   },
-   {
-    "text": "… auch die Übernahme des Schimpfworts als Ergebnis von Erziehung gilt, weil Mats es vom Vater gelernt hat.",
-    "richtig": false,
-    "erklaerung": "Mats hat zwar gelernt, der Vater hatte aber keine Absicht und kein Ziel. Unbeabsichtigtes Lernen ist keine Erziehung im engeren Sinn."
-   }
-  ]
- },
- {
-  "id": "lb3-ft3-a2",
-  "titel": "Erziehungsziel von Herrn Öztürk",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Ein Abend bei Familie Öztürk",
-   "zeilen": false,
-   "text": "Herr Öztürk übt seit zwei Wochen jeden Abend mit seinem Sohn Mats (5) das Zähneputzen. Er zeigt ihm die Bewegungen, lässt ihn dann allein putzen und schaut nur noch zu. Er sagt: „Mats soll bis zur Einschulung selbstständig sein. Das ist mir wichtig.“\n\nMats lernt aber auch noch anderes: Er singt die Melodie einer Joghurt-Werbung mit, die er im Fernsehen aufgeschnappt hat. Und als ihm im Kindergarten ein Turm umfällt, ruft er laut ein Schimpfwort, das sein Vater neulich beim Autofahren benutzt hat. Herr Öztürk ist entsetzt: „Das hat er sicher nicht von mir!“\n\nMats’ Mutter sieht das gelassen: „Ich erziehe eigentlich gar nicht. Ich lasse ihn einfach groß werden – Kinder lernen sowieso alles von allein.“\n\nDie Großmutter, die am Wochenende auf Mats aufpasst, meint: „Hauptsache, er putzt heute Abend die Zähne. Notfalls putze ich sie ihm eben selbst, damit es schnell geht.“"
-  },
-  "kontext": "",
-  "stamm": "Das Erziehungsziel von Herrn Öztürk wird fachlich zutreffend beschrieben, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 3“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… das Ziel als relativ dauerhafte Änderung von Mats’ Verhalten verstanden wird.",
-    "richtig": true,
-    "erklaerung": "Mats soll dauerhaft – bis zur Einschulung und darüber hinaus – selbstständig Zähne putzen."
-   },
-   {
-    "text": "… Erziehungsziele als neutrale Vorgaben gelten, die unabhängig von Werten und Normen formuliert werden.",
-    "richtig": false,
-    "erklaerung": "Erzieherische Handlungen und Ziele sind immer bestimmten Werten und Normen verpflichtet."
-   },
-   {
-    "text": "… Selbstständigkeit als Wert erkannt wird, an dem sich das Handeln des Vaters orientiert.",
-    "richtig": true,
-    "erklaerung": "Erziehung ist wertorientiertes Handeln. Selbstständigkeit ist ein Wert, der dem Vater „wichtig“ ist."
-   },
-   {
-    "text": "… betont wird, dass der Vater ohne dieses Ziel keinen Grund hätte, überhaupt auf Mats einzuwirken.",
-    "richtig": true,
-    "erklaerung": "Erziehung ist ohne Ziel undenkbar: Ohne Ziel würde der Erzieher nicht mehr auf den zu Erziehenden einwirken."
-   }
-  ]
- },
- {
-  "id": "lb3-ft3-a3",
-  "titel": "Äußerung der Mutter",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Ein Abend bei Familie Öztürk",
-   "zeilen": false,
-   "text": "Herr Öztürk übt seit zwei Wochen jeden Abend mit seinem Sohn Mats (5) das Zähneputzen. Er zeigt ihm die Bewegungen, lässt ihn dann allein putzen und schaut nur noch zu. Er sagt: „Mats soll bis zur Einschulung selbstständig sein. Das ist mir wichtig.“\n\nMats lernt aber auch noch anderes: Er singt die Melodie einer Joghurt-Werbung mit, die er im Fernsehen aufgeschnappt hat. Und als ihm im Kindergarten ein Turm umfällt, ruft er laut ein Schimpfwort, das sein Vater neulich beim Autofahren benutzt hat. Herr Öztürk ist entsetzt: „Das hat er sicher nicht von mir!“\n\nMats’ Mutter sieht das gelassen: „Ich erziehe eigentlich gar nicht. Ich lasse ihn einfach groß werden – Kinder lernen sowieso alles von allein.“\n\nDie Großmutter, die am Wochenende auf Mats aufpasst, meint: „Hauptsache, er putzt heute Abend die Zähne. Notfalls putze ich sie ihm eben selbst, damit es schnell geht.“"
-  },
-  "kontext": "",
-  "stamm": "Die Äußerung der Mutter wird fachlich zutreffend beurteilt, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 3“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… gefolgert wird, dass Erziehung überflüssig wird, sobald Kinder viel durch Nachahmung lernen.",
-    "richtig": false,
-    "erklaerung": "Nachahmung ersetzt keine gezielte Lernhilfe. Zudem lernen Kinder durch Nachahmung auch Unerwünschtes (Schimpfwort)."
-   },
-   {
-    "text": "… angemerkt wird, dass die Mutter durch ihr Vorbild unbeabsichtigt dennoch Lernprozesse bei Mats anstößt.",
-    "richtig": true,
-    "erklaerung": "Auch ohne Erziehungsabsicht wirken Eltern als Vorbilder – das zeigt das Beispiel mit dem Schimpfwort des Vaters."
-   },
-   {
-    "text": "… festgestellt wird, dass Kinder ohne Absicht eines Erziehers zwar lernen, dies aber keine Erziehung im engeren Sinn ist.",
-    "richtig": true,
-    "erklaerung": "Die Mutter hat recht, dass Kinder viel von allein lernen. Erziehung liegt aber nur bei beabsichtigter, zielgerichteter Lernhilfe vor."
-   },
-   {
-    "text": "… ihr widersprochen wird, weil jede Form des kindlichen Lernens automatisch Erziehung darstellt.",
-    "richtig": false,
-    "erklaerung": "Nicht jedes Lernen ist Erziehung – entscheidend sind Absicht und Ziel des Erziehers."
-   }
-  ]
- },
- {
-  "id": "lb3-ft3-a4",
-  "titel": "Äußerung der Großmutter",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Ein Abend bei Familie Öztürk",
-   "zeilen": false,
-   "text": "Herr Öztürk übt seit zwei Wochen jeden Abend mit seinem Sohn Mats (5) das Zähneputzen. Er zeigt ihm die Bewegungen, lässt ihn dann allein putzen und schaut nur noch zu. Er sagt: „Mats soll bis zur Einschulung selbstständig sein. Das ist mir wichtig.“\n\nMats lernt aber auch noch anderes: Er singt die Melodie einer Joghurt-Werbung mit, die er im Fernsehen aufgeschnappt hat. Und als ihm im Kindergarten ein Turm umfällt, ruft er laut ein Schimpfwort, das sein Vater neulich beim Autofahren benutzt hat. Herr Öztürk ist entsetzt: „Das hat er sicher nicht von mir!“\n\nMats’ Mutter sieht das gelassen: „Ich erziehe eigentlich gar nicht. Ich lasse ihn einfach groß werden – Kinder lernen sowieso alles von allein.“\n\nDie Großmutter, die am Wochenende auf Mats aufpasst, meint: „Hauptsache, er putzt heute Abend die Zähne. Notfalls putze ich sie ihm eben selbst, damit es schnell geht.“"
-  },
-  "kontext": "",
-  "stamm": "Die Äußerung der Großmutter wird fachlich zutreffend eingeordnet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 3“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… erkannt wird, dass sie eine kurzfristige Wirkung anstrebt statt einer relativ dauerhaften Änderung des Verhaltens.",
-    "richtig": true,
-    "erklaerung": "Ihr Ziel sind saubere Zähne „heute Abend“. Erziehung strebt dagegen eine relativ dauerhafte Verhaltensänderung an."
-   },
-   {
-    "text": "… ihr Vorgehen als gleichwertig zum Üben des Vaters bewertet wird, da beide saubere Zähne erreichen wollen.",
-    "richtig": false,
-    "erklaerung": "Das Ziel ist verschieden: Der Vater will Selbstständigkeit (Lernen), die Großmutter nur ein schnelles Ergebnis."
-   },
-   {
-    "text": "… betont wird, dass für Erziehung allein das Ergebnis zählt und der Weg dorthin unerheblich ist.",
-    "richtig": false,
-    "erklaerung": "Bei Erziehung geht es um Lernprozesse des Kindes. Wenn die Großmutter selbst putzt, lernt Mats nichts."
-   },
-   {
-    "text": "… ihre Haltung als Beispiel für wertorientiertes Erziehungshandeln mit klarem Langzeitziel gilt.",
-    "richtig": false,
-    "erklaerung": "Ein Langzeitziel wie Selbstständigkeit verfolgt sie nicht; im Gegenteil nimmt sie Mats die Aufgabe ab."
-   }
-  ]
- },
- {
-  "id": "lb3-ft4-a1",
-  "titel": "Soziales Handeln",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Noah und die Stopp-Regel",
-   "zeilen": false,
-   "text": "Die FOS-Praktikantin Selin beobachtet im Kindergarten „Sonnenschein“, dass Noah (5) andere Kinder haut, wenn sie ihm Spielsachen wegnehmen. Die Erzieherin Frau Weber überlegt sich ein Vorgehen: Sie spricht am nächsten Morgen ruhig mit Noah über den Vorfall vom Vortag, übt mit ihm und zwei anderen Kindern ein „Stopp!“ mit ausgestreckter Hand und lobt ihn, wenn er es anwendet. Ihr Ziel: Noah soll lernen, seinen Ärger dauerhaft ohne Gewalt auszudrücken.\n\nWährend des Gesprächs muss Selin laut niesen. Noah lacht und vergisst kurz seinen Ärger.\n\nNach zwei Wochen haut Noah im Kindergarten deutlich seltener. Seine Mutter berichtet allerdings, dass er zu Hause seinen kleinen Bruder weiterhin schlägt. Die Kita-Leiterin sagt dazu: „Wir können nie ganz sicher wissen, wie ein Kind auf unsere Maßnahmen reagiert.“\n\nHerr Schmid, ein Kollege, meint dagegen: „Ich mache mir über die Folgen meines Handelns keine großen Gedanken. Ich halte mich an die Hausregeln, dann kann nichts schiefgehen.“"
-  },
-  "kontext": "",
-  "stamm": "Frau Webers Vorgehen wird fachlich zutreffend als soziales Handeln bezeichnet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 4“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… soziales Handeln dadurch gekennzeichnet ist, dass es zuverlässig zum gewünschten Ergebnis führt.",
-    "richtig": false,
-    "erklaerung": "Soziales Handeln ist durch Absicht und Bezug auf andere bestimmt, nicht durch den Erfolg. Pädagogisches Handeln hat einen offenen Ausgang."
-   },
-   {
-    "text": "… auch Selins Niesen als soziales Handeln gilt, weil Noah darauf mit Lachen reagiert.",
-    "richtig": false,
-    "erklaerung": "Niesen ist ein Reflex ohne Absicht. Handeln setzt eine bewusste, überlegte Absicht voraus – eine Reaktion des anderen reicht nicht."
-   },
-   {
-    "text": "… ihr Gespräch mit Noah als Aktivität gilt, die bewusst und willentlich auf eine andere Person bezogen ist.",
-    "richtig": true,
-    "erklaerung": "Soziales Handeln ist nach Brezinka bewusst und willentlich auf andere Menschen bezogen."
-   },
-   {
-    "text": "… sie sich dabei am vergangenen Hauen und am künftig erwarteten Verhalten Noahs orientiert.",
-    "richtig": true,
-    "erklaerung": "Soziales Handeln ist sinnhaft orientiert am vergangenen, gegenwärtigen oder künftig erwarteten Verhalten anderer (Brezinka)."
-   }
-  ]
- },
- {
-  "id": "lb3-ft4-a2",
-  "titel": "Aussage der Kita-Leiterin",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Noah und die Stopp-Regel",
-   "zeilen": false,
-   "text": "Die FOS-Praktikantin Selin beobachtet im Kindergarten „Sonnenschein“, dass Noah (5) andere Kinder haut, wenn sie ihm Spielsachen wegnehmen. Die Erzieherin Frau Weber überlegt sich ein Vorgehen: Sie spricht am nächsten Morgen ruhig mit Noah über den Vorfall vom Vortag, übt mit ihm und zwei anderen Kindern ein „Stopp!“ mit ausgestreckter Hand und lobt ihn, wenn er es anwendet. Ihr Ziel: Noah soll lernen, seinen Ärger dauerhaft ohne Gewalt auszudrücken.\n\nWährend des Gesprächs muss Selin laut niesen. Noah lacht und vergisst kurz seinen Ärger.\n\nNach zwei Wochen haut Noah im Kindergarten deutlich seltener. Seine Mutter berichtet allerdings, dass er zu Hause seinen kleinen Bruder weiterhin schlägt. Die Kita-Leiterin sagt dazu: „Wir können nie ganz sicher wissen, wie ein Kind auf unsere Maßnahmen reagiert.“\n\nHerr Schmid, ein Kollege, meint dagegen: „Ich mache mir über die Folgen meines Handelns keine großen Gedanken. Ich halte mich an die Hausregeln, dann kann nichts schiefgehen.“"
-  },
-  "kontext": "",
-  "stamm": "Die Aussage der Kita-Leiterin wird fachlich zutreffend begründet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 4“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… daraus abgeleitet wird, dass Planung beim pädagogischen Handeln überflüssig ist.",
-    "richtig": false,
-    "erklaerung": "Pädagogisches Handeln bleibt beabsichtigt und geplant. Der offene Ausgang erfordert eher sorgfältige Beobachtung und Anpassung."
-   },
-   {
-    "text": "… das Hauen zu Hause als Beleg dafür gilt, dass Frau Webers Vorgehen keine Erziehung war.",
-    "richtig": false,
-    "erklaerung": "Ob Erziehung vorliegt, hängt von Absicht und Ziel ab, nicht vom vollständigen Erfolg. Der offene Ausgang ist gerade typisch."
-   },
-   {
-    "text": "… erklärt wird, dass Noah als eigenständige Person individuell auf Maßnahmen reagiert.",
-    "richtig": true,
-    "erklaerung": "Weil Menschen unterschiedlich reagieren, kann der Erzieher den Ausgang nie sicher vorhersagen."
-   },
-   {
-    "text": "… pädagogisches Handeln als „Versuchshandeln“ bezeichnet wird, dessen Ausgang offen ist.",
-    "richtig": true,
-    "erklaerung": "Pädagogisches Handeln ist Versuchshandeln: Sein Ergebnis ist offen und lässt sich nicht vorhersehen."
-   }
-  ]
- },
- {
-  "id": "lb3-ft4-a3",
-  "titel": "Haltung von Herrn Schmid",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Noah und die Stopp-Regel",
-   "zeilen": false,
-   "text": "Die FOS-Praktikantin Selin beobachtet im Kindergarten „Sonnenschein“, dass Noah (5) andere Kinder haut, wenn sie ihm Spielsachen wegnehmen. Die Erzieherin Frau Weber überlegt sich ein Vorgehen: Sie spricht am nächsten Morgen ruhig mit Noah über den Vorfall vom Vortag, übt mit ihm und zwei anderen Kindern ein „Stopp!“ mit ausgestreckter Hand und lobt ihn, wenn er es anwendet. Ihr Ziel: Noah soll lernen, seinen Ärger dauerhaft ohne Gewalt auszudrücken.\n\nWährend des Gesprächs muss Selin laut niesen. Noah lacht und vergisst kurz seinen Ärger.\n\nNach zwei Wochen haut Noah im Kindergarten deutlich seltener. Seine Mutter berichtet allerdings, dass er zu Hause seinen kleinen Bruder weiterhin schlägt. Die Kita-Leiterin sagt dazu: „Wir können nie ganz sicher wissen, wie ein Kind auf unsere Maßnahmen reagiert.“\n\nHerr Schmid, ein Kollege, meint dagegen: „Ich mache mir über die Folgen meines Handelns keine großen Gedanken. Ich halte mich an die Hausregeln, dann kann nichts schiefgehen.“"
-  },
-  "kontext": "",
-  "stamm": "Herrn Schmids Haltung wird fachlich zutreffend kritisiert, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 4“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… darauf hingewiesen wird, dass Erzieher wegen des meist ungleichen Verhältnisses pädagogische Verantwortung tragen.",
-    "richtig": true,
-    "erklaerung": "Weil das Verhältnis zwischen Erzieher und zu Erziehendem meist ungleich ist, trägt der Erzieher die pädagogische Verantwortung."
-   },
-   {
-    "text": "… eingewendet wird, dass das Befolgen von Hausregeln die Frage nach den Folgen für das einzelne Kind nicht ersetzt.",
-    "richtig": true,
-    "erklaerung": "Regeln geben Orientierung, entbinden aber nicht von der Verantwortung, die Wirkung auf das konkrete Kind zu bedenken."
-   },
-   {
-    "text": "… betont wird, dass Erzieher sich ständig fragen müssen, welche Folgen ihr Handeln hat.",
-    "richtig": true,
-    "erklaerung": "Genau das verlangt pädagogische Verantwortung – Herr Schmid lehnt es ab."
-   },
-   {
-    "text": "… ihm entgegengehalten wird, dass Kinder und Erzieher in Wissen und Macht grundsätzlich gleichgestellt sind.",
-    "richtig": false,
-    "erklaerung": "Das Gegenteil trifft zu: Das Verhältnis ist meist ungleich. Gerade daraus ergibt sich die Verantwortung des Erziehers."
-   }
-  ]
- },
- {
-  "id": "lb3-ft4-a4",
-  "titel": "Definition von Erziehung",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Noah und die Stopp-Regel",
-   "zeilen": false,
-   "text": "Die FOS-Praktikantin Selin beobachtet im Kindergarten „Sonnenschein“, dass Noah (5) andere Kinder haut, wenn sie ihm Spielsachen wegnehmen. Die Erzieherin Frau Weber überlegt sich ein Vorgehen: Sie spricht am nächsten Morgen ruhig mit Noah über den Vorfall vom Vortag, übt mit ihm und zwei anderen Kindern ein „Stopp!“ mit ausgestreckter Hand und lobt ihn, wenn er es anwendet. Ihr Ziel: Noah soll lernen, seinen Ärger dauerhaft ohne Gewalt auszudrücken.\n\nWährend des Gesprächs muss Selin laut niesen. Noah lacht und vergisst kurz seinen Ärger.\n\nNach zwei Wochen haut Noah im Kindergarten deutlich seltener. Seine Mutter berichtet allerdings, dass er zu Hause seinen kleinen Bruder weiterhin schlägt. Die Kita-Leiterin sagt dazu: „Wir können nie ganz sicher wissen, wie ein Kind auf unsere Maßnahmen reagiert.“\n\nHerr Schmid, ein Kollege, meint dagegen: „Ich mache mir über die Folgen meines Handelns keine großen Gedanken. Ich halte mich an die Hausregeln, dann kann nichts schiefgehen.“"
-  },
-  "kontext": "",
-  "stamm": "Frau Webers Vorgehen erfüllt die Definition von Erziehung, weil …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 4“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… Noah nach den zwei Wochen nachweislich weder im Kindergarten noch zu Hause mehr haut.",
-    "richtig": false,
-    "erklaerung": "Das trifft nicht zu (er haut seltener, zu Hause weiterhin) und ist auch kein Merkmal der Definition – der Erfolg ist offen."
-   },
-   {
-    "text": "… sie mit Noah in einer sozialen Interaktion steht, in der beide wechselseitig aufeinander reagieren.",
-    "richtig": true,
-    "erklaerung": "Soziale Interaktion ist eines der Merkmale von Erziehung: Erzieher und zu Erziehender beeinflussen sich gegenseitig."
-   },
-   {
-    "text": "… sie bestimmte Lernprozesse bei Noah bewusst und absichtlich herbeiführen und unterstützen will.",
-    "richtig": true,
-    "erklaerung": "Teil der Definition: Erziehung will bestimmte Lernprozesse bewusst und absichtlich herbeiführen und unterstützen."
-   },
-   {
-    "text": "… sie eine relativ dauerhafte Veränderung von Noahs Verhalten anstrebt, die einem Erziehungsziel entspricht.",
-    "richtig": true,
-    "erklaerung": "Teil der Definition: relativ dauerhafte Veränderungen des Verhaltens und Erlebens, die bestimmten Erziehungszielen entsprechen."
-   }
-  ]
- },
- {
-  "id": "lb3-ft5-a1",
-  "titel": "Dimensionen nach Baumrind",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Elterngespräche im Hort",
-   "zeilen": false,
-   "text": "Die Horterzieherin Frau Klein führt Elterngespräche über Hausaufgaben und Mediennutzung der Viertklässler.\n\nFrau Albers: „Bei uns gilt eine Stunde Tablet, aber erst nach den Hausaufgaben. Die Regel haben wir mit Lukas besprochen. Wenn er gute Gründe hat, verhandeln wir. Abends erzählt er mir meistens, was ihn beschäftigt.“ Im Hort wirkt Lukas offen und hilft oft Jüngeren.\n\nHerr Brandt: „Mein Sohn hat zu gehorchen. Erklären muss ich nichts. Wer die Hausaufgaben nicht macht, hat eine Woche Hausarrest.“ Sein Sohn Jan ist im Hort meist still und traut sich wenig zu. Gegenüber Jüngeren wird er manchmal grob.\n\nFrau Çelik: „Ich will keinen Streit mit Mia. Wenn sie weint, darf sie eben länger spielen. Hauptsache, sie ist glücklich – ich hab sie so lieb.“\n\nHerr Dorn: „Keine Ahnung, was Tim nachmittags macht. Der ist alt genug. Ich habe genug eigene Probleme.“"
-  },
-  "kontext": "",
-  "stamm": "Das Verhalten der Eltern wird den beiden Dimensionen nach Baumrind fachlich zutreffend zugeordnet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 5“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… Frau Çeliks Zuneigung als Hinweis auf hohe Anforderung gewertet wird, weil sie sich intensiv um Mia kümmert.",
-    "richtig": false,
-    "erklaerung": "Zuneigung gehört zur Dimension Wärme. Anforderungen stellt Frau Çelik gerade kaum."
-   },
-   {
-    "text": "… Herrn Dorns Haltung in beiden Dimensionen als niedrig eingestuft wird.",
-    "richtig": true,
-    "erklaerung": "Er zeigt weder Zuwendung noch stellt er Regeln oder Erwartungen."
-   },
-   {
-    "text": "… Herrn Brandts Hausarrest als Ausdruck hoher Anforderung und Kontrolle gilt.",
-    "richtig": true,
-    "erklaerung": "Strenge Regeln und konsequente Strafen gehören zur Dimension Anforderung/Kontrolle."
-   },
-   {
-    "text": "… Frau Albers’ abendliches Zuhören der Dimension Wärme und Responsivität zugeordnet wird.",
-    "richtig": true,
-    "erklaerung": "Zuhören und Eingehen auf das Kind sind Ausdruck von Wärme und Responsivität."
-   }
-  ]
- },
- {
-  "id": "lb3-ft5-a2",
-  "titel": "Erziehungsstile bestimmen",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Elterngespräche im Hort",
-   "zeilen": false,
-   "text": "Die Horterzieherin Frau Klein führt Elterngespräche über Hausaufgaben und Mediennutzung der Viertklässler.\n\nFrau Albers: „Bei uns gilt eine Stunde Tablet, aber erst nach den Hausaufgaben. Die Regel haben wir mit Lukas besprochen. Wenn er gute Gründe hat, verhandeln wir. Abends erzählt er mir meistens, was ihn beschäftigt.“ Im Hort wirkt Lukas offen und hilft oft Jüngeren.\n\nHerr Brandt: „Mein Sohn hat zu gehorchen. Erklären muss ich nichts. Wer die Hausaufgaben nicht macht, hat eine Woche Hausarrest.“ Sein Sohn Jan ist im Hort meist still und traut sich wenig zu. Gegenüber Jüngeren wird er manchmal grob.\n\nFrau Çelik: „Ich will keinen Streit mit Mia. Wenn sie weint, darf sie eben länger spielen. Hauptsache, sie ist glücklich – ich hab sie so lieb.“\n\nHerr Dorn: „Keine Ahnung, was Tim nachmittags macht. Der ist alt genug. Ich habe genug eigene Probleme.“"
-  },
-  "kontext": "",
-  "stamm": "Die Erziehungsstile der Eltern werden fachlich zutreffend bestimmt, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 5“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… Frau Albers als autoritär eingeordnet wird, da sie feste Regeln aufstellt und durchsetzt.",
-    "richtig": false,
-    "erklaerung": "Feste Regeln allein machen keinen autoritären Stil. Frau Albers verbindet Regeln mit Wärme, Begründung und Mitsprache – das ist autoritativ."
-   },
-   {
-    "text": "… Herr Dorn als permissiv gilt, weil er seinem Sohn viele Freiheiten lässt.",
-    "richtig": false,
-    "erklaerung": "Ihm fehlt auch die Wärme – er nimmt kaum Anteil. Das ist der vernachlässigende Stil, nicht der permissive."
-   },
-   {
-    "text": "… Frau Çelik als permissiv eingestuft wird, da sie Konflikte meidet und kaum Grenzen setzt.",
-    "richtig": true,
-    "erklaerung": "Hohe Wärme, wenige Regeln, Konfliktvermeidung: permissiver Stil."
-   },
-   {
-    "text": "… Herr Brandt als autoritär gilt, weil er Gehorsam ohne Begründung einfordert.",
-    "richtig": true,
-    "erklaerung": "Hohe Anforderung bei geringer Wärme, Gehorsam ohne Erklärung: autoritärer Stil."
-   }
-  ]
- },
- {
-  "id": "lb3-ft5-a3",
-  "titel": "Folgen für die Kinder",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Elterngespräche im Hort",
-   "zeilen": false,
-   "text": "Die Horterzieherin Frau Klein führt Elterngespräche über Hausaufgaben und Mediennutzung der Viertklässler.\n\nFrau Albers: „Bei uns gilt eine Stunde Tablet, aber erst nach den Hausaufgaben. Die Regel haben wir mit Lukas besprochen. Wenn er gute Gründe hat, verhandeln wir. Abends erzählt er mir meistens, was ihn beschäftigt.“ Im Hort wirkt Lukas offen und hilft oft Jüngeren.\n\nHerr Brandt: „Mein Sohn hat zu gehorchen. Erklären muss ich nichts. Wer die Hausaufgaben nicht macht, hat eine Woche Hausarrest.“ Sein Sohn Jan ist im Hort meist still und traut sich wenig zu. Gegenüber Jüngeren wird er manchmal grob.\n\nFrau Çelik: „Ich will keinen Streit mit Mia. Wenn sie weint, darf sie eben länger spielen. Hauptsache, sie ist glücklich – ich hab sie so lieb.“\n\nHerr Dorn: „Keine Ahnung, was Tim nachmittags macht. Der ist alt genug. Ich habe genug eigene Probleme.“"
-  },
-  "kontext": "",
-  "stamm": "Mögliche Folgen für die Kinder werden im Sinne der Forschung zu den Erziehungsstilen zutreffend eingeschätzt, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 5“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… für Tim das geringste Risiko ungünstiger Entwicklungsfolgen angenommen wird, da er früh selbstständig wird.",
-    "richtig": false,
-    "erklaerung": "Der vernachlässigende Stil gilt als am stärksten mit negativen Entwicklungsfolgen verbunden."
-   },
-   {
-    "text": "… für Mia erwartet wird, dass ihr das Aushalten von Frustration besonders leichtfällt.",
-    "richtig": false,
-    "erklaerung": "Permissiv erzogenen Kindern fällt es häufig schwerer, Frustration auszuhalten und Impulse zu steuern."
-   },
-   {
-    "text": "… für Lukas eher Selbstbewusstsein, soziale Kompetenz und Leistungsbereitschaft erwartet werden.",
-    "richtig": true,
-    "erklaerung": "Autoritativ erzogene Kinder gelten in Baumrinds Forschung häufig als selbstbewusst, sozial kompetent und leistungsbereit."
-   },
-   {
-    "text": "… Jans Unsicherheit und sein gelegentlich grobes Verhalten als typischer Zusammenhang mit autoritärer Erziehung gelten.",
-    "richtig": true,
-    "erklaerung": "Kinder aus autoritär geprägten Familien zeigen häufiger Unsicherheit und geringes Selbstwertgefühl oder – je nach Temperament – trotzig-aggressives Verhalten."
-   }
-  ]
- },
- {
-  "id": "lb3-ft5-a4",
-  "titel": "Baumrind im Elterngespräch",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Elterngespräche im Hort",
-   "zeilen": false,
-   "text": "Die Horterzieherin Frau Klein führt Elterngespräche über Hausaufgaben und Mediennutzung der Viertklässler.\n\nFrau Albers: „Bei uns gilt eine Stunde Tablet, aber erst nach den Hausaufgaben. Die Regel haben wir mit Lukas besprochen. Wenn er gute Gründe hat, verhandeln wir. Abends erzählt er mir meistens, was ihn beschäftigt.“ Im Hort wirkt Lukas offen und hilft oft Jüngeren.\n\nHerr Brandt: „Mein Sohn hat zu gehorchen. Erklären muss ich nichts. Wer die Hausaufgaben nicht macht, hat eine Woche Hausarrest.“ Sein Sohn Jan ist im Hort meist still und traut sich wenig zu. Gegenüber Jüngeren wird er manchmal grob.\n\nFrau Çelik: „Ich will keinen Streit mit Mia. Wenn sie weint, darf sie eben länger spielen. Hauptsache, sie ist glücklich – ich hab sie so lieb.“\n\nHerr Dorn: „Keine Ahnung, was Tim nachmittags macht. Der ist alt genug. Ich habe genug eigene Probleme.“"
-  },
-  "kontext": "",
-  "stamm": "Frau Klein nutzt das Modell von Baumrind in den Gesprächen fachlich angemessen, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 5“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… sie Frau Çelik rät, weniger Wärme zu zeigen, damit ihr Stil autoritativer wird.",
-    "richtig": false,
-    "erklaerung": "Autoritativ heißt hohe Wärme plus hohe Anforderung. Frau Çelik müsste ihre Anforderungen erhöhen, nicht die Wärme verringern."
-   },
-   {
-    "text": "… sie die Studienergebnisse als sichere Vorhersage für die Entwicklung jedes einzelnen Kindes verwendet.",
-    "richtig": false,
-    "erklaerung": "Die Forschung zeigt Zusammenhänge und Wahrscheinlichkeiten, keine sicheren Vorhersagen für den Einzelfall."
-   },
-   {
-    "text": "… sie den vernachlässigenden Stil als Teil von Baumrinds ursprünglichem Modell mit drei Stilen vorstellt.",
-    "richtig": false,
-    "erklaerung": "Baumrind beschrieb zunächst drei Stile; den vernachlässigenden Stil ergänzten später Maccoby und Martin."
-   },
-   {
-    "text": "… sie berücksichtigt, dass die Stile Idealtypen sind und Eltern im Alltag häufig Mischformen zeigen.",
-    "richtig": true,
-    "erklaerung": "Die Stile beschreiben Idealtypen; reale Eltern verhalten sich je nach Situation unterschiedlich."
-   }
-  ]
- },
- {
-  "id": "lb3-ft6-a1",
-  "titel": "Das Kinderhaus beschreiben",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Anmeldung im Kinderhaus „Regenbogen“",
-   "zeilen": false,
-   "text": "Das Kinderhaus „Regenbogen“ in Neustadt wird von der Caritas betrieben. Unter einem Dach gibt es eine Krippengruppe, zwei Kindergartengruppen und einen Hort für Grundschulkinder. Betreut werden die Kinder von Erzieherinnen und Erziehern, Kinderpflegerinnen und einer Sozialpädagogin.\n\nFrau Hahn ist alleinerziehend und beginnt im Januar eine Vollzeitstelle. Beim Anmeldegespräch fragt sie besorgt: „Meine Tochter Ella ist gerade drei geworden. Muss sie jetzt in den Kindergarten? Und muss sie dann jeden Tag kommen, so wie später in der Schule?“\n\nIhr Nachbar Herr Vogt hatte ihr am Morgen gesagt: „Kindergarten ist doch nur Aufbewahrung, damit die Eltern arbeiten können. Und wenn das Kind den ganzen Tag dort ist, übernimmt eben der Kindergarten die Erziehung statt der Familie.“\n\nDie Stadt Neustadt plant wegen der hohen Nachfrage eine weitere Einrichtung. Bevor sie selbst aktiv wird, fragt sie bei der Diakonie und beim Roten Kreuz an, ob diese den neuen Kindergarten übernehmen möchten."
-  },
-  "kontext": "",
-  "stamm": "Das Kinderhaus „Regenbogen“ wird fachlich zutreffend beschrieben, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 6“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… angenommen wird, dass die Kinder dort wie in einem Heim dauerhaft wohnen und übernachten.",
-    "richtig": false,
-    "erklaerung": "Anders als im Heim bleiben die Kinder in Kindertagesstätten nicht dauerhaft über Nacht."
-   },
-   {
-    "text": "… die Caritas als öffentlicher Träger bezeichnet wird, weil sie Aufgaben für das Gemeinwohl übernimmt.",
-    "richtig": false,
-    "erklaerung": "Die Caritas ist ein kirchlicher Wohlfahrtsverband und damit ein freier Träger. Öffentliche Träger sind z. B. Städte und Gemeinden."
-   },
-   {
-    "text": "… es als Kindertagesstätte bezeichnet wird, da es Krippe, Kindergarten und Hort unter einem Dach vereint.",
-    "richtig": true,
-    "erklaerung": "„Kita“ ist meist der Oberbegriff für verschiedene Einrichtungen für Kinder unter einem Dach: Krippe, Kindergarten und Hort."
-   },
-   {
-    "text": "… es als außerschulische Einrichtung eingeordnet wird, obwohl dort auch Schulkinder betreut werden.",
-    "richtig": true,
-    "erklaerung": "Kitas sind außerschulische Einrichtungen – auch der Hort betreut Schulkinder außerhalb des Unterrichts."
-   }
-  ]
- },
- {
-  "id": "lb3-ft6-a2",
-  "titel": "Fragen von Frau Hahn",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Anmeldung im Kinderhaus „Regenbogen“",
-   "zeilen": false,
-   "text": "Das Kinderhaus „Regenbogen“ in Neustadt wird von der Caritas betrieben. Unter einem Dach gibt es eine Krippengruppe, zwei Kindergartengruppen und einen Hort für Grundschulkinder. Betreut werden die Kinder von Erzieherinnen und Erziehern, Kinderpflegerinnen und einer Sozialpädagogin.\n\nFrau Hahn ist alleinerziehend und beginnt im Januar eine Vollzeitstelle. Beim Anmeldegespräch fragt sie besorgt: „Meine Tochter Ella ist gerade drei geworden. Muss sie jetzt in den Kindergarten? Und muss sie dann jeden Tag kommen, so wie später in der Schule?“\n\nIhr Nachbar Herr Vogt hatte ihr am Morgen gesagt: „Kindergarten ist doch nur Aufbewahrung, damit die Eltern arbeiten können. Und wenn das Kind den ganzen Tag dort ist, übernimmt eben der Kindergarten die Erziehung statt der Familie.“\n\nDie Stadt Neustadt plant wegen der hohen Nachfrage eine weitere Einrichtung. Bevor sie selbst aktiv wird, fragt sie bei der Diakonie und beim Roten Kreuz an, ob diese den neuen Kindergarten übernehmen möchten."
-  },
-  "kontext": "",
-  "stamm": "Frau Hahns Fragen werden fachlich zutreffend beantwortet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 6“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… ihr erklärt wird, dass für Ella keine gesetzliche Pflicht zum Besuch des Kindergartens besteht.",
-    "richtig": true,
-    "erklaerung": "Im Gegensatz zur Schulpflicht besteht keine gesetzliche Pflicht, einen Kindergarten zu besuchen."
-   },
-   {
-    "text": "… ihr mitgeteilt wird, dass Ella mit drei Jahren im vierten Lebensjahr ist und damit im typischen Kindergartenalter.",
-    "richtig": true,
-    "erklaerung": "Das vierte Lebensjahr beginnt mit dem dritten Geburtstag. Der Kindergarten ist für Kinder zwischen dem vierten und sechsten Lebensjahr."
-   },
-   {
-    "text": "… sie erfährt, dass sie den Beginn des Kindergartenbesuchs am Entwicklungsstand ihrer Tochter ausrichten kann.",
-    "richtig": true,
-    "erklaerung": "Die Eltern schicken ihre Kinder freiwillig und können den Eintritt nach dem Entwicklungsstand richten."
-   },
-   {
-    "text": "… ihr gesagt wird, dass Ella den Kindergarten wie die Schule an jedem Wochentag besuchen muss.",
-    "richtig": false,
-    "erklaerung": "Der Kindergarten muss nicht täglich besucht werden; der Aufenthalt kann flexibel gehandhabt werden."
-   }
-  ]
- },
- {
-  "id": "lb3-ft6-a3",
-  "titel": "Aussage von Herrn Vogt widerlegen",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Anmeldung im Kinderhaus „Regenbogen“",
-   "zeilen": false,
-   "text": "Das Kinderhaus „Regenbogen“ in Neustadt wird von der Caritas betrieben. Unter einem Dach gibt es eine Krippengruppe, zwei Kindergartengruppen und einen Hort für Grundschulkinder. Betreut werden die Kinder von Erzieherinnen und Erziehern, Kinderpflegerinnen und einer Sozialpädagogin.\n\nFrau Hahn ist alleinerziehend und beginnt im Januar eine Vollzeitstelle. Beim Anmeldegespräch fragt sie besorgt: „Meine Tochter Ella ist gerade drei geworden. Muss sie jetzt in den Kindergarten? Und muss sie dann jeden Tag kommen, so wie später in der Schule?“\n\nIhr Nachbar Herr Vogt hatte ihr am Morgen gesagt: „Kindergarten ist doch nur Aufbewahrung, damit die Eltern arbeiten können. Und wenn das Kind den ganzen Tag dort ist, übernimmt eben der Kindergarten die Erziehung statt der Familie.“\n\nDie Stadt Neustadt plant wegen der hohen Nachfrage eine weitere Einrichtung. Bevor sie selbst aktiv wird, fragt sie bei der Diakonie und beim Roten Kreuz an, ob diese den neuen Kindergarten übernehmen möchten."
-  },
-  "kontext": "",
-  "stamm": "Herrn Vogts Aussage wird fachlich zutreffend widerlegt, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 6“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… betont wird, dass der Kindergarten eine familienergänzende Einrichtung ist, die die Familie nicht ersetzt.",
-    "richtig": true,
-    "erklaerung": "Der Kindergarten will die Erziehung der Familie unterstützen und ergänzen – nicht ersetzen."
-   },
-   {
-    "text": "… ihm darin zugestimmt wird, dass der Kindergarten bei ganztägiger Betreuung die Erziehungsaufgabe der Familie übernimmt.",
-    "richtig": false,
-    "erklaerung": "Auch bei Ganztagsbetreuung bleibt der Kindergarten familienergänzend; die Familie behält ihre Erziehungsaufgabe."
-   },
-   {
-    "text": "… eingeräumt wird, dass Pflege und Erziehung im Kindergarten meist von ungelernten Hilfskräften geleistet werden.",
-    "richtig": false,
-    "erklaerung": "Pflege und Erziehung werden in der Regel von ausgebildeten Erziehern und Kinderpflegern geleistet."
-   },
-   {
-    "text": "… mit Mollenhauer ergänzt wird, dass Kinder dort Gleichaltrige und Spielräume finden, die Familien oft fehlen.",
-    "richtig": true,
-    "erklaerung": "Mollenhauer: Die Familie kann heute oft keinen freien, gesicherten Spielraum, keine Altersgruppe und keine vielfältigen Sozialerfahrungen mehr bieten."
-   }
-  ]
- },
- {
-  "id": "lb3-ft6-a4",
-  "titel": "Vorgehen der Stadt Neustadt",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Anmeldung im Kinderhaus „Regenbogen“",
-   "zeilen": false,
-   "text": "Das Kinderhaus „Regenbogen“ in Neustadt wird von der Caritas betrieben. Unter einem Dach gibt es eine Krippengruppe, zwei Kindergartengruppen und einen Hort für Grundschulkinder. Betreut werden die Kinder von Erzieherinnen und Erziehern, Kinderpflegerinnen und einer Sozialpädagogin.\n\nFrau Hahn ist alleinerziehend und beginnt im Januar eine Vollzeitstelle. Beim Anmeldegespräch fragt sie besorgt: „Meine Tochter Ella ist gerade drei geworden. Muss sie jetzt in den Kindergarten? Und muss sie dann jeden Tag kommen, so wie später in der Schule?“\n\nIhr Nachbar Herr Vogt hatte ihr am Morgen gesagt: „Kindergarten ist doch nur Aufbewahrung, damit die Eltern arbeiten können. Und wenn das Kind den ganzen Tag dort ist, übernimmt eben der Kindergarten die Erziehung statt der Familie.“\n\nDie Stadt Neustadt plant wegen der hohen Nachfrage eine weitere Einrichtung. Bevor sie selbst aktiv wird, fragt sie bei der Diakonie und beim Roten Kreuz an, ob diese den neuen Kindergarten übernehmen möchten."
-  },
-  "kontext": "",
-  "stamm": "Das Vorgehen der Stadt Neustadt wird fachlich zutreffend erklärt, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 6“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… angenommen wird, dass öffentliche Träger grundsätzlich die Mehrheit der Kindergärten betreiben.",
-    "richtig": false,
-    "erklaerung": "Die meisten Kindergärten sind in freier Trägerschaft; nur etwa 30 % liegen in öffentlicher Trägerschaft."
-   },
-   {
-    "text": "… die Regelung dem Jugendwohlfahrtsgesetz zugeschrieben wird, das bis heute unverändert gilt.",
-    "richtig": false,
-    "erklaerung": "Das JWG wurde 1990/91 durch das Kinder- und Jugendhilfegesetz (KJHG, SGB VIII) abgelöst."
-   },
-   {
-    "text": "… es auf das Subsidiaritätsprinzip zurückgeführt wird, nach dem freie Träger Vorrang vor öffentlichen Trägern haben.",
-    "richtig": true,
-    "erklaerung": "Öffentliche Träger werden erst aktiv, wenn kein freier Träger zur Verfügung steht (Subsidiaritätsprinzip)."
-   },
-   {
-    "text": "… betont wird, dass ein Kindergarten keiner staatlichen Aufsicht untersteht, sobald ein freier Träger ihn betreibt.",
-    "richtig": false,
-    "erklaerung": "Kindergärten unterstehen unabhängig vom Träger der Aufsicht von Jugendämtern und Regierungen."
-   }
-  ]
- },
- {
-  "id": "lb3-ft7-a1",
-  "titel": "Digitale Medien im BayBEP",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Teamsitzung in der Kita „Sonnenblume“",
-   "zeilen": false,
-   "text": "Die Kita „Sonnenblume“ hat ein Hochbeet bekommen. In der Teamsitzung sammelt das Team Ideen für ein Projekt „Unser Gemüsegarten“.\n\nFrau Yilmaz schlägt vor, dass die Kinder das Wachstum der Pflanzen mit dem Tablet fotografieren und daraus ein eigenes Gartentagebuch gestalten. Mit einer Pflanzen-App wollen sie Unkraut bestimmen und anschließend besprechen, ob die App immer recht hat. Der Praktikant Paul ergänzt: „Und wer brav mitarbeitet, darf zur Belohnung im Ruheraum ein Video schauen.“\n\nFrau Huber ist skeptisch: „Tablets? Die Kinder sitzen zu Hause schon genug vor Bildschirmen. Digitales gehört einfach nicht zum Bildungsauftrag einer Kita.“\n\nHerr Krause möchte das Thema Umwelt einbringen: „Wir zeigen ihnen Filme über Dürren und Überschwemmungen. Wenn sie richtig Angst bekommen, trennen sie den Müll freiwillig.“\n\nDie Leiterin plant für den Herbst die Suchtprävention: Ein Polizist soll den Vorschulkindern erklären, wie gefährlich Drogen sind. Eine Elternvertreterin meint dazu: „Gesund ist ein Kind doch, solange es nicht krank ist.“ Frau Yilmaz will das Gemüse am Ende gemeinsam mit den Kindern zu einer Suppe verarbeiten."
-  },
-  "kontext": "",
-  "stamm": "Die Vorschläge zum Einsatz digitaler Medien entsprechen dem BayBEP, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 7“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… Videos im Ruheraum als Belohnung eingesetzt werden, weil die Kinder sie zu Hause ohnehin nutzen.",
-    "richtig": false,
-    "erklaerung": "Der BayBEP betont: kein Medienkonsum. Passives Videoschauen als Belohnung widerspricht dem Grundsatz."
-   },
-   {
-    "text": "… Frau Hubers Bedenken aufgegriffen werden, indem digitale Medien aus dem Kita-Alltag vollständig ausgeschlossen werden.",
-    "richtig": false,
-    "erklaerung": "Der BayBEP setzt auf intelligentes Risikomanagement statt Ausschluss; Kinder haben ein Recht auf Zugang und Teilhabe."
-   },
-   {
-    "text": "… mit den Kindern besprochen wird, ob die Ergebnisse einer Pflanzen-App immer zuverlässig sind.",
-    "richtig": true,
-    "erklaerung": "Bildung über Medien: Relevanz, Qualität und Zuverlässigkeit von Informationen ansatzweise einschätzen (Analysieren und Reflektieren)."
-   },
-   {
-    "text": "… die Kinder das Pflanzenwachstum mit dem Tablet fotografieren und daraus ein eigenes Gartentagebuch gestalten.",
-    "richtig": true,
-    "erklaerung": "Bildung mit Medien: Kinder produzieren und präsentieren eigene Medienprodukte – Gestalten statt Konsumieren."
-   }
-  ]
- },
- {
-  "id": "lb3-ft7-a2",
-  "titel": "Einwand von Frau Huber",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Teamsitzung in der Kita „Sonnenblume“",
-   "zeilen": false,
-   "text": "Die Kita „Sonnenblume“ hat ein Hochbeet bekommen. In der Teamsitzung sammelt das Team Ideen für ein Projekt „Unser Gemüsegarten“.\n\nFrau Yilmaz schlägt vor, dass die Kinder das Wachstum der Pflanzen mit dem Tablet fotografieren und daraus ein eigenes Gartentagebuch gestalten. Mit einer Pflanzen-App wollen sie Unkraut bestimmen und anschließend besprechen, ob die App immer recht hat. Der Praktikant Paul ergänzt: „Und wer brav mitarbeitet, darf zur Belohnung im Ruheraum ein Video schauen.“\n\nFrau Huber ist skeptisch: „Tablets? Die Kinder sitzen zu Hause schon genug vor Bildschirmen. Digitales gehört einfach nicht zum Bildungsauftrag einer Kita.“\n\nHerr Krause möchte das Thema Umwelt einbringen: „Wir zeigen ihnen Filme über Dürren und Überschwemmungen. Wenn sie richtig Angst bekommen, trennen sie den Müll freiwillig.“\n\nDie Leiterin plant für den Herbst die Suchtprävention: Ein Polizist soll den Vorschulkindern erklären, wie gefährlich Drogen sind. Eine Elternvertreterin meint dazu: „Gesund ist ein Kind doch, solange es nicht krank ist.“ Frau Yilmaz will das Gemüse am Ende gemeinsam mit den Kindern zu einer Suppe verarbeiten."
-  },
-  "kontext": "",
-  "stamm": "Frau Hubers Einwand wird aus Sicht des BayBEP fachlich zutreffend beantwortet, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 7“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… erklärt wird, dass Kinder auch in der digitalen Welt ein Recht auf Zugang, Teilhabe sowie Bildung und Befähigung haben.",
-    "richtig": true,
-    "erklaerung": "Der BayBEP stützt sich auf die Kinderrechte: Zugang und Teilhabe, Schutz und Sicherheit, Bildung und Befähigung."
-   },
-   {
-    "text": "… darauf verwiesen wird, dass der BayBEP digitale Kompetenz als „vierte Kulturtechnik“ neben Lesen, Schreiben und Rechnen bezeichnet.",
-    "richtig": true,
-    "erklaerung": "So steht es im Kapitel 7.4; digitale Kompetenz ist Voraussetzung für gleichberechtigte Teilhabe."
-   },
-   {
-    "text": "… klargestellt wird, dass es in der Kita um Gestalten und Reflektieren geht und nicht um zusätzlichen Medienkonsum.",
-    "richtig": true,
-    "erklaerung": "„Kein Medienkonsum“: Nicht Konsumieren, sondern Gestalten und Lernen ist das Anliegen früher digitaler Bildung."
-   },
-   {
-    "text": "… betont wird, dass das Digitale das Analoge im Kita-Alltag nach und nach ersetzen soll.",
-    "richtig": false,
-    "erklaerung": "Grundsatz des BayBEP: Das Digitale ersetzt das Analoge nicht, sondern ergänzt, unterstützt und bereichert es."
-   }
-  ]
- },
- {
-  "id": "lb3-ft7-a3",
-  "titel": "Vorschlag von Herrn Krause",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Teamsitzung in der Kita „Sonnenblume“",
-   "zeilen": false,
-   "text": "Die Kita „Sonnenblume“ hat ein Hochbeet bekommen. In der Teamsitzung sammelt das Team Ideen für ein Projekt „Unser Gemüsegarten“.\n\nFrau Yilmaz schlägt vor, dass die Kinder das Wachstum der Pflanzen mit dem Tablet fotografieren und daraus ein eigenes Gartentagebuch gestalten. Mit einer Pflanzen-App wollen sie Unkraut bestimmen und anschließend besprechen, ob die App immer recht hat. Der Praktikant Paul ergänzt: „Und wer brav mitarbeitet, darf zur Belohnung im Ruheraum ein Video schauen.“\n\nFrau Huber ist skeptisch: „Tablets? Die Kinder sitzen zu Hause schon genug vor Bildschirmen. Digitales gehört einfach nicht zum Bildungsauftrag einer Kita.“\n\nHerr Krause möchte das Thema Umwelt einbringen: „Wir zeigen ihnen Filme über Dürren und Überschwemmungen. Wenn sie richtig Angst bekommen, trennen sie den Müll freiwillig.“\n\nDie Leiterin plant für den Herbst die Suchtprävention: Ein Polizist soll den Vorschulkindern erklären, wie gefährlich Drogen sind. Eine Elternvertreterin meint dazu: „Gesund ist ein Kind doch, solange es nicht krank ist.“ Frau Yilmaz will das Gemüse am Ende gemeinsam mit den Kindern zu einer Suppe verarbeiten."
-  },
-  "kontext": "",
-  "stamm": "Herrn Krauses Vorschlag wird aus Sicht des BayBEP fachlich zutreffend beurteilt, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 7“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… ihm zugestimmt wird, weil Kinder für die Umweltprobleme hauptverantwortlich sind und deshalb ihr Verhalten ändern müssen.",
-    "richtig": false,
-    "erklaerung": "Kinder tragen für Umweltgefährdungen – wenn überhaupt – nur begrenzt Verantwortung, beschränkt auf ihren unmittelbaren Handlungsbereich."
-   },
-   {
-    "text": "… ergänzt wird, dass Kinder die Umwelt zunächst mit allen Sinnen erfahren und als verletzbar erleben sollen.",
-    "richtig": true,
-    "erklaerung": "Bildungsziel: die Umwelt mit allen Sinnen erfahren und als unersetzlich und verletzbar wahrnehmen – z. B. im Gemüsegarten."
-   },
-   {
-    "text": "… kritisiert wird, dass Angst Kinder überfordern kann, während der BayBEP Zuversicht und Hoffnung stärken will.",
-    "richtig": true,
-    "erklaerung": "Ziel ist, trotz Umweltproblemen Lösungsmöglichkeiten zu erkennen und dabei Zuversicht, Hoffnung und Durchhaltevermögen zu entwickeln."
-   },
-   {
-    "text": "… der Vorschlag als gelungenes Beispiel für Bildung für nachhaltige Entwicklung im Sinne der Agenda 21 gilt.",
-    "richtig": false,
-    "erklaerung": "BNE zeigt nach vorne weisende Szenarien und verbindet Ökologie, Ökonomie und Soziales. Angstmachende Bilder gehören nicht dazu."
-   }
-  ]
- },
- {
-  "id": "lb3-ft7-a4",
-  "titel": "Gesundheitsbildung",
-  "lbNum": 3,
-  "vignette": {
-   "titel": "Teamsitzung in der Kita „Sonnenblume“",
-   "zeilen": false,
-   "text": "Die Kita „Sonnenblume“ hat ein Hochbeet bekommen. In der Teamsitzung sammelt das Team Ideen für ein Projekt „Unser Gemüsegarten“.\n\nFrau Yilmaz schlägt vor, dass die Kinder das Wachstum der Pflanzen mit dem Tablet fotografieren und daraus ein eigenes Gartentagebuch gestalten. Mit einer Pflanzen-App wollen sie Unkraut bestimmen und anschließend besprechen, ob die App immer recht hat. Der Praktikant Paul ergänzt: „Und wer brav mitarbeitet, darf zur Belohnung im Ruheraum ein Video schauen.“\n\nFrau Huber ist skeptisch: „Tablets? Die Kinder sitzen zu Hause schon genug vor Bildschirmen. Digitales gehört einfach nicht zum Bildungsauftrag einer Kita.“\n\nHerr Krause möchte das Thema Umwelt einbringen: „Wir zeigen ihnen Filme über Dürren und Überschwemmungen. Wenn sie richtig Angst bekommen, trennen sie den Müll freiwillig.“\n\nDie Leiterin plant für den Herbst die Suchtprävention: Ein Polizist soll den Vorschulkindern erklären, wie gefährlich Drogen sind. Eine Elternvertreterin meint dazu: „Gesund ist ein Kind doch, solange es nicht krank ist.“ Frau Yilmaz will das Gemüse am Ende gemeinsam mit den Kindern zu einer Suppe verarbeiten."
-  },
-  "kontext": "",
-  "stamm": "Die Pläne zur Gesundheitsbildung entsprechen dem BayBEP, wenn …",
-  "pruefen": "Aus deinem Word-Dokument „Freitagstest 7“ übernommen. Bitte vor dem Freischalten kurz durchsehen.",
-  "aussagen": [
-   {
-    "text": "… die Kinder das geerntete Gemüse zubereiten und Essen als Genuss mit allen Sinnen erleben.",
-    "richtig": true,
-    "erklaerung": "Ziele im Bereich Ernährung: Essen als Genuss mit allen Sinnen erleben, Erfahrungen mit der Zubereitung von Speisen sammeln."
-   },
-   {
-    "text": "… Gesundheit wie von der Elternvertreterin als bloßes Fehlen von Krankheit verstanden wird.",
-    "richtig": false,
-    "erklaerung": "Nach der WHO ist Gesundheit ein Zustand von körperlichem, seelischem, geistigem und sozialem Wohlbefinden."
-   },
-   {
-    "text": "… die Suchtprävention vor allem auf einem Vortrag über Drogen und deren Gefahren beruht.",
-    "richtig": false,
-    "erklaerung": "Suchtprävention im Kindesalter ist sucht(mittel)unspezifisch: Sie stärkt Lebenskompetenzen und Schutzfaktoren statt über Drogen aufzuklären."
-   },
-   {
-    "text": "… Gesundheitsbildung erst in der Grundschule ansetzt, wenn Kinder die Zusammenhänge besser verstehen.",
-    "richtig": false,
-    "erklaerung": "Gesundheitsbildung beginnt ab der Geburt; grundlegende Gewohnheiten entwickeln sich bereits in den ersten Lebensjahren."
-   }
-  ]
- }
-]);
-CHECKOUT_VORLAGEN_ALLE.push(...[
- {
-  "id": "kp-lb3-test1",
-  "titel": "Freitagstest 1: Erziehung als soziale Beziehung",
-  "name": "Erziehung als soziale Beziehung",
-  "lbNum": 3,
-  "nr": 1,
-  "aufgaben": [
-   "lb3-ft1-a1",
-   "lb3-ft1-a2",
-   "lb3-ft1-a3",
-   "lb3-ft1-a4"
-  ],
-  "klassisch": "Erläutern Sie anhand der Fallvignette, inwiefern Erziehung soziale Interaktion und soziale Beziehung ist. Nehmen Sie dabei Stellung zur Aussage von Frau Berger."
- },
- {
-  "id": "kp-lb3-test2",
-  "titel": "Freitagstest 2: Erziehung als Austausch von Informationen",
-  "name": "Erziehung als Austausch von Informationen",
-  "lbNum": 3,
-  "nr": 2,
-  "aufgaben": [
-   "lb3-ft2-a1",
-   "lb3-ft2-a2",
-   "lb3-ft2-a3",
-   "lb3-ft2-a4"
-  ],
-  "klassisch": "Analysieren Sie die Fallvignette mithilfe der Begriffe soziale Kommunikation und symbolischer Interaktionismus. Beurteilen Sie die Einschätzung der Praktikantin Jana."
- },
- {
-  "id": "kp-lb3-test3",
-  "titel": "Freitagstest 3: Erziehung als beabsichtigte Lernhilfe",
-  "name": "Erziehung als beabsichtigte Lernhilfe",
-  "lbNum": 3,
-  "nr": 3,
-  "aufgaben": [
-   "lb3-ft3-a1",
-   "lb3-ft3-a2",
-   "lb3-ft3-a3",
-   "lb3-ft3-a4"
-  ],
-  "klassisch": "Grenzen Sie anhand der Fallvignette Erziehung als beabsichtigte Lernhilfe von unbeabsichtigtem Lernen ab. Beurteilen Sie die Äußerungen der Mutter und der Großmutter."
- },
- {
-  "id": "kp-lb3-test4",
-  "titel": "Freitagstest 4: Erziehung als soziales Handeln",
-  "name": "Erziehung als soziales Handeln",
-  "lbNum": 3,
-  "nr": 4,
-  "aufgaben": [
-   "lb3-ft4-a1",
-   "lb3-ft4-a2",
-   "lb3-ft4-a3",
-   "lb3-ft4-a4"
-  ],
-  "klassisch": "Prüfen Sie anhand der Definition von Erziehung, ob Frau Webers Vorgehen Erziehung ist. Erläutern Sie, warum pädagogisches Handeln als „Versuchshandeln“ bezeichnet wird."
- },
- {
-  "id": "kp-lb3-test5",
-  "titel": "Freitagstest 5: Erziehungsstile nach Baumrind",
-  "name": "Erziehungsstile nach Baumrind",
-  "lbNum": 3,
-  "nr": 5,
-  "aufgaben": [
-   "lb3-ft5-a1",
-   "lb3-ft5-a2",
-   "lb3-ft5-a3",
-   "lb3-ft5-a4"
-  ],
-  "klassisch": "Ordnen Sie die vier Elternteile begründet den Erziehungsstilen nach Baumrind zu und erläutern Sie mögliche Folgen für die kindliche Entwicklung."
- },
- {
-  "id": "kp-lb3-test6",
-  "titel": "Freitagstest 6: Der Kindergarten als Erziehungs- und Bildungseinrichtung",
-  "name": "Der Kindergarten als Erziehungs- und Bildungseinrichtung",
-  "lbNum": 3,
-  "nr": 6,
-  "aufgaben": [
-   "lb3-ft6-a1",
-   "lb3-ft6-a2",
-   "lb3-ft6-a3",
-   "lb3-ft6-a4"
-  ],
-  "klassisch": "Beschreiben Sie anhand der Fallvignette die Merkmale einer Kindertagesstätte und eines Kindergartens. Nehmen Sie Stellung zur Aussage von Herrn Vogt."
- },
- {
-  "id": "kp-lb3-test7",
-  "titel": "Freitagstest 7: Der Bayerische Bildungs- und Erziehungsplan: Digitale Medien, Umwelt, Gesundheit",
-  "name": "Der Bayerische Bildungs- und Erziehungsplan: Digitale Medien, Umwelt, Gesundheit",
-  "lbNum": 3,
-  "nr": 7,
-  "aufgaben": [
-   "lb3-ft7-a1",
-   "lb3-ft7-a2",
-   "lb3-ft7-a3",
-   "lb3-ft7-a4"
-  ],
-  "klassisch": "Beurteilen Sie die Vorschläge aus der Teamsitzung auf Grundlage der Kapitel „Digitale Medien und Technologien“, „Umwelt“ und „Gesundheit“ des BayBEP."
- }
-]);
-
-// ---- K-Prim-Test LB 1 · Nr. 1: Gegenstand der Psychologie und Gegenstand der Pädagogik (jede Aufgabe mit eigener Fallvignette) ----
-CO_AUFGABENBANK.push(...[
- {
-  "id": "kp-lb1-g-lina",
-  "titel": "Gegenstand der Psychologie: Erleben und Verhalten (Lina)",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Lina vor der Schulaufgabe",
-   "zeilen": false,
-   "text": "Du bist an der FOS und heute wird die Schulaufgabe im Fach Pädagogik und Psychologie geschrieben. Deine Mitschülerin Lina teilt dir weinend vor der Schulaufgabe mit, dass sie große Angst vor der Schulaufgabe hat. Dabei sagt sie: „Ich schaffe das nicht!“. Auch äußert sie, dass ihr Denkvermögen während der Schulaufgabe nachlässt. Sie kann kaum die Buchstaben sehen, alles verschwimmt vor ihren Augen. Weiterhin erzählt sie, dass, wenn diese Situation eintritt, sie an den Nägeln knibbelt und sich unruhig auf dem Stuhl hin und her bewegt. „Ich bin so durcheinander und aufgeregt, was soll ich bloß tun?“, fragt dich Lina. Plötzlich betritt der Pädagogik und Psychologie-Lehrer die Klasse und verteilt die Schulaufgabe. Bei dem Anblick der Schulaufgabe beginnt Lina zu zittern und rennt weinend aus der Klasse. Später erzählt sie, dass sie die Schulaufgabe nicht mitschreiben konnte, weil sie Angst vor der Schulaufgabe hatte und deswegen den Klassenraum verließ."
-  },
-  "kontext": "",
-  "stamm": "Gegenstandsbereich der Psychologie und ihre Wechselwirkung: Die Schulaufgabe wirkt sich auf Linas Erleben und Verhalten aus.",
-  "pruefen": "Aussagen aus deiner Vorlage übernommen; Erklärungen von Claude ergänzt. Bitte prüfen.",
-  "aussagen": [
-   {
-    "text": "Mit der Frage von Lina an dich „Ich bin so durcheinander und aufgeregt, was soll ich bloß tun?“ wird das Erleben von Lina deutlich.",
-    "richtig": true,
-    "erklaerung": "Durcheinander und aufgeregt zu sein sind innere Vorgänge, die von außen nicht beobachtbar sind – also Erleben."
-   },
-   {
-    "text": "Mit „… weil sie Angst vor der Schulaufgabe hatte und deswegen den Klassenraum verließ“ wird deutlich, dass Linas Verhalten das Erleben beeinflusst.",
-    "richtig": false,
-    "erklaerung": "Hier ist es umgekehrt: Das Erleben (Angst) beeinflusst das Verhalten (Verlassen des Klassenraums)."
-   },
-   {
-    "text": "Mit „Deine Mitschülerin Lina teilt dir weinend vor der Schulaufgabe mit, dass sie große Angst vor der Schulaufgabe hat“ wird erkennbar, dass das Erleben von Lina ihr Verhalten beeinflusst.",
-    "richtig": true,
-    "erklaerung": "Die Angst (Erleben) zeigt sich im Weinen und Mitteilen (Verhalten)."
-   },
-   {
-    "text": "„Wenn diese Situation eintritt, fängt sie an, an ihren Nägeln zu knibbeln und sich unruhig auf dem Stuhl hin und her zu bewegen“ zeigt das Verhalten von Lina.",
-    "richtig": true,
-    "erklaerung": "An den Nägeln knibbeln und sich unruhig bewegen sind von außen beobachtbare Äußerungen – also Verhalten."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-g-leon",
-  "titel": "Gegenstand der Psychologie: Erleben und Verhalten (Leon)",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Leon und der Klassenchat",
-   "zeilen": false,
-   "text": "Der 17-jährige Leon fährt nach der Schule mit dem Bus nach Hause. Während der Fahrt bemerkt er, dass mehrere Mitschülerinnen und Mitschüler in einer Klassenchat-Gruppe Fotos von einer gemeinsamen Veranstaltung posten. Leon schaut immer wieder auf sein Handy. Nach einigen Minuten legt er das Handy weg und blickt aus dem Fenster. Zu Hause angekommen, zieht er sich in sein Zimmer zurück und nimmt nicht wie sonst am Familiengespräch beim Abendessen teil.\nSeine Mutter fragt ihn später, ob alles in Ordnung sei. Leon antwortet nur kurz: „Schon okay.“ Tatsächlich denkt er darüber nach, warum er auf keinem der geposteten Fotos zu sehen ist, und fühlt sich ausgeschlossen."
-  },
-  "kontext": "",
-  "stamm": "Pädagogische/Psychologische Kompetenz bedeutet auch, fachlich fundierte Einschätzungen vorzunehmen und begründetes Handeln abzuleiten.",
-  "pruefen": "Aussagen aus deiner Vorlage übernommen; Erklärungen von Claude ergänzt. Bitte prüfen.",
-  "aussagen": [
-   {
-    "text": "Leons Rückzug in sein Zimmer gehört zum Verhalten, da diese Handlung von anderen Personen beobachtet werden kann.",
-    "richtig": true,
-    "erklaerung": "Verhalten kann von anderen Personen wahrgenommen und beschrieben werden."
-   },
-   {
-    "text": "Leons Gefühle erlauben die sichere Schlussfolgerung, dass er grundsätzlich über ein geringes Selbstwertgefühl verfügt.",
-    "richtig": false,
-    "erklaerung": "Aus dem Gefühl in einer einzelnen Situation lässt sich keine sichere, grundsätzliche Aussage über sein Selbstwertgefühl ableiten."
-   },
-   {
-    "text": "Bei Leon sollte für eine psychologische Analyse zwischen direkt beobachtbarem Verhalten und vermutetem Erleben unterschieden werden.",
-    "richtig": true,
-    "erklaerung": "Verhalten ist beobachtbar; Erleben ist nicht direkt beobachtbar und muss erschlossen werden."
-   },
-   {
-    "text": "Aus Leons kurzer Antwort gegenüber seiner Mutter lassen sich seine Gedanken und Gefühle eindeutig ableiten.",
-    "richtig": false,
-    "erklaerung": "Die Antwort „Schon okay.“ ist Verhalten. Gedanken und Gefühle sind nicht direkt beobachtbar und lassen sich daraus nicht eindeutig ableiten."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-g-lena",
-  "titel": "Gegenstand der Psychologie: Wechselwirkung von Erleben und Verhalten (Lena)",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Lena – zwischen Leistungsdruck und Rückzug",
-   "zeilen": false,
-   "text": "Lena ist 17 Jahre alt und geht in die 11. Klasse der Fachoberschule. Seit Beginn des Schuljahres fühlt sie sich stark unter Druck: mehrere Prüfungen, eine Projektarbeit und die Bewerbung für ein Auslandspraktikum fallen in denselben Zeitraum. Sie arbeitet länger als sonst, setzt sich sehr hohe Ziele und wirkt zunehmend unruhig.\nIn letzter Zeit schläft Lena schlechter: Sie braucht oft mehr als eine Stunde zum Einschlafen, wacht nachts auf und fühlt sich morgens müde. Beim Frühstück ist sie oft nicht hungrig. In der Schule überspringt sie regelmäßig Pausen, isst seltener in der Kantine und zieht sich in die Bibliothek zurück, um weiterzuarbeiten. Ihre Freundinnen berichten, dass sie Nachrichten seltener beantwortet und gemeinsame Treffen absagt.\nBei einer Klassenarbeit zeigte Lena starke körperliche Reaktionen: zitternde Hände, Herzrasen und ein Engegefühl in der Brust; sie verließ nach 20 Minuten weinend den Raum, weil sie Angst hatte zu versagen. Lena beschreibt, sie fühle sich überfordert und habe große Angst, andere zu enttäuschen. Gleichzeitig ist sie sehr selbstkritisch: Wenn etwas nicht perfekt gelinge, mache sie sich lange Vorwürfe. Früher spielte sie Volleyball und joggte mit einer Freundin; inzwischen hat sie kaum noch Hobbys. Ihre Mutter bemerkt, dass Lena öfter gereizt ist und schnell weint. Auf ein Gespräch mit einer Beratungsstelle reagiert Lena zögerlich: Sie wünscht sich Unterstützung, fürchtet aber, als „schwach“ wahrgenommen zu werden."
-  },
-  "kontext": "",
-  "stamm": "Die Leistungssituation zeigt die wechselseitige Beeinflussung von Lenas Erleben und Verhalten.",
-  "pruefen": "Aussagen aus deiner Vorlage übernommen; Erklärungen von Claude ergänzt. Bitte prüfen.",
-  "aussagen": [
-   {
-    "text": "Weil Verhalten direkt beobachtbar ist, liefern Verhaltensänderungen wie Lenas Rückzug in die Bibliothek eindeutige Hinweise auf die zugrundeliegenden inneren Zustände; man kann aus dem Rückzug ohne Weiteres schließen, dass sie vor allem anhaltende depressive Stimmung hat.",
-    "richtig": false,
-    "erklaerung": "Verhalten ist beobachtbar, das Erleben dahinter muss aber erschlossen werden. Ein eindeutiger Schluss auf eine depressive Stimmung ist nicht möglich."
-   },
-   {
-    "text": "Da Erleben subjektiv ist, kann es nicht systematisch durch Veränderungen im Verhalten beeinflusst werden; wenn Lena also wieder regelmäßig Volleyball spielt, wird dies ihr inneres Erleben kaum verändern, weil Gefühle und Gedanken unabhängig von äußerem Verhalten entstehen.",
-    "richtig": false,
-    "erklaerung": "Erleben und Verhalten stehen in Wechselwirkung: Auch Verhalten (z. B. wieder Sport treiben) kann das Erleben verändern."
-   },
-   {
-    "text": "Die Wechselwirkung zwischen Erleben und Verhalten bedeutet, dass alle beobachtbaren Verhaltensänderungen bei Lena automatisch auf ihr Erleben zurückgehen; äußere Einflüsse (z. B. Terminsituation, Schlafdauer) spielen dabei nur eine untergeordnete Rolle.",
-    "richtig": false,
-    "erklaerung": "Wechselwirkung heißt nicht, dass jedes Verhalten allein auf das Erleben zurückgeht. Auch äußere Einflüsse wirken auf Erleben und Verhalten."
-   },
-   {
-    "text": "Lenas Angst vor Versagen und ihre starke Selbstkritik äußern sich in beobachtbarem Verhalten; dieses Verhalten kann wiederum das Erleben verstärken und so einen rückkoppelnden Kreislauf zwischen inneren Zuständen und äußerem Verhalten erzeugen.",
-    "richtig": true,
-    "erklaerung": "Angst und Selbstkritik (Erleben) zeigen sich z. B. im Rückzug (Verhalten), der wiederum das Erleben verstärken kann."
-   }
-  ]
- },
- {
-  "id": "kp-lb1-g-paedagogik",
-  "titel": "Gegenstand der Pädagogik: Erziehungspraxis, Erziehungswissenschaft, Gegenstandsbereiche",
-  "lbNum": 1,
-  "vignette": {
-   "titel": "Praktikum im Kinderhort",
-   "zeilen": false,
-   "text": "Mia absolviert ihr Praktikum in einem Kinderhort. Die Erzieherin Frau Demir vereinbart mit den Kindern feste Regeln für die Hausaufgabenzeit, lobt den zehnjährigen Paul, als er seine Aufgaben selbstständig beginnt, und überträgt ihm die Verantwortung für das Austeilen der Hefte. In der Teamsitzung berichtet Frau Demir von einer Studie, die untersucht hat, wie sich Lob auf die Selbstständigkeit von Kindern auswirkt. Ihr Kollege Herr Lang meint dagegen, Kinder entwickelten sich am besten, wenn Erwachsene möglichst wenig eingreifen. Mia fällt auf, dass Paul Ratschläge von Frau Demir eher annimmt, seit er ihr vertraut."
-  },
-  "kontext": "",
-  "stamm": "Die Situation im Kinderhort wird fachlich zutreffend eingeordnet, wenn …",
-  "pruefen": "Neu erstellt (Claude). Bitte fachlich und passend zu deinem Unterricht prüfen.",
-  "aussagen": [
-   {
-    "text": "… das Vereinbaren der Regeln und das Lob für Paul der Erziehungspraxis zugeordnet werden, weil es sich um tatsächliches erzieherisches Handeln mit einer erzieherischen Absicht handelt.",
-    "richtig": true,
-    "erklaerung": "Erziehungspraxis meint das tatsächliche erzieherische Handeln; dahinter steht jeweils eine erzieherische Absicht."
-   },
-   {
-    "text": "… die Studie über die Wirkung von Lob der Erziehungspraxis zugeordnet wird, weil eine Erzieherin sie in der Teamsitzung vorstellt.",
-    "richtig": false,
-    "erklaerung": "Die Studie gehört zur Erziehungswissenschaft: Sie untersucht, wie Erziehung abläuft und wirkt."
-   },
-   {
-    "text": "… die unterschiedlichen Auffassungen von Frau Demir und Herrn Lang dem Gegenstandsbereich „Vorstellungen über Erziehung“ zugeordnet werden, weil solche Vorstellungen oft vom Menschenbild abhängen.",
-    "richtig": true,
-    "erklaerung": "Gezielt anleiten oder möglichst wenig eingreifen: Das sind unterschiedliche Vorstellungen über Erziehung, oft abhängig vom Menschenbild."
-   },
-   {
-    "text": "… Pauls Vertrauen zu Frau Demir dem Gegenstandsbereich „Einrichtungen der Erziehung“ zugeordnet wird, weil es im Kinderhort entstanden ist.",
-    "richtig": false,
-    "erklaerung": "Vertrauen gehört zum Gegenstandsbereich „Beziehung zwischen Erzieher und zu Erziehendem“. Der Hort selbst wäre eine Einrichtung der Erziehung."
-   }
-  ]
- }
-]);
-CHECKOUT_VORLAGEN_ALLE.push(...[
- {
-  "id": "kp-lb1-test-gegenstand",
-  "titel": "Gegenstand der Psychologie und Gegenstand der Pädagogik",
-  "lbNum": 1,
-  "nr": 1,
-  "eigeneVignetten": true,
-  "aufgaben": [
-   "kp-lb1-g-lina",
-   "kp-lb1-g-leon",
-   "kp-lb1-g-lena",
-   "kp-lb1-g-paedagogik"
-  ]
- }
-]);
+// Angeboten werden nur Vorlagen im neuen Aufbau (genau 4 Aufgaben: 2 Fallvignetten, je 2 Aufgaben). Ältere Vorlagen mit 3 Aufgaben bleiben im Code.
 const CHECKOUT_VORLAGEN=CHECKOUT_VORLAGEN_ALLE.filter(v=>(v.aufgaben||[]).length===CHECKOUT_MAX_AUFGABEN);
 let coEditor=null;
-// Inhalte einer Vorlage (Titel ihrer K-Prim-Aufgaben), damit klar ist, was getestet wird
-// Einheitliche Benennung aller K-Prim-Tests: „KPrim-Test · LB1 · Nr. 1 · Titel“.
-function coLabel(v){return["KPrim-Test","LB"+v.lbNum,v.nr?"Nr. "+v.nr:"",v.name||v.titel].filter(Boolean).join(" · ");}
-// Angezeigter Titel eines angelegten Check-outs: stammt er unverändert aus einer Vorlage, wird die einheitliche Benennung gezeigt.
-function coTitelAnzeige(c){
- const t=(c&&c.titel)||"";
- const v=CHECKOUT_VORLAGEN_ALLE.find(x=>x.titel===t||coLabel(x)===t);
- return v?coLabel(v):t;
-}
-function coVorlageInhalte(v){return(v.aufgaben||[]).map(id=>(CO_AUFGABENBANK.find(b=>b.id===id)||{}).titel).filter(Boolean);}
 const CO_CHECKLISTE=[
  ["Situation","Situationsbeschreibung adäquat (anwendungsorientierte Informationen)"],
  ["Situation","Alle notwendigen, aber keine irrelevanten Informationen"],
@@ -10365,17 +9052,14 @@ async function openCheckoutEditor(id,vorgabe){
      vTitel:a.vignette?.titel??(glob?.titel||""),vText:a.vignette?.text??(glob?.text||""),vZeilen:a.vignette?!!a.vignette.zeilen:!!glob,
      mTitel:a.material?.titel||"",mText:a.material?.text||"",mQuelle:a.material?.quelle||"",
      aussagen:[0,1,2,3].map(j=>({text:a.aussagen?.[j]||"",richtig:!!lo.aufgaben?.[i]?.richtig?.[j],erklaerung:lo.aufgaben?.[i]?.erklaerung?.[j]||""}))}))};
-   coEditor.eigeneVig=(co.aufgaben||[]).some(a=>a.vignette?.text&&a.vignette.text!==(co.aufgaben[0].vignette?.text||"")); // Test mit eigener Fallvignette je Aufgabe
-   while(coEditor.aufgaben.length<CHECKOUT_MAX_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe()); // ältere Entwürfe mit weniger Aufgaben auffüllen
   }catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
  }else{
   const heute=new Date().toISOString().slice(0,10);
-  const lauf=PROJEKT_PHASEN.find(p=>heute>=p.start&&heute<=p.end)||PROJEKT_PHASEN.find(p=>heute<p.start)||PROJEKT_PHASEN[0];
-  coEditor={id:null,titel:"",lbNum:lauf.lbNum,datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:Array.from({length:CHECKOUT_MAX_AUFGABEN},()=>coLeereAufgabe())};
+  coEditor={id:null,titel:"",lbNum:pp12LbFuerDatum(heute),datum:heute,zaehlt:true,vignetteTitel:"",vignetteText:"",klassisch:"",checkliste:[],aufgaben:[coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe(),coLeereAufgabe()]};
   if(vorgabe?.datum)coEditor.datum=vorgabe.datum;
   if(vorgabe?.lbNum)coEditor.lbNum=vorgabe.lbNum;
   const vl=vorgabe?.vorlage?CHECKOUT_VORLAGEN.find(v=>v.id===vorgabe.vorlage):null;
-  if(vl){coEditor.titel=vl.titel;coEditor.lbNum=vl.lbNum;coEditor.eigeneVig=!!vl.eigeneVignetten;coEditor.aufgaben=vl.aufgaben.map(coAufgabeAusBank);}
+  if(vl){coEditor.titel=vl.titel;coEditor.lbNum=vl.lbNum;coEditor.aufgaben=vl.aufgaben.map(coAufgabeAusBank);}
  }
  coEditorRender();
 }
@@ -10389,9 +9073,8 @@ function coEditorLesen(){
   stamm:v(`coStamm${i}`),kontext:v(`coKo${i}`),vTitel:v(`coVT${i}`),vText:v(`coVX${i}`),vZeilen:!!$(`coVZ${i}`)?.checked,
   mTitel:v(`coMT${i}`),mText:v(`coMX${i}`),mQuelle:v(`coMQ${i}`),
   aussagen:[0,1,2,3].map(j=>({text:v(`coA${i}_${j}`),richtig:$(`coR${i}_${j}`)?.value==="r",erklaerung:v(`coE${i}_${j}`)}))}));
- // Eine Fallvignette für den ganzen Test: Aufgabe 1 gibt sie vor, alle weiteren übernehmen sie.
- const a0=coEditor.aufgaben[0];
- if(a0&&!coEditor.eigeneVig)coEditor.aufgaben.forEach((a,i)=>{if(i>0){a.vTitel=a0.vTitel;a.vText=a0.vText;a.vZeilen=a0.vZeilen;}});
+ // Eine Fallvignette für je 2 Aufgaben: Aufgabe 1 und 3 geben sie vor, Aufgabe 2 und 4 übernehmen sie.
+ coEditor.aufgaben.forEach((a,i)=>{if(i%2===1){const q=coEditor.aufgaben[i-1];a.vTitel=q.vTitel;a.vText=q.vText;a.vZeilen=q.vZeilen;}});
 }
 // Aktualisiert nur die Hinweise (beim Tippen), ohne das Formular neu zu zeichnen.
 function coEditorPruefen(){
@@ -10411,7 +9094,7 @@ function coEditorRender(){
  }
  const e=coEditor,p=coPruefung(e),be=CHECKOUT_BE_NACH_FEHLERN;
  const cl=CO_CHECKLISTE.map(([g,t],k)=>`${k===0||CO_CHECKLISTE[k-1][0]!==g?`<div class="co-cl-gruppe">${g}</div>`:""}<label class="co-cl"><input id="coCl${k}"type="checkbox"${e.checkliste[k]?" checked":""} onchange="coEditorPruefen()"> ${esc(t)}</label>`).join("");
- const bankOpt=coBankOptionen();
+ const bankOpt=`<option value="">Aus der Aufgabenbank einsetzen …</option>${CO_AUFGABENBANK.map(b=>`<option value="${esc(b.id)}">${esc(b.titel)}</option>`).join("")}`;
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 CHECK-OUT-TEST · ${e.id?"ENTWURF BEARBEITEN":"NEU ANLEGEN"} · NUR LEHRKRÄFTE</div>
   <h2>K-Prim-Test anlegen</h2>
@@ -10435,9 +9118,9 @@ function coEditorRender(){
    .co-sec .co-aus-f select{background:#fbe6e6;border-color:#e8b1b1;color:#9a2f2f;font-weight:600}
   </style>
   <div class="co-legende"><span class="co-l-vig">1 Fallvignette</span><span class="co-l-stamm">2 Einleitungssatz</span><span class="co-l-aus">3 Die 4 Aussagen</span></div>
-  <p class="co-ed-intro">Jeder Freitagstest besteht aus <b>einer Fallvignette</b> und genau <b>${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben</b>. Jede Aufgabe hat einen Einleitungssatz und 4 Aussagen. Wertung je Aufgabe: 4 richtig = ${be[0]} BE · 3 = ${be[1]} BE · 2 = ${be[2]} BE · sonst 0. Die Schüler:innen sehen diese Bepunktung vorab im Test.</p>
+  <p class="co-ed-intro">Jeder Check-out-Wochentest besteht aus <b>${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben</b> mit <b>2 Fallvignetten, jede für 2 Aufgaben</b> (Aufgabe 1+2 und 3+4). Jede Aufgabe hat einen Einleitungssatz und 4 Aussagen. Wertung je Aufgabe in Bewertungseinheiten (BE): 4 richtig = ${be[0]} BE · 3 = ${be[1]} BE · 2 = ${be[2]} BE · sonst 0. Gesamt <b>${CHECKOUT_MAX_AUFGABEN*be[0]} BE</b>, umgerechnet in Notenpunkte (0–15).</p>
   <div class="form">
-   ${!e.id&&CHECKOUT_VORLAGEN.length?`<div class="co-ed-vorlage"><b>📋 Vorlage:</b> <select id="coVorlage"onchange="coVorlageWaehlen()"><option value="">Ganzen Test aus Vorlage einsetzen …</option>${CHECKOUT_VORLAGEN.map(v=>`<option value="${esc(v.id)}">${esc(coLabel(v))}${v.datum?" ("+esc(coDatum(v.datum))+")":""} – ${esc(coVorlageInhalte(v).join(" + "))}</option>`).join("")}</select></div>`:""}
+   ${!e.id&&CHECKOUT_VORLAGEN.length?`<div class="co-ed-vorlage"><b>📋 Vorlage:</b> <select id="coVorlage"onchange="coVorlageWaehlen()"><option value="">Ganzen Test aus Vorlage einsetzen …</option>${CHECKOUT_VORLAGEN.map(v=>`<option value="${esc(v.id)}">${esc(v.titel)} (LB ${v.lbNum} · ${esc(coDatum(v.datum))})</option>`).join("")}</select></div>`:""}
    <div style="display:flex;gap:10px;flex-wrap:wrap">
     <label style="flex:2;min-width:200px">Titel<input id="coTitel"value="${esc(e.titel)}"placeholder="z. B. Alltags- und Wissenschaftstheorie"></label>
     <label style="flex:1;min-width:110px">Lernbereich<select id="coLb">${[1,2,3,4].map(n=>`<option value="${n}"${e.lbNum===n?" selected":""}>LB ${n}</option>`).join("")}</select></label>
@@ -10452,12 +9135,12 @@ function coEditorRender(){
     <div class="co-ed-kopf"><b>Aufgabe ${i+1}</b><span id="coHinw${i}"><b>${p.pro[i].richtig} richtig · ${4-p.pro[i].richtig} falsch</b> ${coPruefChips(p.pro[i])}</span></div>
     <div class="co-bankleiste"><span>Aufgabe aus der Bank laden:</span><select id="coBank${i}"class="co-ed-bank"onchange="coBankEinsetzen(${i})">${bankOpt}</select></div>
     ${a.pruefen?`<div class="co-hinweis">⚠ ${esc(a.pruefen)}</div>`:""}
-    ${(i===0||e.eigeneVig)?`<section class="co-sec co-sec-vig">
-     <div class="co-sec-kopf"><span class="co-sec-nr">1</span>Fallvignette <small>${e.eigeneVig?"eigene Situation für diese Aufgabe":"gilt für alle Aufgaben: die Situation, auf die sich alle Aussagen beziehen"}</small></div>
+    ${i%2===0?`<section class="co-sec co-sec-vig">
+     <div class="co-sec-kopf"><span class="co-sec-nr">1</span>Fallvignette <small>gilt für Aufgabe ${i+1} und ${i+2}: die Situation, auf die sich alle Aussagen beider Aufgaben beziehen</small></div>
      <label>Überschrift<input id="coVT${i}"value="${esc(a.vTitel)}"placeholder="z. B. Kindergarten „Wirbelwind“"></label>
      <label>Text<textarea id="coVX${i}"rows="6"placeholder="Situation ohne Hinweise auf die Lösung."oninput="coEditorPruefen()">${esc(a.vText)}</textarea></label>
      <label class="check"><input id="coVZ${i}"type="checkbox"${a.vZeilen?" checked":""}> Zeilen nummerieren (jeder Zeilenumbruch = neue Zeile, für Verweise wie „Z. 15–17“)</label>
-    </section>`:`<div class="co-hinweis ok"style="margin:8px 0">📖 Es gilt die Fallvignette von Aufgabe 1 (eine Fallvignette für den ganzen Test).</div>`}
+    </section>`:`<div class="co-hinweis ok"style="margin:8px 0">📖 Es gilt die Fallvignette von Aufgabe ${i} (eine Fallvignette für je 2 Aufgaben).</div>`}
     <details class="co-ed-details"${a.mText?" open":""}><summary>📎 Material zu Aufgabe ${i+1} (optional, z. B. Studie oder Text)</summary>
      <label>Titel<input id="coMT${i}"value="${esc(a.mTitel)}"></label>
      <label>Text<textarea id="coMX${i}"rows="5">${esc(a.mText)}</textarea></label>
@@ -10481,7 +9164,7 @@ function coEditorRender(){
 
    <details class="co-ed-details"><summary><span class="co-ed-schritt-inline">②</span> Checkliste (ISB) · <span id="coClStand">${e.checkliste.filter(Boolean).length}/${CO_CHECKLISTE.length} bestätigt</span></summary><div class="co-cl-liste">${cl}</div></details>
    <details class="co-ed-details"><summary>Aus Word einfügen (Textvorlage)</summary>
-    <p style="font-size:12px;color:var(--muted);margin:6px 0">Text in dieser Form einfügen – R = richtig, F = falsch. Eine SITUATION gilt für alle Aufgaben, die du danach noch anpassen kannst:</p>
+    <p style="font-size:12px;color:var(--muted);margin:6px 0">Text in dieser Form einfügen – R = richtig, F = falsch. Eine SITUATION gilt zunächst für alle Aufgaben. Für Aufgabe 3 und 4 passt du sie danach an:</p>
     <pre class="co-vorlage">TITEL: Kommunikation in der Lerngruppe
 LB: 4
 SITUATION: Schwierige Kommunikation in der Lerngruppe
@@ -10499,7 +9182,6 @@ AUFGABE: …</pre>
    </details>
    <div class="form-actions co-ed-fuss">
     ${e.id?`<button class="secondary"onclick="coLoeschen('${e.id}')">Löschen</button>`:""}
-    <button class="secondary"onclick="coEditorVorschau()">👁 Vorschau (Schüleransicht)</button>
     <button class="secondary"onclick="coEditorLesen();coTestDruckEditor()">🖨 Test zum Ausdrucken (PDF)</button>
     <button class="secondary"onclick="coEditorLesen();coTestDruckEditor(true)">🖨 Test mit Lösung (PDF)</button>
     <button class="secondary"onclick="coEditorLesen();coPoolExport('pdf')">PDF für Aufgabenpool</button>
@@ -10510,21 +9192,6 @@ AUFGABE: …</pre>
    </div>
   </div>`);
 }
-// Aufgabenbank-Auswahl, geordnet nach Lernbereich und Test; ältere Aufgaben, die in keinem Test mehr vorkommen, stehen zuletzt.
-function coBankOptionen(){
- const tests=CHECKOUT_VORLAGEN.slice().sort((a,b)=>(a.lbNum||9)-(b.lbNum||9)||String(a.datum||"").localeCompare(String(b.datum||""))||(a.nr||0)-(b.nr||0));
- const benutzt=new Set();
- let h='<option value="">Aus der Aufgabenbank einsetzen …</option>';
- tests.forEach(v=>{
-  const items=(v.aufgaben||[]).map(id=>CO_AUFGABENBANK.find(b=>b.id===id)).filter(Boolean);
-  if(!items.length)return;
-  items.forEach(b=>benutzt.add(b.id));
-  h+=`<optgroup label="${esc(coLabel(v))}">${items.map((b,i)=>`<option value="${esc(b.id)}">Aufgabe ${i+1}: ${esc(b.titel)}</option>`).join("")}</optgroup>`;
- });
- const rest=CO_AUFGABENBANK.filter(b=>!benutzt.has(b.id));
- if(rest.length)h+=`<optgroup label="Ältere Aufgaben (in keinem Test mehr)">${rest.map(b=>`<option value="${esc(b.id)}">${esc(b.titel)}</option>`).join("")}</optgroup>`;
- return h;
-}
 function coBankEinsetzen(i){
  coEditorLesen();
  const id=$(`coBank${i}`)?.value;if(!id)return;
@@ -10532,141 +9199,26 @@ function coBankEinsetzen(i){
  const belegt=a.vText.trim()||a.stamm.trim()||a.aussagen.some(x=>x.text.trim());
  if(belegt&&!confirm(`Aufgabe ${i+1} wird durch die Aufgabe aus der Bank ersetzt. Fortfahren?`)){coEditorRender();return}
  coEditor.aufgaben[i]=coAufgabeAusBank(id);
- coEditorRender();toast(i>0?"Aufgabe eingesetzt. Es gilt die Fallvignette von Aufgabe 1: bitte Einleitungssatz und Aussagen darauf zuschneiden.":"Aufgabe eingesetzt – bitte prüfen.");
+ coEditorRender();toast(i%2===1?"Aufgabe eingesetzt. Es gilt die Fallvignette von Aufgabe "+i+": bitte Einleitungssatz und Aussagen darauf abstimmen.":"Aufgabe eingesetzt – bitte prüfen. Die Fallvignette gilt auch für Aufgabe "+(i+2)+".");
 }
-function coEditorVorschau(){
- coEditorLesen();
- const e=coEditor;
- const co={id:"vorschau",titel:e.titel||"(ohne Titel)",lbNum:e.lbNum,datum:e.datum,status:"live",
-  aufgaben:e.aufgaben.map(a=>{const q={stamm:a.stamm,aussagen:a.aussagen.map(s=>s.text),vignette:{titel:a.vTitel,text:a.vText,zeilen:!!a.vZeilen}};
-   if(a.kontext.trim())q.kontext=a.kontext;if(a.mText.trim())q.material={titel:a.mTitel,text:a.mText,quelle:a.mQuelle};return q;})};
- modal(coTestInhaltHTML(co,"vorschau",{},PP_FARBEN[e.lbNum]||"#4a90d9",true));
- coStandAktualisieren(co);
-}
-function coEditorVorschauZurueck(){coEditorRender();}
-// ============================================================
-// LEHRKRAFT: alle Freitagstests des Schuljahres ansehen und durchblättern
-// Übersicht (Liste aller Freitage) → Vorschau (Schüleransicht, mit ‹ › durch alle Freitage,
-// Lösungen einblendbar) → Bearbeiten / Vorlage einsetzen / Live schalten.
-// Quelle je Freitag: gespeicherter Check-out, sonst die Vorlage der App.
-// ============================================================
-let kpv={liste:[],i:0,loesung:false,d:null};
-function kpvFreitage(){
- const out=[];
- PROJEKT_PHASEN.forEach(ph=>["projekt","apt"].forEach(teil=>ppTeilWochen(ph,teil).forEach(w=>out.push({w,ph,teil}))));
- return out.sort((a,b)=>String(a.w.start).localeCompare(String(b.w.start)));
-}
-function kpvEintraege(d){
- return kpvFreitage().map(f=>{
-  const co=coFuerWoche(d,f.w),vl=CHECKOUT_VORLAGEN.find(v=>v.datum===f.w.end)||null;
-  return{...f,co,vl,hat:!!(co||vl)};
- });
-}
-function kpvOrt(x){return`${x.ph.lb} · ${x.teil==="projekt"?ppTeilName("projekt",x.ph):"Prüfungstraining"}`;}
-async function openKprimUebersicht(){
- if(!isTeacher())return;
- const d=await ladeCheckoutDaten();kpv.d=d;
- const e=kpvEintraege(d);
- const chip=x=>x.co?(x.co.status==="live"?`<span class="co-chip live"><span class="co-live-punkt"></span>läuft</span>`:x.co.status==="beendet"?`<span class="co-chip fertig">beendet</span>`:`<span class="co-chip entwurf">Entwurf</span>`)
-  :x.vl?`<span class="co-chip vorlage">Vorlage bereit</span>`:`<span class="co-chip leer">leer</span>`;
- const zeilen=e.map((x,k)=>{
-  const c=PP_FARBEN[x.ph.lbNum]||"#8a99a3";
-  const idx=e.slice(0,k+1).filter(y=>y.hat).length-1;
-  let akt="";
-  if(x.hat)akt+=`<button class="secondary"onclick="openKprimVorschau(0,'${x.w.end}')">👁 Vorschau</button>`;
-  if(x.co){
-   akt+=x.co.status==="entwurf"?`<button class="secondary"onclick="openCheckoutEditor('${x.co.id}')">✎ Bearbeiten</button><button class="primary"onclick="coLiveStarten('${x.co.id}')">▶ Live freischalten</button>`
-    :x.co.status==="live"?`<button class="primary"onclick="openCheckoutMonitor('${x.co.id}')">Live-Übersicht</button>`
-    :`<button class="secondary"onclick="openCheckoutErgebnisse('${x.co.id}')">Ergebnisse</button>`;
-  }else if(x.vl)akt+=`<button class="primary"onclick="openCheckoutEditor(null,{datum:'${x.w.end}',lbNum:${x.ph.lbNum},vorlage:'${x.vl.id}'})">📋 Vorlage einsetzen</button>`;
-  else akt+=`<button class="secondary"onclick="openCheckoutEditor(null,{datum:'${x.w.end}',lbNum:${x.ph.lbNum}})">＋ Check-out anlegen</button>`;
-  return`<div class="co-zeile"style="--c:${c}"><span class="co-lb">Fr ${fmtKurz(x.w.end)}</span>
-   <div class="co-titel"><b>${esc(x.co?coTitelAnzeige(x.co):(x.vl?coLabel(x.vl):"Noch nichts angelegt"))}</b><small>${esc(kpvOrt(x))}${x.co&&x.vl&&coTitelAnzeige(x.co)!==coLabel(x.vl)?` · Vorlage: ${esc(coLabel(x.vl))}`:""}</small></div>
-   ${chip(x)}<div class="co-aktion">${akt}</div></div>`;
- }).join("");
- const mit=e.filter(x=>x.hat).length;
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 K-PRIM-TESTS · NUR LEHRKRÄFTE</div><h2>Alle Freitagstests im Überblick</h2>
-  <p style="font-size:13px;color:var(--muted);margin-top:0">${e.length} Freitage im Schuljahr, davon ${mit} mit Test oder Vorlage. Mit „👁 Vorschau“ siehst du jeden Test so, wie ihn Schüler:innen sehen, und blätterst mit ‹ › durch alle Freitage. Die Lösungen lassen sich einblenden.</p>
-  <div class="co-liste">${zeilen}</div>
-  <div class="form-actions"style="margin-top:14px"><button class="secondary"onclick="closeModal()">Schließen</button>${mit?`<button class="primary"onclick="openKprimVorschau(0)">👁 Alle nacheinander ansehen</button>`:""}</div>`);
-}
-async function openKprimVorschau(idx,startDatum){
- if(!isTeacher())return;
- try{kpv.d=await ladeCheckoutDaten();}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
- kpv.liste=kpvEintraege(kpv.d).filter(x=>x.hat);
- if(!kpv.liste.length){toast("Es gibt noch keine Tests oder Vorlagen zum Ansehen.");return}
- if(startDatum){const k=kpv.liste.findIndex(x=>x.w.end===startDatum);kpv.i=k>=0?k:0;}
- else kpv.i=Math.max(0,Math.min(kpv.liste.length-1,Number(idx)||0));
- await kpvZeigen();
-}
-async function kpvZeigen(){
- const x=kpv.liste[kpv.i];if(!x)return;
- let co,loesung=null,quelle;
- if(x.co){
-  co={...x.co};
-  quelle=x.co.status==="live"?"gespeichert · läuft gerade":x.co.status==="beendet"?"gespeichert · beendet":"gespeichert · Entwurf";
-  try{const l=await getDoc(doc(db,"checkoutLoesungen",x.co.id));if(l.exists())loesung=l.data();}catch(e){console.error("Lösung laden:",e);}
- }else{
-  const ed=x.vl.aufgaben.map(coAufgabeAusBank);
-  co={id:"vorschau",titel:x.vl.titel,lbNum:x.vl.lbNum,datum:x.vl.datum,status:"vorlage",
-   aufgaben:ed.map(a=>{const q={stamm:a.stamm,aussagen:a.aussagen.map(s=>s.text),vignette:{titel:a.vTitel,text:a.vText,zeilen:!!a.vZeilen}};
-    if(a.kontext.trim())q.kontext=a.kontext;if(a.mText.trim())q.material={titel:a.mTitel,text:a.mText,quelle:a.mQuelle};return q;})};
-  loesung={aufgaben:ed.map(a=>({richtig:a.aussagen.map(s=>!!s.richtig),erklaerung:a.aussagen.map(s=>s.erklaerung||"")}))};
-  quelle="Vorlage der App · noch nicht gespeichert";
- }
- const n=kpv.liste.length;
- const aktion=x.co?(x.co.status==="entwurf"?"✎ Bearbeiten":x.co.status==="live"?"Live-Übersicht":"Ergebnisse"):"📋 Vorlage einsetzen";
- const band=`<div class="kp-nav-band">
-   <div class="kp-nav-zeile"><button class="secondary"type="button"onclick="kprimVorschauSpringe(-1)"aria-label="Vorheriger Freitag">‹ Zurück</button>
-    <div class="kp-nav-mitte"><b>Fr ${fmtKurz(x.w.end)} · ${esc(kpvOrt(x))}</b><small>${esc(quelle)} · ${kpv.i+1} von ${n}</small></div>
-    <button class="secondary"type="button"onclick="kprimVorschauSpringe(1)"aria-label="Nächster Freitag">Weiter ›</button></div>
-   <div class="kp-nav-zeile kp-nav-aktionen">
-    <select onchange="kprimVorschauSpringeZu(this.value)"aria-label="Zu einem Freitag springen">${kpv.liste.map((y,k)=>`<option value="${k}"${k===kpv.i?" selected":""}>Fr ${fmtKurz(y.w.end)} · ${esc(y.co?.titel||y.vl?.titel||"")}</option>`).join("")}</select>
-    <button class="secondary"type="button"id="kpvLsgBtn"onclick="kprimLoesungUmschalten()">${kpv.loesung?"🔑 Lösungen ausblenden":"🔑 Lösungen einblenden"}</button>
-    <button class="primary"type="button"onclick="kprimVorschauAktion()">${aktion}</button>
-   </div>
-   <div class="kp-nav-hinweis">👁 Vorschau für Lehrkräfte: Antworten werden nicht gespeichert.</div></div>`;
- modal(coTestInhaltHTML(co,"vorschau",{},PP_FARBEN[co.lbNum]||"#4a90d9",true,{loesung:loesung?.aufgaben||null,loesungAn:kpv.loesung,bandHTML:band,zurueckOnclick:"openKprimUebersicht()",zurueckLabel:"← Zur Übersicht"}));
- coStandAktualisieren(co);
-}
-async function kprimVorschauSpringe(dir){const n=kpv.liste.length;if(!n)return;kpv.i=(kpv.i+Number(dir)+n)%n;await kpvZeigen();}
-async function kprimVorschauSpringeZu(k){kpv.i=Math.max(0,Math.min(kpv.liste.length-1,Number(k)||0));await kpvZeigen();}
-function kprimLoesungUmschalten(){
- kpv.loesung=!kpv.loesung;
- const t=$("coTest");if(t)t.classList.toggle("kp-lsg-an",kpv.loesung);
- const b=$("kpvLsgBtn");if(b)b.textContent=kpv.loesung?"🔑 Lösungen ausblenden":"🔑 Lösungen einblenden";
-}
-function kprimVorschauAktion(){
- const x=kpv.liste[kpv.i];if(!x)return;
- if(x.co){
-  if(x.co.status==="entwurf")return openCheckoutEditor(x.co.id);
-  if(x.co.status==="live")return openCheckoutMonitor(x.co.id);
-  return openCheckoutErgebnisse(x.co.id);
- }
- return openCheckoutEditor(null,{datum:x.w.end,lbNum:x.ph.lbNum,vorlage:x.vl.id});
-}
-Object.assign(window,{openKprimUebersicht,openKprimVorschau,kprimVorschauSpringe,kprimVorschauSpringeZu,kprimLoesungUmschalten,kprimVorschauAktion});
-
 function coVorlageWaehlen(){
  coEditorLesen();
  const id=$("coVorlage")?.value;if(!id)return;
  const v=CHECKOUT_VORLAGEN.find(x=>x.id===id);if(!v)return;
  const belegt=coEditor.aufgaben.some(a=>a.vText.trim()||a.stamm.trim()||a.aussagen.some(x=>x.text.trim()));
  if(belegt&&!confirm("Der Inhalt dieses Entwurfs wird durch die Vorlage ersetzt. Fortfahren?")){coEditorRender();return}
- coEditor.titel=coLabel(v);coEditor.lbNum=v.lbNum;coEditor.datum=v.datum||coEditor.datum;coEditor.eigeneVig=!!v.eigeneVignetten;coEditor.aufgaben=v.aufgaben.map(coAufgabeAusBank);
+ coEditor.titel=v.titel;coEditor.lbNum=v.lbNum;coEditor.datum=v.datum;coEditor.aufgaben=v.aufgaben.map(coAufgabeAusBank);
  coEditorRender();toast("Vorlage eingesetzt – bitte prüfen und speichern.");
 }
 function coEditorAufgabe(d){coEditorLesen();if(d>0&&coEditor.aufgaben.length<CHECKOUT_MAX_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());if(d<0&&coEditor.aufgaben.length>CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.pop();coEditorRender();}
 function coEditorVorschlag(){
  coEditorLesen();
- const ph=PROJEKT_PHASEN.find(p=>p.lbNum===coEditor.lbNum);
- const kp=PP_EINHEITEN.filter(e=>ph&&(ph.trainingWochen.includes(e.id)||ph.notwendigeWochen.includes(e.id))).flatMap(e=>e.kprim||[]).slice(0,CHECKOUT_MAX_AUFGABEN);
+ const kp=CO_AUFGABENBANK.filter(b=>b.lbNum===coEditor.lbNum).slice(0,CHECKOUT_MAX_AUFGABEN);
  if(!kp.length){toast("Für diesen Lernbereich gibt es keine Vorschläge.");return}
- if(!confirm(`${kp.length} K-Prim-Aufgaben aus den App-Vorschlägen einsetzen? Bestehende Aufgaben werden ersetzt.`))return;
- coEditor.aufgaben=kp.map(k=>coAufgabeNorm({stamm:k.frage||"",aussagen:[0,1,2,3].map(j=>({text:k.statements?.[j]?.text||"",richtig:!!k.statements?.[j]?.correct}))}));
+ if(!confirm(`${kp.length} K-Prim-Aufgaben aus der Aufgabenbank einsetzen? Bestehende Aufgaben werden ersetzt. Aufgabe 2 und 4 übernehmen die Fallvignette von Aufgabe 1 und 3.`))return;
+ coEditor.aufgaben=kp.map(b=>coAufgabeAusBank(b.id));
  while(coEditor.aufgaben.length<CHECKOUT_MIN_AUFGABEN)coEditor.aufgaben.push(coLeereAufgabe());
- coEditorRender();toast("Eingesetzt – bitte je Aufgabe eine Fallvignette ergänzen und die Aussagen auf den Fall zuschneiden.");
+ coEditorRender();toast("Eingesetzt – bitte prüfen und speichern.");
 }
 // Textvorlage (aus Word kopiert) oder JSON einlesen.
 function coEditorImport(){
@@ -10751,13 +9303,18 @@ function coSituationHTML(v,pdf=false,nummeriert=true,ohneTitel=false){
 // Absätze (Zeilenumbruch = neuer Absatz).
 function coAbsaetzeHTML(t,pdf=false){const E=pdf?escPDF:esc;return String(t||"").split(/\r?\n/).filter(z=>z.trim()).map(z=>`<p style="margin:0 0 8px;line-height:1.6">${E(z)}</p>`).join("");}
 // Ausgangslage einer Aufgabe: Fallvignette, Material, Zusatz, Einleitungssatz (ohne die Aussagen).
-function coFallHTML(q,pdf=false){
+function coFallHTML(q,pdf=false,fuer=""){
  const E=pdf?escPDF:esc;
  const v=q.vignette?.text?q.vignette:null,m=q.material?.text?q.material:null;
- return`${v?`<div class="kp-vig"><div class="kp-label">📖 Fallvignette${v.titel?` · ${E(v.titel)}`:""}</div>${coSituationHTML(v,pdf,!!v.zeilen,true)}</div>`:""}
+ return`${v?`<div class="kp-vig"><div class="kp-label">📖 Fallvignette${v.titel?` · ${E(v.titel)}`:""}${fuer?` · gilt für ${E(fuer)}`:""}</div>${coSituationHTML(v,pdf,!!v.zeilen,true)}</div>`:""}
   ${m?`<div class="kp-mat"><div class="kp-label">📎 Material${m.titel?` · ${E(m.titel)}`:""}</div>${coAbsaetzeHTML(m.text,pdf)}${m.quelle?`<div class="kp-quelle">${E(m.quelle)}</div>`:""}</div>`:""}
   <div class="kp-frage">${q.kontext?`<div class="kp-kontext">${coAbsaetzeHTML(q.kontext,pdf)}</div>`:""}<strong class="kp-stamm">${E(q.stamm)}</strong>
   <div class="kp-anleitung">Entscheiden Sie bei den Aussagen 1–4, ob sie jeweils <b>richtig oder falsch</b> sind.</div></div>`;
+}
+// Zwei Aufgaben teilen sich eine Fallvignette (Aufgabe 1+2, 3+4). Hat eine Aufgabe dieselbe Vignette wie die davor, wird sie nur einmal gezeigt.
+function coVigWiederholt(aufgaben,i){
+ const v=aufgaben?.[i]?.vignette,w=aufgaben?.[i-1]?.vignette;
+ return i>0&&!!v?.text&&!!w?.text&&v.text===w.text&&(v.titel||"")===(w.titel||"");
 }
 // Ältere Check-outs haben eine gemeinsame Situation über allen Aufgaben.
 function coGemeinsameSituation(co){return co?.vignette?.text&&!(co.aufgaben||[]).some(a=>a.vignette?.text)?co.vignette:null;}
@@ -10819,7 +9376,7 @@ async function openCheckoutMonitor(id){
  const n=(co.aufgaben||[]).length*4;
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 CHECK-OUT · LIVE-ÜBERSICHT</div>
-  <h2>${esc(coTitelAnzeige(co))}</h2>
+  <h2>${esc(co.titel)}</h2>
   <div id="coMonitor"><p style="color:var(--muted)">Lädt …</p></div>
   <div class="form-actions"style="margin-top:14px">
    <button class="secondary"onclick="closeModal()">Schließen</button>
@@ -10870,10 +9427,28 @@ async function openCheckoutTest(id){
  if(!co){toast("Dieser Check-out ist nicht verfügbar.");return}
  if(co.status!=="live"){toast("Dieser Check-out ist nicht (mehr) freigeschaltet.");return}
  if(a?.abgegeben){toast("Du hast bereits abgegeben.");return}
+ let anzahlW=7;
+ try{const e=await getDoc(doc(db,"checkoutEinstellungen","pp"));if(e.exists())anzahlW=Number(e.data().anzahlWaehlen)||7;}catch(e){}
  const ant=a?.antworten||{};
  const c=PP_FARBEN[co.lbNum]||"#4a90d9";
  const glob=coGemeinsameSituation(co);
- modal(coTestInhaltHTML(co,id,ant,c,false));
+ modal(`<div id="coTest"class="kp-test">
+  <div class="kicker"style="color:${c}">🏁 CHECK-OUT · LB ${esc(co.lbNum)} · ${coDatum(co.datum)}</div>
+  <h2>${esc(co.titel)}</h2>
+  <div class="kp-fortschritt"><div class="kp-balken"><i id="coBalken"style="background:${c}"></i></div><span id="coStand"></span></div>
+  <details class="kp-hilfe"><summary>So funktioniert der Test</summary>
+   <p>Der Test besteht aus <b>2 Fallvignetten mit je 2 Aufgaben</b> (zusammen ${(co.aufgaben||[]).length} Aufgaben). Lies zuerst die Fallvignette. Entscheide dann bei <b>jeder</b> der 4 Aussagen, ob sie richtig oder falsch ist. Eine leere Aussage zählt als Fehler. Deine Antworten werden automatisch gespeichert.</p>
+   </details>
+  ${coBewertungsInfoHTML(anzahlW,true)}
+  ${glob?`<div class="kp-vig"style="border-left-color:${c}"><div class="kp-label">📖 Situation</div>${coSituationHTML(glob,false,true,false)}</div>`:""}
+  ${(co.aufgaben||[]).map((q,i)=>`<section class="kp-karte"style="--c:${c}">
+   <header class="kp-kopf"><span class="kp-nummer">${i+1}</span><div><b>Aufgabe ${i+1} von ${(co.aufgaben||[]).length}</b><small>bis zu ${CHECKOUT_BE_NACH_FEHLERN[0]} BE</small></div><span class="kp-fort">0/4</span></header>
+   ${coFallHTML(coVigWiederholt(co.aufgaben,i)?{...q,vignette:null}:q,false,(!coVigWiederholt(co.aufgaben,i)&&coVigWiederholt(co.aufgaben,i+1))?`Aufgabe ${i+1} und ${i+2}`:"")}
+   <div class="kp-liste">${(q.aussagen||[]).map((t,j)=>`<div class="kp-zeile"><span class="kp-num">${j+1}</span><p class="kp-text">${esc(t)}</p>
+    <div class="kp-wahl"role="radiogroup"aria-label="Aussage ${j+1}">${[["r","✓ Richtig"],["f","✗ Falsch"]].map(([v,l])=>`<label class="kp-opt ${v}"><input type="radio"name="coT${i}_${j}"value="${v}"aria-label="Aussage ${j+1}: ${v==="r"?"richtig":"falsch"}"${ant[`${i}_${j}`]===v?" checked":""} onchange="coAntwort('${id}','${i}_${j}','${v}')"><span>${l}</span></label>`).join("")}</div></div>`).join("")}</div>
+  </section>`).join("")}
+  <div class="co-test-fuss"><span id="coStand2"></span><button class="primary"onclick="coAbgeben('${id}')">Abgeben</button></div>
+ </div>`);
  coStandAktualisieren(co);
  // Beendet die Lehrkraft den Test, wird die Bearbeitung sofort gesperrt.
  coUnsubAll();window.__coUnsub=onSnapshot(doc(db,"checkouts",id),snap=>{
@@ -10881,50 +9456,6 @@ async function openCheckoutTest(id){
   const x=snap.data();
   if(x&&x.status!=="live"){coUnsubAll();$("coTest").innerHTML=`<h2>Der Check-out wurde beendet.</h2><p>Deine gespeicherten Antworten werden gewertet. Das Ergebnis erscheint in deinem Lernweg.</p><div class="form-actions"><button class="primary"onclick="closeModal();render()">OK</button></div>`;}
  });
-}
-// Bepunktung zum Vorablesen (Wertung je Aufgabe, Gesamt-BE, Umrechnung in Notenpunkte nach dem P/P-Schlüssel)
-function coBepunktungHTML(n,vorschau){
- const be=CHECKOUT_BE_NACH_FEHLERN,max=n*be[0];
- let summen=new Set([0]);
- for(let i=0;i<n;i++){const t=new Set();summen.forEach(x=>[be[0],be[1],be[2],0].forEach(p=>t.add(x+p)));summen=t;}
- const np=[...summen].sort((a,b)=>b-a).map(x=>`<b>${x} BE</b> = ${notenpunkteAusProzent(Math.round(x/max*1000)/10)} NP`).join(" · ");
- return`<div class="kp-bep"style="background:#f4f9ff;border:1.5px solid #c9def4;border-radius:12px;padding:10px 14px;margin:10px 0;font-size:14px;line-height:1.5">
-  <b>📊 Bepunktung – bitte vorab lesen</b>
-  <p style="margin:6px 0 0">Der Test besteht aus <b>einer Fallvignette</b> und <b>${n} Aufgaben</b> mit je 4 Aussagen. Du entscheidest bei <b>jeder</b> Aussage, ob sie richtig oder falsch ist. Eine leere Aussage zählt als Fehler.${vorschau?"":" Deine Antworten werden automatisch gespeichert."}</p>
-  <p class="kp-wertung"style="margin:6px 0 0"><b>Je Aufgabe:</b> 4 richtig = ${be[0]} BE · 3 richtig = ${be[1]} BE · 2 richtig = ${be[2]} BE · weniger = 0 BE</p>
-  <p style="margin:6px 0 0"><b>Insgesamt:</b> bis zu ${max} BE. Umrechnung in Notenpunkte (NP) nach dem P/P-Bewertungsschlüssel: ${np}</p></div>`;
-}
-// Haben alle Aufgaben dieselbe Fallvignette, wird sie nur einmal über den Aufgaben gezeigt.
-function coGleicheVignette(co){
- const l=co?.aufgaben||[];
- if(l.length<2||!l.every(a=>a.vignette?.text))return null;
- const v0=l[0].vignette;
- return l.every(a=>a.vignette.text===v0.text&&(a.vignette.titel||"")===(v0.titel||""))?v0:null;
-}
-// Inhalt des Tests. vorschau=true: Ansicht für Lehrkräfte im Editor (nichts wird gespeichert).
-function coTestInhaltHTML(co,id,ant,c,vorschau,opt){
- opt=opt||{};
- const gleich=coGleicheVignette(co);
- const glob=coGemeinsameSituation(co)||gleich;
- const n=(co.aufgaben||[]).length;
- const lsg=opt.loesung||null;
- const band=vorschau?(opt.bandHTML||`<div class="kp-vorschau-band">👁 <b>Vorschau</b> · So sehen Schüler:innen den Test. Es wird nichts gespeichert. <button class="secondary"type="button"onclick="coEditorVorschauZurueck()">← Zurück zum Editor</button></div>`):"";
- const zurueck=opt.zurueckOnclick||"coEditorVorschauZurueck()",zLabel=opt.zurueckLabel||"← Zurück zum Editor";
- return`<div id="coTest"class="kp-test${opt.loesungAn?" kp-lsg-an":""}">
-  ${band}
-  <div class="kicker"style="color:${c}">🏁 CHECK-OUT · LB ${esc(co.lbNum)} · ${coDatum(co.datum)}</div>
-  <h2>${esc(coTitelAnzeige(co))}</h2>
-  <div class="kp-fortschritt"><div class="kp-balken"><i id="coBalken"style="background:${c}"></i></div><span id="coStand"></span></div>
-  ${coBepunktungHTML(n,vorschau)}
-  ${glob?`<div class="kp-vig"style="border-left-color:${c}"><div class="kp-label">📖 Fallvignette${glob.titel&&gleich?` · ${esc(glob.titel)}`:""}</div>${coSituationHTML(glob,false,gleich?!!gleich.zeilen:true,!!gleich)}</div>`:""}
-  ${(co.aufgaben||[]).map((q,i)=>`<section class="kp-karte"style="--c:${c}">
-   <header class="kp-kopf"><span class="kp-nummer">${i+1}</span><div><b>Aufgabe ${i+1} von ${n}</b><small>bis zu ${CHECKOUT_BE_NACH_FEHLERN[0]} BE</small></div><span class="kp-fort">0/4</span></header>
-   ${coFallHTML(gleich?{...q,vignette:null}:q)}
-   <div class="kp-liste">${(q.aussagen||[]).map((t,j)=>{const l=lsg?.[i];const r=l?.richtig?.[j];return`<div class="kp-zeile"><span class="kp-num">${j+1}</span>${l?`<div class="kp-text"><p style="margin:0">${esc(t)}</p><div class="kp-lsg ${r?"r":"f"}">🔑 <b>${r?"Richtig":"Falsch"}</b>${l.erklaerung?.[j]?` · ${esc(l.erklaerung[j])}`:""}</div></div>`:`<p class="kp-text">${esc(t)}</p>`}
-    <div class="kp-wahl"role="radiogroup"aria-label="Aussage ${j+1}">${[["r","✓ Richtig"],["f","✗ Falsch"]].map(([v,lab])=>`<label class="kp-opt ${v}"><input type="radio"name="coT${i}_${j}"value="${v}"aria-label="Aussage ${j+1}: ${v==="r"?"richtig":"falsch"}"${(ant||{})[`${i}_${j}`]===v?" checked":""} onchange="${vorschau?"coStandAktualisieren()":`coAntwort('${id}','${i}_${j}','${v}')`}"><span>${lab}</span></label>`).join("")}</div></div>`;}).join("")}</div>
-  </section>`).join("")}
-  <div class="co-test-fuss"><span id="coStand2"></span>${vorschau?`<button class="secondary"type="button"onclick="${zurueck}">${zLabel}</button>`:`<button class="primary"onclick="coAbgeben('${id}')">Abgeben</button>`}</div>
- </div>`;
 }
 function coStandAktualisieren(co){
  const n=document.querySelectorAll("#coTest .kp-zeile").length||(co?.aufgaben||[]).length*4;
@@ -10975,16 +9506,17 @@ function coAufgabeErgebnisHTML(q,i,erg,pdf=false,mitFall=true){
   <div class="kp-liste">${(q.aussagen||[]).map((t,j)=>{const ok=r?.korrekt?.[j];const ang=r?.angekreuzt?.[j];return`<div class="kp-zeile kp-ergz ${r?(ok?"ok":"nein"):""}"><span class="kp-num">${r?(ok?"✓":"✗"):j+1}</span>
    <div class="kp-text"><p>${E(t)}</p>${r?`<div class="kp-chips"><span class="kp-chip">Deine Antwort: <b>${zeichen(ang)}</b></span><span class="kp-chip loes">Lösung: <b>${r.loesung?.[j]?"richtig":"falsch"}</b></span></div>${r.erklaerung?.[j]?`<div class="kp-erk">💡 ${E(r.erklaerung[j])}</div>`:""}`:""}</div></div>`;}).join("")}</div></section>`;
 }
-function coSummeHTML(erg){return erg?.ausgewertet?`<b>${erg.be} von ${erg.maxBE} BE (${String(erg.prozent).replace(".",",")} %) · ${npText(erg.notenpunkte)}</b>`:"nicht ausgewertet";}
+function coSummeHTML(erg){return erg?.ausgewertet?`<b>${erg.be} von ${erg.maxBE} Bewertungseinheiten (BE) · ${String(erg.prozent).replace(".",",")} % · ${npText(erg.notenpunkte)}</b>`:"nicht ausgewertet";}
 async function openCheckoutMeinErgebnis(id){
  try{
   const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${currentUser.uid}`))]);
   const co=c.data(),erg=a.exists()?a.data():null;
   modal(`<button class="modal-close"onclick="closeModal()">×</button>
-   <div class="kicker">🏁 CHECK-OUT · DEIN ERGEBNIS</div><h2>${esc(coTitelAnzeige(co))}</h2>
+   <div class="kicker">🏁 CHECK-OUT · DEIN ERGEBNIS</div><h2>${esc(co.titel)}</h2>
    <div class="co-summe">${coSummeHTML(erg)}</div>
+   ${coRechenwegHTML(erg)}
    ${coGemeinsameSituation(co)?`<div class="co-vignette"style="border-left-color:${PP_FARBEN[co.lbNum]||"#4a90d9"}">${coSituationHTML(co.vignette)}</div>`:""}
-   ${(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg)).join("")}
+   ${(co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,erg,false,!coVigWiederholt(co.aufgaben,i))).join("")}
    <div class="form-actions"><button class="secondary"onclick="coPdfSchueler('${id}')">PDF herunterladen</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
  }catch(e){console.error(e);toast("Konnte nicht geladen werden.");}
 }
@@ -11000,7 +9532,7 @@ async function openCheckoutErgebnisse(id){
  const erg=Object.values(abgaben).filter(a=>a.ausgewertet);
  const schnitt=erg.length?(erg.reduce((s,a)=>s+a.notenpunkte,0)/erg.length).toFixed(1).replace(".",","):"–";
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 CHECK-OUT · ERGEBNISSE · NUR LEHRKRÄFTE</div><h2>${esc(coTitelAnzeige(co))}</h2>
+  <div class="kicker">🏁 CHECK-OUT · ERGEBNISSE · NUR LEHRKRÄFTE</div><h2>${esc(co.titel)}</h2>
   <p style="font-size:13px;color:var(--muted)">${coDatum(co.datum)} · ${erg.length} ausgewertet · Klassenschnitt ${schnitt} Punkte</p>
   <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>Ergebnis</th></tr></thead>
   <tbody>${students.map(s=>{const a=abgaben[s.uid];
@@ -11017,9 +9549,10 @@ async function openCheckoutSchuelerErgebnis(id,uid){
  let d;try{d=await coLadeErgebnisse(id);}catch(e){return}
  const a=d.abgaben[uid],s=d.students.find(x=>x.uid===uid);
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 CHECK-OUT · ${esc(anzeigeName(s))}</div><h2>${esc(coTitelAnzeige(d.co))}</h2>
+  <div class="kicker">🏁 CHECK-OUT · ${esc(anzeigeName(s))}</div><h2>${esc(d.co.titel)}</h2>
   <div class="co-summe">${coSummeHTML(a)}</div>
-  ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a)).join("")}
+  ${coRechenwegHTML(a)}
+  ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a,false,!coVigWiederholt(d.co.aufgaben,i))).join("")}
   <div class="form-actions"><button class="secondary"onclick="openCheckoutErgebnisse('${id}')">← Zurück</button><button class="secondary"onclick="coPdfSchueler('${id}','${uid}')">PDF</button></div>`);
 }
 
@@ -11155,14 +9688,14 @@ function coPdfBlock(co,erg,name){
 function coVignettePdf(co){
  const g=coGemeinsameSituation(co);
  if(g)return`<div class="item">${coSituationHTML(g,true)}</div>`;
- return(co.aufgaben||[]).map((q,i)=>`<div class="item"><b>Aufgabe ${i+1}</b>${coFallHTML({...q,stamm:""},true).replace(/<strong class="kp-stamm"><\/strong>/,"").replace(/<div class="kp-anleitung">.*?<\/div>/,"")}</div>`).join("");
+ return(co.aufgaben||[]).map((q,i)=>coVigWiederholt(co.aufgaben,i)?"":`<div class="item"><b>${coVigWiederholt(co.aufgaben,i+1)?`Aufgabe ${i+1} und ${i+2}`:`Aufgabe ${i+1}`}</b>${coFallHTML({...q,stamm:""},true).replace(/<strong class="kp-stamm"><\/strong>/,"").replace(/<div class="kp-anleitung">.*?<\/div>/,"")}</div>`).join("");
 }
 async function coPdfSchueler(id,uid){
  uid=uid||currentUser.uid;
  try{
   const [c,a]=await Promise.all([getDoc(doc(db,"checkouts",id)),getDoc(doc(db,"checkoutAbgaben",`${id}_${uid}`))]);
   const co=c.data(),erg=a.exists()?a.data():null;
-  openToolPrintWindow(`${coTitelAnzeige(co)} – Ergebnis`,coVignettePdf(co)+coPdfBlock(co,erg,erg?.name||anzeigeName(profile,currentUser)),`F11Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)}`);
+  openToolPrintWindow(`${co.titel} – Ergebnis`,coVignettePdf(co)+coPdfBlock(co,erg,erg?.name||anzeigeName(profile,currentUser)),`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)}`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
 async function coPdfKlasse(id){
@@ -11172,8 +9705,102 @@ async function coPdfKlasse(id){
   const tabelle=`<table><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>
    ${students.map(s=>{const a=abgaben[s.uid];return`<tr><td>${escPDF(anzeigeName(s))}</td>${a?.ausgewertet?(a.auswertung||[]).map(r=>`<td>${r.be}</td>`).join("")+`<td>${a.be}/${a.maxBE}</td><td>${String(a.prozent).replace(".",",")}</td><td><b>${npText(a.notenpunkte)}</b></td>`:`<td colspan="${(co.aufgaben||[]).length+3}">nicht teilgenommen</td>`}</tr>`;}).join("")}</tbody></table>`;
   const einzel=students.filter(s=>abgaben[s.uid]?.ausgewertet).map(s=>`<div style="break-before:page">${coPdfBlock(co,abgaben[s.uid],anzeigeName(s))}</div>`).join("");
-  openToolPrintWindow(`${coTitelAnzeige(co)} – Ergebnisse der Klasse`,`<h2>Übersicht</h2>${tabelle}<div style="break-before:page"></div>${coVignettePdf(co)}${einzel}`,`F11Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)} · Wertung je Aufgabe ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern`);
+  openToolPrintWindow(`${co.titel} – Ergebnisse der Klasse`,`<h2>Übersicht</h2>${tabelle}<div style="break-before:page"></div>${coVignettePdf(co)}${einzel}`,`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)} · Wertung je Aufgabe ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+
+// ============================================================
+// BEWERTUNG DER K-PRIM-TESTS
+// (1) Hinweise für Schüler:innen: Schema, Höchstpunktzahl, Notenschlüssel, Rechenweg
+// (2) Bausteine für den Respizienz-Ausdruck der Lehrkraft (siehe weiter unten)
+// Grundlage: FOSBOS-Vorgabe „Entscheidungsbasierte Aufgaben“ – je Aufgabe 4 Aussagen:
+// 4 richtig = 4 BE, 3 richtig = 2 BE, 2 richtig = 1 BE, weniger = 0 BE.
+// Umrechnung in Notenpunkte nach dem P/P-Bewertungsschlüssel (FOSBOS Bayern, Stand 13.09.2022).
+// ============================================================
+const CO_FACH="Pädagogik/Psychologie",CO_KLASSE="F12Sb",CO_SCHULE="FOSBOS Weilheim",CO_SCHULJAHR="2026/27";
+const CO_ZELLE="padding:3px 6px;border:1px solid #d5dee5;font-size:11.5px";
+// 3 Aufgaben × 4 BE = 12 BE je Test
+function coMaxBE(){return CHECKOUT_MAX_AUFGABEN*CHECKOUT_BE_NACH_FEHLERN[0];}
+function coSchemaZeilen(){
+ const be=CHECKOUT_BE_NACH_FEHLERN;
+ return[["vier richtige Entscheidungen",be[0]],["drei richtige Entscheidungen",be[1]],["zwei richtige Entscheidungen",be[2]],["weniger als zwei richtige Entscheidungen",be[3]]];
+}
+// Für jede mögliche BE-Summe (0 … max) Prozent und Notenpunkte – gleiche Rechnung wie in coBewerten.
+function coBeZuNp(maxBE){
+ const r=[];
+ for(let be=0;be<=maxBE;be++){const p=maxBE?Math.round(be/maxBE*1000)/10:0;r.push({be,prozent:p,np:notenpunkteAusProzent(p)});}
+ return r;
+}
+function coSchemaTabelleHTML(){
+ return`<table style="border-collapse:collapse;width:auto;margin:6px 0"><tbody>${coSchemaZeilen().map(([t,be])=>`<tr><td style="${CO_ZELLE};text-align:left">${t}</td><td style="${CO_ZELLE};text-align:center;white-space:nowrap"><b>${be} BE</b></td></tr>`).join("")}</tbody></table>`;
+}
+// BE → Prozent → Notenpunkte (markBE hebt die eigene Spalte hervor)
+function coBeTabelleHTML(maxBE,markBE){
+ const z=coBeZuNp(maxBE);
+ const st=`${CO_ZELLE};text-align:center;white-space:nowrap`;
+ const mk=be=>be===markBE?"background:#dcebf8;font-weight:800;":"";
+ const kopf=`<tr><th style="${st};text-align:left;background:#f1f5f8">BE</th>${z.map(x=>`<th style="${st};background:#f1f5f8;${mk(x.be)}">${x.be}</th>`).join("")}</tr>`;
+ const pr=`<tr><td style="${st};text-align:left">Prozent</td>${z.map(x=>`<td style="${st};${mk(x.be)}">${String(x.prozent).replace(".",",")}</td>`).join("")}</tr>`;
+ const np=`<tr><td style="${st};text-align:left"><b>Notenpunkte</b></td>${z.map(x=>`<td style="${st};${mk(x.be)}"><b>${x.np}</b></td>`).join("")}</tr>`;
+ return`<div style="overflow-x:auto;margin:6px 0;break-inside:avoid"><table style="border-collapse:collapse;width:auto"><tbody>${kopf}${pr}${np}</tbody></table></div>`;
+}
+// P/P-Bewertungsschlüssel: Prozent → Notenpunkte
+function coProzentSchluesselHTML(){
+ const z=[...FOSBOS_SCHLUESSEL,[0,0]];
+ const st=`${CO_ZELLE};text-align:center;white-space:nowrap`;
+ const unterste=FOSBOS_SCHLUESSEL[FOSBOS_SCHLUESSEL.length-1][1];
+ const half=Math.ceil(z.length/2);
+ const block=teil=>`<tr><th style="${st};text-align:left;background:#f1f5f8">Notenpunkte</th>${teil.map(([np])=>`<th style="${st};background:#f1f5f8">${np}</th>`).join("")}</tr>
+  <tr><td style="${st};text-align:left">Prozent</td>${teil.map(([np,min])=>`<td style="${st}">${np===0?"&lt; "+unterste:"ab "+min}</td>`).join("")}</tr>`;
+ return`<div style="overflow-x:auto;margin:6px 0;break-inside:avoid"><table style="border-collapse:collapse;width:auto"><tbody>${block(z.slice(0,half))}${block(z.slice(half))}</tbody></table></div>`;
+}
+// Hinweise für Schüler:innen: so wird der Test bewertet
+function coBewertungsInfoHTML(anzahl,offen){
+ anzahl=Number(anzahl)||7;
+ const max=coMaxBE(),be0=CHECKOUT_BE_NACH_FEHLERN[0];
+ return`<details class="kp-hilfe co-bew"${offen?" open":""}><summary>📏 So wird bewertet</summary>
+  <p>Jeder Test besteht aus ${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben. Bei jeder Aufgabe entscheidest du für 4 Aussagen, ob sie in Bezug auf die Situation richtig oder falsch sind. Eine nicht beantwortete Aussage zählt als Fehler.</p>
+  <p style="margin-bottom:0"><b>Bewertung pro Aufgabe</b> (BE = Bewertungseinheiten):</p>
+  ${coSchemaTabelleHTML()}
+  <p><b>Pro Test gibt es höchstens ${max} BE</b> (${CHECKOUT_MAX_AUFGABEN} Aufgaben × ${be0} BE). Die BE werden in Prozent und dann in Notenpunkte (0–15) umgerechnet, nach dem P/P-Bewertungsschlüssel (FOSBOS Bayern):</p>
+  ${coBeTabelleHTML(max)}
+  <p>Kurzarbeit-Ersatz: Am Ende wählst du <b>${anzahl} deiner Tests</b> aus. Der Durchschnitt ihrer Notenpunkte ersetzt eine Kurzarbeit; ab ,5 wird aufgerundet.</p>
+  <details><summary>Bewertungsschlüssel in Prozent</summary>${coProzentSchluesselHTML()}</details>
+ </details>`;
+}
+// Rechenweg zum eigenen Ergebnis (Schüler:in und Lehrkraft)
+function coRechenwegHTML(erg){
+ if(!erg?.ausgewertet)return"";
+ const teile=(erg.auswertung||[]).map((r,i)=>`Aufgabe ${i+1}: ${4-r.fehler} richtig → <b>${r.be} BE</b>`).join(" · ");
+ return`<div class="co-bew-weg"><div>${teile}</div><div>Summe: <b>${erg.be} von ${erg.maxBE} BE</b> = ${String(erg.prozent).replace(".",",")} % → <b>${esc(npText(erg.notenpunkte))}</b></div>${coBeTabelleHTML(Number(erg.maxBE)||coMaxBE(),erg.be)}</div>`;
+}
+// Lernbereich als Text (z. B. „LB 1 · Entwicklung“)
+function coLbText(n){const l=PP12_LB[n];return l?`LB ${n} · ${l.titel}`:(n?`LB ${n}`:"");}
+// Unterrichtsstunden der Testwoche (Mo–Fr) laut Stoffverteilungsplan; ohne Treffer (Ferien): die letzten 3 Stunden davor.
+function coStundenInhalte(c){
+ const fr=c?.datum;if(!fr)return[];
+ const lehr=e=>e.typ==="stoff"||e.typ==="wdh"||e.typ==="training";
+ const von=pp12Montag(fr);
+ let l=PP12_PLAN.filter(e=>lehr(e)&&e.d>=von&&e.d<=fr);
+ if(!l.length)l=PP12_PLAN.filter(e=>lehr(e)&&e.d<fr).slice(-3);
+ return l;
+}
+function coStundeText(e){
+ const wt=["So","Mo","Di","Mi","Do","Fr","Sa"][new Date(e.d+"T12:00:00Z").getUTCDay()];
+ return`${wt} ${pp12Datum(e.d)} (${e.h} Std.): ${e.t}`;
+}
+// Klassendurchschnitte: je Test (alle ausgewerteten Abgaben) und für den Kurzarbeit-Ersatz (gewählte Tests)
+function coKlassenStat(checkouts,abgaben,auswahl,uids){
+ const proTest={};
+ checkouts.forEach(c=>{
+  const l=uids.map(u=>abgaben[u]?.[c.id]).filter(a=>a?.ausgewertet);
+  if(!l.length)return;
+  const mw=k=>l.reduce((x,a)=>x+(Number(a[k])||0),0)/l.length;
+  proTest[c.id]={n:l.length,np:mw("notenpunkte"),be:mw("be"),maxBE:Number(l[0].maxBE)||coMaxBE()};
+ });
+ const er=uids.filter(u=>(auswahl[u]?.ids||[]).length).map(u=>coErsatz(auswahl[u].ids,abgaben[u]||{})).filter(Boolean);
+ const ersatz=er.length?{n:er.length,np:er.reduce((x,e)=>x+e.np,0)/er.length,schnitt:er.reduce((x,e)=>x+e.schnitt,0)/er.length}:null;
+ return{proTest,ersatz};
 }
 
 // ---- Kurzarbeit-Ersatz: 7 aus 10 ----
@@ -11185,8 +9812,9 @@ async function openCheckoutAuswahl(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 KURZARBEIT-ERSATZ</div><h2>Wähle ${d.einst.anzahlWaehlen} Tests aus deiner Bibliothek</h2>
   <p style="font-size:13px;color:var(--muted);margin-top:0">Der Durchschnitt der Notenpunkte deiner Auswahl ersetzt eine Kurzarbeit. Ab ,5 wird aufgerundet.</p>
+  ${coBewertungsInfoHTML(d.einst.anzahlWaehlen)}
   ${pool.length<d.einst.anzahlWaehlen?`<div class="empty">Du hast erst ${pool.length} gewertete Check-outs – du brauchst mindestens ${d.einst.anzahlWaehlen}.</div>`:""}
-  <div class="list"id="coAuswahlListe">${pool.map(c=>{const a=d.meineAbgaben[c.id];return`<label class="list-item co-wahl"><input type="checkbox"value="${c.id}"data-np="${a.notenpunkte}"${gewaehlt.has(c.id)?" checked":""} onchange="coAuswahlStand(${d.einst.anzahlWaehlen})"><div style="flex:1"><strong>${esc(coTitelAnzeige(c))}</strong><small>LB ${esc(c.lbNum)} · ${coDatum(c.datum)}</small></div><b>${npText(a.notenpunkte)}</b></label>`;}).join("")}</div>
+  <div class="list"id="coAuswahlListe">${pool.map(c=>{const a=d.meineAbgaben[c.id];return`<label class="list-item co-wahl"><input type="checkbox"value="${c.id}"data-np="${a.notenpunkte}"${gewaehlt.has(c.id)?" checked":""} onchange="coAuswahlStand(${d.einst.anzahlWaehlen})"><div style="flex:1"><strong>${esc(c.titel)}</strong><small>LB ${esc(c.lbNum)} · ${coDatum(c.datum)}</small></div><b>${npText(a.notenpunkte)}</b></label>`;}).join("")}</div>
   <div class="co-test-fuss"><span id="coAuswahlStand"></span><button class="primary"onclick="coAuswahlSpeichern(${d.einst.anzahlWaehlen})">Auswahl speichern</button></div>`);
  coAuswahlStand(d.einst.anzahlWaehlen);
 }
@@ -11223,35 +9851,154 @@ async function coLadeSchueler(uid){
 // Tag, an dem der Test gemacht wurde (Abgabe), sonst das Datum des Check-outs.
 function coTestDatum(co,a){const d=coTsDatum(a?.abgegebenAt);return d?d.toLocaleDateString("de-DE"):coDatum(co.datum);}
 function coProz(x){return String(Math.round(x*10)/10).replace(".",",");}
+// ============================================================
+// RESPIZIENZ-AUSDRUCK (Lehrkraft) – eigener Ausdruck für die Ablage
+// Je Schüler:in: Name, Klasse, Fach, Lernbereich + Inhalte der Unterrichtsstunden je Test,
+// Ergebnisse der gewählten Tests (je Aufgabe, max. 12 BE), Gesamtergebnis, Klassendurchschnitt,
+// Notenschlüssel sowie Durchführung und Hintergründe des K-Prim-Tests.
+// ============================================================
+function coRespizienzHintergrundHTML(einst,anzPool){
+ const E=escPDF,max=coMaxBE(),be0=CHECKOUT_BE_NACH_FEHLERN[0];
+ const soll=Number(einst?.anzahlWaehlen)||7,gesamt=Number(einst?.anzahlGesamt)||10;
+ const li="margin:0 0 4px";
+ return`<div>
+  <h3 style="font-size:13px;margin:16px 0 6px;border-bottom:1.5px solid #1f4d73;padding-bottom:3px;break-after:avoid">Durchführung und Hintergrund des K-Prim-Tests</h3>
+  <ul style="font-size:11.5px;margin:0 0 8px 16px;padding:0;line-height:1.45">
+   <li style="${li}"><b>Aufgabenformat (entscheidungsbasierte Aufgaben):</b> Jeder Test (Check-out) enthält ${CHECKOUT_MAX_AUFGABEN} K-Prim-Aufgaben zu unterschiedlichen Kompetenzen bzw. Inhalten des Lehrplans. Jede Aufgabe besteht aus einer Fallvignette (Situationsbeschreibung), einem Einleitungssatz und 4 Aussagen. Für jede Aussage ist zu entscheiden, ob sie in Bezug auf die Situation richtig oder falsch ist.</li>
+   <li style="${li}"><b>Durchführung:</b> Der Test findet am Ende der Unterrichtswoche (Freitag) statt. Die Lehrkraft schaltet ihn in der Testsituation live frei; die Antworten werden laufend gespeichert. Abgegeben wird durch die Schülerin / den Schüler, spätestens mit dem Beenden des Tests durch die Lehrkraft. Eine nicht beantwortete Aussage zählt als Fehler. Die Lösungen sind getrennt gespeichert und nur für Lehrkräfte lesbar; die Auswertung erfolgt automatisch.</li>
+   <li style="${li}"><b>Bewertung je Aufgabe:</b> ${coSchemaZeilen().map(([t,b])=>`${t}: ${b} BE`).join(" · ")}.</li>
+   <li style="${li}"><b>Höchstpunktzahl:</b> ${CHECKOUT_MAX_AUFGABEN} Aufgaben × ${be0} BE = <b>maximal ${max} BE (Punkte) je Test</b>. Die BE werden in Prozent und nach dem P/P-Bewertungsschlüssel in Notenpunkte (0–15) umgerechnet.</li>
+   <li style="${li}"><b>Kurzarbeit-Ersatz:</b> Vorgesehen sind ${gesamt} Tests${anzPool?` (bisher ${anzPool} beendet)`:""}. Jede Schülerin / jeder Schüler wählt ${soll} davon aus. Der Durchschnitt der Notenpunkte der ${soll} gewählten Tests ersetzt eine Kurzarbeit; ab ,5 wird aufgerundet.</li>
+  </ul>
+  <div style="break-inside:avoid"><div style="font-size:11.5px;font-weight:700;margin:6px 0 0">Umrechnung BE → Notenpunkte (bei ${max} BE je Test)</div>
+  ${coBeTabelleHTML(max)}</div>
+  <div style="break-inside:avoid"><div style="font-size:11.5px;font-weight:700;margin:6px 0 0">P/P-Bewertungsschlüssel (Prozent → Notenpunkte)</div>
+  ${coProzentSchluesselHTML()}</div>
+  <div style="font-size:10px;color:#666;margin-top:4px">Quellen: FOSBOS-Vorgabe „Entscheidungsbasierte Aufgaben“; Bewertungsschlüssel lt. „Unterrichten, Korrigieren und Bewerten im Fach Pädagogik/Psychologie an der Beruflichen Oberschule Bayern“ (Stand 13.09.2022).</div>
+ </div>`;
+}
 // Ein Respizienz-Blatt: alle Angaben zur Ablage der gewählten Tests einer Person.
-function coRespizienzHTML(name,tests,abgaben,einst){
+// ctx: {stat (Klassendurchschnitte), mitHintergrund, lehrkraft, anzPool}
+function coRespizienzHTML(name,tests,abgaben,einst,ctx){
+ ctx=ctx||{};
+ const E=escPDF,stat=ctx.stat||null;
+ const soll=Number(einst?.anzahlWaehlen)||7,max=coMaxBE();
  const zeilen=tests.map(c=>({c,a:abgaben[c.id]})).filter(x=>x.a?.ausgewertet);
- if(!zeilen.length)return`<div class="item"><strong>${escPDF(name)}</strong><div>Keine ausgewerteten Tests in der Auswahl.</div></div>`;
- const nA=Math.max(...zeilen.map(x=>(x.a.auswertung||[]).length));
+ const zell="padding:4px 5px;border:1px solid #cfd8de;font-size:11px;vertical-align:top";
+ const feld=(l,v)=>`<td style="${zell};background:#f1f5f8;width:19%"><b>${l}</b></td><td style="${zell};width:31%">${v}</td>`;
+ const kopf=`<div style="break-inside:avoid">
+  <div style="font-size:10.5px;letter-spacing:.06em;color:#1f4d73;font-weight:700">RESPIZIENZ · ALTERNATIVER LEISTUNGSNACHWEIS (KURZARBEIT-ERSATZ)</div>
+  <div style="font-size:19px;font-weight:800;margin:2px 0 8px">${E(name)}</div>
+  <table style="border-collapse:collapse;width:100%"><tbody>
+   <tr>${feld("Schule",E(CO_SCHULE))}${feld("Klasse",E(CO_KLASSE))}</tr>
+   <tr>${feld("Fach",E(CO_FACH))}${feld("Schuljahr",E(CO_SCHULJAHR))}</tr>
+   <tr>${feld("Leistungsnachweis","Check-outs (K-Prim-Tests) als Ersatz für eine Kurzarbeit")}${feld("Lehrkraft",E(ctx.lehrkraft||"–"))}</tr>
+  </tbody></table></div>`;
+ const hint=ctx.mitHintergrund===false?"":coRespizienzHintergrundHTML(einst,ctx.anzPool);
+ if(!zeilen.length)return`${kopf}<div class="item" style="margin-top:12px">Keine ausgewerteten Tests in der Auswahl.</div>${hint}`;
+ const nA=Math.max(...zeilen.map(x=>(x.a.auswertung||[]).length),CHECKOUT_MAX_AUFGABEN);
  const e=coErsatz(zeilen.map(x=>x.c.id),abgaben);
  const gesamtProz=e.maxBE?e.be/e.maxBE*100:0;
- const kopfA=Array.from({length:nA},(_,k)=>`<th>A${k+1}</th>`).join("");
- const zl=zeilen.map((x,i)=>{const a=x.a,p=Number(a.prozent)||0;
-  return`<tr><td>${i+1}</td><td>${escPDF(coTestDatum(x.c,a))}</td><td>${escPDF(coTitelAnzeige(x.c)||"Check-out")}</td><td>LB ${escPDF(x.c.lbNum||"")}</td>${Array.from({length:nA},(_,k)=>`<td style="text-align:center">${a.auswertung?.[k]?a.auswertung[k].be:"–"}</td>`).join("")}<td style="text-align:center"><b>${a.be}</b></td><td style="text-align:center">${a.maxBE}</td><td style="text-align:center">${coProz(p)}</td><td style="text-align:center"><b>${a.notenpunkte}</b></td><td style="width:70px"><div style="background:#e6ebef;height:9px;border-radius:5px"><div style="width:${Math.max(0,Math.min(100,p))}%;height:9px;border-radius:5px;background:#5a7f99"></div></div></td></tr>`;}).join("");
- const summe=`<tr style="border-top:2px solid #999"><td colspan="${4+nA}"><b>Gesamt (${zeilen.length} Tests)</b></td><td style="text-align:center"><b>${e.be}</b></td><td style="text-align:center"><b>${e.maxBE}</b></td><td style="text-align:center"><b>${coProz(gesamtProz)}</b></td><td style="text-align:center"><b>Ø ${e.schnitt.toFixed(2).replace(".",",")}</b></td><td></td></tr>`;
- const schl=FOSBOS_SCHLUESSEL.map(([np,min])=>`${np}: ab ${min} %`).join(" · ");
- return`<div class="item"style="background:#f5f7f8"><strong style="font-size:15px">${escPDF(name)}</strong>
-  <div>F11Sb · FOSBOS Weilheim · Pädagogik/Psychologie · Schuljahr 2026/27</div>
-  <div>Kurzarbeit-Ersatz: ${zeilen.length} von der Schülerin / dem Schüler gewählte Check-outs (jeweils ${nA} K-Prim-Aufgaben)</div></div>
- <table style="font-size:11.5px"><thead><tr><th>Nr.</th><th>Datum</th><th>Check-out</th><th>LB</th>${kopfA}<th>BE</th><th>max.</th><th>%</th><th>NP</th><th>Verteilung</th></tr></thead><tbody>${zl}${summe}</tbody></table>
- <div class="item"style="margin-top:12px"><div><b>Ergebnis:</b> Durchschnitt der Notenpunkte ${e.schnitt.toFixed(2).replace(".",",")}, gerundet (ab ,5 wird aufgerundet): <b style="font-size:15px">${escPDF(npText(e.np))}</b></div>
-  <div>Summe der Bewertungseinheiten: ${e.be} von ${e.maxBE} BE (${coProz(gesamtProz)} %), zur Information.</div></div>
- <div style="font-size:10.5px;color:#666;margin-top:6px">A1–A${nA}: Bewertungseinheiten (BE) je K-Prim-Aufgabe, ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern, sonst 0 BE. BE = erreichte, max. = mögliche Bewertungseinheiten des Tests. Notenpunkte nach dem P/P-Bewertungsschlüssel (FOSBOS Bayern, Stand 13.09.2022): ${schl}, darunter 0.</div>
- <div style="margin-top:26px;font-size:12px">Respizienz: Datum ______________ &nbsp;&nbsp; Unterschrift ______________________</div>`;
+ const th=`${zell};background:#f1f5f8;text-align:center`;
+ const kopfA=Array.from({length:nA},(_,k)=>`<th style="${th}">A${k+1}</th>`).join("");
+ const zl=zeilen.map((x,i)=>{
+  const a=x.a,p=Number(a.prozent)||0,st=stat?.proTest?.[x.c.id];
+  return`<tr style="break-inside:avoid"><td style="${zell};text-align:center">${i+1}</td><td style="${zell};white-space:nowrap">${E(coTestDatum(x.c,a))}</td>
+   <td style="${zell}"><b>${E(x.c.titel||"Check-out")}</b><div style="color:#555;font-size:10px">${E(coLbText(x.c.lbNum))}</div></td>
+   ${Array.from({length:nA},(_,k)=>`<td style="${zell};text-align:center">${a.auswertung?.[k]?a.auswertung[k].be:"–"}</td>`).join("")}
+   <td style="${zell};text-align:center;white-space:nowrap"><b>${a.be}</b> / ${a.maxBE}</td><td style="${zell};text-align:center">${coProz(p)}</td><td style="${zell};text-align:center"><b>${a.notenpunkte}</b></td>
+   ${stat?`<td style="${zell};text-align:center;color:#444">${st?coProz(st.be):"–"}</td><td style="${zell};text-align:center;color:#444">${st?coProz(st.np):"–"}</td>`:""}</tr>`;}).join("");
+ const summe=`<tr style="border-top:2px solid #777;background:#f7fafc"><td style="${zell}" colspan="${3+nA}"><b>Gesamt (${zeilen.length} ${zeilen.length===1?"Test":"Tests"})</b></td>
+  <td style="${zell};text-align:center;white-space:nowrap"><b>${e.be}</b> / ${e.maxBE}</td><td style="${zell};text-align:center"><b>${coProz(gesamtProz)}</b></td><td style="${zell};text-align:center"><b>Ø ${e.schnitt.toFixed(2).replace(".",",")}</b></td>${stat?`<td style="${zell}"></td><td style="${zell}"></td>`:""}</tr>`;
+ const tabelle=`<h3 style="font-size:13px;margin:16px 0 6px;border-bottom:1.5px solid #1f4d73;padding-bottom:3px">Ergebnisse der ${zeilen.length} gewählten Tests (je Test max. ${max} BE)</h3>
+  <table style="border-collapse:collapse;width:100%"><thead><tr><th style="${th}">Nr.</th><th style="${th}">Datum</th><th style="${th};text-align:left">Check-out · Lernbereich</th>${kopfA}<th style="${th}">BE</th><th style="${th}">%</th><th style="${th}">NP</th>${stat?`<th style="${th}" title="Klassendurchschnitt BE">Ø Kl. BE</th><th style="${th}" title="Klassendurchschnitt Notenpunkte">Ø Kl. NP</th>`:""}</tr></thead><tbody>${zl}${summe}</tbody></table>
+  <div style="font-size:10px;color:#666;margin-top:3px">A1–A${nA}: Bewertungseinheiten (BE) je K-Prim-Aufgabe · BE = erreichte / mögliche BE · NP = Notenpunkte${stat?" · Ø Kl. = Klassendurchschnitt dieses Tests (alle ausgewerteten Abgaben)":""}.</div>`;
+ const warn=zeilen.length!==soll?`<div style="color:#b03a2e;font-weight:700;font-size:11.5px;margin-top:6px">⚠ Vorgesehen sind ${soll} gewählte Tests, ausgewertet vorhanden: ${zeilen.length}.</div>`:"";
+ const kl=stat?.ersatz?`<div>Klassendurchschnitt Kurzarbeit-Ersatz: <b>Ø ${stat.ersatz.np.toFixed(2).replace(".",",")} Notenpunkte</b> (Durchschnitt der Ersatz-Notenpunkte; n = ${stat.ersatz.n} Schüler:innen mit Auswahl)</div>`:"";
+ const ergebnis=`<div style="border:2px solid #1f4d73;border-radius:10px;padding:10px 14px;margin:12px 0 0;break-inside:avoid;background:#f7fafc">
+  <div style="font-weight:800;margin-bottom:3px">Gesamtergebnis Kurzarbeit-Ersatz</div>
+  <div>Durchschnitt der Notenpunkte der ${zeilen.length} Tests: ${e.schnitt.toFixed(2).replace(".",",")} → gerundet (ab ,5 wird aufgerundet): <b style="font-size:16px">${E(npText(e.np))}</b></div>
+  <div style="font-size:11.5px">Summe der Bewertungseinheiten: ${e.be} von ${e.maxBE} BE (${coProz(gesamtProz)} %), zur Information.</div>
+  ${kl?`<div style="font-size:11.5px;margin-top:2px">${kl}</div>`:""}${warn}</div>`;
+ const inh=zeilen.map((x,i)=>{
+  const c=x.c,st=coStundenInhalte(c);
+  return`<div style="border-left:4px solid ${PP_FARBEN[c.lbNum]||"#8a99a3"};padding:3px 10px;margin:0 0 6px;break-inside:avoid;font-size:11.5px;line-height:1.4">
+   <div><b>Test ${i+1}: ${E(c.titel||"Check-out")}</b> · ${E(coTestDatum(c,x.a))}</div>
+   <div>Fach: ${E(CO_FACH)} · Lernbereich: <b>${E(coLbText(c.lbNum)||"–")}</b></div>
+   <div style="color:#444">${st.length?st.map(t=>E(coStundeText(t))).join("<br>"):"Keine Unterrichtsstunden im Stoffverteilungsplan hinterlegt."}</div></div>`;}).join("");
+ const inhalte=`<h3 style="font-size:13px;margin:16px 0 6px;border-bottom:1.5px solid #1f4d73;padding-bottom:3px">Lernbereich und Inhalte der Unterrichtsstunden je Test</h3>${inh}
+  <div style="font-size:10px;color:#666">Inhalte laut Stoffverteilungsplan Pädagogik/Psychologie, Jgst. 12 (Unterrichtsstunden der Woche des Check-outs).</div>`;
+ const unterschrift=`<div style="margin-top:34px;display:flex;gap:40px;break-inside:avoid;font-size:11px"><div style="flex:1;border-top:1px solid #444;padding-top:3px">Lehrkraft${ctx.lehrkraft?` (${E(ctx.lehrkraft)})`:""} · Datum, Unterschrift</div><div style="flex:1;border-top:1px solid #444;padding-top:3px">Respizienz · Datum, Unterschrift</div></div>`;
+ return`${kopf}${tabelle}${ergebnis}${inhalte}${hint}${unterschrift}`;
 }
-async function coPdfRespizienz(uid){
+// Aufruf durch die Lehrkraft: ganze Klasse (Übersicht + ein Blatt je Person) oder eine einzelne Person.
+async function coRespizienzDrucken(opt){
+ if(!isTeacher())return;
+ opt=opt||{};
  try{
-  const s=await coLadeSchueler(uid);
+  const {d,students,abgaben,auswahl}=await coLadeKlasse();
+  const beendet=d.checkouts.filter(c=>c.status==="beendet");
+  const stat=coKlassenStat(beendet,abgaben,auswahl,students.map(s=>s.uid));
+  const ctx={stat,mitHintergrund:opt.mitHintergrund!==false,lehrkraft:anzeigeName(profile,currentUser),anzPool:coPool(d.checkouts,d.einst).length};
+  const mit=students.filter(x=>(auswahl[x.uid]?.ids||[]).length);
+  const liste=opt.uid?mit.filter(x=>x.uid===opt.uid):mit;
+  if(!liste.length){toast(opt.uid?"Für diese Person liegt noch keine Auswahl vor.":"Noch keine Auswahl vorhanden.");return}
+  const sortiert=ids=>ids.map(id=>d.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
+  const heute=new Date().toLocaleDateString("de-DE");
+  const blatt=x=>coRespizienzHTML(anzeigeName(x),sortiert(auswahl[x.uid].ids||[]),abgaben[x.uid]||{},d.einst,ctx);
+  if(opt.uid){
+   const x=liste[0];
+   openToolPrintWindow(`Respizienz – ${anzeigeName(x)}`,blatt(x),`${CO_KLASSE} · ${CO_FACH} · Kurzarbeit-Ersatz · erstellt am ${heute}`);
+   return;
+  }
+  const seiten=liste.map(x=>`<div style="break-before:page">${blatt(x)}</div>`).join("");
+  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(anzeigeName(x))).join(", ");
+  const E=escPDF,zs="padding:4px 6px;border:1px solid #cfd8de;font-size:11.5px";
+  const zeilenTab=liste.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td style="${zs}">${E(anzeigeName(x))}</td><td style="${zs};text-align:center">${e?`${e.be} / ${e.maxBE}`:"–"}</td><td style="${zs};text-align:center">${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td style="${zs};text-align:center"><b>${e?E(npText(e.np)):"–"}</b></td></tr>`;}).join("");
+  const klRow=stat.ersatz?`<tr style="border-top:2px solid #777;background:#f7fafc"><td style="${zs}"><b>Klassendurchschnitt (n = ${stat.ersatz.n})</b></td><td style="${zs}"></td><td style="${zs};text-align:center"><b>Ø ${stat.ersatz.schnitt.toFixed(2).replace(".",",")}</b></td><td style="${zs};text-align:center"><b>Ø ${stat.ersatz.np.toFixed(2).replace(".",",")}</b></td></tr>`:"";
+  const testTab=beendet.filter(c=>stat.proTest[c.id]).map((c,i)=>{const t=stat.proTest[c.id];return`<tr><td style="${zs};text-align:center">${i+1}</td><td style="${zs}">${E(coDatum(c.datum))}</td><td style="${zs}">${E(c.titel||"Check-out")}<div style="font-size:10px;color:#555">${E(coLbText(c.lbNum))}</div></td><td style="${zs};text-align:center">${t.n}</td><td style="${zs};text-align:center">${coProz(t.be)} / ${t.maxBE}</td><td style="${zs};text-align:center"><b>${coProz(t.np)}</b></td></tr>`;}).join("");
+  const uebersicht=`<div style="font-size:10.5px;letter-spacing:.06em;color:#1f4d73;font-weight:700">RESPIZIENZ · ALTERNATIVER LEISTUNGSNACHWEIS (KURZARBEIT-ERSATZ)</div>
+   <div style="font-size:12px;margin:2px 0 8px">${E(CO_SCHULE)} · Klasse ${E(CO_KLASSE)} · ${E(CO_FACH)} · Schuljahr ${E(CO_SCHULJAHR)}</div>
+   <h2>Übersicht Kurzarbeit-Ersatz</h2>
+   <table style="border-collapse:collapse;width:100%"><thead><tr><th style="${zs};background:#f1f5f8;text-align:left">Schüler:in</th><th style="${zs};background:#f1f5f8">BE gesamt</th><th style="${zs};background:#f1f5f8">Ø Notenpunkte</th><th style="${zs};background:#f1f5f8">Ersatznote</th></tr></thead><tbody>${zeilenTab}${klRow}</tbody></table>
+   ${ohne?`<p class="empty" style="font-size:11.5px">Keine Auswahl: ${ohne}</p>`:""}
+   <h2>Klassendurchschnitt je Check-out</h2>
+   <table style="border-collapse:collapse;width:100%"><thead><tr><th style="${zs};background:#f1f5f8">Nr.</th><th style="${zs};background:#f1f5f8;text-align:left">Datum</th><th style="${zs};background:#f1f5f8;text-align:left">Check-out · Lernbereich</th><th style="${zs};background:#f1f5f8">Teilnehmer:innen</th><th style="${zs};background:#f1f5f8">Ø BE</th><th style="${zs};background:#f1f5f8">Ø Notenpunkte</th></tr></thead><tbody>${testTab||`<tr><td style="${zs}" colspan="6">Noch keine ausgewerteten Check-outs.</td></tr>`}</tbody></table>`;
+  openToolPrintWindow("Respizienz – Kurzarbeit-Ersatz (Klasse)",uebersicht+seiten,`${CO_KLASSE} · ${CO_FACH} · erstellt am ${heute}`);
+ }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+// Schüler:in: PDF der eigenen Auswahl (ohne Klassendurchschnitt). Lehrkraft mit uid: vollständige Respizienz.
+async function coPdfRespizienz(uid){
+ if(isTeacher()&&uid)return coRespizienzDrucken({uid});
+ try{
+  const [s,d]=await Promise.all([coLadeSchueler(uid),ladeCheckoutDaten()]);
   const ids=s.auswahl?.ids||[];
   if(!ids.length){toast("Es liegt noch keine Auswahl vor.");return}
   const tests=ids.map(id=>s.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
-  openToolPrintWindow(`Respizienz – ${s.name||"Schüler:in"}`,coRespizienzHTML(s.name||"Schüler:in",tests,s.abgaben),`F11Sb · Pädagogik/Psychologie · Kurzarbeit-Ersatz · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
+  openToolPrintWindow(`Respizienz – ${s.name||"Schüler:in"}`,coRespizienzHTML(s.name||"Schüler:in",tests,s.abgaben,d.einst,{lehrkraft:"",anzPool:coPool(d.checkouts,d.einst).length}),`${CO_KLASSE} · ${CO_FACH} · Kurzarbeit-Ersatz · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
+}
+// Dialog: Respizienz-Ausdruck gezielt starten (ganze Klasse oder eine Person)
+async function openRespizienzDialog(){
+ if(!isTeacher())return;
+ let k;try{k=await coLadeKlasse();}catch(e){console.error(e);toast("Konnte nicht geladen werden.");return}
+ const {students,auswahl,d}=k;
+ const mit=students.filter(x=>(auswahl[x.uid]?.ids||[]).length);
+ const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length);
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div class="kicker">🖨 RESPIZIENZ-AUSDRUCK · NUR LEHRKRÄFTE</div><h2>Respizienz für den Kurzarbeit-Ersatz</h2>
+  <p style="font-size:13px;color:var(--muted);margin-top:0">Eigener Ausdruck für die Ablage. Je Schüler:in enthält er: Name, Klasse und Fach, Lernbereich und Inhalte der Unterrichtsstunden je Test, die Ergebnisse der ${d.einst.anzahlWaehlen} gewählten Tests (je Aufgabe, max. ${coMaxBE()} BE je Test) mit Gesamtergebnis, den Klassendurchschnitt, den Notenschlüssel sowie Durchführung und Hintergründe des K-Prim-Tests.</p>
+  <div class="form">
+   <label>Für wen?<select id="respWer"><option value="">Ganze Klasse (${mit.length} mit Auswahl)</option>${mit.map(x=>`<option value="${esc(x.uid)}">${esc(anzeigeName(x))}</option>`).join("")}</select></label>
+   <label class="check"><input id="respHint"type="checkbox"checked> Durchführung, Hintergründe und Notenschlüssel auf jedem Blatt mit ausdrucken</label>
+   ${ohne.length?`<p style="font-size:12px;color:var(--muted)">Noch keine Auswahl: ${ohne.map(x=>esc(anzeigeName(x))).join(", ")}</p>`:""}
+   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="coRespizienzStarten()"${mit.length?"":" disabled"}>Ausdruck erstellen</button></div>
+  </div>`);
+}
+function coRespizienzStarten(){
+ const uid=$("respWer")?.value||"",h=$("respHint")?.checked!==false;
+ closeModal();
+ return coRespizienzDrucken({uid:uid||null,mitHintergrund:h});
 }
 // Alle Ergebnisse einer Person: Übersicht + jeder Test mit Aufgaben und Lösung.
 async function coPdfSchuelerAlle(uid){
@@ -11259,27 +10006,12 @@ async function coPdfSchuelerAlle(uid){
   const s=await coLadeSchueler(uid);
   const mit=s.checkouts.filter(c=>s.abgaben[c.id]);
   if(!mit.length){toast("Es liegen noch keine Ergebnisse vor.");return}
-  const tab=`<table style="font-size:12px"><thead><tr><th>Datum</th><th>Check-out</th><th>LB</th><th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>${mit.map(c=>{const a=s.abgaben[c.id];return`<tr><td>${escPDF(coTestDatum(c,a))}</td><td>${escPDF(coTitelAnzeige(c)||"")}</td><td>LB ${escPDF(c.lbNum||"")}</td>${a.ausgewertet?`<td>${a.be}/${a.maxBE}</td><td>${coProz(Number(a.prozent)||0)}</td><td><b>${escPDF(npText(a.notenpunkte))}</b></td>`:`<td colspan="3">noch nicht ausgewertet</td>`}</tr>`;}).join("")}</tbody></table>`;
-  const einzel=mit.filter(c=>s.abgaben[c.id].ausgewertet).map(c=>`<div style="break-before:page"><h2>${escPDF(coTitelAnzeige(c)||"")} · ${escPDF(coTestDatum(c,s.abgaben[c.id]))}</h2>${coVignettePdf(c)}${coPdfBlock(c,s.abgaben[c.id],s.name)}</div>`).join("");
-  openToolPrintWindow(`Check-out-Ergebnisse – ${s.name||"Schüler:in"}`,`<div class="item"style="background:#f5f7f8"><strong>${escPDF(s.name||"Schüler:in")}</strong><div>${mit.length} Check-outs</div></div>${tab}${einzel}`,`F11Sb · Pädagogik/Psychologie · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
+  const tab=`<table style="font-size:12px"><thead><tr><th>Datum</th><th>Check-out</th><th>LB</th><th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>${mit.map(c=>{const a=s.abgaben[c.id];return`<tr><td>${escPDF(coTestDatum(c,a))}</td><td>${escPDF(c.titel||"")}</td><td>LB ${escPDF(c.lbNum||"")}</td>${a.ausgewertet?`<td>${a.be}/${a.maxBE}</td><td>${coProz(Number(a.prozent)||0)}</td><td><b>${escPDF(npText(a.notenpunkte))}</b></td>`:`<td colspan="3">noch nicht ausgewertet</td>`}</tr>`;}).join("")}</tbody></table>`;
+  const einzel=mit.filter(c=>s.abgaben[c.id].ausgewertet).map(c=>`<div style="break-before:page"><h2>${escPDF(c.titel||"")} · ${escPDF(coTestDatum(c,s.abgaben[c.id]))}</h2>${coVignettePdf(c)}${coPdfBlock(c,s.abgaben[c.id],s.name)}</div>`).join("");
+  openToolPrintWindow(`Check-out-Ergebnisse – ${s.name||"Schüler:in"}`,`<div class="item"style="background:#f5f7f8"><strong>${escPDF(s.name||"Schüler:in")}</strong><div>${mit.length} Check-outs</div></div>${tab}${einzel}`,`F12Sb · Pädagogik/Psychologie · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
-async function coPdfRespizienzKlasse(){
- if(!isTeacher())return;
- try{
-  const {d,students,abgaben,auswahl}=await coLadeKlasse();
-  const mit=students.filter(x=>(auswahl[x.uid]?.ids||[]).length);
-  if(!mit.length){toast("Noch keine Auswahl vorhanden.");return}
-  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(anzeigeName(x))).join(", ");
-  const seiten=mit.map(x=>{
-   const ab=abgaben[x.uid]||{};
-   const tests=(auswahl[x.uid].ids||[]).map(id=>d.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
-   return`<div style="break-before:page">${coRespizienzHTML(anzeigeName(x),tests,ab)}</div>`;
-  }).join("");
-  const uebersicht=`<h2>Übersicht Kurzarbeit-Ersatz</h2><table><thead><tr><th>Schüler:in</th><th>BE gesamt</th><th>Ø Notenpunkte</th><th>Ersatznote</th></tr></thead><tbody>${mit.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td>${escPDF(anzeigeName(x))}</td><td>${e?`${e.be}/${e.maxBE}`:"–"}</td><td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?escPDF(npText(e.np)):"–"}</b></td></tr>`;}).join("")}</tbody></table>${ohne?`<p class="empty">Keine Auswahl: ${ohne}</p>`:""}`;
-  openToolPrintWindow("Respizienz – Kurzarbeit-Ersatz (Klasse)",uebersicht+seiten,`F11Sb · Pädagogik/Psychologie · erstellt am ${new Date().toLocaleDateString("de-DE")}`);
- }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
-}
+async function coPdfRespizienzKlasse(){return coRespizienzDrucken({});}
 async function coPdfErsatzSchueler(){return coPdfRespizienz(currentUser.uid);}
 async function openCheckoutEinstellungen(){
  if(!isTeacher())return;
@@ -11323,28 +10055,28 @@ async function openCheckoutKlassenuebersicht(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 CHECK-OUTS · ERGEBNISSE JE SCHÜLER:IN</div><h2>Ergebnisse und Kurzarbeit-Ersatz</h2>
   <p style="font-size:12px;color:var(--muted);margin-top:0">Zahlen = Notenpunkte je Check-out (Spalten nach Datum). Grün markiert = von der Schülerin / dem Schüler für den Ersatz gewählt (${d.einst.anzahlWaehlen} Tests). PDF Ergebnisse = alle Tests der Person, PDF Respizienz = die gewählten Tests mit allen Angaben zur Ablage.</p>
-  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(coTitelAnzeige(c))}">${i+1}</th>`).join("")}<th>Ersatz</th><th>PDF</th></tr></thead>
+  <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th><th>PDF</th></tr></thead>
   <tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
    return`<tr><td>${esc(anzeigeName(s))}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td style="white-space:nowrap"><button class="secondary"style="font-size:11px"onclick="coPdfSchuelerAlle('${s.uid}')">Ergebnisse</button> <button class="secondary"style="font-size:11px"onclick="coPdfRespizienz('${s.uid}')"${e?"":" disabled"}>Respizienz</button></td></tr>`;}).join("")}</tbody></table></div>
-  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button><button class="secondary"onclick="coPdfErsatzKlasse()">PDF Übersicht Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
+  <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="openRespizienzDialog()">🖨 Respizienz-Ausdruck</button><button class="secondary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button><button class="secondary"onclick="coPdfErsatzKlasse()">PDF Übersicht Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
 }
 async function coPdfErsatzKlasse(){
  if(!isTeacher())return;
  try{
   const {pool,students,abgaben,auswahl,d}=await coLadeKlasse();
-  const legende=`<div class="item">${pool.map((c,i)=>`${i+1}: ${escPDF(coTitelAnzeige(c))} (${coDatum(c.datum)})`).join(" · ")}</div>`;
+  const legende=`<div class="item">${pool.map((c,i)=>`${i+1}: ${escPDF(c.titel)} (${coDatum(c.datum)})`).join(" · ")}</div>`;
   const tab=`<table><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th>${i+1}</th>`).join("")}<th>Ø Auswahl</th><th>Ersatznote</th></tr></thead><tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
    return`<tr><td>${escPDF(anzeigeName(s))}</td>${pool.map(c=>`<td>${a[c.id]?.ausgewertet?(w.has(c.id)?`<b>[${a[c.id].notenpunkte}]</b>`:a[c.id].notenpunkte):"–"}</td>`).join("")}<td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table>`;
-  openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs (Klasse)",legende+tab,`F11Sb · Pädagogik/Psychologie · [x] = gewählt · ${d.einst.anzahlWaehlen} Tests je Schüler:in`);
+  openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs (Klasse)",legende+tab,`F12Sb · Pädagogik/Psychologie · [x] = gewählt · ${d.einst.anzahlWaehlen} Tests je Schüler:in`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
 Object.assign(window,{coBankEinsetzen,coVorlageWaehlen,coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
  openCheckoutTest,coAntwort,coAbgeben,openCheckoutMeinErgebnis,openCheckoutErgebnisse,openCheckoutSchuelerErgebnis,coPdfSchueler,coPdfKlasse,
- openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfRespizienz,coPdfRespizienzKlasse,coPdfSchuelerAlle});
+ openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfRespizienz,coPdfRespizienzKlasse,coPdfSchuelerAlle,openRespizienzDialog,coRespizienzStarten,coRespizienzDrucken});
 
 async function renderFachDetail(){
- if(activeFach!=="paedagogik")return await renderFaecherUebersicht();
- const fach=F11SB_LEHRPLAN_FAECHER.find(f=>f.key===activeFach);
+ if(!activeFach)return await renderFaecherUebersicht();
+ const fach=F11SB_FAECHER.find(f=>f.key===activeFach);
  const timeline=combinedTimeline(activeFach);
  const wochenItems=timeline.filter(t=>t.kind==="woche");
  const fortschritte=await Promise.all(wochenItems.map(async w=>({id:w.id,f:await getLehrplanFortschritt(w.id)})));
@@ -11357,7 +10089,7 @@ async function renderFachDetail(){
 
  if(activeFach==="paedagogik")return await renderPaedagogikPhasenZeitstrahl(fach,fortschrittMap,heute);
 
- return`<button class="secondary"onclick="closeFach()">← Zurück zur Lernwerkstatt</button>
+ return`<button class="secondary"onclick="closeFach()">← Zurück zu den Fächern</button>
  ${pageHead("LERNPFAD",fach?.label||"Fach",`Dein Weg durchs Schuljahr – ${erledigtCount} von ${wochenItems.length} Wochen geschafft.`,isTeacher()?`<button class="secondary"onclick="openLehrplanKlassenuebersicht('${activeFach}')"> Klassenübersicht</button>`:"")}
  <style>
  .lernpfad{position:relative;margin:20px 0 10px;padding-left:44px}
@@ -11474,7 +10206,7 @@ async function openWocheDetail(fach,wocheId,startTabOverride){
  const ziele=(LEHRPLAN_ZIELE_VORSCHLAG[wocheId]||[]).map((text,i)=>({id:`z${i}`,text}));
  const alleErfuellt=ziele.length>0 && ziele.every(z=>fortschritt.zieleErfuellt?.[z.id]);
  const meinTeam=teams.find(t=>(t.mitgliederUids||[]).includes(currentUser.uid));
- const fachLbl=F11SB_LEHRPLAN_FAECHER.find(f=>f.key===fach)?.label||fach;
+ const fachLbl=F11SB_FAECHER.find(f=>f.key===fach)?.label||fach;
  const meinProdukt=produkte.some(p=>p.uid===currentUser.uid);
 
  // Fortschritt: jeder Arbeitsschritt bekommt einen eigenen Haken, damit
@@ -11722,7 +10454,7 @@ function renderQrCode(){
  <div class="grid grid-2"style="gap:16px;align-items:start">
   <div class="card"><div class="form">
    <label>Link (Adresse)<input id="qrUrl"type="url"inputmode="url"autocomplete="off"placeholder="https://…"onkeydown="if(event.key==='Enter')qrErzeugen()"></label>
-   <label>Beschriftung unter dem Code (optional)<input id="qrText"maxlength="60"placeholder="z. B. Padlet 11Sb"></label>
+   <label>Beschriftung unter dem Code (optional)<input id="qrText"maxlength="60"placeholder="z. B. Padlet 12Sb"></label>
    <label>Farbe<select id="qrFarbe"><option value="#000000">Schwarz</option><option value="#0f3d6e">Dunkelblau</option></select></label>
    ${lehrer?`<label style="display:flex;gap:8px;align-items:center"><input type="checkbox"id="qrLogo"checked style="width:auto"> Schullogo in der Mitte</label>`:""}
    <div class="form-actions"><button class="primary"onclick="qrErzeugen()">QR-Code erstellen</button><button class="secondary"onclick="qrLoeschen()">Löschen</button></div>
@@ -11804,42 +10536,35 @@ function qrLoeschen(){
 window.qrLoeschen=qrLoeschen;window.qrErzeugen=qrErzeugen;window.qrHerunterladen=qrHerunterladen;window.qrKopieren=qrKopieren;
 
 async function renderLernwerkstatt(){
- // Ordnung nach Absicht der Lernenden (vier Gruppen, je mit einer Zwischenzeile in Ich-/Wir-Form).
  const groups=[
-  {title:"Mein Lernen planen und verstehen",sub:"Ich will mein Lernen in die Hand nehmen.",color:"#4a90d9",items:[
-   [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"],
-   [" ","Lernstrategien-Check","Kein Lerntyp-Test – dein Strategien-Profil in 25 Fragen.","lernstrategien"],
-   [" ","Metakognitive Lernstrategien","Über das eigene Lernen nachdenken – klick dich durch.","metakognition"],
-   [" ","Lernstandsmessung","Kurz prüfen: Wo stehe ich und was ist mein nächster Schritt?","lernstand"]
-  ]},
-  {title:"Üben und festigen",sub:"Ich will üben und mich auf Prüfungen vorbereiten.",color:"#3fa66a",items:[
-   [" ","Fachaufsatz-Training","Fachaufsatz Pädagogik/Psychologie an echten Prüfungsaufgaben üben.","fachaufsatz"],
-   [" ","Zuordnungsübungen","Begriff und Erklärung zuordnen, per Knopfdruck selbst überprüfen.","zuordnung"],
-   [" ","Lern-Werkzeuge","Karteikarten, Fokus-Timer und Glossar zum selbstständigen Lernen.","lernwerkzeuge"],
-   [" ","Lernmethoden","Planung, Lernen, Zusammenarbeit und Reflexion.","methoden"],
-   [" ","Uhr & Timer","Aktuelle Uhrzeit im Blick, plus frei einstellbarer Timer für alle.","uhr-timer"]
-  ]},
-  {title:"Gemeinsam arbeiten",sub:"Wir arbeiten im Team und tauschen uns aus.",color:"#8a64b8",items:[
-   [" ","Digitale Tafel","Die Tafel für den Unterricht: Seiten, Karten, Timer, Würfel, Lostopf und mehr.","tafel"],
-   [" ","Team-Whiteboard","Gemeinsam auf einer unendlichen Fläche arbeiten – Notizen, Formen, Pfeile, Zeichnungen.","whiteboard"],
-   [" ","Tools für Zusammenarbeit","Padlet, Wortwolke & Co. für Gruppenarbeit und Unterricht.","kollaboration"],
-   [" ","Lernimpulse","Kurze Impulse für Reflexion und Deeper Learning.","impulse"]
-  ]},
-  {title:"Material, KI und Hilfe",sub:"Ich brauche Material oder Unterstützung.",color:"#e0a324",items:[
-   [" ","Lernressourcen","TaskCard, KI, Videos, ByCS/mebis, Canva und LearningApps.","ressourcen"],
-   [" ","QR-Code-Generator","Links in QR-Codes umwandeln, zum Speichern und Ausdrucken.","qr-code"],
-   [" ","KI zum Lernen","KI als Lernpartner nutzen – bereitgestellte KI-Angebote der Lehrkräfte.","ki-lernen"],
-   [" ","Lerncoaching","Individuelle Begleitung und Kontakt zu einer Lehrkraft.","lerncoaching"],
-   [" ","Fragen & Hilfe","Antworten rund um die F11Sb und das Lernen.","fragenhilfe"]
-  ]}
+ {title:"Mein Lernen planen und verstehen",sub:"Ich will mein Lernen in die Hand nehmen.",color:"#4a90d9",items:[
+ [" ","Persönlicher Lernpfad","Ziele setzen, Lernschritte planen und Fortschritt erkennen.","lernpfad"],
+ [" ","Lernstrategien-Check","Kein Lerntyp-Test – dein Strategien-Profil in 25 Fragen.","lernstrategien"],
+ [" ","Metakognitive Lernstrategien","Über das eigene Lernen nachdenken – klick dich durch.","metakognition"],
+ [" ","Lernmethoden","Planung, Lernen, Zusammenarbeit und Reflexion.","methoden"]
+ ]},
+ {title:"Üben und festigen",sub:"Ich will üben und mich auf Prüfungen vorbereiten.",color:"#3fa66a",items:[
+ [" ","Fachaufsatz-Training","Fachaufsatz Pädagogik/Psychologie an echten Prüfungsaufgaben üben.","fachaufsatz"],
+ [" ","Zuordnungsübungen","Begriff und Erklärung zuordnen, per Knopfdruck selbst überprüfen.","zuordnung"],
+ [" ","Lern-Werkzeuge","Karteikarten, Fokus-Timer und Glossar zum selbstständigen Lernen.","lernwerkzeuge"],
+ [" ","Uhr & Timer","Aktuelle Uhrzeit im Blick, plus frei einstellbarer Timer für alle.","uhr-timer"]
+ ]},
+ {title:"Gemeinsam arbeiten",sub:"Wir arbeiten im Team und tauschen uns aus.",color:"#8a64b8",items:[
+ [" ","Digitale Tafel","Die Tafel für den Unterricht: Seiten, Karten, Timer, Würfel, Lostopf und mehr.","tafel"],
+ [" ","Team-Whiteboard","Gemeinsam auf einer unendlichen Fläche arbeiten – Notizen, Formen, Pfeile, Zeichnungen.","whiteboard"],
+ [" ","Tools für Zusammenarbeit","Padlet, Wortwolke & Co. für Gruppenarbeit und Unterricht.","kollaboration"],
+ [" ","Lernimpulse","Kurze Impulse für Reflexion und Deeper Learning.","impulse"]
+ ]},
+ {title:"Material, KI und Hilfe",sub:"Ich brauche Material oder Unterstützung.",color:"#e0a324",items:[
+ [" ","Lernressourcen","TaskCard, KI, Videos, ByCS/mebis, Canva und LearningApps.","ressourcen"],
+ [" ","QR-Code-Generator","Links in QR-Codes umwandeln, zum Speichern und Ausdrucken.","qr-code"],
+ [" ","KI zum Lernen","KI als Lernpartner nutzen – bereitgestellte KI-Angebote der Lehrkräfte.","ki-lernen"],
+ [" ","Lerncoaching","Individuelle Begleitung und Kontakt zu einer Lehrkraft.","lerncoaching"],
+ [" ","Fragen & Hilfe","Antworten rund um die F12Sb und das Lernen.","fragenhilfe"]
+ ]}
  ];
  return`${pageHead("SELBSTSTÄNDIG LERNEN","Lernwerkstatt","Der offene Lernraum für Lernaufträge, Methoden, Tools und KI.",`<button class="primary"onclick="openPostForm('idea')">＋ Lernimpuls</button>`)}
- ${isTeacher()?`<div class="kicker"style="margin-bottom:10px">PLANUNG FÜR LEHRKRÄFTE</div>
- <a class="card tile"href="#fach"onclick="event.preventDefault();openFach('paedagogik')"style="background:#fff;border-left:4px solid #4a90d9;min-height:110px;margin-bottom:22px">
- <strong style="font-size:16px">Modulplanung Pädagogik und Psychologie</strong>
- <small>Bausteine Woche für Woche einplanen, Projekt- und Prüfungstraining-Gesamtcheck, Didaktik-Kompass. Die Lernlandkarte zeigt das Ergebnis für die Klasse.</small>
- </a>`:""}
- ${groups.map(g=>`<div class="kicker"style="margin:26px 0 2px">${g.title}</div><p style="margin:0 0 10px;color:var(--muted)">${g.sub}</p><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
+ ${groups.map(g=>`<div class="kicker"style="margin:26px 0 4px">${g.title}</div><div style="margin:0 0 10px;font-size:13px;color:var(--muted)">${g.sub}</div><div class="grid grid-4">${g.items.map(x=>`<a class="card tile"style="background:#fff;border-left:4px solid ${g.color}"href="#${x[3]}"><span class="emoji">${x[0]}</span>
 <strong>${x[1]}</strong><small>${x[2]}</small></a>`).join("")}</div>`).join("")}
  ${footer()}`;
 }
@@ -11905,45 +10630,6 @@ const WB_STANDARD={
 };
 const WB_MAX_CURSOR=12; // ab so vielen gleichzeitig Online-Personen werden keine Mauszeiger mehr übertragen (spart Datenverkehr)
 const WB_VORLAGEN=[
- {name:"Psychologie oder Pädagogik?",beschr:"Fragen und Beispiele zuordnen, Zusammenhang festhalten",mitarbeit:true,items:(x,y)=>[
-  {type:"text",x:x-480,y:y-500,w:960,h:60,fs:20,text:"Ordne die Post-its zu: Gehört die Frage zur Psychologie, zur Pädagogik oder zu beiden? Ergänze eigene Beispiele aus deinem Praktikum."},
-  {type:"frame",x:x-600,y:y-400,w:390,h:600,c:"lila",text:"Psychologie: Erleben und Verhalten"},
-  {type:"frame",x:x-195,y:y-400,w:390,h:600,c:"gruen",text:"Beide: Wechselwirkung"},
-  {type:"frame",x:x+210,y:y-400,w:390,h:600,c:"orange",text:"Pädagogik: Erziehung und alles, was dabei wichtig ist"},
-  {type:"frame",x:x-600,y:y+230,w:1200,h:230,c:"grau",text:"Beispiele aus meinem Praktikum"},
-  {type:"note",x:x-1000,y:y-400,w:215,h:150,fs:16,c:"gelb",text:"Warum zieht sich ein Kind bei Kritik zurück?"},
-  {type:"note",x:x-1000,y:y-230,w:215,h:150,fs:16,c:"gelb",text:"Wie kann die Fachkraft das Kind ermutigen?"},
-  {type:"note",x:x-1000,y:y-60,w:215,h:150,fs:16,c:"gelb",text:"Welche Ziele sollen in der Kita verfolgt werden?"},
-  {type:"note",x:x-1000,y:y+110,w:215,h:150,fs:16,c:"gelb",text:"Wie erlebt ein Kind Angst vor einer neuen Situation?"},
-  {type:"note",x:x-1000,y:y+280,w:215,h:150,fs:16,c:"gelb",text:"Eine Studie untersucht, wie Lob die Motivation beeinflusst."}]},
- {name:"Einstieg: Was ist Psychologie?",beschr:"4 Post-its sortieren, eigenes Post-it, später richtigstellen",mitarbeit:true,items:(x,y)=>[
-  {type:"text",x:x-480,y:y-540,w:960,h:76,fs:20,text:"Was ist eigentlich Psychologie? 1) Ordne die gelben Post-its ein: stimmt, stimmt teilweise oder stimmt nicht. 2) Schreibe dein eigenes Post-it. 3) Nach dem Lesen: Hänge um und stelle falsche Aussagen richtig."},
-  {type:"frame",x:x-480,y:y-440,w:960,h:250,c:"grau",text:"Das sagen Leute über Psychologie"},
-  {type:"frame",x:x-600,y:y-170,w:390,h:520,c:"gruen",text:"Stimmt"},
-  {type:"frame",x:x-195,y:y-170,w:390,h:520,c:"orange",text:"Stimmt teilweise"},
-  {type:"frame",x:x+210,y:y-170,w:390,h:520,c:"rosa",text:"Stimmt nicht"},
-  {type:"frame",x:x+640,y:y-440,w:380,h:380,c:"blau",text:"Mein Post-it: Psychologie ist für mich …"},
-  {type:"frame",x:x+640,y:y-30,w:380,h:380,c:"tuerkis",text:"Richtigstellung (nach dem Lesen)"},
-  {type:"shape",shape:"rect",x:x-300,y:y+390,w:600,h:100,c:"lila",fs:20,text:"Leitfrage: Kann man von außen sehen, was in einem Menschen vorgeht?"},
-  {type:"note",x:x-460,y:y-380,w:215,h:170,fs:16,c:"gelb",text:"Psychologie, das ist Couch, Beratung und Therapie. Sie hilft bei persönlichen Problemen."},
-  {type:"note",x:x-225,y:y-380,w:215,h:170,fs:16,c:"gelb",text:"Psychologie erforscht das Unbewusste: Hypnose und Traumdeutung."},
-  {type:"note",x:x+10,y:y-380,w:215,h:170,fs:16,c:"gelb",text:"Psycholog:innen durchschauen mich sofort und wissen, wie es mir geht."},
-  {type:"note",x:x+245,y:y-380,w:215,h:170,fs:16,c:"gelb",text:"Psychologie hat etwas mit Seele, Geist und Gefühlen zu tun."}]},
- {name:"Fachaufsatz: Bausteine",beschr:"Einleitung, Hauptteil und Schluss mit den acht Bausteinen, Gruppen befüllen sie",mitarbeit:true,items:(x,y)=>[
-  {type:"text",x:x-740,y:y-540,w:1500,h:60,fs:20,text:"Baue euren Fachaufsatz Baustein für Baustein auf. Schreibt zu jedem Baustein die Sätze eurer Gruppe auf eine Haftnotiz. Im Hauptteil gilt: Nennen, Erklären, Verdeutlichen (Transfer) mit Zeilenangabe."},
-  {type:"frame",x:x-740,y:y-460,w:440,h:700,c:"blau",text:"Einleitung"},
-  {type:"note",x:x-720,y:y-390,w:400,h:150,fs:16,c:"gelb",text:"1 Einleitungssatz: ganz allgemein ins Thema, ohne Fallbezug"},
-  {type:"note",x:x-720,y:y-220,w:400,h:150,fs:16,c:"gelb",text:"2 Eingrenzung des Lernbereichs: Definitionen Pädagogik und Psychologie"},
-  {type:"note",x:x-720,y:y-50,w:400,h:150,fs:16,c:"gelb",text:"3 Überleitung: Fallbezug mit Zeilenangabe und Ausblick auf den Hauptteil"},
-  {type:"frame",x:x-280,y:y-460,w:640,h:700,c:"gruen",text:"Hauptteil (für jeden Theoriepunkt wiederholen)"},
-  {type:"note",x:x-260,y:y-390,w:290,h:150,fs:16,c:"gelb",text:"4 Klärung von Theorie und Fachbegriffen: Oberbegriff, Definition"},
-  {type:"note",x:x+50,y:y-390,w:290,h:150,fs:16,c:"gelb",text:"5 Nennen: den Theoriepunkt nennen"},
-  {type:"note",x:x-260,y:y-220,w:290,h:150,fs:16,c:"gelb",text:"6 Erklären: in eigenen Worten, mit Definition"},
-  {type:"note",x:x+50,y:y-220,w:290,h:150,fs:16,c:"gelb",text:"7 Verdeutlichen (Transfer): am Fallbeispiel mit Zeilenangabe (Z. __)"},
-  {type:"text",x:x-260,y:y-30,w:600,h:60,fs:20,text:"Danach der nächste Theoriepunkt: Schritte 5 bis 7 noch einmal."},
-  {type:"frame",x:x+400,y:y-460,w:440,h:700,c:"rosa",text:"Schluss"},
-  {type:"note",x:x+420,y:y-390,w:400,h:150,fs:16,c:"gelb",text:"8 Gedanke oder Ausblick: passend zum Thema, kein neuer Stoff"},
-  {type:"frame",x:x-740,y:y+280,w:1580,h:260,c:"grau",text:"Unsere Rückmeldungen: Stern (gelungen) und Wunsch (konkrete Verbesserung)"}]},
  {name:"Brainstorming",beschr:"Thema in der Mitte, Ideen drumherum",items:(x,y)=>[
   {type:"shape",shape:"ellipse",x:x-130,y:y-70,w:260,h:140,c:"blau",text:"Thema",fs:26},
   {type:"note",x:x-420,y:y-230,c:"gelb",text:"Idee 1"},{type:"note",x:x+220,y:y-230,c:"rosa",text:"Idee 2"},
@@ -12159,44 +10845,37 @@ async function renderTafelUebersicht(){return renderWhiteboardUebersicht("tafel"
 async function renderWhiteboardUebersicht(modus){
  const istTafel=modus==="tafel";
  const alle=await getWhiteboards();
- const boards=alle===null?null:(istTafel?alle.filter(b=>b.art==="tafel"&&!b.einstieg):alle.filter(b=>b.art!=="tafel"));
- const einstiege=istTafel&&alle?alle.filter(b=>b.art==="tafel"&&b.einstieg):[];
+ const boards=alle===null?null:(istTafel?alle.filter(b=>b.art==="tafel"):alle.filter(b=>b.art!=="tafel"));
  const kopf=istTafel
   ?pageHead("UNTERRICHT","Digitale Tafel","Die Tafel für deinen Unterricht: Seiten, Karten, Bilder, Videos und Werkzeuge wie Timer, Würfel, Lostopf und Ampel. Lehrkräfte gestalten, alle anderen sehen live zu.",
     isTeacher()?`<button class="primary"onclick="openWhiteboardForm('tafel')">＋ Neue Tafel</button>`:"")
   :pageHead("ZUSAMMENARBEIT","Team-Whiteboard","Gemeinsam auf einer unendlichen Fläche arbeiten: Haftnotizen, Text, Formen, Pfeile und Zeichnungen – alle sehen Änderungen live.",
     `<button class="primary"onclick="openWhiteboardForm()">＋ Neues Whiteboard</button>`);
  if(boards===null)return`${WB_CSS}${kopf}<div class="empty"><strong>${istTafel?"Tafeln":"Whiteboards"} konnten nicht geladen werden.</strong>${esc(wbFehlerText(wbLadeFehler))}<br><small>Tipp: Auf der Seite diagnose.html lässt sich das genau prüfen.</small></div>${footer()}`;
- const karte=b=>`<div class="wb-karte-wrap"><button type="button"class="wb-karte"onclick="openWhiteboard('${b.id}')">
+ return`${WB_CSS}${kopf}
+ <div class="wb-gitter">${boards.map(b=>`<div class="wb-karte-wrap"><button type="button"class="wb-karte"onclick="openWhiteboard('${b.id}')">
   ${wbKarteKopf(b.id)}
   <div class="wb-karte-text"><strong>${esc(b.title||"Whiteboard")}</strong>
   <small>${esc(b.description||"")||(b.art==="tafel"?"Tafel für den Unterricht.":"Gemeinsame Arbeitsfläche.")}</small>
-  <small>${b.art==="tafel"?(b.einstieg?'<b class="wb-art-chip einstieg"style="margin:0 6px 0 0">Einstieg</b>':'<b class="wb-art-chip"style="margin:0 6px 0 0">Tafel</b>'):""}Angelegt von ${esc(b.createdByName||"Campus-Mitglied")} · ${esc(fmtDate(b.createdAt))}</small></div></button>
-  ${isTeacher()?`<button type="button"class="wb-karte-del"title="${b.art==="tafel"?"Tafel":"Whiteboard"} löschen"aria-label="${b.art==="tafel"?"Tafel":"Whiteboard"} löschen"onclick="wbBoardLoeschen('${b.id}','${b.art==="tafel"?"tafel":"team"}')">${wbIcon("papierkorb",18)}</button>${b.art==="tafel"?`<button type="button"class="wb-karte-einst"title="${b.einstieg?"Zurück zu den Tafeln verschieben":"In die Einstiege verschieben"}"onclick="wbEinstiegSetzen('${b.id}',${b.einstieg?"false":"true"})">${b.einstieg?"→ zu Tafeln":"→ zu Einstiegen"}</button>`:""}`:""}</div>`;
- const einstiegBereich=istTafel?`<section class="wb-bereich wb-einstiege"><div class="wb-bereich-kopf"><div><h2>🚀 Einstiege</h2><small>Tafeln für den Stundeneinstieg: Impuls, Bild, Frage oder kurzes Spiel zum Ankommen.</small></div>${isTeacher()?`<button class="secondary"type="button"onclick="openWhiteboardForm('einstieg')">＋ Neuer Einstieg</button>`:""}</div>
-  ${einstiege.length?`<div class="wb-gitter">${einstiege.map(karte).join("")}</div>`:`<div class="empty"style="margin:0"><strong>Noch kein Einstieg.</strong>${isTeacher()?"Lege den ersten Einstieg an.":"Sobald deine Lehrkraft einen Einstieg anlegt, erscheint er hier."}</div>`}</section>
-  <div class="wb-bereich-kopf"style="margin-top:22px"><div><h2>🧑‍🏫 Tafeln</h2><small>Tafeln für den Unterricht.</small></div></div>`:"";
- return`${WB_CSS}${kopf}${istTafel?`<style>.wb-bereich-kopf{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:0 0 12px}.wb-bereich-kopf h2{margin:0;font-size:20px}.wb-bereich-kopf small{color:var(--muted)}.wb-einstiege{background:#fff7ec;border:1px solid #f1d6ad;border-left:6px solid #e08a1e;border-radius:16px;padding:16px;margin:0 0 6px}.wb-art-chip.einstieg{background:#e08a1e}.wb-karte-einst{position:absolute;right:52px;top:12px;height:30px;padding:0 12px;border-radius:15px;border:1px solid #f1d6ad;background:#fff;color:#a35f0c;font:inherit;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(24,67,96,.15);z-index:2}.wb-karte-einst:hover{background:#fff7ec}</style>`:""}
- ${einstiegBereich}
- <div class="wb-gitter">${boards.map(karte).join("")}</div>
+  <small>${b.art==="tafel"?'<b class="wb-art-chip"style="margin:0 6px 0 0">Tafel</b>':""}Angelegt von ${esc(b.createdByName||"Campus-Mitglied")} · ${esc(fmtDate(b.createdAt))}</small></div></button>
+  ${isTeacher()?`<button type="button"class="wb-karte-del"title="${b.art==="tafel"?"Tafel":"Whiteboard"} löschen"aria-label="${b.art==="tafel"?"Tafel":"Whiteboard"} löschen"onclick="wbBoardLoeschen('${b.id}','${b.art==="tafel"?"tafel":"team"}')">${wbIcon("papierkorb",18)}</button>`:""}</div>`).join("")}</div>
  ${boards.length?"":(istTafel?`<div class="empty"><strong>Noch keine Tafel.</strong>${isTeacher()?"Lege die erste Tafel für eine Unterrichtsstunde an.":"Sobald deine Lehrkraft eine Tafel anlegt, erscheint sie hier."}</div>`:`<div class="empty"><strong>Noch kein Whiteboard.</strong>Lege das erste Whiteboard für dein Team oder ein Thema an.</div>`)}
  ${footer()}`;
 }
 function openWhiteboard(id){activeWhiteboardId=id;go("whiteboard-board")}
 function closeWhiteboard(){const art=wb&&wb.board&&wb.board.art;activeWhiteboardId=null;go(art==="tafel"?"tafel":"whiteboard")}
-let wbFormArt="",wbFormEinstieg=false;
+let wbFormArt="";
 function openWhiteboardForm(artVorgabe){
  if(!isApproved()){toast("Nur freigeschaltete Nutzer können ein Whiteboard anlegen.");return}
- wbFormEinstieg=artVorgabe==="einstieg"&&isTeacher();
- wbFormArt=(artVorgabe==="tafel"||wbFormEinstieg)&&isTeacher()?"tafel":"";
+ wbFormArt=artVorgabe==="tafel"&&isTeacher()?"tafel":"";
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">${wbFormEinstieg?"DIGITALE TAFEL · EINSTIEG":wbFormArt?"DIGITALE TAFEL":"TEAM-WHITEBOARD"}</div><h2>${wbFormEinstieg?"Neuer Einstieg":wbFormArt?"Neue Tafel":"Neues Whiteboard"}</h2>
-  <p>${wbFormEinstieg?"Eine Tafel für den Einstieg in eine Stunde (Impuls, Bild, Frage, kurzes Spiel). Nur Lehrkräfte bearbeiten, Schüler:innen sehen zu. Später lässt sich der Einstieg mit Modulen verknüpfen.":wbFormArt?"Eine Tafel für den Unterricht, die du vorbereiten und präsentieren kannst. Schüler:innen sehen zu.":"Eine Arbeitsfläche mit mehreren Seiten, Karten und Unterrichts-Werkzeugen."}</p>
+  <div class="kicker">${wbFormArt?"DIGITALE TAFEL":"TEAM-WHITEBOARD"}</div><h2>${wbFormArt?"Neue Tafel":"Neues Whiteboard"}</h2>
+  <p>${wbFormArt?"Eine Tafel für den Unterricht, die du vorbereiten und präsentieren kannst. Schüler:innen sehen zu.":"Eine Arbeitsfläche mit mehreren Seiten, Karten und Unterrichts-Werkzeugen."}</p>
   <div class="form">
    ${isTeacher()&&!wbFormArt?`<label>Art<select id="wbNeuArt"><option value="team">Team-Whiteboard – alle arbeiten mit</option><option value="tafel">Tafel – nur Lehrkräfte bearbeiten, Schüler:innen sehen zu</option></select></label>`:""}
-   <label>Titel<input id="wbNeuTitel"maxlength="120"placeholder="${wbFormEinstieg?"z. B. Einstieg: Was ist eigentlich normal?":wbFormArt?"z. B. Freud – Instanzenmodell":"z. B. Projektteam 3 – Ideensammlung"}"></label>
+   <label>Titel<input id="wbNeuTitel"maxlength="120"placeholder="${wbFormArt?"z. B. Freud – Instanzenmodell":"z. B. Projektteam 3 – Ideensammlung"}"></label>
    <label>Kurzbeschreibung<textarea id="wbNeuBeschr"rows="3"maxlength="300"placeholder="Wofür ist dieses Whiteboard gedacht?"></textarea></label>
-   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addWhiteboard()">${wbFormEinstieg?"Einstieg anlegen":wbFormArt?"Tafel anlegen":"Whiteboard anlegen"}</button></div>
+   <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="addWhiteboard()">${wbFormArt?"Tafel anlegen":"Whiteboard anlegen"}</button></div>
   </div>`);
 }
 async function addWhiteboard(){
@@ -12204,7 +10883,7 @@ async function addWhiteboard(){
  if(!title){toast("Bitte einen Titel eingeben.");return}
  try{
   const art=(isTeacher()&&(wbFormArt==="tafel"||$("wbNeuArt")?.value==="tafel"))?"tafel":"team";
-  const r=await addDoc(collection(db,"whiteboards"),{title,description,art,schreibschutz:art==="tafel",seiten:1,bg:art==="tafel"?"blau":"weiss",...(art==="tafel"&&wbFormEinstieg?{einstieg:true}:{}),createdBy:currentUser.uid,
+  const r=await addDoc(collection(db,"whiteboards"),{title,description,art,schreibschutz:art==="tafel",seiten:1,bg:art==="tafel"?"blau":"weiss",createdBy:currentUser.uid,
    createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
   closeModal();openWhiteboard(r.id);
  }catch(e){
@@ -12212,15 +10891,6 @@ async function addWhiteboard(){
   toast(e?.code==="permission-denied"?"Firebase verweigert das Anlegen (permission-denied). Bitte die Firestore-Regeln prüfen.":`Whiteboard konnte nicht angelegt werden (${(e&&(e.code||e.name))||"unbekannt"}).`);
  }
 }
-async function wbEinstiegSetzen(id,an){
- if(!isTeacher())return;
- try{
-  await updateDoc(doc(db,"whiteboards",id),{einstieg:!!an});
-  toast(an?"In die Einstiege verschoben.":"Zu den Tafeln verschoben.");
-  await render();
- }catch(e){console.error("Einstieg setzen:",e);toast(e?.code==="permission-denied"?"Firebase verweigert die Änderung.":"Das hat nicht geklappt.");}
-}
-window.wbEinstiegSetzen=wbEinstiegSetzen;
 async function wbBoardLoeschen(id,artVorgabe){
  if(!isTeacher()){toast("Nur Lehrkräfte können ein Whiteboard oder eine Tafel löschen.");return}
  const art=artVorgabe||(wb&&wb.id===id&&wb.board&&wb.board.art)||"team";
@@ -12233,12 +10903,27 @@ async function wbBoardLoeschen(id,artVorgabe){
   await Promise.all(bs.docs.map(d=>deleteDoc(doc(db,"whiteboardImages",d.id))));
   const ps=await getDocs(query(collection(db,"whiteboardPresence"),where("boardId","==",id)));
   await Promise.all(ps.docs.map(d=>deleteDoc(doc(db,"whiteboardPresence",d.id)).catch(()=>{})));
-  // Module im Modulplan, die diese Tafel eingebunden hatten: Verknüpfung lösen (dort kann danach eine neue Tafel angelegt werden)
+  // Verknüpfungen lösen, damit nirgends eine Tafel angezeigt wird, die es nicht mehr gibt
   try{
+   // Stunden im Unterricht-Plan (Termin → Tafel)
+   const ts=await getDocs(query(collection(db,"lehrplanTafeln"),where("boardId","==",id)));
+   await Promise.all(ts.docs.map(d=>{const x=d.data();return(x.lernBoardId||x.whiteboardId||x.rfUrl)?updateDoc(doc(db,"lehrplanTafeln",d.id),{boardId:""}):deleteDoc(doc(db,"lehrplanTafeln",d.id));}));
+   ts.docs.forEach(d=>{const x=d.data();if(PP12_CACHE&&PP12_CACHE.tafeln){if(x.lernBoardId||x.whiteboardId||x.rfUrl)PP12_CACHE.tafeln[d.id]={...PP12_CACHE.tafeln[d.id],boardId:""};else delete PP12_CACHE.tafeln[d.id];}});
+   // zurückgestellte Stunden mit Tafel
+   const pl=await getDoc(doc(db,"lehrplanPlan","pp12"));
+   if(pl.exists()){
+    const pt=pl.data().parkTafeln||{};
+    const rest=Object.fromEntries(Object.entries(pt).filter(([,t])=>!(t&&t.boardId===id)));
+    if(Object.keys(rest).length!==Object.keys(pt).length){
+     await updateDoc(doc(db,"lehrplanPlan","pp12"),{parkTafeln:rest});
+     if(PP12_OVER)PP12_OVER.parkTafeln=rest;
+    }
+   }
+   // Module im Modulplan
    const ms=await getDocs(query(collection(db,"ppModule"),where("tafelId","==",id)));
    await Promise.all(ms.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{tafelId:""})));
    if(ms.docs.length&&typeof ppmLaden==="function")await ppmLaden(true);
-  }catch(e){console.warn("Tafel-Verknüpfung lösen:",e);}
+  }catch(e){console.warn("Tafel-Verknüpfungen lösen:",e);}
   try{
    const mw=await getDocs(query(collection(db,"ppModule"),where("whiteboardId","==",id)));
    await Promise.all(mw.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{whiteboardId:""})));
@@ -12271,7 +10956,7 @@ async function renderWhiteboardBoard(){
  <div class="wb-seite">
   <div class="wb-kopf">
    <button class="secondary"type="button"id="wbZurueck">← ${board.art==="tafel"?"Tafeln":"Whiteboards"}</button>
-   <div><h1>${esc(board.title||"Whiteboard")}${board.art==="tafel"?(board.einstieg?'<span class="wb-art-chip"style="background:#e08a1e">Einstieg</span>':'<span class="wb-art-chip">Tafel</span>'):""}</h1><small>${esc(board.description||"")||(board.art==="tafel"?"Tafel für den Unterricht":"Gemeinsame Arbeitsfläche")}</small></div>
+   <div><h1>${esc(board.title||"Whiteboard")}${board.art==="tafel"?'<span class="wb-art-chip">Tafel</span>':""}</h1><small>${esc(board.description||"")||(board.art==="tafel"?"Tafel für den Unterricht":"Gemeinsame Arbeitsfläche")}</small></div>
    ${kann?`<button class="secondary"type="button"id="wbUmbenennen">Umbenennen</button>`:""}
    <button class="secondary"type="button"id="wbSchutz"hidden></button>
    ${isTeacher()?`<button class="secondary"type="button"id="wbLoeschen">Löschen</button>`:""}
@@ -13054,8 +11739,7 @@ function wbVorlageEinsetzen(i){
   ids.push(wbErzeugen({w:std.w,h:std.h,...t},{zOffset:n}));
  });
  wbUndoPush(async()=>{await wbLoeschenIds(ids,true);});
- if(v.mitarbeit&&wb.board&&wb.board.art!=="tafel"&&wb.board.schreibschutz&&wbBoardVerwalter()){updateDoc(doc(db,"whiteboards",wb.id),{schreibschutz:false}).catch(wbFehler);}
- $("wbTplMenu").hidden=true;wbAuswahlSetzen([]);toast(v.mitarbeit&&wb.board.art!=="tafel"?`Vorlage „${v.name}“ eingefügt. Die Mitarbeit ist für alle geöffnet.`:`Vorlage „${v.name}“ eingefügt.`);
+ $("wbTplMenu").hidden=true;wbAuswahlSetzen([]);toast(`Vorlage „${v.name}“ eingefügt.`);
 }
 function wbVollbild(an){
  const w=wb.wrap;const neu=an===undefined?!w.classList.contains("wb-full"):an;
@@ -13153,7 +11837,7 @@ function wbExportZeichnen(bilderMap){
   }
  });
  c.setTransform(s,0,0,s,0,0);c.fillStyle="#8a99a8";c.font="12px Arial";c.textAlign="left";c.textBaseline="alphabetic";
- c.fillText(`F11Sb · Whiteboard · ${wb.board.title||""}`,pad,H-12);
+ c.fillText(`F12Sb · Whiteboard · ${wb.board.title||""}`,pad,H-12);
  if(wb.pdfModus){wb.pdfModus=false;wbPdfFenster(cv);return;}
  cv.toBlob(b=>{
   if(!b){toast("Das Bild konnte nicht erstellt werden.");return}
@@ -13769,7 +12453,7 @@ function wbNamenModal(id){
  $("wbNamenKlasse").addEventListener("click",async()=>{
   try{
    const s=await getDocs(collection(db,"profilePublic"));
-   const n=s.docs.map(d=>d.data()).filter(u=>u.status==="approved"&&u.role==="student"&&istKlasse11Sb(u)).map(u=>anzeigeName(u)).filter(Boolean).sort((a,b)=>a.localeCompare(b,"de"));
+   const n=s.docs.map(d=>d.data()).filter(u=>u.status==="approved"&&u.role==="student"&&istKlasse12Sb(u)).map(u=>anzeigeName(u)).filter(Boolean).sort((a,b)=>a.localeCompare(b,"de"));
    $("wbNamenText").value=n.join("\n");toast(`${n.length} Namen geladen. Prüfe die Liste und speichere.`);
   }catch(e){toast("Die Klassenliste konnte nicht geladen werden.");}
  });
@@ -13867,6 +12551,7 @@ async function wbDateiHochladen(datei){
 }
 
 Object.assign(window,{openWhiteboard,closeWhiteboard,openWhiteboardForm,addWhiteboard,wbBoardLoeschen});
+
 /* =========================================================
  TOOLS FÜR ZUSAMMENARBEIT – Übersichtsseite in der Lernwerkstatt.
  Sammelt alle kollaborativen Mini-Tools an einer Stelle. Fertige
@@ -13881,17 +12566,16 @@ async function renderKollaborationsTools(){
  ["","Wer ist dran?","Zufällige Auswahl aus der Klasse oder einer eigenen Liste.","zufallspicker",true]
  ];
  const orgaTools=[
- [" ","Digitale Tafel","Unterrichtstafel mit Seiten, Karten, Timer, Würfel und Lostopf.","tafel",true],
- [" ","Team-Whiteboard","Unendliche Fläche mit Notizen, Formen, Pfeilen und Zeichnungen – live im Team.","whiteboard",true],
  [" ","Pinnwand","Padlet-Stil: Ideen im Raster sammeln, pinnen und gemeinsam sichten.","pinnwand",true],
  ["","Kanban-Board","Aufgaben in Spalten Offen / In Arbeit / Fertig für Projektgruppen.","kanban",true],
  ["","Terminfindung","Zeitfenster vorschlagen und als Gruppe gemeinsam abstimmen.","terminfindung",true],
  ["","Team gesucht","Pinnwand für Gruppenfindung: Wer sucht noch Mitstreiter:innen?","teamgesucht",true],
+ ["","Team-Whiteboard","Unendliche Fläche mit Notizen, Formen, Pfeilen und Zeichnungen – live im Team.","whiteboard",true],
  ["✅","Gemeinsame Checkliste","Meilensteine im Projekt oder Praktikum gemeinsam abhaken.","checkliste",true]
  ];
  const toolTile=t=>`<a class="card tile"href="#${t[3]}"><span class="emoji">${t[0]}</span>
 <strong>${t[1]}</strong><small>${t[2]}</small>${!t[4]?`<span class="badge"style="margin-top:8px">IN VORBEREITUNG</span>`:""}</a>`;
- return`${pageHead("ZUSAMMENARBEIT","Tools für Zusammenarbeit","Kostenlose, direkt in die F11Sb integrierte Tools für Gruppenarbeit, Brainstorming und Unterricht – ganz ohne externe Anmeldung.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>`)}
+ return`${pageHead("ZUSAMMENARBEIT","Tools für Zusammenarbeit","Kostenlose, direkt in die F12Sb integrierte Tools für Gruppenarbeit, Brainstorming und Unterricht – ganz ohne externe Anmeldung.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>`)}
  <h3 style="margin:0 0 10px">🔴 Live im Unterricht</h3>
  <div class="grid grid-3">${liveTools.map(toolTile).join("")}</div>
  <h3 style="margin:22px 0 10px"> Projektorganisation</h3>
@@ -14100,7 +12784,7 @@ async function downloadWordcloudPDF(wordcloudId){
  </style>${wordcloudCloudHTML(items)}`;
  openToolPrintWindow(
  "Wortwolke – "+(cloud.title||"Wortwolke"),
- body,"F11Sb · Wortwolke"+(cloud.description?" · "+cloud.description:"")
+ body,"F12Sb · Wortwolke"+(cloud.description?" · "+cloud.description:"")
  );
  }catch(e){console.error("Wortwolke PDF:",e);toast("Die Wortwolke konnte nicht als PDF geöffnet werden.")}
 }
@@ -14292,7 +12976,7 @@ async function downloadKanbanPDF(boardId){
  }).join("");
  openToolPrintWindow(
  "Kanban-Board – "+(board.title||"Kanban-Board"),
- body,"F11Sb · Kanban-Board"+(board.description?" · "+board.description:"")
+ body,"F12Sb · Kanban-Board"+(board.description?" · "+board.description:"")
  );
  }catch(e){console.error("Kanban PDF:",e);toast("Das Kanban-Board konnte nicht als PDF geöffnet werden.")}
 }
@@ -14532,7 +13216,7 @@ async function downloadTermPollPDF(pollId){
  </div>`).join(""):`<p class="empty">Keine Terminvorschläge.</p>`;
  openToolPrintWindow(
  "Terminfindung – "+(poll.title||"Terminfindung"),
- body,"F11Sb · Terminfindung · "+votes.length+"Stimme(n) insgesamt"+(poll.description?" · "+poll.description:"")
+ body,"F12Sb · Terminfindung · "+votes.length+"Stimme(n) insgesamt"+(poll.description?" · "+poll.description:"")
  );
  }catch(e){console.error("Terminfindung PDF:",e);toast("Die Terminfindung konnte nicht als PDF geöffnet werden.")}
 }
@@ -14590,7 +13274,7 @@ async function downloadTeamAdsPDF(){
  ${interested.length?`<small>Interessiert: ${interested.map(i=>escPDF(i.name)).join(",")}</small>`:""}
  </div>`;
  }).join(""):`<p class="empty">Noch kein Gesuch.</p>`;
- openToolPrintWindow("Team gesucht",body,"F11Sb · Übersicht aller offenen Gesuche");
+ openToolPrintWindow("Team gesucht",body,"F12Sb · Übersicht aller offenen Gesuche");
  }catch(e){console.error("Team gesucht PDF:",e);toast("Die Übersicht konnte nicht als PDF geöffnet werden.")}
 }
 
@@ -14878,7 +13562,7 @@ async function downloadChecklistPDF(checklistId){
  </div>`).join(""):`<p class="empty">Noch keine Einträge.</p>`;
  openToolPrintWindow(
  "Checkliste – "+(list.title||"Checkliste"),
- body,"F11Sb · Gemeinsame Checkliste · "+done+"von"+items.length+"erledigt"+(list.description?" · "+list.description:"")
+ body,"F12Sb · Gemeinsame Checkliste · "+done+"von"+items.length+"erledigt"+(list.description?" · "+list.description:"")
  );
  }catch(e){console.error("Checkliste PDF:",e);toast("Die Checkliste konnte nicht als PDF geöffnet werden.")}
 }
@@ -15155,7 +13839,7 @@ async function downloadAmpelPDF(roundId){
  </tbody></table>`;
  openToolPrintWindow(
  "Verständnis-Ampel – "+(round.title||"Runde"),
- body,"F11Sb · Verständnis-Ampel · "+total+"Antwort(en)"+(round.description?" · "+round.description:"")
+ body,"F12Sb · Verständnis-Ampel · "+total+"Antwort(en)"+(round.description?" · "+round.description:"")
  );
  }catch(e){console.error("Ampel PDF:",e);toast("Die Runde konnte nicht als PDF geöffnet werden.")}
 }
@@ -15373,7 +14057,7 @@ async function downloadPollPDF(pollId){
  </tbody></table>`;
  openToolPrintWindow(
  "Live-Umfrage – "+(poll.question||"Umfrage"),
- body,"F11Sb · Live-Umfrage · "+total+"Stimme(n)"+(poll.description?" · "+poll.description:"")
+ body,"F12Sb · Live-Umfrage · "+total+"Stimme(n)"+(poll.description?" · "+poll.description:"")
  );
  }catch(e){console.error("Umfrage PDF:",e);toast("Die Umfrage konnte nicht als PDF geöffnet werden.")}
 }
@@ -15426,7 +14110,7 @@ async function renderZufallspicker(){
 async function pickRandomStudent(){
  try{
  const snap=await getDocs(collection(db,"profilePublic"));
- const students=snap.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&u.role==="student"&&istKlasse11Sb(u));
+ const students=snap.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&u.role!=="teacher"&&u.role!=="admin"&&istKlasse12Sb(u));
  const remaining=students.filter(u=>!pickedStudentUids.includes(u.uid));
  const pool=remaining.length?remaining:students;
  if(!pool.length){toast("Keine freigeschalteten Klassenmitglieder gefunden.");return}
@@ -16020,7 +14704,7 @@ async function downloadDeckPDF(deckId){
  </div>`).join(""):`<p class="empty">Noch keine Karten.</p>`;
  openToolPrintWindow(
  "Karteikarten – "+(deck.title||"Deck"),
- body,"F11Sb · Karteikarten · "+cards.length+"Karte(n)"+(deck.description?" · "+deck.description:"")
+ body,"F12Sb · Karteikarten · "+cards.length+"Karte(n)"+(deck.description?" · "+deck.description:"")
  );
  }catch(e){console.error("Karteikarten PDF:",e);toast("Das Deck konnte nicht als PDF geöffnet werden.")}
 }
@@ -16400,7 +15084,7 @@ async function downloadGlossaryPDF(){
  <strong>${escPDF(g.term)}</strong>
  <div>${escPDF(g.definition)}</div>
  </div>`).join(""):`<p class="empty">Noch keine Begriffe.</p>`;
- openToolPrintWindow("Glossar",body,"F11Sb · Fachbegriffe-Glossar · "+entries.length+"Begriff(e)");
+ openToolPrintWindow("Glossar",body,"F12Sb · Fachbegriffe-Glossar · "+entries.length+"Begriff(e)");
  }catch(e){console.error("Glossar PDF:",e);toast("Das Glossar konnte nicht als PDF geöffnet werden.")}
 }
 
@@ -16825,7 +15509,7 @@ async function downloadEssayPDF(caseId){
  </div>`;
  openToolPrintWindow(
  "Fachaufsatz – "+(c.title||"Aufgabe"),
- body,"F11Sb · Fachaufsatz-Training"+(c.quelle?" · "+c.quelle:"")
+ body,"F12Sb · Fachaufsatz-Training"+(c.quelle?" · "+c.quelle:"")
  );
  }catch(e){console.error("Fachaufsatz PDF:",e);toast("Der Aufsatz konnte nicht als PDF geöffnet werden.")}
 }
@@ -17007,7 +15691,7 @@ async function renderForum(){
  <a class="card tile"href="#forum-board"style="min-height:180px;background:#fff;border-left:4px solid #4a90d9">
  <span class="emoji"></span>
  <strong>Forum</strong>
- <small>Gemeinsam denken, fragen, austauschen und unterstützen – für die ganze F11Sb sichtbar.</small>
+ <small>Gemeinsam denken, fragen, austauschen und unterstützen – für die ganze F12Sb sichtbar.</small>
  </a>
  <a class="card tile"href="#forum-nachrichten"style="min-height:180px;background:#fff;border-left:4px solid #1a9b8e">
  <span class="emoji"></span>
@@ -17104,7 +15788,7 @@ async function renderForumMessages(){
  <button class="secondary"title="Unterhaltung aus meiner Übersicht entfernen"onclick="event.stopPropagation();deleteConversation('${c.otherUid}','${esc(c.otherName||"")}')">Löschen</button>
  </div>
  </div>
- </article>`).join("")||`<div class="empty"><strong>Noch keine Nachrichten.</strong><p>Schreibe jemandem aus der F11Sb eine persönliche Nachricht.</p></div>`}
+ </article>`).join("")||`<div class="empty"><strong>Noch keine Nachrichten.</strong><p>Schreibe jemandem aus der F12Sb eine persönliche Nachricht.</p></div>`}
  </div>${footer()}`;
 }
 
@@ -17357,7 +16041,7 @@ async function getBoardPosts(boardId){
 
 async function renderPinnwandUebersicht(){
  const boards=await getBoards();
- return`${pageHead("ZUSAMMENARBEIT","Pinnwand","Digitale Pinnwände für Ideen, Brainstorming und Gruppenarbeit – im Raster, für die ganze F11Sb sichtbar.",`<button class="primary"onclick="openBoardForm()">＋ Neue Pinnwand</button>`)}
+ return`${pageHead("ZUSAMMENARBEIT","Pinnwand","Digitale Pinnwände für Ideen, Brainstorming und Gruppenarbeit – im Raster, für die ganze F12Sb sichtbar.",`<button class="primary"onclick="openBoardForm()">＋ Neue Pinnwand</button>`)}
  <div class="grid grid-3">${boards.map(b=>`
  <div class="card tile"style="cursor:pointer;text-align:left"onclick="openBoard('${b.id}')">
  <span class="emoji"></span>
@@ -17506,7 +16190,7 @@ async function downloadBoardPDF(boardId){
  </div>`).join(""):`<p class="empty">Noch keine Notizen.</p>`;
  openToolPrintWindow(
  "Pinnwand – "+(board.title||"Pinnwand"),
- body,"F11Sb · Pinnwand"+(board.description?" · "+board.description:"")
+ body,"F12Sb · Pinnwand"+(board.description?" · "+board.description:"")
  );
  }catch(e){console.error("Pinnwand PDF:",e);toast("Die Pinnwand konnte nicht als PDF geöffnet werden.")}
 }
@@ -18176,7 +16860,7 @@ function openJournalPrintWindow(title,students){
  const studentSections=students.map(student=>`
  <section class="student-section">
  <h1>${escPDF(student.name)}</h1>
- <div class="meta">F11Sb · Persönliches Lernjournal</div>
+ <div class="meta">F12Sb · Persönliches Lernjournal</div>
  ${student.entries.length
  ? student.entries.map(j=>`
  <article class="entry">
@@ -18335,7 +17019,7 @@ async function downloadAllJournalsPDF(){
 
  closeModal();
  openJournalPrintWindow(
- "F11Sb – Lernjournale",
+ "F12Sb – Lernjournale",
  students
  );
  }catch(e){
@@ -18815,7 +17499,7 @@ function resilienzCheckin(name){try{localStorage.setItem("campus_resilienz_"+nam
 
 async function renderFragenHilfe(){
  const faqs=[
- ["Was ist die F11Sb?","Die F11Sb verbindet selbstständiges Lernen, Projekte, Praxis, Kompetenzentwicklung und Gemeinschaft. Du arbeitest zunehmend eigenverantwortlich und kannst deinen Lernweg aktiv mitgestalten."],
+ ["Was ist die F12Sb?","Die F12Sb verbindet selbstständiges Lernen, Projekte, Praxis, Kompetenzentwicklung und Gemeinschaft. Du arbeitest zunehmend eigenverantwortlich und kannst deinen Lernweg aktiv mitgestalten."],
  ["Wie funktioniert das Lernen?","Du setzt Ziele, planst deine nächsten Schritte, bearbeitest Lernaufträge und reflektierst deinen Lernweg. Die Lernwerkstatt unterstützt dich dabei mit Methoden, Lernressourcen, Lernimpulsen und KI-Angeboten."],
  ["Wo finde ich meine Aufgaben?","Im Campus-Kompass findest du deine persönlichen Aufgaben, Projekte, Ziele und deinen aktuellen Lernweg."],
  ["Was ist die Lernwerkstatt?","Die Lernwerkstatt ist dein Bereich für selbstständiges Lernen. Dort findest du Lernpfade, Lernressourcen, Lernimpulse, Lernstandsmessungen, KI zum Lernen und diese Fragen-&-Hilfe-Seite."],
@@ -18824,15 +17508,15 @@ async function renderFragenHilfe(){
  ["Was ist Deeper Learning?","Deeper Learning bedeutet, dass du Wissen nicht nur aufnimmst, sondern es verstehst, anwendest, auf neue Situationen überträgst, Probleme löst, gemeinsam arbeitest und deine Ergebnisse reflektierst."],
  ["Was ist ein Lernjournal?","Im Lernjournal hältst du deinen Lernweg fest: Was habe ich gelernt? Was hat funktioniert? Wo gab es Schwierigkeiten? Was ist mein nächster Schritt?"],
  ["Was sind Lernstandsmessungen?","Sie helfen dir zu erkennen, wo du bei deinen Kompetenzen stehst und woran du als Nächstes arbeiten solltest. Die Ergebnisse können deine Kompetenzentwicklung sichtbar machen."],
- ["Wo finde ich Termine?","Im Campus-Kalender findest du die wichtigen Termine der F11Sb. Dort sind auch die Schulferien von Bayern für das Schuljahr 2026/27 markiert."],
- ["Was mache ich bei Fragen zur F11Sb?","Wenn deine Frage hier nicht beantwortet wird, wende dich an deine Lehrkraft bzw. das Klassenteam. Die Seite soll dir zunächst schnelle Orientierung zu F11Sb und Lernen geben."]
+ ["Wo finde ich Termine?","Im Campus-Kalender findest du die wichtigen Termine der F12Sb. Dort sind auch die Schulferien von Bayern für das Schuljahr 2026/27 markiert."],
+ ["Was mache ich bei Fragen zur F12Sb?","Wenn deine Frage hier nicht beantwortet wird, wende dich an deine Lehrkraft bzw. das Klassenteam. Die Seite soll dir zunächst schnelle Orientierung zu F12Sb und Lernen geben."]
  ];
 
- return`${pageHead("ORIENTIERUNG","Fragen & Hilfe","Antworten rund um die F11Sb, selbstständiges Lernen und deinen Lernweg.")}
+ return`${pageHead("ORIENTIERUNG","Fragen & Hilfe","Antworten rund um die F12Sb, selbstständiges Lernen und deinen Lernweg.")}
  <div class="card"style="margin-bottom:16px;border-left:4px solid #3fa66a">
  <span class="badge"> ORIENTIERUNG</span>
  <h2>Du hast eine Frage?</h2>
- <p>Hier findest du schnelle Antworten zu den wichtigsten Fragen rund um die F11Sb und das Lernen. Nutze die Themen als erste Orientierung.</p>
+ <p>Hier findest du schnelle Antworten zu den wichtigsten Fragen rund um die F12Sb und das Lernen. Nutze die Themen als erste Orientierung.</p>
  </div>
  <div class="grid grid-2">
  ${faqs.map(([q,a])=>`<details class="card"style="margin:0 0 12px">
@@ -19267,7 +17951,7 @@ function escapeICS(text){
 }
 
 function buildICS(events,calName){
- const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//F11Sb//Kalender//DE","CALSCALE:GREGORIAN",`X-WR-CALNAME:${escapeICS(calName||"F11Sb Kalender")}`];
+ const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//F12Sb//Kalender//DE","CALSCALE:GREGORIAN",`X-WR-CALNAME:${escapeICS(calName||"F12Sb Kalender")}`];
  const stamp=new Date().toISOString().replace(/[-:]/g,"").split(".")[0]+"Z";
  events.forEach((e,i)=>{
  const raw=e.start||e.date||e.startDate;
@@ -19325,7 +18009,7 @@ async function exportCampusCalendarICS(){
  const ferienRangeEvents=ferienZeitraeume.map(([start,end,label])=>(
  {start,rangeEnd:end,title:label,description:"Schulferien in Bayern"}
  ));
- downloadICS([...events,...calFesteTermine(),...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F11Sb Kalender");
+ downloadICS([...events,...calFesteTermine(),...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F12Sb Kalender");
  toast("Kalender wird heruntergeladen – Datei öffnen, um sie zum Handy-Kalender hinzuzufügen.");
  }catch(e){console.error("Kalender-Export:",e);toast("Der Kalender konnte nicht exportiert werden.")}
 }
@@ -19338,7 +18022,7 @@ function exportCalendarDayICS(y,m,d){
  return !isNaN(x)&&x.getFullYear()===y&&x.getMonth()===m&&x.getDate()===d;
  });
  if(!day.length){toast("An diesem Tag gibt es keinen Termin zum Exportieren.");return}
- downloadICS(day,`termin-${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}.ics`,"F11Sb Termin");
+ downloadICS(day,`termin-${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}.ics`,"F12Sb Termin");
 }
 
 // Terminarten mit Farbklasse (gemeinsam für Übersicht, Tagesansicht und Legende)
@@ -19349,6 +18033,7 @@ const CAL_TYPEN={
  projektvorstellung:{label:"Projektvorstellung",className:"cal-green"},
  referat:{label:"Referat",className:"cal-yellow"},
  praesentation:{label:"Präsentation",className:"cal-purple"},
+ pruefung:{label:"Abschlussprüfung (schriftlich)",className:"cal-gold"},
  notenschluss:{label:"Notenschluss",className:"cal-rose"},
  elternabend:{label:"Elternabend",className:"cal-orange"},
  digitaltag:{label:"Digitaltag",className:"cal-teal"},
@@ -19356,26 +18041,58 @@ const CAL_TYPEN={
  geburtstag:{label:"Geburtstag",className:"cal-birthday"},
  ferien:{label:"Schulferien Bayern",className:"cal-holiday"}
 };
-// Schulaufgaben (SA) und Kurzarbeiten (KU) der F11Sb, Schuljahr 26/27 (laut Leistungsnachweis-Plan, Stand 05.10.2026).
-// Format: [Datum, Typ, Fach-Kürzel für die Monatsansicht, Fach (voll), Kürzel Lehrkraft]
+// Schulaufgaben (SA) und Kurzarbeiten (KA) der F12Sb aus Schuljahr 26/27 (laut Leistungsnachweis-Plan, Stand 05.10.2026).
+// Format: [Datum, Typ, Kurzname für die Monatsansicht, Fach (voll), Kürzel Lehrkraft]
 function calLeistungsnachweise(){
  const L=[
-  ["2026-10-22","kurzarbeit","D","Deutsch","Hm"],
-  ["2026-10-23","kurzarbeit","P/P","Pädagogik/Psychologie","Rz"],
-  ["2026-12-07","schulaufgabe","D","Deutsch","Hm"],
-  ["2026-12-09","schulaufgabe","E","Englisch","Gf"],
-  ["2027-01-19","kurzarbeit","Ch","Chemie","Me"],
-  ["2027-01-21","schulaufgabe","P/P","Pädagogik/Psychologie","Rz"],
-  ["2027-04-15","schulaufgabe","E","Englisch","Gf"],
-  ["2027-06-09","schulaufgabe","D","Deutsch","Hm"]
+  ["2026-10-15","schulaufgabe","Deutsch","Deutsch","Gw"],
+  ["2026-10-22","kurzarbeit","Mathe","Mathematik","Sd"],
+  ["2026-10-27","kurzarbeit","SoWi","Sozialwirtschaft und Recht","So"],
+  ["2026-10-30","kurzarbeit","P/P","Pädagogik/Psychologie","Ta"],
+  ["2026-11-09","kurzarbeit","Std-At","Studier- und Arbeitstechniken (WPF_Std-At_I)","Gw"],
+  ["2026-11-10","kurzarbeit","PuG","Politik und Gesellschaft","Sai"],
+  ["2026-11-11","kurzarbeit","Ethik","Ethik (ET4_F12Sa_Sb_Ua)","Wa"],
+  ["2026-11-11","kurzarbeit","ev. Reli","Evang. Religionslehre (R_Evangelisch)","Sm"],
+  ["2026-11-11","kurzarbeit","kath. Reli","Kath. Religionslehre (K5_F12Sb_Ua)","Kg"],
+  ["2026-11-16","kurzarbeit","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
+  ["2026-11-16","kurzarbeit","Sp I","Spanisch (WPF_Sp_12_I)","Ge"],
+  ["2026-11-16","kurzarbeit","Sp Ia","Spanisch (WPF_Sp_12_Ia)","Os"],
+  ["2026-11-17","kurzarbeit","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
+  ["2026-11-17","kurzarbeit","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
+  ["2026-11-17","kurzarbeit","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"],
+  ["2026-11-25","schulaufgabe","Englisch","Englisch","Rt"],
+  ["2026-12-09","schulaufgabe","Mathe","Mathematik","Sd"],
+  ["2026-12-14","schulaufgabe","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
+  ["2026-12-14","schulaufgabe","Sp I","Spanisch (WPF_Sp_12_I)","Ge"],
+  ["2026-12-14","schulaufgabe","Sp Ia","Spanisch (WPF_Sp_12_Ia)","Os"],
+  ["2026-12-15","schulaufgabe","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
+  ["2026-12-15","schulaufgabe","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
+  ["2026-12-15","schulaufgabe","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"],
+  ["2027-01-28","kurzarbeit","Mathe","Mathematik","Sd"],
+  ["2027-02-17","kurzarbeit","kath. Reli","Kath. Religionslehre (K5_F12Sb_Ua)","Kg"],
+  ["2027-02-22","kurzarbeit","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
+  ["2027-02-22","kurzarbeit","Sp I","Spanisch (WPF_Sp_12_I)","Ge"],
+  ["2027-02-22","kurzarbeit","Sp Ia","Spanisch (WPF_Sp_12_Ia)","Os"],
+  ["2027-02-23","kurzarbeit","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
+  ["2027-02-23","kurzarbeit","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
+  ["2027-02-23","kurzarbeit","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"],
+  ["2027-03-08","schulaufgabe","Mathe","Mathematik","Sd"],
+  ["2027-03-10","schulaufgabe","Mathe","Mathematik","Sd"],
+  ["2027-03-11","schulaufgabe","Englisch","Englisch","Rt"],
+  ["2027-04-12","schulaufgabe","It I","Italienisch (WPF_Italienisch_12_I)","Mo"],
+  ["2027-04-12","schulaufgabe","Sp I","Spanisch (WPF_Sp_12_I)","Ge"],
+  ["2027-04-12","schulaufgabe","Sp Ia","Spanisch (WPF_Sp_12_Ia)","Os"],
+  ["2027-04-13","schulaufgabe","It II","Italienisch (WPF_Italienisch_12_II)","Rt"],
+  ["2027-04-13","schulaufgabe","Sp II","Spanisch (WPF_Sp_12_II)","Ge"],
+  ["2027-04-13","schulaufgabe","Sp IIa","Spanisch (WPF_Sp_12_IIa)","Qa"]
  ];
  return L.map(([start,type,kurz,fach,lk])=>({
   start,type,kurz,fach,
-  title:(type==="schulaufgabe"?"Schulaufgabe (SA) in ":"Kurzarbeit (KU) in ")+fach,
-  description:(type==="schulaufgabe"?"Schulaufgabe (SA)":"Kurzarbeit (KU), Gewicht 2")+" in "+fach+" · Lehrkraft: "+lk
+  title:(type==="schulaufgabe"?"Schulaufgabe (SA) in ":"Kurzarbeit (KA) in ")+fach,
+  description:(type==="schulaufgabe"?"Schulaufgabe":"Kurzarbeit (Gewicht 2)")+" in "+fach+" · Lehrkraft: "+lk
  }));
 }
-// Feste Termine (nicht bearbeitbar): Termine der FOSBOS Weilheim
+// Feste Termine (nicht bearbeitbar): zentrale schriftliche Abschlussprüfungen FOS 12 Bayern 2027 und Termine der FOSBOS Weilheim.
 // ---- Feste (im Code hinterlegte) Termine löschen = ausblenden ----
 // Gespeichert in taskcardLinks/kalender_ausgeblendet (Lehrkräfte schreiben, alle lesen).
 let calAusgeblendetSet=new Set(),calAusgeblendetZeit=0;
@@ -19411,9 +18128,14 @@ async function calFixWiederherstellen(){
 }
 window.calFixAusblenden=calFixAusblenden;window.calFixWiederherstellen=calFixWiederherstellen;
 function calFesteTermineRoh(){
+ const P="Zentraler Prüfungstermin der schriftlichen Abschlussprüfung FOS 12 in Bayern 2027.";
  return[
   {start:"2026-10-29",type:"digitaltag",title:"1. Digitaltag",description:"Digitaltag der FOSBOS Weilheim."},
-  ...calLeistungsnachweise()
+  ...calLeistungsnachweise(),
+  {start:"2027-05-12",type:"pruefung",title:"Abschlussprüfung Deutsch (schriftlich)",description:P},
+  {start:"2027-05-14",type:"pruefung",title:"Abschlussprüfung Pädagogik/Psychologie (schriftlich, Profilfach)",description:P},
+  {start:"2027-06-01",type:"pruefung",title:"Abschlussprüfung Englisch (schriftlich)",description:P},
+  {start:"2027-06-03",type:"pruefung",title:"Abschlussprüfung Mathematik (schriftlich)",description:P}
  ];
 }
 // Kurzform für die Monatsübersicht: Vorname und Initial des Nachnamens
@@ -19491,15 +18213,16 @@ async function renderKalender(){
  const ds=eventsForDay(y,m,d);
  const firstType=ds.length?normalizeType(ds[0]):"";
  const meta=firstType?typeMeta[firstType]:null;
- // Geburtstage: Namen statt „Geburtstag“
+ // Geburtstage: Namen statt „Geburtstag“; Prüfungen: Fach statt Terminart
  const gebDs=firstType==="geburtstag"?ds.filter(x=>normalizeType(x)==="geburtstag"):[];
  let zellText=meta?meta.label:"",zeigt=1;
  if(gebDs.length){zellText=gebDs.map(x=>calKurzName(x.person)).filter(Boolean).join(", ")||meta.label;zeigt=gebDs.length;}
- else if(firstType==="schulaufgabe"||firstType==="kurzarbeit"){
-  const gleich=ds.filter(x=>normalizeType(x)===firstType);
-  const faecher=gleich.map(x=>x.kurz||x.fach||"").filter(Boolean);
-  if(faecher.length){zellText=(firstType==="schulaufgabe"?"SA ":"KU ")+faecher.join(", ");zeigt=gleich.length;}
- }
+ else if(firstType==="pruefung"&&ds[0].title){zellText=String(ds[0].title).replace(/^Abschlussprüfung\s+/,"");}
+  else if((firstType==="schulaufgabe"||firstType==="kurzarbeit")){
+   const gleich=ds.filter(x=>normalizeType(x)===firstType);
+   const faecher=gleich.map(x=>x.kurz||x.fach||"").filter(Boolean);
+   if(faecher.length){zellText=(firstType==="schulaufgabe"?"SA ":"KA ")+faecher.join(", ");zeigt=gleich.length;}
+  }
  const tip=ds.map(x=>x.person||x.title||x.name||"").filter(Boolean).join(" · ");
  cells.push(`<button type="button"class="cal-day ${meta?`has-event ${meta.className}`:""}"title="${esc(tip)}"onclick="openCalendarDay(${y},${m},${d})">
  <span class="cal-num">${d}</span>
@@ -19538,6 +18261,7 @@ async function renderKalender(){
  .cal-yellow{background:#fef3c7!important}.cal-purple{background:#ede9fe!important}.cal-grey{background:#e5e7eb!important}
  .cal-holiday{background:#e3f5da!important;border-color:#8bc34a!important}
  .cal-birthday{background:#ffe4ec!important;border-color:#f472b6!important}
+ .cal-gold{background:#f6c945!important;border-color:#b8860b!important}.cal-gold .cal-event-type{color:#4a3500}
  .cal-orange{background:#ffe0c2!important;border-color:#f08a24!important}
  .cal-teal{background:#c9f2ea!important;border-color:#16a394!important}
  .cal-indigo{background:#d9dcff!important;border-color:#5560e0!important}
@@ -19549,7 +18273,7 @@ async function renderKalender(){
  </style>
  <div class="card"style="margin-bottom:16px">
  <strong>Campus-Kalender</strong>
- <p>Termine werden im gemeinsamen Kalender gespeichert. Klicke auf einen Tag, um die Details zu sehen. <b>SA</b> = Schulaufgabe (blau), <b>KU</b> = Kurzarbeit (rot) – dahinter steht das Fach (D, E, Ch, P/P).</p>${isTeacher()&&calAusgeblendetSet.size?`<p style="margin:6px 0 0"><button class="secondary"onclick="calFixWiederherstellen()">Gelöschte feste Termine wiederherstellen (${calAusgeblendetSet.size})</button></p>`:""}
+ <p>Termine werden im gemeinsamen Kalender gespeichert. Klicke auf einen Tag, um die Details zu sehen. <b>SA</b> = Schulaufgabe (blau), <b>KA</b> = Kurzarbeit (rot) – dahinter steht das Fach.</p>${isTeacher()&&calAusgeblendetSet.size?`<p style="margin:6px 0 0"><button class="secondary"onclick="calFixWiederherstellen()">Gelöschte feste Termine wiederherstellen (${calAusgeblendetSet.size})</button></p>`:""}
  <div class="cal-legend">${legend}</div>
  </div>
  <div class="cal-months">${months.map(x=>monthHTML(x.y,x.m,x.name)).join("")}</div>${footer()}`;
@@ -19614,7 +18338,7 @@ async function getBirthdayEvents(){
  start:dateStr,type:"geburtstag",
  person:anzeigeName(u),
  title:` ${anzeigeName(u)} hat Geburtstag`,
- description:"Herzlichen Glückwunsch von der ganzen F11Sb!"
+ description:"Herzlichen Glückwunsch von der ganzen F12Sb!"
  };
  }).filter(Boolean);
  }catch(e){console.error("Geburtstage laden:",e);return []}
@@ -20144,7 +18868,7 @@ nächste Schritt sinnvoll sein kann.</p>
 
 
 /* =========================================================
- F11Sb – LERNIMPULSE
+ F12Sb – LERNIMPULSE
  Zwei Zugänge:
  1. Gezielte Auswahl
  2. Lern-Glücksrad
@@ -20312,7 +19036,7 @@ window.completeLernimpuls=completeLernimpuls;
 
 
 /* =========================================================
- F11Sb – LERNSTANDSMESSUNG PP 11
+ F12Sb – LERNSTANDSMESSUNG PP 11
  26 Lernstandsmessungen
  5 identische Kompetenzdimensionen × 3 Punkte = 15 Punkte
  ========================================================= */
@@ -20917,13 +19641,13 @@ function lernstandBar(points,max=3){
 
 // ---- Klassenzugehörigkeit (Datenschutz: keine Namenslisten im Code) ----
 // Schüler:innen sind alle freigeschalteten Konten mit der Rolle "student". Lehrkräfte und Admins tauchen in Lernständen und Auswertungen nicht auf.
-function istKlasse11Sb(u){return !!u&&u.role!=="teacher"&&u.role!=="admin"}
+function istKlasse12Sb(u){return !!u&&u.role!=="teacher"&&u.role!=="admin"}
 async function getAllUsersForLernstand(){
  if(!isTeacher()) throw new Error("Nur Lehrkräfte dürfen die Schülerübersicht öffnen.");
  try{
  const snap=await getDocs(collection(db,"users"));
  return snap.docs.map(d=>({uid:d.id,...d.data()}))
- .filter(u=>u.role!=="teacher"&&u.role!=="admin"&&istKlasse11Sb(u))
+ .filter(u=>u.role!=="teacher"&&u.role!=="admin"&&istKlasse12Sb(u))
  .sort((a,b)=>String(anzeigeName(a)).localeCompare(String(anzeigeName(b)),"de"));
  }catch(e){
  console.error("Schülerliste Lernstand:",e);
@@ -21057,7 +19781,7 @@ async function downloadLernstandResultPDF(id){
  return`<div class="item"><strong>${escPDF(String(i+1)+"."+q.label)} · ${q.points} P.</strong><div><em>Aufgabe:</em> ${escPDF(q.prompt||"")}</div><div style="margin-top:6px"><em>Musterlösung:</em><br>${escPDF(q.solution||"Noch keine Musterlösung hinterlegt.").replace(/\n/g,"<br>")}</div></div>`;
  }).join("");
  openToolPrintWindow(
- "Lernstandsmessung – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(scoreLine)}</strong></div>`+body,"F11Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
+ "Lernstandsmessung – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(scoreLine)}</strong></div>`+body,"F12Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
  );
  }catch(e){console.error("Lernstand PDF:",e);toast("Das PDF konnte nicht erstellt werden.")}
 }
@@ -21149,7 +19873,7 @@ async function downloadLernstandTeacherPDF(attemptId){
  }).join("");
  const scoreLine=a.status==="bewertet"?`Gesamt: ${a.total}/${max} Punkte (${lernstandStatusText(a.total,max)})`:`Gesamt bisher: ${Number(a.total)||0}/${max} Punkte (noch nicht vollständig bewertet)`;
  openToolPrintWindow(
- "Bewertungsbericht – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(a.displayName||"Schüler/in")} · Versuch ${a.attempt}/3</strong><br>${escPDF(scoreLine)}${a.feedback?`<br><em>Rückmeldung:</em> ${escPDF(a.feedback)}`:""}</div>`+body,"F11Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
+ "Bewertungsbericht – "+(t.title||"Thema"),`<div class="item"style="background:#f5f7f8"><strong>${escPDF(a.displayName||"Schüler/in")} · Versuch ${a.attempt}/3</strong><br>${escPDF(scoreLine)}${a.feedback?`<br><em>Rückmeldung:</em> ${escPDF(a.feedback)}`:""}</div>`+body,"F12Sb · Lernstandsmessung"+t.nr+"/26 · "+(LERNSTAND_AREAS[t.learningArea]?.title||"")
  );
  }catch(e){console.error("Lernstand-Bewertungsbericht PDF:",e);toast("Das PDF konnte nicht erstellt werden.")}
 }
@@ -21259,14 +19983,14 @@ async function render(){
  const seq=++__campusRenderSeq;
  const p=location.hash.replace("#","")||"news";
  navVerfolgen(p);
- if(["fach","faecher","kompass","start","klassenteam","lernwerkstatt","kw-thema","kw-projekt"].includes(p)&&typeof ppmLaden==="function")await ppmLaden().catch(()=>{});
+ if(["fach","faecher","start","lernstaende","kw-thema","kw-projekt","kw-checkouts","kw-fortschritt","unterricht-pp"].includes(p)&&typeof ppmLaden==="function")await ppmLaden().catch(()=>{});
  const pages={
  start:renderKachelwand,news:renderStart,"kw-thema":renderKwThema,"kw-projekt":renderKwProjekt,"kw-checkouts":renderKwCheckouts,lernstaende:renderKwCheckouts,"kw-fortschritt":renderKwFortschritt,klassenteam:renderKlassenteam,kompass:renderKompass,lernwerkstatt:renderLernwerkstatt,"ki-lernen":renderKILernen,
- faecher:renderFaecherUebersicht,fach:renderFachDetail,didaktik:renderDidaktikKompass,
- whiteboard:renderWhiteboardUebersicht,tafel:renderTafelUebersicht,"whiteboard-board":renderWhiteboardBoard,
+ faecher:renderUnterrichtPP,fach:renderUnterrichtPP,"unterricht-pp":renderUnterrichtPP,leistungsnachweis:renderKwCheckouts,didaktik:renderDidaktikKompass,
  ressourcen:renderRessourcenRoute,lernpfad:renderLernpfadRoute,forum:renderForum,"forum-board":renderForumBoard,"forum-nachrichten":renderForumMessages,
  pinnwand:renderPinnwandUebersicht,"pinnwand-board":renderPinnwandBoard,
  kollaboration:renderKollaborationsTools,
+ whiteboard:renderWhiteboardUebersicht,tafel:renderTafelUebersicht,"whiteboard-board":renderWhiteboardBoard,
  wortwolke:renderWortwolkeUebersicht,"wortwolke-board":renderWortwolkeBoard,
  kanban:renderKanbanUebersicht,"kanban-board":renderKanbanBoard,
  terminfindung:renderTerminfindungUebersicht,"terminfindung-board":renderTerminfindungBoard,
@@ -21289,7 +20013,7 @@ async function render(){
  };
  const fn=pages[p]||renderKachelwand;
  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",
- a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || (a.dataset.page==="lernwerkstatt" && ["whiteboard","whiteboard-board","didaktik","tafel","fach","faecher"].includes(p))));
+ a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || (a.dataset.page==="lernwerkstatt" && ["unterricht-pp","faecher","fach","whiteboard","whiteboard-board","didaktik","tafel"].includes(p))));
  const content=$("content");
  if(!content)return;
  // Never leave a blank page while a module is loading.
@@ -21386,7 +20110,7 @@ entwickelt. Die übrige Campus-App bleibt dabei unverändert.</p></div>${footer(
 
 
 /* =========================================================
- F11Sb – MODAL BRIDGE
+ F12Sb – MODAL BRIDGE
  app.js wird als ES-Modul geladen. Funktionen aus einem
  ES-Modul sind nicht automatisch window-global.
  Die bestehenden Modal-Formulare verwenden jedoch inline
@@ -22038,6 +20762,7 @@ function openCalendarForm(){
  <option value="projektvorstellung">Projektvorstellung</option>
  <option value="referat">Referat</option>
  <option value="praesentation">Präsentation</option>
+ <option value="pruefung">Abschlussprüfung (schriftlich)</option>
  <option value="notenschluss">Notenschluss</option>
  <option value="elternabend">Elternabend</option>
  <option value="digitaltag">Digitaltag</option>
@@ -22099,6 +20824,7 @@ function editCalendarEntry(collectionName,id,title,type,date,time,location,descr
  <option value="projektvorstellung">Projektvorstellung</option>
  <option value="referat">Referat</option>
  <option value="praesentation">Präsentation</option>
+ <option value="pruefung">Abschlussprüfung (schriftlich)</option>
  <option value="notenschluss">Notenschluss</option>
  <option value="elternabend">Elternabend</option>
  <option value="digitaltag">Digitaltag</option>
@@ -22151,6 +20877,7 @@ async function init(){
  clearListeners();
  currentUser=user;
  if(!user){profile=null;notenLiveZuruecksetzen();showAuth();return}
+ $("authError").textContent="Angemeldet – Profil wird geladen …";
  if(codeRegPromise){try{await codeRegPromise}catch(e){return}}
  try{
  await ensureProfile(user);
@@ -22177,7 +20904,7 @@ if(profile.status === "blocked"){
  if(!profile.pseudonym)pseudonymWaehlenModal();
  lrLinkVerarbeiten().catch(e=>console.error("Rallye-Link:",e));
 }
- catch(e){console.error(e);showAuth();$("authError").textContent="Benutzerprofil konnte nicht geladen werden."}
+ catch(e){console.error(e);showAuth();$("authError").textContent="Benutzerprofil konnte nicht geladen werden."+(e?.code?" ("+e.code+")":"")}
  });
  }catch(e){
  console.error("Firebase konnte nicht geladen werden:",e);
@@ -22187,13 +20914,52 @@ if(profile.status === "blocked"){
 }
 
 /* =========================================================
- KACHELWAND – Startseite der F11Sb (nur Pädagogik/Psychologie)
+ KACHELWAND – Startseite der F12Sb (nur Pädagogik/Psychologie)
  Startseite: vier Lernbereichs-Kacheln mit Bausteinen und Fortschrittsbalken.
  Projektseite (kw-projekt), Themenseite (kw-thema), Sammlung der Check-outs (kw-checkouts),
  Lehrkräfte-Übersicht „Erledigt?“ (kw-fortschritt).
- Datenquellen: PROJEKT_PHASEN / PP_EINHEITEN (Lehrplan), ppModule (Bausteine der Lehrkräfte),
+ Datenquellen: KW_PHASEN / KW_THEMEN (Lehrplan), ppModule (Bausteine der Lehrkräfte),
  lehrplanMaterialien (Dateien je Thema), lehrplanFortschritt, checkouts, lernstand*.
  ========================================================= */
+// ---- Lehrplan 12. Klasse (LehrplanPLUS FOS, Pädagogik/Psychologie, Fassung gültig ab 2018/19) ----
+// Vier Lernbereiche; die Themen folgen den Inhalten des Lehrplans. Zeiträume ergeben sich aus dem Stoffverteilungsplan (PP12_PLAN).
+const KW_THEMEN=[
+ {id:"t12_1_1",lbNum:1,nr:"1",kurz:"Entwicklungsbegriff und Entwicklungsbedingungen",thema:"Entwicklungsbegriff und Entwicklungsbedingungen: Anlage, Umwelt, Selbststeuerung",planung:"Merkmale von Entwicklung beschreiben; Anlage, Umwelt und Selbststeuerung mit ihren Wechselwirkungen erläutern; entwicklungsfördernde und -hemmende Erziehungseinflüsse analysieren."},
+ {id:"t12_1_2",lbNum:1,nr:"2",kurz:"Freud: Instanzenmodell",thema:"Psychoanalytische Entwicklungstheorie nach Freud: topografisches Modell, Trieblehre, Instanzenmodell",planung:"Topografisches Modell, Trieblehre und Instanzenmodell (Es, Ich, Über-Ich) erklären."},
+ {id:"t12_1_3",lbNum:1,nr:"3",kurz:"Freud: Psychosexuelle Entwicklung",thema:"Freud: Psychosexuelle und Persönlichkeitsentwicklung",planung:"Phasen der psychosexuellen Entwicklung und Fixierung erklären; Konsequenzen für die Erziehung ableiten."},
+ {id:"t12_1_4",lbNum:1,nr:"4",kurz:"Freud: Abwehrmechanismen",thema:"Freud: Abwehrmechanismen als Ich-Funktion",planung:"Verdrängung, Projektion, Fixierung, Regression und Identifikation an Fallbeispielen erkennen und erklären."},
+ {id:"t12_1_5",lbNum:1,nr:"5",kurz:"Freud: Kritische Würdigung",thema:"Freud: Kritische Würdigung der Theorie",planung:"Erklärungswert und Grenzen der Theorie aufzeigen, z. B. fehlende empirische Überprüfbarkeit der psychosexuellen Entwicklung."},
+ {id:"t12_1_6",lbNum:1,nr:"6",kurz:"Bindung: Begriff, Phasen, Typen",thema:"Sozialemotionale Entwicklung: Bindungsbegriff, Phasen der Bindungsentwicklung, Bindungstypologie",planung:"Bindungsbegriff, Phasen der Bindungsentwicklung und Bindungstypen unterscheiden; eigene Bindungsstile reflektieren."},
+ {id:"t12_1_7",lbNum:1,nr:"7",kurz:"Primäre und sekundäre Bindungen",thema:"Primäre und sekundäre Bindungsbeziehungen (Jugend und Erwachsenenalter nach Ahnert)",planung:"Bindungsbeziehungen in Jugend und Erwachsenenalter nach Ahnert beschreiben."},
+ {id:"t12_1_8",lbNum:1,nr:"8",kurz:"Bindungsförderung (Frühpädagogik)",thema:"Frühpädagogische Überlegungen zur Förderung gelungener Bindung",planung:"Frühpädagogische Ansätze zur Bindungsförderung betrachten und auf pädagogische Situationen anwenden."},
+ {id:"t12_1_9",lbNum:1,nr:"9",kurz:"Lebensspanne nach Baltes",thema:"Entwicklungsanforderungen in der Lebensspanne nach Baltes (Jugend, frühes Erwachsenenalter)",planung:"Entwicklungsanforderungen aus einem Lebensabschnitt benennen und Handlungskonsequenzen für Lebensführung und pädagogische Situationen ableiten."},
+ {id:"t12_1_10",lbNum:1,nr:"10",kurz:"Vulnerabilität und Resilienz",thema:"Vulnerabilität und Resilienz: Schutzfaktoren",planung:"Risikofaktoren, Vulnerabilität und Resilienz erklären; Schutzfaktoren wie soziale Unterstützung, Peerkontakte, Selbstwertgefühl und Selbstwirksamkeit nennen."},
+ {id:"t12_2_1",lbNum:2,nr:"1",kurz:"Persönlichkeit: Begriff und Merkmale",thema:"Persönlichkeit: Begriff und Merkmale (Stabilität, Veränderbarkeit, Einzigartigkeit)",planung:"Stabilität, Veränderbarkeit und Einzigartigkeit als Merkmale der Persönlichkeit erkennen."},
+ {id:"t12_2_2",lbNum:2,nr:"2",kurz:"Big Five",thema:"Persönlichkeitsstruktur: Big Five nach Costa und McCrae, Persönlichkeitsinventare",planung:"Die Big Five zur Beschreibung der Persönlichkeitsstruktur nutzen und ihre Bedeutung für Erleben und Verhalten deuten."},
+ {id:"t12_2_3",lbNum:2,nr:"3",kurz:"Rogers: Aktualisierung und Bewertung",thema:"Personenzentrierte Theorie nach Rogers: Aktualisierungstendenz, organismischer Bewertungsprozess, Bewertungsbedingungen",planung:"Aktualisierungstendenz, organismischen Bewertungsprozess und Bewertungsbedingungen erklären."},
+ {id:"t12_2_4",lbNum:2,nr:"4",kurz:"Rogers: Selbstkonzept, Kongruenz",thema:"Rogers: Selbst und Selbstkonzept, Kongruenz und Inkongruenz, Selbstachtung",planung:"Real- und Idealselbst, Kongruenz und Inkongruenz, Wahrnehmungsverzerrung und -verleugnung erklären; Bedeutung für Erziehung, Beratung und Therapie."},
+ {id:"t12_2_5",lbNum:2,nr:"5",kurz:"Bandura: Erwartungen",thema:"Sozialkognitive Theorie nach Bandura: Überzeugungen, Selbstwirksamkeits-, Ergebnis- und Kompetenzerwartungen",planung:"Überzeugungen und die drei Erwartungsarten unterscheiden und an Beispielen anwenden."},
+ {id:"t12_2_6",lbNum:2,nr:"6",kurz:"Bandura: Selbstregulation",thema:"Bandura: Selbstregulation (Self-Evaluative- und Self-Efficacy-Mechanismen)",planung:"Selbstregulation erklären und die Veränderbarkeit von Selbstwirksamkeitserwartungen erkennen."},
+ {id:"t12_2_7",lbNum:2,nr:"7",kurz:"Identität und Marcia",thema:"Identitätsfindung: Begriff Identität, Identitätsmodell nach Marcia",planung:"Diffuse, übernommene, Moratorium und erarbeitete Identität am Beispiel aus dem Jugendalter verdeutlichen."},
+ {id:"t12_3_1",lbNum:3,nr:"1",kurz:"Berufsfeld und Aufgabenbereiche",thema:"Aufgabenbereiche Sozialer Arbeit: Sozialhilfe, Gesundheits- und Altenhilfe, Kinder- und Jugendhilfe",planung:"Berufsfeld Soziale Arbeit überblicken und Aufgabenbereiche unterscheiden."},
+ {id:"t12_3_2",lbNum:3,nr:"2",kurz:"Verhaltensorientierte Einzelhilfe",thema:"Verhaltensorientiertes Konzept der Einzelhilfe: Analyse, Planung, Verhaltensmodifikation, Evaluation",planung:"Für eine psychosoziale Problemstellung ein Handlungskonzept auf Grundlage einer Lerntheorie entwickeln."},
+ {id:"t12_3_3",lbNum:3,nr:"3",kurz:"Life Model",thema:"Life Model nach Germain und Gitterman: Ökologie, Transaktion, Anpassung, Lebensstress, Coping, Ressourcen",planung:"Austausch- und Anpassungsprozesse zwischen Mensch und Umwelt erläutern; Ressourcen und Coping nutzen."},
+ {id:"t12_3_4",lbNum:3,nr:"4",kurz:"Thiersch: Lebenswelt und Analyse",thema:"Lebensweltorientierte Soziale Arbeit nach Thiersch: Lebenswelt und Dimensionen der Analyse",planung:"Erfahrene Zeit, erfahrenen Raum, soziale Bezüge, Bewältigungsaufgaben und Hilfe zur Selbsthilfe an einem Fall analysieren."},
+ {id:"t12_3_5",lbNum:3,nr:"5",kurz:"Thiersch: Handlungsmaximen",thema:"Thiersch: Struktur- und Handlungsmaximen",planung:"Prävention, Alltagsnähe, Regionalisierung, Integration, Partizipation und Vernetzung erklären und anwenden."},
+ {id:"t12_4_1",lbNum:4,nr:"1",kurz:"Kommunikation, Interaktion, Organon-Modell",thema:"Soziale Kommunikation und Interaktion; Organon-Modell nach Bühler",planung:"Begriffe soziale Kommunikation und soziale Interaktion unterscheiden; Funktionen von Kommunikation am Organon-Modell erklären."},
+ {id:"t12_4_2",lbNum:4,nr:"2",kurz:"Watzlawick: Axiome 1 bis 3",thema:"Kommunikationstheorie nach Watzlawick: Axiome 1 bis 3 und ihre Störungen",planung:"Situationen mit den ersten drei Axiomen analysieren und Entstehung von Kommunikationsstörungen erklären."},
+ {id:"t12_4_3",lbNum:4,nr:"3",kurz:"Watzlawick: Axiome 4 und 5",thema:"Watzlawick: Axiome 4 und 5, gelungene Kommunikation",planung:"Digitale und analoge Modalität sowie symmetrische und komplementäre Beziehungen analysieren; gelungene Kommunikation beschreiben."},
+ {id:"t12_4_4",lbNum:4,nr:"4",kurz:"Kommunikationstechniken",thema:"Kommunikationstechniken: Metakommunikation, Ich-Botschaften, aktives Zuhören, Feedback",planung:"Techniken für erfolgreiche Konfliktgespräche aufzeigen und das eigene Kommunikationsverhalten reflektieren."},
+ {id:"t12_4_5",lbNum:4,nr:"5",kurz:"Kulturelle Unterschiede",thema:"Missverständnisse durch kulturspezifische Unterschiede in der Kommunikation",planung:"Werte, Normen, verbale und nonverbale Codes sowie kulturelle Ausdrucksformen in interkulturellen Situationen verständnisvoll berücksichtigen."},
+ {id:"t12_4_6",lbNum:4,nr:"6",kurz:"Kommunikation in digitalen Medien",thema:"Kommunikation in digitalen Medien: Besonderheiten und Gefährdungen",planung:"Besonderheiten digitaler Kommunikation erklären; Gefährdungen wie Datenmissbrauch, Cybermobbing und Vernachlässigung realer Beziehungen erkennen."}
+].map(e=>({...e,phase:"lb"+e.lbNum}));
+const KW_PROJEKTTITEL={1:"Lernrallye: Psychosexuelle Entwicklung",2:"Mein Selbstkonzept: Persönlichkeit und Identität untersucht",3:"Soziale Arbeit in der Region: Arbeitsfeld erkunden",4:"Kommunikation im Alltag analysieren"};
+const KW_PHASEN=[1,2,3,4].map(n=>{
+ const tage=PP12_BASIS.filter(e=>e.lb===n).map(e=>e.d).sort();
+ const start=tage[0]||PP12_START,end=tage[tage.length-1]||start;
+ return{id:"lb"+n,lb:"LB "+n,lbNum:n,lbTitel:PP12_LB[n].titel,titel:KW_PROJEKTTITEL[n],start,end,projektStart:start,projektEnde:end,
+  startSw:pp12Montag(start),notwendigeWochen:[],projektWocheId:"team_lb"+n,meilensteine:[]};
+});
 const KW_FARBEN={1:{c:"#1B8A9A",bg:"#DFF1F4",t:"#12626E"},2:{c:"#7650A5",bg:"#EEE7F7",t:"#5E3E8A"},3:{c:"#2E7D57",bg:"#E0F2E8",t:"#1F6B47"},4:{c:"#B5622A",bg:"#FAEBDD",t:"#8A4A1D"}};
 const KW={mat:{},fort:{},co:null,geladen:0};
 let activeKwThema=null,activeKwLb=null;
@@ -22208,10 +20974,10 @@ const KW_KAT=[
  {key:"lernuebersicht",label:"Lernübersichten",hint:"Das Wichtigste auf einen Blick",board:true}
 ];
 const KW_BAUSTEINE={selbstlern:["Selbstlernkurs","slk"],stunde:["Deeper-Learning-Einheit","std"],rallye:["Lernrallye","ral"],kprim:["KPrim-Test / Check-out","chk"],apt:["Prüfungstraining","ueb"],einfuehrung:["Einführung","slk"]};
-function kwKurz(e){return String(e.thema||"").split(":")[0].replace(/\s*\(.*\)\s*$/,"")}
-function kwThemenVonPhase(ph){return PP_EINHEITEN.filter(e=>e.phase===ph.id)}
-function kwThemaById(id){return PP_EINHEITEN.find(e=>e.id===id)||null}
-function kwPhase(lbNum){return PROJEKT_PHASEN.find(p=>p.lbNum===Number(lbNum))||null}
+function kwKurz(e){return e.kurz||e.thema}
+function kwThemenVonPhase(ph){return KW_THEMEN.filter(e=>e.phase===ph.id)}
+function kwThemaById(id){return KW_THEMEN.find(e=>e.id===id)||null}
+function kwPhase(lbNum){return KW_PHASEN.find(p=>p.lbNum===Number(lbNum))||null}
 function kwFarbe(lbNum){return KW_FARBEN[lbNum]||KW_FARBEN[1]}
 async function kwLaden(){
  await ppmLaden().catch(()=>{});
@@ -22247,7 +21013,7 @@ function kwHeroHTML(){
  const jetzt=bl.find(b=>b.von<=heute&&b.bis>=heute),next=bl.find(b=>b.von>heute);
  let zeile,zahl,einheit;
  if(jetzt){zeile=`Aktueller Schulblock: Block ${jetzt.nr} bis ${fmtKurz(jetzt.bis)}`;zahl=Math.max(0,tage(heute,jetzt.bis));einheit="Tage noch"}
- else if(next){const pr=PRAKTIKUMSPHASEN.find(p=>p.start<=heute&&p.end>=heute),fe=FERIEN_2026_27.find(f=>f.start<=heute&&f.end>=heute);
+ else if(next){const pr=null,fe=PP12_FERIEN.find(f=>f.start<=heute&&f.end>=heute);
   zeile=`Nächster Schulblock: Block ${next.nr} ab ${fmtKurz(next.von)}`;zahl=tage(heute,next.von);einheit="Tage"
   ;return`<div class="kw-hero"><div><div class="kw-hero-k">${kopf}${pr?" · "+esc(pr.titel).toUpperCase():(fe?" · "+esc(fe.titel).toUpperCase():"")}</div><div class="kw-hero-t">${zeile}</div></div><div class="kw-hero-z"><b>${zahl}</b><span>${einheit}</span></div></div>`}
  else{zeile="Das Schuljahr ist beendet";zahl="";einheit=""}
@@ -22259,7 +21025,7 @@ function kwKachelHTML(ph,lehrer){
  const fertig=lehrer?themen.filter(e=>(KW.mat[e.id]||[]).length||kwModuleThema(e.id).length).length:themen.filter(e=>kwErledigt(e.id)).length;
  const proz=n?Math.round(fertig/n*100):0;
  const status=lehrer?"":(fertig===n&&n?"geschafft":(ph.start<=heute&&ph.end>=heute?"läuft gerade":(ph.start>heute?(proz?"begonnen":"folgt"):"offen")));
- const naechst=!lehrer&&PROJEKT_PHASEN.filter(p=>p.end>=heute).sort((a,b)=>a.start.localeCompare(b.start))[0]===ph&&ph.start>heute;
+ const naechst=!lehrer&&KW_PHASEN.filter(p=>p.end>=heute).sort((a,b)=>a.start.localeCompare(b.start))[0]===ph&&ph.start>heute;
  const projM=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);
  const projTitel=(projM&&projM.titel)||ph.titel;
  // Bausteine, die die Lehrkräfte vorbereitet haben
@@ -22284,19 +21050,19 @@ function kwKachelHTML(ph,lehrer){
 async function renderKachelwand(){
  await kwLaden();
  const lehrer=isTeacher();
- const alle=PROJEKT_PHASEN.flatMap(kwThemenVonPhase);
+ const alle=KW_PHASEN.flatMap(kwThemenVonPhase);
  const fertig=lehrer?alle.filter(e=>(KW.mat[e.id]||[]).length||kwModuleThema(e.id).length).length:alle.filter(e=>kwErledigt(e.id)).length;
  const p=alle.length?Math.round(fertig/alle.length*100):0;
  const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
  const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#E5E7EB" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#4B5563" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
  const links=lehrer
-  ?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände</button><button class="secondary" onclick="go('news')">Campus-News und Termine</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
-  :`<button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button><button class="secondary" onclick="go('news')">Campus-News und Termine</button>`;
+  ?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände und Check-outs</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Campus-News und Termine</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
+  :`<button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Campus-News und Termine</button>`;
  return`<div class="kw" id="kwRoot">
   ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Lernlandkarte","Dein Weg durch das Schuljahr: vier Lernbereiche mit Projekt, Themen und Bausteinen.")}
   <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
   <div class="kw-links">${links}</div>
-  <div class="kw-wand">${PROJEKT_PHASEN.map(ph=>kwKachelHTML(ph,lehrer)).join("")}</div>
+  <div class="kw-wand">${KW_PHASEN.map(ph=>kwKachelHTML(ph,lehrer)).join("")}</div>
  </div>${footer()}`;
 }
 /* ------------------------------------------------ Projektseite */
@@ -22309,8 +21075,7 @@ async function renderKwProjekt(){
  const dateien=[];
  pm.forEach(m=>(m.material||[]).forEach(x=>dateien.push({titel:x.titel||x.name||"Material",url:x.url,typ:x.typ})));
  [ph.projektWocheId,...ph.notwendigeWochen].forEach(wid=>(KW.mat[wid]||[]).forEach(x=>dateien.push({titel:x.titel,url:x.url,typ:x.kategorie,id:x.id,wid})));
- if(projM&&projM.vorlage)try{await bepVorlage(projM.vorlage)}catch(e){}
- const themen=PP_EINHEITEN.filter(e=>e.phase===ph.id&&e.typ==="projekt");
+ const themen=KW_THEMEN.filter(e=>e.phase===ph.id&&true);
  const auftrag=ph.auftrag?`<div class="kw-card"><h3>Auftrag</h3><div class="kw-text">${esc(ph.auftrag.text||"").replace(/\n/g,"<br>")}</div></div>`:"";
  const ms=(ph.meilensteine||[]).length?`<div class="kw-card"><h3>Meilensteine</h3><ol class="kw-ms">${ph.meilensteine.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`:"";
  const dl=dateien.length?dateien.map(d=>kwDateiHTML(d.titel,d.url,d.id,d.wid)).join(""):`<div class="kw-leer">${lehrer?"Noch keine Projektdateien. Lade sie im Projektbaustein oder in den Themen hoch.":"Deine Lehrkraft hat noch keine Dateien eingestellt."}</div>`;
@@ -22337,7 +21102,7 @@ function kwSekHTML(titel,hint,inner,addKat,lehrer,extraBtn){
 async function renderKwThema(){
  await kwLaden();
  const e=kwThemaById(activeKwThema);if(!e)return await renderKachelwand();
- const ph=PROJEKT_PHASEN.find(p=>p.id===e.phase),F=kwFarbe(ph.lbNum),lehrer=isTeacher();
+ const ph=KW_PHASEN.find(p=>p.id===e.phase),F=kwFarbe(ph.lbNum),lehrer=isTeacher();
  const mats=KW.mat[e.id]||[];
  const liste=kat=>{const l=mats.filter(m=>m.kategorie===kat);return l.length?l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join(""):`<div class="kw-leer">${lehrer?"Noch nichts eingestellt.":"Noch nichts eingestellt."}</div>`};
  const secs=KW_KAT.map(k=>{
@@ -22345,7 +21110,7 @@ async function renderKwThema(){
   if(k.stufen)inner=k.stufen.map(([key,l])=>`<div class="kw-stufe"><b>${esc(l)}</b>${liste(key)}${lehrer?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${key}">+ hinzufügen</button>`:""}</div>`).join("");
   else inner=`<div class="kw-dateien">${liste(k.key)}</div>`;
   let extra="";
-  if(k.key==="checkin"){extra=`<div class="kw-aktionen"><button class="primary" data-kw="checkin" data-id="${esc(e.id)}">Check-In starten</button></div>`}
+  
   return kwSekHTML(k.label,k.hint,inner,k.stufen?null:k.key,lehrer,extra);
  }).join("");
  // Variante der Lerneinheit mit Start
@@ -22355,7 +21120,7 @@ async function renderKwThema(){
  const karten=[];
  if(ea&&!ea.entwurf)karten.push(`<div class="kw-baust"><span class="chip slk">Selbstlernkurs</span><b>${esc(ea.titel||kwKurz(e))}</b><small>${eaF.einarbeitungAbgeschlossen?"abgeschlossen":(ea.aufgaben?ea.aufgaben+" Aufgaben":"")}</small><button class="primary" data-kw="ea" data-id="${esc(e.id)}">${eaF.einarbeitungAbgeschlossen?"Nochmal ansehen":"Starten"}</button></div>`);
  mod.forEach(m=>{const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);
-  karten.push(`<div class="kw-baust"><span class="chip ${T[1]}">${esc(T[0])}</span><b>${esc(m.titel||T[0])}</b><small>${f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):(m.start&&swById(m.start)?"ab "+fmtKurz(swById(m.start).start):"")}</small><button class="primary" data-kw="modul" data-id="${esc(m.id)}">${lehrer?"Öffnen":"Starten"}</button></div>`)});
+  karten.push(`<div class="kw-baust"><span class="chip ${T[1]}">${esc(T[0])}</span><b>${esc(m.titel||T[0])}</b><small>${f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):(m.start&&sw12ById(m.start)?"ab "+fmtKurz(sw12ById(m.start).start):"")}</small><button class="primary" data-kw="modul" data-id="${esc(m.id)}">${lehrer?"Öffnen":"Starten"}</button></div>`)});
  const lerneinheit=kwSekHTML("Lerneinheit","Selbstlernkurs, Deeper-Learning-Stunde, Lernrallye oder anderes",
   karten.length?`<div class="kw-baustliste">${karten.join("")}</div>`:`<div class="kw-leer">Für dieses Thema ist noch keine Lerneinheit ausgewählt.</div>`,null,lehrer,
   lehrer?`<div class="kw-aktionen"><button class="secondary" data-kw="modulneu" data-id="${esc(e.id)}">Baustein einplanen</button><button class="secondary" data-kw="modulwahl" data-id="${esc(e.id)}">Vorhandenes Modul zuordnen</button></div>`:"");
@@ -22366,7 +21131,7 @@ async function renderKwThema(){
  const fertigBtn=lehrer?"":`<button type="button" class="kw-fertig${kwErledigt(e.id)?" an":""}" data-kw="fertig" data-id="${esc(e.id)}"><i class="kw-bx${kwErledigt(e.id)?" d":""}"></i>${kwErledigt(e.id)?"Thema erledigt":"Als erledigt markieren"}</button>`;
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
-  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)} · ${e.typ==="projekt"?"für das Projekt":"Training"}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p><div class="kw-aktionen">${fertigBtn}<button class="secondary" data-kw="alt" data-id="${esc(e.id)}">Lernziele und Aufgaben</button></div></header>
+  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p><div class="kw-aktionen">${fertigBtn}</div></header>
   ${secs}${lerneinheit}${checkout}
  </div>${footer()}`;
 }
@@ -22381,7 +21146,7 @@ async function ltLaden(){
  }catch(e){console.warn("Abgaben:",e)}
  try{const s=await getDoc(doc(db,"taskcardLinks","fobizz_test"));LT.kiUrl=s.exists()?(s.data().url||""):"";
   if(!LT.kiUrl){const s2=await getDoc(doc(db,"taskcardLinks","fobizz_fachaufsatz"));LT.kiUrl=s2.exists()?(s2.data().url||""):""}}catch(e){}
- if(isTeacher()){try{LT.schueler=(await getDocs(collection(db,"users"))).docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse11Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"))}catch(e){console.warn("Schüler:",e)}}
+ if(isTeacher()){try{LT.schueler=(await getDocs(collection(db,"users"))).docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse12Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"))}catch(e){console.warn("Schüler:",e)}}
 }
 function ltBE(t){return(t.fragen||[]).reduce((s,f)=>s+(Number(f.be)||0),0)}
 function ltStatus(t,a){
@@ -22543,7 +21308,7 @@ async function renderKwFortschritt(){
   getDocs(collection(db,"users")),getDocs(collection(db,"ppKursFortschritt")).catch(()=>({docs:[]})),
   getDocs(collection(db,"ppRallyeStand")).catch(()=>({docs:[]})),getDocs(collection(db,"ppStundenAntworten")).catch(()=>({docs:[]})),
   getDocs(collection(db,"lehrplanFortschritt")).catch(()=>({docs:[]}))]);
- const schueler=us.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse11Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"));
+ const schueler=us.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse12Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"));
  const K={},R={},S={},L={};
  kf.docs.forEach(d=>{const x=d.data();K[x.modulId+"_"+x.uid]=x});rs.docs.forEach(d=>{const x=d.data();R[x.modulId+"_"+x.uid]=x});
  sa.docs.forEach(d=>{const x=d.data();S[x.modulId+"_"+x.uid]=x});lf.docs.forEach(d=>{L[d.id]=d.data()});
@@ -22600,7 +21365,7 @@ async function kwMatForm(kat){
 }
 async function kwModulWaehlen(themaId){
  await ppmLaden(true);
- const e=kwThemaById(themaId),ph=PROJEKT_PHASEN.find(p=>p.id===e.phase);
+ const e=kwThemaById(themaId),ph=KW_PHASEN.find(p=>p.id===e.phase);
  const l=PPM.liste.filter(m=>m.modul!=="projekt"&&m.modul!=="experiment"&&Number(m.lb)===ph.lbNum);
  modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">LERNEINHEIT ZUORDNEN</div><h2>${esc(kwKurz(e))}</h2>
   <p>Setze einen Haken bei jedem Baustein des Lernbereichs, der zu diesem Thema gehört.</p>
@@ -22628,9 +21393,9 @@ document.addEventListener("click",async ev=>{
   else if(a==="alt"){const e=kwThemaById(id);e.typ==="apt"?openAptDetail(id):openWocheDetail("paedagogik",id)}
   else if(a==="ea"){window.__eaRueck=async()=>{await render()};openEinarbeitung(id)}
   else if(a==="modul")ppmOeffnen(id);
-  else if(a==="modulneu"){const e=kwThemaById(id),ph=PROJEKT_PHASEN.find(p=>p.id===e.phase);window.__kwThemaNeu=id;ppmTypWahl(ph.aptSchulwochen[0])}
+  else if(a==="modulneu"){const e=kwThemaById(id),ph=KW_PHASEN.find(p=>p.id===e.phase);window.__kwThemaNeu=id;ppmTypWahl(ph.startSw)}
   else if(a==="modulwahl")kwModulWaehlen(id);
-  else if(a==="projektstart"){const ph=kwPhase(b.dataset.lb);const pm=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);if(pm)ppmOeffnen(pm.id);else{activePPModul=null;activeFach="paedagogik";activePhaseDetail=ph.id+":projekt";go("fach")}}
+  else if(a==="projektstart"){const ph=kwPhase(b.dataset.lb);const pm=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);if(pm)ppmOeffnen(pm.id);else toast(isTeacher()?"Lege das Projekt im Unterricht-Plan über das Plus-Zeichen als Modul „Projekt“ an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}
   else if(a==="exp"){activeFach="paedagogik";openExperimentStunde(null)}
   else if(a==="fertig"){
    const neu=!kwErledigt(id);
@@ -22722,15 +21487,6 @@ try{ if(typeof closeResilienzModal==="function") window.closeResilienzModal=clos
  }catch(err){ console.error("Impuls schließen:",err); }
  },true);
 })();
-
-// ---------------------------------------------------------------
-// Inline-Handler (onclick="…", onchange="…") laufen im globalen Bereich. Weil app.js ein
-// Modul ist, muss alles, was sie aufrufen, am window hängen. (Ohne diese Zeile tun die
-// Knöpfe „Vorschau (Schüleransicht)“, „Aus der Aufgabenbank einsetzen“ und
-// „Ganzen Test aus Vorlage einsetzen“ nichts, ebenso die Haken „Prüfungsfrage gelesen“,
-// „mit KI korrigiert“ und der Besprechungswunsch, die serverTimestamp() nutzen.)
-Object.assign(window,{coEditorVorschau,coEditorVorschauZurueck,coBankEinsetzen,coVorlageWaehlen,coStandAktualisieren,reopenDetail,$,
- serverTimestamp:(...a)=>serverTimestamp(...a)});
 
 
 // ============================================================
@@ -22918,7 +21674,7 @@ async function lbZuordnenDialog(q,ref,tab){
  let daten;
  try{
   const [t,l,w]=await Promise.all([lade(where("art","==","tafel")),lade(where("lernVorlage","==",true)),lade(where("art","==","team"))]);
-  daten={tafel:sort(t.filter(b=>!b.lernVorlage&&!b.einstieg)),lern:sort(l),wb:sort(w.filter(b=>!b.lernVorlage))};
+  daten={tafel:sort(t.filter(b=>!b.lernVorlage)),lern:sort(l),wb:sort(w.filter(b=>!b.lernVorlage))};
  }catch(err){console.error("Zuordnen laden:",err);toast("Die Boards konnten nicht geladen werden.");return;}
  window.__lbZ={q,ref,tab:tab||"lern",daten};
  modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">ZUORDNEN</div><h2>Zu ${q==="z"?"dieser Stunde":"diesem Modul"} zuordnen</h2>
@@ -23110,7 +21866,7 @@ function lbModulPills(m){
  if(LB_AUSGENOMMEN.includes(m.modul))return"";
  const lehrer=isTeacher(),hatT=!!(m.tafelId||m.rfUrl),hatL=!!m.lernBoardId,hatW=!!m.whiteboardId,id=esc(m.id);
  const p=[];
- if(hatT)p.push(lbPill("Roter Faden"+(hatT?"":" anlegen"),LB_ICON.tafel,hatT,`data-ppm="lb-tafel" data-id="${id}"`,hatT?(m.rfTyp==="pdf"?"Roter Faden (PDF) öffnen":m.rfTyp==="web"?"Roter Faden (Webseite) öffnen":"Roter Faden (digitale Tafel) öffnen, nur Lehrkräfte ändern ihn"):"Roter Faden anlegen: digitale Tafel, PDF oder Webseite"));
+ if(hatT||lehrer)p.push(lbPill("Roter Faden"+(hatT?"":" anlegen"),LB_ICON.tafel,hatT,`data-ppm="lb-tafel" data-id="${id}"`,hatT?(m.rfTyp==="pdf"?"Roter Faden (PDF) öffnen":m.rfTyp==="web"?"Roter Faden (Webseite) öffnen":"Roter Faden (digitale Tafel) öffnen, nur Lehrkräfte ändern ihn"):"Roter Faden anlegen: digitale Tafel, PDF oder Webseite"));
  if(hatL||lehrer)p.push(lbPill("Lernübersicht"+(hatL?"":" zuordnen"),LB_ICON.lern,hatL,`data-ppm="lb-lern" data-id="${id}"`,hatL?(lehrer?"Lernübersicht (Vorlage) öffnen":"Meine Lernübersicht öffnen"):"Lernübersicht aus dem Pool zuordnen oder neu anlegen"));
  if(lehrer)p.push(lbPill("⇄ zuordnen","",false,`data-ppm="lb-zuordnen" data-id="${id}"`,"Roten Faden oder Lernübersicht diesem Modul zuordnen"));
  if(lehrer&&(hatT||hatL))p.push(lbPill("✕ entfernen","",false,`data-ppm="lb-loesen" data-id="${id}"`,"Roter Faden oder Lernübersicht von diesem Modul lösen"));
