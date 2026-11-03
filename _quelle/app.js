@@ -2538,11 +2538,195 @@ window.toggleAuftragGelesen=toggleAuftragGelesen;
 
 // ---- Basis-Check: 2-3 kurze Fragen direkt nach dem Material, damit früh
 // sichtbar wird, ob die Grundidee verstanden wurde (nicht nur "gelesen"). ----
+const CHECKIN_12={
+t12_1_1:[
+["Was kennzeichnet Entwicklung?","Eine Abfolge von Veränderungen im Erleben und Verhalten über die Zeit","Nur körperliches Wachstum","Eine Veränderung, die nach der Kindheit endet"],
+["Was versteht man unter „Anlage“?","Die genetisch mitgegebenen Voraussetzungen","Das Elternhaus und die Schule","Die bewusste Gestaltung des eigenen Lebens"],
+["Was bedeutet „Umwelt“ als Entwicklungsbedingung?","Alle äußeren Einflüsse wie Familie, Freunde und Kultur","Nur die Natur","Die genetische Ausstattung"],
+["Was bedeutet Selbststeuerung?","Der Mensch gestaltet seine Entwicklung aktiv mit.","Der Mensch wird nur von außen geformt.","Entwicklung läuft allein nach den Genen ab."],
+["K","Ein Kind mit musikalischer Begabung wächst in einer Familie auf, die viel musiziert, und übt freiwillig täglich.",["+Anlage und Umwelt wirken hier zusammen.","+Das tägliche freiwillige Üben ist Selbststeuerung.","-Entwicklung hängt allein von der Anlage ab."]]],
+t12_1_2:[
+["Welche drei Ebenen hat das topografische Modell nach Freud?","Bewusstes, Vorbewusstes, Unbewusstes","Es, Ich, Über-Ich","Oral, anal, phallisch"],
+["Welche Instanz folgt dem Lustprinzip?","Das Es","Das Ich","Das Über-Ich"],
+["Welche Instanz folgt dem Realitätsprinzip und vermittelt?","Das Ich","Das Es","Das Über-Ich"],
+["Wofür steht das Über-Ich?","Moral, Gewissen und Normen","Triebwünsche","Vernunft allein"],
+["K","Jonas will den Schokoriegel sofort essen, überlegt aber, dass er bezahlen muss, und fühlt sich bei dem Gedanken an Diebstahl schlecht.",["+Der Wunsch nach dem Riegel kommt vom Es.","+Das schlechte Gewissen kommt vom Über-Ich.","-Das Ich folgt dem Lustprinzip."]]],
+t12_1_3:[
+["Welche Phase der psychosexuellen Entwicklung kommt zuerst?","Die orale Phase","Die anale Phase","Die genitale Phase"],
+["Wie lautet die richtige Reihenfolge der Phasen?","Oral, anal, phallisch, Latenz, genital","Anal, oral, Latenz, phallisch, genital","Genital, phallisch, anal, oral, Latenz"],
+["Was bedeutet Fixierung?","Ein Mensch bleibt in einer Phase hängen, weil Bedürfnisse zu stark oder zu wenig befriedigt wurden.","Ein Mensch überspringt eine Phase.","Ein Mensch vergisst die Phase."],
+["Welche Erwachsenengewohnheit wird oft einer oralen Fixierung zugeordnet?","Nägelkauen oder Rauchen","Übertriebene Ordnungsliebe","Wetteifern"],
+["K","Ein Kind wird in der analen Phase sehr streng zur Sauberkeit erzogen.",["+Freud nimmt an, dass das zu einer Fixierung führen kann.","-Freud sagt, die Erziehung habe keinen Einfluss.","+Pädagogische Folge: Bedürfnisse der jeweiligen Phase feinfühlig beachten."]]],
+t12_1_4:[
+["Was ist Verdrängung?","Unangenehme Inhalte werden ins Unbewusste geschoben.","Eigene Gefühle werden anderen zugeschrieben.","Man fällt auf eine frühere Stufe zurück."],
+["Was ist Projektion?","Eigene Gefühle oder Eigenschaften anderen zuschreiben","Eine Erinnerung vergessen","Ein Vorbild nachahmen"],
+["Was ist Regression?","Rückfall in ein früheres Verhalten","Verdrängen von Gefühlen","Übernahme von Verhalten eines Vorbildes"],
+["Was ist Identifikation?","Eigenschaften eines Vorbildes übernehmen","Eigene Fehler leugnen","Gefühle unterdrücken"],
+["K","Ein Schüler, der selbst oft unkonzentriert ist, sagt: „Die anderen stören ständig!“",["+Das kann Projektion sein.","-Das ist Regression.","+Abwehrmechanismen schützen das Ich vor unangenehmen Gefühlen."]]],
+t12_1_5:[
+["Was ist ein häufiger Kritikpunkt an Freuds Theorie?","Sie ist empirisch schwer überprüfbar.","Sie wurde in Experimenten vollständig bestätigt.","Sie ignoriert das Unbewusste."],
+["Was gilt als Stärke der Theorie?","Sie betont die Bedeutung früher Kindheitserfahrungen.","Sie ist mathematisch exakt.","Sie lässt keine Fragen offen."],
+["Welche Aussage passt zur Kritik an der Triebtheorie?","Sie überbetont die Rolle der Sexualität.","Sie unterschätzt das Unbewusste.","Sie leugnet Entwicklung."],
+["Warum sind Freuds Phasen schwer zu prüfen?","Viele Annahmen beziehen sich auf Unbewusstes, das man nicht messen kann.","Weil sie zu einfach sind.","Weil sie nur für Erwachsene gelten."],
+["K","Eine Lehrkraft sagt: „Freuds Abwehrmechanismen helfen mir, Verhalten zu deuten, aber Beweise gibt es dafür kaum.“",["+Das nennt einen Erklärungswert und eine Grenze.","-Das ist nur Lob.","+Das ist eine kritische Würdigung."]]],
+t12_1_6:[
+["Was ist Bindung?","Ein starkes emotionales Band zu einer Bezugsperson","Eine vorübergehende Sympathie","Eine rein körperliche Abhängigkeit"],
+["Wie verhält sich ein sicher gebundenes Kind in der Fremden Situation?","Es protestiert bei der Trennung und lässt sich bei der Rückkehr trösten.","Es ignoriert die Mutter.","Es wirkt gar nicht berührt und zeigt keine Gefühle."],
+["Welcher Bindungstyp ignoriert die Bezugsperson bei der Rückkehr?","Unsicher-vermeidend","Sicher","Unsicher-ambivalent"],
+["Wer entwickelte die Bindungstypen mit der Fremden Situation?","Mary Ainsworth","Sigmund Freud","Carl Rogers"],
+["K","Ein Kleinkind weint bei der Trennung heftig, ist bei der Rückkehr der Mutter wütend und lässt sich kaum trösten.",["+Das kann unsicher-ambivalente Bindung sein.","-Das ist sicher gebundenes Verhalten.","+Der Bindungstyp zeigt sich im Verhalten bei Trennung und Wiedersehen."]]],
+t12_1_7:[
+["Welche Bindungspersonen gewinnen im Jugendalter an Bedeutung?","Gleichaltrige und Freunde","Nur Großeltern","Nur Lehrkräfte"],
+["Welche Beziehung wird im Erwachsenenalter oft zur wichtigsten Bindung?","Die Partnerschaft","Die Beziehung zu Nachbarn","Die Beziehung zu Kollegen"],
+["Was ist eine primäre Bindungsbeziehung?","Die enge Beziehung zu den Eltern oder einer Hauptbezugsperson","Die Beziehung zu Nachbarn","Eine lose Bekanntschaft"],
+["Wie verändert sich die Bindung zu den Eltern im Jugendalter?","Sie bleibt wichtig, wird aber zunehmend gleichberechtigter.","Sie ist plötzlich bedeutungslos.","Sie wird ausschließlich strenger."],
+["K","Eine 16-Jährige spricht Sorgen lieber mit ihrer besten Freundin als mit den Eltern.",["+Das ist im Jugendalter typisch.","-Das heißt, dass die Bindung zu den Eltern verloren ist.","+Peers werden zu wichtigen Bindungspersonen."]]],
+t12_1_8:[
+["Was ist beim Kita-Start wichtig?","Eine behutsame Eingewöhnung mit einer festen Bezugsperson","Eine schnelle Trennung","Wechselnde Bezugspersonen"],
+["Was bedeutet Feinfühligkeit?","Signale des Kindes wahrnehmen, richtig deuten und prompt angemessen reagieren","Dem Kind alles erlauben","Das Kind ignorieren, bis es lernt, allein zurechtzukommen"],
+["Welche Rolle hat die Bezugserzieherin?","Sie wird zur sicheren Basis in der Einrichtung.","Sie ersetzt die Eltern vollständig.","Sie bleibt für das Kind fremd."],
+["Wie sollten Eltern bei der Eingewöhnung einbezogen werden?","Sie begleiten das Kind anfangs und ziehen sich schrittweise zurück.","Sie verlassen sofort den Raum.","Sie bleiben dauerhaft im Gruppenraum."],
+["K","Ein Kind weint beim Abschied. Die Erzieherin bleibt ruhig, nimmt es in den Arm und spricht ihm Mut zu.",["+Das ist feinfühliges Verhalten.","-Das fördert unsichere Bindung.","+Die Erzieherin wirkt als sichere Basis."]]],
+t12_1_9:[
+["Was ist ein Grundgedanke von Baltes zur Lebensspannenentwicklung?","Entwicklung dauert ein Leben lang.","Entwicklung endet mit dem Erwachsenwerden.","Entwicklung besteht nur aus Gewinnen."],
+["Welche Entwicklungsanforderung steht im Jugendalter oft im Vordergrund?","Die eigene Identität finden","Rente planen","Enkel versorgen"],
+["Welche Anforderung gehört typischerweise zum frühen Erwachsenenalter?","Beruf und Partnerschaft gestalten","Schreiben lernen","Laufen lernen"],
+["Was bedeutet: Entwicklung besteht aus Gewinnen und Verlusten?","In jedem Lebensabschnitt können Fähigkeiten dazukommen und wegfallen.","Nur im Alter gibt es Verluste.","Es gibt nur Gewinne."],
+["K","Ein 19-Jähriger zieht von zu Hause aus und beginnt eine Ausbildung.",["+Er bewältigt Entwicklungsanforderungen des frühen Erwachsenenalters.","-Das ist für Entwicklung nicht relevant.","+Pädagogisch kann man ihn dabei unterstützen, ohne ihn zu bevormunden."]]],
+t12_1_10:[
+["Was bedeutet Resilienz?","Psychische Widerstandsfähigkeit gegenüber Belastungen","Eine besonders hohe Intelligenz","Die Anfälligkeit für Krisen"],
+["Was ist Vulnerabilität?","Erhöhte Verletzbarkeit","Eine Schutzmaßnahme","Eine Lernstrategie"],
+["Welches ist ein Schutzfaktor?","Soziale Unterstützung","Dauerhafte Armut","Gewalterfahrungen"],
+["Welches ist ein Risikofaktor?","Chronische Konflikte in der Familie","Ein stabiler Freundeskreis","Ein hohes Selbstwertgefühl"],
+["K","Trotz schwieriger Verhältnisse entwickelt ein Jugendlicher sich stabil: Er hat eine Mentorin, gute Freunde und glaubt an sich.",["+Das sind Schutzfaktoren.","+Das deutet auf Resilienz hin.","-Das ist Vulnerabilität."]]],
+t12_2_1:[
+["Was heißt Stabilität bei der Persönlichkeit?","Merkmale bleiben über Zeit und Situationen relativ gleich.","Die Persönlichkeit ändert sich ständig.","Alle Menschen sind gleich."],
+["Was heißt Einzigartigkeit?","Jeder Mensch hat eine individuelle Kombination von Merkmalen.","Alle haben dieselben Merkmale.","Persönlichkeit zeigt sich nie."],
+["Was bedeutet Veränderbarkeit?","Die Persönlichkeit kann sich durch Erfahrungen verändern.","Persönlichkeit ist unveränderlich.","Veränderung gibt es nur in der Kindheit."],
+["Was ist Persönlichkeit?","Die Gesamtheit der überdauernden Merkmale, in denen sich ein Mensch von anderen unterscheidet","Das äußere Aussehen","Die momentane Stimmung"],
+["K","Lisa ist seit der Kindheit schüchtern, wird aber durch ihre Ausbildung im Umgang mit Menschen sicherer.",["+Stabilität: Grundzug bleibt erkennbar.","+Veränderbarkeit: Erfahrungen verändern sie.","-Das widerspricht allen Persönlichkeitsmerkmalen."]]],
+t12_2_2:[
+["Welche Dimensionen gehören zu den Big Five?","Offenheit, Gewissenhaftigkeit, Extraversion, Verträglichkeit, Neurotizismus","Intelligenz, Fleiß, Mut, Humor, Ehrgeiz","Oral, anal, phallisch, Latenz, genital"],
+["Welche Dimension beschreibt Geselligkeit und Aktivität?","Extraversion","Verträglichkeit","Neurotizismus"],
+["Welche Dimension beschreibt Ordnung und Zuverlässigkeit?","Gewissenhaftigkeit","Offenheit","Neurotizismus"],
+["Was misst die Dimension Neurotizismus?","Emotionale Labilität und Ängstlichkeit","Hilfsbereitschaft","Neugier"],
+["K","Max probiert gern Neues aus, interessiert sich für Kunst und hat viele Ideen.",["+Das spricht für hohe Offenheit.","-Das spricht für hohe Gewissenhaftigkeit.","+Die Big Five werden mit Fragebögen erfasst."]]],
+t12_2_3:[
+["Was ist die Aktualisierungstendenz?","Die angeborene Tendenz, sich zu entfalten und zu wachsen","Die Angst vor Veränderung","Der Wunsch nach Anerkennung"],
+["Was bewertet der organismische Bewertungsprozess?","Ob eine Erfahrung die eigene Entwicklung fördert","Die Meinung anderer","Die Noten in der Schule"],
+["Was sind Bewertungsbedingungen?","Anerkennung gibt es nur bei erwünschtem Verhalten.","Bedingungslose Annahme","Strenge Regeln in der Schule"],
+["Was fördert nach Rogers die Entwicklung?","Bedingungslose Wertschätzung","Strenge Kontrolle","Dauerhaftes Vergleichen"],
+["K","Ein Kind hört oft: „Ich habe dich nur lieb, wenn du brav bist.“",["+Das sind Bewertungsbedingungen.","-Das ist bedingungslose Wertschätzung.","+Das kann den Zugang zum eigenen Erleben stören."]]],
+t12_2_4:[
+["Was ist das Realselbst?","Wie ich mich selbst wahrnehme","Wie ich gern sein möchte","Wie andere mich sehen"],
+["Was ist das Idealselbst?","Wie ich gern sein möchte","Wie ich bin","Wie andere sein sollen"],
+["Was bedeutet Kongruenz?","Real- und Idealselbst sowie Erleben stimmen überein.","Man fühlt sich überlegen.","Man lehnt sich ab."],
+["Was kann Inkongruenz auslösen?","Angst und Abwehr","Dauerhaftes Glück","Mehr Selbstachtung"],
+["K","Eine Schülerin hält sich für unbegabt, obwohl ihre Noten gut sind, und führt gute Noten auf Zufall zurück.",["+Das kann Wahrnehmungsverzerrung sein.","-Das zeigt Kongruenz.","+Real- und Idealselbst passen hier nicht zusammen."]]],
+t12_2_5:[
+["Was ist eine Selbstwirksamkeitserwartung?","Die Überzeugung, eine Handlung erfolgreich ausführen zu können","Die Erwartung, dass die Handlung zum Ziel führt","Der Wunsch nach Lob"],
+["Was ist eine Ergebniserwartung?","Die Erwartung, dass eine Handlung zu einem bestimmten Ergebnis führt","Die Überzeugung, die Handlung selbst ausführen zu können","Die Angst vor Misserfolg"],
+["Welche Aussage drückt eine hohe Selbstwirksamkeit aus?","„Ich schaffe das, auch wenn es schwer wird.“","„Das klappt eh nicht.“","„Dafür bin ich zu dumm.“"],
+["Welche Aussage drückt eine Ergebniserwartung aus?","„Wenn ich lerne, bestehe ich die Prüfung.“","„Ich kann gut lernen.“","„Lernen ist mir egal.“"],
+["K","Tom sagt: „Wenn ich viel übe, werde ich besser. Aber ich traue mir das Üben nicht zu.“",["+Die Ergebniserwartung ist hoch.","+Die Selbstwirksamkeitserwartung ist niedrig.","-Beide Erwartungen sind hoch."]]],
+t12_2_6:[
+["Was gehört zur Selbstregulation?","Das eigene Verhalten beobachten, bewerten und steuern","Anderen gehorchen","Gefühle verdrängen"],
+["Welche Quelle stärkt Selbstwirksamkeit am meisten?","Eigene Erfolgserfahrungen","Ausreden","Vermeidung"],
+["Was ist eine stellvertretende Erfahrung?","Man sieht, dass jemand Ähnliches Erfolg hat.","Man liest nichts darüber.","Man hört nur Kritik."],
+["Kann sich Selbstwirksamkeit verändern?","Ja, durch neue Erfahrungen","Nein, sie ist angeboren","Nur im Kindesalter"],
+["K","Anna schafft eine schwere Aufgabe und glaubt danach mehr an sich.",["+Das ist eine Erfolgserfahrung.","+Ihre Selbstwirksamkeit steigt.","-Selbstwirksamkeit lässt sich nie beeinflussen."]]],
+t12_2_7:[
+["Welche zwei Dimensionen betrachtet Marcia?","Exploration und Verpflichtung (Commitment)","Intelligenz und Fleiß","Alter und Geschlecht"],
+["Was kennzeichnet die erarbeitete Identität?","Erkundung und feste Festlegung","Keine Erkundung und keine Festlegung","Festlegung ohne Erkundung"],
+["Was kennzeichnet das Moratorium?","Aktive Erkundung ohne feste Festlegung","Festlegung ohne Erkundung","Keine Auseinandersetzung"],
+["Was kennzeichnet die übernommene Identität?","Festlegung ohne eigene Erkundung","Erkundung ohne Festlegung","Keine Festlegung"],
+["K","Jan übernimmt den Beruf seines Vaters, ohne andere Möglichkeiten geprüft zu haben.",["+Das ist eine übernommene Identität.","-Das ist eine erarbeitete Identität.","+Es fehlt die eigene Erkundung."]]],
+t12_3_1:[
+["Welche Aufgabe hat die Sozialhilfe?","Existenzsicherung bei Bedürftigkeit","Freizeitgestaltung","Bildung für alle"],
+["Was gehört zur Kinder- und Jugendhilfe?","Jugendamt und Hilfen zur Erziehung","Pflegedienste für Senioren","Krankenversicherung"],
+["Was gehört zur Altenhilfe?","Beratung und Unterstützung für ältere Menschen","Hilfen für Kleinkinder","Erziehungsberatung"],
+["Was gehört zur Gesundheitshilfe?","Beratung bei Sucht oder Krankheit","Schulabschluss","Hausaufgabenbetreuung"],
+["K","Ein Jugendlicher lebt in einer betreuten Wohngruppe.",["+Das gehört zur Kinder- und Jugendhilfe.","-Das gehört zur Altenhilfe.","+Soziale Arbeit unterstützt hier bei der Entwicklung."]]],
+t12_3_2:[
+["Welche Schritte gehören zum verhaltensorientierten Konzept?","Analyse, Planung, Verhaltensmodifikation, Evaluation","Beobachtung, Urlaub, Strafe","Gespräch, Warten, Abschluss"],
+["Was passiert in der Analyse?","Das Problemverhalten und seine Bedingungen werden erfasst.","Das Verhalten wird sofort verändert.","Der Fall wird abgeschlossen."],
+["Was ist die Verhaltensmodifikation?","Die geplante Veränderung des Verhaltens mit Lernprinzipien","Eine Beratung ohne Ziel","Das Beenden der Hilfe"],
+["Wozu dient die Evaluation?","Sie überprüft, ob das Ziel erreicht wurde.","Sie legt die Strafe fest.","Sie ersetzt die Analyse."],
+["K","Ein Junge stört im Unterricht. Die Fachkraft belohnt ruhiges Verhalten mit Punkten (Token).",["+Das nutzt operantes Konditionieren.","+Das gehört zur Verhaltensmodifikation.","-Das ist eine Analyse."]]],
+t12_3_3:[
+["Was bedeutet Transaktion im Life Model?","Wechselseitiger Austausch zwischen Mensch und Umwelt","Ein einseitiger Einfluss","Ein Geldgeschäft"],
+["Was ist Coping?","Der Umgang mit Stress und Belastungen","Eine Strafe","Ein Gesetz"],
+["Was ist Lebensstress?","Belastung durch Lebensübergänge, Umweltforderungen oder Beziehungen","Nur Prüfungsangst","Eine Krankheit"],
+["Was sind Ressourcen?","Stärken und Hilfen, die bei der Bewältigung unterstützen","Probleme","Regeln"],
+["K","Eine Familie verliert die Wohnung und nutzt Hilfe von Nachbarn und Beratungsstelle.",["+Die Hilfe von Nachbarn und Beratung sind Ressourcen.","+Das ist ein Beispiel für Coping.","-Umwelt spielt keine Rolle."]]],
+t12_3_4:[
+["Was bedeutet Lebensweltorientierung?","Hilfe orientiert sich an der Alltagswelt der Menschen","Hilfe orientiert sich nur an Verwaltungsregeln","Hilfe findet nur in Büros statt"],
+["Welche Dimension gehört zur Lebenswelt nach Thiersch?","Erfahrener Raum","Steuerklasse","Schulnote"],
+["Was ist mit „erfahrener Zeit“ gemeint?","Wie jemand Vergangenheit, Gegenwart und Zukunft erlebt","Die Uhrzeit","Die Dauer der Hilfe"],
+["Was bedeutet Hilfe zur Selbsthilfe?","Menschen werden befähigt, ihre Probleme selbst zu bewältigen.","Fachkräfte lösen alles für die Betroffenen.","Hilfe wird verweigert."],
+["K","Eine Sozialpädagogin besucht eine Familie zu Hause und fragt: „Wie sieht euer Alltag aus?“",["+Das ist Alltagsnähe.","+Sie analysiert die Lebenswelt.","-Das widerspricht Thiersch."]]],
+t12_3_5:[
+["Was bedeutet Prävention?","Probleme vorbeugen, bevor sie entstehen","Probleme erst später lösen","Probleme verschweigen"],
+["Was bedeutet Partizipation?","Betroffene werden beteiligt.","Betroffene werden ausgeschlossen.","Fachkräfte entscheiden allein."],
+["Was bedeutet Regionalisierung?","Angebote sind wohnortnah im Stadtteil erreichbar.","Alle Angebote sind zentral an einem Ort.","Angebote gibt es nur online."],
+["Was bedeutet Alltagsnähe?","Hilfe knüpft an den Alltag der Menschen an.","Hilfe passiert nur im Büro.","Hilfe ist einmalig."],
+["K","Ein Jugendtreff lässt die Jugendlichen mitbestimmen, welches Programm angeboten wird.",["+Das ist Partizipation.","-Das ist Prävention.","+Das passt zu den Handlungsmaximen nach Thiersch."]]],
+t12_4_1:[
+["Was ist soziale Kommunikation?","Austausch von Informationen zwischen Menschen","Handeln ohne Zeichen","Reines Denken"],
+["Was ist Interaktion?","Wechselseitiges, aufeinander bezogenes Handeln","Einseitiges Befehlen","Reines Schweigen"],
+["Welche Funktion hat das Zeichen als Signal im Organon-Modell?","Appell an den Empfänger","Ausdruck des Senders","Darstellung eines Sachverhalts"],
+["Welche Funktion hat das Zeichen als Symptom?","Ausdruck des Senders","Appell an den Empfänger","Darstellung eines Sachverhalts"],
+["K","Eine Lehrerin sagt: „Es ist kalt hier.“ Der Schüler steht auf und schließt das Fenster.",["+Der Satz hat eine Appellfunktion.","+Der Satz stellt auch einen Sachverhalt dar.","-Der Satz hat keine Funktion."]]],
+t12_4_2:[
+["Wie lautet das erste Axiom?","Man kann nicht nicht kommunizieren.","Jede Kommunikation hat einen Inhalts- und Beziehungsaspekt.","Kommunikation ist digital und analog."],
+["Was besagt das zweite Axiom?","Jede Kommunikation hat einen Inhalts- und einen Beziehungsaspekt.","Man kann nicht nicht kommunizieren.","Kommunikation verläuft immer symmetrisch."],
+["Was bedeutet Interpunktion von Ereignisfolgen?","Beteiligte legen unterschiedlich fest, was Ursache und was Folge ist.","Satzzeichen im Text","Ordnung der Wörter"],
+["Wann entstehen Kommunikationsstörungen häufig?","Wenn Inhalts- und Beziehungsaspekt vermischt werden","Wenn man schweigt","Wenn man Fachbegriffe vermeidet"],
+["K","Zwei Partner streiten: „Ich nörgle, weil du dich zurückziehst.“ – „Ich ziehe mich zurück, weil du nörgelst.“",["+Das ist ein Beispiel für unterschiedliche Interpunktion.","-Das ist ein Beispiel für gelungene Kommunikation.","+Beide sehen den anderen als Ursache."]]],
+t12_4_3:[
+["Was gehört zur digitalen Modalität?","Sprache und Wörter","Mimik und Gestik","Tonfall"],
+["Was gehört zur analogen Modalität?","Mimik, Gestik und Tonfall","Geschriebene Wörter","Fachbegriffe"],
+["Wann ist eine Beziehung symmetrisch?","Wenn die Partner gleichberechtigt sind","Wenn einer bestimmt","Wenn einer abhängig ist"],
+["Wann ist eine Beziehung komplementär?","Wenn sich die Rollen ergänzen und Unterschiede bestehen","Wenn alle gleich sind","Wenn niemand redet"],
+["K","Ein Chef gibt Anweisungen, die Mitarbeiterin führt sie aus.",["+Das ist eine komplementäre Beziehung.","-Das ist eine symmetrische Beziehung.","+Komplementäre Beziehungen können funktionieren, wenn beide die Rollen akzeptieren."]]],
+t12_4_4:[
+["Was ist Metakommunikation?","Kommunikation über die Kommunikation","Ein Streitgespräch","Schweigen"],
+["Wie sieht eine Ich-Botschaft aus?","„Ich ärgere mich, wenn du zu spät kommst, weil ich warten muss.“","„Du bist immer unpünktlich!“","„Man kommt nicht zu spät.“"],
+["Was gehört zum aktiven Zuhören?","Zusammenfassen, was die andere Person gesagt hat","Dazwischenreden","Ratschläge geben, bevor man zuhört"],
+["Wie sollte hilfreiches Feedback sein?","Beschreibend, konkret und respektvoll","Verallgemeinernd","Beleidigend"],
+["K","Statt „Du hörst nie zu!“ sagt Mia: „Ich fühle mich übergangen, wenn du mich unterbrichst.“",["+Das ist eine Ich-Botschaft.","-Das ist eine Du-Botschaft.","+Ich-Botschaften vermeiden Vorwürfe."]]],
+t12_4_5:[
+["Was zeigen Normen und Werte einer Kultur?","Was als richtig und angemessen gilt","Wie hoch die Intelligenz ist","Wie alt eine Person ist"],
+["Was kann Blickkontakt in unterschiedlichen Kulturen bedeuten?","Interesse oder auch Respektlosigkeit","In allen Kulturen dasselbe","Nichts"],
+["Was gehört zu nonverbalen Codes?","Gestik, Mimik und Körperabstand","Wörter","Schriftzeichen"],
+["Wie begegnet man kulturellen Unterschieden verständnisvoll?","Nachfragen und eigene Deutungen prüfen","Sofort bewerten","Ignorieren"],
+["K","Ein Schüler schaut seine Lehrerin aus Respekt nicht an. Sie versteht das als Desinteresse.",["+Hier liegt ein kulturell bedingtes Missverständnis vor.","-Hier liegt ein Hörfehler vor.","+Nachfragen kann helfen."]]],
+t12_4_6:[
+["Was fehlt in digitaler Kommunikation oft?","Nonverbale Signale wie Mimik und Tonfall","Wörter","Geräte"],
+["Was ist Cybermobbing?","Wiederholtes Beleidigen oder Bloßstellen im Netz","Ein Spiel","Ein Gespräch unter Freunden"],
+["Welche Gefährdung gehört zur digitalen Kommunikation?","Datenmissbrauch","Mehr Datenschutz","Weniger Erreichbarkeit"],
+["Welche Gefahr besteht, wenn man viel online ist?","Reale Beziehungen werden vernachlässigt.","Die Freundschaft wird stärker.","Es entstehen keine Missverständnisse."],
+["K","Eine Nachricht „Na toll.“ wird als Vorwurf verstanden, war aber ironisch gemeint.",["+Es fehlt der Tonfall als analoges Signal.","-Digitale Kommunikation hat keine Missverständnisse.","+Emojis können helfen, aber nicht alles ersetzen."]]]
+};
+
+// Standard-Check-Ins (5 Fragen je Thema). Eine in Firebase gespeicherte Fassung hat Vorrang.
+function checkinHash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function checkinAusBank(id){
+ const b=CHECKIN_12[id];if(!b)return[];
+ return b.map(q=>{
+  if(q[0]==="K")return{typ:"kprim",text:q[1],statements:q[2].map(s=>({text:s.slice(1),correct:s[0]==="+"}))};
+  const opts=q.slice(1).map((t,i)=>({t,r:i===0}));
+  const k=checkinHash(q[0])%opts.length;
+  const o=opts.slice(k).concat(opts.slice(0,k));
+  return{typ:"mc",text:q[0],optionen:o.map(x=>x.t),richtig:o.findIndex(x=>x.r)};
+ });
+}
 async function getBasischeckFragen(wocheId){
  try{
  const snap=await getDoc(doc(db,"basischeckFragen",wocheId));
- return snap.exists()?(snap.data().fragen||[]):[];
- }catch(e){console.error("Basis-Check-Fragen laden:",e);return[]}
+ if(snap.exists()&&(snap.data().fragen||[]).length)return snap.data().fragen;
+ return checkinAusBank(wocheId);
+ }catch(e){console.error("Basis-Check-Fragen laden:",e);return checkinAusBank(wocheId)}
 }
 function basischeckTypToggle(i){
  const typ=$(`bcTyp${i}`)?.value;
@@ -2555,7 +2739,7 @@ window.basischeckTypToggle=basischeckTypToggle;
 async function saveBasischeckFragen(fach,wocheId){
  if(!isTeacher()){toast("Nur Lehrkräfte können Basis-Check-Fragen anlegen.");return}
  const fragen=[];
- for(let i=0;i<3;i++){
+ for(let i=0;i<5;i++){
  const text=$(`bcFrage${i}`)?.value.trim();
  if(!text)continue;
  const typ=$(`bcTyp${i}`)?.value||"mc";
@@ -2594,14 +2778,15 @@ async function getMyBasischeckVersuch(wocheId){
 }
 function basischeckAmpel(richtig,gesamt){
  if(gesamt<=0)return null;
- if(richtig===gesamt)return"gruen";
- if(richtig>0)return"orange";
+ const q=richtig/gesamt;
+ if(q>=0.8)return"gruen";
+ if(q>=0.4)return"orange";
  return"rot";
 }
 function basischeckAmpelText(ampel){
- if(ampel==="gruen")return"Alles richtig – Basis sitzt";
- if(ampel==="orange")return"Teilweise richtig – nochmal reinschauen";
- if(ampel==="rot")return"Noch nicht verstanden";
+ if(ampel==="gruen")return"Grün – die Basis sitzt schon";
+ if(ampel==="orange")return"Gelb – ein Teil sitzt schon, lies den Lehrtext gezielt";
+ if(ampel==="rot")return"Rot – das Thema ist neu, der Lehrtext hilft dir";
  return"Noch nicht bearbeitet";
 }
 // Wertet eine einzelne Basis-Check-Frage aus, je nach Typ. Alte Fragen ohne
@@ -7657,7 +7842,7 @@ function kprimFrageKopfHTML(nr,stamm,vignette){
 }
 function basischeckPanelHTML(fach,wocheId,basischeckFragen,meinBasischeck,extraSchueler=""){
  if(isTeacher())return`<div class="form">
-  ${[0,1,2].map(i=>{
+  ${[0,1,2,3,4].map(i=>{
    const f=basischeckFragen[i]||{};
    const typ=f.typ||"mc";
    return`<div class="card"style="margin-bottom:10px;background:#f7fafc">
@@ -10298,9 +10483,9 @@ async function openWocheDetail(fach,wocheId,startTabOverride){
  </div>
 
  <div class="wd-panel"id="wdPanel_basischeck">
- <p style="color:var(--muted);margin-top:0;font-size:12px">Kurzer Check direkt nach dem Material: bis zu 3 Fragen, die zeigen, ob die Grundidee angekommen ist.</p>
+ <p style="color:var(--muted);margin-top:0;font-size:12px">Kurzer Check vor dem Lehrtext: bis zu 5 Fragen, die zeigen, ob die Grundidee angekommen ist.</p>
  ${isTeacher()?`<div class="form">
- ${[0,1,2].map(i=>{
+ ${[0,1,2,3,4].map(i=>{
  const f=basischeckFragen[i]||{};
  const typ=f.typ||"mc";
  return`<div class="card"style="margin-bottom:10px;background:#f7fafc">
@@ -20965,8 +21150,8 @@ const KW={mat:{},fort:{},co:null,geladen:0};
 let activeKwThema=null,activeKwLb=null;
 // Reihenfolge der Dateien auf jeder Themenseite (immer gleich)
 const KW_KAT=[
- {key:"lehrtext",label:"Lehrtexte",hint:"Texte zum Nachlesen und Erarbeiten"},
- {key:"checkin",label:"Check-In",hint:"Einstiegstest: Was weißt du schon?"},
+ {key:"checkin",label:"Check-In",hint:"Zuerst: Was weißt du schon? Kein Test, keine Note."},
+ {key:"lehrtext",label:"Lehrtexte",hint:"Danach: Texte zum Nachlesen und Erarbeiten"},
  {key:"arbeitsblatt",label:"Arbeitsblätter",hint:"Zum Bearbeiten im Unterricht"},
  {key:"uebung",label:"Übungsaufgaben",hint:"Zum Üben und Festigen"},
  {key:"vertiefung",label:"Vertiefungsaufgaben",hint:"In drei Schwierigkeitsgraden",stufen:[["vertiefung1","Stufe 1 · grundlegend"],["vertiefung2","Stufe 2 · erweitert"],["vertiefung3","Stufe 3 · anspruchsvoll"]]},
