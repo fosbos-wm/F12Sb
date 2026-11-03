@@ -1,4 +1,4 @@
-let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = fbImportMitWiederholung("./firebase-local.js?v=20261016a").then((fbMod)=>{ const appMod=fbMod, authMod=fbMod, fsMod=fbMod, storageMod={getStorage:fbMod.getStorage,ref:fbMod.ref,uploadBytes:fbMod.uploadBytes,getDownloadURL:fbMod.getDownloadURL,deleteObject:fbMod.deleteObject}; ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile,deleteUser}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment}=fsMod); getDoc=fsLeseMitWiederholung(getDoc); getDocs=fsLeseMitWiederholung(getDocs); ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db){ try{ db=fbMod.initializeFirestore(app,{experimentalAutoDetectLongPolling:true}); }catch(e){ console.warn("Firestore-Start mit Verbindungsfallback nicht möglich, Standard wird genutzt:",e); db=getFirestore(app); } } if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }).catch(e=>{firebaseReadyPromise=null;throw e}); return firebaseReadyPromise; } /*
+let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment, writeBatch; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = fbImportMitWiederholung("./firebase-local.js?v=20261016a").then((fbMod)=>{ const appMod=fbMod, authMod=fbMod, fsMod=fbMod, storageMod={getStorage:fbMod.getStorage,ref:fbMod.ref,uploadBytes:fbMod.uploadBytes,getDownloadURL:fbMod.getDownloadURL,deleteObject:fbMod.deleteObject}; ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile,deleteUser}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment,writeBatch}=fsMod); getDoc=fsLeseMitWiederholung(getDoc); getDocs=fsLeseMitWiederholung(getDocs); ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db){ try{ db=fbMod.initializeFirestore(app,{experimentalAutoDetectLongPolling:true}); }catch(e){ console.warn("Firestore-Start mit Verbindungsfallback nicht möglich, Standard wird genutzt:",e); db=getFirestore(app); } } if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }).catch(e=>{firebaseReadyPromise=null;throw e}); return firebaseReadyPromise; } /*
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
@@ -27,10 +27,10 @@ x=$("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.tt);win
 /* =========================================================
  PSEUDONYM-ANMELDUNG (Datenschutz)
  Keine Klarnamen, keine echten E-Mail-Adressen: Anmeldung mit Pseudonym + Passwort,
- Registrierung nur mit Zugangscode der Lehrkraft. Intern wird das Pseudonym als
+ Schüler: Einrichtung mit Zugangskarte (Code + PIN), Lehrkräfte: Registrierung mit Freischaltung. Intern wird das Pseudonym als
  technische Adresse (…@pseudonym.f12sb.invalid) an Firebase Auth übergeben.
  ========================================================= */
-const PSEUDO_DOMAIN="pseudonym.f12sb.invalid";let codeRegPromise=null;
+const PSEUDO_DOMAIN="pseudonym.f12sb.invalid";let codeRegPromise=null;let authModus="stuLogin";const APP_KLASSE="12sb";
 function pseudoSlug(p){return String(p||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/ß/g,"ss").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")}
 function pseudoMail(p){return pseudoSlug(p)+"@"+PSEUDO_DOMAIN}
 function pseudoGueltig(p){p=String(p||"").trim();return p.length>=3&&p.length<=20&&/^[A-Za-zÄÖÜäöüß0-9 _.\-]+$/.test(p)&&pseudoSlug(p).length>=3}
@@ -59,10 +59,15 @@ async function pseudonymSpeichern(){
 }
 window.pseudonymSpeichern=pseudonymSpeichern;
 function authError(err){
+ if(authModus!=="teacher"){
+  const m2={"auth/invalid-credential":"Pseudonym oder PIN stimmt nicht.","auth/invalid-login-credentials":"Pseudonym oder PIN stimmt nicht.","auth/user-not-found":"Pseudonym oder PIN stimmt nicht.","auth/wrong-password":"Pseudonym oder PIN stimmt nicht.","auth/email-already-in-use":"Dieses Pseudonym ist schon vergeben. Bitte wähle ein anderes.","auth/weak-password":"Die PIN muss mindestens 6 Zeichen haben.","auth/invalid-email":"Bitte wähle ein anderes Pseudonym.","auth/too-many-requests":"Zu viele Versuche. Bitte warte kurz und versuche es später noch einmal.","auth/network-request-failed":"Keine Verbindung. Bitte prüfe dein Internet.","permission-denied":"Der Zugangscode ist ungültig oder wurde schon verwendet.","code-ungueltig":"Der Zugangscode ist ungültig oder wurde schon verwendet."};
+  const t=m2[err?.code]||m2[err?.message];
+  if(t){$("authError").textContent=t;return}
+ }
  const map={
- "rc-ungueltig":"Pseudonym oder Wiederherstellungscode stimmt nicht.","rc-passwort":"Das Passwort konnte nicht geändert werden. Bitte versuche es später noch einmal.","auth/invalid-credential":"Pseudonym oder Passwort ist nicht korrekt.","auth/email-already-in-use":"Dieses Pseudonym ist schon vergeben. Bitte wähle ein anderes.","auth/weak-password":"Das Passwort muss mindestens 6 Zeichen haben.","auth/invalid-email":"Bitte ein gültiges Pseudonym eingeben.","auth/too-many-requests":"Zu viele Versuche. Bitte später erneut versuchen."
+ "rc-ungueltig":"Pseudonym oder Wiederherstellungscode stimmt nicht.","rc-passwort":"Das Passwort konnte nicht geändert werden. Bitte versuche es später noch einmal.","auth/invalid-credential":"Pseudonym/E-Mail oder Passwort ist nicht korrekt.","auth/invalid-login-credentials":"Pseudonym/E-Mail oder Passwort ist nicht korrekt.","auth/user-not-found":"Pseudonym/E-Mail oder Passwort ist nicht korrekt.","auth/wrong-password":"Pseudonym/E-Mail oder Passwort ist nicht korrekt.","auth/email-already-in-use":"Dieses Pseudonym ist schon vergeben. Bitte wähle ein anderes.","auth/weak-password":"Das Passwort muss mindestens 6 Zeichen haben.","auth/invalid-email":"Bitte ein gültiges Pseudonym eingeben.","auth/too-many-requests":"Zu viele Versuche. Bitte später erneut versuchen.","auth/network-request-failed":"Keine Verbindung. Bitte prüfe dein Internet.","permission-denied":"Dafür fehlt die Berechtigung (Firestore-Regeln in der Firebase-Konsole veröffentlichen)."
  };
- $("authError").textContent=map[err?.code]||"Anmeldung konnte nicht durchgeführt werden.";
+ $("authError").textContent=map[err?.code]||("Anmeldung konnte nicht durchgeführt werden."+(err?.code?" ("+err.code+")":""));
 }
 function modal(html){$("modal").innerHTML=html;$("modalBackdrop").hidden=false}
 function closeModal(){$("modalBackdrop").hidden=true;if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}if(ppDirty){ppDirty=false;if(activeFach==="paedagogik")render();}}
@@ -317,7 +322,7 @@ function showAuth(){
 function showApp(){
  $("authScreen").hidden=true;$("app").hidden=false;$("logoutBtn").hidden=false;
  $("userName").textContent=anzeigeName(profile,currentUser);
- if($("recoveryBtn"))$("recoveryBtn").hidden=!(profile?.pseudonym&&String(currentUser?.email||"").endsWith("@"+PSEUDO_DOMAIN));
+ if($("recoveryBtn"))$("recoveryBtn").hidden=!(profile?.pseudonym&&isTeacher()&&String(currentUser?.email||"").endsWith("@"+PSEUDO_DOMAIN));
 
  motivButtonAktualisieren();
  updateTeacherTeamNav();
@@ -331,7 +336,7 @@ async function ensureProfile(user, displayName="", extra={}){
  const ps=(extra.pseudonym||"").trim();
  await setDoc(ref,{
  uid:user.uid,pseudonym:ps,displayName:ps,
- role:"student",status:"pending",zugangscode:extra.zugangscode||"",createdAt:serverTimestamp()
+ role:"student",status:"pending",createdAt:serverTimestamp()
  });
  }
  const s=await getDoc(ref);profile=s.data();
@@ -919,6 +924,71 @@ function moduleError(title,file,error){
  </div>${footer()}`;
 }
 
+function codeNormal(c){const t=String(c||"").toUpperCase().replace(/[^A-Z0-9]/g,"");return t.length===10?t.slice(0,5)+"-"+t.slice(5):t}
+function showAuthMode(m){
+ authModus=m;
+ $("stuLoginTab").classList.toggle("active",m==="stuLogin");
+ $("stuSetupTab").classList.toggle("active",m==="stuSetup");
+ $("teacherTab").classList.toggle("active",m==="teacher");
+ $("stuLoginForm").hidden=m!=="stuLogin";
+ $("stuSetupForm").hidden=m!=="stuSetup";
+ $("teacherBox").hidden=m!=="teacher";
+ $("authError").textContent="";
+ if(m==="teacher")showLoginForm();
+}
+$("stuLoginTab").addEventListener("click",()=>showAuthMode("stuLogin"));
+$("stuSetupTab").addEventListener("click",()=>showAuthMode("stuSetup"));
+$("teacherTab").addEventListener("click",()=>showAuthMode("teacher"));
+$("stuLoginForm").addEventListener("submit",async e=>{
+ e.preventDefault();$("authError").textContent="";
+ if(!configReady){$("authError").textContent="Firebase ist noch nicht konfiguriert.";return}
+ const p=$("stuPseudo").value;
+ if(pseudoSlug(p).length<3){$("authError").textContent="Bitte dein Pseudonym eingeben.";return}
+ try{await loadFirebase();await signInWithEmailAndPassword(auth,pseudoMail(p),$("stuPin").value)}
+ catch(err){console.error(err);authError(err)}
+});
+let setupLaeuft=false;
+$("stuSetupForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(setupLaeuft)return;
+ $("authError").textContent="";
+ if(!configReady){$("authError").textContent="Firebase ist noch nicht konfiguriert.";return}
+ const code=codeNormal($("setupCode").value),pseudo=$("setupPseudo").value.trim(),pin=$("setupPin").value;
+ if(!/^[A-Z2-9]{5}-[A-Z2-9]{5}$/.test(code)){$("authError").textContent="Der Zugangscode hat das Format XXXXX-XXXXX (siehe Karte).";return}
+ if(!pseudoGueltig(pseudo)){$("authError").textContent="Das Pseudonym braucht 3 bis 20 Zeichen (Buchstaben, Zahlen, Leerzeichen, - _ .).";return}
+ if(pin.length<6){$("authError").textContent="Die PIN muss mindestens 6 Zeichen haben.";return}
+ if(pin!==$("setupPin2").value){$("authError").textContent="Die PINs stimmen nicht überein.";return}
+ if(pseudoSlug(pin)===pseudoSlug(pseudo)){$("authError").textContent="Die PIN darf nicht dem Pseudonym entsprechen.";return}
+ setupLaeuft=true;
+ const btn=e.target.querySelector('button[type="submit"]'),txt=btn?btn.textContent:"";
+ if(btn){btn.disabled=true;btn.textContent="Wird eingerichtet …"}
+ try{
+  await loadFirebase();
+  let cred=null;
+  codeRegPromise=(async()=>{
+   cred=await createUserWithEmailAndPassword(auth,pseudoMail(pseudo),pin);
+   try{
+    const cref=doc(db,"einladungen",code);
+    const cs=await getDoc(cref);
+    if(!cs.exists()||cs.data().used){const x=new Error("code-ungueltig");x.code="code-ungueltig";throw x}
+    try{await updateProfile(cred.user,{displayName:pseudo})}catch(_){}
+    const uid=cred.user.uid,b=writeBatch(db);
+    b.set(doc(db,"users",uid),{uid,email:"",firstName:"",lastName:"",displayName:pseudo,pseudonym:pseudo,role:"student",status:"approved",code,createdAt:serverTimestamp()});
+    b.update(cref,{used:true,usedBy:uid,usedAt:serverTimestamp()});
+    await b.commit();
+   }catch(err){try{await deleteUser(cred.user)}catch(_){}throw err}
+  })();
+  try{await codeRegPromise}finally{codeRegPromise=null}
+  $("setupPin").value="";$("setupPin2").value="";
+ }catch(err){console.error(err);authError(err)}
+ finally{setupLaeuft=false;if(btn){btn.disabled=false;btn.textContent=txt}}
+});
+(function(){
+ try{
+  const c=new URLSearchParams(location.search).get("code");
+  if(c){$("setupCode").value=codeNormal(c);showAuthMode("stuSetup");history.replaceState(null,"",location.pathname+location.hash)}
+ }catch(e){}
+})();
 $("loginTab").addEventListener("click",showLoginForm);
 $("registerTab").addEventListener("click",showRegisterForm);
 
@@ -930,6 +1000,8 @@ $("loginForm").addEventListener("submit",async e=>{
  await loadFirebase();
  const kennung=$("loginEmail").value.trim();
  /* Pseudonym ohne @ -> technische Adresse; Lehrkräfte mit bestehendem Konto dürfen ihre E-Mail weiter nutzen */
+ if(!kennung){$("authError").textContent="Bitte Pseudonym oder E-Mail-Adresse eingeben.";return}
+ if(!kennung.includes("@")&&pseudoSlug(kennung).length<3){$("authError").textContent="Bitte dein Pseudonym oder deine E-Mail-Adresse eingeben.";return}
  await signInWithEmailAndPassword(auth,kennung.includes("@")?kennung:pseudoMail(kennung),$("loginPassword").value);
  }catch(err){console.error(err);authError(err)}
 });
@@ -942,9 +1014,8 @@ $("registerForm").addEventListener("submit",async e=>{
  if(pw!==$("registerPassword2").value){$("authError").textContent="Die Passwörter stimmen nicht überein.";return}
  if(pw.length<8||!/[A-Za-zÄÖÜäöüß]/.test(pw)||!/[0-9]/.test(pw)){$("authError").textContent="Das Passwort muss mindestens 8 Zeichen lang sein und Buchstaben UND Zahlen enthalten.";return}
  if(!configReady){$("authError").textContent="Firebase ist noch nicht konfiguriert.";return}
- const pseudonym=$("registerPseudonym").value.trim(),code=$("registerCode").value.trim();
+ const pseudonym=$("registerPseudonym").value.trim();
  if(!pseudoGueltig(pseudonym)){$("authError").textContent="Das Pseudonym braucht 3 bis 20 Zeichen (Buchstaben, Ziffern, Leerzeichen, - _ .). Bitte keinen echten Namen verwenden.";return}
- if(!code){$("authError").textContent="Bitte den Zugangscode deiner Lehrkraft eingeben.";return}
  registerLaeuft=true;let neuerCode="";
  const btn=e.target.querySelector('button[type="submit"]'),btnText=btn?btn.textContent:"";
  if(btn){btn.disabled=true;btn.textContent="Konto wird erstellt …";}
@@ -954,14 +1025,15 @@ $("registerForm").addEventListener("submit",async e=>{
  codeRegPromise=(async()=>{
   const cred=await createUserWithEmailAndPassword(auth,pseudoMail(pseudonym),pw);
   try{await updateProfile(cred.user,{displayName:pseudonym})}catch(_){}
-  await ensureProfile(cred.user,pseudonym,{pseudonym,zugangscode:code});
+  await ensureProfile(cred.user,pseudonym,{pseudonym});
   try{neuerCode=rcNeu();await rcSpeichern(cred.user,pw,neuerCode)}catch(err){neuerCode="";console.warn("Wiederherstellungscode:",err)}
  })();
  try{await codeRegPromise}finally{codeRegPromise=null}
  if(neuerCode)rcAnzeigen(neuerCode);else toast("Konto erstellt. Der Wiederherstellungscode konnte nicht gespeichert werden (Firestore-Regeln veröffentlicht?).");
  }catch(err){
   console.error(err);
-  if(err&&err.code==="permission-denied"){try{const cu=auth&&auth.currentUser;if(cu)await deleteUser(cu)}catch(e2){}$("authError").textContent="Der Zugangscode stimmt nicht.";return}
+  const cu0=auth&&auth.currentUser;
+  if(err&&err.code==="auth/email-already-in-use"&&cu0&&cu0.email&&cu0.email.toLowerCase()===pseudoMail(pseudonym).toLowerCase())return;
   authError(err);
  }finally{
   registerLaeuft=false;
@@ -1063,6 +1135,7 @@ if($("recoveryBtn"))$("recoveryBtn").addEventListener("click",rcDialog);
 $("logoutBtn").onclick=async()=>{
  notenLiveZuruecksetzen();
  try{await loadFirebase();await signOut(auth)}catch(e){console.error(e)}
+ showAuthMode("stuLogin");
 };
 $("menuBtn").onclick=()=>$("sidebar").classList.toggle("open");
 if($("helpQuick"))$("helpQuick").onclick=openHelpForm;
@@ -1144,12 +1217,95 @@ async function getUpcomingCampusCalendarEvent(){
 }
 
 
-async function zugangscodeSpeichern(){
- const c=($("zugangscodeFeld").value||"").trim();
- if(c.length<6){toast("Der Zugangscode braucht mindestens 6 Zeichen.");return}
- try{await setDoc(doc(db,"config","zugang"),{code:c,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});toast("Zugangscode gespeichert.")}catch(e){console.error(e);toast("Der Code konnte nicht gespeichert werden (nur Admin).")}
+/* =========================================================
+ ZUGANGSKARTEN (Lehrkraft) + LOKALE NAMENSLISTE
+ Die Zuordnung Code → echter Name bleibt ausschließlich im
+ Arbeitsspeicher dieses Browsers bzw. auf Papier/CSV der Lehrkraft.
+ Sie wird nie in die Cloud geschrieben.
+ ========================================================= */
+let NAMEN_LOKAL={};
+function zkAnzeige(u){const n=NAMEN_LOKAL[u&&u.code];const d=u&&(u.displayName||u.pseudonym)||"";return n?`${d} (${n})`:d}
+const ZK_ALPHABET="ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+function zkCode(){const a=new Uint32Array(10);crypto.getRandomValues(a);let t="";for(const x of a)t+=ZK_ALPHABET[x%ZK_ALPHABET.length];return t.slice(0,5)+"-"+t.slice(5)}
+function zkSchuetze(t){return String(t==null?"":t).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+async function zkBauHtml(codes,namen,basis){
+ const {qrcode}=await import("./qr-local.js?v=1");
+ const karten=codes.map(c=>{
+  const q=qrcode(0,"M");q.addData(basis+"?code="+encodeURIComponent(c));q.make();
+  return`<div class="k"><div class="kt">F12Sb 26/27 · Zugangskarte</div><div class="kc">${zkSchuetze(c)}</div><div class="kq">${q.createSvgTag(3,0)}</div>
+  <ol><li>QR-Code scannen oder Seite öffnen und „Erstmals einrichten“ wählen.</li><li>Code eingeben, ein <b>Pseudonym</b> und eine <b>PIN</b> (mind. 6 Zeichen) festlegen.</li><li>Merke dir beides. Die Karte gilt nur <b>einmal</b>.</li></ol>
+  <div class="kn">Kein echter Name, keine E-Mail-Adresse als Pseudonym.</div></div>`}).join("");
+ const hatNamen=namen.some(Boolean);
+ const liste=hatNamen?`<div class="seite"><h2>Lehrkraft-Liste (nicht austeilen, vertraulich aufbewahren)</h2><table><thead><tr><th>Code</th><th>Name</th></tr></thead><tbody>${codes.map((c,i)=>`<tr><td>${zkSchuetze(c)}</td><td>${zkSchuetze(namen[i]||"")}</td></tr>`).join("")}</tbody></table></div>`:"";
+ return`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Zugangskarten</title><style>
+ body{font:14px/1.4 system-ui,Arial,sans-serif;margin:0;padding:12px;color:#111}
+ .raster{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .k{border:1px dashed #666;border-radius:8px;padding:10px 12px;break-inside:avoid;min-height:200px;display:grid;grid-template-columns:1fr 100px;gap:4px 10px}
+ .kt{grid-column:1/3;font-weight:700;font-size:12px;color:#355}
+ .kc{font:700 22px/1.2 ui-monospace,Menlo,Consolas,monospace;letter-spacing:1px;align-self:center}
+ .kq{grid-row:2/4;grid-column:2;width:100px}.kq svg{width:100px;height:100px}
+ ol{grid-column:1/3;margin:4px 0 0 16px;padding:0;font-size:11px}.kn{grid-column:1/3;font-size:10px;color:#555}
+ .seite{page-break-before:always}table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:5px 8px;text-align:left;font-size:13px}
+ @media print{body{padding:0}.noprint{display:none}}</style></head><body>
+ <div class="noprint" style="margin-bottom:10px"><button onclick="window.print()">Drucken</button> Die Karten sind einmalig verwendbar.</div>
+ <div class="raster">${karten}</div>${liste}</body></html>`;
 }
-window.zugangscodeSpeichern=zugangscodeSpeichern;
+async function zkErzeugen(){
+ if(!isTeacher()){toast("Nur Lehrkräfte.");return}
+ const namen=($("zkNamen").value||"").split("\n").map(x=>x.trim()).filter(Boolean);
+ const n=namen.length||parseInt($("zkAnzahl").value,10)||0;
+ if(n<1||n>100){toast("Bitte eine Anzahl von 1 bis 100 angeben.");return}
+ const btn=$("zkStart");if(btn)btn.disabled=true;
+ try{
+  const codes=[];while(codes.length<n){const c=zkCode();if(!codes.includes(c))codes.push(c)}
+  const b=writeBatch(db);
+  codes.forEach(c=>b.set(doc(db,"einladungen",c),{used:false,createdBy:currentUser.uid,createdAt:serverTimestamp(),klasse:APP_KLASSE}));
+  await b.commit();
+  codes.forEach((c,i)=>{if(namen[i])NAMEN_LOKAL[c]=namen[i]});
+  const basis=location.origin+location.pathname.replace(/index\.html$/,"");
+  const html=await zkBauHtml(codes,namen,basis);
+  const w=window.open("","_blank");
+  if(w){w.document.open();w.document.write(html);w.document.close()}
+  else toast("Das Fenster wurde blockiert. Bitte Pop-ups erlauben und erneut erzeugen.");
+  if(namen.some(Boolean)){
+   const csv=codes.map((c,i)=>c+";"+(namen[i]||"")).join("\n");
+   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="zugangscodes-NAMENSLISTE-vertraulich.csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+  }
+  toast(codes.length+" Zugangskarten erzeugt.");
+ }catch(e){console.error(e);toast("Karten konnten nicht erzeugt werden.")}
+ finally{if(btn)btn.disabled=false}
+}
+function zkNamenListeLaden(datei){
+ if(!datei)return;
+ const r=new FileReader();
+ r.onload=()=>{
+  let n=0;
+  String(r.result||"").split(/\r?\n/).forEach(z=>{const t=z.split(/[;,\t]/);const c=codeNormal(t[0]);const name=(t.slice(1).join(" ")||"").trim();if(/^[A-Z2-9]{5}-[A-Z2-9]{5}$/.test(c)&&name){NAMEN_LOKAL[c]=name;n++}});
+  toast(n+" Namen geladen (nur in diesem Browser-Fenster).");openUserManagement();
+ };
+ r.readAsText(datei);
+}
+function zkDialog(){
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+ <div class="kicker">ZUGANGSKARTEN</div><h2>Zugangskarten erzeugen</h2>
+ <div class="form"style="gap:10px">
+ <p style="margin:0;font-size:13px">Pro Schüler:in entsteht ein einmaliger Code. Die Schüler legen damit ein <b>Pseudonym</b> und eine <b>PIN</b> fest. Echte Namen und E-Mail-Adressen werden nicht abgefragt.</p>
+ <label>Namen (optional, einer pro Zeile)<textarea id="zkNamen"rows="6"placeholder="Nur wenn du die Karten zuordnen willst. Die Namen werden nicht gespeichert, sondern nur auf deiner Lehrkraft-Liste gedruckt."></textarea></label>
+ <label>Oder Anzahl der Karten<input id="zkAnzahl"type="number"min="1"max="100"value="25"></label>
+ <small style="color:var(--muted)">Mit Namen wird zusätzlich eine CSV-Datei „NAMENSLISTE“ gespeichert. Bewahre sie vertraulich auf (nicht in der Cloud). Später kannst du sie in der Benutzerverwaltung laden, dann siehst du die Namen nur in deinem Browser.</small>
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"id="zkStart"onclick="zkErzeugen()">Karten erzeugen und drucken</button></div></div>`);
+}
+async function kontoZuruecksetzen(uid){
+ if(!isAdmin())return;
+ if(!confirm("Dieses Konto zurücksetzen? Alle Daten der Person werden gelöscht, damit sie sich mit einer neuen Zugangskarte einrichten kann. Danach muss das Anmeldekonto in der Firebase-Konsole (Authentication) gelöscht werden."))return;
+ try{
+  await dsLoeschen(uid,{alsAdmin:true});
+  await deleteDoc(doc(db,"users",uid));
+  toast("Zurückgesetzt. Bitte jetzt in Firebase → Authentication das Anmeldekonto löschen.");
+  openUserManagement();
+ }catch(e){console.error(e);toast("Zurücksetzen nicht möglich.")}
+}
+window.zkBauHtml=zkBauHtml;window.zkErzeugen=zkErzeugen;window.zkDialog=zkDialog;window.zkNamenListeLaden=zkNamenListeLaden;window.kontoZuruecksetzen=kontoZuruecksetzen;
 async function openUserManagement(){
  if(!isTeacher()){toast("Nur Lehrkräfte können Benutzer verwalten.");return}
  try{
@@ -1159,7 +1315,7 @@ async function openUserManagement(){
  if(!isAdmin()) users=users.filter(u=>u.role==="student");
  const rows=users.map(u=>{
  const status=u.status||"pending";
- const name=esc(anzeigeName(u)||u.uid);
+ const name=esc(zkAnzeige(u)||anzeigeName(u)||u.uid);
  const roleLabel=u.role==="admin"?"Admin":u.role==="teacher"?"Lehrkraft":"Schüler/in";
  const canManageStatus=(u.role!=="admin") && (u.role==="student" || isAdmin());
  const actions=(u.role==="student" || isAdmin()) ?`
@@ -1167,6 +1323,7 @@ async function openUserManagement(){
  ${canManageStatus && status!=="approved"?`<button class="secondary"onclick="setUserStatus('${u.uid}','approved')"> Freischalten</button>`:""}
  ${canManageStatus && status!=="blocked"?`<button class="secondary"onclick="setUserStatus('${u.uid}','blocked')">Sperren</button>`:""}
  ${canManageStatus && status==="blocked"?`<button class="secondary"onclick="setUserStatus('${u.uid}','pending')">Reaktivieren</button>`:""}
+ ${isAdmin()&&u.uid!==currentUser.uid&&u.role==="student"?`<button class="secondary"onclick="kontoZuruecksetzen('${u.uid}')">Zurücksetzen</button>`:""}
  ${isAdmin()&&u.uid!==currentUser.uid?`
  <select onchange="setUserRole('${u.uid}',this.value)">
  <option value="student" ${u.role==="student"?"selected":""}>Schüler/in</option>
@@ -1187,7 +1344,8 @@ async function openUserManagement(){
  <p>${isAdmin()
  ?"Verwalte Freigaben und Rollen. Dein eigenes Admin-Konto kann hier nicht auf eine andere Rolle gesetzt werden."
  :"Hier kannst du Schülerkonten freischalten, sperren oder reaktivieren."}</p>
- ${isAdmin()?`<div class="ppm-box" style="margin:0 0 10px"><b>Zugangscode für neue Konten</b><div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap"><input id="zugangscodeFeld" maxlength="40" placeholder="Code, den du der Klasse mitteilst" style="flex:1;min-width:180px"><button class="secondary" onclick="zugangscodeSpeichern()">Code speichern</button></div><small style="color:var(--muted)">Nur wer diesen Code kennt, kann ein Konto anlegen. Danach schaltest du das Konto hier frei.</small></div>`:""}
+ <div class="form-actions"style="justify-content:flex-start;gap:8px;flex-wrap:wrap"><button class="primary"onclick="zkDialog()">＋ Zugangskarten erzeugen</button>
+ <label class="secondary"style="cursor:pointer;padding:8px 12px;border-radius:10px">Namensliste (CSV) laden<input type="file"accept=".csv,.txt"hidden onchange="zkNamenListeLaden(this.files[0])"></label></div>
  <div class="list">${rows||`<div class="empty">Keine passenden Benutzer vorhanden.</div>`}</div>
  <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button></div>
  `);
@@ -7952,11 +8110,12 @@ async function openAptDetail(wocheId,tab){
  const ph=projektPhaseByWoche(wocheId);
  const c=ph?ppFarbe(ph):"#4a90d9";
  const lehrer=isTeacher();
- const [inhalt,materialien,fortschritt,links,ein,klasse,stundeKarte]=await Promise.all([
+ const [inhalt,materialien,fortschritt,links,ein,klasse,stundeKarte,ciFragen,ciMein]=await Promise.all([
   getAptInhalt(wocheId),getLehrplanMaterialien(wocheId),getLehrplanFortschritt(wocheId),
   ladeTaskcardLinks().catch(()=>({})),einarbeitungInfo(wocheId),
   lehrer?ladeStundeKlasse(wocheId).catch(()=>null):Promise.resolve(null),
-  e.interaktiv?stundeKarteHTML(await getLehrplanFortschritt(wocheId)):Promise.resolve("")
+  e.interaktiv?stundeKarteHTML(await getLehrplanFortschritt(wocheId)):Promise.resolve(""),
+  getBasischeckFragen(wocheId).catch(()=>[]),lehrer?Promise.resolve(null):getMyBasischeckVersuch(wocheId)
  ]);
  const schritte=aptSchritte(fortschritt),n=schritte.filter(Boolean).length;
  const offenIdx=schritte.findIndex(x=>!x);
@@ -7992,7 +8151,8 @@ async function openAptDetail(wocheId,tab){
    <input id="matUrl"type="url"placeholder="Link/URL"style="flex:1;min-width:160px">
    <button class="primary"onclick="addLehrplanMaterial('${fach}','${wocheId}')">＋ Material</button></div></div>`:"";
  const abgeschlossenAm=stDatum(fortschritt.einarbeitungAm);
- const s2=`${einKarte}
+ const ciKarte=(ciFragen.length||lehrer)?`<h3 class="apt-h3">Check-In: Was weißt du schon?</h3><p style="font-size:13px;color:var(--muted);margin:0 0 8px">Kein Test, keine Note. Du siehst danach, wo du stehst.</p>${basischeckPanelHTML("paedagogik",wocheId,ciFragen,ciMein)}`:"";
+ const s2=`${ciKarte}${einKarte}
   ${matListe||lehrer?`<h3 class="apt-h3">Material</h3><div class="list">${matListe||`<div class="empty">Noch kein Material eingestellt.</div>`}</div>`:""}${matForm}
   ${lehrer?"":schritte[1]?`<div class="st-fertig">✓ Einarbeitung abgeschlossen${abgeschlossenAm?` am ${abgeschlossenAm}`:""} <button class="text-button"style="font-size:11px"onclick="aptSetzen('${wocheId}',{einarbeitungAbgeschlossen:false,materialBearbeitet:false,basischeckErledigt:false},{tab:'einarbeitung'})">zurücknehmen</button></div>`
    :`<div class="form-actions"style="margin-top:12px"><button class="primary"onclick="stundeEinarbeitungAbschliessen('${wocheId}')">Ich habe die Einarbeitung abgeschlossen</button></div>`}`;
