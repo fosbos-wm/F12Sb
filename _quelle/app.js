@@ -1633,7 +1633,7 @@ function swById(id){return SCHULWOCHEN_PP.find(w=>w.id===id)||null;}
 
 // Vier ausbalancierte Lernbereichsfarben (gleiche Helligkeit/Sättigung,
 // nur der Farbton wechselt) – Blau, Violett, Grün, Terrakotta.
-const PP_FARBEN={1:"#1B8A9A",2:"#7650A5",3:"#2E7D57",4:"#B5622A"};
+const PP_FARBEN={1:"#2494A8",2:"#8460B8",3:"#5FA33E",4:"#E08A2E"};
 
 // Reihenfolge = zeitliche Reihenfolge im Schuljahr (Umbau: LB 1 ist nur noch
 // die interaktive Einstiegsstunde „Das Experiment“ + Prüfungstraining in
@@ -21176,7 +21176,7 @@ const KW_PHASEN=[1,2,3,4].map(n=>{
  return{id:"lb"+n,lb:"LB "+n,lbNum:n,lbTitel:PP12_LB[n].titel,titel:KW_PROJEKTTITEL[n],start,end,projektStart:start,projektEnde:end,
   startSw:pp12Montag(start),notwendigeWochen:[],projektWocheId:"team_lb"+n,meilensteine:[]};
 });
-const KW_FARBEN={1:{c:"#1B8A9A",bg:"#DFF1F4",t:"#12626E"},2:{c:"#7650A5",bg:"#EEE7F7",t:"#5E3E8A"},3:{c:"#2E7D57",bg:"#E0F2E8",t:"#1F6B47"},4:{c:"#B5622A",bg:"#FAEBDD",t:"#8A4A1D"}};
+const KW_FARBEN={1:{c:"#2494A8",bg:"#DDF1F5",t:"#176A7A"},2:{c:"#8460B8",bg:"#EEE8F7",t:"#5F3F94"},3:{c:"#5FA33E",bg:"#E6F3DC",t:"#3F7226"},4:{c:"#E08A2E",bg:"#FCEBD6",t:"#9A5410"}};
 const KW={mat:{},fort:{},co:null,geladen:0};
 let activeKwThema=null,activeKwLb=null;
 // Reihenfolge der Dateien auf jeder Themenseite (immer gleich)
