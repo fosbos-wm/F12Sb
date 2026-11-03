@@ -1,4 +1,4 @@
-let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = import("./firebase-local.js?v=20261016a").then((fbMod)=>{ const appMod=fbMod, authMod=fbMod, fsMod=fbMod, storageMod={getStorage:fbMod.getStorage,ref:fbMod.ref,uploadBytes:fbMod.uploadBytes,getDownloadURL:fbMod.getDownloadURL,deleteObject:fbMod.deleteObject}; ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile,deleteUser}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment}=fsMod); ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db){ try{ db=fbMod.initializeFirestore(app,{experimentalAutoDetectLongPolling:true}); }catch(e){ console.warn("Firestore-Start mit Verbindungsfallback nicht möglich, Standard wird genutzt:",e); db=getFirestore(app); } } if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }); return firebaseReadyPromise; } /*
+let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = fbImportMitWiederholung("./firebase-local.js?v=20261016a").then((fbMod)=>{ const appMod=fbMod, authMod=fbMod, fsMod=fbMod, storageMod={getStorage:fbMod.getStorage,ref:fbMod.ref,uploadBytes:fbMod.uploadBytes,getDownloadURL:fbMod.getDownloadURL,deleteObject:fbMod.deleteObject}; ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile,deleteUser}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment}=fsMod); getDoc=fsLeseMitWiederholung(getDoc); getDocs=fsLeseMitWiederholung(getDocs); ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db){ try{ db=fbMod.initializeFirestore(app,{experimentalAutoDetectLongPolling:true}); }catch(e){ console.warn("Firestore-Start mit Verbindungsfallback nicht möglich, Standard wird genutzt:",e); db=getFirestore(app); } } if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }).catch(e=>{firebaseReadyPromise=null;throw e}); return firebaseReadyPromise; } /*
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
@@ -21272,8 +21272,8 @@ async function renderKachelwand(){
  const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
  const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#DCE9F5" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#3A8FD4" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
  const links=lehrer
-  ?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände und Check-outs</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Campus-News und Termine</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
-  :`<button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Campus-News und Termine</button>`;
+  ?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände und Check-outs</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Startseite</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
+  :`<button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Startseite</button>`;
  return`<div class="kw" id="kwRoot">
   ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Lernlandkarte","Dein Weg durch das Schuljahr: vier Lernbereiche mit Projekt, Themen und Bausteinen.")}
   <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
@@ -22303,3 +22303,40 @@ async function wbExportPdf(){
  try{await wbExport();}finally{wb.pdfModus=false;}
 }
 Object.assign(window,{pp12Lern:typeof pp12Lern==="function"?pp12Lern:undefined,pp12Wb:typeof pp12Wb==="function"?pp12Wb:undefined,lbOrdnerOeffnen,lbOrdnerNeu,lbBereitstellen,lbOrdnerLoeschen,lbZuordnenDialog,lbZuordnenSetzen,lbZFilter,lbZTab,lbZLernNeu,lbZRf,lbRfDialog,lbRfWahl,lbRfWebSpeichern,lbRfOeffnen,lbRfSchliessen,lbRfNeuerTab,pp12LernZuordnen,lbLoesenDialog,lbLoesen,pp12Loesen});
+
+/* Ladestabilität (iPhone/iPad): fehlgeschlagene Ladeversuche werden wiederholt, nicht dauerhaft gemerkt */
+function ladeWarte(ms){return new Promise(r=>setTimeout(r,ms))}
+let sichtbarSeit=Date.now();
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")sichtbarSeit=Date.now()});
+window.addEventListener("pageshow",()=>{sichtbarSeit=Date.now()});
+async function fbImportMitWiederholung(url){
+ let letzter;
+ for(let v=0;v<4;v++){
+  try{
+   const m=await import(v?url+"&r="+v+Date.now().toString(36):url);
+   if(window.__bootMsg)window.__bootMsg("");
+   return m;
+  }catch(e){
+   letzter=e;console.warn("Firebase laden, Versuch "+(v+1)+":",e);
+   if(v<3){if(window.__bootMsg)window.__bootMsg("Die Verbindung hakt. Neuer Versuch "+(v+1)+" von 3 …");await ladeWarte(900*(v+1))}
+  }
+ }
+ throw letzter;
+}
+function fsLeseMitWiederholung(fn){
+ return async(...args)=>{
+  /* iOS bricht Anfragen direkt nach dem Zurückkehren zur Seite oft ab: kurz warten */
+  const w=400-(Date.now()-sichtbarSeit);if(w>0)await ladeWarte(w);
+  let letzter;
+  for(let i=0;i<3;i++){
+   try{return await fn(...args)}catch(e){
+    letzter=e;const c=String(e&&e.code||"");
+    if(c==="permission-denied"||c==="not-found"||c==="invalid-argument"||c==="unauthenticated"||c==="failed-precondition")throw e;
+    if(i<2)await ladeWarte(600*(i+1));
+   }
+  }
+  throw letzter;
+ };
+}
+
+window.__booted=1;if(window.__bootOk)window.__bootOk();
