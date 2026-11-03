@@ -3851,11 +3851,11 @@ async function renderStart(){
  const upcomingDate=nextCalendar?.start||nextCalendar?.date||nextCalendar?.startDate;
  const upcomingDateText=upcomingDate?.seconds?new Date(upcomingDate.seconds*1000).toLocaleDateString("de-DE"):String(upcomingDate||"").slice(0,10);
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
- const newsAction=(isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:"")
- +(isTeacher()?`<button class="secondary"onclick="openUserManagement()"> Benutzer verwalten</button>`:"");
+ 
  return`${coBanner}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
-</div><div class="actions">${isTeacher()?`<button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>`:""}<button class="secondary"onclick="go('kompass')">Mein Kompass →</button></div></section>
+</div></section>
+ ${isTeacher()?`<div class="card"style="margin-bottom:16px;border-left:4px solid #3A8FD4"><div class="kicker">VERWALTUNG</div><h3 style="margin:2px 0 10px">Für Lehrkräfte</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button><button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button></div></div>`:""}
  ${pp12CssBausteine()}${naechsteStunde}
  <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
  <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
@@ -3887,22 +3887,9 @@ class="list-item"><div><strong>${esc(p.title||p.text)}</strong>${p.title?`<small
  <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
  <input id="quickWpInput"type="text"maxlength="140"placeholder="Was steht diese Woche an? Kurz eintragen …"style="flex:1;min-width:220px">
  <button class="primary"onclick="quickAddWochenplan()">＋ Zur Wochenplanung</button>
- <button class="secondary"onclick="go('kompass')">Ausführlicher planen →</button>
  </div>
  ${wochenplan.length?`<div class="list"style="margin-top:10px">${wochenplan.filter(w=>!w.done).slice(0,3).map(w=>`<div class="list-item"><div><strong>${esc(w.title)}</strong>${w.subject?`<small>${esc(F11SB_FAECHER.find(f=>f.key===w.subject)?.label||"")}</small>`:""}</div><span class="pill">${w.scope==="monat"?"Monat":"Woche"}</span></div>`).join("")}</div>`:""}
  </div>
- <div class="card"style="margin-bottom:16px;text-align:center;border-left:4px solid #3fa66a">
- <h2 style="margin:0 0 8px"> FOSBOS-WM Jahresfokus: Solidarität und Zusammenhalt</h2>
- <p style="margin:0;font-style:italic;color:var(--muted)">„Solidarität lebt von kleinen Taten – heute schon jemandem geholfen?“</p>
- </div>
- ${pageHead("ÜBERSICHT","Unser Campus","Die wichtigsten Bereiche auf einen Blick.",newsAction)}
- <div class="grid grid-4">
- ${tile(" ","Campus-Kompass","Dein persönlicher Überblick über Stundenplan, Wochenplanung und Noten.","kompass")}
- ${tile(" ","Lernwerkstatt","Lernaufträge, Methoden, Tools und KI.","lernwerkstatt")}
- ${tile(" ","Unterricht Pädagogik und Psychologie","Stoffverteilungsplan der 12. Klasse.","unterricht-pp")}
- ${tile(" ","Alternativer Leistungsnachweis","K-Prim-Check-outs und Kurzarbeit-Ersatz.","leistungsnachweis")}
- ${tile(" ","Resilienz & Respressi","Stress regulieren und Stärken aufbauen.","resilienz")}
- ${tile(" ","Campus-Kalender","Termine, Ferien und Leistungsnachweise im Blick.","kalender")}</div>
 </div>${footer()}`;
 }
 async function getRecentForumActivityCount(days){
@@ -21148,16 +21135,171 @@ async function renderKwThema(){
   ${secs}${lerneinheit}${checkout}
  </div>${footer()}`;
 }
-/* ------------------------------------------------ Sammlung der Check-outs (Schülerseite) */
+/* ------------------------------------------------ Lernstände: Check-Ins, Check-outs, digitale Tests mit KI-Vorkorrektur */
+const LT={tests:[],abg:{},alle:[],schueler:[],kiUrl:""};
+async function ltLaden(){
+ LT.tests=[];LT.abg={};LT.alle=[];LT.schueler=[];LT.kiUrl="";
+ try{LT.tests=(await getDocs(collection(db,"lernTests"))).docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>tsSek(a.createdAt)-tsSek(b.createdAt))}catch(e){console.warn("Tests:",e)}
+ try{
+  if(isTeacher())LT.alle=(await getDocs(collection(db,"lernTestAbgaben"))).docs.map(d=>({id:d.id,...d.data()}));
+  else(await getDocs(query(collection(db,"lernTestAbgaben"),where("uid","==",currentUser.uid)))).docs.forEach(d=>{const x=d.data();LT.abg[x.testId]={id:d.id,...x}});
+ }catch(e){console.warn("Abgaben:",e)}
+ try{const s=await getDoc(doc(db,"taskcardLinks","fobizz_test"));LT.kiUrl=s.exists()?(s.data().url||""):"";
+  if(!LT.kiUrl){const s2=await getDoc(doc(db,"taskcardLinks","fobizz_fachaufsatz"));LT.kiUrl=s2.exists()?(s2.data().url||""):""}}catch(e){}
+ if(isTeacher()){try{LT.schueler=(await getDocs(collection(db,"users"))).docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse12Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"))}catch(e){console.warn("Schüler:",e)}}
+}
+function ltBE(t){return(t.fragen||[]).reduce((s,f)=>s+(Number(f.be)||0),0)}
+function ltStatus(t,a){
+ if(a&&a.bewertet)return`bewertet · ${a.be} von ${ltBE(t)} BE · ${a.notenpunkte} Notenpunkte`;
+ if(a&&a.abgegeben)return"abgegeben";
+ if(a&&Object.values(a.antworten||{}).some(x=>String(x).trim()))return"in Arbeit";
+ return t.status==="geschlossen"?"geschlossen":"noch offen";
+}
+async function lsCheckInsLaden(){
+ try{
+  const snap=isTeacher()?await getDocs(collection(db,"basischeckVersuche")):await getDocs(query(collection(db,"basischeckVersuche"),where("uid","==",currentUser.uid)));
+  return snap.docs.map(d=>d.data());
+ }catch(e){console.warn("Check-Ins:",e);return[]}
+}
+function lsThemaName(id){const e=kwThemaById(id);if(!e)return String(id);const lb=e.lbNum||String(e.phase||"").replace("lb","");return`LB ${lb} · ${kwKurz(e)}`}
+function lsUebersichtHTML(ci,co,abgaben){
+ const cos=(co&&co.checkouts||[]).filter(c=>c.status==="live"||c.status==="beendet");
+ const rows=LT.schueler.map(u=>{
+  const c=ci.filter(x=>x.uid===u.uid),p=c.reduce((s,x)=>s+(x.gesamt?x.richtig/x.gesamt:0),0);
+  const a=abgaben.filter(x=>x.uid===u.uid&&x.abgegeben),aw=abgaben.filter(x=>x.uid===u.uid&&x.ausgewertet);
+  const np=aw.length?(aw.reduce((s,x)=>s+(Number(x.notenpunkte)||0),0)/aw.length).toFixed(1).replace(".",","):"–";
+  const t=LT.alle.filter(x=>x.uid===u.uid&&x.abgegeben);
+  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td>${c.length?`${c.length} Check-In${c.length===1?"":"s"} · Ø ${Math.round(p/c.length*100)} % richtig`:"–"}</td><td>${a.length} von ${cos.length} abgegeben · Ø ${np} NP</td><td>${t.length} von ${LT.tests.length}</td><td><button type="button" class="secondary kw-add" data-ls="detail" data-uid="${esc(u.uid)}">Details</button></td></tr>`;
+ }).join("");
+ return`<div class="kw-card"><h3>Alles Geleistete im Überblick</h3><div class="kw-tabwrap">${LT.schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Check-Ins</th><th>Check-outs und KPrim-Tests</th><th>Digitale Tests</th><th></th></tr></thead><tbody>${rows}</tbody></table>`:`<div class="kw-leer">Noch keine freigeschalteten Schüler:innen.</div>`}</div><small>NP = Notenpunkte. Lehrkräfte-Konten erscheinen hier nicht.</small></div>`;
+}
+function lsDetail(uid){
+ const u=LT.schueler.find(x=>x.uid===uid)||{uid};
+ const ci=(LT.ci||[]).filter(x=>x.uid===uid),ab=(LT.abgaben||[]).filter(x=>x.uid===uid),co=(KW.co&&KW.co.checkouts)||[];
+ const l1=ci.length?ci.map(x=>`<li>${esc(lsThemaName(x.wocheId))}: ${x.richtig} von ${x.gesamt} richtig</li>`).join(""):"<li>noch kein Check-In</li>";
+ const l2=co.map(c=>{const a=ab.find(x=>x.checkoutId===c.id);return`<li>${esc(coTitelAnzeige(c)||"Check-out")}: ${a?(a.ausgewertet?`${a.be} BE · ${a.notenpunkte} NP`:(a.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen")):"nicht teilgenommen"}</li>`}).join("")||"<li>keine Check-outs</li>";
+ const l3=LT.tests.map(t=>{const a=LT.alle.find(x=>x.testId===t.id&&x.uid===uid);return`<li>${esc(t.titel)}: ${esc(ltStatus(t,a))}</li>`}).join("")||"<li>keine Tests</li>";
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">LERNSTÄNDE</div><h2>${esc(anzeigeName(u))}</h2><h3>Check-Ins</h3><ul>${l1}</ul><h3>Check-outs und KPrim-Tests</h3><ul>${l2}</ul><h3>Digitale Tests</h3><ul>${l3}</ul>`);
+}
 async function renderKwCheckouts(){
- await kwLaden();
+ await kwLaden();await ltLaden();
  const co=KW.co,lehrer=isTeacher();
+ const ci=await lsCheckInsLaden();LT.ci=ci;
+ let abgaben=[];
+ if(lehrer){try{abgaben=(await getDocs(collection(db,"checkoutAbgaben"))).docs.map(d=>d.data())}catch(e){}}
+ LT.abgaben=abgaben;
+ // Check-Ins
+ let ciHTML;
+ if(lehrer){
+  const m={};ci.forEach(x=>{const t=(m[x.wocheId]=m[x.wocheId]||{n:0,p:0});t.n++;t.p+=x.gesamt?x.richtig/x.gesamt:0});
+  ciHTML=Object.keys(m).length?`<div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Thema</th><th>Teilgenommen</th><th>Ø richtig</th></tr></thead><tbody>${Object.entries(m).map(([id,t])=>`<tr><th scope="row">${esc(lsThemaName(id))}</th><td>${t.n}</td><td>${Math.round(t.p/t.n*100)} %</td></tr>`).join("")}</tbody></table></div>`:`<div class="kw-leer">Noch keine Check-Ins gemacht.</div>`;
+ }else{
+  ciHTML=ci.length?`<div class="kw-rows">${ci.map(x=>`<div class="kw-row"><i class="kw-bx d"></i><span>${esc(lsThemaName(x.wocheId))}</span><small>${x.richtig} von ${x.gesamt} richtig</small></div>`).join("")}</div>`:`<div class="kw-leer">Du hast noch keinen Check-In gemacht. Du findest ihn auf der Seite des Themas in der Lernlandkarte.</div>`;
+ }
+ // Tests
+ const tl=LT.tests.filter(t=>lehrer||t.status!=="entwurf").map(t=>{
+  const a=lehrer?null:LT.abg[t.id],n=lehrer?LT.alle.filter(x=>x.testId===t.id&&x.abgegeben).length:0;
+  return`<div class="kw-baust"><span class="chip ueb">LB ${esc(t.lb)}</span><b>${esc(t.titel)}</b><small>${ltBE(t)} BE${t.ki?" · mit KI-Vorkorrektur":""} · ${lehrer?`${n} von ${LT.schueler.length} abgegeben`:esc(ltStatus(t,a))}${t.status==="geschlossen"?" · geschlossen":""}</small>${lehrer
+   ?`<div class="kw-aktionen"><button class="primary" data-ls="erg" data-id="${esc(t.id)}">Ergebnisse</button><button class="secondary" data-ls="testedit" data-id="${esc(t.id)}">Bearbeiten</button><button class="secondary" data-ls="toggle" data-id="${esc(t.id)}">${t.status==="geschlossen"?"Wieder öffnen":"Schließen"}</button><button class="secondary" data-ls="testweg" data-id="${esc(t.id)}">Löschen</button></div>`
+   :`<button class="primary" data-ls="open" data-id="${esc(t.id)}">${a&&a.abgegeben?"Ansehen":(t.status==="geschlossen"?"Ansehen":"Test starten")}</button>`}</div>`}).join("");
+ const testHTML=`<div class="kw-card"><h3>Digitale Tests mit KI-Vorkorrektur</h3><small>Offene Fragen am Bildschirm beantworten. Auf Wunsch gibt es vor der Abgabe eine KI-Vorkorrektur über den Assistenten der Schule.</small>${tl?`<div class="kw-baustliste" style="margin-top:10px">${tl}</div>`:`<div class="kw-leer" style="margin-top:10px">Noch kein Test angelegt.</div>`}${lehrer?`<div class="kw-aktionen" style="margin-top:10px"><button class="primary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button></div>`:""}</div>`;
  return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
-  <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>KPrim-Tests und weitere Check-out-Tests mit Ergebnis, dazu die Lernstandsmessung. Hier liegt auch der Alternative Leistungsnachweis: Du wählst die Check-outs, die als Kurzarbeit-Ersatz zählen.</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button>`:""}</div></header>
-  ${co?`${checkoutLiveBannerHTML(co)}<div class="kw-card">${checkoutSektionHTML(co)}</div>`:`<div class="empty"><strong>Check-outs konnten nicht geladen werden.</strong>Bitte später erneut versuchen.</div>`}
+  <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>Alle Check-Ins, Check-outs und KPrim-Tests, digitale Tests und die Lernstandsmessung an einem Ort. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button>`:""}</div></header>
+  ${lehrer?lsUebersichtHTML(ci,co,abgaben):""}
+  <div class="kw-card"><h3>Check-Ins</h3><small>Kurze Einstiegstests zu den Themen</small>${ciHTML}</div>
+  <div class="kw-card"><h3>Check-outs und KPrim-Tests</h3>${co?`${checkoutLiveBannerHTML(co)}${checkoutSektionHTML(co)}`:`<div class="kw-leer">Check-outs konnten nicht geladen werden.</div>`}</div>
+  ${testHTML}
  </div>${footer()}`;
 }
+function ltForm(id){
+ const t=id?LT.tests.find(x=>x.id===id):null;
+ const lbs=[1,2,3,4].map(n=>{const p=kwPhase(n);return`<option value="${n}"${t&&Number(t.lb)===n?" selected":""}>LB ${n}${p?" · "+esc(p.lbTitel):""}</option>`}).join("");
+ const fr=t?(t.fragen||[]).map(f=>`${f.text} | ${f.be}`).join("\n"):"";
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">DIGITALER TEST</div><h2>${t?"Test bearbeiten":"Neuer Test"}</h2>
+ <div class="form"><label>Titel<input id="ltTitel" maxlength="120" value="${esc(t?t.titel:"")}"></label>
+ <label>Lernbereich<select id="ltLb">${lbs}</select></label>
+ <label>Fragen (eine pro Zeile, am Ende „ | “ und die BE, z. B. „Erkläre … | 4“)<textarea id="ltFragen" rows="7">${esc(fr)}</textarea></label>
+ <label>Hinweis an die Klasse (optional)<textarea id="ltHinweis" rows="2" maxlength="400">${esc(t?t.hinweis||"":"")}</textarea></label>
+ <label class="check"><input type="checkbox" id="ltKi"${!t||t.ki?" checked":""}> KI-Vorkorrektur anbieten</label>
+ <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button><button class="primary" id="ltSave">Speichern</button></div></div>`);
+ $("ltSave").onclick=async()=>{
+  const titel=$("ltTitel").value.trim();
+  const fragen=$("ltFragen").value.split("\n").map(z=>z.trim()).filter(Boolean).map(z=>{const m=z.match(/^(.*?)\s*\|\s*(\d+(?:[.,]\d+)?)\s*$/);return m?{text:m[1],be:Number(m[2].replace(",","."))}:{text:z,be:2}});
+  if(!titel||!fragen.length){toast("Bitte Titel und mindestens eine Frage eingeben.");return}
+  const d={titel,lb:Number($("ltLb").value),fragen,hinweis:$("ltHinweis").value.trim(),ki:$("ltKi").checked,updatedAt:serverTimestamp()};
+  try{
+   if(t)await updateDoc(doc(db,"lernTests",t.id),d);else await addDoc(collection(db,"lernTests"),{...d,status:"offen",createdBy:currentUser.uid,createdAt:serverTimestamp()});
+   closeModal();toast("Test gespeichert.");render();
+  }catch(e){console.error(e);toast("Konnte nicht gespeichert werden.")}
+ };
+}
+function ltOeffnen(id){
+ const t=LT.tests.find(x=>x.id===id);if(!t)return;
+ const a=LT.abg[id]||{antworten:{}},fest=!!a.abgegeben||t.status==="geschlossen";
+ const fr=(t.fragen||[]).map((f,i)=>`<label><b>${i+1}. ${esc(f.text)}</b> <small>(${f.be} BE)</small><textarea id="ltA${i}" rows="5"${fest?" disabled":""}>${esc((a.antworten||{})[i]||"")}</textarea></label>`).join("");
+ const ki=t.ki?`<div class="kw-card" style="margin:6px 0"><h3>KI-Vorkorrektur</h3><small>So geht es: 1. Text kopieren. 2. Den KI-Assistenten der Schule öffnen und den Text einfügen. 3. Die Rückmeldung unten einfügen und speichern. Es gibt keine Note, die KI gibt nur Hinweise.</small><div class="kw-aktionen" style="margin:8px 0"><button type="button" class="secondary" onclick="ltKiKopieren('${esc(id)}')">Text für die KI kopieren</button>${LT.kiUrl?`<a class="secondary" style="text-decoration:none;display:inline-block;padding:9px 14px;border-radius:9px;border:1px solid var(--line)" href="${esc(LT.kiUrl)}" target="_blank" rel="noopener noreferrer">KI-Assistent öffnen</a>`:`<small>Die Lehrkraft hat noch keinen Link hinterlegt.</small>`}</div><label>Rückmeldung der KI hier einfügen<textarea id="ltKiFb" rows="6">${esc(a.kiFeedback||"")}</textarea></label><button type="button" class="secondary" onclick="ltSpeichern('${esc(id)}','ki')">Rückmeldung speichern</button></div>`:"";
+ const lk=a.bewertet?`<div class="kw-card" style="margin:6px 0"><h3>Rückmeldung der Lehrkraft</h3><p><b>${a.be} von ${ltBE(t)} BE · ${a.notenpunkte} Notenpunkte</b></p>${a.lehrerKommentar?`<p>${esc(a.lehrerKommentar)}</p>`:""}</div>`:"";
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">DIGITALER TEST · LB ${esc(t.lb)} · ${ltBE(t)} BE</div><h2>${esc(t.titel)}</h2>${t.hinweis?`<p>${esc(t.hinweis)}</p>`:""}
+ <div class="form">${fr}${ki}${lk}<div class="form-actions"><button class="secondary" onclick="closeModal()">Schließen</button>${fest?"":`<button class="secondary" onclick="ltSpeichern('${esc(id)}','zwischen')">Zwischenspeichern</button><button class="primary" onclick="ltSpeichern('${esc(id)}','abgeben')">Abgeben</button>`}</div></div>`);
+}
+async function ltKiKopieren(id){
+ const t=LT.tests.find(x=>x.id===id);if(!t)return;
+ const block=`Bitte gib mir eine kurze, konstruktive Vorkorrektur zu meinen Antworten in einem Test im Fach Pädagogik/Psychologie (FOS, Lernbereich ${t.lb}): Was ist gut, was fehlt fachlich noch, was sollte ich verbessern? Keine Note, keine Musterlösung.\n\nTest: ${t.titel}\n\n`+(t.fragen||[]).map((f,i)=>`Aufgabe ${i+1} (${f.be} BE): ${f.text}\nMeine Antwort: ${($("ltA"+i)&&$("ltA"+i).value.trim())||"(noch keine Antwort)"}`).join("\n\n");
+ try{await navigator.clipboard.writeText(block);toast("Kopiert. Jetzt im KI-Assistenten einfügen.")}catch(e){toast("Konnte nicht kopiert werden.")}
+}
+window.ltKiKopieren=ltKiKopieren;
+async function ltSpeichern(id,art){
+ const t=LT.tests.find(x=>x.id===id);if(!t)return;
+ const alt=LT.abg[id]||{},antworten={};
+ (t.fragen||[]).forEach((f,i)=>{const el=$("ltA"+i);antworten[i]=el&&!el.disabled?el.value:((alt.antworten||{})[i]||"")});
+ if(art==="abgeben"){
+  if(Object.values(antworten).some(x=>!String(x).trim())&&!confirm("Nicht alle Fragen sind beantwortet. Trotzdem abgeben?"))return;
+  if(!confirm("Test abgeben? Danach kannst du die Antworten nicht mehr ändern."))return;
+ }
+ const d={testId:id,uid:currentUser.uid,name:anzeigeName(profile,currentUser),antworten,kiFeedback:$("ltKiFb")?$("ltKiFb").value:(alt.kiFeedback||""),abgegeben:art==="abgeben"||!!alt.abgegeben,updatedAt:serverTimestamp()};
+ if(art==="abgeben")d.abgegebenAt=serverTimestamp();
+ try{
+  await setDoc(doc(db,"lernTestAbgaben",`${id}_${currentUser.uid}`),d,{merge:true});
+  LT.abg[id]={...alt,...d};
+  toast(art==="abgeben"?"Test abgegeben.":(art==="ki"?"Rückmeldung gespeichert.":"Zwischengespeichert."));
+  if(art==="abgeben"){closeModal();if(typeof showMotivationsBild==="function")showMotivationsBild(true,"abgabe");render()}
+ }catch(e){console.error(e);toast("Konnte nicht gespeichert werden.")}
+}
+window.ltSpeichern=ltSpeichern;
+function ltErgebnisse(id){
+ const t=LT.tests.find(x=>x.id===id);if(!t)return;
+ const zeilen=LT.schueler.map(u=>{
+  const a=LT.alle.find(x=>x.testId===id&&x.uid===u.uid);
+  const inner=a?`${(t.fragen||[]).map((f,i)=>`<p><b>${i+1}. ${esc(f.text)}</b> <small>(${f.be} BE)</small><br>${esc((a.antworten||{})[i]||"–").replace(/\n/g,"<br>")}</p>`).join("")}${a.kiFeedback?`<p><b>KI-Rückmeldung</b><br>${esc(a.kiFeedback).replace(/\n/g,"<br>")}</p>`:""}
+   <div style="display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:end"><label>BE (max. ${ltBE(t)})<input type="number" min="0" max="${ltBE(t)}" step="0.5" id="ltBe_${esc(u.uid)}" value="${a.bewertet?a.be:""}"></label><label>Kommentar<input id="ltKo_${esc(u.uid)}" maxlength="400" value="${esc(a.lehrerKommentar||"")}"></label></div>
+   <button type="button" class="primary" style="margin-top:8px" data-ls="bewerten" data-id="${esc(id)}" data-uid="${esc(u.uid)}">Bewertung speichern</button>`:`<small>noch nichts abgegeben</small>`;
+  return`<details style="margin:6px 0"><summary><b>${esc(anzeigeName(u))}</b> · ${esc(ltStatus(t,a))}</summary><div style="padding:8px 0 4px">${inner}</div></details>`;
+ }).join("")||"<div class='kw-leer'>Keine Schüler:innen.</div>";
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">ERGEBNISSE</div><h2>${esc(t.titel)}</h2>${zeilen}`);
+}
+document.addEventListener("click",async ev=>{
+ const b=ev.target.closest&&ev.target.closest("[data-ls]");if(!b||!currentUser)return;
+ const a=b.dataset.ls,id=b.dataset.id;
+ try{
+  if(a==="testneu")ltForm(null);
+  else if(a==="testedit")ltForm(id);
+  else if(a==="open")ltOeffnen(id);
+  else if(a==="erg")ltErgebnisse(id);
+  else if(a==="detail")lsDetail(b.dataset.uid);
+  else if(a==="kilink")taskcardLinkBearbeiten("fobizz_test",LT.kiUrl);
+  else if(a==="toggle"){const t=LT.tests.find(x=>x.id===id);await updateDoc(doc(db,"lernTests",id),{status:t.status==="geschlossen"?"offen":"geschlossen"});render()}
+  else if(a==="testweg"){if(!confirm("Diesen Test wirklich löschen? Die Abgaben bleiben gespeichert."))return;await deleteDoc(doc(db,"lernTests",id));toast("Gelöscht.");render()}
+  else if(a==="bewerten"){
+   const uid=b.dataset.uid,t=LT.tests.find(x=>x.id===id),max=ltBE(t),be=Math.max(0,Math.min(max,Number(($("ltBe_"+uid).value||"").replace(",","."))));
+   if(!isFinite(be)||$("ltBe_"+uid).value==="")return toast("Bitte BE eintragen.");
+   const np=notenpunkteAusProzent(max?be/max*100:0);
+   await updateDoc(doc(db,"lernTestAbgaben",`${id}_${uid}`),{be,notenpunkte:np,bewertet:true,lehrerKommentar:$("ltKo_"+uid).value.trim(),bewertetAt:serverTimestamp()});
+   const x=LT.alle.find(y=>y.testId===id&&y.uid===uid);if(x)Object.assign(x,{be,notenpunkte:np,bewertet:true});
+   toast(`Gespeichert: ${be} BE = ${np} Notenpunkte.`);
+  }
+ }catch(err){console.error("Lernstände:",err);toast("Das hat nicht geklappt. Bitte erneut versuchen.")}
+});
 /* ------------------------------------------------ Lehrkräfte: Haben alle ordentlich abgeschlossen? */
 async function renderKwFortschritt(){
  if(!isTeacher())return await renderKachelwand();
