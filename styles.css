@@ -98,3 +98,6 @@
 .kw-fa-h{margin:10px 12px 2px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .fa-lbgr .kw-fa-gr{margin:6px 12px}
 .ppm-einfach .ppm-opt{display:none}
+.bc-ed{border-left:6px solid var(--ci);background:color-mix(in srgb,var(--ci) 7%,#fff);border-color:color-mix(in srgb,var(--ci) 30%,#fff);border-left-color:var(--ci)}
+.bc-ed select[id^="bcTyp"]{border:2px solid var(--ci);color:var(--ci);font-weight:800;background:#fff}
+.bc-ed label{color:color-mix(in srgb,var(--ci) 55%,#17384f)}
