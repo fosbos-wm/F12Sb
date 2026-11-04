@@ -10134,6 +10134,13 @@ async function openCheckoutSchuelerErgebnis(id,uid){
 // ---- K-Prim-Test zum Ausdrucken: leer (für den Fall technischer Probleme) oder mit Lösung (für die Lehrkraft) ----
 // Kopf: „Staatliche FOSBOS Weilheim“, Zeile mit KPrim-Test, Datum und Name; unten Gesamtpunktzahl, Umrechnung in Punkte und „Viel Erfolg!“.
 // Mit Lösung: richtige Spalte markiert, Begründung unter jeder Aussage, Umrechnungstabelle, keine Namens- und Datumszeile.
+// Einheitliche Benennung der Check-outs: „KPrim-Test · LB1 · Nr. 1 · Titel“ (Nr. nur, wenn die Vorlage eine hat).
+function coLabel(v){return["KPrim-Test","LB"+v.lbNum,v.nr?"Nr. "+v.nr:"",v.name||v.titel].filter(Boolean).join(" · ");}
+function coTitelAnzeige(c){
+ const t=(c&&c.titel)||"";
+ const v=CHECKOUT_VORLAGEN_ALLE.find(x=>x.titel===t||coLabel(x)===t);
+ return v?coLabel(v):t;
+}
 function coDruckTitelVon(co){return typeof coTitelAnzeige==="function"?coTitelAnzeige(co):(co.titel||"");}
 // Fallvignetten: Gilt eine Vignette für den ganzen Test, steht sie oben. Gilt sie für mehrere Aufgaben in Folge,
 // steht sie nur vor der ersten dieser Aufgaben.
