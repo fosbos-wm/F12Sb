@@ -6,7 +6,7 @@ let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, 
  F12Sb MASTER – STABILE MODULREGISTRY
  Die Master-App selbst enthält keine Pflicht-Imports
  von Zusatzmodulen. Module werden erst beim Öffnen geladen.
- ========================================================= */ const CAMPUS_MODULES={ lernpfad:{label:"Persönlicher Lernpfad",route:"lernpfad",ready:true}, lernressourcen:{label:"Lernressourcen",route:"ressourcen",ready:true}, lernjournal:{label:"Lernjournal",route:"journal",ready:true}, lernmethoden:{label:"Lernmethoden",route:"methoden",ready:true}, lernimpulse:{label:"Lernimpulse",route:"impulse",ready:false}, lernstand:{label:"Lernstandsmessung",route:"lernstand",ready:true}, lerncoaching:{label:"Lerncoaching",route:"lerncoaching",ready:false}, resilienz:{label:"Resilienz & Respressi",route:"resilienz",ready:false}, kompetenz:{label:"Kompetenzwerkstatt",route:"kompetenz",ready:true}, forum:{label:"Campus-Forum",route:"forum",ready:true}, pinnwand:{label:"Pinnwand",route:"pinnwand",ready:true}, kollaboration:{label:"Tools für Zusammenarbeit",route:"kollaboration",ready:true}, wortwolke:{label:"Wortwolke",route:"wortwolke",ready:true}, kanban:{label:"Kanban-Board",route:"kanban",ready:true}, terminfindung:{label:"Terminfindung",route:"terminfindung",ready:true}, teamgesucht:{label:"Team gesucht",route:"teamgesucht",ready:true}, checkliste:{label:"Gemeinsame Checkliste",route:"checkliste",ready:true}, ampel:{label:"Verständnis-Ampel",route:"ampel",ready:true}, umfrage:{label:"Live-Umfrage",route:"umfrage",ready:true}, zufallspicker:{label:"Wer ist dran?",route:"zufallspicker",ready:true}, lernwerkzeuge:{label:"Lern-Werkzeuge",route:"lernwerkzeuge",ready:true}, karteikarten:{label:"Karteikarten",route:"karteikarten",ready:true},"fokus-timer":{label:"Fokus-Timer",route:"fokus-timer",ready:true}, glossar:{label:"Glossar",route:"glossar",ready:true}, projekte:{label:"Projekte",route:"projekte",ready:true}, praxis:{label:"fpA",route:"praktikum",ready:true}, ki:{label:"KI-Innovationslabor",route:"ki",ready:true}, kalender:{label:"Campus-Kalender",route:"kalender",ready:true}, kompetenzprofil:{label:"Kompetenzprofil",route:"kompetenzprofil",ready:false}, team:{label:"Lehrkräfte Klassenteam",route:"team",ready:true} }; const configReady = !Object.values(firebaseConfig).some(v => String(v).includes("HIER_") || String(v).includes("DEIN-PROJEKT")); let app=null, auth=null, db=null; const $=id=>document.getElementById(id); const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+ ========================================================= */ const CAMPUS_MODULES={ lernpfad:{label:"Persönlicher Lernpfad",route:"lernpfad",ready:true}, lernressourcen:{label:"Lernressourcen",route:"ressourcen",ready:true}, lernjournal:{label:"Lernjournal",route:"journal",ready:true}, lernmethoden:{label:"Lernmethoden",route:"methoden",ready:true}, lernimpulse:{label:"Lernimpulse",route:"impulse",ready:false}, lernstand:{label:"Lernstandsmessung",route:"lernstand",ready:true}, lerncoaching:{label:"Lerncoaching",route:"lerncoaching",ready:false}, resilienz:{label:"Resilienz & Respressi",route:"resilienz",ready:false}, kompetenz:{label:"Kompetenzwerkstatt",route:"kompetenz",ready:true}, forum:{label:"Campus-Forum",route:"forum",ready:true}, pinnwand:{label:"Pinnwand",route:"pinnwand",ready:true}, kollaboration:{label:"Tools für Zusammenarbeit",route:"kollaboration",ready:true}, wortwolke:{label:"Wortwolke",route:"wortwolke",ready:true}, kanban:{label:"Kanban-Board",route:"kanban",ready:true}, terminfindung:{label:"Terminfindung",route:"terminfindung",ready:true}, teamgesucht:{label:"Team gesucht",route:"teamgesucht",ready:true}, checkliste:{label:"Gemeinsame Checkliste",route:"checkliste",ready:true}, ampel:{label:"Verständnis-Ampel",route:"ampel",ready:true}, umfrage:{label:"Live-Umfrage",route:"umfrage",ready:true}, zufallspicker:{label:"Wer ist dran?",route:"zufallspicker",ready:true}, lernwerkzeuge:{label:"Lern-Werkzeuge",route:"lernwerkzeuge",ready:true}, karteikarten:{label:"Karteikarten",route:"karteikarten",ready:true},"fokus-timer":{label:"Fokus-Timer",route:"fokus-timer",ready:true}, glossar:{label:"Glossar",route:"glossar",ready:true}, projekte:{label:"Projekte",route:"projekte",ready:true}, ki:{label:"KI-Innovationslabor",route:"ki",ready:true}, kalender:{label:"Campus-Kalender",route:"kalender",ready:true}, kompetenzprofil:{label:"Kompetenzprofil",route:"kompetenzprofil",ready:false}, team:{label:"Lehrkräfte Klassenteam",route:"team",ready:true} }; const configReady = !Object.values(firebaseConfig).some(v => String(v).includes("HIER_") || String(v).includes("DEIN-PROJEKT")); let app=null, auth=null, db=null; const $=id=>document.getElementById(id); const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const statusLabel={green:"Auf Kurs",yellow:"Klärungsbedarf",red:"Handlungsbedarf"};
 const labels={question:"Frage",info:"Info",idea:"Idee",project:"Projekt",practice:"Praxis"};
 let currentUser=null, profile=null, unsubscribers=[];
@@ -1679,14 +1679,7 @@ const F11SB_FAECHER=[
 // B-Block-Termine exakt aus dem offiziellen Dokument "Einteilung Unterrichts-
 // und Praktikumszeit 2026/2027" der FOSBOS Weilheim übernommen (nur 6 Blöcke,
 // nicht 7 – vorherige Annahme war hier ungenau).
-const PRAKTIKUMSPHASEN=[
- {id:"pr1",start:"2026-09-15",end:"2026-10-02",titel:"Praktikum – B-Block – Erziehung (Block 1)",bereich:"Erziehungsbereich",icon:"🏫"},
- {id:"pr2",start:"2026-10-26",end:"2026-11-20",titel:"Praktikum – B-Block – Erziehung (Block 2)",bereich:"Erziehungsbereich",icon:"🏫"},
- {id:"pr3",start:"2026-12-14",end:"2027-01-15",titel:"Praktikum – B-Block – Erziehung (Block 3)",bereich:"Erziehungsbereich",icon:"🏫"},
- {id:"pr4",start:"2027-02-15",end:"2027-03-05",titel:"Praktikum – B-Block – Pflege (Block 1)",bereich:"Pflegebereich",icon:"🏥"},
- {id:"pr5",start:"2027-04-19",end:"2027-05-07",titel:"Praktikum – B-Block – Pflege (Block 2)",bereich:"Pflegebereich",icon:"🏥"},
- {id:"pr6",start:"2027-06-14",end:"2027-07-09",titel:"Praktikum – B-Block – Pflege (Block 3)",bereich:"Pflegebereich",icon:"🏥"}
-];
+const PRAKTIKUMSPHASEN=[]; // In der 12. Klasse gibt es keine fachpraktische Ausbildung (fpA) und keine Praktikumsblöcke.
 
 // Aufträge je Praktikumsphase: von Lehrkräften gepflegt, überall live
 // gespiegelt (Lernpfad-Wegpunkte, fpA-Übersicht, Startseite) – ein
@@ -2897,13 +2890,108 @@ t12_4_4:["Metakommunikation","Ich-Botschaft","Aktives Zuhören","Feedback","Tech
 t12_4_5:["Normen und Werte","Blickkontakt","Nonverbale Codes","Interkulturelles Verhalten","Missverständnis im Fall"],
 t12_4_6:["Fehlende nonverbale Signale","Cybermobbing","Datenmissbrauch","Reale Beziehungen","Digitale Kommunikation im Fall"]
 };
-// Standard-Check-Ins (5 Fragen je Thema). Eine in Firebase gespeicherte Fassung hat Vorrang.
+// Zusätzliche Check-In-Aufgaben: z = Zuordnung/Lückentext/Reihenfolge (Position 3), f = Freitext (letzte Position)
+const CHECKIN_NEU={
+t12_1_1:{tz:"Entwicklungsbedingungen zuordnen",tf:"Zusammenwirken erklären",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Anlage=Genetisch mitgegebene Voraussetzungen", "Umwelt=Äußere Einflüsse wie Familie, Freunde und Kultur", "Selbststeuerung=Der Mensch gestaltet seine Entwicklung aktiv mit"]],
+ f:["F", "Erkläre an einem Beispiel, wie Anlage, Umwelt und Selbststeuerung bei der Entwicklung zusammenwirken.", "Beispiel Sprache: Die Anlage ermöglicht dem Kind das Sprechenlernen, die Umwelt liefert Sprache und Ansprache, und durch eigenes Nachfragen und Üben steuert das Kind seine Entwicklung selbst mit. Keiner der Faktoren wirkt allein."]},
+t12_1_2:{tz:"Instanzen zuordnen",tf:"Zusammenspiel der Instanzen",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Es=Folgt dem Lustprinzip und will Triebwünsche sofort erfüllen", "Ich=Folgt dem Realitätsprinzip und vermittelt", "Über-Ich=Vertritt Moral, Gewissen und Normen"]],
+ f:["F", "Beschreibe an einer Alltagssituation, wie Es, Ich und Über-Ich zusammenspielen.", "Beispiel: Nina hat Lust, in der Prüfung abzuschreiben (Es). Das Über-Ich meldet sich mit schlechtem Gewissen. Das Ich wägt die Folgen ab und entscheidet sich, selbst zu schreiben."]},
+t12_1_3:{tz:"Phasen in Reihenfolge",tf:"Fixierung erklären",
+ z:["R", "Bringe die Phasen der psychosexuellen Entwicklung nach Freud in die richtige Reihenfolge.", ["Orale Phase", "Anale Phase", "Phallische Phase", "Latenzphase", "Genitale Phase"]],
+ f:["F", "Erkläre mit eigenen Worten, was Fixierung bedeutet, und nenne ein Beispiel.", "Fixierung heißt, dass ein Mensch in einer Phase „hängen bleibt“, wenn dort Bedürfnisse zu stark oder zu wenig befriedigt wurden. Beispiel: Wer in der oralen Phase zu kurz kam, kaut als Erwachsener vielleicht Nägel oder raucht."]},
+t12_1_4:{tz:"Abwehrmechanismen zuordnen",tf:"Abwehr am Beispiel erklären",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Verdrängung=Unangenehme Inhalte werden ins Unbewusste geschoben", "Projektion=Eigene Gefühle oder Eigenschaften werden anderen zugeschrieben", "Regression=Rückfall auf eine frühere Entwicklungsstufe", "Identifikation=Eigenschaften eines Vorbildes werden übernommen"]],
+ f:["F", "Wozu dienen Abwehrmechanismen? Erkläre es an einem Beispiel.", "Sie schützen das Ich vor unangenehmen Gefühlen wie Angst oder Schuld. Beispiel: Ein Schüler, der selbst oft unkonzentriert ist, wirft den anderen vor, sie würden ständig stören (Projektion)."]},
+t12_1_5:{tz:"Würdigung ergänzen",tf:"Stärke und Schwäche nennen",
+ z:["L", "Freuds Theorie ist empirisch schwer ___. Als Stärke gilt, dass sie die Bedeutung der frühen ___ betont.", ["überprüfbar", "Kindheitserfahrungen"], ["überprüft", "Methoden"]],
+ f:["F", "Nenne eine Stärke und eine Schwäche von Freuds Theorie.", "Stärke: Sie betont die Bedeutung früher Kindheitserfahrungen und des Unbewussten. Schwäche: Viele Annahmen sind empirisch schwer überprüfbar, und die Betonung der Sexualität gilt als einseitig."]},
+t12_1_6:{tz:"Bindungstypen zuordnen",tf:"Fremde Situation beschreiben",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Sicher gebunden=Protestiert bei der Trennung und lässt sich bei der Rückkehr schnell beruhigen", "Unsicher-vermeidend=Ignoriert die Bezugsperson bei der Rückkehr", "Unsicher-ambivalent=Sucht Nähe, wehrt sie aber zugleich ab"]],
+ f:["F", "Beschreibe, wie sich ein sicher gebundenes Kind in der Fremden Situation verhält.", "Es erkundet den Raum, solange die Bezugsperson da ist (sichere Basis), protestiert bei der Trennung, begrüßt die Bezugsperson bei der Rückkehr und lässt sich schnell beruhigen."]},
+t12_1_7:{tz:"Bindungsbeziehungen zuordnen",tf:"Veränderung der Bindung",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Primäre Bindung=Enge Beziehung zu den Eltern oder einer Hauptbezugsperson", "Jugendalter=Gleichaltrige und Freunde gewinnen an Bedeutung", "Erwachsenenalter=Die Partnerschaft wird oft zur wichtigsten Bindung"]],
+ f:["F", "Wie verändern sich Bindungsbeziehungen vom Kindes- bis zum Erwachsenenalter?", "Zuerst stehen die Eltern als primäre Bindungspersonen im Mittelpunkt. Im Jugendalter gewinnen Gleichaltrige und Freunde an Bedeutung, die Bindung an die Eltern bleibt, wird aber gleichberechtigter. Im Erwachsenenalter wird die Partnerschaft oft zur wichtigsten Bindung."]},
+t12_1_8:{tz:"Eingewöhnung ordnen",tf:"Feinfühligkeit begründen",
+ z:["R", "Bringe die Schritte einer behutsamen Eingewöhnung in der Kita in eine sinnvolle Reihenfolge.", ["Das Kind lernt gemeinsam mit einem Elternteil die Einrichtung kennen", "Die Bezugserzieherin baut vorsichtig Kontakt auf", "Erster kurzer Trennungsversuch", "Die Trennungszeiten werden schrittweise verlängert", "Das Kind nutzt die Erzieherin als sichere Basis"]],
+ f:["F", "Warum ist Feinfühligkeit der Erzieherin für die Bindungsförderung wichtig?", "Feinfühlige Erzieherinnen nehmen Signale des Kindes wahr, deuten sie richtig und reagieren prompt und angemessen. So erlebt das Kind Sicherheit und kann die Erzieherin als sichere Basis nutzen."]},
+t12_1_9:{tz:"Lebensspanne zuordnen",tf:"Gewinne und Verluste",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Lebensspannenperspektive=Entwicklung dauert ein Leben lang", "Jugendalter=Typische Anforderung: die eigene Identität finden", "Frühes Erwachsenenalter=Typische Anforderung: Beruf und Partnerschaft gestalten"]],
+ f:["F", "Erkläre Baltes’ Gedanken, dass Entwicklung aus Gewinnen und Verlusten besteht, an einem Beispiel.", "In jedem Lebensabschnitt können Fähigkeiten dazukommen (Gewinn) und andere wegfallen (Verlust). Beispiel: Ein Jugendlicher gewinnt Selbstständigkeit, verliert aber die Geborgenheit der Kindheit."]},
+t12_1_10:{tz:"Begriffe der Resilienz zuordnen",tf:"Risiko und Schutz",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Vulnerabilität=Erhöhte Verletzbarkeit", "Resilienz=Psychische Widerstandsfähigkeit gegenüber Belastungen", "Risikofaktor=Erhöht die Wahrscheinlichkeit für Entwicklungsprobleme", "Schutzfaktor=Stärkt die Widerstandskraft, zum Beispiel soziale Unterstützung"]],
+ f:["F", "Nenne je zwei Risiko- und zwei Schutzfaktoren und erkläre, wie sie zusammenwirken.", "Risikofaktoren: chronische Konflikte in der Familie, Armut. Schutzfaktoren: soziale Unterstützung, ein positives Selbstbild. Schutzfaktoren können Risiken abpuffern, sodass ein Kind trotz Belastung stabil bleibt (Resilienz)."]},
+t12_2_1:{tz:"Persönlichkeitsmerkmale zuordnen",tf:"Stabil und veränderbar",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Stabilität=Merkmale bleiben über Zeit und Situationen relativ gleich", "Veränderbarkeit=Die Persönlichkeit kann sich durch Erfahrungen verändern", "Einzigartigkeit=Jeder Mensch hat eine individuelle Kombination von Merkmalen"]],
+ f:["F", "Erkläre, warum Persönlichkeit zugleich stabil und veränderbar ist.", "Wichtige Merkmale bleiben über längere Zeit und viele Situationen recht ähnlich (Stabilität). Dennoch kann sich die Persönlichkeit durch neue Erfahrungen, Beziehungen und Lebensereignisse verändern."]},
+t12_2_2:{tz:"Big Five zuordnen",tf:"Person beschreiben",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Extraversion=Geselligkeit und Aktivität", "Gewissenhaftigkeit=Ordnung und Zuverlässigkeit", "Neurotizismus=Emotionale Labilität und Ängstlichkeit", "Offenheit=Interesse an Neuem, Kunst und Ideen"]],
+ f:["F", "Beschreibe eine Person mit hoher Gewissenhaftigkeit und niedriger Extraversion.", "Sie ist ordentlich, zuverlässig und plant sorgfältig, ist aber eher zurückhaltend und ruhig und braucht weniger Geselligkeit."]},
+t12_2_3:{tz:"Rogers ergänzen",tf:"Bewertungsbedingungen erklären",
+ z:["L", "Nach Rogers will jeder Mensch sich entfalten; diese Kraft heißt ___. Anerkennung nur bei erwünschtem Verhalten nennt man ___.", ["Aktualisierungstendenz", "Bewertungsbedingungen"], ["Selbstwirksamkeit"]],
+ f:["F", "Erkläre, wie Bewertungsbedingungen die Entwicklung eines Kindes beeinflussen können.", "Wenn ein Kind Zuwendung nur bei erwünschtem Verhalten bekommt, übernimmt es fremde Maßstäbe und verliert den Zugang zu seinem eigenen Erleben. Bedingungslose Wertschätzung dagegen fördert die Entfaltung."]},
+t12_2_4:{tz:"Selbstkonzept zuordnen",tf:"Inkongruenz am Beispiel",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Realselbst=Wie ich mich selbst wahrnehme", "Idealselbst=Wie ich gern sein möchte", "Kongruenz=Real- und Idealselbst sowie Erleben stimmen überein", "Inkongruenz=Erleben und Selbstbild passen nicht zusammen"]],
+ f:["F", "Was kann Inkongruenz beim Menschen auslösen? Gib ein Beispiel.", "Inkongruenz löst Angst und Abwehr aus, Erfahrungen werden verzerrt oder verleugnet. Beispiel: Eine Schülerin hält sich für unbegabt und führt ihre guten Noten auf Zufall zurück."]},
+t12_2_5:{tz:"Erwartungen zuordnen",tf:"Erwartungen unterscheiden",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Selbstwirksamkeitserwartung=„Ich schaffe das, auch wenn es schwer wird.“", "Ergebniserwartung=„Wenn ich lerne, bestehe ich die Prüfung.“", "Überzeugungen=Annahmen darüber, was man selbst kann und was Handlungen bewirken"]],
+ f:["F", "Erkläre den Unterschied zwischen Selbstwirksamkeits- und Ergebniserwartung an einem Beispiel.", "Selbstwirksamkeit: „Ich traue mir zu, das Referat zu halten.“ Ergebniserwartung: „Wenn ich gut referiere, bekomme ich eine gute Note.“ Man kann ein Ergebnis für wahrscheinlich halten und sich die Handlung trotzdem nicht zutrauen."]},
+t12_2_6:{tz:"Selbstregulation ordnen",tf:"Quellen der Selbstwirksamkeit",
+ z:["R", "Bringe die Schritte der Selbstregulation in eine sinnvolle Reihenfolge.", ["Das eigene Verhalten beobachten", "Das Verhalten mit einem Ziel oder Maßstab vergleichen und bewerten", "Auf Grundlage der Bewertung das Verhalten steuern", "Bei Erfolg wächst die Selbstwirksamkeit"]],
+ f:["F", "Nenne zwei Quellen, durch die sich Selbstwirksamkeit verändern kann, und erkläre eine davon.", "Eigene Erfolgserfahrungen (die stärkste Quelle) und stellvertretende Erfahrungen, wenn man sieht, dass jemand Ähnliches Erfolg hat. Erfolgserlebnisse zeigen: Ich kann das."]},
+t12_2_7:{tz:"Identitätszustände zuordnen",tf:"Moratorium am Beispiel",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Diffuse Identität=Weder Erkundung noch feste Festlegung", "Übernommene Identität=Festlegung ohne eigene Erkundung", "Moratorium=Aktive Erkundung ohne feste Festlegung", "Erarbeitete Identität=Erkundung und feste Festlegung"]],
+ f:["F", "Beschreibe an einem Beispiel aus dem Jugendalter, was ein Moratorium ist.", "Eine Jugendliche probiert verschiedene Nebenjobs, Hobbys und Interessen aus, ohne sich schon auf einen Berufsweg festzulegen: Sie erkundet aktiv, hat sich aber noch nicht verpflichtet."]},
+t12_3_1:{tz:"Arbeitsfelder zuordnen",tf:"Angebote nennen",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Sozialhilfe=Existenzsicherung bei Bedürftigkeit", "Kinder- und Jugendhilfe=Jugendamt und Hilfen zur Erziehung", "Altenhilfe=Beratung und Unterstützung für ältere Menschen", "Gesundheitshilfe=Beratung bei Sucht oder Krankheit"]],
+ f:["F", "Nenne zwei Aufgabenbereiche Sozialer Arbeit und je ein Beispiel für ein Angebot.", "Kinder- und Jugendhilfe: zum Beispiel Hilfen zur Erziehung durch das Jugendamt. Altenhilfe: zum Beispiel Beratung und Unterstützung für ältere Menschen."]},
+t12_3_2:{tz:"Konzeptschritte ordnen",tf:"Analyse erklären",
+ z:["R", "Bringe die Schritte des verhaltensorientierten Konzepts der Einzelhilfe in die richtige Reihenfolge.", ["Analyse des Problemverhaltens und seiner Bedingungen", "Planung von Zielen und Maßnahmen", "Verhaltensmodifikation durchführen", "Evaluation: Zielerreichung überprüfen"]],
+ f:["F", "Erkläre, was in der Analyse des verhaltensorientierten Konzepts geklärt wird.", "Es wird beschrieben, welches Problemverhalten auftritt und unter welchen Bedingungen: Wann und wo tritt es auf, was geht voraus, welche Folgen hat es?"]},
+t12_3_3:{tz:"Life-Model-Begriffe zuordnen",tf:"Lebensstress erklären",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Transaktion=Wechselseitiger Austausch zwischen Mensch und Umwelt", "Coping=Der Umgang mit Stress und Belastungen", "Lebensstress=Belastung durch Lebensübergänge, Umweltforderungen und zwischenmenschliche Prozesse", "Ressourcen=Stärken und Hilfen, die bei der Bewältigung unterstützen"]],
+ f:["F", "Erkläre mit dem Life Model, wie Lebensstress entsteht und was beim Bewältigen helfen kann.", "Lebensstress entsteht, wenn die Anforderungen aus Lebensübergängen oder der Umwelt größer erscheinen als die vorhandenen Ressourcen. Beim Bewältigen (Coping) helfen persönliche Stärken und Unterstützung aus dem Umfeld."]},
+t12_3_4:{tz:"Lebenswelt zuordnen",tf:"Lebensweltorientierung erklären",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Erfahrene Zeit=Wie jemand Vergangenheit, Gegenwart und Zukunft erlebt", "Erfahrener Raum=Wie jemand seine räumliche Umgebung erlebt", "Soziale Bezüge=Beziehungen zu Familie, Freunden und Nachbarn"]],
+ f:["F", "Erkläre, was Lebensweltorientierung in der Sozialen Arbeit bedeutet.", "Die Hilfe knüpft an die Alltagswelt der Menschen an: Wie erleben sie ihre Zeit, ihren Raum und ihre sozialen Beziehungen? Ziel ist Hilfe zur Selbsthilfe."]},
+t12_3_5:{tz:"Handlungsmaximen zuordnen",tf:"Maximen anwenden",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Prävention=Probleme vorbeugen, bevor sie entstehen", "Regionalisierung=Angebote sind wohnortnah erreichbar", "Partizipation=Betroffene werden beteiligt", "Vernetzung=Verschiedene Hilfen und Einrichtungen arbeiten zusammen"]],
+ f:["F", "Wähle zwei Handlungsmaximen nach Thiersch und erkläre, wie eine Beratungsstelle sie umsetzen kann.", "Regionalisierung: Die Beratungsstelle liegt im Stadtteil und ist leicht erreichbar. Partizipation: Die Ratsuchenden werden an Entscheidungen beteiligt und bestimmen die Hilfeziele mit."]},
+t12_4_1:{tz:"Organon-Modell zuordnen",tf:"Begriffe abgrenzen",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Ausdruck (Symptom)=Das Zeichen zeigt etwas über den Sender", "Appell (Signal)=Das Zeichen wirkt auf den Empfänger", "Darstellung (Symbol)=Das Zeichen bezieht sich auf Gegenstände und Sachverhalte"]],
+ f:["F", "Erkläre den Unterschied zwischen sozialer Kommunikation und sozialer Interaktion.", "Soziale Kommunikation ist der Austausch von Informationen zwischen Menschen. Soziale Interaktion ist das wechselseitige, aufeinander bezogene Handeln der Beteiligten."]},
+t12_4_2:{tz:"Axiome zuordnen",tf:"Interpunktion am Beispiel",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["1. Axiom=Man kann nicht nicht kommunizieren", "2. Axiom=Jede Kommunikation hat einen Inhalts- und einen Beziehungsaspekt", "3. Axiom=Beteiligte legen unterschiedlich fest, was Ursache und was Wirkung ist"]],
+ f:["F", "Erkläre das dritte Axiom (Interpunktion von Ereignisfolgen) an einem Beispiel.", "Beide Seiten gliedern den Ablauf unterschiedlich: Er zieht sich zurück, weil sie nörgelt – sie nörgelt, weil er sich zurückzieht. Jeder sieht nur das Verhalten des anderen als Ursache."]},
+t12_4_3:{tz:"Modalitäten zuordnen",tf:"Komplementäre Beziehung",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Digitale Modalität=Sprache und Wörter", "Analoge Modalität=Mimik, Gestik und Tonfall", "Symmetrische Beziehung=Die Partner sind gleichberechtigt", "Komplementäre Beziehung=Die Rollen ergänzen sich, Unterschiede werden betont"]],
+ f:["F", "Gib ein Beispiel für eine komplementäre Beziehung und erkläre, warum sie nicht automatisch schlecht ist.", "Beispiel: Erzieherin und Kind. Die Rollen ergänzen sich; das kann hilfreich sein, wenn die Rollenverteilung passt und beide sie akzeptieren."]},
+t12_4_4:{tz:"Ich-Botschaft ordnen",tf:"Ich-Botschaft formulieren",
+ z:["R", "Bringe die Bausteine einer Ich-Botschaft in eine sinnvolle Reihenfolge.", ["Das Verhalten sachlich beschreiben", "Das eigene Gefühl benennen", "Den Grund für das Gefühl nennen", "Einen Wunsch äußern"]],
+ f:["F", "Formuliere eine Ich-Botschaft für die Situation: Ein Freund kommt zum dritten Mal zu spät.", "Ich ärgere mich, wenn du zu spät kommst, weil ich dann lange warten muss und unsere Zeit knapp wird. Ich wünsche mir, dass du Bescheid sagst, wenn es später wird."]},
+t12_4_5:{tz:"Kulturelle Codes zuordnen",tf:"Missverständnis analysieren",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Normen und Werte=Zeigen, was in einer Kultur als richtig und angemessen gilt", "Verbale Codes=Sprache und Redewendungen", "Nonverbale Codes=Gestik, Mimik und Körperabstand", "Blickkontakt=Kann je nach Kultur Interesse oder Respektlosigkeit bedeuten"]],
+ f:["F", "Nenne ein Beispiel für ein kulturbedingtes Missverständnis in der Kommunikation und wie man damit umgehen kann.", "Blickkontakt gilt in manchen Kulturen als Interesse, in anderen als respektlos. Man kann nachfragen und die eigene Deutung überprüfen, statt sofort zu urteilen."]},
+t12_4_6:{tz:"Digitale Kommunikation zuordnen",tf:"Gefährdungen begegnen",
+ z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Cybermobbing=Wiederholtes Beleidigen oder Bloßstellen im Netz", "Datenmissbrauch=Persönliche Daten werden ohne Erlaubnis weitergegeben oder genutzt", "Fehlende nonverbale Signale=Mimik und Tonfall fehlen, Missverständnisse entstehen leichter"]],
+ f:["F", "Nenne zwei Gefährdungen digitaler Kommunikation und eine Möglichkeit, ihnen zu begegnen.", "Cybermobbing und Datenmissbrauch. Man kann zum Beispiel Vorfälle melden und Vertrauenspersonen einbeziehen, sparsam mit persönlichen Daten umgehen und Privatsphäre-Einstellungen nutzen."]},
+};
+// Standard-Check-Ins (5 Fragen je Thema): 2 Multiple-Choice, 1 Aufgabe mit anderem Typ (Zuordnung/Lückentext/Reihenfolge), 1 K-Prim-Fall, 1 Freitext. Eine in Firebase gespeicherte Fassung hat Vorrang.
 function checkinHash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function checkinMischen(arr,key){return arr.map((x,i)=>({x,h:checkinHash(key+"|"+i+"|"+String(x))})).sort((p,q)=>p.h-q.h).map(o=>o.x)}
 function checkinAusBank(id){
  const b=CHECKIN_12[id];if(!b)return[];
- return b.map((q,qi)=>{
-  const tag=(CHECKIN_TAGS_12[id]||[])[qi]||"";
+ const n=CHECKIN_NEU[id],t=CHECKIN_TAGS_12[id]||[];
+ const items=n?[b[0],b[1],n.z,b[4],n.f]:b;
+ const tags=n?[t[0],t[1],n.tz,t[4],n.tf]:t;
+ return items.map((q,qi)=>{
+  const tag=tags[qi]||"";
   if(q[0]==="K")return{typ:"kprim",text:q[1],tag,statements:q[2].map(s=>({text:s.slice(1),correct:s[0]==="+"}))};
+  if(q[0]==="Z")return{typ:"zuordnung",text:q[1],tag,paare:q[2].map(p=>{const k=p.indexOf("=");return{l:p.slice(0,k),r:p.slice(k+1)}})};
+  if(q[0]==="L")return{typ:"lueckentext",text:q[1],tag,loesung:q[2],woerter:checkinMischen(q[2].concat(q[3]||[]),q[1])};
+  if(q[0]==="R")return{typ:"reihenfolge",text:q[1],tag,schritte:q[2]};
+  if(q[0]==="F")return{typ:"frei",text:q[1],tag,musterantwort:q[2]};
   const opts=q.slice(1).map((t,i)=>({t,r:i===0}));
   const k=checkinHash(q[0])%opts.length;
   const o=opts.slice(k).concat(opts.slice(0,k));
@@ -2919,10 +3007,8 @@ async function getBasischeckFragen(wocheId){
 }
 function basischeckTypToggle(i){
  const typ=$(`bcTyp${i}`)?.value;
- const mc=$(`bcMcBereich${i}`),kp=$(`bcKprimBereich${i}`),of=$(`bcOffenBereich${i}`);
- if(mc)mc.style.display=typ==="mc"?"block":"none";
- if(kp)kp.style.display=typ==="kprim"?"block":"none";
- if(of)of.style.display=typ==="offen"?"block":"none";
+ const m={mc:"bcMcBereich",kprim:"bcKprimBereich",offen:"bcOffenBereich",zuordnung:"bcZBereich",lueckentext:"bcLBereich",reihenfolge:"bcRBereich",frei:"bcFBereich"};
+ Object.keys(m).forEach(k=>{const el=$(`${m[k]}${i}`);if(el)el.style.display=typ===k?"block":"none"});
 }
 window.basischeckTypToggle=basischeckTypToggle;
 async function saveBasischeckFragen(fach,wocheId){
@@ -2949,12 +3035,29 @@ async function saveBasischeckFragen(fach,wocheId){
  const stichworte=($(`bcStichworte${i}`)?.value||"").split(",").map(s=>s.trim()).filter(Boolean);
  if(!stichworte.length)continue;
  fragen.push({typ,text,stichworte});
+ }else if(typ==="zuordnung"){
+ const paare=($(`bcPaare${i}`)?.value||"").split("\n").map(z=>{const k=z.indexOf("=");return k>0?{l:z.slice(0,k).trim(),r:z.slice(k+1).trim()}:null}).filter(p=>p&&p.l&&p.r).slice(0,5);
+ if(paare.length<2){toast(`Frage ${i+1}: Zuordnung braucht mindestens 2 Zeilen der Form „Begriff = Beschreibung“.`);continue}
+ fragen.push({typ,text,paare});
+ }else if(typ==="lueckentext"){
+ const loesung=($(`bcLoesung${i}`)?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
+ const extra=($(`bcExtra${i}`)?.value||"").split(",").map(x=>x.trim()).filter(Boolean);
+ const luecken=(text.match(/___/g)||[]).length;
+ if(!luecken||luecken!==loesung.length){toast(`Frage ${i+1}: Der Text braucht genau so viele ___ wie gesuchte Wörter (${loesung.length}).`);continue}
+ fragen.push({typ,text,loesung,woerter:checkinMischen(loesung.concat(extra),text)});
+ }else if(typ==="reihenfolge"){
+ const schritte=($(`bcSchritte${i}`)?.value||"").split("\n").map(x=>x.trim()).filter(Boolean).slice(0,6);
+ if(schritte.length<3){toast(`Frage ${i+1}: Reihenfolge braucht mindestens 3 Schritte (je eine Zeile, in richtiger Reihenfolge).`);continue}
+ fragen.push({typ,text,schritte});
+ }else if(typ==="frei"){
+ fragen.push({typ,text,musterantwort:($(`bcMuster${i}`)?.value||"").trim()});
  }
  }
  if(!fragen.length){toast("Bitte mindestens eine vollständige Frage eingeben.");return}
  try{
  await setDoc(doc(db,"basischeckFragen",wocheId),{wocheId,fach,fragen,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
  toast("Basis-Check gespeichert.");
+ if($("ciAnsicht")){await openCheckIn(wocheId);return}
  await reopenDetail(fach,wocheId);
  }catch(e){console.error("Basis-Check speichern:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
 }
@@ -2968,7 +3071,7 @@ async function getMyBasischeckVersuch(wocheId){
 function basischeckAmpel(richtig,gesamt){
  if(gesamt<=0)return null;
  const q=richtig/gesamt;
- if(q>=0.8)return"gruen";
+ if(q>=0.75)return"gruen";
  if(q>=0.4)return"orange";
  return"rot";
 }
@@ -2999,21 +3102,44 @@ function basischeckGradeFrage(f,i){
  const treffer=f.stichworte.every(w=>text.toLowerCase().includes(w.toLowerCase()));
  return {beantwortet:true,richtig:treffer,antwort:text};
  }
+ if(typ==="zuordnung"){
+ const w=f.paare.map((p,j)=>document.querySelector(`#bcZ${i}_${j}`)?.value||"");
+ const ok=w.every(Boolean);
+ return {beantwortet:ok,richtig:ok&&w.every((v,j)=>v===String(j)),antwort:w.map(v=>v===""?"-":v).join(",")};
+ }
+ if(typ==="lueckentext"){
+ const w=f.loesung.map((l,j)=>document.querySelector(`#bcL${i}_${j}`)?.value||"");
+ const ok=w.every(Boolean);
+ return {beantwortet:ok,richtig:ok&&w.every((v,j)=>v===f.loesung[j]),antwort:w.map(v=>v||"-").join("|")};
+ }
+ if(typ==="reihenfolge"){
+ const w=f.schritte.map((x,j)=>document.querySelector(`#bcR${i}_${j}`)?.value||"");
+ const ok=w.every(Boolean)&&new Set(w).size===w.length;
+ return {beantwortet:ok,richtig:ok&&w.every((v,j)=>v===String(j+1)),antwort:w.map(v=>v||"-").join(",")};
+ }
+ if(typ==="frei"){
+ const text=($(`bcFrei${i}`)?.value||"").trim();
+ return {beantwortet:text.length>=10,richtig:false,antwort:text,frei:true};
+ }
  return {beantwortet:false,richtig:false,antwort:null};
 }
 async function submitBasischeck(fach,wocheId){
  const fragen=await getBasischeckFragen(wocheId);
  if(!fragen.length){toast("Keine Fragen vorhanden.");return}
  const ergebnisse=fragen.map((f,i)=>basischeckGradeFrage(f,i));
- if(ergebnisse.some(e=>!e.beantwortet)){toast("Bitte alle Fragen beantworten.");return}
- const richtig=ergebnisse.filter(e=>e.richtig).length;
- const ampel=basischeckAmpel(richtig,fragen.length);
+ const fehlt=ergebnisse.findIndex(e=>!e.beantwortet);
+ if(fehlt>=0){toast(fragen[fehlt].typ==="frei"?"Bitte schreibe bei der Freitext-Aufgabe mindestens einen Satz.":"Bitte alle Fragen beantworten.");return}
+ const gewertet=ergebnisse.filter(e=>!e.frei);
+ const richtig=gewertet.filter(e=>e.richtig).length;
+ const gesamt=gewertet.length;
+ const ampel=basischeckAmpel(richtig,gesamt);
  try{
  await setDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${wocheId}`),{
- uid:currentUser.uid,wocheId,fach,antworten:ergebnisse.map(e=>e.antwort),richtig,gesamt:fragen.length,ampel,
+ uid:currentUser.uid,wocheId,fach,antworten:ergebnisse.map(e=>e.antwort),richtig,gesamt,ampel,
  name:anzeigeName(profile,currentUser),createdAt:serverTimestamp()
  });
- toast(`${richtig} von ${fragen.length} richtig.`);
+ toast(`${richtig} von ${gesamt} richtig.`);
+ if($("ciAnsicht")){await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),{uid:currentUser.uid,wocheId,fach,basischeckErledigt:true,updatedAt:serverTimestamp()},{merge:true}).catch(e=>console.error(e));ppDirty=true;await openCheckIn(wocheId);if(ampel==="gruen")showMotivationsBild(false,"lernen","bc:"+wocheId);return}
  if(lehrplanWocheById(fach,wocheId)?.typ==="apt"){await aptSetzen(wocheId,{basischeckErledigt:true},{tab:"basischeck"});return}
  await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),{uid:currentUser.uid,wocheId,fach,basischeckErledigt:true,updatedAt:serverTimestamp()},{merge:true}).catch(e=>console.error(e));
  await reopenDetail(fach,wocheId);
@@ -5416,7 +5542,7 @@ async function renderPPModulplan(){
  const vergangen=SCHULWOCHEN_12.filter(w=>w.end<heute).length,jahrProz=Math.round(vergangen/SCHULWOCHEN_12.length*100);
  const blockWochen=ppmZeitleiste().filter(z=>z.art==="block").reduce((n,z)=>n+z.n,0);
  const zeitBox=`<div class="ppm-box ppm-zeitbox"><h2>Zeitstruktur</h2>
-  <p>Pro Schulwoche stehen <b>${PPM_STD_PRO_WOCHE} Unterrichtsstunden</b> (je ${PPM_MIN_PRO_STUNDE} Minuten) zur Verfügung. In den <b>Praktikumsblöcken (fpA)</b> und in den Ferien ist kein Unterricht, dort lässt sich nichts planen. Das Schuljahr hat <b>${SCHULWOCHEN_12.length} Schulwochen</b> (${blockWochen} Wochen Praktikum und Ferien dazwischen).</p>
+  <p>Pro Schulwoche stehen <b>${PPM_STD_PRO_WOCHE} Unterrichtsstunden</b> (je ${PPM_MIN_PRO_STUNDE} Minuten) zur Verfügung. In den Ferien ist kein Unterricht, dort lässt sich nichts planen. Das Schuljahr hat <b>${SCHULWOCHEN_12.length} Schulwochen</b> (Ferien dazwischen).</p>
   <div class="ppm-balken"><span><b>Verplant:</b> ${ppmStd(belegt)} von ${ppmStd(gesamt)} Unterrichtsstunden (${proz} %)</span><div class="ppm-bar" role="progressbar" aria-valuenow="${proz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${proz}%"></i></div></div>
   <div class="ppm-balken"><span><b>Schuljahr:</b> ${vergangen} von ${SCHULWOCHEN_12.length} Schulwochen vorbei (${jahrProz} %)</span><div class="ppm-bar ppm-bar-jahr" role="progressbar" aria-valuenow="${jahrProz}" aria-valuemin="0" aria-valuemax="100"><i style="width:${jahrProz}%"></i></div></div>
   <div class="ppm-leg"><span><i style="background:#3d8fd0"></i>Woche teilweise belegt</span><span><i style="background:#3fa66a"></i>Woche voll (6,3 Stunden)</span><span><i style="background:#d9534f"></i>Woche überbucht</span><span>🏫 🏥 Praktikum (gesperrt)</span><span>🌴 Ferien (gesperrt)</span></div></div>`;
@@ -5503,7 +5629,7 @@ async function ppmDialog(id,typ,woche,opt){
  if(t==="kprim"){try{checkouts=(await ladeCheckoutDaten()).checkouts||[];}catch(e){}}
  const ea=t==="selbstlern"?await ppmEaListe():[];
  const bfT=t==="blockfall"?await ppmBlockfallThemen():[];
- const lb0=bearb?bearb.lb:(projekt?projekt.lb:1);
+ const lb0=bearb?bearb.lb:(projekt?projekt.lb:(opt.lb||1));
  const lbOpt=[1,2,3,4].map(n=>`<option value="${n}"${n===lb0?" selected":""}>Lernbereich ${n} · ${esc((PP12_LB[n]||{}).titel||"")}</option>`).join("");
  const ph0=KW_PHASEN.find(p=>p.lbNum===lb0);
  const dauer0=bearb?ppmDauerKey(bearb):PPM_DAUER_STANDARD[t];
@@ -5545,27 +5671,28 @@ async function ppmDialog(id,typ,woche,opt){
   const aktuell=bearb&&String(bearb.kursId||"").startsWith("ea:")?bearb.kursId.slice(3):"";
   const passend=ea.filter(e=>e.art==="selbstlern"||e.id===aktuell).sort((x,y)=>(x.lb||9)-(y.lb||9)||String(x.titel).localeCompare(String(y.titel),"de"));
   const lbGruppen=[...new Set(passend.map(e=>e.lb||0))];
-  const eaOpt=lbGruppen.map(n=>`<optgroup label="${n?"Lernbereich "+n:"Lernbereich offen"}">${passend.filter(e=>(e.lb||0)===n).map(e=>`<option value="ea:${esc(e.id)}" data-lb="${e.lb||""}"${bearb&&bearb.kursId==="ea:"+e.id?" selected":""}>${esc(ppmBez(e.titel||e.id,e.art,e.lb))}${e.entwurf?" (Entwurf)":""}</option>`).join("")}</optgroup>`).join("");
+  const eaOpt=lbGruppen.map(n=>`<optgroup label="${n?"Lernbereich "+n:"Lernbereich offen"}">${passend.filter(e=>(e.lb||0)===n).map(e=>`<option value="ea:${esc(e.id)}" data-lb="${e.lb||""}"${(bearb&&bearb.kursId==="ea:"+e.id)||(!bearb&&opt.kurs==="ea:"+e.id)?" selected":""}>${esc(ppmBez(e.titel||e.id,e.art,e.lb))}${e.entwurf?" (Entwurf)":""}</option>`).join("")}</optgroup>`).join("");
   extra=`<label>Kurs (nur Selbstlernkurse)<select id="ppmKurs">
    ${eaOpt}
    <optgroup label="Weitere">${alt?`<option value="psych-gegenstand" selected>${esc(PPM_KURSE["psych-gegenstand"].titel)} (Kurzfassung von Claude)</option>`:""}<option value="eigen"${bearb&&bearb.kursId==="eigen"?" selected":""}>Eigener Kurs (selbst gestalten)</option></optgroup></select></label>
    <p style="font-size:13px;color:var(--muted);margin:0">${passend.length?"Hier erscheinen nur Selbstlernkurse. Weitere fertige Inhalte kommen automatisch dazu, sobald ihre Datei im Ordner einarbeitung/inhalte im Repo liegt.":"Noch keine fertigen Selbstlernkurse gefunden. Du kannst einen eigenen Kurs gestalten."}</p>`;
  }
  modal(`<button class="modal-close" onclick="closeModal()">×</button>
-  <div class="kicker">${T.icon} ${esc(T.kurz.toUpperCase())}</div><h2>${bearb?"Modul bearbeiten":esc(T.name)}</h2>
-  <div class="form">
-   <label>Lernbereich<select id="ppmLb"${projekt?" disabled":""}>${lbOpt}</select></label>
-   <label>Titel<input id="ppmTitel" maxlength="120" value="${esc(bearb?bearb.titel:"")}" placeholder="${esc(t==="projekt"&&ph0?ph0.titel:(t==="experiment"?"Das Experiment":T.name))}"></label>
+  <div class="kicker">${T.icon} ${esc(T.kurz.toUpperCase())}</div><h2>${bearb?"Modul bearbeiten":esc(T.name)}</h2>${opt.einfach&&opt.themaTitel?`<p class="ppm-fuer">Für das Thema <b>${esc(opt.themaTitel)}</b></p>`:""}
+  <div class="form ppm-form${opt.einfach?" ppm-einfach":""}">
+   <label class="ppm-opt">Lernbereich<select id="ppmLb"${projekt?" disabled":""}>${lbOpt}</select></label>
+   <label class="ppm-opt">Titel<input id="ppmTitel" maxlength="120" value="${esc(bearb?bearb.titel:"")}" placeholder="${esc(t==="projekt"&&ph0?ph0.titel:(t==="experiment"?"Das Experiment":T.name))}"></label>
    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label>Beginn (Schulwoche)<select id="ppmStart">${wochenOpt}</select></label>
    <label>Dauer<select id="ppmDauer">${dauerOpt}</select></label></div>
    <div id="ppmKapa" class="ppm-kapahint"></div>
    ${extra}
-    <details class="ppm-details"${(bearb&&(bearb.themen||[]).length)||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen gehört der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${KW_THEMEN.map(e=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${e.id}"${((bearb&&bearb.themen)||[]).includes(e.id)||window.__kwThemaNeu===e.id?" checked":""}> LB ${e.lbNum} · Nr. ${esc(e.nr)} · ${esc(kwKurz(e))}</label>`).join("")}</div></details>
-   <label>Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
-   <div id="ppmMatBox" class="ppm-matbox"></div>
+    <details class="ppm-details ppm-opt"${(bearb&&(bearb.themen||[]).length)||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen gehört der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${KW_THEMEN.map(e=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${e.id}"${((bearb&&bearb.themen)||[]).includes(e.id)||window.__kwThemaNeu===e.id?" checked":""}> LB ${e.lbNum} · Nr. ${esc(e.nr)} · ${esc(kwKurz(e))}</label>`).join("")}</div></details>
+   <label class="ppm-opt">Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
+   <div id="ppmMatBox" class="ppm-matbox ppm-opt"></div>
    <div class="form-actions">${bearb?`<button class="secondary" type="button" id="ppmLoeschen">Modul löschen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
   </div>`);
  const lbSel=$("ppmLb"),ti=$("ppmTitel"),btn=$("ppmSpeichern");
+ if(opt.einfach){const f=document.querySelector(".ppm-form"),a=document.createElement("button");a.type="button";a.className="text-button ppm-mehr";a.textContent="Weitere Einstellungen (Titel, Thema, Hinweis, Material)";a.onclick=()=>{f.classList.remove("ppm-einfach");a.remove()};f.insertBefore(a,f.querySelector(".form-actions"))}
   // ---- Material anhängen (Dateien und Links), wird beim Speichern übernommen ----
   const matBest=[...((bearb&&bearb.material)||[])];   // schon am Modul hängende Materialien
   const matNeu=[];                                     // neu hinzugefügt: {typ,titel,url} (Link) oder {typ,titel,file}
@@ -8029,57 +8156,129 @@ function kprimFrageKopfHTML(nr,stamm,vignette){
   ${vignette?`<div class="kp-vignette">${esc(vignette)}</div>`:""}
   <p class="kp-anleitung">${/beurteilen sie/i.test(stamm||"")?"":"Beurteilen Sie die folgenden Aussagen. "}${KPRIM_ANLEITUNG}</p>`;
 }
-function basischeckPanelHTML(fach,wocheId,basischeckFragen,meinBasischeck,extraSchueler=""){
- if(isTeacher())return`<div class="form">
+function basischeckReihenfolgeAnzeige(f){
+ const idx=f.schritte.map((_,k)=>k);
+ let o=idx.slice().sort((p,q)=>checkinHash(f.text+"#"+f.schritte[p])-checkinHash(f.text+"#"+f.schritte[q]));
+ if(o.every((v,k)=>v===k))o=o.slice(1).concat(o.slice(0,1));
+ return o;
+}
+function basischeckEingabeHTML(f,i,typ){
+ if(typ==="mc")return`<div class="ci-opts">${f.optionen.map((o,j)=>`<label class="ci-o"><input type="radio"name="bcQ${i}"value="${j}"><span class="ci-m"></span><span class="ci-ot">${esc(o)}</span></label>`).join("")}</div>`;
+ if(typ==="kprim")return kprimTabelleHTML(`bcKp${i}`,f.statements.map(x=>x.text));
+ if(typ==="offen")return`<textarea id="bcOffenAntwort${i}"rows="3"placeholder="Deine Antwort …"></textarea>`;
+ if(typ==="frei")return`<textarea id="bcFrei${i}"class="ci-frei"rows="4"placeholder="Schreibe ein bis zwei Sätze in deinen eigenen Worten …"></textarea><p class="ci-hinw">Diese Aufgabe wird nicht bewertet. Danach siehst du eine Musterantwort zum Vergleichen.</p>`;
+ if(typ==="zuordnung"){
+  const rs=checkinMischen(f.paare.map((p,j)=>j),f.text);
+  return`<div class="ci-zu">${f.paare.map((p,j)=>`<div class="ci-zr"><span class="ci-zl">${esc(p.l)}</span><select id="bcZ${i}_${j}"aria-label="${esc(p.l)}"><option value="">– wählen –</option>${rs.map(k=>`<option value="${k}">${esc(f.paare[k].r)}</option>`).join("")}</select></div>`).join("")}</div>`;
+ }
+ if(typ==="lueckentext"){
+  const teile=String(f.text).split("___");
+  const sel=j=>`<select class="ci-lue"id="bcL${i}_${j}"aria-label="Lücke ${j+1}"><option value="">…</option>${(f.woerter||f.loesung).map(w=>`<option value="${esc(w)}">${esc(w)}</option>`).join("")}</select>`;
+  return`<p class="ci-lt">${teile.map((t,j)=>esc(t)+(j<teile.length-1?sel(j):"")).join("")}</p>`;
+ }
+ if(typ==="reihenfolge"){
+  const o=basischeckReihenfolgeAnzeige(f),n=f.schritte.length;
+  return`<div class="ci-re"><p class="ci-hinw">Wähle bei jedem Schritt, an welcher Stelle er steht (1 = zuerst).</p>${o.map(k=>`<div class="ci-zr"><span class="ci-zl">${esc(f.schritte[k])}</span><select id="bcR${i}_${k}"aria-label="Position"><option value="">Platz …</option>${f.schritte.map((_,p)=>`<option value="${p+1}">${p+1}</option>`).join("")}</select></div>`).join("")}</div>`;
+ }
+ return"";
+}
+function basischeckFreiErgebnisHTML(fragen,mein){
+ const l=[];
+ fragen.forEach((f,i)=>{
+  if(f.typ!=="frei")return;
+  const a=(mein.antworten||[])[i];
+  l.push(`<section class="ci-q ci-fr"><div class="ci-qk"><span class="ci-n">${i+1}</span><b class="ci-t">${esc(f.text)}</b></div>
+   <div class="ci-fa"><small>Deine Antwort</small><p>${esc(a||"–")}</p></div>
+   ${f.musterantwort?`<div class="ci-fa ci-fm"><small>Musterantwort zum Vergleichen</small><p>${esc(f.musterantwort)}</p></div>`:""}</section>`);
+ });
+ return l.join("");
+}
+function basischeckEditorHTML(fach,wocheId,fragen){
+ const T=[["mc","Multiple Choice"],["kprim","K-Prim (richtig/falsch je Aussage)"],["offen","Offene Frage (Stichworte)"],["zuordnung","Zuordnung"],["lueckentext","Lückentext"],["reihenfolge","Reihenfolge"],["frei","Freitext (nicht bewertet)"]];
+ return`<div class="form">
   ${[0,1,2,3,4].map(i=>{
-   const f=basischeckFragen[i]||{};
+   const f=fragen[i]||{};
    const typ=f.typ||"mc";
+   const dis=t=>`display:${typ===t?"block":"none"};margin-top:8px`;
    return`<div class="card"style="margin-bottom:10px;background:#f7fafc">
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
-     <label style="flex:1;min-width:200px">Frage ${i+1}${i>0?" (optional)":""}<input id="bcFrage${i}"type="text"value="${esc(f.text||"")}"placeholder="z. B. Was versteht man unter …?"></label>
-     <label style="width:190px">Fragetyp<select id="bcTyp${i}"onchange="basischeckTypToggle(${i})">
-      <option value="mc"${typ==="mc"?" selected":""}>Multiple Choice</option>
-      <option value="kprim"${typ==="kprim"?" selected":""}>K-Prim (richtig/falsch je Aussage)</option>
-      <option value="offen"${typ==="offen"?" selected":""}>Offene Frage</option>
+     <label style="flex:1;min-width:200px">Frage / Aufgabe ${i+1}${i>0?" (optional)":""}<input id="bcFrage${i}"type="text"value="${esc(f.text||"")}"placeholder="z. B. Was versteht man unter …?"></label>
+     <label style="width:210px">Aufgabentyp<select id="bcTyp${i}"onchange="basischeckTypToggle(${i})">
+      ${T.map(([v,t])=>`<option value="${v}"${typ===v?" selected":""}>${t}</option>`).join("")}
      </select></label>
     </div>
-    <div id="bcMcBereich${i}"style="display:${typ==="mc"?"block":"none"};margin-top:8px">
+    <div id="bcMcBereich${i}"style="${dis("mc")}">
      <div class="grid grid-2">${[0,1,2].map(j=>`<label>Antwort ${j+1}${j>1?" (optional)":""}<input id="bcOpt${i}_${j}"type="text"value="${esc(f.optionen?.[j]||"")}"></label>`).join("")}</div>
      <label style="margin-top:6px">Richtige Antwort<select id="bcRichtig${i}">${[0,1,2].map(j=>`<option value="${j}"${f.richtig===j?" selected":""}>Antwort ${j+1}</option>`).join("")}</select></label>
     </div>
-    <div id="bcKprimBereich${i}"style="display:${typ==="kprim"?"block":"none"};margin-top:8px">
+    <div id="bcKprimBereich${i}"style="${dis("kprim")}">
      <label style="margin-bottom:8px">Fallvignette / Einleitungstext (optional – steht über der Tabelle)<textarea id="bcVignette${i}"rows="3"placeholder="z. B. kurze Fallbeschreibung, auf die sich die Aussagen beziehen">${esc(f.vignette||"")}</textarea></label>
-<p style="font-size:11px;color:var(--muted);margin:0 0 6px">Bis zu 4 Aussagen, jeweils als richtig oder falsch markieren. Nur „alles richtig" zählt als bestanden.</p>
+     <p style="font-size:11px;color:var(--muted);margin:0 0 6px">Bis zu 4 Aussagen, jeweils als richtig oder falsch markieren. Nur „alles richtig" zählt als bestanden.</p>
      ${[0,1,2,3].map(j=>{const s=f.statements?.[j]||{};return`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
       <input id="bcStatement${i}_${j}"type="text"value="${esc(s.text||"")}"placeholder="Aussage ${j+1}${j>1?" (optional)":""}"style="flex:1">
       <select id="bcStatementRichtig${i}_${j}"style="width:90px"><option value="true"${s.correct?" selected":""}>richtig</option><option value="false"${s.correct===false?" selected":""}>falsch</option></select>
      </div>`;}).join("")}
     </div>
-    <div id="bcOffenBereich${i}"style="display:${typ==="offen"?"block":"none"};margin-top:8px">
+    <div id="bcOffenBereich${i}"style="${dis("offen")}">
      <label>Erwartete Stichworte (kommagetrennt – ALLE müssen in der Antwort vorkommen)<input id="bcStichworte${i}"type="text"value="${esc((f.stichworte||[]).join(", "))}"placeholder="z. B. Sozialisation, Erziehung, Werte"></label>
+    </div>
+    <div id="bcZBereich${i}"style="${dis("zuordnung")}">
+     <label>2 bis 5 Zeilen, jeweils „Begriff = passende Beschreibung“<textarea id="bcPaare${i}"rows="4"placeholder="Erleben = Innere Vorgänge&#10;Verhalten = Beobachtbare Handlungen">${esc((f.paare||[]).map(p=>p.l+" = "+p.r).join("\n"))}</textarea></label>
+    </div>
+    <div id="bcLBereich${i}"style="${dis("lueckentext")}">
+     <p style="font-size:11px;color:var(--muted);margin:0 0 6px">Im Feld „Frage“ den ganzen Satz schreiben und jede Lücke als ___ (3 Unterstriche) markieren.</p>
+     <label>Gesuchte Wörter in der Reihenfolge der Lücken (kommagetrennt)<input id="bcLoesung${i}"type="text"value="${esc((f.loesung||[]).join(", "))}"placeholder="z. B. überprüfbar, systematischen"></label>
+     <label style="margin-top:6px">Falsche Zusatzwörter (optional, kommagetrennt)<input id="bcExtra${i}"type="text"value="${esc((f.woerter||[]).filter(w=>!(f.loesung||[]).includes(w)).join(", "))}"></label>
+    </div>
+    <div id="bcRBereich${i}"style="${dis("reihenfolge")}">
+     <label>3 bis 6 Schritte, eine Zeile pro Schritt, in der RICHTIGEN Reihenfolge (die Schüler:innen sehen sie gemischt)<textarea id="bcSchritte${i}"rows="5">${esc((f.schritte||[]).join("\n"))}</textarea></label>
+    </div>
+    <div id="bcFBereich${i}"style="${dis("frei")}">
+     <label>Musterantwort (sehen die Schüler:innen nach dem Abgeben zum Vergleichen)<textarea id="bcMuster${i}"rows="3">${esc(f.musterantwort||"")}</textarea></label>
     </div>
    </div>`;
   }).join("")}
   <button class="primary"onclick="saveBasischeckFragen('${fach}','${wocheId}')">Basis-Check speichern</button>
  </div>`;
+}
+function basischeckPanelHTML(fach,wocheId,basischeckFragen,meinBasischeck,extraSchueler=""){
+ if(isTeacher())return basischeckEditorHTML(fach,wocheId,basischeckFragen);
  if(!basischeckFragen.length)return`<div class="empty">Für diesen Inhalt wurde noch kein Basis-Check eingerichtet.</div>${extraSchueler}`;
- if(meinBasischeck)return`<div class="card"style="background:${ampelFarbe(meinBasischeck.ampel)}1a;border-left:4px solid ${ampelFarbe(meinBasischeck.ampel)}">
-  <strong>${meinBasischeck.richtig} von ${meinBasischeck.gesamt} richtig</strong>
-  <p style="margin:6px 0 0;color:var(--muted)">${esc(basischeckAmpelText(meinBasischeck.ampel))}</p>
- </div>`;
- return`<div class="form">
+ if(meinBasischeck){const af=ampelFarbe(meinBasischeck.ampel);return`<div class="ci-res"style="--a:${af}"><div class="ci-ring"><b>${meinBasischeck.richtig}</b><small>von ${meinBasischeck.gesamt}</small></div><div><strong>${meinBasischeck.richtig} von ${meinBasischeck.gesamt} richtig</strong><p>${esc(basischeckAmpelText(meinBasischeck.ampel))}</p></div></div>${basischeckFreiErgebnisHTML(basischeckFragen,meinBasischeck)}`}
+ const anz=basischeckFragen.length,min=Math.max(3,Math.round(anz*1.2));
+ const ART={mc:"Auswahl",kprim:"Richtig oder falsch",offen:"Kurzantwort",zuordnung:"Zuordnen",lueckentext:"Lückentext",reihenfolge:"Reihenfolge",frei:"Freitext"};
+ return`<div class="ci">
+  <div class="ci-kopf"><span>${anz} Aufgaben</span><span>etwa ${min} Minuten</span><span>keine Note</span></div>
   ${basischeckFragen.map((f,i)=>{
    const typ=f.typ||"mc";
-   return`<div class="card"style="margin-bottom:10px">
-    ${typ==="kprim"?kprimFrageKopfHTML(i+1,f.text,f.vignette):`<strong style="display:block;margin-bottom:8px">${i+1}. ${esc(f.text)}</strong>`}
-    ${typ==="mc"?f.optionen.map((o,j)=>`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:4px"><input type="radio"name="bcQ${i}"value="${j}"> <span>${esc(o)}</span></label>`).join(""):""}
-    ${typ==="kprim"?kprimTabelleHTML(`bcKp${i}`,f.statements.map(x=>x.text)):""}
-    ${typ==="offen"?`<textarea id="bcOffenAntwort${i}"rows="3"placeholder="Deine Antwort …"></textarea>`:""}
-   </div>`;
+   return`<section class="ci-q ci-k-${typ}">
+    ${typ==="kprim"?`<div class="ci-qk"><span class="ci-n">${i+1}</span><div class="ci-t">${kprimFrageKopfHTML("",f.text,f.vignette)}</div></div>`:`<div class="ci-qk"><span class="ci-n">${i+1}</span>${typ==="lueckentext"?`<b class="ci-t">Ergänze den Text.</b>`:`<b class="ci-t">${esc(f.text)}</b>`}</div>`}
+    <span class="ci-art">${ART[typ]||""}</span>
+    ${basischeckEingabeHTML(f,i,typ)}
+   </section>`;
   }).join("")}
-  <button class="primary"onclick="submitBasischeck('${fach}','${wocheId}')">Basis-Check abgeben</button>
+  <button class="primary ci-go"onclick="submitBasischeck('${fach}','${wocheId}')">Check-In abgeben</button>
  </div>`;
 }
+
+async function openCheckIn(wocheId){
+ const fach="paedagogik",lehrer=isTeacher();
+ const e=kwThemaById(wocheId)||lehrplanWocheById(fach,wocheId);
+ if(!e){toast("Dieses Thema wurde nicht gefunden.");return}
+ const ph=(typeof KW_PHASEN!=="undefined"&&KW_PHASEN.find(p=>p.id===e.phase))||projektPhaseByWoche(wocheId);
+ const c=ph?ppFarbe(ph):"#4a90d9";
+ const [fragen,mein]=await Promise.all([getBasischeckFragen(wocheId).catch(()=>[]),lehrer?Promise.resolve(null):getMyBasischeckVersuch(wocheId)]);
+ const lb=ph?`LB ${ph.lbNum}`:(e.lb||"");
+ modal(`<button class="modal-close"onclick="closeModal()">×</button>
+  <div id="ciAnsicht"class="ci-seite"style="--c:${c}">
+   <div class="kicker"style="color:${c}">${esc(lb)} · Check-In</div>
+   <h2>${esc(e.thema)}</h2>
+   <p class="ci-intro">${lehrer?"Lehrkraft-Ansicht: Hier bearbeitest du die Fragen. Gespeicherte Fragen ersetzen den Standard-Check-In für alle.":mein?"Dein Ergebnis:":"Was weißt du schon? Kein Test, keine Note. Du siehst danach, wo du stehst."}</p>
+   ${basischeckPanelHTML(fach,wocheId,fragen,mein)}
+   <div class="ci-fuss"><button type="button"class="secondary"onclick="closeModal()">Schließen</button></div>
+  </div>`);
+}
+window.openCheckIn=openCheckIn;
 
 // ---- Einarbeitung: interaktive Seite je Stunde (einarbeitung/inhalte/<id>.json) ----
 const einarbeitungCache={};
@@ -20381,8 +20580,8 @@ async function render(){
  glossar:renderGlossar,
  fachaufsatz:renderFachaufsatzUebersicht,"fachaufsatz-board":renderFachaufsatzBoard,
  projekte:renderProjekte,kompetenz:renderKompetenz,journal:renderLernjournalRoute,
- praktikum:renderPraktikum,resilienz:renderResilienz,praxisfragen:renderPraxisFragen,fragenhilfe:renderFragenHilfe,
- praxisprojekte:renderPraxisProjekte,ki:renderKI,kalender:renderKalender,team:renderTeam,
+ praktikum:renderKachelwand,resilienz:renderResilienz,praxisfragen:renderKachelwand,fragenhilfe:renderFragenHilfe,
+ praxisprojekte:renderKachelwand,ki:renderKI,kalender:renderKalender,team:renderTeam,
  impulse:renderLernimpulse,lernstand:renderLernstand,
  kompetenzprofil:()=>modulePlaceholder("Kompetenzprofil"),methoden:renderLernmethoden,lernstrategien:renderLernstrategienTest,metakognition:renderMetakognition,
  lerncoaching:renderLerncoaching
@@ -21468,7 +21667,8 @@ async function renderKwProjekt(){
 function kwDateiHTML(titel,url,id,wid){
  const del=isTeacher()&&id?`<button type="button" class="kw-del" data-kw="matweg" data-id="${esc(id)}" data-w="${esc(wid)}" aria-label="Löschen">×</button>`:"";
  let a;
- if(String(url||"").startsWith("board:"))a=`<button type="button" class="kw-datei" data-kw="board" data-id="${esc(url.slice(6))}"><span>${esc(titel)}</span><small>Tafel öffnen</small></button>`;
+ if(/^(uebungsbausteine|karteikarten)\//.test(String(url||"")))a=`<a class="kw-datei" href="${esc(url)}" target="_blank" rel="noopener"><span>${esc(titel)}</span><small>${/^karteikarten/.test(url)?"Karteikarten öffnen":"Übung starten"}</small></a>`;
+ else if(String(url||"").startsWith("board:"))a=`<button type="button" class="kw-datei" data-kw="board" data-id="${esc(url.slice(6))}"><span>${esc(titel)}</span><small>Tafel öffnen</small></button>`;
  else a=`<a class="kw-datei" href="${esc(url||"#")}" target="_blank" rel="noopener"><span>${esc(titel)}</span><small>${/^https?:\/\/[^/]*firebasestorage/.test(url||"")?"Datei":"Link"} öffnen</small></a>`;
  return`<div class="kw-dz">${a}${del}</div>`;
 }
@@ -21486,7 +21686,7 @@ async function renderKwThema(){
   if(k.stufen)inner=k.stufen.map(([key,l])=>`<div class="kw-stufe"><b>${esc(l)}</b>${liste(key)}${lehrer?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${key}">+ hinzufügen</button>`:""}</div>`).join("");
   else inner=`<div class="kw-dateien">${liste(k.key)}</div>`;
   let extra="";
-  
+  if(k.key==="checkin"){extra=`<div class="kw-aktionen"><button class="primary" data-kw="checkin" data-id="${esc(e.id)}">Check-In starten</button></div>`}
   return kwSekHTML(k.label,k.hint,inner,k.stufen?null:k.key,lehrer,extra);
  }).join("");
  // Variante der Lerneinheit mit Start
@@ -21547,6 +21747,9 @@ function lsUnsicher(x){
   const an=(x.antworten||[])[i],typ=f.typ||"mc";let ok;
   if(typ==="mc")ok=an===f.richtig;
   else if(typ==="kprim"){const s=String(an||"");ok=f.statements.every((st,k)=>(s[k]==="r")===st.correct)}
+  else if(typ==="zuordnung"){const p=String(an||"").split(",");ok=(f.paare||[]).every((_,k)=>p[k]===String(k))}
+  else if(typ==="lueckentext"){const p=String(an||"").split("|");ok=(f.loesung||[]).every((w,k)=>p[k]===w)}
+  else if(typ==="reihenfolge"){const p=String(an||"").split(",");ok=(f.schritte||[]).every((_,k)=>p[k]===String(k+1))}
   else return;
   if(!ok)out.push(f.tag||(String(f.text).slice(0,45)+"…"));
  });
@@ -21800,7 +22003,91 @@ async function renderKwFortschritt(){
  </div>${footer()}`;
 }
 /* ------------------------------------------------ Dateien am Thema anlegen */
+// Karteikarten-Gruppen je Thema (karteikarten/karten.js, Feld g)
+const KW_KK={t12_1_1:"Entwicklung: Anlage, Umwelt, Selbststeuerung",t12_1_2:"Psychoanalyse: Trieblehre und Instanzen",t12_1_3:"Psychoanalyse: Angst, Abwehr und Entwicklung",t12_1_4:"Psychoanalyse: Angst, Abwehr und Entwicklung",t12_1_10:"Resilienz und Vulnerabilität",t12_2_1:"Persönlichkeit und Big Five",t12_2_2:"Persönlichkeit und Big Five",t12_2_3:"Personenzentrierte Theorie (Rogers)",t12_2_4:"Personenzentrierte Theorie (Rogers)",t12_2_5:"Persönlichkeit und sozial-kognitive Theorie (Bandura)",t12_2_6:"Persönlichkeit und sozial-kognitive Theorie (Bandura)",t12_3_1:"Aufgabenbereiche der Sozialen Arbeit",t12_3_2:"Verhaltensorientiertes Konzept (VOK)",t12_3_3:"Life-Modell",t12_4_1:"Soziale Interaktion und soziale Kommunikation",t12_4_2:"Kommunikationsaxiome",t12_4_3:"Kommunikationsaxiome"};
+async function kwUbKatalog(){try{const r=await fetch("uebungsbausteine/stationen/katalog.json",{cache:"no-cache"});return r.ok?await r.json():[]}catch(e){return[]}}
+function kwWorte(t){return String(t||"").toLowerCase().replace(/[^a-zäöüß ]/g," ").split(/\s+/).filter(w=>w.length>=5)}
+// Spiele (Zuordnung, Memory, Blockfall, Lückentext, Theorievergleich) und Karteikarten für ein Thema auswählen: nach Lernbereich geordnet, ohne Termin und Dauer.
+async function kwFaPicker(kat,themaId){
+ const e=kwThemaById(themaId||activeKwThema);if(!e||!isTeacher())return;
+ const ph=KW_PHASEN.find(p=>p.id===e.phase);
+ const [vorh,ub]=await Promise.all([getDocs(query(collection(db,"lehrplanMaterialien"),where("wocheId","==",e.id))).then(sn=>sn.docs.map(d=>d.data())).catch(()=>[]),kwUbKatalog()]);
+ const schonUrl=new Set(vorh.map(x=>x.url));
+ const ew=new Set(kwWorte(e.thema));
+ const passt=t=>kwWorte(t).some(w=>ew.has(w));
+ const ubThemen=n=>[...new Set(ub.filter(x=>(x.pfad||[])[0]==="LB "+n).map(x=>x.thema))];
+ const ubZeile=x=>{const url=`uebungsbausteine/station.html?s=${x.id}`,da=schonUrl.has(url);return`<label class="check"><input type="checkbox" class="kwUbCb" value="${esc(x.id)}" data-st="${esc(x.stufe||"uebung")}"${da?" checked disabled":""}> <span><b>${esc(x.titel)}</b> <small>${[(x.pfad||[]).slice(-1)[0]||"",x.stufe==="vertiefung"?"Vertiefung":"",da?"schon hinzugefügt":""].filter(Boolean).map(esc).join(" · ")}</small></span></label>`};
+ const kkGr=KW_KK[e.id];
+ const kkZeile=n=>{const mit=n===ph.lbNum&&kkGr,url=`karteikarten/index.html?lb=${n}`+(mit?`&thema=${encodeURIComponent(kkGr)}`:""),t=`LB ${n} · ${mit?kkGr:"Alle Themen"} · Karteikarten`,da=schonUrl.has(url);return`<label class="check"><input type="checkbox" class="kwKkCb" value="${esc(url)}" data-t="${esc(t)}"${da?" checked disabled":""}> <span><b>${esc(t)}</b> <small>${da?"schon hinzugefügt":"Begriffe und Definitionen zum Üben"}</small></span></label>`};
+ const lbGr=n=>{
+  const ut=ubThemen(n),lt=(KW_PHASEN.find(p=>p.lbNum===n)||{}).lbTitel||"";
+  const ubHtml=ut.sort((a,b)=>(n===ph.lbNum?(passt(b)-passt(a)):0)).map(t=>`<div class="kw-fa-gr" style="--k:#8460b8"><b class="fa-lbkopf">Spiele und Übungen: ${esc(t)}</b>${ub.filter(x=>(x.pfad||[])[0]==="LB "+n&&x.thema===t).map(ubZeile).join("")}</div>`).join("");
+  return`<details class="fa-lbgr kw-fa-lb" data-lb="${n}"${n===ph.lbNum?" open":""}><summary><b>Lernbereich ${n}</b> ${esc(lt)}<small>${ub.filter(x=>(x.pfad||[])[0]==="LB "+n).length} Spiele</small></summary>
+   <div class="kw-fa-gr" style="--k:#3a7fd0"><b class="fa-lbkopf">Karteikarten</b>${kkZeile(n)}</div>
+   ${ut.length?`<h4 class="kw-fa-h">Spiele, Zuordnungen und Vertiefungen</h4>${ubHtml}`:""}
+  </details>`;
+ };
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">${esc(kwKurz(e)).toUpperCase()}</div><h2>Übungen und Vertiefungen auswählen</h2>
+  <p style="color:var(--muted);margin:0 0 8px">Kreuze an, was bei diesem Thema erscheinen soll: Spiele (Zuordnung, Memory, Blockfall, Lückentext, Theorievergleich) und Karteikarten. Sortiert nach Lernbereich.</p>
+  <div class="form kw-fa-pick">${[1,2,3,4].map(lbGr).join("")}
+  ${kat?`<button type="button" class="text-button" id="kwFaDatei">Stattdessen eine eigene Datei oder einen Link hinzufügen</button>`:""}
+  <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button><button class="primary" id="kwFaSave">Hinzufügen</button></div></div>`);
+ if(kat)$("kwFaDatei").onclick=()=>kwMatFormDatei(kat);
+ $("kwFaSave").onclick=async()=>{
+  const ubs=[...document.querySelectorAll(".kwUbCb:checked:not(:disabled)")].map(c=>({id:c.value,st:c.dataset.st}));
+  const kks=[...document.querySelectorAll(".kwKkCb:checked:not(:disabled)")].map(c=>({url:c.value,t:c.dataset.t}));
+  const n=ubs.length+kks.length;
+  if(!n){toast("Bitte mindestens einen Eintrag ankreuzen.");return}
+  const basis={wocheId:e.id,fach:"paedagogik",dateiName:"",createdBy:currentUser.uid};
+  try{
+   // Vertiefungen landen immer bei den Vertiefungsaufgaben: Lückentext = Stufe 1, Theorievergleich = Stufe 2
+   const katUb=kt=>(kat&&/^vertiefung\d$/.test(kat))?kat:(kt.stufe==="vertiefung"?(/Lückentext/.test((kt.pfad||[]).slice(-1)[0]||"")?"vertiefung1":"vertiefung2"):"uebung");
+   for(const x of ubs){const kt=ub.find(y=>y.id===x.id);
+    await addDoc(collection(db,"lehrplanMaterialien"),{...basis,kategorie:katUb(kt),titel:kt.titel,url:`uebungsbausteine/station.html?s=${x.id}`,createdAt:serverTimestamp()})}
+   for(const x of kks)await addDoc(collection(db,"lehrplanMaterialien"),{...basis,kategorie:(kat&&/^vertiefung\d$/.test(kat))?kat:"uebung",titel:x.t,url:x.url,createdAt:serverTimestamp()});
+   closeModal();toast(n===1?"Hinzugefügt.":n+" Einträge hinzugefügt.");render();
+  }catch(err){console.error(err);toast("Konnte nicht gespeichert werden.")}
+ };
+}
+window.kwFaPicker=kwFaPicker;
+// Thema → „Baustein einplanen“: alle Bausteine sofort sichtbar, ein Klick öffnet die kurze Einplanung.
+async function kwBausteinWahl(themaId){
+ if(!isTeacher())return;
+ const e=kwThemaById(themaId);if(!e)return;
+ const ph=KW_PHASEN.find(p=>p.id===e.phase)||KW_PHASEN[0];
+ const woche=ph.startSw||null;
+ const FARBE={selbstlern:"#1f8ea3",kprim:"#e08a2e",rallye:"#8460b8",uebung:"#4f9a35",apt:"#3a7fd0",blockfall:"#d4577f"};
+ const karte=(typ,titel,text,btn)=>`<button type="button" class="bw-k" data-typ="${typ}" style="--k:${FARBE[typ]||"#4a90d9"}"><span class="bw-t"><b>${esc(titel)}</b><small>${esc(text)}</small></span><span class="bw-b">${esc(btn||"Einplanen")}</span></button>`;
+ const T=k=>PPM_TYPEN[k];
+ const einfach=(k,txt)=>karte(k,T(k).name,txt||T(k).text);
+ modal(`<button class="modal-close" onclick="closeModal()">×</button>
+  <div class="kicker">BAUSTEIN EINPLANEN</div><h2>${esc(kwKurz(e))}</h2>
+  <p style="color:var(--muted);margin:0 0 4px">Wähle einen Baustein. Danach legst du nur noch Woche und Dauer fest.</p>
+  <div class="bw">
+   <h3 class="bw-h" style="--k:#4f9a35">Üben und Vertiefen</h3>
+   ${karte("uebung","Übungen und Spiele","Zuordnung (Ziehen), Memory, Blockfall, Lückentext, Theorievergleich und Karteikarten – nach Lernbereich geordnet.","Auswählen")}
+   ${einfach("blockfall","Tetris-Lernspiel mit Begriffen und Definitionen.")}${einfach("rallye","Stationen mit Aufgaben, einzeln oder im Team, mit Punkten.")}
+   <h3 class="bw-h" style="--k:#e08a2e">Testen und Prüfen</h3>
+   ${einfach("kprim","Wochentest mit K-Prim-Aufgaben, automatisch ausgewertet.")}${einfach("apt","Prüfungsfrage, Bearbeitung und Vergleich mit der Lösung.")}
+   <h3 class="bw-h" style="--k:#1f8ea3">Selbstlernen</h3>
+   ${einfach("selbstlern","Selbstlernkurs auswählen.")}
+  </div>
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button></div>`);
+ document.querySelectorAll(".bw-k").forEach(b=>b.onclick=async()=>{
+  const typ=b.dataset.typ;
+  if(typ==="uebung"){await kwFaPicker(null,themaId);return}
+  window.__kwThemaNeu=themaId;
+  await ppmDialog(null,typ,woche,{einfach:true,lb:ph.lbNum,themaTitel:kwKurz(e)});
+ });
+}
+window.kwBausteinWahl=kwBausteinWahl;
+
 async function kwMatForm(kat){
+ if(!isTeacher())return;
+ if(!/^(uebung|vertiefung\d?)$/.test(kat))return kwMatFormDatei(kat);
+ return kwFaPicker(kat);
+}
+async function kwMatFormDatei(kat){
  const e=kwThemaById(activeKwThema);if(!e||!isTeacher())return;
  const def=KW_KAT.find(k=>k.key===kat||(k.stufen||[]).some(s=>s[0]===kat));
  const stufe=def&&def.stufen?def.stufen.find(s=>s[0]===kat):null;
@@ -21850,11 +22137,11 @@ document.addEventListener("click",async ev=>{
   else if(a==="matadd")kwMatForm(b.dataset.kat);
   else if(a==="matweg"){if(!confirm("Diese Datei wirklich entfernen?"))return;await deleteDoc(doc(db,"lehrplanMaterialien",id));toast("Entfernt.");render()}
   else if(a==="board")openWhiteboard(id);
-  else if(a==="checkin"){const e=kwThemaById(id);const fr=await getBasischeckFragen(id);if(!fr.length){toast("Für dieses Thema ist noch kein Check-In hinterlegt.");return}window.__eaRueck=null;e.typ==="apt"?openAptDetail(id,"basischeck"):openWocheDetail("paedagogik",id,"basischeck")}
+  else if(a==="checkin"){const e=kwThemaById(id);const fr=await getBasischeckFragen(id);if(!fr.length){toast("Für dieses Thema ist noch kein Check-In hinterlegt.");return}window.__eaRueck=null;openCheckIn(id)}
   else if(a==="alt"){const e=kwThemaById(id);e.typ==="apt"?openAptDetail(id):openWocheDetail("paedagogik",id)}
   else if(a==="ea"){window.__eaRueck=async()=>{await render()};openEinarbeitung(id)}
   else if(a==="modul")ppmOeffnen(id);
-  else if(a==="modulneu"){const e=kwThemaById(id),ph=KW_PHASEN.find(p=>p.id===e.phase);window.__kwThemaNeu=id;ppmTypWahl(ph.startSw)}
+  else if(a==="modulneu"){const e=kwThemaById(id),ph=KW_PHASEN.find(p=>p.id===e.phase);window.__kwThemaNeu=id;kwBausteinWahl(id)}
   else if(a==="modulwahl")kwModulWaehlen(id);
   else if(a==="projektstart"){const ph=kwPhase(b.dataset.lb);const pm=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);if(pm)ppmOeffnen(pm.id);else toast(isTeacher()?"Lege das Projekt im Unterricht-Plan über das Plus-Zeichen als Modul „Projekt“ an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}
   else if(a==="exp"){activeFach="paedagogik";openExperimentStunde(null)}
