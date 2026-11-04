@@ -5066,7 +5066,7 @@ async function pp12NaechsteStundeHtml(){
  const t=PP12_CACHE.tafeln[e.d]&&PP12_CACHE.tafeln[e.d].boardId;
  return`<section class="card"style="margin:0 0 18px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
   <div style="min-width:240px;flex:1"><div class="kicker">${e.d===heute?"HEUTE":"NÄCHSTE STUNDE"} · ${tag} ${e.d.slice(8,10)}.${e.d.slice(5,7)}.</div><h2 style="margin:4px 0 0;font-size:20px">${esc(e.t)}</h2></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="primary"href="#unterricht-pp"style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;font-weight:700">Zur Wochenplanung PP</a>${t?`<button class="secondary"type="button"onclick="pp12Tafel('${e.d}')">Roter Faden öffnen</button>`:""}</div></section>`;
+  <div style="display:flex;gap:8px;flex-wrap:wrap">${t?`<button class="secondary"type="button"onclick="pp12Tafel('${e.d}')">Roter Faden öffnen</button>`:""}</div></section>`;
 }
 
 // ---- Didaktik-Kompass (Orientierung für Lehrkräfte) ----
@@ -21724,8 +21724,8 @@ async function renderKachelwand(){
  const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
  const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#DCE9F5" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#3A8FD4" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
  const links=lehrer
-  ?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände und Check-outs</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Startseite</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
-  :`<button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button><button class="secondary" onclick="go('unterricht-pp')">Unterricht-Plan</button><button class="secondary" onclick="go('news')">Startseite</button>`;
+  ?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände und Check-outs</button><button class="secondary" onclick="go('news')">Startseite</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
+  :`<button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button><button class="secondary" onclick="go('news')">Startseite</button>`;
  return`<div class="kw" id="kwRoot">
   ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Lernlandkarte","Dein Weg durch das Schuljahr: vier Lernbereiche mit Projekt, Themen und Bausteinen.")}
   <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
