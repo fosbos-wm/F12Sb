@@ -1,4 +1,4 @@
-let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment, writeBatch; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = fbImportMitWiederholung("./firebase-local.js?v=20261016a").then((fbMod)=>{ const appMod=fbMod, authMod=fbMod, fsMod=fbMod, storageMod={getStorage:fbMod.getStorage,ref:fbMod.ref,uploadBytes:fbMod.uploadBytes,getDownloadURL:fbMod.getDownloadURL,deleteObject:fbMod.deleteObject}; ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile,deleteUser}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment,writeBatch}=fsMod); getDoc=fsLeseMitWiederholung(getDoc); getDocs=fsLeseMitWiederholung(getDocs); ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db){ try{ db=fbMod.initializeFirestore(app,{experimentalAutoDetectLongPolling:true}); }catch(e){ console.warn("Firestore-Start mit Verbindungsfallback nicht möglich, Standard wird genutzt:",e); db=getFirestore(app); } } if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }).catch(e=>{firebaseReadyPromise=null;throw e}); return firebaseReadyPromise; } /*
+let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment, writeBatch; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = fbImportMitWiederholung("./firebase-local.js?v=20261016a").then((fbMod)=>{ const appMod=fbMod, authMod=fbMod, fsMod=fbMod, storageMod={getStorage:fbMod.getStorage,ref:fbMod.ref,uploadBytes:fbMod.uploadBytes,getDownloadURL:fbMod.getDownloadURL,deleteObject:fbMod.deleteObject}; ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile,deleteUser}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment,writeBatch}=fsMod); getDoc=fsLeseMitWiederholung(getDoc); getDocs=fsLeseMitWiederholung(getDocs); {const dirty=()=>{window.__fsDirty=Date.now()};const w=f=>(...a)=>{dirty();const x=f(...a);Promise.resolve(x).then(dirty,dirty);return x};addDoc=w(addDoc);setDoc=w(setDoc);updateDoc=w(updateDoc);deleteDoc=w(deleteDoc);const wb=writeBatch;writeBatch=(...a)=>{const b=wb(...a),c=b.commit.bind(b);b.commit=()=>{dirty();const x=c();Promise.resolve(x).then(dirty,dirty);return x};return b};const gleich=(f,typ)=>{const m=new Map();return(r,...rest)=>{const k=(r&&r.type===typ&&!rest.length&&r.path)||null;if(!k)return f(r,...rest);if(m.has(k))return m.get(k);const p=Promise.resolve(f(r)).finally(()=>m.delete(k));m.set(k,p);return p}};getDoc=gleich(getDoc,"document");getDocs=gleich(getDocs,"collection");} ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db){ try{ db=fbMod.initializeFirestore(app,{experimentalAutoDetectLongPolling:true}); }catch(e){ console.warn("Firestore-Start mit Verbindungsfallback nicht möglich, Standard wird genutzt:",e); db=getFirestore(app); } } if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }).catch(e=>{firebaseReadyPromise=null;throw e}); return firebaseReadyPromise; } /*
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
@@ -2640,9 +2640,21 @@ async function deleteLehrplanProdukt(id,fach,wocheId){
 }
 
 // ---- Persönlicher Fortschritt (Ziele erfüllt, Häkchen am Zeitstrahl) ---
+// Alle eigenen Fortschrittseinträge mit EINER Abfrage laden (statt je Thema/Kurs eine) – 30 s zwischengespeichert,
+// jeder Schreibzugriff (window.__fsDirty) macht den Zwischenspeicher ungültig.
+let _fortP=null,_fortT=0,_fortUid="";
+function fortAlleMeine(){
+ const uid=currentUser.uid;
+ if(_fortP&&_fortUid===uid&&Date.now()-_fortT<30000&&_fortT>(window.__fsDirty||0))return _fortP;
+ _fortT=Date.now();_fortUid=uid;
+ const p=getDocs(query(collection(db,"lehrplanFortschritt"),where("uid","==",uid))).then(s=>{const m={};s.docs.forEach(d=>{m[d.id.slice(uid.length+1)]=d.data()});return m}).catch(()=>{if(_fortP===p)_fortP=null;return null});
+ return _fortP=p;
+}
 async function getLehrplanFortschritt(wocheId){
  if(!currentUser)return {zieleErfuellt:{},abgeschlossen:false};
  try{
+ const alle=await fortAlleMeine();
+ if(alle)return alle[wocheId]?{...alle[wocheId]}:{zieleErfuellt:{},abgeschlossen:false};
  const snap=await getDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`));
  if(!snap.exists())return {zieleErfuellt:{},abgeschlossen:false};
  return snap.data();
@@ -5343,14 +5355,18 @@ function ppmMd(t){
 async function ppmMeineLaden(){
  if(isTeacher())return;
  try{
-  const [a,b]=await Promise.all([
-   getDocs(query(collection(db,"ppKursFortschritt"),where("uid","==",currentUser.uid))),
-   getDocs(query(collection(db,"ppStundenAntworten"),where("uid","==",currentUser.uid)))]);
+  const uid=currentUser.uid,STD={zieleErfuellt:{},abgeschlossen:false};
+  const [a,b,fs]=await Promise.all([
+   getDocs(query(collection(db,"ppKursFortschritt"),where("uid","==",uid))),
+   getDocs(query(collection(db,"ppStundenAntworten"),where("uid","==",uid))),
+   fortAlleMeine()]);
+  const alle=fs||{};PPM.meine.fortAlle=fs;
+  const holen=id=>fs?(alle[id]||{...STD}):getLehrplanFortschritt(id);
   PPM.meine.kurs=Object.fromEntries(a.docs.map(d=>[d.data().modulId,d.data()]));
   PPM.meine.stunde=Object.fromEntries(b.docs.map(d=>[d.data().modulId,d.data()]));
   if(PPM.liste.some(x=>x.modul==="rallye")){try{const q=await getDocs(query(collection(db,"ppRallyeStand"),where("uid","==",currentUser.uid)));q.docs.forEach(d=>{const x=d.data();x.frei=x.frei||{};x.erg=x.erg||{};LR.stand[x.modulId]=x;});}catch(e){console.error("Rallye-Stand:",e);}}
-  PPM.meine.ea={};PPM.meine.exp=await getLehrplanFortschritt(experimentWocheId());
-  for(const m of PPM.liste.filter(x=>String(x.kursId||"").startsWith("ea:"))){const id=m.kursId.slice(3);PPM.meine.ea[id]=await getLehrplanFortschritt(id);}
+  PPM.meine.ea={};PPM.meine.exp=await holen(experimentWocheId());
+  for(const m of PPM.liste.filter(x=>String(x.kursId||"").startsWith("ea:"))){const id=m.kursId.slice(3);PPM.meine.ea[id]=await holen(id);}
  }catch(e){console.error("Eigener Fortschritt:",e);}
 }
 function ppmDocId(m){return`${m.id}_${currentUser.uid}`;}
@@ -8868,23 +8884,31 @@ function coBewerten(co,loesung,antworten){
 }
 
 // ---- Laden ----
-async function ladeCheckoutDaten(){
+let _coP=null,_coT=0;
+function ladeCheckoutDaten(){ // gleiche Daten innerhalb von 5 s nur einmal laden (Schreibzugriffe machen es ungültig)
+ if(_coP&&Date.now()-_coT<5000&&_coT>(window.__fsDirty||0))return _coP;
+ _coT=Date.now();return _coP=ladeCheckoutDatenRoh();
+}
+async function ladeCheckoutDatenRoh(){
  const lehrer=isTeacher();
  const basis={anzahlGesamt:10,anzahlWaehlen:7,auswahlOffen:false};
  try{
+  const einstP=getDoc(doc(db,"checkoutEinstellungen","pp")).catch(()=>null);
+  const abgP=lehrer?null:getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));if(abgP)abgP.catch(()=>{});
+  const ausP=lehrer?null:getDoc(doc(db,"checkoutAuswahl",currentUser.uid)).catch(()=>null);
   const docs=lehrer?(await getDocs(collection(db,"checkouts"))).docs
    :(await Promise.all(["live","beendet"].map(st=>getDocs(query(collection(db,"checkouts"),where("status","==",st)))))).flatMap(s=>s.docs);
   const checkouts=docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||""))||tsSek(a.createdAt)-tsSek(b.createdAt));
   let einst={};
-  try{const e=await getDoc(doc(db,"checkoutEinstellungen","pp"));einst=e.exists()?e.data():{};}catch(e){}
+  try{const e=await einstP;einst=e&&e.exists()?e.data():{};}catch(e){}
   const meineAbgaben={};let auswahl=null;const stat={};
   if(lehrer){
    try{const klasseUids=new Set((await getAllUsersForLernstand()).map(u=>u.uid));(await getDocs(collection(db,"checkoutAbgaben"))).docs.forEach(x=>{const a=x.data();if(!a.ausgewertet||!klasseUids.has(a.uid))return;const t=(stat[a.checkoutId]=stat[a.checkoutId]||{n:0,summe:0});t.n++;t.summe+=Number(a.notenpunkte)||0;});}catch(e){console.error("Check-out-Statistik:",e);}
   }
   if(!lehrer){
-   const s=await getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));
+   const s=await abgP;
    s.docs.forEach(d=>{const x=d.data();meineAbgaben[x.checkoutId]=x;});
-   try{const a=await getDoc(doc(db,"checkoutAuswahl",currentUser.uid));auswahl=a.exists()?a.data():null;}catch(e){}
+   try{const a=await ausP;auswahl=a&&a.exists()?a.data():null;}catch(e){}
   }
   return{checkouts,einst:{...basis,...einst},meineAbgaben,auswahl,stat};
  }catch(e){console.error("Check-outs laden:",e);return{checkouts:[],einst:basis,meineAbgaben:{},auswahl:null,stat:{},fehler:true};}
@@ -21641,15 +21665,23 @@ function kwThemaById(id){return KW_THEMEN.find(e=>e.id===id)||null}
 function kwPhase(lbNum){return KW_PHASEN.find(p=>p.lbNum===Number(lbNum))||null}
 function kwFarbe(lbNum){return KW_FARBEN[lbNum]||KW_FARBEN[1]}
 async function kwLaden(){
+ // Kurz zwischengespeichert (30 s): Wechsel zwischen Lernlandkarte und Themen lädt nicht jedes Mal alles neu.
+ // Jeder Schreibzugriff (window.__fsDirty) und jeder Benutzerwechsel macht den Zwischenspeicher ungültig.
+ const uid=currentUser?currentUser.uid:"";
+ if(KW.geladen&&KW.uid===uid&&Date.now()-KW.geladen<30000&&KW.geladen>(window.__fsDirty||0))return;
  await ppmLaden().catch(()=>{});
+ const t0=Date.now();
+ const [mat,,co]=await Promise.all([
+  getDocs(collection(db,"lehrplanMaterialien")).catch(e=>{console.warn("Material:",e);return null}),
+  isTeacher()?null:ppmMeineLaden().catch(()=>{}),
+  ladeCheckoutDaten().catch(()=>null)]);
  KW.mat={};KW.fort={};
- try{(await getDocs(collection(db,"lehrplanMaterialien"))).docs.forEach(d=>{const x={id:d.id,...d.data()};(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)})}catch(e){console.warn("Material:",e)}
+ if(mat)mat.docs.forEach(d=>{const x={id:d.id,...d.data()};(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)});
  if(!isTeacher()){
-  try{(await getDocs(query(collection(db,"lehrplanFortschritt"),where("uid","==",currentUser.uid)))).docs.forEach(d=>{KW.fort[d.id.slice(currentUser.uid.length+1)]=d.data()})}catch(e){console.warn("Fortschritt:",e)}
-  await ppmMeineLaden().catch(()=>{});
+  if(PPM.meine.fortAlle)KW.fort=PPM.meine.fortAlle;
+  else try{(await getDocs(query(collection(db,"lehrplanFortschritt"),where("uid","==",currentUser.uid)))).docs.forEach(d=>{KW.fort[d.id.slice(currentUser.uid.length+1)]=d.data()})}catch(e){console.warn("Fortschritt:",e)}
  }
- KW.co=await ladeCheckoutDaten().catch(()=>null);PPM.co=KW.co;
- KW.geladen=Date.now();
+ KW.co=co;PPM.co=co;KW.uid=uid;KW.geladen=t0;
 }
 function kwModuleThema(id){return PPM.liste.filter(m=>m.modul!=="projekt"&&m.modul!=="experiment"&&(m.themen||[]).includes(id))}
 function kwModuleLb(lb){return PPM.liste.filter(m=>Number(m.lb)===Number(lb)&&m.modul!=="projekt"&&m.modul!=="experiment")}
@@ -21785,7 +21817,7 @@ async function renderKwThema(){
  // Variante der Lerneinheit mit Start
  const mod=kwModuleThema(e.id);
  const ea=await einarbeitungInfo(e.id).catch(()=>null);
- const eaF=!lehrer?(await getLehrplanFortschritt(e.id)):{};
+ const eaF=!lehrer?(KW.fort[e.id]||{zieleErfuellt:{},abgeschlossen:false}):{};
  const karten=[];
  if(ea&&!ea.entwurf)karten.push(`<div class="kw-baust"><span class="chip slk">Selbstlernkurs</span><b>${esc(ea.titel||kwKurz(e))}</b><small>${eaF.einarbeitungAbgeschlossen?"abgeschlossen":(ea.aufgaben?ea.aufgaben+" Aufgaben":"")}</small><button class="primary" data-kw="ea" data-id="${esc(e.id)}">${eaF.einarbeitungAbgeschlossen?"Nochmal ansehen":"Starten"}</button></div>`);
  mod.forEach(m=>{const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);
