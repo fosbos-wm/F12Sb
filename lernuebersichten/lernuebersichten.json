@@ -1051,5 +1051,1776 @@
     "text": "Meine Eselsbrücke / mein Beispiel:"
    }
   ]
+ },
+ {
+  "id": "f12-bindung-begriff",
+  "thema": "Der Begriff „Bindung“",
+  "unter": "LB 12.1 · Bindungstheorie · Bindung, Bindungsperson, Bindungs-Explorations-Balance",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Der Begriff „Bindung“"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · Bindungstheorie · Bindung, Bindungsperson, Bindungs-Explorations-Balance"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 193,
+    "c": "blau",
+    "text": "① WARUM BINDUNG? · Gehirn und Selbstsicherheit"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 970,
+    "h": 118,
+    "c": "blau",
+    "fs": 21,
+    "text": "Säugling ist unfertig und auf Hilfe angewiesen\n\nSynapsen verbinden sich → Lernen; abhängig von emotionaler Zuwendung"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -525,
+    "w": 970,
+    "h": 118,
+    "c": "rosa",
+    "fs": 21,
+    "text": "Ohne feste Bindungsperson keine Selbstsicherheit und kein Neugierverhalten\n\nVernachlässigung oder lange Trennung = erstrangiger Risikofaktor"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -362,
+    "w": 2000,
+    "h": 249,
+    "c": "gruen",
+    "text": "② DEFINITIONEN · wörtlich"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -307,
+    "w": 970,
+    "h": 174,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Bindung\nBindung im Sinne der Bindungstheorie ist die besondere, enge, relativ dauerhafte und stark emotionale Beziehung zwischen einem Kind und seiner Bindungsperson, die es betreut."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -307,
+    "w": 970,
+    "h": 174,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Bindungsperson\nEine Bindungsperson ist eine Person, die mit einer anderen Person in einer engeren positiven emotionalen Beziehung steht. Nur sie ist imstande, das Kind zu trösten und zu beruhigen: nur sie kann helfen, ihm Angst und Unsicherheit nehmen und Rückversicherung für seine Entdeckungsreisen in seiner Umwelt geben."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -88,
+    "w": 2000,
+    "h": 185,
+    "c": "orange",
+    "text": "③ BINDUNGSPERSON · wer und wie viele?"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -33,
+    "w": 640,
+    "h": 110,
+    "c": "gelb",
+    "fs": 19,
+    "text": "Nicht von Natur aus da: Bindung muss aufgebaut werden (ab Schwangerschaft, ab dem 1. Lebenstag)"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -33,
+    "w": 640,
+    "h": 110,
+    "c": "gelb",
+    "fs": 19,
+    "text": "Jede Person, die sich um emotionale und soziale Bedürfnisse kümmert\n„Nicht die biologische Herkunft bindet …“ (Largo)"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -33,
+    "w": 640,
+    "h": 110,
+    "c": "gelb",
+    "fs": 19,
+    "text": "Mehrere, nicht zu viele Bindungspersonen → Hauptbindungsperson, Hierarchie"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 122,
+    "w": 2000,
+    "h": 236,
+    "c": "tuerkis",
+    "text": "④ SICHERHEITSBASIS UND SICHERER HAFEN"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 177,
+    "w": 640,
+    "h": 161,
+    "c": "blau",
+    "fs": 19,
+    "text": "SICHERHEITSBASIS\nAusgangspunkt für die Erkundung der Welt"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": 177,
+    "w": 640,
+    "h": 161,
+    "c": "rosa",
+    "fs": 19,
+    "text": "SICHERER HAFEN\nFluchtpunkt bei Angst, Unsicherheit, Gefahr: Schutz, Nähe, Geborgenheit"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": 177,
+    "w": 640,
+    "h": 161,
+    "c": "gruen",
+    "fs": 19,
+    "text": "DEFINITION · Bindungssicherheit\nBindungssicherheit lässt sich als einen Zustand beschreiben, bei dem Säugling sowie Kleinkind Vertrauen in die Verfügbarkeit seiner Bindungsperson haben. Diese ist notwendig, damit das Kleinkind die Vielzahl von neuen Eindrücken verarbeiten kann."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 383,
+    "w": 2000,
+    "h": 193,
+    "c": "lila",
+    "text": "⑤ BINDUNGS-EXPLORATIONS-BALANCE"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 438,
+    "w": 970,
+    "h": 118,
+    "c": "orange",
+    "fs": 21,
+    "text": "BINDUNGSVERHALTEN\nbei Angst, Unsicherheit, Schmerz, fremder bedrohlicher Situation\n• weinen, schreien, klammern, suchen, nachfolgen"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 438,
+    "w": 970,
+    "h": 118,
+    "c": "blau",
+    "fs": 21,
+    "text": "EXPLORATIONSVERHALTEN\nbei Wohlbefinden (positive/neutrale Verfassung)\n• neugierige Erkundungsgänge abseits der Bindungsperson"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 601,
+    "w": 2000,
+    "h": 210,
+    "c": "gruen",
+    "text": "⑥ ZUSAMMENHANG · BEISPIEL · LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 656,
+    "w": 640,
+    "h": 135,
+    "c": "gelb",
+    "fs": 19,
+    "text": "MERKE\nSichere Bindung → aktive Exploration. Unsichere Bindung → Erkundung wird verhindert. „Halt mich ganz fest und lass mich los!“"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": 656,
+    "w": 640,
+    "h": 135,
+    "c": "tuerkis",
+    "fs": 19,
+    "text": "BEISPIEL\nBen (2) baut im Sandkasten (Exploration). Ein Hund bellt: Ben weint und läuft zum Vater (Bindungsverhalten). Nach dem Trösten spielt er weiter."
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": 656,
+    "w": 640,
+    "h": 135,
+    "c": "rosa",
+    "fs": 19,
+    "text": "LERNANKER\n• Ich kann Bindung und Bindungsperson definieren.\n• Ich kann Bindungs- und Explorationsverhalten an einem Beispiel unterscheiden."
+   }
+  ]
+ },
+ {
+  "id": "f12-bindungsphasen",
+  "thema": "Bindungsphasen und -beziehungen",
+  "unter": "LB 12.1 · vier Phasen nach Ainsworth · primäre und sekundäre Bindungsbeziehungen",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Bindungsphasen und -beziehungen"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · vier Phasen nach Ainsworth · primäre und sekundäre Bindungsbeziehungen"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 200,
+    "c": "blau",
+    "text": "① DIE VIER PHASEN DER BINDUNGSENTWICKLUNG (Zeitangaben nur grob)"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 445,
+    "h": 125,
+    "c": "gelb",
+    "fs": 17,
+    "text": "VOR-BINDUNG\n0–2 Monate\n• ohne Unterschied sozial ansprechbar\n• Signale unspezifisch, angeboren"
+   },
+   {
+    "type": "line",
+    "x": -529,
+    "y": -463,
+    "x2": -481,
+    "y2": -463,
+    "c": "grau",
+    "sw": 5,
+    "arrow": true
+   },
+   {
+    "type": "note",
+    "x": -475,
+    "y": -525,
+    "w": 445,
+    "h": 125,
+    "c": "orange",
+    "fs": 17,
+    "text": "BEGINNENDE BINDUNG / ZIELORIENTIERUNG\n2–6 Monate\n• Personen unterscheiden\n• Signale gezielt an vertraute Person"
+   },
+   {
+    "type": "line",
+    "x": -24,
+    "y": -463,
+    "x2": 24,
+    "y2": -463,
+    "c": "grau",
+    "sw": 5,
+    "arrow": true
+   },
+   {
+    "type": "note",
+    "x": 30,
+    "y": -525,
+    "w": 445,
+    "h": 125,
+    "c": "gruen",
+    "fs": 17,
+    "text": "EIGENTLICHE BINDUNG\nab 7. Monat\n• Krabbeln, Nähe aktiv suchen\n• Bindungsperson = Sicherheitsbasis"
+   },
+   {
+    "type": "line",
+    "x": 481,
+    "y": -463,
+    "x2": 529,
+    "y2": -463,
+    "c": "grau",
+    "sw": 5,
+    "arrow": true
+   },
+   {
+    "type": "note",
+    "x": 535,
+    "y": -525,
+    "w": 445,
+    "h": 125,
+    "c": "lila",
+    "fs": 17,
+    "text": "ZIELKORRIGIERTE PARTNERSCHAFT\nab 24. Monat\n• sprechen, verhandeln\n• Perspektive der Bindungsperson übernehmen"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -355,
+    "w": 2000,
+    "h": 159,
+    "c": "orange",
+    "text": "② EIGENTLICHE BINDUNG · Merkmale nach Ainsworth"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -300,
+    "w": 640,
+    "h": 84,
+    "c": "gelb",
+    "fs": 19,
+    "text": "LOKOMOTION\nKind bringt sich aktiv in die Nähe der Bezugsperson"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -300,
+    "w": 640,
+    "h": 84,
+    "c": "gelb",
+    "fs": 19,
+    "text": "PERSONENPERMANENZ\nvermisst sie bei Abwesenheit"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -300,
+    "w": 640,
+    "h": 84,
+    "c": "gelb",
+    "fs": 19,
+    "text": "FLEXIBLES VERHALTEN\nsetzt Verhalten auf das Ziel „Nähe“ ein"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -171,
+    "w": 2000,
+    "h": 193,
+    "c": "gruen",
+    "text": "③ PRIMÄR UND SEKUNDÄR · Definitionen wörtlich"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -116,
+    "w": 970,
+    "h": 118,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Primäre Bindungsbeziehungen\nPrimäre Bindungsbeziehungen sind Bindungen zu Personen, zu denen der Säugling in den ersten Lebensmonaten den intensivsten Kontakt aufbaut."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -116,
+    "w": 970,
+    "h": 118,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Sekundäre Bindungsbeziehungen\nSekundäre Bindungsbeziehungen sind Bindungen, die das Kind bzw. der Jugendliche im weiteren Verlauf seiner Entwicklung nach der primären Bindungserfahrung aufbaut."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 47,
+    "w": 2000,
+    "h": 210,
+    "c": "blau",
+    "text": "④ WICHTIGE DETAILS"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 102,
+    "w": 640,
+    "h": 135,
+    "c": "blau",
+    "fs": 19,
+    "text": "PRIMÄR (meist Mutter)\nGrundlage für Sozialverhalten und Bindungsfähigkeit; prägt emotionale Sicherheit und Selbstbewusstsein"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": 102,
+    "w": 640,
+    "h": 135,
+    "c": "rosa",
+    "fs": 19,
+    "text": "SEKUNDÄR\nVater, Geschwister, Erzieher, Lehrer, Peers, Partner\nVäter: Motorik und Neugier; Erzieher/Lehrer: Aufmerksamkeit nur zeitweise"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": 102,
+    "w": 640,
+    "h": 135,
+    "c": "tuerkis",
+    "fs": 19,
+    "text": "SICHER GEBUNDEN: Vertrauen, stabile Beziehungen\nUNSICHER GEBUNDEN: Probleme mit Nähe, Eifersucht, Misstrauen"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 282,
+    "w": 2000,
+    "h": 221,
+    "c": "gruen",
+    "text": "⑤ BEISPIEL · LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 337,
+    "w": 970,
+    "h": 146,
+    "c": "tuerkis",
+    "fs": 21,
+    "text": "BEISPIEL\nMia (8 Monate) krabbelt der Mutter nach und weint, wenn sie sie nicht findet (Phase 3). Mit 2½ sagt sie: „Mama, bleib noch! Erst Bilderbuch, dann Kita.“ (Phase 4). Die Erzieherin in der Kita ist sekundäre Bindungsperson."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 337,
+    "w": 970,
+    "h": 146,
+    "c": "rosa",
+    "fs": 21,
+    "text": "LERNANKER\n• Ich kann die vier Phasen mit Zeit und Merkmal nennen.\n• Ich kann primäre und sekundäre Bindungsbeziehungen unterscheiden und Beispiele geben."
+   }
+  ]
+ },
+ {
+  "id": "f12-bindung-foerderung",
+  "thema": "Die Förderung gelungener Bindung",
+  "unter": "LB 12.1 · Feinfühligkeit der Bindungsperson · Angst zu verwöhnen",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Die Förderung gelungener Bindung"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · Feinfühligkeit der Bindungsperson · Angst zu verwöhnen"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 159,
+    "c": "blau",
+    "text": "① AUFGABEN DER BINDUNGSPERSON"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 640,
+    "h": 84,
+    "c": "blau",
+    "fs": 19,
+    "text": "Bindung herstellen: Nähe, Zärtlichkeit, Fürsorge, Schutz, Körperkontakt, Ansprache"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -525,
+    "w": 640,
+    "h": 84,
+    "c": "blau",
+    "fs": 19,
+    "text": "Nähe- und Neugierbedürfnis akzeptieren: Nähe, wenn das Kind sie braucht – Freiraum, wenn es selbst erkunden will"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -525,
+    "w": 640,
+    "h": 84,
+    "c": "blau",
+    "fs": 19,
+    "text": "Feste und (emotional) verfügbare Bindungsperson sein"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -396,
+    "w": 2000,
+    "h": 170,
+    "c": "gruen",
+    "text": "② FEINFÜHLIGKEIT · Definition wörtlich"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -341,
+    "w": 1960,
+    "h": 95,
+    "c": "gruen",
+    "fs": 23,
+    "text": "DEFINITION · Feinfühligkeit\nFeinfühligkeit im Umgang mit dem Kind bedeutet, seine Signale wahrzunehmen, richtig zu interpretieren und angemessen und sofort darauf zu reagieren."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -201,
+    "w": 2000,
+    "h": 169,
+    "c": "orange",
+    "text": "③ DIE FÜNF BESTANDTEILE (Ainsworth)"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -146,
+    "w": 344,
+    "h": 94,
+    "c": "blau",
+    "fs": 15,
+    "text": "① WAHRNEHMEN\nZugänglichkeit; niedrige Schwelle: auch subtile Signale"
+   },
+   {
+    "type": "line",
+    "x": -630,
+    "y": -99,
+    "x2": -582,
+    "y2": -99,
+    "c": "grau",
+    "sw": 5,
+    "arrow": true
+   },
+   {
+    "type": "note",
+    "x": -576,
+    "y": -146,
+    "w": 344,
+    "h": 94,
+    "c": "gelb",
+    "fs": 15,
+    "text": "② RICHTIG INTERPRETIEREN\nohne Verzerrung (Projektion, Verleugnung)"
+   },
+   {
+    "type": "line",
+    "x": -226,
+    "y": -99,
+    "x2": -178,
+    "y2": -99,
+    "c": "grau",
+    "sw": 5,
+    "arrow": true
+   },
+   {
+    "type": "note",
+    "x": -172,
+    "y": -146,
+    "w": 344,
+    "h": 94,
+    "c": "lila",
+    "fs": 15,
+    "text": "③ BEDÜRFNISSE ERKENNEN\nsich in das Kind hineinversetzen"
+   },
+   {
+    "type": "line",
+    "x": 178,
+    "y": -99,
+    "x2": 226,
+    "y2": -99,
+    "c": "grau",
+    "sw": 5,
+    "arrow": true
+   },
+   {
+    "type": "note",
+    "x": 232,
+    "y": -146,
+    "w": 344,
+    "h": 94,
+    "c": "gruen",
+    "fs": 15,
+    "text": "④ ANGEMESSEN VERHALTEN\npasst zu Situation und Signal"
+   },
+   {
+    "type": "line",
+    "x": 582,
+    "y": -99,
+    "x2": 630,
+    "y2": -99,
+    "c": "grau",
+    "sw": 5,
+    "arrow": true
+   },
+   {
+    "type": "note",
+    "x": 636,
+    "y": -146,
+    "w": 344,
+    "h": 94,
+    "c": "rosa",
+    "fs": 15,
+    "text": "⑤ PROMPT REAGIEREN\nKind erlebt: Mein Signal bewirkt etwas"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -7,
+    "w": 2000,
+    "h": 221,
+    "c": "tuerkis",
+    "text": "④ ANGST ZU VERWÖHNEN?"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 48,
+    "w": 970,
+    "h": 146,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Feinfühligkeit ≠ Verwöhnen\nFeinfühligkeit unterscheidet sich von Verwöhnen und Überbehüten dadurch, dass feinfühlige Eltern ihr Kind in seiner zunehmenden Selbständigkeit und seiner wachsenden Kommunikationsfähigkeit fördern."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 48,
+    "w": 970,
+    "h": 146,
+    "c": "gelb",
+    "fs": 21,
+    "text": "Säugling hat noch kein bewusstes „Ich“\n• Nichtbeachtung → „meine Bedürfnisse zählen nichts“\n• Ko-Regulation nötig → Selbstregulation wird gelernt\n• Urvertrauen und Selbstwert entstehen → man kann Säuglinge nicht verwöhnen"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 239,
+    "w": 2000,
+    "h": 221,
+    "c": "gruen",
+    "text": "⑤ BEISPIEL · LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 294,
+    "w": 970,
+    "h": 146,
+    "c": "tuerkis",
+    "fs": 21,
+    "text": "BEISPIEL\nJonas (5 Monate) quengelt. Die Mutter hört es sofort, erkennt am Mundbewegen Hunger, versetzt sich in sein Unbehagen, gibt ihm die Flasche und tut das, bevor er laut schreit: Jonas erlebt Wirksamkeit."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 294,
+    "w": 970,
+    "h": 146,
+    "c": "rosa",
+    "fs": 21,
+    "text": "LERNANKER\n• Ich kann die fünf Bestandteile der Feinfühligkeit erklären.\n• Ich kann begründen, warum prompte Reaktion kein Verwöhnen ist."
+   }
+  ]
+ },
+ {
+  "id": "f12-fremdbetreuung",
+  "thema": "Fremdbetreuung und Bindungsentwicklung",
+  "unter": "LB 12.1 · Risiko und Schutz · Eingewöhnung",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Fremdbetreuung und Bindungsentwicklung"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · Risiko und Schutz · Eingewöhnung"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 305,
+    "c": "blau",
+    "text": "① RISIKO ODER SCHUTZ?"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 970,
+    "h": 230,
+    "c": "rosa",
+    "fs": 21,
+    "text": "RISIKO für unsichere Bindung, wenn …\n• Betreuungsstunden zu hoch (> 20 Std./Woche)\n• Betreuungspersonen wenig feinfühlig und wechselnd\n• Bindungsperson zu Hause wenig feinfühlig\n• fehlende Strukturen im Tagesablauf\n• Betreuungsschlüssel zu niedrig (ideal 1:2 oder 1:3)\n• Eingewöhnung zu wenig behutsam"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -525,
+    "w": 970,
+    "h": 230,
+    "c": "gruen",
+    "fs": 21,
+    "text": "SCHUTZ durch …\n• feinfühlige Beziehung zu Hause\n• hohe Qualität der Einrichtung\n• feinfühlige, gleichbleibende Erzieherinnen\n• gutes Betreuungsverhältnis\n• regelmäßige Strukturen\n• behutsame Eingewöhnung"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -250,
+    "w": 2000,
+    "h": 159,
+    "c": "orange",
+    "text": "② WENN DAS ZUHAUSE BELASTET IST …"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -195,
+    "w": 640,
+    "h": 84,
+    "c": "gelb",
+    "fs": 19,
+    "text": "gute Mutter-Kind-Beziehung + schlechte Krippe → Kind meist trotzdem sicher gebunden"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -195,
+    "w": 640,
+    "h": 84,
+    "c": "rosa",
+    "fs": 19,
+    "text": "belastete Beziehung + schlechte Krippe → Risiko unsicherer Bindung"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -195,
+    "w": 640,
+    "h": 84,
+    "c": "gruen",
+    "fs": 19,
+    "text": "belastete Beziehung + hohe Qualität und feinfühlige Erzieherin → große Chance auf sichere Bindung"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -66,
+    "w": 2000,
+    "h": 210,
+    "c": "tuerkis",
+    "text": "③ TRENNUNG UND EINGEWÖHNUNG"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -11,
+    "w": 640,
+    "h": 135,
+    "c": "gelb",
+    "fs": 19,
+    "text": "Trennung von der primären Bindungsperson = Stress\nKagan 1976: Schreien am häufigsten mit 13 Monaten"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -11,
+    "w": 640,
+    "h": 135,
+    "c": "gruen",
+    "fs": 19,
+    "text": "DEFINITION · Ziel der Eingewöhnung\nDas Hauptziel der Eingewöhnung ist, mit Hilfe einer vertrauten Bezugsperson, eine stabile Beziehung zwischen Erzieherin und Kind aufzubauen."
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -11,
+    "w": 640,
+    "h": 135,
+    "c": "lila",
+    "fs": 19,
+    "text": "BOWLBY\n„ernste Angelegenheit, ein Kind unter drei Jahren von seiner Mutter zu trennen“ → nur mit Begründung und sorgfältig geplant (z. B. Berliner Eingewöhnungsmodell)"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 169,
+    "w": 2000,
+    "h": 221,
+    "c": "gruen",
+    "text": "④ BEISPIEL · LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 224,
+    "w": 970,
+    "h": 146,
+    "c": "tuerkis",
+    "fs": 21,
+    "text": "BEISPIEL\nBeim Eingewöhnen bleibt Papa zunächst im Raum. Nach einigen Tagen verlässt er den Raum für wenige Minuten; die Zeit wird schrittweise länger. Die Erzieherin wird zur sicheren Basis."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 224,
+    "w": 970,
+    "h": 146,
+    "c": "rosa",
+    "fs": 21,
+    "text": "LERNANKER\n• Ich kann Risiko- und Schutzbedingungen der Fremdbetreuung nennen.\n• Ich kann Ziel und Ablauf der Eingewöhnung erklären."
+   }
+  ]
+ },
+ {
+  "id": "f12-resilienz-begriff",
+  "thema": "Resilienz – Begriff und Bedeutung",
+  "unter": "LB 12.1 · Psychische Widerstandsfähigkeit · Resilienz und Vulnerabilität",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Resilienz – Begriff und Bedeutung"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · Psychische Widerstandsfähigkeit · Resilienz und Vulnerabilität"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 221,
+    "c": "gruen",
+    "text": "① BEGRIFFE · Definitionen wörtlich"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 970,
+    "h": 146,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Resilienz\nResilienz bedeutet psychische Widerstandskraft und bezeichnet die Fähigkeit, schwierige Lebenssituationen und belastende Ereignisse erfolgreich zu überstehen."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -525,
+    "w": 970,
+    "h": 146,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Vulnerabilität\nVulnerabilität bezeichnet die erhöhte psychische Verletzlichkeit und damit die geringe psychische Widerstandskraft eines Menschen gegenüber ungünstigen Einflüssen und starken Belastungen."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -334,
+    "w": 2000,
+    "h": 193,
+    "c": "tuerkis",
+    "text": "② BILDER UND BEISPIEL"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -279,
+    "w": 970,
+    "h": 118,
+    "c": "gelb",
+    "fs": 21,
+    "text": "Bilder\n• „Immunsystem der Seele“ (Preißmann)\n• Löwenzahn: schlägt überall Wurzeln (Lesch)"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -279,
+    "w": 970,
+    "h": 118,
+    "c": "tuerkis",
+    "fs": 21,
+    "text": "BEISPIEL\nMax und Georg schaffen die Schule nicht. Max zerbricht daran und entwickelt Ängste → Vulnerabilität. Georg übersteht die Krise ohne dauerhafte Beeinträchtigung → resilient."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -116,
+    "w": 2000,
+    "h": 185,
+    "c": "blau",
+    "text": "③ MERKMALE DES KONZEPTS"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -61,
+    "w": 640,
+    "h": 110,
+    "c": "blau",
+    "fs": 19,
+    "text": "Erhalt der Funktionsfähigkeit – oder deren Wiederherstellung (Werner/Smith)"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -61,
+    "w": 640,
+    "h": 110,
+    "c": "blau",
+    "fs": 19,
+    "text": "Keine feste Größe: Phasen erhöhter Vulnerabilität, abhängig von Entwicklungsaufgaben und Erfahrungen"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -61,
+    "w": 640,
+    "h": 110,
+    "c": "blau",
+    "fs": 19,
+    "text": "Zwei Forschungsfragen:\n• was begünstigt Krankheit? → Risikofaktoren\n• was unterscheidet Resiliente? → Schutzfaktoren"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 94,
+    "w": 2000,
+    "h": 193,
+    "c": "orange",
+    "text": "④ BEDEUTUNG UND KRITIK"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 149,
+    "w": 970,
+    "h": 118,
+    "c": "gelb",
+    "fs": 21,
+    "text": "BEDEUTUNG\nvielfältigere Herausforderungen (Individualisierung, Leistungsdruck, Armut); Burnout/Depression nehmen zu; Mannheimer Risikostudie: belastete Familien → schlechtere Entwicklung"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 149,
+    "w": 970,
+    "h": 118,
+    "c": "rosa",
+    "fs": 21,
+    "text": "KRITIK\nResilienz als Vorwand: Anpassung des Menschen statt Gestaltung menschenwürdiger Lebensumstände"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 312,
+    "w": 2000,
+    "h": 193,
+    "c": "gruen",
+    "text": "⑤ LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 367,
+    "w": 1960,
+    "h": 118,
+    "c": "rosa",
+    "fs": 21,
+    "text": "• Ich kann Resilienz und Vulnerabilität definieren und an einem Beispiel unterscheiden.\n• Ich kann erklären, warum Resilienz keine feste Größe ist.\n• Ich kann Bedeutung und Kritik des Konzepts nennen."
+   }
+  ]
+ },
+ {
+  "id": "f12-risiko-schutzfaktoren",
+  "thema": "Risiko- und Schutzfaktoren der Resilienz",
+  "unter": "LB 12.1 · Psychische Widerstandsfähigkeit · Kauai-Studie",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Risiko- und Schutzfaktoren der Resilienz"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · Psychische Widerstandsfähigkeit · Kauai-Studie"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 249,
+    "c": "rosa",
+    "text": "① RISIKOFAKTOREN · wörtlich"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 970,
+    "h": 174,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Risikofaktoren\nRisikofaktoren sind Einflüsse auf den Menschen, die die Wahrscheinlichkeit zu erkranken wesentlich erhöhen und von denen eine Gefährdung der gesunden Entwicklung ausgeht."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -525,
+    "w": 970,
+    "h": 174,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Psychisches Trauma\nVon einem psychischen Trauma spricht man, wenn dramatische Ereignisse wie zum Beispiel Kriegshandlungen, Vergewaltigung, Naturkatastrophen, sexueller Missbrauch oder ein Unfall bei dem Betroffenen eine anhaltende Störung des seelischen Gleichgewichts bewirken und von ihm nicht oder nur sehr schwer verarbeitet und bewältigt werden können."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -306,
+    "w": 2000,
+    "h": 236,
+    "c": "orange",
+    "text": "② ARTEN VON RISIKOFAKTOREN"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -251,
+    "w": 640,
+    "h": 161,
+    "c": "gelb",
+    "fs": 19,
+    "text": "KINDBEZOGEN\nprimär (von Geburt): Frühgeburt, chronische Krankheit, geringe kognitive Fähigkeiten\nUmwelt-bedingt: unsichere Bindung, geringer Selbstwert, geringe Selbstwirksamkeit"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -251,
+    "w": 640,
+    "h": 161,
+    "c": "gelb",
+    "fs": 19,
+    "text": "UMWELTBEZOGEN\nArmut, chronischer Streit, Sucht oder psychische Störung der Eltern, Erziehungsdefizite"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -251,
+    "w": 640,
+    "h": 161,
+    "c": "gelb",
+    "fs": 19,
+    "text": "WIRKUNG\n• selten einzeln, meist mehrere\n• Dauer entscheidend\n• frühe Risiken erhöhen spätere"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -45,
+    "w": 2000,
+    "h": 197,
+    "c": "gruen",
+    "text": "③ SCHUTZFAKTOREN · wörtlich"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 10,
+    "w": 1960,
+    "h": 122,
+    "c": "gruen",
+    "fs": 22,
+    "text": "DEFINITION · Schutzfaktoren\nSchutzfaktoren sind Bedingungen, die trotz Vorliegen von Risikofaktoren eine positive Entwicklung ermöglichen und dazu beitragen, schwierige Situationen im Leben erfolgreich zu überstehen."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 177,
+    "w": 2000,
+    "h": 305,
+    "c": "blau",
+    "text": "④ PERSONALE UND SOZIALE SCHUTZFAKTOREN"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 232,
+    "w": 970,
+    "h": 230,
+    "c": "blau",
+    "fs": 21,
+    "text": "PERSONAL\n• Persönlichkeitsmerkmale (Beständigkeit, Robustheit, Zähigkeit)\n• hohe Intelligenz\n• positive Grundstimmung\n• Denkstil\n• hohes Selbstwertgefühl, hohe Selbstwirksamkeit\n• eigene Stärken erkennen"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 232,
+    "w": 970,
+    "h": 230,
+    "c": "rosa",
+    "fs": 21,
+    "text": "SOZIAL\n• sichere Bindung\n• positives Erziehungsklima\n• gute soziale Beziehungen\n• soziale Unterstützungsnetzwerke"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 507,
+    "w": 2000,
+    "h": 210,
+    "c": "gruen",
+    "text": "⑤ ZUSAMMENHANG · BEISPIEL · LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 562,
+    "w": 640,
+    "h": 135,
+    "c": "gelb",
+    "fs": 19,
+    "text": "MERKE\nRisiko- und Schutzfaktoren wirken zusammen und beeinflussen sich gegenseitig in einem komplexen Wirkmechanismus."
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": 562,
+    "w": 640,
+    "h": 135,
+    "c": "tuerkis",
+    "fs": 19,
+    "text": "BEISPIEL\nJana wächst belastet auf, glaubt aber „Ich schaffe das“, holt sich Hilfe und findet Freunde im Verein → positive Entwicklung trotz Risiko."
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": 562,
+    "w": 640,
+    "h": 135,
+    "c": "rosa",
+    "fs": 19,
+    "text": "LERNANKER\n• Ich kann Risiko- und Schutzfaktoren unterscheiden und je drei nennen.\n• Ich kann personale und soziale Schutzfaktoren zuordnen."
+   }
+  ]
+ },
+ {
+  "id": "f12-resilienz-foerderung",
+  "thema": "Die Förderung der Resilienz",
+  "unter": "LB 12.1 · Psychische Widerstandsfähigkeit · Möglichkeiten der Stärkung",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Die Förderung der Resilienz"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · Psychische Widerstandsfähigkeit · Möglichkeiten der Stärkung"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 177,
+    "c": "blau",
+    "text": "① ANSATZ UND SCHWERPUNKTE"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 604,
+    "h": 102,
+    "c": "blau",
+    "fs": 17,
+    "text": "ZIEL\nRisikofaktoren mindern – Schutzfaktoren erhöhen\nVorteil: Es wird gefragt, was Kinder stärkt."
+   },
+   {
+    "type": "note",
+    "x": -356,
+    "y": -525,
+    "w": 431,
+    "h": 102,
+    "c": "gruen",
+    "fs": 17,
+    "text": "Schutzfaktoren früh fördern"
+   },
+   {
+    "type": "note",
+    "x": 95,
+    "y": -525,
+    "w": 431,
+    "h": 102,
+    "c": "gruen",
+    "fs": 17,
+    "text": "Handlungsmöglichkeiten für stressreiche Situationen aufzeigen"
+   },
+   {
+    "type": "note",
+    "x": 546,
+    "y": -525,
+    "w": 431,
+    "h": 102,
+    "c": "gruen",
+    "fs": 17,
+    "text": "Stabilität und Sicherheit vermitteln"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -378,
+    "w": 2000,
+    "h": 177,
+    "c": "orange",
+    "text": "② MÖGLICHKEITEN ZUR STÄRKUNG (1)"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -323,
+    "w": 475,
+    "h": 102,
+    "c": "gelb",
+    "fs": 17,
+    "text": "SICHERE BINDUNG\nNähe, Zärtlichkeit, Fürsorge, Schutz, Ansprache"
+   },
+   {
+    "type": "note",
+    "x": -485,
+    "y": -323,
+    "w": 475,
+    "h": 102,
+    "c": "gelb",
+    "fs": 17,
+    "text": "DENKSTIL\nRisiko- und Bedrohungswahrnehmung verändern, „positiv“ denken"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -323,
+    "w": 475,
+    "h": 102,
+    "c": "gelb",
+    "fs": 17,
+    "text": "SELBSTWERT UND SELBSTWIRKSAMKEIT\nErfolgserlebnisse, Zutrauen, Kontrolle über das eigene Leben"
+   },
+   {
+    "type": "note",
+    "x": 505,
+    "y": -323,
+    "w": 475,
+    "h": 102,
+    "c": "gelb",
+    "fs": 17,
+    "text": "ERZIEHERVERHALTEN\nWertschätzung, Verstehen, Echtheit; Nähe- und Neugierbedürfnis akzeptieren"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -176,
+    "w": 2000,
+    "h": 177,
+    "c": "orange",
+    "text": "③ MÖGLICHKEITEN ZUR STÄRKUNG (2)"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -121,
+    "w": 475,
+    "h": 102,
+    "c": "gelb",
+    "fs": 17,
+    "text": "AUTORITATIVE ERZIEHUNG\npositive Beziehung + hohe, aber realistische Anforderungen + klare Regeln"
+   },
+   {
+    "type": "note",
+    "x": -485,
+    "y": -121,
+    "w": 475,
+    "h": 102,
+    "c": "gelb",
+    "fs": 17,
+    "text": "FAMILIENKLIMA\nSicherheit und Stabilität; Eltern in der Erziehung stärken"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -121,
+    "w": 475,
+    "h": 102,
+    "c": "gelb",
+    "fs": 17,
+    "text": "SOZIALE BEZIEHUNGEN\nFreundschaften, Unterstützungsnetzwerke, fürsorgliche Personen"
+   },
+   {
+    "type": "note",
+    "x": 505,
+    "y": -121,
+    "w": 475,
+    "h": 102,
+    "c": "gelb",
+    "fs": 17,
+    "text": "HANDLUNGSKOMPETENZEN\nKonflikt- und Bewältigungsstrategien"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 26,
+    "w": 2000,
+    "h": 221,
+    "c": "gruen",
+    "text": "④ BEISPIEL · LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 81,
+    "w": 970,
+    "h": 146,
+    "c": "tuerkis",
+    "fs": 21,
+    "text": "BEISPIEL\nErzieherin Frau Aydin begrüßt jedes Kind persönlich, lässt Samira selbst wählen, spricht klare Gruppenregeln ab und bringt Samira mit Lena zusammen: Bindung, Selbstwirksamkeit, autoritativ und soziales Netz werden gestärkt."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 81,
+    "w": 970,
+    "h": 146,
+    "c": "rosa",
+    "fs": 21,
+    "text": "LERNANKER\n• Ich kann drei Schwerpunkte der Resilienzförderung nennen.\n• Ich kann vier Möglichkeiten zur Stärkung der Resilienz erklären und mit Beispielen aus der Kita verdeutlichen."
+   }
+  ]
+ },
+ {
+  "id": "f12-entwicklungsaufgaben",
+  "thema": "Entwicklungsaufgaben und der Begriff „Jugend“",
+  "unter": "LB 12.1 · Entwicklungsanforderungen im Jugendalter · Havighurst",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Entwicklungsaufgaben und der Begriff „Jugend“"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · Entwicklungsanforderungen im Jugendalter · Havighurst"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 167,
+    "c": "gruen",
+    "text": "① ENTWICKLUNGSAUFGABE · wörtlich"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 1960,
+    "h": 92,
+    "c": "gruen",
+    "fs": 22,
+    "text": "DEFINITION · Entwicklungsaufgabe\nUnter einer Entwicklungsaufgabe versteht man eine Anforderung, die in einem bestimmten Lebensabschnitt eines Menschen auftritt und in diesem Abschnitt bewältigt werden muss."
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -388,
+    "w": 2000,
+    "h": 159,
+    "c": "blau",
+    "text": "② ENTSTEHUNG · drei Bedingungen mit Beispiel"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -333,
+    "w": 640,
+    "h": 84,
+    "c": "blau",
+    "fs": 19,
+    "text": "KÖRPERLICHE REIFE\nHormone → körperliche Veränderungen akzeptieren"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -333,
+    "w": 640,
+    "h": 84,
+    "c": "orange",
+    "fs": 19,
+    "text": "ERWARTUNGEN DER GESELLSCHAFT\nSchulpflicht mit 6 → Schulfähigkeit"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -333,
+    "w": 640,
+    "h": 84,
+    "c": "lila",
+    "fs": 19,
+    "text": "PERSÖNLICHE ZIELE UND WERTE\n22-Jährige möchte Familie gründen"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -204,
+    "w": 2000,
+    "h": 261,
+    "c": "tuerkis",
+    "text": "③ HAVIGHURST (1900–1991)"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -149,
+    "w": 640,
+    "h": 186,
+    "c": "gelb",
+    "fs": 19,
+    "text": "Konzept der Entwicklungsaufgaben erstmals entworfen\nBeispiele: frühe Kindheit – Geschlechtsrolle; Jugend – emotionale Ablösung; Alter – Erhalt der Lebensqualität"
+   },
+   {
+    "type": "note",
+    "x": -320,
+    "y": -149,
+    "w": 640,
+    "h": 186,
+    "c": "gelb",
+    "fs": 19,
+    "text": "Phase Adoleszenz (13–17): Körperliche Reifung · formale Operationen · Gemeinschaft mit Gleichaltrigen · heterosexuelle Beziehungen\nPhase Jugend (18–22): Autonomie von den Eltern · Identität in der Geschlechtsrolle · internalisiertes moralisches Bewusstsein · Berufswahl"
+   },
+   {
+    "type": "note",
+    "x": 340,
+    "y": -149,
+    "w": 640,
+    "h": 186,
+    "c": "rosa",
+    "fs": 19,
+    "text": "Kritik: Gesellschaft hat sich verändert – manche Aufgaben (z. B. „Vorbereitung auf Ehe und Familie“) überdenken"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 82,
+    "w": 2000,
+    "h": 221,
+    "c": "orange",
+    "text": "④ DER BEGRIFF „JUGEND“"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 137,
+    "w": 970,
+    "h": 146,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Jugendalter\nDas Jugendalter ist die Zeit des Übergangs, in welcher der Mensch nicht mehr die Rolle des Kindes und noch nicht die Rolle des Erwachsenen innehat."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 137,
+    "w": 970,
+    "h": 146,
+    "c": "gelb",
+    "fs": 21,
+    "text": "PHASEN\nVorpubertät → Pubertät → Adoleszenz (bis ca. 20)\nEigenständiger Lebensabschnitt erst seit dem 19./20. Jahrhundert; Erwartungen nicht eindeutig festgelegt"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 328,
+    "w": 2000,
+    "h": 193,
+    "c": "gruen",
+    "text": "⑤ BEISPIEL · LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 383,
+    "w": 970,
+    "h": 118,
+    "c": "tuerkis",
+    "fs": 21,
+    "text": "BEISPIEL\nMit 16 darf Eva bei vielem mitentscheiden, gilt aber noch nicht als Erwachsene und muss Ausgehzeiten aushandeln: Übergang zwischen Kinder- und Erwachsenenrolle."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 383,
+    "w": 970,
+    "h": 118,
+    "c": "rosa",
+    "fs": 21,
+    "text": "LERNANKER\n• Ich kann Entwicklungsaufgabe definieren und die drei Entstehungsbedingungen nennen.\n• Ich kann Havighursts Beitrag und den Begriff Jugend erklären."
+   }
+  ]
+ },
+ {
+  "id": "f12-jugend-entwicklungsaufgaben",
+  "thema": "Entwicklungsaufgaben im Jugendalter",
+  "unter": "LB 12.1 · sieben Anforderungen im Jugendalter",
+  "items": [
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -700,
+    "w": 2000,
+    "h": 70,
+    "fs": 44,
+    "text": "Entwicklungsaufgaben im Jugendalter"
+   },
+   {
+    "type": "text",
+    "x": -1000,
+    "y": -632,
+    "w": 2000,
+    "h": 36,
+    "fs": 20,
+    "text": "LB 12.1 · sieben Anforderungen im Jugendalter"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -580,
+    "w": 2000,
+    "h": 193,
+    "c": "blau",
+    "text": "① KÖRPER UND GESCHLECHT"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -525,
+    "w": 970,
+    "h": 118,
+    "c": "blau",
+    "fs": 21,
+    "text": "1 AKZEPTIEREN DER „NEUEN“ KÖRPERLICHEN GESTALT\nBewusstwerden der Körperveränderungen und Akzeptieren der eigenen Erscheinung"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -525,
+    "w": 970,
+    "h": 118,
+    "c": "rosa",
+    "fs": 21,
+    "text": "2 AUSGESTALTUNG DER GESCHLECHTSROLLE\nEntstehen einer sexuellen Orientierung, Entwicklung einer Geschlechtsidentität; persönliche Lösung finden; kulturspezifische Normen"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -362,
+    "w": 2000,
+    "h": 221,
+    "c": "gruen",
+    "text": "② IDENTITÄT · wörtlich"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -307,
+    "w": 970,
+    "h": 146,
+    "c": "gruen",
+    "fs": 21,
+    "text": "DEFINITION · Identität\nIn der Psychologie meint man mit Identität das Selbstverständnis eines Menschen als einmalige und unverwechselbare Person sowohl in der eigenen Betrachtung als auch in der durch die soziale Umwelt."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -307,
+    "w": 970,
+    "h": 146,
+    "c": "gelb",
+    "fs": 21,
+    "text": "3 SUCHE NACH DER IDENTITÄT\nEntdeckung und Schaffung eines Selbstverständnisses; vieles ausprobieren (Erikson)"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": -116,
+    "w": 2000,
+    "h": 193,
+    "c": "orange",
+    "text": "③ LEBENSFORM UND WERTE"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": -61,
+    "w": 970,
+    "h": 118,
+    "c": "gelb",
+    "fs": 21,
+    "text": "4 VORBEREITUNG AUF DIE SICH ANBAHNENDE LEBENSFORM\nBevorzugung einer Möglichkeit des Zusammenlebens: Single, Partner, Familie, kollektive Lebensform"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": -61,
+    "w": 970,
+    "h": 118,
+    "c": "gelb",
+    "fs": 21,
+    "text": "5 SCHAFFUNG EINES EIGENEN WERTESYSTEMS\nSelbständige Entwicklung eigener Überzeugungen und Einstellungen als Grundlage für selbstbestimmtes Handeln"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 102,
+    "w": 2000,
+    "h": 165,
+    "c": "tuerkis",
+    "text": "④ ABLÖSUNG UND BERUF"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 157,
+    "w": 970,
+    "h": 90,
+    "c": "gelb",
+    "fs": 21,
+    "text": "6 EMOTIONALE ABLÖSUNG VON DEN ELTERN UND ANDEREN ERWACHSENEN\nVeränderung der Beziehungen zu den Eltern und Zuwendung zur Peergroup"
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 157,
+    "w": 970,
+    "h": 90,
+    "c": "gelb",
+    "fs": 21,
+    "text": "7 VORBEREITEN DES BERUFLICHEN WERDEGANGS\nAnbahnung der Lebensziele und der Berufswahl"
+   },
+   {
+    "type": "frame",
+    "x": -1000,
+    "y": 292,
+    "w": 2000,
+    "h": 221,
+    "c": "gruen",
+    "text": "⑤ BEISPIELE · LERNANKER"
+   },
+   {
+    "type": "note",
+    "x": -980,
+    "y": 347,
+    "w": 970,
+    "h": 146,
+    "c": "tuerkis",
+    "fs": 21,
+    "text": "BEISPIEL\nLena (16) färbt sich die Haare, probiert Cliquen und Musikstile aus: „Wer bin ich – und wer will ich sein?“ (Identität). Tim verbringt seine Freizeit lieber mit der Clique als mit den Eltern (Ablösung)."
+   },
+   {
+    "type": "note",
+    "x": 10,
+    "y": 347,
+    "w": 970,
+    "h": 146,
+    "c": "rosa",
+    "fs": 21,
+    "text": "LERNANKER\n• Ich kann sieben Entwicklungsaufgaben im Jugendalter nennen.\n• Ich kann Identität definieren und die Aufgaben mit Beispielen verdeutlichen."
+   }
+  ]
  }
 ]
