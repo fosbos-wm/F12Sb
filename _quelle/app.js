@@ -9470,145 +9470,285 @@ const CO_AUFGABENBANK=[
   ]
  },
  {
- "id": "ich-instanzen-fall",
- "titel": "Freud: Instanzen im Alltag (Wohnheim)",
- "lbNum": 1,
- "vignette": {
-  "titel": "Wohnheim Sonnenhof",
-  "zeilen": false,
-  "text": "Im Wohnheim „Sonnenhof“ steht der 16-jährige Kerem abends allein in der Küche. Auf der Arbeitsplatte liegen Süßigkeiten, die für den Gruppenabend am Wochenende gekauft wurden. Kerem hat großen Heißhunger und greift nach der Tüte. Da hört er den Betreuer im Flur, und ihm fällt ein, dass er den anderen versprochen hat, die Vorräte nicht anzurühren. Er legt die Tüte zurück und isst einen Apfel. Am nächsten Morgen erzählt er der Sozialpädagogin Frau Weiß, dass er in der Nacht von einem verschlossenen Raum geträumt habe. Auf ihre Frage, was ihn am Abend beschäftigt habe, fällt ihm ein, dass sein Vater früher Süßigkeiten als Belohnung verteilte. Frau Weiß weiß aus der Akte, dass diese Belohnungen mit Streit endeten. Zu diesem Streit fällt Kerem nichts ein; er spürt nur ein unangenehmes Ziehen im Bauch."
+  "id": "ich-instanzen-fall",
+  "titel": "Freud: Instanzen im Alltag (Wohnheim)",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Wohnheim Sonnenhof",
+   "zeilen": false,
+   "text": "Im Wohnheim „Sonnenhof“ steht der 16-jährige Kerem abends allein in der Küche. Auf der Arbeitsplatte liegen Süßigkeiten, die für den Gruppenabend am Wochenende gekauft wurden. Kerem hat großen Heißhunger und greift nach der Tüte. Da hört er den Betreuer im Flur, und ihm fällt ein, dass er den anderen versprochen hat, die Vorräte nicht anzurühren. Er legt die Tüte zurück und isst einen Apfel. Am nächsten Morgen erzählt er der Sozialpädagogin Frau Weiß, dass er in der Nacht von einem verschlossenen Raum geträumt habe. Auf ihre Frage, was ihn am Abend beschäftigt habe, fällt ihm ein, dass sein Vater früher Süßigkeiten als Belohnung verteilte. Frau Weiß weiß aus der Akte, dass diese Belohnungen mit Streit endeten. Zu diesem Streit fällt Kerem nichts ein; er spürt nur ein unangenehmes Ziehen im Bauch."
+  },
+  "kontext": "",
+  "stamm": "Kerems Verhalten in der Küche lässt sich mit dem Instanzenmodell nach Freud fachlich zutreffend deuten, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… die Erinnerung an das Versprechen dem Ich zugeordnet wird, weil das Ich die moralischen Gebote der Gemeinschaft vertritt.",
+    "richtig": false,
+    "erklaerung": "Gebote und Verbote vertritt das Über-Ich (Moralitätsprinzip). Das Ich vermittelt zwischen den Instanzen und der Realität."
+   },
+   {
+    "text": "… der Heißhunger als Anspruch des Es verstanden wird, das nach dem Lustprinzip auf unmittelbare Befriedigung drängt.",
+    "richtig": true,
+    "erklaerung": "Das Es enthält die Triebe, Wünsche und Bedürfnisse und folgt dem Lustprinzip."
+   },
+   {
+    "text": "… die Entscheidung für den Apfel als Lösung gilt, bei der das Es seinen Anspruch nach dem Moralitätsprinzip durchgesetzt hat.",
+    "richtig": false,
+    "erklaerung": "Das Es folgt dem Lustprinzip. Das Moralitätsprinzip gehört zum Über-Ich."
+   },
+   {
+    "text": "… der Betreuer im Flur als Teil der Außenwelt gilt, an dem sich das Ich bei seiner Abwägung nach dem Realitätsprinzip ausrichtet.",
+    "richtig": true,
+    "erklaerung": "Das Ich vermittelt zwischen Es, Über-Ich und den Anforderungen der Realität (Realitätsprinzip)."
+   }
+  ]
  },
- "kontext": "",
- "stamm": "Kerems Verhalten in der Küche lässt sich mit dem Instanzenmodell nach Freud fachlich zutreffend deuten, wenn …",
- "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
- "aussagen": [
-  {
-   "text": "… die Erinnerung an das Versprechen dem Ich zugeordnet wird, weil das Ich die moralischen Gebote der Gemeinschaft vertritt.",
-   "richtig": false,
-   "erklaerung": "Gebote und Verbote vertritt das Über-Ich (Moralitätsprinzip). Das Ich vermittelt zwischen den Instanzen und der Realität."
-  },
-  {
-   "text": "… der Heißhunger als Anspruch des Es verstanden wird, das nach dem Lustprinzip auf unmittelbare Befriedigung drängt.",
-   "richtig": true,
-   "erklaerung": "Das Es enthält die Triebe, Wünsche und Bedürfnisse und folgt dem Lustprinzip."
-  },
-  {
-   "text": "… die Entscheidung für den Apfel als Lösung gilt, bei der das Es seinen Anspruch nach dem Moralitätsprinzip durchgesetzt hat.",
-   "richtig": false,
-   "erklaerung": "Das Es folgt dem Lustprinzip. Das Moralitätsprinzip gehört zum Über-Ich."
-  },
-  {
-   "text": "… der Betreuer im Flur als Teil der Außenwelt gilt, an dem sich das Ich bei seiner Abwägung nach dem Realitätsprinzip ausrichtet.",
-   "richtig": true,
-   "erklaerung": "Das Ich vermittelt zwischen Es, Über-Ich und den Anforderungen der Realität (Realitätsprinzip)."
-  }
- ]
-},
  {
- "id": "ich-topisch-fall",
- "titel": "Freud: Schichten des Bewusstseins (topisches Modell)",
- "lbNum": 1,
- "vignette": {
-  "titel": "Wohnheim Sonnenhof",
-  "zeilen": false,
-  "text": "Im Wohnheim „Sonnenhof“ steht der 16-jährige Kerem abends allein in der Küche. Auf der Arbeitsplatte liegen Süßigkeiten, die für den Gruppenabend am Wochenende gekauft wurden. Kerem hat großen Heißhunger und greift nach der Tüte. Da hört er den Betreuer im Flur, und ihm fällt ein, dass er den anderen versprochen hat, die Vorräte nicht anzurühren. Er legt die Tüte zurück und isst einen Apfel. Am nächsten Morgen erzählt er der Sozialpädagogin Frau Weiß, dass er in der Nacht von einem verschlossenen Raum geträumt habe. Auf ihre Frage, was ihn am Abend beschäftigt habe, fällt ihm ein, dass sein Vater früher Süßigkeiten als Belohnung verteilte. Frau Weiß weiß aus der Akte, dass diese Belohnungen mit Streit endeten. Zu diesem Streit fällt Kerem nichts ein; er spürt nur ein unangenehmes Ziehen im Bauch."
+  "id": "ich-topisch-fall",
+  "titel": "Freud: Schichten des Bewusstseins (topisches Modell)",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Wohnheim Sonnenhof",
+   "zeilen": false,
+   "text": "Im Wohnheim „Sonnenhof“ steht der 16-jährige Kerem abends allein in der Küche. Auf der Arbeitsplatte liegen Süßigkeiten, die für den Gruppenabend am Wochenende gekauft wurden. Kerem hat großen Heißhunger und greift nach der Tüte. Da hört er den Betreuer im Flur, und ihm fällt ein, dass er den anderen versprochen hat, die Vorräte nicht anzurühren. Er legt die Tüte zurück und isst einen Apfel. Am nächsten Morgen erzählt er der Sozialpädagogin Frau Weiß, dass er in der Nacht von einem verschlossenen Raum geträumt habe. Auf ihre Frage, was ihn am Abend beschäftigt habe, fällt ihm ein, dass sein Vater früher Süßigkeiten als Belohnung verteilte. Frau Weiß weiß aus der Akte, dass diese Belohnungen mit Streit endeten. Zu diesem Streit fällt Kerem nichts ein; er spürt nur ein unangenehmes Ziehen im Bauch."
+  },
+  "kontext": "",
+  "stamm": "Die Schilderung am nächsten Morgen lässt sich mit dem topischen Modell (Schichten des Bewusstseins) fachlich zutreffend erklären, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… die Erinnerung an die Belohnungen des Vaters als vorbewusster Inhalt gilt, der durch die Nachfrage ins Bewusstsein gelangte.",
+    "richtig": true,
+    "erklaerung": "Vorbewusste Inhalte können durch Aufmerksamkeit, eventuell auch durch einen Schlüsselreiz, bewusst werden."
+   },
+   {
+    "text": "… das unangenehme Ziehen im Bauch zeigt, dass unbewusste Inhalte direkt bewusst erfahren werden können.",
+    "richtig": false,
+    "erklaerung": "Nach dem deskriptiven Aspekt kann auf unbewusste Inhalte nur geschlossen werden; sie können nicht bewusst erfahren werden."
+   },
+   {
+    "text": "… der Traum als Hinweis auf Unbewusstes verstanden wird, auf das sich nur indirekt schließen lässt.",
+    "richtig": true,
+    "erklaerung": "Träume, Symptome, Assoziationen und Fehlleistungen sind Wege, auf denen sich Unbewusstes bemerkbar macht (deskriptiver Aspekt)."
+   },
+   {
+    "text": "… die fehlende Erinnerung an den Streit durch eine aktive Gegenkraft erklärt wird, die den Inhalt im Unbewussten hält.",
+    "richtig": true,
+    "erklaerung": "Nach dem dynamischen Aspekt drängen unbewusste Inhalte ins Bewusstsein und werden durch Gegenbesetzung im Unbewussten gehalten."
+   }
+  ]
  },
- "kontext": "",
- "stamm": "Die Schilderung am nächsten Morgen lässt sich mit dem topischen Modell (Schichten des Bewusstseins) fachlich zutreffend erklären, wenn …",
- "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
- "aussagen": [
-  {
-   "text": "… die Erinnerung an die Belohnungen des Vaters als vorbewusster Inhalt gilt, der durch die Nachfrage ins Bewusstsein gelangte.",
-   "richtig": true,
-   "erklaerung": "Vorbewusste Inhalte können durch Aufmerksamkeit, eventuell auch durch einen Schlüsselreiz, bewusst werden."
-  },
-  {
-   "text": "… das unangenehme Ziehen im Bauch zeigt, dass unbewusste Inhalte direkt bewusst erfahren werden können.",
-   "richtig": false,
-   "erklaerung": "Nach dem deskriptiven Aspekt kann auf unbewusste Inhalte nur geschlossen werden; sie können nicht bewusst erfahren werden."
-  },
-  {
-   "text": "… der Traum als Hinweis auf Unbewusstes verstanden wird, auf das sich nur indirekt schließen lässt.",
-   "richtig": true,
-   "erklaerung": "Träume, Symptome, Assoziationen und Fehlleistungen sind Wege, auf denen sich Unbewusstes bemerkbar macht (deskriptiver Aspekt)."
-  },
-  {
-   "text": "… die fehlende Erinnerung an den Streit durch eine aktive Gegenkraft erklärt wird, die den Inhalt im Unbewussten hält.",
-   "richtig": true,
-   "erklaerung": "Nach dem dynamischen Aspekt drängen unbewusste Inhalte ins Bewusstsein und werden durch Gegenbesetzung im Unbewussten gehalten."
-  }
- ]
-},
  {
- "id": "ich-staerke-schwaeche-fall",
- "titel": "Freud: Ich-Stärke und Ich-Schwäche (Ferienlager)",
- "lbNum": 1,
- "vignette": {
-  "titel": "Ferienlager",
-  "zeilen": false,
-  "text": "Im Ferienlager der Jugendhilfe beobachtet die Erzieherin Frau Roth drei Vierzehnjährige. Pauls Vater stellt viele Gebote auf und bestraft Regelverstöße streng. Paul fragt vor jeder Entscheidung nach Erlaubnis und lässt eigene Wünsche kaum erkennen. Emmas Eltern setzten keine Regeln und achteten nicht auf Absprachen. Emma nimmt sich sofort, was sie möchte, und reagiert auf ein „Nein“ mit Wutausbrüchen. Tim erlebte zu Hause Aufgaben, die er bewältigen konnte, und klare Grenzen. Am Lagerfeuer möchte Tim als Erster zum Grill, merkt aber, dass die Jüngeren schon länger warten. Er sagt: „Ich bin gleich dran, das halte ich aus“, und stellt sich hinten an."
+  "id": "ich-staerke-schwaeche-fall",
+  "titel": "Freud: Ich-Stärke und Ich-Schwäche (Ferienlager)",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Ferienlager",
+   "zeilen": false,
+   "text": "Im Ferienlager der Jugendhilfe beobachtet die Erzieherin Frau Roth drei Vierzehnjährige. Pauls Vater stellt viele Gebote auf und bestraft Regelverstöße streng. Paul fragt vor jeder Entscheidung nach Erlaubnis und lässt eigene Wünsche kaum erkennen. Emmas Eltern setzten keine Regeln und achteten nicht auf Absprachen. Emma nimmt sich sofort, was sie möchte, und reagiert auf ein „Nein“ mit Wutausbrüchen. Tim erlebte zu Hause Aufgaben, die er bewältigen konnte, und klare Grenzen. Am Lagerfeuer möchte Tim als Erster zum Grill, merkt aber, dass die Jüngeren schon länger warten. Er sagt: „Ich bin gleich dran, das halte ich aus“, und stellt sich hinten an."
+  },
+  "kontext": "",
+  "stamm": "Das Verhalten der drei Jugendlichen lässt sich nach Freud fachlich zutreffend beurteilen, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Paul als ich-stark gilt, weil er sich an den Geboten orientiert und so ein Gleichgewicht der Instanzen erreicht.",
+    "richtig": false,
+    "erklaerung": "Bei Paul beherrscht das Über-Ich das Ich; eigene Bedürfnisse werden unterdrückt. Das ist eine Ich-Schwäche."
+   },
+   {
+    "text": "… Emmas Verhalten als Ich-Schwäche gilt, bei der das Es das Ich beherrscht und Triebwünsche ungehemmt befriedigt werden.",
+    "richtig": true,
+    "erklaerung": "Herrscht das Es vor, werden die Triebwünsche exzessiv befriedigt; das Ich kann nicht ausgleichen."
+   },
+   {
+    "text": "… Tims Bereitschaft zu warten als Ich-Schwäche gilt, weil er seinen Wunsch der Realität unterordnet.",
+    "richtig": false,
+    "erklaerung": "Wünsche zurückstellen und aufschieben zu können, ist ein Kennzeichen von Ich-Stärke."
+   },
+   {
+    "text": "… Pauls Verhalten als selbstbestimmt gilt, weil sein Ich die Forderungen des Über-Ichs gegenüber der Realität durchsetzt.",
+    "richtig": false,
+    "erklaerung": "Ist das Ich einer Instanz unterlegen, ist die Person fremdbestimmt in ihrem Verhalten."
+   }
+  ]
  },
- "kontext": "",
- "stamm": "Das Verhalten der drei Jugendlichen lässt sich nach Freud fachlich zutreffend beurteilen, wenn …",
- "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
- "aussagen": [
-  {
-   "text": "… Paul als ich-stark gilt, weil er sich an den Geboten orientiert und so ein Gleichgewicht der Instanzen erreicht.",
-   "richtig": false,
-   "erklaerung": "Bei Paul beherrscht das Über-Ich das Ich; eigene Bedürfnisse werden unterdrückt. Das ist eine Ich-Schwäche."
-  },
-  {
-   "text": "… Emmas Verhalten als Ich-Schwäche gilt, bei der das Es das Ich beherrscht und Triebwünsche ungehemmt befriedigt werden.",
-   "richtig": true,
-   "erklaerung": "Herrscht das Es vor, werden die Triebwünsche exzessiv befriedigt; das Ich kann nicht ausgleichen."
-  },
-  {
-   "text": "… Tims Bereitschaft zu warten als Ich-Schwäche gilt, weil er seinen Wunsch der Realität unterordnet.",
-   "richtig": false,
-   "erklaerung": "Wünsche zurückstellen und aufschieben zu können, ist ein Kennzeichen von Ich-Stärke."
-  },
-  {
-   "text": "… Pauls Verhalten als selbstbestimmt gilt, weil sein Ich die Forderungen des Über-Ichs gegenüber der Realität durchsetzt.",
-   "richtig": false,
-   "erklaerung": "Ist das Ich einer Instanz unterlegen, ist die Person fremdbestimmt in ihrem Verhalten."
-  }
- ]
-},
  {
- "id": "ich-erziehung-fall",
- "titel": "Freud: Erzieherverhalten und Ich-Stärke",
- "lbNum": 1,
- "vignette": {
-  "titel": "Ferienlager",
-  "zeilen": false,
-  "text": "Im Ferienlager der Jugendhilfe beobachtet die Erzieherin Frau Roth drei Vierzehnjährige. Pauls Vater stellt viele Gebote auf und bestraft Regelverstöße streng. Paul fragt vor jeder Entscheidung nach Erlaubnis und lässt eigene Wünsche kaum erkennen. Emmas Eltern setzten keine Regeln und achteten nicht auf Absprachen. Emma nimmt sich sofort, was sie möchte, und reagiert auf ein „Nein“ mit Wutausbrüchen. Tim erlebte zu Hause Aufgaben, die er bewältigen konnte, und klare Grenzen. Am Lagerfeuer möchte Tim als Erster zum Grill, merkt aber, dass die Jüngeren schon länger warten. Er sagt: „Ich bin gleich dran, das halte ich aus“, und stellt sich hinten an."
+  "id": "ich-erziehung-fall",
+  "titel": "Freud: Erzieherverhalten und Ich-Stärke",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Ferienlager",
+   "zeilen": false,
+   "text": "Im Ferienlager der Jugendhilfe beobachtet die Erzieherin Frau Roth drei Vierzehnjährige. Pauls Vater stellt viele Gebote auf und bestraft Regelverstöße streng. Paul fragt vor jeder Entscheidung nach Erlaubnis und lässt eigene Wünsche kaum erkennen. Emmas Eltern setzten keine Regeln und achteten nicht auf Absprachen. Emma nimmt sich sofort, was sie möchte, und reagiert auf ein „Nein“ mit Wutausbrüchen. Tim erlebte zu Hause Aufgaben, die er bewältigen konnte, und klare Grenzen. Am Lagerfeuer möchte Tim als Erster zum Grill, merkt aber, dass die Jüngeren schon länger warten. Er sagt: „Ich bin gleich dran, das halte ich aus“, und stellt sich hinten an."
+  },
+  "kontext": "",
+  "stamm": "Aus den Erziehungsbedingungen der drei Jugendlichen lassen sich nach Freud fachlich zutreffende Schlüsse ziehen, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Emmas Erziehungsbedingungen als Grundlage für ein besonders starkes Über-Ich gelten, weil Führung gefehlt hat.",
+    "richtig": false,
+    "erklaerung": "Wenig Führung führt zu einem schwächeren Über-Ich, sodass die Ansprüche des Es maßlos werden können."
+   },
+   {
+    "text": "… der strenge, regelreiche Erziehungsstil in Pauls Familie als Bedingung für ein zu starkes Über-Ich gilt.",
+    "richtig": true,
+    "erklaerung": "Je mehr Gebote, Verbote und Lenkung, desto stärker bildet sich das Über-Ich aus (z. B. autoritärer Stil)."
+   },
+   {
+    "text": "… Tims Erfolgserlebnisse und Grenzen als Bedingungen gelten, die Kompetenz- und Kontrollerwartung und damit Ich-Stärke fördern.",
+    "richtig": true,
+    "erklaerung": "Bewältigbare Aufgaben, Zuwendung und Grenzen stärken das Ich; das Kind kennt seine Möglichkeiten und seine Grenzen."
+   },
+   {
+    "text": "… Pauls Erziehung als Weg zur Ich-Stärke gilt, weil die vielen Gebote ein Gleichgewicht der Instanzen sichern.",
+    "richtig": false,
+    "erklaerung": "Viele Gebote und viel Lenkung stärken das Über-Ich. Beherrscht es das Ich, werden eigene Bedürfnisse unterdrückt: Das ist eine Ich-Schwäche, kein Gleichgewicht."
+   }
+  ]
  },
- "kontext": "",
- "stamm": "Aus den Erziehungsbedingungen der drei Jugendlichen lassen sich nach Freud fachlich zutreffende Schlüsse ziehen, wenn …",
- "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Arbeitsblätter „Instanzen und Dynamik der Persönlichkeit“, „Starkes und schwaches Ich“ und der Tafel zu den Schichten des Bewusstseins. Bitte fachlich und passend zu deinem Unterricht prüfen.",
- "aussagen": [
-  {
-   "text": "… Emmas Erziehungsbedingungen als Grundlage für ein besonders starkes Über-Ich gelten, weil Führung gefehlt hat.",
-   "richtig": false,
-   "erklaerung": "Wenig Führung führt zu einem schwächeren Über-Ich, sodass die Ansprüche des Es maßlos werden können."
+ {
+  "id": "bindung-begriff-fall",
+  "titel": "Bindung: Begriff und Bindungsperson (Familie Aydin)",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Familie Aydin",
+   "text": "Die zweijährige Selin wurde in den ersten Lebensmonaten vor allem von ihrer Mutter versorgt, die sie stillte und viel auf dem Arm trug. Seit drei Monaten besucht sie vormittags die Krippe, wo sich Frau Keller um sie kümmert. Im Garten der Krippe baut Selin Sandburgen und entfernt sich dabei weit von Frau Keller. Als ein Hund laut bellt, weint sie, läuft zu Frau Keller und klammert sich an deren Bein. Nach dem Trösten spielt sie weiter. Der gleichaltrige Ben bleibt im Garten dicht neben Frau Keller sitzen und schaut den anderen zu, ohne selbst zu spielen. Selins sechzehnjähriger Bruder Can vertraut sich heute vor allem seiner Freundin an, mit der er seit einem halben Jahr zusammen ist.",
+   "zeilen": false
   },
-  {
-   "text": "… der strenge, regelreiche Erziehungsstil in Pauls Familie als Bedingung für ein zu starkes Über-Ich gilt.",
-   "richtig": true,
-   "erklaerung": "Je mehr Gebote, Verbote und Lenkung, desto stärker bildet sich das Über-Ich aus (z. B. autoritärer Stil)."
+  "kontext": "",
+  "stamm": "Die Beziehungen im Fall lassen sich im Sinne der Bindungstheorie fachlich zutreffend deuten, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Lernübersichten „Der Begriff Bindung“ und „Bindungsphasen und -beziehungen“. Gemeinsame Fallvignette für alle vier Aufgaben. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… die Bindung zwischen Selin und ihrer Mutter von Natur aus vorhanden war, weil diese sie geboren hat.",
+    "richtig": false,
+    "erklaerung": "Bindung ist nicht von Natur aus da, sondern muss aufgebaut werden. „Nicht die biologische Herkunft bindet.“"
+   },
+   {
+    "text": "… Frau Keller für Selin als Bindungsperson gilt, weil sie ihr Trost und Beruhigung geben kann.",
+    "richtig": true,
+    "erklaerung": "Eine Bindungsperson kann das Kind trösten und beruhigen und ihm Angst und Unsicherheit nehmen."
+   },
+   {
+    "text": "… Selin zu mehreren Personen eine Bindung aufbauen kann, wobei die Mutter Hauptbindungsperson sein kann.",
+    "richtig": true,
+    "erklaerung": "Ein Kind hat mehrere, aber nicht zu viele Bindungspersonen mit einer Hierarchie (Hauptbindungsperson)."
+   },
+   {
+    "text": "… die Versorgung allein genügt, damit eine Person zur Bindungsperson wird, auch ohne das Kind zu trösten.",
+    "richtig": false,
+    "erklaerung": "Pflege reicht nicht aus. Bindungsperson ist, wer emotional zugewandt ist und das Kind trösten und beruhigen kann."
+   }
+  ]
+ },
+ {
+  "id": "bindung-exploration-fall",
+  "titel": "Bindung: Bindungs- und Explorationsverhalten (Familie Aydin)",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Familie Aydin",
+   "text": "Die zweijährige Selin wurde in den ersten Lebensmonaten vor allem von ihrer Mutter versorgt, die sie stillte und viel auf dem Arm trug. Seit drei Monaten besucht sie vormittags die Krippe, wo sich Frau Keller um sie kümmert. Im Garten der Krippe baut Selin Sandburgen und entfernt sich dabei weit von Frau Keller. Als ein Hund laut bellt, weint sie, läuft zu Frau Keller und klammert sich an deren Bein. Nach dem Trösten spielt sie weiter. Der gleichaltrige Ben bleibt im Garten dicht neben Frau Keller sitzen und schaut den anderen zu, ohne selbst zu spielen. Selins sechzehnjähriger Bruder Can vertraut sich heute vor allem seiner Freundin an, mit der er seit einem halben Jahr zusammen ist.",
+   "zeilen": false
   },
-  {
-   "text": "… Tims Erfolgserlebnisse und Grenzen als Bedingungen gelten, die Kompetenz- und Kontrollerwartung und damit Ich-Stärke fördern.",
-   "richtig": true,
-   "erklaerung": "Bewältigbare Aufgaben, Zuwendung und Grenzen stärken das Ich; das Kind kennt seine Möglichkeiten und seine Grenzen."
+  "kontext": "",
+  "stamm": "Selins Verhalten im Garten lässt sich mit den Begriffen der Bindungstheorie fachlich zutreffend beschreiben, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Lernübersichten „Der Begriff Bindung“ und „Bindungsphasen und -beziehungen“. Gemeinsame Fallvignette für alle vier Aufgaben. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… das Bauen der Sandburgen als Explorationsverhalten gilt, das bei Wohlbefinden auftritt.",
+    "richtig": true,
+    "erklaerung": "Explorationsverhalten zeigt sich bei Wohlbefinden als neugierige Erkundung abseits der Bindungsperson."
+   },
+   {
+    "text": "… Weinen und Klammern als Explorationsverhalten gelten, weil Selin dabei ihre Umgebung erkundet.",
+    "richtig": false,
+    "erklaerung": "Weinen, Klammern und Aufsuchen der Bindungsperson sind Bindungsverhalten, das bei Angst aktiviert wird."
+   },
+   {
+    "text": "… Frau Keller beim Bellen als Sicherheitsbasis dient, weil Selin Schutz und Geborgenheit sucht.",
+    "richtig": false,
+    "erklaerung": "Als sicherer Hafen bietet die Bindungsperson bei Angst Schutz und Nähe. Sicherheitsbasis ist der Ausgangspunkt der Erkundung."
+   },
+   {
+    "text": "… das Weiterspielen zeigt, dass Selin ihre Bindungsperson nicht mehr benötigt.",
+    "richtig": false,
+    "erklaerung": "Selin kann erst nach dem Trost weiterspielen. Die Bindungsperson gibt die Rückversicherung für weitere Entdeckungsreisen."
+   }
+  ]
+ },
+ {
+  "id": "bindung-balance-fall",
+  "titel": "Bindung: Bindungs-Explorations-Balance (Familie Aydin)",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Familie Aydin",
+   "text": "Die zweijährige Selin wurde in den ersten Lebensmonaten vor allem von ihrer Mutter versorgt, die sie stillte und viel auf dem Arm trug. Seit drei Monaten besucht sie vormittags die Krippe, wo sich Frau Keller um sie kümmert. Im Garten der Krippe baut Selin Sandburgen und entfernt sich dabei weit von Frau Keller. Als ein Hund laut bellt, weint sie, läuft zu Frau Keller und klammert sich an deren Bein. Nach dem Trösten spielt sie weiter. Der gleichaltrige Ben bleibt im Garten dicht neben Frau Keller sitzen und schaut den anderen zu, ohne selbst zu spielen. Selins sechzehnjähriger Bruder Can vertraut sich heute vor allem seiner Freundin an, mit der er seit einem halben Jahr zusammen ist.",
+   "zeilen": false
   },
-  {
-   "text": "… Pauls Erziehung als Weg zur Ich-Stärke gilt, weil die vielen Gebote ein Gleichgewicht der Instanzen sichern.",
-   "richtig": false,
-   "erklaerung": "Viele Gebote und viel Lenkung stärken das Über-Ich. Beherrscht es das Ich, werden eigene Bedürfnisse unterdrückt: Das ist eine Ich-Schwäche, kein Gleichgewicht."
-  }
- ]
-}
+  "kontext": "",
+  "stamm": "Der Vergleich von Selin und Ben lässt sich nach der Bindungstheorie fachlich zutreffend erklären, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Lernübersichten „Der Begriff Bindung“ und „Bindungsphasen und -beziehungen“. Gemeinsame Fallvignette für alle vier Aufgaben. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… Bens Sitzen neben Frau Keller als Zeichen besonders aktiver Erkundung gilt, weil er andere beobachtet.",
+    "richtig": false,
+    "erklaerung": "Ben erkundet kaum. Beobachten aus der Nähe einer vertrauten Person ist kein aktives Explorationsverhalten."
+   },
+   {
+    "text": "… Selins Entfernung von Frau Keller beim Spielen auf Vertrauen in die Verfügbarkeit der Bindungsperson hindeutet.",
+    "richtig": true,
+    "erklaerung": "Bindungssicherheit, also Vertrauen in die Verfügbarkeit der Bindungsperson, ermöglicht aktive Exploration."
+   },
+   {
+    "text": "… Bens Verhalten darauf hindeuten kann, dass seine Erkundung durch Unsicherheit gehemmt wird.",
+    "richtig": true,
+    "erklaerung": "Unsichere Bindung verhindert die Erkundung; das Kind bleibt in der Nähe der vertrauten Person."
+   },
+   {
+    "text": "… Selins Rückkehr zu Frau Keller und das Weiterspielen die Bindungs-Explorations-Balance zeigen.",
+    "richtig": true,
+    "erklaerung": "Die Balance bedeutet: Rückversicherung bei der Bindungsperson und danach wieder Erkundung („Halt mich fest und lass mich los!“)."
+   }
+  ]
+ },
+ {
+  "id": "bindung-prim-sek-fall",
+  "titel": "Bindung: Primäre und sekundäre Bindungserfahrung (Familie Aydin)",
+  "lbNum": 1,
+  "vignette": {
+   "titel": "Familie Aydin",
+   "text": "Die zweijährige Selin wurde in den ersten Lebensmonaten vor allem von ihrer Mutter versorgt, die sie stillte und viel auf dem Arm trug. Seit drei Monaten besucht sie vormittags die Krippe, wo sich Frau Keller um sie kümmert. Im Garten der Krippe baut Selin Sandburgen und entfernt sich dabei weit von Frau Keller. Als ein Hund laut bellt, weint sie, läuft zu Frau Keller und klammert sich an deren Bein. Nach dem Trösten spielt sie weiter. Der gleichaltrige Ben bleibt im Garten dicht neben Frau Keller sitzen und schaut den anderen zu, ohne selbst zu spielen. Selins sechzehnjähriger Bruder Can vertraut sich heute vor allem seiner Freundin an, mit der er seit einem halben Jahr zusammen ist.",
+   "zeilen": false
+  },
+  "kontext": "",
+  "stamm": "Die Beziehungen der Geschwister lassen sich nach der Bindungstheorie fachlich zutreffend einordnen, wenn …",
+  "pruefen": "Neu erstellt (Claude) nach der ISB-Checkliste der App auf Grundlage der Lernübersichten „Der Begriff Bindung“ und „Bindungsphasen und -beziehungen“. Gemeinsame Fallvignette für alle vier Aufgaben. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+  "aussagen": [
+   {
+    "text": "… die Mutter als primäre Bindungsperson gilt, weil Selin zu ihr in den ersten Lebensmonaten den intensivsten Kontakt aufbaute.",
+    "richtig": true,
+    "erklaerung": "Primäre Bindungsbeziehungen bestehen zu Personen, zu denen der Säugling in den ersten Lebensmonaten den intensivsten Kontakt aufbaut."
+   },
+   {
+    "text": "… Cans Freundin als primäre Bindungsperson gilt, weil sie für ihn heute besonders wichtig ist.",
+    "richtig": false,
+    "erklaerung": "Die Freundin ist eine sekundäre Bindungsperson. Sekundäre Bindungen entstehen später, nach der primären Bindungserfahrung."
+   },
+   {
+    "text": "… die Beziehung zu Frau Keller eine sekundäre Bindungsbeziehung ist, die Selin nach der primären Erfahrung aufbaute.",
+    "richtig": true,
+    "erklaerung": "Sekundäre Bindungsbeziehungen baut das Kind bzw. der Jugendliche im weiteren Verlauf nach der primären Bindungserfahrung auf (z. B. Erzieher, Partner)."
+   },
+   {
+    "text": "… die frühe Mutterbeziehung für Selins spätere Beziehungen bedeutungslos bleibt, weil sekundäre Bindungen sie ersetzen.",
+    "richtig": false,
+    "erklaerung": "Die primäre Bindung ist Grundlage für Sozialverhalten und Bindungsfähigkeit und prägt spätere Beziehungen."
+   }
+  ]
+ }
 ];
 // Vorlage = Check-out mit genau 3 Aufgaben aus der Bank; wird am passenden Freitag per Klick eingesetzt.
 const CHECKOUT_VORLAGEN_ALLE=[
@@ -9815,7 +9955,7 @@ function coEditorRender(){
      <label>Überschrift<input id="coVT${i}"value="${esc(a.vTitel)}"placeholder="z. B. Kindergarten „Wirbelwind“"></label>
      <label>Text<textarea id="coVX${i}"rows="6"placeholder="Situation ohne Hinweise auf die Lösung."oninput="coEditorPruefen()">${esc(a.vText)}</textarea></label>
      <label class="check"><input id="coVZ${i}"type="checkbox"${a.vZeilen?" checked":""}> Zeilen nummerieren (jeder Zeilenumbruch = neue Zeile, für Verweise wie „Z. 15–17“)</label>
-    </section>`:`<div class="co-hinweis ok"style="margin:8px 0">📖 Es gilt die Fallvignette von Aufgabe ${i} (eine Fallvignette für je 2 Aufgaben).</div>`}
+    </section>`:`<div class="co-hinweis ok"style="margin:8px 0">📖 Es gilt die Fallvignette von Aufgabe ${i} (${coEditor.aufgaben.length>2&&coEditor.aufgaben.every(x=>x.vText.trim()&&x.vText===coEditor.aufgaben[0].vText)?"eine Fallvignette für alle Aufgaben":"eine Fallvignette für je 2 Aufgaben"}).</div>`}
     <details class="co-ed-details"${a.mText?" open":""}><summary>📎 Material zu Aufgabe ${i+1} (optional, z. B. Studie oder Text)</summary>
      <label>Titel<input id="coMT${i}"value="${esc(a.mTitel)}"></label>
      <label>Text<textarea id="coMX${i}"rows="5">${esc(a.mText)}</textarea></label>
@@ -10107,12 +10247,13 @@ async function openCheckoutTest(id){
  const ant=a?.antworten||{};
  const c=PP_FARBEN[co.lbNum]||"#4a90d9";
  const glob=coGemeinsameSituation(co);
+ const nVig=new Set((co.aufgaben||[]).map(x=>x.vignette?.text||"")).size;
  modal(`<div id="coTest"class="kp-test">
   <div class="kicker"style="color:${c}">🏁 CHECK-OUT · LB ${esc(co.lbNum)} · ${coDatum(co.datum)}</div>
   <h2>${esc(co.titel)}</h2>
   <div class="kp-fortschritt"><div class="kp-balken"><i id="coBalken"style="background:${c}"></i></div><span id="coStand"></span></div>
   <details class="kp-hilfe"><summary>So funktioniert der Test</summary>
-   <p>Der Test besteht aus <b>2 Fallvignetten mit je 2 Aufgaben</b> (zusammen ${(co.aufgaben||[]).length} Aufgaben). Lies zuerst die Fallvignette. Entscheide dann bei <b>jeder</b> der 4 Aussagen, ob sie richtig oder falsch ist. Eine leere Aussage zählt als Fehler. Deine Antworten werden automatisch gespeichert.</p>
+   <p>Der Test besteht aus <b>${nVig===1?"1 Fallvignette für alle "+(co.aufgaben||[]).length+" Aufgaben":"2 Fallvignetten mit je 2 Aufgaben"}</b>${nVig===1?"":` (zusammen ${(co.aufgaben||[]).length} Aufgaben)`}. Lies zuerst die Fallvignette. Entscheide dann bei <b>jeder</b> der 4 Aussagen, ob sie richtig oder falsch ist. Eine leere Aussage zählt als Fehler. Deine Antworten werden automatisch gespeichert.</p>
    </details>
   ${coBewertungsInfoHTML(anzahlW,true)}
   ${glob?`<div class="kp-vig"style="border-left-color:${c}"><div class="kp-label">📖 Situation</div>${coSituationHTML(glob,false,true,false)}</div>`:""}
