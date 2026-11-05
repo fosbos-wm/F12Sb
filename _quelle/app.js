@@ -22160,7 +22160,7 @@ async function kwBausteinWahl(themaId){
  const e=kwThemaById(themaId);if(!e)return;
  const ph=KW_PHASEN.find(p=>p.id===e.phase)||KW_PHASEN[0];
  const woche=ph.startSw||null;
- const FARBE={selbstlern:"#1f8ea3",kprim:"#e08a2e",rallye:"#8460b8",uebung:"#4f9a35",fachaufsatz:"#2f7d32",apt:"#3a7fd0",blockfall:"#d4577f"};
+ const FARBE={selbstlern:"#1f8ea3",kprim:"#e08a2e",rallye:"#8460b8",uebung:"#4f9a35",fachaufsatz:"#2f7d32",lernuebersicht:"#3a7fd0",apt:"#3a7fd0",blockfall:"#d4577f"};
  const karte=(typ,titel,text,btn)=>`<button type="button" class="bw-k" data-typ="${typ}" style="--k:${FARBE[typ]||"#4a90d9"}"><span class="bw-t"><b>${esc(titel)}</b><small>${esc(text)}</small></span><span class="bw-b">${esc(btn||"Einplanen")}</span></button>`;
  const T=k=>PPM_TYPEN[k];
  const einfach=(k,txt)=>karte(k,T(k).name,txt||T(k).text);
@@ -22170,6 +22170,7 @@ async function kwBausteinWahl(themaId){
   <div class="bw">
    <h3 class="bw-h" style="--k:#4f9a35">Üben und Vertiefen</h3>
    ${karte("uebung","Übungen und Spiele","Zuordnung (Ziehen), Memory, Blockfall, Lückentext, Theorievergleich und Karteikarten – nach Lernbereich geordnet.","Auswählen")}
+   ${karte("lernuebersicht","Lernübersicht","Whiteboard mit dem Wichtigsten auf einen Blick – Schüler:innen ergänzen ihre eigene Kopie.","Auswählen")}
    ${karte("fachaufsatz","Fachaufsatztraining","Alle Fachaufsätze aus Abschlussprüfungen (Lernbereich 1 bis 4) mit ganzem Fall, Zeilennummern, Themafrage und Lösung zum Einblenden.","Auswählen")}
    ${einfach("blockfall","Tetris-Lernspiel mit Begriffen und Definitionen.")}${einfach("rallye","Stationen mit Aufgaben, einzeln oder im Team, mit Punkten.")}
    <h3 class="bw-h" style="--k:#e08a2e">Testen und Prüfen</h3>
@@ -22180,6 +22181,7 @@ async function kwBausteinWahl(themaId){
   <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button></div>`);
  document.querySelectorAll(".bw-k").forEach(b=>b.onclick=async()=>{
   const typ=b.dataset.typ;
+  if(typ==="lernuebersicht"){await kwLuPicker(themaId);return}
   if(typ==="uebung"){await kwFaPicker(null,themaId,"spiele");return}
   if(typ==="fachaufsatz"){await kwFaPicker(null,themaId,"fa");return}
   window.__kwThemaNeu=themaId;
@@ -22190,6 +22192,7 @@ window.kwBausteinWahl=kwBausteinWahl;
 
 async function kwMatForm(kat){
  if(!isTeacher())return;
+ if(kat==="lernuebersicht")return kwLuPicker();
  if(!/^(uebung|vertiefung\d?)$/.test(kat))return kwMatFormDatei(kat);
  return kwFaPicker(kat);
 }
@@ -22658,6 +22661,47 @@ async function lbBereitstellen(){
  toast(`Lernübersichten: ${neu} neu, ${akt} aktualisiert${fehler?`, ${fehler} Fehler (Konsole)`:""}.`);
  await render();
 }
+// ---- Lernübersichten für ein Thema auswählen (Baustein „Lernübersicht“): legt fehlende Whiteboards automatisch aus der Datei an ----
+async function lbEintragSicher(e){
+ const alt=await getDocs(query(collection(db,"whiteboards"),where("lernKey","==",e.id)));
+ if(alt.docs.length)return alt.docs[0].id;
+ const r=await addDoc(collection(db,"whiteboards"),{title:(e.thema+" – Lernübersicht").slice(0,120),description:"Lernübersicht: Zusammenfassung der Lehrkraft, Schüler:innen bekommen eine eigene Kopie zum Ergänzen",art:"tafel",schreibschutz:true,seiten:1,bg:"weiss",lernVorlage:true,lernKey:e.id,createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
+ await lbItemsSchreiben(r.id,lbLernItems(0,0,e.thema,e));
+ return r.id;
+}
+async function kwLuPicker(themaId){
+ const t=kwThemaById(themaId||activeKwThema);if(!t||!isTeacher())return;
+ let liste=[];
+ try{const r=await fetch("lernuebersichten/lernuebersichten.json?v="+Date.now());if(!r.ok)throw new Error("HTTP "+r.status);liste=await r.json();}catch(err){console.error(err);toast("Die Datei lernuebersichten/lernuebersichten.json wurde nicht gefunden.");return;}
+ if(!Array.isArray(liste)||!liste.length){toast("Die Datei enthält keine Lernübersichten.");return;}
+ const [vorh,bs]=await Promise.all([
+  getDocs(query(collection(db,"lehrplanMaterialien"),where("wocheId","==",t.id))).then(sn=>new Set(sn.docs.map(d=>d.data().url))).catch(()=>new Set()),
+  getDocs(query(collection(db,"whiteboards"),where("lernVorlage","==",true))).then(sn=>Object.fromEntries(sn.docs.map(d=>[d.data().lernKey,d.id]))).catch(()=>({}))]);
+ const da=e=>!!(bs[e.id]&&vorh.has("board:"+bs[e.id]));
+ const zeile=(e,vor)=>`<label class="check"><input type="checkbox" class="kwLuCb" value="${esc(e.id)}"${da(e)?" checked disabled":(vor?" checked":"")}> <span><b>${esc(e.thema)}</b> <small>${[esc(e.unter||""),da(e)?"schon hinzugefügt":""].filter(Boolean).join(" · ")}</small></span></label>`;
+ const passend=liste.filter(e=>e.kw===t.id),rest=liste.filter(e=>e.kw!==t.id);
+ const lbN=e=>Number(((e.unter||"").match(/LB (\d)/)||[])[1])||0;
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">${esc(kwKurz(t)).toUpperCase()}</div><h2>Lernübersicht auswählen</h2>
+  <p style="color:var(--muted);margin:0 0 8px">Die Lernübersicht ist ein Whiteboard mit fünf Bausteinen. Schüler:innen bekommen beim Öffnen eine eigene Kopie zum Ergänzen. Fehlende Whiteboards werden beim Hinzufügen automatisch angelegt.</p>
+  <div class="form kw-fa-pick">
+  ${passend.length?`<div class="kw-fa-gr" style="--k:#3a7fd0"><b class="fa-lbkopf">Passend zu diesem Thema</b>${passend.map(e=>zeile(e,true)).join("")}</div>`:`<div class="kw-leer">Für dieses Thema gibt es noch keine passende Lernübersicht. Unten kannst du eine andere wählen.</div>`}
+  ${[1,2,3,4].map(n=>{const l=rest.filter(e=>lbN(e)===n);return l.length?`<details class="fa-lbgr kw-fa-lb"><summary><b>Weitere Lernübersichten · Lernbereich ${n}</b><small>${l.length}</small></summary><div class="kw-fa-gr" style="--k:#3a7fd0">${l.map(e=>zeile(e,false)).join("")}</div></details>`:""}).join("")}
+  ${rest.filter(e=>!lbN(e)).length?`<details class="fa-lbgr kw-fa-lb"><summary><b>Weitere Lernübersichten</b></summary><div class="kw-fa-gr" style="--k:#3a7fd0">${rest.filter(e=>!lbN(e)).map(e=>zeile(e,false)).join("")}</div></details>`:""}
+  <button type="button" class="text-button" id="kwLuDatei">Stattdessen eine eigene Tafel, Datei oder einen Link hinzufügen</button>
+  <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button><button class="primary" id="kwLuSave">Hinzufügen</button></div></div>`);
+ $("kwLuDatei").onclick=()=>kwMatFormDatei("lernuebersicht");
+ $("kwLuSave").onclick=async()=>{
+  const ids=[...document.querySelectorAll(".kwLuCb:checked:not(:disabled)")].map(c=>c.value);
+  if(!ids.length){toast("Bitte mindestens eine Lernübersicht ankreuzen.");return}
+  try{
+   toast("Lernübersicht wird vorbereitet …");
+   for(const id of ids){const e=liste.find(x=>x.id===id),bid=await lbEintragSicher(e);
+    await addDoc(collection(db,"lehrplanMaterialien"),{wocheId:t.id,fach:"paedagogik",kategorie:"lernuebersicht",titel:e.thema,url:"board:"+bid,dateiName:"",createdBy:currentUser.uid,createdAt:serverTimestamp()});}
+   closeModal();toast(ids.length===1?"Hinzugefügt.":ids.length+" Lernübersichten hinzugefügt.");render();
+  }catch(err){console.error(err);toast("Konnte nicht gespeichert werden.")}
+ };
+}
+window.kwLuPicker=kwLuPicker;
 async function lbOrdnerOeffnen(id){
  if(isTeacher()){openWhiteboard(id);return;}
  try{const s=await getDoc(doc(db,"whiteboards",id));await lbMeineKopie(id,s.exists()?s.data().title:"");}catch(e){toast("Das hat nicht geklappt.");}
