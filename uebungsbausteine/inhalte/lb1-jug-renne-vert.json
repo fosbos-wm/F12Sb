@@ -1,0 +1,126 @@
+{
+ "titel": "Rennen: Entwicklungsaufgaben im Jugendalter",
+ "anleitung": "Beantworte die Fragen zu den Entwicklungsaufgaben im Jugendalter.",
+ "fragen": [
+  {
+   "f": "Was meint man in der Psychologie mit Identität?",
+   "o": [
+    "Nur den Namen eines Menschen",
+    "Das Selbstverständnis als einmalige und unverwechselbare Person – in der eigenen Betrachtung und der der sozialen Umwelt",
+    "Die Berufsbezeichnung",
+    "Das biologische Geschlecht"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie sieht Erikson das Ausprobieren im Jugendalter?",
+   "o": [
+    "Als Zeitverschwendung",
+    "Als entscheidenden Schritt hin zu einer eigenständigen Identität",
+    "Als Störung",
+    "Als irrelevant"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was drückt die Geschlechtsidentität aus?",
+   "o": [
+    "Das Erleben der eigenen Geschlechtlichkeit, weiblich oder männlich zu sein",
+    "Die Berufswahl",
+    "Die politische Haltung",
+    "Die Schulform"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was gehört zur sexuellen Orientierung?",
+   "o": [
+    "Ausrichtung der emotionalen Bindung, erotischer Fantasien und sexueller Aktivitäten auf Personen des gleichen und/oder anderen Geschlechts",
+    "Nur das Verhalten der Eltern",
+    "Die Haarfarbe",
+    "Der Schulabschluss"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Lebensform gehört NICHT zu den im Lehrtext genannten?",
+   "o": [
+    "Alleinstehende / Singles",
+    "Partnerschaft (Ehe, Lebenspartnerschaft, ohne Status)",
+    "Kollektive Lebensform (z. B. Wohngemeinschaft)",
+    "Klosterleben ohne Kontakte"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Wie wird die Aufgabe „Schaffung eines eigenen Wertesystems“ beschrieben?",
+   "o": [
+    "Selbstständige Entwicklung eigener Überzeugungen und Einstellungen als Grundlage selbstbestimmten Handelns",
+    "Übernahme der Werte der Eltern ohne Prüfung",
+    "Verzicht auf Werte",
+    "Anpassung an alle Moden"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Der Psychiater Favazza erklärt Piercings bei Teenagern so: „Weil sich ihre Eltern darüber aufregen.“ Welche Aufgabe steht dahinter?",
+   "o": [
+    "Wertebildung und Abgrenzung von der Erwachsenenwelt",
+    "Berufswahl",
+    "Körperliche Reifung",
+    "Spracherwerb"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie definiert sich laut Gardner die heutige Jugend häufig?",
+   "o": [
+    "Vor allem über politische Ereignisse",
+    "Weniger über Politik, mehr über technische Entwicklungen wie das Smartphone",
+    "Über das Wetter",
+    "Gar nicht"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Aufgabe bedeutet „Veränderung der Beziehungen zu den Eltern und Zuwendung zur Peergroup“?",
+   "o": [
+    "Berufswahl",
+    "Emotionale Ablösung von den Eltern und anderen Erwachsenen",
+    "Körperliche Reifung",
+    "Identitätsfindung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Aufgabe meint „Anbahnung der Lebensziele und der Berufswahl“?",
+   "o": [
+    "Vorbereiten des beruflichen Werdegangs",
+    "Wertesystem",
+    "Lebensform",
+    "Geschlechtsrolle"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wovon hängt die Entwicklung der persönlichen Geschlechtsrolle in erster Linie ab?",
+   "o": [
+    "Von kulturspezifischen Normen und Erwartungen",
+    "Nur von Hormonen",
+    "Nur vom Zufall",
+    "Von der Schulnote"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Tim (16) erzählt Probleme zuerst den Freunden, bleibt aber den Eltern verbunden. Wie ist das einzuordnen?",
+   "o": [
+    "Als Zeichen schlechter Bindung",
+    "Als Teil der emotionalen Ablösung (Zuwendung zur Peergroup)",
+    "Als Berufswahl",
+    "Als Wertewandel"
+   ],
+   "r": 1
+  }
+ ]
+}

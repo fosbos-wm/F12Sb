@@ -1,0 +1,48 @@
+{
+ "titel": "Blockfall: Welche Entwicklungsaufgabe?",
+ "anleitung": "Ordne jedes Beispiel der passenden Aufgabe zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Körperliche Gestalt",
+  "Identität",
+  "Wertesystem",
+  "Ablösung von den Eltern"
+ ],
+ "items": [
+  {
+   "t": "Er steht oft vor dem Spiegel und fühlt sich in seinem neuen Körper fremd.",
+   "k": 0
+  },
+  {
+   "t": "Sie muss die Veränderungen ihres Körpers akzeptieren lernen.",
+   "k": 0
+  },
+  {
+   "t": "Lena probiert Haarfarben, Cliquen und Musikstile aus und fragt: „Wer bin ich?“",
+   "k": 1
+  },
+  {
+   "t": "Er sucht ein Selbstverständnis als einmalige und unverwechselbare Person.",
+   "k": 1
+  },
+  {
+   "t": "Sie prüft die Überzeugungen der Erwachsenen streng und idealistisch.",
+   "k": 2
+  },
+  {
+   "t": "Er definiert religiöse, moralische und politische Orientierung selbst, nicht mehr nur über die Eltern.",
+   "k": 2
+  },
+  {
+   "t": "Sie streitet mit den Eltern über Regeln, weil sie eigene Überzeugungen entwickelt.",
+   "k": 2
+  },
+  {
+   "t": "Tim verbringt seine Freizeit lieber mit der Clique und erzählt Probleme zuerst den Freunden.",
+   "k": 3
+  },
+  {
+   "t": "Die Beziehung zu den Eltern verändert sich, Gleichaltrige werden wichtiger.",
+   "k": 3
+  }
+ ]
+}

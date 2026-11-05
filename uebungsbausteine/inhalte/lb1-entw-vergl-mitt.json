@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Wie entstehen Entwicklungsaufgaben?",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Körperliche Reife",
+  "Erwartungen der Gesellschaft",
+  "Persönliche Ziele und Wertvorstellungen"
+ ],
+ "karten": [
+  {
+   "t": "Hormone verändern den Körper in der Pubertät.",
+   "s": 0
+  },
+  {
+   "t": "Die eigene Erscheinung muss akzeptiert werden.",
+   "s": 0
+  },
+  {
+   "t": "Körperveränderungen lösen die Aufgabe „neue Gestalt akzeptieren“ aus.",
+   "s": 0
+  },
+  {
+   "t": "Mit sechs Jahren beginnt die Schulpflicht.",
+   "s": 1
+  },
+  {
+   "t": "Kinder sollen längere Zeit konzentriert zuhören können.",
+   "s": 1
+  },
+  {
+   "t": "Von Jugendlichen wird erwartet, einen Beruf zu wählen.",
+   "s": 1
+  },
+  {
+   "t": "Eine 22-Jährige möchte mindestens zwei Kinder haben.",
+   "s": 2
+  },
+  {
+   "t": "Eine Jugendliche möchte Ärztin werden und plant ihren Weg.",
+   "s": 2
+  },
+  {
+   "t": "Ein Jugendlicher entwickelt eigene Wertvorstellungen und lebt danach.",
+   "s": 2
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Bindung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Begriff Bindung treffen zu?",
+   "statements": [
+    {
+     "text": "Bindung ist eine relativ dauerhafte, stark emotionale Beziehung.",
+     "richtig": true
+    },
+    {
+     "text": "Jede Person, die sich um die emotionalen und sozialen Bedürfnisse des Kindes kümmert, kann Bindungsperson sein.",
+     "richtig": true
+    },
+    {
+     "text": "Bindung ist von Geburt an von Natur aus vorhanden und muss nicht aufgebaut werden.",
+     "richtig": false
+    },
+    {
+     "text": "Nur die leibliche Mutter kann Bindungsperson sein.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Ben (2) baut im Sandkasten. Ein Hund bellt, Ben erschrickt und läuft weinend zum Vater. Nach dem Trösten spielt er weiter. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Beim Erschrecken zeigt Ben Bindungsverhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Beim Spielen im Sandkasten zeigt Ben Explorationsverhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Der Vater ist für Ben in diesem Moment der sichere Hafen.",
+     "richtig": true
+    },
+    {
+     "text": "Weil Ben spielt, besteht in diesem Moment keine Bindung zum Vater.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Bindungssicherheit und Bindungs-Explorations-Balance treffen zu?",
+   "statements": [
+    {
+     "text": "Einer sicheren Bindung entspricht ein aktives Explorationsverhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Eine unsichere Bindung verhindert die Erforschung der Umgebung.",
+     "richtig": true
+    },
+    {
+     "text": "Bei erhöhtem Sicherheitsbedarf wird das Explorationsverhalten eingestellt.",
+     "richtig": true
+    },
+    {
+     "text": "Bindungsverhalten und Explorationsverhalten schließen die Bindung zur Bezugsperson aus.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Bedeutung der Bindung treffen zu?",
+   "statements": [
+    {
+     "text": "Die Entwicklung des Gehirns wird von der emotionalen Zuwendung geprägt.",
+     "richtig": true
+    },
+    {
+     "text": "Ohne feste Bindungsperson entwickelt sich keine Selbstsicherheit.",
+     "richtig": true
+    },
+    {
+     "text": "Vernachlässigung oder lange Trennung ohne Ersatz ist ein erstrangiger Risikofaktor.",
+     "richtig": true
+    },
+    {
+     "text": "Die Bindungstheorie wurde von Havighurst begründet.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

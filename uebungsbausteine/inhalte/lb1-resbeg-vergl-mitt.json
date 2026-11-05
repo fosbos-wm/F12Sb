@@ -1,0 +1,58 @@
+{
+ "titel": "Theorievergleich: Resilienz oder Vulnerabilität?",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Resilienz",
+  "Vulnerabilität"
+ ],
+ "karten": [
+  {
+   "t": "Georg schafft die Schule nicht, übersteht die Krise aber ohne dauerhafte Beeinträchtigung.",
+   "s": 0
+  },
+  {
+   "t": "Fähigkeit, belastende Ereignisse erfolgreich zu überstehen",
+   "s": 0
+  },
+  {
+   "t": "„Immunsystem der Seele“",
+   "s": 0
+  },
+  {
+   "t": "Vergleich mit dem Löwenzahn, der überall Wurzeln schlägt",
+   "s": 0
+  },
+  {
+   "t": "Erhalt oder Wiederherstellung der Funktionsfähigkeit",
+   "s": 0
+  },
+  {
+   "t": "Ein Kind bewältigt den Umzug nach kurzer Zeit gut.",
+   "s": 0
+  },
+  {
+   "t": "Max zerbricht am Scheitern in der Schule und entwickelt starke Ängste.",
+   "s": 1
+  },
+  {
+   "t": "Erhöhte psychische Verletzlichkeit",
+   "s": 1
+  },
+  {
+   "t": "Geringe psychische Widerstandskraft gegenüber starken Belastungen",
+   "s": 1
+  },
+  {
+   "t": "Ein Kind reagiert auf den Umzug mit anhaltenden Ängsten und Rückzug.",
+   "s": 1
+  },
+  {
+   "t": "Gegenstück zur Resilienz",
+   "s": 1
+  },
+  {
+   "t": "Phasen erhöhter Anfälligkeit in der Entwicklung",
+   "s": 1
+  }
+ ]
+}

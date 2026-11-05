@@ -1,0 +1,116 @@
+{
+ "titel": "Rennen: Fremdbetreuung und Bindungsentwicklung",
+ "anleitung": "Beantworte die Fragen zur Fremdbetreuung.",
+ "fragen": [
+  {
+   "f": "Wann erhöht sich laut Forschung das Risiko für eine unsichere Bindungsentwicklung?",
+   "o": [
+    "Immer, sobald ein Kind in die Krippe geht",
+    "Nur bei hoher Stundenzahl, wechselnden Pflegekräften und wenig feinfühliger Mutter",
+    "Nur bei Kindern ohne Geschwister",
+    "Nie"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Die Mutter-Kind-Beziehung ist zu Hause gut und feinfühlig, die Krippenbedingungen sind mäßig. Was ist wahrscheinlich?",
+   "o": [
+    "Das Kind ist unsicher gebunden",
+    "Das Kind ist eher sicher an die Mutter gebunden",
+    "Das Kind entwickelt keine Bindung",
+    "Das Kind wird zwangsläufig geschädigt"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Die Mutter-Kind-Beziehung ist vorbelastet, das Kind kommt in eine hochwertige Krippe mit feinfühliger Erzieherin. Was ist möglich?",
+   "o": [
+    "Große Chance auf eine sichere Bindung an die Erzieherin",
+    "Unsichere Bindung ist sicher",
+    "Die Krippe hat keine Wirkung",
+    "Bindung ist ausgeschlossen"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was ist das Hauptziel der Eingewöhnung?",
+   "o": [
+    "Das Kind soll möglichst schnell allein bleiben",
+    "Mit Hilfe einer vertrauten Bezugsperson eine stabile Beziehung zwischen Erzieherin und Kind aufbauen",
+    "Die Eltern sollen nicht mehr anwesend sein",
+    "Das Kind soll Trennungsleid abgewöhnen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was gilt laut Grossmann/Grossmann für Trennungsleid in diesem Alter?",
+   "o": [
+    "Es kann abgewöhnt werden",
+    "Es kann nur durch eine vertraute Person gemildert werden",
+    "Es gibt kein Trennungsleid",
+    "Es verschwindet von selbst"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie wird der Betreuungsschlüssel idealerweise bewertet?",
+   "o": [
+    "1 : 10",
+    "1 : 8",
+    "1 : 2 oder 1 : 3",
+    "1 : 6"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Warum ist ein hoher Betreuungsschlüssel (viele Kinder je Erzieherin) problematisch?",
+   "o": [
+    "Feinfühliges, promptes Reagieren auf Signale ist schwieriger",
+    "Kinder sind dann zu selbstständig",
+    "Eltern sind unzufrieden",
+    "Er verbessert die Bindung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was betont John Bowlby?",
+   "o": [
+    "Fremdbetreuung ist grundsätzlich ideal",
+    "Die Trennung eines Kindes unter drei Jahren von der Mutter ist eine ernste Angelegenheit und sollte nur mit Begründung und sorgfältig geplant erfolgen",
+    "Mütter sollen die ganze Last der Erziehung allein tragen",
+    "Bindung ist unwichtig"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Paul (13 Monate) weint beim Weggehen der Mutter in der Kita besonders heftig. Wie ist das einzuordnen?",
+   "o": [
+    "Auffällig: Er ist gestört",
+    "Typisch: Der Anteil schreiender Kinder war mit 13 Monaten am höchsten (Kagan)",
+    "Unwichtig",
+    "Beweis für schlechte Erziehung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was hilft der Erzieherin, zur sicheren Basis zu werden?",
+   "o": [
+    "Strenge Regeln",
+    "Angemessene, feinfühlige Reaktion auf das Bindungsverhalten",
+    "Viele Wechsel des Personals",
+    "Kurze Eingewöhnung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wozu tragen regelmäßige Strukturen im Tagesablauf bei?",
+   "o": [
+    "Zur Orientierung des Kindes in der Krippe",
+    "Zu mehr Stress",
+    "Zu einer unsicheren Bindung",
+    "Zu weniger Betreuungsstunden"
+   ],
+   "r": 0
+  }
+ ]
+}

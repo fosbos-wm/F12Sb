@@ -1,0 +1,58 @@
+{
+ "titel": "Theorievergleich: Risiko oder Schutz bei Fremdbetreuung",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Risiko für unsichere Bindung",
+  "Schutz für sichere Bindung"
+ ],
+ "karten": [
+  {
+   "t": "Viele Stunden Fremdbetreuung schon im ersten Lebensjahr",
+   "s": 0
+  },
+  {
+   "t": "Betreuungspersonen wechseln ständig",
+   "s": 0
+  },
+  {
+   "t": "Mutter ist dem Kind gegenüber wenig feinfühlig",
+   "s": 0
+  },
+  {
+   "t": "Tagesablauf ohne Struktur und Orientierung",
+   "s": 0
+  },
+  {
+   "t": "Betreuungsschlüssel 1 : 8",
+   "s": 0
+  },
+  {
+   "t": "Eingewöhnung verläuft zu wenig behutsam",
+   "s": 0
+  },
+  {
+   "t": "Feinfühlige Mutter-Kind-Beziehung zu Hause",
+   "s": 1
+  },
+  {
+   "t": "Feinfühlige Erzieherinnen in einer Krippe mit hoher Qualität",
+   "s": 1
+  },
+  {
+   "t": "Betreuungsschlüssel 1 : 3",
+   "s": 1
+  },
+  {
+   "t": "Regelmäßige Strukturen im Tagesablauf",
+   "s": 1
+  },
+  {
+   "t": "Allmähliche Steigerung der Trennungsphasen",
+   "s": 1
+  },
+  {
+   "t": "Gleichbleibende Bezugserzieherin",
+   "s": 1
+  }
+ ]
+}

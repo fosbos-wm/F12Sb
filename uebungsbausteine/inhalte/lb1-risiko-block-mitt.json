@@ -1,0 +1,76 @@
+{
+ "titel": "Blockfall: Welche Art von Faktor?",
+ "anleitung": "Ordne jeden Faktor der richtigen Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Kindbezogener Risikofaktor",
+  "Umweltbezogener Risikofaktor",
+  "Personaler Schutzfaktor",
+  "Sozialer Schutzfaktor"
+ ],
+ "items": [
+  {
+   "t": "Frühgeburt",
+   "k": 0
+  },
+  {
+   "t": "Chronische Erkrankung des Kindes",
+   "k": 0
+  },
+  {
+   "t": "Geringe kognitive Fähigkeiten",
+   "k": 0
+  },
+  {
+   "t": "Geringes Selbstwertgefühl",
+   "k": 0
+  },
+  {
+   "t": "Armut der Familie",
+   "k": 1
+  },
+  {
+   "t": "Chronischer Streit der Eltern",
+   "k": 1
+  },
+  {
+   "t": "Alkohol- oder Drogenmissbrauch der Eltern",
+   "k": 1
+  },
+  {
+   "t": "Erziehungsdefizite",
+   "k": 1
+  },
+  {
+   "t": "Optimistische Lebenseinstellung",
+   "k": 2
+  },
+  {
+   "t": "Hohe Selbstwirksamkeit",
+   "k": 2
+  },
+  {
+   "t": "Fähigkeit, eigene Stärken zu erkennen",
+   "k": 2
+  },
+  {
+   "t": "Positiver Denkstil",
+   "k": 2
+  },
+  {
+   "t": "Sichere Bindung in der frühesten Kindheit",
+   "k": 3
+  },
+  {
+   "t": "Positives Erziehungsklima",
+   "k": 3
+  },
+  {
+   "t": "Gute Freundschaften",
+   "k": 3
+  },
+  {
+   "t": "Soziale Unterstützungsnetzwerke",
+   "k": 3
+  }
+ ]
+}

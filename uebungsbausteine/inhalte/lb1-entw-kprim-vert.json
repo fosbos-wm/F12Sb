@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Entwicklungsaufgaben und Jugend",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Entwicklungsaufgaben treffen zu?",
+   "statements": [
+    {
+     "text": "Sie treten in einem bestimmten Lebensabschnitt auf und müssen dort bewältigt werden.",
+     "richtig": true
+    },
+    {
+     "text": "Die erfolgreiche Bewältigung ermöglicht in der Regel eine weitere positive Entwicklung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entstehen nur aus der körperlichen Reife.",
+     "richtig": false
+    },
+    {
+     "text": "Eltern und Erzieher können zur Bewältigung nichts beitragen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Havighurst treffen zu?",
+   "statements": [
+    {
+     "text": "Er entwarf das Konzept der Entwicklungsaufgaben erstmals.",
+     "richtig": true
+    },
+    {
+     "text": "Für die frühe Kindheit nennt er z. B. den Erwerb der Geschlechtsrolle.",
+     "richtig": true
+    },
+    {
+     "text": "Manche Aufgaben, z. B. „Vorbereitung auf Ehe und Familie“, müssen wegen des gesellschaftlichen Wandels überdacht werden.",
+     "richtig": true
+    },
+    {
+     "text": "Seine Aufgaben gelten unverändert für alle Gesellschaften der Gegenwart.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Begriff Jugend treffen zu?",
+   "statements": [
+    {
+     "text": "Das Jugendalter ist eine Phase des Übergangs.",
+     "richtig": true
+    },
+    {
+     "text": "Jugend als eigenständiger Lebensabschnitt wurde erst im 19. und 20. Jahrhundert für breite Schichten relevant.",
+     "richtig": true
+    },
+    {
+     "text": "Die Erwartungen an Jugendliche sind eindeutig festgelegt.",
+     "richtig": false
+    },
+    {
+     "text": "Die Rolle des Jugendlichen ist genau beschrieben, die des Kindes nicht.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Eine 16-Jährige darf bei vielem mitentscheiden, gilt aber nicht als erwachsen. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das ist typisch für den Übergangscharakter des Jugendalters.",
+     "richtig": true
+    },
+    {
+     "text": "Unklare Erwartungen können zu Problemen führen.",
+     "richtig": true
+    },
+    {
+     "text": "Sie hat bereits die Rolle des Erwachsenen vollständig übernommen.",
+     "richtig": false
+    },
+    {
+     "text": "Sie hat noch die Rolle eines Kleinkindes.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

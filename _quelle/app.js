@@ -22114,7 +22114,7 @@ async function kwFaPicker(kat,themaId,modus){
  const ew=new Set(kwWorte(e.thema));
  const passt=t=>kwWorte(t).some(w=>ew.has(w));
  const ubThemen=n=>[...new Set(ub.filter(x=>(x.pfad||[])[0]==="LB "+n).map(x=>x.thema))];
- const ubZeile=x=>{const url=`uebungsbausteine/station.html?s=${x.id}`,da=schonUrl.has(url);return`<label class="check"><input type="checkbox" class="kwUbCb" value="${esc(x.id)}" data-st="${esc(x.stufe||"uebung")}"${da?" checked disabled":""}> <span><b>${esc(x.titel)}</b> <small>${[(x.pfad||[]).slice(-1)[0]||"",x.stufe==="vertiefung"?"Vertiefung":"",da?"schon hinzugefügt":""].filter(Boolean).map(esc).join(" · ")}</small></span></label>`};
+ const ubZeile=x=>{const url=`uebungsbausteine/station.html?s=${x.id}`,da=schonUrl.has(url);return`<label class="check"><input type="checkbox" class="kwUbCb" value="${esc(x.id)}" data-st="${esc(x.stufe||"uebung")}"${da?" checked disabled":""}> <span><b>${esc(x.titel)}</b> <small>${[x.schwierigkeit?(x.uebungsart||"")+" · "+x.schwierigkeit:((x.pfad||[]).slice(-1)[0]||""),x.stufe==="vertiefung"?"Vertiefung":"",da?"schon hinzugefügt":""].filter(Boolean).map(esc).join(" · ")}</small></span></label>`};
  const kkGr=KW_KK[e.id];
  const kkZeile=n=>{const mit=n===ph.lbNum&&kkGr,url=`karteikarten/index.html?lb=${n}`+(mit?`&thema=${encodeURIComponent(kkGr)}`:""),t=`LB ${n} · ${mit?kkGr:"Alle Themen"} · Karteikarten`,da=schonUrl.has(url);return`<label class="check"><input type="checkbox" class="kwKkCb" value="${esc(url)}" data-t="${esc(t)}"${da?" checked disabled":""}> <span><b>${esc(t)}</b> <small>${da?"schon hinzugefügt":"Begriffe und Definitionen zum Üben"}</small></span></label>`};
  const lbGr=n=>{

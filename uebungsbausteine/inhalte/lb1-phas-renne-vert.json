@@ -1,0 +1,126 @@
+{
+ "titel": "Rennen: Bindungsphasen und -beziehungen",
+ "anleitung": "Beantworte die Fragen zu Bindungsphasen und Bindungsbeziehungen.",
+ "fragen": [
+  {
+   "f": "Lena (8 Monate) krabbelt der Mutter nach und weint, wenn sie sie nicht findet. In welcher Phase ist sie?",
+   "o": [
+    "Vor-Bindungsphase",
+    "Beginnende Bindung",
+    "Eigentliche Bindung",
+    "Zielkorrigierte Partnerschaft"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welches Merkmal gehört NICHT zur Phase der eigentlichen Bindung?",
+   "o": [
+    "aktives Annähern (Lokomotion)",
+    "Vermissen bei Abwesenheit",
+    "Verhandeln mit der Bindungsperson durch Sprache",
+    "flexibles Verhalten mit dem Ziel Nähe"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was bedeutet „primäre Bindungsbeziehung“?",
+   "o": [
+    "Bindung zu Gleichaltrigen",
+    "Bindung zu der Person, zu der der Säugling in den ersten Lebensmonaten den intensivsten Kontakt hat",
+    "Bindung zu Lehrkräften",
+    "Bindung im Erwachsenenalter"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Bindung ist ein Beispiel für eine sekundäre Bindungsbeziehung?",
+   "o": [
+    "Mutter, die ab Geburt den intensivsten Kontakt hat",
+    "Erzieherin in der Kita",
+    "Hauptbezugsperson im ersten Lebensmonat",
+    "keine der genannten"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie unterscheidet sich die Bindung zu Erzieher/Lehrer von der in der Familie?",
+   "o": [
+    "Sie ist intensiver",
+    "Das Kind hat die volle Aufmerksamkeit",
+    "Sie schenken nur zeitweise die volle Aufmerksamkeit und sind auch für andere Kinder zuständig",
+    "Es gibt keinen Unterschied"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wofür sind primäre Bindungsbeziehungen laut Lehrtext die Grundlage?",
+   "o": [
+    "Nur für motorische Fähigkeiten",
+    "Für Sozialverhalten und Bindungsfähigkeit",
+    "Nur für die Sprache",
+    "Für die Berufswahl"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Rolle haben Väter laut Lehrtext häufig im Verhalten gegenüber dem Kind?",
+   "o": [
+    "Sie stimulieren eher die Motorik und unterstützen das Neugierverhalten",
+    "Sie bieten ausschließlich Schutz",
+    "Sie haben keinen Einfluss",
+    "Sie sind immer primäre Bindungsperson"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie zeigen sich sicher gebundene Erwachsene in Paarbeziehungen?",
+   "o": [
+    "Eifersucht und Misstrauen",
+    "Probleme mit zu großer Nähe",
+    "Beziehungen werden eher mit Vertrauen, Freundschaft, Glück verbunden",
+    "Sie vermeiden Beziehungen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Mia (2½) sagt: „Mama, bleib noch! Erst Bilderbuch, dann Kita.“ Welche Phase zeigt dies?",
+   "o": [
+    "Vor-Bindung",
+    "Beginnende Bindung",
+    "Eigentliche Bindung",
+    "Zielkorrigierte Partnerschaft"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Ein Baby (3 Monate) lächelt Mama an, bleibt bei Fremden ernst. Phase?",
+   "o": [
+    "Vor-Bindungsphase",
+    "Beginnende Bindung / Zielorientierung",
+    "Eigentliche Bindung",
+    "Zielkorrigierte Partnerschaft"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Warum sind die Zeitangaben der Phasen nur grobe Werte?",
+   "o": [
+    "Weil Phasen nicht existieren",
+    "Weil jedes Kind anders ist; es sind grob geschätzte Werte",
+    "Weil sie nur für Mädchen gelten",
+    "Weil sie widerlegt sind"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wer hat die vier Phasen der Bindungsentwicklung beschrieben?",
+   "o": [
+    "Havighurst",
+    "Ainsworth et al.",
+    "Freud",
+    "Erikson"
+   ],
+   "r": 1
+  }
+ ]
+}

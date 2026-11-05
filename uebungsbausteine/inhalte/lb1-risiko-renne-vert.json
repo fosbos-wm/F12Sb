@@ -1,0 +1,126 @@
+{
+ "titel": "Rennen: Risiko- und Schutzfaktoren",
+ "anleitung": "Beantworte die Fragen zu Risiko- und Schutzfaktoren.",
+ "fragen": [
+  {
+   "f": "Sind Risikofaktoren Ursachen von Krankheiten?",
+   "o": [
+    "Ja, immer",
+    "Nein, sie erhöhen nur das Risiko zu erkranken",
+    "Nur bei Kindern",
+    "Nur bei Trauma"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Aussage zur Wirkung mehrerer Risikofaktoren stimmt?",
+   "o": [
+    "Sie treten meist einzeln auf",
+    "Meist wirken mehrere zusammen, auch die Dauer spielt eine Rolle",
+    "Die Dauer ist unwichtig",
+    "Frühe Risiken haben keinen Einfluss auf spätere"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Ein Kind ist jahrelang der Gewalt des Vaters ausgesetzt. Was wird vermutlich geschehen?",
+   "o": [
+    "Es wird weniger verletzbar als ein Kind mit kurzer Belastung",
+    "Es wird vermutlich verletzbarer sein",
+    "Es entwickelt sich unverändert",
+    "Es erwirbt automatisch Resilienz"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welches Beispiel ist ein psychisches Trauma?",
+   "o": [
+    "Ein kurzer Streit",
+    "Ein Unfall oder sexueller Missbrauch, der anhaltend nicht verarbeitet werden kann",
+    "Eine schlechte Note",
+    "Ein Umzug"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was zeigt die Kauai-Studie?",
+   "o": [
+    "Risikofaktoren führen immer zu Störungen",
+    "Viele Menschen entwickeln sich trotz zahlreicher Risikofaktoren positiv",
+    "Schutzfaktoren gibt es nicht",
+    "Nur Armut ist wichtig"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist laut Lehrtext der beständigste und bedeutsamste Schutzfaktor?",
+   "o": [
+    "Hohe Intelligenz",
+    "Die frühe Qualität der Beziehung zwischen Kind und Bezugsperson (sichere Bindung)",
+    "Das Geschlecht",
+    "Der Wohnort"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Jana wächst belastet auf, glaubt „Ich schaffe das“, holt sich Hilfe und findet Freunde im Verein. Welche Schutzfaktoren zeigen sich?",
+   "o": [
+    "Nur Intelligenz",
+    "Selbstwirksamkeit, Nutzen der Stärken und soziales Netz",
+    "Nur Zufall",
+    "Keine"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Faktor zählt zu den sozialen Schutzfaktoren?",
+   "o": [
+    "Robustheit",
+    "Hohe Intelligenz",
+    "Soziale Unterstützungsnetzwerke",
+    "Positive Grundstimmung"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was bedeutet „Risiko- und Schutzmechanismen wirken zusammen“?",
+   "o": [
+    "Sie sind unabhängig",
+    "Sie beeinflussen sich gegenseitig in einem komplexen Wirkmechanismus",
+    "Schutz hebt Risiko immer auf",
+    "Nur das Risiko zählt"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Faktor ist ein kindbezogener Risikofaktor, der durch die Umwelt verursacht wird?",
+   "o": [
+    "Frühgeburt",
+    "Unsichere Bindung",
+    "Chronische Krankheit",
+    "Geringe kognitive Fähigkeiten"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was meint der „positive Denkstil“?",
+   "o": [
+    "Alles schönreden",
+    "Situationen „positiv“ interpretieren und nicht „katastrophieren“",
+    "Probleme verdrängen",
+    "Pech als Strafe sehen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie werden Schutzfaktoren in der Literatur oft noch genannt?",
+   "o": [
+    "Risiken",
+    "Ressourcen",
+    "Defizite",
+    "Auslöser"
+   ],
+   "r": 1
+  }
+ ]
+}

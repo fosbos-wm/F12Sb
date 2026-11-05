@@ -1,0 +1,60 @@
+{
+ "titel": "Blockfall: Welche Bindungsphase?",
+ "anleitung": "Ordne jeden Fall der passenden Phase zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Vor-Bindung",
+  "Beginnende Bindung",
+  "Eigentliche Bindung",
+  "Zielkorrigierte Partnerschaft"
+ ],
+ "items": [
+  {
+   "t": "Ein Säugling (4 Wochen) lächelt jeden an, der sich über ihn beugt.",
+   "k": 0
+  },
+  {
+   "t": "Das Baby (6 Wochen) umklammert reflexartig jeden Finger.",
+   "k": 0
+  },
+  {
+   "t": "Der Säugling schreit, ohne dass sein Weinen an eine bestimmte Person gerichtet ist.",
+   "k": 0
+  },
+  {
+   "t": "Mit 4 Monaten lächelt das Baby seine Mutter an, bei Fremden bleibt es ernst.",
+   "k": 1
+  },
+  {
+   "t": "Das Baby unterscheidet Familienmitglieder und wendet seine Signale bevorzugt den vertrauten Personen zu.",
+   "k": 1
+  },
+  {
+   "t": "Mit 5 Monaten streckt es nur den Eltern die Arme entgegen.",
+   "k": 1
+  },
+  {
+   "t": "Mit 9 Monaten krabbelt das Kind der Mutter nach, als sie das Zimmer verlässt.",
+   "k": 2
+  },
+  {
+   "t": "Das Kind (10 Monate) weint, wenn die Bindungsperson fehlt, und sucht sie.",
+   "k": 2
+  },
+  {
+   "t": "Es eilt bei Angst zur Mutter, die zur Sicherheitsbasis geworden ist.",
+   "k": 2
+  },
+  {
+   "t": "Mit 2½ Jahren sagt das Kind: „Erst Bilderbuch, dann gehst du.“",
+   "k": 3
+  },
+  {
+   "t": "Das Kind versteht, dass die Mutter wegen ihrer Arbeit gehen muss, und verhandelt über die Rückkehrzeit.",
+   "k": 3
+  },
+  {
+   "t": "Es kann den Blickwinkel der Bindungsperson übernehmen und ihr Verhalten nachvollziehen.",
+   "k": 3
+  }
+ ]
+}

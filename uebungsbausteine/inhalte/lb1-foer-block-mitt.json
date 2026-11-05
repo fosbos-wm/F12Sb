@@ -1,0 +1,53 @@
+{
+ "titel": "Blockfall: Welcher Bestandteil der Feinfühligkeit?",
+ "anleitung": "Ordne jedes Verhalten dem Bestandteil zu, der gemeint ist.",
+ "kategorien": [
+  "Wahrnehmen",
+  "Interpretieren",
+  "Bedürfnisse erkennen",
+  "Angemessen handeln",
+  "Prompt reagieren"
+ ],
+ "items": [
+  {
+   "t": "Sie bemerkt schon leichte Spannungen in den Mundbewegungen des Babys.",
+   "k": 0
+  },
+  {
+   "t": "Der Vater ignoriert das leise Wimmern nicht, sondern bemerkt es.",
+   "k": 0
+  },
+  {
+   "t": "Er unterscheidet Müdigkeit von Hunger anhand der Signale.",
+   "k": 1
+  },
+  {
+   "t": "Sie deutet das unruhige Verlangen nach Aufmerksamkeit nicht als Müdigkeit, nur weil sie keine Zeit hat.",
+   "k": 1
+  },
+  {
+   "t": "Sie versetzt sich in die Angst des Kindes vor dem fremden Besucher.",
+   "k": 2
+  },
+  {
+   "t": "Er sieht die Dinge vom Standpunkt des Babys aus, statt über seine Angst zu lachen.",
+   "k": 2
+  },
+  {
+   "t": "Sie gibt dem hungrigen Baby etwas zu essen, statt mit ihm zu spielen.",
+   "k": 3
+  },
+  {
+   "t": "Er tröstet nur so lange, wie das Kind es braucht, und lässt es dann erkunden.",
+   "k": 3
+  },
+  {
+   "t": "Sie nimmt das Kind sofort hoch, als es die Ärmchen ausstreckt.",
+   "k": 4
+  },
+  {
+   "t": "Sie reagiert auf das Weinen innerhalb einer für das Kind tolerablen Frustrationszeit.",
+   "k": 4
+  }
+ ]
+}

@@ -658,5 +658,761 @@
    "Alle Bereiche gemischt",
    "Wichtel-Schubkarrenrennen"
   ]
+ },
+ {
+  "id": "lb1-bind-zuord-leic",
+  "titel": "Zuordnung Bindung: Begriff – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fachbegriffe der Bindungstheorie ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1-bind-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindung: Begriff",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Bindung: Begriff",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-bind-lueck-mitt",
+  "titel": "Lückentext Bindung: Begriff – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Den Text zur Bindung mit den richtigen Fachbegriffen vervollständigen.",
+  "datei": "luecken.html?set=lb1-bind-lueck-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindung: Begriff",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Bindung: Begriff",
+   "Lückentext",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-bind-kprim-vert",
+  "titel": "K-Prim Bindung: Begriff – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen zu Bindung, Bindungsperson und Fallbeispielen prüfen.",
+  "datei": "kprim.html?set=lb1-bind-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindung: Begriff",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Bindung: Begriff",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-phas-memor-leic",
+  "titel": "Memory Bindungsphasen und -beziehungen – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Phasen der Bindungsentwicklung und ihre Merkmale als Paare aufdecken.",
+  "datei": "memory.html?set=lb1-phas-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindungsphasen und -beziehungen",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Bindungsphasen und -beziehungen",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-phas-block-mitt",
+  "titel": "Blockfall Bindungsphasen und -beziehungen – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbeispiele unter Zeitdruck der passenden Bindungsphase zuordnen.",
+  "datei": "blockfall.html?set=lb1-phas-block-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindungsphasen und -beziehungen",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Bindungsphasen und -beziehungen",
+   "Blockfall",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-phas-renne-vert",
+  "titel": "Rennen Bindungsphasen und -beziehungen – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zu Phasen, primären und sekundären Bindungen und Fallbeispielen beantworten.",
+  "datei": "rennen.html?set=lb1-phas-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindungsphasen und -beziehungen",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Bindungsphasen und -beziehungen",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-foer-zuord-leic",
+  "titel": "Zuordnung Förderung gelungener Bindung – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die fünf Bestandteile der Feinfühligkeit mit ihrer Bedeutung verbinden.",
+  "datei": "zuordnung.html?set=lb1-foer-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Förderung gelungener Bindung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Förderung gelungener Bindung",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-foer-block-mitt",
+  "titel": "Blockfall Förderung gelungener Bindung – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhalten von Bindungspersonen dem passenden Bestandteil der Feinfühligkeit zuordnen.",
+  "datei": "blockfall.html?set=lb1-foer-block-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Förderung gelungener Bindung",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Förderung gelungener Bindung",
+   "Blockfall",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-foer-kprim-vert",
+  "titel": "K-Prim Förderung gelungener Bindung – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen zu Feinfühligkeit, Fallbeispielen und „Angst zu verwöhnen“ prüfen.",
+  "datei": "kprim.html?set=lb1-foer-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Förderung gelungener Bindung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Förderung gelungener Bindung",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-fremd-memor-leic",
+  "titel": "Memory Fremdbetreuung und Bindung – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe zur Fremdbetreuung und ihre Erklärungen als Paare aufdecken.",
+  "datei": "memory.html?set=lb1-fremd-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fremdbetreuung und Bindung",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Fremdbetreuung und Bindung",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-fremd-vergl-mitt",
+  "titel": "Theorievergleich Fremdbetreuung und Bindung – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den Risikobedingungen oder den Schutzbedingungen der Fremdbetreuung zuordnen.",
+  "datei": "vergleich.html?set=lb1-fremd-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fremdbetreuung und Bindung",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Fremdbetreuung und Bindung",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-fremd-renne-vert",
+  "titel": "Rennen Fremdbetreuung und Bindung – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zur Fremdbetreuung, Eingewöhnung und zu Fallbeispielen beantworten.",
+  "datei": "rennen.html?set=lb1-fremd-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fremdbetreuung und Bindung",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Fremdbetreuung und Bindung",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-resbeg-lueck-leic",
+  "titel": "Lückentext Resilienz: Begriff und Bedeutung – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Den Text zu Resilienz und Vulnerabilität mit Fachbegriffen vervollständigen.",
+  "datei": "luecken.html?set=lb1-resbeg-lueck-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Resilienz: Begriff und Bedeutung",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Resilienz: Begriff und Bedeutung",
+   "Lückentext",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-resbeg-vergl-mitt",
+  "titel": "Theorievergleich Resilienz: Begriff und Bedeutung – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen und Fälle der Resilienz oder der Vulnerabilität zuordnen.",
+  "datei": "vergleich.html?set=lb1-resbeg-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Resilienz: Begriff und Bedeutung",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Resilienz: Begriff und Bedeutung",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-resbeg-kprim-vert",
+  "titel": "K-Prim Resilienz: Begriff und Bedeutung – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen zu Begriff, Bedeutung und Kritik der Resilienz prüfen.",
+  "datei": "kprim.html?set=lb1-resbeg-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Resilienz: Begriff und Bedeutung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Resilienz: Begriff und Bedeutung",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-risiko-zuord-leic",
+  "titel": "Zuordnung Risiko- und Schutzfaktoren – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe der Risiko- und Schutzfaktoren ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1-risiko-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Risiko- und Schutzfaktoren",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Risiko- und Schutzfaktoren",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-risiko-block-mitt",
+  "titel": "Blockfall Risiko- und Schutzfaktoren – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Faktoren den vier Kategorien der Risiko- und Schutzfaktoren zuordnen.",
+  "datei": "blockfall.html?set=lb1-risiko-block-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Risiko- und Schutzfaktoren",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Risiko- und Schutzfaktoren",
+   "Blockfall",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-risiko-renne-vert",
+  "titel": "Rennen Risiko- und Schutzfaktoren – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zu Risiko- und Schutzfaktoren anhand von Definitionen und Fällen beantworten.",
+  "datei": "rennen.html?set=lb1-risiko-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Risiko- und Schutzfaktoren",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Risiko- und Schutzfaktoren",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-resfoe-memor-leic",
+  "titel": "Memory Resilienz fördern – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Möglichkeiten zur Stärkung der Resilienz und ihre Inhalte als Paare aufdecken.",
+  "datei": "memory.html?set=lb1-resfoe-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Resilienz fördern",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Resilienz fördern",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-resfoe-lueck-mitt",
+  "titel": "Lückentext Resilienz fördern – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Den Text zur Förderung der Resilienz mit Fachbegriffen vervollständigen.",
+  "datei": "luecken.html?set=lb1-resfoe-lueck-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Resilienz fördern",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Resilienz fördern",
+   "Lückentext",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-resfoe-block-vert",
+  "titel": "Blockfall Resilienz fördern – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Beispiele aus dem Erziehungsalltag der passenden Fördermöglichkeit der Resilienz zuordnen.",
+  "datei": "blockfall.html?set=lb1-resfoe-block-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Resilienz fördern",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Resilienz fördern",
+   "Blockfall",
+   "vertieft"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-entw-zuord-leic",
+  "titel": "Zuordnung Entwicklungsaufgaben und Jugend – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe zu Entwicklungsaufgaben und zum Jugendalter ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1-entw-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklungsaufgaben und Jugend",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Entwicklungsaufgaben und Jugend",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-entw-vergl-mitt",
+  "titel": "Theorievergleich Entwicklungsaufgaben und Jugend – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Beispiele den drei Entstehungsbedingungen von Entwicklungsaufgaben zuordnen.",
+  "datei": "vergleich.html?set=lb1-entw-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklungsaufgaben und Jugend",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Entwicklungsaufgaben und Jugend",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-entw-kprim-vert",
+  "titel": "K-Prim Entwicklungsaufgaben und Jugend – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen zu Entwicklungsaufgaben, Havighurst und Jugend prüfen.",
+  "datei": "kprim.html?set=lb1-entw-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklungsaufgaben und Jugend",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Entwicklungsaufgaben und Jugend",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-jug-memor-leic",
+  "titel": "Memory Aufgaben im Jugendalter – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die sieben Entwicklungsaufgaben im Jugendalter und ihre Inhalte als Paare aufdecken.",
+  "datei": "memory.html?set=lb1-jug-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgaben im Jugendalter",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Aufgaben im Jugendalter",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-jug-block-mitt",
+  "titel": "Blockfall Aufgaben im Jugendalter – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Beispiele der passenden Entwicklungsaufgabe im Jugendalter zuordnen.",
+  "datei": "blockfall.html?set=lb1-jug-block-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgaben im Jugendalter",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Aufgaben im Jugendalter",
+   "Blockfall",
+   "mittel"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb1-jug-renne-vert",
+  "titel": "Rennen Aufgaben im Jugendalter – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zu den Entwicklungsaufgaben im Jugendalter anhand von Definitionen und Fällen beantworten.",
+  "datei": "rennen.html?set=lb1-jug-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgaben im Jugendalter",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Aufgaben im Jugendalter",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true
  }
 ]

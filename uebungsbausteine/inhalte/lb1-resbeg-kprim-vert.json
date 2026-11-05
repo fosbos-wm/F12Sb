@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Resilienz",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Begriff Resilienz treffen zu?",
+   "statements": [
+    {
+     "text": "Resilienz bedeutet psychische Widerstandskraft.",
+     "richtig": true
+    },
+    {
+     "text": "Resilienz ist keine feste Größe, sondern verändert sich im Lauf des Lebens.",
+     "richtig": true
+    },
+    {
+     "text": "Resilienz ist eine angeborene, unveränderliche Eigenschaft.",
+     "richtig": false
+    },
+    {
+     "text": "Vulnerabilität ist ein anderes Wort für Resilienz.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Max und Georg scheitern beide in der Schule. Max entwickelt Ängste, Georg übersteht die Krise ohne Beeinträchtigung. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Georg ist resilient.",
+     "richtig": true
+    },
+    {
+     "text": "Bei Max liegt eine Vulnerabilität vor.",
+     "richtig": true
+    },
+    {
+     "text": "Beide verhalten sich resilient, weil beide scheitern.",
+     "richtig": false
+    },
+    {
+     "text": "Das Scheitern selbst beweist, dass Georg vulnerabel ist.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Bedeutung der Resilienz treffen zu?",
+   "statements": [
+    {
+     "text": "Die Herausforderungen sind vielfältiger geworden (z. B. Leistungsdruck, Armut).",
+     "richtig": true
+    },
+    {
+     "text": "Resilienz ist eine wichtige Voraussetzung für selbstsichere, gesunde, kompetente Kinder.",
+     "richtig": true
+    },
+    {
+     "text": "Laut Mannheimer Risikostudie schneiden Kinder aus belasteten Familien langfristig deutlich schlechter ab.",
+     "richtig": true
+    },
+    {
+     "text": "Resilienz spielt nur für Erwachsene eine Rolle.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Kritik und zu den Forschungsfragen treffen zu?",
+   "statements": [
+    {
+     "text": "Kritik: Das Konzept könne als Vorwand dienen, keinen Einfluss auf die Welt nehmen zu müssen.",
+     "richtig": true
+    },
+    {
+     "text": "Die Forschung fragt, welche Faktoren Krankheit begünstigen (Risikofaktoren).",
+     "richtig": true
+    },
+    {
+     "text": "Die Forschung fragt, wodurch sich resiliente Menschen unterscheiden (Schutzfaktoren).",
+     "richtig": true
+    },
+    {
+     "text": "Ziel des Konzepts sei laut Kritik die Gestaltung menschenwürdiger Lebensumstände.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

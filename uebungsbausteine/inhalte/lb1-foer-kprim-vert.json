@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Feinfühligkeit und Verwöhnen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Feinfühligkeit treffen zu?",
+   "statements": [
+    {
+     "text": "Feinfühligkeit ist von zentraler Bedeutung für die Qualität der Bindung.",
+     "richtig": true
+    },
+    {
+     "text": "Zugänglichkeit allein reicht für Feinfühligkeit nicht aus.",
+     "richtig": true
+    },
+    {
+     "text": "Eine Reaktion muss nicht prompt erfolgen, Hauptsache sie ist angemessen.",
+     "richtig": false
+    },
+    {
+     "text": "Feinfühligkeit bedeutet, dem Kind nur dann Nähe zu geben, wenn der Erwachsene es will.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Ein Baby quengelt. Die Mutter hört es, erkennt Hunger, versetzt sich in sein Unbehagen und füttert es sofort. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Alle fünf Bestandteile der Feinfühligkeit sind erfüllt.",
+     "richtig": true
+    },
+    {
+     "text": "Das Kind erlebt, dass sein Signal etwas bewirkt.",
+     "richtig": true
+    },
+    {
+     "text": "Die Mutter verwöhnt das Kind durch die schnelle Reaktion.",
+     "richtig": false
+    },
+    {
+     "text": "Die Reaktion ist nicht prompt, weil das Kind noch nicht schreit.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu „Angst zu verwöhnen“ treffen zu?",
+   "statements": [
+    {
+     "text": "Der Säugling hat noch kein bewusstes „Ich“.",
+     "richtig": true
+    },
+    {
+     "text": "Bei Nichtbeachtung erfährt der Säugling, dass seine Bedürfnisse nichts zählen.",
+     "richtig": true
+    },
+    {
+     "text": "Selbstregulation wird durch Erfahrungen der Ko-Regulation gelernt.",
+     "richtig": true
+    },
+    {
+     "text": "Man sollte das Kind vom ersten Lebenstag an zum Warten und Verzichten erziehen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Fehlinterpretationen entstehen durch Verzerrung der Wahrnehmung?",
+   "statements": [
+    {
+     "text": "Eine Mutter, die nicht bei ihrem Baby sein will, deutet dessen Unruhe als Müdigkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Eine Mutter in Eile deutet langsameres Essen als Zeichen der Sättigung.",
+     "richtig": true
+    },
+    {
+     "text": "Eine Mutter, die ihr Kind ablehnt, nimmt es eher als zurückweisend wahr.",
+     "richtig": true
+    },
+    {
+     "text": "Verzerrung entsteht, wenn die Mutter ihre eigenen Wünsche und Stimmungen genau kennt.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

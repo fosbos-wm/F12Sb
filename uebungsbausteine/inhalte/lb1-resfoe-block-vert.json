@@ -1,0 +1,56 @@
+{
+ "titel": "Blockfall: Welche Möglichkeit stärkt die Resilienz?",
+ "anleitung": "Ordne jedes Beispiel der Fördermöglichkeit zu, die damit gestärkt wird.",
+ "kategorien": [
+  "Sichere Bindung",
+  "Selbstwirksamkeit",
+  "Autoritative Erziehung",
+  "Soziale Beziehungen"
+ ],
+ "items": [
+  {
+   "t": "Die Bezugserzieherin tröstet das weinende Kind und bleibt bei ihm.",
+   "k": 0
+  },
+  {
+   "t": "Die Eltern geben Nähe und Zärtlichkeit, wenn das Kind sie braucht.",
+   "k": 0
+  },
+  {
+   "t": "Das Kleinkind erfährt: Mein Signal wird beantwortet, ich bin sicher.",
+   "k": 0
+  },
+  {
+   "t": "Das Kind baut mit Hilfe allein den Turm fertig und hört: „Das hast du selbst geschafft.“",
+   "k": 1
+  },
+  {
+   "t": "Ein Schüler erlebt durch eine bewältigte Aufgabe Erfolg und traut sich mehr zu.",
+   "k": 1
+  },
+  {
+   "t": "Die Erzieherin lässt das Kind die Jacke selbst anziehen und hilft nur bei Bedarf.",
+   "k": 1
+  },
+  {
+   "t": "Eltern loben, fordern altersgerecht und halten vereinbarte Regeln konsequent ein.",
+   "k": 2
+  },
+  {
+   "t": "Eine Lehrkraft stellt hohe, aber erreichbare Anforderungen und gibt klare Standards vor.",
+   "k": 2
+  },
+  {
+   "t": "Die Kita organisiert Patenschaften zwischen älteren und jüngeren Kindern.",
+   "k": 3
+  },
+  {
+   "t": "Zwei Kinder, die gern zeichnen, werden zusammengebracht und bilden eine Freundschaft.",
+   "k": 3
+  },
+  {
+   "t": "Das Kind wird in einen Sportverein eingebunden und findet ein Netz Gleichaltriger.",
+   "k": 3
+  }
+ ]
+}

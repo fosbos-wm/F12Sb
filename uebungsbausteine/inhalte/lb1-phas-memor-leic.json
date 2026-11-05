@@ -1,0 +1,38 @@
+{
+ "titel": "Memory: Phasen der Bindung",
+ "anleitung": "Finde zu jeder Phase das passende Merkmal.",
+ "paare": [
+  [
+   "Vor-Bindungsphase",
+   "0–2 Monate, Signale unspezifisch"
+  ],
+  [
+   "Beginnende Bindung",
+   "2–6 Monate, Personen werden unterschieden"
+  ],
+  [
+   "Eigentliche Bindung",
+   "ab ca. 7. Monat, Kind sucht aktiv Nähe"
+  ],
+  [
+   "Zielkorrigierte Partnerschaft",
+   "ab ca. 24. Monat, Kind verhandelt mit Bindungsperson"
+  ],
+  [
+   "Lokomotion",
+   "Kind bringt sich aktiv in die Nähe der Bezugsperson"
+  ],
+  [
+   "Personenpermanenz",
+   "Kind vermisst die Bindungsperson bei Abwesenheit"
+  ],
+  [
+   "Primäre Bindung",
+   "intensivster Kontakt in den ersten Lebensmonaten"
+  ],
+  [
+   "Sekundäre Bindung",
+   "nach der primären Erfahrung aufgebaut, z. B. zu Erzieherin"
+  ]
+ ]
+}
