@@ -1133,6 +1133,7 @@ window.rcDialog=rcDialog;window.rcErzeugen=rcErzeugen;
 if($("motivBtn"))$("motivBtn").onclick=motivUmschalten;
 if($("recoveryBtn"))$("recoveryBtn").addEventListener("click",rcDialog);
 $("logoutBtn").onclick=async()=>{
+ zuordnungMap=null;
  notenLiveZuruecksetzen();
  try{await loadFirebase();await signOut(auth)}catch(e){console.error(e)}
  showAuthMode("stuLogin");
@@ -10352,9 +10353,9 @@ async function openCheckoutErgebnisse(id){
   <p style="font-size:13px;color:var(--muted)">${coDatum(co.datum)} · ${erg.length} ausgewertet · Klassenschnitt ${schnitt} Punkte</p>
   <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>Ergebnis</th></tr></thead>
   <tbody>${students.map(s=>{const a=abgaben[s.uid];
-   if(!a)return`<tr><td>${esc(anzeigeName(s))}</td><td colspan="${(co.aufgaben||[]).length+2}"style="color:var(--muted)">nicht teilgenommen</td></tr>`;
-   if(!a.ausgewertet)return`<tr><td>${esc(anzeigeName(s))}</td><td colspan="${(co.aufgaben||[]).length+2}">noch nicht ausgewertet</td></tr>`;
-   return`<tr style="cursor:pointer"onclick="openCheckoutSchuelerErgebnis('${id}','${s.uid}')"><td>${esc(anzeigeName(s))}</td>${(a.auswertung||[]).map(r=>`<td style="text-align:center"title="${r.fehler} Fehler">${r.be}</td>`).join("")}<td style="text-align:center">${a.be}/${a.maxBE}</td><td><b>${npText(a.notenpunkte)}</b></td></tr>`;}).join("")}</tbody></table></div>
+   if(!a)return`<tr><td>${esc(zName(anzeigeName(s)))}</td><td colspan="${(co.aufgaben||[]).length+2}"style="color:var(--muted)">nicht teilgenommen</td></tr>`;
+   if(!a.ausgewertet)return`<tr><td>${esc(zName(anzeigeName(s)))}</td><td colspan="${(co.aufgaben||[]).length+2}">noch nicht ausgewertet</td></tr>`;
+   return`<tr style="cursor:pointer"onclick="openCheckoutSchuelerErgebnis('${id}','${s.uid}')"><td>${esc(zName(anzeigeName(s)))}</td>${(a.auswertung||[]).map(r=>`<td style="text-align:center"title="${r.fehler} Fehler">${r.be}</td>`).join("")}<td style="text-align:center">${a.be}/${a.maxBE}</td><td><b>${npText(a.notenpunkte)}</b></td></tr>`;}).join("")}</tbody></table></div>
   <div class="form-actions"style="margin-top:14px">
    <button class="secondary"onclick="coNeuAuswerten('${id}')">Neu auswerten</button>
    <button class="secondary"onclick="coLoeschen('${id}')">Löschen</button>
@@ -10365,7 +10366,7 @@ async function openCheckoutSchuelerErgebnis(id,uid){
  let d;try{d=await coLadeErgebnisse(id);}catch(e){return}
  const a=d.abgaben[uid],s=d.students.find(x=>x.uid===uid);
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker">🏁 CHECK-OUT · ${esc(anzeigeName(s))}</div><h2>${esc(d.co.titel)}</h2>
+  <div class="kicker">🏁 CHECK-OUT · ${esc(zName(anzeigeName(s)))}</div><h2>${esc(d.co.titel)}</h2>
   <div class="co-summe">${coSummeHTML(a)}</div>
   ${coRechenwegHTML(a)}
   ${(d.co.aufgaben||[]).map((q,i)=>coAufgabeErgebnisHTML(q,i,a,false,!coVigWiederholt(d.co.aufgaben,i))).join("")}
@@ -10526,8 +10527,8 @@ async function coPdfKlasse(id){
  try{
   const {co,abgaben,students}=await coLadeErgebnisse(id);
   const tabelle=`<table><thead><tr><th>Schüler:in</th>${(co.aufgaben||[]).map((q,i)=>`<th>A${i+1}</th>`).join("")}<th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>
-   ${students.map(s=>{const a=abgaben[s.uid];return`<tr><td>${escPDF(anzeigeName(s))}</td>${a?.ausgewertet?(a.auswertung||[]).map(r=>`<td>${r.be}</td>`).join("")+`<td>${a.be}/${a.maxBE}</td><td>${String(a.prozent).replace(".",",")}</td><td><b>${npText(a.notenpunkte)}</b></td>`:`<td colspan="${(co.aufgaben||[]).length+3}">nicht teilgenommen</td>`}</tr>`;}).join("")}</tbody></table>`;
-  const einzel=students.filter(s=>abgaben[s.uid]?.ausgewertet).map(s=>`<div style="break-before:page">${coPdfBlock(co,abgaben[s.uid],anzeigeName(s))}</div>`).join("");
+   ${students.map(s=>{const a=abgaben[s.uid];return`<tr><td>${escPDF(zName(anzeigeName(s)))}</td>${a?.ausgewertet?(a.auswertung||[]).map(r=>`<td>${r.be}</td>`).join("")+`<td>${a.be}/${a.maxBE}</td><td>${String(a.prozent).replace(".",",")}</td><td><b>${npText(a.notenpunkte)}</b></td>`:`<td colspan="${(co.aufgaben||[]).length+3}">nicht teilgenommen</td>`}</tr>`;}).join("")}</tbody></table>`;
+  const einzel=students.filter(s=>abgaben[s.uid]?.ausgewertet).map(s=>`<div style="break-before:page">${coPdfBlock(co,abgaben[s.uid],zName(anzeigeName(s)))}</div>`).join("");
   openToolPrintWindow(`${co.titel} – Ergebnisse der Klasse`,`<h2>Übersicht</h2>${tabelle}<div style="break-before:page"></div>${coVignettePdf(co)}${einzel}`,`F12Sb · Pädagogik/Psychologie · LB ${co.lbNum} · ${coDatum(co.datum)} · Wertung je Aufgabe ${CHECKOUT_BE_NACH_FEHLERN.slice(0,3).join("/")} BE bei 0/1/2 Fehlern`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
@@ -10700,6 +10701,91 @@ function coRespizienzHintergrundHTML(einst,anzPool){
   <div style="font-size:10px;color:#666;margin-top:4px">Quellen: FOSBOS-Vorgabe „Entscheidungsbasierte Aufgaben“; Bewertungsschlüssel lt. „Unterrichten, Korrigieren und Bewerten im Fach Pädagogik/Psychologie an der Beruflichen Oberschule Bayern“ (Stand 13.09.2022).</div>
  </div>`;
 }
+/* =========================================================
+ NAMENS-ZUORDNUNG (nur Lehrkräfte, nur im Arbeitsspeicher)
+ Die Lehrkraft lädt ihre eigene Liste (CSV: Pseudonym;Name) in den Browser. Sie wird nirgends gespeichert
+ (nicht in Firebase, nicht im Browser-Speicher) und ist beim Neuladen oder Abmelden weg. Sie wird nur für
+ die Anzeige in den Auswertungen und für die Respizienz-PDFs verwendet.
+ ========================================================= */
+let zuordnungMap=null,zuordnungNeu=null;
+function zName(p){
+ if(!zuordnungMap||!isTeacher())return p;
+ const n=zuordnungMap.get(pseudoSlug(p));
+ return n?`${n} (${p})`:p;
+}
+function zSort(arr){
+ if(!zuordnungMap||!isTeacher())return arr;
+ return [...arr].sort((a,b)=>zName(anzeigeName(a)).localeCompare(zName(anzeigeName(b)),"de"));
+}
+function zCsvZeilen(text){
+ text=String(text||"").replace(/^﻿/,"");
+ const erste=text.split(/\r?\n/)[0]||"";
+ const sep=[";","\t",","].map(s=>[s,erste.split(s).length]).sort((a,b)=>b[1]-a[1])[0][0];
+ const zeilen=[];let zeile=[],zelle="",q=false;
+ for(let i=0;i<text.length;i++){
+  const ch=text[i];
+  if(q){if(ch==='"'){if(text[i+1]==='"'){zelle+='"';i++}else q=false}else zelle+=ch}
+  else if(ch==='"')q=true;
+  else if(ch===sep){zeile.push(zelle);zelle=""}
+  else if(ch==="\n"||ch==="\r"){if(ch==="\r"&&text[i+1]==="\n")i++;zeile.push(zelle);zelle="";zeilen.push(zeile);zeile=[]}
+  else zelle+=ch;
+ }
+ if(zelle!==""||zeile.length){zeile.push(zelle);zeilen.push(zeile)}
+ return zeilen.map(z=>z.map(c=>c.trim())).filter(z=>z.some(Boolean));
+}
+// Spalten: "Pseudonym" + "Name" (oder "Vorname"/"Nachname"). Ohne Kopfzeile gilt: 1. Spalte Pseudonym, 2. Spalte Name.
+function zCsvAuswerten(text){
+ const zeilen=zCsvZeilen(text),map=new Map();let doppelt=0;
+ if(!zeilen.length)return{map,doppelt};
+ const kopf=zeilen[0].map(c=>c.toLowerCase());
+ const idx=re=>kopf.findIndex(c=>re.test(c));
+ let pi=idx(/pseudonym/),start=1;
+ let ni=idx(/^(name|klarname|schüler(:in)?|schueler(in)?)$/),vi=idx(/^vorname/),ci=idx(/^(nachname|familienname)/);
+ if(pi<0){pi=0;ni=1;vi=-1;ci=-1;start=0}
+ else if(ni<0&&vi<0&&ci<0){ni=kopf.findIndex((c,k)=>k!==pi)}
+ for(let r=start;r<zeilen.length;r++){
+  const z=zeilen[r],p=(z[pi]||"").trim();
+  let n=(ni>=0?z[ni]||"":"").trim();
+  if(!n&&(vi>=0||ci>=0)){const v=(vi>=0?z[vi]||"":"").trim(),c=(ci>=0?z[ci]||"":"").trim();n=[c,v].filter(Boolean).join(", ")}
+  const k=pseudoSlug(p);
+  if(!k||!n)continue;
+  if(map.has(k)){doppelt++;continue}
+  map.set(k,n);
+ }
+ return{map,doppelt};
+}
+async function zLiesDatei(datei){
+ const buf=await datei.arrayBuffer();
+ try{return new TextDecoder("utf-8",{fatal:true}).decode(buf)}
+ catch(e){return new TextDecoder("windows-1252").decode(buf)}
+}
+function zuordnungLaden(){
+ if(!isTeacher())return;
+ const inp=document.createElement("input");inp.type="file";inp.accept=".csv,.txt,text/csv,text/plain";
+ inp.onchange=async()=>{
+  const f=inp.files&&inp.files[0];if(!f)return;
+  try{
+   const r=zCsvAuswerten(await zLiesDatei(f));
+   if(!r.map.size){toast("Keine Zuordnungen gefunden. Erwartet: eine CSV mit den Spalten Pseudonym und Name.");return}
+   zuordnungMap=r.map;
+   toast(`Zuordnung geladen: ${r.map.size} Namen. Sie liegt nur in diesem Browser-Tab und wird nicht gespeichert.`+(r.doppelt?` ${r.doppelt} doppelte Pseudonyme wurden ignoriert.`:""));
+   if(zuordnungNeu)await zuordnungNeu();
+  }catch(e){console.error(e);toast("Die Datei konnte nicht gelesen werden.")}
+ };
+ inp.click();
+}
+function zuordnungEntfernen(){
+ zuordnungMap=null;toast("Zuordnung entfernt.");
+ if(isTeacher()&&zuordnungNeu)zuordnungNeu();
+}
+function zuordnungBox(students,neu){
+ zuordnungNeu=neu;
+ const stil='margin:0 0 10px;font-size:12px';
+ if(!zuordnungMap)return`<div class="notice"style="${stil}"><b>Namen zuordnen (optional):</b> Lade deine eigene Liste (CSV mit den Spalten Pseudonym und Name). Sie bleibt nur in diesem Browser-Tab, wird nirgends gespeichert und ist beim Neuladen oder Abmelden weg. <button type="button"class="secondary"style="font-size:11px;margin-left:6px"onclick="zuordnungLaden()">Zuordnung laden …</button></div>`;
+ const ohne=students.filter(s=>!zuordnungMap.has(pseudoSlug(anzeigeName(s)))).map(s=>anzeigeName(s));
+ return`<div class="notice"style="${stil}"><b>Zuordnung aktiv:</b> ${students.length-ohne.length} von ${students.length} Schüler:innen zugeordnet${ohne.length?` (ohne Treffer: ${ohne.slice(0,8).map(esc).join(", ")}${ohne.length>8?" …":""})`:""}. Nur im Arbeitsspeicher. PDFs mit Zuordnung enthalten Klarnamen und gehören nicht in eine Cloud. <button type="button"class="secondary"style="font-size:11px;margin-left:6px"onclick="zuordnungLaden()">Andere Datei</button> <button type="button"class="secondary"style="font-size:11px"onclick="zuordnungEntfernen()">Zuordnung entfernen</button></div>`;
+}
+
 // Ein Respizienz-Blatt: alle Angaben zur Ablage der gewählten Tests einer Person.
 // ctx: {stat (Klassendurchschnitte), mitHintergrund, lehrkraft, anzPool}
 function coRespizienzHTML(name,tests,abgaben,einst,ctx){
@@ -10768,16 +10854,16 @@ async function coRespizienzDrucken(opt){
   if(!liste.length){toast(opt.uid?"Für diese Person liegt noch keine Auswahl vor.":"Noch keine Auswahl vorhanden.");return}
   const sortiert=ids=>ids.map(id=>d.checkouts.find(c=>c.id===id)).filter(Boolean).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||"")));
   const heute=new Date().toLocaleDateString("de-DE");
-  const blatt=x=>coRespizienzHTML(anzeigeName(x),sortiert(auswahl[x.uid].ids||[]),abgaben[x.uid]||{},d.einst,ctx);
+  const blatt=x=>coRespizienzHTML(zName(anzeigeName(x)),sortiert(auswahl[x.uid].ids||[]),abgaben[x.uid]||{},d.einst,ctx);
   if(opt.uid){
    const x=liste[0];
-   openToolPrintWindow(`Respizienz – ${anzeigeName(x)}`,blatt(x),`${CO_KLASSE} · ${CO_FACH} · Kurzarbeit-Ersatz · erstellt am ${heute}`);
+   openToolPrintWindow(`Respizienz – ${zName(anzeigeName(x))}`,blatt(x),`${CO_KLASSE} · ${CO_FACH} · Kurzarbeit-Ersatz · erstellt am ${heute}`);
    return;
   }
   const seiten=liste.map(x=>`<div style="break-before:page">${blatt(x)}</div>`).join("");
-  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(anzeigeName(x))).join(", ");
+  const ohne=students.filter(x=>!(auswahl[x.uid]?.ids||[]).length).map(x=>escPDF(zName(anzeigeName(x)))).join(", ");
   const E=escPDF,zs="padding:4px 6px;border:1px solid #cfd8de;font-size:11.5px";
-  const zeilenTab=liste.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td style="${zs}">${E(anzeigeName(x))}</td><td style="${zs};text-align:center">${e?`${e.be} / ${e.maxBE}`:"–"}</td><td style="${zs};text-align:center">${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td style="${zs};text-align:center"><b>${e?E(npText(e.np)):"–"}</b></td></tr>`;}).join("");
+  const zeilenTab=liste.map(x=>{const e=coErsatz(auswahl[x.uid].ids||[],abgaben[x.uid]||{});return`<tr><td style="${zs}">${E(zName(anzeigeName(x)))}</td><td style="${zs};text-align:center">${e?`${e.be} / ${e.maxBE}`:"–"}</td><td style="${zs};text-align:center">${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td style="${zs};text-align:center"><b>${e?E(npText(e.np)):"–"}</b></td></tr>`;}).join("");
   const klRow=stat.ersatz?`<tr style="border-top:2px solid #777;background:#f7fafc"><td style="${zs}"><b>Klassendurchschnitt (n = ${stat.ersatz.n})</b></td><td style="${zs}"></td><td style="${zs};text-align:center"><b>Ø ${stat.ersatz.schnitt.toFixed(2).replace(".",",")}</b></td><td style="${zs};text-align:center"><b>Ø ${stat.ersatz.np.toFixed(2).replace(".",",")}</b></td></tr>`:"";
   const testTab=beendet.filter(c=>stat.proTest[c.id]).map((c,i)=>{const t=stat.proTest[c.id];return`<tr><td style="${zs};text-align:center">${i+1}</td><td style="${zs}">${E(coDatum(c.datum))}</td><td style="${zs}">${E(c.titel||"Check-out")}<div style="font-size:10px;color:#555">${E(coLbText(c.lbNum))}</div></td><td style="${zs};text-align:center">${t.n}</td><td style="${zs};text-align:center">${coProz(t.be)} / ${t.maxBE}</td><td style="${zs};text-align:center"><b>${coProz(t.np)}</b></td></tr>`;}).join("");
   const uebersicht=`<div style="font-size:10.5px;letter-spacing:.06em;color:#1f4d73;font-weight:700">RESPIZIENZ · ALTERNATIVER LEISTUNGSNACHWEIS (KURZARBEIT-ERSATZ)</div>
@@ -10811,10 +10897,11 @@ async function openRespizienzDialog(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🖨 RESPIZIENZ-AUSDRUCK · NUR LEHRKRÄFTE</div><h2>Respizienz für den Kurzarbeit-Ersatz</h2>
   <p style="font-size:13px;color:var(--muted);margin-top:0">Eigener Ausdruck für die Ablage. Je Schüler:in enthält er: Name, Klasse und Fach, Lernbereich und Inhalte der Unterrichtsstunden je Test, die Ergebnisse der ${d.einst.anzahlWaehlen} gewählten Tests (je Aufgabe, max. ${coMaxBE()} BE je Test) mit Gesamtergebnis, den Klassendurchschnitt, den Notenschlüssel sowie Durchführung und Hintergründe des K-Prim-Tests.</p>
+  ${zuordnungBox(students,openRespizienzDialog)}
   <div class="form">
-   <label>Für wen?<select id="respWer"><option value="">Ganze Klasse (${mit.length} mit Auswahl)</option>${mit.map(x=>`<option value="${esc(x.uid)}">${esc(anzeigeName(x))}</option>`).join("")}</select></label>
+   <label>Für wen?<select id="respWer"><option value="">Ganze Klasse (${mit.length} mit Auswahl)</option>${mit.map(x=>`<option value="${esc(x.uid)}">${esc(zName(anzeigeName(x)))}</option>`).join("")}</select></label>
    <label class="check"><input id="respHint"type="checkbox"checked> Durchführung, Hintergründe und Notenschlüssel auf jedem Blatt mit ausdrucken</label>
-   ${ohne.length?`<p style="font-size:12px;color:var(--muted)">Noch keine Auswahl: ${ohne.map(x=>esc(anzeigeName(x))).join(", ")}</p>`:""}
+   ${ohne.length?`<p style="font-size:12px;color:var(--muted)">Noch keine Auswahl: ${ohne.map(x=>esc(zName(anzeigeName(x)))).join(", ")}</p>`:""}
    <div class="form-actions"><button class="secondary"onclick="closeModal()">Abbrechen</button><button class="primary"onclick="coRespizienzStarten()"${mit.length?"":" disabled"}>Ausdruck erstellen</button></div>
   </div>`);
 }
@@ -10826,7 +10913,7 @@ function coRespizienzStarten(){
 // Alle Ergebnisse einer Person: Übersicht + jeder Test mit Aufgaben und Lösung.
 async function coPdfSchuelerAlle(uid){
  try{
-  const s=await coLadeSchueler(uid);
+  const s=await coLadeSchueler(uid);s.name=zName(s.name||"Schüler:in");
   const mit=s.checkouts.filter(c=>s.abgaben[c.id]);
   if(!mit.length){toast("Es liegen noch keine Ergebnisse vor.");return}
   const tab=`<table style="font-size:12px"><thead><tr><th>Datum</th><th>Check-out</th><th>LB</th><th>BE</th><th>%</th><th>Notenpunkte (Note)</th></tr></thead><tbody>${mit.map(c=>{const a=s.abgaben[c.id];return`<tr><td>${escPDF(coTestDatum(c,a))}</td><td>${escPDF(c.titel||"")}</td><td>LB ${escPDF(c.lbNum||"")}</td>${a.ausgewertet?`<td>${a.be}/${a.maxBE}</td><td>${coProz(Number(a.prozent)||0)}</td><td><b>${escPDF(npText(a.notenpunkte))}</b></td>`:`<td colspan="3">noch nicht ausgewertet</td>`}</tr>`;}).join("")}</tbody></table>`;
@@ -10869,7 +10956,7 @@ async function coLadeKlasse(){
  const [students,ab,aw]=await Promise.all([getAllUsersForLernstand(),getDocs(collection(db,"checkoutAbgaben")),getDocs(collection(db,"checkoutAuswahl"))]);
  const abgaben={};ab.docs.forEach(x=>{const a=x.data();(abgaben[a.uid]=abgaben[a.uid]||{})[a.checkoutId]=a;});
  const auswahl={};aw.docs.forEach(x=>{auswahl[x.id]=x.data();});
- return{d,pool,students,abgaben,auswahl};
+ return{d,pool,students:zSort(students),abgaben,auswahl};
 }
 async function openCheckoutKlassenuebersicht(){
  if(!isTeacher())return;
@@ -10878,9 +10965,10 @@ async function openCheckoutKlassenuebersicht(){
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div class="kicker">🏁 CHECK-OUTS · ERGEBNISSE JE SCHÜLER:IN</div><h2>Ergebnisse und Kurzarbeit-Ersatz</h2>
   <p style="font-size:12px;color:var(--muted);margin-top:0">Zahlen = Notenpunkte je Check-out (Spalten nach Datum). Grün markiert = von der Schülerin / dem Schüler für den Ersatz gewählt (${d.einst.anzahlWaehlen} Tests). PDF Ergebnisse = alle Tests der Person, PDF Respizienz = die gewählten Tests mit allen Angaben zur Ablage.</p>
+  ${zuordnungBox(students,openCheckoutKlassenuebersicht)}
   <div style="overflow-x:auto"><table class="ls-matrix co-erg-matrix"><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th title="${esc(c.titel)}">${i+1}</th>`).join("")}<th>Ersatz</th><th>PDF</th></tr></thead>
   <tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
-   return`<tr><td>${esc(anzeigeName(s))}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td style="white-space:nowrap"><button class="secondary"style="font-size:11px"onclick="coPdfSchuelerAlle('${s.uid}')">Ergebnisse</button> <button class="secondary"style="font-size:11px"onclick="coPdfRespizienz('${s.uid}')"${e?"":" disabled"}>Respizienz</button></td></tr>`;}).join("")}</tbody></table></div>
+   return`<tr><td>${esc(zName(anzeigeName(s)))}</td>${pool.map(c=>`<td class="${w.has(c.id)?"co-gewaehlt":""}"style="text-align:center">${a[c.id]?.ausgewertet?a[c.id].notenpunkte:"–"}</td>`).join("")}<td><b>${e?npText(e.np):"–"}</b></td><td style="white-space:nowrap"><button class="secondary"style="font-size:11px"onclick="coPdfSchuelerAlle('${s.uid}')">Ergebnisse</button> <button class="secondary"style="font-size:11px"onclick="coPdfRespizienz('${s.uid}')"${e?"":" disabled"}>Respizienz</button></td></tr>`;}).join("")}</tbody></table></div>
   <div class="form-actions"style="margin-top:14px"><button class="primary"onclick="openRespizienzDialog()">🖨 Respizienz-Ausdruck</button><button class="secondary"onclick="coPdfRespizienzKlasse()">PDF Respizienz Klasse</button><button class="secondary"onclick="coPdfErsatzKlasse()">PDF Übersicht Klasse</button><button class="secondary"onclick="closeModal()">Schließen</button></div>`);
 }
 async function coPdfErsatzKlasse(){
@@ -10889,13 +10977,13 @@ async function coPdfErsatzKlasse(){
   const {pool,students,abgaben,auswahl,d}=await coLadeKlasse();
   const legende=`<div class="item">${pool.map((c,i)=>`${i+1}: ${escPDF(c.titel)} (${coDatum(c.datum)})`).join(" · ")}</div>`;
   const tab=`<table><thead><tr><th>Schüler:in</th>${pool.map((c,i)=>`<th>${i+1}</th>`).join("")}<th>Ø Auswahl</th><th>Ersatznote</th></tr></thead><tbody>${students.map(s=>{const a=abgaben[s.uid]||{},w=new Set(auswahl[s.uid]?.ids||[]);const e=auswahl[s.uid]?coErsatz([...w],a):null;
-   return`<tr><td>${escPDF(anzeigeName(s))}</td>${pool.map(c=>`<td>${a[c.id]?.ausgewertet?(w.has(c.id)?`<b>[${a[c.id].notenpunkte}]</b>`:a[c.id].notenpunkte):"–"}</td>`).join("")}<td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table>`;
+   return`<tr><td>${escPDF(zName(anzeigeName(s)))}</td>${pool.map(c=>`<td>${a[c.id]?.ausgewertet?(w.has(c.id)?`<b>[${a[c.id].notenpunkte}]</b>`:a[c.id].notenpunkte):"–"}</td>`).join("")}<td>${e?e.schnitt.toFixed(2).replace(".",","):"–"}</td><td><b>${e?npText(e.np):"–"}</b></td></tr>`;}).join("")}</tbody></table>`;
   openToolPrintWindow("Kurzarbeit-Ersatz – Check-outs (Klasse)",legende+tab,`F12Sb · Pädagogik/Psychologie · [x] = gewählt · ${d.einst.anzahlWaehlen} Tests je Schüler:in`);
  }catch(e){console.error(e);toast("PDF konnte nicht erstellt werden.");}
 }
 Object.assign(window,{coBankEinsetzen,coVorlageWaehlen,coEditorPruefen,coEditorLesen,coPoolExport,openCheckoutEditor,coEditorAufgabe,coEditorVorschlag,coEditorImport,coEditorSpeichern,coLoeschen,coLiveStarten,openCheckoutMonitor,coBeenden,coNeuAuswerten,
  openCheckoutTest,coAntwort,coAbgeben,openCheckoutMeinErgebnis,openCheckoutErgebnisse,openCheckoutSchuelerErgebnis,coPdfSchueler,coPdfKlasse,
- openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfRespizienz,coPdfRespizienzKlasse,coPdfSchuelerAlle,openRespizienzDialog,coRespizienzStarten,coRespizienzDrucken});
+ openCheckoutAuswahl,coAuswahlStand,coAuswahlSpeichern,coPdfErsatzSchueler,openCheckoutEinstellungen,coEinstellungenSpeichern,openCheckoutKlassenuebersicht,coPdfErsatzKlasse,coPdfRespizienz,coPdfRespizienzKlasse,coPdfSchuelerAlle,openRespizienzDialog,coRespizienzStarten,coRespizienzDrucken,zuordnungLaden,zuordnungEntfernen});
 
 async function renderFachDetail(){
  if(!activeFach)return await renderFaecherUebersicht();
