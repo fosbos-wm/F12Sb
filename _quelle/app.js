@@ -22050,7 +22050,7 @@ async function renderKwThema(){
  const karten=[];
  if(ea&&!ea.entwurf)karten.push(`<div class="kw-baust"><span class="chip slk">Selbstlernkurs</span><b>${esc(ea.titel||kwKurz(e))}</b><small>${eaF.einarbeitungAbgeschlossen?"abgeschlossen":(ea.aufgaben?ea.aufgaben+" Aufgaben":"")}</small><button class="primary" data-kw="ea" data-id="${esc(e.id)}">${eaF.einarbeitungAbgeschlossen?"Nochmal ansehen":"Starten"}</button></div>`);
  mod.forEach(m=>{const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);
-  karten.push(`<div class="kw-baust"><span class="chip ${T[1]}">${esc(T[0])}</span><b>${esc(m.titel||T[0])}</b><small>${f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):(m.start&&sw12ById(m.start)?"ab "+fmtKurz(sw12ById(m.start).start):"")}</small><button class="primary" data-kw="modul" data-id="${esc(m.id)}">${lehrer?"Öffnen":"Starten"}</button></div>`)});
+  karten.push(`<div class="kw-baust"><span class="chip ${T[1]}">${esc(T[0])}</span><b>${esc(m.titel||T[0])}</b><small>${f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):(m.start&&sw12ById(m.start)?"ab "+fmtKurz(sw12ById(m.start).start):"")}</small><div class="kw-baust-btn"><button class="primary" data-kw="modul" data-id="${esc(m.id)}">${lehrer?"Öffnen":"Starten"}</button>${lehrer?`<button type="button" class="secondary kw-baust-weg" data-kw="modulweg" data-id="${esc(m.id)}" data-thema="${esc(e.id)}" title="Diesen Baustein von diesem Thema entfernen">Entfernen</button>`:""}</div></div>`)});
  const lerneinheit=(!lehrer&&!karten.length)?"":kwSekHTML("Lerneinheit","Selbstlernkurs, Deeper-Learning-Stunde, Lernrallye oder anderes",
   karten.length?`<div class="kw-baustliste">${karten.join("")}</div>`:`<div class="kw-leer">Für dieses Thema ist noch keine Lerneinheit ausgewählt.</div>`,null,lehrer,
   lehrer?`<div class="kw-aktionen"><button class="secondary" data-kw="modulneu" data-id="${esc(e.id)}">Baustein einplanen</button><button class="secondary" data-kw="modulwahl" data-id="${esc(e.id)}">Vorhandenes Modul zuordnen</button></div>`:"");
@@ -22502,6 +22502,19 @@ async function kwModulWaehlen(themaId){
    closeModal();await ppmLaden(true);toast("Zugeordnet.");render()}catch(err){console.error(err);toast("Konnte nicht gespeichert werden.")}
  };
 }
+async function kwModulEntfernen(modulId,themaId){
+ if(!isTeacher())return;
+ await ppmLaden(true);
+ const m=ppmById(modulId);if(!m)return;
+ const nm=m.titel||(KW_BAUSTEINE[m.modul]||["Baustein"])[0];
+ const rest=(m.themen||[]).filter(t=>t!==themaId);
+ if(!confirm(rest.length?`„${nm}“ von diesem Thema entfernen?\n\nDer Baustein bleibt bei den anderen Themen erhalten.`:`„${nm}“ wirklich entfernen?\n\nDer Baustein wird gelöscht (auch aus dem Modulplan). Fortschritte der Klasse bleiben in der Datenbank erhalten, sind aber nicht mehr sichtbar.`))return;
+ try{
+  if(rest.length)await updateDoc(doc(db,"ppModule",m.id),{themen:rest,updatedAt:serverTimestamp()});
+  else await deleteDoc(doc(db,"ppModule",m.id));
+  await ppmLaden(true);toast("Entfernt.");render();
+ }catch(err){console.error(err);toast("Das Entfernen hat nicht geklappt.")}
+}
 /* ------------------------------------------------ Klicks */
 document.addEventListener("click",async ev=>{
  const b=ev.target.closest&&ev.target.closest("[data-kw]");if(!b||!currentUser)return;
@@ -22522,6 +22535,7 @@ document.addEventListener("click",async ev=>{
   else if(a==="modul")ppmOeffnen(id);
   else if(a==="modulneu"){const e=kwThemaById(id),ph=KW_PHASEN.find(p=>p.id===e.phase);window.__kwThemaNeu=id;kwBausteinWahl(id)}
   else if(a==="modulwahl")kwModulWaehlen(id);
+  else if(a==="modulweg")await kwModulEntfernen(id,b.dataset.thema);
   else if(a==="projektstart"){const ph=kwPhase(b.dataset.lb);const pm=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);if(pm)ppmOeffnen(pm.id);else toast(isTeacher()?"Lege das Projekt im Unterricht-Plan über das Plus-Zeichen als Modul „Projekt“ an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}
   else if(a==="exp"){activeFach="paedagogik";openExperimentStunde(null)}
   else if(a==="fertig"){
