@@ -21997,6 +21997,7 @@ async function renderKachelwand(){
   ${kwSchuelerBanner()}
   ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Lernlandkarte","Dein Weg durch das Schuljahr: vier Lernbereiche mit Projekt, Themen und Bausteinen.")}
   <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
+  ${lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">👀 Schüleransicht</button></div>`:""}
   <div class="kw-wand">${KW_PHASEN.map(ph=>kwKachelHTML(ph,lehrer)).join("")}</div>
  </div>${footer()}`;
 }
