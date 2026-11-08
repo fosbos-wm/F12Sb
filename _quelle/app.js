@@ -73,7 +73,7 @@ function modal(html){$("modal").innerHTML=html;$("modalBackdrop").hidden=false}
 function closeModal(){$("modalBackdrop").hidden=true;if(window.__coUnsub){try{window.__coUnsub()}catch(e){}window.__coUnsub=null;}if(ppDirty){ppDirty=false;if(activeFach==="paedagogik")render();}}
 function pageHead(k,h,p,actions=""){return`<header class="kw-kopf page-head" style="--c:#3A8FD4;--t:#1F6FB2"><div><div class="kicker">${k}</div><h1>${h}</h1><p>${p}</p>
 </div><div class="actions">${actions}</div></header>`}
-function footer(){return`<div class="footer"><span>F12Sb 26/27 · FOSBOS Weilheim</span><span>Gemeinsam · offen ·
+function footer(){return`<div class="footer"><span>F12Sb · FOSBOS Weilheim</span><span>Gemeinsam · offen ·
 respektvoll</span><span><button type="button"onclick="showImpressum()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Impressum</button> · <button type="button"onclick="showDatenschutz()"style="background:none;border:none;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer">Datenschutz</button></span></div>`}
 
 /* =========================================================
@@ -1233,7 +1233,7 @@ async function zkBauHtml(codes,namen,basis){
  const {qrcode}=await import("./qr-local.js?v=1");
  const karten=codes.map(c=>{
   const q=qrcode(0,"M");q.addData(basis+"?code="+encodeURIComponent(c));q.make();
-  return`<div class="k"><div class="kt">F12Sb 26/27 · Zugangskarte</div><div class="kc">${zkSchuetze(c)}</div><div class="kq">${q.createSvgTag(3,0)}</div>
+  return`<div class="k"><div class="kt">F12Sb · Zugangskarte</div><div class="kc">${zkSchuetze(c)}</div><div class="kq">${q.createSvgTag(3,0)}</div>
   <ol><li>QR-Code scannen oder Seite öffnen und „Erstmals einrichten“ wählen.</li><li>Code eingeben, ein <b>Pseudonym</b> und eine <b>PIN</b> (mind. 6 Zeichen) festlegen.</li><li>Merke dir beides. Die Karte gilt nur <b>einmal</b>.</li></ol>
   <div class="kn">Kein echter Name, keine E-Mail-Adresse als Pseudonym.</div></div>`}).join("");
  const hatNamen=namen.some(Boolean);
@@ -4366,7 +4366,7 @@ async function renderStart(){
  const upcomingDateText=upcomingDate?.seconds?new Date(upcomingDate.seconds*1000).toLocaleDateString("de-DE"):String(upcomingDate||"").slice(0,10);
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
  
- return`${coBanner}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb 26/27</span><h1>Willkommen auf dem Campus.</h1><p>Hier
+ return`${coBanner}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
 </div></section>
  ${isTeacher()?`<div class="card"style="margin-bottom:16px;border-left:4px solid #3A8FD4"><div class="kicker">VERWALTUNG</div><h3 style="margin:2px 0 10px">Für Lehrkräfte</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button><button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button></div></div>`:""}
@@ -18421,7 +18421,7 @@ async function renderFragenHilfe(){
  ["Was ist Deeper Learning?","Deeper Learning bedeutet, dass du Wissen nicht nur aufnimmst, sondern es verstehst, anwendest, auf neue Situationen überträgst, Probleme löst, gemeinsam arbeitest und deine Ergebnisse reflektierst."],
  ["Was ist ein Lernjournal?","Im Lernjournal hältst du deinen Lernweg fest: Was habe ich gelernt? Was hat funktioniert? Wo gab es Schwierigkeiten? Was ist mein nächster Schritt?"],
  ["Was sind Lernstandsmessungen?","Sie helfen dir zu erkennen, wo du bei deinen Kompetenzen stehst und woran du als Nächstes arbeiten solltest. Die Ergebnisse können deine Kompetenzentwicklung sichtbar machen."],
- ["Wo finde ich Termine?","Im Campus-Kalender findest du die wichtigen Termine der F12Sb. Dort sind auch die Schulferien von Bayern für das Schuljahr 2026/27 markiert."],
+ ["Wo finde ich Termine?","Im Campus-Kalender findest du die wichtigen Termine der F12Sb. Dort sind auch die Schulferien von Bayern für das Schuljahr markiert."],
  ["Was mache ich bei Fragen zur F12Sb?","Wenn deine Frage hier nicht beantwortet wird, wende dich an deine Lehrkraft bzw. das Klassenteam. Die Seite soll dir zunächst schnelle Orientierung zu F12Sb und Lernen geben."]
  ];
 
@@ -18510,7 +18510,7 @@ async function renderPraktikum(){
  .pk-body small{display:block;color:var(--muted);font-size:11px;line-height:1.6}
  </style>
 
- <div class="kicker">PRAKTIKUMSPHASEN & BLOCKBERICHTE 2026/27</div>
+ <div class="kicker">PRAKTIKUMSPHASEN & BLOCKBERICHTE</div>
  <div class="pk-split">
  <div class="pk-zeitstrahl">${PRAKTIKUMSPHASEN.map(p=>{
  const heute=new Date().toISOString().slice(0,10);
@@ -18913,7 +18913,7 @@ async function exportCampusCalendarICS(){
  const ferienZeitraeume=[
  ["2026-08-03","2026-09-14","Sommerferien 2026"],
  ["2026-11-02","2026-11-06","Herbstferien / unterrichtsfreie Tage um Allerheiligen"],
- ["2026-12-24","2027-01-08","Weihnachtsferien 2026/27"],
+ ["2026-12-24","2027-01-08","Weihnachtsferien"],
  ["2027-02-08","2027-02-12","Frühjahrsferien 2027"],
  ["2027-03-22","2027-04-02","Osterferien 2027"],
  ["2027-05-18","2027-05-28","Pfingstferien 2027"],
@@ -19070,7 +19070,7 @@ async function renderKalender(){
  const ferienZeitraeume=[
  ["2026-08-03","2026-09-14","Sommerferien 2026"],
  ["2026-11-02","2026-11-06","Herbstferien / unterrichtsfreie Tage um Allerheiligen"],
- ["2026-12-24","2027-01-08","Weihnachtsferien 2026/27"],
+ ["2026-12-24","2027-01-08","Weihnachtsferien"],
  ["2027-02-08","2027-02-12","Frühjahrsferien 2027"],
  ["2027-03-22","2027-04-02","Osterferien 2027"],
  ["2027-05-18","2027-05-28","Pfingstferien 2027"],
@@ -19158,7 +19158,7 @@ async function renderKalender(){
  `<span class="cal-legend-item"><i class="cal-legend-dot ${v.className}"></i>${esc(v.label)}</span>`
  ).join("");
 
- const html=`${pageHead("ORGANISATION","Campus-Kalender","Das Schuljahr 26/27 auf einen Blick. Termine sind je nach Terminart farblich gekennzeichnet.",`${addButton}${birthdayButton}${exportButton}`)}
+ const html=`${pageHead("ORGANISATION","Campus-Kalender","Das Schuljahr auf einen Blick. Termine sind je nach Terminart farblich gekennzeichnet.",`${addButton}${birthdayButton}${exportButton}`)}
  <style>
  .cal-months{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
  .cal-month{padding:18px}.cal-month-head{margin-bottom:10px}
@@ -21875,6 +21875,19 @@ const KW_PHASEN=[1,2,3,4].map(n=>{
   startSw:pp12Montag(start),notwendigeWochen:[],projektWocheId:"team_lb"+n,meilensteine:[]};
 });
 const KW_FARBEN={1:{c:"#2494A8",bg:"#DDF1F5",t:"#176A7A"},2:{c:"#8460B8",bg:"#EEE8F7",t:"#5F3F94"},3:{c:"#5FA33E",bg:"#E6F3DC",t:"#3F7226"},4:{c:"#E08A2E",bg:"#FCEBD6",t:"#9A5410"}};
+// ---- Schüleransicht für Lehrkräfte (Lernlandkarte, Themen, Projekte) ----
+// Solange aktiv, zeigen alle Lernlandkarten-Seiten genau das, was Schüler:innen sehen.
+let KW_SCHUELER=false;
+function kwLehrer(){return isTeacher()&&!KW_SCHUELER}
+function kwSchuelerUmschalten(an){
+ if(!isTeacher())return;
+ KW_SCHUELER=!!an;KW.geladen=0;PPM.geladen=0;
+ render();
+}
+function kwSchuelerBanner(){
+ return isTeacher()&&KW_SCHUELER?`<div class="kw-vorschau" role="status"><span><b>Schüleransicht</b>: So sehen die Schüler:innen die Lernlandkarte, ihre Themen und Projekte. Es lässt sich nichts verändern.</span><button type="button" class="primary" onclick="kwSchuelerUmschalten(false)">Zurück zur Lehrkraft-Ansicht</button></div>`:"";
+}
+window.kwSchuelerUmschalten=kwSchuelerUmschalten;
 const KW={mat:{},fort:{},co:null,geladen:0};
 let activeKwThema=null,activeKwLb=null;
 // Reihenfolge der Dateien auf jeder Themenseite (immer gleich)
@@ -21902,11 +21915,11 @@ async function kwLaden(){
  const t0=Date.now();
  const [mat,,co]=await Promise.all([
   getDocs(collection(db,"lehrplanMaterialien")).catch(e=>{console.warn("Material:",e);return null}),
-  isTeacher()?null:ppmMeineLaden().catch(()=>{}),
+  kwLehrer()?null:ppmMeineLaden().catch(()=>{}),
   ladeCheckoutDaten().catch(()=>null)]);
  KW.mat={};KW.fort={};
  if(mat)mat.docs.forEach(d=>{const x={id:d.id,...d.data()};(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)});
- if(!isTeacher()){
+ if(!kwLehrer()){
   if(PPM.meine.fortAlle)KW.fort=PPM.meine.fortAlle;
   else try{(await getDocs(query(collection(db,"lehrplanFortschritt"),where("uid","==",currentUser.uid)))).docs.forEach(d=>{KW.fort[d.id.slice(currentUser.uid.length+1)]=d.data()})}catch(e){console.warn("Fortschritt:",e)}
  }
@@ -21971,16 +21984,17 @@ function kwKachelHTML(ph,lehrer){
 }
 async function renderKachelwand(){
  await kwLaden();
- const lehrer=isTeacher();
+ const lehrer=kwLehrer();
  const alle=KW_PHASEN.flatMap(kwThemenVonPhase);
  const fertig=lehrer?alle.filter(e=>(KW.mat[e.id]||[]).length||kwModuleThema(e.id).length).length:alle.filter(e=>kwErledigt(e.id)).length;
  const p=alle.length?Math.round(fertig/alle.length*100):0;
  const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
  const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#DCE9F5" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#3A8FD4" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
  const links=lehrer
-  ?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände und Check-outs</button><button class="secondary" onclick="go('news')">Startseite</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
+  ?`<button class="secondary" onclick="kwSchuelerUmschalten(true)">👀 Schüleransicht</button><button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lernstaende')">Lernstände und Check-outs</button><button class="secondary" onclick="go('news')">Startseite</button><button class="secondary" onclick="openUserManagement()">Benutzer verwalten</button>`
   :`<button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button><button class="secondary" onclick="go('news')">Startseite</button>`;
  return`<div class="kw" id="kwRoot">
+  ${kwSchuelerBanner()}
   ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Lernlandkarte","Dein Weg durch das Schuljahr: vier Lernbereiche mit Projekt, Themen und Bausteinen.")}
   <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
   <div class="kw-wand">${KW_PHASEN.map(ph=>kwKachelHTML(ph,lehrer)).join("")}</div>
@@ -21990,7 +22004,7 @@ async function renderKachelwand(){
 async function renderKwProjekt(){
  await kwLaden();
  const ph=kwPhase(activeKwLb);if(!ph)return await renderKachelwand();
- const F=kwFarbe(ph.lbNum),lehrer=isTeacher();
+ const F=kwFarbe(ph.lbNum),lehrer=kwLehrer();
  const pm=PPM.liste.filter(m=>(m.modul==="projekt"||m.modul==="experiment")&&Number(m.lb)===ph.lbNum);
  const projM=pm.find(m=>m.modul==="projekt"&&!m.projektId);
  const dateien=[];
@@ -22002,6 +22016,7 @@ async function renderKwProjekt(){
  const dl=dateien.length?dateien.map(d=>kwDateiHTML(d.titel,d.url,d.id,d.wid)).join(""):`<div class="kw-leer">${lehrer?"Noch keine Projektdateien. Lade sie im Projektbaustein oder in den Themen hoch.":"Deine Lehrkraft hat noch keine Dateien eingestellt."}</div>`;
  const start=ph.einstieg?`<button class="primary" data-kw="exp">Interaktive Stunde „Das Experiment“ starten</button>`:`<button class="primary" data-kw="projektstart" data-lb="${ph.lbNum}">${lehrer?"Projektseite öffnen":"Projekt starten"}</button>`;
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
+  ${kwSchuelerBanner()}
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
   <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.projektStart,ph.projektEnde)||"")} · ${fmtKurz(ph.projektStart)}–${fmtKurz(ph.projektEnde)}</small><h1>${esc((projM&&projM.titel)||ph.titel)}</h1><p>${esc(ph.lbTitel)} · Projekt</p><div class="kw-aktionen">${start}</div></header>
   ${auftrag}${ms}
@@ -22011,7 +22026,7 @@ async function renderKwProjekt(){
 }
 /* ------------------------------------------------ Themenseite */
 function kwDateiHTML(titel,url,id,wid){
- const del=isTeacher()&&id?`<button type="button" class="kw-del" data-kw="matweg" data-id="${esc(id)}" data-w="${esc(wid)}" aria-label="Löschen">×</button>`:"";
+ const del=kwLehrer()&&id?`<button type="button" class="kw-del" data-kw="matweg" data-id="${esc(id)}" data-w="${esc(wid)}" aria-label="Löschen">×</button>`:"";
  let a;
  if(/^(uebungsbausteine|karteikarten)\//.test(String(url||"")))a=`<a class="kw-datei" href="${esc(url)}" target="_blank" rel="noopener"><span>${esc(titel)}</span><small>${/^karteikarten/.test(url)?"Karteikarten öffnen":"Übung starten"}</small></a>`;
  else if(String(url||"").startsWith("fa:"))a=`<button type="button" class="kw-datei" data-kw="faueb" data-id="${esc(url.slice(3))}"><span>${esc(titel)}</span><small>Übung öffnen</small></button>`;
@@ -22025,7 +22040,7 @@ function kwSekHTML(titel,hint,inner,addKat,lehrer,extraBtn){
 async function renderKwThema(){
  await kwLaden();
  const e=kwThemaById(activeKwThema);if(!e)return await renderKachelwand();
- const ph=KW_PHASEN.find(p=>p.id===e.phase),F=kwFarbe(ph.lbNum),lehrer=isTeacher();
+ const ph=KW_PHASEN.find(p=>p.id===e.phase),F=kwFarbe(ph.lbNum),lehrer=kwLehrer();
  const mats=KW.mat[e.id]||[];
  const ciP=lehrer?Promise.resolve([]):getBasischeckFragen(e.id).catch(()=>[]); // parallel zu den anderen Abfragen laden
  const liste=kat=>{const l=mats.filter(m=>m.kategorie===kat);return l.length?l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join(""):`<div class="kw-leer">${lehrer?"Noch nichts eingestellt.":"Noch nichts eingestellt."}</div>`};
@@ -22061,6 +22076,7 @@ async function renderKwThema(){
  const checkout=(!lehrer&&!cos.length)?"":kwSekHTML("Check-out","Abschlusstest der Lehrkraft am Ende des Themas",`<div class="kw-dateien">${coInner}</div>`,null,lehrer,`<div class="kw-aktionen"><button class="secondary" data-kw="checkouts">${lehrer?"Check-outs verwalten":"Alle meine Check-outs"}</button><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button></div>`);
  const fertigBtn=lehrer?"":`<button type="button" class="kw-fertig${kwErledigt(e.id)?" an":""}" data-kw="fertig" data-id="${esc(e.id)}"><i class="kw-bx${kwErledigt(e.id)?" d":""}"></i>${kwErledigt(e.id)?"Thema erledigt":"Als erledigt markieren"}</button>`;
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
+  ${kwSchuelerBanner()}
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
   <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p><div class="kw-aktionen">${fertigBtn}</div></header>
   ${secs}${lerneinheit}${checkout}${(!lehrer&&!secs&&!lerneinheit&&!checkout)?`<div class="kw-card"><div class="kw-leer">Deine Lehrkraft hat zu diesem Thema noch nichts eingestellt.</div></div>`:""}
@@ -22072,12 +22088,12 @@ async function ltLaden(){
  LT.tests=[];LT.abg={};LT.alle=[];LT.schueler=[];LT.kiUrl="";
  try{LT.tests=(await getDocs(collection(db,"lernTests"))).docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>tsSek(a.createdAt)-tsSek(b.createdAt))}catch(e){console.warn("Tests:",e)}
  try{
-  if(isTeacher())LT.alle=(await getDocs(collection(db,"lernTestAbgaben"))).docs.map(d=>({id:d.id,...d.data()}));
+  if(kwLehrer())LT.alle=(await getDocs(collection(db,"lernTestAbgaben"))).docs.map(d=>({id:d.id,...d.data()}));
   else(await getDocs(query(collection(db,"lernTestAbgaben"),where("uid","==",currentUser.uid)))).docs.forEach(d=>{const x=d.data();LT.abg[x.testId]={id:d.id,...x}});
  }catch(e){console.warn("Abgaben:",e)}
  try{const s=await getDoc(doc(db,"taskcardLinks","fobizz_test"));LT.kiUrl=s.exists()?(s.data().url||""):"";
   if(!LT.kiUrl){const s2=await getDoc(doc(db,"taskcardLinks","fobizz_fachaufsatz"));LT.kiUrl=s2.exists()?(s2.data().url||""):""}}catch(e){}
- if(isTeacher()){try{LT.schueler=(await getDocs(collection(db,"users"))).docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse12Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"))}catch(e){console.warn("Schüler:",e)}}
+ if(kwLehrer()){try{LT.schueler=(await getDocs(collection(db,"users"))).docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse12Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"))}catch(e){console.warn("Schüler:",e)}}
 }
 function ltBE(t){return(t.fragen||[]).reduce((s,f)=>s+(Number(f.be)||0),0)}
 function ltStatus(t,a){
@@ -22088,7 +22104,7 @@ function ltStatus(t,a){
 }
 async function lsCheckInsLaden(){
  try{
-  const snap=isTeacher()?await getDocs(collection(db,"basischeckVersuche")):await getDocs(query(collection(db,"basischeckVersuche"),where("uid","==",currentUser.uid)));
+  const snap=kwLehrer()?await getDocs(collection(db,"basischeckVersuche")):await getDocs(query(collection(db,"basischeckVersuche"),where("uid","==",currentUser.uid)));
   return snap.docs.map(d=>d.data());
  }catch(e){console.warn("Check-Ins:",e);return[]}
 }
@@ -22207,7 +22223,7 @@ function lsLbBlock(n,ci,co,abgaben,lehrer){
 }
 async function renderKwCheckouts(){
  await kwLaden();await ltLaden();
- const co=KW.co,lehrer=isTeacher();
+ const co=KW.co,lehrer=kwLehrer();
  const ci=await lsCheckInsLaden();LT.ci=ci;
  let abgaben=[];
  if(lehrer){try{abgaben=(await getDocs(collection(db,"checkoutAbgaben"))).docs.map(d=>d.data())}catch(e){}}
@@ -22218,6 +22234,7 @@ async function renderKwCheckouts(){
  const bloecke=[1,2,3,4].map(n=>lsLbBlock(n,ci,co,abgaben,lehrer)).join("");
  const verw=co?`<details class="kw-card ls-verw"><summary><b>Check-outs verwalten und Kurzarbeit-Ersatz</b> <small>${lehrer?"neuen Check-out anlegen, Einstellungen, Klassenübersicht":"deine Auswahl für den Kurzarbeit-Ersatz"}</small></summary>${checkoutSektionHTML(co)}</details>`:"";
  return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
+  ${kwSchuelerBanner()}
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
   <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>Geordnet nach Lernbereichen: Check-Ins je Thema, Check-outs, K-Prim-Tests und digitale Tests. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button>`:""}</div></header>
   ${co?checkoutLiveBannerHTML(co):""}
@@ -22321,7 +22338,7 @@ document.addEventListener("click",async ev=>{
 });
 /* ------------------------------------------------ Lehrkräfte: Haben alle ordentlich abgeschlossen? */
 async function renderKwFortschritt(){
- if(!isTeacher())return await renderKachelwand();
+ if(!kwLehrer())return await renderKachelwand();
  await kwLaden();
  const [us,kf,rs,sa,lf]=await Promise.all([
   getDocs(collection(db,"users")),getDocs(collection(db,"ppKursFortschritt")).catch(()=>({docs:[]})),
@@ -22351,6 +22368,7 @@ async function renderKwFortschritt(){
  const kopf=mods.map(m=>{const T=KW_BAUSTEINE[m.modul]||["",""];return`<th><span class="chip ${T[1]}">${esc(T[0])}</span><br><small>LB ${esc(m.lb)} · ${esc(m.titel||"")}</small></th>`}).join("");
  const zeilen=schueler.map(u=>`<tr><th scope="row">${esc(anzeigeName(u))}</th>${mods.map(m=>{const z=zelle(m,u);return`<td class="kw-z ${z.k}">${esc(z.t)}</td>`}).join("")}</tr>`).join("");
  return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
+  ${kwSchuelerBanner()}
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
   <header class="kw-kopf"><small>FÜR LEHRKRÄFTE</small><h1>Erledigt? Selbstlernkurse und Lernrallyes</h1><p>Grün: ordentlich abgeschlossen. Orange: begonnen oder nur flüchtig bearbeitet (fertig, aber weniger als 60 % richtig). Grau: noch offen. Lehrkräfte-Konten erscheinen hier nicht.</p></header>
   <div class="kw-card"><div class="kw-tabwrap">${mods.length&&schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th>${kopf}</tr></thead><tbody>${zeilen}</tbody></table>`:`<div class="kw-leer">Noch keine passenden Bausteine oder freigeschaltete Schüler:innen.</div>`}</div></div>
@@ -22373,7 +22391,7 @@ function kwWorte(t){return String(t||"").toLowerCase().replace(/[^a-zäöüß ]/
 // Spiele (Zuordnung, Memory, Blockfall, Lückentext, Theorievergleich) und Karteikarten für ein Thema auswählen: nach Lernbereich geordnet, ohne Termin und Dauer.
 async function kwFaPicker(kat,themaId,modus){
  const nurFa=modus==="fa",nurSp=modus==="spiele";
- const e=kwThemaById(themaId||activeKwThema);if(!e||!isTeacher())return;
+ const e=kwThemaById(themaId||activeKwThema);if(!e||!kwLehrer())return;
  const ph=KW_PHASEN.find(p=>p.id===e.phase);
  const [alle,vorh,ub]=await Promise.all([faLaden(),getDocs(query(collection(db,"lehrplanMaterialien"),where("wocheId","==",e.id))).then(sn=>sn.docs.map(d=>d.data())).catch(()=>[]),kwUbKatalog()]);
  const schon=new Set(vorh.filter(x=>String(x.url||"").startsWith("fa:")).map(x=>x.url.slice(3)));
@@ -22425,7 +22443,7 @@ async function kwFaPicker(kat,themaId,modus){
 window.kwFaPicker=kwFaPicker;
 // Thema → „Baustein einplanen“: alle Bausteine sofort sichtbar, ein Klick öffnet die kurze Einplanung.
 async function kwBausteinWahl(themaId){
- if(!isTeacher())return;
+ if(!kwLehrer())return;
  const e=kwThemaById(themaId);if(!e)return;
  const ph=KW_PHASEN.find(p=>p.id===e.phase)||KW_PHASEN[0];
  const woche=ph.startSw||null;
@@ -22460,13 +22478,13 @@ async function kwBausteinWahl(themaId){
 window.kwBausteinWahl=kwBausteinWahl;
 
 async function kwMatForm(kat){
- if(!isTeacher())return;
+ if(!kwLehrer())return;
  if(kat==="lernuebersicht")return kwLuPicker();
  if(!/^(uebung|vertiefung\d?)$/.test(kat))return kwMatFormDatei(kat);
  return kwFaPicker(kat);
 }
 async function kwMatFormDatei(kat){
- const e=kwThemaById(activeKwThema);if(!e||!isTeacher())return;
+ const e=kwThemaById(activeKwThema);if(!e||!kwLehrer())return;
  const def=KW_KAT.find(k=>k.key===kat||(k.stufen||[]).some(s=>s[0]===kat));
  const stufe=def&&def.stufen?def.stufen.find(s=>s[0]===kat):null;
  const istBoard=!!(def&&def.board);
@@ -22503,7 +22521,7 @@ async function kwModulWaehlen(themaId){
  };
 }
 async function kwModulEntfernen(modulId,themaId){
- if(!isTeacher())return;
+ if(!kwLehrer())return;
  await ppmLaden(true);
  const m=ppmById(modulId);if(!m)return;
  const nm=m.titel||(KW_BAUSTEINE[m.modul]||["Baustein"])[0];
@@ -22536,7 +22554,7 @@ document.addEventListener("click",async ev=>{
   else if(a==="modulneu"){const e=kwThemaById(id),ph=KW_PHASEN.find(p=>p.id===e.phase);window.__kwThemaNeu=id;kwBausteinWahl(id)}
   else if(a==="modulwahl")kwModulWaehlen(id);
   else if(a==="modulweg")await kwModulEntfernen(id,b.dataset.thema);
-  else if(a==="projektstart"){const ph=kwPhase(b.dataset.lb);const pm=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);if(pm)ppmOeffnen(pm.id);else toast(isTeacher()?"Lege das Projekt im Unterricht-Plan über das Plus-Zeichen als Modul „Projekt“ an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}
+  else if(a==="projektstart"){const ph=kwPhase(b.dataset.lb);const pm=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);if(pm)ppmOeffnen(pm.id);else toast(kwLehrer()?"Lege das Projekt im Unterricht-Plan über das Plus-Zeichen als Modul „Projekt“ an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}
   else if(a==="exp"){activeFach="paedagogik";openExperimentStunde(null)}
   else if(a==="fertig"){
    const neu=!kwErledigt(id);

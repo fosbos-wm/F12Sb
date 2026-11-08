@@ -915,3 +915,6 @@ details.kw-card>summary{cursor:pointer;list-style:none}details.kw-card>summary s
 details.ls-lb>summary{list-style:none;cursor:pointer}details.ls-lb>summary::-webkit-details-marker{display:none}
 .ls-pf{font-style:normal;font-size:16px;transition:transform .15s}details.ls-lb:not([open]) .ls-pf{transform:rotate(-90deg)}
 details.ls-lb:not([open])>summary.ls-lbk{border-radius:0 0 0 0}
+/* Schüleransicht für Lehrkräfte (Lernlandkarte) */
+.kw-vorschau{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px;padding:10px 14px;border-radius:12px;background:#f3ecfb;border:1px solid #cdb6ea;border-left:5px solid #8250b8;color:#3d2a5c;font-size:13.5px}
+.kw-vorschau .primary{padding:7px 14px}
