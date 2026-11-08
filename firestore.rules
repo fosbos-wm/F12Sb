@@ -574,6 +574,23 @@ service cloud.firestore {
     }
 
     // TaskCard-Links je Lernbereich (4 Kacheln unter dem Zeitstrahl).
+    match /basischeckFragen/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+    match /basischeckVersuche/{id} {
+      allow read: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
+      allow create: if isApproved() && request.resource.data.uid == request.auth.uid;
+      allow update: if isApproved() && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == resource.data.uid;
+      allow delete: if isTeacher();
+    }
+    match /ubErgebnisse/{id} {
+      allow read: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
+      allow create: if isApproved() && request.resource.data.uid == request.auth.uid
+        && request.resource.data.max is number && request.resource.data.punkte is number;
+      allow delete: if isTeacher();
+    }
     match /lernTests/{id} {
       allow read: if isApproved();
       allow write: if isTeacher();
