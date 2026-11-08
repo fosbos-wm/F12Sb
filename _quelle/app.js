@@ -3082,6 +3082,32 @@ async function getMyBasischeckVersuch(wocheId){
  return snap.exists()?snap.data():null;
  }catch(e){console.error("Basis-Check-Versuch laden:",e);return null}
 }
+// ---- Check-In-Verlauf: alle Versuche stehen im selben Datensatz (verlauf), kein Zusatz-Laden ----
+function ciVerlauf(x){
+ const v=Array.isArray(x&&x.verlauf)?x.verlauf.filter(p=>p&&p.g>0):[];
+ if(v.length)return v;
+ return x&&x.gesamt>0?[{r:x.richtig,g:x.gesamt}]:[];
+}
+function ciProz(p){return Math.round(p.r/p.g*100)}
+function ciVerlaufTxt(x){const v=ciVerlauf(x);return v.length>1?v.map(p=>ciProz(p)+" %").join(" → "):""}
+function ciVerlaufSVG(x){
+ const v=ciVerlauf(x);if(v.length<2)return"";
+ const W=352,H=176,L=54,R=314,T=16,B=132,n=v.length;
+ const px=i=>L+(R-L)*i/(n-1),py=q=>B-(B-T)*q/100;
+ const band=(a,b,c)=>`<rect x="${L}" y="${py(b).toFixed(1)}" width="${R-L}" height="${(py(a)-py(b)).toFixed(1)}" fill="${c}"/>`;
+ const pts=v.map((p,i)=>[px(i),py(ciProz(p))]);
+ const lab=v.map((p,i)=>{
+  const dt=p.t?new Date(p.t):null,ds=dt?`${dt.getDate()}.${dt.getMonth()+1}.`:"";
+  return`<text x="${px(i).toFixed(1)}" y="${(pts[i][1]-8).toFixed(1)}" text-anchor="middle" font-size="11" fill="#1f2d3d">${ciProz(p)} %</text>`
+   +`<text x="${px(i).toFixed(1)}" y="${B+16}" text-anchor="middle" font-size="10.5" fill="#3a4a5a">${i===0?"Check-In":"Wdh. "+i}</text>`
+   +(ds?`<text x="${px(i).toFixed(1)}" y="${B+29}" text-anchor="middle" font-size="9.5" fill="#7a8794">${ds}</text>`:"");
+ }).join("");
+ const ticks=[0,50,100].map(q=>`<text x="${L-6}" y="${(py(q)+3.5).toFixed(1)}" text-anchor="end" font-size="10" fill="#7a8794">${q}</text>`).join("");
+ return`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Verlauf: ${ciVerlaufTxt(x)}">${band(0,40,"#F7E3E3")}${band(40,75,"#FAF2DC")}${band(75,100,"#E1EEE6")}${ticks}<polyline fill="none" stroke="#1F3A60" stroke-width="2.4" stroke-linejoin="round" points="${pts.map(q=>q[0].toFixed(1)+","+q[1].toFixed(1)).join(" ")}"/>${pts.map(q=>`<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="4.2" fill="#1F3A60"/>`).join("")}${lab}</svg>`;
+}
+const CI_NEU={};
+function ciWiederholen(wocheId){CI_NEU[wocheId]=true;openCheckIn(wocheId)}
+window.ciWiederholen=ciWiederholen;
 function basischeckAmpel(richtig,gesamt){
  if(gesamt<=0)return null;
  const q=richtig/gesamt;
@@ -3148,10 +3174,14 @@ async function submitBasischeck(fach,wocheId){
  const gesamt=gewertet.length;
  const ampel=basischeckAmpel(richtig,gesamt);
  try{
+ const alt=await getMyBasischeckVersuch(wocheId);
+ const altMs=alt&&alt.createdAt&&alt.createdAt.toMillis?alt.createdAt.toMillis():0;
+ const verlauf=[...(alt?(alt.verlauf||[{r:alt.richtig,g:alt.gesamt,t:altMs}]):[]),{r:richtig,g:gesamt,t:Date.now()}].slice(-10);
  await setDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${wocheId}`),{
- uid:currentUser.uid,wocheId,fach,antworten:ergebnisse.map(e=>e.antwort),richtig,gesamt,ampel,
+ uid:currentUser.uid,wocheId,fach,antworten:ergebnisse.map(e=>e.antwort),richtig,gesamt,ampel,verlauf,
  name:anzeigeName(profile,currentUser),createdAt:serverTimestamp()
  });
+ delete CI_NEU[wocheId];
  toast(`${richtig} von ${gesamt} richtig.`);
  if($("ciAnsicht")){await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),{uid:currentUser.uid,wocheId,fach,basischeckErledigt:true,updatedAt:serverTimestamp()},{merge:true}).catch(e=>console.error(e));ppDirty=true;await openCheckIn(wocheId);if(ampel==="gruen")showMotivationsBild(false,"lernen","bc:"+wocheId);return}
  if(lehrplanWocheById(fach,wocheId)?.typ==="apt"){await aptSetzen(wocheId,{basischeckErledigt:true},{tab:"basischeck"});return}
@@ -8337,7 +8367,7 @@ function basischeckEditorHTML(fach,wocheId,fragen){
 function basischeckPanelHTML(fach,wocheId,basischeckFragen,meinBasischeck,extraSchueler=""){
  if(isTeacher())return basischeckEditorHTML(fach,wocheId,basischeckFragen);
  if(!basischeckFragen.length)return`<div class="empty">Für diesen Inhalt wurde noch kein Basis-Check eingerichtet.</div>${extraSchueler}`;
- if(meinBasischeck){const af=ampelFarbe(meinBasischeck.ampel);return`<div class="ci-res"style="--a:${af}"><div class="ci-ring"><b>${meinBasischeck.richtig}</b><small>von ${meinBasischeck.gesamt}</small></div><div><strong>${meinBasischeck.richtig} von ${meinBasischeck.gesamt} richtig</strong><p>${esc(basischeckAmpelText(meinBasischeck.ampel))}</p></div></div>${basischeckFreiErgebnisHTML(basischeckFragen,meinBasischeck)}`}
+ if(meinBasischeck){const af=ampelFarbe(meinBasischeck.ampel);return`<div class="ci-res"style="--a:${af}"><div class="ci-ring"><b>${meinBasischeck.richtig}</b><small>von ${meinBasischeck.gesamt}</small></div><div><strong>${meinBasischeck.richtig} von ${meinBasischeck.gesamt} richtig</strong><p>${esc(basischeckAmpelText(meinBasischeck.ampel))}</p></div></div>${basischeckFreiErgebnisHTML(basischeckFragen,meinBasischeck)}${ciVerlaufSVG(meinBasischeck)?`<div class="ci-verlauf"><b>Dein Verlauf</b>${ciVerlaufSVG(meinBasischeck)}</div>`:""}<button type="button"class="secondary"onclick="ciWiederholen('${wocheId}')">Wissen erneut prüfen</button><small style="display:block;margin-top:6px;color:var(--muted)">Am besten nach dem Üben und an einem anderen Tag. Dann siehst du, wie sich dein Ergebnis entwickelt.</small>`}
  const anz=basischeckFragen.length,min=Math.max(3,Math.round(anz*1.2));
  const ART={mc:"Auswahl",kprim:"Richtig oder falsch",offen:"Kurzantwort",zuordnung:"Zuordnen",lueckentext:"Lückentext",reihenfolge:"Reihenfolge",frei:"Freitext"};
  return`<div class="ci">
@@ -8360,7 +8390,8 @@ async function openCheckIn(wocheId){
  if(!e){toast("Dieses Thema wurde nicht gefunden.");return}
  const ph=(typeof KW_PHASEN!=="undefined"&&KW_PHASEN.find(p=>p.id===e.phase))||projektPhaseByWoche(wocheId);
  const c=ph?ppFarbe(ph):"#4a90d9";
- const [fragen,mein]=await Promise.all([getBasischeckFragen(wocheId).catch(()=>[]),lehrer?Promise.resolve(null):getMyBasischeckVersuch(wocheId)]);
+ const [fragen,mein0]=await Promise.all([getBasischeckFragen(wocheId).catch(()=>[]),lehrer?Promise.resolve(null):getMyBasischeckVersuch(wocheId)]);
+ const mein=CI_NEU[wocheId]?null:mein0;
  const lb=ph?`LB ${ph.lbNum}`:(e.lb||"");
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div id="ciAnsicht"class="ci-seite"style="--c:${c}">
@@ -22138,12 +22169,15 @@ function lsThemaDetail(id){
  const liste=LT.schueler.map(u=>({u,x:cs.find(y=>y.uid===u.uid)})).sort((p,q)=>(p.x?rang[p.x.ampel]??1:3)-(q.x?rang[q.x.ampel]??1:3)||anzeigeName(p.u).localeCompare(anzeigeName(q.u),"de"));
  const g=k=>cs.filter(x=>x.ampel===k).length;
  const top=lsTopUnsicher(id,6);
+ const mw=cs.map(ciVerlauf).filter(v=>v.length>1),mittel=f=>Math.round(mw.reduce((s,v)=>s+ciProz(f(v)),0)/mw.length);
+ const wdh=mw.length?`<p style="margin:0 0 12px;font-size:13px"><b>${mw.length}</b> ${mw.length===1?"Person hat":"Personen haben"} den Check-In wiederholt: Ø erster Check-In <b>${mittel(v=>v[0])} %</b> → Ø letzter Stand <b>${mittel(v=>v[v.length-1])} %</b></p>`:"";
  const zeilen=liste.map(({u,x})=>{
   if(!x)return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td><span style="color:var(--muted)">noch nicht gemacht</span></td><td></td></tr>`;
   const uns=lsUnsicher(x);
-  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td style="white-space:nowrap">${lsAmpelPunkt(x.ampel)} ${x.richtig} von ${x.gesamt} richtig</td><td>${uns.length?esc(uns.join(" · ")):`<span style="color:var(--muted)">–</span>`}</td></tr>`}).join("");
+  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td style="white-space:nowrap">${lsAmpelPunkt(x.ampel)} ${x.richtig} von ${x.gesamt} richtig${ciVerlaufTxt(x)?`<br><small style="color:var(--muted)">Verlauf: ${ciVerlaufTxt(x)}</small>`:""}</td><td>${uns.length?esc(uns.join(" · ")):`<span style="color:var(--muted)">–</span>`}</td></tr>`}).join("");
  modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">CHECK-IN</div><h2>${esc(e?kwKurz(e):id)}</h2>
  <p style="margin:2px 0 12px;font-size:13px;color:var(--muted)">${cs.length} von ${N} haben den Check-In gemacht · <b style="color:#2E7D57">${g("gruen")} grün</b> · <b style="color:#B38600">${g("orange")} gelb</b> · <b style="color:#C0392B">${g("rot")} rot</b></p>
+ ${wdh}
  ${top.length?`<div class="ls-unsbox"><b>Hier ist die Klasse noch unsicher</b><ul>${top.map(([t,n])=>`<li>${esc(t)} <small>${n} von ${cs.length}</small></li>`).join("")}</ul></div>`:(cs.length?`<div class="ls-unsbox ok"><b>Keine auffälligen Lücken</b></div>`:"")}
  <div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Ergebnis</th><th>Noch unsicher bei</th></tr></thead><tbody>${zeilen||`<tr><td>Noch keine Schüler:innen.</td></tr>`}</tbody></table></div>`);
 }
@@ -22163,7 +22197,7 @@ function lsDetail(uid){
  const ci=(LT.ci||[]).filter(x=>x.uid===uid),ab=(LT.abgaben||[]).filter(x=>x.uid===uid),co=(KW.co&&KW.co.checkouts)||[];
  const lb=[1,2,3,4].map(n=>{
   const ph=kwPhase(n),F=kwFarbe(n);
-  const th=lsThemenLb(n).map(e=>{const x=ci.find(y=>y.wocheId===e.id);return`<li>${x?lsAmpelPunkt(x.ampel):lsAmpelPunkt("")} ${esc(kwKurz(e))}: ${x?`${x.richtig} von ${x.gesamt} richtig${lsUnsicher(x).length?" · unsicher: "+esc(lsUnsicher(x).join(", ")):""}`:"Check-In offen"}</li>`}).join("");
+  const th=lsThemenLb(n).map(e=>{const x=ci.find(y=>y.wocheId===e.id);return`<li>${x?lsAmpelPunkt(x.ampel):lsAmpelPunkt("")} ${esc(kwKurz(e))}: ${x?`${x.richtig} von ${x.gesamt} richtig${ciVerlaufTxt(x)?" · Verlauf: "+ciVerlaufTxt(x):""}${lsUnsicher(x).length?" · unsicher: "+esc(lsUnsicher(x).join(", ")):""}`:"Check-In offen"}</li>`}).join("");
   const cs=co.filter(c=>Number(c.lbNum)===n).map(c=>{const a=ab.find(x=>x.checkoutId===c.id);return`<li>Check-out ${esc(coTitelAnzeige(c)||"")}: ${a?(a.ausgewertet?`${a.be} BE · ${a.notenpunkte} NP`:(a.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen")):"nicht teilgenommen"}</li>`}).join("");
   const ts=LT.tests.filter(t=>Number(t.lb)===n).map(t=>{const a=LT.alle.find(x=>x.testId===t.id&&x.uid===uid);return`<li>Test ${esc(t.titel)}: ${esc(ltStatus(t,a))}</li>`}).join("");
   return`<h3 style="color:${F.t};margin:14px 0 4px">LB ${n}${ph?" · "+esc(ph.lbTitel):""}</h3><ul>${th||"<li>keine Themen</li>"}${cs}${ts}</ul>`}).join("");
@@ -22215,7 +22249,7 @@ function lsLbBlock(n,ci,co,abgaben,lehrer){
    return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}${(()=>{const t=lsTopUnsicher(e.id,2);return t.length?`<small class="ls-uns">Unsicher: ${esc(t.map(x=>x[0]).join(" · "))}</small>`:""})()}</span>${bar}<small>${n3} von ${N}</small><button class="secondary kw-add" data-ls="thema" data-id="${esc(e.id)}">Wer?</button></div>`;
   }
   const x=mine[0];
-  return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}</span>${x?`${lsAmpelPunkt(x.ampel)}<small>${x.richtig} von ${x.gesamt} richtig</small>`:`<small class="ls-offen">Check-In offen</small>`}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(e.id)}">${x?"Ansehen":"Starten"}</button></div>`;
+  return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}</span>${x?`${lsAmpelPunkt(x.ampel)}<small>${x.richtig} von ${x.gesamt} richtig</small>`:`<small class="ls-offen">Check-In offen</small>`}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(e.id)}">${x?"Ansehen":"Starten"}</button></div>${x&&ciVerlaufSVG(x)?`<details class="ls-verlauf"><summary>Verlauf: ${ciVerlaufTxt(x)}</summary>${ciVerlaufSVG(x)}</details>`:""}`;
  }).join("");
  const nachweise=cos.map(c=>lsCoZeile(c,co,lehrer,abgaben)).join("")+tests.map(t=>lsTestZeile(t,lehrer)).join("");
  return`<details class="ls-lb" id="ls-lb${n}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><summary class="ls-lbk"><small>LB ${n}</small><b>${esc(ph.lbTitel)}</b><span>${chip}</span><i class="ls-pf" aria-hidden="true">▾</i></summary>

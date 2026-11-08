@@ -918,3 +918,6 @@ details.ls-lb:not([open])>summary.ls-lbk{border-radius:0 0 0 0}
 /* Schüleransicht für Lehrkräfte (Lernlandkarte) */
 .kw-vorschau{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px;padding:10px 14px;border-radius:12px;background:#f3ecfb;border:1px solid #cdb6ea;border-left:5px solid #8250b8;color:#3d2a5c;font-size:13.5px}
 .kw-vorschau .primary{padding:7px 14px}
+/* Check-In-Verlauf */
+.ci-verlauf{margin:14px 0 8px}.ci-verlauf svg{max-width:440px;display:block;margin-top:6px}
+.ls-verlauf{margin:2px 0 10px 34px;font-size:13px}.ls-verlauf summary{cursor:pointer;color:var(--muted)}.ls-verlauf svg{max-width:420px;display:block;margin-top:6px}
