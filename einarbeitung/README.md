@@ -16,7 +16,11 @@ Die App zeigt Kurse im **Modulplan der 12. Klasse** (Unterricht Pädagogik und P
         ├── f12-fa01.json    Basiskurs Fachaufsatztraining (Instanzenmodell nach Freud)
         ├── f12-freud1.json  Freud: Instanzenmodell (Es, Ich, Über-Ich)
         ├── f12-freud2.json  Freud: Psychosexuelle Entwicklung und Fixierung
-        └── f12-freud3.json  Freud: Abwehrmechanismen
+        ├── f12-freud3.json  Freud: Abwehrmechanismen
+        ├── fa04.json        Training: Struktur einhalten (Fall Tim, nach der Kurzarbeit)
+        ├── fa05.json        Training: Theorie beschreiben (ohne Fallbezug)
+        ├── fa06.json        Training: Fallbezug üben (Transfer mit Zeilenangaben)
+        └── fa07.json        Training: Schreiben üben (Sätze, Argumente, roter Faden)
 
 ## Neuen Kurs anlegen
 
@@ -63,3 +67,7 @@ Die App zeigt Kurse im **Modulplan der 12. Klasse** (Unterricht Pädagogik und P
 ## Was gespeichert wird
 
 Die App speichert „Kurs abgeschlossen“ (mit Datum) und die Zahl der richtig gelösten Aufgaben. Beides sehen die Person selbst und die Lehrkraft. Eigene Texte der Schüler:innen bleiben im Browser.
+
+## Trainings nach Kurzarbeit und Schulaufgabe
+
+In der Lernlandkarte steht in jedem Lernbereich unter den Themen eine Zeile: LB 1 „1.Kurzarbeit“, LB 2 „1.Schulaufgabe“, LB 3 „2.Kurzarbeit“, LB 4 „2.Schulaufgabe“. Dort stellen Lehrkräfte über „Baustein einplanen“ mehrere Trainings (`fa05`, `fa06`, `fa04`, `fa07`) auf einmal ein, ohne Woche und Dauer. Die Zeilen sind keine Lehrplan-Themen und zählen nicht in den Fortschritt. Die Kurse tragen kein `lb`-Feld und können deshalb in jedem Lernbereich eingestellt werden. Am Ende jedes Kurses zeigt der Player eine Gesamtauswertung (Aufgaben, richtige Antworten, eigene Texte mit Kriterien).

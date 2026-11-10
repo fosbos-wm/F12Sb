@@ -1,0 +1,478 @@
+{
+ "titel": "Training: Fallbezug üben",
+ "modulart": "selbstlern",
+ "einleitung": "Du übst das **Verdeutlichen (Transfer)** am Fall Tim: passende Textstellen finden, Zeilen angeben, mit dem Fachbegriff deuten und mehrere Belege nutzen. Plane etwa 45 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "Training · Fallbezug üben",
+   "titel": "Theorie am Fall belegen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "situation",
+     "label": "Arbeitsauftrag",
+     "text": "Sie erachten die Persönlichkeitsstruktur von Tim für problematisch und wollen diese Einschätzung mit den Erkenntnissen von Sigmund Freud belegen. Erläutern Sie am Beispiel von Tim (Z. 13–22) den Begriff „Ich-Schwäche“ ausführlich."
+    },
+    {
+     "typ": "text",
+     "text": "In diesem Training übst du den Teil, in dem viele Punkte verloren gehen: das **Verdeutlichen (Transfer)**. Du suchst die passende Textstelle, gibst die Zeilen an und verknüpfst sie mit dem Merkmal. Plane etwa 45 Minuten ein."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Ein guter Transfer hat drei Schritte:**\n- **Beleg:** Du zitierst oder benennst die Textstelle mit Zeilenangabe, z. B. (Z. 13–14).\n- **Deutung:** Du sagst mit dem Fachbegriff, warum die Stelle das Merkmal zeigt („Das zeigt, dass das Es zu stark ist“).\n- **Verknüpfung:** Du knüpfst an die Erklärung an und zeigst, was die Stelle über Tims Persönlichkeitsstruktur aussagt."
+    },
+    {
+     "typ": "mc",
+     "frage": "Welcher Satz ist der Anfang eines guten Transfers?",
+     "optionen": [
+      "Tim ist 17 und besucht die 11. Klasse.",
+      "Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14).",
+      "Das ist ein zu starkes Es.",
+      "Das Es drängt nach sofortiger Befriedigung."
+     ],
+     "richtig": 1,
+     "erklaerung": "Der Transfer beginnt mit dem Beleg samt Zeilenangabe. Die anderen Sätze erzählen den Fall nach, nennen nur das Ergebnis oder bleiben allgemein."
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 1",
+   "titel": "Zeilen finden",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim (zum Nachschlagen)",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne jeder Textstelle die richtige Zeilenangabe zu.",
+     "paare": [
+      [
+       "Tim spürt ein starkes Verlangen mitzuspielen",
+       "Z. 4–6"
+      ],
+      [
+       "„Ein Versprechen bricht man nicht“",
+       "Z. 7–8"
+      ],
+      [
+       "Tim beherrscht erst zwei von fünf Aufgabentypen",
+       "Z. 8–10"
+      ],
+      [
+       "Tim zockt fast jede Nacht bis 2 Uhr",
+       "Z. 13–14"
+      ],
+      [
+       "Ben warnt Tim: „Du hast schon zwei Fünfer“",
+       "Z. 17–18"
+      ],
+      [
+       "„Ich kann einfach nicht anders“",
+       "Z. 19"
+      ]
+     ],
+     "erklaerung": "Gib immer alle Zeilen an, über die sich die Stelle erstreckt. So findet die Korrektur den Beleg sofort."
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 2",
+   "titel": "Welcher Beleg passt wohin?",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Nicht jede Textstelle belegt jedes Merkmal. Entscheide, wozu die Stelle passt."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Ordne die Textstellen zu.",
+     "hinweis": "Eine Spalte nimmt Stellen auf, die zu keinem der drei Merkmale passen.",
+     "kategorien": [
+      {
+       "name": "Zu starkes Es",
+       "items": [
+        "Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14)",
+        "Der Vorsatz, nur eine Stunde zu spielen, scheitert jeden Abend (Z. 14–15)"
+       ]
+      },
+      {
+       "name": "Unterlegenes Ich",
+       "items": [
+        "Schuldgefühle und Selbstvorwürfe ändern sein Verhalten nicht (Z. 15–16)",
+        "Bens Warnung (zwei Fünfer, Z. 17–18) bleibt wirkungslos"
+       ]
+      },
+      {
+       "name": "Fremdbestimmung",
+       "items": [
+        "„Ich kann einfach nicht anders“ (Z. 19)",
+        "Trotz Verwarnung sitzt er wieder bis spät in die Nacht vor dem Bildschirm (Z. 21–22)"
+       ]
+      },
+      {
+       "name": "Gehört zu keinem Merkmal (Hintergrund)",
+       "items": [
+        "Tim ist 17 und besucht die 11. Klasse (Z. 1)",
+        "Die Mathe-Schulaufgabe steht am nächsten Tag an (Z. 2–3)"
+       ]
+      }
+     ],
+     "erklaerung": "Das Zocken und der gescheiterte Vorsatz zeigen das starke Es. Die Wirkungslosigkeit von Schuldgefühlen und Warnung zeigt das unterlegene Ich. Das „nicht anders können“ zeigt die Fremdbestimmung. Alter und Schulaufgabe sind Hintergrund."
+    }
+   ]
+  },
+  {
+   "kicker": "Technik",
+   "titel": "Einen Transfer Schritt für Schritt bauen",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Setze den Transfer zu Merkmal 1 aus den richtigen Bausteinen zusammen."
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Transfer zum zu starken Es.",
+     "text": "Bei Tim ist das Es zu stark: Er zockt fast jede Nacht bis {{2 Uhr}} ({{Z. 13–14}}). Sein {{Vorsatz}}, nur eine Stunde zu spielen, scheitert (Z. 14–15). Das {{Bedürfnis}} nach sofortiger Befriedigung setzt sich immer wieder durch.",
+     "woerter": [
+      "2 Uhr",
+      "Z. 13–14",
+      "Vorsatz",
+      "Bedürfnis",
+      "Z. 1–2",
+      "Z. 7–8",
+      "Gewissen",
+      "Mitternacht"
+     ],
+     "erklaerung": "Beleg mit Zeile, dann der Vorsatz als zweiter Beleg und die Deutung mit dem Fachbegriff."
+    },
+    {
+     "typ": "text",
+     "text": "Bei Merkmal 3 stehen die Sätze in der richtigen Reihenfolge: Beleg, Deutung, Folge."
+    },
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe den Transfer zu „Fremdbestimmung“ in die richtige Reihenfolge.",
+     "hinweis": "Beginne mit dem Beleg.",
+     "absaetze": [
+      "Tim sagt: „Ich weiß, dass ich aufhören sollte, aber in dem Moment ist mir alles egal. Ich kann einfach nicht anders“ (Z. 18–19).",
+      "Er weiß, was er tun sollte, kann es aber nicht umsetzen: Seine Triebimpulse bestimmen sein Verhalten.",
+      "Trotz Schlafmangel, Verwarnung und zwei Fünfern (Z. 17–18; 20–21) macht er weiter.",
+      "Er sitzt am nächsten Abend wieder bis spät in die Nacht vor dem Bildschirm (Z. 21–22)."
+     ],
+     "erklaerung": "Beleg, Deutung mit dem Fachbegriff, Folgen als weitere Belege, Wiederholung des Verhaltens als Schlusspunkt."
+    }
+   ]
+  },
+  {
+   "kicker": "Satzanfänge",
+   "titel": "Mit welchen Wörtern verknüpfst du?",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne jeder Aufgabe im Transfer den passenden Satzanfang zu.",
+     "paare": [
+      [
+       "Beleg einführen",
+       "Tim zockt … / Tim sagt: …"
+      ],
+      [
+       "Deuten",
+       "Das zeigt, dass …"
+      ],
+      [
+       "Begründen",
+       "Das wird daran deutlich, dass …"
+      ],
+      [
+       "Folge aufzeigen",
+       "Dadurch gelingt es Tim nicht, …"
+      ],
+      [
+       "Weiteren Beleg ergänzen",
+       "Außerdem zeigt sich …"
+      ]
+     ],
+     "erklaerung": "Diese Satzanfänge kannst du in jedem Transfer wiederverwenden."
+    }
+   ]
+  },
+  {
+   "kicker": "Fehlerjagd",
+   "titel": "Was fehlt in diesem Transfer?",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Fünf Transferversuche (frei erfunden, nicht aus deiner Klasse). Findest du den Fehler?"
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Ordne jeden Transfer seinem Fehler zu.",
+     "hinweis": "Ein Transfer ist gelungen.",
+     "kategorien": [
+      {
+       "name": "Fall nacherzählt, Theorie fehlt",
+       "items": [
+        "Tim zockt jede Nacht, schläft im Unterricht ein und bekommt eine Verwarnung."
+       ]
+      },
+      {
+       "name": "Zeilenangabe fehlt",
+       "items": [
+        "Tims Es ist zu stark, denn er zockt fast jede Nacht bis 2 Uhr und kann seinen Vorsatz nicht einhalten."
+       ]
+      },
+      {
+       "name": "Nur Zitat, Deutung fehlt",
+       "items": [
+        "Tim sagt: „Ich kann einfach nicht anders“ (Z. 19)."
+       ]
+      },
+      {
+       "name": "Beleg stammt aus dem falschen Fallteil",
+       "items": [
+        "Tims Es ist zu stark: Er spielt nur eine einzige Runde mit und lernt danach konzentriert weiter (Z. 11–12)."
+       ]
+      },
+      {
+       "name": "Gelungen",
+       "items": [
+        "Tims Es ist zu stark: Er zockt fast jede Nacht bis 2 Uhr (Z. 13–14) und hält seinen Vorsatz, nur eine Stunde zu spielen, nicht ein (Z. 14–15). Sein Bedürfnis nach sofortiger Befriedigung setzt sich also immer wieder durch."
+       ]
+      }
+     ],
+     "erklaerung": "Gelungen sind Beleg, Zeile, Fachbegriff und Verknüpfung. Z. 1–12 zeigen ein funktionierendes Ich, deshalb belegen sie kein Merkmal der Ich-Schwäche."
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 3",
+   "titel": "Schreibe zwei Transfers",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Verdeutlichen Sie das Merkmal „zu starkes Es“ am Fall Tim (Transfer).",
+     "hinweis": "Schreibe zwei bis drei Sätze: Beleg mit Zeilenangabe, zweiter Beleg, Deutung mit Fachbegriff.",
+     "muster": "Bei Tim ist das Es zu stark: Er zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Sein Vorsatz, nur eine Stunde zu spielen, scheitert Abend für Abend (Z. 14–15).",
+     "kriterien": [
+      "Ich habe die **Textstelle** (Zocken bis 2 Uhr) genannt.",
+      "Ich habe die **Zeilenangabe** (Z. 13–14) geschrieben.",
+      "Ich habe den **gescheiterten Vorsatz** (Z. 14–15) als zweiten Beleg verwendet.",
+      "Ich habe mit dem Fachbegriff **gedeutet**: Das Es ist zu stark.",
+      "Ich habe **nichts erfunden**, was nicht im Fall steht."
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Verdeutlichen Sie das Merkmal „unterlegenes Ich“ am Fall Tim (Transfer).",
+     "hinweis": "Schreibe drei bis vier Sätze: Beleg, Deutung, Forderungen von Über-Ich und Realität mit Zeilen.",
+     "muster": "Tims Ich kann sich gegenüber dem Es nicht behaupten, seine Vorsätze scheitern (Z. 14–15; 18–19). Die Forderungen des Über-Ichs (Schuldgefühle, Selbstvorwürfe; Z. 15–16) und der Realität (zwei Fünfer, Müdigkeit, Verwarnung; Z. 17–21) nimmt er zwar wahr, sie ändern aber nichts an seinem Verhalten.",
+     "kriterien": [
+      "Ich habe die **Textstelle** zum gescheiterten Vorsatz mit Zeile genannt (Z. 14–15; 18–19).",
+      "Ich habe gedeutet: Das Ich kann sich gegenüber dem Es nicht behaupten.",
+      "Ich habe die **Forderung des Über-Ichs** (Schuldgefühle, Z. 15–16) genannt.",
+      "Ich habe die **Forderung der Realität** (zwei Fünfer, Z. 17–18; Verwarnung, Z. 20–21) genannt.",
+      "Ich habe **nichts erfunden**, was nicht im Fall steht."
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Gegenprobe",
+   "titel": "Z. 1–12 oder Z. 13–22?",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Im ersten Teil des Falls (Z. 1–12) funktioniert Tims Persönlichkeit. Im zweiten (Z. 13–22) nicht mehr. Für Aufgabe 2 brauchst du die Belege aus dem zweiten Teil."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Ordne die Aussagen dem passenden Fallteil zu.",
+     "kategorien": [
+      {
+       "name": "Z. 1–12: Ich vermittelt",
+       "items": [
+        "Tim spielt nur eine einzige Runde mit (Z. 11–12).",
+        "Er stellt sich einen Wecker (Z. 12).",
+        "Er lernt danach konzentriert weiter (Z. 12)."
+       ]
+      },
+      {
+       "name": "Z. 13–22: Ich-Schwäche",
+       "items": [
+        "Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14).",
+        "Er schläft im Unterricht ein (Z. 20).",
+        "Er sitzt am nächsten Abend wieder bis spät vor dem Bildschirm (Z. 21–22)."
+       ]
+      }
+     ],
+     "erklaerung": "Der Kontrast zeigt, was eine gelungene Vermittlung ausmacht und wie sich die Ich-Schwäche davon abhebt."
+    }
+   ]
+  },
+  {
+   "kicker": "Finale",
+   "titel": "Der Fallbezug in deinem Aufsatz",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "text",
+     "text": "Du schreibst jetzt alle Teile mit Fallbezug: die Überleitung, die drei Transfers und den Schluss. Die allgemeinen Teile sind in der Strukturhilfe vorgegeben."
+    },
+    {
+     "typ": "strukturstreifen",
+     "titel": "Schreiben Sie die Teile des Fachaufsatzes mit Fallbezug.",
+     "aufgabe": "Erläutern Sie am Beispiel von Tim (Z. 13–22) den Begriff „Ich-Schwäche“ ausführlich.",
+     "felder": [
+      {
+       "titel": "Einleitung: Überleitung",
+       "farbe": "pfirsich",
+       "hilfe": "Hier kommt zum ersten Mal der Fall: Was fällt an Tim auf (Zeilen)? Kündige den Begriff „Ich-Schwäche“ an.",
+       "muster": "In der Fallsituation fällt Tim in den letzten Wochen durch sein Verhalten auf: Er zockt fast jede Nacht bis 2 Uhr und kann nicht aufhören (Z. 13–22). Dieses Verhalten wird im Folgenden mit dem Begriff „Ich-Schwäche“ nach Freud erläutert."
+      },
+      {
+       "titel": "Merkmal 1: Verdeutlichen (Transfer)",
+       "farbe": "blau",
+       "hilfe": "Vorgegeben ist: „Ein erstes Merkmal ist ein zu starkes Es.“ Beleg mit Zeile, zweiter Beleg, Deutung.",
+       "muster": "Bei Tim ist das Es zu stark: Er zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Sein Vorsatz, nur eine Stunde zu spielen, scheitert Abend für Abend (Z. 14–15)."
+      },
+      {
+       "titel": "Merkmal 2: Verdeutlichen (Transfer)",
+       "farbe": "gruen",
+       "hilfe": "Vorgegeben ist: „Ein zweites Merkmal ist ein unterlegenes Ich.“ Beleg mit Zeilen, Forderungen von Über-Ich und Realität.",
+       "muster": "Tims Ich kann sich gegenüber dem Es nicht behaupten, seine Vorsätze scheitern (Z. 14–15; 18–19). Die Forderungen des Über-Ichs (Schuldgefühle, Selbstvorwürfe; Z. 15–16) und der Realität (zwei Fünfer, Müdigkeit, Verwarnung; Z. 17–21) nimmt er zwar wahr, sie ändern aber nichts an seinem Verhalten."
+      },
+      {
+       "titel": "Merkmal 3: Verdeutlichen (Transfer)",
+       "farbe": "rot",
+       "hilfe": "Vorgegeben ist: „Ein drittes Merkmal ist die Fremdbestimmung.“ Beleg mit Zitat und Zeilen, Folgen.",
+       "muster": "Tim weiß, dass er aufhören sollte, kann es aber nicht umsetzen („Ich kann einfach nicht anders“, Z. 18–19), und macht trotz der negativen Folgen weiter (Z. 21–22)."
+      },
+      {
+       "titel": "Schluss",
+       "farbe": "pfirsich",
+       "hilfe": "Ein Gedanke zum Thema: Was braucht ein Mensch, um seine Wünsche und Anforderungen in Einklang zu bringen?",
+       "muster": "Ein starkes Ich ist die Voraussetzung dafür, dass Wünsche, Gewissen und Anforderungen der Realität in Einklang gebracht werden können."
+      }
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Prüfe am Ende jeden Satz mit Tim: **Gibt es eine Zeilenangabe? Steht das wirklich im Fall? Habe ich gedeutet und nicht nur nacherzählt?**"
+    }
+   ]
+  }
+ ]
+}

@@ -5242,7 +5242,7 @@ const PPM_EXP_TEILE=[
 function ppmExpMinuten(teile){return PPM_EXP_TEILE.filter(t=>(teile||[]).includes(t.k)).reduce((n,t)=>n+t.min,0);}
 function ppmExpTeile(m){return Array.isArray(m&&m.teile)&&m.teile.length?m.teile:PPM_EXP_TEILE.map(t=>t.k);}
 // Fertige Einarbeitungs-Inhalte (einarbeitung/inhalte/<id>.json); wählbar im Selbstlernkurs.
-const PPM_EA_IDS=["f12-fa01","f12-satzbausteine","f12-freud1","f12-freud2","f12-freud3","fa01","fa02"]; // Dateien liegen in einarbeitung/inhalte/<ID>.json (12. Klasse)
+const PPM_EA_IDS=["f12-fa01","f12-satzbausteine","f12-freud1","f12-freud2","f12-freud3","fa01","fa02","fa04","fa05","fa06","fa07"]; // Dateien liegen in einarbeitung/inhalte/<ID>.json (12. Klasse)
 // Einheitliche Bezeichnung: Inhalt · Modulart · LB1 (LB nur, wenn bekannt)
 function ppmBez(inhalt,modul,lb){const T=PPM_TYPEN[modul];return[inhalt,T?T.art:"",lb?"LB"+lb:""].filter(Boolean).join(" · ");}
 // Modulart und Lernbereich einer Einarbeitung: zuerst die Angaben in der JSON-Datei ("modulart", "lb"),
@@ -5721,7 +5721,7 @@ async function ppmDialog(id,typ,woche,opt){
    <label class="ppm-opt">Titel<input id="ppmTitel" maxlength="120" value="${esc(bearb?bearb.titel:"")}" placeholder="${esc(t==="projekt"&&ph0?ph0.titel:(t==="experiment"?"Das Experiment":T.name))}"></label>
    <div hidden><select id="ppmStart">${wochenOpt}</select><select id="ppmDauer">${dauerOpt}</select><div id="ppmKapa"></div></div>
    ${extra}
-    <details class="ppm-details ppm-opt"${(bearb&&(bearb.themen||[]).length)||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen gehört der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${KW_THEMEN.map(e=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${e.id}"${((bearb&&bearb.themen)||[]).includes(e.id)||window.__kwThemaNeu===e.id?" checked":""}> LB ${e.lbNum} · Nr. ${esc(e.nr)} · ${esc(kwKurz(e))}</label>`).join("")}</div></details>
+    <details class="ppm-details ppm-opt"${(bearb&&(bearb.themen||[]).length)||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen gehört der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${KW_THEMEN.concat(KW_LEISTUNGEN).map(e=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${e.id}"${((bearb&&bearb.themen)||[]).includes(e.id)||window.__kwThemaNeu===e.id?" checked":""}> LB ${e.lbNum} · ${e.leistung?"":"Nr. "+esc(e.nr)+" · "}${esc(kwKurz(e))}</label>`).join("")}</div></details>
    <label class="ppm-opt">Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
    <div id="ppmMatBox" class="ppm-matbox ppm-opt"></div>
    <div class="form-actions">${bearb?`<button class="secondary" type="button" id="ppmLoeschen">Modul löschen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
@@ -21934,7 +21934,16 @@ const KW_KAT=[
 const KW_BAUSTEINE={selbstlern:["Selbstlernkurs","slk"],stunde:["Deeper-Learning-Einheit","std"],rallye:["Lernrallye","ral"],kprim:["KPrim-Test / Check-out","chk"],apt:["Fachaufsatztraining","ueb"],einfuehrung:["Einführung","slk"]};
 function kwKurz(e){return e.kurz||e.thema}
 function kwThemenVonPhase(ph){return KW_THEMEN.filter(e=>e.phase===ph.id)}
-function kwThemaById(id){return KW_THEMEN.find(e=>e.id===id)||null}
+// Trainings nach einer Leistungserhebung: je Lernbereich eine Zeile unter den Themen der Lernlandkarte (Kurzarbeit, Schulaufgabe).
+// Sie sind keine Lehrplan-Themen und zählen nicht in Fortschritt und Themenzahl, nehmen aber Bausteine (Selbstlernkurse) auf.
+const KW_LEISTUNGEN=[{id:"ln-ka1",phase:"lb1",lbNum:1,lb:"LB 1",nr:"KA 1",thema:"1.Kurzarbeit",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der Rückgabe gezielt deine Schwächen übst."},{id:"ln-sa1",phase:"lb2",lbNum:2,lb:"LB 2",nr:"SA 1",thema:"1.Schulaufgabe",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der Rückgabe gezielt deine Schwächen übst."},{id:"ln-ka2",phase:"lb3",lbNum:3,lb:"LB 3",nr:"KA 2",thema:"2.Kurzarbeit",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der Rückgabe gezielt deine Schwächen übst."},{id:"ln-sa2",phase:"lb4",lbNum:4,lb:"LB 4",nr:"SA 2",thema:"2.Schulaufgabe",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der Rückgabe gezielt deine Schwächen übst."}];
+const KW_TRAININGS=["fa05","fa06","fa04","fa07"]; // Theorie beschreiben, Fallbezug üben, Struktur einhalten, Schreiben üben
+function kwThemaById(id){return KW_THEMEN.find(e=>e.id===id)||KW_LEISTUNGEN.find(e=>e.id===id)||null}
+function kwLeistungRow(ph){
+ const l=KW_LEISTUNGEN.find(x=>x.phase===ph.id);if(!l)return"";
+ const n=kwModuleThema(l.id).length;
+ return`<button type="button" class="kw-row kw-ln" style="margin-top:8px;border-top:1px dashed var(--c)" data-kw="thema" data-id="${esc(l.id)}"><i class="kw-bx" style="visibility:hidden"></i><em></em><span>${esc(l.thema)}</span>${n?`<small>${n}</small>`:""}</button>`;
+}
 function kwPhase(lbNum){return KW_PHASEN.find(p=>p.lbNum===Number(lbNum))||null}
 function kwFarbe(lbNum){return KW_FARBEN[lbNum]||KW_FARBEN[1]}
 async function kwLaden(){
@@ -22007,7 +22016,7 @@ function kwKachelHTML(ph,lehrer){
   <header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${status?`<span class="kw-st">${naechst?"als Nächstes":status}</span>`:""}</header>
   <button type="button" class="kw-proj" data-kw="projekt" data-lb="${ph.lbNum}"><span class="chip prj">Projekt</span><b>${esc(projTitel)}</b><small>${fmtKurz(ph.projektStart)}–${fmtKurz(ph.projektEnde)}</small></button>
   <div class="kw-lab">${n} THEMEN · ${lehrer?fertig+" MIT MATERIAL":fertig+" ERLEDIGT"}</div>
-  <div class="kw-rows">${rows}</div>
+  <div class="kw-rows">${rows}${kwLeistungRow(ph)}</div>
   <div class="kw-lab">BAUSTEINE DER LEHRKRÄFTE</div>
   <div class="kw-chips">${chips}</div>
   <footer class="kw-fuss"><div class="kw-bar" role="progressbar" aria-valuenow="${proz}" aria-valuemin="0" aria-valuemax="100" aria-label="${lehrer?"Vorbereitung":"Fortschritt"} Lernbereich ${ph.lbNum}"><i style="width:${proz}%"></i></div><span>${lehrer?"Vorbereitet":"Fortschritt"} ${proz} %</span></footer>
@@ -22074,11 +22083,11 @@ async function renderKwThema(){
  const e=kwThemaById(activeKwThema);if(!e)return await renderKachelwand();
  const ph=KW_PHASEN.find(p=>p.id===e.phase),F=kwFarbe(ph.lbNum),lehrer=kwLehrer();
  const mats=KW.mat[e.id]||[];
- const ciP=lehrer?Promise.resolve([]):getBasischeckFragen(e.id).catch(()=>[]); // parallel zu den anderen Abfragen laden
+ const ciP=(lehrer||e.leistung)?Promise.resolve([]):getBasischeckFragen(e.id).catch(()=>[]); // parallel zu den anderen Abfragen laden
  const liste=kat=>{const l=mats.filter(m=>m.kategorie===kat);return l.length?l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join(""):`<div class="kw-leer">${lehrer?"Noch nichts eingestellt.":"Noch nichts eingestellt."}</div>`};
  // Schülerseite: nur Abschnitte mit Inhalt anzeigen (Lehrkraft sieht alle, um etwas hinzuzufügen)
  const ciFr=await ciP;
- const secs=KW_KAT.map(k=>{
+ const secs=e.leistung?"":KW_KAT.map(k=>{
   if(!lehrer){
    const hat=k.stufen?k.stufen.some(([key])=>mats.some(m=>m.kategorie===key)):mats.some(m=>m.kategorie===k.key);
    if(!hat&&!(k.key==="checkin"&&ciFr.length))return"";
@@ -22092,25 +22101,26 @@ async function renderKwThema(){
  }).join("");
  // Variante der Lerneinheit mit Start
  const mod=kwModuleThema(e.id);
- const ea=await einarbeitungInfo(e.id).catch(()=>null);
+ const ea=e.leistung?null:await einarbeitungInfo(e.id).catch(()=>null);
  const eaF=!lehrer?(KW.fort[e.id]||{zieleErfuellt:{},abgeschlossen:false}):{};
  const karten=[];
  if(ea&&!ea.entwurf)karten.push(`<div class="kw-baust"><span class="chip slk">Selbstlernkurs</span><b>${esc(ea.titel||kwKurz(e))}</b><small>${eaF.einarbeitungAbgeschlossen?"abgeschlossen":(ea.aufgaben?ea.aufgaben+" Aufgaben":"")}</small><button class="primary" data-kw="ea" data-id="${esc(e.id)}">${eaF.einarbeitungAbgeschlossen?"Nochmal ansehen":"Starten"}</button></div>`);
  mod.forEach(m=>{const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);
+  if(e.leistung){karten.push(`<div class="kw-dz"><button type="button" class="kw-datei" data-kw="modul" data-id="${esc(m.id)}"><span>${esc(m.titel||T[0])}</span><small>${f&&f.done?"abgeschlossen":(lehrer?"Öffnen":"Training starten")}</small></button>${lehrer?`<button type="button" class="kw-del kw-baust-weg" data-kw="modulweg" data-id="${esc(m.id)}" data-thema="${esc(e.id)}" aria-label="Training entfernen" title="Training von dieser Seite entfernen">×</button>`:""}</div>`);return}
   karten.push(`<div class="kw-baust"><span class="chip ${T[1]}">${esc(T[0])}</span><b>${esc(m.titel||T[0])}</b><small>${f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):(m.start&&sw12ById(m.start)?"ab "+fmtKurz(sw12ById(m.start).start):"")}</small><div class="kw-baust-btn"><button class="primary" data-kw="modul" data-id="${esc(m.id)}">${lehrer?"Öffnen":"Starten"}</button>${lehrer?`<button type="button" class="secondary kw-baust-weg" data-kw="modulweg" data-id="${esc(m.id)}" data-thema="${esc(e.id)}" title="Diesen Baustein von diesem Thema entfernen">Entfernen</button>`:""}</div></div>`)});
- const lerneinheit=(!lehrer&&!karten.length)?"":kwSekHTML("Lerneinheit","Selbstlernkurs, Deeper-Learning-Stunde, Lernrallye oder anderes",
-  karten.length?`<div class="kw-baustliste">${karten.join("")}</div>`:`<div class="kw-leer">Für dieses Thema ist noch keine Lerneinheit ausgewählt.</div>`,null,lehrer,
+ const lerneinheit=(!lehrer&&!karten.length)?"":kwSekHTML(e.leistung?"Trainings":"Lerneinheit",e.leistung?"Selbstlernkurse zum Üben der eigenen Schwächen":"Selbstlernkurs, Deeper-Learning-Stunde, Lernrallye oder anderes",
+  karten.length?`<div class="${e.leistung?"kw-dateien":"kw-baustliste"}">${karten.join("")}</div>`:`<div class="kw-leer">${e.leistung?"Hier ist noch kein Training ausgewählt.":"Für dieses Thema ist noch keine Lerneinheit ausgewählt."}</div>`,null,lehrer,
   lehrer?`<div class="kw-aktionen"><button class="secondary" data-kw="modulneu" data-id="${esc(e.id)}">Baustein einplanen</button><button class="secondary" data-kw="modulwahl" data-id="${esc(e.id)}">Vorhandenes Modul zuordnen</button></div>`:"");
  // Check-out am Ende
  // Check-outs gehören zum Lernbereich, nicht zum Thema: Schüler sehen sie hier nur, solange einer läuft (alle anderen unter „Lernstände“)
  const cos=KW.co&&KW.co.checkouts?KW.co.checkouts.filter(c=>Number(c.lbNum)===ph.lbNum&&(lehrer||c.status==="live")):[];
  const coInner=cos.length?cos.map(c=>{const a=(KW.co.meineAbgaben||{})[c.id];return`<div class="kw-dz"><button type="button" class="kw-datei" data-kw="checkouts"><span>${esc(coTitelAnzeige(c)||"Check-out")}</span><small>${a&&a.abgegeben?"abgegeben":(c.status==="live"?"läuft jetzt":(c.status==="beendet"?"beendet":"angelegt"))}</small></button></div>`}).join(""):`<div class="kw-leer">Die Lehrkraft legt den Check-out am Ende des Themas an.</div>`;
- const checkout=(!lehrer&&!cos.length)?"":kwSekHTML("Check-out","Abschlusstest der Lehrkraft am Ende des Themas",`<div class="kw-dateien">${coInner}</div>`,null,lehrer,`<div class="kw-aktionen"><button class="secondary" data-kw="checkouts">${lehrer?"Check-outs verwalten":"Alle meine Check-outs"}</button><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button></div>`);
- const fertigBtn=lehrer?"":`<button type="button" class="kw-fertig${kwErledigt(e.id)?" an":""}" data-kw="fertig" data-id="${esc(e.id)}"><i class="kw-bx${kwErledigt(e.id)?" d":""}"></i>${kwErledigt(e.id)?"Thema erledigt":"Als erledigt markieren"}</button>`;
+ const checkout=e.leistung||(!lehrer&&!cos.length)?"":kwSekHTML("Check-out","Abschlusstest der Lehrkraft am Ende des Themas",`<div class="kw-dateien">${coInner}</div>`,null,lehrer,`<div class="kw-aktionen"><button class="secondary" data-kw="checkouts">${lehrer?"Check-outs verwalten":"Alle meine Check-outs"}</button><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button></div>`);
+ const fertigBtn=lehrer||e.leistung?"":`<button type="button" class="kw-fertig${kwErledigt(e.id)?" an":""}" data-kw="fertig" data-id="${esc(e.id)}"><i class="kw-bx${kwErledigt(e.id)?" d":""}"></i>${kwErledigt(e.id)?"Thema erledigt":"Als erledigt markieren"}</button>`;
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
   ${kwSchuelerBanner()}
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
-  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p><div class="kw-aktionen">${fertigBtn}</div></header>
+  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · ${e.leistung?"Trainings nach der "+esc(e.thema):"Nr. "+esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p><div class="kw-aktionen">${fertigBtn}</div></header>
   ${secs}${lerneinheit}${checkout}${(!lehrer&&!secs&&!lerneinheit&&!checkout)?`<div class="kw-card"><div class="kw-leer">Deine Lehrkraft hat zu diesem Thema noch nichts eingestellt.</div></div>`:""}
  </div>${footer()}`;
 }
@@ -22477,9 +22487,32 @@ async function kwFaPicker(kat,themaId,modus){
 }
 window.kwFaPicker=kwFaPicker;
 // Thema → „Baustein einplanen“: alle Bausteine sofort sichtbar, ein Klick öffnet die kurze Einplanung.
+// Trainings nach Kurzarbeit/Schulaufgabe: mehrere auf einmal ankreuzen, ohne Woche und Dauer. Die Module laufen ohne Schulwoche und belegen keinen Platz im Wochenplan.
+async function kwTrainingWahl(e){
+ const ph=KW_PHASEN.find(p=>p.id===e.phase)||KW_PHASEN[0];
+ const infos=await Promise.all(KW_TRAININGS.map(x=>einarbeitungInfo(x).catch(()=>null)));
+ const da=new Set(kwModuleThema(e.id).map(m=>m.kursId));
+ const zeilen=KW_TRAININGS.map((x,i)=>{const n=infos[i];if(!n||n.entwurf)return"";const schon=da.has("ea:"+x);
+  return`<label style="display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-top:8px;cursor:${schon?"default":"pointer"}"><input type="checkbox" class="kwTrCb" value="${x}"${schon?" checked disabled":""}><span><b>${esc(n.titel)}</b>${schon?`<br><small style="color:var(--muted)">schon eingestellt</small>`:""}</span></label>`}).join("");
+ modal(`<button class="modal-close" onclick="closeModal()">×</button>
+  <div class="kicker">TRAININGS EINSTELLEN</div><h2>${esc(e.thema)}</h2>
+  <p style="color:var(--muted);margin:0 0 4px">Kreuze die Trainings an, die deine Schüler:innen nach der Rückgabe üben sollen.</p>
+  ${zeilen}
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="kwTrSave">Einstellen</button></div>`);
+ $("kwTrSave").onclick=async()=>{
+  const ids=[...document.querySelectorAll(".kwTrCb:checked:not(:disabled)")].map(c=>c.value);
+  if(!ids.length){toast("Bitte mindestens ein Training ankreuzen.");return}
+  try{
+   for(const id of ids){const n=infos[KW_TRAININGS.indexOf(id)];
+    await addDoc(collection(db,"ppModule"),{modul:"selbstlern",lb:ph.lbNum,titel:n.titel,start:"",dauer:"w1",wochen:1,notiz:"",kursId:"ea:"+id,themen:[e.id],training:true,ord:KW_TRAININGS.indexOf(id)+1,createdBy:currentUser.uid,createdAt:serverTimestamp()});}
+   closeModal();await ppmLaden(true);await render();toast(ids.length===1?"Training eingestellt.":ids.length+" Trainings eingestellt.");
+  }catch(err){ppmFehler(err,"Die Trainings konnten nicht eingestellt werden");}
+ };
+}
 async function kwBausteinWahl(themaId){
  if(!kwLehrer())return;
  const e=kwThemaById(themaId);if(!e)return;
+ if(e.leistung)return await kwTrainingWahl(e);
  const ph=KW_PHASEN.find(p=>p.id===e.phase)||KW_PHASEN[0];
  const woche=ph.startSw||null;
  const FARBE={selbstlern:"#1f8ea3",kprim:"#e08a2e",rallye:"#8460b8",uebung:"#4f9a35",fachaufsatz:"#2f7d32",lernuebersicht:"#3a7fd0",apt:"#3a7fd0",blockfall:"#d4577f"};

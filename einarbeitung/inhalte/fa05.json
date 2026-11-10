@@ -1,0 +1,364 @@
+{
+ "titel": "Training: Theorie beschreiben",
+ "modulart": "selbstlern",
+ "einleitung": "Du übst, eine Theorie **allgemein** zu beschreiben, also ohne Fallbezug: die Persönlichkeitsinstanzen nach Freud, die Ich-Schwäche, Merkmale, Nennen und Erklären. Der Fall Tim bleibt zunächst im Hintergrund. Plane etwa 45 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "Training · Theorie beschreiben",
+   "titel": "Allgemein heißt: ohne Tim",
+   "bloecke": [
+    {
+     "typ": "zitat",
+     "text": "„Ich weiß, dass ich aufhören sollte, aber in dem Moment ist mir alles egal. Ich kann einfach nicht anders.“",
+     "quelle": "Tim (Z. 18–19)"
+    },
+    {
+     "typ": "situation",
+     "label": "Arbeitsauftrag",
+     "text": "Sie erachten die Persönlichkeitsstruktur von Tim für problematisch und wollen diese Einschätzung mit den Erkenntnissen von Sigmund Freud belegen. Erläutern Sie am Beispiel von Tim (Z. 13–22) den Begriff „Ich-Schwäche“ ausführlich."
+    },
+    {
+     "typ": "text",
+     "text": "Bevor du am Fall zeigen kannst, dass Tim eine Ich-Schwäche hat, musst du die **Theorie selbst** sicher beschreiben können: ohne Tim, ohne Zeilenangabe, mit den richtigen Fachbegriffen. Das sind im Aufsatz die **Eingrenzung**, die **Klärung der Instanzen und der Ich-Schwäche** sowie bei jedem Merkmal das **Nennen** und **Erklären**. Plane etwa 45 Minuten ein."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Allgemein beschreiben** heißt: Der Satz würde auch bei einem ganz anderen Fall stimmen. Er enthält keinen Namen und keine Zeilenangabe."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Allgemein oder mit Fallbezug?",
+     "hinweis": "Ordne jeden Satz zu. Im Hauptteil dürfen Nennen und Erklären nur allgemeine Sätze enthalten.",
+     "kategorien": [
+      {
+       "name": "Allgemein (ohne Fallbezug)",
+       "items": [
+        "Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse.",
+        "Das Über-Ich hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht.",
+        "Das Ich vermittelt zwischen Es, Über-Ich und Realität."
+       ]
+      },
+      {
+       "name": "Mit Fallbezug",
+       "items": [
+        "Tims Es meldet das Verlangen, die ganze Nacht durchzuzocken (Z. 4–6).",
+        "Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14).",
+        "Ben warnt Tim, er habe schon zwei Fünfer (Z. 17–18)."
+       ]
+      }
+     ],
+     "erklaerung": "Sobald ein Name, eine Figur aus dem Fall oder eine Zeilenangabe vorkommt, ist es Fallbezug. Der gehört in den Transfer, nicht in Nennen und Erklären."
+    }
+   ]
+  },
+  {
+   "kicker": "Theorie 1",
+   "titel": "Die drei Instanzen der Persönlichkeit",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Nach Freud steht in jedem Menschen ein ständiges Zusammenspiel von drei Instanzen. Sie bestimmen, wie er auf Wünsche, Regeln und die Wirklichkeit reagiert."
+    },
+    {
+     "typ": "schema",
+     "links": "Es",
+     "rechts": "Über-Ich",
+     "mitte": [
+      "Das Ich vermittelt",
+      "zwischen den Instanzen",
+      "und der Realität"
+     ],
+     "beschriftung": "Das Ich steht zwischen den Forderungen von Es, Über-Ich und Realität."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Das **Es** ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt.\n\nDas **Über-Ich** hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht und lenkt das Verhalten im Sinne der geltenden Moral.\n\nDas **Ich** vermittelt zwischen den Triebimpulsen des Es, den Anforderungen des Über-Ichs und der Realität."
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze die Definitionen.",
+     "text": "Das Es ist die Instanz der {{Triebe}}, Wünsche und Bedürfnisse, die nach {{sofortiger}} Befriedigung drängt. Das Über-Ich hat die {{Wert- und Normvorstellungen}} der Gesellschaft verinnerlicht. Das Ich {{vermittelt}} zwischen Es, Über-Ich und {{Realität}}.",
+     "woerter": [
+      "Triebe",
+      "sofortiger",
+      "Wert- und Normvorstellungen",
+      "vermittelt",
+      "Realität",
+      "späterer",
+      "verbietet",
+      "Erinnerungen"
+     ],
+     "erklaerung": "Triebe und sofortige Befriedigung gehören zum Es, die verinnerlichten Wert- und Normvorstellungen zum Über-Ich. Das Ich vermittelt zwischen den Instanzen und der Realität."
+    }
+   ]
+  },
+  {
+   "kicker": "Theorie 2",
+   "titel": "Merkmale der Ich-Schwäche",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht. Im Hauptteil beschreibst du dazu Merkmale, zuerst allgemein. Diese Merkmale solltest du erklären können:"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne jedem Merkmal die passende allgemeine Erklärung zu.",
+     "paare": [
+      [
+       "Ungleichgewicht der Instanzen",
+       "Die Instanzen stehen zueinander oder zur Realität nicht im Gleichgewicht."
+      ],
+      [
+       "Zu starkes Es",
+       "Das Bedürfnis nach sofortiger Befriedigung setzt sich immer wieder durch, Triebimpulse können nicht aufgeschoben oder begrenzt werden."
+      ],
+      [
+       "Unterlegenes Ich",
+       "Das Ich kann sich nicht behaupten und nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln."
+      ],
+      [
+       "Fremdbestimmung",
+       "Das Verhalten wird nicht von der Person selbst gesteuert, sondern von ihren Triebimpulsen bestimmt."
+      ]
+     ],
+     "erklaerung": "Im Erwartungshorizont werden zu starkes Es, unterlegenes Ich und Fremdbestimmung am Fall Tim verdeutlicht. Das Ungleichgewicht steht als Klärung davor."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Ein Merkmal beschreibst du immer in zwei Schritten: **Nennen** (ein Satz: Wie heißt es?) und **Erklären** (ein bis zwei Sätze: Was bedeutet es?). Der Fall kommt erst danach."
+    }
+   ]
+  },
+  {
+   "kicker": "Technik",
+   "titel": "Nennen und Erklären unterscheiden",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Am Beispiel „zu starkes Es“ siehst du den Unterschied. Beides bleibt allgemein."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Nennen oder Erklären?",
+     "hinweis": "Ordne die Sätze zu.",
+     "kategorien": [
+      {
+       "name": "Nennen",
+       "items": [
+        "Ein erstes Merkmal der Ich-Schwäche ist ein zu stark ausgebildetes Es.",
+        "Ein zweites Merkmal ist ein unterlegenes Ich."
+       ]
+      },
+      {
+       "name": "Erklären",
+       "items": [
+        "Dabei setzt sich das Bedürfnis nach sofortiger Befriedigung immer wieder durch.",
+        "Triebimpulse können nicht aufgeschoben oder begrenzt werden.",
+        "Das Ich kann nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln."
+       ]
+      }
+     ],
+     "erklaerung": "Das Nennen gibt dem Merkmal einen Namen. Das Erklären sagt, was dahintersteckt."
+    },
+    {
+     "typ": "mc",
+     "frage": "Warum reicht es nicht, nur das Merkmal zu nennen („Ein Merkmal ist die Fremdbestimmung.“)?",
+     "optionen": [
+      "Weil der Leser nicht erfährt, was mit dem Fachbegriff gemeint ist",
+      "Weil Fachbegriffe im Aufsatz nicht vorkommen dürfen",
+      "Weil man sonst keine Zeilenangabe braucht",
+      "Es reicht, der Rest steht ja im Transfer"
+     ],
+     "richtig": 0,
+     "erklaerung": "Erst die Erklärung zeigt, dass du den Fachbegriff verstanden hast. Der Transfer baut darauf auf."
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 1",
+   "titel": "Allgemein genug?",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile, ob die Sätze für Nennen oder Erklären im Hauptteil geeignet sind (allgemein, ohne Fallbezug).",
+     "aussagen": [
+      {
+       "text": "„Bei einer Ich-Schwäche stehen die Instanzen in einem Ungleichgewicht.“",
+       "richtig": true,
+       "erklaerung": "Allgemein, mit Fachbegriff."
+      },
+      {
+       "text": "„Tims Es ist zu stark, er zockt bis 2 Uhr.“",
+       "richtig": false,
+       "erklaerung": "Der Name Tim gehört in den Transfer."
+      },
+      {
+       "text": "„Ein unterlegenes Ich kann nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln.“",
+       "richtig": true,
+       "erklaerung": "Allgemeine Erklärung des Merkmals."
+      },
+      {
+       "text": "„Ben warnt Tim, und trotzdem macht er weiter, das ist Fremdbestimmung.“",
+       "richtig": false,
+       "erklaerung": "Die Warnung von Ben ist Fall und gehört in den Transfer."
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Erkläre das Merkmal ohne Fallbezug.",
+     "text": "Bei einer Fremdbestimmung wird das Verhalten nicht frei gesteuert, sondern von den {{Triebimpulsen}} bestimmt. Die Person weiß vielleicht, dass sie aufhören {{sollte}}, kann es aber nicht {{umsetzen}}.",
+     "woerter": [
+      "Triebimpulsen",
+      "sollte",
+      "umsetzen",
+      "Tim",
+      "Ben",
+      "vermeiden"
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Gegenstück",
+   "titel": "Gelungene Vermittlung oder Ich-Schwäche?",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Im Aufsatz hilft es, den Kontrast zu kennen. So erkennst du, was eine Ich-Schwäche auszeichnet."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Wozu gehört die Aussage?",
+     "hinweis": "Ordne jede Aussage zu.",
+     "kategorien": [
+      {
+       "name": "Gelungene Vermittlung durch das Ich",
+       "items": [
+        "wägt zwischen Wunsch, Forderungen und Realität ab",
+        "findet einen Kompromiss",
+        "kann Triebimpulse aufschieben oder begrenzen"
+       ]
+      },
+      {
+       "name": "Ich-Schwäche",
+       "items": [
+        "Triebimpulse setzen sich immer wieder durch",
+        "Das Ich kann sich nicht behaupten",
+        "Das Verhalten wird von Trieben bestimmt, obwohl die Person es besser weiß"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 2",
+   "titel": "Schreibe selbst, ohne Fallbezug",
+   "bloecke": [
+    {
+     "typ": "frei",
+     "frage": "Klären Sie die drei Persönlichkeitsinstanzen nach Freud und den Begriff „Ich-Schwäche“ in vier bis fünf Sätzen. Verwenden Sie keinen Fallbezug.",
+     "hinweis": "Nenne zu jeder Instanz ein bis zwei Kennzeichen und sage, was Ich-Schwäche bedeutet.",
+     "muster": "Nach Freud besteht die Persönlichkeit aus drei Instanzen: Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt. Das Über-Ich hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht und lenkt das Verhalten im Sinne der geltenden Moral. Das Ich vermittelt zwischen den Triebimpulsen des Es, den Anforderungen des Über-Ichs und der Realität. Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht.",
+     "kriterien": [
+      "Ich habe das **Es** als Instanz der Triebe, Wünsche und Bedürfnisse mit **sofortiger Befriedigung** beschrieben.",
+      "Ich habe das **Über-Ich** mit den **verinnerlichten Wert- und Normvorstellungen** beschrieben.",
+      "Ich habe das **Ich** als **vermittelnde** Instanz zwischen Es, Über-Ich und Realität beschrieben.",
+      "Ich habe die **Ich-Schwäche** als **Ungleichgewicht** der Instanzen erklärt.",
+      "In meinem Text kommt **kein Name** aus dem Fall und **keine Zeilenangabe** vor."
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Nennen und erklären Sie das Merkmal „zu starkes Es“ in zwei Sätzen, ohne Fallbezug.",
+     "hinweis": "Erster Satz: Nennen. Zweiter Satz: Erklären.",
+     "muster": "Ein erstes Merkmal der Ich-Schwäche ist ein zu stark ausgebildetes Es. Dabei setzt sich das Bedürfnis nach sofortiger Befriedigung immer wieder durch, Triebimpulse können nicht aufgeschoben oder begrenzt werden.",
+     "kriterien": [
+      "Mein erster Satz **nennt** das Merkmal mit dem Fachbegriff.",
+      "Mein zweiter Satz **erklärt**, was gemeint ist (sofortige Befriedigung setzt sich durch, Triebimpulse werden nicht aufgeschoben).",
+      "Es kommt **kein Fallbezug** vor."
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Nennen und erklären Sie das Merkmal „unterlegenes Ich“ in zwei Sätzen, ohne Fallbezug.",
+     "hinweis": "Erster Satz: Nennen. Zweiter Satz: Erklären.",
+     "muster": "Ein zweites Merkmal ist ein unterlegenes Ich. Das Ich kann sich weder gegenüber dem Es noch gegenüber den anderen Instanzen behaupten und nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln.",
+     "kriterien": [
+      "Mein erster Satz **nennt** das Merkmal.",
+      "Mein zweiter Satz **erklärt**: Das Ich kann sich nicht behaupten und nicht zwischen Es, Über-Ich und Realität vermitteln.",
+      "Es kommt **kein Fallbezug** vor."
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Finale",
+   "titel": "Der allgemeine Teil deines Aufsatzes",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Jetzt schreibst du alle Teile des Aufsatzes, die **ohne Fall** auskommen. Den Transfer übst du im Training „Fallbezug üben“."
+    },
+    {
+     "typ": "strukturstreifen",
+     "titel": "Schreiben Sie den fallfreien Teil des Fachaufsatzes.",
+     "aufgabe": "Erläutern Sie den Begriff „Ich-Schwäche“ ausführlich. Schreiben Sie hier nur die Teile, die ohne Fallbezug auskommen.",
+     "felder": [
+      {
+       "titel": "Einleitung: Einleitungssatz",
+       "farbe": "pfirsich",
+       "hilfe": "Ganz allgemein: Innere Konflikte zwischen Wunsch und Pflicht.",
+       "muster": "Jeder Mensch gerät immer wieder in innere Konflikte zwischen dem, was er gerade möchte, und dem, was er tun sollte. Wie gut es gelingt, solche Konflikte zu lösen, prägt die Persönlichkeit eines Menschen."
+      },
+      {
+       "titel": "Einleitung: Eingrenzung des Lernbereichs",
+       "farbe": "pfirsich",
+       "hilfe": "Definiere Pädagogik und Psychologie und führe zu Freud hin.",
+       "muster": "Unter Pädagogik werden sowohl alle Formen des praktischen Erziehungsgeschehens als auch die wissenschaftliche Erhellung der Erziehungswirklichkeit verstanden. Die Psychologie ist die Wissenschaft vom Erleben und Verhalten des Menschen. Eine psychologische Erklärung für innere Konflikte bietet die psychoanalytische Theorie Sigmund Freuds."
+      },
+      {
+       "titel": "Hauptteil: Klärung der Instanzen und der Ich-Schwäche",
+       "farbe": "gelb",
+       "hilfe": "Es, Über-Ich, Ich definieren und sagen, was Ich-Schwäche bedeutet.",
+       "muster": "Nach Freud besteht die Persönlichkeit aus drei Instanzen: Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt. Das Über-Ich hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht und lenkt das Verhalten im Sinne der geltenden Moral. Das Ich vermittelt zwischen den Triebimpulsen des Es, den Anforderungen des Über-Ichs und der Realität. Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht."
+      },
+      {
+       "titel": "Merkmal 1: Nennen und Erklären",
+       "farbe": "blau",
+       "hilfe": "Zu starkes Es: Fachbegriff, dann Erklärung.",
+       "muster": "Ein erstes Merkmal der Ich-Schwäche ist ein zu stark ausgebildetes Es. Dabei setzt sich das Bedürfnis nach sofortiger Befriedigung immer wieder durch, Triebimpulse können nicht aufgeschoben oder begrenzt werden."
+      },
+      {
+       "titel": "Merkmal 2: Nennen und Erklären",
+       "farbe": "gruen",
+       "hilfe": "Unterlegenes Ich: Fachbegriff, dann Erklärung.",
+       "muster": "Ein zweites Merkmal ist ein unterlegenes Ich. Das Ich kann sich weder gegenüber dem Es noch gegenüber den anderen Instanzen behaupten und nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln."
+      },
+      {
+       "titel": "Merkmal 3: Nennen und Erklären",
+       "farbe": "rot",
+       "hilfe": "Fremdbestimmung: Fachbegriff, dann Erklärung.",
+       "muster": "Ein drittes Merkmal ist die Fremdbestimmung des Verhaltens. Die Person wird in ihrem Verhalten nicht von sich selbst, sondern von ihren Triebimpulsen bestimmt."
+      },
+      {
+       "titel": "Schluss",
+       "farbe": "pfirsich",
+       "hilfe": "Ein allgemeiner Gedanke zum Thema.",
+       "muster": "Ein starkes Ich ist die Voraussetzung dafür, dass Wünsche, Gewissen und Anforderungen der Realität in Einklang gebracht werden können."
+      }
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Wenn deine Sätze **allgemein** sind und die Fachbegriffe stimmen, hast du die Grundlage für den Transfer. Weiter geht es mit dem Training „Fallbezug üben“."
+    }
+   ]
+  }
+ ]
+}

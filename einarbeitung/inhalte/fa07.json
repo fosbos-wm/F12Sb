@@ -1,0 +1,486 @@
+{
+ "titel": "Training: Schreiben üben",
+ "modulart": "selbstlern",
+ "einleitung": "Du trainierst, **wie** du in der Kurzarbeit schreibst: ganze Sätze, Argumente, roter Faden, richtige Reihenfolge und nichts dazudichten. Alles am Fall Tim. Plane etwa 45 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "Training · Schreiben üben",
+   "titel": "Gut schreiben in der Kurzarbeit",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "situation",
+     "label": "Arbeitsauftrag",
+     "text": "Sie erachten die Persönlichkeitsstruktur von Tim für problematisch und wollen diese Einschätzung mit den Erkenntnissen von Sigmund Freud belegen. Erläutern Sie am Beispiel von Tim (Z. 13–22) den Begriff „Ich-Schwäche“ ausführlich."
+    },
+    {
+     "typ": "text",
+     "text": "Du weißt, was in einen Fachaufsatz gehört, aber die Punkte hängen auch davon ab, **wie** du schreibst. In diesem Training übst du fünf Dinge, immer am Fall Tim:"
+    },
+    {
+     "typ": "text",
+     "text": "- ganze Sätze mit Fachsprache\n- eine Argumentation aus Behauptung, Begründung und Beleg\n- einen roten Faden mit Verknüpfungen\n- die richtige Arbeitsreihenfolge in der Kurzarbeit\n- nichts dazudichten, was nicht im Fall steht"
+    },
+    {
+     "typ": "text",
+     "text": "Plane etwa 45 Minuten ein."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Merke:** Jeder Satz soll etwas leisten. Er gehört zu einem Baustein, er ist vollständig, und er stützt sich auf den Fall."
+    }
+   ]
+  },
+  {
+   "kicker": "Sätze",
+   "titel": "Ganze Sätze mit Fachsprache",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welcher Satz ist vollständig und fachsprachlich?",
+     "optionen": [
+      "Tim zockt halt zu viel und kann nix dafür.",
+      "Tims Es ist zu stark, da er fast jede Nacht bis 2 Uhr zockt (Z. 13–14).",
+      "Zu starkes Es bei Tim.",
+      "Tim und das Zocken, das ist ein Problem mit dem Es."
+     ],
+     "richtig": 1,
+     "erklaerung": "Der zweite Satz ist vollständig, nutzt den Fachbegriff und nennt die Zeile. Die anderen sind umgangssprachlich oder unvollständig."
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Setze das passende Fachverb ein.",
+     "text": "Das Es {{drängt}} nach sofortiger Befriedigung. Das Ich {{vermittelt}} zwischen den Forderungen von Es, Über-Ich und Realität. Tims Aussage „Ich kann einfach nicht anders“ {{zeigt}}, dass sein Verhalten fremdbestimmt ist.",
+     "woerter": [
+      "drängt",
+      "vermittelt",
+      "zeigt",
+      "redet",
+      "macht",
+      "findet"
+     ],
+     "erklaerung": "Fachsprachliche Verben wie drängen, vermitteln, zeigen, erklären, belegen und sich behaupten machen deine Sätze präzise."
+    },
+    {
+     "typ": "mc",
+     "frage": "Welcher Satz bleibt beim Fall und erfindet nichts?",
+     "optionen": [
+      "Tim zockt, weil er zu Hause Streit mit den Eltern hat.",
+      "Tim wirft sich vor, sein Versprechen an die Mutter wieder gebrochen zu haben (Z. 15–16).",
+      "Tim hat bestimmt keine anderen Hobbys mehr.",
+      "Tim ist völlig süchtig."
+     ],
+     "richtig": 1,
+     "erklaerung": "Nur der zweite Satz steht im Fall (Z. 15–16). Die anderen erfinden Gründe oder übertreiben."
+    }
+   ]
+  },
+  {
+   "kicker": "Argumentieren",
+   "titel": "Behauptung, Begründung, Beleg",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Ein guter Gedanke besteht aus drei Teilen: Du **behauptest** etwas, du **begründest** es mit dem Fachbegriff, und du **belegst** es am Fall."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne zu: Was ist Behauptung, Begründung, Beleg?",
+     "paare": [
+      [
+       "Behauptung",
+       "Tims Es ist zu stark ausgebildet."
+      ],
+      [
+       "Begründung",
+       "Sein Bedürfnis nach sofortiger Befriedigung setzt sich gegen seine Vorsätze durch."
+      ],
+      [
+       "Beleg",
+       "Er zockt fast jede Nacht bis 2 Uhr, obwohl er sich vornimmt, nur eine Stunde zu spielen (Z. 13–15)."
+      ]
+     ],
+     "erklaerung": "Die Behauptung sagt, was du zeigen willst. Die Begründung erklärt, warum das stimmt. Der Beleg ist die Textstelle."
+    },
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe die Argumentation zu Merkmal 1 in die richtige Reihenfolge.",
+     "hinweis": "Behauptung, Begründung, Beleg.",
+     "absaetze": [
+      "Tims Es ist zu stark ausgebildet.",
+      "Sein Bedürfnis nach sofortiger Befriedigung setzt sich gegen seine Vorsätze durch.",
+      "Er zockt fast jede Nacht bis 2 Uhr, obwohl er sich vornimmt, nur eine Stunde zu spielen (Z. 13–15)."
+     ],
+     "erklaerung": "Erst die Behauptung, dann die Begründung, am Ende der Beleg mit Zeile."
+    },
+    {
+     "typ": "frei",
+     "frage": "Schreiben Sie eine Argumentation (Behauptung, Begründung, Beleg) zum Merkmal „Fremdbestimmung“.",
+     "hinweis": "Drei Sätze genügen.",
+     "muster": "Tims Verhalten ist fremdbestimmt. Er wird nicht von sich selbst, sondern von seinen Triebimpulsen gesteuert. Er sagt: „Ich kann einfach nicht anders“ (Z. 18–19).",
+     "kriterien": [
+      "Mein erster Satz ist eine **Behauptung** mit dem Fachbegriff.",
+      "Mein zweiter Satz **begründet** (nicht von sich selbst, sondern von Triebimpulsen gesteuert).",
+      "Mein dritter Satz **belegt** mit Zitat und Zeilenangabe."
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Roter Faden",
+   "titel": "Jeder Absatz beantwortet eine Frage",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Ein roter Faden entsteht, wenn jeder Baustein eine Frage des Lesers beantwortet und die Sätze miteinander verbunden sind."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Welchen Baustein beantwortet welche Leserfrage?",
+     "paare": [
+      [
+       "Worum geht es ganz allgemein?",
+       "Einleitungssatz"
+      ],
+      [
+       "Was ist Psychologie, was Pädagogik?",
+       "Eingrenzung des Lernbereichs"
+      ],
+      [
+       "Was hat das mit Tim zu tun?",
+       "Überleitung"
+      ],
+      [
+       "Was sind Es, Über-Ich, Ich und Ich-Schwäche?",
+       "Klärung der Instanzen"
+      ],
+      [
+       "Welches Merkmal meinst du?",
+       "Nennen"
+      ],
+      [
+       "Was bedeutet das?",
+       "Erklären"
+      ],
+      [
+       "Wo steht das im Fall?",
+       "Verdeutlichen (Transfer)"
+      ],
+      [
+       "Was folgt daraus?",
+       "Schluss"
+      ]
+     ]
+    },
+    {
+     "typ": "text",
+     "text": "Verknüpfungswörter halten die Sätze zusammen. Setze sie passend ein."
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze die Verknüpfungswörter.",
+     "text": "Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14). {{Dadurch}} schläft er im Unterricht ein (Z. 20). {{Außerdem}} erhält er eine Verwarnung (Z. 20–21). {{Trotzdem}} sitzt er am nächsten Abend wieder vor dem Bildschirm (Z. 21–22).",
+     "woerter": [
+      "Dadurch",
+      "Außerdem",
+      "Trotzdem",
+      "Dagegen",
+      "Zuerst",
+      "Deshalb"
+     ],
+     "erklaerung": "Dadurch zeigt eine Folge, außerdem fügt einen weiteren Beleg hinzu, trotzdem markiert den Widerspruch zwischen Folgen und Verhalten."
+    }
+   ]
+  },
+  {
+   "kicker": "Reihenfolge",
+   "titel": "Der ganze Aufsatz und die Arbeitsschritte",
+   "bloecke": [
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe die Sätze eines Aufsatzes in die richtige Reihenfolge.",
+     "hinweis": "Achte auf „erstes“, „zweites“ und darauf, dass Allgemeines vor dem Fall steht.",
+     "absaetze": [
+      "Jeder Mensch gerät immer wieder in innere Konflikte zwischen dem, was er gerade möchte, und dem, was er tun sollte. Wie gut es gelingt, solche Konflikte zu lösen, prägt die Persönlichkeit eines Menschen.",
+      "Unter Pädagogik werden sowohl alle Formen des praktischen Erziehungsgeschehens als auch die wissenschaftliche Erhellung der Erziehungswirklichkeit verstanden. Die Psychologie ist die Wissenschaft vom Erleben und Verhalten des Menschen. Eine psychologische Erklärung für innere Konflikte bietet die psychoanalytische Theorie Sigmund Freuds.",
+      "In der Fallsituation fällt Tim in den letzten Wochen durch sein Verhalten auf: Er zockt fast jede Nacht bis 2 Uhr und kann nicht aufhören (Z. 13–22). Dieses Verhalten wird im Folgenden mit dem Begriff „Ich-Schwäche“ nach Freud erläutert.",
+      "Nach Freud besteht die Persönlichkeit aus drei Instanzen: Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt. Das Über-Ich hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht und lenkt das Verhalten im Sinne der geltenden Moral. Das Ich vermittelt zwischen den Triebimpulsen des Es, den Anforderungen des Über-Ichs und der Realität. Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht.",
+      "Ein erstes Merkmal der Ich-Schwäche ist ein zu stark ausgebildetes Es.",
+      "Bei Tim ist das Es zu stark: Er zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Sein Vorsatz, nur eine Stunde zu spielen, scheitert Abend für Abend (Z. 14–15).",
+      "Ein zweites Merkmal ist ein unterlegenes Ich.",
+      "Tims Ich kann sich gegenüber dem Es nicht behaupten, seine Vorsätze scheitern (Z. 14–15; 18–19). Die Forderungen des Über-Ichs (Schuldgefühle, Selbstvorwürfe; Z. 15–16) und der Realität (zwei Fünfer, Müdigkeit, Verwarnung; Z. 17–21) nimmt er zwar wahr, sie ändern aber nichts an seinem Verhalten.",
+      "Ein drittes Merkmal ist die Fremdbestimmung des Verhaltens.",
+      "Tim weiß, dass er aufhören sollte, kann es aber nicht umsetzen („Ich kann einfach nicht anders“, Z. 18–19), und macht trotz der negativen Folgen weiter (Z. 21–22).",
+      "Ein starkes Ich ist die Voraussetzung dafür, dass Wünsche, Gewissen und Anforderungen der Realität in Einklang gebracht werden können."
+     ],
+     "erklaerung": "Allgemeiner Einstieg, Eingrenzung, Überleitung zum Fall, Klärung, drei Merkmale (jeweils Nennen, dann Transfer), Schluss."
+    },
+    {
+     "typ": "text",
+     "text": "Auch dein Vorgehen in der Kurzarbeit hat eine sinnvolle Reihenfolge."
+    },
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe die Arbeitsschritte in die richtige Reihenfolge.",
+     "absaetze": [
+      "Den Auftrag lesen und markieren: Operator „Erläutern“, „Ich-Schwäche“, „am Beispiel von Tim (Z. 13–22)“.",
+      "Die Fallsituation lesen und auf die Zeilen achten.",
+      "Die Merkmale der Ich-Schwäche sammeln und passende Textstellen mit Zeilenangabe markieren.",
+      "Eine kurze Gliederung nach den Bausteinen als Stichworte notieren.",
+      "Der Reihe nach ausformulieren.",
+      "Am Ende prüfen: Zeilenangaben, Aufbau, nichts dazugedichtet."
+     ],
+     "erklaerung": "Erst planen, dann schreiben, am Ende kontrollieren. So behältst du den roten Faden."
+    }
+   ]
+  },
+  {
+   "kicker": "Dichten",
+   "titel": "Nichts dazudichten",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim (zum Nachschlagen)",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "text",
+     "text": "Im Fall steht nur, was in der Fallsituation steht. Alles andere ist erfunden. Dazwischen liegen **Schlussfolgerungen**: Sie sind erlaubt, wenn du sie aus dem Text begründen kannst."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Steht es im Text, ist es eine Schlussfolgerung, oder ist es dazugedichtet?",
+     "hinweis": "Ordne die Aussagen zu. Schaue im Fall nach.",
+     "kategorien": [
+      {
+       "name": "Steht im Text",
+       "items": [
+        "Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14).",
+        "Sein Freund Ben warnt ihn (Z. 17–18).",
+        "Tim erhält vom Klassenleiter eine Verwarnung (Z. 20–21)."
+       ]
+      },
+      {
+       "name": "Zulässige Schlussfolgerung",
+       "items": [
+        "Tims Vorsätze sind nicht wirksam, denn er hält sich Abend für Abend nicht daran (Z. 14–15).",
+        "Sein Ich setzt sich gegen das Es nicht durch, denn trotz Schuldgefühlen (Z. 15–16) macht er weiter (Z. 21–22)."
+       ]
+      },
+      {
+       "name": "Dazugedichtet",
+       "items": [
+        "Tims Eltern haben ihm das Handy weggenommen.",
+        "Tim hat keine Freunde außer Ben.",
+        "Tim hat schon früher gezockt, als er in der 9. Klasse war.",
+        "Tim leidet an einer Spielsucht."
+       ]
+      }
+     ],
+     "erklaerung": "Im Fall steht nichts über die Eltern, über andere Freunde, über früher oder über eine Diagnose. Der Aufsatz erklärt Tims Verhalten mit dem Begriff Ich-Schwäche, er stellt keine Diagnose."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Ein Entwurf (frei erfunden) lautet: „Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Er hat Streit mit seinen Eltern. Er nimmt sich vor, nur eine Stunde zu spielen (Z. 14–15). Tim ist süchtig.“",
+     "aussagen": [
+      {
+       "text": "Der Satz über den Streit mit den Eltern ist durch den Fall belegt.",
+       "richtig": false,
+       "erklaerung": "Davon steht nichts in der Fallsituation."
+      },
+      {
+       "text": "Der Satz „Tim ist süchtig.“ ist durch den Fall belegt.",
+       "richtig": false,
+       "erklaerung": "Das ist eine Diagnose, die der Fall nicht stellt."
+      },
+      {
+       "text": "Der Satz über das Zocken bis 2 Uhr mit Z. 13–14 ist korrekt belegt.",
+       "richtig": true,
+       "erklaerung": "Das steht in Z. 13–14."
+      },
+      {
+       "text": "Der Satz über den Vorsatz, nur eine Stunde zu spielen, mit Z. 14–15 ist korrekt belegt.",
+       "richtig": true,
+       "erklaerung": "Das steht in Z. 14–15."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Schluss",
+   "titel": "Ein guter Schlusssatz",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welcher Schluss passt am besten zum Thema Ich-Schwäche?",
+     "optionen": [
+      "Ein starkes Ich ist die Voraussetzung dafür, dass Wünsche, Gewissen und Anforderungen der Realität in Einklang gebracht werden können.",
+      "Tim sollte einfach früher ins Bett gehen.",
+      "Zusammenfassend wurde alles gesagt.",
+      "Ben ist ein guter Freund."
+     ],
+     "richtig": 0,
+     "erklaerung": "Der Schluss greift einen Gedanken zum Thema auf: Ein starkes Ich bringt Wünsche, Gewissen und Realität in Einklang. Er bleibt beim Thema und bei den Fakten."
+    }
+   ]
+  },
+  {
+   "kicker": "Finale",
+   "titel": "Dein Aufsatz mit allen Schreibregeln",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "strukturstreifen",
+     "titel": "Formulieren Sie einen Fachaufsatz zum Fall Tim.",
+     "aufgabe": "Erläutern Sie am Beispiel von Tim (Z. 13–22) den Begriff „Ich-Schwäche“ ausführlich.",
+     "hinweis": "Schreibe in ganzen Sätzen mit Fachsprache, mit Verknüpfungen und ohne etwas dazuzudichten.",
+     "felder": [
+      {
+       "titel": "Einleitung: Einleitungssatz",
+       "farbe": "pfirsich",
+       "hilfe": "Ein ganz allgemeiner Satz: Innere Konflikte zwischen Wunsch und Pflicht.",
+       "muster": "Jeder Mensch gerät immer wieder in innere Konflikte zwischen dem, was er gerade möchte, und dem, was er tun sollte. Wie gut es gelingt, solche Konflikte zu lösen, prägt die Persönlichkeit eines Menschen."
+      },
+      {
+       "titel": "Einleitung: Eingrenzung des Lernbereichs",
+       "farbe": "pfirsich",
+       "hilfe": "Definiere Pädagogik und Psychologie in ganzen Sätzen.",
+       "muster": "Unter Pädagogik werden sowohl alle Formen des praktischen Erziehungsgeschehens als auch die wissenschaftliche Erhellung der Erziehungswirklichkeit verstanden. Die Psychologie ist die Wissenschaft vom Erleben und Verhalten des Menschen. Eine psychologische Erklärung für innere Konflikte bietet die psychoanalytische Theorie Sigmund Freuds."
+      },
+      {
+       "titel": "Einleitung: Überleitung",
+       "farbe": "pfirsich",
+       "hilfe": "Verknüpfe: Was fällt an Tim auf (Z.), und was folgt jetzt? Kündige „Ich-Schwäche“ an.",
+       "muster": "In der Fallsituation fällt Tim in den letzten Wochen durch sein Verhalten auf: Er zockt fast jede Nacht bis 2 Uhr und kann nicht aufhören (Z. 13–22). Dieses Verhalten wird im Folgenden mit dem Begriff „Ich-Schwäche“ nach Freud erläutert."
+      },
+      {
+       "titel": "Hauptteil: Klärung der Instanzen",
+       "farbe": "gelb",
+       "hilfe": "Fachbegriffe verwenden: Es, Über-Ich, Ich, Ungleichgewicht.",
+       "muster": "Nach Freud besteht die Persönlichkeit aus drei Instanzen: Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt. Das Über-Ich hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht und lenkt das Verhalten im Sinne der geltenden Moral. Das Ich vermittelt zwischen den Triebimpulsen des Es, den Anforderungen des Über-Ichs und der Realität. Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht."
+      },
+      {
+       "titel": "Merkmal 1",
+       "farbe": "blau",
+       "hilfe": "Behauptung (Nennen), Begründung (Erklären), Beleg (Transfer) mit Zeile.",
+       "muster": "Ein erstes Merkmal der Ich-Schwäche ist ein zu stark ausgebildetes Es. Dabei setzt sich das Bedürfnis nach sofortiger Befriedigung immer wieder durch, Triebimpulse können nicht aufgeschoben oder begrenzt werden. Bei Tim ist das Es zu stark: Er zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Sein Vorsatz, nur eine Stunde zu spielen, scheitert Abend für Abend (Z. 14–15)."
+      },
+      {
+       "titel": "Merkmal 2",
+       "farbe": "gruen",
+       "hilfe": "Verknüpfe mit „Ein zweites Merkmal“, dann Behauptung, Begründung, Beleg mit Zeilen.",
+       "muster": "Ein zweites Merkmal ist ein unterlegenes Ich. Das Ich kann sich weder gegenüber dem Es noch gegenüber den anderen Instanzen behaupten und nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln. Tims Ich kann sich gegenüber dem Es nicht behaupten, seine Vorsätze scheitern (Z. 14–15; 18–19). Die Forderungen des Über-Ichs (Schuldgefühle, Selbstvorwürfe; Z. 15–16) und der Realität (zwei Fünfer, Müdigkeit, Verwarnung; Z. 17–21) nimmt er zwar wahr, sie ändern aber nichts an seinem Verhalten."
+      },
+      {
+       "titel": "Merkmal 3",
+       "farbe": "rot",
+       "hilfe": "Verknüpfe mit „Ein drittes Merkmal“, dann Behauptung, Begründung, Beleg mit Zeilen. Nichts dazudichten.",
+       "muster": "Ein drittes Merkmal ist die Fremdbestimmung des Verhaltens. Die Person wird in ihrem Verhalten nicht von sich selbst, sondern von ihren Triebimpulsen bestimmt. Tim weiß, dass er aufhören sollte, kann es aber nicht umsetzen („Ich kann einfach nicht anders“, Z. 18–19), und macht trotz der negativen Folgen weiter (Z. 21–22)."
+      },
+      {
+       "titel": "Schluss",
+       "farbe": "pfirsich",
+       "hilfe": "Ein Gedanke zum Thema, der an den Anfang anknüpft.",
+       "muster": "Ein starkes Ich ist die Voraussetzung dafür, dass Wünsche, Gewissen und Anforderungen der Realität in Einklang gebracht werden können."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Prüfe deinen Aufsatz mit der Schreib-Checkliste. Notiere in einem Satz, welche Schreibregel dir noch am schwersten fällt.",
+     "hinweis": "Du musst den Satz nicht abgeben. Er hilft dir bei der nächsten Kurzarbeit.",
+     "muster": "Beispiel: Mir fällt es schwer, nichts dazuzudichten. Ich prüfe künftig bei jedem Satz, ob er im Fall steht.",
+     "kriterien": [
+      "Meine Bausteine stehen in der **richtigen Reihenfolge**.",
+      "Meine Sätze sind **vollständig** und fachsprachlich.",
+      "Meine Merkmale folgen **Behauptung, Begründung, Beleg**.",
+      "Meine Absätze sind durch **Verknüpfungen** verbunden (roter Faden).",
+      "Ich habe **nichts dazugedichtet**, was nicht im Fall steht."
+     ]
+    }
+   ]
+  }
+ ]
+}

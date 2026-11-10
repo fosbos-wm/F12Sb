@@ -119,6 +119,23 @@ textarea{width:100%;min-height:130px}
 .krit .stand{display:flex;align-items:center;gap:10px;margin:8px 0}
 .krit .stand .bar{flex:1}
 .krit .stand b{min-width:44px;text-align:right}
+
+.ausw{margin:14px 0 6px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.ausw h3{margin:0 0 10px;font-size:1.05rem}
+.ausw-kopf{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.ausw-zahl{min-width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem;color:#fff;background:var(--accent)}
+.ausw-zahl.ok{background:var(--ok)}
+.ausw .abar{height:10px;border-radius:999px;background:#e7eef3;overflow:hidden}
+.ausw .abar i{display:block;height:100%;background:var(--accent);border-radius:999px}
+.ausw .abar.gruen i{background:var(--ok)}
+.ausw-zeile{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(90px,1fr) auto;gap:6px 12px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.ausw-zeile .t{font-weight:700;font-size:.93rem;line-height:1.3}
+.ausw-zeile .t small{display:block;font-weight:600;color:var(--muted)}
+.ausw-zeile .z{font-weight:800;white-space:nowrap}
+.ausw-zeile .st{grid-column:1/-1;font-size:.86rem;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ausw-zeile .st .gut{color:var(--ok);font-weight:700}
+.ausw-zeile .st .uebe{color:var(--no);font-weight:700}
+.ausw-tipp{margin-top:10px;padding:10px 12px;border-radius:10px;background:#fff8dc;border:1px solid #f1d78a;font-size:.93rem}
 </style>
 </head>
 <body>
@@ -136,6 +153,7 @@ var store={
   set:function(k,v){try{localStorage.setItem('einarb:'+ID+':'+k,JSON.stringify(v));}catch(e){}}
 };
 var RES=store.get('res',{});     // Aufgabe -> true/false (richtig?)
+var KR=store.get('kr',{});      // Selbstcheck-Punkte der Textaufgaben: Aufgabe -> {n,max}
 var TXT=store.get('txt',{});     // Freitext-Antworten (nur lokal)
 var CONTENT=null,TOTAL=0;
 
@@ -310,20 +328,24 @@ function taskFrei(t,key){
     if(t.hinweis)box.append(h('div',{class:'sub'},t.hinweis));
     var ta=h('textarea',{'aria-label':'Deine Antwort',placeholder:'Schreibe zuerst deine eigene Antwort …'});
     ta.value=TXT[key]||'';
-    ta.addEventListener('input',function(){TXT[key]=ta.value;store.set('txt',TXT);btn.disabled=ta.value.trim().length<40;});
+    ta.addEventListener('input',function(){TXT[key]=ta.value;store.set('txt',TXT);});
     var out=h('div');
-    var btn=h('button',{class:'btn',type:'button',disabled:ta.value.trim().length<40?'':false,onclick:function(){
+    var btn=h('button',{class:'btn',type:'button',onclick:function(){
+      TXT[key]=ta.value;store.set('txt',TXT);
+      if(ta.value.trim().length<40){
+        out.replaceChildren(h('div',{class:'fb info'},'Schreibe zuerst deine eigene Antwort, am besten zwei bis drei Sätze. Danach kannst du die Musterlösung ansehen und vergleichen.'));
+        ta.focus();return;
+      }
       var kids=[h('div',{class:'fb info'},h('strong',null,'Musterlösung: '),md(h('span'),t.muster||''))];
       if(t.kriterien&&t.kriterien.length){
-        kids.push(kriterienBox(t.kriterien,function(){ta.disabled=true;finish(true);}));
+        kids.push(kriterienBox(t.kriterien,function(n){KR[key]={n:n,max:t.kriterien.length};store.set('kr',KR);ta.disabled=true;finish(true);}));
       }else{
         kids.push(h('label',{class:'opt'},h('input',{type:'checkbox',onchange:function(e){if(e.target.checked){e.target.disabled=true;ta.disabled=true;finish(true);}}}),h('span',null,'Ich habe meine Antwort mit der Musterlösung verglichen und bei Bedarf ergänzt.')));
       }
       out.replaceChildren.apply(out,kids);
       btn.disabled=true;
     }},'Musterlösung anzeigen');
-    btn.disabled=ta.value.trim().length<40;
-    box.append(ta,h('div',{class:'sub'},'Die Musterlösung erscheint, sobald du mindestens ein paar Sätze geschrieben hast.'),btn,out);
+    box.append(ta,h('div',{class:'sub'},'Schreibe zuerst deine Antwort (zwei bis drei Sätze), dann klickst du auf „Musterlösung anzeigen“.'),btn,out);
   });
 }
 var TYPEN={mc:taskMC,lueckentext:taskLuecke,zuordnung:taskZuordnung,kprim:taskKprim,frei:taskFrei};
@@ -455,18 +477,20 @@ function taskStruktur(t,key){
       var muster=h('div',{class:'muster'},h('b',null,'Musterformulierung'),md(h('span'),f.muster||''));
       var bHilfe=h('button',{class:'btn ghost small',type:'button','aria-expanded':'false',onclick:function(){var an=hilfe.classList.toggle('an');bHilfe.setAttribute('aria-expanded',an?'true':'false');}},'? Strukturhilfe');
       var gezeigt=false;
+      var hinweis=h('div',{class:'sub',style:'display:none;margin:4px 0 0'},'Schreibe zuerst zu diesem Baustein ein bis zwei Sätze. Dann kannst du die Musterformulierung ansehen.');
       var bMuster=h('button',{class:'btn small',type:'button',onclick:function(){
+        TXT[k]=ta.value;store.set('txt',TXT);
+        if(ta.value.trim().length<25){hinweis.style.display='block';ta.focus();return;}
+        hinweis.style.display='none';
         muster.style.display='block';bMuster.disabled=true;bMuster.textContent='Muster angezeigt';
         if(!gezeigt){gezeigt=true;zeigtN++;pruefeAbschluss();}
       }},'Muster anzeigen');
-      function upd(){bMuster.disabled=gezeigt||ta.value.trim().length<25;}
-      ta.addEventListener('input',function(){TXT[k]=ta.value;store.set('txt',TXT);upd();});
-      upd();
-      var rechts=h('div',{class:'rechts'},ta,hilfe,muster,h('div',{class:'tools'},bHilfe,bMuster));
+      ta.addEventListener('input',function(){TXT[k]=ta.value;store.set('txt',TXT);if(ta.value.trim().length>=25)hinweis.style.display='none';});
+      var rechts=h('div',{class:'rechts'},ta,hinweis,hilfe,muster,h('div',{class:'tools'},bHilfe,bMuster));
       box.append(h('div',{class:'sfeld'},h('div',{class:'zeile'},h('div',{class:'lab farbe-'+(f.farbe||'pfirsich')},f.titel),rechts)));
       rows.push({ta:ta});
     });
-    box.append(h('div',{class:'sub'},'Die Musterformulierung wird frei, sobald du in einem Baustein mindestens ein bis zwei Sätze geschrieben hast.'),abschluss);
+    box.append(h('div',{class:'sub'},'Die Musterformulierung eines Bausteins kannst du ansehen, sobald du dazu ein bis zwei Sätze geschrieben hast. Hast du alle Bausteine verglichen, erscheint der Abschluss.'),abschluss);
   });
 }
 TYPEN.reihenfolge=taskReihenfolge;
@@ -538,6 +562,60 @@ function countTasks(c){
 }
 
 /* ---------- Abschluss ---------- */
+/* ---------- Gesamtauswertung ---------- */
+function seitenStand(){
+  var out=[];
+  (CONTENT.abschnitte||[]).forEach(function(s,si){
+    var keys=[];
+    blocksOf(s).forEach(function(b,bi){if(TYPEN[b.typ])keys.push(si+'-'+bi);});
+    if(!keys.length)return;
+    var done=0,ok=0;
+    keys.forEach(function(k){if(k in RES){done++;if(RES[k])ok++;}});
+    out.push({si:si,titel:s.titel||('Seite '+(si+1)),kicker:s.kicker||'',total:keys.length,done:done,ok:ok});
+  });
+  return out;
+}
+function renderAuswertung(box){
+  var st=stand(),seiten=seitenStand();
+  if(!TOTAL||!seiten.length)return;
+  var pct=Math.round(st.ok/TOTAL*100),w=h('div',{class:'ausw'});
+  w.append(h('h3',null,'Deine Gesamtauswertung'));
+  w.append(h('div',{class:'ausw-kopf'},
+    h('div',{class:'ausw-zahl'+(st.ok===TOTAL?' ok':'')},pct+' %'),
+    h('div',null,h('b',null,st.ok+' von '+TOTAL+' Aufgaben richtig'),
+      h('div',{class:'sub'},st.done<TOTAL?'Bearbeitet: '+st.done+' von '+TOTAL+'. Der Wert steigt, sobald du weitere Aufgaben löst.':'Alle Aufgaben sind bearbeitet.'))));
+  var schwach=[];
+  seiten.forEach(function(s){
+    var p=s.ok/s.total*100,fertig=s.done>=s.total;
+    var zeile=h('div',{class:'ausw-zeile'},
+      h('div',{class:'t'},s.titel,s.kicker?h('small',null,s.kicker):null),
+      h('div',{class:'abar'+(s.ok===s.total?' gruen':'')},h('i',{style:'width:'+p+'%'})),
+      h('div',{class:'z'},s.ok+'/'+s.total));
+    var info=h('div',{class:'st'});
+    if(s.ok===s.total)info.append(h('span',{class:'gut'},'Sicher'));
+    else if(!fertig){info.append(h('span',null,'Noch offen: '+(s.total-s.done)+' Aufgabe'+(s.total-s.done===1?'':'n')));schwach.push(s);}
+    else{info.append(h('span',{class:'uebe'},p>=60?'Fast geschafft':'Hier solltest du noch üben'));schwach.push(s);}
+    if(s.ok<s.total)info.append(h('button',{class:'btn ghost small',type:'button',onclick:function(){zeigeSeite(s.si,true);}},'Zur Seite'));
+    zeile.append(info);
+    w.append(zeile);
+  });
+  var kn=0,km=0;
+  Object.keys(KR).forEach(function(k){if(k in RES){kn+=KR[k].n;km+=KR[k].max;}});
+  if(km){
+    w.append(h('div',{class:'ausw-zeile'},
+      h('div',{class:'t'},'Selbstcheck deiner Texte',h('small',null,'Punkte, die dein Text im Vergleich mit der Musterlösung schon hatte')),
+      h('div',{class:'abar'+(kn===km?' gruen':'')},h('i',{style:'width:'+Math.round(kn/km*100)+'%'})),
+      h('div',{class:'z'},kn+'/'+km)));
+  }
+  if(schwach.length){
+    var z=schwach.slice().sort(function(a,b){return a.ok/a.total-b.ok/b.total;})[0];
+    w.append(h('div',{class:'ausw-tipp'},h('b',null,'Als Nächstes üben: '),z.titel+'. '+(z.done<z.total?'Hier sind noch Aufgaben offen.':'Löse die Aufgaben dort nochmal, am besten mit „Nochmal versuchen“.')));
+  }else if(st.ok===TOTAL){
+    w.append(h('div',{class:'ausw-tipp'},'Alle Aufgaben hast du richtig gelöst. Schreibe zum Abschluss noch einmal einen eigenen Text ohne Hilfe, so prüfst du, ob es wirklich sitzt.'));
+  }
+  box.append(w);
+}
+
 function renderFinal(box){
   var st=stand(),alle=st.done>=TOTAL&&TOTAL>0;
   box.replaceChildren(h('h2',null,'Abschluss'));
@@ -546,6 +624,7 @@ function renderFinal(box){
   }else{
     box.append(h('div',{class:'fb ok'},'Geschafft! '+st.ok+' von '+TOTAL+' Aufgaben waren beim Bearbeiten richtig.'));
   }
+  renderAuswertung(box);
   if(LINK.rolle==='lehrkraft'){box.append(h('p',{class:'lead'},'Ansicht der Lehrkraft: hier wird nichts gespeichert.'));return;}
   if(EMBED){
     if(LINK.gespeichert||LINK.abgeschlossen)box.append(h('p',{class:'done-note'},'✓ Die Einarbeitung ist als abgeschlossen gespeichert.'));

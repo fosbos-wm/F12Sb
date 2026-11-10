@@ -1,0 +1,472 @@
+{
+ "titel": "Training: Struktur einhalten",
+ "modulart": "selbstlern",
+ "einleitung": "Du übst den **Aufbau** eines Fachaufsatzes am Fall Tim aus der Kurzarbeit: Welche Bausteine gibt es, und in welcher Reihenfolge stehen sie? Am Ende schreibst du deinen Aufsatz mit Strukturstreifen. Plane etwa 45 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "Training · Struktur einhalten",
+   "titel": "Die Aufgabe aus der Kurzarbeit",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "situation",
+     "label": "Arbeitsauftrag",
+     "text": "Sie erachten die Persönlichkeitsstruktur von Tim für problematisch und wollen diese Einschätzung mit den Erkenntnissen von Sigmund Freud belegen. Erläutern Sie am Beispiel von Tim (Z. 13–22) den Begriff „Ich-Schwäche“ ausführlich."
+    },
+    {
+     "typ": "text",
+     "text": "In diesem Training übst du **nur den Aufbau**: Welche Bausteine hat dein Fachaufsatz, und in welcher Reihenfolge stehen sie? Die Inhalte kennst du aus dem Unterricht. Hier geht es darum, sie an der richtigen Stelle zu platzieren. Plane etwa 45 Minuten ein."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Erläutern** heißt hier: Du erklärst den Begriff „Ich-Schwäche“ ausführlich und machst ihn an Tims Verhalten anschaulich. Deshalb gehören zu jedem Merkmal Textstellen mit **Zeilenangabe**."
+    },
+    {
+     "typ": "mc",
+     "frage": "Was verlangt der Arbeitsauftrag?",
+     "optionen": [
+      "Den Begriff „Ich-Schwäche“ nach Freud ausführlich erläutern und an Tims Verhalten (Z. 13–22) verdeutlichen",
+      "Tims Verhalten bewerten und Tipps geben, wie er weniger zockt",
+      "Nur die drei Persönlichkeitsinstanzen definieren, ohne den Fall zu nutzen",
+      "Das Zusammenwirken von Es, Ich und Über-Ich in Z. 1–12 verdeutlichen"
+     ],
+     "richtig": 0,
+     "erklaerung": "Der Auftrag nennt den Begriff „Ich-Schwäche“, die Erkenntnisse Freuds und das Beispiel Tim in Z. 13–22. Das Zusammenwirken der Instanzen in Z. 1–12 ist Aufgabe 1 der Kurzarbeit."
+    }
+   ]
+  },
+  {
+   "kicker": "Erster Versuch",
+   "titel": "Aufgabe 1: Bringe den Aufsatz in Ordnung",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Unten steht ein Fachaufsatz zur Aufgabe, in Stücke zerlegt und durcheinander. Du kennst die Bausteine noch nicht systematisch? Das ist in Ordnung. Überlege, was ein Leser zuerst wissen muss und was auf dem Vorherigen aufbaut."
+    },
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe die Teile in die richtige Reihenfolge.",
+     "hinweis": "Verschiebe die Teile mit den Pfeilen. Nach dem Überprüfen siehst du, welche schon richtig stehen.",
+     "absaetze": [
+      "Jeder Mensch gerät immer wieder in innere Konflikte zwischen dem, was er gerade möchte, und dem, was er tun sollte. Wie gut es gelingt, solche Konflikte zu lösen, prägt die Persönlichkeit eines Menschen.",
+      "Unter Pädagogik werden sowohl alle Formen des praktischen Erziehungsgeschehens als auch die wissenschaftliche Erhellung der Erziehungswirklichkeit verstanden. Die Psychologie ist die Wissenschaft vom Erleben und Verhalten des Menschen. Eine psychologische Erklärung für innere Konflikte bietet die psychoanalytische Theorie Sigmund Freuds.",
+      "In der Fallsituation fällt Tim in den letzten Wochen durch sein Verhalten auf: Er zockt fast jede Nacht bis 2 Uhr und kann nicht aufhören (Z. 13–22). Dieses Verhalten wird im Folgenden mit dem Begriff „Ich-Schwäche“ nach Freud erläutert.",
+      "Nach Freud besteht die Persönlichkeit aus drei Instanzen: Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt. Das Über-Ich hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht und lenkt das Verhalten im Sinne der geltenden Moral. Das Ich vermittelt zwischen den Triebimpulsen des Es, den Anforderungen des Über-Ichs und der Realität. Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht.",
+      "Ein erstes Merkmal der Ich-Schwäche ist ein zu stark ausgebildetes Es.",
+      "Dabei setzt sich das Bedürfnis nach sofortiger Befriedigung immer wieder durch, Triebimpulse können nicht aufgeschoben oder begrenzt werden.",
+      "Bei Tim ist das Es zu stark: Er zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Sein Vorsatz, nur eine Stunde zu spielen, scheitert Abend für Abend (Z. 14–15).",
+      "Ein zweites Merkmal ist ein unterlegenes Ich.",
+      "Das Ich kann sich weder gegenüber dem Es noch gegenüber den anderen Instanzen behaupten und nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln.",
+      "Tims Ich kann sich gegenüber dem Es nicht behaupten, seine Vorsätze scheitern (Z. 14–15; 18–19). Die Forderungen des Über-Ichs (Schuldgefühle, Selbstvorwürfe; Z. 15–16) und der Realität (zwei Fünfer, Müdigkeit, Verwarnung; Z. 17–21) nimmt er zwar wahr, sie ändern aber nichts an seinem Verhalten.",
+      "Ein drittes Merkmal ist die Fremdbestimmung des Verhaltens.",
+      "Die Person wird in ihrem Verhalten nicht von sich selbst, sondern von ihren Triebimpulsen bestimmt.",
+      "Tim weiß, dass er aufhören sollte, kann es aber nicht umsetzen („Ich kann einfach nicht anders“, Z. 18–19), und macht trotz der negativen Folgen weiter (Z. 21–22).",
+      "Ein starkes Ich ist die Voraussetzung dafür, dass Wünsche, Gewissen und Anforderungen der Realität in Einklang gebracht werden können."
+     ],
+     "erklaerung": "Zuerst kommt die Einleitung (allgemein, dann eingegrenzt, dann der Fall), danach der Hauptteil mit der Klärung der Instanzen und der Ich-Schwäche und den drei Merkmalen, am Ende der Schluss."
+    }
+   ]
+  },
+  {
+   "kicker": "Auflösung",
+   "titel": "Der Bauplan eines Fachaufsatzes",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "So sieht derselbe Aufsatz mit Bausteinen aus. Die Zahl hinter dem Baustein zeigt die Bewertungseinheiten (BE) laut Erwartungshorizont. Einleitung und Schluss haben dort keine eigenen BE, sie gehören aber zu einem guten Aufsatz."
+    },
+    {
+     "typ": "aufbau",
+     "legende": [
+      {
+       "name": "Einleitung und Schluss",
+       "farbe": "pfirsich"
+      },
+      {
+       "name": "Klärung der Instanzen",
+       "farbe": "gelb"
+      },
+      {
+       "name": "Merkmal 1",
+       "farbe": "blau"
+      },
+      {
+       "name": "Merkmal 2",
+       "farbe": "gruen"
+      },
+      {
+       "name": "Merkmal 3",
+       "farbe": "rot"
+      }
+     ],
+     "zeilen": [
+      {
+       "label": "Einleitungssatz",
+       "farbe": "pfirsich",
+       "text": "Jeder Mensch gerät immer wieder in innere Konflikte zwischen dem, was er gerade möchte, und dem, was er tun sollte. Wie gut es gelingt, solche Konflikte zu lösen, prägt die Persönlichkeit eines Menschen."
+      },
+      {
+       "label": "Eingrenzung des Lernbereichs",
+       "farbe": "pfirsich",
+       "text": "Unter Pädagogik werden sowohl alle Formen des praktischen Erziehungsgeschehens als auch die wissenschaftliche Erhellung der Erziehungswirklichkeit verstanden. Die Psychologie ist die Wissenschaft vom Erleben und Verhalten des Menschen. Eine psychologische Erklärung für innere Konflikte bietet die psychoanalytische Theorie Sigmund Freuds."
+      },
+      {
+       "label": "Überleitung zum Fall",
+       "farbe": "pfirsich",
+       "text": "In der Fallsituation fällt Tim in den letzten Wochen durch sein Verhalten auf: Er zockt fast jede Nacht bis 2 Uhr und kann nicht aufhören (Z. 13–22). Dieses Verhalten wird im Folgenden mit dem Begriff „Ich-Schwäche“ nach Freud erläutert."
+      },
+      {
+       "label": "Klärung: Instanzen und Ich-Schwäche · 1 BE",
+       "farbe": "gelb",
+       "text": "Nach Freud besteht die Persönlichkeit aus drei Instanzen: Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt. Das Über-Ich hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht und lenkt das Verhalten im Sinne der geltenden Moral. Das Ich vermittelt zwischen den Triebimpulsen des Es, den Anforderungen des Über-Ichs und der Realität. Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht."
+      },
+      {
+       "label": "Merkmal 1: Nennen",
+       "farbe": "blau",
+       "text": "Ein erstes Merkmal der Ich-Schwäche ist ein zu stark ausgebildetes Es."
+      },
+      {
+       "label": "Merkmal 1: Erklären",
+       "farbe": "blau",
+       "text": "Dabei setzt sich das Bedürfnis nach sofortiger Befriedigung immer wieder durch, Triebimpulse können nicht aufgeschoben oder begrenzt werden."
+      },
+      {
+       "label": "Merkmal 1: Verdeutlichen (Transfer) · ganzes Merkmal 3 BE",
+       "farbe": "blau",
+       "text": "Bei Tim ist das Es zu stark: Er zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Sein Vorsatz, nur eine Stunde zu spielen, scheitert Abend für Abend (Z. 14–15)."
+      },
+      {
+       "label": "Merkmal 2: Nennen",
+       "farbe": "gruen",
+       "text": "Ein zweites Merkmal ist ein unterlegenes Ich."
+      },
+      {
+       "label": "Merkmal 2: Erklären",
+       "farbe": "gruen",
+       "text": "Das Ich kann sich weder gegenüber dem Es noch gegenüber den anderen Instanzen behaupten und nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln."
+      },
+      {
+       "label": "Merkmal 2: Verdeutlichen (Transfer) · ganzes Merkmal 4 BE",
+       "farbe": "gruen",
+       "text": "Tims Ich kann sich gegenüber dem Es nicht behaupten, seine Vorsätze scheitern (Z. 14–15; 18–19). Die Forderungen des Über-Ichs (Schuldgefühle, Selbstvorwürfe; Z. 15–16) und der Realität (zwei Fünfer, Müdigkeit, Verwarnung; Z. 17–21) nimmt er zwar wahr, sie ändern aber nichts an seinem Verhalten."
+      },
+      {
+       "label": "Merkmal 3: Nennen",
+       "farbe": "rot",
+       "text": "Ein drittes Merkmal ist die Fremdbestimmung des Verhaltens."
+      },
+      {
+       "label": "Merkmal 3: Erklären",
+       "farbe": "rot",
+       "text": "Die Person wird in ihrem Verhalten nicht von sich selbst, sondern von ihren Triebimpulsen bestimmt."
+      },
+      {
+       "label": "Merkmal 3: Verdeutlichen (Transfer) · ganzes Merkmal 2 BE",
+       "farbe": "rot",
+       "text": "Tim weiß, dass er aufhören sollte, kann es aber nicht umsetzen („Ich kann einfach nicht anders“, Z. 18–19), und macht trotz der negativen Folgen weiter (Z. 21–22)."
+      },
+      {
+       "label": "Schluss",
+       "farbe": "pfirsich",
+       "text": "Ein starkes Ich ist die Voraussetzung dafür, dass Wünsche, Gewissen und Anforderungen der Realität in Einklang gebracht werden können."
+      }
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "**Drei Regeln für den Aufbau:**\n- Der Einleitungssatz ist ganz **allgemein**, noch ohne Tim. Der Fall kommt erst in der Überleitung.\n- Jedes Merkmal im Hauptteil folgt immer derselben Reihenfolge: **Nennen, Erklären, Verdeutlichen (Transfer)**.\n- Die **Zeilenangabe** steht im Transfer, direkt bei der Textstelle."
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 2",
+   "titel": "Welcher Satz gehört zu welchem Baustein?",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Hier stehen andere Formulierungen als oben. Erkenne den Baustein am Inhalt des Satzes, nicht am Wortlaut."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne jedem Baustein den passenden Satz zu.",
+     "paare": [
+      [
+       "Einleitungssatz",
+       "Jeder Mensch kennt Situationen, in denen er etwas will und gleichzeitig weiß, dass er es besser lassen sollte."
+      ],
+      [
+       "Eingrenzung des Lernbereichs",
+       "Die Psychologie ist die Wissenschaft vom Erleben und Verhalten des Menschen."
+      ],
+      [
+       "Überleitung",
+       "Im Folgenden wird Tims Verhalten in den letzten Wochen (Z. 13–22) mit dem Begriff „Ich-Schwäche“ erläutert."
+      ],
+      [
+       "Nennen",
+       "Ein Merkmal der Ich-Schwäche ist ein zu starkes Es."
+      ],
+      [
+       "Erklären",
+       "Dabei setzt sich das Bedürfnis nach sofortiger Befriedigung immer wieder durch."
+      ],
+      [
+       "Verdeutlichen (Transfer)",
+       "Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14) und kann seinen Vorsatz nicht einhalten (Z. 14–15)."
+      ],
+      [
+       "Schluss",
+       "Ein starkes Ich hilft dabei, Wünsche und Anforderungen in Einklang zu bringen."
+      ]
+     ],
+     "erklaerung": "Nur der Transfer enthält Tim und eine Zeilenangabe. Nennen und Erklären bleiben allgemein."
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 3",
+   "titel": "Fehlerjagd im Entwurf",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Ein Mitschüler hat einen Entwurf geschrieben (frei erfunden, nicht aus deiner Klasse). In jedem Abschnitt steckt **ein** Aufbaufehler, einer ist in Ordnung."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Welcher Fehler steckt in welchem Abschnitt?",
+     "hinweis": "Ordne jeden Abschnitt der passenden Spalte zu.",
+     "kategorien": [
+      {
+       "name": "Fallbezug zu früh",
+       "items": [
+        "Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Das ist ein spannender Fall."
+       ]
+      },
+      {
+       "name": "Schritt fehlt: Erklären",
+       "items": [
+        "Ein Merkmal der Ich-Schwäche ist ein zu starkes Es. Tim zockt fast jede Nacht bis 2 Uhr (Z. 13–14)."
+       ]
+      },
+      {
+       "name": "Zeilenangabe fehlt",
+       "items": [
+        "Ein Merkmal ist das unterlegene Ich. Das Ich kann nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln. Tim schafft es nicht, seine Vorsätze einzuhalten."
+       ]
+      },
+      {
+       "name": "Schluss ohne Bezug zum Thema",
+       "items": [
+        "Zum Schluss: Tim sollte einfach früher ins Bett gehen."
+       ]
+      },
+      {
+       "name": "Aufbau in Ordnung",
+       "items": [
+        "Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht."
+       ]
+      }
+     ],
+     "erklaerung": "Der Einleitungssatz bleibt allgemein, Nennen und Erklären gehören vor den Transfer, jeder Beleg braucht seine Zeile, und der Schluss greift einen Gedanken zum Thema auf, keinen Ratschlag an Tim."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile die Aussagen zum Aufbau eines Fachaufsatzes.",
+     "aussagen": [
+      {
+       "text": "Die Definitionen von Pädagogik und Psychologie stehen in der Eingrenzung des Lernbereichs.",
+       "richtig": true,
+       "erklaerung": "Die Eingrenzung führt vom allgemeinen Einstieg zum Lernbereich."
+      },
+      {
+       "text": "Im Hauptteil steht zuerst der Transfer, dann Nennen und Erklären.",
+       "richtig": false,
+       "erklaerung": "Die Reihenfolge ist Nennen, Erklären, Verdeutlichen (Transfer)."
+      },
+      {
+       "text": "Die Überleitung ist die Stelle, an der zum ersten Mal der Fall erwähnt wird.",
+       "richtig": true,
+       "erklaerung": "Der Einleitungssatz und die Eingrenzung bleiben allgemein."
+      },
+      {
+       "text": "Der Schluss besteht aus einem Ratschlag an Tim.",
+       "richtig": false,
+       "erklaerung": "Der Schluss ist ein zum Thema passender Gedanke oder Ausblick."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 4",
+   "titel": "Der Aufbau bei Aufgabe 1 der Kurzarbeit",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Auch Aufgabe 1 der Kurzarbeit hat einen festen Aufbau: Du definierst zuerst die Persönlichkeitsinstanzen (Nennen und Erklären) und verdeutlichst danach ihr Zusammenwirken in Tims Situation (Z. 1–12). Der Transfer folgt dem Ablauf im Text."
+    },
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe die Bausteine zu Aufgabe 1 in die richtige Reihenfolge.",
+     "hinweis": "Zuerst die Instanzen, dann das Zusammenwirken am Fall.",
+     "absaetze": [
+      "Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt.",
+      "Das Ich ist die Instanz, die zwischen den Triebimpulsen des Es und den Anforderungen von Über-Ich und Außenwelt abwägt und vermittelt.",
+      "Das Über-Ich ist die Instanz, die die Wert- und Normvorstellungen der Gesellschaft verinnerlicht hat und das Verhalten im Sinne der geltenden Moral lenkt.",
+      "Tims Es meldet das starke Verlangen, mit den Freunden zu spielen und die ganze Nacht durchzuzocken (Z. 4–6).",
+      "Das Über-Ich verurteilt den Wunsch mit der Norm „Ein Versprechen bricht man nicht“ (Z. 7–8) und fordert, zu lernen.",
+      "Das Ich prüft die Realität: Die Schulaufgabe steht morgen an, und Tim beherrscht erst zwei von fünf Aufgabentypen (Z. 8–10).",
+      "Tim befindet sich im Konflikt (Z. 10–11). Das Ich vermittelt und findet einen Kompromiss: nur eine Runde, ein Wecker, danach Lernen (Z. 11–12)."
+     ],
+     "erklaerung": "Erst werden die drei Instanzen definiert, dann folgt das Zusammenwirken am Fall in der Reihenfolge des Textes: Es, Über-Ich, Realität, Konflikt und Entscheidung."
+    }
+   ]
+  },
+  {
+   "kicker": "Aufgabe 5",
+   "titel": "Dein Fachaufsatz mit Strukturstreifen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Fallsituation: Tim",
+     "zeilen": [
+      "Tim (17) besucht die 11. Klasse. Am Mittwochabend sitzt er an",
+      "seinem Schreibtisch, um für die Mathe-Schulaufgabe am nächsten Tag",
+      "zu lernen. Da leuchtet sein Handy auf: Seine Freunde laden ihn zu",
+      "einer neuen Runde seines Lieblingsspiels ein. Tim spürt sofort ein",
+      "starkes Verlangen mitzuspielen und würde am liebsten die ganze",
+      "Nacht durchzocken. Gleichzeitig meldet sich eine innere Stimme:",
+      "„Du hast Mama versprochen, heute zu lernen. Ein Versprechen bricht",
+      "man nicht, und wer nicht lernt, lässt andere im Stich!“ Tim weiß",
+      "außerdem, dass er erst zwei von fünf Aufgabentypen beherrscht und",
+      "dass die Schulaufgabe schon morgen ansteht. Er überlegt kurz hin",
+      "und her. Schließlich spielt er nur eine einzige Runde mit, stellt",
+      "sich einen Wecker und lernt danach konzentriert weiter.",
+      "",
+      "In den letzten Wochen ist das anders: Tim zockt fast jede Nacht",
+      "bis 2 Uhr, obwohl er sich jeden Abend vornimmt, nur eine Stunde zu",
+      "spielen. Danach plagen ihn Schuldgefühle, und er wirft sich vor,",
+      "sein Versprechen an die Mutter wieder gebrochen zu haben. Sein",
+      "Freund Ben warnt ihn: „Du hast schon zwei Fünfer, hör endlich",
+      "auf!“ Tim antwortet: „Ich weiß, dass ich aufhören sollte, aber in",
+      "dem Moment ist mir alles egal. Ich kann einfach nicht anders.“ Er",
+      "schläft im Unterricht ein, verpasst Abgaben und erhält vom",
+      "Klassenleiter eine Verwarnung. Trotzdem sitzt er am nächsten Abend",
+      "wieder bis spät in die Nacht vor dem Bildschirm."
+     ]
+    },
+    {
+     "typ": "text",
+     "text": "Jetzt schreibst du selbst zu Aufgabe 2. Jedes Feld ist ein Baustein. Die Strukturhilfe (?) erinnert dich an den Inhalt. Das Muster siehst du, sobald du selbst etwas geschrieben hast."
+    },
+    {
+     "typ": "strukturstreifen",
+     "titel": "Formulieren Sie einen Fachaufsatz zum Fall Tim.",
+     "aufgabe": "Erläutern Sie am Beispiel von Tim (Z. 13–22) den Begriff „Ich-Schwäche“ ausführlich.",
+     "felder": [
+      {
+       "titel": "Einleitung: Einleitungssatz",
+       "farbe": "pfirsich",
+       "hilfe": "Ein ganz allgemeiner Satz ohne Tim: Innere Konflikte zwischen Wunsch und Pflicht.",
+       "muster": "Jeder Mensch gerät immer wieder in innere Konflikte zwischen dem, was er gerade möchte, und dem, was er tun sollte. Wie gut es gelingt, solche Konflikte zu lösen, prägt die Persönlichkeit eines Menschen."
+      },
+      {
+       "titel": "Einleitung: Eingrenzung des Lernbereichs",
+       "farbe": "pfirsich",
+       "hilfe": "Definiere Pädagogik und Psychologie, jeweils in einem Satz, und führe zu Freud hin.",
+       "muster": "Unter Pädagogik werden sowohl alle Formen des praktischen Erziehungsgeschehens als auch die wissenschaftliche Erhellung der Erziehungswirklichkeit verstanden. Die Psychologie ist die Wissenschaft vom Erleben und Verhalten des Menschen. Eine psychologische Erklärung für innere Konflikte bietet die psychoanalytische Theorie Sigmund Freuds."
+      },
+      {
+       "titel": "Einleitung: Überleitung",
+       "farbe": "pfirsich",
+       "hilfe": "Hier kommt zum ersten Mal der Fall: Was fällt an Tim auf (Zeilen)? Kündige den Begriff „Ich-Schwäche“ an.",
+       "muster": "In der Fallsituation fällt Tim in den letzten Wochen durch sein Verhalten auf: Er zockt fast jede Nacht bis 2 Uhr und kann nicht aufhören (Z. 13–22). Dieses Verhalten wird im Folgenden mit dem Begriff „Ich-Schwäche“ nach Freud erläutert."
+      },
+      {
+       "titel": "Hauptteil: Klärung der Instanzen und der Ich-Schwäche",
+       "farbe": "gelb",
+       "hilfe": "Definiere Es, Über-Ich und Ich und sage, was Ich-Schwäche bedeutet (Ungleichgewicht), noch ohne Fall.",
+       "muster": "Nach Freud besteht die Persönlichkeit aus drei Instanzen: Das Es ist die Instanz der Triebe, Wünsche und Bedürfnisse, die nach sofortiger Befriedigung drängt. Das Über-Ich hat die Wert- und Normvorstellungen der Gesellschaft verinnerlicht und lenkt das Verhalten im Sinne der geltenden Moral. Das Ich vermittelt zwischen den Triebimpulsen des Es, den Anforderungen des Über-Ichs und der Realität. Bei einer Ich-Schwäche stehen die Instanzen zueinander bzw. zur Realität in einem Ungleichgewicht."
+      },
+      {
+       "titel": "Merkmal 1: zu starkes Es",
+       "farbe": "blau",
+       "hilfe": "Nennen, Erklären (allgemein), dann Verdeutlichen (Transfer) mit Zeilenangabe.",
+       "muster": "Ein erstes Merkmal der Ich-Schwäche ist ein zu stark ausgebildetes Es. Dabei setzt sich das Bedürfnis nach sofortiger Befriedigung immer wieder durch, Triebimpulse können nicht aufgeschoben oder begrenzt werden. Bei Tim ist das Es zu stark: Er zockt fast jede Nacht bis 2 Uhr (Z. 13–14). Sein Vorsatz, nur eine Stunde zu spielen, scheitert Abend für Abend (Z. 14–15)."
+      },
+      {
+       "titel": "Merkmal 2: unterlegenes Ich",
+       "farbe": "gruen",
+       "hilfe": "Nennen, Erklären (allgemein), dann Verdeutlichen (Transfer) mit Zeilenangaben.",
+       "muster": "Ein zweites Merkmal ist ein unterlegenes Ich. Das Ich kann sich weder gegenüber dem Es noch gegenüber den anderen Instanzen behaupten und nicht zwischen den Forderungen von Es, Über-Ich und Realität vermitteln. Tims Ich kann sich gegenüber dem Es nicht behaupten, seine Vorsätze scheitern (Z. 14–15; 18–19). Die Forderungen des Über-Ichs (Schuldgefühle, Selbstvorwürfe; Z. 15–16) und der Realität (zwei Fünfer, Müdigkeit, Verwarnung; Z. 17–21) nimmt er zwar wahr, sie ändern aber nichts an seinem Verhalten."
+      },
+      {
+       "titel": "Merkmal 3: Fremdbestimmung",
+       "farbe": "rot",
+       "hilfe": "Nennen, Erklären (allgemein), dann Verdeutlichen (Transfer) mit Zitat und Zeilenangaben.",
+       "muster": "Ein drittes Merkmal ist die Fremdbestimmung des Verhaltens. Die Person wird in ihrem Verhalten nicht von sich selbst, sondern von ihren Triebimpulsen bestimmt. Tim weiß, dass er aufhören sollte, kann es aber nicht umsetzen („Ich kann einfach nicht anders“, Z. 18–19), und macht trotz der negativen Folgen weiter (Z. 21–22)."
+      },
+      {
+       "titel": "Schluss",
+       "farbe": "pfirsich",
+       "hilfe": "Ein Gedanke oder Ausblick zum Thema, kein Ratschlag an Tim.",
+       "muster": "Ein starkes Ich ist die Voraussetzung dafür, dass Wünsche, Gewissen und Anforderungen der Realität in Einklang gebracht werden können."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Abschluss",
+   "titel": "Dein Plan für die nächste Kurzarbeit",
+   "bloecke": [
+    {
+     "typ": "frei",
+     "frage": "Welchen Baustein vergisst oder verwechselst du am ehesten? Schreibe zwei bis drei Sätze, worauf du in der nächsten Kurzarbeit als Erstes achtest.",
+     "hinweis": "Ehrlich zu dir selbst zu sein, hilft dir mehr als eine perfekte Antwort.",
+     "muster": "Beispiel: Ich schreibe in den Einleitungssatz oft schon Tim hinein. Ab jetzt schreibe ich ihn allgemein und nenne den Fall erst in der Überleitung. Außerdem kontrolliere ich am Ende, ob bei jedem Transfer eine Zeilenangabe steht.",
+     "kriterien": [
+      "Ich habe einen **konkreten Baustein** genannt.",
+      "Ich habe einen **Satz** formuliert, was ich anders mache.",
+      "Ich weiß, wie ich am Ende **kontrolliere** (z. B. Zeilenangaben prüfen)."
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Merke dir die Reihenfolge: **Einleitungssatz, Eingrenzung, Überleitung, Klärung der Instanzen und der Ich-Schwäche, Merkmale (Nennen, Erklären, Verdeutlichen (Transfer)), Schluss.**\n\nWenn dir die Inhalte der Merkmale noch unsicher sind, übe weiter mit dem Training „Theorie beschreiben“. Fehlt dir der Fallbezug, nimm das Training „Fallbezug üben“."
+    }
+   ]
+  }
+ ]
+}
