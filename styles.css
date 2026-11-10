@@ -83,7 +83,7 @@
 .kw-fa-gr input[type=checkbox]{accent-color:var(--k)}
 /* Check-In: jede Aufgabenart hat ihre Farbe */
 .ci-q{--ci:var(--c,var(--blue));border-left:6px solid var(--ci);background:linear-gradient(180deg,color-mix(in srgb,var(--ci) 7%,#fff),#fff 90px)}
-.ci-k-mc{--ci:#1f8ea3}.ci-k-kprim{--ci:#e08a2e}.ci-k-zuordnung{--ci:#8460b8}.ci-k-lueckentext{--ci:#4f9a35}.ci-k-reihenfolge{--ci:#d4577f}.ci-k-frei{--ci:#3a7fd0}.ci-k-offen{--ci:#3a7fd0}
+.ci-k-mc{--ci:#1f8ea3}.ci-k-kprim{--ci:#e08a2e}.ci-k-zuordnung{--ci:#8460b8}.ci-k-lueckentext{--ci:#4f9a35}.ci-k-reihenfolge{--ci:#d4577f}.ci-k-frei{--ci:#a0592f}.ci-k-offen{--ci:#3a7fd0}
 .ci-art{display:inline-block;margin:0 0 10px 42px;padding:3px 11px;border-radius:999px;background:color-mix(in srgb,var(--ci) 14%,#fff);color:color-mix(in srgb,var(--ci) 75%,#10303f);border:1px solid color-mix(in srgb,var(--ci) 35%,#fff);font-size:11px;font-weight:800;letter-spacing:.05em}
 .ci-q .ci-zr{border-color:color-mix(in srgb,var(--ci) 25%,#fff);background:#fff}
 .ci-q .ci-zr:has(select:not([value=""]):focus),.ci-q .ci-zr:focus-within{border-color:var(--ci)}
@@ -108,3 +108,6 @@
 /* Check-In-Verlauf */
 .ci-verlauf{margin:14px 0 8px}.ci-verlauf svg{max-width:440px;display:block;margin-top:6px}
 .ls-verlauf{margin:2px 0 10px 34px;font-size:13px}.ls-verlauf summary{cursor:pointer;color:var(--muted)}.ls-verlauf svg{max-width:420px;display:block;margin-top:6px}
+/* Lernstände: Ampel und Verlauf je Übung */
+.ls-ub{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:3px 0 1px 34px;font-size:13px}.ls-ub small{color:var(--muted)}
+.ub-frame{width:100%;height:68vh;border:1px solid var(--line);border-radius:10px;background:#fff}

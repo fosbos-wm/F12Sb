@@ -578,6 +578,15 @@ service cloud.firestore {
       allow read: if isApproved();
       allow create, update, delete: if isTeacher();
     }
+    match /faErgebnisse/{id} {
+      // Fachaufsatz-Selbsteinschätzung: nur Punktzahlen, kein Text
+      allow read: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
+      allow create: if isApproved() && request.resource.data.uid == request.auth.uid
+        && request.resource.data.max is number && request.resource.data.punkte is number
+        && request.resource.data.max > 0 && request.resource.data.max <= 40
+        && request.resource.data.punkte >= 0 && request.resource.data.punkte <= request.resource.data.max;
+      allow delete: if isTeacher();
+    }
     match /basischeckVersuche/{id} {
       allow read: if isApproved() && (resource.data.uid == request.auth.uid || isTeacher());
       allow create: if isApproved() && request.resource.data.uid == request.auth.uid;

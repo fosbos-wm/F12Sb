@@ -16,6 +16,7 @@ iframe{flex:1;width:100%;border:0;background:var(--bg);min-height:0}
 import {qrSvg,esc,fmtTime,SAFE_DATEI,loadKatalog,makeCode,rankSort,ls,cleanParams,cleanId} from "./js/ts-core.js";
 const $=id=>document.getElementById(id);
 const q=new URLSearchParams(location.search),sid=cleanId(q.get("s")),team=Math.max(1,Math.min(30,+q.get("t")||+ls.get("ts-team")||1)),auswahl=(q.get("auswahl")||"").split(",").map(cleanId).filter(Boolean).join(",");
+if(q.get("app")==="1"){$("back").hidden=true;$("back").style.display="none"}
 $("back").href="index.html?t="+team+(auswahl?"&auswahl="+encodeURIComponent(auswahl):"");
 const shareUrl=(()=>{const u=new URL(location.href);u.searchParams.delete("t");u.hash="";return u.href})();
 qrSvg(shareUrl,56).then(v=>{$("qrs").innerHTML=v});
@@ -35,6 +36,7 @@ const fail=t=>{$("fehler").hidden=false;$("ftext").textContent=t};
     window.addEventListener("message",e=>{
       if(e.source!==fr.contentWindow)return;
       const r=e.data&&e.data.tsResult;if(!r||s.ergebnis===false)return;
+      if(q.get("app")==="1")try{parent.postMessage({ubErgebnis:{sid,punkte:+r.punkte||0,max:+r.max||1,zuege:+r.zuege||0,sekunden:+r.sekunden||0}},location.origin)}catch(_){}
       const n={team,punkte:Math.max(0,Math.round(+r.punkte||0)),max:Math.max(1,Math.round(+r.max||1)),zuege:Math.max(0,Math.round(+r.zuege||0)),sekunden:Math.max(0,Math.round(+r.sekunden||0))};
       let old=null;try{old=JSON.parse(ls.get(key)||"null")}catch(_){}
       const best=old&&rankSort(old,n)<=0?old:n;ls.set(key,JSON.stringify(best));
