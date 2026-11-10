@@ -7,7 +7,7 @@
 iframe{flex:1;width:100%;border:0;background:var(--bg);min-height:0}
 .res{padding:10px 16px;font-size:.95rem}.res code{font:800 1.3rem var(--mono);letter-spacing:.06em}</style></head>
 <body>
-<div class="bar"><button type="button" id="qrmini" class="alt" aria-label="QR-Code zu dieser Übung, zum Vergrößern antippen" style="padding:3px;min-width:0;flex:none"><span id="qrs" style="display:block;width:56px;height:56px"></span></button><span class="led on"></span><span class="t" id="titel">Station</span><span class="muted small" id="team"></span><a class="btn alt" id="back" href="index.html">Alle Übungen</a></div>
+<div class="bar"><button type="button" id="qrmini" class="alt" aria-label="QR-Code zu dieser Übung, zum Vergrößern antippen" style="padding:3px;min-width:0;flex:none"><span id="qrs" style="display:block;width:56px;height:56px"></span></button><span class="led on"></span><span class="t" id="titel">Station</span><span class="muted small" id="team"></span><a class="btn alt" id="back" href="../index.html#start">← Lernlandkarte</a></div>
 <div class="res msg" id="res" hidden role="status"></div>
 <div class="beamer" id="qrbig" hidden style="display:none"><button class="alt close" id="qrclose" type="button">Schließen</button><div class="side" style="margin:auto"><div class="muted">Scannen und mitmachen</div><div id="qrb"></div><div class="muted small" id="qru" style="word-break:break-all;max-width:360px"></div></div></div>
 <iframe id="frame" title="Station" allow="fullscreen" hidden></iframe>
@@ -16,8 +16,8 @@ iframe{flex:1;width:100%;border:0;background:var(--bg);min-height:0}
 import {qrSvg,esc,fmtTime,SAFE_DATEI,loadKatalog,makeCode,rankSort,ls,cleanParams,cleanId} from "./js/ts-core.js";
 const $=id=>document.getElementById(id);
 const q=new URLSearchParams(location.search),sid=cleanId(q.get("s")),team=Math.max(1,Math.min(30,+q.get("t")||+ls.get("ts-team")||1)),auswahl=(q.get("auswahl")||"").split(",").map(cleanId).filter(Boolean).join(",");
-if(q.get("app")==="1"){$("back").hidden=true;$("back").style.display="none"}
-$("back").href="index.html?t="+team+(auswahl?"&auswahl="+encodeURIComponent(auswahl):"");
+// Zurück zur Lernlandkarte: in der App (Fenster) Übung schließen und dorthin wechseln, sonst Link zur App
+$("back").addEventListener("click",e=>{try{if(q.get("app")==="1"&&parent!==window&&parent.closeModal&&parent.go){e.preventDefault();parent.closeModal();parent.go("start")}}catch{}});
 const shareUrl=(()=>{const u=new URL(location.href);u.searchParams.delete("t");u.hash="";return u.href})();
 qrSvg(shareUrl,56).then(v=>{$("qrs").innerHTML=v});
 $("qrmini").addEventListener("click",async()=>{$("qrb").innerHTML=await qrSvg(shareUrl,340);$("qru").textContent=shareUrl.replace(/^https?:\/\//,"");$("qrbig").hidden=false;$("qrbig").style.display="flex"});
