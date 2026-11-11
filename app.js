@@ -4992,3 +4992,47 @@ Das l\xE4sst sich nicht r\xFCckg\xE4ngig machen.`))return;const n=async i=>{for(
     <label style="display:block;margin:0 0 8px">Adresse oder iframe-Code<input id="lbRfUrl" type="text" autocomplete="off" style="width:100%;box-sizing:border-box;min-height:42px;padding:0 12px;border:1px solid var(--line);border-radius:10px;font:inherit"></label>
     <label style="display:block;margin:0 0 8px">Titel (optional)<input id="lbRfTitel" type="text" maxlength="120" style="width:100%;box-sizing:border-box;min-height:42px;padding:0 12px;border:1px solid var(--line);border-radius:10px;font:inherit"></label>
     <div class="form-actions" style="margin-top:12px"><button class="primary" type="button" onclick="lbRfWebSpeichern()">Speichern</button><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button></div>`)}catch(r){console.error("Roter Faden:",r),u(r&&r.message?r.message:"Das hat nicht geklappt.")}}async function FE(){const e=window.__lbRf;if(!e||!_e())return;const t=e.q,n=e.ref;let i=String((g("lbRfUrl")||{}).value||"").trim();const r=i.match(/<iframe[^>]*?\ssrc\s*=\s*["']([^"']+)["']/i);r&&(i=r[1].replace(/&amp;/g,"&").trim());const a=gl(i);if(!a){u("Bitte eine g\xFCltige Adresse (https://\u2026) eingeben.");return}const s=String((g("lbRfTitel")||{}).value||"").trim().slice(0,120)||"Webseite";try{await Qr(sb(t,n)),await ou(t,n,t==="z"?{rfTyp:"web",rfUrl:a,rfTitel:s,boardId:""}:{rfTyp:"web",rfUrl:a,rfTitel:s,tafelId:""}),te(),await W(),u("Webseite als Roter Faden eingebettet.")}catch(l){console.error("Roter Faden Webseite:",l),u(l?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln pr\xFCfen.":"Das hat nicht geklappt.")}}async function Qr(e){if(e&&e.rfTyp==="pdf"&&e.rfUrl)try{await Ot(e.rfUrl)}catch{}}function du(e){ob();const t=e.rfTyp==="pdf",n=t?e.rfUrl:gl(e.rfUrl);if(!n){u("Der Rote Faden hat keine g\xFCltige Adresse.");return}window.__lbRfUrl=n;const i=document.createElement("div");i.id="lbRfOverlay",i.className="exp-overlay",i.innerHTML=`<div class="exp-leiste"><b>${t?"\u{1F4C4}":"\u{1F310}"} ${o(e.rfTitel||"Roter Faden")}</b><span style="display:flex;gap:8px"><button type="button" class="secondary" onclick="lbRfNeuerTab()">\u2197 In neuem Tab</button><button type="button" class="secondary" onclick="lbRfSchliessen()">\u2715 Schlie\xDFen</button></span></div><iframe title="${o(e.rfTitel||"Roter Faden")}" src="${o(n)}"${t?"":` sandbox="${Pg(n)}" allow="fullscreen" allowfullscreen`}></iframe>`,document.body.appendChild(i),document.body.classList.add("exp-offen")}function ob(){const e=document.getElementById("lbRfOverlay");e&&e.remove(),document.body.classList.remove("exp-offen")}function NE(){window.__lbRfUrl&&window.open(window.__lbRfUrl,"_blank","noopener")}async function IE(e){if(e.whiteboardId){ot(e.whiteboardId);return}if(!_e())return;const t=await ye(K(b,"whiteboards"),{title:(qr(e)+" \u2013 Whiteboard").slice(0,120),description:"Gemeinsames Whiteboard zum Modul",art:"team",schreibschutz:!1,seiten:1,bg:"weiss",createdBy:x.uid,createdByName:X(re,x),createdAt:R()});await ne($(b,"ppModule",e.id),{whiteboardId:t.id}),await Ce(!0),ot(t.id)}async function cb(e){if(e.lernBoardId){if(_e()){ot(e.lernBoardId);return}await nu(e.lernBoardId,qr(e));return}if(!_e())return;if(!window.__lbLernNeu){await Ya("m",e.id,"lern");return}const t=await ru(qr(e),"Lern\xFCbersicht zum Modul: Zusammenfassung der Lehrkraft, Sch\xFCler:innen bekommen eine eigene Kopie zum Erg\xE4nzen");await ne($(b,"ppModule",e.id),{lernBoardId:t}),await Ce(!0),ot(t)}function KE(e){const t=window.open("","_blank");if(!t){u("Bitte Pop-ups f\xFCr diese Seite erlauben.");return}const n=String(m&&m.board&&m.board.title||"Whiteboard").replace(/&/g,"&amp;").replace(/</g,"&lt;");t.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>${n}</title><style>@page{size:A4 ${e.width>e.height?"landscape":"portrait"};margin:10mm}body{margin:0;font-family:Arial,sans-serif}h1{font-size:15px;margin:0 0 6px}img{max-width:100%;max-height:calc(100vh - 40px);display:block}.n{background:#f3f3f3;padding:8px;border-radius:6px;margin-bottom:10px;font-size:11px}@media print{.n{display:none}img{max-height:none}}</style></head><body><div class="n">Im Druckdialog \u201EAls PDF sichern\u201C bzw. \u201EPDF\u201C ausw\xE4hlen. Gedruckt wird die aktuelle Seite des Whiteboards.</div><h1>${n}</h1><img src="${e.toDataURL("image/png")}" alt=""><script>window.onload=function(){setTimeout(function(){window.print()},400)}<\/script></body></html>`),t.document.close()}async function CE(){if(m){m.pdfModus=!0;try{await Ag()}finally{m.pdfModus=!1}}}Object.assign(window,{pp12Lern:typeof lu=="function"?lu:void 0,pp12Wb:typeof rb=="function"?rb:void 0,lbOrdnerOeffnen:LE,lbOrdnerNeu:TE,lbBereitstellen:EE,lbOrdnerLoeschen:mE,lbZuordnenDialog:Ya,lbZuordnenSetzen:xE,lbZFilter:yE,lbZTab:vE,lbZLernNeu:wE,lbZRf:kE,lbRfDialog:cu,lbRfWahl:lb,lbRfWebSpeichern:FE,lbRfOeffnen:du,lbRfSchliessen:ob,lbRfNeuerTab:NE,pp12LernZuordnen:$E,lbLoesenDialog:au,lbLoesen:SE,pp12Loesen:AE});function uu(e){return new Promise(t=>setTimeout(t,e))}let pu=Date.now();document.addEventListener("visibilitychange",()=>{document.visibilityState==="visible"&&(pu=Date.now())}),window.addEventListener("pageshow",()=>{pu=Date.now()});async function jE(e){let t;for(let n=0;n<4;n++)try{const i=await(n?import(e+"&r="+n+Date.now().toString(36)):import(e));return window.__bootMsg&&window.__bootMsg(""),i}catch(i){t=i,console.warn("Firebase laden, Versuch "+(n+1)+":",i),n<3&&(window.__bootMsg&&window.__bootMsg("Die Verbindung hakt. Neuer Versuch "+(n+1)+" von 3 \u2026"),await uu(900*(n+1)))}throw t}function db(e){return async(...t)=>{const n=400-(Date.now()-pu);n>0&&await uu(n);let i;for(let r=0;r<3;r++)try{return await e(...t)}catch(a){i=a;const s=String(a&&a.code||"");if(s==="permission-denied"||s==="not-found"||s==="invalid-argument"||s==="unauthenticated"||s==="failed-precondition")throw a;r<2&&await uu(600*(r+1))}throw i}}window.__booted=1,window.__bootOk&&window.__bootOk()});export default RE();
+
+
+/* ===== Lernlandkarte: Vollansicht =====
+   Knopf „Vollansicht“ auf der Lernlandkarte: blendet Kopfzeile und Seitenleiste aus und zeigt
+   alle Lernbereiche nebeneinander über die ganze Breite (am Beamer/Bildschirm vollständig lesbar).
+   Beenden: Knopf „Vollansicht beenden“, Esc oder Seitenwechsel. */
+(function(){
+ if(window.__kwVoll)return;window.__kwVoll=1;
+ const B=document.body;
+ function an(){return B.classList.contains("kw-voll")}
+ function knoepfe(){document.querySelectorAll(".kw-voll-btn").forEach(b=>{b.textContent=an()?"✕ Vollansicht beenden":"⛶ Vollansicht"})}
+ function ende(){
+  B.classList.remove("kw-voll");
+  try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
+  knoepfe();
+ }
+ function start(){
+  B.classList.add("kw-voll");
+  try{const r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}
+  knoepfe();window.scrollTo(0,0);
+ }
+ function umschalten(){an()?ende():start()}
+ window.kwVollansicht=umschalten;
+ function einbauen(){
+  const root=document.getElementById("kwRoot");
+  if(!root){if(an())ende();return}
+  if(!root.querySelector(".kw-wand"))return; // nur die Lernlandkarte selbst
+  if(root.querySelector(".kw-voll-btn"))return;
+  let links=root.querySelector(".kw-links");
+  if(!links){links=document.createElement("div");links.className="kw-links";const w=root.querySelector(".kw-wand");w.parentNode.insertBefore(links,w)}
+  const b=document.createElement("button");
+  b.type="button";b.className="secondary kw-voll-btn";b.title="Alle Lernbereiche auf einen Blick, ganze Bildschirmbreite";
+  b.addEventListener("click",umschalten);
+  links.insertBefore(b,links.firstChild);knoepfe();
+ }
+ const ex=document.createElement("button");
+ ex.type="button";ex.className="primary kw-voll-exit";ex.textContent="✕ Vollansicht beenden";ex.addEventListener("click",ende);
+ B.appendChild(ex);
+ document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&an())ende()});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&an())ende()});
+ let t=0;
+ new MutationObserver(()=>{if(t)return;t=setTimeout(()=>{t=0;einbauen()},60)}).observe(document.getElementById("content")||B,{childList:true,subtree:true});
+ einbauen();
+})();

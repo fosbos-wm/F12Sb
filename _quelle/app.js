@@ -23325,3 +23325,47 @@ function fsLeseMitWiederholung(fn){
 }
 
 window.__booted=1;if(window.__bootOk)window.__bootOk();
+
+
+/* ===== Lernlandkarte: Vollansicht =====
+   Knopf „Vollansicht“ auf der Lernlandkarte: blendet Kopfzeile und Seitenleiste aus und zeigt
+   alle Lernbereiche nebeneinander über die ganze Breite (am Beamer/Bildschirm vollständig lesbar).
+   Beenden: Knopf „Vollansicht beenden“, Esc oder Seitenwechsel. */
+(function(){
+ if(window.__kwVoll)return;window.__kwVoll=1;
+ const B=document.body;
+ function an(){return B.classList.contains("kw-voll")}
+ function knoepfe(){document.querySelectorAll(".kw-voll-btn").forEach(b=>{b.textContent=an()?"✕ Vollansicht beenden":"⛶ Vollansicht"})}
+ function ende(){
+  B.classList.remove("kw-voll");
+  try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
+  knoepfe();
+ }
+ function start(){
+  B.classList.add("kw-voll");
+  try{const r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}
+  knoepfe();window.scrollTo(0,0);
+ }
+ function umschalten(){an()?ende():start()}
+ window.kwVollansicht=umschalten;
+ function einbauen(){
+  const root=document.getElementById("kwRoot");
+  if(!root){if(an())ende();return}
+  if(!root.querySelector(".kw-wand"))return; // nur die Lernlandkarte selbst
+  if(root.querySelector(".kw-voll-btn"))return;
+  let links=root.querySelector(".kw-links");
+  if(!links){links=document.createElement("div");links.className="kw-links";const w=root.querySelector(".kw-wand");w.parentNode.insertBefore(links,w)}
+  const b=document.createElement("button");
+  b.type="button";b.className="secondary kw-voll-btn";b.title="Alle Lernbereiche auf einen Blick, ganze Bildschirmbreite";
+  b.addEventListener("click",umschalten);
+  links.insertBefore(b,links.firstChild);knoepfe();
+ }
+ const ex=document.createElement("button");
+ ex.type="button";ex.className="primary kw-voll-exit";ex.textContent="✕ Vollansicht beenden";ex.addEventListener("click",ende);
+ B.appendChild(ex);
+ document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&an())ende()});
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&an())ende()});
+ let t=0;
+ new MutationObserver(()=>{if(t)return;t=setTimeout(()=>{t=0;einbauen()},60)}).observe(document.getElementById("content")||B,{childList:true,subtree:true});
+ einbauen();
+})();

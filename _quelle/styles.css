@@ -921,3 +921,17 @@ details.ls-lb:not([open])>summary.ls-lbk{border-radius:0 0 0 0}
 /* Check-In-Verlauf */
 .ci-verlauf{margin:14px 0 8px}.ci-verlauf svg{max-width:440px;display:block;margin-top:6px}
 .ls-verlauf{margin:2px 0 10px 34px;font-size:13px}.ls-verlauf summary{cursor:pointer;color:var(--muted)}.ls-verlauf svg{max-width:420px;display:block;margin-top:6px}
+
+
+/* ===== Lernlandkarte: Vollansicht ===== */
+.kw-voll-exit{display:none}
+body.kw-voll .topbar,body.kw-voll .sidebar,body.kw-voll .footer,body.kw-voll #kwRoot>.page-head,body.kw-voll #kwRoot>header{display:none!important}
+body.kw-voll .app-shell{min-height:100vh}
+body.kw-voll main#content{max-width:none;width:100%;padding:14px 18px 24px}
+body.kw-voll .kw-voll-exit{display:block;position:fixed;right:14px;bottom:14px;z-index:60;box-shadow:0 4px 14px rgba(24,67,96,.3)}
+body.kw-voll .kw-wand{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+body.kw-voll .kw-row{font-size:14px;padding:7px 8px}
+body.kw-voll .kw-th b{font-size:18px}
+@media(max-width:900px){body.kw-voll .kw-wand{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){body.kw-voll .kw-wand{grid-template-columns:1fr}}
+@media print{.kw-voll-btn,.kw-voll-exit{display:none!important}}
