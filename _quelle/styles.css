@@ -1100,3 +1100,8 @@ body.kw-voll .kw-th b{font-size:18px}
 .nav-area .nav-link.active{background:#fff;box-shadow:0 1px 4px rgba(23,56,79,.14)}
 .nav-area-l .nav-link.active{color:#17384f;box-shadow:inset 3px 0 0 #17384f,0 1px 4px rgba(23,56,79,.14)}
 .nav-area-s .nav-link.active{color:#2F6B16;box-shadow:inset 3px 0 0 #4FA72E,0 1px 4px rgba(23,56,79,.14)}
+
+/* QR-Code der Startseite oben rechts */
+.hero-qr{left:auto!important;right:14px}
+.hero:has(.hero-qr){padding-left:28px!important;padding-right:150px}
+@media(max-width:800px){.hero-qr{right:auto}.hero:has(.hero-qr){padding-right:28px}}
