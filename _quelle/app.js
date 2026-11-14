@@ -22755,7 +22755,7 @@ async function renderKachelwand(){
  const p=alle.length?Math.round(fertig/alle.length*100):0;
  const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
  const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#DCE9F5" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#3A8FD4" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
- const lk=lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht</button><button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lk-inhalte')">Inhalte einstellen</button></div>`:"";
+ const lk=lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht</button><button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lk-unterricht')">Unterricht planen</button></div>`:"";
  return`<div class="kw" id="kwRoot">
   ${kwSchuelerBanner()}
   <button class="secondary" onclick="go('unterricht')">← Unterrichtsfächer</button>
@@ -23130,30 +23130,21 @@ function lxLegende(){return`<div class="lx-legende">${[1,2,3,4,5,6,7].map(n=>`<s
 async function renderLkUnterricht(){
  if(!isTeacher())return await renderKachelwand();
  await kwLaden();
- return`<div class="lx-seite">${pageHead("LEHRKRÄFTE · 1","Unterricht erstellen","Plane Bausteine für ein Thema: Selbstlernkurs, Deeper-Learning-Stunde, Lernrallye, Projekt, Check-out.")}
+ return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterricht planen","Plane Bausteine und stelle Inhalte ein: Materialien, Wissens-Checks, Selbstlernkurse, Stunden, Check-outs und Tests. Jedes Thema hat dieselben sieben Teile wie bei den Schüler:innen.")}
  <div class="lx-kacheln">
   ${lxKachel("kompass","Wochenplanung","Bausteine und Stunden auf Schulwochen legen")}
   ${lxKachel("fach","Fächer und Projekte","Lernbereiche, Projekte und Bausteine ansehen")}
   ${lxKachel("tafel","Digitale Tafel","Tafelbilder und Unterrichtsseiten bauen")}
   ${lxKachel("whiteboard","Team-Whiteboard","Lernübersichten und Tafelbilder gestalten")}
   ${lxKachel("fachaufsatz","Fachaufsatz-Training","Aufsatzaufgaben einstellen und verwalten")}
-  ${lxKachel("kw-fortschritt","Erledigt? Selbstlernkurse und Rallyes","Wer hat welchen Baustein bearbeitet?")}
- </div>
- <h2 class="lx-h2">Thema wählen und Baustein einplanen</h2><p class="lx-hint">Ein Klick öffnet das Thema. Dort stehen „Baustein einplanen“ und „Vorhandenes Modul zuordnen“ (Teil 4).</p>${lxLegende()}
- <div class="kw-wand lx-wahl">${lxThemaWahlen("unterricht")}</div></div>${footer()}`;
-}
-async function renderLkInhalte(){
- if(!isTeacher())return await renderKachelwand();
- await kwLaden();
- return`<div class="lx-seite">${pageHead("LEHRKRÄFTE · 2","Inhalte einstellen","Stelle Materialien, Wissens-Checks und Tests ein. Jedes Thema hat dieselben sieben Teile wie bei den Schüler:innen.")}
- <div class="lx-kacheln">
-  ${lxKachel("lk-materialien","Neues Check-out anlegen","K-Prim-Test mit Fallvignette einstellen",{data:'data-lx="co" data-op="neu"'})}
-  ${lxKachel("lk-test","Digitalen Test anlegen","Freitext-Test mit KI-Vorkorrektur",{data:'data-ls="testneu"'})}
+  ${lxKachel("","Neues Check-out anlegen","K-Prim-Test mit Fallvignette einstellen",{data:'data-lx="co" data-op="neu"'})}
+  ${lxKachel("","Digitalen Test anlegen","Freitext-Test mit KI-Vorkorrektur",{data:'data-ls="testneu"'})}
   ${lxKachel("tests","Tests verwalten","Live schalten, Ergebnisse ansehen")}
+  ${lxKachel("kw-fortschritt","Erledigt? Selbstlernkurse und Rallyes","Wer hat welchen Baustein bearbeitet?")}
   ${lxKachel("ressourcen","Lernressourcen","Links, Videos und KI-Angebote pflegen")}
  </div>
- <h2 class="lx-h2">Thema wählen und Inhalte einstellen</h2><p class="lx-hint">Ein Klick öffnet das Thema. Mit „+ hinzufügen“ stellst du Dateien in den passenden Teil ein. Die Punkte zeigen, was schon da ist.</p>${lxLegende()}
- <div class="kw-wand lx-wahl">${lxThemaWahlen("inhalte")}</div></div>${footer()}`;
+ <h2 class="lx-h2">Thema wählen</h2><p class="lx-hint">Ein Klick öffnet das Thema. Dort stellst du mit „+ hinzufügen“ Dateien in den passenden Teil ein und planst Bausteine („Baustein einplanen“, Teil 4). Die Punkte zeigen, was schon da ist.</p>${lxLegende()}
+ <div class="kw-wand lx-wahl">${lxThemaWahlen("unterricht")}</div></div>${footer()}`;
 }
 
 /* ---------- Navigation je Rolle, Routen, Klicks ---------- */
@@ -23170,14 +23161,13 @@ function lxNavAktiv(seite,p){
  if(seite==="lernwerkstatt")return LW.includes(p);
  if(seite==="kompetenz")return["kompetenz","tests"].includes(p);
  if(seite==="lernstaende")return["lernstaende","kw-checkouts"].includes(p);
- if(seite==="lk-unterricht")return p==="lk-unterricht";
- if(seite==="lk-inhalte")return p==="lk-inhalte";
+ if(seite==="lk-unterricht")return p==="lk-unterricht"||p==="lk-inhalte";
  return false;
 }
 function lxRouten(){return{
  unterricht:renderUnterrichtsfaecher,"lw-ueben":renderLwUeben,"lw-ueben-pp":renderLwUebenPP,"lw-training":renderLwTraining,"lw-training-pp":renderLwTrainingPP,
  "lw-nachbereitung":renderLwNachbereitung,"lw-lernen":renderLwLernen,"lw-koop":renderLwKoop,tests:renderTests,kompetenz:renderKompetenzLx,
- lernstaende:renderLernstaendeLx,"kw-checkouts":renderLernstaendeLx,"lk-unterricht":renderLkUnterricht,"lk-inhalte":renderLkInhalte}}
+ lernstaende:renderLernstaendeLx,"kw-checkouts":renderLernstaendeLx,"lk-unterricht":renderLkUnterricht,"lk-inhalte":renderLkUnterricht}}
 document.addEventListener("click",async ev=>{
  const b=ev.target.closest&&ev.target.closest("[data-lx]");if(!b||!currentUser)return;
  const a=b.dataset.lx,id=b.dataset.id;
