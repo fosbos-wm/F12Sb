@@ -23202,7 +23202,7 @@ function lxAngeboteLb(ph,art){
 async function lxAngebotSeite(art,kicker,titel,text,zurueck,zurueckText,kopf){
  await kwLaden();
  const t=LX_CFG.phasen().slice().sort((a,b)=>a.lbNum-b.lbNum).map(ph=>lxAngeboteLb(ph,art)).join("");
- return`<div class="lx-seite"><button class="secondary" onclick="go('${zurueck}')">← ${esc(zurueckText)}</button>${pageHead(kicker,titel,text)}${kopf||""}${t?`<div class="kw-wand">${t}</div>`:`<div class="kw-card"><div class="kw-leer">Deine Lehrkraft hat hier noch nichts freigeschaltet. Sobald sie Angebote in der Lernlandkarte einstellt, erscheinen sie hier.</div></div>`}</div>${footer()}`;
+ return`<div class="lx-seite"><button class="secondary" onclick="go('${zurueck}')">← ${esc(zurueckText)}</button>${pageHead(kicker,titel,text)}${kopf||""}${t?`<div class="kw-wand lx-ang">${t}</div>`:`<div class="kw-card"><div class="kw-leer">Deine Lehrkraft hat hier noch nichts freigeschaltet. Sobald sie Angebote in der Lernlandkarte einstellt, erscheinen sie hier.</div></div>`}</div>${footer()}`;
 }
 async function renderLwUebenPP(){
  return lxAngebotSeite("ue","LERNWERKSTATT · 1","Pädagogik / Psychologie: Übungs- und Vertiefungsaufgaben","Alle Übungen und Vertiefungsaufgaben, die deine Lehrkraft freigeschaltet hat, geordnet nach Lernbereichen.","lw-ueben","Übungs- und Vertiefungsaufgaben");
