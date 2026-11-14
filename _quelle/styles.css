@@ -935,3 +935,83 @@ body.kw-voll .kw-th b{font-size:18px}
 @media(max-width:900px){body.kw-voll .kw-wand{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){body.kw-voll .kw-wand{grid-template-columns:1fr}}
 @media print{.kw-voll-btn,.kw-voll-exit{display:none!important}}
+
+/* ===== Umbau: Unterrichtsfächer, Themenseite, Lernwerkstatt, Lehrkräfte ===== */
+.lx-seite{display:block}
+.lx-h2{margin:26px 0 4px;font-size:20px}
+.lx-hint{margin:0 0 10px;color:var(--muted)}
+.lx-kacheln{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:14px 0 20px}
+.lx-kacheln.lx-oben{margin-top:6px}
+.lx-kachel{display:flex;flex-direction:column;gap:6px;text-align:left;font:inherit;color:#17384f;background:#fff;border:2px solid #B8C0C8;border-radius:14px;padding:16px 18px;min-height:96px;text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s,border-color .12s}
+.lx-kachel b{font-size:16px;line-height:1.25}
+.lx-kachel small{color:var(--muted);font-size:13px;line-height:1.35}
+.lx-kachel:hover,.lx-kachel:focus-visible{border-color:#7E8A96;box-shadow:0 6px 18px rgba(23,56,79,.12);transform:translateY(-2px)}
+.lx-kachel.lx-aus{opacity:.55;cursor:default}
+.lx-kachel.lx-aus:hover{transform:none;box-shadow:none;border-color:#B8C0C8}
+.lx-badge{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:#EEF1F4;color:#5A6772;border-radius:999px;padding:2px 10px}
+.lx-faecher .lx-kachel{min-height:130px}
+.lx-bar{display:block;height:8px;border-radius:99px;background:#E4EAF0;overflow:hidden;margin-top:4px}
+.lx-bar i{display:block;height:100%;background:#3A8FD4;border-radius:99px}
+.lx-bar-t{font-size:12px;color:var(--muted)}
+/* sieben Teile der Themenseite */
+.lx-weg{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.lx-chip{font:inherit;font-size:12.5px;font-weight:700;color:#17384f;background:#fff;border:2px solid var(--k);border-radius:999px;padding:5px 12px;cursor:pointer}
+.lx-chip b{display:inline-block;min-width:18px;height:18px;line-height:18px;text-align:center;border-radius:50%;background:var(--k);color:#fff;font-size:11px;margin-right:4px}
+.lx-chip:hover{background:#F4F8FB}
+.lx-sek{border:3px solid var(--k);border-radius:16px;background:#fff;margin:16px 0;padding:0 16px 14px;overflow:hidden;scroll-margin-top:12px}
+.lx-sek-k{display:flex;align-items:center;gap:12px;margin:0 -16px 12px;padding:12px 16px;background:var(--kb);border-bottom:1px solid var(--k)}
+.lx-sek-k h3{margin:0;font-size:17px}
+.lx-sek-k small{color:#4B5B68}
+.lx-nr{flex:none;width:30px;height:30px;border-radius:50%;background:var(--k);color:#fff;font-weight:900;display:grid;place-items:center;font-size:14px}
+.lx-sek .kw-stufe{margin:10px 0}
+.lx-sicht{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:12px;padding:10px 12px;border:1px dashed #B8C0C8;border-radius:12px;background:#FAFBFC}
+.lx-sicht small{color:var(--muted);flex-basis:100%}
+.lx-ab{color:#7A5A00;background:#FFF4D0;border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.lx-lock{opacity:.6}
+.lx-lock .kw-bx{opacity:.35}
+.kw-row.lx-lock{cursor:default}
+/* Lernstand */
+.lx-ls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:0 0 12px}
+.lx-ls-z{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#FFFDF9}
+.lx-ls-z span{font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#7A5A2A}
+.lx-ls-z b{font-size:16px}
+.lx-ls-z small{color:var(--muted)}
+.lx-selbst{margin:8px 0 12px}
+.lx-selbst div{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.lx-sb{font:inherit;font-size:13px;font-weight:700;padding:7px 14px;border-radius:999px;border:2px solid #F28A24;background:#fff;color:#8A4A08;cursor:pointer}
+.lx-sb.an,.lx-sb:hover{background:#F28A24;color:#fff}
+.lx-ueben{margin:10px 0;padding:12px 16px;border-radius:14px;border:2px solid #F28A24;background:#FEF2E5}
+.lx-ueben.ok{border-color:#86CC6A;background:#F0FAEB}
+.lx-ueben ul{margin:6px 0 0;padding-left:20px}
+.lx-ueben li{margin:4px 0}
+.lx-offen-l{margin:4px 0 8px;padding-left:18px}
+.lx-ok{margin:6px 0;font-weight:700;color:#2E7D57}
+/* Lehrkräfte */
+.lx-legende{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 12px;font-size:12.5px;color:#4B5B68}
+.lx-legende span{display:inline-flex;align-items:center;gap:5px}
+.lx-pt{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px solid var(--k);background:#fff}
+.lx-pt.an{background:var(--k)}
+.lx-pts{display:inline-flex;gap:3px;align-items:center}
+.lx-eintritt{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.lx-eintritt select{flex:1 1 260px;min-width:0}
+.nav-gruppe{font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#7E8A96;padding:12px 12px 4px}
+.nav-gruppe[hidden],.nav-link[hidden]{display:none}
+/* Verstärkungen: mehrere Varianten */
+.motivations-karte.lxv2 .motivations-karte-inner{background:linear-gradient(135deg,#3FA66A,#1598d1)}
+.motivations-karte.lxv3 .motivations-karte-inner{background:linear-gradient(135deg,#F28A24,#E0457B)}
+.motivations-karte.lxv4 .motivations-karte-inner{background:linear-gradient(135deg,#6C3483,#F0C43C);color:#fff}
+.motivations-karte.lxv2 .motivations-emoji{display:inline-block;animation:lxDreh .7s ease-out}
+.motivations-karte.lxv3 .motivations-emoji{display:inline-block;animation:lxHupf .6s ease-out}
+.motiv-mini.lxm2{border-left-color:#3FA66A}
+.motiv-mini.lxm3{border-left-color:#F28A24;animation:motivMiniIn .35s cubic-bezier(.34,1.56,.64,1),motivMiniOut .3s ease-in 2.9s forwards}
+.motiv-konfetti i.st{width:14px;height:14px;border-radius:0;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.motiv-konfetti i.rd{width:10px;height:10px;border-radius:50%}
+@keyframes lxDreh{from{transform:rotate(-200deg) scale(.3)}to{transform:none}}
+@keyframes lxHupf{0%{transform:translateY(24px) scale(.5)}60%{transform:translateY(-10px) scale(1.15)}100%{transform:none}}
+@media(prefers-reduced-motion:reduce){.motivations-karte .motivations-emoji{animation:none!important}}
+.kw-wand.lx-wahl{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr))}
+.lx-wahl .kw-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lx-wahl .kw-row span{flex:1 1 180px;min-width:0;text-align:left}
+.lx-wahl .kw-row em{flex:none;min-width:34px}
+.lx-wahl .kw-row small{flex:none}
+@media(max-width:700px){.kw-wand.lx-wahl{grid-template-columns:1fr}}

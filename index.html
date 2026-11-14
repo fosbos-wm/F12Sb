@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://securetoken.googleapis.com" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20261111d">
+<link rel="stylesheet" href="styles.css?v=20261114a">
 
 <!-- App-Icon fürs Homescreen (Handy/iPad) -->
 <link rel="manifest" href="manifest.json">
@@ -132,10 +132,15 @@
       <div class="side-title">CAMPUS</div>
       <nav>
         <a href="#news" data-page="news" class="nav-link active">Startseite</a>
-        <a href="#start" data-page="start" class="nav-link">Lernlandkarte</a>
-        <a href="#lernstaende" data-page="lernstaende" class="nav-link">Lernstände</a>
+        <div class="nav-gruppe lx-lehrer" hidden>Lehrkräfte</div>
+        <a href="#lk-unterricht" data-page="lk-unterricht" class="nav-link lx-lehrer" hidden>Unterricht erstellen</a>
+        <a href="#lk-inhalte" data-page="lk-inhalte" class="nav-link lx-lehrer" hidden>Inhalte einstellen</a>
+        <a href="#lernstaende" data-page="lernstaende" class="nav-link lx-lehrer" hidden>Lernstände prüfen</a>
+        <a href="#team" data-page="team" class="nav-link lx-lehrer" hidden>Lehrkräfte Klassenteam</a>
+        <div class="nav-gruppe lx-lehrer" hidden>So sehen es die Schüler:innen</div>
+        <a href="#unterricht" data-page="unterricht" class="nav-link">Unterrichtsfächer</a>
+        <a href="#lernstaende" data-page="lernstaende" class="nav-link lx-schueler">Lernstände</a>
         <a href="#lernwerkstatt" data-page="lernwerkstatt" class="nav-link">Lernwerkstatt</a>
-        <a href="#journal" data-page="journal" class="nav-link">Lernjournal</a>
         <a href="#kompetenz" data-page="kompetenz" class="nav-link">Kompetenzwerkstatt</a>
         <a href="#klassenteam" data-page="klassenteam" class="nav-link">Unser Klassenteam</a>
         <a href="#resilienz" data-page="resilienz" class="nav-link">Resilienz & Respressi</a>
@@ -155,7 +160,7 @@
 <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" id="modal"></div></div>
 <div class="toast" id="toast"></div>
 
-<script type="module" src="app.js?v=20261111d"></script>
+<script type="module" src="app.js?v=20261114a"></script>
 <script>
 /* Ladehinweis: erscheint, wenn die App nach 15 Sekunden noch nicht mit Firebase verbunden ist */
 (function(){
