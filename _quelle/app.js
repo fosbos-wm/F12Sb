@@ -21976,7 +21976,7 @@ async function renderKwProjekt(){
  await kwLaden();
  const ph=kwPhase(activeKwLb);if(!ph)return await renderKachelwand();
  const F=kwFarbe(ph.lbNum),lehrer=kwLehrer();
- if(!lehrer&&!lxPhaseSichtbar(ph))return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">${kwSchuelerBanner()}<button class="secondary" data-kw="wand">← Lernlandkarte</button><header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)}</small><h1>Projekt</h1><p>Das Projekt wird zwei Wochen vorher freigeschaltet: <b>ab ${esc(fmtKurz(LX_CFG.projektStart(ph)))}</b>.</p></header></div>${footer()}`;
+ if(!lehrer&&!lxPhaseSichtbar(ph))return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">${kwSchuelerBanner()}<button class="secondary" data-kw="wand">← Lernlandkarte</button><header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)}</small><h1>Projekt</h1><p>Das Projekt <b>folgt</b> und wird zwei Wochen vorher freigeschaltet.</p></header></div>${footer()}`;
  const pm=PPM.liste.filter(m=>(m.modul==="projekt"||m.modul==="experiment")&&Number(m.lb)===ph.lbNum);
  const projM=pm.find(m=>m.modul==="projekt"&&!m.projektId);
  const dateien=[];
@@ -22595,7 +22595,7 @@ function lxThemaSichtbar(e){
  if(kwLehrer()||!e||e.leistung)return true;
  const s=lxThemaStart(e);return !s||s<=lxPlus(LX_VORLAUF_TAGE);
 }
-function lxSichtText(e){const s=lxThemaStart(e);return s?"ab "+fmtKurz(s)+" sichtbar":"bald sichtbar"}
+function lxSichtText(e){return"folgt"}
 function lxPhaseSichtbar(ph){
  if(kwLehrer())return true;
  const s=LX_CFG.projektStart(ph);return !s||s<=lxPlus(LX_VORLAUF_TAGE);
@@ -22605,7 +22605,7 @@ function lxGesperrtRow(e){
 }
 function lxGesperrtSeite(e,ph,F){
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">${kwSchuelerBanner()}<button class="secondary" data-kw="wand">← Lernlandkarte</button>
- <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)}</small><h1>${esc(kwKurz(e))}</h1><p>Dieses Thema wird zwei Wochen vorher freigeschaltet: <b>${esc(lxSichtText(e))}</b>. Bis dahin kannst du an den Themen davor weiterarbeiten.</p></header></div>${footer()}`;
+ <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)}</small><h1>${esc(kwKurz(e))}</h1><p>Dieses Thema wird zwei Wochen vorher freigeschaltet: <b>folgt</b>. Bis dahin kannst du an den Themen davor weiterarbeiten.</p></header></div>${footer()}`;
 }
 async function lxSichtSetzen(themaId,datum){
  if(!isTeacher())return;
@@ -22729,14 +22729,14 @@ function kwKachelHTML(ph,lehrer){
  const rows=themen.map(e=>{
   if(!lehrer&&!lxThemaSichtbar(e))return lxGesperrtRow(e);
   const ok=!lehrer&&kwErledigt(e.id),nm=(KW.mat[e.id]||[]).length+kwModuleThema(e.id).length;
-  const ab=lehrer&&lxThemaStart(e)>lxPlus(LX_VORLAUF_TAGE)?`<small class="lx-ab" title="Schüler:innen sehen dieses Thema erst ab diesem Datum">Schüler ab ${esc(fmtKurz(lxThemaStart(e)))}</small>`:"";
+  const ab="";
   return`<button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx${ok?" d":""}"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span>${ab}${nm?`<small>${nm}</small>`:""}</button>`;
  }).join("");
  const projStart=LX_CFG.projektStart(ph);
  const projSichtbar=lehrer||lxPhaseSichtbar(ph);
  const projKnopf=projSichtbar
   ?`<button type="button" class="kw-proj" data-kw="projekt" data-lb="${ph.lbNum}"><span class="chip prj">Projekt</span><b>${esc(projTitel)}</b><small>${fmtKurz(ph.projektStart)}–${fmtKurz(ph.projektEnde)}</small></button>`
-  :`<div class="kw-proj lx-lock"><span class="chip prj">Projekt</span><b>${esc(projTitel)}</b><small class="lx-ab">ab ${esc(fmtKurz(projStart))} sichtbar</small></div>`;
+  :`<div class="kw-proj lx-lock"><span class="chip prj">Projekt</span><b>${esc(projTitel)}</b><small class="lx-ab">folgt</small></div>`;
  return`<article class="kw-tile${naechst?" kw-next":""}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
   <header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${status?`<span class="kw-st">${naechst?"als Nächstes":status}</span>`:""}</header>
   ${projKnopf}
