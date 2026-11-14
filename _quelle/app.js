@@ -23057,24 +23057,26 @@ async function renderLernstaendeLx(){
 async function lxOffenKachel(){
  try{
   await kwLaden();
-  if(isTeacher()&&kwLehrer()){
+  if(isTeacher()&&kwLehrer()&&window.__lxBereich!=="s"){
    const b=await lxHinweisBox();
    return`<div class="card card-compact lx-offen" style="border-left:4px solid ${LXF[7].c};margin-bottom:16px"><h3>Lernstände der Klasse</h3>${b}<div class="kw-aktionen"><button class="secondary" onclick="go('lernstaende')">Lernstände prüfen</button></div></div>`;
   }
   const L=await lxMeinLaden(),T=lxMeineThemen(L),heute=lxHeute(),z=[];
   lxCoHinweise().filter(h=>/läuft jetzt/.test(h.t)).forEach(h=>z.push({t:h.t,go:h.go}));
-  const aktuell=T.filter(x=>!x.m.erledigt&&(lxThemaStart(x.e)||"")<=heute).slice(-3);
-  aktuell.forEach(x=>{
+  const jetzt=new Date(heute+"T12:00:00"),wt=(jetzt.getDay()+6)%7;
+  const mo=lxIso(new Date(jetzt.getTime()-wt*864e5)),so=lxIso(new Date(jetzt.getTime()+(6-wt)*864e5));
+  const woche=T.filter(x=>{const st=lxThemaStart(x.e)||"";return st<=so&&st>=mo}).slice(-4);
+  let total=0,done=0;const offen=[];
+  woche.forEach(x=>{
    const n=kwKurz(x.e);
-   if(!x.m.c)z.push({t:`Wissens-Check „${n}“ fehlt noch`,thema:x.e.id});
-   else if(!x.m.ubN)z.push({t:`Übungen zu „${n}“ noch nicht gemacht`,thema:x.e.id});
-   else if(!x.m.selbst)z.push({t:`Selbsteinschätzung zu „${n}“ fehlt`,thema:x.e.id});
-   else if(x.m.ampel&&x.m.ampel!=="gruen")z.push({t:`„${n}“ noch üben: ${lxProz(x.m.q)} sicher`,thema:x.e.id});
+   [[x.m.c,`Wissens-Check „${n}“`],[x.m.ubN,`Übungen zu „${n}“`],[x.m.selbst,`Selbsteinschätzung „${n}“`]].forEach(([ok,t])=>{total++;if(ok)done++;else offen.push({t,thema:x.e.id})});
   });
-  const j=await lxJournalHeuteOffen();if(j)z.push({t:"Lernjournal: heute noch kein Eintrag",go:"journal"});
-  const zeigen=z.slice(0,4);
-  const inner=zeigen.length?`<ul class="lx-offen-l">${zeigen.map(x=>`<li><button type="button" class="text-button" ${x.thema?`data-kw="thema" data-id="${esc(x.thema)}"`:`onclick="go('${x.go}')"`}>${esc(x.t)}</button></li>`).join("")}</ul>${z.length>4?`<small>und ${z.length-4} weitere</small>`:""}`:`<p class="lx-ok">Alles Wichtige ist erledigt. Stark! 🎉</p>`;
-  return`<div class="card card-compact lx-offen" style="border-left:4px solid ${LXF[7].c};margin-bottom:16px"><h3>Das fehlt dir noch</h3>${inner}<div class="kw-aktionen"><button class="secondary" onclick="go('lernstaende')">Meine Lernstände</button></div></div>`;
+  lxCoHinweise().filter(h=>/läuft jetzt/.test(h.t)).forEach(h=>{total++;offen.push({t:h.t,go:h.go})});
+  const j=await lxJournalHeuteOffen();if(j){total++;offen.push({t:"Lernjournal heute",go:"journal"})}
+  const pr=total?Math.round(done/total*100):100;
+  const zeigen=offen.slice(0,3);
+  const liste=zeigen.length?`<ul class="lx-offen-l" style="margin:8px 0 0;padding-left:18px;font-size:13px">${zeigen.map(x=>`<li><button type="button" class="text-button" ${x.thema?`data-kw="thema" data-id="${esc(x.thema)}"`:`onclick="go('${x.go}')"`}>${esc(x.t)}</button></li>`).join("")}</ul>${offen.length>3?`<small>und ${offen.length-3} weitere</small>`:""}`:`<p class="lx-ok" style="margin:8px 0 0">Diese Woche ist alles erledigt. Stark! 🎉</p>`;
+  return`<div class="card card-compact lx-offen" style="border-left:4px solid ${LXF[7].c};margin-bottom:16px;max-width:420px"><h3 style="margin:0 0 8px;font-size:15px">Diese Woche noch zu erledigen</h3><div style="display:flex;align-items:center;gap:10px"><div style="flex:1;height:10px;background:#e3ebf2;border-radius:6px;overflow:hidden"><div style="width:${pr}%;height:100%;background:#3fa66a"></div></div><b style="font-size:13px">${pr} %</b></div><small>${done} von ${total} Schritten geschafft</small>${liste}</div>`;
  }catch(e){console.warn("Offen-Kachel:",e);return""}
 }
 async function lxJournalHeuteOffen(){
