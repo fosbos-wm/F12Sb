@@ -22939,25 +22939,6 @@ async function renderLwUeben(){
   +lxKachel("","Mathematik","Wird vorbereitet",{data:'data-lx="mathe"',extra:'<span class="lx-badge">bald</span>'})
   +lxKachel("","Weitere Fächer","Folgen später",{aus:true}));
 }
-// Alle Themen mit Übungs- und Vertiefungsangeboten, geordnet nach Lernbereichen
-async function renderLwUebenPP(){
- await kwLaden();await lxTitelLaden().catch(()=>{});
- const lehrer=kwLehrer(),L=lehrer?null:await lxMeinLaden();
- const D=L?{ci:Object.values(L.ci),ub:L.ub,fa:L.fa,fort:{[currentUser.uid]:KW.fort||{}}}:null;
- const bl=LX_CFG.phasen().slice().sort((a,b)=>a.lbNum-b.lbNum).map(ph=>{
-  const F=kwFarbe(ph.lbNum);
-  const rows=kwThemenVonPhase(ph).map(e=>{
-   if(!lehrer&&!lxThemaSichtbar(e))return lxGesperrtRow(e);
-   const mats=(KW.mat[e.id]||[]).filter(m=>m.kategorie==="uebung"||/^vertiefung/.test(m.kategorie||""));
-   const fa=kwModuleThema(e.id).filter(m=>m.modul==="fachaufsatz"||m.modul==="apt").length;
-   const m=D?lxMetrik(currentUser.uid,e.id,D):null;
-   const st=m&&m.ubN?`${lxPunkt(lxAmpel(m.ubErst),"")} ${lxProz(m.ubErst)} beim 1. Versuch`:(m?"noch nicht geübt":"");
-   return`<button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx${m&&m.erledigt?" d":""}"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span><small>${mats.length+fa} Angebote${st?" · "+st:""}</small></button>`;
-  }).join("");
-  return`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum}</small><b>${esc(ph.lbTitel)}</b></div></header><div class="kw-rows">${rows}</div></article>`;
- }).join("");
- return`<div class="lx-seite"><button class="secondary" onclick="go('lw-ueben')">← Übungs- und Vertiefungsaufgaben</button>${pageHead("LERNWERKSTATT · 1","Pädagogik / Psychologie: Üben und Vertiefen","Hier findest du je Thema die Übungen und die Vertiefung in drei Schwierigkeitsgraden. Ein Klick öffnet das Thema (Teil 3).")}<div class="kw-wand">${bl}</div></div>${footer()}`;
-}
 async function renderLwTraining(){
  return lxSeite("LERNWERKSTATT · 2","Training von Kompetenzen zur Abschlussprüfung","Wähle dein Fach.","lernwerkstatt","Lernwerkstatt",
   lxKachel("lw-training-pp","Pädagogik / Psychologie","Fachaufsatztraining und Nachbereitung von Kurzarbeiten und Schulaufgaben")
@@ -22965,7 +22946,7 @@ async function renderLwTraining(){
 }
 async function renderLwTrainingPP(){
  return lxSeite("LERNWERKSTATT · 2","Pädagogik / Psychologie: Prüfungstraining","Übe gezielt, was in Kurzarbeit, Schulaufgabe und Abschlussprüfung verlangt wird.","lw-training","Training von Kompetenzen",
-  lxKachel("fachaufsatz","Fachaufsatztraining","Fachaufsatz an echten Prüfungsaufgaben üben")
+  lxKachel("lw-fachaufsatz","Fachaufsatztraining","Alle freigeschalteten Fachaufsätze und Trainings, nach Lernbereich")
   +lxKachel("lw-nachbereitung","Nachbereitung von Kurzarbeiten und Schulaufgaben","Trainings nach der Rückgabe: Struktur, Theorie, Transfer, Schreiben"));
 }
 async function renderLwNachbereitung(){
@@ -23156,7 +23137,7 @@ function lxNavRollen(){
  const fpa=sb.querySelector('[data-page="praktikum"]');if(fpa)fpa.hidden=!LX_CFG.fpa;
 }
 function lxNavAktiv(seite,p){
- const LW=["lernwerkstatt","lw-ueben","lw-ueben-pp","lw-training","lw-training-pp","lw-nachbereitung","lw-lernen","lw-koop","journal","fachaufsatz","fachaufsatz-board","whiteboard","whiteboard-board","didaktik","tafel","fach","faecher","lernpfad","lernstrategien","metakognition","lernstand","zuordnung","lernwerkzeuge","methoden","impulse","kollaboration","lerncoaching","fragenhilfe","uhr-timer","ki-lernen","qr-code","karteikarten","karteikarten-board","glossar"];
+ const LW=["lernwerkstatt","lw-ueben","lw-ueben-pp","lw-training","lw-training-pp","lw-fachaufsatz","lw-nachbereitung","lw-lernen","lw-koop","journal","fachaufsatz","fachaufsatz-board","whiteboard","whiteboard-board","didaktik","tafel","fach","faecher","lernpfad","lernstrategien","metakognition","lernstand","zuordnung","lernwerkzeuge","methoden","impulse","kollaboration","lerncoaching","fragenhilfe","uhr-timer","ki-lernen","qr-code","karteikarten","karteikarten-board","glossar"];
  if(seite==="unterricht")return["unterricht","start","kw-thema","kw-projekt","kw-fortschritt"].includes(p);
  if(seite==="lernwerkstatt")return LW.includes(p);
  if(seite==="kompetenz")return["kompetenz","tests"].includes(p);
@@ -23166,7 +23147,7 @@ function lxNavAktiv(seite,p){
 }
 function lxRouten(){return{
  unterricht:renderUnterrichtsfaecher,"lw-ueben":renderLwUeben,"lw-ueben-pp":renderLwUebenPP,"lw-training":renderLwTraining,"lw-training-pp":renderLwTrainingPP,
- "lw-nachbereitung":renderLwNachbereitung,"lw-lernen":renderLwLernen,"lw-koop":renderLwKoop,tests:renderTests,kompetenz:renderKompetenzLx,
+ "lw-nachbereitung":renderLwNachbereitung,"lw-fachaufsatz":renderLwFachaufsatz,"lw-lernen":renderLwLernen,"lw-koop":renderLwKoop,tests:renderTests,kompetenz:renderKompetenzLx,
  lernstaende:renderLernstaendeLx,"kw-checkouts":renderLernstaendeLx,"lk-unterricht":renderLkUnterricht,"lk-inhalte":renderLkUnterricht}}
 document.addEventListener("click",async ev=>{
  const b=ev.target.closest&&ev.target.closest("[data-lx]");if(!b||!currentUser)return;
@@ -23198,6 +23179,42 @@ const LX_MOTIV_L={
  besonders:[{e:"🏆",t:"Das Thema ist komplett vorbereitet."},{e:"🎉",t:"Stark! Die Klasse kann loslegen."},{e:"🌟",t:"Ein Test ist live. Viel Erfolg!"}],
  bonus:[{e:"🎁",t:"Überraschung: Du bist heute richtig produktiv."},{e:"🦉",t:"Weitsicht zahlt sich aus."},{e:"🍀",t:"Das merken die Schüler:innen."}]
 };
+
+/* ---------- Übersichten „Übungsaufgaben" und „Fachaufsatztraining": alles, was freigeschaltet ist, nach Lernbereich, im Farbschema der Lernlandkarte ---------- */
+const LX_UE_KAT=[["uebung","Übungsaufgaben"],["vertiefung1","Vertiefung · Stufe 1"],["vertiefung2","Vertiefung · Stufe 2"],["vertiefung3","Vertiefung · Stufe 3"]];
+function lxFaModZeile(m){const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);return`<button type="button" class="kw-datei" data-kw="modul" data-id="${esc(m.id)}"><span>${esc(m.titel||T[0])}</span><small>${f&&f.done?"abgeschlossen":(f&&f.frac>0?Math.round(f.frac*100)+" % bearbeitet":(kwLehrer()?"Öffnen":"Starten"))}</small></button>`}
+// Ein Lernbereich als Kachel; pro Thema nur die Angebote, die die Lehrkraft schon eingestellt hat
+function lxAngeboteLb(ph,art){
+ const F=kwFarbe(ph.lbNum),lehrer=kwLehrer();
+ const bl=kwThemenVonPhase(ph).map(e=>{
+  if(!lehrer&&!lxThemaSichtbar(e))return"";
+  const mats=KW.mat[e.id]||[];
+  const fa=kwModuleThema(e.id).filter(m=>m.modul==="fachaufsatz"||m.modul==="apt");
+  let inner="";
+  if(art==="ue"){
+   inner=LX_UE_KAT.map(([k,l])=>{const x=mats.filter(m=>m.kategorie===k);return x.length?`<div class="kw-stufe"><b>${esc(l)}</b>${x.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join("")}</div>`:""}).join("");
+  }else inner=fa.length?`<div class="kw-dateien">${fa.map(lxFaModZeile).join("")}</div>`:"";
+  if(!inner)return"";
+  return`<div class="lx-thema-b"><button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx${!lehrer&&kwErledigt(e.id)?" d":""}"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span></button>${inner}</div>`;
+ }).join("");
+ return bl?`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div></header><div class="kw-rows">${bl}</div></article>`:"";
+}
+async function lxAngebotSeite(art,kicker,titel,text,zurueck,zurueckText,kopf){
+ await kwLaden();
+ const t=LX_CFG.phasen().slice().sort((a,b)=>a.lbNum-b.lbNum).map(ph=>lxAngeboteLb(ph,art)).join("");
+ return`<div class="lx-seite"><button class="secondary" onclick="go('${zurueck}')">← ${esc(zurueckText)}</button>${pageHead(kicker,titel,text)}${kopf||""}${t?`<div class="kw-wand">${t}</div>`:`<div class="kw-card"><div class="kw-leer">Deine Lehrkraft hat hier noch nichts freigeschaltet. Sobald sie Angebote in der Lernlandkarte einstellt, erscheinen sie hier.</div></div>`}</div>${footer()}`;
+}
+async function renderLwUebenPP(){
+ return lxAngebotSeite("ue","LERNWERKSTATT · 1","Pädagogik / Psychologie: Übungs- und Vertiefungsaufgaben","Alle Übungen und Vertiefungsaufgaben, die deine Lehrkraft freigeschaltet hat, geordnet nach Lernbereichen.","lw-ueben","Übungs- und Vertiefungsaufgaben");
+}
+async function renderLwFachaufsatz(){
+ await kwLaden();
+ const infos=await Promise.all(KW_TRAININGS_ALLE.map(x=>einarbeitungInfo(x).catch(()=>null)));
+ const z=KW_TRAININGS_ALLE.map((x,i)=>{const n=infos[i];if(!n||n.entwurf)return"";const h=KW_TR_HINT[x];return`<button type="button" class="kw-datei" data-kw="ea" data-id="${esc(x)}"><span>${esc(n.titel)}</span><small>${h?esc(h)+" · ":""}${n.aufgaben?n.aufgaben+" Aufgaben":"Selbstlernkurs"}</small></button>`}).join("");
+ const tr=z?lxSek(3,"Trainings","Selbstlernkurse zu Struktur, Theorie, Fallbezug und Schreiben",`<div class="kw-dateien">${z}</div>`):"";
+ const nb=`<div class="lx-kacheln">${lxKachel("lw-nachbereitung","Nachbereitung von Kurzarbeiten und Schulaufgaben","Trainings nach der Rückgabe")}</div>`;
+ return lxAngebotSeite("fa","LERNWERKSTATT · 2","Fachaufsatztraining","Alle Fachaufsätze und Trainings, die deine Lehrkraft freigeschaltet hat. Die Fachaufsätze sind nach Lernbereichen geordnet.","lw-training-pp","Prüfungstraining",tr+nb);
+}
 
 /* ---------- Verstärkungen auch für Lehrkräfte: erscheinen nach Speichern, Anlegen, Freischalten (zufällig, nicht jedes Mal) ---------- */
 {const toast0=toast;toast=function(t){

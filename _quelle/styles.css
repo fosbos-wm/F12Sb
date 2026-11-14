@@ -1015,3 +1015,4 @@ body.kw-voll .kw-th b{font-size:18px}
 .lx-wahl .kw-row em{flex:none;min-width:34px}
 .lx-wahl .kw-row small{flex:none}
 @media(max-width:700px){.kw-wand.lx-wahl{grid-template-columns:1fr}}
+.lx-thema-b{margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(0,0,0,.08)}.lx-thema-b>.kw-dateien,.lx-thema-b>.kw-stufe{margin:2px 0 4px 8px}
