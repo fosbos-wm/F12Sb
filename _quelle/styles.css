@@ -1036,3 +1036,51 @@ body.kw-voll .kw-th b{font-size:18px}
 .lx-ang .kw-datei small{flex:none;max-width:42%;font-size:11.5px;font-weight:700;line-height:1.25;white-space:normal;text-align:center;color:var(--t);background:var(--bg);border-radius:999px;padding:4px 10px}
 .lx-ang .lx-thema-b>.kw-stufe{margin-top:14px}
 .lx-ang .lx-thema-b>.kw-row+.kw-stufe,.lx-ang .lx-thema-b>.kw-row+.kw-dateien{margin-top:4px}
+
+/* Lernimpulse: besser lesbar, Schreibfeld klar erkennbar */
+.lxi{display:flex;flex-direction:column;gap:14px}
+.lxi-titel{margin:0;font-size:26px;line-height:1.25}
+.lxi-zufall{margin:0;padding:10px 14px;border-radius:12px;background:#FFF4D0;color:#5B4300}
+.lxi-b{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;border:1px solid var(--line);background:#fff}
+.lxi-b>div{flex:1;min-width:0}
+.lxi-b b{display:block;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.lxi-b p{margin:0;line-height:1.6;font-size:16px}
+.lxi-n{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:14px;background:#E4EAF0;color:#17384f}
+.lxi-task{font-size:19px!important;line-height:1.55!important;font-weight:600}
+.lxi-aufgabe{background:#EEF6FC;border-color:#B7D6EE}.lxi-aufgabe .lxi-n{background:#3A8FD4;color:#fff}
+.lxi-hinweis{background:#FAFBFC}
+.lxi-schreiben{background:#F1FAEC;border:2px solid #86CC6A}.lxi-schreiben .lxi-n{background:#4FA72E;color:#fff}
+.lxi-schreiben label b{color:#2F6B16;font-size:13.5px;margin-bottom:8px}
+.lxi-schreiben textarea{display:block;width:100%;min-height:130px;box-sizing:border-box;padding:14px 16px;font:inherit;font-size:16px;line-height:1.55;color:var(--ink);background:#fff;border:2px dashed #86CC6A;border-radius:12px;resize:vertical}
+.lxi-schreiben textarea:focus{outline:none;border-style:solid;border-color:#4FA72E;box-shadow:0 0 0 4px rgba(79,167,46,.18)}
+.lxi-schreiben textarea::placeholder{color:#7A8A74}
+.lxi-danach{background:#FFFDF6;border-color:#EBDDA8}.lxi-danach .lxi-n{background:#E3B93C;color:#fff}
+.lxi-aktion{margin-top:4px;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+/* Impuls-Karten und Bereiche mit mehr Luft */
+.impulse-choice-grid{gap:20px}
+.impulse-section{margin-top:28px}
+#impulseCards{gap:18px}
+.impulse-card{gap:6px;padding:20px 20px 18px!important}
+.impulse-card strong{font-size:17px;line-height:1.3}
+.impulse-card small{font-size:14px;line-height:1.55;color:var(--muted)}
+.impulse-card .pill{margin-top:12px}
+.impulse-category{padding:16px 16px!important}
+.impulse-category small{display:block;margin-top:6px;line-height:1.45}
+.impulse-progress-card{margin-top:20px}
+
+/* Tests: eine Spalte, jeder Lernbereich als breite Karte mit klaren Zeilen */
+.lx-tests{display:flex;flex-direction:column;gap:18px;margin-top:18px}
+.lx-tests .kw-tile{display:block;min-width:0}
+.lx-tests .kw-th{padding:14px 18px}
+.lx-tests .ls-liste{padding:4px 18px 8px;background:#fff;border-radius:0 0 14px 14px}
+.lx-tests .ls-zeile{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px 18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.lx-tests .ls-zeile:last-child{border-bottom:0}
+.lx-tests .ls-t b{display:block;font-size:15.5px;font-weight:700;line-height:1.35}
+.lx-tests .ls-t small{display:block;margin-top:3px;font-size:13px;color:var(--muted)}
+.lx-tests .ls-a{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.lx-tests .ls-a button{padding:8px 16px;font-size:14px;white-space:nowrap}
+.lx-tests .co-chip{justify-self:start;white-space:nowrap}
+.lx-t-leer{padding:14px 0!important;margin:0!important;text-align:left!important}
+@media(max-width:700px){.lx-tests .ls-zeile{grid-template-columns:1fr}.lx-tests .ls-a{justify-content:flex-start}}
+.lx-tests .kw-th{min-height:0;align-items:center}
+.lx-eintritt select{padding:11px 12px;font:inherit;border:2px solid #B8A2DC;border-radius:10px;background:#fff}

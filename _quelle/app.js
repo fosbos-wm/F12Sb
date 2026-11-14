@@ -19917,15 +19917,14 @@ function openLernimpuls(id,fromWheel=false){
  const i=lernImpulse.find(x=>x.id===id);if(!i)return;
  const c=lernImpulseCategory(i.cat);
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
- <div class="kicker">${fromWheel?"ZUFALLSIMPULS":"GEZIELTER IMPULS"} · ${c.icon} ${esc(c.title)}</div>
- <h2>${esc(i.title)}</h2>
- ${fromWheel?`<div class="notice"><strong> Dieser Impuls ist jetzt dran.</strong><p>Du hast dich überraschen lassen –
-probiere genau diesen Impuls aus.</p></div>`:""}
- <div class="card"><span class="badge">DEINE AUFGABE</span><p style="font-size:19px;line-height:1.55;margin- top:10px">${esc(i.task)}</p></div>
- <div class="notice"><strong> Hinweis</strong><p>${esc(i.hint)}</p></div>
- <label> Deine kurze Notiz<textarea id="impulseAnswer"rows="4"placeholder="Was hast du gemacht, erkannt oder herausgefunden?"></textarea></label>
- <div class="notice"><strong> Danach</strong><p>${esc(i.next)}</p></div>
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Später</button><button class="primary"onclick="completeLernimpuls('${i.id}')"> Impuls gemacht</button></div>`);
+ <div class="lxi"><div class="kicker">${fromWheel?"ZUFALLSIMPULS":"GEZIELTER IMPULS"} · ${c.icon} ${esc(c.title)}</div>
+ <h2 class="lxi-titel">${esc(i.title)}</h2>
+ ${fromWheel?`<p class="lxi-zufall"><strong>Dieser Impuls ist jetzt dran.</strong> Du hast dich überraschen lassen. Probiere genau diesen aus.</p>`:""}
+ <section class="lxi-b lxi-aufgabe"><span class="lxi-n">1</span><div><b>Deine Aufgabe</b><p class="lxi-task">${esc(i.task)}</p></div></section>
+ <section class="lxi-b lxi-hinweis"><span class="lxi-n">2</span><div><b>Hinweis</b><p>${esc(i.hint)}</p></div></section>
+ <section class="lxi-b lxi-schreiben"><span class="lxi-n">3</span><div><label for="impulseAnswer"><b>Hier schreibst du deine Notiz</b></label><textarea id="impulseAnswer" rows="5" placeholder="Tippe hier: Was hast du gemacht, erkannt oder herausgefunden?"></textarea></div></section>
+ <section class="lxi-b lxi-danach"><span class="lxi-n">4</span><div><b>Danach</b><p>${esc(i.next)}</p></div></section>
+ <div class="form-actions lxi-aktion"><button class="secondary"onclick="closeModal()">Später</button><button class="primary"onclick="completeLernimpuls('${i.id}')">Impuls gemacht</button></div></div>`);
 }
 
 function completeLernimpuls(id){
@@ -23004,12 +23003,12 @@ async function renderTests(){
   const cs=alle.filter(c=>Number(c.lbNum)===n),ts=LT.tests.filter(t=>Number(t.lb)===n);
   if(!cs.length&&!ts.length&&!lehrer)return"";
   const zt=ts.map(t=>{const a=LT.abg[t.id];return`<div class="ls-zeile"><div class="ls-t"><b>${esc(t.titel)}</b><small>Digitaler Test · ${ltBE(t)} BE · ${esc(lehrer?(t.status==="geschlossen"?"geschlossen":"offen"):ltStatus(t,a))}</small></div><div class="ls-a"><button class="${lehrer?"secondary":"primary"}" data-ls="${lehrer?"erg":"open"}" data-id="${esc(t.id)}">${lehrer?"Ergebnisse":(a&&a.abgegeben?"Ansehen":"Öffnen")}</button></div></div>`}).join("");
-  return`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${n}</small><b>${esc(p.lbTitel)}</b></div></header><div class="ls-liste">${cs.map(c=>lxCoZeile(c,co,lehrer)).join("")}${zt}${(!cs.length&&!ts.length)?`<div class="kw-leer">Noch kein Test in diesem Lernbereich.</div>`:""}</div></article>`;
+  return`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${n}</small><b>${esc(p.lbTitel)}</b></div></header><div class="ls-liste">${cs.map(c=>lxCoZeile(c,co,lehrer)).join("")}${zt}${(!cs.length&&!ts.length)?`<div class="kw-leer lx-t-leer">Noch kein Test in diesem Lernbereich.</div>`:""}</div></article>`;
  };
  const verw=lehrer?`<div class="kw-aktionen"><button class="primary" data-lx="co" data-op="neu">＋ Neuer Check-out (K-Prim)</button><button class="secondary" data-ls="testneu">＋ Neuer digitaler Test</button><button class="secondary" onclick="go('lernstaende')">Ergebnisse in den Lernständen</button></div>`:"";
  return`<div class="lx-seite"><button class="secondary" onclick="go('kompetenz')">← Kompetenzwerkstatt</button>${pageHead("KOMPETENZWERKSTATT","Leistungs- und Kompetenztests","Alle K-Prim-Tests, Check-outs und digitalen Tests an einem Ort. Hier trittst du in einen Test ein und nimmst teil.")}
  ${co.checkouts?checkoutLiveBannerHTML(co):""}${verw}${eintreten}
- <div class="kw-wand">${[1,2,3,4].map(lb).join("")}</div></div>${footer()}`;
+ <div class="lx-tests">${[1,2,3,4].map(lb).join("")}</div></div>${footer()}`;
 }
 async function renderKompetenzLx(){
  const h=await renderKompetenz();
