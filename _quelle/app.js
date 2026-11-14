@@ -22834,7 +22834,7 @@ async function renderKwThema(){
   leist?Promise.resolve(null):einarbeitungInfo(e.id).catch(()=>null),
   leist?Promise.resolve([]):Promise.all(KW_TRAININGS_ALLE.map(x=>einarbeitungInfo(x).catch(()=>null)))]);
  const aus=new Set((PPM.aus||[]).filter(a=>(a.themen||[]).includes(e.id)).map(a=>a.kursId));
- const trListe=KW_TRAININGS_ALLE.map((x,i)=>{const n=trInfos[i];if(!n||n.entwurf||aus.has(x))return"";const h=KW_TR_HINT[x];return`<div class="kw-dz"><button type="button" class="kw-datei" data-kw="ea" data-id="${esc(x)}"><span>${esc(n.titel)}</span><small>${h?esc(h)+" · ":""}${n.aufgaben?n.aufgaben+" Aufgaben":"Selbstlernkurs"}</small></button>${lehrer?`<button type="button" class="kw-del kw-baust-weg" data-kw="trweg" data-id="${esc(x)}" data-thema="${esc(e.id)}" aria-label="Ausblenden" title="Auf dieser Themenseite ausblenden">×</button>`:""}</div>`}).join("");
+ const nb=lxNachbIds();const trListe=KW_TRAININGS_ALLE.map((x,i)=>{const n=trInfos[i];if(!n||n.entwurf||aus.has(x)||nb.has(x))return"";const h=KW_TR_HINT[x];return`<div class="kw-dz"><button type="button" class="kw-datei" data-kw="ea" data-id="${esc(x)}"><span>${esc(n.titel)}</span><small>${h?esc(h)+" · ":""}${n.aufgaben?n.aufgaben+" Aufgaben":"Selbstlernkurs"}</small></button>${lehrer?`<button type="button" class="kw-del kw-baust-weg" data-kw="trweg" data-id="${esc(x)}" data-thema="${esc(e.id)}" aria-label="Ausblenden" title="Auf dieser Themenseite ausblenden">×</button>`:""}</div>`}).join("");
  const liste=kat=>{const l=mats.filter(m=>m.kategorie===kat);return l.length?l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join(""):`<div class="kw-leer">Noch nichts eingestellt.</div>`};
  const hat=kat=>mats.some(m=>m.kategorie===kat);
  const add=kat=>lehrer?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${kat}">+ hinzufügen</button>`:"";
@@ -22950,6 +22950,8 @@ async function renderLwTrainingPP(){
   lxKachel("lw-fachaufsatz","Fachaufsatztraining","Alle freigeschalteten Fachaufsätze und Trainings, nach Lernbereich")
   +lxKachel("lw-nachbereitung","Nachbereitung von Kurzarbeiten und Schulaufgaben","Trainings nach der Rückgabe: Struktur, Theorie, Transfer, Schreiben"));
 }
+// Trainings, die nur zur Nachbereitung von Kurzarbeiten und Schulaufgaben gehören
+function lxNachbIds(){return new Set(LX_CFG.nachbereitung.flatMap(n=>n.trainings.map(t=>t[0])))}
 async function renderLwNachbereitung(){
  await kwLaden();
  const lehrer=kwLehrer();
@@ -23211,8 +23213,8 @@ async function renderLwUebenPP(){
 async function renderLwFachaufsatz(){
  await kwLaden();
  const infos=await Promise.all(KW_TRAININGS_ALLE.map(x=>einarbeitungInfo(x).catch(()=>null)));
- const z=KW_TRAININGS_ALLE.map((x,i)=>{const n=infos[i];if(!n||n.entwurf)return"";const h=KW_TR_HINT[x];return`<button type="button" class="kw-datei" data-kw="ea" data-id="${esc(x)}"><span>${esc(n.titel)}</span><small>${h?esc(h)+" · ":""}${n.aufgaben?n.aufgaben+" Aufgaben":"Selbstlernkurs"}</small></button>`}).join("");
- const tr=z?lxSek(3,"Trainings","Selbstlernkurse zu Struktur, Theorie, Fallbezug und Schreiben",`<div class="kw-dateien">${z}</div>`):"";
+ const nbIds=lxNachbIds();const z=KW_TRAININGS_ALLE.map((x,i)=>{const n=infos[i];if(!n||n.entwurf||nbIds.has(x))return"";const h=KW_TR_HINT[x];return`<button type="button" class="kw-datei" data-kw="ea" data-id="${esc(x)}"><span>${esc(n.titel)}</span><small>${h?esc(h)+" · ":""}${n.aufgaben?n.aufgaben+" Aufgaben":"Selbstlernkurs"}</small></button>`}).join("");
+ const tr=z?lxSek(3,"Trainings","Selbstlernkurse zum Fachaufsatz",`<div class="kw-dateien">${z}</div>`):"";
  const nb=`<div class="lx-kacheln">${lxKachel("lw-nachbereitung","Nachbereitung von Kurzarbeiten und Schulaufgaben","Trainings nach der Rückgabe")}</div>`;
  return lxAngebotSeite("fa","LERNWERKSTATT · 2","Fachaufsatztraining","Alle Fachaufsätze und Trainings, die deine Lehrkraft freigeschaltet hat. Die Fachaufsätze sind nach Lernbereichen geordnet.","lw-training-pp","Prüfungstraining",tr+nb);
 }
