@@ -22708,7 +22708,7 @@ async function renderUnterrichtsfaecher(){
 /* ---------- Lernlandkarte (Kachelwand) ---------- */
 function lxLandkartenKacheln(lehrer){
  return`<div class="lx-kacheln">
-  ${lxKachel("lernstaende",lehrer?"Lernstände der Klasse":"Meine Lernstände",lehrer?"Wer steht wo, wo gibt es Schwierigkeiten?":"Wo stehst du, was solltest du noch üben?")}
+  ${lehrer?"":lxKachel("lernstaende","Meine Lernstände","Nur dein eigener Stand: Wo stehst du, was solltest du noch üben?")}
   ${lxKachel("journal",lehrer?"Lernjournal":"Mein Lernjournal","Gedanken zum Lernen festhalten")}
   ${lxKachel("ressourcen","Lernressourcen","Links, Videos, KI-Angebote und Material")}
  </div>`;
