@@ -1084,3 +1084,19 @@ body.kw-voll .kw-th b{font-size:18px}
 @media(max-width:700px){.lx-tests .ls-zeile{grid-template-columns:1fr}.lx-tests .ls-a{justify-content:flex-start}}
 .lx-tests .kw-th{min-height:0;align-items:center}
 .lx-eintritt select{padding:11px 12px;font:inherit;border:2px solid #B8A2DC;border-radius:10px;background:#fff}
+
+/* Sidebar: zwei klar getrennte Bereiche */
+.nav-area{border-radius:14px;padding:8px 8px 10px;margin:0 0 14px;border:1px solid var(--line);display:flex;flex-direction:column;gap:3px}
+.nav-area[hidden]{display:none}
+.nav-area-l{background:#EEF3F8;border-color:#C5D3E0}
+.nav-area-s{background:#F1FAEC;border-color:#CBE8B8}
+.nav-bereich{display:flex;flex-direction:column;gap:2px;margin:0 0 6px;padding:8px 10px;border-radius:10px;color:#fff}
+.nav-area-l .nav-bereich{background:#17384f}
+.nav-area-s .nav-bereich{background:#4FA72E}
+.nav-bereich b{font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.nav-bereich small{font-size:11.5px;opacity:.85}
+.nav-area .nav-link{padding:9px 12px}
+.nav-area .nav-link:hover{background:rgba(255,255,255,.7)}
+.nav-area .nav-link.active{background:#fff;box-shadow:0 1px 4px rgba(23,56,79,.14)}
+.nav-area-l .nav-link.active{color:#17384f;box-shadow:inset 3px 0 0 #17384f,0 1px 4px rgba(23,56,79,.14)}
+.nav-area-s .nav-link.active{color:#2F6B16;box-shadow:inset 3px 0 0 #4FA72E,0 1px 4px rgba(23,56,79,.14)}

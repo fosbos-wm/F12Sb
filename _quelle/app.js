@@ -23141,6 +23141,8 @@ function lxNavRollen(){
 }
 function lxNavAktiv(seite,p){
  const LW=["lernwerkstatt","lw-pp","lw-mathe","lw-ueben","lw-ueben-pp","lw-training","lw-training-pp","lw-fachaufsatz","lw-nachbereitung","lw-lernen","lw-koop","journal","fachaufsatz","fachaufsatz-board","whiteboard","whiteboard-board","didaktik","tafel","fach","faecher","lernpfad","lernstrategien","metakognition","lernstand","zuordnung","lernwerkzeuge","methoden","impulse","kollaboration","lerncoaching","fragenhilfe","uhr-timer","ki-lernen","qr-code","karteikarten","karteikarten-board","glossar"];
+ if(seite==="news-l")return p==="news"&&window.__lxBereich!=="s";
+ if(seite==="news-s")return p==="news"&&(!isTeacher()||window.__lxBereich==="s");
  if(seite==="unterricht")return["unterricht","start","kw-thema","kw-projekt","kw-fortschritt"].includes(p);
  if(seite==="lernwerkstatt")return LW.includes(p);
  if(seite==="kompetenz")return["kompetenz","tests"].includes(p);
@@ -23152,6 +23154,11 @@ function lxRouten(){return{
  unterricht:renderUnterrichtsfaecher,"lw-pp":renderLwPP,"lw-mathe":renderLwMathe,"lw-ueben":renderLwPP,"lw-training":renderLwPP,"lw-ueben-pp":renderLwUebenPP,"lw-training-pp":renderLwTrainingPP,
  "lw-nachbereitung":renderLwNachbereitung,"lw-fachaufsatz":renderLwFachaufsatz,"lw-lernen":renderLwLernen,"lw-koop":renderLwKoop,tests:renderTests,kompetenz:renderKompetenzLx,
  lernstaende:renderLernstaendeLx,"kw-checkouts":renderLernstaendeLx,"lk-unterricht":renderLkUnterricht,"lk-inhalte":renderLkUnterricht}}
+document.addEventListener("click",ev=>{
+ const n=ev.target.closest&&ev.target.closest('.nav-link[data-page^="news-"]');if(!n)return;
+ window.__lxBereich=n.dataset.page==="news-s"?"s":"l";
+ setTimeout(()=>document.querySelectorAll('.nav-link[data-page^="news-"]').forEach(a=>a.classList.toggle("active",lxNavAktiv(a.dataset.page,"news")&&(location.hash||"#news").replace("#","")==="news")),0);
+});
 document.addEventListener("click",async ev=>{
  const b=ev.target.closest&&ev.target.closest("[data-lx]");if(!b||!currentUser)return;
  const a=b.dataset.lx,id=b.dataset.id;

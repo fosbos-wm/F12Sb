@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://securetoken.googleapis.com" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20261114a">
+<link rel="stylesheet" href="styles.css?v=20261114b">
 
 <!-- App-Icon fürs Homescreen (Handy/iPad) -->
 <link rel="manifest" href="manifest.json">
@@ -131,19 +131,24 @@
     <aside class="sidebar" id="sidebar">
       <div class="side-title">CAMPUS</div>
       <nav>
-        <a href="#news" data-page="news" class="nav-link active">Startseite</a>
-        <div class="nav-gruppe lx-lehrer" hidden>Lehrkräfte</div>
-        <a href="#lk-unterricht" data-page="lk-unterricht" class="nav-link lx-lehrer" hidden>Unterricht planen</a>
-        <a href="#lernstaende" data-page="lernstaende" class="nav-link lx-lehrer" hidden>Lernstände prüfen</a>
-        <a href="#team" data-page="team" class="nav-link lx-lehrer" hidden>Lehrkräfte Klassenteam</a>
-        <div class="nav-gruppe lx-lehrer" hidden>So sehen es die Schüler:innen</div>
-        <a href="#unterricht" data-page="unterricht" class="nav-link">Unterrichtsfächer</a>
-        <a href="#lernstaende" data-page="lernstaende" class="nav-link lx-schueler">Lernstände</a>
-        <a href="#lernwerkstatt" data-page="lernwerkstatt" class="nav-link">Lernwerkstatt</a>
-        <a href="#kompetenz" data-page="kompetenz" class="nav-link">Kompetenzwerkstatt</a>
-        <a href="#klassenteam" data-page="klassenteam" class="nav-link">Unser Klassenteam</a>
-        <a href="#resilienz" data-page="resilienz" class="nav-link">Resilienz & Respressi</a>
-        <a href="#kalender" data-page="kalender" class="nav-link">Campus-Kalender</a>
+        <div class="nav-area nav-area-l lx-lehrer" hidden>
+          <div class="nav-bereich"><b>Bereich Lehrkräfte</b><small>Planen, prüfen, abstimmen</small></div>
+          <a href="#news" data-page="news-l" class="nav-link">Startseite</a>
+          <a href="#lk-unterricht" data-page="lk-unterricht" class="nav-link">Unterricht planen</a>
+          <a href="#lernstaende" data-page="lernstaende" class="nav-link">Lernstände prüfen</a>
+          <a href="#team" data-page="team" class="nav-link">Lehrkräfte Klassenteam</a>
+        </div>
+        <div class="nav-area nav-area-s">
+          <div class="nav-bereich"><b>Bereich Schüler:innen</b><small>Lernen, üben, testen</small></div>
+          <a href="#news" data-page="news-s" class="nav-link active">Startseite</a>
+          <a href="#unterricht" data-page="unterricht" class="nav-link">Unterrichtsfächer</a>
+          <a href="#lernstaende" data-page="lernstaende" class="nav-link lx-schueler">Lernstände</a>
+          <a href="#lernwerkstatt" data-page="lernwerkstatt" class="nav-link">Lernwerkstatt</a>
+          <a href="#kompetenz" data-page="kompetenz" class="nav-link">Kompetenzwerkstatt</a>
+          <a href="#klassenteam" data-page="klassenteam" class="nav-link">Unser Klassenteam</a>
+          <a href="#resilienz" data-page="resilienz" class="nav-link">Resilienz & Respressi</a>
+          <a href="#kalender" data-page="kalender" class="nav-link">Campus-Kalender</a>
+        </div>
       </nav>
       <div class="side-card">
         <b>Campus hilft</b>
@@ -159,7 +164,7 @@
 <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" id="modal"></div></div>
 <div class="toast" id="toast"></div>
 
-<script type="module" src="app.js?v=20261114a"></script>
+<script type="module" src="app.js?v=20261114b"></script>
 <script>
 /* Ladehinweis: erscheint, wenn die App nach 15 Sekunden noch nicht mit Firebase verbunden ist */
 (function(){
