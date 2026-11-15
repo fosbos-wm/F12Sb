@@ -23119,7 +23119,13 @@ function lxLegende(){return`<div class="lx-legende">${LX_TEILE.map(n=>`<span><i 
 async function renderLkUnterricht(){
  if(!isTeacher())return await renderKachelwand();
  await kwLaden();
- return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterricht planen","Plane Bausteine und stelle Inhalte ein: Materialien, Wissens-Checks, Selbstlernkurse, Stunden, Check-outs und Tests. Jedes Thema hat dieselben acht Teile wie bei den Schüler:innen.")}
+ const fk=window.__lkFach||"";
+ const kk=(k,t,s,c,bg)=>`<button type="button" class="wpw-fb${fk===k?" an":""}" role="tab" aria-selected="${fk===k}" data-lx="lkfach" data-k="${k}" style="--c:${c};--bg:${bg}"><b>${t}</b><small>${s}</small></button>`;
+ const faecher=`<div class="wpw-fl" role="tablist" aria-label="Fach wählen">${kk("pp","Pädagogik/Psychologie","Lernlandkarte, Themen und Bausteine","#1f9a8a","#e0f2ee")}${kk("mathe","Mathematik","Wird vorbereitet","#2f6fb5","#e1ebf8")}</div>`;
+ let inhalt;
+ if(fk==="pp")inhalt=`<h2 class="lx-h2">Pädagogik/Psychologie: Lernlandkarte</h2><p class="lx-hint">Ein Klick öffnet das Thema. Dort stellst du mit „+ hinzufügen“ Dateien in den passenden Teil ein und planst Bausteine („Baustein einplanen“, Teil 4). Die Punkte zeigen, was schon da ist.</p>${lxLegende()}
+ <div class="kw-wand lx-wahl">${lxThemaWahlen("unterricht")}</div>
+ <h2 class="lx-h2">Weitere Werkzeuge</h2>
  <div class="lx-kacheln">
   ${lxKachel("kompass","Wochenplanung","Bausteine und Stunden auf Schulwochen legen")}
   ${lxKachel("fach","Fächer und Projekte","Lernbereiche, Projekte und Bausteine ansehen")}
@@ -23131,9 +23137,11 @@ async function renderLkUnterricht(){
   ${lxKachel("tests","Tests verwalten","Live schalten, Ergebnisse ansehen")}
   ${lxKachel("kw-fortschritt","Erledigt? Selbstlernkurse und Rallyes","Wer hat welchen Baustein bearbeitet?")}
   ${lxKachel("ressourcen","Lernressourcen","Links, Videos und KI-Angebote pflegen")}
- </div>
- <h2 class="lx-h2">Thema wählen</h2><p class="lx-hint">Ein Klick öffnet das Thema. Dort stellst du mit „+ hinzufügen“ Dateien in den passenden Teil ein und planst Bausteine („Baustein einplanen“, Teil 4). Die Punkte zeigen, was schon da ist.</p>${lxLegende()}
- <div class="kw-wand lx-wahl">${lxThemaWahlen("unterricht")}</div></div>${footer()}`;
+ </div>`;
+ else if(fk==="mathe")inhalt=`<h2 class="lx-h2">Mathematik</h2><div class="card"><p>Das Fach Mathematik wird gerade vorbereitet. Sobald Inhalte da sind, planst du sie hier genauso wie in Pädagogik/Psychologie.</p><button type="button" class="secondary" onclick="go('lw-mathe')">Mathematik in der Lernwerkstatt ansehen</button></div>`;
+ else inhalt=`<p class="lx-hint">Wähle ein Fach, um Inhalte zu planen und bereitzustellen.</p>`;
+ return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterricht planen","Wähle ein Fach. Bei Pädagogik/Psychologie siehst du zuerst die vier Lernbereiche der Lernlandkarte, darunter die weiteren Werkzeuge. Jedes Thema hat dieselben acht Teile wie bei den Schüler:innen.")}
+ ${faecher}${inhalt}</div>${footer()}`;
 }
 
 /* ---------- Navigation je Rolle, Routen, Klicks ---------- */
@@ -23169,7 +23177,8 @@ document.addEventListener("click",async ev=>{
  const b=ev.target.closest&&ev.target.closest("[data-lx]");if(!b||!currentUser)return;
  const a=b.dataset.lx,id=b.dataset.id;
  try{
-  if(a==="mathe"){toast("Mathematik wird gerade vorbereitet.");showMotivationsBild(false,"allgemein","mathe")}
+  if(a==="lkfach"){window.__lkFach=b.dataset.k;render()}
+  else if(a==="mathe"){toast("Mathematik wird gerade vorbereitet.");showMotivationsBild(false,"allgemein","mathe")}
   else if(a==="selbst")await lxSelbstSetzen(id,Number(b.dataset.w));
   else if(a==="ab"){const v=$("lxAb")&&$("lxAb").value;if(!v)return toast("Bitte ein Datum wählen.");await lxSichtSetzen(id,v)}
   else if(a==="ab0")await lxSichtSetzen(id,"");
