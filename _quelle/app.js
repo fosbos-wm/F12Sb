@@ -4401,7 +4401,7 @@ async function renderStart(){
  return`${coBanner}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
 </div></section>
- ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>${isAdmin()?`<button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button>`:""}</div>`:""}
+ ${isTeacher()&&window.__lxBereich!=="s"?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>${isAdmin()?`<button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button>`:""}</div>`:""}
  ${pp12CssBausteine()}${naechsteStunde}
  ${await lxOffenKachel()}
   <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
@@ -23162,6 +23162,7 @@ function lxRouten(){return{
 document.addEventListener("click",ev=>{
  const n=ev.target.closest&&ev.target.closest('.nav-link[data-page^="news-"]');if(!n)return;
  window.__lxBereich=n.dataset.page==="news-s"?"s":"l";
+ if(["","#","#news"].includes(location.hash))render();
  setTimeout(()=>document.querySelectorAll('.nav-link[data-page^="news-"]').forEach(a=>a.classList.toggle("active",lxNavAktiv(a.dataset.page,"news")&&(location.hash||"#news").replace("#","")==="news")),0);
 });
 document.addEventListener("click",async ev=>{
