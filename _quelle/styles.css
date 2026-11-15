@@ -385,3 +385,25 @@ body.kw-voll .kw-th b{font-size:18px}
 .ls-dot{margin-right:6px;vertical-align:baseline}
 .lx-ls-z small{word-spacing:1px}
 .lx-ls-z small .ls-dot:not(:first-child){margin-left:4px}
+
+/* Check-out und Lernentwicklung */
+.ce-box{margin:14px 0;padding:14px 16px;border:1px solid #d9e2ec;border-left:4px solid #1F3A60;border-radius:10px;background:#fff}
+.ce-kopf{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.ce-kopf small{color:#5b6b7b;font-size:12px}
+.ce-svg{display:block;max-width:440px;margin:6px auto 4px}
+.ce-hint{color:#5b6b7b;font-size:13px;margin:6px 0}
+.ce-ziele{margin-top:10px}
+.ce-z{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;border-top:1px solid #edf1f5;font-size:13.5px}
+.ce-zv{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.ce-zv em{color:#7a8794;font-style:normal}
+.ce-c{display:inline-flex;width:22px;height:22px;border-radius:50%;align-items:center;justify-content:center;font-style:normal;font-weight:700;font-size:13px;color:#fff}
+.ce-c.ja{background:#2E7D57}.ce-c.nein{background:#C0392B}.ce-c.n{background:#c5ccd3}
+.ce-lern{margin:16px 0}
+.ce-lb{margin:14px 0;padding:10px 12px;border:1px solid #e3e9ef;border-top:4px solid var(--c,#1F3A60);border-radius:10px;background:#fff}
+.ce-lbk{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.ce-sum{font-size:13px;color:#3a4a5a}
+.ce-lbs{overflow-x:auto;margin-top:6px}
+.ce-det{margin-top:6px;font-size:13px}.ce-det ul{margin:6px 0 0;padding-left:18px}.ce-det em{font-style:normal;color:#7a8794}
+.ce-leer{padding:14px;border:1px dashed #c5ccd3;border-radius:10px;color:#5b6b7b;font-size:13.5px}
+.bc-tag{display:block;margin-top:8px;font-size:12px}
+.ce-ziele>b{display:block;margin-bottom:4px}
