@@ -1,4 +1,4 @@
-let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment, writeBatch; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){ if(firebaseReadyPromise) return firebaseReadyPromise; firebaseReadyPromise = fbImportMitWiederholung("./firebase-local.js?v=20261016a").then((fbMod)=>{ const appMod=fbMod, authMod=fbMod, fsMod=fbMod, storageMod={getStorage:fbMod.getStorage,ref:fbMod.ref,uploadBytes:fbMod.uploadBytes,getDownloadURL:fbMod.getDownloadURL,deleteObject:fbMod.deleteObject}; ({initializeApp}=appMod); ({getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendPasswordResetEmail,updateProfile,deleteUser}=authMod); ({getFirestore,collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs,query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,arrayRemove,increment,writeBatch}=fsMod); getDoc=fsLeseMitWiederholung(getDoc); getDocs=fsLeseMitWiederholung(getDocs); {const dirty=()=>{window.__fsDirty=Date.now()};const w=f=>(...a)=>{dirty();const x=f(...a);Promise.resolve(x).then(dirty,dirty);return x};addDoc=w(addDoc);setDoc=w(setDoc);updateDoc=w(updateDoc);deleteDoc=w(deleteDoc);const wb=writeBatch;writeBatch=(...a)=>{const b=wb(...a),c=b.commit.bind(b);b.commit=()=>{dirty();const x=c();Promise.resolve(x).then(dirty,dirty);return x};return b};const gleich=(f,typ)=>{const m=new Map();return(r,...rest)=>{const k=(r&&r.type===typ&&!rest.length&&r.path)||null;if(!k)return f(r,...rest);if(m.has(k))return m.get(k);const p=Promise.resolve(f(r)).finally(()=>m.delete(k));m.set(k,p);return p}};getDoc=gleich(getDoc,"document");getDocs=gleich(getDocs,"collection");} ({getStorage,ref:storageRef,uploadBytes,getDownloadURL,deleteObject}=storageMod); if(!app) app=initializeApp(firebaseConfig); if(!auth) auth=getAuth(app); if(!db){ try{ db=fbMod.initializeFirestore(app,{experimentalAutoDetectLongPolling:true}); }catch(e){ console.warn("Firestore-Start mit Verbindungsfallback nicht möglich, Standard wird genutzt:",e); db=getFirestore(app); } } if(!storage) storage=getStorage(app); window.CampusFirebase={ get db(){return db}, get currentUser(){return currentUser}, collection,doc,addDoc,setDoc,updateDoc,deleteDoc,getDoc,getDocs, query,orderBy,limit,where,onSnapshot,serverTimestamp,arrayUnion,increment, modal,toast,pageHead,footer,render }; return true; }).catch(e=>{firebaseReadyPromise=null;throw e}); return firebaseReadyPromise; } /*
+let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment, writeBatch; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){return firebaseReadyPromise||(firebaseReadyPromise=fbImportMitWiederholung("./firebase-local.js?v=20261016a").then(e=>{const t=e,n=e,i=e,r={getStorage:e.getStorage,ref:e.ref,uploadBytes:e.uploadBytes,getDownloadURL:e.getDownloadURL,deleteObject:e.deleteObject};({initializeApp:initializeApp}=t),{getAuth:getAuth,onAuthStateChanged:onAuthStateChanged,createUserWithEmailAndPassword:createUserWithEmailAndPassword,signInWithEmailAndPassword:signInWithEmailAndPassword,signOut:signOut,sendPasswordResetEmail:sendPasswordResetEmail,updateProfile:updateProfile,deleteUser:deleteUser}=n,{getFirestore:getFirestore,collection:collection,doc:doc,addDoc:addDoc,setDoc:setDoc,updateDoc:updateDoc,deleteDoc:deleteDoc,getDoc:getDoc,getDocs:getDocs,query:query,orderBy:orderBy,limit:limit,where:where,onSnapshot:onSnapshot,serverTimestamp:serverTimestamp,arrayUnion:arrayUnion,arrayRemove:arrayRemove,increment:increment,writeBatch:writeBatch}=i,getDoc=fsLeseMitWiederholung(getDoc),getDocs=fsLeseMitWiederholung(getDocs);{const a=()=>{window.__fsDirty=Date.now()},s=d=>(...p)=>{a();const h=d(...p);return Promise.resolve(h).then(a,a),h};addDoc=s(addDoc),setDoc=s(setDoc),updateDoc=s(updateDoc),deleteDoc=s(deleteDoc);const l=writeBatch;writeBatch=(...d)=>{const p=l(...d),h=p.commit.bind(p);return p.commit=()=>{a();const k=h();return Promise.resolve(k).then(a,a),k},p};const c=(d,p)=>{const h=new Map;return(k,...f)=>{const y=k&&k.type===p&&!f.length&&k.path||null;if(!y)return d(k,...f);if(h.has(y))return h.get(y);const w=Promise.resolve(d(k)).finally(()=>h.delete(y));return h.set(y,w),w}};getDoc=c(getDoc,"document"),getDocs=c(getDocs,"collection")}if({getStorage:getStorage,ref:storageRef,uploadBytes:uploadBytes,getDownloadURL:getDownloadURL,deleteObject:deleteObject}=r,app||(app=initializeApp(firebaseConfig)),auth||(auth=getAuth(app)),!db)try{db=e.initializeFirestore(app,{experimentalAutoDetectLongPolling:!0})}catch(a){console.warn("Firestore-Start mit Verbindungsfallback nicht m\xF6glich, Standard wird genutzt:",a),db=getFirestore(app)}return storage||(storage=getStorage(app)),window.CampusFirebase={get db(){return db},get currentUser(){return currentUser},collection:collection,doc:doc,addDoc:addDoc,setDoc:setDoc,updateDoc:updateDoc,deleteDoc:deleteDoc,getDoc:getDoc,getDocs:getDocs,query:query,orderBy:orderBy,limit:limit,where:where,onSnapshot:onSnapshot,serverTimestamp:serverTimestamp,arrayUnion:arrayUnion,increment:increment,modal:modal,toast:toast,pageHead:pageHead,footer:footer,render:render},!0}).catch(e=>{throw firebaseReadyPromise=null,e}),firebaseReadyPromise)} /*
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
  der Firebase Console hier eingesetzt.
@@ -47,16 +47,7 @@ function pseudonymWaehlenModal(){
  <div id="pseudoFehler" class="auth-error"></div>
  <div class="form-actions"><button class="primary" onclick="pseudonymSpeichern()">Speichern</button></div></div>`);
 }
-async function pseudonymSpeichern(){
- const v=$("pseudoNeu").value.trim();
- if(!pseudoGueltig(v)){$("pseudoFehler").textContent="3 bis 20 Zeichen: Buchstaben, Ziffern, Leerzeichen, - _ .";return}
- try{
-  await updateDoc(doc(db,"users",currentUser.uid),{pseudonym:v,displayName:v,firstName:"",lastName:"",email:""});
-  profile={...profile,pseudonym:v,displayName:v,firstName:"",lastName:"",email:""};
-  await syncProfilPublic();
-  $("userName").textContent=v;closeModal();toast("Pseudonym gespeichert.");render();
- }catch(e){console.error(e);$("pseudoFehler").textContent="Speichern nicht möglich. Bitte erneut versuchen."}
-}
+async function pseudonymSpeichern(){const e=$("pseudoNeu").value.trim();if(!pseudoGueltig(e)){$("pseudoFehler").textContent="3 bis 20 Zeichen: Buchstaben, Ziffern, Leerzeichen, - _ .";return}try{await updateDoc(doc(db,"users",currentUser.uid),{pseudonym:e,displayName:e,firstName:"",lastName:"",email:""}),profile={...profile,pseudonym:e,displayName:e,firstName:"",lastName:"",email:""},await syncProfilPublic(),$("userName").textContent=e,closeModal(),toast("Pseudonym gespeichert."),render()}catch(t){console.error(t),$("pseudoFehler").textContent="Speichern nicht m\xF6glich. Bitte erneut versuchen."}}
 window.pseudonymSpeichern=pseudonymSpeichern;
 function authError(err){
  if(authModus!=="teacher"){
@@ -132,23 +123,7 @@ function dsHinweis(){return`<small class="ds-hinweis"style="display:block;margin
 
 /* Sammlungen mit personenbezogenen Daten: [Sammlung, Feld, selbst löschbar?]
    "id" = Dokument-ID ist die UID (Abfrage über getDoc). */
-const DS_DATEN=[
- ["journal","uid",1],["competencies","uid",1],["lernpfade","uid",1],["resilienzSchaetze","uid",1],
- ["heimatorte","uid",1],["steckbriefe","uid",1],["wochenplanung","uid",1],["noten","id",1],
- ["essayEntries","uid",1],["essayCases","createdBy",1],
- ["ppStundenAntworten","uid",1],["ppLernuebersicht","uid",1],["ppKursFortschritt","uid",1],
- ["ppRallyeStand","uid",1],["ppRallyeRang","uid",1],
- ["lehrplanFortschritt","uid",1],["lehrplanProdukte","uid",1],["lehrplanTeams","createdBy",1],
- ["messages","fromUid",1],["posts","authorUid",1],["boardPosts","authorUid",1],
- ["tasks","createdBy",1],["projects","createdBy",1],["wordcloudEntries","authorUid",1],
- ["kanbanCards","createdBy",1],["checklistItems","createdBy",1],["termVotes","uid",1],
- ["pollVotes","uid",1],["ampelResponses","uid",1],["teamAds","authorUid",1],
- ["flashcards","createdBy",1],["glossaryEntries","createdBy",1],
- ["whiteboardItems","authorUid",1],["whiteboardImages","authorUid",1],["whiteboardPresence","uid",1],
- ["randomPickerLists","createdBy",1],["profilePublic","id",1],
- /* Leistungsnachweise bleiben als schulische Unterlagen bei der Schule: nur Lehrkraft/Admin löscht */
- ["checkoutAbgaben","uid",0],["checkoutAuswahl","id",0],["lernstandVersuche","uid",0]
-];
+const DS_DATEN=[["journal","uid",1],["competencies","uid",1],["lernpfade","uid",1],["resilienzSchaetze","uid",1],["heimatorte","uid",1],["steckbriefe","uid",1],["wochenplanung","uid",1],["noten","id",1],["essayEntries","uid",1],["essayCases","createdBy",1],["ppStundenAntworten","uid",1],["ppLernuebersicht","uid",1],["ppKursFortschritt","uid",1],["ppRallyeStand","uid",1],["ppRallyeRang","uid",1],["lehrplanFortschritt","uid",1],["ubErgebnisse","uid",1],["faErgebnisse","uid",1],["lehrplanProdukte","uid",1],["lehrplanTeams","createdBy",1],["messages","fromUid",1],["posts","authorUid",1],["boardPosts","authorUid",1],["tasks","createdBy",1],["projects","createdBy",1],["wordcloudEntries","authorUid",1],["kanbanCards","createdBy",1],["checklistItems","createdBy",1],["termVotes","uid",1],["pollVotes","uid",1],["ampelResponses","uid",1],["teamAds","authorUid",1],["flashcards","createdBy",1],["glossaryEntries","createdBy",1],["whiteboardItems","authorUid",1],["whiteboardImages","authorUid",1],["whiteboardPresence","uid",1],["randomPickerLists","createdBy",1],["profilePublic","id",1],["checkoutAbgaben","uid",0],["checkoutAuswahl","id",0],["lernstandVersuche","uid",0]];
 async function dsLesen(uid,c,feld){
  if(feld==="id"){const s=await getDoc(doc(db,c,uid));return s.exists()?[{id:s.id,data:s.data()}]:[]}
  const q=await getDocs(query(collection(db,c),where(feld,"==",uid)));
@@ -222,63 +197,60 @@ async function dsKlasseLoeschen(){
   alert(personen+" Schüler-Konten bearbeitet, "+n+" Einträge gelöscht."+(gesperrt.size?"\n\nNicht per Admin löschbar (privat bzw. nur durch die Person selbst, z. B. Nachrichten, Resilienz-Schatzkiste, Wochenplanung): "+[...gesperrt].join(", ")+"\nDiese Daten sind für niemanden einsehbar; sie lassen sich in der Firebase-Konsole (Firestore) löschen.":"")+"\n\nWichtig: Die Anmeldekonten selbst bitte in der Firebase-Konsole unter Authentication löschen.");
  }catch(e){console.error(e);toast("Löschen nicht vollständig möglich.")}
 }
-function showDatenschutz(){
- const angemeldet=!!(typeof currentUser!=="undefined"&&currentUser&&typeof profile!=="undefined"&&profile&&profile.status==="approved");
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
+function showDatenschutz(){const e=!!(typeof currentUser<"u"&&currentUser&&typeof profile<"u"&&profile&&profile.status==="approved");modal(`<button class="modal-close"onclick="closeModal()">\xD7</button>
  <div class="kicker">RECHTLICHES</div>
- <h2>Datenschutzerklärung</h2>
+ <h2>Datenschutzerkl\xE4rung</h2>
  <div class="form"style="gap:12px;font-size:.95em;line-height:1.5">
- <div class="notice"><strong>Entwurf</strong><p style="margin-bottom:0">Diese Erklärung wird vom Datenschutzbeauftragten der Schule geprüft und kann sich noch ändern.</p></div>
+ <div class="notice"><strong>Entwurf</strong><p style="margin-bottom:0">Diese Erkl\xE4rung wird vom Datenschutzbeauftragten der Schule gepr\xFCft und kann sich noch \xE4ndern.</p></div>
 
  <p><strong>1. Verantwortlicher</strong><br>
- Staatliche Fachoberschule und Berufsoberschule Weilheim, Kerschensteinerstraße 2, 82362 Weilheim i.OB, vertreten durch den Schulleiter Christian Dick, OStD. Telefon +49 881 9239-43, E-Mail 0897.Sekretariat@schule.bayern.de.</p>
+ Staatliche Fachoberschule und Berufsoberschule Weilheim, Kerschensteinerstra\xDFe 2, 82362 Weilheim i.OB, vertreten durch den Schulleiter Christian Dick, OStD. Telefon +49 881 9239-43, E-Mail 0897.Sekretariat@schule.bayern.de.</p>
 
  <p><strong>2. Datenschutzbeauftragter</strong><br>
  Niklas Hilber, <a href="mailto:niklas.hilber@schule.bayern.de">niklas.hilber@schule.bayern.de</a></p>
 
  <p><strong>3. Zweck und Rechtsgrundlage</strong><br>
- Die ${DS_APP}-App unterstützt den Unterricht (Lernpläne, Lernjournal, Übungen, Check-outs, Zusammenarbeit). Die Verarbeitung erfolgt zur Erfüllung des schulischen Bildungs- und Erziehungsauftrags (Art. 6 Abs. 1 Buchst. e DSGVO i. V. m. Art. 4 BayDSG und Art. 85 BayEUG). Freiwillige Angaben (z. B. Steckbrief, Geburtstag, Herkunftsort) beruhen auf deiner Einwilligung (Art. 6 Abs. 1 Buchst. a DSGVO); du kannst sie jederzeit löschen oder widerrufen.</p>
+ Die ${DS_APP}-App unterst\xFCtzt den Unterricht (Lernpl\xE4ne, Lernjournal, \xDCbungen, Check-outs, Zusammenarbeit). Die Verarbeitung erfolgt zur Erf\xFCllung des schulischen Bildungs- und Erziehungsauftrags (Art. 6 Abs. 1 Buchst. e DSGVO i. V. m. Art. 4 BayDSG und Art. 85 BayEUG). Freiwillige Angaben (z. B. Steckbrief, Geburtstag, Herkunftsort) beruhen auf deiner Einwilligung (Art. 6 Abs. 1 Buchst. a DSGVO); du kannst sie jederzeit l\xF6schen oder widerrufen.</p>
 
  <p><strong>4. Welche Daten werden verarbeitet?</strong></p>
  <ul style="margin:0 0 0 18px">
- <li>Konto: selbst gewähltes Pseudonym (kein Klarname, keine E-Mail-Adresse), Rolle und Freigabestatus, Anmeldezeitpunkt</li>
- <li>Lern- und Arbeitsdaten: Lernjournal, Lernpfad, Kompetenzen, Wochenplanung, Übungs- und Aufsatztexte, Antworten in Check-outs und Lernstandsmessungen, Fortschritte, abgegebene Dateien</li>
- <li>Zusammenarbeit: Beiträge, Nachrichten, Pinnwand, Whiteboards, Umfragen und Abstimmungen</li>
+ <li>Konto: selbst gew\xE4hltes Pseudonym (kein Klarname, keine E-Mail-Adresse), Rolle und Freigabestatus, Anmeldezeitpunkt</li>
+ <li>Lern- und Arbeitsdaten: Lernjournal, Lernpfad, Kompetenzen, Wochenplanung, \xDCbungs- und Aufsatztexte, Antworten in Check-outs und Lernstandsmessungen, Selbsteinsch\xE4tzungen bei Fachaufsatz-\xDCbungen (nur Punktzahlen, ohne deinen Text), Fortschritte, abgegebene Dateien</li>
+ <li>Zusammenarbeit: Beitr\xE4ge, Nachrichten, Pinnwand, Whiteboards, Umfragen und Abstimmungen</li>
  <li>Freiwillig: Steckbrief, Geburtstag (Tag und Monat), Herkunftsort</li>
- <li>Technisch: IP-Adresse und Geräteinformationen bei jedem Aufruf (siehe Punkt 5)</li>
+ <li>Technisch: IP-Adresse und Ger\xE4teinformationen bei jedem Aufruf (siehe Punkt 5)</li>
  </ul>
  <p>Bitte trage keine sensiblen Daten (Gesundheit, Familie, Religion, Herkunft, Konflikte) in Freitextfelder ein.</p>
 
- <p><strong>5. Empfänger und Dienstleister</strong><br>
- <em>Google Firebase</em> (Google Cloud EMEA Limited / Google LLC): Anmeldung, Datenbank (Firestore) und Dateispeicher. Die Daten werden in einem Rechenzentrum von Google gespeichert; eine Verarbeitung durch das US-Unternehmen Google LLC ist dabei nicht ausgeschlossen. Grundlage der Übermittlung sind der Angemessenheitsbeschluss zum EU-US Data Privacy Framework bzw. Standardvertragsklauseln.<br>
+ <p><strong>5. Empf\xE4nger und Dienstleister</strong><br>
+ <em>Google Firebase</em> (Google Cloud EMEA Limited / Google LLC): Anmeldung, Datenbank (Firestore) und Dateispeicher. Die Daten werden in einem Rechenzentrum von Google gespeichert; eine Verarbeitung durch das US-Unternehmen Google LLC ist dabei nicht ausgeschlossen. Grundlage der \xDCbermittlung sind der Angemessenheitsbeschluss zum EU-US Data Privacy Framework bzw. Standardvertragsklauseln.<br>
  <em>GitHub Pages</em> (GitHub Inc., Microsoft): Auslieferung der Webseite. Dabei wird deine IP-Adresse verarbeitet.<br>
- <em>Eingebettete Inhalte</em> (YouTube, Vimeo, WebUntis): Erst wenn du solche Inhalte öffnest, wird eine Verbindung zum jeweiligen Anbieter aufgebaut und deine IP-Adresse übermittelt.<br>
+ <em>Eingebettete Inhalte</em> (YouTube, Vimeo, WebUntis): Erst wenn du solche Inhalte \xF6ffnest, wird eine Verbindung zum jeweiligen Anbieter aufgebaut und deine IP-Adresse \xFCbermittelt.<br>
  Die Software der App wird von dieser Seite selbst ausgeliefert, es werden keine Schriftarten, Tracker oder Werbedienste von Dritten geladen.</p>
 
  <p><strong>6. Cookies und lokaler Speicher</strong><br>
- Die App setzt keine Tracking-Cookies. Im Browser werden nur Einstellungen gespeichert (z. B. Ansichtsgröße) sowie die technisch nötige Anmeldung.</p>
+ Die App setzt keine Tracking-Cookies. Im Browser werden nur Einstellungen gespeichert (z. B. Ansichtsgr\xF6\xDFe) sowie die technisch n\xF6tige Anmeldung.</p>
 
  <p><strong>7. Speicherdauer</strong><br>
- Deine Daten werden gelöscht, wenn du die Klasse verlässt, spätestens zum Ende des Schuljahres. Du kannst deine Daten jederzeit selbst löschen (siehe unten). Leistungsnachweise (Check-outs, Lernstandsmessungen) werden nach den schulrechtlichen Aufbewahrungsfristen als Unterlagen der Schule behandelt.</p>
+ Deine Daten werden gel\xF6scht, wenn du die Klasse verl\xE4sst, sp\xE4testens zum Ende des Schuljahres. Du kannst deine Daten jederzeit selbst l\xF6schen (siehe unten). Leistungsnachweise (Check-outs, Lernstandsmessungen) werden nach den schulrechtlichen Aufbewahrungsfristen als Unterlagen der Schule behandelt.</p>
 
  <p><strong>8. Wer sieht was?</strong><br>
- Lehrkräfte sehen deine Lern- und Arbeitsdaten sowie Abgaben. Mitschüler:innen sehen nur, was du in gemeinsamen Bereichen (Forum, Pinnwand, Whiteboard, Steckbrief) veröffentlichst. Wochenplanung, Resilienz-Schatzkiste und Nachrichten sind für Lehrkräfte nicht einsehbar. Der Notenrechner speichert nichts.</p>
+ Lehrkr\xE4fte sehen deine Lern- und Arbeitsdaten sowie Abgaben. Mitsch\xFCler:innen sehen nur, was du in gemeinsamen Bereichen (Forum, Pinnwand, Whiteboard, Steckbrief) ver\xF6ffentlichst. Wochenplanung, Resilienz-Schatzkiste und Nachrichten sind f\xFCr Lehrkr\xE4fte nicht einsehbar. Der Notenrechner speichert nichts.</p>
 
  <p><strong>9. Deine Rechte</strong><br>
- Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO). Wende dich dazu an die Schule oder den Datenschutzbeauftragten. Du hast außerdem das Recht auf Beschwerde beim Bayerischen Landesbeauftragten für den Datenschutz, Wagmüllerstraße 18, 80538 München, <a href="https://www.datenschutz-bayern.de"target="_blank"rel="noopener">www.datenschutz-bayern.de</a>.</p>
+ Auskunft (Art. 15), Berichtigung (Art. 16), L\xF6schung (Art. 17), Einschr\xE4nkung (Art. 18), Daten\xFCbertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO). Wende dich dazu an die Schule oder den Datenschutzbeauftragten. Du hast au\xDFerdem das Recht auf Beschwerde beim Bayerischen Landesbeauftragten f\xFCr den Datenschutz, Wagm\xFCllerstra\xDFe 18, 80538 M\xFCnchen, <a href="https://www.datenschutz-bayern.de"target="_blank"rel="noopener">www.datenschutz-bayern.de</a>.</p>
 
- ${angemeldet?`<div class="card"style="padding:12px">
+ ${e?`<div class="card"style="padding:12px">
  <strong>Meine Daten</strong>
- <p style="margin:6px 0 10px">Lade alle deine gespeicherten Daten herunter oder lösche sie samt Konto.</p>
+ <p style="margin:6px 0 10px">Lade alle deine gespeicherten Daten herunter oder l\xF6sche sie samt Konto.</p>
  <div class="form-actions"style="justify-content:flex-start;gap:8px;flex-wrap:wrap">
- <button class="secondary"type="button"onclick="dsExport()">⬇ Meine Daten herunterladen</button>
- <button class="secondary"type="button"onclick="dsMeineDatenLoeschen()">🗑 Meine Daten &amp; Konto löschen</button>
- ${isAdmin()?`<button class="secondary"type="button"onclick="dsKlasseLoeschen()">🗑 Schuljahresende: Klasse löschen (Admin)</button>`:""}
+ <button class="secondary"type="button"onclick="dsExport()">\u2B07 Meine Daten herunterladen</button>
+ <button class="secondary"type="button"onclick="dsMeineDatenLoeschen()">\u{1F5D1} Meine Daten &amp; Konto l\xF6schen</button>
+ ${isAdmin()?'<button class="secondary"type="button"onclick="dsKlasseLoeschen()">\u{1F5D1} Schuljahresende: Klasse l\xF6schen (Admin)</button>':""}
  </div></div>`:""}
 
- <div class="form-actions"><button class="secondary"onclick="closeModal()">Schließen</button></div>
- </div>`);
-}
+ <div class="form-actions"><button class="secondary"onclick="closeModal()">Schlie\xDFen</button></div>
+ </div>`)}
 window.showDatenschutz=showDatenschutz;window.dsExport=dsExport;window.dsMeineDatenLoeschen=dsMeineDatenLoeschen;window.dsKlasseLoeschen=dsKlasseLoeschen;
 
 
@@ -549,97 +521,13 @@ async function updateLernressource(){
  }
 }
 
-async function renderRessourcenRoute(){
- /*
- Lernressourcen bewusst direkt in app.js rendern.
- Dadurch ist der Bereich unabhängig davon, ob das optionale
- Modul modules/lernressourcen.js auf GitHub Pages geladen werden kann.
- Es werden beide bisher verwendeten Collections unterstützt:
- - lernressourcen (aktuelle Struktur)
- - resources (ältere Bestände)
- */
- try{
- await loadFirebase();
- const fb=window.CampusFirebase;
- if(!fb?.db) throw new Error("Firebase ist noch nicht bereit.");
-
- const collections=["lernressourcen","resources"];
- const all=[];
- for(const collectionName of collections){
- try{
- const ref=fb.collection(fb.db,collectionName);
- let snap;
- try{
- snap=await fb.getDocs(fb.query(ref,fb.orderBy("createdAt","desc"),fb.limit(200)));
- }catch(orderError){
- snap=await fb.getDocs(ref);
- }
- snap.docs.forEach(d=>all.push({id:d.id,collection:collectionName,...d.data()}));
- }catch(error){
- console.warn("Lernressourcen-Collection nicht lesbar:",collectionName,error);
- }
- }
-
- // Doppelte Datensätze vermeiden, falls derselbe Inhalt in beiden
- // Collections liegt. Die ID allein reicht nicht, weil sie je Collection
- // vergeben wird; deshalb wird zusätzlich die normalisierte URL verwendet.
- const seen=new Set();
- const resources=all.filter(r=>{
- const key=[String(r.title??r.name??"").trim().toLowerCase(),String(r.url??r.link??"").trim().toLowerCase()].join("|");
- if(!key.replace(/\|/g,"")) return false;
- if(seen.has(key)) return false;
- seen.add(key);
- return true;
- });
-
- const types={
- taskcard:{icon:"",label:"TaskCard"},
- ki:{icon:"",label:"KI-Lernressource"},
- external:{icon:"",label:"Externer Link"},
- video:{icon:"",label:"Video-Link"},
- bycs:{icon:"",label:"ByCS / mebis"},
- canva:{icon:"",label:"Canva"},
- learningapps:{icon:"",label:"LearningApps"},
- website:{icon:"",label:"Webseite"}
- };
- const typeOf=r=>{
- const raw=String(r.type??r.category??"external").toLowerCase();
- if(types[raw]) return raw;
- if(raw.includes("task")) return"taskcard";
- if(raw.includes("video")) return"video";
- if(raw.includes("bycs")||raw.includes("mebis")) return"bycs";
- if(raw.includes("canva")) return"canva";
- if(raw.includes("learningapps")||raw.includes("learning apps")) return"learningapps";
- if(raw.includes("ki")) return"ki";
- if(raw.includes("web")) return"website";
- return"external";
- };
- const urlOf=r=>String(r.url??r.link??"").trim();
- const titleOf=r=>String(r.title??r.name??"Lernressource");
- const descOf=r=>String(r.description??r.text??"");
- const subjectOf=r=>String(r.subject??r.fach??r.lernbereich??"");
- const tagsOf=r=>Array.isArray(r.tags)?r.tags:(typeof r.tags==="string"?r.tags.split(",").map(x=>x.trim()).filter(Boolean):[]);
-
- const grouped={taskcard:[],ki:[],external:[],video:[],bycs:[],canva:[],learningapps:[],website:[]};
- resources.forEach(r=>grouped[typeOf(r)].push(r));
-
- const canEdit=typeof isTeacher==="function" && isTeacher();
- const addButton=canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Lernressource hinzufügen</button>`:"";
-
- const card=r=>{
- const type=typeOf(r),t=types[type],tags=tagsOf(r),url=urlOf(r);
- const editCall=`editLernressourceForm('${esc(r.collection)}','${esc(r.id)}','${esc(String(titleOf(r)).replace(/\n/g,"\\n"))}','${esc(type)}','${esc(String(url).replace(/\n/g,"\\n"))}','${esc(String(descOf(r)).replace(/\n/g,"\\n"))}','${esc(String(subjectOf(r)).replace(/\n/g,"\\n"))}','${esc(tags.join(",").replace(/\n/g,"\\n"))}')`;
- const meta=[subjectOf(r),...tags.map(x=>"#"+x)].filter(Boolean).join(" · ");
- return`<article class="card resource-card res-tile"data-resource-id="${esc(r.id)}"data-resource-collection="${esc(r.collection)}"title="${esc(titleOf(r))}">
- <div class="res-top"><span class="resource-icon">${t.icon}</span><span class="pill">${esc(t.label)}</span>${canEdit?`<span class="res-edit"><button type="button"class="res-ico"title="Bearbeiten"aria-label="Lernressource bearbeiten"onclick="${editCall}">✎</button><button type="button"class="res-ico"title="Löschen"aria-label="Lernressource löschen"onclick="deleteCampusEntry('${r.collection}','${r.id}','Lernressource')">🗑</button></span>`:""}</div>
- <h3>${esc(titleOf(r))}</h3>
- ${descOf(r)?`<p class="res-desc">${esc(descOf(r))}</p>`:""}
- ${meta?`<div class="res-meta">${esc(meta)}</div>`:""}
- ${url?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(url)}')">Öffnen →</button>`:`<div class="notice"style="margin-top:auto;font-size:12px">Noch kein Link hinterlegt.</div>`}
- </article>`;
- };
- const plusKachel=typ=>canEdit?`<button type="button"class="res-plus"onclick="window.openLernressourceForm('${typ}')"aria-label="Neue Lernressource anlegen"><span class="big">＋</span><span>Neue Lernressource</span></button>`:"";
- const resCss=`<style>
+async function renderRessourcenRoute(){try{await loadFirebase();const e=window.CampusFirebase;if(!e?.db)throw new Error("Firebase ist noch nicht bereit.");const t=["lernressourcen","resources"],n=[];for(const A of t)try{const _=e.collection(e.db,A);let Q;try{Q=await e.getDocs(e.query(_,e.orderBy("createdAt","desc"),e.limit(200)))}catch{Q=await e.getDocs(_)}Q.docs.forEach(C=>n.push({id:C.id,collection:A,...C.data()}))}catch(_){console.warn("Lernressourcen-Collection nicht lesbar:",A,_)}const i=new Set,r=n.filter(A=>{const _=[String(A.title??A.name??"").trim().toLowerCase(),String(A.url??A.link??"").trim().toLowerCase()].join("|");return!_.replace(/\|/g,"")||i.has(_)?!1:(i.add(_),!0)}),a={taskcard:{icon:"",label:"TaskCard"},ki:{icon:"",label:"KI-Lernressource"},external:{icon:"",label:"Externer Link"},video:{icon:"",label:"Video-Link"},bycs:{icon:"",label:"ByCS / mebis"},canva:{icon:"",label:"Canva"},learningapps:{icon:"",label:"LearningApps"},website:{icon:"",label:"Webseite"}},s=A=>{const _=String(A.type??A.category??"external").toLowerCase();return a[_]?_:_.includes("task")?"taskcard":_.includes("video")?"video":_.includes("bycs")||_.includes("mebis")?"bycs":_.includes("canva")?"canva":_.includes("learningapps")||_.includes("learning apps")?"learningapps":_.includes("ki")?"ki":_.includes("web")?"website":"external"},l=A=>String(A.url??A.link??"").trim(),c=A=>String(A.title??A.name??"Lernressource"),d=A=>String(A.description??A.text??""),p=A=>String(A.subject??A.fach??A.lernbereich??""),h=A=>Array.isArray(A.tags)?A.tags:typeof A.tags=="string"?A.tags.split(",").map(_=>_.trim()).filter(Boolean):[],k={taskcard:[],ki:[],external:[],video:[],bycs:[],canva:[],learningapps:[],website:[]};r.forEach(A=>k[s(A)].push(A));const f=typeof isTeacher=="function"&&isTeacher(),y=f?'<button class="primary"onclick="window.openLernressourceForm()">\uFF0B Lernressource hinzuf\xFCgen</button>':"",w=A=>{const _=s(A),Q=a[_],C=h(A),H=l(A),ie=`editLernressourceForm('${esc(A.collection)}','${esc(A.id)}','${esc(String(c(A)).replace(/\n/g,"\\n"))}','${esc(_)}','${esc(String(H).replace(/\n/g,"\\n"))}','${esc(String(d(A)).replace(/\n/g,"\\n"))}','${esc(String(p(A)).replace(/\n/g,"\\n"))}','${esc(C.join(",").replace(/\n/g,"\\n"))}')`,Ee=[p(A),...C.map(ee=>"#"+ee)].filter(Boolean).join(" \xB7 ");return`<article class="card resource-card res-tile"data-resource-id="${esc(A.id)}"data-resource-collection="${esc(A.collection)}"title="${esc(c(A))}">
+ <div class="res-top"><span class="resource-icon">${Q.icon}</span><span class="pill">${esc(Q.label)}</span>${f?`<span class="res-edit"><button type="button"class="res-ico"title="Bearbeiten"aria-label="Lernressource bearbeiten"onclick="${ie}">\u270E</button><button type="button"class="res-ico"title="L\xF6schen"aria-label="Lernressource l\xF6schen"onclick="deleteCampusEntry('${A.collection}','${A.id}','Lernressource')">\u{1F5D1}</button></span>`:""}</div>
+ <h3>${esc(c(A))}</h3>
+ ${d(A)?`<p class="res-desc">${esc(d(A))}</p>`:""}
+ ${Ee?`<div class="res-meta">${esc(Ee)}</div>`:""}
+ ${H?`<button class="primary resource-open"onclick="window.openLernressource('${encodeURIComponent(H)}')">\xD6ffnen \u2192</button>`:'<div class="notice"style="margin-top:auto;font-size:12px">Noch kein Link hinterlegt.</div>'}
+ </article>`},v=A=>f?`<button type="button"class="res-plus"onclick="window.openLernressourceForm('${A}')"aria-label="Neue Lernressource anlegen"><span class="big">\uFF0B</span><span>Neue Lernressource</span></button>`:"";return`<style>
  .res-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
  .res-tile{min-height:250px;padding:14px;display:flex;flex-direction:column;gap:8px}
  .res-tile>*{flex-shrink:0}
@@ -659,28 +547,17 @@ async function renderRessourcenRoute(){
  @media(max-width:1100px){.res-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
  @media(max-width:720px){.res-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
  @media(max-width:460px){.res-grid{grid-template-columns:1fr}.res-tile,.res-plus{min-height:170px}}
- </style>`;
-
- return`${resCss}${pageHead("LERNWERKSTATT","Lernressourcen-Bibliothek","Finde passende Lernmaterialien, digitale Angebote und externe Lernwege – zentral für Schüler und Lehrkräfte.",addButton)}
+ </style>${pageHead("LERNWERKSTATT","Lernressourcen-Bibliothek","Finde passende Lernmaterialien, digitale Angebote und externe Lernwege \u2013 zentral f\xFCr Sch\xFCler und Lehrkr\xE4fte.",y)}
  <div class="card"style="border-left:4px solid #3fa66a">
  <span class="badge"> DEINE LERNBIBLIOTHEK</span>
- <h2>Passende Ressource auswählen</h2>
+ <h2>Passende Ressource ausw\xE4hlen</h2>
  <p>TaskCards, KI-Lernangebote, Videos, ByCS/mebis, Canva und LearningApps sowie weitere Webseiten an einem Ort.</p>
  <div class="chips"><span class="chip"> TaskCard</span><span class="chip"> KI</span><span class="chip"> Video</span><span class="chip"> ByCS / mebis</span><span class="chip"> Canva</span><span class="chip"> LearningApps</span><span class="chip"> Webseite</span></div>
  </div>
  ${await lbOrdnerHtml()}
- ${Object.entries(grouped).map(([type,list])=>{
- if(!list.length)return"";
- const t=types[type];
- return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${t.icon} ${t.label.toUpperCase()}</div><h2>${esc(t.label)}</h2></div><span class="pill">${list.length}</span></div><div class="res-grid">${list.map(card).join("")}${plusKachel(type)}</div></section>`;
- }).join("")}
- ${resources.length?`<div class="notice"style="margin-top:16px"> ${resources.length} Lernressource${resources.length===1?"":"n"} verfügbar.</div>`:`<div class="card empty"style="margin-top:12px"><strong>Noch keine Lernressourcen vorhanden.</strong><p>Lege z. B. eine TaskCard, einen KI-Link, ein Video oder einen ByCS-/mebis-Link an.</p>${canEdit?`<button class="primary"onclick="window.openLernressourceForm()">＋ Erste Lernressource anlegen</button>`:""}</div>`}
- ${footer()}`;
- }catch(error){
- console.error("Lernressourcen konnten nicht geladen werden:",error);
- return moduleError("Lernressourcen","app.js",error);
- }
-}
+ ${Object.entries(k).map(([A,_])=>{if(!_.length)return"";const Q=a[A];return`<section class="resource-section"><div class="section-head"><div><div class="kicker">${Q.icon} ${Q.label.toUpperCase()}</div><h2>${esc(Q.label)}</h2></div><span class="pill">${_.length}</span></div><div class="res-grid">${_.map(w).join("")}${v(A)}</div></section>`}).join("")}
+ ${r.length?`<div class="notice"style="margin-top:16px"> ${r.length} Lernressource${r.length===1?"":"n"} verf\xFCgbar.</div>`:`<div class="card empty"style="margin-top:12px"><strong>Noch keine Lernressourcen vorhanden.</strong><p>Lege z. B. eine TaskCard, einen KI-Link, ein Video oder einen ByCS-/mebis-Link an.</p>${f?'<button class="primary"onclick="window.openLernressourceForm()">\uFF0B Erste Lernressource anlegen</button>':""}</div>`}
+ ${footer()}`}catch(e){return console.error("Lernressourcen konnten nicht geladen werden:",e),moduleError("Lernressourcen","app.js",e)}}
 
 /* =========================================================
  PERSÖNLICHER LERNPFAD – trainiert selbstreguliertes Lernen:
@@ -1200,23 +1077,7 @@ function letzterDonnerstagVorOrAm(dateStr){
 }
 function cleanDateInput(v){return v||"—"}
 
-async function getUpcomingCampusCalendarEvent(){
- let events=[];
- try{events=await getCollection("events","start",false)}catch(e){console.error("Startseite Kalender events:",e)}
- if(!events.length){
- try{events=await getCollection("calendar","date",false)}catch(e){console.error("Startseite Kalender calendar:",e)}
- }
- const today=new Date(); today.setHours(0,0,0,0);
- const eventDate=e=>{
- const raw=e?.start||e?.date||e?.startDate;
- if(!raw)return null;
- if(typeof raw==="object"&&raw.seconds)return new Date(raw.seconds*1000);
- const d=new Date(String(raw).slice(0,10)+"T00:00:00");
- return isNaN(d)?null:d;
- };
- await calAusgeblendetLaden();events=[...events,...calFesteTermine()];
- return events.map(e=>({e,d:eventDate(e)})).filter(x=>x.d&&x.d>=today).sort((a,b)=>a.d-b.d)[0]?.e||null;
-}
+async function getUpcomingCampusCalendarEvent(){let e=[];try{e=await getCollection("events","start",!1)}catch(i){console.error("Startseite Kalender events:",i)}if(!e.length)try{e=await getCollection("calendar","date",!1)}catch(i){console.error("Startseite Kalender calendar:",i)}const t=new Date;t.setHours(0,0,0,0);const n=i=>{const r=i?.start||i?.date||i?.startDate;if(!r)return null;if(typeof r=="object"&&r.seconds)return new Date(r.seconds*1e3);const a=new Date(String(r).slice(0,10)+"T00:00:00");return isNaN(a)?null:a};return await calAusgeblendetLaden(),e=[...e,...calFesteTermine()],e.map(i=>({e:i,d:n(i)})).filter(i=>i.d&&i.d>=t).sort((i,r)=>i.d-r.d)[0]?.e||null}
 
 
 /* =========================================================
@@ -1599,51 +1460,46 @@ async function deleteSteckbrief(){
 window.openSteckbriefForm=openSteckbriefForm;window.saveSteckbrief=saveSteckbrief;window.deleteSteckbrief=deleteSteckbrief;
 window.mySteckbriefData=null;
 
-async function renderKlassenteam(){
- const [heimatEntries,steckbriefe,birthdays]=await Promise.all([getHeimatEintraege(),getSteckbriefe(),getAllBirthdaysSorted()]);
- const myHeimatort=heimatEntries.find(e=>e.uid===currentUser.uid);
- window.mySteckbriefData=steckbriefe.find(s=>s.uid===currentUser.uid)||null;
- return`${pageHead("GEMEINSCHAFT","Unser Klassenteam","Einander kennenlernen und übers Jahr zusammenfinden.")}
+async function renderKlassenteam(){const[e,t,n]=await Promise.all([getHeimatEintraege(),getSteckbriefe(),getAllBirthdaysSorted()]),i=e.find(r=>r.uid===currentUser.uid);return window.mySteckbriefData=t.find(r=>r.uid===currentUser.uid)||null,`${pageHead("GEMEINSCHAFT","Unser Klassenteam","Einander kennenlernen und \xFCbers Jahr zusammenfinden.")}
  <div class="card">
  <div class="kicker">KENNENLERNEN</div>
  <h2 style="margin-top:4px">Wo unser Klassenteam zu Hause ist</h2>
- <p style="color:var(--muted)">Trag deinen Heimatort ein – so seht ihr auf einen Blick, wer aus eurer Gegend kommt. Vielleicht ergeben sich daraus ja Fahrgemeinschaften oder gemeinsame Projekte übers Jahr.</p>
+ <p style="color:var(--muted)">Trag deinen Heimatort ein \u2013 so seht ihr auf einen Blick, wer aus eurer Gegend kommt. Vielleicht ergeben sich daraus ja Fahrgemeinschaften oder gemeinsame Projekte \xFCbers Jahr.</p>
  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
  <select id="heimatOrtSelect"style="flex:1;min-width:200px">
- <option value="">Ort auswählen …</option>
- ${[...LANDKREIS_ORTE].sort((a,b)=>a[0].localeCompare(b[0],"de")).map(([name])=>`<option value="${esc(name)}"${myHeimatort?.ort===name?"selected":""}>${esc(name)}</option>`).join("")}
+ <option value="">Ort ausw\xE4hlen \u2026</option>
+ ${[...LANDKREIS_ORTE].sort((r,a)=>r[0].localeCompare(a[0],"de")).map(([r])=>`<option value="${esc(r)}"${i?.ort===r?"selected":""}>${esc(r)}</option>`).join("")}
  </select>
- <button class="primary"onclick="saveHeimatort()">${myHeimatort?"Aktualisieren":"Eintragen"}</button>
- ${myHeimatort?`<button class="secondary"onclick="removeHeimatort()">Entfernen</button>`:""}
+ <button class="primary"onclick="saveHeimatort()">${i?"Aktualisieren":"Eintragen"}</button>
+ ${i?'<button class="secondary"onclick="removeHeimatort()">Entfernen</button>':""}
  </div>
- <div id="heimatkarteWrap">${heimatkarteSVG(heimatEntries)}</div>
+ <div id="heimatkarteWrap">${heimatkarteSVG(e)}</div>
  ${isTeacher()?`<details style="margin-top:14px">
- <summary style="cursor:pointer;color:var(--muted);font-size:13px">Für Lehrkräfte: Einträge verwalten (${heimatEntries.length})</summary>
- <div class="list"style="margin-top:10px">${heimatEntries.map(e=>`<div class="list-item"><div><strong>${esc(e.name||"Campus-Mitglied")}</strong><small>${esc(e.ort||"")}</small></div><button class="secondary"onclick="removeHeimatortAsTeacher('${e.uid}','${esc(e.name||"")}')">Entfernen</button></div>`).join("")||`<div class="empty">Noch keine Einträge.</div>`}</div>
- ${heimatEntries.length?`<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="resetAlleHeimatorte()">Alle Einträge zurücksetzen</button></div>`:""}
+ <summary style="cursor:pointer;color:var(--muted);font-size:13px">F\xFCr Lehrkr\xE4fte: Eintr\xE4ge verwalten (${e.length})</summary>
+ <div class="list"style="margin-top:10px">${e.map(r=>`<div class="list-item"><div><strong>${esc(r.name||"Campus-Mitglied")}</strong><small>${esc(r.ort||"")}</small></div><button class="secondary"onclick="removeHeimatortAsTeacher('${r.uid}','${esc(r.name||"")}')">Entfernen</button></div>`).join("")||'<div class="empty">Noch keine Eintr\xE4ge.</div>'}</div>
+ ${e.length?'<div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="resetAlleHeimatorte()">Alle Eintr\xE4ge zur\xFCcksetzen</button></div>':""}
  </details>`:""}
  </div>
 
  <div class="card"style="margin-top:16px">
  <div class="kicker">STECKBRIEFE</div>
  <h2 style="margin-top:4px">Wer wir sind</h2>
- <p style="color:var(--muted)">Ein paar Sätze übereinander – hilft beim Kennenlernen und Zusammenarbeiten.</p>
- <div class="form-actions"style="margin-bottom:14px"><button class="primary"onclick="openSteckbriefForm(mySteckbriefData)">${mySteckbriefData?"Meinen Steckbrief bearbeiten":"＋ Meinen Steckbrief anlegen"}</button></div>
- <div class="grid grid-3">${steckbriefe.map(s=>`<div class="card"style="background:#f7fafc">
- <strong>${esc(s.name)}</strong>
- ${s.mag?`<p style="margin:8px 0 0;font-size:13px"><b>Mag:</b> ${esc(s.mag)}</p>`:""}
- ${s.gutDarin?`<p style="margin:6px 0 0;font-size:13px"><b>Gut darin:</b> ${esc(s.gutDarin)}</p>`:""}
- ${s.fakt?`<p style="margin:6px 0 0;font-size:13px"><b>Fakt:</b> ${esc(s.fakt)}</p>`:""}
- </div>`).join("")||`<div class="empty">Noch keine Steckbriefe – leg den ersten an!</div>`}</div>
+ <p style="color:var(--muted)">Ein paar S\xE4tze \xFCbereinander \u2013 hilft beim Kennenlernen und Zusammenarbeiten.</p>
+ <div class="form-actions"style="margin-bottom:14px"><button class="primary"onclick="openSteckbriefForm(mySteckbriefData)">${mySteckbriefData?"Meinen Steckbrief bearbeiten":"\uFF0B Meinen Steckbrief anlegen"}</button></div>
+ <div class="grid grid-3">${t.map(r=>`<div class="card"style="background:#f7fafc">
+ <strong>${esc(r.name)}</strong>
+ ${r.mag?`<p style="margin:8px 0 0;font-size:13px"><b>Mag:</b> ${esc(r.mag)}</p>`:""}
+ ${r.gutDarin?`<p style="margin:6px 0 0;font-size:13px"><b>Gut darin:</b> ${esc(r.gutDarin)}</p>`:""}
+ ${r.fakt?`<p style="margin:6px 0 0;font-size:13px"><b>Fakt:</b> ${esc(r.fakt)}</p>`:""}
+ </div>`).join("")||'<div class="empty">Noch keine Steckbriefe \u2013 leg den ersten an!</div>'}</div>
  </div>
 
  <div class="card"style="margin-top:16px">
  <div class="kicker">TERMINE</div>
  <h2 style="margin-top:4px">Geburtstage im Klassenteam</h2>
- <div class="list">${birthdays.map(b=>{const c=personColor(b.uid);return`<div class="list-item"style="background:${c.bg};border-left:4px solid ${c.border};border-radius:8px;padding:10px 12px;margin-bottom:6px"><div><strong style="color:${c.text}">${esc(b.name)}</strong><small>${esc(b.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))}</small></div>${b.isToday?`<span class="pill green"> Heute!</span>`:`<span class="pill"style="background:${c.border};color:#fff">in ${b.days} Tagen</span>`}</div>`}).join("")||`<div class="empty">Noch keine Geburtstage eingetragen.</div>`}</div>
+ <div class="list">${n.map(r=>{const a=personColor(r.uid);return`<div class="list-item"style="background:${a.bg};border-left:4px solid ${a.border};border-radius:8px;padding:10px 12px;margin-bottom:6px"><div><strong style="color:${a.text}">${esc(r.name)}</strong><small>${esc(r.date.toLocaleDateString("de-DE",{day:"2-digit",month:"long"}))}</small></div>${r.isToday?'<span class="pill green"> Heute!</span>':`<span class="pill"style="background:${a.border};color:#fff">in ${r.days} Tagen</span>`}</div>`}).join("")||'<div class="empty">Noch keine Geburtstage eingetragen.</div>'}</div>
  </div>
- ${footer()}`;
-}
+ ${footer()}`}
 
 // ============================================================
 // STUNDENPLAN (WebUntis), NOTEN & WOCHENPLANUNG – F12Sb
@@ -2133,7 +1989,7 @@ const motivZustand={seit:0,keys:{},letzterText:""};
 function motivAn(){try{return localStorage.getItem("f12sb_motivation_aus")!=="1"}catch(e){return true}}
 function motivButtonAktualisieren(){
  const b=$("motivBtn");if(!b)return;
- const zeigen=!!currentUser;
+ const zeigen=!!currentUser&&!isTeacher();
  b.hidden=!zeigen;
  const an=motivAn();
  b.classList.toggle("aus",!an);
@@ -2152,7 +2008,7 @@ function motivZeigen(pick,modus){
  document.querySelectorAll(".motivations-karte,.motiv-mini,.motiv-konfetti").forEach(x=>x.remove());
  const el=document.createElement("div");
  if(modus==="mini"){
-  el.className="motiv-mini lxm"+(1+Math.floor(Math.random()*3));
+  el.className="motiv-mini";
   el.setAttribute("role","status");
   el.innerHTML=`<span class="motiv-badge"aria-hidden="true">${pick.e}</span><span class="motiv-text">${esc(pick.t)}</span>`;
   el.onclick=()=>el.remove();
@@ -2160,16 +2016,15 @@ function motivZeigen(pick,modus){
   setTimeout(()=>el.remove(),3300);
   return;
  }
- el.className="motivations-karte"+(modus==="bonus"?" bonus":"")+" lxv"+(1+Math.floor(Math.random()*4));
+ el.className="motivations-karte"+(modus==="bonus"?" bonus":"");
  el.setAttribute("role","status");
  el.innerHTML=`<div class="motivations-karte-inner"><span class="motivations-abzeichen"aria-hidden="true"><span class="motivations-emoji">${pick.e}</span></span><strong>${esc(pick.t)}</strong></div>`;
  el.onclick=()=>el.remove();
  document.body.appendChild(el);
  const farben=["#1598d1","#6c3483","#f5a623","#e0457b","#3fa66a","#f1c40f"];
  const k=document.createElement("div");k.className="motiv-konfetti";k.setAttribute("aria-hidden","true");
- const kv=Math.floor(Math.random()*3);
  for(let i=0;i<18;i++){
-  const c=document.createElement("i");if(kv===1)c.className="st";else if(kv===2)c.className="rd";
+  const c=document.createElement("i");
   c.style.left=(Math.random()*100)+"%";c.style.background=farben[i%farben.length];
   c.style.animationDelay=(Math.random()*0.5)+"s";c.style.animationDuration=(1.5+Math.random()*0.9)+"s";
   k.appendChild(c);
@@ -2177,30 +2032,7 @@ function motivZeigen(pick,modus){
  document.body.appendChild(k);
  setTimeout(()=>{el.remove();k.remove()},2700);
 }
-function showMotivationsBild(besonders,art,schluessel){
- if(!currentUser||!motivAn())return;
- const jetzt=Date.now();
- if(schluessel){
-  if(jetzt-(motivZustand.keys[schluessel]||0)<60000)return;
-  motivZustand.keys[schluessel]=jetzt;
- }
- motivZustand.seit++;
- let modus="mini";
- if(besonders)modus="gross";
- else{
-  const n=motivZustand.seit;
-  // variable Quote: direkt nach einer Nachricht selten, nach längerer Pause sicherer
-  const p=n>=9?1:n>=6?0.75:n===1?0.15:0.32;
-  if(Math.random()>p)return;
-  if(Math.random()<0.08)modus="bonus";
- }
- motivZustand.seit=0;
- const pool=isTeacher()?(modus==="gross"?LX_MOTIV_L.besonders:modus==="bonus"?LX_MOTIV_L.bonus:LX_MOTIV_L.lehrer):(modus==="gross"?MOTIV_BESONDERS:modus==="bonus"?MOTIV_BONUS:[...(MOTIV_POOLS[art]||[]),...MOTIV_POOLS.allgemein]);
- let pick=pool[0];
- for(let i=0;i<8;i++){pick=pool[Math.floor(Math.random()*pool.length)];if(pick.t!==motivZustand.letzterText)break;}
- motivZustand.letzterText=pick.t;
- motivZeigen(pick,modus);
-}
+function showMotivationsBild(e,t,n){if(!currentUser||isTeacher()||!motivAn())return;const i=Date.now();if(n){if(i-(motivZustand.keys[n]||0)<6e4)return;motivZustand.keys[n]=i}motivZustand.seit++;let r="mini";if(e)r="gross";else{const l=motivZustand.seit,c=l>=9?1:l>=6?.75:l===1?.15:.32;if(Math.random()>c)return;Math.random()<.08&&(r="bonus")}motivZustand.seit=0;const a=r==="gross"?MOTIV_BESONDERS:r==="bonus"?MOTIV_BONUS:[...MOTIV_POOLS[t]||[],...MOTIV_POOLS.allgemein];let s=a[0];for(let l=0;l<8&&(s=a[Math.floor(Math.random()*a.length)],s.t===motivZustand.letzterText);l++);motivZustand.letzterText=s.t,motivZeigen(s,r)}
 // Alte Aufrufstellen nutzen weiterhin diesen Namen.
 function showMotivationsToast(besonders){showMotivationsBild(besonders)}
 window.motivUmschalten=motivUmschalten;
@@ -2448,27 +2280,21 @@ async function msZurueck(){
  if(k.ansicht==="schueler"){pgDaten=null;return openProjektSchuelerDetail(k.uid,k.phId);}
  closeModal();return render();
 }
-async function openMsBeitrag(phId,teamId,i,ansicht){
- const ph=projektPhaseById(phId);if(!ph)return;
- msKontext={...(msKontext||{}),phId,teamId,ansicht:ansicht||msKontext?.ansicht||"seite"};
- let b=null;
- try{const s=await getDoc(doc(db,"meilensteinBeitraege",`${teamId}_${i}_${currentUser.uid}`));b=s.exists()?s.data():null;}catch(e){}
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
-  <div class="kicker"style="color:${ppFarbe(ph)}">${esc(ph.lb)} · PROJEKT-MEILENSTEIN ${i+1}/${ph.meilensteine.length}</div>
-  <h2>${esc(ph.meilensteine[i])}</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:0">Was hast <b>du</b> zu diesem Meilenstein beigetragen? Der Meilenstein gilt erst als erreicht, wenn alle aus eurem Team ihren Beitrag eingetragen haben${msBrauchtBestaetigung(ph,i)?" und eure Lehrkraft ihn bestätigt hat":""}.</p>
+async function openMsBeitrag(e,t,n,i){const r=projektPhaseById(e);if(!r)return;msKontext={...msKontext||{},phId:e,teamId:t,ansicht:i||msKontext?.ansicht||"seite"};let a=null;try{const s=await getDoc(doc(db,"meilensteinBeitraege",`${t}_${n}_${currentUser.uid}`));a=s.exists()?s.data():null}catch{}modal(`<button class="modal-close"onclick="closeModal()">\xD7</button>
+  <div class="kicker"style="color:${ppFarbe(r)}">${esc(r.lb)} \xB7 PROJEKT-MEILENSTEIN ${n+1}/${r.meilensteine.length}</div>
+  <h2>${esc(r.meilensteine[n])}</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:0">Was hast <b>du</b> zu diesem Meilenstein beigetragen? Der Meilenstein gilt erst als erreicht, wenn alle aus eurem Team ihren Beitrag eingetragen haben${msBrauchtBestaetigung(r,n)?" und eure Lehrkraft ihn best\xE4tigt hat":""}.</p>
   <div class="form">
-   <label>Mein Beitrag<textarea id="msText"rows="4"maxlength="1500"placeholder="z. B. Ich habe die Hypothese mit UV und AV formuliert und die Kontrollgruppe geplant.">${esc(b?.text||"")}</textarea></label>
-   <label>Link (optional)<input id="msLink"type="url"value="${esc(b?.link||"")}"placeholder="https://…"></label>
+   <label>Mein Beitrag<textarea id="msText"rows="4"maxlength="1500"placeholder="z. B. Ich habe die Hypothese mit UV und AV formuliert und die Kontrollgruppe geplant.">${esc(a?.text||"")}</textarea></label>
+   <label>Link (optional)<input id="msLink"type="url"value="${esc(a?.link||"")}"placeholder="https://\u2026"></label>
    <label>Datei (optional, max. 15 MB)<input id="msDatei"type="file"></label>
-   ${b?.dateiUrl?`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a class="pill"href="${esc(b.dateiUrl)}"target="_blank"rel="noopener">${esc(b.dateiName||"Datei")} ↗</a><label class="check"style="font-size:12px"><input id="msDateiWeg"type="checkbox"> Datei löschen</label></div>`:""}
+   ${a?.dateiUrl?`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a class="pill"href="${esc(a.dateiUrl)}"target="_blank"rel="noopener">${esc(a.dateiName||"Datei")} \u2197</a><label class="check"style="font-size:12px"><input id="msDateiWeg"type="checkbox"> Datei l\xF6schen</label></div>`:""}
    <div class="form-actions">
     <button class="secondary"onclick="msZurueck()">Abbrechen</button>
-    ${b?`<button class="secondary"onclick="msBeitragLoeschen('${phId}','${teamId}',${i})">Beitrag löschen</button>`:""}
-    <button class="primary"onclick="msBeitragSpeichern('${phId}','${teamId}',${i})">Beitrag speichern</button>
+    ${a?`<button class="secondary"onclick="msBeitragLoeschen('${e}','${t}',${n})">Beitrag l\xF6schen</button>`:""}
+    <button class="primary"onclick="msBeitragSpeichern('${e}','${t}',${n})">Beitrag speichern</button>
    </div>
-  </div>`);
-}
+  </div>`)}
 async function msBeitragSpeichern(phId,teamId,i){
  const text=$("msText")?.value.trim()||"";
  let link=$("msLink")?.value.trim()||"";
@@ -2495,17 +2321,7 @@ async function msBeitragLoeschen(phId,teamId,i){
  try{const alt=await getDoc(ref);const url=alt.exists()?alt.data().dateiUrl:"";await deleteDoc(ref);await deleteCampusDatei(url);toast("Beitrag gelöscht.");await msZurueck();}
  catch(e){console.error(e);toast("Konnte nicht gelöscht werden.");}
 }
-async function msPruefen(phId,teamId,i,ok,ansicht){
- if(!isTeacher())return;
- let kommentar="";
- if(!ok){const r=prompt("Rückmeldung an das Team (was fehlt noch?):","");if(r===null)return;kommentar=r.trim();}
- msKontext={...(msKontext||{}),phId,teamId,ansicht:ansicht||msKontext?.ansicht||"seite"};
- try{
-  await updateDoc(doc(db,"lehrplanTeams",teamId),{[`msPruefung.${i}`]:{s:ok?"ok":"zurueck",kommentar,at:serverTimestamp(),von:currentUser.uid}});
-  toast(ok?"Meilenstein bestätigt.":"Meilenstein zurückgegeben.");
-  await msZurueck();
- }catch(e){console.error("Meilenstein prüfen:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
-}
+async function msPruefen(e,t,n,i,r){if(!isTeacher())return;let a="";if(!i){const s=prompt("R\xFCckmeldung an das Team (was fehlt noch?):","");if(s===null)return;a=s.trim()}msKontext={...msKontext||{},phId:e,teamId:t,ansicht:r||msKontext?.ansicht||"seite"};try{await updateDoc(doc(db,"lehrplanTeams",t),{[`msPruefung.${n}`]:{s:i?"ok":"zurueck",kommentar:a,at:serverTimestamp(),von:currentUser.uid}}),toast(i?"Meilenstein best\xE4tigt.":"Meilenstein zur\xFCckgegeben."),await msZurueck()}catch(s){console.error("Meilenstein pr\xFCfen:",s),toast(s?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln pr\xFCfen.":"Konnte nicht gespeichert werden.")}}
 // Eigenes Fenster mit allen Meilensteinen eines Teams (aus der Wochenansicht).
 async function openMeilensteinModal(phId,teamId,zurueck){
  const ph=projektPhaseById(phId);if(!ph)return;
@@ -3107,9 +2923,6 @@ function ciVerlaufSVG(x){
  const ticks=[0,50,100].map(q=>`<text x="${L-6}" y="${(py(q)+3.5).toFixed(1)}" text-anchor="end" font-size="10" fill="#7a8794">${q}</text>`).join("");
  return`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Verlauf: ${ciVerlaufTxt(x)}">${band(0,40,"#F7E3E3")}${band(40,75,"#FAF2DC")}${band(75,100,"#E1EEE6")}${ticks}<polyline fill="none" stroke="#1F3A60" stroke-width="2.4" stroke-linejoin="round" points="${pts.map(q=>q[0].toFixed(1)+","+q[1].toFixed(1)).join(" ")}"/>${pts.map(q=>`<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="4.2" fill="#1F3A60"/>`).join("")}${lab}</svg>`;
 }
-const CI_NEU={};
-function ciWiederholen(wocheId){CI_NEU[wocheId]=true;openCheckIn(wocheId)}
-window.ciWiederholen=ciWiederholen;
 function basischeckAmpel(richtig,gesamt){
  if(gesamt<=0)return null;
  const q=richtig/gesamt;
@@ -3165,33 +2978,7 @@ function basischeckGradeFrage(f,i){
  }
  return {beantwortet:false,richtig:false,antwort:null};
 }
-async function submitBasischeck(fach,wocheId){
- const fragen=await getBasischeckFragen(wocheId);
- if(!fragen.length){toast("Keine Fragen vorhanden.");return}
- const ergebnisse=fragen.map((f,i)=>basischeckGradeFrage(f,i));
- const fehlt=ergebnisse.findIndex(e=>!e.beantwortet);
- if(fehlt>=0){toast(fragen[fehlt].typ==="frei"?"Bitte schreibe bei der Freitext-Aufgabe mindestens einen Satz.":"Bitte alle Fragen beantworten.");return}
- const gewertet=ergebnisse.filter(e=>!e.frei);
- const richtig=gewertet.filter(e=>e.richtig).length;
- const gesamt=gewertet.length;
- const ampel=basischeckAmpel(richtig,gesamt);
- try{
- const alt=await getMyBasischeckVersuch(wocheId);
- const altMs=alt&&alt.createdAt&&alt.createdAt.toMillis?alt.createdAt.toMillis():0;
- const verlauf=[...(alt?(alt.verlauf||[{r:alt.richtig,g:alt.gesamt,t:altMs}]):[]),{r:richtig,g:gesamt,t:Date.now()}].slice(-10);
- await setDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${wocheId}`),{
- uid:currentUser.uid,wocheId,fach,antworten:ergebnisse.map(e=>e.antwort),richtig,gesamt,ampel,verlauf,
- name:anzeigeName(profile,currentUser),createdAt:serverTimestamp()
- });
- delete CI_NEU[wocheId];
- toast(`${richtig} von ${gesamt} richtig.`);
- if($("ciAnsicht")){await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),{uid:currentUser.uid,wocheId,fach,basischeckErledigt:true,updatedAt:serverTimestamp()},{merge:true}).catch(e=>console.error(e));ppDirty=true;await openCheckIn(wocheId);if(ampel==="gruen")showMotivationsBild(false,"lernen","bc:"+wocheId);return}
- if(lehrplanWocheById(fach,wocheId)?.typ==="apt"){await aptSetzen(wocheId,{basischeckErledigt:true},{tab:"basischeck"});return}
- await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${wocheId}`),{uid:currentUser.uid,wocheId,fach,basischeckErledigt:true,updatedAt:serverTimestamp()},{merge:true}).catch(e=>console.error(e));
- await reopenDetail(fach,wocheId);
- if(ampel==="gruen")showMotivationsBild(false,"lernen","bc:"+wocheId);
- }catch(e){console.error("Wissens-Check abgeben:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
-}
+async function submitBasischeck(e,t){const n=await getBasischeckFragen(t);if(!n.length){toast("Keine Fragen vorhanden.");return}const i=n.map((d,p)=>basischeckGradeFrage(d,p)),r=i.findIndex(d=>!d.beantwortet);if(r>=0){toast(n[r].typ==="frei"?"Bitte schreibe bei der Freitext-Aufgabe mindestens einen Satz.":"Bitte alle Fragen beantworten.");return}const a=i.filter(d=>!d.frei),s=a.filter(d=>d.richtig).length,l=a.length,c=basischeckAmpel(s,l);try{const d=await getMyBasischeckVersuch(t),p=parseInt(document.querySelector('input[name="ciSich"]:checked')?.value,10)||0,h=d&&d.createdAt&&d.createdAt.toMillis?d.createdAt.toMillis():0,k=[...d?d.verlauf||[{r:d.richtig,g:d.gesamt,s:d.sicher||0,t:h}]:[],{r:s,g:l,s:p,t:Date.now()}].slice(-10);if(await setDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,antworten:i.map(f=>f.antwort),richtig:s,gesamt:l,ampel:c,sicher:p,verlauf:k,name:anzeigeName(profile,currentUser),createdAt:serverTimestamp()}),delete CI_NEU[t],toast(`${s} von ${l} richtig.`),$("ciAnsicht")){await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,basischeckErledigt:!0,updatedAt:serverTimestamp()},{merge:!0}).catch(f=>console.error(f)),ppDirty=!0,await openCheckIn(t),c==="gruen"&&showMotivationsBild(!1,"lernen","bc:"+t);return}if(lehrplanWocheById(e,t)?.typ==="apt"){await aptSetzen(t,{basischeckErledigt:!0},{tab:"basischeck"});return}await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,basischeckErledigt:!0,updatedAt:serverTimestamp()},{merge:!0}).catch(f=>console.error(f)),await reopenDetail(e,t),c==="gruen"&&showMotivationsBild(!1,"lernen","bc:"+t)}catch(d){console.error("Wissens-Check abgeben:",d),toast(d?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln pr\xFCfen.":"Konnte nicht gespeichert werden.")}}
 window.submitBasischeck=submitBasischeck;
 
 // ---- Live-Wochenübersicht für Lehrkräfte: Fortschritt-Position je Person,
@@ -4361,33 +4148,10 @@ function aktuellePraktikumsphase(){
  const kommend=PRAKTIKUMSPHASEN.filter(p=>p.start>today).sort((a,b)=>a.start.localeCompare(b.start))[0];
  return kommend?{...kommend,status:"kommend"}:null;
 }
-async function miniKalenderHTML(){
- let events=[];
- try{events=(await getCollection("events","start",false)).map(e=>({...e,collection:"events"}))}catch(e){}
- if(!events.length){try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){}}
- let birthdayEvents=[];
- try{birthdayEvents=await getBirthdayEvents()}catch(e){}
- await calAusgeblendetLaden();events=[...events,...calFesteTermine()];
- // Dieselben Schulferien-Zeiträume wie im vollständigen Campus-Kalender.
- const ferienZeitraeume=[
- ["2026-08-03","2026-09-14"],["2026-11-02","2026-11-06"],["2026-12-24","2027-01-08"],
- ["2027-02-08","2027-02-12"],["2027-03-22","2027-04-02"],["2027-05-18","2027-05-28"],["2027-08-02","2027-09-13"]
- ];
- const istFerien=key=>ferienZeitraeume.some(([von,bis])=>key>=von&&key<=bis);
- const today=new Date();today.setHours(0,0,0,0);
- const monday=new Date(today);monday.setDate(today.getDate()-((today.getDay()+6)%7));
- const days=Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return d});
- const dateKey=d=>d.toISOString().slice(0,10);
- const eventDates=new Set(events.map(e=>String(e.start||e.date||"").slice(0,10)));
- const birthdayDates=new Set(birthdayEvents.map(e=>String(e.start||"").slice(0,10)));
- const wt=["Mo","Di","Mi","Do","Fr","Sa","So"];
- return `<a href="#kalender"class="mini-kalender">
- ${days.map((d,i)=>{const key=dateKey(d);const isToday=key===dateKey(today);
- const ferien=istFerien(key),geburtstag=birthdayDates.has(key),termin=eventDates.has(key);
- return `<div class="mini-kalender-day${isToday?" mini-kalender-today":""}${ferien?" mini-kalender-ferien":""}"><small>${wt[i]}</small><strong>${d.getDate()}</strong>${geburtstag?`<span class="mini-kalender-dot mini-kalender-dot-pink"></span>`:termin?`<span class="mini-kalender-dot"></span>`:""}</div>`;}).join("")}
+async function miniKalenderHTML(){let e=[];try{e=(await getCollection("events","start",!1)).map(h=>({...h,collection:"events"}))}catch{}if(!e.length)try{e=(await getCollection("calendar","date",!1)).map(h=>({...h,collection:"calendar"}))}catch{}let t=[];try{t=await getBirthdayEvents()}catch{}await calAusgeblendetLaden(),e=[...e,...calFesteTermine()];const n=[["2026-08-03","2026-09-14"],["2026-11-02","2026-11-06"],["2026-12-24","2027-01-08"],["2027-02-08","2027-02-12"],["2027-03-22","2027-04-02"],["2027-05-18","2027-05-28"],["2027-08-02","2027-09-13"]],i=h=>n.some(([k,f])=>h>=k&&h<=f),r=new Date;r.setHours(0,0,0,0);const a=new Date(r);a.setDate(r.getDate()-(r.getDay()+6)%7);const s=Array.from({length:7},(h,k)=>{const f=new Date(a);return f.setDate(a.getDate()+k),f}),l=h=>h.toISOString().slice(0,10),c=new Set(e.map(h=>String(h.start||h.date||"").slice(0,10))),d=new Set(t.map(h=>String(h.start||"").slice(0,10))),p=["Mo","Di","Mi","Do","Fr","Sa","So"];return`<a href="#kalender"class="mini-kalender">
+ ${s.map((h,k)=>{const f=l(h),y=f===l(r),w=i(f),v=d.has(f),S=c.has(f);return`<div class="mini-kalender-day${y?" mini-kalender-today":""}${w?" mini-kalender-ferien":""}"><small>${p[k]}</small><strong>${h.getDate()}</strong>${v?'<span class="mini-kalender-dot mini-kalender-dot-pink"></span>':S?'<span class="mini-kalender-dot"></span>':""}</div>`}).join("")}
  </a>
- <small style="display:block;margin-top:6px;color:var(--muted);font-size:10px">Zum vollständigen Campus-Kalender →</small>`;
-}
+ <small style="display:block;margin-top:6px;color:var(--muted);font-size:10px">Zum vollst\xE4ndigen Campus-Kalender \u2192</small>`}
 async function renderStart(){
  let news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
  try{[news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("news","createdAt",true,10),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
@@ -4808,14 +4572,7 @@ function pp12PlanBauen(m){
  m.arr.forEach((id,i)=>{if(!id)return;const e=m.reg[id],d=PP12_MSLOTS[i];out.push({...e,d,h:PP12_SLOT_H[d],id});});
  return out.sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);
 }
-function pp12Anwenden(over){
- over=over||{};
- let m=pp12Modell(over);
- if(!m){console.warn("Gespeicherte Planänderung passt nicht zum Grundplan und wird ignoriert.");over={};m=pp12Modell(over);}
- PP12_OVER={datum:over.datum||{},park:over.park||[],eigene:over.eigene||{},weg:over.weg||[],parkTafeln:over.parkTafeln||{}};
- PP12_PLAN.splice(0,PP12_PLAN.length,...pp12PlanBauen(m));
- PP12_PARK=m.park.map(id=>m.reg[id]);
-}
+function pp12Anwenden(e){e=e||{};let t=pp12Modell(e);t||(console.warn("Gespeicherte Plan\xE4nderung passt nicht zum Grundplan und wird ignoriert."),e={},t=pp12Modell(e)),PP12_OVER={datum:e.datum||{},park:e.park||[],eigene:e.eigene||{},weg:e.weg||[],parkTafeln:e.parkTafeln||{}},PP12_PLAN.splice(0,PP12_PLAN.length,...pp12PlanBauen(t)),PP12_PARK=t.park.map(n=>t.reg[n])}
 const pp12Kopie=m=>({reg:{...m.reg},park:m.park.slice(),arr:m.arr.slice(),weg:(m.weg||[]).slice()});
 // Diese Stunde mit der Nachbarstunde tauschen (auch auf einen freien Termin).
 function pp12Tausch(m,id,dir){
@@ -4845,28 +4602,7 @@ function pp12Ab(m,id,dir){
 }
 function pp12DatumVon(m,id){const i=m.arr.indexOf(id);return i<0?null:PP12_MSLOTS[i];}
 // Speichert den neuen Plan und nimmt die Tafeln der Stunden mit (Tafeln hängen am Datum).
-async function pp12Speichern(neu,alt){
- const over={datum:{},park:neu.park.slice(),eigene:{},weg:(neu.weg||[]).slice(),parkTafeln:{}};
- neu.arr.forEach((id,i)=>{if(id)over.datum[id]=PP12_MSLOTS[i];});
- Object.values(neu.reg).forEach(e=>{if(e.eigen)over.eigene[e.id]={t:e.t,lb:e.lb||0,typ:e.typ||"wdh"};});
- const T=PP12_CACHE.tafeln,final={},betroffen=new Set(),parkT={...(PP12_OVER.parkTafeln||{})};
- const ids=new Set([...Object.keys(neu.reg),...Object.keys(alt.reg)]);
- ids.forEach(id=>{
-  const o=pp12DatumVon(alt,id),n=neu.reg[id]?pp12DatumVon(neu,id):null;
-  if(o===n)return;
-  if(o)betroffen.add(o);if(n)betroffen.add(n);
-  const data=o?T[o]:parkT[id];
-  if(!o)delete parkT[id];
-  if(data){if(n)final[n]=data;else if(neu.reg[id])parkT[id]=data;}
- });
- over.parkTafeln=Object.fromEntries(Object.entries(parkT).filter(([id])=>neu.reg[id]&&neu.park.includes(id)));
- await setDoc(doc(db,"lehrplanPlan","pp12"),{...over,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
- for(const d of betroffen){
-  if(final[d]){await setDoc(doc(db,"lehrplanTafeln",d),final[d]);T[d]=final[d];}
-  else if(T[d]){await deleteDoc(doc(db,"lehrplanTafeln",d));delete T[d];}
- }
- pp12Anwenden(over);
-}
+async function pp12Speichern(e,t){const n={datum:{},park:e.park.slice(),eigene:{},weg:(e.weg||[]).slice(),parkTafeln:{}};e.arr.forEach((c,d)=>{c&&(n.datum[c]=PP12_MSLOTS[d])}),Object.values(e.reg).forEach(c=>{c.eigen&&(n.eigene[c.id]={t:c.t,lb:c.lb||0,typ:c.typ||"wdh"})});const i=PP12_CACHE.tafeln,r={},a=new Set,s={...PP12_OVER.parkTafeln||{}};new Set([...Object.keys(e.reg),...Object.keys(t.reg)]).forEach(c=>{const d=pp12DatumVon(t,c),p=e.reg[c]?pp12DatumVon(e,c):null;if(d===p)return;d&&a.add(d),p&&a.add(p);const h=d?i[d]:s[c];d||delete s[c],h&&(p?r[p]=h:e.reg[c]&&(s[c]=h))}),n.parkTafeln=Object.fromEntries(Object.entries(s).filter(([c])=>e.reg[c]&&e.park.includes(c))),await setDoc(doc(db,"lehrplanPlan","pp12"),{...n,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});for(const c of a)r[c]?(await setDoc(doc(db,"lehrplanTafeln",c),r[c]),i[c]=r[c]):i[c]&&(await deleteDoc(doc(db,"lehrplanTafeln",c)),delete i[c]);pp12Anwenden(n)}
 async function pp12Aendern(fn,erfolg){
  if(!isTeacher()||pp12Beschaeftigt)return;
  pp12Beschaeftigt=true;
@@ -4921,19 +4657,7 @@ function pp12Gesamt(dir){
  },"Der freie Termin wurde aufgeholt: Alles ab der nächsten Stunde ist einen Unterrichtstag früher.");
 }
 // Freien Termin (Reserve) mit einer Fortsetzungsstunde füllen
-function pp12ReserveFuellen(datum){
- const vorher=[...PP12_PLAN].reverse().find(x=>x.d<datum&&x.lb>0&&!PP12_FIX(x));
- const t=prompt("Titel der Stunde (z. B. Fortsetzung des letzten Themas):",vorher?("Fortsetzung: "+vorher.t).slice(0,140):"Fortsetzung");
- if(t===null||!t.trim())return;
- return pp12Aendern((m)=>{
-  const i=PP12_MSLOTS.indexOf(datum);
-  if(i<0||m.arr[i]!==null)return{fehler:"Dieser Termin ist nicht mehr frei."};
-  const id="x"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-  m.reg[id]={id,t:t.trim().slice(0,140),lb:vorher?vorher.lb:0,typ:"wdh",eigen:true};
-  m.arr[i]=id;
-  return{m};
- },"Stunde eingetragen.");
-}
+function pp12ReserveFuellen(e){const t=[...PP12_PLAN].reverse().find(i=>i.d<e&&i.lb>0&&!PP12_FIX(i)),n=prompt("Titel der Stunde (z. B. Fortsetzung des letzten Themas):",t?("Fortsetzung: "+t.t).slice(0,140):"Fortsetzung");if(!(n===null||!n.trim()))return pp12Aendern(i=>{const r=PP12_MSLOTS.indexOf(e);if(r<0||i.arr[r]!==null)return{fehler:"Dieser Termin ist nicht mehr frei."};const a="x"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);return i.reg[a]={id:a,t:n.trim().slice(0,140),lb:t?t.lb:0,typ:"wdh",eigen:!0},i.arr[r]=a,{m:i}},"Stunde eingetragen.")}
 // Jede Stunde (außer Leistungsnachweisen und Prüfungen) aus dem Plan entfernen. Der Termin wird frei (Reserve).
 // Stunden aus dem Grundplan landen unter „Entfernte Stunden“ und lassen sich wiederherstellen; selbst eingetragene Stunden sind danach weg.
 function pp12Loeschen(id){
@@ -5070,28 +4794,7 @@ function pp12TafelHtml(e){
  return`<button type="button"class="pp12-tafel${t?" da":""}"onclick="pp12Tafel('${e.d}')"title="${t?(t.rfTyp==="pdf"?"Roter Faden (PDF) öffnen":t.rfTyp==="web"?"Roter Faden (Webseite) öffnen":"Roter Faden dieser Stunde öffnen"):"Roter Faden anlegen: digitale Tafel, PDF oder Webseite"}">${wbIcon("frame",14)}<span>Roter Faden${t?"":" anlegen"}</span></button>`;
 }
 let pp12Beschaeftigt=false;
-async function pp12Tafel(datum){
- const t=PP12_CACHE.tafeln[datum];
- if(t&&t.rfUrl){lbRfOeffnen(t);return;}
- if(t&&t.boardId){openWhiteboard(t.boardId);return;}
- if(!isTeacher()||pp12Beschaeftigt)return;
- if(!window.__lbRfDirekt){lbRfDialog("z",datum);return;}
- window.__lbRfDirekt=false;
- pp12Beschaeftigt=true;
- try{
-  const e=PP12_PLAN.find(x=>x.d===datum);
-  const titel=`${datum.slice(8,10)}.${datum.slice(5,7)}. ${e?e.t:"Unterricht"}`.slice(0,120);
-  const r=await addDoc(collection(db,"whiteboards"),{title:titel,description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:true,seiten:1,
-   createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
-  await lbRfAlteWeg(PP12_CACHE.tafeln[datum]);
-  await setDoc(doc(db,"lehrplanTafeln",datum),{boardId:r.id,rfTyp:"",rfUrl:"",rfTitel:"",titel,createdBy:currentUser.uid,createdAt:serverTimestamp()},{merge:true});
-  PP12_CACHE.tafeln[datum]={...(PP12_CACHE.tafeln[datum]||{}),boardId:r.id,titel};
-  openWhiteboard(r.id);
- }catch(err){
-  console.error("Stunden-Tafel:",err);
-  toast(err?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln prüfen.":"Die Tafel konnte nicht angelegt werden.");
- }finally{pp12Beschaeftigt=false;}
-}
+async function pp12Tafel(e){const t=PP12_CACHE.tafeln[e];if(t&&t.rfUrl){lbRfOeffnen(t);return}if(t&&t.boardId){openWhiteboard(t.boardId);return}if(!(!isTeacher()||pp12Beschaeftigt)){if(!window.__lbRfDirekt){lbRfDialog("z",e);return}window.__lbRfDirekt=!1,pp12Beschaeftigt=!0;try{const n=PP12_PLAN.find(a=>a.d===e),i=`${e.slice(8,10)}.${e.slice(5,7)}. ${n?n.t:"Unterricht"}`.slice(0,120),r=await addDoc(collection(db,"whiteboards"),{title:i,description:"Tafel zur Unterrichtsstunde",art:"tafel",schreibschutz:!0,seiten:1,createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});await lbRfAlteWeg(PP12_CACHE.tafeln[e]),await setDoc(doc(db,"lehrplanTafeln",e),{boardId:r.id,rfTyp:"",rfUrl:"",rfTitel:"",titel:i,createdBy:currentUser.uid,createdAt:serverTimestamp()},{merge:!0}),PP12_CACHE.tafeln[e]={...PP12_CACHE.tafeln[e]||{},boardId:r.id,titel:i},openWhiteboard(r.id)}catch(n){console.error("Stunden-Tafel:",n),toast(n?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln pr\xFCfen.":"Die Tafel konnte nicht angelegt werden.")}finally{pp12Beschaeftigt=!1}}}
 // „Nächste Stunde“ für die Startseite
 async function pp12NaechsteStundeHtml(){
  await pp12DatenLaden();
@@ -5317,15 +5020,7 @@ function ppmKursSchritte(m){
  if(Array.isArray(m.schritte)&&m.schritte.length)return m.schritte;
  return (PPM_KURSE[m.kursId]||{}).schritte||[];
 }
-async function ppmLaden(erzwingen){
- if(!erzwingen&&Date.now()-PPM.geladen<30000)return;
- try{
-  const s=await getDocs(collection(db,"ppModule"));
-  PPM.liste=s.docs.map(d=>({id:d.id,...d.data()}));PPM.aus=PPM.liste.filter(m=>m.modul==="trainingaus");PPM.liste=PPM.liste.filter(m=>m.modul!=="trainingaus");PPM.fehler="";
- }catch(e){console.error("Module laden:",e);PPM.fehler=(e&&(e.code||e.name))||"unbekannt";PPM.liste=[];}
- PPM.geladen=Date.now();
- PPM.liste.sort((a,b)=>(ppmSwIndex(a.start)-ppmSwIndex(b.start))||((a.ord||0)-(b.ord||0))||(tsSek(a.createdAt)-tsSek(b.createdAt)));
-}
+async function ppmLaden(e){if(!(!e&&Date.now()-PPM.geladen<3e4)){try{const t=await getDocs(collection(db,"ppModule"));PPM.liste=t.docs.map(n=>({id:n.id,...n.data()})),PPM.aus=[...PPM.liste.filter(n=>n.modul==="trainingaus")],PPM.liste=PPM.liste.filter(n=>n.modul!=="trainingaus"),PPM.fehler=""}catch(t){console.error("Module laden:",t),PPM.fehler=t&&(t.code||t.name)||"unbekannt",PPM.liste=[]}PPM.geladen=Date.now(),PPM.liste.sort((t,n)=>ppmSwIndex(t.start)-ppmSwIndex(n.start)||(t.ord||0)-(n.ord||0)||tsSek(t.createdAt)-tsSek(n.createdAt))}}
 function ppmSwIndex(id){return SCHULWOCHEN_12.findIndex(w=>w.id===id);}
 function ppmWochen(m){const i=ppmSwIndex(m.start);if(i<0)return[];return SCHULWOCHEN_12.slice(i,i+ppmDauerDef(m).wochen);}
 function ppmStd(min){return String(Math.round(min/PPM_MIN_PRO_STUNDE*10)/10).replace(".",",");} // Minuten → Unterrichtsstunden (à 45 Min.)
@@ -5654,196 +5349,35 @@ const PPM_MAT_INFO={pdf:["📄","PDF"],bild:["🖼️","Bild"],video:["🎬","Fi
 function ppmWochenOptionen(sel){
  return SCHULWOCHEN_12.map(w=>`<option value="${w.id}"${w.id===sel?" selected":""}>${fmtKurz(w.start)}–${fmtKurz(w.end)}</option>`).join("");
 }
-async function ppmDialog(id,typ,woche,opt){
- opt=opt||{};
- const bearb=id?ppmById(id):null;
- const t=bearb?bearb.modul:typ;if(!PPM_TYPEN[t]||(!bearb&&!PPM_ZUSATZ.includes(t)))return;
- const T=PPM_TYPEN[t];
- const projektId=bearb?bearb.projektId:opt.projektId;
- const projekt=projektId?ppmById(projektId):null;
- const heute=new Date().toISOString().slice(0,10);
- const erste=SCHULWOCHEN_12.find(w=>w.end>=heute)||SCHULWOCHEN_12[0];
- const projWochen=projekt?ppmWochen(projekt):null;
- const start=bearb?bearb.start:(woche&&(!projWochen||projWochen.some(w=>w.id===woche))?woche:(projWochen?projWochen[0].id:erste.id));
- let checkouts=[];
- if(t==="kprim"){try{checkouts=(await ladeCheckoutDaten()).checkouts||[];}catch(e){}}
- const ea=t==="selbstlern"?await ppmEaListe():[];
- const bfT=t==="blockfall"?await ppmBlockfallThemen():[];
- const lb0=bearb?bearb.lb:(projekt?projekt.lb:(opt.lb||1));
- const lbOpt=[1,2,3,4].map(n=>`<option value="${n}"${n===lb0?" selected":""}>Lernbereich ${n} · ${esc((PP12_LB[n]||{}).titel||"")}</option>`).join("");
- const ph0=KW_PHASEN.find(p=>p.lbNum===lb0);
- const dauer0=bearb?ppmDauerKey(bearb):PPM_DAUER_STANDARD[t];
- const dauerListe=PPM_DAUERN.filter(d=>d.min).filter(d=>!d.alt||d.k===dauer0);
- const dauerOpt=(()=>{const l=dauerListe.some(d=>d.k===dauer0)?dauerListe:[...dauerListe,{k:dauer0,lang:dauer0.slice(1)+" Wochen (bisher)"}];return l.map(d=>`<option value="${d.k}"${d.k===dauer0?" selected":""}>${esc(d.lang)}</option>`).join("");})();
- const last=ppmLast(bearb?bearb.id:null);
- const wochenListe=projWochen||SCHULWOCHEN_12;
- const wochenOpt=wochenListe.map(w=>`<option value="${w.id}"${w.id===start?" selected":""}>KW ${ppmKW(w)} · ${fmtKurz(w.start)}–${fmtKurz(w.end)}</option>`).join("");
- let extra="";
- if(t==="projekt"){
-  const dir0=ppmProjektDirekt(bearb||{lb:lb0});
-  extra=`<label>Beim Aufrufen öffnet sich<select id="ppmDirekt"><option value="experiment"${dir0?" selected":""}>direkt „Das Experiment“ (interaktive Stunde)</option><option value="projekt"${dir0?"":" selected"}>die Projektseite mit Teams und Meilensteinen</option></select></label>
-   <p style="font-size:13px;color:var(--muted);margin:0">Team-Projekt mit Meilensteinen anlegen: Das Projekt nutzt die Meilensteine und die Teams des Lernbereichs.</p>`;
- }
- if(t==="apt")extra=`<p style="font-size:13px;color:var(--muted);margin:0">Die Frage aus der Abschlussprüfung, den relevanten Inhalt und die Lösung gestaltest du danach direkt auf der Modulseite.</p>`;
- if(t==="stunde")extra=`<label>Phase im Deeper-Learning-Konzept<select id="ppmPhase">${[1,2,3].map(n=>`<option value="${n}"${(bearb?bearb.phase:2)===n?" selected":""}>${PP12_PHASEN[n].kurz} · ${esc(PP12_PHASEN[n].name)}</option>`).join("")}</select></label>
-  ${bearb?"":`<p style="font-size:13px;color:var(--muted);margin:0">Zu jeder Stunde wird automatisch eine Digitale Tafel angelegt.</p>`}`;
- if(t==="kprim")extra=`<label>Check-out verknüpfen<select id="ppmCheckout"><option value="">Noch keinen (später verknüpfen)</option>${checkouts.map(c=>`<option value="${esc(c.id)}"${bearb&&bearb.checkoutId===c.id?" selected":""}>${esc(c.titel||"Check-out")} · K-Prim-Aufgabensatz${c.datum?" · "+esc(c.datum):""}</option>`).join("")}</select></label>`;
- if(t==="rallye"){
-  extra=`<label>Wie spielen die Schüler:innen?<select id="ppmRModus"><option value="einzeln"${bearb&&bearb.rModus==="team"?"":" selected"}>Einzeln: Jede Person sammelt eigene Punkte</option><option value="team"${bearb&&bearb.rModus==="team"?" selected":""}>In Teams: Die Punkte zählen für das Team</option></select></label>
-   <label>Freischaltung der Stationen<select id="ppmRFrei">${Object.entries(LR_FREISCHALTUNG).map(([k,v])=>`<option value="${k}"${(bearb&&bearb.rFreischaltung||"qr")===k?" selected":""}>${esc(v)}</option>`).join("")}</select></label>
-   <p style="font-size:13px;color:var(--muted);margin:0">${bearb?"":"Die Stationen legst du danach auf der Modulseite an. "}Für die Rallye braucht jedes Handy Internet. Eine Kartenansicht und einen Offline-Modus gibt es nicht.</p>`;
- }
- if(t==="experiment"){
-  const gew=bearb?ppmExpTeile(bearb):PPM_EXP_TEILE.map(x=>x.k);
-  extra=`<div class="ppm-teile"><b style="font-size:13px">Teile der Einheit wählen</b>
-   ${PPM_EXP_TEILE.map(tl=>`<label class="check"><input type="checkbox" class="ppmTeil" value="${tl.k}"${gew.includes(tl.k)?" checked":""}><span><b>${esc(tl.name)}</b> <small>(ca. ${tl.min} Min.)</small><br><small style="color:var(--muted)">${esc(tl.text)}</small></span></label>`).join("")}
+async function ppmDialog(e,t,n,i){i=i||{};const r=e?ppmById(e):null,a=r?r.modul:t;if(!PPM_TYPEN[a]||!r&&!PPM_ZUSATZ.includes(a))return;const s=PPM_TYPEN[a],l=r?r.projektId:i.projektId,c=l?ppmById(l):null,d=new Date().toISOString().slice(0,10),p=SCHULWOCHEN_12.find(T=>T.end>=d)||SCHULWOCHEN_12[0],h=c?ppmWochen(c):null,k=r?r.start:n&&(!h||h.some(T=>T.id===n))?n:h?h[0].id:p.id;let f=[];if(a==="kprim")try{f=(await ladeCheckoutDaten()).checkouts||[]}catch{}const y=a==="selbstlern"?await ppmEaListe():[],w=a==="blockfall"?await ppmBlockfallThemen():[],v=r?r.lb:c?c.lb:i.lb||1,S=[1,2,3,4].map(T=>`<option value="${T}"${T===v?" selected":""}>Lernbereich ${T} \xB7 ${esc((PP12_LB[T]||{}).titel||"")}</option>`).join(""),A=KW_PHASEN.find(T=>T.lbNum===v),_=r?ppmDauerKey(r):PPM_DAUER_STANDARD[a],Q=PPM_DAUERN.filter(T=>T.min).filter(T=>!T.alt||T.k===_),C=(Q.some(E=>E.k===_)?Q:[...Q,{k:_,lang:_.slice(1)+" Wochen (bisher)"}]).map(E=>`<option value="${E.k}"${E.k===_?" selected":""}>${esc(E.lang)}</option>`).join(""),H=ppmLast(r?r.id:null),Ee=(h||SCHULWOCHEN_12).map(T=>`<option value="${T.id}"${T.id===k?" selected":""}>KW ${ppmKW(T)} \xB7 ${fmtKurz(T.start)}\u2013${fmtKurz(T.end)}</option>`).join("");let ee="";if(a==="projekt"){const T=ppmProjektDirekt(r||{lb:v});ee=`<label>Beim Aufrufen \xF6ffnet sich<select id="ppmDirekt"><option value="experiment"${T?" selected":""}>direkt \u201EDas Experiment\u201C (interaktive Stunde)</option><option value="projekt"${T?"":" selected"}>die Projektseite mit Teams und Meilensteinen</option></select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">Team-Projekt mit Meilensteinen anlegen: Das Projekt nutzt die Meilensteine und die Teams des Lernbereichs.</p>`}if(a==="apt"&&(ee='<p style="font-size:13px;color:var(--muted);margin:0">Die Frage aus der Abschlusspr\xFCfung, den relevanten Inhalt und die L\xF6sung gestaltest du danach direkt auf der Modulseite.</p>'),a==="stunde"&&(ee=`<label>Phase im Deeper-Learning-Konzept<select id="ppmPhase">${[1,2,3].map(T=>`<option value="${T}"${(r?r.phase:2)===T?" selected":""}>${PP12_PHASEN[T].kurz} \xB7 ${esc(PP12_PHASEN[T].name)}</option>`).join("")}</select></label>
+  ${r?"":'<p style="font-size:13px;color:var(--muted);margin:0">Zu jeder Stunde wird automatisch eine Digitale Tafel angelegt.</p>'}`),a==="kprim"&&(ee=`<label>Check-out verkn\xFCpfen<select id="ppmCheckout"><option value="">Noch keinen (sp\xE4ter verkn\xFCpfen)</option>${f.map(T=>`<option value="${esc(T.id)}"${r&&r.checkoutId===T.id?" selected":""}>${esc(T.titel||"Check-out")} \xB7 K-Prim-Aufgabensatz${T.datum?" \xB7 "+esc(T.datum):""}</option>`).join("")}</select></label>`),a==="rallye"&&(ee=`<label>Wie spielen die Sch\xFCler:innen?<select id="ppmRModus"><option value="einzeln"${r&&r.rModus==="team"?"":" selected"}>Einzeln: Jede Person sammelt eigene Punkte</option><option value="team"${r&&r.rModus==="team"?" selected":""}>In Teams: Die Punkte z\xE4hlen f\xFCr das Team</option></select></label>
+   <label>Freischaltung der Stationen<select id="ppmRFrei">${Object.entries(LR_FREISCHALTUNG).map(([T,E])=>`<option value="${T}"${(r&&r.rFreischaltung||"qr")===T?" selected":""}>${esc(E)}</option>`).join("")}</select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">${r?"":"Die Stationen legst du danach auf der Modulseite an. "}F\xFCr die Rallye braucht jedes Handy Internet. Eine Kartenansicht und einen Offline-Modus gibt es nicht.</p>`),a==="experiment"){const T=r?ppmExpTeile(r):PPM_EXP_TEILE.map(E=>E.k);ee=`<div class="ppm-teile"><b style="font-size:13px">Teile der Einheit w\xE4hlen</b>
+   ${PPM_EXP_TEILE.map(E=>`<label class="check"><input type="checkbox" class="ppmTeil" value="${E.k}"${T.includes(E.k)?" checked":""}><span><b>${esc(E.name)}</b> <small>(ca. ${E.min} Min.)</small><br><small style="color:var(--muted)">${esc(E.text)}</small></span></label>`).join("")}
    <div id="ppmTeileInfo" class="ppm-teileinfo"></div></div>
-   ${projekt?`<p style="font-size:13px;color:var(--muted);margin:0">Diese Einheit gehört zum Projekt „${esc(projekt.titel)}“ und zählt zur Projektzeit.</p>`:""}`;
- }
- if(t==="blockfall"){
-  const gew=bearb&&Array.isArray(bearb.themen)&&bearb.themen.length?bearb.themen:bfT.map(x=>x.id);
-  extra=`<div class="ppm-teile"><b style="font-size:13px">Themenpakete im Spiel</b>
-   ${bfT.length?bfT.map(x=>`<label class="check"><input type="checkbox" class="ppmBfTh" value="${esc(x.id)}"${gew.includes(x.id)?" checked":""}><span><b>${esc(x.titel)}</b> <small>(${x.n} Karten)</small></span></label>`).join(""):`<p style="color:#b3261e;font-size:13px;margin:0">Die Datei blockfall/aufgaben.json wurde nicht gefunden.</p>`}</div>
-   <p style="font-size:13px;color:var(--muted);margin:0">Mit jeder vollen Reihe stellt das Spiel eine Frage zu einem Begriff oder einer Definition. Die Fragen liegen in der Datei blockfall/aufgaben.json.</p>`;
- }
- if(t==="selbstlern"){
-  const alt=bearb&&bearb.kursId==="psych-gegenstand";
-  const aktuell=bearb&&String(bearb.kursId||"").startsWith("ea:")?bearb.kursId.slice(3):"";
-  const passend=ea.filter(e=>e.art==="selbstlern"||e.id===aktuell).sort((x,y)=>(x.lb||9)-(y.lb||9)||String(x.titel).localeCompare(String(y.titel),"de"));
-  const lbGruppen=[...new Set(passend.map(e=>e.lb||0))];
-  const eaOpt=lbGruppen.map(n=>`<optgroup label="${n?"Lernbereich "+n:"Lernbereich offen"}">${passend.filter(e=>(e.lb||0)===n).map(e=>`<option value="ea:${esc(e.id)}" data-lb="${e.lb||""}"${(bearb&&bearb.kursId==="ea:"+e.id)||(!bearb&&opt.kurs==="ea:"+e.id)?" selected":""}>${esc(ppmBez(e.titel||e.id,e.art,e.lb))}${e.entwurf?" (Entwurf)":""}</option>`).join("")}</optgroup>`).join("");
-  extra=`<label>Kurs (nur Selbstlernkurse)<select id="ppmKurs">
-   ${eaOpt}
-   <optgroup label="Weitere">${alt?`<option value="psych-gegenstand" selected>${esc(PPM_KURSE["psych-gegenstand"].titel)} (Kurzfassung von Claude)</option>`:""}<option value="eigen"${bearb&&bearb.kursId==="eigen"?" selected":""}>Eigener Kurs (selbst gestalten)</option></optgroup></select></label>
-   <p style="font-size:13px;color:var(--muted);margin:0">${passend.length?"Hier erscheinen nur Selbstlernkurse. Weitere fertige Inhalte kommen automatisch dazu, sobald ihre Datei im Ordner einarbeitung/inhalte im Repo liegt.":"Noch keine fertigen Selbstlernkurse gefunden. Du kannst einen eigenen Kurs gestalten."}</p>`;
- }
- modal(`<button class="modal-close" onclick="closeModal()">×</button>
-  <div class="kicker">${T.icon} ${esc(T.kurz.toUpperCase())}</div><h2>${bearb?"Modul bearbeiten":esc(T.name)}</h2>${opt.einfach&&opt.themaTitel?`<p class="ppm-fuer">Für das Thema <b>${esc(opt.themaTitel)}</b></p>`:""}
-  <div class="form ppm-form${opt.einfach?" ppm-einfach":""}">
-   <label class="ppm-opt">Lernbereich<select id="ppmLb"${projekt?" disabled":""}>${lbOpt}</select></label>
-   <label class="ppm-opt">Titel<input id="ppmTitel" maxlength="120" value="${esc(bearb?bearb.titel:"")}" placeholder="${esc(t==="projekt"&&ph0?ph0.titel:(t==="experiment"?"Das Experiment":T.name))}"></label>
-   <div hidden><select id="ppmStart">${wochenOpt}</select><select id="ppmDauer">${dauerOpt}</select><div id="ppmKapa"></div></div>
-   ${extra}
-    <details class="ppm-details ppm-opt"${(bearb&&(bearb.themen||[]).length)||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen gehört der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${KW_THEMEN.concat(KW_LEISTUNGEN).map(e=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${e.id}"${((bearb&&bearb.themen)||[]).includes(e.id)||window.__kwThemaNeu===e.id?" checked":""}> LB ${e.lbNum} · ${e.leistung?"":"Nr. "+esc(e.nr)+" · "}${esc(kwKurz(e))}</label>`).join("")}</div></details>
-   <label class="ppm-opt">Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(bearb?bearb.notiz||"":"")}</textarea></label>
+   ${c?`<p style="font-size:13px;color:var(--muted);margin:0">Diese Einheit geh\xF6rt zum Projekt \u201E${esc(c.titel)}\u201C und z\xE4hlt zur Projektzeit.</p>`:""}`}if(a==="blockfall"){const T=r&&Array.isArray(r.themen)&&r.themen.length?r.themen:w.map(E=>E.id);ee=`<div class="ppm-teile"><b style="font-size:13px">Themenpakete im Spiel</b>
+   ${w.length?w.map(E=>`<label class="check"><input type="checkbox" class="ppmBfTh" value="${esc(E.id)}"${T.includes(E.id)?" checked":""}><span><b>${esc(E.titel)}</b> <small>(${E.n} Karten)</small></span></label>`).join(""):'<p style="color:#b3261e;font-size:13px;margin:0">Die Datei blockfall/aufgaben.json wurde nicht gefunden.</p>'}</div>
+   <p style="font-size:13px;color:var(--muted);margin:0">Mit jeder vollen Reihe stellt das Spiel eine Frage zu einem Begriff oder einer Definition. Die Fragen liegen in der Datei blockfall/aufgaben.json.</p>`}if(a==="selbstlern"){const T=r&&r.kursId==="psych-gegenstand",E=r&&String(r.kursId||"").startsWith("ea:")?r.kursId.slice(3):"",V=y.filter(we=>we.art==="selbstlern"||we.id===E).sort((we,ke)=>(we.lb||9)-(ke.lb||9)||String(we.titel).localeCompare(String(ke.titel),"de"));ee=`<label>Kurs (nur Selbstlernkurse)<select id="ppmKurs">
+   ${[...new Set(V.map(we=>we.lb||0))].map(we=>`<optgroup label="${we?"Lernbereich "+we:"Lernbereich offen"}">${V.filter(ke=>(ke.lb||0)===we).map(ke=>`<option value="ea:${esc(ke.id)}" data-lb="${ke.lb||""}"${r&&r.kursId==="ea:"+ke.id||!r&&i.kurs==="ea:"+ke.id?" selected":""}>${esc(ppmBez(ke.titel||ke.id,ke.art,ke.lb))}${ke.entwurf?" (Entwurf)":""}</option>`).join("")}</optgroup>`).join("")}
+   <optgroup label="Weitere">${T?`<option value="psych-gegenstand" selected>${esc(PPM_KURSE["psych-gegenstand"].titel)} (Kurzfassung von Claude)</option>`:""}<option value="eigen"${r&&r.kursId==="eigen"?" selected":""}>Eigener Kurs (selbst gestalten)</option></optgroup></select></label>
+   <p style="font-size:13px;color:var(--muted);margin:0">${V.length?"Hier erscheinen nur Selbstlernkurse. Weitere fertige Inhalte kommen automatisch dazu, sobald ihre Datei im Ordner einarbeitung/inhalte im Repo liegt.":"Noch keine fertigen Selbstlernkurse gefunden. Du kannst einen eigenen Kurs gestalten."}</p>`}modal(`<button class="modal-close" onclick="closeModal()">\xD7</button>
+  <div class="kicker">${s.icon} ${esc(s.kurz.toUpperCase())}</div><h2>${r?"Modul bearbeiten":esc(s.name)}</h2>${i.einfach&&i.themaTitel?`<p class="ppm-fuer">F\xFCr das Thema <b>${esc(i.themaTitel)}</b></p>`:""}
+  <div class="form ppm-form${i.einfach?" ppm-einfach":""}">
+   <label class="ppm-opt">Lernbereich<select id="ppmLb"${c?" disabled":""}>${S}</select></label>
+   <label class="ppm-opt">Titel<input id="ppmTitel" maxlength="120" value="${esc(r?r.titel:"")}" placeholder="${esc(a==="projekt"&&A?A.titel:a==="experiment"?"Das Experiment":s.name)}"></label>
+   <div hidden><select id="ppmStart">${Ee}</select><select id="ppmDauer">${C}</select><div id="ppmKapa"></div></div>
+   ${ee}
+    <details class="ppm-details ppm-opt"${r&&(r.themen||[]).length||window.__kwThemaNeu?" open":""}><summary>Zu welchen Lehrplan-Themen geh\xF6rt der Baustein?</summary><div style="display:flex;flex-direction:column;gap:2px;margin:6px 0 10px">${KW_THEMEN.concat(KW_LEISTUNGEN).map(T=>`<label class="check"><input type="checkbox" class="ppmThemaCb" value="${T.id}"${(r&&r.themen||[]).includes(T.id)||window.__kwThemaNeu===T.id?" checked":""}> LB ${T.lbNum} \xB7 ${T.leistung?"":"Nr. "+esc(T.nr)+" \xB7 "}${esc(kwKurz(T))}</label>`).join("")}</div></details>
+   <label class="ppm-opt">Hinweis an die Klasse (optional)<textarea id="ppmNotiz" rows="2" maxlength="400">${esc(r&&r.notiz||"")}</textarea></label>
    <div id="ppmMatBox" class="ppm-matbox ppm-opt"></div>
-   <div class="form-actions">${bearb?`<button class="secondary" type="button" id="ppmLoeschen">Modul löschen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
-  </div>`);
- const lbSel=$("ppmLb"),ti=$("ppmTitel"),btn=$("ppmSpeichern");
- if(opt.einfach){const f=document.querySelector(".ppm-form"),a=document.createElement("button");a.type="button";a.className="text-button ppm-mehr";a.textContent="Weitere Einstellungen (Titel, Thema, Hinweis, Material)";a.onclick=()=>{f.classList.remove("ppm-einfach");a.remove()};f.insertBefore(a,f.querySelector(".form-actions"))}
-  // ---- Material anhängen (Dateien und Links), wird beim Speichern übernommen ----
-  const matBest=[...((bearb&&bearb.material)||[])];   // schon am Modul hängende Materialien
-  const matNeu=[];                                     // neu hinzugefügt: {typ,titel,url} (Link) oder {typ,titel,file}
-  const matWegUrls=[];                                 // entfernte Dateien, werden nach dem Speichern aus dem Speicher gelöscht
-  let matLinkOffen=false,matHochgeladen=[];
-  const matRender=()=>{
-   const box=$("ppmMatBox");if(!box)return;
-   const zeile=(x,attr)=>{const inf=PPM_MAT_INFO[x.typ]||PPM_MAT_INFO.link;return`<div class="ppm-mat" style="flex-wrap:wrap"><span style="font-size:20px">${inf[0]}</span><div style="flex:1;min-width:140px"><b>${esc(x.titel||x.name||"Material")}</b><br><small style="color:var(--muted)">${inf[1]}${x.file?" · wird beim Speichern hochgeladen":""}</small></div><button type="button" class="ppm-btn klein" ${attr} title="Entfernen" aria-label="Material entfernen">✕</button></div>`;};
-   box.innerHTML=`<b style="font-size:14px">Material anhängen (optional)</b>
-    ${matBest.map((x,i)=>zeile(x,`data-mb="${i}"`)).join("")}${matNeu.map((x,i)=>zeile(x,`data-mn="${i}"`)).join("")}
-    <div class="ppm-zeile" style="border:0;padding:6px 0 0"><button type="button" class="ppm-btn" data-mat="datei">📎 Datei (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-mat="link">🔗 Link</button><input type="file" id="ppmMatInput" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div>
-    ${matLinkOffen?`<div style="display:grid;gap:8px;margin-top:6px"><input id="ppmMatUrl" placeholder="https://…" aria-label="Adresse"><input id="ppmMatUrlTitel" maxlength="100" placeholder="Titel (optional)" aria-label="Titel"><div><button type="button" class="ppm-btn primaer" data-mat="link-ok">Link hinzufügen</button> <button type="button" class="ppm-btn" data-mat="link-x">Abbrechen</button></div></div>`:""}
-    <small style="color:var(--muted)">Dateien bis 15 MB. Das Material erscheint auf der Modulseite für die Klasse.</small>`;
-  };
-  matRender();
-  $("ppmMatBox").addEventListener("click",ev=>{
-   const b=ev.target.closest("button");if(!b)return;
-   if(b.dataset.mb!==undefined){const x=matBest.splice(Number(b.dataset.mb),1)[0];if(x&&x.typ!=="link"&&x.url)matWegUrls.push(x.url);matRender();return;}
-   if(b.dataset.mn!==undefined){matNeu.splice(Number(b.dataset.mn),1);matRender();return;}
-   const a=b.dataset.mat;
-   if(a==="datei"){const inp=$("ppmMatInput");inp.onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;
-     if(f.size>DATEI_MAX_BYTES){toast("Datei ist zu groß (max. 15 MB).");e.target.value="";return;}
-     matNeu.push({typ:ppmDateiTyp(f),titel:f.name.replace(/\.[a-z0-9]{2,5}$/i,""),name:f.name,file:f});matRender();};inp.click();return;}
-   if(a==="link"){matLinkOffen=true;matRender();const u=$("ppmMatUrl");if(u)u.focus();return;}
-   if(a==="link-x"){matLinkOffen=false;matRender();return;}
-   if(a==="link-ok"){const u=wbSichereUrl($("ppmMatUrl").value);if(!u){toast("Das ist keine gültige Internetadresse.");return;}
-     matNeu.push({typ:"link",titel:$("ppmMatUrlTitel").value.trim()||u.replace(/^https?:\/\//,""),url:u});matLinkOffen=false;matRender();return;}
-  });
- const teileGewaehlt=()=>[...document.querySelectorAll(".ppmTeil")].filter(c=>c.checked).map(c=>c.value);
- const aktualisieren=()=>{
-  const dk=$("ppmDauer").value;
-  let ok=true;
-  if(projekt){$("ppmKapa").innerHTML=`<span style="color:#1f6a3a">✓ Einheit im Projekt: zählt zur Projektzeit, kein eigener Platz nötig.</span>`;}
-  else{ok=true;}
-  if(t==="experiment"){
-   const g=teileGewaehlt(),min=ppmExpMinuten(g),d=PPM_DAUERN.find(x=>x.k===dk),info=$("ppmTeileInfo");
-   let txt=`Gewählt: ${g.length} von ${PPM_EXP_TEILE.length} Teilen, ca. ${min} Min.`;
-   if(d&&d.min)txt+=min<=d.min?` · passt in ${d.min} Minuten`:` · <span style="color:#b3261e">länger als die eingeplanten ${d.min} Minuten</span>`;
-   if(!g.length){txt=`<span style="color:#b3261e">Bitte mindestens einen Teil wählen.</span>`;ok=false;}
-   info.innerHTML=txt;
-  }
-  btn.disabled=!ok;btn.title=ok?"":"In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche).";
- };
- if(t==="selbstlern"){const ks=$("ppmKurs");if(ks)ks.addEventListener("change",()=>{const o=ks.options[ks.selectedIndex],n=o&&o.dataset.lb;if(n&&!lbSel.disabled)lbSel.value=n;});}
- if(t==="projekt"&&!bearb)lbSel.addEventListener("change",()=>{const x=KW_PHASEN.find(y=>y.lbNum===Number(lbSel.value));ti.placeholder=x?x.titel:T.name;const d=$("ppmDirekt");if(d)d.value=(x&&x.einstieg)?"experiment":"projekt";});
- $("ppmStart").addEventListener("change",aktualisieren);$("ppmDauer").addEventListener("change",aktualisieren);
- document.querySelectorAll(".ppmTeil").forEach(c=>c.addEventListener("change",()=>{
-  const box=[...document.querySelectorAll(".ppmTeil")],get=k=>box.find(x=>x.value===k);
-  if(c.value==="ergebnisse"&&c.checked)get("experiment").checked=true;
-  if(c.value==="experiment"&&!c.checked)get("ergebnisse").checked=false;
-  aktualisieren();
- }));
- aktualisieren();
- btn.addEventListener("click",async()=>{
-  const lb=Number(lbSel.value),pr={ok:true};
-  const dk=$("ppmDauer").value,def=PPM_DAUERN.find(d=>d.k===dk);
-  const daten={modul:t,lb,titel:ti.value.trim(),start:$("ppmStart").value,dauer:dk,wochen:def?def.wochen:(Number(dk.slice(1))||1),notiz:$("ppmNotiz").value.trim()};
-  if(!daten.titel){const x=KW_PHASEN.find(y=>y.lbNum===lb);daten.titel=t==="projekt"&&x?x.titel:(t==="apt"?"Prüfungstraining · LB"+lb:t==="kprim"?"K-Prim-Aufgabensatz · LB"+lb:t==="stunde"?"Deeper-Learning-Einheit · LB"+lb:t==="experiment"?"Das Experiment":t==="rallye"?"Lernrallye · LB"+lb:t==="blockfall"?"Blockfall":"Selbstlernkurs · LB"+lb);}
-  daten.themen=[...document.querySelectorAll(".ppmThemaCb:checked")].map(c=>c.value);window.__kwThemaNeu=null;
-  if(projektId)daten.projektId=projektId;
-  if(t==="projekt"&&$("ppmDirekt"))daten.direkt=$("ppmDirekt").value;
-  if(t==="stunde")daten.phase=Number($("ppmPhase").value);
-  if(t==="kprim")daten.checkoutId=$("ppmCheckout").value||"";
-  if(t==="experiment"){
-   daten.teile=PPM_EXP_TEILE.map(x=>x.k).filter(k=>teileGewaehlt().includes(k));
-   const min=ppmExpMinuten(daten.teile);
-   if(def&&def.min&&min>def.min&&!confirm(`Die gewählten Teile brauchen etwa ${min} Minuten, eingeplant sind ${def.min}. Trotzdem speichern?`))return;
-  }
-  if(t==="rallye"){daten.rModus=$("ppmRModus").value;daten.rFreischaltung=$("ppmRFrei").value;}
-  if(t==="blockfall"){
-   const th=[...document.querySelectorAll(".ppmBfTh")].filter(c=>c.checked).map(c=>c.value);
-   if(bfT.length&&!th.length){toast("Bitte mindestens ein Themenpaket wählen.");return;}
-   daten.themen=th.length===bfT.length?[]:th;   // leer = alle Themenpakete
-  }
-  if(t==="selbstlern"){
-   daten.kursId=$("ppmKurs").value;
-   if(!ti.value.trim()){
-    if(daten.kursId.startsWith("ea:")){const e=ea.find(x=>"ea:"+x.id===daten.kursId);daten.titel=(e&&e.titel)||daten.titel;}
-    else if(PPM_KURSE[daten.kursId])daten.titel=PPM_KURSE[daten.kursId].titel;
-   }
-  }
-  try{
-   // Neue Dateien hochladen (bei einem Fehler wird nichts gespeichert, das Fenster bleibt offen)
-   const matNeuFertig=[];
-   matHochgeladen=[];
-   if(matNeu.some(x=>x.file))toast("Material wird hochgeladen …");
-   for(const x of matNeu){
-    if(x.file){const up=await uploadCampusDatei(x.file,`ppMaterial/${bearb?bearb.id:"neu"}`);matHochgeladen.push(up.url);matNeuFertig.push({typ:x.typ,titel:x.titel,name:x.name,url:up.url});}
-    else matNeuFertig.push({typ:x.typ,titel:x.titel,url:x.url});
-   }
-   const matAlle=[...matBest,...matNeuFertig];
-   if(matAlle.length||(bearb&&(bearb.material||[]).length))daten.material=matAlle;
-   if(bearb){await updateDoc(doc(db,"ppModule",bearb.id),{...daten,updatedAt:serverTimestamp()});matWegUrls.forEach(u=>deleteCampusDatei(u));}
-   else{
-    const basis={...daten,createdBy:currentUser.uid,createdAt:serverTimestamp()};
-    if(t==="projekt")basis.einheiten=[];
-    if(t==="stunde"){basis.material=daten.material||[];basis.fragen=[];basis.tafelId=await ppmTafelAnlegen(daten.titel);}
-    if(t==="rallye"){basis.stationen=[];basis.rAktiv=false;}
-    if(t==="selbstlern"&&daten.kursId==="eigen")basis.schritte=[{id:"s1",typ:"text",titel:"Erster Schritt",text:"## Willkommen\nHier beginnt dein Kurs."},{id:"s2",typ:"abschluss",titel:"Geschafft",text:"Du hast den Kurs abgeschlossen."}];
-    await addDoc(collection(db,"ppModule"),basis);
-   }
-   closeModal();await ppmLaden(true);await render();toast("Modul gespeichert.");
-  }catch(e){matHochgeladen.forEach(u=>deleteCampusDatei(u));matHochgeladen=[];ppmFehler(e,"Das Modul konnte nicht gespeichert werden");}
- });
- const lo=$("ppmLoeschen");
- if(lo)lo.addEventListener("click",async()=>{
-  if(!confirm("Dieses Modul wirklich löschen? Fortschritte der Klasse bleiben in der Datenbank erhalten, sind aber nicht mehr sichtbar."))return;
-  try{
-   if(bearb.modul==="projekt"){for(const x of PPM.liste.filter(y=>y.projektId===bearb.id))await deleteDoc(doc(db,"ppModule",x.id));}
-   await deleteDoc(doc(db,"ppModule",bearb.id));closeModal();activePPModul=null;await ppmLaden(true);await render();toast("Modul gelöscht.");
-  }catch(e){ppmFehler(e,"Löschen nicht möglich");}
- });
-}
+   <div class="form-actions">${r?'<button class="secondary" type="button" id="ppmLoeschen">Modul l\xF6schen</button>':""}<button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="ppmSpeichern">Speichern</button></div>
+  </div>`);const U=$("ppmLb"),ge=$("ppmTitel"),de=$("ppmSpeichern");if(i.einfach){const T=document.querySelector(".ppm-form"),E=document.createElement("button");E.type="button",E.className="text-button ppm-mehr",E.textContent="Weitere Einstellungen (Titel, Thema, Hinweis, Material)",E.onclick=()=>{T.classList.remove("ppm-einfach"),E.remove()},T.insertBefore(E,T.querySelector(".form-actions"))}const fe=[...r&&r.material||[]],se=[],G=[];let N=!1,M=[];const I=()=>{const T=$("ppmMatBox");if(!T)return;const E=(V,be)=>{const ue=PPM_MAT_INFO[V.typ]||PPM_MAT_INFO.link;return`<div class="ppm-mat" style="flex-wrap:wrap"><span style="font-size:20px">${ue[0]}</span><div style="flex:1;min-width:140px"><b>${esc(V.titel||V.name||"Material")}</b><br><small style="color:var(--muted)">${ue[1]}${V.file?" \xB7 wird beim Speichern hochgeladen":""}</small></div><button type="button" class="ppm-btn klein" ${be} title="Entfernen" aria-label="Material entfernen">\u2715</button></div>`};T.innerHTML=`<b style="font-size:14px">Material anh\xE4ngen (optional)</b>
+    ${fe.map((V,be)=>E(V,`data-mb="${be}"`)).join("")}${se.map((V,be)=>E(V,`data-mn="${be}"`)).join("")}
+    <div class="ppm-zeile" style="border:0;padding:6px 0 0"><button type="button" class="ppm-btn" data-mat="datei">\u{1F4CE} Datei (PDF, Film, Audio, Bild)</button><button type="button" class="ppm-btn" data-mat="link">\u{1F517} Link</button><input type="file" id="ppmMatInput" accept="application/pdf,.pdf,video/*,audio/*,image/*" hidden></div>
+    ${N?'<div style="display:grid;gap:8px;margin-top:6px"><input id="ppmMatUrl" placeholder="https://\u2026" aria-label="Adresse"><input id="ppmMatUrlTitel" maxlength="100" placeholder="Titel (optional)" aria-label="Titel"><div><button type="button" class="ppm-btn primaer" data-mat="link-ok">Link hinzuf\xFCgen</button> <button type="button" class="ppm-btn" data-mat="link-x">Abbrechen</button></div></div>':""}
+    <small style="color:var(--muted)">Dateien bis 15 MB. Das Material erscheint auf der Modulseite f\xFCr die Klasse.</small>`};I(),$("ppmMatBox").addEventListener("click",T=>{const E=T.target.closest("button");if(!E)return;if(E.dataset.mb!==void 0){const be=fe.splice(Number(E.dataset.mb),1)[0];be&&be.typ!=="link"&&be.url&&G.push(be.url),I();return}if(E.dataset.mn!==void 0){se.splice(Number(E.dataset.mn),1),I();return}const V=E.dataset.mat;if(V==="datei"){const be=$("ppmMatInput");be.onchange=ue=>{const we=ue.target.files&&ue.target.files[0];if(we){if(we.size>DATEI_MAX_BYTES){toast("Datei ist zu gro\xDF (max. 15 MB)."),ue.target.value="";return}se.push({typ:ppmDateiTyp(we),titel:we.name.replace(/\.[a-z0-9]{2,5}$/i,""),name:we.name,file:we}),I()}},be.click();return}if(V==="link"){N=!0,I();const be=$("ppmMatUrl");be&&be.focus();return}if(V==="link-x"){N=!1,I();return}if(V==="link-ok"){const be=wbSichereUrl($("ppmMatUrl").value);if(!be){toast("Das ist keine g\xFCltige Internetadresse.");return}se.push({typ:"link",titel:$("ppmMatUrlTitel").value.trim()||be.replace(/^https?:\/\//,""),url:be}),N=!1,I();return}});const B=()=>[...document.querySelectorAll(".ppmTeil")].filter(T=>T.checked).map(T=>T.value),L=()=>{const T=$("ppmDauer").value;let E=!0;if(c?$("ppmKapa").innerHTML='<span style="color:#1f6a3a">\u2713 Einheit im Projekt: z\xE4hlt zur Projektzeit, kein eigener Platz n\xF6tig.</span>':E=!0,a==="experiment"){const V=B(),be=ppmExpMinuten(V),ue=PPM_DAUERN.find(Be=>Be.k===T),we=$("ppmTeileInfo");let ke=`Gew\xE4hlt: ${V.length} von ${PPM_EXP_TEILE.length} Teilen, ca. ${be} Min.`;ue&&ue.min&&(ke+=be<=ue.min?` \xB7 passt in ${ue.min} Minuten`:` \xB7 <span style="color:#b3261e">l\xE4nger als die eingeplanten ${ue.min} Minuten</span>`),V.length||(ke='<span style="color:#b3261e">Bitte mindestens einen Teil w\xE4hlen.</span>',E=!1),we.innerHTML=ke}de.disabled=!E,de.title=E?"":"In dieser Woche ist nicht genug Platz (6,3 Unterrichtsstunden pro Woche)."};if(a==="selbstlern"){const T=$("ppmKurs");T&&T.addEventListener("change",()=>{const E=T.options[T.selectedIndex],V=E&&E.dataset.lb;V&&!U.disabled&&(U.value=V)})}a==="projekt"&&!r&&U.addEventListener("change",()=>{const T=KW_PHASEN.find(V=>V.lbNum===Number(U.value));ge.placeholder=T?T.titel:s.name;const E=$("ppmDirekt");E&&(E.value=T&&T.einstieg?"experiment":"projekt")}),$("ppmStart").addEventListener("change",L),$("ppmDauer").addEventListener("change",L),document.querySelectorAll(".ppmTeil").forEach(T=>T.addEventListener("change",()=>{const E=[...document.querySelectorAll(".ppmTeil")],V=be=>E.find(ue=>ue.value===be);T.value==="ergebnisse"&&T.checked&&(V("experiment").checked=!0),T.value==="experiment"&&!T.checked&&(V("ergebnisse").checked=!1),L()})),L(),de.addEventListener("click",async()=>{const T=Number(U.value),E={ok:!0},V=$("ppmDauer").value,be=PPM_DAUERN.find(we=>we.k===V),ue={modul:a,lb:T,titel:ge.value.trim(),start:$("ppmStart").value,dauer:V,wochen:be?be.wochen:Number(V.slice(1))||1,notiz:$("ppmNotiz").value.trim()};if(!ue.titel){const we=KW_PHASEN.find(ke=>ke.lbNum===T);ue.titel=a==="projekt"&&we?we.titel:a==="apt"?"Pr\xFCfungstraining \xB7 LB"+T:a==="kprim"?"K-Prim-Aufgabensatz \xB7 LB"+T:a==="stunde"?"Deeper-Learning-Einheit \xB7 LB"+T:a==="experiment"?"Das Experiment":a==="rallye"?"Lernrallye \xB7 LB"+T:a==="blockfall"?"Blockfall":"Selbstlernkurs \xB7 LB"+T}if(ue.themen=[...document.querySelectorAll(".ppmThemaCb:checked")].map(we=>we.value),window.__kwThemaNeu=null,l&&(ue.projektId=l),a==="projekt"&&$("ppmDirekt")&&(ue.direkt=$("ppmDirekt").value),a==="stunde"&&(ue.phase=Number($("ppmPhase").value)),a==="kprim"&&(ue.checkoutId=$("ppmCheckout").value||""),a==="experiment"){ue.teile=PPM_EXP_TEILE.map(ke=>ke.k).filter(ke=>B().includes(ke));const we=ppmExpMinuten(ue.teile);if(be&&be.min&&we>be.min&&!confirm(`Die gew\xE4hlten Teile brauchen etwa ${we} Minuten, eingeplant sind ${be.min}. Trotzdem speichern?`))return}if(a==="rallye"&&(ue.rModus=$("ppmRModus").value,ue.rFreischaltung=$("ppmRFrei").value),a==="blockfall"){const we=[...document.querySelectorAll(".ppmBfTh")].filter(ke=>ke.checked).map(ke=>ke.value);if(w.length&&!we.length){toast("Bitte mindestens ein Themenpaket w\xE4hlen.");return}ue.themen=we.length===w.length?[]:we}if(a==="selbstlern"&&(ue.kursId=$("ppmKurs").value,!ge.value.trim()))if(ue.kursId.startsWith("ea:")){const we=y.find(ke=>"ea:"+ke.id===ue.kursId);ue.titel=we&&we.titel||ue.titel}else PPM_KURSE[ue.kursId]&&(ue.titel=PPM_KURSE[ue.kursId].titel);try{const we=[];M=[],se.some(Be=>Be.file)&&toast("Material wird hochgeladen \u2026");for(const Be of se)if(Be.file){const Xe=await uploadCampusDatei(Be.file,`ppMaterial/${r?r.id:"neu"}`);M.push(Xe.url),we.push({typ:Be.typ,titel:Be.titel,name:Be.name,url:Xe.url})}else we.push({typ:Be.typ,titel:Be.titel,url:Be.url});const ke=[...fe,...we];if((ke.length||r&&(r.material||[]).length)&&(ue.material=ke),r)await updateDoc(doc(db,"ppModule",r.id),{...ue,updatedAt:serverTimestamp()}),G.forEach(Be=>deleteCampusDatei(Be));else{const Be={...ue,createdBy:currentUser.uid,createdAt:serverTimestamp()};a==="projekt"&&(Be.einheiten=[]),a==="stunde"&&(Be.material=ue.material||[],Be.fragen=[],Be.tafelId=await ppmTafelAnlegen(ue.titel)),a==="rallye"&&(Be.stationen=[],Be.rAktiv=!1),a==="selbstlern"&&ue.kursId==="eigen"&&(Be.schritte=[{id:"s1",typ:"text",titel:"Erster Schritt",text:`## Willkommen
+Hier beginnt dein Kurs.`},{id:"s2",typ:"abschluss",titel:"Geschafft",text:"Du hast den Kurs abgeschlossen."}]),await addDoc(collection(db,"ppModule"),Be)}closeModal(),await ppmLaden(!0),await render(),toast("Modul gespeichert.")}catch(we){M.forEach(ke=>deleteCampusDatei(ke)),M=[],ppmFehler(we,"Das Modul konnte nicht gespeichert werden")}});const Z=$("ppmLoeschen");Z&&Z.addEventListener("click",async()=>{if(confirm("Dieses Modul wirklich l\xF6schen? Fortschritte der Klasse bleiben in der Datenbank erhalten, sind aber nicht mehr sichtbar."))try{if(r.modul==="projekt")for(const T of PPM.liste.filter(E=>E.projektId===r.id))await deleteDoc(doc(db,"ppModule",T.id));await deleteDoc(doc(db,"ppModule",r.id)),closeModal(),activePPModul=null,await ppmLaden(!0),await render(),toast("Modul gel\xF6scht.")}catch(T){ppmFehler(T,"L\xF6schen nicht m\xF6glich")}})}
 function ppmFehler(e,text){
  console.error("Modulplaner:",e);
  toast(e&&e.code==="permission-denied"?`${text}: Firebase verweigert den Zugriff (permission-denied). Bitte die Firestore-Regeln prüfen.`:`${text}: ${(e&&(e.code||(e.message&&e.message.length<220?e.message:e.name)))||"unbekannt"}`);
@@ -6196,12 +5730,7 @@ async function ppmKursSeite(m){
 }
 
 // ---- Schreiben (Schüler:in) ----
-async function ppmStundeSchreiben(m,teil){
- const alt=PPM.meine.stunde[m.id]||{modulId:m.id,uid:currentUser.uid,name:ppmName(),antworten:[],gezeigt:[],bewertung:[]};
- const neu={...alt,...teil,modulId:m.id,uid:currentUser.uid,name:ppmName(),updatedAt:serverTimestamp()};
- await setDoc(doc(db,"ppStundenAntworten",ppmDocId(m)),neu);
- PPM.meine.stunde[m.id]=neu;
-}
+async function ppmStundeSchreiben(e,t){const i={...PPM.meine.stunde[e.id]||{modulId:e.id,uid:currentUser.uid,name:ppmName(),antworten:[],gezeigt:[],bewertung:[]},...t,modulId:e.id,uid:currentUser.uid,name:ppmName(),updatedAt:serverTimestamp()};await setDoc(doc(db,"ppStundenAntworten",ppmDocId(e)),i),PPM.meine.stunde[e.id]=i}
 async function ppmKursSchreiben(m,fn){
  const alt=PPM.meine.kurs[m.id]||{modulId:m.id,uid:currentUser.uid,name:ppmName(),erledigt:{},zuordnung:{},antworten:{},gezeigt:{}};
  const neu=JSON.parse(JSON.stringify({...alt,erledigt:alt.erledigt||{},zuordnung:alt.zuordnung||{},antworten:alt.antworten||{},gezeigt:alt.gezeigt||{}}));
@@ -6448,41 +5977,7 @@ function ppmDndZiel(){
  if(vor){vor.classList.add("ppm-vor");ppmDnd.vor=vor.dataset.id;}
  else if(karten.length)karten[karten.length-1].classList.add("ppm-ende");
 }
-async function ppmDndAblegen(id,zielW,vorId){
- const m=ppmById(id);if(!m||!zielW||!isTeacher())return;
- const iAlt=ppmSwIndex(m.start),iNeu=ppmSwIndex(zielW);
- if(iNeu<0){toast("Hier lässt sich nichts planen.");return;}
- const d=iNeu-iAlt,neu=SCHULWOCHEN_PP[iNeu];
- if(d!==0&&!m.projektId){
-  const pr=ppmPruefen(neu.id,ppmDauerKey(m),m.id);
-  if(!pr.ok){toast(pr.fehler||`In der Woche ${fmtKurz(neu.start)}–${fmtKurz(neu.end)} ist nicht genug Platz.`);return;}
- }
- // Reihenfolge der Zielwoche so, wie sie gerade angezeigt wird, mit dem gezogenen Modul an der Ablagestelle
- const zeile=document.querySelector(`.ppm-woche[data-w="${zielW}"] .ppm-reihe,.pp12-woche[data-w="${zielW}"] .ppm-reihe`);
- let ids=zeile?[...zeile.querySelectorAll(".ppm-karte[data-id]")].map(c=>c.dataset.id).filter(x=>x!==id):PPM.liste.filter(x=>x.start===zielW&&x.id!==id).map(x=>x.id);
- const pos=vorId?ids.indexOf(vorId):-1;
- if(pos>=0)ids.splice(pos,0,id);else ids.push(id);
- if(d===0){const alt=zeile?[...zeile.querySelectorAll(".ppm-karte[data-id]")].map(c=>c.dataset.id):[];if(alt.join("|")===ids.join("|"))return;}
- const y=window.scrollY;
- try{
-  for(let k=0;k<ids.length;k++){
-   const x=ppmById(ids[k]);if(!x)continue;
-   const o=(k+1)*10,upd={};
-   if((x.ord||0)!==o)upd.ord=o;
-   if(x.id===id&&d!==0)upd.start=neu.id;
-   if(Object.keys(upd).length)await updateDoc(doc(db,"ppModule",x.id),{...upd,updatedAt:serverTimestamp()});
-  }
-  if(d!==0&&m.modul==="projekt"){ // Einheiten im Projekt wandern mit
-   for(const x of PPM.liste.filter(z=>z.projektId===m.id)){
-    const j=ppmSwIndex(x.start)+d;
-    if(j>=0&&j<SCHULWOCHEN_PP.length)await updateDoc(doc(db,"ppModule",x.id),{start:SCHULWOCHEN_PP[j].id,updatedAt:serverTimestamp()});
-   }
-  }
-  await ppmLaden(true);await render();
-  try{window.scrollTo(0,y);}catch(e){}
-  if(d!==0)toast(`Verschoben auf ${fmtKurz(neu.start)}–${fmtKurz(neu.end)}.`);
- }catch(e){console.error(e);toast(e&&e.code==="permission-denied"?"Firebase verweigert das Speichern.":"Konnte nicht verschoben werden.");}
-}
+async function ppmDndAblegen(e,t,n){const i=ppmById(e);if(!i||!t||!isTeacher())return;const r=ppmSwIndex(i.start),a=ppmSwIndex(t);if(a<0){toast("Hier l\xE4sst sich nichts planen.");return}const s=a-r,l=SCHULWOCHEN_PP[a];if(s!==0&&!i.projektId){const k=ppmPruefen(l.id,ppmDauerKey(i),i.id);if(!k.ok){toast(k.fehler||`In der Woche ${fmtKurz(l.start)}\u2013${fmtKurz(l.end)} ist nicht genug Platz.`);return}}const c=document.querySelector(`.ppm-woche[data-w="${t}"] .ppm-reihe,.pp12-woche[data-w="${t}"] .ppm-reihe`);let d=c?[...c.querySelectorAll(".ppm-karte[data-id]")].map(k=>k.dataset.id).filter(k=>k!==e):PPM.liste.filter(k=>k.start===t&&k.id!==e).map(k=>k.id);const p=n?d.indexOf(n):-1;if(p>=0?d.splice(p,0,e):d.push(e),s===0&&(c?[...c.querySelectorAll(".ppm-karte[data-id]")].map(f=>f.dataset.id):[]).join("|")===d.join("|"))return;const h=window.scrollY;try{for(let k=0;k<d.length;k++){const f=ppmById(d[k]);if(!f)continue;const y=(k+1)*10,w={};(f.ord||0)!==y&&(w.ord=y),f.id===e&&s!==0&&(w.start=l.id),Object.keys(w).length&&await updateDoc(doc(db,"ppModule",f.id),{...w,updatedAt:serverTimestamp()})}if(s!==0&&i.modul==="projekt")for(const k of PPM.liste.filter(f=>f.projektId===i.id)){const f=ppmSwIndex(k.start)+s;f>=0&&f<SCHULWOCHEN_PP.length&&await updateDoc(doc(db,"ppModule",k.id),{start:SCHULWOCHEN_PP[f].id,updatedAt:serverTimestamp()})}await ppmLaden(!0),await render();try{window.scrollTo(0,h)}catch{}s!==0&&toast(`Verschoben auf ${fmtKurz(l.start)}\u2013${fmtKurz(l.end)}.`)}catch(k){console.error(k),toast(k&&k.code==="permission-denied"?"Firebase verweigert das Speichern.":"Konnte nicht verschoben werden.")}}
 if(!window.__ppmDndGebunden){
  window.__ppmDndGebunden=true;
  document.addEventListener("pointerdown",e=>{
@@ -6857,10 +6352,7 @@ async function renderUnterrichtPP(){
 window.renderUnterrichtPP=renderUnterrichtPP;
 
 // Lernbereich des nächsten (bzw. heutigen) Unterrichtstags laut Stoffverteilungsplan.
-function pp12LbFuerDatum(iso){
- const e=PP12_PLAN.find(x=>x.lb>0&&x.d>=iso)||[...PP12_PLAN].reverse().find(x=>x.lb>0);
- return e?e.lb:1;
-}
+function pp12LbFuerDatum(e){const t=PP12_PLAN.find(n=>n.lb>0&&n.d>=e)||[...PP12_PLAN].reverse().find(n=>n.lb>0);return t?t.lb:1}
 
 // ============================================================
 // ALTERNATIVER LEISTUNGSNACHWEIS (K-Prim-Check-outs, Kurzarbeit-Ersatz)
@@ -7308,62 +6800,44 @@ async function faLaden(){
 }
 function faKey(id){return"fa:"+(currentUser?currentUser.uid:"x")+":"+id}
 function faLies(id){try{return JSON.parse(localStorage.getItem(faKey(id))||"{}")}catch(e){return{}}}
-function faSchreib(id,patch){try{localStorage.setItem(faKey(id),JSON.stringify({...faLies(id),...patch}))}catch(e){}}
+function faSchreib(e,t){try{localStorage.setItem(faKey(e),JSON.stringify({...faLies(e),...t}))}catch{}}
 function faZeilenText(u){return(u.fall||[]).map(z=>z[0]?"Z. "+z[0]+": "+z[1]:z[1]).join("\n")}
 function faLoesungText(u){return(u.loesung||[]).map(s=>s.b+": "+s.t).join("\n")}
 function faZeilenHTML(u){if(!(u.fall||[]).length)return"";return`<div class="fa-fall"><b>${esc(u.fallkopf||"Fallbeispiel")}</b>${u.fallHinweis?`<small class="fa-zh">${esc(u.fallHinweis)}</small>`:""}${(u.fall||[]).map(z=>z[0]?`<div class="fa-z${Number(z[0])%5===0?" fa-z5":""}"><span>${esc(z[0])}</span><p>${esc(z[1])}</p></div>`:`<p class="fa-zk">${esc(z[1])}</p>`).join("")}</div>`}
-async function ppmFachaufsatzSeite(m,opt){
- const lehrer=isTeacher(),alle=await faLaden();
- const sel=(m.themen||[]);
- const liste=m.uebIds?alle.filter(u=>m.uebIds.includes(u.id)):sel.length?alle.filter(u=>sel.includes(u.thema)):alle.filter(u=>u.lb===Number(m.lb));
- const kern=liste.filter(u=>!u.zusatz),extra=liste.filter(u=>u.zusatz);
- const min=kern.reduce((a,u)=>a+(u.minuten||0),0);
- const links=await ladeTaskcardLinks().catch(()=>({}));
- const fobizz=((links||{}).fobizz_fachaufsatz||{}).url||"";
- const erl=kern.filter(u=>faLies(u.id).d).length;
- const karte=(u,i,istKern)=>{
-  const s=faLies(u.id),th=kwThemaById(u.thema);
-  const loesBtn=lehrer?"":`<button type="button" class="ppm-btn" onclick="faLoesung('${u.id}')">Lösung ein-/ausblenden</button>`;
-  return`<details class="fa-ue${s.d?" fa-ok":""}" id="fa_${u.id}"${istKern?" data-kern=\"1\"":""}${i===0&&istKern?" open":""}>
-   <summary><span class="fa-nr" data-n="${i+1}">${s.d?"✓":(istKern?i+1:"+")}</span><span><b>${esc(u.titel)}</b><small>${esc(th?th.thema:(u.zusatz||u.thema))}${u.zusatz?" · "+esc(u.zusatz):""} · ${esc(u.format)}</small></span></summary>
+async function ppmFachaufsatzSeite(e,t){const n=isTeacher(),i=await faLaden(),r=e.themen||[],a=e.uebIds?i.filter(v=>e.uebIds.includes(v.id)):r.length?i.filter(v=>r.includes(v.thema)):i.filter(v=>v.lb===Number(e.lb)),s=a.filter(v=>!v.zusatz),l=a.filter(v=>v.zusatz),c=s.reduce((v,S)=>v+(S.minuten||0),0),p=((await ladeTaskcardLinks().catch(()=>({}))||{}).fobizz_fachaufsatz||{}).url||"",h=s.filter(v=>faLies(v.id).d).length,k=(v,S,A)=>{const _=faLies(v.id),Q=kwThemaById(v.thema),C=n?"":`<button type="button" class="ppm-btn" onclick="faLoesung('${v.id}')">L\xF6sung ein-/ausblenden</button>`;return`<details class="fa-ue${_.d?" fa-ok":""}" id="fa_${v.id}"${A?' data-kern="1"':""}${S===0&&A?" open":""}>
+   <summary><span class="fa-nr" data-n="${S+1}">${_.d?"\u2713":A?S+1:"+"}</span><span><b>${esc(v.titel)}</b><small>${esc(Q?Q.thema:v.zusatz||v.thema)}${v.zusatz?" \xB7 "+esc(v.zusatz):""} \xB7 ${esc(v.format)}</small></span></summary>
    <div class="fa-body">
-    ${zeilenKopfHinweis(u)}
-    ${faZeilenHTML(u)}
-    <div class="fa-aufg"><b>${u.jahr?"Themafrage":"Aufgabe"}</b><p>${esc(u.aufgabe)}</p>${u.hinweis?`<small>${esc(u.hinweis)}</small>`:""}</div>
-    ${lehrer?"":`<label class="fa-label">Dein Text<textarea id="fat_${u.id}" rows="8" oninput="faTipp('${u.id}',this)" placeholder="Schreibe hier deine Antwort. Nenne die Theorie, erkläre sie und verdeutliche am Fall mit Zeilenangaben …">${esc(s.t||"")}</textarea></label>
-    <small class="fa-hinweis">Dein Text bleibt nur auf diesem Gerät gespeichert.</small>`}
-    <div class="fa-btns">${loesBtn}
-     ${lehrer?"":`<button type="button" class="ppm-btn" onclick="faKopieren('${u.id}')">Text für die KI kopieren</button>`}
-     ${fobizz?`<a class="ppm-btn" href="${esc(fobizz)}" target="_blank" rel="noopener noreferrer">KI-Assistent öffnen ↗</a>`:""}</div>
-    ${lehrer||!fobizz?"":`<small class="fa-hinweis">Erst „Text für die KI kopieren“, dann den Assistenten öffnen und einfügen.</small>`}
-    ${lehrer&&!fobizz?`<small class="fa-hinweis">Link zum KI-Assistenten: in der Lernwerkstatt beim Prüfungstraining hinterlegen (Fobizz-Link).</small>`:""}
-    <div class="fa-loes" id="fal_${u.id}"${lehrer?"":" hidden"}>
-     <b>${lehrer?"Musterlösung (nur für Lehrkräfte sichtbar, Schüler:innen blenden sie selbst ein)":"Musterlösung"}</b>
-     ${(u.loesung||[]).map(x=>`<p><span class="fa-b">${esc(x.b)}</span> ${esc(x.t)}</p>`).join("")}
-     <b class="fa-kk">${lehrer?"Kriterien für die Rückmeldung":"Prüfe selbst:"}</b>
-     <ul>${(u.kriterien||[]).map(k=>`<li>${esc(k)}</li>`).join("")}</ul>
+    ${zeilenKopfHinweis(v)}
+    ${faZeilenHTML(v)}
+    <div class="fa-aufg"><b>${v.jahr?"Themafrage":"Aufgabe"}</b><p>${esc(v.aufgabe)}</p>${v.hinweis?`<small>${esc(v.hinweis)}</small>`:""}</div>
+    ${n?"":`<label class="fa-label">Dein Text<textarea id="fat_${v.id}" rows="8" oninput="faTipp('${v.id}',this)" placeholder="Schreibe hier deine Antwort. Nenne die Theorie, erkl\xE4re sie und verdeutliche am Fall mit Zeilenangaben \u2026">${esc(_.t||"")}</textarea></label>
+    <small class="fa-hinweis">Dein Text bleibt nur auf diesem Ger\xE4t gespeichert.</small>`}
+    <div class="fa-btns">${C}
+     ${n?"":`<button type="button" class="ppm-btn" onclick="faKopieren('${v.id}')">Text f\xFCr die KI kopieren</button>`}
+     ${p?`<a class="ppm-btn" href="${esc(p)}" target="_blank" rel="noopener noreferrer">KI-Assistent \xF6ffnen \u2197</a>`:""}</div>
+    ${n||!p?"":'<small class="fa-hinweis">Erst \u201EText f\xFCr die KI kopieren\u201C, dann den Assistenten \xF6ffnen und einf\xFCgen.</small>'}
+    ${n&&!p?'<small class="fa-hinweis">Link zum KI-Assistenten: in der Lernwerkstatt beim Pr\xFCfungstraining hinterlegen (Fobizz-Link).</small>':""}
+    <div class="fa-loes" id="fal_${v.id}"${n?"":" hidden"}>
+     <b>${n?"Musterl\xF6sung (nur f\xFCr Lehrkr\xE4fte sichtbar, Sch\xFCler:innen blenden sie selbst ein)":"Musterl\xF6sung"}</b>
+     ${(v.loesung||[]).map(H=>`<p><span class="fa-b">${esc(H.b)}</span> ${esc(H.t)}</p>`).join("")}
+     ${n?`<b class="fa-kk">Kriterien f\xFCr die R\xFCckmeldung</b>
+     <ul>${(v.kriterien||[]).map(H=>`<li>${esc(H)}</li>`).join("")}</ul>`:faSelbstHTML(v,_)}
     </div>
-    ${lehrer?"":`<label class="check fa-fertig"><input type="checkbox" ${s.d?"checked ":""}onchange="faErledigt('${u.id}',this.checked)"><span>Erledigt</span></label>`}
-   </div></details>`;
- };
- const karten=kern.map((u,i)=>karte(u,i,true)).join("");
- const zus=extra.length?`<details class="fa-zus"><summary>Mehr üben: ${extra.length} zusätzliche Übung${extra.length===1?"":"en"} (Vertiefung und weitere Themen)</summary>${extra.map((u,i)=>karte(u,i,false)).join("")}</details>`:"";
- const css=`<style>.fa-ue{background:#fff;border:1px solid var(--line);border-radius:14px;margin:10px 0;overflow:hidden}.fa-ue>summary{display:flex;gap:12px;align-items:center;padding:12px 14px;cursor:pointer;list-style:none}.fa-ue>summary::-webkit-details-marker{display:none}
+    ${n?"":`<label class="check fa-fertig"><input type="checkbox" ${_.d?"checked ":""}onchange="faErledigt('${v.id}',this.checked)"><span>Erledigt</span></label>`}
+   </div></details>`},f=s.map((v,S)=>k(v,S,!0)).join(""),y=l.length?`<details class="fa-zus"><summary>Mehr \xFCben: ${l.length} zus\xE4tzliche \xDCbung${l.length===1?"":"en"} (Vertiefung und weitere Themen)</summary>${l.map((v,S)=>k(v,S,!1)).join("")}</details>`:"",w=`<style>.fa-ue{background:#fff;border:1px solid var(--line);border-radius:14px;margin:10px 0;overflow:hidden}.fa-ue>summary{display:flex;gap:12px;align-items:center;padding:12px 14px;cursor:pointer;list-style:none}.fa-ue>summary::-webkit-details-marker{display:none}
  .fa-ue>summary small{display:block;color:var(--muted);font-size:12px}.fa-nr{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--c,#3A8FD4);color:var(--c,#3A8FD4);display:grid;place-items:center;font-weight:800}.fa-ok .fa-nr{background:var(--c,#3A8FD4);color:#fff}
  .fa-body{padding:2px 16px 16px}.fa-quelle{font-size:12px;color:var(--muted);margin:0 0 8px}.fa-fall{background:#f4f8fc;border-left:4px solid var(--c,#3A8FD4);border-radius:10px;padding:10px 12px;margin:8px 0}.fa-z{display:flex;gap:10px;margin-top:3px;line-height:1.4}.fa-z span{flex:none;min-width:26px;text-align:right;font-size:11px;color:var(--muted);padding-top:3px}.fa-z5 span{font-weight:800;color:var(--c,#3A8FD4)}.fa-zk{margin:8px 0 2px;font-weight:700}.fa-zh{display:block;color:var(--muted);font-size:12px;margin:2px 0 6px}.fa-zus{margin:14px 0}.fa-zus>summary{cursor:pointer;font-weight:700;padding:8px 2px}.fa-z p{margin:0}
  .fa-aufg{margin:10px 0}.fa-aufg p{margin:4px 0}.fa-aufg small,.fa-hinweis{color:var(--muted);font-size:12px}.fa-label{display:block;font-weight:700;font-size:12px}.fa-label textarea{width:100%;font:inherit;font-weight:400;margin-top:4px}.fa-btns{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}.fa-btns a{text-decoration:none;display:inline-block}
- .fa-loes{background:#eef7ee;border-left:4px solid #3fa66a;border-radius:10px;padding:10px 12px;margin:10px 0}.fa-loes p{margin:6px 0}.fa-b{font-weight:800;color:#2e7d4f}.fa-kk{display:block;margin-top:8px}.fa-fertig{margin-top:8px}</style>`;
- if(opt&&opt.karten)return css+liste.map((u,i)=>karte(u,i,true)).join("");
- return`${ppmKopf(m,`<p style="color:var(--muted)">${kern.length} Übung${kern.length===1?"":"en"}${sel.length?" (ausgewählte Themen)":""}</p>`)}
- ${css}
- <div class="ppm-box"><h2>Fachaufsatz kurz geübt</h2>
-  <p>Lies den ganzen Fall, schreibe nur den gefragten Teil und belege mit <b>Zeilenangaben</b> (zum Beispiel „Z. 12–14“). Danach kannst du die Musterlösung einblenden oder deinen Text von der KI korrigieren lassen.</p>
-  ${lehrer?`<p class="ppm-leer">Lehrkräfte sehen die Musterlösungen sofort. Die Übungen gelten für den Lernbereich ${m.lb}${sel.length?" und die gewählten Themen":""}. Themen wählst du über „Modul bearbeiten“.</p>`:`<div class="ppm-balken"><b id="faStand">${erl} von ${kern.length} erledigt</b></div>`}
+ .fa-self{margin:6px 0 2px}.fa-kr{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:space-between;padding:6px 0;border-top:1px solid #d6e8d6}.fa-kr:first-child{border-top:0}.fa-kr>span:first-child{flex:1 1 220px;line-height:1.35}.fa-kw{display:flex;gap:6px}.fa-kw label{cursor:pointer}.fa-kw input{position:absolute;opacity:0;pointer-events:none}.fa-kw span{display:inline-block;border:2px solid #b9d6b9;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700;background:#fff;color:#35553a}.fa-kw input:checked+span{background:#2e7d4f;border-color:#2e7d4f;color:#fff}.fa-kw input:focus-visible+span{outline:2px solid #2e7d4f;outline-offset:2px}.fa-sestand{font-size:13px;font-weight:700;color:#2e7d4f}
+ .fa-loes{background:#eef7ee;border-left:4px solid #3fa66a;border-radius:10px;padding:10px 12px;margin:10px 0}.fa-loes p{margin:6px 0}.fa-b{font-weight:800;color:#2e7d4f}.fa-kk{display:block;margin-top:8px}.fa-fertig{margin-top:8px}</style>`;return t&&t.karten?w+a.map((v,S)=>k(v,S,!0)).join(""):`${ppmKopf(e,`<p style="color:var(--muted)">${s.length} \xDCbung${s.length===1?"":"en"}${r.length?" (ausgew\xE4hlte Themen)":""}</p>`)}
+ ${w}
+ <div class="ppm-box"><h2>Fachaufsatz kurz ge\xFCbt</h2>
+  <p>Lies den ganzen Fall, schreibe nur den gefragten Teil und belege mit <b>Zeilenangaben</b> (zum Beispiel \u201EZ. 12\u201314\u201C). Danach kannst du die Musterl\xF6sung einblenden oder deinen Text von der KI korrigieren lassen.</p>
+  ${n?`<p class="ppm-leer">Lehrkr\xE4fte sehen die Musterl\xF6sungen sofort. Die \xDCbungen gelten f\xFCr den Lernbereich ${e.lb}${r.length?" und die gew\xE4hlten Themen":""}. Themen w\xE4hlst du \xFCber \u201EModul bearbeiten\u201C.</p>`:`<div class="ppm-balken"><b id="faStand">${h} von ${s.length} erledigt</b></div>`}
  </div>
- ${liste.length?karten+zus:`<div class="ppm-box"><p class="ppm-leer">Für diese Auswahl sind noch keine Übungen hinterlegt.</p></div>`}
- ${lehrer&&FA_HINWEIS?`<p class="fa-quelle">${esc(FA_HINWEIS)}</p>`:""}
- ${footer()}`;
-}
+ ${a.length?f+y:'<div class="ppm-box"><p class="ppm-leer">F\xFCr diese Auswahl sind noch keine \xDCbungen hinterlegt.</p></div>'}
+ ${n&&FA_HINWEIS?`<p class="fa-quelle">${esc(FA_HINWEIS)}</p>`:""}
+ ${footer()}`}
 function zeilenKopfHinweis(u){return u.herkunft?`<p class="fa-quelle">${esc(u.herkunft)}</p>`:""}
 function faTipp(id,el){faSchreib(id,{t:el.value})}
 function faLoesung(id){
@@ -7763,64 +7237,7 @@ async function lrVorlageAnlegen(m,i,anhaengen){
  toast(`${v.stationen.length} Stationen ${anhaengen?"angehängt":"geladen"}.`);
 }
 // ---- Klicks der Lernrallye ----
-async function lrKlick(e){
- const b=e.target.closest&&e.target.closest("[data-lr]");
- if(!b)return;
- const a=b.dataset.lr;
- const m=activePPModul?ppmById(activePPModul):null;
- if(a==="reset"){ // im Auswertungs-Fenster: Stand einer Person zurücksetzen
-  if(!isTeacher())return;
-  if(!confirm("Den Stand dieser Person in der Rallye wirklich zurücksetzen?"))return;
-  try{const id=b.dataset.doc;await deleteDoc(doc(db,"ppRallyeStand",id));await deleteDoc(doc(db,"ppRallyeRang",id));toast("Zurückgesetzt.");closeModal();if(m)await lrAuswertungDialog(m);}catch(err){ppmFehler(err,"Zurücksetzen nicht möglich");}
-  return;
- }
- if(!m||m.modul!=="rallye")return;
- const lehrer=isTeacher(),stand=LR.stand[m.id];
- try{
-  if(a==="station"){
-   const sid=b.dataset.sid;LR.sicht={modulId:m.id,sid};await render();window.scrollTo(0,0);return;
-  }
-  if(a==="zurueck"){LR.sicht=null;await render();return;}
-  if(a==="neu-laden"){await render();return;}
-  if(a==="pruefen"){
-   const st=lrStation(m,b.dataset.sid);if(!st)return;
-   const r=lrAntwortLesen(st);
-   if(!r.ok){toast(st.typ==="kprim"?"Bitte alle vier Aussagen beantworten.":st.typ==="zuordnen"?"Bitte jedem Begriff eine Erklärung zuordnen.":"Bitte zuerst eine Antwort geben.");return;}
-   const erg={...lrBewerten(st,r.a),a:r.a,zeit:Date.now()};
-   if(lehrer){LR.sicht={modulId:m.id,sid:st.id,erg};await render();return;}
-   if(!m.rAktiv){toast("Die Rallye ist beendet.");return;}
-   stand.erg[st.id]=erg;
-   await lrSpeichern(m,stand);
-   await render();return;
-  }
-  if(a==="team"||a==="team-neu"){
-   if(lehrer)return;
-   const name=a==="team"?b.dataset.team:($("lrTeamName")?.value||"").trim().replace(/\s+/g," ");
-   if(!name){toast("Bitte einen Teamnamen eingeben.");return;}
-   stand.team=name;await lrSpeichern(m,stand);await render();return;
-  }
-  if(a==="code"){if(!lehrer)await lrCodeEinloesen(m,stand,$("lrCode")?.value);return;}
-  if(a==="scan"){if(!lehrer)await lrScannen(m,stand);return;}
-  if(!lehrer)return;
-  if(a==="aktiv"){await updateDoc(doc(db,"ppModule",m.id),{rAktiv:!m.rAktiv,updatedAt:serverTimestamp()});await ppmLaden(true);await render();toast(m.rAktiv?"Die Rallye ist beendet.":"Die Rallye läuft.");return;}
-  if(a==="st-neu"){lrStationDialog(m,null);return;}
-  if(a==="st-vorlage"){await lrVorlageDialog(m);return;}
-  if(a==="vorlage"){await lrVorlageAnlegen(m,Number(b.dataset.i),b.dataset.wie==="plus");return;}
-  if(a==="st-edit"){lrStationDialog(m,b.dataset.sid);return;}
-  if(a==="st-weg"){
-   const st=lrStation(m,b.dataset.sid);if(!st)return;
-   if(!confirm(`Die Station „${st.titel}“ wirklich löschen? Bereits gesammelte Punkte bleiben in der Rangliste stehen.`))return;
-   await lrStationenSpeichern(m,(m.stationen||[]).filter(x=>x.id!==st.id));return;
-  }
-  if(a==="st-auf"||a==="st-ab"){
-   const l=[...(m.stationen||[])],i=l.findIndex(x=>x.id===b.dataset.sid),j=a==="st-auf"?i-1:i+1;
-   if(i<0||j<0||j>=l.length)return;
-   [l[i],l[j]]=[l[j],l[i]];await lrStationenSpeichern(m,l);return;
-  }
-  if(a==="auswertung"){await lrAuswertungDialog(m);return;}
-  if(a==="qr-druck"){lrQrDruck(m);return;}
- }catch(err){ppmFehler(err,"Aktion nicht möglich");}
-}
+async function lrKlick(e){const t=e.target.closest&&e.target.closest("[data-lr]");if(!t)return;const n=t.dataset.lr,i=activePPModul?ppmById(activePPModul):null;if(n==="reset"){if(!isTeacher()||!confirm("Den Stand dieser Person in der Rallye wirklich zur\xFCcksetzen?"))return;try{const s=t.dataset.doc;await deleteDoc(doc(db,"ppRallyeStand",s)),await deleteDoc(doc(db,"ppRallyeRang",s)),toast("Zur\xFCckgesetzt."),closeModal(),i&&await lrAuswertungDialog(i)}catch(s){ppmFehler(s,"Zur\xFCcksetzen nicht m\xF6glich")}return}if(!i||i.modul!=="rallye")return;const r=isTeacher(),a=LR.stand[i.id];try{if(n==="station"){const s=t.dataset.sid;LR.sicht={modulId:i.id,sid:s},await render(),window.scrollTo(0,0);return}if(n==="zurueck"){LR.sicht=null,await render();return}if(n==="neu-laden"){await render();return}if(n==="pruefen"){const s=lrStation(i,t.dataset.sid);if(!s)return;const l=lrAntwortLesen(s);if(!l.ok){toast(s.typ==="kprim"?"Bitte alle vier Aussagen beantworten.":s.typ==="zuordnen"?"Bitte jedem Begriff eine Erkl\xE4rung zuordnen.":"Bitte zuerst eine Antwort geben.");return}const c={...lrBewerten(s,l.a),a:l.a,zeit:Date.now()};if(r){LR.sicht={modulId:i.id,sid:s.id,erg:c},await render();return}if(!i.rAktiv){toast("Die Rallye ist beendet.");return}a.erg[s.id]=c,await lrSpeichern(i,a),await render();return}if(n==="team"||n==="team-neu"){if(r)return;const s=n==="team"?t.dataset.team:($("lrTeamName")?.value||"").trim().replace(/\s+/g," ");if(!s){toast("Bitte einen Teamnamen eingeben.");return}a.team=s,await lrSpeichern(i,a),await render();return}if(n==="code"){r||await lrCodeEinloesen(i,a,$("lrCode")?.value);return}if(n==="scan"){r||await lrScannen(i,a);return}if(!r)return;if(n==="aktiv"){await updateDoc(doc(db,"ppModule",i.id),{rAktiv:!i.rAktiv,updatedAt:serverTimestamp()}),await ppmLaden(!0),await render(),toast(i.rAktiv?"Die Rallye ist beendet.":"Die Rallye l\xE4uft.");return}if(n==="st-neu"){lrStationDialog(i,null);return}if(n==="st-vorlage"){await lrVorlageDialog(i);return}if(n==="vorlage"){await lrVorlageAnlegen(i,Number(t.dataset.i),t.dataset.wie==="plus");return}if(n==="st-edit"){lrStationDialog(i,t.dataset.sid);return}if(n==="st-weg"){const s=lrStation(i,t.dataset.sid);if(!s||!confirm(`Die Station \u201E${s.titel}\u201C wirklich l\xF6schen? Bereits gesammelte Punkte bleiben in der Rangliste stehen.`))return;await lrStationenSpeichern(i,(i.stationen||[]).filter(l=>l.id!==s.id));return}if(n==="st-auf"||n==="st-ab"){const s=[...i.stationen||[]],l=s.findIndex(d=>d.id===t.dataset.sid),c=n==="st-auf"?l-1:l+1;if(l<0||c<0||c>=s.length)return;[s[l],s[c]]=[s[c],s[l]],await lrStationenSpeichern(i,s);return}if(n==="auswertung"){await lrAuswertungDialog(i);return}if(n==="qr-druck"){lrQrDruck(i);return}}catch(s){ppmFehler(s,"Aktion nicht m\xF6glich")}}
 if(!window.__lrKlickGebunden){window.__lrKlickGebunden=true;document.addEventListener("click",lrKlick);}
 
 async function renderPaedagogikPhasenZeitstrahl(fach,fortschrittMap,heute){
@@ -8308,17 +7725,9 @@ function basischeckEingabeHTML(f,i,typ){
  }
  return"";
 }
-function basischeckFreiErgebnisHTML(fragen,mein){
- const l=[];
- fragen.forEach((f,i)=>{
-  if(f.typ!=="frei")return;
-  const a=(mein.antworten||[])[i];
-  l.push(`<section class="ci-q ci-fr"><div class="ci-qk"><span class="ci-n">${i+1}</span><b class="ci-t">${esc(f.text)}</b></div>
-   <div class="ci-fa"><small>Deine Antwort</small><p>${esc(a||"–")}</p></div>
-   ${f.musterantwort?`<div class="ci-fa ci-fm"><small>Musterantwort zum Vergleichen</small><p>${esc(f.musterantwort)}</p></div>`:""}</section>`);
- });
- return l.join("");
-}
+function r_oy(e,t){const n=[];return e.forEach((i,r)=>{if(i.typ!=="frei")return;const a=(t.antworten||[])[r];n.push(`<section class="ci-q ci-k-frei ci-fr"><div class="ci-qk"><span class="ci-n">${r+1}</span><b class="ci-t">${esc(i.text)}</b></div>
+   <div class="ci-fa"><small>Deine Antwort</small><p>${esc(a||"\u2013")}</p></div>
+   ${i.musterantwort?`<div class="ci-fa ci-fm"><small>Musterantwort zum Vergleichen</small><p>${esc(i.musterantwort)}</p></div>`:""}</section>`)}),n.join("")}
 function basischeckEditorHTML(fach,wocheId,fragen){
  const T=[["mc","Multiple Choice"],["kprim","K-Prim (richtig/falsch je Aussage)"],["offen","Offene Frage (Stichworte)"],["zuordnung","Zuordnung"],["lueckentext","Lückentext"],["reihenfolge","Reihenfolge"],["frei","Freitext (nicht bewertet)"]];
  return`<div class="form">
@@ -8367,25 +7776,20 @@ function basischeckEditorHTML(fach,wocheId,fragen){
   <button class="primary"onclick="saveBasischeckFragen('${fach}','${wocheId}')">Wissens-Check speichern</button>
  </div>`;
 }
-function basischeckPanelHTML(fach,wocheId,basischeckFragen,meinBasischeck,extraSchueler=""){
- if(isTeacher())return basischeckEditorHTML(fach,wocheId,basischeckFragen);
- if(!basischeckFragen.length)return`<div class="empty">Für diesen Inhalt wurde noch kein Wissens-Check eingerichtet.</div>${extraSchueler}`;
- if(meinBasischeck){const af=ampelFarbe(meinBasischeck.ampel);return`<div class="ci-res"style="--a:${af}"><div class="ci-ring"><b>${meinBasischeck.richtig}</b><small>von ${meinBasischeck.gesamt}</small></div><div><strong>${meinBasischeck.richtig} von ${meinBasischeck.gesamt} richtig</strong><p>${esc(basischeckAmpelText(meinBasischeck.ampel))}</p></div></div>${basischeckFreiErgebnisHTML(basischeckFragen,meinBasischeck)}${ciVerlaufSVG(meinBasischeck)?`<div class="ci-verlauf"><b>Dein Verlauf</b>${ciVerlaufSVG(meinBasischeck)}</div>`:""}<button type="button"class="secondary"onclick="ciWiederholen('${wocheId}')">Wissen erneut prüfen</button><small style="display:block;margin-top:6px;color:var(--muted)">Am besten nach dem Üben und an einem anderen Tag. Dann siehst du, wie sich dein Ergebnis entwickelt.</small>`}
- const anz=basischeckFragen.length,min=Math.max(3,Math.round(anz*1.2));
- const ART={mc:"Auswahl",kprim:"Richtig oder falsch",offen:"Kurzantwort",zuordnung:"Zuordnen",lueckentext:"Lückentext",reihenfolge:"Reihenfolge",frei:"Freitext"};
- return`<div class="ci">
-  <div class="ci-kopf"><span>${anz} Aufgaben</span><span>etwa ${min} Minuten</span><span>keine Note</span></div>
-  ${basischeckFragen.map((f,i)=>{
-   const typ=f.typ||"mc";
-   return`<section class="ci-q ci-k-${typ}">
-    ${typ==="kprim"?`<div class="ci-qk"><span class="ci-n">${i+1}</span><div class="ci-t">${kprimFrageKopfHTML("",f.text,f.vignette)}</div></div>`:`<div class="ci-qk"><span class="ci-n">${i+1}</span>${typ==="lueckentext"?`<b class="ci-t">Ergänze den Text.</b>`:`<b class="ci-t">${esc(f.text)}</b>`}</div>`}
-    <span class="ci-art">${ART[typ]||""}</span>
-    ${basischeckEingabeHTML(f,i,typ)}
-   </section>`;
-  }).join("")}
-  <button class="primary ci-go"onclick="submitBasischeck('${fach}','${wocheId}')">Wissens-Check abgeben</button>
- </div>`;
-}
+function r_dy(e){const t=e&&e.verlauf;return t&&t.length>1?`<small>Verlauf: ${t.map(n=>n.r+"/"+n.g).join(" \u2192 ")}</small>`:""}
+const CI_NEU={};
+function ciWiederholen(e){CI_NEU[e]=!0,openCheckIn(e)}
+window.ciWiederholen=ciWiederholen;
+function basischeckPanelHTML(e,t,n,i,r=""){if(isTeacher())return basischeckEditorHTML(e,t,n);if(!n.length)return`<div class="empty">F\xFCr diesen Inhalt wurde noch kein Wissens-Check eingerichtet.</div>${r}`;if(i)return`<div class="ci-res"style="--a:${ampelFarbe(i.ampel)}"><div class="ci-ring"><b>${i.richtig}</b><small>von ${i.gesamt}</small></div><div><strong>${i.richtig} von ${i.gesamt} richtig</strong><p>${esc(basischeckAmpelText(i.ampel))}</p>${r_dy(i)}</div></div>${r_oy(n,i)}${ciVerlaufSVG(i)?`<div class="ci-verlauf"><b>Dein Verlauf</b>${ciVerlaufSVG(i)}</div>`:""}<button type="button"class="secondary"onclick="ciWiederholen('${t}')">Wissen erneut pr\xFCfen</button>`;const a=n.length,s=Math.max(3,Math.round(a*1.2)),l={mc:"Auswahl",kprim:"Richtig oder falsch",offen:"Kurzantwort",zuordnung:"Zuordnen",lueckentext:"L\xFCckentext",reihenfolge:"Reihenfolge",frei:"Freitext"};return`<div class="ci">
+  <div class="ci-kopf"><span>${a} Aufgaben</span><span>etwa ${s} Minuten</span><span>keine Note</span></div>
+  ${n.map((c,d)=>{const p=c.typ||"mc";return`<section class="ci-q ci-k-${p}">
+    ${p==="kprim"?`<div class="ci-qk"><span class="ci-n">${d+1}</span><div class="ci-t">${kprimFrageKopfHTML("",c.text,c.vignette)}</div></div>`:`<div class="ci-qk"><span class="ci-n">${d+1}</span>${p==="lueckentext"?'<b class="ci-t">Erg\xE4nze den Text.</b>':`<b class="ci-t">${esc(c.text)}</b>`}</div>`}
+    <span class="ci-art">${l[p]||""}</span>
+    ${basischeckEingabeHTML(c,d,p)}
+   </section>`}).join("")}
+  <div class="ci-sich"><b>Wie sicher f\xFChlst du dich bei diesem Thema?</b><label><input type="radio"name="ciSich"value="1"> eher unsicher</label><label><input type="radio"name="ciSich"value="2"> teils, teils</label><label><input type="radio"name="ciSich"value="3"> ziemlich sicher</label></div>
+  <button class="primary ci-go"onclick="submitBasischeck('${e}','${t}')">Wissens-Check abgeben</button>
+ </div>`}
 
 async function openCheckIn(wocheId){
  const fach="paedagogik",lehrer=isTeacher();
@@ -8924,30 +8328,7 @@ function ladeCheckoutDaten(){ // gleiche Daten innerhalb von 5 s nur einmal lade
  if(_coP&&Date.now()-_coT<5000&&_coT>(window.__fsDirty||0))return _coP;
  _coT=Date.now();return _coP=ladeCheckoutDatenRoh();
 }
-async function ladeCheckoutDatenRoh(){
- const lehrer=isTeacher();
- const basis={anzahlGesamt:10,anzahlWaehlen:7,auswahlOffen:false};
- try{
-  const einstP=getDoc(doc(db,"checkoutEinstellungen","pp")).catch(()=>null);
-  const abgP=lehrer?null:getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));if(abgP)abgP.catch(()=>{});
-  const ausP=lehrer?null:getDoc(doc(db,"checkoutAuswahl",currentUser.uid)).catch(()=>null);
-  const docs=lehrer?(await getDocs(collection(db,"checkouts"))).docs
-   :(await Promise.all(["live","beendet"].map(st=>getDocs(query(collection(db,"checkouts"),where("status","==",st)))))).flatMap(s=>s.docs);
-  const checkouts=docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(a.datum||"").localeCompare(String(b.datum||""))||tsSek(a.createdAt)-tsSek(b.createdAt));
-  let einst={};
-  try{const e=await einstP;einst=e&&e.exists()?e.data():{};}catch(e){}
-  const meineAbgaben={};let auswahl=null;const stat={};
-  if(lehrer){
-   try{const klasseUids=new Set((await getAllUsersForLernstand()).map(u=>u.uid));(await getDocs(collection(db,"checkoutAbgaben"))).docs.forEach(x=>{const a=x.data();if(!a.ausgewertet||!klasseUids.has(a.uid))return;const t=(stat[a.checkoutId]=stat[a.checkoutId]||{n:0,summe:0});t.n++;t.summe+=Number(a.notenpunkte)||0;});}catch(e){console.error("Check-out-Statistik:",e);}
-  }
-  if(!lehrer){
-   const s=await abgP;
-   s.docs.forEach(d=>{const x=d.data();meineAbgaben[x.checkoutId]=x;});
-   try{const a=await ausP;auswahl=a&&a.exists()?a.data():null;}catch(e){}
-  }
-  return{checkouts,einst:{...basis,...einst},meineAbgaben,auswahl,stat};
- }catch(e){console.error("Check-outs laden:",e);return{checkouts:[],einst:basis,meineAbgaben:{},auswahl:null,stat:{},fehler:true};}
-}
+async function ladeCheckoutDatenRoh(){const e=isTeacher(),t={anzahlGesamt:10,anzahlWaehlen:7,auswahlOffen:!1};try{const n=getDoc(doc(db,"checkoutEinstellungen","pp")).catch(()=>null),i=e?null:getDocs(query(collection(db,"checkoutAbgaben"),where("uid","==",currentUser.uid)));i&&i.catch(()=>{});const r=e?null:getDoc(doc(db,"checkoutAuswahl",currentUser.uid)).catch(()=>null),s=(e?(await getDocs(collection(db,"checkouts"))).docs:(await Promise.all(["live","beendet"].map(h=>getDocs(query(collection(db,"checkouts"),where("status","==",h)))))).flatMap(h=>h.docs)).map(h=>({id:h.id,...h.data()})).sort((h,k)=>String(h.datum||"").localeCompare(String(k.datum||""))||tsSek(h.createdAt)-tsSek(k.createdAt));let l={};try{const h=await n;l=h&&h.exists()?h.data():{}}catch{}const c={};let d=null;const p={};if(e)try{const h=new Set((await getAllUsersForLernstand()).map(k=>k.uid));(await getDocs(collection(db,"checkoutAbgaben"))).docs.forEach(k=>{const f=k.data();if(!f.ausgewertet||!h.has(f.uid))return;const y=p[f.checkoutId]=p[f.checkoutId]||{n:0,summe:0};y.n++,y.summe+=Number(f.notenpunkte)||0})}catch(h){console.error("Check-out-Statistik:",h)}if(!e){(await i).docs.forEach(k=>{const f=k.data();c[f.checkoutId]=f});try{const k=await r;d=k&&k.exists()?k.data():null}catch{}}return{checkouts:s,einst:{...t,...l},meineAbgaben:c,auswahl:d,stat:p}}catch(n){return console.error("Check-outs laden:",n),{checkouts:[],einst:t,meineAbgaben:{},auswahl:null,stat:{},fehler:!0}}}
 // Die für den Kurzarbeit-Ersatz zählenden Check-outs (beendet, „zählt").
 // Bibliothek = alle beendeten Check-outs, die für den Kurzarbeit-Ersatz zählen.
 function coPool(checkouts,einst){return checkouts.filter(c=>c.status==="beendet"&&c.zaehlt!==false);}
@@ -10603,15 +9984,8 @@ function coBeTabelleHTML(maxBE,markBE){
  return`<div style="overflow-x:auto;margin:6px 0;break-inside:avoid"><table style="border-collapse:collapse;width:auto"><tbody>${kopf}${pr}${np}</tbody></table></div>`;
 }
 // P/P-Bewertungsschlüssel: Prozent → Notenpunkte
-function coProzentSchluesselHTML(){
- const z=[...FOSBOS_SCHLUESSEL,[0,0]];
- const st=`${CO_ZELLE};text-align:center;white-space:nowrap`;
- const unterste=FOSBOS_SCHLUESSEL[FOSBOS_SCHLUESSEL.length-1][1];
- const half=Math.ceil(z.length/2);
- const block=teil=>`<tr><th style="${st};text-align:left;background:#f1f5f8">Notenpunkte</th>${teil.map(([np])=>`<th style="${st};background:#f1f5f8">${np}</th>`).join("")}</tr>
-  <tr><td style="${st};text-align:left">Prozent</td>${teil.map(([np,min])=>`<td style="${st}">${np===0?"&lt; "+unterste:"ab "+min}</td>`).join("")}</tr>`;
- return`<div style="overflow-x:auto;margin:6px 0;break-inside:avoid"><table style="border-collapse:collapse;width:auto"><tbody>${block(z.slice(0,half))}${block(z.slice(half))}</tbody></table></div>`;
-}
+function coProzentSchluesselHTML(){const e=[...FOSBOS_SCHLUESSEL,[0,0]],t=`${CO_ZELLE};text-align:center;white-space:nowrap`,n=FOSBOS_SCHLUESSEL[FOSBOS_SCHLUESSEL.length-1][1],i=Math.ceil(e.length/2),r=a=>`<tr><th style="${t};text-align:left;background:#f1f5f8">Notenpunkte</th>${a.map(([s])=>`<th style="${t};background:#f1f5f8">${s}</th>`).join("")}</tr>
+  <tr><td style="${t};text-align:left">Prozent</td>${a.map(([s,l])=>`<td style="${t}">${s===0?"&lt; "+n:"ab "+l}</td>`).join("")}</tr>`;return`<div style="overflow-x:auto;margin:6px 0;break-inside:avoid"><table style="border-collapse:collapse;width:auto"><tbody>${r(e.slice(0,i))}${r(e.slice(i))}</tbody></table></div>`}
 // Hinweise für Schüler:innen: so wird der Test bewertet
 function coBewertungsInfoHTML(anzahl,offen){
  anzahl=Number(anzahl)||7;
@@ -11131,244 +10505,180 @@ function showWocheTab(tabId){
 }
 window.showWocheTab=showWocheTab;
 
-async function openWocheDetail(fach,wocheId,startTabOverride){
- if(istStundeneinheit(wocheId))return openAptDetail(wocheId);
- const woche=lehrplanWocheById(fach,wocheId);
- if(!woche){toast("Diese Woche wurde nicht gefunden.");return}
- const [auftrag,materialien,teams,produkte,fortschritt,lsTasks,lsAttempts,basischeckFragen,meinBasischeck]=await Promise.all([
- getLehrplanAuftrag(wocheId),getLehrplanMaterialien(wocheId),getLehrplanTeams(teamAnchorFor(wocheId)),
- getLehrplanProdukte(wocheId),getLehrplanFortschritt(wocheId),
- getLernstandTasks().catch(()=>[]),getMyLernstandAttempts().catch(()=>[]),
- getBasischeckFragen(wocheId),getMyBasischeckVersuch(wocheId)
- ]);
- // Verknüpfung mit der Lernstandsmessung: dieselben Aufgaben, gefiltert
- // nach dem Lernbereich dieser Woche (z. B. "LB 3" → "lb3"). Kein eigener
- // Datentopf – Ergebnisse und Versuche sind automatisch synchron, weil es
- // exakt dieselbe Datenquelle wie unter Lernwerkstatt → Lernstandsmessung ist.
- const wocheLbKeys=(woche.lb||"").match(/\d/g)?.map(n=>"lb"+n)||[];
- const relevanteTasks=lsTasks.filter(t=>wocheLbKeys.includes(t.learningArea));
- const lernstandBearbeitet=relevanteTasks.some(t=>lernstandAttemptCount(lsAttempts,t.id)>0);
- const ziele=(LEHRPLAN_ZIELE_VORSCHLAG[wocheId]||[]).map((text,i)=>({id:`z${i}`,text}));
- const alleErfuellt=ziele.length>0 && ziele.every(z=>fortschritt.zieleErfuellt?.[z.id]);
- const meinTeam=teams.find(t=>(t.mitgliederUids||[]).includes(currentUser.uid));
- const fachLbl=F11SB_FAECHER.find(f=>f.key===fach)?.label||fach;
- const meinProdukt=produkte.some(p=>p.uid===currentUser.uid);
-
- // Fortschritt: jeder Arbeitsschritt bekommt einen eigenen Haken, damit
- // jederzeit klar ist, wo genau man gerade steht.
- const schritte=[
- {label:"Auftrag gelesen",done:!!fortschritt.auftragGelesen,tab:"ziele"},
- {label:"Material erhalten",done:!!fortschritt.materialErhalten,tab:"material"},
- ...(basischeckFragen.length?[{label:"Wissens-Check",done:!!meinBasischeck,tab:"basischeck"}]:[]),
- ...(wocheHatTeam(woche)?[{label:"Team gebildet",done:!!meinTeam,tab:"team"}]:[]),
-  ...(woche.interaktiv?[{label:"Interaktive Stunde",done:!!fortschritt.experimentErledigt,tab:"ziele"}]:[]),
- {label:"Lernprodukt",done:meinProdukt,tab:"produkte"},
- {label:"Abschluss-Check",done:lernstandBearbeitet,tab:"lernstand"},
- {label:"Selbsteinschätzung",done:alleErfuellt,tab:"selbsteinschaetzung"},
- {label:"Fertig",done:!!fortschritt.abgeschlossen,tab:"selbsteinschaetzung"}
- ];
- let aktivIdx=schritte.findIndex(s=>!s.done);
- if(aktivIdx===-1)aktivIdx=schritte.length-1;
- const startTab=startTabOverride||schritte[Math.min(aktivIdx,schritte.length-1)].tab;
- // Pädagogik/Psychologie: kleiner Fortschrittskopf + Querverlinkung ins APT
- const ppKopf=fach==="paedagogik"?await ppEinheitKopfHTML(wocheId):"";
- const aptLinks=fach==="paedagogik"?PP_EINHEITEN.filter(a=>a.typ==="apt"&&(a.bezug||[]).includes(wocheId)):[];
-
- modal(`<button class="modal-close"onclick="closeModal()">×</button>
- ${ppKopf}
- <div class="kicker">${esc(fachLbl)} · ${esc(woche.lb)} · ${esc(fmtDateOnly(woche.start))}–${esc(fmtDateOnly(woche.end))}</div>
- <h2>${esc(woche.thema)}</h2>
- <span class="pill"style="background:${woche.interaktiv?"#3F7FC1":woche.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${woche.interaktiv?"Interaktive Einstiegsstunde":woche.typ==="projekt"?"Projektarbeit":"Selbstlern-/Eigenarbeit"}</span>
- <p style="margin-top:10px;color:var(--muted)">${esc(woche.planung)}</p>
- ${woche.praxis?`<div class="card"style="border-left:4px solid #4a90d9;margin-top:10px;padding:10px 12px"><strong style="font-size:12px"> Praxistransfer</strong><small style="display:block;margin-top:4px">${esc(woche.praxis)}</small></div>`:""}
- ${aptLinks.length?`<div class="pp-bezug-box"style="--c:${lernbereichAkzentfarbe(woche.lb)}">🎓 <b>Wird im Abschlussprüfungs-Training vertieft:</b> ${aptLinks.map(a=>`<a href="javascript:void 0"onclick="openAptDetail('${a.id}')">${esc(a.thema)}</a>`).join(" · ")}</div>`:""}
+async function openWocheDetail(e,t,n){if(istStundeneinheit(t))return openAptDetail(t);const i=lehrplanWocheById(e,t);if(!i){toast("Diese Woche wurde nicht gefunden.");return}const[r,a,s,l,c,d,p,h,k]=await Promise.all([getLehrplanAuftrag(t),getLehrplanMaterialien(t),getLehrplanTeams(teamAnchorFor(t)),getLehrplanProdukte(t),getLehrplanFortschritt(t),getLernstandTasks().catch(()=>[]),getMyLernstandAttempts().catch(()=>[]),getBasischeckFragen(t),getMyBasischeckVersuch(t)]),f=(i.lb||"").match(/\d/g)?.map(U=>"lb"+U)||[],y=d.filter(U=>f.includes(U.learningArea)),w=y.some(U=>lernstandAttemptCount(p,U.id)>0),v=(LEHRPLAN_ZIELE_VORSCHLAG[t]||[]).map((U,ge)=>({id:`z${ge}`,text:U})),S=v.length>0&&v.every(U=>c.zieleErfuellt?.[U.id]),A=s.find(U=>(U.mitgliederUids||[]).includes(currentUser.uid)),_=F11SB_FAECHER.find(U=>U.key===e)?.label||e,Q=l.some(U=>U.uid===currentUser.uid),C=[{label:"Auftrag gelesen",done:!!c.auftragGelesen,tab:"ziele"},{label:"Material erhalten",done:!!c.materialErhalten,tab:"material"},...h.length?[{label:"Wissens-Check",done:!!k,tab:"basischeck"}]:[],...wocheHatTeam(i)?[{label:"Team gebildet",done:!!A,tab:"team"}]:[],...i.interaktiv?[{label:"Interaktive Stunde",done:!!c.experimentErledigt,tab:"ziele"}]:[],{label:"Lernprodukt",done:Q,tab:"produkte"},{label:"Abschluss-Check",done:w,tab:"lernstand"},{label:"Selbsteinsch\xE4tzung",done:S,tab:"selbsteinschaetzung"},{label:"Fertig",done:!!c.abgeschlossen,tab:"selbsteinschaetzung"}];let H=C.findIndex(U=>!U.done);H===-1&&(H=C.length-1);const ie=n||C[Math.min(H,C.length-1)].tab,Ee=e==="paedagogik"?await ppEinheitKopfHTML(t):"",ee=e==="paedagogik"?PP_EINHEITEN.filter(U=>U.typ==="apt"&&(U.bezug||[]).includes(t)):[];modal(`<button class="modal-close"onclick="closeModal()">\xD7</button>
+ ${Ee}
+ <div class="kicker">${esc(_)} \xB7 ${esc(i.lb)} \xB7 ${esc(fmtDateOnly(i.start))}\u2013${esc(fmtDateOnly(i.end))}</div>
+ <h2>${esc(i.thema)}</h2>
+ <span class="pill"style="background:${i.interaktiv?"#3F7FC1":i.typ==="projekt"?"#3fa66a":"#e0a324"};color:#fff">${i.interaktiv?"Interaktive Einstiegsstunde":i.typ==="projekt"?"Projektarbeit":"Selbstlern-/Eigenarbeit"}</span>
+ <p style="margin-top:10px;color:var(--muted)">${esc(i.planung)}</p>
+ ${i.praxis?`<div class="card"style="border-left:4px solid #4a90d9;margin-top:10px;padding:10px 12px"><strong style="font-size:12px"> Praxistransfer</strong><small style="display:block;margin-top:4px">${esc(i.praxis)}</small></div>`:""}
+ ${ee.length?`<div class="pp-bezug-box"style="--c:${lernbereichAkzentfarbe(i.lb)}">\u{1F393} <b>Wird im Abschlusspr\xFCfungs-Training vertieft:</b> ${ee.map(U=>`<a href="javascript:void 0"onclick="openAptDetail('${U.id}')">${esc(U.thema)}</a>`).join(" \xB7 ")}</div>`:""}
 
  <div class="wd-stepper">
- ${schritte.map((s,i)=>`<div class="wd-step${s.done?" wd-step-done":""}${i===aktivIdx&&!s.done?" wd-step-aktiv":""}">
- <div class="wd-step-dot">${s.done?"✓":i+1}</div><small>${esc(s.label)}</small>
- </div>${i<schritte.length-1?`<div class="wd-step-line${schritte[i+1].done||s.done?" wd-step-line-done":""}"></div>`:""}`).join("")}
+ ${C.map((U,ge)=>`<div class="wd-step${U.done?" wd-step-done":""}${ge===H&&!U.done?" wd-step-aktiv":""}">
+ <div class="wd-step-dot">${U.done?"\u2713":ge+1}</div><small>${esc(U.label)}</small>
+ </div>${ge<C.length-1?`<div class="wd-step-line${C[ge+1].done||U.done?" wd-step-line-done":""}"></div>`:""}`).join("")}
  </div>
- ${isTeacher()?(()=>{const ph=projektPhaseByWoche(wocheId);return`<div style="margin:-10px 0 16px;display:flex;gap:8px;flex-wrap:wrap"><button class="secondary"style="font-size:11px"onclick="openWochenLiveUebersicht('${fach}','${wocheId}')"> Live-Übersicht: Wo steht die Klasse gerade?</button>${ph?`<button class="primary"style="font-size:11px"onclick="openPhasenLiveUebersicht('${ph.id}')"> Projekt-Live-Übersicht (${esc(ph.titel)})</button>`:""}</div>`;})():""}
+ ${isTeacher()?(()=>{const U=projektPhaseByWoche(t);return`<div style="margin:-10px 0 16px;display:flex;gap:8px;flex-wrap:wrap"><button class="secondary"style="font-size:11px"onclick="openWochenLiveUebersicht('${e}','${t}')"> Live-\xDCbersicht: Wo steht die Klasse gerade?</button>${U?`<button class="primary"style="font-size:11px"onclick="openPhasenLiveUebersicht('${U.id}')"> Projekt-Live-\xDCbersicht (${esc(U.titel)})</button>`:""}</div>`})():""}
 
  <div class="wd-tabs">
  <button type="button"class="wd-tab"data-tab="ziele"onclick="showWocheTab('ziele')"> Lernziele und Aufgaben</button>
  <button type="button"class="wd-tab"data-tab="material"onclick="showWocheTab('material')"> Lernmaterialien</button>
- ${basischeckFragen.length||isTeacher()?`<button type="button"class="wd-tab"data-tab="basischeck"onclick="showWocheTab('basischeck')"> Wissens-Check</button>`:""}
- <button type="button"class="wd-tab"data-tab="team"onclick="showWocheTab('team')"> ${wocheHatTeam(woche)?"Team":"(Team)"}</button>
+ ${h.length||isTeacher()?`<button type="button"class="wd-tab"data-tab="basischeck"onclick="showWocheTab('basischeck')"> Wissens-Check</button>`:""}
+ <button type="button"class="wd-tab"data-tab="team"onclick="showWocheTab('team')"> ${wocheHatTeam(i)?"Team":"(Team)"}</button>
  <button type="button"class="wd-tab"data-tab="produkte"onclick="showWocheTab('produkte')"> Lernprodukte</button>
  <button type="button"class="wd-tab"data-tab="lernstand"onclick="showWocheTab('lernstand')"> Abschluss-Check</button>
- <button type="button"class="wd-tab"data-tab="selbsteinschaetzung"onclick="showWocheTab('selbsteinschaetzung')"> Selbsteinschätzung</button>
+ <button type="button"class="wd-tab"data-tab="selbsteinschaetzung"onclick="showWocheTab('selbsteinschaetzung')"> Selbsteinsch\xE4tzung</button>
  </div>
 
  <div class="wd-panel"id="wdPanel_ziele">
- ${woche.interaktiv?await stundeKarteHTML(fortschritt):""}
+ ${i.interaktiv?await stundeKarteHTML(c):""}
  <div class="wd-ziele-info">
- <strong> Lernziele laut Lehrplan</strong> <small>(${esc(woche.lb)}, LehrplanPLUS FOS 11 Pädagogik/Psychologie)</small>
- <ul>${ziele.map(z=>`<li>${esc(z.text)}</li>`).join("")||"<li>Für dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</li>"}</ul>
+ <strong> Lernziele laut Lehrplan</strong> <small>(${esc(i.lb)}, LehrplanPLUS FOS 11 P\xE4dagogik/Psychologie)</small>
+ <ul>${v.map(U=>`<li>${esc(U.text)}</li>`).join("")||"<li>F\xFCr dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</li>"}</ul>
  </div>
 
  <h3 style="margin:18px 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--muted)"> Konkreter Arbeitsauftrag</h3>
- <p style="font-size:11px;color:var(--muted);margin:0 0 10px">Von der Lehrkraft frei gestaltet – legt fest, WIE die Lernziele oben konkret bearbeitet werden.</p>
+ <p style="font-size:11px;color:var(--muted);margin:0 0 10px">Von der Lehrkraft frei gestaltet \u2013 legt fest, WIE die Lernziele oben konkret bearbeitet werden.</p>
  ${isTeacher()?`<div class="form">
- <label>Titel<input id="auftragTitel"type="text"value="${esc(auftrag?.titel||"")}"placeholder="z. B. Fallanalyse Erziehungsstile"></label>
- <label>Beschreibung<textarea id="auftragBeschreibung"rows="4"placeholder="Was genau sollen die Schüler:innen tun?">${esc(auftrag?.beschreibung||"")}</textarea></label>
+ <label>Titel<input id="auftragTitel"type="text"value="${esc(r?.titel||"")}"placeholder="z. B. Fallanalyse Erziehungsstile"></label>
+ <label>Beschreibung<textarea id="auftragBeschreibung"rows="4"placeholder="Was genau sollen die Sch\xFCler:innen tun?">${esc(r?.beschreibung||"")}</textarea></label>
  <div class="form-actions">
- <button class="primary"onclick="saveLehrplanAuftrag('${fach}','${wocheId}')">Speichern</button>
- ${auftrag?`<button class="secondary"onclick="deleteLehrplanAuftrag('${auftrag.id}','${fach}','${wocheId}')">Löschen</button>`:""}
+ <button class="primary"onclick="saveLehrplanAuftrag('${e}','${t}')">Speichern</button>
+ ${r?`<button class="secondary"onclick="deleteLehrplanAuftrag('${r.id}','${e}','${t}')">L\xF6schen</button>`:""}
  </div>
- </div>`
- :!auftrag?`<div class="empty">Für diese Woche wurde noch kein Arbeitsauftrag eingetragen.</div>`
- :`<div class="card"style="border-left:4px solid #4a90d9"><strong>${esc(auftrag.titel)}</strong>${auftrag.beschreibung?`<p style="margin:6px 0 0;white-space:pre-wrap">${esc(auftrag.beschreibung)}</p>`:""}</div>`}
- ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.auftragGelesen?"checked":""} onchange="toggleAuftragGelesen('${fach}','${wocheId}',this.checked)"><span> Auftrag gelesen, Ziele sind mir klar</span></label>`:""}
+ </div>`:r?`<div class="card"style="border-left:4px solid #4a90d9"><strong>${esc(r.titel)}</strong>${r.beschreibung?`<p style="margin:6px 0 0;white-space:pre-wrap">${esc(r.beschreibung)}</p>`:""}</div>`:'<div class="empty">F\xFCr diese Woche wurde noch kein Arbeitsauftrag eingetragen.</div>'}
+ ${isTeacher()?"":`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${c.auftragGelesen?"checked":""} onchange="toggleAuftragGelesen('${e}','${t}',this.checked)"><span> Auftrag gelesen, Ziele sind mir klar</span></label>`}
  <p style="font-size:11px;color:var(--muted);margin:16px 0 6px">Bevor es losgeht:</p>
- ${miniToolRow([["🧭","Lernpfad","lernpfad"],["🤔","Metakognition","metakognition"]])}
+ ${miniToolRow([["\u{1F9ED}","Lernpfad","lernpfad"],["\u{1F914}","Metakognition","metakognition"]])}
  </div>
 
  <div class="wd-panel"id="wdPanel_material">
  ${isTeacher()?`<div class="form"style="margin-bottom:12px">
  <div style="display:flex;gap:8px;flex-wrap:wrap">
- <select id="matKategorie">${MATERIAL_KATEGORIEN.map(k=>`<option value="${k.key}">${k.label}</option>`).join("")}</select>
+ <select id="matKategorie">${MATERIAL_KATEGORIEN.map(U=>`<option value="${U.key}">${U.label}</option>`).join("")}</select>
  <input id="matTitel"type="text"placeholder="Titel"style="flex:1;min-width:140px">
  <input id="matUrl"type="url"placeholder="Link/URL"style="flex:1;min-width:160px">
- <button class="primary"onclick="addLehrplanMaterial('${fach}','${wocheId}')">＋ Hinzufügen</button>
+ <button class="primary"onclick="addLehrplanMaterial('${e}','${t}')">\uFF0B Hinzuf\xFCgen</button>
  </div>
  </div>`:""}
- <div class="list">${materialien.map(m=>`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
- <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(MATERIAL_KATEGORIEN.find(k=>k.key===m.kategorie)?.label||m.kategorie)}: ${esc(m.titel)}</strong>${isTeacher()?`<button class="secondary"onclick="deleteLehrplanMaterial('${m.id}','${fach}','${wocheId}')">Löschen</button>`:""}</div>
- ${m.url?materialEmbedHTML(m):""}
- </div>`).join("")||`<div class="empty">Noch keine Lernmaterialien eingestellt.</div>`}</div>
+ <div class="list">${a.map(U=>`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
+ <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(MATERIAL_KATEGORIEN.find(ge=>ge.key===U.kategorie)?.label||U.kategorie)}: ${esc(U.titel)}</strong>${isTeacher()?`<button class="secondary"onclick="deleteLehrplanMaterial('${U.id}','${e}','${t}')">L\xF6schen</button>`:""}</div>
+ ${U.url?materialEmbedHTML(U):""}
+ </div>`).join("")||'<div class="empty">Noch keine Lernmaterialien eingestellt.</div>'}</div>
  <p style="font-size:11px;color:var(--muted);margin-top:12px">Zum Bearbeiten des Materials:</p>
- ${miniToolRow([["🗂️","Karteikarten & Timer","lernwerkzeuge"],["🤖","KI zum Lernen","ki-lernen"],["🔗","Lernressourcen","ressourcen"],["⏱️","Uhr & Timer","uhr-timer"]])}
- ${!isTeacher()?`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${fortschritt.materialErhalten?"checked":""} onchange="toggleMaterialErhalten('${fach}','${wocheId}',this.checked)"><span> Materialien erhalten/gesichtet</span></label>`:""}
+ ${miniToolRow([["\u{1F5C2}\uFE0F","Karteikarten & Timer","lernwerkzeuge"],["\u{1F916}","KI zum Lernen","ki-lernen"],["\u{1F517}","Lernressourcen","ressourcen"],["\u23F1\uFE0F","Uhr & Timer","uhr-timer"]])}
+ ${isTeacher()?"":`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:14px;font-weight:700;font-size:13px"><input type="checkbox"${c.materialErhalten?"checked":""} onchange="toggleMaterialErhalten('${e}','${t}',this.checked)"><span> Materialien erhalten/gesichtet</span></label>`}
  </div>
 
  <div class="wd-panel"id="wdPanel_basischeck">
  <p style="color:var(--muted);margin-top:0;font-size:12px">Kurzer Check vor dem Lehrtext: bis zu 5 Fragen, die zeigen, ob die Grundidee angekommen ist.</p>
  ${isTeacher()?`<div class="form">
- ${[0,1,2,3,4].map(i=>{
- const f=basischeckFragen[i]||{};
- const typ=f.typ||"mc";
- return`<div class="card"style="margin-bottom:10px;background:#f7fafc">
+ ${[0,1,2,3,4].map(U=>{const ge=h[U]||{},de=ge.typ||"mc";return`<div class="card"style="margin-bottom:10px;background:#f7fafc">
  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
- <label style="flex:1;min-width:200px">Frage ${i+1}${i>0?" (optional)":""}<input id="bcFrage${i}"type="text"value="${esc(f.text||"")}"placeholder="z. B. Was versteht man unter …?"></label>
- <label style="width:190px">Fragetyp<select id="bcTyp${i}"onchange="basischeckTypToggle(${i})">
- <option value="mc"${typ==="mc"?" selected":""}>Multiple Choice</option>
- <option value="kprim"${typ==="kprim"?" selected":""}>K-Prim (richtig/falsch je Aussage)</option>
- <option value="offen"${typ==="offen"?" selected":""}>Offene Frage</option>
+ <label style="flex:1;min-width:200px">Frage ${U+1}${U>0?" (optional)":""}<input id="bcFrage${U}"type="text"value="${esc(ge.text||"")}"placeholder="z. B. Was versteht man unter \u2026?"></label>
+ <label style="width:190px">Fragetyp<select id="bcTyp${U}"onchange="basischeckTypToggle(${U})">
+ <option value="mc"${de==="mc"?" selected":""}>Multiple Choice</option>
+ <option value="kprim"${de==="kprim"?" selected":""}>K-Prim (richtig/falsch je Aussage)</option>
+ <option value="offen"${de==="offen"?" selected":""}>Offene Frage</option>
  </select></label>
  </div>
 
- <div id="bcMcBereich${i}"style="display:${typ==="mc"?"block":"none"};margin-top:8px">
+ <div id="bcMcBereich${U}"style="display:${de==="mc"?"block":"none"};margin-top:8px">
  <div class="grid grid-2">
- ${[0,1,2].map(j=>`<label>Antwort ${j+1}${j>1?" (optional)":""}<input id="bcOpt${i}_${j}"type="text"value="${esc(f.optionen?.[j]||"")}"></label>`).join("")}
+ ${[0,1,2].map(fe=>`<label>Antwort ${fe+1}${fe>1?" (optional)":""}<input id="bcOpt${U}_${fe}"type="text"value="${esc(ge.optionen?.[fe]||"")}"></label>`).join("")}
  </div>
- <label style="margin-top:6px">Richtige Antwort<select id="bcRichtig${i}">
- ${[0,1,2].map(j=>`<option value="${j}"${f.richtig===j?" selected":""}>Antwort ${j+1}</option>`).join("")}
+ <label style="margin-top:6px">Richtige Antwort<select id="bcRichtig${U}">
+ ${[0,1,2].map(fe=>`<option value="${fe}"${ge.richtig===fe?" selected":""}>Antwort ${fe+1}</option>`).join("")}
  </select></label>
  </div>
 
- <div id="bcKprimBereich${i}"style="display:${typ==="kprim"?"block":"none"};margin-top:8px">
- <label style="margin-bottom:8px">Fallvignette / Einleitungstext (optional – steht über der Tabelle)<textarea id="bcVignette${i}"rows="3"placeholder="z. B. kurze Fallbeschreibung, auf die sich die Aussagen beziehen">${esc(f.vignette||"")}</textarea></label>
-<p style="font-size:11px;color:var(--muted);margin:0 0 6px">Bis zu 4 Aussagen, jeweils als richtig oder falsch markieren. Nur „alles richtig" zählt als bestanden.</p>
- ${[0,1,2,3].map(j=>{const s=f.statements?.[j]||{};return`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
- <input id="bcStatement${i}_${j}"type="text"value="${esc(s.text||"")}"placeholder="Aussage ${j+1}${j>1?" (optional)":""}"style="flex:1">
- <select id="bcStatementRichtig${i}_${j}"style="width:90px">
- <option value="true"${s.correct?" selected":""}>richtig</option>
- <option value="false"${s.correct===false?" selected":""}>falsch</option>
+ <div id="bcKprimBereich${U}"style="display:${de==="kprim"?"block":"none"};margin-top:8px">
+ <label style="margin-bottom:8px">Fallvignette / Einleitungstext (optional \u2013 steht \xFCber der Tabelle)<textarea id="bcVignette${U}"rows="3"placeholder="z. B. kurze Fallbeschreibung, auf die sich die Aussagen beziehen">${esc(ge.vignette||"")}</textarea></label>
+<p style="font-size:11px;color:var(--muted);margin:0 0 6px">Bis zu 4 Aussagen, jeweils als richtig oder falsch markieren. Nur \u201Ealles richtig" z\xE4hlt als bestanden.</p>
+ ${[0,1,2,3].map(fe=>{const se=ge.statements?.[fe]||{};return`<div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+ <input id="bcStatement${U}_${fe}"type="text"value="${esc(se.text||"")}"placeholder="Aussage ${fe+1}${fe>1?" (optional)":""}"style="flex:1">
+ <select id="bcStatementRichtig${U}_${fe}"style="width:90px">
+ <option value="true"${se.correct?" selected":""}>richtig</option>
+ <option value="false"${se.correct===!1?" selected":""}>falsch</option>
  </select>
- </div>`;}).join("")}
+ </div>`}).join("")}
  </div>
 
- <div id="bcOffenBereich${i}"style="display:${typ==="offen"?"block":"none"};margin-top:8px">
- <label>Erwartete Stichworte (kommagetrennt – beliebig viele, ALLE müssen in der Antwort vorkommen, damit sie als richtig gilt)<input id="bcStichworte${i}"type="text"value="${esc((f.stichworte||[]).join(", "))}"placeholder="z. B. Sozialisation, Erziehung, Werte"></label>
+ <div id="bcOffenBereich${U}"style="display:${de==="offen"?"block":"none"};margin-top:8px">
+ <label>Erwartete Stichworte (kommagetrennt \u2013 beliebig viele, ALLE m\xFCssen in der Antwort vorkommen, damit sie als richtig gilt)<input id="bcStichworte${U}"type="text"value="${esc((ge.stichworte||[]).join(", "))}"placeholder="z. B. Sozialisation, Erziehung, Werte"></label>
  </div>
- </div>`;
- }).join("")}
- <button class="primary"onclick="saveBasischeckFragen('${fach}','${wocheId}')">Wissens-Check speichern</button>
- </div>`
- :!basischeckFragen.length?`<div class="empty">Für diese Woche wurde noch kein Wissens-Check eingerichtet.</div>`
- :meinBasischeck?`<div class="card"style="background:${ampelFarbe(meinBasischeck.ampel)}1a;border-left:4px solid ${ampelFarbe(meinBasischeck.ampel)}">
- <strong>${meinBasischeck.richtig} von ${meinBasischeck.gesamt} richtig</strong>
- <p style="margin:6px 0 0;color:var(--muted)">${esc(basischeckAmpelText(meinBasischeck.ampel))}</p>
- </div>`
- :`<div class="form">
- ${basischeckFragen.map((f,i)=>{
- const typ=f.typ||"mc";
- return`<div class="card"style="margin-bottom:10px">
- ${typ==="kprim"?kprimFrageKopfHTML(i+1,f.text,f.vignette):`<strong style="display:block;margin-bottom:8px">${i+1}. ${esc(f.text)}</strong>`}
- ${typ==="mc"?f.optionen.map((o,j)=>`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:4px"><input type="radio"name="bcQ${i}"value="${j}"> <span>${esc(o)}</span></label>`).join(""):""}
- ${typ==="kprim"?kprimTabelleHTML(`bcKp${i}`,f.statements.map(x=>x.text)):""}
- ${typ==="offen"?`<textarea id="bcOffenAntwort${i}"rows="3"placeholder="Deine Antwort …"></textarea>`:""}
- </div>`;
- }).join("")}
- <button class="primary"onclick="submitBasischeck('${fach}','${wocheId}')">Wissens-Check abgeben</button>
- </div>`}
+ </div>`}).join("")}
+ <button class="primary"onclick="saveBasischeckFragen('${e}','${t}')">Wissens-Check speichern</button>
+ </div>`:h.length?k?`<div class="card"style="background:${ampelFarbe(k.ampel)}1a;border-left:4px solid ${ampelFarbe(k.ampel)}">
+ <strong>${k.richtig} von ${k.gesamt} richtig</strong>
+ <p style="margin:6px 0 0;color:var(--muted)">${esc(basischeckAmpelText(k.ampel))}</p>
+ </div>`:`<div class="form">
+ ${h.map((U,ge)=>{const de=U.typ||"mc";return`<div class="card"style="margin-bottom:10px">
+ ${de==="kprim"?kprimFrageKopfHTML(ge+1,U.text,U.vignette):`<strong style="display:block;margin-bottom:8px">${ge+1}. ${esc(U.text)}</strong>`}
+ ${de==="mc"?U.optionen.map((fe,se)=>`<label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:4px"><input type="radio"name="bcQ${ge}"value="${se}"> <span>${esc(fe)}</span></label>`).join(""):""}
+ ${de==="kprim"?kprimTabelleHTML(`bcKp${ge}`,U.statements.map(fe=>fe.text)):""}
+ ${de==="offen"?`<textarea id="bcOffenAntwort${ge}"rows="3"placeholder="Deine Antwort \u2026"></textarea>`:""}
+ </div>`}).join("")}
+ <button class="primary"onclick="submitBasischeck('${e}','${t}')">Wissens-Check abgeben</button>
+ </div>`:'<div class="empty">F\xFCr diese Woche wurde noch kein Wissens-Check eingerichtet.</div>'}
  </div>
 
  <div class="wd-panel"id="wdPanel_team">
- <p style="color:var(--muted);margin-top:0">Team/Gruppe${wocheHatTeam(woche)?" – für dieses Projekt vorgesehen":" – freiwillig (deshalb in Klammern)"}. Passende Mitstreiter:innen findest du auch über die Kompetenzwerkstatt.</p>
- <div class="list">${teams.map(t=>{
- const inTeam=(t.mitgliederUids||[]).includes(currentUser.uid);
- const phase=projektPhaseByWoche(wocheId);
- const zeigtMeilensteine=phase&&!phase.einstieg&&phase.notwendigeWochen.includes(wocheId);
- return`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
- <div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(t.teamName)}</strong><small>${esc((t.mitgliederNamen||[]).join(", ")||"Noch niemand")}</small></div><div style="display:flex;gap:6px">${inTeam?`<button class="secondary"onclick="leaveLehrplanTeam('${t.id}','${fach}','${wocheId}')">Verlassen</button>`:`<button class="primary"onclick="joinLehrplanTeam('${t.id}','${fach}','${wocheId}')">Beitreten</button>`}${isTeacher()?`<button class="secondary"onclick="deleteLehrplanTeam('${t.id}','${fach}','${wocheId}')">Auflösen</button>`:""}</div></div>
- ${zeigtMeilensteine&&(inTeam||isTeacher())?`<div><button class="secondary"style="font-size:12px"onclick="openMeilensteinModal('${phase.id}','${t.id}',{fach:'${fach}',woche:'${wocheId}'})">★ Meilensteine & ${inTeam?"meine Beiträge":"Beiträge ansehen"}</button></div>`:""}
- </div>`}).join("")||`<div class="empty">Noch keine Teams gebildet.</div>`}</div>
- ${!meinTeam?`<div class="form-actions"style="margin-top:10px"><input id="neuTeamName"type="text"placeholder="Team-Name"style="flex:1"><button class="primary"onclick="createLehrplanTeam('${fach}','${wocheId}')">＋ Team gründen</button></div>`:""}
- ${miniToolRow([["🌟","Kompetenzwerkstatt","kompetenz"],["🤝","Kollaborations-Tools","kollaboration"]])}
+ <p style="color:var(--muted);margin-top:0">Team/Gruppe${wocheHatTeam(i)?" \u2013 f\xFCr dieses Projekt vorgesehen":" \u2013 freiwillig (deshalb in Klammern)"}. Passende Mitstreiter:innen findest du auch \xFCber die Kompetenzwerkstatt.</p>
+ <div class="list">${s.map(U=>{const ge=(U.mitgliederUids||[]).includes(currentUser.uid),de=projektPhaseByWoche(t),fe=de&&!de.einstieg&&de.notwendigeWochen.includes(t);return`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
+ <div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(U.teamName)}</strong><small>${esc((U.mitgliederNamen||[]).join(", ")||"Noch niemand")}</small></div><div style="display:flex;gap:6px">${ge?`<button class="secondary"onclick="leaveLehrplanTeam('${U.id}','${e}','${t}')">Verlassen</button>`:`<button class="primary"onclick="joinLehrplanTeam('${U.id}','${e}','${t}')">Beitreten</button>`}${isTeacher()?`<button class="secondary"onclick="deleteLehrplanTeam('${U.id}','${e}','${t}')">Aufl\xF6sen</button>`:""}</div></div>
+ ${fe&&(ge||isTeacher())?`<div><button class="secondary"style="font-size:12px"onclick="openMeilensteinModal('${de.id}','${U.id}',{fach:'${e}',woche:'${t}'})">\u2605 Meilensteine & ${ge?"meine Beitr\xE4ge":"Beitr\xE4ge ansehen"}</button></div>`:""}
+ </div>`}).join("")||'<div class="empty">Noch keine Teams gebildet.</div>'}</div>
+ ${A?"":`<div class="form-actions"style="margin-top:10px"><input id="neuTeamName"type="text"placeholder="Team-Name"style="flex:1"><button class="primary"onclick="createLehrplanTeam('${e}','${t}')">\uFF0B Team gr\xFCnden</button></div>`}
+ ${miniToolRow([["\u{1F31F}","Kompetenzwerkstatt","kompetenz"],["\u{1F91D}","Kollaborations-Tools","kollaboration"]])}
  </div>
 
  <div class="wd-panel"id="wdPanel_produkte">
- <div class="list">${produkte.map(p=>`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
- <div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(p.titel)}</strong><small>${esc(p.name)}${p.inhalt?" · "+esc(p.inhalt.slice(0,60)):""}</small></div>${(p.uid===currentUser.uid||isTeacher())?`<button class="secondary"onclick="deleteLehrplanProdukt('${p.id}','${fach}','${wocheId}')">Löschen</button>`:""}</div>
- ${p.dateiUrl?dateiEmbedHTML(p.dateiUrl,p.dateiName):""}
- </div>`).join("")||`<div class="empty">Noch keine Lernprodukte hochgeladen.</div>`}</div>
+ <div class="list">${l.map(U=>`<div class="list-item"style="flex-direction:column;align-items:stretch;gap:8px">
+ <div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(U.titel)}</strong><small>${esc(U.name)}${U.inhalt?" \xB7 "+esc(U.inhalt.slice(0,60)):""}</small></div>${U.uid===currentUser.uid||isTeacher()?`<button class="secondary"onclick="deleteLehrplanProdukt('${U.id}','${e}','${t}')">L\xF6schen</button>`:""}</div>
+ ${U.dateiUrl?dateiEmbedHTML(U.dateiUrl,U.dateiName):""}
+ </div>`).join("")||'<div class="empty">Noch keine Lernprodukte hochgeladen.</div>'}</div>
  <p style="font-size:11px;color:var(--muted);margin-top:12px">Zum Erstellen deines Produkts:</p>
- ${miniToolRow([["🔗","Lernressourcen","ressourcen"],["🤖","KI zum Lernen","ki-lernen"],["✍️","Fachaufsatztraining","fachaufsatz"]])}
+ ${miniToolRow([["\u{1F517}","Lernressourcen","ressourcen"],["\u{1F916}","KI zum Lernen","ki-lernen"],["\u270D\uFE0F","Fachaufsatztraining","fachaufsatz"]])}
  <div class="form-actions"style="margin-top:10px;flex-wrap:wrap">
  <input id="produktTitel"type="text"placeholder="Titel des Lernprodukts"style="flex:1;min-width:140px">
  <input id="produktInhalt"type="text"placeholder="Link oder kurze Beschreibung (optional)"style="flex:1;min-width:160px">
  </div>
  <div class="form-actions"style="margin-top:8px;flex-wrap:wrap;align-items:center">
  <label style="font-weight:700;font-size:12px">Datei (optional, max. 15 MB)<input id="produktDatei"type="file"style="display:block;margin-top:4px"></label>
- <button class="primary"onclick="addLehrplanProdukt('${fach}','${wocheId}')">＋ Hochladen</button>
+ <button class="primary"onclick="addLehrplanProdukt('${e}','${t}')">\uFF0B Hochladen</button>
  </div>
  </div>
 
  <div class="wd-panel"id="wdPanel_lernstand">
- <p style="color:var(--muted);margin-top:0">Dieselben Kompetenzüberprüfungen wie unter „Lernstandsmessung" in der Lernwerkstatt, hier gefiltert nach ${esc(woche.lb)}. Die Lehrkraft sieht dein Ergebnis über das Ampelsystem.</p>
- <div class="list">${relevanteTasks.map(t=>{
- const latest=lernstandLatest(lsAttempts,t.id),count=lernstandAttemptCount(lsAttempts,t.id),max=lernstandMaxPoints(t.id);
- return`<div class="list-item"><div><strong>${t.nr}. ${esc(t.title)}</strong><small>${count?`letzter Stand: ${latest.total}/${max} · Versuch ${latest.attempt}`:"noch nicht bearbeitet"}</small></div>
+ <p style="color:var(--muted);margin-top:0">Dieselben Kompetenz\xFCberpr\xFCfungen wie unter \u201ELernstandsmessung" in der Lernwerkstatt, hier gefiltert nach ${esc(i.lb)}. Die Lehrkraft sieht dein Ergebnis \xFCber das Ampelsystem.</p>
+ <div class="list">${y.map(U=>{const ge=lernstandLatest(p,U.id),de=lernstandAttemptCount(p,U.id),fe=lernstandMaxPoints(U.id);return`<div class="list-item"><div><strong>${U.nr}. ${esc(U.title)}</strong><small>${de?`letzter Stand: ${ge.total}/${fe} \xB7 Versuch ${ge.attempt}`:"noch nicht bearbeitet"}</small></div>
  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
- ${latest?`<span class="pill ${lernstandStatus(latest.total,max)}">${lernstandStatusText(latest.total,max)}</span>`:""}
- ${count?`<button class="secondary"onclick="openLernstandResult('${t.id}')">🔓 Musterlösung</button>`:""}
- <button class="primary"onclick="openLernstand('${t.id}')">${count?"Weiter/ansehen":"Starten"} →</button>
- </div></div>`;
- }).join("")||`<div class="empty">Für ${esc(woche.lb)} sind noch keine Lernstandsmessungen hinterlegt.</div>`}</div>
+ ${ge?`<span class="pill ${lernstandStatus(ge.total,fe)}">${lernstandStatusText(ge.total,fe)}</span>`:""}
+ ${de?`<button class="secondary"onclick="openLernstandResult('${U.id}')">\u{1F513} Musterl\xF6sung</button>`:""}
+ <button class="primary"onclick="openLernstand('${U.id}')">${de?"Weiter/ansehen":"Starten"} \u2192</button>
+ </div></div>`}).join("")||`<div class="empty">F\xFCr ${esc(i.lb)} sind noch keine Lernstandsmessungen hinterlegt.</div>`}</div>
  <div class="form-actions"style="margin-top:10px"><button class="secondary"onclick="closeModal();go('lernstand')"> Alle Lernstandsmessungen ansehen</button></div>
  </div>
 
  <div class="wd-panel"id="wdPanel_selbsteinschaetzung">
- <p style="color:var(--muted);margin-top:0">Schätz dich jetzt zum Schluss selbst ein: Welche Lernziele hast du wirklich erreicht?</p>
- <div class="list">${ziele.map(z=>`<div class="list-item"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;flex:1"><input type="checkbox"${fortschritt.zieleErfuellt?.[z.id]?"checked":""} onchange="toggleZielErfuellt('${fach}','${wocheId}','${z.id}',this.checked)"><span>${esc(z.text)}</span></label></div>`).join("")||`<div class="empty">Für dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</div>`}</div>
- ${ziele.length?`<div class="form-actions"style="margin-top:12px">
- <button class="primary"${fortschritt.abgeschlossen?"disabled":""} onclick="markWocheAbgeschlossen('${fach}','${wocheId}')">${fortschritt.abgeschlossen?"✓ Woche abgeschlossen":alleErfuellt?"✓ Woche als abgeschlossen markieren":" Erst alle Ziele erfüllen"}</button>
+ <p style="color:var(--muted);margin-top:0">Sch\xE4tz dich jetzt zum Schluss selbst ein: Welche Lernziele hast du wirklich erreicht?</p>
+ <div class="list">${v.map(U=>`<div class="list-item"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;flex:1"><input type="checkbox"${c.zieleErfuellt?.[U.id]?"checked":""} onchange="toggleZielErfuellt('${e}','${t}','${U.id}',this.checked)"><span>${esc(U.text)}</span></label></div>`).join("")||'<div class="empty">F\xFCr dieses Fach/diese Woche sind noch keine Lehrplan-Ziele hinterlegt.</div>'}</div>
+ ${v.length?`<div class="form-actions"style="margin-top:12px">
+ <button class="primary"${c.abgeschlossen?"disabled":""} onclick="markWocheAbgeschlossen('${e}','${t}')">${c.abgeschlossen?"\u2713 Woche abgeschlossen":S?"\u2713 Woche als abgeschlossen markieren":" Erst alle Ziele erf\xFCllen"}</button>
  </div>`:""}
  <p style="font-size:11px;color:var(--muted);margin-top:16px">Zur Vertiefung deiner Reflexion:</p>
- ${miniToolRow([["🤔","Metakognition","metakognition"],["🧭","Lernpfad aktualisieren","lernpfad"],["💬","Lerncoaching","lerncoaching"]])}
+ ${miniToolRow([["\u{1F914}","Metakognition","metakognition"],["\u{1F9ED}","Lernpfad aktualisieren","lernpfad"],["\u{1F4AC}","Lerncoaching","lerncoaching"]])}
  </div>
 
  <div class="wd-footer">
- <button class="secondary"onclick="closeModal()">Schließen</button>
+ <button class="secondary"onclick="closeModal()">Schlie\xDFen</button>
  <span style="flex:1"></span>
- <button class="secondary"onclick="closeModal();go('forum-board')">❓ Im Forum fragen</button>
+ <button class="secondary"onclick="closeModal();go('forum-board')">\u2753 Im Forum fragen</button>
  <button class="primary"onclick="closeModal();go('forum-nachrichten')"> Lehrkraft fragen</button>
  </div>
- `);
- showWocheTab(startTab);
-}
+ `),showWocheTab(ie)}
 window.openWocheDetail=openWocheDetail;
 
 // ============================================================
@@ -11805,56 +11115,7 @@ async function addWhiteboard(){
   toast(e?.code==="permission-denied"?"Firebase verweigert das Anlegen (permission-denied). Bitte die Firestore-Regeln prüfen.":`Whiteboard konnte nicht angelegt werden (${(e&&(e.code||e.name))||"unbekannt"}).`);
  }
 }
-async function wbBoardLoeschen(id,artVorgabe){
- if(!isTeacher()){toast("Nur Lehrkräfte können ein Whiteboard oder eine Tafel löschen.");return}
- const art=artVorgabe||(wb&&wb.id===id&&wb.board&&wb.board.art)||"team";
- const istTafel=art==="tafel";
- if(!confirm(istTafel?"Diese Tafel mit allen Seiten und Elementen wirklich löschen? Das lässt sich nicht rückgängig machen.":"Dieses Whiteboard mit allen Elementen wirklich löschen? Das lässt sich nicht rückgängig machen."))return;
- try{
-  const snap=await getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",id)));
-  await Promise.all(snap.docs.map(d=>deleteDoc(doc(db,"whiteboardItems",d.id))));
-  const bs=await getDocs(query(collection(db,"whiteboardImages"),where("boardId","==",id)));
-  await Promise.all(bs.docs.map(d=>deleteDoc(doc(db,"whiteboardImages",d.id))));
-  const ps=await getDocs(query(collection(db,"whiteboardPresence"),where("boardId","==",id)));
-  await Promise.all(ps.docs.map(d=>deleteDoc(doc(db,"whiteboardPresence",d.id)).catch(()=>{})));
-  // Verknüpfungen lösen, damit nirgends eine Tafel angezeigt wird, die es nicht mehr gibt
-  try{
-   // Stunden im Unterricht-Plan (Termin → Tafel)
-   const ts=await getDocs(query(collection(db,"lehrplanTafeln"),where("boardId","==",id)));
-   await Promise.all(ts.docs.map(d=>{const x=d.data();return(x.lernBoardId||x.whiteboardId||x.rfUrl)?updateDoc(doc(db,"lehrplanTafeln",d.id),{boardId:""}):deleteDoc(doc(db,"lehrplanTafeln",d.id));}));
-   ts.docs.forEach(d=>{const x=d.data();if(PP12_CACHE&&PP12_CACHE.tafeln){if(x.lernBoardId||x.whiteboardId||x.rfUrl)PP12_CACHE.tafeln[d.id]={...PP12_CACHE.tafeln[d.id],boardId:""};else delete PP12_CACHE.tafeln[d.id];}});
-   // zurückgestellte Stunden mit Tafel
-   const pl=await getDoc(doc(db,"lehrplanPlan","pp12"));
-   if(pl.exists()){
-    const pt=pl.data().parkTafeln||{};
-    const rest=Object.fromEntries(Object.entries(pt).filter(([,t])=>!(t&&t.boardId===id)));
-    if(Object.keys(rest).length!==Object.keys(pt).length){
-     await updateDoc(doc(db,"lehrplanPlan","pp12"),{parkTafeln:rest});
-     if(PP12_OVER)PP12_OVER.parkTafeln=rest;
-    }
-   }
-   // Module im Modulplan
-   const ms=await getDocs(query(collection(db,"ppModule"),where("tafelId","==",id)));
-   await Promise.all(ms.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{tafelId:""})));
-   if(ms.docs.length&&typeof ppmLaden==="function")await ppmLaden(true);
-  }catch(e){console.warn("Tafel-Verknüpfungen lösen:",e);}
-  try{
-   const mw=await getDocs(query(collection(db,"ppModule"),where("whiteboardId","==",id)));
-   await Promise.all(mw.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{whiteboardId:""})));
-   if(mw.docs.length&&typeof ppmLaden==="function")await ppmLaden(true);
-   const ml=await getDocs(query(collection(db,"ppModule"),where("lernBoardId","==",id)));
-   await Promise.all(ml.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{lernBoardId:""})));
-   if(ml.docs.length&&typeof ppmLaden==="function")await ppmLaden(true);
-   for(const feld of["whiteboardId","lernBoardId"]){
-    const lw=await getDocs(query(collection(db,"lehrplanTafeln"),where(feld,"==",id)));
-    await Promise.all(lw.docs.map(d=>updateDoc(doc(db,"lehrplanTafeln",d.id),{[feld]:""})));
-    lw.docs.forEach(d=>{if(typeof PP12_CACHE!=="undefined"&&PP12_CACHE.tafeln&&PP12_CACHE.tafeln[d.id])PP12_CACHE.tafeln[d.id][feld]="";});
-   }
-  }catch(e){console.warn("Whiteboard-Verknüpfung lösen:",e);}
-  await deleteDoc(doc(db,"whiteboards",id));
-  activeWhiteboardId=null;go(istTafel?"tafel":"whiteboard");toast(istTafel?"Tafel gelöscht.":"Whiteboard gelöscht.");
- }catch(e){console.error("Whiteboard löschen:",e);toast("Konnte nicht vollständig gelöscht werden.");}
-}
+async function wbBoardLoeschen(e,t){if(!isTeacher()){toast("Nur Lehrkr\xE4fte k\xF6nnen ein Whiteboard oder eine Tafel l\xF6schen.");return}const i=(t||wb&&wb.id===e&&wb.board&&wb.board.art||"team")==="tafel";if(confirm(i?"Diese Tafel mit allen Seiten und Elementen wirklich l\xF6schen? Das l\xE4sst sich nicht r\xFCckg\xE4ngig machen.":"Dieses Whiteboard mit allen Elementen wirklich l\xF6schen? Das l\xE4sst sich nicht r\xFCckg\xE4ngig machen."))try{const r=await getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",e)));await Promise.all(r.docs.map(l=>deleteDoc(doc(db,"whiteboardItems",l.id))));const a=await getDocs(query(collection(db,"whiteboardImages"),where("boardId","==",e)));await Promise.all(a.docs.map(l=>deleteDoc(doc(db,"whiteboardImages",l.id))));const s=await getDocs(query(collection(db,"whiteboardPresence"),where("boardId","==",e)));await Promise.all(s.docs.map(l=>deleteDoc(doc(db,"whiteboardPresence",l.id)).catch(()=>{})));try{const l=await getDocs(query(collection(db,"lehrplanTafeln"),where("boardId","==",e)));await Promise.all(l.docs.map(p=>{const h=p.data();return h.lernBoardId||h.whiteboardId||h.rfUrl?updateDoc(doc(db,"lehrplanTafeln",p.id),{boardId:""}):deleteDoc(doc(db,"lehrplanTafeln",p.id))})),l.docs.forEach(p=>{const h=p.data();PP12_CACHE&&PP12_CACHE.tafeln&&(h.lernBoardId||h.whiteboardId||h.rfUrl?PP12_CACHE.tafeln[p.id]={...PP12_CACHE.tafeln[p.id],boardId:""}:delete PP12_CACHE.tafeln[p.id])});const c=await getDoc(doc(db,"lehrplanPlan","pp12"));if(c.exists()){const p=c.data().parkTafeln||{},h=Object.fromEntries(Object.entries(p).filter(([,k])=>!(k&&k.boardId===e)));Object.keys(h).length!==Object.keys(p).length&&(await updateDoc(doc(db,"lehrplanPlan","pp12"),{parkTafeln:h}),PP12_OVER&&(PP12_OVER.parkTafeln=h))}const d=await getDocs(query(collection(db,"ppModule"),where("tafelId","==",e)));await Promise.all(d.docs.map(p=>updateDoc(doc(db,"ppModule",p.id),{tafelId:""}))),d.docs.length&&typeof ppmLaden=="function"&&await ppmLaden(!0)}catch(l){console.warn("Tafel-Verkn\xFCpfungen l\xF6sen:",l)}try{const l=await getDocs(query(collection(db,"ppModule"),where("whiteboardId","==",e)));await Promise.all(l.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{whiteboardId:""}))),l.docs.length&&typeof ppmLaden=="function"&&await ppmLaden(!0);const c=await getDocs(query(collection(db,"ppModule"),where("lernBoardId","==",e)));await Promise.all(c.docs.map(d=>updateDoc(doc(db,"ppModule",d.id),{lernBoardId:""}))),c.docs.length&&typeof ppmLaden=="function"&&await ppmLaden(!0);for(const d of["whiteboardId","lernBoardId"]){const p=await getDocs(query(collection(db,"lehrplanTafeln"),where(d,"==",e)));await Promise.all(p.docs.map(h=>updateDoc(doc(db,"lehrplanTafeln",h.id),{[d]:""}))),p.docs.forEach(h=>{typeof PP12_CACHE<"u"&&PP12_CACHE.tafeln&&PP12_CACHE.tafeln[h.id]&&(PP12_CACHE.tafeln[h.id][d]="")})}}catch(l){console.warn("Whiteboard-Verkn\xFCpfung l\xF6sen:",l)}await deleteDoc(doc(db,"whiteboards",e)),activeWhiteboardId=null,go(i?"tafel":"whiteboard"),toast(i?"Tafel gel\xF6scht.":"Whiteboard gel\xF6scht.")}catch(r){console.error("Whiteboard l\xF6schen:",r),toast("Konnte nicht vollst\xE4ndig gel\xF6scht werden.")}}
 
 // ------------------------------------------------------------ Board-Seite
 async function renderWhiteboardBoard(){
@@ -11963,7 +11224,7 @@ function wbLinienFuer(id){
 }
 function wbIstSvg(it){return it.type==="stroke"||it.type==="line";}
 function wbSichtbar(it){return (it.seite||1)===wb.seite;}
-function wbSeitenItems(){return [...wb.items.values()].filter(wbSichtbar);}
+function wbSeitenItems(){return[...wb.items.values()].filter(wbSichtbar)}
 function wbKopfH(it){return it.type==="image"&&(wb.board.art==="tafel"||it.titel)?38:0;}
 function wbDarfLoeschen(it){return isTeacher()||it.authorUid===currentUser.uid;}
 function wbWelt(cx,cy){
@@ -12163,46 +11424,16 @@ function wbEntfernenDom(id){
  const el=wb.els.get(id);if(el){el.remove();wb.els.delete(id);}
  const g=wb.svgEls.get(id);if(g){g.remove();wb.svgEls.delete(id);}
 }
-function wbZ(){
- const liste=[...wb.items.values()].sort((a,b)=>((a.type==="frame"?0:1)-(b.type==="frame"?0:1))||((a.z||0)-(b.z||0)));
- liste.forEach((it,i)=>{const el=wb.els.get(it.id);if(el)el.style.zIndex=String(i+1);});
- liste.filter(wbIstSvg).forEach(it=>{const g=wb.svgEls.get(it.id);if(g)wb.svg.insertBefore(g,wb.selG);});
-}
+function wbZ(){const e=[...wb.items.values()].sort((t,n)=>(t.type==="frame"?0:1)-(n.type==="frame"?0:1)||(t.z||0)-(n.z||0));e.forEach((t,n)=>{const i=wb.els.get(t.id);i&&(i.style.zIndex=String(n+1))}),e.filter(wbIstSvg).forEach(t=>{const n=wb.svgEls.get(t.id);n&&wb.svg.insertBefore(n,wb.selG)})}
 function wbNachAenderung(){
  const h=$("wbHinweis");if(h)h.hidden=wbSeitenItems().length>0||wb.ro;
  wbSelSvg();wbPropsZeichnen();
 }
 
 // ---- Auswahl ----
-function wbAuswahlSetzen(ids){
- const alt=new Set(wb.sel);wb.sel=new Set(ids);
- new Set([...alt,...wb.sel]).forEach(id=>wbZeichne(id));
- wbSelSvg();wbPropsZeichnen();
-}
-function wbSelSvg(){
- if(!wb||!wb.selG)return;
- const k=wb.view.k;let html="";
- wb.sel.forEach(id=>{
-  const it=wb.items.get(id);if(!it||!wbIstSvg(it))return;
-  const b=wbBox(it),p=8/k;
-  html+=`<rect x="${b.x-p}"y="${b.y-p}"width="${b.w+p*2}"height="${b.h+p*2}"fill="none"stroke="#2f7fc6"stroke-width="${1.5/k}"stroke-dasharray="${6/k} ${4/k}"rx="${4/k}"/>`;
- });
- if(wb.sel.size===1){
-  const it=wb.items.get([...wb.sel][0]);
-  if(it&&it.type==="line"){
-   const en=wbEnden(it);
-   [[1,en.x1,en.y1],[2,en.x2,en.y2]].forEach(([n,x,y])=>{html+=`<circle data-ep="${n}"cx="${x}"cy="${y}"r="${8/k}"fill="#fff"stroke="#2f7fc6"stroke-width="${2/k}"style="pointer-events:all;cursor:move"/>`;});
-  }
- }
- wb.selG.innerHTML=html;
-}
-function wbTrefferLinie(pt){
- const tol=10/wb.view.k;let best=null;
- [...wb.items.values()].filter(i=>wbIstSvg(i)&&wbSichtbar(i)).sort((a,b)=>(b.z||0)-(a.z||0)).some(it=>{
-  const n=wbAbstand(it,pt);if(n<=tol+((it.sw||4)/2)){best=it;return true;}return false;
- });
- return best;
-}
+function wbAuswahlSetzen(e){const t=new Set(wb.sel);wb.sel=new Set(e),new Set([...t,...wb.sel]).forEach(n=>wbZeichne(n)),wbSelSvg(),wbPropsZeichnen()}
+function wbSelSvg(){if(!wb||!wb.selG)return;const e=wb.view.k;let t="";if(wb.sel.forEach(n=>{const i=wb.items.get(n);if(!i||!wbIstSvg(i))return;const r=wbBox(i),a=8/e;t+=`<rect x="${r.x-a}"y="${r.y-a}"width="${r.w+a*2}"height="${r.h+a*2}"fill="none"stroke="#2f7fc6"stroke-width="${1.5/e}"stroke-dasharray="${6/e} ${4/e}"rx="${4/e}"/>`}),wb.sel.size===1){const n=wb.items.get([...wb.sel][0]);if(n&&n.type==="line"){const i=wbEnden(n);[[1,i.x1,i.y1],[2,i.x2,i.y2]].forEach(([r,a,s])=>{t+=`<circle data-ep="${r}"cx="${a}"cy="${s}"r="${8/e}"fill="#fff"stroke="#2f7fc6"stroke-width="${2/e}"style="pointer-events:all;cursor:move"/>`})}}wb.selG.innerHTML=t}
+function wbTrefferLinie(e){const t=10/wb.view.k;let n=null;return[...wb.items.values()].filter(i=>wbIstSvg(i)&&wbSichtbar(i)).sort((i,r)=>(r.z||0)-(i.z||0)).some(i=>wbAbstand(i,e)<=t+(i.sw||4)/2?(n=i,!0):!1),n}
 function wbAbstandPunktStrecke(px,py,ax,ay,bx,by){
  const dx=bx-ax,dy=by-ay,l2=dx*dx+dy*dy;
  let t=l2?((px-ax)*dx+(py-ay)*dy)/l2:0;t=Math.max(0,Math.min(1,t));
@@ -12228,70 +11459,10 @@ function wbVereinfachen(pts,eps){
 }
 
 // ---- Eigenschaftsleiste ----
-function wbPropsZeichnen(){
- const box=$("wbProps");if(!box)return;
- const sel=[...wb.sel].map(id=>wb.items.get(id)).filter(Boolean);
- const werkzeugTyp={note:"note",text:"text",shape:"shape",line:"line",pen:"stroke",frame:"frame"}[wb.tool];
- const typen=new Set(sel.length?sel.map(i=>i.type):(werkzeugTyp?[werkzeugTyp]:[]));
- if(!typen.size){box.hidden=true;box.innerHTML="";return;}
- const aktFarbe=sel.length?sel[0].c:(wb.farben[wb.tool]||"grau");
- const hatSw=["stroke","line","shape"].some(t=>typen.has(t));
- const hatFs=["note","text","shape","frame","card"].some(t=>typen.has(t));
- const hatPfeil=typen.has("line");
- const aktSw=sel.length?(sel[0].sw||WB_STANDARD[sel[0].type]?.sw||4):(wb.sw[wb.tool]||4);
- let html=`<div class="wb-gruppe">${WB_FARBEN.map(f=>`<button type="button"class="wb-sw${f.k===aktFarbe?" on":""}"data-farbe="${f.k}"title="${f.k}"style="background:${f.soft};box-shadow:0 0 0 1px ${f.dark}55${f.k===aktFarbe?",0 0 0 3px #2f7fc6":""}"></button>`).join("")}</div>`;
- if(hatSw)html+=`<div class="wb-gruppe">${[[2,"Dünn"],[4,"Mittel"],[8,"Dick"]].map(([w,t])=>`<button type="button"class="wb-mini${aktSw===w?" on":""}"data-sw="${w}"title="${t}"><span style="display:block;width:16px;height:${Math.max(2,w/1.5)}px;background:currentColor;border-radius:4px"></span></button>`).join("")}</div>`;
- if(hatFs)html+=`<div class="wb-gruppe"><button type="button"class="wb-mini"data-fs="-2"title="Schrift kleiner">A−</button><button type="button"class="wb-mini"data-fs="2"title="Schrift größer">A+</button></div>`;
- if(hatPfeil)html+=`<div class="wb-gruppe"><button type="button"class="wb-mini${sel.some(i=>i.arrow)?" on":""}"data-pfeil="1"title="Pfeilspitze ein/aus">➜</button></div>`;
- if(sel.length)html+=`<div class="wb-gruppe"><button type="button"class="wb-mini"data-aktion="dup"title="Duplizieren (Strg+D)">${wbIcon("copy",18)}</button><button type="button"class="wb-mini"data-aktion="vor"title="Nach vorn">${wbIcon("front",18)}</button><button type="button"class="wb-mini"data-aktion="zurueck"title="Nach hinten">${wbIcon("back",18)}</button><button type="button"class="wb-mini"data-aktion="del"title="Löschen (Entf)">${wbIcon("trash",18)}</button></div>`;
- box.innerHTML=html;box.hidden=false;
-}
-function wbAufAuswahl(felderFn){
- const ids=[...wb.sel];
- const vorher=ids.map(id=>({id,alt:{...wb.items.get(id)}}));
- const nachher=[];
- ids.forEach(id=>{const it=wb.items.get(id);if(!it)return;const f=felderFn(it);Object.assign(it,f);wbZeichne(id);nachher.push([id,f]);});
- wbSelSvg();wbPropsZeichnen();
- nachher.forEach(([id,f])=>updateDoc(doc(db,"whiteboardItems",id),{...f,updatedAt:serverTimestamp()}).catch(wbFehler));
- wbUndoPush(async()=>{for(const v of vorher){const felder={};Object.keys(nachher.find(n=>n[0]===v.id)[1]).forEach(k=>{felder[k]=v.alt[k]===undefined?null:v.alt[k];});const it=wb.items.get(v.id);if(it){Object.assign(it,felder);wbZeichne(v.id);}await updateDoc(doc(db,"whiteboardItems",v.id),{...felder,updatedAt:serverTimestamp()}).catch(()=>{});}wbSelSvg();wbPropsZeichnen();});
-}
-function wbEigenschaftKlick(e){
- const b=e.target.closest("button");if(!b)return;
- if(b.dataset.farbe){
-  const k=b.dataset.farbe;
-  if(wb.sel.size)wbAufAuswahl(()=>({c:k}));
-  if(wb.farben[wb.tool]!==undefined)wb.farben[wb.tool]=k;
-  wbPropsZeichnen();
- }else if(b.dataset.sw){
-  const w=Number(b.dataset.sw);
-  if(wb.sw[wb.tool]!==undefined)wb.sw[wb.tool]=w;
-  if(wb.sel.size)wbAufAuswahl(it=>["stroke","line","shape"].includes(it.type)?{sw:w}:{});
-  wbPropsZeichnen();
- }else if(b.dataset.fs){
-  const d=Number(b.dataset.fs);
-  wbAufAuswahl(it=>["note","text","shape","frame","card"].includes(it.type)?{fs:wbBegrenzen((it.fs||18)+d,10,96)}:{});
- }else if(b.dataset.pfeil){
-  const an=![...wb.sel].map(id=>wb.items.get(id)).some(i=>i?.arrow);
-  wbAufAuswahl(it=>it.type==="line"?{arrow:an}:{});
- }else if(b.dataset.aktion==="del")wbLoeschenIds([...wb.sel]);
- else if(b.dataset.aktion==="dup")wbDuplizieren();
- else if(b.dataset.aktion==="vor")wbAufAuswahl(()=>({z:Date.now()}));
- else if(b.dataset.aktion==="zurueck"){const mn=Math.min(...[...wb.items.values()].map(i=>i.z||0));let n=0;wbAufAuswahl(()=>({z:mn-1000-(n++)}));}
- wbZ();
-}
-function wbDuplizieren(){
- const ids=[...wb.sel];if(!ids.length)return;
- const neu=[];
- ids.forEach((id,i)=>{
-  const it=wb.items.get(id);if(!it)return;
-  const {id:_i,createdAt,updatedAt,authorUid,authorName,...rest}=it;
-  const k={...rest,x:(rest.x||0)+28,y:(rest.y||0)+28};
-  if(rest.type==="line"){const n=wbEnden(it);k.x=Math.round(n.x1)+28;k.y=Math.round(n.y1)+28;k.x2=Math.round(n.x2)+28;k.y2=Math.round(n.y2)+28;k.a=null;k.b=null;}
-  neu.push(wbErzeugen(k,{zOffset:i}));
- });
- wbAuswahlSetzen(neu);
- wbUndoPush(async()=>{await wbLoeschenIds(neu,true);});
-}
+function wbPropsZeichnen(){const e=$("wbProps");if(!e)return;const t=[...wb.sel].map(p=>wb.items.get(p)).filter(Boolean),n={note:"note",text:"text",shape:"shape",line:"line",pen:"stroke",frame:"frame"}[wb.tool],i=new Set(t.length?t.map(p=>p.type):n?[n]:[]);if(!i.size){e.hidden=!0,e.innerHTML="";return}const r=t.length?t[0].c:wb.farben[wb.tool]||"grau",a=["stroke","line","shape"].some(p=>i.has(p)),s=["note","text","shape","frame","card"].some(p=>i.has(p)),l=i.has("line"),c=t.length?t[0].sw||WB_STANDARD[t[0].type]?.sw||4:wb.sw[wb.tool]||4;let d=`<div class="wb-gruppe">${WB_FARBEN.map(p=>`<button type="button"class="wb-sw${p.k===r?" on":""}"data-farbe="${p.k}"title="${p.k}"style="background:${p.soft};box-shadow:0 0 0 1px ${p.dark}55${p.k===r?",0 0 0 3px #2f7fc6":""}"></button>`).join("")}</div>`;a&&(d+=`<div class="wb-gruppe">${[[2,"D\xFCnn"],[4,"Mittel"],[8,"Dick"]].map(([p,h])=>`<button type="button"class="wb-mini${c===p?" on":""}"data-sw="${p}"title="${h}"><span style="display:block;width:16px;height:${Math.max(2,p/1.5)}px;background:currentColor;border-radius:4px"></span></button>`).join("")}</div>`),s&&(d+='<div class="wb-gruppe"><button type="button"class="wb-mini"data-fs="-2"title="Schrift kleiner">A\u2212</button><button type="button"class="wb-mini"data-fs="2"title="Schrift gr\xF6\xDFer">A+</button></div>'),l&&(d+=`<div class="wb-gruppe"><button type="button"class="wb-mini${t.some(p=>p.arrow)?" on":""}"data-pfeil="1"title="Pfeilspitze ein/aus">\u279C</button></div>`),t.length&&(d+=`<div class="wb-gruppe"><button type="button"class="wb-mini"data-aktion="dup"title="Duplizieren (Strg+D)">${wbIcon("copy",18)}</button><button type="button"class="wb-mini"data-aktion="vor"title="Nach vorn">${wbIcon("front",18)}</button><button type="button"class="wb-mini"data-aktion="zurueck"title="Nach hinten">${wbIcon("back",18)}</button><button type="button"class="wb-mini"data-aktion="del"title="L\xF6schen (Entf)">${wbIcon("trash",18)}</button></div>`),e.innerHTML=d,e.hidden=!1}
+function r_Ir(e){const t=[...wb.sel],n=t.map(r=>({id:r,alt:{...wb.items.get(r)}})),i=[];t.forEach(r=>{const a=wb.items.get(r);if(!a)return;const s=e(a);Object.assign(a,s),wbZeichne(r),i.push([r,s])}),wbSelSvg(),wbPropsZeichnen(),i.forEach(([r,a])=>updateDoc(doc(db,"whiteboardItems",r),{...a,updatedAt:serverTimestamp()}).catch(wbFehler)),wbUndoPush(async()=>{for(const r of n){const a={};Object.keys(i.find(l=>l[0]===r.id)[1]).forEach(l=>{a[l]=r.alt[l]===void 0?null:r.alt[l]});const s=wb.items.get(r.id);s&&(Object.assign(s,a),wbZeichne(r.id)),await updateDoc(doc(db,"whiteboardItems",r.id),{...a,updatedAt:serverTimestamp()}).catch(()=>{})}wbSelSvg(),wbPropsZeichnen()})}
+function r_J1(e){const t=e.target.closest("button");if(t){if(t.dataset.farbe){const n=t.dataset.farbe;wb.sel.size&&r_Ir(()=>({c:n})),wb.farben[wb.tool]!==void 0&&(wb.farben[wb.tool]=n),wbPropsZeichnen()}else if(t.dataset.sw){const n=Number(t.dataset.sw);wb.sw[wb.tool]!==void 0&&(wb.sw[wb.tool]=n),wb.sel.size&&r_Ir(i=>["stroke","line","shape"].includes(i.type)?{sw:n}:{}),wbPropsZeichnen()}else if(t.dataset.fs){const n=Number(t.dataset.fs);r_Ir(i=>["note","text","shape","frame","card"].includes(i.type)?{fs:wbBegrenzen((i.fs||18)+n,10,96)}:{})}else if(t.dataset.pfeil){const n=![...wb.sel].map(i=>wb.items.get(i)).some(i=>i?.arrow);r_Ir(i=>i.type==="line"?{arrow:n}:{})}else if(t.dataset.aktion==="del")wbLoeschenIds([...wb.sel]);else if(t.dataset.aktion==="dup")r_vg();else if(t.dataset.aktion==="vor")r_Ir(()=>({z:Date.now()}));else if(t.dataset.aktion==="zurueck"){const n=Math.min(...[...wb.items.values()].map(r=>r.z||0));let i=0;r_Ir(()=>({z:n-1e3-i++}))}wbZ()}}
+function r_vg(){const e=[...wb.sel];if(!e.length)return;const t=[];e.forEach((n,i)=>{const r=wb.items.get(n);if(!r)return;const{id:a,createdAt:s,updatedAt:l,authorUid:c,authorName:d,...p}=r,h={...p,x:(p.x||0)+28,y:(p.y||0)+28};if(p.type==="line"){const k=wbEnden(r);h.x=Math.round(k.x1)+28,h.y=Math.round(k.y1)+28,h.x2=Math.round(k.x2)+28,h.y2=Math.round(k.y2)+28,h.a=null,h.b=null}t.push(wbErzeugen(h,{zOffset:i}))}),wbAuswahlSetzen(t),wbUndoPush(async()=>{await wbLoeschenIds(t,!0)})}
 
 // ---- Texte bearbeiten ----
 function wbBearbeitenStart(id,feld){
@@ -12329,144 +11500,9 @@ function wbSetzeWerkzeug(t){
  if(t!=="select"&&["note","text","shape","line","pen","frame"].indexOf(t)>-1&&wb.sel.size)wbAuswahlSetzen([]);
  wbPropsZeichnen();
 }
-function wbRadieren(pt){
- const tol=12/wb.view.k;const treffer=[];
- wb.items.forEach(it=>{if(wbIstSvg(it)&&wbSichtbar(it)&&wbAbstand(it,pt)<=tol+(it.sw||4)/2)treffer.push(it.id);});
- if(treffer.length){
-  const eigene=treffer.filter(id=>wbDarfLoeschen(wb.items.get(id)));
-  if(!eigene.length){if(!wb.radierHinweis){wb.radierHinweis=true;toast("Zeichnungen anderer Personen kann nur eine Lehrkraft radieren.");}return;}
-  (wb.radiert=wb.radiert||[]).push(...eigene.map(id=>({...wb.items.get(id)})));
-  eigene.forEach(id=>{const it=wb.items.get(id);wb.items.delete(id);wb.sel.delete(id);wbEntfernenDom(id);deleteDoc(doc(db,"whiteboardItems",id)).catch(wbFehler);});
-  wbNachAenderung();
- }
-}
-function wbDown(e){
- if(!wb||e.target.closest?.(".wb-menu"))return;
- const pid=e.pointerId??1;wb.pointers.set(pid,{x:e.clientX,y:e.clientY});
- if(wb.pointers.size>=2){wbPinchStart();return;}
- if(e.button===2)return;
- if(e.target.closest?.('[contenteditable="true"]'))return;
- // Eigene Doppelklick-Erkennung: Der Browser meldet kein dblclick, wenn pointerdown abgebrochen wird.
- {
-  const jetzt=Date.now(),l=wb.letzterDown;
-  if(l&&!l.bewegt&&jetzt-l.t<400&&Math.hypot(e.clientX-l.x,e.clientY-l.y)<12&&e.button!==1&&wb.tool==="select"&&!e.target.closest?.("[data-act],a,.wb-video-start,.wb-rs,[data-ep]")){
-   wb.letzterDown=null;wb.dblT=Date.now();wbDoppel({target:e.target,clientX:e.clientX,clientY:e.clientY});e.preventDefault();return;
-  }
-  wb.letzterDown={t:jetzt,x:e.clientX,y:e.clientY,bewegt:false};
- }
- if(wb.editing)wbBearbeitenEnde(true);
- $("wbFormMenu").hidden=true;$("wbTplMenu").hidden=true;
- const pt=wbWelt(e.clientX,e.clientY);
- const tippen=e.pointerType==="touch";
- if(wb.tool==="hand"||e.button===1||wb.space){
-  wb.aktion={t:"pan",sx:e.clientX,sy:e.clientY,vx:wb.view.x,vy:wb.view.y};wb.stage.style.cursor="grabbing";e.preventDefault();return;
- }
- if(e.target.closest?.("[data-act],[data-aktion],a,.wb-video-start")){return;}
- if(wb.ro){wb.aktion={t:"pan",sx:e.clientX,sy:e.clientY,vx:wb.view.x,vy:wb.view.y};e.preventDefault();return;}
- const tool=wb.tool;
- if(tool==="select"){
-  const ep=e.target.closest?.("[data-ep]");
-  const rs=e.target.closest?.(".wb-rs");
-  const itemEl=e.target.closest?.(".wb-item");
-  if(ep){
-   const id=[...wb.sel][0],it=wb.items.get(id);
-   if(it){wb.lokal.add(id);wb.aktion={t:"ep",id,n:Number(ep.dataset.ep),alt:{x:it.x,y:it.y,x2:it.x2,y2:it.y2,a:it.a||null,b:it.b||null}};}
-   e.preventDefault();return;
-  }
-  if(rs&&itemEl){
-   const id=itemEl.dataset.id,it=wb.items.get(id);
-   if(it){wb.lokal.add(id);wb.aktion={t:"resize",id,sx:e.clientX,sy:e.clientY,w0:it.w,h0:it.h};}
-   e.preventDefault();return;
-  }
-  let treffer=itemEl?wb.items.get(itemEl.dataset.id):wbTrefferLinie(pt);
-  if(treffer){
-   const id=treffer.id;
-   if(e.shiftKey){const s=new Set(wb.sel);if(s.has(id))s.delete(id);else s.add(id);wbAuswahlSetzen(s);}
-   else if(!wb.sel.has(id))wbAuswahlSetzen([id]);
-   const ids=[...wb.sel];
-   if(!ids.length){e.preventDefault();return;}
-   const start={};ids.forEach(i=>{const x=wb.items.get(i);if(x&&!(x.type==="line"&&(x.a||x.b))){start[i]={x:x.x,y:x.y,x2:x.x2,y2:x.y2};wb.lokal.add(i);}});
-   wb.aktion={t:"move",sx:e.clientX,sy:e.clientY,start,bewegt:false,klickId:id,shift:e.shiftKey};
-   e.preventDefault();return;
-  }
-  if(tippen){wb.aktion={t:"pan",sx:e.clientX,sy:e.clientY,vx:wb.view.x,vy:wb.view.y};e.preventDefault();return;}
-  if(!e.shiftKey)wbAuswahlSetzen([]);
-  const r=wb.stage.getBoundingClientRect();
-  const gummi=document.createElement("div");gummi.className="wb-rubber";wb.stage.appendChild(gummi);
-  wb.aktion={t:"gummi",sx:e.clientX,sy:e.clientY,rx:r.left,ry:r.top,el:gummi,shift:e.shiftKey,vorher:new Set(wb.sel)};
-  e.preventDefault();return;
- }
- if(tool==="note"||tool==="text"){wb.aktion={t:"klick",tool,sx:e.clientX,sy:e.clientY,pt};e.preventDefault();return;}
- if(tool==="shape"||tool==="frame"){
-  const v=document.createElement("div");v.className="wb-rubber";wb.stage.appendChild(v);
-  wb.aktion={t:"ziehen",tool,pt,cur:pt,sx:e.clientX,sy:e.clientY,el:v};e.preventDefault();return;
- }
- if(tool==="line"){const an=wbItemAn(pt);wb.aktion={t:"linie",pt,cur:pt,a:an?an.id:null};e.preventDefault();return;}
- if(tool==="pen"){wb.aktion={t:"stift",pts:[[pt.x,pt.y]]};e.preventDefault();return;}
- if(tool==="eraser"){wb.radiert=[];wb.radierHinweis=false;wb.aktion={t:"radieren"};wbRadieren(pt);e.preventDefault();return;}
-}
-function wbMove(e){
- if(!wb)return;
- if(wb.letzterDown&&!wb.letzterDown.bewegt&&Math.hypot(e.clientX-wb.letzterDown.x,e.clientY-wb.letzterDown.y)>5)wb.letzterDown.bewegt=true;
- const pid=e.pointerId??1;if(wb.pointers.has(pid))wb.pointers.set(pid,{x:e.clientX,y:e.clientY});
- if(wb.pointers.size>=2&&wb.pinch){wbPinchBewegen();return;}
- const a=wb.aktion;if(!a)return;
- const k=wb.view.k;
- if(a.t==="pan"){wb.view={...wb.view,x:a.vx+(e.clientX-a.sx),y:a.vy+(e.clientY-a.sy)};wbAnsichtSetzen();return;}
- const pt=wbWelt(e.clientX,e.clientY);
- if(a.t==="move"){
-  const dx=(e.clientX-a.sx)/k,dy=(e.clientY-a.sy)/k;
-  if(!a.bewegt&&Math.hypot(e.clientX-a.sx,e.clientY-a.sy)<4)return;
-  a.bewegt=true;
-  Object.keys(a.start).forEach(id=>{
-   const it=wb.items.get(id),s=a.start[id];if(!it)return;
-   const f={x:Math.round(s.x+dx),y:Math.round(s.y+dy)};
-   if(it.type==="line"){f.x2=Math.round(s.x2+dx);f.y2=Math.round(s.y2+dy);}
-   Object.assign(it,f);wbZeichne(id);wbUpdateDrosselt(id,f);
-  });
-  wbSelSvg();return;
- }
- if(a.t==="resize"){
-  const it=wb.items.get(a.id);if(!it)return;
-  const min=it.type==="text"?{w:80,h:32}:(WB_KARTENTYPEN.includes(it.type)?{w:150,h:100}:{w:60,h:40});
-  const f={w:Math.round(Math.max(min.w,a.w0+(e.clientX-a.sx)/k)),h:Math.round(Math.max(min.h,a.h0+(e.clientY-a.sy)/k))};
-  if(it.type==="image"&&it.ar)f.h=Math.max(30,Math.round(f.w/it.ar)+wbKopfH(it));
-  Object.assign(it,f);wbZeichne(a.id);wbUpdateDrosselt(a.id,f);return;
- }
- if(a.t==="ep"){
-  const it=wb.items.get(a.id);if(!it)return;
-  let ziel=wbItemAn(pt,a.id);
-  if(ziel&&((a.n===1&&it.b===ziel.id)||(a.n===2&&it.a===ziel.id)))ziel=null;
-  wbZielMarkieren(ziel?ziel.id:null);
-  const f=a.n===1?{x:Math.round(pt.x),y:Math.round(pt.y),a:ziel?ziel.id:null}:{x2:Math.round(pt.x),y2:Math.round(pt.y),b:ziel?ziel.id:null};
-  Object.assign(it,f);wbZeichne(a.id);wbSelSvg();wbUpdateDrosselt(a.id,f);return;
- }
- if(a.t==="gummi"){
-  const x=Math.min(a.sx,e.clientX)-a.rx,y=Math.min(a.sy,e.clientY)-a.ry;
-  Object.assign(a.el.style,{left:x+"px",top:y+"px",width:Math.abs(e.clientX-a.sx)+"px",height:Math.abs(e.clientY-a.sy)+"px"});return;
- }
- if(a.t==="ziehen"){
-  a.cur=pt;
-  const r=wb.stage.getBoundingClientRect();
-  const x=Math.min(a.sx,e.clientX)-r.left,y=Math.min(a.sy,e.clientY)-r.top;
-  Object.assign(a.el.style,{left:x+"px",top:y+"px",width:Math.abs(e.clientX-a.sx)+"px",height:Math.abs(e.clientY-a.sy)+"px"});return;
- }
- if(a.t==="linie"){
-  a.cur=pt;
-  let ziel=wbItemAn(pt);if(ziel&&ziel.id===a.a)ziel=null;
-  a.b=ziel?ziel.id:null;wbZielMarkieren(a.b);
-  const n=wbEnden({x:a.pt.x,y:a.pt.y,x2:pt.x,y2:pt.y,a:a.a,b:a.b});
-  wbVorschau(`<path d="M${n.x1} ${n.y1}L${n.x2} ${n.y2}${wb.arrowNeu?wbPfeilspitze(n.x1,n.y1,n.x2,n.y2,wb.sw.line):""}"fill="none"stroke="${wbFarbe(wb.farben.line).dark}"stroke-width="${wb.sw.line}"stroke-linecap="round"opacity=".75"/>`);return;
- }
- if(a.t==="stift"){
-  const l=a.pts[a.pts.length-1];
-  if(Math.hypot(pt.x-l[0],pt.y-l[1])*k<2)return;
-  a.pts.push([pt.x,pt.y]);
-  let d=`M${a.pts[0][0]} ${a.pts[0][1]}`;for(let i=1;i<a.pts.length;i++)d+=`L${a.pts[i][0]} ${a.pts[i][1]}`;
-  wbVorschau(`<path d="${d}"fill="none"stroke="${wbFarbe(wb.farben.pen).dark}"stroke-width="${wb.sw.pen}"stroke-linecap="round"stroke-linejoin="round"/>`);return;
- }
- if(a.t==="radieren"){wbRadieren(pt);return;}
-}
+function r_yg(e){const t=12/wb.view.k,n=[];if(wb.items.forEach(i=>{wbIstSvg(i)&&wbSichtbar(i)&&wbAbstand(i,e)<=t+(i.sw||4)/2&&n.push(i.id)}),n.length){const i=n.filter(r=>wbDarfLoeschen(wb.items.get(r)));if(!i.length){wb.radierHinweis||(wb.radierHinweis=!0,toast("Zeichnungen anderer Personen kann nur eine Lehrkraft radieren."));return}(wb.radiert=wb.radiert||[]).push(...i.map(r=>({...wb.items.get(r)}))),i.forEach(r=>{const a=wb.items.get(r);wb.items.delete(r),wb.sel.delete(r),wbEntfernenDom(r),deleteDoc(doc(db,"whiteboardItems",r)).catch(wbFehler)}),wbNachAenderung()}}
+function r_q1(e){if(!wb||e.target.closest?.(".wb-menu"))return;const t=e.pointerId??1;if(wb.pointers.set(t,{x:e.clientX,y:e.clientY}),wb.pointers.size>=2){r_X1();return}if(e.button===2||e.target.closest?.('[contenteditable="true"]'))return;{const a=Date.now(),s=wb.letzterDown;if(s&&!s.bewegt&&a-s.t<400&&Math.hypot(e.clientX-s.x,e.clientY-s.y)<12&&e.button!==1&&wb.tool==="select"&&!e.target.closest?.("[data-act],a,.wb-video-start,.wb-rs,[data-ep]")){wb.letzterDown=null,wb.dblT=Date.now(),wbDoppel({target:e.target,clientX:e.clientX,clientY:e.clientY}),e.preventDefault();return}wb.letzterDown={t:a,x:e.clientX,y:e.clientY,bewegt:!1}}wb.editing&&wbBearbeitenEnde(!0),$("wbFormMenu").hidden=!0,$("wbTplMenu").hidden=!0;const n=wbWelt(e.clientX,e.clientY),i=e.pointerType==="touch";if(wb.tool==="hand"||e.button===1||wb.space){wb.aktion={t:"pan",sx:e.clientX,sy:e.clientY,vx:wb.view.x,vy:wb.view.y},wb.stage.style.cursor="grabbing",e.preventDefault();return}if(e.target.closest?.("[data-act],[data-aktion],a,.wb-video-start"))return;if(wb.ro){wb.aktion={t:"pan",sx:e.clientX,sy:e.clientY,vx:wb.view.x,vy:wb.view.y},e.preventDefault();return}const r=wb.tool;if(r==="select"){const a=e.target.closest?.("[data-ep]"),s=e.target.closest?.(".wb-rs"),l=e.target.closest?.(".wb-item");if(a){const h=[...wb.sel][0],k=wb.items.get(h);k&&(wb.lokal.add(h),wb.aktion={t:"ep",id:h,n:Number(a.dataset.ep),alt:{x:k.x,y:k.y,x2:k.x2,y2:k.y2,a:k.a||null,b:k.b||null}}),e.preventDefault();return}if(s&&l){const h=l.dataset.id,k=wb.items.get(h);k&&(wb.lokal.add(h),wb.aktion={t:"resize",id:h,sx:e.clientX,sy:e.clientY,w0:k.w,h0:k.h}),e.preventDefault();return}let c=l?wb.items.get(l.dataset.id):wbTrefferLinie(n);if(c){const h=c.id;if(e.shiftKey){const y=new Set(wb.sel);y.has(h)?y.delete(h):y.add(h),wbAuswahlSetzen(y)}else wb.sel.has(h)||wbAuswahlSetzen([h]);const k=[...wb.sel];if(!k.length){e.preventDefault();return}const f={};k.forEach(y=>{const w=wb.items.get(y);w&&!(w.type==="line"&&(w.a||w.b))&&(f[y]={x:w.x,y:w.y,x2:w.x2,y2:w.y2},wb.lokal.add(y))}),wb.aktion={t:"move",sx:e.clientX,sy:e.clientY,start:f,bewegt:!1,klickId:h,shift:e.shiftKey},e.preventDefault();return}if(i){wb.aktion={t:"pan",sx:e.clientX,sy:e.clientY,vx:wb.view.x,vy:wb.view.y},e.preventDefault();return}e.shiftKey||wbAuswahlSetzen([]);const d=wb.stage.getBoundingClientRect(),p=document.createElement("div");p.className="wb-rubber",wb.stage.appendChild(p),wb.aktion={t:"gummi",sx:e.clientX,sy:e.clientY,rx:d.left,ry:d.top,el:p,shift:e.shiftKey,vorher:new Set(wb.sel)},e.preventDefault();return}if(r==="note"||r==="text"){wb.aktion={t:"klick",tool:r,sx:e.clientX,sy:e.clientY,pt:n},e.preventDefault();return}if(r==="shape"||r==="frame"){const a=document.createElement("div");a.className="wb-rubber",wb.stage.appendChild(a),wb.aktion={t:"ziehen",tool:r,pt:n,cur:n,sx:e.clientX,sy:e.clientY,el:a},e.preventDefault();return}if(r==="line"){const a=wbItemAn(n);wb.aktion={t:"linie",pt:n,cur:n,a:a?a.id:null},e.preventDefault();return}if(r==="pen"){wb.aktion={t:"stift",pts:[[n.x,n.y]]},e.preventDefault();return}if(r==="eraser"){wb.radiert=[],wb.radierHinweis=!1,wb.aktion={t:"radieren"},r_yg(n),e.preventDefault();return}}
+function r_Q1(e){if(!wb)return;wb.letzterDown&&!wb.letzterDown.bewegt&&Math.hypot(e.clientX-wb.letzterDown.x,e.clientY-wb.letzterDown.y)>5&&(wb.letzterDown.bewegt=!0);const t=e.pointerId??1;if(wb.pointers.has(t)&&wb.pointers.set(t,{x:e.clientX,y:e.clientY}),wb.pointers.size>=2&&wb.pinch){r_Y1();return}const n=wb.aktion;if(!n)return;const i=wb.view.k;if(n.t==="pan"){wb.view={...wb.view,x:n.vx+(e.clientX-n.sx),y:n.vy+(e.clientY-n.sy)},wbAnsichtSetzen();return}const r=wbWelt(e.clientX,e.clientY);if(n.t==="move"){const a=(e.clientX-n.sx)/i,s=(e.clientY-n.sy)/i;if(!n.bewegt&&Math.hypot(e.clientX-n.sx,e.clientY-n.sy)<4)return;n.bewegt=!0,Object.keys(n.start).forEach(l=>{const c=wb.items.get(l),d=n.start[l];if(!c)return;const p={x:Math.round(d.x+a),y:Math.round(d.y+s)};c.type==="line"&&(p.x2=Math.round(d.x2+a),p.y2=Math.round(d.y2+s)),Object.assign(c,p),wbZeichne(l),wbUpdateDrosselt(l,p)}),wbSelSvg();return}if(n.t==="resize"){const a=wb.items.get(n.id);if(!a)return;const s=a.type==="text"?{w:80,h:32}:WB_KARTENTYPEN.includes(a.type)?{w:150,h:100}:{w:60,h:40},l={w:Math.round(Math.max(s.w,n.w0+(e.clientX-n.sx)/i)),h:Math.round(Math.max(s.h,n.h0+(e.clientY-n.sy)/i))};a.type==="image"&&a.ar&&(l.h=Math.max(30,Math.round(l.w/a.ar)+wbKopfH(a))),Object.assign(a,l),wbZeichne(n.id),wbUpdateDrosselt(n.id,l);return}if(n.t==="ep"){const a=wb.items.get(n.id);if(!a)return;let s=wbItemAn(r,n.id);s&&(n.n===1&&a.b===s.id||n.n===2&&a.a===s.id)&&(s=null),wbZielMarkieren(s?s.id:null);const l=n.n===1?{x:Math.round(r.x),y:Math.round(r.y),a:s?s.id:null}:{x2:Math.round(r.x),y2:Math.round(r.y),b:s?s.id:null};Object.assign(a,l),wbZeichne(n.id),wbSelSvg(),wbUpdateDrosselt(n.id,l);return}if(n.t==="gummi"){const a=Math.min(n.sx,e.clientX)-n.rx,s=Math.min(n.sy,e.clientY)-n.ry;Object.assign(n.el.style,{left:a+"px",top:s+"px",width:Math.abs(e.clientX-n.sx)+"px",height:Math.abs(e.clientY-n.sy)+"px"});return}if(n.t==="ziehen"){n.cur=r;const a=wb.stage.getBoundingClientRect(),s=Math.min(n.sx,e.clientX)-a.left,l=Math.min(n.sy,e.clientY)-a.top;Object.assign(n.el.style,{left:s+"px",top:l+"px",width:Math.abs(e.clientX-n.sx)+"px",height:Math.abs(e.clientY-n.sy)+"px"});return}if(n.t==="linie"){n.cur=r;let a=wbItemAn(r);a&&a.id===n.a&&(a=null),n.b=a?a.id:null,wbZielMarkieren(n.b);const s=wbEnden({x:n.pt.x,y:n.pt.y,x2:r.x,y2:r.y,a:n.a,b:n.b});wbVorschau(`<path d="M${s.x1} ${s.y1}L${s.x2} ${s.y2}${wb.arrowNeu?wbPfeilspitze(s.x1,s.y1,s.x2,s.y2,wb.sw.line):""}"fill="none"stroke="${wbFarbe(wb.farben.line).dark}"stroke-width="${wb.sw.line}"stroke-linecap="round"opacity=".75"/>`);return}if(n.t==="stift"){const a=n.pts[n.pts.length-1];if(Math.hypot(r.x-a[0],r.y-a[1])*i<2)return;n.pts.push([r.x,r.y]);let s=`M${n.pts[0][0]} ${n.pts[0][1]}`;for(let l=1;l<n.pts.length;l++)s+=`L${n.pts[l][0]} ${n.pts[l][1]}`;wbVorschau(`<path d="${s}"fill="none"stroke="${wbFarbe(wb.farben.pen).dark}"stroke-width="${wb.sw.pen}"stroke-linecap="round"stroke-linejoin="round"/>`);return}if(n.t==="radieren"){r_yg(r);return}}
 function wbVorschau(html){const g=$("wbVorschau");if(g)g.innerHTML=html;}
 function wbUp(e){
  if(!wb)return;
@@ -12555,26 +11591,9 @@ function wbUp(e){
   return;
  }
 }
-function wbPinchStart(){
- const p=[...wb.pointers.values()];if(p.length<2)return;
- wb.aktion=null;wbVorschau("");
- const cx=(p[0].x+p[1].x)/2,cy=(p[0].y+p[1].y)/2;
- const w=wbWelt(cx,cy);
- wb.pinch={d:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)||1,k:wb.view.k,wx:w.x,wy:w.y};
-}
-function wbPinchBewegen(){
- const p=[...wb.pointers.values()];if(p.length<2||!wb.pinch)return;
- const r=wb.stage.getBoundingClientRect();
- const cx=(p[0].x+p[1].x)/2-r.left,cy=(p[0].y+p[1].y)/2-r.top;
- const d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)||1;
- const k=wbBegrenzen(wb.pinch.k*d/wb.pinch.d,0.1,4);
- wb.view={k,x:cx-wb.pinch.wx*k,y:cy-wb.pinch.wy*k};wbAnsichtSetzen();
-}
-function wbRad(e){
- e.preventDefault();
- if(e.shiftKey){wb.view={...wb.view,x:wb.view.x-(e.deltaX||e.deltaY)};wbAnsichtSetzen();return;}
- wbZoomBei(e.clientX,e.clientY,Math.exp(-e.deltaY*(e.ctrlKey?0.01:0.0015)));
-}
+function r_X1(){const e=[...wb.pointers.values()];if(e.length<2)return;wb.aktion=null,wbVorschau("");const t=(e[0].x+e[1].x)/2,n=(e[0].y+e[1].y)/2,i=wbWelt(t,n);wb.pinch={d:Math.hypot(e[0].x-e[1].x,e[0].y-e[1].y)||1,k:wb.view.k,wx:i.x,wy:i.y}}
+function r_Y1(){const e=[...wb.pointers.values()];if(e.length<2||!wb.pinch)return;const t=wb.stage.getBoundingClientRect(),n=(e[0].x+e[1].x)/2-t.left,i=(e[0].y+e[1].y)/2-t.top,r=Math.hypot(e[0].x-e[1].x,e[0].y-e[1].y)||1,a=wbBegrenzen(wb.pinch.k*r/wb.pinch.d,.1,4);wb.view={k:a,x:n-wb.pinch.wx*a,y:i-wb.pinch.wy*a},wbAnsichtSetzen()}
+function r_ex(e){if(e.preventDefault(),e.shiftKey){wb.view={...wb.view,x:wb.view.x-(e.deltaX||e.deltaY)},wbAnsichtSetzen();return}wbZoomBei(e.clientX,e.clientY,Math.exp(-e.deltaY*(e.ctrlKey?.01:.0015)))}
 function wbDoppel(e){
  if(!wb||wb.ro||wb.tool!=="select")return;
  const itemEl=e.target.closest?.(".wb-item");
@@ -12594,42 +11613,7 @@ function wbDoppel(e){
  wbAuswahlSetzen([id]);wbBearbeitenStart(id);
 }
 function wbEditierbar(t){return !!(t&&((t.isContentEditable)||(t.closest&&t.closest('[contenteditable="true"]'))));}
-function wbTaste(e){
- if(!wb)return;
- const t=e.target;
- const tippt=t&&(wbEditierbar(t)||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
- if(wb.editing&&wbEditierbar(t)){
-  if(e.key==="Escape"){e.preventDefault();wbBearbeitenEnde(false);}
-  else if(e.key==="Enter"&&(e.ctrlKey||e.metaKey)){e.preventDefault();wbBearbeitenEnde(true);}
-  return;
- }
- if(tippt||!$("modalBackdrop").hidden)return;
- const ctrl=e.ctrlKey||e.metaKey;
- if(e.code==="Space"){wb.space=true;e.preventDefault();return;}
- if(wb.ro&&!(e.key==="Escape"||e.key==="+"||e.key==="="||e.key==="-"||e.key==="0"))return;
- if(ctrl&&e.key.toLowerCase()==="z"){e.preventDefault();wbRueckgaengig();return;}
- if(ctrl&&e.key.toLowerCase()==="d"){e.preventDefault();wbDuplizieren();return;}
- if(ctrl&&e.key.toLowerCase()==="a"){e.preventDefault();wbAuswahlSetzen(wbSeitenItems().map(i=>i.id));return;}
- if(ctrl&&e.key.toLowerCase()==="c"){wb.zwischen=[...wb.sel].map(id=>({...wb.items.get(id)}));return;}
- if(ctrl&&e.key.toLowerCase()==="v"){
-  if(!wb.zwischen||!wb.zwischen.length)return;e.preventDefault();
-  const neu=wb.zwischen.map((it,i)=>{const {id,createdAt,updatedAt,authorUid,authorName,...rest}=it;const k={...rest,seite:wb.seite,x:rest.x+40,y:rest.y+40};if(rest.type==="line"){k.x2=rest.x2+40;k.y2=rest.y2+40;k.a=null;k.b=null;}return wbErzeugen(k,{zOffset:i});});
-  wbAuswahlSetzen(neu);wbUndoPush(async()=>{await wbLoeschenIds(neu,true);});return;
- }
- if(e.key==="Delete"||e.key==="Backspace"){if(wb.sel.size){e.preventDefault();wbLoeschenIds([...wb.sel]);}return;}
- if(e.key==="Escape"){
-  if(wb.wrap.classList.contains("wb-full")&&!wb.sel.size&&wb.tool==="select"){wbVollbild(false);return;}
-  wbSetzeWerkzeug("select");wbAuswahlSetzen([]);return;
- }
- if(e.key==="+"||e.key==="="){wbMitteZoom(1.2);return;}
- if(e.key==="-"){wbMitteZoom(1/1.2);return;}
- if(e.key==="0"){wbAlleAnzeigen();return;}
- if(ctrl||e.altKey)return;
- const map={v:"select",h:"hand",n:"note",t:"text",s:"shape",l:"line",p:"pen",e:"eraser",f:"frame",i:"bild"};
- const w=map[e.key.toLowerCase()];
- if(w==="bild"){const inp=$("wbBildInput");if(inp)inp.click();}
- else if(w){wbSetzeWerkzeug(w);}
-}
+function r_tx(e){if(!wb)return;const t=e.target,n=t&&(wbEditierbar(t)||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));if(wb.editing&&wbEditierbar(t)){e.key==="Escape"?(e.preventDefault(),wbBearbeitenEnde(!1)):e.key==="Enter"&&(e.ctrlKey||e.metaKey)&&(e.preventDefault(),wbBearbeitenEnde(!0));return}if(n||!$("modalBackdrop").hidden)return;const i=e.ctrlKey||e.metaKey;if(e.code==="Space"){wb.space=!0,e.preventDefault();return}if(wb.ro&&!(e.key==="Escape"||e.key==="+"||e.key==="="||e.key==="-"||e.key==="0"))return;if(i&&e.key.toLowerCase()==="z"){e.preventDefault(),wbRueckgaengig();return}if(i&&e.key.toLowerCase()==="d"){e.preventDefault(),r_vg();return}if(i&&e.key.toLowerCase()==="a"){e.preventDefault(),wbAuswahlSetzen(wbSeitenItems().map(s=>s.id));return}if(i&&e.key.toLowerCase()==="c"){wb.zwischen=[...wb.sel].map(s=>({...wb.items.get(s)}));return}if(i&&e.key.toLowerCase()==="v"){if(!wb.zwischen||!wb.zwischen.length)return;e.preventDefault();const s=wb.zwischen.map((l,c)=>{const{id:d,createdAt:p,updatedAt:h,authorUid:k,authorName:f,...y}=l,w={...y,seite:wb.seite,x:y.x+40,y:y.y+40};return y.type==="line"&&(w.x2=y.x2+40,w.y2=y.y2+40,w.a=null,w.b=null),wbErzeugen(w,{zOffset:c})});wbAuswahlSetzen(s),wbUndoPush(async()=>{await wbLoeschenIds(s,!0)});return}if(e.key==="Delete"||e.key==="Backspace"){wb.sel.size&&(e.preventDefault(),wbLoeschenIds([...wb.sel]));return}if(e.key==="Escape"){if(wb.wrap.classList.contains("wb-full")&&!wb.sel.size&&wb.tool==="select"){wbVollbild(!1);return}wbSetzeWerkzeug("select"),wbAuswahlSetzen([]);return}if(e.key==="+"||e.key==="="){wbMitteZoom(1.2);return}if(e.key==="-"){wbMitteZoom(1/1.2);return}if(e.key==="0"){wbAlleAnzeigen();return}if(i||e.altKey)return;const a={v:"select",h:"hand",n:"note",t:"text",s:"shape",l:"line",p:"pen",e:"eraser",f:"frame",i:"bild"}[e.key.toLowerCase()];if(a==="bild"){const s=$("wbBildInput");s&&s.click()}else a&&wbSetzeWerkzeug(a)}
 function wbTasteLos(e){if(wb&&e.code==="Space")wb.space=false;}
 
 // ---- Menüs, Vorlagen, Export ----
@@ -12693,73 +11677,7 @@ async function wbExport(){
  })));
  wbExportZeichnen(bilderMap);
 }
-function wbExportZeichnen(bilderMap){
- const items=wbSeitenItems();
- if(!items.length){toast("Diese Seite ist noch leer.");return}
- let x1=1e9,y1=1e9,x2=-1e9,y2=-1e9;
- items.forEach(it=>{const b=wbBox(it);x1=Math.min(x1,b.x);y1=Math.min(y1,b.y);x2=Math.max(x2,b.x+b.w);y2=Math.max(y2,b.y+b.h);});
- const pad=48,W=x2-x1+pad*2,H=y2-y1+pad*2+22;
- const s=Math.min(2,4096/W,4096/H);
- const cv=document.createElement("canvas");cv.width=Math.ceil(W*s);cv.height=Math.ceil(H*s);
- const c=cv.getContext("2d");if(!c){toast("Export wird von diesem Browser nicht unterstützt.");return}
- c.scale(s,s);c.fillStyle="#fff";c.fillRect(0,0,W,H);c.translate(pad-x1,pad-y1);
- const rr=(x,y,w,h,r)=>{c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();};
- const sortiert=items.slice().sort((a,b)=>((a.type==="frame"?0:1)-(b.type==="frame"?0:1))||((a.z||0)-(b.z||0)));
- const text=(it,farbe,mitte)=>{
-  c.fillStyle=farbe;c.font=`${it.fs||18}px Arial, sans-serif`;c.textBaseline="top";
-  const maxW=it.w-(mitte?it.w*0.28:28);const zl=wbUmbruch(c,it.text,maxW);const lh=(it.fs||18)*1.3;
-  const th=zl.length*lh;let y=mitte?it.y+(it.h-th)/2:it.y+12;
-  zl.forEach(z=>{c.textAlign=mitte?"center":"left";c.fillText(z,mitte?it.x+it.w/2:it.x+14,y);y+=lh;});
- };
- sortiert.filter(i=>!wbIstSvg(i)).forEach(it=>{
-  const f=wbFarbe(it.c);
-  if(it.type==="frame"){rr(it.x,it.y,it.w,it.h,14);c.fillStyle=f.soft+"59";c.fill();c.setLineDash([8,6]);c.lineWidth=2;c.strokeStyle=f.dark;c.stroke();c.setLineDash([]);c.font=`bold ${it.fs||22}px Arial, sans-serif`;c.fillStyle=f.dark;c.textAlign="left";c.textBaseline="top";c.fillText(it.text||"",it.x+14,it.y+10);}
-  else if(it.type==="note"){c.save();c.shadowColor="rgba(40,50,70,.25)";c.shadowBlur=10;c.shadowOffsetY=4;rr(it.x,it.y,it.w,it.h,6);c.fillStyle=f.soft;c.fill();c.restore();text(it,"#1f2d3d",false);c.font="10px Arial";c.fillStyle="rgba(31,45,61,.55)";c.textAlign="left";c.fillText(wbKurz(it.authorName),it.x+12,it.y+it.h-14);}
-  else if(it.type==="text"){text(it,f.dark,false);}
-  else if(["card","tool","qr","link","video","embed","datei"].includes(it.type)){
-   c.save();c.shadowColor="rgba(40,50,70,.2)";c.shadowBlur=8;c.shadowOffsetY=3;rr(it.x,it.y,it.w,it.h,12);c.fillStyle="#fff";c.fill();c.restore();
-   c.save();rr(it.x,it.y,it.w,it.h,12);c.clip();c.fillStyle=f.soft;c.fillRect(it.x,it.y,it.w,34);c.restore();
-   c.fillStyle=f.dark;c.font="bold 14px Arial, sans-serif";c.textAlign="left";c.textBaseline="middle";
-   c.fillText(it.type==="tool"?(wbToolDef(it.tool)?.titel||""):(it.titel||""),it.x+14,it.y+17);c.textBaseline="top";
-   if(it.type==="card"){text({...it,y:it.y+34,h:it.h-34},"#1f2d3d",false);}
-   else if(it.type==="qr"&&wbSichereUrl(it.url)){
-    try{const q=WB_QR(0,"M");q.addData(wbSichereUrl(it.url));q.make();const n=q.getModuleCount(),sz=Math.min(it.w-30,it.h-60),cs=sz/n,ox=it.x+(it.w-sz)/2,oy=it.y+44;
-     c.fillStyle="#111";for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(q.isDark(r,k))c.fillRect(ox+k*cs,oy+r*cs,cs+0.5,cs+0.5);}catch(e){}
-   }else{c.fillStyle="#51657a";c.font="14px Arial, sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillText(String(wbToolKurz(it)).slice(0,60),it.x+it.w/2,it.y+it.h/2+10);}
-  }
-  else if(it.type==="image"){
-   c.save();c.shadowColor="rgba(40,50,70,.25)";c.shadowBlur=10;c.shadowOffsetY=4;rr(it.x,it.y,it.w,it.h,10);c.fillStyle="#e9edf1";c.fill();c.restore();
-   const im=bilderMap&&bilderMap.get(it.id);
-   if(im){c.save();rr(it.x,it.y,it.w,it.h,10);c.clip();c.drawImage(im,it.x,it.y,it.w,it.h);c.restore();}
-  }
-  else if(it.type==="shape"){
-   c.beginPath();
-   if(it.shape==="ellipse")c.ellipse(it.x+it.w/2,it.y+it.h/2,it.w/2,it.h/2,0,0,Math.PI*2);
-   else if(it.shape==="diamond"){c.moveTo(it.x+it.w/2,it.y);c.lineTo(it.x+it.w,it.y+it.h/2);c.lineTo(it.x+it.w/2,it.y+it.h);c.lineTo(it.x,it.y+it.h/2);c.closePath();}
-   else if(it.shape==="triangle"){c.moveTo(it.x+it.w/2,it.y);c.lineTo(it.x+it.w,it.y+it.h);c.lineTo(it.x,it.y+it.h);c.closePath();}
-   else rr(it.x,it.y,it.w,it.h,6);
-   c.fillStyle=f.soft;c.fill();c.lineWidth=it.sw||3;c.strokeStyle=f.dark;c.stroke();text(it,"#1f2d3d",true);
-  }
- });
- sortiert.filter(wbIstSvg).forEach(it=>{
-  const f=wbFarbe(it.c);c.strokeStyle=f.dark;c.lineWidth=it.sw||4;c.lineCap="round";c.lineJoin="round";c.beginPath();
-  if(it.type==="stroke"){const p=it.pts||[];c.moveTo(it.x+p[0],it.y+p[1]);for(let i=2;i<p.length;i+=2)c.lineTo(it.x+p[i],it.y+p[i+1]);if(p.length===2)c.lineTo(it.x+p[0]+0.01,it.y+p[1]);c.stroke();}
-  else{
-   const n=wbEnden(it);
-   c.moveTo(n.x1,n.y1);c.lineTo(n.x2,n.y2);c.stroke();
-   if(it.arrow){const a=Math.atan2(n.y2-n.y1,n.x2-n.x1),l=10+(it.sw||4)*2.2,b=0.45;c.beginPath();c.moveTo(n.x2-l*Math.cos(a-b),n.y2-l*Math.sin(a-b));c.lineTo(n.x2,n.y2);c.lineTo(n.x2-l*Math.cos(a+b),n.y2-l*Math.sin(a+b));c.stroke();}
-  }
- });
- c.setTransform(s,0,0,s,0,0);c.fillStyle="#8a99a8";c.font="12px Arial";c.textAlign="left";c.textBaseline="alphabetic";
- c.fillText(`F12Sb · Whiteboard · ${wb.board.title||""}`,pad,H-12);
- if(wb.pdfModus){wb.pdfModus=false;wbPdfFenster(cv);return;}
- cv.toBlob(b=>{
-  if(!b){toast("Das Bild konnte nicht erstellt werden.");return}
-  const url=URL.createObjectURL(b);const a=document.createElement("a");
-  a.href=url;a.download=`whiteboard-${String(wb.board.title||"board").replace(/[^\wäöüÄÖÜß-]+/g,"-")}.png`;document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),2000);toast("Bild gespeichert.");
- },"image/png");
-}
+function wbExportZeichnen(e){const t=wbSeitenItems();if(!t.length){toast("Diese Seite ist noch leer.");return}let n=1e9,i=1e9,r=-1e9,a=-1e9;t.forEach(w=>{const v=wbBox(w);n=Math.min(n,v.x),i=Math.min(i,v.y),r=Math.max(r,v.x+v.w),a=Math.max(a,v.y+v.h)});const s=48,l=r-n+s*2,c=a-i+s*2+22,d=Math.min(2,4096/l,4096/c),p=document.createElement("canvas");p.width=Math.ceil(l*d),p.height=Math.ceil(c*d);const h=p.getContext("2d");if(!h){toast("Export wird von diesem Browser nicht unterst\xFCtzt.");return}h.scale(d,d),h.fillStyle="#fff",h.fillRect(0,0,l,c),h.translate(s-n,s-i);const k=(w,v,S,A,_)=>{h.beginPath(),h.moveTo(w+_,v),h.arcTo(w+S,v,w+S,v+A,_),h.arcTo(w+S,v+A,w,v+A,_),h.arcTo(w,v+A,w,v,_),h.arcTo(w,v,w+S,v,_),h.closePath()},f=t.slice().sort((w,v)=>(w.type==="frame"?0:1)-(v.type==="frame"?0:1)||(w.z||0)-(v.z||0)),y=(w,v,S)=>{h.fillStyle=v,h.font=`${w.fs||18}px Arial, sans-serif`,h.textBaseline="top";const A=w.w-(S?w.w*.28:28),_=wbUmbruch(h,w.text,A),Q=(w.fs||18)*1.3,C=_.length*Q;let H=S?w.y+(w.h-C)/2:w.y+12;_.forEach(ie=>{h.textAlign=S?"center":"left",h.fillText(ie,S?w.x+w.w/2:w.x+14,H),H+=Q})};if(f.filter(w=>!wbIstSvg(w)).forEach(w=>{const v=wbFarbe(w.c);if(w.type==="frame")k(w.x,w.y,w.w,w.h,14),h.fillStyle=v.soft+"59",h.fill(),h.setLineDash([8,6]),h.lineWidth=2,h.strokeStyle=v.dark,h.stroke(),h.setLineDash([]),h.font=`bold ${w.fs||22}px Arial, sans-serif`,h.fillStyle=v.dark,h.textAlign="left",h.textBaseline="top",h.fillText(w.text||"",w.x+14,w.y+10);else if(w.type==="note")h.save(),h.shadowColor="rgba(40,50,70,.25)",h.shadowBlur=10,h.shadowOffsetY=4,k(w.x,w.y,w.w,w.h,6),h.fillStyle=v.soft,h.fill(),h.restore(),y(w,"#1f2d3d",!1),h.font="10px Arial",h.fillStyle="rgba(31,45,61,.55)",h.textAlign="left",h.fillText(wbKurz(w.authorName),w.x+12,w.y+w.h-14);else if(w.type==="text")y(w,v.dark,!1);else if(["card","tool","qr","link","video","embed","datei"].includes(w.type))if(h.save(),h.shadowColor="rgba(40,50,70,.2)",h.shadowBlur=8,h.shadowOffsetY=3,k(w.x,w.y,w.w,w.h,12),h.fillStyle="#fff",h.fill(),h.restore(),h.save(),k(w.x,w.y,w.w,w.h,12),h.clip(),h.fillStyle=v.soft,h.fillRect(w.x,w.y,w.w,34),h.restore(),h.fillStyle=v.dark,h.font="bold 14px Arial, sans-serif",h.textAlign="left",h.textBaseline="middle",h.fillText(w.type==="tool"?wbToolDef(w.tool)?.titel||"":w.titel||"",w.x+14,w.y+17),h.textBaseline="top",w.type==="card")y({...w,y:w.y+34,h:w.h-34},"#1f2d3d",!1);else if(w.type==="qr"&&wbSichereUrl(w.url))try{const S=WB_QR(0,"M");S.addData(wbSichereUrl(w.url)),S.make();const A=S.getModuleCount(),_=Math.min(w.w-30,w.h-60),Q=_/A,C=w.x+(w.w-_)/2,H=w.y+44;h.fillStyle="#111";for(let ie=0;ie<A;ie++)for(let Ee=0;Ee<A;Ee++)S.isDark(ie,Ee)&&h.fillRect(C+Ee*Q,H+ie*Q,Q+.5,Q+.5)}catch{}else h.fillStyle="#51657a",h.font="14px Arial, sans-serif",h.textAlign="center",h.textBaseline="middle",h.fillText(String(wbToolKurz(w)).slice(0,60),w.x+w.w/2,w.y+w.h/2+10);else if(w.type==="image"){h.save(),h.shadowColor="rgba(40,50,70,.25)",h.shadowBlur=10,h.shadowOffsetY=4,k(w.x,w.y,w.w,w.h,10),h.fillStyle="#e9edf1",h.fill(),h.restore();const S=e&&e.get(w.id);S&&(h.save(),k(w.x,w.y,w.w,w.h,10),h.clip(),h.drawImage(S,w.x,w.y,w.w,w.h),h.restore())}else w.type==="shape"&&(h.beginPath(),w.shape==="ellipse"?h.ellipse(w.x+w.w/2,w.y+w.h/2,w.w/2,w.h/2,0,0,Math.PI*2):w.shape==="diamond"?(h.moveTo(w.x+w.w/2,w.y),h.lineTo(w.x+w.w,w.y+w.h/2),h.lineTo(w.x+w.w/2,w.y+w.h),h.lineTo(w.x,w.y+w.h/2),h.closePath()):w.shape==="triangle"?(h.moveTo(w.x+w.w/2,w.y),h.lineTo(w.x+w.w,w.y+w.h),h.lineTo(w.x,w.y+w.h),h.closePath()):k(w.x,w.y,w.w,w.h,6),h.fillStyle=v.soft,h.fill(),h.lineWidth=w.sw||3,h.strokeStyle=v.dark,h.stroke(),y(w,"#1f2d3d",!0))}),f.filter(wbIstSvg).forEach(w=>{const v=wbFarbe(w.c);if(h.strokeStyle=v.dark,h.lineWidth=w.sw||4,h.lineCap="round",h.lineJoin="round",h.beginPath(),w.type==="stroke"){const S=w.pts||[];h.moveTo(w.x+S[0],w.y+S[1]);for(let A=2;A<S.length;A+=2)h.lineTo(w.x+S[A],w.y+S[A+1]);S.length===2&&h.lineTo(w.x+S[0]+.01,w.y+S[1]),h.stroke()}else{const S=wbEnden(w);if(h.moveTo(S.x1,S.y1),h.lineTo(S.x2,S.y2),h.stroke(),w.arrow){const A=Math.atan2(S.y2-S.y1,S.x2-S.x1),_=10+(w.sw||4)*2.2,Q=.45;h.beginPath(),h.moveTo(S.x2-_*Math.cos(A-Q),S.y2-_*Math.sin(A-Q)),h.lineTo(S.x2,S.y2),h.lineTo(S.x2-_*Math.cos(A+Q),S.y2-_*Math.sin(A+Q)),h.stroke()}}}),h.setTransform(d,0,0,d,0,0),h.fillStyle="#8a99a8",h.font="12px Arial",h.textAlign="left",h.textBaseline="alphabetic",h.fillText(`F12Sb \xB7 Whiteboard \xB7 ${wb.board.title||""}`,s,c-12),wb.pdfModus){wb.pdfModus=!1,wbPdfFenster(p);return}p.toBlob(w=>{if(!w){toast("Das Bild konnte nicht erstellt werden.");return}const v=URL.createObjectURL(w),S=document.createElement("a");S.href=v,S.download=`whiteboard-${String(wb.board.title||"board").replace(/[^\wäöüÄÖÜß-]+/g,"-")}.png`,document.body.appendChild(S),S.click(),S.remove(),setTimeout(()=>URL.revokeObjectURL(v),2e3),toast("Bild gespeichert.")},"image/png")}
 
 
 // ---- Bilder (als verkleinertes JPEG in Firestore, getrennt vom Element, damit Verschieben schnell bleibt) ----
@@ -12806,31 +11724,8 @@ async function wbBildEinfuegen(data,bw,bh,pt){
  wbSetzeWerkzeug("select");wbAuswahlSetzen([id]);
  return id;
 }
-async function wbBildDatei(datei,pt){
- if(!datei||!/^image\//.test(datei.type||"")){toast("Bitte eine Bilddatei wählen.");return}
- if(datei.size>15*1024*1024){toast("Das Bild ist zu groß (maximal 15 MB).");return}
- if(!isTeacher()&&wb&&[...wb.items.values()].filter(i=>i.type==="image").length>=12){toast("Auf diesem Whiteboard sind schon 12 Bilder. Bitte erst eines löschen.");return}
- try{
-  toast("Bild wird verarbeitet …");
-  const b=await wbBildVorbereiten(datei);
-  await wbBildEinfuegen(b.data,b.w,b.h,pt);
- }catch(e){
-  console.error("Bild einfügen:",e);
-  toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern des Bildes. Bitte die Firestore-Regeln prüfen.":"Das Bild konnte nicht eingefügt werden.");
- }
-}
-
-// ---- Live-Mauszeiger der anderen ----
-function wbCursorSenden(pt,weg){
- if(!wb||!wb.cursorAn)return;
- const jetzt=Date.now();
- const andere=[...wb.praesenz.values()].filter(p=>p.uid!==currentUser.uid&&jetzt-(p.seen||0)<75000).length;
- if(!andere||andere>WB_MAX_CURSOR)return;
- if(!weg&&jetzt-wb.cursorT<700)return;
- if(weg&&wb.cursorWeg)return;
- wb.cursorT=jetzt;wb.cursorWeg=!!weg;
- setDoc(doc(db,"whiteboardPresence",`${wb.id}_${currentUser.uid}`),{boardId:wb.id,uid:currentUser.uid,name:anzeigeName(profile,currentUser),seen:jetzt,cx:weg?null:Math.round(pt.x),cy:weg?null:Math.round(pt.y),cs:jetzt},{merge:true}).catch(()=>{});
-}
+async function r_Uc(e,t){if(!e||!/^image\//.test(e.type||"")){toast("Bitte eine Bilddatei w\xE4hlen.");return}if(e.size>15*1024*1024){toast("Das Bild ist zu gro\xDF (maximal 15 MB).");return}if(!isTeacher()&&wb&&[...wb.items.values()].filter(n=>n.type==="image").length>=12){toast("Auf diesem Whiteboard sind schon 12 Bilder. Bitte erst eines l\xF6schen.");return}try{toast("Bild wird verarbeitet \u2026");const n=await wbBildVorbereiten(e);await wbBildEinfuegen(n.data,n.w,n.h,t)}catch(n){console.error("Bild einf\xFCgen:",n),toast(n?.code==="permission-denied"?"Firebase verweigert das Speichern des Bildes. Bitte die Firestore-Regeln pr\xFCfen.":"Das Bild konnte nicht eingef\xFCgt werden.")}}
+function r_Gc(e,t){if(!wb||!wb.cursorAn)return;const n=Date.now(),i=[...wb.praesenz.values()].filter(r=>r.uid!==currentUser.uid&&n-(r.seen||0)<75e3).length;!i||i>WB_MAX_CURSOR||!t&&n-wb.cursorT<700||t&&wb.cursorWeg||(wb.cursorT=n,wb.cursorWeg=!!t,setDoc(doc(db,"whiteboardPresence",`${wb.id}_${currentUser.uid}`),{boardId:wb.id,uid:currentUser.uid,name:anzeigeName(profile,currentUser),seen:n,cx:t?null:Math.round(e.x),cy:t?null:Math.round(e.y),cs:n},{merge:!0}).catch(()=>{}))}
 function wbCursorZeichnen(ohneAnim){
  if(!wb)return;
  const layer=$("wbCursors");if(!layer)return;
@@ -12868,134 +11763,14 @@ function wbToolKurz(it){
  }
 }
 // ---- Online-Anzeige ----
-function wbOnlineZeichnen(){
- const box=$("wbOnline");if(!box||!wb)return;
- const jetzt=Date.now();
- const liste=[...wb.praesenz.values()].filter(p=>jetzt-(p.seen||0)<75000).sort((a,b)=>String(a.uid).localeCompare(String(b.uid)));
- box.innerHTML=liste.slice(0,8).map(p=>{const c=personColor(p.uid);const ini=(wbKurz(p.name)[0]||"?").toUpperCase();return`<span class="wb-ava"style="background:${c.border}"title="${esc(p.name||"")}${p.uid===currentUser.uid?" (du)":""}">${esc(ini)}</span>`;}).join("")+(liste.length>8?`<span class="wb-ava"style="background:#8a99a8">+${liste.length-8}</span>`:"");
-}
+function r_Bg(){const e=$("wbOnline");if(!e||!wb)return;const t=Date.now(),n=[...wb.praesenz.values()].filter(i=>t-(i.seen||0)<75e3).sort((i,r)=>String(i.uid).localeCompare(String(r.uid)));e.innerHTML=n.slice(0,8).map(i=>{const r=personColor(i.uid),a=(wbKurz(i.name)[0]||"?").toUpperCase();return`<span class="wb-ava"style="background:${r.border}"title="${esc(i.name||"")}${i.uid===currentUser.uid?" (du)":""}">${esc(a)}</span>`}).join("")+(n.length>8?`<span class="wb-ava"style="background:#8a99a8">+${n.length-8}</span>`:"")}
 function wbPresenzSchreiben(){
  if(!wb)return;
  setDoc(doc(db,"whiteboardPresence",`${wb.id}_${currentUser.uid}`),{boardId:wb.id,uid:currentUser.uid,name:anzeigeName(profile,currentUser),seen:Date.now()},{merge:true}).catch(()=>{});
 }
 
 // ---- Start und Ende ----
-function initWhiteboardBoard(id){
- wbStop();
- const stage=$("wbStage");if(!stage)return;
- wb={id,stage,wrap:$("wbWrap"),world:$("wbWorld"),itemsEl:$("wbItems"),svg:$("wbSvg"),selG:$("wbSelG"),
-  view:wbAnsicht[id+"#1"]?{...wbAnsicht[id+"#1"]}:null,seite:1,board:(wbBoardCache&&wbBoardCache.id===id)?wbBoardCache:{},tool:"select",form:"rect",arrowNeu:true,
-  farben:{note:"gelb",text:"grau",shape:"blau",line:"grau",pen:"grau",frame:"grau"},
-  sw:{line:4,pen:4,shape:3},items:new Map(),els:new Map(),svgEls:new Map(),sel:new Set(),lokal:new Set(),
-  undo:[],drossel:{},pointers:new Map(),aktion:null,pinch:null,editing:null,space:false,praesenz:new Map(),timers:[],handler:[],erstesLaden:true,
-  ro:false,editFeld:"text",videoAn:new Set(),folgenAus:false,fuehrt:false,letzteFuehrung:null,fuehrTimer:null,kartenZaehler:0,
-  bilder:new Map(),bilderLaden:new Set(),cursorAn:true,cursorT:0,cursorWeg:true,cursorEls:new Map(),zielId:null,animTimer:null};
-
- if(!wb.view){const s=wbBuehne();wb.view={x:s.w/2,y:s.h/2,k:1};}
- wbAnsichtSetzen();
- const on=(el,ev,fn,opt)=>{el.addEventListener(ev,fn,opt);wb.handler.push([el,ev,fn,opt]);};
- on(stage,"pointerdown",wbDown);on(window,"pointermove",wbMove);on(window,"pointerup",wbUp);on(window,"pointercancel",wbUp);
- on(stage,"pointerdown",()=>{if(wb.wrap)wb.wrap.classList.add("wb-zieht");},true);on(window,"pointerup",()=>{if(wb.wrap)wb.wrap.classList.remove("wb-zieht");});on(window,"pointercancel",()=>{if(wb.wrap)wb.wrap.classList.remove("wb-zieht");});
- on(stage,"wheel",wbRad,{passive:false});on(stage,"contextmenu",e=>e.preventDefault());
- on(stage,"dblclick",e=>{if(Date.now()-(wb.dblT||0)<700)return;wbDoppel(e);});
- on(document,"keydown",wbTaste);on(document,"keyup",wbTasteLos);
- on(stage,"pointermove",e=>{if(wb)wbCursorSenden(wbWelt(e.clientX,e.clientY));});
- on(stage,"pointerleave",()=>wbCursorSenden(null,true));
- on($("wbCursorAn"),"click",()=>{
-  wb.cursorAn=!wb.cursorAn;$("wbCursorAn").classList.toggle("on",wb.cursorAn);
-  if(!wb.cursorAn)wbCursorSenden(null,true);wbCursorZeichnen();
-  toast(wb.cursorAn?"Mauszeiger der anderen sind sichtbar.":"Mauszeiger sind ausgeblendet.");
- });
- on($("wbBild"),"click",()=>$("wbBildInput").click());
- on($("wbBildInput"),"change",e=>{const f=e.target.files&&e.target.files[0];if(f)wbBildDatei(f);e.target.value="";});
- on(document,"paste",e=>{
-  if(!wb||wb.editing||wb.ro)return;const t=e.target;
-  if(t&&(wbEditierbar(t)||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))return;
-  const f=[...(e.clipboardData&&e.clipboardData.files?e.clipboardData.files:[])].find(x=>/^image\//.test(x.type));
-  if(f){e.preventDefault();wbBildDatei(f);}
- });
- on(stage,"click",wbKlick);
- on($("wbLeiste"),"click",e=>{
-  const b=e.target.closest("button");if(!b||wb.ro)return;
-  if(b.dataset.tool)wbSetzeWerkzeug(b.dataset.tool);
-  else if(b.dataset.karte)wbKarteEinfuegen(b.dataset.karte);
-  else if(b.dataset.leiste==="werkzeuge"){wb.wrap.classList.toggle("wb-tools-offen");b.classList.toggle("on",wb.wrap.classList.contains("wb-tools-offen"));}
- });
- on($("wbHg"),"click",()=>{
-  const m=$("wbHgMenu");if(!m.hidden){m.hidden=true;return;}
-  m.innerHTML=`<div class="wb-menu-titel">Hintergrund</div><div class="wb-hg-reihe">${WB_HG.map(x=>`<button type="button"class="wb-hg${x.k===(wb.board.bg||"weiss")?" on":""}"data-hg="${x.k}"title="${x.n}"style="background:${x.c}"></button>`).join("")}</div>`;
-  m.hidden=false;
-  const r=$("wbHg").getBoundingClientRect(),w=wb.wrap.getBoundingClientRect();
-  m.style.right=Math.max(8,w.right-r.right)+"px";m.style.left="auto";m.style.top=(r.bottom-w.top+8)+"px";
- });
- on($("wbHgMenu"),"click",async e=>{
-  const b=e.target.closest("[data-hg]");if(!b)return;
-  $("wbHgMenu").hidden=true;
-  try{await updateDoc(doc(db,"whiteboards",wb.id),{bg:b.dataset.hg});}catch(err){wbFehler(err);}
- });
- on($("wbKartenBtn"),"click",()=>{const m=$("wbKartenMenu");if(m.hidden)wbKartenMenuAuf();else m.hidden=true;});
- on($("wbKartenMenu"),"click",e=>{const b=e.target.closest("[data-karte]");if(b)wbKarteEinfuegen(b.dataset.karte);});
- on($("wbDateiInput"),"change",e=>{const f=e.target.files&&e.target.files[0];if(f)wbDateiHochladen(f);e.target.value="";});
- on($("wbSeiten"),"click",e=>{
-  const b=e.target.closest("[data-seite]");if(!b)return;
-  const v=b.dataset.seite;
-  if(v==="neu")wbSeiteNeu();else if(v==="weg")wbSeiteLoeschen();else wbSeiteWechseln(Number(v));
- });
- const sb=$("wbSchutz");if(sb)on(sb,"click",wbSchutzUmschalten);
- on($("wbFolgen"),"click",wbFolgenUmschalten);
- on($("wbFolgenStop"),"click",()=>{wb.folgenAus=true;$("wbFolgenBanner").hidden=true;toast("Du folgst der Lehrkraft nicht mehr.");});
- on(stage,"dragover",e=>e.preventDefault());
- on(stage,"drop",e=>{
-  e.preventDefault();if(wb.ro)return;
-  const fl=[...(e.dataTransfer&&e.dataTransfer.files?e.dataTransfer.files:[])].filter(x=>/^image\//.test(x.type)).slice(0,5);
-  const pt=wbWelt(e.clientX,e.clientY);fl.forEach((x,i)=>wbBildDatei(x,{x:pt.x+i*30,y:pt.y+i*30}));
- });
- on($("wbTools"),"click",e=>{
-  const b=e.target.closest("[data-tool]");if(!b)return;
-  const t=b.dataset.tool;
-  if(t==="shape"&&wb.tool==="shape"){wbFormMenuAuf();return;}
-  wbSetzeWerkzeug(t);if(t==="shape")wbFormMenuAuf();
- });
- on($("wbFormMenu"),"click",e=>{const b=e.target.closest("[data-form]");if(!b)return;wb.form=b.dataset.form;$("wbFormMenu").hidden=true;wbSetzeWerkzeug("shape");});
- on($("wbTplMenu"),"click",e=>{const b=e.target.closest("[data-tpl]");if(b)wbVorlageEinsetzen(Number(b.dataset.tpl));});
- on($("wbProps"),"click",wbEigenschaftKlick);
- on($("wbUndo"),"click",wbRueckgaengig);
- on($("wbZoomPlus"),"click",()=>wbMitteZoom(1.25));on($("wbZoomMinus"),"click",()=>wbMitteZoom(0.8));on($("wbFit"),"click",wbAlleAnzeigen);
- on($("wbNamen"),"click",()=>{wb.wrap.classList.toggle("wb-hide-namen");$("wbNamen").classList.toggle("on",wb.wrap.classList.contains("wb-hide-namen"));});
- on($("wbTpl"),"click",()=>{const m=$("wbTplMenu");if(m.hidden)wbTplMenuAuf();else m.hidden=true;});
- on($("wbExport"),"click",wbExport);on($("wbExportPdf"),"click",wbExportPdf);on($("wbVoll"),"click",()=>wbVollbild());on($("wbHilfe"),"click",wbHilfe);
- on($("wbZurueck"),"click",closeWhiteboard);
- if($("wbZurueckThema"))on($("wbZurueckThema"),"click",()=>{wbVonKw=false;activeWhiteboardId=null;go("kw-thema")});
- const un=$("wbUmbenennen");if(un)on(un,"click",async()=>{
-  const n=prompt("Neuer Titel für das Whiteboard:",wb.board.title||"");if(n===null||!n.trim())return;
-  try{await updateDoc(doc(db,"whiteboards",id),{title:n.trim().slice(0,120)});toast("Umbenannt.");await render();}catch(e){wbFehler(e);}
- });
- const lo=$("wbLoeschen");if(lo)on(lo,"click",()=>wbBoardLoeschen(id));
- wbUndoKnopf();wbPropsZeichnen();
- wb.boardUnsub=onSnapshot(doc(db,"whiteboards",id),s=>{
-  if(!wb||wb.id!==id)return;
-  if(s.exists()){wb.board={id,...s.data()};wbBoardGeaendert();}
- },e=>wbFehler(e));
- wbBoardGeaendert();
- // Live-Daten
- wb.unsub=onSnapshot(query(collection(db,"whiteboardItems"),where("boardId","==",id)),snap=>{
-  if(!wb||wb.id!==id)return;
-  snap.docChanges().forEach(ch=>{
-   const iid=ch.doc.id;
-   if(ch.type==="removed"){wb.items.delete(iid);wb.sel.delete(iid);wbEntfernenDom(iid);return;}
-   if(wb.lokal.has(iid))return;
-   wb.items.set(iid,{id:iid,...ch.doc.data()});wbZeichne(iid);
-  });
-  wbZ();wbNachAenderung();
-  if(wb.erstesLaden){wb.erstesLaden=false;if(!wbAnsicht[id+"#"+wb.seite]&&wbSeitenItems().length)wbAlleAnzeigen();}
- },e=>{wbFehler(e);if(!(e&&e.code==="permission-denied"))wbMeldung(`Die Elemente konnten nicht geladen werden (${(e&&(e.code||e.name))||"unbekannt"}).`);});
- wb.praesUnsub=onSnapshot(query(collection(db,"whiteboardPresence"),where("boardId","==",id)),snap=>{
-  if(!wb||wb.id!==id)return;
-  wb.praesenz=new Map(snap.docs.map(d=>[d.id,d.data()]));wbOnlineZeichnen();wbCursorZeichnen();
- },()=>{});
- wbPresenzSchreiben();
- wb.timers.push(setInterval(wbPresenzSchreiben,25000),setInterval(wbOnlineZeichnen,15000),setInterval(()=>wbCursorZeichnen(),4000),setInterval(wbToolTick,250));
-}
+function initWhiteboardBoard(e){wbStop();const t=$("wbStage");if(!t)return;if(wb={id:e,stage:t,wrap:$("wbWrap"),world:$("wbWorld"),itemsEl:$("wbItems"),svg:$("wbSvg"),selG:$("wbSelG"),view:wbAnsicht[e+"#1"]?{...wbAnsicht[e+"#1"]}:null,seite:1,board:wbBoardCache&&wbBoardCache.id===e?wbBoardCache:{},tool:"select",form:"rect",arrowNeu:!0,farben:{note:"gelb",text:"grau",shape:"blau",line:"grau",pen:"grau",frame:"grau"},sw:{line:4,pen:4,shape:3},items:new Map,els:new Map,svgEls:new Map,sel:new Set,lokal:new Set,undo:[],drossel:{},pointers:new Map,aktion:null,pinch:null,editing:null,space:!1,praesenz:new Map,timers:[],handler:[],erstesLaden:!0,ro:!1,editFeld:"text",videoAn:new Set,folgenAus:!1,fuehrt:!1,letzteFuehrung:null,fuehrTimer:null,kartenZaehler:0,bilder:new Map,bilderLaden:new Set,cursorAn:!0,cursorT:0,cursorWeg:!0,cursorEls:new Map,zielId:null,animTimer:null},!wb.view){const s=wbBuehne();wb.view={x:s.w/2,y:s.h/2,k:1}}wbAnsichtSetzen();const n=(s,l,c,d)=>{s.addEventListener(l,c,d),wb.handler.push([s,l,c,d])};n(t,"pointerdown",r_q1),n(window,"pointermove",r_Q1),n(window,"pointerup",wbUp),n(window,"pointercancel",wbUp),n(t,"pointerdown",()=>{wb.wrap&&wb.wrap.classList.add("wb-zieht")},!0),n(window,"pointerup",()=>{wb.wrap&&wb.wrap.classList.remove("wb-zieht")}),n(window,"pointercancel",()=>{wb.wrap&&wb.wrap.classList.remove("wb-zieht")}),n(t,"wheel",r_ex,{passive:!1}),n(t,"contextmenu",s=>s.preventDefault()),n(t,"dblclick",s=>{Date.now()-(wb.dblT||0)<700||wbDoppel(s)}),n(document,"keydown",r_tx),n(document,"keyup",wbTasteLos),n(t,"pointermove",s=>{wb&&r_Gc(wbWelt(s.clientX,s.clientY))}),n(t,"pointerleave",()=>r_Gc(null,!0)),n($("wbCursorAn"),"click",()=>{wb.cursorAn=!wb.cursorAn,$("wbCursorAn").classList.toggle("on",wb.cursorAn),wb.cursorAn||r_Gc(null,!0),wbCursorZeichnen(),toast(wb.cursorAn?"Mauszeiger der anderen sind sichtbar.":"Mauszeiger sind ausgeblendet.")}),n($("wbBild"),"click",()=>$("wbBildInput").click()),n($("wbBildInput"),"change",s=>{const l=s.target.files&&s.target.files[0];l&&r_Uc(l),s.target.value=""}),n(document,"paste",s=>{if(!wb||wb.editing||wb.ro)return;const l=s.target;if(l&&(wbEditierbar(l)||/^(INPUT|TEXTAREA|SELECT)$/.test(l.tagName)))return;const c=[...s.clipboardData&&s.clipboardData.files?s.clipboardData.files:[]].find(d=>/^image\//.test(d.type));c&&(s.preventDefault(),r_Uc(c))}),n(t,"click",wbKlick),n($("wbLeiste"),"click",s=>{const l=s.target.closest("button");!l||wb.ro||(l.dataset.tool?wbSetzeWerkzeug(l.dataset.tool):l.dataset.karte?wbKarteEinfuegen(l.dataset.karte):l.dataset.leiste==="werkzeuge"&&(wb.wrap.classList.toggle("wb-tools-offen"),l.classList.toggle("on",wb.wrap.classList.contains("wb-tools-offen"))))}),n($("wbHg"),"click",()=>{const s=$("wbHgMenu");if(!s.hidden){s.hidden=!0;return}s.innerHTML=`<div class="wb-menu-titel">Hintergrund</div><div class="wb-hg-reihe">${WB_HG.map(d=>`<button type="button"class="wb-hg${d.k===(wb.board.bg||"weiss")?" on":""}"data-hg="${d.k}"title="${d.n}"style="background:${d.c}"></button>`).join("")}</div>`,s.hidden=!1;const l=$("wbHg").getBoundingClientRect(),c=wb.wrap.getBoundingClientRect();s.style.right=Math.max(8,c.right-l.right)+"px",s.style.left="auto",s.style.top=l.bottom-c.top+8+"px"}),n($("wbHgMenu"),"click",async s=>{const l=s.target.closest("[data-hg]");if(l){$("wbHgMenu").hidden=!0;try{await updateDoc(doc(db,"whiteboards",wb.id),{bg:l.dataset.hg})}catch(c){wbFehler(c)}}}),n($("wbKartenBtn"),"click",()=>{const s=$("wbKartenMenu");s.hidden?wbKartenMenuAuf():s.hidden=!0}),n($("wbKartenMenu"),"click",s=>{const l=s.target.closest("[data-karte]");l&&wbKarteEinfuegen(l.dataset.karte)}),n($("wbDateiInput"),"change",s=>{const l=s.target.files&&s.target.files[0];l&&wbDateiHochladen(l),s.target.value=""}),n($("wbSeiten"),"click",s=>{const l=s.target.closest("[data-seite]");if(!l)return;const c=l.dataset.seite;c==="neu"?wbSeiteNeu():c==="weg"?r_hx():wbSeiteWechseln(Number(c))});const i=$("wbSchutz");i&&n(i,"click",wbSchutzUmschalten),n($("wbFolgen"),"click",wbFolgenUmschalten),n($("wbFolgenStop"),"click",()=>{wb.folgenAus=!0,$("wbFolgenBanner").hidden=!0,toast("Du folgst der Lehrkraft nicht mehr.")}),n(t,"dragover",s=>s.preventDefault()),n(t,"drop",s=>{if(s.preventDefault(),wb.ro)return;const l=[...s.dataTransfer&&s.dataTransfer.files?s.dataTransfer.files:[]].filter(d=>/^image\//.test(d.type)).slice(0,5),c=wbWelt(s.clientX,s.clientY);l.forEach((d,p)=>r_Uc(d,{x:c.x+p*30,y:c.y+p*30}))}),n($("wbTools"),"click",s=>{const l=s.target.closest("[data-tool]");if(!l)return;const c=l.dataset.tool;if(c==="shape"&&wb.tool==="shape"){wbFormMenuAuf();return}wbSetzeWerkzeug(c),c==="shape"&&wbFormMenuAuf()}),n($("wbFormMenu"),"click",s=>{const l=s.target.closest("[data-form]");l&&(wb.form=l.dataset.form,$("wbFormMenu").hidden=!0,wbSetzeWerkzeug("shape"))}),n($("wbTplMenu"),"click",s=>{const l=s.target.closest("[data-tpl]");l&&wbVorlageEinsetzen(Number(l.dataset.tpl))}),n($("wbProps"),"click",r_J1),n($("wbUndo"),"click",wbRueckgaengig),n($("wbZoomPlus"),"click",()=>wbMitteZoom(1.25)),n($("wbZoomMinus"),"click",()=>wbMitteZoom(.8)),n($("wbFit"),"click",wbAlleAnzeigen),n($("wbNamen"),"click",()=>{wb.wrap.classList.toggle("wb-hide-namen"),$("wbNamen").classList.toggle("on",wb.wrap.classList.contains("wb-hide-namen"))}),n($("wbTpl"),"click",()=>{const s=$("wbTplMenu");s.hidden?wbTplMenuAuf():s.hidden=!0}),n($("wbExport"),"click",wbExport),n($("wbExportPdf"),"click",wbExportPdf),n($("wbVoll"),"click",()=>wbVollbild()),n($("wbHilfe"),"click",wbHilfe),n($("wbZurueck"),"click",closeWhiteboard),$("wbZurueckThema")&&n($("wbZurueckThema"),"click",()=>{wbVonKw=!1,activeWhiteboardId=null,go("kw-thema")});const r=$("wbUmbenennen");r&&n(r,"click",async()=>{const s=prompt("Neuer Titel f\xFCr das Whiteboard:",wb.board.title||"");if(!(s===null||!s.trim()))try{await updateDoc(doc(db,"whiteboards",e),{title:s.trim().slice(0,120)}),toast("Umbenannt."),await render()}catch(l){wbFehler(l)}});const a=$("wbLoeschen");a&&n(a,"click",()=>wbBoardLoeschen(e)),wbUndoKnopf(),wbPropsZeichnen(),wb.boardUnsub=onSnapshot(doc(db,"whiteboards",e),s=>{!wb||wb.id!==e||s.exists()&&(wb.board={id:e,...s.data()},wbBoardGeaendert())},s=>wbFehler(s)),wbBoardGeaendert(),wb.unsub=onSnapshot(query(collection(db,"whiteboardItems"),where("boardId","==",e)),s=>{!wb||wb.id!==e||(s.docChanges().forEach(l=>{const c=l.doc.id;if(l.type==="removed"){wb.items.delete(c),wb.sel.delete(c),wbEntfernenDom(c);return}wb.lokal.has(c)||(wb.items.set(c,{id:c,...l.doc.data()}),wbZeichne(c))}),wbZ(),wbNachAenderung(),wb.erstesLaden&&(wb.erstesLaden=!1,!wbAnsicht[e+"#"+wb.seite]&&wbSeitenItems().length&&wbAlleAnzeigen()))},s=>{wbFehler(s),s&&s.code==="permission-denied"||wbMeldung(`Die Elemente konnten nicht geladen werden (${s&&(s.code||s.name)||"unbekannt"}).`)}),wb.praesUnsub=onSnapshot(query(collection(db,"whiteboardPresence"),where("boardId","==",e)),s=>{!wb||wb.id!==e||(wb.praesenz=new Map(s.docs.map(l=>[l.id,l.data()])),r_Bg(),wbCursorZeichnen())},()=>{}),wbPresenzSchreiben(),wb.timers.push(setInterval(wbPresenzSchreiben,25e3),setInterval(r_Bg,15e3),setInterval(()=>wbCursorZeichnen(),4e3),setInterval(wbToolTick,250))}
 function wbStop(){
  if(!wb)return;
  const w=wb;wb=null;
@@ -13095,35 +11870,12 @@ function wbSeitenLeiste(){
  if(isTeacher()&&n>1&&wb.seite===n)h+=`<button type="button"class="wb-seite-btn wb-seite-weg"data-seite="weg"title="Letzte Seite löschen">${wbIcon("trash",16)}</button>`;
  box.innerHTML=h;box.hidden=!h;
 }
-function wbSeiteWechseln(n){
- if(!wb||n===wb.seite)return;
- wbBearbeitenEnde(true);
- wbAnsicht[wb.id+"#"+wb.seite]={...wb.view};
- wb.seite=n;wb.sel=new Set();
- wb.els.forEach(el=>el.remove());wb.els.clear();
- wb.svgEls.forEach(g=>g.remove());wb.svgEls.clear();
- wb.items.forEach((it,id)=>wbZeichne(id));
- wbZ();
- const v=wbAnsicht[wb.id+"#"+n],s=wbBuehne();
- wb.view=v?{...v}:{x:s.w/2,y:s.h/2,k:1};
- wbAnsichtSetzen();wbSeitenLeiste();wbNachAenderung();
- if(!v&&wbSeitenItems().length)wbAlleAnzeigen();
- wbFuehrungSenden();
-}
+function wbSeiteWechseln(e){if(!wb||e===wb.seite)return;wbBearbeitenEnde(!0),wbAnsicht[wb.id+"#"+wb.seite]={...wb.view},wb.seite=e,wb.sel=new Set,wb.els.forEach(i=>i.remove()),wb.els.clear(),wb.svgEls.forEach(i=>i.remove()),wb.svgEls.clear(),wb.items.forEach((i,r)=>wbZeichne(r)),wbZ();const t=wbAnsicht[wb.id+"#"+e],n=wbBuehne();wb.view=t?{...t}:{x:n.w/2,y:n.h/2,k:1},wbAnsichtSetzen(),wbSeitenLeiste(),wbNachAenderung(),!t&&wbSeitenItems().length&&wbAlleAnzeigen(),wbFuehrungSenden()}
 async function wbSeiteNeu(){
  const n=wbSeitenZahl();if(n>=10)return;
  try{await updateDoc(doc(db,"whiteboards",wb.id),{seiten:n+1});wb.board.seiten=n+1;wbSeiteWechseln(n+1);}catch(e){wbFehler(e);}
 }
-async function wbSeiteLoeschen(){
- const n=wbSeitenZahl();if(n<2||wb.seite!==n)return;
- const items=[...wb.items.values()].filter(i=>(i.seite||1)===n);
- if(!confirm(`Seite ${n} mit ${items.length} Element${items.length===1?"":"en"} wirklich löschen?`))return;
- try{
-  await Promise.all(items.map(i=>deleteDoc(doc(db,"whiteboardItems",i.id))));
-  await updateDoc(doc(db,"whiteboards",wb.id),{seiten:n-1});wb.board.seiten=n-1;
-  wbSeiteWechseln(n-1);
- }catch(e){wbFehler(e);}
-}
+async function r_hx(){const e=wbSeitenZahl();if(e<2||wb.seite!==e)return;const t=[...wb.items.values()].filter(n=>(n.seite||1)===e);if(confirm(`Seite ${e} mit ${t.length} Element${t.length===1?"":"en"} wirklich l\xF6schen?`))try{await Promise.all(t.map(n=>deleteDoc(doc(db,"whiteboardItems",n.id)))),await updateDoc(doc(db,"whiteboards",wb.id),{seiten:e-1}),wb.board.seiten=e-1,wbSeiteWechseln(e-1)}catch(n){wbFehler(n)}}
 
 // ---- Board-Eigenschaften (Nur-Ansicht, „Alle folgen mir“) ----
 function wbBoardGeaendert(){
@@ -13423,12 +12175,7 @@ function wbFreiePosition(w,h){
  const f=kand.find(q=>frei(q.x,q.y)&&drin(q.x,q.y))||kand.find(q=>frei(q.x,q.y));
  return f?{x:Math.round(f.x),y:Math.round(f.y)}:{x:Math.round(c.x-w/2),y:Math.round(c.y-h/2)};
 }
-function wbAufKarteZentrieren(x,y,w,h){
- const s=wbBuehne(),k=wb.view.k;
- const x0=-wb.view.x/k,y0=-wb.view.y/k,x1=(s.w-wb.view.x)/k,y1=(s.h-wb.view.y)/k;
- if(x>=x0+90/k&&y>=y0+70/k&&x+w<=x1-20/k&&y+h<=y1-90/k)return;
- wb.view={...wb.view,x:s.w/2-(x+w/2)*k,y:s.h/2-(y+h/2)*k};wbAnsichtSetzen();
-}
+function wbAufKarteZentrieren(e,t,n,i){const r=wbBuehne(),a=wb.view.k,s=-wb.view.x/a,l=-wb.view.y/a,c=(r.w-wb.view.x)/a,d=(r.h-wb.view.y)/a;e>=s+90/a&&t>=l+70/a&&e+n<=c-20/a&&t+i<=d-90/a||(wb.view={...wb.view,x:r.w/2-(e+n/2)*a,y:r.h/2-(t+i/2)*a},wbAnsichtSetzen())}
 function wbKarteEinfuegen(k){
  $("wbKartenMenu").hidden=true;
  if(wb.ro)return;
@@ -16096,23 +14843,18 @@ function essayCaseTileHTML(c){
  </div>`;
 }
 
-async function renderFachaufsatzUebersicht(){
- const cases=await getEssayCases();
- const grouped=essayLernbereiche.map(([code,label])=>({code,label,cases:cases.filter(c=>c.lernbereich===code)})).filter(g=>g.cases.length);
- const ungrouped=cases.filter(c=>!c.lernbereich||!essayLernbereiche.some(l=>l[0]===c.lernbereich));
- return`${pageHead("SELBSTSTÄNDIG LERNEN","Fachaufsatztraining","Fachaufsatz in Pädagogik/Psychologie an echten Prüfungsaufgaben üben.",`<button class="secondary"onclick="go('lernwerkstatt')">← Lernwerkstatt</button>
- ${isTeacher()?`<button class="primary"onclick="openEssayCaseForm()">＋ Neue Aufgabe</button>`:""}`)}
- <div class="notice"><strong>So funktioniert's:</strong><p style="margin-bottom:0">Jede Aufgabe basiert auf einer echten alten Prüfungs- oder Schulaufgabe: 1. Aufgabenstellung lesen, 2. Theorie zur Beantwortung lesen, 3. im Antwortraum deinen Fachaufsatz schreiben, danach die Erfolgskriterien nach dem echten Bewertungsbogen selbst ankreuzen, optional per fobizz-Assistent eine schnelle KI-Vorkorrektur holen und bei Bedarf zur Lehrkraft zur Korrektur einreichen. Deine Übungstexte sind privat – nur du selbst und Lehrkräfte sehen sie, nicht deine Mitschüler:innen.</p></div>
+async function renderFachaufsatzUebersicht(){const e=await getEssayCases(),t=essayLernbereiche.map(([i,r])=>({code:i,label:r,cases:e.filter(a=>a.lernbereich===i)})).filter(i=>i.cases.length),n=e.filter(i=>!i.lernbereich||!essayLernbereiche.some(r=>r[0]===i.lernbereich));return`${pageHead("SELBSTST\xC4NDIG LERNEN","Fachaufsatztraining","Fachaufsatz in P\xE4dagogik/Psychologie an echten Pr\xFCfungsaufgaben \xFCben.",`<button class="secondary"onclick="go('start')">\u2190 Lernlandkarte</button><button class="secondary"onclick="go('lernwerkstatt')">\u2190 Lernwerkstatt</button>
+ ${isTeacher()?'<button class="primary"onclick="openEssayCaseForm()">\uFF0B Neue Aufgabe</button>':""}`)}
+ <div class="notice"><strong>So funktioniert's:</strong><p style="margin-bottom:0">Jede Aufgabe basiert auf einer echten alten Pr\xFCfungs- oder Schulaufgabe: 1. Aufgabenstellung lesen, 2. Theorie zur Beantwortung lesen, 3. im Antwortraum deinen Fachaufsatz schreiben, danach die Erfolgskriterien nach dem echten Bewertungsbogen selbst ankreuzen, optional per fobizz-Assistent eine schnelle KI-Vorkorrektur holen und bei Bedarf zur Lehrkraft zur Korrektur einreichen. Deine \xDCbungstexte sind privat \u2013 nur du selbst und Lehrkr\xE4fte sehen sie, nicht deine Mitsch\xFCler:innen.</p></div>
  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
- ${essayLernbereiche.map(([code,label])=>{const c=LERNBEREICH_FARBEN[essayLernbereichNummer(code)];return`<span class="pill"style="background:${c.bg};color:${c.text}">${esc(code)} · ${esc(label)}</span>`;}).join("")}
+ ${essayLernbereiche.map(([i,r])=>{const a=LERNBEREICH_FARBEN[essayLernbereichNummer(i)];return`<span class="pill"style="background:${a.bg};color:${a.text}">${esc(i)} \xB7 ${esc(r)}</span>`}).join("")}
  </div>
- ${!cases.length?`<div class="card empty"style="text-align:center"><strong>Noch keine Übungsaufgaben</strong><p style="margin-bottom:0">${isTeacher()?"Lege oben die erste Prüfungsaufgabe zum Üben an.":"Deine Lehrkraft stellt hier bald die ersten Prüfungsaufgaben zum Üben ein."}</p></div>`:""}
- ${grouped.map(g=>`
- <h3 style="margin:20px 0 10px">${esc(g.code)} – ${esc(g.label)}</h3>
- <div class="grid grid-3">${g.cases.map(essayCaseTileHTML).join("")}</div>`).join("")}
- ${ungrouped.length?`<h3 style="margin:20px 0 10px">Ohne Lernbereich</h3><div class="grid grid-3">${ungrouped.map(essayCaseTileHTML).join("")}</div>`:""}
- ${footer()}`;
-}
+ ${e.length?"":`<div class="card empty"style="text-align:center"><strong>Noch keine \xDCbungsaufgaben</strong><p style="margin-bottom:0">${isTeacher()?"Lege oben die erste Pr\xFCfungsaufgabe zum \xDCben an.":"Deine Lehrkraft stellt hier bald die ersten Pr\xFCfungsaufgaben zum \xDCben ein."}</p></div>`}
+ ${t.map(i=>`
+ <h3 style="margin:20px 0 10px">${esc(i.code)} \u2013 ${esc(i.label)}</h3>
+ <div class="grid grid-3">${i.cases.map(essayCaseTileHTML).join("")}</div>`).join("")}
+ ${n.length?`<h3 style="margin:20px 0 10px">Ohne Lernbereich</h3><div class="grid grid-3">${n.map(essayCaseTileHTML).join("")}</div>`:""}
+ ${footer()}`}
 
 function openEssayCase(id){activeEssayCaseId=id;go("fachaufsatz-board")}
 function closeEssayCase(){activeEssayCaseId=null;go("fachaufsatz")}
@@ -18897,31 +17639,7 @@ function downloadICS(events,filename,calName){
  setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},0);
 }
 
-async function exportCampusCalendarICS(){
- try{
- let events=[];
- try{events=await getCollection("events","start",false)}catch(e){console.error(e)}
- if(!events.length){
- try{events=await getCollection("calendar","date",false)}catch(e){console.error(e)}
- }
- let birthdayEvents=[];
- try{birthdayEvents=await getBirthdayEvents()}catch(e){console.error(e)}
- const ferienZeitraeume=[
- ["2026-08-03","2026-09-14","Sommerferien 2026"],
- ["2026-11-02","2026-11-06","Herbstferien / unterrichtsfreie Tage um Allerheiligen"],
- ["2026-12-24","2027-01-08","Weihnachtsferien"],
- ["2027-02-08","2027-02-12","Frühjahrsferien 2027"],
- ["2027-03-22","2027-04-02","Osterferien 2027"],
- ["2027-05-18","2027-05-28","Pfingstferien 2027"],
- ["2027-08-02","2027-09-13","Sommerferien 2027"]
- ];
- const ferienRangeEvents=ferienZeitraeume.map(([start,end,label])=>(
- {start,rangeEnd:end,title:label,description:"Schulferien in Bayern"}
- ));
- downloadICS([...events,...calFesteTermine(),...birthdayEvents,...ferienRangeEvents],"campuskalender.ics","F12Sb Kalender");
- toast("Kalender wird heruntergeladen – Datei öffnen, um sie zum Handy-Kalender hinzuzufügen.");
- }catch(e){console.error("Kalender-Export:",e);toast("Der Kalender konnte nicht exportiert werden.")}
-}
+async function exportCampusCalendarICS(){try{let e=[];try{e=await getCollection("events","start",!1)}catch(r){console.error(r)}if(!e.length)try{e=await getCollection("calendar","date",!1)}catch(r){console.error(r)}let t=[];try{t=await getBirthdayEvents()}catch(r){console.error(r)}const i=[["2026-08-03","2026-09-14","Sommerferien 2026"],["2026-11-02","2026-11-06","Herbstferien / unterrichtsfreie Tage um Allerheiligen"],["2026-12-24","2027-01-08","Weihnachtsferien"],["2027-02-08","2027-02-12","Fr\xFChjahrsferien 2027"],["2027-03-22","2027-04-02","Osterferien 2027"],["2027-05-18","2027-05-28","Pfingstferien 2027"],["2027-08-02","2027-09-13","Sommerferien 2027"]].map(([r,a,s])=>({start:r,rangeEnd:a,title:s,description:"Schulferien in Bayern"}));downloadICS([...e,...calFesteTermine(),...t,...i],"campuskalender.ics","F12Sb Kalender"),toast("Kalender wird heruntergeladen \u2013 Datei \xF6ffnen, um sie zum Handy-Kalender hinzuzuf\xFCgen.")}catch(e){console.error("Kalender-Export:",e),toast("Der Kalender konnte nicht exportiert werden.")}}
 
 function exportCalendarDayICS(y,m,d){
  const events=window._campusCalendarEvents||[];
@@ -19036,125 +17754,21 @@ async function calFixWiederherstellen(){
  }catch(e){console.error("Feste Termine wiederherstellen:",e);toast("Konnte nicht wiederhergestellt werden.");}
 }
 window.calFixAusblenden=calFixAusblenden;window.calFixWiederherstellen=calFixWiederherstellen;
-function calFesteTermineRoh(){
- const P="Zentraler Prüfungstermin der schriftlichen Abschlussprüfung FOS 12 in Bayern 2027.";
- return[
-  {start:"2026-10-29",type:"digitaltag",title:"1. Digitaltag",description:"Digitaltag der FOSBOS Weilheim."},
-  ...calLeistungsnachweise(),
-  {start:"2027-05-12",type:"pruefung",title:"Abschlussprüfung Deutsch (schriftlich)",description:P},
-  {start:"2027-05-14",type:"pruefung",title:"Abschlussprüfung Pädagogik/Psychologie (schriftlich, Profilfach)",description:P},
-  {start:"2027-06-01",type:"pruefung",title:"Abschlussprüfung Englisch (schriftlich)",description:P},
-  {start:"2027-06-03",type:"pruefung",title:"Abschlussprüfung Mathematik (schriftlich)",description:P}
- ];
-}
+function calFesteTermineRoh(){const e="Zentraler Pr\xFCfungstermin der schriftlichen Abschlusspr\xFCfung FOS 12 in Bayern 2027.";return[{start:"2026-10-29",type:"digitaltag",title:"1. Digitaltag",description:"Digitaltag der FOSBOS Weilheim."},...calLeistungsnachweise(),{start:"2027-05-12",type:"pruefung",title:"Abschlusspr\xFCfung Deutsch (schriftlich)",description:e},{start:"2027-05-14",type:"pruefung",title:"Abschlusspr\xFCfung P\xE4dagogik/Psychologie (schriftlich, Profilfach)",description:e},{start:"2027-06-01",type:"pruefung",title:"Abschlusspr\xFCfung Englisch (schriftlich)",description:e},{start:"2027-06-03",type:"pruefung",title:"Abschlusspr\xFCfung Mathematik (schriftlich)",description:e}]}
 // Kurzform für die Monatsübersicht: Vorname und Initial des Nachnamens
 function calKurzName(n){
  const t=String(n||"").trim().split(/\s+/).filter(Boolean);
  if(!t.length)return"";
  return t.length>1?`${t[0]} ${t[t.length-1][0]}.`:t[0];
 }
-async function renderKalender(){
- let events=[];
- try{events=(await getCollection("events","start",false)).map(e=>({...e,collection:"events"}))}catch(e){console.error("Kalender events:",e)}
- if(!events.length){
- try{events=(await getCollection("calendar","date",false)).map(e=>({...e,collection:"calendar"}))}catch(e){console.error("Kalender calendar:",e)}
- }
-
- const typeMeta=CAL_TYPEN;
-
- // Schulferien Bayern – Schuljahr 2026/27.
- const ferienZeitraeume=[
- ["2026-08-03","2026-09-14","Sommerferien 2026"],
- ["2026-11-02","2026-11-06","Herbstferien / unterrichtsfreie Tage um Allerheiligen"],
- ["2026-12-24","2027-01-08","Weihnachtsferien"],
- ["2027-02-08","2027-02-12","Frühjahrsferien 2027"],
- ["2027-03-22","2027-04-02","Osterferien 2027"],
- ["2027-05-18","2027-05-28","Pfingstferien 2027"],
- ["2027-08-02","2027-09-13","Sommerferien 2027"]
- ];
- const ferienEvents=[];
- ferienZeitraeume.forEach(([von,bis,label])=>{
- const start=new Date(von+"T00:00:00");
- const end=new Date(bis+"T00:00:00");
- for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)){
- ferienEvents.push({
- start:`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`,
- type:"ferien",
- title:label,
- description:"Schulferien in Bayern"
- });
- }
- });
- let birthdayEvents=[];
- try{birthdayEvents=await getBirthdayEvents()}catch(e){console.error("Kalender Geburtstage:",e)}
- await calAusgeblendetLaden();events=[...events,...calFesteTermine(),...birthdayEvents,...ferienEvents];
-
- const normalizeType=e=>{
- const raw=String(e?.type||e?.eventType||e?.category||"sonstiges").toLowerCase().trim();
- return raw==="präsentation"?"praesentation":(typeMeta[raw]?raw:"sonstiges");
- };
- const dateVal=e=>{
- const raw=e?.start||e?.date||e?.startDate;
- if(!raw)return null;
- if(typeof raw==="object"&&raw.seconds)return new Date(raw.seconds*1000);
- const d=new Date(String(raw).slice(0,10)+"T00:00:00");
- return isNaN(d)?null:d;
- };
- const eventsForDay=(y,m,d)=>events.filter(e=>{
- const x=dateVal(e);
- return x&&x.getFullYear()===y&&x.getMonth()===m&&x.getDate()===d;
- });
-
- const months=[
- {m:8,y:2026,name:"September 2026"},{m:9,y:2026,name:"Oktober 2026"},
- {m:10,y:2026,name:"November 2026"},{m:11,y:2026,name:"Dezember 2026"},
- {m:0,y:2027,name:"Januar 2027"},{m:1,y:2027,name:"Februar 2027"},
- {m:2,y:2027,name:"März 2027"},{m:3,y:2027,name:"April 2027"},
- {m:4,y:2027,name:"Mai 2027"},{m:5,y:2027,name:"Juni 2027"},{m:6,y:2027,name:"Juli 2027"},
- {m:7,y:2027,name:"August 2027"}
- ];
- const week=["Mo","Di","Mi","Do","Fr","Sa","So"];
-
- const monthHTML=(y,m,name)=>{
- const first=new Date(y,m,1),days=new Date(y,m+1,0).getDate(),offset=(first.getDay()+6)%7,cells=[];
- for(let i=0;i<offset;i++)cells.push('<div class="cal-day empty"></div>');
- for(let d=1;d<=days;d++){
- const ds=eventsForDay(y,m,d);
- const firstType=ds.length?normalizeType(ds[0]):"";
- const meta=firstType?typeMeta[firstType]:null;
- // Geburtstage: Namen statt „Geburtstag“; Prüfungen: Fach statt Terminart
- const gebDs=firstType==="geburtstag"?ds.filter(x=>normalizeType(x)==="geburtstag"):[];
- let zellText=meta?meta.label:"",zeigt=1;
- if(gebDs.length){zellText=gebDs.map(x=>calKurzName(x.person)).filter(Boolean).join(", ")||meta.label;zeigt=gebDs.length;}
- else if(firstType==="pruefung"&&ds[0].title){zellText=String(ds[0].title).replace(/^Abschlussprüfung\s+/,"");}
-  else if((firstType==="schulaufgabe"||firstType==="kurzarbeit")){
-   const gleich=ds.filter(x=>normalizeType(x)===firstType);
-   const faecher=gleich.map(x=>x.kurz||x.fach||"").filter(Boolean);
-   if(faecher.length){zellText=(firstType==="schulaufgabe"?"SA ":"KA ")+faecher.join(", ");zeigt=gleich.length;}
-  }
- const tip=ds.map(x=>x.person||x.title||x.name||"").filter(Boolean).join(" · ");
- cells.push(`<button type="button"class="cal-day ${meta?`has-event ${meta.className}`:""}"title="${esc(tip)}"onclick="openCalendarDay(${y},${m},${d})">
- <span class="cal-num">${d}</span>
- ${meta?`<span class="cal-event-type">${esc(zellText)}</span>${ds.length>zeigt?`<span class="cal-count">+${ds.length-zeigt}</span>`:""}`:""}
- </button>`);
- }
- while(cells.length%7)cells.push('<div class="cal-day empty"></div>');
- return`<section class="card cal-month">
- <div class="cal-month-head"><h2>${name}</h2></div>
- <div class="cal-week">${week.map(x=>`<div>${x}</div>`).join("")}</div>
- <div class="cal-grid">${cells.join("")}</div>
- </section>`;
- };
-
- window._campusCalendarEvents=events;
- const addButton=isTeacher()?'<button id="calendarAddBtn"class="primary"type="button">＋ Termin eintragen</button>':"";
- const birthdayButton='<button id="calendarBirthdayBtn"class="secondary"type="button"> Meinen Geburtstag eintragen</button>';
- const exportButton='<button class="secondary"type="button"onclick="exportCampusCalendarICS()"> Kalender aufs Handy exportieren</button>';
- const legend=Object.entries(typeMeta).map(([k,v])=>
- `<span class="cal-legend-item"><i class="cal-legend-dot ${v.className}"></i>${esc(v.label)}</span>`
- ).join("");
-
- const html=`${pageHead("ORGANISATION","Campus-Kalender","Das Schuljahr auf einen Blick. Termine sind je nach Terminart farblich gekennzeichnet.",`${addButton}${birthdayButton}${exportButton}`)}
+async function renderKalender(){let e=[];try{e=(await getCollection("events","start",!1)).map(v=>({...v,collection:"events"}))}catch(v){console.error("Kalender events:",v)}if(!e.length)try{e=(await getCollection("calendar","date",!1)).map(v=>({...v,collection:"calendar"}))}catch(v){console.error("Kalender calendar:",v)}const t=CAL_TYPEN,n=[["2026-08-03","2026-09-14","Sommerferien 2026"],["2026-11-02","2026-11-06","Herbstferien / unterrichtsfreie Tage um Allerheiligen"],["2026-12-24","2027-01-08","Weihnachtsferien"],["2027-02-08","2027-02-12","Fr\xFChjahrsferien 2027"],["2027-03-22","2027-04-02","Osterferien 2027"],["2027-05-18","2027-05-28","Pfingstferien 2027"],["2027-08-02","2027-09-13","Sommerferien 2027"]],i=[];n.forEach(([v,S,A])=>{const _=new Date(v+"T00:00:00"),Q=new Date(S+"T00:00:00");for(let C=new Date(_);C<=Q;C.setDate(C.getDate()+1))i.push({start:`${C.getFullYear()}-${String(C.getMonth()+1).padStart(2,"0")}-${String(C.getDate()).padStart(2,"0")}`,type:"ferien",title:A,description:"Schulferien in Bayern"})});let r=[];try{r=await getBirthdayEvents()}catch(v){console.error("Kalender Geburtstage:",v)}await calAusgeblendetLaden(),e=[...e,...calFesteTermine(),...r,...i];const a=v=>{const S=String(v?.type||v?.eventType||v?.category||"sonstiges").toLowerCase().trim();return S==="pr\xE4sentation"?"praesentation":t[S]?S:"sonstiges"},s=v=>{const S=v?.start||v?.date||v?.startDate;if(!S)return null;if(typeof S=="object"&&S.seconds)return new Date(S.seconds*1e3);const A=new Date(String(S).slice(0,10)+"T00:00:00");return isNaN(A)?null:A},l=(v,S,A)=>e.filter(_=>{const Q=s(_);return Q&&Q.getFullYear()===v&&Q.getMonth()===S&&Q.getDate()===A}),c=[{m:8,y:2026,name:"September 2026"},{m:9,y:2026,name:"Oktober 2026"},{m:10,y:2026,name:"November 2026"},{m:11,y:2026,name:"Dezember 2026"},{m:0,y:2027,name:"Januar 2027"},{m:1,y:2027,name:"Februar 2027"},{m:2,y:2027,name:"M\xE4rz 2027"},{m:3,y:2027,name:"April 2027"},{m:4,y:2027,name:"Mai 2027"},{m:5,y:2027,name:"Juni 2027"},{m:6,y:2027,name:"Juli 2027"},{m:7,y:2027,name:"August 2027"}],d=["Mo","Di","Mi","Do","Fr","Sa","So"],p=(v,S,A)=>{const _=new Date(v,S,1),Q=new Date(v,S+1,0).getDate(),C=(_.getDay()+6)%7,H=[];for(let ie=0;ie<C;ie++)H.push('<div class="cal-day empty"></div>');for(let ie=1;ie<=Q;ie++){const Ee=l(v,S,ie),ee=Ee.length?a(Ee[0]):"",U=ee?t[ee]:null,ge=ee==="geburtstag"?Ee.filter(G=>a(G)==="geburtstag"):[];let de=U?U.label:"",fe=1;if(ge.length)de=ge.map(G=>calKurzName(G.person)).filter(Boolean).join(", ")||U.label,fe=ge.length;else if(ee==="pruefung"&&Ee[0].title)de=String(Ee[0].title).replace(/^Abschlussprüfung\s+/,"");else if(ee==="schulaufgabe"||ee==="kurzarbeit"){const G=Ee.filter(M=>a(M)===ee),N=G.map(M=>M.kurz||M.fach||"").filter(Boolean);N.length&&(de=(ee==="schulaufgabe"?"SA ":"KA ")+N.join(", "),fe=G.length)}const se=Ee.map(G=>G.person||G.title||G.name||"").filter(Boolean).join(" \xB7 ");H.push(`<button type="button"class="cal-day ${U?`has-event ${U.className}`:""}"title="${esc(se)}"onclick="openCalendarDay(${v},${S},${ie})">
+ <span class="cal-num">${ie}</span>
+ ${U?`<span class="cal-event-type">${esc(de)}</span>${Ee.length>fe?`<span class="cal-count">+${Ee.length-fe}</span>`:""}`:""}
+ </button>`)}for(;H.length%7;)H.push('<div class="cal-day empty"></div>');return`<section class="card cal-month">
+ <div class="cal-month-head"><h2>${A}</h2></div>
+ <div class="cal-week">${d.map(ie=>`<div>${ie}</div>`).join("")}</div>
+ <div class="cal-grid">${H.join("")}</div>
+ </section>`};window._campusCalendarEvents=e;const h=isTeacher()?'<button id="calendarAddBtn"class="primary"type="button">\uFF0B Termin eintragen</button>':"",k='<button id="calendarBirthdayBtn"class="secondary"type="button"> Meinen Geburtstag eintragen</button>',f='<button class="secondary"type="button"onclick="exportCampusCalendarICS()"> Kalender aufs Handy exportieren</button>',y=Object.entries(t).map(([v,S])=>`<span class="cal-legend-item"><i class="cal-legend-dot ${S.className}"></i>${esc(S.label)}</span>`).join(""),w=`${pageHead("ORGANISATION","Campus-Kalender","Das Schuljahr auf einen Blick. Termine sind je nach Terminart farblich gekennzeichnet.",`${h}${k}${f}`)}
  <style>
  .cal-months{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
  .cal-month{padding:18px}.cal-month-head{margin-bottom:10px}
@@ -19182,16 +17796,10 @@ async function renderKalender(){
  </style>
  <div class="card"style="margin-bottom:16px">
  <strong>Campus-Kalender</strong>
- <p>Termine werden im gemeinsamen Kalender gespeichert. Klicke auf einen Tag, um die Details zu sehen. <b>SA</b> = Schulaufgabe (blau), <b>KA</b> = Kurzarbeit (rot) – dahinter steht das Fach.</p>${isTeacher()&&calAusgeblendetSet.size?`<p style="margin:6px 0 0"><button class="secondary"onclick="calFixWiederherstellen()">Gelöschte feste Termine wiederherstellen (${calAusgeblendetSet.size})</button></p>`:""}
- <div class="cal-legend">${legend}</div>
+ <p>Termine werden im gemeinsamen Kalender gespeichert. Klicke auf einen Tag, um die Details zu sehen. <b>SA</b> = Schulaufgabe (blau), <b>KA</b> = Kurzarbeit (rot) \u2013 dahinter steht das Fach.</p>${isTeacher()&&calAusgeblendetSet.size?`<p style="margin:6px 0 0"><button class="secondary"onclick="calFixWiederherstellen()">Gel\xF6schte feste Termine wiederherstellen (${calAusgeblendetSet.size})</button></p>`:""}
+ <div class="cal-legend">${y}</div>
  </div>
- <div class="cal-months">${months.map(x=>monthHTML(x.y,x.m,x.name)).join("")}</div>${footer()}`;
- setTimeout(()=>{
- const b=$("calendarAddBtn");if(b)b.addEventListener("click",openCalendarForm);
- const bb=$("calendarBirthdayBtn");if(bb)bb.addEventListener("click",openBirthdayForm);
- },0);
- return html;
-}
+ <div class="cal-months">${c.map(v=>p(v.y,v.m,v.name)).join("")}</div>${footer()}`;return setTimeout(()=>{const v=$("calendarAddBtn");v&&v.addEventListener("click",openCalendarForm);const S=$("calendarBirthdayBtn");S&&S.addEventListener("click",openBirthdayForm)},0),w}
 
 // Liest die Geburtstage (nur Tag/Monat, kein Jahr) aller freigeschalteten
 // Campus-Mitglieder aus users/{uid}.birthday ("MM-DD") und wandelt sie in
@@ -21902,10 +20510,12 @@ function kwKurz(e){return e.kurz||e.thema}
 function kwThemenVonPhase(ph){return KW_THEMEN.filter(e=>e.phase===ph.id)}
 // Trainings nach einer Leistungserhebung: je Lernbereich eine Zeile unter den Themen der Lernlandkarte (Kurzarbeit, Schulaufgabe).
 // Sie sind keine Lehrplan-Themen und zählen nicht in Fortschritt und Themenzahl, nehmen aber Bausteine (Selbstlernkurse) auf.
-const KW_LEISTUNGEN=[{id:"ln-ka1",phase:"lb1",lbNum:1,lb:"LB 1",nr:"KA 1",thema:"1.Kurzarbeit",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der Rückgabe gezielt deine Schwächen übst."},{id:"ln-sa1",phase:"lb2",lbNum:2,lb:"LB 2",nr:"SA 1",thema:"1.Schulaufgabe",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der Rückgabe gezielt deine Schwächen übst."},{id:"ln-ka2",phase:"lb3",lbNum:3,lb:"LB 3",nr:"KA 2",thema:"2.Kurzarbeit",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der Rückgabe gezielt deine Schwächen übst."},{id:"ln-sa2",phase:"lb4",lbNum:4,lb:"LB 4",nr:"SA 2",thema:"2.Schulaufgabe",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der Rückgabe gezielt deine Schwächen übst."}];
-const KW_TRAININGS_ALLE=["f12-fa01","fa04","fa05","fa06","fa07","f12-mp-struktur","f12-mp-theorie","f12-mp-transfer"]; // alle Fachaufsatz-Trainings: erscheinen auf jeder Themenseite
-const KW_TR_HINT={fa04:"Fall Tim",fa05:"Fall Tim",fa06:"Fall Tim",fa07:"Fall Tim","f12-mp-struktur":"Fall Paul und Max","f12-mp-theorie":"Fall Paul und Max","f12-mp-transfer":"Fall Paul und Max"};
-const KW_TRAININGS=["fa05","fa06","fa04","fa07","f12-mp-theorie","f12-mp-struktur","f12-mp-transfer"]; // Theorie beschreiben, Fallbezug üben, Struktur einhalten, Schreiben üben
+const KW_LEISTUNGEN=[{id:"ln-ka1",phase:"lb1",lbNum:1,lb:"LB 1",nr:"KA 1",thema:"1.Kurzarbeit",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der R\xFCckgabe gezielt deine Schw\xE4chen \xFCbst."},{id:"ln-sa1",phase:"lb2",lbNum:2,lb:"LB 2",nr:"SA 1",thema:"1.Schulaufgabe",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der R\xFCckgabe gezielt deine Schw\xE4chen \xFCbst."},{id:"ln-ka2",phase:"lb3",lbNum:3,lb:"LB 3",nr:"KA 2",thema:"2.Kurzarbeit",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der R\xFCckgabe gezielt deine Schw\xE4chen \xFCbst."},{id:"ln-sa2",phase:"lb4",lbNum:4,lb:"LB 4",nr:"SA 2",thema:"2.Schulaufgabe",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der R\xFCckgabe gezielt deine Schw\xE4chen \xFCbst."}];
+async function kwTrainingWahl(e){const ph=KW_PHASEN.find(p=>p.id===e.phase)||KW_PHASEN[0],infos=await Promise.all(["fa05","fa06","fa04","fa07","f12-mp-theorie","f12-mp-struktur","f12-mp-transfer"].map(x=>einarbeitungInfo(x).catch(()=>null))),da=new Set(kwModuleThema(e.id).map(m=>m.kursId)),T=["fa05","fa06","fa04","fa07","f12-mp-theorie","f12-mp-struktur","f12-mp-transfer"],z=T.map((x,i)=>{const n=infos[i];if(!n||n.entwurf)return"";const s=da.has("ea:"+x);return`<label style="display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-top:8px;cursor:${s?"default":"pointer"}"><input type="checkbox" class="kwTrCb" value="${x}"${s?" checked disabled":""}><span><b>${esc(n.titel)}</b>${/^fa0/.test(x)||s?'<br><small style="color:var(--muted)">'+((/^fa0/.test(x)?{fa04:"Fall Tim",fa05:"Fall Tim",fa06:"Fall Tim",fa07:"Fall Tim"}[x]:"")||"")+((/^fa0/.test(x)&&s)?" \xB7 ":"")+(s?"schon eingestellt":"")+"</small>":""}</span></label>`}).join("");modal(`<button class="modal-close" onclick="closeModal()">\xD7</button>
+  <div class="kicker">TRAININGS EINSTELLEN</div><h2>${esc(e.thema)}</h2>
+  <p style="color:var(--muted);margin:0 0 4px">Kreuze die Trainings an, die deine Sch\xFCler:innen nach der R\xFCckgabe \xFCben sollen.</p>
+  ${z}
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="kwTrSave">Einstellen</button></div>`),$("kwTrSave").onclick=async()=>{const ids=[...document.querySelectorAll(".kwTrCb:checked:not(:disabled)")].map(c=>c.value);if(!ids.length){toast("Bitte mindestens ein Training ankreuzen.");return}try{for(const id of ids){const n=infos[T.indexOf(id)];await addDoc(collection(db,"ppModule"),{modul:"selbstlern",lb:ph.lbNum,titel:n.titel,start:"",dauer:"w1",wochen:1,notiz:"",kursId:"ea:"+id,themen:[e.id],training:!0,ord:T.indexOf(id)+1,createdBy:currentUser.uid,createdAt:serverTimestamp()})}closeModal(),await ppmLaden(!0),await render(),toast(ids.length===1?"Training eingestellt.":ids.length+" Trainings eingestellt.")}catch(err){ppmFehler(err,"Die Trainings konnten nicht eingestellt werden")}}} // Theorie beschreiben, Fallbezug üben, Struktur einhalten, Schreiben üben
 function kwThemaById(id){return KW_THEMEN.find(e=>e.id===id)||KW_LEISTUNGEN.find(e=>e.id===id)||null}
 function kwLeistungRow(ph){
  const l=KW_LEISTUNGEN.find(x=>x.phase===ph.id);if(!l)return"";
@@ -21990,15 +20600,7 @@ async function renderKwProjekt(){
  </div>${footer()}`;
 }
 /* ------------------------------------------------ Themenseite */
-function kwDateiHTML(titel,url,id,wid){
- const del=kwLehrer()&&id?`<button type="button" class="kw-del" data-kw="matweg" data-id="${esc(id)}" data-w="${esc(wid)}" aria-label="Löschen">×</button>`:"";
- let a;
- if(/^(uebungsbausteine|karteikarten)\//.test(String(url||"")))a=`<a class="kw-datei" href="${esc(url)}" target="_blank" rel="noopener"><span>${esc(titel)}</span><small>${/^karteikarten/.test(url)?"Karteikarten öffnen":"Übung starten"}</small></a>`;
- else if(String(url||"").startsWith("fa:"))a=`<button type="button" class="kw-datei" data-kw="faueb" data-id="${esc(url.slice(3))}"><span>${esc(titel)}</span><small>Übung öffnen</small></button>`;
- else if(String(url||"").startsWith("board:"))a=`<button type="button" class="kw-datei" data-kw="board" data-id="${esc(url.slice(6))}"><span>${esc(titel)}</span><small>Tafel öffnen</small></button>`;
- else a=`<a class="kw-datei" href="${esc(url||"#")}" target="_blank" rel="noopener"><span>${esc(titel)}</span><small>${/^https?:\/\/[^/]*firebasestorage/.test(url||"")?"Datei":"Link"} öffnen</small></a>`;
- return lxDzHtml(a,del,id);
-}
+function kwDateiHTML(e,t,n,i){const r=isTeacher()&&n?`<button type="button" class="kw-del" data-kw="matweg" data-id="${esc(n)}" data-w="${esc(i)}" aria-label="L\xF6schen">\xD7</button>`:"";let a;return/^uebungsbausteine\/station\.html\?s=/.test(String(t||""))&&!isTeacher()?a=`<button type="button" class="kw-datei" data-kw="ubopen" data-url="${esc(t)}" data-w="${esc(i||"")}" data-t="${esc(e)}"><span>${esc(e)}</span><small>\xDCbung starten (Ergebnis wird gespeichert)</small></button>`:/^(uebungsbausteine|karteikarten)\//.test(String(t||""))?a=`<a class="kw-datei" href="${esc(t)}" target="_blank" rel="noopener"><span>${esc(e)}</span><small>${/^karteikarten/.test(t)?"Karteikarten \xF6ffnen":"\xDCbung starten"}</small></a>`:String(t||"").startsWith("fa:")?a=`<button type="button" class="kw-datei" data-kw="faueb" data-id="${esc(t.slice(3))}"><span>${esc(e)}</span><small>\xDCbung \xF6ffnen</small></button>`:String(t||"").startsWith("board:")?a=`<button type="button" class="kw-datei" data-kw="board" data-id="${esc(t.slice(6))}"><span>${esc(e)}</span><small>Tafel \xF6ffnen</small></button>`:a=`<a class="kw-datei" href="${esc(t||"#")}" target="_blank" rel="noopener"><span>${esc(e)}</span><small>${/^https?:\/\/[^/]*firebasestorage/.test(t||"")?"Datei":"Link"} \xF6ffnen</small></a>`, lxDzHtml(a,r,n)}
 function kwSekHTML(titel,hint,inner,addKat,lehrer,extraBtn){
  return`<section class="kw-card kw-sek"><div class="kw-sek-kopf"><div><h3>${esc(titel)}</h3>${hint?`<small>${esc(hint)}</small>`:""}</div>${lehrer&&addKat?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${addKat}">+ hinzufügen</button>`:""}</div>${extraBtn||""}${inner}</section>`;
 }
@@ -22051,25 +20653,68 @@ function lsTopUnsicher(id,max){
  const m={};(LT.ci||[]).filter(x=>x.wocheId===id).forEach(x=>lsUnsicher(x).forEach(t=>m[t]=(m[t]||0)+1));
  return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,max);
 }
-function lsThemaDetail(id){
- const e=kwThemaById(id),N=LT.schueler.length;
- const cs=(LT.ci||[]).filter(x=>x.wocheId===id);
- const rang={rot:0,orange:1,gruen:2};
- const liste=LT.schueler.map(u=>({u,x:cs.find(y=>y.uid===u.uid)})).sort((p,q)=>(p.x?rang[p.x.ampel]??1:3)-(q.x?rang[q.x.ampel]??1:3)||anzeigeName(p.u).localeCompare(anzeigeName(q.u),"de"));
- const g=k=>cs.filter(x=>x.ampel===k).length;
- const top=lsTopUnsicher(id,6);
- const mw=cs.map(ciVerlauf).filter(v=>v.length>1),mittel=f=>Math.round(mw.reduce((s,v)=>s+ciProz(f(v)),0)/mw.length);
- const wdh=mw.length?`<p style="margin:0 0 12px;font-size:13px"><b>${mw.length}</b> ${mw.length===1?"Person hat":"Personen haben"} den Wissens-Check wiederholt: Ø erster Wissens-Check <b>${mittel(v=>v[0])} %</b> → Ø letzter Stand <b>${mittel(v=>v[v.length-1])} %</b></p>`:"";
- const zeilen=liste.map(({u,x})=>{
-  if(!x)return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td><span style="color:var(--muted)">noch nicht gemacht</span></td><td></td></tr>`;
-  const uns=lsUnsicher(x);
-  return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td style="white-space:nowrap">${lsAmpelPunkt(x.ampel)} ${x.richtig} von ${x.gesamt} richtig${ciVerlaufTxt(x)?`<br><small style="color:var(--muted)">Verlauf: ${ciVerlaufTxt(x)}</small>`:""}</td><td>${uns.length?esc(uns.join(" · ")):`<span style="color:var(--muted)">–</span>`}</td></tr>`}).join("");
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">CHECK-IN</div><h2>${esc(e?kwKurz(e):id)}</h2>
- <p style="margin:2px 0 12px;font-size:13px;color:var(--muted)">${cs.length} von ${N} haben den Wissens-Check gemacht · <b style="color:#2E7D57">${g("gruen")} grün</b> · <b style="color:#B38600">${g("orange")} gelb</b> · <b style="color:#C0392B">${g("rot")} rot</b></p>
- ${wdh}
- ${top.length?`<div class="ls-unsbox"><b>Hier ist die Klasse noch unsicher</b><ul>${top.map(([t,n])=>`<li>${esc(t)} <small>${n} von ${cs.length}</small></li>`).join("")}</ul></div>`:(cs.length?`<div class="ls-unsbox ok"><b>Keine auffälligen Lücken</b></div>`:"")}
- <div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Ergebnis</th><th>Noch unsicher bei</th></tr></thead><tbody>${zeilen||`<tr><td>Noch keine Schüler:innen.</td></tr>`}</tbody></table></div>`);
+function lsThemaDetail(e){const t=kwThemaById(e),n=LT.schueler.length,i=(LT.ci||[]).filter(d=>d.wocheId===e),r={rot:0,orange:1,gruen:2},a=LT.schueler.map(d=>({u:d,x:i.find(p=>p.uid===d.uid)})).sort((d,p)=>(d.x?r[d.x.ampel]??1:3)-(p.x?r[p.x.ampel]??1:3)||anzeigeName(d.u).localeCompare(anzeigeName(p.u),"de")),s=d=>i.filter(p=>p.ampel===d).length,l=lsTopUnsicher(e,6),c=a.map(({u:d,x:p})=>{if(!p)return`<tr><th scope="row">${esc(anzeigeName(d))}</th><td><span style="color:var(--muted)">noch nicht gemacht</span></td><td></td></tr>`;const h=lsUnsicher(p);return`<tr><th scope="row">${esc(anzeigeName(d))}</th><td style="white-space:nowrap">${lsAmpelPunkt(p.ampel)} ${p.richtig} von ${p.gesamt} richtig${ciVerlaufTxt(p)?`<br><small style="color:var(--muted)">Verlauf: ${ciVerlaufTxt(p)}</small>`:""}</td><td>${h.length?esc(h.join(" \xB7 ")):'<span style="color:var(--muted)">\u2013</span>'}</td></tr>`}).join("");modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">CHECK-IN</div><h2>${esc(t?kwKurz(t):e)}</h2>
+ <p style="margin:2px 0 12px;font-size:13px;color:var(--muted)">${i.length} von ${n} haben den Wissens-Check gemacht \xB7 <b style="color:#2E7D57">${s("gruen")} gr\xFCn</b> \xB7 <b style="color:#B38600">${s("orange")} gelb</b> \xB7 <b style="color:#C0392B">${s("rot")} rot</b></p>
+ ${(()=>{const mw=i.map(ciVerlauf).filter(v=>v.length>1);if(!mw.length)return"";const mi=f=>Math.round(mw.reduce((s,v)=>s+ciProz(f(v)),0)/mw.length);return`<p style="margin:0 0 12px;font-size:13px"><b>${mw.length}</b> ${mw.length===1?"Person hat":"Personen haben"} den Wissens-Check wiederholt: \u00D8 erster Wissens-Check <b>${mi(v=>v[0])} %</b> \u2192 \u00D8 letzter Stand <b>${mi(v=>v[v.length-1])} %</b></p>`})()}
+ ${l.length?`<div class="ls-unsbox"><b>Hier ist die Klasse noch unsicher</b><ul>${l.map(([d,p])=>`<li>${esc(d)} <small>${p} von ${i.length}</small></li>`).join("")}</ul></div>`:i.length?'<div class="ls-unsbox ok"><b>Keine auff\xE4lligen L\xFCcken</b></div>':""}
+ <div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Ergebnis</th><th>Noch unsicher bei</th></tr></thead><tbody>${c||"<tr><td>Noch keine Sch\xFCler:innen.</td></tr>"}</tbody></table></div>${ubThemaHTML(e)}`)}
+let r_Qd=null;
+function r_QA(e,t,n){r_Qd={wid:t||"",titel:n||""};const i=String(e||"");/^uebungsbausteine\/station\.html\?s=[A-Za-z0-9_-]+/.test(i)&&modal(`<button class="modal-close"onclick="closeModal()">\xD7</button><div class="kicker">\xDCBUNG</div><h2>${esc(n||"\xDCbung")}</h2><iframe class="ub-frame"src="${esc(i+"&app=1")}"title="\xDCbung"allow="fullscreen"></iframe><small>Dein Ergebnis wird gespeichert und hilft deiner Lehrkraft einzusch\xE4tzen, wo du stehst. Keine Note.</small>`)}
+window.addEventListener("message",async e=>{if(e.origin!==location.origin)return;const t=e.data&&e.data.ubErgebnis;if(!t||!r_Qd||!currentUser||isTeacher())return;const n=String(t.sid||"").replace(/[^A-Za-z0-9_-]/g,"").slice(0,80);if(!n)return;const i=Math.max(1,Math.round(+t.max||1)),r=Math.max(0,Math.min(i,Math.round(+t.punkte||0)));try{await addDoc(collection(db,"ubErgebnisse"),{uid:currentUser.uid,wocheId:r_Qd.wid,stationId:n,punkte:r,max:i,zuege:Math.max(0,Math.round(+t.zuege||0)),sekunden:Math.max(0,Math.round(+t.sekunden||0)),createdAt:serverTimestamp()}),toast("Ergebnis gespeichert.")}catch(a){console.warn("\xDCbungsergebnis:",a)}});
+function ubAmpel(q){return q>=.75?"gruen":q>=.4?"orange":"rot"}
+function ubMeinUid(){return currentUser?currentUser.uid:""}
+async function ubLaden(){
+const lehrer=isTeacher();
+const hole=async n=>{try{const s=lehrer?await getDocs(collection(db,n)):await getDocs(query(collection(db,n),where("uid","==",currentUser.uid)));return s.docs.map(d=>d.data())}catch{return[]}};
+const[ub,fa,kat,faU]=await Promise.all([hole("ubErgebnisse"),hole("faErgebnisse"),kwUbKatalog().catch(()=>[]),faLaden().catch(()=>[])]);
+LT.ubTitel={};(kat||[]).forEach(k=>{LT.ubTitel[k.id]=k.titel});
+LT.faTitel={};(faU||[]).forEach(u=>{LT.faTitel[u.id]=u.titel});
+return ub.concat(fa.map(r=>({...r,stationId:"fa_"+r.uebId,quelle:"fa"})));
 }
+function ubTitel(sid){return String(sid).startsWith("fa_")?"Fachaufsatz: "+((LT.faTitel||{})[String(sid).slice(3)]||String(sid).slice(3)):((LT.ubTitel||{})[sid]||sid)}
+function ubZeilenHTML(uid,wid){
+const mine=(LT.ub||[]).filter(r=>r.uid===uid&&r.wocheId===wid&&r.max>0).sort((a,c)=>r_Vl(a)-r_Vl(c)),g2={};
+mine.forEach(r=>{(g2[r.stationId]=g2[r.stationId]||[]).push(r)});
+return Object.entries(g2).map(([sid,l])=>{
+const last=l[l.length-1],amp=ubAmpel(last.punkte/last.max),v={verlauf:l.map(e=>({r:e.punkte,g:e.max,t:r_Vl(e)}))};
+return`<div class="ls-ub">${lsAmpelPunkt(amp,LS_AMP[amp][1])}<span>${esc(ubTitel(sid))}</span><small>${last.punkte} von ${last.max}${l.length>1?" · "+l.length+" Versuche":""}</small></div>${ciVerlaufSVG(v)?`<details class="ls-verlauf"><summary>Verlauf: ${ciVerlaufTxt(v)}</summary>${ciVerlaufSVG(v)}</details>`:""}`;
+}).join("");
+}
+function ubThemaHTML(id){
+const ub=(LT.ub||[]).filter(r=>r.wocheId===id&&r.max>0).sort((a,c)=>r_Vl(a)-r_Vl(c)),nach={};
+ub.forEach(r=>{(nach[r.stationId]=nach[r.stationId]||{})[r.uid]=r});
+const zl=Object.entries(nach).map(([sid,pro])=>{
+const l=Object.values(pro),gg=k=>l.filter(r=>ubAmpel(r.punkte/r.max)===k).length,avg=Math.round(l.reduce((s,r)=>s+r.punkte/r.max,0)/l.length*100);
+return`<tr><th scope="row">${esc(ubTitel(sid))}</th><td>${l.length} von ${LT.schueler.length}</td><td><b style="color:#2E7D57">${gg("gruen")}</b> · <b style="color:#B38600">${gg("orange")}</b> · <b style="color:#C0392B">${gg("rot")}</b></td><td>Ø ${avg} %</td></tr>`}).join("");
+return zl?`<h3 style="margin:16px 0 6px;font-size:14px">Übungen und Fachaufsatz zu diesem Thema</h3><div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Übung</th><th>Gemacht</th><th>grün · gelb · rot</th><th>Stand</th></tr></thead><tbody>${zl}</tbody></table></div>`:"";
+}
+function faSelbstHTML(u,s){
+const ks=u.kriterien||[],se=Array.isArray(s.se)?s.se:[];
+if(!ks.length)return"";
+return`<b class="fa-kk">Prüfe selbst: Was hattest du in deinem Text?</b>
+<div class="fa-self"id="fas_${u.id}">${ks.map((k,i)=>`<div class="fa-kr"><span>${esc(k)}</span><span class="fa-kw"role="radiogroup"aria-label="${esc(k)}">${[[2,"drin"],[1,"teilweise"],[0,"fehlt"]].map(([v,t])=>`<label><input type="radio"name="fak_${u.id}_${i}"value="${v}"${se[i]===v?" checked":""}><span>${t}</span></label>`).join("")}</span></div>`).join("")}
+<div class="fa-btns"><button type="button"class="ppm-btn"onclick="faSelbstSpeichern('${u.id}')">Selbsteinschätzung speichern</button><span class="fa-sestand"id="fase_${u.id}">${s.sq!=null?`Zuletzt: ${s.sp} von ${s.sm} (${s.sq} %)`:""}</span></div>
+<small class="fa-hinweis">Gespeichert wird nur die Punktzahl, nicht dein Text. Sie zeigt dir deinen Lernstand und erscheint in deinen Lernständen.</small></div>`;
+}
+async function faSelbstSpeichern(id){
+if(isTeacher()||!currentUser)return;
+const alle=await faLaden(),ue=alle.find(r=>r.id===id);if(!ue)return;
+const ks=ue.kriterien||[],se=[];
+for(let i=0;i<ks.length;i++){const r=document.querySelector(`input[name="fak_${id}_${i}"]:checked`);if(!r){toast("Bitte bei jedem Kriterium etwas auswählen.");return}se.push(Number(r.value))}
+const punkte=se.reduce((a,c)=>a+c,0),max=ks.length*2;
+try{await addDoc(collection(db,"faErgebnisse"),{uid:currentUser.uid,wocheId:String(ue.thema||""),uebId:String(ue.id),lb:Number(ue.lb)||0,punkte,max,createdAt:serverTimestamp()})}
+catch(e){console.warn("Fachaufsatz-Selbsteinschätzung:",e);toast("Konnte nicht gespeichert werden. Bitte später noch einmal versuchen.");return}
+const q2=Math.round(punkte/max*100);
+faSchreib(id,{se,sp:punkte,sm:max,sq:q2});
+const el=$("fase_"+id);if(el)el.textContent=`Gespeichert: ${punkte} von ${max} (${q2} %)`;
+const cb=document.querySelector(`#fa_${id} .fa-fertig input`);if(cb){cb.checked=true;faErledigt(id,true)}
+toast("Selbsteinschätzung gespeichert.");
+}
+window.faSelbstSpeichern=faSelbstSpeichern;
+const r_Vf=28;
+function r_Vl(e){const t=e&&e.createdAt;return t&&t.toMillis?t.toMillis():e&&e.t||0}
+function r_XA(e,t,n,i,r){const a=Date.now(),s=[],l=n.find(S=>S.uid===e&&S.wocheId===t),c=S=>S&&(a-S)/864e5>r_Vf?.5:1;l&&l.gesamt>0&&s.push({q:l.richtig/l.gesamt,w:2*c(r_Vl(l))});const d={};i.filter(S=>S.uid===e&&S.wocheId===t).sort((S,A)=>r_Vl(S)-r_Vl(A)).forEach(S=>{d[S.stationId]=S});const p=Object.values(d);p.forEach(S=>s.push({q:S.punkte/S.max,w:(S.quelle==="fa"?.5:1)*c(r_Vl(S))}));const h=(r||[]).find(S=>S.uid===e&&S.wocheId===t),k=!!(h&&h.abgeschlossen);if(!s.length)return{ampel:null,n:0,selbst:k,hinweis:k?"nur selbst abgehakt":""};const f=s.reduce((S,A)=>S+A.w,0),y=s.reduce((S,A)=>S+A.q*A.w,0)/f,w=y>=.75?"gruen":y>=.4?"orange":"rot",v=[];return k&&w!=="gruen"&&v.push("selbst \u201Eerledigt\u201C, Messung "+(w==="rot"?"rot":"gelb")),l&&l.sicher===3&&l.gesamt&&l.richtig/l.gesamt<.5&&v.push("sehr sicher, aber viele Fehler"),l&&l.sicher===1&&l.gesamt&&l.richtig/l.gesamt>=.75&&v.push("untersch\xE4tzt sich"),{ampel:w,q:y,n:s.length,vorlaeufig:s.length<2,selbst:k,hinweis:v.join(" \xB7 "),ub:p.length}}
+function r_YA(e,t,n){const i=[1,2,3,4].flatMap(d=>lsThemenLb(d));if(!i.length||!LT.schueler.length)return"";const r=LT.schueler.map(d=>({u:d,z:i.map(p=>r_XA(d.uid,p.id,e,t,n))})),a=r.map(({u:d,z:p})=>({u:d,rot:p.filter(h=>h.ampel==="rot").length,hin:p.filter(h=>h.hinweis&&h.ampel).length})).filter(d=>d.rot>=2||d.hin>=2).sort((d,p)=>p.rot+p.hin-(d.rot+d.hin)).slice(0,8),s=i.map(d=>`<th title="${esc(kwKurz(d))}"><span>${esc(d.nr)}</span></th>`).join(""),l=r.map(({u:d,z:p})=>`<tr><th scope="row">${esc(anzeigeName(d))}</th>${p.map((h,k)=>`<td><button type="button"class="ev-z${h.vorlaeufig?" vl":""}"style="background:${h.ampel?LS_AMP[h.ampel][0]:"#E3E8EC"}"data-ls="detail"data-uid="${esc(d.uid)}"title="${esc(kwKurz(i[k]))}: ${h.ampel?h.n+" Messung(en)"+(h.vorlaeufig?", vorl\xE4ufig":""):"noch keine Messung"}${h.hinweis?" \xB7 "+esc(h.hinweis):""}">${h.hinweis&&h.ampel?"!":""}</button></td>`).join("")}</tr>`).join("");return`<details class="kw-card ls-lern"open><summary><b>Lernstand-\xDCbersicht (gemessen)</b> <small>Personen \xD7 Themen, aus Wissens-Check, \xDCbungen und Fachaufsatz-Selbsteinsch\xE4tzung</small></summary>${a.length?`<div class="ls-unsbox"><b>Braucht Aufmerksamkeit</b><ul>${a.map(d=>`<li>${esc(anzeigeName(d.u))} <small>${d.rot} Themen rot${d.hin?`, ${d.hin} Abweichungen Selbstbild/Messung`:""}</small></li>`).join("")}</ul></div>`:'<div class="ls-unsbox ok"><b>Aktuell keine auff\xE4lligen Personen</b></div>'}<div class="kw-tabwrap"><table class="kw-tab ev-tab"><thead><tr><th>Pseudonym</th>${s}</tr></thead><tbody>${l}</tbody></table></div><small>Gr\xFCn ab 75 %, gelb ab 40 %, sonst rot; grau = noch keine Messung; blass = erst eine Messung (vorl\xE4ufig); \u201E!\u201C = Selbstbild und Messung passen nicht zusammen. Messungen \xE4lter als ${r_Vf} Tage z\xE4hlen halb. Zelle anklicken f\xFCr Details.</small></details>`}
 function lsUebersichtHTML(ci,co,abgaben){
  const rows=LT.schueler.map(u=>{
   const c=ci.filter(x=>x.uid===u.uid);
@@ -22081,17 +20726,7 @@ function lsUebersichtHTML(ci,co,abgaben){
  }).join("");
  return`<details class="kw-card ls-lern"><summary><b>Nach Lernenden</b> <small>Alles, was eine einzelne Person geleistet hat</small></summary><div class="kw-tabwrap">${LT.schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Wissens-Checks</th><th>Check-outs und K-Prim-Tests</th><th>Digitale Tests</th><th></th></tr></thead><tbody>${rows}</tbody></table>`:`<div class="kw-leer">Noch keine freigeschalteten Schüler:innen.</div>`}</div><small>NP = Notenpunkte. Lehrkräfte-Konten erscheinen hier nicht.</small></details>`;
 }
-function lsDetail(uid){
- const u=LT.schueler.find(x=>x.uid===uid)||{uid};
- const ci=(LT.ci||[]).filter(x=>x.uid===uid),ab=(LT.abgaben||[]).filter(x=>x.uid===uid),co=(KW.co&&KW.co.checkouts)||[];
- const lb=[1,2,3,4].map(n=>{
-  const ph=kwPhase(n),F=kwFarbe(n);
-  const th=lsThemenLb(n).map(e=>{const x=ci.find(y=>y.wocheId===e.id);return`<li>${x?lsAmpelPunkt(x.ampel):lsAmpelPunkt("")} ${esc(kwKurz(e))}: ${x?`${x.richtig} von ${x.gesamt} richtig${ciVerlaufTxt(x)?" · Verlauf: "+ciVerlaufTxt(x):""}${lsUnsicher(x).length?" · unsicher: "+esc(lsUnsicher(x).join(", ")):""}`:"Wissens-Check offen"}</li>`}).join("");
-  const cs=co.filter(c=>Number(c.lbNum)===n).map(c=>{const a=ab.find(x=>x.checkoutId===c.id);return`<li>Check-out ${esc(coTitelAnzeige(c)||"")}: ${a?(a.ausgewertet?`${a.be} BE · ${a.notenpunkte} NP`:(a.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen")):"nicht teilgenommen"}</li>`}).join("");
-  const ts=LT.tests.filter(t=>Number(t.lb)===n).map(t=>{const a=LT.alle.find(x=>x.testId===t.id&&x.uid===uid);return`<li>Test ${esc(t.titel)}: ${esc(ltStatus(t,a))}</li>`}).join("");
-  return`<h3 style="color:${F.t};margin:14px 0 4px">LB ${n}${ph?" · "+esc(ph.lbTitel):""}</h3><ul>${th||"<li>keine Themen</li>"}${cs}${ts}</ul>`}).join("");
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">LERNSTÄNDE</div><h2>${esc(anzeigeName(u))}</h2>${lb}`);
-}
+function lsDetail(e){const t=LT.schueler.find(s=>s.uid===e)||{uid:e},n=(LT.ci||[]).filter(s=>s.uid===e),i=(LT.abgaben||[]).filter(s=>s.uid===e),r=KW.co&&KW.co.checkouts||[],a=[1,2,3,4].map(s=>{const l=kwPhase(s),c=kwFarbe(s),d=lsThemenLb(s).map(k=>{const f=n.find(y=>y.wocheId===k.id);return`<li>${lsAmpelPunkt(f?f.ampel:"")} ${esc(kwKurz(k))}: ${f?`${f.richtig} von ${f.gesamt} richtig${ciVerlaufTxt(f)?" \xB7 Verlauf: "+ciVerlaufTxt(f):""}${lsUnsicher(f).length?" \xB7 unsicher: "+esc(lsUnsicher(f).join(", ")):""}`:"Wissens-Check offen"}</li>${(()=>{const zz=ubZeilenHTML(e,k.id);return zz?`<li style="list-style:none">${zz}</li>`:""})()}`}).join(""),p=r.filter(k=>Number(k.lbNum)===s).map(k=>{const f=i.find(y=>y.checkoutId===k.id);return`<li>Check-out ${esc(coTitelAnzeige(k)||"")}: ${f?f.ausgewertet?`${f.be} BE \xB7 ${f.notenpunkte} NP`:f.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen":"nicht teilgenommen"}</li>`}).join(""),h=LT.tests.filter(k=>Number(k.lb)===s).map(k=>{const f=LT.alle.find(y=>y.testId===k.id&&y.uid===e);return`<li>Test ${esc(k.titel)}: ${esc(ltStatus(k,f))}</li>`}).join("");return`<h3 style="color:${c.t};margin:14px 0 4px">LB ${s}${l?" \xB7 "+esc(l.lbTitel):""}</h3><ul>${d||"<li>keine Themen</li>"}${p}${h}</ul>`}).join("");modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">LERNST\xC4NDE</div><h2>${esc(anzeigeName(t))}</h2>${a}`)}
 function lsCoZeile(c,d,lehrer,abgaben){
  const a=d.meineAbgaben[c.id];
  const st=c.status==="live"?`<span class="co-chip live"><span class="co-live-punkt"></span>läuft</span>`:c.status==="beendet"?`<span class="co-chip fertig">beendet</span>`:`<span class="co-chip entwurf">Entwurf</span>`;
@@ -22116,59 +20751,21 @@ function lsTestZeile(t,lehrer){
   :`<button class="primary" data-ls="open" data-id="${esc(t.id)}">${a&&a.abgegeben?"Ansehen":(t.status==="geschlossen"?"Ansehen":"Test starten")}</button>`;
  return`<div class="ls-zeile"><span class="chip ueb">Digitaler Test</span><div class="ls-t"><b>${esc(t.titel)}</b><small>${ltBE(t)} BE${t.ki?" · mit KI-Vorkorrektur":""} · ${lehrer?`${n} von ${LT.schueler.length} abgegeben`:esc(ltStatus(t,a))}${t.status==="geschlossen"?" · geschlossen":""}</small></div><div class="ls-a">${rechts}</div></div>`;
 }
-function lsLbBlock(n,ci,co,abgaben,lehrer){
- const ph=kwPhase(n),F=kwFarbe(n);if(!ph)return"";
- const themen=lsThemenLb(n),N=LT.schueler.length;
- const cos=((co&&co.checkouts)||[]).filter(c=>Number(c.lbNum)===n);
- const tests=LT.tests.filter(t=>Number(t.lb)===n&&(lehrer||t.status!=="entwurf"));
- // Kopfzahlen
- let chip;
- if(lehrer){
-  const v=ci.filter(x=>themen.some(e=>e.id===x.wocheId)).length;
-  chip=`Wissens-Checks ${v} von ${themen.length*N}`;
- }else{
-  const v=themen.filter(e=>ci.some(x=>x.wocheId===e.id)).length;
-  chip=`Wissens-Checks ${v} von ${themen.length}`;
- }
- const zeilen=themen.map(e=>{
-  const mine=ci.filter(x=>x.wocheId===e.id);
-  if(lehrer){
-   const g=k=>mine.filter(x=>x.ampel===k).length,n3=mine.length;
-   const bar=n3?`<span class="ls-bar" title="grün ${g("gruen")} · gelb ${g("orange")} · rot ${g("rot")}">${["gruen","orange","rot"].map(k=>g(k)?`<i style="flex:${g(k)};background:${LS_AMP[k][0]}">${g(k)}</i>`:"").join("")}</span>`:`<span class="ls-bar leer"></span>`;
-   return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}${(()=>{const t=lsTopUnsicher(e.id,2);return t.length?`<small class="ls-uns">Unsicher: ${esc(t.map(x=>x[0]).join(" · "))}</small>`:""})()}</span>${bar}<small>${n3} von ${N}</small><button class="secondary kw-add" data-ls="thema" data-id="${esc(e.id)}">Wer?</button></div>`;
-  }
-  const x=mine[0];
-  return`<div class="ls-th"><em>${esc(e.nr)}</em><span class="ls-tn">${esc(kwKurz(e))}</span>${x?`${lsAmpelPunkt(x.ampel)}<small>${x.richtig} von ${x.gesamt} richtig</small>`:`<small class="ls-offen">Wissens-Check offen</small>`}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(e.id)}">${x?"Ansehen":"Starten"}</button></div>${x&&ciVerlaufSVG(x)?`<details class="ls-verlauf"><summary>Verlauf: ${ciVerlaufTxt(x)}</summary>${ciVerlaufSVG(x)}</details>`:""}`;
- }).join("");
- const nachweise=cos.map(c=>lsCoZeile(c,co,lehrer,abgaben)).join("")+tests.map(t=>lsTestZeile(t,lehrer)).join("");
- return`<details class="ls-lb" id="ls-lb${n}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><summary class="ls-lbk"><small>LB ${n}</small><b>${esc(ph.lbTitel)}</b><span>${chip}</span><i class="ls-pf" aria-hidden="true">▾</i></summary>
-  <div class="ls-sek"><h4>Wissens-Checks nach Thema</h4>${zeilen||`<div class="kw-leer">Keine Themen.</div>`}</div>
-  <div class="ls-sek"><h4>Check-outs, K-Prim-Tests und digitale Tests</h4>${nachweise||`<div class="kw-leer">Zu diesem Lernbereich gibt es noch keinen Nachweis.</div>`}</div></details>`;
-}
-async function renderKwCheckouts(){
- await kwLaden();await ltLaden();
- const co=KW.co,lehrer=kwLehrer();
- const ci=await lsCheckInsLaden();LT.ci=ci;
- let abgaben=[];
- if(lehrer){try{abgaben=(await getDocs(collection(db,"checkoutAbgaben"))).docs.map(d=>d.data())}catch(e){}}
- LT.abgaben=abgaben;
- LT.fr={};
- if(lehrer){const ids=[1,2,3,4].flatMap(n=>lsThemenLb(n).map(e=>e.id));await Promise.all(ids.map(async id=>{LT.fr[id]=await getBasischeckFragen(id)}))}
- const nav=[1,2,3,4].map(n=>{const ph=kwPhase(n),F=kwFarbe(n);return ph?`<a class="ls-nav" href="#" data-ls="sprung" data-lb="${n}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><small>LB ${n}</small><b>${esc(ph.lbTitel)}</b></a>`:""}).join("");
- const bloecke=[1,2,3,4].map(n=>lsLbBlock(n,ci,co,abgaben,lehrer)).join("");
- const verw=co?`<details class="kw-card ls-verw"><summary><b>Check-outs verwalten und Kurzarbeit-Ersatz</b> <small>${lehrer?"neuen Check-out anlegen, Einstellungen, Klassenübersicht":"deine Auswahl für den Kurzarbeit-Ersatz"}</small></summary>${checkoutSektionHTML(co)}</details>`:"";
- return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
+function r_rE(e,t,n,i,r){const a=kwPhase(e),s=kwFarbe(e);if(!a)return"";const l=lsThemenLb(e),c=LT.schueler.length,d=(n&&n.checkouts||[]).filter(y=>Number(y.lbNum)===e),p=LT.tests.filter(y=>Number(y.lb)===e&&(r||y.status!=="entwurf"));let h;r?h=`Wissens-Checks ${t.filter(w=>l.some(v=>v.id===w.wocheId)).length} von ${l.length*c}`:h=`Wissens-Checks ${l.filter(w=>t.some(v=>v.wocheId===w.id)).length} von ${l.length}`;const k=l.map(y=>{const w=t.filter(S=>S.wocheId===y.id);if(r){const S=Q=>w.filter(C=>C.ampel===Q).length,A=w.length,_=A?`<span class="ls-bar" title="gr\xFCn ${S("gruen")} \xB7 gelb ${S("orange")} \xB7 rot ${S("rot")}">${["gruen","orange","rot"].map(Q=>S(Q)?`<i style="flex:${S(Q)};background:${LS_AMP[Q][0]}">${S(Q)}</i>`:"").join("")}</span>`:'<span class="ls-bar leer"></span>';return`<div class="ls-th"><em>${esc(y.nr)}</em><span class="ls-tn">${esc(kwKurz(y))}${(()=>{const Q=lsTopUnsicher(y.id,2);return Q.length?`<small class="ls-uns">Unsicher: ${esc(Q.map(C=>C[0]).join(" \xB7 "))}</small>`:""})()}</span>${_}<small>${A} von ${c}</small><button class="secondary kw-add" data-ls="thema" data-id="${esc(y.id)}">Wer?</button></div>`}const v=w[0];return`<div class="ls-th"><em>${esc(y.nr)}</em><span class="ls-tn">${esc(kwKurz(y))}</span>${v?`${lsAmpelPunkt(v.ampel)}<small>${v.richtig} von ${v.gesamt} richtig</small>`:'<small class="ls-offen">Wissens-Check offen</small>'}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(y.id)}">${v?"Ansehen":"Starten"}</button></div>${v&&ciVerlaufSVG(v)?`<details class="ls-verlauf"><summary>Verlauf: ${ciVerlaufTxt(v)}</summary>${ciVerlaufSVG(v)}</details>`:""}${ubZeilenHTML(ubMeinUid(),y.id)}`}).join(""),f=d.map(y=>lsCoZeile(y,n,r,i)).join("")+p.map(y=>lsTestZeile(y,r)).join("");return`<details class="ls-lb" id="ls-lb${e}" style="--c:${s.c};--bg:${s.bg};--t:${s.t}"><summary class="ls-lbk"><small>LB ${e}</small><b>${esc(a.lbTitel)}</b><span>${h}</span><i class="ls-pf" aria-hidden="true">\u25BE</i></summary>
+  <div class="ls-sek"><h4>Wissens-Checks nach Thema</h4>${k||'<div class="kw-leer">Keine Themen.</div>'}</div>
+  <div class="ls-sek"><h4>Check-outs, K-Prim-Tests und digitale Tests</h4>${f||'<div class="kw-leer">Zu diesem Lernbereich gibt es noch keinen Nachweis.</div>'}</div></details>`}
+async function renderKwCheckouts(){await kwLaden(),await ltLaden();const e=KW.co,t=isTeacher(),n=await lsCheckInsLaden();LT.ci=n;let i=[];if(t)try{i=(await getDocs(collection(db,"checkoutAbgaben"))).docs.map(d=>d.data())}catch{}LT.abgaben=i;let r=await ubLaden(),a=[];if(LT.ub=r,t){try{a=(await getDocs(collection(db,"lehrplanFortschritt"))).docs.map(d=>d.data())}catch{}}if(LT.fr={},t){const d=[1,2,3,4].flatMap(p=>lsThemenLb(p).map(h=>h.id));await Promise.all(d.map(async p=>{LT.fr[p]=await getBasischeckFragen(p)}))}const s=[1,2,3,4].map(d=>{const p=kwPhase(d),h=kwFarbe(d);return p?`<a class="ls-nav" href="#" data-ls="sprung" data-lb="${d}" style="--c:${h.c};--bg:${h.bg};--t:${h.t}"><small>LB ${d}</small><b>${esc(p.lbTitel)}</b></a>`:""}).join(""),l=[1,2,3,4].map(d=>r_rE(d,n,e,i,t)).join(""),c=e?`<details class="kw-card ls-verw"><summary><b>Check-outs verwalten und Kurzarbeit-Ersatz</b> <small>${t?"neuen Check-out anlegen, Einstellungen, Klassen\xFCbersicht":"deine Auswahl f\xFCr den Kurzarbeit-Ersatz"}</small></summary>${checkoutSektionHTML(e)}</details>`:"";return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
   ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">← Lernlandkarte</button>
-  <header class="kw-kopf"><small>LERNSTÄNDE</small><h1>${lehrer?"Lernstände der Klasse":"Meine Lernstände"}</h1><p>Geordnet nach Lernbereichen: Wissens-Checks je Thema, Check-outs, K-Prim-Tests und digitale Tests. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${lehrer?`<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button>`:""}</div></header>
-  ${co?checkoutLiveBannerHTML(co):""}
-  <div class="ls-navwrap">${nav}</div>
+  <button class="secondary" data-kw="wand">\u2190 Lernlandkarte</button>
+  <header class="kw-kopf"><small>LERNST\xC4NDE</small><h1>${t?"Lernst\xE4nde der Klasse":"Meine Lernst\xE4nde"}</h1><p>Geordnet nach Lernbereichen: Wissens-Checks je Thema, Check-outs, K-Prim-Tests und digitale Tests. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${t?'<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button>':""}</div></header>
+  ${e?checkoutLiveBannerHTML(e):""}
+  <div class="ls-navwrap">${s}</div>
   <div class="kw-aktionen" style="margin:0 0 10px"><button class="secondary" data-ls="alle" data-auf="1">Alle aufklappen</button><button class="secondary" data-ls="alle" data-auf="0">Alle zuklappen</button></div>
-  ${bloecke}
-  ${lehrer?lsUebersichtHTML(ci,co,abgaben):""}
-  ${verw}
- </div>${footer()}`;
-}
+  ${t?r_YA(n,r,a):""}
+  ${l}
+  ${t?lsUebersichtHTML(n,e,i):""}
+  ${c}
+ </div>${footer()}`}
 function ltForm(id){
  const t=id?LT.tests.find(x=>x.id===id):null;
  const lbs=[1,2,3,4].map(n=>{const p=kwPhase(n);return`<option value="${n}"${t&&Number(t.lb)===n?" selected":""}>LB ${n}${p?" · "+esc(p.lbTitel):""}</option>`}).join("");
@@ -22261,133 +20858,32 @@ document.addEventListener("click",async ev=>{
  }catch(err){console.error("Lernstände:",err);toast("Das hat nicht geklappt. Bitte erneut versuchen.")}
 });
 /* ------------------------------------------------ Lehrkräfte: Haben alle ordentlich abgeschlossen? */
-async function renderKwFortschritt(){
- if(!kwLehrer())return await renderKachelwand();
- await kwLaden();
- const [us,kf,rs,sa,lf]=await Promise.all([
-  getDocs(collection(db,"users")),getDocs(collection(db,"ppKursFortschritt")).catch(()=>({docs:[]})),
-  getDocs(collection(db,"ppRallyeStand")).catch(()=>({docs:[]})),getDocs(collection(db,"ppStundenAntworten")).catch(()=>({docs:[]})),
-  getDocs(collection(db,"lehrplanFortschritt")).catch(()=>({docs:[]}))]);
- const schueler=us.docs.map(d=>({uid:d.id,...d.data()})).filter(u=>u.status==="approved"&&istKlasse12Sb(u)).sort((a,b)=>anzeigeName(a).localeCompare(anzeigeName(b),"de"));
- const K={},R={},S={},L={};
- kf.docs.forEach(d=>{const x=d.data();K[x.modulId+"_"+x.uid]=x});rs.docs.forEach(d=>{const x=d.data();R[x.modulId+"_"+x.uid]=x});
- sa.docs.forEach(d=>{const x=d.data();S[x.modulId+"_"+x.uid]=x});lf.docs.forEach(d=>{L[d.id]=d.data()});
- const mods=PPM.liste.filter(m=>["selbstlern","rallye","einfuehrung","apt","stunde"].includes(m.modul)).sort((a,b)=>(Number(a.lb)-Number(b.lb))||(ppmSwIndex(a.start)-ppmSwIndex(b.start)));
- // Zelle: {t:Text, k:"ok"|"teil"|"flach"|"offen"}
- const zelle=(m,u)=>{
-  try{
-   if(m.modul==="selbstlern"&&String(m.kursId||"").startsWith("ea:")){const f=L[u.uid+"_"+m.kursId.slice(3)]||{},a=f.einarbeitungAufgaben;
-    if(f.einarbeitungAbgeschlossen){const q=a&&a.gesamt?a.richtig/a.gesamt:1;return q<0.6?{t:`fertig, aber nur ${a.richtig}/${a.gesamt} richtig`,k:"flach"}:{t:a&&a.gesamt?`fertig · ${a.richtig}/${a.gesamt}`:"fertig",k:"ok"}}
-    return a?{t:`begonnen · ${a.richtig}/${a.gesamt}`,k:"teil"}:{t:"offen",k:"offen"}}
-   if(m.modul==="selbstlern"){const sch=ppmKursSchritte(m).filter(x=>x.typ!=="abschluss"),f=K[m.id+"_"+u.uid],n=f?sch.filter(x=>f.erledigt&&f.erledigt[x.id]).length:0;return n===sch.length&&sch.length?{t:"fertig",k:"ok"}:(n?{t:`${n}/${sch.length} Schritte`,k:"teil"}:{t:"offen",k:"offen"})}
-   if(m.modul==="rallye"){const s=R[m.id+"_"+u.uid]||{},n=(m.stationen||[]).length,f=Object.keys(s.erg||{}).length;
-    if(!f)return{t:"offen",k:"offen"};const richtig=Object.values(s.erg||{}).filter(x=>x&&(x.richtig===true||x.ok===true)).length;
-    return f>=n&&n?{t:`alle ${n} Stationen`,k:"ok"}:{t:`${f}/${n} Stationen`,k:"teil"}}
-   if(m.modul==="einfuehrung"){const ids=m.kurse||[];if(!ids.length)return{t:"–",k:"offen"};const n=ids.filter(id=>(L[u.uid+"_"+id]||{}).einarbeitungAbgeschlossen).length;return n===ids.length?{t:"fertig",k:"ok"}:(n?{t:`${n}/${ids.length} Kurse`,k:"teil"}:{t:"offen",k:"offen"})}
-   if(m.modul==="apt"){const f=S[m.id+"_"+u.uid]||{};return f.aptBewertung?{t:"verglichen",k:"ok"}:(f.aptAbgegeben?{t:"abgegeben",k:"teil"}:(f.aptAntwort?{t:"in Arbeit",k:"teil"}:{t:"offen",k:"offen"}))}
-   if(m.modul==="stunde"){const f=S[m.id+"_"+u.uid];return f&&f.fertig?{t:"fertig",k:"ok"}:(f?{t:"in Arbeit",k:"teil"}:{t:"offen",k:"offen"})}
-  }catch(e){}
-  return{t:"–",k:"offen"};
- };
- const kopf=mods.map(m=>{const T=KW_BAUSTEINE[m.modul]||["",""];return`<th><span class="chip ${T[1]}">${esc(T[0])}</span><br><small>LB ${esc(m.lb)} · ${esc(m.titel||"")}</small></th>`}).join("");
- const zeilen=schueler.map(u=>`<tr><th scope="row">${esc(anzeigeName(u))}</th>${mods.map(m=>{const z=zelle(m,u);return`<td class="kw-z ${z.k}">${esc(z.t)}</td>`}).join("")}</tr>`).join("");
- return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
+async function renderKwFortschritt(){if(!isTeacher())return await renderKachelwand();await kwLaden();const[e,t,n,i,r]=await Promise.all([getDocs(collection(db,"users")),getDocs(collection(db,"ppKursFortschritt")).catch(()=>({docs:[]})),getDocs(collection(db,"ppRallyeStand")).catch(()=>({docs:[]})),getDocs(collection(db,"ppStundenAntworten")).catch(()=>({docs:[]})),getDocs(collection(db,"lehrplanFortschritt")).catch(()=>({docs:[]}))]),a=e.docs.map(y=>({uid:y.id,...y.data()})).filter(y=>y.status==="approved"&&istKlasse12Sb(y)).sort((y,w)=>anzeigeName(y).localeCompare(anzeigeName(w),"de")),s={},l={},c={},d={};t.docs.forEach(y=>{const w=y.data();s[w.modulId+"_"+w.uid]=w}),n.docs.forEach(y=>{const w=y.data();l[w.modulId+"_"+w.uid]=w}),i.docs.forEach(y=>{const w=y.data();c[w.modulId+"_"+w.uid]=w}),r.docs.forEach(y=>{d[y.id]=y.data()});const p=PPM.liste.filter(y=>["selbstlern","rallye","einfuehrung","apt","stunde"].includes(y.modul)).sort((y,w)=>Number(y.lb)-Number(w.lb)||ppmSwIndex(y.start)-ppmSwIndex(w.start)),h=(y,w)=>{try{if(y.modul==="selbstlern"&&String(y.kursId||"").startsWith("ea:")){const v=d[w.uid+"_"+y.kursId.slice(3)]||{},S=v.einarbeitungAufgaben;return v.einarbeitungAbgeschlossen?(S&&S.gesamt?S.richtig/S.gesamt:1)<.6?{t:`fertig, aber nur ${S.richtig}/${S.gesamt} richtig`,k:"flach"}:{t:S&&S.gesamt?`fertig \xB7 ${S.richtig}/${S.gesamt}`:"fertig",k:"ok"}:S?{t:`begonnen \xB7 ${S.richtig}/${S.gesamt}`,k:"teil"}:{t:"offen",k:"offen"}}if(y.modul==="selbstlern"){const v=ppmKursSchritte(y).filter(_=>_.typ!=="abschluss"),S=s[y.id+"_"+w.uid],A=S?v.filter(_=>S.erledigt&&S.erledigt[_.id]).length:0;return A===v.length&&v.length?{t:"fertig",k:"ok"}:A?{t:`${A}/${v.length} Schritte`,k:"teil"}:{t:"offen",k:"offen"}}if(y.modul==="rallye"){const v=l[y.id+"_"+w.uid]||{},S=(y.stationen||[]).length,A=Object.keys(v.erg||{}).length;if(!A)return{t:"offen",k:"offen"};const _=Object.values(v.erg||{}).filter(Q=>Q&&(Q.richtig===!0||Q.ok===!0)).length;return A>=S&&S?{t:`alle ${S} Stationen`,k:"ok"}:{t:`${A}/${S} Stationen`,k:"teil"}}if(y.modul==="einfuehrung"){const v=y.kurse||[];if(!v.length)return{t:"\u2013",k:"offen"};const S=v.filter(A=>(d[w.uid+"_"+A]||{}).einarbeitungAbgeschlossen).length;return S===v.length?{t:"fertig",k:"ok"}:S?{t:`${S}/${v.length} Kurse`,k:"teil"}:{t:"offen",k:"offen"}}if(y.modul==="apt"){const v=c[y.id+"_"+w.uid]||{};return v.aptBewertung?{t:"verglichen",k:"ok"}:v.aptAbgegeben?{t:"abgegeben",k:"teil"}:v.aptAntwort?{t:"in Arbeit",k:"teil"}:{t:"offen",k:"offen"}}if(y.modul==="stunde"){const v=c[y.id+"_"+w.uid];return v&&v.fertig?{t:"fertig",k:"ok"}:v?{t:"in Arbeit",k:"teil"}:{t:"offen",k:"offen"}}}catch{}return{t:"\u2013",k:"offen"}},k=p.map(y=>{const w=KW_BAUSTEINE[y.modul]||["",""];return`<th><span class="chip ${w[1]}">${esc(w[0])}</span><br><small>LB ${esc(y.lb)} \xB7 ${esc(y.titel||"")}</small></th>`}).join(""),f=a.map(y=>`<tr><th scope="row">${esc(anzeigeName(y))}</th>${p.map(w=>{const v=h(w,y);return`<td class="kw-z ${v.k}">${esc(v.t)}</td>`}).join("")}</tr>`).join("");return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
   ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">← Lernlandkarte</button>
-  <header class="kw-kopf"><small>FÜR LEHRKRÄFTE</small><h1>Erledigt? Selbstlernkurse und Lernrallyes</h1><p>Grün: ordentlich abgeschlossen. Orange: begonnen oder nur flüchtig bearbeitet (fertig, aber weniger als 60 % richtig). Grau: noch offen. Lehrkräfte-Konten erscheinen hier nicht.</p></header>
-  <div class="kw-card"><div class="kw-tabwrap">${mods.length&&schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th>${kopf}</tr></thead><tbody>${zeilen}</tbody></table>`:`<div class="kw-leer">Noch keine passenden Bausteine oder freigeschaltete Schüler:innen.</div>`}</div></div>
+  <button class="secondary" data-kw="wand">\u2190 Lernlandkarte</button>
+  <header class="kw-kopf"><small>F\xDCR LEHRKR\xC4FTE</small><h1>Erledigt? Selbstlernkurse und Lernrallyes</h1><p>Gr\xFCn: ordentlich abgeschlossen. Orange: begonnen oder nur fl\xFCchtig bearbeitet (fertig, aber weniger als 60 % richtig). Grau: noch offen. Lehrkr\xE4fte-Konten erscheinen hier nicht.</p></header>
+  <div class="kw-card"><div class="kw-tabwrap">${p.length&&a.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th>${k}</tr></thead><tbody>${f}</tbody></table>`:'<div class="kw-leer">Noch keine passenden Bausteine oder freigeschaltete Sch\xFCler:innen.</div>'}</div></div>
   <div class="kw-card"><h3>Weitere Stellen</h3><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung (alle Aufgaben, Versuche)</button><button class="secondary" data-kw="checkouts">Check-out-Ergebnisse</button></div></div>
- </div>${footer()}`;
-}
-/* ------------------------------------------------ Dateien am Thema anlegen */
-// Karteikarten-Gruppen je Thema (karteikarten/karten.js, Feld g)
-async function kwFaUebungOeffnen(uid){
- const alle=await faLaden(),u=alle.find(x=>x.id===uid);
- if(!u){toast("Diese Übung gibt es nicht mehr.");return}
- const h=await ppmFachaufsatzSeite({lb:u.lb,themen:[],uebIds:[uid]},{karten:true});
- const th=kwThemaById(u.thema);
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">ÜBUNGSAUFGABE · LB ${u.lb}</div><h2>${esc(u.titel)}</h2><p style="color:var(--muted);margin:0 0 6px">${esc(th?kwKurz(th):(u.zusatz||""))} </p>${h.replace(/<details class="fa-ue/,'<details open class="fa-ue')}<div class="form-actions"><button class="secondary" onclick="closeModal()">Schließen</button></div>`);
-}
+ </div>${footer()}`}
+async function kwFaUebungOeffnen(e){const t=await faLaden(),n=t.find(a=>a.id===e);if(!n){toast("Diese \xDCbung gibt es nicht mehr.");return}const i=await ppmFachaufsatzSeite({lb:n.lb,themen:[],uebIds:[e]},{karten:!0}),r=kwThemaById(n.thema);modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kw-links"style="margin:0 0 8px"><button class="secondary" onclick="closeModal();go('start')">\u2190 Lernlandkarte</button></div><div class="kicker">\xDCBUNGSAUFGABE \xB7 LB ${n.lb}</div><h2>${esc(n.titel)}</h2><p style="color:var(--muted);margin:0 0 6px">${esc(r?kwKurz(r):n.zusatz||"")} </p>${i.replace(/<details class="fa-ue/,'<details open class="fa-ue')}<div class="form-actions"><button class="secondary" onclick="closeModal()">Schlie\xDFen</button></div>`)}
 window.kwFaUebungOeffnen=kwFaUebungOeffnen;
 const KW_KK={t12_1_1:"Entwicklung: Anlage, Umwelt, Selbststeuerung",t12_1_2:"Psychoanalyse: Trieblehre und Instanzen",t12_1_3:"Psychoanalyse: Angst, Abwehr und Entwicklung",t12_1_4:"Psychoanalyse: Angst, Abwehr und Entwicklung",t12_1_10:"Resilienz und Vulnerabilität",t12_2_1:"Persönlichkeit und Big Five",t12_2_2:"Persönlichkeit und Big Five",t12_2_3:"Personenzentrierte Theorie (Rogers)",t12_2_4:"Personenzentrierte Theorie (Rogers)",t12_2_5:"Persönlichkeit und sozial-kognitive Theorie (Bandura)",t12_2_6:"Persönlichkeit und sozial-kognitive Theorie (Bandura)",t12_3_1:"Aufgabenbereiche der Sozialen Arbeit",t12_3_2:"Verhaltensorientiertes Konzept (VOK)",t12_3_3:"Life-Modell",t12_4_1:"Soziale Interaktion und soziale Kommunikation",t12_4_2:"Kommunikationsaxiome",t12_4_3:"Kommunikationsaxiome"};
 async function kwUbKatalog(){try{const r=await fetch("uebungsbausteine/stationen/katalog.json",{cache:"no-cache"});return r.ok?await r.json():[]}catch(e){return[]}}
 function kwWorte(t){return String(t||"").toLowerCase().replace(/[^a-zäöüß ]/g," ").split(/\s+/).filter(w=>w.length>=5)}
 // Spiele (Zuordnung, Memory, Blockfall, Lückentext, Theorievergleich) und Karteikarten für ein Thema auswählen: nach Lernbereich geordnet, ohne Termin und Dauer.
-async function kwFaPicker(kat,themaId,modus){
- const nurFa=modus==="fa",nurSp=modus==="spiele";
- const e=kwThemaById(themaId||activeKwThema);if(!e||!kwLehrer())return;
- const ph=KW_PHASEN.find(p=>p.id===e.phase);
- const [alle,vorh,ub]=await Promise.all([faLaden(),getDocs(query(collection(db,"lehrplanMaterialien"),where("wocheId","==",e.id))).then(sn=>sn.docs.map(d=>d.data())).catch(()=>[]),kwUbKatalog()]);
- const schon=new Set(vorh.filter(x=>String(x.url||"").startsWith("fa:")).map(x=>x.url.slice(3)));
- const schonUrl=new Set(vorh.map(x=>x.url));
- const kopf=g=>{const t=kwThemaById(g);return t?`Nr. ${t.nr} · ${kwKurz(t)}`:`Weiteres Thema: ${(alle.find(u=>u.thema===g)||{}).zusatz||g}`};
- const zeile=u=>`<label class="check"><input type="checkbox" class="kwFaCb" value="${esc(u.id)}"${schon.has(u.id)?" checked disabled":(u.thema===e.id&&!u.zusatz?" checked":"")}> <span><b>${esc(u.titel)}</b> <small>${[u.zusatz?esc(u.zusatz):"",schon.has(u.id)?"schon hinzugefügt":""].filter(Boolean).join(" · ")}</small></span></label>`;
- const ew=new Set(kwWorte(e.thema));
- const passt=t=>kwWorte(t).some(w=>ew.has(w));
- const ubThemen=n=>[...new Set(ub.filter(x=>(x.pfad||[])[0]==="LB "+n).map(x=>x.thema))];
- const ubZeile=x=>{const url=`uebungsbausteine/station.html?s=${x.id}`,da=schonUrl.has(url);return`<label class="check"><input type="checkbox" class="kwUbCb" value="${esc(x.id)}" data-st="${esc(x.stufe||"uebung")}"${da?" checked disabled":""}> <span><b>${esc(x.titel)}</b> <small>${[x.schwierigkeit?(x.uebungsart||"")+" · "+x.schwierigkeit:((x.pfad||[]).slice(-1)[0]||""),x.stufe==="vertiefung"?"Vertiefung":"",da?"schon hinzugefügt":""].filter(Boolean).map(esc).join(" · ")}</small></span></label>`};
- const kkGr=KW_KK[e.id];
- const kkZeile=n=>{const mit=n===ph.lbNum&&kkGr,url=`karteikarten/index.html?lb=${n}`+(mit?`&thema=${encodeURIComponent(kkGr)}`:""),t=`LB ${n} · ${mit?kkGr:"Alle Themen"} · Karteikarten`,da=schonUrl.has(url);return`<label class="check"><input type="checkbox" class="kwKkCb" value="${esc(url)}" data-t="${esc(t)}"${da?" checked disabled":""}> <span><b>${esc(t)}</b> <small>${da?"schon hinzugefügt":"Begriffe und Definitionen zum Üben"}</small></span></label>`};
- const lbGr=n=>{
-  const l=alle.filter(u=>u.lb===n),ut=ubThemen(n),lt=(KW_PHASEN.find(p=>p.lbNum===n)||{}).lbTitel||"";
-  const gr=[...new Set(l.map(u=>u.thema))].sort((a,b)=>(a===e.id?-1:b===e.id?1:0));
-  const ubHtml=ut.sort((a,b)=>(n===ph.lbNum?(passt(b)-passt(a)):0)).map(t=>`<div class="kw-fa-gr" style="--k:#8460b8"><b class="fa-lbkopf">Spiele und Übungen: ${esc(t)}</b>${ub.filter(x=>(x.pfad||[])[0]==="LB "+n&&x.thema===t).map(ubZeile).join("")}</div>`).join("");
-  return`<details class="fa-lbgr kw-fa-lb" data-lb="${n}"${n===ph.lbNum||nurFa?" open":""}><summary><b>Lernbereich ${n}</b> ${esc(lt)}<small>${[nurSp?"":l.length+" Fachaufsätze",nurFa?"":ub.filter(x=>(x.pfad||[])[0]==="LB "+n).length+" Spiele"].filter(Boolean).join(" · ")}</small></summary>
-   ${gr.length&&!nurSp?`<h4 class="kw-fa-h">Fachaufsatztraining (Abschlussprüfungen)</h4>`:""}${nurSp?"":gr.map(g=>`<div class="kw-fa-gr" style="--k:#4f9a35"><b class="fa-lbkopf">${esc(kopf(g))}</b>${l.filter(u=>u.thema===g).map(zeile).join("")}</div>`).join("")}
-   ${nurFa?"":`<div class="kw-fa-gr" style="--k:#3a7fd0"><b class="fa-lbkopf">Karteikarten</b>${kkZeile(n)}</div>`}
-   ${ut.length&&!nurFa?`<h4 class="kw-fa-h">Spiele, Zuordnungen und Vertiefungen</h4>${ubHtml}`:""}
-  </details>`;
- };
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">${esc(kwKurz(e)).toUpperCase()}</div><h2>${nurFa?"Fachaufsatztraining auswählen":nurSp?"Übungen und Spiele auswählen":"Übungen und Vertiefungen auswählen"}</h2>
-  <p style="color:var(--muted);margin:0 0 8px">${nurFa?"Kreuze die Fachaufsätze aus Abschlussprüfungen an, die bei diesem Thema erscheinen sollen. Jeder Fall hat Zeilennummern, die Themafrage und die Lösung zum Einblenden.":"Kreuze an, was bei diesem Thema erscheinen soll: "+(nurSp?"":"Fachaufsatz-Übungen aus Abschlussprüfungen, ")+"Spiele (Zuordnung, Memory, Blockfall, Lückentext, Theorievergleich) und Karteikarten."} Sortiert nach Lernbereich.</p>
-  <div class="form kw-fa-pick">${[1,2,3,4].map(lbGr).join("")}
-  ${kat?`<button type="button" class="text-button" id="kwFaDatei">Stattdessen eine eigene Datei oder einen Link hinzufügen</button>`:""}
-  <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button><button class="primary" id="kwFaSave">Hinzufügen</button></div></div>`);
- if(kat)$("kwFaDatei").onclick=()=>kwMatFormDatei(kat);
- lxPickerAufwerten();$("kwFaSave").onclick=async()=>{
-  const ids=[...document.querySelectorAll(".kwFaCb:checked:not(:disabled)")].map(c=>c.value);
-  const ubs=[...document.querySelectorAll(".kwUbCb:checked:not(:disabled)")].map(c=>({id:c.value,st:c.dataset.st}));
-  const kks=[...document.querySelectorAll(".kwKkCb:checked:not(:disabled)")].map(c=>({url:c.value,t:c.dataset.t}));
-  const n=ids.length+ubs.length+kks.length;
-  if(!n){toast("Bitte mindestens einen Eintrag ankreuzen.");return}
-  const basis={wocheId:e.id,fach:"paedagogik",dateiName:"",createdBy:currentUser.uid};
-  try{
-   // Vertiefungen landen immer bei den Vertiefungsaufgaben: Lückentext = Stufe 1, Theorievergleich = Stufe 2
-   const katUb=kt=>(kat&&/^vertiefung\d$/.test(kat))?kat:(kt.stufe==="vertiefung"?(/Lückentext/.test((kt.pfad||[]).slice(-1)[0]||"")?"vertiefung1":"vertiefung2"):"uebung");
-   const katFa=u=>(kat&&/^vertiefung\d$/.test(kat))?kat:(u.zusatz?"vertiefung3":"uebung");
-   for(const id of ids){const u=alle.find(x=>x.id===id);
-    await addDoc(collection(db,"lehrplanMaterialien"),{...basis,kategorie:katFa(u),titel:u.titel,url:"fa:"+id,createdAt:serverTimestamp()})}
-   for(const x of ubs){const kt=ub.find(y=>y.id===x.id);
-    await addDoc(collection(db,"lehrplanMaterialien"),{...basis,kategorie:katUb(kt),titel:kt.titel,url:`uebungsbausteine/station.html?s=${x.id}`,createdAt:serverTimestamp()})}
-   for(const x of kks)await addDoc(collection(db,"lehrplanMaterialien"),{...basis,kategorie:(kat&&/^vertiefung\d$/.test(kat))?kat:"uebung",titel:x.t,url:x.url,createdAt:serverTimestamp()});
-   closeModal();toast(n===1?"Hinzugefügt.":n+" Einträge hinzugefügt.");render();
-  }catch(err){console.error(err);toast("Konnte nicht gespeichert werden.")}
- };
-}
+async function kwFaPicker(e,t,n){const i=n==="fa",r=n==="spiele",a=kwThemaById(t||activeKwThema);if(!a||!isTeacher())return;const s=KW_PHASEN.find(C=>C.id===a.phase),[l,c,d]=await Promise.all([faLaden(),getDocs(query(collection(db,"lehrplanMaterialien"),where("wocheId","==",a.id))).then(C=>C.docs.map(H=>H.data())).catch(()=>[]),kwUbKatalog()]),p=new Set(c.filter(C=>String(C.url||"").startsWith("fa:")).map(C=>C.url.slice(3))),h=new Set(c.map(C=>C.url)),k=C=>{const H=kwThemaById(C);return H?`Nr. ${H.nr} \xB7 ${kwKurz(H)}`:`Weiteres Thema: ${(l.find(ie=>ie.thema===C)||{}).zusatz||C}`},f=C=>`<label class="check"><input type="checkbox" class="kwFaCb" value="${esc(C.id)}"${p.has(C.id)?" checked disabled":C.thema===a.id&&!C.zusatz?" checked":""}> <span><b>${esc(C.titel)}</b> <small>${[C.zusatz?esc(C.zusatz):"",p.has(C.id)?"schon hinzugef\xFCgt":""].filter(Boolean).join(" \xB7 ")}</small></span></label>`,y=new Set(kwWorte(a.thema)),w=C=>kwWorte(C).some(H=>y.has(H)),v=C=>[...new Set(d.filter(H=>(H.pfad||[])[0]==="LB "+C).map(H=>H.thema))],S=C=>{const H=`uebungsbausteine/station.html?s=${C.id}`,ie=h.has(H);return`<label class="check"><input type="checkbox" class="kwUbCb" value="${esc(C.id)}" data-st="${esc(C.stufe||"uebung")}"${ie?" checked disabled":""}> <span><b>${esc(C.titel)}</b> <small>${[C.schwierigkeit?(C.uebungsart||"")+" \xB7 "+C.schwierigkeit:(C.pfad||[]).slice(-1)[0]||"",C.stufe==="vertiefung"?"Vertiefung":"",ie?"schon hinzugef\xFCgt":""].filter(Boolean).map(esc).join(" \xB7 ")}</small></span></label>`},A=KW_KK[a.id],_=C=>{const H=C===s.lbNum&&A,ie=`karteikarten/index.html?lb=${C}`+(H?`&thema=${encodeURIComponent(A)}`:""),Ee=`LB ${C} \xB7 ${H?A:"Alle Themen"} \xB7 Karteikarten`,ee=h.has(ie);return`<label class="check"><input type="checkbox" class="kwKkCb" value="${esc(ie)}" data-t="${esc(Ee)}"${ee?" checked disabled":""}> <span><b>${esc(Ee)}</b> <small>${ee?"schon hinzugef\xFCgt":"Begriffe und Definitionen zum \xDCben"}</small></span></label>`},Q=C=>{const H=l.filter(ge=>ge.lb===C),ie=v(C),Ee=(KW_PHASEN.find(ge=>ge.lbNum===C)||{}).lbTitel||"",ee=[...new Set(H.map(ge=>ge.thema))].sort((ge,de)=>ge===a.id?-1:de===a.id?1:0),U=ie.sort((ge,de)=>C===s.lbNum?w(de)-w(ge):0).map(ge=>`<div class="kw-fa-gr" style="--k:#8460b8"><b class="fa-lbkopf">Spiele und \xDCbungen: ${esc(ge)}</b>${d.filter(de=>(de.pfad||[])[0]==="LB "+C&&de.thema===ge).map(S).join("")}</div>`).join("");return`<details class="fa-lbgr kw-fa-lb" data-lb="${C}"${C===s.lbNum||i?" open":""}><summary><b>Lernbereich ${C}</b> ${esc(Ee)}<small>${[r?"":H.length+" Fachaufs\xE4tze",i?"":d.filter(ge=>(ge.pfad||[])[0]==="LB "+C).length+" Spiele"].filter(Boolean).join(" \xB7 ")}</small></summary>
+   ${ee.length&&!r?'<h4 class="kw-fa-h">Fachaufsatztraining (Abschlusspr\xFCfungen)</h4>':""}${r?"":ee.map(ge=>`<div class="kw-fa-gr" style="--k:#4f9a35"><b class="fa-lbkopf">${esc(k(ge))}</b>${H.filter(de=>de.thema===ge).map(f).join("")}</div>`).join("")}
+   ${i?"":`<div class="kw-fa-gr" style="--k:#3a7fd0"><b class="fa-lbkopf">Karteikarten</b>${_(C)}</div>`}
+   ${ie.length&&!i?`<h4 class="kw-fa-h">Spiele, Zuordnungen und Vertiefungen</h4>${U}`:""}
+  </details>`};modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">${esc(kwKurz(a)).toUpperCase()}</div><h2>${i?"Fachaufsatztraining ausw\xE4hlen":r?"\xDCbungen und Spiele ausw\xE4hlen":"\xDCbungen und Vertiefungen ausw\xE4hlen"}</h2>
+  <p style="color:var(--muted);margin:0 0 8px">${i?"Kreuze die Fachaufs\xE4tze aus Abschlusspr\xFCfungen an, die bei diesem Thema erscheinen sollen. Jeder Fall hat Zeilennummern, die Themafrage und die L\xF6sung zum Einblenden.":"Kreuze an, was bei diesem Thema erscheinen soll: "+(r?"":"Fachaufsatz-\xDCbungen aus Abschlusspr\xFCfungen, ")+"Spiele (Zuordnung, Memory, Blockfall, L\xFCckentext, Theorievergleich) und Karteikarten."} Sortiert nach Lernbereich.</p>
+  <div class="form kw-fa-pick">${[1,2,3,4].map(Q).join("")}
+  ${e?'<button type="button" class="text-button" id="kwFaDatei">Stattdessen eine eigene Datei oder einen Link hinzuf\xFCgen</button>':""}
+  <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button><button class="primary" id="kwFaSave">Hinzuf\xFCgen</button></div></div>`),e&&($("kwFaDatei").onclick=()=>kwMatFormDatei(e)),lxPickerAufwerten();$("kwFaSave").onclick=async()=>{const C=[...document.querySelectorAll(".kwFaCb:checked:not(:disabled)")].map(U=>U.value),H=[...document.querySelectorAll(".kwUbCb:checked:not(:disabled)")].map(U=>({id:U.value,st:U.dataset.st})),ie=[...document.querySelectorAll(".kwKkCb:checked:not(:disabled)")].map(U=>({url:U.value,t:U.dataset.t})),Ee=C.length+H.length+ie.length;if(!Ee){toast("Bitte mindestens einen Eintrag ankreuzen.");return}const ee={wocheId:a.id,fach:"paedagogik",dateiName:"",createdBy:currentUser.uid};try{const U=de=>e&&/^vertiefung\d$/.test(e)?e:de.stufe==="vertiefung"?/Lückentext/.test((de.pfad||[]).slice(-1)[0]||"")?"vertiefung1":"vertiefung2":"uebung",ge=de=>e&&/^vertiefung\d$/.test(e)?e:de.zusatz?"vertiefung3":"uebung";for(const de of C){const fe=l.find(se=>se.id===de);await addDoc(collection(db,"lehrplanMaterialien"),{...ee,kategorie:ge(fe),titel:fe.titel,url:"fa:"+de,createdAt:serverTimestamp()})}for(const de of H){const fe=d.find(se=>se.id===de.id);await addDoc(collection(db,"lehrplanMaterialien"),{...ee,kategorie:U(fe),titel:fe.titel,url:`uebungsbausteine/station.html?s=${de.id}`,createdAt:serverTimestamp()})}for(const de of ie)await addDoc(collection(db,"lehrplanMaterialien"),{...ee,kategorie:e&&/^vertiefung\d$/.test(e)?e:"uebung",titel:de.t,url:de.url,createdAt:serverTimestamp()});closeModal(),toast(Ee===1?"Hinzugef\xFCgt.":Ee+" Eintr\xE4ge hinzugef\xFCgt."),render()}catch(U){console.error(U),toast("Konnte nicht gespeichert werden.")}}}
 window.kwFaPicker=kwFaPicker;
 // Thema → „Baustein einplanen“: alle Bausteine sofort sichtbar, ein Klick öffnet die kurze Einplanung.
 // Trainings nach Kurzarbeit/Schulaufgabe: mehrere auf einmal ankreuzen, ohne Woche und Dauer. Die Module laufen ohne Schulwoche und belegen keinen Platz im Wochenplan.
-async function kwTrainingWahl(e){
- const ph=KW_PHASEN.find(p=>p.id===e.phase)||KW_PHASEN[0];
- const infos=await Promise.all(KW_TRAININGS.map(x=>einarbeitungInfo(x).catch(()=>null)));
- const da=new Set(kwModuleThema(e.id).map(m=>m.kursId));
- const zeilen=KW_TRAININGS.map((x,i)=>{const n=infos[i];if(!n||n.entwurf)return"";const schon=da.has("ea:"+x);
-  return`<label style="display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-top:8px;cursor:${schon?"default":"pointer"}"><input type="checkbox" class="kwTrCb" value="${x}"${schon?" checked disabled":""}><span><b>${esc(n.titel)}</b>${((/^fa0/.test(x)&&KW_TR_HINT[x])||schon)?`<br><small style="color:var(--muted)">${[/^fa0/.test(x)?KW_TR_HINT[x]:"",schon?"schon eingestellt":""].filter(Boolean).join(" · ")}</small>`:""}</span></label>`}).join("");
- modal(`<button class="modal-close" onclick="closeModal()">×</button>
-  <div class="kicker">TRAININGS EINSTELLEN</div><h2>${esc(e.thema)}</h2>
-  <p style="color:var(--muted);margin:0 0 4px">Kreuze die Trainings an, die deine Schüler:innen nach der Rückgabe üben sollen.</p>
-  ${zeilen}
-  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="kwTrSave">Einstellen</button></div>`);
- $("kwTrSave").onclick=async()=>{
-  const ids=[...document.querySelectorAll(".kwTrCb:checked:not(:disabled)")].map(c=>c.value);
-  if(!ids.length){toast("Bitte mindestens ein Training ankreuzen.");return}
-  try{
-   for(const id of ids){const n=infos[KW_TRAININGS.indexOf(id)];
-    await addDoc(collection(db,"ppModule"),{modul:"selbstlern",lb:ph.lbNum,titel:n.titel,start:"",dauer:"w1",wochen:1,notiz:"",kursId:"ea:"+id,themen:[e.id],training:true,ord:KW_TRAININGS.indexOf(id)+1,createdBy:currentUser.uid,createdAt:serverTimestamp()});}
-   closeModal();await ppmLaden(true);await render();toast(ids.length===1?"Training eingestellt.":ids.length+" Trainings eingestellt.");
-  }catch(err){ppmFehler(err,"Die Trainings konnten nicht eingestellt werden");}
- };
-}
+
 async function kwBausteinWahl(themaId){
  if(!kwLehrer())return;
  const e=kwThemaById(themaId);if(!e)return;
@@ -22468,18 +20964,7 @@ async function kwModulWaehlen(themaId){
    closeModal();await ppmLaden(true);toast("Zugeordnet.");render()}catch(err){console.error(err);toast("Konnte nicht gespeichert werden.")}
  };
 }
-async function kwTrAus(id,themaId,zurueck){
- if(!kwLehrer())return;
- await ppmLaden(true);
- try{
-  if(zurueck){for(const a of (PPM.aus||[]).filter(a=>(a.themen||[]).includes(themaId)))await deleteDoc(doc(db,"ppModule",a.id))}
-  else{
-   if(!confirm("Diesen Kurs auf dieser Themenseite ausblenden?\n\nEr bleibt in der App erhalten und kann hier wieder eingeblendet werden."))return;
-   await addDoc(collection(db,"ppModule"),{modul:"trainingaus",kursId:id,themen:[themaId],lb:0,createdBy:currentUser.uid,createdAt:serverTimestamp()});
-  }
-  await ppmLaden(true);toast(zurueck?"Eingeblendet.":"Ausgeblendet.");render();
- }catch(err){console.error(err);toast("Das hat nicht geklappt.")}
-}
+
 async function kwModulEntfernen(modulId,themaId){
  if(!kwLehrer())return;
  await ppmLaden(true);
@@ -22494,36 +20979,18 @@ async function kwModulEntfernen(modulId,themaId){
  }catch(err){console.error(err);toast("Das Entfernen hat nicht geklappt.")}
 }
 /* ------------------------------------------------ Klicks */
-document.addEventListener("click",async ev=>{
- const b=ev.target.closest&&ev.target.closest("[data-kw]");if(!b||!currentUser)return;
- const a=b.dataset.kw,id=b.dataset.id;
+async function kwTrAus(id,themaId,zurueck){
+ if(!kwLehrer())return;
+ await ppmLaden(true);
  try{
-  if(a==="thema"){activeKwThema=id;go("kw-thema")}
-  else if(a==="projekt"){activeKwLb=Number(b.dataset.lb);go("kw-projekt")}
-  else if(a==="wand")go("start");
-  else if(a==="checkouts")go("lernstaende");
-  else if(a==="fortschritt")go("kw-fortschritt");
-  else if(a==="matadd")kwMatForm(b.dataset.kat);
-  else if(a==="matweg"){if(!confirm("Diese Datei wirklich entfernen?"))return;await deleteDoc(doc(db,"lehrplanMaterialien",id));toast("Entfernt.");render()}
-  else if(a==="board"){wbVonKw=true;openWhiteboard(id)}
-  else if(a==="faueb")kwFaUebungOeffnen(id);
-  else if(a==="checkin"){const e=kwThemaById(id);const fr=await getBasischeckFragen(id);if(!fr.length){toast("Für dieses Thema ist noch kein Wissens-Check hinterlegt.");return}window.__eaRueck=null;openCheckIn(id)}
-  else if(a==="alt"){const e=kwThemaById(id);e.typ==="apt"?openAptDetail(id):openWocheDetail("paedagogik",id)}
-  else if(a==="ea"){window.__eaRueck=async()=>{await render()};openEinarbeitung(id)}
-  else if(a==="modul")ppmOeffnen(id);
-  else if(a==="modulneu"){const e=kwThemaById(id),ph=KW_PHASEN.find(p=>p.id===e.phase);window.__kwThemaNeu=id;kwBausteinWahl(id)}
-  else if(a==="modulwahl")kwModulWaehlen(id);
-  else if(a==="modulweg")await kwModulEntfernen(id,b.dataset.thema);else if(a==="trweg")await kwTrAus(id,b.dataset.thema,false);else if(a==="trzurueck")await kwTrAus(null,id,true);
-  else if(a==="projektstart"){const ph=kwPhase(b.dataset.lb);const pm=PPM.liste.find(m=>m.modul==="projekt"&&Number(m.lb)===ph.lbNum&&!m.projektId);if(pm)ppmOeffnen(pm.id);else toast(kwLehrer()?"Lege das Projekt im Unterricht-Plan über das Plus-Zeichen als Modul „Projekt“ an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}
-  else if(a==="exp"){activeFach="paedagogik";openExperimentStunde(null)}
-  else if(a==="fertig"){
-   const neu=!kwErledigt(id);
-   await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${id}`),{uid:currentUser.uid,wocheId:id,fach:"paedagogik",abgeschlossen:neu,updatedAt:serverTimestamp()},{merge:true});
-   if(neu)showMotivationsBild(true,"abgabe");render();
+  if(zurueck){for(const a of (PPM.aus||[]).filter(a=>(a.themen||[]).includes(themaId)))await deleteDoc(doc(db,"ppModule",a.id))}
+  else{
+   if(!confirm("Diesen Kurs auf dieser Themenseite ausblenden?\n\nEr bleibt in der App erhalten und kann hier wieder eingeblendet werden."))return;
+   await addDoc(collection(db,"ppModule"),{modul:"trainingaus",kursId:id,themen:[themaId],lb:0,createdBy:currentUser.uid,createdAt:serverTimestamp()});
   }
- }catch(err){console.error("Kachelwand:",err);toast("Das hat nicht geklappt. Bitte erneut versuchen.")}
-});
-
+  await ppmLaden(true);toast(zurueck?"Eingeblendet.":"Ausgeblendet.");render();
+ }catch(err){console.error(err);toast("Das hat nicht geklappt.")}
+}
 /* ---- Klassenstufen-Einstellungen F12Sb ---- */
 const LX_CFG={
  app:"F12Sb",klasse:12,fpa:false,
@@ -22541,13 +21008,16 @@ const LX_CFG={
  projektStart:ph=>ph.projektStart||ph.start,
  nachbereitung:[
   {id:"ln-ka1",titel:"1. Kurzarbeit",fall:"Fall Tim",trainings:[["fa04","Struktur"],["fa05","Theorie"],["fa06","Transfer"],["fa07","Schreiben"]]},
+  {id:"ln-ka1-pm",titel:"1. Kurzarbeit (Zusatz)",fall:"Fall Paul und Max",trainings:[["f12-mp-struktur","Struktur"],["f12-mp-theorie","Theorie"],["f12-mp-transfer","Transfer"]]},
   {id:"ln-sa1",titel:"1. Schulaufgabe",fall:"",trainings:[]},
   {id:"ln-ka2",titel:"2. Kurzarbeit",fall:"",trainings:[]},
   {id:"ln-sa2",titel:"2. Schulaufgabe",fall:"",trainings:[]}
  ],
- zusatzTrainings:[{titel:"Fall Paul und Max (LB 1, psychosexuelle Entwicklung)",trainings:[["f12-mp-struktur","Struktur"],["f12-mp-theorie","Theorie"],["f12-mp-transfer","Transfer"]]}],
+ zusatzTrainings:[],
  klasseFilter:u=>istKlasse12Sb(u)
 };
+const KW_TRAININGS_ALLE=["f12-fa01","fa04","fa05","fa06","fa07","f12-mp-struktur","f12-mp-theorie","f12-mp-transfer"];
+const KW_TR_HINT={fa04:"Fall Tim",fa05:"Fall Tim",fa06:"Fall Tim",fa07:"Fall Tim","f12-mp-struktur":"Fall Paul und Max","f12-mp-theorie":"Fall Paul und Max","f12-mp-transfer":"Fall Paul und Max"};
 
 /* =========================================================
  UMBAU (Nov 2026)
@@ -23393,68 +21863,7 @@ function lxMatSort(){Object.keys(KW.mat||{}).forEach(k=>KW.mat[k].sort((a,b)=>lx
 })();
 
 
-init();
-
-
-/* =========================================================
- ROBUST INTERACTION BRIDGE – KALENDER & IMPULSE
- ========================================================= */
-(function(){
- if(window.__CampusInteractionBridgeInstalled)return;
- window.__CampusInteractionBridgeInstalled=true;
-
- document.addEventListener("click", async function(ev){
- const el=ev.target.closest("[data-calendar-add],[data-calendar-day],[data-impulse-id],[data-open-impulse]");
- if(!el)return;
-
- ev.preventDefault();
- ev.stopPropagation();
-
- try{
- if(el.hasAttribute("data-calendar-add")){
- if(typeof window.openCalendarForm==="function") window.openCalendarForm();
- else if(typeof openCalendarForm==="function") openCalendarForm();
- return;
- }
-
- if(el.hasAttribute("data-calendar-day")){
- const raw=el.getAttribute("data-calendar-day");
- const parts=raw.split("-").map(Number);
- if(parts.length===3 && typeof window.openCalendarDay==="function"){
- window.openCalendarDay(parts[0],parts[1],parts[2]);
- }
- return;
- }
-
- const impulseId=el.getAttribute("data-impulse-id")||el.getAttribute("data-open-impulse");
- if(impulseId){
- if(typeof window.openImpulse==="function") window.openImpulse(impulseId);
- else if(typeof window.openImpuls==="function") window.openImpuls(impulseId);
- else if(typeof window.openImpulseModal==="function") window.openImpulseModal(impulseId);
- else{
- const data=window._campusImpulses||window.impulses||[];
- const item=data.find(x=>String(x.id)===String(impulseId));
- if(item){
- const title=item.title||item.name||"Impuls";
- const body=item.text||item.content||item.description||"";
- if(typeof window.modal==="function") window.modal(`<button class="modal-close"onclick="closeModal()">×</button><div class="kicker">IMPULS</div><h2>${esc(title)}</h2><p>${esc(body)}</p>`);
- }
- }
- }
- }catch(err){
- console.error("Campus Interaction:",err);
- }
- },true);
-})();
-
-
-/* Compatibility aliases */
-if(typeof window.openCalendarForm!=="function" && typeof openCalendarForm==="function") window.openCalendarForm=openCalendarForm;
-if(typeof window.addCalendar!=="function" && typeof addCalendar==="function") window.addCalendar=addCalendar;
-if(typeof window.openCalendarDay!=="function" && typeof openCalendarDay==="function") window.openCalendarDay=openCalendarDay;
-if(typeof window.openImpulse!=="function" && typeof openImpulse==="function") window.openImpulse=openImpulse;
-if(typeof window.openImpuls!=="function" && typeof openImpuls==="function") window.openImpuls=openImpuls;
-if(typeof window.openImpulseModal!=="function" && typeof openImpulseModal==="function") window.openImpulseModal=openImpulseModal;
+document.addEventListener("click",async e=>{const t=e.target.closest&&e.target.closest("[data-kw]");if(!t||!currentUser)return;const n=t.dataset.kw,i=t.dataset.id;try{if(n==="thema")activeKwThema=i,go("kw-thema");else if(n==="projekt")activeKwLb=Number(t.dataset.lb),go("kw-projekt");else if(n==="wand")go("start");else if(n==="checkouts")go("lernstaende");else if(n==="fortschritt")go("kw-fortschritt");else if(n==="matadd")kwMatForm(t.dataset.kat);else if(n==="matweg"){if(!confirm("Diese Datei wirklich entfernen?"))return;await deleteDoc(doc(db,"lehrplanMaterialien",i)),toast("Entfernt."),render()}else if(n==="board")wbVonKw=!0,openWhiteboard(i);else if(n==="faueb")kwFaUebungOeffnen(i);else if(n==="ubopen")r_QA(t.dataset.url,t.dataset.w,t.dataset.t);else if(n==="checkin"){const r=kwThemaById(i);if(!(await getBasischeckFragen(i)).length){toast("F\xFCr dieses Thema ist noch kein Wissens-Check hinterlegt.");return}window.__eaRueck=null,openCheckIn(i)}else if(n==="alt")kwThemaById(i).typ==="apt"?openAptDetail(i):openWocheDetail("paedagogik",i);else if(n==="ea")window.__eaRueck=async()=>{await render()},openEinarbeitung(i);else if(n==="modul")ppmOeffnen(i);else if(n==="modulneu"){const r=kwThemaById(i),a=KW_PHASEN.find(s=>s.id===r.phase);window.__kwThemaNeu=i,kwBausteinWahl(i)}else if(n==="modulwahl")kwModulWaehlen(i);else if(n==="trweg")await kwTrAus(i,t.dataset.thema,!1);else if(n==="trzurueck")await kwTrAus(null,i,!0);else if(n==="modulweg")await kwModulEntfernen(i,t.dataset.thema);else if(n==="projektstart"){const r=kwPhase(t.dataset.lb),a=PPM.liste.find(s=>s.modul==="projekt"&&Number(s.lb)===r.lbNum&&!s.projektId);a?ppmOeffnen(a.id):toast(isTeacher()?"Lege das Projekt im Unterricht-Plan \xFCber das Plus-Zeichen als Modul \u201EProjekt\u201C an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}else if(n==="exp")activeFach="paedagogik",openExperimentStunde(null);else if(n==="fertig"){const r=!kwErledigt(i);await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${i}`),{uid:currentUser.uid,wocheId:i,fach:"paedagogik",abgeschlossen:r,updatedAt:serverTimestamp()},{merge:!0}),r&&showMotivationsBild(!0,"abgabe"),render()}}catch(r){console.error("Kachelwand:",r),toast("Das hat nicht geklappt. Bitte erneut versuchen.")}}),init(),(function(){window.__CampusInteractionBridgeInstalled||(window.__CampusInteractionBridgeInstalled=!0,document.addEventListener("click",async function(e){const t=e.target.closest("[data-calendar-add],[data-calendar-day],[data-impulse-id],[data-open-impulse]");if(t){e.preventDefault(),e.stopPropagation();try{if(t.hasAttribute("data-calendar-add")){typeof window.openCalendarForm=="function"?window.openCalendarForm():typeof openCalendarForm=="function"&&openCalendarForm();return}if(t.hasAttribute("data-calendar-day")){const r=t.getAttribute("data-calendar-day").split("-").map(Number);r.length===3&&typeof window.openCalendarDay=="function"&&window.openCalendarDay(r[0],r[1],r[2]);return}const n=t.getAttribute("data-impulse-id")||t.getAttribute("data-open-impulse");if(n)if(typeof window.openImpulse=="function")window.openImpulse(n);else if(typeof window.openImpuls=="function")window.openImpuls(n);else if(typeof window.openImpulseModal=="function")window.openImpulseModal(n);else{const r=(window._campusImpulses||window.impulses||[]).find(a=>String(a.id)===String(n));if(r){const a=r.title||r.name||"Impuls",s=r.text||r.content||r.description||"";typeof window.modal=="function"&&window.modal(`<button class="modal-close"onclick="closeModal()">\xD7</button><div class="kicker">IMPULS</div><h2>${esc(a)}</h2><p>${esc(s)}</p>`)}}}catch(n){console.error("Campus Interaction:",n)}}},!0))})(),typeof window.openCalendarForm!="function"&&typeof openCalendarForm=="function"&&(window.openCalendarForm=openCalendarForm),typeof window.addCalendar!="function"&&typeof addCalendar=="function"&&(window.addCalendar=addCalendar),typeof window.openCalendarDay!="function"&&typeof openCalendarDay=="function"&&(window.openCalendarDay=openCalendarDay),typeof window.openImpulse!="function"&&typeof openImpulse=="function"&&(window.openImpulse=openImpulse),typeof window.openImpuls!="function"&&typeof openImpuls=="function"&&(window.openImpuls=openImpuls),typeof window.openImpulseModal!="function"&&typeof openImpulseModal=="function"&&(window.openImpulseModal=openImpulseModal);
 
 
 try{ if(typeof closeResilienzModal==="function") window.closeResilienzModal=closeResilienzModal; }catch(_){}
@@ -23500,40 +21909,7 @@ const LB_ICON={
 // ---- Eigene Kopie der Lernübersicht ----
 // Die Vorlage (Whiteboard der Lehrkraft) wird einmal pro Schüler:in kopiert: Elemente, Bilder, Seitenzahl, Hintergrund.
 let lbBusy=false;
-async function lbMeineKopie(vorlageId,titel){
- if(lbBusy)return;lbBusy=true;
- try{
-  const kid=vorlageId+"_"+currentUser.uid,kref=doc(db,"ppLernuebersicht",kid);
-  let s=null;try{s=await getDoc(kref);}catch(e){console.warn("Lernübersicht lesen:",e);}
-  if(s&&s.exists()&&s.data().boardId){
-   const b=await getDoc(doc(db,"whiteboards",s.data().boardId));
-   if(b.exists()){openWhiteboard(b.id);return;}
-  }
-  const v=await getDoc(doc(db,"whiteboards",vorlageId));
-  if(!v.exists()){toast("Die Lernübersicht der Lehrkraft gibt es nicht mehr.");return;}
-  toast("Deine eigene Lernübersicht wird angelegt …");
-  const vd=v.data(),name=anzeigeName(profile,currentUser);
-  const nb=await addDoc(collection(db,"whiteboards"),{title:("Meine Lernübersicht: "+String(titel||vd.title||"").replace(/\s*–\s*Lernübersicht$/,"")).slice(0,120),description:"Eigene Kopie der Lernübersicht",art:"lern",schreibschutz:false,seiten:vd.seiten||1,bg:vd.bg||"weiss",lernVon:currentUser.uid,vorlageId,createdBy:currentUser.uid,createdByName:name,createdAt:serverTimestamp()});
-  const [its,ims]=await Promise.all([getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",vorlageId))),getDocs(query(collection(db,"whiteboardImages"),where("boardId","==",vorlageId)))]);
-  const idMap=new Map();
-  its.docs.forEach(d=>idMap.set(d.id,doc(collection(db,"whiteboardItems")).id));
-  ims.docs.forEach(d=>idMap.set(d.id,doc(collection(db,"whiteboardImages")).id));
-  const jobs=[];
-  ims.docs.forEach(d=>jobs.push(()=>setDoc(doc(db,"whiteboardImages",idMap.get(d.id)),{boardId:nb.id,data:d.data().data,authorUid:currentUser.uid,createdAt:serverTimestamp()})));
-  its.docs.forEach(d=>{
-   const x={...d.data()};
-   Object.keys(x).forEach(k=>{if(typeof x[k]==="string"&&idMap.has(x[k]))x[k]=idMap.get(x[k]);});
-   x.boardId=nb.id;x.authorUid=currentUser.uid;x.authorName=name;x.createdAt=serverTimestamp();x.updatedAt=serverTimestamp();
-   jobs.push(()=>setDoc(doc(db,"whiteboardItems",idMap.get(d.id)),x));
-  });
-  for(let i=0;i<jobs.length;i+=20)await Promise.all(jobs.slice(i,i+20).map(f=>f()));
-  await setDoc(kref,{lernId:vorlageId,uid:currentUser.uid,name,boardId:nb.id,titel:titel||"",updatedAt:serverTimestamp()});
-  openWhiteboard(nb.id);
- }catch(err){
-  console.error("Lernübersicht kopieren:",err);
-  toast(err?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln prüfen.":"Deine Lernübersicht konnte nicht angelegt werden.");
- }finally{lbBusy=false;}
-}
+async function lbMeineKopie(e,t){if(!lbBusy){lbBusy=!0;try{const n=e+"_"+currentUser.uid,i=doc(db,"ppLernuebersicht",n);let r=null;try{r=await getDoc(i)}catch(f){console.warn("Lern\xFCbersicht lesen:",f)}if(r&&r.exists()&&r.data().boardId){const f=await getDoc(doc(db,"whiteboards",r.data().boardId));if(f.exists()){openWhiteboard(f.id);return}}const a=await getDoc(doc(db,"whiteboards",e));if(!a.exists()){toast("Die Lern\xFCbersicht der Lehrkraft gibt es nicht mehr.");return}toast("Deine eigene Lern\xFCbersicht wird angelegt \u2026");const s=a.data(),l=anzeigeName(profile,currentUser),c=await addDoc(collection(db,"whiteboards"),{title:("Meine Lern\xFCbersicht: "+String(t||s.title||"").replace(/\s*–\s*Lernübersicht$/,"")).slice(0,120),description:"Eigene Kopie der Lern\xFCbersicht",art:"lern",schreibschutz:!1,seiten:s.seiten||1,bg:s.bg||"weiss",lernVon:currentUser.uid,vorlageId:e,createdBy:currentUser.uid,createdByName:l,createdAt:serverTimestamp()}),[d,p]=await Promise.all([getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",e))),getDocs(query(collection(db,"whiteboardImages"),where("boardId","==",e)))]),h=new Map;d.docs.forEach(f=>h.set(f.id,doc(collection(db,"whiteboardItems")).id)),p.docs.forEach(f=>h.set(f.id,doc(collection(db,"whiteboardImages")).id));const k=[];p.docs.forEach(f=>k.push(()=>setDoc(doc(db,"whiteboardImages",h.get(f.id)),{boardId:c.id,data:f.data().data,authorUid:currentUser.uid,createdAt:serverTimestamp()}))),d.docs.forEach(f=>{const y={...f.data()};Object.keys(y).forEach(w=>{typeof y[w]=="string"&&h.has(y[w])&&(y[w]=h.get(y[w]))}),y.boardId=c.id,y.authorUid=currentUser.uid,y.authorName=l,y.createdAt=serverTimestamp(),y.updatedAt=serverTimestamp(),k.push(()=>setDoc(doc(db,"whiteboardItems",h.get(f.id)),y))});for(let f=0;f<k.length;f+=20)await Promise.all(k.slice(f,f+20).map(y=>y()));await setDoc(i,{lernId:e,uid:currentUser.uid,name:l,boardId:c.id,titel:t||"",updatedAt:serverTimestamp()}),openWhiteboard(c.id)}catch(n){console.error("Lern\xFCbersicht kopieren:",n),toast(n?.code==="permission-denied"?"Firebase verweigert das Anlegen. Bitte die Firestore-Regeln pr\xFCfen.":"Deine Lern\xFCbersicht konnte nicht angelegt werden.")}finally{lbBusy=!1}}}
 // ---- Das Lernübersicht-Whiteboard: fünf Bausteine ----
 // ① Kernfrage · ② Kernwissen · ③ Zusammenhänge · ④ Beispiel/Fall · ⑤ Lernanker
 // Koordinaten um den Mittelpunkt (x,y). Ohne Inhalt entsteht die leere Vorlage mit Hilfetexten.
@@ -23548,34 +21924,7 @@ const LB_BEISPIEL={
  fall:"Fall (Kita): Der fünfjährige Tim will sofort weiter mit dem Bagger spielen (Es), weiß aber, dass vor dem Mittagessen aufgeräumt wird (Über-Ich).\n\nStarkes Ich: Tim vereinbart „noch fünf Minuten, dann räume ich auf“ und hält sich daran → selbstbestimmt.\n\nSchwaches Ich: Tim wird nur von dem gesteuert, was gerade am stärksten drückt (Wutanfall oder Gehorsam aus Angst) → fremdbestimmt.",
  anker:["Ich kann Ich-Stärke und Ich-Schwäche mit je zwei Merkmalen beschreiben.","Ich kann erklären, warum das Ich zwischen Es, Über-Ich und Realität vermittelt.","Ich kann an einem Beispiel zeigen, wann eine Person selbst- bzw. fremdbestimmt handelt."]
 };
-function lbLernItems(x,y,thema,bsp){
- // Freie Gestaltung: Eintrag mit eigenem "items"-Feld (Elemente mit Koordinaten um den Mittelpunkt)
- if(bsp&&typeof bsp==="object"&&Array.isArray(bsp.items))return bsp.items.map(i=>({...i,x:x+i.x,y:y+i.y,...(i.type==="line"?{x2:x+i.x2,y2:y+i.y2}:{})}));
- const L=[],f=(px,py,w,h,c,text)=>L.push({type:"frame",x:x+px,y:y+py,w,h,c,text}),
-  n=(px,py,w,h,c,text,fs)=>L.push({type:"note",x:x+px,y:y+py,w,h,c,fs:fs||18,text}),
-  t=(px,py,w,h,fs,text)=>L.push({type:"text",x:x+px,y:y+py,w,h,fs,text}),
-  s=(px,py,w,h,c,text)=>L.push({type:"shape",shape:"ellipse",x:x+px,y:y+py,w,h,c,fs:20,text}),
-  l=(x1,y1,x2,y2)=>L.push({type:"line",x:x+x1,y:y+y1,x2:x+x2,y2:y+y2,c:"grau",sw:4,arrow:true});
- const B=bsp===true?LB_BEISPIEL:(bsp||null);
- t(-1000,-700,2000,70,44,"Lernübersicht: "+(bsp?B.thema:(thema||"Thema der Stunde")));
- t(-1000,-632,2000,36,20,bsp?B.unter:"Fach · Lernbereich · Datum");
- f(-1000,-580,2000,230,"blau","① KERNFRAGE · Was ist das Thema?");
- f(-1000,-320,1180,600,"gruen","② KERNWISSEN · Was muss ich wissen?");
- f(200,-320,800,600,"orange","③ ZUSAMMENHÄNGE · Wie hängt es zusammen?");
- f(-1000,310,1180,430,"lila","④ BEISPIEL / FALL · Wie sieht es in der Praxis aus?");
- f(200,310,800,430,"tuerkis","⑤ LERNANKER · Was muss ich am Ende aus dem Kopf können?");
- n(-980,-520,1960,150,"gelb",bsp?B.frage:"Schreibe die Leitfrage der Stunde in einem Satz.",bsp?26:22);
- if(bsp){const k=B.wissen.length,w=Math.floor((1140-20*(k-1))/k);B.wissen.forEach((x,i)=>n(-980+i*(w+20),-250,w,520,x.c||"gelb",x.text,k>2?20:23));}
- else{["Kernbegriff 1: Definition in eigenen Worten","Kernbegriff 2: Merkmale, Beispiele","Kernbegriff 3: Wichtiges im Überblick"].forEach((tx,i)=>n(-980+i*390,-250,370,520,"gelb",tx,20));}
- s(490,-80,220,120,"blau",bsp?(B.mitte||"Ich"):"Thema");
- const bg=bsp?(B.begriffe||["Es","Über-Ich","Realität"]):["Begriff A","Begriff B","Begriff C"],fa=bsp?["rosa","lila","tuerkis"]:["gelb","gelb","gelb"];
- s(230,-250,230,100,fa[0],bg[0]);s(740,-250,230,100,fa[1],bg[1]);s(490,90,220,90,fa[2],bg[2]);
- l(520,-55,400,-150);l(680,-55,800,-150);l(600,40,600,90);
- n(220,195,760,80,"gelb",bsp?B.zusammen:"Zusammenhang in einem Satz: … führt zu … , weil …",19);
- n(-980,370,1140,340,"gelb",bsp?B.fall:"Ein Fall aus Kita, Schule oder Alltag: Was passiert? Wie zeigt sich das Thema? Was würde eine Fachkraft tun?",bsp?23:20);
- (bsp?B.anker.slice(0,3):["Das kann ich aus dem Kopf: …","Das kann ich aus dem Kopf: …","Das kann ich aus dem Kopf: …"]).forEach((tx,i,arr)=>{const w=Math.floor((770-10*(arr.length-1))/arr.length);n(215+i*(w+10),370,w,340,"gelb",tx,bsp?21:19);});
- return L;
-}
+function lbLernItems(e,t,n,i){if(i&&typeof i=="object"&&Array.isArray(i.items))return i.items.map(f=>({...f,x:e+f.x,y:t+f.y,...f.type==="line"?{x2:e+f.x2,y2:t+f.y2}:{}}));const r=[],a=(f,y,w,v,S,A)=>r.push({type:"frame",x:e+f,y:t+y,w,h:v,c:S,text:A}),s=(f,y,w,v,S,A,_)=>r.push({type:"note",x:e+f,y:t+y,w,h:v,c:S,fs:_||18,text:A}),l=(f,y,w,v,S,A)=>r.push({type:"text",x:e+f,y:t+y,w,h:v,fs:S,text:A}),c=(f,y,w,v,S,A)=>r.push({type:"shape",shape:"ellipse",x:e+f,y:t+y,w,h:v,c:S,fs:20,text:A}),d=(f,y,w,v)=>r.push({type:"line",x:e+f,y:t+y,x2:e+w,y2:t+v,c:"grau",sw:4,arrow:!0}),p=i===!0?LB_BEISPIEL:i||null;if(l(-1e3,-700,2e3,70,44,"Lern\xFCbersicht: "+(i?p.thema:n||"Thema der Stunde")),l(-1e3,-632,2e3,36,20,i?p.unter:"Fach \xB7 Lernbereich \xB7 Datum"),a(-1e3,-580,2e3,230,"blau","\u2460 KERNFRAGE \xB7 Was ist das Thema?"),a(-1e3,-320,1180,600,"gruen","\u2461 KERNWISSEN \xB7 Was muss ich wissen?"),a(200,-320,800,600,"orange","\u2462 ZUSAMMENH\xC4NGE \xB7 Wie h\xE4ngt es zusammen?"),a(-1e3,310,1180,430,"lila","\u2463 BEISPIEL / FALL \xB7 Wie sieht es in der Praxis aus?"),a(200,310,800,430,"tuerkis","\u2464 LERNANKER \xB7 Was muss ich am Ende aus dem Kopf k\xF6nnen?"),s(-980,-520,1960,150,"gelb",i?p.frage:"Schreibe die Leitfrage der Stunde in einem Satz.",i?26:22),i){const f=p.wissen.length,y=Math.floor((1140-20*(f-1))/f);p.wissen.forEach((w,v)=>s(-980+v*(y+20),-250,y,520,w.c||"gelb",w.text,f>2?20:23))}else["Kernbegriff 1: Definition in eigenen Worten","Kernbegriff 2: Merkmale, Beispiele","Kernbegriff 3: Wichtiges im \xDCberblick"].forEach((f,y)=>s(-980+y*390,-250,370,520,"gelb",f,20));c(490,-80,220,120,"blau",i?p.mitte||"Ich":"Thema");const h=i?p.begriffe||["Es","\xDCber-Ich","Realit\xE4t"]:["Begriff A","Begriff B","Begriff C"],k=i?["rosa","lila","tuerkis"]:["gelb","gelb","gelb"];return c(230,-250,230,100,k[0],h[0]),c(740,-250,230,100,k[1],h[1]),c(490,90,220,90,k[2],h[2]),d(520,-55,400,-150),d(680,-55,800,-150),d(600,40,600,90),s(220,195,760,80,"gelb",i?p.zusammen:"Zusammenhang in einem Satz: \u2026 f\xFChrt zu \u2026 , weil \u2026",19),s(-980,370,1140,340,"gelb",i?p.fall:"Ein Fall aus Kita, Schule oder Alltag: Was passiert? Wie zeigt sich das Thema? Was w\xFCrde eine Fachkraft tun?",i?23:20),(i?p.anker.slice(0,3):["Das kann ich aus dem Kopf: \u2026","Das kann ich aus dem Kopf: \u2026","Das kann ich aus dem Kopf: \u2026"]).forEach((f,y,w)=>{const v=Math.floor((770-10*(w.length-1))/w.length);s(215+y*(v+10),370,v,340,"gelb",f,i?21:19)}),r}
 // Vorlagen-Menü im Whiteboard (Lehrkräfte): beide Fassungen einfügen
 if(typeof WB_VORLAGEN!=="undefined"&&!WB_VORLAGEN.some(v=>v.name==="Lernübersicht (5 Bausteine)")){
  WB_VORLAGEN.unshift({name:"Beispiel: Starkes und schwaches Ich",beschr:"Ausgefüllte Lernübersicht mit fünf Bausteinen",items:(x,y)=>lbLernItems(x,y,"",true)});
@@ -23692,22 +22041,7 @@ function lbZFilter(v){
  const t=String(v||"").trim().toLowerCase();
  document.querySelectorAll("#lbZListe [data-t]").forEach(b=>{b.style.display=!t||b.dataset.t.includes(t)?"":"none";});
 }
-async function lbZuordnenSetzen(id){
- const z=window.__lbZ;if(!z||!isTeacher())return;
- const feld=lbZFeld(z.tab);
- try{
-  if(z.q==="z"){
-   await setDoc(doc(db,"lehrplanTafeln",z.ref),{[feld]:id},{merge:true});
-   PP12_CACHE.tafeln[z.ref]={...(PP12_CACHE.tafeln[z.ref]||{}),[feld]:id};
-  }else{
-   await updateDoc(doc(db,"ppModule",z.ref),{[feld]:id});await ppmLaden(true);
-  }
-  closeModal();await render();toast(id?"Zugeordnet.":"Zuordnung gelöst.");
- }catch(err){
-  console.error("Zuordnen:",err);
-  toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Das hat nicht geklappt.");
- }
-}
+async function lbZuordnenSetzen(e){const t=window.__lbZ;if(!t||!isTeacher())return;const n=lbZFeld(t.tab);try{t.q==="z"?(await setDoc(doc(db,"lehrplanTafeln",t.ref),{[n]:e},{merge:!0}),PP12_CACHE.tafeln[t.ref]={...PP12_CACHE.tafeln[t.ref]||{},[n]:e}):(await updateDoc(doc(db,"ppModule",t.ref),{[n]:e}),await ppmLaden(!0)),closeModal(),await render(),toast(e?"Zugeordnet.":"Zuordnung gel\xF6st.")}catch(i){console.error("Zuordnen:",i),toast(i?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln pr\xFCfen.":"Das hat nicht geklappt.")}}
 async function pp12LernZuordnen(d){await lbZuordnenDialog("z",d);}
 // ---- Entfernen: Roter Faden, Lernübersicht oder Whiteboard von einer Stunde bzw. einem Modul lösen ----
 // Das Whiteboard selbst bleibt erhalten (Löschen: im Menü „Tafeln“ bzw. „Whiteboards“ über den Papierkorb).
@@ -23725,72 +22059,11 @@ function lbLoesenDialog(q,ref){
   <div style="display:grid;gap:8px">${da.map(f=>`<button type="button" class="secondary" style="text-align:left" onclick="lbLoesen('${f[1]}')">✕ ${esc(f[0])} lösen</button>`).join("")}</div>
   <div class="form-actions" style="margin-top:12px"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button></div>`);
 }
-async function lbLoesen(feld){
- const z=window.__lbL;if(!z||!isTeacher())return;
- try{
-  if(z.q==="z"){
-   const upd0={[feld]:""};
-   if(feld==="boardId"){const tt=PP12_CACHE.tafeln[z.ref]||{};if(tt.rfUrl){await lbRfAlteWeg(tt);Object.assign(upd0,{rfTyp:"",rfUrl:"",rfTitel:""});}}
-   await setDoc(doc(db,"lehrplanTafeln",z.ref),upd0,{merge:true});
-   PP12_CACHE.tafeln[z.ref]={...(PP12_CACHE.tafeln[z.ref]||{}),...upd0};
-  }else{
-   const upd={[feld]:""};
-   if(feld==="tafelId"){const mm=ppmById(z.ref)||{};if(mm.rfUrl){await lbRfAlteWeg(mm);Object.assign(upd,{rfTyp:"",rfUrl:"",rfTitel:""});}}
-   await updateDoc(doc(db,"ppModule",z.ref),upd);await ppmLaden(true);
-  }
-  closeModal();await render();toast("Verbindung gelöst.");
- }catch(err){
-  console.error("Lösen:",err);
-  toast(err?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Das hat nicht geklappt.");
- }
-}
+async function lbLoesen(e){const t=window.__lbL;if(!(!t||!isTeacher()))try{if(t.q==="z"){const n={[e]:""};if(e==="boardId"){const i=PP12_CACHE.tafeln[t.ref]||{};i.rfUrl&&(await lbRfAlteWeg(i),Object.assign(n,{rfTyp:"",rfUrl:"",rfTitel:""}))}await setDoc(doc(db,"lehrplanTafeln",t.ref),n,{merge:!0}),PP12_CACHE.tafeln[t.ref]={...PP12_CACHE.tafeln[t.ref]||{},...n}}else{const n={[e]:""};if(e==="tafelId"){const i=ppmById(t.ref)||{};i.rfUrl&&(await lbRfAlteWeg(i),Object.assign(n,{rfTyp:"",rfUrl:"",rfTitel:""}))}await updateDoc(doc(db,"ppModule",t.ref),n),await ppmLaden(!0)}closeModal(),await render(),toast("Verbindung gel\xF6st.")}catch(n){console.error("L\xF6sen:",n),toast(n?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln pr\xFCfen.":"Das hat nicht geklappt.")}}
 async function pp12Loesen(d){lbLoesenDialog("z",d);}
 // ---- Lernübersichten aus der Repo-Datei bereitstellen ----
 // Datei: lernuebersichten/lernuebersichten.json (Liste von Einträgen: id, thema, unter, datum (optional, nur F12Sb), modul (optional: Modultitel oder Liste von Titeln), frage, wissen, mitte, begriffe, zusammen, fall, anker)
-async function lbBereitstellen(){
- if(!isTeacher())return;
- let liste;
- try{
-  const r=await fetch("lernuebersichten/lernuebersichten.json?v="+Date.now());
-  if(!r.ok)throw new Error("HTTP "+r.status);
-  liste=await r.json();
- }catch(err){console.error("Lernübersichten-Datei:",err);toast("Die Datei lernuebersichten/lernuebersichten.json wurde nicht gefunden.");return;}
- if(!Array.isArray(liste)||!liste.length){toast("Die Datei enthält keine Lernübersichten.");return;}
- if(!confirm(liste.length+" Lernübersicht"+(liste.length===1?"":"en")+" bereitstellen? Bereits bereitgestellte werden mit dem Inhalt aus der Datei überschrieben (deine Änderungen an diesen Whiteboards gehen verloren). Eigene Kopien der Schüler:innen bleiben unverändert."))return;
- let neu=0,akt=0,fehler=0;
- for(const e of liste){
-  try{
-   if(!e.id||!e.thema)throw new Error("id oder thema fehlt");
-   const alt=await getDocs(query(collection(db,"whiteboards"),where("lernKey","==",e.id)));
-   let bid;
-   if(alt.docs.length){
-    bid=alt.docs[0].id;
-    const its=await getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",bid)));
-    for(let i=0;i<its.docs.length;i+=20)await Promise.all(its.docs.slice(i,i+20).map(d=>deleteDoc(doc(db,"whiteboardItems",d.id))));
-    await updateDoc(doc(db,"whiteboards",bid),{title:(e.thema+" – Lernübersicht").slice(0,120)});
-    akt++;
-   }else{
-    const r=await addDoc(collection(db,"whiteboards"),{title:(e.thema+" – Lernübersicht").slice(0,120),description:"Lernübersicht: Zusammenfassung der Lehrkraft, Schüler:innen bekommen eine eigene Kopie zum Ergänzen",art:"tafel",schreibschutz:true,seiten:1,bg:"weiss",lernVorlage:true,lernKey:e.id,createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
-    bid=r.id;neu++;
-   }
-   await lbItemsSchreiben(bid,lbLernItems(0,0,e.thema,e));
-   if(e.modul&&typeof ppmLaden==="function"){
-    await ppmLaden(true);
-    const namen=(Array.isArray(e.modul)?e.modul:[e.modul]).map(x=>String(x).trim().toLowerCase());
-    for(const m of PPM.liste){
-     if(LB_AUSGENOMMEN.includes(m.modul))continue;
-     if(namen.includes(String(lbModulTitel(m)).trim().toLowerCase()))await updateDoc(doc(db,"ppModule",m.id),{lernBoardId:bid});
-    }
-   }
-   if(e.datum&&typeof PP12_CACHE!=="undefined"){
-    await setDoc(doc(db,"lehrplanTafeln",e.datum),{lernBoardId:bid},{merge:true});
-    PP12_CACHE.tafeln[e.datum]={...(PP12_CACHE.tafeln[e.datum]||{}),lernBoardId:bid};
-   }
-  }catch(err){fehler++;console.error("Lernübersicht bereitstellen:",e&&e.id,err);}
- }
- toast(`Lernübersichten: ${neu} neu, ${akt} aktualisiert${fehler?`, ${fehler} Fehler (Konsole)`:""}.`);
- await render();
-}
+async function lbBereitstellen(){if(!isTeacher())return;let e;try{const r=await fetch("lernuebersichten/lernuebersichten.json?v="+Date.now());if(!r.ok)throw new Error("HTTP "+r.status);e=await r.json()}catch(r){console.error("Lern\xFCbersichten-Datei:",r),toast("Die Datei lernuebersichten/lernuebersichten.json wurde nicht gefunden.");return}if(!Array.isArray(e)||!e.length){toast("Die Datei enth\xE4lt keine Lern\xFCbersichten.");return}if(!confirm(e.length+" Lern\xFCbersicht"+(e.length===1?"":"en")+" bereitstellen? Bereits bereitgestellte werden mit dem Inhalt aus der Datei \xFCberschrieben (deine \xC4nderungen an diesen Whiteboards gehen verloren). Eigene Kopien der Sch\xFCler:innen bleiben unver\xE4ndert."))return;let t=0,n=0,i=0;for(const r of e)try{if(!r.id||!r.thema)throw new Error("id oder thema fehlt");const a=await getDocs(query(collection(db,"whiteboards"),where("lernKey","==",r.id)));let s;if(a.docs.length){s=a.docs[0].id;const l=await getDocs(query(collection(db,"whiteboardItems"),where("boardId","==",s)));for(let c=0;c<l.docs.length;c+=20)await Promise.all(l.docs.slice(c,c+20).map(d=>deleteDoc(doc(db,"whiteboardItems",d.id))));await updateDoc(doc(db,"whiteboards",s),{title:(r.thema+" \u2013 Lern\xFCbersicht").slice(0,120)}),n++}else s=(await addDoc(collection(db,"whiteboards"),{title:(r.thema+" \u2013 Lern\xFCbersicht").slice(0,120),description:"Lern\xFCbersicht: Zusammenfassung der Lehrkraft, Sch\xFCler:innen bekommen eine eigene Kopie zum Erg\xE4nzen",art:"tafel",schreibschutz:!0,seiten:1,bg:"weiss",lernVorlage:!0,lernKey:r.id,createdBy:currentUser.uid,createdByName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()})).id,t++;if(await lbItemsSchreiben(s,lbLernItems(0,0,r.thema,r)),r.modul&&typeof ppmLaden=="function"){await ppmLaden(!0);const l=(Array.isArray(r.modul)?r.modul:[r.modul]).map(c=>String(c).trim().toLowerCase());for(const c of PPM.liste)LB_AUSGENOMMEN.includes(c.modul)||l.includes(String(lbModulTitel(c)).trim().toLowerCase())&&await updateDoc(doc(db,"ppModule",c.id),{lernBoardId:s})}r.datum&&typeof PP12_CACHE<"u"&&(await setDoc(doc(db,"lehrplanTafeln",r.datum),{lernBoardId:s},{merge:!0}),PP12_CACHE.tafeln[r.datum]={...PP12_CACHE.tafeln[r.datum]||{},lernBoardId:s})}catch(a){i++,console.error("Lern\xFCbersicht bereitstellen:",r&&r.id,a)}toast(`Lern\xFCbersichten: ${t} neu, ${n} aktualisiert${i?`, ${i} Fehler (Konsole)`:""}.`),await render()}
 // ---- Lernübersichten für ein Thema auswählen (Baustein „Lernübersicht“): legt fehlende Whiteboards automatisch aus der Datei an ----
 async function lbEintragSicher(e){
  const alt=await getDocs(query(collection(db,"whiteboards"),where("lernKey","==",e.id)));
@@ -23909,14 +22182,7 @@ function lbModulBar(m){
 // q "m" = Modul (ppModule), q "z" = Stunde im Zeitstrahl (lehrplanTafeln, Schlüssel = Datum)
 function lbRfObj(q,ref){return q==="z"?((typeof PP12_CACHE!=="undefined"&&PP12_CACHE.tafeln[ref])||{}):(ppmById(ref)||{});}
 function lbRfTitelFuer(q,ref){return q==="z"?lbStundeTitel(ref):lbModulTitel(ppmById(ref)||{});}
-async function lbRfSpeichern(q,ref,upd){
- if(q==="z"){
-  await setDoc(doc(db,"lehrplanTafeln",ref),upd,{merge:true});
-  PP12_CACHE.tafeln[ref]={...(PP12_CACHE.tafeln[ref]||{}),...upd};
- }else{
-  await updateDoc(doc(db,"ppModule",ref),upd);await ppmLaden(true);
- }
-}
+async function lbRfSpeichern(e,t,n){e==="z"?(await setDoc(doc(db,"lehrplanTafeln",t),n,{merge:!0}),PP12_CACHE.tafeln[t]={...PP12_CACHE.tafeln[t]||{},...n}):(await updateDoc(doc(db,"ppModule",t),n),await ppmLaden(!0))}
 async function lbModulTafel(m){
  if(m.rfUrl){lbRfOeffnen(m);return;}
  if(m.tafelId){openWhiteboard(m.tafelId);return;}
@@ -24067,48 +22333,4 @@ function fsLeseMitWiederholung(fn){
  };
 }
 
-window.__booted=1;if(window.__bootOk)window.__bootOk();
-
-
-/* ===== Lernlandkarte: Vollansicht =====
-   Knopf „Vollansicht“ auf der Lernlandkarte: blendet Kopfzeile und Seitenleiste aus und zeigt
-   alle Lernbereiche nebeneinander über die ganze Breite (am Beamer/Bildschirm vollständig lesbar).
-   Beenden: Knopf „Vollansicht beenden“, Esc oder Seitenwechsel. */
-(function(){
- if(window.__kwVoll)return;window.__kwVoll=1;
- const B=document.body;
- function an(){return B.classList.contains("kw-voll")}
- function knoepfe(){document.querySelectorAll(".kw-voll-btn").forEach(b=>{b.textContent=an()?"✕ Vollansicht beenden":"⛶ Vollansicht"})}
- function ende(){
-  B.classList.remove("kw-voll");
-  try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
-  knoepfe();
- }
- function start(){
-  B.classList.add("kw-voll");
-  try{const r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}
-  knoepfe();window.scrollTo(0,0);
- }
- function umschalten(){an()?ende():start()}
- window.kwVollansicht=umschalten;
- function einbauen(){
-  const root=document.getElementById("kwRoot");
-  if(!root){if(an())ende();return}
-  if(!root.querySelector(".kw-wand"))return; // nur die Lernlandkarte selbst
-  if(root.querySelector(".kw-voll-btn"))return;
-  let links=root.querySelector(".kw-links");
-  if(!links){links=document.createElement("div");links.className="kw-links";const w=root.querySelector(".kw-wand");w.parentNode.insertBefore(links,w)}
-  const b=document.createElement("button");
-  b.type="button";b.className="secondary kw-voll-btn";b.title="Alle Lernbereiche auf einen Blick, ganze Bildschirmbreite";
-  b.addEventListener("click",umschalten);
-  links.insertBefore(b,links.firstChild);knoepfe();
- }
- const ex=document.createElement("button");
- ex.type="button";ex.className="primary kw-voll-exit";ex.textContent="✕ Vollansicht beenden";ex.addEventListener("click",ende);
- B.appendChild(ex);
- document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&an())ende()});
- document.addEventListener("keydown",e=>{if(e.key==="Escape"&&an())ende()});
- let t=0;
- new MutationObserver(()=>{if(t)return;t=setTimeout(()=>{t=0;einbauen()},60)}).observe(document.getElementById("content")||B,{childList:true,subtree:true});
- einbauen();
-})();
+window.__booted=1,window.__bootOk&&window.__bootOk()
