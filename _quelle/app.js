@@ -4401,7 +4401,7 @@ async function renderStart(){
  return`${coBanner}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
 </div></section>
- ${isTeacher()?`<div class="card"style="margin-bottom:16px;border-left:4px solid #3A8FD4"><div class="kicker">VERWALTUNG</div><h3 style="margin:2px 0 10px">Für Lehrkräfte</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button><button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button></div></div>`:""}
+ ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>${isAdmin()?`<button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button>`:""}</div>`:""}
  ${pp12CssBausteine()}${naechsteStunde}
  ${await lxOffenKachel()}
   <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
@@ -22763,7 +22763,7 @@ async function renderKachelwand(){
  </div>${footer()}`;
 }
 
-/* ---------- Themenseite: immer dieselben sieben Teile in derselben Reihenfolge ---------- */
+/* ---------- Themenseite: immer dieselben acht Teile in derselben Reihenfolge ---------- */
 function lxSek(nr,titel,hint,inner,extra){
  const F=LXF[nr];
  return`<section class="lx-sek" id="lx-s${nr}" style="--k:${F.c};--kb:${F.bg}"><header class="lx-sek-k"><span class="lx-nr">${F.d||nr}</span><div><h3>${esc(titel)}</h3>${hint?`<small>${esc(hint)}</small>`:""}</div></header>${extra||""}${inner}</section>`;
@@ -23119,7 +23119,7 @@ function lxLegende(){return`<div class="lx-legende">${LX_TEILE.map(n=>`<span><i 
 async function renderLkUnterricht(){
  if(!isTeacher())return await renderKachelwand();
  await kwLaden();
- return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterricht planen","Plane Bausteine und stelle Inhalte ein: Materialien, Wissens-Checks, Selbstlernkurse, Stunden, Check-outs und Tests. Jedes Thema hat dieselben sieben Teile wie bei den Schüler:innen.")}
+ return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterricht planen","Plane Bausteine und stelle Inhalte ein: Materialien, Wissens-Checks, Selbstlernkurse, Stunden, Check-outs und Tests. Jedes Thema hat dieselben acht Teile wie bei den Schüler:innen.")}
  <div class="lx-kacheln">
   ${lxKachel("kompass","Wochenplanung","Bausteine und Stunden auf Schulwochen legen")}
   ${lxKachel("fach","Fächer und Projekte","Lernbereiche, Projekte und Bausteine ansehen")}
