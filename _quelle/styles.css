@@ -377,3 +377,11 @@ body.kw-voll .kw-th b{font-size:18px}
 .bc-ed.ci-k-frei::before{content:"Freitext · nicht bewertet"}
 .bc-ed input[type=text],.bc-ed textarea,.bc-ed select{border-color:color-mix(in srgb,var(--ci) 35%,#fff)}
 .bc-ed input:focus,.bc-ed textarea:focus,.bc-ed select:focus{outline:none;border-color:var(--ci);box-shadow:0 0 0 3px color-mix(in srgb,var(--ci) 18%,transparent)}
+
+/* Abstände: Dateizeilen untereinander, Ampelpunkte zum Text */
+.kw-dateien .kw-dz,.kw-dz{margin-bottom:8px}
+.lx-ub .kw-dz{margin:0 0 8px}
+.kw-dateien:has(>.kw-dz) .kw-dz{margin-bottom:0}
+.ls-dot{margin-right:6px;vertical-align:baseline}
+.lx-ls-z small{word-spacing:1px}
+.lx-ls-z small .ls-dot:not(:first-child){margin-left:4px}
