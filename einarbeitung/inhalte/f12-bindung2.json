@@ -1,0 +1,423 @@
+{
+ "titel": "Feinfühligkeit: Gelungene Bindung fördern",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Wie entsteht eine **sichere Bindung**? Nach Mary Ainsworth hängt sie vor allem von der **Feinfühligkeit** der Bindungsperson ab. In diesem Selbstlernkurs lernst du die **fünf Bestandteile der Feinfühligkeit** kennen, prüfst typische Fehlformen, räumst mit dem Mythos „Verwöhnen“ auf und berätst am Ende Sandra in einem anspruchsvollen Fall. Plane etwa 45 bis 60 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1 · Förderung gelungener Bindung",
+   "titel": "Lernsituation: Verwöhnt Sandra Marie zu sehr?",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Du bist mit Sandra befreundet. Sie ist Mutter der **15 Monate alten Marie**. Sandra nimmt Marie auf den Arm, wenn sie weint, und reagiert schnell auf ihre Signale. Sandras Eltern warnen sie: „Marie wird ein **tyrannisches, ungezogenes Kind**, wenn immer sofort jemand springt. Früher hat Schreienlassen auch nicht geschadet.“ Sandra selbst kommt aus einem strengen Elternhaus und kann sich nicht erinnern, je mit ihren Eltern gekuschelt zu haben. Sie ist verunsichert und bittet dich um eine fachliche Einschätzung."
+    },
+    {
+     "typ": "notizen",
+     "beschriftung": "Stimmen im Raum",
+     "items": [
+      "Sandras Mutter: „Man muss das Kind auch mal schreien lassen.“",
+      "Sandras Vater: „Kinder brauchen vor allem eine harte Hand.“",
+      "Sandra: „Ich will an Marie nicht weitergeben, was ich selbst erlebt habe.“",
+      "Marie: meistens kooperativ und zufrieden."
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Wie würdest du spontan entscheiden: Verwöhnt Sandra ihre Tochter? Schreibe 2 bis 3 Sätze mit einer ersten Begründung.",
+     "hinweis": "Du darfst deiner Intuition folgen. Am Ende des Kurses überprüfst du dein Urteil mit Fachwissen.",
+     "muster": "Erste Einschätzung: Wenn Sandra auf Maries Signale eingeht und Marie zufrieden und kooperativ wirkt, spricht viel dafür, dass Sandra nicht verwöhnt, sondern ihr Kind gut versorgt. Fachlich geht es um Feinfühligkeit: Wer die Bedürfnisse seines Kindes wahrnimmt und angemessen sowie prompt darauf reagiert, fördert eine sichere Bindung."
+    }
+   ]
+  },
+  {
+   "kicker": "Grundlagen",
+   "titel": "Feinfühligkeit: Der Schlüssel zur sicheren Bindung",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "**Feinfühligkeit** (Mary Ainsworth, 1977) ist die Fähigkeit einer Bindungsperson, die **Signale des Kindes wahrzunehmen**, **richtig zu deuten** und **angemessen und prompt** darauf zu reagieren. Sie gilt als wichtigster Faktor für die Entwicklung einer **sicheren Bindung**."
+    },
+    {
+     "typ": "schema",
+     "links": "Signal des Kindes (z. B. Weinen, Blickkontakt, Arme ausstrecken)",
+     "mitte": [
+      "Feinfühligkeit",
+      "der Bindungsperson"
+     ],
+     "rechts": "Sichere Bindung und Urvertrauen",
+     "beschriftung": "Vom Signal zur Bindung"
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Feinfühligkeit heißt **nicht**, perfekt zu sein. Es genügt, in einem guten Teil der Situationen **ausreichend feinfühlig** zu reagieren. Fehler lassen sich wieder gutmachen („Reparatur“), etwa durch Trost nach einem Missverständnis."
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Aussage beschreibt Feinfühligkeit am treffendsten?",
+     "optionen": [
+      "Die Bindungsperson erfüllt jeden Wunsch des Kindes sofort.",
+      "Die Bindungsperson nimmt kindliche Signale wahr, deutet sie richtig und reagiert angemessen und prompt.",
+      "Die Bindungsperson legt feste Zeiten für Zuwendung fest.",
+      "Die Bindungsperson fördert vor allem die Selbstständigkeit des Kindes."
+     ],
+     "richtig": 1,
+     "erklaerung": "Feinfühligkeit umfasst Wahrnehmen, richtige Deutung, Angemessenheit und Promptheit. Unbegrenzte Wunscherfüllung ist etwas anderes."
+    }
+   ]
+  },
+  {
+   "kicker": "Die fünf Bestandteile",
+   "titel": "Fünf Schritte zur feinfühligen Reaktion",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Ainsworth beschreibt Feinfühligkeit als Kette aus **fünf Bestandteilen**. Fällt ein Glied aus, wird die Reaktion unfeinfühlig."
+    },
+    {
+     "typ": "aufbau",
+     "legende": [
+      {
+       "name": "Wahrnehmen",
+       "farbe": "blau"
+      },
+      {
+       "name": "Verstehen",
+       "farbe": "gelb"
+      },
+      {
+       "name": "Handeln",
+       "farbe": "gruen"
+      }
+     ],
+     "zeilen": [
+      {
+       "label": "a",
+       "farbe": "blau",
+       "text": "**Wahrnehmen der kindlichen Signale.** Die Bindungsperson ist **zugänglich** (erreichbar) und hat eine **niedrige Wahrnehmungsschwelle**: Sie bemerkt auch feine Zeichen."
+      },
+      {
+       "label": "b",
+       "farbe": "gelb",
+       "text": "**Richtige Interpretation der Signale.** Sie deutet das Verhalten ohne Verzerrung, also nicht nach den eigenen Wünschen, Stimmungen oder Abwehrmechanismen."
+      },
+      {
+       "label": "c",
+       "farbe": "gelb",
+       "text": "**Erkennen der Bedürfnisse hinter den Signalen.** Sie kann sich in das Kind **hineinversetzen** (Empathie) und sieht die Welt aus seiner Sicht."
+      },
+      {
+       "label": "d",
+       "farbe": "gruen",
+       "text": "**Angemessenes Verhalten.** Die Reaktion passt zur Situation und zum Bedürfnis (trösten, füttern, spielen, loslassen)."
+      },
+      {
+       "label": "e",
+       "farbe": "gruen",
+       "text": "**Prompte Reaktion.** Die Reaktion erfolgt **zeitnah**, sodass das Kind sie als Folge seines Signals erlebt und **Selbstwirksamkeit** erfährt."
+      }
+     ]
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Schritte der richtigen Beschreibung zu",
+     "paare": [
+      [
+       "Wahrnehmen",
+       "Auch leise, kleine Signale werden bemerkt"
+      ],
+      [
+       "Richtig interpretieren",
+       "Unruhe wird nicht automatisch als Müdigkeit gedeutet, nur weil die Mutter es eilig hat"
+      ],
+      [
+       "Bedürfnis erkennen",
+       "Sich in die Lage des Babys hineinversetzen"
+      ],
+      [
+       "Angemessen reagieren",
+       "Trösten, wenn das Kind Trost braucht, nicht füttern oder wegspielen"
+      ],
+      [
+       "Prompt reagieren",
+       "Kind erlebt: Auf mein Signal folgt Hilfe"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Feinfühligkeit präzisieren",
+     "text": "Eine {{niedrige}} Wahrnehmungsschwelle bedeutet, dass auch feine Signale bemerkt werden. Wird die Reaktion stark verzögert, kann das Kind sie nicht mit seinem {{Signal}} verbinden. Die Reaktion muss {{angemessen}} und {{prompt}} sein. Damit erlebt das Kind {{Selbstwirksamkeit}}.",
+     "woerter": [
+      "niedrige",
+      "Signal",
+      "angemessen",
+      "prompt",
+      "Selbstwirksamkeit",
+      "hohe",
+      "Verhalten",
+      "zufällig"
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Fehlformen erkennen",
+   "titel": "Wo geht die Kette verloren?",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Unfeinfühliges Verhalten hat meist eine **Bruchstelle** in der Kette. Wenn du sie erkennst, kannst du gezielt beraten."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "An welchem Schritt scheitert die Reaktion?",
+     "hinweis": "Ordne jedes Beispiel dem Bestandteil zu, der **nicht** gelingt.",
+     "kategorien": [
+      {
+       "name": "a Wahrnehmen",
+       "items": [
+        "Eine Mutter telefoniert und bemerkt nicht, dass das Baby die Arme ausstreckt.",
+        "Ein Vater ist so müde, dass er das leise Wimmern überhört."
+       ]
+      },
+      {
+       "name": "b Richtig interpretieren",
+       "items": [
+        "Eine Mutter, die zur Arbeit muss, deutet das unruhige Verlangen nach Aufmerksamkeit als Müdigkeit und legt das Kind ins Bett.",
+        "Ein Vater sieht jedes Langsamer-Werden beim Essen als Zeichen der Sättigung, weil er in Eile ist."
+       ]
+      },
+      {
+       "name": "c Bedürfnis erkennen",
+       "items": [
+        "Eine Mutter lacht über das Weinen des Kindes und kitzelt es, ohne zu verstehen, dass es Angst hat.",
+        "Ein Vater reagiert auf sein Baby nur sachlich-distanziert, ohne emotional mitzufühlen."
+       ]
+      },
+      {
+       "name": "d Angemessen reagieren",
+       "items": [
+        "Ein Baby ist müde, die Mutter will mit ihm spielen.",
+        "Ein Kind sucht sozialen Kontakt, die Mutter füttert es stattdessen."
+       ]
+      },
+      {
+       "name": "e Prompt reagieren",
+       "items": [
+        "Die Mutter reagiert auf das Weinen angemessen, aber erst nach 20 Minuten.",
+        "Der Vater sieht die ausgestreckten Ärmchen, wartet aber „bis es sich beruhigt hat“."
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Ein Vater bemerkt, dass sein Baby unruhig quengelt. Er denkt: „Es will nur Aufmerksamkeit, ich lasse es.“ Tatsächlich hat das Baby Bauchschmerzen. Welche Aussagen sind richtig?",
+     "aussagen": [
+      {
+       "text": "Das Wahrnehmen gelingt, denn der Vater bemerkt das Quengeln.",
+       "richtig": true,
+       "erklaerung": "Das Signal wird bemerkt, Bestandteil a ist erfüllt."
+      },
+      {
+       "text": "Die Interpretation misslingt, denn er deutet das Signal falsch.",
+       "richtig": true,
+       "erklaerung": "Bauchschmerzen werden als „Aufmerksamkeit wollen“ gedeutet, die Bruchstelle liegt bei b."
+      },
+      {
+       "text": "Die Reaktion ist angemessen, weil das Baby nur lernen muss zu warten.",
+       "richtig": false,
+       "erklaerung": "Die Reaktion passt nicht zum tatsächlichen Bedürfnis (Trost, Hilfe bei Schmerzen)."
+      },
+      {
+       "text": "Die Reaktion ist prompt, weil der Vater sofort entscheidet.",
+       "richtig": false,
+       "erklaerung": "Prompt heißt zeitnah **helfen**. Eine sofortige falsche oder ausbleibende Reaktion ist nicht prompt im Sinne der Feinfühligkeit."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Vertiefen",
+   "titel": "Verwöhnen oder Feinfühligkeit? Ko-Regulation",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Viele Eltern fürchten: **Wer immer sofort reagiert, verwöhnt.** Fachlich ist das ein Missverständnis. Prompte Bedürfnisbefriedigung ist **kein Verwöhnen im negativen Sinn**. Feinfühlige Eltern fördern ihr Kind zugleich in seiner **zunehmenden Selbstständigkeit** und seiner **wachsenden Kommunikationsfähigkeit**."
+    },
+    {
+     "typ": "zitat",
+     "text": "Man kann den Säugling aus dieser Sicht heraus gar nicht verwöhnen.",
+     "quelle": "Herbst, T. (2009): Angst zu Verwöhnen"
+    },
+    {
+     "typ": "text",
+     "text": "Säuglinge können ihre Gefühle und Bedürfnisse noch nicht selbst steuern. Sie sind auf die **Ko-Regulation** durch die Bindungsperson angewiesen: Die Bindungsperson **beruhigt** und **reguliert** das Kind von außen. Durch viele solcher Erfahrungen lernt das Kind allmählich die **Selbstregulation**. Bleibt Ko-Regulation aus und wird der panisch schreiende Säugling allein gelassen, kann das die Entwicklung belasten. Der Säugling erlebt, dass seine Bedürfnisse nichts zählen. Dagegen bilden sich durch Feinfühligkeit **Urvertrauen** und **Selbstwertgefühl**."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Verwöhnen oder Feinfühligkeit?",
+     "hinweis": "Ordne die Verhaltensweisen zu.",
+     "kategorien": [
+      {
+       "name": "Feinfühligkeit",
+       "items": [
+        "Das Baby wird bei Hunger gestillt und bei Angst getröstet.",
+        "Das Kleinkind darf allein ausprobieren und bekommt Hilfe, wenn es nach ihr fragt."
+       ]
+      },
+      {
+       "name": "Überbehüten / negatives Verwöhnen",
+       "items": [
+        "Die Mutter nimmt dem Kind jede kleine Aufgabe ab, obwohl es sie selbst bewältigen könnte.",
+        "Das Kind bekommt grundsätzlich alles, was es verlangt, unabhängig von seinen Bedürfnissen."
+       ]
+      },
+      {
+       "name": "Unfeinfühlig / vernachlässigend",
+       "items": [
+        "Das Baby wird nach dem Prinzip „Schreien stärkt die Lungen“ liegen gelassen.",
+        "Die Eltern ignorieren Signale aus Prinzip, um dem Kind „Härte“ beizubringen."
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Warum bedeutet prompte Reaktion auf das Weinen eines Säuglings nicht, dass das Kind „verwöhnt“ wird?",
+     "optionen": [
+      "Weil Säuglinge noch nicht weinen, um etwas zu erreichen, sondern Bedürfnisse anzeigen und auf Ko-Regulation angewiesen sind.",
+      "Weil Weinen für Säuglinge keine Bedeutung hat.",
+      "Weil Eltern ohnehin nicht anders können.",
+      "Weil Kinder später automatisch selbstständig werden."
+     ],
+     "richtig": 0,
+     "erklaerung": "Säuglinge können sich noch nicht selbst regulieren. Prompte Reaktion gibt Sicherheit und legt die Grundlage für Selbstregulation, Urvertrauen und Selbstwert."
+    }
+   ]
+  },
+  {
+   "kicker": "Transfer",
+   "titel": "Der Brückenschlag: Feinfühligkeit und Bindungstypen",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Ainsworth fand in Beobachtungen zu Hause: Das Verhalten der Bindungsperson im ersten Lebensjahr hängt mit dem **Bindungstyp** des Kindes im Fremde-Situations-Test zusammen. Die Forschung zeigt einen Zusammenhang, aber **keinen starren Zwang**: Auch das Temperament des Kindes, Belastungen der Familie und spätere Erfahrungen wirken mit."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Welche Bindungsperson passt zu welchem Typ?",
+     "paare": [
+      [
+       "Reagiert verlässlich, einfühlsam und prompt",
+       "B sicher"
+      ],
+      [
+       "Weist Nähe häufig ab und bleibt distanziert",
+       "A unsicher-vermeidend"
+      ],
+      [
+       "Reagiert unvorhersehbar mal zugewandt, mal nicht",
+       "C unsicher-ambivalent"
+      ],
+      [
+       "Wirkt beängstigend oder selbst verängstigt",
+       "D desorganisiert"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Aussage zum Zusammenhang von Feinfühligkeit und Bindungstyp ist die fachlich vorsichtigste und richtigste?",
+     "optionen": [
+      "Mangelnde Feinfühligkeit führt zwingend zu einer unsicheren Bindung.",
+      "Feinfühligkeit begünstigt eine sichere Bindung, ist aber nicht der einzige Einflussfaktor.",
+      "Feinfühligkeit hat keinen Einfluss auf die Bindung.",
+      "Nur Mütter können feinfühlig sein."
+     ],
+     "richtig": 1,
+     "erklaerung": "Feinfühligkeit gilt als wichtigster Einflussfaktor, aber Bindung wird auch von Temperament, Lebensumständen und weiteren Bezugspersonen beeinflusst."
+    }
+   ]
+  },
+  {
+   "kicker": "Anwenden",
+   "titel": "Sandra beraten",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Auftrag",
+     "text": "Sandra hat dir von den Vorwürfen ihrer Eltern erzählt. Sie bittet dich um eine **fachlich fundierte Beratung**: Verwöhnt sie Marie? Wie soll sie mit der Kritik ihrer Eltern umgehen?"
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteilen Sie Sandras Verhalten und die Aussagen ihrer Eltern mithilfe der Bestandteile der Feinfühligkeit und der Erkenntnisse zur Ko-Regulation.",
+     "hinweis": "Schreibe 6 bis 10 Sätze: Fachbegriff nennen, erklären, an Sandra/Marie verdeutlichen.",
+     "muster": "Sandra reagiert auf Maries Signale schnell und zugewandt. Das entspricht den Bestandteilen der Feinfühligkeit nach Ainsworth: Sie nimmt Signale wahr, deutet sie richtig und reagiert angemessen und prompt. Durch die prompte Reaktion erlebt Marie Selbstwirksamkeit und entwickelt Urvertrauen. Das ist kein Verwöhnen, denn Säuglinge und Kleinkinder sind noch auf Ko-Regulation durch die Bindungsperson angewiesen und lernen so allmählich Selbstregulation. Dass Marie meistens kooperativ und zufrieden ist, bestätigt dies. Die Prophezeiung der Eltern „tyrannisches Kind“ ist nicht gedeckt. Das „Schreienlassen“ würde dagegen das Gefühl vermitteln, dass die eigenen Bedürfnisse nichts zählen. Sandra lässt sich von ihren eigenen Erfahrungen leiten, die sie nicht weitergeben will. Das zeigt Reflexionsfähigkeit. Ich würde ihr raten, ihrer inneren Stimme zu vertrauen und der Kritik mit Fachwissen zu begegnen. Zugleich sollte sie die Selbstständigkeit von Marie zunehmend fördern.",
+     "kriterien": [
+      "Ich habe mindestens drei Bestandteile der Feinfühligkeit genannt.",
+      "Ich habe Verwöhnen und Feinfühligkeit voneinander abgegrenzt.",
+      "Ich habe Ko-Regulation oder Urvertrauen erklärt.",
+      "Ich habe zu Sandras Eltern Stellung genommen.",
+      "Ich habe mein Urteil mit Beobachtungen aus dem Fall begründet."
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Entwickeln Sie einen Gesprächsimpuls, mit dem Sandra ihren Eltern fachlich erklären kann, warum sie auf Maries Weinen sofort reagiert (2 bis 3 Sätze in einfacher Sprache).",
+     "hinweis": "Schreibe so, dass die Großeltern es verstehen. Keine Fachbegriffe ohne Erklärung.",
+     "muster": "„Ein so kleines Kind kann sich noch nicht allein beruhigen. Wenn ich sofort auf Marie eingehe, hilft ihr das zu spüren: Ich werde gehört, ich bin sicher. Aus dieser Sicherheit heraus wird sie später mutig und selbstständig. Verwöhnen wäre es, ihr alles abzunehmen, das tue ich nicht.“"
+    }
+   ]
+  },
+  {
+   "kicker": "Zum Mitnehmen",
+   "titel": "Das Wichtigste auf einen Blick",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Abschlussquiz: Welche Aussagen sind richtig?",
+     "aussagen": [
+      {
+       "text": "Zur Feinfühligkeit gehört auch das Erkennen der Bedürfnisse hinter den Signalen.",
+       "richtig": true,
+       "erklaerung": "Empathie ist Bestandteil c."
+      },
+      {
+       "text": "Promptheit bedeutet, dass die Reaktion zeitnah erfolgt.",
+       "richtig": true,
+       "erklaerung": "Damit erlebt das Kind sein Signal als wirksam."
+      },
+      {
+       "text": "Ko-Regulation führt dazu, dass das Kind nie selbstständig wird.",
+       "richtig": false,
+       "erklaerung": "Gerade durch Ko-Regulation lernt das Kind die Selbstregulation."
+      },
+      {
+       "text": "Feinfühligkeit ist der wichtigste, aber nicht der einzige Einfluss auf die Bindungsqualität.",
+       "richtig": true,
+       "erklaerung": "Temperament und Lebensumstände wirken mit."
+      }
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Das nimmst du mit",
+     "text": "**Feinfühligkeit** (Ainsworth) = Signale **wahrnehmen**, **richtig interpretieren**, **Bedürfnisse erkennen**, **angemessen** und **prompt** reagieren. Sie fördert **sichere Bindung**, **Urvertrauen** und **Selbstwert**. Prompte Reaktion ist **kein Verwöhnen**, weil Kinder auf **Ko-Regulation** angewiesen sind, um **Selbstregulation** zu lernen."
+    },
+    {
+     "typ": "text",
+     "text": "**Rückblick:** Lies noch einmal deine erste Einschätzung zu Sandra und Marie. Was würdest du jetzt anders formulieren? Im Kurs **Bindungstypen und der Fremde-Situations-Test** erfährst du, wie man die Bindungsqualität misst."
+    },
+    {
+     "typ": "fussnote",
+     "text": "Quellen: Ainsworth, M. (1977): Feinfühligkeit versus Unempfindlichkeit gegenüber den Signalen des Babys. Herbst, T. (2009): Angst zu Verwöhnen. Beckh/Berkic: Stark durch Bindung, ISB München (Fall „Verwöhnt Sandra Marie zu sehr?“)."
+    }
+   ]
+  }
+ ]
+}

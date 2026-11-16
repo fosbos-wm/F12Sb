@@ -1,0 +1,471 @@
+{
+ "titel": "Bindungstypen und der Fremde-Situations-Test",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "In diesem Selbstlernkurs erforschst du, **wie Kinder Bindung zeigen** und wie man das wissenschaftlich messen kann. Du begleitest vier Kinder durch die Eingewöhnung in der Krippe, wirst selbst zur Forscherin bzw. zum Forscher im **Fremde-Situations-Test** (Ainsworth) und ordnest am Ende die **Bindungstypen A, B, C und D** fachlich sicher zu. Plane etwa 45 bis 60 Minuten ein. Alle Aufgaben geben dir sofort Rückmeldung.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1 · Bindung",
+   "titel": "Lernsituation: Vier Kinder, vier Abschiede",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In der Krippe „Sonnenkinder“ beginnt die Eingewöhnung. Vier Kinder kommen mit ihrer Bindungsperson zum ersten Mal in die Gruppe: **Anna**, **Benjamin**, **Christine** und **Daniel**. Die Erzieherin Frau Weber beobachtet, wie sich die Kinder beim Abschied und beim Wiedersehen verhalten. Sie merkt schnell: So unterschiedlich kann „Mama geht“ aussehen."
+    },
+    {
+     "typ": "notizen",
+     "beschriftung": "Frau Webers Beobachtungen am ersten Tag",
+     "items": [
+      "Anna winkt kurz und spielt weiter. Als ihre Mutter zurückkommt, schaut sie kaum auf.",
+      "Benjamin weint beim Abschied laut, lässt sich aber bald trösten und geht nach der Rückkehr der Mutter wieder spielen.",
+      "Christine klammert sich fest, ist kaum zu beruhigen und stößt ihre Mutter beim Wiedersehen weg, obwohl sie ihr gleichzeitig die Arme entgegenstreckt.",
+      "Daniel erstarrt beim Abschied, läuft zur Tür, bleibt abrupt stehen und wirkt ratlos."
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Stelle Vermutungen an: Woran könnte es liegen, dass sich die vier Kinder so unterschiedlich verhalten? Schreibe 2 bis 3 Sätze.",
+     "hinweis": "Es geht noch nicht um die richtige Fachsprache. Sammle deine Ideen. Am Ende des Kurses vergleichst du sie mit dem, was du gelernt hast.",
+     "muster": "Mögliche Vermutungen: Die Kinder haben bisher unterschiedliche Erfahrungen damit gemacht, wie ihre Bezugspersonen auf ihre Bedürfnisse reagieren. Ein Kind, das sich getröstet fühlt, kann besser mit dem Abschied umgehen. Ein Kind, das oft abgewiesen wurde, zeigt vielleicht kaum Gefühle. Wenn das Verhalten der Bindungsperson unberechenbar oder beängstigend ist, reagiert das Kind verunsichert oder widersprüchlich. Fachlich gesprochen geht es um die Qualität der Bindung."
+    }
+   ]
+  },
+  {
+   "kicker": "Grundlagen",
+   "titel": "Was ist Bindung? Das Fundament",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "**Bindung** bezeichnet ein emotionales Band zwischen einem Kind und einer vertrauten Person, der **Bindungsperson**. Das Kind sucht bei ihr **Nähe, Schutz und Trost**, besonders wenn es Angst hat, müde ist oder sich unwohl fühlt. Nach John Bowlby ist das Bindungsverhalten ein **angeborenes Verhaltenssystem**: Es sichert das Überleben, weil das Kind Schutz erhält."
+    },
+    {
+     "typ": "text",
+     "text": "Bindung und **Erkundung** gehören zusammen. Hat das Kind eine **sichere Basis**, traut es sich, die Umwelt zu erforschen. Wird es unsicher, kehrt es zur Bindungsperson zurück und „tankt“ Sicherheit auf."
+    },
+    {
+     "typ": "merke",
+     "text": "**Bindungssystem:** wird bei Angst, Stress oder Trennung aktiviert, das Kind sucht Nähe.\n**Explorationssystem:** wird bei Sicherheit aktiviert, das Kind erkundet die Umwelt.\nBeide Systeme sind wie eine Wippe: Ist das eine aktiv, tritt das andere zurück."
+    },
+    {
+     "typ": "mc",
+     "frage": "Ein Kleinkind spielt konzentriert in der Bauecke. Plötzlich fällt ein Regal um, es erschrickt und läuft weinend zur Erzieherin. Welches Verhaltenssystem wird jetzt aktiviert?",
+     "optionen": [
+      "Das Explorationssystem, weil das Kind sich bewegt.",
+      "Das Bindungssystem, weil das Kind durch Angst Nähe und Schutz sucht.",
+      "Keines von beiden, weil das Kind nur reagiert.",
+      "Beide gleich stark, weil das Kind weint und läuft."
+     ],
+     "richtig": 1,
+     "erklaerung": "Der Schreck löst Angst aus. Dadurch wird das Bindungssystem aktiviert und das Kind sucht Nähe und Trost. Erst wenn es sich sicher fühlt, tritt das Explorationssystem wieder in den Vordergrund."
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Begriffe sichern",
+     "text": "Bindung ist ein {{emotionales}} Band zwischen Kind und {{Bindungsperson}}. Bei Angst sucht das Kind {{Nähe}} und Schutz. Gibt die Bindungsperson Sicherheit, dient sie als {{sichere}} Basis für die Erkundung.",
+     "woerter": [
+      "emotionales",
+      "Bindungsperson",
+      "Nähe",
+      "sichere",
+      "Distanz",
+      "rechtliches",
+      "Fremde"
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Forschung",
+   "titel": "Der Fremde-Situations-Test (Ainsworth)",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Mary Ainsworth wollte Bindungsqualität **messbar** machen. Sie entwickelte (1960er/70er Jahre, Beschreibung 1978) den **Fremde-Situations-Test**. Er prüft, wie ein Kind im Alter von etwa **12 bis 24 Monaten** auf **kurze Trennungen** von der Bindungsperson und auf eine **fremde Person** in einem unbekannten Raum reagiert. Der Test besteht aus **acht Episoden**, die jeweils etwa drei Minuten dauern."
+    },
+    {
+     "typ": "aufbau",
+     "legende": [
+      {
+       "name": "Kind mit Bindungsperson",
+       "farbe": "gruen"
+      },
+      {
+       "name": "Kind mit Fremder",
+       "farbe": "gelb"
+      },
+      {
+       "name": "Kind allein",
+       "farbe": "rot"
+      }
+     ],
+     "zeilen": [
+      {
+       "label": "1",
+       "farbe": "gruen",
+       "text": "Bindungsperson und Kind werden in den Spielraum geführt."
+      },
+      {
+       "label": "2",
+       "farbe": "gruen",
+       "text": "Das Kind erkundet den Raum, die Bindungsperson ist anwesend und passiv."
+      },
+      {
+       "label": "3",
+       "farbe": "gelb",
+       "text": "Eine fremde Person kommt hinzu und nähert sich dem Kind."
+      },
+      {
+       "label": "4",
+       "farbe": "gelb",
+       "text": "**1. Trennung:** Die Bindungsperson geht, das Kind bleibt mit der Fremden."
+      },
+      {
+       "label": "5",
+       "farbe": "gruen",
+       "text": "**1. Wiedervereinigung:** Die Bindungsperson kommt zurück, die Fremde geht."
+      },
+      {
+       "label": "6",
+       "farbe": "rot",
+       "text": "**2. Trennung:** Auch die Bindungsperson geht, das Kind ist allein."
+      },
+      {
+       "label": "7",
+       "farbe": "gelb",
+       "text": "Die Fremde kommt zurück und versucht das Kind zu trösten."
+      },
+      {
+       "label": "8",
+       "farbe": "gruen",
+       "text": "**2. Wiedervereinigung:** Die Bindungsperson kommt zurück."
+      }
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Worauf achten die Forschenden?",
+     "text": "Entscheidend ist **nicht**, ob das Kind weint. Ausgewertet wird vor allem das Verhalten bei den **Wiedervereinigungen** (Episoden 5 und 8): Sucht das Kind Nähe? Lässt es sich trösten? Kehrt es danach zum Spiel zurück? Dazu kommen Protest bei der Trennung, Erkundung und Verhalten gegenüber der Fremden."
+    },
+    {
+     "typ": "reihenfolge",
+     "titel": "Bringe den Ablauf in die richtige Reihenfolge",
+     "hinweis": "Ziehe die Schritte in die Reihenfolge des Tests.",
+     "absaetze": [
+      "Kind und Bindungsperson erkunden gemeinsam den Raum.",
+      "Eine fremde Person kommt hinzu.",
+      "Die Bindungsperson verlässt den Raum (erste Trennung).",
+      "Die Bindungsperson kommt zurück (erste Wiedervereinigung).",
+      "Das Kind bleibt kurz ganz allein (zweite Trennung).",
+      "Die Bindungsperson kehrt zurück (zweite Wiedervereinigung)."
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Der Fremde-Situations-Test von Ainsworth …",
+     "aussagen": [
+      {
+       "text": "… untersucht Kinder im Alter von etwa 12 bis 24 Monaten.",
+       "richtig": true,
+       "erklaerung": "In diesem Alter ist das Bindungsverhalten deutlich ausgeprägt und gut beobachtbar."
+      },
+      {
+       "text": "… misst Bindungsqualität vor allem daran, wie lange ein Kind weint.",
+       "richtig": false,
+       "erklaerung": "Wichtiger ist das Verhalten bei der Wiedervereinigung: Nähe suchen, Trost annehmen, zurück zum Spiel."
+      },
+      {
+       "text": "… besteht aus Episoden mit Trennungen und Wiedervereinigungen in einer unbekannten Umgebung.",
+       "richtig": true,
+       "erklaerung": "Gerade die leichte Belastung durch Fremdheit und Trennung aktiviert das Bindungssystem."
+      },
+      {
+       "text": "… ist ein Intelligenztest für Kleinkinder.",
+       "richtig": false,
+       "erklaerung": "Der Test erfasst die Qualität der Bindung, nicht die Intelligenz."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Bindungstypen",
+   "titel": "Die vier Bindungstypen im Überblick",
+   "bloecke": [
+    {
+     "typ": "text",
+     "text": "Aus den Beobachtungen entstehen **Bindungstypen**. Ainsworth beschrieb drei (A, B, C), später ergänzten Main und Solomon einen vierten Typ (D). Jeder Typ ist eine **Anpassung des Kindes** an das Verhalten seiner Bindungsperson: Das Kind lernt, wie es am besten mit seinen Bedürfnissen umgeht."
+    },
+    {
+     "typ": "aufbau",
+     "legende": [
+      {
+       "name": "A unsicher-vermeidend",
+       "farbe": "gelb"
+      },
+      {
+       "name": "B sicher",
+       "farbe": "gruen"
+      },
+      {
+       "name": "C unsicher-ambivalent",
+       "farbe": "pfirsich"
+      },
+      {
+       "name": "D desorganisiert",
+       "farbe": "rot"
+      }
+     ],
+     "zeilen": [
+      {
+       "label": "A",
+       "farbe": "gelb",
+       "text": "**Unsicher-vermeidend (Anna).** Kind: zeigt bei der Trennung kaum Kummer, spielt weiter, **meidet** bei der Wiedervereinigung den Kontakt und wendet sich ab. Bindungsperson: reagiert eher **zurückweisend**, unterkühlt oder abweisend auf Nähebedürfnisse."
+      },
+      {
+       "label": "B",
+       "farbe": "gruen",
+       "text": "**Sicher (Benjamin).** Kind: protestiert bei der Trennung, **sucht** bei der Rückkehr Nähe, lässt sich **rasch trösten** und kehrt zum Spiel zurück. Bindungsperson: **feinfühlig**, verlässlich, zugewandt."
+      },
+      {
+       "label": "C",
+       "farbe": "pfirsich",
+       "text": "**Unsicher-ambivalent (Christine).** Kind: ist bei der Trennung sehr belastet, **klammert**, ist bei der Rückkehr zugleich nähesuchend und **wütend-abweisend**, schwer zu beruhigen. Bindungsperson: **unvorhersehbar** (mal zugewandt, mal unaufmerksam), also inkonsistent."
+      },
+      {
+       "label": "D",
+       "farbe": "rot",
+       "text": "**Desorganisiert (Daniel).** Kind: zeigt **widersprüchliche, unlogische** Verhaltensweisen, erstarrt, wirkt ängstlich oder verwirrt, keine erkennbare Strategie. Bindungsperson: wirkt oft **ängstigend oder selbst verängstigt**, zum Beispiel bei Misshandlung oder eigener unverarbeiteter Traumatisierung."
+      }
+     ]
+    },
+    {
+     "typ": "merke",
+     "text": "Die Bindungstypen beschreiben die **Beziehung** zwischen Kind und Bindungsperson, **nicht** den Charakter des Kindes. Bei einer anderen Bindungsperson kann sich ein Kind anders verhalten."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne das Kindverhalten dem Typ zu",
+     "paare": [
+      [
+       "Spielt bei der Trennung weiter und ignoriert die Rückkehr",
+       "A unsicher-vermeidend"
+      ],
+      [
+       "Weint, sucht Nähe, beruhigt sich schnell und spielt weiter",
+       "B sicher"
+      ],
+      [
+       "Klammert und stößt gleichzeitig weg, kaum zu beruhigen",
+       "C unsicher-ambivalent"
+      ],
+      [
+       "Erstarrt, widersprüchliche Bewegungen, wirkt verwirrt",
+       "D desorganisiert"
+      ]
+     ]
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne das Verhalten der Bindungsperson dem Typ zu",
+     "paare": [
+      [
+       "Feinfühlig und verlässlich",
+       "B sicher"
+      ],
+      [
+       "Weist Nähewünsche des Kindes oft zurück",
+       "A unsicher-vermeidend"
+      ],
+      [
+       "Mal zugewandt, mal nicht erreichbar",
+       "C unsicher-ambivalent"
+      ],
+      [
+       "Löst durch eigenes Verhalten Angst aus",
+       "D desorganisiert"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Üben",
+   "titel": "Du bist die Forscherin / der Forscher",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Videoprotokoll",
+     "text": "Du wertest den Fremde-Situations-Test von vier Kindern aus. Hier siehst du jeweils die Beobachtung in **Episode 5** (erste Wiedervereinigung):"
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Welcher Bindungstyp ist gemeint?",
+     "hinweis": "Ordne jede Beobachtung dem passenden Typ zu.",
+     "kategorien": [
+      {
+       "name": "A unsicher-vermeidend",
+       "items": [
+        "Lena blickt kurz auf, wendet sich ab und spielt mit dem Bagger weiter.",
+        "Tom hält Abstand zur Mutter, nimmt ihren Arm nicht an."
+       ]
+      },
+      {
+       "name": "B sicher",
+       "items": [
+        "Mia läuft zur Mutter, lässt sich umarmen und baut danach weiter.",
+        "Jan lächelt, streckt die Arme aus und beruhigt sich in wenigen Sekunden."
+       ]
+      },
+      {
+       "name": "C unsicher-ambivalent",
+       "items": [
+        "Nele schreit, klammert sich fest und schlägt dabei nach der Mutter.",
+        "Paul weint weiter, lässt sich lange nicht trösten und bleibt am Bein der Mutter."
+       ]
+      },
+      {
+       "name": "D desorganisiert",
+       "items": [
+        "Ben läuft zur Mutter, bleibt kurz vor ihr stehen, dreht sich weg und erstarrt.",
+        "Eva nähert sich mit abgewandtem Kopf und lässt sich dann zu Boden fallen."
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Ein Kind weint bei der ersten Trennung heftig, läuft bei der Rückkehr zur Mutter, lässt sich im Arm beruhigen und spielt dann wieder. Welche Schlussfolgerung ist fachlich richtig?",
+     "optionen": [
+      "Das Kind ist unsicher gebunden, weil es geweint hat.",
+      "Das Kind ist sicher gebunden, weil es Nähe sucht, Trost annimmt und wieder erkundet.",
+      "Das Kind ist desorganisiert, weil sein Verhalten wechselt.",
+      "Man kann nichts sagen, weil nur das Weinen zählt."
+     ],
+     "richtig": 1,
+     "erklaerung": "Sicher gebundene Kinder dürfen Kummer zeigen. Entscheidend sind Nähe suchen, Trost annehmen und die Rückkehr zur Erkundung."
+    },
+    {
+     "typ": "mc",
+     "frage": "Ein Kind zeigt bei der Trennung keinerlei Kummer und ignoriert bei der Rückkehr die Mutter. Welche Deutung ist die fundierteste?",
+     "optionen": [
+      "Das Kind ist besonders selbstständig und deshalb sicher gebunden.",
+      "Das Kind ist unsicher-vermeidend gebunden, es hat gelernt, Nähewünsche zu unterdrücken.",
+      "Das Kind ist unsicher-ambivalent gebunden.",
+      "Das Kind ist desorganisiert gebunden."
+     ],
+     "richtig": 1,
+     "erklaerung": "Scheinbare Gelassenheit kann ein Schutz sein. Wenn Nähewünsche oft zurückgewiesen wurden, lernt das Kind, sie zu unterdrücken. Das ist typisch für A."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu den Bindungstypen sind richtig?",
+     "aussagen": [
+      {
+       "text": "Der sichere Typ B zeigt bei der Trennung nie Kummer.",
+       "richtig": false,
+       "erklaerung": "Auch sicher gebundene Kinder protestieren. Der Unterschied liegt im Trost und in der Rückkehr zum Spiel."
+      },
+      {
+       "text": "Beim unsicher-ambivalenten Typ C zeigt das Kind bei der Wiedervereinigung Nähewunsch und Ärger zugleich.",
+       "richtig": true,
+       "erklaerung": "Das Kind ist unsicher, ob die Bindungsperson verlässlich ist, und reagiert widersprüchlich."
+      },
+      {
+       "text": "Beim Typ D ist das Verhalten des Kindes widersprüchlich, ohne erkennbare Strategie.",
+       "richtig": true,
+       "erklaerung": "Das Kind kann weder Nähe suchen noch ausweichen, wenn die Bindungsperson zugleich Quelle von Schutz und Angst ist."
+      },
+      {
+       "text": "Ein Kind hat bei allen Bindungspersonen immer denselben Bindungstyp.",
+       "richtig": false,
+       "erklaerung": "Bindungstypen beschreiben die Beziehung zu einer bestimmten Person und können sich unterscheiden."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kicker": "Anwenden",
+   "titel": "Zurück in die Krippe: Anna, Benjamin, Christine, Daniel",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Auftrag",
+     "text": "Frau Weber spricht mit dem Team: „Wie gehen wir bei der Eingewöhnung mit den vier Kindern um?“ Du berätst das Team fachlich."
+    },
+    {
+     "typ": "frei",
+     "frage": "Ordnen Sie die vier Kinder Anna, Benjamin, Christine und Daniel anhand der Beobachtungen aus der Lernsituation einem Bindungstyp zu und begründen Sie jede Zuordnung.",
+     "hinweis": "Schreibe zu jedem Kind 1 bis 2 Sätze: Typ nennen, Merkmal des Kindverhaltens belegen.",
+     "muster": "Anna zeigt kaum Kummer beim Abschied und beachtet ihre Mutter bei der Rückkehr kaum. Das ist typisch für den **unsicher-vermeidenden** Typ A, sie unterdrückt ihr Nähebedürfnis. Benjamin weint, lässt sich aber trösten und spielt danach weiter, er ist **sicher gebunden** (Typ B). Christine klammert und stößt ihre Mutter zugleich weg, sie ist schwer zu beruhigen: **unsicher-ambivalent** (Typ C). Daniel erstarrt und wirkt ratlos, sein Verhalten ist widersprüchlich: **desorganisiert** (Typ D).",
+     "kriterien": [
+      "Ich habe alle vier Kinder einem Typ zugeordnet.",
+      "Ich habe zu jedem Kind ein konkretes Merkmal aus der Beobachtung genannt.",
+      "Ich habe die Fachbegriffe richtig verwendet.",
+      "Ich habe das Verhalten bei Trennung und Wiedervereinigung beachtet."
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteilen Sie: Frau Weber sagt: „Anna ist ja ein ganz pflegeleichtes, selbstständiges Kind, um die müssen wir uns nicht kümmern.“",
+     "hinweis": "Argumentiere mit 3 bis 5 Sätzen. Nimm Stellung und begründe mit dem Bindungstyp.",
+     "muster": "Die Aussage ist problematisch. Annas Gelassenheit beim Abschied bedeutet nicht Selbstständigkeit, sondern deutet auf eine unsicher-vermeidende Bindung hin: Sie hat vermutlich gelernt, ihre Nähewünsche nicht zu zeigen, weil sie zurückgewiesen wurden. Innerlich kann sie dennoch stark gestresst sein. Gerade Anna braucht verlässliche, zugewandte Erzieherinnen, die ihre feinen Signale wahrnehmen. Man sollte also gerade nicht auf Anna verzichten, sondern ihr eine sichere Beziehung anbieten."
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Konsequenz für die Eingewöhnung ist am besten begründet?",
+     "optionen": [
+      "Alle vier Kinder bekommen genau denselben Ablauf, damit es gerecht ist.",
+      "Daniel wird besonders behutsam begleitet, die Erzieherin bietet eine verlässliche, ruhige Beziehung an.",
+      "Christine wird sofort ohne Bindungsperson in der Gruppe gelassen, damit sie lernt, sich zu lösen.",
+      "Anna wird in Ruhe gelassen, weil sie keinen Kummer zeigt."
+     ],
+     "richtig": 1,
+     "erklaerung": "Eine verlässliche, ruhige und vorhersehbare Beziehung wirkt besonders bei desorganisierten Kindern stabilisierend. Eine abrupte Trennung (C) oder Ignorieren (A) verstärkt die Unsicherheit."
+    }
+   ]
+  },
+  {
+   "kicker": "Zum Mitnehmen",
+   "titel": "Das Wichtigste auf einen Blick",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Wiederhole: Begriff und Erklärung",
+     "paare": [
+      [
+       "Sichere Basis",
+       "Bindungsperson, von der aus das Kind die Welt erkundet"
+      ],
+      [
+       "Fremde-Situations-Test",
+       "Standardisierte Beobachtung von Trennung und Wiedervereinigung (Ainsworth)"
+      ],
+      [
+       "Wiedervereinigung",
+       "Besonders aussagekräftige Episode für die Bindungsqualität"
+      ],
+      [
+       "Desorganisierte Bindung",
+       "Widersprüchliches Verhalten, oft bei ängstigender Bindungsperson"
+      ]
+     ]
+    },
+    {
+     "typ": "merke",
+     "label": "Das nimmst du mit",
+     "text": "**Bindung** ist ein emotionales Band, das dem Kind Schutz und eine **sichere Basis** gibt. Mit dem **Fremde-Situations-Test** (Ainsworth) untersucht man die Bindungsqualität bei 12 bis 24 Monate alten Kindern. Es gibt vier Typen: **A unsicher-vermeidend**, **B sicher**, **C unsicher-ambivalent**, **D desorganisiert**. Entscheidend ist das Verhalten bei der **Wiedervereinigung** und die **Feinfühligkeit** der Bindungsperson."
+    },
+    {
+     "typ": "text",
+     "text": "**Ausblick:** Warum sich Bindungspersonen so unterschiedlich verhalten und wie man gelungene Bindung fördern kann, erfährst du im Kurs **Feinfühligkeit: Gelungene Bindung fördern**."
+    },
+    {
+     "typ": "fussnote",
+     "text": "Quellen: Ainsworth, M. et al. (1978): Patterns of Attachment. Main, M./Solomon, J. (1986/1990) zur desorganisierten Bindung. Lernsituation „Eingewöhnung in der Kinderkrippe“ (AB1)."
+    }
+   ]
+  }
+ ]
+}

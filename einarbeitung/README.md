@@ -17,6 +17,8 @@ Die App zeigt Kurse im **Modulplan der 12. Klasse** (Unterricht Pädagogik und P
         ├── f12-freud1.json  Freud: Instanzenmodell (Es, Ich, Über-Ich)
         ├── f12-freud2.json  Freud: Psychosexuelle Entwicklung und Fixierung
         ├── f12-freud3.json  Freud: Abwehrmechanismen
+        ├── f12-bindung1.json  Bindungstypen und Fremde-Situations-Test (Ainsworth)
+        ├── f12-bindung2.json  Feinfühligkeit: Gelungene Bindung fördern
         ├── fa04.json        Training: Struktur einhalten (Fall Tim, nach der Kurzarbeit)
         ├── fa05.json        Training: Theorie beschreiben (ohne Fallbezug)
         ├── fa06.json        Training: Fallbezug üben (Transfer mit Zeilenangaben)
