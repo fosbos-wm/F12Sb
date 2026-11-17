@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://identitytoolkit.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://securetoken.googleapis.com" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20261117c">
+<link rel="stylesheet" href="styles.css?v=20261117e">
 
 <!-- App-Icon fürs Homescreen (Handy/iPad) -->
 <link rel="manifest" href="manifest.json">
@@ -54,6 +54,34 @@
       <small>Unser Lernraum. Unser Projekt. Unser Weg.</small>
     </div>
   </a>
+    <aside class="sidebar" id="sidebar">
+      <nav>
+        <div class="nav-area nav-area-l lx-lehrer" hidden>
+          <div class="nav-bereich"><b>Bereich Lehrkräfte</b><small>Planen, prüfen, abstimmen</small></div>
+          <a href="#news" data-page="news-l" class="nav-link">Übersicht</a>
+          <a href="#lk-unterricht" data-page="lk-unterricht" class="nav-link">Unterricht und Inhalte</a>
+          <a href="#lernstaende" data-page="lernstaende" class="nav-link">Lernstände</a>
+          <a href="#team" data-page="team" class="nav-link">Klassenteam</a>
+        </div>
+        <div class="nav-area nav-area-s">
+          <div class="nav-bereich"><b>Bereich Schüler:innen</b><small>Lernen, üben, testen</small></div>
+          <a href="#news" data-page="news-s" class="nav-link active">Start</a>
+          <a href="#unterricht" data-page="unterricht" class="nav-link">Lernlandkarte</a>
+          <a href="#lernstaende" data-page="lernstaende" class="nav-link lx-schueler">Mein Lernstand</a>
+          <details class="nav-mehr">
+            <summary>Mehr</summary>
+            <div class="nav-pop">
+            <a href="#lernwerkstatt" data-page="lernwerkstatt" class="nav-link">Lernwerkstatt</a>
+            <a href="#kompetenz" data-page="kompetenz" class="nav-link">Kompetenzwerkstatt</a>
+            <a href="#resilienz" data-page="resilienz" class="nav-link">Resilienz &amp; Respressi</a>
+            <a href="#klassenteam" data-page="klassenteam" class="nav-link">Klassenteam und Forum</a>
+            <a href="#kalender" data-page="kalender" class="nav-link">Kalender</a>
+            <button type="button" id="helpQuick" class="nav-link nav-hilfe">Hilfe anbieten</button>
+            </div>
+          </details>
+        </div>
+      </nav>
+    </aside>
   <div class="user-area">
     <span id="userName" class="user-name"></span>
     <button class="ghost-icon" id="motivBtn" hidden type="button" title="Motivations-Hinweise ein oder aus">✨</button>
@@ -128,38 +156,7 @@
 
 <div id="app" hidden>
   <div class="app-shell">
-    <aside class="sidebar" id="sidebar">
-      <div class="side-title">CAMPUS</div>
-      <nav>
-        <div class="nav-area nav-area-l lx-lehrer" hidden>
-          <div class="nav-bereich"><b>Bereich Lehrkräfte</b><small>Planen, prüfen, abstimmen</small></div>
-          <a href="#news" data-page="news-l" class="nav-link">Übersicht</a>
-          <a href="#lk-unterricht" data-page="lk-unterricht" class="nav-link">Unterricht und Inhalte</a>
-          <a href="#lernstaende" data-page="lernstaende" class="nav-link">Lernstände</a>
-          <a href="#team" data-page="team" class="nav-link">Klassenteam</a>
-        </div>
-        <div class="nav-area nav-area-s">
-          <div class="nav-bereich"><b>Bereich Schüler:innen</b><small>Lernen, üben, testen</small></div>
-          <a href="#news" data-page="news-s" class="nav-link active">Start</a>
-          <a href="#unterricht" data-page="unterricht" class="nav-link">Lernlandkarte</a>
-          <a href="#lernstaende" data-page="lernstaende" class="nav-link lx-schueler">Mein Lernstand</a>
-          <details class="nav-mehr">
-            <summary>Mehr</summary>
-            <a href="#lernwerkstatt" data-page="lernwerkstatt" class="nav-link">Lernwerkstatt</a>
-            <a href="#kompetenz" data-page="kompetenz" class="nav-link">Kompetenzwerkstatt</a>
-            <a href="#resilienz" data-page="resilienz" class="nav-link">Resilienz &amp; Respressi</a>
-            <a href="#klassenteam" data-page="klassenteam" class="nav-link">Klassenteam und Forum</a>
-            <a href="#kalender" data-page="kalender" class="nav-link">Kalender</a>
-          </details>
-        </div>
-      </nav>
-      <div class="side-card">
-        <b>Campus hilft</b>
-        <p>Wobei kannst du anderen helfen?</p>
-        <button id="helpQuick">Hilfe anbieten →</button>
-      </div>
-      <div class="side-footer">Gemeinsam · offen · respektvoll</div>
-    </aside>
+
     <main id="content" tabindex="-1"></main>
   </div>
 </div>
@@ -167,7 +164,7 @@
 <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" id="modal"></div></div>
 <div class="toast" id="toast"></div>
 
-<script type="module" src="app.js?v=20261117c"></script>
+<script type="module" src="app.js?v=20261117e"></script>
 <script>
 /* Ladehinweis: erscheint, wenn die App nach 15 Sekunden noch nicht mit Firebase verbunden ist */
 (function(){

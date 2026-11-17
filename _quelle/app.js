@@ -19579,7 +19579,7 @@ async function render(){
  const fn=pages[p]||renderKachelwand;
  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",
  a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || lxNavAktiv(a.dataset.page,p)));
- document.querySelectorAll(".nav-mehr").forEach(d=>{if(d.querySelector(".nav-link.active"))d.open=true});
+ document.querySelectorAll(".nav-mehr").forEach(d=>{d.open=false});
  const content=$("content");
  if(!content)return;
  // Never leave a blank page while a module is loading.
@@ -21864,6 +21864,8 @@ async function renderLkUnterricht(){
 }
 
 /* ---------- Navigation je Rolle, Routen, Klicks ---------- */
+document.addEventListener("click",e=>{document.querySelectorAll(".nav-mehr[open]").forEach(d=>{if(!d.contains(e.target)||e.target.closest(".nav-link"))d.open=false})});/*lxMehrZu*/
+(function lxNavOben(){const mv=()=>{const sb=document.getElementById("sidebar"),u=document.querySelector(".topbar .user-area");if(sb&&u&&sb.parentElement!==u.parentElement)u.before(sb)};mv();document.addEventListener("DOMContentLoaded",mv)})();
 function lxNavRollen(){
  const sb=$("sidebar");if(!sb)return;
  const l=isTeacher();
