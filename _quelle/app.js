@@ -4196,6 +4196,55 @@ function lxLernwegKarte(){
  return`<section class="zl-weg"><h3>Dein Lernweg zu jedem Thema</h3><ol>${st.map(x=>`<li><b>${x[0]}</b><small>${x[1]}</small></li>`).join("")}</ol><p>Du entscheidest selbst, in welcher Reihenfolge du vorgehst. <a href="#unterricht">Zur Lernlandkarte →</a></p></section>`;
 }
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest(".lx-tab");if(!b)return;const sek=b.closest(".lx-sek");if(!sek)return;sek.querySelectorAll(".lx-tab").forEach(x=>x.classList.toggle("an",x===b));sek.querySelectorAll(".lx-tab-p").forEach(p=>p.classList.toggle("aus",p.dataset.t!==b.dataset.lxtab))});
+
+/* ---------- Neue Startseite, Lernpfad und Üben-Hub (Entwurf Vorschau A) ---------- */
+function lxSichKey(id,b){return`lxs:${currentUser?.uid||"x"}:${id}:${b}`}
+function lxSich(id,b){try{return localStorage.getItem(lxSichKey(id,b))||""}catch(e){return""}}
+function lxKwInfo(){const t=new Date(),d=new Date(Date.UTC(t.getFullYear(),t.getMonth(),t.getDate()));const n=d.getUTCDay()||7;d.setUTCDate(d.getUTCDate()+4-n);const y0=new Date(Date.UTC(d.getUTCFullYear(),0,1));const kw=Math.ceil(((d-y0)/864e5+1)/7);const fr=new Date(t);fr.setDate(t.getDate()+((5-t.getDay()+7)%7));return{kw,fr:String(fr.getDate()).padStart(2,"0")+"."+String(fr.getMonth()+1).padStart(2,"0")+"."}}
+function lxZeitNeu(){
+ try{
+  const ph=LX_CFG.phasen().slice().sort((a,b)=>a.start<b.start?-1:1);
+  const t=x=>new Date(x+"T12:00:00Z").getTime(),a=t(ph[0].start),z=t(ph[ph.length-1].end),W=z-a,pc=x=>Math.max(0,Math.min(100,(t(x)-a)/W*100));
+  const heute=new Date().toISOString().slice(0,10);
+  const segs=ph.map(p=>{const l=pc(p.start),w=Math.max(2,pc(p.end)-l),cur=p.start<=heute&&heute<=p.end;return`<div class="zl-seg${cur?" an":""}" style="left:${l}%;width:${w}%"></div><div class="zl-lab${cur?" an":""}" style="left:${l}%">LB ${p.lbNum} · ${fmtKurz(p.start)}–${fmtKurz(p.end)}</div>`}).join("");
+  const h=pc(heute),ein=heute>=ph[0].start&&heute<=ph[ph.length-1].end;
+  return`<section class="lxs-zeit"><div class="lxs-zk"><b>Was kommt wann?</b> <small>Projekte im Schuljahr</small><a href="#start" class="lxs-link">Alle Lernbereiche ansehen</a></div><div class="zl-bahn"><div class="zl-linie"></div>${segs}${ein?`<i class="zl-heute" style="left:${h}%"></i><span class="zl-hl" style="left:${h}%">heute</span>`:""}</div></section>`;
+ }catch(e){return""}
+}
+async function lxStartNeu(wp){
+ try{await kwLaden().catch(()=>{})}catch(e){}
+ const heute=new Date().toISOString().slice(0,10);
+ const phasen=LX_CFG.phasen().slice().sort((a,b)=>a.start<b.start?-1:1);
+ const ph=phasen.find(p=>p.start<=heute&&heute<=p.end)||phasen.find(p=>p.start>heute)||phasen[phasen.length-1];
+ const name=($("userName")?.textContent||"").trim(),I=lxKwInfo();
+ let themen=[];try{themen=kwThemenSicht(ph).filter(e=>e.typ!=="projekt").slice(0,6)}catch(e){}
+ const V=await Promise.all(themen.map(async e=>({ci:await getMyBasischeckVersuch(e.id).catch(()=>null),co:await getMyBasischeckVersuch(e.id+"@ende").catch(()=>null)})));
+ const zeile=themen.map((e,i)=>{
+  const {ci,co}=V[i],cur=co?4:(ci?3:1);
+  const st=[["Check-in"+(ci?` ${ci.richtig}/${ci.gesamt}`:""),ci],["Infotext",0],["Üben",0],["Check-out",co]].map((x,k)=>`<span class="${cur===[1,2,3,4][k]||(k===2&&cur===3)?"an":""}">${x[1]?"✓ ":""}${esc(x[0])}</span>`).join(" › ");
+  const Z=[["r","Begriffe"],["t","Theorie"],["a","Anwendung"]].map(b=>{const v=lxSich(e.id,b[0]);return`<div class="lxs-b lxs-${b[0]}"><b>${b[1]}</b><span>${v==="g"?"fertig":(v?"in Arbeit":"offen")}</span></div>`}).join("");
+  return`<article class="lxs-t"><div class="lxs-th"><h3>${esc(kwKurz(e))}</h3><button type="button" class="${ci?"primary":"secondary"}" data-kw="thema" data-id="${esc(e.id)}">${ci?"Weiter üben":"Starten"}</button></div><div class="lxs-pfad">${st}</div><div class="lxs-bs">${Z}</div></article>`}).join("");
+ let woche="";
+ try{
+  const plus=n=>{const d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+  const Z=(wp||[]).filter(w=>!w.done&&w.dueDate&&w.dueDate<=plus(7)).slice(0,4);
+  woche=Z.map((w,i)=>`<div class="lxs-wz${i?"":" erste"}"><small>${esc(fmtKurz(w.dueDate))} · ${w.dueDate<heute?"überfällig":"fällig"}</small><b>${esc(w.title)}</b></div>`).join("")||`<div class="lxs-wz"><small>Alles erledigt</small><b>Keine Aufgaben in den nächsten 7 Tagen</b></div>`;
+ }catch(e){}
+ return`<div class="lxs"><div class="lxs-kopf"><div><small>KW ${I.kw} · FÄLLIG BIS FREITAG, ${I.fr}</small><h1>Hallo${name?" "+esc(name):""}, das ist deine Woche.</h1></div><div class="lxs-leg"><span class="r">Begriffe</span><span class="t">Theorie</span><span class="a">Anwendung</span></div></div>${lxZeitNeu()}
+ <div class="lxs-raster"><section class="lxs-main"><div class="lxs-mk"><h2>Pädagogik / Psychologie</h2><small>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</small></div>${zeile||`<div class="kw-leer">Für diesen Lernbereich sind noch keine Themen freigeschaltet.</div>`}</section>
+ <aside class="lxs-seite"><section class="lxs-wo"><h3>Diese Woche</h3>${woche}<a class="lxs-link" href="#kalender">Ganze Woche ansehen</a></section><section class="lxs-fr"><h3>Fachliche Frage?</h3><p>Stelle sie im Klassenteam und Forum. Deine Lehrkräfte lesen mit.</p><button type="button" class="secondary" onclick="go('klassenteam')">Zum Klassenteam</button></section></aside></div></div>`;
+}
+async function lxThemaHub(e,lehrer){
+ let ci=null,co=null;
+ if(!lehrer){ci=await getMyBasischeckVersuch(e.id).catch(()=>null);co=await getMyBasischeckVersuch(e.id+"@ende").catch(()=>null)}
+ const S=[[1,"Check-in",ci?`${ci.richtig} von ${ci.gesamt}`:"",!!ci],[2,"Infotext","",false],[4,"Selbstlernkurs","",false],[3,"Üben","",false],[6,"Check-out","",!!co]];
+ const step=`<section class="lxp"><div class="lxp-h"><small>DEIN LERNPFAD</small><span>Du entscheidest, welche Schritte du brauchst und in welcher Reihenfolge. Jeder Lernpfad ist individuell. Klick auf einen Schritt, um ihn zu öffnen.</span></div><ol class="lxp-st">${S.map((x,i)=>`<li><button type="button" data-lx="sprung" data-n="${x[0]}" class="${x[3]?"ok":""}"><i>${x[3]?"✓":i+1}</i><b>${x[1]}</b>${x[2]?`<em>${x[2]}</em>`:""}</button></li>`).join("")}</ol></section>`;
+ const B=[["r","Begriffe","Was heißt das?","Begriffe und Merkmale sicher abrufen. Mit Karteikarten oder im Blockfall.",["Karteikarten","Blockfall"]],["t","Theorie","Wie hängt das zusammen?","Zusammenhänge verstehen und erklären. Mehrere Übungsformen zur Auswahl.",["Zuordnen","Lückentext","Quiz"]],["a","Anwendung","Wo erkenne ich das?","Das Gelernte auf einen Fall aus der Praxis übertragen.",["Fallbeispiel","Transferaufgabe"]]];
+ const cards=B.map(b=>{const v=lxSich(e.id,b[0]);return`<article class="lxh-c lxh-${b[0]}"><small>${b[1].toUpperCase()}</small><h3>${b[2]}</h3><p>${b[3]}</p><div class="lxh-ch">${b[4].map(c=>`<span>${c}</span>`).join("")}</div><button type="button" class="lxh-go" data-lx="sprung" data-n="3">${b[1]} üben</button><div class="lxh-si" data-th="${esc(e.id)}" data-b="${b[0]}"><b>Wie sicher bist du?</b><div>${[["r","unsicher"],["y","fast"],["g","sicher"]].map(x=>`<button type="button" class="lxh-p ${x[0]}${v===x[0]?" an":""}${v&&v!==x[0]?" blass":""}" data-sich="${x[0]}"><i></i>${x[1]}</button>`).join("")}</div></div></article>`}).join("");
+ return step+(lehrer?"":`<h2 class="lxh-h">Üben auf Basis</h2><p class="lxh-s">Drei Bereiche. Such dir aus, wo du noch Übung brauchst.</p><div class="lxh">${cards}</div><div class="lxh-u"><button type="button" class="lxh-u1" data-lx="sprung" data-n="3"><b>Noch unsicher?</b><span>Zu den weiteren Übungen zu diesem Thema – Basis, Plus, Vertieft.</span></button><button type="button" class="lxh-u2" data-lx="sprung" data-n="6"><b>Alles klar?</b><span>Direkt zum Check-out und deinem Lernstand festhalten.</span></button></div>`);
+}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest(".lxh-p");if(!b)return;const w=b.closest(".lxh-si");try{localStorage.setItem(lxSichKey(w.dataset.th,w.dataset.b),b.dataset.sich)}catch(e){}w.querySelectorAll(".lxh-p").forEach(x=>{x.classList.toggle("an",x===b);x.classList.toggle("blass",x!==b)})});
+
 async function renderStart(){
  let news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
  try{[news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("news","createdAt",true,10),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
@@ -4206,7 +4255,7 @@ async function renderStart(){
  const upcomingDateText=upcomingDate?.seconds?new Date(upcomingDate.seconds*1000).toLocaleDateString("de-DE"):String(upcomingDate||"").slice(0,10);
  const upcomingTime=nextCalendar?.time?` · ${esc(nextCalendar.time)} Uhr`:"";
  
- return`${coBanner}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb</span><h1>Willkommen auf dem Campus.</h1><p>Hier
+ return`${coBanner}${(!isTeacher()||window.__lxBereich==="s")?await lxStartNeu(wochenplan):""}<section class="hero"><a class="hero-qr"href="https://fosbos-wm.github.io/F12Sb/"target="_blank"rel="noopener"title="F12Sb im Browser öffnen oder mit dem Handy scannen"aria-label="QR-Code: Link zur F12Sb-App"><img src="qr-f12sb.png"alt="QR-Code zur F12Sb-App"width="108"height="108"></a><div><span class="badge"> F12Sb</span><h1>Willkommen auf dem Campus.</h1><p>Hier
 verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbeiten am selben digitalen Campus.</p>
 </div></section>
  ${isTeacher()&&window.__lxBereich!=="s"?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>${isAdmin()?`<button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button>`:""}</div>`:""}
@@ -7848,8 +7897,9 @@ async function openCheckIn(wocheId){
  const lb=ph?`LB ${ph.lbNum}`:(e.lb||"");
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div id="ciAnsicht"class="ci-seite"style="--c:${c}">
-   <div class="kicker"style="color:${c}">${esc(lb)} · ${ende?"Check-out":"Check-in"}</div>
-   <h2>${esc(e.thema)}</h2>
+   <div class="kicker"style="color:${c}">Pädagogik / Psychologie › ${esc(kwKurz?kwKurz(e):e.thema)} › ${ende?"Check-out":"Check-in"}</div>
+   <div class="ci-titel"><h2>${ende?"Check-out":"Check-in"}</h2><div class="ci-chips">${ende?"<span>ca. 20 Minuten</span><span>anspruchsvoller als der Check-in</span><span>mit Transfer</span>":"<span>ca. 10 Minuten</span><span>ohne Note</span><span>Niveau: Basis</span>"}</div></div>
+   <nav class="lxp-st lxp-mini">${["Check-in","Infotext","Selbstlernkurs","Üben","Check-out"].map((x,i)=>`<span class="${(ende?4:0)===i?"an":""}"><i>${i+1}</i>${x}</span>`).join("")}</nav>
    <p class="ci-intro">${lehrer?(ende?"Lehrkraft-Ansicht (Check-out): Dieselben Lernziele wie am Anfang, anders formuliert und etwas anspruchsvoller. Du kannst alles bearbeiten oder ergänzen. Das Feld Lernziel verbindet die Aufgabe automatisch mit dem Check-in. Gespeicherte Fragen ersetzen die Standardfragen für alle.":"Lehrkraft-Ansicht: Hier bearbeitest du die Fragen. Gespeicherte Fragen ersetzen den Standard-Check-In für alle."):mein?"Dein Ergebnis:":(ende?"Zeig, was du jetzt kannst: Du sicherst dein Wissen, wendest es auf einen Fall an, erklärst und begründest. Danach blickst du zurück und siehst deine Lernkurve. Keine Note.":"Wir starten leicht: Du liest eine Situation, zeigst, was du schon weißt, und schreibst deine Fragen auf. Kein Test, keine Note.")}</p>
    ${ende&&!lehrer&&mein?'<div id="ceEntw"></div>':""}${basischeckPanelHTML(fach,wocheId,fragen,mein)}
    <div class="ci-fuss"><button type="button"class="secondary"onclick="closeModal()">Schließen</button></div>
@@ -21391,7 +21441,14 @@ function lxKachel(href,titel,text,opt){
   :opt.data?`<button type="button" class="lx-kachel" ${opt.data}>${inner}</button>`
   :`<a class="lx-kachel" href="#${esc(href)}">${inner}</a>`;
 }
+
 async function renderUnterrichtsfaecher(){
+ const L=[["Deutsch", ""], ["Englisch", ""], ["Mathematik", ""], ["Religion / Ethik", ""], ["Politik und Gesellschaft", ""], ["Sport", ""], ["SWR", ""], ["Biologie", ""], ["Soziologie", ""], ["Wahlpflicht 1", ""], ["Wahlpflicht 2", ""]];
+ const kachel=(t,badge,txt,href)=>`<${href?'button type="button" onclick="go(\'start\')"':'div'} class="lxf-k${href?" an":""}"><h3>${esc(t)}</h3><span class="lxf-b${href?" muster":""}">${esc(badge)}</span><p>${esc(txt)}</p></${href?"button":"div"}>`;
+ return`${kwSchuelerBanner()}<div class="lxf"><small class="lxf-kick">UNTERRICHTSFÄCHER</small><h1>Fächer der 12. Klasse</h1><p class="lxf-sub">Wähle ein Fach. Dort findest du die Lernlandkarte mit allen Themen. Pädagogik / Psychologie ist das Muster, die anderen Fächer werden nach demselben Aufbau ausgearbeitet.</p>
+ <div class="lxf-grid">${kachel("Pädagogik / Psychologie","Ausgearbeitet als Muster","4 Lernbereiche, Lernlandkarte, Lernweg mit Check-in und Check-out",true)}${L.map(x=>kachel(x[0],x[1]&&x[1].startsWith("Nicht")?x[1]:"Folgt",x[1]&&!x[1].startsWith("Nicht")?x[1]:"Lernlandkarte, Themen und Material kommen aus deinen Unterlagen.")).join("")}</div></div>${footer()}`;
+}
+async function renderUnterrichtsfaecherAlt(){
  await kwLaden().catch(()=>{});
  const lehrer=kwLehrer();
  const alle=LX_CFG.phasen().flatMap(kwThemenSicht);
@@ -21450,9 +21507,38 @@ function kwKachelHTML(ph,lehrer){
   <footer class="kw-fuss"><div class="kw-bar" role="progressbar" aria-valuenow="${proz}" aria-valuemin="0" aria-valuemax="100" aria-label="${lehrer?"Vorbereitung":"Fortschritt"} Lernbereich ${ph.lbNum}"><i style="width:${proz}%"></i></div><span>${lehrer?"Vorbereitet":"Fortschritt"} ${proz} %</span></footer>
  </article>`;
 }
+
+/* ---------- Neue Lernlandkarte (Entwurf) ---------- */
+function lxLandkarteNeu(){
+ const heute=lxHeute(),FACH=["Pädagogik / Psychologie", "Deutsch", "Englisch", "Mathematik", "Religion / Ethik", "Politik und Gesellschaft", "Sport", "SWR", "Biologie", "Soziologie", "Wahlpflicht 1", "Wahlpflicht 2"];
+ const phasen=[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum);
+ const akt=phasen.find(p=>p.start<=heute&&heute<=p.end)||phasen.find(p=>p.start>heute)||phasen[phasen.length-1];
+ const spalte=ph=>{
+  const th=kwThemenSicht(ph).filter(e=>e.typ!=="projekt"),pr=PP_EINHEITEN_PROJEKT(ph),cur=ph===akt;
+  const rows=th.map(e=>{const pk=["r","t","a"].map(b=>{const v=lxSich(e.id,b);return`<i class="${v==="g"?"f":(v?"h":"")} ${b}"></i>`}).join("");return`<button type="button" class="lxl-th" data-lxl="${esc(e.id)}"><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span><span class="lxl-pk">${pk}</span></button>`}).join("");
+  return`<details class="lxl-lb"${cur?" open":""}><summary><small>LB ${ph.lbNum}</small>${cur?`<span class="lxl-akt">AKTUELL</span>`:""}<h3>${esc(ph.lbTitel||"")}</h3><span class="lxl-n">${th.length} Themen</span></summary>${pr}<div class="lxl-liste">${rows||`<div class="kw-leer">Noch keine Themen freigeschaltet.</div>`}</div></details>`;
+ };
+ const first=kwThemenSicht(akt).find(e=>e.typ!=="projekt");
+ return`${kwSchuelerBanner()}<div class="lxl"><div class="lxl-tabs">${FACH.map((f,i)=>`<span class="${i?"":"an"}">${esc(f)}</span>`).join("")}</div><h1>Lernlandkarte</h1><div class="lxl-leg"><span class="r">Begriffe</span><span class="t">Theorie</span><span class="a">Anwendung</span></div><p class="lxl-h">Tippe auf einen Lernbereich, um die Themen aufzuklappen.</p>
+ <div class="lxl-spalten">${phasen.map(spalte).join("")}</div>
+ <section class="lxl-sel" id="lxlSel">${lxlAuswahl(first)}</section></div>${footer()}`;
+}
+function PP_EINHEITEN_PROJEKT(ph){
+ const t=String((ph.titel||"")).trim(),a=ph.projektStart||ph.start,b=ph.projektEnde||ph.end;
+ if(!t)return"";
+ return`<button type="button" class="lxl-pr" data-kw="projekt" data-lb="${ph.lbNum}"><span>Projekt</span><b>${esc(t)}</b><small>${esc(fmtKurz(a))}–${esc(fmtKurz(b))}</small></button>`;
+}
+function lxlAuswahl(e){
+ if(!e)return"";
+ const m=(KW.mat[e.id]||[]),dl=k=>{const x=m.find(y=>y.kategorie===k);return x&&x.url?`<a class="secondary lxl-dl" href="${esc(x.url)}" target="_blank" rel="noopener">${k==="lehrtext"?"Infotext (PDF)":"Zusammenfassung (PDF)"}</a>`:""};
+ return`<div><small>AUSGEWÄHLT</small><h2>${esc(kwKurz(e))}</h2><p>Lehrtexte zum Thema</p></div><div class="lxl-sa">${dl("lehrtext")}${dl("lernuebersicht")}<button type="button" class="primary" data-kw="thema" data-id="${esc(e.id)}">Thema öffnen</button></div>`;
+}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-lxl]");if(!b)return;const e=LX_CFG.phasen().flatMap(kwThemenVonPhase).find(x=>x.id===b.dataset.lxl);document.querySelectorAll(".lxl-th.an").forEach(x=>x.classList.remove("an"));b.classList.add("an");const w=document.getElementById("lxlSel");if(w&&e)w.innerHTML=lxlAuswahl(e)});
+
 async function renderKachelwand(){
  await kwLaden();
  const lehrer=kwLehrer();
+ if(!lehrer)return lxLandkarteNeu();
  const alle=LX_CFG.phasen().flatMap(kwThemenSicht);
  const fertig=lehrer?alle.filter(e=>(KW.mat[e.id]||[]).length||kwModuleThema(e.id).length).length:alle.filter(e=>kwErledigt(e.id)).length;
  const p=alle.length?Math.round(fertig/alle.length*100):0;
@@ -21590,7 +21676,7 @@ async function renderKwThema(){
   faMod.forEach(m=>ub.push({h:modZeile(m),b:"a",n:"a"}));
   if(trListe)ub.push({h:trListe,b:"a",n:"a"});
   const ubHtml=LX_BEREICH.map(B=>{
-   const st=LX_STUFEN.map(([nk,nn])=>{const l=ub.filter(x=>x.b===B.k&&x.n===nk);return l.length?`<div class="lx-stufe"><b>${nn}</b><div class="kw-dateien">${l.map(x=>x.h).join("")}</div></div>`:(lehrer?`<div class="lx-stufe"><b>${nn}</b><div class="kw-leer">noch leer</div></div>`:"")}).join("");
+   const st=LX_STUFEN.map(([nk,nn])=>{const l=ub.filter(x=>x.b===B.k&&x.n===nk);return l.length?`<div class="lx-stufe"><b>${nn}</b><div class="kw-dateien">${l.map(x=>x.h).join("")}</div></div>`:(lehrer?`<div class="lx-stufe"><b>${nn}</b><div class="kw-leer">noch leer</div></div>`:`<div class="lx-stufe leer"></div>`)}).join("");
    return(st.replace(/<[^>]*>/g,"").trim()===""&&!lehrer)?"":`<div class="lx-ber" style="--k:${B.c};--kb:${B.bg}"><header><h4>${B.n}</h4><small>${B.hint}</small></header>${st}</div>`;
   }).join("");
   const ubAdd=lehrer?`<div class="kw-aktionen"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="uebung">+ Basis</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="vertiefung2">+ Plus</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="vertiefung3">+ Vertieft</button>${aus.size?`<button class="secondary" data-kw="trzurueck" data-id="${esc(e.id)}">Ausgeblendete Kurse wieder einblenden</button>`:""}</div>`:"";
@@ -21609,7 +21695,7 @@ async function renderKwThema(){
  const altBtn=(leist||LX_CFG.klasse!==11)?"":`<button class="secondary" data-kw="alt" data-id="${esc(e.id)}">Lernziele und Aufgaben</button>`;
  const st=lxThemaStart(e);
  const sichtZeile=lehrer&&!leist?`<div class="lx-sicht"><label>Schüler:innen sehen dieses Thema ab <input type="date" id="lxAb" value="${esc(st)}"></label><button type="button" class="secondary" data-lx="ab" data-id="${esc(e.id)}">Datum speichern</button><button type="button" class="text-button" data-lx="ab0" data-id="${esc(e.id)}">Automatisch</button><small>Sonst gilt: zwei Wochen vor dem geplanten Start.</small></div>`:"";
- const navChips=leist?"":`<p class="lx-wegtext"><b>Dein Lernweg:</b> Du entscheidest selbst, in welcher Reihenfolge du vorgehst. Jeder Schritt ist ein Link.</p><nav class="lx-weg" aria-label="Dein Lernweg">${LX_TEILE.map(n=>`<button type="button" class="lx-chip" style="--k:${LXF[n].c}" data-lx="sprung" data-n="${n}"><b>${LXF[n].d}</b> ${esc(LXF[n].n)}</button>`).join("")}</nav>`;
+ const navChips=leist?"":await lxThemaHub(e,lehrer);
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
   ${kwSchuelerBanner()}
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
