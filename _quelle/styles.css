@@ -518,3 +518,13 @@ body:has(#app[hidden]) #sidebar{display:none}
 body:has(#app[hidden]) .topbar .user-area{margin-left:auto}
 .app-shell{display:block}
 @media(max-width:900px){.topbar{height:auto;flex-wrap:wrap;padding:8px 12px;gap:6px}.topbar .sidebar{order:3;flex:1 0 100%}.topbar .sidebar nav{overflow-x:auto}.topbar .brand-copy{display:none}}
+
+/* Kopfleiste: Höhe automatisch, Lehrkraft-Navigation in eigener Zeile */
+.topbar{height:auto;min-height:60px;flex-wrap:wrap;align-items:center;row-gap:0}
+.topbar .brand{padding:8px 0}
+.topbar .sidebar nav{flex-wrap:wrap;align-items:center}
+.topbar .nav-area{flex-wrap:wrap;align-items:center}
+.topbar .nav-area .nav-link,.topbar .nav-mehr>summary{white-space:nowrap;line-height:1.2}
+.topbar:has(.nav-area-l:not([hidden])) .sidebar{order:3;flex:1 0 100%;border-top:1px solid var(--line);padding:6px 0}
+.topbar:has(.nav-area-l:not([hidden])) .sidebar nav{gap:4px 28px}
+.topbar .nav-area .nav-bereich b{white-space:nowrap}
