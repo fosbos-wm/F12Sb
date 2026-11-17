@@ -4211,7 +4211,7 @@ verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbe
 </div></section>
  ${isTeacher()&&window.__lxBereich!=="s"?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>${isAdmin()?`<button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button>`:""}</div>`:""}
  ${pp12CssBausteine()}${naechsteStunde}
- ${lxZeitleisteHTML()}${isTeacher()&&window.__lxBereich!=="s"?"":lxLernwegKarte()}
+ ${isTeacher()&&window.__lxBereich!=="s"?"":lxLernwegKarte()}
  ${await lxOffenKachel()}
   <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
  <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div

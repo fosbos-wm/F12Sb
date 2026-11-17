@@ -550,3 +550,9 @@ body:has(#app[hidden]) .topbar .user-area{margin-left:auto}
 .topbar:has(.nav-area-l:not([hidden])) .sidebar{padding:8px 0 4px;margin-top:2px}
 .topbar .nav-area .nav-link,.topbar .nav-mehr>summary{margin:2px 0}
 .topbar .nav-mehr[open]>summary{margin:2px 0}
+
+/* Seite zentriert und füllend */
+main#content{width:100%;max-width:1640px;margin-inline:auto;padding-inline:clamp(16px,3vw,48px)}
+body.kw-voll main#content{max-width:none}
+.topbar{padding-inline:max(24px,calc((100% - 1640px)/2 + clamp(16px,3vw,48px)))}
+@media(max-width:900px){.topbar{padding-inline:12px}}
