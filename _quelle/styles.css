@@ -528,3 +528,19 @@ body:has(#app[hidden]) .topbar .user-area{margin-left:auto}
 .topbar:has(.nav-area-l:not([hidden])) .sidebar{order:3;flex:1 0 100%;border-top:1px solid var(--line);padding:6px 0}
 .topbar:has(.nav-area-l:not([hidden])) .sidebar nav{gap:4px 28px}
 .topbar .nav-area .nav-bereich b{white-space:nowrap}
+
+/* Feinschliff Kopfleiste und Abstand zum Inhalt */
+.topbar{padding:0 28px;min-height:56px}
+.topbar .brand{padding:6px 0}
+.topbar .brand img{height:34px}
+.topbar .user-area{align-items:center}
+.topbar .sidebar nav,.topbar .nav-area{align-items:center}
+.topbar .nav-area .nav-link{font-size:14px;padding:8px 13px;display:inline-flex;align-items:center;line-height:1.2}
+.topbar .nav-area .nav-bereich b{font-size:10.5px}
+.topbar .nav-mehr{display:inline-flex;align-items:center;margin:0}
+.topbar .nav-mehr>summary{font-size:14px;padding:7px 13px;display:inline-flex;align-items:center;line-height:1.2;margin:0}
+.topbar:has(.nav-area-l:not([hidden])) .sidebar{padding:4px 0 8px}
+.app-shell{padding-top:26px}
+.app-shell #content{padding-top:8px}
+@media(max-width:900px){.app-shell{padding-top:14px}}
+.topbar .nav-mehr>summary::after{margin-left:6px}
