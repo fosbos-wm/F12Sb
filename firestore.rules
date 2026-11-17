@@ -1005,6 +1005,28 @@ service cloud.firestore {
     }
 
     // ---------------------------------------------------------
+    // WOCHENAUFTRAG, PFLICHTTERMINE, LIVE-ANSICHT
+    // ---------------------------------------------------------
+    // Arbeitsauftrag je Fach und Woche: Lehrkräfte schreiben, alle lesen.
+    match /wochenauftraege/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+    // Verpflichtende Termine (Stunde, Übung, Gespräch): Lehrkräfte schreiben, alle lesen.
+    match /pflichttermine/{id} {
+      allow read: if isApproved();
+      allow create, update, delete: if isTeacher();
+    }
+    // Live-Ansicht: Schüler:innen melden ihr aktuelles Thema und ihren Lernschritt,
+    // nur Lehrkräfte (und die Person selbst) dürfen es lesen.
+    match /lernLive/{uid} {
+      allow read: if isTeacher() || (isApproved() && request.auth.uid == uid);
+      allow create, update: if isApproved() && request.auth.uid == uid
+        && request.resource.data.uid == request.auth.uid;
+      allow delete: if isApproved() && (request.auth.uid == uid || isTeacher());
+    }
+
+    // ---------------------------------------------------------
     // Deny everything not explicitly listed above.
     // ---------------------------------------------------------
     match /{document=**} {

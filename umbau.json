@@ -1,0 +1,6 @@
+{
+  "aktiv": false,
+  "sperren": false,
+  "text": "Die F12Sb wird gerade umgebaut. Es kann sein, dass Seiten kurz anders aussehen oder etwas nicht funktioniert. Deine Daten bleiben erhalten.",
+  "hinweis": "Zum Einschalten: aktiv auf true setzen und die Datei hochladen. Zum Ausschalten: wieder auf false. sperren=true blockiert die App mit einer Vollbild-Meldung."
+}

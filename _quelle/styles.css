@@ -696,3 +696,97 @@ button.primary:hover{background:#0F2539}
 .lxl-lb .lxl-kopf small{font-weight:700;color:#55697B}.lxl-lb .lxl-kopf h3{grid-column:1/-1;margin:2px 0;font-size:20px;color:#17324B}
 .lxl-th,.lxl-pr{cursor:default}.lxl-th:hover{background:none}
 .lxs-mk .lxs-link{margin-left:auto}
+
+/* Lernstände neu */
+.lsn-kopf small,.lsn-h small{font-weight:700;letter-spacing:.06em;color:#55697B;font-size:12px}
+.lsn-kopf h1{margin:4px 0 6px;font-size:clamp(26px,3.2vw,38px);color:#17324B}.lsn-kopf p{color:#55697B;max-width:75ch;margin:0 0 12px}
+.lsn-kopf{margin:6px 0 18px}
+.lsn-h{margin:26px 0 12px}.lsn-h h2{margin:2px 0 0;font-size:24px;color:#17324B}
+.lsn-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
+.lsn-k{background:#EAF2FB;border:1px solid #D3E3F3;border-top:3px solid #469BDC;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.lsn-k:nth-child(even){background:#F3F8E8;border-color:#DDE9C4;border-top-color:#9BBF41}
+.lsn-k b{font-size:26px;color:#17324B}.lsn-k span{font-weight:700;color:#17324B}.lsn-k small{color:#55697B}
+.lsn-lb{background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:16px 18px;margin-bottom:16px}
+.lsn-lb header{margin-bottom:8px}.lsn-lb header small{font-weight:800;color:#55697B}.lsn-lb header h3{margin:0;font-size:20px;color:#17324B}
+.lsn-t{border-top:1px solid #E8EEF4;padding:12px 0}
+.lsn-th{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}.lsn-th .text-button{font-weight:800;font-size:16px;color:#17324B;text-align:left}
+.lsn-m{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.lsn-m>div{background:#F3F7FB;border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}.lsn-m small{color:#55697B;font-size:12px}
+.lsn-bar{display:block;height:7px;border-radius:99px;background:#DDE6EE;overflow:hidden}.lsn-bar i{display:block;height:100%;background:#469BDC}.lsn-bar.co i{background:#9BBF41}
+.lsn-leer{color:#9AA9B8}.lsn-zu.auf{color:#17783C}.lsn-zu.ab{color:#B42318}
+.lsn-amp{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700}.lsn-amp i{width:10px;height:10px;border-radius:50%;display:inline-block;margin-left:6px}
+.lsn details{margin-top:8px}.lsn summary{cursor:pointer;color:#17324B;font-weight:700;font-size:14px}
+.lsn-ul{list-style:none;margin:8px 0 0;padding:0}.lsn-ul li{display:grid;grid-template-columns:1fr auto auto;gap:12px;padding:6px 0;border-top:1px dashed #E2E8F0;font-size:14px}.lsn-ul em{color:#55697B;font-style:normal}
+
+/* ===== Neuer Lernpfad (Bibliothek), Woche, Live ===== */
+.lxp-st .on b{text-decoration:underline;text-decoration-color:#9BBF41;text-decoration-thickness:3px;text-underline-offset:6px}
+.lxp-st .on i{border-color:#17324B;border-width:3px}
+.lxp-st button{min-height:40px}
+.lxq-p{background:#fff;border:1px solid #DAE5EE;border-radius:18px;padding:20px 24px 24px;margin:0 0 22px}
+.lxq-p>header h2{margin:0 0 4px;font-size:24px;color:#17324B}.lxq-p>header p{margin:0 0 16px;color:#55697B}
+.lxq-erg{margin:12px 0 0;color:#17324B}
+.lxq-wa{background:#FFF7DC;border:1px solid #F1DFA0;border-radius:14px;padding:12px 16px;margin:14px 0 0;display:flex;flex-direction:column;gap:3px;color:#17324B}
+.lxq-tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.lxq-tab{border:1px solid #C5D3E0;background:#fff;border-radius:999px;padding:8px 18px;font-weight:700;color:#55697B;cursor:pointer}
+.lxq-tab.an{background:#17324B;color:#fff;border-color:#17324B}
+.lxq-det{border:1px solid #DAE5EE;border-radius:14px;margin:0 0 12px;background:#F8FBFE;overflow:hidden}
+.lxq-det>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;font-size:16px;color:#17324B}
+.lxq-det>summary::-webkit-details-marker{display:none}
+.lxq-neu{font-size:13px;font-weight:700;color:#075a9d;text-decoration:underline}
+.lxq-med{padding:0 12px 14px}
+.lxq-med iframe{width:100%;height:min(78vh,820px);border:1px solid #DAE5EE;border-radius:10px;background:#fff}
+.lxq-vid iframe{height:auto;aspect-ratio:16/9}
+.lxq-med audio,.lxq-med video{width:100%;border-radius:10px}
+.lxq-dl{display:inline-block;border:2px solid #17324B;border-radius:10px;padding:9px 14px;font-weight:700;color:#17324B;text-decoration:none;background:#fff}
+.lxq-mx{display:grid;grid-template-columns:130px repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}
+.lxq-mh{padding:12px 16px;border-radius:12px;color:#fff;font-weight:800;font-size:16px}
+.lxq-sl{display:flex;flex-direction:column;justify-content:center}.lxq-sl b{font-size:16px;color:#17324B}.lxq-sl small{color:#55697B}
+.lxq-z{background:var(--kb,#F1F5F8);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;min-height:64px}
+.lxq-it .kw-dz,.lxq-it{display:block}
+.lxq-it .kw-datei{display:flex;flex-direction:column;gap:2px;width:100%;background:#fff;border:1px solid transparent;border-radius:10px;padding:10px 12px;text-align:left;text-decoration:none;color:var(--k,#17324B);font-weight:700;cursor:pointer}
+.lxq-it .kw-datei:hover{border-color:var(--k,#17324B)}.lxq-it .kw-datei small{font-weight:500;color:#55697B}
+.lxq-leer{color:#97A9B9;text-align:center;padding:10px}
+.lxq-sk{grid-column:2/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.lxq-zus{background:#EEF6FD;border:1px solid #CFE3F5;border-top:4px solid #469BDC;border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.lxq-zus small{font-weight:800;letter-spacing:.06em;color:#55697B;font-size:12px}.lxq-zus b{font-size:17px;color:#17324B}.lxq-zus span{color:#55697B;font-size:14px}
+.lxq-zus .primary,.lxq-zus .secondary{margin-top:6px}
+.lxq-h3{margin:26px 0 12px;font-size:19px;color:#17324B}
+.lxq-zg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.lxq-ok,.lxq-nok{margin-top:16px;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.lxq-ok{background:#E5F4EA;border:1px solid #BFE0CB}.lxq-nok{background:#FFF1E0;border:1px solid #F3CFA0}
+.lxq-ok span,.lxq-nok span{color:#55697B}
+@media(max-width:900px){.lxq-mx{grid-template-columns:1fr}.lxq-mx>div:first-child{display:none}.lxq-sk{grid-column:1}.lxq-sl{margin-top:10px}.lxq-p{padding:16px}}
+/* Individueller Lernpfad: Themen anklickbar */
+.lxl-th{cursor:pointer}.lxl-th:hover,.lxl-th.an{background:rgba(255,255,255,.85)}
+.lxl-pk i.f{opacity:1;background:currentColor}
+/* Startseite */
+.lxs-wa{margin:0 0 12px;color:#17324B}
+.lxs-wz.pf{background:#17324B;color:#fff;border-color:#17324B}
+.lxs-fach{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}
+.lxs-f{background:#EAF2FB;border:1px solid #D3E3F3;border-top:3px solid #469BDC;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.lxs-f small{font-weight:800;letter-spacing:.05em;color:#55697B;text-transform:uppercase;font-size:11px}.lxs-f b{font-size:16px;color:#17324B}.lxs-f span{color:#55697B;font-size:13px}
+/* Lehrkräfte: Woche */
+.lxw-raster{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;align-items:start}
+.lxw-k{background:#EAF2FB;border:1px solid #D3E3F3;border-top:3px solid #469BDC;border-radius:16px;padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+.lxw-g{background:#F3F8E8;border-color:#DDE9C4;border-top-color:#9BBF41}
+.lxw-k h3{margin:0;font-size:20px;color:#17324B}.lxw-k label{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:14px;color:#17324B}
+.lxw-k input[type=date],.lxw-k input[type=time],.lxw-k input[type=text],.lxw-k select,.lxw-k textarea{border:1px solid #C5D3E0;border-radius:10px;padding:10px 12px;font:inherit;background:#fff;font-weight:500}
+.lxw-hint{margin:0;color:#55697B;font-size:14px}.lxw-sub{font-weight:700;font-size:14px;color:#55697B}
+.lxw-lb{background:#fff;border-radius:12px;padding:10px 12px}.lxw-lb b{font-size:13px;color:#55697B}
+.lxw-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.lxw-chip{display:inline-flex!important;flex-direction:row!important;align-items:center;gap:6px!important;border:1px solid #C5D3E0;border-radius:999px;padding:5px 12px;font-weight:600!important;font-size:13px!important;background:#fff;cursor:pointer}
+.lxw-chip:has(input:checked){background:#17324B;color:#fff;border-color:#17324B}
+.lxw-chip input{accent-color:#9BBF41}
+.lxw-liste h4{margin:6px 0 8px;font-size:15px;color:#55697B}
+.lxw-z{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px}.lxw-z small{display:block;color:#55697B;font-size:13px}
+/* Lehrkräfte: Live */
+.lxl-sum{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}.lxl-sum b{font-size:18px;color:#17324B;margin-right:6px}
+.lxl-sum span{background:#EAF2FB;border:1px solid #D3E3F3;border-radius:999px;padding:4px 12px;font-weight:700;font-size:13px;color:#17324B}
+.lxl-tab td{vertical-align:middle}.lxl-tab tr.inaktiv td{opacity:.55}
+.lxl-pkt{display:inline-block;width:10px;height:10px;border-radius:50%;background:#C5CCD3;margin-right:8px}.lxl-pkt.an{background:#1E9E52;box-shadow:0 0 0 3px rgba(30,158,82,.2)}
+.lxl-chip{display:inline-block;border-radius:999px;color:#fff;font-weight:700;font-size:12px;padding:3px 10px;white-space:nowrap}.lxl-chip.grau{background:#E4ECF3;color:#55697B}
+.lxl-weg{margin:14px 0 0;color:#55697B;font-size:14px}
+
+.kw.kw-seite.lxp-seite{max-width:1240px}
+.lxq-it .kw-datei,.lxq-it .kw-datei *{text-align:left!important}
+.lxq-it .kw-datei{align-items:flex-start!important}
