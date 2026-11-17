@@ -1600,7 +1600,7 @@ window.deletePraktikumsphaseAuftrag=deletePraktikumsphaseAuftrag;
 //   (1) dem PROJEKT (Projektinhalte + Team-Meilensteine) und danach
 //   (2) dem ABSCHLUSSPRÜFUNGS-TRAINING (APT) mit den übrigen Lehrplan-
 //       inhalten des Lernbereichs, je Inhalt in 5 Bereichen:
-//       Prüfungsfrage → Inhalte & Aufgabeneingrenzung → Wissens-Check →
+//       Prüfungsfrage → Inhalte & Aufgabeneingrenzung → Check-in →
 //       Lernprodukt & Vorkorrektur (umgesetzt). Der K-Prim-Test läuft
 //       separat als „Check-out“ am Ende der Woche (live durch die Lehrkraft).
 // Die Zeitbudgets rechnen in echten Schulwochen (siehe SCHULWOCHEN_PP).
@@ -1650,7 +1650,7 @@ const PP_FARBEN={1:"#2494A8",2:"#8460B8",3:"#5FA33E",4:"#E08A2E"};
 // läuft 3 Schulwochen). Wochen ändern: nur die Listen projektSchulwochen /
 // aptSchulwochen unten anpassen (IDs siehe SCHULWOCHEN_PP).
 // Gemeinsamer Ablauf der drei Projekte (meilensteine): Team → Leitfrage →
-// fachliche Grundlage → Wissens-Check → Praxisbezug → Entwurf mit Feedback →
+// fachliche Grundlage → Check-in → Praxisbezug → Entwurf mit Feedback →
 // Endprodukt. Index 5 (Entwurf) und 6 (Endprodukt) bestätigt die Lehrkraft.
 const PROJEKT_PHASEN_ROH=[
  {id:"lb1",lb:"LB 1",lbNum:1,titel:"Das Experiment – interaktive Stunde",lbTitel:"Wissenschaft & Erziehung",
@@ -1666,13 +1666,13 @@ const PROJEKT_PHASEN_ROH=[
 
 Euer Weg:
 1. Bildet ein Team, grenzt euer Thema ein und formuliert eine Leitfrage mit Begründung.
-2. Erarbeitet die fachliche Grundlage (Merkmale von Erziehung, Erziehungsstile nach Baumrind) und prüft euren Wissensstand im Wissens-Check.
+2. Erarbeitet die fachliche Grundlage (Merkmale von Erziehung, Erziehungsstile nach Baumrind) und prüft euren Wissensstand im Check-in.
 3. Wendet die Theorie auf eine Beobachtung aus dem Praktikum an: beschreibt die Situation kurz und analysiert sie fachlich.
 4. Legt eine Gliederung bzw. einen Entwurf vor und holt euch Feedback der Lehrkraft.
 5. Erstellt euer Endprodukt (Ausarbeitung, Plakat oder Präsentation) und beantwortet darin eure Leitfrage.
 
 Datenschutz: Beobachtungen nur anonymisiert verwenden, also keine Namen, keine Einrichtung, keine erkennbaren Details.`},
-  meilensteine:["Team gebildet","Thema eingegrenzt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Merkmale von Erziehung, Baumrind)","Wissens-Check gemacht","Praxisbezug: anonymisierte Praktikumsbeobachtung fachlich analysiert","Gliederung bzw. Entwurf liegt vor (Feedback der Lehrkraft)","Endprodukt abgegeben und präsentiert"],
+  meilensteine:["Team gebildet","Thema eingegrenzt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Merkmale von Erziehung, Baumrind)","Check-in gemacht","Praxisbezug: anonymisierte Praktikumsbeobachtung fachlich analysiert","Gliederung bzw. Entwurf liegt vor (Feedback der Lehrkraft)","Endprodukt abgegeben und präsentiert"],
   bestaetigung:[5,6]},
  {id:"lb2",lb:"LB 2",lbNum:2,titel:"Wahrnehmungs- und Gedächtnis-Parcours",lbTitel:"Wahrnehmung, Gedächtnis, Emotion, Motivation",
   projektSchulwochen:["sw08","sw09","sw10"],aptSchulwochen:["sw11","sw12","sw13"],
@@ -1682,11 +1682,11 @@ Datenschutz: Beobachtungen nur anonymisiert verwenden, also keine Namen, keine E
 
 Euer Weg:
 1. Bildet ein Team, entscheidet euch für ein Phänomen (Wahrnehmung oder Gedächtnis) und formuliert eine Leitfrage mit Begründung.
-2. Erarbeitet die fachliche Grundlage (Wahrnehmung, Mehrspeichermodell, Strategien zum Wissenserwerb) und prüft euren Wissensstand im Wissens-Check.
+2. Erarbeitet die fachliche Grundlage (Wahrnehmung, Mehrspeichermodell, Strategien zum Wissenserwerb) und prüft euren Wissensstand im Check-in.
 3. Beschreibt kurz, was eure Station zeigt, und analysiert fachlich, welche Prozesse und Einflussfaktoren dahinterstehen.
 4. Legt ein Konzept für eure Station vor (Idee, Material, Ablauf) und holt euch Feedback der Lehrkraft.
 5. Führt eure Station im Parcours durch und gebt eine kurze Reflexion ab.`},
-  meilensteine:["Team gebildet","Phänomen gewählt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Wahrnehmung, Gedächtnis)","Wissens-Check gemacht","Praxisbezug: Station kurz beschrieben und fachlich analysiert","Konzept bzw. Entwurf der Station liegt vor (Feedback der Lehrkraft)","Station im Parcours durchgeführt, Reflexion abgegeben"],
+  meilensteine:["Team gebildet","Phänomen gewählt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Wahrnehmung, Gedächtnis)","Check-in gemacht","Praxisbezug: Station kurz beschrieben und fachlich analysiert","Konzept bzw. Entwurf der Station liegt vor (Feedback der Lehrkraft)","Station im Parcours durchgeführt, Reflexion abgegeben"],
   bestaetigung:[5,6]},
  {id:"lb4",lb:"LB 4",lbNum:4,titel:"Konditionierung im Alltag entdecken",lbTitel:"Lernen",
   projektSchulwochen:["sw14","sw15","sw16"],aptSchulwochen:["sw17","sw18","sw19"],
@@ -1696,11 +1696,11 @@ Euer Weg:
 
 Euer Weg:
 1. Bildet ein Team, grenzt euer Thema ein und formuliert eine Leitfrage mit Begründung.
-2. Erarbeitet die fachliche Grundlage (Merkmale von Lernen, klassisches Konditionieren nach Pawlow, operantes Konditionieren nach Thorndike und Skinner) und prüft euren Wissensstand im Wissens-Check.
+2. Erarbeitet die fachliche Grundlage (Merkmale von Lernen, klassisches Konditionieren nach Pawlow, operantes Konditionieren nach Thorndike und Skinner) und prüft euren Wissensstand im Check-in.
 3. Sammelt Alltagsbeispiele, wählt eines aus, beschreibt es kurz und analysiert es fachlich (klassisch oder operant?).
 4. Legt eine Gliederung bzw. einen Entwurf eurer Dokumentation vor und holt euch Feedback der Lehrkraft.
 5. Erstellt euer Endprodukt (Dokumentation, Plakat oder Präsentation) und beantwortet darin eure Leitfrage.`},
-  meilensteine:["Team gebildet","Thema eingegrenzt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Konditionierung)","Wissens-Check gemacht","Praxisbezug: Alltagsbeispiel kurz beschrieben und fachlich analysiert","Gliederung bzw. Entwurf liegt vor (Feedback der Lehrkraft)","Endprodukt abgegeben und präsentiert"],
+  meilensteine:["Team gebildet","Thema eingegrenzt, Leitfrage mit Begründung formuliert","Fachliche Grundlage erarbeitet (Konditionierung)","Check-in gemacht","Praxisbezug: Alltagsbeispiel kurz beschrieben und fachlich analysiert","Gliederung bzw. Entwurf liegt vor (Feedback der Lehrkraft)","Endprodukt abgegeben und präsentiert"],
   bestaetigung:[5,6]}
 ];
 // Teams hängen am Projekt (nicht an einem einzelnen Inhalt) – ein Team pro
@@ -2518,7 +2518,7 @@ async function toggleMaterialErhalten(fach,wocheId,erledigt){
 }
 window.toggleAuftragGelesen=toggleAuftragGelesen;
 
-// ---- Wissens-Check: 2-3 kurze Fragen direkt nach dem Material, damit früh
+// ---- Check-in: 2-3 kurze Fragen direkt nach dem Material, damit früh
 // sichtbar wird, ob die Grundidee verstanden wurde (nicht nur "gelesen"). ----
 const CHECKIN_12={
 t12_1_1:[
@@ -2728,7 +2728,7 @@ t12_4_4:["Metakommunikation","Ich-Botschaft","Aktives Zuhören","Feedback","Tech
 t12_4_5:["Normen und Werte","Blickkontakt","Nonverbale Codes","Interkulturelles Verhalten","Missverständnis im Fall"],
 t12_4_6:["Fehlende nonverbale Signale","Cybermobbing","Datenmissbrauch","Reale Beziehungen","Digitale Kommunikation im Fall"]
 };
-// Zusätzliche Wissens-Check-Aufgaben: z = Zuordnung/Lückentext/Reihenfolge (Position 3), f = Freitext (letzte Position)
+// Zusätzliche Check-in-Aufgaben: z = Zuordnung/Lückentext/Reihenfolge (Position 3), f = Freitext (letzte Position)
 const CHECKIN_NEU={
 t12_1_1:{tz:"Entwicklungsbedingungen zuordnen",tf:"Zusammenwirken erklären",
  z:["Z", "Ordne jedem Begriff die passende Beschreibung zu.", ["Anlage=Genetisch mitgegebene Voraussetzungen", "Umwelt=Äußere Einflüsse wie Familie, Freunde und Kultur", "Selbststeuerung=Der Mensch gestaltet seine Entwicklung aktiv mit"]],
@@ -2824,10 +2824,23 @@ function checkinMischen(arr,key){return arr.map((x,i)=>({x,h:checkinHash(key+"|"
 function checkinAusBank(id){
  const ende=/@ende$/.test(id);if(ende)id=id.slice(0,-5);const b=(ende?CHECKOUT_12:CHECKIN_12)[id];if(!b)return[];
  const n=CHECKIN_NEU[id],t=CHECKIN_TAGS_12[id]||[];
- const items=ende?b:(n?[b[0],b[1],n.z,b[4],n.f]:b);
- const tags=n?[t[0],t[1],n.tz,t[4],n.tf]:t;
- return items.map((q,qi)=>{
+ let items,tags,ph;
+ if(ende){
+  // Check-out (anspruchsvoller, mit Transfer): Sichern, Anwenden, Erklären und Begründen, danach der Rückblick (Sicherheit + Lernkurve)
+  items=b;tags=n?[t[0],t[1],n.tz,t[4],n.tf]:t;
+  ph=["Sichern","Sichern","Sichern","Anwenden","Erklären und begründen"];
+ }else{
+  // Check-in (leicht): Hinführung, Vorwissen, eigene Fragen
+  const k=b.find(q=>q[0]==="K");
+  items=[k?["I",k[1]]:null,b[0],b[1],n?n.z:b[2],["E"]];
+  tags=["Hinführung",t[0],t[1],n?n.tz:t[2],"Eigene Fragen"];
+  ph=["Hinführung","Vorwissen","Vorwissen","Vorwissen","Eigene Fragen"];
+ }
+ const out=items.map((q,qi)=>{
+  if(!q)return null;
   const tag=tags[qi]||"";
+  if(q[0]==="I")return{typ:"frei",opt:true,text:"Lies die Situation. Was fällt dir auf? Was weißt du schon dazu?",situation:q[1],tag,platzhalter:"Schreibe auf, was dir auffällt. Auch Vermutungen sind willkommen …",hinweis:"Diese Aufgabe wird nicht bewertet. Es gibt keine falsche Antwort."};
+  if(q[0]==="E")return{typ:"frei",opt:true,text:"Welche Fragen hast du zu diesem Thema? Was möchtest du noch wissen?",tag,platzhalter:"Schreibe deine Fragen auf …",hinweis:"Deine Fragen helfen dir und deiner Lehrkraft. Sie werden nicht bewertet."};
   if(q[0]==="K")return{typ:"kprim",text:q[1],tag,statements:q[2].map(s=>({text:s.slice(1),correct:s[0]==="+"}))};
   if(q[0]==="Z")return{typ:"zuordnung",text:q[1],tag,paare:q[2].map(p=>{const k=p.indexOf("=");return{l:p.slice(0,k),r:p.slice(k+1)}})};
   if(q[0]==="L")return{typ:"lueckentext",text:q[1],tag,loesung:q[2],woerter:checkinMischen(q[2].concat(q[3]||[]),q[1])};
@@ -2838,13 +2851,14 @@ function checkinAusBank(id){
   const o=opts.slice(k).concat(opts.slice(0,k));
   return{typ:"mc",text:q[0],tag,optionen:o.map(x=>x.t),richtig:o.findIndex(x=>x.r)};
  });
+ return out.map((o,qi)=>o?{...o,phase:ph[qi]}:o).filter(Boolean);
 }
 async function getBasischeckFragen(wocheId){
  try{
  const snap=await getDoc(doc(db,"basischeckFragen",wocheId));
  if(snap.exists()&&(snap.data().fragen||[]).length)return snap.data().fragen;
  return checkinAusBank(wocheId);
- }catch(e){console.error("Wissens-Check-Fragen laden:",e);return checkinAusBank(wocheId)}
+ }catch(e){console.error("Check-in-Fragen laden:",e);return checkinAusBank(wocheId)}
 }
 function basischeckTypToggle(i){
  const typ=$(`bcTyp${i}`)?.value;
@@ -2854,7 +2868,7 @@ function basischeckTypToggle(i){
 }
 window.basischeckTypToggle=basischeckTypToggle;
 async function saveBasischeckFragen(fach,wocheId){
- if(!isTeacher()){toast("Nur Lehrkräfte können Wissens-Check-Fragen anlegen.");return}
+ if(!isTeacher()){toast("Nur Lehrkräfte können Check-in-Fragen anlegen.");return}
  const fragen=[];
  for(let i=0;i<5;i++){
  const text=$(`bcFrage${i}`)?.value.trim();
@@ -2899,19 +2913,19 @@ async function saveBasischeckFragen(fach,wocheId){
  if(!fragen.length){toast("Bitte mindestens eine vollständige Frage eingeben.");return}
  try{
  await setDoc(doc(db,"basischeckFragen",wocheId),{wocheId,fach,fragen,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
- toast("Wissens-Check gespeichert.");
+ toast("Check-in gespeichert.");
  if($("ciAnsicht")){await openCheckIn(wocheId);return}
  await reopenDetail(fach,wocheId);
- }catch(e){console.error("Wissens-Check speichern:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
+ }catch(e){console.error("Check-in speichern:",e);toast(e?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln prüfen.":"Konnte nicht gespeichert werden.");}
 }
 window.saveBasischeckFragen=saveBasischeckFragen;
 async function getMyBasischeckVersuch(wocheId){
  try{
  const snap=await getDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${wocheId}`));
  return snap.exists()?snap.data():null;
- }catch(e){console.error("Wissens-Check-Versuch laden:",e);return null}
+ }catch(e){console.error("Check-in-Versuch laden:",e);return null}
 }
-// ---- Wissens-Check-Verlauf: alle Versuche stehen im selben Datensatz (verlauf), kein Zusatz-Laden ----
+// ---- Check-in-Verlauf: alle Versuche stehen im selben Datensatz (verlauf), kein Zusatz-Laden ----
 function ciVerlauf(x){
  const v=Array.isArray(x&&x.verlauf)?x.verlauf.filter(p=>p&&p.g>0):[];
  if(v.length)return v;
@@ -2947,7 +2961,7 @@ function basischeckAmpelText(ampel){
  if(ampel==="rot")return"Rot – das Thema ist neu, der Lehrtext hilft dir";
  return"Noch nicht bearbeitet";
 }
-// Wertet eine einzelne Wissens-Check-Frage aus, je nach Typ. Alte Fragen ohne
+// Wertet eine einzelne Check-in-Frage aus, je nach Typ. Alte Fragen ohne
 // "typ"-Feld werden wie Multiple Choice behandelt (Rückwärtskompatibilität).
 function basischeckGradeFrage(f,i){
  const typ=f.typ||"mc";
@@ -2985,15 +2999,15 @@ function basischeckGradeFrage(f,i){
  }
  if(typ==="frei"){
  const text=($(`bcFrei${i}`)?.value||"").trim();
- return {beantwortet:text.length>=10,richtig:false,antwort:text,frei:true};
+ return {beantwortet:!!f.opt||text.length>=10,richtig:false,antwort:text,frei:true};
  }
  return {beantwortet:false,richtig:false,antwort:null};
 }
-async function submitBasischeck(e,t){const n=await getBasischeckFragen(t);if(!n.length){toast("Keine Fragen vorhanden.");return}const i=n.map((d,p)=>basischeckGradeFrage(d,p)),r=i.findIndex(d=>!d.beantwortet);if(r>=0){toast(n[r].typ==="frei"?"Bitte schreibe bei der Freitext-Aufgabe mindestens einen Satz.":"Bitte alle Fragen beantworten.");return}const a=i.filter(d=>!d.frei),s=a.filter(d=>d.richtig).length,l=a.length,c=basischeckAmpel(s,l);try{const d=await getMyBasischeckVersuch(t),p=parseInt(document.querySelector('input[name="ciSich"]:checked')?.value,10)||0,h=d&&d.createdAt&&d.createdAt.toMillis?d.createdAt.toMillis():0,k=[...d?d.verlauf||[{r:d.richtig,g:d.gesamt,s:d.sicher||0,t:h}]:[],{r:s,g:l,s:p,t:Date.now(),rf:i.map(f=>f.frei?"x":f.richtig?"1":"0").join("")}].slice(-10);if(await setDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,antworten:i.map(f=>f.antwort),tg:n.map(f=>f.tag||""),richtig:s,gesamt:l,ampel:c,sicher:p,verlauf:k,name:anzeigeName(profile,currentUser),createdAt:serverTimestamp()}),delete CI_NEU[t],toast(`${s} von ${l} richtig.`),$("ciAnsicht")){(/@ende$/.test(t)||await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,basischeckErledigt:!0,updatedAt:serverTimestamp()},{merge:!0}).catch(f=>console.error(f))),ppDirty=!0,await openCheckIn(t),c==="gruen"&&showMotivationsBild(!1,"lernen","bc:"+t);return}if(lehrplanWocheById(e,t)?.typ==="apt"){await aptSetzen(t,{basischeckErledigt:!0},{tab:"basischeck"});return}(/@ende$/.test(t)||await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,basischeckErledigt:!0,updatedAt:serverTimestamp()},{merge:!0}).catch(f=>console.error(f))),await reopenDetail(e,t),c==="gruen"&&showMotivationsBild(!1,"lernen","bc:"+t)}catch(d){console.error("Wissens-Check abgeben:",d),toast(d?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln pr\xFCfen.":"Konnte nicht gespeichert werden.")}}
+async function submitBasischeck(e,t){const n=await getBasischeckFragen(t);if(!n.length){toast("Keine Fragen vorhanden.");return}const i=n.map((d,p)=>basischeckGradeFrage(d,p)),r=i.findIndex(d=>!d.beantwortet);if(r>=0){toast(n[r].typ==="frei"?"Bitte schreibe bei der Freitext-Aufgabe mindestens einen Satz.":"Bitte alle Fragen beantworten.");return}const a=i.filter(d=>!d.frei),s=a.filter(d=>d.richtig).length,l=a.length,c=basischeckAmpel(s,l);try{const d=await getMyBasischeckVersuch(t),p=parseInt(document.querySelector('input[name="ciSich"]:checked')?.value,10)||0,h=d&&d.createdAt&&d.createdAt.toMillis?d.createdAt.toMillis():0,k=[...d?d.verlauf||[{r:d.richtig,g:d.gesamt,s:d.sicher||0,t:h}]:[],{r:s,g:l,s:p,t:Date.now(),rf:i.map(f=>f.frei?"x":f.richtig?"1":"0").join("")}].slice(-10);if(await setDoc(doc(db,"basischeckVersuche",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,antworten:i.map(f=>f.antwort),tg:n.map(f=>f.tag||""),richtig:s,gesamt:l,ampel:c,sicher:p,verlauf:k,name:anzeigeName(profile,currentUser),createdAt:serverTimestamp()}),delete CI_NEU[t],toast(`${s} von ${l} richtig.`),$("ciAnsicht")){(/@ende$/.test(t)||await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,basischeckErledigt:!0,updatedAt:serverTimestamp()},{merge:!0}).catch(f=>console.error(f))),ppDirty=!0,await openCheckIn(t),c==="gruen"&&showMotivationsBild(!1,"lernen","bc:"+t);return}if(lehrplanWocheById(e,t)?.typ==="apt"){await aptSetzen(t,{basischeckErledigt:!0},{tab:"basischeck"});return}(/@ende$/.test(t)||await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${t}`),{uid:currentUser.uid,wocheId:t,fach:e,basischeckErledigt:!0,updatedAt:serverTimestamp()},{merge:!0}).catch(f=>console.error(f))),await reopenDetail(e,t),c==="gruen"&&showMotivationsBild(!1,"lernen","bc:"+t)}catch(d){console.error("Check-in abgeben:",d),toast(d?.code==="permission-denied"?"Firebase verweigert das Speichern. Bitte die Firestore-Regeln pr\xFCfen.":"Konnte nicht gespeichert werden.")}}
 window.submitBasischeck=submitBasischeck;
 
 // ---- Live-Wochenübersicht für Lehrkräfte: Fortschritt-Position je Person,
-// Wissens-Check-Ampel, Lernstand-Ampel und "zuletzt aktiv" – aktualisiert sich
+// Check-in-Ampel, Lernstand-Ampel und "zuletzt aktiv" – aktualisiert sich
 // automatisch per Firestore-Live-Listener, ohne dass neu geöffnet werden muss.
 let wochenLiveState=null;
 function renderWochenLiveTable(fach,wocheId,woche){
@@ -3003,7 +3017,7 @@ function renderWochenLiveTable(fach,wocheId,woche){
  if(!tbody)return;
  const relevanteTasks=st.lsTasks.filter(t=>st.wocheLbKeys.includes(t.learningArea));
  // Basis-Schritte, die immer zählen: Auftrag, Material, Lernprodukt, Lernstand, Selbsteinschätzung.
- // Wissens-Check und Team zählen nur mit, wenn für diese Woche zutreffend.
+ // Check-in und Team zählen nur mit, wenn für diese Woche zutreffend.
  const gesamtSchritte=5+(st.hatBasischeck?1:0)+(wocheHatTeam(woche)?1:0)+(woche.interaktiv?1:0);
  tbody.innerHTML=st.students.map(s=>{
  const f=st.fortschritt.find(x=>x.uid===s.uid)||{};
@@ -3045,7 +3059,7 @@ function subscribeWochenLive(fach,wocheId,woche){
  const u2=onSnapshot(
  query(collection(db,"basischeckVersuche"),where("wocheId","==",wocheId)),
  snap=>{wochenLiveState.basischeck=snap.docs.map(d=>d.data());renderWochenLiveTable(fach,wocheId,woche);},
- e=>console.error("Wochen-Live-Update (Wissens-Check):",e)
+ e=>console.error("Wochen-Live-Update (Check-in):",e)
  );
  liveUnsubscribe=()=>{try{u1();}catch(e){}try{u2();}catch(e){}};
 }
@@ -3068,7 +3082,7 @@ async function openWochenLiveUebersicht(fach,wocheId){
  <h2>${esc(woche.thema)}</h2>
  <p style="color:var(--muted);font-size:12px">Aktualisiert sich automatisch, sobald Schüler:innen einen Schritt abschließen – kein Neuladen nötig. Rot markiertes Datum = seit 3+ Tagen keine Aktivität.</p>
  <div style="overflow-x:auto"><table class="ls-matrix">
- <thead><tr><th>Schüler:in</th><th>Fortschritt</th><th>Wissens-Check</th><th>Abschluss-Check</th><th>Zuletzt aktiv</th></tr></thead>
+ <thead><tr><th>Schüler:in</th><th>Fortschritt</th><th>Check-in</th><th>Abschluss-Check</th><th>Zuletzt aktiv</th></tr></thead>
  <tbody id="wochenLiveTbody"><tr><td colspan="5">Lädt …</td></tr></tbody>
  </table></div>
  <div class="form-actions"style="margin-top:14px">
@@ -7464,7 +7478,7 @@ function renderPPTeilAnsicht(ph,teil,fortschrittMap,meineTeams,heute,extra={}){
     <div class="pp-schritte">${s.map((d,i)=>`<span class="${d?"done":""}"style="${d?`background:${c};border-color:${c}`:""}"title="${esc(APT_SCHRITT_LABELS[i])}">${d?"✓":i+1}</span>`).join("")}</div>
     ${(e.bezug||[]).length?`<small class="pp-bezug">🔗 baut auf dem Projekt auf: ${(e.bezug||[]).map(b=>`<a href="javascript:void 0"onclick="event.stopPropagation();openWocheDetail('paedagogik','${b}')">${esc(lehrplanWocheById("paedagogik",b)?.thema||b)}</a>`).join(" · ")}</small>`:""}
    </div>`;}).join("")}</div>
-  <p style="font-size:11px;color:var(--muted);margin-top:10px">① Prüfungsfrage · ② Inhalte & Aufgabeneingrenzung · ③ Wissens-Check · ④ Lernprodukt hochladen & Vorkorrektur umsetzen. Den K-Prim-Test schreibst du als 🏁 Check-out am Ende der Woche.</p>`;
+  <p style="font-size:11px;color:var(--muted);margin-top:10px">① Prüfungsfrage · ② Inhalte & Aufgabeneingrenzung · ③ Check-in · ④ Lernprodukt hochladen & Vorkorrektur umsetzen. Den K-Prim-Test schreibst du als 🏁 Check-out am Ende der Woche.</p>`;
  }
  return`<button class="secondary"onclick="closePhaseDetail()">← Zurück zum Zeitstrahl</button>
  ${ppMiniZeitstrahlHTML(fortschrittMap,meineTeams,heute,`${ph.id}:${teil}`,extra.coDaten)}
@@ -7694,7 +7708,7 @@ async function getAptInhalt(id){
 }
 function aptKprimAufgaben(inhalt,e){return(inhalt.kprim&&inhalt.kprim.length)?inhalt.kprim:(e.kprim||[]);}
 
-// Wissens-Check-Bereich (Lehrkraft-Editor bzw. Schüler-Test) – gemeinsam
+// Check-in-Bereich (Lehrkraft-Editor bzw. Schüler-Test) – gemeinsam
 // genutzt von Projektinhalten und APT-Inhalten.
 // ---- K-Prim als Tabelle: Aussage | richtig | falsch (wie in der Prüfung) ----
 const KPRIM_ANLEITUNG="<b>Kreuzen Sie für jede Aussage an, ob sie richtig oder falsch ist.</b>";
@@ -7720,7 +7734,7 @@ function basischeckEingabeHTML(f,i,typ){
  if(typ==="mc")return`<div class="ci-opts">${f.optionen.map((o,j)=>`<label class="ci-o"><input type="radio"name="bcQ${i}"value="${j}"><span class="ci-m"></span><span class="ci-ot">${esc(o)}</span></label>`).join("")}</div>`;
  if(typ==="kprim")return kprimTabelleHTML(`bcKp${i}`,f.statements.map(x=>x.text));
  if(typ==="offen")return`<textarea id="bcOffenAntwort${i}"rows="3"placeholder="Deine Antwort …"></textarea>`;
- if(typ==="frei")return`<textarea id="bcFrei${i}"class="ci-frei"rows="4"placeholder="Schreibe ein bis zwei Sätze in deinen eigenen Worten …"></textarea><p class="ci-hinw">Diese Aufgabe wird nicht bewertet. Danach siehst du eine Musterantwort zum Vergleichen.</p>`;
+ if(typ==="frei")return`<textarea id="bcFrei${i}"class="ci-frei"rows="4"placeholder="${esc(f.platzhalter||"Schreibe ein bis zwei Sätze in deinen eigenen Worten …")}"></textarea><p class="ci-hinw">${esc(f.hinweis||"Diese Aufgabe wird nicht bewertet. Danach siehst du eine Musterantwort zum Vergleichen.")}</p>`;
  if(typ==="zuordnung"){
   const rs=checkinMischen(f.paare.map((p,j)=>j),f.text);
   return`<div class="ci-zu">${f.paare.map((p,j)=>`<div class="ci-zr"><span class="ci-zl">${esc(p.l)}</span><select id="bcZ${i}_${j}"aria-label="${esc(p.l)}"><option value="">– wählen –</option>${rs.map(k=>`<option value="${k}">${esc(f.paare[k].r)}</option>`).join("")}</select></div>`).join("")}</div>`;
@@ -7753,7 +7767,7 @@ function basischeckEditorHTML(fach,wocheId,fragen){
       ${T.map(([v,t])=>`<option value="${v}"${typ===v?" selected":""}>${t}</option>`).join("")}
      </select></label>
     </div>
-    <label class="bc-tag">Lernziel (verbindet Wissens-Check am Anfang und am Ende)<input id="bcTag${i}"type="text"value="${esc(f.tag||"")}"placeholder="z. B. Selbststeuerung"></label>
+    <label class="bc-tag">Lernziel (verbindet Check-in und am Ende)<input id="bcTag${i}"type="text"value="${esc(f.tag||"")}"placeholder="z. B. Selbststeuerung"></label>
     <div id="bcMcBereich${i}"style="${dis("mc")}">
      <div class="grid grid-2">${[0,1,2].map(j=>`<label>Antwort ${j+1}${j>1?" (optional)":""}<input id="bcOpt${i}_${j}"type="text"value="${esc(f.optionen?.[j]||"")}"></label>`).join("")}</div>
      <label style="margin-top:6px">Richtige Antwort<select id="bcRichtig${i}">${[0,1,2].map(j=>`<option value="${j}"${f.richtig===j?" selected":""}>Antwort ${j+1}</option>`).join("")}</select></label>
@@ -7785,22 +7799,22 @@ function basischeckEditorHTML(fach,wocheId,fragen){
     </div>
    </div>`;
   }).join("")}
-  <button class="primary"onclick="saveBasischeckFragen('${fach}','${wocheId}')">Wissens-Check speichern</button>
+  <button class="primary"onclick="saveBasischeckFragen('${fach}','${wocheId}')">Check-in speichern</button>
  </div>`;
 }
 function r_dy(e){const t=e&&e.verlauf;return t&&t.length>1?`<small>Verlauf: ${t.map(n=>n.r+"/"+n.g).join(" \u2192 ")}</small>`:""}
 const CI_NEU={};
 function ciWiederholen(e){CI_NEU[e]=!0,openCheckIn(e)}
 window.ciWiederholen=ciWiederholen;
-function basischeckPanelHTML(e,t,n,i,r=""){if(isTeacher())return basischeckEditorHTML(e,t,n);if(!n.length)return`<div class="empty">F\xFCr diesen Inhalt wurde noch kein Wissens-Check eingerichtet.</div>${r}`;if(i)return`<div class="ci-res"style="--a:${ampelFarbe(i.ampel)}"><div class="ci-ring"><b>${i.richtig}</b><small>von ${i.gesamt}</small></div><div><strong>${i.richtig} von ${i.gesamt} richtig</strong><p>${esc(ceIstEnde(t)?ciEndeText(i.ampel):basischeckAmpelText(i.ampel))}</p>${r_dy(i)}</div></div>${r_oy(n,i)}${ciVerlaufSVG(i)?`<div class="ci-verlauf"><b>Dein Verlauf</b>${ciVerlaufSVG(i)}</div>`:""}<button type="button"class="secondary"onclick="ciWiederholen('${t}')">${ceIstEnde(t)?"Noch einmal machen":"Wissen erneut pr\xFCfen"}</button>`;const a=n.length,s=Math.max(3,Math.round(a*1.2)),l={mc:"Auswahl",kprim:"Richtig oder falsch",offen:"Kurzantwort",zuordnung:"Zuordnen",lueckentext:"L\xFCckentext",reihenfolge:"Reihenfolge",frei:"Freitext"};return`<div class="ci">
+function basischeckPanelHTML(e,t,n,i,r=""){if(isTeacher())return basischeckEditorHTML(e,t,n);if(!n.length)return`<div class="empty">F\xFCr diesen Inhalt wurde noch kein Check-in eingerichtet.</div>${r}`;if(i)return`<div class="ci-res"style="--a:${ampelFarbe(i.ampel)}"><div class="ci-ring"><b>${i.richtig}</b><small>von ${i.gesamt}</small></div><div><strong>${i.richtig} von ${i.gesamt} richtig</strong><p>${esc(ceIstEnde(t)?ciEndeText(i.ampel):basischeckAmpelText(i.ampel))}</p>${r_dy(i)}</div></div>${r_oy(n,i)}${ciVerlaufSVG(i)?`<div class="ci-verlauf"><b>Dein Verlauf</b>${ciVerlaufSVG(i)}</div>`:""}<button type="button"class="secondary"onclick="ciWiederholen('${t}')">${ceIstEnde(t)?"Noch einmal machen":"Wissen erneut pr\xFCfen"}</button>`;const a=n.length,s=Math.max(3,Math.round(a*1.2)),l={mc:"Auswahl",kprim:"Richtig oder falsch",offen:"Kurzantwort",zuordnung:"Zuordnen",lueckentext:"L\xFCckentext",reihenfolge:"Reihenfolge",frei:"Freitext"};return`<div class="ci">
   <div class="ci-kopf"><span>${a} Aufgaben</span><span>etwa ${s} Minuten</span><span>keine Note</span></div>
-  ${n.map((c,d)=>{const p=c.typ||"mc";return`<section class="ci-q ci-k-${p}">
-    ${p==="kprim"?`<div class="ci-qk"><span class="ci-n">${d+1}</span><div class="ci-t">${kprimFrageKopfHTML("",c.text,c.vignette)}</div></div>`:`<div class="ci-qk"><span class="ci-n">${d+1}</span>${p==="lueckentext"?'<b class="ci-t">Erg\xE4nze den Text.</b>':`<b class="ci-t">${esc(c.text)}</b>`}</div>`}
+  ${n.map((c,d)=>{const p=c.typ||"mc";return`${c.phase&&(d===0||n[d-1].phase!==c.phase)?`<h3 class="ci-phase">${esc(c.phase)}</h3>`:""}<section class="ci-q ci-k-${p}">
+    ${c.situation?`<p class="ci-sit">${esc(c.situation)}</p>`:""}${p==="kprim"?`<div class="ci-qk"><span class="ci-n">${d+1}</span><div class="ci-t">${kprimFrageKopfHTML("",c.text,c.vignette)}</div></div>`:`<div class="ci-qk"><span class="ci-n">${d+1}</span>${p==="lueckentext"?'<b class="ci-t">Erg\xE4nze den Text.</b>':`<b class="ci-t">${esc(c.text)}</b>`}</div>`}
     <span class="ci-art">${l[p]||""}</span>
     ${basischeckEingabeHTML(c,d,p)}
    </section>`}).join("")}
-  <div class="ci-sich"><b>Wie sicher f\xFChlst du dich bei diesem Thema?</b><label><input type="radio"name="ciSich"value="1"> eher unsicher</label><label><input type="radio"name="ciSich"value="2"> teils, teils</label><label><input type="radio"name="ciSich"value="3"> ziemlich sicher</label></div>
-  <button class="primary ci-go"onclick="submitBasischeck('${e}','${t}')">${ceIstEnde(t)?"Wissens-Check am Ende abgeben":"Wissens-Check abgeben"}</button>
+  ${ceIstEnde(t)?'<h3 class="ci-phase">R\xFCckblick</h3>':""}<div class="ci-sich"><b>${ceIstEnde(t)?"Wie sicher f\xFChlst du dich jetzt \u2013 im Vergleich zu deinem Check-in?":"Wie sicher f\xFChlst du dich bei diesem Thema?"}</b><label><input type="radio"name="ciSich"value="1"> eher unsicher</label><label><input type="radio"name="ciSich"value="2"> teils, teils</label><label><input type="radio"name="ciSich"value="3"> ziemlich sicher</label></div>
+  <button class="primary ci-go"onclick="submitBasischeck('${e}','${t}')">${ceIstEnde(t)?"Check-out abgeben":"Check-in abgeben"}</button>
  </div>`}
 
 async function openCheckIn(wocheId){
@@ -7814,9 +7828,9 @@ async function openCheckIn(wocheId){
  const lb=ph?`LB ${ph.lbNum}`:(e.lb||"");
  modal(`<button class="modal-close"onclick="closeModal()">×</button>
   <div id="ciAnsicht"class="ci-seite"style="--c:${c}">
-   <div class="kicker"style="color:${c}">${esc(lb)} · ${ende?"Wissens-Check am Ende":"Wissens-Check"}</div>
+   <div class="kicker"style="color:${c}">${esc(lb)} · ${ende?"Check-out":"Check-in"}</div>
    <h2>${esc(e.thema)}</h2>
-   <p class="ci-intro">${lehrer?(ende?"Lehrkraft-Ansicht (Wissens-Check am Ende): Dieselben Lernziele wie am Anfang, anders formuliert und etwas anspruchsvoller. Du kannst alles bearbeiten oder ergänzen. Das Feld Lernziel verbindet die Aufgabe automatisch mit dem Wissens-Check am Anfang. Gespeicherte Fragen ersetzen die Standardfragen für alle.":"Lehrkraft-Ansicht: Hier bearbeitest du die Fragen. Gespeicherte Fragen ersetzen den Standard-Check-In für alle."):mein?"Dein Ergebnis:":(ende?"Was kannst du jetzt? Die Aufgaben prüfen dieselben Lernziele wie am Anfang, nur anders gestellt. Kein Test, keine Note. Danach siehst du deine Lernkurve.":"Was weißt du schon? Kein Test, keine Note. Du siehst danach, wo du stehst.")}</p>
+   <p class="ci-intro">${lehrer?(ende?"Lehrkraft-Ansicht (Check-out): Dieselben Lernziele wie am Anfang, anders formuliert und etwas anspruchsvoller. Du kannst alles bearbeiten oder ergänzen. Das Feld Lernziel verbindet die Aufgabe automatisch mit dem Check-in. Gespeicherte Fragen ersetzen die Standardfragen für alle.":"Lehrkraft-Ansicht: Hier bearbeitest du die Fragen. Gespeicherte Fragen ersetzen den Standard-Check-In für alle."):mein?"Dein Ergebnis:":(ende?"Zeig, was du jetzt kannst: Du sicherst dein Wissen, wendest es auf einen Fall an, erklärst und begründest. Danach blickst du zurück und siehst deine Lernkurve. Keine Note.":"Wir starten leicht: Du liest eine Situation, zeigst, was du schon weißt, und schreibst deine Fragen auf. Kein Test, keine Note.")}</p>
    ${ende&&!lehrer&&mein?'<div id="ceEntw"></div>':""}${basischeckPanelHTML(fach,wocheId,fragen,mein)}
    <div class="ci-fuss"><button type="button"class="secondary"onclick="closeModal()">Schließen</button></div>
   </div>`);
@@ -7894,7 +7908,7 @@ async function openAptDetail(wocheId,tab){
    <input id="matUrl"type="url"placeholder="Link/URL"style="flex:1;min-width:160px">
    <button class="primary"onclick="addLehrplanMaterial('${fach}','${wocheId}')">＋ Material</button></div></div>`:"";
  const abgeschlossenAm=stDatum(fortschritt.einarbeitungAm);
- const ciKarte=(ciFragen.length||lehrer)?`<h3 class="apt-h3">Wissens-Check: Was weißt du schon?</h3><p style="font-size:13px;color:var(--muted);margin:0 0 8px">Kein Test, keine Note. Du siehst danach, wo du stehst.</p>${basischeckPanelHTML("paedagogik",wocheId,ciFragen,ciMein)}`:"";
+ const ciKarte=(ciFragen.length||lehrer)?`<h3 class="apt-h3">Check-in: Was weißt du schon?</h3><p style="font-size:13px;color:var(--muted);margin:0 0 8px">Kein Test, keine Note. Du siehst danach, wo du stehst.</p>${basischeckPanelHTML("paedagogik",wocheId,ciFragen,ciMein)}`:"";
  const s2=`${ciKarte}${einKarte}
   ${matListe||lehrer?`<h3 class="apt-h3">Material</h3><div class="list">${matListe||`<div class="empty">Noch kein Material eingestellt.</div>`}</div>`:""}${matForm}
   ${lehrer?"":schritte[1]?`<div class="st-fertig">✓ Einarbeitung abgeschlossen${abgeschlossenAm?` am ${abgeschlossenAm}`:""} <button class="text-button"style="font-size:11px"onclick="aptSetzen('${wocheId}',{einarbeitungAbgeschlossen:false,materialBearbeitet:false,basischeckErledigt:false},{tab:'einarbeitung'})">zurücknehmen</button></div>`
@@ -10518,7 +10532,7 @@ function showWocheTab(tabId){
 }
 window.showWocheTab=showWocheTab;
 
-async function openWocheDetail(e,t,n){if(istStundeneinheit(t))return openAptDetail(t);const i=lehrplanWocheById(e,t);if(!i){toast("Diese Woche wurde nicht gefunden.");return}const[r,a,s,l,c,d,p,h,k]=await Promise.all([getLehrplanAuftrag(t),getLehrplanMaterialien(t),getLehrplanTeams(teamAnchorFor(t)),getLehrplanProdukte(t),getLehrplanFortschritt(t),getLernstandTasks().catch(()=>[]),getMyLernstandAttempts().catch(()=>[]),getBasischeckFragen(t),getMyBasischeckVersuch(t)]),f=(i.lb||"").match(/\d/g)?.map(U=>"lb"+U)||[],y=d.filter(U=>f.includes(U.learningArea)),w=y.some(U=>lernstandAttemptCount(p,U.id)>0),v=(LEHRPLAN_ZIELE_VORSCHLAG[t]||[]).map((U,ge)=>({id:`z${ge}`,text:U})),S=v.length>0&&v.every(U=>c.zieleErfuellt?.[U.id]),A=s.find(U=>(U.mitgliederUids||[]).includes(currentUser.uid)),_=F11SB_FAECHER.find(U=>U.key===e)?.label||e,Q=l.some(U=>U.uid===currentUser.uid),C=[{label:"Auftrag gelesen",done:!!c.auftragGelesen,tab:"ziele"},{label:"Material erhalten",done:!!c.materialErhalten,tab:"material"},...h.length?[{label:"Wissens-Check",done:!!k,tab:"basischeck"}]:[],...wocheHatTeam(i)?[{label:"Team gebildet",done:!!A,tab:"team"}]:[],...i.interaktiv?[{label:"Interaktive Stunde",done:!!c.experimentErledigt,tab:"ziele"}]:[],{label:"Lernprodukt",done:Q,tab:"produkte"},{label:"Abschluss-Check",done:w,tab:"lernstand"},{label:"Selbsteinsch\xE4tzung",done:S,tab:"selbsteinschaetzung"},{label:"Fertig",done:!!c.abgeschlossen,tab:"selbsteinschaetzung"}];let H=C.findIndex(U=>!U.done);H===-1&&(H=C.length-1);const ie=n||C[Math.min(H,C.length-1)].tab,Ee=e==="paedagogik"?await ppEinheitKopfHTML(t):"",ee=e==="paedagogik"?PP_EINHEITEN.filter(U=>U.typ==="apt"&&(U.bezug||[]).includes(t)):[];modal(`<button class="modal-close"onclick="closeModal()">\xD7</button>
+async function openWocheDetail(e,t,n){if(istStundeneinheit(t))return openAptDetail(t);const i=lehrplanWocheById(e,t);if(!i){toast("Diese Woche wurde nicht gefunden.");return}const[r,a,s,l,c,d,p,h,k]=await Promise.all([getLehrplanAuftrag(t),getLehrplanMaterialien(t),getLehrplanTeams(teamAnchorFor(t)),getLehrplanProdukte(t),getLehrplanFortschritt(t),getLernstandTasks().catch(()=>[]),getMyLernstandAttempts().catch(()=>[]),getBasischeckFragen(t),getMyBasischeckVersuch(t)]),f=(i.lb||"").match(/\d/g)?.map(U=>"lb"+U)||[],y=d.filter(U=>f.includes(U.learningArea)),w=y.some(U=>lernstandAttemptCount(p,U.id)>0),v=(LEHRPLAN_ZIELE_VORSCHLAG[t]||[]).map((U,ge)=>({id:`z${ge}`,text:U})),S=v.length>0&&v.every(U=>c.zieleErfuellt?.[U.id]),A=s.find(U=>(U.mitgliederUids||[]).includes(currentUser.uid)),_=F11SB_FAECHER.find(U=>U.key===e)?.label||e,Q=l.some(U=>U.uid===currentUser.uid),C=[{label:"Auftrag gelesen",done:!!c.auftragGelesen,tab:"ziele"},{label:"Material erhalten",done:!!c.materialErhalten,tab:"material"},...h.length?[{label:"Check-in",done:!!k,tab:"basischeck"}]:[],...wocheHatTeam(i)?[{label:"Team gebildet",done:!!A,tab:"team"}]:[],...i.interaktiv?[{label:"Interaktive Stunde",done:!!c.experimentErledigt,tab:"ziele"}]:[],{label:"Lernprodukt",done:Q,tab:"produkte"},{label:"Abschluss-Check",done:w,tab:"lernstand"},{label:"Selbsteinsch\xE4tzung",done:S,tab:"selbsteinschaetzung"},{label:"Fertig",done:!!c.abgeschlossen,tab:"selbsteinschaetzung"}];let H=C.findIndex(U=>!U.done);H===-1&&(H=C.length-1);const ie=n||C[Math.min(H,C.length-1)].tab,Ee=e==="paedagogik"?await ppEinheitKopfHTML(t):"",ee=e==="paedagogik"?PP_EINHEITEN.filter(U=>U.typ==="apt"&&(U.bezug||[]).includes(t)):[];modal(`<button class="modal-close"onclick="closeModal()">\xD7</button>
  ${Ee}
  <div class="kicker">${esc(_)} \xB7 ${esc(i.lb)} \xB7 ${esc(fmtDateOnly(i.start))}\u2013${esc(fmtDateOnly(i.end))}</div>
  <h2>${esc(i.thema)}</h2>
@@ -10537,7 +10551,7 @@ async function openWocheDetail(e,t,n){if(istStundeneinheit(t))return openAptDeta
  <div class="wd-tabs">
  <button type="button"class="wd-tab"data-tab="ziele"onclick="showWocheTab('ziele')"> Lernziele und Aufgaben</button>
  <button type="button"class="wd-tab"data-tab="material"onclick="showWocheTab('material')"> Lernmaterialien</button>
- ${h.length||isTeacher()?`<button type="button"class="wd-tab"data-tab="basischeck"onclick="showWocheTab('basischeck')"> Wissens-Check</button>`:""}
+ ${h.length||isTeacher()?`<button type="button"class="wd-tab"data-tab="basischeck"onclick="showWocheTab('basischeck')"> Check-in</button>`:""}
  <button type="button"class="wd-tab"data-tab="team"onclick="showWocheTab('team')"> ${wocheHatTeam(i)?"Team":"(Team)"}</button>
  <button type="button"class="wd-tab"data-tab="produkte"onclick="showWocheTab('produkte')"> Lernprodukte</button>
  <button type="button"class="wd-tab"data-tab="lernstand"onclick="showWocheTab('lernstand')"> Abschluss-Check</button>
@@ -10622,7 +10636,7 @@ async function openWocheDetail(e,t,n){if(istStundeneinheit(t))return openAptDeta
  <label>Erwartete Stichworte (kommagetrennt \u2013 beliebig viele, ALLE m\xFCssen in der Antwort vorkommen, damit sie als richtig gilt)<input id="bcStichworte${U}"type="text"value="${esc((ge.stichworte||[]).join(", "))}"placeholder="z. B. Sozialisation, Erziehung, Werte"></label>
  </div>
  </div>`}).join("")}
- <button class="primary"onclick="saveBasischeckFragen('${e}','${t}')">Wissens-Check speichern</button>
+ <button class="primary"onclick="saveBasischeckFragen('${e}','${t}')">Check-in speichern</button>
  </div>`:h.length?k?`<div class="card"style="background:${ampelFarbe(k.ampel)}1a;border-left:4px solid ${ampelFarbe(k.ampel)}">
  <strong>${k.richtig} von ${k.gesamt} richtig</strong>
  <p style="margin:6px 0 0;color:var(--muted)">${esc(basischeckAmpelText(k.ampel))}</p>
@@ -10633,8 +10647,8 @@ async function openWocheDetail(e,t,n){if(istStundeneinheit(t))return openAptDeta
  ${de==="kprim"?kprimTabelleHTML(`bcKp${ge}`,U.statements.map(fe=>fe.text)):""}
  ${de==="offen"?`<textarea id="bcOffenAntwort${ge}"rows="3"placeholder="Deine Antwort \u2026"></textarea>`:""}
  </div>`}).join("")}
- <button class="primary"onclick="submitBasischeck('${e}','${t}')">${ceIstEnde(t)?"Wissens-Check am Ende abgeben":"Wissens-Check abgeben"}</button>
- </div>`:'<div class="empty">F\xFCr diese Woche wurde noch kein Wissens-Check eingerichtet.</div>'}
+ <button class="primary"onclick="submitBasischeck('${e}','${t}')">${ceIstEnde(t)?"Check-out abgeben":"Check-in abgeben"}</button>
+ </div>`:'<div class="empty">F\xFCr diese Woche wurde noch kein Check-in eingerichtet.</div>'}
  </div>
 
  <div class="wd-panel"id="wdPanel_team">
@@ -20510,12 +20524,14 @@ const KW={mat:{},fort:{},co:null,geladen:0};
 let activeKwThema=null,activeKwLb=null;
 // Reihenfolge der Dateien auf jeder Themenseite (immer gleich)
 const KW_KAT=[
- {key:"checkin",label:"Wissens-Check",hint:"Zuerst: Was weißt du schon? Kein Test, keine Note."},
+ {key:"checkin",label:"Check-in",hint:"Zuerst: Was weißt du schon? Kein Test, keine Note."},
  {key:"lernsituation",label:"Lernsituationen",hint:"Einstieg: eine Situation, an der das Thema sichtbar wird"},
  {key:"lehrtext",label:"Lehrtexte",hint:"Danach: Texte zum Nachlesen und Erarbeiten"},
  {key:"arbeitsblatt",label:"Arbeitsblätter",hint:"Zum Bearbeiten im Unterricht"},
  {key:"uebung",label:"Übungsaufgaben",hint:"Zum Üben und Festigen"},
  {key:"vertiefung",label:"Vertiefungsaufgaben",hint:"In drei Schwierigkeitsgraden",stufen:[["vertiefung1","Stufe 1 · grundlegend"],["vertiefung2","Stufe 2 · erweitert"],["vertiefung3","Stufe 3 · anspruchsvoll"]]},
+ {key:"audio",label:"Hören",hint:"Audio zum Thema"},
+ {key:"video",label:"Sehen",hint:"Video zum Thema"},
  {key:"tafel",label:"Digitale Tafeln",hint:"Tafelbilder zur Stunde",board:true},
  {key:"lernuebersicht",label:"Lernübersichten",hint:"Das Wichtigste auf einen Blick",board:true}
 ];
@@ -20619,7 +20635,7 @@ function kwSekHTML(titel,hint,inner,addKat,lehrer,extraBtn){
  return`<section class="kw-card kw-sek"><div class="kw-sek-kopf"><div><h3>${esc(titel)}</h3>${hint?`<small>${esc(hint)}</small>`:""}</div>${lehrer&&addKat?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${addKat}">+ hinzufügen</button>`:""}</div>${extraBtn||""}${inner}</section>`;
 }
 
-/* ------------------------------------------------ Lernstände: Wissens-Checks, Check-outs, digitale Tests mit KI-Vorkorrektur */
+/* ------------------------------------------------ Lernstände: Check-ins, Check-outs, digitale Tests mit KI-Vorkorrektur */
 const LT={tests:[],abg:{},alle:[],schueler:[],kiUrl:""};
 async function ltLaden(){
  LT.tests=[];LT.abg={};LT.alle=[];LT.schueler=[];LT.kiUrl="";
@@ -20643,7 +20659,7 @@ async function lsCheckInsLaden(){
  try{
   const snap=kwLehrer()?await getDocs(collection(db,"basischeckVersuche")):await getDocs(query(collection(db,"basischeckVersuche"),where("uid","==",currentUser.uid)));
   return snap.docs.map(d=>d.data()).filter(x=>!ceIstEnde(x.wocheId));
- }catch(e){console.warn("Wissens-Checks:",e);return[]}
+ }catch(e){console.warn("Check-ins:",e);return[]}
 }
 function lsThemaName(id){const e=kwThemaById(id);if(!e)return String(id);const lb=e.lbNum||String(e.phase||"").replace("lb","");return`LB ${lb} · ${kwKurz(e)}`}
 const LS_AMP={gruen:["#2E7D57","grün"],orange:["#E0A800","gelb"],rot:["#C0392B","rot"]};
@@ -20668,8 +20684,8 @@ function lsTopUnsicher(id,max){
  return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,max);
 }
 function lsThemaDetail(e){const t=kwThemaById(e),n=LT.schueler.length,i=(LT.ci||[]).filter(d=>d.wocheId===e),r={rot:0,orange:1,gruen:2},a=LT.schueler.map(d=>({u:d,x:i.find(p=>p.uid===d.uid)})).sort((d,p)=>(d.x?r[d.x.ampel]??1:3)-(p.x?r[p.x.ampel]??1:3)||anzeigeName(d.u).localeCompare(anzeigeName(p.u),"de")),s=d=>i.filter(p=>p.ampel===d).length,l=lsTopUnsicher(e,6),c=a.map(({u:d,x:p})=>{if(!p)return`<tr><th scope="row">${esc(anzeigeName(d))}</th><td><span style="color:var(--muted)">noch nicht gemacht</span></td><td></td></tr>`;const h=lsUnsicher(p);return`<tr><th scope="row">${esc(anzeigeName(d))}</th><td style="white-space:nowrap">${lsAmpelPunkt(p.ampel)} ${p.richtig} von ${p.gesamt} richtig${ciVerlaufTxt(p)?`<br><small style="color:var(--muted)">Verlauf: ${ciVerlaufTxt(p)}</small>`:""}</td><td>${h.length?esc(h.join(" \xB7 ")):'<span style="color:var(--muted)">\u2013</span>'}</td></tr>`}).join("");modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">CHECK-IN</div><h2>${esc(t?kwKurz(t):e)}</h2>
- <p style="margin:2px 0 12px;font-size:13px;color:var(--muted)">${i.length} von ${n} haben den Wissens-Check gemacht \xB7 <b style="color:#2E7D57">${s("gruen")} gr\xFCn</b> \xB7 <b style="color:#B38600">${s("orange")} gelb</b> \xB7 <b style="color:#C0392B">${s("rot")} rot</b></p>
- ${(()=>{const mw=i.map(ciVerlauf).filter(v=>v.length>1);if(!mw.length)return"";const mi=f=>Math.round(mw.reduce((s,v)=>s+ciProz(f(v)),0)/mw.length);return`<p style="margin:0 0 12px;font-size:13px"><b>${mw.length}</b> ${mw.length===1?"Person hat":"Personen haben"} den Wissens-Check wiederholt: \u00D8 erster Wissens-Check <b>${mi(v=>v[0])} %</b> \u2192 \u00D8 letzter Stand <b>${mi(v=>v[v.length-1])} %</b></p>`})()}
+ <p style="margin:2px 0 12px;font-size:13px;color:var(--muted)">${i.length} von ${n} haben den Check-in gemacht \xB7 <b style="color:#2E7D57">${s("gruen")} gr\xFCn</b> \xB7 <b style="color:#B38600">${s("orange")} gelb</b> \xB7 <b style="color:#C0392B">${s("rot")} rot</b></p>
+ ${(()=>{const mw=i.map(ciVerlauf).filter(v=>v.length>1);if(!mw.length)return"";const mi=f=>Math.round(mw.reduce((s,v)=>s+ciProz(f(v)),0)/mw.length);return`<p style="margin:0 0 12px;font-size:13px"><b>${mw.length}</b> ${mw.length===1?"Person hat":"Personen haben"} den Check-in wiederholt: \u00D8 erster Check-in <b>${mi(v=>v[0])} %</b> \u2192 \u00D8 letzter Stand <b>${mi(v=>v[v.length-1])} %</b></p>`})()}
  ${l.length?`<div class="ls-unsbox"><b>Hier ist die Klasse noch unsicher</b><ul>${l.map(([d,p])=>`<li>${esc(d)} <small>${p} von ${i.length}</small></li>`).join("")}</ul></div>`:i.length?'<div class="ls-unsbox ok"><b>Keine auff\xE4lligen L\xFCcken</b></div>':""}
  <div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Ergebnis</th><th>Noch unsicher bei</th></tr></thead><tbody>${c||"<tr><td>Noch keine Sch\xFCler:innen.</td></tr>"}</tbody></table></div>${ubThemaHTML(e)}`)}
 let r_Qd=null;
@@ -20728,7 +20744,7 @@ window.faSelbstSpeichern=faSelbstSpeichern;
 const r_Vf=28;
 function r_Vl(e){const t=e&&e.createdAt;return t&&t.toMillis?t.toMillis():e&&e.t||0}
 function r_XA(e,t,n,i,r){const a=Date.now(),s=[],l=n.find(S=>S.uid===e&&S.wocheId===t),c=S=>S&&(a-S)/864e5>r_Vf?.5:1;l&&l.gesamt>0&&s.push({q:l.richtig/l.gesamt,w:2*c(r_Vl(l))});const d={};i.filter(S=>S.uid===e&&S.wocheId===t).sort((S,A)=>r_Vl(S)-r_Vl(A)).forEach(S=>{d[S.stationId]=S});const p=Object.values(d);p.forEach(S=>s.push({q:S.punkte/S.max,w:(S.quelle==="fa"?.5:1)*c(r_Vl(S))}));const h=(r||[]).find(S=>S.uid===e&&S.wocheId===t),k=!!(h&&h.abgeschlossen);if(!s.length)return{ampel:null,n:0,selbst:k,hinweis:k?"nur selbst abgehakt":""};const f=s.reduce((S,A)=>S+A.w,0),y=s.reduce((S,A)=>S+A.q*A.w,0)/f,w=y>=.75?"gruen":y>=.4?"orange":"rot",v=[];return k&&w!=="gruen"&&v.push("selbst \u201Eerledigt\u201C, Messung "+(w==="rot"?"rot":"gelb")),l&&l.sicher===3&&l.gesamt&&l.richtig/l.gesamt<.5&&v.push("sehr sicher, aber viele Fehler"),l&&l.sicher===1&&l.gesamt&&l.richtig/l.gesamt>=.75&&v.push("untersch\xE4tzt sich"),{ampel:w,q:y,n:s.length,vorlaeufig:s.length<2,selbst:k,hinweis:v.join(" \xB7 "),ub:p.length}}
-function r_YA(e,t,n){const i=[1,2,3,4].flatMap(d=>lsThemenLb(d));if(!i.length||!LT.schueler.length)return"";const r=LT.schueler.map(d=>({u:d,z:i.map(p=>r_XA(d.uid,p.id,e,t,n))})),a=r.map(({u:d,z:p})=>({u:d,rot:p.filter(h=>h.ampel==="rot").length,hin:p.filter(h=>h.hinweis&&h.ampel).length})).filter(d=>d.rot>=2||d.hin>=2).sort((d,p)=>p.rot+p.hin-(d.rot+d.hin)).slice(0,8),s=i.map(d=>`<th title="${esc(kwKurz(d))}"><span>${esc(d.nr)}</span></th>`).join(""),l=r.map(({u:d,z:p})=>`<tr><th scope="row">${esc(anzeigeName(d))}</th>${p.map((h,k)=>`<td><button type="button"class="ev-z${h.vorlaeufig?" vl":""}"style="background:${h.ampel?LS_AMP[h.ampel][0]:"#E3E8EC"}"data-ls="detail"data-uid="${esc(d.uid)}"title="${esc(kwKurz(i[k]))}: ${h.ampel?h.n+" Messung(en)"+(h.vorlaeufig?", vorl\xE4ufig":""):"noch keine Messung"}${h.hinweis?" \xB7 "+esc(h.hinweis):""}">${h.hinweis&&h.ampel?"!":""}</button></td>`).join("")}</tr>`).join("");return`<details class="kw-card ls-lern"open><summary><b>Lernstand-\xDCbersicht (gemessen)</b> <small>Personen \xD7 Themen, aus Wissens-Check, \xDCbungen und Fachaufsatz-Selbsteinsch\xE4tzung</small></summary>${a.length?`<div class="ls-unsbox"><b>Braucht Aufmerksamkeit</b><ul>${a.map(d=>`<li>${esc(anzeigeName(d.u))} <small>${d.rot} Themen rot${d.hin?`, ${d.hin} Abweichungen Selbstbild/Messung`:""}</small></li>`).join("")}</ul></div>`:'<div class="ls-unsbox ok"><b>Aktuell keine auff\xE4lligen Personen</b></div>'}<div class="kw-tabwrap"><table class="kw-tab ev-tab"><thead><tr><th>Pseudonym</th>${s}</tr></thead><tbody>${l}</tbody></table></div><small>Gr\xFCn ab 75 %, gelb ab 40 %, sonst rot; grau = noch keine Messung; blass = erst eine Messung (vorl\xE4ufig); \u201E!\u201C = Selbstbild und Messung passen nicht zusammen. Messungen \xE4lter als ${r_Vf} Tage z\xE4hlen halb. Zelle anklicken f\xFCr Details.</small></details>`}
+function r_YA(e,t,n){const i=[1,2,3,4].flatMap(d=>lsThemenLb(d));if(!i.length||!LT.schueler.length)return"";const r=LT.schueler.map(d=>({u:d,z:i.map(p=>r_XA(d.uid,p.id,e,t,n))})),a=r.map(({u:d,z:p})=>({u:d,rot:p.filter(h=>h.ampel==="rot").length,hin:p.filter(h=>h.hinweis&&h.ampel).length})).filter(d=>d.rot>=2||d.hin>=2).sort((d,p)=>p.rot+p.hin-(d.rot+d.hin)).slice(0,8),s=i.map(d=>`<th title="${esc(kwKurz(d))}"><span>${esc(d.nr)}</span></th>`).join(""),l=r.map(({u:d,z:p})=>`<tr><th scope="row">${esc(anzeigeName(d))}</th>${p.map((h,k)=>`<td><button type="button"class="ev-z${h.vorlaeufig?" vl":""}"style="background:${h.ampel?LS_AMP[h.ampel][0]:"#E3E8EC"}"data-ls="detail"data-uid="${esc(d.uid)}"title="${esc(kwKurz(i[k]))}: ${h.ampel?h.n+" Messung(en)"+(h.vorlaeufig?", vorl\xE4ufig":""):"noch keine Messung"}${h.hinweis?" \xB7 "+esc(h.hinweis):""}">${h.hinweis&&h.ampel?"!":""}</button></td>`).join("")}</tr>`).join("");return`<details class="kw-card ls-lern"open><summary><b>Lernstand-\xDCbersicht (gemessen)</b> <small>Personen \xD7 Themen, aus Check-in, \xDCbungen und Fachaufsatz-Selbsteinsch\xE4tzung</small></summary>${a.length?`<div class="ls-unsbox"><b>Braucht Aufmerksamkeit</b><ul>${a.map(d=>`<li>${esc(anzeigeName(d.u))} <small>${d.rot} Themen rot${d.hin?`, ${d.hin} Abweichungen Selbstbild/Messung`:""}</small></li>`).join("")}</ul></div>`:'<div class="ls-unsbox ok"><b>Aktuell keine auff\xE4lligen Personen</b></div>'}<div class="kw-tabwrap"><table class="kw-tab ev-tab"><thead><tr><th>Pseudonym</th>${s}</tr></thead><tbody>${l}</tbody></table></div><small>Gr\xFCn ab 75 %, gelb ab 40 %, sonst rot; grau = noch keine Messung; blass = erst eine Messung (vorl\xE4ufig); \u201E!\u201C = Selbstbild und Messung passen nicht zusammen. Messungen \xE4lter als ${r_Vf} Tage z\xE4hlen halb. Zelle anklicken f\xFCr Details.</small></details>`}
 function lsUebersichtHTML(ci,co,abgaben){
  const rows=LT.schueler.map(u=>{
   const c=ci.filter(x=>x.uid===u.uid);
@@ -20738,9 +20754,9 @@ function lsUebersichtHTML(ci,co,abgaben){
   const pu=["gruen","orange","rot"].map(k=>{const n=c.filter(x=>x.ampel===k).length;return n?`${lsAmpelPunkt(k)}${n} `:""}).join("");
   return`<tr><th scope="row">${esc(anzeigeName(u))}</th><td>${c.length?`${c.length} · ${pu}`:"–"}</td><td>${a.length} abgegeben · Ø ${np} NP</td><td>${t.length}</td><td><button type="button" class="secondary kw-add" data-ls="detail" data-uid="${esc(u.uid)}">Details</button></td></tr>`;
  }).join("");
- return`<details class="kw-card ls-lern"><summary><b>Nach Lernenden</b> <small>Alles, was eine einzelne Person geleistet hat</small></summary><div class="kw-tabwrap">${LT.schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Wissens-Checks</th><th>Check-outs und K-Prim-Tests</th><th>Digitale Tests</th><th></th></tr></thead><tbody>${rows}</tbody></table>`:`<div class="kw-leer">Noch keine freigeschalteten Schüler:innen.</div>`}</div><small>NP = Notenpunkte. Lehrkräfte-Konten erscheinen hier nicht.</small></details>`;
+ return`<details class="kw-card ls-lern"><summary><b>Nach Lernenden</b> <small>Alles, was eine einzelne Person geleistet hat</small></summary><div class="kw-tabwrap">${LT.schueler.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th><th>Check-ins</th><th>Check-outs und K-Prim-Tests</th><th>Digitale Tests</th><th></th></tr></thead><tbody>${rows}</tbody></table>`:`<div class="kw-leer">Noch keine freigeschalteten Schüler:innen.</div>`}</div><small>NP = Notenpunkte. Lehrkräfte-Konten erscheinen hier nicht.</small></details>`;
 }
-function lsDetail(e){const t=LT.schueler.find(s=>s.uid===e)||{uid:e},n=(LT.ci||[]).filter(s=>s.uid===e),i=(LT.abgaben||[]).filter(s=>s.uid===e),r=KW.co&&KW.co.checkouts||[],a=[1,2,3,4].map(s=>{const l=kwPhase(s),c=kwFarbe(s),d=lsThemenLb(s).map(k=>{const f=n.find(y=>y.wocheId===k.id);return`<li>${lsAmpelPunkt(f?f.ampel:"")} ${esc(kwKurz(k))}: ${f?`${f.richtig} von ${f.gesamt} richtig${ciVerlaufTxt(f)?" \xB7 Verlauf: "+ciVerlaufTxt(f):""}${lsUnsicher(f).length?" \xB7 unsicher: "+esc(lsUnsicher(f).join(", ")):""}`:"Wissens-Check offen"}</li>${(()=>{const zz=ubZeilenHTML(e,k.id);return zz?`<li style="list-style:none">${zz}</li>`:""})()}`}).join(""),p=r.filter(k=>Number(k.lbNum)===s).map(k=>{const f=i.find(y=>y.checkoutId===k.id);return`<li>Check-out ${esc(coTitelAnzeige(k)||"")}: ${f?f.ausgewertet?`${f.be} BE \xB7 ${f.notenpunkte} NP`:f.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen":"nicht teilgenommen"}</li>`}).join(""),h=LT.tests.filter(k=>Number(k.lb)===s).map(k=>{const f=LT.alle.find(y=>y.testId===k.id&&y.uid===e);return`<li>Test ${esc(k.titel)}: ${esc(ltStatus(k,f))}</li>`}).join("");return`<h3 style="color:${c.t};margin:14px 0 4px">LB ${s}${l?" \xB7 "+esc(l.lbTitel):""}</h3><ul>${d||"<li>keine Themen</li>"}${p}${h}</ul>`}).join("");modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">LERNST\xC4NDE</div><h2>${esc(anzeigeName(t))}</h2>${a}`)}
+function lsDetail(e){const t=LT.schueler.find(s=>s.uid===e)||{uid:e},n=(LT.ci||[]).filter(s=>s.uid===e),i=(LT.abgaben||[]).filter(s=>s.uid===e),r=KW.co&&KW.co.checkouts||[],a=[1,2,3,4].map(s=>{const l=kwPhase(s),c=kwFarbe(s),d=lsThemenLb(s).map(k=>{const f=n.find(y=>y.wocheId===k.id);return`<li>${lsAmpelPunkt(f?f.ampel:"")} ${esc(kwKurz(k))}: ${f?`${f.richtig} von ${f.gesamt} richtig${ciVerlaufTxt(f)?" \xB7 Verlauf: "+ciVerlaufTxt(f):""}${lsUnsicher(f).length?" \xB7 unsicher: "+esc(lsUnsicher(f).join(", ")):""}`:"Check-in offen"}</li>${(()=>{const zz=ubZeilenHTML(e,k.id);return zz?`<li style="list-style:none">${zz}</li>`:""})()}`}).join(""),p=r.filter(k=>Number(k.lbNum)===s).map(k=>{const f=i.find(y=>y.checkoutId===k.id);return`<li>Check-out ${esc(coTitelAnzeige(k)||"")}: ${f?f.ausgewertet?`${f.be} BE \xB7 ${f.notenpunkte} NP`:f.abgegeben?"abgegeben, noch nicht ausgewertet":"begonnen":"nicht teilgenommen"}</li>`}).join(""),h=LT.tests.filter(k=>Number(k.lb)===s).map(k=>{const f=LT.alle.find(y=>y.testId===k.id&&y.uid===e);return`<li>Test ${esc(k.titel)}: ${esc(ltStatus(k,f))}</li>`}).join("");return`<h3 style="color:${c.t};margin:14px 0 4px">LB ${s}${l?" \xB7 "+esc(l.lbTitel):""}</h3><ul>${d||"<li>keine Themen</li>"}${p}${h}</ul>`}).join("");modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">LERNST\xC4NDE</div><h2>${esc(anzeigeName(t))}</h2>${a}`)}
 function lsCoZeile(c,d,lehrer,abgaben){
  const a=d.meineAbgaben[c.id];
  const st=c.status==="live"?`<span class="co-chip live"><span class="co-live-punkt"></span>läuft</span>`:c.status==="beendet"?`<span class="co-chip fertig">beendet</span>`:`<span class="co-chip entwurf">Entwurf</span>`;
@@ -20765,13 +20781,13 @@ function lsTestZeile(t,lehrer){
   :`<button class="primary" data-ls="open" data-id="${esc(t.id)}">${a&&a.abgegeben?"Ansehen":(t.status==="geschlossen"?"Ansehen":"Test starten")}</button>`;
  return`<div class="ls-zeile"><span class="chip ueb">Digitaler Test</span><div class="ls-t"><b>${esc(t.titel)}</b><small>${ltBE(t)} BE${t.ki?" · mit KI-Vorkorrektur":""} · ${lehrer?`${n} von ${LT.schueler.length} abgegeben`:esc(ltStatus(t,a))}${t.status==="geschlossen"?" · geschlossen":""}</small></div><div class="ls-a">${rechts}</div></div>`;
 }
-function r_rE(e,t,n,i,r){const a=kwPhase(e),s=kwFarbe(e);if(!a)return"";const l=lsThemenLb(e),c=LT.schueler.length,d=(n&&n.checkouts||[]).filter(y=>Number(y.lbNum)===e),p=LT.tests.filter(y=>Number(y.lb)===e&&(r||y.status!=="entwurf"));let h;r?h=`Wissens-Checks ${t.filter(w=>l.some(v=>v.id===w.wocheId)).length} von ${l.length*c}`:h=`Wissens-Checks ${l.filter(w=>t.some(v=>v.wocheId===w.id)).length} von ${l.length}`;const k=l.map(y=>{const w=t.filter(S=>S.wocheId===y.id);if(r){const S=Q=>w.filter(C=>C.ampel===Q).length,A=w.length,_=A?`<span class="ls-bar" title="gr\xFCn ${S("gruen")} \xB7 gelb ${S("orange")} \xB7 rot ${S("rot")}">${["gruen","orange","rot"].map(Q=>S(Q)?`<i style="flex:${S(Q)};background:${LS_AMP[Q][0]}">${S(Q)}</i>`:"").join("")}</span>`:'<span class="ls-bar leer"></span>';return`<div class="ls-th"><em>${esc(y.nr)}</em><span class="ls-tn">${esc(kwKurz(y))}${(()=>{const Q=lsTopUnsicher(y.id,2);return Q.length?`<small class="ls-uns">Unsicher: ${esc(Q.map(C=>C[0]).join(" \xB7 "))}</small>`:""})()}</span>${_}<small>${A} von ${c}</small><button class="secondary kw-add" data-ls="thema" data-id="${esc(y.id)}">Wer?</button></div>`}const v=w[0];return`<div class="ls-th"><em>${esc(y.nr)}</em><span class="ls-tn">${esc(kwKurz(y))}</span>${v?`${lsAmpelPunkt(v.ampel)}<small>${v.richtig} von ${v.gesamt} richtig</small>`:'<small class="ls-offen">Wissens-Check offen</small>'}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(y.id)}">${v?"Ansehen":"Starten"}</button></div>${v&&ciVerlaufSVG(v)?`<details class="ls-verlauf"><summary>Verlauf: ${ciVerlaufTxt(v)}</summary>${ciVerlaufSVG(v)}</details>`:""}${ubZeilenHTML(ubMeinUid(),y.id)}`}).join(""),f=d.map(y=>lsCoZeile(y,n,r,i)).join("")+p.map(y=>lsTestZeile(y,r)).join("");return`<details class="ls-lb" id="ls-lb${e}" style="--c:${s.c};--bg:${s.bg};--t:${s.t}"><summary class="ls-lbk"><small>LB ${e}</small><b>${esc(a.lbTitel)}</b><span>${h}</span><i class="ls-pf" aria-hidden="true">\u25BE</i></summary>
-  <div class="ls-sek"><h4>Wissens-Checks nach Thema</h4>${k||'<div class="kw-leer">Keine Themen.</div>'}</div>
+function r_rE(e,t,n,i,r){const a=kwPhase(e),s=kwFarbe(e);if(!a)return"";const l=lsThemenLb(e),c=LT.schueler.length,d=(n&&n.checkouts||[]).filter(y=>Number(y.lbNum)===e),p=LT.tests.filter(y=>Number(y.lb)===e&&(r||y.status!=="entwurf"));let h;r?h=`Check-ins ${t.filter(w=>l.some(v=>v.id===w.wocheId)).length} von ${l.length*c}`:h=`Check-ins ${l.filter(w=>t.some(v=>v.wocheId===w.id)).length} von ${l.length}`;const k=l.map(y=>{const w=t.filter(S=>S.wocheId===y.id);if(r){const S=Q=>w.filter(C=>C.ampel===Q).length,A=w.length,_=A?`<span class="ls-bar" title="gr\xFCn ${S("gruen")} \xB7 gelb ${S("orange")} \xB7 rot ${S("rot")}">${["gruen","orange","rot"].map(Q=>S(Q)?`<i style="flex:${S(Q)};background:${LS_AMP[Q][0]}">${S(Q)}</i>`:"").join("")}</span>`:'<span class="ls-bar leer"></span>';return`<div class="ls-th"><em>${esc(y.nr)}</em><span class="ls-tn">${esc(kwKurz(y))}${(()=>{const Q=lsTopUnsicher(y.id,2);return Q.length?`<small class="ls-uns">Unsicher: ${esc(Q.map(C=>C[0]).join(" \xB7 "))}</small>`:""})()}</span>${_}<small>${A} von ${c}</small><button class="secondary kw-add" data-ls="thema" data-id="${esc(y.id)}">Wer?</button></div>`}const v=w[0];return`<div class="ls-th"><em>${esc(y.nr)}</em><span class="ls-tn">${esc(kwKurz(y))}</span>${v?`${lsAmpelPunkt(v.ampel)}<small>${v.richtig} von ${v.gesamt} richtig</small>`:'<small class="ls-offen">Check-in offen</small>'}<button class="secondary kw-add" data-kw="checkin" data-id="${esc(y.id)}">${v?"Ansehen":"Starten"}</button></div>${v&&ciVerlaufSVG(v)?`<details class="ls-verlauf"><summary>Verlauf: ${ciVerlaufTxt(v)}</summary>${ciVerlaufSVG(v)}</details>`:""}${ubZeilenHTML(ubMeinUid(),y.id)}`}).join(""),f=d.map(y=>lsCoZeile(y,n,r,i)).join("")+p.map(y=>lsTestZeile(y,r)).join("");return`<details class="ls-lb" id="ls-lb${e}" style="--c:${s.c};--bg:${s.bg};--t:${s.t}"><summary class="ls-lbk"><small>LB ${e}</small><b>${esc(a.lbTitel)}</b><span>${h}</span><i class="ls-pf" aria-hidden="true">\u25BE</i></summary>
+  <div class="ls-sek"><h4>Check-ins nach Thema</h4>${k||'<div class="kw-leer">Keine Themen.</div>'}</div>
   <div class="ls-sek"><h4>Check-outs, K-Prim-Tests und digitale Tests</h4>${f||'<div class="kw-leer">Zu diesem Lernbereich gibt es noch keinen Nachweis.</div>'}</div></details>`}
 async function renderKwCheckouts(){await kwLaden(),await ltLaden();const e=KW.co,t=isTeacher(),n=await lsCheckInsLaden();LT.ci=n;let i=[];if(t)try{i=(await getDocs(collection(db,"checkoutAbgaben"))).docs.map(d=>d.data())}catch{}LT.abgaben=i;let r=await ubLaden(),a=[];if(LT.ub=r,t){try{a=(await getDocs(collection(db,"lehrplanFortschritt"))).docs.map(d=>d.data())}catch{}}if(LT.fr={},t){const d=[1,2,3,4].flatMap(p=>lsThemenLb(p).map(h=>h.id));await Promise.all(d.map(async p=>{LT.fr[p]=await getBasischeckFragen(p)}))}const s=[1,2,3,4].map(d=>{const p=kwPhase(d),h=kwFarbe(d);return p?`<a class="ls-nav" href="#" data-ls="sprung" data-lb="${d}" style="--c:${h.c};--bg:${h.bg};--t:${h.t}"><small>LB ${d}</small><b>${esc(p.lbTitel)}</b></a>`:""}).join(""),l=[1,2,3,4].map(d=>r_rE(d,n,e,i,t)).join(""),c=e?`<details class="kw-card ls-verw"><summary><b>Check-outs verwalten und Kurzarbeit-Ersatz</b> <small>${t?"neuen Check-out anlegen, Einstellungen, Klassen\xFCbersicht":"deine Auswahl f\xFCr den Kurzarbeit-Ersatz"}</small></summary>${checkoutSektionHTML(e)}</details>`:"";return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
   ${kwSchuelerBanner()}
   <button class="secondary" data-kw="wand">\u2190 Lernlandkarte</button>
-  <header class="kw-kopf"><small>LERNST\xC4NDE</small><h1>${t?"Lernst\xE4nde der Klasse":"Meine Lernst\xE4nde"}</h1><p>Geordnet nach Lernbereichen: Wissens-Checks je Thema, Check-outs, K-Prim-Tests und digitale Tests. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${t?'<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button>':""}</div></header>
+  <header class="kw-kopf"><small>LERNST\xC4NDE</small><h1>${t?"Lernst\xE4nde der Klasse":"Meine Lernst\xE4nde"}</h1><p>Geordnet nach Lernbereichen: Check-ins je Thema, Check-outs, K-Prim-Tests und digitale Tests. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${t?'<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button>':""}</div></header>
   ${e?checkoutLiveBannerHTML(e):""}
   <div class="ls-navwrap">${s}</div>
   <div class="kw-aktionen" style="margin:0 0 10px"><button class="secondary" data-ls="alle" data-auf="1">Alle aufklappen</button><button class="secondary" data-ls="alle" data-auf="0">Alle zuklappen</button></div>
@@ -21005,7 +21021,7 @@ async function kwTrAus(id,themaId,zurueck){
   await ppmLaden(true);toast(zurueck?"Eingeblendet.":"Ausgeblendet.");render();
  }catch(err){console.error(err);toast("Das hat nicht geklappt.")}
 }
-/* Check-out (Abschluss) F12Sb – je Thema 5 Aufgaben, parallel zum Wissens-Check am Anfang:
+/* Check-out (Abschluss) F12Sb – je Thema 5 Aufgaben, parallel zum Check-in:
    gleiche Lernziele (Tags), andere Formulierung, anderer Fall, etwas anspruchsvoller.
    Reihenfolge: 1 MC, 2 MC, 3 Zuordnung/Reihenfolge/Lücke, 4 K-Prim-Fall, 5 Freitext (Transfer). Erste Antwort bei MC = richtig (wird gemischt). */
 const CHECKOUT_12={
@@ -21225,16 +21241,18 @@ const KW_TR_HINT={fa04:"Fall Tim",fa05:"Fall Tim",fa06:"Fall Tim",fa07:"Fall Tim
 const LX_VORLAUF_TAGE=14;
 // Die sieben Teile jeder Themenseite: Reihenfolge und Randfarbe sind für Schüler:innen und Lehrkräfte gleich.
 const LXF={
- 1:{c:"#8E5BD1",bg:"#F5EFFC",n:"Wissens-Check zu Beginn",d:1},
+ 1:{c:"#469BDC",bg:"#EEF6FD",n:"Check-in",d:1},
  8:{c:"#D9467A",bg:"#FCEDF3",n:"Einführung",d:2},
- 2:{c:"#6EC3EE",bg:"#EDF8FE",n:"Lernsituationen · Lehrtexte · Arbeitsblätter",d:3},
- 3:{c:"#86CC6A",bg:"#F0FAEB",n:"Übungs- und Vertiefungsaufgaben",d:4},
- 4:{c:"#F0C43C",bg:"#FEF8E2",n:"Lernbausteine · Unterricht",d:5},
- 5:{c:"#1D4E9E",bg:"#EAF0FA",n:"Tafelbilder · Lernübersichten",d:6},
- 6:{c:"#14A39A",bg:"#E6F7F5",n:"Check-Out-Tests",d:7},
- 7:{c:"#F28A24",bg:"#FEF2E5",n:"Persönlicher Lernstand zum Thema",d:8}
+ 2:{c:"#9BBF41",bg:"#F4F8E8",n:"Infotext",d:2},
+ 4:{c:"#469BDC",bg:"#EEF6FD",n:"Selbstlernkurs",d:3},
+ 3:{c:"#9BBF41",bg:"#F4F8E8",n:"Üben",d:4},
+ 5:{c:"#1D4E9E",bg:"#EAF0FA",n:"Tafelbilder · Lernübersichten",d:2},
+ 6:{c:"#469BDC",bg:"#EEF6FD",n:"Check-out",d:5},
+ 9:{c:"#6B7C8C",bg:"#F1F5F8",n:"Test der Lehrkraft",d:6},
+ 7:{c:"#9BBF41",bg:"#F4F8E8",n:"Persönlicher Lernstand zum Thema",d:7}
 };
-const LX_TEILE=[1,8,2,3,4,5,6,7];
+const LX_TEILE=[1,2,4,3,6,9,7];
+const LX_LEG=[1,2,4,3,6];
 function lxIso(d){const z=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate())}
 function lxHeute(){return lxIso(new Date())}
 function lxPlus(t){const d=new Date();d.setDate(d.getDate()+t);return lxIso(d)}
@@ -21299,7 +21317,7 @@ async function lxTitelLaden(){
 function lxUbTitel(sid){return(LXT.ub&&LXT.ub[sid])||sid}
 
 /* ---------- Lernstands-Kennzahlen je Person und Thema ----------
- D = {ci:[Wissens-Check-Versuche], ub:[Übungsergebnisse], fa:[Fachaufsatz-Selbsteinschätzungen], fort:{uid:{themaId:Dokument}}} */
+ D = {ci:[Check-in-Versuche], ub:[Übungsergebnisse], fa:[Fachaufsatz-Selbsteinschätzungen], fort:{uid:{themaId:Dokument}}} */
 function lxMetrik(uid,themaId,D){
  const c=D.ci.find(x=>x.uid===uid&&x.wocheId===themaId)||null;
  const v=c?ciVerlauf(c):[];
@@ -21324,12 +21342,12 @@ function lxMetrik(uid,themaId,D){
 // Konkrete Übungs-Hinweise für ein Thema (Schüler:innen)
 function lxHinweise(m){
  const h=[];
- if(!m.c)h.push("Mach den Wissens-Check, damit du siehst, wo du stehst.");
- else if(m.wcLetzt<0.75)h.push(`Wissens-Check: ${lxProz(m.wcLetzt)} richtig. Übe mit den Übungs- und Vertiefungsaufgaben (Teil 3) und mach den Wissens-Check danach noch einmal.`);
+ if(!m.c)h.push("Mach den Check-in, damit du siehst, wo du stehst.");
+ else if(m.wcLetzt<0.75)h.push(`Check-in: ${lxProz(m.wcLetzt)} richtig. Übe mit den Übungs- und Vertiefungsaufgaben (Teil 3) und mach den Check-in danach noch einmal.`);
  if(m.ubErst!=null&&m.ubErst<0.6)h.push(`Beim ersten Versuch hast du bei den Übungen im Schnitt ${lxProz(m.ubErst)} richtig. Wiederhole die Übungen.`);
  if(m.faQ!=null&&m.faQ<0.6)h.push(`Fachaufsatz-Training: Selbsteinschätzung nur ${lxProz(m.faQ)}. Übe noch einen Fachaufsatz zu diesem Thema.`);
  if(m.selbst&&m.selbst<=2)h.push("Du fühlst dich noch unsicher. Lies den Lehrtext (Teil 2) und sieh dir die Tafelbilder (Teil 5) an.");
- if(m.selbst>=3&&m.wcLetzt!=null&&m.wcLetzt<0.5)h.push("Du schätzt dich sicherer ein, als dein Ergebnis zeigt. Schau dir die Fehler im Wissens-Check noch einmal an.");
+ if(m.selbst>=3&&m.wcLetzt!=null&&m.wcLetzt<0.5)h.push("Du schätzt dich sicherer ein, als dein Ergebnis zeigt. Schau dir die Fehler im Check-in noch einmal an.");
  if(!m.selbst&&m.c)h.push("Schätze dich noch selbst ein (Teil 7), das hilft dir beim Planen.");
  return h;
 }
@@ -21462,7 +21480,7 @@ async function lxLernstandThemaSchueler(e,ph){
  const D={ci:Object.values(L.ci),ub:L.ub,fa:L.fa,fort:{[currentUser.uid]:KW.fort||{}}};
  const m=lxMetrik(currentUser.uid,e.id,D);
  const zeilen=[];
- zeilen.push(`<div class="lx-ls-z"><span>Wissens-Check</span><b>${m.c?(m.ende?`${lxProz(m.wcErst)} → ${lxProz(m.wcLetzt)}`:(m.wcAnz>1?`${lxProz(m.wcErst)} → ${lxProz(m.wcLetzt)}`:lxProz(m.wcLetzt))):(m.ende?lxProz(m.wcLetzt):"noch nicht gemacht")}</b><small>${m.ende?"Start und Check-out":(m.c?(m.wcAnz>1?`${m.wcAnz} Versuche, Start und aktueller Stand`:"nach dem Üben den Wissens-Check am Ende machen"):"")}</small></div>`);
+ zeilen.push(`<div class="lx-ls-z"><span>Check-in</span><b>${m.c?(m.ende?`${lxProz(m.wcErst)} → ${lxProz(m.wcLetzt)}`:(m.wcAnz>1?`${lxProz(m.wcErst)} → ${lxProz(m.wcLetzt)}`:lxProz(m.wcLetzt))):(m.ende?lxProz(m.wcLetzt):"noch nicht gemacht")}</b><small>${m.ende?"Start und Check-out":(m.c?(m.wcAnz>1?`${m.wcAnz} Versuche, Start und aktueller Stand`:"nach dem Üben den Check-out machen"):"")}</small></div>`);
  zeilen.push(`<div class="lx-ls-z"><span>Übungsaufgaben</span><b>${m.ubN?`${lxProz(m.ubErst)} beim 1. Versuch`:"noch keine gemacht"}</b><small>${m.ubN?`${m.ubN} ${m.ubN===1?"Übung":"Übungen"}, zuletzt Ø ${lxProz(m.ubLetzt)}`:""}</small></div>`);
  zeilen.push(`<div class="lx-ls-z"><span>Fachaufsatz-Training</span><b>${m.faN?`Ø ${lxProz(m.faQ)} (Selbsteinschätzung)`:"noch keines gemacht"}</b><small>${m.faN?`${m.faN} ${m.faN===1?"Aufsatz":"Aufsätze"}`:""}</small></div>`);
  const hin=lxHinweise(m);
@@ -21480,7 +21498,7 @@ async function lxLernstandThemaLehrer(e){
  const sicher=sel[0]+sel[1];
  return lxSek(7,LXF[7].n,"Wo die Klasse bei diesem Thema steht",
   `<div class="lx-ls">
-   <div class="lx-ls-z"><span>Wissens-Check gemacht</span><b>${cs.length} von ${N}</b><small>${lxPunkt("gruen")}${g("gruen")} grün · ${lxPunkt("orange")}${g("orange")} gelb · ${lxPunkt("rot")}${g("rot")} rot</small></div>
+   <div class="lx-ls-z"><span>Check-in gemacht</span><b>${cs.length} von ${N}</b><small>${lxPunkt("gruen")}${g("gruen")} grün · ${lxPunkt("orange")}${g("orange")} gelb · ${lxPunkt("rot")}${g("rot")} rot</small></div>
    <div class="lx-ls-z"><span>Übungen, 1. Versuch</span><b>${ub==null?"noch keine Ergebnisse":"Ø "+lxProz(ub)}</b></div>
    <div class="lx-ls-z"><span>Selbsteinschätzung</span><b>${sel.reduce((a,b)=>a+b,0)} von ${N}</b><small>unsicher oder ein bisschen: ${sicher}</small></div>
   </div>
@@ -21520,47 +21538,52 @@ async function renderKwThema(){
   teile.push(lxSek(3,"Trainings nach der Rückgabe","Selbstlernkurse, mit denen du deine Schwächen gezielt übst",l?`<div class="kw-dateien">${l}</div>`:`<div class="kw-leer">Hier ist noch kein Training ausgewählt.</div>`,lehrer?`<div class="kw-aktionen"><button class="secondary" data-kw="modulneu" data-id="${esc(e.id)}">Training einstellen</button></div>`:""));
   teile.push(`<div class="kw-card"><button class="secondary" onclick="go('lw-nachbereitung')">Alle Trainings in der Lernwerkstatt ansehen</button></div>`);
  }else{
-  // 1 Wissens-Check zu Beginn
+  // Lernweg: 1 Check-in, 2 Infotext, 3 Selbstlernkurs, 4 Üben, 5 Check-out (die Schritte sind Links, jede Person geht ihren eigenen Weg)
   const s1=(lehrer||hat("checkin")||ciFr.length)?(()=>{
    const inner=(lehrer||hat("checkin"))?`<div class="kw-dateien">${liste("checkin")}</div>`:"";
-   const akt=`<div class="kw-aktionen"><button class="primary" data-kw="checkin" data-id="${esc(e.id)}">Wissens-Check ${lehrer?"ansehen":"starten"}</button>${lehrer?`<button class="secondary" data-ce="co" data-id="${esc(e.id)}">Wissens-Check am Ende bearbeiten</button>`:""}${lehrer?add("checkin"):""}</div>`;
-   return lxSek(1,LXF[1].n,"Zuerst: Was weißt du schon? Kein Test, keine Note.",inner,akt);
+   const akt=`<div class="kw-aktionen"><button class="primary" data-kw="checkin" data-id="${esc(e.id)}">Check-in ${lehrer?"ansehen":"starten"}</button>${lehrer?add("checkin"):""}</div>`;
+   return lxSek(1,LXF[1].n,"Was weißt du schon? Welche Fragen hast du? Kein Test, keine Note.",inner,akt);
   })():"";
   teile.push(s1);
-  // Einführung: Digitale Tafeln zum Einstieg ins Thema
-  const s8l=mats.filter(m=>m.kategorie==="einfuehrung");const s8in=s8l.length?`<div class="kw-dateien">${s8l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join("")}</div>`:"";
-  teile.push((lehrer||s8in)?lxSek(8,LXF[8].n,"Einstieg ins Thema mit einer Digitalen Tafel",s8in||`<div class="kw-leer">Noch keine Tafel ausgewählt.</div>`,lehrer?`<div class="kw-aktionen"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="einfuehrung">+ Digitale Tafel hinzufügen</button></div>`:""):"");
-  // 2 Lernsituationen, Lehrtexte, Arbeitsblätter
-  const s2in=teil("lernsituation","Lernsituationen")+teil("lehrtext","Lehrtexte")+teil("arbeitsblatt","Arbeitsblätter");
-  teile.push(s2in?lxSek(2,LXF[2].n,"Einstieg, Texte zum Erarbeiten und Blätter für den Unterricht",s2in):"");
-  // 3 Übungs- und Vertiefungsaufgaben
-  const ueIn=uebTeil("uebung","Übungsaufgaben")+uebTeil("vertiefung1","Vertiefung · Stufe 1 · grundlegend")+uebTeil("vertiefung2","Vertiefung · Stufe 2 · erweitert")+uebTeil("vertiefung3","Vertiefung · Stufe 3 · anspruchsvoll")
-   +((lehrer||faMod.length||trListe)?`<div class="kw-stufe"><b>Fachaufsatz-Training</b>${(faMod.length||trListe)?`<div class="kw-dateien">${faMod.map(modZeile).join("")}${trListe}</div>`:`<div class="kw-leer">Noch kein Fachaufsatz eingestellt.</div>`}${lehrer&&aus.size?`<button class="secondary" data-kw="trzurueck" data-id="${esc(e.id)}">Ausgeblendete Kurse wieder einblenden</button>`:""}</div>`:"");
-  teile.push(ueIn?lxSek(3,LXF[3].n,"Zum Üben und Festigen, die Vertiefung in drei Schwierigkeitsgraden",ueIn):"");
-  // 4 Lernbausteine / Unterricht
+  // 2 Infotext: Lesen, Hören, Sehen
+  const s8l=mats.filter(m=>m.kategorie==="einfuehrung");
+  const einf=(lehrer||s8l.length)?`<div class="kw-stufe"><b>Sehen · Einführungstafel</b>${s8l.length?`<div class="kw-dateien">${s8l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join("")}</div>`:`<div class="kw-leer">Noch keine Tafel ausgewählt.</div>`}${add("einfuehrung")}</div>`:"";
+  const infoIn=teil("lernsituation","Lesen · Lernsituationen")+teil("lehrtext","Lesen · Lehrtexte")+teil("arbeitsblatt","Lesen · Arbeitsblätter")+teil("audio","Hören · Audio")+teil("video","Sehen · Video")+einf+teil("tafel","Sehen · Digitale Tafeln")+teil("lernuebersicht","Sehen · Lernübersichten");
+  teile.push(infoIn?lxSek(2,LXF[2].n,"Lesen, Hören oder Sehen: Wähle, was dir beim Verstehen hilft.",infoIn):"");
+  // 3 Selbstlernkurs
   const karten=[];
   if(ea&&!ea.entwurf){const eaF=!lehrer?(KW.fort[e.id]||{}):{};karten.push(`<div class="kw-baust"><span class="chip slk">Selbstlernkurs</span><b>${esc(ea.titel||kwKurz(e))}</b><small>${eaF.einarbeitungAbgeschlossen?"abgeschlossen":(ea.aufgaben?ea.aufgaben+" Aufgaben":"")}</small><button class="primary" data-kw="ea" data-id="${esc(e.id)}">${eaF.einarbeitungAbgeschlossen?"Nochmal ansehen":"Starten"}</button></div>`)}
   restMod.forEach(m=>{const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);
    const sw=(typeof swById==="function"&&m.start&&swById(m.start))||(typeof sw12ById==="function"&&m.start&&sw12ById(m.start))||null;
    karten.push(`<div class="kw-baust"><span class="chip ${T[1]}">${esc(T[0])}</span><b>${esc(m.titel||T[0])}</b><small>${f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):(sw?"ab "+fmtKurz(sw.start):"")}</small><div class="kw-baust-btn"><button class="primary" data-kw="modul" data-id="${esc(m.id)}">${lehrer?"Öffnen":"Starten"}</button>${lehrer?`<button type="button" class="secondary kw-baust-weg" data-kw="modulweg" data-id="${esc(m.id)}" data-thema="${esc(e.id)}" title="Diesen Baustein von diesem Thema entfernen">Entfernen</button>`:""}</div></div>`)});
   const s4in=karten.length?`<div class="kw-baustliste">${karten.join("")}</div>`:`<div class="kw-leer">Für dieses Thema ist noch keine Lerneinheit ausgewählt.</div>`;
-  teile.push((lehrer||karten.length)?lxSek(4,LXF[4].n,"Selbstlernkurs, Deeper-Learning-Stunde, Lernrallye und weitere Bausteine",s4in,aktionBausteine):"");
-  // 5 Tafelbilder / Lernübersichten
-  const s5in=teil("tafel","Digitale Tafeln (Tafelbilder)")+teil("lernuebersicht","Lernübersichten");
-  teile.push(s5in?lxSek(5,LXF[5].n,"Tafelbilder zur Stunde und das Wichtigste auf einen Blick",s5in):"");
-  // 6 Check-Out-Tests
+  teile.push((lehrer||karten.length)?lxSek(4,LXF[4].n,"Das Thema Schritt für Schritt, wenn du mehr Zeit zum Verstehen brauchst.",s4in,aktionBausteine):"");
+  // 4 Üben: Begriffe, Theorie, Anwendung, je mit Basis, Plus und Vertieft
+  const ub=[];
+  ["uebung","vertiefung1","vertiefung2","vertiefung3"].forEach(kat=>mats.filter(m=>m.kategorie===kat).forEach(m=>{const mt=lxUebMeta(m,kat,K,e,ph);ub.push({h:lxUebDz(m,kat,K,e,ph),b:lxBereichArt(mt.art,kat),n:mt.niv})}));
+  faMod.forEach(m=>ub.push({h:modZeile(m),b:"a",n:"a"}));
+  if(trListe)ub.push({h:trListe,b:"a",n:"a"});
+  const ubHtml=LX_BEREICH.map(B=>{
+   const st=LX_STUFEN.map(([nk,nn])=>{const l=ub.filter(x=>x.b===B.k&&x.n===nk);return l.length?`<div class="lx-stufe"><b>${nn}</b><div class="kw-dateien">${l.map(x=>x.h).join("")}</div></div>`:(lehrer?`<div class="lx-stufe"><b>${nn}</b><div class="kw-leer">noch leer</div></div>`:"")}).join("");
+   return(st.replace(/<[^>]*>/g,"").trim()===""&&!lehrer)?"":`<div class="lx-ber" style="--k:${B.c};--kb:${B.bg}"><header><h4>${B.n}</h4><small>${B.hint}</small></header>${st}</div>`;
+  }).join("");
+  const ubAdd=lehrer?`<div class="kw-aktionen"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="uebung">+ Basis</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="vertiefung2">+ Plus</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="vertiefung3">+ Vertieft</button>${aus.size?`<button class="secondary" data-kw="trzurueck" data-id="${esc(e.id)}">Ausgeblendete Kurse wieder einblenden</button>`:""}</div>`:"";
+  teile.push((ubHtml.trim()||lehrer)?lxSek(3,LXF[3].n,"Drei Bereiche, jeweils in drei Stufen: Basis, Plus und Vertieft.",`<div class="lx-ben">${ubHtml}</div>`,ubAdd):"");
+  // 5 Check-out (Schüler:in) und Test der Lehrkraft
+  const hatCo=checkinAusBank(e.id+"@ende").length>0;
+  teile.push((lehrer||hatCo)?lxSek(6,LXF[6].n,"Zeig, was du kannst: sichern, anwenden, erklären und begründen, dann zurückblicken.",`<div class="kw-aktionen"><button class="primary" data-ce="co" data-id="${esc(e.id)}">Check-out ${lehrer?"ansehen und bearbeiten":"starten"}</button></div>`):"");
   const cos=KW.co&&KW.co.checkouts?KW.co.checkouts.filter(c=>Number(c.lbNum)===ph.lbNum&&(lehrer||c.status!=="entwurf")):[];
-  const s6in=cos.length?`<div class="ls-liste">${cos.map(c=>lxCoZeile(c,KW.co,lehrer)).join("")}</div>`:`<div class="kw-leer">${lehrer?"Noch kein Check-out zu diesem Lernbereich.":"Die Lehrkraft schaltet den Check-out am Ende des Themas frei."}</div>`;
-  const s6akt=`<div class="kw-aktionen"><button class="secondary" onclick="go('tests')">${lehrer?"Tests verwalten":"Alle Tests und Check-outs"}</button>${lehrer?`<button class="secondary" data-lx="co" data-op="neu">＋ Neuer Check-out</button>`:""}</div>`;
-  teile.push((lehrer||cos.length)?lxSek(6,LXF[6].n,"Abschlusstest der Lehrkraft, ausgewertet in Notenpunkten",s6in,s6akt):"");
-  // 7 Persönlicher Lernstand
+  const s6in=cos.length?`<div class="ls-liste">${cos.map(c=>lxCoZeile(c,KW.co,lehrer)).join("")}</div>`:`<div class="kw-leer">${lehrer?"Noch kein Test zu diesem Lernbereich.":"Die Lehrkraft schaltet den Test am Ende des Themas frei."}</div>`;
+  const s6akt=`<div class="kw-aktionen"><button class="secondary" onclick="go('tests')">${lehrer?"Tests verwalten":"Alle Tests"}</button>${lehrer?`<button class="secondary" data-lx="co" data-op="neu">＋ Neuer Test</button>`:""}</div>`;
+  teile.push((lehrer||cos.length)?lxSek(9,LXF[9].n,"Abschlusstest der Lehrkraft, ausgewertet in Notenpunkten",s6in,s6akt):"");
+  // Persönlicher Lernstand
   teile.push(lehrer?await lxLernstandThemaLehrer(e):await lxLernstandThemaSchueler(e,ph));
  }
  const fertigBtn=lehrer||leist?"":`<button type="button" class="kw-fertig${kwErledigt(e.id)?" an":""}" data-kw="fertig" data-id="${esc(e.id)}"><i class="kw-bx${kwErledigt(e.id)?" d":""}"></i>${kwErledigt(e.id)?"Thema erledigt":"Als erledigt markieren"}</button>`;
  const altBtn=(leist||LX_CFG.klasse!==11)?"":`<button class="secondary" data-kw="alt" data-id="${esc(e.id)}">Lernziele und Aufgaben</button>`;
  const st=lxThemaStart(e);
  const sichtZeile=lehrer&&!leist?`<div class="lx-sicht"><label>Schüler:innen sehen dieses Thema ab <input type="date" id="lxAb" value="${esc(st)}"></label><button type="button" class="secondary" data-lx="ab" data-id="${esc(e.id)}">Datum speichern</button><button type="button" class="text-button" data-lx="ab0" data-id="${esc(e.id)}">Automatisch</button><small>Sonst gilt: zwei Wochen vor dem geplanten Start.</small></div>`:"";
- const navChips=leist?"":`<nav class="lx-weg" aria-label="Aufbau des Themas">${LX_TEILE.map(n=>`<button type="button" class="lx-chip" style="--k:${LXF[n].c}" data-lx="sprung" data-n="${n}"><b>${LXF[n].d}</b> ${esc(LXF[n].n)}</button>`).join("")}</nav>`;
+ const navChips=leist?"":`<p class="lx-wegtext"><b>Dein Lernweg:</b> Du entscheidest selbst, in welcher Reihenfolge du vorgehst. Jeder Schritt ist ein Link.</p><nav class="lx-weg" aria-label="Dein Lernweg">${LX_TEILE.map(n=>`<button type="button" class="lx-chip" style="--k:${LXF[n].c}" data-lx="sprung" data-n="${n}"><b>${LXF[n].d}</b> ${esc(LXF[n].n)}</button>`).join("")}</nav>`;
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
   ${kwSchuelerBanner()}
   <button class="secondary" data-kw="wand">← Lernlandkarte</button>
@@ -21722,7 +21745,7 @@ async function lxHinweisBox(){
   .forEach(x=>lis.push(`<li><button type="button" class="text-button" data-kw="thema" data-id="${esc(x.e.id)}">${esc(lsThemaName(x.e.id))}</button>: ${esc(x.hin[0])}</li>`));
  const tab=T.map(x=>`<tr><th scope="row"><button type="button" class="text-button" data-kw="thema" data-id="${esc(x.e.id)}">${esc(lsThemaName(x.e.id))}</button></th><td>${x.m.ampel?lxPunkt(x.m.ampel,LX_AMP[x.m.ampel][1]):"–"}</td><td>${x.m.c?lxProz(x.m.wcLetzt):"–"}</td><td>${x.m.ubN?lxProz(x.m.ubErst):"–"}</td><td>${x.m.faN?lxProz(x.m.faQ):"–"}</td><td>${x.m.selbst?LX_SELBST[x.m.selbst-1][1]:"–"}</td></tr>`).join("");
  return`${lis.length?`<div class="lx-ueben"><b>Das solltest du noch üben</b><ul>${lis.join("")}</ul></div>`:`<div class="lx-ueben ok"><b>Gut gemacht.</b> Im Moment gibt es nichts, was du dringend üben musst.</div>`}
- <details class="kw-card"><summary><b>Mein Stand je Thema</b> <small>Wissens-Check, Übungen (1. Versuch), Fachaufsatz, Selbsteinschätzung</small></summary><div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Thema</th><th>Stand</th><th>Wissens-Check</th><th>Übungen</th><th>Aufsatz</th><th>Selbst</th></tr></thead><tbody>${tab}</tbody></table></div></details>`;
+ <details class="kw-card"><summary><b>Mein Stand je Thema</b> <small>Check-in, Übungen (1. Versuch), Fachaufsatz, Selbsteinschätzung</small></summary><div class="kw-tabwrap"><table class="kw-tab"><thead><tr><th>Thema</th><th>Stand</th><th>Check-in</th><th>Übungen</th><th>Aufsatz</th><th>Selbst</th></tr></thead><tbody>${tab}</tbody></table></div></details>`;
 }
 async function renderLernstaendeLx(){
  const h=await renderKwCheckouts();
@@ -21748,7 +21771,7 @@ async function lxOffenKachel(){
   let total=0,done=0;const offen=[];
   woche.forEach(x=>{
    const n=kwKurz(x.e);
-   [[x.m.c,`Wissens-Check „${n}“`],[x.m.ubN,`Übungen zu „${n}“`],[x.m.selbst,`Selbsteinschätzung „${n}“`]].forEach(([ok,t])=>{total++;if(ok)done++;else offen.push({t,thema:x.e.id})});
+   [[x.m.c,`Check-in „${n}“`],[x.m.ubN,`Übungen zu „${n}“`],[x.m.selbst,`Selbsteinschätzung „${n}“`]].forEach(([ok,t])=>{total++;if(ok)done++;else offen.push({t,thema:x.e.id})});
   });
   lxCoHinweise().filter(h=>/läuft jetzt/.test(h.t)).forEach(h=>{total++;offen.push({t:h.t,go:h.go})});
   const j=await lxJournalHeuteOffen();if(j){total++;offen.push({t:"Lernjournal heute",go:"journal"})}
@@ -21776,8 +21799,8 @@ function lxThemaWahlen(modus){
    const has=k=>mats.some(m=>m.kategorie===k||(k==="vertiefung"&&/^vertiefung/.test(m.kategorie||"")));
    const cos=(KW.co&&KW.co.checkouts||[]).some(c=>Number(c.lbNum)===ph.lbNum);
    const teile=[
-    [1,has("checkin")],[8,has("einfuehrung")],[2,has("lernsituation")||has("lehrtext")||has("arbeitsblatt")],[3,has("uebung")||has("vertiefung")||mod.some(m=>m.modul==="fachaufsatz"||m.modul==="apt")],
-    [4,mod.some(m=>m.modul!=="fachaufsatz"&&m.modul!=="apt")],[5,has("tafel")||has("lernuebersicht")],[6,cos]];
+    [1,has("checkin")||checkinAusBank(e.id).length>0],[2,has("einfuehrung")||has("lernsituation")||has("lehrtext")||has("arbeitsblatt")||has("audio")||has("video")||has("tafel")||has("lernuebersicht")],
+    [4,mod.some(m=>m.modul!=="fachaufsatz"&&m.modul!=="apt")],[3,has("uebung")||has("vertiefung")||mod.some(m=>m.modul==="fachaufsatz"||m.modul==="apt")],[6,checkinAusBank(e.id+"@ende").length>0]];
    const pts=teile.map(([n,ok])=>`<i class="lx-pt${ok?" an":""}" style="--k:${LXF[n].c}" title="${esc(LXF[n].n)}: ${ok?"vorhanden":"fehlt"}"></i>`).join("");
    const st=lxThemaStart(e);
    return`<button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span><small class="lx-pts" aria-label="Vorhandene Teile">${pts}</small>${st?`<small class="lx-ab">Schüler ab ${esc(fmtKurz(st))}</small>`:""}</button>`;
@@ -21785,7 +21808,7 @@ function lxThemaWahlen(modus){
   return`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div></header><div class="kw-rows">${rows}${kwLeistungRow(ph)}</div></article>`;
  }).join("");
 }
-function lxLegende(){return`<div class="lx-legende">${LX_TEILE.map(n=>`<span><i class="lx-pt an" style="--k:${LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
+function lxLegende(){return`<div class="lx-legende">${LX_LEG.map(n=>`<span><i class="lx-pt an" style="--k:${LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
 async function renderLkUnterricht(){
  if(!isTeacher())return await renderKachelwand();
  await kwLaden();
@@ -21925,7 +21948,20 @@ lxNavRollen();
  Einheitliche Darstellung der Übungsaufgaben + Digitale-Tafel-Auswahl
  Immer gleich: Lernbereich (LB 1–4) · Thema · Übungsart · Niveau
  ========================================================= */
-const LX_NIV={g:{t:"grundlegend",c:"#2E7D57",bg:"#E4F4EB"},e:{t:"erweitert",c:"#B8860B",bg:"#FFF3CF"},a:{t:"anspruchsvoll",c:"#C0392B",bg:"#FCE7E4"}};
+const LX_NIV={g:{t:"Basis",c:"#2E7D57",bg:"#E4F4EB"},e:{t:"Plus",c:"#B8860B",bg:"#FFF3CF"},a:{t:"Vertieft",c:"#C0392B",bg:"#FCE7E4"}};
+// Üben: drei Bereiche (Farbe = Art des Wissens) mit je drei Stufen
+const LX_BEREICH=[
+ {k:"b",n:"Begriffe",hint:"Fachbegriffe sicher kennen",c:"#B42318",bg:"#FCEBE9"},
+ {k:"t",n:"Theorie",hint:"Zusammenhänge verstehen und erklären",c:"#1F4FD1",bg:"#E9EFFD"},
+ {k:"a",n:"Anwendung",hint:"Auf Fälle und Prüfungsaufgaben anwenden",c:"#17783C",bg:"#E5F4EA"}];
+const LX_STUFEN=[["g","Basis"],["e","Plus"],["a","Vertieft"]];
+function lxBereichArt(art,kat){
+ art=String(art||"");
+ if(/K-Prim|Fachaufsatz|Fall|Transfer|Anwend/i.test(art))return"a";
+ if(/Vergleich|Theorie|L\u00FCckentext|Reihenfolge|Struktur|Freitext/i.test(art))return"t";
+ if(/Zuordnung|Memory|Blockfall|Tetris|rennen|Karteikarten|Begriff/i.test(art))return"b";
+ return kat==="vertiefung3"?"a":(kat==="vertiefung2"?"t":"b");
+}
 function lxNiveauArt(art,stufe){
  art=String(art||"");
  if(/Fachaufsatz/.test(art))return"a";
@@ -21951,7 +21987,7 @@ function lxUebMeta(m,kat,K,e,ph){
   if(u){lb=u.lb||lb;const t=kwThemaById(u.thema);thema=t?kwKurz(t):(u.zusatz||thema)}
  }else if(/^uebungsbausteine\/station\.html\?s=/.test(url)){
   const x=K.ub.find(y=>y.id===url.split("s=")[1]);
-  if(x){lb=Number(String((x.pfad||[])[0]||"").replace(/\D/g,""))||lb;thema=x.thema||thema;art=String((x.pfad||[]).slice(-1)[0]||"Übung").replace(/\s*\(Vertiefung\)/,"");niv=lxNiveauArt(art,x.stufe)}
+  if(x){lb=Number(String((x.pfad||[])[0]||"").replace(/\D/g,""))||lb;thema=x.thema||thema;const pf=(x.pfad||[]),lz=String(pf.slice(-1)[0]||""),sm={leicht:"g",mittel:"e",vertieft:"a"};art=String((sm[lz]?pf.slice(-2)[0]:lz)||"Übung").replace(/\s*\(Vertiefung\)/,"");niv=sm[lz]||lxNiveauArt(art,x.stufe)}
  }else if(/^karteikarten\//.test(url)){
   const q=url.split("?")[1]||"",p=new URLSearchParams(q);
   lb=Number(p.get("lb"))||lb;thema=p.get("thema")||"Alle Themen";art="Karteikarten";niv="g";
@@ -22062,9 +22098,9 @@ function lxMatSort(){Object.keys(KW.mat||{}).forEach(k=>KW.mat[k].sort((a,b)=>lx
  });
 })();
 
-/* ================= Check-out (Wissens-Check am Ende) und Lernentwicklungskurve =================
-   Der Check-out ist ein zweiter Wissens-Check mit der Kennung "<themaId>@ende". Er prüft dieselben Lernziele
-   (Tags) wie der Wissens-Check am Anfang, anders formuliert. Die Verknüpfung läuft automatisch über das Lernziel. */
+/* ================= Check-out (Check-out) und Lernentwicklungskurve =================
+   Der Check-out ist ein zweiter Check-in mit der Kennung "<themaId>@ende". Er prüft dieselben Lernziele
+   (Tags) wie der Check-in, anders formuliert. Die Verknüpfung läuft automatisch über das Lernziel. */
 function ceIstEnde(id){return/@ende$/.test(String(id||""))}
 function ceBasis(id){return String(id||"").replace(/@ende$/,"")}
 function ciEndeText(a){return a==="gruen"?"Grün – das Lernziel sitzt":a==="orange"?"Gelb – das meiste sitzt, wiederhole gezielt":a==="rot"?"Rot – übe das Thema noch einmal":"Noch nicht bearbeitet"}
@@ -22135,11 +22171,11 @@ function ceThemaBlockHTML(e,D,uid){
  let inner="";
  if(M.e){
   const pts=ceSchuelerPunkte(M);
-  inner=ceKurveSVG(pts,M.d)+(M.a==null?`<p class="ce-hint">Den Start-Wissens-Check hast du nicht gemacht. Deshalb fehlt der Vergleich.</p>`:"")+ceZieleHTML(ceZiele(M,e.id));
+  inner=ceKurveSVG(pts,M.d)+(M.a==null?`<p class="ce-hint">Den Check-in hast du nicht gemacht. Deshalb fehlt der Vergleich.</p>`:"")+ceZieleHTML(ceZiele(M,e.id));
  }else{
-  inner=`<p class="ce-hint">${M.s?"Du hast am Anfang "+lxProz(M.a)+" erreicht. ":""}Wenn du das Thema bearbeitet hast, mach den Wissens-Check am Ende. Er fragt dieselben Lernziele noch einmal ab, und du siehst deine Lernkurve.</p>`;
+  inner=`<p class="ce-hint">${M.s?"Du hast am Anfang "+lxProz(M.a)+" erreicht. ":""}Wenn du das Thema bearbeitet hast, mach den Check-out. Er fragt dieselben Lernziele noch einmal ab, und du siehst deine Lernkurve.</p>`;
  }
- const btn=hat?`<button type="button" class="primary" data-ce="co" data-id="${esc(e.id)}">${M.e?"Wissens-Check am Ende wiederholen":"Wissens-Check am Ende starten"}</button>`:"";
+ const btn=hat?`<button type="button" class="primary" data-ce="co" data-id="${esc(e.id)}">${M.e?"Check-out wiederholen":"Check-out starten"}</button>`:"";
  return`<div class="ce-box"><div class="ce-kopf"><b>Deine Lernentwicklung</b><small>Start → Ende</small></div>${inner}${btn?`<div class="kw-aktionen">${btn}</div>`:""}</div>`;
 }
 // Klassenwerte (Lehrkräfte): nur Personen mit beiden Messpunkten
@@ -22154,7 +22190,7 @@ function ceKlasseThema(K,e){
 }
 function ceKlasseThemaHTML(e,K){
  const k=ceKlasseThema(K,e);
- const kurve=k.n?ceKurveSVG([{p:k.a,l:"Ø Start",s:lxProz(k.a)},{p:k.b,l:"Ø Ende",s:lxProz(k.b)}],k.d):`<p class="ce-hint">Noch keine Person hat Wissens-Check und Check-out gemacht.</p>`;
+ const kurve=k.n?ceKurveSVG([{p:k.a,l:"Ø Start",s:lxProz(k.a)},{p:k.b,l:"Ø Ende",s:lxProz(k.b)}],k.d):`<p class="ce-hint">Noch keine Person hat Check-in und Check-out gemacht.</p>`;
  const zl=k.ziele.filter(x=>x.a!=null||x.b!=null).map(x=>`<div class="ce-z"><span>${esc(x.t)}</span><span class="ce-zv"><b style="color:${ceFarbe(x.a)}">${lxProz(x.a)}</b><em>→</em><b style="color:${ceFarbe(x.b)}">${lxProz(x.b)}</b></span></div>`).join("");
  return`<div class="ce-box"><div class="ce-kopf"><b>Lernzuwachs der Klasse</b><small>Start → Ende · ${k.nStart} Start, ${k.nEnde} Ende, ${k.n} mit beiden</small></div>${kurve}${zl?`<div class="ce-ziele"><b>Lernziele, Anteil richtig</b>${zl}</div>`:""}</div>`;
 }
@@ -22166,7 +22202,7 @@ async function ceEntwFuellen(themaId){
   const e=kwThemaById(themaId);if(!e)return;
   const M=ceMess(currentUser.uid,themaId,{ci:Object.values(L.ci).map(x=>({...x,uid:currentUser.uid}))});
   if(!M.e){el.innerHTML="";return}
-  el.innerHTML=`<div class="ce-box"><div class="ce-kopf"><b>Deine Lernkurve</b><small>${esc(kwKurz(e))}</small></div>${ceKurveSVG(ceSchuelerPunkte(M),M.d)}${M.a==null?`<p class="ce-hint">Den Start-Wissens-Check hast du nicht gemacht. Deshalb fehlt der Vergleich.</p>`:""}${ceZieleHTML(ceZiele(M,themaId))}</div>`;
+  el.innerHTML=`<div class="ce-box"><div class="ce-kopf"><b>Deine Lernkurve</b><small>${esc(kwKurz(e))}</small></div>${ceKurveSVG(ceSchuelerPunkte(M),M.d)}${M.a==null?`<p class="ce-hint">Den Check-in hast du nicht gemacht. Deshalb fehlt der Vergleich.</p>`:""}${ceZieleHTML(ceZiele(M,themaId))}</div>`;
  }catch(err){console.warn("Lernkurve:",err)}
 }
 // Lernbereich-Übersicht: je Thema Start und Check-out
@@ -22215,21 +22251,21 @@ async function ceLernstandBox(){
    });
    if(rows.length){nAlle+=rows.filter(r=>r.a!=null&&r.b!=null).length;karten.push(ceLbKarte(ph,rows))}
   });
-  const ein=lehrer?"Durchschnitt der Klasse je Thema (nur Personen, die Start und Ende gemacht haben).":"Grau gestrichelt: dein Start. Dunkel: dein Wissens-Check am Ende. Je höher die Kurve rechts liegt, desto mehr hast du dazugelernt.";
-  return`<section class="ce-lern card"><h3>${lehrer?"Lernentwicklung der Klasse":"Deine Lernentwicklung"}</h3><p class="ce-hint">${ein}</p>${karten.length?karten.join(""):`<div class="ce-leer">Hier erscheint die Lernkurve, sobald zu einem Thema der Wissens-Check am Anfang und am Ende gemacht wurden.</div>`}</section>`;
+  const ein=lehrer?"Durchschnitt der Klasse je Thema (nur Personen, die Start und Ende gemacht haben).":"Grau gestrichelt: dein Start. Dunkel: dein Check-out. Je höher die Kurve rechts liegt, desto mehr hast du dazugelernt.";
+  return`<section class="ce-lern card"><h3>${lehrer?"Lernentwicklung der Klasse":"Deine Lernentwicklung"}</h3><p class="ce-hint">${ein}</p>${karten.length?karten.join(""):`<div class="ce-leer">Hier erscheint die Lernkurve, sobald zu einem Thema der Check-in und am Ende gemacht wurden.</div>`}</section>`;
  }catch(err){console.warn("Lernentwicklung:",err);return""}
 }
 document.addEventListener("click",async ev=>{
  const t=ev.target.closest&&ev.target.closest('[data-ce="co"]');if(!t||!currentUser)return;
  const id=t.dataset.id;
  try{
-  if(!(await getBasischeckFragen(id+"@ende")).length){toast("Für dieses Thema ist noch kein Wissens-Check am Ende hinterlegt.");return}
+  if(!(await getBasischeckFragen(id+"@ende")).length){toast("Für dieses Thema ist noch kein Check-out hinterlegt.");return}
   window.__eaRueck=null;await openCheckIn(id+"@ende");
- }catch(err){console.error(err);toast("Der Wissens-Check am Ende konnte nicht geöffnet werden.")}
+ }catch(err){console.error(err);toast("Der Check-out konnte nicht geöffnet werden.")}
 });
 
 
-document.addEventListener("click",async e=>{const t=e.target.closest&&e.target.closest("[data-kw]");if(!t||!currentUser)return;const n=t.dataset.kw,i=t.dataset.id;try{if(n==="thema")activeKwThema=i,go("kw-thema");else if(n==="projekt")activeKwLb=Number(t.dataset.lb),go("kw-projekt");else if(n==="wand")go("start");else if(n==="checkouts")go("lernstaende");else if(n==="fortschritt")go("kw-fortschritt");else if(n==="matadd")kwMatForm(t.dataset.kat);else if(n==="matweg"){if(!confirm("Diese Datei wirklich entfernen?"))return;await deleteDoc(doc(db,"lehrplanMaterialien",i)),toast("Entfernt."),render()}else if(n==="board")wbVonKw=!0,openWhiteboard(i);else if(n==="faueb")kwFaUebungOeffnen(i);else if(n==="ubopen")r_QA(t.dataset.url,t.dataset.w,t.dataset.t);else if(n==="checkin"){const r=kwThemaById(i);if(!(await getBasischeckFragen(i)).length){toast("F\xFCr dieses Thema ist noch kein Wissens-Check hinterlegt.");return}window.__eaRueck=null,openCheckIn(i)}else if(n==="alt")kwThemaById(i).typ==="apt"?openAptDetail(i):openWocheDetail("paedagogik",i);else if(n==="ea")window.__eaRueck=async()=>{await render()},openEinarbeitung(i);else if(n==="modul")ppmOeffnen(i);else if(n==="modulneu"){const r=kwThemaById(i),a=KW_PHASEN.find(s=>s.id===r.phase);window.__kwThemaNeu=i,kwBausteinWahl(i)}else if(n==="modulwahl")kwModulWaehlen(i);else if(n==="trweg")await kwTrAus(i,t.dataset.thema,!1);else if(n==="trzurueck")await kwTrAus(null,i,!0);else if(n==="modulweg")await kwModulEntfernen(i,t.dataset.thema);else if(n==="projektstart"){const r=kwPhase(t.dataset.lb),a=PPM.liste.find(s=>s.modul==="projekt"&&Number(s.lb)===r.lbNum&&!s.projektId);a?ppmOeffnen(a.id):toast(isTeacher()?"Lege das Projekt im Unterricht-Plan \xFCber das Plus-Zeichen als Modul \u201EProjekt\u201C an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}else if(n==="exp")activeFach="paedagogik",openExperimentStunde(null);else if(n==="fertig"){const r=!kwErledigt(i);await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${i}`),{uid:currentUser.uid,wocheId:i,fach:"paedagogik",abgeschlossen:r,updatedAt:serverTimestamp()},{merge:!0}),r&&showMotivationsBild(!0,"abgabe"),render()}}catch(r){console.error("Kachelwand:",r),toast("Das hat nicht geklappt. Bitte erneut versuchen.")}}),init(),(function(){window.__CampusInteractionBridgeInstalled||(window.__CampusInteractionBridgeInstalled=!0,document.addEventListener("click",async function(e){const t=e.target.closest("[data-calendar-add],[data-calendar-day],[data-impulse-id],[data-open-impulse]");if(t){e.preventDefault(),e.stopPropagation();try{if(t.hasAttribute("data-calendar-add")){typeof window.openCalendarForm=="function"?window.openCalendarForm():typeof openCalendarForm=="function"&&openCalendarForm();return}if(t.hasAttribute("data-calendar-day")){const r=t.getAttribute("data-calendar-day").split("-").map(Number);r.length===3&&typeof window.openCalendarDay=="function"&&window.openCalendarDay(r[0],r[1],r[2]);return}const n=t.getAttribute("data-impulse-id")||t.getAttribute("data-open-impulse");if(n)if(typeof window.openImpulse=="function")window.openImpulse(n);else if(typeof window.openImpuls=="function")window.openImpuls(n);else if(typeof window.openImpulseModal=="function")window.openImpulseModal(n);else{const r=(window._campusImpulses||window.impulses||[]).find(a=>String(a.id)===String(n));if(r){const a=r.title||r.name||"Impuls",s=r.text||r.content||r.description||"";typeof window.modal=="function"&&window.modal(`<button class="modal-close"onclick="closeModal()">\xD7</button><div class="kicker">IMPULS</div><h2>${esc(a)}</h2><p>${esc(s)}</p>`)}}}catch(n){console.error("Campus Interaction:",n)}}},!0))})(),typeof window.openCalendarForm!="function"&&typeof openCalendarForm=="function"&&(window.openCalendarForm=openCalendarForm),typeof window.addCalendar!="function"&&typeof addCalendar=="function"&&(window.addCalendar=addCalendar),typeof window.openCalendarDay!="function"&&typeof openCalendarDay=="function"&&(window.openCalendarDay=openCalendarDay),typeof window.openImpulse!="function"&&typeof openImpulse=="function"&&(window.openImpulse=openImpulse),typeof window.openImpuls!="function"&&typeof openImpuls=="function"&&(window.openImpuls=openImpuls),typeof window.openImpulseModal!="function"&&typeof openImpulseModal=="function"&&(window.openImpulseModal=openImpulseModal);
+document.addEventListener("click",async e=>{const t=e.target.closest&&e.target.closest("[data-kw]");if(!t||!currentUser)return;const n=t.dataset.kw,i=t.dataset.id;try{if(n==="thema")activeKwThema=i,go("kw-thema");else if(n==="projekt")activeKwLb=Number(t.dataset.lb),go("kw-projekt");else if(n==="wand")go("start");else if(n==="checkouts")go("lernstaende");else if(n==="fortschritt")go("kw-fortschritt");else if(n==="matadd")kwMatForm(t.dataset.kat);else if(n==="matweg"){if(!confirm("Diese Datei wirklich entfernen?"))return;await deleteDoc(doc(db,"lehrplanMaterialien",i)),toast("Entfernt."),render()}else if(n==="board")wbVonKw=!0,openWhiteboard(i);else if(n==="faueb")kwFaUebungOeffnen(i);else if(n==="ubopen")r_QA(t.dataset.url,t.dataset.w,t.dataset.t);else if(n==="checkin"){const r=kwThemaById(i);if(!(await getBasischeckFragen(i)).length){toast("F\xFCr dieses Thema ist noch kein Check-in hinterlegt.");return}window.__eaRueck=null,openCheckIn(i)}else if(n==="alt")kwThemaById(i).typ==="apt"?openAptDetail(i):openWocheDetail("paedagogik",i);else if(n==="ea")window.__eaRueck=async()=>{await render()},openEinarbeitung(i);else if(n==="modul")ppmOeffnen(i);else if(n==="modulneu"){const r=kwThemaById(i),a=KW_PHASEN.find(s=>s.id===r.phase);window.__kwThemaNeu=i,kwBausteinWahl(i)}else if(n==="modulwahl")kwModulWaehlen(i);else if(n==="trweg")await kwTrAus(i,t.dataset.thema,!1);else if(n==="trzurueck")await kwTrAus(null,i,!0);else if(n==="modulweg")await kwModulEntfernen(i,t.dataset.thema);else if(n==="projektstart"){const r=kwPhase(t.dataset.lb),a=PPM.liste.find(s=>s.modul==="projekt"&&Number(s.lb)===r.lbNum&&!s.projektId);a?ppmOeffnen(a.id):toast(isTeacher()?"Lege das Projekt im Unterricht-Plan \xFCber das Plus-Zeichen als Modul \u201EProjekt\u201C an.":"Das Projekt wurde von der Lehrkraft noch nicht angelegt.")}else if(n==="exp")activeFach="paedagogik",openExperimentStunde(null);else if(n==="fertig"){const r=!kwErledigt(i);await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${i}`),{uid:currentUser.uid,wocheId:i,fach:"paedagogik",abgeschlossen:r,updatedAt:serverTimestamp()},{merge:!0}),r&&showMotivationsBild(!0,"abgabe"),render()}}catch(r){console.error("Kachelwand:",r),toast("Das hat nicht geklappt. Bitte erneut versuchen.")}}),init(),(function(){window.__CampusInteractionBridgeInstalled||(window.__CampusInteractionBridgeInstalled=!0,document.addEventListener("click",async function(e){const t=e.target.closest("[data-calendar-add],[data-calendar-day],[data-impulse-id],[data-open-impulse]");if(t){e.preventDefault(),e.stopPropagation();try{if(t.hasAttribute("data-calendar-add")){typeof window.openCalendarForm=="function"?window.openCalendarForm():typeof openCalendarForm=="function"&&openCalendarForm();return}if(t.hasAttribute("data-calendar-day")){const r=t.getAttribute("data-calendar-day").split("-").map(Number);r.length===3&&typeof window.openCalendarDay=="function"&&window.openCalendarDay(r[0],r[1],r[2]);return}const n=t.getAttribute("data-impulse-id")||t.getAttribute("data-open-impulse");if(n)if(typeof window.openImpulse=="function")window.openImpulse(n);else if(typeof window.openImpuls=="function")window.openImpuls(n);else if(typeof window.openImpulseModal=="function")window.openImpulseModal(n);else{const r=(window._campusImpulses||window.impulses||[]).find(a=>String(a.id)===String(n));if(r){const a=r.title||r.name||"Impuls",s=r.text||r.content||r.description||"";typeof window.modal=="function"&&window.modal(`<button class="modal-close"onclick="closeModal()">\xD7</button><div class="kicker">IMPULS</div><h2>${esc(a)}</h2><p>${esc(s)}</p>`)}}}catch(n){console.error("Campus Interaction:",n)}}},!0))})(),typeof window.openCalendarForm!="function"&&typeof openCalendarForm=="function"&&(window.openCalendarForm=openCalendarForm),typeof window.addCalendar!="function"&&typeof addCalendar=="function"&&(window.addCalendar=addCalendar),typeof window.openCalendarDay!="function"&&typeof openCalendarDay=="function"&&(window.openCalendarDay=openCalendarDay),typeof window.openImpulse!="function"&&typeof openImpulse=="function"&&(window.openImpulse=openImpulse),typeof window.openImpuls!="function"&&typeof openImpuls=="function"&&(window.openImpuls=openImpuls),typeof window.openImpulseModal!="function"&&typeof openImpulseModal=="function"&&(window.openImpulseModal=openImpulseModal);
 
 
 try{ if(typeof closeResilienzModal==="function") window.closeResilienzModal=closeResilienzModal; }catch(_){}
