@@ -544,3 +544,9 @@ body:has(#app[hidden]) .topbar .user-area{margin-left:auto}
 .app-shell #content{padding-top:8px}
 @media(max-width:900px){.app-shell{padding-top:14px}}
 .topbar .nav-mehr>summary::after{margin-left:6px}
+
+/* Luft unter den Navigationsbuttons */
+.topbar{padding-bottom:12px;padding-top:4px}
+.topbar:has(.nav-area-l:not([hidden])) .sidebar{padding:8px 0 4px;margin-top:2px}
+.topbar .nav-area .nav-link,.topbar .nav-mehr>summary{margin:2px 0}
+.topbar .nav-mehr[open]>summary{margin:2px 0}
