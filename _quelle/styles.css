@@ -690,3 +690,9 @@ body.kw-voll main#content{max-width:none}
 .list-item,.card .card{background:#fff}
 button.primary,.primary{background:#17324B;color:#fff;border-color:#17324B}
 button.primary:hover{background:#0F2539}
+
+/* Lernlandkarte: reine Übersicht */
+.lxl-lb .lxl-kopf{padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:2px 8px;background:rgba(255,255,255,.35)}
+.lxl-lb .lxl-kopf small{font-weight:700;color:#55697B}.lxl-lb .lxl-kopf h3{grid-column:1/-1;margin:2px 0;font-size:20px;color:#17324B}
+.lxl-th,.lxl-pr{cursor:default}.lxl-th:hover{background:none}
+.lxs-mk .lxs-link{margin-left:auto}

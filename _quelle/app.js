@@ -4230,8 +4230,8 @@ async function lxStartNeu(wp){
   const Z=(wp||[]).filter(w=>!w.done&&w.dueDate&&w.dueDate<=plus(7)).slice(0,4);
   woche=Z.map((w,i)=>`<div class="lxs-wz${i?"":" erste"}"><small>${esc(fmtKurz(w.dueDate))} · ${w.dueDate<heute?"überfällig":"fällig"}</small><b>${esc(w.title)}</b></div>`).join("")||`<div class="lxs-wz"><small>Alles erledigt</small><b>Keine Aufgaben in den nächsten 7 Tagen</b></div>`;
  }catch(e){}
- return`<div class="lxs"><div class="lxs-kopf"><div><small>KW ${I.kw} · FÄLLIG BIS FREITAG, ${I.fr}</small><h1>Hallo${name?" "+esc(name):""}, das ist deine Woche.</h1></div><div class="lxs-leg"><span class="r">Begriffe</span><span class="t">Theorie</span><span class="a">Anwendung</span></div></div>${lxZeitNeu()}
- <div class="lxs-raster"><section class="lxs-main"><div class="lxs-mk"><h2>Pädagogik / Psychologie</h2><small>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</small></div>${zeile||`<div class="kw-leer">Für diesen Lernbereich sind noch keine Themen freigeschaltet.</div>`}</section>
+ return`<div class="lxs"><div class="lxs-kopf"><div><small>KW ${I.kw} · FÄLLIG BIS FREITAG, ${I.fr}</small><h1>Hallo${name?" "+esc(name):""}, das ist deine Woche.</h1></div><div class="lxs-leg"><span class="r">Begriffe</span><span class="t">Theorie</span><span class="a">Anwendung</span></div></div>
+ <div class="lxs-raster"><section class="lxs-main"><div class="lxs-mk"><h2>Pädagogik / Psychologie</h2><small>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</small><a class="lxs-link" href="#" onclick="go('start');return false">Alle Lernbereiche ansehen →</a></div>${zeile||`<div class="kw-leer">Für diesen Lernbereich sind noch keine Themen freigeschaltet.</div>`}</section>
  <aside class="lxs-seite"><section class="lxs-wo"><h3>Diese Woche</h3>${woche}<a class="lxs-link" href="#kalender">Ganze Woche ansehen</a></section><section class="lxs-fr"><h3>Fachliche Frage?</h3><p>Stelle sie im Klassenteam und Forum. Deine Lehrkräfte lesen mit.</p><button type="button" class="secondary" onclick="go('klassenteam')">Zum Klassenteam</button></section></aside></div></div>`;
 }
 async function lxThemaHub(e,lehrer){
@@ -21515,18 +21515,17 @@ function lxLandkarteNeu(){
  const akt=phasen.find(p=>p.start<=heute&&heute<=p.end)||phasen.find(p=>p.start>heute)||phasen[phasen.length-1];
  const spalte=ph=>{
   const th=kwThemenSicht(ph).filter(e=>e.typ!=="projekt"),pr=PP_EINHEITEN_PROJEKT(ph),cur=ph===akt;
-  const rows=th.map(e=>{const pk=["r","t","a"].map(b=>{const v=lxSich(e.id,b);return`<i class="${v==="g"?"f":(v?"h":"")} ${b}"></i>`}).join("");return`<button type="button" class="lxl-th" data-lxl="${esc(e.id)}"><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span><span class="lxl-pk">${pk}</span></button>`}).join("");
-  return`<details class="lxl-lb"${cur?" open":""}><summary><small>LB ${ph.lbNum}</small>${cur?`<span class="lxl-akt">AKTUELL</span>`:""}<h3>${esc(ph.lbTitel||"")}</h3><span class="lxl-n">${th.length} Themen</span></summary>${pr}<div class="lxl-liste">${rows||`<div class="kw-leer">Noch keine Themen freigeschaltet.</div>`}</div></details>`;
+  const rows=th.map(e=>{const pk=["r","t","a"].map(b=>{const v=lxSich(e.id,b);return`<i class="${v==="g"?"f":(v?"h":"")} ${b}"></i>`}).join("");return`<div class="lxl-th"><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span><span class="lxl-pk">${pk}</span></div>`}).join("");
+  return`<section class="lxl-lb"><header class="lxl-kopf"><small>LB ${ph.lbNum}</small>${cur?`<span class="lxl-akt">AKTUELL</span>`:""}<h3>${esc(ph.lbTitel||"")}</h3><span class="lxl-n">${th.length} Themen</span></header>${pr}<div class="lxl-liste">${rows||`<div class="kw-leer">Noch keine Themen freigeschaltet.</div>`}</div></section>`;
  };
  const first=kwThemenSicht(akt).find(e=>e.typ!=="projekt");
- return`${kwSchuelerBanner()}<div class="lxl"><div class="lxl-tabs">${FACH.map((f,i)=>`<span class="${i?"":"an"}">${esc(f)}</span>`).join("")}</div><h1>Lernlandkarte</h1><div class="lxl-leg"><span class="r">Begriffe</span><span class="t">Theorie</span><span class="a">Anwendung</span></div><p class="lxl-h">Tippe auf einen Lernbereich, um die Themen aufzuklappen.</p>
- <div class="lxl-spalten">${phasen.map(spalte).join("")}</div>
- <section class="lxl-sel" id="lxlSel">${lxlAuswahl(first)}</section></div>${footer()}`;
+ return`${kwSchuelerBanner()}<div class="lxl"><div class="lxl-tabs">${FACH.map((f,i)=>`<span class="${i?"":"an"}">${esc(f)}</span>`).join("")}</div><h1>Lernlandkarte</h1><div class="lxl-leg"><span class="r">Begriffe</span><span class="t">Theorie</span><span class="a">Anwendung</span></div><p class="lxl-h">Überblick über alle Lernbereiche und Themen. Gearbeitet wird auf der Startseite.</p>
+ <div class="lxl-spalten">${phasen.map(spalte).join("")}</div></div>${footer()}`;
 }
 function PP_EINHEITEN_PROJEKT(ph){
  const t=String((ph.titel||"")).trim(),a=ph.projektStart||ph.start,b=ph.projektEnde||ph.end;
  if(!t)return"";
- return`<button type="button" class="lxl-pr" data-kw="projekt" data-lb="${ph.lbNum}"><span>Projekt</span><b>${esc(t)}</b><small>${esc(fmtKurz(a))}–${esc(fmtKurz(b))}</small></button>`;
+ return`<div class="lxl-pr"><span>Projekt</span><b>${esc(t)}</b><small>${esc(fmtKurz(a))}–${esc(fmtKurz(b))}</small></div>`;
 }
 function lxlAuswahl(e){
  if(!e)return"";
