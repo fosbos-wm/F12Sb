@@ -419,3 +419,53 @@ body.kw-voll .kw-th b{font-size:18px}
 .lx-stufe{margin-top:14px}
 .lx-stufe>b{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--k);margin-bottom:4px}
 @media(max-width:980px){.lx-ben{grid-template-columns:1fr}}
+
+/* Farbdesign nach Logo: Blau und Grün, abwechselnd getönt */
+.topbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#469BDC 50%,#9BBF41 50%)}
+.lx-kacheln>.lx-kachel:nth-child(odd){background:#EEF6FD;border:1px solid #CFE3F5;border-top:4px solid #469BDC}
+.lx-kacheln>.lx-kachel:nth-child(even){background:#F4F8E8;border:1px solid #DDE9BE;border-top:4px solid #9BBF41}
+.lx-kacheln>.lx-kachel.lx-aus{opacity:.75}
+.grid>.card.card-compact:nth-child(odd){background:#EEF6FD;border-top:4px solid #469BDC}
+.grid>.card.card-compact:nth-child(even){background:#F4F8E8;border-top:4px solid #9BBF41}
+.nav-mehr{margin:2px 0 0}
+.nav-mehr>summary{cursor:pointer;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:700;color:#526a7a;list-style:none}
+.nav-mehr>summary::-webkit-details-marker{display:none}
+.nav-mehr>summary::after{content:" ▾"}
+.nav-mehr[open]>summary::after{content:" ▴"}
+.nav-mehr .nav-link{padding-left:24px}
+/* Start: Zeitleiste und Lernweg */
+.zl,.zl-weg{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin-bottom:20px}
+.zl h3,.zl-weg h3{margin:0 0 10px;font-size:16px;color:#17324B}
+.zl-bahn{position:relative;height:74px;margin:6px 0 4px}
+.zl-linie{position:absolute;left:0;right:0;top:26px;height:6px;border-radius:3px;background:#E4ECF3}
+.zl-seg{position:absolute;top:20px;height:18px;border-radius:4px;background:#8497A8}
+.zl-seg.an{background:#17324B}
+.zl-lab{position:absolute;top:46px;font-size:11px;font-weight:700;color:#55697B;white-space:nowrap}
+.zl-lab.an{color:#17324B;font-weight:800}
+.zl-m{position:absolute;top:12px;width:3px;height:34px;border-radius:2px;background:#F0A500}
+.zl-m.pruefung{background:#B42318;width:4px}
+.zl-heute{position:absolute;top:10px;width:2px;height:38px;background:#469BDC}
+.zl-hl{position:absolute;top:-2px;transform:translateX(-50%);font-size:12px;font-weight:800;color:#469BDC}
+.zl small{color:var(--muted);font-size:12px}
+.zl-weg ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;counter-reset:z}
+.zl-weg li{counter-increment:z;background:#EEF6FD;border-top:4px solid #469BDC;border-radius:12px;padding:10px 12px}
+.zl-weg li:nth-child(even){background:#F4F8E8;border-top-color:#9BBF41}
+.zl-weg li::before{content:counter(z);font-weight:900;color:#17324B;margin-right:6px}
+.zl-weg li b{font-size:14px;color:#17324B}
+.zl-weg li small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.zl-weg p{margin:12px 0 0;color:var(--muted);font-size:13px}
+.zl-weg p a{color:#075a9d;font-weight:800}
+@media(max-width:900px){.zl-weg ol{grid-template-columns:1fr}}
+
+/* Infotext: Reiter Lesen, Hören, Sehen */
+.lx-tabs{display:flex;gap:8px;margin:4px 0 12px;flex-wrap:wrap}
+.lx-tab{border:1px solid #CFE3F5;background:#fff;color:#17324B;border-radius:999px;padding:8px 18px;font-weight:800;cursor:pointer}
+.lx-tab.an{background:#17324B;color:#fff;border-color:#17324B}
+.lx-tab-p.aus{display:none}
+.lx-upl{background:#fff;border:1px dashed #469BDC;border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.lx-upl small{display:block;color:var(--muted);margin:2px 0 8px}
+/* Kompetenz- und Resilienz-Seite im selben Farbdesign */
+.competency-card:nth-child(odd),.resource-card:nth-child(odd){background:#EEF6FD;border-top:4px solid #469BDC}
+.competency-card:nth-child(even),.resource-card:nth-child(even){background:#F4F8E8;border-top:4px solid #9BBF41}
+.competency-hero{background:linear-gradient(110deg,#fff,#EEF6FD);border-top:4px solid #9BBF41}
+.competency-motto{background:#F4F8E8;border-color:#DDE9BE;color:#3C5A14}

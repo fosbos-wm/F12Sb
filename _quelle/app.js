@@ -2856,7 +2856,7 @@ function checkinAusBank(id){
 async function getBasischeckFragen(wocheId){
  try{
  const snap=await getDoc(doc(db,"basischeckFragen",wocheId));
- if(snap.exists()&&(snap.data().fragen||[]).length)return snap.data().fragen;
+ if(snap.exists()&&snap.data().v===2&&(snap.data().fragen||[]).length)return snap.data().fragen;
  return checkinAusBank(wocheId);
  }catch(e){console.error("Check-in-Fragen laden:",e);return checkinAusBank(wocheId)}
 }
@@ -2912,7 +2912,7 @@ async function saveBasischeckFragen(fach,wocheId){
  }
  if(!fragen.length){toast("Bitte mindestens eine vollständige Frage eingeben.");return}
  try{
- await setDoc(doc(db,"basischeckFragen",wocheId),{wocheId,fach,fragen,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
+ await setDoc(doc(db,"basischeckFragen",wocheId),{wocheId,fach,fragen,v:2,updatedAt:serverTimestamp(),updatedBy:currentUser.uid});
  toast("Check-in gespeichert.");
  if($("ciAnsicht")){await openCheckIn(wocheId);return}
  await reopenDetail(fach,wocheId);
@@ -4177,6 +4177,25 @@ async function miniKalenderHTML(){let e=[];try{e=(await getCollection("events","
  ${s.map((h,k)=>{const f=l(h),y=f===l(r),w=i(f),v=d.has(f),S=c.has(f);return`<div class="mini-kalender-day${y?" mini-kalender-today":""}${w?" mini-kalender-ferien":""}"><small>${p[k]}</small><strong>${h.getDate()}</strong>${v?'<span class="mini-kalender-dot mini-kalender-dot-pink"></span>':S?'<span class="mini-kalender-dot"></span>':""}</div>`}).join("")}
  </a>
  <small style="display:block;margin-top:6px;color:var(--muted);font-size:10px">Zum vollst\xE4ndigen Campus-Kalender \u2192</small>`}
+function lxZeitleisteHTML(){
+ try{
+  const ph=KW_PHASEN.slice().sort((a,b)=>a.start<b.start?-1:1);
+  const t=x=>new Date(x+"T12:00:00Z").getTime();
+  const pr=PP12_PLAN.filter(x=>x.typ==="pruefung").map(x=>x.d).sort();
+  const a=t(PP12_START),z=t(pr[pr.length-1]||ph[ph.length-1].end),W=z-a;
+  const pc=x=>Math.max(0,Math.min(100,(t(x)-a)/W*100));
+  const heute=new Date().toISOString().slice(0,10);
+  const segs=ph.map(p=>{const l=pc(p.start),w=Math.max(1,pc(p.end)-l),cur=p.start<=heute&&heute<=p.end;return`<div class="zl-seg${cur?" an":""}" style="left:${l}%;width:${w}%"></div><div class="zl-lab${cur?" an":""}" style="left:${l}%">LB ${p.lbNum} · ${fmtKurz(p.start)}–${fmtKurz(p.end)}</div>`}).join("");
+  const marks=PP12_PLAN.filter(x=>x.typ==="leistung"||x.typ==="pruefung").map(x=>`<i class="zl-m ${x.typ}" style="left:${pc(x.d)}%" title="${esc(fmtKurz(x.d)+" "+x.t)}"></i>`).join("");
+  const h=pc(heute);
+  return`<section class="zl"><h3>Was kommt wann?</h3><div class="zl-bahn"><div class="zl-linie"></div>${segs}${marks}${heute>=PP12_START?`<i class="zl-heute" style="left:${h}%"></i><span class="zl-hl" style="left:${h}%">heute</span>`:""}</div><small>Striche: Kurzarbeit, Schulaufgaben und Abschlussprüfungen</small></section>`;
+ }catch(e){return""}
+}
+function lxLernwegKarte(){
+ const st=[["Check-in","Was weißt du schon? Was möchtest du wissen?"],["Infotext","Lesen, Hören oder Sehen"],["Selbstlernkurs","Das Thema Schritt für Schritt"],["Üben","Begriffe, Theorie, Anwendung"],["Check-out","Zeig, was du kannst"]];
+ return`<section class="zl-weg"><h3>Dein Lernweg zu jedem Thema</h3><ol>${st.map(x=>`<li><b>${x[0]}</b><small>${x[1]}</small></li>`).join("")}</ol><p>Du entscheidest selbst, in welcher Reihenfolge du vorgehst. <a href="#unterricht">Zur Lernlandkarte →</a></p></section>`;
+}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest(".lx-tab");if(!b)return;const sek=b.closest(".lx-sek");if(!sek)return;sek.querySelectorAll(".lx-tab").forEach(x=>x.classList.toggle("an",x===b));sek.querySelectorAll(".lx-tab-p").forEach(p=>p.classList.toggle("aus",p.dataset.t!==b.dataset.lxtab))});
 async function renderStart(){
  let news=[],nextCalendar=null,birthdayInfo=null,wochenplan=[];
  try{[news,nextCalendar,birthdayInfo,wochenplan]=await Promise.all([getCollection("news","createdAt",true,10),getUpcomingCampusCalendarEvent(),getUpcomingBirthdayInfo(),getMeineWochenplanung()])}catch(e){}
@@ -4192,6 +4211,7 @@ verbinden wir Lernen, Praxis und Gemeinschaft. Alle angemeldeten Mitglieder arbe
 </div></section>
  ${isTeacher()&&window.__lxBereich!=="s"?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px"><button class="primary"onclick="openNewsForm()">＋ News veröffentlichen</button>${isAdmin()?`<button class="secondary"onclick="openUserManagement()">Benutzer verwalten</button>`:""}</div>`:""}
  ${pp12CssBausteine()}${naechsteStunde}
+ ${lxZeitleisteHTML()}${isTeacher()&&window.__lxBereich!=="s"?"":lxLernwegKarte()}
  ${await lxOffenKachel()}
   <div class="grid grid-3"style="gap:20px;margin-bottom:20px">
  <div class="card card-compact"style="border-left:4px solid #4a90d9"><h3> Campus-News</h3><div class="list">${news.slice(0,3).map(p=>`<div
@@ -19559,6 +19579,7 @@ async function render(){
  const fn=pages[p]||renderKachelwand;
  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",
  a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || lxNavAktiv(a.dataset.page,p)));
+ document.querySelectorAll(".nav-mehr").forEach(d=>{if(d.querySelector(".nav-link.active"))d.open=true});
  const content=$("content");
  if(!content)return;
  // Never leave a blank page while a module is loading.
@@ -21377,10 +21398,10 @@ async function renderUnterrichtsfaecher(){
  const fertig=lehrer?alle.filter(e=>(KW.mat[e.id]||[]).length||kwModuleThema(e.id).length).length:alle.filter(e=>kwErledigt(e.id)).length;
  const p=alle.length?Math.round(fertig/alle.length*100):0;
  const bar=`<span class="lx-bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${p}%"></i></span><span class="lx-bar-t">${lehrer?"Vorbereitet":"Erledigt"}: ${p} %</span>`;
- return`${kwSchuelerBanner()}${pageHead("UNTERRICHTSFÄCHER","Unterrichtsfächer","Wähle ein Fach. Dort findest du die Lernlandkarte mit allen Themen, Aufgaben und deinem Lernstand.")}
+ return`${kwSchuelerBanner()}${pageHead("LERNLANDKARTE","Fächer der 12. Klasse","Wähle ein Fach. Dort findest du alle Themen mit dem Lernweg: Check-in, Infotext, Selbstlernkurs, Üben, Check-out.")}
  <div class="lx-kacheln lx-faecher">
-  ${lxKachel("start","Pädagogik / Psychologie","Lernlandkarte mit allen Lernbereichen, Themen und Projekten",{extra:bar})}
-  ${lxKachel("","Mathematik","Wird vorbereitet",{data:'data-lx="mathe"',extra:'<span class="lx-badge">bald</span>'})}
+  ${lxKachel("start","Pädagogik / Psychologie","Lernlandkarte mit 4 Lernbereichen und 29 Themen. Lernweg mit Check-in und Check-out.",{extra:bar})}
+  ${["Deutsch","Englisch","Mathematik","Religionslehre / Ethik","Politik und Gesellschaft","Sport","Sozialwirtschaft und Recht","Biologie","Soziologie","Wahlpflichtfach 1","Wahlpflichtfach 2"].map(n=>lxKachel("",n,"Lernlandkarte und Material folgen",{aus:true,extra:'<span class="lx-badge">folgt</span>'})).join("")}
  </div>${footer()}`;
 }
 
@@ -21548,7 +21569,12 @@ async function renderKwThema(){
   // 2 Infotext: Lesen, Hören, Sehen
   const s8l=mats.filter(m=>m.kategorie==="einfuehrung");
   const einf=(lehrer||s8l.length)?`<div class="kw-stufe"><b>Sehen · Einführungstafel</b>${s8l.length?`<div class="kw-dateien">${s8l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join("")}</div>`:`<div class="kw-leer">Noch keine Tafel ausgewählt.</div>`}${add("einfuehrung")}</div>`:"";
-  const infoIn=teil("lernsituation","Lesen · Lernsituationen")+teil("lehrtext","Lesen · Lehrtexte")+teil("arbeitsblatt","Lesen · Arbeitsblätter")+teil("audio","Hören · Audio")+teil("video","Sehen · Video")+einf+teil("tafel","Sehen · Digitale Tafeln")+teil("lernuebersicht","Sehen · Lernübersichten");
+  const lesenH=teil("lernsituation","Lernsituationen")+teil("lehrtext","Lehrtexte")+teil("arbeitsblatt","Arbeitsblätter");
+  const hoerenH=teil("audio","Audio");
+  const sehenH=teil("video","Videos")+einf+teil("tafel","Digitale Tafeln")+teil("lernuebersicht","Lernübersichten");
+  const tabs=[["lesen","Lesen",lesenH],["hoeren","Hören",hoerenH],["sehen","Sehen",sehenH]].filter(x=>x[2]);
+  const upl=lehrer?`<div class="lx-upl"><b>Infotext hinzufügen</b><small>Datei hochladen (bis 15 MB) oder Link einfügen. Videos am besten als Link, Audios als Datei.</small><div class="kw-aktionen"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="lehrtext">+ Lesetext</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="audio">+ Audio</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="video">+ Video</button></div></div>`:"";
+  const infoIn=tabs.length?upl+`<div class="lx-tabs" role="tablist">${tabs.map((x,k)=>`<button type="button" class="lx-tab${k?"":" an"}" data-lxtab="${x[0]}">${x[1]}</button>`).join("")}</div>`+tabs.map((x,k)=>`<div class="lx-tab-p${k?" aus":""}" data-t="${x[0]}">${x[2]}</div>`).join(""):"";
   teile.push(infoIn?lxSek(2,LXF[2].n,"Lesen, Hören oder Sehen: Wähle, was dir beim Verstehen hilft.",infoIn):"");
   // 3 Selbstlernkurs
   const karten=[];
