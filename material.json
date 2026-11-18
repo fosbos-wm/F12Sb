@@ -2671,6 +2671,86 @@
    "titel": "Praxis-Check: Eingewöhnung bei uns",
    "url": "lb12-bindung/t12_1_8/3-5-auftrag.html",
    "ord": 35
+  },
+  {
+   "id": "druck-t12_1_6-0",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Lernrallye-Blätter (PDF) – Begriff und Phasen",
+   "url": "lb12-bindung/druck/Rallye_1_Bindung_Begriff_und_Phasen_Schueler.pdf",
+   "ord": 40
+  },
+  {
+   "id": "druck-t12_1_6-1",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Druckvorlagen (PDF) – Begriff und Phasen",
+   "url": "lb12-bindung/druck/Druckvorlagen_1_Bindung_Begriff_und_Phasen.pdf",
+   "ord": 41
+  },
+  {
+   "id": "druck-t12_1_6t-0",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Lernrallye-Blätter (PDF) – Bindungstypen",
+   "url": "lb12-bindung/druck/Rallye_2_Bindungstypen_Schueler.pdf",
+   "ord": 40
+  },
+  {
+   "id": "druck-t12_1_6t-1",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Druckvorlagen (PDF) – Bindungstypen",
+   "url": "lb12-bindung/druck/Druckvorlagen_2_Bindungstypen.pdf",
+   "ord": 41
+  },
+  {
+   "id": "druck-t12_1_6b-0",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Lernrallye-Blätter (PDF) – Feinfühligkeit",
+   "url": "lb12-bindung/druck/Rallye_3_Feinfuehligkeit_Schueler.pdf",
+   "ord": 40
+  },
+  {
+   "id": "druck-t12_1_6b-1",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Druckvorlagen (PDF) – Feinfühligkeit",
+   "url": "lb12-bindung/druck/Druckvorlagen_3_Feinfuehligkeit.pdf",
+   "ord": 41
+  },
+  {
+   "id": "druck-t12_1_7-0",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Lernrallye-Blätter (PDF) – Bindungsnetz",
+   "url": "lb12-bindung/druck/Rallye_4_Bindungsnetz_Schueler.pdf",
+   "ord": 40
+  },
+  {
+   "id": "druck-t12_1_7-1",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Druckvorlagen (PDF) – Bindungsnetz",
+   "url": "lb12-bindung/druck/Druckvorlagen_4_Bindungsnetz.pdf",
+   "ord": 41
+  },
+  {
+   "id": "druck-t12_1_8-0",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Lernrallye-Blätter (PDF) – Frühpädagogik",
+   "url": "lb12-bindung/druck/Rallye_5_Fruehpaedagogik_Schueler.pdf",
+   "ord": 40
+  },
+  {
+   "id": "druck-t12_1_8-1",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Druckvorlagen (PDF) – Frühpädagogik",
+   "url": "lb12-bindung/druck/Druckvorlagen_5_Fruehpaedagogik.pdf",
+   "ord": 41
   }
  ]
 }
