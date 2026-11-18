@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Körperliche Reife",
+  "Gesellschaftliche Erwartung",
+  "Persönliches Ziel"
+ ],
+ "items": [
+  {
+   "t": "Neue Körpergestalt akzeptieren",
+   "k": 0
+  },
+  {
+   "t": "Pubertät bewältigen",
+   "k": 0
+  },
+  {
+   "t": "Geschlechtsrolle annehmen",
+   "k": 0
+  },
+  {
+   "t": "Schulabschluss erreichen",
+   "k": 1
+  },
+  {
+   "t": "Berufsausbildung abschließen",
+   "k": 1
+  },
+  {
+   "t": "Mit 6 Jahren schulfähig sein",
+   "k": 1
+  },
+  {
+   "t": "Eine eigene Familie gründen wollen",
+   "k": 2
+  },
+  {
+   "t": "Einen bestimmten Beruf anstreben",
+   "k": 2
+  },
+  {
+   "t": "Ein eigenes Wertesystem entwickeln wollen",
+   "k": 2
+  }
+ ]
+}

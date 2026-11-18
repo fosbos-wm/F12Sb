@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Lebensspannenentwicklung treffen zu?",
+   "statements": [
+    {
+     "text": "Entwicklung dauert das ganze Leben.",
+     "richtig": true
+    },
+    {
+     "text": "Verluste können durch Alternativen ausgeglichen werden.",
+     "richtig": true
+    },
+    {
+     "text": "Entwicklung endet mit dem Jugendalter.",
+     "richtig": false
+    },
+    {
+     "text": "Im Alter gibt es nur Abbau.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Entwicklungsaufgaben treffen zu?",
+   "statements": [
+    {
+     "text": "Sie ergeben sich aus Reife, Gesellschaft und persönlichen Zielen.",
+     "richtig": true
+    },
+    {
+     "text": "Sie treten in bestimmten Lebensabschnitten auf.",
+     "richtig": true
+    },
+    {
+     "text": "Sie sind in allen Kulturen identisch.",
+     "richtig": false
+    },
+    {
+     "text": "Sie lassen sich ohne Folgen überspringen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Ayla (17) macht Fachabitur, streitet mit den Eltern und verbringt viel Zeit mit der Clique. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Sie bewältigt die Ablösung von den Eltern.",
+     "richtig": true
+    },
+    {
+     "text": "Die Clique unterstützt die Identitätsfindung.",
+     "richtig": true
+    },
+    {
+     "text": "Die Ablösung ist keine Aufgabe des Jugendalters.",
+     "richtig": false
+    },
+    {
+     "text": "Die Peergroup hat keinen Einfluss.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Peergroup treffen zu?",
+   "statements": [
+    {
+     "text": "Ihre Bedeutung steigt im Jugendalter.",
+     "richtig": true
+    },
+    {
+     "text": "Rollen können dort ausprobiert werden.",
+     "richtig": true
+    },
+    {
+     "text": "Die Beziehung zu den Eltern endet vollständig.",
+     "richtig": false
+    },
+    {
+     "text": "Sie ist für die Entwicklung belanglos.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

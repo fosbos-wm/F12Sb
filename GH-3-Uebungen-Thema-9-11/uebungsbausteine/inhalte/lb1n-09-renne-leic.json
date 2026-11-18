@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welcher Faktor erhöht das Risiko?",
+   "o": [
+    "häufig wechselndes Personal",
+    "feste Bezugserzieherin",
+    "Rituale",
+    "feinfühlige Fachkräfte"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was ist Hauptziel der Eingewöhnung?",
+   "o": [
+    "möglichst schneller Abschied",
+    "stabile Beziehung zwischen Kind und Erzieherin",
+    "Selbstständigkeit durch Trennung",
+    "Eltern entlasten"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Schadet Fremdbetreuung automatisch der Bindung?",
+   "o": [
+    "ja, immer",
+    "nur bei Mädchen",
+    "nein, es kommt auf die Bedingungen an",
+    "nur bei Krippen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was schützt?",
+   "o": [
+    "lange Betreuungszeiten",
+    "häufige Wechsel",
+    "fehlende Rituale",
+    "feinfühlige Beziehung zuhause"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Wie werden Trennungen bei der Eingewöhnung gesteigert?",
+   "o": [
+    "allmählich",
+    "sofort lang",
+    "nie",
+    "zufällig"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wer kann sekundäre Bindungsperson werden?",
+   "o": [
+    "niemand",
+    "die Erzieherin",
+    "nur Eltern",
+    "nur Geschwister"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Betreuungsschlüssel ist günstiger?",
+   "o": [
+    "1 : 8",
+    "1 : 15",
+    "1 : 3",
+    "1 : 20"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was hilft bei Trennungsleid?",
+   "o": [
+    "Ablenkung ohne Person",
+    "Strafen",
+    "schnelles Gehen",
+    "vertraute Bezugsperson"
+   ],
+   "r": 3
+  }
+ ]
+}

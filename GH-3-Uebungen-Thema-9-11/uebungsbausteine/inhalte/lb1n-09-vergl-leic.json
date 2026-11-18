@@ -1,0 +1,50 @@
+{
+ "titel": "Theorievergleich: Beispiele sortieren",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Risiko",
+  "Schutz"
+ ],
+ "karten": [
+  {
+   "t": "Ständig wechselndes Personal",
+   "s": 0
+  },
+  {
+   "t": "Sehr viele Betreuungsstunden im 1. Lebensjahr",
+   "s": 0
+  },
+  {
+   "t": "Wenig feinfühlige Eltern",
+   "s": 0
+  },
+  {
+   "t": "Zu schnelle Eingewöhnung",
+   "s": 0
+  },
+  {
+   "t": "Ungünstiger Betreuungsschlüssel",
+   "s": 0
+  },
+  {
+   "t": "Feste Bezugserzieherin",
+   "s": 1
+  },
+  {
+   "t": "Feinfühlige Fachkräfte",
+   "s": 1
+  },
+  {
+   "t": "Behutsame Eingewöhnung",
+   "s": 1
+  },
+  {
+   "t": "Gute Qualität der Einrichtung",
+   "s": 1
+  },
+  {
+   "t": "Rituale beim Abschied",
+   "s": 1
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Risiko für unsichere Bindung",
+  "Schutz für sichere Bindung"
+ ],
+ "items": [
+  {
+   "t": "Ständig wechselndes Personal",
+   "k": 0
+  },
+  {
+   "t": "Viele Betreuungsstunden im ersten Lebensjahr",
+   "k": 0
+  },
+  {
+   "t": "Wenig feinfühlige Eltern",
+   "k": 0
+  },
+  {
+   "t": "Zu schnelle Eingewöhnung",
+   "k": 0
+  },
+  {
+   "t": "Ungünstiger Betreuungsschlüssel",
+   "k": 0
+  },
+  {
+   "t": "Feinfühlige Fachkräfte",
+   "k": 1
+  },
+  {
+   "t": "Behutsame, allmähliche Eingewöhnung",
+   "k": 1
+  },
+  {
+   "t": "Feste Bezugserzieherin",
+   "k": 1
+  },
+  {
+   "t": "Gute Qualität der Einrichtung",
+   "k": 1
+  },
+  {
+   "t": "Rituale beim Abschied",
+   "k": 1
+  }
+ ]
+}

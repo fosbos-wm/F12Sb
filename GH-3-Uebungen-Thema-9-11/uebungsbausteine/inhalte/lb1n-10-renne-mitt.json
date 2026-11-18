@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Herr Schuster gibt den Marathon auf und radelt. Welches Merkmal?",
+   "o": [
+    "Ausgleich von Verlusten",
+    "Weiterentwicklung",
+    "Erhaltung",
+    "keines"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Er stellt seine Fitness wieder her. Welches Merkmal?",
+   "o": [
+    "Ausgleich",
+    "Erhaltung/Wiedererlangung",
+    "Weiterentwicklung",
+    "keines"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Lena zieht aus. Welche Aufgabe?",
+   "o": [
+    "Spracherwerb",
+    "Laufen lernen",
+    "Ablösung von den Eltern",
+    "Sauberkeit"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Ayla weiß nicht, was nach dem Fachabitur kommt. Welche Aufgabe?",
+   "o": [
+    "Sauberkeit",
+    "Laufen",
+    "Spracherwerb",
+    "Berufsvorbereitung"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Was gehört zur Peergroup?",
+   "o": [
+    "Gleichaltrige als Bezugsgruppe",
+    "Familie",
+    "Lehrkräfte",
+    "Fremde"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie verläuft Entwicklung nach Baltes?",
+   "o": [
+    "bis zum Jugendalter",
+    "lebenslang",
+    "bis zur Pubertät",
+    "bis zum Schuleintritt"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist eine Transition?",
+   "o": [
+    "Reifung",
+    "Fixierung",
+    "Lebensübergang",
+    "Strafe"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Woraus entstehen Entwicklungsaufgaben?",
+   "o": [
+    "nur Zufall",
+    "nur Schule",
+    "nur Familie",
+    "Reife, Gesellschaft, persönliche Ziele"
+   ],
+   "r": 3
+  }
+ ]
+}

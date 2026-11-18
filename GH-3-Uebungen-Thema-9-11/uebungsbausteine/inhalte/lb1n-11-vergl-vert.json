@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Verringert Risiken",
+  "Stärkt Schutzfaktoren"
+ ],
+ "karten": [
+  {
+   "t": "Anti-Mobbing-Programm",
+   "s": 0
+  },
+  {
+   "t": "Entlastung bei Überforderung",
+   "s": 0
+  },
+  {
+   "t": "Unterstützung für belastete Familien",
+   "s": 0
+  },
+  {
+   "t": "Frühzeitige Hilfe bei Problemen",
+   "s": 0
+  },
+  {
+   "t": "Soziale Kompetenzen trainieren",
+   "s": 1
+  },
+  {
+   "t": "Verlässliche Beziehungen anbieten",
+   "s": 1
+  },
+  {
+   "t": "Selbstwirksamkeit stärken",
+   "s": 1
+  },
+  {
+   "t": "Optimismus und Zuversicht fördern",
+   "s": 1
+  }
+ ]
+}

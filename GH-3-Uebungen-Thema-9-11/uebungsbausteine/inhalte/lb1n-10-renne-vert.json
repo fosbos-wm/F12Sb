@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Beurteilungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie beurteilt man den Konflikt zwischen Tarek und seinen Eltern?",
+   "o": [
+    "typisch für die Ablösung im Jugendalter",
+    "krankhaft",
+    "unwichtig",
+    "vermeidbar"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Chance bietet Tareks Auszeit?",
+   "o": [
+    "nichts",
+    "Orientierung und Selbstständigkeit",
+    "Verlust",
+    "Strafe"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welches Risiko besteht?",
+   "o": [
+    "keines",
+    "Reife",
+    "Orientierungslosigkeit",
+    "Abitur"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Lösung ist am ausgewogensten?",
+   "o": [
+    "Verbot",
+    "Auszeit ohne Plan",
+    "sofort studieren",
+    "Plan mit Zeitrahmen und Bewerbung"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Welche Rolle haben die Eltern?",
+   "o": [
+    "unterstützen und Orientierung geben",
+    "entscheiden allein",
+    "ignorieren",
+    "bestrafen"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie beurteilt man „Mit 58 gibt es keine Entwicklung mehr“?",
+   "o": [
+    "richtig",
+    "falsch, Entwicklung dauert lebenslang",
+    "bewiesen",
+    "irrelevant"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Warum sind Entwicklungsaufgaben nicht überall gleich?",
+   "o": [
+    "alle gleich",
+    "Zufall",
+    "Erwartungen sind kulturabhängig",
+    "Alter"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was gehört zum Urteil?",
+   "o": [
+    "Meinung",
+    "Beispiel",
+    "Definition",
+    "Chancen, Risiken, Empfehlung"
+   ],
+   "r": 3
+  }
+ ]
+}

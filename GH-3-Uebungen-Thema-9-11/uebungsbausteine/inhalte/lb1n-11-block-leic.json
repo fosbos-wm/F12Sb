@@ -1,0 +1,50 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Risikofaktor",
+  "Schutzfaktor"
+ ],
+ "items": [
+  {
+   "t": "Dauerhafter Streit in der Familie",
+   "k": 0
+  },
+  {
+   "t": "Armut",
+   "k": 0
+  },
+  {
+   "t": "Psychische Erkrankung eines Elternteils",
+   "k": 0
+  },
+  {
+   "t": "Vernachlässigung",
+   "k": 0
+  },
+  {
+   "t": "Trauma",
+   "k": 0
+  },
+  {
+   "t": "Hohes Selbstwertgefühl",
+   "k": 1
+  },
+  {
+   "t": "Stabile Beziehung zu einer Bezugsperson",
+   "k": 1
+  },
+  {
+   "t": "Gute Freundschaften",
+   "k": 1
+  },
+  {
+   "t": "Optimismus und Neugier",
+   "k": 1
+  },
+  {
+   "t": "Anregendes Lernumfeld",
+   "k": 1
+  }
+ ]
+}

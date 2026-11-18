@@ -1,0 +1,30 @@
+{
+ "titel": "Memory: Aussagen und Beurteilung",
+ "anleitung": "Finde die passenden Paare.",
+ "paare": [
+  [
+   "Nele hat eine feste Bezugserzieherin.",
+   "Schutzfaktor"
+  ],
+  [
+   "Frau Roth wechselt plötzlich die Gruppe.",
+   "Risiko für die Beziehung"
+  ],
+  [
+   "Familie Berg plant 40 Stunden im ersten Lebensjahr.",
+   "mögliches Risiko, abzumildern durch Qualität"
+  ],
+  [
+   "Die Großmutter sagt: „Das schadet immer.“",
+   "zu pauschal"
+  ],
+  [
+   "Der Vater begleitet die Eingewöhnung.",
+   "vertraute Person"
+  ],
+  [
+   "Ein Abschiedsritual",
+   "gibt Sicherheit"
+  ]
+ ]
+}

@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Baltes treffen zu?",
+   "statements": [
+    {
+     "text": "Entwicklung ist lebenslang.",
+     "richtig": true
+    },
+    {
+     "text": "Verluste können ausgeglichen werden.",
+     "richtig": true
+    },
+    {
+     "text": "Entwicklung endet in der Kindheit.",
+     "richtig": false
+    },
+    {
+     "text": "Im Alter gibt es nur Abbau.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Entwicklungsaufgaben treffen zu?",
+   "statements": [
+    {
+     "text": "Sie hängen von Reife, Gesellschaft und Zielen ab.",
+     "richtig": true
+    },
+    {
+     "text": "Sie treten in Lebensabschnitten auf.",
+     "richtig": true
+    },
+    {
+     "text": "Sie sind in allen Kulturen gleich.",
+     "richtig": false
+    },
+    {
+     "text": "Sie lassen sich folgenlos überspringen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Jugendalter treffen zu?",
+   "statements": [
+    {
+     "text": "Ablösung von den Eltern ist eine Aufgabe.",
+     "richtig": true
+    },
+    {
+     "text": "Die Peergroup unterstützt die Identitätsfindung.",
+     "richtig": true
+    },
+    {
+     "text": "Eltern sind bedeutungslos.",
+     "richtig": false
+    },
+    {
+     "text": "Berufswahl ist keine Aufgabe.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

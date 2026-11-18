@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was bedeutet Resilienz?",
+   "o": [
+    "psychische Widerstandskraft",
+    "Verletzlichkeit",
+    "Erkrankung",
+    "Strafe"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was ist Vulnerabilität?",
+   "o": [
+    "Widerstandskraft",
+    "erhöhte Verletzlichkeit",
+    "Stärke",
+    "Reifung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher ist ein sozialer Schutzfaktor?",
+   "o": [
+    "Optimismus",
+    "hohe Selbstwirksamkeit",
+    "sichere Bindung",
+    "Intelligenz"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was erhöht die Verletzbarkeit?",
+   "o": [
+    "ein einzelner Schutzfaktor",
+    "Selbstwirksamkeit",
+    "Freundschaften",
+    "Kumulation mehrerer Risiken"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Ist Resilienz unveränderlich?",
+   "o": [
+    "nein, sie lässt sich fördern",
+    "ja, angeboren",
+    "ja, bei Geburt festgelegt",
+    "nur im Kindesalter"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Erziehung fördert Resilienz?",
+   "o": [
+    "autoritäre",
+    "autoritative",
+    "vernachlässigende",
+    "permissive"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Jana wächst belastet auf, kommt aber gut zurecht. Was erklärt das?",
+   "o": [
+    "keine Risiken",
+    "reiner Zufall",
+    "Schutzfaktoren wie Oma und Freundin",
+    "Gene allein"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist Selbstwirksamkeit?",
+   "o": [
+    "Streben nach Macht",
+    "Angst",
+    "Verdrängung",
+    "Überzeugung, Situationen bewältigen zu können"
+   ],
+   "r": 3
+  }
+ ]
+}
