@@ -1,3 +1,21 @@
+/* Themenseite: nur die Übersicht sichtbar, Bereiche klappen per Klick auf */
+(function(){
+ const st=document.createElement("style");
+ st.textContent=".kw-seite .lx-sek:not(.lx-open)>*:not(.lx-sek-k){display:none!important}.kw-seite .lx-sek>.lx-sek-k{cursor:pointer;position:relative;padding-right:44px}.kw-seite .lx-sek:not(.lx-open)>.lx-sek-k{border-bottom:0}.kw-seite .lx-sek>.lx-sek-k::after{content:'\\25B8';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--k,#1688cf);transition:transform .2s}.kw-seite .lx-sek.lx-open>.lx-sek-k::after{transform:translateY(-50%) rotate(90deg)}";
+ document.head.appendChild(st);
+ window.lxSekAuf=function(el,nurAuf){
+  const offen=el.classList.contains("lx-open");
+  if(offen&&nurAuf)return;
+  document.querySelectorAll(".kw-seite .lx-sek.lx-open").forEach(x=>x.classList.remove("lx-open"));
+  if(!offen)el.classList.add("lx-open");
+ };
+ document.addEventListener("click",ev=>{
+  const k=ev.target.closest&&ev.target.closest(".kw-seite .lx-sek>.lx-sek-k");
+  if(!k||ev.target.closest("button,a,input,select,label"))return;
+  lxSekAuf(k.parentElement);
+ });
+})();
+
 let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment, writeBatch; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){return firebaseReadyPromise||(firebaseReadyPromise=fbImportMitWiederholung("./firebase-local.js?v=20261016a").then(e=>{const t=e,n=e,i=e,r={getStorage:e.getStorage,ref:e.ref,uploadBytes:e.uploadBytes,getDownloadURL:e.getDownloadURL,deleteObject:e.deleteObject};({initializeApp:initializeApp}=t),{getAuth:getAuth,onAuthStateChanged:onAuthStateChanged,createUserWithEmailAndPassword:createUserWithEmailAndPassword,signInWithEmailAndPassword:signInWithEmailAndPassword,signOut:signOut,sendPasswordResetEmail:sendPasswordResetEmail,updateProfile:updateProfile,deleteUser:deleteUser}=n,{getFirestore:getFirestore,collection:collection,doc:doc,addDoc:addDoc,setDoc:setDoc,updateDoc:updateDoc,deleteDoc:deleteDoc,getDoc:getDoc,getDocs:getDocs,query:query,orderBy:orderBy,limit:limit,where:where,onSnapshot:onSnapshot,serverTimestamp:serverTimestamp,arrayUnion:arrayUnion,arrayRemove:arrayRemove,increment:increment,writeBatch:writeBatch}=i,getDoc=fsLeseMitWiederholung(getDoc),getDocs=fsLeseMitWiederholung(getDocs);{const a=()=>{window.__fsDirty=Date.now()},s=d=>(...p)=>{a();const h=d(...p);return Promise.resolve(h).then(a,a),h};addDoc=s(addDoc),setDoc=s(setDoc),updateDoc=s(updateDoc),deleteDoc=s(deleteDoc);const l=writeBatch;writeBatch=(...d)=>{const p=l(...d),h=p.commit.bind(p);return p.commit=()=>{a();const k=h();return Promise.resolve(k).then(a,a),k},p};const c=(d,p)=>{const h=new Map;return(k,...f)=>{const y=k&&k.type===p&&!f.length&&k.path||null;if(!y)return d(k,...f);if(h.has(y))return h.get(y);const w=Promise.resolve(d(k)).finally(()=>h.delete(y));return h.set(y,w),w}};getDoc=c(getDoc,"document"),getDocs=c(getDocs,"collection")}if({getStorage:getStorage,ref:storageRef,uploadBytes:uploadBytes,getDownloadURL:getDownloadURL,deleteObject:deleteObject}=r,app||(app=initializeApp(firebaseConfig)),auth||(auth=getAuth(app)),!db)try{db=e.initializeFirestore(app,{experimentalAutoDetectLongPolling:!0})}catch(a){console.warn("Firestore-Start mit Verbindungsfallback nicht m\xF6glich, Standard wird genutzt:",a),db=getFirestore(app)}return storage||(storage=getStorage(app)),window.CampusFirebase={get db(){return db},get currentUser(){return currentUser},collection:collection,doc:doc,addDoc:addDoc,setDoc:setDoc,updateDoc:updateDoc,deleteDoc:deleteDoc,getDoc:getDoc,getDocs:getDocs,query:query,orderBy:orderBy,limit:limit,where:where,onSnapshot:onSnapshot,serverTimestamp:serverTimestamp,arrayUnion:arrayUnion,increment:increment,modal:modal,toast:toast,pageHead:pageHead,footer:footer,render:render},!0}).catch(e=>{throw firebaseReadyPromise=null,e}),firebaseReadyPromise)} /*
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
@@ -22354,7 +22372,7 @@ document.addEventListener("click",async ev=>{
   else if(a==="selbst")await lxSelbstSetzen(id,Number(b.dataset.w));
   else if(a==="ab"){const v=$("lxAb")&&$("lxAb").value;if(!v)return toast("Bitte ein Datum wählen.");await lxSichtSetzen(id,v)}
   else if(a==="ab0")await lxSichtSetzen(id,"");
-  else if(a==="sprung"){const el=document.getElementById("lx-s"+b.dataset.n);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});else toast("Dieser Teil ist für dieses Thema noch leer.")}
+  else if(a==="sprung"){const el=document.getElementById("lx-s"+b.dataset.n);if(el){lxSekAuf(el,true);el.scrollIntoView({behavior:"smooth",block:"start"})}else toast("Dieser Teil ist für dieses Thema noch leer.")}
   else if(a==="netz"){const el=$("lxNetz");if(el)el.scrollIntoView({behavior:"smooth",block:"start"})}
   else if(a==="eintreten"){
    const v=($("lxTestWahl")||{}).value||"",[art,tid]=[v.slice(0,2),v.slice(3)];
@@ -23215,3 +23233,4 @@ function fsLeseMitWiederholung(fn){
 }
 
 window.__booted=1,window.__bootOk&&window.__bootOk()
+
