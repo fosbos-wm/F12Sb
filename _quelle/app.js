@@ -4271,10 +4271,10 @@ function lxWocheAnsicht(wp){
  const off=window.__lxWo||0,t=new Date();t.setDate(t.getDate()+off*7);
  const dw=t.getDay()||7,mo=new Date(t);mo.setDate(t.getDate()-dw+1);
  const tage=[0,1,2,3,4].map(i=>{const d=new Date(mo);d.setDate(mo.getDate()+i);return lxIso(d)});
- const heute=lxHeute(),N=["Mo","Di","Mi","Do","Fr"],PT=LXWA.pt||[],WA=LXWA.d||[];
+ const heute=lxHeute(),N=["Mo","Di","Mi","Do","Fr"],PT=(LXWA.pt||[]).filter(x=>!x.uid||isTeacher()||x.uid===(currentUser&&currentUser.uid)),WA=LXWA.d||[];
  const dd=new Date(Date.UTC(mo.getFullYear(),mo.getMonth(),mo.getDate()+3)),y0=new Date(Date.UTC(dd.getUTCFullYear(),0,1)),kw=Math.ceil(((dd-y0)/864e5+1)/7);
  const ev=iso=>{
-  const a=PT.filter(x=>x.datum===iso).sort((p,q)=>(p.zeit||"")<(q.zeit||"")?-1:1).map(x=>`<div class="lxs-ev"><small>${x.zeit?esc(x.zeit)+" \u00B7 ":""}Pflicht${x.fach?" \u00B7 "+esc(x.fach):""}</small><b>${esc((x.art||"")+(x.titel?": "+x.titel:""))}</b></div>`);
+  const a=PT.filter(x=>x.datum===iso).sort((p,q)=>(p.zeit||"")<(q.zeit||"")?-1:1).map(x=>`<div class="lxs-ev"><small>${x.zeit?esc(x.zeit)+" \u00B7 ":""}Pflicht${x.fach?" \u00B7 "+esc(x.fach):""}${x.schuelerName&&isTeacher()?" \u00B7 "+esc(x.schuelerName):""}</small><b>${esc((x.art||"")+(x.titel?": "+x.titel:""))}</b></div>`);
   const b=WA.filter(x=>x.bis===iso).map(x=>`<div class="lxs-ev ab"><small>F\xE4llig \u00B7 ${esc(x.fach||"")}</small><b>Auftr\xE4ge abschlie\xDFen</b></div>`);
   const c=(wp||[]).filter(x=>!x.done&&x.dueDate===iso).map(x=>`<div class="lxs-ev ei"><small>Mein Plan</small><b>${esc(x.title)}</b></div>`);
   return a.concat(b,c).join("")||`<div class="lxs-frei">frei</div>`;
@@ -21920,7 +21920,7 @@ async function lxThemaPfadSeite(e,ph,F){
 /* --- Lehrkräfte: Wochenauftrag und Pflichttermine --- */
 async function renderWocheL(){
  if(!isTeacher())return`<div class="card"><p>Diese Seite ist für Lehrkräfte.</p></div>`;
- await kwLaden().catch(()=>{});await lxWaLaden(true);
+ await kwLaden().catch(()=>{});await lxWaLaden(true);const ptSch=await lxPtSchuelerFeld();
  setTimeout(lxLiveStart,0);
  const heute=lxHeute(),fr=lxFreitag(lxPlus(1)),phasen=[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum);
  const KL=await lxKlasseLaden().catch(()=>({schueler:[],fort:{}})),gesch=id=>(KL.schueler||[]).filter(u=>((KL.fort[u.uid]||{})[id]||{}).abgeschlossen).length;
@@ -21944,10 +21944,10 @@ async function renderWocheL(){
   <p class="lxw-hint">Verpflichtend, erscheint den Schüler:innen auf der Startseite.</p>
   <div class="lxw-row"><label>Datum<input type="date" id="ptDatum" value="${lxFreitag(lxPlus(3))}"></label>
   <label>Uhrzeit<input type="time" id="ptZeit"></label></div>
-  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>Übung</option><option>Lernstandsgespräch</option><option>Test</option><option>Sonstiges</option></select></label>
+  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>Übung</option><option>Lernstandsgespräch</option><option>Test</option><option>Sonstiges</option></select></label>${ptSch}
   <label>Titel<input type="text" id="ptTitel" maxlength="90" placeholder="z. B. Instruktion Pädagogik/Psychologie"></label>
   <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div>
-  <div class="lxw-liste"><h4>Geplante Pflichttermine</h4>${PT.map(t=>`<div class="lxw-z"><div><b>${esc(lxTagKurz(t.datum))}${t.zeit?" · "+esc(t.zeit):""}</b> · ${esc(t.art||"")}<small>${t.fach?esc(t.fach)+(t.titel?": ":""):""}${esc(t.titel||"")}</small></div><button class="secondary" data-wa="ptdel" data-id="${esc(t.id)}">Löschen</button></div>`).join("")||`<div class="kw-leer">Noch keine Termine.</div>`}</div></section></div></div>${footer()}`;
+  <div class="lxw-liste"><h4>Geplante Pflichttermine</h4>${PT.map(t=>`<div class="lxw-z"><div><b>${esc(lxTagKurz(t.datum))}${t.zeit?" · "+esc(t.zeit):""}</b> · ${esc(t.art||"")}${t.schuelerName?" \u00B7 "+esc(t.schuelerName):""}<small>${t.fach?esc(t.fach)+(t.titel?": ":""):""}${esc(t.titel||"")}</small></div><button class="secondary" data-wa="ptdel" data-id="${esc(t.id)}">Löschen</button></div>`).join("")||`<div class="kw-leer">Noch keine Termine.</div>`}</div></section></div></div>${footer()}`;
 }
 document.addEventListener("change",ev=>{if(!ev.target.matches||!ev.target.matches('input[name="waThema"]'))return;const z=document.getElementById("waZahl");if(z)z.textContent=document.querySelectorAll('input[name="waThema"]:checked').length+" gewählt"});
 document.addEventListener("click",async ev=>{
@@ -21965,9 +21965,10 @@ document.addEventListener("click",async ev=>{
    if(!confirm("Diesen Arbeitsauftrag löschen?"))return;
    await deleteDoc(doc(db,"wochenauftraege",b.dataset.id));LXWA.t=0;render();
   }else if(a==="ptsave"){
-   const datum=v("ptDatum"),titel=v("ptTitel").trim();
+   const datum=v("ptDatum"),titel=v("ptTitel").trim(),ls=v("ptArt")==="Lernstandsgespräch",sid=ls?v("ptSchueler"):"",sel=$("ptSchueler");
    if(!datum)return toast("Bitte ein Datum wählen.");
-   await addDoc(collection(db,"pflichttermine"),{datum,zeit:v("ptZeit"),fach:v("ptFach"),art:v("ptArt"),titel:titel.slice(0,90),von:currentUser.uid,createdAt:serverTimestamp()});
+   if(ls&&!sid)return toast("Bitte eine Schülerin oder einen Schüler wählen.");
+   await addDoc(collection(db,"pflichttermine"),{datum,zeit:v("ptZeit"),fach:v("ptFach"),art:v("ptArt"),titel:titel.slice(0,90),...(sid?{uid:sid,schuelerName:(sel&&sel.selectedOptions[0]?sel.selectedOptions[0].textContent:"").slice(0,80)}:{}),von:currentUser.uid,createdAt:serverTimestamp()});
    LXWA.t=0;toast("Pflichttermin angesetzt.");render();
   }else if(a==="ptdel"){
    if(!confirm("Diesen Termin löschen?"))return;
@@ -22404,9 +22405,14 @@ function lxThemaWahlen(modus){
  }).join("");
 }
 function lxLegende(){return`<div class="lx-legende">${LX_LEG.map(n=>`<span><i class="lx-pt an" style="--k:${LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
+async function lxPtSchuelerFeld(){
+ let L=[];try{L=((await lxKlasseLaden()).schueler)||[]}catch(e){}
+ return`<label id="ptSchWrap" hidden>Sch\xFCler:in<select id="ptSchueler"><option value="">Bitte w\xE4hlen</option>${L.map(u=>`<option value="${esc(u.uid)}">${esc(anzeigeName(u))}</option>`).join("")}</select></label>`;
+}
+document.addEventListener("change",ev=>{const a=ev.target&&ev.target.id==="ptArt"?ev.target:null;if(!a)return;const w=document.getElementById("ptSchWrap");if(w)w.hidden=a.value!=="Lernstandsgespr\xE4ch"});
 async function renderLkPlanung(){
  if(!isTeacher())return await renderKachelwand();
- await kwLaden().catch(()=>{});await lxWaLaden(true);
+ await kwLaden().catch(()=>{});await lxWaLaden(true);const ptSch=await lxPtSchuelerFeld();
  const dow=new Date().getDay(),mo=lxPlus(((1-dow+7)%7)||7),moD=new Date(mo+"T12:00:00"),addT=n=>{const d=new Date(moD);d.setDate(d.getDate()+n);return lxIso(d)},fr=addT(4);
  const inW=iso=>iso>=mo&&iso<=fr;
  const phasen=[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum);
@@ -22426,10 +22432,10 @@ async function renderLkPlanung(){
   <div class="kw-aktionen"><button class="primary" data-wa="save">Einplanen</button></div></section>
  <section class="lxw-k lxw-g"><h3>Pflichttermin f\xFCr n\xE4chste Woche</h3>
   <div class="lxw-row"><label>Datum<input type="date" id="ptDatum" value="${mo}" min="${mo}" max="${fr}"></label><label>Uhrzeit<input type="time" id="ptZeit"></label></div>
-  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>\xDCbung</option><option>Projekt</option><option>Lernstandsgespr\xE4ch</option><option>Test</option><option>Sonstiges</option></select></label>
+  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>\xDCbung</option><option>Projekt</option><option>Lernstandsgespr\xE4ch</option><option>Test</option><option>Sonstiges</option></select></label>${ptSch}
   <label>Titel<input type="text" id="ptTitel" maxlength="90" placeholder="z. B. Projektstart LB 1"></label>
   <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div>
-  <div class="lxw-liste"><h4>Termine n\xE4chste Woche</h4>${PT.map(t=>`<div class="lxw-z"><div><b>${esc(lxTagKurz(t.datum))}${t.zeit?" \u00B7 "+esc(t.zeit):""}</b> \u00B7 ${esc(t.art||"")}<small>${esc(t.titel||"")}</small></div><button class="secondary" data-wa="ptdel" data-id="${esc(t.id)}">L\xF6schen</button></div>`).join("")||`<div class="kw-leer">Noch keine Termine.</div>`}</div></section></div>
+  <div class="lxw-liste"><h4>Termine n\xE4chste Woche</h4>${PT.map(t=>`<div class="lxw-z"><div><b>${esc(lxTagKurz(t.datum))}${t.zeit?" \u00B7 "+esc(t.zeit):""}</b> \u00B7 ${esc(t.art||"")}${t.schuelerName?" \u00B7 "+esc(t.schuelerName):""}<small>${esc(t.titel||"")}</small></div><button class="secondary" data-wa="ptdel" data-id="${esc(t.id)}">L\xF6schen</button></div>`).join("")||`<div class="kw-leer">Noch keine Termine.</div>`}</div></section></div>
  <section class="lxw-k" style="margin-top:14px"><h3>Eingeplant und vorbereiten</h3>${geplant}</section></div>${footer()}`;
 }
 async function renderLkUnterricht(){
