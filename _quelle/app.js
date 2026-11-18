@@ -1,3 +1,16 @@
+
+window.lxPPDirekt=async function(){
+ try{await kwLaden().catch(()=>{});await lxWaLaden().catch(()=>{});
+  const heute=lxHeute(),phasen=LX_CFG.phasen().slice().sort((a,b)=>a.start<b.start?-1:1);
+  const ph=phasen.find(p=>p.start<=heute&&heute<=p.end)||phasen.find(p=>p.start>heute)||phasen[phasen.length-1];
+  const ids=[];(LXWA.d||[]).filter(w=>(w.bis||"")>=heute&&w.fach==="Pädagogik / Psychologie").forEach(w=>(w.themen||[]).forEach(t=>{if(!ids.includes(t))ids.push(t)}));
+  let th=ids.map(kwThemaById).filter(Boolean);
+  if(!th.length)th=kwThemenSicht(ph).filter(e=>e.typ!=="projekt");
+  const e=th.find(x=>!(KW.fort[x.id]||{}).abgeschlossen)||th[0];
+  if(e){activeKwThema=e.id;go("kw-thema")}else go("kw-wand");
+ }catch(x){console.warn(x);go("kw-wand")}
+};
+(function(){const st=document.createElement("style");st.textContent=".kw-seite .lx-sek:not(.lx-open){padding-bottom:0}.kw-seite .lx-sek:not(.lx-open)>.lx-sek-k{margin-bottom:0;border-bottom:0}.lxs-zwei{align-items:stretch}.lxs-andere .lxs-fachbox{background:#fff8ec;border:1px solid #f1dcb4;border-top:3px solid #e8890c;border-radius:18px;padding:20px 22px;height:100%}.lxs-fachbox h3{margin:0 0 12px;font-size:20px}.lxs-fachbox .lxs-fach{display:flex;flex-direction:column;gap:10px}.lxs-leer{color:#6c8190;margin:0}.lxs-unten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}@media(max-width:800px){.lxs-unten{grid-template-columns:1fr}}";document.head.appendChild(st)})();
 /* Themenseite: nur die Übersicht sichtbar, Bereiche klappen per Klick auf */
 (function(){
  const st=document.createElement("style");
@@ -4259,8 +4272,9 @@ async function lxStartNeu(wp){
  }catch(e){}
  const bis=WA.length?lxTagKurz(WA[0].bis).toUpperCase():"FREITAG, "+I.fr;
  return`<div class="lxs"><div class="lxs-kopf"><div><small>KW ${I.kw} · FÄLLIG BIS ${esc(bis)}</small><h1>Hallo${name?" "+esc(name):""}, das ist deine Woche.</h1></div></div>
- <div class="lxs-raster"><section class="lxs-main"><div class="lxs-mk"><h2>Pädagogik / Psychologie</h2><small>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</small><a class="lxs-link" href="#" onclick="go('unterricht');return false">Individueller Lernpfad →</a></div>${prog}${auftrag}${weiterK}${rest.length>(weiter?1:0)?`<h3 class="lxs-h3">Weitere Themen dieser Woche</h3>${zeile}`:""}</section>
- <aside class="lxs-seite"><section class="lxs-wo"><h3>Feste Termine</h3>${woche}<a class="lxs-link" href="#kalender">Ganze Woche ansehen</a></section><section class="lxs-fr"><h3>Fachliche Frage?</h3><p>Stelle sie im Forum. Deine Lehrkräfte lesen mit.</p><button type="button" class="secondary" onclick="go('forum-board')">Zum Forum</button></section></aside></div>${andere}</div>`;
+ <div class="lxs-raster lxs-zwei"><section class="lxs-main"><div class="lxs-mk"><h2>Pädagogik / Psychologie</h2><small>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</small><a class="lxs-link" href="#" onclick="go('unterricht');return false">Individueller Lernpfad →</a></div>${prog}${auftrag}${weiterK}${rest.length>(weiter?1:0)?`<h3 class="lxs-h3">Weitere Themen dieser Woche</h3>${zeile}`:""}</section>
+ <aside class="lxs-seite lxs-andere"><section class="lxs-fachbox"><h3>Aufträge aus anderen Fächern</h3>${waAnd.length?andere:`<p class="lxs-leer">Diese Woche gibt es keine Aufträge aus anderen Fächern.</p>`}</section></aside></div>
+ <div class="lxs-unten"><section class="lxs-wo"><h3>Feste Termine</h3>${woche}<a class="lxs-link" href="#kalender">Ganze Woche ansehen</a></section><section class="lxs-fr"><h3>Fachliche Frage?</h3><p>Stelle sie im Forum. Deine Lehrkräfte lesen mit.</p><button type="button" class="secondary" onclick="go('forum-board')">Zum Forum</button></section></div></div>`;
 }
 async function lxThemaHub(e,lehrer){
  let ci=null,co=null;
@@ -21480,10 +21494,10 @@ function lxKachel(href,titel,text,opt){
 }
 
 async function renderUnterrichtsfaecher(){
- if(!kwLehrer())return await renderKachelwand();
- const L=[["Deutsch", ""], ["Englisch", ""], ["Mathematik", ""], ["Religion / Ethik", ""], ["Politik und Gesellschaft", ""], ["Sport", ""], ["SWR", ""], ["Biologie", ""], ["Soziologie", ""], ["Wahlpflicht 1", ""], ["Wahlpflicht 2", ""]];
- const kachel=(t,badge,txt,href)=>`<${href?'button type="button" onclick="go(\'start\')"':'div'} class="lxf-k${href?" an":""}"><h3>${esc(t)}</h3><span class="lxf-b${href?" muster":""}">${esc(badge)}</span><p>${esc(txt)}</p></${href?"button":"div"}>`;
- return`${kwSchuelerBanner()}<div class="lxf"><small class="lxf-kick">UNTERRICHTSFÄCHER</small><h1>Fächer der 12. Klasse</h1><p class="lxf-sub">Wähle ein Fach. Dort findest du den Individuellen Lernpfad mit allen Themen. Pädagogik / Psychologie ist das Muster, die anderen Fächer werden nach demselben Aufbau ausgearbeitet.</p>
+
+ const L=[["Deutsch", ""], ["Englisch", ""], ["Mathematik", ""], ["Religion / Ethik", ""], ["Politik und Gesellschaft", ""], ["SWR", ""], ["Biologie", ""], ["Soziologie", ""], ["Wahlpflicht 1", ""], ["Wahlpflicht 2", ""]];
+ const kachel=(t,badge,txt,href)=>`<${href?'button type="button" onclick="lxPPDirekt()"':'div'} class="lxf-k${href?" an":""}"><h3>${esc(t)}</h3><span class="lxf-b${href?" muster":""}">${esc(badge)}</span><p>${esc(txt)}</p></${href?"button":"div"}>`;
+ return`${kwSchuelerBanner()}<div class="lxf"><small class="lxf-kick">LERNPFADE</small><h1>Meine Lernpfade in der 12. Klasse</h1><p class="lxf-sub">Wähle ein Fach. Du kommst direkt zum Thema, an dem du gerade arbeitest. Pädagogik / Psychologie ist das Muster, die anderen Fächer werden nach demselben Aufbau ausgearbeitet.</p>
  <div class="lxf-grid">${kachel("Pädagogik / Psychologie","Ausgearbeitet als Muster","4 Lernbereiche, Individueller Lernpfad, Lernweg mit Check-in und Check-out",true)}${L.map(x=>kachel(x[0],x[1]&&x[1].startsWith("Nicht")?x[1]:"Folgt",x[1]&&!x[1].startsWith("Nicht")?x[1]:"Individueller Lernpfad, Themen und Material kommen aus deinen Unterlagen.")).join("")}</div></div>${footer()}`;
 }
 async function renderUnterrichtsfaecherAlt(){
@@ -21496,7 +21510,7 @@ async function renderUnterrichtsfaecherAlt(){
  return`${kwSchuelerBanner()}${pageHead("LERNLANDKARTE","Fächer der 12. Klasse","Wähle ein Fach. Dort findest du alle Themen mit dem Lernweg: Check-in, Infotext, Selbstlernkurs, Üben, Check-out.")}
  <div class="lx-kacheln lx-faecher">
   ${lxKachel("start","Pädagogik / Psychologie","Individueller Lernpfad mit 4 Lernbereichen und 29 Themen. Lernweg mit Check-in und Check-out.",{extra:bar})}
-  ${["Deutsch","Englisch","Mathematik","Religionslehre / Ethik","Politik und Gesellschaft","Sport","Sozialwirtschaft und Recht","Biologie","Soziologie","Wahlpflichtfach 1","Wahlpflichtfach 2"].map(n=>lxKachel("",n,"Individueller Lernpfad und Material folgen",{aus:true,extra:'<span class="lx-badge">folgt</span>'})).join("")}
+  ${["Deutsch","Englisch","Mathematik","Religionslehre / Ethik","Politik und Gesellschaft","Sozialwirtschaft und Recht","Biologie","Soziologie","Wahlpflichtfach 1","Wahlpflichtfach 2"].map(n=>lxKachel("",n,"Individueller Lernpfad und Material folgen",{aus:true,extra:'<span class="lx-badge">folgt</span>'})).join("")}
  </div>${footer()}`;
 }
 
@@ -22016,7 +22030,7 @@ async function renderKwThema(){
   const cos=KW.co&&KW.co.checkouts?KW.co.checkouts.filter(c=>Number(c.lbNum)===ph.lbNum&&(lehrer||c.status!=="entwurf")):[];
   const s6in=cos.length?`<div class="ls-liste">${cos.map(c=>lxCoZeile(c,KW.co,lehrer)).join("")}</div>`:`<div class="kw-leer">${lehrer?"Noch kein Test zu diesem Lernbereich.":"Die Lehrkraft schaltet den Test am Ende des Themas frei."}</div>`;
   const s6akt=`<div class="kw-aktionen"><button class="secondary" onclick="go('tests')">${lehrer?"Tests verwalten":"Alle Tests"}</button>${lehrer?`<button class="secondary" data-lx="co" data-op="neu">＋ Neuer Test</button>`:""}</div>`;
-  teile.push((lehrer||cos.length)?lxSek(9,LXF[9].n,"Abschlusstest der Lehrkraft, ausgewertet in Notenpunkten",s6in,s6akt):"");
+  /* Test der Lehrkraft: bewusst nicht mehr auf der Themenseite */
   // Persönlicher Lernstand
   teile.push(lehrer?await lxLernstandThemaLehrer(e):await lxLernstandThemaSchueler(e,ph));
  }
