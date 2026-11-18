@@ -1,0 +1,48 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Typ A",
+  "Typ B",
+  "Typ C",
+  "Typ D"
+ ],
+ "items": [
+  {
+   "t": "Kaum Kummer bei Trennung",
+   "k": 0
+  },
+  {
+   "t": "Ignoriert die Mutter beim Wiedersehen",
+   "k": 0
+  },
+  {
+   "t": "Weint bei Trennung, lässt sich schnell trösten",
+   "k": 1
+  },
+  {
+   "t": "Begrüßt die Mutter freudig",
+   "k": 1
+  },
+  {
+   "t": "Klammert und wehrt zugleich ab",
+   "k": 2
+  },
+  {
+   "t": "Lässt sich kaum beruhigen",
+   "k": 2
+  },
+  {
+   "t": "Widersprüchliches, erstarrtes Verhalten",
+   "k": 3
+  },
+  {
+   "t": "Angst vor der Bindungsperson",
+   "k": 3
+  },
+  {
+   "t": "Verhalten ohne erkennbare Strategie",
+   "k": 3
+  }
+ ]
+}

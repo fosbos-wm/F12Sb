@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Aussagen beurteilen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Das Baby weint und wird sofort getröstet.",
+   "prompte, feinfühlige Reaktion"
+  ],
+  [
+   "Das Baby wird nachts bewusst nicht getröstet.",
+   "Signal wird nicht beantwortet"
+  ],
+  [
+   "Ein 3-Jähriger fordert dauernd Süßigkeiten, die Eltern geben nach.",
+   "Verwöhnen, kein Bedürfnis"
+  ],
+  [
+   "Die Mutter deutet Hunger statt Nähe.",
+   "falsche Interpretation"
+  ],
+  [
+   "Das Kind lernt, sich selbst zu beruhigen.",
+   "Selbstregulation durch Ko-Regulation"
+  ],
+  [
+   "Das Kind vertraut seinen Bezugspersonen.",
+   "Urvertrauen"
+  ]
+ ]
+}

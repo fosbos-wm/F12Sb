@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Beurteilungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie beurteilt man „Schreien lassen fördert Selbstständigkeit“?",
+   "o": [
+    "falsch, es kann Hilflosigkeit auslösen",
+    "richtig",
+    "bewiesen",
+    "irrelevant"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie unterscheidet man Bedürfnis und Wunsch bei einem 3-Jährigen?",
+   "o": [
+    "gar nicht",
+    "Bedürfnisse sind notwendig, Wünsche können warten",
+    "Wünsche sind wichtiger",
+    "beides ist gleich"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was bedeutet angemessene Reaktion?",
+   "o": [
+    "immer sofort alles geben",
+    "nie reagieren",
+    "passend zum Bedürfnis und zum Alter",
+    "immer gleich"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Warum ist Feinfühligkeit kein Verwöhnen?",
+   "o": [
+    "Sie ist dasselbe",
+    "Sie vermeidet Grenzen",
+    "Sie ist selten",
+    "Sie beantwortet Bedürfnisse, nicht jeden Wunsch"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Welche Antwort an die Großmutter ist am besten?",
+   "o": [
+    "Prompte Reaktion fördert Vertrauen und Selbstständigkeit",
+    "Sie hat recht",
+    "Kinder sollen schreien",
+    "Verwöhnen ist gut"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Folge hat dauerhaft fehlende Feinfühligkeit?",
+   "o": [
+    "keine",
+    "erhöhtes Risiko unsicherer Bindung",
+    "immer eine Störung",
+    "nur Vorteile"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was gehört zur Beurteilung?",
+   "o": [
+    "nur Tradition",
+    "nur Meinung",
+    "Wirkung auf Bindung und Selbstständigkeit",
+    "nur Alter"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Grenze gehört zur Feinfühligkeit?",
+   "o": [
+    "keine Regeln",
+    "nur Strafen",
+    "Ignorieren",
+    "klare Regeln mit Verständnis"
+   ],
+   "r": 3
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Primäre Bindung",
+  "Sekundäre Bindung"
+ ],
+ "items": [
+  {
+   "t": "Beziehung des Säuglings zur Hauptbezugsperson",
+   "k": 0
+  },
+  {
+   "t": "Intensivster Kontakt in den ersten Lebensmonaten",
+   "k": 0
+  },
+  {
+   "t": "Fundament für spätere Bindungen",
+   "k": 0
+  },
+  {
+   "t": "Erzieherin in der Kita",
+   "k": 1
+  },
+  {
+   "t": "Lehrerin in der Grundschule",
+   "k": 1
+  },
+  {
+   "t": "Freunde im Jugendalter",
+   "k": 1
+  },
+  {
+   "t": "Partner im Erwachsenenalter",
+   "k": 1
+  },
+  {
+   "t": "Vater, der später stärker einbezogen wird",
+   "k": 1
+  },
+  {
+   "t": "Trainer im Verein",
+   "k": 1
+  }
+ ]
+}

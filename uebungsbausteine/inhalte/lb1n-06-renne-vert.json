@@ -1,84 +1,84 @@
 {
- "titel": "Rennen: Bindung: Begriff, Phasen und Typen",
+ "titel": "Rennen: Beurteilungsfragen",
  "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
  "fragen": [
   {
-   "f": "Welcher Typ zeigt Kummer bei Trennung und schnelle Beruhigung?",
+   "f": "Wie beurteilt man „Mein Sohn weint nie, er ist selbstständig“?",
    "o": [
-    "Typ B",
-    "Typ A",
-    "Typ C",
-    "Typ D"
+    "voreilig, es kann Typ A sein",
+    "richtig",
+    "bewiesen",
+    "irrelevant"
    ],
    "r": 0
   },
   {
-   "f": "Welcher Typ klammert und wehrt zugleich ab?",
+   "f": "Was ist bei Typ A auffällig?",
    "o": [
-    "Typ A",
-    "Typ C",
-    "Typ B",
-    "Typ D"
+    "Bedürfnisse werden stark gezeigt",
+    "Bedürfnisse werden unterdrückt",
+    "Kind ist krank",
+    "Kind spielt nie"
    ],
    "r": 1
   },
   {
-   "f": "Was kennzeichnet Typ A?",
+   "f": "Warum sind Bindungstypen veränderbar?",
    "o": [
-    "freudige Begrüßung",
-    "Klammern",
-    "kaum Kummer, Meiden der Mutter",
-    "Erstarren"
+    "sie sind genetisch",
+    "sie sind festgelegt",
+    "neue Erfahrungen können wirken",
+    "sie sind Zufall"
    ],
    "r": 2
   },
   {
-   "f": "Wann beginnt die eigentliche Bindung?",
+   "f": "Wie ist Typ D zu verstehen?",
    "o": [
-    "mit der Geburt",
-    "mit 2 Jahren",
-    "mit 6 Jahren",
-    "ab ca. 7 Monaten"
+    "besonders sicher",
+    "besonders selbstständig",
+    "unwichtig",
+    "widersprüchliches Verhalten, oft Angst vor der Bindungsperson"
    ],
    "r": 3
   },
   {
-   "f": "Was ist die Sicherheitsbasis?",
+   "f": "Welche Aussage ist am besten begründet?",
    "o": [
-    "Ausgangspunkt zum Erkunden",
-    "Ort der Strafe",
-    "Spielzeug",
-    "Gewohnheit"
+    "Typen sind Momentaufnahmen",
+    "Typen bleiben lebenslang",
+    "Typen sind erblich",
+    "Typen sind bedeutungslos"
    ],
    "r": 0
   },
   {
-   "f": "Was zeigt ein Kind bei Angst?",
+   "f": "Welche Folge hat unsichere Bindung?",
    "o": [
-    "Explorationsverhalten",
-    "Bindungsverhalten",
-    "kein Verhalten",
-    "Trotz"
+    "sicher eine Störung",
+    "erhöhtes Risiko, kein Automatismus",
+    "keine Folgen",
+    "nur Vorteile"
    ],
    "r": 1
   },
   {
-   "f": "Welcher Typ ist am häufigsten?",
+   "f": "Was zeigt die Fremde Situation?",
    "o": [
-    "Typ D",
-    "Typ C",
-    "Typ B",
-    "Typ A"
+    "Intelligenz",
+    "Körpergröße",
+    "Verhalten bei Trennung und Wiedersehen",
+    "Temperament allein"
    ],
    "r": 2
   },
   {
-   "f": "Bindungs-Explorations-Balance bedeutet:",
+   "f": "Was fördert sichere Bindung?",
    "o": [
-    "Kind erkundet immer",
-    "Kind klammert immer",
-    "Kind spielt nie",
-    "Bindungs- und Explorationsverhalten wechseln sich je nach Sicherheit ab"
+    "Strenge",
+    "Ignorieren",
+    "Verwöhnen",
+    "feinfühlige, verlässliche Reaktionen"
    ],
    "r": 3
   }

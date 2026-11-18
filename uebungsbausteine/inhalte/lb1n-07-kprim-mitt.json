@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu den fünf Bestandteilen treffen zu?",
+   "statements": [
+    {
+     "text": "Dazu gehört das Wahrnehmen der Signale.",
+     "richtig": true
+    },
+    {
+     "text": "Dazu gehört prompte Reaktion.",
+     "richtig": true
+    },
+    {
+     "text": "Dazu gehört, Wünsche zu ignorieren.",
+     "richtig": false
+    },
+    {
+     "text": "Dazu gehört Bestrafung.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Ko-Regulation treffen zu?",
+   "statements": [
+    {
+     "text": "Säuglinge brauchen Hilfe beim Regulieren.",
+     "richtig": true
+    },
+    {
+     "text": "Daraus entwickelt sich Selbstregulation.",
+     "richtig": true
+    },
+    {
+     "text": "Sie verhindert Selbstständigkeit.",
+     "richtig": false
+    },
+    {
+     "text": "Sie ist nur für Jugendliche wichtig.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Fall Emma und Paul treffen zu?",
+   "statements": [
+    {
+     "text": "Emmas Mutter reagiert feinfühlig.",
+     "richtig": true
+    },
+    {
+     "text": "Pauls Vater nimmt das Signal nicht wahr.",
+     "richtig": true
+    },
+    {
+     "text": "Paul lernt Selbstregulation durch Alleinlassen.",
+     "richtig": false
+    },
+    {
+     "text": "Emma wird dadurch verwöhnt.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

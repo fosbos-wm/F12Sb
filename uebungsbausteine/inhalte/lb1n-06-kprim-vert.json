@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Bindung treffen zu?",
+   "statements": [
+    {
+     "text": "Bindung ist relativ dauerhaft und stark emotional.",
+     "richtig": true
+    },
+    {
+     "text": "Bindung ist angeboren und muss nicht aufgebaut werden.",
+     "richtig": false
+    },
+    {
+     "text": "Bindungspersonen können trösten und beruhigen.",
+     "richtig": true
+    },
+    {
+     "text": "Nur die leibliche Mutter kann Bindungsperson sein.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Phasen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Vor-Bindung umfasst die ersten beiden Lebensmonate.",
+     "richtig": true
+    },
+    {
+     "text": "In der beginnenden Bindung werden vertraute Personen unterschieden.",
+     "richtig": true
+    },
+    {
+     "text": "Die zielkorrigierte Partnerschaft beginnt mit 2 Monaten.",
+     "richtig": false
+    },
+    {
+     "text": "Phasen sind bedeutungslos.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Christine klammert bei Trennung und wehrt die Mutter beim Wiedersehen ab. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Sie zeigt Typ C.",
+     "richtig": true
+    },
+    {
+     "text": "Die Mutter verhält sich eher unberechenbar.",
+     "richtig": true
+    },
+    {
+     "text": "Sie zeigt Typ B.",
+     "richtig": false
+    },
+    {
+     "text": "Der Typ ist unveränderlich.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Typ D treffen zu?",
+   "statements": [
+    {
+     "text": "Das Verhalten wirkt widersprüchlich.",
+     "richtig": true
+    },
+    {
+     "text": "Es kann mit Angst vor der Bindungsperson verbunden sein.",
+     "richtig": true
+    },
+    {
+     "text": "Es handelt sich um eine sichere Bindung.",
+     "richtig": false
+    },
+    {
+     "text": "Es tritt nur bei Erwachsenen auf.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

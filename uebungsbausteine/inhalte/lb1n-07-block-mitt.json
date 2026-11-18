@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Argumente sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Feinfühlig",
+  "Verwöhnend",
+  "Vernachlässigend"
+ ],
+ "items": [
+  {
+   "t": "Reagiert passend auf das Bedürfnis",
+   "k": 0
+  },
+  {
+   "t": "Deutet Signale zutreffend",
+   "k": 0
+  },
+  {
+   "t": "Setzt klare, liebevolle Grenzen",
+   "k": 0
+  },
+  {
+   "t": "Erfüllt jeden Wunsch sofort",
+   "k": 1
+  },
+  {
+   "t": "Setzt keine Grenzen",
+   "k": 1
+  },
+  {
+   "t": "Überfordert das Kind mit Angeboten",
+   "k": 1
+  },
+  {
+   "t": "Ignoriert Signale",
+   "k": 2
+  },
+  {
+   "t": "Reagiert gar nicht",
+   "k": 2
+  },
+  {
+   "t": "Lässt das Kind lange allein",
+   "k": 2
+  }
+ ]
+}

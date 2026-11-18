@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Sven gibt Mila das Fläschchen, obwohl sie Nähe wollte. Was fehlte?",
+   "o": [
+    "richtiges Interpretieren",
+    "Wahrnehmen",
+    "Promptheit",
+    "nichts"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Pauls Vater beachtet das Weinen nicht. Was fehlt?",
+   "o": [
+    "angemessen reagieren",
+    "Signale wahrnehmen",
+    "Verwöhnen",
+    "nichts"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Emmas Mutter reagiert sofort und passend. Was fördert das?",
+   "o": [
+    "unsichere Bindung",
+    "Abhängigkeit",
+    "sichere Bindung",
+    "nichts"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was lernt Paul, wenn sein Weinen ignoriert wird?",
+   "o": [
+    "Selbstständigkeit",
+    "Urvertrauen",
+    "Geduld",
+    "Signale zählen nicht"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Wie nennt man die Unterstützung beim Beruhigen?",
+   "o": [
+    "Ko-Regulation",
+    "Selbstregulation",
+    "Verwöhnung",
+    "Fixierung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Kann man Säuglinge verwöhnen?",
+   "o": [
+    "ja immer",
+    "nein, sie brauchen Ko-Regulation",
+    "nur nachts",
+    "nur Jungen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wozu führt Ko-Regulation später?",
+   "o": [
+    "Regression",
+    "Verdrängung",
+    "Selbstregulation",
+    "Fixierung"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist Urvertrauen?",
+   "o": [
+    "Angst",
+    "Strafe",
+    "Fähigkeit zu lesen",
+    "Erfahrung, dass Bedürfnisse beantwortet werden"
+   ],
+   "r": 3
+  }
+ ]
+}

@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Maja bezeichnet ihre Mutter als wichtigste Bezugsperson seit Geburt. Welche Bindung?",
+   "o": [
+    "primäre Bindung",
+    "sekundäre Bindung",
+    "keine",
+    "Fremdbindung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Ihre Erzieherin in der Krippe gehört zu den:",
+   "o": [
+    "primären Bindungen",
+    "sekundären Bindungen",
+    "Fremden",
+    "Gleichaltrigen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Der beste Freund im Jugendalter ist eine:",
+   "o": [
+    "primäre Bindung",
+    "Erzieherin",
+    "sekundäre Bindung",
+    "Mutter"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Warum baut Leon schnell Vertrauen zur Erzieherin auf?",
+   "o": [
+    "Zufall",
+    "Strafe",
+    "Alter",
+    "sichere primäre Bindung als Grundlage"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Können sekundäre Bindungen Defizite ausgleichen?",
+   "o": [
+    "teilweise, ja",
+    "nie",
+    "nur bei Kindern",
+    "immer vollständig"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie wirken unsichere Bindungen im Erwachsenenalter oft?",
+   "o": [
+    "keine Wirkung",
+    "Schwierigkeiten mit Nähe und Eifersucht",
+    "bessere Beziehungen",
+    "nur Vorteile"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Aussage stimmt?",
+   "o": [
+    "Frühe Bindung legt alles fest",
+    "Spätere Beziehungen sind unwichtig",
+    "Spätere Beziehungen können ergänzen und korrigieren",
+    "Nur Eltern zählen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Peers sind wichtig, weil sie im Jugendalter:",
+   "o": [
+    "Eltern ersetzen",
+    "nur Zeit füllen",
+    "nichts bewirken",
+    "Nähe und Identitätsfindung ermöglichen"
+   ],
+   "r": 3
+  }
+ ]
+}

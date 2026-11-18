@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Ein Kind weint bei Trennung und strahlt bei der Rückkehr. Welcher Typ?",
+   "o": [
+    "Typ B",
+    "Typ A",
+    "Typ C",
+    "Typ D"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Ein Kind ignoriert die Mutter bei Rückkehr. Welcher Typ?",
+   "o": [
+    "Typ B",
+    "Typ A",
+    "Typ C",
+    "Typ D"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Ein Kind klammert und stößt weg. Welcher Typ?",
+   "o": [
+    "Typ A",
+    "Typ B",
+    "Typ C",
+    "Typ D"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Ein Kind erstarrt bei der Rückkehr der Mutter. Welcher Typ?",
+   "o": [
+    "Typ A",
+    "Typ B",
+    "Typ C",
+    "Typ D"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Mit 12 Monaten ist ein Kind in der Phase:",
+   "o": [
+    "eigentliche Bindung",
+    "Vor-Bindung",
+    "zielkorrigierte Partnerschaft",
+    "keine"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Bei Gefahr zeigt das Kind:",
+   "o": [
+    "Explorationsverhalten",
+    "Bindungsverhalten",
+    "kein Verhalten",
+    "Trotz"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Bei Wohlbefinden zeigt das Kind:",
+   "o": [
+    "Bindungsverhalten",
+    "Angst",
+    "Explorationsverhalten",
+    "Regression"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wer ist Bindungsperson?",
+   "o": [
+    "wer das Kind füttert",
+    "jede Person",
+    "nur die Mutter",
+    "wer trösten und beruhigen kann"
+   ],
+   "r": 3
+  }
+ ]
+}

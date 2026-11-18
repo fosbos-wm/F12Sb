@@ -1,0 +1,46 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Feinfühlig",
+  "Nicht feinfühlig"
+ ],
+ "items": [
+  {
+   "t": "Nimmt leises Quengeln wahr",
+   "k": 0
+  },
+  {
+   "t": "Tröstet und beruhigt prompt",
+   "k": 0
+  },
+  {
+   "t": "Deutet das Weinen zutreffend als Hunger oder Nähe",
+   "k": 0
+  },
+  {
+   "t": "Reagiert auf das Bedürfnis des Kindes",
+   "k": 0
+  },
+  {
+   "t": "Lässt das Baby nachts bewusst schreien",
+   "k": 1
+  },
+  {
+   "t": "Reagiert nach eigenen Wünschen statt nach dem Bedürfnis",
+   "k": 1
+  },
+  {
+   "t": "Ignoriert Signale",
+   "k": 1
+  },
+  {
+   "t": "Reagiert zu spät und unvorhersehbar",
+   "k": 1
+  },
+  {
+   "t": "Spielt weiter, obwohl das Kind weint",
+   "k": 1
+  }
+ ]
+}

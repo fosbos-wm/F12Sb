@@ -1,0 +1,38 @@
+{
+ "titel": "Memory: Beispiele und Begriffe",
+ "anleitung": "Finde die passenden Paare.",
+ "paare": [
+  [
+   "Weint bei Trennung, lässt sich schnell trösten, begrüßt freudig",
+   "Typ B"
+  ],
+  [
+   "Kaum Kummer, meidet die Mutter beim Wiedersehen",
+   "Typ A"
+  ],
+  [
+   "Klammert und wehrt zugleich ab",
+   "Typ C"
+  ],
+  [
+   "Erstarrt, zeigt widersprüchliches Verhalten",
+   "Typ D"
+  ],
+  [
+   "Läuft bei Angst zur Mutter",
+   "Bindungsverhalten"
+  ],
+  [
+   "Erkundet neugierig den Raum",
+   "Explorationsverhalten"
+  ],
+  [
+   "Von hier aus entdeckt das Kind die Welt",
+   "Sicherheitsbasis"
+  ],
+  [
+   "Hier sucht das Kind bei Angst Zuflucht",
+   "sicherer Hafen"
+  ]
+ ]
+}

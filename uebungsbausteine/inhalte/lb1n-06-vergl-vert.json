@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Typ B – sicher",
+  "Typ A – vermeidend",
+  "Typ C – ambivalent"
+ ],
+ "karten": [
+  {
+   "t": "Kummer bei Trennung, schnelle Beruhigung",
+   "s": 0
+  },
+  {
+   "t": "Freudige Begrüßung",
+   "s": 0
+  },
+  {
+   "t": "Nutzt Mutter als sicheren Hafen",
+   "s": 0
+  },
+  {
+   "t": "Kaum Kummer, scheinbar unbeeindruckt",
+   "s": 1
+  },
+  {
+   "t": "Wendet sich beim Wiedersehen ab",
+   "s": 1
+  },
+  {
+   "t": "Spielt weiter",
+   "s": 1
+  },
+  {
+   "t": "Klammert und wehrt ab",
+   "s": 2
+  },
+  {
+   "t": "Lässt sich schwer beruhigen",
+   "s": 2
+  },
+  {
+   "t": "Wechselhafte Reaktionen der Mutter",
+   "s": 2
+  }
+ ]
+}

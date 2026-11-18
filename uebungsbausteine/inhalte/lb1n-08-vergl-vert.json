@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Primäre Bindung",
+  "Sekundäre Bindung",
+  "Beides möglich"
+ ],
+ "karten": [
+  {
+   "t": "Entsteht in den ersten Lebensmonaten",
+   "s": 0
+  },
+  {
+   "t": "Intensivster Kontakt des Säuglings",
+   "s": 0
+  },
+  {
+   "t": "Fundament für Bindungsfähigkeit",
+   "s": 0
+  },
+  {
+   "t": "Erzieherin, Lehrkraft, Trainer",
+   "s": 1
+  },
+  {
+   "t": "Peers und Partner",
+   "s": 1
+  },
+  {
+   "t": "Später aufgebaut",
+   "s": 1
+  },
+  {
+   "t": "Kann Sicherheit geben",
+   "s": 2
+  },
+  {
+   "t": "Kann trösten",
+   "s": 2
+  },
+  {
+   "t": "Kann das Kind prägen",
+   "s": 2
+  }
+ ]
+}

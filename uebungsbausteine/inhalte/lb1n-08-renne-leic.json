@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist eine primäre Bindungsbeziehung?",
+   "o": [
+    "die erste intensivste Bindung in den ersten Lebensmonaten",
+    "Bindung zu Peers",
+    "Bindung im Alter",
+    "Bindung zu Lehrkräften"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wozu zählt die Erzieherin?",
+   "o": [
+    "primäre Bindung",
+    "sekundäre Bindung",
+    "keine Bindung",
+    "Fremdbindung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Rolle hat die primäre Bindung?",
+   "o": [
+    "keine Rolle",
+    "nur Kindheit",
+    "Fundament für Bindungsfähigkeit",
+    "Ersatz für Freunde"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Aussage stimmt?",
+   "o": [
+    "Frühe Bindung bestimmt alles unveränderlich",
+    "Spätere Beziehungen sind unwichtig",
+    "Nur Eltern zählen",
+    "Spätere Beziehungen können korrigieren und ergänzen"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Wie verhalten sich unsicher gebundene Erwachsene oft?",
+   "o": [
+    "Probleme mit Nähe und Eifersucht",
+    "besonders sicher",
+    "ohne Probleme",
+    "ohne Beziehungen"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Bindung entsteht im Jugendalter?",
+   "o": [
+    "nur zu Eltern",
+    "zu Peers und Partnern",
+    "keine",
+    "nur zu Lehrkräften"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Leon baut schnell Vertrauen zur Erzieherin auf. Warum?",
+   "o": [
+    "Zufall",
+    "Gene",
+    "sichere primäre Bindung als Grundlage",
+    "Strafen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was kennzeichnet sekundäre Bindung?",
+   "o": [
+    "wird vor der Geburt aufgebaut",
+    "ersetzt immer die primäre",
+    "gibt es nicht",
+    "wird nach der primären Erfahrung aufgebaut"
+   ],
+   "r": 3
+  }
+ ]
+}

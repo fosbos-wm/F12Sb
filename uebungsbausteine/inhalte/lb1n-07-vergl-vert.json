@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Feinfühlig",
+  "Verwöhnend",
+  "Vernachlässigend"
+ ],
+ "karten": [
+  {
+   "t": "Reagiert passend auf das Bedürfnis",
+   "s": 0
+  },
+  {
+   "t": "Deutet Signale zutreffend",
+   "s": 0
+  },
+  {
+   "t": "Setzt klare, liebevolle Grenzen",
+   "s": 0
+  },
+  {
+   "t": "Erfüllt jeden Wunsch sofort",
+   "s": 1
+  },
+  {
+   "t": "Setzt keine Grenzen",
+   "s": 1
+  },
+  {
+   "t": "Überfordert das Kind mit Angeboten",
+   "s": 1
+  },
+  {
+   "t": "Ignoriert Signale",
+   "s": 2
+  },
+  {
+   "t": "Reagiert gar nicht",
+   "s": 2
+  },
+  {
+   "t": "Lässt das Kind lange allein",
+   "s": 2
+  }
+ ]
+}

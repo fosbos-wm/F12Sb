@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur primären Bindung treffen zu?",
+   "statements": [
+    {
+     "text": "Sie entsteht in den ersten Lebensmonaten.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist Fundament für Bindungsfähigkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht im Jugendalter.",
+     "richtig": false
+    },
+    {
+     "text": "Sie ist bedeutungslos.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur sekundären Bindung treffen zu?",
+   "statements": [
+    {
+     "text": "Dazu gehören Erzieherinnen.",
+     "richtig": true
+    },
+    {
+     "text": "Dazu gehören Partner.",
+     "richtig": true
+    },
+    {
+     "text": "Sie bestehen nur zur Mutter.",
+     "richtig": false
+    },
+    {
+     "text": "Sie entstehen vor der Geburt.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Veränderbarkeit treffen zu?",
+   "statements": [
+    {
+     "text": "Neue positive Beziehungen können wirken.",
+     "richtig": true
+    },
+    {
+     "text": "Eigene Entwicklung spielt mit.",
+     "richtig": true
+    },
+    {
+     "text": "Frühe Bindung ist unveränderlich.",
+     "richtig": false
+    },
+    {
+     "text": "Spätere Beziehungen haben keinen Einfluss.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

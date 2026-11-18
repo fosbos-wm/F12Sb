@@ -1,84 +1,84 @@
 {
- "titel": "Rennen: Primäre und sekundäre Bindungen",
+ "titel": "Rennen: Beurteilungsfragen",
  "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
  "fragen": [
   {
-   "f": "Was ist eine primäre Bindungsbeziehung?",
+   "f": "Wie beurteilt man „Unsicher gebunden, für immer gestört“?",
    "o": [
-    "die erste intensivste Bindung in den ersten Lebensmonaten",
-    "Bindung zu Peers",
-    "Bindung im Alter",
-    "Bindung zu Lehrkräften"
+    "zu pauschal und deterministisch",
+    "richtig",
+    "bewiesen",
+    "irrelevant"
    ],
    "r": 0
   },
   {
-   "f": "Wozu zählt die Erzieherin?",
+   "f": "Was spricht für den Einfluss der frühen Bindung?",
    "o": [
-    "primäre Bindung",
-    "sekundäre Bindung",
-    "keine Bindung",
-    "Fremdbindung"
+    "exakte Vorhersage",
+    "Fundament für Vertrauen und Nähe",
+    "keine Veränderung",
+    "Gene"
    ],
    "r": 1
   },
   {
-   "f": "Welche Rolle hat die primäre Bindung?",
+   "f": "Was spricht für Veränderbarkeit?",
    "o": [
-    "keine Rolle",
-    "nur Kindheit",
-    "Fundament für Bindungsfähigkeit",
-    "Ersatz für Freunde"
+    "Gene",
+    "Strafe",
+    "Sekundäre Bindungen und eigene Entwicklung",
+    "Zufall"
    ],
    "r": 2
   },
   {
-   "f": "Welche Aussage stimmt?",
+   "f": "Welches Fazit ist am besten?",
    "o": [
-    "Frühe Bindung bestimmt alles unveränderlich",
-    "Spätere Beziehungen sind unwichtig",
-    "Nur Eltern zählen",
-    "Spätere Beziehungen können korrigieren und ergänzen"
+    "Alles ist festgelegt",
+    "Alles ist offen",
+    "Nichts zählt",
+    "Prägung ja, Determinismus nein"
    ],
    "r": 3
   },
   {
-   "f": "Wie verhalten sich unsicher gebundene Erwachsene oft?",
+   "f": "Was zeigt die Erzieherin-Beziehung?",
    "o": [
-    "Probleme mit Nähe und Eifersucht",
-    "besonders sicher",
-    "ohne Probleme",
-    "ohne Beziehungen"
+    "Chance auf korrigierende Erfahrung",
+    "Bindung ist unmöglich",
+    "Eltern sind unwichtig",
+    "Zufall"
    ],
    "r": 0
   },
   {
-   "f": "Welche Bindung entsteht im Jugendalter?",
+   "f": "Wie ist „Peers sind unwichtig“ zu beurteilen?",
    "o": [
-    "nur zu Eltern",
-    "zu Peers und Partnern",
-    "keine",
-    "nur zu Lehrkräften"
+    "richtig",
+    "falsch, sie sind im Jugendalter zentral",
+    "bewiesen",
+    "irrelevant"
    ],
    "r": 1
   },
   {
-   "f": "Leon baut schnell Vertrauen zur Erzieherin auf. Warum?",
+   "f": "Welche Aussage wird fachlich gestützt?",
    "o": [
-    "Zufall",
-    "Gene",
-    "sichere primäre Bindung als Grundlage",
-    "Strafen"
+    "Alle Bindungen sind gleich",
+    "Nur Mütter prägen",
+    "Bindungsfähigkeit baut auf frühen Erfahrungen auf",
+    "Nur Gene wirken"
    ],
    "r": 2
   },
   {
-   "f": "Was kennzeichnet sekundäre Bindung?",
+   "f": "Was gehört zur Beurteilung?",
    "o": [
-    "wird vor der Geburt aufgebaut",
-    "ersetzt immer die primäre",
-    "gibt es nicht",
-    "wird nach der primären Erfahrung aufgebaut"
+    "Meinung",
+    "Beispiel",
+    "Definition",
+    "Belege, Gegenargument, Fazit"
    ],
    "r": 3
   }

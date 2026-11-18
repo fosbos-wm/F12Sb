@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur primären Bindung treffen zu?",
+   "statements": [
+    {
+     "text": "Sie entsteht in den ersten Lebensmonaten.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist Fundament für spätere Bindungsfähigkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht erst im Jugendalter.",
+     "richtig": false
+    },
+    {
+     "text": "Sie spielt keine Rolle.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu sekundären Bindungen treffen zu?",
+   "statements": [
+    {
+     "text": "Dazu zählen Erzieherinnen und Lehrkräfte.",
+     "richtig": true
+    },
+    {
+     "text": "Dazu zählen Freunde und Partner.",
+     "richtig": true
+    },
+    {
+     "text": "Sie bestehen nur zur Mutter.",
+     "richtig": false
+    },
+    {
+     "text": "Sie sind immer unsicher.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Leon (5) wurde feinfühlig versorgt und baut schnell Vertrauen zur Erzieherin auf. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Seine primäre Bindung wirkt als Grundlage.",
+     "richtig": true
+    },
+    {
+     "text": "Die Erzieherin kann sekundäre Bindungsperson werden.",
+     "richtig": true
+    },
+    {
+     "text": "Er kann keine neuen Bindungen aufbauen.",
+     "richtig": false
+    },
+    {
+     "text": "Seine primäre Bindung wurde durch die Kita ersetzt.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu späteren Beziehungen treffen zu?",
+   "statements": [
+    {
+     "text": "Unsicher gebundene Erwachsene haben oft Schwierigkeiten mit Nähe.",
+     "richtig": true
+    },
+    {
+     "text": "Neue Erfahrungen können frühere Erfahrungen verändern.",
+     "richtig": true
+    },
+    {
+     "text": "Frühe Bindung legt alles endgültig fest.",
+     "richtig": false
+    },
+    {
+     "text": "Spätere Beziehungen haben keinen Einfluss.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

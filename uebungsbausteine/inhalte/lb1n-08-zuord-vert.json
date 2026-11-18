@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Aussagen beurteilen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Maja vertraut ihrer Mutter von Geburt an.",
+   "primäre Bindung"
+  ],
+  [
+   "Maja baut Vertrauen zur Erzieherin auf.",
+   "sekundäre Bindung"
+  ],
+  [
+   "Ein unsicher gebundenes Kind gewinnt Vertrauen zu einer Lehrerin.",
+   "korrigierende Erfahrung"
+  ],
+  [
+   "Ein Erwachsener meidet Nähe.",
+   "mögliche Folge unsicherer Bindung"
+  ],
+  [
+   "Jugendliche suchen Freunde.",
+   "sekundäre Bindung als Entwicklungsaufgabe"
+  ],
+  [
+   "„Frühe Bindung bestimmt alles.“",
+   "deterministisch, zu einseitig"
+  ]
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "titel": "Theorievergleich: Beispiele sortieren",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Feinfühlig",
+  "Nicht feinfühlig"
+ ],
+ "karten": [
+  {
+   "t": "Bemerkt leises Quengeln",
+   "s": 0
+  },
+  {
+   "t": "Deutet Weinen zutreffend",
+   "s": 0
+  },
+  {
+   "t": "Tröstet sofort",
+   "s": 0
+  },
+  {
+   "t": "Reagiert passend zum Bedürfnis",
+   "s": 0
+  },
+  {
+   "t": "Lässt das Baby bewusst schreien",
+   "s": 1
+  },
+  {
+   "t": "Ignoriert Signale",
+   "s": 1
+  },
+  {
+   "t": "Reagiert nach eigenen Wünschen",
+   "s": 1
+  },
+  {
+   "t": "Reagiert viel zu spät",
+   "s": 1
+  },
+  {
+   "t": "Antwortet unvorhersehbar",
+   "s": 1
+  }
+ ]
+}

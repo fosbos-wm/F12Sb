@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Sicherheitsbasis treffen zu?",
+   "statements": [
+    {
+     "text": "Sie ermöglicht das Erkunden.",
+     "richtig": true
+    },
+    {
+     "text": "Das Kind kehrt bei Angst zu ihr zurück.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist ein Spielzeug.",
+     "richtig": false
+    },
+    {
+     "text": "Sie gibt es nur bei Typ A.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Phasen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Vor-Bindung umfasst etwa die ersten 2 Monate.",
+     "richtig": true
+    },
+    {
+     "text": "Ab ca. 7 Monaten beginnt die eigentliche Bindung.",
+     "richtig": true
+    },
+    {
+     "text": "Die zielkorrigierte Partnerschaft beginnt mit 2 Monaten.",
+     "richtig": false
+    },
+    {
+     "text": "Phasen sind bedeutungslos.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Typ A treffen zu?",
+   "statements": [
+    {
+     "text": "Es zeigt sich kaum Kummer bei Trennung.",
+     "richtig": true
+    },
+    {
+     "text": "Die Mutter wird beim Wiedersehen gemieden.",
+     "richtig": true
+    },
+    {
+     "text": "Es handelt sich um sichere Bindung.",
+     "richtig": false
+    },
+    {
+     "text": "Das Kind klammert stark.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

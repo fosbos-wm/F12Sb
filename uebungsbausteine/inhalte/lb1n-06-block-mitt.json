@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Argumente sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Typ B – sicher",
+  "Typ A – vermeidend",
+  "Typ C – ambivalent"
+ ],
+ "items": [
+  {
+   "t": "Kummer bei Trennung, schnelle Beruhigung",
+   "k": 0
+  },
+  {
+   "t": "Freudige Begrüßung",
+   "k": 0
+  },
+  {
+   "t": "Nutzt Mutter als sicheren Hafen",
+   "k": 0
+  },
+  {
+   "t": "Kaum Kummer, scheinbar unbeeindruckt",
+   "k": 1
+  },
+  {
+   "t": "Wendet sich beim Wiedersehen ab",
+   "k": 1
+  },
+  {
+   "t": "Spielt weiter",
+   "k": 1
+  },
+  {
+   "t": "Klammert und wehrt ab",
+   "k": 2
+  },
+  {
+   "t": "Lässt sich schwer beruhigen",
+   "k": 2
+  },
+  {
+   "t": "Wechselhafte Reaktionen der Mutter",
+   "k": 2
+  }
+ ]
+}

@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welche Bestandteile gehören zur Feinfühligkeit?",
+   "o": [
+    "wahrnehmen, interpretieren, angemessen und prompt reagieren",
+    "strafen und belohnen",
+    "fordern und kontrollieren",
+    "ignorieren und abwarten"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum prompt?",
+   "o": [
+    "damit Eltern Zeit sparen",
+    "damit das Kind Signal und Reaktion verknüpfen kann",
+    "damit das Kind lauter schreit",
+    "damit es verwöhnt wird"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Kann man Säuglinge durch prompte Reaktion verwöhnen?",
+   "o": [
+    "ja, immer",
+    "nur nachts",
+    "nein, sie brauchen Ko-Regulation",
+    "nur bei Jungen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was fördert Feinfühligkeit?",
+   "o": [
+    "unsichere Bindung",
+    "Vermeidung",
+    "Distanz",
+    "sichere Bindung"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Sven gibt Mila ein Fläschchen, obwohl sie Nähe wollte. Was fehlte?",
+   "o": [
+    "richtiges Interpretieren",
+    "Wahrnehmen",
+    "Promptheit",
+    "nichts"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was entwickelt sich aus Ko-Regulation?",
+   "o": [
+    "Fixierung",
+    "Selbstregulation",
+    "Regression",
+    "Verdrängung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was erlebt ein Kind bei feinfühliger Reaktion?",
+   "o": [
+    "Angst",
+    "Hilflosigkeit",
+    "Urvertrauen",
+    "Misstrauen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Feinfühligkeit ist der wichtigste Einflussfaktor für:",
+   "o": [
+    "Intelligenz",
+    "Körpergröße",
+    "Schulnoten",
+    "sichere Bindung"
+   ],
+   "r": 3
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Aussagen beurteilen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Ein Kind begrüßt die Mutter freudig.",
+   "Typ B"
+  ],
+  [
+   "Ein Kind wendet sich beim Wiedersehen ab.",
+   "Typ A"
+  ],
+  [
+   "Ein Kind klammert und stößt weg.",
+   "Typ C"
+  ],
+  [
+   "Ein Kind erstarrt widersprüchlich.",
+   "Typ D"
+  ],
+  [
+   "Ein Kind erkundet neugierig den Raum.",
+   "Explorationsverhalten"
+  ],
+  [
+   "Ein Kind sucht bei Angst Schutz.",
+   "Bindungsverhalten"
+  ]
+ ]
+}
