@@ -21983,7 +21983,8 @@ async function renderKwThema(){
  const liste=kat=>{const l=mats.filter(m=>m.kategorie===kat);return l.length?l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join(""):`<div class="kw-leer">Noch nichts eingestellt.</div>`};
  const hat=kat=>mats.some(m=>m.kategorie===kat);
  const add=kat=>lehrer?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${kat}">+ hinzufügen</button>`:"";
- const teil=(kat,label)=>(!lehrer&&!hat(kat))?"":`<div class="kw-stufe"><b>${esc(label)}</b>${liste(kat)}${add(kat)}</div>`;
+ const teil=(kat,label)=>(!hat(kat))?"":`<div class="kw-stufe"><b>${esc(label)}</b>${liste(kat)}</div>`;
+ const addReihe=l=>lehrer?`<div class="kw-aktionen lx-addreihe">${l.map(x=>`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${x[0]}">+ ${esc(x[1])}</button>`).join("")}</div>`:"";
  const K=leist?{fa:[],ub:[]}:await lxUebKataloge();
  const mod=kwModuleThema(e.id);
  const faMod=mod.filter(m=>m.modul==="fachaufsatz"||m.modul==="apt"),restMod=mod.filter(m=>!(m.modul==="fachaufsatz"||m.modul==="apt"));
@@ -22008,12 +22009,12 @@ async function renderKwThema(){
   teile.push(s1);
   // 2 Infotext: Lesen, Hören, Sehen
   const s8l=mats.filter(m=>m.kategorie==="einfuehrung");
-  const einf=(lehrer||s8l.length)?`<div class="kw-stufe"><b>Sehen · Einführungstafel</b>${s8l.length?`<div class="kw-dateien">${s8l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join("")}</div>`:`<div class="kw-leer">Noch keine Tafel ausgewählt.</div>`}${add("einfuehrung")}</div>`:"";
-  const lesenH=teil("lernsituation","Lernsituationen")+teil("lehrtext","Lehrtexte")+teil("arbeitsblatt","Arbeitsblätter");
-  const hoerenH=teil("audio","Audio");
-  const sehenH=teil("video","Videos")+einf+teil("tafel","Digitale Tafeln")+teil("lernuebersicht","Lernübersichten");
+  const einf=(s8l.length)?`<div class="kw-stufe"><b>Sehen · Einführungstafel</b><div class="kw-dateien">${s8l.map(m=>kwDateiHTML(m.titel,m.url,m.id,e.id)).join("")}</div></div>`:"";
+  const lesenH=teil("lernsituation","Lernsituationen")+teil("lehrtext","Lehrtexte")+teil("arbeitsblatt","Arbeitsblätter")+addReihe([["lehrtext","Lesetext"],["lernsituation","Lernsituation"],["arbeitsblatt","Arbeitsblatt"]]);
+  const hoerenH=teil("audio","Audio")+addReihe([["audio","Audio"]]);
+  const sehenH=teil("video","Videos")+einf+teil("tafel","Digitale Tafeln")+teil("lernuebersicht","Lernübersichten")+addReihe([["video","Video"],["tafel","Digitale Tafel"],["lernuebersicht","Lernübersicht"],["einfuehrung","Einführungstafel"]]);
   const tabs=[["lesen","Lesen",lesenH],["hoeren","Hören",hoerenH],["sehen","Sehen",sehenH]].filter(x=>x[2]);
-  const upl=lehrer?`<div class="lx-upl"><b>Infotext hinzufügen</b><small>Datei hochladen (bis 15 MB) oder Link einfügen. Videos am besten als Link, Audios als Datei.</small><div class="kw-aktionen"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="lehrtext">+ Lesetext</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="audio">+ Audio</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="video">+ Video</button></div></div>`:"";
+  const upl="";
   const infoIn=tabs.length?upl+`<div class="lx-tabs" role="tablist">${tabs.map((x,k)=>`<button type="button" class="lx-tab${k?"":" an"}" data-lxtab="${x[0]}">${x[1]}</button>`).join("")}</div>`+tabs.map((x,k)=>`<div class="lx-tab-p${k?" aus":""}" data-t="${x[0]}">${x[2]}</div>`).join(""):"";
   teile.push(infoIn?lxSek(2,LXF[2].n,"Lesen, Hören oder Sehen: Wähle, was dir beim Verstehen hilft.",infoIn):"");
   // 3 Selbstlernkurs
