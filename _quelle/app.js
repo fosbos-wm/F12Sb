@@ -30,6 +30,12 @@ window.lxPPDirekt=async function(){
  });
 })();
 
+document.addEventListener("click",ev=>{
+ const b=ev.target.closest&&ev.target.closest("[data-lsfach]");
+ if(b){window.__lsFach=b.dataset.lsfach||"";render();return}
+ if(ev.target.closest&&ev.target.closest('a[data-page="lernstaende"]'))window.__lsFach="";
+});
+window.addEventListener("hashchange",()=>{if(location.hash.replace("#","")==="lernstaende")window.__lsFach=""});
 let initializeApp, getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, updateProfile, deleteUser; let getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, getDoc, getDocs, query, orderBy, limit, where, onSnapshot, serverTimestamp, arrayUnion, arrayRemove, increment, writeBatch; let getStorage, storageRef, uploadBytes, getDownloadURL, deleteObject; let storage=null; let firebaseReadyPromise = null; async function loadFirebase(){return firebaseReadyPromise||(firebaseReadyPromise=fbImportMitWiederholung("./firebase-local.js?v=20261016a").then(e=>{const t=e,n=e,i=e,r={getStorage:e.getStorage,ref:e.ref,uploadBytes:e.uploadBytes,getDownloadURL:e.getDownloadURL,deleteObject:e.deleteObject};({initializeApp:initializeApp}=t),{getAuth:getAuth,onAuthStateChanged:onAuthStateChanged,createUserWithEmailAndPassword:createUserWithEmailAndPassword,signInWithEmailAndPassword:signInWithEmailAndPassword,signOut:signOut,sendPasswordResetEmail:sendPasswordResetEmail,updateProfile:updateProfile,deleteUser:deleteUser}=n,{getFirestore:getFirestore,collection:collection,doc:doc,addDoc:addDoc,setDoc:setDoc,updateDoc:updateDoc,deleteDoc:deleteDoc,getDoc:getDoc,getDocs:getDocs,query:query,orderBy:orderBy,limit:limit,where:where,onSnapshot:onSnapshot,serverTimestamp:serverTimestamp,arrayUnion:arrayUnion,arrayRemove:arrayRemove,increment:increment,writeBatch:writeBatch}=i,getDoc=fsLeseMitWiederholung(getDoc),getDocs=fsLeseMitWiederholung(getDocs);{const a=()=>{window.__fsDirty=Date.now()},s=d=>(...p)=>{a();const h=d(...p);return Promise.resolve(h).then(a,a),h};addDoc=s(addDoc),setDoc=s(setDoc),updateDoc=s(updateDoc),deleteDoc=s(deleteDoc);const l=writeBatch;writeBatch=(...d)=>{const p=l(...d),h=p.commit.bind(p);return p.commit=()=>{a();const k=h();return Promise.resolve(k).then(a,a),k},p};const c=(d,p)=>{const h=new Map;return(k,...f)=>{const y=k&&k.type===p&&!f.length&&k.path||null;if(!y)return d(k,...f);if(h.has(y))return h.get(y);const w=Promise.resolve(d(k)).finally(()=>h.delete(y));return h.set(y,w),w}};getDoc=c(getDoc,"document"),getDocs=c(getDocs,"collection")}if({getStorage:getStorage,ref:storageRef,uploadBytes:uploadBytes,getDownloadURL:getDownloadURL,deleteObject:deleteObject}=r,app||(app=initializeApp(firebaseConfig)),auth||(auth=getAuth(app)),!db)try{db=e.initializeFirestore(app,{experimentalAutoDetectLongPolling:!0})}catch(a){console.warn("Firestore-Start mit Verbindungsfallback nicht m\xF6glich, Standard wird genutzt:",a),db=getFirestore(app)}return storage||(storage=getStorage(app)),window.CampusFirebase={get db(){return db},get currentUser(){return currentUser},collection:collection,doc:doc,addDoc:addDoc,setDoc:setDoc,updateDoc:updateDoc,deleteDoc:deleteDoc,getDoc:getDoc,getDocs:getDocs,query:query,orderBy:orderBy,limit:limit,where:where,onSnapshot:onSnapshot,serverTimestamp:serverTimestamp,arrayUnion:arrayUnion,increment:increment,modal:modal,toast:toast,pageHead:pageHead,footer:footer,render:render},!0}).catch(e=>{throw firebaseReadyPromise=null,e}),firebaseReadyPromise)} /*
  WICHTIG:
  Diese Werte werden nach dem Anlegen deiner Firebase-Web-App aus
@@ -22274,7 +22280,21 @@ async function lxLernstandKlasse(){
  const kachel=(z,t,u)=>`<div class="lsn-k"><b>${z}</b><span>${t}</span>${u?`<small>${u}</small>`:""}</div>`;
  return`<section class="lsn"><div class="lsn-h"><small>KLASSENÜBERSICHT</small><h2>Check-in, Check-out und Übungen je Thema</h2></div><div class="lsn-sum">${kachel(N,"Schüler:innen")}${kachel(sumCi,"Check-ins abgegeben","über alle Themen")}${kachel(sumCo,"Check-outs abgegeben","über alle Themen")}${kachel(nT,"Themen")}</div>${bl}</section>`;
 }
+function lsFaecherListe(){
+ return LX_CFG.klasse===11
+  ?["Deutsch","Englisch","Mathematik","Geschichte","Sozialwirtschaft und Recht","Chemie","fpA (Fachpraktische Ausbildung)","Wahlpflichtbereich (Förderunterricht)"]
+  :["Deutsch","Englisch","Mathematik","Religion / Ethik","Politik und Gesellschaft","SWR","Biologie","Soziologie","Wahlpflicht 1","Wahlpflicht 2"];
+}
 async function renderLernstaendeLx(){
+ if(kwLehrer()||window.__lsFach==="pp"){
+  const h=await renderLernstaendePP();
+  return kwLehrer()?h:`<div class="kw-links" style="margin:0 0 10px"><button type="button" class="secondary" data-lsfach="">\u2190 Alle F\xE4cher</button></div>`+h;
+ }
+ const an=`<button type="button" class="lxf-k an" data-lsfach="pp"><h3>P\xE4dagogik / Psychologie</h3><span class="lxf-b muster">Check-ins, Check-outs, \xDCbungen</span><p>Dein Stand je Lernbereich und Thema, dazu ein Lerntipp.</p></button>`;
+ const aus=lsFaecherListe().map(n=>`<div class="lxf-k"><h3>${esc(n)}</h3><span class="lxf-b">Folgt</span><p>Hier erscheinen deine Lernst\xE4nde, sobald das Fach ausgearbeitet ist.</p></div>`).join("");
+ return`${kwSchuelerBanner()}<div class="lxf"><small class="lxf-kick">MEINE LERNST\xC4NDE</small><h1>Meine Lernst\xE4nde</h1><p class="lxf-sub">W\xE4hle ein Fach. Dort siehst du, was gemessen wurde, und bekommst einen Lerntipp.</p><div class="lxf-grid">${an}${aus}</div></div>${footer()}`;
+}
+async function renderLernstaendePP(){
  let h=await renderKwCheckouts();
  const lehrer=kwLehrer();
  let box="";try{box=await lxHinweisBox()}catch(e){console.warn("Hinweise:",e)}
