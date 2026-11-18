@@ -2111,6 +2111,566 @@
    "titel": "Rennen: Beurteilungsfragen",
    "url": "uebungsbausteine/station.html?s=lb1n-06-renne-vert",
    "ord": 35
+  },
+  {
+   "id": "lb12-t12_1_6-1-1-karteikarten",
+   "wocheId": "t12_1_6",
+   "kategorie": "uebung",
+   "titel": "Karteikarten",
+   "url": "lb12-bindung/t12_1_6/1-1-karteikarten.html",
+   "ord": 11
+  },
+  {
+   "id": "lb12-t12_1_6-1-2-zuordnen",
+   "wocheId": "t12_1_6",
+   "kategorie": "uebung",
+   "titel": "Zuordnen",
+   "url": "lb12-bindung/t12_1_6/1-2-zuordnen.html",
+   "ord": 12
+  },
+  {
+   "id": "lb12-t12_1_6-1-3-lueckentext",
+   "wocheId": "t12_1_6",
+   "kategorie": "uebung",
+   "titel": "Lückentext",
+   "url": "lb12-bindung/t12_1_6/1-3-lueckentext.html",
+   "ord": 13
+  },
+  {
+   "id": "lb12-t12_1_6-1-4-beispiel-detektiv",
+   "wocheId": "t12_1_6",
+   "kategorie": "uebung",
+   "titel": "Beispiel-Detektiv",
+   "url": "lb12-bindung/t12_1_6/1-4-beispiel-detektiv.html",
+   "ord": 14
+  },
+  {
+   "id": "lb12-t12_1_6-2-1-struktur-legen",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung2",
+   "titel": "Struktur legen",
+   "url": "lb12-bindung/t12_1_6/2-1-struktur-legen.html",
+   "ord": 21
+  },
+  {
+   "id": "lb12-t12_1_6-2-2-fall-diagnose",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung2",
+   "titel": "Fall-Diagnose",
+   "url": "lb12-bindung/t12_1_6/2-2-fall-diagnose.html",
+   "ord": 22
+  },
+  {
+   "id": "lb12-t12_1_6-2-3-einordnen",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung2",
+   "titel": "Einordnen mit Reglern",
+   "url": "lb12-bindung/t12_1_6/2-3-einordnen.html",
+   "ord": 23
+  },
+  {
+   "id": "lb12-t12_1_6-2-4-folgen-zuordnen",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung2",
+   "titel": "Folgen zuordnen",
+   "url": "lb12-bindung/t12_1_6/2-4-folgen-zuordnen.html",
+   "ord": 24
+  },
+  {
+   "id": "lb12-t12_1_6-2-5-fehler-detektiv",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung2",
+   "titel": "Fehler-Detektiv",
+   "url": "lb12-bindung/t12_1_6/2-5-fehler-detektiv.html",
+   "ord": 25
+  },
+  {
+   "id": "lb12-t12_1_6-3-1-auftrag",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "Rollenspiel: Phasen-Raten in der Krippe",
+   "url": "lb12-bindung/t12_1_6/3-1-auftrag.html",
+   "ord": 31
+  },
+  {
+   "id": "lb12-t12_1_6-3-2-auftrag",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "Beobachtungsauftrag: Nähe und Entdecken",
+   "url": "lb12-bindung/t12_1_6/3-2-auftrag.html",
+   "ord": 32
+  },
+  {
+   "id": "lb12-t12_1_6-3-3-auftrag",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "Bindungs-Rallye",
+   "url": "lb12-bindung/t12_1_6/3-3-auftrag.html",
+   "ord": 33
+  },
+  {
+   "id": "lb12-t12_1_6-3-4-auftrag",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "Kurzprojekt: Faltblatt „Wie Bindung wächst“",
+   "url": "lb12-bindung/t12_1_6/3-4-auftrag.html",
+   "ord": 34
+  },
+  {
+   "id": "lb12-t12_1_6-3-5-auftrag",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "Praxis-Check: Wo wird Bindung sichtbar?",
+   "url": "lb12-bindung/t12_1_6/3-5-auftrag.html",
+   "ord": 35
+  },
+  {
+   "id": "lb12-t12_1_6t-1-1-karteikarten",
+   "wocheId": "t12_1_6t",
+   "kategorie": "uebung",
+   "titel": "Karteikarten",
+   "url": "lb12-bindung/t12_1_6t/1-1-karteikarten.html",
+   "ord": 11
+  },
+  {
+   "id": "lb12-t12_1_6t-1-2-zuordnen",
+   "wocheId": "t12_1_6t",
+   "kategorie": "uebung",
+   "titel": "Zuordnen",
+   "url": "lb12-bindung/t12_1_6t/1-2-zuordnen.html",
+   "ord": 12
+  },
+  {
+   "id": "lb12-t12_1_6t-1-3-lueckentext",
+   "wocheId": "t12_1_6t",
+   "kategorie": "uebung",
+   "titel": "Lückentext",
+   "url": "lb12-bindung/t12_1_6t/1-3-lueckentext.html",
+   "ord": 13
+  },
+  {
+   "id": "lb12-t12_1_6t-1-4-beispiel-detektiv",
+   "wocheId": "t12_1_6t",
+   "kategorie": "uebung",
+   "titel": "Beispiel-Detektiv",
+   "url": "lb12-bindung/t12_1_6t/1-4-beispiel-detektiv.html",
+   "ord": 14
+  },
+  {
+   "id": "lb12-t12_1_6t-2-1-struktur-legen",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Struktur legen",
+   "url": "lb12-bindung/t12_1_6t/2-1-struktur-legen.html",
+   "ord": 21
+  },
+  {
+   "id": "lb12-t12_1_6t-2-2-fall-diagnose",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Fall-Diagnose",
+   "url": "lb12-bindung/t12_1_6t/2-2-fall-diagnose.html",
+   "ord": 22
+  },
+  {
+   "id": "lb12-t12_1_6t-2-3-einordnen",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Einordnen mit Reglern",
+   "url": "lb12-bindung/t12_1_6t/2-3-einordnen.html",
+   "ord": 23
+  },
+  {
+   "id": "lb12-t12_1_6t-2-4-folgen-zuordnen",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Folgen zuordnen",
+   "url": "lb12-bindung/t12_1_6t/2-4-folgen-zuordnen.html",
+   "ord": 24
+  },
+  {
+   "id": "lb12-t12_1_6t-2-5-fehler-detektiv",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Fehler-Detektiv",
+   "url": "lb12-bindung/t12_1_6t/2-5-fehler-detektiv.html",
+   "ord": 25
+  },
+  {
+   "id": "lb12-t12_1_6t-3-1-auftrag",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Lernsituation: Teamsitzung Eingewöhnung",
+   "url": "lb12-bindung/t12_1_6t/3-1-auftrag.html",
+   "ord": 31
+  },
+  {
+   "id": "lb12-t12_1_6t-3-2-auftrag",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Rollenspiel: Die Fremde Situation nachspielen",
+   "url": "lb12-bindung/t12_1_6t/3-2-auftrag.html",
+   "ord": 32
+  },
+  {
+   "id": "lb12-t12_1_6t-3-3-auftrag",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Produkt: Übersicht „Bindungstypen im Vergleich“",
+   "url": "lb12-bindung/t12_1_6t/3-3-auftrag.html",
+   "ord": 33
+  },
+  {
+   "id": "lb12-t12_1_6t-3-4-auftrag",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Bindungstyp-Rallye",
+   "url": "lb12-bindung/t12_1_6t/3-4-auftrag.html",
+   "ord": 34
+  },
+  {
+   "id": "lb12-t12_1_6t-3-5-auftrag",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Praxis-Check: Was tun als Fachkraft?",
+   "url": "lb12-bindung/t12_1_6t/3-5-auftrag.html",
+   "ord": 35
+  },
+  {
+   "id": "lb12-t12_1_6b-1-1-karteikarten",
+   "wocheId": "t12_1_6b",
+   "kategorie": "uebung",
+   "titel": "Karteikarten",
+   "url": "lb12-bindung/t12_1_6b/1-1-karteikarten.html",
+   "ord": 11
+  },
+  {
+   "id": "lb12-t12_1_6b-1-2-zuordnen",
+   "wocheId": "t12_1_6b",
+   "kategorie": "uebung",
+   "titel": "Zuordnen",
+   "url": "lb12-bindung/t12_1_6b/1-2-zuordnen.html",
+   "ord": 12
+  },
+  {
+   "id": "lb12-t12_1_6b-1-3-lueckentext",
+   "wocheId": "t12_1_6b",
+   "kategorie": "uebung",
+   "titel": "Lückentext",
+   "url": "lb12-bindung/t12_1_6b/1-3-lueckentext.html",
+   "ord": 13
+  },
+  {
+   "id": "lb12-t12_1_6b-1-4-beispiel-detektiv",
+   "wocheId": "t12_1_6b",
+   "kategorie": "uebung",
+   "titel": "Beispiel-Detektiv",
+   "url": "lb12-bindung/t12_1_6b/1-4-beispiel-detektiv.html",
+   "ord": 14
+  },
+  {
+   "id": "lb12-t12_1_6b-2-1-struktur-legen",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung2",
+   "titel": "Struktur legen",
+   "url": "lb12-bindung/t12_1_6b/2-1-struktur-legen.html",
+   "ord": 21
+  },
+  {
+   "id": "lb12-t12_1_6b-2-2-fall-diagnose",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung2",
+   "titel": "Fall-Diagnose",
+   "url": "lb12-bindung/t12_1_6b/2-2-fall-diagnose.html",
+   "ord": 22
+  },
+  {
+   "id": "lb12-t12_1_6b-2-3-einordnen",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung2",
+   "titel": "Einordnen mit Reglern",
+   "url": "lb12-bindung/t12_1_6b/2-3-einordnen.html",
+   "ord": 23
+  },
+  {
+   "id": "lb12-t12_1_6b-2-4-folgen-zuordnen",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung2",
+   "titel": "Folgen zuordnen",
+   "url": "lb12-bindung/t12_1_6b/2-4-folgen-zuordnen.html",
+   "ord": 24
+  },
+  {
+   "id": "lb12-t12_1_6b-2-5-fehler-detektiv",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung2",
+   "titel": "Fehler-Detektiv",
+   "url": "lb12-bindung/t12_1_6b/2-5-fehler-detektiv.html",
+   "ord": 25
+  },
+  {
+   "id": "lb12-t12_1_6b-3-1-auftrag",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "Beratungsgespräch mit Sandra",
+   "url": "lb12-bindung/t12_1_6b/3-1-auftrag.html",
+   "ord": 31
+  },
+  {
+   "id": "lb12-t12_1_6b-3-2-auftrag",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "Schriftliche Beratung: Brief an Sandra",
+   "url": "lb12-bindung/t12_1_6b/3-2-auftrag.html",
+   "ord": 32
+  },
+  {
+   "id": "lb12-t12_1_6b-3-3-auftrag",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "Feinfühligkeits-Rallye",
+   "url": "lb12-bindung/t12_1_6b/3-3-auftrag.html",
+   "ord": 33
+  },
+  {
+   "id": "lb12-t12_1_6b-3-4-auftrag",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "Kurzprojekt: Elternflyer „Verwöhnen? Nein, feinfühlig!“",
+   "url": "lb12-bindung/t12_1_6b/3-4-auftrag.html",
+   "ord": 34
+  },
+  {
+   "id": "lb12-t12_1_6b-3-5-auftrag",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "Praxis-Check: Feinfühligkeit beobachten",
+   "url": "lb12-bindung/t12_1_6b/3-5-auftrag.html",
+   "ord": 35
+  },
+  {
+   "id": "lb12-t12_1_7-1-1-karteikarten",
+   "wocheId": "t12_1_7",
+   "kategorie": "uebung",
+   "titel": "Karteikarten",
+   "url": "lb12-bindung/t12_1_7/1-1-karteikarten.html",
+   "ord": 11
+  },
+  {
+   "id": "lb12-t12_1_7-1-2-zuordnen",
+   "wocheId": "t12_1_7",
+   "kategorie": "uebung",
+   "titel": "Zuordnen",
+   "url": "lb12-bindung/t12_1_7/1-2-zuordnen.html",
+   "ord": 12
+  },
+  {
+   "id": "lb12-t12_1_7-1-3-lueckentext",
+   "wocheId": "t12_1_7",
+   "kategorie": "uebung",
+   "titel": "Lückentext",
+   "url": "lb12-bindung/t12_1_7/1-3-lueckentext.html",
+   "ord": 13
+  },
+  {
+   "id": "lb12-t12_1_7-1-4-beispiel-detektiv",
+   "wocheId": "t12_1_7",
+   "kategorie": "uebung",
+   "titel": "Beispiel-Detektiv",
+   "url": "lb12-bindung/t12_1_7/1-4-beispiel-detektiv.html",
+   "ord": 14
+  },
+  {
+   "id": "lb12-t12_1_7-2-1-struktur-legen",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung2",
+   "titel": "Struktur legen",
+   "url": "lb12-bindung/t12_1_7/2-1-struktur-legen.html",
+   "ord": 21
+  },
+  {
+   "id": "lb12-t12_1_7-2-2-fall-diagnose",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung2",
+   "titel": "Fall-Diagnose",
+   "url": "lb12-bindung/t12_1_7/2-2-fall-diagnose.html",
+   "ord": 22
+  },
+  {
+   "id": "lb12-t12_1_7-2-3-einordnen",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung2",
+   "titel": "Einordnen mit Reglern",
+   "url": "lb12-bindung/t12_1_7/2-3-einordnen.html",
+   "ord": 23
+  },
+  {
+   "id": "lb12-t12_1_7-2-4-folgen-zuordnen",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung2",
+   "titel": "Folgen zuordnen",
+   "url": "lb12-bindung/t12_1_7/2-4-folgen-zuordnen.html",
+   "ord": 24
+  },
+  {
+   "id": "lb12-t12_1_7-2-5-fehler-detektiv",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung2",
+   "titel": "Fehler-Detektiv",
+   "url": "lb12-bindung/t12_1_7/2-5-fehler-detektiv.html",
+   "ord": 25
+  },
+  {
+   "id": "lb12-t12_1_7-3-1-auftrag",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "Beziehungslandkarte",
+   "url": "lb12-bindung/t12_1_7/3-1-auftrag.html",
+   "ord": 31
+  },
+  {
+   "id": "lb12-t12_1_7-3-2-auftrag",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "Rollenspiel: Vom Kind zur Partnerschaft",
+   "url": "lb12-bindung/t12_1_7/3-2-auftrag.html",
+   "ord": 32
+  },
+  {
+   "id": "lb12-t12_1_7-3-3-auftrag",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "Bindungsnetz-Rallye",
+   "url": "lb12-bindung/t12_1_7/3-3-auftrag.html",
+   "ord": 33
+  },
+  {
+   "id": "lb12-t12_1_7-3-4-auftrag",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "Kurzprojekt: Plakat „Wir sind viele Bindungen“",
+   "url": "lb12-bindung/t12_1_7/3-4-auftrag.html",
+   "ord": 34
+  },
+  {
+   "id": "lb12-t12_1_7-3-5-auftrag",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "Praxis-Check: Die Fachkraft als sekundäre Bindung",
+   "url": "lb12-bindung/t12_1_7/3-5-auftrag.html",
+   "ord": 35
+  },
+  {
+   "id": "lb12-t12_1_8-1-1-karteikarten",
+   "wocheId": "t12_1_8",
+   "kategorie": "uebung",
+   "titel": "Karteikarten",
+   "url": "lb12-bindung/t12_1_8/1-1-karteikarten.html",
+   "ord": 11
+  },
+  {
+   "id": "lb12-t12_1_8-1-2-zuordnen",
+   "wocheId": "t12_1_8",
+   "kategorie": "uebung",
+   "titel": "Zuordnen",
+   "url": "lb12-bindung/t12_1_8/1-2-zuordnen.html",
+   "ord": 12
+  },
+  {
+   "id": "lb12-t12_1_8-1-3-lueckentext",
+   "wocheId": "t12_1_8",
+   "kategorie": "uebung",
+   "titel": "Lückentext",
+   "url": "lb12-bindung/t12_1_8/1-3-lueckentext.html",
+   "ord": 13
+  },
+  {
+   "id": "lb12-t12_1_8-1-4-beispiel-detektiv",
+   "wocheId": "t12_1_8",
+   "kategorie": "uebung",
+   "titel": "Beispiel-Detektiv",
+   "url": "lb12-bindung/t12_1_8/1-4-beispiel-detektiv.html",
+   "ord": 14
+  },
+  {
+   "id": "lb12-t12_1_8-2-1-struktur-legen",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung2",
+   "titel": "Struktur legen",
+   "url": "lb12-bindung/t12_1_8/2-1-struktur-legen.html",
+   "ord": 21
+  },
+  {
+   "id": "lb12-t12_1_8-2-2-fall-diagnose",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung2",
+   "titel": "Fall-Diagnose",
+   "url": "lb12-bindung/t12_1_8/2-2-fall-diagnose.html",
+   "ord": 22
+  },
+  {
+   "id": "lb12-t12_1_8-2-3-einordnen",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung2",
+   "titel": "Einordnen mit Reglern",
+   "url": "lb12-bindung/t12_1_8/2-3-einordnen.html",
+   "ord": 23
+  },
+  {
+   "id": "lb12-t12_1_8-2-4-folgen-zuordnen",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung2",
+   "titel": "Folgen zuordnen",
+   "url": "lb12-bindung/t12_1_8/2-4-folgen-zuordnen.html",
+   "ord": 24
+  },
+  {
+   "id": "lb12-t12_1_8-2-5-fehler-detektiv",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung2",
+   "titel": "Fehler-Detektiv",
+   "url": "lb12-bindung/t12_1_8/2-5-fehler-detektiv.html",
+   "ord": 25
+  },
+  {
+   "id": "lb12-t12_1_8-3-1-auftrag",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "Diskussion Laura und Christoph",
+   "url": "lb12-bindung/t12_1_8/3-1-auftrag.html",
+   "ord": 31
+  },
+  {
+   "id": "lb12-t12_1_8-3-2-auftrag",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "Entscheidungshilfe für Marthas Eltern",
+   "url": "lb12-bindung/t12_1_8/3-2-auftrag.html",
+   "ord": 32
+  },
+  {
+   "id": "lb12-t12_1_8-3-3-auftrag",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "Frühpädagogik-Rallye",
+   "url": "lb12-bindung/t12_1_8/3-3-auftrag.html",
+   "ord": 33
+  },
+  {
+   "id": "lb12-t12_1_8-3-4-auftrag",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "Projekt: Eingewöhnungskonzept in einer Seite",
+   "url": "lb12-bindung/t12_1_8/3-4-auftrag.html",
+   "ord": 34
+  },
+  {
+   "id": "lb12-t12_1_8-3-5-auftrag",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "Praxis-Check: Eingewöhnung bei uns",
+   "url": "lb12-bindung/t12_1_8/3-5-auftrag.html",
+   "ord": 35
   }
  ]
 }
