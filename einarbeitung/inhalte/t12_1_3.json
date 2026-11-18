@@ -1,0 +1,122 @@
+{
+ "titel": "Psychosexuelle Entwicklung nach Freud",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst die **fünf Phasen**, Fixierung und Regression kennen. Plane etwa 25 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Mia (2;6) ruft ständig „Nein, selber!“ und hält ihren Stuhlgang zurück, als der Vater über ein Missgeschick schimpft. Die Erzieherin sagt: „Das passt zu ihrem Alter.“"
+    },
+    {
+     "typ": "text",
+     "text": "Nach Freud durchläuft das Kind **fünf Phasen**: oral (1. Lj.), anal (2.–3. Lj.), phallisch (4.–5. Lj.), Latenz (6. bis ca. 12. Lj.), genital (ab Pubertät)."
+    },
+    {
+     "typ": "text",
+     "text": "Wird ein Bedürfnis zu stark enttäuscht oder zu sehr verwöhnt, bleibt Libido in der Phase gebunden (**Fixierung**). Unter Stress kann der Mensch darauf zurückfallen (**Regression**)."
+    },
+    {
+     "typ": "text",
+     "text": "Gelingt die **anale Phase** (geduldige Sauberkeitserziehung), entwickeln sich Selbstständigkeit und Leistungsfreude."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Die Fixierung legt die Schwachstelle an, die Regression bringt sie zum Vorschein."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "In welcher Phase steht der Ausscheidungsvorgang im Mittelpunkt?",
+     "optionen": [
+      "orale Phase",
+      "anale Phase",
+      "Latenzphase"
+     ],
+     "richtig": 1,
+     "erklaerung": "2. bis 3. Lebensjahr."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne zu.",
+     "paare": [
+      [
+       "orale Phase",
+       "1. Lebensjahr, Mund, Urvertrauen"
+      ],
+      [
+       "anale Phase",
+       "2.–3. Lebensjahr, Autonomie, Sauberkeit"
+      ],
+      [
+       "phallische Phase",
+       "4.–5. Lebensjahr, Ödipuskonflikt, Über-Ich"
+      ],
+      [
+       "Latenzphase",
+       "6. bis ca. 12. Lebensjahr, Sublimierung, Lernen"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze.",
+     "text": "Unter Stress fällt ein Mensch auf ein früheres Entwicklungsniveau zurück: Das nennt man {{Regression}}. Bleibt Libido in einer Phase gebunden, spricht man von {{Fixierung}}.",
+     "woerter": [
+      "Regression",
+      "Fixierung",
+      "Identifikation"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Sauberkeitserziehung nach Freud stimmen?",
+     "aussagen": [
+      {
+       "text": "Sie sollte nicht zu früh und nicht zu streng sein.",
+       "richtig": true,
+       "erklaerung": "Sonst drohen Angst und Verweigerung."
+      },
+      {
+       "text": "Die Ausscheidungsprodukte sollten negativ bewertet werden.",
+       "richtig": false,
+       "erklaerung": "Negative Bewertung ist zu vermeiden."
+      },
+      {
+       "text": "Matschen mit Sand oder Fingerfarben kann angemessene Befriedigung sein.",
+       "richtig": true,
+       "erklaerung": "Das ist ein erlaubter Ausgleich."
+      },
+      {
+       "text": "Eigenwille des Kindes sollte unterdrückt werden.",
+       "richtig": false,
+       "erklaerung": "Er sollte unterstützt werden, mit Grenzen."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in drei bis vier Sätzen, was Herr Brandt (35), der unter Stress an Stiften kaut und mehr raucht, nach Freud zeigt.",
+     "hinweis": "3–4 Sätze",
+     "muster": "Er zeigt eine Regression in die orale Phase. Wahrscheinlich besteht dort eine Fixierung (unzureichende oder unregelmäßige Befriedigung im ersten Lebensjahr). Unter Belastung weicht er auf orale Befriedigung (Kauen, Rauchen, Essen) aus.",
+     "kriterien": [
+      "Regression genannt",
+      "Fixierung erklärt",
+      "Phase richtig"
+     ]
+    }
+   ]
+  }
+ ]
+}

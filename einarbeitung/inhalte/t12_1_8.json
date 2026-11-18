@@ -1,0 +1,122 @@
+{
+ "titel": "Bindungsförderung in der Frühpädagogik",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst, wie **Fremdbetreuung** und **Eingewöhnung** die Bindung beeinflussen. Plane etwa 20 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Frau Weiß fragt die Erzieherin: „Wird meine Tochter in der Krippe bindungsgestört?“ Die Erzieherin antwortet: „Das hängt von mehreren Dingen ab.“"
+    },
+    {
+     "typ": "text",
+     "text": "Das Risiko für unsichere Bindung steigt, wenn **viele Betreuungsstunden** schon im ersten Lebensjahr, **wechselndes Personal** und **mangelnde Feinfühligkeit** der Eltern zusammentreffen."
+    },
+    {
+     "typ": "text",
+     "text": "Schützend wirken eine feinfühlige Beziehung zuhause, hohe Qualität der Einrichtung, ein günstiger Betreuungsschlüssel, feste Strukturen und feinfühlige Fachkräfte."
+    },
+    {
+     "typ": "text",
+     "text": "Hauptziel der **Eingewöhnung**: mit Hilfe einer vertrauten Bezugsperson eine stabile Beziehung zwischen Erzieherin und Kind aufbauen; Trennungen werden allmählich gesteigert."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Nicht die Fremdbetreuung an sich entscheidet, sondern die Qualität der Beziehungen und der Rahmenbedingungen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welcher Faktor erhöht das Risiko?",
+     "optionen": [
+      "feste Bezugserzieherin",
+      "ständig wechselndes Personal",
+      "behutsame Eingewöhnung"
+     ],
+     "richtig": 1,
+     "erklaerung": "Wechselnde Personen erschweren Bindung."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Risiko oder Schutz?",
+     "kategorien": [
+      {
+       "name": "Risiko",
+       "items": [
+        "viele Stunden im 1. Lebensjahr",
+        "wechselndes Personal",
+        "wenig feinfühlige Eltern"
+       ]
+      },
+      {
+       "name": "Schutz",
+       "items": [
+        "feinfühlige Fachkräfte",
+        "behutsame Eingewöhnung",
+        "gutes Betreuungsverhältnis"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze.",
+     "text": "Bei der Eingewöhnung werden Anwesenheitsdauer und Trennungsphasen {{allmählich}} gesteigert. Trennungsleid kann nicht abgewöhnt, sondern nur durch eine {{vertraute}} Person gemildert werden.",
+     "woerter": [
+      "allmählich",
+      "vertraute",
+      "sofort"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen stimmen?",
+     "aussagen": [
+      {
+       "text": "Fremdbetreuung schadet der Bindung automatisch.",
+       "richtig": false,
+       "erklaerung": "Es kommt auf Bedingungen an."
+      },
+      {
+       "text": "Die Erzieherin kann zu einer sekundären Bindungsperson werden.",
+       "richtig": true,
+       "erklaerung": "Sie ist oft die erste feste Beziehung außerhalb der Familie."
+      },
+      {
+       "text": "Rituale beim Abschied helfen.",
+       "richtig": true,
+       "erklaerung": "Sie geben Sicherheit."
+      },
+      {
+       "text": "Je kürzer die Eingewöhnung, desto besser.",
+       "richtig": false,
+       "erklaerung": "Behutsame Eingewöhnung regelt den Stress."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Formuliere eine kurze Antwort an Frau Weiß (3–4 Sätze).",
+     "hinweis": "3–4 Sätze",
+     "muster": "Fremdbetreuung führt nicht automatisch zu unsicherer Bindung. Entscheidend sind die Qualität der Einrichtung, feinfühlige Fachkräfte, ein günstiger Betreuungsschlüssel und eine behutsame Eingewöhnung. Eine feinfühlige Beziehung zuhause schützt zusätzlich.",
+     "kriterien": [
+      "differenziert",
+      "Faktoren genannt",
+      "Eingewöhnung"
+     ]
+    }
+   ]
+  }
+ ]
+}

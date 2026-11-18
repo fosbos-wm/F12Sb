@@ -1,0 +1,119 @@
+{
+ "titel": "Entwicklung und Entwicklungsbedingungen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "In diesem Selbstlernkurs klärst du, was Entwicklung ist und wie **Anlage, Umwelt und Selbststeuerung** zusammenwirken. Plane etwa 20 bis 25 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Die eineiigen Zwillinge Amira und Leyla (15) wachsen in derselben Familie auf. Amira ist Klassenbeste, Leyla engagiert sich im Jugendzentrum und macht kaum Hausaufgaben. Die Eltern fragen: „Wie kann das sein? Sie haben doch die gleichen Gene!“"
+    },
+    {
+     "typ": "text",
+     "text": "**Entwicklung** ist eine gerichtete, zeitlich geordnete Reihe von miteinander zusammenhängenden Veränderungen des Erlebens und Verhaltens."
+    },
+    {
+     "typ": "text",
+     "text": "Drei Bedingungen wirken zusammen: die **Anlage** (genetische Ausstattung, bei der Befruchtung festgelegt), die **Umwelt** (natürlich, kulturell, ökonomisch, sozial) und die **Selbststeuerung** (der Mensch gestaltet seine Entwicklung aktiv mit)."
+    },
+    {
+     "typ": "text",
+     "text": "Anteile lassen sich nicht zuverlässig trennen: Die Bedingungen **beeinflussen sich wechselseitig** (sechs Wirkbeziehungen)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Anlage = Möglichkeiten · Umwelt = Entfaltung · Selbststeuerung = aktives Mitgestalten. Nicht „entweder – oder“, sondern **Zusammenspiel**."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was gehört zum Entwicklungsbegriff?",
+     "optionen": [
+      "Veränderungen sind zufällig und ungeordnet",
+      "Veränderungen laufen in einer geordneten Reihenfolge auf ein Ziel hin",
+      "Entwicklung endet mit der Pubertät"
+     ],
+     "richtig": 1,
+     "erklaerung": "Entwicklung ist gerichtet und zeitlich geordnet."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Anlage",
+       "genetische Ausstattung, bei der Befruchtung festgelegt"
+      ],
+      [
+       "Umwelt",
+       "alle äußeren Einflüsse, z. B. Familie, Kultur, Klima"
+      ],
+      [
+       "Selbststeuerung",
+       "aktives Herbeiführen und Beeinflussen der eigenen Entwicklung"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Eineiige Zwillinge haben die gleiche {{Anlage}}. Trotzdem unterscheiden sie sich, weil sie ihre {{Umwelt}} unterschiedlich erleben und durch ihre {{Selbststeuerung}} eigene Wege gehen.",
+     "woerter": [
+      "Anlage",
+      "Umwelt",
+      "Selbststeuerung",
+      "Vererbung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Leyla sucht sich im Jugendzentrum selbst ihren Freundeskreis. Welche Aussagen stimmen?",
+     "aussagen": [
+      {
+       "text": "Das ist ein Beispiel für Selbststeuerung.",
+       "richtig": true,
+       "erklaerung": "Leyla gestaltet aktiv ihr Umfeld."
+      },
+      {
+       "text": "Ihre Umwelt wirkt dadurch nicht mehr auf sie.",
+       "richtig": false,
+       "erklaerung": "Die selbst gestaltete Umwelt wirkt wieder auf sie zurück."
+      },
+      {
+       "text": "Es zeigt die Wirkbeziehung Selbststeuerung → Umwelt.",
+       "richtig": true,
+       "erklaerung": "Sie beeinflusst ihre soziale Umwelt."
+      },
+      {
+       "text": "Anlage spielt keine Rolle mehr.",
+       "richtig": false,
+       "erklaerung": "Anlage wirkt immer mit."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre den Eltern in drei Sätzen, wie die Unterschiede zwischen den Zwillingen entstehen können.",
+     "hinweis": "3–4 Sätze",
+     "muster": "Die Anlage ist gleich, aber Anlage ist nur eine Möglichkeit. Beide erleben die Familie unterschiedlich und gestalten ihre Umwelt aktiv mit: Amira richtet sich auf Leistung aus, Leyla auf Freunde. Das ist Selbststeuerung; sie wirkt zurück auf Umwelt und Anlage.",
+     "kriterien": [
+      "Fachbegriffe Anlage, Umwelt, Selbststeuerung genannt",
+      "Wechselwirkung begründet",
+      "Fallbezug"
+     ]
+    }
+   ]
+  }
+ ]
+}

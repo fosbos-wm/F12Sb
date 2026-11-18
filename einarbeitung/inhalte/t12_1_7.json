@@ -1,0 +1,112 @@
+{
+ "titel": "Primäre und sekundäre Bindungen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du unterscheidest **primäre und sekundäre Bindungsbeziehungen** und erkennst ihre Bedeutung für spätere Beziehungen. Plane etwa 20 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Leon (5) wurde als Baby feinfühlig versorgt. Sein Vater spielt am Wochenende wild mit ihm. In der Kita baut Leon schnell eine Beziehung zu seiner Bezugserzieherin auf."
+    },
+    {
+     "typ": "text",
+     "text": "**Primäre Bindungsbeziehungen** sind Bindungen zu Personen, zu denen der Säugling in den ersten Lebensmonaten den intensivsten Kontakt aufbaut."
+    },
+    {
+     "typ": "text",
+     "text": "**Sekundäre Bindungsbeziehungen** sind Bindungen, die das Kind bzw. der Jugendliche im weiteren Verlauf seiner Entwicklung nach der primären Bindungserfahrung aufbaut (Vater, Familie, Erzieherin, Lehrkraft, Peers, Partner)."
+    },
+    {
+     "typ": "text",
+     "text": "Die primäre Bindung ist das Fundament für Bindungsfähigkeit; sicher gebundene Menschen gestalten Beziehungen eher mit Vertrauen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Primär = erste, intensivste Bindung · sekundär = spätere Bindungen. Frühe Erfahrungen prägen, spätere Beziehungen können korrigieren."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welche Beziehung ist sekundär?",
+     "optionen": [
+      "Säugling – Hauptbezugsperson in den ersten Monaten",
+      "Kind – Erzieherin in der Kita",
+      "beides"
+     ],
+     "richtig": 1,
+     "erklaerung": "Die Erzieherin kommt später dazu."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Primär oder sekundär?",
+     "kategorien": [
+      {
+       "name": "primär",
+       "items": [
+        "Beziehung des Säuglings zur Mutter in den ersten Lebensmonaten"
+       ]
+      },
+      {
+       "name": "sekundär",
+       "items": [
+        "Vater (später aufgebaut)",
+        "Erzieherin",
+        "Lehrerin",
+        "Freunde im Jugendalter",
+        "Partner im Erwachsenenalter"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen stimmen?",
+     "aussagen": [
+      {
+       "text": "Väter stimulieren eher Motorik und Neugier.",
+       "richtig": true,
+       "erklaerung": "Die primäre Person bietet vor allem Schutz."
+      },
+      {
+       "text": "Eine Erzieherin hat gleich viel Zeit pro Kind wie die Familie.",
+       "richtig": false,
+       "erklaerung": "Sie muss ihre Aufmerksamkeit teilen."
+      },
+      {
+       "text": "Unsicher gebundene Erwachsene haben oft Probleme mit Nähe und Eifersucht.",
+       "richtig": true,
+       "erklaerung": "Typisch für unsichere Bindung."
+      },
+      {
+       "text": "Frühe Bindung bestimmt unveränderlich das ganze Leben.",
+       "richtig": false,
+       "erklaerung": "Spätere Beziehungen können ergänzen und korrigieren."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in 3 Sätzen, warum Leon vermutlich schnell Vertrauen zur Erzieherin fasst.",
+     "hinweis": "3 Sätze",
+     "muster": "Leon hat eine sichere primäre Bindung erlebt. Sie ist das Fundament für Bindungsfähigkeit. Er überträgt sein Vertrauen auf neue Bezugspersonen (sekundäre Bindung).",
+     "kriterien": [
+      "primäre Bindung",
+      "Fundament",
+      "Übertragung"
+     ]
+    }
+   ]
+  }
+ ]
+}

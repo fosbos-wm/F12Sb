@@ -87,6 +87,270 @@
    "titel": "Infotext: Vulnerabilität und Resilienz",
    "url": "infotexte/LB1-11_Vulnerabilit%C3%A4t-und-Resilienz.pdf",
    "ord": 11
+  },
+  {
+   "id": "ueb01b",
+   "wocheId": "t12_1_1",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Entwicklung und Entwicklungsbedingungen",
+   "url": "aufgaben/LB1-01_Basis_Entwicklung-und-Entwicklungsbedingungen.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb01p",
+   "wocheId": "t12_1_1",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Entwicklung und Entwicklungsbedingungen",
+   "url": "aufgaben/LB1-01_Plus_Entwicklung-und-Entwicklungsbedingungen.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb01v",
+   "wocheId": "t12_1_1",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Entwicklung und Entwicklungsbedingungen",
+   "url": "aufgaben/LB1-01_Vertieft_Entwicklung-und-Entwicklungsbedingungen.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb02b",
+   "wocheId": "t12_1_2",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Freuds Persönlichkeitsmodell",
+   "url": "aufgaben/LB1-02_Basis_Freuds-Pers%C3%B6nlichkeitsmodell.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb02p",
+   "wocheId": "t12_1_2",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Freuds Persönlichkeitsmodell",
+   "url": "aufgaben/LB1-02_Plus_Freuds-Pers%C3%B6nlichkeitsmodell.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb02v",
+   "wocheId": "t12_1_2",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Freuds Persönlichkeitsmodell",
+   "url": "aufgaben/LB1-02_Vertieft_Freuds-Pers%C3%B6nlichkeitsmodell.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb03b",
+   "wocheId": "t12_1_3",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Psychosexuelle Entwicklung",
+   "url": "aufgaben/LB1-03_Basis_Psychosexuelle-Entwicklung.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb03p",
+   "wocheId": "t12_1_3",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Psychosexuelle Entwicklung",
+   "url": "aufgaben/LB1-03_Plus_Psychosexuelle-Entwicklung.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb03v",
+   "wocheId": "t12_1_3",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Psychosexuelle Entwicklung",
+   "url": "aufgaben/LB1-03_Vertieft_Psychosexuelle-Entwicklung.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb04b",
+   "wocheId": "t12_1_4",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Angst und Abwehrmechanismen",
+   "url": "aufgaben/LB1-04_Basis_Angst-und-Abwehrmechanismen.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb04p",
+   "wocheId": "t12_1_4",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Angst und Abwehrmechanismen",
+   "url": "aufgaben/LB1-04_Plus_Angst-und-Abwehrmechanismen.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb04v",
+   "wocheId": "t12_1_4",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Angst und Abwehrmechanismen",
+   "url": "aufgaben/LB1-04_Vertieft_Angst-und-Abwehrmechanismen.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb05b",
+   "wocheId": "t12_1_5",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Kritische Würdigung der Psychoanalyse",
+   "url": "aufgaben/LB1-05_Basis_Kritische-W%C3%BCrdigung-der-Psychoanalyse.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb05p",
+   "wocheId": "t12_1_5",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Kritische Würdigung der Psychoanalyse",
+   "url": "aufgaben/LB1-05_Plus_Kritische-W%C3%BCrdigung-der-Psychoanalyse.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb05v",
+   "wocheId": "t12_1_5",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Kritische Würdigung der Psychoanalyse",
+   "url": "aufgaben/LB1-05_Vertieft_Kritische-W%C3%BCrdigung-der-Psychoanalyse.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb06b",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Bindung Begriff Phasen und Typen",
+   "url": "aufgaben/LB1-06_Basis_Bindung-Begriff-Phasen-und-Typen.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb06p",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Bindung Begriff Phasen und Typen",
+   "url": "aufgaben/LB1-06_Plus_Bindung-Begriff-Phasen-und-Typen.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb06v",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Bindung Begriff Phasen und Typen",
+   "url": "aufgaben/LB1-06_Vertieft_Bindung-Begriff-Phasen-und-Typen.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb07b",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Feinfühligkeit und gelungene Bindung",
+   "url": "aufgaben/LB1-07_Basis_Feinf%C3%BChligkeit-und-gelungene-Bindung.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb07p",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Feinfühligkeit und gelungene Bindung",
+   "url": "aufgaben/LB1-07_Plus_Feinf%C3%BChligkeit-und-gelungene-Bindung.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb07v",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Feinfühligkeit und gelungene Bindung",
+   "url": "aufgaben/LB1-07_Vertieft_Feinf%C3%BChligkeit-und-gelungene-Bindung.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb08b",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Primäre und sekundäre Bindungen",
+   "url": "aufgaben/LB1-08_Basis_Prim%C3%A4re-und-sekund%C3%A4re-Bindungen.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb08p",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Primäre und sekundäre Bindungen",
+   "url": "aufgaben/LB1-08_Plus_Prim%C3%A4re-und-sekund%C3%A4re-Bindungen.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb08v",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Primäre und sekundäre Bindungen",
+   "url": "aufgaben/LB1-08_Vertieft_Prim%C3%A4re-und-sekund%C3%A4re-Bindungen.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb09b",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Bindungsförderung in der Frühpädagogik",
+   "url": "aufgaben/LB1-09_Basis_Bindungsf%C3%B6rderung-in-der-Fr%C3%BChp%C3%A4dagogik.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb09p",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Bindungsförderung in der Frühpädagogik",
+   "url": "aufgaben/LB1-09_Plus_Bindungsf%C3%B6rderung-in-der-Fr%C3%BChp%C3%A4dagogik.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb09v",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Bindungsförderung in der Frühpädagogik",
+   "url": "aufgaben/LB1-09_Vertieft_Bindungsf%C3%B6rderung-in-der-Fr%C3%BChp%C3%A4dagogik.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb10b",
+   "wocheId": "t12_1_9",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Lebensspanne und Entwicklungsaufgaben",
+   "url": "aufgaben/LB1-10_Basis_Lebensspanne-und-Entwicklungsaufgaben.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb10p",
+   "wocheId": "t12_1_9",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Lebensspanne und Entwicklungsaufgaben",
+   "url": "aufgaben/LB1-10_Plus_Lebensspanne-und-Entwicklungsaufgaben.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb10v",
+   "wocheId": "t12_1_9",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Lebensspanne und Entwicklungsaufgaben",
+   "url": "aufgaben/LB1-10_Vertieft_Lebensspanne-und-Entwicklungsaufgaben.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb11b",
+   "wocheId": "t12_1_10",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Vulnerabilität und Resilienz",
+   "url": "aufgaben/LB1-11_Basis_Vulnerabilit%C3%A4t-und-Resilienz.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb11p",
+   "wocheId": "t12_1_10",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Vulnerabilität und Resilienz",
+   "url": "aufgaben/LB1-11_Plus_Vulnerabilit%C3%A4t-und-Resilienz.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb11v",
+   "wocheId": "t12_1_10",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Vulnerabilität und Resilienz",
+   "url": "aufgaben/LB1-11_Vertieft_Vulnerabilit%C3%A4t-und-Resilienz.pdf",
+   "ord": 12
   }
  ]
 }

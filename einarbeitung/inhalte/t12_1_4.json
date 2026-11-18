@@ -1,0 +1,129 @@
+{
+ "titel": "Angst und Abwehrmechanismen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst die **drei Angstformen** und die wichtigsten **Abwehrmechanismen** und erkennst sie in Fällen. Plane etwa 25 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Lotta (4) bekommt ein Geschwisterchen. Plötzlich will sie wieder aus dem Fläschchen trinken, spricht Babysprache und möchte getragen werden. Ihr Vater ist ratlos."
+    },
+    {
+     "typ": "text",
+     "text": "**Angst** ist eine Reaktion des Ich auf eine Bedrohung. Freud unterscheidet **Realangst**, **moralische Angst** (Gewissen) und **neurotische Angst** (Es)."
+    },
+    {
+     "typ": "text",
+     "text": "**Abwehrmechanismen** schützen das Ich unbewusst vor Angst: Verdrängung, Projektion, Identifikation, Regression, Fixierung."
+    },
+    {
+     "typ": "text",
+     "text": "Werden sie starr und dauerhaft eingesetzt, wird die Realität verzerrt und es drohen psychische Störungen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Angst = Warnsignal des Ich · Abwehr = unbewusster Schutz. Problematisch wird es, wenn Abwehr starr und dauerhaft ist."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Lotta nässt wieder ein/trinkt wieder aus dem Fläschchen. Welcher Mechanismus?",
+     "optionen": [
+      "Projektion",
+      "Regression",
+      "Verdrängung"
+     ],
+     "richtig": 1,
+     "erklaerung": "Rückfall auf eine frühere Entwicklungsstufe unter Stress."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Mechanismus zu.",
+     "paare": [
+      [
+       "Verdrängung",
+       "Peinliches wird „vergessen“, wirkt aber weiter"
+      ],
+      [
+       "Projektion",
+       "eigene unannehmliche Eigenschaften werden bei anderen gesehen"
+      ],
+      [
+       "Identifikation",
+       "Eigenschaften einer bewunderten Person werden übernommen"
+      ],
+      [
+       "Regression",
+       "Rückfall auf früheres Entwicklungsniveau"
+      ]
+     ]
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Welche Angstform ist es?",
+     "paare": [
+      [
+       "Realangst",
+       "Angst vor Strafe oder Blamage"
+      ],
+      [
+       "moralische Angst",
+       "Schuldgefühle, Gewissensbisse"
+      ],
+      [
+       "neurotische Angst",
+       "Angst, von eigenen Impulsen überwältigt zu werden"
+      ]
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Herr Yilmaz ist selbst unpünktlich und sagt ständig: „Meine Mitarbeiter sind unzuverlässig!“ Was stimmt?",
+     "aussagen": [
+      {
+       "text": "Er zeigt Projektion.",
+       "richtig": true,
+       "erklaerung": "Eigene Eigenschaften werden bei anderen gesehen."
+      },
+      {
+       "text": "Er zeigt Regression.",
+       "richtig": false,
+       "erklaerung": "Es gibt keinen Rückfall auf ein früheres Niveau."
+      },
+      {
+       "text": "Der Mechanismus läuft unbewusst ab.",
+       "richtig": true,
+       "erklaerung": "Abwehr ist unbewusst."
+      },
+      {
+       "text": "Der Mechanismus entlastet ihn kurzfristig.",
+       "richtig": true,
+       "erklaerung": "Das Problem liegt scheinbar bei den anderen."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Warum kann dauerhaftes Abwehren problematisch werden?",
+     "hinweis": "2–3 Sätze",
+     "muster": "Starre Abwehr verfälscht die Wahrnehmung der Realität; Probleme werden nicht gelöst, es kommt zu unangemessenen Entscheidungen, und das Verdrängte wirkt weiter. Das kann zu psychischen Störungen führen.",
+     "kriterien": [
+      "Realitätsverzerrung",
+      "Folge benannt"
+     ]
+    }
+   ]
+  }
+ ]
+}

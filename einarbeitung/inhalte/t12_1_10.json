@@ -1,0 +1,134 @@
+{
+ "titel": "Vulnerabilität und Resilienz",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst, warum manche Menschen Krisen besser überstehen: **Risiko- und Schutzfaktoren**. Plane etwa 20 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Jana (9) lebt in einer Familie mit Streit und Alkoholproblemen. Trotzdem ist sie neugierig und gut in der Schule. Sie hat eine enge Beziehung zu ihrer Oma und eine gute Freundin."
+    },
+    {
+     "typ": "text",
+     "text": "**Resilienz** bedeutet psychische Widerstandskraft und bezeichnet die Fähigkeit, schwierige Lebenssituationen und belastende Ereignisse erfolgreich zu überstehen. **Vulnerabilität** ist die erhöhte psychische Verletzlichkeit."
+    },
+    {
+     "typ": "text",
+     "text": "**Risikofaktoren** erhöhen die Wahrscheinlichkeit zu erkranken (kindbezogen, umweltbezogen, Trauma). **Schutzfaktoren** ermöglichen trotz Risiken eine positive Entwicklung (personal und sozial)."
+    },
+    {
+     "typ": "text",
+     "text": "Resilienz ist keine feste Größe und lässt sich fördern."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Risikofaktoren erhöhen die Verletzbarkeit, Schutzfaktoren machen widerstandsfähig."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welcher ist ein sozialer Schutzfaktor?",
+     "optionen": [
+      "hohe Selbstwirksamkeit",
+      "sichere Bindung",
+      "Optimismus"
+     ],
+     "richtig": 1,
+     "erklaerung": "Sichere Bindung liegt im sozialen Umfeld."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Risiko oder Schutz?",
+     "kategorien": [
+      {
+       "name": "Risikofaktor",
+       "items": [
+        "Armut",
+        "chronischer Streit in der Familie",
+        "psychische Erkrankung der Eltern"
+       ]
+      },
+      {
+       "name": "Schutzfaktor",
+       "items": [
+        "Selbstwertgefühl",
+        "positive Freundschaften",
+        "stabile Beziehung zu Erwachsenen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne zu.",
+     "paare": [
+      [
+       "Resilienz",
+       "psychische Widerstandskraft"
+      ],
+      [
+       "Vulnerabilität",
+       "erhöhte Verletzlichkeit"
+      ],
+      [
+       "Schutzfaktoren",
+       "ermöglichen positive Entwicklung trotz Risiken"
+      ],
+      [
+       "Risikofaktoren",
+       "erhöhen die Wahrscheinlichkeit zu erkranken"
+      ]
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen stimmen?",
+     "aussagen": [
+      {
+       "text": "Resilienz ist unveränderlich angeboren.",
+       "richtig": false,
+       "erklaerung": "Sie verändert sich im Lauf des Lebens."
+      },
+      {
+       "text": "Autoritative Erziehung fördert Resilienz.",
+       "richtig": true,
+       "erklaerung": "Wärme und klare Regeln."
+      },
+      {
+       "text": "Selbstwirksamkeit ist die Überzeugung, Situationen bewältigen zu können.",
+       "richtig": true,
+       "erklaerung": "Ein Schutzfaktor."
+      },
+      {
+       "text": "Je mehr Risiken zusammenkommen, desto verletzlicher ist ein Kind.",
+       "richtig": true,
+       "erklaerung": "Risiken kumulieren."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in 3–4 Sätzen, warum Jana trotz hoher Belastung gut zurechtkommt.",
+     "hinweis": "3–4 Sätze",
+     "muster": "Jana hat Schutzfaktoren: Oma als feste Bezugsperson, gute Freundin, Lob in der Schule, Zuversicht und Neugier. Sie wirken wie ein Schutzschirm gegen Risiken (Streit, Alkohol, Armut).",
+     "kriterien": [
+      "Schutzfaktoren genannt",
+      "Risiken benannt",
+      "Zusammenhang"
+     ]
+    }
+   ]
+  }
+ ]
+}

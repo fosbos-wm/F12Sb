@@ -1,0 +1,135 @@
+{
+ "titel": "Freuds Persönlichkeitsmodell",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst Freuds **Bewusstseinsschichten** und die **drei Instanzen** kennen und wendest sie an. Plane etwa 25 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Mia findet in der Pause eine volle Geldbörse. Ein Teil von ihr denkt: „Das Geld könnte ich gut brauchen.“ Ein anderer: „Das gehört mir nicht.“ Nach kurzem Überlegen bringt sie die Börse ins Sekretariat."
+    },
+    {
+     "typ": "text",
+     "text": "Freud unterscheidet **bewusst**, **vorbewusst** und **unbewusst**. Das Unbewusste beeinflusst Erleben und Verhalten maßgeblich (Fehlleistungen, Träume)."
+    },
+    {
+     "typ": "text",
+     "text": "Die Persönlichkeit besteht aus **Es** (Lustprinzip, „Ich will!“), **Ich** (Realitätsprinzip, vermittelt) und **Über-Ich** (Moralitätsprinzip, „Du sollst!“)."
+    },
+    {
+     "typ": "text",
+     "text": "Ein **starkes Ich** gleicht die Ansprüche von Es, Über-Ich und Realität aus. Bei einem schwachen Ich siegt eine der Instanzen oder die Realität."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Es = will · Über-Ich = soll · Ich = vermittelt. Ich-Stärke = gelungener Ausgleich."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welche Instanz arbeitet nach dem Realitätsprinzip?",
+     "optionen": [
+      "Es",
+      "Ich",
+      "Über-Ich"
+     ],
+     "richtig": 1,
+     "erklaerung": "Das Ich prüft die Realität und vermittelt."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne zu.",
+     "paare": [
+      [
+       "Es",
+       "angeboren, drängt auf sofortige Befriedigung"
+      ],
+      [
+       "Ich",
+       "prüft die Realität und sucht Kompromisse"
+      ],
+      [
+       "Über-Ich",
+       "verinnerlichte Normen, Gewissen"
+      ]
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen den Instanzen zu.",
+     "kategorien": [
+      {
+       "name": "Es",
+       "items": [
+        "„Ich will das jetzt!“",
+        "Suche nach Lust"
+       ]
+      },
+      {
+       "name": "Ich",
+       "items": [
+        "„Ich warte, dann geht es ohne Ärger.“",
+        "plant und wägt ab"
+       ]
+      },
+      {
+       "name": "Über-Ich",
+       "items": [
+        "„Das gehört sich nicht.“",
+        "Schuldgefühle"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Ben (5) fragt vor jedem Spiel „Darf ich?“ und weint bei Fehlern. Seine Eltern sind sehr streng. Welche Aussagen passen?",
+     "aussagen": [
+      {
+       "text": "Das Über-Ich ist sehr stark ausgeprägt.",
+       "richtig": true,
+       "erklaerung": "Viele Gebote und Verbote werden verinnerlicht."
+      },
+      {
+       "text": "Das Es setzt sich im Übermaß durch.",
+       "richtig": false,
+       "erklaerung": "Es werden eher Wünsche unterdrückt."
+      },
+      {
+       "text": "Eine Form von Ich-Schwäche liegt vor.",
+       "richtig": true,
+       "erklaerung": "Das Über-Ich siegt über das Ich."
+      },
+      {
+       "text": "Autoritäre Erziehung kann das begünstigen.",
+       "richtig": true,
+       "erklaerung": "Viel Lenkung stärkt das Über-Ich."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beschreibe die Geldbörsen-Situation mit den drei Instanzen.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Das Es will das Geld; das Über-Ich verbietet Diebstahl und droht mit Schuldgefühlen; das Ich prüft die Realität (Folgen, Entdeckung) und entscheidet sich für den Kompromiss, die Börse abzugeben.",
+     "kriterien": [
+      "alle drei Instanzen genannt",
+      "Prinzip erkennbar",
+      "Ergebnis des Ich"
+     ]
+    }
+   ]
+  }
+ ]
+}

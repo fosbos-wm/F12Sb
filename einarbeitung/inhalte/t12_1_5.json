@@ -1,0 +1,112 @@
+{
+ "titel": "Kritische Würdigung der Psychoanalyse",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst, **Stärken und Schwächen** der Theorie Freuds zu beurteilen. Plane etwa 20 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Erzieherin sagt zu einer Mutter: „Das Trotzen Ihres Sohnes ist der Ödipuskonflikt, das ist normal.“ Die Mutter fragt: „Ist das bewiesen?“"
+    },
+    {
+     "typ": "text",
+     "text": "**Stärken:** umfassende Erklärung vieler Verhaltensweisen, Entdeckung der Bedeutung des Unbewussten und der frühen Kindheit, praktischer Nutzen in Beratung und Pädagogik."
+    },
+    {
+     "typ": "text",
+     "text": "**Schwächen:** vage Begriffe, kaum wissenschaftlich überprüfbar, Verallgemeinerung aus klinischen Fällen, kulturelle Abhängigkeit."
+    },
+    {
+     "typ": "text",
+     "text": "Empirie: Zusammenhänge zwischen oralen/analen Merkmalen sind teilweise belegt; der Primärnarzissmus gilt als widerlegt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Psychoanalyse = umfassend und wirkungsmächtig, aber schwer überprüfbar und kulturell geprägt."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Warum ist die Theorie schwer überprüfbar?",
+     "optionen": [
+      "Sie ist zu einfach",
+      "Jedes Ergebnis lässt sich als Bestätigung deuten",
+      "Es gibt keine Kinder zum Untersuchen"
+     ],
+     "richtig": 1,
+     "erklaerung": "Eine nicht widerlegbare Theorie ist schwer zu prüfen."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Stärke oder Kritik?",
+     "kategorien": [
+      {
+       "name": "Stärke",
+       "items": [
+        "betont frühe Kindheit",
+        "erklärt viele Verhaltensweisen",
+        "praktischer Nutzen in der Beratung"
+       ]
+      },
+      {
+       "name": "Kritik",
+       "items": [
+        "vage Begriffe",
+        "Aussagen aus Patientenfällen verallgemeinert",
+        "kulturelle Unterschiede bleiben unberücksichtigt"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Empirie stimmen?",
+     "aussagen": [
+      {
+       "text": "Orale Merkmale treten teilweise gemeinsam auf (z. B. Rauchen, Nägelkauen).",
+       "richtig": true,
+       "erklaerung": "Das ist teilweise belegt."
+      },
+      {
+       "text": "Der Primärnarzissmus ist bestätigt.",
+       "richtig": false,
+       "erklaerung": "Neugeborene reagieren aufmerksam auf Reize."
+      },
+      {
+       "text": "Die Entstehung durch Erziehung ist kaum belegt.",
+       "richtig": true,
+       "erklaerung": "Methodische Schwierigkeiten."
+      },
+      {
+       "text": "Freuds Phasenmodell ist insgesamt vollständig bestätigt.",
+       "richtig": false,
+       "erklaerung": "Nur einzelne Zusammenhänge sind teilweise belegt."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Antworte der Mutter in 3–4 Sätzen: Ist der Ödipuskonflikt bewiesen?",
+     "hinweis": "3–4 Sätze",
+     "muster": "Nein. Er ist eine Annahme Freuds, die empirisch nicht belegt und kulturübergreifend nicht bestätigt wurde. Die Theorie ist schwer überprüfbar, weil jedes Verhalten gedeutet werden kann. Trotz kann viele andere Ursachen haben, z. B. Autonomieentwicklung.",
+     "kriterien": [
+      "nicht bewiesen",
+      "Begründung",
+      "alternative Erklärung"
+     ]
+    }
+   ]
+  }
+ ]
+}

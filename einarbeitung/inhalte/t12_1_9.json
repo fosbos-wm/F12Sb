@@ -1,0 +1,132 @@
+{
+ "titel": "Lebensspanne und Entwicklungsaufgaben",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst die **Entwicklungspsychologie der Lebensspanne** und **Entwicklungsaufgaben** kennen. Plane etwa 20 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ayla (17) macht ihr Fachabitur und weiß nicht, was danach kommt. Sie verbringt viel Zeit mit ihrer Clique und streitet mit den Eltern über Ausgehzeiten."
+    },
+    {
+     "typ": "text",
+     "text": "Nach Baltes ist Entwicklung ein **lebenslanger Prozess** mit drei Merkmalen: Weiterentwicklung, Erhaltung/Wiedererlangung, Ausgleich von Verlusten."
+    },
+    {
+     "typ": "text",
+     "text": "Eine **Entwicklungsaufgabe** ist eine Anforderung, die in einem bestimmten Lebensabschnitt auftritt und in diesem Abschnitt bewältigt werden muss. Sie entsteht aus körperlicher Reife, Erwartungen der Gesellschaft und persönlichen Zielen."
+    },
+    {
+     "typ": "text",
+     "text": "Im Jugendalter u. a.: neue Körpergestalt akzeptieren, Geschlechtsrolle ausgestalten, Ablösung von den Eltern, Berufsvorbereitung, Lebensform, Wertesystem, Identität."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Entwicklung hört nie auf. Lebensübergänge (Transitionen) verlangen besondere Bewältigung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Ein Kletterer wechselt nach einer Verletzung zum Schwimmen. Welches Merkmal nach Baltes?",
+     "optionen": [
+      "Weiterentwicklung",
+      "Erhaltung",
+      "Ausgleich von Verlusten"
+     ],
+     "richtig": 2,
+     "erklaerung": "Das alte Niveau ist nicht mehr erreichbar."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne zu.",
+     "paare": [
+      [
+       "Weiterentwicklung",
+       "Zunahme von Fähigkeiten, z. B. Krabbeln lernen"
+      ],
+      [
+       "Erhaltung/Wiedererlangung",
+       "Niveau halten oder nach Verlust wiederherstellen"
+      ],
+      [
+       "Ausgleich von Verlusten",
+       "mit niedrigerem Niveau oder Alternative zufrieden"
+      ]
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Aus welcher Quelle entsteht die Aufgabe?",
+     "kategorien": [
+      {
+       "name": "körperliche Reife",
+       "items": [
+        "neue Körpergestalt akzeptieren"
+       ]
+      },
+      {
+       "name": "Erwartungen der Gesellschaft",
+       "items": [
+        "schulfähig sein mit 6 Jahren",
+        "Berufsausbildung abschließen"
+       ]
+      },
+      {
+       "name": "persönliche Ziele",
+       "items": [
+        "eine Familie gründen wollen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Peergroup stimmen?",
+     "aussagen": [
+      {
+       "text": "Sie wird im Jugendalter wichtiger.",
+       "richtig": true,
+       "erklaerung": "Gleichaltrige bieten neue Beziehungen."
+      },
+      {
+       "text": "Jugendliche lösen sich komplett von den Eltern.",
+       "richtig": false,
+       "erklaerung": "Die Beziehung verändert sich eher."
+      },
+      {
+       "text": "Sie unterstützt die Identitätsfindung.",
+       "richtig": true,
+       "erklaerung": "Rollen werden ausprobiert."
+      },
+      {
+       "text": "Peergroups sind für die Entwicklung bedeutungslos.",
+       "richtig": false,
+       "erklaerung": "Sie befriedigen eigene Bedürfnisse."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Nenne drei Entwicklungsaufgaben, die Ayla bewältigen muss, mit Begründung.",
+     "hinweis": "3–4 Sätze",
+     "muster": "Berufliche Laufbahn vorbereiten (Fachabitur, Entscheidung), emotionale Ablösung von den Eltern (Clique, Streit um Ausgehzeiten), Identität finden (Wer will ich sein?).",
+     "kriterien": [
+      "drei Aufgaben",
+      "Fallbezug"
+     ]
+    }
+   ]
+  }
+ ]
+}

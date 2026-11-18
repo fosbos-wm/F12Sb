@@ -1,0 +1,121 @@
+{
+ "titel": "Feinfühligkeit und gelungene Bindung",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst die **fünf Bestandteile der Feinfühligkeit** kennen und wendest sie an. Plane etwa 20 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Sven schaut Fußball, als sein Baby Mila im Nebenzimmer unruhig wird. Er gibt ihr das Fläschchen. Mila trinkt wenig und weint weiter: Sie wollte Nähe."
+    },
+    {
+     "typ": "text",
+     "text": "**Feinfühligkeit** bedeutet, die Signale des Kindes wahrzunehmen, richtig zu interpretieren und angemessen und sofort darauf zu reagieren."
+    },
+    {
+     "typ": "text",
+     "text": "Bestandteile: Signale wahrnehmen · richtig interpretieren · Bedürfnis erkennen · angemessen reagieren · prompt reagieren."
+    },
+    {
+     "typ": "text",
+     "text": "Feinfühligkeit ist kein Verwöhnen: Säuglinge brauchen **Ko-Regulation**, aus der sich Selbstregulation entwickelt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Feinfühligkeit ist der wichtigste Einflussfaktor für sichere Bindung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Warum soll die Reaktion prompt sein?",
+     "optionen": [
+      "Damit das Kind schneller einschläft",
+      "Damit das Kind Signal und Reaktion verknüpfen kann",
+      "Damit Eltern Zeit sparen"
+     ],
+     "richtig": 1,
+     "erklaerung": "So erlebt das Kind Wirksamkeit."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne zu.",
+     "paare": [
+      [
+       "Signale wahrnehmen",
+       "Das leise Quengeln überhaupt bemerken"
+      ],
+      [
+       "richtig interpretieren",
+       "Nicht nach eigenen Wünschen deuten"
+      ],
+      [
+       "Bedürfnis erkennen",
+       "Sich in das Kind hineinversetzen"
+      ],
+      [
+       "prompt reagieren",
+       "Innerhalb einer für das Kind erträglichen Zeit"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze.",
+     "text": "Ein Säugling kann seine Bedürfnisse nicht allein steuern. Er braucht {{Ko-Regulation}} durch die Bezugsperson; so lernt er später {{Selbstregulation}}.",
+     "woerter": [
+      "Ko-Regulation",
+      "Selbstregulation",
+      "Verwöhnung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Frau Kaya lässt ihr 3 Monate altes Baby nachts schreien, „damit es nicht verwöhnt wird“. Was stimmt?",
+     "aussagen": [
+      {
+       "text": "Das widerspricht der Feinfühligkeit.",
+       "richtig": true,
+       "erklaerung": "Signale werden nicht prompt beantwortet."
+      },
+      {
+       "text": "Ein Baby kann man durch prompte Reaktion verwöhnen.",
+       "richtig": false,
+       "erklaerung": "Das ist nicht der Fall."
+      },
+      {
+       "text": "Das Baby kann erleben, dass seine Signale nicht zählen.",
+       "richtig": true,
+       "erklaerung": "Das gefährdet Urvertrauen."
+      },
+      {
+       "text": "Feinfühligkeit fördert die Selbstständigkeit.",
+       "richtig": true,
+       "erklaerung": "Sichere Basis ermöglicht Erkunden."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Gib Frau Kaya drei Hinweise, wie sie nachts feinfühlig reagieren kann.",
+     "hinweis": "3–4 Sätze",
+     "muster": "Auf Weinen schnell reagieren und trösten; Nähe anbieten (Hautkontakt, Stimme); beruhigende, feste Rituale. Begründung: So lernt das Kind, dass es sich auf die Bezugsperson verlassen kann.",
+     "kriterien": [
+      "drei Hinweise",
+      "Begründung"
+     ]
+    }
+   ]
+  }
+ ]
+}
