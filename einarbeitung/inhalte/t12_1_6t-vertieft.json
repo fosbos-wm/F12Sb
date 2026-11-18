@@ -1,0 +1,116 @@
+{
+ "titel": "Bindungstypen (Vertiefung)",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst Aussagen zum Bindungstyp und zu Folgen unsicherer Bindung. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Vater sagt: „Mein Sohn weint nie, wenn ich gehe. Er ist besonders selbstständig.“ Die Erzieherin beobachtet, dass der Sohn bei Rückkehr des Vaters wegschaut und weiterspielt."
+    },
+    {
+     "typ": "text",
+     "text": "Kaum sichtbarer Kummer kann ein Zeichen für **Typ A** sein: Das Kind hat gelernt, Bindungsbedürfnisse zu unterdrücken. Selbstständigkeit zeigt sich eher bei sicher gebundenen Kindern, die erkunden **und** Nähe suchen können."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil nennt **Beobachtung, Deutung und Folgen** und bleibt vorsichtig: Typen sind Momentaufnahmen und können sich ändern."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Beobachtung · Deutung · Folge · Vorsicht."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Vater treffen zu?",
+     "aussagen": [
+      {
+       "text": "Seine Deutung („selbstständig“) ist voreilig.",
+       "richtig": true,
+       "erklaerung": "Auch Typ A möglich."
+      },
+      {
+       "text": "Kein Weinen beweist sichere Bindung.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Es lohnt, das Verhalten bei Wiedersehen zu beobachten.",
+       "richtig": true,
+       "erklaerung": "Wiedervereinigung."
+      },
+      {
+       "text": "Sicher gebundene Kinder zeigen nie Kummer.",
+       "richtig": false,
+       "erklaerung": "Sie zeigen Kummer."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Folge kann unsichere Bindung langfristig haben?",
+     "optionen": [
+      "Schwierigkeiten, Nähe und Vertrauen zuzulassen",
+      "automatisch psychische Störung",
+      "keine Folgen"
+     ],
+     "richtig": 0,
+     "erklaerung": "Erhöhtes Risiko, kein Automatismus."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Stabilität der Bindungstypen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Neue Erfahrungen können den Typ verändern.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Der Typ bleibt lebenslang gleich.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Feinfühlige Erzieherinnen können Unsicherheit ausgleichen.",
+       "richtig": true,
+       "erklaerung": "Sekundäre Bindung."
+      },
+      {
+       "text": "Der Typ ist erblich festgelegt.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile in 6–7 Sätzen, ob der Sohn „besonders selbstständig“ oder unsicher-vermeidend gebunden ist.",
+     "hinweis": "6–7 Sätze",
+     "muster": "Dafür, dass es Selbstständigkeit ist, spricht sein Spiel. Dagegen spricht das Wegschauen bei Rückkehr des Vaters, typisch für Typ A. Deshalb beurteile ich die Deutung als zu einseitig: Es ist eher unsicher-vermeidende Bindung, wobei weitere Beobachtungen nötig sind.",
+     "kriterien": [
+      "Pro",
+      "Contra",
+      "Urteil",
+      "Vorsicht"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_6"
+ ]
+}

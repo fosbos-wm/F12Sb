@@ -1935,6 +1935,182 @@
    "titel": "Rennen: Beurteilungsfragen",
    "url": "uebungsbausteine/station.html?s=lb1n-11-renne-vert",
    "ord": 35
+  },
+  {
+   "id": "info06t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Bindung: Begriff, Phasen, Typen",
+   "url": "infotexte/LB1-06_Bindung-Begriff-Phasen-und-Typen.pdf",
+   "ord": 6
+  },
+  {
+   "id": "ueb06bt",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung1",
+   "titel": "Basis: Bindung Begriff Phasen und Typen",
+   "url": "aufgaben/LB1-06_Basis_Bindung-Begriff-Phasen-und-Typen.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb06pt",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Plus: Bindung Begriff Phasen und Typen",
+   "url": "aufgaben/LB1-06_Plus_Bindung-Begriff-Phasen-und-Typen.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb06vt",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Vertieft: Bindung Begriff Phasen und Typen",
+   "url": "aufgaben/LB1-06_Vertieft_Bindung-Begriff-Phasen-und-Typen.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubn06l1t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-zuord-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn06l2t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung1",
+   "titel": "Memory: Begriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-memor-leic",
+   "ord": 31
+  },
+  {
+   "id": "ubn06l3t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-lueck-leic",
+   "ord": 32
+  },
+  {
+   "id": "ubn06l4t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung1",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-block-leic",
+   "ord": 33
+  },
+  {
+   "id": "ubn06l5t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung1",
+   "titel": "Theorievergleich: Beispiele sortieren",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-vergl-leic",
+   "ord": 34
+  },
+  {
+   "id": "ubn06l6t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-renne-leic",
+   "ord": 35
+  },
+  {
+   "id": "ubn06m1t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-zuord-mitt",
+   "ord": 30
+  },
+  {
+   "id": "ubn06m2t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Memory: Beispiele und Begriffe",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-memor-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn06m3t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Lückentext: Fall anwenden",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-lueck-mitt",
+   "ord": 32
+  },
+  {
+   "id": "ubn06m4t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Argumente sortieren",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-block-mitt",
+   "ord": 33
+  },
+  {
+   "id": "ubn06m5t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-kprim-mitt",
+   "ord": 34
+  },
+  {
+   "id": "ubn06m6t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung2",
+   "titel": "Rennen: Anwendungsfragen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-renne-mitt",
+   "ord": 35
+  },
+  {
+   "id": "ubn06v1t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-kprim-vert",
+   "ord": 30
+  },
+  {
+   "id": "ubn06v2t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Zuordnung: Aussagen beurteilen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-zuord-vert",
+   "ord": 31
+  },
+  {
+   "id": "ubn06v3t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Memory: Aussagen und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-memor-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn06v4t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-lueck-vert",
+   "ord": 33
+  },
+  {
+   "id": "ubn06v5t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-vergl-vert",
+   "ord": 34
+  },
+  {
+   "id": "ubn06v6t",
+   "wocheId": "t12_1_6t",
+   "kategorie": "vertiefung3",
+   "titel": "Rennen: Beurteilungsfragen",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-renne-vert",
+   "ord": 35
   }
  ]
 }

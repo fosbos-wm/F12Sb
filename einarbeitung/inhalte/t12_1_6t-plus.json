@@ -1,0 +1,118 @@
+{
+ "titel": "Bindungstypen (Plus)",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du bestimmst Bindungstypen und Phasen an neuen Beobachtungen. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In der Fremden Situation wird Emre (12 Monate) von seiner Mutter verlassen. Er weint, krabbelt zur Tür und lässt sich von der Mutter bei der Rückkehr schnell trösten. Lia (12 Monate) spielt weiter und beachtet ihre Mutter bei der Rückkehr kaum. Noah (12 Monate) schreit und stößt die Mutter zugleich weg."
+    },
+    {
+     "typ": "text",
+     "text": "Entscheidend ist das Verhalten bei der **Wiedervereinigung**: Typ **B** (sicher) zeigt Kummer und lässt sich trösten, Typ **A** (unsicher-vermeidend) zeigt kaum Kummer und meidet die Bindungsperson, Typ **C** (unsicher-ambivalent) zeigt Klammern und Abwehr zugleich."
+    },
+    {
+     "typ": "text",
+     "text": "Mit 12 Monaten befinden sich die Kinder in der Phase der **eigentlichen Bindung** (Lokomotion, Trennungsangst)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Bindungstyp = Muster bei Trennung und Wiedersehen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Kinder dem Bindungstyp zu.",
+     "paare": [
+      [
+       "Emre",
+       "B – sicher"
+      ],
+      [
+       "Lia",
+       "A – unsicher-vermeidend"
+      ],
+      [
+       "Noah",
+       "C – unsicher-ambivalent"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Bindungsphase passt zum Alter von 12 Monaten?",
+     "optionen": [
+      "Vor-Bindung",
+      "eigentliche Bindung",
+      "zielkorrigierte Partnerschaft"
+     ],
+     "richtig": 1,
+     "erklaerung": "Ab ca. 7 Monaten."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Emre treffen zu?",
+     "aussagen": [
+      {
+       "text": "Er nutzt die Mutter als sicheren Hafen.",
+       "richtig": true,
+       "erklaerung": "Er sucht Trost."
+      },
+      {
+       "text": "Er zeigt Typ A.",
+       "richtig": false,
+       "erklaerung": "Typ B."
+      },
+      {
+       "text": "Seine Mutter reagiert vermutlich meist feinfühlig.",
+       "richtig": true,
+       "erklaerung": "Typisch."
+      },
+      {
+       "text": "Bindungsverhalten bedeutet, dass er nicht erkundet.",
+       "richtig": false,
+       "erklaerung": "Beides wechselt."
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze.",
+     "text": "Bei Gefahr zeigt ein Kind {{Bindungsverhalten}}, bei Wohlbefinden {{Explorationsverhalten}}. Beides im Gleichgewicht nennt man Bindungs-Explorations-{{Balance}}.",
+     "woerter": [
+      "Bindungsverhalten",
+      "Explorationsverhalten",
+      "Balance",
+      "Fixierung"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in 4–5 Sätzen, warum Lias Verhalten nicht bedeutet, dass sie keine Bindung hat.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Lias Verhalten zeigt eine unsicher-vermeidende Bindung. Sie hat eine Bindung, unterdrückt aber ihre Bindungsbedürfnisse, vermutlich weil die Mutter Nähe oft zurückweist. Kaum Kummer heißt nicht, dass sie keinen Stress empfindet.",
+     "kriterien": [
+      "Typ A",
+      "Begründung",
+      "Fallbezug"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_6"
+ ]
+}

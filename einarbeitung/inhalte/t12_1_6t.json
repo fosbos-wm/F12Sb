@@ -1,0 +1,134 @@
+{
+ "titel": "Bindungstypen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du lernst den **Bindungsbegriff**, die **vier Phasen** und die **Bindungstypen** nach Ainsworth kennen. Plane etwa 25 Minuten ein.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In der Krippe beginnen vier Kinder die Eingewöhnung. Anna winkt kurz und spielt weiter, Benjamin weint, lässt sich trösten und begrüßt seine Mutter freudig, Christine klammert und wehrt sich zugleich, Daniel verhält sich widersprüchlich."
+    },
+    {
+     "typ": "text",
+     "text": "**Bindung** ist die besondere, enge, relativ dauerhafte und stark emotionale Beziehung zwischen einem Kind und seiner Bindungsperson. Sie ist **sicherer Hafen** und **Sicherheitsbasis**."
+    },
+    {
+     "typ": "text",
+     "text": "Phasen: Vor-Bindung (0–2 Monate), beginnende Bindung (ca. 3–6), eigentliche Bindung (ab ca. 7), zielkorrigierte Partnerschaft (ab ca. 24 Monate)."
+    },
+    {
+     "typ": "text",
+     "text": "Typen: **B** sicher, **A** unsicher-vermeidend, **C** unsicher-ambivalent, **D** desorganisiert. Entscheidend ist das Verhalten bei der Wiedervereinigung."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Sichere Bindung ermöglicht freies Erkunden (Bindungs-Explorations-Balance)."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wer ist Bindungsperson?",
+     "optionen": [
+      "jede Person, die das Kind ablenkt",
+      "eine Person, die trösten und beruhigen kann und mit der das Kind eine enge Beziehung hat",
+      "nur die leibliche Mutter"
+     ],
+     "richtig": 1,
+     "erklaerung": "Bindung entsteht durch Vertrautheit, nicht durch Herkunft."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Typ zu.",
+     "paare": [
+      [
+       "B – sicher",
+       "Kummer bei Trennung, freudige Begrüßung, schnell getröstet"
+      ],
+      [
+       "A – unsicher-vermeidend",
+       "kaum Kummer, ignoriert die Mutter beim Wiedersehen"
+      ],
+      [
+       "C – unsicher-ambivalent",
+       "klammert und stößt zugleich weg"
+      ],
+      [
+       "D – desorganisiert",
+       "widersprüchlich, erstarrt, Angst vor der Bindungsperson"
+      ]
+     ]
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Phase zu.",
+     "paare": [
+      [
+       "Vor-Bindung",
+       "0–2 Monate, Signale an alle Menschen"
+      ],
+      [
+       "beginnende Bindung",
+       "3–6 Monate, vertraute Personen werden unterschieden"
+      ],
+      [
+       "eigentliche Bindung",
+       "ab ca. 7 Monaten, aktive Nähe, Trennungsangst"
+      ],
+      [
+       "zielkorrigierte Partnerschaft",
+       "ab ca. 24 Monaten, Verhandeln mit Sprache"
+      ]
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Christine klammert und wehrt die Mutter zugleich ab. Welche Aussagen passen?",
+     "aussagen": [
+      {
+       "text": "Typ C (unsicher-ambivalent).",
+       "richtig": true,
+       "erklaerung": "Klammern und Wegstoßen."
+      },
+      {
+       "text": "Typ B (sicher).",
+       "richtig": false,
+       "erklaerung": "Sicher gebundene Kinder beruhigen sich schnell."
+      },
+      {
+       "text": "Die Mutter verhält sich oft unberechenbar.",
+       "richtig": true,
+       "erklaerung": "Mal feinfühlig, mal ablehnend."
+      },
+      {
+       "text": "Der Typ ist unveränderlich.",
+       "richtig": false,
+       "erklaerung": "Neue Erfahrungen können ihn verändern."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in 3–4 Sätzen die Bindungs-Explorations-Balance.",
+     "hinweis": "3–4 Sätze",
+     "muster": "Bei Sicherheit zeigt das Kind Explorationsverhalten und erkundet die Umwelt; bei Angst oder Belastung überwiegt das Bindungsverhalten und es sucht Nähe. Eine sichere Bindung ermöglicht freies Erkunden, eine unsichere hemmt es.",
+     "kriterien": [
+      "Bindungs- und Explorationsverhalten",
+      "Situationen",
+      "Wirkung"
+     ]
+    }
+   ]
+  }
+ ]
+}
