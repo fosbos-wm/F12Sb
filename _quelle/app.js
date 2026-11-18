@@ -5652,7 +5652,7 @@ function ppmMaterialBox(m){
 function ppmKopf(m,unter,extraBtn){
  const T=PPM_TYPEN[m.modul],c=ppmFarbe(m),w=ppmWochen(m);
  const zeit=w.length?`${fmtKurz(w[0].start)}–${fmtKurz(w[w.length-1].end)}`:"";
- return`<div class="kw-links"><button class="secondary" onclick="go('start')">← Individueller Lernpfad</button><button class="secondary" data-ppm="plan">← Unterricht</button></div>
+ return`<div class="kw-links"><button class="secondary" onclick="go('start')">← Meine Lernpfade</button><button class="secondary" data-ppm="plan">← Unterricht</button></div>
  ${PPM_CSS}
  <div class="ppm-box ppm-kopf kw-kopf" style="--c:${c};--t:${c}"><div class="kicker">${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit}</div>
   <h1>${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
@@ -11281,7 +11281,7 @@ async function renderWhiteboardBoard(){
  return`${WB_CSS}
  <div class="wb-seite">
   <div class="wb-kopf">
-   <button class="secondary"type="button"id="wbZurueck">← ${wbVonKw?"Individueller Lernpfad":(board.art==="tafel"?"Tafeln":"Whiteboards")}</button>${wbVonKw&&activeKwThema?`<button class="secondary"type="button"id="wbZurueckThema">← Thema</button>`:""}
+   <button class="secondary"type="button"id="wbZurueck">← ${wbVonKw?"Meine Lernpfade":(board.art==="tafel"?"Tafeln":"Whiteboards")}</button>${wbVonKw&&activeKwThema?`<button class="secondary"type="button"id="wbZurueckThema">← Thema</button>`:""}
    <div><h1>${esc(board.title||"Whiteboard")}${board.art==="tafel"?'<span class="wb-art-chip">Tafel</span>':""}</h1><small>${esc(board.description||"")||(board.art==="tafel"?"Tafel für den Unterricht":"Gemeinsame Arbeitsfläche")}</small></div>
    ${kann?`<button class="secondary"type="button"id="wbUmbenennen">Umbenennen</button>`:""}
    <button class="secondary"type="button"id="wbSchutz"hidden></button>
@@ -14994,7 +14994,7 @@ function essayCaseTileHTML(c){
  </div>`;
 }
 
-async function renderFachaufsatzUebersicht(){const e=await getEssayCases(),t=essayLernbereiche.map(([i,r])=>({code:i,label:r,cases:e.filter(a=>a.lernbereich===i)})).filter(i=>i.cases.length),n=e.filter(i=>!i.lernbereich||!essayLernbereiche.some(r=>r[0]===i.lernbereich));return`${pageHead("SELBSTST\xC4NDIG LERNEN","Fachaufsatztraining","Fachaufsatz in P\xE4dagogik/Psychologie an echten Pr\xFCfungsaufgaben \xFCben.",`<button class="secondary"onclick="go('start')">\u2190 Individueller Lernpfad</button><button class="secondary"onclick="go('lernwerkstatt')">\u2190 Lernwerkstatt</button>
+async function renderFachaufsatzUebersicht(){const e=await getEssayCases(),t=essayLernbereiche.map(([i,r])=>({code:i,label:r,cases:e.filter(a=>a.lernbereich===i)})).filter(i=>i.cases.length),n=e.filter(i=>!i.lernbereich||!essayLernbereiche.some(r=>r[0]===i.lernbereich));return`${pageHead("SELBSTST\xC4NDIG LERNEN","Fachaufsatztraining","Fachaufsatz in P\xE4dagogik/Psychologie an echten Pr\xFCfungsaufgaben \xFCben.",`<button class="secondary"onclick="go('start')">\u2190 Meine Lernpfade</button><button class="secondary"onclick="go('lernwerkstatt')">\u2190 Lernwerkstatt</button>
  ${isTeacher()?'<button class="primary"onclick="openEssayCaseForm()">\uFF0B Neue Aufgabe</button>':""}`)}
  <div class="notice"><strong>So funktioniert's:</strong><p style="margin-bottom:0">Jede Aufgabe basiert auf einer echten alten Pr\xFCfungs- oder Schulaufgabe: 1. Aufgabenstellung lesen, 2. Theorie zur Beantwortung lesen, 3. im Antwortraum deinen Fachaufsatz schreiben, danach die Erfolgskriterien nach dem echten Bewertungsbogen selbst ankreuzen, optional per fobizz-Assistent eine schnelle KI-Vorkorrektur holen und bei Bedarf zur Lehrkraft zur Korrektur einreichen. Deine \xDCbungstexte sind privat \u2013 nur du selbst und Lehrkr\xE4fte sehen sie, nicht deine Mitsch\xFCler:innen.</p></div>
  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
@@ -20632,7 +20632,7 @@ const KW_PHASEN=[1,2,3,4].map(n=>{
   startSw:pp12Montag(start),notwendigeWochen:[],projektWocheId:"team_lb"+n,meilensteine:[]};
 });
 const KW_FARBEN={1:{c:"#2494A8",bg:"#DDF1F5",t:"#176A7A"},2:{c:"#8460B8",bg:"#EEE8F7",t:"#5F3F94"},3:{c:"#5FA33E",bg:"#E6F3DC",t:"#3F7226"},4:{c:"#E08A2E",bg:"#FCEBD6",t:"#9A5410"}};
-// ---- Schüleransicht für Lehrkräfte (Individueller Lernpfad, Themen, Projekte) ----
+// ---- Schüleransicht für Lehrkräfte (Lernpfad, Themen, Projekte) ----
 // Solange aktiv, zeigen alle Lernpfad-Seiten genau das, was Schüler:innen sehen.
 let KW_SCHUELER=false;
 function kwLehrer(){return isTeacher()&&!KW_SCHUELER}
@@ -20663,7 +20663,7 @@ const KW_KAT=[
 const KW_BAUSTEINE={selbstlern:["Selbstlernkurs","slk"],stunde:["Deeper-Learning-Einheit","std"],rallye:["Lernrallye","ral"],kprim:["KPrim-Test / Check-out","chk"],apt:["Fachaufsatztraining","ueb"],einfuehrung:["Einführung","slk"]};
 function kwKurz(e){return e.kurz||e.thema}
 function kwThemenVonPhase(ph){return KW_THEMEN.filter(e=>e.phase===ph.id)}
-// Trainings nach einer Leistungserhebung: je Lernbereich eine Zeile unter den Themen der Individueller Lernpfad (Kurzarbeit, Schulaufgabe).
+// Trainings nach einer Leistungserhebung: je Lernbereich eine Zeile unter den Themen der Meine Lernpfade (Kurzarbeit, Schulaufgabe).
 // Sie sind keine Lehrplan-Themen und zählen nicht in Fortschritt und Themenzahl, nehmen aber Bausteine (Selbstlernkurse) auf.
 const KW_LEISTUNGEN=[{id:"ln-ka1",phase:"lb1",lbNum:1,lb:"LB 1",nr:"KA 1",thema:"1.Kurzarbeit",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der R\xFCckgabe gezielt deine Schw\xE4chen \xFCbst."},{id:"ln-sa1",phase:"lb2",lbNum:2,lb:"LB 2",nr:"SA 1",thema:"1.Schulaufgabe",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der R\xFCckgabe gezielt deine Schw\xE4chen \xFCbst."},{id:"ln-ka2",phase:"lb3",lbNum:3,lb:"LB 3",nr:"KA 2",thema:"2.Kurzarbeit",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der R\xFCckgabe gezielt deine Schw\xE4chen \xFCbst."},{id:"ln-sa2",phase:"lb4",lbNum:4,lb:"LB 4",nr:"SA 2",thema:"2.Schulaufgabe",typ:"training",leistung:true,planung:"Hier findest du Trainings, mit denen du nach der R\xFCckgabe gezielt deine Schw\xE4chen \xFCbst."}];
 async function kwTrainingWahl(e){const ph=KW_PHASEN.find(p=>p.id===e.phase)||KW_PHASEN[0],infos=await Promise.all(["fa05","fa06","fa04","fa07","f12-mp-theorie","f12-mp-struktur","f12-mp-transfer"].map(x=>einarbeitungInfo(x).catch(()=>null))),da=new Set(kwModuleThema(e.id).map(m=>m.kursId)),T=["fa05","fa06","fa04","fa07","f12-mp-theorie","f12-mp-struktur","f12-mp-transfer"],z=T.map((x,i)=>{const n=infos[i];if(!n||n.entwurf)return"";const s=da.has("ea:"+x);return`<label style="display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-top:8px;cursor:${s?"default":"pointer"}"><input type="checkbox" class="kwTrCb" value="${x}"${s?" checked disabled":""}><span><b>${esc(n.titel)}</b>${/^fa0/.test(x)||s?'<br><small style="color:var(--muted)">'+((/^fa0/.test(x)?{fa04:"Fall Tim",fa05:"Fall Tim",fa06:"Fall Tim",fa07:"Fall Tim"}[x]:"")||"")+((/^fa0/.test(x)&&s)?" \xB7 ":"")+(s?"schon eingestellt":"")+"</small>":""}</span></label>`}).join("");modal(`<button class="modal-close" onclick="closeModal()">\xD7</button>
@@ -20680,7 +20680,7 @@ function kwLeistungRow(ph){
 function kwPhase(lbNum){return KW_PHASEN.find(p=>p.lbNum===Number(lbNum))||null}
 function kwFarbe(lbNum){return KW_FARBEN[lbNum]||KW_FARBEN[1]}
 async function kwLaden(){
- // Kurz zwischengespeichert (30 s): Wechsel zwischen Individueller Lernpfad und Themen lädt nicht jedes Mal alles neu.
+ // Kurz zwischengespeichert (30 s): Wechsel zwischen Meine Lernpfade und Themen lädt nicht jedes Mal alles neu.
  // Jeder Schreibzugriff (window.__fsDirty) und jeder Benutzerwechsel macht den Zwischenspeicher ungültig.
  const uid=currentUser?currentUser.uid:"";
  if(KW.geladen&&KW.uid===uid&&Date.now()-KW.geladen<30000&&KW.geladen>(window.__fsDirty||0))return;
@@ -20737,7 +20737,7 @@ async function renderKwProjekt(){
  await kwLaden();
  const ph=kwPhase(activeKwLb);if(!ph)return await renderKachelwand();
  const F=kwFarbe(ph.lbNum),lehrer=kwLehrer();
- if(!lehrer&&!lxPhaseSichtbar(ph))return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">${kwSchuelerBanner()}<button class="secondary" data-kw="wand">← Individueller Lernpfad</button><header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)}</small><h1>Projekt</h1><p>Das Projekt <b>folgt</b> und wird zwei Wochen vorher freigeschaltet.</p></header></div>${footer()}`;
+ if(!lehrer&&!lxPhaseSichtbar(ph))return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">${kwSchuelerBanner()}<button class="secondary" data-kw="wand">← Meine Lernpfade</button><header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)}</small><h1>Projekt</h1><p>Das Projekt <b>folgt</b> und wird zwei Wochen vorher freigeschaltet.</p></header></div>${footer()}`;
  const pm=PPM.liste.filter(m=>(m.modul==="projekt"||m.modul==="experiment")&&Number(m.lb)===ph.lbNum);
  const projM=pm.find(m=>m.modul==="projekt"&&!m.projektId);
  const dateien=[];
@@ -20750,7 +20750,7 @@ async function renderKwProjekt(){
  const start=ph.einstieg?`<button class="primary" data-kw="exp">Interaktive Stunde „Das Experiment“ starten</button>`:`<button class="primary" data-kw="projektstart" data-lb="${ph.lbNum}">${lehrer?"Projektseite öffnen":"Projekt starten"}</button>`;
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
   ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">← Individueller Lernpfad</button>
+  <button class="secondary" data-kw="wand">← Meine Lernpfade</button>
   <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.projektStart,ph.projektEnde)||"")} · ${fmtKurz(ph.projektStart)}–${fmtKurz(ph.projektEnde)}</small><h1>${esc((projM&&projM.titel)||ph.titel)}</h1><p>${esc(ph.lbTitel)} · Projekt</p><div class="kw-aktionen">${start}</div></header>
   ${auftrag}${ms}
   <div class="kw-card"><h3>Dateien zum Projekt</h3><div class="kw-dateien">${dl}</div></div>
@@ -20914,7 +20914,7 @@ function r_rE(e,t,n,i,r){const a=kwPhase(e),s=kwFarbe(e);if(!a)return"";const l=
   <div class="ls-sek"><h4>Check-outs, K-Prim-Tests und digitale Tests</h4>${f||'<div class="kw-leer">Zu diesem Lernbereich gibt es noch keinen Nachweis.</div>'}</div></details>`}
 async function renderKwCheckouts(){await kwLaden(),await ltLaden();const e=KW.co,t=isTeacher(),n=await lsCheckInsLaden();LT.ci=n;let i=[];if(t)try{i=(await getDocs(collection(db,"checkoutAbgaben"))).docs.map(d=>d.data())}catch{}LT.abgaben=i;let r=await ubLaden(),a=[];if(LT.ub=r,t){try{a=(await getDocs(collection(db,"lehrplanFortschritt"))).docs.map(d=>d.data())}catch{}}if(LT.fr={},t){const d=[1,2,3,4].flatMap(p=>lsThemenLb(p).map(h=>h.id));await Promise.all(d.map(async p=>{LT.fr[p]=await getBasischeckFragen(p)}))}const s=[1,2,3,4].map(d=>{const p=kwPhase(d),h=kwFarbe(d);return p?`<a class="ls-nav" href="#" data-ls="sprung" data-lb="${d}" style="--c:${h.c};--bg:${h.bg};--t:${h.t}"><small>LB ${d}</small><b>${esc(p.lbTitel)}</b></a>`:""}).join(""),l=[1,2,3,4].map(d=>r_rE(d,n,e,i,t)).join(""),c=e?`<details class="kw-card ls-verw"><summary><b>Check-outs verwalten und Kurzarbeit-Ersatz</b> <small>${t?"neuen Check-out anlegen, Einstellungen, Klassen\xFCbersicht":"deine Auswahl f\xFCr den Kurzarbeit-Ersatz"}</small></summary>${checkoutSektionHTML(e)}</details>`:"";return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
   ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">\u2190 Individueller Lernpfad</button>
+  <button class="secondary" data-kw="wand">\u2190 Meine Lernpfade</button>
   <header class="kw-kopf"><small>LERNST\xC4NDE</small><h1>${t?"Lernst\xE4nde der Klasse":"Meine Lernst\xE4nde"}</h1><p>Geordnet nach Lernbereichen: Check-ins je Thema, Check-outs, K-Prim-Tests und digitale Tests. Hier liegt auch der Alternative Leistungsnachweis (Kurzarbeit-Ersatz).</p><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung</button>${t?'<button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" data-ls="testneu">Neuen Test anlegen</button><button class="secondary" data-ls="kilink">KI-Assistent-Link festlegen</button>':""}</div></header>
   ${e?checkoutLiveBannerHTML(e):""}
   <div class="ls-navwrap">${s}</div>
@@ -21018,12 +21018,12 @@ document.addEventListener("click",async ev=>{
 /* ------------------------------------------------ Lehrkräfte: Haben alle ordentlich abgeschlossen? */
 async function renderKwFortschritt(){if(!isTeacher())return await renderKachelwand();await kwLaden();const[e,t,n,i,r]=await Promise.all([getDocs(collection(db,"users")),getDocs(collection(db,"ppKursFortschritt")).catch(()=>({docs:[]})),getDocs(collection(db,"ppRallyeStand")).catch(()=>({docs:[]})),getDocs(collection(db,"ppStundenAntworten")).catch(()=>({docs:[]})),getDocs(collection(db,"lehrplanFortschritt")).catch(()=>({docs:[]}))]),a=e.docs.map(y=>({uid:y.id,...y.data()})).filter(y=>y.status==="approved"&&istKlasse12Sb(y)).sort((y,w)=>anzeigeName(y).localeCompare(anzeigeName(w),"de")),s={},l={},c={},d={};t.docs.forEach(y=>{const w=y.data();s[w.modulId+"_"+w.uid]=w}),n.docs.forEach(y=>{const w=y.data();l[w.modulId+"_"+w.uid]=w}),i.docs.forEach(y=>{const w=y.data();c[w.modulId+"_"+w.uid]=w}),r.docs.forEach(y=>{d[y.id]=y.data()});const p=PPM.liste.filter(y=>["selbstlern","rallye","einfuehrung","apt","stunde"].includes(y.modul)).sort((y,w)=>Number(y.lb)-Number(w.lb)||ppmSwIndex(y.start)-ppmSwIndex(w.start)),h=(y,w)=>{try{if(y.modul==="selbstlern"&&String(y.kursId||"").startsWith("ea:")){const v=d[w.uid+"_"+y.kursId.slice(3)]||{},S=v.einarbeitungAufgaben;return v.einarbeitungAbgeschlossen?(S&&S.gesamt?S.richtig/S.gesamt:1)<.6?{t:`fertig, aber nur ${S.richtig}/${S.gesamt} richtig`,k:"flach"}:{t:S&&S.gesamt?`fertig \xB7 ${S.richtig}/${S.gesamt}`:"fertig",k:"ok"}:S?{t:`begonnen \xB7 ${S.richtig}/${S.gesamt}`,k:"teil"}:{t:"offen",k:"offen"}}if(y.modul==="selbstlern"){const v=ppmKursSchritte(y).filter(_=>_.typ!=="abschluss"),S=s[y.id+"_"+w.uid],A=S?v.filter(_=>S.erledigt&&S.erledigt[_.id]).length:0;return A===v.length&&v.length?{t:"fertig",k:"ok"}:A?{t:`${A}/${v.length} Schritte`,k:"teil"}:{t:"offen",k:"offen"}}if(y.modul==="rallye"){const v=l[y.id+"_"+w.uid]||{},S=(y.stationen||[]).length,A=Object.keys(v.erg||{}).length;if(!A)return{t:"offen",k:"offen"};const _=Object.values(v.erg||{}).filter(Q=>Q&&(Q.richtig===!0||Q.ok===!0)).length;return A>=S&&S?{t:`alle ${S} Stationen`,k:"ok"}:{t:`${A}/${S} Stationen`,k:"teil"}}if(y.modul==="einfuehrung"){const v=y.kurse||[];if(!v.length)return{t:"\u2013",k:"offen"};const S=v.filter(A=>(d[w.uid+"_"+A]||{}).einarbeitungAbgeschlossen).length;return S===v.length?{t:"fertig",k:"ok"}:S?{t:`${S}/${v.length} Kurse`,k:"teil"}:{t:"offen",k:"offen"}}if(y.modul==="apt"){const v=c[y.id+"_"+w.uid]||{};return v.aptBewertung?{t:"verglichen",k:"ok"}:v.aptAbgegeben?{t:"abgegeben",k:"teil"}:v.aptAntwort?{t:"in Arbeit",k:"teil"}:{t:"offen",k:"offen"}}if(y.modul==="stunde"){const v=c[y.id+"_"+w.uid];return v&&v.fertig?{t:"fertig",k:"ok"}:v?{t:"in Arbeit",k:"teil"}:{t:"offen",k:"offen"}}}catch{}return{t:"\u2013",k:"offen"}},k=p.map(y=>{const w=KW_BAUSTEINE[y.modul]||["",""];return`<th><span class="chip ${w[1]}">${esc(w[0])}</span><br><small>LB ${esc(y.lb)} \xB7 ${esc(y.titel||"")}</small></th>`}).join(""),f=a.map(y=>`<tr><th scope="row">${esc(anzeigeName(y))}</th>${p.map(w=>{const v=h(w,y);return`<td class="kw-z ${v.k}">${esc(v.t)}</td>`}).join("")}</tr>`).join("");return`<div class="kw kw-seite" style="--c:#3A8FD4;--bg:#E3F0FA;--t:#1F6FB2">
   ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">\u2190 Individueller Lernpfad</button>
+  <button class="secondary" data-kw="wand">\u2190 Meine Lernpfade</button>
   <header class="kw-kopf"><small>F\xDCR LEHRKR\xC4FTE</small><h1>Erledigt? Selbstlernkurse und Lernrallyes</h1><p>Gr\xFCn: ordentlich abgeschlossen. Orange: begonnen oder nur fl\xFCchtig bearbeitet (fertig, aber weniger als 60 % richtig). Grau: noch offen. Lehrkr\xE4fte-Konten erscheinen hier nicht.</p></header>
   <div class="kw-card"><div class="kw-tabwrap">${p.length&&a.length?`<table class="kw-tab"><thead><tr><th>Pseudonym</th>${k}</tr></thead><tbody>${f}</tbody></table>`:'<div class="kw-leer">Noch keine passenden Bausteine oder freigeschaltete Sch\xFCler:innen.</div>'}</div></div>
   <div class="kw-card"><h3>Weitere Stellen</h3><div class="kw-aktionen"><button class="secondary" onclick="go('lernstand')">Lernstandsmessung (alle Aufgaben, Versuche)</button><button class="secondary" data-kw="checkouts">Check-out-Ergebnisse</button></div></div>
  </div>${footer()}`}
-async function kwFaUebungOeffnen(e){const t=await faLaden(),n=t.find(a=>a.id===e);if(!n){toast("Diese \xDCbung gibt es nicht mehr.");return}const i=await ppmFachaufsatzSeite({lb:n.lb,themen:[],uebIds:[e]},{karten:!0}),r=kwThemaById(n.thema);modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kw-links"style="margin:0 0 8px"><button class="secondary" onclick="closeModal();go('start')">\u2190 Individueller Lernpfad</button></div><div class="kicker">\xDCBUNGSAUFGABE \xB7 LB ${n.lb}</div><h2>${esc(n.titel)}</h2><p style="color:var(--muted);margin:0 0 6px">${esc(r?kwKurz(r):n.zusatz||"")} </p>${i.replace(/<details class="fa-ue/,'<details open class="fa-ue')}<div class="form-actions"><button class="secondary" onclick="closeModal()">Schlie\xDFen</button></div>`)}
+async function kwFaUebungOeffnen(e){const t=await faLaden(),n=t.find(a=>a.id===e);if(!n){toast("Diese \xDCbung gibt es nicht mehr.");return}const i=await ppmFachaufsatzSeite({lb:n.lb,themen:[],uebIds:[e]},{karten:!0}),r=kwThemaById(n.thema);modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kw-links"style="margin:0 0 8px"><button class="secondary" onclick="closeModal();go('start')">\u2190 Meine Lernpfade</button></div><div class="kicker">\xDCBUNGSAUFGABE \xB7 LB ${n.lb}</div><h2>${esc(n.titel)}</h2><p style="color:var(--muted);margin:0 0 6px">${esc(r?kwKurz(r):n.zusatz||"")} </p>${i.replace(/<details class="fa-ue/,'<details open class="fa-ue')}<div class="form-actions"><button class="secondary" onclick="closeModal()">Schlie\xDFen</button></div>`)}
 window.kwFaUebungOeffnen=kwFaUebungOeffnen;
 const KW_KK={t12_1_1:"Entwicklung: Anlage, Umwelt, Selbststeuerung",t12_1_2:"Psychoanalyse: Trieblehre und Instanzen",t12_1_3:"Psychoanalyse: Angst, Abwehr und Entwicklung",t12_1_4:"Psychoanalyse: Angst, Abwehr und Entwicklung",t12_1_10:"Resilienz und Vulnerabilität",t12_2_1:"Persönlichkeit und Big Five",t12_2_2:"Persönlichkeit und Big Five",t12_2_3:"Personenzentrierte Theorie (Rogers)",t12_2_4:"Personenzentrierte Theorie (Rogers)",t12_2_5:"Persönlichkeit und sozial-kognitive Theorie (Bandura)",t12_2_6:"Persönlichkeit und sozial-kognitive Theorie (Bandura)",t12_3_1:"Aufgabenbereiche der Sozialen Arbeit",t12_3_2:"Verhaltensorientiertes Konzept (VOK)",t12_3_3:"Life-Modell",t12_4_1:"Soziale Interaktion und soziale Kommunikation",t12_4_2:"Kommunikationsaxiome",t12_4_3:"Kommunikationsaxiome"};
 const KW_UB_W={1:"t12_1_1",2:"t12_1_2",3:"t12_1_3",4:"t12_1_4",5:"t12_1_5",6:"t12_1_6",7:"t12_1_6b",8:"t12_1_7",9:"t12_1_8",10:"t12_1_9",11:"t12_1_10"};
@@ -21364,7 +21364,7 @@ const KW_TR_HINT={fa04:"Fall Tim",fa05:"Fall Tim",fa06:"Fall Tim",fa07:"Fall Tim
 
 /* =========================================================
  UMBAU (Nov 2026)
- · Unterrichtsfächer → Individueller Lernpfad, Themenseite mit sieben festen Teilen und Farben
+ · Unterrichtsfächer → Lernpfad, Themenseite mit sieben festen Teilen und Farben
  · Lernwerkstatt in vier Bereichen, Leistungs- und Kompetenztests in der Kompetenzwerkstatt
  · Lehrkräfte-Bereich: Unterricht erstellen, Inhalte einstellen, Lernstände prüfen, Team
  · Lernstandshinweise für Schüler:innen und Lehrkräfte, Startseiten-Kachel „Das fehlt dir noch“
@@ -21415,7 +21415,7 @@ function lxGesperrtRow(e){
  return`<div class="kw-row lx-lock" title="Dieses Thema wird zwei Wochen vorher sichtbar"><i class="kw-bx" style="opacity:.35"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span><small class="lx-ab">${esc(lxSichtText(e))}</small></div>`;
 }
 function lxGesperrtSeite(e,ph,F){
- return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">${kwSchuelerBanner()}<button class="secondary" data-kw="wand">← Individueller Lernpfad</button>
+ return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">${kwSchuelerBanner()}<button class="secondary" data-kw="wand">← Meine Lernpfade</button>
  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)}</small><h1>${esc(kwKurz(e))}</h1><p>Dieses Thema wird zwei Wochen vorher freigeschaltet: <b>folgt</b>. Bis dahin kannst du an den Themen davor weiterarbeiten.</p></header></div>${footer()}`;
 }
 async function lxSichtSetzen(themaId,datum){
@@ -21509,7 +21509,7 @@ async function renderUnterrichtsfaecher(){
  const L=[["Deutsch", ""], ["Englisch", ""], ["Mathematik", ""], ["Religion / Ethik", ""], ["Politik und Gesellschaft", ""], ["SWR", ""], ["Biologie", ""], ["Soziologie", ""], ["Wahlpflicht 1", ""], ["Wahlpflicht 2", ""]];
  const kachel=(t,badge,txt,href)=>`<${href?'button type="button" onclick="lxPPDirekt()"':'div'} class="lxf-k${href?" an":""}"><h3>${esc(t)}</h3><span class="lxf-b${href?" muster":""}">${esc(badge)}</span><p>${esc(txt)}</p></${href?"button":"div"}>`;
  return`${kwSchuelerBanner()}<div class="lxf"><small class="lxf-kick">LERNPFADE</small><h1>Meine Lernpfade in der 12. Klasse</h1><p class="lxf-sub">Wähle ein Fach. Du kommst direkt zum Thema, an dem du gerade arbeitest. Pädagogik / Psychologie ist das Muster, die anderen Fächer werden nach demselben Aufbau ausgearbeitet.</p>
- <div class="lxf-grid">${kachel("Pädagogik / Psychologie","Ausgearbeitet als Muster","4 Lernbereiche, Individueller Lernpfad, Lernweg mit Check-in und Check-out",true)}${L.map(x=>kachel(x[0],x[1]&&x[1].startsWith("Nicht")?x[1]:"Folgt",x[1]&&!x[1].startsWith("Nicht")?x[1]:"Individueller Lernpfad, Themen und Material kommen aus deinen Unterlagen.")).join("")}</div></div>${footer()}`;
+ <div class="lxf-grid">${kachel("Pädagogik / Psychologie","Ausgearbeitet als Muster","4 Lernbereiche, Meine Lernpfade, Lernweg mit Check-in und Check-out",true)}${L.map(x=>kachel(x[0],x[1]&&x[1].startsWith("Nicht")?x[1]:"Folgt",x[1]&&!x[1].startsWith("Nicht")?x[1]:"Lernpfad, Themen und Material kommen aus deinen Unterlagen.")).join("")}</div></div>${footer()}`;
 }
 async function renderUnterrichtsfaecherAlt(){
  await kwLaden().catch(()=>{});
@@ -21520,12 +21520,12 @@ async function renderUnterrichtsfaecherAlt(){
  const bar=`<span class="lx-bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${p}%"></i></span><span class="lx-bar-t">${lehrer?"Vorbereitet":"Erledigt"}: ${p} %</span>`;
  return`${kwSchuelerBanner()}${pageHead("LERNLANDKARTE","Fächer der 12. Klasse","Wähle ein Fach. Dort findest du alle Themen mit dem Lernweg: Check-in, Infotext, Selbstlernkurs, Üben, Check-out.")}
  <div class="lx-kacheln lx-faecher">
-  ${lxKachel("start","Pädagogik / Psychologie","Individueller Lernpfad mit 4 Lernbereichen und 29 Themen. Lernweg mit Check-in und Check-out.",{extra:bar})}
-  ${["Deutsch","Englisch","Mathematik","Religionslehre / Ethik","Politik und Gesellschaft","Sozialwirtschaft und Recht","Biologie","Soziologie","Wahlpflichtfach 1","Wahlpflichtfach 2"].map(n=>lxKachel("",n,"Individueller Lernpfad und Material folgen",{aus:true,extra:'<span class="lx-badge">folgt</span>'})).join("")}
+  ${lxKachel("start","Pädagogik / Psychologie","Lernpfad mit 4 Lernbereichen und 29 Themen. Lernweg mit Check-in und Check-out.",{extra:bar})}
+  ${["Deutsch","Englisch","Mathematik","Religionslehre / Ethik","Politik und Gesellschaft","Sozialwirtschaft und Recht","Biologie","Soziologie","Wahlpflichtfach 1","Wahlpflichtfach 2"].map(n=>lxKachel("",n,"Lernpfad und Material folgen",{aus:true,extra:'<span class="lx-badge">folgt</span>'})).join("")}
  </div>${footer()}`;
 }
 
-/* ---------- Individueller Lernpfad (Kachelwand) ---------- */
+/* ---------- Meine Lernpfade (Kachelwand) ---------- */
 function lxLandkartenKacheln(lehrer){
  return`<div class="lx-kacheln">
   ${lehrer?"":lxKachel("lernstaende","Meine Lernstände","Nur dein eigener Stand: Wo stehst du, was solltest du noch üben?")}
@@ -21571,7 +21571,7 @@ function kwKachelHTML(ph,lehrer){
  </article>`;
 }
 
-/* ---------- Neue Individueller Lernpfad (Entwurf) ---------- */
+/* ---------- Neue Meine Lernpfade (Entwurf) ---------- */
 function lxLandkarteNeu(){
  const heute=lxHeute(),FACH=["Pädagogik / Psychologie", "Deutsch", "Englisch", "Mathematik", "Religion / Ethik", "Politik und Gesellschaft", "Sport", "SWR", "Biologie", "Soziologie", "Wahlpflicht 1", "Wahlpflicht 2"];
  const phasen=[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum);
@@ -21582,7 +21582,7 @@ function lxLandkarteNeu(){
   return`<section class="lxl-lb"><header class="lxl-kopf"><small>LB ${ph.lbNum}</small>${cur?`<span class="lxl-akt">AKTUELL</span>`:""}<h3>${esc(ph.lbTitel||"")}</h3><span class="lxl-n">${th.length} Themen</span>${pr}</header><div class="lxl-liste">${rows||`<div class="kw-leer">Noch keine Themen freigeschaltet.</div>`}</div></section>`;
  };
  const first=kwThemenSicht(akt).find(e=>e.typ!=="projekt");
- return`${kwSchuelerBanner()}<div class="lxl"><div class="lxl-tabs">${FACH.map((f,i)=>`<button type="button" class="lxl-tab${i?"":" an"}" data-lxf="${i}">${esc(f)}</button>`).join("")}</div><h1>Individueller Lernpfad</h1><p class="lxl-h">Deine Bibliothek: Alle Themen mit Infotext, Übungen und Check-out. Du entscheidest, womit du anfängst. Der Punkt zeigt: offen, begonnen oder geschafft.</p>
+ return`${kwSchuelerBanner()}<div class="lxl"><div class="lxl-tabs">${FACH.map((f,i)=>`<button type="button" class="lxl-tab${i?"":" an"}" data-lxf="${i}">${esc(f)}</button>`).join("")}</div><h1>Meine Lernpfade</h1><p class="lxl-h">Deine Bibliothek: Alle Themen mit Infotext, Übungen und Check-out. Du entscheidest, womit du anfängst. Der Punkt zeigt: offen, begonnen oder geschafft.</p>
  <div class="lxl-spalten">${phasen.map(spalte).join("")}</div><div class="lxl-folgt kw-leer" hidden>Dieses Fach folgt. Themen und Material kommen aus deinen Unterlagen.</div></div>${footer()}`;
 }
 function PP_EINHEITEN_PROJEKT(ph){
@@ -21611,7 +21611,7 @@ async function renderKachelwand(){
  return`<div class="kw" id="kwRoot">
   ${kwSchuelerBanner()}
   <button class="secondary" onclick="go('unterricht')">← Unterrichtsfächer</button>
-  ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Individueller Lernpfad","Dein Weg durch das Schuljahr: vier Lernbereiche mit Projekt, Themen und Bausteinen.")}
+  ${pageHead("PÄDAGOGIK/PSYCHOLOGIE","Meine Lernpfade","Dein Weg durch das Schuljahr: vier Lernbereiche mit Projekt, Themen und Bausteinen.")}
   <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
   ${lxLandkartenKacheln(lehrer)}
   ${lk}
@@ -21717,7 +21717,7 @@ async function lxLive(ort,extra,force){
  }catch(e){}
 }
 setInterval(()=>{if(!document.hidden&&LXL.cur&&currentUser&&!isTeacher())lxLive(LXL.cur.ort,LXL.cur,true)},60000);
-const LX_ORTE={news:"Startseite",unterricht:"Individueller Lernpfad",start:"Individueller Lernpfad",lernstaende:"Meine Lernstände","kw-checkouts":"Meine Lernstände",lernwerkstatt:"Lernwerkstatt",kompetenz:"Kompetenzwerkstatt",tests:"Tests",kalender:"Kalender",resilienz:"Resilienz und Respressi",klassenteam:"Klassenteam",forum:"Forum","forum-board":"Forum","forum-nachrichten":"Nachrichten",journal:"Lernjournal",lernpfad:"Persönlicher Lernpfad",karteikarten:"Karteikarten","karteikarten-board":"Karteikarten",fachaufsatz:"Fachaufsatztraining","fachaufsatz-board":"Fachaufsatztraining"};
+const LX_ORTE={news:"Startseite",unterricht:"Meine Lernpfade",start:"Meine Lernpfade",lernstaende:"Meine Lernstände","kw-checkouts":"Meine Lernstände",lernwerkstatt:"Lernwerkstatt",kompetenz:"Kompetenzwerkstatt",tests:"Tests",kalender:"Kalender",resilienz:"Resilienz und Respressi",klassenteam:"Klassenteam",forum:"Forum","forum-board":"Forum","forum-nachrichten":"Nachrichten",journal:"Lernjournal",lernpfad:"Persönlicher Lernpfad",karteikarten:"Karteikarten","karteikarten-board":"Karteikarten",fachaufsatz:"Fachaufsatztraining","fachaufsatz-board":"Fachaufsatztraining"};
 function lxRouteHook(p){
  if(p!=="live"){if(window.__lxLiveUn){try{window.__lxLiveUn()}catch(e){}window.__lxLiveUn=null}clearInterval(window.__lxLiveIv)}
  if(!currentUser||isTeacher()||p==="kw-thema")return;
@@ -21865,7 +21865,7 @@ async function lxThemaPfadSeite(e,ph,F){
  const waBox=WAt.length?`<div class="lxq-wa"><b>Dein Arbeitsauftrag</b>${WAt.map(w=>`<span>${esc(w.fach||"")}${w.text?": "+esc(w.text):""} · bis ${esc(lxTagKurz(w.bis))}</span>`).join("")}</div>`:"";
  return`<div class="kw kw-seite lxp-seite" data-id="${esc(e.id)}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
   ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">← Individueller Lernpfad</button>
+  <button class="secondary" data-kw="wand">← Meine Lernpfade</button>
   <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p><div class="kw-aktionen">${dl}</div></header>
   ${waBox}
   ${stepper}
@@ -22052,7 +22052,7 @@ async function renderKwThema(){
  const navChips=leist?"":await lxThemaHub(e,lehrer);
  return`<div class="kw kw-seite" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
   ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">← Individueller Lernpfad</button>
+  <button class="secondary" data-kw="wand">← Meine Lernpfade</button>
   <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · ${leist?"Trainings nach der "+esc(e.thema):"Nr. "+esc(e.nr)+(LX_CFG.klasse===11?" · "+(e.typ==="projekt"?"für das Projekt":"Training"):"")}</small><h1>${esc(leist?e.thema:e.thema)}</h1><p>${esc(e.planung||"")}</p><div class="kw-aktionen">${fertigBtn}${altBtn}</div>${sichtZeile}</header>
   ${navChips}
   ${teile.join("")}
@@ -22368,9 +22368,9 @@ async function renderLkUnterricht(){
  await kwLaden();
  const fk=window.__lkFach||"";
  const kk=(k,t,s,c,bg)=>`<button type="button" class="wpw-fb${fk===k?" an":""}" role="tab" aria-selected="${fk===k}" data-lx="lkfach" data-k="${k}" style="--c:${c};--bg:${bg}"><b>${t}</b><small>${s}</small></button>`;
- const faecher=`<div class="wpw-fl" role="tablist" aria-label="Fach wählen">${kk("pp","Pädagogik/Psychologie","Individueller Lernpfad, Themen und Bausteine","#1f9a8a","#e0f2ee")}${kk("mathe","Mathematik","Wird vorbereitet","#2f6fb5","#e1ebf8")}</div>`;
+ const faecher=`<div class="wpw-fl" role="tablist" aria-label="Fach wählen">${kk("pp","Pädagogik/Psychologie","Lernpfad, Themen und Bausteine","#1f9a8a","#e0f2ee")}${kk("mathe","Mathematik","Wird vorbereitet","#2f6fb5","#e1ebf8")}</div>`;
  let inhalt;
- if(fk==="pp")inhalt=`<h2 class="lx-h2">Pädagogik/Psychologie: Individueller Lernpfad</h2><p class="lx-hint">Ein Klick öffnet das Thema. Dort stellst du mit „+ hinzufügen“ Dateien in den passenden Teil ein und planst Bausteine („Baustein einplanen“, Teil 4). Die Punkte zeigen, was schon da ist.</p>${lxLegende()}
+ if(fk==="pp")inhalt=`<h2 class="lx-h2">Pädagogik/Psychologie: Meine Lernpfade</h2><p class="lx-hint">Ein Klick öffnet das Thema. Dort stellst du mit „+ hinzufügen“ Dateien in den passenden Teil ein und planst Bausteine („Baustein einplanen“, Teil 4). Die Punkte zeigen, was schon da ist.</p>${lxLegende()}
  <div class="kw-wand lx-wahl">${lxThemaWahlen("unterricht")}</div>
  <h2 class="lx-h2">Weitere Werkzeuge</h2>
  <div class="lx-kacheln">
@@ -22454,7 +22454,7 @@ const LX_MOTIV_L={
  bonus:[{e:"🎁",t:"Überraschung: Du bist heute richtig produktiv."},{e:"🦉",t:"Weitsicht zahlt sich aus."},{e:"🍀",t:"Das merken die Schüler:innen."}]
 };
 
-/* ---------- Übersichten „Übungsaufgaben" und „Fachaufsatztraining": alles, was freigeschaltet ist, nach Lernbereich, im Farbschema der Individueller Lernpfad ---------- */
+/* ---------- Übersichten „Übungsaufgaben" und „Fachaufsatztraining": alles, was freigeschaltet ist, nach Lernbereich, im Farbschema der Meine Lernpfade ---------- */
 const LX_UE_KAT=[["uebung","Übungsaufgaben"],["vertiefung1","Vertiefung · Stufe 1"],["vertiefung2","Vertiefung · Stufe 2"],["vertiefung3","Vertiefung · Stufe 3"]];
 function lxFaModZeile(m){const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);return`<button type="button" class="kw-datei" data-kw="modul" data-id="${esc(m.id)}"><span>${esc(m.titel||T[0])}</span><small>${f&&f.done?"abgeschlossen":(f&&f.frac>0?Math.round(f.frac*100)+" % bearbeitet":(kwLehrer()?"Öffnen":"Starten"))}</small></button>`}
 // Ein Lernbereich als Kachel; pro Thema nur die Angebote, die die Lehrkraft schon eingestellt hat
