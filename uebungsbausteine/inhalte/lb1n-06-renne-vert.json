@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Bindung: Begriff, Phasen und Typen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welcher Typ zeigt Kummer bei Trennung und schnelle Beruhigung?",
+   "o": [
+    "Typ B",
+    "Typ A",
+    "Typ C",
+    "Typ D"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welcher Typ klammert und wehrt zugleich ab?",
+   "o": [
+    "Typ A",
+    "Typ C",
+    "Typ B",
+    "Typ D"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was kennzeichnet Typ A?",
+   "o": [
+    "freudige Begrüßung",
+    "Klammern",
+    "kaum Kummer, Meiden der Mutter",
+    "Erstarren"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wann beginnt die eigentliche Bindung?",
+   "o": [
+    "mit der Geburt",
+    "mit 2 Jahren",
+    "mit 6 Jahren",
+    "ab ca. 7 Monaten"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Was ist die Sicherheitsbasis?",
+   "o": [
+    "Ausgangspunkt zum Erkunden",
+    "Ort der Strafe",
+    "Spielzeug",
+    "Gewohnheit"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was zeigt ein Kind bei Angst?",
+   "o": [
+    "Explorationsverhalten",
+    "Bindungsverhalten",
+    "kein Verhalten",
+    "Trotz"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Typ ist am häufigsten?",
+   "o": [
+    "Typ D",
+    "Typ C",
+    "Typ B",
+    "Typ A"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Bindungs-Explorations-Balance bedeutet:",
+   "o": [
+    "Kind erkundet immer",
+    "Kind klammert immer",
+    "Kind spielt nie",
+    "Bindungs- und Explorationsverhalten wechseln sich je nach Sicherheit ab"
+   ],
+   "r": 3
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "titel": "Theorievergleich: Feinfühligkeit und gelungene Bindung",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Feinfühlig",
+  "Nicht feinfühlig"
+ ],
+ "karten": [
+  {
+   "t": "Nimmt leises Quengeln wahr",
+   "s": 0
+  },
+  {
+   "t": "Tröstet und beruhigt prompt",
+   "s": 0
+  },
+  {
+   "t": "Deutet das Weinen zutreffend als Hunger oder Nähe",
+   "s": 0
+  },
+  {
+   "t": "Reagiert auf das Bedürfnis des Kindes",
+   "s": 0
+  },
+  {
+   "t": "Lässt das Baby nachts bewusst schreien",
+   "s": 1
+  },
+  {
+   "t": "Reagiert nach eigenen Wünschen statt nach dem Bedürfnis",
+   "s": 1
+  },
+  {
+   "t": "Ignoriert Signale",
+   "s": 1
+  },
+  {
+   "t": "Reagiert zu spät und unvorhersehbar",
+   "s": 1
+  },
+  {
+   "t": "Spielt weiter, obwohl das Kind weint",
+   "s": 1
+  }
+ ]
+}

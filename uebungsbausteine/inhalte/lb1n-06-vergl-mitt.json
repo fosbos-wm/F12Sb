@@ -1,0 +1,48 @@
+{
+ "titel": "Theorievergleich: Bindung: Begriff, Phasen und Typen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Typ A",
+  "Typ B",
+  "Typ C",
+  "Typ D"
+ ],
+ "karten": [
+  {
+   "t": "Kaum Kummer bei Trennung",
+   "s": 0
+  },
+  {
+   "t": "Ignoriert die Mutter beim Wiedersehen",
+   "s": 0
+  },
+  {
+   "t": "Weint bei Trennung, lässt sich schnell trösten",
+   "s": 1
+  },
+  {
+   "t": "Begrüßt die Mutter freudig",
+   "s": 1
+  },
+  {
+   "t": "Klammert und wehrt zugleich ab",
+   "s": 2
+  },
+  {
+   "t": "Lässt sich kaum beruhigen",
+   "s": 2
+  },
+  {
+   "t": "Widersprüchliches, erstarrtes Verhalten",
+   "s": 3
+  },
+  {
+   "t": "Angst vor der Bindungsperson",
+   "s": 3
+  },
+  {
+   "t": "Verhalten ohne erkennbare Strategie",
+   "s": 3
+  }
+ ]
+}

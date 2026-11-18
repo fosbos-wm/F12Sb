@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Feinfühligkeit und gelungene Bindung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Feinfühligkeit treffen zu?",
+   "statements": [
+    {
+     "text": "Dazu gehört, Signale richtig zu interpretieren.",
+     "richtig": true
+    },
+    {
+     "text": "Dazu gehört prompte Reaktion.",
+     "richtig": true
+    },
+    {
+     "text": "Dazu gehört, Bedürfnisse zu überhören.",
+     "richtig": false
+    },
+    {
+     "text": "Sie ist dasselbe wie Verwöhnen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Ko-Regulation treffen zu?",
+   "statements": [
+    {
+     "text": "Säuglinge können Gefühle nicht allein regulieren.",
+     "richtig": true
+    },
+    {
+     "text": "Aus Ko-Regulation entwickelt sich Selbstregulation.",
+     "richtig": true
+    },
+    {
+     "text": "Ko-Regulation verhindert Selbstständigkeit.",
+     "richtig": false
+    },
+    {
+     "text": "Sie ist nur im Kindergarten nötig.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Frau Kaya lässt ihr Baby nachts schreien, „damit es nicht verwöhnt wird“. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das widerspricht der Feinfühligkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Das Baby kann erleben, dass seine Signale nichts bewirken.",
+     "richtig": true
+    },
+    {
+     "text": "Das Baby wird dadurch selbstständiger.",
+     "richtig": false
+    },
+    {
+     "text": "Prompte Reaktion würde die Bindung schwächen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur gelungenen Bindung treffen zu?",
+   "statements": [
+    {
+     "text": "Sie ermöglicht Erkunden mit Sicherheitsbasis.",
+     "richtig": true
+    },
+    {
+     "text": "Sie wird durch verlässliche Reaktionen gefördert.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht nur durch viel Spielzeug.",
+     "richtig": false
+    },
+    {
+     "text": "Sie ist nach dem ersten Jahr abgeschlossen.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

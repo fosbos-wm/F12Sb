@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Kritische Würdigung der Psychoanalyse",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Stärken treffen zu?",
+   "statements": [
+    {
+     "text": "Die Theorie hat das Unbewusste ins Blickfeld gerückt.",
+     "richtig": true
+    },
+    {
+     "text": "Sie betont die Prägung durch frühe Erfahrungen.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist vollständig empirisch bestätigt.",
+     "richtig": false
+    },
+    {
+     "text": "Sie gilt unabhängig von der Kultur.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Kritik treffen zu?",
+   "statements": [
+    {
+     "text": "Viele Begriffe sind schwer überprüfbar.",
+     "richtig": true
+    },
+    {
+     "text": "Aussagen wurden aus Patientenfällen verallgemeinert.",
+     "richtig": true
+    },
+    {
+     "text": "Die Theorie ist leicht widerlegbar.",
+     "richtig": false
+    },
+    {
+     "text": "Kritik gibt es nicht.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Eine Erzieherin sagt, das Trotzen eines Jungen sei der Ödipuskonflikt. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Der Ödipuskonflikt ist empirisch nicht belegt.",
+     "richtig": true
+    },
+    {
+     "text": "Trotz kann auch andere Ursachen haben.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist bewiesen, dass Trotz auf dem Ödipuskonflikt beruht.",
+     "richtig": false
+    },
+    {
+     "text": "Trotz zeigt immer eine Fixierung.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Empirie treffen zu?",
+   "statements": [
+    {
+     "text": "Teile der Annahmen zu oralen Merkmalen sind belegt.",
+     "richtig": true
+    },
+    {
+     "text": "Der Primärnarzissmus gilt als widerlegt.",
+     "richtig": true
+    },
+    {
+     "text": "Alle Phasen sind bewiesen.",
+     "richtig": false
+    },
+    {
+     "text": "Die Studienlage ist eindeutig.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

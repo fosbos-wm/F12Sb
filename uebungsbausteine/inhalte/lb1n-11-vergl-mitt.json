@@ -1,0 +1,50 @@
+{
+ "titel": "Theorievergleich: Vulnerabilität und Resilienz",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Risikofaktor",
+  "Schutzfaktor"
+ ],
+ "karten": [
+  {
+   "t": "Dauerhafter Streit in der Familie",
+   "s": 0
+  },
+  {
+   "t": "Armut",
+   "s": 0
+  },
+  {
+   "t": "Psychische Erkrankung eines Elternteils",
+   "s": 0
+  },
+  {
+   "t": "Vernachlässigung",
+   "s": 0
+  },
+  {
+   "t": "Trauma",
+   "s": 0
+  },
+  {
+   "t": "Hohes Selbstwertgefühl",
+   "s": 1
+  },
+  {
+   "t": "Stabile Beziehung zu einer Bezugsperson",
+   "s": 1
+  },
+  {
+   "t": "Gute Freundschaften",
+   "s": 1
+  },
+  {
+   "t": "Optimismus und Neugier",
+   "s": 1
+  },
+  {
+   "t": "Anregendes Lernumfeld",
+   "s": 1
+  }
+ ]
+}

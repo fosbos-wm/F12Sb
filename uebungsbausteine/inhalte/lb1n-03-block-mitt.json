@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Psychosexuelle Entwicklung",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Orale Phase",
+  "Anale Phase",
+  "Phallische Phase"
+ ],
+ "items": [
+  {
+   "t": "Saugen, Beißen und Lutschen",
+   "k": 0
+  },
+  {
+   "t": "Urvertrauen entsteht durch Versorgung",
+   "k": 0
+  },
+  {
+   "t": "Nägelkauen als späteres Verhalten",
+   "k": 0
+  },
+  {
+   "t": "Kind lernt Sauberkeit",
+   "k": 1
+  },
+  {
+   "t": "Trotzphase „Nein, selber!“",
+   "k": 1
+  },
+  {
+   "t": "Autonomie gegenüber den Eltern",
+   "k": 1
+  },
+  {
+   "t": "Kind entdeckt Geschlechtsunterschiede",
+   "k": 2
+  },
+  {
+   "t": "Identifikation mit dem gleichgeschlechtlichen Elternteil",
+   "k": 2
+  },
+  {
+   "t": "Über-Ich entsteht",
+   "k": 2
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Entwicklung und Entwicklungsbedingungen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Entwicklungsbegriff treffen zu?",
+   "statements": [
+    {
+     "text": "Entwicklung verläuft gerichtet und zeitlich geordnet.",
+     "richtig": true
+    },
+    {
+     "text": "Entwicklung endet mit dem Erwachsenwerden.",
+     "richtig": false
+    },
+    {
+     "text": "Entwicklung umfasst Erleben und Verhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Entwicklung besteht nur aus körperlichen Veränderungen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Bedingungen der Entwicklung treffen zu?",
+   "statements": [
+    {
+     "text": "Die Anlage ist bei der Befruchtung festgelegt.",
+     "richtig": true
+    },
+    {
+     "text": "Die Umwelt umfasst auch kulturelle und soziale Einflüsse.",
+     "richtig": true
+    },
+    {
+     "text": "Selbststeuerung bedeutet, dass der Mensch passiv bleibt.",
+     "richtig": false
+    },
+    {
+     "text": "Die Bedingungen wirken unabhängig voneinander.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Amira und Leyla sind eineiige Zwillinge mit unterschiedlichen Interessen. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Sie haben die gleiche Anlage.",
+     "richtig": true
+    },
+    {
+     "text": "Unterschiedliche Erfahrungen können Unterschiede erklären.",
+     "richtig": true
+    },
+    {
+     "text": "Ihre Selbststeuerung ist zwangsläufig identisch.",
+     "richtig": false
+    },
+    {
+     "text": "Gleiche Gene führen immer zu gleichem Verhalten.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Wechselwirkung treffen zu?",
+   "statements": [
+    {
+     "text": "Die Selbststeuerung kann die Umwelt verändern.",
+     "richtig": true
+    },
+    {
+     "text": "Die Umwelt kann beeinflussen, welche Anlagen sich entfalten.",
+     "richtig": true
+    },
+    {
+     "text": "Es gibt nur eine Einflussrichtung von der Anlage zur Umwelt.",
+     "richtig": false
+    },
+    {
+     "text": "Ein Anteil in Prozent lässt sich zuverlässig angeben.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

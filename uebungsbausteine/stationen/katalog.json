@@ -21,6 +21,12 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Zuordnung"
+  ],
+  "themen": [
+   "t12_1_2",
+   "t12_1_3",
+   "t12_1_4",
+   "t12_1_5"
   ]
  },
  {
@@ -45,6 +51,12 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Memory"
+  ],
+  "themen": [
+   "t12_1_2",
+   "t12_1_3",
+   "t12_1_4",
+   "t12_1_5"
   ]
  },
  {
@@ -69,6 +81,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Blockfall"
+  ],
+  "themen": [
+   "t12_1_2"
   ]
  },
  {
@@ -93,6 +108,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Blockfall"
+  ],
+  "themen": [
+   "t12_1_4"
   ]
  },
  {
@@ -117,6 +135,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Blockfall"
+  ],
+  "themen": [
+   "t12_1_2"
   ]
  },
  {
@@ -141,6 +162,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Theorievergleich"
+  ],
+  "themen": [
+   "t12_1_2"
   ]
  },
  {
@@ -165,6 +189,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Theorievergleich"
+  ],
+  "themen": [
+   "t12_1_5"
   ]
  },
  {
@@ -189,6 +216,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Theorievergleich"
+  ],
+  "themen": [
+   "t12_1_4"
   ]
  },
  {
@@ -213,6 +243,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Theorievergleich"
+  ],
+  "themen": [
+   "t12_1_5"
   ]
  },
  {
@@ -237,6 +270,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Lückentext"
+  ],
+  "themen": [
+   "t12_1_4"
   ]
  },
  {
@@ -261,6 +297,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Lückentext"
+  ],
+  "themen": [
+   "t12_1_4"
   ]
  },
  {
@@ -285,6 +324,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Lückentext"
+  ],
+  "themen": [
+   "t12_1_2"
   ]
  },
  {
@@ -309,6 +351,9 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Lückentext"
+  ],
+  "themen": [
+   "t12_1_3"
   ]
  },
  {
@@ -324,6 +369,12 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "K-Prim"
+  ],
+  "themen": [
+   "t12_1_2",
+   "t12_1_3",
+   "t12_1_4",
+   "t12_1_5"
   ]
  },
  {
@@ -359,6 +410,12 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Begriffe-Tetris"
+  ],
+  "themen": [
+   "t12_1_2",
+   "t12_1_3",
+   "t12_1_4",
+   "t12_1_5"
   ]
  },
  {
@@ -374,6 +431,12 @@
    "LB 1",
    "Psychoanalyse (Freud)",
    "Wichtel-Schubkarrenrennen"
+  ],
+  "themen": [
+   "t12_1_2",
+   "t12_1_3",
+   "t12_1_4",
+   "t12_1_5"
   ]
  },
  {
@@ -398,6 +461,9 @@
    "LB 1",
    "Entwicklung",
    "Zuordnung"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -422,6 +488,9 @@
    "LB 1",
    "Entwicklung",
    "Zuordnung"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -446,6 +515,9 @@
    "LB 1",
    "Entwicklung",
    "Memory"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -470,6 +542,9 @@
    "LB 1",
    "Entwicklung",
    "Blockfall"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -494,6 +569,9 @@
    "LB 1",
    "Entwicklung",
    "Theorievergleich"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -518,6 +596,9 @@
    "LB 1",
    "Entwicklung",
    "Lückentext"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -542,6 +623,9 @@
    "LB 1",
    "Entwicklung",
    "Lückentext"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -557,6 +641,9 @@
    "LB 1",
    "Entwicklung",
    "K-Prim"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -592,6 +679,9 @@
    "LB 1",
    "Entwicklung",
    "Begriffe-Tetris"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -607,6 +697,9 @@
    "LB 1",
    "Entwicklung",
    "Wichtel-Schubkarrenrennen"
+  ],
+  "themen": [
+   "t12_1_1"
   ]
  },
  {
@@ -642,7 +735,8 @@
    "LB 1",
    "Alle Bereiche gemischt",
    "Begriffe-Tetris"
-  ]
+  ],
+  "themen": []
  },
  {
   "id": "kurz-rennen-alles",
@@ -657,7 +751,8 @@
    "LB 1",
    "Alle Bereiche gemischt",
    "Wichtel-Schubkarrenrennen"
-  ]
+  ],
+  "themen": []
  },
  {
   "id": "lb1-bind-zuord-leic",
@@ -685,7 +780,10 @@
    "Zuordnung",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_6"
+  ]
  },
  {
   "id": "lb1-bind-lueck-mitt",
@@ -713,7 +811,10 @@
    "Lückentext",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_6"
+  ]
  },
  {
   "id": "lb1-bind-kprim-vert",
@@ -741,7 +842,10 @@
    "K-Prim",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_6"
+  ]
  },
  {
   "id": "lb1-phas-memor-leic",
@@ -769,7 +873,11 @@
    "Memory",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_6",
+   "t12_1_7"
+  ]
  },
  {
   "id": "lb1-phas-block-mitt",
@@ -797,7 +905,11 @@
    "Blockfall",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_6",
+   "t12_1_7"
+  ]
  },
  {
   "id": "lb1-phas-renne-vert",
@@ -825,7 +937,11 @@
    "Rennen",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_6",
+   "t12_1_7"
+  ]
  },
  {
   "id": "lb1-foer-zuord-leic",
@@ -853,7 +969,10 @@
    "Zuordnung",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
  },
  {
   "id": "lb1-foer-block-mitt",
@@ -881,7 +1000,10 @@
    "Blockfall",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
  },
  {
   "id": "lb1-foer-kprim-vert",
@@ -909,7 +1031,10 @@
    "K-Prim",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
  },
  {
   "id": "lb1-fremd-memor-leic",
@@ -937,7 +1062,10 @@
    "Memory",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
  },
  {
   "id": "lb1-fremd-vergl-mitt",
@@ -965,7 +1093,10 @@
    "Theorievergleich",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
  },
  {
   "id": "lb1-fremd-renne-vert",
@@ -993,7 +1124,10 @@
    "Rennen",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
  },
  {
   "id": "lb1-resbeg-lueck-leic",
@@ -1021,7 +1155,10 @@
    "Lückentext",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-resbeg-vergl-mitt",
@@ -1049,7 +1186,10 @@
    "Theorievergleich",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-resbeg-kprim-vert",
@@ -1077,7 +1217,10 @@
    "K-Prim",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-risiko-zuord-leic",
@@ -1105,7 +1248,10 @@
    "Zuordnung",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-risiko-block-mitt",
@@ -1133,7 +1279,10 @@
    "Blockfall",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-risiko-renne-vert",
@@ -1161,7 +1310,10 @@
    "Rennen",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-resfoe-memor-leic",
@@ -1189,7 +1341,10 @@
    "Memory",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-resfoe-lueck-mitt",
@@ -1217,7 +1372,10 @@
    "Lückentext",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-resfoe-block-vert",
@@ -1245,7 +1403,10 @@
    "Blockfall",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  },
  {
   "id": "lb1-entw-zuord-leic",
@@ -1273,7 +1434,10 @@
    "Zuordnung",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
  },
  {
   "id": "lb1-entw-vergl-mitt",
@@ -1301,7 +1465,10 @@
    "Theorievergleich",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
  },
  {
   "id": "lb1-entw-kprim-vert",
@@ -1329,7 +1496,10 @@
    "K-Prim",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
  },
  {
   "id": "lb1-jug-memor-leic",
@@ -1357,7 +1527,10 @@
    "Memory",
    "leicht"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
  },
  {
   "id": "lb1-jug-block-mitt",
@@ -1385,7 +1558,10 @@
    "Blockfall",
    "mittel"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
  },
  {
   "id": "lb1-jug-renne-vert",
@@ -1413,6 +1589,1032 @@
    "Rennen",
    "vertieft"
   ],
-  "neu12": true
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
+ },
+ {
+  "id": "lb1n-01-zuord-leic",
+  "titel": "Zuordnung Entwicklung und Entwicklungsbedingungen – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fachbegriffe ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1n-01-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung und Entwicklungsbedingungen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Entwicklung und Entwicklungsbedingungen",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_1"
+  ]
+ },
+ {
+  "id": "lb1n-01-block-mitt",
+  "titel": "Blockfall Entwicklung und Entwicklungsbedingungen – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen unter Zeitdruck der richtigen Kategorie zuordnen.",
+  "datei": "blockfall.html?set=lb1n-01-block-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung und Entwicklungsbedingungen",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Entwicklung und Entwicklungsbedingungen",
+   "Blockfall",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_1"
+  ]
+ },
+ {
+  "id": "lb1n-01-kprim-vert",
+  "titel": "K-Prim Entwicklung und Entwicklungsbedingungen – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen prüfen: trifft zu oder nicht.",
+  "datei": "kprim.html?set=lb1n-01-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Entwicklung und Entwicklungsbedingungen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Entwicklung und Entwicklungsbedingungen",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_1"
+  ]
+ },
+ {
+  "id": "lb1n-02-memor-leic",
+  "titel": "Memory Freuds Persönlichkeitsmodell – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe und Erklärungen als Paare aufdecken.",
+  "datei": "memory.html?set=lb1n-02-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Freuds Persönlichkeitsmodell",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Freuds Persönlichkeitsmodell",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_2"
+  ]
+ },
+ {
+  "id": "lb1n-02-vergl-mitt",
+  "titel": "Theorievergleich Freuds Persönlichkeitsmodell – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-02-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Freuds Persönlichkeitsmodell",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Freuds Persönlichkeitsmodell",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_2"
+  ]
+ },
+ {
+  "id": "lb1n-02-renne-vert",
+  "titel": "Rennen Freuds Persönlichkeitsmodell – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zum Thema beantworten.",
+  "datei": "rennen.html?set=lb1n-02-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Freuds Persönlichkeitsmodell",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Freuds Persönlichkeitsmodell",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_2"
+  ]
+ },
+ {
+  "id": "lb1n-03-zuord-leic",
+  "titel": "Zuordnung Psychosexuelle Entwicklung – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fachbegriffe ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1n-03-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychosexuelle Entwicklung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Psychosexuelle Entwicklung",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_3"
+  ]
+ },
+ {
+  "id": "lb1n-03-block-mitt",
+  "titel": "Blockfall Psychosexuelle Entwicklung – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen unter Zeitdruck der richtigen Kategorie zuordnen.",
+  "datei": "blockfall.html?set=lb1n-03-block-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychosexuelle Entwicklung",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Psychosexuelle Entwicklung",
+   "Blockfall",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_3"
+  ]
+ },
+ {
+  "id": "lb1n-03-kprim-vert",
+  "titel": "K-Prim Psychosexuelle Entwicklung – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen prüfen: trifft zu oder nicht.",
+  "datei": "kprim.html?set=lb1n-03-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Psychosexuelle Entwicklung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Psychosexuelle Entwicklung",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_3"
+  ]
+ },
+ {
+  "id": "lb1n-04-memor-leic",
+  "titel": "Memory Angst und Abwehrmechanismen – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe und Erklärungen als Paare aufdecken.",
+  "datei": "memory.html?set=lb1n-04-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Angst und Abwehrmechanismen",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Angst und Abwehrmechanismen",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_4"
+  ]
+ },
+ {
+  "id": "lb1n-04-vergl-mitt",
+  "titel": "Theorievergleich Angst und Abwehrmechanismen – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-04-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Angst und Abwehrmechanismen",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Angst und Abwehrmechanismen",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_4"
+  ]
+ },
+ {
+  "id": "lb1n-04-renne-vert",
+  "titel": "Rennen Angst und Abwehrmechanismen – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zum Thema beantworten.",
+  "datei": "rennen.html?set=lb1n-04-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Angst und Abwehrmechanismen",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Angst und Abwehrmechanismen",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_4"
+  ]
+ },
+ {
+  "id": "lb1n-05-zuord-leic",
+  "titel": "Zuordnung Kritische Würdigung der Psychoanalyse – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fachbegriffe ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1n-05-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der Psychoanalyse",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Kritische Würdigung der Psychoanalyse",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_5"
+  ]
+ },
+ {
+  "id": "lb1n-05-vergl-mitt",
+  "titel": "Theorievergleich Kritische Würdigung der Psychoanalyse – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-05-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der Psychoanalyse",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Kritische Würdigung der Psychoanalyse",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_5"
+  ]
+ },
+ {
+  "id": "lb1n-05-kprim-vert",
+  "titel": "K-Prim Kritische Würdigung der Psychoanalyse – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen prüfen: trifft zu oder nicht.",
+  "datei": "kprim.html?set=lb1n-05-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der Psychoanalyse",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Kritische Würdigung der Psychoanalyse",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_5"
+  ]
+ },
+ {
+  "id": "lb1n-06-memor-leic",
+  "titel": "Memory Bindung: Begriff, Phasen und Typen – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe und Erklärungen als Paare aufdecken.",
+  "datei": "memory.html?set=lb1n-06-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindung: Begriff, Phasen und Typen",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Bindung: Begriff, Phasen und Typen",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_6"
+  ]
+ },
+ {
+  "id": "lb1n-06-vergl-mitt",
+  "titel": "Theorievergleich Bindung: Begriff, Phasen und Typen – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-06-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindung: Begriff, Phasen und Typen",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Bindung: Begriff, Phasen und Typen",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_6"
+  ]
+ },
+ {
+  "id": "lb1n-06-renne-vert",
+  "titel": "Rennen Bindung: Begriff, Phasen und Typen – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zum Thema beantworten.",
+  "datei": "rennen.html?set=lb1n-06-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindung: Begriff, Phasen und Typen",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Bindung: Begriff, Phasen und Typen",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_6"
+  ]
+ },
+ {
+  "id": "lb1n-07-zuord-leic",
+  "titel": "Zuordnung Feinfühligkeit und gelungene Bindung – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fachbegriffe ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1n-07-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Feinfühligkeit und gelungene Bindung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Feinfühligkeit und gelungene Bindung",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_6b"
+  ]
+ },
+ {
+  "id": "lb1n-07-vergl-mitt",
+  "titel": "Theorievergleich Feinfühligkeit und gelungene Bindung – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-07-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Feinfühligkeit und gelungene Bindung",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Feinfühligkeit und gelungene Bindung",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_6b"
+  ]
+ },
+ {
+  "id": "lb1n-07-kprim-vert",
+  "titel": "K-Prim Feinfühligkeit und gelungene Bindung – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen prüfen: trifft zu oder nicht.",
+  "datei": "kprim.html?set=lb1n-07-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Feinfühligkeit und gelungene Bindung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Feinfühligkeit und gelungene Bindung",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_6b"
+  ]
+ },
+ {
+  "id": "lb1n-08-memor-leic",
+  "titel": "Memory Primäre und sekundäre Bindungen – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe und Erklärungen als Paare aufdecken.",
+  "datei": "memory.html?set=lb1n-08-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Primäre und sekundäre Bindungen",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Primäre und sekundäre Bindungen",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_7"
+  ]
+ },
+ {
+  "id": "lb1n-08-vergl-mitt",
+  "titel": "Theorievergleich Primäre und sekundäre Bindungen – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-08-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Primäre und sekundäre Bindungen",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Primäre und sekundäre Bindungen",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_7"
+  ]
+ },
+ {
+  "id": "lb1n-08-renne-vert",
+  "titel": "Rennen Primäre und sekundäre Bindungen – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zum Thema beantworten.",
+  "datei": "rennen.html?set=lb1n-08-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Primäre und sekundäre Bindungen",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Primäre und sekundäre Bindungen",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_7"
+  ]
+ },
+ {
+  "id": "lb1n-09-zuord-leic",
+  "titel": "Zuordnung Bindungsförderung in der Frühpädagogik – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fachbegriffe ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1n-09-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindungsförderung in der Frühpädagogik",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Bindungsförderung in der Frühpädagogik",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
+ },
+ {
+  "id": "lb1n-09-vergl-mitt",
+  "titel": "Theorievergleich Bindungsförderung in der Frühpädagogik – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-09-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindungsförderung in der Frühpädagogik",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Bindungsförderung in der Frühpädagogik",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
+ },
+ {
+  "id": "lb1n-09-kprim-vert",
+  "titel": "K-Prim Bindungsförderung in der Frühpädagogik – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen prüfen: trifft zu oder nicht.",
+  "datei": "kprim.html?set=lb1n-09-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bindungsförderung in der Frühpädagogik",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Bindungsförderung in der Frühpädagogik",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_8"
+  ]
+ },
+ {
+  "id": "lb1n-10-memor-leic",
+  "titel": "Memory Lebensspanne und Entwicklungsaufgaben – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriffe und Erklärungen als Paare aufdecken.",
+  "datei": "memory.html?set=lb1n-10-memor-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Lebensspanne und Entwicklungsaufgaben",
+  "uebungsart": "Memory",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Lebensspanne und Entwicklungsaufgaben",
+   "Memory",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
+ },
+ {
+  "id": "lb1n-10-vergl-mitt",
+  "titel": "Theorievergleich Lebensspanne und Entwicklungsaufgaben – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-10-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Lebensspanne und Entwicklungsaufgaben",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Lebensspanne und Entwicklungsaufgaben",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
+ },
+ {
+  "id": "lb1n-10-renne-vert",
+  "titel": "Rennen Lebensspanne und Entwicklungsaufgaben – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fragen zum Thema beantworten.",
+  "datei": "rennen.html?set=lb1n-10-renne-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Lebensspanne und Entwicklungsaufgaben",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Lebensspanne und Entwicklungsaufgaben",
+   "Rennen",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_9"
+  ]
+ },
+ {
+  "id": "lb1n-11-zuord-leic",
+  "titel": "Zuordnung Vulnerabilität und Resilienz – leicht",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fachbegriffe ihren Erklärungen zuordnen.",
+  "datei": "zuordnung.html?set=lb1n-11-zuord-leic",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Vulnerabilität und Resilienz",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 1",
+   "Vulnerabilität und Resilienz",
+   "Zuordnung",
+   "leicht"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
+ },
+ {
+  "id": "lb1n-11-vergl-mitt",
+  "titel": "Theorievergleich Vulnerabilität und Resilienz – mittel",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen den passenden Spalten zuordnen.",
+  "datei": "vergleich.html?set=lb1n-11-vergl-mitt",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Vulnerabilität und Resilienz",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 1",
+   "Vulnerabilität und Resilienz",
+   "Theorievergleich",
+   "mittel"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
+ },
+ {
+  "id": "lb1n-11-kprim-vert",
+  "titel": "K-Prim Vulnerabilität und Resilienz – vertieft",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aussagen prüfen: trifft zu oder nicht.",
+  "datei": "kprim.html?set=lb1n-11-kprim-vert",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Vulnerabilität und Resilienz",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 1",
+   "Vulnerabilität und Resilienz",
+   "K-Prim",
+   "vertieft"
+  ],
+  "neu12": true,
+  "themen": [
+   "t12_1_10"
+  ]
  }
 ]

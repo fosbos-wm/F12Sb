@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Bindungsförderung in der Frühpädagogik",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Fremdbetreuung treffen zu?",
+   "statements": [
+    {
+     "text": "Es kommt auf Qualität und Rahmenbedingungen an.",
+     "richtig": true
+    },
+    {
+     "text": "Fremdbetreuung führt automatisch zu unsicherer Bindung.",
+     "richtig": false
+    },
+    {
+     "text": "Feinfühlige Fachkräfte wirken schützend.",
+     "richtig": true
+    },
+    {
+     "text": "Wechselndes Personal ist unproblematisch.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Eingewöhnung treffen zu?",
+   "statements": [
+    {
+     "text": "Sie baut Beziehung zur Erzieherin auf.",
+     "richtig": true
+    },
+    {
+     "text": "Trennungen werden allmählich gesteigert.",
+     "richtig": true
+    },
+    {
+     "text": "Je kürzer, desto besser.",
+     "richtig": false
+    },
+    {
+     "text": "Eine vertraute Person ist dabei nicht nötig.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Frau Weiß fragt, ob ihre Tochter in der Krippe bindungsgestört wird. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das hängt von mehreren Faktoren ab.",
+     "richtig": true
+    },
+    {
+     "text": "Eine feinfühlige Beziehung zuhause schützt.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist unausweichlich.",
+     "richtig": false
+    },
+    {
+     "text": "Die Betreuungsqualität spielt keine Rolle.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Risiken treffen zu?",
+   "statements": [
+    {
+     "text": "Viele Stunden schon im ersten Lebensjahr können ein Risiko sein.",
+     "richtig": true
+    },
+    {
+     "text": "Fehlende Feinfühligkeit erhöht das Risiko.",
+     "richtig": true
+    },
+    {
+     "text": "Rituale erhöhen das Risiko.",
+     "richtig": false
+    },
+    {
+     "text": "Gutes Personal erhöht das Risiko.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

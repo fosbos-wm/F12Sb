@@ -1,0 +1,46 @@
+{
+ "titel": "Theorievergleich: Primäre und sekundäre Bindungen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Primäre Bindung",
+  "Sekundäre Bindung"
+ ],
+ "karten": [
+  {
+   "t": "Beziehung des Säuglings zur Hauptbezugsperson",
+   "s": 0
+  },
+  {
+   "t": "Intensivster Kontakt in den ersten Lebensmonaten",
+   "s": 0
+  },
+  {
+   "t": "Fundament für spätere Bindungen",
+   "s": 0
+  },
+  {
+   "t": "Erzieherin in der Kita",
+   "s": 1
+  },
+  {
+   "t": "Lehrerin in der Grundschule",
+   "s": 1
+  },
+  {
+   "t": "Freunde im Jugendalter",
+   "s": 1
+  },
+  {
+   "t": "Partner im Erwachsenenalter",
+   "s": 1
+  },
+  {
+   "t": "Vater, der später stärker einbezogen wird",
+   "s": 1
+  },
+  {
+   "t": "Trainer im Verein",
+   "s": 1
+  }
+ ]
+}

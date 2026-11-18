@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Angst und Abwehrmechanismen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Realangst",
+  "Moralische Angst",
+  "Neurotische Angst"
+ ],
+ "karten": [
+  {
+   "t": "Angst vor einer Strafe in der Schule",
+   "s": 0
+  },
+  {
+   "t": "Furcht vor einem bissigen Hund",
+   "s": 0
+  },
+  {
+   "t": "Angst vor öffentlicher Blamage",
+   "s": 0
+  },
+  {
+   "t": "Schuldgefühle nach einer Lüge",
+   "s": 1
+  },
+  {
+   "t": "Gewissensbisse wegen eines Streits",
+   "s": 1
+  },
+  {
+   "t": "Angst, gegen die eigenen Werte zu verstoßen",
+   "s": 1
+  },
+  {
+   "t": "Angst, von Wut überwältigt zu werden",
+   "s": 2
+  },
+  {
+   "t": "Furcht, Triebimpulse nicht kontrollieren zu können",
+   "s": 2
+  },
+  {
+   "t": "diffuse Angst ohne erkennbaren Anlass",
+   "s": 2
+  }
+ ]
+}

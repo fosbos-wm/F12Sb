@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Freuds Persönlichkeitsmodell",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Es",
+  "Ich",
+  "Über-Ich"
+ ],
+ "karten": [
+  {
+   "t": "„Ich will das sofort haben!“",
+   "s": 0
+  },
+  {
+   "t": "Strebt nach Lust und Triebbefriedigung",
+   "s": 0
+  },
+  {
+   "t": "Wirkt von Geburt an",
+   "s": 0
+  },
+  {
+   "t": "Prüft, ob etwas in der Realität möglich ist",
+   "s": 1
+  },
+  {
+   "t": "Wägt Folgen ab und sucht Kompromisse",
+   "s": 1
+  },
+  {
+   "t": "Schiebt Befriedigung auf",
+   "s": 1
+  },
+  {
+   "t": "„Das gehört sich nicht!“",
+   "s": 2
+  },
+  {
+   "t": "Löst Schuldgefühle aus",
+   "s": 2
+  },
+  {
+   "t": "Beinhaltet verinnerlichte Gebote und Verbote",
+   "s": 2
+  }
+ ]
+}

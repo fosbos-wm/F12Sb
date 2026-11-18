@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Psychosexuelle Entwicklung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu den Phasen treffen zu?",
+   "statements": [
+    {
+     "text": "Die orale Phase betrifft das erste Lebensjahr.",
+     "richtig": true
+    },
+    {
+     "text": "Die anale Phase betrifft das zweite und dritte Lebensjahr.",
+     "richtig": true
+    },
+    {
+     "text": "Die Latenzphase beginnt mit der Geburt.",
+     "richtig": false
+    },
+    {
+     "text": "Die genitale Phase endet im Grundschulalter.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Fixierung und Regression treffen zu?",
+   "statements": [
+    {
+     "text": "Fixierung entsteht bei Über- oder Unterbefriedigung.",
+     "richtig": true
+    },
+    {
+     "text": "Regression tritt häufig unter Stress auf.",
+     "richtig": true
+    },
+    {
+     "text": "Fixierung bedeutet gelungene Entwicklung.",
+     "richtig": false
+    },
+    {
+     "text": "Regression ist ein Zeichen für Reife.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Mia (2;6) hält Stuhlgang zurück, nachdem der Vater geschimpft hat. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Die anale Phase ist betroffen.",
+     "richtig": true
+    },
+    {
+     "text": "Strenge Erziehung kann Widerstand hervorrufen.",
+     "richtig": true
+    },
+    {
+     "text": "Das Verhalten zeigt eine genitale Phase.",
+     "richtig": false
+    },
+    {
+     "text": "Schimpfen fördert nach Freud die Autonomie.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Sauberkeitserziehung treffen zu?",
+   "statements": [
+    {
+     "text": "Sie sollte weder zu früh noch zu streng erfolgen.",
+     "richtig": true
+    },
+    {
+     "text": "Matschen kann eine angemessene Ersatzbefriedigung sein.",
+     "richtig": true
+    },
+    {
+     "text": "Ausscheidungsprodukte sollen als „eklig“ gelten.",
+     "richtig": false
+    },
+    {
+     "text": "Eigenwille des Kindes soll gebrochen werden.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

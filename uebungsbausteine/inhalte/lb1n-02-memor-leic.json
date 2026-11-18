@@ -1,0 +1,38 @@
+{
+ "titel": "Memory: Freuds Persönlichkeitsmodell",
+ "anleitung": "Finde zu jedem Begriff die passende Erklärung.",
+ "paare": [
+  [
+   "Unbewusstes",
+   "nicht zugängliche Inhalte, die Erleben und Verhalten maßgeblich beeinflussen"
+  ],
+  [
+   "Vorbewusstes",
+   "Inhalte, die leicht ins Bewusstsein geholt werden können"
+  ],
+  [
+   "Bewusstes",
+   "gegenwärtig wahrgenommene Inhalte"
+  ],
+  [
+   "Es",
+   "angeboren, Lustprinzip, Sofortbefriedigung"
+  ],
+  [
+   "Ich",
+   "Realitätsprinzip, vermittelt zwischen den Ansprüchen"
+  ],
+  [
+   "Über-Ich",
+   "Moralitätsprinzip, verinnerlichte Normen und Gewissen"
+  ],
+  [
+   "Starkes Ich",
+   "gleicht Es, Über-Ich und Realität aus"
+  ],
+  [
+   "Fehlleistung",
+   "Versprecher als Hinweis auf Unbewusstes"
+  ]
+ ]
+}

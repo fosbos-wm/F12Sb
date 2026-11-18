@@ -1,0 +1,50 @@
+{
+ "titel": "Theorievergleich: Bindungsförderung in der Frühpädagogik",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Risiko für unsichere Bindung",
+  "Schutz für sichere Bindung"
+ ],
+ "karten": [
+  {
+   "t": "Ständig wechselndes Personal",
+   "s": 0
+  },
+  {
+   "t": "Viele Betreuungsstunden im ersten Lebensjahr",
+   "s": 0
+  },
+  {
+   "t": "Wenig feinfühlige Eltern",
+   "s": 0
+  },
+  {
+   "t": "Zu schnelle Eingewöhnung",
+   "s": 0
+  },
+  {
+   "t": "Ungünstiger Betreuungsschlüssel",
+   "s": 0
+  },
+  {
+   "t": "Feinfühlige Fachkräfte",
+   "s": 1
+  },
+  {
+   "t": "Behutsame, allmähliche Eingewöhnung",
+   "s": 1
+  },
+  {
+   "t": "Feste Bezugserzieherin",
+   "s": 1
+  },
+  {
+   "t": "Gute Qualität der Einrichtung",
+   "s": 1
+  },
+  {
+   "t": "Rituale beim Abschied",
+   "s": 1
+  }
+ ]
+}

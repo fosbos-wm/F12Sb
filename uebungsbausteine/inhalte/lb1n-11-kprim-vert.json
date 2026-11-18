@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Vulnerabilität und Resilienz",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Resilienz treffen zu?",
+   "statements": [
+    {
+     "text": "Sie bezeichnet psychische Widerstandskraft.",
+     "richtig": true
+    },
+    {
+     "text": "Sie kann sich im Lebenslauf verändern.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist unveränderlich angeboren.",
+     "richtig": false
+    },
+    {
+     "text": "Sie bedeutet, nie Belastungen zu erleben.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Risiko- und Schutzfaktoren treffen zu?",
+   "statements": [
+    {
+     "text": "Schutzfaktoren ermöglichen positive Entwicklung trotz Risiken.",
+     "richtig": true
+    },
+    {
+     "text": "Risikofaktoren erhöhen die Wahrscheinlichkeit zu erkranken.",
+     "richtig": true
+    },
+    {
+     "text": "Schutzfaktoren sind immer ausschließlich personal.",
+     "richtig": false
+    },
+    {
+     "text": "Ein einzelner Risikofaktor führt immer zur Störung.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Jana (9) lebt in einer belasteten Familie, hat aber eine enge Oma und eine Freundin. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Oma wirkt als Schutzfaktor.",
+     "richtig": true
+    },
+    {
+     "text": "Gute Freundschaft kann Resilienz fördern.",
+     "richtig": true
+    },
+    {
+     "text": "Jana kann nicht resilient sein.",
+     "richtig": false
+    },
+    {
+     "text": "Risiken bleiben ohne Wirkung.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Vulnerabilität treffen zu?",
+   "statements": [
+    {
+     "text": "Mehrere Risiken können sich verstärken.",
+     "richtig": true
+    },
+    {
+     "text": "Vulnerabilität bedeutet erhöhte Verletzlichkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Sie schützt vor Störungen.",
+     "richtig": false
+    },
+    {
+     "text": "Sie ist identisch mit Resilienz.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}
