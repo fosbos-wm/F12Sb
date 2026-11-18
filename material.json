@@ -1,0 +1,92 @@
+{
+ "material": [
+  {
+   "id": "info01",
+   "wocheId": "t12_1_1",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Entwicklung und Entwicklungsbedingungen",
+   "url": "infotexte/LB1-01_Entwicklung-und-Entwicklungsbedingungen.pdf",
+   "ord": 1
+  },
+  {
+   "id": "info02",
+   "wocheId": "t12_1_2",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Freuds Persönlichkeitsmodell",
+   "url": "infotexte/LB1-02_Freuds-Pers%C3%B6nlichkeitsmodell.pdf",
+   "ord": 2
+  },
+  {
+   "id": "info03",
+   "wocheId": "t12_1_3",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Psychosexuelle Entwicklung",
+   "url": "infotexte/LB1-03_Psychosexuelle-Entwicklung.pdf",
+   "ord": 3
+  },
+  {
+   "id": "info04",
+   "wocheId": "t12_1_4",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Angst und Abwehrmechanismen",
+   "url": "infotexte/LB1-04_Angst-und-Abwehrmechanismen.pdf",
+   "ord": 4
+  },
+  {
+   "id": "info05",
+   "wocheId": "t12_1_5",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Kritische Würdigung der Psychoanalyse",
+   "url": "infotexte/LB1-05_Kritische-W%C3%BCrdigung-der-Psychoanalyse.pdf",
+   "ord": 5
+  },
+  {
+   "id": "info06",
+   "wocheId": "t12_1_6",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Bindung: Begriff, Phasen, Typen",
+   "url": "infotexte/LB1-06_Bindung-Begriff-Phasen-und-Typen.pdf",
+   "ord": 6
+  },
+  {
+   "id": "info07",
+   "wocheId": "t12_1_6b",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Feinfühligkeit und gelungene Bindung",
+   "url": "infotexte/LB1-07_Feinf%C3%BChligkeit-und-gelungene-Bindung.pdf",
+   "ord": 7
+  },
+  {
+   "id": "info08",
+   "wocheId": "t12_1_7",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Primäre und sekundäre Bindungen",
+   "url": "infotexte/LB1-08_Prim%C3%A4re-und-sekund%C3%A4re-Bindungen.pdf",
+   "ord": 8
+  },
+  {
+   "id": "info09",
+   "wocheId": "t12_1_8",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Bindungsförderung in der Frühpädagogik",
+   "url": "infotexte/LB1-09_Bindungsf%C3%B6rderung-in-der-Fr%C3%BChp%C3%A4dagogik.pdf",
+   "ord": 9
+  },
+  {
+   "id": "info10",
+   "wocheId": "t12_1_9",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Lebensspanne und Entwicklungsaufgaben",
+   "url": "infotexte/LB1-10_Lebensspanne-und-Entwicklungsaufgaben.pdf",
+   "ord": 10
+  },
+  {
+   "id": "info11",
+   "wocheId": "t12_1_10",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Vulnerabilität und Resilienz",
+   "url": "infotexte/LB1-11_Vulnerabilit%C3%A4t-und-Resilienz.pdf",
+   "ord": 11
+  }
+ ]
+}

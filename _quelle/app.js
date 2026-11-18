@@ -20648,7 +20648,10 @@ async function kwLaden(){
   kwLehrer()?null:ppmMeineLaden().catch(()=>{}),
   ladeCheckoutDaten().catch(()=>null),lxSichtLaden(),lxWaLaden().catch(()=>{})]);
  KW.mat={};KW.fort={};
- if(mat)mat.docs.forEach(d=>{const x={id:d.id,...d.data()};(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)});lxMatSort();
+ if(mat)mat.docs.forEach(d=>{const x={id:d.id,...d.data()};(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)});
+ // Mitgelieferte Materialien aus dem Repo (material.json): Infotexte u. a., ohne Upload in der App.
+ try{const rr=await fetch("material.json?v="+Date.now());if(rr.ok){((await rr.json()).material||[]).forEach(x=>{(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push({fach:"paedagogik",...x,id:"repo-"+x.id})})}}catch(e){console.warn("material.json:",e)}
+ lxMatSort();
  if(!kwLehrer()){
   if(PPM.meine.fortAlle)KW.fort=PPM.meine.fortAlle;
   else try{(await getDocs(query(collection(db,"lehrplanFortschritt"),where("uid","==",currentUser.uid)))).docs.forEach(d=>{KW.fort[d.id.slice(currentUser.uid.length+1)]=d.data()})}catch(e){console.warn("Fortschritt:",e)}
@@ -20712,7 +20715,7 @@ async function renderKwProjekt(){
  </div>${footer()}`;
 }
 /* ------------------------------------------------ Themenseite */
-function kwDateiHTML(e,t,n,i){const r=isTeacher()&&n?`<button type="button" class="kw-del" data-kw="matweg" data-id="${esc(n)}" data-w="${esc(i)}" aria-label="L\xF6schen">\xD7</button>`:"";let a;return/^uebungsbausteine\/station\.html\?s=/.test(String(t||""))&&!isTeacher()?a=`<button type="button" class="kw-datei" data-kw="ubopen" data-url="${esc(t)}" data-w="${esc(i||"")}" data-t="${esc(e)}"><span>${esc(e)}</span><small>\xDCbung starten (Ergebnis wird gespeichert)</small></button>`:/^(uebungsbausteine|karteikarten)\//.test(String(t||""))?a=`<a class="kw-datei" href="${esc(t)}" target="_blank" rel="noopener"><span>${esc(e)}</span><small>${/^karteikarten/.test(t)?"Karteikarten \xF6ffnen":"\xDCbung starten"}</small></a>`:String(t||"").startsWith("fa:")?a=`<button type="button" class="kw-datei" data-kw="faueb" data-id="${esc(t.slice(3))}"><span>${esc(e)}</span><small>\xDCbung \xF6ffnen</small></button>`:String(t||"").startsWith("board:")?a=`<button type="button" class="kw-datei" data-kw="board" data-id="${esc(t.slice(6))}"><span>${esc(e)}</span><small>Tafel \xF6ffnen</small></button>`:a=`<a class="kw-datei" href="${esc(t||"#")}" target="_blank" rel="noopener"><span>${esc(e)}</span><small>${/^https?:\/\/[^/]*firebasestorage/.test(t||"")?"Datei":"Link"} \xF6ffnen</small></a>`, lxDzHtml(a,r,n)}
+function kwDateiHTML(e,t,n,i){const r=isTeacher()&&n&&!String(n).startsWith("repo-")?`<button type="button" class="kw-del" data-kw="matweg" data-id="${esc(n)}" data-w="${esc(i)}" aria-label="L\xF6schen">\xD7</button>`:"";let a;return/^uebungsbausteine\/station\.html\?s=/.test(String(t||""))&&!isTeacher()?a=`<button type="button" class="kw-datei" data-kw="ubopen" data-url="${esc(t)}" data-w="${esc(i||"")}" data-t="${esc(e)}"><span>${esc(e)}</span><small>\xDCbung starten (Ergebnis wird gespeichert)</small></button>`:/^(uebungsbausteine|karteikarten)\//.test(String(t||""))?a=`<a class="kw-datei" href="${esc(t)}" target="_blank" rel="noopener"><span>${esc(e)}</span><small>${/^karteikarten/.test(t)?"Karteikarten \xF6ffnen":"\xDCbung starten"}</small></a>`:String(t||"").startsWith("fa:")?a=`<button type="button" class="kw-datei" data-kw="faueb" data-id="${esc(t.slice(3))}"><span>${esc(e)}</span><small>\xDCbung \xF6ffnen</small></button>`:String(t||"").startsWith("board:")?a=`<button type="button" class="kw-datei" data-kw="board" data-id="${esc(t.slice(6))}"><span>${esc(e)}</span><small>Tafel \xF6ffnen</small></button>`:a=`<a class="kw-datei" href="${esc(t||"#")}" target="_blank" rel="noopener"><span>${esc(e)}</span><small>${/^https?:\/\/[^/]*firebasestorage/.test(t||"")?"Datei":"Link"} \xF6ffnen</small></a>`, lxDzHtml(a,r,n)}
 function kwSekHTML(titel,hint,inner,addKat,lehrer,extraBtn){
  return`<section class="kw-card kw-sek"><div class="kw-sek-kopf"><div><h3>${esc(titel)}</h3>${hint?`<small>${esc(hint)}</small>`:""}</div>${lehrer&&addKat?`<button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${addKat}">+ hinzufügen</button>`:""}</div>${extraBtn||""}${inner}</section>`;
 }
@@ -22561,7 +22564,7 @@ function lxMatSort(){Object.keys(KW.mat||{}).forEach(k=>KW.mat[k].sort((a,b)=>lx
   drag=null;
   try{
    const jobs=[];
-   ids.forEach((id,i)=>{const m=alle.find(x=>x.id===id),neu=(i+1)*10;if(m&&m.ord!==neu){m.ord=neu;jobs.push(updateDoc(doc(db,"lehrplanMaterialien",id),{ord:neu}))}});
+   ids.forEach((id,i)=>{const m=alle.find(x=>x.id===id),neu=(i+1)*10;if(m&&m.ord!==neu&&!String(id).startsWith("repo-")){m.ord=neu;jobs.push(updateDoc(doc(db,"lehrplanMaterialien",id),{ord:neu}))}});
    await Promise.all(jobs);lxMatSort();toast("Reihenfolge gespeichert.");
   }catch(e){console.warn("Reihenfolge:",e);toast("Reihenfolge konnte nicht gespeichert werden.");render()}
  });
