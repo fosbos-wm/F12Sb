@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Beispiele sortieren",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Anlage",
+  "Umwelt",
+  "Selbststeuerung"
+ ],
+ "karten": [
+  {
+   "t": "Amira und Leyla haben identisches Erbgut",
+   "s": 0
+  },
+  {
+   "t": "Jonas bringt eine musikalische Veranlagung mit",
+   "s": 0
+  },
+  {
+   "t": "Ein Kind ist von Natur aus sehr lebhaft",
+   "s": 0
+  },
+  {
+   "t": "Sabine wächst in einem Dorf ohne Bücherei auf",
+   "s": 1
+  },
+  {
+   "t": "Die Schule bietet Förderunterricht an",
+   "s": 1
+  },
+  {
+   "t": "Die Eltern sprechen viel mit dem Kind",
+   "s": 1
+  },
+  {
+   "t": "Leyla meldet sich selbst im Jugendzentrum an",
+   "s": 2
+  },
+  {
+   "t": "Jonas beschließt, täglich zu üben",
+   "s": 2
+  },
+  {
+   "t": "Mia sucht gezielt Hilfe bei Lernproblemen",
+   "s": 2
+  }
+ ]
+}

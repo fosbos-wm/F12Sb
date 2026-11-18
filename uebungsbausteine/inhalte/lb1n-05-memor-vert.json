@@ -1,0 +1,30 @@
+{
+ "titel": "Memory: Aussagen und Beurteilung",
+ "anleitung": "Finde die passenden Paare.",
+ "paare": [
+  [
+   "„Freud ist komplett überholt.“",
+   "zu pauschal, Einfluss bleibt"
+  ],
+  [
+   "„Freud ist vollständig bewiesen.“",
+   "falsch, nur teilweise belegt"
+  ],
+  [
+   "Trotz = Ödipuskonflikt",
+   "empirisch nicht belegt, Alternativen möglich"
+  ],
+  [
+   "Beratung nutzt psychoanalytische Gedanken.",
+   "praktischer Nutzen"
+  ],
+  [
+   "Aus Patientenfällen auf alle Menschen schließen",
+   "Verallgemeinerung als Kritik"
+  ],
+  [
+   "Einfluss ≠ Geltung",
+   "wichtige Unterscheidung im Urteil"
+  ]
+ ]
+}

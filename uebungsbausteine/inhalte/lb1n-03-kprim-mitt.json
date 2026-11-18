@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Latenzphase treffen zu?",
+   "statements": [
+    {
+     "text": "Sie reicht etwa von 6 bis ca. 12 Jahren.",
+     "richtig": true
+    },
+    {
+     "text": "Libido wird auf Lernen und Leistung gelenkt.",
+     "richtig": true
+    },
+    {
+     "text": "Es gibt keine Entwicklung.",
+     "richtig": false
+    },
+    {
+     "text": "Sie endet mit der Geburt.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur phallischen Phase treffen zu?",
+   "statements": [
+    {
+     "text": "Sie betrifft etwa das 4. und 5. Lebensjahr.",
+     "richtig": true
+    },
+    {
+     "text": "Das Über-Ich entwickelt sich.",
+     "richtig": true
+    },
+    {
+     "text": "Das Kind lernt Sauberkeit.",
+     "richtig": false
+    },
+    {
+     "text": "Es geht um den Mund.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Libido treffen zu?",
+   "statements": [
+    {
+     "text": "Sie ist psychische Triebenergie.",
+     "richtig": true
+    },
+    {
+     "text": "Sie kann in einer Phase gebunden bleiben.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist eine Instanz.",
+     "richtig": false
+    },
+    {
+     "text": "Sie existiert erst ab der Pubertät.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

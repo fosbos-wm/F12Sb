@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Beispiele sortieren",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Es",
+  "Ich",
+  "Über-Ich"
+ ],
+ "karten": [
+  {
+   "t": "Nora will nur Spaß und keine Hausaufgaben",
+   "s": 0
+  },
+  {
+   "t": "Das Baby schreit sofort bei Hunger",
+   "s": 0
+  },
+  {
+   "t": "Kai will den Keks nehmen, ohne zu fragen",
+   "s": 0
+  },
+  {
+   "t": "Lisa plant: erst lernen, dann Serie",
+   "s": 1
+  },
+  {
+   "t": "Max überlegt, ob die Lüge auffliegt",
+   "s": 1
+  },
+  {
+   "t": "Jana wägt Wunsch und Regel ab",
+   "s": 1
+  },
+  {
+   "t": "Emre hat ein schlechtes Gewissen nach dem Streit",
+   "s": 2
+  },
+  {
+   "t": "Sara denkt: Man darf nicht petzen",
+   "s": 2
+  },
+  {
+   "t": "Ben schämt sich für kleine Fehler",
+   "s": 2
+  }
+ ]
+}

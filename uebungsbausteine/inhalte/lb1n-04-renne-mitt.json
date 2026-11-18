@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Herr Lang sagt: „Der Jobverlust war mir egal.“ Welcher Mechanismus?",
+   "o": [
+    "Verdrängung",
+    "Projektion",
+    "Identifikation",
+    "Regression"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Ein 4-Jähriger will nach der Geburt der Schwester wieder Fläschchen. Welcher Mechanismus?",
+   "o": [
+    "Projektion",
+    "Regression",
+    "Verdrängung",
+    "Identifikation"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Ein Schüler beschuldigt andere, selbst unehrlich zu sein. Welcher Mechanismus?",
+   "o": [
+    "Verdrängung",
+    "Identifikation",
+    "Projektion",
+    "Regression"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Angst geht vom Über-Ich aus?",
+   "o": [
+    "Realangst",
+    "neurotische Angst",
+    "keine",
+    "moralische Angst"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Eine Jugendliche übernimmt Haltung und Stil ihres Vorbilds. Welcher Mechanismus?",
+   "o": [
+    "Identifikation",
+    "Projektion",
+    "Regression",
+    "Verdrängung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum ist Abwehr langfristig problematisch?",
+   "o": [
+    "Sie ist bewusst",
+    "Probleme bleiben ungelöst",
+    "Sie stärkt das Es",
+    "Sie ist selten"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie läuft Abwehr ab?",
+   "o": [
+    "bewusst",
+    "nur im Schlaf",
+    "unbewusst",
+    "nur bei Kindern"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Angst richtet sich auf reale Gefahr?",
+   "o": [
+    "moralische Angst",
+    "neurotische Angst",
+    "keine",
+    "Realangst"
+   ],
+   "r": 3
+  }
+ ]
+}

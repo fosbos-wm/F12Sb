@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welcher Mechanismus: Eigene Unpünktlichkeit wird bei Kollegen kritisiert.",
+   "o": [
+    "Projektion",
+    "Verdrängung",
+    "Regression",
+    "Identifikation"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welcher Mechanismus: Ein 4-Jähriger nässt nach der Geburt der Schwester wieder ein.",
+   "o": [
+    "Projektion",
+    "Regression",
+    "Verdrängung",
+    "Identifikation"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wozu dienen Abwehrmechanismen?",
+   "o": [
+    "Stärkung des Über-Ich",
+    "Befriedigung des Es",
+    "Schutz des Ich vor Angst",
+    "Bewusste Problemlösung"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wie laufen Abwehrmechanismen ab?",
+   "o": [
+    "bewusst geplant",
+    "nur bei Kindern",
+    "nur im Schlaf",
+    "unbewusst"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Welche Angst geht vom Über-Ich aus?",
+   "o": [
+    "moralische Angst",
+    "Realangst",
+    "neurotische Angst",
+    "keine"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was kann dauerhafte Abwehr bewirken?",
+   "o": [
+    "bessere Problemlösung",
+    "Verzerrung der Realität",
+    "mehr Ich-Stärke",
+    "weniger Angst dauerhaft"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Ein Jugendlicher ahmt sein Idol nach. Welcher Mechanismus?",
+   "o": [
+    "Verdrängung",
+    "Regression",
+    "Identifikation",
+    "Projektion"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist Verdrängung?",
+   "o": [
+    "bewusstes Vergessen",
+    "Schuldzuweisung",
+    "Rückfall",
+    "Unangenehmes wird ins Unbewusste abgedrängt"
+   ],
+   "r": 3
+  }
+ ]
+}

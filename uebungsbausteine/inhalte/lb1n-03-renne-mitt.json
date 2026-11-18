@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Elias (1) beruhigt sich durch Nuckeln. Welche Phase?",
+   "o": [
+    "orale Phase",
+    "anale Phase",
+    "phallische Phase",
+    "Latenzphase"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Mara (2;8) trotzt und ist stolz auf Toilettengang. Welche Phase?",
+   "o": [
+    "orale Phase",
+    "anale Phase",
+    "phallische Phase",
+    "genitale Phase"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Ben (4;6) fragt nach Geschlechtsunterschieden und will „Papa heiraten“. Welche Phase?",
+   "o": [
+    "orale Phase",
+    "anale Phase",
+    "phallische Phase",
+    "Latenzphase"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Ein Erwachsener raucht bei Stress mehr. Was liegt nahe?",
+   "o": [
+    "Fixierung in der genitalen Phase",
+    "Reifung",
+    "Identifikation",
+    "Regression in die orale Phase"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Ein 8-Jähriger sammelt Karten und lernt eifrig. Welche Phase?",
+   "o": [
+    "Latenzphase",
+    "orale Phase",
+    "anale Phase",
+    "phallische Phase"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie sollte Sauberkeitserziehung ablaufen?",
+   "o": [
+    "möglichst früh",
+    "geduldig, nicht zu streng",
+    "mit Strafen",
+    "gar nicht"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was begünstigt Fixierung?",
+   "o": [
+    "gelungene Erziehung",
+    "Reifung",
+    "Über- oder Unterbefriedigung",
+    "Identifikation"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Phase beginnt in der Pubertät?",
+   "o": [
+    "Latenzphase",
+    "phallische Phase",
+    "anale Phase",
+    "genitale Phase"
+   ],
+   "r": 3
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Argumente sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Nutzen von Abwehr",
+  "Risiko von Abwehr"
+ ],
+ "items": [
+  {
+   "t": "Kurzfristige Entlastung",
+   "k": 0
+  },
+  {
+   "t": "Schutz vor Überforderung",
+   "k": 0
+  },
+  {
+   "t": "Zeitgewinn zur Stabilisierung",
+   "k": 0
+  },
+  {
+   "t": "Verzerrte Realitätswahrnehmung",
+   "k": 1
+  },
+  {
+   "t": "Probleme bleiben ungelöst",
+   "k": 1
+  },
+  {
+   "t": "Verdrängtes wirkt weiter",
+   "k": 1
+  },
+  {
+   "t": "Starre, dauerhafte Muster",
+   "k": 1
+  },
+  {
+   "t": "Mögliche psychische Störungen",
+   "k": 1
+  }
+ ]
+}

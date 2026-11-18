@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Aussagen beurteilen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Ein Elternpaar sagt: „Unser Sohn ist eben faul, das liegt in den Genen.“",
+   "einseitig (Anlage), Umwelt und Selbststeuerung fehlen"
+  ],
+  [
+   "Eine Lehrerin sagt: „Mit guter Förderung wird jedes Kind gleich gut.“",
+   "einseitig (Umwelt), Anlage fehlt"
+  ],
+  [
+   "Ein Jugendlicher sagt: „Ich bin, was ich aus mir mache.“",
+   "einseitig (Selbststeuerung)"
+  ],
+  [
+   "Zwillinge entwickeln sich trotz gleicher Gene verschieden.",
+   "Beleg für Wechselwirkung"
+  ],
+  [
+   "Ein Kind wächst in Armut auf und wird erfolgreich.",
+   "Zusammenspiel von Schutz und Selbststeuerung"
+  ],
+  [
+   "Anteile von Anlage und Umwelt in Prozent",
+   "nicht zuverlässig trennbar"
+  ]
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Anlage",
+  "Umwelt",
+  "Selbststeuerung"
+ ],
+ "items": [
+  {
+   "t": "Augenfarbe wird bei der Befruchtung festgelegt",
+   "k": 0
+  },
+  {
+   "t": "Genetisch bedingte Veranlagung zu großer Körpergröße",
+   "k": 0
+  },
+  {
+   "t": "Das Kind erbt die Neigung zu Schüchternheit",
+   "k": 0
+  },
+  {
+   "t": "Eine Familie mit vielen Büchern und Gesprächen",
+   "k": 1
+  },
+  {
+   "t": "Ein Kind wächst in einem Land mit schlechter Ernährung auf",
+   "k": 1
+  },
+  {
+   "t": "Eine Schule mit guten Förderangeboten",
+   "k": 1
+  },
+  {
+   "t": "Lena beschließt, jeden Tag zu üben, um besser zu werden",
+   "k": 2
+  },
+  {
+   "t": "Ein Jugendlicher sucht sich bewusst einen Sportverein",
+   "k": 2
+  },
+  {
+   "t": "Ein Kind setzt sich selbst das Ziel, Radfahren zu lernen",
+   "k": 2
+  }
+ ]
+}

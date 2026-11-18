@@ -1,0 +1,46 @@
+{
+ "titel": "Blockfall: Argumente sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Pro Wert der Theorie",
+  "Contra Wert der Theorie"
+ ],
+ "items": [
+  {
+   "t": "Hebt das Unbewusste hervor",
+   "k": 0
+  },
+  {
+   "t": "Betont frühe Kindheit",
+   "k": 0
+  },
+  {
+   "t": "Praktischer Nutzen in Beratung",
+   "k": 0
+  },
+  {
+   "t": "Hat Psychologie stark beeinflusst",
+   "k": 0
+  },
+  {
+   "t": "Kaum empirisch prüfbar",
+   "k": 1
+  },
+  {
+   "t": "Verallgemeinerung aus Einzelfällen",
+   "k": 1
+  },
+  {
+   "t": "Kulturelle Abhängigkeit",
+   "k": 1
+  },
+  {
+   "t": "Vage Begriffe",
+   "k": 1
+  },
+  {
+   "t": "Primärnarzissmus widerlegt",
+   "k": 1
+  }
+ ]
+}

@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Anlage treffen zu?",
+   "statements": [
+    {
+     "text": "Sie ist bei der Befruchtung festgelegt.",
+     "richtig": true
+    },
+    {
+     "text": "Sie bestimmt die Entwicklung allein.",
+     "richtig": false
+    },
+    {
+     "text": "Sie wirkt mit Umwelt und Selbststeuerung zusammen.",
+     "richtig": true
+    },
+    {
+     "text": "Sie verändert sich durch Erziehung vollständig.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Umwelt treffen zu?",
+   "statements": [
+    {
+     "text": "Sie umfasst soziale Einflüsse.",
+     "richtig": true
+    },
+    {
+     "text": "Sie umfasst auch kulturelle Einflüsse.",
+     "richtig": true
+    },
+    {
+     "text": "Sie betrifft nur die Familie.",
+     "richtig": false
+    },
+    {
+     "text": "Sie wirkt unabhängig von der Anlage.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Selbststeuerung treffen zu?",
+   "statements": [
+    {
+     "text": "Menschen setzen sich Ziele.",
+     "richtig": true
+    },
+    {
+     "text": "Sie kann die Umwelt verändern.",
+     "richtig": true
+    },
+    {
+     "text": "Sie gibt es erst im Erwachsenenalter.",
+     "richtig": false
+    },
+    {
+     "text": "Sie macht Anlage und Umwelt bedeutungslos.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

@@ -1,46 +1,46 @@
 {
- "titel": "Blockfall: Entwicklung und Entwicklungsbedingungen",
+ "titel": "Blockfall: Argumente sortieren",
  "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
  "kategorien": [
-  "Anlage",
-  "Umwelt",
-  "Selbststeuerung"
+  "Spricht für Anlage",
+  "Spricht für Umwelt",
+  "Spricht für Selbststeuerung"
  ],
  "items": [
   {
-   "t": "Augenfarbe wird bei der Befruchtung festgelegt",
+   "t": "Eineiige Zwillinge ähneln sich in vielen Merkmalen",
    "k": 0
   },
   {
-   "t": "Genetisch bedingte Veranlagung zu großer Körpergröße",
+   "t": "Veranlagungen zeigen sich schon früh",
    "k": 0
   },
   {
-   "t": "Das Kind erbt die Neigung zu Schüchternheit",
+   "t": "Bestimmte Begabungen kommen in Familien gehäuft vor",
    "k": 0
   },
   {
-   "t": "Eine Familie mit vielen Büchern und Gesprächen",
+   "t": "Kinder in anregenden Familien lernen oft schneller",
    "k": 1
   },
   {
-   "t": "Ein Kind wächst in einem Land mit schlechter Ernährung auf",
+   "t": "Armut kann Entwicklungschancen verringern",
    "k": 1
   },
   {
-   "t": "Eine Schule mit guten Förderangeboten",
+   "t": "Gute Schulen fördern Fähigkeiten",
    "k": 1
   },
   {
-   "t": "Lena beschließt, jeden Tag zu üben, um besser zu werden",
+   "t": "Jugendliche wählen gezielt Vorbilder",
    "k": 2
   },
   {
-   "t": "Ein Jugendlicher sucht sich bewusst einen Sportverein",
+   "t": "Menschen setzen sich langfristige Ziele",
    "k": 2
   },
   {
-   "t": "Ein Kind setzt sich selbst das Ziel, Radfahren zu lernen",
+   "t": "Wer übt, verbessert seine Leistung",
    "k": 2
   }
  ]

@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Warum ist die Theorie schwer überprüfbar?",
+   "o": [
+    "Jedes Ergebnis lässt sich als Bestätigung deuten",
+    "Sie ist zu kurz",
+    "Es gibt keine Patienten",
+    "Sie ist zu neu"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Stärke wird genannt?",
+   "o": [
+    "exakte Messbarkeit",
+    "Betonung der frühen Kindheit",
+    "kulturelle Neutralität",
+    "Verzicht auf Deutung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was gilt als empirisch widerlegt?",
+   "o": [
+    "Bedeutung der Kindheit",
+    "Existenz von Abwehr",
+    "Primärnarzissmus",
+    "Unbewusstes"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Ein Kritikpunkt lautet:",
+   "o": [
+    "zu geringe Wirkung",
+    "zu wenig Begriffe",
+    "zu große Genauigkeit",
+    "Verallgemeinerung aus klinischen Fällen"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Was bedeutet Kulturabhängigkeit?",
+   "o": [
+    "Aussagen gelten nicht überall gleich",
+    "Kulturen sind gleich",
+    "keine Kritik",
+    "Kultur spielt keine Rolle"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Aussage zur Empirie stimmt?",
+   "o": [
+    "alles ist bestätigt",
+    "orale und anale Merkmale treten teilweise gemeinsam auf",
+    "nichts ist erforscht",
+    "Ödipus ist bewiesen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie beurteilt man die Theorie fair?",
+   "o": [
+    "nur Stärken nennen",
+    "nur Schwächen nennen",
+    "Stärken und Schwächen abwägen",
+    "gar nicht beurteilen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Trotz ist ein Beispiel für:",
+   "o": [
+    "sicheren Nachweis der analen Phase",
+    "reines Triebverhalten",
+    "Ödipuskonflikt",
+    "Verhalten mit vielen möglichen Ursachen"
+   ],
+   "r": 3
+  }
+ ]
+}

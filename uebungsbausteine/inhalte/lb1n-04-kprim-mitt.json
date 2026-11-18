@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Verdrängung treffen zu?",
+   "statements": [
+    {
+     "text": "Unangenehmes wird ins Unbewusste abgedrängt.",
+     "richtig": true
+    },
+    {
+     "text": "Das Verdrängte wirkt weiter.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist ein bewusster Plan.",
+     "richtig": false
+    },
+    {
+     "text": "Sie löst das Problem dauerhaft.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Projektion treffen zu?",
+   "statements": [
+    {
+     "text": "Eigene Eigenschaften werden anderen zugeschrieben.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entlastet kurzfristig.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist ein Rückfall auf frühere Stufe.",
+     "richtig": false
+    },
+    {
+     "text": "Sie läuft bewusst ab.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Identifikation treffen zu?",
+   "statements": [
+    {
+     "text": "Eigenschaften einer bewunderten Person werden übernommen.",
+     "richtig": true
+    },
+    {
+     "text": "Sie kann Angst reduzieren.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist Regression.",
+     "richtig": false
+    },
+    {
+     "text": "Sie läuft nur bei Kindern ab.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

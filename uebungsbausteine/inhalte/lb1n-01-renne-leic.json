@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was gehört zum Begriff Entwicklung?",
+   "o": [
+    "gerichtete, zeitlich geordnete Veränderungen",
+    "zufällige Einzelereignisse",
+    "nur körperliches Wachstum",
+    "Veränderungen nur in der Kindheit"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Bedingung ist bei der Befruchtung festgelegt?",
+   "o": [
+    "Umwelt",
+    "Anlage",
+    "Selbststeuerung",
+    "Erziehung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Zu welcher Bedingung zählt die soziale Umwelt?",
+   "o": [
+    "Anlage",
+    "Selbststeuerung",
+    "Umwelt",
+    "Reifung"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Eineiige Zwillinge unterscheiden sich in ihren Interessen. Was erklärt das am besten?",
+   "o": [
+    "unterschiedliche Anlage",
+    "ein Messfehler",
+    "reiner Zufall",
+    "unterschiedliche Umwelterfahrungen und Selbststeuerung"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Wie wirken Anlage, Umwelt und Selbststeuerung zusammen?",
+   "o": [
+    "Sie beeinflussen sich wechselseitig",
+    "Die Anlage entscheidet allein",
+    "Die Umwelt entscheidet allein",
+    "Sie wirken unabhängig voneinander"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Eine Jugendliche wählt gezielt Freunde, die sie fördern. Welche Wirkbeziehung?",
+   "o": [
+    "Umwelt wirkt auf die Anlage",
+    "Selbststeuerung wirkt auf die Umwelt",
+    "Anlage wirkt auf die Umwelt",
+    "Keine Wirkbeziehung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Warum lassen sich Anteile von Anlage und Umwelt nicht sauber trennen?",
+   "o": [
+    "Weil es keine Anlage gibt",
+    "Weil Umwelt unwichtig ist",
+    "Weil sie sich wechselseitig beeinflussen",
+    "Weil Messungen verboten sind"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was zeigt, dass Selbststeuerung zur Entwicklung gehört?",
+   "o": [
+    "Kinder wachsen immer gleich",
+    "Gene bestimmen alles",
+    "Umwelt formt passiv",
+    "Menschen setzen sich Ziele und verfolgen sie"
+   ],
+   "r": 3
+  }
+ ]
+}

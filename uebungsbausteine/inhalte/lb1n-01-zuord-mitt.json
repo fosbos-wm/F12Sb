@@ -1,0 +1,38 @@
+{
+ "titel": "Zuordnung: Beispiele erkennen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Ein Kind hat die gleiche Augenfarbe wie sein Vater",
+   "Anlage"
+  ],
+  [
+   "Eine Familie liest viel vor, das Kind spricht früh",
+   "Umwelt"
+  ],
+  [
+   "Eine Jugendliche setzt sich das Ziel, Gitarre zu lernen",
+   "Selbststeuerung"
+  ],
+  [
+   "Eineiige Zwillinge entwickeln unterschiedliche Hobbys",
+   "Wechselwirkung"
+  ],
+  [
+   "Ein Land mit guter Ernährung und Schulen",
+   "Umwelt"
+  ],
+  [
+   "Ein Kind sucht sich bewusst sportliche Freunde",
+   "Selbststeuerung wirkt auf Umwelt"
+  ],
+  [
+   "Veranlagung zu Schüchternheit",
+   "Anlage"
+  ],
+  [
+   "Erfolge steigern die Motivation zum Üben",
+   "Wechselwirkung"
+  ]
+ ]
+}

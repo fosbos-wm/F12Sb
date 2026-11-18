@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Angst nach Freud treffen zu?",
+   "statements": [
+    {
+     "text": "Angst ist eine Funktion des Ich.",
+     "richtig": true
+    },
+    {
+     "text": "Es gibt Realangst, moralische und neurotische Angst.",
+     "richtig": true
+    },
+    {
+     "text": "Angst entsteht nur im Es.",
+     "richtig": false
+    },
+    {
+     "text": "Angst ist immer krankhaft.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Abwehrmechanismen treffen zu?",
+   "statements": [
+    {
+     "text": "Sie wirken unbewusst.",
+     "richtig": true
+    },
+    {
+     "text": "Sie schützen das Ich kurzfristig vor Angst.",
+     "richtig": true
+    },
+    {
+     "text": "Sie lösen das Problem dauerhaft.",
+     "richtig": false
+    },
+    {
+     "text": "Sie sind immer bewusst gesteuert.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Herr Yilmaz ist unpünktlich und beklagt die Unzuverlässigkeit seiner Mitarbeiter. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es handelt sich um Projektion.",
+     "richtig": true
+    },
+    {
+     "text": "Das Problem wird scheinbar bei anderen verortet.",
+     "richtig": true
+    },
+    {
+     "text": "Es handelt sich um Regression.",
+     "richtig": false
+    },
+    {
+     "text": "Er handelt vollständig bewusst.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu starrer Abwehr treffen zu?",
+   "statements": [
+    {
+     "text": "Sie kann die Wahrnehmung der Realität verzerren.",
+     "richtig": true
+    },
+    {
+     "text": "Das Verdrängte kann weiterwirken.",
+     "richtig": true
+    },
+    {
+     "text": "Sie macht Menschen langfristig stabiler.",
+     "richtig": false
+    },
+    {
+     "text": "Sie führt nie zu Störungen.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

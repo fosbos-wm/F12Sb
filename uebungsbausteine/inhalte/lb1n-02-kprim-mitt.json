@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Es treffen zu?",
+   "statements": [
+    {
+     "text": "Es folgt dem Lustprinzip.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist angeboren.",
+     "richtig": true
+    },
+    {
+     "text": "Es folgt dem Realitätsprinzip.",
+     "richtig": false
+    },
+    {
+     "text": "Es entsteht durch Erziehung.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Über-Ich treffen zu?",
+   "statements": [
+    {
+     "text": "Es enthält verinnerlichte Normen.",
+     "richtig": true
+    },
+    {
+     "text": "Es entsteht durch Erziehung.",
+     "richtig": true
+    },
+    {
+     "text": "Es folgt dem Lustprinzip.",
+     "richtig": false
+    },
+    {
+     "text": "Es ist bei Geburt voll ausgebildet.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Ich treffen zu?",
+   "statements": [
+    {
+     "text": "Es prüft die Realität.",
+     "richtig": true
+    },
+    {
+     "text": "Es sucht Kompromisse.",
+     "richtig": true
+    },
+    {
+     "text": "Es folgt dem Moralitätsprinzip.",
+     "richtig": false
+    },
+    {
+     "text": "Es ist unbewusst und triebhaft.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

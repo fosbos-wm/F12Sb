@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Jonas hat Begabung, übt aber nie. Was fehlt für die Entfaltung?",
+   "o": [
+    "Umwelt und Selbststeuerung",
+    "Anlage",
+    "Reifung",
+    "nichts"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Zwei Brüder wachsen in derselben Familie auf und sind sehr verschieden. Was zeigt das?",
+   "o": [
+    "Anlage ist gleich",
+    "Gleiche Umwelt führt nicht zu gleicher Entwicklung",
+    "Erziehung ist unwichtig",
+    "Entwicklung ist zufällig"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Eine Schülerin sucht sich bewusst lernstarke Freunde. Welche Wirkbeziehung?",
+   "o": [
+    "Anlage wirkt auf Umwelt",
+    "Umwelt wirkt auf Anlage",
+    "Selbststeuerung wirkt auf Umwelt",
+    "keine"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Ein Kind zieht in ein Land mit guter Schulbildung. Welche Bedingung?",
+   "o": [
+    "Anlage",
+    "Selbststeuerung",
+    "Reifung",
+    "Umwelt"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Warum lässt sich der Anteil der Anlage nicht angeben?",
+   "o": [
+    "Bedingungen beeinflussen sich wechselseitig",
+    "Anlage gibt es nicht",
+    "Umwelt zählt nicht",
+    "Daten fehlen immer"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Mias Erfolge im Sport motivieren sie, mehr zu trainieren. Was zeigt das?",
+   "o": [
+    "reine Anlage",
+    "Wechselwirkung",
+    "reine Umwelt",
+    "Zufall"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wer entscheidet über die Entwicklung?",
+   "o": [
+    "nur die Gene",
+    "nur die Eltern",
+    "Anlage, Umwelt und Selbststeuerung gemeinsam",
+    "nur das Kind"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist ein Beispiel für kulturelle Umwelt?",
+   "o": [
+    "Augenfarbe",
+    "tägliches Üben",
+    "Veranlagung",
+    "Normen und Bräuche des Landes"
+   ],
+   "r": 3
+  }
+ ]
+}

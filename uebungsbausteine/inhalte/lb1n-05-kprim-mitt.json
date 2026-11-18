@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Überprüfbarkeit treffen zu?",
+   "statements": [
+    {
+     "text": "Die Theorie ist schwer widerlegbar.",
+     "richtig": true
+    },
+    {
+     "text": "Jedes Verhalten lässt sich nachträglich deuten.",
+     "richtig": true
+    },
+    {
+     "text": "Alle Aussagen sind experimentell bewiesen.",
+     "richtig": false
+    },
+    {
+     "text": "Es gibt kein Problem.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Kritik treffen zu?",
+   "statements": [
+    {
+     "text": "Begriffe sind teils vage.",
+     "richtig": true
+    },
+    {
+     "text": "Kulturelle Unterschiede bleiben unberücksichtigt.",
+     "richtig": true
+    },
+    {
+     "text": "Die Theorie ist exakt messbar.",
+     "richtig": false
+    },
+    {
+     "text": "Sie gilt unabhängig von der Kultur.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Stärken treffen zu?",
+   "statements": [
+    {
+     "text": "Sie betont die Bedeutung der Kindheit.",
+     "richtig": true
+    },
+    {
+     "text": "Sie hat Beratung beeinflusst.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist vollständig bestätigt.",
+     "richtig": false
+    },
+    {
+     "text": "Sie erklärt nur Erwachsene.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Es",
+  "Ich",
+  "Über-Ich"
+ ],
+ "items": [
+  {
+   "t": "„Ich will das sofort haben!“",
+   "k": 0
+  },
+  {
+   "t": "Strebt nach Lust und Triebbefriedigung",
+   "k": 0
+  },
+  {
+   "t": "Wirkt von Geburt an",
+   "k": 0
+  },
+  {
+   "t": "Prüft, ob etwas in der Realität möglich ist",
+   "k": 1
+  },
+  {
+   "t": "Wägt Folgen ab und sucht Kompromisse",
+   "k": 1
+  },
+  {
+   "t": "Schiebt Befriedigung auf",
+   "k": 1
+  },
+  {
+   "t": "„Das gehört sich nicht!“",
+   "k": 2
+  },
+  {
+   "t": "Löst Schuldgefühle aus",
+   "k": 2
+  },
+  {
+   "t": "Beinhaltet verinnerlichte Gebote und Verbote",
+   "k": 2
+  }
+ ]
+}

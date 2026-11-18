@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welche Instanz folgt dem Lustprinzip?",
+   "o": [
+    "Es",
+    "Ich",
+    "Über-Ich",
+    "Bewusstes"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welches Prinzip leitet das Ich?",
+   "o": [
+    "Lustprinzip",
+    "Realitätsprinzip",
+    "Moralitätsprinzip",
+    "Zufallsprinzip"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist das Über-Ich?",
+   "o": [
+    "der Triebbereich",
+    "die Wahrnehmung",
+    "verinnerlichte Normen und das Gewissen",
+    "das Bewusstsein"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wann spricht man von einem starken Ich?",
+   "o": [
+    "wenn es das Es unterdrückt",
+    "wenn es dem Über-Ich folgt",
+    "wenn es nichts wahrnimmt",
+    "wenn es zwischen Es, Über-Ich und Realität ausgleicht"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Ein Kind schämt sich massiv für kleine Fehler. Was ist wahrscheinlich?",
+   "o": [
+    "ein sehr starkes Über-Ich",
+    "ein starkes Es",
+    "ein starkes Ich",
+    "ein schwaches Über-Ich"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wo liegen verdrängte Inhalte?",
+   "o": [
+    "im Bewusstsein",
+    "im Unbewussten",
+    "im Vorbewussten",
+    "in der Realität"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wann siegt das Es?",
+   "o": [
+    "wenn das Über-Ich stark ist",
+    "wenn das Ich stark ist",
+    "wenn das Ich zu schwach ist, um zu steuern",
+    "nie"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Instanz entsteht erst durch Erziehung?",
+   "o": [
+    "Es",
+    "Realität",
+    "Trieb",
+    "Über-Ich"
+   ],
+   "r": 3
+  }
+ ]
+}

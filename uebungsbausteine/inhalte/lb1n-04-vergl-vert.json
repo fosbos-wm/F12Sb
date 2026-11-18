@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Nutzen von Abwehr",
+  "Risiko von Abwehr"
+ ],
+ "karten": [
+  {
+   "t": "Kurzfristige Entlastung",
+   "s": 0
+  },
+  {
+   "t": "Schutz vor Überforderung",
+   "s": 0
+  },
+  {
+   "t": "Zeitgewinn zur Stabilisierung",
+   "s": 0
+  },
+  {
+   "t": "Verzerrte Realitätswahrnehmung",
+   "s": 1
+  },
+  {
+   "t": "Probleme bleiben ungelöst",
+   "s": 1
+  },
+  {
+   "t": "Verdrängtes wirkt weiter",
+   "s": 1
+  },
+  {
+   "t": "Starre, dauerhafte Muster",
+   "s": 1
+  },
+  {
+   "t": "Mögliche psychische Störungen",
+   "s": 1
+  }
+ ]
+}

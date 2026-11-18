@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Beispiele sortieren",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Realangst",
+  "Moralische Angst",
+  "Neurotische Angst"
+ ],
+ "karten": [
+  {
+   "t": "Angst vor einer schlechten Note und Strafe",
+   "s": 0
+  },
+  {
+   "t": "Furcht vor einem Unfall",
+   "s": 0
+  },
+  {
+   "t": "Angst vor öffentlicher Blamage",
+   "s": 0
+  },
+  {
+   "t": "Schuldgefühle nach einem Streit",
+   "s": 1
+  },
+  {
+   "t": "Gewissensbisse wegen einer Lüge",
+   "s": 1
+  },
+  {
+   "t": "Angst, gegen eigene Werte zu verstoßen",
+   "s": 1
+  },
+  {
+   "t": "Angst, von eigenen Impulsen überwältigt zu werden",
+   "s": 2
+  },
+  {
+   "t": "Diffuse Angst ohne klaren Anlass",
+   "s": 2
+  },
+  {
+   "t": "Furcht, die Kontrolle zu verlieren",
+   "s": 2
+  }
+ ]
+}

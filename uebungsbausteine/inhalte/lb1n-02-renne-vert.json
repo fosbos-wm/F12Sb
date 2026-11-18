@@ -1,84 +1,84 @@
 {
- "titel": "Rennen: Freuds Persönlichkeitsmodell",
+ "titel": "Rennen: Beurteilungsfragen",
  "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
  "fragen": [
   {
-   "f": "Welche Instanz folgt dem Lustprinzip?",
+   "f": "Was kennzeichnet ein starkes Ich?",
    "o": [
-    "Es",
-    "Ich",
-    "Über-Ich",
-    "Bewusstes"
+    "Ausgleich zwischen Es, Über-Ich und Realität",
+    "Unterdrückung des Es",
+    "Gehorsam gegenüber dem Über-Ich",
+    "Verzicht auf Wünsche"
    ],
    "r": 0
   },
   {
-   "f": "Welches Prinzip leitet das Ich?",
+   "f": "Warum kann sehr strenge Erziehung problematisch sein?",
    "o": [
-    "Lustprinzip",
-    "Realitätsprinzip",
-    "Moralitätsprinzip",
-    "Zufallsprinzip"
+    "Sie stärkt immer das Ich",
+    "Sie kann ein übermäßiges Über-Ich fördern",
+    "Sie schwächt das Es",
+    "Sie wirkt nicht"
    ],
    "r": 1
   },
   {
-   "f": "Was ist das Über-Ich?",
+   "f": "Welche Folge hat fehlende Grenzsetzung nach Freud?",
    "o": [
-    "der Triebbereich",
-    "die Wahrnehmung",
-    "verinnerlichte Normen und das Gewissen",
-    "das Bewusstsein"
+    "Das Über-Ich dominiert",
+    "Das Ich ist unnötig",
+    "Das Es dominiert eher",
+    "keine"
    ],
    "r": 2
   },
   {
-   "f": "Wann spricht man von einem starken Ich?",
+   "f": "Wie beurteilt man „Das Es ist schlecht“?",
    "o": [
-    "wenn es das Es unterdrückt",
-    "wenn es dem Über-Ich folgt",
-    "wenn es nichts wahrnimmt",
-    "wenn es zwischen Es, Über-Ich und Realität ausgleicht"
+    "richtig",
+    "bewiesen",
+    "irrelevant",
+    "einseitig, das Es ist Teil der Persönlichkeit"
    ],
    "r": 3
   },
   {
-   "f": "Ein Kind schämt sich massiv für kleine Fehler. Was ist wahrscheinlich?",
+   "f": "Welche Erziehung fördert das Ich?",
    "o": [
-    "ein sehr starkes Über-Ich",
-    "ein starkes Es",
-    "ein starkes Ich",
-    "ein schwaches Über-Ich"
+    "verständnisvoll mit klaren Grenzen",
+    "streng und strafend",
+    "grenzenlos",
+    "gleichgültig"
    ],
    "r": 0
   },
   {
-   "f": "Wo liegen verdrängte Inhalte?",
+   "f": "Wodurch entsteht das Über-Ich?",
    "o": [
-    "im Bewusstsein",
-    "im Unbewussten",
-    "im Vorbewussten",
-    "in der Realität"
+    "Geburt",
+    "Verinnerlichung von Normen",
+    "Zufall",
+    "Trieb"
    ],
    "r": 1
   },
   {
-   "f": "Wann siegt das Es?",
+   "f": "Wie lässt sich Konflikt zwischen Instanzen lösen?",
    "o": [
-    "wenn das Über-Ich stark ist",
-    "wenn das Ich stark ist",
-    "wenn das Ich zu schwach ist, um zu steuern",
-    "nie"
+    "durch Verdrängung des Über-Ich",
+    "durch Sieg des Es",
+    "durch einen Kompromiss des Ich",
+    "gar nicht"
    ],
    "r": 2
   },
   {
-   "f": "Welche Instanz entsteht erst durch Erziehung?",
+   "f": "Was ist die Kernaussage des Modells?",
    "o": [
-    "Es",
-    "Realität",
-    "Trieb",
-    "Über-Ich"
+    "Gene bestimmen alles",
+    "Umwelt zählt nicht",
+    "Verhalten ist zufällig",
+    "Verhalten entsteht aus dem Zusammenspiel der Instanzen"
    ],
    "r": 3
   }

@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Beurteilungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wann ist die Aussage „Er hängt in der analen Phase fest“ berechtigt?",
+   "o": [
+    "bei dauerhaftem, auffälligem Muster",
+    "bei einem einzelnen Witz",
+    "bei jedem Trotz",
+    "nie"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was spricht für den Wert des Modells?",
+   "o": [
+    "Es ist vollständig bewiesen",
+    "Es betont frühe Erfahrungen",
+    "Es gilt kulturunabhängig",
+    "Es ist exakt messbar"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was spricht gegen das Modell?",
+   "o": [
+    "zu viele Belege",
+    "zu kurze Theorie",
+    "schwere Überprüfbarkeit",
+    "zu wenig Phasen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wie ist die Empirie?",
+   "o": [
+    "vollständig bestätigt",
+    "vollständig widerlegt",
+    "nicht vorhanden",
+    "teilweise gestützt, insgesamt nicht bestätigt"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Warum ist Trotz nicht sicher ein Beleg für die anale Phase?",
+   "o": [
+    "Er hat viele mögliche Ursachen",
+    "Er ist selten",
+    "Er ist krank",
+    "Er ist bewiesen"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum ist Regression nicht Fixierung?",
+   "o": [
+    "Beides ist gleich",
+    "Regression ist vorübergehender Rückfall unter Stress",
+    "Fixierung ist kurz",
+    "Regression ist dauerhaft"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Beurteilung ist am besten?",
+   "o": [
+    "Es erklärt alles",
+    "Es ist wertlos",
+    "Das Modell erklärt manches, aber nicht alles",
+    "Es ist exakt"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was bedeutet Sublimierung?",
+   "o": [
+    "Verdrängung",
+    "Regression",
+    "Fixierung",
+    "Triebenergie wird auf Lernen und Leistung gelenkt"
+   ],
+   "r": 3
+  }
+ ]
+}

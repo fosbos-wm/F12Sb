@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Spricht für Anlage",
+  "Spricht für Umwelt",
+  "Spricht für Selbststeuerung"
+ ],
+ "karten": [
+  {
+   "t": "Eineiige Zwillinge ähneln sich in vielen Merkmalen",
+   "s": 0
+  },
+  {
+   "t": "Veranlagungen zeigen sich schon früh",
+   "s": 0
+  },
+  {
+   "t": "Bestimmte Begabungen kommen in Familien gehäuft vor",
+   "s": 0
+  },
+  {
+   "t": "Kinder in anregenden Familien lernen oft schneller",
+   "s": 1
+  },
+  {
+   "t": "Armut kann Entwicklungschancen verringern",
+   "s": 1
+  },
+  {
+   "t": "Gute Schulen fördern Fähigkeiten",
+   "s": 1
+  },
+  {
+   "t": "Jugendliche wählen gezielt Vorbilder",
+   "s": 2
+  },
+  {
+   "t": "Menschen setzen sich langfristige Ziele",
+   "s": 2
+  },
+  {
+   "t": "Wer übt, verbessert seine Leistung",
+   "s": 2
+  }
+ ]
+}

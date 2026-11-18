@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Eine Erzieherin erklärt Trotz mit dem Ödipuskonflikt. Was ist problematisch?",
+   "o": [
+    "Er ist empirisch nicht belegt",
+    "Trotz gibt es nicht",
+    "Der Konflikt ist bewiesen",
+    "Kinder trotzen nie"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum ist die Aussage „orale Phase erklärt alles“ kritisch?",
+   "o": [
+    "Sie ist belegt",
+    "Alternativerklärungen bleiben unberücksichtigt",
+    "Sie ist zu kurz",
+    "Sie ist zu genau"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist eine Stärke der Theorie?",
+   "o": [
+    "exakte Messbarkeit",
+    "Kulturneutralität",
+    "Hinweis auf frühe Kindheit",
+    "Verzicht auf Deutung"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was gilt als widerlegt?",
+   "o": [
+    "Bedeutung der Kindheit",
+    "Abwehr",
+    "Unbewusstes",
+    "Primärnarzissmus"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Wie lässt sich die Theorie prüfen?",
+   "o": [
+    "nur eingeschränkt",
+    "vollständig",
+    "gar nicht möglich",
+    "durch Zufall"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Frage prüft eine Behauptung?",
+   "o": [
+    "Wer sagt es?",
+    "Gibt es Belege und Alternativen?",
+    "Wie alt ist die Theorie?",
+    "Wie lang ist sie?"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was bedeutet kulturabhängig?",
+   "o": [
+    "gilt überall",
+    "gilt nie",
+    "gilt nicht überall gleich",
+    "gilt nur Kindern"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Warum ist Verallgemeinerung kritisch?",
+   "o": [
+    "Sie ist genau",
+    "Sie ist selten",
+    "Sie ist bewiesen",
+    "Einzelfälle sind nicht für alle gültig"
+   ],
+   "r": 3
+  }
+ ]
+}

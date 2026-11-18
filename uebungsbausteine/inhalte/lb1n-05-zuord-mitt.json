@@ -1,0 +1,38 @@
+{
+ "titel": "Zuordnung: Beispiele erkennen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Betont die Bedeutung der frühen Kindheit",
+   "Stärke"
+  ],
+  [
+   "Jedes Ergebnis lässt sich als Bestätigung deuten",
+   "Kritik: kaum widerlegbar"
+  ],
+  [
+   "Aussagen stammen aus Patientenfällen",
+   "Kritik: Verallgemeinerung"
+  ],
+  [
+   "Hilft bei Beratung und Pädagogik",
+   "Stärke: praktischer Nutzen"
+  ],
+  [
+   "Aussagen gelten nicht in allen Kulturen gleich",
+   "Kritik: Kulturabhängigkeit"
+  ],
+  [
+   "Primärnarzissmus",
+   "gilt als widerlegt"
+  ],
+  [
+   "Ödipuskonflikt",
+   "empirisch nicht belegt"
+  ],
+  [
+   "Orale Merkmale treten teilweise gemeinsam auf",
+   "teilweise belegt"
+  ]
+ ]
+}

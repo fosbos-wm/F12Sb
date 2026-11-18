@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Argumente sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Es dominiert",
+  "Über-Ich dominiert",
+  "Ich vermittelt"
+ ],
+ "items": [
+  {
+   "t": "Wutanfall, wenn Wünsche nicht erfüllt werden",
+   "k": 0
+  },
+  {
+   "t": "Geringe Frustrationstoleranz",
+   "k": 0
+  },
+  {
+   "t": "Sofortige Befriedigung um jeden Preis",
+   "k": 0
+  },
+  {
+   "t": "Dauernde Schuldgefühle bei kleinen Fehlern",
+   "k": 1
+  },
+  {
+   "t": "Übertriebene Ordentlichkeit aus Angst",
+   "k": 1
+  },
+  {
+   "t": "Wünsche werden stark unterdrückt",
+   "k": 1
+  },
+  {
+   "t": "Aufschieben der Befriedigung mit Plan",
+   "k": 2
+  },
+  {
+   "t": "Abwägen von Folgen",
+   "k": 2
+  },
+  {
+   "t": "Kompromisse zwischen Wunsch und Regel",
+   "k": 2
+  }
+ ]
+}

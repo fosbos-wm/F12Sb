@@ -1,0 +1,30 @@
+{
+ "titel": "Memory: Aussagen und Beurteilung",
+ "anleitung": "Finde die passenden Paare.",
+ "paare": [
+  [
+   "Herr Lang sagt, der Jobverlust sei ihm egal, schläft aber schlecht.",
+   "Verdrängung mit möglichen Folgen"
+  ],
+  [
+   "Elif sagt, die Lehrerin mag sie nicht.",
+   "Projektion"
+  ],
+  [
+   "Ein 5-Jähriger trinkt wieder aus dem Fläschchen.",
+   "Regression"
+  ],
+  [
+   "Ein Jugendlicher imitiert sein Idol.",
+   "Identifikation"
+  ],
+  [
+   "Angst vor Strafe wegen einer schlechten Note",
+   "Realangst"
+  ],
+  [
+   "Schuldgefühl nach einer Lüge",
+   "moralische Angst"
+  ]
+ ]
+}

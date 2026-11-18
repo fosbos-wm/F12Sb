@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Das Ich vermittelt. Zwischen wem?",
+   "o": [
+    "Es, Über-Ich und Realität",
+    "Eltern und Kind",
+    "Schule und Freunden",
+    "Körper und Geist"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Ein Kind nimmt heimlich Süßes und hat danach Schuldgefühle. Welche Instanz?",
+   "o": [
+    "Es",
+    "Über-Ich",
+    "Ich",
+    "Bewusstes"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welches Prinzip bestimmt das Handeln, wenn jemand Folgen abwägt?",
+   "o": [
+    "Lustprinzip",
+    "Moralitätsprinzip",
+    "Realitätsprinzip",
+    "Zufall"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Mia findet eine Geldbörse und gibt sie ab. Welche Instanz entschied?",
+   "o": [
+    "Es",
+    "nur Über-Ich",
+    "keine",
+    "Ich"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Bei sehr strenger Erziehung ist wahrscheinlich besonders stark:",
+   "o": [
+    "Über-Ich",
+    "Es",
+    "Vorbewusstes",
+    "Realität"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Ein Kind tobt, bis es seinen Willen bekommt. Welche Instanz dominiert?",
+   "o": [
+    "Ich",
+    "Es",
+    "Über-Ich",
+    "keine"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was zeigt ein Versprecher nach Freud?",
+   "o": [
+    "Müdigkeit",
+    "Dummheit",
+    "Wirkung des Unbewussten",
+    "Zufall"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wo liegen verdrängte Inhalte?",
+   "o": [
+    "im Bewusstsein",
+    "im Vorbewussten",
+    "in der Realität",
+    "im Unbewussten"
+   ],
+   "r": 3
+  }
+ ]
+}

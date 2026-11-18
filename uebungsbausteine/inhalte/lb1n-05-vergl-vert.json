@@ -1,0 +1,46 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Pro Wert der Theorie",
+  "Contra Wert der Theorie"
+ ],
+ "karten": [
+  {
+   "t": "Hebt das Unbewusste hervor",
+   "s": 0
+  },
+  {
+   "t": "Betont frühe Kindheit",
+   "s": 0
+  },
+  {
+   "t": "Praktischer Nutzen in Beratung",
+   "s": 0
+  },
+  {
+   "t": "Hat Psychologie stark beeinflusst",
+   "s": 0
+  },
+  {
+   "t": "Kaum empirisch prüfbar",
+   "s": 1
+  },
+  {
+   "t": "Verallgemeinerung aus Einzelfällen",
+   "s": 1
+  },
+  {
+   "t": "Kulturelle Abhängigkeit",
+   "s": 1
+  },
+  {
+   "t": "Vage Begriffe",
+   "s": 1
+  },
+  {
+   "t": "Primärnarzissmus widerlegt",
+   "s": 1
+  }
+ ]
+}

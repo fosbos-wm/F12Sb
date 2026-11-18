@@ -1,0 +1,30 @@
+{
+ "titel": "Memory: Aussagen und Beurteilung",
+ "anleitung": "Finde die passenden Paare.",
+ "paare": [
+  [
+   "Ein 3-Jähriger liebt Pipi-Witze.",
+   "alterstypisch, kein Beleg für Fixierung"
+  ],
+  [
+   "Ein Erwachsener kaut dauerhaft an Stiften.",
+   "mögliche orale Fixierung"
+  ],
+  [
+   "Ein Kind fällt nach der Geburt der Schwester zurück.",
+   "Regression"
+  ],
+  [
+   "Die Mutter hält Strenge für Sauberkeitserziehung nötig.",
+   "kann Angst und Widerstand fördern"
+  ],
+  [
+   "Das Phasenmodell erklärt alles.",
+   "zu pauschal, empirisch nicht bestätigt"
+  ],
+  [
+   "Spielen mit Matsch",
+   "angemessene Ersatzbefriedigung"
+  ]
+ ]
+}

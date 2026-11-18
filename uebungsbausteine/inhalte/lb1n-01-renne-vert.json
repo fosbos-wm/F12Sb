@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Beurteilungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welche Aussage ist am besten begründet?",
+   "o": [
+    "„Anlage, Umwelt und Selbststeuerung wirken zusammen.“",
+    "„Gene bestimmen alles.“",
+    "„Nur Erziehung zählt.“",
+    "„Entwicklung ist Zufall.“"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum ist „Faulheit ist angeboren“ problematisch?",
+   "o": [
+    "Es ist genau belegt",
+    "Es blendet Umwelt und Selbststeuerung aus",
+    "Es betont die Umwelt",
+    "Es ist unverständlich"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welches Argument spricht für die Bedeutung der Umwelt?",
+   "o": [
+    "Eineiige Zwillinge sind sich ähnlich",
+    "Gene sind festgelegt",
+    "Kinder in anregenden Umgebungen entwickeln sich oft schneller",
+    "Reifung dauert lange"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welches Argument spricht für die Bedeutung der Anlage?",
+   "o": [
+    "Schulen fördern",
+    "Kinder üben",
+    "Familien sprechen",
+    "Eineiige Zwillinge ähneln sich in vielen Merkmalen"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Warum ist die Aussage „Der Mensch ist Produkt seiner Umwelt“ einseitig?",
+   "o": [
+    "Sie ignoriert Anlage und Selbststeuerung",
+    "Sie ist zu allgemein",
+    "Sie ist falsch geschrieben",
+    "Sie ist belegt"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was bedeutet Selbststeuerung für Erziehung?",
+   "o": [
+    "Erziehung ist unnötig",
+    "Kinder gestalten ihre Entwicklung mit",
+    "Kinder sind passiv",
+    "Eltern entscheiden allein"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Position vertritt ein Urteil mit Wechselwirkung?",
+   "o": [
+    "deterministisch",
+    "einseitig",
+    "differenziert",
+    "beliebig"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was gehört zu einem begründeten Urteil?",
+   "o": [
+    "nur eine Behauptung",
+    "nur ein Beispiel",
+    "nur eine Definition",
+    "Argumente, Gegenargument, Fazit"
+   ],
+   "r": 3
+  }
+ ]
+}

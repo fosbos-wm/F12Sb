@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Spricht für das Modell",
+  "Spricht gegen das Modell"
+ ],
+ "karten": [
+  {
+   "t": "Betonung früher Kindheit",
+   "s": 0
+  },
+  {
+   "t": "Praktischer Nutzen in der Beratung",
+   "s": 0
+  },
+  {
+   "t": "Orale Merkmale treten teilweise gemeinsam auf",
+   "s": 0
+  },
+  {
+   "t": "Phasen sind schwer überprüfbar",
+   "s": 1
+  },
+  {
+   "t": "Verallgemeinerung aus Patientenfällen",
+   "s": 1
+  },
+  {
+   "t": "Kulturelle Unterschiede bleiben unberücksichtigt",
+   "s": 1
+  },
+  {
+   "t": "Trotz hat viele mögliche Ursachen",
+   "s": 1
+  },
+  {
+   "t": "Begriffe sind vage",
+   "s": 1
+  }
+ ]
+}

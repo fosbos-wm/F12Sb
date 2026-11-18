@@ -1,47 +1,42 @@
 {
- "titel": "Blockfall: Psychosexuelle Entwicklung",
+ "titel": "Blockfall: Argumente sortieren",
  "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
  "kategorien": [
-  "Orale Phase",
-  "Anale Phase",
-  "Phallische Phase"
+  "Spricht für das Modell",
+  "Spricht gegen das Modell"
  ],
  "items": [
   {
-   "t": "Saugen, Beißen und Lutschen",
+   "t": "Betonung früher Kindheit",
    "k": 0
   },
   {
-   "t": "Urvertrauen entsteht durch Versorgung",
+   "t": "Praktischer Nutzen in der Beratung",
    "k": 0
   },
   {
-   "t": "Nägelkauen als späteres Verhalten",
+   "t": "Orale Merkmale treten teilweise gemeinsam auf",
    "k": 0
   },
   {
-   "t": "Kind lernt Sauberkeit",
+   "t": "Phasen sind schwer überprüfbar",
    "k": 1
   },
   {
-   "t": "Trotzphase „Nein, selber!“",
+   "t": "Verallgemeinerung aus Patientenfällen",
    "k": 1
   },
   {
-   "t": "Autonomie gegenüber den Eltern",
+   "t": "Kulturelle Unterschiede bleiben unberücksichtigt",
    "k": 1
   },
   {
-   "t": "Kind entdeckt Geschlechtsunterschiede",
-   "k": 2
+   "t": "Trotz hat viele mögliche Ursachen",
+   "k": 1
   },
   {
-   "t": "Identifikation mit dem gleichgeschlechtlichen Elternteil",
-   "k": 2
-  },
-  {
-   "t": "Über-Ich entsteht",
-   "k": 2
+   "t": "Begriffe sind vage",
+   "k": 1
   }
  ]
 }

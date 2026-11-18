@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Beurteilungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welches Fazit ist am besten begründet?",
+   "o": [
+    "Große Wirkung, aber nur teilweise belegt",
+    "komplett wertlos",
+    "komplett bestätigt",
+    "nicht beurteilbar"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie beurteilt man „Freud ist überholt“?",
+   "o": [
+    "richtig",
+    "zu pauschal, der Einfluss bleibt",
+    "bewiesen",
+    "unwichtig"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie beurteilt man „Ohne Freud keine Psychologie“?",
+   "o": [
+    "bewiesen",
+    "falsch",
+    "Einfluss ist groß, Geltung ist damit nicht belegt",
+    "irrelevant"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Unterschied zwischen Einfluss und Geltung?",
+   "o": [
+    "kein Unterschied",
+    "Einfluss ist Beweis",
+    "Geltung ist Beliebtheit",
+    "Einfluss ist Wirkung, Geltung ist Belegbarkeit"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Was gehört in ein Urteil?",
+   "o": [
+    "Pro, Contra, Fazit",
+    "nur Pro",
+    "nur Contra",
+    "nur Beispiele"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welches Gegenargument passt zu „Freud ist unbrauchbar“?",
+   "o": [
+    "Vage Begriffe",
+    "Praktischer Nutzen in der Beratung",
+    "Schwere Prüfbarkeit",
+    "Kulturabhängigkeit"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welches Argument passt zu „Freud ist wissenschaftlich solide“?",
+   "o": [
+    "viele Experimente",
+    "Kulturneutralität",
+    "keines, da Prüfbarkeit eingeschränkt ist",
+    "exakte Begriffe"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was spricht für Differenzierung?",
+   "o": [
+    "Es gibt nur Stärken",
+    "Es gibt nur Schwächen",
+    "Es gibt nichts",
+    "Stärken und Schwächen existieren nebeneinander"
+   ],
+   "r": 3
+  }
+ ]
+}

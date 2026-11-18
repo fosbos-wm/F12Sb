@@ -1,0 +1,90 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu den Bewusstseinsschichten treffen zu?",
+   "statements": [
+    {
+     "text": "Das Unbewusste beeinflusst Erleben und Verhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Das Vorbewusste ist leicht zugänglich.",
+     "richtig": true
+    },
+    {
+     "text": "Das Bewusste umfasst alle seelischen Inhalte.",
+     "richtig": false
+    },
+    {
+     "text": "Fehlleistungen sind zufällig und bedeutungslos.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Instanzen treffen zu?",
+   "statements": [
+    {
+     "text": "Das Es folgt dem Lustprinzip.",
+     "richtig": true
+    },
+    {
+     "text": "Das Über-Ich enthält verinnerlichte Normen.",
+     "richtig": true
+    },
+    {
+     "text": "Das Ich folgt dem Lustprinzip.",
+     "richtig": false
+    },
+    {
+     "text": "Das Es ist durch Erziehung entstanden.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Mia findet eine volle Geldbörse und bringt sie ins Sekretariat. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das Es will das Geld behalten.",
+     "richtig": true
+    },
+    {
+     "text": "Das Über-Ich verbietet Diebstahl.",
+     "richtig": true
+    },
+    {
+     "text": "Das Ich prüft Folgen und entscheidet.",
+     "richtig": true
+    },
+    {
+     "text": "Das Es hat die Börse abgegeben.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Ich-Stärke treffen zu?",
+   "statements": [
+    {
+     "text": "Ein starkes Ich vermittelt zwischen den Ansprüchen.",
+     "richtig": true
+    },
+    {
+     "text": "Bei schwachem Ich kann eine Instanz dominieren.",
+     "richtig": true
+    },
+    {
+     "text": "Ein starkes Ich unterdrückt jedes Bedürfnis.",
+     "richtig": false
+    },
+    {
+     "text": "Ich-Stärke ist unveränderlich angeboren.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

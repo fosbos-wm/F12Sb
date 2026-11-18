@@ -1,0 +1,46 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Stärke der Theorie",
+  "Kritik an der Theorie"
+ ],
+ "items": [
+  {
+   "t": "Betont die Bedeutung der frühen Kindheit",
+   "k": 0
+  },
+  {
+   "t": "Erklärt viele Verhaltensweisen",
+   "k": 0
+  },
+  {
+   "t": "Praktischer Nutzen in Beratung und Pädagogik",
+   "k": 0
+  },
+  {
+   "t": "Hebt das Unbewusste hervor",
+   "k": 0
+  },
+  {
+   "t": "Begriffe sind vage",
+   "k": 1
+  },
+  {
+   "t": "Kaum empirisch überprüfbar",
+   "k": 1
+  },
+  {
+   "t": "Ableitung aus Einzelfällen",
+   "k": 1
+  },
+  {
+   "t": "Kulturelle Unterschiede bleiben unberücksichtigt",
+   "k": 1
+  },
+  {
+   "t": "Jedes Ergebnis lässt sich als Bestätigung deuten",
+   "k": 1
+  }
+ ]
+}

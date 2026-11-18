@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Realangst",
+  "Moralische Angst",
+  "Neurotische Angst"
+ ],
+ "items": [
+  {
+   "t": "Angst vor einer Strafe in der Schule",
+   "k": 0
+  },
+  {
+   "t": "Furcht vor einem bissigen Hund",
+   "k": 0
+  },
+  {
+   "t": "Angst vor öffentlicher Blamage",
+   "k": 0
+  },
+  {
+   "t": "Schuldgefühle nach einer Lüge",
+   "k": 1
+  },
+  {
+   "t": "Gewissensbisse wegen eines Streits",
+   "k": 1
+  },
+  {
+   "t": "Angst, gegen die eigenen Werte zu verstoßen",
+   "k": 1
+  },
+  {
+   "t": "Angst, von Wut überwältigt zu werden",
+   "k": 2
+  },
+  {
+   "t": "Furcht, Triebimpulse nicht kontrollieren zu können",
+   "k": 2
+  },
+  {
+   "t": "diffuse Angst ohne erkennbaren Anlass",
+   "k": 2
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "titel": "Theorievergleich: Beispiele sortieren",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Stärke",
+  "Kritik"
+ ],
+ "karten": [
+  {
+   "t": "Erklärt viele Verhaltensweisen",
+   "s": 0
+  },
+  {
+   "t": "Hebt das Unbewusste hervor",
+   "s": 0
+  },
+  {
+   "t": "Betont die Bedeutung der Kindheit",
+   "s": 0
+  },
+  {
+   "t": "Hat Beratung und Therapie angestoßen",
+   "s": 0
+  },
+  {
+   "t": "Begriffe sind vage",
+   "s": 1
+  },
+  {
+   "t": "Schwer überprüfbar",
+   "s": 1
+  },
+  {
+   "t": "Aus Einzelfällen verallgemeinert",
+   "s": 1
+  },
+  {
+   "t": "Kulturelle Unterschiede fehlen",
+   "s": 1
+  },
+  {
+   "t": "Jedes Ergebnis passt zur Theorie",
+   "s": 1
+  }
+ ]
+}

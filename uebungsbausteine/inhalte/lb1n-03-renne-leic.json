@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "In welcher Phase steht der Mund im Mittelpunkt?",
+   "o": [
+    "orale Phase",
+    "anale Phase",
+    "phallische Phase",
+    "Latenzphase"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Phase betrifft die Sauberkeitserziehung?",
+   "o": [
+    "orale Phase",
+    "anale Phase",
+    "genitale Phase",
+    "Latenzphase"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was bedeutet Fixierung?",
+   "o": [
+    "Rückfall unter Stress",
+    "Verdrängung",
+    "Libido bleibt in einer Phase gebunden",
+    "Identifikation"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was bedeutet Regression?",
+   "o": [
+    "Stillstand der Entwicklung",
+    "Entwicklung zur Reife",
+    "Phasenwechsel",
+    "Rückfall auf ein früheres Entwicklungsniveau"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Ein Erwachsener kaut unter Stress an Stiften. Was liegt nahe?",
+   "o": [
+    "Regression in die orale Phase",
+    "Fixierung in der Latenzphase",
+    "Reifung",
+    "Identifikation"
+   ],
+   "r": 0
+  },
+  {
+   "f": "In welcher Phase entsteht nach Freud das Über-Ich?",
+   "o": [
+    "orale Phase",
+    "phallische Phase",
+    "anale Phase",
+    "genitale Phase"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was geschieht in der Latenzphase?",
+   "o": [
+    "Sauberkeitserziehung",
+    "Ödipuskonflikt",
+    "Libido wird auf Lernen und Leistung gelenkt",
+    "reife Sexualität"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wie soll Sauberkeitserziehung nach Freud ablaufen?",
+   "o": [
+    "möglichst früh",
+    "mit Strafen",
+    "gar nicht",
+    "geduldig, nicht zu früh und nicht zu streng"
+   ],
+   "r": 3
+  }
+ ]
+}
