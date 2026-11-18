@@ -6,11 +6,12 @@ window.lxPPDirekt=async function(){
   const ids=[];(LXWA.d||[]).filter(w=>(w.bis||"")>=heute&&w.fach==="Pädagogik / Psychologie").forEach(w=>(w.themen||[]).forEach(t=>{if(!ids.includes(t))ids.push(t)}));
   let th=ids.map(kwThemaById).filter(Boolean);
   if(!th.length)th=kwThemenSicht(ph).filter(e=>e.typ!=="projekt");
-  const e=th.find(x=>!(KW.fort[x.id]||{}).abgeschlossen)||th[0];
-  if(e){activeKwThema=e.id;go("kw-thema")}else go("kw-wand");
+  if(th.length===1){activeKwThema=th[0].id;go("kw-thema");return}
+  if(!th.length){go("kw-wand");return}
+  modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">P\xC4DAGOGIK / PSYCHOLOGIE</div><h2>Deine Themen diese Woche</h2><p style="color:var(--muted)">W\xE4hle ein Thema.</p><div class="list">${th.map(e=>`<div class="list-item"><div><strong>${esc(kwKurz(e))}</strong>${(KW.fort[e.id]||{}).abgeschlossen?"<small>\u2713 geschafft</small>":""}</div><button type="button" class="primary" data-kw="thema" data-id="${esc(e.id)}" onclick="closeModal()">\xD6ffnen</button></div>`).join("")}</div><p style="margin-top:12px"><button type="button" class="text-button" data-kw="wand" onclick="closeModal()">Alle Themen ansehen</button></p>`);
  }catch(x){console.warn(x);go("kw-wand")}
 };
-(function(){const st=document.createElement("style");st.textContent=".kw-seite .lx-sek:not(.lx-open){padding-bottom:0}.kw-seite .lx-sek:not(.lx-open)>.lx-sek-k{margin-bottom:0;border-bottom:0}.lxs-zwei{align-items:stretch}.lxs-andere .lxs-fachbox{background:#fff8ec;border:1px solid #f1dcb4;border-top:3px solid #e8890c;border-radius:18px;padding:20px 22px;height:100%}.lxs-fachbox h3{margin:0 0 12px;font-size:20px}.lxs-fachbox .lxs-fach{display:flex;flex-direction:column;gap:10px}.lxs-leer{color:#6c8190;margin:0}.lxs-unten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}@media(max-width:800px){.lxs-unten{grid-template-columns:1fr}}";document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.textContent=".kw-seite .lx-sek:not(.lx-open){display:none!important}.kw-seite .lx-sek.lx-open{margin-top:14px}.kw-seite .lx-sek:not(.lx-open)>.lx-sek-k{margin-bottom:0;border-bottom:0}.lxs-zwei{align-items:stretch}.lxs-andere .lxs-fachbox{background:#fff8ec;border:1px solid #f1dcb4;border-top:3px solid #e8890c;border-radius:18px;padding:20px 22px;height:100%}.lxs-fachbox h3{margin:0 0 12px;font-size:20px}.lxs-fachbox .lxs-fach{display:flex;flex-direction:column;gap:10px}.lxs-leer{color:#6c8190;margin:0}.lxs-unten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}@media(max-width:800px){.lxs-unten{grid-template-columns:1fr}}";document.head.appendChild(st)})();
 /* Themenseite: nur die Übersicht sichtbar, Bereiche klappen per Klick auf */
 (function(){
  const st=document.createElement("style");
@@ -4279,7 +4280,7 @@ async function lxStartNeu(wp){
 async function lxThemaHub(e,lehrer){
  let ci=null,co=null;
  if(!lehrer){ci=await getMyBasischeckVersuch(e.id).catch(()=>null);co=await getMyBasischeckVersuch(e.id+"@ende").catch(()=>null)}
- const S=[[1,"Check-in",ci?`${ci.richtig} von ${ci.gesamt}`:"",!!ci],[2,"Infotext","",false],[3,"Üben und Vertiefen","",false],[6,"Check-out","",!!co]];
+ const S=[[1,"Check-in",ci?`${ci.richtig} von ${ci.gesamt}`:"",!!ci],[2,"Infotext","",false],[4,"Selbstlernkurs","",false],[3,"Üben und Vertiefen","",false],[6,"Check-out","",!!co],[7,"Lernstand","",false]];
  const step=`<section class="lxp"><div class="lxp-h"><small>DEIN LERNPFAD</small><span>Du entscheidest, welche Schritte du brauchst und in welcher Reihenfolge. Jeder Lernpfad ist individuell. Klick auf einen Schritt, um ihn zu öffnen.</span></div><ol class="lxp-st">${S.map((x,i)=>`<li><button type="button" data-lx="sprung" data-n="${x[0]}" class="${x[3]?"ok":""}"><i>${x[3]?"✓":i+1}</i><b>${x[1]}</b>${x[2]?`<em>${x[2]}</em>`:""}</button></li>`).join("")}</ol></section>`;
  const B=[["r","Begriffe","Was heißt das?","Begriffe und Merkmale sicher abrufen. Mit Karteikarten oder im Blockfall.",["Karteikarten","Blockfall"]],["t","Theorie","Wie hängt das zusammen?","Zusammenhänge verstehen und erklären. Mehrere Übungsformen zur Auswahl.",["Zuordnen","Lückentext","Quiz"]],["a","Anwendung","Wo erkenne ich das?","Das Gelernte auf einen Fall aus der Praxis übertragen.",["Fallbeispiel","Transferaufgabe"]]];
  const cards=B.map(b=>{const v=lxSich(e.id,b[0]);return`<article class="lxh-c lxh-${b[0]}"><small>${b[1].toUpperCase()}</small><h3>${b[2]}</h3><p>${b[3]}</p><div class="lxh-ch">${b[4].map(c=>`<span>${c}</span>`).join("")}</div><button type="button" class="lxh-go" data-lx="sprung" data-n="3">${b[1]} üben</button><div class="lxh-si" data-th="${esc(e.id)}" data-b="${b[0]}"><b>Wie sicher bist du?</b><div>${[["r","unsicher"],["y","fast"],["g","sicher"]].map(x=>`<button type="button" class="lxh-p ${x[0]}${v===x[0]?" an":""}${v&&v!==x[0]?" blass":""}" data-sich="${x[0]}"><i></i>${x[1]}</button>`).join("")}</div></div></article>`}).join("");
@@ -22386,7 +22387,7 @@ document.addEventListener("click",async ev=>{
   else if(a==="selbst")await lxSelbstSetzen(id,Number(b.dataset.w));
   else if(a==="ab"){const v=$("lxAb")&&$("lxAb").value;if(!v)return toast("Bitte ein Datum wählen.");await lxSichtSetzen(id,v)}
   else if(a==="ab0")await lxSichtSetzen(id,"");
-  else if(a==="sprung"){const el=document.getElementById("lx-s"+b.dataset.n);if(el){lxSekAuf(el,true);el.scrollIntoView({behavior:"smooth",block:"start"})}else toast("Dieser Teil ist für dieses Thema noch leer.")}
+  else if(a==="sprung"){const el=document.getElementById("lx-s"+b.dataset.n);if(el){lxSekAuf(el);if(el.classList.contains("lx-open"))el.scrollIntoView({behavior:"smooth",block:"start"})}else toast("Dieser Teil ist für dieses Thema noch leer.")}
   else if(a==="netz"){const el=$("lxNetz");if(el)el.scrollIntoView({behavior:"smooth",block:"start"})}
   else if(a==="eintreten"){
    const v=($("lxTestWahl")||{}).value||"",[art,tid]=[v.slice(0,2),v.slice(3)];
