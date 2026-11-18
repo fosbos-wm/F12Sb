@@ -20650,7 +20650,7 @@ async function kwLaden(){
  KW.mat={};KW.fort={};KW.hide=new Set();KW.hideList=[];
  if(mat)mat.docs.forEach(d=>{const x={id:d.id,...d.data()};if(x.kategorie==="_hide"){KW.hide.add(x.hide);KW.hideList.push({key:x.hide,docId:d.id,thema:x.thema||""});return}(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)});
  // Mitgelieferte Materialien aus dem Repo (material.json): Infotexte u. a., ohne Upload in der App.
- try{const rr=await fetch("material.json?v="+Date.now());if(rr.ok){((await rr.json()).material||[]).forEach(x=>{if(KW.hide.has("repo-"+x.id))return;(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push({fach:"paedagogik",...x,id:"repo-"+x.id})})}}catch(e){console.warn("material.json:",e)}
+ try{const rr=await fetch("material.json?v="+Date.now());if(rr.ok){((await rr.json()).material||[]).forEach(x=>{if(KW.hide.has("repo-"+x.id))return;const _m=/^ubn\d+[lmv](\d+)$/.exec(x.id||"");if(_m&&+_m[1]>1)return;if((KW.mat[x.wocheId]||[]).some(y=>y.url===x.url))return;(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push({fach:"paedagogik",...x,id:"repo-"+x.id})})}}catch(e){console.warn("material.json:",e)}
  lxMatSort();
  if(!kwLehrer()){
   if(PPM.meine.fortAlle)KW.fort=PPM.meine.fortAlle;
