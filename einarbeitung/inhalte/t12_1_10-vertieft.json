@@ -1,0 +1,115 @@
+{
+ "titel": "Vulnerabilität und Resilienz – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst das Konzept Resilienz kritisch und für die Praxis. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Schulleiter sagt: „Wir müssen die Schüler nur resilienter machen, dann sind Belastungen kein Problem.“ Eine Schulsozialarbeiterin entgegnet: „Das schiebt die Verantwortung auf die Kinder.“"
+    },
+    {
+     "typ": "text",
+     "text": "Resilienz ist **kein reines Persönlichkeitsmerkmal**, sondern entsteht im Zusammenspiel von **Person und Umwelt**. Wer nur Resilienz fordert, übersieht **Risikofaktoren** in der Umwelt (Armut, Mobbing, Überforderung)."
+    },
+    {
+     "typ": "text",
+     "text": "Eine gute Praxis **verringert Risiken** und **stärkt Schutzfaktoren** zugleich."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Resilienz fördern und Risiken verringern."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Schulleiter treffen zu?",
+     "aussagen": [
+      {
+       "text": "Seine Sicht ist einseitig.",
+       "richtig": true,
+       "erklaerung": "Umwelt fehlt."
+      },
+      {
+       "text": "Resilienz macht Belastungen bedeutungslos.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Resilienz kann gefördert werden.",
+       "richtig": true,
+       "erklaerung": "Richtig."
+      },
+      {
+       "text": "Belastungen sollen ignoriert werden.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Sozialarbeiterin treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie betont die Verantwortung der Umwelt.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Sie lehnt Resilienzförderung ab.",
+       "richtig": false,
+       "erklaerung": "Nicht unbedingt."
+      },
+      {
+       "text": "Risiken in der Schule sollten reduziert werden.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Kinder sind allein verantwortlich.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Maßnahme verbindet beides?",
+     "optionen": [
+      "Anti-Mobbing-Programm und Stärkung sozialer Kompetenzen",
+      "Nur Belohnungen",
+      "Nur Appelle"
+     ],
+     "richtig": 0,
+     "erklaerung": "Risiko senken + Schutz stärken."
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile in 6–7 Sätzen die Aussage „Wir müssen die Schüler nur resilienter machen“.",
+     "hinweis": "6–7 Sätze",
+     "muster": "Resilienzförderung ist sinnvoll, doch sie genügt nicht. Risikofaktoren wie Mobbing oder Überforderung müssen verringert werden. Die Aussage ist daher zu einseitig; nötig ist ein Zusammenspiel aus Förderung und Entlastung.",
+     "kriterien": [
+      "Pro",
+      "Contra",
+      "Urteil"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_10"
+ ]
+}

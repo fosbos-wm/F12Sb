@@ -1,0 +1,115 @@
+{
+ "titel": "Lebensspanne und Entwicklungsaufgaben – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst Entwicklungsaufgaben im Jugendalter und mögliche Konflikte. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Tarek (17) möchte nach dem Fachabitur ein Jahr reisen. Seine Eltern wollen, dass er sofort studiert. Es kommt zum Streit. Tareks Freund meint: „Du musst deinen eigenen Weg gehen.“"
+    },
+    {
+     "typ": "text",
+     "text": "Hier treffen **persönliche Ziele** (Reisen, Orientierung), **gesellschaftliche Erwartungen** (Ausbildung) und **Ablösung von den Eltern** zusammen. Konflikte sind typisch: Jugendliche erproben Autonomie, Eltern sorgen sich."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil wägt **Chancen und Risiken** ab und schlägt einen **Kompromiss** vor."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Entwicklungsaufgaben können Konflikte auslösen, sie sind Chance und Belastung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Der Konflikt ist typisch für die Ablösung.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Tarek sollte seine Ziele ignorieren.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Eltern sind weiter wichtig, die Beziehung verändert sich.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Die Peergroup spielt keine Rolle.",
+       "richtig": false,
+       "erklaerung": "Sie unterstützt Identität."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welcher Vorschlag ist am ausgewogensten?",
+     "optionen": [
+      "Studium sofort",
+      "Reise ohne Planung",
+      "Gemeinsame Planung mit Ziel und Zeitrahmen"
+     ],
+     "richtig": 2,
+     "erklaerung": "Kompromiss."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Chancen hat die Auszeit?",
+     "aussagen": [
+      {
+       "text": "Orientierung für Berufswahl",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Förderung von Selbstständigkeit",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Sie löst automatisch alle Probleme",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Sie verhindert Entwicklung",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile in 6–7 Sätzen die Entscheidung von Tarek und gib eine Empfehlung.",
+     "hinweis": "6–7 Sätze",
+     "muster": "Die Auszeit unterstützt Identität und Autonomie, birgt aber Risiken wie Orientierungslosigkeit. Die Sorgen der Eltern sind nachvollziehbar. Ich empfehle einen Kompromiss mit klarem Plan, z. B. begrenzte Auszeit mit Bewerbung.",
+     "kriterien": [
+      "Chance",
+      "Risiko",
+      "Empfehlung"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_9"
+ ]
+}

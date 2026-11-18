@@ -1,0 +1,116 @@
+{
+ "titel": "Feinfühligkeit und gelungene Bindung – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst Mythen zu „Verwöhnen“ und Selbstständigkeit. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Großmutter sagt: „Wer sein Baby immer sofort tröstet, verwöhnt es. Früher hat man die Kinder auch schreien lassen.“ Eine Kinderkrankenschwester widerspricht."
+    },
+    {
+     "typ": "text",
+     "text": "Säuglinge können nicht verwöhnt werden, wenn Bedürfnisse beantwortet werden. Prompte, passende Reaktion fördert **Urvertrauen** und später **Selbstständigkeit**. Wichtig ist, **Bedürfnis** (Nähe, Hunger, Schlaf) und **Wunsch** zu unterscheiden, je älter das Kind wird."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil berücksichtigt auch Grenzen: Feinfühligkeit heißt nicht, jedem Impuls nachzugeben, sondern Signale zu verstehen und **angemessen** zu reagieren."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Feinfühligkeit ≠ Verwöhnen: Sie bedeutet passende Antworten auf Bedürfnisse."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Großmutter treffen zu?",
+     "aussagen": [
+      {
+       "text": "Ihre Aussage verwechselt Feinfühligkeit mit Verwöhnen.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Schreien lassen fördert Selbstständigkeit.",
+       "richtig": false,
+       "erklaerung": "Es kann Vertrauen mindern."
+      },
+      {
+       "text": "Ein Säugling braucht Ko-Regulation.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Sofortiges Trösten schadet immer.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Wie unterscheiden sich Bedürfnis und Wunsch bei einem 3-Jährigen?",
+     "optionen": [
+      "Bedürfnisse sind unverzichtbar, Wünsche können warten",
+      "Beides ist gleich",
+      "Wünsche sind wichtiger"
+     ],
+     "richtig": 0,
+     "erklaerung": "Differenzierung."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu angemessener Reaktion treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie berücksichtigt das Alter des Kindes.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Sie bedeutet, jeden Wunsch sofort zu erfüllen.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Sie schließt klare Grenzen nicht aus.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Sie macht Kinder abhängig.",
+       "richtig": false,
+       "erklaerung": "Sie macht sicherer."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile in 6–7 Sätzen die Aussage der Großmutter und formuliere eine begründete Antwort.",
+     "hinweis": "6–7 Sätze",
+     "muster": "Die Aussage ist überholt. Säuglinge können Signale nur nach außen senden; werden sie beantwortet, entsteht Urvertrauen. Schreien lassen kann Stress und Hilflosigkeit auslösen. Allerdings sollte man mit zunehmendem Alter Wünsche von Bedürfnissen unterscheiden. Insgesamt ist Feinfühligkeit kein Verwöhnen.",
+     "kriterien": [
+      "Aussage geprüft",
+      "Begründung",
+      "Differenzierung",
+      "Urteil"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_6b"
+ ]
+}

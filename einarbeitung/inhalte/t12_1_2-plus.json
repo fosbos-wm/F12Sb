@@ -1,0 +1,132 @@
+{
+ "titel": "Freuds Persönlichkeitsmodell – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du ordnest Verhalten in neuen Situationen den **drei Instanzen** zu. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Tom (15) steht vor dem Kiosk. Er hat Hunger und sieht, dass die Verkäuferin kurz wegschaut. Ein Teil von ihm will einen Schokoriegel einstecken. Ein anderer Teil sagt: „Das ist Diebstahl.“ Schließlich legt er sein Geld auf den Tresen und kauft den Riegel."
+    },
+    {
+     "typ": "text",
+     "text": "Bei der Anwendung fragst du: Welche Instanz „spricht“? Das **Es** drängt auf sofortige Befriedigung (Lustprinzip). Das **Über-Ich** verbietet mit Normen und Schuldgefühlen. Das **Ich** prüft die Realität (Entdeckungsgefahr, Folgen) und vermittelt (Realitätsprinzip)."
+    },
+    {
+     "typ": "text",
+     "text": "Ein **starkes Ich** findet eine Lösung, die die Realität berücksichtigt und beide Ansprüche halbwegs erfüllt, hier: bezahlen. Wo diese Vermittlung scheitert, setzt sich eine Instanz durch."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Fall-Schema: Wer will? Wer verbietet? Wer vermittelt? Was ist das Ergebnis?"
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "sortieren",
+     "titel": "Ordne Toms Gedanken den Instanzen zu.",
+     "kategorien": [
+      {
+       "name": "Es",
+       "items": [
+        "„Den Riegel will ich jetzt!“"
+       ]
+      },
+      {
+       "name": "Über-Ich",
+       "items": [
+        "„Das ist Diebstahl, das macht man nicht.“",
+        "Schlechtes Gewissen schon beim Gedanken"
+       ]
+      },
+      {
+       "name": "Ich",
+       "items": [
+        "„Wenn sie es merkt, gibt es Ärger, ich zahle.“"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welches Prinzip bestimmt Toms Entscheidung zu zahlen?",
+     "optionen": [
+      "Lustprinzip",
+      "Realitätsprinzip",
+      "Moralitätsprinzip"
+     ],
+     "richtig": 1,
+     "erklaerung": "Das Ich vermittelt realitätsgerecht."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Was wäre bei einem schwachen Ich denkbar?",
+     "aussagen": [
+      {
+       "text": "Tom stiehlt den Riegel, weil das Es dominiert.",
+       "richtig": true,
+       "erklaerung": "Das Es setzt sich durch."
+      },
+      {
+       "text": "Tom grübelt stundenlang, weil das Über-Ich dominiert.",
+       "richtig": true,
+       "erklaerung": "Starke Schuldgefühle."
+      },
+      {
+       "text": "Tom bezahlt, weil alle Instanzen ausgeglichen sind.",
+       "richtig": false,
+       "erklaerung": "Das wäre ein starkes Ich."
+      },
+      {
+       "text": "Das Es verschwindet ganz.",
+       "richtig": false,
+       "erklaerung": "Das Es bleibt bestehen."
+      }
+     ]
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne zu.",
+     "paare": [
+      [
+       "Lustprinzip",
+       "Es"
+      ],
+      [
+       "Realitätsprinzip",
+       "Ich"
+      ],
+      [
+       "Moralitätsprinzip",
+       "Über-Ich"
+      ]
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beschreibe in 4–5 Sätzen eine eigene Alltagssituation, in der alle drei Instanzen sichtbar werden.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Beispiel: Vor der Klausur will das Es lieber Serien schauen, das Über-Ich sagt „Du musst lernen“, das Ich plant Lernzeiten mit Pausen und Belohnung.",
+     "kriterien": [
+      "Alle drei Instanzen",
+      "Prinzipien",
+      "Ergebnis"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_2"
+ ]
+}

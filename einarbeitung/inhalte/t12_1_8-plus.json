@@ -1,0 +1,109 @@
+{
+ "titel": "Bindungsförderung in der Frühpädagogik – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du planst eine Eingewöhnung und beurteilst Rahmenbedingungen. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Die Krippe „Sonnenkäfer“ nimmt Nele (10 Monate) auf. Der Vater begleitet sie zwei Wochen. Die Bezugserzieherin Frau Roth ist jeden Tag da, die Gruppe hat 12 Kinder und 4 Fachkräfte. Nach drei Wochen wechselt Frau Roth plötzlich die Gruppe."
+    },
+    {
+     "typ": "text",
+     "text": "Eine gelungene **Eingewöhnung** ist behutsam: vertraute Person anwesend, Trennungen werden **allmählich** gesteigert, feste **Bezugserzieherin**, Rituale."
+    },
+    {
+     "typ": "text",
+     "text": "Der plötzliche Wechsel der Bezugserzieherin ist ein **Risikofaktor**, weil die entstehende Beziehung abbricht."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Eingewöhnung = Beziehung aufbauen · Kontinuität sichern."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "sortieren",
+     "titel": "Risiko oder Schutz?",
+     "kategorien": [
+      {
+       "name": "Schutz",
+       "items": [
+        "Vater begleitet",
+        "feste Bezugserzieherin",
+        "günstiger Betreuungsschlüssel 1 : 3"
+       ]
+      },
+      {
+       "name": "Risiko",
+       "items": [
+        "plötzlicher Wechsel der Erzieherin"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was sollte die Krippe tun?",
+     "optionen": [
+      "Frau Roth wechseln lassen",
+      "Beziehung erhalten und Übergabe behutsam gestalten",
+      "Eingewöhnung beenden"
+     ],
+     "richtig": 1,
+     "erklaerung": "Kontinuität."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Ein Wechsel kann die Bindung beeinträchtigen.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Neles Vater sollte sofort gehen.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Rituale geben Sicherheit.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Kita-Besuch führt immer zu unsicherer Bindung.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Gib der Leitung in 4–5 Sätzen eine begründete Empfehlung zum Erzieherinnenwechsel.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Ein Wechsel nach drei Wochen unterbricht die entstehende Beziehung. Besser ist, Frau Roth bei Nele zu lassen oder eine behutsame Übergabe mit vertrauter Person zu organisieren. So wird Bindung gefördert.",
+     "kriterien": [
+      "Risiko",
+      "Empfehlung",
+      "Begründung"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_8"
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "titel": "Freuds Persönlichkeitsmodell – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst Freuds Modell in einer Erziehungssituation und begründest Folgen. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Familie Weber erzieht ihre Tochter Nora (6) sehr streng: Süßigkeiten sind verboten, Fehler werden scharf kritisiert. Nora ist ordentlich, aber ängstlich, entschuldigt sich ständig und kaut an den Nägeln. Die Familie Özdemir lässt ihren Sohn Can (6) dagegen fast alles tun. Er hat Wutanfälle, wenn er etwas nicht bekommt."
+    },
+    {
+     "typ": "text",
+     "text": "Nach Freud wirken Erziehung und Instanzen zusammen: Sehr strenge Erziehung kann ein **übermäßig starkes Über-Ich** fördern (Angst, Schuldgefühle), fehlende Grenzen können ein **dominantes Es** begünstigen (geringe Frustrationstoleranz)."
+    },
+    {
+     "typ": "text",
+     "text": "Ziel ist ein **starkes Ich**: Kinder brauchen Orientierung und Verständnis, damit sie Bedürfnisse und Regeln ausbalancieren lernen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Erziehung beeinflusst, welche Instanz sich entwickelt. Beurteile immer mit Ursache und Folge."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Nora treffen zu?",
+     "aussagen": [
+      {
+       "text": "Ihr Über-Ich ist sehr stark ausgeprägt.",
+       "richtig": true,
+       "erklaerung": "Strenge Regeln verinnerlicht."
+      },
+      {
+       "text": "Ihr Es dominiert.",
+       "richtig": false,
+       "erklaerung": "Eher Unterdrückung von Wünschen."
+      },
+      {
+       "text": "Das Nägelkauen kann Ausdruck unterdrückter Impulse sein.",
+       "richtig": true,
+       "erklaerung": "Mögliche Ersatzbefriedigung."
+      },
+      {
+       "text": "Streng erziehen stärkt immer das Ich.",
+       "richtig": false,
+       "erklaerung": "Es kann das Ich schwächen."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Can treffen zu?",
+     "aussagen": [
+      {
+       "text": "Das Es setzt sich häufig durch.",
+       "richtig": true,
+       "erklaerung": "Sofortbefriedigung."
+      },
+      {
+       "text": "Fehlende Grenzen erschweren den Aufbau des Über-Ich.",
+       "richtig": true,
+       "erklaerung": "Normen werden kaum verinnerlicht."
+      },
+      {
+       "text": "Er hat ein besonders starkes Ich.",
+       "richtig": false,
+       "erklaerung": "Das Ich vermittelt kaum."
+      },
+      {
+       "text": "Wutanfälle sind Zeichen eines starken Ichs.",
+       "richtig": false,
+       "erklaerung": "Das Es setzt sich durch."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welcher Erziehungsstil fördert nach Freud am ehesten ein starkes Ich?",
+     "optionen": [
+      "streng und strafend",
+      "grenzenlos gewährend",
+      "verständnisvoll mit klaren Grenzen"
+     ],
+     "richtig": 2,
+     "erklaerung": "Ausgleich von Bedürfnissen und Regeln."
+    },
+    {
+     "typ": "frei",
+     "frage": "Vergleiche in 6–7 Sätzen die Erziehung bei Nora und Can und beurteile ihre Folgen für die Instanzen.",
+     "hinweis": "6–7 Sätze: Nennen, Erklären, Verdeutlichen",
+     "muster": "Bei Nora fördert strenge Erziehung ein starkes Über-Ich: Ängstlichkeit und Schuldgefühle. Bei Can fehlen Grenzen, das Es dominiert, er verträgt Frustration schlecht. In beiden Fällen gelingt dem Ich der Ausgleich nur schlecht. Förderlich wäre Erziehung mit Wärme und klaren Regeln.",
+     "kriterien": [
+      "Beide Fälle",
+      "Instanzen",
+      "Folge",
+      "Begründetes Urteil"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_2"
+ ]
+}

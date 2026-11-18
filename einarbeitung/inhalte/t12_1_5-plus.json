@@ -1,0 +1,109 @@
+{
+ "titel": "Kritische Würdigung der Psychoanalyse – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du wendest Stärken und Schwächen der Theorie auf Aussagen an. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Lehrerin sagt: „Susis Schüchternheit liegt an der oralen Phase, das erklärt alles.“ Ein Kollege fragt: „Woher weißt du das? Kann man das prüfen?“"
+    },
+    {
+     "typ": "text",
+     "text": "Prüfe Behauptungen nach **Überprüfbarkeit** (kann man sie widerlegen?), **Belegen** und **Alternativerklärungen**."
+    },
+    {
+     "typ": "text",
+     "text": "Die Behauptung der Lehrerin ist **schwer prüfbar**, weil man jedes Verhalten nachträglich deuten kann. Alternativerklärungen (Temperament, Erfahrungen) bleiben unberücksichtigt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Prüfen: Beleg? Prüfbar? Alternativen?"
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welcher Einwand des Kollegen ist berechtigt?",
+     "optionen": [
+      "Die Aussage ist kaum überprüfbar",
+      "Orale Phase gibt es nicht",
+      "Schüchternheit ist unwichtig"
+     ],
+     "richtig": 0,
+     "erklaerung": "Überprüfbarkeit."
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Ordne die Aussagen zu.",
+     "kategorien": [
+      {
+       "name": "Stärke",
+       "items": [
+        "Betont die Bedeutung früher Erfahrungen",
+        "Lenkt den Blick auf Unbewusstes"
+       ]
+      },
+      {
+       "name": "Kritik",
+       "items": [
+        "Kaum widerlegbar",
+        "Kulturelle Einflüsse bleiben unberücksichtigt"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Lehrerin treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie schreibt eine Ursache ohne Beleg zu.",
+       "richtig": true,
+       "erklaerung": "Spekulation."
+      },
+      {
+       "text": "Sie nennt Alternativerklärungen.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Ihre Aussage ist bewiesen.",
+       "richtig": false,
+       "erklaerung": "Nicht belegbar."
+      },
+      {
+       "text": "Eine einzelne Erklärung reicht selten aus.",
+       "richtig": true,
+       "erklaerung": "Mehrere Faktoren."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Formuliere in 4–5 Sätzen eine ausgewogene Antwort der Lehrerin an den Kollegen.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Die Psychoanalyse bietet eine mögliche Deutung, weist aber geringe Überprüfbarkeit auf. Schüchternheit kann auch durch Temperament oder Erfahrungen entstehen. Ich sollte die Deutung als Hypothese verstehen.",
+     "kriterien": [
+      "Stärke",
+      "Schwäche",
+      "Alternative"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_5"
+ ]
+}

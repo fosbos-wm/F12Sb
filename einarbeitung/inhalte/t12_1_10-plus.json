@@ -1,0 +1,116 @@
+{
+ "titel": "Vulnerabilität und Resilienz – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du erkennst Risiko- und Schutzfaktoren in einem Fall. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Kemal (12) lebt mit seiner Mutter, die oft krank ist. Das Geld ist knapp, es gibt häufig Streit mit dem Vermieter. Kemal hat eine feste Freundesgruppe, einen verlässlichen Trainer im Fußballverein und gute Noten. Er sagt: „Ich schaffe das schon.“"
+    },
+    {
+     "typ": "text",
+     "text": "**Risikofaktoren** bei Kemal: Krankheit der Mutter, Armut, Streit. **Schutzfaktoren**: Freunde, Trainer als Bezugsperson, Schulerfolg, Zuversicht und Selbstwirksamkeit."
+    },
+    {
+     "typ": "text",
+     "text": "Schutzfaktoren sind **personal** (Selbstwirksamkeit, Optimismus) oder **sozial** (Bindung, Freundschaft, Vorbilder)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Risiken + Schutzfaktoren abwägen → Resilienz erklären."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "sortieren",
+     "titel": "Ordne die Faktoren zu.",
+     "kategorien": [
+      {
+       "name": "Risikofaktor",
+       "items": [
+        "Krankheit der Mutter",
+        "knappes Geld"
+       ]
+      },
+      {
+       "name": "personaler Schutzfaktor",
+       "items": [
+        "Zuversicht",
+        "Selbstwirksamkeit"
+       ]
+      },
+      {
+       "name": "sozialer Schutzfaktor",
+       "items": [
+        "Freundesgruppe",
+        "verlässlicher Trainer"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was erklärt Kemals Resilienz am besten?",
+     "optionen": [
+      "Schutzfaktoren gleichen Risiken aus",
+      "keine Belastung",
+      "Glück allein"
+     ],
+     "richtig": 0,
+     "erklaerung": "Zusammenspiel."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Mehrere Risiken erhöhen die Verletzbarkeit.",
+       "richtig": true,
+       "erklaerung": "Kumulation."
+      },
+      {
+       "text": "Resilienz bedeutet, keine Belastung zu erleben.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Resilienz lässt sich fördern.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Resilienz ist unveränderlich.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in 4–5 Sätzen, wie Erwachsene Kemals Resilienz weiter fördern können.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Sie können verlässliche Beziehungen sichern, Erfolge und Selbstwirksamkeit stärken, Unterstützung für die Familie vermitteln und ihm Gelegenheit geben, Probleme selbst zu lösen.",
+     "kriterien": [
+      "Maßnahme",
+      "Begründung",
+      "Fachbegriff"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_10"
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "titel": "Entwicklung und Entwicklungsbedingungen – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du wendest das Zusammenspiel von **Anlage, Umwelt und Selbststeuerung** auf einen neuen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Jonas (16) stammt aus einer Familie, in der viele als begabte Musiker gelten. Er übt täglich Gitarre, weil er in einer Band spielen will. Seine Eltern bezahlen den Unterricht, die Schule hat eine Musik-AG. Sein jüngerer Bruder zeigt dagegen kein Interesse an Musik."
+    },
+    {
+     "typ": "text",
+     "text": "Bei der Analyse eines Falls ordnest du jede Information einer Bedingung zu: **Anlage** (vererbte Begabung), **Umwelt** (Eltern, Schule, Unterricht) und **Selbststeuerung** (Jonas will Musiker werden und übt gezielt)."
+    },
+    {
+     "typ": "text",
+     "text": "Anschließend beschreibst du die **Wechselwirkung**: Eine Begabung (Anlage) wird erst durch Förderung (Umwelt) und eigenen Einsatz (Selbststeuerung) sichtbar. Dass der Bruder anders ist, zeigt, dass gleiche Umwelt nicht zu gleicher Entwicklung führt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Fall analysieren: Informationen zuordnen, Wechselwirkung beschreiben, Aussage begründen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "sortieren",
+     "titel": "Ordne die Informationen aus dem Fall den Bedingungen zu.",
+     "kategorien": [
+      {
+       "name": "Anlage",
+       "items": [
+        "Familiäre Häufung musikalischer Begabung"
+       ]
+      },
+      {
+       "name": "Umwelt",
+       "items": [
+        "Bezahlter Unterricht",
+        "Musik-AG der Schule"
+       ]
+      },
+      {
+       "name": "Selbststeuerung",
+       "items": [
+        "Tägliches Üben",
+        "Ziel, in einer Band zu spielen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Warum ist der Bruder nicht ebenfalls musikalisch?",
+     "optionen": [
+      "Die Umwelt ist bei Geschwistern immer verschieden",
+      "Anlage und Selbststeuerung sind nicht identisch, er setzt andere Ziele",
+      "Entwicklung ist reiner Zufall"
+     ],
+     "richtig": 1,
+     "erklaerung": "Auch bei gleicher Familie unterscheiden sich Anlage und Selbststeuerung."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Fall treffen zu?",
+     "aussagen": [
+      {
+       "text": "Die Förderung durch Eltern und Schule gehört zur Umwelt.",
+       "richtig": true,
+       "erklaerung": "Äußere Einflüsse."
+      },
+      {
+       "text": "Jonas' Übungsverhalten ist Selbststeuerung.",
+       "richtig": true,
+       "erklaerung": "Er gestaltet aktiv."
+      },
+      {
+       "text": "Seine Begabung hängt ausschließlich vom Unterricht ab.",
+       "richtig": false,
+       "erklaerung": "Anlage wirkt mit."
+      },
+      {
+       "text": "Ohne Üben würde die Begabung genauso sichtbar werden.",
+       "richtig": false,
+       "erklaerung": "Entfaltung braucht Umwelt und Selbststeuerung."
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze die Wechselwirkung.",
+     "text": "Jonas' Begabung ist seine {{Anlage}}. Sie wird durch die {{Umwelt}} gefördert. Weil er sich Ziele setzt, wirkt seine {{Selbststeuerung}} auf beides zurück.",
+     "woerter": [
+      "Anlage",
+      "Umwelt",
+      "Selbststeuerung",
+      "Reifung"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in 4–5 Sätzen, wie Anlage, Umwelt und Selbststeuerung bei Jonas zusammenwirken.",
+     "hinweis": "4–5 Sätze, mit Fachbegriffen",
+     "muster": "Jonas hat vermutlich eine musikalische Anlage. Die Umwelt fördert sie durch Unterricht und Musik-AG. Durch Selbststeuerung (tägliches Üben, Band-Ziel) nutzt er diese Möglichkeiten aktiv. Die Bedingungen beeinflussen sich wechselseitig: Erfolge verstärken seine Motivation.",
+     "kriterien": [
+      "Drei Bedingungen genannt",
+      "Fallbezug",
+      "Wechselwirkung erklärt"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_1"
+ ]
+}

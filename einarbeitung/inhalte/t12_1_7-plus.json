@@ -1,0 +1,109 @@
+{
+ "titel": "Primäre und sekundäre Bindungen – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du erkennst primäre und sekundäre Bindungen in Lebensläufen. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Maja (17) erzählt: „Meine Mutter war immer für mich da. Als ich in die Krippe kam, mochte ich meine Erzieherin sehr. Heute ist mein bester Freund ein Anker für mich, und mit meinem Freund bin ich seit einem Jahr zusammen.“"
+    },
+    {
+     "typ": "text",
+     "text": "Die Beziehung zur **Mutter** ist die **primäre** Bindung. **Erzieherin, Freunde und Partner** sind **sekundäre** Bindungen. Sie bauen auf dem Fundament der frühen Erfahrungen auf, können aber auch korrigieren und ergänzen."
+    },
+    {
+     "typ": "text",
+     "text": "Mit zunehmendem Alter treten **Peers und Partner** in den Vordergrund, die Eltern bleiben wichtig."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Primär = erste, intensivste · sekundär = später aufgebaut."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "sortieren",
+     "titel": "Ordne Majas Beziehungen zu.",
+     "kategorien": [
+      {
+       "name": "primär",
+       "items": [
+        "Mutter"
+       ]
+      },
+      {
+       "name": "sekundär",
+       "items": [
+        "Erzieherin in der Krippe",
+        "bester Freund",
+        "Freund/Partner"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Warum fällt Maja der Aufbau neuer Bindungen wohl leicht?",
+     "optionen": [
+      "Sie hat eine sichere primäre Bindung als Grundlage",
+      "Sie hat keine Mutter",
+      "Sie hat Glück"
+     ],
+     "richtig": 0,
+     "erklaerung": "Fundament."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sekundäre Bindungen können Defizite teilweise ausgleichen.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Peers sind für Jugendliche bedeutungslos.",
+       "richtig": false,
+       "erklaerung": "Sehr wichtig."
+      },
+      {
+       "text": "Die primäre Bindung bleibt Fundament.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Neue Bindungen ersetzen immer die primäre.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in 4–5 Sätzen, warum Erzieherinnen als sekundäre Bindungspersonen wichtig sind.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Kinder verbringen viel Zeit in der Kita. Eine Erzieherin kann trösten und Sicherheit bieten. Sie ergänzt die primäre Bindung und kann bei unsicherer Bindung korrigierende Erfahrungen ermöglichen.",
+     "kriterien": [
+      "sekundär",
+      "Funktion",
+      "Begründung"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_7"
+ ]
+}

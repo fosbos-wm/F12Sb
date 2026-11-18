@@ -1,0 +1,117 @@
+{
+ "titel": "Angst und Abwehrmechanismen – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du erkennst Abwehrmechanismen und Angstformen in Alltagsfällen. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Elif (16) hat eine schlechte Note geschrieben. Sie sagt: „Die Lehrerin mag mich nicht.“ Als ihre Mutter nachfragt, antwortet sie: „Welche Klausur?“ Später sagt sie, sie werde Lehrerin und alles besser machen."
+    },
+    {
+     "typ": "text",
+     "text": "Prüfe den Fall in drei Schritten: **Angst** benennen, **Mechanismus** erkennen, **Folge** beurteilen."
+    },
+    {
+     "typ": "text",
+     "text": "Elif zeigt mehrere Mechanismen: **Projektion** (Schuld wird der Lehrerin zugeschrieben), **Verdrängung** („Welche Klausur?“), **Identifikation** (sie will wie ihre Lehrerin werden). Ursache ist wohl **moralische Angst** oder **Realangst** (Ärger der Eltern)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Angst → Abwehr → kurzfristige Entlastung, aber verzerrte Realität."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Aussagen Elifs zu.",
+     "paare": [
+      [
+       "„Die Lehrerin mag mich nicht.“",
+       "Projektion"
+      ],
+      [
+       "„Welche Klausur?“",
+       "Verdrängung"
+      ],
+      [
+       "„Ich werde auch Lehrerin.“",
+       "Identifikation"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Angstform ist bei der Angst vor Ärger mit den Eltern wahrscheinlich?",
+     "optionen": [
+      "Realangst",
+      "moralische Angst",
+      "neurotische Angst"
+     ],
+     "richtig": 0,
+     "erklaerung": "Realer Konflikt."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Abwehr treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie läuft unbewusst ab.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Sie löst das Problem dauerhaft.",
+       "richtig": false,
+       "erklaerung": "Nur kurzfristig."
+      },
+      {
+       "text": "Sie kann die Wahrnehmung verzerren.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Elif plant bewusst, ihre Mutter zu täuschen.",
+       "richtig": false,
+       "erklaerung": "Abwehr ist unbewusst."
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze.",
+     "text": "Wenn eigene Fehler anderen zugeschrieben werden, nennt man das {{Projektion}}. Wird Unangenehmes aus dem Bewusstsein abgedrängt, spricht man von {{Verdrängung}}.",
+     "woerter": [
+      "Projektion",
+      "Verdrängung",
+      "Regression"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Gib Elif in 4–5 Sätzen einen Rat, wie sie konstruktiver mit der Note umgehen kann, und begründe ihn mit Freud.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Elif sollte die Angst wahrnehmen statt abwehren, Ursachen der Note suchen und Hilfe annehmen. Dauerhafte Abwehr verzerrt die Realität und verhindert Lösungen; ein starkes Ich kann realitätsgerecht handeln.",
+     "kriterien": [
+      "Rat",
+      "Freud-Bezug",
+      "Begründung"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_4"
+ ]
+}

@@ -1,0 +1,117 @@
+{
+ "titel": "Psychosexuelle Entwicklung – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du ordnest Verhalten Phasen zu und erkennst Fixierung und Regression. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Die Erzieherin beobachtet drei Kinder: Elias (1) steckt alles in den Mund und beruhigt sich mit dem Schnuller. Mara (2;8) sagt zu allem „Nein!“ und ist stolz auf ihren Toilettengang. Ben (4;6) fragt, warum Mama und Papa verschieden sind, und will „Papa heiraten, wenn er groß ist“ (Ben spricht vom Vater)."
+    },
+    {
+     "typ": "text",
+     "text": "Ordne zuerst das **Alter** zu, dann das **typische Verhalten**: oral (Mund), anal (Ausscheidung, Autonomie), phallisch (Geschlechtsunterschied, Identifikation)."
+    },
+    {
+     "typ": "text",
+     "text": "**Fixierung** zeigt sich als dauerhaftes Muster, **Regression** als vorübergehender Rückfall unter Belastung."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Alter + Verhalten = Phase. Dauerhaft = Fixierung, vorübergehend unter Stress = Regression."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Kinder zu.",
+     "paare": [
+      [
+       "Elias (1)",
+       "orale Phase"
+      ],
+      [
+       "Mara (2;8)",
+       "anale Phase"
+      ],
+      [
+       "Ben (4;6)",
+       "phallische Phase"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Warum ist Maras „Nein!“ in diesem Alter typisch?",
+     "optionen": [
+      "Sie entwickelt Autonomie",
+      "Sie ist gestört",
+      "Sie ist fixiert"
+     ],
+     "richtig": 0,
+     "erklaerung": "Anale Phase: Eigenwille und Autonomie."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Maras Vater schimpft heftig bei Missgeschicken. Was ist wahrscheinlich?",
+     "aussagen": [
+      {
+       "text": "Sie kann Angst vor Strafe entwickeln.",
+       "richtig": true,
+       "erklaerung": "Zu strenge Erziehung."
+      },
+      {
+       "text": "Sie wird dadurch besonders selbstständig.",
+       "richtig": false,
+       "erklaerung": "Eher gehemmt."
+      },
+      {
+       "text": "Es kann zu Widerstand oder Anpassung kommen.",
+       "richtig": true,
+       "erklaerung": "Beides möglich."
+      },
+      {
+       "text": "Es hat keinen Einfluss.",
+       "richtig": false,
+       "erklaerung": "Reaktion der Eltern wirkt."
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze.",
+     "text": "Wenn der 5-jährige Ben nach der Geburt seiner Schwester wieder Fläschchen möchte, zeigt er eine {{Regression}}. Bleibt ein Erwachsener dauerhaft oral orientiert, spricht man von {{Fixierung}}.",
+     "woerter": [
+      "Regression",
+      "Fixierung",
+      "Identifikation"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre in 4–5 Sätzen, warum Eltern bei der Sauberkeitserziehung nach Freud Geduld zeigen sollten.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Die anale Phase prägt Autonomie. Zu frühe oder strenge Erziehung kann Angst und Widerstand erzeugen und Fixierung begünstigen. Geduld ermöglicht, dass das Kind Kontrolle erlebt und Selbstständigkeit aufbaut.",
+     "kriterien": [
+      "Phase genannt",
+      "Folge",
+      "Begründung"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_3"
+ ]
+}

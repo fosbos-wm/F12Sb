@@ -1,0 +1,115 @@
+{
+ "titel": "Primäre und sekundäre Bindungen – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst, wie stark frühe Bindung spätere Beziehungen bestimmt. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Student sagt: „Wer als Baby unsicher gebunden war, ist für immer beziehungsgestört.“ Eine Dozentin sagt: „Das ist zu einfach.“"
+    },
+    {
+     "typ": "text",
+     "text": "Frühe Bindung ist ein **Fundament**, aber kein Schicksal. **Sekundäre Bindungen** (Erzieherin, Lehrkraft, Freunde, Partner) können korrigierende Erfahrungen bieten. Auch Selbststeuerung und Umwelt wirken mit."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil nennt **Belege für den Einfluss**, **Gründe für Veränderbarkeit** und ein **Fazit**."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Prägung ja, Determinismus nein."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Aussage des Studenten treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie ist deterministisch.",
+       "richtig": true,
+       "erklaerung": "Zu starr."
+      },
+      {
+       "text": "Sie berücksichtigt sekundäre Bindungen.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Frühe Bindung hat dennoch Einfluss.",
+       "richtig": true,
+       "erklaerung": "Fundament."
+      },
+      {
+       "text": "Sie ist empirisch eindeutig belegt.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Erfahrung kann Unsicherheit ausgleichen?",
+     "optionen": [
+      "verlässliche sekundäre Bindung",
+      "Vermeidung von Beziehungen",
+      "Isolation"
+     ],
+     "richtig": 0,
+     "erklaerung": "Korrigierend."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Veränderbarkeit treffen zu?",
+     "aussagen": [
+      {
+       "text": "Positive neue Beziehungen können den Bindungsstil verändern.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Therapie ist ausgeschlossen.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Anlage und Selbststeuerung spielen mit.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Bindung entscheidet allein.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile in 6–7 Sätzen die Aussage „Unsichere frühe Bindung führt immer zu Beziehungsproblemen“.",
+     "hinweis": "6–7 Sätze",
+     "muster": "Frühe Erfahrungen prägen das Vertrauen, daher erhöht sich das Risiko. Es gibt aber keinen Automatismus: Sekundäre Bindungen und eigene Entwicklung können korrigieren. Die Aussage ist deshalb zu pauschal. Ich beurteile sie als falsch verallgemeinert.",
+     "kriterien": [
+      "Pro",
+      "Contra",
+      "Urteil"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_7"
+ ]
+}

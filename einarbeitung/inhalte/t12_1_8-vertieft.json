@@ -1,0 +1,115 @@
+{
+ "titel": "Bindungsförderung in der Frühpädagogik – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst die Frage „Krippe oder zuhause?“ differenziert. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Familie Berg plant, ihr Kind mit 8 Monaten für 40 Stunden pro Woche in die Krippe zu geben. Die Großmutter warnt: „Das schadet der Bindung.“ Die Eltern sind unsicher."
+    },
+    {
+     "typ": "text",
+     "text": "Es gibt kein einfaches Ja oder Nein. Risikofaktoren: **viele Stunden im ersten Lebensjahr**, **wechselndes Personal**, **geringe Feinfühligkeit**. Schutz: **Qualität der Einrichtung**, **Betreuungsschlüssel**, **feinfühlige Eltern**."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil bezieht **alle Faktoren** ein und gibt eine **Empfehlung** mit Bedingungen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Nicht „ob“, sondern „unter welchen Bedingungen“."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Warnung der Großmutter treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie ist zu pauschal.",
+       "richtig": true,
+       "erklaerung": "Bedingungen entscheiden."
+      },
+      {
+       "text": "Lange Betreuungszeiten im 1. Jahr können ein Risiko sein.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Fremdbetreuung schadet immer.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Betreuungsqualität spielt keine Rolle.",
+       "richtig": false,
+       "erklaerung": "Doch."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was sollten die Eltern prüfen?",
+     "optionen": [
+      "Betreuungsschlüssel und Kontinuität des Personals",
+      "nur den Preis",
+      "nur die Entfernung"
+     ],
+     "richtig": 0,
+     "erklaerung": "Qualität."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Maßnahmen schützen die Bindung?",
+     "aussagen": [
+      {
+       "text": "feinfühlige Beziehung zuhause",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "stundenlange Fremdbetreuung ohne Eingewöhnung",
+       "richtig": false,
+       "erklaerung": "Nein."
+      },
+      {
+       "text": "Bezugserzieherin und Rituale",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Wechsel der Betreuungsperson alle Wochen",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile in 6–7 Sätzen den Plan der Familie und gib eine bedingte Empfehlung.",
+     "hinweis": "6–7 Sätze",
+     "muster": "40 Stunden im ersten Lebensjahr sind ein Risikofaktor. Er kann abgemildert werden durch hohe Qualität, feste Bezugserzieherin, behutsame Eingewöhnung und feinfühlige Eltern. Ich empfehle, die Stunden zu reduzieren oder die Bedingungen genau zu prüfen.",
+     "kriterien": [
+      "Risiko",
+      "Schutz",
+      "Empfehlung"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_8"
+ ]
+}

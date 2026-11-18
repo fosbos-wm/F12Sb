@@ -1,0 +1,116 @@
+{
+ "titel": "Kritische Würdigung der Psychoanalyse – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du verfasst ein begründetes Urteil zur Theorie Freuds. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In einer Diskussion sagt Ali: „Freud ist überholt, das braucht man nicht mehr.“ Lea: „Ohne Freud gäbe es keine moderne Psychologie.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein **Urteil** beginnt mit einer These, nennt **Argumente mit Belegen**, würdigt die Gegenposition und endet mit einem **Fazit**. Beide Aussagen sind zugespitzt: Freud hat Wichtiges angestoßen, ist aber in vielen Punkten nicht belegt."
+    },
+    {
+     "typ": "text",
+     "text": "Nützlich ist die Unterscheidung zwischen **Einfluss** (historisch, praktisch) und **wissenschaftlicher Geltung** (Prüfbarkeit, Belege)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Urteil = These · Argumente · Gegenposition · Fazit."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Alis Position treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie ignoriert den Einfluss Freuds.",
+       "richtig": true,
+       "erklaerung": "Einseitig."
+      },
+      {
+       "text": "Sie ist vollständig richtig.",
+       "richtig": false,
+       "erklaerung": "Zu pauschal."
+      },
+      {
+       "text": "Teile der Theorie sind empirisch schwach.",
+       "richtig": true,
+       "erklaerung": "Berechtigter Kern."
+      },
+      {
+       "text": "Freud ist heute bedeutungslos.",
+       "richtig": false,
+       "erklaerung": "Wirkt weiter."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Leas Position treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie betont zu Recht die historische Wirkung.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Sie belegt die Gültigkeit der Theorie.",
+       "richtig": false,
+       "erklaerung": "Einfluss ≠ Geltung."
+      },
+      {
+       "text": "Sie unterscheidet zwischen Einfluss und Geltung.",
+       "richtig": false,
+       "erklaerung": "Tut sie nicht."
+      },
+      {
+       "text": "Einfluss bedeutet nicht automatisch wissenschaftliche Bestätigung.",
+       "richtig": true,
+       "erklaerung": "Wichtige Unterscheidung."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welches Fazit ist am besten begründet?",
+     "optionen": [
+      "Freud ist komplett wertlos",
+      "Freud ist komplett bestätigt",
+      "Die Theorie hat große Wirkung, ist aber nur teilweise belegt"
+     ],
+     "richtig": 2,
+     "erklaerung": "Differenziert."
+    },
+    {
+     "typ": "frei",
+     "frage": "Verfasse in 6–8 Sätzen ein begründetes Urteil zur Theorie Freuds.",
+     "hinweis": "6–8 Sätze: These, 2 Argumente, Gegenposition, Fazit",
+     "muster": "Die Psychoanalyse ist wegweisend, aber nur teilweise haltbar. Für sie spricht die Betonung der frühen Kindheit und des Unbewussten. Gegen sie spricht die geringe Überprüfbarkeit und Kulturabhängigkeit. Alis Kritik trifft den Kern, Leas Hinweis auf die Wirkung ebenfalls. Insgesamt beurteile ich die Theorie als einflussreiche, aber nicht bestätigte Deutungshilfe.",
+     "kriterien": [
+      "These",
+      "Pro",
+      "Contra",
+      "Fazit"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_5"
+ ]
+}

@@ -1,0 +1,139 @@
+{
+ "titel": "Entwicklung und Entwicklungsbedingungen – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst einseitige Aussagen zur Entwicklung und begründest differenziert. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In einer Elternrunde sagt Herr Brandl: „Mein Sohn ist faul, das hat er von mir geerbt.“ Frau Sander entgegnet: „Alles eine Frage der Erziehung, die Gene spielen keine Rolle.“ Die Erzieherin Frau Koch widerspricht beiden."
+    },
+    {
+     "typ": "text",
+     "text": "Beide Aussagen sind **einseitig**: Herr Brandl betont allein die Anlage, Frau Sander allein die Umwelt. Eine differenzierte Beurteilung berücksichtigt alle drei Bedingungen und ihre Wechselwirkung."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Auch die Selbststeuerung ist wichtig: Der Sohn kann sein Verhalten selbst mitgestalten."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Beurteilen = Position prüfen, begründen, Gegenposition würdigen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen beurteilen die Position von Herrn Brandl zutreffend?",
+     "aussagen": [
+      {
+       "text": "Er ignoriert den Einfluss der Umwelt.",
+       "richtig": true,
+       "erklaerung": "Einseitig."
+      },
+      {
+       "text": "Anlage allein erklärt Verhalten vollständig.",
+       "richtig": false,
+       "erklaerung": "Wechselwirkung."
+      },
+      {
+       "text": "Auch Vorbilder in der Familie sind Umwelteinflüsse.",
+       "richtig": true,
+       "erklaerung": "Sie können das Verhalten prägen."
+      },
+      {
+       "text": "„Faulheit“ lässt sich nicht beeinflussen.",
+       "richtig": false,
+       "erklaerung": "Selbststeuerung und Umwelt wirken mit."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen beurteilen die Position von Frau Sander zutreffend?",
+     "aussagen": [
+      {
+       "text": "Sie ignoriert die Anlage.",
+       "richtig": true,
+       "erklaerung": "Einseitig."
+      },
+      {
+       "text": "Erziehung wirkt unabhängig von individuellen Voraussetzungen.",
+       "richtig": false,
+       "erklaerung": "Kinder reagieren je nach Anlage unterschiedlich."
+      },
+      {
+       "text": "Sie berücksichtigt die Selbststeuerung nicht.",
+       "richtig": true,
+       "erklaerung": "Das Kind gestaltet mit."
+      },
+      {
+       "text": "Sie hat damit recht, weil Gene keine Rolle spielen.",
+       "richtig": false,
+       "erklaerung": "Anlage wirkt immer mit."
+      }
+     ]
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Argumente zu.",
+     "paare": [
+      [
+       "Pro Anlage",
+       "Eineiige Zwillinge ähneln sich in vielen Merkmalen"
+      ],
+      [
+       "Pro Umwelt",
+       "Kinder in anregenden Umgebungen entwickeln sich oft schneller"
+      ],
+      [
+       "Pro Selbststeuerung",
+       "Menschen setzen sich Ziele und gestalten ihre Umgebung"
+      ],
+      [
+       "Pro Wechselwirkung",
+       "Anteile lassen sich nicht sauber trennen"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Antwort von Frau Koch ist fachlich am besten?",
+     "optionen": [
+      "Es kommt auf die Gene an.",
+      "Anlage, Umwelt und Selbststeuerung wirken zusammen, der Anteil ist nicht trennbar.",
+      "Nur Erziehung zählt.",
+      "Kinder entwickeln sich zufällig."
+     ],
+     "richtig": 1,
+     "erklaerung": "Differenzierte Position."
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile in 6–7 Sätzen die Aussage „Faulheit ist angeboren“. Nenne ein Argument dafür, eines dagegen und fälle ein begründetes Urteil.",
+     "hinweis": "6–7 Sätze: Nennen, Erklären, Verdeutlichen",
+     "muster": "Dafür spricht, dass Anlagen Temperament und Aktivitätsniveau beeinflussen können. Dagegen spricht, dass Umwelt (Vorbilder, Anforderungen, Motivation) und Selbststeuerung das Verhalten mitgestalten. Eine Zuschreibung „angeboren“ übersieht die Wechselwirkung. Ich beurteile die Aussage deshalb als zu einseitig.",
+     "kriterien": [
+      "Pro-Argument",
+      "Contra-Argument",
+      "Begründetes Urteil",
+      "Fachbegriffe"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_1"
+ ]
+}

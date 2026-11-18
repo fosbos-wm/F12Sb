@@ -1,0 +1,119 @@
+{
+ "titel": "Lebensspanne und Entwicklungsaufgaben – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du erkennst Entwicklungsaufgaben und Merkmale nach Baltes in Fällen. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Herr Schuster (58) hat nach einem Herzinfarkt seinen Marathon-Traum aufgegeben. Er trainiert nun Radfahren in der Reha und freut sich über jede Etappe. Seine Tochter Lena (17) zieht bald zu Hause aus und beginnt eine Ausbildung."
+    },
+    {
+     "typ": "text",
+     "text": "Nach **Baltes** gehören zur Entwicklung **Weiterentwicklung** (Radfahren lernen), **Erhaltung/Wiedererlangung** (Fitness) und **Ausgleich von Verlusten** (neues Ziel statt Marathon)."
+    },
+    {
+     "typ": "text",
+     "text": "Lenas **Entwicklungsaufgaben**: Ablösung von den Eltern, Berufsvorbereitung, Aufbau einer eigenen Lebensform. Sie ergeben sich aus Reife, gesellschaftlichen Erwartungen und eigenen Zielen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Baltes: Gewinne, Erhalt, Verluste ausgleichen. Entwicklungsaufgaben: Reife · Gesellschaft · persönliche Ziele."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne zu.",
+     "paare": [
+      [
+       "Marathon aufgeben, Radfahren trainieren",
+       "Ausgleich von Verlusten"
+      ],
+      [
+       "Fitness nach dem Infarkt wiedererlangen",
+       "Erhaltung/Wiedererlangung"
+      ],
+      [
+       "Neue Fähigkeiten beim Radfahren",
+       "Weiterentwicklung"
+      ]
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Aus welcher Quelle stammt die Aufgabe bei Lena?",
+     "kategorien": [
+      {
+       "name": "gesellschaftliche Erwartung",
+       "items": [
+        "Berufsausbildung abschließen"
+       ]
+      },
+      {
+       "name": "persönliches Ziel",
+       "items": [
+        "eine eigene Wohnung beziehen wollen"
+       ]
+      },
+      {
+       "name": "körperliche Reife",
+       "items": [
+        "Veränderungen der Pubertät bewältigt haben"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Entwicklung dauert das ganze Leben.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Mit 58 gibt es keine Entwicklung mehr.",
+       "richtig": false,
+       "erklaerung": "Doch."
+      },
+      {
+       "text": "Ablösung von den Eltern ist eine Aufgabe im Jugendalter.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Entwicklungsaufgaben sind in allen Kulturen gleich.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beschreibe in 4–5 Sätzen, wie Herr Schuster den Verlust ausgleicht, und ordne ihn nach Baltes ein.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Er verliert die Möglichkeit, Marathon zu laufen, und setzt ein neues Ziel (Radfahren). Das ist Ausgleich von Verlusten. Außerdem arbeitet er an der Wiedererlangung seiner Fitness.",
+     "kriterien": [
+      "Baltes-Begriff",
+      "Fallbezug"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_9"
+ ]
+}

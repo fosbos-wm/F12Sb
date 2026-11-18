@@ -1,0 +1,115 @@
+{
+ "titel": "Psychosexuelle Entwicklung – Vertieft: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du beurteilst Aussagen zur psychosexuellen Entwicklung kritisch. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Mutter liest, ihr Sohn (3) „hänge in der analen Phase fest“, weil er Pipi-Witze liebt. Eine Freundin sagt: „Quatsch, das ist alles Erfindung.“"
+    },
+    {
+     "typ": "text",
+     "text": "Beurteile kritisch: Typische Verhaltensweisen passen oft zu den Phasen, doch einzelne Beobachtungen reichen nicht, um eine **Fixierung** zu behaupten. Fixierung meint ein dauerhaftes, auffälliges Muster."
+    },
+    {
+     "typ": "text",
+     "text": "Die **Empirie** ist gemischt: Manche Zusammenhänge (orale oder anale Merkmale) wurden teilweise gefunden, das Gesamtmodell ist nicht bestätigt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Kritische Haltung: nicht alles glauben, nicht alles verwerfen, Belege abwägen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Aussage der Mutter treffen zu?",
+     "aussagen": [
+      {
+       "text": "Pipi-Witze allein belegen keine Fixierung.",
+       "richtig": true,
+       "erklaerung": "Zu wenig Evidenz."
+      },
+      {
+       "text": "Dieses Verhalten ist im Alter von 3 Jahren ungewöhnlich.",
+       "richtig": false,
+       "erklaerung": "Es ist alterstypisch."
+      },
+      {
+       "text": "Eine Fixierung setzt ein dauerhaftes Muster voraus.",
+       "richtig": true,
+       "erklaerung": "Nicht nur Einzelbeobachtung."
+      },
+      {
+       "text": "Fixierung entsteht durch Interesse an Witzen.",
+       "richtig": false,
+       "erklaerung": "Entsteht durch Über-/Unterbefriedigung."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Aussage der Freundin treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie übertreibt, Teile sind empirisch gestützt.",
+       "richtig": true,
+       "erklaerung": "Differenzierung nötig."
+      },
+      {
+       "text": "Das Modell ist vollständig widerlegt.",
+       "richtig": false,
+       "erklaerung": "Nicht vollständig."
+      },
+      {
+       "text": "Das Modell ist vollständig bestätigt.",
+       "richtig": false,
+       "erklaerung": "Auch nicht."
+      },
+      {
+       "text": "Eine pauschale Ablehnung ist unwissenschaftlich.",
+       "richtig": true,
+       "erklaerung": "Beurteilung braucht Argumente."
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welches Argument spricht gegen den Wert des Modells?",
+     "optionen": [
+      "Die Phasen sind schwer überprüfbar",
+      "Es berücksichtigt die Kindheit",
+      "Es erklärt Verhalten"
+     ],
+     "richtig": 0,
+     "erklaerung": "Kritikpunkt."
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile in 6–7 Sätzen die Aussage „Das Phasenmodell Freuds erklärt kindliches Verhalten vollständig“.",
+     "hinweis": "6–7 Sätze",
+     "muster": "Das Modell erklärt manches, z. B. Autonomie in der analen Phase. Es ist aber schwer überprüfbar, kulturabhängig und aus Einzelfällen gewonnen. Daher erklärt es Verhalten nicht vollständig. Andere Faktoren (Temperament, Umwelt) wirken mit.",
+     "kriterien": [
+      "Stärke",
+      "Schwäche",
+      "Urteil"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_3"
+ ]
+}

@@ -351,6 +351,270 @@
    "titel": "Vertieft: Vulnerabilität und Resilienz",
    "url": "aufgaben/LB1-11_Vertieft_Vulnerabilitaet-und-Resilienz.pdf",
    "ord": 12
+  },
+  {
+   "id": "ubn01l",
+   "wocheId": "t12_1_1",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Entwicklung und Entwicklungsbedingungen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-01-zuord-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn01m",
+   "wocheId": "t12_1_1",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Entwicklung und Entwicklungsbedingungen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-01-block-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn01v",
+   "wocheId": "t12_1_1",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Entwicklung und Entwicklungsbedingungen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-01-kprim-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn02l",
+   "wocheId": "t12_1_2",
+   "kategorie": "vertiefung1",
+   "titel": "Memory: Freuds Persönlichkeitsmodell (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-02-memor-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn02m",
+   "wocheId": "t12_1_2",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Freuds Persönlichkeitsmodell (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-02-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn02v",
+   "wocheId": "t12_1_2",
+   "kategorie": "vertiefung3",
+   "titel": "Rennen: Freuds Persönlichkeitsmodell (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-02-renne-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn03l",
+   "wocheId": "t12_1_3",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Psychosexuelle Entwicklung (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-03-zuord-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn03m",
+   "wocheId": "t12_1_3",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Psychosexuelle Entwicklung (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-03-block-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn03v",
+   "wocheId": "t12_1_3",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Psychosexuelle Entwicklung (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-03-kprim-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn04l",
+   "wocheId": "t12_1_4",
+   "kategorie": "vertiefung1",
+   "titel": "Memory: Angst und Abwehrmechanismen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-04-memor-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn04m",
+   "wocheId": "t12_1_4",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Angst und Abwehrmechanismen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-04-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn04v",
+   "wocheId": "t12_1_4",
+   "kategorie": "vertiefung3",
+   "titel": "Rennen: Angst und Abwehrmechanismen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-04-renne-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn05l",
+   "wocheId": "t12_1_5",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Kritische Würdigung der Psychoanalyse (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-05-zuord-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn05m",
+   "wocheId": "t12_1_5",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Kritische Würdigung der Psychoanalyse (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-05-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn05v",
+   "wocheId": "t12_1_5",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Kritische Würdigung der Psychoanalyse (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-05-kprim-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn06l",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung1",
+   "titel": "Memory: Bindung: Begriff, Phasen und Typen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-memor-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn06m",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Bindung: Begriff, Phasen und Typen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn06v",
+   "wocheId": "t12_1_6",
+   "kategorie": "vertiefung3",
+   "titel": "Rennen: Bindung: Begriff, Phasen und Typen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-06-renne-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn07l",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Feinfühligkeit und gelungene Bindung (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-07-zuord-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn07m",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Feinfühligkeit und gelungene Bindung (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-07-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn07v",
+   "wocheId": "t12_1_6b",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Feinfühligkeit und gelungene Bindung (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-07-kprim-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn08l",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung1",
+   "titel": "Memory: Primäre und sekundäre Bindungen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-08-memor-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn08m",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Primäre und sekundäre Bindungen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-08-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn08v",
+   "wocheId": "t12_1_7",
+   "kategorie": "vertiefung3",
+   "titel": "Rennen: Primäre und sekundäre Bindungen (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-08-renne-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn09l",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Bindungsförderung in der Frühpädagogik (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-09-zuord-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn09m",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Bindungsförderung in der Frühpädagogik (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-09-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn09v",
+   "wocheId": "t12_1_8",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Bindungsförderung in der Frühpädagogik (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-09-kprim-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn10l",
+   "wocheId": "t12_1_9",
+   "kategorie": "vertiefung1",
+   "titel": "Memory: Lebensspanne und Entwicklungsaufgaben (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-10-memor-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn10m",
+   "wocheId": "t12_1_9",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Lebensspanne und Entwicklungsaufgaben (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-10-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn10v",
+   "wocheId": "t12_1_9",
+   "kategorie": "vertiefung3",
+   "titel": "Rennen: Lebensspanne und Entwicklungsaufgaben (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-10-renne-vert",
+   "ord": 32
+  },
+  {
+   "id": "ubn11l",
+   "wocheId": "t12_1_10",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Vulnerabilität und Resilienz (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-11-zuord-leic",
+   "ord": 30
+  },
+  {
+   "id": "ubn11m",
+   "wocheId": "t12_1_10",
+   "kategorie": "vertiefung2",
+   "titel": "Theorievergleich: Vulnerabilität und Resilienz (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-11-vergl-mitt",
+   "ord": 31
+  },
+  {
+   "id": "ubn11v",
+   "wocheId": "t12_1_10",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Vulnerabilität und Resilienz (interaktiv)",
+   "url": "uebungsbausteine/station.html?s=lb1n-11-kprim-vert",
+   "ord": 32
   }
  ]
 }

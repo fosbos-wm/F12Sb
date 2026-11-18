@@ -1,0 +1,109 @@
+{
+ "titel": "Feinfühligkeit und gelungene Bindung – Plus: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 1,
+ "einleitung": "Du erkennst feinfühliges und unfeinfühliges Verhalten und gibst Rückmeldung. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Die Mutter von Emma (8 Monate) bemerkt, dass Emma unruhig wird und die Arme hebt. Sie sagt: „Du willst Nähe, komm her“, nimmt sie hoch und wiegt sie. Der Vater von Paul (8 Monate) tippt weiter am Handy, als Paul weint, und sagt: „Der soll sich beruhigen.“"
+    },
+    {
+     "typ": "text",
+     "text": "Beurteile mit den **fünf Bestandteilen**: Signale wahrnehmen, richtig interpretieren, Bedürfnis erkennen, angemessen reagieren, prompt reagieren."
+    },
+    {
+     "typ": "text",
+     "text": "Emmas Mutter erfüllt alle Bestandteile; Pauls Vater erfüllt keinen: Er beachtet das Signal nicht, deutet es nicht und reagiert nicht."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Fünf Bestandteile prüfen, dann begründen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.1",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "sortieren",
+     "titel": "Ordne die Beobachtungen zu.",
+     "kategorien": [
+      {
+       "name": "Feinfühlig",
+       "items": [
+        "Mutter erkennt den Wunsch nach Nähe",
+        "Sie reagiert sofort"
+       ]
+      },
+      {
+       "name": "Nicht feinfühlig",
+       "items": [
+        "Vater beachtet das Weinen nicht",
+        "„Der soll sich beruhigen.“"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welcher Bestandteil fehlt dem Vater zuerst?",
+     "optionen": [
+      "angemessene Reaktion",
+      "Signale wahrnehmen",
+      "Ko-Regulation"
+     ],
+     "richtig": 1,
+     "erklaerung": "Er beachtet das Signal nicht."
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Emma erlebt, dass ihre Signale Wirkung haben.",
+       "richtig": true,
+       "erklaerung": "Selbstwirksamkeit."
+      },
+      {
+       "text": "Paul lernt Selbstregulation durch Alleinlassen.",
+       "richtig": false,
+       "erklaerung": "Er braucht Ko-Regulation."
+      },
+      {
+       "text": "Dauerhaft unfeinfühlige Reaktionen erhöhen das Risiko unsicherer Bindung.",
+       "richtig": true,
+       "erklaerung": "Ja."
+      },
+      {
+       "text": "Feinfühligkeit ist Verwöhnen.",
+       "richtig": false,
+       "erklaerung": "Nein."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Gib Pauls Vater in 4–5 Sätzen eine fachlich begründete Rückmeldung.",
+     "hinweis": "4–5 Sätze",
+     "muster": "Paul zeigt mit Weinen ein Signal. Wenn es nicht beachtet wird, kann er Urvertrauen schlechter aufbauen. Der Vater sollte hinsehen, die Ursache deuten und prompt trösten. So lernt Paul, dass er sich auf ihn verlassen kann.",
+     "kriterien": [
+      "Fachbegriffe",
+      "Begründung",
+      "konkreter Rat"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_1_6b"
+ ]
+}
