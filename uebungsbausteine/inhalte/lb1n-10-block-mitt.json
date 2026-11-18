@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Argumente sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Chance",
+  "Risiko"
+ ],
+ "items": [
+  {
+   "t": "Orientierung für die Berufswahl",
+   "k": 0
+  },
+  {
+   "t": "Förderung von Selbstständigkeit",
+   "k": 0
+  },
+  {
+   "t": "Neue Erfahrungen",
+   "k": 0
+  },
+  {
+   "t": "Stärkung der Identität",
+   "k": 0
+  },
+  {
+   "t": "Orientierungslosigkeit",
+   "k": 1
+  },
+  {
+   "t": "Konflikt mit den Eltern",
+   "k": 1
+  },
+  {
+   "t": "Verzögerter Berufseinstieg",
+   "k": 1
+  },
+  {
+   "t": "Finanzielle Belastung",
+   "k": 1
+  }
+ ]
+}

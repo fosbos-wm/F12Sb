@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Argumente sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Risiko",
+  "Schutz",
+  "Kommt auf Bedingungen an"
+ ],
+ "items": [
+  {
+   "t": "Wechselndes Personal",
+   "k": 0
+  },
+  {
+   "t": "Zu schnelle Eingewöhnung",
+   "k": 0
+  },
+  {
+   "t": "Ungünstiger Betreuungsschlüssel",
+   "k": 0
+  },
+  {
+   "t": "Feste Bezugserzieherin",
+   "k": 1
+  },
+  {
+   "t": "Feinfühlige Fachkräfte",
+   "k": 1
+  },
+  {
+   "t": "Hohe Qualität",
+   "k": 1
+  },
+  {
+   "t": "Anzahl der Betreuungsstunden",
+   "k": 2
+  },
+  {
+   "t": "Alter beim Eintritt",
+   "k": 2
+  },
+  {
+   "t": "Feinfühligkeit der Eltern",
+   "k": 2
+  }
+ ]
+}

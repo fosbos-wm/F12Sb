@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Chance",
+  "Risiko"
+ ],
+ "karten": [
+  {
+   "t": "Orientierung für die Berufswahl",
+   "s": 0
+  },
+  {
+   "t": "Förderung von Selbstständigkeit",
+   "s": 0
+  },
+  {
+   "t": "Neue Erfahrungen",
+   "s": 0
+  },
+  {
+   "t": "Stärkung der Identität",
+   "s": 0
+  },
+  {
+   "t": "Orientierungslosigkeit",
+   "s": 1
+  },
+  {
+   "t": "Konflikt mit den Eltern",
+   "s": 1
+  },
+  {
+   "t": "Verzögerter Berufseinstieg",
+   "s": 1
+  },
+  {
+   "t": "Finanzielle Belastung",
+   "s": 1
+  }
+ ]
+}

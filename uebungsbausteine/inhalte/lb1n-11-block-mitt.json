@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Argumente sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Verringert Risiken",
+  "Stärkt Schutzfaktoren"
+ ],
+ "items": [
+  {
+   "t": "Anti-Mobbing-Programm",
+   "k": 0
+  },
+  {
+   "t": "Entlastung bei Überforderung",
+   "k": 0
+  },
+  {
+   "t": "Unterstützung für belastete Familien",
+   "k": 0
+  },
+  {
+   "t": "Frühzeitige Hilfe bei Problemen",
+   "k": 0
+  },
+  {
+   "t": "Soziale Kompetenzen trainieren",
+   "k": 1
+  },
+  {
+   "t": "Verlässliche Beziehungen anbieten",
+   "k": 1
+  },
+  {
+   "t": "Selbstwirksamkeit stärken",
+   "k": 1
+  },
+  {
+   "t": "Optimismus und Zuversicht fördern",
+   "k": 1
+  }
+ ]
+}

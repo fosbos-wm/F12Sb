@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Eingewöhnung treffen zu?",
+   "statements": [
+    {
+     "text": "Eine vertraute Person ist anwesend.",
+     "richtig": true
+    },
+    {
+     "text": "Trennungen werden allmählich gesteigert.",
+     "richtig": true
+    },
+    {
+     "text": "Sie sollte so kurz wie möglich sein.",
+     "richtig": false
+    },
+    {
+     "text": "Sie braucht keine Bezugserzieherin.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Risikofaktoren treffen zu?",
+   "statements": [
+    {
+     "text": "Wechselndes Personal ist ein Risiko.",
+     "richtig": true
+    },
+    {
+     "text": "Viele Stunden im ersten Jahr können riskant sein.",
+     "richtig": true
+    },
+    {
+     "text": "Rituale erhöhen das Risiko.",
+     "richtig": false
+    },
+    {
+     "text": "Gute Qualität erhöht das Risiko.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Schutzfaktoren treffen zu?",
+   "statements": [
+    {
+     "text": "Feinfühlige Fachkräfte schützen.",
+     "richtig": true
+    },
+    {
+     "text": "Ein günstiger Betreuungsschlüssel schützt.",
+     "richtig": true
+    },
+    {
+     "text": "Ständiger Wechsel schützt.",
+     "richtig": false
+    },
+    {
+     "text": "Fremdbetreuung schützt immer.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

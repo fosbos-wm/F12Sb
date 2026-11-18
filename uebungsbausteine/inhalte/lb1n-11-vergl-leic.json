@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Beispiele sortieren",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Risikofaktor",
+  "Personaler Schutzfaktor",
+  "Sozialer Schutzfaktor"
+ ],
+ "karten": [
+  {
+   "t": "Armut",
+   "s": 0
+  },
+  {
+   "t": "Psychische Erkrankung eines Elternteils",
+   "s": 0
+  },
+  {
+   "t": "Dauerhafter Streit in der Familie",
+   "s": 0
+  },
+  {
+   "t": "Hohes Selbstwertgefühl",
+   "s": 1
+  },
+  {
+   "t": "Optimismus",
+   "s": 1
+  },
+  {
+   "t": "Selbstwirksamkeit",
+   "s": 1
+  },
+  {
+   "t": "Gute Freundschaften",
+   "s": 2
+  },
+  {
+   "t": "Verlässliche Bezugsperson",
+   "s": 2
+  },
+  {
+   "t": "Anregendes Lernumfeld",
+   "s": 2
+  }
+ ]
+}

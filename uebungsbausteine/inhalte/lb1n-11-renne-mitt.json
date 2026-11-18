@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Anwendungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Kemals Mutter ist oft krank, Geld ist knapp. Was ist das?",
+   "o": [
+    "Risikofaktoren",
+    "Schutzfaktoren",
+    "Resilienz",
+    "Selbstwirksamkeit"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Kemals Freundesgruppe ist:",
+   "o": [
+    "Risiko",
+    "sozialer Schutzfaktor",
+    "personaler Schutzfaktor",
+    "Vulnerabilität"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Seine Zuversicht ist:",
+   "o": [
+    "sozialer Schutzfaktor",
+    "Risiko",
+    "personaler Schutzfaktor",
+    "Armut"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Mehrere Risiken zusammen bewirken:",
+   "o": [
+    "Resilienz",
+    "Schutz",
+    "nichts",
+    "höhere Verletzbarkeit"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Was fördert Resilienz?",
+   "o": [
+    "autoritative Erziehung",
+    "Vernachlässigung",
+    "Strenge",
+    "Ignorieren"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Ist Resilienz unveränderlich?",
+   "o": [
+    "ja",
+    "nein, sie lässt sich fördern",
+    "nur bei Geburt",
+    "nie"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Janas Oma ist ein:",
+   "o": [
+    "Risiko",
+    "personaler Schutz",
+    "sozialer Schutzfaktor",
+    "Vulnerabilität"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist Selbstwirksamkeit?",
+   "o": [
+    "Streben nach Macht",
+    "Angst",
+    "Verdrängung",
+    "Überzeugung, Situationen bewältigen zu können"
+   ],
+   "r": 3
+  }
+ ]
+}

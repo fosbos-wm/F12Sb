@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Beurteilungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie beurteilt man „Die Krippe schadet der Bindung“?",
+   "o": [
+    "zu pauschal, Bedingungen entscheiden",
+    "richtig",
+    "bewiesen",
+    "irrelevant"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was sollten Eltern prüfen?",
+   "o": [
+    "nur Preis",
+    "Betreuungsschlüssel und Kontinuität",
+    "nur Lage",
+    "nur Größe"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist bei 40 Stunden im ersten Lebensjahr riskant?",
+   "o": [
+    "Selbstständigkeit",
+    "Schutz",
+    "Belastung der Bindungsentwicklung",
+    "nichts"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wie lässt sich dieses Risiko mindern?",
+   "o": [
+    "Strafe",
+    "Ignorieren",
+    "Wechsel",
+    "Qualität, Bezugserzieherin, Eingewöhnung"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Welche Empfehlung ist ausgewogen?",
+   "o": [
+    "Stunden reduzieren oder Bedingungen prüfen",
+    "unbedingt 40 Stunden",
+    "gar nicht betreuen",
+    "egal"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Rolle haben Eltern?",
+   "o": [
+    "keine",
+    "feinfühlige Beziehung schützt",
+    "nur Geld",
+    "nur Fahrdienst"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Aussage ist fachlich haltbar?",
+   "o": [
+    "Stunden zählen nie",
+    "Personal ist egal",
+    "Qualität und Feinfühligkeit entscheiden",
+    "Rituale schaden"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was gehört zum Urteil?",
+   "o": [
+    "nur Risiko",
+    "nur Schutz",
+    "nur Beispiel",
+    "Risiko, Schutz, Empfehlung"
+   ],
+   "r": 3
+  }
+ ]
+}

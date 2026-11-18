@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie verläuft Entwicklung nach Baltes?",
+   "o": [
+    "lebenslang",
+    "nur bis zum Jugendalter",
+    "nur bis zur Pubertät",
+    "nur im Alter"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Ein Kletterer wechselt nach Verletzung zum Schwimmen. Welches Merkmal?",
+   "o": [
+    "Weiterentwicklung",
+    "Ausgleich von Verlusten",
+    "Erhaltung",
+    "Reifung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist eine Entwicklungsaufgabe?",
+   "o": [
+    "Hausaufgabe",
+    "Vorschrift",
+    "Anforderung in einem Lebensabschnitt",
+    "Strafe"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Woraus entstehen Entwicklungsaufgaben?",
+   "o": [
+    "nur aus Zufall",
+    "nur aus Reife",
+    "nur aus Schule",
+    "Reife, Gesellschaft und eigene Ziele"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Welche Aufgabe gehört zum Jugendalter?",
+   "o": [
+    "Ablösung von den Eltern",
+    "Laufen lernen",
+    "Sprechen lernen",
+    "Sauberkeit"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was bietet die Peergroup?",
+   "o": [
+    "Ersatz für Schule",
+    "Gleichaltrige für Identitätssuche",
+    "Versorgung",
+    "Strafen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist ein Lebensübergang?",
+   "o": [
+    "Reifung",
+    "Fixierung",
+    "Transition",
+    "Ritual"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Ayla weiß nicht, was sie nach dem Fachabitur tut. Welche Aufgabe?",
+   "o": [
+    "Sauberkeit",
+    "Spracherwerb",
+    "Laufen",
+    "Berufsvorbereitung"
+   ],
+   "r": 3
+  }
+ ]
+}

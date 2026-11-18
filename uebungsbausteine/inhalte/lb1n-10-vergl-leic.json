@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Beispiele sortieren",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Körperliche Reife",
+  "Gesellschaftliche Erwartung",
+  "Persönliches Ziel"
+ ],
+ "karten": [
+  {
+   "t": "Pubertät bewältigen",
+   "s": 0
+  },
+  {
+   "t": "Neue Körpergestalt akzeptieren",
+   "s": 0
+  },
+  {
+   "t": "Geschlechtsrolle annehmen",
+   "s": 0
+  },
+  {
+   "t": "Schulabschluss erreichen",
+   "s": 1
+  },
+  {
+   "t": "Berufsausbildung abschließen",
+   "s": 1
+  },
+  {
+   "t": "Mit 6 Jahren schulfähig sein",
+   "s": 1
+  },
+  {
+   "t": "Eine eigene Familie gründen wollen",
+   "s": 2
+  },
+  {
+   "t": "Einen Wunschberuf anstreben",
+   "s": 2
+  },
+  {
+   "t": "Ein eigenes Wertesystem entwickeln",
+   "s": 2
+  }
+ ]
+}

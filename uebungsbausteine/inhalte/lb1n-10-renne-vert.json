@@ -1,84 +1,84 @@
 {
- "titel": "Rennen: Lebensspanne und Entwicklungsaufgaben",
+ "titel": "Rennen: Beurteilungsfragen",
  "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
  "fragen": [
   {
-   "f": "Wie verläuft Entwicklung nach Baltes?",
+   "f": "Wie beurteilt man den Konflikt zwischen Tarek und seinen Eltern?",
    "o": [
-    "lebenslang",
-    "nur bis zum Jugendalter",
-    "nur bis zur Pubertät",
-    "nur im Alter"
+    "typisch für die Ablösung im Jugendalter",
+    "krankhaft",
+    "unwichtig",
+    "vermeidbar"
    ],
    "r": 0
   },
   {
-   "f": "Ein Kletterer wechselt nach Verletzung zum Schwimmen. Welches Merkmal?",
+   "f": "Welche Chance bietet Tareks Auszeit?",
    "o": [
-    "Weiterentwicklung",
-    "Ausgleich von Verlusten",
-    "Erhaltung",
-    "Reifung"
+    "nichts",
+    "Orientierung und Selbstständigkeit",
+    "Verlust",
+    "Strafe"
    ],
    "r": 1
   },
   {
-   "f": "Was ist eine Entwicklungsaufgabe?",
+   "f": "Welches Risiko besteht?",
    "o": [
-    "Hausaufgabe",
-    "Vorschrift",
-    "Anforderung in einem Lebensabschnitt",
-    "Strafe"
+    "keines",
+    "Reife",
+    "Orientierungslosigkeit",
+    "Abitur"
    ],
    "r": 2
   },
   {
-   "f": "Woraus entstehen Entwicklungsaufgaben?",
+   "f": "Welche Lösung ist am ausgewogensten?",
    "o": [
-    "nur aus Zufall",
-    "nur aus Reife",
-    "nur aus Schule",
-    "Reife, Gesellschaft und eigene Ziele"
+    "Verbot",
+    "Auszeit ohne Plan",
+    "sofort studieren",
+    "Plan mit Zeitrahmen und Bewerbung"
    ],
    "r": 3
   },
   {
-   "f": "Welche Aufgabe gehört zum Jugendalter?",
+   "f": "Welche Rolle haben die Eltern?",
    "o": [
-    "Ablösung von den Eltern",
-    "Laufen lernen",
-    "Sprechen lernen",
-    "Sauberkeit"
+    "unterstützen und Orientierung geben",
+    "entscheiden allein",
+    "ignorieren",
+    "bestrafen"
    ],
    "r": 0
   },
   {
-   "f": "Was bietet die Peergroup?",
+   "f": "Wie beurteilt man „Mit 58 gibt es keine Entwicklung mehr“?",
    "o": [
-    "Ersatz für Schule",
-    "Gleichaltrige für Identitätssuche",
-    "Versorgung",
-    "Strafen"
+    "richtig",
+    "falsch, Entwicklung dauert lebenslang",
+    "bewiesen",
+    "irrelevant"
    ],
    "r": 1
   },
   {
-   "f": "Was ist ein Lebensübergang?",
+   "f": "Warum sind Entwicklungsaufgaben nicht überall gleich?",
    "o": [
-    "Reifung",
-    "Fixierung",
-    "Transition",
-    "Ritual"
+    "alle gleich",
+    "Zufall",
+    "Erwartungen sind kulturabhängig",
+    "Alter"
    ],
    "r": 2
   },
   {
-   "f": "Ayla weiß nicht, was sie nach dem Fachabitur tut. Welche Aufgabe?",
+   "f": "Was gehört zum Urteil?",
    "o": [
-    "Sauberkeit",
-    "Spracherwerb",
-    "Laufen",
-    "Berufsvorbereitung"
+    "Meinung",
+    "Beispiel",
+    "Definition",
+    "Chancen, Risiken, Empfehlung"
    ],
    "r": 3
   }

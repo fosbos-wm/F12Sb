@@ -1,0 +1,86 @@
+{
+ "titel": "Rennen: Beurteilungsfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie beurteilt man „Wir müssen die Schüler nur resilienter machen“?",
+   "o": [
+    "einseitig, Risiken in der Umwelt zählen",
+    "richtig",
+    "bewiesen",
+    "irrelevant"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Maßnahme verbindet Förderung und Entlastung?",
+   "o": [
+    "Appelle",
+    "Anti-Mobbing-Programm plus soziale Kompetenzen",
+    "Belohnung",
+    "Strafen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Warum liegt Verantwortung nicht allein beim Kind?",
+   "o": [
+    "Kinder sind schwach",
+    "Eltern sind schuld",
+    "Resilienz entsteht im Zusammenspiel von Person und Umwelt",
+    "Schule ist schuld"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Aussage ist fachlich haltbar?",
+   "o": [
+    "Resilienz ist angeboren",
+    "Risiken sind unwichtig",
+    "Schutz ist unnötig",
+    "Resilienz lässt sich fördern, Risiken sollten sinken"
+   ],
+   "r": 3
+  },
+  {
+   "f": "Was bedeutet Kumulation?",
+   "o": [
+    "Risiken verstärken sich",
+    "Schutz verstärkt sich",
+    "Alles verschwindet",
+    "nichts"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Folge hat starke Risikobelastung ohne Schutz?",
+   "o": [
+    "Resilienz",
+    "höhere Verletzbarkeit",
+    "Schutz",
+    "keine"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Rolle hat Schule?",
+   "o": [
+    "nur Wissen",
+    "nichts",
+    "Risiken verringern, Schutz stärken",
+    "Strafe"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was gehört zum Urteil?",
+   "o": [
+    "nur Pro",
+    "nur Contra",
+    "nur Beispiel",
+    "Pro, Contra, Fazit"
+   ],
+   "r": 3
+  }
+ ]
+}

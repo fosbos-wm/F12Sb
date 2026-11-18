@@ -1,0 +1,69 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Schutzfaktoren treffen zu?",
+   "statements": [
+    {
+     "text": "Sie ermöglichen positive Entwicklung trotz Risiken.",
+     "richtig": true
+    },
+    {
+     "text": "Sie können personal oder sozial sein.",
+     "richtig": true
+    },
+    {
+     "text": "Sie sind immer angeboren.",
+     "richtig": false
+    },
+    {
+     "text": "Sie sind identisch mit Risikofaktoren.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Risikofaktoren treffen zu?",
+   "statements": [
+    {
+     "text": "Sie erhöhen die Wahrscheinlichkeit zu erkranken.",
+     "richtig": true
+    },
+    {
+     "text": "Mehrere Risiken verstärken sich.",
+     "richtig": true
+    },
+    {
+     "text": "Ein Risiko führt immer zur Störung.",
+     "richtig": false
+    },
+    {
+     "text": "Sie sind identisch mit Resilienz.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Resilienz treffen zu?",
+   "statements": [
+    {
+     "text": "Sie lässt sich fördern.",
+     "richtig": true
+    },
+    {
+     "text": "Sie verändert sich im Lebenslauf.",
+     "richtig": true
+    },
+    {
+     "text": "Sie bedeutet, nie belastet zu sein.",
+     "richtig": false
+    },
+    {
+     "text": "Sie ist unveränderlich.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}
