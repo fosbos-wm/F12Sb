@@ -22495,7 +22495,6 @@ async function renderLkUnterricht(){
  else if(fk==="mathe")inhalt=`<h2 class="lx-h2">Mathematik</h2><div class="card"><p>Das Fach Mathematik wird gerade vorbereitet. Sobald Inhalte da sind, planst du sie hier genauso wie in Pädagogik/Psychologie.</p><button type="button" class="secondary" onclick="go('lw-mathe')">Mathematik in der Lernwerkstatt ansehen</button></div>`;
  else inhalt=`<p class="lx-hint">Wähle ein Fach, um Inhalte zu planen und bereitzustellen.</p>`;
  return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterricht planen","Wähle ein Fach. Bei Pädagogik/Psychologie siehst du zuerst die vier Lernbereiche des Individuellen Lernpfads, darunter die weiteren Werkzeuge. Jedes Thema hat dieselben acht Teile wie bei den Schüler:innen.")}
- <div class="lx-kacheln" style="margin:0 0 14px">${lxKachel("lk-planung","Lerneinheiten für nächste Woche einplanen","Themen und Projekte wählen, Pflichttermine setzen und direkt vorbereiten")}</div>
  ${faecher}${inhalt}</div>${footer()}`;
 }
 
