@@ -11,7 +11,7 @@ window.lxPPDirekt=async function(){
   modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">P\xC4DAGOGIK / PSYCHOLOGIE</div><h2>Deine Themen diese Woche</h2><p style="color:var(--muted)">W\xE4hle ein Thema.</p><div class="lxs-a lxs-modal">${th.map((e,ix)=>{const f=!!(KW.fort[e.id]||{}).abgeschlossen;return`<div class="lxs-tz ${ix%2?"mb":"mg"}"><span><b>${esc(kwKurz(e))}</b>${f?"<small>\u2713 geschafft</small>":""}</span><button type="button" class="${f?"secondary":"primary"}" data-kw="thema" data-id="${esc(e.id)}" onclick="closeModal()">${f?"Ansehen":"\xD6ffnen"}</button></div>`}).join("")}</div><p style="margin:14px 0 0"><button type="button" class="secondary" data-kw="wand" onclick="closeModal()">Alle Themen ansehen</button></p>`);
  }catch(x){console.warn(x);go("kw-wand")}
 };
-(function(){const st=document.createElement("style");st.textContent=".lx-ben{column-gap:10px!important}.lx-ber{row-gap:6px!important}.lx-ber>header small{display:none!important}.lx-ber>header h4{padding:6px 12px!important;margin:0!important;font-size:14px!important}.lx-stufe{padding:6px 8px!important;margin-top:0!important}.lx-stufe>b{display:block!important;font-size:10px!important;margin-bottom:3px!important}.lx-stufe .kw-leer{padding:0!important;margin:0!important;font-size:12px!important}.lx-ub{margin:3px 0!important;padding:0!important;border-left-width:4px!important}.lx-ub .kw-dz{margin:0!important;align-items:center}.lx-ub .kw-datei{padding:6px 8px!important;gap:2px 6px!important}.lx-ub .lx-pr-titel{font-size:12.5px!important;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.lx-ub .lx-lbchip,.lx-ub .lx-th,.lx-ub .lx-niv{display:none!important}.lx-ub .lx-pr-meta{margin-top:2px!important}.lx-ub .lx-art{font-size:10.5px!important}.lx-ub .kw-datei small{font-size:11px!important}.lx-ub .kw-del{min-width:26px!important;width:26px!important;padding:0!important}.lx-ub .kw-dz{gap:4px!important;min-width:0}.lx-ub .kw-datei{min-width:0;flex:1 1 auto}.lx-ub .kw-del{margin:0 3px 0 0!important;flex:0 0 26px}.lx-mehr{padding:3px 10px!important;font-size:12px!important;margin-top:3px!important}.lxs-unten{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))!important}.kw-seite .lx-sek:not(.lx-open){display:none!important}.kw-seite .lx-sek.lx-open{margin-top:14px}.kw-seite .lx-sek:not(.lx-open)>.lx-sek-k{margin-bottom:0;border-bottom:0}.lxs-zwei{align-items:stretch}.lxs-andere .lxs-fachbox{background:#fff8ec;border:1px solid #f1dcb4;border-top:3px solid #e8890c;border-radius:18px;padding:20px 22px;height:100%}.lxs-fachbox h3{margin:0 0 12px;font-size:20px}.lxs-fachbox .lxs-fach{display:flex;flex-direction:column;gap:10px}.lxs-leer{color:#6c8190;margin:0}.lxs-unten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}.lxs-auf h2{font-size:20px;margin:0 0 12px}.lxs-ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-items:start}.lxs-a{background:#fff;border:1px solid #dce7ef;border-top:3px solid #9BBF41;border-radius:14px;padding:14px 16px}.lxs-ak{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.lxs-ak b{font-size:16px}.lxs-ak em{font-style:normal;font-size:12px;color:#6c8190;font-weight:700}.lxs-a>p{margin:6px 0 8px;color:#355064;font-size:14px;line-height:1.4}.lxs-tz{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid #edf1f4}.lxs-tz span{display:flex;flex-direction:column;min-width:0}.lxs-tz small{color:#6c8190;font-size:12px}.lxs-tz button{padding:7px 12px;font-size:13px;flex:0 0 auto}.lsn-tipp{background:#f3f8e8;border:1px solid #DDE9C4;border-left:5px solid #9BBF41;border-radius:14px;padding:14px 18px;margin:0 0 18px}.lsn-tipp small{font-weight:900;letter-spacing:.12em;color:#5b842c;font-size:11px}.lsn-tipp p{margin:6px 0 10px;font-size:15px;line-height:1.5;color:#17384f}.lsn-tipp span{display:block;margin-top:10px;font-size:13px;color:#4b5b68}.lxs-modal{background:none;border:0;border-radius:0;padding:0;display:flex;flex-direction:column;gap:14px}.lxs-modal .lxs-tz{border:2px solid;border-radius:14px;padding:14px 18px}.lxs-modal .lxs-tz.mg{background:#f3f8e8;border-color:#9BBF41}.lxs-modal .lxs-tz.mb{background:#eaf4fc;border-color:#4a9bdc}.modal h2{color:var(--blue-dark)}@media(max-width:800px){.lxs-unten{grid-template-columns:1fr}}";document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.textContent=".lxs-zwei2{display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,2fr);gap:20px;align-items:start;margin-top:14px}.lxs-zwei2 .lxs-auf{margin:0}.lxs-zwei2 .lxs-ag{display:grid!important;grid-template-columns:1fr!important;gap:10px}.lxs-wk{background:#fff;border:1px solid #dce7ef;border-radius:16px;padding:14px;min-width:0}.lxs-wk-kopf{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}.lxs-wk-kopf h2{margin:0;font-size:18px}.lxs-wk-kopf div{display:flex;gap:6px}.lxs-wk-kopf button{padding:4px 10px}.lxs-wt{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.lxs-d{background:#f3f8fc;border-radius:10px;padding:8px;min-height:230px;min-width:0}.lxs-d.heute{outline:2px solid #1688cf;background:#eaf4fc}.lxs-d>b{display:block;font-size:12px;color:#55697b;margin-bottom:6px}.lxs-ev{background:#fff;border-left:4px solid #d92c34;border-radius:8px;padding:5px 7px;margin-bottom:5px;font-size:12px;line-height:1.3}.lxs-ev small{display:block;color:#55697b;font-size:11px}.lxs-ev.ab{border-left-color:#e08a2e}.lxs-ev.ei{border-left-color:#82b83b}.lxs-d .lxs-frei{color:#9aa9b5;font-size:12px}.lxs-leg{margin:10px 0 0;font-size:12px;color:#55697b}@media(max-width:980px){.lxs-zwei2{grid-template-columns:1fr}}@media(max-width:640px){.lxs-wt{grid-template-columns:1fr}.lxs-d{min-height:0}}.lx-ben{column-gap:10px!important}.lx-ber{row-gap:6px!important}.lx-ber>header small{display:none!important}.lx-ber>header h4{padding:6px 12px!important;margin:0!important;font-size:14px!important}.lx-stufe{padding:6px 8px!important;margin-top:0!important}.lx-stufe>b{display:block!important;font-size:10px!important;margin-bottom:3px!important}.lx-stufe .kw-leer{padding:0!important;margin:0!important;font-size:12px!important}.lx-ub{margin:3px 0!important;padding:0!important;border-left-width:4px!important}.lx-ub .kw-dz{margin:0!important;align-items:center}.lx-ub .kw-datei{padding:6px 8px!important;gap:2px 6px!important}.lx-ub .lx-pr-titel{font-size:12.5px!important;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.lx-ub .lx-lbchip,.lx-ub .lx-th,.lx-ub .lx-niv{display:none!important}.lx-ub .lx-pr-meta{margin-top:2px!important}.lx-ub .lx-art{font-size:10.5px!important}.lx-ub .kw-datei small{font-size:11px!important}.lx-ub .kw-del{min-width:26px!important;width:26px!important;padding:0!important}.lx-ub .kw-dz{gap:4px!important;min-width:0}.lx-ub .kw-datei{min-width:0;flex:1 1 auto}.lx-ub .kw-del{margin:0 3px 0 0!important;flex:0 0 26px}.lx-mehr{padding:3px 10px!important;font-size:12px!important;margin-top:3px!important}.lxs-unten{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))!important}.kw-seite .lx-sek:not(.lx-open){display:none!important}.kw-seite .lx-sek.lx-open{margin-top:14px}.kw-seite .lx-sek:not(.lx-open)>.lx-sek-k{margin-bottom:0;border-bottom:0}.lxs-zwei{align-items:stretch}.lxs-andere .lxs-fachbox{background:#fff8ec;border:1px solid #f1dcb4;border-top:3px solid #e8890c;border-radius:18px;padding:20px 22px;height:100%}.lxs-fachbox h3{margin:0 0 12px;font-size:20px}.lxs-fachbox .lxs-fach{display:flex;flex-direction:column;gap:10px}.lxs-leer{color:#6c8190;margin:0}.lxs-unten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}.lxs-auf h2{font-size:20px;margin:0 0 12px}.lxs-ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-items:start}.lxs-a{background:#fff;border:1px solid #dce7ef;border-top:3px solid #9BBF41;border-radius:14px;padding:14px 16px}.lxs-ak{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.lxs-ak b{font-size:16px}.lxs-ak em{font-style:normal;font-size:12px;color:#6c8190;font-weight:700}.lxs-a>p{margin:6px 0 8px;color:#355064;font-size:14px;line-height:1.4}.lxs-tz{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid #edf1f4}.lxs-tz span{display:flex;flex-direction:column;min-width:0}.lxs-tz small{color:#6c8190;font-size:12px}.lxs-tz button{padding:7px 12px;font-size:13px;flex:0 0 auto}.lsn-tipp{background:#f3f8e8;border:1px solid #DDE9C4;border-left:5px solid #9BBF41;border-radius:14px;padding:14px 18px;margin:0 0 18px}.lsn-tipp small{font-weight:900;letter-spacing:.12em;color:#5b842c;font-size:11px}.lsn-tipp p{margin:6px 0 10px;font-size:15px;line-height:1.5;color:#17384f}.lsn-tipp span{display:block;margin-top:10px;font-size:13px;color:#4b5b68}.lxs-modal{background:none;border:0;border-radius:0;padding:0;display:flex;flex-direction:column;gap:14px}.lxs-modal .lxs-tz{border:2px solid;border-radius:14px;padding:14px 18px}.lxs-modal .lxs-tz.mg{background:#f3f8e8;border-color:#9BBF41}.lxs-modal .lxs-tz.mb{background:#eaf4fc;border-color:#4a9bdc}.modal h2{color:var(--blue-dark)}@media(max-width:800px){.lxs-unten{grid-template-columns:1fr}}";document.head.appendChild(st)})();
 /* Themenseite: nur die Übersicht sichtbar, Bereiche klappen per Klick auf */
 (function(){
  const st=document.createElement("style");
@@ -4257,6 +4257,21 @@ function lxZeitNeu(){
   return`<section class="lxs-zeit"><div class="lxs-zk"><b>Was kommt wann?</b> <small>Projekte im Schuljahr</small><a href="#start" class="lxs-link">Alle Lernbereiche ansehen</a></div><div class="zl-bahn"><div class="zl-linie"></div>${segs}${ein?`<i class="zl-heute" style="left:${h}%"></i><span class="zl-hl" style="left:${h}%">heute</span>`:""}</div></section>`;
  }catch(e){return""}
 }
+function lxWocheAnsicht(wp){
+ const off=window.__lxWo||0,t=new Date();t.setDate(t.getDate()+off*7);
+ const dw=t.getDay()||7,mo=new Date(t);mo.setDate(t.getDate()-dw+1);
+ const tage=[0,1,2,3,4].map(i=>{const d=new Date(mo);d.setDate(mo.getDate()+i);return lxIso(d)});
+ const heute=lxHeute(),N=["Mo","Di","Mi","Do","Fr"],PT=LXWA.pt||[],WA=LXWA.d||[];
+ const dd=new Date(Date.UTC(mo.getFullYear(),mo.getMonth(),mo.getDate()+3)),y0=new Date(Date.UTC(dd.getUTCFullYear(),0,1)),kw=Math.ceil(((dd-y0)/864e5+1)/7);
+ const ev=iso=>{
+  const a=PT.filter(x=>x.datum===iso).sort((p,q)=>(p.zeit||"")<(q.zeit||"")?-1:1).map(x=>`<div class="lxs-ev"><small>${x.zeit?esc(x.zeit)+" \u00B7 ":""}Pflicht${x.fach?" \u00B7 "+esc(x.fach):""}</small><b>${esc((x.art||"")+(x.titel?": "+x.titel:""))}</b></div>`);
+  const b=WA.filter(x=>x.bis===iso).map(x=>`<div class="lxs-ev ab"><small>F\xE4llig \u00B7 ${esc(x.fach||"")}</small><b>Auftr\xE4ge abschlie\xDFen</b></div>`);
+  const c=(wp||[]).filter(x=>!x.done&&x.dueDate===iso).map(x=>`<div class="lxs-ev ei"><small>Mein Plan</small><b>${esc(x.title)}</b></div>`);
+  return a.concat(b,c).join("")||`<div class="lxs-frei">frei</div>`;
+ };
+ return`<section class="lxs-wk"><div class="lxs-wk-kopf"><h2>Meine Woche \u00B7 KW ${kw} \u00B7 ${fmtKurz(tage[0])}\u2013${fmtKurz(tage[4])}</h2><div><button type="button" class="secondary" data-lxwo="${off-1}">\u2039</button><button type="button" class="secondary" data-lxwo="0">Diese Woche</button><button type="button" class="secondary" data-lxwo="${off+1}">\u203A</button></div></div><div class="lxs-wt">${tage.map((iso,i)=>`<div class="lxs-d${iso===heute?" heute":""}"><b>${N[i]} ${fmtKurz(iso)}</b>${ev(iso)}</div>`).join("")}</div><p class="lxs-leg"><span style="color:#d92c34">\u25A0</span> Pflichttermin der Lehrkraft \u00A0 <span style="color:#e08a2e">\u25A0</span> Abgabe \u00A0 <span style="color:#82b83b">\u25A0</span> mein Plan</p></section>`;
+}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-lxwo]");if(!b)return;window.__lxWo=Number(b.dataset.lxwo)||0;render()});
 async function lxStartNeu(wp){
  try{await kwLaden().catch(()=>{})}catch(e){}
  await lxWaLaden().catch(()=>{});
@@ -4287,13 +4302,13 @@ async function lxStartNeu(wp){
  }catch(e){}
  const tz=o=>`<div class="lxs-tz"><span><b>${esc(kwKurz(o.e))}</b><small>${o.fertig?"✓ geschafft":"Nächster Schritt: "+esc(o.nxs)}</small></span><button type="button" class="${o.begonnen&&!o.fertig?"primary":"secondary"}" data-kw="thema" data-id="${esc(o.e.id)}">${o.fertig?"Ansehen":(o.begonnen?"Weiter":"Starten")}</button></div>`;
  const byId={};rest.forEach(o=>{byId[o.e.id]=o});
- let auf=WA.map(w=>{const L=(w.themen||[]).map(t=>byId[t]).filter(Boolean);return`<article class="lxs-a"><div class="lxs-ak"><b>${esc(w.fach||"")}</b><em>bis ${esc(lxTagKurz(w.bis))}</em></div>${w.text?`<p>${esc(w.text)}</p>`:""}${L.map(tz).join("")}</article>`}).join("");
+ let auf=WA.map(w=>{const L=(w.themen||[]).map(t=>byId[t]).filter(Boolean);return`<article class="lxs-a"><div class="lxs-ak"><b>${esc(w.fach||"")}</b><em>bis ${esc(lxTagKurz(w.bis))}</em></div>${w.text?`<p>${esc(w.text)}</p>`:""}${L.map(tz).join("")}${(w.projekte||[]).map(n=>{const pj=kwPhase(n);return pj?`<div class="lxs-tz"><span><b>Projekt LB ${n}</b><small>${esc(pj.titel||pj.lbTitel||"")}</small></span><button type="button" class="primary" data-kw="projekt" data-lb="${n}">Öffnen</button></div>`:""}).join("")}</article>`}).join("");
  if(!waPP.length&&rest.length)auf=`<article class="lxs-a"><div class="lxs-ak"><b>Pädagogik / Psychologie</b></div>${rest.map(tz).join("")}</article>`+auf;
  if(!auf)auf=`<p class="lxs-leer">Diese Woche gibt es keine Aufträge.</p>`;
  const bis=WA.length?lxTagKurz(WA[0].bis).toUpperCase():"FREITAG, "+I.fr;
  return`<div class="lxs"><div class="lxs-kopf"><div><small>KW ${I.kw} · FÄLLIG BIS ${esc(bis)}</small><h1>Hallo${name?" "+esc(name):""}, das ist deine Woche.</h1></div></div>
- <section class="lxs-auf"><h2>Deine Aufträge diese Woche</h2><div class="lxs-ag">${auf}</div></section>
- <div class="lxs-unten"><section class="lxs-wo"><h3>Feste Termine</h3>${woche}<a class="lxs-link" href="#kalender">Ganze Woche ansehen</a></section><section class="lxs-fr"><h3>Fachliche Frage?</h3><p>Stelle sie im Forum. Deine Lehrkräfte lesen mit.</p><button type="button" class="secondary" onclick="go('forum-board')">Zum Forum</button></section><section class="lxs-fr"><h3>Unser Klassenteam</h3><p>Steckbriefe, Geburtstage und wo wir zu Hause sind.</p><button type="button" class="secondary" onclick="go('klassenteam')">Zum Klassenteam</button></section></div></div>`;
+ <div class="lxs-zwei2"><section class="lxs-auf"><h2>Deine Aufträge diese Woche</h2><div class="lxs-ag">${auf}</div></section>${lxWocheAnsicht(wp)}</div>
+ <div class="lxs-unten"><section class="lxs-fr"><h3>Fachliche Frage?</h3><p>Stelle sie im Forum. Deine Lehrkräfte lesen mit.</p><button type="button" class="secondary" onclick="go('forum-board')">Zum Forum</button></section><section class="lxs-fr"><h3>Unser Klassenteam</h3><p>Steckbriefe, Geburtstage und wo wir zu Hause sind.</p><button type="button" class="secondary" onclick="go('klassenteam')">Zum Klassenteam</button></section></div></div>`;
 }
 async function lxThemaHub(e,lehrer){
  let ci=null,co=null;
@@ -21924,10 +21939,10 @@ document.addEventListener("click",async ev=>{
  try{
   if(a==="fr0"||a==="fr1"){const el=$("waBis");if(el)el.value=lxFreitag(lxPlus(a==="fr0"?1:8));return}
   if(a==="save"){
-   const themen=[...document.querySelectorAll('input[name="waThema"]:checked')].map(x=>x.value),text=v("waText").trim(),bis=v("waBis");
+   const themen=[...document.querySelectorAll('input[name="waThema"]:checked')].map(x=>x.value),projekte=[...document.querySelectorAll('input[name="waProjekt"]:checked')].map(x=>Number(x.value)),text=v("waText").trim(),bis=v("waBis");
    if(!bis)return toast("Bitte ein Datum wählen.");
-   if(!text&&!themen.length)return toast("Bitte mindestens ein Thema wählen.");
-   await addDoc(collection(db,"wochenauftraege"),{fach:v("waFach"),bis,text:text.slice(0,600),themen,von:currentUser.uid,vonName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
+   if(!text&&!themen.length&&!projekte.length)return toast("Bitte mindestens ein Thema oder Projekt wählen.");
+   await addDoc(collection(db,"wochenauftraege"),{fach:v("waFach"),bis,text:text.slice(0,600),themen,projekte,von:currentUser.uid,vonName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
    LXWA.t=0;toast("Arbeitsauftrag veröffentlicht.");render();
   }else if(a==="del"){
    if(!confirm("Diesen Arbeitsauftrag löschen?"))return;
@@ -22372,6 +22387,34 @@ function lxThemaWahlen(modus){
  }).join("");
 }
 function lxLegende(){return`<div class="lx-legende">${LX_LEG.map(n=>`<span><i class="lx-pt an" style="--k:${LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
+async function renderLkPlanung(){
+ if(!isTeacher())return await renderKachelwand();
+ await kwLaden().catch(()=>{});await lxWaLaden(true);
+ const dow=new Date().getDay(),mo=lxPlus(((1-dow+7)%7)||7),moD=new Date(mo+"T12:00:00"),addT=n=>{const d=new Date(moD);d.setDate(d.getDate()+n);return lxIso(d)},fr=addT(4);
+ const inW=iso=>iso>=mo&&iso<=fr;
+ const phasen=[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum);
+ const themen=phasen.map(ph=>`<details class="lxw-lb" open><summary><b>LB ${ph.lbNum} \u00B7 ${esc(ph.lbTitel||"")}</b></summary><div class="lxw-chips">${kwThemenVonPhase(ph).filter(e=>e.typ!=="projekt").map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
+ const proj=phasen.map(ph=>`<label class="lxw-chip"><input type="checkbox" name="waProjekt" value="${ph.lbNum}"><span>LB ${ph.lbNum} \u00B7 Projekt: ${esc(ph.titel||ph.lbTitel||"")}</span></label>`).join("");
+ const fo=LXW_FAECHER.map(f=>`<option>${esc(f)}</option>`).join("");
+ const WA=(LXWA.d||[]).filter(w=>inW(w.bis||"")).sort((a,b)=>(a.bis||"")<(b.bis||"")?-1:1);
+ const PT=(LXWA.pt||[]).filter(t=>inW(t.datum||"")).sort((a,b)=>((a.datum||"")+(a.zeit||""))<((b.datum||"")+(b.zeit||""))?-1:1);
+ const vb=w=>(w.themen||[]).map(id=>{const t=kwThemaById(id);return t?`<div class="lxw-z"><div><b>${esc(kwKurz(t))}</b><small>Thema \u00B7 ${esc(w.fach||"")}</small></div><button type="button" class="secondary" data-kw="thema" data-id="${esc(id)}">Vorbereiten</button></div>`:""}).join("")+(w.projekte||[]).map(n=>{const p=kwPhase(n);return p?`<div class="lxw-z"><div><b>Projekt LB ${n}</b><small>${esc(p.titel||p.lbTitel||"")}</small></div><button type="button" class="secondary" data-kw="projekt" data-lb="${n}">Vorbereiten</button></div>`:""}).join("");
+ const geplant=WA.map(w=>`<div class="lxw-liste"><h4>${esc(w.fach||"")} \u00B7 bis ${esc(lxTagKurz(w.bis))}</h4>${w.text?`<p class="lxw-hint">${esc(w.text)}</p>`:""}${vb(w)}<div class="kw-aktionen"><button type="button" class="secondary" data-wa="del" data-id="${esc(w.id)}">Auftrag l\xF6schen</button></div></div>`).join("")||`<div class="kw-leer">F\xFCr n\xE4chste Woche ist noch nichts eingeplant.</div>`;
+ return`<div class="lx-seite"><div class="kw-links"><button type="button" class="secondary" onclick="go('lk-unterricht')">\u2190 Unterricht und Inhalte</button></div>${pageHead("LEHRKR\xC4FTE \u00B7 N\xC4CHSTE WOCHE","Lerneinheiten f\xFCr n\xE4chste Woche einplanen","Woche vom "+fmtKurz(mo)+" bis "+fmtKurz(fr)+" W\xE4hle Themen und Projekte, setze Pflichttermine und bereite alles direkt vor.","")}
+ <div class="lxw-raster"><section class="lxw-k"><h3>Themen und Projekte w\xE4hlen</h3>
+  <div class="lxw-row"><label>Fach<select id="waFach">${fo}</select></label><label>F\xE4llig bis<input type="date" id="waBis" value="${fr}"></label></div>
+  <div class="lxw-sub"><b>Themen</b> <span id="waZahl" class="lxw-zahl">0 gew\xE4hlt</span></div>${themen}
+  <div class="lxw-sub"><b>Projekt einplanen</b></div><div class="lxw-chips">${proj}</div>
+  <label>Hinweis (optional)<textarea id="waText" rows="2" placeholder="Nur wenn n\xF6tig."></textarea></label>
+  <div class="kw-aktionen"><button class="primary" data-wa="save">Einplanen</button></div></section>
+ <section class="lxw-k lxw-g"><h3>Pflichttermin f\xFCr n\xE4chste Woche</h3>
+  <div class="lxw-row"><label>Datum<input type="date" id="ptDatum" value="${mo}" min="${mo}" max="${fr}"></label><label>Uhrzeit<input type="time" id="ptZeit"></label></div>
+  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>\xDCbung</option><option>Projekt</option><option>Lernstandsgespr\xE4ch</option><option>Test</option><option>Sonstiges</option></select></label>
+  <label>Titel<input type="text" id="ptTitel" maxlength="90" placeholder="z. B. Projektstart LB 1"></label>
+  <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div>
+  <div class="lxw-liste"><h4>Termine n\xE4chste Woche</h4>${PT.map(t=>`<div class="lxw-z"><div><b>${esc(lxTagKurz(t.datum))}${t.zeit?" \u00B7 "+esc(t.zeit):""}</b> \u00B7 ${esc(t.art||"")}<small>${esc(t.titel||"")}</small></div><button class="secondary" data-wa="ptdel" data-id="${esc(t.id)}">L\xF6schen</button></div>`).join("")||`<div class="kw-leer">Noch keine Termine.</div>`}</div></section></div>
+ <section class="lxw-k" style="margin-top:14px"><h3>Eingeplant und vorbereiten</h3>${geplant}</section></div>${footer()}`;
+}
 async function renderLkUnterricht(){
  if(!isTeacher())return await renderKachelwand();
  await kwLaden();
@@ -22397,6 +22440,7 @@ async function renderLkUnterricht(){
  else if(fk==="mathe")inhalt=`<h2 class="lx-h2">Mathematik</h2><div class="card"><p>Das Fach Mathematik wird gerade vorbereitet. Sobald Inhalte da sind, planst du sie hier genauso wie in Pädagogik/Psychologie.</p><button type="button" class="secondary" onclick="go('lw-mathe')">Mathematik in der Lernwerkstatt ansehen</button></div>`;
  else inhalt=`<p class="lx-hint">Wähle ein Fach, um Inhalte zu planen und bereitzustellen.</p>`;
  return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterricht planen","Wähle ein Fach. Bei Pädagogik/Psychologie siehst du zuerst die vier Lernbereiche des Individuellen Lernpfads, darunter die weiteren Werkzeuge. Jedes Thema hat dieselben acht Teile wie bei den Schüler:innen.")}
+ <div class="lx-kacheln" style="margin:0 0 14px">${lxKachel("lk-planung","Lerneinheiten für nächste Woche einplanen","Themen und Projekte wählen, Pflichttermine setzen und direkt vorbereiten")}</div>
  ${faecher}${inhalt}</div>${footer()}`;
 }
 
@@ -22418,13 +22462,13 @@ function lxNavAktiv(seite,p){
  if(seite==="lernwerkstatt")return LW.includes(p);
  if(seite==="kompetenz")return["kompetenz","tests"].includes(p);
  if(seite==="lernstaende")return["lernstaende","kw-checkouts"].includes(p);
- if(seite==="lk-unterricht")return p==="lk-unterricht"||p==="lk-inhalte";
+ if(seite==="lk-unterricht")return p==="lk-unterricht"||p==="lk-inhalte"||p==="lk-planung";
  return false;
 }
 function lxRouten(){return{
  unterricht:renderUnterrichtsfaecher,"lw-pp":renderLwPP,"lw-mathe":renderLwMathe,"lw-ueben":renderLwPP,"lw-training":renderLwPP,"lw-ueben-pp":renderLwUebenPP,"lw-training-pp":renderLwTrainingPP,
  "lw-nachbereitung":renderLwNachbereitung,"lw-fachaufsatz":renderLwFachaufsatz,"lw-lernen":renderLwLernen,"lw-koop":renderLwKoop,tests:renderTests,kompetenz:renderKompetenzLx,
- lernstaende:renderLernstaendeLx,"kw-checkouts":renderLernstaendeLx,wochenauftrag:renderWocheL,live:renderWocheL,"lk-unterricht":renderLkUnterricht,"lk-inhalte":renderLkUnterricht}}
+ lernstaende:renderLernstaendeLx,"kw-checkouts":renderLernstaendeLx,wochenauftrag:renderWocheL,live:renderWocheL,"lk-unterricht":renderLkUnterricht,"lk-inhalte":renderLkUnterricht,"lk-planung":renderLkPlanung}}
 document.addEventListener("click",ev=>{
  const n=ev.target.closest&&ev.target.closest('.nav-link[data-page^="news-"]');if(!n)return;
  window.__lxBereich=n.dataset.page==="news-s"?"s":"l";
