@@ -22287,9 +22287,9 @@ function lsFaecherListe(){
   :["Deutsch","Englisch","Mathematik","Religion / Ethik","Politik und Gesellschaft","SWR","Biologie","Soziologie","Wahlpflicht 1","Wahlpflicht 2"];
 }
 async function renderLernstaendeLx(){
- if(kwLehrer()||window.__lsFach==="pp"){
+ if(window.__lsFach==="pp"){
   const h=await renderLernstaendePP();
-  return kwLehrer()?h:`<div class="kw-links" style="margin:0 0 10px"><button type="button" class="secondary" data-lsfach="">\u2190 Alle F\xE4cher</button></div>`+h;
+  return`<div class="kw-links" style="margin:0 0 10px"><button type="button" class="secondary" data-lsfach="">\u2190 Alle F\xE4cher</button></div>`+h;
  }
  const an=`<button type="button" class="lxf-k an" data-lsfach="pp"><h3>P\xE4dagogik / Psychologie</h3><span class="lxf-b muster">Check-ins, Check-outs, \xDCbungen</span><p>Dein Stand je Lernbereich und Thema, dazu ein Lerntipp.</p></button>`;
  const aus=lsFaecherListe().map(n=>`<div class="lxf-k"><h3>${esc(n)}</h3><span class="lxf-b">Folgt</span><p>Hier erscheinen deine Lernst\xE4nde, sobald das Fach ausgearbeitet ist.</p></div>`).join("");
