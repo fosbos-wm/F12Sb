@@ -21945,9 +21945,9 @@ async function renderWocheL(){
   <p class="lxw-hint">Verpflichtend, erscheint den Schüler:innen auf der Startseite.</p>
   <div class="lxw-row"><label>Datum<input type="date" id="ptDatum" value="${lxFreitag(lxPlus(3))}"></label>
   <label>Uhrzeit<input type="time" id="ptZeit"></label></div>
-  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>\xDCbung</option><option>Rollenspiel</option><option>Lernrallye</option><option>Projekt</option><option>Lernstandsgespr\xE4ch</option><option>Test</option><option>Sonstiges</option></select></label>${ptSch}
+  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>\xDCbung</option><option>Rollenspiel</option><option>Lernrallye</option><option>Selbstlernkurs</option><option>Fachaufsatztraining</option><option>K-Prim-Test</option><option>Projekt</option><option>Lernstandsgespr\xE4ch</option><option>Test</option><option>Sonstiges</option></select></label>${ptSch}
   <label>Titel<input type="text" id="ptTitel" maxlength="90" placeholder="z. B. Instruktion Pädagogik/Psychologie"></label>
-  <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div>
+  <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div><div class="kw-aktionen" id="ptNeuWrap"><button type="button" class="secondary" data-wa="ptneu">Termin ansetzen und gleich erstellen</button></div>
   <div class="lxw-liste"><h4>Geplante Pflichttermine</h4>${PT.map(t=>`<div class="lxw-z"><div><b>${esc(lxTagKurz(t.datum))}${t.zeit?" · "+esc(t.zeit):""}</b> · ${esc(t.art||"")}${t.schuelerName?" \u00B7 "+esc(t.schuelerName):""}<small>${t.fach?esc(t.fach)+(t.titel?": ":""):""}${esc(t.titel||"")}</small></div>${lxPtArbBtn(t)}<button class="secondary" data-wa="ptdel" data-id="${esc(t.id)}">Löschen</button></div>`).join("")||`<div class="kw-leer">Noch keine Termine.</div>`}</div></section></div></div>${footer()}`;
 }
 document.addEventListener("change",ev=>{if(!ev.target.matches||!ev.target.matches('input[name="waThema"]'))return;const z=document.getElementById("waZahl");if(z)z.textContent=document.querySelectorAll('input[name="waThema"]:checked').length+" gewählt"});
@@ -21965,12 +21965,13 @@ document.addEventListener("click",async ev=>{
   }else if(a==="del"){
    if(!confirm("Diesen Arbeitsauftrag löschen?"))return;
    await deleteDoc(doc(db,"wochenauftraege",b.dataset.id));LXWA.t=0;render();
-  }else if(a==="ptsave"){
-   const datum=v("ptDatum"),titel=v("ptTitel").trim(),ls=v("ptArt")==="Lernstandsgespräch",sid=ls?v("ptSchueler"):"",sel=$("ptSchueler");
+  }else if(a==="ptsave"||a==="ptneu"){
+   const datum=v("ptDatum"),titel=v("ptTitel").trim(),art0=v("ptArt"),lb0=Number(v("ptLb"))||1,ls=v("ptArt")==="Lernstandsgespräch",sid=ls?v("ptSchueler"):"",sel=$("ptSchueler");
    if(!datum)return toast("Bitte ein Datum wählen.");
    if(ls&&!sid)return toast("Bitte eine Schülerin oder einen Schüler wählen.");
-   await addDoc(collection(db,"pflichttermine"),{datum,zeit:v("ptZeit"),fach:v("ptFach"),art:v("ptArt"),lb:Number(v("ptLb"))||0,titel:titel.slice(0,90),...(sid?{uid:sid,schuelerName:(sel&&sel.selectedOptions[0]?sel.selectedOptions[0].textContent:"").slice(0,80)}:{}),von:currentUser.uid,createdAt:serverTimestamp()});
+   const ptRef=await addDoc(collection(db,"pflichttermine"),{datum,zeit:v("ptZeit"),fach:v("ptFach"),art:v("ptArt"),lb:Number(v("ptLb"))||0,titel:titel.slice(0,90),...(sid?{uid:sid,schuelerName:(sel&&sel.selectedOptions[0]?sel.selectedOptions[0].textContent:"").slice(0,80)}:{}),von:currentUser.uid,createdAt:serverTimestamp()});
    LXWA.t=0;toast("Pflichttermin angesetzt.");render();
+   if(a==="ptneu"){const t0={id:ptRef.id,datum,lb:lb0,titel,art:art0};(LXWA.pt=LXWA.pt||[]).push(t0);await lxPtAusarbeiten(t0.id)}
   }else if(a==="ptarb"){await lxPtAusarbeiten(b.dataset.id);return
   }else if(a==="ptdel"){
    if(!confirm("Diesen Termin löschen?"))return;
@@ -22416,11 +22417,18 @@ function lxThemaWahlen(modus){
 function lxLegende(){return`<div class="lx-legende">${LX_LEG.map(n=>`<span><i class="lx-pt an" style="--k:${LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
 const LX_PT_ARB={"Unterrichtsstunde":"stunde","Rollenspiel":"stunde","Lernrallye":"rallye"};
 function lxPtArbBtn(t){
- if(!t||!(t.art==="Unterrichtsstunde"||t.art==="Rollenspiel"||t.art==="Lernrallye"||t.art==="Projekt"||t.art==="\xDCbung"))return"";
+ if(!t||!(t.art==="Unterrichtsstunde"||t.art==="Rollenspiel"||t.art==="Lernrallye"||t.art==="Projekt"||t.art==="\xDCbung"||LX_PT_DLG[t.art]))return"";
  return`<button class="secondary" data-wa="ptarb" data-id="${esc(t.id)}">${t.modulId?"\xD6ffnen":"Ausarbeiten"}</button>`;
+}
+const LX_PT_DLG={"Selbstlernkurs":"selbstlern","Fachaufsatztraining":"apt","K-Prim-Test":"kprim"};
+function lxPtWoche(datum){
+ const SW=(()=>{try{return SCHULWOCHEN_12}catch(e){return SCHULWOCHEN_PP}})();
+ const dd=new Date(datum+"T12:00:00Z");dd.setUTCDate(dd.getUTCDate()-(dd.getUTCDay()+6)%7);const mo=dd.toISOString().slice(0,10),w=SW.find(x=>x.id===mo)||SW.find(x=>x.end>=datum)||SW[0];
+ return w.id;
 }
 async function lxPtAusarbeiten(id){
  const t=(LXWA.pt||[]).find(x=>x.id===id);if(!t)return;
+ if(LX_PT_DLG[t.art]){await ppmDialog(null,LX_PT_DLG[t.art],lxPtWoche(t.datum),{lb:Number(t.lb)||1});return}
  if(t.modulId){await ppmLaden(true);if(ppmById(t.modulId)){ppmOeffnen(t.modulId);return}}
  if(t.art==="Projekt"){activeKwLb=Number(t.lb)||1;go("kw-projekt");return}
  if(t.art==="\xDCbung"){
@@ -22445,7 +22453,7 @@ async function lxPtSchuelerFeld(){
  let L=[];try{L=((await lxKlasseLaden()).schueler)||[]}catch(e){}
  return`<label id="ptSchWrap" hidden>Sch\xFCler:in<select id="ptSchueler"><option value="">Bitte w\xE4hlen</option>${L.map(u=>`<option value="${esc(u.uid)}">${esc(anzeigeName(u))}</option>`).join("")}</select></label><label id="ptLbWrap">Lernbereich (zum Ausarbeiten)<select id="ptLb">${[1,2,3,4].map(n=>`<option value="${n}">LB ${n}</option>`).join("")}</select></label>`;
 }
-document.addEventListener("change",ev=>{const a=ev.target&&ev.target.id==="ptArt"?ev.target:null;if(!a)return;const w=document.getElementById("ptSchWrap");if(w)w.hidden=a.value!=="Lernstandsgespr\xE4ch";const l=document.getElementById("ptLbWrap");if(l)l.hidden=!["Unterrichtsstunde","\xDCbung","Rollenspiel","Lernrallye","Projekt"].includes(a.value)});
+document.addEventListener("change",ev=>{const a=ev.target&&ev.target.id==="ptArt"?ev.target:null;if(!a)return;const w=document.getElementById("ptSchWrap");if(w)w.hidden=a.value!=="Lernstandsgespr\xE4ch";const l=document.getElementById("ptLbWrap");if(l)l.hidden=!["Unterrichtsstunde","\xDCbung","Rollenspiel","Lernrallye","Projekt","Selbstlernkurs","Fachaufsatztraining","K-Prim-Test"].includes(a.value);const nw=document.getElementById("ptNeuWrap");if(nw)nw.hidden=["Lernstandsgespr\xE4ch","Test","Sonstiges"].includes(a.value)});
 async function renderLkPlanung(){
  if(!isTeacher())return await renderKachelwand();
  await kwLaden().catch(()=>{});await lxWaLaden(true);const ptSch=await lxPtSchuelerFeld();
@@ -22471,9 +22479,9 @@ async function renderLkPlanung(){
   <div class="kw-aktionen"><button class="primary" data-wa="save">Einplanen</button></div></details>
  <details class="lxp-d"><summary>+ Termin ansetzen</summary>
   <div class="lxw-row" style="margin-top:10px"><label>Datum<input type="date" id="ptDatum" value="${mo}" min="${mo}" max="${fr}"></label><label>Uhrzeit<input type="time" id="ptZeit"></label></div>
-  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>\xDCbung</option><option>Rollenspiel</option><option>Lernrallye</option><option>Projekt</option><option>Lernstandsgespr\xE4ch</option><option>Test</option><option>Sonstiges</option></select></label>${ptSch}
+  <label>Art<select id="ptArt"><option>Unterrichtsstunde</option><option>\xDCbung</option><option>Rollenspiel</option><option>Lernrallye</option><option>Selbstlernkurs</option><option>Fachaufsatztraining</option><option>K-Prim-Test</option><option>Projekt</option><option>Lernstandsgespr\xE4ch</option><option>Test</option><option>Sonstiges</option></select></label>${ptSch}
   <label>Titel<input type="text" id="ptTitel" maxlength="90" placeholder="z. B. Projektstart LB 1"></label>
-  <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div></details>
+  <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div><div class="kw-aktionen" id="ptNeuWrap"><button type="button" class="secondary" data-wa="ptneu">Termin ansetzen und gleich erstellen</button></div></details>
  </div>${footer()}`;
 }
 async function renderLkUnterricht(){
