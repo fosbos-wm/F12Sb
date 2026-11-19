@@ -22079,7 +22079,7 @@ async function renderKwThema(){
    const PRI={b:[/^Zuordn/i,/L\u00FCckentext/i,/Karteikarten/i],t:[/Fall-?Diagnose/i,/Struktur/i],a:[/K-Prim/i,/Rollenspiel/i,/Fall/i]}[B.k]||[];
    let pk=null;for(const r of PRI){pk=l.find(x=>x.t&&r.test(x.t));if(pk)break}if(!pk)pk=l.find(x=>x.t)||l[0];
    const rest=l.filter(x=>x!==pk);
-   const inh=l.length?`<div class="lx-eb-ch">${pk.h}${rest.length?`<details class="lx-rest"><summary>+ ${rest.length} weitere \u00DCbung${rest.length>1?"en":""}</summary><div class="lx-eb-ch">${rest.map(x=>x.h).join("")}</div></details>`:""}</div>`:`<div class="kw-leer">${lehrer?"noch leer":"Hier kommen bald Übungen."}</div>`;
+   const inh=l.length?`<div class="lx-eb-ch">${pk.h}</div>`:`<div class="kw-leer">${lehrer?"noch leer":"Hier kommen bald Übungen."}</div>`;
    const kt=["uebung","vertiefung2","vertiefung3"][ix];
    const mehr=lehrer?`<div class="lx-mehr"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${kt}">+ Weitere Aufgaben</button>${(KW.hideList||[]).some(h=>h.key.startsWith("repo-")&&h.thema===e.id)?`<button type="button" class="text-button" data-kw="hiderestore" data-id="${esc(e.id)}">Entfernte Materialien zur\xFCckholen</button>`:""}</div>`:"";
    return`<div class="lx-eb" style="--k:${B.c};--kb:${B.bg};--ek:${B.c};--ebg:${B.bg};margin-left:${ix*26}px"><div class="lx-eb-n"><b>${B.nr}</b><small>${B.afb}</small></div><div class="lx-eb-t"><h4>Ebene ${B.nr} \xB7 ${B.n}</h4><p>${B.d}</p>${txtT.length?`<p class="lx-eb-tx">Texte: ${esc(txtT.join(", "))}</p>`:""}${inh}</div></div>`;
