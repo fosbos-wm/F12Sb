@@ -21925,7 +21925,6 @@ async function lxThemaPfadSeite(e,ph,F){
 async function renderWocheL(){
  if(!isTeacher())return`<div class="card"><p>Diese Seite ist für Lehrkräfte.</p></div>`;
  await kwLaden().catch(()=>{});await lxWaLaden(true);const ptSch=await lxPtSchuelerFeld();
- setTimeout(lxLiveStart,0);
  const heute=lxHeute(),fr=lxFreitag(lxPlus(1)),phasen=[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum);
  const KL=await lxKlasseLaden().catch(()=>({schueler:[],fort:{}})),gesch=id=>(KL.schueler||[]).filter(u=>((KL.fort[u.uid]||{})[id]||{}).abgeschlossen).length;
  const themen=phasen.map(ph=>`<details class="lxw-lb" open><summary><b>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</b></summary><div class="lxw-chips">${kwThemenVonPhase(ph).filter(e=>e.typ!=="projekt").map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
@@ -21933,8 +21932,7 @@ async function renderWocheL(){
  const WA=LXWA.d.filter(w=>(w.bis||"")>=lxPlus(-7)).sort((a,b)=>(a.bis||"")<(b.bis||"")?-1:1);
  const PT=LXWA.pt.filter(t=>(t.datum||"")>=heute).sort((a,b)=>((a.datum||"")+(a.zeit||""))<((b.datum||"")+(b.zeit||""))?-1:1);
  const titel=id=>{const t=kwThemaById(id);return t?kwKurz(t):id};
- return`<div class="lx-seite">${pageHead("LEHRKRÄFTE · WOCHE UND LIVE","Woche und Live","Oben siehst du, woran die Klasse gerade arbeitet. Darunter gibst du den Arbeitsauftrag bis Freitag vor und planst verpflichtende Termine.","")}
- <section class="lxw-live"><h3>Live: Was machen die Schüler:innen gerade?</h3><div id="lxLiveBox"><div class="kw-leer">Wird geladen …</div></div></section>
+ return`<div class="lx-seite">${pageHead("LEHRKRÄFTE · WOCHE PLANEN","Arbeitsaufträge für die Woche und Pflichttermine planen","Hier gibst du den Arbeitsauftrag bis Freitag vor und planst verpflichtende Termine. Die Live-Ansicht findest du bei den Lernständen.","")}
  <div class="lxw-raster"><section class="lxw-k"><h3>Arbeitsauftrag für die Woche</h3>
   <div class="lxw-row"><label>Fach<select id="waFach">${fo}</select></label>
   <label>Fällig bis<input type="date" id="waBis" value="${fr}"></label></div>
@@ -22341,13 +22339,15 @@ function lsFaecherListe(){
   :["Deutsch","Englisch","Mathematik","Religion / Ethik","Politik und Gesellschaft","SWR","Biologie","Soziologie","Wahlpflicht 1","Wahlpflicht 2"];
 }
 async function renderLernstaendeLx(){
+ const LV=isTeacher()?`<section class="lxw-live"><h3>Live-Ansicht: Was machen die Sch\xFCler:innen gerade?</h3><div id="lxLiveBox"><div class="kw-leer">Wird geladen \u2026</div></div></section>`:"";
+ if(isTeacher())setTimeout(lxLiveStart,0);
  if(window.__lsFach==="pp"){
   const h=await renderLernstaendePP();
-  return`<div class="kw-links" style="margin:0 0 10px"><button type="button" class="secondary" data-lsfach="">\u2190 Alle F\xE4cher</button></div>`+h;
+  return LV+`<div class="kw-links" style="margin:0 0 10px"><button type="button" class="secondary" data-lsfach="">\u2190 Alle F\xE4cher</button></div>`+h;
  }
  const an=`<button type="button" class="lxf-k an" data-lsfach="pp"><h3>P\xE4dagogik / Psychologie</h3><span class="lxf-b muster">Check-ins, Check-outs, \xDCbungen</span><p>Dein Stand je Lernbereich und Thema, dazu ein Lerntipp.</p></button>`;
  const aus=lsFaecherListe().map(n=>`<div class="lxf-k"><h3>${esc(n)}</h3><span class="lxf-b">Folgt</span><p>Hier erscheinen deine Lernst\xE4nde, sobald das Fach ausgearbeitet ist.</p></div>`).join("");
- return`${kwSchuelerBanner()}<div class="lxf"><small class="lxf-kick">MEINE LERNST\xC4NDE</small><h1>Meine Lernst\xE4nde</h1><p class="lxf-sub">W\xE4hle ein Fach. Dort siehst du, was gemessen wurde, und bekommst einen Lerntipp.</p><div class="lxf-grid">${an}${aus}</div></div>${footer()}`;
+ return LV+`${kwSchuelerBanner()}<div class="lxf"><small class="lxf-kick">MEINE LERNST\xC4NDE</small><h1>Meine Lernst\xE4nde</h1><p class="lxf-sub">W\xE4hle ein Fach. Dort siehst du, was gemessen wurde, und bekommst einen Lerntipp.</p><div class="lxf-grid">${an}${aus}</div></div>${footer()}`;
 }
 async function renderLernstaendePP(){
  let h=await renderKwCheckouts();
