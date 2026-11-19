@@ -2,3 +2,7 @@
 
 /* Themenseite: mittig und mit der Bildschirmbreite mitwachsend */
 .kw.kw-seite,.kw-seite,.kw.kw-seite.lxp-seite{width:100%;max-width:min(100%,clamp(1000px,82vw,1560px))!important;margin-inline:auto!important}
+
+.nav-trenn{flex:0 0 1px;width:1px;height:28px;background:#b9c9d8;align-self:center;margin:0 8px}@media(max-width:800px){.nav-trenn{flex:0 0 1px;width:auto;height:1px;align-self:stretch;margin:4px 8px}}
+
+details.lxw-lb>summary{display:flex;align-items:center;gap:8px;padding:2px 0}details.lxw-lb>summary::before{content:"";width:8px;height:8px;border-right:2px solid #55697b;border-bottom:2px solid #55697b;transform:rotate(-45deg);transition:transform .15s;flex:0 0 auto;margin:0 4px 0 2px}details.lxw-lb[open]>summary::before{transform:rotate(45deg)}details.lxw-lb>summary:hover b{color:var(--blue-dark)}.lxw-n{margin-left:auto;font-size:11px;font-weight:800;color:#fff;background:var(--blue);border-radius:999px;padding:2px 9px}.lxw-n:empty{display:none}details.lxw-lb>summary::-webkit-details-marker{display:none}

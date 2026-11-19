@@ -21927,7 +21927,7 @@ async function renderWocheL(){
  await kwLaden().catch(()=>{});await lxWaLaden(true);const ptSch=await lxPtSchuelerFeld();
  const heute=lxHeute(),fr=lxFreitag(lxPlus(1)),phasen=[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum);
  const KL=await lxKlasseLaden().catch(()=>({schueler:[],fort:{}})),gesch=id=>(KL.schueler||[]).filter(u=>((KL.fort[u.uid]||{})[id]||{}).abgeschlossen).length;
- const themen=phasen.map(ph=>`<details class="lxw-lb" open><summary><b>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</b></summary><div class="lxw-chips">${kwThemenVonPhase(ph).filter(e=>e.typ!=="projekt").map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
+ const themen=phasen.map(ph=>`<details class="lxw-lb"><summary><b>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</b><span class="lxw-n"></span></summary><div class="lxw-chips">${kwThemenVonPhase(ph).filter(e=>e.typ!=="projekt").map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
  const fo=LXW_FAECHER.map(f=>`<option>${esc(f)}</option>`).join("");
  const WA=LXWA.d.filter(w=>(w.bis||"")>=lxPlus(-7)).sort((a,b)=>(a.bis||"")<(b.bis||"")?-1:1);
  const PT=LXWA.pt.filter(t=>(t.datum||"")>=heute).sort((a,b)=>((a.datum||"")+(a.zeit||""))<((b.datum||"")+(b.zeit||""))?-1:1);
@@ -21951,7 +21951,7 @@ async function renderWocheL(){
   <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div><div class="kw-aktionen" id="ptNeuWrap"><button type="button" class="secondary" data-wa="ptneu">Termin ansetzen und gleich erstellen</button></div>
   <div class="lxw-liste"><h4>Geplante Pflichttermine</h4>${PT.map(t=>`<div class="lxw-z"><div><b>${esc(lxTagKurz(t.datum))}${t.zeit?" · "+esc(t.zeit):""}</b> · ${esc(t.art||"")}${t.schuelerName?" \u00B7 "+esc(t.schuelerName):""}<small>${t.fach?esc(t.fach)+(t.titel?": ":""):""}${esc(t.titel||"")}</small></div>${lxPtArbBtn(t)}<button class="secondary" data-wa="ptdel" data-id="${esc(t.id)}">Löschen</button></div>`).join("")||`<div class="kw-leer">Noch keine Termine.</div>`}</div></section></div></div>${footer()}`;
 }
-document.addEventListener("change",ev=>{if(!ev.target.matches||!ev.target.matches('input[name="waThema"]'))return;const z=document.getElementById("waZahl");if(z)z.textContent=document.querySelectorAll('input[name="waThema"]:checked').length+" gewählt"});
+document.addEventListener("change",ev=>{if(!ev.target.matches||!ev.target.matches('input[name="waThema"]'))return;const z=document.getElementById("waZahl");if(z)z.textContent=document.querySelectorAll('input[name="waThema"]:checked').length+" gewählt";const d=ev.target.closest("details.lxw-lb"),nn=d&&d.querySelector(".lxw-n");if(nn){const k=d.querySelectorAll("input:checked").length;nn.textContent=k?k+" gewählt":""}});
 document.addEventListener("click",async ev=>{
  const b=ev.target.closest&&ev.target.closest("[data-wa]");if(!b||!currentUser||!isTeacher())return;
  const a=b.dataset.wa,v=id=>($(id)||{}).value||"";
