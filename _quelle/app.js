@@ -19717,6 +19717,7 @@ async function render(){
  const fn=pages[p]||renderKachelwand;
  document.querySelectorAll(".nav-link").forEach(a=>a.classList.toggle("active",
  a.dataset.page===p || (a.dataset.page==="forum" && p.startsWith("forum-")) || lxNavAktiv(a.dataset.page,p)));
+ document.querySelectorAll('.nav-link[data-page="lernstaende"]').forEach(a=>{if(["lernstaende","kw-checkouts"].includes(p)){const sch=!!a.closest(".nav-area-s");a.classList.toggle("active",isTeacher()?(window.__lsBereich==="s")===sch:sch)}});
  document.querySelectorAll(".nav-mehr").forEach(d=>{d.open=false});
  const content=$("content");
  if(!content)return;
@@ -22543,6 +22544,7 @@ function lxRouten(){return{
  unterricht:renderUnterrichtsfaecher,"lw-pp":renderLwPP,"lw-mathe":renderLwMathe,"lw-ueben":renderLwPP,"lw-training":renderLwPP,"lw-ueben-pp":renderLwUebenPP,"lw-training-pp":renderLwTrainingPP,
  "lw-nachbereitung":renderLwNachbereitung,"lw-fachaufsatz":renderLwFachaufsatz,"lw-lernen":renderLwLernen,"lw-koop":renderLwKoop,tests:renderTests,kompetenz:renderKompetenzLx,
  lernstaende:renderLernstaendeLx,"kw-checkouts":renderLernstaendeLx,wochenauftrag:renderWocheL,live:renderWocheL,"lk-unterricht":renderLkUnterricht,"lk-inhalte":renderLkUnterricht,"lk-planung":renderLkPlanung}}
+document.addEventListener("click",ev=>{const ls=ev.target.closest&&ev.target.closest('.nav-link[data-page="lernstaende"]');if(ls){window.__lsBereich=ls.closest(".nav-area-s")?"s":"l";document.querySelectorAll('.nav-link[data-page="lernstaende"]').forEach(a=>a.classList.toggle("active",a===ls))}},true);
 document.addEventListener("click",ev=>{
  const n=ev.target.closest&&ev.target.closest('.nav-link[data-page^="news-"]');if(!n)return;
  window.__lxBereich=n.dataset.page==="news-s"?"s":"l";
