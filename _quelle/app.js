@@ -5713,7 +5713,7 @@ function ppmMaterialBox(m){
 function ppmKopf(m,unter,extraBtn){
  const T=PPM_TYPEN[m.modul],c=ppmFarbe(m),w=ppmWochen(m);
  const zeit=w.length?`${fmtKurz(w[0].start)}–${fmtKurz(w[w.length-1].end)}`:"";
- return`<div class="kw-links"><button class="secondary" onclick="go('start')">← Meine Lernpfade</button><button class="secondary" data-ppm="plan">← Unterricht</button></div>
+ return`<div class="kw-links"><button class="secondary" onclick="ppmZurueck()">\u2190 Zur\u00FCck</button><button class="secondary" data-ppm="plan">← Unterricht</button></div>
  ${PPM_CSS}
  <div class="ppm-box ppm-kopf kw-kopf" style="--c:${c};--t:${c}"><div class="kicker">${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit}</div>
   <h1>${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
@@ -6201,8 +6201,10 @@ function ppmFragenLesen(m){
  document.querySelectorAll("[data-ppm-loesung]").forEach(t=>{const i=Number(t.dataset.ppmLoesung);fr[i]={...(fr[i]||{}),loesung:t.value};});
  m.fragen=fr;
 }
+window.ppmZurueck=()=>{const z=window.__ppVor;activePPModul=null;go(z&&z!=="fach"?z:"start")};
 function ppmOeffnen(id){
  const m=ppmById(id);if(!m)return;
+ if(location.hash!=="#fach")window.__ppVor=location.hash.slice(1)||"start";
  activePPModul=id;
  if(location.hash!=="#unterricht-pp")location.hash="#unterricht-pp";else render();
 }
