@@ -4319,7 +4319,7 @@ async function lxStartNeu(wp){
  const tz=o=>`<div class="lxs-tz"><span><b>${esc(kwKurz(o.e))}</b><small>${o.fertig?"✓ geschafft":"Nächster Schritt: "+esc(o.nxs)}</small></span><button type="button" class="${o.begonnen&&!o.fertig?"primary":"secondary"}" data-kw="thema" data-id="${esc(o.e.id)}">${o.fertig?"Ansehen":(o.begonnen?"Weiter":"Starten")}</button></div>`;
  const byId={};rest.forEach(o=>{byId[o.e.id]=o});
  let auf=WA.map(w=>{const L=(w.themen||[]).map(t=>byId[t]).filter(Boolean);return`<article class="lxs-a"><div class="lxs-ak"><b>${esc(w.fach||"")}</b><em>bis ${esc(lxTagKurz(w.bis))}</em></div>${w.text?`<p>${esc(w.text)}</p>`:""}${L.map(tz).join("")}${(w.projekte||[]).map(n=>{const pj=kwPhase(n);return pj?`<div class="lxs-tz"><span><b>Projekt LB ${n}</b><small>${esc(pj.titel||pj.lbTitel||"")}</small></span><button type="button" class="primary" data-kw="projekt" data-lb="${n}">Öffnen</button></div>`:""}).join("")}${isTeacher()?`<div class="lxs-tz"><span></span><button type="button" class="secondary" data-wa="del" data-id="${esc(w.id||"")}">Auftrag l\xF6schen</button></div>`:""}</article>`}).join("");
- try{await ppmLaden().catch(()=>{});const dw=(new Date().getDay()||7),frI=lxPlus(Math.max(0,5-dw)),uid0=currentUser&&currentUser.uid,PW=(LXWA.pt||[]).filter(x=>lxPtBis(x)>=heute&&((x.datum||"")<=frI||(x.optional&&(x.datum||"")<=lxPlus(28)))&&(!x.uid||x.uid===uid0)).sort((a,b)=>((a.datum||"")+(a.zeit||""))<((b.datum||"")+(b.zeit||""))?-1:1);
+ try{await ppmLaden().catch(()=>{});try{lxPtAutoLink()}catch(e){console.error("Termin-Zuordnung:",e)}const dw=(new Date().getDay()||7),frI=lxPlus(Math.max(0,5-dw)),uid0=currentUser&&currentUser.uid,PW=(LXWA.pt||[]).filter(x=>lxPtBis(x)>=heute&&((x.datum||"")<=frI||(x.optional&&(x.datum||"")<=lxPlus(28)))&&(!x.uid||x.uid===uid0)).sort((a,b)=>((a.datum||"")+(a.zeit||""))<((b.datum||"")+(b.zeit||""))?-1:1);
   const bauPT=(PW,tit,em,cl)=>PW.length?`<article class="lxs-a lxs-pt${cl}"><div class="lxs-ak"><b>${tit}</b><em>${em}</em></div>${PW.map(x=>`<div class="lxs-tz"><span><b>${esc((x.art||"")+(x.titel?": "+x.titel:""))}</b><small>${esc(lxPtDat(x))}${x.zeit?" \u00B7 "+esc(lxZ(x)):""}${x.fach?" \u00B7 "+esc(x.fach):""}</small></span>${x.modulId&&ppmById(x.modulId)?`<button type="button" class="primary" data-kw="modul" data-id="${esc(x.modulId)}">\u00D6ffnen</button>`:""}${isTeacher()?`<button type="button" class="secondary" data-wa="ptdel" data-id="${esc(x.id||"")}" title="Termin l\u00F6schen">L\u00F6schen</button>`:""}</div>${(x.trainings||[]).filter(t=>ppmById(t.id)).map(t=>`<div class="lxs-tz lxs-tr"><span><b>${esc(t.titel)}</b><small>Selbstlernkurs zur R\xFCckgabe</small></span><button type="button" class="primary" data-kw="modul" data-id="${esc(t.id)}">Starten</button></div>`).join("")}`).join("")}</article>`:"";const PJ=PW.filter(x=>x.art==="Projekt"&&x.modulId&&ppmById(x.modulId)),PW2=PW.filter(x=>!PJ.includes(x)),pjK=await lxProjektKarten(PJ);auf=pjK+bauPT(PW2.filter(x=>!x.optional),"Pflichttermine","verpflichtend","")+bauPT(PW2.filter(x=>x.optional),"Optionale Termine","freiwillig"," lxs-opt")+auf}catch(e){}
  if(!waPP.length&&rest.length)auf=`<article class="lxs-a"><div class="lxs-ak"><b>Pädagogik / Psychologie</b></div>${rest.map(tz).join("")}</article>`+auf;
  try{
@@ -4329,7 +4329,7 @@ async function lxStartNeu(wp){
    let fo=null;try{fo=ppmFort(m)}catch(e){}
    const lbl=fo&&fo.done?"Ansehen":(fo&&fo.frac>0?"Weiter":"Starten");
    let st="";try{st=ppmStatus(m)||""}catch(e){}
-   return`<div class="lxs-tz" style="background:${ppmFarbe(m)}33;border-left:6px solid ${ppmFarbe(m)};border-radius:10px;padding:10px 12px;margin:8px 0"><span><b>\uD83D\uDCCC Projekt: ${esc(lbModulTitel(m)||m.titel||"Projekt")}</b><small>${esc(z)} ${st}</small></span><button type="button" class="${lbl==="Weiter"||lbl==="Starten"?"primary":"secondary"}" data-kw="modul" data-id="${esc(m.id)}">${lbl}</button></div>`}).join("");
+   return`<div class="lxs-str pr" style="display:flex;align-items:center;gap:8px;margin:6px 0;white-space:nowrap" data-kw="modul" data-id="${esc(m.id)}" role="button" tabindex="0" title="Projekt \u00F6ffnen"><b style="display:inline;overflow:hidden;text-overflow:ellipsis;flex:1 1 auto;min-width:0">\uD83D\uDCCC Projekt: ${esc(lbModulTitelX(m))}</b><small style="flex:0 0 auto">${esc(z)}${z?" \u00B7 ":""}${lbl}</small></div>`}).join("");
   if(pjH){const k=auf.indexOf("<b>"+esc(PJ_FACH)+"</b>");const e0=k>-1?auf.indexOf("</div>",k):-1;
    if(e0>-1)auf=auf.slice(0,e0+6)+pjH+auf.slice(e0+6);
    else auf=`<article class="lxs-a"><div class="lxs-ak"><b>${esc(PJ_FACH)}</b></div>${pjH}</article>`+auf}
@@ -22749,6 +22749,24 @@ document.addEventListener("click",async ev=>{
  const n=ev.target.closest&&ev.target.closest("[data-pjneu]");
  if(n&&isTeacher()){ev.preventDefault();ev.stopPropagation();try{await ppmDialog(null,"projekt",lxPtWoche(new Date().toISOString().slice(0,10)),{lb:Number(n.dataset.pjneu)||1})}catch(x){console.error(x)}}
 },true);
+// Pflichttermine ohne Modul-Verknüpfung automatisch dem Projekt/Modul mit gleichem Titel zuordnen (in der Anzeige; Lehrkräfte speichern die Zuordnung)
+function lxPtAutoLink(){
+ const N=x=>String(x||"").toLowerCase().replace(/[^a-z0-9\u00E4\u00F6\u00FC\u00DF ]/g," ").replace(/\s+/g," ").trim();
+ const L=(typeof PPM!=="undefined"&&PPM.liste)||[];if(!L.length)return;
+ (LXWA.pt||[]).forEach(t=>{
+  if(t.modulId&&ppmById(t.modulId))return;
+  const typ=LX_PT_DLG[t.art]||LX_PT_ARB[t.art]||(t.art==="Projekt"?"projekt":"");if(!typ)return;
+  const q=N(t.titel);if(q.length<3)return;
+  const K=L.filter(m=>m.modul===typ&&!m.projektId).filter(m=>{const n=N(lbModulTitelX(m));return n.includes(q)||q.includes(n)});
+  if(!K.length)return;
+  const bis=lxPtBis(t),imFenster=K.filter(m=>{try{const w=ppmWochen(m);return w.length&&w[0].start<=bis&&w[w.length-1].end>=(t.datum||"")}catch(e){return false}});
+  const len=m=>{try{return ppmWochen(m).length||99}catch(e){return 99}};
+  const m=(imFenster.length?imFenster:K).slice().sort((x,y)=>((N(lbModulTitelX(y))===q)-(N(lbModulTitelX(x))===q))||(len(x)-len(y)))[0];
+  t.modulId=m.id;
+  if(isTeacher()&&t.id){updateDoc(doc(db,"pflichttermine",t.id),{modulId:m.id}).catch(()=>{})}
+ });
+}
+function lbModulTitelX(m){try{return(typeof ppmTitel==="function"?ppmTitel(m):m.titel)||m.titel||"Projekt"}catch(e){return m.titel||"Projekt"}}
 function lxLegende(){return`<div class="lx-legende">${LX_LEG.map(n=>`<span><i class="lx-pt an" style="--k:${LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
 const LX_PT_ARB={"Unterrichtsstunde":"stunde","Rollenspiel":"stunde","Lernrallye":"rallye"};
 function lxPtArbBtn(t){
