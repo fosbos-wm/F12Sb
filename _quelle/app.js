@@ -5268,7 +5268,7 @@ function ppmZeitleiste(){
 }
 function ppmFuerTeil(lb,teil){return PPM.liste.find(m=>m.modul===teil&&Number(m.lb)===Number(lb));}
 function ppmById(id){return PPM.liste.find(m=>m.id===id)||null;}
-function ppmFarbe(m){return PP_FARBEN[m.lb]||"#8a99a3";}
+function ppmFarbe(m){if(m&&m.modul==="projekt")return"#6a3f9a";return PP_FARBEN[m.lb]||"#8a99a3";}
 function ppmMd(t){
  const zeilen=String(t||"").split("\n");let html="",liste=false;
  const inl=x=>esc(x).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
@@ -22725,7 +22725,7 @@ async function lxJournalHeuteOffen(){
 
 /* ---------- Lehrkräfte: Unterricht erstellen · Inhalte einstellen ---------- */
 // Projektstreifen im farbigen Kopf eines Lernbereichs: Projekt öffnen; Lehrkraft: bearbeiten (Auftrag, Material, Meilensteine) oder anlegen
-(function(){const st=document.createElement("style");st.textContent=".kw-th{flex-wrap:wrap}.kw-pjb{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.kw-pjb .kw-pj{display:inline-flex;align-items:center;gap:6px;background:#17324a;color:#fff;border:0;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;max-width:100%}.kw-pjb .kw-pj small{font-weight:700;color:#fff!important;letter-spacing:0;opacity:.9}.kw-pjb .kw-pje.weg{color:#b32b32;border-color:rgba(179,43,50,.4)}.kw-pjb .kw-pje{background:rgba(255,255,255,.75);color:#17324a;border:1px solid rgba(23,50,74,.25);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer}";document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.textContent=".kw-th{flex-wrap:wrap}.kw-pjb{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.kw-pjb .kw-pj{display:inline-flex;align-items:center;gap:6px;background:#6a3f9a;color:#fff;border:0;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;max-width:100%}.kw-pjb .kw-pj small{font-weight:700;color:#fff!important;letter-spacing:0;opacity:.9}.kw-pjb .kw-pje.weg{color:#b32b32;border-color:rgba(179,43,50,.4)}.kw-pjb .kw-pje{background:rgba(255,255,255,.75);color:#17324a;border:1px solid rgba(23,50,74,.25);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer}";document.head.appendChild(st)})();
 function lxLbProjekte(lb){
  let L=[];try{L=((typeof PPM!=="undefined"&&PPM.liste)||[]).filter(m=>m.modul==="projekt"&&Number(m.lb)===Number(lb))}catch(e){}
  const lehrer=isTeacher();
@@ -22749,8 +22749,9 @@ function lxPtAutoLink(){
  const N=x=>String(x||"").toLowerCase().replace(/[^a-z0-9\u00E4\u00F6\u00FC\u00DF ]/g," ").replace(/\s+/g," ").trim();
  const L=(typeof PPM!=="undefined"&&PPM.liste)||[];if(!L.length)return;
  (LXWA.pt||[]).forEach(t=>{
-  if(t.modulId&&ppmById(t.modulId))return;
-  const typ=LX_PT_DLG[t.art]||LX_PT_ARB[t.art]||(t.art==="Projekt"?"projekt":"");if(!typ)return;
+  const typ=LX_PT_DLG[t.art]||LX_PT_ARB[t.art]||(t.art==="Projekt"?"projekt":"");
+  if(t.modulId&&ppmById(t.modulId)){if(!typ||typ!=="projekt"||ppmById(t.modulId).modul==="projekt")return;t.modulId=""}
+  if(!typ)return;
   const q=N(t.titel);if(q.length<3)return;
   const K=L.filter(m=>m.modul===typ&&!m.projektId).filter(m=>{const n=N(lbModulTitelX(m));return n.includes(q)||q.includes(n)});
   if(!K.length)return;
@@ -22783,7 +22784,7 @@ function lxPtWoche(datum){
 async function lxPtAusarbeiten(id){
  const t=(LXWA.pt||[]).find(x=>x.id===id);if(!t)return;
  if(LX_PT_DLG[t.art]){window.__kwThemaNeu=lxPtThemen(t.titel);window.__ptLink={id:t.id,typ:LX_PT_DLG[t.art],t:Date.now()};await ppmDialog(null,LX_PT_DLG[t.art],lxPtWoche(t.datum),{lb:Number(t.lb)||1});return}
- if(t.modulId){await ppmLaden(true);if(ppmById(t.modulId)){ppmOeffnen(t.modulId);return}}
+ if(t.modulId){await ppmLaden(true);const mm=ppmById(t.modulId);if(mm&&(t.art!=="Projekt"||mm.modul==="projekt")){ppmOeffnen(t.modulId);return}}
  if(t.art==="Projekt"){activeKwLb=Number(t.lb)||1;go("kw-projekt");return}
  if(t.art==="\xDCbung"){
   const typen=["selbstlern","blockfall","apt"].map(k=>[k,PPM_TYPEN[k]]);
@@ -22807,7 +22808,7 @@ function lxPtModulOptionen(t){
  const N=x=>String(x||"").toLowerCase().replace(/[^a-z0-9\u00E4\u00F6\u00FC\u00DF ]/g," ").replace(/\s+/g," ").trim();
  const typ=LX_PT_DLG[t.art]||LX_PT_ARB[t.art]||(t.art==="Projekt"?"projekt":"");
  let L=((typeof PPM!=="undefined"&&PPM.liste)||[]).slice();
- const gleich=L.filter(m=>!typ||m.modul===typ);if(gleich.length)L=gleich;
+ if(typ){const gleich=L.filter(m=>m.modul===typ);L=(typ==="projekt"||gleich.length)?gleich:L}
  const q=N(t.titel);
  const treffer=t.modulId||(q.length>=3?(L.find(m=>{const n=N(lbModulTitel(m)||m.titel);return n.includes(q)||q.includes(n)})||{}).id:"")||"";
  return`<option value="">Kein Modul</option>`+L.map(m=>`<option value="${esc(m.id)}"${m.id===treffer?" selected":""}>${esc(lbModulTitel(m)||m.titel||"Modul")}</option>`).join("");
