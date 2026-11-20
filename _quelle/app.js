@@ -22650,13 +22650,13 @@ async function lxLernstandSchueler(){
  const lbs=[...new Set(rows.map(r=>r.ph.lbNum))].sort();
  const block=n=>{
   const R=rows.filter(r=>r.ph.lbNum===n);if(!R.length)return"";const ph=R[0].ph;
-  return`<section class="lsn-lb"><header><small>LB ${n}</small><h3>${esc(ph.lbTitel||"")}</h3></header>${R.map(r=>{
+  return`<details class="lsn-lb lsn-lbd"><summary><header><small>LB ${n}</small><h3>${esc(ph.lbTitel||"")}</h3></header></summary>${R.map(r=>{
    const ub=L.ub.filter(u=>u.wocheId===r.e.id&&u.max>0),st={};ub.forEach(u=>{(st[u.stationId]=st[u.stationId]||[]).push(u)});
    const lis=Object.entries(st).map(([id,l])=>{l.sort((a,b)=>lxMs(a)-lxMs(b));const e=l[0],z=l[l.length-1];return`<li><span>${esc(lxUbTitel(id))}</span><em>${l.length} Versuch${l.length>1?"e":""}</em><b>${Math.round(e.punkte/e.max*100)} %${l.length>1?` → ${Math.round(z.punkte/z.max*100)} %`:""}</b></li>`}).join("");
    const fa=L.fa.filter(u=>u.wocheId===r.e.id&&u.max>0).map(u=>`<li><span>Fachaufsatz: ${esc((LXT.fa&&LXT.fa[u.aufsatzId||u.faId||u.stationId])||"Training")}</span><em>Selbsteinschätzung</em><b>${Math.round(u.punkte/u.max*100)} %</b></li>`).join("");
    return`<article class="lsn-t"><div class="lsn-th"><button type="button" class="text-button" data-kw="thema" data-id="${esc(r.e.id)}">${esc(lsThemaName(r.e.id))}</button><span>${r.m.ampel?lxPunkt(r.m.ampel,LX_AMP[r.m.ampel][1]):""}</span></div>
    <div class="lsn-m"><div><small>Check-in</small>${lsnBar(r.ci,"ci")}</div><div><small>Check-out</small>${lsnBar(r.co,"co")}</div><div><small>Zuwachs</small>${lsnZu(r.ci,r.co)}</div><div><small>Übungen</small>${r.m.ubN?`<b>${r.m.ubN} bearbeitet</b>`:`<span class="lsn-leer">–</span>`}</div><div><small>Selbsteinschätzung</small>${r.m.selbst?`<b>${["","noch unsicher","ein bisschen","ziemlich sicher","sicher"][r.m.selbst]}</b>`:`<span class="lsn-leer">–</span>`}</div></div>
-   ${lis||fa?`<details><summary>Übungen und Vertiefungen anzeigen</summary><ul class="lsn-ul">${lis}${fa}</ul></details>`:""}</article>`}).join("")}</section>`;
+   ${lis||fa?`<details><summary>Übungen und Vertiefungen anzeigen</summary><ul class="lsn-ul">${lis}${fa}</ul></details>`:""}</article>`}).join("")}</details>`;
  };
  const tipp=lxLerntipp(rows);
  return`<section class="lsn">${tipp}<div class="lsn-h"><small>MEINE LERNSTÄNDE</small><h2>Was bisher gemessen wurde</h2></div>${sum}${lbs.map(block).join("")}</section>`;
@@ -22675,7 +22675,7 @@ async function lxLernstandKlasse(){
    const g={gruen:0,orange:0,rot:0};mm.forEach(m=>{if(m.ampel)g[m.ampel]++});
    return`<article class="lsn-t"><div class="lsn-th"><button type="button" class="text-button" data-ls="thema" data-id="${esc(e.id)}">${esc(lsThemaName(e.id))}</button><span class="lsn-amp"><i style="background:#2E7D57"></i>${g.gruen}<i style="background:#E0A800"></i>${g.orange}<i style="background:#C0392B"></i>${g.rot}</span></div>
    <div class="lsn-m"><div><small>Check-in (${mc.length}/${N})</small>${lsnBar(ci,"ci")}</div><div><small>Check-out (${mo.length}/${N})</small>${lsnBar(co,"co")}</div><div><small>Ø Zuwachs</small>${zu==null?`<span class="lsn-leer">–</span>`:`<b class="lsn-zu ${zu>0?"auf":"ab"}">${zu>0?"▲ +":"▼ "}${Math.round(zu*100)} %</b>`}</div><div><small>Übungen (${ub.length}/${N})</small>${lsnBar(ubq)}</div></div></article>`}).join("");
-  return`<section class="lsn-lb"><header><small>LB ${ph.lbNum}</small><h3>${esc(ph.lbTitel||"")}</h3></header>${R||`<div class="kw-leer">Keine Themen.</div>`}</section>`;
+  return`<details class="lsn-lb lsn-lbd"><summary><header><small>LB ${ph.lbNum}</small><h3>${esc(ph.lbTitel||"")}</h3></header></summary>${R||`<div class="kw-leer">Keine Themen.</div>`}</details>`;
  };
  const bl=phs.map(block).join("");
  const kachel=(z,t,u)=>`<div class="lsn-k"><b>${z}</b><span>${t}</span>${u?`<small>${u}</small>`:""}</div>`;
@@ -23318,6 +23318,7 @@ function ceLbSVG(rows){
   ${dA?`<path d="${dA}" fill="none" stroke="#7a8794" stroke-width="2.4" stroke-dasharray="5 4" stroke-linecap="round"/>`:""}${dB?`<path d="${dB}" fill="none" stroke="#1F3A60" stroke-width="3" stroke-linecap="round"/>`:""}${pk}
   <g font-size="11" fill="#3a4a5a"><circle cx="${L+8}" cy="${H-16}" r="4.5" fill="#7a8794"/><text x="${L+18}" y="${H-12}">Start</text><circle cx="${L+78}" cy="${H-16}" r="5.5" fill="#1F3A60"/><text x="${L+90}" y="${H-12}">Ende</text></g></svg>`;
 }
+(function(){const st=document.createElement("style");st.textContent=".lsn-lbd>summary,.ce-lernd>summary{cursor:pointer;list-style:none}.lsn-lbd>summary::-webkit-details-marker,.ce-lernd>summary::-webkit-details-marker{display:none}.lsn-lbd>summary header{display:flex;align-items:baseline;gap:10px}.lsn-lbd>summary::before,.ce-lernd>summary::before{content:\"\\25B8\";float:left;margin-right:8px;font-size:18px;color:#1F3A60}.lsn-lbd[open]>summary::before,.ce-lernd[open]>summary::before{content:\"\\25BE\"}.ce-erkl{margin:8px 0;background:#f2f6fa;border-radius:10px;padding:8px 12px}.ce-erkl summary{cursor:pointer;font-weight:700}";document.head.appendChild(st)})();
 function ceLbKarte(ph,rows){
  const F=kwFarbe(ph.lbNum),b=rows.filter(r=>r.a!=null&&r.b!=null);
  const a=lxMittel(b.map(r=>r.a)),e=lxMittel(b.map(r=>r.b));
@@ -23348,7 +23349,7 @@ async function ceLernstandBox(){
    if(rows.length){nAlle+=rows.filter(r=>r.a!=null&&r.b!=null).length;karten.push(ceLbKarte(ph,rows))}
   });
   const ein=lehrer?"Durchschnitt der Klasse je Thema (nur Personen, die Start und Ende gemacht haben).":"Grau gestrichelt: dein Start. Dunkel: dein Check-out. Je höher die Kurve rechts liegt, desto mehr hast du dazugelernt.";
-  return`<section class="ce-lern card"><h3>${lehrer?"Lernentwicklung der Klasse":"Deine Lernentwicklung"}</h3><p class="ce-hint">${ein}</p>${karten.length?karten.join(""):`<div class="ce-leer">Hier erscheint die Lernkurve, sobald zu einem Thema der Check-in und am Ende gemacht wurden.</div>`}</section>`;
+  return`<section class="ce-lern card"><details class="ce-lernd"><summary><h3 style="display:inline">${lehrer?"Lernentwicklung der Klasse":"Deine Lernentwicklung"}</h3></summary><p class="ce-hint">${ein}</p>${`<details class="ce-erkl"><summary>Was zeigt die Grafik und was bringt sie?</summary><div><p><b>Jeder Punkt unten ist ein Thema</b> (Nummer = Thema im Lernbereich, Mauszeiger zeigt den Titel). Die <b>graue gestrichelte Linie</b> ist der Check-in am Anfang, die <b>dunkle Linie</b> der Check-out am Ende. Der <b>Balken dazwischen</b> ist der Lernzuwachs: gr\u00FCn = besser geworden, rot = schlechter.</p><p>Die Farbfl\u00E4chen sind Orientierung: gr\u00FCn ab 75 %, gelb 40 bis 75 %, rot darunter.</p><p><b>Was bringt das?</b> ${lehrer?"Du siehst sofort, bei welchem Thema die Klasse am wenigsten dazugelernt hat (kurzer oder roter Balken) und wo der Start schon hoch war (dort lohnt weniger Zeit). Die Linie verbindet nur die Themen zur besseren Lesbarkeit, sie ist kein Verlauf \u00FCber die Zeit. Gez\u00E4hlt werden nur Personen, die Check-in und Check-out gemacht haben, bei wenigen Personen ist der Durchschnitt wenig aussagekr\u00E4ftig.":"Du siehst, bei welchen Themen du am meisten dazugelernt hast und wo du noch \u00FCben solltest. Die Linie verbindet nur die Themen, sie ist kein Verlauf \u00FCber die Zeit."}</p></div></details>`}${karten.length?karten.join(""):`<div class="ce-leer">Hier erscheint die Lernkurve, sobald zu einem Thema der Check-in und am Ende gemacht wurden.</div>`}</details></section>`;
  }catch(err){console.warn("Lernentwicklung:",err);return""}
 }
 document.addEventListener("click",async ev=>{
