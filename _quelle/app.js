@@ -5563,6 +5563,25 @@ function pjFaecherDialogHTML(r){
  const sel=new Set((r&&r.faecher)||[]);
  return`<div id="ppmFachBox" class="ppm-box" style="margin:8px 0"><b>F\u00E4cher\u00FCbergreifend</b><p style="font-size:13px;color:var(--muted);margin:2px 0 6px">Wird das Projekt zusammen mit anderen F\u00E4chern durchgef\u00FChrt? Dann w\u00E4hle sie aus. Das Projekt erscheint bei den Auftr\u00E4gen dieser F\u00E4cher und auf der Projektseite.</p>${PJ_ANDERE_FAECHER.map(f=>`<label class="check" style="display:inline-flex;margin-right:12px"><input type="checkbox" class="ppmFach" value="${esc(f)}"${sel.has(f)?" checked":""}><span>${esc(f)}</span></label>`).join("")}<label style="display:block;margin-top:6px">Absprache mit den F\u00E4chern (Beitrag der Fachlehrkr\u00E4fte, Bewertung, Termine)<textarea id="ppmFachHinw" rows="3" maxlength="600" placeholder="z. B. Deutsch bewertet den Text, P/P die fachliche Begr\u00FCndung; Pr\u00E4sentation in der Deutschstunde.">${esc((r&&r.faecherHinweis)||"")}</textarea></label></div>`;
 }
+function pjFaecherBox(m){
+ const F=(m&&m.modul==="projekt"&&m.faecher)||[];if(!F.length)return"";
+ const alle=["P\u00E4dagogik / Psychologie",...F],B=m.faecherBeitraege||[],lehrer=isTeacher();
+ const feld=(t,v)=>v?`<p style="margin:4px 0;white-space:pre-wrap"><b>${t}:</b> ${esc(v)}</p>`:"";
+ return`<div class="ppm-box"><h2>Beitr\u00E4ge der beteiligten F\u00E4cher</h2><p style="color:var(--muted);font-size:13px;margin:0 0 8px">Jedes Fach sagt, was es zum Projekt beitr\u00E4gt.</p>${alle.map((f,i)=>{const b=B.find(x=>x.fach===f)||{},leer=!(b.auftrag||b.material||b.bewertung||b.termin);
+  return`<div class="lxs-tz" style="display:block;border-left:6px solid #6a3f9a;padding:8px 12px;margin:8px 0"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><b>${esc(f)}</b>${lehrer?`<button type="button" class="ppm-btn klein" data-pjfb="${esc(m.id)}" data-i="${i}">\u270E Beitrag bearbeiten</button>`:""}</div>${leer?`<p class="ppm-leer" style="margin:4px 0">Noch kein Beitrag eingetragen.</p>`:feld("Teilauftrag",b.auftrag)+feld("Material und Hinweise",b.material)+feld("Bewertung",b.bewertung)+feld("Termin",b.termin)}</div>`}).join("")}</div>`;
+}
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-pjfb]");if(!b||!isTeacher())return;ev.preventDefault();ev.stopPropagation();
+ const m=ppmById(b.dataset.pjfb);if(!m)return;const f=["P\u00E4dagogik / Psychologie",...(m.faecher||[])][Number(b.dataset.i)],x=(m.faecherBeitraege||[]).find(y=>y.fach===f)||{};
+ modal(`<button class="modal-close" onclick="closeModal()">\u00D7</button><div class="kicker">BEITRAG DES FACHS</div><h2>${esc(f)}</h2>
+  <label>Teilauftrag: Was macht dieses Fach im Projekt?<textarea id="fbAuftrag" rows="3" maxlength="800">${esc(x.auftrag||"")}</textarea></label>
+  <label>Material und Hinweise<textarea id="fbMaterial" rows="3" maxlength="800">${esc(x.material||"")}</textarea></label>
+  <label>Bewertung: Was bewertet dieses Fach?<textarea id="fbBewertung" rows="2" maxlength="500">${esc(x.bewertung||"")}</textarea></label>
+  <label>Termin dieses Fachs (z. B. Abgabe oder Pr\u00E4sentation)<input id="fbTermin" maxlength="80" value="${esc(x.termin||"")}" placeholder="z. B. Fr 04.12., Deutschstunde"></label>
+  <div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Abbrechen</button><button class="primary" type="button" id="fbSave">Speichern</button></div>`);
+ document.getElementById("fbSave").onclick=async()=>{try{const v=id=>(document.getElementById(id)||{value:""}).value.trim();
+  const neu=(m.faecherBeitraege||[]).filter(y=>y.fach!==f);neu.push({fach:f,auftrag:v("fbAuftrag"),material:v("fbMaterial"),bewertung:v("fbBewertung"),termin:v("fbTermin")});
+  await updateDoc(doc(db,"ppModule",m.id),{faecherBeitraege:neu});closeModal();await ppmLaden(true);toast("Beitrag gespeichert.");render()}catch(e){console.error(e);toast("Der Beitrag konnte nicht gespeichert werden.")}};
+},true);
 function pjFaecherZeile(m){
  const F=(m&&m.modul==="projekt"&&m.faecher)||[];if(!F.length)return"";
  return`<div class="ppm-fach-zeile" style="margin:8px 0 0"><b>F\u00E4cher\u00FCbergreifend:</b> ${["P\u00E4dagogik / Psychologie",...F].map(f=>`<span class="pj-chip" style="display:inline-block;margin:2px 4px 2px 0">${esc(f)}</span>`).join("")}${m.faecherHinweis?`<p style="white-space:pre-wrap;margin:6px 0 0;font-size:13px">${esc(m.faecherHinweis)}</p>`:""}</div>`;
@@ -5732,7 +5751,7 @@ function ppmKopf(m,unter,extraBtn){
  ${PPM_CSS}
  <div class="ppm-box ppm-kopf kw-kopf" style="--c:${c};--t:${c}"><div class="kicker">${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit}</div>
   <h1>${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
-  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${m.modul==="projekt"?`<button type="button" class="ppm-btn klein" data-pjdel="${esc(m.id)}" style="color:#b32b32">\uD83D\uDDD1 Projekt l\u00F6schen</button>`:""}${extraBtn||""}</div>`:""}</div>${lbModulBar(m)}${ppmMaterialBox(m)}`;
+  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${m.modul==="projekt"?`<button type="button" class="ppm-btn klein" data-pjdel="${esc(m.id)}" style="color:#b32b32">\uD83D\uDDD1 Projekt l\u00F6schen</button>`:""}${extraBtn||""}</div>`:""}</div>${lbModulBar(m)}${pjFaecherBox(m)}${ppmMaterialBox(m)}`;
 }
 // ---- Projekt ----
 async function ppmProjektSeite(m){
