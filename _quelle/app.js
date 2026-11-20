@@ -22718,18 +22718,22 @@ function lxThemaWahlen(modus){
 }
 
 // Projektstreifen im farbigen Kopf eines Lernbereichs: Projekt öffnen; Lehrkraft: bearbeiten (Auftrag, Material, Meilensteine) oder anlegen
-(function(){const st=document.createElement("style");st.textContent=".kw-th{flex-wrap:wrap}.kw-pjb{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.kw-pjb .kw-pj{display:inline-flex;align-items:center;gap:6px;background:#17324a;color:#fff;border:0;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;max-width:100%}.kw-pjb .kw-pj small{font-weight:600;opacity:.85}.kw-pjb .kw-pje{background:rgba(255,255,255,.75);color:#17324a;border:1px solid rgba(23,50,74,.25);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer}";document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.textContent=".kw-th{flex-wrap:wrap}.kw-pjb{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.kw-pjb .kw-pj{display:inline-flex;align-items:center;gap:6px;background:#17324a;color:#fff;border:0;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;max-width:100%}.kw-pjb .kw-pj small{font-weight:700;color:#fff!important;letter-spacing:0;opacity:.9}.kw-pjb .kw-pje.weg{color:#b32b32;border-color:rgba(179,43,50,.4)}.kw-pjb .kw-pje{background:rgba(255,255,255,.75);color:#17324a;border:1px solid rgba(23,50,74,.25);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer}";document.head.appendChild(st)})();
 function lxLbProjekte(lb){
  let L=[];try{L=((typeof PPM!=="undefined"&&PPM.liste)||[]).filter(m=>m.modul==="projekt"&&Number(m.lb)===Number(lb))}catch(e){}
  const lehrer=isTeacher();
  const pills=L.map(m=>{let z="";try{const w=ppmWochen(m);if(w.length)z=fmtKurz(w[0].start)+"\u2013"+fmtKurz(w[w.length-1].end)}catch(e){}
-  return`<button type="button" class="kw-pj" data-kw="modul" data-id="${esc(m.id)}" title="Auftrag, Material, Ziele, Team und Meilensteine \u00F6ffnen">\uD83D\uDCCC ${esc(ppmTitel(m)||m.titel||"Projekt")}${z?` <small>${esc(z)}</small>`:""}</button>${lehrer?`<button type="button" class="kw-pje" data-pjedit="${esc(m.id)}" title="Auftrag, Material, Meilensteine und Themen bearbeiten">\u270E Bearbeiten</button>`:""}`}).join("");
+  return`<button type="button" class="kw-pj" data-kw="modul" data-id="${esc(m.id)}" title="Auftrag, Material, Ziele, Team und Meilensteine \u00F6ffnen">\uD83D\uDCCC ${esc(ppmTitel(m)||m.titel||"Projekt")}${z?` <small>${esc(z)}</small>`:""}</button>${lehrer?`<button type="button" class="kw-pje" data-pjedit="${esc(m.id)}" title="Auftrag, Material, Meilensteine und Themen bearbeiten">\u270E Bearbeiten</button><button type="button" class="kw-pje weg" data-pjdel="${esc(m.id)}" title="Projekt l\u00F6schen">\uD83D\uDDD1 L\u00F6schen</button>`:""}`}).join("");
  const neu=lehrer&&!L.length?`<button type="button" class="kw-pje" data-pjneu="${Number(lb)}">+ Projekt in diesem Lernbereich anlegen</button>`:"";
  return pills||neu?`<div class="kw-pjb">${pills}${neu}</div>`:"";
 }
 document.addEventListener("click",async ev=>{
  const e=ev.target.closest&&ev.target.closest("[data-pjedit]");
  if(e&&isTeacher()){ev.preventDefault();ev.stopPropagation();try{await ppmDialog(e.dataset.pjedit)}catch(x){console.error(x)}return}
+ const d=ev.target.closest&&ev.target.closest("[data-pjdel]");
+ if(d&&isTeacher()){ev.preventDefault();ev.stopPropagation();const m=ppmById(d.dataset.pjdel);if(!m)return;
+  if(!confirm("Projekt \u201E"+(ppmTitel(m)||m.titel||"")+"\u201C wirklich l\u00F6schen? Fortschritte der Klasse bleiben in der Datenbank erhalten, sind aber nicht mehr sichtbar."))return;
+  try{for(const a of (PPM.liste||[]).filter(x=>x.projektId===m.id))await deleteDoc(doc(db,"ppModule",a.id));await deleteDoc(doc(db,"ppModule",m.id));activePPModul=null;await ppmLaden(true);await render();toast("Projekt gel\u00F6scht.")}catch(x){ppmFehler(x,"L\u00F6schen nicht m\u00F6glich")}return}
  const n=ev.target.closest&&ev.target.closest("[data-pjneu]");
  if(n&&isTeacher()){ev.preventDefault();ev.stopPropagation();try{await ppmDialog(null,"projekt",lxPtWoche(new Date().toISOString().slice(0,10)),{lb:Number(n.dataset.pjneu)||1})}catch(x){console.error(x)}}
 },true);
