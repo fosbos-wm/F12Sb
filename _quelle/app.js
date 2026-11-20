@@ -4318,7 +4318,7 @@ async function lxStartNeu(wp){
  }catch(e){}
  const tz=o=>`<div class="lxs-tz"><span><b>${esc(kwKurz(o.e))}</b><small>${o.fertig?"✓ geschafft":"Nächster Schritt: "+esc(o.nxs)}</small></span><button type="button" class="${o.begonnen&&!o.fertig?"primary":"secondary"}" data-kw="thema" data-id="${esc(o.e.id)}">${o.fertig?"Ansehen":(o.begonnen?"Weiter":"Starten")}</button></div>`;
  const byId={};rest.forEach(o=>{byId[o.e.id]=o});
- let auf=WA.map(w=>{const L=(w.themen||[]).map(t=>byId[t]).filter(Boolean);return`<article class="lxs-a"><div class="lxs-ak"><b>${esc(w.fach||"")}</b><em>bis ${esc(lxTagKurz(w.bis))}</em></div>${w.text?`<p>${esc(w.text)}</p>`:""}${L.map(tz).join("")}${(w.projekte||[]).map(n=>{const pj=kwPhase(n);return pj?`<div class="lxs-tz"><span><b>Projekt LB ${n}</b><small>${esc(pj.titel||pj.lbTitel||"")}</small></span><button type="button" class="primary" data-kw="projekt" data-lb="${n}">Öffnen</button></div>`:""}).join("")}${isTeacher()?`<div class="lxs-tz"><span></span><button type="button" class="secondary" data-wa="del" data-id="${esc(w.id||"")}">Auftrag l\xF6schen</button></div>`:""}</article>`}).join("");
+ let auf=WA.map(w=>{const L=(w.themen||[]).map(t=>byId[t]).filter(Boolean);return`<article class="lxs-a"><div class="lxs-ak"><b>${esc(w.fach||"")}</b><em>bis ${esc(lxTagKurz(w.bis))}</em></div>${w.text?`<p>${esc(w.text)}</p>`:""}${L.map(o=>tz(o).replace(/<\/div>$/,(isTeacher()?`<button type="button" class="secondary" data-wa="themadel" data-id="${esc(w.id||"")}" data-t="${esc(o.e.id)}" title="Dieses Thema aus dem Auftrag entfernen" style="color:#b32b32;margin-left:6px">\u2715</button>`:"")+"</div>")).join("")}${(w.projekte||[]).map(n=>{const pj=kwPhase(n);return pj?`<div class="lxs-tz"><span><b>Projekt LB ${n}</b><small>${esc(pj.titel||pj.lbTitel||"")}</small></span><button type="button" class="primary" data-kw="projekt" data-lb="${n}">Öffnen</button></div>`:""}).join("")}${isTeacher()?`<div class="lxs-tz"><span></span><button type="button" class="secondary" data-wa="del" data-id="${esc(w.id||"")}">Auftrag l\xF6schen</button></div>`:""}</article>`}).join("");
  try{await ppmLaden().catch(()=>{});try{lxPtAutoLink()}catch(e){console.error("Termin-Zuordnung:",e)}const dw=(new Date().getDay()||7),frI=lxPlus(Math.max(0,5-dw)),uid0=currentUser&&currentUser.uid,PW=(LXWA.pt||[]).filter(x=>lxPtBis(x)>=heute&&((x.datum||"")<=frI||(x.optional&&(x.datum||"")<=lxPlus(28)))&&(!x.uid||x.uid===uid0)).sort((a,b)=>((a.datum||"")+(a.zeit||""))<((b.datum||"")+(b.zeit||""))?-1:1);
   const bauPT=(PW,tit,em,cl)=>PW.length?`<article class="lxs-a lxs-pt${cl}"><div class="lxs-ak"><b>${tit}</b><em>${em}</em></div>${PW.map(x=>`<div class="lxs-tz"><span><b>${esc((x.art||"")+(x.titel?": "+x.titel:""))}</b><small>${esc(lxPtDat(x))}${x.zeit?" \u00B7 "+esc(lxZ(x)):""}${x.fach?" \u00B7 "+esc(x.fach):""}</small></span>${x.modulId&&ppmById(x.modulId)?`<button type="button" class="primary" data-kw="modul" data-id="${esc(x.modulId)}">\u00D6ffnen</button>`:""}${isTeacher()?`<button type="button" class="secondary" data-wa="ptdel" data-id="${esc(x.id||"")}" title="Termin l\u00F6schen">L\u00F6schen</button>`:""}</div>${(x.trainings||[]).filter(t=>ppmById(t.id)).map(t=>`<div class="lxs-tz lxs-tr"><span><b>${esc(t.titel)}</b><small>Selbstlernkurs zur R\xFCckgabe</small></span><button type="button" class="primary" data-kw="modul" data-id="${esc(t.id)}">Starten</button></div>`).join("")}`).join("")}</article>`:"";const PJ=PW.filter(x=>x.art==="Projekt"&&x.modulId&&ppmById(x.modulId)),PW2=PW.filter(x=>!PJ.includes(x)),pjK=await lxProjektKarten(PJ);auf=pjK+bauPT(PW2.filter(x=>!x.optional),"Pflichttermine","verpflichtend","")+bauPT(PW2.filter(x=>x.optional),"Optionale Termine","freiwillig"," lxs-opt")+auf}catch(e){}
  if(!waPP.length&&rest.length)auf=`<article class="lxs-a"><div class="lxs-ak"><b>Pädagogik / Psychologie</b></div>${rest.map(tz).join("")}</article>`+auf;
@@ -4329,7 +4329,7 @@ async function lxStartNeu(wp){
    let fo=null;try{fo=ppmFort(m)}catch(e){}
    const lbl=fo&&fo.done?"Ansehen":(fo&&fo.frac>0?"Weiter":"Starten");
    let st="";try{st=ppmStatus(m)||""}catch(e){}
-   return`<div class="lxs-str pr" style="display:flex;align-items:center;gap:8px;margin:6px 0;white-space:nowrap" data-kw="modul" data-id="${esc(m.id)}" role="button" tabindex="0" title="Projekt \u00F6ffnen"><b style="display:inline;overflow:hidden;text-overflow:ellipsis;flex:1 1 auto;min-width:0">\uD83D\uDCCC Projekt: ${esc(lbModulTitelX(m))}</b><small style="flex:0 0 auto">${esc(z)}${z?" \u00B7 ":""}${lbl}</small></div>`};
+   return`<div class="lxs-str pr" style="display:flex;align-items:center;gap:8px;margin:6px 0;white-space:nowrap" data-kw="modul" data-id="${esc(m.id)}" role="button" tabindex="0" title="Projekt \u00F6ffnen"><b style="display:inline;overflow:hidden;text-overflow:ellipsis;flex:1 1 auto;min-width:0">\uD83D\uDCCC Projekt: ${esc(lbModulTitelX(m))}</b><small style="flex:0 0 auto">${esc(z)}${z?" \u00B7 ":""}${lbl}</small>${isTeacher()?`<button type="button" data-pjdel="${esc(m.id)}" title="Projekt l\u00F6schen" style="flex:0 0 auto;background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:6px;padding:0 7px;cursor:pointer">\u2715</button>`:""}</div>`};
   const pjH=LP.map(pjEin).join("");
   if(pjH){const k=auf.indexOf("<b>"+esc(PJ_FACH)+"</b>");const e0=k>-1?auf.indexOf("</div>",k):-1;
    if(e0>-1)auf=auf.slice(0,e0+6)+pjH+auf.slice(e0+6);
@@ -5732,7 +5732,7 @@ function ppmKopf(m,unter,extraBtn){
  ${PPM_CSS}
  <div class="ppm-box ppm-kopf kw-kopf" style="--c:${c};--t:${c}"><div class="kicker">${esc((T.art||T.kurz).toUpperCase())} · LB${m.lb} · ${zeit}</div>
   <h1>${esc(m.titel||T.name)}</h1>${m.notiz?`<p>${esc(m.notiz)}</p>`:""}${unter||""}
-  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${extraBtn||""}</div>`:""}</div>${lbModulBar(m)}${ppmMaterialBox(m)}`;
+  ${isTeacher()?`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button type="button" class="ppm-btn klein" data-ppm="bearbeiten" data-id="${esc(m.id)}">✎ Modul bearbeiten</button>${m.modul==="projekt"?`<button type="button" class="ppm-btn klein" data-pjdel="${esc(m.id)}" style="color:#b32b32">\uD83D\uDDD1 Projekt l\u00F6schen</button>`:""}${extraBtn||""}</div>`:""}</div>${lbModulBar(m)}${ppmMaterialBox(m)}`;
 }
 // ---- Projekt ----
 async function ppmProjektSeite(m){
@@ -22302,6 +22302,12 @@ document.addEventListener("click",async ev=>{
    if(!text&&!themen.length&&!projekte.length)return toast("Bitte mindestens ein Thema oder Projekt wählen.");
    await addDoc(collection(db,"wochenauftraege"),{fach:v("waFach"),bis,text:text.slice(0,600),themen,projekte,von:currentUser.uid,vonName:anzeigeName(profile,currentUser),createdAt:serverTimestamp()});
    LXWA.t=0;toast("Arbeitsauftrag veröffentlicht.");render();
+  }else if(a==="themadel"){
+   if(!confirm("Dieses Thema aus dem Auftrag entfernen?"))return;
+   const w=(LXWA.d||[]).find(x=>x.id===b.dataset.id);if(!w)return;
+   const rest=(w.themen||[]).filter(x=>x!==b.dataset.t);
+   if(!rest.length&&!(w.projekte||[]).length&&!(w.text||"").trim())await deleteDoc(doc(db,"wochenauftraege",w.id));else await updateDoc(doc(db,"wochenauftraege",w.id),{themen:rest});
+   LXWA.t=0;toast("Thema entfernt.");render();
   }else if(a==="del"){
    if(!confirm("Diesen Arbeitsauftrag löschen?"))return;
    await deleteDoc(doc(db,"wochenauftraege",b.dataset.id));LXWA.t=0;render();
@@ -22757,7 +22763,7 @@ document.addEventListener("click",async ev=>{
  const d=ev.target.closest&&ev.target.closest("[data-pjdel]");
  if(d&&isTeacher()){ev.preventDefault();ev.stopPropagation();const m=ppmById(d.dataset.pjdel);if(!m)return;
   if(!confirm("Projekt \u201E"+(lbModulTitel(m)||m.titel||"")+"\u201C wirklich l\u00F6schen? Fortschritte der Klasse bleiben in der Datenbank erhalten, sind aber nicht mehr sichtbar."))return;
-  try{for(const a of (PPM.liste||[]).filter(x=>x.projektId===m.id))await deleteDoc(doc(db,"ppModule",a.id));await deleteDoc(doc(db,"ppModule",m.id));activePPModul=null;await ppmLaden(true);await render();toast("Projekt gel\u00F6scht.")}catch(x){ppmFehler(x,"L\u00F6schen nicht m\u00F6glich")}return}
+  try{for(const a of (PPM.liste||[]).filter(x=>x.projektId===m.id))await deleteDoc(doc(db,"ppModule",a.id));await deleteDoc(doc(db,"ppModule",m.id));activePPModul=null;await ppmLaden(true);if(location.hash==="#fach"&&window.ppmZurueck)ppmZurueck();else await render();toast("Projekt gel\u00F6scht.")}catch(x){ppmFehler(x,"L\u00F6schen nicht m\u00F6glich")}return}
  const n=ev.target.closest&&ev.target.closest("[data-pjneu]");
  if(n&&isTeacher()){ev.preventDefault();ev.stopPropagation();try{await ppmDialog(null,"projekt",lxPtWoche(new Date().toISOString().slice(0,10)),{lb:Number(n.dataset.pjneu)||1})}catch(x){console.error(x)}}
 },true);
