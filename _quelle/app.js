@@ -21886,6 +21886,17 @@ function lxLandkartenKacheln(lehrer){
 // Schüler:innen sehen nur Themen, zu denen die Lehrkraft Material oder Bausteine eingestellt hat
 function kwHatMaterial(e){return !!e&&((KW.mat[e.id]||[]).length>0||kwModuleThema(e.id).length>0)}
 function kwThemenSicht(ph){const t=kwThemenVonPhase(ph);return kwLehrer()?t:t.filter(kwHatMaterial)}
+// Teile-Punkte (Check-in, Infotext, Selbstlernkurs, Üben, Check-out) und „Schüler ab“-Datum je Thema (Lehrkraft-Ansicht der Kachelwand)
+function lxThemaPunkte(e,ph){
+ const mats=KW.mat[e.id]||[],mod=kwModuleThema(e.id);
+ const has=k=>mats.some(m=>m.kategorie===k||(k==="vertiefung"&&/^vertiefung/.test(m.kategorie||"")));
+ const teile=[
+  [1,has("checkin")||checkinAusBank(e.id).length>0],[2,has("einfuehrung")||has("lernsituation")||has("lehrtext")||has("arbeitsblatt")||has("audio")||has("video")||has("tafel")||has("lernuebersicht")],
+  [4,mod.some(m=>m.modul!=="fachaufsatz"&&m.modul!=="apt")],[3,has("uebung")||has("vertiefung")||mod.some(m=>m.modul==="fachaufsatz"||m.modul==="apt")],[6,checkinAusBank(e.id+"@ende").length>0]];
+ const pts=teile.map(([n,ok])=>`<i class="lx-pt${ok?" an":""}" style="--k:${LXF[n].c}" title="${esc(LXF[n].n)}: ${ok?"vorhanden":"fehlt"}"></i>`).join("");
+ const st=lxThemaStart(e);
+ return`<small class="lx-pts" aria-label="Vorhandene Teile">${pts}</small>${st?`<small class="lx-ab">Sch\u00FCler ab ${esc(fmtKurz(st))}</small>`:""}`;
+}
 function kwKachelHTML(ph,lehrer){
  const F=kwFarbe(ph.lbNum),themen=kwThemenSicht(ph),heute=lxHeute();
  const n=themen.length;
@@ -21902,7 +21913,7 @@ function kwKachelHTML(ph,lehrer){
  const rows=themen.map(e=>{
   if(!lehrer&&!lxThemaSichtbar(e))return lxGesperrtRow(e);
   const ok=!lehrer&&kwErledigt(e.id),nm=(KW.mat[e.id]||[]).length+kwModuleThema(e.id).length;
-  const ab="";
+  const ab=lehrer?lxThemaPunkte(e,ph):"";
   return`<button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx${ok?" d":""}"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span>${ab}${nm?`<small>${nm}</small>`:""}</button>`;
  }).join("");
  const projStart=LX_CFG.projektStart(ph);
@@ -21949,6 +21960,7 @@ function lxlAuswahl(e){
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-lxl]");if(!b)return;const e=LX_CFG.phasen().flatMap(kwThemenVonPhase).find(x=>x.id===b.dataset.lxl);document.querySelectorAll(".lxl-th.an").forEach(x=>x.classList.remove("an"));b.classList.add("an");const w=document.getElementById("lxlSel");if(w&&e)w.innerHTML=lxlAuswahl(e)});
 
 async function renderKachelwand(){
+ try{await ppmLaden()}catch(e){}
  await kwLaden();
  const lehrer=kwLehrer();
  if(!lehrer){await lxWaLaden().catch(()=>{});return lxLandkarteNeu()}
@@ -21957,7 +21969,7 @@ async function renderKachelwand(){
  const p=alle.length?Math.round(fertig/alle.length*100):0;
  const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
  const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#DCE9F5" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#3A8FD4" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
- const lk=lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht</button><button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lk-unterricht')">Unterrichtsbibliothek</button></div>`:"";
+ const lk=lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht</button><button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button></div>`:"";
  return`<div class="kw" id="kwRoot">
   ${kwSchuelerBanner()}
   <button class="secondary" onclick="go('unterricht')">← Unterrichtsfächer</button>
@@ -21965,7 +21977,9 @@ async function renderKachelwand(){
   <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
   ${lxLandkartenKacheln(lehrer)}
   ${lk}
-  <div class="kw-wand">${[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum).map(ph=>kwKachelHTML(ph,lehrer)).join("")}</div>
+  ${lehrer?`<p class="lx-hint">Ein Klick auf ein Thema \u00F6ffnet es. Dort stellst du mit \u201E+ hinzuf\u00FCgen\u201C Dateien in den passenden Teil ein und planst Bausteine (\u201EBaustein einplanen\u201C, Teil 4). Die Punkte zeigen, was schon da ist. Sch\u00FCler:innen sehen ein Thema ab dem Datum \u201ESch\u00FCler ab \u2026\u201C; Projekte legst und bearbeitest du im Kopf des Lernbereichs.</p>${lxLegende()}`:""}
+  <div class="kw-wand${lehrer?" lx-wahl":""}">${[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum).map(ph=>kwKachelHTML(ph,lehrer)).join("")}</div>
+  ${lehrer?lxWerkzeuge():""}
  </div>${footer()}`;
 }
 
@@ -22710,25 +22724,6 @@ async function lxJournalHeuteOffen(){
 }
 
 /* ---------- Lehrkräfte: Unterricht erstellen · Inhalte einstellen ---------- */
-function lxThemaWahlen(modus){
- const heute=lxHeute();
- return LX_CFG.phasen().slice().sort((a,b)=>a.lbNum-b.lbNum).map(ph=>{
-  const F=kwFarbe(ph.lbNum);
-  const rows=kwThemenVonPhase(ph).map(e=>{
-   const mats=KW.mat[e.id]||[],mod=kwModuleThema(e.id);
-   const has=k=>mats.some(m=>m.kategorie===k||(k==="vertiefung"&&/^vertiefung/.test(m.kategorie||"")));
-   const cos=(KW.co&&KW.co.checkouts||[]).some(c=>Number(c.lbNum)===ph.lbNum);
-   const teile=[
-    [1,has("checkin")||checkinAusBank(e.id).length>0],[2,has("einfuehrung")||has("lernsituation")||has("lehrtext")||has("arbeitsblatt")||has("audio")||has("video")||has("tafel")||has("lernuebersicht")],
-    [4,mod.some(m=>m.modul!=="fachaufsatz"&&m.modul!=="apt")],[3,has("uebung")||has("vertiefung")||mod.some(m=>m.modul==="fachaufsatz"||m.modul==="apt")],[6,checkinAusBank(e.id+"@ende").length>0]];
-   const pts=teile.map(([n,ok])=>`<i class="lx-pt${ok?" an":""}" style="--k:${LXF[n].c}" title="${esc(LXF[n].n)}: ${ok?"vorhanden":"fehlt"}"></i>`).join("");
-   const st=lxThemaStart(e);
-   return`<button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span><small class="lx-pts" aria-label="Vorhandene Teile">${pts}</small>${st?`<small class="lx-ab">Schüler ab ${esc(fmtKurz(st))}</small>`:""}</button>`;
-  }).join("");
-  return`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${lxLbProjekte(ph.lbNum)}</header><div class="kw-rows">${rows}${kwLeistungRow(ph)}</div></article>`;
- }).join("");
-}
-
 // Projektstreifen im farbigen Kopf eines Lernbereichs: Projekt öffnen; Lehrkraft: bearbeiten (Auftrag, Material, Meilensteine) oder anlegen
 (function(){const st=document.createElement("style");st.textContent=".kw-th{flex-wrap:wrap}.kw-pjb{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.kw-pjb .kw-pj{display:inline-flex;align-items:center;gap:6px;background:#17324a;color:#fff;border:0;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;max-width:100%}.kw-pjb .kw-pj small{font-weight:700;color:#fff!important;letter-spacing:0;opacity:.9}.kw-pjb .kw-pje.weg{color:#b32b32;border-color:rgba(179,43,50,.4)}.kw-pjb .kw-pje{background:rgba(255,255,255,.75);color:#17324a;border:1px solid rgba(23,50,74,.25);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer}";document.head.appendChild(st)})();
 function lxLbProjekte(lb){
@@ -22850,7 +22845,7 @@ async function renderLkPlanung(){
  };
  const themen=phasen.map(ph=>`<details class="lxw-lb"><summary><b>LB ${ph.lbNum} \u00B7 ${esc(ph.lbTitel||"")}</b></summary><div class="lxw-chips">${kwThemenVonPhase(ph).filter(e=>e.typ!=="projekt").map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
  const proj=phasen.map(ph=>`<label class="lxw-chip"><input type="checkbox" name="waProjekt" value="${ph.lbNum}"><span>Projekt LB ${ph.lbNum}</span></label>`).join("");
- return`<div class="lx-seite"><div class="kw-links"><button type="button" class="secondary" onclick="go('lk-unterricht')">\u2190 Unterrichtsbibliothek</button></div>
+ return`<div class="lx-seite"><div class="kw-links"><button type="button" class="secondary" onclick="go('lk-unterricht')">\u2190 Meine Lernpfade</button></div>
  <h1 style="margin:8px 0 12px">N\xE4chste Woche \u00B7 ${fmtKurz(tage[0])}\u2013${fmtKurz(tage[4])}</h1>
  <div class="lxs-wt lxp-wt">${tage.map((iso,i)=>`<div class="lxs-d"><b>${N[i]} ${fmtKurz(iso)}</b>${tag(iso)}</div>`).join("")}</div>
  <details class="lxp-d"><summary>+ Themen oder Projekt einplanen</summary>
@@ -22867,16 +22862,8 @@ async function renderLkPlanung(){
   <div class="kw-aktionen"><button class="primary" data-wa="ptsave">Termin ansetzen</button></div><div class="kw-aktionen" id="ptNeuWrap"><button type="button" class="secondary" data-wa="ptneu">Termin ansetzen und gleich erstellen</button></div></details>
  </div>${footer()}`;
 }
-async function renderLkUnterricht(){
- if(!isTeacher())return await renderKachelwand();
- await kwLaden();
- const fk=window.__lkFach||"";
- const kk=(k,t,s,c,bg)=>`<button type="button" class="wpw-fb${fk===k?" an":""}" role="tab" aria-selected="${fk===k}" data-lx="lkfach" data-k="${k}" style="--c:${c};--bg:${bg}"><b>${t}</b><small>${s}</small></button>`;
- const faecher=`<div class="wpw-fl" role="tablist" aria-label="Fach wählen">${kk("pp","Pädagogik/Psychologie","Lernpfad, Themen und Bausteine","#1f9a8a","#e0f2ee")}${kk("mathe","Mathematik","Wird vorbereitet","#2f6fb5","#e1ebf8")}</div>`;
- let inhalt;
- if(fk==="pp")inhalt=`<h2 class="lx-h2">Pädagogik/Psychologie: Meine Lernpfade</h2><p class="lx-hint">Ein Klick öffnet das Thema. Dort stellst du mit „+ hinzufügen“ Dateien in den passenden Teil ein und planst Bausteine („Baustein einplanen“, Teil 4). Die Punkte zeigen, was schon da ist.</p>${lxLegende()}
- <div class="kw-wand lx-wahl">${lxThemaWahlen("unterricht")}</div>
- <h2 class="lx-h2">Weitere Werkzeuge</h2>
+function lxWerkzeuge(){
+ return`<h2 class="lx-h2">Weitere Werkzeuge</h2>
  <div class="lx-kacheln">
   ${lxKachel("kompass","Wochenplanung","Bausteine und Stunden auf Schulwochen legen")}
   ${lxKachel("fach","Fächer und Projekte","Lernbereiche, Projekte und Bausteine ansehen")}
@@ -22888,11 +22875,12 @@ async function renderLkUnterricht(){
   ${lxKachel("tests","Tests verwalten","Live schalten, Ergebnisse ansehen")}
   ${lxKachel("kw-fortschritt","Erledigt? Selbstlernkurse und Rallyes","Wer hat welchen Baustein bearbeitet?")}
   ${lxKachel("ressourcen","Lernressourcen","Links, Videos und KI-Angebote pflegen")}
+  ${lxKachel("lw-mathe","Mathematik","Wird vorbereitet: Inhalte in der Lernwerkstatt ansehen")}
  </div>`;
- else if(fk==="mathe")inhalt=`<h2 class="lx-h2">Mathematik</h2><div class="card"><p>Das Fach Mathematik wird gerade vorbereitet. Sobald Inhalte da sind, planst du sie hier genauso wie in Pädagogik/Psychologie.</p><button type="button" class="secondary" onclick="go('lw-mathe')">Mathematik in der Lernwerkstatt ansehen</button></div>`;
- else inhalt=`<p class="lx-hint">Wähle ein Fach, um Inhalte zu planen und bereitzustellen.</p>`;
- return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterrichtsbibliothek","Hier findest du alle Unterrichtsstunden der Lernbereiche mit ihrer Vorbereitung und dem aktuellen Planungsstand. Jedes Thema hat dieselben acht Teile wie bei den Schüler:innen. Die Schüler:innen sehen ein Thema ab dem angegebenen Datum („Schüler ab …“) in ihrem Lernpfad; Dateien und eingeplante Bausteine erscheinen dort in den passenden Teilen. Wähle ein Fach, um zu beginnen.")}
- ${faecher}${inhalt}</div>${footer()}`;
+}
+// Die frühere Lehrkraft-Ansicht „Unterrichtsbibliothek“ gibt es nicht mehr: Themen, Projekte und Werkzeuge stehen in „Meine Lernpfade“
+async function renderLkUnterricht(){
+ return await renderKachelwand();
 }
 
 /* ---------- Navigation je Rolle, Routen, Klicks ---------- */
@@ -22979,6 +22967,7 @@ function lxAngeboteLb(ph,art){
  return bl?`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${lxLbProjekte(ph.lbNum)}</header><div class="kw-rows">${bl}</div></article>`:"";
 }
 async function lxAngebotSeite(art,kicker,titel,text,zurueck,zurueckText,kopf){
+ try{await ppmLaden()}catch(e){}
  await kwLaden();
  const t=LX_CFG.phasen().slice().sort((a,b)=>a.lbNum-b.lbNum).map(ph=>lxAngeboteLb(ph,art)).join("");
  return`<div class="lx-seite"><button class="secondary" onclick="go('${zurueck}')">← ${esc(zurueckText)}</button>${pageHead(kicker,titel,text)}${kopf||""}${t?`<div class="kw-wand lx-ang">${t}</div>`:`<div class="kw-card"><div class="kw-leer">Deine Lehrkraft hat hier noch nichts freigeschaltet. Sobald sie Angebote im Individuellen Lernpfad einstellt, erscheinen sie hier.</div></div>`}</div>${footer()}`;
