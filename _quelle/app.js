@@ -9352,7 +9352,147 @@ const CO_AUFGABENBANK=[
     "erklaerung": "Die primäre Bindung ist Grundlage für Sozialverhalten und Bindungsfähigkeit und prägt spätere Beziehungen."
    }
   ]
- }
+ },
+{
+ "id": "bindung-fall-begriff",
+ "titel": "Bindung: Begriff und Funktion (Fall Mäusenest)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Krippe „Mäusenest“, Beobachtungen in der Bring- und Abholzeit",
+  "text": "In der Krippe „Mäusenest“ beobachtet die Erzieherin Frau Demir für die Entwicklungsgespräche sechs Kinder in der Bring- und Abholzeit.\nLena (4 Monate) lächelt vor allem ihre Mutter und Frau Demir an, lässt sich aber auch von der Praktikantin ohne Protest auf den Arm nehmen.\nNoah (10 Monate) weint, sobald seine Mutter den Raum verlässt, und krabbelt ihr bei der Rückkehr sofort entgegen. Von der Praktikantin lässt er sich nicht hochnehmen.\nElif (28 Monate) verabschiedet sich winkend und erklärt Frau Demir, die Mama komme nach dem Mittagessen. Dann baut sie mit anderen Kindern an ihrem Turm weiter.\nJonas (18 Monate) schaut nach dem Abschied kaum auf und spielt weiter. Als sein Vater ihn nachmittags hochheben will, wendet er sich ab und bleibt bei den Bausteinen.\nMia (20 Monate) klammert sich beim Abschied fest. Bei der Abholung läuft sie zu ihrer Mutter, schlägt aber auf sie ein und weint auch auf dem Arm weiter.\nBen (15 Monate) geht seinem Vater bei der Abholung zunächst entgegen, bleibt dann mitten im Raum stehen und schaut zu Boden.",
+  "zeilen": false
+ },
+ "kontext": "",
+ "stamm": "Die Beobachtungen lassen sich mit dem Bindungsbegriff fachlich zutreffend deuten, wenn …",
+ "pruefen": "Neu erstellt (Claude), anspruchsvolle Fassung mit einer gemeinsamen Fallvignette. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… Noahs Weinen bei der Trennung als Hinweis darauf gilt, dass seine Mutter für ihn ein sicherer Hafen ist.",
+   "richtig": true,
+   "erklaerung": "Trennungsprotest zeigt, dass eine Bindung besteht: Die Bindungsperson wird als Quelle von Trost und Sicherheit erlebt."
+  },
+  {
+   "text": "… Bindung mit einer vertrauten Beziehung gleichgesetzt wird, in der ein Kind gern spielt und Zuwendung erhält.",
+   "richtig": false,
+   "erklaerung": "Bindung ist eine besondere, enge, relativ dauerhafte und stark emotionale Beziehung zu bestimmten Personen. Vertrautheit allein genügt nicht."
+  },
+  {
+   "text": "… Elifs ruhiger Abschied als Zeichen gilt, dass die Beziehung zu ihrer Mutter wenig eng ist.",
+   "richtig": false,
+   "erklaerung": "Ein sicher gebundenes Kind kann Trennungen aushalten und die Umgebung erkunden, weil es der Bindungsperson vertraut."
+  },
+  {
+   "text": "… Elifs Weiterspielen mit den anderen Kindern als Ausdruck des Zusammenspiels von Bindung und Erkundung gedeutet wird.",
+   "richtig": true,
+   "erklaerung": "Die Bindungsperson dient als Sicherheitsbasis, von der aus das Kind erkundet (Bindungs-Explorations-Balance)."
+  }
+ ]
+},
+{
+ "id": "bindung-fall-phasen",
+ "titel": "Bindung: Phasen der Bindungsentwicklung (Fall Mäusenest)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Krippe „Mäusenest“, Beobachtungen in der Bring- und Abholzeit",
+  "text": "In der Krippe „Mäusenest“ beobachtet die Erzieherin Frau Demir für die Entwicklungsgespräche sechs Kinder in der Bring- und Abholzeit.\nLena (4 Monate) lächelt vor allem ihre Mutter und Frau Demir an, lässt sich aber auch von der Praktikantin ohne Protest auf den Arm nehmen.\nNoah (10 Monate) weint, sobald seine Mutter den Raum verlässt, und krabbelt ihr bei der Rückkehr sofort entgegen. Von der Praktikantin lässt er sich nicht hochnehmen.\nElif (28 Monate) verabschiedet sich winkend und erklärt Frau Demir, die Mama komme nach dem Mittagessen. Dann baut sie mit anderen Kindern an ihrem Turm weiter.\nJonas (18 Monate) schaut nach dem Abschied kaum auf und spielt weiter. Als sein Vater ihn nachmittags hochheben will, wendet er sich ab und bleibt bei den Bausteinen.\nMia (20 Monate) klammert sich beim Abschied fest. Bei der Abholung läuft sie zu ihrer Mutter, schlägt aber auf sie ein und weint auch auf dem Arm weiter.\nBen (15 Monate) geht seinem Vater bei der Abholung zunächst entgegen, bleibt dann mitten im Raum stehen und schaut zu Boden.",
+  "zeilen": false
+ },
+ "kontext": "",
+ "stamm": "Die Kinder lassen sich den Phasen der Bindungsentwicklung fachlich zutreffend zuordnen, wenn …",
+ "pruefen": "Neu erstellt (Claude), anspruchsvolle Fassung mit einer gemeinsamen Fallvignette. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… Lena der Phase der Vor-Bindung zugeordnet wird, weil sie vertraute Personen schon bevorzugt.",
+   "richtig": false,
+   "erklaerung": "Die Vor-Bindung reicht nur bis etwa zwei Monate. Eine erkennbare Bevorzugung vertrauter Personen bei gleichzeitig fehlender Ablehnung Fremder entspricht der beginnenden Bindung (ca. 3 bis 6 Monate)."
+  },
+  {
+   "text": "… Noahs Fremdeln und sein Trennungsprotest als typisch für die Phase der eigentlichen Bindung gelten.",
+   "richtig": true,
+   "erklaerung": "Ab etwa sieben Monaten richtet sich das Kind klar auf bestimmte Personen aus, sucht aktiv ihre Nähe und reagiert auf Fremde und Trennung mit Protest."
+  },
+  {
+   "text": "… Elif der Phase der zielkorrigierten Partnerschaft zugeordnet wird, weil sie die Pläne ihrer Mutter versteht und ihr Verhalten darauf abstimmt.",
+   "richtig": true,
+   "erklaerung": "Ab etwa 24 Monaten verstehen Kinder Absichten und Pläne der Bindungsperson und können Trennungen mitgestalten."
+  },
+  {
+   "text": "… Elifs gelassener Abschied dafür spricht, dass sie noch in der Phase der beginnenden Bindung steht.",
+   "richtig": false,
+   "erklaerung": "Das Verstehen der Mutter-Pläne und der gelassene Umgang mit der Trennung passen zu einer späteren Phase, nicht zur beginnenden Bindung."
+  }
+ ]
+},
+{
+ "id": "bindung-fall-typen",
+ "titel": "Bindung: Bindungstypen (Fall Mäusenest)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Krippe „Mäusenest“, Beobachtungen in der Bring- und Abholzeit",
+  "text": "In der Krippe „Mäusenest“ beobachtet die Erzieherin Frau Demir für die Entwicklungsgespräche sechs Kinder in der Bring- und Abholzeit.\nLena (4 Monate) lächelt vor allem ihre Mutter und Frau Demir an, lässt sich aber auch von der Praktikantin ohne Protest auf den Arm nehmen.\nNoah (10 Monate) weint, sobald seine Mutter den Raum verlässt, und krabbelt ihr bei der Rückkehr sofort entgegen. Von der Praktikantin lässt er sich nicht hochnehmen.\nElif (28 Monate) verabschiedet sich winkend und erklärt Frau Demir, die Mama komme nach dem Mittagessen. Dann baut sie mit anderen Kindern an ihrem Turm weiter.\nJonas (18 Monate) schaut nach dem Abschied kaum auf und spielt weiter. Als sein Vater ihn nachmittags hochheben will, wendet er sich ab und bleibt bei den Bausteinen.\nMia (20 Monate) klammert sich beim Abschied fest. Bei der Abholung läuft sie zu ihrer Mutter, schlägt aber auf sie ein und weint auch auf dem Arm weiter.\nBen (15 Monate) geht seinem Vater bei der Abholung zunächst entgegen, bleibt dann mitten im Raum stehen und schaut zu Boden.",
+  "zeilen": false
+ },
+ "kontext": "",
+ "stamm": "Die Reaktionen bei der Wiedervereinigung lassen sich den Bindungstypen zuordnen, wenn …",
+ "pruefen": "Neu erstellt (Claude), anspruchsvolle Fassung mit einer gemeinsamen Fallvignette. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… Jonas als unsicher-vermeidend (A) gilt, weil er die Nähe des Vaters meidet und nach der Trennung kaum Gefühle zeigt.",
+   "richtig": true,
+   "erklaerung": "Unsicher-vermeidende Kinder meiden bei der Wiedervereinigung Nähe und wirken wenig belastet."
+  },
+  {
+   "text": "… Ben als sicher gebunden (B) gilt, weil er auf seinen Vater zugeht.",
+   "richtig": false,
+   "erklaerung": "Das Zugehen allein genügt nicht: Entscheidend ist der Verlauf. Ben bricht die Annäherung ab, was nicht zu einer sicheren Bindung passt."
+  },
+  {
+   "text": "… Ben als desorganisiert (D) gilt, weil seine Annäherung abbricht und keine geordnete Strategie erkennbar ist.",
+   "richtig": true,
+   "erklaerung": "Desorganisierte Kinder zeigen widersprüchliches, stockendes oder erstarrtes Verhalten und keine einheitliche Strategie."
+  },
+  {
+   "text": "… Mia als desorganisiert (D) gilt, weil sie bei der Abholung weint und ihre Mutter schlägt.",
+   "richtig": false,
+   "erklaerung": "Mia sucht Nähe und wehrt sich zugleich. Das ist widersprüchlich, folgt aber einer erkennbaren Strategie und entspricht dem unsicher-ambivalenten Typ (C)."
+  }
+ ]
+},
+{
+ "id": "bindung-fall-transfer",
+ "titel": "Bindung: Einordnung und pädagogisches Handeln (Fall Mäusenest)",
+ "lbNum": 1,
+ "vignette": {
+  "titel": "Krippe „Mäusenest“, Beobachtungen in der Bring- und Abholzeit",
+  "text": "In der Krippe „Mäusenest“ beobachtet die Erzieherin Frau Demir für die Entwicklungsgespräche sechs Kinder in der Bring- und Abholzeit.\nLena (4 Monate) lächelt vor allem ihre Mutter und Frau Demir an, lässt sich aber auch von der Praktikantin ohne Protest auf den Arm nehmen.\nNoah (10 Monate) weint, sobald seine Mutter den Raum verlässt, und krabbelt ihr bei der Rückkehr sofort entgegen. Von der Praktikantin lässt er sich nicht hochnehmen.\nElif (28 Monate) verabschiedet sich winkend und erklärt Frau Demir, die Mama komme nach dem Mittagessen. Dann baut sie mit anderen Kindern an ihrem Turm weiter.\nJonas (18 Monate) schaut nach dem Abschied kaum auf und spielt weiter. Als sein Vater ihn nachmittags hochheben will, wendet er sich ab und bleibt bei den Bausteinen.\nMia (20 Monate) klammert sich beim Abschied fest. Bei der Abholung läuft sie zu ihrer Mutter, schlägt aber auf sie ein und weint auch auf dem Arm weiter.\nBen (15 Monate) geht seinem Vater bei der Abholung zunächst entgegen, bleibt dann mitten im Raum stehen und schaut zu Boden.",
+  "zeilen": false
+ },
+ "kontext": "",
+ "stamm": "Für die Einordnung der Beobachtungen und das Handeln von Frau Demir gilt fachlich zutreffend, wenn …",
+ "pruefen": "Neu erstellt (Claude), anspruchsvolle Fassung mit einer gemeinsamen Fallvignette. Bitte fachlich und passend zu deinem Unterricht prüfen.",
+ "aussagen": [
+  {
+   "text": "… der Bindungstyp als Merkmal der Beziehung zu einer bestimmten Bindungsperson verstanden wird und nicht als feste Eigenschaft des Kindes.",
+   "richtig": true,
+   "erklaerung": "Bindungstypen beschreiben die Qualität einer Beziehung. Ein Kind kann zu verschiedenen Personen unterschiedlich gebunden sein, und die Beziehung kann sich verändern."
+  },
+  {
+   "text": "… aus der Abholsituation eines einzelnen Tages sicher auf den Bindungstyp eines Kindes geschlossen wird.",
+   "richtig": false,
+   "erklaerung": "Eine einzelne Beobachtung reicht nicht. Verlässliche Einschätzungen brauchen mehrere Situationen über einen längeren Zeitraum."
+  },
+  {
+   "text": "… Jonas’ Verhalten so gedeutet wird, dass er wenig Bedürfnis nach Nähe hat und deshalb nicht besonders begleitet werden muss.",
+   "richtig": false,
+   "erklaerung": "Unsicher-vermeidende Kinder verbergen ihr Bedürfnis nach Nähe, obwohl sie innerlich belastet sind. Sie brauchen verlässliche, behutsame Begleitung."
+  },
+  {
+   "text": "… bei Mia berücksichtigt wird, dass ihr Verhalten mit einem wenig vorhersagbaren Umgang der Bindungsperson mit ihren Signalen zusammenhängen kann.",
+   "richtig": true,
+   "erklaerung": "Unsicher-ambivalente Bindung wird mit einem uneinheitlichen, schwer vorhersagbaren Reagieren auf die Signale des Kindes in Verbindung gebracht."
+  }
+ ]
+}
 ];
 // Vorlage = Check-out mit genau 3 Aufgaben aus der Bank; wird am passenden Freitag per Klick eingesetzt.
 const CHECKOUT_VORLAGEN_ALLE=[
@@ -9400,7 +9540,19 @@ const CHECKOUT_VORLAGEN_ALLE=[
    "ich-staerke-schwaeche-fall",
    "ich-erziehung-fall"
   ]
- }
+ },
+{
+ "id": "aln-bindung-fall",
+ "titel": "Bindung: Begriff, Phasen und Bindungstypen (Fall Mäusenest, anspruchsvoll)",
+ "lbNum": 1,
+ "datum": "2026-11-27",
+ "aufgaben": [
+  "bindung-fall-begriff",
+  "bindung-fall-phasen",
+  "bindung-fall-typen",
+  "bindung-fall-transfer"
+ ]
+}
 ];
 // Angeboten werden nur Vorlagen im neuen Aufbau (genau 4 Aufgaben: 2 Fallvignetten, je 2 Aufgaben). Ältere Vorlagen mit 3 Aufgaben bleiben im Code.
 const CHECKOUT_VORLAGEN=CHECKOUT_VORLAGEN_ALLE.filter(v=>(v.aufgaben||[]).length===CHECKOUT_MAX_AUFGABEN);
