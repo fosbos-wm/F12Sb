@@ -552,11 +552,17 @@ service cloud.firestore {
     // Teams/Gruppen je Woche: Schüler:innen bilden sie selbst.
     match /lehrplanTeams/{id} {
       allow read: if isApproved();
-      allow create: if isApproved() && request.resource.data.createdBy == request.auth.uid;
+      allow create: if isApproved() && request.resource.data.createdBy == request.auth.uid
+        && !request.resource.data.keys().hasAny(['msPruefung']);
       allow update: if isTeacher()
-        || (isApproved() && request.auth.uid in resource.data.get('mitgliederUids',[]))
-        || (isApproved() && resource.data.createdBy == request.auth.uid);
-      allow delete: if isTeacher() || (isApproved() && resource.data.createdBy == request.auth.uid);
+        || (isApproved()
+          && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['msPruefung'])
+          && (request.auth.uid in resource.data.get('mitgliederUids',[])
+            || resource.data.createdBy == request.auth.uid
+            || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['mitgliederUids','mitgliederNamen'])
+              && request.auth.uid in request.resource.data.mitgliederUids)));
+      allow delete: if isTeacher() || (isApproved() && (resource.data.createdBy == request.auth.uid
+        || resource.data.get('mitgliederUids',[]).size() == 0));
     }
     // Produkte/Ergebnisse je Woche: Schüler:innen laden hoch, Lehrkraft sieht alles.
     match /lehrplanProdukte/{id} {

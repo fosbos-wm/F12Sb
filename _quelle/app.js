@@ -15270,7 +15270,6 @@ function essayCaseTileHTML(c){
 async function renderFachaufsatzUebersicht(){const e=await getEssayCases(),t=essayLernbereiche.map(([i,r])=>({code:i,label:r,cases:e.filter(a=>a.lernbereich===i)})).filter(i=>i.cases.length),n=e.filter(i=>!i.lernbereich||!essayLernbereiche.some(r=>r[0]===i.lernbereich));return`${pageHead("SELBSTST\xC4NDIG LERNEN","Fachaufsatztraining","Fachaufsatz in P\xE4dagogik/Psychologie an echten Pr\xFCfungsaufgaben \xFCben.",`<button class="secondary"onclick="go('start')">\u2190 Meine Lernpfade</button><button class="secondary"onclick="go('lernwerkstatt')">\u2190 Lernwerkstatt</button>
  ${isTeacher()?'<button class="primary"onclick="openEssayCaseForm()">\uFF0B Neue Aufgabe</button>':""}`)}
  <div class="notice"><strong>So funktioniert's:</strong><p style="margin-bottom:0">Jede Aufgabe basiert auf einer echten alten Pr\xFCfungs- oder Schulaufgabe: 1. Aufgabenstellung lesen, 2. Theorie zur Beantwortung lesen, 3. im Antwortraum deinen Fachaufsatz schreiben, danach die Erfolgskriterien nach dem echten Bewertungsbogen selbst ankreuzen, optional per fobizz-Assistent eine schnelle KI-Vorkorrektur holen und bei Bedarf zur Lehrkraft zur Korrektur einreichen. Deine \xDCbungstexte sind privat \u2013 nur du selbst und Lehrkr\xE4fte sehen sie, nicht deine Mitsch\xFCler:innen.</p></div>
- ${await lxFaDieseWoche()}
  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
  ${essayLernbereiche.map(([i,r])=>{const a=LERNBEREICH_FARBEN[essayLernbereichNummer(i)];return`<span class="pill"style="background:${a.bg};color:${a.text}">${esc(i)} \xB7 ${esc(r)}</span>`}).join("")}
  </div>
@@ -22864,30 +22863,13 @@ async function lxAngebotSeite(art,kicker,titel,text,zurueck,zurueckText,kopf){
 async function renderLwUebenPP(){
  return lxAngebotSeite("ue","LERNWERKSTATT · 1","Pädagogik / Psychologie: Übungs- und Vertiefungsaufgaben","Alle Übungen und Vertiefungsaufgaben, die deine Lehrkraft freigeschaltet hat, geordnet nach Lernbereichen.","lw-pp","Pädagogik / Psychologie");
 }
-async function lxFaDieseWoche(){
- try{
-  await lxWaLaden().catch(()=>{});
-  const heute=lxHeute(),kw=lxKwInfo().kw;
-  const ids=[];(LXWA.d||[]).filter(w=>(w.bis||"")>=heute).forEach(w=>(w.themen||[]).forEach(t=>{if(!ids.includes(t))ids.push(t)}));
-  const fa=await faLaden().catch(()=>[]);
-  const kopf=`<small>KW ${kw}</small>`;
-  let inhalt;
-  if(!ids.length)inhalt=`<p class="kw-leer">F\xFCr diese Woche sind noch keine Themen eingestellt. Sobald deine Lehrkraft Arbeitsauftr\xE4ge f\xFCr die Woche ver\xF6ffentlicht, erscheinen hier die passenden Fachaufs\xE4tze.</p>`;
-  else{
-   const gr=ids.map(id=>{const e=kwThemaById(id);if(!e)return"";const L=fa.filter(u=>u.thema===id);
-    return`<div class="lx-thema-b"><button type="button" class="kw-row" data-kw="thema" data-id="${esc(id)}"><i class="kw-bx"></i><em>${esc(e.nr||"")}</em><span>${esc(kwKurz(e))}</span></button>${L.length?`<div class="kw-dateien">${L.map(u=>`<button type="button" class="kw-datei" data-kw="faueb" data-id="${esc(u.id)}"><span>${esc(u.titel||"Fachaufsatz")}</span><small>${u.minuten?esc(u.minuten)+" Min.":"Fachaufsatz"}${u.herkunft?" · "+esc(String(u.herkunft).slice(0,70)):""}</small></button>`).join("")}</div>`:`<p class="kw-leer" style="margin:6px 0 0">Zu diesem Thema gibt es noch keinen Fachaufsatz.</p>`}</div>`}).join("");
-   inhalt=gr||`<p class="kw-leer">Zu den Themen dieser Woche gibt es noch keine Fachaufs\xE4tze.</p>`;
-  }
-  return`<section class="kw-card" style="margin:14px 0"><h2 style="margin:0 0 4px;font-size:20px">Diese Woche · ${kopf}</h2><p style="margin:0 0 10px;color:var(--muted);font-size:14px">Alle Fachaufs\xE4tze zu den Themen, die ihr gerade laut Wochenplan bearbeitet.</p>${inhalt}</section>`;
- }catch(e){console.warn("Fachaufsatz diese Woche:",e);return""}
-}
 async function renderLwFachaufsatz(){
  await kwLaden();
  const infos=await Promise.all(KW_TRAININGS_ALLE.map(x=>einarbeitungInfo(x).catch(()=>null)));
  const nbIds=lxNachbIds();const z=KW_TRAININGS_ALLE.map((x,i)=>{const n=infos[i];if(!n||n.entwurf||nbIds.has(x))return"";const h=KW_TR_HINT[x];return`<button type="button" class="kw-datei" data-kw="ea" data-id="${esc(x)}"><span>${esc(n.titel)}</span><small>${h?esc(h)+" · ":""}${n.aufgaben?n.aufgaben+" Aufgaben":"Selbstlernkurs"}</small></button>`}).join("");
  const tr=z?lxSek(3,"Trainings","Selbstlernkurse zum Fachaufsatz",`<div class="kw-dateien">${z}</div>`):"";
  const nb=`<div class="lx-kacheln">${lxKachel("lw-nachbereitung","Nachbereitung von Kurzarbeiten und Schulaufgaben","Trainings nach der Rückgabe")}</div>`;
- return lxAngebotSeite("fa","LERNWERKSTATT · 2","Fachaufsatztraining","Alle Fachaufsätze und Trainings, die deine Lehrkraft freigeschaltet hat. Die Fachaufsätze sind nach Lernbereichen geordnet.","lw-training-pp","Prüfungstraining",(await lxFaDieseWoche())+tr+nb);
+ return lxAngebotSeite("fa","LERNWERKSTATT · 2","Fachaufsatztraining","Alle Fachaufsätze und Trainings, die deine Lehrkraft freigeschaltet hat. Die Fachaufsätze sind nach Lernbereichen geordnet.","lw-training-pp","Prüfungstraining",tr+nb);
 }
 
 /* ---------- Verstärkungen auch für Lehrkräfte: erscheinen nach Speichern, Anlegen, Freischalten (zufällig, nicht jedes Mal) ---------- */
