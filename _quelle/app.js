@@ -21899,7 +21899,7 @@ function kwKachelHTML(ph,lehrer){
   ?`<button type="button" class="kw-proj" data-kw="projekt" data-lb="${ph.lbNum}"><span class="chip prj">Projekt</span><b>${esc(projTitel)}</b><small>${fmtKurz(ph.projektStart)}–${fmtKurz(ph.projektEnde)}</small></button>`
   :`<div class="kw-proj lx-lock"><span class="chip prj">Projekt</span><b>${esc(projTitel)}</b><small class="lx-ab">folgt</small></div>`;
  return`<article class="kw-tile${naechst?" kw-next":""}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
-  <header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${status?`<span class="kw-st">${naechst?"als Nächstes":status}</span>`:""}</header>
+  <header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${lxLbProjekte(ph.lbNum)}${status?`<span class="kw-st">${naechst?"als Nächstes":status}</span>`:""}</header>
   ${projKnopf}
   <div class="kw-lab">${n} THEMEN · ${lehrer?fertig+" MIT MATERIAL":fertig+" ERLEDIGT"}</div>
   <div class="kw-rows">${rows||(lehrer?"":`<div class="kw-leer">Hier ist noch nichts eingestellt.</div>`)}${kwLeistungRow(ph)}</div>
@@ -22713,9 +22713,26 @@ function lxThemaWahlen(modus){
    const st=lxThemaStart(e);
    return`<button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span><small class="lx-pts" aria-label="Vorhandene Teile">${pts}</small>${st?`<small class="lx-ab">Schüler ab ${esc(fmtKurz(st))}</small>`:""}</button>`;
   }).join("");
-  return`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div></header><div class="kw-rows">${rows}${kwLeistungRow(ph)}</div></article>`;
+  return`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${lxLbProjekte(ph.lbNum)}</header><div class="kw-rows">${rows}${kwLeistungRow(ph)}</div></article>`;
  }).join("");
 }
+
+// Projektstreifen im farbigen Kopf eines Lernbereichs: Projekt öffnen; Lehrkraft: bearbeiten (Auftrag, Material, Meilensteine) oder anlegen
+(function(){const st=document.createElement("style");st.textContent=".kw-th{flex-wrap:wrap}.kw-pjb{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.kw-pjb .kw-pj{display:inline-flex;align-items:center;gap:6px;background:#17324a;color:#fff;border:0;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:800;cursor:pointer;max-width:100%}.kw-pjb .kw-pj small{font-weight:600;opacity:.85}.kw-pjb .kw-pje{background:rgba(255,255,255,.75);color:#17324a;border:1px solid rgba(23,50,74,.25);border-radius:999px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer}";document.head.appendChild(st)})();
+function lxLbProjekte(lb){
+ let L=[];try{L=((typeof PPM!=="undefined"&&PPM.liste)||[]).filter(m=>m.modul==="projekt"&&Number(m.lb)===Number(lb))}catch(e){}
+ const lehrer=isTeacher();
+ const pills=L.map(m=>{let z="";try{const w=ppmWochen(m);if(w.length)z=fmtKurz(w[0].start)+"\u2013"+fmtKurz(w[w.length-1].end)}catch(e){}
+  return`<button type="button" class="kw-pj" data-kw="modul" data-id="${esc(m.id)}" title="Auftrag, Material, Ziele, Team und Meilensteine \u00F6ffnen">\uD83D\uDCCC ${esc(ppmTitel(m)||m.titel||"Projekt")}${z?` <small>${esc(z)}</small>`:""}</button>${lehrer?`<button type="button" class="kw-pje" data-pjedit="${esc(m.id)}" title="Auftrag, Material, Meilensteine und Themen bearbeiten">\u270E Bearbeiten</button>`:""}`}).join("");
+ const neu=lehrer&&!L.length?`<button type="button" class="kw-pje" data-pjneu="${Number(lb)}">+ Projekt in diesem Lernbereich anlegen</button>`:"";
+ return pills||neu?`<div class="kw-pjb">${pills}${neu}</div>`:"";
+}
+document.addEventListener("click",async ev=>{
+ const e=ev.target.closest&&ev.target.closest("[data-pjedit]");
+ if(e&&isTeacher()){ev.preventDefault();ev.stopPropagation();try{await ppmDialog(e.dataset.pjedit)}catch(x){console.error(x)}return}
+ const n=ev.target.closest&&ev.target.closest("[data-pjneu]");
+ if(n&&isTeacher()){ev.preventDefault();ev.stopPropagation();try{await ppmDialog(null,"projekt",lxPtWoche(new Date().toISOString().slice(0,10)),{lb:Number(n.dataset.pjneu)||1})}catch(x){console.error(x)}}
+},true);
 function lxLegende(){return`<div class="lx-legende">${LX_LEG.map(n=>`<span><i class="lx-pt an" style="--k:${LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
 const LX_PT_ARB={"Unterrichtsstunde":"stunde","Rollenspiel":"stunde","Lernrallye":"rallye"};
 function lxPtArbBtn(t){
@@ -22757,9 +22774,22 @@ async function lxPtModulAnlegen(t,typ){
  try{const ref=await addDoc(collection(db,"ppModule"),Be);await updateDoc(doc(db,"pflichttermine",t.id),{modulId:ref.id});LXWA.t=0;await ppmLaden(true);toast("Baustein angelegt. Jetzt ausarbeiten.");ppmOeffnen(ref.id)}catch(e){ppmFehler(e,"Der Baustein konnte nicht angelegt werden")}
 }
 document.addEventListener("click",async ev=>{const b=ev.target.closest&&ev.target.closest("[data-ptmod]");if(!b||!isTeacher())return;const t=(LXWA.pt||[]).find(x=>x.id===b.dataset.id);if(!t)return;closeModal();await lxPtModulAnlegen(t,b.dataset.ptmod)});
-document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-ptinfo]");if(!b)return;const t=(LXWA.pt||[]).find(x=>x.id===b.dataset.ptinfo);if(!t)return;
+function lxPtModulOptionen(t){
+ const N=x=>String(x||"").toLowerCase().replace(/[^a-z0-9\u00E4\u00F6\u00FC\u00DF ]/g," ").replace(/\s+/g," ").trim();
+ const typ=LX_PT_DLG[t.art]||LX_PT_ARB[t.art]||(t.art==="Projekt"?"projekt":"");
+ let L=((typeof PPM!=="undefined"&&PPM.liste)||[]).slice();
+ const gleich=L.filter(m=>!typ||m.modul===typ);if(gleich.length)L=gleich;
+ const q=N(t.titel);
+ const treffer=t.modulId||(q.length>=3?(L.find(m=>{const n=N(ppmTitel(m)||m.titel);return n.includes(q)||q.includes(n)})||{}).id:"")||"";
+ return`<option value="">Kein Modul</option>`+L.map(m=>`<option value="${esc(m.id)}"${m.id===treffer?" selected":""}>${esc(ppmTitel(m)||m.titel||"Modul")}</option>`).join("");
+}
+document.addEventListener("click",async ev=>{const b=ev.target.closest&&ev.target.closest("[data-ptlink]");if(!b||!isTeacher())return;const sel=document.getElementById("ptLinkSel");if(!sel)return;
+ try{await updateDoc(doc(db,"pflichttermine",b.dataset.ptlink),{modulId:sel.value||""});LXWA.t=0;closeModal();toast(sel.value?"Termin mit dem Modul verkn\u00FCpft. Ein Klick f\u00FChrt jetzt direkt dorthin.":"Verkn\u00FCpfung gel\u00F6st.");render()}
+ catch(e){console.error(e);toast("Die Verkn\u00FCpfung konnte nicht gespeichert werden.")}});
+document.addEventListener("click",async ev=>{const b=ev.target.closest&&ev.target.closest("[data-ptinfo]");if(!b)return;const t=(LXWA.pt||[]).find(x=>x.id===b.dataset.ptinfo);if(!t)return;
+ if(isTeacher()){try{await ppmLaden()}catch(e){}}
  const tr=(t.trainings||[]).filter(x=>ppmById(x.id)).map(x=>`<div class="lxs-tz lxs-tr"><span><b>${esc(x.titel)}</b><small>Selbstlernkurs</small></span><button type="button" class="primary" data-kw="modul" data-id="${esc(x.id)}" onclick="closeModal()">Starten</button></div>`).join("");
- modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">${t.optional?"OPTIONALER TERMIN":"PFLICHTTERMIN"}</div><h2>${esc((t.art||"")+(t.titel?": "+t.titel:""))}</h2><p style="color:var(--muted);margin:0 0 8px">${esc(lxPtDat(t))}${t.zeit?" \u00B7 "+esc(lxZ(t))+" Uhr":""}${t.fach?" \u00B7 "+esc(t.fach):""}${t.optional?" \u00B7 freiwillig":" \u00B7 verpflichtend"}</p>${tr}${isTeacher()&&t.modulId?`<div class="lxs-tz lxs-tr"><span><b>Verkn\xFCpftes Modul</b></span><button type="button" class="primary" data-kw="modul" data-id="${esc(t.modulId)}" onclick="closeModal()">\xD6ffnen</button></div>`:""}<div class="form-actions">${isTeacher()?`<button class="secondary" type="button" data-wa="ptdel" data-id="${esc(t.id)}" onclick="closeModal()">Termin l\xF6schen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Schlie\xDFen</button></div>`)});
+ modal(`<button class="modal-close" onclick="closeModal()">\xD7</button><div class="kicker">${t.optional?"OPTIONALER TERMIN":"PFLICHTTERMIN"}</div><h2>${esc((t.art||"")+(t.titel?": "+t.titel:""))}</h2><p style="color:var(--muted);margin:0 0 8px">${esc(lxPtDat(t))}${t.zeit?" \u00B7 "+esc(lxZ(t))+" Uhr":""}${t.fach?" \u00B7 "+esc(t.fach):""}${t.optional?" \u00B7 freiwillig":" \u00B7 verpflichtend"}</p>${tr}${isTeacher()&&t.modulId&&ppmById(t.modulId)?`<div class="lxs-tz lxs-tr"><span><b>${esc(ppmTitel(ppmById(t.modulId))||"Verkn\xFCpftes Modul")}</b><small>Auftrag, Material, Ziele, Team und Meilensteine</small></span><button type="button" class="primary" data-kw="modul" data-id="${esc(t.modulId)}" onclick="closeModal()">\xD6ffnen</button></div>`:""}${isTeacher()?`<div class="lxs-tz lxs-tr" style="flex-wrap:wrap;gap:8px"><span style="flex:1 1 100%"><b>${t.modulId?"Verkn\xFCpfung \u00E4ndern":"Mit Projekt oder Modul verkn\xFCpfen"}</b><small>Sch\u00FCler:innen kommen mit einem Klick auf den Termin direkt zum Modul.</small></span><select id="ptLinkSel" style="flex:1 1 220px">${lxPtModulOptionen(t)}</select><button type="button" class="primary" data-ptlink="${esc(t.id)}">Speichern</button></div>`:""}<div class="form-actions">${isTeacher()?`<button class="secondary" type="button" data-wa="ptdel" data-id="${esc(t.id)}" onclick="closeModal()">Termin l\xF6schen</button>`:""}<button class="secondary" type="button" onclick="closeModal()">Schlie\xDFen</button></div>`)});
 async function lxPtTrainingsZeigen(box){
  box.innerHTML='<small>Lade Selbstlernkurse \u2026</small>';
  const ids=(typeof KW_TRAININGS_ALLE!=="undefined"?KW_TRAININGS_ALLE:[]),inf=await Promise.all(ids.map(x=>einarbeitungInfo(x).catch(()=>null)));
@@ -22912,7 +22942,7 @@ function lxAngeboteLb(ph,art){
   if(!inner)return"";
   return`<div class="lx-thema-b"><button type="button" class="kw-row" data-kw="thema" data-id="${esc(e.id)}"><i class="kw-bx${!lehrer&&kwErledigt(e.id)?" d":""}"></i><em>${esc(e.nr)}</em><span>${esc(kwKurz(e))}</span></button>${inner}</div>`;
  }).join("");
- return bl?`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div></header><div class="kw-rows">${bl}</div></article>`:"";
+ return bl?`<article class="kw-tile" style="--c:${F.c};--bg:${F.bg};--t:${F.t}"><header class="kw-th"><div><small>LB ${ph.lbNum} · ${esc(kwBlockText(ph.start,ph.end)||fmtKurz(ph.start))}</small><b>${esc(ph.lbTitel)}</b></div>${lxLbProjekte(ph.lbNum)}</header><div class="kw-rows">${bl}</div></article>`:"";
 }
 async function lxAngebotSeite(art,kicker,titel,text,zurueck,zurueckText,kopf){
  await kwLaden();
