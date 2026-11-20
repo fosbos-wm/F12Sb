@@ -21652,7 +21652,7 @@ async function renderKachelwand(){
  const p=alle.length?Math.round(fertig/alle.length*100):0;
  const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
  const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#DCE9F5" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#3A8FD4" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
- const lk=lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht</button><button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lk-unterricht')">Unterricht planen</button></div>`:"";
+ const lk=lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht</button><button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button><button class="secondary" onclick="go('lk-unterricht')">Unterrichtsbibliothek</button></div>`:"";
  return`<div class="kw" id="kwRoot">
   ${kwSchuelerBanner()}
   <button class="secondary" onclick="go('unterricht')">← Unterrichtsfächer</button>
@@ -22480,7 +22480,7 @@ async function renderLkPlanung(){
  };
  const themen=phasen.map(ph=>`<details class="lxw-lb"><summary><b>LB ${ph.lbNum} \u00B7 ${esc(ph.lbTitel||"")}</b></summary><div class="lxw-chips">${kwThemenVonPhase(ph).filter(e=>e.typ!=="projekt").map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
  const proj=phasen.map(ph=>`<label class="lxw-chip"><input type="checkbox" name="waProjekt" value="${ph.lbNum}"><span>Projekt LB ${ph.lbNum}</span></label>`).join("");
- return`<div class="lx-seite"><div class="kw-links"><button type="button" class="secondary" onclick="go('lk-unterricht')">\u2190 Unterricht und Inhalte</button></div>
+ return`<div class="lx-seite"><div class="kw-links"><button type="button" class="secondary" onclick="go('lk-unterricht')">\u2190 Unterrichtsbibliothek</button></div>
  <h1 style="margin:8px 0 12px">N\xE4chste Woche \u00B7 ${fmtKurz(tage[0])}\u2013${fmtKurz(tage[4])}</h1>
  <div class="lxs-wt lxp-wt">${tage.map((iso,i)=>`<div class="lxs-d"><b>${N[i]} ${fmtKurz(iso)}</b>${tag(iso)}</div>`).join("")}</div>
  <details class="lxp-d"><summary>+ Themen oder Projekt einplanen</summary>
@@ -22519,7 +22519,7 @@ async function renderLkUnterricht(){
  </div>`;
  else if(fk==="mathe")inhalt=`<h2 class="lx-h2">Mathematik</h2><div class="card"><p>Das Fach Mathematik wird gerade vorbereitet. Sobald Inhalte da sind, planst du sie hier genauso wie in Pädagogik/Psychologie.</p><button type="button" class="secondary" onclick="go('lw-mathe')">Mathematik in der Lernwerkstatt ansehen</button></div>`;
  else inhalt=`<p class="lx-hint">Wähle ein Fach, um Inhalte zu planen und bereitzustellen.</p>`;
- return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterricht planen","Wähle ein Fach. Bei Pädagogik/Psychologie siehst du zuerst die vier Lernbereiche des Individuellen Lernpfads, darunter die weiteren Werkzeuge. Jedes Thema hat dieselben acht Teile wie bei den Schüler:innen.")}
+ return`<div class="lx-seite">${pageHead("LEHRKRÄFTE","Unterrichtsbibliothek","Hier findest du alle Unterrichtsstunden der Lernbereiche mit ihrer Vorbereitung und dem aktuellen Planungsstand. Jedes Thema hat dieselben acht Teile wie bei den Schüler:innen. Die Schüler:innen sehen ein Thema ab dem angegebenen Datum („Schüler ab …“) in ihrem Lernpfad; Dateien und eingeplante Bausteine erscheinen dort in den passenden Teilen. Wähle ein Fach, um zu beginnen.")}
  ${faecher}${inhalt}</div>${footer()}`;
 }
 
