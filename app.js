@@ -57,7 +57,7 @@ Wichtig: Die Anmeldekonten selbst bitte in der Firebase-Konsole unter Authentica
  <div class="kicker">RECHTLICHES</div>
  <h2>Datenschutzerkl\xE4rung</h2>
  <div class="form"style="gap:12px;font-size:.95em;line-height:1.5">
- <div class="notice"><strong>Entwurf</strong><p style="margin-bottom:0">Diese Erkl\xE4rung wird vom Datenschutzbeauftragten der Schule gepr\xFCft und kann sich noch \xE4ndern.</p></div>
+ <div class="notice"><strong>Abgestimmt</strong><p style="margin-bottom:0">Die Nutzung der App ist mit dem Datenschutzbeauftragten der Schule abgestimmt.</p></div>
 
  <p><strong>1. Verantwortlicher</strong><br>
  Staatliche Fachoberschule und Berufsoberschule Weilheim, Kerschensteinerstra\xDFe 2, 82362 Weilheim i.OB, vertreten durch den Schulleiter Christian Dick, OStD. Telefon +49 881 9239-43, E-Mail 0897.Sekretariat@schule.bayern.de.</p>
