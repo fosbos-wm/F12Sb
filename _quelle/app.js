@@ -4299,7 +4299,7 @@ async function lxStartNeu(wp){
  const pp="Pädagogik / Psychologie",waPP=WA.filter(w=>w.fach===pp),waAnd=WA.filter(w=>w.fach!==pp);
  const ids=[];waPP.forEach(w=>(w.themen||[]).forEach(t=>{if(!ids.includes(t))ids.push(t)}));
  let themen=ids.map(kwThemaById).filter(Boolean);
- if(!themen.length){try{themen=kwThemenSicht(ph).filter(e=>e.typ!=="projekt").slice(0,6)}catch(e){}}
+ if(!themen.length){try{themen=kwThemenSicht(ph).slice(0,6)}catch(e){}}
  const V=await Promise.all(themen.map(async e=>({ci:await getMyBasischeckVersuch(e.id).catch(()=>null),co:await getMyBasischeckVersuch(e.id+"@ende").catch(()=>null)})));
  const rest=[];let weiter=null;
  themen.forEach((e,i)=>{const {ci,co}=V[i],f=KW.fort[e.id]||{},fertig=!!f.abgeschlossen;const nxs=fertig?"geschafft":(!ci?"Check-in":(!f.info?"Infotext":(!co?"Check-out":"Üben oder Check-out")));const o={e,fertig,nxs,begonnen:!!(ci||f.info)};if(!fertig&&!weiter)weiter=o;rest.push(o)});
@@ -22283,7 +22283,7 @@ async function renderWocheL(){
  await kwLaden().catch(()=>{});await lxWaLaden(true);const ptSch=await lxPtSchuelerFeld();
  const heute=lxHeute(),fr=lxFreitag(lxPlus(1)),phasen=[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum);
  const KL=await lxKlasseLaden().catch(()=>({schueler:[],fort:{}})),gesch=id=>(KL.schueler||[]).filter(u=>((KL.fort[u.uid]||{})[id]||{}).abgeschlossen).length;
- const themen=phasen.map(ph=>`<details class="lxw-lb"><summary><b>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</b><span class="lxw-n"></span></summary><div class="lxw-chips">${kwThemenVonPhase(ph).filter(e=>e.typ!=="projekt").map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
+ const themen=phasen.map(ph=>`<details class="lxw-lb"><summary><b>LB ${ph.lbNum} · ${esc(ph.lbTitel||"")}</b><span class="lxw-n"></span></summary><div class="lxw-chips">${kwThemenVonPhase(ph).map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
  const fo=LXW_FAECHER.map(f=>`<option>${esc(f)}</option>`).join("");
  const WA=LXWA.d.filter(w=>(w.bis||"")>=lxPlus(-7)).sort((a,b)=>(a.bis||"")<(b.bis||"")?-1:1);
  const PT=LXWA.pt.filter(t=>lxPtBis(t)>=heute).sort((a,b)=>((a.datum||"")+(a.zeit||""))<((b.datum||"")+(b.zeit||""))?-1:1);
@@ -22901,7 +22901,7 @@ async function renderLkPlanung(){
   const a=WA.filter(w=>w.bis===iso).map(w=>`<div class="lxp-w">${(w.themen||[]).map(id=>{const e=kwThemaById(id);return e?`<div class="lxs-ev ab"><small>${esc(w.fach||"")} \u00B7 f\xE4llig</small><b>${esc(kwKurz(e))}</b><span class="lxp-a"><button type="button" class="secondary" data-kw="thema" data-id="${esc(id)}">Vorbereiten</button></span></div>`:""}).join("")}${(w.projekte||[]).map(n=>{const p=kwPhase(n);return p?`<div class="lxs-ev ab"><small>Projekt \u00B7 f\xE4llig</small><b>LB ${n} \u00B7 ${esc(p.titel||p.lbTitel||"")}</b><span class="lxp-a"><button type="button" class="secondary" data-kw="projekt" data-lb="${n}">Vorbereiten</button></span></div>`:""}).join("")}<div class="lxp-a"><button type="button" class="text-button" data-wa="del" data-id="${esc(w.id)}">Auftrag l\xF6schen</button></div></div>`).join("");
   return t+a||`<div class="lxs-frei">frei</div>`;
  };
- const themen=phasen.map(ph=>`<details class="lxw-lb"><summary><b>LB ${ph.lbNum} \u00B7 ${esc(ph.lbTitel||"")}</b></summary><div class="lxw-chips">${kwThemenVonPhase(ph).filter(e=>e.typ!=="projekt").map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
+ const themen=phasen.map(ph=>`<details class="lxw-lb"><summary><b>LB ${ph.lbNum} \u00B7 ${esc(ph.lbTitel||"")}</b></summary><div class="lxw-chips">${kwThemenVonPhase(ph).map(e=>`<label class="lxw-chip"><input type="checkbox" name="waThema" value="${esc(e.id)}"><span>${esc(kwKurz(e))}</span></label>`).join("")}</div></details>`).join("");
  const proj=phasen.map(ph=>`<label class="lxw-chip"><input type="checkbox" name="waProjekt" value="${ph.lbNum}"><span>Projekt LB ${ph.lbNum}</span></label>`).join("");
  return`<div class="lx-seite"><div class="kw-links"><button type="button" class="secondary" onclick="go('lk-unterricht')">\u2190 Meine Lernpfade</button></div>
  <h1 style="margin:8px 0 12px">N\xE4chste Woche \u00B7 ${fmtKurz(tage[0])}\u2013${fmtKurz(tage[4])}</h1>
