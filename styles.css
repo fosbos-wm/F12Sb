@@ -45,3 +45,17 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lsn-lb>summary{cursor:pointer}
 .lsn-lb>summary::marker{color:var(--c,#55697b)}
 .lsn-lb>summary:hover header h3{filter:brightness(.85)}
+
+/* ===== Dialoge: Lernbereichs-Farbsystem und reduzierte Darstellung (22.11.2026) ===== */
+#modal.lb-modal{border-top:8px solid var(--c)}
+#modal.lb-modal .kicker{color:var(--c)}
+#modal.lb-modal h2{color:var(--c)}
+#modal.lb-modal input:focus,#modal.lb-modal select:focus,#modal.lb-modal textarea:focus{border-color:var(--c);outline:2px solid color-mix(in srgb,var(--c) 30%,transparent);outline-offset:0}
+#modal.lb-modal .ppm-fuer{display:inline-block;margin:0 0 10px;padding:6px 12px;border-left:4px solid var(--c);border-radius:8px;background:color-mix(in srgb,var(--c) 10%,#fff);color:#17324b}
+#modal.lb-modal .ppm-fuer b{color:var(--c)}
+/* einfache Ansicht: keine Nummerierung, keine Hinweistexte, enger */
+.ppm-einfach .ppm-sek-kopf{display:none}
+.ppm-einfach .ppm-sek{margin:0 0 12px;padding:0;border:0;background:none}
+.ppm-einfach .ppm-sek-3>p{display:none}
+.ppm-einfach .ppm-sek select{width:100%}
+.ppm-einfach .ppm-mehr{font-size:13px;font-weight:600;color:var(--muted,#55697b)}
