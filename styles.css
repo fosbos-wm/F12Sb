@@ -59,3 +59,9 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .ppm-einfach .ppm-sek-3>p{display:none}
 .ppm-einfach .ppm-sek select{width:100%}
 .ppm-einfach .ppm-mehr{font-size:13px;font-weight:600;color:var(--muted,#55697b)}
+
+/* Wochenansicht: Termin direkt löschen (nur Lehrkräfte) */
+.lxs-ev,.lxs-str{position:relative}
+.lxs-x{position:absolute;top:4px;right:4px;width:26px;height:26px;padding:0;border:0;border-radius:50%;background:#fff;color:#b3261e;font-size:18px;line-height:1;cursor:pointer;box-shadow:0 0 0 1px #e3c9c7}
+.lxs-x:hover,.lxs-x:focus-visible{background:#b3261e;color:#fff}
+.lxs-ev:has(.lxs-x) small,.lxs-ev:has(.lxs-x) b{padding-right:24px}
