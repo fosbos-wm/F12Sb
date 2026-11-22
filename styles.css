@@ -15,3 +15,33 @@ details.lxw-lb .lxw-n{background:var(--c)}
 details.lxw-lb .lxw-chip{border-color:color-mix(in srgb,var(--c) 45%,#fff)}
 details.lxw-lb .lxw-chip:has(input:checked){background:var(--c);border-color:var(--c);color:#fff}
 details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
+
+/* ===== Handy: Kopfleiste klebt nicht mehr fest und überdeckt keine Inhalte (21.11.2026) ===== */
+@media(max-width:800px),(max-height:520px){
+  .topbar{position:relative;top:auto;z-index:30;padding-bottom:6px}
+  .topbar .sidebar nav{flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:2px}
+  /* Lehrkräfte-Menü: eine Zeile, seitlich wischen */
+  .topbar .nav-area-l{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0}
+  .topbar .nav-area-l::-webkit-scrollbar{display:none}
+  .topbar .nav-area-l>*{flex:0 0 auto}
+  /* Schüler-Menü: darf umbrechen, aber kompakt */
+  .topbar .nav-area-s{flex-wrap:wrap;gap:2px 4px;padding:2px 0}
+  .topbar .nav-area .nav-link,.topbar .nav-mehr>summary{white-space:nowrap;padding:7px 11px;font-size:14px}
+  .topbar .nav-trenn{flex:0 0 1px;width:1px;height:20px;align-self:center;margin:0 2px}
+  .topbar .user-area{gap:6px}
+  .topbar .user-area .ghost-icon{padding:6px 10px;font-size:12px}
+  /* „Mehr“-Fenster: eine Spalte, scrollbar, überdeckt nichts dauerhaft */
+  .topbar .nav-pop{padding:10px 12px 14px;grid-template-columns:1fr;gap:8px;max-height:70vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .topbar .nav-pop .nav-link{padding:11px 14px;white-space:normal}
+  .topbar .nav-pop .nav-link small{font-size:12px}
+  /* mitwandernde Tabellenköpfe starten oben, nicht unter der Kopfleiste */
+  .kw-tab thead th{top:0}
+}
+
+/* ===== Einheitliches Lernbereichs-Farbsystem auch bei den Lernständen (22.11.2026) ===== */
+.lsn-lb{border-left:6px solid var(--c,#8a99a3);background:color-mix(in srgb,var(--c,#8a99a3) 10%,#fff)}
+.lsn-lb header small{color:var(--c,#55697b)}
+.lsn-lb header h3{color:var(--c,#17324b)}
+.lsn-lb>summary{cursor:pointer}
+.lsn-lb>summary::marker{color:var(--c,#55697b)}
+.lsn-lb>summary:hover header h3{filter:brightness(.85)}
