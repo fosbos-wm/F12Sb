@@ -1,0 +1,145 @@
+{
+ "titel": "Identität und das Identitätsmodell nach Marcia – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Identität und das Identitätsmodell nach Marcia** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Beraterin hat drei Schülerinnen: Eva sagt „Ich mache, was meine Mutter will.“ Mia sagt „Ich weiß nichts, mir ist alles egal.“ Noah sagt „Ich habe viel ausprobiert und weiß jetzt, was ich will.“ Die Beraterin möchte alle nach demselben Schema beraten."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Identität = Selbstverständnis als einmalige Person. Marcia: Verpflichtung × Experimentierfreudigkeit → vier Typen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Mira (17) möchte Erzieherin werden. Sie hat Praktika gemacht, Gespräche geführt und Zweifel durchdacht. Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es handelt sich um eine erarbeitete Identität.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Verpflichtung und Experimentierfreudigkeit sind hoch.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie hat ihre Werte nie hinterfragt.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Ihre Entscheidung wirkt voraussichtlich stabil.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Wer die Berufswahl der Eltern übernimmt, hat eine schlechte Identität.“",
+     "aussagen": [
+      {
+       "text": "Die Aussage ist einseitig: Übernommene Identität kann sicher wirken.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie wurde nicht kritisch geprüft.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Marcia bewertet die Typen moralisch.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Pädagogisch sinnvoll: Gelegenheiten zum Hinterfragen geben.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "erarbeitet",
+       "items": [
+        "Alternativen geprüft, bewusst entschieden",
+        "Zweifel durchdacht",
+        "Erfahrungen im Praktikum"
+       ]
+      },
+      {
+       "name": "übernommen",
+       "items": [
+        "Familienwerte ohne Prüfung",
+        "Betrieb der Eltern übernehmen",
+        "sicher, aber ohne Auseinandersetzung"
+       ]
+      },
+      {
+       "name": "kritisch/diffus",
+       "items": [
+        "viele Möglichkeiten ausprobieren",
+        "keine klare Entscheidung",
+        "wenig Orientierung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Das Modell nach Marcia hilft, Jugendliche {{einzuordnen}}. Es ist ein {{Modell}} und beschreibt keine {{feste}} Abfolge. Pädagogisch wichtig: Bei übernommener Identität Gelegenheit zum {{Hinterfragen}} geben und bei diffuser Identität {{Ermutigung}}.",
+     "woerter": [
+      "einzuordnen",
+      "Modell",
+      "feste",
+      "Hinterfragen",
+      "Ermutigung",
+      "Strafe",
+      "Beweis",
+      "Zwang"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile das Vorhaben der Beraterin.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Ein einheitliches Schema passt nicht: Die Typen unterscheiden sich, daher braucht jede Person eine andere Unterstützung.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_11"
+ ]
+}

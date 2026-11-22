@@ -1,0 +1,138 @@
+{
+ "titel": "Die Entstehung psychischer Störungen – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Die Entstehung psychischer Störungen** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Mutter berichtet: „Mein Sohn hat Panikattacken seit der Trennung von seiner Freundin. Er ist immer so tapfer gewesen.“ Ein Arzt sagt: „Das ist nur Stress.“ Die Beraterin meint: „Es steckt mehr dahinter.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Inkongruenz + starres Selbstkonzept + Lebensereignis → Konflikt → Symptom."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Marie (17) will „immer perfekt“ sein. Als sie bei der Prüfung durchfällt, schläft sie nicht mehr und bekommt Panikattacken. Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Das Lebensereignis ist die Prüfung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Ihr Selbstkonzept ist eher starr.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Panikattacken sind das Symptom.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Ursache liegt allein im Körper.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Wer ein Symptom beseitigt, hat das Problem gelöst.“",
+     "aussagen": [
+      {
+       "text": "Der Konflikt dahinter bleibt bestehen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Man sollte den Konflikt verstehbar machen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Symptome sind belanglos.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Neue Erfahrungen der Annahme helfen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Risiko",
+       "items": [
+        "starres Selbstkonzept",
+        "große Diskrepanz",
+        "Bedingte Zuwendung",
+        "Abwehr von Erfahrungen"
+       ]
+      },
+      {
+       "name": "Schutz",
+       "items": [
+        "Flexibles Selbstkonzept",
+        "Bedingungslose Wertschätzung",
+        "Offenheit für Erfahrung",
+        "Unterstützung im Gespräch"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Rogers’ Erklärung von Störungen betont {{Inkongruenz}} und {{Selbstkonzept}}. Das ist praktisch bedeutsam, aber nicht jede {{Störung}} lässt sich so erklären. Die Theorie vernachlässigt {{biologische}} Faktoren.",
+     "woerter": [
+      "Inkongruenz",
+      "Selbstkonzept",
+      "Störung",
+      "biologische",
+      "Trieb",
+      "Gene",
+      "Strafe"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile die Aussage des Arztes.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Stress ist ein Teil, greift aber zu kurz: Nach Rogers sind Selbstkonzept und Inkongruenz wichtig. Fazit: Beides ernst nehmen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_16"
+ ]
+}

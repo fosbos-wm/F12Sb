@@ -1,0 +1,139 @@
+{
+ "titel": "Carl Rogers und die personenzentrierte Theorie – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Carl Rogers und die personenzentrierte Theorie** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In einem Hort streiten zwei Erzieherinnen. Frau A: „Kinder wollen von sich aus wachsen, wir müssen nur Raum geben.“ Frau B: „Ohne klare Lenkung machen sie, was sie wollen.“ Die Leitung fragt, welche Haltung zu ihrer Einrichtung passt."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Rogers: personenzentriert, humanistisch („dritte Kraft“), positives Menschenbild, subjektive Erfahrung verstehen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Eine Betreuerin sagt: „Ich gebe dem Kind keine Lösung vor. Ich höre zu und vertraue darauf, dass es seinen Weg findet.“ Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Die Haltung entspricht dem Menschenbild von Rogers.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie vertraut auf die Entfaltungstendenz des Kindes.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das ist eine triebtheoretische Sicht nach Freud.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie will die subjektive Erfahrung des Kindes verstehen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Rogers hält den Menschen für gut, deshalb braucht es keine Erziehung.“",
+     "aussagen": [
+      {
+       "text": "Die Aussage vereinfacht: Rogers betont das Klima, in dem sich der Mensch positiv entwickelt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Erziehung schafft nach Rogers Wertschätzung und Verständnis.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Rogers hält jedes Verhalten für gut.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Entscheidend ist nicht der Mensch als solcher, sondern das Klima.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Humanistisches Menschenbild",
+       "items": [
+        "Mensch ist positiv und konstruktiv",
+        "Vertrauen in die eigenen Möglichkeiten",
+        "Begleiten und Ermutigen",
+        "Verstehen der subjektiven Sicht"
+       ]
+      },
+      {
+       "name": "Anderes Menschenbild",
+       "items": [
+        "Mensch durch Triebe gesteuert",
+        "Verhalten durch Verstärkung geformt",
+        "Lenken und Grenzen setzen als Hauptweg",
+        "Mensch als Bündel von Reaktionen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Die personenzentrierte Theorie gilt als {{dritte Kraft}} der Psychologie. Ihre Stärke ist das {{positive}} Menschenbild. Ihre Grenze liegt darin, dass es eine {{Annahme}} ist und kein {{Beweis}}. Man sollte daher beide Sichtweisen als {{Modelle}} verstehen.",
+     "woerter": [
+      "dritte Kraft",
+      "positive",
+      "Annahme",
+      "Beweis",
+      "Modelle",
+      "Gesetz",
+      "Triebe",
+      "Test"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile die beiden Haltungen. Gib der Leitung eine begründete Empfehlung.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Beide Haltungen sind Modelle. Vertrauen und Klima fördern Entwicklung, Grenzen geben Sicherheit. Empfehlung: Wertschätzende Begleitung mit klaren, begründeten Regeln.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_05"
+ ]
+}

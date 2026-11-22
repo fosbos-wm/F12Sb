@@ -1,0 +1,155 @@
+{
+ "titel": "Die Bewältigung von Erfahrungen: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Die Bewältigung von Erfahrungen**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Frau ist wütend auf ihren Mann, obwohl sie eine liebevolle Ehefrau sein will. Sie kann ihre Wut nicht in ihr Selbstbild einordnen."
+    },
+    {
+     "typ": "text",
+     "text": "Bei **hoher Selbstachtung** ist das Selbstkonzept **flexibel**: Die Person **erweitert** es und integriert die neue Erfahrung. Rogers nennt das **Offenheit für Erfahrung**."
+    },
+    {
+     "typ": "text",
+     "text": "Bei **geringer Selbstachtung** ist das Selbstkonzept **starr**: Es wird **verteidigt** durch **Wahrnehmungsverleugnung** oder **Wahrnehmungsverzerrung**. Der Konflikt bleibt bestehen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Hohe Selbstachtung → Erweiterung → Kongruenz. Geringe Selbstachtung → Abwehr → Inkongruenz bleibt."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wie geht ein Mensch mit hoher Selbstachtung mit Inkongruenz um?",
+     "optionen": [
+      "Er erweitert sein Selbstkonzept",
+      "Er verleugnet",
+      "Er ignoriert den Körper"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Er erweitert sein Selbstkonzept"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Erweiterung des Selbstkonzepts",
+       "neue Erfahrungen werden integriert"
+      ],
+      [
+       "Verteidigung des Selbstkonzepts",
+       "Erfahrungen werden abgewehrt"
+      ],
+      [
+       "Offenheit für Erfahrung",
+       "alle Erfahrungen können in die Selbststruktur aufgenommen werden"
+      ],
+      [
+       "hohe Selbstachtung",
+       "führt meist zu einem flexiblen Selbstkonzept"
+      ],
+      [
+       "geringe Selbstachtung",
+       "führt meist zu einem starren Selbstkonzept"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Bei hoher {{Selbstachtung}} kann das Selbstkonzept {{erweitert}} werden. Rogers nennt das völlige {{Offenheit}} für Erfahrung. Bei geringer Selbstachtung wird das Selbstkonzept {{verteidigt}}: durch Wahrnehmungsverleugnung oder {{Wahrnehmungsverzerrung}}. Der {{Konflikt}} bleibt bestehen.",
+     "woerter": [
+      "Selbstachtung",
+      "erweitert",
+      "Offenheit",
+      "verteidigt",
+      "Wahrnehmungsverzerrung",
+      "Konflikt",
+      "Trieb",
+      "Projektion",
+      "Rollenspiel"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Weg A treffen zu?",
+     "aussagen": [
+      {
+       "text": "Das Selbstkonzept wird erweitert.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es entsteht dauerhafte Abwehr.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Hohe Selbstachtung begünstigt ihn.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das Ergebnis ist Kongruenz.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Weg A",
+       "items": [
+        "hohe Selbstachtung",
+        "flexibles Selbstkonzept",
+        "Erweiterung",
+        "Kongruenz"
+       ]
+      },
+      {
+       "name": "Weg B",
+       "items": [
+        "geringe Selbstachtung",
+        "starres Selbstkonzept",
+        "Abwehr",
+        "Inkongruenz bleibt"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, wie sich Weg A und Weg B unterscheiden.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Weg A: Hohe Selbstachtung, flexibles Selbstkonzept, es wird erweitert. Weg B: Geringe Selbstachtung, starres Selbstkonzept, es wird durch Abwehr verteidigt und der Konflikt bleibt.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_15"
+ ]
+}

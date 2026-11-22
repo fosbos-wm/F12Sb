@@ -1,0 +1,138 @@
+{
+ "titel": "Begriff Persönlichkeit – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Begriff Persönlichkeit** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Kim (18) gilt in der Klasse als „die Ruhige“. Im Praktikum im Kindergarten erlebt die Anleiterin sie als aufmerksam und zuverlässig, aber kaum redselig. Bei der Abschlussfeier hält Kim zum ersten Mal eine kurze Rede und sagt hinterher: „Ich hätte nie gedacht, dass ich das kann.“ Ihre Mitschülerin meint: „Kim hat eben einen schwierigen Charakter.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Persönlichkeit = einzigartige Struktur relativ stabiler, aber veränderbarer Merkmale, erschlossen aus dem Verhalten."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen treffen zu? Fall: Jonas (17) war schon als Kind sehr ordentlich. Durch sein Praktikum in der Kita wird er lockerer, bleibt aber insgesamt gewissenhaft.",
+     "aussagen": [
+      {
+       "text": "Seine Gewissenhaftigkeit zeigt die Zeitstabilität.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Veränderung zeigt, dass Merkmale nicht starr sind.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Jonas’ Persönlichkeit ist deshalb widerlegt.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Aus seinem Verhalten schließt man auf sein Merkmal.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Persönlichkeit ist angeboren und ändert sich nie.“",
+     "aussagen": [
+      {
+       "text": "Die Aussage vernachlässigt die Veränderbarkeit.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Persönlichkeitsmerkmale sind relativ konstant, aber veränderbar.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Aussage ist vollständig richtig.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Erfahrungen können Merkmale verändern.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Zeitstabilität",
+       "items": [
+        "Mia ist seit Jahren still.",
+        "Jonas ist in jeder Klasse der Ordentliche.",
+        "Grundzüge bleiben erkennbar.",
+        "Verhalten ist über Wochen vorhersagbar."
+       ]
+      },
+      {
+       "name": "Veränderbarkeit",
+       "items": [
+        "Durch den Theaterkurs wird Mia mutiger.",
+        "Neue Erfahrungen verändern Eva.",
+        "Nach dem Praktikum wird Jonas lockerer.",
+        "Merkmale sind nicht starr."
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Die Aussage „Charakter ist unveränderlich“ halte ich für {{einseitig}}. Persönlichkeitsmerkmale sind zwar relativ {{konstant}}, aber auch {{veränderbar}}. Das zeigt zum Beispiel Mia, die im Theaterkurs mutiger wird. Ihre {{Einzigartigkeit}} bleibt dabei erhalten.",
+     "woerter": [
+      "einseitig",
+      "konstant",
+      "veränderbar",
+      "Einzigartigkeit",
+      "richtig",
+      "starr",
+      "zufällig"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile die Aussage: „Wer ruhig ist, bleibt ruhig.“",
+     "hinweis": "3–5 Sätze",
+     "muster": "Die Aussage stimmt nur teilweise: Merkmale sind relativ zeitstabil, aber veränderbar (Kims Rede). Fazit: Tendenzen bleiben meist erkennbar, sind aber nicht starr.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_01"
+ ]
+}

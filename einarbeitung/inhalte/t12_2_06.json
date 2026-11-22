@@ -1,0 +1,156 @@
+{
+ "titel": "Das Menschenbild der personenzentrierten Theorie: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Das Menschenbild der personenzentrierten Theorie**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Sieh dir spielende Kleinkinder an: Sie teilen, trösten, streiten und versöhnen sich. Ist der Mensch von Natur aus gut – oder muss man ihn zähmen?"
+    },
+    {
+     "typ": "text",
+     "text": "Rogers hält die menschliche Natur für grundsätzlich **positiv und konstruktiv**. Der Mensch strebt nach **Selbsterhaltung und Selbstverwirklichung** und kann sich **selbst regulierend** entwickeln. Wird der „gute“ Kern unterdrückt, wird er psychisch krank."
+    },
+    {
+     "typ": "text",
+     "text": "Wichtig ist das **Klima**: **Angstfreiheit**, **einfühlendes Verständnis**, **Wertschätzung und Akzeptierung** und **Aufrichtigkeit**. Freud sieht den Menschen dagegen als **triebbestimmt**."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Rogers: positiv, konstruktiv, sozial; Klima entscheidet. Freud: triebbestimmt, im Konflikt."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wie sieht Rogers die menschliche Natur?",
+     "optionen": [
+      "Grundsätzlich positiv und konstruktiv",
+      "Grundsätzlich triebgesteuert",
+      "Grundsätzlich böse"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Grundsätzlich positiv und konstruktiv"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "positives Menschenbild",
+       "Der Mensch ist konstruktiv, sozial und entwicklungsfähig"
+      ],
+      [
+       "selbst regulierend",
+       "der Mensch entwickelt sich von selbst in Richtung Reife"
+      ],
+      [
+       "Klima",
+       "zwischenmenschliche Bedingungen für Entfaltung"
+      ],
+      [
+       "Angstfreiheit",
+       "Abwesenheit von Bedrohung"
+      ],
+      [
+       "einfühlendes Verständnis",
+       "sich in das Erleben des anderen hineinversetzen"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Rogers hält die menschliche Natur für grundsätzlich {{positiv}} und {{konstruktiv}}. Der Mensch kann sich {{selbst regulierend}} entwickeln. Entscheidend ist das zwischenmenschliche {{Klima}} mit Angstfreiheit, einfühlendem {{Verständnis}}, {{Wertschätzung}} und Aufrichtigkeit. Freud sieht den Menschen dagegen als {{triebbestimmt}}.",
+     "woerter": [
+      "positiv",
+      "konstruktiv",
+      "selbst regulierend",
+      "Klima",
+      "Verständnis",
+      "Wertschätzung",
+      "triebbestimmt",
+      "bösartig",
+      "Strafe",
+      "Belohnung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Klima treffen zu?",
+     "aussagen": [
+      {
+       "text": "Angstfreiheit gehört zum förderlichen Klima.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Wertschätzung hängt von der Leistung ab.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Einfühlendes Verständnis gehört dazu.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Aufrichtigkeit ist nicht nötig.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Rogers",
+       "items": [
+        "Mensch grundsätzlich konstruktiv",
+        "Ziel: Selbstverwirklichung",
+        "Verhalten durch Aktualisierungstendenz",
+        "Vertrauen und Begleiten"
+       ]
+      },
+      {
+       "name": "Freud",
+       "items": [
+        "Mensch im Triebkonflikt",
+        "Ziel: Triebe bändigen",
+        "Verhalten durch Triebenergie",
+        "Lenkung und Grenzen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Vergleiche kurz das Menschenbild von Rogers mit dem von Freud.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Rogers: Der Mensch ist grundsätzlich positiv und konstruktiv und strebt nach Selbstverwirklichung. Freud: Der Mensch ist triebbestimmt und im Konflikt zwischen Trieben und Abwehr.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_06"
+ ]
+}

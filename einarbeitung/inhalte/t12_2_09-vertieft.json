@@ -1,0 +1,139 @@
+{
+ "titel": "Bildung und Wirkung des Selbstkonzepts – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Bildung und Wirkung des Selbstkonzepts** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Jule (17) hält sich für „kontaktscheu“. Im Hortpraktikum bleibt sie meist im Hintergrund. Die Anleiterin sagt: „Du hast so ein gutes Gespür für die Kinder. Sprich sie ruhig öfter an.“ Jule traut sich einmal, ein Kind anzusprechen, und es freut sich."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Erfahrungen + Forderungen + Beziehungsbotschaften → Selbstkonzept → Wahrnehmung und Verhalten → Bestätigung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Nico (9) hört oft: „Du bist unordentlich.“ Er räumt kaum auf und denkt: „Ich bin eben so.“ Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es handelt sich um eine Du-Botschaft.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie kann sein Selbstkonzept negativ prägen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das Verhalten ist unabhängig vom Selbstkonzept.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Eine Rückmeldung zum Verhalten wäre günstiger.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Schlechte Noten sind allein die Ursache für ein ungünstiges Selbstkonzept.“",
+     "aussagen": [
+      {
+       "text": "Die Wirkung läuft auch umgekehrt: ein ungünstiges Selbstkonzept kann Leistungen mit bedingen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das Selbstkonzept wird auch durch Bezugspersonen geprägt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Noten wirken immer allein.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Wechselseitige Beeinflussung ist plausibel.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Wirkung: Bestätigung positiv",
+       "items": [
+        "Kontakte suchen → Erfolgserlebnis",
+        "Erfolg stärkt Selbstvertrauen",
+        "Mehr Übung führt zu Sicherheit",
+        "Selbstbild wird gefestigt"
+       ]
+      },
+      {
+       "name": "Wirkung: Bestätigung negativ",
+       "items": [
+        "Kontakte meiden → Misserfolg",
+        "Misserfolg verstärkt Selbstzweifel",
+        "Weniger Übung führt zu Unsicherheit",
+        "Negatives Selbstbild bestätigt sich"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Das Selbstkonzept führt zu {{Erfahrungen}}, die es {{bestätigen}}. Das kann einen {{Kreislauf}} bilden. Lehrkräfte können ihn durch {{Erfolgserlebnisse}} und Rückmeldung zum {{Verhalten}} durchbrechen.",
+     "woerter": [
+      "Erfahrungen",
+      "bestätigen",
+      "Kreislauf",
+      "Erfolgserlebnisse",
+      "Verhalten",
+      "Strafen",
+      "Person",
+      "Triebe"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile: „Man ist, wie man ist – das Selbstkonzept ändert sich nicht.“",
+     "hinweis": "3–5 Sätze",
+     "muster": "Das Selbstkonzept ist relativ stabil, aber veränderbar. Neue Erfahrungen (Jules Erfolg) können es verändern; die Aussage ist daher einseitig.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_09"
+ ]
+}

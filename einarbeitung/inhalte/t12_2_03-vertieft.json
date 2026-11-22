@@ -1,0 +1,139 @@
+{
+ "titel": "Big Five – Info – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Big Five – Info** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In einem Team der Jugendhilfe sagt die Leiterin: „Wir brauchen jemanden mit hoher Gewissenhaftigkeit für die Akten und jemanden mit hoher Verträglichkeit für die Elterngespräche.“ Ein Kollege meint: „Das ist doch Schubladendenken – Menschen sind mehr als fünf Zahlen.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "OCEAN: Offenheit, Gewissenhaftigkeit, Extraversion, Verträglichkeit, Neurotizismus. Beschreiben, nicht erklären."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Paul (16) liebt Partys, ist laut und aktiv, vergisst aber oft Termine und lässt sein Zimmer chaotisch. Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Seine Extraversion ist hoch ausgeprägt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Seine Gewissenhaftigkeit ist eher niedrig.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Beide Merkmale schließen sich aus.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Man beschreibt ihn mit mehreren Dimensionen gleichzeitig.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Das Big-Five-Modell erklärt, warum ein Mensch so wird.“",
+     "aussagen": [
+      {
+       "text": "Es beschreibt Ausprägungen, erklärt aber keine Entstehung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Faktorenanalytische Modelle erklären die Entwicklung der Persönlichkeit.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Für Erklärungen braucht man andere Theorien, z. B. Rogers oder Bandura.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Ein Profil zeigt, wie stark Merkmale ausgeprägt sind.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "hohe Ausprägung",
+       "items": [
+        "Extraversion: gesprächig und gesellig",
+        "Neurotizismus: ängstlich und nervös",
+        "Gewissenhaftigkeit: pünktlich und ordentlich",
+        "Offenheit: neugierig auf Neues"
+       ]
+      },
+      {
+       "name": "niedrige Ausprägung",
+       "items": [
+        "Extraversion: zurückhaltend und distanziert",
+        "Neurotizismus: ruhig und gelassen",
+        "Gewissenhaftigkeit: nachlässig",
+        "Offenheit: konservativ, verschlossen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Das Big-Five-Modell ist ein {{übersichtliches}} Modell, das in verschiedenen {{Kulturen}} gefunden wurde. Seine Grenze ist: Es {{beschreibt}} nur und {{erklärt}} nicht, wie die Persönlichkeit entsteht. Deshalb braucht man ergänzend andere {{Theorien}}.",
+     "woerter": [
+      "übersichtliches",
+      "Kulturen",
+      "beschreibt",
+      "erklärt",
+      "Theorien",
+      "Test",
+      "Therapie",
+      "Triebe"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile den Einwand des Kollegen.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Der Einwand ist teilweise berechtigt: fünf Faktoren erfassen nicht alles, ein Profil ist keine Bewertung. Aber als Orientierung ist das Modell nützlich, wenn man Ausprägungen als Tendenzen versteht und im Einzelfall genau hinsieht.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_03"
+ ]
+}

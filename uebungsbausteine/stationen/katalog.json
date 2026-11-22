@@ -7731,5 +7731,5476 @@
    "t12_1_10"
   ],
   "neu12": true
+ },
+ {
+  "id": "lb2n-01-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-01-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-01-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Kernwissen",
+  "datei": "luecken.html?set=lb2n-01-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-01-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-01-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-01-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-01-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-01-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-01-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-01-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-01-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-01-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-01-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-01-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-01-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-01-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Persönlichkeit – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-01-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Persönlichkeit",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Begriff Persönlichkeit",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_01"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-02-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Kernwissen",
+  "datei": "luecken.html?set=lb2n-02-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-02-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-02-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-02-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-02-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-02-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-02-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-02-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Testverfahren und Persönlichkeitsinventare – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-02-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Testverfahren und Persönlichkeitsinventare",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Testverfahren und Persönlichkeitsinventare",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_02"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-03-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Kernwissen",
+  "datei": "luecken.html?set=lb2n-03-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-03-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-03-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-03-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-03-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-03-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-03-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-03-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Info – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-03-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Info",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Big Five – Info",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_03"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-04-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Kernwissen",
+  "datei": "luecken.html?set=lb2n-04-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-04-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-04-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-04-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-04-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-04-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-04-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-04-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Big Five – Vertiefung – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-04-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Big Five – Vertiefung",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Big Five – Vertiefung",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-05-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Kernwissen",
+  "datei": "luecken.html?set=lb2n-05-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-05-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-05-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-05-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-05-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-05-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-05-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-05-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Carl Rogers und die personenzentrierte Theorie – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-05-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Carl Rogers und die personenzentrierte Theorie",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_05"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-06-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Kernwissen",
+  "datei": "luecken.html?set=lb2n-06-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-06-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-06-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-06-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-06-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-06-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-06-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-06-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Menschenbild der personenzentrierten Theorie – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-06-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Menschenbild der personenzentrierten Theorie",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Das Menschenbild der personenzentrierten Theorie",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_06"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-07-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Kernwissen",
+  "datei": "luecken.html?set=lb2n-07-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-07-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-07-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-07-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-07-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-07-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-07-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-07-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aktualisierungstendenz und organismischer Bewertungsprozess – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-07-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aktualisierungstendenz und organismischer Bewertungsprozess",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_07"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-08-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Kernwissen",
+  "datei": "luecken.html?set=lb2n-08-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-08-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-08-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-08-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-08-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-08-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-08-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-08-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das Selbstkonzept – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-08-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das Selbstkonzept",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Das Selbstkonzept",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-09-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Kernwissen",
+  "datei": "luecken.html?set=lb2n-09-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-09-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-09-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-09-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-09-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-09-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-09-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-09-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bildung und Wirkung des Selbstkonzepts – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-09-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Bildung und Wirkung des Selbstkonzepts",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_09"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-10-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Kernwissen",
+  "datei": "luecken.html?set=lb2n-10-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-10-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-10-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-10-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-10-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-10-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-10-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-10-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Selbstregulation als Persönlichkeitsmerkmal – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-10-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Selbstregulation als Persönlichkeitsmerkmal",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Selbstregulation als Persönlichkeitsmerkmal",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_10"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-11-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Kernwissen",
+  "datei": "luecken.html?set=lb2n-11-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-11-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-11-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-11-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-11-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-11-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-11-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-11-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Identität und das Identitätsmodell nach Marcia – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-11-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Identität und das Identitätsmodell nach Marcia",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Identität und das Identitätsmodell nach Marcia",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_11"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-12-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Kernwissen",
+  "datei": "luecken.html?set=lb2n-12-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-12-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-12-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-12-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-12-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-12-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-12-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-12-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Flexibilität des Selbstkonzepts und Abwehr – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-12-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Flexibilität des Selbstkonzepts und Abwehr",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-13-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Kernwissen",
+  "datei": "luecken.html?set=lb2n-13-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-13-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-13-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-13-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-13-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-13-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-13-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-13-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Zwei Ebenen des Bewertens – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-13-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Zwei Ebenen des Bewertens",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Zwei Ebenen des Bewertens",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_13"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-14-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Kernwissen",
+  "datei": "luecken.html?set=lb2n-14-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-14-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-14-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-14-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-14-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-14-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-14-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-14-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kongruenz und Inkongruenz – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-14-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kongruenz und Inkongruenz",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Kongruenz und Inkongruenz",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_14"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-15-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Kernwissen",
+  "datei": "luecken.html?set=lb2n-15-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-15-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-15-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-15-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-15-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-15-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-15-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-15-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Bewältigung von Erfahrungen – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-15-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Bewältigung von Erfahrungen",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Die Bewältigung von Erfahrungen",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_15"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-16-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Kernwissen",
+  "datei": "luecken.html?set=lb2n-16-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-16-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-16-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-16-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-16-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-16-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-16-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-16-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Die Entstehung psychischer Störungen – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-16-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Die Entstehung psychischer Störungen",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Die Entstehung psychischer Störungen",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-17-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Kernwissen",
+  "datei": "luecken.html?set=lb2n-17-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-17-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-17-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-17-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-17-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-17-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-17-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-17-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Bedeutung der personenzentrierten Theorie für die Erziehung – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-17-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Bedeutung der personenzentrierten Theorie für die Erziehung",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_17"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-18-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Kernwissen",
+  "datei": "luecken.html?set=lb2n-18-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-18-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-18-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-18-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-18-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-18-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-18-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-18-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung der personenzentrierten Theorie – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-18-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung der personenzentrierten Theorie",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Kritische Würdigung der personenzentrierten Theorie",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_18"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb2n-19-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Kernwissen",
+  "datei": "luecken.html?set=lb2n-19-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Wissensfragen",
+  "datei": "rennen.html?set=lb2n-19-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb2n-19-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb2n-19-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Aussagen prüfen",
+  "datei": "kprim.html?set=lb2n-19-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb2n-19-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb2n-19-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-19-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – Begründetes Urteil",
+  "datei": "luecken.html?set=lb2n-19-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_19"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-kprim-test1",
+  "titel": "K-Prim-Test 1 (Stunde 1–4)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 1 bis 4",
+  "datei": "kprim.html?set=lb2n-kprim-test1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 1",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "K-Prim-Test 1",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_01",
+   "t12_2_02",
+   "t12_2_03",
+   "t12_2_04"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-kprim-test2",
+  "titel": "K-Prim-Test 2 (Stunde 5–8)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 5 bis 8",
+  "datei": "kprim.html?set=lb2n-kprim-test2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 2",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "K-Prim-Test 2",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_05",
+   "t12_2_06",
+   "t12_2_07",
+   "t12_2_08"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-kprim-test3",
+  "titel": "K-Prim-Test 3 (Stunde 9–12)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 9 bis 12",
+  "datei": "kprim.html?set=lb2n-kprim-test3",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 3",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "K-Prim-Test 3",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_09",
+   "t12_2_10",
+   "t12_2_11",
+   "t12_2_12"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-kprim-test4",
+  "titel": "K-Prim-Test 4 (Stunde 13–16)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 13 bis 16",
+  "datei": "kprim.html?set=lb2n-kprim-test4",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 4",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "K-Prim-Test 4",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_13",
+   "t12_2_14",
+   "t12_2_15",
+   "t12_2_16"
+  ],
+  "neu12": true
+ },
+ {
+  "id": "lb2n-kprim-test5",
+  "titel": "K-Prim-Test 5 (Stunde 16–19)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 16 bis 19",
+  "datei": "kprim.html?set=lb2n-kprim-test5",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 5",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 2",
+   "K-Prim-Test 5",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_2_16",
+   "t12_2_17",
+   "t12_2_18",
+   "t12_2_19"
+  ],
+  "neu12": true
  }
 ]

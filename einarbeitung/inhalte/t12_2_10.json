@@ -1,0 +1,154 @@
+{
+ "titel": "Selbstregulation als Persönlichkeitsmerkmal: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Selbstregulation als Persönlichkeitsmerkmal**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Anja will in Mathe mindestens 9 Punkte. Sie überlegt, wie die Prüfung ablaufen wird, erstellt einen Lernplan und denkt: „Wenn ich übe, kann ich das.“ Nach der Klausur prüft sie, was gut lief."
+    },
+    {
+     "typ": "text",
+     "text": "**Selbstregulation** bezeichnet die Fähigkeit, sich selbst zu motivieren, sich Ziele zu setzen, Strategien zu entwerfen sowie das fortlaufende Verhalten zu bewerten und entsprechend zu ändern. Grundlage sind **symbolische Repräsentation**, **vorausschauendes Denken** und **Selbstreflexion**."
+    },
+    {
+     "typ": "text",
+     "text": "Zwei Mechanismen wirken: **Selbstwirksamkeit** (subjektive Überzeugung, anspruchsvolle Situationen zu bewältigen) und **Selbstevaluation** (Bewertung des eigenen Erlebens und Verhaltens)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Selbstregulation = Ziele, Strategien, Bewerten. Selbstwirksamkeit = „Ich kann das.“ Selbstevaluation = „Wie gut war ich?“"
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was ist Selbstregulation?",
+     "optionen": [
+      "Sich selbst motivieren, Ziele setzen, Strategien entwerfen, Verhalten bewerten und ändern",
+      "Ein Trieb",
+      "Eine Intelligenzstufe"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Sich selbst motivieren, Ziele setzen, Strategien entwerfen, Verhalten bewerten und ändern"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Selbstregulation",
+       "Fähigkeit, sich zu motivieren, Ziele zu setzen, Strategien zu entwerfen und Verhalten zu bewerten und zu ändern"
+      ],
+      [
+       "Selbstwirksamkeit",
+       "Überzeugung, anspruchsvolle künftige Situationen bewältigen zu können"
+      ],
+      [
+       "Selbstevaluation",
+       "Bewertung des eigenen Erlebens und Verhaltens, der eigenen Stärken und Schwächen"
+      ],
+      [
+       "Kompetenzerwartung",
+       "Einschätzung der eigenen Fähigkeiten, ein Ziel zu erreichen"
+      ],
+      [
+       "Ergebniserwartung",
+       "Abwägen von Erfolg oder Misserfolg"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Albert {{Bandura}} beschreibt in der {{sozial-kognitiven}} Theorie die Selbstregulation. Voraussetzungen sind {{symbolische Repräsentation}}, vorausschauendes Denken und {{Selbstreflexion}}. Zwei Mechanismen wirken: {{Selbstwirksamkeit}} und {{Selbstevaluation}}. Entscheidend ist, ob die Person {{glaubt}}, die Situation bewältigen zu können.",
+     "woerter": [
+      "Bandura",
+      "sozial-kognitiven",
+      "symbolische Repräsentation",
+      "Selbstreflexion",
+      "Selbstwirksamkeit",
+      "Selbstevaluation",
+      "glaubt",
+      "Triebe",
+      "Es",
+      "objektive Lage"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Selbstregulation treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie umfasst Ziele setzen und Verhalten bewerten.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist bei allen Menschen gleich stark.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie wird durch Modelllernen beeinflusst.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist ein angeborener Trieb.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Selbstwirksamkeit",
+       "items": [
+        "„Ich schaffe das.“",
+        "Überzeugung, Anforderungen zu bewältigen",
+        "Wirkt vor der Handlung"
+       ]
+      },
+      {
+       "name": "Selbstevaluation",
+       "items": [
+        "„Das war gut/schlecht gelaufen.“",
+        "Bewertung der eigenen Stärken und Schwächen",
+        "Wirkt nach der Handlung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre Selbstwirksamkeit und Selbstevaluation an einem Beispiel.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Selbstwirksamkeit: Vor der Prüfung denkt Anja „Ich schaffe das“. Selbstevaluation: Nach der Prüfung bewertet sie, was gut lief und was nicht.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_10"
+ ]
+}

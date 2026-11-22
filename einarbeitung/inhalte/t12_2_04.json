@@ -1,0 +1,161 @@
+{
+ "titel": "Big Five – Vertiefung: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Big Five – Vertiefung**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Im Teamgespräch sagt eine Kollegin: „Tom ist eben unorganisiert.“ Du hast sein Big-Five-Profil gesehen: Offenheit hoch, Gewissenhaftigkeit niedrig."
+    },
+    {
+     "typ": "text",
+     "text": "Ein **Profil** zeigt die **relative Ausprägung** der fünf Faktoren im Vergleich zu anderen Menschen. Es ist **Beschreibung, keine Bewertung**."
+    },
+    {
+     "typ": "text",
+     "text": "Beschreibe in drei Schritten: **nennen** (Faktor und Ausprägung), **erklären** (Bedeutung), **verdeutlichen** (Verhalten aus dem Fall)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Profil lesen: nennen – erklären – verdeutlichen. Beschreiben, nicht bewerten."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was zeigt ein Big-Five-Profil?",
+     "optionen": [
+      "Die Ausprägung der fünf Faktoren",
+      "Nur die Intelligenz",
+      "Die Noten"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Die Ausprägung der fünf Faktoren"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Profil",
+       "Werte der fünf Faktoren einer Person"
+      ],
+      [
+       "relative Ausprägung",
+       "Vergleich mit anderen Menschen, keine Note"
+      ],
+      [
+       "nennen",
+       "Faktor und Ausprägung festhalten"
+      ],
+      [
+       "erklären",
+       "Bedeutung der Ausprägung beschreiben"
+      ],
+      [
+       "verdeutlichen",
+       "mit Verhalten aus dem Fall belegen"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Ein Big-Five-Profil enthält für jeden {{Faktor}} eine {{Ausprägung}}. Die Werte sind {{relative}} Ausprägungen im Vergleich zu anderen. Beim Beschreiben geht man vor: {{nennen}}, erklären, {{verdeutlichen}}. Ein Profil ist eine {{Beschreibung}}, keine Bewertung.",
+     "woerter": [
+      "Faktor",
+      "Ausprägung",
+      "relative",
+      "nennen",
+      "verdeutlichen",
+      "Beschreibung",
+      "Note",
+      "Diagnose",
+      "Strafe"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Lesen eines Profils treffen zu?",
+     "aussagen": [
+      {
+       "text": "Die Werte sind relativ zu anderen Menschen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Ein Profil ist eine Schulnote.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Ein Profil beschreibt Tendenzen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Ein Profil sagt Verhalten in jeder Situation sicher voraus.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "nennen",
+       "items": [
+        "Offenheit: hoch",
+        "Gewissenhaftigkeit: niedrig",
+        "Neurotizismus: mittel"
+       ]
+      },
+      {
+       "name": "erklären",
+       "items": [
+        "Das heißt: vielfältige Interessen",
+        "Das bedeutet: wenig Selbstorganisation",
+        "Das heißt: leicht aus dem Gleichgewicht"
+       ]
+      },
+      {
+       "name": "verdeutlichen",
+       "items": [
+        "Tom liest Fantasy und besucht Museen.",
+        "Tom vergisst Abgabetermine.",
+        "Tom schläft vor Klausuren schlecht."
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beschreibe in drei Schritten (nennen, erklären, verdeutlichen) einen Faktor einer Person aus einem Fall.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Extraversion: hoch. Das heißt hohe Geselligkeit und Gesprächigkeit. Im Fall spricht die Person in der Pause alle neuen Mitschüler an.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_04"
+ ]
+}

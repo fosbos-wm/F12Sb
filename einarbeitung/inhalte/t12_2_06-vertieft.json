@@ -1,0 +1,139 @@
+{
+ "titel": "Das Menschenbild der personenzentrierten Theorie – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Das Menschenbild der personenzentrierten Theorie** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Kita überarbeitet ihr Leitbild. Das Team ist uneins: Die einen schreiben „Wir vertrauen den Kindern und begleiten ihre Entwicklung.“ Die anderen: „Wir setzen klare Grenzen, weil Kinder sonst ihre Triebe ausleben.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Rogers: positiv, konstruktiv, sozial; Klima entscheidet. Freud: triebbestimmt, im Konflikt."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Ein Hortleiter sagt: „Kinder sind Wesen, die man bändigen muss.“ Seine Kollegin: „Kinder wollen wachsen, wenn man sie lässt.“ Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Die Kollegin vertritt ein Menschenbild nach Rogers.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der Leiter steht eher der triebtheoretischen Sicht nahe.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Beide Sichten sind bewiesen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Das Menschenbild bestimmt das pädagogische Handeln.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Wenn der Mensch von Natur aus gut ist, gibt es kein destruktives Verhalten.“",
+     "aussagen": [
+      {
+       "text": "Rogers sieht auch destruktive Kräfte.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Er nimmt an, dass sie aus Angst und Abwehr entstehen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Aussage trifft Rogers’ Position genau.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Das Klima spielt eine wichtige Rolle.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Rogers",
+       "items": [
+        "Grundtendenz: Potenzial entwickeln",
+        "Ziel: Selbstverwirklichung",
+        "Motivation: Aktualisierungstendenz",
+        "Erziehung: Begleiten"
+       ]
+      },
+      {
+       "name": "Freud",
+       "items": [
+        "Grundkonflikt: Triebe gegen Abwehr",
+        "Ziel: Triebe bändigen oder kanalisieren",
+        "Motivation: Triebenergie",
+        "Erziehung: Lenken und Grenzen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Das {{Menschenbild}} ist eine {{Annahme}}, kein Beweis. Rogers’ Sicht führt zu einer {{begleitenden}} Haltung, Freuds Sicht eher zu {{Lenkung}}. In der Praxis ist ein {{Klima}} aus Wertschätzung und klaren Regeln sinnvoll.",
+     "woerter": [
+      "Menschenbild",
+      "Annahme",
+      "begleitenden",
+      "Lenkung",
+      "Klima",
+      "Strafe",
+      "Beweis",
+      "Zufall"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile, ob man eines der Menschenbilder beweisen kann.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Menschenbilder sind Annahmen, keine Beweise. Wertvoll ist, ihre Folgen für das Handeln zu reflektieren.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_06"
+ ]
+}

@@ -1,0 +1,156 @@
+{
+ "titel": "Flexibilität des Selbstkonzepts und Abwehr: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Flexibilität des Selbstkonzepts und Abwehr**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Person ist überzeugt, hoch intelligent zu sein. Im Studium macht sie andere Erfahrungen. Sie hält ihr Selbstbild aufrecht, ignoriert die Erfahrungen oder deutet sie um."
+    },
+    {
+     "typ": "text",
+     "text": "Ob ein Selbstkonzept **flexibel** oder **starr** ist, hängt von der **Selbstachtung** ab und diese von der **bedingungslosen positiven Beachtung**, die ein Mensch erfahren hat."
+    },
+    {
+     "typ": "text",
+     "text": "Bei einem starren Selbstkonzept werden bedrohliche Erfahrungen abgewehrt: **Wahrnehmungsverleugnung** (negiert, vom Bewusstsein ausgeschlossen) oder **Wahrnehmungsverzerrung** (Bedeutung entstellt)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Hohe Selbstachtung → flexibel → Integration. Geringe Selbstachtung → starr → Abwehr."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wovon hängt die Flexibilität des Selbstkonzepts ab?",
+     "optionen": [
+      "Von der Selbstachtung",
+      "Vom Alter",
+      "Von der Körpergröße"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Von der Selbstachtung"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "flexibles Selbstkonzept",
+       "Erfahrungen können integriert werden"
+      ],
+      [
+       "starres Selbstkonzept",
+       "Erfahrungen, die nicht passen, werden abgewehrt"
+      ],
+      [
+       "Selbstachtung",
+       "Wertschätzung der eigenen Person"
+      ],
+      [
+       "bedingungslose positive Beachtung",
+       "Wertschätzung unabhängig von Leistung und Verhalten"
+      ],
+      [
+       "Wahrnehmungsverleugnung",
+       "bedrohliche Erfahrung wird negiert und vom Bewusstsein ausgeschlossen"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Ein {{flexibles}} Selbstkonzept entsteht bei hoher {{Selbstachtung}} und bedingungsloser positiver {{Beachtung}}. Bei einem {{starren}} Selbstkonzept werden bedrohliche Erfahrungen abgewehrt: durch {{Wahrnehmungsverleugnung}} oder {{Wahrnehmungsverzerrung}}. Ein sehr variables Selbstbild über Rollen kann auf ein fehlendes {{Kern-Selbst}} hinweisen.",
+     "woerter": [
+      "flexibles",
+      "Selbstachtung",
+      "Beachtung",
+      "starren",
+      "Wahrnehmungsverleugnung",
+      "Wahrnehmungsverzerrung",
+      "Kern-Selbst",
+      "Verdrängung",
+      "Projektion",
+      "Trieb"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Abwehr nach Rogers treffen zu?",
+     "aussagen": [
+      {
+       "text": "Abwehr schützt ein starres Selbstkonzept vor Bedrohung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Abwehr tritt vor allem bei hoher Selbstachtung auf.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Wahrnehmungsverleugnung schließt Erfahrungen vom Bewusstsein aus.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Wahrnehmungsverzerrung ändert das Selbstkonzept sofort.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "flexibel",
+       "items": [
+        "hohe Selbstachtung",
+        "Erfahrungen werden integriert",
+        "bedingungslose positive Beachtung erlebt",
+        "Selbstkonzept verändert sich mit Erfahrungen"
+       ]
+      },
+      {
+       "name": "starr",
+       "items": [
+        "geringe Selbstachtung",
+        "Erfahrungen werden abgewehrt",
+        "wenig positive Beachtung",
+        "Wahrnehmungsverleugnung oder -verzerrung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre den Zusammenhang zwischen Selbstachtung und Flexibilität des Selbstkonzepts.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Wer bedingungslose positive Beachtung erfährt, hat hohe Selbstachtung. Dann können Erfahrungen in das Selbstkonzept integriert werden. Bei geringer Selbstachtung wird das Selbstkonzept starr und Erfahrungen werden abgewehrt.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_12"
+ ]
+}

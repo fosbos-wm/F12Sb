@@ -1,0 +1,137 @@
+{
+ "titel": "Selbstregulation als Persönlichkeitsmerkmal – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Selbstregulation als Persönlichkeitsmerkmal** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Anja (17) schreibt in zwei Wochen Mathe. Sie will mindestens 9 Punkte. Sie erstellt einen Lernplan, sagt sich: „Wenn ich übe, kann ich das“ und rechnet täglich Aufgaben. Nach der Klausur schreibt sie auf, was gut und weniger gut lief."
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Selbstregulation = Ziele, Strategien, Bewerten. Selbstwirksamkeit = „Ich kann das.“ Selbstevaluation = „Wie gut war ich?“"
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Anja erzählt der Freundin, wie die Klausur ablief.",
+       "symbolische Repräsentation"
+      ],
+      [
+       "Anja überlegt, wie die Prüfung nächste Woche ablaufen wird.",
+       "vorausschauendes Denken"
+      ],
+      [
+       "„Ich will in Mathe mindestens 9 Punkte.“",
+       "Ziel setzen"
+      ],
+      [
+       "„Wenn ich übe, kann ich das.“",
+       "Kompetenzerwartung"
+      ],
+      [
+       "„Mit dem Lernplan stehen meine Chancen gut.“",
+       "Ergebniserwartung"
+      ],
+      [
+       "Anja bewertet nach der Klausur, was gut und schlecht lief.",
+       "Selbstevaluation"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was meint Selbstwirksamkeit?",
+     "optionen": [
+      "Objektive Leistungsfähigkeit",
+      "Subjektive Überzeugung, anspruchsvolle Situationen bewältigen zu können",
+      "Genetische Begabung"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Subjektive Überzeugung, anspruchsvolle Situationen bewältigen zu können"
+    },
+    {
+     "typ": "mc",
+     "frage": "Was ist Selbstevaluation?",
+     "optionen": [
+      "Messung durch Fremde",
+      "Vergleich mit Tieren",
+      "Bewertung des eigenen Erlebens und Verhaltens"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Bewertung des eigenen Erlebens und Verhaltens"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Selbstwirksamkeit treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie ist eine subjektive Überzeugung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie hängt allein von der objektiven Situation ab.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie bezieht sich auf künftige, anspruchsvolle Situationen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist identisch mit Selbstevaluation.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre drei Teilaspekte der Selbstregulation an Anja.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Ziel: 9 Punkte; Strategie: Lernplan, tägliche Aufgaben; Kompetenzerwartung: „Wenn ich übe, kann ich das“.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, wie Selbstwirksamkeit und Selbstevaluation zusammenwirken.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Selbstwirksamkeit steuert vor der Handlung, Selbstevaluation bewertet danach; beides beeinflusst das nächste Ziel.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_10"
+ ]
+}

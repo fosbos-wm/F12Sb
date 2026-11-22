@@ -1,0 +1,155 @@
+{
+ "titel": "Das Selbstkonzept: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Das Selbstkonzept**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Wie würdest du dich selbst beschreiben: mutig oder furchtsam, still oder gesprächig, gewissenhaft oder nachlässig? Und woher weißt du das?"
+    },
+    {
+     "typ": "text",
+     "text": "Das **Selbstkonzept** ist die Gesamtheit aller Wahrnehmungen, Urteilsbildungen und Bewertungen über sich selbst. Es ist durch **Erfahrungen** gebildet, im Allgemeinen **bewusst**, relativ **zeitstabil** und **situationsübergreifend**, aber veränderbar."
+    },
+    {
+     "typ": "text",
+     "text": "Es besteht aus dem **Real-Selbst** (was ich bin) und dem **Ideal-Selbst** (was ich sein möchte). Ein geringer Abstand (**Diskrepanz**) führt zu Ausgeglichenheit, ein großer zu Spannung."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Selbstkonzept = Real-Selbst + Ideal-Selbst. Kleine Diskrepanz = ausgeglichen, große = Spannung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was ist das Selbstkonzept?",
+     "optionen": [
+      "Gesamtheit aller Wahrnehmungen, Urteilsbildungen und Bewertungen über sich selbst",
+      "Ein Teil des Es",
+      "Die Summe aller Noten"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Gesamtheit aller Wahrnehmungen, Urteilsbildungen und Bewertungen über sich selbst"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Selbstkonzept",
+       "Gesamtheit aller Wahrnehmungen, Urteilsbildungen und Bewertungen über sich selbst"
+      ],
+      [
+       "phänomenales Feld",
+       "individuelles Bezugssystem, die einzigartige Realität eines Menschen"
+      ],
+      [
+       "Real-Selbst",
+       "tatsächliches Bild einer Person von sich"
+      ],
+      [
+       "Ideal-Selbst",
+       "Bild davon, wie man gern sein möchte"
+      ],
+      [
+       "Diskrepanz",
+       "Abstand zwischen Real- und Ideal-Selbst"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Das {{Selbstkonzept}} ist die Gesamtheit aller {{Wahrnehmungen}}, Urteilsbildungen und {{Bewertungen}} über sich selbst. Es besteht aus dem {{Real-Selbst}} und dem {{Ideal-Selbst}}. Ist der Abstand, die {{Diskrepanz}}, gering, fühlt sich die Person {{ausgeglichen}}. Das Selbstkonzept ist relativ {{zeitstabil}}, aber nicht unveränderbar.",
+     "woerter": [
+      "Selbstkonzept",
+      "Wahrnehmungen",
+      "Bewertungen",
+      "Real-Selbst",
+      "Ideal-Selbst",
+      "Diskrepanz",
+      "ausgeglichen",
+      "zeitstabil",
+      "Es",
+      "Unbewusstes",
+      "Über-Ich"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Selbstkonzept treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es ist durch Erfahrungen gebildet.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es ist unveränderbar.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Es ist im Allgemeinen bewusst.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Rogers sieht das Selbst als innere Instanz wie Freud.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Real-Selbst",
+       "items": [
+        "„Ich bin ziemlich schüchtern.“",
+        "„Ich bin gut in Mathe.“",
+        "„Ich lerne gründlich.“"
+       ]
+      },
+      {
+       "name": "Ideal-Selbst",
+       "items": [
+        "„Ich möchte selbstbewusst sein.“",
+        "„Ich müsste Everybody’s Darling sein.“",
+        "„Ich will perfekt aussehen.“"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre das Selbstkonzept mit Real- und Ideal-Selbst an einem Beispiel.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Das Selbstkonzept ist die Gesamtheit aller Wahrnehmungen und Bewertungen über sich selbst. Real-Selbst: „Ich bin still.“ Ideal-Selbst: „Ich möchte mutig sein.“ Ein großer Abstand erzeugt Spannung.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_08"
+ ]
+}

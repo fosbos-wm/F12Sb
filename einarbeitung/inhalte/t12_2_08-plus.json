@@ -1,0 +1,137 @@
+{
+ "titel": "Das Selbstkonzept – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Das Selbstkonzept** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Emre (17) sieht sich als „Chaot“, der nie rechtzeitig fertig wird. Er möchte aber „der Ordentliche“ sein, den die Eltern und die Lehrkraft schätzen. Vor Prüfungen ist er nervös und schläft schlecht."
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Selbstkonzept = Real-Selbst + Ideal-Selbst. Kleine Diskrepanz = ausgeglichen, große = Spannung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "„Ich bin eher still und lerne gründlich.“",
+       "Real-Selbst"
+      ],
+      [
+       "„Ich möchte mutig sein.“",
+       "Ideal-Selbst"
+      ],
+      [
+       "„Ich muss immer Klassenbeste sein, damit meine Eltern stolz sind.“",
+       "Ideal-Selbst mit verinnerlichten Bewertungen"
+      ],
+      [
+       "Die Person erlebt sich als entspannt und ausgeglichen.",
+       "geringe Diskrepanz"
+      ],
+      [
+       "„Ich tauge zu nichts“ und „Ich müsste perfekt sein“",
+       "große Diskrepanz"
+      ],
+      [
+       "Die Person erlebt mehrfach, dass Kontakt ihr leichtfällt, und sieht sich bald als kontaktfreudig.",
+       "Bildung des Selbstkonzepts"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was beschreibt das Real-Selbst?",
+     "optionen": [
+      "Das, was die Person sein möchte",
+      "Das tatsächliche Bild einer Person von sich",
+      "Das, was andere sehen"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Das tatsächliche Bild einer Person von sich"
+    },
+    {
+     "typ": "mc",
+     "frage": "Was enthält das Ideal-Selbst?",
+     "optionen": [
+      "Nur Wünsche der Eltern",
+      "Nur Fakten",
+      "Wunschbild und verinnerlichte Bewertungen anderer"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Wunschbild und verinnerlichte Bewertungen anderer"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Real- und Ideal-Selbst treffen zu?",
+     "aussagen": [
+      {
+       "text": "Das Ideal-Selbst enthält verinnerlichte Bewertungen anderer.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Menschen versuchen, die Diskrepanz gering zu halten.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Eine große Diskrepanz führt zu seelischer Ausgeglichenheit.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Das Real-Selbst ist das, was man sein möchte.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Nenne Emres Real-Selbst und sein Ideal-Selbst.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Real-Selbst: „Ich bin ein Chaot“; Ideal-Selbst: „der Ordentliche“.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, wodurch sein Ideal-Selbst geprägt ist.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Durch verinnerlichte Bewertungen anderer (Eltern, Lehrkraft).",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_08"
+ ]
+}

@@ -1,0 +1,139 @@
+{
+ "titel": "Selbstregulation als Persönlichkeitsmerkmal – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Selbstregulation als Persönlichkeitsmerkmal** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Lehrerin bemerkt: „Meine Schüler warten auf Anweisungen und trauen sich nichts zu.“ Ein Kollege entgegnet: „Das liegt an der Klasse, daran kann man nichts ändern.“ Die Lehrerin entschließt sich, Wochenziele mit den Schülern zu vereinbaren."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Selbstregulation = Ziele, Strategien, Bewerten. Selbstwirksamkeit = „Ich kann das.“ Selbstevaluation = „Wie gut war ich?“"
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Ben (16) setzt sich das Ziel, den Führerschein zu schaffen. Er plant Lernzeiten, glaubt „Ich schaffe das“ und bewertet nach jeder Probeprüfung seine Fehler. Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Er zeigt Selbstregulation.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sein „Ich schaffe das“ ist Selbstwirksamkeit.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Seine Fehlerbewertung ist Selbstevaluation.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Er braucht keine Strategie.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Selbstregulation hängt nur von der Intelligenz ab.“",
+     "aussagen": [
+      {
+       "text": "Sie hängt auch von Überzeugungen und Modellen ab.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Selbstwirksamkeit ist eine subjektive Überzeugung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Intelligenz bestimmt allein die Selbstwirksamkeit.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Selbstregulation ist unterschiedlich stark ausgeprägt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "fördert Selbstregulation",
+       "items": [
+        "Ziele selbst setzen dürfen",
+        "Strategien gemeinsam entwickeln",
+        "Rückmeldung zum Lernfortschritt",
+        "Erfolgserlebnisse ermöglichen"
+       ]
+      },
+      {
+       "name": "hemmt Selbstregulation",
+       "items": [
+        "Alles vorschreiben",
+        "Nur Fehler betonen",
+        "Entscheidungen immer abnehmen",
+        "Ohne Rückmeldung arbeiten lassen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Selbstregulation ist ein wichtiges {{Persönlichkeitsmerkmal}}. Sie lässt sich {{fördern}}, zum Beispiel durch Zielsetzung und {{Rückmeldung}}. Die Theorie betont die {{kognitiven}} Prozesse und wird daher dem Erleben nicht immer vollständig {{gerecht}}.",
+     "woerter": [
+      "Persönlichkeitsmerkmal",
+      "fördern",
+      "Rückmeldung",
+      "kognitiven",
+      "gerecht",
+      "Trieb",
+      "Strafe",
+      "ignoriert"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile die Aussage des Kollegen.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Die Aussage ist einseitig: Selbstregulation ist unterschiedlich ausgeprägt und lässt sich fördern, auch durch Modelle und Erfolgserlebnisse.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_10"
+ ]
+}

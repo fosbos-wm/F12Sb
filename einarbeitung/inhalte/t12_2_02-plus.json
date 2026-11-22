@@ -1,0 +1,137 @@
+{
+ "titel": "Testverfahren und Persönlichkeitsinventare – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Testverfahren und Persönlichkeitsinventare** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Jana (17) macht im Internet einen Test „Welcher Persönlichkeitstyp bist du?“. Sie beantwortet 12 Aussagen mit „trifft zu / trifft nicht zu“. Das Ergebnis: „Du bist ein Kommunikationstyp.“ Sie schickt es ihren Freundinnen und meint: „Jetzt weiß ich, wer ich bin.“"
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Inventar = Fragebogen zur Selbstbeschreibung, der ausgewählte Merkmale messbar macht. Er ist hilfreich, aber nicht der ganze Mensch."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "„Ich bin gern unter Menschen.“ – Antwort von 1 bis 4",
+       "geschlossene Frage"
+      ],
+      [
+       "„Was schätzen Sie an sich am meisten?“",
+       "offene Frage"
+      ],
+      [
+       "Ein Test mit 50 Aufgaben pro Faktor 10",
+       "B5T"
+      ],
+      [
+       "Ein Test mit 138 Aussagen, Antwort ja/nein",
+       "FPI"
+      ],
+      [
+       "Die Person beschreibt sich selbst",
+       "Selbstbeschreibung"
+      ],
+      [
+       "Wie stark ist ‚Ängstlichkeit‘ bei mir ausgeprägt?",
+       "Ausprägungsgrad"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Wie viele Aufgaben hat der B5T?",
+     "optionen": [
+      "138",
+      "50",
+      "18"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: 50"
+    },
+    {
+     "typ": "mc",
+     "frage": "Welcher Test fasst 138 Ja/Nein-Aussagen zusammen?",
+     "optionen": [
+      "B5T",
+      "16PF",
+      "FPI"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: FPI"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum B5T und FPI treffen zu?",
+     "aussagen": [
+      {
+       "text": "Der B5T erfasst die Big-Five-Faktoren.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das FPI hat 138 Aussagen mit Ja/Nein.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der B5T hat 138 Aufgaben.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Das FPI erfasst auch Extraversion und Neurotizismus.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, warum es sich um ein Persönlichkeitsinventar handelt (zwei Merkmale).",
+     "hinweis": "3–5 Sätze",
+     "muster": "Es ist ein Fragebogen, Jana beschreibt sich selbst (Selbstbeschreibung) und ein Merkmal (Kommunikation) wird ausgewählt und gemessen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre zwei Grenzen des Tests für Janas Schlussfolgerung.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Ein Test erfasst nur einzelne Merkmale, nicht die ganze Persönlichkeit. Außerdem kann die Selbsteinschätzung verzerrt sein; das Ergebnis ist eine Momentaufnahme.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_02"
+ ]
+}

@@ -1,0 +1,156 @@
+{
+ "titel": "Kongruenz und Inkongruenz: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Kongruenz und Inkongruenz**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Frau sieht sich als „gute, liebende Mutter“ und spürt zugleich den Wunsch nach Freiheit. Ihr Selbstbild lässt das nicht zu. Sie fühlt sich gefangen."
+    },
+    {
+     "typ": "text",
+     "text": "**Kongruenz** bezeichnet die **Übereinstimmung** des Selbstkonzepts mit dem organismischen Erleben einer Person. Sie besteht auch bei geringer Diskrepanz zwischen Real- und Ideal-Selbst."
+    },
+    {
+     "typ": "text",
+     "text": "**Inkongruenz** bezeichnet die **Nichtübereinstimmung**. Das wahre Selbst wird in den Hintergrund gedrängt (**Selbstentfremdung**). Inkongruenz ist Ausgangspunkt seelischer Fehlentwicklungen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Kongruenz = Selbstkonzept und Erleben stimmen überein. Inkongruenz = sie stimmen nicht überein."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was ist Kongruenz?",
+     "optionen": [
+      "Übereinstimmung von Selbstkonzept und organismischem Erleben",
+      "Streit mit anderen",
+      "Ein Persönlichkeitstest"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Übereinstimmung von Selbstkonzept und organismischem Erleben"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Kongruenz",
+       "Übereinstimmung von Selbstkonzept und organismischem Erleben"
+      ],
+      [
+       "Inkongruenz",
+       "Nichtübereinstimmung von Selbstkonzept und organismischem Erleben"
+      ],
+      [
+       "wahres Selbst",
+       "das, was die Person im Kern erlebt und sein kann"
+      ],
+      [
+       "Selbstentfremdung",
+       "das wahre Selbst wird in den Hintergrund gedrängt"
+      ],
+      [
+       "Diskrepanz",
+       "Abstand zwischen Real- und Ideal-Selbst"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "{{Kongruenz}} ist die Übereinstimmung des Selbstkonzepts mit dem organismischen {{Erleben}}. {{Inkongruenz}} ist die Nichtübereinstimmung. Sie entsteht oft, wenn Gefühle nicht zum {{Selbstbild}} passen. Das wahre Selbst wird in den {{Hintergrund}} gedrängt, es entsteht {{Selbstentfremdung}}. Kongruenz fördert eine {{gesunde}} Entwicklung.",
+     "woerter": [
+      "Kongruenz",
+      "Erleben",
+      "Inkongruenz",
+      "Selbstbild",
+      "Hintergrund",
+      "Selbstentfremdung",
+      "gesunde",
+      "Trieb",
+      "Abwehr",
+      "Verdrängung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Kongruenz treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie fördert gesunde Entwicklung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie entsteht bei geringer Wertschätzung.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie besteht bei geringer Diskrepanz zwischen Real- und Ideal-Selbst.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie bedeutet, nur Positives zu erleben.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Kongruenz",
+       "items": [
+        "Erleben und Selbstbild stimmen überein",
+        "geringe Diskrepanz",
+        "Offenheit für Erfahrung",
+        "gesunde Entwicklung"
+       ]
+      },
+      {
+       "name": "Inkongruenz",
+       "items": [
+        "Erleben widerspricht dem Selbstbild",
+        "große Diskrepanz",
+        "Selbstentfremdung",
+        "Ausgangspunkt von Fehlentwicklungen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre Inkongruenz an einem Beispiel aus dem Alltag.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Ein Kind sieht sich als „immer lieb“ und spürt Wut. Selbstkonzept und Erleben passen nicht zusammen, das ist Inkongruenz.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_14"
+ ]
+}

@@ -1,0 +1,156 @@
+{
+ "titel": "Kritische Würdigung der personenzentrierten Theorie: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Kritische Würdigung der personenzentrierten Theorie**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Die personenzentrierte Theorie erlebte ihren Höhepunkt in den 1980er-Jahren. Ihre Anhänger sagen: „Endlich ein positives Menschenbild.“ Kritiker sagen: „Nicht genug empirisch belegt.“"
+    },
+    {
+     "typ": "text",
+     "text": "Die Theorie wendet sich gegen die **mechanistische** Sicht von Psychoanalyse und Behaviorismus. Rogers entwickelte zuerst eine **Therapiemethode**, später die Theorie."
+    },
+    {
+     "typ": "text",
+     "text": "**Stärken:** positives Menschenbild, Bedeutung für Erziehung, Beratung/Therapie, Ganzheit. **Schwächen:** begrenzter Erklärungswert, nicht erschöpfend wissenschaftlich fundiert, unscharfe Begriffe, Umwelt vernachlässigt. Eine kritische Würdigung endet mit einem **abwägenden Fazit**."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Würdigung: nennen – erklären – verdeutlichen, dann abwägendes Fazit."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wogegen wendet sich die personenzentrierte Theorie?",
+     "optionen": [
+      "Gegen mechanistische Vorstellungen von Psychoanalyse und Behaviorismus",
+      "Gegen Therapie",
+      "Gegen die Erziehung"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Gegen mechanistische Vorstellungen von Psychoanalyse und Behaviorismus"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "kritische Würdigung",
+       "abwägende Beurteilung von Stärken und Schwächen"
+      ],
+      [
+       "Stärke",
+       "positiver Aspekt der Theorie"
+      ],
+      [
+       "Schwäche",
+       "kritischer Aspekt der Theorie"
+      ],
+      [
+       "Erklärungswert",
+       "Reichweite der Theorie"
+      ],
+      [
+       "wissenschaftliche Fundierung",
+       "empirische Überprüfbarkeit"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Die kritische Würdigung nennt {{Stärken}} und {{Schwächen}}. Stärke ist das positive {{Menschenbild}} und die Bedeutung für {{Erziehung}} und Beratung. Schwächen sind der begrenzte {{Erklärungswert}} und die nicht erschöpfende wissenschaftliche {{Fundierung}}. Zum Schluss steht ein abwägendes {{Fazit}}.",
+     "woerter": [
+      "Stärken",
+      "Schwächen",
+      "Menschenbild",
+      "Erziehung",
+      "Erklärungswert",
+      "Fundierung",
+      "Fazit",
+      "Trieb",
+      "Strafe",
+      "Test"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu den Stärken treffen zu?",
+     "aussagen": [
+      {
+       "text": "Das Menschenbild ist eine Alternative zu „Marionette“ und „Triebwesen“.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Theorie ist vollständig empirisch bewiesen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie hat große Bedeutung für Erziehung und Beratung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie erklärt Wahrnehmung und Denken umfassend.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Stärke",
+       "items": [
+        "positives Menschenbild",
+        "Bedeutung für Erziehung und Beratung",
+        "ganzheitliche Sicht",
+        "anwendbar in vielen Bereichen"
+       ]
+      },
+      {
+       "name": "Schwäche",
+       "items": [
+        "begrenzter Erklärungswert",
+        "nicht erschöpfend wissenschaftlich fundiert",
+        "unscharfe Begriffe",
+        "Umwelt und Gesellschaft vernachlässigt"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Nenne eine Stärke und eine Schwäche der personenzentrierten Theorie mit Begründung.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Stärke: Das positive Menschenbild ist eine Alternative zu Marionette und Triebwesen. Schwäche: Der Erklärungswert ist begrenzt, denn Wahrnehmung und Denken werden kaum erfasst.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_18"
+ ]
+}

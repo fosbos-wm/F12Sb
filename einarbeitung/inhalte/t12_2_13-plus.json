@@ -1,0 +1,137 @@
+{
+ "titel": "Zwei Ebenen des Bewertens – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Zwei Ebenen des Bewertens** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Nele (16) hält sich für rücksichtsvoll und hilfsbereit. Ihre Mitschüler nutzen das aus und schreiben von ihr ab. Nele merkt, dass sie sich ausgenutzt fühlt und wütend wird, sagt aber trotzdem immer Ja."
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Organismus: spontan, flexibel, innen. Selbstkonzept: verinnerlicht, außen. Stimmen sie nicht überein: Spannung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Ein Kleinkind bewertet Hunger negativ und Nahrung positiv.",
+       "Bewerten durch den Organismus"
+      ],
+      [
+       "Ein Kind sagt zu sich: „Ich bin ein böser Bub.“",
+       "Bewerten durch das Selbstkonzept"
+      ],
+      [
+       "Das Kind übernimmt das Urteil der Eltern.",
+       "Internalisierung"
+      ],
+      [
+       "Das Kind darf wütend sein und sieht sich trotzdem als liebenswert.",
+       "Übereinstimmung beider Ebenen"
+      ],
+      [
+       "Eine rücksichtsvolle Person wird ausgenutzt und spürt zwei Impulse.",
+       "Spannung zwischen den Ebenen"
+      ],
+      [
+       "Erfahrungen, die für das Selbstkonzept bedeutsam sind.",
+       "Selbstaktualisierung"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was ist Selbstaktualisierung?",
+     "optionen": [
+      "Ein Trieb",
+      "Der Teil der Erfahrungen, der für Selbstachtung und Selbstkonzept bedeutsam ist",
+      "Das Es"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Der Teil der Erfahrungen, der für Selbstachtung und Selbstkonzept bedeutsam ist"
+    },
+    {
+     "typ": "mc",
+     "frage": "Was bedeutet Internalisierung?",
+     "optionen": [
+      "Das Ignorieren von Urteilen",
+      "Das Abwehren von Gefühlen",
+      "Die Übernahme des Werturteils anderer"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Die Übernahme des Werturteils anderer"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Selbstaktualisierung treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie ist ein Teilsystem der Aktualisierungstendenz.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist unabhängig von der Aktualisierungstendenz.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie dient Selbstachtung und Selbstkonzept.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie bewertet nur nach dem Organismus.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre Neles Spannung mit den zwei Ebenen.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Organismus: Wut und Wunsch nach Selbstschutz (Aktualisierungstendenz). Selbstkonzept: „Ich bin rücksichtsvoll“ (Selbstaktualisierung). Beides widerspricht sich.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, woher ihr Selbstbild stammen kann.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Verinnerlichte Werturteile von Bezugspersonen, die Hilfsbereitschaft anerkannt haben.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_13"
+ ]
+}

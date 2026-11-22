@@ -1,0 +1,137 @@
+{
+ "titel": "Big Five – Vertiefung – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Big Five – Vertiefung** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Aylin (16) ist die Erste, die in neuen Gruppen Kontakte knüpft. Sie hält Absprachen strikt ein, überprüft ihre Aufgaben dreimal und gerät schnell in Stress, wenn etwas nicht planmäßig läuft. Neue Ideen der Gruppe findet sie anstrengend; sie bevorzugt bewährte Wege."
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Profil lesen: nennen – erklären – verdeutlichen. Beschreiben, nicht bewerten."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Extraversion: hoch",
+       "nennen"
+      ],
+      [
+       "Das heißt: hohe Geselligkeit, Gesprächigkeit, Aktivität",
+       "erklären"
+      ],
+      [
+       "Er spricht in der Pause alle neuen Mitschüler an.",
+       "verdeutlichen"
+      ],
+      [
+       "Vor Prüfungen ist sie sehr nervös.",
+       "Neurotizismus hoch"
+      ],
+      [
+       "Er hält jede Regel genau ein.",
+       "Gewissenhaftigkeit hoch"
+      ],
+      [
+       "Sie ist kritisch und hinterfragt Normen.",
+       "Offenheit hoch"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welche Reihenfolge nutzt man beim Beschreiben einer Person?",
+     "optionen": [
+      "Verdeutlichen – nennen",
+      "Nennen – erklären – verdeutlichen",
+      "Beurteilen – nennen"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Nennen – erklären – verdeutlichen"
+    },
+    {
+     "typ": "mc",
+     "frage": "Was kann sehr hohe Gewissenhaftigkeit auch bedeuten?",
+     "optionen": [
+      "Starke Nachlässigkeit",
+      "Große Offenheit",
+      "Eine gewisse Zwanghaftigkeit bei Regeln"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Eine gewisse Zwanghaftigkeit bei Regeln"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu den Grenzen des Modells treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es erklärt nicht, wie die Persönlichkeit entsteht.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es erfasst jede Besonderheit eines Menschen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Es beruht meist auf Selbsteinschätzung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es ist unabhängig von Kulturen widerlegt.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Nenne vier Faktoren mit Ausprägung (hoch/niedrig).",
+     "hinweis": "3–5 Sätze",
+     "muster": "Extraversion hoch, Gewissenhaftigkeit hoch, Neurotizismus hoch, Offenheit eher niedrig.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre die Bedeutung der Ausprägungen Gewissenhaftigkeit und Neurotizismus.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Hohe Gewissenhaftigkeit: Selbstorganisation, Ordentlichkeit, Zuverlässigkeit. Hoher Neurotizismus: Empfindlichkeit, unter Stress leichter aus dem Gleichgewicht.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_04"
+ ]
+}

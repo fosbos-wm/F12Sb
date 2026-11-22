@@ -1,0 +1,153 @@
+{
+ "titel": "Testverfahren und Persönlichkeitsinventare: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Testverfahren und Persönlichkeitsinventare**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Auf einer Plattform kannst du testen, welche Serienfigur du bist. Du beantwortest 10 Aussagen und bekommst ein Ergebnis. Ist das Psychologie?"
+    },
+    {
+     "typ": "text",
+     "text": "Ein **Persönlichkeitsinventar** ist ein Fragebogen, der ein oder mehrere ausgewählte Persönlichkeitsmerkmale und deren Ausprägungsgrad erfasst und messbar macht."
+    },
+    {
+     "typ": "text",
+     "text": "Fragen können **geschlossen** (Ja/Nein, Skala) oder **offen** sein. Bekannt sind der **B5T** (50 Aufgaben) und das **FPI** (138 Ja/Nein-Aussagen). Grenzen: Selbsteinschätzung, nur einzelne Merkmale, Momentaufnahme."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Inventar = Fragebogen zur Selbstbeschreibung, der ausgewählte Merkmale messbar macht. Er ist hilfreich, aber nicht der ganze Mensch."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was misst ein Persönlichkeitsinventar?",
+     "optionen": [
+      "Ausgewählte Merkmale und deren Ausprägungsgrad",
+      "Die gesamte Persönlichkeit",
+      "Die Intelligenz aller Menschen"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Ausgewählte Merkmale und deren Ausprägungsgrad"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Persönlichkeitsinventar",
+       "Fragebogen, der ausgewählte Merkmale und ihre Ausprägung messbar macht"
+      ],
+      [
+       "Selbstbeschreibung",
+       "Person beurteilt sich selbst im Fragebogen"
+      ],
+      [
+       "geschlossene Frage",
+       "feste Antwort: Ja/Nein, Skala oder Auswahl"
+      ],
+      [
+       "offene Frage",
+       "freie Antwort in eigenen Worten"
+      ],
+      [
+       "B5T",
+       "Big-Five-Persönlichkeitstest mit 50 Aufgaben"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Ein {{Persönlichkeitsinventar}} ist ein {{Fragebogen}}, der ausgewählte Persönlichkeitsmerkmale und deren {{Ausprägungsgrad}} messbar macht. Die Person beantwortet die Fragen selbst, es handelt sich also um eine {{Selbstbeschreibung}}. Der {{B5T}} hat 50 Aufgaben, das {{FPI}} 138 Ja/Nein-Aussagen.",
+     "woerter": [
+      "Persönlichkeitsinventar",
+      "Fragebogen",
+      "Ausprägungsgrad",
+      "Selbstbeschreibung",
+      "B5T",
+      "FPI",
+      "Beobachtung",
+      "Experiment",
+      "Fallstudie"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Persönlichkeitsinventaren treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie erfassen in der Regel nur einzelne Merkmale.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie messen die gesamte Persönlichkeit vollständig.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie beruhen auf Selbstbeschreibung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es gibt nur offene Fragen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Stärke",
+       "items": [
+        "Ergebnisse sind vergleichbar",
+        "Auswertung ist schnell",
+        "Ausprägung wird messbar"
+       ]
+      },
+      {
+       "name": "Grenze",
+       "items": [
+        "Man kann sich besser darstellen",
+        "Nur einzelne Merkmale werden erfasst",
+        "Ergebnis ist nur eine Momentaufnahme"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, wie ein Persönlichkeitsinventar funktioniert und welche Grenze es hat.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Ein Inventar ist ein Fragebogen, in dem sich die Person selbst beschreibt. So werden ausgewählte Merkmale und ihre Ausprägung messbar. Grenze: Es erfasst nur einzelne Merkmale und die Selbsteinschätzung kann verzerrt sein.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_02"
+ ]
+}

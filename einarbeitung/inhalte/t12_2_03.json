@@ -1,0 +1,163 @@
+{
+ "titel": "Big Five – Info: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Big Five – Info**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Im Bewerbungstraining sollst du dich mit „fünf Wörtern“ beschreiben. Dein Sitznachbar nimmt: neugierig, ordentlich, gesellig, hilfsbereit, gelassen. Welche Dimensionen stecken dahinter?"
+    },
+    {
+     "typ": "text",
+     "text": "Das **Fünf-Faktoren-Modell** („Big Five“) von Costa und McCrae unterscheidet fünf Grundfaktoren: **O**penness, **C**onscientiousness, **E**xtraversion, **A**greeableness, **N**euroticism (**OCEAN**)."
+    },
+    {
+     "typ": "text",
+     "text": "Die Faktoren wurden mit der **Faktorenanalyse** gewonnen. Das Modell **beschreibt** die Persönlichkeit, erklärt sie aber nicht."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "OCEAN: Offenheit, Gewissenhaftigkeit, Extraversion, Verträglichkeit, Neurotizismus. Beschreiben, nicht erklären."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wofür steht das C in OCEAN?",
+     "optionen": [
+      "Conscientiousness (Gewissenhaftigkeit)",
+      "Charakter",
+      "Creativity"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Conscientiousness (Gewissenhaftigkeit)"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Openness",
+       "Offenheit – Verschlossenheit"
+      ],
+      [
+       "Conscientiousness",
+       "Gewissenhaftigkeit – Nachlässigkeit"
+      ],
+      [
+       "Extraversion",
+       "nach außen gewandt – nach innen gewandt"
+      ],
+      [
+       "Agreeableness",
+       "Verträglichkeit – Unverträglichkeit"
+      ],
+      [
+       "Neuroticism",
+       "emotionale Stabilität – emotionale Labilität"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Das Fünf-Faktoren-Modell wird auch {{Big Five}} genannt. Es wurde von {{Costa}} und {{McCrae}} entwickelt und mithilfe der {{Faktorenanalyse}} gewonnen. Die Faktoren sind Offenheit, {{Gewissenhaftigkeit}}, Extraversion, {{Verträglichkeit}} und {{Neurotizismus}}. Das Modell {{beschreibt}} die Persönlichkeit, erklärt sie aber nicht.",
+     "woerter": [
+      "Big Five",
+      "Costa",
+      "McCrae",
+      "Faktorenanalyse",
+      "Gewissenhaftigkeit",
+      "Verträglichkeit",
+      "Neurotizismus",
+      "beschreibt",
+      "Freud",
+      "erklärt",
+      "Selbstkonzept"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu den Big Five treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es gibt fünf Grunddimensionen der Persönlichkeit.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Dimensionen sind nur zwei: Extraversion und Neurotizismus.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Die Faktoren stammen aus statistischen Verfahren.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Big Five sind ein Test, aber kein Modell.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Offenheit",
+       "items": [
+        "neugierig und einfallsreich",
+        "hinterfragt Normen",
+        "vielfältig interessiert"
+       ]
+      },
+      {
+       "name": "Gewissenhaftigkeit",
+       "items": [
+        "ordentlich und zuverlässig",
+        "zielstrebig und pflichtbewusst",
+        "organisiert sich selbst"
+       ]
+      },
+      {
+       "name": "Extraversion",
+       "items": [
+        "gesellig und gesprächig",
+        "aktiv und optimistisch",
+        "sucht Kontakt zu Menschen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beschreibe eine Person, die du gut kennst, mit drei der Big-Five-Faktoren.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Meine Freundin ist extravertiert (sucht Kontakt, gesprächig), gewissenhaft (ordentlich, zuverlässig) und verträglich (hilfsbereit, gibt nach). So beschreibe ich ihre Ausprägung, erkläre aber nicht, warum sie so ist.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_03"
+ ]
+}

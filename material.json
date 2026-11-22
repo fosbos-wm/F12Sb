@@ -2673,84 +2673,2020 @@
    "ord": 35
   },
   {
-   "id": "druck-t12_1_6-0",
-   "wocheId": "t12_1_6",
+   "id": "ubnb01l1",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb01l2",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb01l3",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb01m1",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb01m2",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb01m3",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb01v1",
+   "wocheId": "t12_2_01",
    "kategorie": "vertiefung3",
-   "titel": "AFB III: Lernrallye-Blätter (PDF) – Begriff und Phasen",
-   "url": "lb12-bindung/druck/Rallye_1_Bindung_Begriff_und_Phasen_Schueler.pdf",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb01v2",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb01v3",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-01-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info201",
+   "wocheId": "t12_2_01",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Begriff Persönlichkeit",
+   "url": "infotexte/LB2-01_Der-Begriff-Persoenlichkeit.pdf",
+   "ord": 1
+  },
+  {
+   "id": "ueb201b",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Begriff Persönlichkeit",
+   "url": "aufgaben/LB2-01_Basis_Der-Begriff-Persoenlichkeit.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb201p",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Begriff Persönlichkeit",
+   "url": "aufgaben/LB2-01_Plus_Der-Begriff-Persoenlichkeit.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb201v",
+   "wocheId": "t12_2_01",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Begriff Persönlichkeit",
+   "url": "aufgaben/LB2-01_Vertieft_Der-Begriff-Persoenlichkeit.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb02l1",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb02l2",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb02l3",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb02m1",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb02m2",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb02m3",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb02v1",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb02v2",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb02v3",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-02-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info202",
+   "wocheId": "t12_2_02",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Testverfahren und Persönlichkeitsinventare",
+   "url": "infotexte/LB2-02_Persoenlichkeitsinventare-und-Testverfahren.pdf",
+   "ord": 2
+  },
+  {
+   "id": "ueb202b",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Testverfahren und Persönlichkeitsinventare",
+   "url": "aufgaben/LB2-02_Basis_Persoenlichkeitsinventare-und-Testverfahren.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb202p",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Testverfahren und Persönlichkeitsinventare",
+   "url": "aufgaben/LB2-02_Plus_Persoenlichkeitsinventare-und-Testverfahren.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb202v",
+   "wocheId": "t12_2_02",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Testverfahren und Persönlichkeitsinventare",
+   "url": "aufgaben/LB2-02_Vertieft_Persoenlichkeitsinventare-und-Testverfahren.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb03l1",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb03l2",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb03l3",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb03m1",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb03m2",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb03m3",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb03v1",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb03v2",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb03v3",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-03-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info203",
+   "wocheId": "t12_2_03",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Big Five – Info",
+   "url": "infotexte/LB2-03_Das-Fuenf-Faktoren-Modell-Big-Five.pdf",
+   "ord": 3
+  },
+  {
+   "id": "ueb203b",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Big Five – Info",
+   "url": "aufgaben/LB2-03_Basis_Das-Fuenf-Faktoren-Modell-Big-Five.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb203p",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Big Five – Info",
+   "url": "aufgaben/LB2-03_Plus_Das-Fuenf-Faktoren-Modell-Big-Five.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb203v",
+   "wocheId": "t12_2_03",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Big Five – Info",
+   "url": "aufgaben/LB2-03_Vertieft_Das-Fuenf-Faktoren-Modell-Big-Five.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb04l1",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb04l2",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb04l3",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb04m1",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb04m2",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb04m3",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb04v1",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb04v2",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb04v3",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-04-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info204",
+   "wocheId": "t12_2_04",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Big Five – Vertiefung",
+   "url": "infotexte/LB2-04_Big-Five-Vertiefung-und-Anwendung.pdf",
+   "ord": 4
+  },
+  {
+   "id": "ueb204b",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Big Five – Vertiefung",
+   "url": "aufgaben/LB2-04_Basis_Big-Five-Vertiefung-und-Anwendung.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb204p",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Big Five – Vertiefung",
+   "url": "aufgaben/LB2-04_Plus_Big-Five-Vertiefung-und-Anwendung.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb204v",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Big Five – Vertiefung",
+   "url": "aufgaben/LB2-04_Vertieft_Big-Five-Vertiefung-und-Anwendung.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb05l1",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb05l2",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb05l3",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb05m1",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb05m2",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb05m3",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb05v1",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb05v2",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb05v3",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-05-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info205",
+   "wocheId": "t12_2_05",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Carl Rogers und die personenzentrierte Theorie",
+   "url": "infotexte/LB2-05_Carl-Rogers-und-die-personenzentrierte-Theorie.pdf",
+   "ord": 5
+  },
+  {
+   "id": "ueb205b",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Carl Rogers und die personenzentrierte Theorie",
+   "url": "aufgaben/LB2-05_Basis_Carl-Rogers-und-die-personenzentrierte-Theorie.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb205p",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Carl Rogers und die personenzentrierte Theorie",
+   "url": "aufgaben/LB2-05_Plus_Carl-Rogers-und-die-personenzentrierte-Theorie.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb205v",
+   "wocheId": "t12_2_05",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Carl Rogers und die personenzentrierte Theorie",
+   "url": "aufgaben/LB2-05_Vertieft_Carl-Rogers-und-die-personenzentrierte-Theorie.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb06l1",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb06l2",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb06l3",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb06m1",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb06m2",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb06m3",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb06v1",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb06v2",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb06v3",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-06-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info206",
+   "wocheId": "t12_2_06",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Das Menschenbild der personenzentrierten Theorie",
+   "url": "infotexte/LB2-06_Das-Menschenbild-der-personenzentrierten-Theorie.pdf",
+   "ord": 6
+  },
+  {
+   "id": "ueb206b",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Das Menschenbild der personenzentrierten Theorie",
+   "url": "aufgaben/LB2-06_Basis_Das-Menschenbild-der-personenzentrierten-Theorie.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb206p",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Das Menschenbild der personenzentrierten Theorie",
+   "url": "aufgaben/LB2-06_Plus_Das-Menschenbild-der-personenzentrierten-Theorie.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb206v",
+   "wocheId": "t12_2_06",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Das Menschenbild der personenzentrierten Theorie",
+   "url": "aufgaben/LB2-06_Vertieft_Das-Menschenbild-der-personenzentrierten-Theorie.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb07l1",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb07l2",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb07l3",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb07m1",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb07m2",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb07m3",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb07v1",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb07v2",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb07v3",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-07-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info207",
+   "wocheId": "t12_2_07",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "url": "infotexte/LB2-07_Aktualisierungstendenz-und-organismischer-Bewertungsprozess.pdf",
+   "ord": 7
+  },
+  {
+   "id": "ueb207b",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "url": "aufgaben/LB2-07_Basis_Aktualisierungstendenz-und-organismischer-Bewertungsprozess.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb207p",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "url": "aufgaben/LB2-07_Plus_Aktualisierungstendenz-und-organismischer-Bewertungsprozess.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb207v",
+   "wocheId": "t12_2_07",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Aktualisierungstendenz und organismischer Bewertungsprozess",
+   "url": "aufgaben/LB2-07_Vertieft_Aktualisierungstendenz-und-organismischer-Bewertungsprozess.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb08l1",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb08l2",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb08l3",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb08m1",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb08m2",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb08m3",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb08v1",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb08v2",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb08v3",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-08-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info208",
+   "wocheId": "t12_2_08",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Das Selbstkonzept",
+   "url": "infotexte/LB2-08_Das-Selbstkonzept.pdf",
+   "ord": 8
+  },
+  {
+   "id": "ueb208b",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Das Selbstkonzept",
+   "url": "aufgaben/LB2-08_Basis_Das-Selbstkonzept.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb208p",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Das Selbstkonzept",
+   "url": "aufgaben/LB2-08_Plus_Das-Selbstkonzept.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb208v",
+   "wocheId": "t12_2_08",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Das Selbstkonzept",
+   "url": "aufgaben/LB2-08_Vertieft_Das-Selbstkonzept.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb09l1",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb09l2",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb09l3",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb09m1",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb09m2",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb09m3",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb09v1",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb09v2",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb09v3",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-09-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info209",
+   "wocheId": "t12_2_09",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Bildung und Wirkung des Selbstkonzepts",
+   "url": "infotexte/LB2-09_Bildung-und-Wirkung-des-Selbstkonzepts.pdf",
+   "ord": 9
+  },
+  {
+   "id": "ueb209b",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Bildung und Wirkung des Selbstkonzepts",
+   "url": "aufgaben/LB2-09_Basis_Bildung-und-Wirkung-des-Selbstkonzepts.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb209p",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Bildung und Wirkung des Selbstkonzepts",
+   "url": "aufgaben/LB2-09_Plus_Bildung-und-Wirkung-des-Selbstkonzepts.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb209v",
+   "wocheId": "t12_2_09",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Bildung und Wirkung des Selbstkonzepts",
+   "url": "aufgaben/LB2-09_Vertieft_Bildung-und-Wirkung-des-Selbstkonzepts.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb10l1",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb10l2",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb10l3",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb10m1",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb10m2",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb10m3",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb10v1",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb10v2",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb10v3",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-10-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info210",
+   "wocheId": "t12_2_10",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Selbstregulation als Persönlichkeitsmerkmal",
+   "url": "infotexte/LB2-10_Selbstregulation-als-Persoenlichkeitsmerkmal.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb210b",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Selbstregulation als Persönlichkeitsmerkmal",
+   "url": "aufgaben/LB2-10_Basis_Selbstregulation-als-Persoenlichkeitsmerkmal.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb210p",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Selbstregulation als Persönlichkeitsmerkmal",
+   "url": "aufgaben/LB2-10_Plus_Selbstregulation-als-Persoenlichkeitsmerkmal.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb210v",
+   "wocheId": "t12_2_10",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Selbstregulation als Persönlichkeitsmerkmal",
+   "url": "aufgaben/LB2-10_Vertieft_Selbstregulation-als-Persoenlichkeitsmerkmal.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb11l1",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb11l2",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb11l3",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb11m1",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb11m2",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb11m3",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb11v1",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb11v2",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb11v3",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-11-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info211",
+   "wocheId": "t12_2_11",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Identität und das Identitätsmodell nach Marcia",
+   "url": "infotexte/LB2-11_Identitaet-und-das-Identitaetsmodell-nach-Marcia.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb211b",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Identität und das Identitätsmodell nach Marcia",
+   "url": "aufgaben/LB2-11_Basis_Identitaet-und-das-Identitaetsmodell-nach-Marcia.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb211p",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Identität und das Identitätsmodell nach Marcia",
+   "url": "aufgaben/LB2-11_Plus_Identitaet-und-das-Identitaetsmodell-nach-Marcia.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb211v",
+   "wocheId": "t12_2_11",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Identität und das Identitätsmodell nach Marcia",
+   "url": "aufgaben/LB2-11_Vertieft_Identitaet-und-das-Identitaetsmodell-nach-Marcia.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb12l1",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb12l2",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb12l3",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb12m1",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb12m2",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb12m3",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb12v1",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb12v2",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb12v3",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-12-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info212",
+   "wocheId": "t12_2_12",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Flexibilität des Selbstkonzepts und Abwehr",
+   "url": "infotexte/LB2-12_Flexibilitaet-des-Selbstkonzepts-und-Abwehr.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ueb212b",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Flexibilität des Selbstkonzepts und Abwehr",
+   "url": "aufgaben/LB2-12_Basis_Flexibilitaet-des-Selbstkonzepts-und-Abwehr.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb212p",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Flexibilität des Selbstkonzepts und Abwehr",
+   "url": "aufgaben/LB2-12_Plus_Flexibilitaet-des-Selbstkonzepts-und-Abwehr.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb212v",
+   "wocheId": "t12_2_12",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Flexibilität des Selbstkonzepts und Abwehr",
+   "url": "aufgaben/LB2-12_Vertieft_Flexibilitaet-des-Selbstkonzepts-und-Abwehr.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb13l1",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb13l2",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb13l3",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb13m1",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb13m2",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb13m3",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb13v1",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb13v2",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb13v3",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-13-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info213",
+   "wocheId": "t12_2_13",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Zwei Ebenen des Bewertens",
+   "url": "infotexte/LB2-13_Zwei-Ebenen-des-Bewertens.pdf",
+   "ord": 13
+  },
+  {
+   "id": "ueb213b",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Zwei Ebenen des Bewertens",
+   "url": "aufgaben/LB2-13_Basis_Zwei-Ebenen-des-Bewertens.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb213p",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Zwei Ebenen des Bewertens",
+   "url": "aufgaben/LB2-13_Plus_Zwei-Ebenen-des-Bewertens.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb213v",
+   "wocheId": "t12_2_13",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Zwei Ebenen des Bewertens",
+   "url": "aufgaben/LB2-13_Vertieft_Zwei-Ebenen-des-Bewertens.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb14l1",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb14l2",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb14l3",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb14m1",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb14m2",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb14m3",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb14v1",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb14v2",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb14v3",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-14-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info214",
+   "wocheId": "t12_2_14",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Kongruenz und Inkongruenz",
+   "url": "infotexte/LB2-14_Kongruenz-und-Inkongruenz.pdf",
+   "ord": 14
+  },
+  {
+   "id": "ueb214b",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Kongruenz und Inkongruenz",
+   "url": "aufgaben/LB2-14_Basis_Kongruenz-und-Inkongruenz.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb214p",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Kongruenz und Inkongruenz",
+   "url": "aufgaben/LB2-14_Plus_Kongruenz-und-Inkongruenz.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb214v",
+   "wocheId": "t12_2_14",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Kongruenz und Inkongruenz",
+   "url": "aufgaben/LB2-14_Vertieft_Kongruenz-und-Inkongruenz.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb15l1",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb15l2",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb15l3",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb15m1",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb15m2",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb15m3",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb15v1",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb15v2",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb15v3",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-15-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info215",
+   "wocheId": "t12_2_15",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Die Bewältigung von Erfahrungen",
+   "url": "infotexte/LB2-15_Die-Bewaeltigung-von-Erfahrungen.pdf",
+   "ord": 15
+  },
+  {
+   "id": "ueb215b",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Die Bewältigung von Erfahrungen",
+   "url": "aufgaben/LB2-15_Basis_Die-Bewaeltigung-von-Erfahrungen.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb215p",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Die Bewältigung von Erfahrungen",
+   "url": "aufgaben/LB2-15_Plus_Die-Bewaeltigung-von-Erfahrungen.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb215v",
+   "wocheId": "t12_2_15",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Die Bewältigung von Erfahrungen",
+   "url": "aufgaben/LB2-15_Vertieft_Die-Bewaeltigung-von-Erfahrungen.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb16l1",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb16l2",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb16l3",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb16m1",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb16m2",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb16m3",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb16v1",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb16v2",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb16v3",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-16-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info216",
+   "wocheId": "t12_2_16",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Die Entstehung psychischer Störungen",
+   "url": "infotexte/LB2-16_Die-Entstehung-psychischer-Stoerungen.pdf",
+   "ord": 16
+  },
+  {
+   "id": "ueb216b",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Die Entstehung psychischer Störungen",
+   "url": "aufgaben/LB2-16_Basis_Die-Entstehung-psychischer-Stoerungen.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb216p",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Die Entstehung psychischer Störungen",
+   "url": "aufgaben/LB2-16_Plus_Die-Entstehung-psychischer-Stoerungen.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb216v",
+   "wocheId": "t12_2_16",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Die Entstehung psychischer Störungen",
+   "url": "aufgaben/LB2-16_Vertieft_Die-Entstehung-psychischer-Stoerungen.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb17l1",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb17l2",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb17l3",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb17m1",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb17m2",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb17m3",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb17v1",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb17v2",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb17v3",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-17-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info217",
+   "wocheId": "t12_2_17",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "url": "infotexte/LB2-17_Die-Bedeutung-der-personenzentrierten-Theorie-fuer-die-Erziehung.pdf",
+   "ord": 17
+  },
+  {
+   "id": "ueb217b",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "url": "aufgaben/LB2-17_Basis_Die-Bedeutung-der-personenzentrierten-Theorie-fuer-die-Erziehung.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb217p",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "url": "aufgaben/LB2-17_Plus_Die-Bedeutung-der-personenzentrierten-Theorie-fuer-die-Erziehung.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb217v",
+   "wocheId": "t12_2_17",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Bedeutung der personenzentrierten Theorie für die Erziehung",
+   "url": "aufgaben/LB2-17_Vertieft_Die-Bedeutung-der-personenzentrierten-Theorie-fuer-die-Erziehung.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb18l1",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb18l2",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb18l3",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb18m1",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb18m2",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb18m3",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb18v1",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb18v2",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb18v3",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-18-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info218",
+   "wocheId": "t12_2_18",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Kritische Würdigung der personenzentrierten Theorie",
+   "url": "infotexte/LB2-18_Kritische-Wuerdigung-der-personenzentrierten-Theorie.pdf",
+   "ord": 18
+  },
+  {
+   "id": "ueb218b",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Kritische Würdigung der personenzentrierten Theorie",
+   "url": "aufgaben/LB2-18_Basis_Kritische-Wuerdigung-der-personenzentrierten-Theorie.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb218p",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Kritische Würdigung der personenzentrierten Theorie",
+   "url": "aufgaben/LB2-18_Plus_Kritische-Wuerdigung-der-personenzentrierten-Theorie.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb218v",
+   "wocheId": "t12_2_18",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Kritische Würdigung der personenzentrierten Theorie",
+   "url": "aufgaben/LB2-18_Vertieft_Kritische-Wuerdigung-der-personenzentrierten-Theorie.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnb19l1",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung1",
+   "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-zuord-leic0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb19l2",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung1",
+   "titel": "Lückentext: Kernwissen",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-lueck-leic1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb19l3",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung1",
+   "titel": "Rennen: Wissensfragen",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-renne-leic2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb19m1",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung2",
+   "titel": "Zuordnung: Beispiele erkennen",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-zuord-mitt0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb19m2",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung2",
+   "titel": "Blockfall: Begriffe sortieren",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-block-mitt1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb19m3",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung2",
+   "titel": "K-Prim: Aussagen prüfen",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-kprim-mitt2",
+   "ord": 32
+  },
+  {
+   "id": "ubnb19v1",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim: Fall und Beurteilung",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-kprim-vert0",
+   "ord": 30
+  },
+  {
+   "id": "ubnb19v2",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung3",
+   "titel": "Theorievergleich: Argumente gegenüberstellen",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-vergl-vert1",
+   "ord": 31
+  },
+  {
+   "id": "ubnb19v3",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung3",
+   "titel": "Lückentext: Begründetes Urteil",
+   "url": "uebungsbausteine/station.html?s=lb2n-19-lueck-vert2",
+   "ord": 32
+  },
+  {
+   "id": "info219",
+   "wocheId": "t12_2_19",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "url": "infotexte/LB2-19_Personenzentrierte-Theorie-und-Psychoanalyse-im-Vergleich.pdf",
+   "ord": 19
+  },
+  {
+   "id": "ueb219b",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung1",
+   "titel": "AFB I: Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "url": "aufgaben/LB2-19_Basis_Personenzentrierte-Theorie-und-Psychoanalyse-im-Vergleich.pdf",
+   "ord": 10
+  },
+  {
+   "id": "ueb219p",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung2",
+   "titel": "AFB II: Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "url": "aufgaben/LB2-19_Plus_Personenzentrierte-Theorie-und-Psychoanalyse-im-Vergleich.pdf",
+   "ord": 11
+  },
+  {
+   "id": "ueb219v",
+   "wocheId": "t12_2_19",
+   "kategorie": "vertiefung3",
+   "titel": "AFB III: Personenzentrierte Theorie und Psychoanalyse im Vergleich",
+   "url": "aufgaben/LB2-19_Vertieft_Personenzentrierte-Theorie-und-Psychoanalyse-im-Vergleich.pdf",
+   "ord": 12
+  },
+  {
+   "id": "ubnkp1",
+   "wocheId": "t12_2_04",
+   "kategorie": "vertiefung3",
+   "titel": "K-Prim-Test 1 (Stunde 1–4)",
+   "url": "uebungsbausteine/station.html?s=lb2n-kprim-test1",
    "ord": 40
   },
   {
-   "id": "druck-t12_1_6-1",
-   "wocheId": "t12_1_6",
+   "id": "ubnkp2",
+   "wocheId": "t12_2_08",
    "kategorie": "vertiefung3",
-   "titel": "AFB III: Druckvorlagen (PDF) – Begriff und Phasen",
-   "url": "lb12-bindung/druck/Druckvorlagen_1_Bindung_Begriff_und_Phasen.pdf",
-   "ord": 41
-  },
-  {
-   "id": "druck-t12_1_6t-0",
-   "wocheId": "t12_1_6t",
-   "kategorie": "vertiefung3",
-   "titel": "AFB III: Lernrallye-Blätter (PDF) – Bindungstypen",
-   "url": "lb12-bindung/druck/Rallye_2_Bindungstypen_Schueler.pdf",
+   "titel": "K-Prim-Test 2 (Stunde 5–8)",
+   "url": "uebungsbausteine/station.html?s=lb2n-kprim-test2",
    "ord": 40
   },
   {
-   "id": "druck-t12_1_6t-1",
-   "wocheId": "t12_1_6t",
+   "id": "ubnkp3",
+   "wocheId": "t12_2_12",
    "kategorie": "vertiefung3",
-   "titel": "AFB III: Druckvorlagen (PDF) – Bindungstypen",
-   "url": "lb12-bindung/druck/Druckvorlagen_2_Bindungstypen.pdf",
-   "ord": 41
-  },
-  {
-   "id": "druck-t12_1_6b-0",
-   "wocheId": "t12_1_6b",
-   "kategorie": "vertiefung3",
-   "titel": "AFB III: Lernrallye-Blätter (PDF) – Feinfühligkeit",
-   "url": "lb12-bindung/druck/Rallye_3_Feinfuehligkeit_Schueler.pdf",
+   "titel": "K-Prim-Test 3 (Stunde 9–12)",
+   "url": "uebungsbausteine/station.html?s=lb2n-kprim-test3",
    "ord": 40
   },
   {
-   "id": "druck-t12_1_6b-1",
-   "wocheId": "t12_1_6b",
+   "id": "ubnkp4",
+   "wocheId": "t12_2_16",
    "kategorie": "vertiefung3",
-   "titel": "AFB III: Druckvorlagen (PDF) – Feinfühligkeit",
-   "url": "lb12-bindung/druck/Druckvorlagen_3_Feinfuehligkeit.pdf",
-   "ord": 41
-  },
-  {
-   "id": "druck-t12_1_7-0",
-   "wocheId": "t12_1_7",
-   "kategorie": "vertiefung3",
-   "titel": "AFB III: Lernrallye-Blätter (PDF) – Bindungsnetz",
-   "url": "lb12-bindung/druck/Rallye_4_Bindungsnetz_Schueler.pdf",
+   "titel": "K-Prim-Test 4 (Stunde 13–16)",
+   "url": "uebungsbausteine/station.html?s=lb2n-kprim-test4",
    "ord": 40
   },
   {
-   "id": "druck-t12_1_7-1",
-   "wocheId": "t12_1_7",
+   "id": "ubnkp5",
+   "wocheId": "t12_2_19",
    "kategorie": "vertiefung3",
-   "titel": "AFB III: Druckvorlagen (PDF) – Bindungsnetz",
-   "url": "lb12-bindung/druck/Druckvorlagen_4_Bindungsnetz.pdf",
-   "ord": 41
-  },
-  {
-   "id": "druck-t12_1_8-0",
-   "wocheId": "t12_1_8",
-   "kategorie": "vertiefung3",
-   "titel": "AFB III: Lernrallye-Blätter (PDF) – Frühpädagogik",
-   "url": "lb12-bindung/druck/Rallye_5_Fruehpaedagogik_Schueler.pdf",
+   "titel": "K-Prim-Test 5 (Stunde 16–19)",
+   "url": "uebungsbausteine/station.html?s=lb2n-kprim-test5",
    "ord": 40
-  },
-  {
-   "id": "druck-t12_1_8-1",
-   "wocheId": "t12_1_8",
-   "kategorie": "vertiefung3",
-   "titel": "AFB III: Druckvorlagen (PDF) – Frühpädagogik",
-   "url": "lb12-bindung/druck/Druckvorlagen_5_Fruehpaedagogik.pdf",
-   "ord": 41
   }
  ]
 }

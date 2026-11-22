@@ -1,0 +1,162 @@
+{
+ "titel": "Begriff Persönlichkeit: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Begriff Persönlichkeit**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Lena spricht im Bus jede Mitfahrerin an. Mia schaut aus dem Fenster und hört Musik. Am Abend sagt Lena: „Mia ist halt so.“"
+    },
+    {
+     "typ": "text",
+     "text": "Die **Persönlichkeit** ist die einzigartige und nicht beobachtbare Struktur von relativ konstanten und doch sich verändernden Merkmalen einer Person, sogenannten Persönlichkeitsmerkmalen, die ein beständiges Verhaltens- und Erlebensmuster zur Folge hat."
+    },
+    {
+     "typ": "text",
+     "text": "Persönlichkeitsmerkmale sind **relativ zeitstabil** und **situationsübergreifend**, bei jedem Menschen **unterschiedlich stark ausgeprägt** und **veränderbar**. Man erschließt sie aus dem Verhalten."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Persönlichkeit = einzigartige Struktur relativ stabiler, aber veränderbarer Merkmale, erschlossen aus dem Verhalten."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was bedeutet „zeitstabil“?",
+     "optionen": [
+      "Das Merkmal bleibt über längere Zeit relativ gleich.",
+      "Das Merkmal ändert sich täglich.",
+      "Das Merkmal zeigt sich nur einmal."
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Das Merkmal bleibt über längere Zeit relativ gleich."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Persönlichkeit",
+       "einzigartige, nicht beobachtbare Struktur aus relativ konstanten, veränderbaren Merkmalen"
+      ],
+      [
+       "Persönlichkeitsmerkmal",
+       "Wesenszug, Eigenschaft oder Verhaltensbereitschaft"
+      ],
+      [
+       "zeitstabil",
+       "bleibt über längere Zeit relativ gleich"
+      ],
+      [
+       "situationsübergreifend",
+       "zeigt sich in verschiedenen Situationen ähnlich"
+      ],
+      [
+       "Merkmalsausprägung",
+       "bei jedem Menschen unterschiedlich stark entwickelt"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Die {{Persönlichkeit}} besteht aus verschiedenen {{Persönlichkeitsmerkmalen}}. Diese sind relativ {{zeitstabil}} und {{situationsübergreifend}}, aber nicht starr, sondern {{veränderbar}}. Weil man Persönlichkeit nicht sehen kann, schließt man aus dem {{Verhalten}} auf sie. Jeder Mensch ist {{einzigartig}}.",
+     "woerter": [
+      "Persönlichkeit",
+      "Persönlichkeitsmerkmalen",
+      "zeitstabil",
+      "situationsübergreifend",
+      "veränderbar",
+      "Verhalten",
+      "einzigartig",
+      "Charakter",
+      "unveränderlich",
+      "Triebe"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Persönlichkeitsbegriff treffen zu?",
+     "aussagen": [
+      {
+       "text": "Persönlichkeit besteht aus verschiedenen Persönlichkeitsmerkmalen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Persönlichkeitsmerkmale sind völlig unveränderlich.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Persönlichkeit ist ein gedanklich konstruiertes Gefüge.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Persönlichkeit lässt sich direkt beobachten.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "zeitstabil",
+       "items": [
+        "Jonas ist seit der Grundschule pünktlich",
+        "Sara hat schon immer Humor",
+        "Merkmal bleibt über Jahre erkennbar"
+       ]
+      },
+      {
+       "name": "veränderbar",
+       "items": [
+        "Nach einem Training wird Eva selbstsicherer",
+        "Erfahrungen verändern ein Merkmal",
+        "Durch Therapie wird jemand gelassener"
+       ]
+      },
+      {
+       "name": "einzigartig",
+       "items": [
+        "Keine zwei Menschen haben dieselbe Kombination",
+        "Auch eineiige Zwillinge unterscheiden sich",
+        "Ausprägung und Zusammenspiel sind unverwechselbar"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre die Merkmale des Persönlichkeitsbegriffs an einem Beispiel aus deinem Alltag.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Persönlichkeit besteht aus Merkmalen wie Hilfsbereitschaft. Sie sind zeitstabil (zeigt sich seit Jahren), situationsübergreifend (zu Hause und in der Schule), veränderbar (durch Erfahrungen) und einzigartig (andere haben eine andere Kombination).",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_01"
+ ]
+}

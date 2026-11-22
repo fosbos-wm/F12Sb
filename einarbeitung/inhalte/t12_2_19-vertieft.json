@@ -1,0 +1,140 @@
+{
+ "titel": "Personenzentrierte Theorie und Psychoanalyse im Vergleich – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Personenzentrierte Theorie und Psychoanalyse im Vergleich** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "In einem Team streiten zwei Kolleginnen. Frau A: „Man muss verstehen, welche Triebe und unbewussten Konflikte hinter dem Verhalten stecken.“ Frau B: „Man muss dem Kind Wertschätzung, Verstehen und Echtheit entgegenbringen.“ Die Leitung fragt, wer recht hat."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Freud: triebbestimmt. Rogers: positiv, Aktualisierung. Beide: Konflikt hinter Symptomen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Ein Kind schlägt seine Schwester. Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Psychoanalytisch: Das Es drängt nach aggressiver Befriedigung, das Über-Ich verbietet.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Personenzentriert: Wut passt nicht zum Selbstbild „Ich bin lieb“ (Inkongruenz).",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Beide Theorien erklären das Verhalten identisch.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Beide sehen im Verhalten einen Ausdruck eines Konflikts.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Man muss sich für eine der Theorien entscheiden.“",
+     "aussagen": [
+      {
+       "text": "Beide ergänzen sich in der Praxis.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Psychoanalyse erinnert an Konflikte, Rogers zeigt, wie man begegnet.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Man darf nur eine Theorie nutzen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Beide haben Stärken und Grenzen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Psychoanalyse",
+       "items": [
+        "erklärt Nachwirkung früher Erfahrungen",
+        "Unbewusstes wird betont",
+        "schwer überprüfbar",
+        "wenig Handlungsanleitung"
+       ]
+      },
+      {
+       "name": "Personenzentrierte Theorie",
+       "items": [
+        "klare Haltungen für Erziehung",
+        "Mensch positiv und aktiv",
+        "schwer messbare Begriffe",
+        "Wertschätzung als Kern"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Beide Theorien haben {{Stärken}} und Grenzen. Die Psychoanalyse erklärt, warum frühe {{Erfahrungen}} nachwirken, bietet aber wenig {{Handlungsanleitung}}. Die personenzentrierte Theorie zeigt, {{wie}} man Kindern begegnet, ist aber schwer {{messbar}}. In der Praxis {{ergänzen}} sie sich.",
+     "woerter": [
+      "Stärken",
+      "Erfahrungen",
+      "Handlungsanleitung",
+      "wie",
+      "messbar",
+      "ergänzen",
+      "Strafen",
+      "Trieb",
+      "ersetzen"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile, wer recht hat, und gib der Leitung eine Empfehlung.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Beide haben Stärken und Grenzen; Frau A erklärt das Warum, Frau B das Wie. Empfehlung: ergänzend nutzen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_19"
+ ]
+}

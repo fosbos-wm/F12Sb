@@ -1,0 +1,162 @@
+{
+ "titel": "Aktualisierungstendenz und organismischer Bewertungsprozess: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Aktualisierungstendenz und organismischer Bewertungsprozess**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Kleinkind könnte krabbeln, das ist bequemer. Trotzdem will es laufen lernen, stürzt, steht wieder auf und strahlt. Was treibt es an?"
+    },
+    {
+     "typ": "text",
+     "text": "Für Rogers gibt es nur **eine** angeborene Antriebskraft: das Streben nach **Selbsterhaltung und Selbstverwirklichung**. Er nennt sie **Aktualisierungstendenz**. Sie zeigt sich in **Erhaltung**, **Entfaltung** und **Autonomie**."
+    },
+    {
+     "typ": "text",
+     "text": "Der **organismische Bewertungsprozess** misst jede Erfahrung daran, ob sie die Aktualisierung fördert (positiv) oder einschränkt (negativ). Förderliches wird angestrebt, Hinderliches gemieden."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Aktualisierungstendenz = einzige angeborene Antriebskraft. Organismischer Bewertungsprozess = Erfahrung wird als förderlich oder hinderlich bewertet."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wie viele angeborene Antriebskräfte gibt es nach Rogers?",
+     "optionen": [
+      "Nur eine: die Aktualisierungstendenz",
+      "Drei: Es, Ich, Über-Ich",
+      "Zwei: Liebe und Hass"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Nur eine: die Aktualisierungstendenz"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Aktualisierungstendenz",
+       "angeborenes, beständiges Streben nach Erhaltung und Entfaltung der Möglichkeiten"
+      ],
+      [
+       "Organismus",
+       "psychische und physische Einheit des Menschen"
+      ],
+      [
+       "organismischer Bewertungsprozess",
+       "Erfahrungen werden danach bewertet, ob sie die Selbstverwirklichung fördern"
+      ],
+      [
+       "Selbsterhaltung",
+       "Grundbedürfnisse befriedigen, Spannung abbauen"
+      ],
+      [
+       "Selbstverwirklichung",
+       "Entfaltung der Möglichkeiten"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Die {{Aktualisierungstendenz}} ist das grundlegende {{Motiv}} menschlichen Verhaltens. Sie zeigt sich in der {{Erhaltung}}, der {{Entfaltung}} und im Streben nach {{Selbstbestimmung}}. Im organismischen {{Bewertungsprozess}} werden Erfahrungen {{positiv}} bewertet, wenn sie die Selbstverwirklichung fördern.",
+     "woerter": [
+      "Aktualisierungstendenz",
+      "Motiv",
+      "Erhaltung",
+      "Entfaltung",
+      "Selbstbestimmung",
+      "Bewertungsprozess",
+      "positiv",
+      "Trieb",
+      "negativ",
+      "Gewohnheit"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Aktualisierungstendenz treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie ist die einzige angeborene Antriebskraft.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie entsteht erst durch Erziehung.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie umfasst Erhaltung, Entfaltung und Selbstbestimmung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist ein Trieb im Sinne Freuds.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Erhaltung",
+       "items": [
+        "essen und trinken",
+        "sich warm anziehen",
+        "Spannung abbauen"
+       ]
+      },
+      {
+       "name": "Entfaltung",
+       "items": [
+        "sprechen lernen",
+        "Fahrrad fahren lernen",
+        "neue Fähigkeiten entwickeln"
+       ]
+      },
+      {
+       "name": "Autonomie",
+       "items": [
+        "eigene Entscheidungen treffen",
+        "sich gegen Kontrolle wehren",
+        "selbst bestimmen, was man trägt"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre an einem Beispiel den organismischen Bewertungsprozess.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Ein Kind lernt gehen: Die Eltern helfen, bis es allein geht. Der Organismus bewertet die Erfahrung positiv, weil sie die Selbstverwirklichung fördert. Wird es nur festgehalten, bewertet es negativ und reagiert mit Trotz.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_07"
+ ]
+}

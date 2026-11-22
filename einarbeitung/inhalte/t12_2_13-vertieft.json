@@ -1,0 +1,138 @@
+{
+ "titel": "Zwei Ebenen des Bewertens – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Zwei Ebenen des Bewertens** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Auf einem Elternabend sagt ein Vater: „Wenn mein Sohn wütend ist, schicke ich ihn auf sein Zimmer – bis er wieder lieb ist.“ Die Erzieherin entgegnet: „Wir lassen die Wut zu und besprechen, was ihn geärgert hat.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Organismus: spontan, flexibel, innen. Selbstkonzept: verinnerlicht, außen. Stimmen sie nicht überein: Spannung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Leon (7) schlägt wütend seine Schwester und hört: „Böser Junge!“ Später sagt er zu sich: „Ich bin böse.“ Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Leon hat das Werturteil der Eltern internalisiert.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es entsteht eine Spannung zwischen den beiden Ebenen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Leons Wut war organismisch gesehen irrelevant.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Wertschätzende Reaktion könnte beide Ebenen versöhnen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Das Selbstkonzept bewertet immer richtiger als der Organismus.“",
+     "aussagen": [
+      {
+       "text": "Das Selbstkonzept bewertet nach verinnerlichten Werten, nicht nach dem Erleben.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es kann zu Spannungen führen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der Organismus irrt sich grundsätzlich.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Entscheidend ist die Übereinstimmung beider Ebenen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Organismus",
+       "items": [
+        "Bewertung nach Wachstum",
+        "flexible Anpassung",
+        "Bezugspunkt innen",
+        "spontan"
+       ]
+      },
+      {
+       "name": "Selbstkonzept",
+       "items": [
+        "Bewertung nach Zuwendung",
+        "verinnerlichte Normen",
+        "kann starr werden",
+        "Bezugspunkt außen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Die Unterscheidung der beiden Ebenen erklärt {{Spannungen}} zwischen Erleben und {{Selbstbild}}. Sie ist plausibel, aber schwer {{überprüfbar}}. Bei bedingungsloser {{Wertschätzung}} stimmen beide Ebenen eher überein.",
+     "woerter": [
+      "Spannungen",
+      "Selbstbild",
+      "überprüfbar",
+      "Wertschätzung",
+      "Es",
+      "Test",
+      "Trieb"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile beide Reaktionen.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Der Vater schafft Spannung; die Erzieherin schafft Kongruenz. Grenzen bleiben möglich, wenn die Person angenommen wird.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_13"
+ ]
+}

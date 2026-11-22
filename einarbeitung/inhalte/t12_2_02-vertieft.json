@@ -1,0 +1,138 @@
+{
+ "titel": "Testverfahren und Persönlichkeitsinventare – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Testverfahren und Persönlichkeitsinventare** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Jugendamt lässt Bewerberinnen für die Kita-Leitung einen Persönlichkeitsfragebogen (FPI-ähnlich) ausfüllen. Das Ergebnis zeigt bei einer Bewerberin hohe Gehemmtheit. Der Leiter sagt: „Dann ist sie für den Beruf nicht geeignet.“ Die Bewerberin ist überrascht, weil sie sich im Praktikum sehr wohlgefühlt hat."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Inventar = Fragebogen zur Selbstbeschreibung, der ausgewählte Merkmale messbar macht. Er ist hilfreich, aber nicht der ganze Mensch."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Ein Online-Test „Welcher Typ bist du?“ verspricht, die ganze Persönlichkeit in 5 Minuten zu bestimmen. Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Ein seriöses Inventar erfasst nur einzelne Merkmale.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Selbsteinschätzung kann verzerrt sein.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der Test misst sicher die gesamte Persönlichkeit.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Ein einzelnes Ergebnis ist eine Momentaufnahme.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Ein Fragebogen reicht, um einen Menschen vollständig zu verstehen.“",
+     "aussagen": [
+      {
+       "text": "Die Aussage überschätzt den Test.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Weitere Methoden sind Beobachtung und Fallstudie.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Fragebögen messen jedes Merkmal fehlerfrei.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Ergebnisse brauchen kritische Deutung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Offene Frage",
+       "items": [
+        "Frei antworten",
+        "Persönlichere Antworten",
+        "Schwer auszuwerten",
+        "Was schätzen Sie an sich?"
+       ]
+      },
+      {
+       "name": "Geschlossene Frage",
+       "items": [
+        "Ja/Nein ankreuzen",
+        "Leicht vergleichbar",
+        "Skala von 1 bis 5",
+        "Schnell auswertbar"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Persönlichkeitsinventare sind {{vergleichbar}} und schnell auswertbar. Ihre Grenze ist die {{Selbsteinschätzung}}: Man kann sich besser darstellen. Außerdem erfassen sie nur {{einzelne}} Merkmale. Ein Test ist daher nur eine {{Momentaufnahme}}.",
+     "woerter": [
+      "vergleichbar",
+      "Selbsteinschätzung",
+      "einzelne",
+      "Momentaufnahme",
+      "Fallstudie",
+      "gesamte",
+      "Beobachtung"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile den Einsatz des Fragebogens bei Bewerbungen.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Pro: vergleichbar, schnell, strukturiert. Contra: Selbsteinschätzung, nur Momentaufnahme, Ausprägung ≠ Eignung. Fazit: Nur als Ergänzung zu Gespräch und Beobachtung sinnvoll.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_02"
+ ]
+}

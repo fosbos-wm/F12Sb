@@ -3152,5 +3152,556 @@
    }
   ],
   "kw": "t12_1_6"
+ },
+ {
+  "id": "f12-pers-begriff",
+  "thema": "Der Begriff „Persönlichkeit“",
+  "unter": "LB 12.2 · Persönlichkeit",
+  "frage": "Was versteht die Psychologie unter Persönlichkeit – und woran erkennt man sie?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "PERSÖNLICHKEIT\n• einzigartige Struktur\n• nicht direkt beobachtbar\n• aus Verhalten erschlossen"
+   },
+   {
+    "c": "blau",
+    "text": "PERSÖNLICHKEITSMERKMALE\n• relativ zeitstabil\n• situationsübergreifend\n• veränderbar, unterschiedlich ausgeprägt"
+   }
+  ],
+  "mitte": "Persönlichkeit",
+  "begriffe": [
+   "Merkmale",
+   "Verhalten",
+   "Einzigartigkeit"
+  ],
+  "zusammen": "Merkmale → beständiges Verhaltens- und Erlebensmuster",
+  "fall": "Mia ist seit Jahren ruhig (zeitstabil), im Bus und in der Schule (situationsübergreifend), wird im Theaterkurs mutiger (veränderbar).",
+  "anker": [
+   "Ich kann Persönlichkeit definieren.",
+   "Ich kann ihre Merkmale an Beispielen erklären."
+  ],
+  "kw": "t12_2_01"
+ },
+ {
+  "id": "f12-pers-inventar",
+  "thema": "Persönlichkeitsinventare und Testverfahren",
+  "unter": "LB 12.2 · Persönlichkeit · Erhebung",
+  "frage": "Wie lässt sich Persönlichkeit messen – und wie aussagekräftig ist das?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "PERSÖNLICHKEITSINVENTAR\n• Fragebogen\n• Selbstbeschreibung\n• Merkmale und Ausprägung messbar\n• B5T · FPI"
+   },
+   {
+    "c": "rosa",
+    "text": "GRENZEN\n• nur einzelne Merkmale\n• Selbsteinschätzung\n• Momentaufnahme"
+   }
+  ],
+  "mitte": "Inventar",
+  "begriffe": [
+   "Fragetypen",
+   "B5T / FPI",
+   "Grenzen"
+  ],
+  "zusammen": "Selbstbeschreibung → messbare Merkmale → aber nur ein Ausschnitt",
+  "fall": "Ein Online-Test sagt „Kommunikationstyp“. Er erfasst aber nur einzelne Merkmale, nicht Jana als Ganze.",
+  "anker": [
+   "Ich kann ein Inventar erklären.",
+   "Ich kann Stärken und Grenzen benennen."
+  ],
+  "kw": "t12_2_02"
+ },
+ {
+  "id": "f12-pers-bigfive",
+  "thema": "Big Five – das Fünf-Faktoren-Modell",
+  "unter": "LB 12.2 · Costa und McCrae",
+  "frage": "Wie lässt sich Persönlichkeit mit fünf Dimensionen beschreiben?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "OCEAN\n• Openness\n• Conscientiousness\n• Extraversion\n• Agreeableness\n• Neuroticism"
+   },
+   {
+    "c": "blau",
+    "text": "FAKTORENANALYSE\n• viele Eigenschaften → wenige Faktoren\n• Costa & McCrae\n• beschreibt, erklärt nicht"
+   }
+  ],
+  "mitte": "Big Five",
+  "begriffe": [
+   "Offenheit",
+   "Extraversion",
+   "Neurotizismus"
+  ],
+  "zusammen": "Fünf Dimensionen → Profil einer Person → Beschreibung (keine Erklärung)",
+  "fall": "Sara: gewissenhaft, Tim: verträglich, Lena: extravertiert, Nele: nervös vor Prüfungen.",
+  "anker": [
+   "Ich kann die fünf Faktoren nennen.",
+   "Ich kann Personen mit den Big Five beschreiben."
+  ],
+  "kw": "t12_2_03"
+ },
+ {
+  "id": "f12-pers-bigfive-vertiefung",
+  "thema": "Big-Five-Profile lesen",
+  "unter": "LB 12.2 · Big Five · Anwendung",
+  "frage": "Wie liest und deutet man ein Persönlichkeitsprofil?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "PROFIL LESEN\n1. nennen: Faktor, Ausprägung\n2. erklären: Bedeutung\n3. verdeutlichen: Verhalten im Fall"
+   },
+   {
+    "c": "blau",
+    "text": "WICHTIG\n• relative Ausprägung\n• Beschreibung, keine Bewertung\n• erklärt nicht die Entstehung"
+   }
+  ],
+  "mitte": "Profil",
+  "begriffe": [
+   "nennen",
+   "erklären",
+   "verdeutlichen"
+  ],
+  "zusammen": "Ausprägung → Bedeutung → Beleg im Fall",
+  "fall": "Tom: Offenheit hoch (Fantasy, Museen), Gewissenhaftigkeit niedrig (vergisst Termine).",
+  "anker": [
+   "Ich kann ein Profil lesen.",
+   "Ich kann es differenziert beschreiben, ohne zu bewerten."
+  ],
+  "kw": "t12_2_04"
+ },
+ {
+  "id": "f12-rogers-einfuehrung",
+  "thema": "Carl Rogers und die personenzentrierte Theorie",
+  "unter": "LB 12.2 · Rogers · Einführung",
+  "frage": "Wer war Carl Rogers – und was ist das Besondere seiner Theorie?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "CARL ROGERS\n• 1902, Oak Park (USA)\n• Agrarwissenschaft, Theologie, Psychologie\n• klientenzentrierte Therapie"
+   },
+   {
+    "c": "blau",
+    "text": "HUMANISTISCHE PSYCHOLOGIE\n• „dritte Kraft“\n• positives Menschenbild\n• subjektive Erfahrung verstehen"
+   }
+  ],
+  "mitte": "Rogers",
+  "begriffe": [
+   "Menschenbild",
+   "Therapie",
+   "dritte Kraft"
+  ],
+  "zusammen": "Vertrauen in den Menschen → verstehen statt formen",
+  "fall": "Eine Erzieherin fragt: „Erzähl mir, wie du das gemeint hast.“",
+  "anker": [
+   "Ich kann Rogers einordnen.",
+   "Ich kann die Grundhaltung erklären."
+  ],
+  "kw": "t12_2_05"
+ },
+ {
+  "id": "f12-rogers-menschenbild",
+  "thema": "Das Menschenbild nach Rogers",
+  "unter": "LB 12.2 · Rogers · Menschenbild",
+  "frage": "Ist der Mensch gut – und was folgt daraus für die Erziehung?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "ROGERS\n• positiv und konstruktiv\n• selbst regulierend\n• Klima: Angstfreiheit, Verständnis, Wertschätzung, Aufrichtigkeit"
+   },
+   {
+    "c": "rosa",
+    "text": "FREUD\n• triebbestimmt\n• Konflikt zwischen Trieben und Abwehr\n• Triebe bändigen"
+   }
+  ],
+  "mitte": "Menschenbild",
+  "begriffe": [
+   "Klima",
+   "Vertrauen",
+   "Lenkung"
+  ],
+  "zusammen": "Menschenbild → pädagogisches Handeln",
+  "fall": "Wutanfall im Hort: verstehen und begleiten oder lenken und begrenzen?",
+  "anker": [
+   "Ich kann beide Menschenbilder vergleichen.",
+   "Ich kann Folgen für das Handeln nennen."
+  ],
+  "kw": "t12_2_06"
+ },
+ {
+  "id": "f12-rogers-aktualisierung",
+  "thema": "Aktualisierungstendenz und Bewertungsprozess",
+  "unter": "LB 12.2 · Rogers · Motivation",
+  "frage": "Was treibt den Menschen an – und wie bewertet er seine Erfahrungen?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "AKTUALISIERUNGSTENDENZ\n• einzige angeborene Antriebskraft\n• Erhaltung · Entfaltung · Autonomie"
+   },
+   {
+    "c": "blau",
+    "text": "ORGANISMISCHER BEWERTUNGSPROZESS\n• fördert → positiv, angestrebt\n• hemmt → negativ, gemieden"
+   }
+  ],
+  "mitte": "Aktualisierung",
+  "begriffe": [
+   "Erhaltung",
+   "Entfaltung",
+   "Autonomie"
+  ],
+  "zusammen": "Streben nach Wachstum → Erfahrungen werden bewertet → Verhalten",
+  "fall": "Gehenlernen: Hilfe zur Selbstständigkeit wird positiv bewertet, ständiges Festhalten negativ.",
+  "anker": [
+   "Ich kann die Aktualisierungstendenz erklären.",
+   "Ich kann den Bewertungsprozess am Beispiel zeigen."
+  ],
+  "kw": "t12_2_07"
+ },
+ {
+  "id": "f12-rogers-selbstkonzept",
+  "thema": "Das Selbstkonzept",
+  "unter": "LB 12.2 · Rogers · Selbst",
+  "frage": "Wie sieht ein Mensch sich selbst – und was bedeutet eine Diskrepanz?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "SELBSTKONZEPT\n• Gesamtheit aller Wahrnehmungen, Urteilsbildungen, Bewertungen über sich\n• durch Erfahrungen gebildet\n• relativ stabil"
+   },
+   {
+    "c": "blau",
+    "text": "REAL- UND IDEAL-SELBST\n• Real: was ich bin\n• Ideal: was ich sein möchte\n• Diskrepanz → Spannung"
+   }
+  ],
+  "mitte": "Selbstkonzept",
+  "begriffe": [
+   "Real-Selbst",
+   "Ideal-Selbst",
+   "Diskrepanz"
+  ],
+  "zusammen": "Erfahrungen → Selbstkonzept → Abstand Real/Ideal → Wohlbefinden",
+  "fall": "Emre: „Ich bin ein Chaot“ vs. „Ich möchte der Ordentliche sein“.",
+  "anker": [
+   "Ich kann das Selbstkonzept definieren.",
+   "Ich kann Real- und Ideal-Selbst unterscheiden."
+  ],
+  "kw": "t12_2_08"
+ },
+ {
+  "id": "f12-rogers-selbstkonzept-wirkung",
+  "thema": "Bildung und Wirkung des Selbstkonzepts",
+  "unter": "LB 12.2 · Rogers · Selbstkonzept",
+  "frage": "Woher kommt das Selbstkonzept – und wie wirkt es?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "BILDUNG\n• persönliche Erfahrungen\n• Forderungen der Bezugspersonen\n• Beziehungsbotschaften\n• Du-Botschaften besonders prägend"
+   },
+   {
+    "c": "blau",
+    "text": "WIRKUNG\n• Wahrnehmung\n• Erleben und Verhalten\n• Selbst-Konsistenz → Bestätigung"
+   }
+  ],
+  "mitte": "Selbstkonzept",
+  "begriffe": [
+   "Verinnerlichung",
+   "Bestätigung",
+   "Kreislauf"
+  ],
+  "zusammen": "Erfahrung + Forderung → Selbstkonzept → Verhalten → Bestätigung",
+  "fall": "„Ich bin kontaktscheu“ → Kontakte meiden → Misserfolg → Selbstbild bestätigt",
+  "anker": [
+   "Ich kann Bildung und Wirkung erklären.",
+   "Ich kann Verhalten statt Person rückmelden."
+  ],
+  "kw": "t12_2_09"
+ },
+ {
+  "id": "f12-bandura-selbstregulation",
+  "thema": "Selbstregulation",
+  "unter": "LB 12.2 · Bandura · Selbstregulation",
+  "frage": "Wie steuern Menschen ihr eigenes Handeln?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "SELBSTREGULATION\n• motivieren\n• Ziele setzen\n• Strategien entwerfen\n• Verhalten bewerten und ändern"
+   },
+   {
+    "c": "blau",
+    "text": "MECHANISMEN\n• Selbstwirksamkeit: „Ich kann das.“\n• Selbstevaluation: „Wie gut war ich?“"
+   }
+  ],
+  "mitte": "Selbstregulation",
+  "begriffe": [
+   "Selbstwirksamkeit",
+   "Selbstevaluation",
+   "Modelllernen"
+  ],
+  "zusammen": "Ziel → Strategie → Handeln → Bewerten → neues Ziel",
+  "fall": "Anja: 9 Punkte als Ziel, Lernplan, „Wenn ich übe, kann ich das“, Auswertung.",
+  "anker": [
+   "Ich kann Selbstregulation definieren.",
+   "Ich kann Selbstwirksamkeit und Selbstevaluation unterscheiden."
+  ],
+  "kw": "t12_2_10"
+ },
+ {
+  "id": "f12-identitaet-marcia",
+  "thema": "Identität und das Modell nach Marcia",
+  "unter": "LB 12.2 · Identität",
+  "frage": "Wer bin ich – und wie finden Jugendliche ihre Identität?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "IDENTITÄT\n• einmalige, unverwechselbare Person\n• eigene und fremde Sicht\n• Aufgabe des Jugendalters"
+   },
+   {
+    "c": "blau",
+    "text": "MARCIA\n• Verpflichtung\n• Experimentierfreudigkeit\n• erarbeitet · übernommen · kritisch · diffus"
+   }
+  ],
+  "mitte": "Identität",
+  "begriffe": [
+   "Verpflichtung",
+   "Experimentieren",
+   "Typen"
+  ],
+  "zusammen": "Zwei Dimensionen → vier Typen → passende Unterstützung",
+  "fall": "Andreas erarbeitet, Lena übernimmt, Kevin experimentiert.",
+  "anker": [
+   "Ich kann Identität definieren.",
+   "Ich kann Marcias Typen zuordnen."
+  ],
+  "kw": "t12_2_11"
+ },
+ {
+  "id": "f12-rogers-flexibilitaet-abwehr",
+  "thema": "Flexibilität des Selbstkonzepts und Abwehr",
+  "unter": "LB 12.2 · Rogers · Abwehr",
+  "frage": "Wie geht ein Selbstkonzept mit Erfahrungen um, die nicht passen?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "FLEXIBEL\n• hohe Selbstachtung\n• bedingungslose positive Beachtung\n• Erfahrungen werden integriert"
+   },
+   {
+    "c": "rosa",
+    "text": "STARR\n• geringe Selbstachtung\n• Abwehr: Verleugnung oder Verzerrung"
+   }
+  ],
+  "mitte": "Selbstachtung",
+  "begriffe": [
+   "Integration",
+   "Verleugnung",
+   "Verzerrung"
+  ],
+  "zusammen": "Beachtung → Selbstachtung → Flexibilität oder Abwehr",
+  "fall": "Aylin deutet die 4 in Mathe als „unfaire Aufgabe“ um.",
+  "anker": [
+   "Ich kann flexibel und starr unterscheiden.",
+   "Ich kann Abwehrformen am Fall zeigen."
+  ],
+  "kw": "t12_2_12"
+ },
+ {
+  "id": "f12-rogers-zwei-ebenen",
+  "thema": "Zwei Ebenen des Bewertens",
+  "unter": "LB 12.2 · Rogers · Bewerten",
+  "frage": "Woher stammen Werturteile – aus dem Erleben oder aus verinnerlichten Normen?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "ORGANISMUS\n• spontan, flexibel\n• Bezugspunkt innen\n• Erhaltung und Entwicklung"
+   },
+   {
+    "c": "blau",
+    "text": "SELBSTKONZEPT\n• verinnerlicht\n• Bezugspunkt außen\n• Selbstaktualisierung"
+   }
+  ],
+  "mitte": "Bewerten",
+  "begriffe": [
+   "Internalisierung",
+   "Selbstaktualisierung",
+   "Übereinstimmung"
+  ],
+  "zusammen": "Beide Ebenen stimmen → Kongruenz; sonst Spannung",
+  "fall": "Nele ist wütend, sagt aber Ja, um rücksichtsvoll zu bleiben.",
+  "anker": [
+   "Ich kann die zwei Ebenen unterscheiden.",
+   "Ich kann Spannungen am Fall erklären."
+  ],
+  "kw": "t12_2_13"
+ },
+ {
+  "id": "f12-rogers-kongruenz",
+  "thema": "Kongruenz und Inkongruenz",
+  "unter": "LB 12.2 · Rogers · Gesundheit",
+  "frage": "Wann ist ein Mensch seelisch im Einklang – und wann nicht?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "KONGRUENZ\n• Selbstkonzept = Erleben\n• geringe Diskrepanz\n• gesunde Entwicklung"
+   },
+   {
+    "c": "rosa",
+    "text": "INKONGRUENZ\n• Selbstkonzept ≠ Erleben\n• große Diskrepanz\n• Selbstentfremdung"
+   }
+  ],
+  "mitte": "Einklang",
+  "begriffe": [
+   "Wertschätzung",
+   "Selbstbild",
+   "Erleben"
+  ],
+  "zusammen": "Erleben und Selbstbild stimmen → Kongruenz",
+  "fall": "Eine Mutter sieht sich als „gute Mutter“ und sehnt sich nach Freiheit.",
+  "anker": [
+   "Ich kann beide Begriffe definieren.",
+   "Ich kann sie am Fall unterscheiden."
+  ],
+  "kw": "t12_2_14"
+ },
+ {
+  "id": "f12-rogers-bewaeltigung",
+  "thema": "Bewältigung von Erfahrungen",
+  "unter": "LB 12.2 · Rogers · Bewältigung",
+  "frage": "Wie gehen Menschen mit Erfahrungen um, die nicht zu ihrem Selbstbild passen?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "WEG A\n• hohe Selbstachtung\n• flexibles Selbstkonzept\n• Erweiterung → Kongruenz"
+   },
+   {
+    "c": "rosa",
+    "text": "WEG B\n• geringe Selbstachtung\n• starres Selbstkonzept\n• Abwehr → Inkongruenz bleibt"
+   }
+  ],
+  "mitte": "Bewältigung",
+  "begriffe": [
+   "Erweiterung",
+   "Abwehr",
+   "Offenheit"
+  ],
+  "zusammen": "Selbstachtung entscheidet über den Weg",
+  "fall": "Anna erweitert ihr Selbstkonzept, Sara verteidigt es.",
+  "anker": [
+   "Ich kann beide Wege beschreiben.",
+   "Ich kann sie am Fall zuordnen."
+  ],
+  "kw": "t12_2_15"
+ },
+ {
+  "id": "f12-rogers-stoerungen",
+  "thema": "Entstehung psychischer Störungen",
+  "unter": "LB 12.2 · Rogers · Störungen",
+  "frage": "Wie entstehen psychische Störungen nach Rogers?",
+  "wissen": [
+   {
+    "c": "rosa",
+    "text": "BAUSTEINE\n• bestehende Inkongruenz\n• starres Selbstkonzept\n• aktuelles Lebensereignis"
+   },
+   {
+    "c": "blau",
+    "text": "FOLGE\n• innerer Konflikt\n• Angst\n• Symptom = Bewältigungsversuch"
+   }
+  ],
+  "mitte": "Störung",
+  "begriffe": [
+   "Inkongruenz",
+   "Selbstkonzept",
+   "Symptom"
+  ],
+  "zusammen": "Drei Bausteine → Konflikt → Symptom",
+  "fall": "Jonas: Sicherheit vs. Selbstständigkeit, Studienplatz, Magenschmerzen.",
+  "anker": [
+   "Ich kann die Entstehung erklären.",
+   "Ich kann ein Symptom als Ausdruck eines Konflikts deuten."
+  ],
+  "kw": "t12_2_16"
+ },
+ {
+  "id": "f12-rogers-erziehung",
+  "thema": "Bedeutung für die Erziehung",
+  "unter": "LB 12.2 · Rogers · Erziehung",
+  "frage": "Was bedeutet die personenzentrierte Theorie für die Erziehung?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "BEDINGUNGSLOSE POSITIVE BEACHTUNG\n• Achtung, Anerkennung, Wärme\n• keine Bedingungen\n• → Selbstachtung"
+   },
+   {
+    "c": "blau",
+    "text": "ROGERS-VARIABLEN\n• Wertschätzung\n• Verstehen\n• Echtheit"
+   }
+  ],
+  "mitte": "Erziehung",
+  "begriffe": [
+   "Bewertungsbedingungen",
+   "Selbstachtung",
+   "Haltung"
+  ],
+  "zusammen": "Haltung → Selbstachtung → flexibles Selbstkonzept → Kongruenz",
+  "fall": "„Ich mag dich trotzdem. Hauen ist nicht erlaubt.“",
+  "anker": [
+   "Ich kann die drei Haltungen erklären.",
+   "Ich kann Person und Verhalten trennen."
+  ],
+  "kw": "t12_2_17"
+ },
+ {
+  "id": "f12-rogers-wuerdigung",
+  "thema": "Kritische Würdigung",
+  "unter": "LB 12.2 · Rogers · Würdigung",
+  "frage": "Wie gut ist die personenzentrierte Theorie – und was kann sie nicht?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "STÄRKEN\n• positives Menschenbild\n• Bedeutung für Erziehung\n• Beratung und Therapie\n• ganzheitlich"
+   },
+   {
+    "c": "rosa",
+    "text": "SCHWÄCHEN\n• begrenzter Erklärungswert\n• wenig wissenschaftlich fundiert\n• unscharfe Begriffe\n• Umwelt vernachlässigt"
+   }
+  ],
+  "mitte": "Würdigung",
+  "begriffe": [
+   "nennen",
+   "erklären",
+   "verdeutlichen"
+  ],
+  "zusammen": "Stärken und Schwächen → abwägendes Fazit",
+  "fall": "Fortbildung: Hilfe im Alltag, aber Aktualisierungstendenz schwer messbar.",
+  "anker": [
+   "Ich kann Stärken und Schwächen nennen.",
+   "Ich kann ein abwägendes Fazit formulieren."
+  ],
+  "kw": "t12_2_18"
+ },
+ {
+  "id": "f12-rogers-freud-vergleich",
+  "thema": "Rogers und Freud im Vergleich",
+  "unter": "LB 12.2 · Vergleich",
+  "frage": "Worin unterscheiden sich Rogers und Freud – und was verbindet sie?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "ROGERS\n• Mensch positiv\n• Aktualisierungstendenz\n• Kongruenz/Inkongruenz\n• klare Haltungen"
+   },
+   {
+    "c": "rosa",
+    "text": "FREUD\n• Mensch triebbestimmt\n• Triebe, Instanzen\n• Abwehr\n• Nachwirkung früher Erfahrungen"
+   }
+  ],
+  "mitte": "Vergleich",
+  "begriffe": [
+   "Menschenbild",
+   "Antrieb",
+   "Symptom"
+  ],
+  "zusammen": "Beide: Konflikt hinter Symptomen, aber unterschiedliche Erklärungen",
+  "fall": "Ein Kind schlägt seine Schwester: Triebe und Über-Ich oder Inkongruenz?",
+  "anker": [
+   "Ich kann beide Theorien vergleichen.",
+   "Ich kann ihre Ergänzung begründen."
+  ],
+  "kw": "t12_2_19"
  }
 ]

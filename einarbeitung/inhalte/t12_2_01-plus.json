@@ -1,0 +1,137 @@
+{
+ "titel": "Begriff Persönlichkeit – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Begriff Persönlichkeit** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Nele (16) ist seit der Grundschule gesellig, organisiert im Verein jede Feier und ist auch in der Berufsschule die Erste, die neue Leute anspricht. Ihr Bruder Ben (17) war als Kind sehr schüchtern. Nach einem Auslandsjahr spricht er heute auch Fremde an, bleibt aber insgesamt ruhiger als Nele."
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Persönlichkeit = einzigartige Struktur relativ stabiler, aber veränderbarer Merkmale, erschlossen aus dem Verhalten."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Lena spricht in jeder Gruppe zuerst Fremde an – im Bus, im Verein und in der Schule.",
+       "situationsübergreifend"
+      ],
+      [
+       "Mia war schon als Kind zurückhaltend und ist es heute noch.",
+       "zeitstabil"
+      ],
+      [
+       "Nach dem Theaterkurs traut sich Mia mehr zu.",
+       "veränderbar"
+      ],
+      [
+       "Beide sind etwas ängstlich, Mia aber deutlich stärker.",
+       "Merkmalsausprägung"
+      ],
+      [
+       "Auch Zwillinge unterscheiden sich in ihrem Erleben und Verhalten.",
+       "Einzigartigkeit"
+      ],
+      [
+       "Man sieht, dass Tim oft Streit sucht, und schließt auf „aggressiv“.",
+       "nicht direkt beobachtbar"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Wie erfährt man etwas über die Persönlichkeit eines Menschen?",
+     "optionen": [
+      "Durch direktes Beobachten der Persönlichkeit",
+      "Indirekt aus seinem Verhalten in konkreten Situationen",
+      "Durch Messen der Körpergröße"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Indirekt aus seinem Verhalten in konkreten Situationen"
+    },
+    {
+     "typ": "mc",
+     "frage": "Was ist Temperament nach heutigem Verständnis?",
+     "optionen": [
+      "Die Mischung der Körperflüssigkeiten",
+      "Ein Charakterfehler",
+      "Ein Persönlichkeitsmerkmal, gekennzeichnet durch Lebhaftigkeit, Schwung und Aktivität"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Ein Persönlichkeitsmerkmal, gekennzeichnet durch Lebhaftigkeit, Schwung und Aktivität"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Temperament und Charakter treffen zu?",
+     "aussagen": [
+      {
+       "text": "Charakter wird im Alltag oft bewertet.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Temperament ist heute ein Persönlichkeitsmerkmal.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der Begriff Charakter betont das Veränderbare.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Temperament wurde in der Antike mit Körperflüssigkeiten erklärt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre an Nele die Merkmale zeitstabil und situationsübergreifend.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Zeitstabil: Nele ist seit der Grundschule gesellig. Situationsübergreifend: Sie zeigt es im Verein und in der Berufsschule.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre an Ben, warum Persönlichkeitsmerkmale veränderbar, aber nicht beliebig sind.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Ben verändert sich durch das Auslandsjahr, bleibt aber insgesamt ruhiger. Merkmale sind relativ konstant, aber nicht starr: Erfahrungen verändern sie, die Grundtendenz bleibt erkennbar.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_01"
+ ]
+}

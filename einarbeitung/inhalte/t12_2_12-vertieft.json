@@ -1,0 +1,139 @@
+{
+ "titel": "Flexibilität des Selbstkonzepts und Abwehr – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Flexibilität des Selbstkonzepts und Abwehr** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Studie zeigt: Personen, die sich in verschiedenen Rollen (Tochter, Freundin, Schülerin) völlig unterschiedlich beschreiben, haben mehr Probleme. Ein Student meint: „Ich bin eben in jeder Rolle ein anderer Mensch, das ist doch normal.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Hohe Selbstachtung → flexibel → Integration. Geringe Selbstachtung → starr → Abwehr."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Tom ist überzeugt, hoch intelligent zu sein. Er fällt zweimal durch die Prüfung und sagt: „Der Prüfer hat mich nicht gemocht.“ Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es handelt sich um Wahrnehmungsverzerrung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sein Selbstkonzept ist eher starr.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Er integriert die Erfahrung.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Die Abwehr schützt sein Selbstbild.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Abwehr ist immer schlecht.“",
+     "aussagen": [
+      {
+       "text": "Abwehr schützt kurzfristig das Selbstkonzept.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Dauerhaft hindert sie, Erfahrungen zu integrieren.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist immer ein Zeichen von Krankheit.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Entscheidend sind Dauer und Starrheit.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Verleugnung",
+       "items": [
+        "Erfahrung wird gar nicht wahrgenommen",
+        "Ärger wird nicht gespürt",
+        "Ignorieren oder Unterdrücken",
+        "Von Bewusstsein ausgeschlossen"
+       ]
+      },
+      {
+       "name": "Verzerrung",
+       "items": [
+        "Bedeutung wird entstellt",
+        "Schuld wird anderen zugeschrieben",
+        "Erfahrung wird passend umgedeutet",
+        "Selbstkonzept bleibt unverändert"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Rogers’ Sicht auf Abwehr ist {{plausibel}}, aber schwer {{überprüfbar}}. Pädagogisch sinnvoll ist {{bedingungslose}} positive Beachtung, damit das Selbstkonzept {{flexibel}} bleibt. Abwehr sollte nicht {{bewertet}}, sondern verstanden werden.",
+     "woerter": [
+      "plausibel",
+      "überprüfbar",
+      "bedingungslose",
+      "flexibel",
+      "bewertet",
+      "Triebe",
+      "Strafe",
+      "ignoriert"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile die Aussage des Studenten.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Rollenanpassung ist normal; die Aussage ist nur teilweise richtig. Problematisch sind sehr große Unterschiede ohne gemeinsamen Kern.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_12"
+ ]
+}

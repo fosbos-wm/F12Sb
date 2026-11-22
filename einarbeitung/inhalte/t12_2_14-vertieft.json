@@ -1,0 +1,138 @@
+{
+ "titel": "Kongruenz und Inkongruenz – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Kongruenz und Inkongruenz** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Beraterin hat eine Klientin, die sich als „fürsorgliche Mutter“ sieht, aber ständig müde ist und sich nach Freiheit sehnt. Die Beraterin sagt: „Es ist verständlich, dass beides in Ihnen ist.“ Die Klientin weint zum ersten Mal und sagt: „Ich darf das also fühlen?“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Kongruenz = Selbstkonzept und Erleben stimmen überein. Inkongruenz = sie stimmen nicht überein."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Mara (15) sieht sich als „stark und selbstständig“, fühlt aber oft Angst. Sie sagt: „Ich habe nie Angst.“ Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es besteht Inkongruenz zwischen Selbstkonzept und Erleben.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie nimmt ihre Angst nicht in das Selbstkonzept auf.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist kongruent.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Ein akzeptierendes Gespräch kann Kongruenz fördern.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Kongruente Menschen sind immer glücklich.“",
+     "aussagen": [
+      {
+       "text": "Kongruenz bedeutet Übereinstimmung, nicht dauernde Zufriedenheit.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Auch kongruente Menschen erleben negative Gefühle.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Kongruenz bedeutet, keine Probleme zu haben.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie können mit Gefühlen offener umgehen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Kongruenz",
+       "items": [
+        "Offenheit für Gefühle",
+        "Selbstbild und Erleben passen",
+        "Real- und Ideal-Selbst ähneln sich",
+        "Selbstachtung hoch"
+       ]
+      },
+      {
+       "name": "Inkongruenz",
+       "items": [
+        "Gefühle werden ausgeblendet",
+        "Selbstbild widerspricht Erleben",
+        "Real- und Ideal-Selbst klaffen auseinander",
+        "Selbstachtung gering"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Die Unterscheidung von Kongruenz und Inkongruenz ist {{hilfreich}}, um Konflikte zu verstehen. Sie ist aber schwer {{messbar}}. In der Praxis sollte man {{Gefühle}} annehmen und nicht {{bewerten}}.",
+     "woerter": [
+      "hilfreich",
+      "messbar",
+      "Gefühle",
+      "bewerten",
+      "Strafen",
+      "Trieb",
+      "unterdrücken"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile: „Wer Gefühle nicht zeigt, ist inkongruent.“",
+     "hinweis": "3–5 Sätze",
+     "muster": "Gefühle zu zeigen ist nicht dasselbe wie sie wahrzunehmen. Inkongruenz heißt: Erleben und Selbstbild passen nicht zusammen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_14"
+ ]
+}

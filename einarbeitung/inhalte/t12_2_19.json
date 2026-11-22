@@ -1,0 +1,161 @@
+{
+ "titel": "Personenzentrierte Theorie und Psychoanalyse im Vergleich: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Personenzentrierte Theorie und Psychoanalyse im Vergleich**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Kind schlägt seine Schwester. Zwei Fachkräfte reagieren unterschiedlich: Die eine fragt nach dem Trieb hinter dem Verhalten, die andere fragt: „Wie fühlst du dich gerade?“"
+    },
+    {
+     "typ": "text",
+     "text": "**Freud:** Mensch triebbestimmt, Konflikt der Instanzen (Es, Ich, Über-Ich). **Rogers:** Mensch positiv, strebt nach Selbstverwirklichung; Störungen durch Inkongruenz."
+    },
+    {
+     "typ": "text",
+     "text": "**Gemeinsamkeiten:** angeborene Antriebskraft, Symptome als Ausdruck von Konflikten, Entwicklung aus der Therapie, auch zerstörerische Kräfte. In der Praxis **ergänzen** sich beide Blicke."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Freud: triebbestimmt. Rogers: positiv, Aktualisierung. Beide: Konflikt hinter Symptomen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welche Antriebskraft nennt Freud?",
+     "optionen": [
+      "Triebe",
+      "Aktualisierungstendenz",
+      "Selbstwirksamkeit"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Triebe"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Menschenbild Freud",
+       "eher negativ, triebbestimmt"
+      ],
+      [
+       "Menschenbild Rogers",
+       "positiv, konstruktiv, sozial"
+      ],
+      [
+       "Antriebskraft Freud",
+       "Triebe (Sexualität/Aggression)"
+      ],
+      [
+       "Antriebskraft Rogers",
+       "Aktualisierungstendenz"
+      ],
+      [
+       "Symptom",
+       "Ausdruck eines Konflikts (beide Theorien)"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Freud sieht den Menschen als {{triebbestimmt}}, Rogers als {{positiv}} und konstruktiv. Beide gehen von einer {{angeborenen}} Antriebskraft aus und sehen im Symptom den Ausdruck eines {{Konflikts}}. Beide Theorien entwickelten sich aus der {{Therapie}}. Rogers gibt klare {{Haltungen}} für die Erziehung vor.",
+     "woerter": [
+      "triebbestimmt",
+      "positiv",
+      "angeborenen",
+      "Konflikts",
+      "Therapie",
+      "Haltungen",
+      "Behaviorismus",
+      "Test",
+      "Strafe"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Gemeinsamkeiten treffen zu?",
+     "aussagen": [
+      {
+       "text": "Beide nehmen eine angeborene Antriebskraft an.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Beide sehen den Menschen als rein positiv.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Beide sehen Symptome als Ausdruck von Konflikten.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Beide entstanden aus der Therapie.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Freud",
+       "items": [
+        "Triebe als Antrieb",
+        "Es, Ich, Über-Ich",
+        "Abwehrmechanismen"
+       ]
+      },
+      {
+       "name": "Rogers",
+       "items": [
+        "Aktualisierungstendenz",
+        "Selbstkonzept",
+        "Kongruenz"
+       ]
+      },
+      {
+       "name": "beide",
+       "items": [
+        "Symptom als Konflikt",
+        "angeborene Antriebskraft",
+        "Entstehung aus Therapie"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Vergleiche Freud und Rogers in zwei Punkten.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Menschenbild: Freud sieht den Menschen als triebbestimmt, Rogers als positiv und konstruktiv. Antrieb: Freud nennt Triebe, Rogers die Aktualisierungstendenz.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_19"
+ ]
+}

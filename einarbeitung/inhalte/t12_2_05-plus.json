@@ -1,0 +1,137 @@
+{
+ "titel": "Carl Rogers und die personenzentrierte Theorie – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Carl Rogers und die personenzentrierte Theorie** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Sozialpädagogin begegnet dem 15-jährigen Jonas, der Streit mit seinen Eltern hat. Sie gibt ihm keine Ratschläge, hört zu, fragt nach seiner Sicht und sagt: „Ich glaube, du findest eine Lösung, die zu dir passt.“"
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Rogers: personenzentriert, humanistisch („dritte Kraft“), positives Menschenbild, subjektive Erfahrung verstehen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Eine Erzieherin fragt: „Erzähl mir, wie du das gemeint hast.“",
+       "Verstehen der subjektiven Erfahrung"
+      ],
+      [
+       "Die Therapeutin lenkt nicht, sondern vertraut auf den Klienten.",
+       "klientenzentriert"
+      ],
+      [
+       "Neben Psychoanalyse und Behaviorismus eine eigene Richtung",
+       "dritte Kraft"
+      ],
+      [
+       "Ein Kind wird als grundsätzlich konstruktiv gesehen.",
+       "positives Menschenbild"
+      ],
+      [
+       "Alle Erfahrungen werden aus Sicht der Person betrachtet.",
+       "subjektive Erfahrung"
+      ],
+      [
+       "Rogers studierte zuerst Agrarwissenschaft, dann Theologie.",
+       "Rogers Herkunft und Studium"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was verbindet die humanistische Psychologie?",
+     "optionen": [
+      "Eine einheitliche Theorie",
+      "Ein gleichartiges, positives Menschenbild",
+      "Eine gemeinsame Messmethode"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Ein gleichartiges, positives Menschenbild"
+    },
+    {
+     "typ": "mc",
+     "frage": "Wozu entwickelte Rogers seine Techniken zusammenfassend?",
+     "optionen": [
+      "Zur Psychoanalyse",
+      "Zur Verhaltenstherapie",
+      "Zur klientenzentrierten Therapie"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Zur klientenzentrierten Therapie"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Rogers treffen zu?",
+     "aussagen": [
+      {
+       "text": "Er entwickelte die klientenzentrierte Therapie.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Er wollte Menschen formen und verbessern.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Er wollte die subjektive Erfahrung verstehen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Er war von Beruf Verhaltenstherapeut.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, warum die Sozialpädagogin personenzentriert handelt.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Sie hört zu, fragt nach Jonas’ subjektiver Sicht und vertraut auf seine Entfaltungsmöglichkeiten: Merkmale der personenzentrierten Haltung.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre den Zusammenhang zwischen ihrem Menschenbild und ihrem Verhalten.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Sie hält Jonas für grundsätzlich konstruktiv und selbstbestimmungsfähig, deshalb begleitet sie statt zu lenken.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_05"
+ ]
+}

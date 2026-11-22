@@ -1,0 +1,162 @@
+{
+ "titel": "Identität und das Identitätsmodell nach Marcia: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Identität und das Identitätsmodell nach Marcia**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Andreas (17) soll sich für eine Ausbildung entscheiden. Er hat mit einem Sozialarbeiter und einem Berufsberater gesprochen und seine Zweifel durchdacht."
+    },
+    {
+     "typ": "text",
+     "text": "**Identität** bedeutet das Selbstverständnis eines Menschen als **einmalige und unverwechselbare Person** in der eigenen Betrachtung und in der seiner sozialen Umwelt. Sie entwickelt sich in der Auseinandersetzung mit Werten und Normen, besonders im Jugendalter."
+    },
+    {
+     "typ": "text",
+     "text": "Nach **Marcia** entscheiden **Verpflichtung** und **Experimentierfreudigkeit** über den Typ: **erarbeitet**, **übernommen**, **kritisch (Moratorium)**, **diffus**. Die Typen sind keine feste Abfolge."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Identität = Selbstverständnis als einmalige Person. Marcia: Verpflichtung × Experimentierfreudigkeit → vier Typen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was bedeutet Identität in der Psychologie?",
+     "optionen": [
+      "Selbstverständnis als einmalige, unverwechselbare Person",
+      "Name und Alter",
+      "Die Gesamtheit aller Körpermerkmale"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Selbstverständnis als einmalige, unverwechselbare Person"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Identität",
+       "Selbstverständnis als einmalige, unverwechselbare Person"
+      ],
+      [
+       "James E. Marcia",
+       "Entwicklungspsychologe, entwickelte das Identitätsmodell"
+      ],
+      [
+       "Verpflichtung",
+       "Bindung an Werthaltungen: hoch oder niedrig"
+      ],
+      [
+       "Experimentierfreudigkeit",
+       "Ausprobieren von Werthaltungen: hoch oder niedrig"
+      ],
+      [
+       "erarbeitete Identität",
+       "Verpflichtung hoch, Experimentieren hoch"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "{{Identität}} ist das Selbstverständnis eines Menschen als einmalige und {{unverwechselbare}} Person. Marcia beschreibt vier Typen anhand von {{Verpflichtung}} und {{Experimentierfreudigkeit}}. Bei der {{erarbeiteten}} Identität sind beide hoch. Bei der {{übernommenen}} Identität ist die Verpflichtung hoch, das Experimentieren {{niedrig}}.",
+     "woerter": [
+      "Identität",
+      "unverwechselbare",
+      "Verpflichtung",
+      "Experimentierfreudigkeit",
+      "erarbeiteten",
+      "übernommenen",
+      "niedrig",
+      "diffusen",
+      "Moratorium",
+      "gering"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Marcias Modell treffen zu?",
+     "aussagen": [
+      {
+       "text": "Verpflichtung und Experimentierfreudigkeit sind die beiden Dimensionen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Typen folgen einer festen Reihenfolge.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Typen können in unterschiedlicher Ausprägung vorkommen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es beschreibt vor allem körperliche Entwicklung.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "erarbeitet",
+       "items": [
+        "kritisch geprüft, feste Standpunkte",
+        "hohes Selbstwertgefühl, stressresistent",
+        "bewusste Berufsentscheidung"
+       ]
+      },
+      {
+       "name": "übernommen",
+       "items": [
+        "Werte der Familie übernommen",
+        "keine kritische Auseinandersetzung",
+        "Berufsentscheidung ohne Alternativen"
+       ]
+      },
+      {
+       "name": "diffus",
+       "items": [
+        "kaum Festlegung",
+        "niedriges Interesse an Werten",
+        "unsicher, wenig Ziele"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre das Identitätsmodell nach Marcia an einem Beispiel.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Marcia unterscheidet nach Verpflichtung und Experimentierfreudigkeit. Beispiel: Andreas hat verschiedene Möglichkeiten geprüft und sich bewusst entschieden (erarbeitete Identität).",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_11"
+ ]
+}

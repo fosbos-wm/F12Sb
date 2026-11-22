@@ -1,0 +1,139 @@
+{
+ "titel": "Das Selbstkonzept – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Das Selbstkonzept** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Sophie (16) vergleicht sich täglich mit Influencerinnen. Sie denkt: „Ich bin nicht hübsch genug und nicht erfolgreich.“ Gleichzeitig will sie genauso perfekt aussehen. Ihre Freundin sagt: „Du bist, wie du bist, mir reicht das.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Selbstkonzept = Real-Selbst + Ideal-Selbst. Kleine Diskrepanz = ausgeglichen, große = Spannung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Lena (17) denkt: „Ich bin unbegabt“ (Real-Selbst), will aber unbedingt Klassenbeste sein (Ideal-Selbst). Sie ist oft unruhig und gereizt. Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Die Diskrepanz ist groß.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das erklärt die innere Spannung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das Selbstkonzept ist ein Teil des Es.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Rogers erklärt Depression u. a. mit solch einer Diskrepanz.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Das Selbstkonzept ist angeboren.“",
+     "aussagen": [
+      {
+       "text": "Es wird durch Erfahrungen gebildet.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es ist relativ zeitstabil, aber veränderbar.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es steht von Geburt an fest.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Verinnerlichte Bewertungen anderer prägen das Ideal-Selbst.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "geringe Diskrepanz",
+       "items": [
+        "Person erlebt sich als entspannt",
+        "Ausgeglichenheit",
+        "Gesunde seelische Entwicklung",
+        "Real- und Ideal-Selbst stimmen weitgehend überein"
+       ]
+      },
+      {
+       "name": "große Diskrepanz",
+       "items": [
+        "Innere Spannungen und Unruhe",
+        "Negatives Real-Selbst, überhöhtes Ideal-Selbst",
+        "Unausgeglichenheit",
+        "Depressive Gedanken"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Eine große {{Diskrepanz}} zwischen Real- und Ideal-Selbst kann zu {{Spannungen}} führen. Ein überhöhtes {{Ideal-Selbst}} ist oft unrealistisch. Die Theorie ist plausibel, aber das Selbstkonzept ist nicht direkt {{messbar}}. Man kann es nur aus {{Aussagen}} erschließen.",
+     "woerter": [
+      "Diskrepanz",
+      "Spannungen",
+      "Ideal-Selbst",
+      "messbar",
+      "Aussagen",
+      "Es",
+      "Trieb",
+      "Beweis"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile, ob sich ein Selbstkonzept durch Social Media dauerhaft verändern kann.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Das Selbstkonzept ist relativ stabil, aber durch Erfahrungen veränderbar. Wiederholte Vergleiche können es verändern; positive Erfahrungen und Wertschätzung wirken entgegen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_08"
+ ]
+}

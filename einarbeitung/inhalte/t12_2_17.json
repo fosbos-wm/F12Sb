@@ -1,0 +1,156 @@
+{
+ "titel": "Bedeutung der personenzentrierten Theorie für die Erziehung: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Bedeutung der personenzentrierten Theorie für die Erziehung**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "„Ich mag dich erst wieder, wenn du dein Zimmer aufräumst.“ – „Du bist ein liebes Kind, wenn du nicht so aggressiv bist.“ Was machen solche Sätze mit einem Kind?"
+    },
+    {
+     "typ": "text",
+     "text": "**Positive Beachtung** ist eine gefühlsmäßige Grundhaltung, die sich in Achtung, Anerkennung und Wärme zeigt. **Bedingungslose** positive Beachtung ist nicht an Bedingungen geknüpft. **Selbstachtung** ist die wertende Einstellung zu sich selbst."
+    },
+    {
+     "typ": "text",
+     "text": "Fehlt bedingungslose Beachtung, entwickeln Kinder **Bewertungsbedingungen**, ein starres Selbstkonzept und **Inkongruenz**. Förderlich sind **Wertschätzung**, **Verstehen** und **Echtheit** (Rogers-Variablen)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Bedingungslose positive Beachtung → Selbstachtung → flexibles Selbstkonzept. Rogers-Variablen: Wertschätzung, Verstehen, Echtheit."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was ist positive Beachtung?",
+     "optionen": [
+      "Gefühlsmäßige Grundhaltung aus Achtung, Anerkennung und Wärme",
+      "Eine Belohnung",
+      "Eine Note"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Gefühlsmäßige Grundhaltung aus Achtung, Anerkennung und Wärme"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "positive Beachtung",
+       "Grundhaltung aus Achtung, Anerkennung und Wärme"
+      ],
+      [
+       "bedingungslose positive Beachtung",
+       "Achtung, Anerkennung und Wärme ohne Bedingungen"
+      ],
+      [
+       "Selbstachtung",
+       "wertende Einstellung zu sich selbst"
+      ],
+      [
+       "Bewertungsbedingungen",
+       "Maßstäbe, die das Kind erfüllen muss, um Zuneigung zu erhalten"
+      ],
+      [
+       "Wertschätzung",
+       "Akzeptanz der Person und ihrer Gefühle"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "{{Positive Beachtung}} ist eine gefühlsmäßige Grundhaltung aus Achtung, Anerkennung und {{Wärme}}. Sie ist {{bedingungslos}}, wenn sie nicht an Bedingungen geknüpft ist. Fehlt sie, entwickeln Kinder {{Bewertungsbedingungen}}. Förderliche Haltungen sind {{Wertschätzung}}, {{Verstehen}} und {{Echtheit}}.",
+     "woerter": [
+      "Positive Beachtung",
+      "Wärme",
+      "bedingungslos",
+      "Bewertungsbedingungen",
+      "Wertschätzung",
+      "Verstehen",
+      "Echtheit",
+      "Strafe",
+      "Lob",
+      "Kontrolle"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Bewertungsbedingungen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie entstehen bei bedingter Zuwendung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie fördern Selbstachtung.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Das Kind blendet Gefühle aus, die als Bedrohung erlebt werden.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie sind Teil bedingungsloser Beachtung.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Mit bedingungsloser Beachtung",
+       "items": [
+        "hohe Selbstachtung",
+        "flexibles Selbstkonzept",
+        "Kongruenz",
+        "Kind vertraut seinem Erleben"
+       ]
+      },
+      {
+       "name": "Ohne bedingungslose Beachtung",
+       "items": [
+        "geringe Selbstachtung",
+        "starres Selbstkonzept",
+        "Inkongruenz",
+        "Entfremdung vom Erleben"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, warum bedingungslose positive Beachtung für die Erziehung wichtig ist.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Sie stärkt die Selbstachtung und ein flexibles Selbstkonzept. Kinder können Gefühle annehmen und entwickeln Kongruenz. Fehlt sie, entstehen Bewertungsbedingungen und Inkongruenz.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_17"
+ ]
+}

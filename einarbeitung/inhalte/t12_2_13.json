@@ -1,0 +1,156 @@
+{
+ "titel": "Zwei Ebenen des Bewertens: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Zwei Ebenen des Bewertens**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Kleinkind zieht seine Schwester an den Haaren und hört: „Böser Bub!“ Wiederholt sich das, sagt es irgendwann selbst: „Ich bin böse.“"
+    },
+    {
+     "typ": "text",
+     "text": "**Ebene 1** – Bewerten durch den **Organismus**: spontan, flexibel, Bezugspunkt im Kind selbst, Ziel ist **Erhaltung und Entwicklung** des Organismus."
+    },
+    {
+     "typ": "text",
+     "text": "**Ebene 2** – Bewerten durch das **Selbstkonzept**: Das Kind übernimmt Werturteile anderer (**Internalisierung**), um positive Beachtung zu erhalten. **Selbstaktualisierung** ist der Teil der Erfahrungen, der für Selbstachtung und Selbstkonzept bedeutsam ist. Unter förderlichen Bedingungen stimmen beide Ebenen überein."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Organismus: spontan, flexibel, innen. Selbstkonzept: verinnerlicht, außen. Stimmen sie nicht überein: Spannung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wie viele Ebenen des Bewertens gibt es nach Rogers?",
+     "optionen": [
+      "Zwei: Organismus und Selbstkonzept",
+      "Drei: Es, Ich, Über-Ich",
+      "Eine: den Verstand"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Zwei: Organismus und Selbstkonzept"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Bewerten durch den Organismus",
+       "spontanes, flexibles Bewerten nach Erhaltung und Entwicklung"
+      ],
+      [
+       "Bewerten durch das Selbstkonzept",
+       "Bewerten nach verinnerlichten Werten anderer"
+      ],
+      [
+       "Selbstaktualisierung",
+       "Erfahrungen, die für Selbstachtung und Selbstkonzept bedeutsam sind"
+      ],
+      [
+       "Internalisierung",
+       "Übernahme des Werturteils anderer"
+      ],
+      [
+       "Bezugspunkt innen",
+       "Wertung liegt in der Person selbst"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Der Mensch bewertet auf zwei Ebenen: durch den {{Organismus}} und durch das {{Selbstkonzept}}. Der organismische Prozess ist {{spontan}} und flexibel, der Bezugspunkt liegt {{innen}}. Das Selbstkonzept bewertet nach {{verinnerlichten}} Werten, der Bezugspunkt liegt {{außen}}. Unter förderlichen Bedingungen stimmen beide {{überein}}.",
+     "woerter": [
+      "Organismus",
+      "Selbstkonzept",
+      "spontan",
+      "innen",
+      "verinnerlichten",
+      "außen",
+      "überein",
+      "Es",
+      "unbewusst",
+      "Über-Ich"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum organismischen Bewerten treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es ist spontan und flexibel.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es ist ein festgelegtes System.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Der Bezugspunkt liegt im Kind selbst.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es ist Ausdruck der Aktualisierungstendenz.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Organismus",
+       "items": [
+        "spontan und flexibel",
+        "Bezugspunkt in der Person",
+        "Hunger negativ, Nahrung positiv",
+        "Ziel: Erhaltung und Entwicklung"
+       ]
+      },
+      {
+       "name": "Selbstkonzept",
+       "items": [
+        "verinnerlichte Werte",
+        "Bezugspunkt außerhalb",
+        "Ziel: positive Beachtung",
+        "kann starr sein"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre die zwei Ebenen des Bewertens an einem Beispiel.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Ein Kind zieht seine Schwester an den Haaren (Erleben des Organismus), hört „böser Bub“ und übernimmt das Urteil (Selbstkonzept). Beide Ebenen können in Spannung stehen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_13"
+ ]
+}

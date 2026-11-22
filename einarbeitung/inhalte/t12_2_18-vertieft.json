@@ -1,0 +1,138 @@
+{
+ "titel": "Kritische Würdigung der personenzentrierten Theorie – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Kritische Würdigung der personenzentrierten Theorie** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Schulleiter sagt: „Rogers’ Menschenbild ist naiv. Kinder brauchen klare Führung.“ Eine Lehrerin entgegnet: „Wertschätzung und Führung schließen sich nicht aus.“ Ein Psychologe ergänzt: „Die Theorie erklärt nicht, wie Wahrnehmung oder Denken funktionieren.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Würdigung: nennen – erklären – verdeutlichen, dann abwägendes Fazit."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Ein Kollege sagt: „Rogers’ Theorie ist wissenschaftlich perfekt.“ Eine Kollegin: „Sie ist unbrauchbar.“ Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Beide Aussagen sind einseitig.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Eine kritische Würdigung nennt Stärken und Schwächen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Theorie ist vollständig bewiesen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Ein abwägendes Fazit ist sinnvoll.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Rogers’ Theorie erklärt jede seelische Störung.“",
+     "aussagen": [
+      {
+       "text": "Nicht jede Störung geht auf Inkongruenz zurück.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der Erklärungswert ist begrenzt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie erklärt alle Störungen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Andere Theorien können ergänzen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Pro (Stärke)",
+       "items": [
+        "positives Menschenbild",
+        "Bedeutung für Gesprächsführung",
+        "stärkt Selbstachtung",
+        "ganzheitlicher Blick"
+       ]
+      },
+      {
+       "name": "Contra (Schwäche)",
+       "items": [
+        "Begriffe schwer überprüfbar",
+        "Wahrnehmung und Denken kaum erfasst",
+        "Umwelt wird vernachlässigt",
+        "nicht alle Störungen erklärt"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Insgesamt ist die personenzentrierte Theorie ein {{wertvoller}} Impuls für Haltung und Gesprächsführung, erklärt aber nicht {{alles}}. Wissenschaftlich ist sie nur {{begrenzt}} überprüfbar. Man sollte sie daher durch andere {{Theorien}} ergänzen.",
+     "woerter": [
+      "wertvoller",
+      "alles",
+      "begrenzt",
+      "Theorien",
+      "Trieb",
+      "Beweis",
+      "Strafe"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Verfasse ein abwägendes Fazit.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Die Theorie liefert eine wertvolle Grundhaltung, erklärt aber nicht alles, besonders Wahrnehmung und Denken, und ist begrenzt überprüft. Fazit: Sie ist nützlich, sollte aber ergänzt werden.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_18"
+ ]
+}

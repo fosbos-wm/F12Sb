@@ -1,0 +1,155 @@
+{
+ "titel": "Carl Rogers und die personenzentrierte Theorie: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Carl Rogers und die personenzentrierte Theorie**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Ein Kind malt den Himmel grün. Die Erzieherin korrigiert nicht, sondern fragt: „Erzähl mir, wie du das gemeint hast.“"
+    },
+    {
+     "typ": "text",
+     "text": "**Carl Rogers** (1902 in Oak Park, USA geboren) begründete die **personenzentrierte Theorie**. Er studierte Agrarwissenschaft, Theologie und Psychologie und entwickelte die **klientenzentrierte Therapie**."
+    },
+    {
+     "typ": "text",
+     "text": "Er gehört zur **humanistischen Psychologie**, der „dritten Kraft“ neben Psychoanalyse und Behaviorismus. Sie verbindet ein **positives Menschenbild**, kein einheitliches Theoriegebäude. Rogers will die **subjektive Erfahrung** eines Menschen verstehen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Rogers: personenzentriert, humanistisch („dritte Kraft“), positives Menschenbild, subjektive Erfahrung verstehen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wer begründete die personenzentrierte Theorie?",
+     "optionen": [
+      "Carl Rogers",
+      "Sigmund Freud",
+      "Albert Bandura"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Carl Rogers"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "Carl Rogers",
+       "Begründer der personenzentrierten Theorie und klientenzentrierten Therapie"
+      ],
+      [
+       "humanistische Psychologie",
+       "„dritte Kraft“ neben Psychoanalyse und Behaviorismus"
+      ],
+      [
+       "Menschenbild",
+       "grundsätzlich positive und konstruktive Sicht auf den Menschen"
+      ],
+      [
+       "klientenzentrierte Therapie",
+       "Gesprächstherapie, die dem Klienten vertraut statt ihn zu lenken"
+      ],
+      [
+       "subjektive Erfahrung",
+       "das, was ein Mensch selbst erlebt und wahrnimmt"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Carl {{Rogers}} begründete die {{personenzentrierte}} Theorie. Er gehört zur {{humanistischen}} Psychologie, die als {{dritte Kraft}} neben Psychoanalyse und Behaviorismus gilt. Sie beruht auf einem {{positiven}} Menschenbild. Rogers will die {{subjektive}} Erfahrung eines Menschen verstehen.",
+     "woerter": [
+      "Rogers",
+      "personenzentrierte",
+      "humanistischen",
+      "dritte Kraft",
+      "positiven",
+      "subjektive",
+      "negativen",
+      "Triebe",
+      "objektive"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur humanistischen Psychologie treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie gilt als dritte Kraft neben Psychoanalyse und Behaviorismus.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist durch eine einheitliche Theorie verbunden.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie hat ein gleichartiges positives Menschenbild.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie sieht den Menschen als grundsätzlich triebgesteuert.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Rogers",
+       "items": [
+        "Mensch ist grundsätzlich positiv und konstruktiv",
+        "klientenzentrierte Therapie",
+        "humanistische Psychologie",
+        "Subjektive Erfahrung verstehen"
+       ]
+      },
+      {
+       "name": "Freud",
+       "items": [
+        "Psychoanalyse",
+        "Triebe stehen im Mittelpunkt",
+        "Unbewusstes wird gedeutet",
+        "Mensch im Konflikt mit seinen Trieben"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, was an Rogers’ Theorie „personenzentriert“ ist.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Die Person mit ihrem Erleben steht im Mittelpunkt. Rogers will ihre subjektive Erfahrung verstehen und vertraut auf ihre Möglichkeiten, statt sie zu formen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_05"
+ ]
+}

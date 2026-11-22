@@ -1,0 +1,137 @@
+{
+ "titel": "Identität und das Identitätsmodell nach Marcia – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Identität und das Identitätsmodell nach Marcia** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Andreas hat mit Sozialarbeiter und Berufsberater gesprochen und sich bewusst für ein Studium entschieden. Lena übernimmt das Geschäft ihres Vaters und hat nie über Alternativen nachgedacht. Kevin kann sich nicht entscheiden und probiert verschiedene Praktika aus."
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Identität = Selbstverständnis als einmalige Person. Marcia: Verpflichtung × Experimentierfreudigkeit → vier Typen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Andreas hat intensiv recherchiert und sich dann bewusst für den Beruf entschieden.",
+       "erarbeitete Identität"
+      ],
+      [
+       "Ein Jugendlicher übernimmt den Betrieb der Eltern, ohne Alternativen zu prüfen.",
+       "übernommene Identität"
+      ],
+      [
+       "Eine Schülerin probiert viele Praktika aus und kann sich noch nicht festlegen.",
+       "kritische Identität (Moratorium)"
+      ],
+      [
+       "Ein Jugendlicher hat kein Interesse an Berufswahl und lässt alles auf sich zukommen.",
+       "diffuse Identität"
+      ],
+      [
+       "„Wer bin ich, wie bin ich?“",
+       "Leitfrage der Selbstsicht"
+      ],
+      [
+       "Identität in der Betrachtung der sozialen Umwelt",
+       "Fremdbild"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Welcher Typ hat Verpflichtung hoch und Experimentieren hoch?",
+     "optionen": [
+      "Übernommene Identität",
+      "Erarbeitete Identität",
+      "Diffuse Identität"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Erarbeitete Identität"
+    },
+    {
+     "typ": "mc",
+     "frage": "Welcher Typ übernimmt die Werte der Familie ohne Auseinandersetzung?",
+     "optionen": [
+      "Erarbeitete Identität",
+      "Kritische Identität",
+      "Übernommene Identität"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Übernommene Identität"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Identität treffen zu?",
+     "aussagen": [
+      {
+       "text": "Identität ist ein Selbstverständnis als einmalige Person.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie umfasst nur Name und Alter.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Die Identitätsfindung erfolgt in Auseinandersetzung mit Werten und Normen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist eine zentrale Aufgabe des Jugendalters.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Ordne jede Person einem Identitätstyp zu.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Andreas: erarbeitet; Lena: übernommen; Kevin: kritisch (Moratorium)/Experimentieren.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Begründe die Zuordnung von Andreas und Lena mit den beiden Dimensionen.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Andreas: Verpflichtung hoch, Experimentieren hoch. Lena: Verpflichtung hoch, Experimentieren niedrig.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_11"
+ ]
+}

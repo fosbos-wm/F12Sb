@@ -1,0 +1,138 @@
+{
+ "titel": "Die Bewältigung von Erfahrungen – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Die Bewältigung von Erfahrungen** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Leitung sagt: „In unserem Beruf stellen wir uns hinten an. Wer an sich denkt, ist unprofessionell.“ Eine Mitarbeiterin entgegnet: „Wer nicht für sich sorgt, kann auf Dauer für andere nicht sorgen.“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Hohe Selbstachtung → Erweiterung → Kongruenz. Geringe Selbstachtung → Abwehr → Inkongruenz bleibt."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Tina arbeitet im Pflegedienst und denkt: „Ich muss immer für alle da sein.“ Sie ist erschöpft. Eine Kollegin sagt: „Du darfst auch auf dich achten.“ Tina antwortet: „Das wäre egoistisch.“ Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Tina verteidigt ihr Selbstkonzept.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie wehrt die Erfahrung der Erschöpfung ab.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie erweitert ihr Selbstkonzept.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Ein erweitertes Selbstkonzept: „Ich sorge für andere und für mich.“",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Wer sein Selbstkonzept ändert, verliert seine Identität.“",
+     "aussagen": [
+      {
+       "text": "Eine Erweiterung kann den Kern erhalten.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Flexibilität gilt in der Theorie als gesund.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Jede Veränderung bedroht die Identität.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Starre Selbstkonzepte erschweren die Anpassung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "Erweiterung",
+       "items": [
+        "Neue Erfahrung integrieren",
+        "„Ich darf auch wütend sein.“",
+        "Selbstkonzept anpassen",
+        "Offenheit"
+       ]
+      },
+      {
+       "name": "Verteidigung",
+       "items": [
+        "Erfahrung ignorieren",
+        "Erfahrung umdeuten",
+        "Selbstbild unverändert halten",
+        "Konflikt bleibt bestehen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Die Theorie beschreibt zwei {{Wege}} der Bewältigung. Ihre Stärke ist die {{Praxisrelevanz}}, zum Beispiel für die {{Selbstfürsorge}} in sozialen Berufen. Ihre Schwäche ist, dass die Begriffe schwer {{überprüfbar}} sind.",
+     "woerter": [
+      "Wege",
+      "Praxisrelevanz",
+      "Selbstfürsorge",
+      "überprüfbar",
+      "Triebe",
+      "Strafe",
+      "Diagnose"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile die Positionen.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Die Mitarbeiterin vertritt das erweiterte Selbstkonzept: flexibel, gesünder. Die Haltung der Leitung ist kurzfristig leistungsorientiert, aber langfristig riskant.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_15"
+ ]
+}

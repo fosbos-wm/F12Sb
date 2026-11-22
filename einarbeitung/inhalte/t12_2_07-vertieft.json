@@ -1,0 +1,138 @@
+{
+ "titel": "Aktualisierungstendenz und organismischer Bewertungsprozess – AFB III: Beurteilen",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du beurteilst Aussagen zu **Aktualisierungstendenz und organismischer Bewertungsprozess** und begründest dein Urteil. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Der siebenjährige Ben soll schwimmen lernen. Sein Vater hält ihn im Wasser ständig fest. Die Trainerin dagegen erlaubt ihm, selbst zu entscheiden, wann er loslässt, und lobt kleine Fortschritte. Ben freut sich auf die Trainerin, wehrt sich aber gegen den Vater."
+    },
+    {
+     "typ": "text",
+     "text": "Ein Urteil begründest du mit **Fachbegriffen, Fallbezug und Gegenargument**. Prüfe, was stimmt, was einseitig ist und was fehlt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Aktualisierungstendenz = einzige angeborene Antriebskraft. Organismischer Bewertungsprozess = Erfahrung wird als förderlich oder hinderlich bewertet."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "kprim",
+     "stamm": "Fall: Ein Vater nimmt seine Tochter (3) immer an die Hand, damit sie nicht fällt. Sie wird trotzig. Welche Aussagen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Das Kind bewertet die Erfahrung negativ.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Ihre Selbstverwirklichung wird eingeschränkt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das ist ein Beleg für fehlende Aktualisierungstendenz.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Hilfe in kleinen Schritten würde die Aktualisierung fördern.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Beurteile: „Wer nach Selbstverwirklichung strebt, handelt egoistisch.“",
+     "aussagen": [
+      {
+       "text": "Rogers meint Entfaltung der Möglichkeiten und Selbstbestimmung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Selbstverwirklichung bedeutet nicht Rücksichtslosigkeit.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Selbstverwirklichung heißt, nur eigene Wünsche durchzusetzen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Rogers sieht den Menschen als sozial.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Argumente.",
+     "kategorien": [
+      {
+       "name": "fördert die Aktualisierung",
+       "items": [
+        "Hilfestellung beim Gehenlernen",
+        "Ermutigung zu eigenen Schritten",
+        "Wahlmöglichkeiten im Alltag",
+        "Zutrauen in die eigene Kraft"
+       ]
+      },
+      {
+       "name": "hemmt die Aktualisierung",
+       "items": [
+        "ständiges Festhalten an der Hand",
+        "Entscheidungen immer abnehmen",
+        "Dauerhafte Kontrolle",
+        "Aufgaben ohne Spielraum"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Vervollständige das Urteil.",
+     "text": "Die Aktualisierungstendenz erklärt, warum Jugendliche nach {{Autonomie}} streben. Wenn Eltern zu viel {{kontrollieren}}, bewertet der Organismus das {{negativ}}. Förderlich ist es, Unterstützung zu geben und die {{Selbstbestimmung}} zu achten.",
+     "woerter": [
+      "Autonomie",
+      "kontrollieren",
+      "negativ",
+      "Selbstbestimmung",
+      "Strafe",
+      "positiv",
+      "ignorieren"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Beurteile die Aussage: „Kinder müssen von außen angetrieben werden, sonst lernen sie nichts.“",
+     "hinweis": "3–5 Sätze",
+     "muster": "Rogers: Kinder tragen die Aktualisierungstendenz selbst in sich. Ermutigung und passende Hilfe fördern; Antreiben kann hemmen. Aber Grenzen und Sicherheit bleiben wichtig.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_07"
+ ]
+}

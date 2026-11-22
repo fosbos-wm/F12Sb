@@ -1,0 +1,137 @@
+{
+ "titel": "Die Entstehung psychischer Störungen – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Die Entstehung psychischer Störungen** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Jonas (19) hat gelernt: „Ich bleibe der brave Junge, der bei den Eltern bleibt.“ Gleichzeitig will er selbstständig werden. Als er einen Studienplatz in einer anderen Stadt bekommt, bekommt er starke Magenschmerzen ohne körperliche Ursache."
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Inkongruenz + starres Selbstkonzept + Lebensereignis → Konflikt → Symptom."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Ein Sohn will selbstständig werden, bleibt aber „der brave Junge“.",
+       "bestehende Inkongruenz"
+      ],
+      [
+       "„Ich darf keine Schwäche zeigen.“",
+       "starres Selbstkonzept"
+      ],
+      [
+       "Der Sohn zieht für das Studium aus.",
+       "aktuelles Lebensereignis"
+      ],
+      [
+       "Er bekommt Panikattacken.",
+       "Symptom"
+      ],
+      [
+       "Tamara fühlt sich erschöpft, will aber „die Starke“ sein.",
+       "innerer Konflikt"
+      ],
+      [
+       "Das Symptom erleichtert vorübergehend die Spannung.",
+       "Bewältigungsversuch"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was geht mit der drohenden Erschütterung einher?",
+     "optionen": [
+      "Freude",
+      "Angst",
+      "Gleichgültigkeit"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Angst"
+    },
+    {
+     "typ": "mc",
+     "frage": "Was ist ein Symptom?",
+     "optionen": [
+      "Ein Persönlichkeitstest",
+      "Eine Diagnose",
+      "Ausdruck des inneren Konflikts"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Ausdruck des inneren Konflikts"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Symptom treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es äußert den inneren Konflikt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es ist eine Ursache des Konflikts.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Es kann die Spannung kurzfristig lindern.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es sollte ohne Beachtung des Konflikts beseitigt werden.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Ordne die Bausteine zu: Inkongruenz, starres Selbstkonzept, Lebensereignis, Symptom.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Inkongruenz: Sicherheit vs. Selbstständigkeit; starres Selbstkonzept: „Ich bleibe der brave Junge“; Lebensereignis: Studienplatz; Symptom: Magenschmerzen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, wie das Symptom den Konflikt zeigt.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Das Symptom bringt den Konflikt zum Ausdruck: Es erlaubt, bei den Eltern zu bleiben, ohne den Wunsch nach Selbstständigkeit wahrzunehmen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_16"
+ ]
+}

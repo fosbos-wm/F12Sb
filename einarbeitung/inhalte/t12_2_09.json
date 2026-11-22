@@ -1,0 +1,156 @@
+{
+ "titel": "Bildung und Wirkung des Selbstkonzepts: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du sicherst die Grundlagen zum Thema **Bildung und Wirkung des Selbstkonzepts**. Etwa 20 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Zwei Schülerinnen bekommen im Praktikum dieselbe Aufgabe: Eine denkt „Ich bin kontaktfreudig“ und geht auf alle zu, die andere denkt „Ich bin kontaktscheu“ und bleibt in der Ecke."
+    },
+    {
+     "typ": "text",
+     "text": "Das Selbstkonzept entsteht durch drei Einflüsse: **persönliche Erfahrungen**, **Forderungen und Wünsche der Bezugspersonen** und **Beziehungsbotschaften**. Um **positive Beachtung** zu erhalten, werden Forderungen **verinnerlicht**."
+    },
+    {
+     "typ": "text",
+     "text": "Das Selbstkonzept lenkt **Wahrnehmung, Erleben und Verhalten**. Menschen streben nach **Selbst-Konsistenz** und machen Erfahrungen, die ihr Selbstbild **bestätigen**."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Erfahrungen + Forderungen + Beziehungsbotschaften → Selbstkonzept → Wahrnehmung und Verhalten → Bestätigung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welche Einflüsse bestimmen das Selbstkonzept?",
+     "optionen": [
+      "Persönliche Erfahrungen, Forderungen der Bezugspersonen, Beziehungsbotschaften",
+      "Nur die Gene",
+      "Nur Noten"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Persönliche Erfahrungen, Forderungen der Bezugspersonen, Beziehungsbotschaften"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne die Begriffe zu.",
+     "paare": [
+      [
+       "positive Beachtung",
+       "Bedürfnis nach Zuwendung und Anerkennung"
+      ],
+      [
+       "Verinnerlichung",
+       "Forderungen der Bezugspersonen werden übernommen"
+      ],
+      [
+       "Du-Botschaft",
+       "beurteilt die ganze Person („Du bist …“)"
+      ],
+      [
+       "Beziehungsbotschaft",
+       "vermittelt, wie die Bezugsperson zur Person steht"
+      ],
+      [
+       "Selbst-Konsistenz",
+       "Streben nach Übereinstimmung mit dem Selbstbild"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Das Selbstkonzept bildet sich durch persönliche {{Erfahrungen}}, {{Forderungen}} der Bezugspersonen und {{Beziehungsbotschaften}}. Um positive {{Beachtung}} zu erhalten, werden Forderungen {{verinnerlicht}}. Menschen streben nach {{Selbst-Konsistenz}} und verhalten sich so, wie es ihrem Selbstkonzept {{entspricht}}.",
+     "woerter": [
+      "Erfahrungen",
+      "Forderungen",
+      "Beziehungsbotschaften",
+      "Beachtung",
+      "verinnerlicht",
+      "Selbst-Konsistenz",
+      "entspricht",
+      "Triebe",
+      "verdrängen",
+      "Zufall"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Bildung des Selbstkonzepts treffen zu?",
+     "aussagen": [
+      {
+       "text": "Forderungen der Bezugspersonen werden verinnerlicht.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Beziehungsbotschaften haben keinen Einfluss.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Persönliche Erfahrungen prägen das Selbstkonzept.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es ist von Geburt an festgelegt.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "positives Selbstkonzept",
+       "items": [
+        "„Ich bin kontaktfreudig.“",
+        "Kontakte aufsuchen",
+        "Erfolgserlebnis, Kontaktsicherheit",
+        "viel Erfahrung und Übung"
+       ]
+      },
+      {
+       "name": "negatives Selbstkonzept",
+       "items": [
+        "„Ich bin kontaktscheu.“",
+        "Kontakte vermeiden",
+        "Misserfolg, Kontakthemmung",
+        "mangelnde Erfahrung und Übung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, wie sich ein negatives Selbstkonzept selbst bestätigen kann.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Wer sich für kontaktscheu hält, vermeidet Kontakte. Dadurch fehlen Erfahrung und Übung, es entsteht Misserfolg und Kontakthemmung. Das bestätigt das Selbstbild.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Beispiel",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_09"
+ ]
+}

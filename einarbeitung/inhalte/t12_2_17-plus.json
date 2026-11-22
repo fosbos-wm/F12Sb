@@ -1,0 +1,137 @@
+{
+ "titel": "Bedeutung der personenzentrierten Theorie für die Erziehung – AFB II: Anwenden",
+ "modulart": "selbstlern",
+ "lb": 2,
+ "einleitung": "Du wendest das Wissen zu **Bedeutung der personenzentrierten Theorie für die Erziehung** auf einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Der vierjährige Lukas schreit im Supermarkt und wirft sich auf den Boden. Seine Mutter sagt: „So ein böses Kind mag ich nicht.“ Eine andere Mutter beobachtet das und sagt zu ihrem Kind in ähnlicher Lage: „Du bist wütend, weil du keine Süßigkeit bekommst. Ich verstehe das, aber ich kaufe sie heute nicht.“"
+    },
+    {
+     "typ": "text",
+     "text": "Bei jedem Fall gehst du so vor: Information im Fall suchen, dem Fachbegriff zuordnen und mit Fallbezug erklären."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Bedingungslose positive Beachtung → Selbstachtung → flexibles Selbstkonzept. Rogers-Variablen: Wertschätzung, Verstehen, Echtheit."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.2",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "„Ich mag dich erst wieder, wenn du dein Zimmer aufräumst.“",
+       "Bewertungsbedingung"
+      ],
+      [
+       "„Ich sehe, dass du wütend bist, und ich mag dich trotzdem.“",
+       "Wertschätzung"
+      ],
+      [
+       "Die Erzieherin fragt nach, wie es dem Kind geht.",
+       "Verstehen"
+      ],
+      [
+       "Die Erzieherin ist ehrlich über ihre Gefühle.",
+       "Echtheit"
+      ],
+      [
+       "Ein Kind wird geliebt, auch wenn es schlechte Noten hat.",
+       "bedingungslose positive Beachtung"
+      ],
+      [
+       "Das Kind sagt: „Ich bin nur liebenswert, wenn ich Ordnung halte.“",
+       "Selbstkonzept aus Bewertungsbedingung"
+      ]
+     ]
+    },
+    {
+     "typ": "mc",
+     "frage": "Was sind Bewertungsbedingungen?",
+     "optionen": [
+      "Schulnoten",
+      "Maßstäbe, die man erfüllen muss, um Zuneigung zu erhalten",
+      "Gesetze"
+     ],
+     "richtig": 1,
+     "erklaerung": "Richtig: Maßstäbe, die man erfüllen muss, um Zuneigung zu erhalten"
+    },
+    {
+     "typ": "mc",
+     "frage": "Was folgt aus fehlender bedingungsloser Beachtung?",
+     "optionen": [
+      "Hohe Selbstachtung",
+      "Offenheit",
+      "Geringe Selbstachtung, starres Selbstkonzept"
+     ],
+     "richtig": 2,
+     "erklaerung": "Richtig: Geringe Selbstachtung, starres Selbstkonzept"
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Wertschätzung treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie akzeptiert die Person und ihre Gefühle.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie billigt jedes Verhalten.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie hängt nicht von Leistung ab.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie schließt Grenzen aus.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, was die erste Mutter dem Kind vermittelt.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Bewertungsbedingung: Zuneigung gibt es nur, wenn man „lieb“ ist. Wut ist unerwünscht.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Erkläre, welche Haltungen die zweite Mutter zeigt.",
+     "hinweis": "3–5 Sätze",
+     "muster": "Verstehen (Gefühl benannt), Wertschätzung (Person akzeptiert), Echtheit (klare eigene Position).",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_2_17"
+ ]
+}
