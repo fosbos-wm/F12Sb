@@ -1,18 +1,22 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Station – Teststation</title><link rel="stylesheet" href="css/ts.css">
-<style>html,body{height:100%}body{display:flex;flex-direction:column}
+<style>html,body{min-height:100%}body{display:flex;flex-direction:column}
 .bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px max(16px,env(safe-area-inset-left,0px));background:var(--lv,#33414d);color:#fff;border-bottom:0}
 .bar .tt{flex:1 1 220px;min-width:0}.bar .kick{font-size:.76rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;opacity:.95}
 .bar .t{font-weight:800;font-size:1.35rem;line-height:1.2;margin-top:2px}.bar .info{opacity:.95;font-size:.95rem;margin-top:3px}
 .bar .muted{color:#fff;opacity:.85}.bar .led{display:none}.bar #back{background:#fff;color:#1f2a33;border:0}
-iframe{flex:1;width:100%;border:0;background:var(--bg);min-height:0}
+iframe{flex:1 0 auto;width:100%;height:80vh;border:0;background:var(--bg);min-height:420px}
+.after{padding:0 max(16px,env(safe-area-inset-left,0px)) 28px;max-width:980px;width:100%;box-sizing:border-box;margin:0 auto}
+.kann{margin-top:22px;background:#fff;border:2px solid var(--lv);border-radius:14px;padding:14px 16px}.kann h3{margin:0 0 8px;color:var(--lv);font-size:1rem}.kann label{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;cursor:pointer}.kann input{accent-color:var(--lv);margin-top:4px}
+.pnav{margin-top:20px;background:#fff;border:1px solid #d8dee4;border-radius:14px;padding:14px 16px}.pnav h3{margin:0 0 8px;font-size:.95rem;color:var(--lv)}.pnav a{display:inline-block;margin:0 6px 6px 0;padding:6px 12px;border-radius:999px;border:2px solid var(--lv);color:var(--lv);text-decoration:none;font-weight:600;font-size:.9rem}.pnav a.on{background:var(--lv);color:#fff}.pnav .home{display:block;margin-top:8px;border:0;padding:0;color:#667;font-weight:500}
 .res{padding:10px 16px;font-size:.95rem}.res code{font:800 1.3rem var(--mono);letter-spacing:.06em}</style></head>
 <body>
 <div class="bar"><button type="button" id="qrmini" class="alt" aria-label="QR-Code zu dieser Übung, zum Vergrößern antippen" style="padding:3px;min-width:0;flex:none"><span id="qrs" style="display:block;width:56px;height:56px"></span></button><span class="led on"></span><div class="tt"><div class="kick" id="kick"></div><div class="t" id="titel">Station</div><div class="info" id="info"></div></div><span class="muted small" id="team"></span><a class="btn alt" id="back" href="../index.html#start">← Lernlandkarte</a></div>
 <div class="res msg" id="res" hidden role="status"></div>
 <div class="beamer" id="qrbig" hidden style="display:none"><button class="alt close" id="qrclose" type="button">Schließen</button><div class="side" style="margin:auto"><div class="muted">Scannen und mitmachen</div><div id="qrb"></div><div class="muted small" id="qru" style="word-break:break-all;max-width:360px"></div></div></div>
 <iframe id="frame" title="Station" allow="fullscreen" hidden></iframe>
+<div class="after" id="after" hidden></div>
 <div class="wrap" id="fehler" hidden><div class="msg err" id="ftext"></div></div>
 <script type="module">
 import {qrSvg,esc,fmtTime,SAFE_DATEI,loadKatalog,makeCode,rankSort,ls,cleanParams,cleanId} from "./js/ts-core.js";
@@ -37,6 +41,29 @@ const fail=t=>{$("fehler").hidden=false;$("ftext").textContent=t};
       document.body.style.setProperty("--lv",E[0]);$("kick").textContent=E[1];
       const lb=String(pf[0]||"").match(/^LB\s*\d+/i);$("info").textContent=[lb?lb[0]:"",s.thema||"",art].filter(Boolean).join(" · ");
       let m=document.querySelector('meta[name="theme-color"]');if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m)}m.content=E[0]})();$("team").textContent="Team "+team;document.title=s.titel+" – Teststation";
+
+    // Selbsteinschätzung und weitere Übungen
+    (()=>{
+      const EB=["Begriffe klären","Theorie verstehen","Anwenden in der Praxis"];
+      const ebOf=x=>{const pf=x.pfad||[],lz=String(pf.slice(-1)[0]||""),sm={leicht:1,mittel:1,vertieft:1},art=String((sm[lz]?pf.slice(-2)[0]:lz)||x.uebungsart||"Übung").replace(/\s*\(Vertiefung\)/,"");
+        return /K-Prim|Fachaufsatz|(?<!Block)Fall|Transfer|Anwend/i.test(art)?3:/Vergleich|Theorie|L\u00FCckentext|Reihenfolge|Struktur|Freitext/i.test(art)?2:/Zuordnung|Memory|Blockfall|Tetris|rennen|Karteikarten|Begriff/i.test(art)?1:(x.schwierigkeit==="vertieft"||x.stufe==="vertiefung"?2:1)};
+      let eb=Number(q.get("eb"));if(!(eb>=1&&eb<=3))eb=ebOf(s);
+      const box=$("after");let h="";
+      if(Array.isArray(s.kannst)&&s.kannst.length){
+        let sv=[];try{sv=JSON.parse(ls.get("ts-kann-"+sid)||"[]")}catch(_){}
+        h+=`<div class="kann"><h3>\u2705 Einsch\u00E4tzung: Ich kann \u2026</h3>${s.kannst.map((t,i)=>`<label><input type="checkbox" data-i="${i}" ${sv[i]?"checked":""}> ${esc(t)}</label>`).join("")}</div>`}
+      const sib=kat.filter(x=>x.id!==sid&&x.thema&&x.thema===s.thema&&(x.pfad||[])[0]===(s.pfad||[])[0]);
+      const link=x=>{const u=new URL(location.href);u.search="";u.searchParams.set("s",x.id);["app","t"].forEach(k=>{if(q.get(k))u.searchParams.set(k,q.get(k))});return u.pathname.split("/").pop()+u.search};
+      const same=sib.filter(x=>ebOf(x)===eb),other=sib.filter(x=>ebOf(x)!==eb);
+      if(same.length||other.length){
+        h+=`<nav class="pnav">`;
+        if(same.length)h+=`<h3>Weitere \u00DCbungen auf Ebene ${eb} \u00B7 ${EB[eb-1]}</h3>`+same.slice(0,12).map(x=>`<a href="${esc(link(x))}">${esc(x.titel)}</a>`).join("");
+        if(other.length)h+=`<h3 style="margin-top:10px">Weitere \u00DCbungen zu diesem Thema</h3>`+other.slice(0,18).map(x=>`<a href="${esc(link(x))}">${esc(x.titel)}</a>`).join("");
+        h+=`<a class="home" href="../index.html#start" id="home2">\u2190 \u00DCbersicht aller Ebenen</a></nav>`}
+      if(h){box.innerHTML=h;box.hidden=false;
+        box.querySelectorAll(".kann input").forEach(c=>c.addEventListener("change",()=>{let v=[];try{v=JSON.parse(ls.get("ts-kann-"+sid)||"[]")}catch(_){}v[+c.dataset.i]=c.checked;ls.set("ts-kann-"+sid,JSON.stringify(v))}));
+        const hm=box.querySelector("#home2");if(hm)hm.addEventListener("click",e=>{try{if(q.get("app")==="1"&&parent!==window&&parent.closeModal&&parent.go){e.preventDefault();parent.closeModal();parent.go("start")}}catch{}})}
+    })();
     const u=new URL("stationen/"+s.datei,location.href);
     u.searchParams.set("ts","1");u.searchParams.set("team",team);
     Object.entries(cleanParams(s,q)).forEach(([a,v])=>u.searchParams.set(a,v));
