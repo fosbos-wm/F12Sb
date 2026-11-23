@@ -203,3 +203,24 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lxp-row.lxp-prrow{align-items:flex-start}
 .lxp-row.lxp-prrow .lxb-t{flex:1 1 0}
 .lxp-prrow .kw-del{flex:0 0 28px}
+
+/* Handy: kompakte Kopfzeile, Menü klappt ein */
+@media(max-width:800px){
+.topbar{height:auto!important;min-height:0!important;flex-wrap:wrap!important;gap:6px 8px!important;padding:6px 12px!important;position:sticky;top:0}
+.topbar .brand img{height:34px;width:auto}
+.topbar .brand-divider,.topbar .brand-copy span,.topbar .brand-copy small{display:none!important}
+.topbar .brand-copy strong{font-size:16px}
+.topbar .user-area{margin-left:auto;display:flex;align-items:center;gap:6px}
+.topbar .user-name,.topbar #motivBtn,.topbar #recoveryBtn{display:none!important}
+.topbar .user-area .ghost-icon{padding:6px 10px;font-size:13px}
+.topbar .menu-btn{display:inline-flex!important;align-items:center;gap:4px;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:14px;font-weight:700;color:var(--blue-dark);background:#fff}
+.topbar #sidebar,.topbar .sidebar{display:none!important;order:3;flex:1 0 100%!important;max-height:70vh;overflow:auto!important;border-top:1px solid var(--line);padding:6px 0!important}
+.topbar #sidebar.open,.topbar .sidebar.open{display:block!important}
+.topbar .sidebar nav{flex-direction:column!important;flex-wrap:nowrap!important;overflow:visible!important;gap:6px!important;padding:0!important;align-items:stretch!important}
+.topbar .nav-area{display:flex!important;flex-wrap:wrap;gap:4px 6px;align-items:center}
+.topbar .nav-area[hidden]{display:none!important}
+.topbar .nav-bereich{flex:1 0 100%;margin:4px 0 0}
+.topbar .nav-bereich small{display:none}
+.topbar .nav-trenn{display:none}
+.topbar .nav-link{padding:7px 12px;font-size:14px}
+}
