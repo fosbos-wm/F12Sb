@@ -22769,7 +22769,7 @@ function lxBibVis(e,items,fort){
 }
 async function lxBibLade(e,ph){
  const [ea,a,b,trInfos,K]=await Promise.all([einarbeitungInfo(e.id).catch(()=>null),einarbeitungInfo(e.id+"-plus").catch(()=>null),einarbeitungInfo(e.id+"-vertieft").catch(()=>null),Promise.all(KW_TRAININGS_ALLE.map(x=>einarbeitungInfo(x).catch(()=>null))),lxUebKataloge()]);
- const eaS={e:a,a:b},items=lxBibItems(e,ph,K,ea,eaS,trInfos),fort=KW.fort[e.id]||{};
+ const eaS={e:a,a:b},items=lxBibItems(e,ph,K,ea,eaS,trInfos),fort=(isTeacher()&&window.__lxPre&&window.__lxPre[e.id])?{...(KW.fort[e.id]||{}),zusatz:window.__lxPre[e.id]}:(KW.fort[e.id]||{});
  return{K,ea,eaS,trInfos,items,pool:lxBibPool(e,ph,K,items),fort,bib:lxBibVis(e,items,fort)};
 }
 function lxBibTh(i,e){
@@ -22842,8 +22842,7 @@ async function lxBibPicker(tid,n){
  const sv=$("lxbPzSave");if(sv)sv.onclick=async()=>{
   const ks=[...document.querySelectorAll(".lxbPz:checked")].map(c=>c.value);if(!ks.length)return toast("Bitte mindestens eine Aufgabe ankreuzen.");
   try{const neu=[...new Set([...(D.fort.zusatz||[]),...ks])];
-   if(!isTeacher())await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});
-   KW.fort[tid]={...(KW.fort[tid]||{}),zusatz:neu};window.__lxPfadWahl[tid]="ueben";closeModal();toast(ks.length===1?"Hinzugefügt.":ks.length+" Aufgaben hinzugefügt.");render();setTimeout(lxBibUebAuf,500);
+   if(isTeacher())(window.__lxPre=window.__lxPre||{})[tid]=neu;else{await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});KW.fort[tid]={...(KW.fort[tid]||{}),zusatz:neu};if(PPM.meine&&PPM.meine.fortAlle)PPM.meine.fortAlle[tid]=KW.fort[tid];window.__fsDirty=Date.now()}window.__lxPfadWahl[tid]="ueben";closeModal();toast(ks.length===1?"Hinzugefügt.":ks.length+" Aufgaben hinzugefügt.");render();setTimeout(lxBibUebAuf,500);
   }catch(x){console.error(x);toast("Das hat nicht geklappt.")}};
 }
 document.addEventListener("click",async ev=>{
@@ -22851,7 +22850,7 @@ document.addEventListener("click",async ev=>{
  const a=b.dataset.bb,tid=b.dataset.id;
  try{
   if(a==="pick"){await lxBibPicker(tid,b.dataset.n);return}
-  if(a==="zdel"){const k=b.dataset.k,f=KW.fort[tid]||{},neu=(f.zusatz||[]).filter(x=>x!==k);if(!isTeacher())await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});KW.fort[tid]={...f,zusatz:neu};window.__lxPfadWahl[tid]="ueben";render();setTimeout(lxBibUebAuf,500);return}
+  if(a==="zdel"){const k=b.dataset.k,pre=isTeacher()&&window.__lxPre&&window.__lxPre[tid],f=pre?{zusatz:pre}:(KW.fort[tid]||{}),neu=(f.zusatz||[]).filter(x=>x!==k);if(isTeacher())(window.__lxPre=window.__lxPre||{})[tid]=neu;else{await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});KW.fort[tid]={...f,zusatz:neu};if(PPM.meine&&PPM.meine.fortAlle)PPM.meine.fortAlle[tid]=KW.fort[tid];window.__fsDirty=Date.now()}window.__lxPfadWahl[tid]="ueben";render();setTimeout(lxBibUebAuf,500);return}
   if(!isTeacher())return;
   if(a==="lib"){lxBibLibModal(tid);return}
   if(a==="add"){closeModal();await lxBibAdd(b.dataset.g,tid);return}
@@ -23433,7 +23432,7 @@ async function renderLkUnterricht(){
 }
 
 /* ---------- Navigation je Rolle, Routen, Klicks ---------- */
-document.addEventListener("click",e=>{document.querySelectorAll(".nav-mehr[open]").forEach(d=>{if(!d.contains(e.target)||e.target.closest(".nav-link"))d.open=false})});/*lxMehrZu*/
+document.addEventListener("click",e=>{document.querySelectorAll(".nav-mehr[open]").forEach(d=>{if(!d.contains(e.target)||e.target.closest(".nav-link"))d.open=false})});/*lxMehrZu*/["pointerdown","touchstart"].forEach(ev=>document.addEventListener(ev,e=>{document.querySelectorAll(".nav-mehr[open]").forEach(d=>{if(!d.contains(e.target))d.open=false})},{passive:true}));window.addEventListener("scroll",()=>{document.querySelectorAll(".nav-mehr[open]").forEach(d=>{d.open=false})},{passive:true});document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".nav-mehr[open]").forEach(d=>{d.open=false})});/*lxMehrZu2*/
 (function lxNavOben(){const mv=()=>{const sb=document.getElementById("sidebar"),u=document.querySelector(".topbar .user-area");if(sb&&u&&sb.parentElement!==u.parentElement)u.before(sb)};mv();document.addEventListener("DOMContentLoaded",mv)})();
 function lxNavRollen(){
  const sb=$("sidebar");if(!sb)return;
