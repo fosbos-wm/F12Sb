@@ -22354,7 +22354,7 @@ async function renderKachelwand(){
  const p=alle.length?Math.round(fertig/alle.length*100):0;
  const r=31,u=2*Math.PI*r,da=(u*p/100).toFixed(1);
  const ring=`<svg width="56" height="56" viewBox="0 0 78 78" role="img" aria-label="Gesamtstand ${p} Prozent"><circle cx="39" cy="39" r="${r}" fill="none" stroke="#DCE9F5" stroke-width="10"/><circle cx="39" cy="39" r="${r}" fill="none" stroke="#3A8FD4" stroke-width="10" stroke-dasharray="${da} ${u.toFixed(1)}" transform="rotate(-90 39 39)" stroke-linecap="round"/></svg>`;
- const lk=lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht</button><button class="secondary" data-kw="fortschritt">Erledigt? Selbstlernkurse und Rallyes</button></div>`:"";
+ const lk=lehrer?`<div class="kw-links"><button class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht</button></div>`:"";
  return`<div class="kw" id="kwRoot">
   ${kwSchuelerBanner()}
   <button class="secondary" onclick="go('unterricht')">← Unterrichtsfächer</button>
