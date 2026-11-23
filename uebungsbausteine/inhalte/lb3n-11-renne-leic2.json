@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist ein Habitat?",
+   "o": [
+    "Der verhaltensbeeinflussende Lebensraum eines Menschen",
+    "Das Wirkungsfeld einer Person",
+    "Ein Rückzugswinkel"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was bedeutet Nische im Life Model?",
+   "o": [
+    "Ein Versteck",
+    "Das gesellschaftlich zugestandene Handlungsfeld einer Person",
+    "Ein Wohnort"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Woran erkennt man eine gute Nische?",
+   "o": [
+    "An Geringschätzung",
+    "An Ohnmacht",
+    "An Einflussmöglichkeiten und Wertschätzung"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welches Beispiel passt zum Habitat?",
+   "o": [
+    "Bauliche Gegebenheiten wie Wohnhäuser und Verkehrsverbindungen",
+    "Der Platz des Klassenclowns",
+    "Das Selbstwertgefühl"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was kann ein unpassendes Habitat nach Germain bewirken?",
+   "o": [
+    "Mehr Selbstständigkeit",
+    "Desorientierung und Verstimmung",
+    "Bessere Gesundheit"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie nutzt die Fachkraft die Nischenanalyse?",
+   "o": [
+    "Sie ist unwichtig.",
+    "Sie ersetzt die Beratung.",
+    "Sie liefert Hinweise für das helfende Eingreifen."
+   ],
+   "r": 2
+  }
+ ]
+}

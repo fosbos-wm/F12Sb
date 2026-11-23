@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Anpassung treffen zu?",
+   "statements": [
+    {
+     "text": "Anpassung ist ein aktiver und dynamischer Prozess.",
+     "richtig": true
+    },
+    {
+     "text": "Anpassung meint Einordnung in bestehende Verhältnisse.",
+     "richtig": false
+    },
+    {
+     "text": "Sie kann auch durch Veränderung der Umwelt erfolgen.",
+     "richtig": true
+    },
+    {
+     "text": "Ziel ist ein optimales Person-Umwelt-Verhältnis.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Transaktionen treffen zu?",
+   "statements": [
+    {
+     "text": "Anpassungsfördernde Transaktionen begünstigen die Entwicklung des Menschen.",
+     "richtig": true
+    },
+    {
+     "text": "Anpassungsfeindliche Transaktionen führen zu Missverhältnissen.",
+     "richtig": true
+    },
+    {
+     "text": "Anpassungsfeindliche Transaktionen verbessern Wohlbefinden.",
+     "richtig": false
+    },
+    {
+     "text": "Sie erfordern oft eine erhöhte Anpassungsleistung.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

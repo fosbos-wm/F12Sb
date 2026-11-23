@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Nennen/Erklären",
+  "Verdeutlichen (Transfer)"
+ ],
+ "karten": [
+  {
+   "t": "Analyse: Problemverhalten genau erfassen",
+   "s": 0
+  },
+  {
+   "t": "Planung: Ziele und Vorgehensplan",
+   "s": 0
+  },
+  {
+   "t": "Begriffe definieren",
+   "s": 0
+  },
+  {
+   "t": "Schritte aufzählen",
+   "s": 0
+  },
+  {
+   "t": "Bei Anne: Schulangst auf drei Ebenen beschreiben",
+   "s": 1
+  },
+  {
+   "t": "Bei Anne: Entspannung und Angsthierarchie",
+   "s": 1
+  },
+  {
+   "t": "Bei Anne: Bewertung nach drei Monaten",
+   "s": 1
+  },
+  {
+   "t": "Bei Anne: Ziel regelmäßiger Schulbesuch",
+   "s": 1
+  }
+ ]
+}

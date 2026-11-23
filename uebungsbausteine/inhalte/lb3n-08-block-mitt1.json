@@ -1,0 +1,35 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Einleitung",
+  "Hauptteil",
+  "Schluss"
+ ],
+ "items": [
+  {
+   "t": "allgemeiner Einstieg",
+   "k": 0
+  },
+  {
+   "t": "Überleitung mit Fallbezug",
+   "k": 0
+  },
+  {
+   "t": "Analyse erklären",
+   "k": 1
+  },
+  {
+   "t": "Verhaltensmodifikation am Fall",
+   "k": 1
+  },
+  {
+   "t": "Bewertung des Erfolgs",
+   "k": 1
+  },
+  {
+   "t": "Ausblick",
+   "k": 2
+  }
+ ]
+}

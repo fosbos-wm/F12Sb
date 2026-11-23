@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Jana (15) verweigert den Sportunterricht wegen Angst vor dem Schwimmbad. Die Sozialpädagogin vereinbart: Entspannung lernen, die Angst nach Stufen ordnen, schrittweise an das Wasser herangehen. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es handelt sich um systematische Desensibilisierung.",
+     "richtig": true
+    },
+    {
+     "text": "Eine Reizüberflutung wäre ein deutlich anderes Vorgehen.",
+     "richtig": true
+    },
+    {
+     "text": "Differentielle Verstärkung ist die einzige mögliche Technik.",
+     "richtig": false
+    },
+    {
+     "text": "Die Wahl begründet sich aus der Verhaltensanalyse.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Bei Verhaltensproblemen reicht es, immer zu loben.“",
+   "statements": [
+    {
+     "text": "Lob wirkt nur im Zusammenhang mit der Analyse und passender Technik.",
+     "richtig": true
+    },
+    {
+     "text": "Je nach Problem sind weitere Techniken nötig.",
+     "richtig": true
+    },
+    {
+     "text": "Lob löst jedes Problem.",
+     "richtig": false
+    },
+    {
+     "text": "Differentielle Verstärkung bedeutet auch, Unerwünschtes nicht zu verstärken.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

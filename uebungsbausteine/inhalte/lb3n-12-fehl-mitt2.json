@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Stress und Coping",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Erkläre Lebens-Stress und Coping.",
+ "saetze": [
+  {
+   "t": "Lebens-Stress ist ein Belastungszustand bei gestörter Person-Umwelt-Abstimmung.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Lebens-Stress ist immer negativ.",
+   "falsch": true,
+   "korr": "Er kann auch positiv sein."
+  },
+  {
+   "t": "Coping ist jeder Versuch, Stress zu bewältigen.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Positives Coping lässt den Stress bestehen.",
+   "falsch": true,
+   "korr": "Es baut den Stress ab."
+  },
+  {
+   "t": "Ressourcen sind die Kräfte zur Bewältigung.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Soziale Ressourcen findet man nur in der Person.",
+   "falsch": true,
+   "korr": "Das sind personale Ressourcen; soziale liegen im Umfeld."
+  }
+ ]
+}

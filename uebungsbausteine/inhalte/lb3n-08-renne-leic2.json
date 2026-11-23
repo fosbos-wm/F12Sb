@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie ist ein Fachaufsatz aufgebaut?",
+   "o": [
+    "Einleitung, Hauptteil, Schluss",
+    "Nur Hauptteil",
+    "Frage, Antwort"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was gehört in die Einleitung?",
+   "o": [
+    "Die Lösung des Falls",
+    "Allgemeiner Einstieg, Klärung des Lernbereichs, Überleitung zum Fall",
+    "Nur die Literatur"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie geht man im Hauptteil vor?",
+   "o": [
+    "Nur Nennen",
+    "Nur Wiedergabe aus dem Heft",
+    "Nennen, Erklären, Verdeutlichen (Transfer)"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Schritte hat das verhaltensorientierte Konzept?",
+   "o": [
+    "Analyse, Planung, Handlung, Bewertung",
+    "Beobachtung, Deutung, Traumanalyse",
+    "Anmeldung, Beratung, Rechnung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie bezieht man den Fall ein?",
+   "o": [
+    "Der Fall wird ignoriert",
+    "Theorie wird an Anne konkretisiert",
+    "Der Fall wird nur abgeschrieben"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was kann ein Schlussgedanke sein?",
+   "o": [
+    "Eine Entschuldigung",
+    "Eine neue Aufgabe",
+    "Ein passender Gedanke oder Ausblick zum Thema"
+   ],
+   "r": 2
+  }
+ ]
+}

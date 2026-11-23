@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Wahl der Technik treffen zu?",
+   "statements": [
+    {
+     "text": "Die Technik richtet sich nach der Verhaltensanalyse.",
+     "richtig": true
+    },
+    {
+     "text": "Es gibt für jedes Problem nur eine richtige Technik.",
+     "richtig": false
+    },
+    {
+     "text": "Verstärkende Konsequenzen sprechen oft für operante Techniken.",
+     "richtig": true
+    },
+    {
+     "text": "Bei Ängsten kommen häufig klassische Techniken in Frage.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Bewertung treffen zu?",
+   "statements": [
+    {
+     "text": "In der Bewertung wird geprüft, ob die Ziele erreicht wurden.",
+     "richtig": true
+    },
+    {
+     "text": "Bei Stagnation wird das Vorgehen angepasst.",
+     "richtig": true
+    },
+    {
+     "text": "Nach der Bewertung ist nie eine Änderung nötig.",
+     "richtig": false
+    },
+    {
+     "text": "Erfolgskontrolle wird schon in der Planung vorbereitet.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

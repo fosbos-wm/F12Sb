@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Transaktion",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Erkläre das Life Model.",
+ "saetze": [
+  {
+   "t": "Das Life Model wurde von Germain und Gitterman entwickelt.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Probleme entstehen allein im Inneren der Person.",
+   "falsch": true,
+   "korr": "Sie entstehen auch in der Beziehung Person–Umwelt."
+  },
+  {
+   "t": "Transaktion ist die gegenseitige Beeinflussung von Person und Umwelt.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Eine Transaktion ist ein einmaliger, abgeschlossener Vorgang.",
+   "falsch": true,
+   "korr": "Sie ist eine fortlaufende Wirkung und Rückwirkung."
+  },
+  {
+   "t": "Die Soziale Arbeit hat eine Doppelverpflichtung.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Ökologie ist die Lehre vom Lernen.",
+   "falsch": true,
+   "korr": "Ökologie ist die Lehre von den Beziehungen zwischen Organismen und Umwelten."
+  }
+ ]
+}

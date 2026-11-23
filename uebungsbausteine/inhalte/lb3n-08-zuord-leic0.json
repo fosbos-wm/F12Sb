@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Fachaufsatz",
+   "strukturierter Text mit Einleitung, Hauptteil, Schluss"
+  ],
+  [
+   "Einleitung",
+   "Einstieg, Klärung des Lernbereichs, Überleitung zum Fall"
+  ],
+  [
+   "Hauptteil",
+   "Theorie nennen, erklären, am Fall verdeutlichen (Transfer)"
+  ],
+  [
+   "Schlussgedanke",
+   "abschließender Gedanke oder Ausblick"
+  ],
+  [
+   "Fallbezug",
+   "Theorie wird am Beispiel konkretisiert"
+  ],
+  [
+   "Operator Erläutern",
+   "Sachverhalt mit Beispielen verständlich machen"
+  ]
+ ]
+}

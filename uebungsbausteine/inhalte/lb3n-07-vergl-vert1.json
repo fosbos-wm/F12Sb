@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "klassische Technik",
+  "operante Technik"
+ ],
+ "karten": [
+  {
+   "t": "Entspannung gegen Angst",
+   "s": 0
+  },
+  {
+   "t": "Angsthierarchie",
+   "s": 0
+  },
+  {
+   "t": "Aversion durch Übelkeit",
+   "s": 0
+  },
+  {
+   "t": "Konfrontation",
+   "s": 0
+  },
+  {
+   "t": "Lob und Ignorieren",
+   "s": 1
+  },
+  {
+   "t": "Teilschritte belohnen",
+   "s": 1
+  },
+  {
+   "t": "Motivation durch Bedürfnisse",
+   "s": 1
+  },
+  {
+   "t": "Verstärkung ausschleichen",
+   "s": 1
+  }
+ ]
+}

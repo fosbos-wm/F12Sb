@@ -1,0 +1,35 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Lebens-Stress",
+  "Coping",
+  "Ressource"
+ ],
+ "items": [
+  {
+   "t": "Kündigung",
+   "k": 0
+  },
+  {
+   "t": "Verlust einer nahestehenden Person",
+   "k": 0
+  },
+  {
+   "t": "Beratung aufsuchen",
+   "k": 1
+  },
+  {
+   "t": "Plan machen",
+   "k": 1
+  },
+  {
+   "t": "Freundin als Unterstützung",
+   "k": 2
+  },
+  {
+   "t": "Problemlösefähigkeit",
+   "k": 2
+  }
+ ]
+}

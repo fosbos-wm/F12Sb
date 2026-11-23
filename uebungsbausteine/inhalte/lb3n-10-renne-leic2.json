@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was bedeutet Anpassung im Life Model?",
+   "o": [
+    "Herstellen einer Übereinstimmung zwischen Person und Umwelt",
+    "Sich in bestehende Verhältnisse einordnen",
+    "Sich der Gruppe unterordnen"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie kann Anpassung geschehen?",
+   "o": [
+    "Nur durch Änderung der Person",
+    "Durch Veränderung der Person und/oder der Umwelt",
+    "Nur durch Änderung der Umwelt"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was sind anpassungsfördernde Transaktionen?",
+   "o": [
+    "Prozesse, die Konflikte erzeugen",
+    "Prozesse ohne Wirkung",
+    "Prozesse, die zu Übereinstimmung zwischen Person und Umwelt führen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist ein Beispiel für eine anpassungsfeindliche Transaktion?",
+   "o": [
+    "Ein Erholungsgebiet wird einer Autobahn geopfert",
+    "Ein Baggersee wird für die Gemeinde gebaut",
+    "Ein Park entsteht auf einer Brache"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Umwelt umfasst Sprache, Normen und Massenmedien?",
+   "o": [
+    "Die natürliche Umwelt",
+    "Die kulturelle Umwelt",
+    "Die ökonomische Umwelt"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Umwelt umfasst Wohn- und Einkommensverhältnisse?",
+   "o": [
+    "Die soziale Umwelt",
+    "Die natürliche Umwelt",
+    "Die ökonomische Umwelt"
+   ],
+   "r": 2
+  }
+ ]
+}

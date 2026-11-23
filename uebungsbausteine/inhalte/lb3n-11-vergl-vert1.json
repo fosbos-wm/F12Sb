@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Habitat",
+  "Nische"
+ ],
+ "karten": [
+  {
+   "t": "Wohnumgebung",
+   "s": 0
+  },
+  {
+   "t": "Verkehrsanbindung",
+   "s": 0
+  },
+  {
+   "t": "Spielplatz und Treffs",
+   "s": 0
+  },
+  {
+   "t": "Architektur",
+   "s": 0
+  },
+  {
+   "t": "Einflussmöglichkeit",
+   "s": 1
+  },
+  {
+   "t": "Status in der Gruppe",
+   "s": 1
+  },
+  {
+   "t": "Wertschätzung",
+   "s": 1
+  },
+  {
+   "t": "Handlungsfeld",
+   "s": 1
+  }
+ ]
+}

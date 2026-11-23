@@ -1,0 +1,33 @@
+{
+ "titel": "Regler: sanft oder konfrontativ?",
+ "anleitung": "Schiebe den Regler für jede Aussage an die passende Stelle zwischen den beiden Polen.",
+ "links": "sanft, schrittweise",
+ "rechts": "konfrontativ, sofort",
+ "items": [
+  {
+   "t": "Systematische Desensibilisierung",
+   "w": 15,
+   "e": "Schrittweise bei Entspannung."
+  },
+  {
+   "t": "Gegenkonditionierung",
+   "w": 25,
+   "e": "Angenehme Kopplung."
+  },
+  {
+   "t": "Reizüberflutung (Flooding)",
+   "w": 95,
+   "e": "Sofortige starke Konfrontation."
+  },
+  {
+   "t": "Shaping",
+   "w": 20,
+   "e": "Kleine Schritte."
+  },
+  {
+   "t": "Aversionstherapie",
+   "w": 85,
+   "e": "Unangenehme Kopplung."
+  }
+ ]
+}

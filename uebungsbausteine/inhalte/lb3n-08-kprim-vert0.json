@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Anne (17) hat Angst, zur Schule zu gehen, trifft keine Freunde mehr und hat Magenprobleme. Ihre Mutter erlaubt ihr bei Bauchweh das Zuhausebleiben. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Magenprobleme gehören zur physiologischen Ebene.",
+     "richtig": true
+    },
+    {
+     "text": "Das Zuhausebleiben kann die Schulangst aufrechterhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Der Fall liefert keine Anhaltspunkte für eine Analyse.",
+     "richtig": false
+    },
+    {
+     "text": "Ein Ziel könnte sein, wieder regelmäßig die Schule zu besuchen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Im Hauptteil reicht es, die Schritte nur aufzuzählen.“",
+   "statements": [
+    {
+     "text": "Es braucht auch Erklären und Fallbezug.",
+     "richtig": true
+    },
+    {
+     "text": "Nennen allein genügt nicht für eine gute Leistung.",
+     "richtig": true
+    },
+    {
+     "text": "Aufzählen reicht für alle Punkte.",
+     "richtig": false
+    },
+    {
+     "text": "Transfer zeigt, dass die Theorie verstanden wurde.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

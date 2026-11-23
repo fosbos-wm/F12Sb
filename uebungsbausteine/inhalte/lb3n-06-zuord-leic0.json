@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "differentielle Verstärkung",
+   "unerwünschtes Verhalten ignorieren, erwünschtes sofort verstärken"
+  ],
+  [
+   "Verhaltensformung (Shaping)",
+   "schrittweiser Aufbau eines Verhaltens durch Verstärkung kleiner Schritte"
+  ],
+  [
+   "Nicht-Verstärkung",
+   "unerwünschtes Verhalten wird nicht mehr beachtet"
+  ],
+  [
+   "Gesetz der Bereitschaft",
+   "Lernen setzt voraus, dass ein angenehmer Zustand herbeigeführt oder ein unangenehmer beseitigt wird (Thorndike)"
+  ],
+  [
+   "sekundärer Verstärker",
+   "gelernter Verstärker, z. B. ein Klickton"
+  ],
+  [
+   "Endverhalten",
+   "das gewünschte Zielverhalten"
+  ]
+ ]
+}

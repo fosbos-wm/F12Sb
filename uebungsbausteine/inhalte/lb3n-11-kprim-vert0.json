@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Mia (16) lebt in einem Hochhausviertel ohne Jugendtreff. In ihrer Klasse darf sie nie mitentscheiden, Mitschüler lachen über sie. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das Viertel gehört zum Habitat.",
+     "richtig": true
+    },
+    {
+     "text": "Mias geringe Einflussmöglichkeiten deuten auf eine schlechte Nische.",
+     "richtig": true
+    },
+    {
+     "text": "Mia hat eine gute Nische.",
+     "richtig": false
+    },
+    {
+     "text": "Die Sozialarbeit kann Habitat und Nische verbessern.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Nische bedeutet, dass man sich zurückzieht.“",
+   "statements": [
+    {
+     "text": "Im Life Model heißt Nische Wirkungsfeld.",
+     "richtig": true
+    },
+    {
+     "text": "Historisch bedeutete Nische Rückzugswinkel.",
+     "richtig": true
+    },
+    {
+     "text": "Das Life Model benutzt den Begriff genauso.",
+     "richtig": false
+    },
+    {
+     "text": "Das zeigt die Kritik an unpräzisen Begriffen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

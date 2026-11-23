@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Eine Stadt baut an der Stadtgrenze ein großes Gewerbegebiet. Viele ziehen wegen Lärm und Abgasen aufs Land und pendeln mit dem Auto. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es zeigt einen Wirkkreislauf durch Transaktionen.",
+     "richtig": true
+    },
+    {
+     "text": "Die veränderte Umwelt wirkt auf die Lebensverhältnisse zurück.",
+     "richtig": true
+    },
+    {
+     "text": "Die Umwelt bleibt unverändert.",
+     "richtig": false
+    },
+    {
+     "text": "Aus Reaktionen der Menschen entstehen neue Umweltveränderungen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Soziale Arbeit soll nur den einzelnen Klienten ändern.“",
+   "statements": [
+    {
+     "text": "Das widerspricht der ökologischen Sicht.",
+     "richtig": true
+    },
+    {
+     "text": "Auch die Umwelt muss gestaltet werden.",
+     "richtig": true
+    },
+    {
+     "text": "Die Aussage entspricht dem Life Model.",
+     "richtig": false
+    },
+    {
+     "text": "Person und Umwelt stehen in Wechselwirkung.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

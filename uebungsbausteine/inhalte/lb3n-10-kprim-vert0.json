@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Ein Stadtteil schließt sein Jugendzentrum. Die Jugendlichen treffen sich nun an der Tankstelle, es gibt Beschwerden. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Schließung kann eine anpassungsfeindliche Transaktion sein.",
+     "richtig": true
+    },
+    {
+     "text": "Die Umwelt verändert sich und verlangt neue Anpassung.",
+     "richtig": true
+    },
+    {
+     "text": "Die Jugendlichen müssen sich einfach besser anpassen, mehr ist nicht nötig.",
+     "richtig": false
+    },
+    {
+     "text": "Eine anpassungsfördernde Lösung könnte ein neuer Treffpunkt sein.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Anpassung heißt, dass sich der Klient der Umwelt unterordnet.“",
+   "statements": [
+    {
+     "text": "Das widerspricht dem Begriff im Life Model.",
+     "richtig": true
+    },
+    {
+     "text": "Anpassung ist ein aktiver, oft kreativer Prozess.",
+     "richtig": true
+    },
+    {
+     "text": "Anpassung ist immer Unterordnung.",
+     "richtig": false
+    },
+    {
+     "text": "Auch die Umwelt soll sich den Bedürfnissen anpassen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

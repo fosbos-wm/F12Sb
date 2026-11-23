@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Nische treffen zu?",
+   "statements": [
+    {
+     "text": "Nische ist das gesellschaftlich zugestandene Handlungsfeld.",
+     "richtig": true
+    },
+    {
+     "text": "Nische bedeutet Rückzugswinkel.",
+     "richtig": false
+    },
+    {
+     "text": "Wertschätzung kann ein Merkmal einer guten Nische sein.",
+     "richtig": true
+    },
+    {
+     "text": "Eine schlechte Nische bedeutet geringe Einflussmöglichkeiten.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Habitat treffen zu?",
+   "statements": [
+    {
+     "text": "Es umfasst bauliche, soziale und kulturelle Gegebenheiten.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist der Ort, an dem ein Lebewesen anzutreffen ist.",
+     "richtig": true
+    },
+    {
+     "text": "Es beschreibt nur die Wohnung.",
+     "richtig": false
+    },
+    {
+     "text": "Es kann das Funktionieren eines Organismus fördern oder beeinträchtigen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

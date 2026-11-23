@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Anpassung",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Erkläre den Begriff Anpassung im Life Model.",
+ "saetze": [
+  {
+   "t": "Anpassung stellt eine Übereinstimmung von Person und Umwelt her.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Anpassung bedeutet, sich in bestehende Verhältnisse einzuordnen.",
+   "falsch": true,
+   "korr": "Sie ist ein aktiver, dynamischer Prozess."
+  },
+  {
+   "t": "Sie kann auch durch Veränderung der Umwelt geschehen.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Anpassungsfeindliche Transaktionen fördern das Wohlbefinden.",
+   "falsch": true,
+   "korr": "Sie führen zu Missverhältnissen."
+  },
+  {
+   "t": "Zur Umwelt zählen natürliche, kulturelle, soziale und ökonomische Bereiche.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Die kulturelle Umwelt umfasst das Klima.",
+   "falsch": true,
+   "korr": "Das Klima gehört zur natürlichen Umwelt."
+  }
+ ]
+}

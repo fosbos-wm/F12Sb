@@ -1,0 +1,35 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Person",
+  "Umwelt",
+  "Transaktion"
+ ],
+ "items": [
+  {
+   "t": "Bedürfnisse, Rechte, Ziele",
+   "k": 0
+  },
+  {
+   "t": "Anpassungsfähigkeit",
+   "k": 0
+  },
+  {
+   "t": "natürliche, kulturelle, soziale, ökonomische Bereiche",
+   "k": 1
+  },
+  {
+   "t": "Anforderungen und Möglichkeiten",
+   "k": 1
+  },
+  {
+   "t": "Wirkung und Rückwirkung",
+   "k": 2
+  },
+  {
+   "t": "endlose Spirale wechselseitiger Beeinflussung",
+   "k": 2
+  }
+ ]
+}

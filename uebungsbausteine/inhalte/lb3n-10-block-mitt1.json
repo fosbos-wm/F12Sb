@@ -1,0 +1,34 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "anpassungsfördernd",
+  "anpassungsfeindlich"
+ ],
+ "items": [
+  {
+   "t": "Baggersee als Treffpunkt",
+   "k": 0
+  },
+  {
+   "t": "Rampe für Rollstuhl",
+   "k": 0
+  },
+  {
+   "t": "Beratungsstelle im Stadtteil",
+   "k": 0
+  },
+  {
+   "t": "Autobahn durch Erholungsgebiet",
+   "k": 1
+  },
+  {
+   "t": "Kürzung von Jugendtreffs",
+   "k": 1
+  },
+  {
+   "t": "Wohnung zu klein für Familie",
+   "k": 1
+  }
+ ]
+}

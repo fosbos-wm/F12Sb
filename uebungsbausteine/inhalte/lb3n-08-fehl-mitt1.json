@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Fachaufsatz Anne",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Schülerabsatz zum Hauptteil über Anne.",
+ "saetze": [
+  {
+   "t": "Die Analyse beschreibt Annes Schulangst auf drei Ebenen.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Bei Anne zeigen sich Magenprobleme auf der Verhaltensebene.",
+   "falsch": true,
+   "korr": "Magenprobleme gehören zur physiologischen Ebene."
+  },
+  {
+   "t": "In der Planung werden Ziele und ein Vorgehensplan entwickelt.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Als Technik käme die systematische Desensibilisierung in Frage.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Die Bewertung findet vor der Analyse statt.",
+   "falsch": true,
+   "korr": "Die Bewertung ist der letzte Schritt."
+  },
+  {
+   "t": "Die Theorie wird nicht auf Anne bezogen.",
+   "falsch": true,
+   "korr": "Fallbezug (Transfer) ist verlangt."
+  }
+ ]
+}

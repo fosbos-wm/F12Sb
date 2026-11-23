@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Beispiele erkennen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Fritz stört den Unterricht: Lehrer und Klasse schauen weg. Arbeitet er mit, bekommt er Lob.",
+   "differentielle Verstärkung"
+  ],
+  [
+   "Ein Kind spricht nicht. Schon ein einzelner Laut wird belohnt, später Nachahmung.",
+   "Verhaltensformung (Shaping)"
+  ],
+  [
+   "Der Lehrer wendet sich Fritz beim Stören nicht mehr zu.",
+   "Nicht-Verstärkung"
+  ],
+  [
+   "Der Betreuer knüpft an das Bedürfnis des Klienten nach Anerkennung an.",
+   "Schaffen von Motivation"
+  ],
+  [
+   "Das Kind trägt die Brille, nachdem erst das Aufnehmen des Gestells verstärkt wurde.",
+   "Teilschritt zum Endverhalten"
+  ],
+  [
+   "Ein Klickton kündigt Süßigkeiten an und wirkt dann selbst verstärkend.",
+   "sekundärer Verstärker"
+  ]
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "titel": "Diagnose: Coping",
+ "anleitung": "Lies den Fall, wähle die passende Antwort und belege sie mit den richtigen Hinweisen.",
+ "faelle": [
+  {
+   "fall": "Nach der Kündigung geht Herr B. zur Beratungsstelle und findet eine neue Stelle.",
+   "frage": "Welches Coping?",
+   "optionen": [
+    "positives Coping",
+    "negatives Coping"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Der Stress wird abgebaut.",
+     "ok": true
+    },
+    {
+     "t": "Der Stress verstärkt sich.",
+     "ok": false
+    }
+   ],
+   "erkl": "Positives Coping."
+  },
+  {
+   "fall": "Nach der Trennung trinkt Mia mehr, Probleme wachsen.",
+   "frage": "Welches Coping?",
+   "optionen": [
+    "negatives Coping",
+    "positives Coping"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Die Bewältigung misslingt.",
+     "ok": true
+    },
+    {
+     "t": "Es werden effektive Strategien genutzt.",
+     "ok": false
+    }
+   ],
+   "erkl": "Negatives Coping."
+  },
+  {
+   "fall": "Lena sieht die Prüfung als Chance und lernt gezielt.",
+   "frage": "Welcher Lebens-Stress?",
+   "optionen": [
+    "positiver Lebens-Stress",
+    "negativer Lebens-Stress"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Sie sieht eine Herausforderung.",
+     "ok": true
+    },
+    {
+     "t": "Sie sieht eine Bedrohung.",
+     "ok": false
+    }
+   ],
+   "erkl": "Positiver Lebens-Stress."
+  }
+ ]
+}

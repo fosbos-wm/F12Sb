@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Beispiele erkennen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Eine Familie wohnt an einer Hauptstraße ohne Spielplatz in der Nähe.",
+   "Habitat"
+  ],
+  [
+   "Der Klassenclown hat sein Publikum in der Klasse.",
+   "Nische"
+  ],
+  [
+   "Ein Schüler darf über Lerninhalte mitentscheiden.",
+   "gute Nische"
+  ],
+  [
+   "Ein Jugendlicher hat keinerlei Einfluss auf das Schulleben.",
+   "schlechte Nische"
+  ],
+  [
+   "Ein Stadtteil hat Bürgerhaus, Theater und Bücherei.",
+   "kulturelle Gegebenheiten"
+  ],
+  [
+   "Ein Verein vergibt Posten an seine Mitglieder.",
+   "Nische"
+  ]
+ ]
+}

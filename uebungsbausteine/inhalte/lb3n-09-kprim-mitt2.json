@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Life Model treffen zu?",
+   "statements": [
+    {
+     "text": "Es verbindet die ökologische Sicht mit einer Methode für die Praxis.",
+     "richtig": true
+    },
+    {
+     "text": "Es sieht Probleme nur im Inneren der Person.",
+     "richtig": false
+    },
+    {
+     "text": "Person und Umwelt beeinflussen sich wechselseitig.",
+     "richtig": true
+    },
+    {
+     "text": "Es wurde in den USA entwickelt.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Transaktion treffen zu?",
+   "statements": [
+    {
+     "text": "Transaktionen können positiv, negativ oder neutral sein.",
+     "richtig": true
+    },
+    {
+     "text": "Eine Transaktion ist ein einmaliger Vorgang.",
+     "richtig": false
+    },
+    {
+     "text": "Das Verhalten einer Person wirkt auf die Umwelt ein.",
+     "richtig": true
+    },
+    {
+     "text": "Die Umwelt wirkt auf die Person zurück.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

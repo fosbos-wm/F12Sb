@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welche Technik gehört zum operanten Konditionieren?",
+   "o": [
+    "Verhaltensformung (Shaping)",
+    "Reizüberflutung",
+    "Aversionstherapie"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Technik passt zu einer Angststörung mit Vermeidung?",
+   "o": [
+    "Differentielle Verstärkung",
+    "Systematische Desensibilisierung",
+    "Shaping"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Technik baut ein neues Verhalten in kleinen Schritten auf?",
+   "o": [
+    "Gegenkonditionierung",
+    "Aversionstherapie",
+    "Verhaltensformung"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was prüft man vor der Wahl einer Technik?",
+   "o": [
+    "Das Ergebnis der Verhaltensanalyse",
+    "Das Lieblingsfach des Klienten",
+    "Die Schuhgröße"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Technik ist ethisch besonders umstritten?",
+   "o": [
+    "Entspannungstraining",
+    "Aversionstherapie",
+    "Lob"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Schritt folgt nach der Intervention?",
+   "o": [
+    "Analyse",
+    "Planung",
+    "Bewertung"
+   ],
+   "r": 2
+  }
+ ]
+}

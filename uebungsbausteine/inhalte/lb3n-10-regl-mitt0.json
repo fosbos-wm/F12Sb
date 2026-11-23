@@ -1,0 +1,33 @@
+{
+ "titel": "Regler: Anpassung",
+ "anleitung": "Schiebe den Regler für jede Aussage an die passende Stelle zwischen den beiden Polen.",
+ "links": "anpassungsfeindlich",
+ "rechts": "anpassungsfördernd",
+ "items": [
+  {
+   "t": "Ein Erholungsgebiet wird für eine Autobahn geopfert.",
+   "w": 8,
+   "e": "Anpassungsfeindlich."
+  },
+  {
+   "t": "Ein Baggersee wird als Treffpunkt gebaut.",
+   "w": 92,
+   "e": "Anpassungsfördernd."
+  },
+  {
+   "t": "Ein Jugendzentrum wird aus Spargründen geschlossen.",
+   "w": 15,
+   "e": "Eher feindlich."
+  },
+  {
+   "t": "Eine Rampe macht ein Gebäude barrierefrei.",
+   "w": 90,
+   "e": "Fördernd."
+  },
+  {
+   "t": "Ein Betrieb bietet flexible Arbeitszeiten für pflegende Angehörige.",
+   "w": 80,
+   "e": "Eher fördernd."
+  }
+ ]
+}

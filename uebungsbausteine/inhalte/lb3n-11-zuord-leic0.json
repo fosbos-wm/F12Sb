@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Habitat",
+   "unmittelbarer Lebensraum, der Erleben und Verhalten beeinflusst"
+  ],
+  [
+   "Nische",
+   "gesellschaftlich zugestandenes Handlungsfeld einer Person"
+  ],
+  [
+   "gute Nische",
+   "große Einflussmöglichkeiten"
+  ],
+  [
+   "schlechte Nische",
+   "geringe Einflussmöglichkeiten, Ohnmacht"
+  ],
+  [
+   "Wertschätzung",
+   "Merkmal einer guten Nische"
+  ],
+  [
+   "Geringschätzung",
+   "Hinweis auf eine schlechte Nische"
+  ]
+ ]
+}

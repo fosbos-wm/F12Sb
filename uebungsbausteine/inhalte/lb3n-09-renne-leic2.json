@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wer entwickelte das Life Model?",
+   "o": [
+    "Carel Germain und Alex Gitterman",
+    "Sigmund Freud und Carl Rogers",
+    "Hobmair und Thiersch"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was bedeutet der Begriff Ökologie ursprünglich?",
+   "o": [
+    "Lehre vom Lernen",
+    "Lehre vom Haushalt (oikos = Haus, logos = Lehre)",
+    "Lehre vom Träumen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie sieht die ökologische Soziale Arbeit Probleme?",
+   "o": [
+    "Nur als innere Krankheit",
+    "Nur als Schuld der Eltern",
+    "Als Folge einer fehlgelaufenen Beziehung zwischen Person und Umwelt"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was bedeutet Transaktion?",
+   "o": [
+    "Ständige gegenseitige Beeinflussung von Individuum und Umwelt",
+    "Einmalige Handlung einer Person",
+    "Eine Bezahlung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Umweltbereiche nennt der Lehrtext?",
+   "o": [
+    "Nur Wohnung und Schule",
+    "Natürliche, kulturelle, ökonomische und soziale Umwelt",
+    "Nur Familie"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Doppelverpflichtung hat die Soziale Arbeit nach dem Life Model?",
+   "o": [
+    "Strafen und Kontrollieren",
+    "Beraten und Verwalten",
+    "Hilfe für die Person und Gestaltung der Umwelt"
+   ],
+   "r": 2
+  }
+ ]
+}

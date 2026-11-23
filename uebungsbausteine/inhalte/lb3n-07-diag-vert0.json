@@ -1,0 +1,69 @@
+{
+ "titel": "Diagnose: Passende Technik wählen",
+ "anleitung": "Lies den Fall, wähle die passende Antwort und belege sie mit den richtigen Hinweisen.",
+ "faelle": [
+  {
+   "fall": "Anna hat Angst vor dem Zahnarzt.",
+   "frage": "Welche Technik passt am besten?",
+   "optionen": [
+    "systematische Desensibilisierung",
+    "differentielle Verstärkung",
+    "Shaping"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um eine emotionale Angstreaktion.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Aufbau neuer Verhaltensweisen.",
+     "ok": false
+    }
+   ],
+   "erkl": "Angst: klassisch."
+  },
+  {
+   "fall": "Ben stört, um Aufmerksamkeit zu erhalten.",
+   "frage": "Welche Technik passt am besten?",
+   "optionen": [
+    "differentielle Verstärkung",
+    "Reizüberflutung",
+    "Gegenkonditionierung"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Aufmerksamkeit verstärkt das Stören.",
+     "ok": true
+    },
+    {
+     "t": "Es ist eine Angststörung.",
+     "ok": false
+    }
+   ],
+   "erkl": "Konsequenzen steuern: operant."
+  },
+  {
+   "fall": "Tom soll lernen, vor der Gruppe zu sprechen.",
+   "frage": "Welche Technik passt am besten?",
+   "optionen": [
+    "Shaping",
+    "Aversionstherapie",
+    "Flooding"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Das Verhalten ist noch nicht vorhanden und muss aufgebaut werden.",
+     "ok": true
+    },
+    {
+     "t": "Es wird ein Reiz unangenehm gemacht.",
+     "ok": false
+    }
+   ],
+   "erkl": "Aufbau in Schritten: Shaping."
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Intervention",
+   "gezielte Handlung nach dem Vorgehensplan"
+  ],
+  [
+   "klassisches Konditionieren",
+   "Lernen durch Kopplung von Reizen"
+  ],
+  [
+   "operantes Konditionieren",
+   "Lernen durch Konsequenzen"
+  ],
+  [
+   "Gegenkonditionierung",
+   "Angstreiz mit unvereinbarem angenehmem Reiz koppeln"
+  ],
+  [
+   "Reizüberflutung",
+   "sofortige Konfrontation mit starken Reizen"
+  ],
+  [
+   "Verhaltensformung",
+   "kleine Schritte zum Endverhalten verstärken"
+  ]
+ ]
+}

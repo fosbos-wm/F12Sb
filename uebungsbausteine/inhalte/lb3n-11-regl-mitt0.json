@@ -1,0 +1,33 @@
+{
+ "titel": "Regler: Nische",
+ "anleitung": "Schiebe den Regler für jede Aussage an die passende Stelle zwischen den beiden Polen.",
+ "links": "schlechte Nische",
+ "rechts": "gute Nische",
+ "items": [
+  {
+   "t": "Eine Schülerin entscheidet im Klassenrat mit.",
+   "w": 88,
+   "e": "Gute Nische."
+  },
+  {
+   "t": "Ein Jugendlicher darf nie mitentscheiden und wird ausgelacht.",
+   "w": 10,
+   "e": "Schlechte Nische."
+  },
+  {
+   "t": "Ein Vereinsmitglied hat ein Amt und wird geschätzt.",
+   "w": 85,
+   "e": "Gute Nische."
+  },
+  {
+   "t": "Ein Bewohner wird diskriminiert.",
+   "w": 8,
+   "e": "Schlechte Nische."
+  },
+  {
+   "t": "Ein Neuer wird gelegentlich nach seiner Meinung gefragt.",
+   "w": 55,
+   "e": "Mittel."
+  }
+ ]
+}

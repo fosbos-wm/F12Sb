@@ -1,0 +1,66 @@
+{
+ "titel": "Diagnose: Habitat oder Nische?",
+ "anleitung": "Lies den Fall, wähle die passende Antwort und belege sie mit den richtigen Hinweisen.",
+ "faelle": [
+  {
+   "fall": "Ein Viertel mit Hochhäusern, ohne Spielplatz.",
+   "frage": "Was ist beschrieben?",
+   "optionen": [
+    "Habitat",
+    "Nische"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um den Lebensraum.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Einflussmöglichkeiten.",
+     "ok": false
+    }
+   ],
+   "erkl": "Habitat."
+  },
+  {
+   "fall": "Der Klassenclown hat sein Publikum.",
+   "frage": "Was ist beschrieben?",
+   "optionen": [
+    "Nische",
+    "Habitat"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um Wirkungsfeld und Einfluss.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Gebäude.",
+     "ok": false
+    }
+   ],
+   "erkl": "Nische."
+  },
+  {
+   "fall": "Ein Bürgerhaus und ein Theater im Stadtteil.",
+   "frage": "Was ist beschrieben?",
+   "optionen": [
+    "Habitat",
+    "Nische"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Kulturelle Gegebenheiten des Lebensraums.",
+     "ok": true
+    },
+    {
+     "t": "Statuszuschreibung.",
+     "ok": false
+    }
+   ],
+   "erkl": "Habitat."
+  }
+ ]
+}

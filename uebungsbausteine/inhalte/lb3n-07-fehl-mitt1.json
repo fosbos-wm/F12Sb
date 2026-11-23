@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Interventionen",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Begründe die Auswahl von Techniken.",
+ "saetze": [
+  {
+   "t": "Die Technik wird aus der Verhaltensanalyse abgeleitet.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Klassische Techniken eignen sich vor allem für Ängste.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Aversionstherapie ist ethisch unumstritten.",
+   "falsch": true,
+   "korr": "Sie ist umstritten und braucht Freiwilligkeit."
+  },
+  {
+   "t": "Nach der Intervention folgt die Bewertung.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Bei Stagnation wird das Vorgehen beibehalten.",
+   "falsch": true,
+   "korr": "Es wird geändert."
+  },
+  {
+   "t": "Differentielle Verstärkung ist eine klassische Technik.",
+   "falsch": true,
+   "korr": "Sie ist operant."
+  }
+ ]
+}

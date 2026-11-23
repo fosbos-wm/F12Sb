@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "anpassungsfördernd",
+  "anpassungsfeindlich"
+ ],
+ "karten": [
+  {
+   "t": "Baggersee",
+   "s": 0
+  },
+  {
+   "t": "Barrierefreiheit",
+   "s": 0
+  },
+  {
+   "t": "gemeinsame Regeln",
+   "s": 0
+  },
+  {
+   "t": "positives Person-Umwelt-Verhältnis",
+   "s": 0
+  },
+  {
+   "t": "Lärm und Abgase",
+   "s": 1
+  },
+  {
+   "t": "Verlust des Treffpunkts",
+   "s": 1
+  },
+  {
+   "t": "Missverhältnis",
+   "s": 1
+  },
+  {
+   "t": "erhöhte Anpassungsleistung",
+   "s": 1
+  }
+ ]
+}

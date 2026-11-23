@@ -1,0 +1,35 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Habitat",
+  "gute Nische",
+  "schlechte Nische"
+ ],
+ "items": [
+  {
+   "t": "Wohnhaus, Verkehrsanbindung",
+   "k": 0
+  },
+  {
+   "t": "Bürgerhaus und Museum",
+   "k": 0
+  },
+  {
+   "t": "Mitentscheiden im Verein",
+   "k": 1
+  },
+  {
+   "t": "Anerkennung in der Gruppe",
+   "k": 1
+  },
+  {
+   "t": "Keine Einflussmöglichkeit",
+   "k": 2
+  },
+  {
+   "t": "Diskriminierung",
+   "k": 2
+  }
+ ]
+}

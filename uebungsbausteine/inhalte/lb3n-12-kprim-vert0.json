@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Nach dem Tod ihrer Mutter fühlt sich Anna (17) überfordert. Sie meldet sich nicht mehr, sagt Treffen ab, die Noten sinken. Ihre Tante bietet Hilfe an, Anna lehnt ab. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es liegt negativer Lebens-Stress vor.",
+     "richtig": true
+    },
+    {
+     "text": "Annas Rückzug ist ein eher negatives Coping.",
+     "richtig": true
+    },
+    {
+     "text": "Die Tante ist eine soziale Ressource.",
+     "richtig": true
+    },
+    {
+     "text": "Anna hat keinerlei Ressourcen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Stress ist immer schlecht und muss vermieden werden.“",
+   "statements": [
+    {
+     "text": "Lebens-Stress kann auch positiv sein.",
+     "richtig": true
+    },
+    {
+     "text": "Eine Herausforderung mit passenden Ressourcen kann Wachstum fördern.",
+     "richtig": true
+    },
+    {
+     "text": "Jeder Stress ist schädlich.",
+     "richtig": false
+    },
+    {
+     "text": "Entscheidend sind Bewertung und Bewältigung.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}
