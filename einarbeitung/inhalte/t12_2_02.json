@@ -2,7 +2,7 @@
  "titel": "Testverfahren und Persönlichkeitsinventare: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Testverfahren und Persönlichkeitsinventare**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Testverfahren und Persönlichkeitsinventare** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Persönlichkeitsinventar",
-       "Fragebogen, der ausgewählte Merkmale und ihre Ausprägung messbar macht"
+       "„Ich bin gern unter Menschen.“ – Antwort von 1 bis 4",
+       "geschlossene Frage"
       ],
       [
-       "Selbstbeschreibung",
-       "Person beurteilt sich selbst im Fragebogen"
+       "„Was schätzen Sie an sich am meisten?“",
+       "offene Frage"
       ],
       [
-       "geschlossene Frage",
-       "feste Antwort: Ja/Nein, Skala oder Auswahl"
+       "Ein Test mit 50 Aufgaben pro Faktor 10",
+       "B5T"
       ],
       [
-       "offene Frage",
-       "freie Antwort in eigenen Worten"
+       "Ein Test mit 138 Aussagen, Antwort ja/nein",
+       "FPI"
       ],
       [
-       "B5T",
-       "Big-Five-Persönlichkeitstest mit 50 Aufgaben"
+       "Die Person beschreibt sich selbst",
+       "Selbstbeschreibung"
+      ],
+      [
+       "Wie stark ist ‚Ängstlichkeit‘ bei mir ausgeprägt?",
+       "Ausprägungsgrad"
       ]
      ]
     },
@@ -135,12 +139,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre, wie ein Persönlichkeitsinventar funktioniert und welche Grenze es hat.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Ein Inventar ist ein Fragebogen, in dem sich die Person selbst beschreibt. So werden ausgewählte Merkmale und ihre Ausprägung messbar. Grenze: Es erfasst nur einzelne Merkmale und die Selbsteinschätzung kann verzerrt sein.",
+     "frage": "Jana (17) macht im Internet einen Test „Welcher Persönlichkeitstyp bist du?“. Sie beantwortet 12 Aussagen mit „trifft zu / trifft nicht zu“. Das Ergebnis: „Du bist ein Kommunikationstyp.“ Sie schickt es ihren Freundinnen und meint: „Jetzt weiß ich, wer ich bin.“ Erkläre, warum es sich um ein Persönlichkeitsinventar handelt (zwei Merkmale).",
+     "hinweis": "4–6 Sätze",
+     "muster": "Es ist ein Fragebogen, Jana beschreibt sich selbst (Selbstbeschreibung) und ein Merkmal (Kommunikation) wird ausgewählt und gemessen.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

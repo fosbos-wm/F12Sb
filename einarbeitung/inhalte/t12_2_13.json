@@ -2,7 +2,7 @@
  "titel": "Zwei Ebenen des Bewertens: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Zwei Ebenen des Bewertens**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Zwei Ebenen des Bewertens** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Bewerten durch den Organismus",
-       "spontanes, flexibles Bewerten nach Erhaltung und Entwicklung"
+       "Ein Kleinkind bewertet Hunger negativ und Nahrung positiv.",
+       "Bewerten durch den Organismus"
       ],
       [
-       "Bewerten durch das Selbstkonzept",
-       "Bewerten nach verinnerlichten Werten anderer"
+       "Ein Kind sagt zu sich: „Ich bin ein böser Bub.“",
+       "Bewerten durch das Selbstkonzept"
       ],
       [
-       "Selbstaktualisierung",
-       "Erfahrungen, die für Selbstachtung und Selbstkonzept bedeutsam sind"
+       "Das Kind übernimmt das Urteil der Eltern.",
+       "Internalisierung"
       ],
       [
-       "Internalisierung",
-       "Übernahme des Werturteils anderer"
+       "Das Kind darf wütend sein und sieht sich trotzdem als liebenswert.",
+       "Übereinstimmung beider Ebenen"
       ],
       [
-       "Bezugspunkt innen",
-       "Wertung liegt in der Person selbst"
+       "Eine rücksichtsvolle Person wird ausgenutzt und spürt zwei Impulse.",
+       "Spannung zwischen den Ebenen"
+      ],
+      [
+       "Erfahrungen, die für das Selbstkonzept bedeutsam sind.",
+       "Selbstaktualisierung"
       ]
      ]
     },
@@ -138,12 +142,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre die zwei Ebenen des Bewertens an einem Beispiel.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Ein Kind zieht seine Schwester an den Haaren (Erleben des Organismus), hört „böser Bub“ und übernimmt das Urteil (Selbstkonzept). Beide Ebenen können in Spannung stehen.",
+     "frage": "Nele (16) hält sich für rücksichtsvoll und hilfsbereit. Ihre Mitschüler nutzen das aus und schreiben von ihr ab. Nele merkt, dass sie sich ausgenutzt fühlt und wütend wird, sagt aber trotzdem immer Ja. Erkläre Neles Spannung mit den zwei Ebenen.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Organismus: Wut und Wunsch nach Selbstschutz (Aktualisierungstendenz). Selbstkonzept: „Ich bin rücksichtsvoll“ (Selbstaktualisierung). Beides widerspricht sich.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

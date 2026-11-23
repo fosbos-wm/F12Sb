@@ -2,7 +2,7 @@
  "titel": "Begriff Persönlichkeit: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Begriff Persönlichkeit**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Begriff Persönlichkeit** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Persönlichkeit",
-       "einzigartige, nicht beobachtbare Struktur aus relativ konstanten, veränderbaren Merkmalen"
+       "Lena spricht in jeder Gruppe zuerst Fremde an – im Bus, im Verein und in der Schule.",
+       "situationsübergreifend"
       ],
       [
-       "Persönlichkeitsmerkmal",
-       "Wesenszug, Eigenschaft oder Verhaltensbereitschaft"
+       "Mia war schon als Kind zurückhaltend und ist es heute noch.",
+       "zeitstabil"
       ],
       [
-       "zeitstabil",
-       "bleibt über längere Zeit relativ gleich"
+       "Nach dem Theaterkurs traut sich Mia mehr zu.",
+       "veränderbar"
       ],
       [
-       "situationsübergreifend",
-       "zeigt sich in verschiedenen Situationen ähnlich"
+       "Beide sind etwas ängstlich, Mia aber deutlich stärker.",
+       "Merkmalsausprägung"
       ],
       [
-       "Merkmalsausprägung",
-       "bei jedem Menschen unterschiedlich stark entwickelt"
+       "Auch Zwillinge unterscheiden sich in ihrem Erleben und Verhalten.",
+       "Einzigartigkeit"
+      ],
+      [
+       "Man sieht, dass Tim oft Streit sucht, und schließt auf „aggressiv“.",
+       "nicht direkt beobachtbar"
       ]
      ]
     },
@@ -144,12 +148,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre die Merkmale des Persönlichkeitsbegriffs an einem Beispiel aus deinem Alltag.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Persönlichkeit besteht aus Merkmalen wie Hilfsbereitschaft. Sie sind zeitstabil (zeigt sich seit Jahren), situationsübergreifend (zu Hause und in der Schule), veränderbar (durch Erfahrungen) und einzigartig (andere haben eine andere Kombination).",
+     "frage": "Nele (16) ist seit der Grundschule gesellig, organisiert im Verein jede Feier und ist auch in der Berufsschule die Erste, die neue Leute anspricht. Ihr Bruder Ben (17) war als Kind sehr schüchtern. Nach einem Auslandsjahr spricht er heute auch Fremde an, bleibt aber insgesamt ruhiger als Nele. Erkläre an Nele die Merkmale zeitstabil und situationsübergreifend.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Zeitstabil: Nele ist seit der Grundschule gesellig. Situationsübergreifend: Sie zeigt es im Verein und in der Berufsschule.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

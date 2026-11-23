@@ -2,7 +2,7 @@
  "titel": "Selbstregulation als Persönlichkeitsmerkmal: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Selbstregulation als Persönlichkeitsmerkmal**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Selbstregulation als Persönlichkeitsmerkmal** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Selbstregulation",
-       "Fähigkeit, sich zu motivieren, Ziele zu setzen, Strategien zu entwerfen und Verhalten zu bewerten und zu ändern"
+       "Anja erzählt der Freundin, wie die Klausur ablief.",
+       "symbolische Repräsentation"
       ],
       [
-       "Selbstwirksamkeit",
-       "Überzeugung, anspruchsvolle künftige Situationen bewältigen zu können"
+       "Anja überlegt, wie die Prüfung nächste Woche ablaufen wird.",
+       "vorausschauendes Denken"
       ],
       [
-       "Selbstevaluation",
-       "Bewertung des eigenen Erlebens und Verhaltens, der eigenen Stärken und Schwächen"
+       "„Ich will in Mathe mindestens 9 Punkte.“",
+       "Ziel setzen"
       ],
       [
-       "Kompetenzerwartung",
-       "Einschätzung der eigenen Fähigkeiten, ein Ziel zu erreichen"
+       "„Wenn ich übe, kann ich das.“",
+       "Kompetenzerwartung"
       ],
       [
-       "Ergebniserwartung",
-       "Abwägen von Erfolg oder Misserfolg"
+       "„Mit dem Lernplan stehen meine Chancen gut.“",
+       "Ergebniserwartung"
+      ],
+      [
+       "Anja bewertet nach der Klausur, was gut und schlecht lief.",
+       "Selbstevaluation"
       ]
      ]
     },
@@ -136,12 +140,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre Selbstwirksamkeit und Selbstevaluation an einem Beispiel.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Selbstwirksamkeit: Vor der Prüfung denkt Anja „Ich schaffe das“. Selbstevaluation: Nach der Prüfung bewertet sie, was gut lief und was nicht.",
+     "frage": "Anja (17) schreibt in zwei Wochen Mathe. Sie will mindestens 9 Punkte. Sie erstellt einen Lernplan, sagt sich: „Wenn ich übe, kann ich das“ und rechnet täglich Aufgaben. Nach der Klausur schreibt sie auf, was gut und weniger gut lief. Erkläre drei Teilaspekte der Selbstregulation an Anja.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Ziel: 9 Punkte; Strategie: Lernplan, tägliche Aufgaben; Kompetenzerwartung: „Wenn ich übe, kann ich das“.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

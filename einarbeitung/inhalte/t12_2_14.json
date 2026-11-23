@@ -2,7 +2,7 @@
  "titel": "Kongruenz und Inkongruenz: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Kongruenz und Inkongruenz**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Kongruenz und Inkongruenz** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Kongruenz",
-       "Übereinstimmung von Selbstkonzept und organismischem Erleben"
+       "Ein Kind hat „Ich darf keine Wut haben“ verinnerlicht und spürt Wut.",
+       "Inkongruenz"
       ],
       [
-       "Inkongruenz",
-       "Nichtübereinstimmung von Selbstkonzept und organismischem Erleben"
+       "Was jemand erlebt, sieht er auch bewusst so und es passt zu seinem Selbstbild.",
+       "Kongruenz"
       ],
       [
-       "wahres Selbst",
-       "das, was die Person im Kern erlebt und sein kann"
+       "Eine Frau fühlt sich als „gute Mutter“ gefangen, weil sie Freiheit will.",
+       "Inkongruenz"
       ],
       [
-       "Selbstentfremdung",
-       "das wahre Selbst wird in den Hintergrund gedrängt"
+       "Real- und Ideal-Selbst liegen eng beieinander.",
+       "geringe Diskrepanz"
       ],
       [
-       "Diskrepanz",
-       "Abstand zwischen Real- und Ideal-Selbst"
+       "Die Person entfernt sich von ihren eigenen Wünschen.",
+       "Selbstentfremdung"
+      ],
+      [
+       "Die Person kann ihrem wahren Selbst folgen.",
+       "Kongruenz"
       ]
      ]
     },
@@ -138,12 +142,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre Inkongruenz an einem Beispiel aus dem Alltag.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Ein Kind sieht sich als „immer lieb“ und spürt Wut. Selbstkonzept und Erleben passen nicht zusammen, das ist Inkongruenz.",
+     "frage": "Paul (9) hat gelernt: „Ich bin ein guter Junge, ich bin immer lieb und nett.“ Als sein Freund ihn auslacht, spürt Paul Wut, sagt aber „Ist schon okay.“ Abends hat er Bauchschmerzen. Erkläre, warum bei Paul Inkongruenz besteht.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Selbstkonzept: „Ich bin immer lieb.“ Organismus: Wut. Beide passen nicht zusammen.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

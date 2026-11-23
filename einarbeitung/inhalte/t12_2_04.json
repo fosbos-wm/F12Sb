@@ -2,7 +2,7 @@
  "titel": "Big Five – Vertiefung: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Big Five – Vertiefung**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Big Five – Vertiefung** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Profil",
-       "Werte der fünf Faktoren einer Person"
+       "Extraversion: hoch",
+       "nennen"
       ],
       [
-       "relative Ausprägung",
-       "Vergleich mit anderen Menschen, keine Note"
+       "Das heißt: hohe Geselligkeit, Gesprächigkeit, Aktivität",
+       "erklären"
       ],
       [
-       "nennen",
-       "Faktor und Ausprägung festhalten"
+       "Er spricht in der Pause alle neuen Mitschüler an.",
+       "verdeutlichen"
       ],
       [
-       "erklären",
-       "Bedeutung der Ausprägung beschreiben"
+       "Vor Prüfungen ist sie sehr nervös.",
+       "Neurotizismus hoch"
       ],
       [
-       "verdeutlichen",
-       "mit Verhalten aus dem Fall belegen"
+       "Er hält jede Regel genau ein.",
+       "Gewissenhaftigkeit hoch"
+      ],
+      [
+       "Sie ist kritisch und hinterfragt Normen.",
+       "Offenheit hoch"
       ]
      ]
     },
@@ -143,12 +147,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Beschreibe in drei Schritten (nennen, erklären, verdeutlichen) einen Faktor einer Person aus einem Fall.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Extraversion: hoch. Das heißt hohe Geselligkeit und Gesprächigkeit. Im Fall spricht die Person in der Pause alle neuen Mitschüler an.",
+     "frage": "Aylin (16) ist die Erste, die in neuen Gruppen Kontakte knüpft. Sie hält Absprachen strikt ein, überprüft ihre Aufgaben dreimal und gerät schnell in Stress, wenn etwas nicht planmäßig läuft. Neue Ideen der Gruppe findet sie anstrengend; sie bevorzugt bewährte Wege. Nenne vier Faktoren mit Ausprägung (hoch/niedrig).",
+     "hinweis": "4–6 Sätze",
+     "muster": "Extraversion hoch, Gewissenhaftigkeit hoch, Neurotizismus hoch, Offenheit eher niedrig.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

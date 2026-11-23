@@ -2,7 +2,7 @@
  "titel": "Die Entstehung psychischer Störungen: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Die Entstehung psychischer Störungen**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Die Entstehung psychischer Störungen** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Inkongruenz",
-       "Ausgangspunkt psychischer Störungen"
+       "Ein Sohn will selbstständig werden, bleibt aber „der brave Junge“.",
+       "bestehende Inkongruenz"
       ],
       [
-       "starres Selbstkonzept",
-       "nimmt neue Erfahrungen nicht auf"
+       "„Ich darf keine Schwäche zeigen.“",
+       "starres Selbstkonzept"
       ],
       [
-       "Lebensereignis",
-       "aktuelles Ereignis, das den Konflikt verschärft"
+       "Der Sohn zieht für das Studium aus.",
+       "aktuelles Lebensereignis"
       ],
       [
-       "innerer Konflikt",
-       "Spannung zwischen Erleben und Selbstkonzept"
+       "Er bekommt Panikattacken.",
+       "Symptom"
       ],
       [
-       "Symptom",
-       "äußerer Ausdruck des Konflikts"
+       "Tamara fühlt sich erschöpft, will aber „die Starke“ sein.",
+       "innerer Konflikt"
+      ],
+      [
+       "Das Symptom erleichtert vorübergehend die Spannung.",
+       "Bewältigungsversuch"
       ]
      ]
     },
@@ -143,12 +147,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre kurz, wie nach Rogers eine psychische Störung entsteht.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Inkongruenz, ein starres Selbstkonzept und ein aktuelles Lebensereignis führen zu einem inneren Konflikt, der sich in einem Symptom äußert.",
+     "frage": "Jonas (19) hat gelernt: „Ich bleibe der brave Junge, der bei den Eltern bleibt.“ Gleichzeitig will er selbstständig werden. Als er einen Studienplatz in einer anderen Stadt bekommt, bekommt er starke Magenschmerzen ohne körperliche Ursache. Ordne die Bausteine zu: Inkongruenz, starres Selbstkonzept, Lebensereignis, Symptom.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Inkongruenz: Sicherheit vs. Selbstständigkeit; starres Selbstkonzept: „Ich bleibe der brave Junge“; Lebensereignis: Studienplatz; Symptom: Magenschmerzen.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

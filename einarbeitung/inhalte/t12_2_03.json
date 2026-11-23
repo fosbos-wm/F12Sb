@@ -2,7 +2,7 @@
  "titel": "Big Five – Info: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Big Five – Info**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Big Five – Info** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Openness",
-       "Offenheit – Verschlossenheit"
+       "Jonas probiert jede Woche eine neue Sportart aus.",
+       "Openness"
       ],
       [
-       "Conscientiousness",
-       "Gewissenhaftigkeit – Nachlässigkeit"
+       "Sara führt einen Lernplan und gibt pünktlich ab.",
+       "Conscientiousness"
       ],
       [
-       "Extraversion",
-       "nach außen gewandt – nach innen gewandt"
+       "Lena kommt mit jedem sofort ins Gespräch.",
+       "Extraversion"
       ],
       [
-       "Agreeableness",
-       "Verträglichkeit – Unverträglichkeit"
+       "Tim hilft beim Umzug und gibt im Streit meist nach.",
+       "Agreeableness"
       ],
       [
-       "Neuroticism",
-       "emotionale Stabilität – emotionale Labilität"
+       "Nele schläft vor jeder Klausur schlecht und zweifelt an sich.",
+       "Neuroticism"
+      ],
+      [
+       "Die vielen Adjektive werden statistisch zu fünf Grunddimensionen verdichtet.",
+       "Faktorenanalyse"
       ]
      ]
     },
@@ -145,12 +149,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Beschreibe eine Person, die du gut kennst, mit drei der Big-Five-Faktoren.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Meine Freundin ist extravertiert (sucht Kontakt, gesprächig), gewissenhaft (ordentlich, zuverlässig) und verträglich (hilfsbereit, gibt nach). So beschreibe ich ihre Ausprägung, erkläre aber nicht, warum sie so ist.",
+     "frage": "Emre (17) ist im Praktikum in der Kita beliebt: Er spricht mit allen Eltern, schlägt neue Spiele vor und liebt es, Projekte zu planen. Dass die Dienstpläne ordentlich sind, liegt an der Kollegin. Emre ist oft zu spät, vergisst Absprachen und ist vor Elterngesprächen sehr aufgeregt. Beschreibe Emre mit drei Big-Five-Faktoren (Faktor, Ausprägung, Beleg).",
+     "hinweis": "4–6 Sätze",
+     "muster": "Extraversion hoch (spricht mit allen, aktiv). Offenheit hoch (neue Spiele, Projekte). Neurotizismus hoch (aufgeregt vor Elterngesprächen).",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

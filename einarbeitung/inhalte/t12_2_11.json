@@ -2,7 +2,7 @@
  "titel": "Identität und das Identitätsmodell nach Marcia: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Identität und das Identitätsmodell nach Marcia**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Identität und das Identitätsmodell nach Marcia** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Identität",
-       "Selbstverständnis als einmalige, unverwechselbare Person"
+       "Andreas hat intensiv recherchiert und sich dann bewusst für den Beruf entschieden.",
+       "erarbeitete Identität"
       ],
       [
-       "James E. Marcia",
-       "Entwicklungspsychologe, entwickelte das Identitätsmodell"
+       "Ein Jugendlicher übernimmt den Betrieb der Eltern, ohne Alternativen zu prüfen.",
+       "übernommene Identität"
       ],
       [
-       "Verpflichtung",
-       "Bindung an Werthaltungen: hoch oder niedrig"
+       "Eine Schülerin probiert viele Praktika aus und kann sich noch nicht festlegen.",
+       "kritische Identität (Moratorium)"
       ],
       [
-       "Experimentierfreudigkeit",
-       "Ausprobieren von Werthaltungen: hoch oder niedrig"
+       "Ein Jugendlicher hat kein Interesse an Berufswahl und lässt alles auf sich zukommen.",
+       "diffuse Identität"
       ],
       [
-       "erarbeitete Identität",
-       "Verpflichtung hoch, Experimentieren hoch"
+       "„Wer bin ich, wie bin ich?“",
+       "Leitfrage der Selbstsicht"
+      ],
+      [
+       "Identität in der Betrachtung der sozialen Umwelt",
+       "Fremdbild"
       ]
      ]
     },
@@ -144,12 +148,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre das Identitätsmodell nach Marcia an einem Beispiel.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Marcia unterscheidet nach Verpflichtung und Experimentierfreudigkeit. Beispiel: Andreas hat verschiedene Möglichkeiten geprüft und sich bewusst entschieden (erarbeitete Identität).",
+     "frage": "Andreas hat mit Sozialarbeiter und Berufsberater gesprochen und sich bewusst für ein Studium entschieden. Lena übernimmt das Geschäft ihres Vaters und hat nie über Alternativen nachgedacht. Kevin kann sich nicht entscheiden und probiert verschiedene Praktika aus. Ordne jede Person einem Identitätstyp zu.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Andreas: erarbeitet; Lena: übernommen; Kevin: kritisch (Moratorium)/Experimentieren.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

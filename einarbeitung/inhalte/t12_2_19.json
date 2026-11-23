@@ -2,7 +2,7 @@
  "titel": "Personenzentrierte Theorie und Psychoanalyse im Vergleich: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Personenzentrierte Theorie und Psychoanalyse im Vergleich**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Personenzentrierte Theorie und Psychoanalyse im Vergleich** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Menschenbild Freud",
-       "eher negativ, triebbestimmt"
+       "Das Es drängt nach Triebbefriedigung, das Über-Ich verbietet.",
+       "Freud"
       ],
       [
-       "Menschenbild Rogers",
-       "positiv, konstruktiv, sozial"
+       "Das Kind erlebt Wut, hat aber das Selbstbild „Ich bin lieb“.",
+       "Rogers: Inkongruenz"
       ],
       [
-       "Antriebskraft Freud",
-       "Triebe (Sexualität/Aggression)"
+       "Der Mensch strebt nach Selbstverwirklichung.",
+       "Rogers"
       ],
       [
-       "Antriebskraft Rogers",
-       "Aktualisierungstendenz"
+       "Unbewusste Konflikte wirken später nach.",
+       "Freud"
       ],
       [
-       "Symptom",
-       "Ausdruck eines Konflikts (beide Theorien)"
+       "Wertschätzung, Verstehen, Echtheit",
+       "Rogers"
+      ],
+      [
+       "Das Symptom ist der Ausdruck eines inneren Konflikts.",
+       "Gemeinsamkeit"
       ]
      ]
     },
@@ -143,12 +147,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Vergleiche Freud und Rogers in zwei Punkten.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Menschenbild: Freud sieht den Menschen als triebbestimmt, Rogers als positiv und konstruktiv. Antrieb: Freud nennt Triebe, Rogers die Aktualisierungstendenz.",
+     "frage": "Der siebenjährige Leon schlägt im Hort seinen Freund. Später sagt er: „Ich bin ein böser Junge.“ Zu Hause hat er gelernt, dass „liebe Jungs“ nicht wütend sein dürfen. Erkläre das Verhalten psychoanalytisch.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Das Es drängt nach aggressiver Triebbefriedigung, das Über-Ich verbietet sie (Schuldgefühle), das Ich vermittelt. Verdrängte Wut kann sich im Symptom zeigen.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

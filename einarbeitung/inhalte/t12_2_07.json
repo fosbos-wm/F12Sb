@@ -2,7 +2,7 @@
  "titel": "Aktualisierungstendenz und organismischer Bewertungsprozess: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Aktualisierungstendenz und organismischer Bewertungsprozess**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Aktualisierungstendenz und organismischer Bewertungsprozess** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "Aktualisierungstendenz",
-       "angeborenes, beständiges Streben nach Erhaltung und Entfaltung der Möglichkeiten"
+       "Ein Kind isst, weil es Hunger hat.",
+       "Selbsterhaltung"
       ],
       [
-       "Organismus",
-       "psychische und physische Einheit des Menschen"
+       "Ein Kind lernt sprechen, malen und Fahrrad fahren.",
+       "Entfaltung"
       ],
       [
-       "organismischer Bewertungsprozess",
-       "Erfahrungen werden danach bewertet, ob sie die Selbstverwirklichung fördern"
+       "Eine Jugendliche will ihre Entscheidungen selbst treffen.",
+       "Autonomie"
       ],
       [
-       "Selbsterhaltung",
-       "Grundbedürfnisse befriedigen, Spannung abbauen"
+       "Das Kind reagiert auf Dauer-Handhalten mit Trotz.",
+       "negative Bewertung"
       ],
       [
-       "Selbstverwirklichung",
-       "Entfaltung der Möglichkeiten"
+       "Die Eltern geben Hilfestellung, bis das Kind allein geht.",
+       "positive Bewertung"
+      ],
+      [
+       "Der Organismus prüft jede Erfahrung auf Wachstum.",
+       "organismischer Bewertungsprozess"
       ]
      ]
     },
@@ -144,12 +148,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre an einem Beispiel den organismischen Bewertungsprozess.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Ein Kind lernt gehen: Die Eltern helfen, bis es allein geht. Der Organismus bewertet die Erfahrung positiv, weil sie die Selbstverwirklichung fördert. Wird es nur festgehalten, bewertet es negativ und reagiert mit Trotz.",
+     "frage": "Mara (16) soll von ihrer Mutter eine Jacke mitnehmen. Sie sagt: „Ich bin doch kein Kind mehr!“ und geht ohne Jacke zur Bushaltestelle. Später friert sie, sagt es aber nicht. Erkläre Maras Verhalten mit der Aktualisierungstendenz.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Mara strebt nach Autonomie (Richtung der Aktualisierungstendenz) und will unabhängig werden.",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }

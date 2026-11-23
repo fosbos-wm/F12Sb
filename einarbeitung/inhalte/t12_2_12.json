@@ -2,7 +2,7 @@
  "titel": "Flexibilität des Selbstkonzepts und Abwehr: Selbstlernkurs",
  "modulart": "selbstlern",
  "lb": 2,
- "einleitung": "Du sicherst die Grundlagen zum Thema **Flexibilität des Selbstkonzepts und Abwehr**. Etwa 20 Minuten.",
+ "einleitung": "Du erarbeitest das Thema **Flexibilität des Selbstkonzepts und Abwehr** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
  "abschnitte": [
   {
    "kicker": "LB 12.2",
@@ -45,27 +45,31 @@
     },
     {
      "typ": "zuordnung",
-     "titel": "Ordne die Begriffe zu.",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
      "paare": [
       [
-       "flexibles Selbstkonzept",
-       "Erfahrungen können integriert werden"
+       "Eine Frau spürt ihren Ärger auf den Mann nicht, weil „liebevolle Ehefrauen keinen Ärger haben dürfen“.",
+       "Wahrnehmungsverleugnung"
       ],
       [
-       "starres Selbstkonzept",
-       "Erfahrungen, die nicht passen, werden abgewehrt"
+       "Ein schlechtes Zeugnis wird mit „Die Lehrer mögen mich nicht“ erklärt.",
+       "Wahrnehmungsverzerrung"
       ],
       [
-       "Selbstachtung",
-       "Wertschätzung der eigenen Person"
+       "Ein Kind wird geliebt, auch wenn es Fehler macht.",
+       "bedingungslose positive Beachtung"
       ],
       [
-       "bedingungslose positive Beachtung",
-       "Wertschätzung unabhängig von Leistung und Verhalten"
+       "Eine Person nimmt Kritik an und ändert ihr Selbstbild.",
+       "flexibles Selbstkonzept"
       ],
       [
-       "Wahrnehmungsverleugnung",
-       "bedrohliche Erfahrung wird negiert und vom Bewusstsein ausgeschlossen"
+       "Eine Person hält trotz schlechter Erfahrungen fest an „Ich bin hochintelligent“.",
+       "starres Selbstkonzept"
+      ],
+      [
+       "Eine Person verhält sich in jeder Rolle völlig anders.",
+       "fehlendes Kern-Selbst"
       ]
      ]
     },
@@ -138,12 +142,12 @@
     },
     {
      "typ": "frei",
-     "frage": "Erkläre den Zusammenhang zwischen Selbstachtung und Flexibilität des Selbstkonzepts.",
-     "hinweis": "3–5 Sätze",
-     "muster": "Wer bedingungslose positive Beachtung erfährt, hat hohe Selbstachtung. Dann können Erfahrungen in das Selbstkonzept integriert werden. Bei geringer Selbstachtung wird das Selbstkonzept starr und Erfahrungen werden abgewehrt.",
+     "frage": "Aylin (16) sieht sich als Klassenbeste. Bei einer 4 in Mathe sagt sie: „Das lag nur an der unfairen Aufgabe.“ Ihre Eltern haben ihr als Kind nur bei guten Noten Zuwendung gegeben. Ihre Freundin sagt: „Du bist mir auch mit einer 4 wichtig.“ Erkläre Aylins Reaktion mit der passenden Abwehrform.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Wahrnehmungsverzerrung: Die Bedeutung der Note wird umgedeutet („unfaire Aufgabe“).",
      "kriterien": [
       "Fachbegriffe genannt",
-      "Beispiel",
+      "Fallbezug",
       "begründet"
      ]
     }
