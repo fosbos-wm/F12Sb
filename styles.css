@@ -138,3 +138,58 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lxA-gr .kw-baust b{text-align:left;flex:1 1 140px}
 .lxA-gr .kw-baust button,.lxA-gr .kw-baust .primary{margin:0!important;width:auto!important;flex:0 0 auto}
 .lxA-gr .kw-baust .kw-baust-btn{margin:0;display:flex;gap:6px}
+
+/* Lehrkraft-Themenseite */
+.lxp-step{display:flex;gap:8px;flex-wrap:wrap;background:#fff;border:1px solid #dde3e8;border-radius:12px;padding:10px;margin:12px 0}
+.lxp-sb{flex:1 1 170px;display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #dde3e8;border-radius:10px;background:#f6f9fc;font:inherit;font-weight:700;color:#17384f;cursor:pointer;text-align:left}
+.lxp-sb i{font-style:normal;width:22px;height:22px;border-radius:50%;border:2px solid #8a96a3;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none}
+.lxp-sb em{font-style:normal;font-weight:500;font-size:12px;color:#5b6b78;margin-left:auto;white-space:nowrap}
+.lxp-sb.on{background:#17384f;border-color:#17384f;color:#fff}.lxp-sb.on i{border-color:#fff}.lxp-sb.on em{color:#cfe0ee}
+.lxp-sec{display:none;background:#fff;border:1px solid #dde3e8;border-radius:12px;padding:14px;margin-bottom:12px}
+.lxp-sec.on{display:block}
+.lxp-hint{margin:0 0 10px;font-size:.9rem;color:#5b6b78}
+.lxp-leer{font-size:.9rem;color:#6c8190;padding:6px 0}
+.lxp-n{font-weight:500;font-size:.8rem;color:#5b6b78;margin-left:6px}
+.lxp-tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.lxp-tb{border:1px solid #c9d3dc;border-radius:999px;padding:4px 14px;background:#fff;font:inherit;font-size:.9rem;cursor:pointer}
+.lxp-tb.on{background:#17384f;color:#fff;border-color:#17384f}
+.lxp-tp{display:none}.lxp-tp.on{display:block}
+.lxp-row{display:flex;align-items:center;gap:10px;border:1px solid #e3e8ee;border-radius:8px;padding:4px 8px;margin-bottom:5px;background:#fff}
+.lxp-row.off{background:#f6f8fa}
+.lxp-row input{width:20px;height:20px;flex:none;margin:0}
+.lxp-row .lxb-t .kw-dz,.lxp-row .lxb-t .kw-datei{margin:0}
+.lxp-dz{margin-bottom:5px}
+.lxp-add{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.lxp-b{font-size:.85rem;padding:6px 10px}
+.lxp-b.lxp-pri{background:#17384f;color:#fff;border-color:#17384f}
+.lxp-gr{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:12px;align-items:start}
+.lxp-lv{display:flex;border:1px solid #e3e8ee;border-radius:12px;overflow:hidden;margin-bottom:8px;background:#fff;box-shadow:0 1px 3px rgba(20,40,60,.06)}
+.lxp-nr{flex:0 0 58px;background:var(--ek);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px}
+.lxp-nr small{font-size:10px}
+.lxp-lb{flex:1;min-width:0;padding:8px 10px}
+.lxp-lb h5,.lxp-g1 h5,.lxp-g2 h5{margin:0 0 6px;font-size:.9rem}
+.lxp-lb h5{color:var(--ek)}
+.lxp-g1,.lxp-g2{border-radius:12px;padding:10px 12px 8px;margin-bottom:10px;box-shadow:0 1px 3px rgba(20,40,60,.06)}
+.lxp-g1{background:#EEF0F2;color:#374151}.lxp-g2{background:#C9CDD2;color:#1f2937}
+.lxp-g1 .lxp-row,.lxp-g2 .lxp-row{background:#fff}
+.lxp-g1 h5,.lxp-g2 h5{color:inherit}
+@media(max-width:820px){.lxp-gr{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.lxp-lv{margin-left:0!important}.lxp-nr{flex-basis:44px;font-size:17px}.lxp-sb{flex-basis:100%}}
+.lxp-row{flex-wrap:nowrap}
+.lxp-row .kw-grip{display:none!important}
+.lxp-row .lxb-t{flex:1 1 0;min-width:0}
+.lxp-row .lxb-t .kw-datei span,.lxp-row .lxb-t .kw-datei b{white-space:normal;overflow-wrap:anywhere}
+.lxp-row .lxb-art{flex:none}
+.lxp-g1 .lxb-art,.lxp-g2 .lxb-art{display:none}
+@media(max-width:600px){.lxp-row{flex-wrap:wrap}.lxp-row .lxb-art{margin-left:30px}}
+.lxp-row .lxb-t .kw-datei span,.lxp-row .lxb-t .kw-datei b{overflow-wrap:break-word!important;word-break:normal}
+@media(max-width:600px){
+.lxp-row{flex-wrap:nowrap!important;gap:6px;padding:4px 6px}
+.lxp-row .lxb-art{display:none}
+.lxp-row .lxb-t{flex:1 1 0!important;min-width:0}
+.lxp-row .lxb-t .kw-dz{display:flex;align-items:center;gap:4px}
+.lxp-row .lxb-t .kw-datei{flex:1 1 0;min-width:0;padding:6px 8px!important}
+.lxp-row .lxb-t .kw-datei small{display:none}
+.lxp-row .lxb-t .kw-del{flex:0 0 28px;min-width:28px!important;width:28px;padding:0!important}
+.lxp-lb{padding:6px 6px}
+}

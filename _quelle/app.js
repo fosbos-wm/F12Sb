@@ -22783,24 +22783,56 @@ function lxBibSchuelerBtn(e){
 }
 function lxBibUebAuf(){const k=[...document.querySelectorAll(".kw-seite .lx-sek>.lx-sek-k")].find(x=>/Üben/.test(x.textContent));if(k&&window.lxSekAuf)lxSekAuf(k.parentElement,true)}
 async function lxBibListeSeite(e,ph,F){
- const D=await lxBibLade(e,ph),{items,bib}=D;
- const grp=LXB_GRP.map(([g,n])=>{
-  const l=items.filter(i=>i.grp===g);
-  const zeilen=l.length?l.map(i=>`<label class="lxb-z"><input type="checkbox" class="lxbCb" value="${esc(i.key)}"${bib.base.has(i.key)?" checked":""}><span class="lxb-t">${lxBibTh(i,e)}</span>${i.art?`<em class="lxb-art">${esc(i.art)}</em>`:""}</label>`).join(""):`<div class="kw-leer">Noch nichts eingestellt.</div>`;
-  const neu=g==="baust"?`<button type="button" class="secondary" data-kw="modulneu" data-id="${esc(e.id)}">+ Baustein einplanen</button>`:`<button type="button" class="secondary" data-bb="add" data-g="${g}" data-id="${esc(e.id)}">+ hinzufügen aus Bibliothek</button>`;
-  return`<section class="lxb-g"><header><h3>${n}</h3><small>${l.filter(i=>bib.base.has(i.key)).length} von ${l.length} im Lernpfad</small>${neu}</header>${zeilen}</section>`}).join("");
- const st=lxThemaStart(e);
- const sicht=`<div class="lx-sicht"><label>Schüler:innen sehen dieses Thema ab <input type="date" id="lxAb" value="${esc(st)}"></label><button type="button" class="secondary" data-lx="ab" data-id="${esc(e.id)}">Datum speichern</button><button type="button" class="text-button" data-lx="ab0" data-id="${esc(e.id)}">Automatisch</button><small>Sonst gilt: zwei Wochen vor dem geplanten Start.</small></div>`;
- return`<div class="kw kw-seite lxb-seite" data-id="${esc(e.id)}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
-  ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">← Meine Lernpfade</button>
-  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p>
-   <div class="kw-aktionen"><button type="button" class="primary" data-bb="lib" data-id="${esc(e.id)}">+ hinzufügen aus Bibliothek</button><button type="button" class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht ansehen</button><button type="button" class="text-button" data-bb="alt" data-id="${esc(e.id)}">Alte Themenansicht (Check-in, Check-out, Bausteine)</button></div>${sicht}</header>
-  <div class="lxb-hinweis"><b>Materialliste dieses Themas.</b> Setze ein Häkchen bei allem, was im Lernpfad der Schüler:innen als <b>Basis</b> erscheinen soll. Alles andere können sich die Schüler:innen mit „+ weitere Übungsaufgabe“ selbst dazuholen. Ohne eigene Auswahl gilt die automatische Vorauswahl.</div>
-  ${grp}
-  <div class="lxb-fuss"><button type="button" class="primary" data-bb="save" data-id="${esc(e.id)}">Auswahl für den Lernpfad speichern</button><button type="button" class="secondary" data-bb="auto" data-id="${esc(e.id)}">Automatische Vorauswahl wiederherstellen</button><span class="lxb-stat">${KW.basis[e.id]?"Eigene Auswahl gespeichert.":"Automatische Vorauswahl aktiv."}</span></div>
- </div>${footer()}`;
+  const D=await lxBibLade(e,ph),{items,bib}=D,mats=KW.mat[e.id]||[];
+  window.__lxPS=window.__lxPS||{};const cur=window.__lxPS[e.id]||"in";
+  const row=i=>`<div class="lxp-row${bib.base.has(i.key)?"":" off"}"><input type="checkbox" class="lxbCb" value="${esc(i.key)}"${bib.base.has(i.key)?" checked":""} aria-label="${esc(i.titel||"")} im Lernpfad anzeigen"><span class="lxb-t">${lxBibTh(i,e)}</span>${i.art?`<em class="lxb-art">${esc(i.art)}</em>`:""}</div>`;
+  const rows=l=>l.length?l.map(row).join(""):`<div class="lxp-leer">Noch nichts eingestellt.</div>`;
+  const n=(id)=>`<span class="lxp-n" data-sc="${id}"></span>`;
+  const btn=(txt,attr,c)=>`<button type="button" class="secondary lxp-b${c?" "+c:""}" ${attr}>${txt}</button>`;
+  const tid=esc(e.id);
+  // 1 Check-in
+  const ci=mats.filter(m=>m.kategorie==="checkin"),nFr=checkinAusBank(e.id).length;
+  const sCI=`<p class="lxp-hint">Zum Einstieg: Was wissen die Schüler:innen schon? Kein Test, keine Note.</p>${nFr?`<p class="lxp-hint"><b>${nFr} Fragen</b> sind im Check-in hinterlegt.</p>`:""}${ci.length?ci.map(m=>`<div class="lxp-dz">${kwDateiHTML(m.titel,m.url,m.id,e.id)}</div>`).join(""):(nFr?"":`<div class="lxp-leer">Noch nichts eingestellt.</div>`)}<div class="lxp-add">${btn("Check-in ansehen und bearbeiten",`data-kw="checkin" data-id="${tid}"`,"lxp-pri")}${btn("+ Datei hinzufügen",`data-kw="matadd" data-kat="checkin"`)}</div>`;
+  // 2 Infotext
+  const info=items.filter(i=>i.grp==="info"),lesen=info.filter(i=>!(i.mat&&i.mat.kategorie==="audio")),hoeren=info.filter(i=>i.mat&&i.mat.kategorie==="audio"),sehen=items.filter(i=>i.grp==="tafel"||i.grp==="lue");
+  const tabs=[["l","Lesen",lesen,[["lehrtext","Lesetext"],["lernsituation","Lernsituation"],["arbeitsblatt","Arbeitsblatt"]].map(x=>btn("+ "+x[1],`data-kw="matadd" data-kat="${x[0]}"`)).join("")],
+   ["h","Hören",hoeren,btn("+ Audio",`data-kw="matadd" data-kat="audio"`)],
+   ["s","Sehen",sehen,[["video","Video"],["tafel","Digitale Tafel"],["einfuehrung","Einführungstafel"]].map(x=>btn("+ "+x[1],`data-kw="matadd" data-kat="${x[0]}"`)).join("")+btn("+ Lernübersicht",`data-bb="add" data-g="lue" data-id="${tid}"`)]];
+  const sIN=`<p class="lxp-hint">Häkchen = erscheint im Lernpfad der Schüler:innen. Ohne Häkchen bleibt es in der Bibliothek.</p><div class="lxp-tabs" role="tablist">${tabs.map((t,k)=>`<button type="button" class="lxp-tb${k?"":" on"}" data-bp="tab" data-t="${t[0]}">${t[1]} · ${t[2].length}</button>`).join("")}</div>${tabs.map((t,k)=>`<div class="lxp-tp${k?"":" on"}" data-tp="${t[0]}">${rows(t[2])}<div class="lxp-add">${t[3]}</div></div>`).join("")}`;
+  // 3 Üben und Vertiefen
+  const kt=["uebung","vertiefung2","vertiefung3"];
+  const lv=LX_EBENEN.map((B,ix)=>{const g="afb"+(ix+1),l=items.filter(i=>i.grp===g);
+   return`<div class="lxp-lv" id="lxpc-${g}" style="--ek:${B.c};--eb:${B.bg};margin-left:${ix*14}px"><b class="lxp-nr">${B.nr}<small>${B.afb}</small></b><div class="lxp-lb"><h5>Ebene ${B.nr} · ${B.n} ${n("lxpc-"+g)}</h5>${rows(l)}<div class="lxp-add">${btn("+ Datei hinzufügen",`data-kw="matadd" data-kat="${kt[ix]}"`)}${btn("+ aus Bibliothek",`data-bb="add" data-g="${g}" data-id="${tid}"`)}</div></div></div>`}).join("");
+  const g1=items.filter(i=>i.grp==="slk"||i.grp==="baust"),g2=items.filter(i=>i.grp==="fa");
+  const sUE=`<p class="lxp-hint">Links die Treppe, rechts die grauen Blöcke. Was angehakt ist, sehen die Schüler:innen als Basis. Den Rest können sie sich mit „+ weitere“ selbst holen.</p><div class="lxp-gr"><div class="lxp-tr">${lv}</div><aside><section class="lxp-g1" id="lxpc-g1"><h5>Selbstlernkurs und Lerneinheiten ${n("lxpc-g1")}</h5>${rows(g1)}<div class="lxp-add">${btn("+ Selbstlernkurs",`data-bb="add" data-g="slk" data-id="${tid}"`)}${btn("+ Baustein einplanen",`data-kw="modulneu" data-id="${tid}"`)}</div></section><section class="lxp-g2" id="lxpc-g2"><h5>Fachaufsatztraining ${n("lxpc-g2")}</h5>${rows(g2)}<div class="lxp-add">${btn("+ Fachaufsatztraining",`data-bb="add" data-g="fa" data-id="${tid}"`)}</div></section></aside></div>`;
+  // 4 Check-out
+  const cos=KW.co&&KW.co.checkouts?KW.co.checkouts.filter(c=>Number(c.lbNum)===ph.lbNum):[];
+  const sCO=`<p class="lxp-hint">Zeig, was du kannst: Test am Ende des Themas.</p>${cos.length&&typeof lxCoZeile==="function"?`<div class="ls-liste">${cos.map(c=>lxCoZeile(c,KW.co,true)).join("")}</div>`:`<div class="lxp-leer">Noch kein Test zu diesem Lernbereich.</div>`}<div class="lxp-add">${btn("Check-out ansehen und bearbeiten",`data-ce="co" data-id="${tid}"`,"lxp-pri")}${btn("＋ Neuer Test",`data-lx="co" data-op="neu"`)}</div>`;
+  const S=[["ci","Check-in",sCI,""],["in","Infotext",sIN,'<span class="lxp-n" data-sc="lxpc-in"></span>'],["ue","Üben und Vertiefen",sUE,'<span class="lxp-n" data-sc="lxpc-ue"></span>'],["co","Check-out",sCO,""]];
+  const stepper=`<nav class="lxp-step" aria-label="Lernpfad dieses Themas">${S.map((s,k)=>`<button type="button" class="lxp-sb${s[0]===cur?" on":""}" data-bp="step" data-s="${s[0]}" data-id="${tid}"><i>${k+1}</i><span>${s[1]}</span><em>${s[3]}</em></button>`).join("")}</nav>`;
+  const secs=S.map(s=>`<section class="lxp-sec${s[0]===cur?" on":""}" data-p="${s[0]}" id="${s[0]==="in"?"lxpc-in":s[0]==="ue"?"lxpc-ue":"lxp-"+s[0]}">${s[2]}</section>`).join("");
+  const st=lxThemaStart(e);
+  const sicht=`<div class="lx-sicht"><label>Schüler:innen sehen dieses Thema ab <input type="date" id="lxAb" value="${esc(st)}"></label><button type="button" class="secondary" data-lx="ab" data-id="${tid}">Datum speichern</button><button type="button" class="text-button" data-lx="ab0" data-id="${tid}">Automatisch</button><small>Sonst gilt: zwei Wochen vor dem geplanten Start.</small></div>`;
+  setTimeout(lxpZaehl,0);
+  return`<div class="kw kw-seite lxb-seite lxp-seite" data-id="${tid}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
+   ${kwSchuelerBanner()}
+   <button class="secondary" data-kw="wand">← Unterrichtsbibliothek</button>
+   <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p>
+    <div class="kw-aktionen"><button type="button" class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht ansehen</button><button type="button" class="text-button" data-bb="alt" data-id="${tid}">Alte Themenansicht</button></div>${sicht}</header>
+   ${stepper}${secs}
+   <div class="lxb-fuss"><button type="button" class="primary" data-bb="save" data-id="${tid}">Auswahl für den Lernpfad speichern</button><button type="button" class="secondary" data-bb="auto" data-id="${tid}">Automatische Vorauswahl wiederherstellen</button><span class="lxb-stat">${KW.basis[e.id]?"Eigene Auswahl gespeichert.":"Automatische Vorauswahl aktiv."}</span></div>
+  </div>${footer()}`;
 }
+function lxpZaehl(){
+ document.querySelectorAll(".lxp-n").forEach(s=>{const c=document.getElementById(s.dataset.sc);if(!c)return;const a=c.querySelectorAll(".lxbCb"),o=c.querySelectorAll(".lxbCb:checked");s.textContent=a.length?o.length+" von "+a.length:""});
+}
+document.addEventListener("change",ev=>{const c=ev.target.closest&&ev.target.closest(".lxp-seite .lxbCb");if(!c)return;const r=c.closest(".lxp-row");if(r)r.classList.toggle("off",!c.checked);lxpZaehl()});
+document.addEventListener("click",ev=>{
+ const b=ev.target.closest&&ev.target.closest("[data-bp]");if(!b||!isTeacher())return;
+ const seite=b.closest(".lxp-seite");if(!seite)return;
+ if(b.dataset.bp==="step"){window.__lxPS=window.__lxPS||{};window.__lxPS[b.dataset.id]=b.dataset.s;seite.querySelectorAll(".lxp-sb").forEach(x=>x.classList.toggle("on",x===b));seite.querySelectorAll(".lxp-sec").forEach(x=>x.classList.toggle("on",x.dataset.p===b.dataset.s))}
+ if(b.dataset.bp==="tab"){seite.querySelectorAll(".lxp-tb").forEach(x=>x.classList.toggle("on",x===b));seite.querySelectorAll(".lxp-tp").forEach(x=>x.classList.toggle("on",x.dataset.tp===b.dataset.t))}
+});
 async function lxBibAdd(g,tid){
  const e=kwThemaById(tid);if(!e)return;
  if(g==="info")return kwMatForm("lehrtext");
