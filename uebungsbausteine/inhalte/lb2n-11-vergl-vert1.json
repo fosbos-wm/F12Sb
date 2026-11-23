@@ -1,0 +1,47 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "erarbeitet",
+  "übernommen",
+  "kritisch/diffus"
+ ],
+ "karten": [
+  {
+   "t": "Alternativen geprüft, bewusst entschieden",
+   "s": 0
+  },
+  {
+   "t": "Zweifel durchdacht",
+   "s": 0
+  },
+  {
+   "t": "Erfahrungen im Praktikum",
+   "s": 0
+  },
+  {
+   "t": "Familienwerte ohne Prüfung",
+   "s": 1
+  },
+  {
+   "t": "Betrieb der Eltern übernehmen",
+   "s": 1
+  },
+  {
+   "t": "sicher, aber ohne Auseinandersetzung",
+   "s": 1
+  },
+  {
+   "t": "viele Möglichkeiten ausprobieren",
+   "s": 2
+  },
+  {
+   "t": "keine klare Entscheidung",
+   "s": 2
+  },
+  {
+   "t": "wenig Orientierung",
+   "s": 2
+  }
+ ]
+}

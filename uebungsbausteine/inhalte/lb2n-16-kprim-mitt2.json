@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Entstehung von Störungen treffen zu?",
+   "statements": [
+    {
+     "text": "Inkongruenz ist der Ausgangspunkt.",
+     "richtig": true
+    },
+    {
+     "text": "Ein Lebensereignis ist unwichtig.",
+     "richtig": false
+    },
+    {
+     "text": "Ein starres Selbstkonzept begünstigt die Störung.",
+     "richtig": true
+    },
+    {
+     "text": "Das Symptom ist ein Bewältigungsversuch.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Symptom treffen zu?",
+   "statements": [
+    {
+     "text": "Es äußert den inneren Konflikt.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist eine Ursache des Konflikts.",
+     "richtig": false
+    },
+    {
+     "text": "Es kann die Spannung kurzfristig lindern.",
+     "richtig": true
+    },
+    {
+     "text": "Es sollte ohne Beachtung des Konflikts beseitigt werden.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

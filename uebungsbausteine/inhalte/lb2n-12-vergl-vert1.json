@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Verleugnung",
+  "Verzerrung"
+ ],
+ "karten": [
+  {
+   "t": "Erfahrung wird gar nicht wahrgenommen",
+   "s": 0
+  },
+  {
+   "t": "Ärger wird nicht gespürt",
+   "s": 0
+  },
+  {
+   "t": "Ignorieren oder Unterdrücken",
+   "s": 0
+  },
+  {
+   "t": "Von Bewusstsein ausgeschlossen",
+   "s": 0
+  },
+  {
+   "t": "Bedeutung wird entstellt",
+   "s": 1
+  },
+  {
+   "t": "Schuld wird anderen zugeschrieben",
+   "s": 1
+  },
+  {
+   "t": "Erfahrung wird passend umgedeutet",
+   "s": 1
+  },
+  {
+   "t": "Selbstkonzept bleibt unverändert",
+   "s": 1
+  }
+ ]
+}

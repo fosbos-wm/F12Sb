@@ -1,0 +1,111 @@
+{
+ "titel": "K-Prim-Test 2: Stunde 5 bis 8",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht. Die letzte Aufgabe ist eine Fallvignette.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur humanistischen Psychologie treffen zu? (Carl Rogers und die personenzentrierte Theorie)",
+   "statements": [
+    {
+     "text": "Sie gilt als dritte Kraft neben Psychoanalyse und Behaviorismus.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist durch eine einheitliche Theorie verbunden.",
+     "richtig": false
+    },
+    {
+     "text": "Sie hat ein gleichartiges positives Menschenbild.",
+     "richtig": true
+    },
+    {
+     "text": "Sie sieht den Menschen als grundsätzlich triebgesteuert.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Klima treffen zu? (Das Menschenbild der personenzentrierten Theorie)",
+   "statements": [
+    {
+     "text": "Angstfreiheit gehört zum förderlichen Klima.",
+     "richtig": true
+    },
+    {
+     "text": "Wertschätzung hängt von der Leistung ab.",
+     "richtig": false
+    },
+    {
+     "text": "Einfühlendes Verständnis gehört dazu.",
+     "richtig": true
+    },
+    {
+     "text": "Aufrichtigkeit ist nicht nötig.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Aktualisierungstendenz treffen zu? (Aktualisierungstendenz und organismischer Bewertungsprozess)",
+   "statements": [
+    {
+     "text": "Sie ist die einzige angeborene Antriebskraft.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht erst durch Erziehung.",
+     "richtig": false
+    },
+    {
+     "text": "Sie umfasst Erhaltung, Entfaltung und Selbstbestimmung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist ein Trieb im Sinne Freuds.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Selbstkonzept treffen zu? (Das Selbstkonzept)",
+   "statements": [
+    {
+     "text": "Es ist durch Erfahrungen gebildet.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist unveränderbar.",
+     "richtig": false
+    },
+    {
+     "text": "Es ist im Allgemeinen bewusst.",
+     "richtig": true
+    },
+    {
+     "text": "Rogers sieht das Selbst als innere Instanz wie Freud.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Fall: Lena (17) denkt: „Ich bin unbegabt“ (Real-Selbst), will aber unbedingt Klassenbeste sein (Ideal-Selbst). Sie ist oft unruhig und gereizt. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Diskrepanz ist groß.",
+     "richtig": true
+    },
+    {
+     "text": "Das erklärt die innere Spannung.",
+     "richtig": true
+    },
+    {
+     "text": "Das Selbstkonzept ist ein Teil des Es.",
+     "richtig": false
+    },
+    {
+     "text": "Rogers erklärt Depression u. a. mit solch einer Diskrepanz.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

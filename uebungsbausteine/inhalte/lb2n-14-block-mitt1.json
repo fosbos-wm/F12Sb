@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Kongruenz",
+  "Inkongruenz"
+ ],
+ "items": [
+  {
+   "t": "Erleben und Selbstbild stimmen überein",
+   "k": 0
+  },
+  {
+   "t": "geringe Diskrepanz",
+   "k": 0
+  },
+  {
+   "t": "Offenheit für Erfahrung",
+   "k": 0
+  },
+  {
+   "t": "gesunde Entwicklung",
+   "k": 0
+  },
+  {
+   "t": "Erleben widerspricht dem Selbstbild",
+   "k": 1
+  },
+  {
+   "t": "große Diskrepanz",
+   "k": 1
+  },
+  {
+   "t": "Selbstentfremdung",
+   "k": 1
+  },
+  {
+   "t": "Ausgangspunkt von Fehlentwicklungen",
+   "k": 1
+  }
+ ]
+}

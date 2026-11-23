@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Pro (Stärke)",
+  "Contra (Schwäche)"
+ ],
+ "karten": [
+  {
+   "t": "positives Menschenbild",
+   "s": 0
+  },
+  {
+   "t": "Bedeutung für Gesprächsführung",
+   "s": 0
+  },
+  {
+   "t": "stärkt Selbstachtung",
+   "s": 0
+  },
+  {
+   "t": "ganzheitlicher Blick",
+   "s": 0
+  },
+  {
+   "t": "Begriffe schwer überprüfbar",
+   "s": 1
+  },
+  {
+   "t": "Wahrnehmung und Denken kaum erfasst",
+   "s": 1
+  },
+  {
+   "t": "Umwelt wird vernachlässigt",
+   "s": 1
+  },
+  {
+   "t": "nicht alle Störungen erklärt",
+   "s": 1
+  }
+ ]
+}

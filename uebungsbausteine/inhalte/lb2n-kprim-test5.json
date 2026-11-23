@@ -1,0 +1,111 @@
+{
+ "titel": "K-Prim-Test 5: Stunde 16 bis 19",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht. Die letzte Aufgabe ist eine Fallvignette.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Symptom treffen zu? (Die Entstehung psychischer Störungen)",
+   "statements": [
+    {
+     "text": "Es äußert den inneren Konflikt.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist eine Ursache des Konflikts.",
+     "richtig": false
+    },
+    {
+     "text": "Es kann die Spannung kurzfristig lindern.",
+     "richtig": true
+    },
+    {
+     "text": "Es sollte ohne Beachtung des Konflikts beseitigt werden.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Wertschätzung treffen zu? (Bedeutung der personenzentrierten Theorie für die Erziehung)",
+   "statements": [
+    {
+     "text": "Sie akzeptiert die Person und ihre Gefühle.",
+     "richtig": true
+    },
+    {
+     "text": "Sie billigt jedes Verhalten.",
+     "richtig": false
+    },
+    {
+     "text": "Sie hängt nicht von Leistung ab.",
+     "richtig": true
+    },
+    {
+     "text": "Sie schließt Grenzen aus.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Schwächen treffen zu? (Kritische Würdigung der personenzentrierten Theorie)",
+   "statements": [
+    {
+     "text": "Nicht jede Störung geht auf Inkongruenz zurück.",
+     "richtig": true
+    },
+    {
+     "text": "Die Theorie vernachlässigt vor allem die Therapie.",
+     "richtig": false
+    },
+    {
+     "text": "Begriffe sind schwer messbar.",
+     "richtig": true
+    },
+    {
+     "text": "Gesellschaftliche Einflüsse werden kaum berücksichtigt.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Unterschieden treffen zu? (Personenzentrierte Theorie und Psychoanalyse im Vergleich)",
+   "statements": [
+    {
+     "text": "Freud: Mensch triebbestimmt; Rogers: Mensch positiv.",
+     "richtig": true
+    },
+    {
+     "text": "Rogers erklärt vor allem frühkindliche Triebe.",
+     "richtig": false
+    },
+    {
+     "text": "Freud betont das Unbewusste.",
+     "richtig": true
+    },
+    {
+     "text": "Rogers gibt klare Haltungen für die Praxis vor.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Fall: Ein Kind schlägt seine Schwester. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Psychoanalytisch: Das Es drängt nach aggressiver Befriedigung, das Über-Ich verbietet.",
+     "richtig": true
+    },
+    {
+     "text": "Personenzentriert: Wut passt nicht zum Selbstbild „Ich bin lieb“ (Inkongruenz).",
+     "richtig": true
+    },
+    {
+     "text": "Beide Theorien erklären das Verhalten identisch.",
+     "richtig": false
+    },
+    {
+     "text": "Beide sehen im Verhalten einen Ausdruck eines Konflikts.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

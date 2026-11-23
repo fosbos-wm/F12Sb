@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Inkongruenz",
+  "starres Selbstkonzept",
+  "Symptom"
+ ],
+ "items": [
+  {
+   "t": "Erleben und Selbstbild passen nicht",
+   "k": 0
+  },
+  {
+   "t": "Streben nach Selbstständigkeit vs. „braver Junge“",
+   "k": 0
+  },
+  {
+   "t": "Ideal-Selbst und Real-Selbst klaffen auseinander",
+   "k": 0
+  },
+  {
+   "t": "Erfahrungen werden nicht integriert",
+   "k": 1
+  },
+  {
+   "t": "„Ich bleibe der Junge, der alles richtig macht.“",
+   "k": 1
+  },
+  {
+   "t": "Abwehr",
+   "k": 1
+  },
+  {
+   "t": "Panikattacken",
+   "k": 2
+  },
+  {
+   "t": "depressive Verstimmung",
+   "k": 2
+  },
+  {
+   "t": "Magenschmerzen ohne Befund",
+   "k": 2
+  }
+ ]
+}

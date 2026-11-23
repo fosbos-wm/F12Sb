@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Marcias Modell treffen zu?",
+   "statements": [
+    {
+     "text": "Verpflichtung und Experimentierfreudigkeit sind die beiden Dimensionen.",
+     "richtig": true
+    },
+    {
+     "text": "Die Typen folgen einer festen Reihenfolge.",
+     "richtig": false
+    },
+    {
+     "text": "Typen können in unterschiedlicher Ausprägung vorkommen.",
+     "richtig": true
+    },
+    {
+     "text": "Es beschreibt vor allem körperliche Entwicklung.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Identität treffen zu?",
+   "statements": [
+    {
+     "text": "Identität ist ein Selbstverständnis als einmalige Person.",
+     "richtig": true
+    },
+    {
+     "text": "Sie umfasst nur Name und Alter.",
+     "richtig": false
+    },
+    {
+     "text": "Die Identitätsfindung erfolgt in Auseinandersetzung mit Werten und Normen.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist eine zentrale Aufgabe des Jugendalters.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

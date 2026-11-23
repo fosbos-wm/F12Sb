@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "erarbeitet",
+  "übernommen",
+  "diffus"
+ ],
+ "items": [
+  {
+   "t": "kritisch geprüft, feste Standpunkte",
+   "k": 0
+  },
+  {
+   "t": "hohes Selbstwertgefühl, stressresistent",
+   "k": 0
+  },
+  {
+   "t": "bewusste Berufsentscheidung",
+   "k": 0
+  },
+  {
+   "t": "Werte der Familie übernommen",
+   "k": 1
+  },
+  {
+   "t": "keine kritische Auseinandersetzung",
+   "k": 1
+  },
+  {
+   "t": "Berufsentscheidung ohne Alternativen",
+   "k": 1
+  },
+  {
+   "t": "kaum Festlegung",
+   "k": 2
+  },
+  {
+   "t": "niedriges Interesse an Werten",
+   "k": 2
+  },
+  {
+   "t": "unsicher, wenig Ziele",
+   "k": 2
+  }
+ ]
+}

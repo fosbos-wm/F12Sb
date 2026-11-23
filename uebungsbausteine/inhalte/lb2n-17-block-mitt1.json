@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Mit bedingungsloser Beachtung",
+  "Ohne bedingungslose Beachtung"
+ ],
+ "items": [
+  {
+   "t": "hohe Selbstachtung",
+   "k": 0
+  },
+  {
+   "t": "flexibles Selbstkonzept",
+   "k": 0
+  },
+  {
+   "t": "Kongruenz",
+   "k": 0
+  },
+  {
+   "t": "Kind vertraut seinem Erleben",
+   "k": 0
+  },
+  {
+   "t": "geringe Selbstachtung",
+   "k": 1
+  },
+  {
+   "t": "starres Selbstkonzept",
+   "k": 1
+  },
+  {
+   "t": "Inkongruenz",
+   "k": 1
+  },
+  {
+   "t": "Entfremdung vom Erleben",
+   "k": 1
+  }
+ ]
+}

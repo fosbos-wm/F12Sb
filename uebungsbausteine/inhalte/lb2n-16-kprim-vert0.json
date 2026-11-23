@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Marie (17) will „immer perfekt“ sein. Als sie bei der Prüfung durchfällt, schläft sie nicht mehr und bekommt Panikattacken. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das Lebensereignis ist die Prüfung.",
+     "richtig": true
+    },
+    {
+     "text": "Ihr Selbstkonzept ist eher starr.",
+     "richtig": true
+    },
+    {
+     "text": "Die Panikattacken sind das Symptom.",
+     "richtig": true
+    },
+    {
+     "text": "Die Ursache liegt allein im Körper.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Wer ein Symptom beseitigt, hat das Problem gelöst.“",
+   "statements": [
+    {
+     "text": "Der Konflikt dahinter bleibt bestehen.",
+     "richtig": true
+    },
+    {
+     "text": "Man sollte den Konflikt verstehbar machen.",
+     "richtig": true
+    },
+    {
+     "text": "Symptome sind belanglos.",
+     "richtig": false
+    },
+    {
+     "text": "Neue Erfahrungen der Annahme helfen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

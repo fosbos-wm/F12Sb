@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie viele Ebenen des Bewertens gibt es nach Rogers?",
+   "o": [
+    "Zwei: Organismus und Selbstkonzept",
+    "Drei: Es, Ich, Über-Ich",
+    "Eine: den Verstand"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wo liegt der Bezugspunkt der organismischen Wertung?",
+   "o": [
+    "Bei den Eltern",
+    "In der wertenden Person selbst",
+    "In der Gesellschaft"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist Selbstaktualisierung?",
+   "o": [
+    "Ein Trieb",
+    "Das Es",
+    "Der Teil der Erfahrungen, der für Selbstachtung und Selbstkonzept bedeutsam ist"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was bedeutet Internalisierung?",
+   "o": [
+    "Die Übernahme des Werturteils anderer",
+    "Das Ignorieren von Urteilen",
+    "Das Abwehren von Gefühlen"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wann stimmen beide Ebenen überein?",
+   "o": [
+    "Nie",
+    "Unter förderlichen Bedingungen, z. B. bei bedingungsloser Wertschätzung",
+    "Nur bei Erwachsenen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie bewertet ein Säugling Hunger?",
+   "o": [
+    "Positiv",
+    "Gar nicht",
+    "Negativ, Nahrung positiv"
+   ],
+   "r": 2
+  }
+ ]
+}

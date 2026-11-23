@@ -1,0 +1,111 @@
+{
+ "titel": "K-Prim-Test 3: Stunde 9 bis 12",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht. Die letzte Aufgabe ist eine Fallvignette.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Bildung des Selbstkonzepts treffen zu? (Bildung und Wirkung des Selbstkonzepts)",
+   "statements": [
+    {
+     "text": "Forderungen der Bezugspersonen werden verinnerlicht.",
+     "richtig": true
+    },
+    {
+     "text": "Beziehungsbotschaften haben keinen Einfluss.",
+     "richtig": false
+    },
+    {
+     "text": "Persönliche Erfahrungen prägen das Selbstkonzept.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist von Geburt an festgelegt.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Selbstregulation treffen zu? (Selbstregulation als Persönlichkeitsmerkmal)",
+   "statements": [
+    {
+     "text": "Sie umfasst Ziele setzen und Verhalten bewerten.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist bei allen Menschen gleich stark.",
+     "richtig": false
+    },
+    {
+     "text": "Sie wird durch Modelllernen beeinflusst.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist ein angeborener Trieb.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Marcias Modell treffen zu? (Identität und das Identitätsmodell nach Marcia)",
+   "statements": [
+    {
+     "text": "Verpflichtung und Experimentierfreudigkeit sind die beiden Dimensionen.",
+     "richtig": true
+    },
+    {
+     "text": "Die Typen folgen einer festen Reihenfolge.",
+     "richtig": false
+    },
+    {
+     "text": "Typen können in unterschiedlicher Ausprägung vorkommen.",
+     "richtig": true
+    },
+    {
+     "text": "Es beschreibt vor allem körperliche Entwicklung.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Abwehr nach Rogers treffen zu? (Flexibilität des Selbstkonzepts und Abwehr)",
+   "statements": [
+    {
+     "text": "Abwehr schützt ein starres Selbstkonzept vor Bedrohung.",
+     "richtig": true
+    },
+    {
+     "text": "Abwehr tritt vor allem bei hoher Selbstachtung auf.",
+     "richtig": false
+    },
+    {
+     "text": "Wahrnehmungsverleugnung schließt Erfahrungen vom Bewusstsein aus.",
+     "richtig": true
+    },
+    {
+     "text": "Wahrnehmungsverzerrung ändert das Selbstkonzept sofort.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Fall: Tom ist überzeugt, hoch intelligent zu sein. Er fällt zweimal durch die Prüfung und sagt: „Der Prüfer hat mich nicht gemocht.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es handelt sich um Wahrnehmungsverzerrung.",
+     "richtig": true
+    },
+    {
+     "text": "Sein Selbstkonzept ist eher starr.",
+     "richtig": true
+    },
+    {
+     "text": "Er integriert die Erfahrung.",
+     "richtig": false
+    },
+    {
+     "text": "Die Abwehr schützt sein Selbstbild.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

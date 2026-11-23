@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wovon hängt die Flexibilität des Selbstkonzepts ab?",
+   "o": [
+    "Von der Selbstachtung",
+    "Vom Alter",
+    "Von der Körpergröße"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was kennzeichnet ein flexibles Selbstkonzept?",
+   "o": [
+    "Neue Erfahrungen werden abgewehrt",
+    "Neue Erfahrungen werden integriert",
+    "Es ändert sich täglich"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist Wahrnehmungsverleugnung?",
+   "o": [
+    "Die Erfahrung wird ins Gegenteil verkehrt",
+    "Die Erfahrung wird integriert",
+    "Eine bedrohliche Erfahrung wird negiert und aus dem Bewusstsein ausgeschlossen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist Wahrnehmungsverzerrung?",
+   "o": [
+    "Die Bedeutung der Erfahrung wird entstellt, damit sie zum Selbstkonzept passt",
+    "Die Erfahrung wird ignoriert",
+    "Die Erfahrung wird gelöscht"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Erziehung führt zu einem flexiblen Selbstkonzept?",
+   "o": [
+    "Wenig positive Beachtung",
+    "Bedingungslose positive Beachtung",
+    "Nur Leistungsbeachtung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was vermutete Rogers über sehr variable Rollenbilder?",
+   "o": [
+    "Sie sind besonders gesund",
+    "Sie sind angeboren",
+    "Sie weisen auf ein fehlendes Kern-Selbst hin"
+   ],
+   "r": 2
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu den Stärken treffen zu?",
+   "statements": [
+    {
+     "text": "Das Menschenbild ist eine Alternative zu „Marionette“ und „Triebwesen“.",
+     "richtig": true
+    },
+    {
+     "text": "Die Theorie ist vollständig empirisch bewiesen.",
+     "richtig": false
+    },
+    {
+     "text": "Sie hat große Bedeutung für Erziehung und Beratung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie erklärt Wahrnehmung und Denken umfassend.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Schwächen treffen zu?",
+   "statements": [
+    {
+     "text": "Nicht jede Störung geht auf Inkongruenz zurück.",
+     "richtig": true
+    },
+    {
+     "text": "Die Theorie vernachlässigt vor allem die Therapie.",
+     "richtig": false
+    },
+    {
+     "text": "Begriffe sind schwer messbar.",
+     "richtig": true
+    },
+    {
+     "text": "Gesellschaftliche Einflüsse werden kaum berücksichtigt.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

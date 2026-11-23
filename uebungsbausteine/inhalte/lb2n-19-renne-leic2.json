@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welche Antriebskraft nennt Freud?",
+   "o": [
+    "Triebe",
+    "Aktualisierungstendenz",
+    "Selbstwirksamkeit"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Antriebskraft nennt Rogers?",
+   "o": [
+    "Triebe",
+    "Aktualisierungstendenz",
+    "Konditionierung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welches Menschenbild hat Freud?",
+   "o": [
+    "Positiv, konstruktiv",
+    "Neutral",
+    "Eher negativ, triebbestimmt"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was haben beide Theorien gemeinsam?",
+   "o": [
+    "Symptome bringen einen Konflikt zum Ausdruck",
+    "Der Mensch ist nur Reiz-Reaktion",
+    "Der Mensch ist unveränderlich"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Woraus entwickelten sich beide Theorien?",
+   "o": [
+    "Aus Tierexperimenten",
+    "Aus der Therapie",
+    "Aus Statistik"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Stärke hat die personenzentrierte Theorie?",
+   "o": [
+    "Hohe empirische Überprüfbarkeit",
+    "Erklärung frühkindlicher Konflikte",
+    "Klare Haltungen für Erziehung und Beratung"
+   ],
+   "r": 2
+  }
+ ]
+}

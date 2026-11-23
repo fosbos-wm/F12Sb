@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Eine Erzieherin sagt: „Ich sehe, dass du wütend bist, und ich mag dich trotzdem. Aber hauen ist nicht in Ordnung.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Sie zeigt Wertschätzung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie unterscheidet Person und Verhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Sie billigt das Hauen.",
+     "richtig": false
+    },
+    {
+     "text": "Das stärkt die Selbstachtung des Kindes.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Bedingungslose Beachtung heißt, dass Kinder keine Regeln brauchen.“",
+   "statements": [
+    {
+     "text": "Bedingungslos bezieht sich auf die Person, nicht auf jedes Verhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Regeln und Wertschätzung lassen sich verbinden.",
+     "richtig": true
+    },
+    {
+     "text": "Rogers lehnt jede Grenze ab.",
+     "richtig": false
+    },
+    {
+     "text": "Akzeptanz ist nicht Billigung.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

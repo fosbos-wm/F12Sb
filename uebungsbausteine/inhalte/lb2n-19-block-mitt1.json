@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Freud",
+  "Rogers",
+  "beide"
+ ],
+ "items": [
+  {
+   "t": "Triebe als Antrieb",
+   "k": 0
+  },
+  {
+   "t": "Es, Ich, Über-Ich",
+   "k": 0
+  },
+  {
+   "t": "Abwehrmechanismen",
+   "k": 0
+  },
+  {
+   "t": "Aktualisierungstendenz",
+   "k": 1
+  },
+  {
+   "t": "Selbstkonzept",
+   "k": 1
+  },
+  {
+   "t": "Kongruenz",
+   "k": 1
+  },
+  {
+   "t": "Symptom als Konflikt",
+   "k": 2
+  },
+  {
+   "t": "angeborene Antriebskraft",
+   "k": 2
+  },
+  {
+   "t": "Entstehung aus Therapie",
+   "k": 2
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist Kongruenz?",
+   "o": [
+    "Übereinstimmung von Selbstkonzept und organismischem Erleben",
+    "Streit mit anderen",
+    "Ein Persönlichkeitstest"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was ist Inkongruenz?",
+   "o": [
+    "Zufriedenheit",
+    "Nichtübereinstimmung von Selbstkonzept und organismischem Erleben",
+    "Ein Bewusstseinszustand"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wann entsteht Kongruenz?",
+   "o": [
+    "Bei strenger Erziehung",
+    "Bei Vernachlässigung",
+    "Bei hoher Wertschätzung in der Erziehung"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Rolle spielt die Diskrepanz?",
+   "o": [
+    "Bei großer Diskrepanz entsteht Inkongruenz",
+    "Sie ist immer groß",
+    "Sie ist ohne Bedeutung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was zeigt das Beispiel der Mutter?",
+   "o": [
+    "Sie ist kongruent",
+    "Sie sieht sich als gute Mutter und spürt den Wunsch nach Freiheit: Inkongruenz",
+    "Sie hat kein Selbstbild"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was folgt aus Inkongruenz?",
+   "o": [
+    "Sicheres Selbstbild",
+    "Immer Krankheit",
+    "Ausgangspunkt seelischer Fehlentwicklungen"
+   ],
+   "r": 2
+  }
+ ]
+}

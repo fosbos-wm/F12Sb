@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Organismus",
+  "Selbstkonzept"
+ ],
+ "items": [
+  {
+   "t": "spontan und flexibel",
+   "k": 0
+  },
+  {
+   "t": "Bezugspunkt in der Person",
+   "k": 0
+  },
+  {
+   "t": "Hunger negativ, Nahrung positiv",
+   "k": 0
+  },
+  {
+   "t": "Ziel: Erhaltung und Entwicklung",
+   "k": 0
+  },
+  {
+   "t": "verinnerlichte Werte",
+   "k": 1
+  },
+  {
+   "t": "Bezugspunkt außerhalb",
+   "k": 1
+  },
+  {
+   "t": "Ziel: positive Beachtung",
+   "k": 1
+  },
+  {
+   "t": "kann starr sein",
+   "k": 1
+  }
+ ]
+}

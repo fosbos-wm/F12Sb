@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Organismus",
+  "Selbstkonzept"
+ ],
+ "karten": [
+  {
+   "t": "Bewertung nach Wachstum",
+   "s": 0
+  },
+  {
+   "t": "flexible Anpassung",
+   "s": 0
+  },
+  {
+   "t": "Bezugspunkt innen",
+   "s": 0
+  },
+  {
+   "t": "spontan",
+   "s": 0
+  },
+  {
+   "t": "Bewertung nach Zuwendung",
+   "s": 1
+  },
+  {
+   "t": "verinnerlichte Normen",
+   "s": 1
+  },
+  {
+   "t": "kann starr werden",
+   "s": 1
+  },
+  {
+   "t": "Bezugspunkt außen",
+   "s": 1
+  }
+ ]
+}

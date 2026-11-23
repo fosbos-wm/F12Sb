@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Kongruenz",
+  "Inkongruenz"
+ ],
+ "karten": [
+  {
+   "t": "Offenheit für Gefühle",
+   "s": 0
+  },
+  {
+   "t": "Selbstbild und Erleben passen",
+   "s": 0
+  },
+  {
+   "t": "Real- und Ideal-Selbst ähneln sich",
+   "s": 0
+  },
+  {
+   "t": "Selbstachtung hoch",
+   "s": 0
+  },
+  {
+   "t": "Gefühle werden ausgeblendet",
+   "s": 1
+  },
+  {
+   "t": "Selbstbild widerspricht Erleben",
+   "s": 1
+  },
+  {
+   "t": "Real- und Ideal-Selbst klaffen auseinander",
+   "s": 1
+  },
+  {
+   "t": "Selbstachtung gering",
+   "s": 1
+  }
+ ]
+}

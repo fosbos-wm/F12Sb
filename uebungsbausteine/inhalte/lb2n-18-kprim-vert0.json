@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Ein Kollege sagt: „Rogers’ Theorie ist wissenschaftlich perfekt.“ Eine Kollegin: „Sie ist unbrauchbar.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Beide Aussagen sind einseitig.",
+     "richtig": true
+    },
+    {
+     "text": "Eine kritische Würdigung nennt Stärken und Schwächen.",
+     "richtig": true
+    },
+    {
+     "text": "Die Theorie ist vollständig bewiesen.",
+     "richtig": false
+    },
+    {
+     "text": "Ein abwägendes Fazit ist sinnvoll.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Rogers’ Theorie erklärt jede seelische Störung.“",
+   "statements": [
+    {
+     "text": "Nicht jede Störung geht auf Inkongruenz zurück.",
+     "richtig": true
+    },
+    {
+     "text": "Der Erklärungswert ist begrenzt.",
+     "richtig": true
+    },
+    {
+     "text": "Sie erklärt alle Störungen.",
+     "richtig": false
+    },
+    {
+     "text": "Andere Theorien können ergänzen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Mara (15) sieht sich als „stark und selbstständig“, fühlt aber oft Angst. Sie sagt: „Ich habe nie Angst.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es besteht Inkongruenz zwischen Selbstkonzept und Erleben.",
+     "richtig": true
+    },
+    {
+     "text": "Sie nimmt ihre Angst nicht in das Selbstkonzept auf.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist kongruent.",
+     "richtig": false
+    },
+    {
+     "text": "Ein akzeptierendes Gespräch kann Kongruenz fördern.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Kongruente Menschen sind immer glücklich.“",
+   "statements": [
+    {
+     "text": "Kongruenz bedeutet Übereinstimmung, nicht dauernde Zufriedenheit.",
+     "richtig": true
+    },
+    {
+     "text": "Auch kongruente Menschen erleben negative Gefühle.",
+     "richtig": true
+    },
+    {
+     "text": "Kongruenz bedeutet, keine Probleme zu haben.",
+     "richtig": false
+    },
+    {
+     "text": "Sie können mit Gefühlen offener umgehen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

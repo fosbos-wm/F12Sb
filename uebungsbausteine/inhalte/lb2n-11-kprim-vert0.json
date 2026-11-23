@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Mira (17) möchte Erzieherin werden. Sie hat Praktika gemacht, Gespräche geführt und Zweifel durchdacht. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es handelt sich um eine erarbeitete Identität.",
+     "richtig": true
+    },
+    {
+     "text": "Verpflichtung und Experimentierfreudigkeit sind hoch.",
+     "richtig": true
+    },
+    {
+     "text": "Sie hat ihre Werte nie hinterfragt.",
+     "richtig": false
+    },
+    {
+     "text": "Ihre Entscheidung wirkt voraussichtlich stabil.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Wer die Berufswahl der Eltern übernimmt, hat eine schlechte Identität.“",
+   "statements": [
+    {
+     "text": "Die Aussage ist einseitig: Übernommene Identität kann sicher wirken.",
+     "richtig": true
+    },
+    {
+     "text": "Sie wurde nicht kritisch geprüft.",
+     "richtig": true
+    },
+    {
+     "text": "Marcia bewertet die Typen moralisch.",
+     "richtig": false
+    },
+    {
+     "text": "Pädagogisch sinnvoll: Gelegenheiten zum Hinterfragen geben.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

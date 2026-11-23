@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Tina arbeitet im Pflegedienst und denkt: „Ich muss immer für alle da sein.“ Sie ist erschöpft. Eine Kollegin sagt: „Du darfst auch auf dich achten.“ Tina antwortet: „Das wäre egoistisch.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Tina verteidigt ihr Selbstkonzept.",
+     "richtig": true
+    },
+    {
+     "text": "Sie wehrt die Erfahrung der Erschöpfung ab.",
+     "richtig": true
+    },
+    {
+     "text": "Sie erweitert ihr Selbstkonzept.",
+     "richtig": false
+    },
+    {
+     "text": "Ein erweitertes Selbstkonzept: „Ich sorge für andere und für mich.“",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Wer sein Selbstkonzept ändert, verliert seine Identität.“",
+   "statements": [
+    {
+     "text": "Eine Erweiterung kann den Kern erhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Flexibilität gilt in der Theorie als gesund.",
+     "richtig": true
+    },
+    {
+     "text": "Jede Veränderung bedroht die Identität.",
+     "richtig": false
+    },
+    {
+     "text": "Starre Selbstkonzepte erschweren die Anpassung.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

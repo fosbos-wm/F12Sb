@@ -1,0 +1,111 @@
+{
+ "titel": "K-Prim-Test 4: Stunde 13 bis 16",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht. Die letzte Aufgabe ist eine Fallvignette.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum organismischen Bewerten treffen zu? (Zwei Ebenen des Bewertens)",
+   "statements": [
+    {
+     "text": "Es ist spontan und flexibel.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist ein festgelegtes System.",
+     "richtig": false
+    },
+    {
+     "text": "Der Bezugspunkt liegt im Kind selbst.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist Ausdruck der Aktualisierungstendenz.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Kongruenz treffen zu? (Kongruenz und Inkongruenz)",
+   "statements": [
+    {
+     "text": "Sie fördert gesunde Entwicklung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht bei geringer Wertschätzung.",
+     "richtig": false
+    },
+    {
+     "text": "Sie besteht bei geringer Diskrepanz zwischen Real- und Ideal-Selbst.",
+     "richtig": true
+    },
+    {
+     "text": "Sie bedeutet, nur Positives zu erleben.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Weg A treffen zu? (Die Bewältigung von Erfahrungen)",
+   "statements": [
+    {
+     "text": "Das Selbstkonzept wird erweitert.",
+     "richtig": true
+    },
+    {
+     "text": "Es entsteht dauerhafte Abwehr.",
+     "richtig": false
+    },
+    {
+     "text": "Hohe Selbstachtung begünstigt ihn.",
+     "richtig": true
+    },
+    {
+     "text": "Das Ergebnis ist Kongruenz.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Entstehung von Störungen treffen zu? (Die Entstehung psychischer Störungen)",
+   "statements": [
+    {
+     "text": "Inkongruenz ist der Ausgangspunkt.",
+     "richtig": true
+    },
+    {
+     "text": "Ein Lebensereignis ist unwichtig.",
+     "richtig": false
+    },
+    {
+     "text": "Ein starres Selbstkonzept begünstigt die Störung.",
+     "richtig": true
+    },
+    {
+     "text": "Das Symptom ist ein Bewältigungsversuch.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Fall: Marie (17) will „immer perfekt“ sein. Als sie bei der Prüfung durchfällt, schläft sie nicht mehr und bekommt Panikattacken. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das Lebensereignis ist die Prüfung.",
+     "richtig": true
+    },
+    {
+     "text": "Ihr Selbstkonzept ist eher starr.",
+     "richtig": true
+    },
+    {
+     "text": "Die Panikattacken sind das Symptom.",
+     "richtig": true
+    },
+    {
+     "text": "Die Ursache liegt allein im Körper.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

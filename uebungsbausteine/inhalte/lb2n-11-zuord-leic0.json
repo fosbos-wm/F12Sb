@@ -1,0 +1,34 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Identität",
+   "Selbstverständnis als einmalige, unverwechselbare Person"
+  ],
+  [
+   "James E. Marcia",
+   "Entwicklungspsychologe, entwickelte das Identitätsmodell"
+  ],
+  [
+   "Verpflichtung",
+   "Bindung an Werthaltungen: hoch oder niedrig"
+  ],
+  [
+   "Experimentierfreudigkeit",
+   "Ausprobieren von Werthaltungen: hoch oder niedrig"
+  ],
+  [
+   "erarbeitete Identität",
+   "Verpflichtung hoch, Experimentieren hoch"
+  ],
+  [
+   "übernommene Identität",
+   "Verpflichtung hoch, Experimentieren niedrig"
+  ],
+  [
+   "diffuse Identität",
+   "Verpflichtung niedrig, Experimentieren niedrig"
+  ]
+ ]
+}

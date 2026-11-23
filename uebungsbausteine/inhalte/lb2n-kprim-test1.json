@@ -1,0 +1,111 @@
+{
+ "titel": "K-Prim-Test 1: Stunde 1 bis 4",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht. Die letzte Aufgabe ist eine Fallvignette.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Persönlichkeitsbegriff treffen zu? (Begriff Persönlichkeit)",
+   "statements": [
+    {
+     "text": "Persönlichkeit besteht aus verschiedenen Persönlichkeitsmerkmalen.",
+     "richtig": true
+    },
+    {
+     "text": "Persönlichkeitsmerkmale sind völlig unveränderlich.",
+     "richtig": false
+    },
+    {
+     "text": "Persönlichkeit ist ein gedanklich konstruiertes Gefüge.",
+     "richtig": true
+    },
+    {
+     "text": "Die Persönlichkeit lässt sich direkt beobachten.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Persönlichkeitsinventaren treffen zu? (Testverfahren und Persönlichkeitsinventare)",
+   "statements": [
+    {
+     "text": "Sie erfassen in der Regel nur einzelne Merkmale.",
+     "richtig": true
+    },
+    {
+     "text": "Sie messen die gesamte Persönlichkeit vollständig.",
+     "richtig": false
+    },
+    {
+     "text": "Sie beruhen auf Selbstbeschreibung.",
+     "richtig": true
+    },
+    {
+     "text": "Es gibt nur offene Fragen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Big Five treffen zu? (Big Five – Info)",
+   "statements": [
+    {
+     "text": "Es gibt fünf Grunddimensionen der Persönlichkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Die Dimensionen sind nur zwei: Extraversion und Neurotizismus.",
+     "richtig": false
+    },
+    {
+     "text": "Die Faktoren stammen aus statistischen Verfahren.",
+     "richtig": true
+    },
+    {
+     "text": "Die Big Five sind ein Test, aber kein Modell.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Lesen eines Profils treffen zu? (Big Five – Vertiefung)",
+   "statements": [
+    {
+     "text": "Die Werte sind relativ zu anderen Menschen.",
+     "richtig": true
+    },
+    {
+     "text": "Ein Profil ist eine Schulnote.",
+     "richtig": false
+    },
+    {
+     "text": "Ein Profil beschreibt Tendenzen.",
+     "richtig": true
+    },
+    {
+     "text": "Ein Profil sagt Verhalten in jeder Situation sicher voraus.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Fall: Tom (17): Offenheit hoch, Gewissenhaftigkeit niedrig, Extraversion mittel, Verträglichkeit hoch, Neurotizismus niedrig. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Tom ist kreativ und umgänglich.",
+     "richtig": true
+    },
+    {
+     "text": "Er braucht eher Unterstützung bei der Selbstorganisation.",
+     "richtig": true
+    },
+    {
+     "text": "Er ist sicher ein unzuverlässiger Mensch in allen Bereichen.",
+     "richtig": false
+    },
+    {
+     "text": "Tom bleibt vor Prüfungen eher gelassen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

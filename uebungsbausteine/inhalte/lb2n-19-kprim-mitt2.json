@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Gemeinsamkeiten treffen zu?",
+   "statements": [
+    {
+     "text": "Beide nehmen eine angeborene Antriebskraft an.",
+     "richtig": true
+    },
+    {
+     "text": "Beide sehen den Menschen als rein positiv.",
+     "richtig": false
+    },
+    {
+     "text": "Beide sehen Symptome als Ausdruck von Konflikten.",
+     "richtig": true
+    },
+    {
+     "text": "Beide entstanden aus der Therapie.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Unterschieden treffen zu?",
+   "statements": [
+    {
+     "text": "Freud: Mensch triebbestimmt; Rogers: Mensch positiv.",
+     "richtig": true
+    },
+    {
+     "text": "Rogers erklärt vor allem frühkindliche Triebe.",
+     "richtig": false
+    },
+    {
+     "text": "Freud betont das Unbewusste.",
+     "richtig": true
+    },
+    {
+     "text": "Rogers gibt klare Haltungen für die Praxis vor.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

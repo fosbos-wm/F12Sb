@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Tom ist überzeugt, hoch intelligent zu sein. Er fällt zweimal durch die Prüfung und sagt: „Der Prüfer hat mich nicht gemocht.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es handelt sich um Wahrnehmungsverzerrung.",
+     "richtig": true
+    },
+    {
+     "text": "Sein Selbstkonzept ist eher starr.",
+     "richtig": true
+    },
+    {
+     "text": "Er integriert die Erfahrung.",
+     "richtig": false
+    },
+    {
+     "text": "Die Abwehr schützt sein Selbstbild.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Abwehr ist immer schlecht.“",
+   "statements": [
+    {
+     "text": "Abwehr schützt kurzfristig das Selbstkonzept.",
+     "richtig": true
+    },
+    {
+     "text": "Dauerhaft hindert sie, Erfahrungen zu integrieren.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist immer ein Zeichen von Krankheit.",
+     "richtig": false
+    },
+    {
+     "text": "Entscheidend sind Dauer und Starrheit.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

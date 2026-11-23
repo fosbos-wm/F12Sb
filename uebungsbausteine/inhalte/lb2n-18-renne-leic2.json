@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wogegen wendet sich die personenzentrierte Theorie?",
+   "o": [
+    "Gegen mechanistische Vorstellungen von Psychoanalyse und Behaviorismus",
+    "Gegen Therapie",
+    "Gegen die Erziehung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was entwickelte Rogers zuerst?",
+   "o": [
+    "Eine Theorie",
+    "Eine Therapiemethode",
+    "Einen Test"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche ist eine Stärke?",
+   "o": [
+    "Hohe empirische Absicherung",
+    "Genaue Messbarkeit",
+    "Positives Menschenbild"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche ist eine Schwäche?",
+   "o": [
+    "Begrenzter Erklärungswert",
+    "Praxisrelevanz",
+    "Wertschätzung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie schreibt man eine kritische Würdigung?",
+   "o": [
+    "Nur Stärken nennen",
+    "Nennen, erklären, verdeutlichen, dann Fazit",
+    "Nur Schwächen nennen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was gehört zum Fazit?",
+   "o": [
+    "Eine Wiederholung",
+    "Eine Frage",
+    "Ein abwägendes Urteil"
+   ],
+   "r": 2
+  }
+ ]
+}

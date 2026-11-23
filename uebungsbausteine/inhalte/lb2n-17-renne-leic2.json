@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist positive Beachtung?",
+   "o": [
+    "Gefühlsmäßige Grundhaltung aus Achtung, Anerkennung und Wärme",
+    "Eine Belohnung",
+    "Eine Note"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was kennzeichnet bedingungslose positive Beachtung?",
+   "o": [
+    "Sie wird für Leistung gegeben",
+    "Sie ist nicht von Bedingungen abhängig",
+    "Sie ist selten"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was sind Bewertungsbedingungen?",
+   "o": [
+    "Schulnoten",
+    "Gesetze",
+    "Maßstäbe, die man erfüllen muss, um Zuneigung zu erhalten"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was folgt aus fehlender bedingungsloser Beachtung?",
+   "o": [
+    "Geringe Selbstachtung, starres Selbstkonzept",
+    "Hohe Selbstachtung",
+    "Offenheit"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Nenne die förderlichen Haltungen.",
+   "o": [
+    "Strenge, Lenken, Loben",
+    "Wertschätzung, Verstehen, Echtheit",
+    "Belohnen, Strafen, Ignorieren"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was heißt Wertschätzung nicht?",
+   "o": [
+    "Akzeptanz der Person",
+    "Achtung der Gefühle",
+    "Billigung jedes Verhaltens"
+   ],
+   "r": 2
+  }
+ ]
+}

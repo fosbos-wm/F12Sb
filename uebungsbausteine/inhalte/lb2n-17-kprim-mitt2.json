@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Bewertungsbedingungen treffen zu?",
+   "statements": [
+    {
+     "text": "Sie entstehen bei bedingter Zuwendung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie fördern Selbstachtung.",
+     "richtig": false
+    },
+    {
+     "text": "Das Kind blendet Gefühle aus, die als Bedrohung erlebt werden.",
+     "richtig": true
+    },
+    {
+     "text": "Sie sind Teil bedingungsloser Beachtung.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Wertschätzung treffen zu?",
+   "statements": [
+    {
+     "text": "Sie akzeptiert die Person und ihre Gefühle.",
+     "richtig": true
+    },
+    {
+     "text": "Sie billigt jedes Verhalten.",
+     "richtig": false
+    },
+    {
+     "text": "Sie hängt nicht von Leistung ab.",
+     "richtig": true
+    },
+    {
+     "text": "Sie schließt Grenzen aus.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

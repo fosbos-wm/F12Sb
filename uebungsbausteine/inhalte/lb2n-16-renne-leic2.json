@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist der Ausgangspunkt psychischer Störungen nach Rogers?",
+   "o": [
+    "Inkongruenz",
+    "Triebstau",
+    "Vererbung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche drei Bausteine führen zur Störung?",
+   "o": [
+    "Es, Ich, Über-Ich",
+    "Inkongruenz, Lebensereignis, starres Selbstkonzept",
+    "Anlage, Umwelt, Selbststeuerung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was geht mit der drohenden Erschütterung einher?",
+   "o": [
+    "Freude",
+    "Gleichgültigkeit",
+    "Angst"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist ein Symptom?",
+   "o": [
+    "Ausdruck des inneren Konflikts",
+    "Ein Persönlichkeitstest",
+    "Eine Diagnose"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie versteht Rogers ein Symptom?",
+   "o": [
+    "Als Strafe",
+    "Als Bewältigungsversuch der Konfliktspannung",
+    "Als Zufall"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was sollte man in der Praxis beachten?",
+   "o": [
+    "Nur das Symptom entfernen",
+    "Nichts tun",
+    "Den Konflikt hinter dem Symptom verstehbar machen"
+   ],
+   "r": 2
+  }
+ ]
+}

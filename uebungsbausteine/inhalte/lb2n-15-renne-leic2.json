@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie geht ein Mensch mit hoher Selbstachtung mit Inkongruenz um?",
+   "o": [
+    "Er erweitert sein Selbstkonzept",
+    "Er verleugnet",
+    "Er ignoriert den Körper"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was heißt Offenheit für Erfahrung?",
+   "o": [
+    "Nichts wird bewertet",
+    "Alle Erfahrungen können in die Selbststruktur aufgenommen werden",
+    "Alles wird abgewehrt"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie geht ein Mensch mit geringer Selbstachtung mit Inkongruenz um?",
+   "o": [
+    "Er erweitert es",
+    "Er wechselt den Beruf",
+    "Er verteidigt sein Selbstkonzept"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Abwehrformen nennt Rogers?",
+   "o": [
+    "Wahrnehmungsverleugnung und -verzerrung",
+    "Verdrängung und Projektion",
+    "Fixierung und Regression"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was bleibt bei Weg B bestehen?",
+   "o": [
+    "Die Selbstachtung",
+    "Der Konflikt zwischen Erleben und Selbstkonzept",
+    "Die Offenheit"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Bedeutung hat Selbstfürsorge in sozialen Berufen?",
+   "o": [
+    "Verzicht auf eigene Bedürfnisse",
+    "Keine",
+    "Balance zwischen Sorge für andere und für sich selbst"
+   ],
+   "r": 2
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Ein Kind schlägt seine Schwester. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Psychoanalytisch: Das Es drängt nach aggressiver Befriedigung, das Über-Ich verbietet.",
+     "richtig": true
+    },
+    {
+     "text": "Personenzentriert: Wut passt nicht zum Selbstbild „Ich bin lieb“ (Inkongruenz).",
+     "richtig": true
+    },
+    {
+     "text": "Beide Theorien erklären das Verhalten identisch.",
+     "richtig": false
+    },
+    {
+     "text": "Beide sehen im Verhalten einen Ausdruck eines Konflikts.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Man muss sich für eine der Theorien entscheiden.“",
+   "statements": [
+    {
+     "text": "Beide ergänzen sich in der Praxis.",
+     "richtig": true
+    },
+    {
+     "text": "Die Psychoanalyse erinnert an Konflikte, Rogers zeigt, wie man begegnet.",
+     "richtig": true
+    },
+    {
+     "text": "Man darf nur eine Theorie nutzen.",
+     "richtig": false
+    },
+    {
+     "text": "Beide haben Stärken und Grenzen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

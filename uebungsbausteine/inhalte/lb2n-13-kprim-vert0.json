@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Leon (7) schlägt wütend seine Schwester und hört: „Böser Junge!“ Später sagt er zu sich: „Ich bin böse.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Leon hat das Werturteil der Eltern internalisiert.",
+     "richtig": true
+    },
+    {
+     "text": "Es entsteht eine Spannung zwischen den beiden Ebenen.",
+     "richtig": true
+    },
+    {
+     "text": "Leons Wut war organismisch gesehen irrelevant.",
+     "richtig": false
+    },
+    {
+     "text": "Wertschätzende Reaktion könnte beide Ebenen versöhnen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Das Selbstkonzept bewertet immer richtiger als der Organismus.“",
+   "statements": [
+    {
+     "text": "Das Selbstkonzept bewertet nach verinnerlichten Werten, nicht nach dem Erleben.",
+     "richtig": true
+    },
+    {
+     "text": "Es kann zu Spannungen führen.",
+     "richtig": true
+    },
+    {
+     "text": "Der Organismus irrt sich grundsätzlich.",
+     "richtig": false
+    },
+    {
+     "text": "Entscheidend ist die Übereinstimmung beider Ebenen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

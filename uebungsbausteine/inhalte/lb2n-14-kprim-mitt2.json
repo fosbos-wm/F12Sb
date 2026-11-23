@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Kongruenz treffen zu?",
+   "statements": [
+    {
+     "text": "Sie fördert gesunde Entwicklung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht bei geringer Wertschätzung.",
+     "richtig": false
+    },
+    {
+     "text": "Sie besteht bei geringer Diskrepanz zwischen Real- und Ideal-Selbst.",
+     "richtig": true
+    },
+    {
+     "text": "Sie bedeutet, nur Positives zu erleben.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Inkongruenz treffen zu?",
+   "statements": [
+    {
+     "text": "Selbstkonzept und Erleben widersprechen sich.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist immer ein Zeichen von Störung.",
+     "richtig": false
+    },
+    {
+     "text": "Das wahre Selbst wird verdrängt.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht oft durch verinnerlichte Bewertungen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

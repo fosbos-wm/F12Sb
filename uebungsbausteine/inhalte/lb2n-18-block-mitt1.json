@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Stärke",
+  "Schwäche"
+ ],
+ "items": [
+  {
+   "t": "positives Menschenbild",
+   "k": 0
+  },
+  {
+   "t": "Bedeutung für Erziehung und Beratung",
+   "k": 0
+  },
+  {
+   "t": "ganzheitliche Sicht",
+   "k": 0
+  },
+  {
+   "t": "anwendbar in vielen Bereichen",
+   "k": 0
+  },
+  {
+   "t": "begrenzter Erklärungswert",
+   "k": 1
+  },
+  {
+   "t": "nicht erschöpfend wissenschaftlich fundiert",
+   "k": 1
+  },
+  {
+   "t": "unscharfe Begriffe",
+   "k": 1
+  },
+  {
+   "t": "Umwelt und Gesellschaft vernachlässigt",
+   "k": 1
+  }
+ ]
+}

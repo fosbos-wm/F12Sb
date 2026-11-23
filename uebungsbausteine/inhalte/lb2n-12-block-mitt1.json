@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "flexibel",
+  "starr"
+ ],
+ "items": [
+  {
+   "t": "hohe Selbstachtung",
+   "k": 0
+  },
+  {
+   "t": "Erfahrungen werden integriert",
+   "k": 0
+  },
+  {
+   "t": "bedingungslose positive Beachtung erlebt",
+   "k": 0
+  },
+  {
+   "t": "Selbstkonzept verändert sich mit Erfahrungen",
+   "k": 0
+  },
+  {
+   "t": "geringe Selbstachtung",
+   "k": 1
+  },
+  {
+   "t": "Erfahrungen werden abgewehrt",
+   "k": 1
+  },
+  {
+   "t": "wenig positive Beachtung",
+   "k": 1
+  },
+  {
+   "t": "Wahrnehmungsverleugnung oder -verzerrung",
+   "k": 1
+  }
+ ]
+}

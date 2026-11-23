@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Risiko",
+  "Schutz"
+ ],
+ "karten": [
+  {
+   "t": "starres Selbstkonzept",
+   "s": 0
+  },
+  {
+   "t": "große Diskrepanz",
+   "s": 0
+  },
+  {
+   "t": "Bedingte Zuwendung",
+   "s": 0
+  },
+  {
+   "t": "Abwehr von Erfahrungen",
+   "s": 0
+  },
+  {
+   "t": "Flexibles Selbstkonzept",
+   "s": 1
+  },
+  {
+   "t": "Bedingungslose Wertschätzung",
+   "s": 1
+  },
+  {
+   "t": "Offenheit für Erfahrung",
+   "s": 1
+  },
+  {
+   "t": "Unterstützung im Gespräch",
+   "s": 1
+  }
+ ]
+}

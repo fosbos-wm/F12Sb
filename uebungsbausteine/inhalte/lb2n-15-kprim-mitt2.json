@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Weg A treffen zu?",
+   "statements": [
+    {
+     "text": "Das Selbstkonzept wird erweitert.",
+     "richtig": true
+    },
+    {
+     "text": "Es entsteht dauerhafte Abwehr.",
+     "richtig": false
+    },
+    {
+     "text": "Hohe Selbstachtung begünstigt ihn.",
+     "richtig": true
+    },
+    {
+     "text": "Das Ergebnis ist Kongruenz.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Weg B treffen zu?",
+   "statements": [
+    {
+     "text": "Das Selbstkonzept wird verteidigt.",
+     "richtig": true
+    },
+    {
+     "text": "Es wird neue Erfahrung integriert.",
+     "richtig": false
+    },
+    {
+     "text": "Wahrnehmungsverleugnung oder -verzerrung treten auf.",
+     "richtig": true
+    },
+    {
+     "text": "Es besteht ein Risiko für psychische Störung.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Psychoanalyse",
+  "Personenzentrierte Theorie"
+ ],
+ "karten": [
+  {
+   "t": "erklärt Nachwirkung früher Erfahrungen",
+   "s": 0
+  },
+  {
+   "t": "Unbewusstes wird betont",
+   "s": 0
+  },
+  {
+   "t": "schwer überprüfbar",
+   "s": 0
+  },
+  {
+   "t": "wenig Handlungsanleitung",
+   "s": 0
+  },
+  {
+   "t": "klare Haltungen für Erziehung",
+   "s": 1
+  },
+  {
+   "t": "Mensch positiv und aktiv",
+   "s": 1
+  },
+  {
+   "t": "schwer messbare Begriffe",
+   "s": 1
+  },
+  {
+   "t": "Wertschätzung als Kern",
+   "s": 1
+  }
+ ]
+}

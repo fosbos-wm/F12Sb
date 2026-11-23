@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was bedeutet Identität in der Psychologie?",
+   "o": [
+    "Selbstverständnis als einmalige, unverwechselbare Person",
+    "Name und Alter",
+    "Die Gesamtheit aller Körpermerkmale"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche zwei Dimensionen nutzt Marcia?",
+   "o": [
+    "Offenheit und Extraversion",
+    "Verpflichtung und Experimentierfreudigkeit",
+    "Es und Über-Ich"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Typ hat Verpflichtung hoch und Experimentieren hoch?",
+   "o": [
+    "Übernommene Identität",
+    "Diffuse Identität",
+    "Erarbeitete Identität"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welcher Typ übernimmt die Werte der Familie ohne Auseinandersetzung?",
+   "o": [
+    "Übernommene Identität",
+    "Erarbeitete Identität",
+    "Kritische Identität"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Aufgabe gilt als zentral im Jugendalter?",
+   "o": [
+    "Spracherwerb",
+    "Identitätsfindung",
+    "Sauberkeitserziehung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Gelten die Identitätstypen als feste zeitliche Abfolge?",
+   "o": [
+    "Ja, immer in dieser Reihenfolge",
+    "Nur bei Jungen",
+    "Nein"
+   ],
+   "r": 2
+  }
+ ]
+}

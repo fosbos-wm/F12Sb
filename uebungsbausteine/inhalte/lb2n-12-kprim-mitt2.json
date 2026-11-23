@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Abwehr nach Rogers treffen zu?",
+   "statements": [
+    {
+     "text": "Abwehr schützt ein starres Selbstkonzept vor Bedrohung.",
+     "richtig": true
+    },
+    {
+     "text": "Abwehr tritt vor allem bei hoher Selbstachtung auf.",
+     "richtig": false
+    },
+    {
+     "text": "Wahrnehmungsverleugnung schließt Erfahrungen vom Bewusstsein aus.",
+     "richtig": true
+    },
+    {
+     "text": "Wahrnehmungsverzerrung ändert das Selbstkonzept sofort.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Selbstachtung treffen zu?",
+   "statements": [
+    {
+     "text": "Sie hängt von der erlebten positiven Beachtung ab.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht unabhängig von Bezugspersonen.",
+     "richtig": false
+    },
+    {
+     "text": "Hohe Selbstachtung begünstigt ein flexibles Selbstkonzept.",
+     "richtig": true
+    },
+    {
+     "text": "Geringe Selbstachtung führt zu Offenheit für Erfahrungen.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}
