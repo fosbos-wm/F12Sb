@@ -22760,7 +22760,7 @@ function lxBibPool(e,ph,K,items){
  (K.fa||[]).forEach(x=>{if(x.thema!==e.id||have.has("fa:"+x.id))return;p.push({key:"fa:"+x.id,grp:"fa",titel:x.titel,art:"Fachaufsatztraining",niv:"a",url:"fa:"+x.id})});
  return p;
 }
-function lxBibAuto(items){const s=new Set(),seen={};items.forEach(i=>{if(["info","tafel","lue","baust"].includes(i.grp)){s.add(i.key);return}if(i.grp==="slk"){if(i.main||i.modId)s.add(i.key);return}if(i.grp==="fa"){if(!i.repo)s.add(i.key);return}if(!i.repo){s.add(i.key);return}if(!seen[i.grp]){seen[i.grp]=1;s.add(i.key)}});return s}
+function lxBibAuto(items){const s=new Set(),seen={};items.forEach(i=>{if(["info","tafel","lue","baust"].includes(i.grp)){s.add(i.key);return}if(i.grp==="slk"){if(i.main||i.modId)s.add(i.key);return}if(i.grp==="fa"){if(i.mat&&!i.repo)s.add(i.key);return}if(!i.repo){s.add(i.key);return}if(!seen[i.grp]){seen[i.grp]=1;s.add(i.key)}});return s}
 function lxBibVis(e,items,fort){
  const base=lxBibAuto(items),b=(KW.basis||{})[e.id];
  if(b){b.an.forEach(k=>base.add(k));b.aus.forEach(k=>base.delete(k))}
@@ -22877,7 +22877,7 @@ async function renderKwThema(){
  if(!lehrer&&!lxThemaSichtbar(e))return lxGesperrtSeite(e,ph,F);
   if(lehrer&&!e.leistung&&window.__kwAlt!==e.id)return await lxBibListeSeite(e,ph,F);
  const leist=!!e.leistung;
- const bibD=(lehrer||leist)?null:await lxBibLade(e,ph),sicht=k=>!bibD||!bibD.items.some(x=>x.key===k)||bibD.bib.vis.has(k),slPos=k=>!!bibD&&(bibD.fort.zusatz||[]).includes(k)&&!bibD.bib.base.has(k);
+ const bibD=(lehrer||leist)?null:await lxBibLade(e,ph),sicht=k=>{if(!bibD||bibD.bib.vis.has(k))return true;if(bibD.items.some(x=>x.key===k))return false;if(k.startsWith("tr:")||k.startsWith("mod:"))return false;if(k.startsWith("m:")){const m=(KW.mat[e.id]||[]).find(x=>"m:"+x.id===k);return !(m&&/^(uebung|vertiefung[123])$/.test(m.kategorie))}return true},slPos=k=>!!bibD&&(bibD.fort.zusatz||[]).includes(k)&&!bibD.bib.base.has(k);
  let mats=KW.mat[e.id]||[];if(bibD)mats=mats.filter(m=>sicht("m:"+m.id));
  const [ciFr,ea,trInfos]=await Promise.all([
   (lehrer||leist)?Promise.resolve([]):getBasischeckFragen(e.id).catch(()=>[]),
