@@ -1,0 +1,162 @@
+{
+ "titel": "Life Model: Habitat und Nische: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Life Model: Habitat und Nische** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Jonas wohnt in einem Hochhausviertel ohne Treffpunkte. In der Klasse lachen ihn andere aus, mitentscheiden darf er nie. Die Sozialpädagogin fragt: „Wo kannst du etwas bewirken – und wo nicht?“"
+    },
+    {
+     "typ": "text",
+     "text": "Das **Habitat** ist der unmittelbare Lebensraum, der das Erleben und Verhalten eines Menschen beeinflusst; er umfasst die baulichen, kulturellen und sozialen Gegebenheiten, in denen man lebt. Ein unpassendes Habitat führt zu Desorientierung und Verstimmung."
+    },
+    {
+     "typ": "text",
+     "text": "Die **Nische** ist die Bezeichnung für das „Wirkungsfeld einer Person“ und stellt das ihr gesellschaftlich zugestandene Handlungsfeld – die Einflussmöglichkeiten, die ein Mensch an einem Platz hat – dar. Man unterscheidet **gute Nische** (große Einflussmöglichkeiten, Wertschätzung) und **schlechte Nische** (geringe Einflussmöglichkeiten, Geringschätzung, Diskriminierung)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Habitat = Lebensraum (baulich, sozial, kulturell). Nische = Wirkungsfeld und Einflussmöglichkeit; gut oder schlecht."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was ist ein Habitat?",
+     "optionen": [
+      "Der verhaltensbeeinflussende Lebensraum eines Menschen",
+      "Das Wirkungsfeld einer Person",
+      "Ein Rückzugswinkel"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Der verhaltensbeeinflussende Lebensraum eines Menschen"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Eine Familie wohnt an einer Hauptstraße ohne Spielplatz in der Nähe.",
+       "Habitat"
+      ],
+      [
+       "Der Klassenclown hat sein Publikum in der Klasse.",
+       "Nische"
+      ],
+      [
+       "Ein Schüler darf über Lerninhalte mitentscheiden.",
+       "gute Nische"
+      ],
+      [
+       "Ein Jugendlicher hat keinerlei Einfluss auf das Schulleben.",
+       "schlechte Nische"
+      ],
+      [
+       "Ein Stadtteil hat Bürgerhaus, Theater und Bücherei.",
+       "kulturelle Gegebenheiten"
+      ],
+      [
+       "Ein Verein vergibt Posten an seine Mitglieder.",
+       "Nische"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Das {{Habitat}} ist der unmittelbare {{Lebensraum}}, der das Erleben und Verhalten eines Menschen beeinflusst. Er umfasst {{bauliche}}, kulturelle und soziale Gegebenheiten. Die {{Nische}} ist das Wirkungsfeld einer Person, ihr gesellschaftlich zugestandenes {{Handlungsfeld}}. Bei einer guten Nische hat sie große {{Einflussmöglichkeiten}}.",
+     "woerter": [
+      "Habitat",
+      "Lebensraum",
+      "bauliche",
+      "Nische",
+      "Handlungsfeld",
+      "Einflussmöglichkeiten",
+      "Rückzugswinkel",
+      "Wohnung allein",
+      "Freizeit"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Nische treffen zu?",
+     "aussagen": [
+      {
+       "text": "Nische ist das gesellschaftlich zugestandene Handlungsfeld.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Nische bedeutet Rückzugswinkel.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Wertschätzung kann ein Merkmal einer guten Nische sein.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Eine schlechte Nische bedeutet geringe Einflussmöglichkeiten.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Habitat",
+       "items": [
+        "Wohnhaus, Verkehrsanbindung",
+        "Bürgerhaus und Museum"
+       ]
+      },
+      {
+       "name": "gute Nische",
+       "items": [
+        "Mitentscheiden im Verein",
+        "Anerkennung in der Gruppe"
+       ]
+      },
+      {
+       "name": "schlechte Nische",
+       "items": [
+        "Keine Einflussmöglichkeit",
+        "Diskriminierung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Jonas (15) wohnt in einem Viertel mit vielen Hochhäusern, wenig Grün, ohne Jugendtreff. In der Klasse wird er ausgelacht, bei Entscheidungen übergangen. Im Boxverein dagegen ist er geachtet und leitet das Aufwärmen. Beschreibe sein Habitat.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Hochhäuser, wenig Grün, kein Jugendtreff, schlechte Spielmöglichkeiten.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_11"
+ ]
+}

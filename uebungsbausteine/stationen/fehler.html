@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Übung</title>
+<style>
+:root{--bg:#f2f5f7;--panel:#fff;--fg:#14222c;--muted:#566872;--line:#d3dde3;--pri:#0e5a77;--pri-ink:#fff;--ok:#1b7f4b;--ok-soft:#d9f0e2;--bad:#b3261e;--bad-soft:#f9dedc}
+@media (prefers-color-scheme:dark){:root{--bg:#0f171c;--panel:#17232a;--fg:#e6eff3;--muted:#9bb0ba;--line:#2a3b44;--pri:#5fb8d9;--pri-ink:#062029;--ok:#6fd49b;--ok-soft:#163626;--bad:#ff9a92;--bad-soft:#40201e;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:14px max(14px,env(safe-area-inset-left,0px)) 40px;max-width:820px;margin-inline:auto}
+h1{font-size:1.2rem;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 14px}
+.task{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.task h2{font-size:1rem;margin:0 0 10px}
+.st{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.st.ok{background:var(--ok-soft)}.st.bad{background:var(--bad-soft)}
+.tf{display:flex;gap:6px}
+.tf button{font:600 .85rem inherit;font-family:inherit;border:2px solid var(--line);background:var(--panel);color:var(--fg);border-radius:10px;padding:8px 12px;cursor:pointer;min-width:5.6em}
+.tf button[aria-pressed="true"]{border-color:var(--pri);background:var(--pri);color:var(--pri-ink)}
+.fb{grid-column:1/-1;font-size:.88rem;font-weight:600}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.b{font:600 .95rem inherit;font-family:inherit;border-radius:10px;border:1px solid var(--pri);background:var(--pri);color:var(--pri-ink);padding:10px 18px;cursor:pointer}.b.alt{background:var(--panel);color:var(--fg);border-color:var(--line)}.b:disabled{opacity:.5}
+.sum{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--ok-soft);color:var(--ok);font-weight:700}
+:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;display:block;width:100%;text-align:left;font:inherit;color:var(--fg)}
+button.item{cursor:pointer}.item.sel{border:2px solid var(--pri)}.item.ok{background:var(--ok-soft)}.item.bad{background:var(--bad-soft)}
+.fbk{font-size:.88rem;font-weight:600;margin-top:6px}.sit{background:var(--panel);border-left:5px solid var(--pri);padding:10px 14px;border-radius:8px;margin-bottom:12px}
+input[type=range]{width:100%}.pol{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+</style></head><body>
+<h1 id="t">Übung</h1><p class="sub" id="a"></p>
+<div id="main"></div>
+<div class="bar"><button class="b" id="chk" disabled type="button">Prüfen</button><button class="b alt" id="again" type="button" hidden>Noch einmal</button><span class="sub" id="cnt" style="margin:0"></span></div>
+<div id="sum" role="status"></div>
+<script>
+const QS=new URLSearchParams(location.search),TS=QS.get("ts")==="1",SET=(QS.get("set")||"").replace(/[^a-z0-9\-]/gi,"");
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let D=null,checked=false,tries=0,t0=0,secs=0,started=false;
+const start=()=>{if(!started){started=true;t0=Date.now()}};
+function done(ok,tot){checked=true;tries++;secs=Math.round((Date.now()-t0)/1000);$("sum").innerHTML=`<div class="sum">${ok} von ${tot} richtig.${TS?" Zeige deiner Lehrkraft den Ergebniscode (oben).":""}</div>`;
+ if(TS)try{parent.postMessage({tsResult:{punkte:ok,max:tot,zuege:tries,sekunden:secs}},"*")}catch(e){}}
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let sel={};
+function init(){sel={};render()}
+function render(){
+ $("main").innerHTML=`<div class="sit">${esc(D.situation)}</div>`+D.saetze.map((s,i)=>{let c=sel[i]?"sel":"",fb="";
+  if(checked){const r=!!sel[i]===s.falsch;c=r?"ok":"bad";fb=`<div class="fbk">${s.falsch?"Fehler gefunden"+(sel[i]?"":" – übersehen")+": "+esc(s.korr):(sel[i]?"Dieser Satz ist richtig.":"richtig, dieser Satz stimmt.")}</div>`}
+  return `<button type="button" class="item ${c}" data-i="${i}" ${checked?"disabled":""}>${esc(s.t)}${fb}</button>`}).join("");
+ $("chk").disabled=checked;$("cnt").textContent=Object.values(sel).filter(Boolean).length+" als falsch markiert";$("again").hidden=!checked;
+ document.querySelectorAll("[data-i]").forEach(b=>b.addEventListener("click",()=>{start();sel[b.dataset.i]=!sel[b.dataset.i];render()}));}
+$("chk").addEventListener("click",()=>{let ok=0;D.saetze.forEach((s,i)=>{if(!!sel[i]===s.falsch)ok++});done(ok,D.saetze.length);render()});
+$("again").addEventListener("click",()=>{checked=false;started=false;$("sum").innerHTML="";init()});
+fetch("../inhalte/"+SET+".json").then(r=>r.json()).then(d=>{D=d;$("t").textContent=d.titel;$("a").textContent=d.anleitung;init()}).catch(()=>{$("a").textContent="Die Übung konnte nicht geladen werden."});
+</script></body></html>

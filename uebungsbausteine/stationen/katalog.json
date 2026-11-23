@@ -14258,5 +14258,7309 @@
    "eine Fallvignette mit Fachbegriffen analysieren",
    "mein Ergebnis einschätzen und Lücken gezielt nacharbeiten"
   ]
+ },
+ {
+  "id": "lb3n-01-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-01-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Begriff Soziale Arbeit“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-01-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Kernwissen",
+  "datei": "luecken.html?set=lb3n-01-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Begriff Soziale Arbeit“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-01-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-01-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Begriff Soziale Arbeit“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-01-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-01-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Begriff Soziale Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-01-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-01-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Begriff Soziale Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-01-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-01-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Begriff Soziale Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-01-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-01-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Begriff Soziale Arbeit“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-01-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-01-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Begriff Soziale Arbeit“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-01-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-01-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Begriff Soziale Arbeit“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-01-fehl-mitt0",
+  "titel": "Fehler-Detektiv: Antwort zum Begriff",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Fehler-Detektiv: Antwort zum Begriff",
+  "datei": "fehler.html?set=lb3n-01-fehl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Begriff Soziale Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-01-regl-mitt1",
+  "titel": "Regler: privat oder professionell?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Begriff Soziale Arbeit – Einordnen mit Reglern: privat oder professionell?",
+  "datei": "regler.html?set=lb3n-01-regl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Begriff Soziale Arbeit",
+  "uebungsart": "Regler",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Begriff Soziale Arbeit",
+   "Regler",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_01"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Begriff Soziale Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Sachverhalte auf einer Skala einordnen"
+  ]
+ },
+ {
+  "id": "lb3n-02-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-02-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Aufgabenbereiche der Sozialen Arbeit“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-02-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Kernwissen",
+  "datei": "luecken.html?set=lb3n-02-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Aufgabenbereiche der Sozialen Arbeit“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-02-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-02-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Aufgabenbereiche der Sozialen Arbeit“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-02-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-02-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Aufgabenbereiche der Sozialen Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-02-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-02-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Aufgabenbereiche der Sozialen Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-02-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-02-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Aufgabenbereiche der Sozialen Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-02-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-02-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Aufgabenbereiche der Sozialen Arbeit“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-02-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-02-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Aufgabenbereiche der Sozialen Arbeit“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-02-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-02-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Aufgabenbereiche der Sozialen Arbeit“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-02-fehl-mitt0",
+  "titel": "Fehler-Detektiv: Aufgabenbereiche",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Fehler-Detektiv: Aufgabenbereiche",
+  "datei": "fehler.html?set=lb3n-02-fehl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Aufgabenbereiche der Sozialen Arbeit“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-02-diag-vert1",
+  "titel": "Diagnose: Welcher Aufgabenbereich?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Aufgabenbereiche der Sozialen Arbeit – Diagnose: Welcher Aufgabenbereich?",
+  "datei": "diagnose.html?set=lb3n-02-diag-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Aufgabenbereiche der Sozialen Arbeit",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_02"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Aufgabenbereiche der Sozialen Arbeit“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-03-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-03-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Handlungskonzepte“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-03-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Kernwissen",
+  "datei": "luecken.html?set=lb3n-03-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Handlungskonzepte“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-03-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-03-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Handlungskonzepte“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-03-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-03-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Handlungskonzepte“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-03-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-03-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Handlungskonzepte“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-03-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-03-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Handlungskonzepte“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-03-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-03-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Handlungskonzepte“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-03-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-03-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Handlungskonzepte“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-03-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-03-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Handlungskonzepte“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-03-fehl-mitt0",
+  "titel": "Fehler-Detektiv: Handlungskonzept",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Fehler-Detektiv: Handlungskonzept",
+  "datei": "fehler.html?set=lb3n-03-fehl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Handlungskonzepte“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-03-folg-leic1",
+  "titel": "Folgen ordnen: Vier Handlungsschritte",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Handlungskonzepte – Folgen ordnen: Vier Handlungsschritte",
+  "datei": "folgen.html?set=lb3n-03-folg-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Handlungskonzepte",
+  "uebungsart": "Folgen ordnen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Handlungskonzepte",
+   "Folgen ordnen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_03"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Handlungskonzepte“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Abläufe in der richtigen Reihenfolge wiedergeben"
+  ]
+ },
+ {
+  "id": "lb3n-04-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-04-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Das verhaltensorientierte Konzept: Verhaltensanalyse“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-04-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Kernwissen",
+  "datei": "luecken.html?set=lb3n-04-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Das verhaltensorientierte Konzept: Verhaltensanalyse“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-04-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-04-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Das verhaltensorientierte Konzept: Verhaltensanalyse“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-04-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-04-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Das verhaltensorientierte Konzept: Verhaltensanalyse“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-04-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-04-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Das verhaltensorientierte Konzept: Verhaltensanalyse“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-04-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-04-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Das verhaltensorientierte Konzept: Verhaltensanalyse“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-04-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-04-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Das verhaltensorientierte Konzept: Verhaltensanalyse“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-04-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-04-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Das verhaltensorientierte Konzept: Verhaltensanalyse“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-04-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-04-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Das verhaltensorientierte Konzept: Verhaltensanalyse“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-04-fehl-mitt0",
+  "titel": "Fehler-Detektiv: Verhaltensanalyse",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Fehler-Detektiv: Verhaltensanalyse",
+  "datei": "fehler.html?set=lb3n-04-fehl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Das verhaltensorientierte Konzept: Verhaltensanalyse“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-04-diag-vert1",
+  "titel": "Diagnose: Welche Ebene?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Das verhaltensorientierte Konzept: Verhaltensanalyse – Diagnose: Welche Ebene?",
+  "datei": "diagnose.html?set=lb3n-04-diag-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Das verhaltensorientierte Konzept: Verhaltensanalyse",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Das verhaltensorientierte Konzept: Verhaltensanalyse“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-05-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-05-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Verhaltensmodifikation I: klassisches Konditionieren“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-05-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Kernwissen",
+  "datei": "luecken.html?set=lb3n-05-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Verhaltensmodifikation I: klassisches Konditionieren“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-05-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-05-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Verhaltensmodifikation I: klassisches Konditionieren“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-05-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-05-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Verhaltensmodifikation I: klassisches Konditionieren“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-05-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-05-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Verhaltensmodifikation I: klassisches Konditionieren“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-05-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-05-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Verhaltensmodifikation I: klassisches Konditionieren“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-05-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-05-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Verhaltensmodifikation I: klassisches Konditionieren“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-05-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-05-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Verhaltensmodifikation I: klassisches Konditionieren“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-05-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-05-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Verhaltensmodifikation I: klassisches Konditionieren“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-05-fehl-mitt0",
+  "titel": "Fehler-Detektiv: Klassische Techniken",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Fehler-Detektiv: Klassische Techniken",
+  "datei": "fehler.html?set=lb3n-05-fehl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Verhaltensmodifikation I: klassisches Konditionieren“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-05-folg-leic1",
+  "titel": "Folgen ordnen: Systematische Desensibilisierung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Folgen ordnen: Systematische Desensibilisierung",
+  "datei": "folgen.html?set=lb3n-05-folg-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Folgen ordnen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Folgen ordnen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Verhaltensmodifikation I: klassisches Konditionieren“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Abläufe in der richtigen Reihenfolge wiedergeben"
+  ]
+ },
+ {
+  "id": "lb3n-05-diag-vert2",
+  "titel": "Diagnose: Welche Technik?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation I: klassisches Konditionieren – Diagnose: Welche Technik?",
+  "datei": "diagnose.html?set=lb3n-05-diag-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation I: klassisches Konditionieren",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation I: klassisches Konditionieren",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_05"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Verhaltensmodifikation I: klassisches Konditionieren“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-06-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-06-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Verhaltensmodifikation II: operantes Konditionieren“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-06-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Kernwissen",
+  "datei": "luecken.html?set=lb3n-06-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Verhaltensmodifikation II: operantes Konditionieren“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-06-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-06-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Verhaltensmodifikation II: operantes Konditionieren“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-06-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-06-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Verhaltensmodifikation II: operantes Konditionieren“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-06-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-06-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Verhaltensmodifikation II: operantes Konditionieren“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-06-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-06-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Verhaltensmodifikation II: operantes Konditionieren“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-06-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-06-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Verhaltensmodifikation II: operantes Konditionieren“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-06-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-06-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Verhaltensmodifikation II: operantes Konditionieren“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-06-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-06-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Verhaltensmodifikation II: operantes Konditionieren“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-06-fehl-mitt0",
+  "titel": "Fehler-Detektiv: Operante Techniken",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Fehler-Detektiv: Operante Techniken",
+  "datei": "fehler.html?set=lb3n-06-fehl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Verhaltensmodifikation II: operantes Konditionieren“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-06-folg-leic1",
+  "titel": "Folgen ordnen: Shaping beim Brilletragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Folgen ordnen: Shaping beim Brilletragen",
+  "datei": "folgen.html?set=lb3n-06-folg-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Folgen ordnen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Folgen ordnen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Verhaltensmodifikation II: operantes Konditionieren“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Abläufe in der richtigen Reihenfolge wiedergeben"
+  ]
+ },
+ {
+  "id": "lb3n-06-diag-vert2",
+  "titel": "Diagnose: Welche Technik?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Verhaltensmodifikation II: operantes Konditionieren – Diagnose: Welche Technik?",
+  "datei": "diagnose.html?set=lb3n-06-diag-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Verhaltensmodifikation II: operantes Konditionieren",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Verhaltensmodifikation II: operantes Konditionieren",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_06"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Verhaltensmodifikation II: operantes Konditionieren“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-07-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-07-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Übungen zu den Interventionen der Verhaltensmodifikation“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-07-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Kernwissen",
+  "datei": "luecken.html?set=lb3n-07-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Übungen zu den Interventionen der Verhaltensmodifikation“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-07-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-07-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Übungen zu den Interventionen der Verhaltensmodifikation“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-07-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-07-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übungen zu den Interventionen der Verhaltensmodifikation“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-07-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-07-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übungen zu den Interventionen der Verhaltensmodifikation“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-07-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-07-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übungen zu den Interventionen der Verhaltensmodifikation“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-07-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-07-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Übungen zu den Interventionen der Verhaltensmodifikation“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-07-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-07-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Übungen zu den Interventionen der Verhaltensmodifikation“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-07-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-07-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Übungen zu den Interventionen der Verhaltensmodifikation“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-07-diag-vert0",
+  "titel": "Diagnose: Passende Technik wählen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Diagnose: Passende Technik wählen",
+  "datei": "diagnose.html?set=lb3n-07-diag-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Übungen zu den Interventionen der Verhaltensmodifikation“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-07-fehl-mitt1",
+  "titel": "Fehler-Detektiv: Interventionen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Fehler-Detektiv: Interventionen",
+  "datei": "fehler.html?set=lb3n-07-fehl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übungen zu den Interventionen der Verhaltensmodifikation“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-07-regl-mitt2",
+  "titel": "Regler: sanft oder konfrontativ?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übungen zu den Interventionen der Verhaltensmodifikation – Einordnen mit Reglern: sanft oder konfrontativ?",
+  "datei": "regler.html?set=lb3n-07-regl-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übungen zu den Interventionen der Verhaltensmodifikation",
+  "uebungsart": "Regler",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übungen zu den Interventionen der Verhaltensmodifikation",
+   "Regler",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_07"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übungen zu den Interventionen der Verhaltensmodifikation“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Sachverhalte auf einer Skala einordnen"
+  ]
+ },
+ {
+  "id": "lb3n-08-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-08-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-08-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Kernwissen",
+  "datei": "luecken.html?set=lb3n-08-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-08-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-08-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-08-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-08-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-08-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-08-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-08-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-08-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-08-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-08-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-08-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-08-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-08-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-08-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-08-folg-leic0",
+  "titel": "Folgen ordnen: Aufbau des Fachaufsatzes",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Folgen ordnen: Aufbau des Fachaufsatzes",
+  "datei": "folgen.html?set=lb3n-08-folg-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Folgen ordnen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Folgen ordnen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Abläufe in der richtigen Reihenfolge wiedergeben"
+  ]
+ },
+ {
+  "id": "lb3n-08-fehl-mitt1",
+  "titel": "Fehler-Detektiv: Fachaufsatz Anne",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept – Fehler-Detektiv: Fachaufsatz Anne",
+  "datei": "fehler.html?set=lb3n-08-fehl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-09-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-09-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Ökologie und Transaktion“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-09-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Kernwissen",
+  "datei": "luecken.html?set=lb3n-09-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Ökologie und Transaktion“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-09-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-09-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Ökologie und Transaktion“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-09-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-09-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Ökologie und Transaktion“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-09-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-09-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Ökologie und Transaktion“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-09-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-09-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Ökologie und Transaktion“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-09-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-09-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Ökologie und Transaktion“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-09-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-09-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Ökologie und Transaktion“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-09-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-09-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Ökologie und Transaktion“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-09-folg-leic0",
+  "titel": "Folgen ordnen: Wirkkreislauf durch Transaktionen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Folgen ordnen: Wirkkreislauf durch Transaktionen",
+  "datei": "folgen.html?set=lb3n-09-folg-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Folgen ordnen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Folgen ordnen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Ökologie und Transaktion“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Abläufe in der richtigen Reihenfolge wiedergeben"
+  ]
+ },
+ {
+  "id": "lb3n-09-fehl-mitt1",
+  "titel": "Fehler-Detektiv: Transaktion",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Ökologie und Transaktion – Fehler-Detektiv: Transaktion",
+  "datei": "fehler.html?set=lb3n-09-fehl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Ökologie und Transaktion",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Ökologie und Transaktion",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_09"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Ökologie und Transaktion“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-10-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-10-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Anpassung“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-10-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Kernwissen",
+  "datei": "luecken.html?set=lb3n-10-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Anpassung“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-10-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-10-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Anpassung“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-10-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-10-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Anpassung“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-10-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-10-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Anpassung“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-10-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-10-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Anpassung“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-10-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-10-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Anpassung“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-10-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-10-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Anpassung“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-10-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-10-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Anpassung“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-10-regl-mitt0",
+  "titel": "Regler: Anpassung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Einordnen mit Reglern: Anpassung",
+  "datei": "regler.html?set=lb3n-10-regl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Regler",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Regler",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Anpassung“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Sachverhalte auf einer Skala einordnen"
+  ]
+ },
+ {
+  "id": "lb3n-10-fehl-mitt1",
+  "titel": "Fehler-Detektiv: Anpassung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Anpassung – Fehler-Detektiv: Anpassung",
+  "datei": "fehler.html?set=lb3n-10-fehl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Anpassung",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Anpassung",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_10"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Anpassung“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-11-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-11-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Habitat und Nische“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-11-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Kernwissen",
+  "datei": "luecken.html?set=lb3n-11-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Habitat und Nische“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-11-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-11-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Habitat und Nische“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-11-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-11-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Habitat und Nische“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-11-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-11-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Habitat und Nische“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-11-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-11-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Habitat und Nische“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-11-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-11-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Habitat und Nische“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-11-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-11-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Habitat und Nische“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-11-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-11-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Habitat und Nische“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-11-regl-mitt0",
+  "titel": "Regler: Nische",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Einordnen mit Reglern: Nische",
+  "datei": "regler.html?set=lb3n-11-regl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Regler",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Regler",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Habitat und Nische“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Sachverhalte auf einer Skala einordnen"
+  ]
+ },
+ {
+  "id": "lb3n-11-diag-vert1",
+  "titel": "Diagnose: Habitat oder Nische?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Diagnose: Habitat oder Nische?",
+  "datei": "diagnose.html?set=lb3n-11-diag-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Habitat und Nische“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-11-fehl-mitt2",
+  "titel": "Fehler-Detektiv: Habitat und Nische",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Habitat und Nische – Fehler-Detektiv: Habitat und Nische",
+  "datei": "fehler.html?set=lb3n-11-fehl-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Habitat und Nische",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Habitat und Nische",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_11"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Habitat und Nische“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-12-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-12-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Lebens-Stress, Coping und Ressourcen“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-12-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Kernwissen",
+  "datei": "luecken.html?set=lb3n-12-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Lebens-Stress, Coping und Ressourcen“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-12-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-12-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: Lebens-Stress, Coping und Ressourcen“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-12-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-12-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Lebens-Stress, Coping und Ressourcen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-12-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-12-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Lebens-Stress, Coping und Ressourcen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-12-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-12-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Lebens-Stress, Coping und Ressourcen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-12-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-12-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Lebens-Stress, Coping und Ressourcen“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-12-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-12-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Lebens-Stress, Coping und Ressourcen“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-12-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-12-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Lebens-Stress, Coping und Ressourcen“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-12-diag-vert0",
+  "titel": "Diagnose: Coping",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Diagnose: Coping",
+  "datei": "diagnose.html?set=lb3n-12-diag-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: Lebens-Stress, Coping und Ressourcen“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-12-regl-mitt1",
+  "titel": "Regler: Ressourcen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Einordnen mit Reglern: Ressourcen",
+  "datei": "regler.html?set=lb3n-12-regl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Regler",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Regler",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Lebens-Stress, Coping und Ressourcen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Sachverhalte auf einer Skala einordnen"
+  ]
+ },
+ {
+  "id": "lb3n-12-fehl-mitt2",
+  "titel": "Fehler-Detektiv: Stress und Coping",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: Lebens-Stress, Coping und Ressourcen – Fehler-Detektiv: Stress und Coping",
+  "datei": "fehler.html?set=lb3n-12-fehl-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: Lebens-Stress, Coping und Ressourcen",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: Lebens-Stress, Coping und Ressourcen",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: Lebens-Stress, Coping und Ressourcen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-13-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-13-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: eine Methode für die Praxis“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-13-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Kernwissen",
+  "datei": "luecken.html?set=lb3n-13-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: eine Methode für die Praxis“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-13-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-13-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Life Model: eine Methode für die Praxis“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-13-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-13-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: eine Methode für die Praxis“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-13-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-13-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: eine Methode für die Praxis“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-13-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-13-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: eine Methode für die Praxis“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-13-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-13-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: eine Methode für die Praxis“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-13-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-13-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: eine Methode für die Praxis“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-13-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-13-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: eine Methode für die Praxis“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-13-fehl-mitt0",
+  "titel": "Fehler-Detektiv: Praxismethode",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Fehler-Detektiv: Praxismethode",
+  "datei": "fehler.html?set=lb3n-13-fehl-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Life Model: eine Methode für die Praxis“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-13-diag-vert1",
+  "titel": "Diagnose: Person oder Umwelt?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Life Model: eine Methode für die Praxis – Diagnose: Person oder Umwelt?",
+  "datei": "diagnose.html?set=lb3n-13-diag-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Life Model: eine Methode für die Praxis",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Life Model: eine Methode für die Praxis",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_13"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Life Model: eine Methode für die Praxis“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-14-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-14-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Fallbearbeitung Frau Müller“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-14-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Kernwissen",
+  "datei": "luecken.html?set=lb3n-14-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Fallbearbeitung Frau Müller“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-14-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-14-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Fallbearbeitung Frau Müller“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-14-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-14-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Fallbearbeitung Frau Müller“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-14-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-14-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Fallbearbeitung Frau Müller“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-14-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-14-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Fallbearbeitung Frau Müller“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-14-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-14-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Fallbearbeitung Frau Müller“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-14-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-14-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Fallbearbeitung Frau Müller“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-14-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-14-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Fallbearbeitung Frau Müller“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-14-folg-leic0",
+  "titel": "Folgen ordnen: Fallbearbeitung nach dem Life Model",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Folgen ordnen: Fallbearbeitung nach dem Life Model",
+  "datei": "folgen.html?set=lb3n-14-folg-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Folgen ordnen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Folgen ordnen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Fallbearbeitung Frau Müller“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Abläufe in der richtigen Reihenfolge wiedergeben"
+  ]
+ },
+ {
+  "id": "lb3n-14-fehl-mitt1",
+  "titel": "Fehler-Detektiv: Fall Müller",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Fallbearbeitung Frau Müller – Fehler-Detektiv: Fall Müller",
+  "datei": "fehler.html?set=lb3n-14-fehl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Fallbearbeitung Frau Müller",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Fallbearbeitung Frau Müller",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_14"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Fallbearbeitung Frau Müller“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-15-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-15-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Kritische Würdigung des Life Models“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-15-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Kernwissen",
+  "datei": "luecken.html?set=lb3n-15-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Kritische Würdigung des Life Models“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-15-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-15-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Kritische Würdigung des Life Models“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-15-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-15-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Kritische Würdigung des Life Models“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-15-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-15-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Kritische Würdigung des Life Models“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-15-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-15-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Kritische Würdigung des Life Models“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-15-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-15-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Kritische Würdigung des Life Models“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-15-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-15-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Kritische Würdigung des Life Models“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-15-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-15-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Kritische Würdigung des Life Models“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-15-diag-vert0",
+  "titel": "Diagnose: Stärke, Grenze oder Kritik?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Diagnose: Stärke, Grenze oder Kritik?",
+  "datei": "diagnose.html?set=lb3n-15-diag-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Kritische Würdigung des Life Models“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-15-fehl-mitt1",
+  "titel": "Fehler-Detektiv: Würdigung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Kritische Würdigung des Life Models – Fehler-Detektiv: Würdigung",
+  "datei": "fehler.html?set=lb3n-15-fehl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Kritische Würdigung des Life Models",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Kritische Würdigung des Life Models",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_15"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Kritische Würdigung des Life Models“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-16-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-16-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Thiersch: Lebenswelt und Dimensionen der Analyse“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-16-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Kernwissen",
+  "datei": "luecken.html?set=lb3n-16-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Thiersch: Lebenswelt und Dimensionen der Analyse“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-16-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-16-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Thiersch: Lebenswelt und Dimensionen der Analyse“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-16-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-16-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Thiersch: Lebenswelt und Dimensionen der Analyse“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-16-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-16-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Thiersch: Lebenswelt und Dimensionen der Analyse“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-16-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-16-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Thiersch: Lebenswelt und Dimensionen der Analyse“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-16-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-16-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Thiersch: Lebenswelt und Dimensionen der Analyse“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-16-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-16-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Thiersch: Lebenswelt und Dimensionen der Analyse“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-16-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-16-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Thiersch: Lebenswelt und Dimensionen der Analyse“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-16-diag-vert0",
+  "titel": "Diagnose: Welche Dimension?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Diagnose: Welche Dimension?",
+  "datei": "diagnose.html?set=lb3n-16-diag-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Thiersch: Lebenswelt und Dimensionen der Analyse“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-16-fehl-mitt1",
+  "titel": "Fehler-Detektiv: Lebenswelt",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Lebenswelt und Dimensionen der Analyse – Fehler-Detektiv: Lebenswelt",
+  "datei": "fehler.html?set=lb3n-16-fehl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Lebenswelt und Dimensionen der Analyse",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Lebenswelt und Dimensionen der Analyse",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Thiersch: Lebenswelt und Dimensionen der Analyse“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-17-zuord-leic0",
+  "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Fachbegriffe und Erklärungen",
+  "datei": "zuordnung.html?set=lb3n-17-zuord-leic0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Zuordnung",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Thiersch: Struktur- und Handlungsmaximen“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-17-lueck-leic1",
+  "titel": "Lückentext: Kernwissen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Kernwissen",
+  "datei": "luecken.html?set=lb3n-17-lueck-leic1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Lückentext",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Thiersch: Struktur- und Handlungsmaximen“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-17-renne-leic2",
+  "titel": "Rennen: Wissensfragen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Wissensfragen",
+  "datei": "rennen.html?set=lb3n-17-renne-leic2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Rennen",
+  "schwierigkeit": "leicht",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Rennen",
+   "leicht"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "die zentralen Begriffe zum Thema „Thiersch: Struktur- und Handlungsmaximen“ nennen",
+   "Fachbegriffe und Erklärungen richtig verbinden",
+   "die Kernaussagen mit eigenen Worten wiedergeben",
+   "Wissensfragen schnell und sicher beantworten"
+  ]
+ },
+ {
+  "id": "lb3n-17-zuord-mitt0",
+  "titel": "Zuordnung: Beispiele erkennen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Beispiele erkennen",
+  "datei": "zuordnung.html?set=lb3n-17-zuord-mitt0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Zuordnung",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Zuordnung",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Thiersch: Struktur- und Handlungsmaximen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Begriffe und Erklärungen sicher zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-17-block-mitt1",
+  "titel": "Blockfall: Begriffe sortieren",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Begriffe sortieren",
+  "datei": "blockfall.html?set=lb3n-17-block-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Blockfall",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Blockfall",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Thiersch: Struktur- und Handlungsmaximen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen der passenden Kategorie zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-17-kprim-mitt2",
+  "titel": "K-Prim: Aussagen prüfen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Aussagen prüfen",
+  "datei": "kprim.html?set=lb3n-17-kprim-mitt2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "K-Prim",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Thiersch: Struktur- und Handlungsmaximen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-17-kprim-vert0",
+  "titel": "K-Prim: Fall und Beurteilung",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Fall und Beurteilung",
+  "datei": "kprim.html?set=lb3n-17-kprim-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Thiersch: Struktur- und Handlungsmaximen“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Aussagen als richtig oder falsch beurteilen"
+  ]
+ },
+ {
+  "id": "lb3n-17-vergl-vert1",
+  "titel": "Theorievergleich: Argumente gegenüberstellen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Argumente gegenüberstellen",
+  "datei": "vergleich.html?set=lb3n-17-vergl-vert1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Theorievergleich",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Theorievergleich",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Thiersch: Struktur- und Handlungsmaximen“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Argumente den passenden Spalten zuordnen"
+  ]
+ },
+ {
+  "id": "lb3n-17-lueck-vert2",
+  "titel": "Lückentext: Begründetes Urteil",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Begründetes Urteil",
+  "datei": "luecken.html?set=lb3n-17-lueck-vert2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Lückentext",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Lückentext",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Thiersch: Struktur- und Handlungsmaximen“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fachbegriffe im Zusammenhang richtig einsetzen"
+  ]
+ },
+ {
+  "id": "lb3n-17-diag-vert0",
+  "titel": "Diagnose: Welche Maxime?",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Diagnose: Welche Maxime?",
+  "datei": "diagnose.html?set=lb3n-17-diag-vert0",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Diagnose",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Diagnose",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "einen Fall zu „Thiersch: Struktur- und Handlungsmaximen“ mit Fachbegriffen analysieren",
+   "Aussagen kritisch prüfen und beurteilen",
+   "ein begründetes Urteil mit Fallbezug formulieren",
+   "Fälle mit Fachbegriffen diagnostizieren und begründen"
+  ]
+ },
+ {
+  "id": "lb3n-17-fehl-mitt1",
+  "titel": "Fehler-Detektiv: Maximen",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "Thiersch: Struktur- und Handlungsmaximen – Fehler-Detektiv: Maximen",
+  "datei": "fehler.html?set=lb3n-17-fehl-mitt1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "Thiersch: Struktur- und Handlungsmaximen",
+  "uebungsart": "Fehler-Detektiv",
+  "schwierigkeit": "mittel",
+  "pfad": [
+   "LB 3",
+   "Thiersch: Struktur- und Handlungsmaximen",
+   "Fehler-Detektiv",
+   "mittel"
+  ],
+  "themen": [
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Beispiele dem passenden Fachbegriff zuordnen",
+   "Zusammenhänge zu „Thiersch: Struktur- und Handlungsmaximen“ am Beispiel erklären",
+   "falsche Aussagen erkennen und berichtigen",
+   "fachliche Fehler in Antworten finden und berichtigen"
+  ]
+ },
+ {
+  "id": "lb3n-kprim-test1",
+  "titel": "K-Prim-Test 1 (Stunde 1–4)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 1 bis 4",
+  "datei": "kprim.html?set=lb3n-kprim-test1",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 1",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "K-Prim-Test 1",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_01",
+   "t12_3_02",
+   "t12_3_03",
+   "t12_3_04"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Wissensaufgaben zu den Stunden 1 bis 4 sicher beantworten",
+   "Aussagen mit Fachbegriffen als richtig oder falsch beurteilen",
+   "eine Fallvignette mit Fachbegriffen analysieren",
+   "mein Ergebnis einschätzen und Lücken gezielt nacharbeiten"
+  ]
+ },
+ {
+  "id": "lb3n-kprim-test2",
+  "titel": "K-Prim-Test 2 (Stunde 5–8)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 5 bis 8",
+  "datei": "kprim.html?set=lb3n-kprim-test2",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 2",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "K-Prim-Test 2",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_05",
+   "t12_3_06",
+   "t12_3_07",
+   "t12_3_08"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Wissensaufgaben zu den Stunden 5 bis 8 sicher beantworten",
+   "Aussagen mit Fachbegriffen als richtig oder falsch beurteilen",
+   "eine Fallvignette mit Fachbegriffen analysieren",
+   "mein Ergebnis einschätzen und Lücken gezielt nacharbeiten"
+  ]
+ },
+ {
+  "id": "lb3n-kprim-test3",
+  "titel": "K-Prim-Test 3 (Stunde 9–12)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 9 bis 12",
+  "datei": "kprim.html?set=lb3n-kprim-test3",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 3",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "K-Prim-Test 3",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_09",
+   "t12_3_10",
+   "t12_3_11",
+   "t12_3_12"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Wissensaufgaben zu den Stunden 9 bis 12 sicher beantworten",
+   "Aussagen mit Fachbegriffen als richtig oder falsch beurteilen",
+   "eine Fallvignette mit Fachbegriffen analysieren",
+   "mein Ergebnis einschätzen und Lücken gezielt nacharbeiten"
+  ]
+ },
+ {
+  "id": "lb3n-kprim-test4",
+  "titel": "K-Prim-Test 4 (Stunde 13–16)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 13 bis 16",
+  "datei": "kprim.html?set=lb3n-kprim-test4",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 4",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "K-Prim-Test 4",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_13",
+   "t12_3_14",
+   "t12_3_15",
+   "t12_3_16"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Wissensaufgaben zu den Stunden 13 bis 16 sicher beantworten",
+   "Aussagen mit Fachbegriffen als richtig oder falsch beurteilen",
+   "eine Fallvignette mit Fachbegriffen analysieren",
+   "mein Ergebnis einschätzen und Lücken gezielt nacharbeiten"
+  ]
+ },
+ {
+  "id": "lb3n-kprim-test5",
+  "titel": "K-Prim-Test 5 (Stunde 14–17)",
+  "fach": "Pädagogik/Psychologie",
+  "beschreibung": "4 Wissensaufgaben und eine Fallvignette zu den Stunden 14 bis 17",
+  "datei": "kprim.html?set=lb3n-kprim-test5",
+  "ergebnis": true,
+  "parameter": [
+   {
+    "name": "spiel",
+    "label": "Mischung (Nummer)",
+    "typ": "zahl",
+    "min": 1,
+    "max": 99,
+    "standard": 1
+   }
+  ],
+  "thema": "K-Prim-Test 5",
+  "uebungsart": "K-Prim",
+  "schwierigkeit": "vertieft",
+  "pfad": [
+   "LB 3",
+   "K-Prim-Test 5",
+   "K-Prim",
+   "vertieft"
+  ],
+  "themen": [
+   "t12_3_14",
+   "t12_3_15",
+   "t12_3_16",
+   "t12_3_17"
+  ],
+  "neu12": true,
+  "kannst": [
+   "Wissensaufgaben zu den Stunden 14 bis 17 sicher beantworten",
+   "Aussagen mit Fachbegriffen als richtig oder falsch beurteilen",
+   "eine Fallvignette mit Fachbegriffen analysieren",
+   "mein Ergebnis einschätzen und Lücken gezielt nacharbeiten"
+  ]
  }
 ]

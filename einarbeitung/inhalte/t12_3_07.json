@@ -1,0 +1,159 @@
+{
+ "titel": "Übungen zu den Interventionen der Verhaltensmodifikation: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Übungen zu den Interventionen der Verhaltensmodifikation** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Vier Klienten, vier Probleme: Zahnarztangst, Zocken bis nachts, ein stiller Schüler und ein ständiger Störenfried. Die Sozialpädagogin legt vier Karten mit Techniken auf den Tisch und fragt: „Welche passt wozu – und warum?“"
+    },
+    {
+     "typ": "text",
+     "text": "Die Technik wird nach der **Verhaltensanalyse** und der Lerntheorie gewählt. **Klassisch:** Gegenkonditionierung, systematische Desensibilisierung, Reizüberflutung, Aversionstherapie. **Operant:** differentielle Verstärkung, Verhaltensformung, Wegnahme aufrechterhaltender Bedingungen, Schaffen von Motivation."
+    },
+    {
+     "typ": "text",
+     "text": "Nach der **Intervention** wird in der **Bewertung** geprüft, ob die Ziele erreicht wurden; bei Stagnation oder Rückschritten ändert man das Vorgehen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Technik aus der Analyse ableiten: Ängste → klassisch (Desensibilisierung), Aufbau/Abbau durch Konsequenzen → operant."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welche Technik gehört zum operanten Konditionieren?",
+     "optionen": [
+      "Verhaltensformung (Shaping)",
+      "Reizüberflutung",
+      "Aversionstherapie"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Verhaltensformung (Shaping)"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Ein Kind mit Zahnarztangst lernt Entspannung und nähert sich dem Behandlungsstuhl in Stufen.",
+       "systematische Desensibilisierung"
+      ],
+      [
+       "Ein Schüler, der laut dazwischenruft, wird ignoriert; meldet er sich, wird er sofort aufgerufen.",
+       "differentielle Verstärkung"
+      ],
+      [
+       "Ein Jugendlicher, der nie in der Gruppe spricht, wird für jeden Schritt zum Sprechen belohnt.",
+       "Verhaltensformung"
+      ],
+      [
+       "Eine Klientin wird gleich zu Beginn mit der gefürchteten Fahrt im Aufzug konfrontiert.",
+       "Reizüberflutung"
+      ],
+      [
+       "Ein Raucher erhält ein Mittel, das beim Rauchen Übelkeit auslöst.",
+       "Aversionstherapie"
+      ],
+      [
+       "Ein Kind bekommt beim Anblick des Hundes etwas Leckeres.",
+       "Gegenkonditionierung"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Je nachdem, welche {{Lerntheorie}} zugrunde liegt, wählt man verschiedene Techniken. Zum {{klassischen}} Konditionieren zählen Gegenkonditionierung, {{Desensibilisierung}}, Reizüberflutung und Aversionstherapie. Zum {{operanten}} Konditionieren zählen {{differentielle}} Verstärkung und Verhaltensformung. Die Technik muss zum {{Problem}} und zum Klienten passen.",
+     "woerter": [
+      "Lerntheorie",
+      "klassischen",
+      "Desensibilisierung",
+      "operanten",
+      "differentielle",
+      "Problem",
+      "Gesprächstherapie",
+      "Traumdeutung",
+      "Strafe"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Wahl der Technik treffen zu?",
+     "aussagen": [
+      {
+       "text": "Die Technik richtet sich nach der Verhaltensanalyse.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es gibt für jedes Problem nur eine richtige Technik.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Verstärkende Konsequenzen sprechen oft für operante Techniken.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Bei Ängsten kommen häufig klassische Techniken in Frage.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "klassisches Konditionieren",
+       "items": [
+        "Gegenkonditionierung",
+        "systematische Desensibilisierung",
+        "Reizüberflutung",
+        "Aversionstherapie"
+       ]
+      },
+      {
+       "name": "operantes Konditionieren",
+       "items": [
+        "differentielle Verstärkung",
+        "Verhaltensformung",
+        "Wegnahme aufrechterhaltender Bedingungen",
+        "Motivation durch Belohnung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "(A) Max (12) schreit im Unterricht, um Aufmerksamkeit zu bekommen. (B) Frau S. hat Angst vor Aufzügen. (C) Tom (9) sagt kaum ein Wort in der Gruppe. (D) Herr K. trinkt täglich viel Alkohol, andere Therapien haben nicht gewirkt. Ordne den Fällen A bis D je eine Technik zu.",
+     "hinweis": "4–6 Sätze",
+     "muster": "A: differentielle Verstärkung; B: systematische Desensibilisierung (oder Flooding); C: Verhaltensformung; D: Aversionstherapie (umstritten).",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_07"
+ ]
+}

@@ -1,0 +1,164 @@
+{
+ "titel": "Das verhaltensorientierte Konzept: Verhaltensanalyse: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Das verhaltensorientierte Konzept: Verhaltensanalyse** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Frau Maltz kommt in die Beratungsstelle. Verkehrsmittel sind für sie „ein Alptraum“. Familie und Freundin kümmern sich sofort um sie, wenn die Angst kommt. Der Praxisanleiter notiert viel – denn bevor etwas verändert wird, muss man das Problem genau kennen."
+    },
+    {
+     "typ": "text",
+     "text": "Das **verhaltensorientierte Konzept** beruht auf den behavioristischen Lerntheorien (Konditionierungstheorien). Grundannahme: Jedes Verhalten, auch das unangepasste, ist erlernt und kann wieder verlernt werden. Ziel ist der Abbau unerwünschten und der Aufbau erwünschten Verhaltens durch gezielte Lernhilfen. Man geht in vier Schritten vor: **Analyse, Planung, Handlung, Bewertung**."
+    },
+    {
+     "typ": "text",
+     "text": "Die **Verhaltensanalyse** beschreibt das Problemverhalten genau (Verhaltensebene, kognitive und physiologische Ebene), klärt **auslösende** und **aufrechterhaltende Bedingungen**, sucht nach **Ersatz-/Entlastungsfunktionen** und **Lern- und Verhaltensdefiziten** und legt die gewünschte Veränderung fest."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Verhalten ist erlernt und kann verlernt werden. Analyse: Verhalten, Situationen, Funktionen, Defizite, Veränderungsziel."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welche wissenschaftliche Grundlage hat das verhaltensorientierte Konzept?",
+     "optionen": [
+      "Behavioristische Lerntheorien (Konditionierungstheorien)",
+      "Psychoanalyse nach Freud",
+      "Die Theorie des Selbstkonzepts"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Behavioristische Lerntheorien (Konditionierungstheorien)"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Frau Maltz schildert Schweiß, Zittern und Schwindel in der U-Bahn.",
+       "physiologische Ebene"
+      ],
+      [
+       "Frau Maltz denkt: „Ich bin zu dumm für Verkehrsmittel.“",
+       "kognitive Ebene"
+      ],
+      [
+       "Frau Maltz vermeidet jede Fahrt mit Bus und Bahn.",
+       "Verhaltensebene"
+      ],
+      [
+       "Familie und Freundin kümmern sich sofort liebevoll um sie, wenn die Angst auftritt.",
+       "aufrechterhaltende Bedingung"
+      ],
+      [
+       "Die Angst tritt bei Verkehrsmitteln auf, nicht aber zu Hause.",
+       "auslösende Situation"
+      ],
+      [
+       "Sie hat nie gelernt, sich in Bus und Bahn zu orientieren.",
+       "Lern- und Verhaltensdefizit"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Das verhaltensorientierte Konzept geht davon aus, dass jedes {{Verhalten}}, auch das {{unangepasste}}, {{erlernt}} ist und wieder {{verlernt}} werden kann. Ziel ist der {{Abbau}} unerwünschten und der {{Aufbau}} erwünschten Verhaltens. Das Vorgehen verläuft in vier Schritten: Analyse, {{Planung}}, Handlung (Verhaltensmodifikation) und {{Bewertung}}.",
+     "woerter": [
+      "Verhalten",
+      "unangepasste",
+      "erlernt",
+      "verlernt",
+      "Abbau",
+      "Aufbau",
+      "Planung",
+      "Bewertung",
+      "Tiefenpsychologie",
+      "Deutung",
+      "Traumanalyse"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum verhaltensorientierten Konzept treffen zu?",
+     "aussagen": [
+      {
+       "text": "Jedes Verhalten, auch das unangepasste, ist erlernt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es geht vor allem um die Veränderung innerpsychischer Ursachen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Das Symptom selbst steht im Mittelpunkt der Veränderung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Das Verhalten wird im Zusammenhang der Lerngeschichte gesehen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Verhaltensebene",
+       "items": [
+        "meidet Busfahrten",
+        "bleibt zu Hause"
+       ]
+      },
+      {
+       "name": "kognitive Ebene",
+       "items": [
+        "„Ich werde nie fahren können.“",
+        "Erwartung: „Es passiert etwas.“"
+       ]
+      },
+      {
+       "name": "physiologische Ebene",
+       "items": [
+        "Schweißausbruch",
+        "weiche Knie"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Frau Maltz bekommt bei fast jeder Fahrt mit Auto, Bus oder Bahn starke Angst: Schweiß, Atemnot, zitternde Hände, weiche Knie. Sie denkt: „Ich bin zu dumm dafür.“ Sie fährt nicht mehr. Wenn die Angst kommt, sind Familie und Freundin sofort da; ihr Mann tröstet sie, die Kinder übernehmen Hausarbeiten. Sie sagt, das finde sie „ganz angenehm“. Beschreibe das Problemverhalten auf den drei Ebenen.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Verhaltensebene: meidet Verkehrsmittel; kognitive Ebene: „Ich bin zu dumm“, Erwartung des Versagens; physiologische Ebene: Schweiß, Atemnot, Zittern, weiche Knie, Schwindel.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_04"
+ ]
+}

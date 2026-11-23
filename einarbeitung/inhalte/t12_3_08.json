@@ -1,0 +1,165 @@
+{
+ "titel": "Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Übung Fachaufsatz: Vorgehen nach dem verhaltensorientierten Konzept** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "An der Tafel steht: „Erläutern Sie ein Vorgehen nach dem verhaltensorientierten Konzept am Beispiel von Anne.“ Daneben Annes Steckbrief. Die Klasse überlegt: Wie fange ich an, und wie baue ich den Aufsatz auf?"
+    },
+    {
+     "typ": "text",
+     "text": "Ein **Fachaufsatz** besteht aus **Einleitung** (allgemeiner Einstieg, Eingrenzung in den Lernbereich, Überleitung mit Fallbezug), **Hauptteil** und **Schluss** (passender Gedanke oder Ausblick). Der Hauptteil folgt den Schritten **Nennen, Erklären, Verdeutlichen (Transfer)**."
+    },
+    {
+     "typ": "text",
+     "text": "Beim verhaltensorientierten Konzept sind die Schritte **Analyse, Planung, Handlung, Bewertung**. Am Fall **Anne** (17 Jahre: Angst vor der Schule, trifft keine Freunde mehr, Magenprobleme) wird jeder Schritt konkretisiert."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Fachaufsatz: Einleitung – Hauptteil (Nennen, Erklären, Verdeutlichen) – Schluss. Theorie immer am Fall zeigen."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wie ist ein Fachaufsatz aufgebaut?",
+     "optionen": [
+      "Einleitung, Hauptteil, Schluss",
+      "Nur Hauptteil",
+      "Frage, Antwort"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Einleitung, Hauptteil, Schluss"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "„Soziale Arbeit begleitet Menschen in Krisen.“ (erster Satz)",
+       "allgemeiner Einstieg"
+      ],
+      [
+       "Der Lernbereich Soziale Arbeit wird durch Pädagogik und Psychologie eingegrenzt.",
+       "Eingrenzung in den Lernbereich"
+      ],
+      [
+       "„Bei Anne beginnt die Analyse mit der genauen Beschreibung ihrer Schulangst.“",
+       "Verdeutlichen (Transfer)"
+      ],
+      [
+       "Die Analyse ist die genaue Erfassung des Problemverhaltens und seiner Bedingungen.",
+       "Erklären"
+      ],
+      [
+       "Die vier Schritte werden aufgezählt.",
+       "Nennen"
+      ],
+      [
+       "„Wie wichtig es ist, Menschen nicht allein zu lassen, zeigt auch Annes Weg.“",
+       "Schlussgedanke"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Ein Fachaufsatz besteht aus {{Einleitung}}, {{Hauptteil}} und {{Schluss}}. Im Hauptteil geht man in den Schritten {{Nennen}}, {{Erklären}} und {{Verdeutlichen}} (Transfer) vor. Beim verhaltensorientierten Konzept sind das die vier Schritte Analyse, {{Planung}}, Handlung und {{Bewertung}}, die man am {{Fall}} zeigt.",
+     "woerter": [
+      "Einleitung",
+      "Hauptteil",
+      "Schluss",
+      "Nennen",
+      "Erklären",
+      "Verdeutlichen",
+      "Planung",
+      "Bewertung",
+      "Fall",
+      "Zusammenfassung",
+      "Tagebuch",
+      "Brief"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Aufbau treffen zu?",
+     "aussagen": [
+      {
+       "text": "Die Einleitung beginnt mit einem allgemeinen Einstiegssatz.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der Hauptteil besteht aus Nennen, Erklären und Verdeutlichen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der Schluss wiederholt die gesamte Analyse.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Die Überleitung enthält den Fallbezug.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Einleitung",
+       "items": [
+        "allgemeiner Einstieg",
+        "Überleitung mit Fallbezug"
+       ]
+      },
+      {
+       "name": "Hauptteil",
+       "items": [
+        "Analyse erklären",
+        "Verhaltensmodifikation am Fall",
+        "Bewertung des Erfolgs"
+       ]
+      },
+      {
+       "name": "Schluss",
+       "items": [
+        "Ausblick"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Anne (17) hat Angst, zur Schule zu gehen, trifft keine Freunde mehr und hat Magenprobleme. Seit Wochen bleibt sie oft zu Hause. Ihre Mutter ist besorgt und erlaubt es, wenn sie über Bauchweh klagt. Beschreibe Annes Problemverhalten auf den drei Ebenen.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Verhaltensebene: Schulbesuch vermeiden, Freunde nicht treffen; kognitive Ebene: Angst, Befürchtungen; physiologische Ebene: Magenprobleme.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_08"
+ ]
+}

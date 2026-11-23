@@ -36,7 +36,7 @@ const fail=t=>{$("fehler").hidden=false;$("ftext").textContent=t};
     $("titel").textContent=s.titel;
     (()=>{const pf=s.pfad||[],lz=String(pf.slice(-1)[0]||""),sm={leicht:1,mittel:1,vertieft:1},art=String((sm[lz]?pf.slice(-2)[0]:lz)||s.uebungsart||"Übung").replace(/\s*\(Vertiefung\)/,"");
       let eb=Number(q.get("eb"));
-      if(!(eb>=1&&eb<=3)){eb=/K-Prim|Fachaufsatz|(?<!Block)Fall|Transfer|Anwend/i.test(art)?3:/Vergleich|Theorie|L\u00FCckentext|Reihenfolge|Struktur|Freitext/i.test(art)?2:/Zuordnung|Memory|Blockfall|Tetris|rennen|Karteikarten|Begriff/i.test(art)?1:(s.schwierigkeit==="vertieft"||s.stufe==="vertiefung"?2:1)}
+      if(!(eb>=1&&eb<=3)){eb=/K-Prim|Diagnose|Fehler|Fachaufsatz|(?<!Block)Fall|Transfer|Anwend/i.test(art)?3:/Vergleich|Folgen|Regler|Theorie|L\u00FCckentext|Reihenfolge|Struktur|Freitext/i.test(art)?2:/Zuordnung|Memory|Blockfall|Tetris|rennen|Karteikarten|Begriff/i.test(art)?1:(s.schwierigkeit==="vertieft"||s.stufe==="vertiefung"?2:1)}
       const E=[["#d23c3c","Ebene 1 · Begriffe klären · AFB I · Wissen"],["#1f6fb8","Ebene 2 · Theorie verstehen · AFB II · Verstehen"],["#2c8a52","Ebene 3 · Anwenden in der Praxis · AFB III · Übertragen"]][eb-1];
       document.body.style.setProperty("--lv",E[0]);$("kick").textContent=E[1];
       const lb=String(pf[0]||"").match(/^LB\s*\d+/i);$("info").textContent=[lb?lb[0]:"",s.thema||"",art].filter(Boolean).join(" · ");
@@ -46,7 +46,7 @@ const fail=t=>{$("fehler").hidden=false;$("ftext").textContent=t};
     (()=>{
       const EB=["Begriffe klären","Theorie verstehen","Anwenden in der Praxis"];
       const ebOf=x=>{const pf=x.pfad||[],lz=String(pf.slice(-1)[0]||""),sm={leicht:1,mittel:1,vertieft:1},art=String((sm[lz]?pf.slice(-2)[0]:lz)||x.uebungsart||"Übung").replace(/\s*\(Vertiefung\)/,"");
-        return /K-Prim|Fachaufsatz|(?<!Block)Fall|Transfer|Anwend/i.test(art)?3:/Vergleich|Theorie|L\u00FCckentext|Reihenfolge|Struktur|Freitext/i.test(art)?2:/Zuordnung|Memory|Blockfall|Tetris|rennen|Karteikarten|Begriff/i.test(art)?1:(x.schwierigkeit==="vertieft"||x.stufe==="vertiefung"?2:1)};
+        return /K-Prim|Diagnose|Fehler|Fachaufsatz|(?<!Block)Fall|Transfer|Anwend/i.test(art)?3:/Vergleich|Folgen|Regler|Theorie|L\u00FCckentext|Reihenfolge|Struktur|Freitext/i.test(art)?2:/Zuordnung|Memory|Blockfall|Tetris|rennen|Karteikarten|Begriff/i.test(art)?1:(x.schwierigkeit==="vertieft"||x.stufe==="vertiefung"?2:1)};
       let eb=Number(q.get("eb"));if(!(eb>=1&&eb<=3))eb=ebOf(s);
       const box=$("after");let h="";
       if(Array.isArray(s.kannst)&&s.kannst.length){

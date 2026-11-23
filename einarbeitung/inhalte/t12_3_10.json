@@ -1,0 +1,156 @@
+{
+ "titel": "Life Model: Anpassung: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Life Model: Anpassung** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Auf einem Gemeindegrundstück soll ein Baggersee entstehen, weil es keine Bademöglichkeit gibt. Gleichzeitig soll eine Wiese für eine Straße geopfert werden. „Beides verändert unsere Lebensumwelt“, sagt die Gemeinderätin."
+    },
+    {
+     "typ": "text",
+     "text": "**Anpassung** bezeichnet den Prozess, durch den eine Übereinstimmung zwischen dem Individuum mit seinen Bedürfnissen, Rechten und Zielen und den Anforderungen bzw. Möglichkeiten seiner Umwelt hergestellt wird. Sie kann durch Veränderung der Person **und** der Umwelt geschehen und meint nicht Einordnung in bestehende Verhältnisse."
+    },
+    {
+     "typ": "text",
+     "text": "**Anpassungsfördernde Transaktionen** führen zu einer Übereinstimmung und damit zu einem positiven Person-Umwelt-Verhältnis. **Anpassungsfeindliche Transaktionen** führen zu Missverhältnissen und beeinträchtigen die Entwicklung. Man unterscheidet natürliche, kulturelle, soziale und ökonomische Umwelt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Anpassung = Übereinstimmung von Person und Umwelt. Fördernd → positives Verhältnis, feindlich → Missverhältnis."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was bedeutet Anpassung im Life Model?",
+     "optionen": [
+      "Herstellen einer Übereinstimmung zwischen Person und Umwelt",
+      "Sich in bestehende Verhältnisse einordnen",
+      "Sich der Gruppe unterordnen"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Herstellen einer Übereinstimmung zwischen Person und Umwelt"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Eine Gemeinde plant einen Baggersee als Treffpunkt und Naherholungsgebiet.",
+       "anpassungsfördernde Transaktion"
+      ],
+      [
+       "Ein Wald wird für eine Autobahn gerodet, Anwohner leiden unter Lärm.",
+       "anpassungsfeindliche Transaktion"
+      ],
+      [
+       "Ein Zugezogener lernt die Sprache und findet Freunde im Verein.",
+       "Anpassung der Person"
+      ],
+      [
+       "Ein Betrieb baut eine Rampe für Rollstuhlfahrer.",
+       "Anpassung der Umwelt"
+      ],
+      [
+       "Mieten steigen stark, die Familie muss das Viertel verlassen.",
+       "ökonomische Umwelt"
+      ],
+      [
+       "Klassenregeln werden gemeinsam mit den Schülern erarbeitet.",
+       "soziale Umwelt"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "{{Anpassung}} bezeichnet den Prozess, durch den eine Übereinstimmung zwischen dem Individuum mit seinen Bedürfnissen, Rechten und Zielen und den {{Anforderungen}} und Möglichkeiten seiner Umwelt hergestellt wird. Sie bedeutet nicht {{Einordnung}}, sondern einen aktiven, dynamischen Prozess. {{Anpassungsfördernde}} Transaktionen führen zu Übereinstimmung, {{anpassungsfeindliche}} zu einem Missverhältnis.",
+     "woerter": [
+      "Anpassung",
+      "Anforderungen",
+      "Einordnung",
+      "Anpassungsfördernde",
+      "anpassungsfeindliche",
+      "Gleichschaltung",
+      "Unterwerfung",
+      "Rückzug"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Anpassung treffen zu?",
+     "aussagen": [
+      {
+       "text": "Anpassung ist ein aktiver und dynamischer Prozess.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Anpassung meint Einordnung in bestehende Verhältnisse.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie kann auch durch Veränderung der Umwelt erfolgen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Ziel ist ein optimales Person-Umwelt-Verhältnis.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "anpassungsfördernd",
+       "items": [
+        "Baggersee als Treffpunkt",
+        "Rampe für Rollstuhl",
+        "Beratungsstelle im Stadtteil"
+       ]
+      },
+      {
+       "name": "anpassungsfeindlich",
+       "items": [
+        "Autobahn durch Erholungsgebiet",
+        "Kürzung von Jugendtreffs",
+        "Wohnung zu klein für Familie"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "In einem Stadtteil schließt das Jugendzentrum aus Spargründen. Die Jugendlichen treffen sich nun an einer Tankstelle, Anwohner beschweren sich, die Polizei kontrolliert. Eine Sozialarbeiterin spricht mit den Jugendlichen und mit der Stadt. Beschreibe eine anpassungsfeindliche Transaktion in vier Schritten.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Umwelt: Zentrum schließt; Person: Jugendliche weichen aus; Umwelt: Beschwerden, Kontrolle; Person: Frust, Rückzug.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_10"
+ ]
+}

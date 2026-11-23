@@ -1,0 +1,162 @@
+{
+ "titel": "Kritische Würdigung des Life Models: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Kritische Würdigung des Life Models** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Sozialarbeiterin sagt über ihre Arbeit: „Ich schaue auf Familie, Schule und Viertel. Aber manchmal liegt das Problem tiefer, und manchmal ändern Politiker einfach nichts.“"
+    },
+    {
+     "typ": "text",
+     "text": "**Erklärungswert:** Menschliches Verhalten lässt sich aus dem Grad der Übereinstimmung zwischen den Bedürfnissen des Menschen und den Umweltgegebenheiten erklären; Probleme werden im sozialen Kontext gesehen, Umwelthilfen erschlossen und koordiniert."
+    },
+    {
+     "typ": "text",
+     "text": "**Grenzen:** Manche Probleme liegen im Inneren der Person; frühere Person-Umwelt-Beziehungen lassen sich nicht ungeschehen machen; Menschen sind nicht immer zum Engagement bereit; die gegenwärtige Umwelt lässt sich oft nicht ändern. **Kritik:** Begriffe (Transaktion, Nische, Stress) sind zum Teil unpräzise und werden nicht korrekt verwendet."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Würdigung: Erklärungswert (Person-Umwelt), Grenzen (Inneres, Vergangenheit, Bereitschaft, Umwelt starr), Kritik (Begriffe)."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Worin liegt der Erklärungswert des Life Models?",
+     "optionen": [
+      "Verhalten wird aus der Übereinstimmung von Bedürfnissen und Umwelt erklärt.",
+      "Verhalten ist angeboren.",
+      "Verhalten ist zufällig."
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Verhalten wird aus der Übereinstimmung von Bedürfnissen und Umwelt erklärt."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Eine Fachkraft erklärt Verhalten aus der Wohnsituation und der Schule.",
+       "Erklärungswert"
+      ],
+      [
+       "Ein Klient hat Probleme, die aus seinem Inneren stammen.",
+       "Grenze: Problem im Inneren"
+      ],
+      [
+       "Die Stadt hat kein Geld für den geplanten Jugendtreff.",
+       "Grenze: Umwelt nicht änderbar"
+      ],
+      [
+       "Ein Jugendlicher sagt: „Das bringt doch alles nichts.“",
+       "Grenze: fehlende Bereitschaft"
+      ],
+      [
+       "Ein Fachbegriff wird anders verwendet als in der Wirtschaft.",
+       "Kritik: Begrifflichkeiten"
+      ],
+      [
+       "Die Kindheitserfahrung prägt das Verhalten.",
+       "Grenze: Vergangenheit"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Das Life Model hat einen großen {{Erklärungswert}}: Verhalten lässt sich aus dem Grad der {{Übereinstimmung}} zwischen den Bedürfnissen des Menschen und den {{Umweltgegebenheiten}} erklären. Seine {{Grenzen}} liegen darin, dass viele Probleme im {{Inneren}} der Person begründet sind. Außerdem sind die {{Begrifflichkeiten}} zum Teil unpräzise.",
+     "woerter": [
+      "Erklärungswert",
+      "Übereinstimmung",
+      "Umweltgegebenheiten",
+      "Grenzen",
+      "Inneren",
+      "Begrifflichkeiten",
+      "Theoriefreiheit",
+      "Schuld",
+      "Zwang"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Erklärungswert treffen zu?",
+     "aussagen": [
+      {
+       "text": "Das Problem wird im sozialen Kontext gesehen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Der Klient wird allein verantwortlich gemacht.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Umwelthilfen werden erschlossen und koordiniert.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Störungen entstehen aus Nichtübereinstimmung von Mensch und Umwelt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Erklärungswert",
+       "items": [
+        "Verhalten aus Person-Umwelt-Beziehung",
+        "Umwelthilfen werden koordiniert"
+       ]
+      },
+      {
+       "name": "Grenzen",
+       "items": [
+        "Probleme im Inneren der Person",
+        "Umwelt nicht immer änderbar"
+       ]
+      },
+      {
+       "name": "Kritik",
+       "items": [
+        "Unpräzise Begriffe",
+        "Altes Wissen mit neuen Wörtern"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "In einem Stadtteil möchte eine Sozialarbeiterin einen Jugendtreff gründen. Der Gemeinderat lehnt ab, weil das Geld fehlt. Die Jugendlichen sagen: „Das hat sowieso keinen Sinn.“ Nur wenige engagieren sich. Erkläre zwei Grenzen des ökologischen Ansatzes am Fall.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Umweltbedingungen nicht änderbar (Geld, Politik); mangelnde Bereitschaft der Jugendlichen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_15"
+ ]
+}

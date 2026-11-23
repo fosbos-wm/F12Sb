@@ -1,0 +1,157 @@
+{
+ "titel": "Life Model: eine Methode für die Praxis: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Life Model: eine Methode für die Praxis** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Herr Krüger geht bald in Rente. Er lebt allein, kennt kaum Nachbarn, fühlt sich leer. Beim Beratungsgespräch sagt die Sozialarbeiterin: „Wir schauen zwei Dinge an: was Sie brauchen – und was Ihre Umgebung dazu beitragen kann.“"
+    },
+    {
+     "typ": "text",
+     "text": "Störungen im **Passungsgefüge** von Person und Umwelt entstehen durch anpassungsfeindliche Transaktionen, z. B. durch **kritische Lebensereignisse**, **belastende Umweltbedingungen** und **Kommunikations-/Beziehungsprobleme**. Sie führen zu **negativem Lebens-Stress**."
+    },
+    {
+     "typ": "text",
+     "text": "Daraus ergeben sich zwei **Ziele der Sozialen Arbeit**: Stärkung des **Anpassungspotenzials der Person** und **Beeinflussung und Gestaltung der Umwelt**. Ökologische Sozialarbeit regt Menschen in ungünstigem Habitat und negativer Nische zu Coping an, damit Lebens-Stress bewältigt wird und sich Selbstbestimmung und Sinngewissheit einstellen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Praxismethode: Problembereiche erkennen, Person stärken, Umwelt gestalten – Ziel: Lebens-Stress bewältigen, Selbstbestimmung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wodurch entstehen Störungen im Passungsgefüge?",
+     "optionen": [
+      "Durch anpassungsfeindliche Transaktionen",
+      "Durch zu viel Freizeit",
+      "Durch Erbanlagen allein"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Durch anpassungsfeindliche Transaktionen"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Ein Mann kurz vor der Rente fühlt sich leer und einsam.",
+       "kritisches Lebensereignis (Statuswechsel)"
+      ],
+      [
+       "Eine Familie hat eine zu kleine, laute Wohnung.",
+       "belastende Umweltbedingung"
+      ],
+      [
+       "Ein Ehepaar streitet ständig und spricht nicht mehr miteinander.",
+       "Kommunikations-/Beziehungsproblem"
+      ],
+      [
+       "Die Sozialarbeiterin unterstützt den Mann bei der Freizeitgestaltung.",
+       "Stärkung der Person"
+      ],
+      [
+       "Sie setzt sich für Begegnungsstätten im Viertel ein.",
+       "Gestaltung der Umwelt"
+      ],
+      [
+       "Der Klient entscheidet selbst und fühlt sich sicher.",
+       "Selbstbestimmung"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Störungen im {{Passungsgefüge}} von Person und Umwelt entstehen durch {{anpassungsfeindliche}} Transaktionen, z. B. durch kritische {{Lebensereignisse}}, belastende Umweltbedingungen und {{Kommunikationsprobleme}}. Sie führen zu negativem Lebens-Stress. Die Soziale Arbeit hat zwei Ziele: Stärkung des {{Anpassungspotenzials}} der Person und Beeinflussung und {{Gestaltung}} der Umwelt.",
+     "woerter": [
+      "Passungsgefüge",
+      "anpassungsfeindliche",
+      "Lebensereignisse",
+      "Kommunikationsprobleme",
+      "Anpassungspotenzials",
+      "Gestaltung",
+      "Bestrafung",
+      "Verwaltung",
+      "Kontrolle"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Life Model als Praxismethode treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es nennt zwei Ziele: Person stärken und Umwelt gestalten.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es berücksichtigt den Lebenslauf der Klienten.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es vermeidet Ressourcen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Es will persönliche und soziale Ressourcen mobilisieren.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Hilfe für die Person",
+       "items": [
+        "Selbstvertrauen stärken",
+        "Bewältigungsstrategien üben",
+        "Kontakte vermitteln"
+       ]
+      },
+      {
+       "name": "Gestaltung der Umwelt",
+       "items": [
+        "Begegnungsstätte schaffen",
+        "Wohnsituation verbessern",
+        "Gesellschaftliche Bedingungen verändern"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Herr Krüger (63) steht kurz vor der Pensionierung. Er lebt allein in einer wenig ansprechenden Wohnung, kennt kaum Nachbarn und fühlt sich depressiv. Er sucht eine Familienberatungsstelle auf. Erkläre, welche Problembereiche vorliegen.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Kritisches Lebensereignis (Rolle/Status Arbeitnehmer → Rentner), belastende Umwelt (Wohnung, wenig Kontakte), Gefühl der Einsamkeit.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_13"
+ ]
+}

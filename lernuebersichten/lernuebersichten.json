@@ -3703,5 +3703,574 @@
    "Ich kann ihre Ergänzung begründen."
   ],
   "kw": "t12_2_19"
+ },
+ {
+  "id": "f12-sa-begriff",
+  "thema": "Der Begriff „Soziale Arbeit“",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Was ist Soziale Arbeit – und was unterscheidet sie von privater Hilfe?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "SOZIALE ARBEIT\n• berufsmäßig\n• wissenschaftlich fundiert\n• alle Altersgruppen"
+   },
+   {
+    "c": "blau",
+    "text": "BEREICHE\n• Sozialarbeit\n• Sozialpädagogik (erzieherisch)"
+   },
+   {
+    "c": "rosa",
+    "text": "TRÄGER\n• öffentlich: Jugendamt\n• frei: AWO, Caritas, DRK"
+   }
+  ],
+  "mitte": "Soziale Arbeit",
+  "begriffe": [
+   "Notsituation",
+   "Träger",
+   "Praxisfeld"
+  ],
+  "zusammen": "Soziale Arbeit = Sozialarbeit + Sozialpädagogik, professionell und wissenschaftlich",
+  "fall": "Frau Berger (Caritas) hilft professionell, Tim aus der Nachbarschaft privat.",
+  "anker": [
+   "Ich kann Soziale Arbeit definieren.",
+   "Ich kann sie von privater Hilfe abgrenzen."
+  ],
+  "kw": "t12_3_01"
+ },
+ {
+  "id": "f12-sa-aufgaben",
+  "thema": "Aufgabenbereiche der Sozialen Arbeit",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wofür ist Soziale Arbeit zuständig?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "KINDER- UND JUGENDHILFE\n• SGB VIII\n• Entwicklung fördern"
+   },
+   {
+    "c": "rosa",
+    "text": "SOZIALHILFE\n• Lebensunterhalt\n• Würde des Menschen"
+   },
+   {
+    "c": "blau",
+    "text": "GESUNDHEITSHILFE\n• Förderung, Schutz\n• Wiederherstellung"
+   },
+   {
+    "c": "gelb",
+    "text": "ALTENHILFE\n• altersbedingte Schwierigkeiten\n• Teilhabe"
+   }
+  ],
+  "mitte": "Aufgabenbereiche",
+  "begriffe": [
+   "Prävention",
+   "Praxisfeld",
+   "Vernetzung"
+  ],
+  "zusammen": "Vier Bereiche – in der Praxis oft gemeinsam gefragt",
+  "fall": "Familie Aydin braucht Jugendhilfe, Sozialhilfe und Altenhilfe zugleich.",
+  "anker": [
+   "Ich kann die vier Bereiche nennen.",
+   "Ich kann Praxisfelder zuordnen."
+  ],
+  "kw": "t12_3_02"
+ },
+ {
+  "id": "f12-sa-handlungskonzepte",
+  "thema": "Handlungskonzepte der Sozialen Arbeit",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie geht man in der Sozialen Arbeit zielgerichtet vor?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "HANDLUNGSKONZEPT\n• Ziel + Methoden\n• wissenschaftlich begründet"
+   },
+   {
+    "c": "blau",
+    "text": "METHODEN\n• Einzelhilfe\n• Gruppenarbeit\n• Gemeinwesenarbeit"
+   },
+   {
+    "c": "gelb",
+    "text": "SCHRITTE\n• Analyse\n• Planung\n• Handlung\n• Bewertung"
+   }
+  ],
+  "mitte": "Handlungskonzept",
+  "begriffe": [
+   "Hilfe zur Selbsthilfe",
+   "Arbeitsbündnis",
+   "Anwendungsprinzipien"
+  ],
+  "zusammen": "Zielgerichtetes Handeln in vier Schritten – mit passender Methode",
+  "fall": "Frau Weiß berät Jonas: zuhören, planen, handeln, bewerten.",
+  "anker": [
+   "Ich kann ein Handlungskonzept definieren.",
+   "Ich kann die vier Schritte nennen."
+  ],
+  "kw": "t12_3_03"
+ },
+ {
+  "id": "f12-sa-verhaltensanalyse",
+  "thema": "Das verhaltensorientierte Konzept – Verhaltensanalyse",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie analysiert man problematisches Verhalten?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "GRUNDANNAHME\n• Verhalten ist erlernt\n• kann verlernt werden"
+   },
+   {
+    "c": "blau",
+    "text": "VIER SCHRITTE\n• Analyse\n• Planung\n• Handlung\n• Bewertung"
+   },
+   {
+    "c": "rosa",
+    "text": "ANALYSE\n• Verhalten auf 3 Ebenen\n• Auslöser und Aufrechterhaltung\n• Funktion, Defizite"
+   }
+  ],
+  "mitte": "Verhaltens-analyse",
+  "begriffe": [
+   "Lerntheorie",
+   "Symptom",
+   "Lerngeschichte"
+  ],
+  "zusammen": "Erst genau analysieren, dann gezielt verändern",
+  "fall": "Frau Maltz: Angst in Verkehrsmitteln, verstärkt durch Zuwendung.",
+  "anker": [
+   "Ich kann die Grundannahme nennen.",
+   "Ich kann eine Verhaltensanalyse durchführen."
+  ],
+  "kw": "t12_3_04"
+ },
+ {
+  "id": "f12-sa-modifikation-klassisch",
+  "thema": "Verhaltensmodifikation I – klassisches Konditionieren",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Welche Techniken bauen Angst und unerwünschte Reaktionen ab?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "GEGENKONDITIONIERUNG\n• unvereinbare angenehme Reaktion"
+   },
+   {
+    "c": "blau",
+    "text": "SYSTEMATISCHE DESENSIBILISIERUNG\n• Entspannung\n• Angsthierarchie\n• Konfrontation"
+   },
+   {
+    "c": "rosa",
+    "text": "REIZÜBERFLUTUNG\n• sofort stark\n• Befürchtung tritt nicht ein"
+   },
+   {
+    "c": "gelb",
+    "text": "AVERSIONSTHERAPIE\n• Reiz + Übelkeit\n• ethisch umstritten"
+   }
+  ],
+  "mitte": "Klassisches Konditionieren",
+  "begriffe": [
+   "Wolpe",
+   "Konfrontation",
+   "Freiwilligkeit"
+  ],
+  "zusammen": "Neue Reiz-Reaktions-Verbindungen ersetzen alte",
+  "fall": "Peter und das Pelzkaninchen: Süßigkeiten + Annäherung.",
+  "anker": [
+   "Ich kann vier Techniken unterscheiden.",
+   "Ich kann die Desensibilisierung erklären."
+  ],
+  "kw": "t12_3_05"
+ },
+ {
+  "id": "f12-sa-modifikation-operant",
+  "thema": "Verhaltensmodifikation II – operantes Konditionieren",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie baut man erwünschtes Verhalten durch Verstärkung auf?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "DIFFERENTIELLE VERSTÄRKUNG\n• Unerwünschtes ignorieren\n• Erwünschtes verstärken"
+   },
+   {
+    "c": "blau",
+    "text": "SHAPING\n• kleine Schritte\n• Endverhalten\n• Verstärkung ausschleichen"
+   },
+   {
+    "c": "gelb",
+    "text": "MOTIVATION\n• Bereitschaft (Thorndike)\n• Belohnung in Aussicht"
+   }
+  ],
+  "mitte": "Operantes Konditionieren",
+  "begriffe": [
+   "Nicht-Verstärkung",
+   "Teilschritt",
+   "sekundärer Verstärker"
+  ],
+  "zusammen": "Konsequenzen steuern das Verhalten",
+  "fall": "Fritz stört: ignorieren, Mitarbeit sofort loben.",
+  "anker": [
+   "Ich kann differentielle Verstärkung erklären.",
+   "Ich kann ein Shaping-Programm planen."
+  ],
+  "kw": "t12_3_06"
+ },
+ {
+  "id": "f12-sa-interventionen",
+  "thema": "Interventionen der Verhaltensmodifikation anwenden",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Welche Technik passt zu welchem Problem?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "KLASSISCH\n• Gegenkonditionierung\n• Desensibilisierung\n• Flooding\n• Aversion"
+   },
+   {
+    "c": "blau",
+    "text": "OPERANT\n• diff. Verstärkung\n• Shaping"
+   },
+   {
+    "c": "gelb",
+    "text": "AUSWAHL\n• Verhaltensanalyse\n• Ziel, Klient, Ethik"
+   }
+  ],
+  "mitte": "Interventionen",
+  "begriffe": [
+   "Verhaltensanalyse",
+   "Bewertung",
+   "Freiwilligkeit"
+  ],
+  "zusammen": "Die passende Technik ergibt sich aus der Analyse",
+  "fall": "Vier Klienten, vier Techniken – begründet gewählt.",
+  "anker": [
+   "Ich kann Techniken zuordnen.",
+   "Ich kann meine Wahl begründen."
+  ],
+  "kw": "t12_3_07"
+ },
+ {
+  "id": "f12-sa-fachaufsatz-anne",
+  "thema": "Fachaufsatz: Vorgehen am Beispiel Anne",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie schreibe ich einen guten Fachaufsatz zu einem Fall?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "EINLEITUNG\n• Einstieg\n• Lernbereich\n• Überleitung"
+   },
+   {
+    "c": "blau",
+    "text": "HAUPTTEIL\n• Nennen\n• Erklären\n• Verdeutlichen (Transfer)"
+   },
+   {
+    "c": "gelb",
+    "text": "SCHLUSS\n• Gedanke / Ausblick"
+   }
+  ],
+  "mitte": "Fachaufsatz",
+  "begriffe": [
+   "Fallbezug",
+   "Operator",
+   "Struktur"
+  ],
+  "zusammen": "Theorie am Fall konkretisieren",
+  "fall": "Anne: Schulangst, Freunde, Magenprobleme – vier Schritte.",
+  "anker": [
+   "Ich kann einen Fachaufsatz gliedern.",
+   "Ich kann Theorie am Fall zeigen."
+  ],
+  "kw": "t12_3_08"
+ },
+ {
+  "id": "f12-sa-lifemodel-grundlagen",
+  "thema": "Life Model – Ökologie und Transaktion",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Warum schaut das Life Model auf Person und Umwelt zugleich?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "LIFE MODEL\n• Germain und Gitterman\n• ökologisches Denkmodell"
+   },
+   {
+    "c": "blau",
+    "text": "TRANSAKTION\n• Person ↔ Umwelt\n• Wirkung und Rückwirkung"
+   },
+   {
+    "c": "rosa",
+    "text": "DOPPELVERPFLICHTUNG\n• Person stärken\n• Umwelt gestalten"
+   }
+  ],
+  "mitte": "Life Model",
+  "begriffe": [
+   "Ökologie",
+   "Austauschprozess",
+   "Lebensvollzug"
+  ],
+  "zusammen": "Probleme entstehen in der Beziehung von Person und Umwelt",
+  "fall": "Familie Haas: kleine Wohnung, unruhiger Sohn.",
+  "anker": [
+   "Ich kann Transaktion erklären.",
+   "Ich kann die Doppelverpflichtung nennen."
+  ],
+  "kw": "t12_3_09"
+ },
+ {
+  "id": "f12-sa-lifemodel-anpassung",
+  "thema": "Life Model – Anpassung",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Was heißt Anpassung zwischen Person und Umwelt?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "ANPASSUNG\n• Übereinstimmung\n• aktiver Prozess\n• nicht Einordnung"
+   },
+   {
+    "c": "blau",
+    "text": "ANPASSUNGSFÖRDERND\n• positives Verhältnis\n• Entwicklung gefördert"
+   },
+   {
+    "c": "rosa",
+    "text": "ANPASSUNGSFEINDLICH\n• Missverhältnis\n• Entwicklung beeinträchtigt"
+   }
+  ],
+  "mitte": "Anpassung",
+  "begriffe": [
+   "Transaktion",
+   "Umweltbereiche",
+   "Wohlbefinden"
+  ],
+  "zusammen": "Person und Umwelt passen zusammen – oder nicht",
+  "fall": "Jugendzentrum schließt: feindlich. Neuer Treffpunkt: fördernd.",
+  "anker": [
+   "Ich kann Anpassung erklären.",
+   "Ich kann beide Transaktionsarten unterscheiden."
+  ],
+  "kw": "t12_3_10"
+ },
+ {
+  "id": "f12-sa-lifemodel-habitat-nische",
+  "thema": "Life Model – Habitat und Nische",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wo lebt eine Person – und was kann sie dort bewirken?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "HABITAT\n• unmittelbarer Lebensraum\n• baulich, sozial, kulturell"
+   },
+   {
+    "c": "blau",
+    "text": "NISCHE\n• Wirkungsfeld\n• Einflussmöglichkeit"
+   },
+   {
+    "c": "rosa",
+    "text": "GUT / SCHLECHT\n• gute: Wertschätzung\n• schlechte: Ohnmacht"
+   }
+  ],
+  "mitte": "Habitat und Nische",
+  "begriffe": [
+   "Lebensraum",
+   "Handlungsfeld",
+   "Status"
+  ],
+  "zusammen": "Habitat = wo, Nische = was kann ich dort bewirken",
+  "fall": "Jonas: schwaches Habitat, in der Klasse schlechte, im Verein gute Nische.",
+  "anker": [
+   "Ich kann Habitat und Nische unterscheiden.",
+   "Ich kann gute und schlechte Nische erkennen."
+  ],
+  "kw": "t12_3_11"
+ },
+ {
+  "id": "f12-sa-lifemodel-stress-coping",
+  "thema": "Life Model – Lebens-Stress, Coping, Ressourcen",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie gehen Menschen mit Belastungen um?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "LEBENS-STRESS\n• positiv: Herausforderung\n• negativ: Bedrohung"
+   },
+   {
+    "c": "blau",
+    "text": "COPING\n• positiv: Stress sinkt\n• negativ: Stress bleibt"
+   },
+   {
+    "c": "gelb",
+    "text": "RESSOURCEN\n• personal\n• sozial"
+   }
+  ],
+  "mitte": "Lebens-Stress und Coping",
+  "begriffe": [
+   "Selbststeuerung",
+   "Selbstwert",
+   "Lebenslauf"
+  ],
+  "zusammen": "Ressourcen entscheiden mit, ob Coping gelingt",
+  "fall": "Anna und Tom: unterschiedliche Wege nach der Belastung.",
+  "anker": [
+   "Ich kann Stress und Coping unterscheiden.",
+   "Ich kann Ressourcen benennen."
+  ],
+  "kw": "t12_3_12"
+ },
+ {
+  "id": "f12-sa-lifemodel-methode",
+  "thema": "Life Model – eine Methode für die Praxis",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie hilft Soziale Arbeit nach dem Life Model konkret?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "PROBLEMBEREICHE\n• kritische Lebensereignisse\n• belastende Umwelt\n• Beziehungsprobleme"
+   },
+   {
+    "c": "blau",
+    "text": "ZIELE\n• Anpassungspotenzial stärken\n• Umwelt gestalten"
+   },
+   {
+    "c": "gelb",
+    "text": "ERGEBNIS\n• Coping\n• Selbstbestimmung\n• Sinngewissheit"
+   }
+  ],
+  "mitte": "Praxismethode",
+  "begriffe": [
+   "Passungsgefüge",
+   "Lebens-Stress",
+   "Habitat und Nische"
+  ],
+  "zusammen": "Person stärken und Umwelt verbessern",
+  "fall": "Herr Krüger: Rente, Einsamkeit, Wohnung, fehlende Kontakte.",
+  "anker": [
+   "Ich kann die Problembereiche nennen.",
+   "Ich kann beide Ziele an einem Fall anwenden."
+  ],
+  "kw": "t12_3_13"
+ },
+ {
+  "id": "f12-sa-fall-mueller",
+  "thema": "Fallbearbeitung Frau Müller",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie bearbeite ich einen Fall mit dem Life Model?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "BESCHREIBEN\n• Person\n• Umwelten"
+   },
+   {
+    "c": "blau",
+    "text": "ANALYSIEREN\n• Transaktionen\n• Habitat, Nische\n• Stress, Coping, Ressourcen"
+   },
+   {
+    "c": "gelb",
+    "text": "ZIELE\n• Person stärken\n• Umwelt gestalten"
+   }
+  ],
+  "mitte": "Fallbearbeitung",
+  "begriffe": [
+   "Hilfeplan",
+   "Ressourcen",
+   "Schuldzuweisung"
+  ],
+  "zusammen": "Zusammenspiel statt Schuld",
+  "fall": "Frau Müller und Sebastian: Familienhilfe, Wohnheim, Schule.",
+  "anker": [
+   "Ich kann einen Fall ökologisch beschreiben.",
+   "Ich kann Ziele ableiten."
+  ],
+  "kw": "t12_3_14"
+ },
+ {
+  "id": "f12-sa-lifemodel-wuerdigung",
+  "thema": "Kritische Würdigung des Life Models",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Was kann das Life Model – und was nicht?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "ERKLÄRUNGSWERT\n• Person-Umwelt-Passung\n• sozialer Kontext"
+   },
+   {
+    "c": "rosa",
+    "text": "GRENZEN\n• Inneres der Person\n• Vergangenheit\n• Bereitschaft\n• Umwelt starr"
+   },
+   {
+    "c": "gelb",
+    "text": "KRITIK\n• unpräzise Begriffe"
+   }
+  ],
+  "mitte": "Kritische Würdigung",
+  "begriffe": [
+   "Erklärungswert",
+   "Grenze",
+   "Bereitschaft"
+  ],
+  "zusammen": "Nützlich, aber nicht allumfassend",
+  "fall": "Jugendtreff scheitert an Geld und Motivation.",
+  "anker": [
+   "Ich kann Stärken nennen.",
+   "Ich kann Grenzen begründen."
+  ],
+  "kw": "t12_3_15"
+ },
+ {
+  "id": "f12-sa-thiersch-lebenswelt",
+  "thema": "Thiersch – Lebenswelt und Dimensionen",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie sieht Soziale Arbeit den Alltag der Menschen?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "LEBENSWELT\n• Alltag\n• Thiersch"
+   },
+   {
+    "c": "blau",
+    "text": "DIMENSIONEN\n• erfahrene Zeit\n• erfahrener Raum\n• soziale Bezüge\n• Bewältigungsaufgaben"
+   },
+   {
+    "c": "gelb",
+    "text": "ZIEL\n• Hilfe zur Selbsthilfe\n• gesellschaftliche Bedingungen"
+   }
+  ],
+  "mitte": "Lebenswelt",
+  "begriffe": [
+   "Alltag",
+   "Selbsthilfe",
+   "Bewältigung"
+  ],
+  "zusammen": "Vom Alltag der Menschen aus helfen",
+  "fall": "Familie Kaya: enge Wohnung, Schulden, keine Kontakte.",
+  "anker": [
+   "Ich kann Lebenswelt erklären.",
+   "Ich kann die Dimensionen anwenden."
+  ],
+  "kw": "t12_3_16"
+ },
+ {
+  "id": "f12-sa-thiersch-maximen",
+  "thema": "Thiersch – Struktur- und Handlungsmaximen",
+  "unter": "LB 12.3 · Soziale Arbeit",
+  "frage": "Wie muss Soziale Arbeit gestaltet sein, damit sie lebensweltnah wirkt?",
+  "wissen": [
+   {
+    "c": "gruen",
+    "text": "PRÄVENTION\nALLTAGSNÄHE"
+   },
+   {
+    "c": "blau",
+    "text": "REGIONALISIERUNG / DEZENTRALISIERUNG\nINTEGRATION"
+   },
+   {
+    "c": "gelb",
+    "text": "PARTIZIPATION\nVERNETZUNG"
+   }
+  ],
+  "mitte": "Maximen",
+  "begriffe": [
+   "Hilfe zur Selbsthilfe",
+   "Lebenswelt",
+   "Stadtteil"
+  ],
+  "zusammen": "Nah, beteiligend, vernetzt – damit Selbsthilfe gelingt",
+  "fall": "Sprechstunde im Park, Jugendbeirat, abgestimmte Hilfen.",
+  "anker": [
+   "Ich kann sechs Maximen nennen.",
+   "Ich kann Maßnahmen zuordnen."
+  ],
+  "kw": "t12_3_17"
  }
 ]

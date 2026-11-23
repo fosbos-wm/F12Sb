@@ -1,0 +1,162 @@
+{
+ "titel": "Life Model: Lebens-Stress, Coping und Ressourcen: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Life Model: Lebens-Stress, Coping und Ressourcen** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Anna (17) verliert ihre Mutter. Sie schweigt, zieht sich zurück, die Noten sinken. Ihre Tante meldet sich täglich. Die Schulsozialarbeiterin fragt: „Was hilft dir gerade – und woher könnte noch Unterstützung kommen?“"
+    },
+    {
+     "typ": "text",
+     "text": "**Lebens-Stress** ist ein Belastungs- und Spannungszustand, der durch eine Störung der Abgestimmtheit von Person und Umwelt ausgelöst wird. Er kann **positiv** (Herausforderung) oder **negativ** (Bedrohung) sein. **Ressourcen** sind die Kräfte, die einem Individuum zur Bewältigung einer Situation zur Verfügung stehen – **personal** (z. B. Motivation, Problemlösefähigkeit) oder **sozial** (z. B. Freunde, Beratungsstellen)."
+    },
+    {
+     "typ": "text",
+     "text": "**Coping** ist jeder Versuch, stressreiche Situationen zu bewältigen. **Positives Coping** baut den Stress ab, **negatives Coping** lässt ihn bestehen oder verstärkt ihn. Erfolgreiche Bewältigung fördert Kompetenzgefühl und Selbstwert; wichtig ist auch die **Selbststeuerung**."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Lebens-Stress positiv/negativ; Coping positiv/negativ; Ressourcen personal/sozial."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was ist Lebens-Stress?",
+     "optionen": [
+      "Belastungs- und Spannungszustand durch Störung der Person-Umwelt-Abstimmung",
+      "Nur negative Anspannung",
+      "Ein Gefühl der Langeweile"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Belastungs- und Spannungszustand durch Störung der Person-Umwelt-Abstimmung"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Nach der Kündigung fühlt sich Herr B. bedroht und hilflos.",
+       "negativer Lebens-Stress"
+      ],
+      [
+       "Lena sieht die Aufnahmeprüfung als Chance und lernt gezielt.",
+       "positiver Lebens-Stress"
+      ],
+      [
+       "Er holt sich Hilfe beim Schuldnerberater und löst das Problem.",
+       "positives Coping"
+      ],
+      [
+       "Sie trinkt mehr Alkohol, die Probleme wachsen.",
+       "negatives Coping"
+      ],
+      [
+       "Die Freundin hilft beim Umzug.",
+       "soziale Ressource"
+      ],
+      [
+       "Marie vertraut auf ihre Fähigkeit, Probleme zu lösen.",
+       "personale Ressource"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "{{Lebens-Stress}} ist ein Belastungs- und Spannungszustand, der durch eine Störung der {{Abgestimmtheit}} von Person und Umwelt ausgelöst wird. {{Coping}} ist jeder Versuch, stressreiche Situationen zu {{bewältigen}}. {{Ressourcen}} sind die Kräfte, die einem Individuum zur Bewältigung zur Verfügung stehen. Man unterscheidet {{personale}} und soziale Ressourcen.",
+     "woerter": [
+      "Lebens-Stress",
+      "Abgestimmtheit",
+      "Coping",
+      "bewältigen",
+      "Ressourcen",
+      "personale",
+      "Burnout",
+      "Therapie",
+      "Verstärker"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Lebens-Stress treffen zu?",
+     "aussagen": [
+      {
+       "text": "Er kann positiv oder negativ sein.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Er entsteht immer aus Faulheit.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Positiver Lebens-Stress entsteht bei Herausforderung mit vorhandenen Kräften.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Negativer Lebens-Stress geht oft mit Hilflosigkeit einher.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Lebens-Stress",
+       "items": [
+        "Kündigung",
+        "Verlust einer nahestehenden Person"
+       ]
+      },
+      {
+       "name": "Coping",
+       "items": [
+        "Beratung aufsuchen",
+        "Plan machen"
+       ]
+      },
+      {
+       "name": "Ressource",
+       "items": [
+        "Freundin als Unterstützung",
+        "Problemlösefähigkeit"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Nach dem Tod ihrer Mutter fühlt sich Anna (17) überfordert. Sie sagt Treffen ab, ihre Noten sinken. Ihre Tante meldet sich täglich, ihre Lehrerin bietet ein Gespräch an. Anna blockt ab. Zeige, warum hier negativer Lebens-Stress vorliegt.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Die Anforderung (Verlust) übersteigt ihre Bewältigungsfähigkeit; Gefühle von Überforderung und Hilflosigkeit.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_12"
+ ]
+}

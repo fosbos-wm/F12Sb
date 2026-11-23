@@ -1,0 +1,165 @@
+{
+ "titel": "Verhaltensmodifikation I: klassisches Konditionieren: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Verhaltensmodifikation I: klassisches Konditionieren** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Peter (3) fürchtet pelzige Dinge. Seine Betreuerin setzt ihn auf einen hohen Stuhl, gibt ihm Süßigkeiten und rückt dabei ein Pelzkaninchen immer ein Stück näher. Am Ende sitzt das Kaninchen auf seinem Schoß."
+    },
+    {
+     "typ": "text",
+     "text": "Die **Verhaltensmodifikation** ist die Handlungsphase; je nach Lerntheorie ergeben sich verschiedene Techniken. Auf der Grundlage des **klassischen Konditionierens** stehen: **Gegenkonditionierung** (Kopplung des unangenehmen Reizes mit einem unvereinbaren, angenehmen Reiz), **systematische Desensibilisierung** (schrittweise Annäherung an den Angstreiz bei Entspannung), **Reizüberflutung** (sofortige Konfrontation mit starken Reizen) und **Aversionstherapie** (Kopplung eines anziehenden Reizes mit einem unangenehmen Reiz)."
+    },
+    {
+     "typ": "text",
+     "text": "Die Desensibilisierung folgt drei Grundsätzen: **Entspannungstraining, Angsthierarchie, Konfrontation** (real oder in der Vorstellung). Sie wurde von Joseph **Wolpe** entwickelt, weil Angst und Entspannung nicht gleichzeitig vorhanden sein können."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Klassisch: Gegenkonditionierung, Desensibilisierung (Entspannung – Hierarchie – Konfrontation), Flooding, Aversionstherapie."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was ist das Ziel der Gegenkonditionierung?",
+     "optionen": [
+      "Eine schon erworbene Reiz-Reaktions-Verbindung abbauen",
+      "Neue Wörter lehren",
+      "Gedanken deuten"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Eine schon erworbene Reiz-Reaktions-Verbindung abbauen"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Peter bekommt Süßigkeiten, während ihm ein Pelzkaninchen allmählich näher gebracht wird.",
+       "Gegenkonditionierung"
+      ],
+      [
+       "Ein Klient lernt progressive Muskelentspannung und konfrontiert sich Schritt für Schritt mit der Spinne.",
+       "systematische Desensibilisierung"
+      ],
+      [
+       "Frau M. geht gleich zu Beginn mit der Therapeutin auf die belebte Straße, trotz Panik.",
+       "Reizüberflutung (Flooding)"
+      ],
+      [
+       "Einem Alkoholiker wird Alkohol mit einem Mittel gegeben, das Übelkeit auslöst.",
+       "Aversionstherapie"
+      ],
+      [
+       "Der Klient ordnet seine Ängste von leicht bis stark.",
+       "Angsthierarchie"
+      ],
+      [
+       "Ein Klient stellt sich die gefürchtete Situation nur im Kopf vor.",
+       "Konfrontation in der Vorstellung"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Auf der Grundlage des klassischen Konditionierens gibt es die {{Gegenkonditionierung}}, die systematische {{Desensibilisierung}}, die {{Reizüberflutung}} und die {{Aversionstherapie}}. Bei der Desensibilisierung folgt die Annäherung drei Grundsätzen: Entspannungstraining, {{Angsthierarchie}} und {{Konfrontation}}. Die Technik wurde von Joseph {{Wolpe}} entwickelt.",
+     "woerter": [
+      "Gegenkonditionierung",
+      "Desensibilisierung",
+      "Reizüberflutung",
+      "Aversionstherapie",
+      "Angsthierarchie",
+      "Konfrontation",
+      "Wolpe",
+      "Shaping",
+      "Münzsystem",
+      "Löschung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur systematischen Desensibilisierung treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie verbindet Angstreize mit Entspannung.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie beginnt mit dem stärksten Angstreiz.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Der nächste Punkt der Hierarchie wird erst nach entspanntem Durchleben des vorigen bearbeitet.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie ist nach Wolpe entwickelt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Gegenkonditionierung / Desensibilisierung",
+       "items": [
+        "schrittweise Annäherung",
+        "Entspannung statt Angst",
+        "Angsthierarchie"
+       ]
+      },
+      {
+       "name": "Reizüberflutung",
+       "items": [
+        "sofort starke Reize",
+        "Erfahrung: Befürchtungen treten nicht ein",
+        "kaum Abstufung"
+       ]
+      },
+      {
+       "name": "Aversionstherapie",
+       "items": [
+        "Alkohol + Übelkeit",
+        "Reiz verliert Anziehung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Frau M. leidet unter Agoraphobie. Sie befürchtet, auf der belebten Straße, im Kaufhaus oder im Aufzug ohnmächtig zu werden. Die Therapeutin geht mit ihr gleich vor die Praxistür auf die belebte Straße und fordert sie auf weiterzugehen, auch wenn Herzklopfen auftritt. Die Angst klingt nach einiger Zeit ab. Benenne die angewandte Technik und begründe.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Reizüberflutung (Flooding): Sofortige Konfrontation mit stark angstauslösenden Reizen, ohne Abstufung; Frau M. erfährt, dass die Befürchtung nicht eintritt.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_05"
+ ]
+}

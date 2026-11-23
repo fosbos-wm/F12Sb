@@ -1,0 +1,164 @@
+{
+ "titel": "Thiersch: Lebenswelt und Dimensionen der Analyse: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Thiersch: Lebenswelt und Dimensionen der Analyse** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Frau Kaya sagt der Sozialarbeiterin: „Mein Alltag ist ein Wirrwarr – Kinder, Schulden, die enge Wohnung.“ Die Sozialarbeiterin sagt nicht: „Sie haben ein Problem.“ Sie fragt: „Erzählen Sie mir einen normalen Tag.“"
+    },
+    {
+     "typ": "text",
+     "text": "Die **lebensweltorientierte Soziale Arbeit** nach **Hans Thiersch** geht vom **Alltag** der Menschen aus. Die **Lebenswelt** ist der Alltag, in dem Menschen ihr Leben erfahren, deuten und bewältigen. Hilfe soll **Hilfe zur Selbsthilfe** sein."
+    },
+    {
+     "typ": "text",
+     "text": "**Dimensionen der Analyse:** erfahrene **Zeit**, erfahrener **Raum**, **soziale Bezüge**, **Bewältigungsaufgaben**; zusätzlich die **gesellschaftlichen Bedingungen** (z. B. Arbeit, Wohnen, Armut), die den Alltag prägen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Thiersch: Lebenswelt = Alltag. Analyse: Zeit, Raum, soziale Bezüge, Bewältigungsaufgaben, gesellschaftliche Bedingungen. Ziel: Selbsthilfe."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Von welchem Ausgangspunkt geht die Lebensweltorientierung aus?",
+     "optionen": [
+      "Vom Alltag und der erlebten Lebenswelt der Menschen",
+      "Von der Diagnose",
+      "Von der Verwaltung"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Vom Alltag und der erlebten Lebenswelt der Menschen"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Für Frau K. ist die Wohnung ein sicherer Ort, das Viertel dagegen bedrohlich.",
+       "erfahrener Raum"
+      ],
+      [
+       "Herr B. denkt nur noch an früher und sieht keine Zukunft.",
+       "erfahrene Zeit"
+      ],
+      [
+       "Jonas hat nur noch Kontakt zu seiner Oma.",
+       "soziale Bezüge"
+      ],
+      [
+       "Frau T. muss Kinder, Arbeit und Schulden gleichzeitig managen.",
+       "Bewältigungsaufgaben"
+      ],
+      [
+       "Die Fachkraft begleitet, bis die Familie es allein schafft.",
+       "Hilfe zur Selbsthilfe"
+      ],
+      [
+       "Hohe Mieten und Arbeitslosigkeit prägen den Alltag.",
+       "gesellschaftliche Bedingungen"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Die {{Lebensweltorientierung}} nach Hans {{Thiersch}} geht vom {{Alltag}} der Menschen aus. Zur Analyse der Lebenswelt betrachtet man die erfahrene {{Zeit}}, den erfahrenen {{Raum}}, die sozialen {{Bezüge}} und die {{Bewältigungsaufgaben}}. Ziel ist Hilfe zur {{Selbsthilfe}}; dabei sind auch gesellschaftliche Bedingungen zu beachten.",
+     "woerter": [
+      "Lebensweltorientierung",
+      "Thiersch",
+      "Alltag",
+      "Zeit",
+      "Raum",
+      "Bezüge",
+      "Bewältigungsaufgaben",
+      "Selbsthilfe",
+      "Diagnose",
+      "Therapie",
+      "Strafe"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Lebensweltorientierung treffen zu?",
+     "aussagen": [
+      {
+       "text": "Sie geht vom Alltag der Menschen aus.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie bezieht gesellschaftliche Bedingungen ein.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie sieht Menschen als Fälle.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie will Hilfe zur Selbsthilfe.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "erfahrene Zeit",
+       "items": [
+        "Die Zukunft erscheint ihr aussichtslos.",
+        "Früher war alles besser."
+       ]
+      },
+      {
+       "name": "erfahrener Raum",
+       "items": [
+        "Die Wohnung ist beengt.",
+        "Das Viertel fühlt sich unsicher an."
+       ]
+      },
+      {
+       "name": "soziale Bezüge",
+       "items": [
+        "Die Familie ist zerstritten.",
+        "Freunde ziehen sich zurück."
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Frau Kaya (34) lebt mit zwei Kindern in einer Zwei-Zimmer-Wohnung. Sie ist arbeitslos, hat Schulden und keinen Kontakt zu Verwandten. Das Viertel meidet sie abends. Sie sagt: „Ich sehe keinen Ausweg.“ Ordne die Beobachtungen den Dimensionen zu.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Raum: kleine Wohnung, Viertel unsicher; Zeit: kein Ausweg/Zukunft; soziale Bezüge: kein Kontakt; Bewältigungsaufgaben: Kinder, Schulden, Arbeitslosigkeit.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_16"
+ ]
+}

@@ -1,0 +1,165 @@
+{
+ "titel": "Handlungskonzepte: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Handlungskonzepte** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Studentin der Sozialen Arbeit erzählt: „Heute berate ich Frau K., morgen leite ich eine Elterngruppe, und am Wochenende plane ich ein Stadtteilfest.“ Jonas fragt: „Und das ist alles dasselbe Konzept?“"
+    },
+    {
+     "typ": "text",
+     "text": "Ein **Handlungskonzept** ist ein Entwurf zum beruflichen Umgang mit sozialen Problemen, in dem das Ziel und die Methoden zu diesem Ziel gedanklich vorweggenommen werden und der wissenschaftlich und auf Berufserfahrung begründet ist. Man unterscheidet die **soziale Einzelhilfe**, die **soziale Gruppenarbeit** und die **soziale Gemeinwesenarbeit**."
+    },
+    {
+     "typ": "text",
+     "text": "In der Einzelhilfe geht man meist in vier Handlungsschritten vor: **Analyse**, **Planung**, **Handlung** (Intervention) und **Bewertung**. Wichtige Anwendungsprinzipien sind Akzeptieren, Individualisieren, Selbstbestimmung, keine wertende Haltung, Vertraulichkeit und Selbstkontrolle."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Handlungskonzept = Ziel + Methoden, wissenschaftlich begründet. Methoden: Einzelhilfe, Gruppenarbeit, Gemeinwesenarbeit. Schritte: Analyse, Planung, Handlung, Bewertung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welche Methoden gehören zu den klassischen Methoden der Sozialen Arbeit?",
+     "optionen": [
+      "Einzelhilfe, Gruppenarbeit, Gemeinwesenarbeit",
+      "Verhaltenstherapie, Psychoanalyse, Gesprächstherapie",
+      "Beratung, Erziehung, Strafe"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Einzelhilfe, Gruppenarbeit, Gemeinwesenarbeit"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Eine Fachkraft berät Frau K. allein zu ihren Schulden.",
+       "soziale Einzelhilfe"
+      ],
+      [
+       "Die Anonymen Alkoholiker treffen sich wöchentlich.",
+       "soziale Gruppenarbeit"
+      ],
+      [
+       "Bewohner eines Stadtteils gründen mit Hilfe einer Fachkraft einen Jugendtreff.",
+       "soziale Gemeinwesenarbeit"
+      ],
+      [
+       "Die Sozialpädagogin beschreibt zuerst genau das Problem und baut Vertrauen auf.",
+       "Analyse"
+      ],
+      [
+       "Klient und Sozialarbeiter vereinbaren Ziele und Termine.",
+       "Planung"
+      ],
+      [
+       "Am Ende wird geprüft, ob die Ziele erreicht wurden.",
+       "Bewertung"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Ein {{Handlungskonzept}} ist ein Entwurf zum beruflichen Umgang mit {{sozialen Problemen}}, in dem das {{Ziel}} und die {{Methoden}} gedanklich vorweggenommen werden. Klassische Methoden sind {{Einzelhilfe}}, {{Gruppenarbeit}} und {{Gemeinwesenarbeit}}. In der Einzelhilfe geht man in vier Schritten vor: Analyse, {{Planung}}, Handlung und {{Bewertung}}.",
+     "woerter": [
+      "Handlungskonzept",
+      "sozialen Problemen",
+      "Ziel",
+      "Methoden",
+      "Einzelhilfe",
+      "Gruppenarbeit",
+      "Gemeinwesenarbeit",
+      "Planung",
+      "Bewertung",
+      "Strafe",
+      "Therapie",
+      "Verwaltung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu Handlungskonzepten treffen zu?",
+     "aussagen": [
+      {
+       "text": "Handlungskonzepte beruhen auf wissenschaftlichen Grundlagen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Ziel und Methoden hängen voneinander ab.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie schreiben jeden Schritt starr vor, ohne Anpassung.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie sollen professionelles Handeln ermöglichen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Einzelhilfe",
+       "items": [
+        "Akzeptieren, Individualisieren",
+        "Vertraulichkeit"
+       ]
+      },
+      {
+       "name": "Gruppenarbeit",
+       "items": [
+        "Dort anfangen, wo die Gruppe steht",
+        "Sich als Gruppenleiter entbehrlich machen"
+       ]
+      },
+      {
+       "name": "Gemeinwesenarbeit",
+       "items": [
+        "Vernetzung der sozialen Dienste",
+        "Aktivierung der Bewohner"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Jonas (17) hat Streit mit seinen Eltern und schwänzt. Die Sozialpädagogin Frau Weiß hört ihm zu, wertet nicht, und sie vereinbaren zwei Ziele und wöchentliche Termine. Nach sechs Wochen sprechen sie darüber, was sich verändert hat. Ordne die Beobachtungen im Fall den vier Handlungsschritten zu.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Zuhören/Informationen sammeln: Analyse; Ziele und Termine vereinbaren: Planung; die Beratungstermine: Handlung; Rückblick nach sechs Wochen: Bewertung.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_03"
+ ]
+}

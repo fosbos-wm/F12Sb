@@ -1,0 +1,158 @@
+{
+ "titel": "Begriff Soziale Arbeit: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Begriff Soziale Arbeit** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Lena (17) möchte nach dem Abitur etwas „Soziales“ machen. Ihr Onkel sagt: „Das mache ich ja auch, wenn ich Nachbarn helfe.“ Lena ist sich nicht sicher, was Soziale Arbeit von nettem Helfen unterscheidet."
+    },
+    {
+     "typ": "text",
+     "text": "**Soziale Arbeit** fasst die beiden Bereiche der Sozialarbeit und Sozialpädagogik zusammen und umfasst die berufsmäßige, wissenschaftlich fundierte Hilfeleistung an Menschen aller Altersgruppen zur Verhinderung und Bewältigung von unterschiedlichen Problem- und Notsituationen individueller und sozialer Art."
+    },
+    {
+     "typ": "text",
+     "text": "**Sozialarbeit** meint Einrichtungen und Maßnahmen zur Bewältigung und Verhinderung von Notsituationen. **Sozialpädagogik** betont den pädagogischen Auftrag und ist ein Teilbereich der Sozialen Arbeit. Beschäftigt sind Fachkräfte bei **öffentlichen** (z. B. Jugendamt) und **freien Trägern** (z. B. Wohlfahrtsverbände)."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Soziale Arbeit = berufsmäßige, wissenschaftlich fundierte Hilfe für Menschen aller Altersgruppen; Sozialarbeit + Sozialpädagogik; Träger öffentlich oder frei."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wodurch unterscheidet sich Soziale Arbeit von privater Hilfe?",
+     "optionen": [
+      "Sie ist berufsmäßig und wissenschaftlich fundiert.",
+      "Sie ist immer kostenlos.",
+      "Sie richtet sich nur an Kinder."
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Sie ist berufsmäßig und wissenschaftlich fundiert."
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Ein Jugendamt berät eine Familie.",
+       "öffentlicher Träger"
+      ],
+      [
+       "Die Caritas betreibt eine Wohnungslosenhilfe.",
+       "freier Träger"
+      ],
+      [
+       "Eine Schulsozialarbeiterin begleitet Jugendliche in der Berufsorientierung.",
+       "Praxisfeld"
+      ],
+      [
+       "Eine Erzieherin im Jugendhaus fördert gezielt die Entwicklung der Jugendlichen.",
+       "Sozialpädagogik"
+      ],
+      [
+       "Nachbarn kochen einer kranken Frau spontan Suppe.",
+       "private Hilfe"
+      ],
+      [
+       "Hilfen werden von ausgebildeten Fachkräften nach wissenschaftlichen Erkenntnissen geleistet.",
+       "Soziale Arbeit"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Die {{Soziale Arbeit}} fasst {{Sozialarbeit}} und {{Sozialpädagogik}} zusammen. Sie ist eine {{berufsmäßige}} und {{wissenschaftlich}} fundierte Hilfe bei Problem- und {{Notsituationen}} individueller und sozialer Art. Damit grenzt sie sich von {{privater}} Hilfe ab.",
+     "woerter": [
+      "Soziale Arbeit",
+      "Sozialarbeit",
+      "Sozialpädagogik",
+      "berufsmäßige",
+      "wissenschaftlich",
+      "Notsituationen",
+      "privater",
+      "ehrenamtlicher",
+      "zufälliger",
+      "Politik"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Begriff Soziale Arbeit treffen zu?",
+     "aussagen": [
+      {
+       "text": "Soziale Arbeit ist berufsmäßige und wissenschaftlich fundierte Hilfe.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Soziale Arbeit hilft nur Kindern.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Sie soll Probleme bewältigen oder verhindern.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Sie braucht keine rechtliche Grundlage.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Sozialarbeit",
+       "items": [
+        "Beratung bei Schulden",
+        "Hilfe in einer Notunterkunft",
+        "Unterstützung bei Behördengängen"
+       ]
+      },
+      {
+       "name": "Sozialpädagogik",
+       "items": [
+        "Freizeitpädagogik im Jugendzentrum",
+        "Erziehung außerhalb von Familie und Schule",
+        "Gruppenarbeit mit erzieherischer Absicht"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Tim (17) hilft seiner Nachbarin Frau Roth seit Jahren beim Einkaufen. Als Frau Roth stürzt und länger Hilfe braucht, kommt Frau Berger vom Sozialdienst der Caritas. Sie klärt mit Frau Roth die Pflege, beantragt Leistungen und vermittelt einen Mittagstisch. Erkläre, woran man erkennt, dass Frau Bergers Tätigkeit Soziale Arbeit ist.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Sie ist berufsmäßig (Sozialdienst der Caritas), wissenschaftlich fundiert und professionell, sie hilft bei einer Notsituation (Sturz, Pflegebedarf) und vermittelt Hilfen.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_01"
+ ]
+}

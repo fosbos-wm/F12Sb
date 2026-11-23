@@ -1,0 +1,162 @@
+{
+ "titel": "Thiersch: Struktur- und Handlungsmaximen: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Thiersch: Struktur- und Handlungsmaximen** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Im Stadtteil gibt es Streit zwischen Jugendlichen und Anwohnern. Die Sozialarbeiterin lädt nicht ins Amt ein, sondern setzt sich mit einer Thermoskanne in den Park. „Hier sind die Leute – dann gehe ich dorthin.“"
+    },
+    {
+     "typ": "text",
+     "text": "Die **Struktur- und Handlungsmaximen** nach Thiersch geben vor, wie Soziale Arbeit organisiert und gestaltet sein soll: **Prävention** (vorbeugen), **Alltagsnähe** (am Alltag orientiert), **Regionalisierung/Dezentralisierung** (wohnortnah), **Integration** (Ausgrenzung vermeiden), **Partizipation** (Beteiligung der Betroffenen), **Vernetzung** (Zusammenarbeit der Hilfen)."
+    },
+    {
+     "typ": "text",
+     "text": "Sie dienen dem Ziel der **Hilfe zur Selbsthilfe**: Menschen sollen befähigt werden, ihren Alltag in ihrer Lebenswelt selbst zu bewältigen."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Maximen: Prävention, Alltagsnähe, Regionalisierung/Dezentralisierung, Integration, Partizipation, Vernetzung."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was bedeutet Prävention?",
+     "optionen": [
+      "Vorbeugen, bevor Probleme entstehen",
+      "Bestrafen",
+      "Verwalten"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Vorbeugen, bevor Probleme entstehen"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Ein Jugendtreff bietet Sport an, bevor Gewalt entsteht.",
+       "Prävention"
+      ],
+      [
+       "Die Beratung findet im Treffpunkt des Viertels statt, nicht im fernen Amt.",
+       "Regionalisierung/Dezentralisierung"
+      ],
+      [
+       "Die Fachkraft besucht die Familie zu Hause und spricht ihre Sprache.",
+       "Alltagsnähe"
+      ],
+      [
+       "Menschen mit Behinderung nehmen am normalen Vereinsleben teil.",
+       "Integration"
+      ],
+      [
+       "Eltern und Jugendliche entscheiden bei der Hilfeplanung mit.",
+       "Partizipation"
+      ],
+      [
+       "Schule, Jugendamt und Verein stimmen ihre Hilfen ab.",
+       "Vernetzung"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Die Struktur- und Handlungsmaximen nach Thiersch sind {{Prävention}}, {{Alltagsnähe}}, Regionalisierung bzw. {{Dezentralisierung}}, {{Integration}}, Partizipation und {{Vernetzung}}. Sie beschreiben, wie Soziale Arbeit organisiert sein soll, damit Hilfe zur {{Selbsthilfe}} gelingt.",
+     "woerter": [
+      "Prävention",
+      "Alltagsnähe",
+      "Dezentralisierung",
+      "Integration",
+      "Vernetzung",
+      "Selbsthilfe",
+      "Kontrolle",
+      "Strafe",
+      "Verwaltung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu den Maximen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Prävention soll Probleme vermeiden.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Partizipation heißt, Betroffene zu beteiligen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Dezentralisierung bedeutet zentrale Verwaltung.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Vernetzung bedeutet Zusammenarbeit.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Prävention",
+       "items": [
+        "Aufklärung vor Sucht",
+        "Frühe Hilfen für Familien"
+       ]
+      },
+      {
+       "name": "Alltagsnähe",
+       "items": [
+        "Hausbesuch statt Amtsweg",
+        "Beratung im Stadtteil"
+       ]
+      },
+      {
+       "name": "Partizipation",
+       "items": [
+        "Jugendparlament",
+        "Mitentscheiden im Hilfeplan"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "In einem Stadtteil gründet die Sozialarbeiterin Frau Dorn eine Sprechstunde im Park, einen Elterntreff im Mehrgenerationenhaus und einen Jugendbeirat. Sie stimmt sich mit Schule, Verein und Jugendamt ab. Ordne die Maßnahmen den Maximen zu.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Sprechstunde im Park: Alltagsnähe/Dezentralisierung; Elterntreff: Prävention/Integration; Jugendbeirat: Partizipation; Abstimmung: Vernetzung.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_17"
+ ]
+}

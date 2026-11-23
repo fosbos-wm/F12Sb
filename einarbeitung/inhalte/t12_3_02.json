@@ -1,0 +1,170 @@
+{
+ "titel": "Aufgabenbereiche der Sozialen Arbeit: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Aufgabenbereiche der Sozialen Arbeit** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Jonas macht ein Praktikum im Sozialamt. Am Montag berät er einen Mann ohne Wohnung, am Dienstag begleitet er eine Mitarbeiterin ins Seniorenheim. „Wo gehört das eigentlich hin?“, fragt er sich."
+    },
+    {
+     "typ": "text",
+     "text": "Die Soziale Arbeit gliedert sich in vier Aufgabenbereiche: **Kinder- und Jugendhilfe** (SGB VIII, fördert junge Menschen, wirkt sozialen Benachteiligungen entgegen), **Sozialhilfe** (Hilfe zum Lebensunterhalt, damit ein Leben möglich ist, das der Würde des Menschen entspricht), **Gesundheitshilfe** (Förderung, Erhaltung, Schutz und Wiederherstellung der Gesundheit) und **Altenhilfe** (altersbedingte Schwierigkeiten verhüten, überwinden oder mildern und Teilhabe am Leben in der Gemeinschaft ermöglichen)."
+    },
+    {
+     "typ": "text",
+     "text": "Jeder Bereich hat typische Praxisfelder, z. B. Jugendarbeit, Wohnungslosenhilfe, Sozialdienst im Krankenhaus oder Seniorentreff. In der Praxis überschneiden sich die Bereiche häufig."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Vier Aufgabenbereiche: Kinder- und Jugendhilfe, Sozialhilfe, Gesundheitshilfe, Altenhilfe."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Welches Gesetzbuch regelt die Kinder- und Jugendhilfe?",
+     "optionen": [
+      "SGB VIII",
+      "SGB XII",
+      "Grundgesetz allein"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: SGB VIII"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Ein Jugendtreff bietet offene Angebote für 14-Jährige.",
+       "Kinder- und Jugendhilfe"
+      ],
+      [
+       "Ein Mann ohne Wohnung erhält Beratung und Notunterkunft.",
+       "Sozialhilfe"
+      ],
+      [
+       "Eine Sozialarbeiterin berät im Krankenhaus bei der Entlassung.",
+       "Gesundheitshilfe"
+      ],
+      [
+       "Ein Seniorentreff lädt zum Kaffee ein.",
+       "Altenhilfe"
+      ],
+      [
+       "Eine Beratungsstelle bietet Suchtprävention an Schulen an.",
+       "Gesundheitshilfe (Prävention)"
+      ],
+      [
+       "Ein Familienhelfer unterstützt Eltern bei der Erziehung.",
+       "Hilfen zur Erziehung"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Die {{Kinder- und Jugendhilfe}} will junge Menschen in ihrer {{Entwicklung}} fördern und {{Benachteiligungen}} entgegenwirken. Die {{Sozialhilfe}} sichert den {{Lebensunterhalt}} in Not. Die {{Gesundheitshilfe}} schützt und stellt Gesundheit wieder her. Die {{Altenhilfe}} ermöglicht Teilhabe am Leben in der Gemeinschaft.",
+     "woerter": [
+      "Kinder- und Jugendhilfe",
+      "Entwicklung",
+      "Benachteiligungen",
+      "Sozialhilfe",
+      "Lebensunterhalt",
+      "Gesundheitshilfe",
+      "Altenhilfe",
+      "Rentenversicherung",
+      "Strafvollzug",
+      "Schulrecht"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zu den Aufgabenbereichen treffen zu?",
+     "aussagen": [
+      {
+       "text": "Die Kinder- und Jugendhilfe ist im SGB VIII geregelt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Sozialhilfe hilft zum Lebensunterhalt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Die Gesundheitshilfe kümmert sich nur um alte Menschen.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Die Altenhilfe will Teilhabe am Leben in der Gemeinschaft ermöglichen.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Kinder- und Jugendhilfe",
+       "items": [
+        "Hilfen zur Erziehung",
+        "Jugendarbeit"
+       ]
+      },
+      {
+       "name": "Sozialhilfe",
+       "items": [
+        "Wohnungslosenhilfe",
+        "Hilfe zur Pflege"
+       ]
+      },
+      {
+       "name": "Gesundheitshilfe",
+       "items": [
+        "Sozialdienst im Krankenhaus",
+        "Suchtprävention"
+       ]
+      },
+      {
+       "name": "Altenhilfe",
+       "items": [
+        "Seniorentreff",
+        "Demenzberatung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Frau Demir arbeitet in der Beratungsstelle einer Stadt. Heute berät sie einen 16-Jährigen mit Schulangst, vermittelt einer 85-Jährigen einen Pflegedienst und hilft einem Mann ohne Wohnung bei einem Antrag auf Leistungen. Ordne die drei Fälle je einem Aufgabenbereich zu.",
+     "hinweis": "4–6 Sätze",
+     "muster": "16-Jähriger: Kinder- und Jugendhilfe; 85-Jährige: Altenhilfe (Pflege); Mann ohne Wohnung: Sozialhilfe.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_02"
+ ]
+}

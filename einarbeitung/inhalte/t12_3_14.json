@@ -1,0 +1,164 @@
+{
+ "titel": "Fallbearbeitung Frau Müller: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Fallbearbeitung Frau Müller** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Frau Müller (35) hat vier Kinder von drei Männern, der Sohn Sebastian (10) ist in der Schule kaum tragbar und lebt jetzt im Wohnheim. In der Beratung sagt sie: „Ich kann nicht mehr. Alle sagen, ich bin schuld.“"
+    },
+    {
+     "typ": "text",
+     "text": "Bei der **Fallbearbeitung** mit dem Life Model beschreibt man Person und Umwelten, prüft die **Transaktionen** (anpassungsfördernd/-feindlich), analysiert **Habitat und Nische**, **Lebens-Stress**, **Coping** und **Ressourcen**. Daraus werden Ziele für die Person und für die Umwelt abgeleitet."
+    },
+    {
+     "typ": "text",
+     "text": "Im Fall Müller/Sebastian zeigt sich: Probleme sind selten nur „im Kind“ oder nur „in der Mutter“ verortet, sondern im Zusammenspiel von Person, Familie, Schule und Gesellschaft."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Fallbearbeitung: Person – Umwelten – Transaktionen – Habitat/Nische – Stress/Coping/Ressourcen – Ziele."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Womit beginnt die Fallbearbeitung nach dem Life Model?",
+     "optionen": [
+      "Mit der Beschreibung von Person und Umwelt",
+      "Mit einem Urteil",
+      "Mit einer Strafe"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Mit der Beschreibung von Person und Umwelt"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Frau Müller ist überfordert und lässt die Kinder oft allein.",
+       "anpassungsfeindliche Transaktion"
+      ],
+      [
+       "Eine Familienhelferin unterstützt Frau Müller im Alltag.",
+       "soziale Ressource"
+      ],
+      [
+       "Sebastian lebt im Wohnheim der Schule und macht Fortschritte im Sozialverhalten.",
+       "anpassungsfördernde Transaktion"
+      ],
+      [
+       "In der Schule hat Sebastian kaum Einflussmöglichkeiten.",
+       "schlechte Nische"
+      ],
+      [
+       "Die Familie lebt in einer kleinen Wohnung mit vier Kindern.",
+       "Habitat"
+      ],
+      [
+       "Frau Müller möchte die Erziehung wieder selbst schaffen.",
+       "Selbstbestimmung"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Bei der Fallbearbeitung nach dem Life Model beschreibe ich zuerst die {{Person}} und ihre {{Umwelten}}, dann die {{Transaktionen}}, die anpassungsfördernd oder {{anpassungsfeindlich}} sein können. Danach prüfe ich {{Habitat}} und {{Nische}}, Lebens-Stress, {{Coping}} und Ressourcen und leite Ziele für Person und {{Umwelt}} ab.",
+     "woerter": [
+      "Person",
+      "Umwelten",
+      "Transaktionen",
+      "anpassungsfeindlich",
+      "Habitat",
+      "Nische",
+      "Coping",
+      "Umwelt",
+      "Strafe",
+      "Gutachten",
+      "Testung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur Fallbearbeitung treffen zu?",
+     "aussagen": [
+      {
+       "text": "Man analysiert Person und Umwelt zugleich.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Man sucht nur nach Schuld der Mutter.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Ressourcen werden erfasst.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Ziele betreffen Person und Umwelt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Person",
+       "items": [
+        "Frau Müller ist alleinerziehend",
+        "Sebastian zeigt aggressives Verhalten"
+       ]
+      },
+      {
+       "name": "Umwelt",
+       "items": [
+        "Schule und Wohnheim",
+        "Jugendamt und Familienhilfe"
+       ]
+      },
+      {
+       "name": "Transaktion",
+       "items": [
+        "Schulverweis als Folge",
+        "Fortschritte im Wohnheim"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Frau Müller ist alleinerziehend, sie hat vier Kinder von drei Vätern, zu denen kaum Kontakt besteht. Sie ist überfordert; die Kinder waren oft sich selbst überlassen. Sebastian (10) zeigt aggressives Verhalten, wurde von der Schule an eine Schule zur Erziehungshilfe verwiesen und lebt im Wohnheim, wo er Fortschritte macht. Eine Familienhelferin unterstützt die Mutter. Beschreibe zwei anpassungsfeindliche und zwei anpassungsfördernde Transaktionen.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Feindlich: Überforderung und Alleinsein, Schulausschluss. Fördernd: Wohnheim, Familienhilfe.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_14"
+ ]
+}

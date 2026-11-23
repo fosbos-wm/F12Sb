@@ -1,0 +1,163 @@
+{
+ "titel": "Life Model: Ökologie und Transaktion: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Life Model: Ökologie und Transaktion** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Eine Kleinstadt baut ein neues Gewerbegebiet und eine breite Umgehungsstraße. Zuerst freuen sich viele über Arbeitsplätze, dann klagen Anwohner über Lärm und ziehen weg. „Alles hängt irgendwie zusammen“, sagt eine Sozialarbeiterin."
+    },
+    {
+     "typ": "text",
+     "text": "Das **Life Model** (Lebensvollzugsmodell) wurde 1980 von **Carel Germain** und **Alex Gitterman** als ökologisches Denkmodell der Sozialen Arbeit entwickelt. **Ökologie** ist die Lehre von den Beziehungen zwischen Organismen und Umwelten. Probleme entstehen als Folge einer fehlgelaufenen Beziehung zwischen Person und Umwelt."
+    },
+    {
+     "typ": "text",
+     "text": "**Transaktion** ist die ständige gegenseitige Beeinflussung von Individuum und Umwelt im Sinne von Wirkung und Rückwirkung, wobei sich beide durch diese Austauschprozesse selbst im Verlauf der Zeit formen und verändern. Daraus folgt die **Doppelverpflichtung** der Sozialen Arbeit: Hilfe für die Person und Gestaltung der Umwelt."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Life Model: Person-in-Umwelt. Transaktion = Wirkung und Rückwirkung. Soziale Arbeit hilft der Person und gestaltet die Umwelt."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Wer entwickelte das Life Model?",
+     "optionen": [
+      "Carel Germain und Alex Gitterman",
+      "Sigmund Freud und Carl Rogers",
+      "Hobmair und Thiersch"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Carel Germain und Alex Gitterman"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Menschen bauen Häuser dem Klima angepasst; die gebauten Häuser verändern ihre Lebensverhältnisse.",
+       "Transaktion"
+      ],
+      [
+       "Eine Schule bietet zu wenig Räume; Schüler weichen auf Flure aus.",
+       "Person-Umwelt-Beziehung"
+      ],
+      [
+       "Die Sozialarbeiterin berät die Familie und verbessert die Wohnsituation.",
+       "Doppelverpflichtung"
+      ],
+      [
+       "Ein Straßennetz wird ausgebaut, Lärm und Abgase belasten Anwohner.",
+       "Rückwirkung der Umwelt"
+      ],
+      [
+       "Das Problem wird nur im Inneren der Person gesehen.",
+       "einseitige Sicht"
+      ],
+      [
+       "Soziale Arbeit schaut auf Person und Umwelt zugleich.",
+       "ökologische Sichtweise"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Das {{Life Model}} wurde 1980 von Carel Germain und Alex {{Gitterman}} als {{ökologisches}} Denkmodell entwickelt. {{Ökologie}} ist die Lehre von den Beziehungen zwischen Organismen und {{Umwelten}}. Probleme entstehen als Folge einer fehlgelaufenen Beziehung zwischen {{Person}} und Umwelt. Die ständige gegenseitige Beeinflussung heißt {{Transaktion}}.",
+     "woerter": [
+      "Life Model",
+      "Gitterman",
+      "ökologisches",
+      "Ökologie",
+      "Umwelten",
+      "Person",
+      "Transaktion",
+      "Interaktion",
+      "Kommunikation",
+      "Konditionierung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zum Life Model treffen zu?",
+     "aussagen": [
+      {
+       "text": "Es verbindet die ökologische Sicht mit einer Methode für die Praxis.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es sieht Probleme nur im Inneren der Person.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Person und Umwelt beeinflussen sich wechselseitig.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Es wurde in den USA entwickelt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "Person",
+       "items": [
+        "Bedürfnisse, Rechte, Ziele",
+        "Anpassungsfähigkeit"
+       ]
+      },
+      {
+       "name": "Umwelt",
+       "items": [
+        "natürliche, kulturelle, soziale, ökonomische Bereiche",
+        "Anforderungen und Möglichkeiten"
+       ]
+      },
+      {
+       "name": "Transaktion",
+       "items": [
+        "Wirkung und Rückwirkung",
+        "endlose Spirale wechselseitiger Beeinflussung"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Eine Schule hat nur einen kleinen Hof. Die Jugendlichen stehen in Gruppen an der Straße, Anwohner beschweren sich über Lärm, die Schule verbietet das Verlassen des Geländes. Die Jugendlichen verlagern ihre Treffen auf den Park. Erkläre den Wirkkreislauf in vier Schritten.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Umwelt (kleiner Hof) wirkt auf Person; Personen verändern Verhalten (stehen an Straße); Umwelt reagiert (Beschwerden, Verbot); Personen wirken erneut (Park).",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_09"
+ ]
+}

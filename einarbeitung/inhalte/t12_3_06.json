@@ -1,0 +1,161 @@
+{
+ "titel": "Verhaltensmodifikation II: operantes Konditionieren: Selbstlernkurs",
+ "modulart": "selbstlern",
+ "lb": 3,
+ "einleitung": "Du erarbeitest das Thema **Verhaltensmodifikation II: operantes Konditionieren** und wendest es auf Beispiele und einen Fall an. Etwa 25 Minuten.",
+ "abschnitte": [
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 1: Situation und Kernwissen",
+   "bloecke": [
+    {
+     "typ": "situation",
+     "label": "Lernsituation",
+     "text": "Fritz ist der Klassenclown. Jedes Mal, wenn er stört, lachen die anderen und der Lehrer wendet sich ihm zu. Die Sozialpädagogin sagt: „Wir ändern nicht Fritz, wir ändern, was nach dem Stören passiert.“"
+    },
+    {
+     "typ": "text",
+     "text": "Auf der Grundlage des **operanten Konditionierens** wird entweder unerwünschtes Verhalten abgebaut oder erwünschtes aufgebaut. **Differentielle Verstärkung** meint das Ignorieren unerwünschten Verhaltens bei gleichzeitigem Verstärken von erwünschten Verhaltensweisen. Voraussetzung ist die **Bereitschaft** des Klienten (Thorndikes Gesetz der Bereitschaft); die Fachkraft schafft Motivation, z. B. durch Anknüpfen an Bedürfnisse oder in Aussicht gestellte Belohnung."
+    },
+    {
+     "typ": "text",
+     "text": "**Verhaltensformung (Shaping)** meint den schrittweisen Aufbau eines Verhaltens, indem man bereits kleine Schritte in Richtung des Endverhaltens systematisch verstärkt. Zuerst wird jedes ähnliche Verhalten verstärkt, dann nur noch Schritte näher am Ziel, schließlich das Endverhalten, dann unregelmäßig, bis die Verstärkung überflüssig wird."
+    },
+    {
+     "typ": "merke",
+     "label": "Merke",
+     "text": "Operant: Differentielle Verstärkung = ignorieren + verstärken. Shaping = kleine Schritte zum Ziel verstärken."
+    }
+   ]
+  },
+  {
+   "kicker": "LB 12.3",
+   "titel": "Seite 2: Aufgaben mit Rückmeldung",
+   "bloecke": [
+    {
+     "typ": "mc",
+     "frage": "Was ist differentielle Verstärkung?",
+     "optionen": [
+      "Unerwünschtes Verhalten ignorieren und erwünschtes sofort verstärken",
+      "Jedes Verhalten bestrafen",
+      "Nur belohnen, ohne zu ignorieren"
+     ],
+     "richtig": 0,
+     "erklaerung": "Richtig: Unerwünschtes Verhalten ignorieren und erwünschtes sofort verstärken"
+    },
+    {
+     "typ": "zuordnung",
+     "titel": "Ordne den Beispielen den passenden Begriff zu.",
+     "paare": [
+      [
+       "Fritz stört den Unterricht: Lehrer und Klasse schauen weg. Arbeitet er mit, bekommt er Lob.",
+       "differentielle Verstärkung"
+      ],
+      [
+       "Ein Kind spricht nicht. Schon ein einzelner Laut wird belohnt, später Nachahmung.",
+       "Verhaltensformung (Shaping)"
+      ],
+      [
+       "Der Lehrer wendet sich Fritz beim Stören nicht mehr zu.",
+       "Nicht-Verstärkung"
+      ],
+      [
+       "Der Betreuer knüpft an das Bedürfnis des Klienten nach Anerkennung an.",
+       "Schaffen von Motivation"
+      ],
+      [
+       "Das Kind trägt die Brille, nachdem erst das Aufnehmen des Gestells verstärkt wurde.",
+       "Teilschritt zum Endverhalten"
+      ],
+      [
+       "Ein Klickton kündigt Süßigkeiten an und wirkt dann selbst verstärkend.",
+       "sekundärer Verstärker"
+      ]
+     ]
+    },
+    {
+     "typ": "lueckentext",
+     "titel": "Ergänze den Text.",
+     "text": "Auf der Grundlage des operanten Konditionierens ist die {{differentielle Verstärkung}} das Ignorieren unerwünschten Verhaltens bei gleichzeitigem {{Verstärken}} erwünschten Verhaltens. Bei der {{Verhaltensformung}} (shaping) werden bereits kleine Schritte in Richtung des {{Endverhaltens}} verstärkt. Voraussetzung ist die {{Bereitschaft}} des Klienten, die durch Motivation geschaffen wird.",
+     "woerter": [
+      "differentielle Verstärkung",
+      "Verstärken",
+      "Verhaltensformung",
+      "Endverhaltens",
+      "Bereitschaft",
+      "Gegenkonditionierung",
+      "Flooding",
+      "Entspannung"
+     ]
+    },
+    {
+     "typ": "kprim",
+     "stamm": "Welche Aussagen zur differentiellen Verstärkung treffen zu?",
+     "aussagen": [
+      {
+       "text": "Unerwünschtes Verhalten wird nicht verstärkt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Erwünschtes Verhalten wird sofort verstärkt.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      },
+      {
+       "text": "Man bestraft das unerwünschte Verhalten laut.",
+       "richtig": false,
+       "erklaerung": "Das stimmt nicht."
+      },
+      {
+       "text": "Wegnahme verstärkender Bedingungen ist Teil des Vorgehens.",
+       "richtig": true,
+       "erklaerung": "Das stimmt."
+      }
+     ]
+    },
+    {
+     "typ": "sortieren",
+     "titel": "Sortiere die Aussagen.",
+     "kategorien": [
+      {
+       "name": "differentielle Verstärkung",
+       "items": [
+        "Stören ignorieren",
+        "Mitarbeit sofort loben"
+       ]
+      },
+      {
+       "name": "Shaping",
+       "items": [
+        "Teilschritte in Richtung Ziel verstärken",
+        "Verstärkung allmählich ausschleichen"
+       ]
+      },
+      {
+       "name": "Motivation schaffen",
+       "items": [
+        "Belohnung in Aussicht stellen",
+        "an Bedürfnisse anknüpfen"
+       ]
+      }
+     ]
+    },
+    {
+     "typ": "frei",
+     "frage": "Fritz stört im Unterricht, indem er laut Witze macht. Mitschüler lachen, der Lehrer ermahnt ihn. Wenn Fritz einmal ruhig arbeitet, wird er nicht beachtet. Erkläre, welche Bedingungen das Stören aufrechterhalten.",
+     "hinweis": "4–6 Sätze",
+     "muster": "Aufmerksamkeit durch Lachen und Ermahnen wirkt als Verstärkung; ruhige Mitarbeit wird nicht beachtet.",
+     "kriterien": [
+      "Fachbegriffe genannt",
+      "Fallbezug",
+      "begründet"
+     ]
+    }
+   ]
+  }
+ ],
+ "themen": [
+  "t12_3_06"
+ ]
+}
