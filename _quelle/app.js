@@ -22778,7 +22778,7 @@ function lxBibTh(i,e){
  return`<button type="button" class="kw-datei" data-kw="ea" data-id="${esc(i.eaId)}"><span>${esc(i.titel)}</span><small>${i.n?i.n+" Aufgaben":"Ansehen"}</small></button>`;
 }
 function lxBibSchuelerBtn(e){
- return`<div class="lxb-mehr"><button type="button" class="secondary" data-bb="pick" data-n="g" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB I</button><button type="button" class="secondary" data-bb="pick" data-n="e" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB II</button><button type="button" class="secondary" data-bb="pick" data-n="a" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB III</button></div>`;
+ return`<div class="lxb-mehr"><button type="button" class="secondary" data-bb="pick" data-n="g" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB I</button><button type="button" class="secondary" data-bb="pick" data-n="e" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB II</button><button type="button" class="secondary" data-bb="pick" data-n="a" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB III</button><button type="button" class="secondary lxb-grau1" data-bb="pick" data-n="s" data-id="${esc(e.id)}">+ Selbstlernkurs</button><button type="button" class="secondary lxb-grau2" data-bb="pick" data-n="f" data-id="${esc(e.id)}">+ Fachaufsatztraining</button></div>`;
 }
 function lxBibUebAuf(){const k=[...document.querySelectorAll(".kw-seite .lx-sek>.lx-sek-k")].find(x=>/Üben/.test(x.textContent));if(k&&window.lxSekAuf)lxSekAuf(k.parentElement,true)}
 async function lxBibListeSeite(e,ph,F){
@@ -22827,23 +22827,22 @@ async function lxBibSpeichern(tid){
  KW.basis[tid]={an:new Set(an),aus:new Set(aus)};window.__fsDirty=Date.now();toast("Gespeichert. Der Lernpfad der Schüler:innen zeigt jetzt diese Auswahl.");render();
 }
 async function lxBibPicker(tid,n){
- const e=kwThemaById(tid);if(!e||isTeacher())return;
- const ph=LX_CFG.phasen().find(p=>p.id===e.phase),D=await lxBibLade(e,ph),G={g:"afb1",e:"afb2",a:"afb3"}[n],AN={g:"AFB I",e:"AFB II",a:"AFB III"}[n];
+ const e=kwThemaById(tid);if(!e||kwLehrer())return;
+ const ph=LX_CFG.phasen().find(p=>p.id===e.phase),D=await lxBibLade(e,ph),G={g:"afb1",e:"afb2",a:"afb3",s:"slk",f:"fa"}[n],AN={g:"AFB I",e:"AFB II",a:"AFB III",s:"Selbstlernkurs",f:"Fachaufsatztraining"}[n],SF=n==="s"||n==="f";
  const alle=[...D.items,...D.pool].filter(i=>!D.bib.vis.has(i.key));
  let l=alle.filter(i=>i.grp===G);
  let extra=[];
- if(n==="e")extra=alle.filter(i=>i.grp==="slk");
- if(n==="a")extra=alle.filter(i=>i.grp==="fa"&&!i.tr&&!i.modId);
+ if(n==="s")l=l.filter(i=>i.key.startsWith("ea:"));
  const zl=i=>`<label class="check lxb-pz"><input type="checkbox" class="lxbPz" value="${esc(i.key)}"><span><b>${esc(i.titel)}</b>${i.art?`<small>${esc(i.art)}${i.n?" · "+i.n+" Aufgaben":""}</small>`:""}</span></label>`;
- const T={g:"Begriffe und Grundlagen",e:"Theorie und Zusammenhänge",a:"Anwendung und Transfer"}[n];
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">${esc(kwKurz(e)).toUpperCase()}</div><h2>Weitere Übungsaufgaben · ${AN}</h2><p style="color:var(--muted);margin:0 0 8px">${T}. Das sind alle weiteren Aufgaben zu diesem Thema. Was du ankreuzt, erscheint in deinem Lernpfad bei ${AN}.</p>
-  <div class="form lxb-pick">${l.length?l.map(zl).join(""):`<div class="kw-leer">Hier gibt es keine weiteren Übungsaufgaben. Alles ist schon in deinem Lernpfad.</div>`}
+ const T={g:"Begriffe und Grundlagen",e:"Theorie und Zusammenhänge",a:"Anwendung und Transfer",s:"Selbstlernkurse",f:"Fachaufsatztrainings"}[n];
+ modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">${esc(kwKurz(e)).toUpperCase()}</div><h2>${SF?"Weiter"+(n==="s"?"en ":"es ")+AN+" hinzufügen":"Weitere Übungsaufgaben · "+AN}</h2><p style="color:var(--muted);margin:0 0 8px">${T}. Das sind alle weiteren Aufgaben zu diesem Thema. Was du ankreuzt, erscheint in deinem Lernpfad ${SF?"im grauen Block „"+AN+"“":"bei "+AN}.</p>
+  <div class="form lxb-pick">${l.length?l.map(zl).join(""):`<div class="kw-leer">Hier gibt es nichts Weiteres. Alles ist schon in deinem Lernpfad.</div>`}
   ${extra.length?`<h4 class="lxb-h4">${n==="e"?"Selbstlernkurse":"Fachaufsatztraining"}</h4>${extra.map(zl).join("")}`:""}
   <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button>${(l.length||extra.length)?`<button class="primary" id="lxbPzSave">Zum Lernpfad hinzufügen</button>`:""}</div></div>`);
  const sv=$("lxbPzSave");if(sv)sv.onclick=async()=>{
   const ks=[...document.querySelectorAll(".lxbPz:checked")].map(c=>c.value);if(!ks.length)return toast("Bitte mindestens eine Aufgabe ankreuzen.");
   try{const neu=[...new Set([...(D.fort.zusatz||[]),...ks])];
-   await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});
+   if(!isTeacher())await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});
    KW.fort[tid]={...(KW.fort[tid]||{}),zusatz:neu};window.__lxPfadWahl[tid]="ueben";closeModal();toast(ks.length===1?"Hinzugefügt.":ks.length+" Aufgaben hinzugefügt.");render();setTimeout(lxBibUebAuf,500);
   }catch(x){console.error(x);toast("Das hat nicht geklappt.")}};
 }
@@ -22852,7 +22851,7 @@ document.addEventListener("click",async ev=>{
  const a=b.dataset.bb,tid=b.dataset.id;
  try{
   if(a==="pick"){await lxBibPicker(tid,b.dataset.n);return}
-  if(a==="zdel"){const k=b.dataset.k,f=KW.fort[tid]||{},neu=(f.zusatz||[]).filter(x=>x!==k);await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});KW.fort[tid]={...f,zusatz:neu};window.__lxPfadWahl[tid]="ueben";render();setTimeout(lxBibUebAuf,500);return}
+  if(a==="zdel"){const k=b.dataset.k,f=KW.fort[tid]||{},neu=(f.zusatz||[]).filter(x=>x!==k);if(!isTeacher())await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});KW.fort[tid]={...f,zusatz:neu};window.__lxPfadWahl[tid]="ueben";render();setTimeout(lxBibUebAuf,500);return}
   if(!isTeacher())return;
   if(a==="lib"){lxBibLibModal(tid);return}
   if(a==="add"){closeModal();await lxBibAdd(b.dataset.g,tid);return}
@@ -22932,23 +22931,26 @@ async function renderKwThema(){
   teile.push((lehrer)?lxSek(4,LXF[4].n,"Das Thema Schritt für Schritt, wenn du mehr Zeit zum Verstehen brauchst.",s4in,aktionBausteine):"");
   // 4 Üben: Begriffe, Theorie, Anwendung, je mit Basis, Plus und Vertieft
   const ub=[];
-  ["uebung","vertiefung1","vertiefung2","vertiefung3"].forEach(kat=>mats.filter(m=>m.kategorie===kat).forEach(m=>{const mt=lxUebMeta(m,kat,K,e,ph);ub.push({h:lxUebDz(m,kat,K,e,ph),t:String(m.titel||""),b:lxBereichArt(mt.art,kat),n:mt.niv,z:slPos("m:"+m.id)?"m:"+m.id:""})}));
-  faMod.forEach(m=>ub.push({h:modZeile(m),b:"a",n:"a",z:slPos("mod:"+m.id)?"mod:"+m.id:""}));
-  if(trListe)trListe.split(/(?=<div class="lx-ub")/).filter(x=>x.trim()).forEach(h=>{const mm=h.match(/lx-pr-titel">([^<]*)</);ub.push({h,t:mm?mm[1]:"Training",b:"a",n:"a"})});
-  if(bibD){(bibD.fort.zusatz||[]).forEach(k=>{const q=bibD.pool.find(x=>x.key===k);if(q){const kat=q.niv==="a"?"vertiefung3":q.niv==="e"?"vertiefung2":"uebung";ub.push({h:lxUebDz({titel:q.titel,url:q.url,id:""},kat,K,e,ph),t:q.titel,b:lxBereichArt(q.art,kat),n:q.niv,z:k})}else if(k.startsWith("ea:")){const it=bibD.items.find(x=>x.key===k);if(it&&!bibD.bib.base.has(k))ub.push({h:lxUebDzHtml(`<div class="kw-dz"><button type="button" class="kw-datei" data-kw="ea" data-id="${esc(it.eaId)}"><span>${esc(it.titel)}</span><small>Selbstlernkurs</small></button></div>`,ph.lbNum,kwKurz(e),"Selbstlernkurs","e"),t:it.titel,b:"t",n:"e",z:k})}})}
+  ["uebung","vertiefung1","vertiefung2","vertiefung3"].forEach(kat=>mats.filter(m=>m.kategorie===kat).forEach(m=>{const mt=lxUebMeta(m,kat,K,e,ph);ub.push({h:lxUebDz(m,kat,K,e,ph),t:String(m.titel||""),b:lxBereichArt(mt.art,kat),n:mt.niv,fa:String(m.url||"").startsWith("fa:")||/Fachaufsatz/i.test(mt.art||""),z:slPos("m:"+m.id)?"m:"+m.id:""})}));
+  faMod.forEach(m=>ub.push({h:modZeile(m),b:"a",n:"a",fa:true,z:slPos("mod:"+m.id)?"mod:"+m.id:""}));
+  if(trListe)trListe.split(/(?=<div class="lx-ub")/).filter(x=>x.trim()).forEach(h=>{const mm=h.match(/lx-pr-titel">([^<]*)</),km=h.match(/data-kw="ea" data-id="([^"]+)"/),tk=km?"tr:"+km[1]:"";ub.push({h,t:mm?mm[1]:"Training",b:"a",n:"a",fa:true,z:tk&&slPos(tk)?tk:""})});
+  if(bibD){(bibD.fort.zusatz||[]).forEach(k=>{const q=bibD.pool.find(x=>x.key===k);if(q){const kat=q.niv==="a"?"vertiefung3":q.niv==="e"?"vertiefung2":"uebung";ub.push({h:lxUebDz({titel:q.titel,url:q.url,id:""},kat,K,e,ph),t:q.titel,b:lxBereichArt(q.art,kat),n:q.niv,fa:q.grp==="fa",z:k})}else if(k.startsWith("ea:")){const it=bibD.items.find(x=>x.key===k);if(it&&!bibD.bib.base.has(k))ub.push({h:lxUebDzHtml(`<div class="kw-dz"><button type="button" class="kw-datei" data-kw="ea" data-id="${esc(it.eaId)}"><span>${esc(it.titel)}</span><small>Selbstlernkurs</small></button></div>`,ph.lbNum,kwKurz(e),"Selbstlernkurs","e"),t:it.titel,b:"t",n:"e",sl:true,z:k})}})}
   const txtT=mats.filter(m=>m.kategorie==="lehrtext").map(m=>m.titel).filter(Boolean);
   const ubHtml=LX_EBENEN.map((B,ix)=>{
-   const l=ub.filter(x=>x.b===B.k);
+   const l=ub.filter(x=>x.b===B.k&&(lehrer||!(x.fa||x.sl)));
    const PRI={b:[/^Zuordn/i,/L\u00FCckentext/i,/Karteikarten/i],t:[/Fall-?Diagnose/i,/Struktur/i],a:[/K-Prim/i,/Rollenspiel/i,/Fall/i]}[B.k]||[];
    let pk=null;for(const r of PRI){pk=l.find(x=>x.t&&r.test(x.t));if(pk)break}if(!pk)pk=l.find(x=>x.t)||l[0];
    const rest=l.filter(x=>x!==pk);
    const zd=x=>x.z?`<button type="button" class="lxq-zdel" data-bb="zdel" data-id="${esc(e.id)}" data-k="${esc(x.z)}" title="Wieder entfernen">×</button>`:"";const inh=l.length?(lehrer?`<div class="lx-eb-ch">${pk.h}</div>`:l.map(x=>`<div class="lx-eb-ch" style="position:relative">${x.h}${zd(x)}</div>`).join("")):`<div class="kw-leer">${lehrer?"noch leer":"Hier kommen bald Übungen."}</div>`;
    const kt=["uebung","vertiefung2","vertiefung3"][ix];
    const mehr=lehrer?`<div class="lx-mehr"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${kt}">+ Weitere Aufgaben</button>${(KW.hideList||[]).some(h=>h.key.startsWith("repo-")&&h.thema===e.id)?`<button type="button" class="text-button" data-kw="hiderestore" data-id="${esc(e.id)}">Entfernte Materialien zur\xFCckholen</button>`:""}</div>`:"";
-   return`<div class="lx-eb" style="--k:${B.c};--kb:${B.bg};--ek:${B.c};--ebg:${B.bg};margin-left:${ix*26}px"><div class="lx-eb-n"><b>${B.nr}</b><small>${B.afb}</small></div><div class="lx-eb-t"><h4>Ebene ${B.nr} \xB7 ${B.n}</h4><p>${B.d}</p>${txtT.length?`<p class="lx-eb-tx">Texte: ${esc(txtT.join(", "))}</p>`:""}${inh}</div></div>`;
+   return`<div class="lx-eb" style="--k:${B.c};--kb:${B.bg};--ek:${B.c};--ebg:${B.bg};margin-left:${ix*26}px;--ix:${ix}"><div class="lx-eb-n"><b>${B.nr}</b><small>${B.afb}</small></div><div class="lx-eb-t"><h4>Ebene ${B.nr} \xB7 ${B.n}</h4>${lehrer?`<p>${B.d}</p>`:""}${lehrer&&txtT.length?`<p class="lx-eb-tx">Texte: ${esc(txtT.join(", "))}</p>`:""}${inh}</div></div>`;
   }).join("");
+  const gIt=x=>`<div class="lxq-it">${x.h}${x.z?`<button type="button" class="lxq-zdel" data-bb="zdel" data-id="${esc(e.id)}" data-k="${esc(x.z)}" title="Wieder entfernen">\xD7</button>`:""}</div>`;
+  const slkIn=(karten.length?`<div class="kw-baustliste">${karten.join("")}</div>`:"")+ub.filter(x=>x.sl).map(gIt).join(""),faIn=ub.filter(x=>x.fa).map(gIt).join("");
+  const lxAGrid=`<div class="lxA-grid${slkIn||faIn?"":" nur"}"><div class="lxA-tr">${ubHtml}</div>${slkIn||faIn?`<aside class="lxA-gr">${slkIn?`<section class="lxA-g1"><h4>Selbstlernkurs</h4>${slkIn}</section>`:""}${faIn?`<section class="lxA-g2"><h4>Fachaufsatztraining</h4>${faIn}</section>`:""}</aside>`:""}</div>`;
   const ubAdd=lehrer?`<div class="kw-aktionen"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="uebung">+ Ebene 1 (AFB I)</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="vertiefung2">+ Ebene 2 (AFB II)</button><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="vertiefung3">+ Ebene 3 (AFB III)</button><button type="button" class="secondary kw-add" data-kw="slkadd" data-id="${esc(e.id)}">+ Selbstlernkurs</button><button type="button" class="secondary kw-add" data-kw="faadd" data-id="${esc(e.id)}">+ Fachaufsatztraining</button>${(KW.hideList||[]).some(h=>h.key.startsWith("repo-")&&h.thema===e.id)?`<button type="button" class="text-button" data-kw="hiderestore" data-id="${esc(e.id)}">Entfernte Materialien zur\xFCckholen</button>`:""}</div>`:lxBibSchuelerBtn(e);
-  teile.push((ubHtml.trim()||lehrer)?lxSek(3,LXF[3].n,"Drei Ebenen \u2013 der Anspruch steigt von Stufe zu Stufe.",`${!lehrer&&karten.length?`<h4 class="lxb-h4">Selbstlernkurse und Lerneinheiten</h4>${s4in}`:""}<div class="lx-ben"><p class="lx-anl">Arbeite dich von oben nach unten: Erst die Begriffe sicher kl\xE4ren, dann die Theorie verstehen, dann das Wissen in der Praxis anwenden.</p>${ubHtml}<p class="lx-leg">${LX_EBENEN.map((B,i)=>`<span><i style="background:${B.c}"></i>${["Rot","Blau","Gr\xFCn"][i]} = ${["Begriffe (Wissen)","Theorie (Verstehen)","Anwendung (\xDCbertragen)"][i]}</span>`).join(" \xB7 ")}</p></div>`,ubAdd):"");
+  teile.push((ubHtml.trim()||lehrer)?lxSek(3,LXF[3].n,"Drei Ebenen \u2013 der Anspruch steigt von Stufe zu Stufe.",`<div class="lx-ben${lehrer?"":" lxA"}"><p class="lx-anl">Arbeite dich von oben nach unten: Erst die Begriffe sicher kl\xE4ren, dann die Theorie verstehen, dann das Wissen in der Praxis anwenden.</p>${lehrer?ubHtml:lxAGrid}<p class="lx-leg">${LX_EBENEN.map((B,i)=>`<span><i style="background:${B.c}"></i>${["Rot","Blau","Gr\xFCn"][i]} = ${["Begriffe (Wissen)","Theorie (Verstehen)","Anwendung (\xDCbertragen)"][i]}</span>`).join(" \xB7 ")}</p></div>`,ubAdd):"");
   // 5 Check-out (Schüler:in) und Test der Lehrkraft
   const hatCo=checkinAusBank(e.id+"@ende").length>0;
   teile.push((lehrer||hatCo)?lxSek(6,LXF[6].n,"Zeig, was du kannst: sichern, anwenden, erklären und begründen, dann zurückblicken.",`<div class="kw-aktionen"><button class="primary" data-ce="co" data-id="${esc(e.id)}">Check-out ${lehrer?"ansehen und bearbeiten":"starten"}</button></div>`):"");
