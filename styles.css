@@ -44,3 +44,5 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lxa-k header span{color:var(--muted)}
 .lxa-k p{margin:8px 0}
 .lxa-th{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+
+.kw-seite.lx-nurpfad .lx-sek:not(.lx-open){display:none}
