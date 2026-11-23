@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Differentielle Verstärkung",
+  "Shaping"
+ ],
+ "karten": [
+  {
+   "t": "Stören ignorieren",
+   "s": 0
+  },
+  {
+   "t": "Mitarbeit sofort loben",
+   "s": 0
+  },
+  {
+   "t": "Aufmerksamkeit entziehen",
+   "s": 0
+  },
+  {
+   "t": "Verstärkung bei erwünschtem Verhalten",
+   "s": 0
+  },
+  {
+   "t": "Teilschritte verstärken",
+   "s": 1
+  },
+  {
+   "t": "Sprechenlernen in Etappen",
+   "s": 1
+  },
+  {
+   "t": "Verstärkung ausschleichen",
+   "s": 1
+  },
+  {
+   "t": "Ziel: neues Verhalten aufbauen",
+   "s": 1
+  }
+ ]
+}

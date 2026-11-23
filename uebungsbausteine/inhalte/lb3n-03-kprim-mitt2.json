@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Handlungskonzepten treffen zu?",
+   "statements": [
+    {
+     "text": "Handlungskonzepte beruhen auf wissenschaftlichen Grundlagen.",
+     "richtig": true
+    },
+    {
+     "text": "Ziel und Methoden hängen voneinander ab.",
+     "richtig": true
+    },
+    {
+     "text": "Sie schreiben jeden Schritt starr vor, ohne Anpassung.",
+     "richtig": false
+    },
+    {
+     "text": "Sie sollen professionelles Handeln ermöglichen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Einzelhilfe treffen zu?",
+   "statements": [
+    {
+     "text": "Es geht in der Einzelhilfe um Schuld oder Unschuld.",
+     "richtig": false
+    },
+    {
+     "text": "Vertraulichkeit ist Voraussetzung für effektive Hilfe.",
+     "richtig": true
+    },
+    {
+     "text": "Selbstbestimmung des Klienten ist wichtig.",
+     "richtig": true
+    },
+    {
+     "text": "Der Sozialarbeiter löst das Problem für den Klienten.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

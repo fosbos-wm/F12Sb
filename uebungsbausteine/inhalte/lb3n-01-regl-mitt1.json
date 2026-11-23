@@ -1,0 +1,33 @@
+{
+ "titel": "Regler: privat oder professionell?",
+ "anleitung": "Schiebe den Regler für jede Aussage an die passende Stelle zwischen den beiden Polen.",
+ "links": "privat",
+ "rechts": "professionell",
+ "items": [
+  {
+   "t": "Eine Nachbarin kocht spontan für den kranken Herrn Maier.",
+   "w": 10,
+   "e": "Spontane private Hilfe."
+  },
+  {
+   "t": "Ein Verein organisiert ehrenamtlich Hausaufgabenhilfe ohne Ausbildung.",
+   "w": 35,
+   "e": "Zwischen privat und professionell, ehrenamtlich."
+  },
+  {
+   "t": "Eine Sozialpädagogin im Jugendamt berät Eltern nach fachlichen Standards.",
+   "w": 92,
+   "e": "Berufsmäßig und wissenschaftlich fundiert."
+  },
+  {
+   "t": "Eine Schulsozialarbeiterin führt ein Gespräch mit dokumentierten Zielen.",
+   "w": 88,
+   "e": "Professionell."
+  },
+  {
+   "t": "Zwei Freundinnen trösten sich nach einem Streit.",
+   "w": 5,
+   "e": "Private Hilfe."
+  }
+ ]
+}

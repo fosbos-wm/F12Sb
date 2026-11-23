@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welches Gesetzbuch regelt die Kinder- und Jugendhilfe?",
+   "o": [
+    "SGB VIII",
+    "SGB XII",
+    "Grundgesetz allein"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was will die Sozialhilfe ermöglichen?",
+   "o": [
+    "Eine Ausbildung für alle",
+    "Ein Leben, das der Würde des Menschen entspricht",
+    "Einen Studienplatz"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Bereich gehört zur Gesundheitshilfe?",
+   "o": [
+    "Jugendarbeit",
+    "Seniorentreff",
+    "Sozialdienst im Krankenhaus"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welcher Bereich gehört zur Altenhilfe?",
+   "o": [
+    "Ambulante Altenarbeit, z. B. Sozialstation",
+    "Hilfen zur Erziehung",
+    "Wohnungslosenhilfe"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welcher Bereich gehört zur Sozialhilfe?",
+   "o": [
+    "Suchtprävention",
+    "Eingliederungshilfe für Menschen mit Behinderung",
+    "Förderung in Kindertagesstätten"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was zählt zur Kinder- und Jugendhilfe?",
+   "o": [
+    "Demenzberatung",
+    "Klinische Sozialarbeit",
+    "Förderung von Kindern in Tageseinrichtungen und Tagespflege"
+   ],
+   "r": 2
+  }
+ ]
+}

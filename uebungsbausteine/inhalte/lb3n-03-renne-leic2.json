@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welche Methoden gehören zu den klassischen Methoden der Sozialen Arbeit?",
+   "o": [
+    "Einzelhilfe, Gruppenarbeit, Gemeinwesenarbeit",
+    "Verhaltenstherapie, Psychoanalyse, Gesprächstherapie",
+    "Beratung, Erziehung, Strafe"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was steht in der sozialen Einzelhilfe im Mittelpunkt?",
+   "o": [
+    "Der Stadtteil",
+    "Das Individuum mit seinem Problem",
+    "Die Gruppe"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was bedeutet Hilfe zur Selbsthilfe?",
+   "o": [
+    "Der Sozialarbeiter löst das Problem allein.",
+    "Der Klient bekommt Geld.",
+    "Der Klient wird befähigt, sein Problem selbst zu lösen."
+   ],
+   "r": 2
+  },
+  {
+   "f": "In welchem Schritt werden Ziele entwickelt und ein Vorgehensplan erstellt?",
+   "o": [
+    "Planung",
+    "Analyse",
+    "Bewertung"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welches Prinzip bedeutet, den Klienten so anzunehmen, wie er ist?",
+   "o": [
+    "Individualisieren",
+    "Akzeptieren",
+    "Selbstkontrolle"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Worauf zielt Gemeinwesenarbeit?",
+   "o": [
+    "Nur auf das Verhalten eines Einzelnen",
+    "Nur auf Therapie",
+    "Auf Verbesserung der Lebensqualität in einer räumlichen Einheit"
+   ],
+   "r": 2
+  }
+ ]
+}

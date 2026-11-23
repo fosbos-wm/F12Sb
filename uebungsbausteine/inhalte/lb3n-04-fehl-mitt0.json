@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Verhaltensanalyse",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Erkläre die Verhaltensanalyse.",
+ "saetze": [
+  {
+   "t": "Das verhaltensorientierte Konzept geht davon aus, dass Verhalten erlernt ist.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Es geht vor allem darum, die Kindheitserlebnisse zu deuten.",
+   "falsch": true,
+   "korr": "Gegenstand ist das problematische Verhalten selbst."
+  },
+  {
+   "t": "Problemverhalten wird auf kognitiver, körperlicher und Verhaltensebene beschrieben.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Aufrechterhaltende Bedingungen sind Situationen, die das Verhalten auslösen.",
+   "falsch": true,
+   "korr": "Aufrechterhaltend sind Konsequenzen, die verstärken; Auslöser sind auslösende Bedingungen."
+  },
+  {
+   "t": "Das Verhalten kann eine Ersatz- oder Entlastungsfunktion haben.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Die Analyse legt zum Schluss die gewünschte Veränderung fest.",
+   "falsch": false,
+   "korr": ""
+  }
+ ]
+}

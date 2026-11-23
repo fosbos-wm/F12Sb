@@ -1,0 +1,81 @@
+{
+ "titel": "Diagnose: Welcher Aufgabenbereich?",
+ "anleitung": "Lies den Fall, wähle die passende Antwort und belege sie mit den richtigen Hinweisen.",
+ "faelle": [
+  {
+   "fall": "Ein Sozialdienst im Krankenhaus plant mit einem Patienten die Entlassung.",
+   "frage": "Welcher Aufgabenbereich?",
+   "optionen": [
+    "Gesundheitshilfe",
+    "Altenhilfe",
+    "Sozialhilfe"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um Wiederherstellung und Erhaltung der Gesundheit.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Hilfe zur Erziehung.",
+     "ok": false
+    },
+    {
+     "t": "Der Dienst ist im Krankenhaus tätig.",
+     "ok": true
+    }
+   ],
+   "erkl": "Sozialdienst im Krankenhaus = Gesundheitshilfe."
+  },
+  {
+   "fall": "Ein Seniorentreff lädt zum Mittagstisch ein.",
+   "frage": "Welcher Aufgabenbereich?",
+   "optionen": [
+    "Altenhilfe",
+    "Kinder- und Jugendhilfe",
+    "Sozialhilfe"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Ältere Menschen sollen am Leben in der Gemeinschaft teilnehmen.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Hilfen zur Erziehung.",
+     "ok": false
+    },
+    {
+     "t": "Offene Altenarbeit.",
+     "ok": true
+    }
+   ],
+   "erkl": "Offene Altenarbeit = Altenhilfe."
+  },
+  {
+   "fall": "Ein Mann ohne Wohnung erhält Beratung und einen Platz in einer Notunterkunft.",
+   "frage": "Welcher Aufgabenbereich?",
+   "optionen": [
+    "Sozialhilfe",
+    "Gesundheitshilfe",
+    "Kinder- und Jugendhilfe"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um den Lebensunterhalt und ein Leben in Würde.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Altersprobleme.",
+     "ok": false
+    },
+    {
+     "t": "Wohnungslosenhilfe.",
+     "ok": true
+    }
+   ],
+   "erkl": "Wohnungslosenhilfe = Sozialhilfe."
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Desensibilisierung",
+  "Reizüberflutung"
+ ],
+ "karten": [
+  {
+   "t": "Entspannungstraining",
+   "s": 0
+  },
+  {
+   "t": "Angsthierarchie von leicht bis stark",
+   "s": 0
+  },
+  {
+   "t": "sanfte Annäherung",
+   "s": 0
+  },
+  {
+   "t": "Rückzug bei Überforderung",
+   "s": 0
+  },
+  {
+   "t": "sofort stärkster Reiz",
+   "s": 1
+  },
+  {
+   "t": "Erfahrung: Angst klingt von selbst ab",
+   "s": 1
+  },
+  {
+   "t": "hohe Belastung",
+   "s": 1
+  },
+  {
+   "t": "keine Abstufung",
+   "s": 1
+  }
+ ]
+}

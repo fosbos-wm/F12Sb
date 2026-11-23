@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Klassische Techniken",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Erkläre die systematische Desensibilisierung.",
+ "saetze": [
+  {
+   "t": "Sie wurde von Joseph Wolpe entwickelt.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Angst und Entspannung können gleichzeitig vorhanden sein.",
+   "falsch": true,
+   "korr": "Sie schließen sich aus; deshalb hilft Entspannung."
+  },
+  {
+   "t": "Der Klient erstellt eine Angsthierarchie.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Man beginnt mit dem stärksten Angstreiz.",
+   "falsch": true,
+   "korr": "Man beginnt mit dem leichtesten."
+  },
+  {
+   "t": "Der nächste Punkt wird erst nach entspanntem Durchleben des vorigen bearbeitet.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Die Konfrontation ist nur in der Realität möglich.",
+   "falsch": true,
+   "korr": "Sie kann auch in der Vorstellung erfolgen."
+  }
+ ]
+}

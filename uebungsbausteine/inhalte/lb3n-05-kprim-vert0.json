@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Lena (16) hat große Angst vor Hunden. Die Beraterin lernt mit ihr Entspannung, sie erstellen eine Liste (Hundebild – Hund hinter dem Zaun – Hund an der Leine – Hund streicheln) und gehen die Schritte nacheinander durch. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das Vorgehen ist systematische Desensibilisierung.",
+     "richtig": true
+    },
+    {
+     "text": "Die Liste ist eine Angsthierarchie.",
+     "richtig": true
+    },
+    {
+     "text": "Es wird zuerst der stärkste Reiz geübt.",
+     "richtig": false
+    },
+    {
+     "text": "Der nächste Schritt folgt erst nach entspanntem Durchleben des vorigen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Reizüberflutung ist immer besser als schrittweise Annäherung, weil sie schneller geht.“",
+   "statements": [
+    {
+     "text": "Die Aussage ist zu pauschal.",
+     "richtig": true
+    },
+    {
+     "text": "Flooding kann sehr belastend sein und braucht Freiwilligkeit und Begleitung.",
+     "richtig": true
+    },
+    {
+     "text": "Schnell bedeutet automatisch besser.",
+     "richtig": false
+    },
+    {
+     "text": "Die Wahl der Methode richtet sich nach Klient und Situation.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

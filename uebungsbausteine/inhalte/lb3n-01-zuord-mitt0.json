@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Beispiele erkennen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Ein Jugendamt berät eine Familie.",
+   "öffentlicher Träger"
+  ],
+  [
+   "Die Caritas betreibt eine Wohnungslosenhilfe.",
+   "freier Träger"
+  ],
+  [
+   "Eine Schulsozialarbeiterin begleitet Jugendliche in der Berufsorientierung.",
+   "Praxisfeld"
+  ],
+  [
+   "Eine Erzieherin im Jugendhaus fördert gezielt die Entwicklung der Jugendlichen.",
+   "Sozialpädagogik"
+  ],
+  [
+   "Nachbarn kochen einer kranken Frau spontan Suppe.",
+   "private Hilfe"
+  ],
+  [
+   "Hilfen werden von ausgebildeten Fachkräften nach wissenschaftlichen Erkenntnissen geleistet.",
+   "Soziale Arbeit"
+  ]
+ ]
+}

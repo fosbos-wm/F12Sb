@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Herr Lenz kommt mit hohen Schulden in die Beratungsstelle. Die Fachkraft hört zu, sammelt Informationen, vereinbart mit ihm Ziele und Termine und prüft nach drei Monaten, ob sich die Lage verbessert hat. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es handelt sich um soziale Einzelhilfe.",
+     "richtig": true
+    },
+    {
+     "text": "Die vier Schritte sind Analyse, Planung, Handlung, Bewertung.",
+     "richtig": true
+    },
+    {
+     "text": "Das Vereinbaren von Zielen gehört zur Bewertung.",
+     "richtig": false
+    },
+    {
+     "text": "Die Fachkraft sollte Herrn Lenz nicht vorverurteilen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Gemeinwesenarbeit ist nur eine dritte Methode neben Einzelhilfe und Gruppenarbeit.“",
+   "statements": [
+    {
+     "text": "Die moderne Sichtweise versteht sie als übergreifendes Arbeitsprinzip.",
+     "richtig": true
+    },
+    {
+     "text": "Sie schließt Einzelhilfe und Gruppenarbeit mit ein.",
+     "richtig": true
+    },
+    {
+     "text": "Die Aussage ist ohne Einschränkung richtig.",
+     "richtig": false
+    },
+    {
+     "text": "Ökologische Theorien wie das Life Model bilden ihre Grundlage.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist das Ziel der Gegenkonditionierung?",
+   "o": [
+    "Eine schon erworbene Reiz-Reaktions-Verbindung abbauen",
+    "Neue Wörter lehren",
+    "Gedanken deuten"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum kann Entspannung gegen Angst helfen?",
+   "o": [
+    "Entspannung macht müde.",
+    "Angst und Entspannung können nicht gleichzeitig vorhanden sein.",
+    "Angst ist immer unbegründet."
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist der erste Grundsatz der systematischen Desensibilisierung?",
+   "o": [
+    "Konfrontation",
+    "Belohnung",
+    "Entspannungstraining"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wie geht die Reizüberflutung vor?",
+   "o": [
+    "Sie konfrontiert gleich zu Beginn mit stark Angst auslösenden Reizen.",
+    "Sie nähert langsam an.",
+    "Sie belohnt kleine Schritte."
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wann ist eine Aversionstherapie angezeigt?",
+   "o": [
+    "Bei jeder Prüfungsangst",
+    "Bei Verhaltensweisen mit unmittelbar positiven, aber langfristig schädlichen Folgen, z. B. Alkoholkonsum",
+    "Bei Schüchternheit"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Warum ist die Aversionstherapie umstritten?",
+   "o": [
+    "Sie ist zu billig.",
+    "Sie dauert zu kurz.",
+    "Sie stößt an ethische Grenzen, wenn die Freiwilligkeit fehlt."
+   ],
+   "r": 2
+  }
+ ]
+}

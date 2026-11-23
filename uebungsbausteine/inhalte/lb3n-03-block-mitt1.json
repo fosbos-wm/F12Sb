@@ -1,0 +1,35 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Einzelhilfe",
+  "Gruppenarbeit",
+  "Gemeinwesenarbeit"
+ ],
+ "items": [
+  {
+   "t": "Akzeptieren, Individualisieren",
+   "k": 0
+  },
+  {
+   "t": "Vertraulichkeit",
+   "k": 0
+  },
+  {
+   "t": "Dort anfangen, wo die Gruppe steht",
+   "k": 1
+  },
+  {
+   "t": "Sich als Gruppenleiter entbehrlich machen",
+   "k": 1
+  },
+  {
+   "t": "Vernetzung der sozialen Dienste",
+   "k": 2
+  },
+  {
+   "t": "Aktivierung der Bewohner",
+   "k": 2
+  }
+ ]
+}

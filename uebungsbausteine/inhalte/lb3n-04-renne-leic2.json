@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welche wissenschaftliche Grundlage hat das verhaltensorientierte Konzept?",
+   "o": [
+    "Behavioristische Lerntheorien (Konditionierungstheorien)",
+    "Psychoanalyse nach Freud",
+    "Die Theorie des Selbstkonzepts"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was ist im verhaltensorientierten Konzept Gegenstand der Veränderung?",
+   "o": [
+    "Die gesamte Persönlichkeit",
+    "Das problematische Verhalten selbst",
+    "Die Kindheit"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Ebenen werden bei der Beschreibung des Problemverhaltens erfasst?",
+   "o": [
+    "Nur die Verhaltensebene",
+    "Nur der Traum",
+    "Kognitive, körperliche (physiologische) und Verhaltensebene"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was klärt die Analyse mit den aufrechterhaltenden Bedingungen?",
+   "o": [
+    "Welche Konsequenzen das Verhalten verstärken",
+    "Welche Kindheitserlebnisse es verursacht haben",
+    "Welche Noten die Person hat"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was bedeutet Ersatz- oder Entlastungsfunktion?",
+   "o": [
+    "Das Verhalten ist unwichtig.",
+    "Das Verhalten ersetzt oder entlastet etwas anderes, z. B. eine Angst oder einen Konflikt.",
+    "Das Verhalten ist angeboren."
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie versteht die moderne Verhaltenstherapie den Begriff Verhalten?",
+   "o": [
+    "Nur sichtbare Handlungen",
+    "Nur Reflexe",
+    "Auch verdeckte Reaktionen wie Gedanken und körperliche Reaktionen"
+   ],
+   "r": 2
+  }
+ ]
+}

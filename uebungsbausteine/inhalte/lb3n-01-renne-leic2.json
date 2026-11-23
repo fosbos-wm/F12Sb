@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wodurch unterscheidet sich Soziale Arbeit von privater Hilfe?",
+   "o": [
+    "Sie ist berufsmäßig und wissenschaftlich fundiert.",
+    "Sie ist immer kostenlos.",
+    "Sie richtet sich nur an Kinder."
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was ist mit Sozialpädagogik gemeint?",
+   "o": [
+    "Nur die Arbeit im Jugendamt",
+    "Soziale Arbeit mit erzieherischer Absicht außerhalb von Familie, Schule und Berufsausbildung",
+    "Nur die Hilfe für alte Menschen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Träger ist ein öffentlicher Träger?",
+   "o": [
+    "Der Deutsche Caritasverband",
+    "Ein kleiner Sportverein",
+    "Das Jugendamt"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welche Organisation ist ein freier Träger?",
+   "o": [
+    "Die Arbeiterwohlfahrt (AWO)",
+    "Das Gesundheitsamt",
+    "Das Sozialamt"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie wird die Trennung von Sozialarbeit und Sozialpädagogik in der neueren Literatur gesehen?",
+   "o": [
+    "Sie wird strenger gezogen",
+    "Meist nicht mehr aufrechterhalten, weil sich die Tätigkeiten überschneiden",
+    "Sie wurde nie diskutiert"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Für wen gilt Soziale Arbeit?",
+   "o": [
+    "Nur für Jugendliche",
+    "Nur für Senioren",
+    "Für Menschen aller Altersgruppen"
+   ],
+   "r": 2
+  }
+ ]
+}

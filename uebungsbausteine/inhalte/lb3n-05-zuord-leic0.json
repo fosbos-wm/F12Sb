@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Verhaltensmodifikation",
+   "Veränderung (Abänderung) des Verhaltens in der Handlungsphase"
+  ],
+  [
+   "Gegenkonditionierung",
+   "unangenehmer Reiz wird mit einem unvereinbaren, angenehmen Reiz gekoppelt"
+  ],
+  [
+   "systematische Desensibilisierung",
+   "schrittweise Annäherung an den Angstreiz bei Entspannung"
+  ],
+  [
+   "Angsthierarchie",
+   "nach Schweregrad geordnete Liste angstauslösender Situationen"
+  ],
+  [
+   "Reizüberflutung (Flooding)",
+   "sofortige Konfrontation mit stark angstauslösenden Reizen"
+  ],
+  [
+   "Aversionstherapie",
+   "Koppelung eines anziehenden Reizes mit einem unangenehmen Reiz"
+  ]
+ ]
+}

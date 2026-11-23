@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Beispiele erkennen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Eine Fachkraft berät Frau K. allein zu ihren Schulden.",
+   "soziale Einzelhilfe"
+  ],
+  [
+   "Die Anonymen Alkoholiker treffen sich wöchentlich.",
+   "soziale Gruppenarbeit"
+  ],
+  [
+   "Bewohner eines Stadtteils gründen mit Hilfe einer Fachkraft einen Jugendtreff.",
+   "soziale Gemeinwesenarbeit"
+  ],
+  [
+   "Die Sozialpädagogin beschreibt zuerst genau das Problem und baut Vertrauen auf.",
+   "Analyse"
+  ],
+  [
+   "Klient und Sozialarbeiter vereinbaren Ziele und Termine.",
+   "Planung"
+  ],
+  [
+   "Am Ende wird geprüft, ob die Ziele erreicht wurden.",
+   "Bewertung"
+  ]
+ ]
+}

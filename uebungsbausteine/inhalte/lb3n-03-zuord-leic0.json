@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Handlungskonzept",
+   "Entwurf zum beruflichen Umgang mit sozialen Problemen mit Ziel und Methoden"
+  ],
+  [
+   "soziale Einzelhilfe",
+   "Arbeit mit Einzelnen, Familien oder Paaren (Casework)"
+  ],
+  [
+   "soziale Gruppenarbeit",
+   "Hilfe durch sinnvolle Gruppenerlebnisse"
+  ],
+  [
+   "soziale Gemeinwesenarbeit",
+   "Verbesserung für Menschen in einer räumlichen Einheit"
+  ],
+  [
+   "Hilfe zur Selbsthilfe",
+   "Klient wird befähigt, sein Problem selbst zu lösen"
+  ],
+  [
+   "Arbeitsbündnis",
+   "Vereinbarung über Zeit, Ort und vorläufige Dauer der Treffen"
+  ]
+ ]
+}

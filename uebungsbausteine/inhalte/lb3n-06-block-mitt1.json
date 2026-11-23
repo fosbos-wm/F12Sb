@@ -1,0 +1,35 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "differentielle Verstärkung",
+  "Shaping",
+  "Motivation schaffen"
+ ],
+ "items": [
+  {
+   "t": "Stören ignorieren",
+   "k": 0
+  },
+  {
+   "t": "Mitarbeit sofort loben",
+   "k": 0
+  },
+  {
+   "t": "Teilschritte in Richtung Ziel verstärken",
+   "k": 1
+  },
+  {
+   "t": "Verstärkung allmählich ausschleichen",
+   "k": 1
+  },
+  {
+   "t": "Belohnung in Aussicht stellen",
+   "k": 2
+  },
+  {
+   "t": "an Bedürfnisse anknüpfen",
+   "k": 2
+  }
+ ]
+}

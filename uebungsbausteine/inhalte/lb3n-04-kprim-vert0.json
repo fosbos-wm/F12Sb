@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Egon bekommt vor mündlichen Prüfungen starke Angst, nicht aber vor schriftlichen. Wird er nicht abgefragt, wenn er Angst zeigt, ist er erleichtert, und der Lehrer wendet sich ihm freundlich zu. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Angst bei mündlichen Prüfungen beschreibt eine auslösende Situation.",
+     "richtig": true
+    },
+    {
+     "text": "Die Zuwendung des Lehrers kann das Verhalten aufrechterhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Dass die Angst bei schriftlichen Prüfungen fehlt, ist für die Analyse unwichtig.",
+     "richtig": false
+    },
+    {
+     "text": "Die Analyse prüft auch mögliche Lern- und Verhaltensdefizite.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Verhaltenstherapie behandelt nur Symptome und ist deshalb oberflächlich.“",
+   "statements": [
+    {
+     "text": "Das Symptom ist hier selbst die Störung, die Lerngeschichte wird aber einbezogen.",
+     "richtig": true
+    },
+    {
+     "text": "Heute werden auch Gedanken und körperliche Reaktionen beachtet.",
+     "richtig": true
+    },
+    {
+     "text": "Die Aussage trifft vollständig zu.",
+     "richtig": false
+    },
+    {
+     "text": "Das Konzept sieht den Menschen heute ganzheitlich.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

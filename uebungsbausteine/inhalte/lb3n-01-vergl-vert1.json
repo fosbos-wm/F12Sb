@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Sozialarbeit",
+  "Sozialpädagogik"
+ ],
+ "karten": [
+  {
+   "t": "Notsituationen bewältigen oder verhindern",
+   "s": 0
+  },
+  {
+   "t": "Beratung bei Wohnungslosigkeit",
+   "s": 0
+  },
+  {
+   "t": "Hilfe für alle Altersgruppen",
+   "s": 0
+  },
+  {
+   "t": "Nothilfe in Krisen",
+   "s": 0
+  },
+  {
+   "t": "erzieherische Absicht",
+   "s": 1
+  },
+  {
+   "t": "junge Menschen außerhalb von Familie und Schule",
+   "s": 1
+  },
+  {
+   "t": "Teilbereich der Sozialen Arbeit",
+   "s": 1
+  },
+  {
+   "t": "Fokus auf Erziehung",
+   "s": 1
+  }
+ ]
+}

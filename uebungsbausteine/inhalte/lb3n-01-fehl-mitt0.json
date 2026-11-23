@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Antwort zum Begriff",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Erkläre den Begriff Soziale Arbeit.",
+ "saetze": [
+  {
+   "t": "Soziale Arbeit ist die berufsmäßige, wissenschaftlich fundierte Hilfe bei Problem- und Notsituationen.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Sie gilt nur für Kinder und Jugendliche.",
+   "falsch": true,
+   "korr": "Soziale Arbeit gilt für Menschen aller Altersgruppen."
+  },
+  {
+   "t": "Sozialpädagogik ist ein Teilbereich der Sozialen Arbeit mit erzieherischer Absicht.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Private Hilfe von Nachbarn zählt zur Sozialen Arbeit.",
+   "falsch": true,
+   "korr": "Soziale Arbeit ist berufsmäßig; private Hilfe ist davon abgegrenzt."
+  },
+  {
+   "t": "Jugendämter sind öffentliche Träger.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Die Caritas ist ein öffentlicher Träger.",
+   "falsch": true,
+   "korr": "Die Caritas ist ein freier Träger."
+  }
+ ]
+}

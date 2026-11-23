@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Kinder- und Jugendhilfe",
+   "fördert junge Menschen in ihrer Entwicklung und wirkt Benachteiligungen entgegen (SGB VIII)"
+  ],
+  [
+   "Sozialhilfe",
+   "Hilfe zum Lebensunterhalt für Menschen in Not, passend zur Menschenwürde"
+  ],
+  [
+   "Gesundheitshilfe",
+   "Förderung, Erhaltung, Schutz und Wiederherstellung der Gesundheit"
+  ],
+  [
+   "Altenhilfe",
+   "verhütet, überwindet oder mildert altersbedingte Schwierigkeiten"
+  ],
+  [
+   "Wohnungslosenhilfe",
+   "Bereich der Sozialhilfe"
+  ],
+  [
+   "Offene Altenarbeit",
+   "z. B. Seniorentreff"
+  ]
+ ]
+}

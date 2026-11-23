@@ -1,0 +1,69 @@
+{
+ "titel": "Diagnose: Welche Technik?",
+ "anleitung": "Lies den Fall, wähle die passende Antwort und belege sie mit den richtigen Hinweisen.",
+ "faelle": [
+  {
+   "fall": "Peter bekommt Süßigkeiten, während das Pelzkaninchen näher gebracht wird.",
+   "frage": "Welche Technik?",
+   "optionen": [
+    "Gegenkonditionierung",
+    "Reizüberflutung",
+    "Aversionstherapie"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Der Angstreiz wird mit angenehmen Reizen gekoppelt.",
+     "ok": true
+    },
+    {
+     "t": "Es wird sofort mit starken Reizen konfrontiert.",
+     "ok": false
+    }
+   ],
+   "erkl": "Gegenkonditionierung."
+  },
+  {
+   "fall": "Frau M. geht gleich mit der Therapeutin auf die belebte Straße.",
+   "frage": "Welche Technik?",
+   "optionen": [
+    "Reizüberflutung",
+    "Gegenkonditionierung",
+    "Aversionstherapie"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Sofortige Konfrontation mit starkem Reiz.",
+     "ok": true
+    },
+    {
+     "t": "Es wird Übelkeit ausgelöst.",
+     "ok": false
+    }
+   ],
+   "erkl": "Flooding."
+  },
+  {
+   "fall": "Ein Alkoholiker erhält ein Mittel, das Übelkeit erzeugt.",
+   "frage": "Welche Technik?",
+   "optionen": [
+    "Aversionstherapie",
+    "Reizüberflutung",
+    "Desensibilisierung"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Ein anziehender Reiz wird mit einem unangenehmen gekoppelt.",
+     "ok": true
+    },
+    {
+     "t": "Es wird entspannt.",
+     "ok": false
+    }
+   ],
+   "erkl": "Aversionstherapie."
+  }
+ ]
+}

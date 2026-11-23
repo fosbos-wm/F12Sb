@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Fachbegriffe und Erklärungen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "verhaltensorientiertes Konzept",
+   "Handlungskonzept auf Basis behavioristischer Lerntheorien: Verhalten wird erlernt und kann verlernt werden"
+  ],
+  [
+   "Verhaltensanalyse",
+   "genaue Klärung des problematischen Verhaltens und seiner Bedingungen"
+  ],
+  [
+   "auslösende Bedingungen",
+   "Situationen, die das problematische Verhalten hervorrufen"
+  ],
+  [
+   "aufrechterhaltende Bedingungen",
+   "Konsequenzen, die das Verhalten verstärken"
+  ],
+  [
+   "Ersatz- oder Entlastungsfunktion",
+   "das Verhalten ersetzt oder entlastet etwas anderes"
+  ],
+  [
+   "Lern- und Verhaltensdefizit",
+   "erwünschtes Verhalten wurde nie gelernt"
+  ]
+ ]
+}

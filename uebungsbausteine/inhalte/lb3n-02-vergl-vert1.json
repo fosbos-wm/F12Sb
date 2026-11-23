@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Sozialhilfe",
+  "Gesundheitshilfe"
+ ],
+ "karten": [
+  {
+   "t": "Hilfe zum Lebensunterhalt",
+   "s": 0
+  },
+  {
+   "t": "Wohnungslosenhilfe",
+   "s": 0
+  },
+  {
+   "t": "Eingliederungshilfe",
+   "s": 0
+  },
+  {
+   "t": "Hilfe zur Pflege",
+   "s": 0
+  },
+  {
+   "t": "Sozialdienst im Krankenhaus",
+   "s": 1
+  },
+  {
+   "t": "Suchtprävention",
+   "s": 1
+  },
+  {
+   "t": "Klinische Sozialarbeit",
+   "s": 1
+  },
+  {
+   "t": "Wiederherstellung der Gesundheit",
+   "s": 1
+  }
+ ]
+}

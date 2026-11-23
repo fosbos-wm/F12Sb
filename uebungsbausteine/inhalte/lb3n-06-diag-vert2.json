@@ -1,0 +1,69 @@
+{
+ "titel": "Diagnose: Welche Technik?",
+ "anleitung": "Lies den Fall, wähle die passende Antwort und belege sie mit den richtigen Hinweisen.",
+ "faelle": [
+  {
+   "fall": "Fritz stört, alle schauen weg; arbeitet er mit, bekommt er Lob.",
+   "frage": "Welche Technik?",
+   "optionen": [
+    "differentielle Verstärkung",
+    "Shaping",
+    "Aversionstherapie"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Unerwünschtes wird ignoriert, Erwünschtes verstärkt.",
+     "ok": true
+    },
+    {
+     "t": "Es werden Teilschritte aufgebaut.",
+     "ok": false
+    }
+   ],
+   "erkl": "Differentielle Verstärkung."
+  },
+  {
+   "fall": "Ein Kind, das nicht spricht, wird schon für einen Laut belohnt.",
+   "frage": "Welche Technik?",
+   "optionen": [
+    "Shaping",
+    "differentielle Verstärkung",
+    "Reizüberflutung"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Kleine Schritte zum Endverhalten werden verstärkt.",
+     "ok": true
+    },
+    {
+     "t": "Es wird ignoriert.",
+     "ok": false
+    }
+   ],
+   "erkl": "Shaping."
+  },
+  {
+   "fall": "Der Betreuer knüpft an das Bedürfnis nach Anerkennung an und stellt Belohnung in Aussicht.",
+   "frage": "Welcher Schritt?",
+   "optionen": [
+    "Motivation schaffen",
+    "Flooding",
+    "Gegenkonditionierung"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um Bereitschaft zum Lernen.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Angst.",
+     "ok": false
+    }
+   ],
+   "erkl": "Motivation schaffen."
+  }
+ ]
+}

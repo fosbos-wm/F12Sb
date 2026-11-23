@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Analyse",
+  "Planung"
+ ],
+ "karten": [
+  {
+   "t": "Verhalten genau beschreiben",
+   "s": 0
+  },
+  {
+   "t": "Bedingungen klären",
+   "s": 0
+  },
+  {
+   "t": "Ersatzfunktion herausfinden",
+   "s": 0
+  },
+  {
+   "t": "Defizite ermitteln",
+   "s": 0
+  },
+  {
+   "t": "Ziele festlegen",
+   "s": 1
+  },
+  {
+   "t": "Vorgehensplan ausarbeiten",
+   "s": 1
+  },
+  {
+   "t": "Erfolgskontrolle planen",
+   "s": 1
+  },
+  {
+   "t": "Schritte vom Ist- zum Sollzustand",
+   "s": 1
+  }
+ ]
+}

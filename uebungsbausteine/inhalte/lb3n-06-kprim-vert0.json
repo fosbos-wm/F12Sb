@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Ein 3-jähriger Junge weigert sich, nach einer Augenoperation die Brille aufzusetzen. Zuerst wird das Aufnehmen des Gestells mit einem Klickton und Süßigkeit verstärkt, dann das Halten, dann das Heranführen an die Augen. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es handelt sich um Verhaltensformung (Shaping).",
+     "richtig": true
+    },
+    {
+     "text": "Der Klickton wirkt als sekundärer Verstärker.",
+     "richtig": true
+    },
+    {
+     "text": "Verstärkt wird erst, wenn die Brille fehlerfrei getragen wird.",
+     "richtig": false
+    },
+    {
+     "text": "Teilschritte werden nacheinander verstärkt.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Wenn Kinder stören, hilft es am besten, sie ständig zu ermahnen.“",
+   "statements": [
+    {
+     "text": "Ermahnung ist Aufmerksamkeit und kann das Stören verstärken.",
+     "richtig": true
+    },
+    {
+     "text": "Besser ist, Stören zu ignorieren und erwünschtes Verhalten zu verstärken.",
+     "richtig": true
+    },
+    {
+     "text": "Ständiges Ermahnen baut das Verhalten sicher ab.",
+     "richtig": false
+    },
+    {
+     "text": "Dazu gehört auch, Motivation für das erwünschte Verhalten zu schaffen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

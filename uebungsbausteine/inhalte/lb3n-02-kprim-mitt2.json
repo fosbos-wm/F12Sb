@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu den Aufgabenbereichen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Kinder- und Jugendhilfe ist im SGB VIII geregelt.",
+     "richtig": true
+    },
+    {
+     "text": "Die Sozialhilfe hilft zum Lebensunterhalt.",
+     "richtig": true
+    },
+    {
+     "text": "Die Gesundheitshilfe kümmert sich nur um alte Menschen.",
+     "richtig": false
+    },
+    {
+     "text": "Die Altenhilfe will Teilhabe am Leben in der Gemeinschaft ermöglichen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Beispielen treffen zu?",
+   "statements": [
+    {
+     "text": "Suchtprävention gehört zur Gesundheitshilfe.",
+     "richtig": true
+    },
+    {
+     "text": "Eingliederungshilfe gehört zur Altenhilfe.",
+     "richtig": false
+    },
+    {
+     "text": "Ein Seniorentreff ist offene Altenarbeit.",
+     "richtig": true
+    },
+    {
+     "text": "Hilfen zur Erziehung gehören zur Kinder- und Jugendhilfe.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

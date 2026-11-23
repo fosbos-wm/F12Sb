@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Mara hilft ihrer Nachbarin jede Woche beim Einkaufen. Ihre Cousine arbeitet als ausgebildete Sozialpädagogin im Jugendamt. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Maras Hilfe ist private Hilfe.",
+     "richtig": true
+    },
+    {
+     "text": "Die Cousine leistet berufsmäßige, wissenschaftlich fundierte Hilfe.",
+     "richtig": true
+    },
+    {
+     "text": "Maras Hilfe ist Soziale Arbeit im Sinne des Begriffs.",
+     "richtig": false
+    },
+    {
+     "text": "Das Jugendamt ist ein öffentlicher Träger.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Soziale Arbeit ist nur etwas für Menschen am Rand der Gesellschaft.“",
+   "statements": [
+    {
+     "text": "Die Aussage ist zu eng, denn Soziale Arbeit gilt für alle Altersgruppen.",
+     "richtig": true
+    },
+    {
+     "text": "Soziale Arbeit soll auch vorbeugen, nicht nur helfen.",
+     "richtig": true
+    },
+    {
+     "text": "Die Aussage ist vollständig richtig.",
+     "richtig": false
+    },
+    {
+     "text": "Soziale Arbeit begleitet das Hineinwachsen in die Gesellschaft.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

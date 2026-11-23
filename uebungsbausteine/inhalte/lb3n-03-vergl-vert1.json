@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Einzelhilfe",
+  "Gruppenarbeit"
+ ],
+ "karten": [
+  {
+   "t": "Das Individuum steht im Mittelpunkt",
+   "s": 0
+  },
+  {
+   "t": "Vertraulichkeit",
+   "s": 0
+  },
+  {
+   "t": "Casework",
+   "s": 0
+  },
+  {
+   "t": "Akzeptieren",
+   "s": 0
+  },
+  {
+   "t": "Gruppenprozesse arrangieren",
+   "s": 1
+  },
+  {
+   "t": "Mit der Stärke jedes Einzelnen arbeiten",
+   "s": 1
+  },
+  {
+   "t": "Selbstbestimmung der Gruppe",
+   "s": 1
+  },
+  {
+   "t": "Gruppenleiter wird entbehrlich",
+   "s": 1
+  }
+ ]
+}

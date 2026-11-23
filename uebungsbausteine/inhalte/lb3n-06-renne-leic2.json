@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist differentielle Verstärkung?",
+   "o": [
+    "Unerwünschtes Verhalten ignorieren und erwünschtes sofort verstärken",
+    "Jedes Verhalten bestrafen",
+    "Nur belohnen, ohne zu ignorieren"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum wird unerwünschtes Verhalten oft ungewollt verstärkt?",
+   "o": [
+    "Es ist angeboren.",
+    "Andere reagieren mit Aufmerksamkeit darauf.",
+    "Es wird nie bemerkt."
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was bedeutet Shaping?",
+   "o": [
+    "Plötzliche starke Konfrontation",
+    "Löschung durch Entspannung",
+    "Schrittweiser Aufbau eines Verhaltens durch Verstärkung kleiner Teilschritte"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was besagt Thorndikes Gesetz der Bereitschaft?",
+   "o": [
+    "Ein Mensch lernt, wenn er einen unangenehmen Zustand beseitigen und einen angenehmen herbeiführen kann.",
+    "Alle Menschen lernen gleich.",
+    "Lernen braucht keine Motivation."
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie geht die Verstärkung beim Shaping im Verlauf vor?",
+   "o": [
+    "Immer gleich",
+    "Erst jedes Verhalten, später unregelmäßig, bis sie überflüssig wird",
+    "Nur am Anfang"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welcher Verstärker war im Brillenbeispiel der erlernte Klickton?",
+   "o": [
+    "Ein primärer Verstärker",
+    "Eine Strafe",
+    "Ein sekundärer Verstärker"
+   ],
+   "r": 2
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Aufgabenbereiche",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Beschreibe die Aufgabenbereiche der Sozialen Arbeit.",
+ "saetze": [
+  {
+   "t": "Die Kinder- und Jugendhilfe ist im SGB VIII geregelt.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Die Sozialhilfe soll Strafen für Menschen in Not verhängen.",
+   "falsch": true,
+   "korr": "Sie sichert den Lebensunterhalt, damit ein Leben in Würde möglich ist."
+  },
+  {
+   "t": "Die Gesundheitshilfe fördert, erhält und schützt die Gesundheit.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Altenhilfe kümmert sich nur um Pflegefälle im Heim.",
+   "falsch": true,
+   "korr": "Auch offene Altenarbeit, z. B. Seniorentreff, gehört dazu."
+  },
+  {
+   "t": "Suchtprävention gehört zur Gesundheitshilfe.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Eingliederungshilfe gehört zur Kinder- und Jugendhilfe.",
+   "falsch": true,
+   "korr": "Sie gehört zur Sozialhilfe."
+  }
+ ]
+}

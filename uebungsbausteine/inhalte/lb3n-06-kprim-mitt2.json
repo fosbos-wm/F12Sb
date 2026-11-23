@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur differentiellen Verstärkung treffen zu?",
+   "statements": [
+    {
+     "text": "Unerwünschtes Verhalten wird nicht verstärkt.",
+     "richtig": true
+    },
+    {
+     "text": "Erwünschtes Verhalten wird sofort verstärkt.",
+     "richtig": true
+    },
+    {
+     "text": "Man bestraft das unerwünschte Verhalten laut.",
+     "richtig": false
+    },
+    {
+     "text": "Wegnahme verstärkender Bedingungen ist Teil des Vorgehens.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum Shaping treffen zu?",
+   "statements": [
+    {
+     "text": "Auch Annäherungen an das Endverhalten werden verstärkt.",
+     "richtig": true
+    },
+    {
+     "text": "Es wird nur das fertige Endverhalten belohnt.",
+     "richtig": false
+    },
+    {
+     "text": "Die Verstärkung wird nach und nach unregelmäßiger.",
+     "richtig": true
+    },
+    {
+     "text": "Das Endverhalten wird durch Übung und Wiederholung gefestigt.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

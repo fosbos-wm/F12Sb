@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Beispiele erkennen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Frau Maltz schildert Schweiß, Zittern und Schwindel in der U-Bahn.",
+   "physiologische Ebene"
+  ],
+  [
+   "Frau Maltz denkt: „Ich bin zu dumm für Verkehrsmittel.“",
+   "kognitive Ebene"
+  ],
+  [
+   "Frau Maltz vermeidet jede Fahrt mit Bus und Bahn.",
+   "Verhaltensebene"
+  ],
+  [
+   "Familie und Freundin kümmern sich sofort liebevoll um sie, wenn die Angst auftritt.",
+   "aufrechterhaltende Bedingung"
+  ],
+  [
+   "Die Angst tritt bei Verkehrsmitteln auf, nicht aber zu Hause.",
+   "auslösende Situation"
+  ],
+  [
+   "Sie hat nie gelernt, sich in Bus und Bahn zu orientieren.",
+   "Lern- und Verhaltensdefizit"
+  ]
+ ]
+}

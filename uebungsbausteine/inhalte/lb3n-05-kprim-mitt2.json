@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur systematischen Desensibilisierung treffen zu?",
+   "statements": [
+    {
+     "text": "Sie verbindet Angstreize mit Entspannung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie beginnt mit dem stärksten Angstreiz.",
+     "richtig": false
+    },
+    {
+     "text": "Der nächste Punkt der Hierarchie wird erst nach entspanntem Durchleben des vorigen bearbeitet.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist nach Wolpe entwickelt.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Reizüberflutung und Aversionstherapie treffen zu?",
+   "statements": [
+    {
+     "text": "Bei der Reizüberflutung wird sofort stark konfrontiert.",
+     "richtig": true
+    },
+    {
+     "text": "Aversionstherapie koppelt einen anziehenden mit einem unangenehmen Reiz.",
+     "richtig": true
+    },
+    {
+     "text": "Aversionstherapie ist ethisch unumstritten.",
+     "richtig": false
+    },
+    {
+     "text": "Aversionstherapie wird oft bei Sucht-Verhalten eingesetzt.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

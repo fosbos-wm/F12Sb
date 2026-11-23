@@ -1,0 +1,37 @@
+{
+ "titel": "Fehler-Detektiv: Operante Techniken",
+ "anleitung": "Lies die Schülerantwort. Tippe alle Sätze an, die fachlich falsch sind, und prüfe dann.",
+ "situation": "Aufgabe: Erkläre differentielle Verstärkung und Shaping.",
+ "saetze": [
+  {
+   "t": "Bei der differentiellen Verstärkung wird erwünschtes Verhalten verstärkt.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Dabei wird unerwünschtes Verhalten besonders laut ermahnt.",
+   "falsch": true,
+   "korr": "Es wird ignoriert (Nicht-Verstärkung)."
+  },
+  {
+   "t": "Beim Shaping werden kleine Schritte zum Endverhalten verstärkt.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Beim Shaping wird nur das fertige Endverhalten belohnt.",
+   "falsch": true,
+   "korr": "Auch Annäherungen werden verstärkt."
+  },
+  {
+   "t": "Die Verstärkung wird später unregelmäßiger.",
+   "falsch": false,
+   "korr": ""
+  },
+  {
+   "t": "Motivation ist für Verstärkung unwichtig.",
+   "falsch": true,
+   "korr": "Das Gesetz der Bereitschaft: Lernen braucht Motivation."
+  }
+ ]
+}

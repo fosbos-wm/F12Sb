@@ -1,0 +1,69 @@
+{
+ "titel": "Diagnose: Welche Ebene?",
+ "anleitung": "Lies den Fall, wähle die passende Antwort und belege sie mit den richtigen Hinweisen.",
+ "faelle": [
+  {
+   "fall": "Frau Maltz denkt: „Ich schaffe das nie.“",
+   "frage": "Welche Ebene?",
+   "optionen": [
+    "kognitive Ebene",
+    "Verhaltensebene",
+    "physiologische Ebene"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um Gedanken.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um sichtbare Handlung.",
+     "ok": false
+    }
+   ],
+   "erkl": "Gedanken = kognitive Ebene."
+  },
+  {
+   "fall": "Frau Maltz bricht in der U-Bahn der Schweiß aus.",
+   "frage": "Welche Ebene?",
+   "optionen": [
+    "physiologische Ebene",
+    "kognitive Ebene",
+    "Verhaltensebene"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um körperliche Symptome.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Erwartungen.",
+     "ok": false
+    }
+   ],
+   "erkl": "Körper = physiologische Ebene."
+  },
+  {
+   "fall": "Frau Maltz vermeidet jede Fahrt.",
+   "frage": "Welche Ebene?",
+   "optionen": [
+    "Verhaltensebene",
+    "kognitive Ebene",
+    "physiologische Ebene"
+   ],
+   "r": 0,
+   "belege": [
+    {
+     "t": "Es geht um beobachtbares Verhalten.",
+     "ok": true
+    },
+    {
+     "t": "Es geht um Schwindel.",
+     "ok": false
+    }
+   ],
+   "erkl": "Vermeiden = Verhaltensebene."
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Sozialarbeit",
+  "Sozialpädagogik"
+ ],
+ "items": [
+  {
+   "t": "Beratung bei Schulden",
+   "k": 0
+  },
+  {
+   "t": "Hilfe in einer Notunterkunft",
+   "k": 0
+  },
+  {
+   "t": "Unterstützung bei Behördengängen",
+   "k": 0
+  },
+  {
+   "t": "Freizeitpädagogik im Jugendzentrum",
+   "k": 1
+  },
+  {
+   "t": "Erziehung außerhalb von Familie und Schule",
+   "k": 1
+  },
+  {
+   "t": "Gruppenarbeit mit erzieherischer Absicht",
+   "k": 1
+  }
+ ]
+}

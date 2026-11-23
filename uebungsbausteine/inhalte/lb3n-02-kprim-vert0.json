@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Herr Wagner (82) lebt allein, hat kaum Geld und stürzt oft. Eine Sozialarbeiterin vermittelt Pflege, beantragt Grundsicherung und organisiert einen Besuchsdienst. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Sozialhilfe sichert den Lebensunterhalt.",
+     "richtig": true
+    },
+    {
+     "text": "Altenhilfe ermöglicht Teilhabe am Leben in der Gemeinschaft.",
+     "richtig": true
+    },
+    {
+     "text": "Der Fall gehört ausschließlich zur Kinder- und Jugendhilfe.",
+     "richtig": false
+    },
+    {
+     "text": "Mehrere Aufgabenbereiche greifen ineinander.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Die Aufgabenbereiche lassen sich immer klar trennen.“",
+   "statements": [
+    {
+     "text": "Die Aussage trifft nur eingeschränkt zu.",
+     "richtig": true
+    },
+    {
+     "text": "Viele Lebenslagen betreffen mehrere Bereiche.",
+     "richtig": true
+    },
+    {
+     "text": "Die Bereiche sind vollkommen getrennt.",
+     "richtig": false
+    },
+    {
+     "text": "Die Systematisierung ist bisher nicht abschließend gelungen.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}
