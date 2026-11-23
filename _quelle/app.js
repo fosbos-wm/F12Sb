@@ -21231,6 +21231,7 @@ const KW_KAT=[
  {key:"arbeitsblatt",label:"Arbeitsblätter",hint:"Zum Bearbeiten im Unterricht"},
  {key:"uebung",label:"Übungsaufgaben",hint:"Zum Üben und Festigen"},
  {key:"vertiefung",label:"Vertiefungsaufgaben",hint:"In drei Schwierigkeitsgraden",stufen:[["vertiefung1","Stufe 1 · grundlegend"],["vertiefung2","Stufe 2 · erweitert"],["vertiefung3","Stufe 3 · anspruchsvoll"]]},
+ {key:"praxis",label:"Praxisauftrag",hint:"Freiwillig: etwas herstellen oder gestalten"},
  {key:"audio",label:"Hören",hint:"Audio zum Thema"},
  {key:"video",label:"Sehen",hint:"Video zum Thema"},
  {key:"tafel",label:"Digitale Tafeln",hint:"Tafelbilder zur Stunde",board:true},
@@ -21677,15 +21678,16 @@ async function kwMatFormDatei(kat){
   ${istBoard?`<label>Vorhandene Tafel wählen<select id="kwBoard"><option value="">– keine –</option>${boards.map(b=>`<option value="${esc(b.id)}">${esc(b.title||"Tafel")}</option>`).join("")}</select></label>`:""}
   <label>Datei hochladen (max. 15 MB)<input id="kwDatei" type="file"></label>
   <label>oder Link<input id="kwLink" type="url" placeholder="https://"></label>
+  ${kat==="praxis"?`<label>Hinweis für Schüler:innen<input id="kwHinweis" maxlength="200" placeholder="z. B. Material bei der Lehrkraft abholen"></label>`:""}
   <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button><button class="primary" id="kwSave">Speichern</button></div></div>`);
  $("kwSave").onclick=async()=>{
   const titel=$("kwTitel").value.trim(),f=$("kwDatei").files[0],link=$("kwLink").value.trim(),bd=$("kwBoard")?$("kwBoard").value:"";
   if(!titel){toast("Bitte einen Titel eingeben.");return}
-  if(!f&&!link&&!bd){toast("Bitte Datei, Link oder Tafel angeben.");return}
+  const hin=$("kwHinweis")?$("kwHinweis").value.trim():"";if(!f&&!link&&!bd&&!hin){toast(kat==="praxis"?"Bitte Hinweis, Datei oder Link angeben.":"Bitte Datei, Link oder Tafel angeben.");return}
   try{
    let url=bd?"board:"+bd:link,dateiName="";
    if(f){toast("Datei wird hochgeladen …");const up=await uploadCampusDatei(f,`ppMaterial/thema_${e.id}`);url=up.url;dateiName=up.name}
-   await addDoc(collection(db,"lehrplanMaterialien"),{wocheId:e.id,fach:"paedagogik",kategorie:kat,titel,url,dateiName,createdBy:currentUser.uid,createdAt:serverTimestamp()});
+   await addDoc(collection(db,"lehrplanMaterialien"),{wocheId:e.id,fach:"paedagogik",kategorie:kat,titel,url,dateiName,...(kat==="praxis"?{hinweis:hin}:{}),createdBy:currentUser.uid,createdAt:serverTimestamp()});
    closeModal();toast("Gespeichert.");render();
   }catch(err){console.error(err);toast(err&&err.message?err.message:"Konnte nicht gespeichert werden.")}
  };
@@ -22733,7 +22735,7 @@ KW.basis=KW.basis||{};
 const LXB_GRP=[["info","Infotext"],["tafel","Tafelbild"],["lue","Lernübersicht"],["slk","Selbstlernkurs"],["baust","Weitere Lerneinheiten"],["afb1","Übungsaufgaben AFB I"],["afb2","Übungsaufgaben AFB II"],["afb3","Übungsaufgaben AFB III"],["fa","Fachaufsatztraining"]];
 function lxBibItems(e,ph,K,ea,eaS,trInfos){
  const mats=KW.mat[e.id]||[],it=[],hid=k=>KW.hide&&KW.hide.has(k);
- const G={lernsituation:"info",lehrtext:"info",arbeitsblatt:"info",audio:"info",video:"tafel",einfuehrung:"tafel",tafel:"tafel",lernuebersicht:"lue"};
+ const G={lernsituation:"info",lehrtext:"info",arbeitsblatt:"info",audio:"info",video:"tafel",einfuehrung:"tafel",tafel:"tafel",lernuebersicht:"lue",praxis:"praxis"};
  mats.forEach(m=>{
   let grp=G[m.kategorie],niv="",art="";const u=String(m.url||"");
   if(!grp&&/^(uebung|vertiefung[123])$/.test(m.kategorie)){
@@ -22745,7 +22747,7 @@ function lxBibItems(e,ph,K,ea,eaS,trInfos){
    grp=u.startsWith("fa:")?"fa":({b:"afb1",t:"afb2",a:"afb3"})[lxBereichArt(art,m.kategorie)]||"afb1";
   }
   if(!grp)return;
-  it.push({key:"m:"+m.id,grp,titel:m.titel||"",art,niv,url:u,mat:m,repo:String(m.id).startsWith("repo-")});
+  it.push({key:"m:"+m.id,grp,titel:m.titel||"",art:grp==="praxis"?"Praxisauftrag":art,niv,url:u,mat:m,repo:String(m.id).startsWith("repo-")});
  });
  [[e.id,ea,"",true],[e.id+"-plus",eaS&&eaS.e,"Stufe II"],[e.id+"-vertieft",eaS&&eaS.a,"Stufe III"]].forEach(([fid,n,st,main])=>{if(n&&!n.entwurf&&!hid("ea:"+fid))it.push({key:"ea:"+fid,grp:"slk",titel:n.titel||kwKurz(e),art:"Selbstlernkurs"+(st?" · "+st:""),main:!!main,eaId:fid,n:n.aufgaben||0})});
  const mod=kwModuleThema(e.id);
@@ -22762,7 +22764,7 @@ function lxBibPool(e,ph,K,items){
  (K.fa||[]).forEach(x=>{if(x.thema!==e.id||have.has("fa:"+x.id))return;p.push({key:"fa:"+x.id,grp:"fa",titel:x.titel,art:"Fachaufsatztraining",niv:"a",url:"fa:"+x.id})});
  return p;
 }
-function lxBibAuto(items){const s=new Set(),seen={};items.forEach(i=>{if(["info","tafel","lue","baust"].includes(i.grp)){s.add(i.key);return}if(i.grp==="slk"){if(i.main||i.modId)s.add(i.key);return}if(i.grp==="fa"){if(i.mat&&!i.repo)s.add(i.key);return}if(!i.repo){s.add(i.key);return}if(!seen[i.grp]){seen[i.grp]=1;s.add(i.key)}});return s}
+function lxBibAuto(items){const s=new Set(),seen={};items.forEach(i=>{if(["info","tafel","lue","baust","praxis"].includes(i.grp)){s.add(i.key);return}if(i.grp==="slk"){if(i.main||i.modId)s.add(i.key);return}if(i.grp==="fa"){if(i.mat&&!i.repo)s.add(i.key);return}if(!i.repo){s.add(i.key);return}if(!seen[i.grp]){seen[i.grp]=1;s.add(i.key)}});return s}
 function lxBibVis(e,items,fort){
  const base=lxBibAuto(items),b=(KW.basis||{})[e.id];
  if(b){b.an.forEach(k=>base.add(k));b.aus.forEach(k=>base.delete(k))}
@@ -22802,8 +22804,9 @@ async function lxBibListeSeite(e,ph,F){
   const sIN=`<p class="lxp-hint">Häkchen = erscheint im Lernpfad der Schüler:innen. Ohne Häkchen bleibt es in der Bibliothek.</p><div class="lxp-tabs" role="tablist">${tabs.map((t,k)=>`<button type="button" class="lxp-tb${k?"":" on"}" data-bp="tab" data-t="${t[0]}">${t[1]} · ${t[2].length}</button>`).join("")}</div>${tabs.map((t,k)=>`<div class="lxp-tp${k?"":" on"}" data-tp="${t[0]}">${rows(t[2])}<div class="lxp-add">${t[3]}</div></div>`).join("")}`;
   // 3 Üben und Vertiefen
   const kt=["uebung","vertiefung2","vertiefung3"];
-  const lv=LX_EBENEN.map((B,ix)=>{const g="afb"+(ix+1),l=items.filter(i=>i.grp===g);
-   return`<div class="lxp-lv" id="lxpc-${g}" style="--ek:${B.c};--eb:${B.bg};margin-left:${ix*14}px"><b class="lxp-nr">${B.nr}<small>${B.afb}</small></b><div class="lxp-lb"><h5>Ebene ${B.nr} · ${B.n} ${n("lxpc-"+g)}</h5>${rows(l)}<div class="lxp-add">${btn("+ Datei hinzufügen",`data-kw="matadd" data-kat="${kt[ix]}"`)}${btn("+ aus Bibliothek",`data-bb="add" data-g="${g}" data-id="${tid}"`)}</div></div></div>`}).join("");
+  const prRow=i=>{const m=i.mat||{};return`<div class="lxp-row lxp-prrow${bib.base.has(i.key)?"":" off"}"><input type="checkbox" class="lxbCb" value="${esc(i.key)}"${bib.base.has(i.key)?" checked":""} aria-label="${esc(i.titel||"")} im Lernpfad anzeigen"><span class="lxb-t"><div class="lxp-pr"><b>${esc(i.titel||"Praxisauftrag")}</b>${m.hinweis?`<small>${esc(m.hinweis)}</small>`:`<small>kein Hinweis f\xFCr Sch\xFCler:innen</small>`}${i.url?kwDateiHTML("Unterlagen ansehen",i.url,"",e.id):""}</div></span><button type="button" class="kw-del" data-kw="matweg" data-id="${esc(m.id)}" data-w="${esc(e.id)}" aria-label="L\xF6schen">\xD7</button></div>`};
+  const lv=LX_EBENEN.map((B,ix)=>{const g="afb"+(ix+1),l=items.filter(i=>i.grp===g),pr=ix===2?items.filter(i=>i.grp==="praxis"):[];
+   return`<div class="lxp-lv" id="lxpc-${g}" style="--ek:${B.c};--eb:${B.bg};margin-left:${ix*14}px"><b class="lxp-nr">${B.nr}<small>${B.afb}</small></b><div class="lxp-lb"><h5>Ebene ${B.nr} · ${B.n} ${n("lxpc-"+g)}</h5>${ix===2?`<div class="lxp-sub">Am Fall \xFCben</div>`:""}${rows(l)}<div class="lxp-add">${btn("+ Datei hinzufügen",`data-kw="matadd" data-kat="${kt[ix]}"`)}${btn("+ aus Bibliothek",`data-bb="add" data-g="${g}" data-id="${tid}"`)}</div>${ix===2?`<div class="lxp-sub">Praxisauftrag \xB7 freiwillig</div><p class="lxp-hint">Etwas herstellen oder gestalten. Die Sch\xFCler:innen holen sich das Material bei dir ab oder erhalten digitale Unterlagen.</p>${pr.length?pr.map(prRow).join(""):`<div class="lxp-leer">Noch kein Praxisauftrag.</div>`}<div class="lxp-add">${btn("+ Praxisauftrag anlegen",`data-kw="matadd" data-kat="praxis"`)}</div>`:""}</div></div>`}).join("");
   const g1=items.filter(i=>i.grp==="slk"||i.grp==="baust"),g2=items.filter(i=>i.grp==="fa");
   const sUE=`<p class="lxp-hint">Links die Treppe, rechts die grauen Blöcke. Was angehakt ist, sehen die Schüler:innen als Basis. Den Rest können sie sich mit „+ weitere“ selbst holen.</p><div class="lxp-gr"><div class="lxp-tr">${lv}</div><aside><section class="lxp-g1" id="lxpc-g1"><h5>Selbstlernkurs und Lerneinheiten ${n("lxpc-g1")}</h5>${rows(g1)}<div class="lxp-add">${btn("+ Selbstlernkurs",`data-bb="add" data-g="slk" data-id="${tid}"`)}${btn("+ Baustein einplanen",`data-kw="modulneu" data-id="${tid}"`)}</div></section><section class="lxp-g2" id="lxpc-g2"><h5>Fachaufsatztraining ${n("lxpc-g2")}</h5>${rows(g2)}<div class="lxp-add">${btn("+ Fachaufsatztraining",`data-bb="add" data-g="fa" data-id="${tid}"`)}</div></section></aside></div>`;
   // 4 Check-out
@@ -22969,6 +22972,7 @@ async function renderKwThema(){
   if(trListe)trListe.split(/(?=<div class="lx-ub")/).filter(x=>x.trim()).forEach(h=>{const mm=h.match(/lx-pr-titel">([^<]*)</),km=h.match(/data-kw="ea" data-id="([^"]+)"/),tk=km?"tr:"+km[1]:"";ub.push({h,t:mm?mm[1]:"Training",b:"a",n:"a",fa:true,z:tk&&slPos(tk)?tk:""})});
   if(bibD){(bibD.fort.zusatz||[]).forEach(k=>{const q=bibD.pool.find(x=>x.key===k);if(q){const kat=q.niv==="a"?"vertiefung3":q.niv==="e"?"vertiefung2":"uebung";ub.push({h:lxUebDz({titel:q.titel,url:q.url,id:""},kat,K,e,ph),t:q.titel,b:lxBereichArt(q.art,kat),n:q.niv,fa:q.grp==="fa",z:k})}else if(k.startsWith("ea:")){const it=bibD.items.find(x=>x.key===k);if(it&&!bibD.bib.base.has(k))ub.push({h:lxUebDzHtml(`<div class="kw-dz"><button type="button" class="kw-datei" data-kw="ea" data-id="${esc(it.eaId)}"><span>${esc(it.titel)}</span><small>Selbstlernkurs</small></button></div>`,ph.lbNum,kwKurz(e),"Selbstlernkurs","e"),t:it.titel,b:"t",n:"e",sl:true,z:k})}})}
   const txtT=mats.filter(m=>m.kategorie==="lehrtext").map(m=>m.titel).filter(Boolean);
+  const px=lehrer?[]:mats.filter(m=>m.kategorie==="praxis"&&sicht("m:"+m.id)),pxHtml=px.length?`<div class="lxA-sub">Praxisauftrag \xB7 freiwillig</div>`+px.map(m=>`<div class="lxA-pa"><b>${esc(m.titel||"Praxisauftrag")}</b>${m.hinweis?`<small>${esc(m.hinweis)}</small>`:""}${m.url?kwDateiHTML("Unterlagen \xF6ffnen",m.url,"",e.id):""}</div>`).join(""):"";
   const ubHtml=LX_EBENEN.map((B,ix)=>{
    const l=ub.filter(x=>x.b===B.k&&(lehrer||!(x.fa||x.sl)));
    const PRI={b:[/^Zuordn/i,/L\u00FCckentext/i,/Karteikarten/i],t:[/Fall-?Diagnose/i,/Struktur/i],a:[/K-Prim/i,/Rollenspiel/i,/Fall/i]}[B.k]||[];
@@ -22977,7 +22981,7 @@ async function renderKwThema(){
    const zd=x=>x.z?`<button type="button" class="lxq-zdel" data-bb="zdel" data-id="${esc(e.id)}" data-k="${esc(x.z)}" title="Wieder entfernen">×</button>`:"";const inh=l.length?(lehrer?`<div class="lx-eb-ch">${pk.h}</div>`:l.map(x=>`<div class="lx-eb-ch" style="position:relative">${x.h}${zd(x)}</div>`).join("")):`<div class="kw-leer">${lehrer?"noch leer":"Hier kommen bald Übungen."}</div>`;
    const kt=["uebung","vertiefung2","vertiefung3"][ix];
    const mehr=lehrer?`<div class="lx-mehr"><button type="button" class="secondary kw-add" data-kw="matadd" data-kat="${kt}">+ Weitere Aufgaben</button>${(KW.hideList||[]).some(h=>h.key.startsWith("repo-")&&h.thema===e.id)?`<button type="button" class="text-button" data-kw="hiderestore" data-id="${esc(e.id)}">Entfernte Materialien zur\xFCckholen</button>`:""}</div>`:"";
-   return`<div class="lx-eb" style="--k:${B.c};--kb:${B.bg};--ek:${B.c};--ebg:${B.bg};margin-left:${ix*26}px;--ix:${ix}"><div class="lx-eb-n"><b>${B.nr}</b><small>${B.afb}</small></div><div class="lx-eb-t"><h4>Ebene ${B.nr} \xB7 ${B.n}</h4>${lehrer?`<p>${B.d}</p>`:""}${lehrer&&txtT.length?`<p class="lx-eb-tx">Texte: ${esc(txtT.join(", "))}</p>`:""}${inh}</div></div>`;
+   return`<div class="lx-eb" style="--k:${B.c};--kb:${B.bg};--ek:${B.c};--ebg:${B.bg};margin-left:${ix*26}px;--ix:${ix}"><div class="lx-eb-n"><b>${B.nr}</b><small>${B.afb}</small></div><div class="lx-eb-t"><h4>Ebene ${B.nr} \xB7 ${B.n}</h4>${lehrer?`<p>${B.d}</p>`:""}${lehrer&&txtT.length?`<p class="lx-eb-tx">Texte: ${esc(txtT.join(", "))}</p>`:""}${B.k==="a"&&px.length?`<div class="lxA-sub">Am Fall \xFCben</div>`:""}${inh}${B.k==="a"?pxHtml:""}</div></div>`;
   }).join("");
   const gIt=x=>`<div class="lxq-it">${x.h}${x.z?`<button type="button" class="lxq-zdel" data-bb="zdel" data-id="${esc(e.id)}" data-k="${esc(x.z)}" title="Wieder entfernen">\xD7</button>`:""}</div>`;
   const slkIn=(karten.length?`<div class="kw-baustliste">${karten.join("")}</div>`:"")+ub.filter(x=>x.sl).map(gIt).join(""),faIn=ub.filter(x=>x.fa).map(gIt).join("");

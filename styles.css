@@ -193,3 +193,13 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lxp-row .lxb-t .kw-del{flex:0 0 28px;min-width:28px!important;width:28px;padding:0!important}
 .lxp-lb{padding:6px 6px}
 }
+
+/* Praxisauftrag */
+.lxA-sub,.lxp-sub{font-size:.72rem;font-weight:700;letter-spacing:.4px;color:#5b6b78;text-transform:uppercase;margin:8px 0 5px}
+.lxA-pa,.lxp-pr{border:1px solid #1D9E75;border-left:3px solid #0F6E56;border-radius:8px;background:#E1F5EE;color:#04342C;padding:7px 10px;margin-bottom:6px}
+.lxA-pa b,.lxp-pr b{font-weight:600;display:block;font-size:.92rem}
+.lxA-pa small,.lxp-pr small{display:block;color:#085041;font-size:.8rem;margin:2px 0 4px}
+.lxA-pa .kw-dz,.lxA-pa .kw-datei,.lxp-pr .kw-dz,.lxp-pr .kw-datei{margin:4px 0 0}
+.lxp-row.lxp-prrow{align-items:flex-start}
+.lxp-row.lxp-prrow .lxb-t{flex:1 1 0}
+.lxp-prrow .kw-del{flex:0 0 28px}
