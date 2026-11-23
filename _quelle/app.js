@@ -22099,6 +22099,7 @@ const KW_TR_HINT={fa04:"Fall Tim",fa05:"Fall Tim",fa06:"Fall Tim",fa07:"Fall Tim
  ========================================================= */
 const LX_VORLAUF_TAGE=14;
 // Die sieben Teile jeder Themenseite: Reihenfolge und Randfarbe sind für Schüler:innen und Lehrkräfte gleich.
+const LXD={1:"#469BDC",2:"#9BBF41",4:"#E8A33D",3:"#8E6BC4",6:"#469BDC"};
 const LXF={
  1:{c:"#469BDC",bg:"#EEF6FD",n:"Check-in",d:1},
  8:{c:"#D9467A",bg:"#FCEDF3",n:"Einführung",d:2},
@@ -22269,7 +22270,7 @@ function lxThemaPunkte(e,ph){
  const teile=[
   [1,has("checkin")||checkinAusBank(e.id).length>0],[2,has("einfuehrung")||has("lernsituation")||has("lehrtext")||has("arbeitsblatt")||has("audio")||has("video")||has("tafel")||has("lernuebersicht")],
   [4,mod.some(m=>m.modul!=="fachaufsatz"&&m.modul!=="apt")],[3,has("uebung")||has("vertiefung")||mod.some(m=>m.modul==="fachaufsatz"||m.modul==="apt")],[6,checkinAusBank(e.id+"@ende").length>0]];
- const pts=teile.map(([n,ok])=>`<i class="lx-pt${ok?" an":""}" style="--k:${LXF[n].c}" title="${esc(LXF[n].n)}: ${ok?"vorhanden":"fehlt"}"></i>`).join("");
+ const pts=teile.map(([n,ok])=>`<i class="lx-pt${ok?" an":""}" style="--k:${LXD[n]||LXF[n].c}" title="${esc(LXF[n].n)}: ${ok?"vorhanden":"fehlt"}"></i>`).join("");
  const st=lxThemaStart(e);
  return`<small class="lx-pts" aria-label="Vorhandene Teile">${pts}</small>${st?`<small class="lx-ab">Sch\u00FCler ab ${esc(fmtKurz(st))}</small>`:""}`;
 }
@@ -22353,7 +22354,7 @@ async function renderKachelwand(){
   <div class="kw-top">${kwHeroHTML()}<div class="kw-gesamt">${ring}<div><b>${lehrer?"Vorbereitung":"Gesamtstand"} ${p} %</b><small>${fertig} von ${alle.length} Themen ${lehrer?"mit Material oder Baustein":"erledigt"}</small></div></div></div>
   ${lehrer?"":lxLandkartenKacheln(lehrer)}
   ${lk}
-  ${lehrer?`<p class="lx-hint">Ein Klick auf ein Thema öffnet die Materialliste dieses Themas: Infotext, Tafelbild, Lernübersicht, Selbstlernkurs, Übungsaufgaben AFB I bis III und Fachaufsatztraining. Die Punkte zeigen, was schon gefüllt ist. Schüler:innen sehen ein Thema ab dem Datum „Schüler ab …“; Projekte legst und bearbeitest du im Kopf des Lernbereichs.</p>${lxLegende()}`:""}
+  ${lehrer?`<p class="lx-hint">Ein Klick auf ein Thema öffnet die Bearbeitungsseite dieses Themas mit Check-in, Infotext, Üben und Vertiefen und Check-out. Die Punkte zeigen, was schon gefüllt ist. Schüler:innen sehen ein Thema ab dem Datum „Schüler ab …“; Projekte legst und bearbeitest du im Kopf des Lernbereichs.</p>${lxLegende()}`:""}
   <div class="kw-wand${lehrer?" lx-wahl":""}">${[...LX_CFG.phasen()].sort((a,b)=>a.lbNum-b.lbNum).map(ph=>kwKachelHTML(ph,lehrer)).join("")}</div>
   ${lehrer?lxWerkzeuge():""}
  </div>${footer()}`;
@@ -23333,7 +23334,7 @@ function lxPtAutoLink(){
  });
 }
 function lbModulTitelX(m){try{return(typeof ppmTitel==="function"?ppmTitel(m):m.titel)||m.titel||"Projekt"}catch(e){return m.titel||"Projekt"}}
-function lxLegende(){return`<div class="lx-legende">${LX_LEG.map(n=>`<span><i class="lx-pt an" style="--k:${LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
+function lxLegende(){return`<div class="lx-legende">${LX_LEG.map(n=>`<span><i class="lx-pt an" style="--k:${LXD[n]||LXF[n].c}"></i>${LXF[n].d} ${esc(LXF[n].n)}</span>`).join("")}</div>`}
 const LX_PT_ARB={"Unterrichtsstunde":"stunde","Rollenspiel":"stunde","Lernrallye":"rallye"};
 function lxPtArbBtn(t){
  if(!t||!(t.art==="Unterrichtsstunde"||t.art==="Rollenspiel"||t.art==="Lernrallye"||t.art==="Projekt"||t.art==="\xDCbung"||LX_PT_DLG[t.art]))return"";
