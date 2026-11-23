@@ -21220,6 +21220,7 @@ function kwSchuelerBanner(){
  return isTeacher()&&KW_SCHUELER?`<div class="kw-vorschau" role="status"><span><b>Schüleransicht</b>: So sehen die Schüler:innen den Individuellen Lernpfad, ihre Themen und Projekte. Es lässt sich nichts verändern.</span><button type="button" class="primary" onclick="kwSchuelerUmschalten(false)">Zurück zur Lehrkraft-Ansicht</button></div>`:"";
 }
 window.kwSchuelerUmschalten=kwSchuelerUmschalten;
+document.addEventListener("click",ev=>{if(!isTeacher())return;const a=ev.target.closest&&ev.target.closest("a.nav-link");if(!a)return;const s=!!a.closest(".nav-area-s"),l=!!a.closest(".nav-area-l");if(!s&&!l)return;if(KW_SCHUELER===s)return;KW_SCHUELER=s;KW.geladen=0;PPM.geladen=0;if((a.getAttribute("href")||"")===(location.hash||""))setTimeout(render,0)},true);/*lxNavRolle*/
 const KW={mat:{},fort:{},co:null,geladen:0};
 let activeKwThema=null,activeKwLb=null;
 // Reihenfolge der Dateien auf jeder Themenseite (immer gleich)
