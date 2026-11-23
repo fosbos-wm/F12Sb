@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was bedeutet „zeitstabil“?",
+   "o": [
+    "Das Merkmal bleibt über längere Zeit relativ gleich.",
+    "Das Merkmal ändert sich täglich.",
+    "Das Merkmal zeigt sich nur einmal."
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum ist der Begriff „Charakter“ für die Psychologie nicht mehr brauchbar?",
+   "o": [
+    "Er ist zu neu.",
+    "Er betont das Unveränderbare und wird im Alltag stark bewertet.",
+    "Er beschreibt nur Tiere."
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie erfährt man etwas über die Persönlichkeit eines Menschen?",
+   "o": [
+    "Durch direktes Beobachten der Persönlichkeit",
+    "Durch Messen der Körpergröße",
+    "Indirekt aus seinem Verhalten in konkreten Situationen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist Temperament nach heutigem Verständnis?",
+   "o": [
+    "Ein Persönlichkeitsmerkmal, gekennzeichnet durch Lebhaftigkeit, Schwung und Aktivität",
+    "Die Mischung der Körperflüssigkeiten",
+    "Ein Charakterfehler"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was meint die Struktur einer Persönlichkeit?",
+   "o": [
+    "Das Aussehen",
+    "Die Anordnung der Persönlichkeitsmerkmale zueinander",
+    "Die Anzahl der Freunde"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was erforscht die Persönlichkeitspsychologie?",
+   "o": [
+    "Nur Krankheiten",
+    "Nur Kinder",
+    "Aufbau und Entwicklung der Persönlichkeit"
+   ],
+   "r": 2
+  }
+ ]
+}

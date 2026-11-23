@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist das Selbstkonzept?",
+   "o": [
+    "Gesamtheit aller Wahrnehmungen, Urteilsbildungen und Bewertungen über sich selbst",
+    "Ein Teil des Es",
+    "Die Summe aller Noten"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was ist das phänomenale Feld?",
+   "o": [
+    "Die Umwelt allgemein",
+    "Das individuelle Bezugssystem, die einzigartige Realität eines Menschen",
+    "Ein Testverfahren"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was beschreibt das Real-Selbst?",
+   "o": [
+    "Das, was die Person sein möchte",
+    "Das, was andere sehen",
+    "Das tatsächliche Bild einer Person von sich"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was enthält das Ideal-Selbst?",
+   "o": [
+    "Wunschbild und verinnerlichte Bewertungen anderer",
+    "Nur Wünsche der Eltern",
+    "Nur Fakten"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie entsteht das Selbstkonzept?",
+   "o": [
+    "Durch Vererbung allein",
+    "Durch Erfahrungen",
+    "Durch Zufall"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was kann eine große Diskrepanz zeigen?",
+   "o": [
+    "Gelassenheit",
+    "Selbstzufriedenheit",
+    "Innere Spannung und Unruhe"
+   ],
+   "r": 2
+  }
+ ]
+}

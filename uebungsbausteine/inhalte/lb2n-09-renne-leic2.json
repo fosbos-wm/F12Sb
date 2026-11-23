@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Welche Einflüsse bestimmen das Selbstkonzept?",
+   "o": [
+    "Persönliche Erfahrungen, Forderungen der Bezugspersonen, Beziehungsbotschaften",
+    "Nur die Gene",
+    "Nur Noten"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum übernimmt ein Kind Forderungen der Eltern?",
+   "o": [
+    "Weil es keine eigenen Wünsche hat",
+    "Um positive Beachtung zu erhalten",
+    "Aus Trieb"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was ist besonders prägend?",
+   "o": [
+    "Sachliche Fehlerhinweise",
+    "Schweigen",
+    "Du-Botschaften, die die ganze Person beurteilen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was bedeutet Selbst-Konsistenz?",
+   "o": [
+    "Streben nach Übereinstimmung mit dem Selbstbild",
+    "Streben nach Aufmerksamkeit",
+    "Streben nach Macht"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was folgt aus einem negativen Selbstkonzept („Ich bin kontaktscheu“)?",
+   "o": [
+    "Der Mensch sucht mehr Kontakte",
+    "Kontakte werden vermieden, das Selbstbild wird bestätigt",
+    "Das Selbstbild löst sich auf"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche pädagogische Konsequenz gilt?",
+   "o": [
+    "Person kritisieren",
+    "Nie kritisieren",
+    "Verhalten kritisieren, nicht die Person"
+   ],
+   "r": 2
+  }
+ ]
+}

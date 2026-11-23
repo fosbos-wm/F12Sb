@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Erhaltung",
+  "Entfaltung",
+  "Autonomie"
+ ],
+ "items": [
+  {
+   "t": "essen und trinken",
+   "k": 0
+  },
+  {
+   "t": "sich warm anziehen",
+   "k": 0
+  },
+  {
+   "t": "Spannung abbauen",
+   "k": 0
+  },
+  {
+   "t": "sprechen lernen",
+   "k": 1
+  },
+  {
+   "t": "Fahrrad fahren lernen",
+   "k": 1
+  },
+  {
+   "t": "neue Fähigkeiten entwickeln",
+   "k": 1
+  },
+  {
+   "t": "eigene Entscheidungen treffen",
+   "k": 2
+  },
+  {
+   "t": "sich gegen Kontrolle wehren",
+   "k": 2
+  },
+  {
+   "t": "selbst bestimmen, was man trägt",
+   "k": 2
+  }
+ ]
+}

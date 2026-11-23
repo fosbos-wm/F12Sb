@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Eine Betreuerin sagt: „Ich gebe dem Kind keine Lösung vor. Ich höre zu und vertraue darauf, dass es seinen Weg findet.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Haltung entspricht dem Menschenbild von Rogers.",
+     "richtig": true
+    },
+    {
+     "text": "Sie vertraut auf die Entfaltungstendenz des Kindes.",
+     "richtig": true
+    },
+    {
+     "text": "Das ist eine triebtheoretische Sicht nach Freud.",
+     "richtig": false
+    },
+    {
+     "text": "Sie will die subjektive Erfahrung des Kindes verstehen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Rogers hält den Menschen für gut, deshalb braucht es keine Erziehung.“",
+   "statements": [
+    {
+     "text": "Die Aussage vereinfacht: Rogers betont das Klima, in dem sich der Mensch positiv entwickelt.",
+     "richtig": true
+    },
+    {
+     "text": "Erziehung schafft nach Rogers Wertschätzung und Verständnis.",
+     "richtig": true
+    },
+    {
+     "text": "Rogers hält jedes Verhalten für gut.",
+     "richtig": false
+    },
+    {
+     "text": "Entscheidend ist nicht der Mensch als solcher, sondern das Klima.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

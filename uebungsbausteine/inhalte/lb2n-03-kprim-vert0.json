@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Paul (16) liebt Partys, ist laut und aktiv, vergisst aber oft Termine und lässt sein Zimmer chaotisch. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Seine Extraversion ist hoch ausgeprägt.",
+     "richtig": true
+    },
+    {
+     "text": "Seine Gewissenhaftigkeit ist eher niedrig.",
+     "richtig": true
+    },
+    {
+     "text": "Beide Merkmale schließen sich aus.",
+     "richtig": false
+    },
+    {
+     "text": "Man beschreibt ihn mit mehreren Dimensionen gleichzeitig.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Das Big-Five-Modell erklärt, warum ein Mensch so wird.“",
+   "statements": [
+    {
+     "text": "Es beschreibt Ausprägungen, erklärt aber keine Entstehung.",
+     "richtig": true
+    },
+    {
+     "text": "Faktorenanalytische Modelle erklären die Entwicklung der Persönlichkeit.",
+     "richtig": false
+    },
+    {
+     "text": "Für Erklärungen braucht man andere Theorien, z. B. Rogers oder Bandura.",
+     "richtig": true
+    },
+    {
+     "text": "Ein Profil zeigt, wie stark Merkmale ausgeprägt sind.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

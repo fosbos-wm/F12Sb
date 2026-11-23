@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Ein Vater nimmt seine Tochter (3) immer an die Hand, damit sie nicht fällt. Sie wird trotzig. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Das Kind bewertet die Erfahrung negativ.",
+     "richtig": true
+    },
+    {
+     "text": "Ihre Selbstverwirklichung wird eingeschränkt.",
+     "richtig": true
+    },
+    {
+     "text": "Das ist ein Beleg für fehlende Aktualisierungstendenz.",
+     "richtig": false
+    },
+    {
+     "text": "Hilfe in kleinen Schritten würde die Aktualisierung fördern.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Wer nach Selbstverwirklichung strebt, handelt egoistisch.“",
+   "statements": [
+    {
+     "text": "Rogers meint Entfaltung der Möglichkeiten und Selbstbestimmung.",
+     "richtig": true
+    },
+    {
+     "text": "Selbstverwirklichung bedeutet nicht Rücksichtslosigkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Selbstverwirklichung heißt, nur eigene Wünsche durchzusetzen.",
+     "richtig": false
+    },
+    {
+     "text": "Rogers sieht den Menschen als sozial.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

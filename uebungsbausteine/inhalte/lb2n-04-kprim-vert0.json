@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Tom (17): Offenheit hoch, Gewissenhaftigkeit niedrig, Extraversion mittel, Verträglichkeit hoch, Neurotizismus niedrig. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Tom ist kreativ und umgänglich.",
+     "richtig": true
+    },
+    {
+     "text": "Er braucht eher Unterstützung bei der Selbstorganisation.",
+     "richtig": true
+    },
+    {
+     "text": "Er ist sicher ein unzuverlässiger Mensch in allen Bereichen.",
+     "richtig": false
+    },
+    {
+     "text": "Tom bleibt vor Prüfungen eher gelassen.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Lea hat wenig Gewissenhaftigkeit, also ist sie faul.“",
+   "statements": [
+    {
+     "text": "Die Aussage vermischt Beschreibung und Bewertung.",
+     "richtig": true
+    },
+    {
+     "text": "Ein Profil beschreibt Tendenzen, es bewertet nicht.",
+     "richtig": true
+    },
+    {
+     "text": "Niedrige Gewissenhaftigkeit bedeutet immer Faulheit.",
+     "richtig": false
+    },
+    {
+     "text": "Man sollte Lea differenziert betrachten.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "fördert Selbstregulation",
+  "hemmt Selbstregulation"
+ ],
+ "karten": [
+  {
+   "t": "Ziele selbst setzen dürfen",
+   "s": 0
+  },
+  {
+   "t": "Strategien gemeinsam entwickeln",
+   "s": 0
+  },
+  {
+   "t": "Rückmeldung zum Lernfortschritt",
+   "s": 0
+  },
+  {
+   "t": "Erfolgserlebnisse ermöglichen",
+   "s": 0
+  },
+  {
+   "t": "Alles vorschreiben",
+   "s": 1
+  },
+  {
+   "t": "Nur Fehler betonen",
+   "s": 1
+  },
+  {
+   "t": "Entscheidungen immer abnehmen",
+   "s": 1
+  },
+  {
+   "t": "Ohne Rückmeldung arbeiten lassen",
+   "s": 1
+  }
+ ]
+}

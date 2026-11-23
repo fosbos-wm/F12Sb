@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was misst ein Persönlichkeitsinventar?",
+   "o": [
+    "Ausgewählte Merkmale und deren Ausprägungsgrad",
+    "Die gesamte Persönlichkeit",
+    "Die Intelligenz aller Menschen"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Frageform ist „Treiben Sie täglich Sport?“ (ja/nein)?",
+   "o": [
+    "Offene Frage",
+    "Geschlossene Frage",
+    "Beobachtung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wie viele Aufgaben hat der B5T?",
+   "o": [
+    "138",
+    "18",
+    "50"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Welcher Test fasst 138 Ja/Nein-Aussagen zusammen?",
+   "o": [
+    "FPI",
+    "B5T",
+    "16PF"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Methode gehört NICHT zu den Persönlichkeitsinventaren?",
+   "o": [
+    "Fragebogen mit Skala",
+    "Fallstudie",
+    "Selbstbeurteilung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Grenze hat ein Inventar?",
+   "o": [
+    "Es kann nur Kinder messen.",
+    "Es misst die ganze Persönlichkeit exakt.",
+    "Es beruht auf Selbsteinschätzung und erfasst nur einzelne Merkmale."
+   ],
+   "r": 2
+  }
+ ]
+}

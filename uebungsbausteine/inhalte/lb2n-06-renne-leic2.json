@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie sieht Rogers die menschliche Natur?",
+   "o": [
+    "Grundsätzlich positiv und konstruktiv",
+    "Grundsätzlich triebgesteuert",
+    "Grundsätzlich böse"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was wird psychisch krank, wenn man es unterdrückt?",
+   "o": [
+    "Der Verstand",
+    "Der „gute“ Kern des Menschen",
+    "Der Körper"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welches Klima fördert Entfaltung?",
+   "o": [
+    "Streng, kontrollierend, leistungsbezogen",
+    "Gleichgültig und chaotisch",
+    "Angstfrei, einfühlend, wertschätzend, aufrichtig"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wie sieht Freud den Menschen?",
+   "o": [
+    "Als triebbestimmt im Konflikt",
+    "Als grundsätzlich konstruktiv",
+    "Als völlig frei"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wie erklärt Rogers destruktives Verhalten?",
+   "o": [
+    "Es ist angeboren",
+    "Es entsteht aus Angst und Abwehr",
+    "Es ist ein Zeichen von Stärke"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was folgt aus einem positiven Menschenbild?",
+   "o": [
+    "Man kontrolliert",
+    "Man bestraft",
+    "Man vertraut, begleitet und ermutigt"
+   ],
+   "r": 2
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "titel": "Zuordnung: Beispiele erkennen",
+ "anleitung": "Ordne jedem Begriff die passende Erklärung zu.",
+ "paare": [
+  [
+   "Jonas probiert jede Woche eine neue Sportart aus.",
+   "Openness"
+  ],
+  [
+   "Sara führt einen Lernplan und gibt pünktlich ab.",
+   "Conscientiousness"
+  ],
+  [
+   "Lena kommt mit jedem sofort ins Gespräch.",
+   "Extraversion"
+  ],
+  [
+   "Tim hilft beim Umzug und gibt im Streit meist nach.",
+   "Agreeableness"
+  ],
+  [
+   "Nele schläft vor jeder Klausur schlecht und zweifelt an sich.",
+   "Neuroticism"
+  ],
+  [
+   "Die vielen Adjektive werden statistisch zu fünf Grunddimensionen verdichtet.",
+   "Faktorenanalyse"
+  ]
+ ]
+}

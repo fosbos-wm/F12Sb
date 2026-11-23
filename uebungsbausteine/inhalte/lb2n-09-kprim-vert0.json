@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Nico (9) hört oft: „Du bist unordentlich.“ Er räumt kaum auf und denkt: „Ich bin eben so.“ Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Es handelt sich um eine Du-Botschaft.",
+     "richtig": true
+    },
+    {
+     "text": "Sie kann sein Selbstkonzept negativ prägen.",
+     "richtig": true
+    },
+    {
+     "text": "Das Verhalten ist unabhängig vom Selbstkonzept.",
+     "richtig": false
+    },
+    {
+     "text": "Eine Rückmeldung zum Verhalten wäre günstiger.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Schlechte Noten sind allein die Ursache für ein ungünstiges Selbstkonzept.“",
+   "statements": [
+    {
+     "text": "Die Wirkung läuft auch umgekehrt: ein ungünstiges Selbstkonzept kann Leistungen mit bedingen.",
+     "richtig": true
+    },
+    {
+     "text": "Das Selbstkonzept wird auch durch Bezugspersonen geprägt.",
+     "richtig": true
+    },
+    {
+     "text": "Noten wirken immer allein.",
+     "richtig": false
+    },
+    {
+     "text": "Wechselseitige Beeinflussung ist plausibel.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu Persönlichkeitsinventaren treffen zu?",
+   "statements": [
+    {
+     "text": "Sie erfassen in der Regel nur einzelne Merkmale.",
+     "richtig": true
+    },
+    {
+     "text": "Sie messen die gesamte Persönlichkeit vollständig.",
+     "richtig": false
+    },
+    {
+     "text": "Sie beruhen auf Selbstbeschreibung.",
+     "richtig": true
+    },
+    {
+     "text": "Es gibt nur offene Fragen.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum B5T und FPI treffen zu?",
+   "statements": [
+    {
+     "text": "Der B5T erfasst die Big-Five-Faktoren.",
+     "richtig": true
+    },
+    {
+     "text": "Das FPI hat 138 Aussagen mit Ja/Nein.",
+     "richtig": true
+    },
+    {
+     "text": "Der B5T hat 138 Aufgaben.",
+     "richtig": false
+    },
+    {
+     "text": "Das FPI erfasst auch Extraversion und Neurotizismus.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

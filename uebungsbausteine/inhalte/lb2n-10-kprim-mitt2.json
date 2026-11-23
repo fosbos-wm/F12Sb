@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Selbstregulation treffen zu?",
+   "statements": [
+    {
+     "text": "Sie umfasst Ziele setzen und Verhalten bewerten.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist bei allen Menschen gleich stark.",
+     "richtig": false
+    },
+    {
+     "text": "Sie wird durch Modelllernen beeinflusst.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist ein angeborener Trieb.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Selbstwirksamkeit treffen zu?",
+   "statements": [
+    {
+     "text": "Sie ist eine subjektive Überzeugung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie hängt allein von der objektiven Situation ab.",
+     "richtig": false
+    },
+    {
+     "text": "Sie bezieht sich auf künftige, anspruchsvolle Situationen.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist identisch mit Selbstevaluation.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

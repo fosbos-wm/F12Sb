@@ -1,0 +1,42 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Rogers",
+  "Freud"
+ ],
+ "items": [
+  {
+   "t": "Mensch grundsätzlich konstruktiv",
+   "k": 0
+  },
+  {
+   "t": "Ziel: Selbstverwirklichung",
+   "k": 0
+  },
+  {
+   "t": "Verhalten durch Aktualisierungstendenz",
+   "k": 0
+  },
+  {
+   "t": "Vertrauen und Begleiten",
+   "k": 0
+  },
+  {
+   "t": "Mensch im Triebkonflikt",
+   "k": 1
+  },
+  {
+   "t": "Ziel: Triebe bändigen",
+   "k": 1
+  },
+  {
+   "t": "Verhalten durch Triebenergie",
+   "k": 1
+  },
+  {
+   "t": "Lenkung und Grenzen",
+   "k": 1
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "nennen",
+  "erklären",
+  "verdeutlichen"
+ ],
+ "items": [
+  {
+   "t": "Offenheit: hoch",
+   "k": 0
+  },
+  {
+   "t": "Gewissenhaftigkeit: niedrig",
+   "k": 0
+  },
+  {
+   "t": "Neurotizismus: mittel",
+   "k": 0
+  },
+  {
+   "t": "Das heißt: vielfältige Interessen",
+   "k": 1
+  },
+  {
+   "t": "Das bedeutet: wenig Selbstorganisation",
+   "k": 1
+  },
+  {
+   "t": "Das heißt: leicht aus dem Gleichgewicht",
+   "k": 1
+  },
+  {
+   "t": "Tom liest Fantasy und besucht Museen.",
+   "k": 2
+  },
+  {
+   "t": "Tom vergisst Abgabetermine.",
+   "k": 2
+  },
+  {
+   "t": "Tom schläft vor Klausuren schlecht.",
+   "k": 2
+  }
+ ]
+}

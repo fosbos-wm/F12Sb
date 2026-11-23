@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wie viele angeborene Antriebskräfte gibt es nach Rogers?",
+   "o": [
+    "Nur eine: die Aktualisierungstendenz",
+    "Drei: Es, Ich, Über-Ich",
+    "Zwei: Liebe und Hass"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was meint „Organismus“ bei Rogers?",
+   "o": [
+    "Nur den Körper",
+    "Die psychische und physische Einheit des Menschen",
+    "Nur die Psyche"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche drei Richtungen hat die Aktualisierungstendenz?",
+   "o": [
+    "Oral, anal, phallisch",
+    "Offenheit, Extraversion, Neurotizismus",
+    "Erhaltung, Entfaltung, Autonomie"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wie wird eine Erfahrung bewertet, die Selbstverwirklichung fördert?",
+   "o": [
+    "Positiv",
+    "Negativ",
+    "Gar nicht"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Warum geht die 16-Jährige ohne Jacke?",
+   "o": [
+    "Ihr ist warm.",
+    "Sie bewertet die Aufforderung als Einschränkung ihrer Unabhängigkeit.",
+    "Sie hat die Jacke verloren."
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was zeigt das Gehenlernen?",
+   "o": [
+    "Kinder sollen nur krabbeln.",
+    "Hilfe schadet immer.",
+    "Förderung der Selbstverwirklichung wird positiv bewertet."
+   ],
+   "r": 2
+  }
+ ]
+}

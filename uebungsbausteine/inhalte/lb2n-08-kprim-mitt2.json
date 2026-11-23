@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Selbstkonzept treffen zu?",
+   "statements": [
+    {
+     "text": "Es ist durch Erfahrungen gebildet.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist unveränderbar.",
+     "richtig": false
+    },
+    {
+     "text": "Es ist im Allgemeinen bewusst.",
+     "richtig": true
+    },
+    {
+     "text": "Rogers sieht das Selbst als innere Instanz wie Freud.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Real- und Ideal-Selbst treffen zu?",
+   "statements": [
+    {
+     "text": "Das Ideal-Selbst enthält verinnerlichte Bewertungen anderer.",
+     "richtig": true
+    },
+    {
+     "text": "Menschen versuchen, die Diskrepanz gering zu halten.",
+     "richtig": true
+    },
+    {
+     "text": "Eine große Diskrepanz führt zu seelischer Ausgeglichenheit.",
+     "richtig": false
+    },
+    {
+     "text": "Das Real-Selbst ist das, was man sein möchte.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

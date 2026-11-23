@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Ben (16) setzt sich das Ziel, den Führerschein zu schaffen. Er plant Lernzeiten, glaubt „Ich schaffe das“ und bewertet nach jeder Probeprüfung seine Fehler. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Er zeigt Selbstregulation.",
+     "richtig": true
+    },
+    {
+     "text": "Sein „Ich schaffe das“ ist Selbstwirksamkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Seine Fehlerbewertung ist Selbstevaluation.",
+     "richtig": true
+    },
+    {
+     "text": "Er braucht keine Strategie.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Selbstregulation hängt nur von der Intelligenz ab.“",
+   "statements": [
+    {
+     "text": "Sie hängt auch von Überzeugungen und Modellen ab.",
+     "richtig": true
+    },
+    {
+     "text": "Selbstwirksamkeit ist eine subjektive Überzeugung.",
+     "richtig": true
+    },
+    {
+     "text": "Intelligenz bestimmt allein die Selbstwirksamkeit.",
+     "richtig": false
+    },
+    {
+     "text": "Selbstregulation ist unterschiedlich stark ausgeprägt.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

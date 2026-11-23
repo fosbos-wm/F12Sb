@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Lena (17) denkt: „Ich bin unbegabt“ (Real-Selbst), will aber unbedingt Klassenbeste sein (Ideal-Selbst). Sie ist oft unruhig und gereizt. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Die Diskrepanz ist groß.",
+     "richtig": true
+    },
+    {
+     "text": "Das erklärt die innere Spannung.",
+     "richtig": true
+    },
+    {
+     "text": "Das Selbstkonzept ist ein Teil des Es.",
+     "richtig": false
+    },
+    {
+     "text": "Rogers erklärt Depression u. a. mit solch einer Diskrepanz.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Das Selbstkonzept ist angeboren.“",
+   "statements": [
+    {
+     "text": "Es wird durch Erfahrungen gebildet.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist relativ zeitstabil, aber veränderbar.",
+     "richtig": true
+    },
+    {
+     "text": "Es steht von Geburt an fest.",
+     "richtig": false
+    },
+    {
+     "text": "Verinnerlichte Bewertungen anderer prägen das Ideal-Selbst.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

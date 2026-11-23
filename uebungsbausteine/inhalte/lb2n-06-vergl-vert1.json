@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Rogers",
+  "Freud"
+ ],
+ "karten": [
+  {
+   "t": "Grundtendenz: Potenzial entwickeln",
+   "s": 0
+  },
+  {
+   "t": "Ziel: Selbstverwirklichung",
+   "s": 0
+  },
+  {
+   "t": "Motivation: Aktualisierungstendenz",
+   "s": 0
+  },
+  {
+   "t": "Erziehung: Begleiten",
+   "s": 0
+  },
+  {
+   "t": "Grundkonflikt: Triebe gegen Abwehr",
+   "s": 1
+  },
+  {
+   "t": "Ziel: Triebe bändigen oder kanalisieren",
+   "s": 1
+  },
+  {
+   "t": "Motivation: Triebenergie",
+   "s": 1
+  },
+  {
+   "t": "Erziehung: Lenken und Grenzen",
+   "s": 1
+  }
+ ]
+}

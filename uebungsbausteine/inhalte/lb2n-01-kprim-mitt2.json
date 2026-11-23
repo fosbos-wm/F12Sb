@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zum Persönlichkeitsbegriff treffen zu?",
+   "statements": [
+    {
+     "text": "Persönlichkeit besteht aus verschiedenen Persönlichkeitsmerkmalen.",
+     "richtig": true
+    },
+    {
+     "text": "Persönlichkeitsmerkmale sind völlig unveränderlich.",
+     "richtig": false
+    },
+    {
+     "text": "Persönlichkeit ist ein gedanklich konstruiertes Gefüge.",
+     "richtig": true
+    },
+    {
+     "text": "Die Persönlichkeit lässt sich direkt beobachten.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Temperament und Charakter treffen zu?",
+   "statements": [
+    {
+     "text": "Charakter wird im Alltag oft bewertet.",
+     "richtig": true
+    },
+    {
+     "text": "Temperament ist heute ein Persönlichkeitsmerkmal.",
+     "richtig": true
+    },
+    {
+     "text": "Der Begriff Charakter betont das Veränderbare.",
+     "richtig": false
+    },
+    {
+     "text": "Temperament wurde in der Antike mit Körperflüssigkeiten erklärt.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

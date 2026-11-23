@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was zeigt ein Big-Five-Profil?",
+   "o": [
+    "Die Ausprägung der fünf Faktoren",
+    "Nur die Intelligenz",
+    "Die Noten"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was bedeutet „relative Ausprägung“?",
+   "o": [
+    "Genaue Schulnote",
+    "Vergleich mit anderen Menschen",
+    "Nur eigene Einschätzung"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Reihenfolge nutzt man beim Beschreiben einer Person?",
+   "o": [
+    "Verdeutlichen – nennen",
+    "Beurteilen – nennen",
+    "Nennen – erklären – verdeutlichen"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was kann sehr hohe Gewissenhaftigkeit auch bedeuten?",
+   "o": [
+    "Eine gewisse Zwanghaftigkeit bei Regeln",
+    "Starke Nachlässigkeit",
+    "Große Offenheit"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Wirkung hat hoher Neurotizismus oft?",
+   "o": [
+    "Man ist besonders gelassen.",
+    "Man gerät unter Stress leichter aus dem Gleichgewicht.",
+    "Man ist nie nervös."
+   ],
+   "r": 1
+  },
+  {
+   "f": "Wofür kann man ein Profil in der Praxis nutzen?",
+   "o": [
+    "Um sie zu bestrafen",
+    "Um ihre Noten festzulegen",
+    "Kinder und Jugendliche differenziert zu beschreiben"
+   ],
+   "r": 2
+  }
+ ]
+}

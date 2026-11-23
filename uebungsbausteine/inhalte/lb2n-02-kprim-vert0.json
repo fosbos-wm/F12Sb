@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Fall: Ein Online-Test „Welcher Typ bist du?“ verspricht, die ganze Persönlichkeit in 5 Minuten zu bestimmen. Welche Aussagen treffen zu?",
+   "statements": [
+    {
+     "text": "Ein seriöses Inventar erfasst nur einzelne Merkmale.",
+     "richtig": true
+    },
+    {
+     "text": "Die Selbsteinschätzung kann verzerrt sein.",
+     "richtig": true
+    },
+    {
+     "text": "Der Test misst sicher die gesamte Persönlichkeit.",
+     "richtig": false
+    },
+    {
+     "text": "Ein einzelnes Ergebnis ist eine Momentaufnahme.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Ein Fragebogen reicht, um einen Menschen vollständig zu verstehen.“",
+   "statements": [
+    {
+     "text": "Die Aussage überschätzt den Test.",
+     "richtig": true
+    },
+    {
+     "text": "Weitere Methoden sind Beobachtung und Fallstudie.",
+     "richtig": true
+    },
+    {
+     "text": "Fragebögen messen jedes Merkmal fehlerfrei.",
+     "richtig": false
+    },
+    {
+     "text": "Ergebnisse brauchen kritische Deutung.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

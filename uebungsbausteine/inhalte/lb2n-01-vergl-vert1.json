@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Zeitstabilität",
+  "Veränderbarkeit"
+ ],
+ "karten": [
+  {
+   "t": "Mia ist seit Jahren still.",
+   "s": 0
+  },
+  {
+   "t": "Jonas ist in jeder Klasse der Ordentliche.",
+   "s": 0
+  },
+  {
+   "t": "Grundzüge bleiben erkennbar.",
+   "s": 0
+  },
+  {
+   "t": "Verhalten ist über Wochen vorhersagbar.",
+   "s": 0
+  },
+  {
+   "t": "Durch den Theaterkurs wird Mia mutiger.",
+   "s": 1
+  },
+  {
+   "t": "Neue Erfahrungen verändern Eva.",
+   "s": 1
+  },
+  {
+   "t": "Nach dem Praktikum wird Jonas lockerer.",
+   "s": 1
+  },
+  {
+   "t": "Merkmale sind nicht starr.",
+   "s": 1
+  }
+ ]
+}

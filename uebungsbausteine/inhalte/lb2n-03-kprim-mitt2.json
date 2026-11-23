@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zu den Big Five treffen zu?",
+   "statements": [
+    {
+     "text": "Es gibt fünf Grunddimensionen der Persönlichkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Die Dimensionen sind nur zwei: Extraversion und Neurotizismus.",
+     "richtig": false
+    },
+    {
+     "text": "Die Faktoren stammen aus statistischen Verfahren.",
+     "richtig": true
+    },
+    {
+     "text": "Die Big Five sind ein Test, aber kein Modell.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu den Polen treffen zu?",
+   "statements": [
+    {
+     "text": "Verträglichkeit steht im Gegensatz zu Unverträglichkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Neurotizismus ist das Gegenteil von emotionaler Stabilität.",
+     "richtig": true
+    },
+    {
+     "text": "Extraversion bedeutet immer Aggression.",
+     "richtig": false
+    },
+    {
+     "text": "Offenheit steht im Gegensatz zu Verschlossenheit.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

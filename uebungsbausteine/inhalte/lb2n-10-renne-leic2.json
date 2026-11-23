@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Was ist Selbstregulation?",
+   "o": [
+    "Sich selbst motivieren, Ziele setzen, Strategien entwerfen, Verhalten bewerten und ändern",
+    "Ein Trieb",
+    "Eine Intelligenzstufe"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wer hat die sozial-kognitive Theorie entwickelt?",
+   "o": [
+    "Carl Rogers",
+    "Albert Bandura",
+    "Sigmund Freud"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was meint Selbstwirksamkeit?",
+   "o": [
+    "Objektive Leistungsfähigkeit",
+    "Genetische Begabung",
+    "Subjektive Überzeugung, anspruchsvolle Situationen bewältigen zu können"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was ist Selbstevaluation?",
+   "o": [
+    "Bewertung des eigenen Erlebens und Verhaltens",
+    "Messung durch Fremde",
+    "Vergleich mit Tieren"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was zählt für die Selbstwirksamkeit besonders?",
+   "o": [
+    "Die objektive Situation",
+    "Dass die Person glaubt, sie könne es bewältigen",
+    "Die Noten der anderen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was beeinflusst die Selbstregulation zusätzlich?",
+   "o": [
+    "Zufall",
+    "Das Es",
+    "Modelllernen"
+   ],
+   "r": 2
+  }
+ ]
+}

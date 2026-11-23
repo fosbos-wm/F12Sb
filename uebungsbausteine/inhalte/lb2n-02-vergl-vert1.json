@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Offene Frage",
+  "Geschlossene Frage"
+ ],
+ "karten": [
+  {
+   "t": "Frei antworten",
+   "s": 0
+  },
+  {
+   "t": "Persönlichere Antworten",
+   "s": 0
+  },
+  {
+   "t": "Schwer auszuwerten",
+   "s": 0
+  },
+  {
+   "t": "Was schätzen Sie an sich?",
+   "s": 0
+  },
+  {
+   "t": "Ja/Nein ankreuzen",
+   "s": 1
+  },
+  {
+   "t": "Leicht vergleichbar",
+   "s": 1
+  },
+  {
+   "t": "Skala von 1 bis 5",
+   "s": 1
+  },
+  {
+   "t": "Schnell auswertbar",
+   "s": 1
+  }
+ ]
+}

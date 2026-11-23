@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wofür steht das C in OCEAN?",
+   "o": [
+    "Conscientiousness (Gewissenhaftigkeit)",
+    "Charakter",
+    "Creativity"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Wer entwickelte die Big Five?",
+   "o": [
+    "Freud und Jung",
+    "Costa und McCrae",
+    "Rogers und Bandura"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was bedeutet hohe Extraversion?",
+   "o": [
+    "Starke Ängstlichkeit",
+    "Hohe Ordnungsliebe",
+    "Hohe Geselligkeit, Gesprächigkeit, Aktivität und Expressivität"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Was kennzeichnet hohen Neurotizismus?",
+   "o": [
+    "Empfindlichkeit, unter Stress leichter aus dem Gleichgewicht",
+    "Große Gelassenheit",
+    "Hohe Kontaktfreude"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welcher Faktor beschreibt ein vertrauensvolles, hilfsbereites Verhalten gegenüber anderen?",
+   "o": [
+    "Offenheit",
+    "Verträglichkeit",
+    "Neurotizismus"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welchen Nachteil haben faktorenanalytische Modelle?",
+   "o": [
+    "Sie sind nicht messbar.",
+    "Sie sind zu ungenau für Erwachsene.",
+    "Sie beschreiben, erklären aber nicht."
+   ],
+   "r": 2
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur humanistischen Psychologie treffen zu?",
+   "statements": [
+    {
+     "text": "Sie gilt als dritte Kraft neben Psychoanalyse und Behaviorismus.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist durch eine einheitliche Theorie verbunden.",
+     "richtig": false
+    },
+    {
+     "text": "Sie hat ein gleichartiges positives Menschenbild.",
+     "richtig": true
+    },
+    {
+     "text": "Sie sieht den Menschen als grundsätzlich triebgesteuert.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zu Rogers treffen zu?",
+   "statements": [
+    {
+     "text": "Er entwickelte die klientenzentrierte Therapie.",
+     "richtig": true
+    },
+    {
+     "text": "Er wollte Menschen formen und verbessern.",
+     "richtig": false
+    },
+    {
+     "text": "Er wollte die subjektive Erfahrung verstehen.",
+     "richtig": true
+    },
+    {
+     "text": "Er war von Beruf Verhaltenstherapeut.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

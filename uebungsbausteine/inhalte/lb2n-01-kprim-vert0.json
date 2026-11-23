@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Fall und Beurteilung",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen treffen zu? Fall: Jonas (17) war schon als Kind sehr ordentlich. Durch sein Praktikum in der Kita wird er lockerer, bleibt aber insgesamt gewissenhaft.",
+   "statements": [
+    {
+     "text": "Seine Gewissenhaftigkeit zeigt die Zeitstabilität.",
+     "richtig": true
+    },
+    {
+     "text": "Die Veränderung zeigt, dass Merkmale nicht starr sind.",
+     "richtig": true
+    },
+    {
+     "text": "Jonas’ Persönlichkeit ist deshalb widerlegt.",
+     "richtig": false
+    },
+    {
+     "text": "Aus seinem Verhalten schließt man auf sein Merkmal.",
+     "richtig": true
+    }
+   ]
+  },
+  {
+   "frage": "Beurteile: „Persönlichkeit ist angeboren und ändert sich nie.“",
+   "statements": [
+    {
+     "text": "Die Aussage vernachlässigt die Veränderbarkeit.",
+     "richtig": true
+    },
+    {
+     "text": "Persönlichkeitsmerkmale sind relativ konstant, aber veränderbar.",
+     "richtig": true
+    },
+    {
+     "text": "Die Aussage ist vollständig richtig.",
+     "richtig": false
+    },
+    {
+     "text": "Erfahrungen können Merkmale verändern.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}

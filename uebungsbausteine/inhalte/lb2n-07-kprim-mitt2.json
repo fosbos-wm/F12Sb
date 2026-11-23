@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Aktualisierungstendenz treffen zu?",
+   "statements": [
+    {
+     "text": "Sie ist die einzige angeborene Antriebskraft.",
+     "richtig": true
+    },
+    {
+     "text": "Sie entsteht erst durch Erziehung.",
+     "richtig": false
+    },
+    {
+     "text": "Sie umfasst Erhaltung, Entfaltung und Selbstbestimmung.",
+     "richtig": true
+    },
+    {
+     "text": "Sie ist ein Trieb im Sinne Freuds.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zum organismischen Bewertungsprozess treffen zu?",
+   "statements": [
+    {
+     "text": "Jede Erfahrung wird danach bewertet, ob sie das Wachstum fördert.",
+     "richtig": true
+    },
+    {
+     "text": "Hinderliche Erfahrungen werden positiv bewertet.",
+     "richtig": false
+    },
+    {
+     "text": "Förderliche Erfahrungen werden angestrebt.",
+     "richtig": true
+    },
+    {
+     "text": "Er findet nur in Therapien statt.",
+     "richtig": false
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Beschreibung",
+  "Bewertung"
+ ],
+ "karten": [
+  {
+   "t": "Tom ist wenig gewissenhaft.",
+   "s": 0
+  },
+  {
+   "t": "Lea hat hohe Offenheit.",
+   "s": 0
+  },
+  {
+   "t": "Er plant selten im Voraus.",
+   "s": 0
+  },
+  {
+   "t": "Sie zeigt starke Neugier.",
+   "s": 0
+  },
+  {
+   "t": "Tom ist faul.",
+   "s": 1
+  },
+  {
+   "t": "Lea ist eine Chaotin.",
+   "s": 1
+  },
+  {
+   "t": "Er ist ein schlechter Mensch.",
+   "s": 1
+  },
+  {
+   "t": "Sie ist unmöglich.",
+   "s": 1
+  }
+ ]
+}

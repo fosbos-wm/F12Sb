@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Wirkung: Bestätigung positiv",
+  "Wirkung: Bestätigung negativ"
+ ],
+ "karten": [
+  {
+   "t": "Kontakte suchen → Erfolgserlebnis",
+   "s": 0
+  },
+  {
+   "t": "Erfolg stärkt Selbstvertrauen",
+   "s": 0
+  },
+  {
+   "t": "Mehr Übung führt zu Sicherheit",
+   "s": 0
+  },
+  {
+   "t": "Selbstbild wird gefestigt",
+   "s": 0
+  },
+  {
+   "t": "Kontakte meiden → Misserfolg",
+   "s": 1
+  },
+  {
+   "t": "Misserfolg verstärkt Selbstzweifel",
+   "s": 1
+  },
+  {
+   "t": "Weniger Übung führt zu Unsicherheit",
+   "s": 1
+  },
+  {
+   "t": "Negatives Selbstbild bestätigt sich",
+   "s": 1
+  }
+ ]
+}

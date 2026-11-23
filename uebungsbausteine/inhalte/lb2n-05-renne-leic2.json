@@ -1,0 +1,60 @@
+{
+ "titel": "Rennen: Wissensfragen",
+ "anleitung": "Beantworte die Fragen so schnell und sicher wie möglich.",
+ "fragen": [
+  {
+   "f": "Wer begründete die personenzentrierte Theorie?",
+   "o": [
+    "Carl Rogers",
+    "Sigmund Freud",
+    "Albert Bandura"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Welche Richtung gilt als „dritte Kraft“?",
+   "o": [
+    "Psychoanalyse",
+    "Humanistische Psychologie",
+    "Behaviorismus"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Was verbindet die humanistische Psychologie?",
+   "o": [
+    "Eine einheitliche Theorie",
+    "Eine gemeinsame Messmethode",
+    "Ein gleichartiges, positives Menschenbild"
+   ],
+   "r": 2
+  },
+  {
+   "f": "Wozu entwickelte Rogers seine Techniken zusammenfassend?",
+   "o": [
+    "Zur klientenzentrierten Therapie",
+    "Zur Psychoanalyse",
+    "Zur Verhaltenstherapie"
+   ],
+   "r": 0
+  },
+  {
+   "f": "Was will Rogers bei einem Menschen vor allem?",
+   "o": [
+    "Sein Verhalten formen und kontrollieren",
+    "Seine subjektive Erfahrung verstehen",
+    "Seine Triebe bändigen"
+   ],
+   "r": 1
+  },
+  {
+   "f": "Welche Haltung zeigt die Erzieherin im Basteln-Beispiel?",
+   "o": [
+    "Strenge Korrektur",
+    "Gleichgültigkeit",
+    "Vertrauen in die eigenen Möglichkeiten des Kindes"
+   ],
+   "r": 2
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "titel": "Blockfall: Begriffe sortieren",
+ "anleitung": "Ordne jede Aussage der passenden Kategorie zu, bevor der Block unten ankommt.",
+ "kategorien": [
+  "Offenheit",
+  "Gewissenhaftigkeit",
+  "Extraversion"
+ ],
+ "items": [
+  {
+   "t": "neugierig und einfallsreich",
+   "k": 0
+  },
+  {
+   "t": "hinterfragt Normen",
+   "k": 0
+  },
+  {
+   "t": "vielfältig interessiert",
+   "k": 0
+  },
+  {
+   "t": "ordentlich und zuverlässig",
+   "k": 1
+  },
+  {
+   "t": "zielstrebig und pflichtbewusst",
+   "k": 1
+  },
+  {
+   "t": "organisiert sich selbst",
+   "k": 1
+  },
+  {
+   "t": "gesellig und gesprächig",
+   "k": 2
+  },
+  {
+   "t": "aktiv und optimistisch",
+   "k": 2
+  },
+  {
+   "t": "sucht Kontakt zu Menschen",
+   "k": 2
+  }
+ ]
+}

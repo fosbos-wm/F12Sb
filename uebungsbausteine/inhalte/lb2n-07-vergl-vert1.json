@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "fördert die Aktualisierung",
+  "hemmt die Aktualisierung"
+ ],
+ "karten": [
+  {
+   "t": "Hilfestellung beim Gehenlernen",
+   "s": 0
+  },
+  {
+   "t": "Ermutigung zu eigenen Schritten",
+   "s": 0
+  },
+  {
+   "t": "Wahlmöglichkeiten im Alltag",
+   "s": 0
+  },
+  {
+   "t": "Zutrauen in die eigene Kraft",
+   "s": 0
+  },
+  {
+   "t": "ständiges Festhalten an der Hand",
+   "s": 1
+  },
+  {
+   "t": "Entscheidungen immer abnehmen",
+   "s": 1
+  },
+  {
+   "t": "Dauerhafte Kontrolle",
+   "s": 1
+  },
+  {
+   "t": "Aufgaben ohne Spielraum",
+   "s": 1
+  }
+ ]
+}

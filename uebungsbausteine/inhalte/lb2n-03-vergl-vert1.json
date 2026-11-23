@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "hohe Ausprägung",
+  "niedrige Ausprägung"
+ ],
+ "karten": [
+  {
+   "t": "Extraversion: gesprächig und gesellig",
+   "s": 0
+  },
+  {
+   "t": "Neurotizismus: ängstlich und nervös",
+   "s": 0
+  },
+  {
+   "t": "Gewissenhaftigkeit: pünktlich und ordentlich",
+   "s": 0
+  },
+  {
+   "t": "Offenheit: neugierig auf Neues",
+   "s": 0
+  },
+  {
+   "t": "Extraversion: zurückhaltend und distanziert",
+   "s": 1
+  },
+  {
+   "t": "Neurotizismus: ruhig und gelassen",
+   "s": 1
+  },
+  {
+   "t": "Gewissenhaftigkeit: nachlässig",
+   "s": 1
+  },
+  {
+   "t": "Offenheit: konservativ, verschlossen",
+   "s": 1
+  }
+ ]
+}

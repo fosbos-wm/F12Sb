@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "geringe Diskrepanz",
+  "große Diskrepanz"
+ ],
+ "karten": [
+  {
+   "t": "Person erlebt sich als entspannt",
+   "s": 0
+  },
+  {
+   "t": "Ausgeglichenheit",
+   "s": 0
+  },
+  {
+   "t": "Gesunde seelische Entwicklung",
+   "s": 0
+  },
+  {
+   "t": "Real- und Ideal-Selbst stimmen weitgehend überein",
+   "s": 0
+  },
+  {
+   "t": "Innere Spannungen und Unruhe",
+   "s": 1
+  },
+  {
+   "t": "Negatives Real-Selbst, überhöhtes Ideal-Selbst",
+   "s": 1
+  },
+  {
+   "t": "Unausgeglichenheit",
+   "s": 1
+  },
+  {
+   "t": "Depressive Gedanken",
+   "s": 1
+  }
+ ]
+}

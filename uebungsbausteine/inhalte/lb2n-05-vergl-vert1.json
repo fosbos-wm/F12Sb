@@ -1,0 +1,42 @@
+{
+ "titel": "Theorievergleich: Argumente gegenüberstellen",
+ "anleitung": "Tippe eine Karte an und dann die Spalte, zu der sie gehört. Wenn alle Karten sortiert sind, kannst du prüfen.",
+ "spalten": [
+  "Humanistisches Menschenbild",
+  "Anderes Menschenbild"
+ ],
+ "karten": [
+  {
+   "t": "Mensch ist positiv und konstruktiv",
+   "s": 0
+  },
+  {
+   "t": "Vertrauen in die eigenen Möglichkeiten",
+   "s": 0
+  },
+  {
+   "t": "Begleiten und Ermutigen",
+   "s": 0
+  },
+  {
+   "t": "Verstehen der subjektiven Sicht",
+   "s": 0
+  },
+  {
+   "t": "Mensch durch Triebe gesteuert",
+   "s": 1
+  },
+  {
+   "t": "Verhalten durch Verstärkung geformt",
+   "s": 1
+  },
+  {
+   "t": "Lenken und Grenzen setzen als Hauptweg",
+   "s": 1
+  },
+  {
+   "t": "Mensch als Bündel von Reaktionen",
+   "s": 1
+  }
+ ]
+}

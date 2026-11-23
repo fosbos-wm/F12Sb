@@ -1,0 +1,48 @@
+{
+ "titel": "K-Prim: Aussagen prüfen",
+ "anleitung": "Entscheide bei jeder Aussage, ob sie zutrifft oder nicht.",
+ "aufgaben": [
+  {
+   "frage": "Welche Aussagen zur Bildung des Selbstkonzepts treffen zu?",
+   "statements": [
+    {
+     "text": "Forderungen der Bezugspersonen werden verinnerlicht.",
+     "richtig": true
+    },
+    {
+     "text": "Beziehungsbotschaften haben keinen Einfluss.",
+     "richtig": false
+    },
+    {
+     "text": "Persönliche Erfahrungen prägen das Selbstkonzept.",
+     "richtig": true
+    },
+    {
+     "text": "Es ist von Geburt an festgelegt.",
+     "richtig": false
+    }
+   ]
+  },
+  {
+   "frage": "Welche Aussagen zur Wirkung treffen zu?",
+   "statements": [
+    {
+     "text": "Das Selbstkonzept beeinflusst Wahrnehmung, Erleben und Verhalten.",
+     "richtig": true
+    },
+    {
+     "text": "Reize, die zum Selbstbild passen, werden eher wahrgenommen.",
+     "richtig": true
+    },
+    {
+     "text": "Menschen verhalten sich entgegen ihrem Selbstbild.",
+     "richtig": false
+    },
+    {
+     "text": "Erfahrungen bestätigen häufig das Selbstbild.",
+     "richtig": true
+    }
+   ]
+  }
+ ]
+}
