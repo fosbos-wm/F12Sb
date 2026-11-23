@@ -21275,10 +21275,10 @@ async function kwLaden(){
   getDocs(collection(db,"lehrplanMaterialien")).catch(e=>{console.warn("Material:",e);return null}),
   kwLehrer()?null:ppmMeineLaden().catch(()=>{}),
   ladeCheckoutDaten().catch(()=>null),lxSichtLaden(),lxWaLaden().catch(()=>{})]);
- KW.mat={};KW.fort={};KW.hide=new Set();KW.hideList=[];KW.basis={};
- if(mat)mat.docs.forEach(d=>{const x={id:d.id,...d.data()};if(x.kategorie==="_hide"){KW.hide.add(x.hide);KW.hideList.push({key:x.hide,docId:d.id,thema:x.thema||""});return}if(x.kategorie==="_basis"){KW.basis[x.thema]={an:new Set(x.an||[]),aus:new Set(x.aus||[])};return}(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)});
+ KW.mat={};KW.fort={};KW.hide=new Set();KW.hideList=[];
+ if(mat)mat.docs.forEach(d=>{const x={id:d.id,...d.data()};if(x.kategorie==="_hide"){KW.hide.add(x.hide);KW.hideList.push({key:x.hide,docId:d.id,thema:x.thema||""});return}(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push(x)});
  // Mitgelieferte Materialien aus dem Repo (material.json): Infotexte u. a., ohne Upload in der App.
- try{const rr=await(()=>{const p=window.__matP;window.__matP=null;return p||fetch("material.json",{cache:"no-cache"})})();if(rr.ok){((await rr.json()).material||[]).forEach(x=>{if(KW.hide.has("repo-"+x.id))return;if((KW.mat[x.wocheId]||[]).some(y=>y.url===x.url))return;(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push({fach:"paedagogik",...x,id:"repo-"+x.id})})}}catch(e){console.warn("material.json:",e)}
+ try{const rr=await(()=>{const p=window.__matP;window.__matP=null;return p||fetch("material.json",{cache:"no-cache"})})();if(rr.ok){((await rr.json()).material||[]).forEach(x=>{if(KW.hide.has("repo-"+x.id))return;const _m=/^ubn\d+[lmv](\d+)t?$/.exec(x.id||"");if(_m&&+_m[1]>1)return;if((KW.mat[x.wocheId]||[]).some(y=>y.url===x.url))return;(KW.mat[x.wocheId]=KW.mat[x.wocheId]||[]).push({fach:"paedagogik",...x,id:"repo-"+x.id})})}}catch(e){console.warn("material.json:",e)}
  lxMatSort();
  if(!kwLehrer()){
   if(PPM.meine.fortAlle)KW.fort=PPM.meine.fortAlle;
@@ -22549,15 +22549,13 @@ async function lxThemaPfadSeite(e,ph,F){
   Promise.all(KW_TRAININGS_ALLE.map(x=>einarbeitungInfo(x).catch(()=>null))),
   lxUebKataloge(),lxMeinLaden().catch(()=>null)]);
  let ubN=0;try{if(L)ubN=lxMetrik(uid,e.id,{ci:Object.values(L.ci),ub:L.ub,fa:L.fa,fort:{[uid]:KW.fort||{}}}).ubN||0}catch(x){}
- const bibItems=lxBibItems(e,ph,K,ea,eaS,trInfos),bibPool=lxBibPool(e,ph,K,bibItems),bib=lxBibVis(e,bibItems,fort),bibKnown=new Set(bibItems.map(x=>x.key)),sicht=k=>!bibKnown.has(k)||bib.vis.has(k),slPos=k=>(fort.zusatz||[]).includes(k)&&!bib.base.has(k),zx=(k,h)=>slPos(k)?h.replace(/<\/div>$/,`<button type="button" class="lxq-zdel" data-bb="zdel" data-id="${esc(e.id)}" data-k="${esc(k)}" title="Wieder entfernen">×</button></div>`):h;
- const matsV=mats.filter(m=>sicht("m:"+m.id));
  const hatCo=checkinAusBank(e.id+"@ende").length>0;
  const selbst=Number(fort.selbst)||0;
  if(co&&!fort.abgeschlossen&&!isTeacher()){fort.abgeschlossen=true;KW.fort[e.id]={...fort,abgeschlossen:true};setDoc(doc(db,"lehrplanFortschritt",`${uid}_${e.id}`),{uid,wocheId:e.id,fach:"paedagogik",abgeschlossen:true,abgeschlossenAt:serverTimestamp()},{merge:true}).catch(()=>{});LXM.t=0}
  /* Infotext */
- const lesen=["lernsituation","lehrtext","arbeitsblatt"].flatMap(k=>matsV.filter(m=>m.kategorie===k));
- const hoeren=matsV.filter(m=>m.kategorie==="audio");
- const sehen=["video","einfuehrung","tafel","lernuebersicht"].flatMap(k=>matsV.filter(m=>m.kategorie===k));
+ const lesen=["lernsituation","lehrtext","arbeitsblatt"].flatMap(k=>mats.filter(m=>m.kategorie===k));
+ const hoeren=mats.filter(m=>m.kategorie==="audio");
+ const sehen=["video","einfuehrung","tafel","lernuebersicht"].flatMap(k=>mats.filter(m=>m.kategorie===k));
   const dl=lesen[0]&&lesen[0].url?`<a class="secondary lxq-dl" href="${esc(lesen[0].url)}" target="_blank" rel="noopener" download>Infotext herunterladen</a>`:"";
  const hatInfo=lesen.length||hoeren.length||sehen.length;
  const infoIn=hatInfo?lxInfoListe(lesen,"")+(hoeren.length?`<h3 class="lxq-h3">Zum Hören</h3>${lxInfoListe(hoeren,"")}`:"")+(sehen.length?`<h3 class="lxq-h3">Zum Sehen</h3>${lxInfoListe(sehen,"")}`:"")+(hatCo?`<div class="lxq-frage"><b>Kommst du schon klar?</b><div class="kw-aktionen"><button type="button" class="primary" data-ce="co" data-id="${esc(e.id)}">Ja, weiter zum Check-out</button><button type="button" class="secondary" data-lx="pfad" data-s="ueben">Noch nicht, ich übe erst</button></div></div>`:""):`<div class="kw-leer">Der Infotext zu diesem Thema folgt.</div>`;
@@ -22567,23 +22565,21 @@ async function lxThemaPfadSeite(e,ph,F){
  const aus=new Set((PPM.aus||[]).filter(a=>(a.themen||[]).includes(e.id)).map(a=>a.kursId));
  const nb=lxNachbIds();
  const items=[];
- ["uebung","vertiefung1","vertiefung2","vertiefung3"].forEach(kat=>matsV.filter(m=>m.kategorie===kat).forEach(m=>{{const _u=String(m.url||"");if(/^uebungsbausteine\/station\.html\?s=/.test(_u)){const _x=K.ub.find(y=>y.id===_u.split("s=")[1]);{const _T=kwUbThemen(_x);if(_x&&_T&&!_T.includes(e.id))return}}}const mt=lxUebMeta(m,kat,K,e,ph);let nv=mt.niv;if(/^uebungsbausteine\/station\.html\?s=/.test(String(m.url||""))&&!K.ub.some(x=>x.id===String(m.url).split("s=")[1]))nv=kat==="vertiefung3"?"a":(kat==="vertiefung2"?"e":"g");items.push({h:kwDateiHTML(m.titel,m.url,"",e.id),b:lxBereichArt(mt.art,kat),n:nv,z:slPos("m:"+m.id)?"m:"+m.id:""})}));
- (fort.zusatz||[]).forEach(k=>{const q=bibPool.find(x=>x.key===k);if(q)items.push({h:kwDateiHTML(q.titel,q.url,"",e.id),b:lxBereichArt(q.art,q.niv==="a"?"vertiefung3":q.niv==="e"?"vertiefung2":"uebung"),n:q.niv,z:k})});
+ ["uebung","vertiefung1","vertiefung2","vertiefung3"].forEach(kat=>mats.filter(m=>m.kategorie===kat).forEach(m=>{{const _u=String(m.url||"");if(/^uebungsbausteine\/station\.html\?s=/.test(_u)){const _x=K.ub.find(y=>y.id===_u.split("s=")[1]);{const _T=kwUbThemen(_x);if(_x&&_T&&!_T.includes(e.id))return}}}const mt=lxUebMeta(m,kat,K,e,ph);let nv=mt.niv;if(/^uebungsbausteine\/station\.html\?s=/.test(String(m.url||""))&&!K.ub.some(x=>x.id===String(m.url).split("s=")[1]))nv=kat==="vertiefung3"?"a":(kat==="vertiefung2"?"e":"g");items.push({h:kwDateiHTML(m.titel,m.url,"",e.id),b:lxBereichArt(mt.art,kat),n:nv})}));
  const stufen=[["g","AFB I","Pflichtniveau P/P"],["e","AFB II","Mehr Übung"],["a","AFB III","Für Ehrgeizige"]];
  const kachel=(kicker,titel,text,btn)=>`<div class="lxq-zus"><small>${kicker}</small><b>${esc(titel)}</b>${text?`<span>${esc(text)}</span>`:""}${btn}</div>`;
- const sl=[],slZ=[];
- if(ea&&!ea.entwurf&&!(KW.hide&&KW.hide.has("ea:"+e.id))&&sicht("ea:"+e.id)){(slPos("ea:"+e.id)?slZ:sl).push(zx("ea:"+e.id,kachel("SELBSTLERNKURS",ea.titel||kwKurz(e),fort.einarbeitungAbgeschlossen?"abgeschlossen":(ea.aufgaben?ea.aufgaben+" Aufgaben, Schritt für Schritt in deinem Tempo":"Schritt für Schritt in deinem Tempo"),`<button class="primary" data-kw="ea" data-id="${esc(e.id)}">${fort.einarbeitungAbgeschlossen?"Nochmal ansehen":"Starten"}</button>`)))}
- const slS={e:[],a:[]};[["e","-plus"],["a","-vertieft"]].forEach(([nk,suf])=>{const n=eaS[nk];if(n&&!n.entwurf&&!(KW.hide&&KW.hide.has("ea:"+e.id+suf))&&sicht("ea:"+e.id+suf)){const fid=e.id+suf;slS[nk].push(zx("ea:"+fid,kachel("SELBSTLERNKURS",n.titel||kwKurz(e),n.aufgaben?n.aufgaben+" Aufgaben, Schritt für Schritt in deinem Tempo":"Schritt für Schritt in deinem Tempo",`<button class="primary" data-kw="ea" data-id="${esc(fid)}">Starten</button>`)))}});
- slZ.forEach(x=>slS.e.push(x));
- restMod.filter(m=>sicht("mod:"+m.id)).forEach(m=>{const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);sl.push(kachel(T[0].toUpperCase(),m.titel||T[0],f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):"",`<button class="primary" data-kw="modul" data-id="${esc(m.id)}">Starten</button>`))});
+ const sl=[];
+ if(ea&&!ea.entwurf&&!(KW.hide&&KW.hide.has("ea:"+e.id))){sl.push(kachel("SELBSTLERNKURS",ea.titel||kwKurz(e),fort.einarbeitungAbgeschlossen?"abgeschlossen":(ea.aufgaben?ea.aufgaben+" Aufgaben, Schritt für Schritt in deinem Tempo":"Schritt für Schritt in deinem Tempo"),`<button class="primary" data-kw="ea" data-id="${esc(e.id)}">${fort.einarbeitungAbgeschlossen?"Nochmal ansehen":"Starten"}</button>`))}
+ const slS={e:[],a:[]};[["e","-plus"],["a","-vertieft"]].forEach(([nk,suf])=>{const n=eaS[nk];if(n&&!n.entwurf&&!(KW.hide&&KW.hide.has("ea:"+e.id+suf))){const fid=e.id+suf;slS[nk].push(kachel("SELBSTLERNKURS",n.titel||kwKurz(e),n.aufgaben?n.aufgaben+" Aufgaben, Schritt für Schritt in deinem Tempo":"Schritt für Schritt in deinem Tempo",`<button class="primary" data-kw="ea" data-id="${esc(fid)}">Starten</button>`))}});
+ restMod.forEach(m=>{const T=KW_BAUSTEINE[m.modul]||["Baustein","chk"],f=ppmFort(m);sl.push(kachel(T[0].toUpperCase(),m.titel||T[0],f?(f.done?"abgeschlossen":(f.frac>0?Math.round(f.frac*100)+" % bearbeitet":"noch offen")):"",`<button class="primary" data-kw="modul" data-id="${esc(m.id)}">Starten</button>`))});
  const zus=[];
- faMod.filter(m=>sicht("mod:"+m.id)).forEach(m=>{const f=ppmFort(m);slS.a.push(zx("mod:"+m.id,kachel("FACHAUFSATZ-TRAINING",m.titel||"Fachaufsatz-Training",f&&f.done?"abgeschlossen":"Nennen, Erklären, Verdeutlichen (Transfer) üben",`<button class="secondary" data-kw="modul" data-id="${esc(m.id)}">Öffnen</button>`)))});
- KW_TRAININGS_ALLE.forEach((x,i)=>{const n=trInfos[i];if(!n||n.entwurf||aus.has(x)||nb.has(x)||!(n.themen||[]).includes(e.id)||!sicht("tr:"+x))return;const h=KW_TR_HINT[x];slS.a.push(zx("tr:"+x,kachel("FACHAUFSATZ-TRAINING",n.titel,(h?h+" · ":"")+(n.aufgaben?n.aufgaben+" Aufgaben":"Selbstlernkurs"),`<button class="secondary" data-kw="ea" data-id="${esc(x)}">Öffnen</button>`)))});
+ faMod.forEach(m=>{const f=ppmFort(m);zus.push(kachel("FACHAUFSATZ-TRAINING",m.titel||"Fachaufsatz-Training",f&&f.done?"abgeschlossen":"Nennen, Erklären, Verdeutlichen (Transfer) üben",`<button class="secondary" data-kw="modul" data-id="${esc(m.id)}">Öffnen</button>`))});
+ KW_TRAININGS_ALLE.forEach((x,i)=>{const n=trInfos[i];if(!n||n.entwurf||aus.has(x)||nb.has(x)||!(n.themen||[]).includes(e.id))return;const h=KW_TR_HINT[x];zus.push(kachel("FACHAUFSATZ-TRAINING",n.titel,(h?h+" · ":"")+(n.aufgaben?n.aufgaben+" Aufgaben":"Selbstlernkurs"),`<button class="secondary" data-kw="ea" data-id="${esc(x)}">Öffnen</button>`))});
  const bmap={};LX_BEREICH.forEach(b=>{bmap[b.k]=b});
  const tag=k=>{const b=bmap[k];return b?`<span class="lxq-tag" style="--k:${b.c}">${b.n}</span>`:""};
- const spalten=stufen.map(([nk,nn,nh])=>{const l=items.filter(x=>x.n===nk).map(x=>`<div class="lxq-it">${x.h}${tag(x.b)}${x.z?`<button type="button" class="lxq-zdel" data-bb="zdel" data-id="${esc(e.id)}" data-k="${esc(x.z)}" title="Wieder entfernen">×</button>`:""}</div>`).join("")+(nk==="g"?sl.join(""):(slS[nk]||[]).join(""));return`<section class="lxq-sp"><header><b>${nn}</b><small>${nh}</small></header>${l||`<div class="lxq-leer">noch nichts eingestellt</div>`}</section>`}).join("");
+ const spalten=stufen.map(([nk,nn,nh])=>{const l=items.filter(x=>x.n===nk).map(x=>`<div class="lxq-it">${x.h}${tag(x.b)}</div>`).join("")+(nk==="g"?sl.join(""):(slS[nk]||[]).join(""));return`<section class="lxq-sp"><header><b>${nn}</b><small>${nh}</small></header>${l||`<div class="lxq-leer">noch nichts eingestellt</div>`}</section>`}).join("");
  const hatUeb=items.length||sl.length||zus.length||slS.e.length||slS.a.length;
- const uebIn0=hatUeb?`<div class="lxq-3">${spalten}</div>${zus.length?`<h3 class="lxq-h3">Weitere Trainings</h3><div class="lxq-zg">${zus.join("")}</div>`:""}`:`<div class="kw-leer">Zu diesem Thema sind noch keine Übungen eingestellt.</div>`;
+ const uebIn=hatUeb?`<div class="lxq-3">${spalten}</div>${zus.length?`<h3 class="lxq-h3">Weitere Trainings</h3><div class="lxq-zg">${zus.join("")}</div>`:""}`:`<div class="kw-leer">Zu diesem Thema sind noch keine Übungen eingestellt.</div>`;
  /* Check-out mit Selbsteinschätzung */
  const nxt=co?lxNaechstesThema(e):null;
  let coIn;
@@ -22625,7 +22621,7 @@ async function lxThemaPfadSeite(e,ph,F){
   ${weiter}
   ${pan("checkin","Check-in","Was weißt du schon? Etwa 10 Minuten, keine Note.",ciIn)}
   ${pan("infotext","Infotext","",infoIn)}
-  ${pan("ueben","Üben und Vertiefen","Nur wenn du noch unsicher bist. Such dir eine Stufe aus.",uebIn0+lxBibSchuelerBtn(e))}
+  ${pan("ueben","Üben und Vertiefen","Nur wenn du noch unsicher bist. Such dir eine Stufe aus.",uebIn)}
   ${pan("checkout","Check-out","Zeig, was du kannst. Danach schätzt du dich selbst ein.",coIn)}
  </div>${footer()}`;
 }
@@ -22736,159 +22732,12 @@ async function lxLiveStart(){
  window.__lxLiveIv=setInterval(zeichne,20000);
 }
 
-/* ===== Basis-Auswahl je Thema (Unterrichtsbibliothek → Lernpfad der Schüler:innen) ===== */
-KW.basis=KW.basis||{};
-const LXB_GRP=[["info","Infotext"],["tafel","Tafelbild"],["lue","Lernübersicht"],["slk","Selbstlernkurs"],["baust","Weitere Lerneinheiten"],["afb1","Übungsaufgaben AFB I"],["afb2","Übungsaufgaben AFB II"],["afb3","Übungsaufgaben AFB III"],["fa","Fachaufsatztraining"]];
-function lxBibItems(e,ph,K,ea,eaS,trInfos){
- const mats=KW.mat[e.id]||[],it=[],hid=k=>KW.hide&&KW.hide.has(k);
- const G={lernsituation:"info",lehrtext:"info",arbeitsblatt:"info",audio:"info",video:"tafel",einfuehrung:"tafel",tafel:"tafel",lernuebersicht:"lue"};
- mats.forEach(m=>{
-  let grp=G[m.kategorie],niv="",art="";const u=String(m.url||"");
-  if(!grp&&/^(uebung|vertiefung[123])$/.test(m.kategorie)){
-   const sm=/^uebungsbausteine\/station\.html\?s=/.test(u),x=sm?K.ub.find(y=>y.id===u.split("s=")[1]):null;
-   if(x){const T=kwUbThemen(x);if(T&&!T.includes(e.id))return}
-   const mt=lxUebMeta(m,m.kategorie,K,e,ph);niv=mt.niv;art=mt.art;
-   if(sm&&!x)niv=m.kategorie==="vertiefung3"?"a":(m.kategorie==="vertiefung2"?"e":"g");
-   if(/K-Prim/i.test(art))return;
-   grp=u.startsWith("fa:")?"fa":({g:"afb1",e:"afb2",a:"afb3"})[niv]||"afb1";
-  }
-  if(!grp)return;
-  it.push({key:"m:"+m.id,grp,titel:m.titel||"",art,niv,url:u,mat:m,repo:String(m.id).startsWith("repo-")});
- });
- [[e.id,ea,"",true],[e.id+"-plus",eaS&&eaS.e,"Stufe II"],[e.id+"-vertieft",eaS&&eaS.a,"Stufe III"]].forEach(([fid,n,st,main])=>{if(n&&!n.entwurf&&!hid("ea:"+fid))it.push({key:"ea:"+fid,grp:"slk",titel:n.titel||kwKurz(e),art:"Selbstlernkurs"+(st?" · "+st:""),main:!!main,eaId:fid,n:n.aufgaben||0})});
- const mod=kwModuleThema(e.id);
- mod.forEach(m=>{const fa=m.modul==="fachaufsatz"||m.modul==="apt",T=KW_BAUSTEINE[m.modul]||["Baustein","chk"];it.push({key:"mod:"+m.id,grp:fa?"fa":(m.modul==="selbstlern"?"slk":"baust"),titel:m.titel||T[0],art:fa?"Fachaufsatz-Training":T[0],modId:m.id})});
- const aus=new Set((PPM.aus||[]).filter(a=>(a.themen||[]).includes(e.id)).map(a=>a.kursId)),nb=lxNachbIds();
- KW_TRAININGS_ALLE.forEach((x,i)=>{const n=trInfos&&trInfos[i];if(!n||n.entwurf||aus.has(x)||nb.has(x)||!(n.themen||[]).includes(e.id))return;it.push({key:"tr:"+x,grp:"fa",titel:n.titel,art:"Fachaufsatz-Training",eaId:x,n:n.aufgaben||0,tr:true})});
- return it;
-}
-function lxBibPool(e,ph,K,items){
- const have=new Set(items.map(i=>String(i.url||"")).filter(Boolean)),p=[];
- (K.ub||[]).forEach(x=>{const T=kwUbThemen(x);if(!T||!T.includes(e.id))return;const url="uebungsbausteine/station.html?s="+x.id;if(have.has(url))return;
-  const mt=lxUebMeta({url},"uebung",K,e,{lbNum:1});if(/K-Prim/i.test(mt.art))return;
-  p.push({key:"u:"+x.id,grp:({g:"afb1",e:"afb2",a:"afb3"})[mt.niv]||"afb1",titel:x.titel,art:mt.art,niv:mt.niv,url})});
- (K.fa||[]).forEach(x=>{if(x.thema!==e.id||have.has("fa:"+x.id))return;p.push({key:"fa:"+x.id,grp:"fa",titel:x.titel,art:"Fachaufsatztraining",niv:"a",url:"fa:"+x.id})});
- return p;
-}
-function lxBibAuto(items){
- const s=new Set(),seen={};
- items.forEach(i=>{
-  if(["info","tafel","lue","baust"].includes(i.grp)){s.add(i.key);return}
-  if(i.grp==="slk"){if(i.main||i.modId)s.add(i.key);return}
-  if(i.grp==="fa"){if(!i.repo)s.add(i.key);return}
-  if(!i.repo){s.add(i.key);return}
-  if(!seen[i.grp]){seen[i.grp]=1;s.add(i.key)}
- });
- return s;
-}
-function lxBibVis(e,items,fort){
- const base=lxBibAuto(items),b=(KW.basis||{})[e.id];
- if(b){b.an.forEach(k=>base.add(k));b.aus.forEach(k=>base.delete(k))}
- const vis=new Set(base);((fort&&fort.zusatz)||[]).forEach(k=>vis.add(k));
- return{vis,base,auto:lxBibAuto(items)};
-}
-async function lxBibLade(e,ph){
- const [ea,a,b,trInfos,K]=await Promise.all([einarbeitungInfo(e.id).catch(()=>null),einarbeitungInfo(e.id+"-plus").catch(()=>null),einarbeitungInfo(e.id+"-vertieft").catch(()=>null),Promise.all(KW_TRAININGS_ALLE.map(x=>einarbeitungInfo(x).catch(()=>null))),lxUebKataloge()]);
- const eaS={e:a,a:b},items=lxBibItems(e,ph,K,ea,eaS,trInfos),fort=KW.fort[e.id]||{};
- return{K,ea,eaS,trInfos,items,pool:lxBibPool(e,ph,K,items),fort,bib:lxBibVis(e,items,fort)};
-}
-function lxBibTh(i,e){
- if(i.mat)return kwDateiHTML(i.titel,i.url,i.mat.id,e.id);
- if(i.modId)return`<button type="button" class="kw-datei" data-kw="modul" data-id="${esc(i.modId)}"><span>${esc(i.titel)}</span><small>Öffnen</small></button>`;
- return`<button type="button" class="kw-datei" data-kw="ea" data-id="${esc(i.eaId)}"><span>${esc(i.titel)}</span><small>${i.n?i.n+" Aufgaben":"Ansehen"}</small></button>`;
-}
-function lxBibSchuelerBtn(e){
- return`<div class="lxb-mehr"><button type="button" class="secondary" data-bb="pick" data-n="g" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB I</button><button type="button" class="secondary" data-bb="pick" data-n="e" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB II</button><button type="button" class="secondary" data-bb="pick" data-n="a" data-id="${esc(e.id)}">+ weitere Übungsaufgabe AFB III</button></div>`;
-}
-async function lxBibListeSeite(e,ph,F){
- const D=await lxBibLade(e,ph),{items,bib}=D;
- const grp=LXB_GRP.map(([g,n])=>{
-  const l=items.filter(i=>i.grp===g);
-  const zeilen=l.length?l.map(i=>`<label class="lxb-z"><input type="checkbox" class="lxbCb" value="${esc(i.key)}"${bib.base.has(i.key)?" checked":""}><span class="lxb-t">${lxBibTh(i,e)}</span>${i.art?`<em class="lxb-art">${esc(i.art)}</em>`:""}</label>`).join(""):`<div class="kw-leer">Noch nichts eingestellt.</div>`;
-  const neu=g==="baust"?`<button type="button" class="secondary" data-kw="modulneu" data-id="${esc(e.id)}">+ Baustein einplanen</button>`:`<button type="button" class="secondary" data-bb="add" data-g="${g}" data-id="${esc(e.id)}">+ hinzufügen aus Bibliothek</button>`;
-  return`<section class="lxb-g"><header><h3>${n}</h3><small>${l.filter(i=>bib.base.has(i.key)).length} von ${l.length} im Lernpfad</small>${neu}</header>${zeilen}</section>`}).join("");
- const st=lxThemaStart(e);
- const sicht=`<div class="lx-sicht"><label>Schüler:innen sehen dieses Thema ab <input type="date" id="lxAb" value="${esc(st)}"></label><button type="button" class="secondary" data-lx="ab" data-id="${esc(e.id)}">Datum speichern</button><button type="button" class="text-button" data-lx="ab0" data-id="${esc(e.id)}">Automatisch</button><small>Sonst gilt: zwei Wochen vor dem geplanten Start.</small></div>`;
- return`<div class="kw kw-seite lxb-seite" data-id="${esc(e.id)}" style="--c:${F.c};--bg:${F.bg};--t:${F.t}">
-  ${kwSchuelerBanner()}
-  <button class="secondary" data-kw="wand">← Meine Lernpfade</button>
-  <header class="kw-kopf"><small>LB ${ph.lbNum} · ${esc(ph.lbTitel)} · Nr. ${esc(e.nr)}</small><h1>${esc(e.thema)}</h1><p>${esc(e.planung||"")}</p>
-   <div class="kw-aktionen"><button type="button" class="primary" data-bb="lib" data-id="${esc(e.id)}">+ hinzufügen aus Bibliothek</button><button type="button" class="secondary" onclick="kwSchuelerUmschalten(true)">Schüleransicht ansehen</button><button type="button" class="text-button" data-bb="alt" data-id="${esc(e.id)}">Alte Themenansicht (Check-in, Check-out, Bausteine)</button></div>${sicht}</header>
-  <div class="lxb-hinweis"><b>Materialliste dieses Themas.</b> Setze ein Häkchen bei allem, was im Lernpfad der Schüler:innen als <b>Basis</b> erscheinen soll. Alles andere können sich die Schüler:innen mit „+ weitere Übungsaufgabe“ selbst dazuholen. Ohne eigene Auswahl gilt die automatische Vorauswahl.</div>
-  ${grp}
-  <div class="lxb-fuss"><button type="button" class="primary" data-bb="save" data-id="${esc(e.id)}">Auswahl für den Lernpfad speichern</button><button type="button" class="secondary" data-bb="auto" data-id="${esc(e.id)}">Automatische Vorauswahl wiederherstellen</button><span class="lxb-stat">${KW.basis[e.id]?"Eigene Auswahl gespeichert.":"Automatische Vorauswahl aktiv."}</span></div>
- </div>${footer()}`;
-}
-async function lxBibAdd(g,tid){
- const e=kwThemaById(tid);if(!e)return;
- if(g==="info")return kwMatForm("lehrtext");
- if(g==="tafel")return kwMatForm("tafel");
- if(g==="lue")return kwLuPicker(tid);
- if(g==="slk")return kwFaPicker(null,tid,"slk");
- if(g==="afb1")return kwFaPicker("uebung",tid);
- if(g==="afb2")return kwFaPicker("vertiefung2",tid);
- if(g==="afb3")return kwFaPicker("vertiefung3",tid);
- if(g==="fa")return kwFaPicker(null,tid,"fa");
-}
-function lxBibLibModal(tid){
- const e=kwThemaById(tid);if(!e)return;
- const t=(g,txt,sub)=>`<button type="button" class="bw-k" data-bb="add" data-g="${g}" data-id="${esc(tid)}" style="--k:#4a90d9"><span class="bw-t"><b>${txt}</b><small>${sub}</small></span><span class="bw-b">Auswählen</span></button>`;
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">${esc(kwKurz(e)).toUpperCase()}</div><h2>Hinzufügen aus Bibliothek</h2><p style="color:var(--muted);margin:0 0 6px">Was soll zu diesem Thema dazukommen?</p><div class="bw">
-  ${t("info","Infotext","Lesetext, Lernsituation, Arbeitsblatt, Audio (Datei oder Link)")}${t("tafel","Tafelbild","Digitale Tafel, Einführungstafel, Video")}${t("lue","Lernübersicht","Whiteboard als Zusammenfassung")}${t("slk","Selbstlernkurs","Selbstlernkurse zu diesem Thema")}
-  ${t("afb1","Übungsaufgaben AFB I","Begriffe: Zuordnung, Memory, Lückentext, Rennen …")}${t("afb2","Übungsaufgaben AFB II","Theorie: Vergleich, Reihenfolge, Fehler-Detektiv, Regler …")}${t("afb3","Übungsaufgaben AFB III","Anwendung: Fälle, Diagnose, Transfer")}${t("fa","Fachaufsatztraining","Fachaufsätze aus Abschlussprüfungen")}
-  </div><div class="form-actions"><button class="secondary" type="button" onclick="closeModal()">Schließen</button></div>`);
-}
-async function lxBibSpeichern(tid){
- const e=kwThemaById(tid),ph=LX_CFG.phasen().find(p=>p.id===e.phase),D=await lxBibLade(e,ph);
- const auto=D.bib.auto,an=[],aus=[],gesetzt=new Set([...document.querySelectorAll(".lxbCb:checked")].map(c=>c.value));
- D.items.forEach(i=>{const on=gesetzt.has(i.key),a=auto.has(i.key);if(on&&!a)an.push(i.key);if(!on&&a)aus.push(i.key)});
- await setDoc(doc(db,"lehrplanMaterialien","basis_"+tid),{kategorie:"_basis",wocheId:"_basis",thema:tid,fach:"paedagogik",an,aus,createdBy:currentUser.uid,createdAt:serverTimestamp()});
- KW.basis[tid]={an:new Set(an),aus:new Set(aus)};window.__fsDirty=Date.now();toast("Gespeichert. Der Lernpfad der Schüler:innen zeigt jetzt diese Auswahl.");render();
-}
-async function lxBibPicker(tid,n){
- const e=kwThemaById(tid);if(!e||isTeacher())return;
- const ph=LX_CFG.phasen().find(p=>p.id===e.phase),D=await lxBibLade(e,ph),G={g:"afb1",e:"afb2",a:"afb3"}[n],AN={g:"AFB I",e:"AFB II",a:"AFB III"}[n];
- const alle=[...D.items,...D.pool].filter(i=>!D.bib.vis.has(i.key));
- let l=alle.filter(i=>i.grp===G);
- let extra=[];
- if(n==="e")extra=alle.filter(i=>i.grp==="slk");
- if(n==="a")extra=alle.filter(i=>i.grp==="fa");
- const zl=i=>`<label class="check lxb-pz"><input type="checkbox" class="lxbPz" value="${esc(i.key)}"><span><b>${esc(i.titel)}</b>${i.art?`<small>${esc(i.art)}${i.n?" · "+i.n+" Aufgaben":""}</small>`:""}</span></label>`;
- const T={g:"Begriffe und Grundlagen",e:"Theorie und Zusammenhänge",a:"Anwendung und Transfer"}[n];
- modal(`<button class="modal-close" onclick="closeModal()">×</button><div class="kicker">${esc(kwKurz(e)).toUpperCase()}</div><h2>Weitere Übungsaufgaben · ${AN}</h2><p style="color:var(--muted);margin:0 0 8px">${T}. Das sind alle weiteren Aufgaben zu diesem Thema. Was du ankreuzt, erscheint in deinem Lernpfad bei ${AN}.</p>
-  <div class="form lxb-pick">${l.length?l.map(zl).join(""):`<div class="kw-leer">Hier gibt es keine weiteren Übungsaufgaben. Alles ist schon in deinem Lernpfad.</div>`}
-  ${extra.length?`<h4 class="lxb-h4">${n==="e"?"Selbstlernkurse":"Fachaufsatztraining"}</h4>${extra.map(zl).join("")}`:""}
-  <div class="form-actions"><button class="secondary" onclick="closeModal()">Abbrechen</button>${(l.length||extra.length)?`<button class="primary" id="lxbPzSave">Zum Lernpfad hinzufügen</button>`:""}</div></div>`);
- const sv=$("lxbPzSave");if(sv)sv.onclick=async()=>{
-  const ks=[...document.querySelectorAll(".lxbPz:checked")].map(c=>c.value);if(!ks.length)return toast("Bitte mindestens eine Aufgabe ankreuzen.");
-  try{const neu=[...new Set([...(D.fort.zusatz||[]),...ks])];
-   await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});
-   KW.fort[tid]={...(KW.fort[tid]||{}),zusatz:neu};window.__lxPfadWahl[tid]="ueben";closeModal();toast(ks.length===1?"Hinzugefügt.":ks.length+" Aufgaben hinzugefügt.");render();
-  }catch(x){console.error(x);toast("Das hat nicht geklappt.")}};
-}
-document.addEventListener("click",async ev=>{
- const b=ev.target.closest&&ev.target.closest("[data-bb]");if(!b||!currentUser)return;
- const a=b.dataset.bb,tid=b.dataset.id;
- try{
-  if(a==="pick"){await lxBibPicker(tid,b.dataset.n);return}
-  if(a==="zdel"){const k=b.dataset.k,f=KW.fort[tid]||{},neu=(f.zusatz||[]).filter(x=>x!==k);await setDoc(doc(db,"lehrplanFortschritt",`${currentUser.uid}_${tid}`),{uid:currentUser.uid,wocheId:tid,fach:"paedagogik",zusatz:neu},{merge:true});KW.fort[tid]={...f,zusatz:neu};window.__lxPfadWahl[tid]="ueben";render();return}
-  if(!isTeacher())return;
-  if(a==="lib"){lxBibLibModal(tid);return}
-  if(a==="add"){closeModal();await lxBibAdd(b.dataset.g,tid);return}
-  if(a==="save"){await lxBibSpeichern(tid);return}
-  if(a==="auto"){if(!confirm("Eigene Auswahl verwerfen und zur automatischen Vorauswahl zurückkehren?"))return;await deleteDoc(doc(db,"lehrplanMaterialien","basis_"+tid)).catch(()=>{});delete KW.basis[tid];window.__fsDirty=Date.now();toast("Automatische Vorauswahl ist wieder aktiv.");render();return}
-  if(a==="alt"){window.__kwAlt=tid;render();return}
-  if(a==="neu"){window.__kwAlt=null;render();return}
- }catch(err){console.error(err);toast("Das hat nicht geklappt.")}
-});
-
 async function renderKwThema(){
  await kwLaden();
  const e=kwThemaById(activeKwThema);if(!e)return await renderKachelwand();
  const ph=LX_CFG.phasen().find(p=>p.id===e.phase),F=kwFarbe(ph.lbNum),lehrer=kwLehrer();
  if(!lehrer&&!lxThemaSichtbar(e))return lxGesperrtSeite(e,ph,F);
  if(!lehrer&&!e.leistung)return await lxThemaPfadSeite(e,ph,F);
- if(lehrer&&!e.leistung&&window.__kwAlt!==e.id)return await lxBibListeSeite(e,ph,F);
  const leist=!!e.leistung;
  const mats=KW.mat[e.id]||[];
  const [ciFr,ea,trInfos]=await Promise.all([
