@@ -5543,6 +5543,26 @@
    "titel": "K-Prim-Test 5 (Stunde 14–17)",
    "url": "uebungsbausteine/station.html?s=lb3n-kprim-test5",
    "ord": 40
+  },
+  {
+   "id": "px-lebensfaden",
+   "wocheId": "t12_1_9",
+   "kategorie": "praxis",
+   "titel": "Mein Lebensfaden: Lebenslinien-Plakat nach Baltes",
+   "hinweis": "Einzel- oder Partnerarbeit · Interview + 2 × 45 Min. · Lebenslinien-Plakat (A3)",
+   "url": "aufgaben/LB1-10_Praxis_Mein-Lebensfaden.pdf",
+   "ord": 10,
+   "bib": true
+  },
+  {
+   "id": "px-kompass-jugend",
+   "wocheId": "t12_1_9",
+   "kategorie": "praxis",
+   "titel": "Kompass Jugendalter: Entwicklungsaufgaben erklären und testen",
+   "hinweis": "Gruppen à 3–4 · 2 × 45 Min. · Kompass-Plakat und Aufgabenkarten",
+   "url": "aufgaben/LB1-10_Praxis_Kompass-Jugendalter.pdf",
+   "ord": 20,
+   "bib": true
   }
  ]
 }

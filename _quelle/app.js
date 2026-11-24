@@ -22767,7 +22767,7 @@ function lxBibPool(e,ph,K,items){
  (K.fa||[]).forEach(x=>{if(x.thema!==e.id||have.has("fa:"+x.id))return;p.push({key:"fa:"+x.id,grp:"fa",titel:x.titel,art:"Fachaufsatztraining",niv:"a",url:"fa:"+x.id})});
  return p;
 }
-function lxBibAuto(items){const s=new Set(),seen={};items.forEach(i=>{if(["info","tafel","lue","baust","praxis"].includes(i.grp)){s.add(i.key);return}if(i.grp==="slk"){if(i.main||i.modId)s.add(i.key);return}if(i.grp==="fa"){if(i.mat&&!i.repo)s.add(i.key);return}if(!i.repo){s.add(i.key);return}if(!seen[i.grp]){seen[i.grp]=1;s.add(i.key)}});return s}
+function lxBibAuto(items){const s=new Set(),seen={};items.forEach(i=>{if(i.grp==="praxis"){if(!(i.mat&&i.mat.bib))s.add(i.key);return}if(["info","tafel","lue","baust"].includes(i.grp)){s.add(i.key);return}if(i.grp==="slk"){if(i.main||i.modId)s.add(i.key);return}if(i.grp==="fa"){if(i.mat&&!i.repo)s.add(i.key);return}if(!i.repo){s.add(i.key);return}if(!seen[i.grp]){seen[i.grp]=1;s.add(i.key)}});return s}
 function lxBibVis(e,items,fort){
  const base=lxBibAuto(items),b=(KW.basis||{})[e.id];
  if(b){b.an.forEach(k=>base.add(k));b.aus.forEach(k=>base.delete(k))}
