@@ -81,6 +81,14 @@
    "ord": 10
   },
   {
+   "id": "info10b",
+   "wocheId": "t12_1_9",
+   "kategorie": "lehrtext",
+   "titel": "Infotext: Theorie der Lebensspanne nach Baltes",
+   "url": "infotexte/LB1-10b_Theorie-der-Lebensspanne-nach-Baltes.pdf",
+   "ord": 11
+  },
+  {
    "id": "info11",
    "wocheId": "t12_1_10",
    "kategorie": "lehrtext",
