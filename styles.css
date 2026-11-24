@@ -261,3 +261,24 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lxA-pb .kw-datei small{display:none}
 .lxA-hol{font-size:.76rem;color:#5d7487}
 @media(max-width:600px){.lxA-sub2 em{display:none}.lxA-wk{padding:9px 10px}}
+
+/*lxPxLehrer*/
+.lxp-px{display:flex;align-items:flex-start;gap:9px;background:#fff;border:1px solid #cfe5d8;border-radius:10px;padding:8px 10px;margin-bottom:6px}
+.lxp-px.off{background:#f8fbf9;border-style:dashed}
+.lxp-px.off b{color:#5d7487}
+.lxp-px input{width:18px;height:18px;flex:none;margin:2px 0 0}
+.lxp-pxb{flex:1;min-width:0}
+.lxp-pxb b{font-weight:600;font-size:.88rem;display:block}
+.lxp-pxs{display:block;color:#5d7487;font-size:.78rem;margin:2px 0 4px}
+.lxp-pxb .lxA-mt{margin:4px 0 5px}
+.lxp-pxl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.lxp-lk{font-size:.8rem;color:#1a5fa8}
+.lxp-tg{font-size:.7rem;color:#5d7487;background:#fff;border:1px solid #dbe5ee;border-radius:999px;padding:1px 8px}
+.lxp-px .kw-del{flex:0 0 26px;width:26px;height:26px;padding:0}
+.lxp-wk .lxp-add,.lxA-wk .lxp-add{margin-top:8px}
+.kw-pxrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.kw-pxh{font-size:.78rem;color:#5d7487;margin:2px 0 10px}
+.kw-pxprev{margin:10px 0 0;background:#f1f8f4;border:1.5px dashed #9fcdb2}
+.kw-pxk{font-size:.72rem!important;margin:0 0 4px!important}
+@media(max-width:600px){.kw-pxrow{grid-template-columns:1fr}}
+.kw-pxprev .lxA-mt span{background:#fff}
