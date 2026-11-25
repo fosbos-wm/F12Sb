@@ -310,3 +310,7 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 @media(max-width:600px){.lxt-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.lxt-an .lxt-fig,.lxt-an .lxt-fig>span{animation:none}.lxt-fwb i{animation:none;opacity:.9;transform:translate(var(--dx),var(--dy))}}
 .lxt-seg>i.akt{box-shadow:0 0 0 1.5px var(--fc)}
+
+.lxt-wfig{position:absolute;width:26px;margin-left:-13px;margin-top:-41px;line-height:0;z-index:2}.lxt-wfig>span{display:block}.lxt-wfig svg{display:block;overflow:visible}
+.lxt-an .lxt-wfig{animation-duration:1.7s;animation-delay:.3s;animation-timing-function:ease-in-out;animation-fill-mode:both}.lxt-an .lxt-wfig>span{animation:lxt-hop .42s .3s 4 ease-in-out}
+@media(prefers-reduced-motion:reduce){.lxt-an .lxt-wfig,.lxt-an .lxt-wfig>span{animation:none}}
