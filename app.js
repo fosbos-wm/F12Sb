@@ -5146,7 +5146,7 @@ function lxNeuStartX(e){
  bars.forEach(b=>{let k=lanes.findIndex(l=>l<b.a);if(k<0){k=lanes.length;lanes.push(-1)}lanes[k]=b.b;b.lane=k});
  const nL=lanes.length;
  /* Stundenbereich */
- let h0=8,h1=12;const rng=(z,zb)=>{if(!z)return;h0=Math.min(h0,hr(z));const m=zb?hr(zb)-(String(zb).slice(3,5)==="00"?1:0):hr(z);h1=Math.max(h1,m,hr(z))};
+ let h0=8,h1=15;const rng=(z,zb)=>{if(!z)return;h0=Math.min(h0,hr(z));const m=zb?hr(zb)-(String(zb).slice(3,5)==="00"?1:0):hr(z);h1=Math.max(h1,m,hr(z))};
  pt.forEach(p=>{if(days.some(d=>lxPtAn(p,d))&&!(lxPtBis(p)>p.datum))rng(p.zeit,p.zeitBis)});an.forEach(x=>{if(days.some(d=>lxPtAn(x,d)))rng(x.zeit,x.zeitBis)});
  h0=Math.max(6,h0);h1=Math.min(20,h1);
  const anW=an.filter(x=>days.some(d=>lxPtAn(x,d))&&x.zeit);
@@ -5173,18 +5173,22 @@ function lxNeuStartX(e){
  const kzLeg=Object.keys(names).sort().map(k=>`<b>${esc(k)}</b> ${esc(names[k])}`).join(" \u00b7 ");
  /* Auftragskarten */
  const cards=lxNeuCards();
- const row=cards.map((c,i)=>`<button type="button" class="lx3-c${i?"":" sel"}${c.done?" done":""}" data-lx3="${i}" style="--fc:${lxNeuFarbe(c.fach)}"><span class="lx3-r">${c.done?"\u2713":c.rang}</span><span class="lx3-ct"><small><i></i>${esc(c.fach||"Auftrag")}</small><b>${esc(c.titel)}</b><em>${c.bis?"bis "+esc(lxTagKurz(c.bis)):"laufende Phase"}</em>${(c.hint&&!(c.frei&&c.hint===c.titel))?`<u>Hinweis${c.kz?" von "+esc(c.kz):""}</u>`:""}</span></button>`).join("");
- const det=cards.map((c,i)=>{const lab=c.done?"Ansehen":c.begun?"Weiter":"Starten";
-  const btn=c.tid?`<button type="button" class="primary" data-kw="thema" data-id="${esc(c.tid)}">${lab}</button>`:c.lb?`<button type="button" class="primary" data-kw="projekt" data-lb="${c.lb}">\u00d6ffnen</button>`:"";
-  const del=T&&c.aid?`<button type="button" class="secondary" data-wa="del" data-id="${esc(c.aid)}">Auftrag l\u00f6schen</button>`:"";
-  return`<div class="lx3-det"${i?" hidden":""} data-lxd="${i}"><div class="lx3-dt"><small>${esc(c.fach||"")}${c.bis?" \u00b7 bis "+esc(lxTagKurz(c.bis)):""}${c.rang?" \u00b7 Rang "+c.rang:""}</small><b>${esc(c.titel)}</b>${c.hint?`<p>${c.frei&&c.hint===c.titel?"":`<strong>Hinweis${c.kz?" von "+esc(c.kz):""}:</strong> ${esc(c.hint)}`}${c.frei&&c.hint===c.titel&&c.kz?`<strong>Auftrag von ${esc(c.kz)}</strong>`:""}</p>`:`<p class="lx3-nh">Kein zus\u00e4tzlicher Hinweis. Die Themen bearbeitest du selbstst\u00e4ndig.</p>`}</div><div class="lx3-da">${btn}${del}</div></div>`}).join("");
+ const row=cards.map((c,i)=>`<button type="button" class="lx3-c${c.done?" done":""}" data-lx3="${i}" style="--fc:${lxNeuFarbe(c.fach)}"><span class="lx3-r">${c.done?"\u2713":c.rang}</span><span class="lx3-ct"><small><i></i>${esc(c.fach||"Auftrag")}</small><b>${esc(c.titel)}</b><em>${c.bis?"bis "+esc(lxTagKurz(c.bis)):"laufende Phase"}</em>${(c.hint&&!(c.frei&&c.hint===c.titel))?`<u>Hinweis von ${esc(c.kz||"Lehrkraft")} lesen</u>`:""}</span></button>`).join("");
+ window.__lx3Cards=cards;
  const kopf=`<div class="lx3-kopf"><h2>Meine Woche \u00b7 KW ${W.kw} \u00b7 ${fmtKurz(days[0])}\u2013${fmtKurz(days[4])}</h2><div><button type="button" class="secondary" data-lxwo="${W.off-1}">\u2039</button><button type="button" class="secondary" data-lxwo="0">Diese Woche</button><button type="button" class="secondary" data-lxwo="${W.off+1}">\u203a</button></div></div>`;
  const leg=`<p class="lx3-leg"><span class="lx3-l pf">Pflichttermin</span><span class="lx3-l op">optional</span>${hatAn?'<span class="lx3-l kz">K\u00fcrzel oben rechts = Lehrkraft da</span>':""}<span class="lx3-l pj">Projekt \u00fcber mehrere Tage</span></p>`.replace("K\u00fcrzel","K\u00fcrzel");
  return`<div class="lx3"><section class="lx3-w">${kopf}${leg}<div class="lx3-gw"><div class="lx3-g">${g}</div></div>${kzLeg?`<p class="lx3-kl">${kzLeg}</p>`:""}</section>
- <section class="lx3-auf"><h2>Meine Auftr\u00e4ge <small>Rang 1 zuerst \u00b7 nach rechts wischen</small></h2>${cards.length?`<div class="lx3-row">${row}</div><div class="lx3-dets">${det}</div>`:'<p class="lxs-leer">Diese Woche gibt es keine Auftr\u00e4ge.</p>'}</section></div>`}
-document.addEventListener("click",ev=>{const c=ev.target.closest&&ev.target.closest("[data-lx3]");if(!c)return;const box=c.closest(".lx3-auf");if(!box)return;
- box.querySelectorAll("[data-lx3]").forEach(x=>x.classList.toggle("sel",x===c));
- box.querySelectorAll("[data-lxd]").forEach(x=>{x.hidden=x.dataset.lxd!==c.dataset.lx3})});
+ <section class="lx3-auf"><h2>Meine Auftr\u00e4ge <small>Rang 1 zuerst \u00b7 Klick startet den Auftrag</small></h2>${cards.length?`<div class="lx3-row">${row}</div>`:'<p class="lxs-leer">Diese Woche gibt es keine Auftr\u00e4ge.</p>'}</section></div>`}
+function lxNeuLos(c){const b=document.createElement("button");b.type="button";b.style.display="none";
+ if(c.tid){b.dataset.kw="thema";b.dataset.id=c.tid}else if(c.lb){b.dataset.kw="projekt";b.dataset.lb=c.lb}else return;
+ document.body.appendChild(b);b.click();b.remove()}
+document.addEventListener("click",ev=>{const el=ev.target.closest&&ev.target.closest("[data-lx3]");if(!el)return;const c=(window.__lx3Cards||[])[Number(el.dataset.lx3)];if(!c)return;
+ const T=isTeacher(),hint=(c.hint&&!(c.frei&&c.hint===c.titel))?c.hint:"",startbar=!!(c.tid||c.lb);
+ if(startbar&&!hint&&!T){lxNeuLos(c);return}
+ const lab=c.done?"Ansehen":c.begun?"Weiter":"Starten";
+ const btn=c.tid?`<button type="button" class="primary" data-kw="thema" data-id="${esc(c.tid)}" onclick="closeModal()">${lab}</button>`:c.lb?`<button type="button" class="primary" data-kw="projekt" data-lb="${c.lb}" onclick="closeModal()">\u00D6ffnen</button>`:"";
+ const del=T&&c.aid?`<button type="button" class="secondary" data-wa="del" data-id="${esc(c.aid)}" onclick="closeModal()">Auftrag l\u00F6schen</button>`:"";
+ modal(`<button class="modal-close" onclick="closeModal()">\u00D7</button><div class="kicker">${esc(c.fach||"AUFTRAG").toUpperCase()}${c.bis?" \u00B7 BIS "+esc(lxTagKurz(c.bis)).toUpperCase():""}</div><h2 style="margin:4px 0 10px">${esc(c.titel)}</h2>${hint?`<div style="background:#f2f7fb;border-left:5px solid ${lxNeuFarbe(c.fach)};border-radius:10px;padding:10px 12px;margin:0 0 12px"><small style="font-weight:700;color:#4f677b">HINWEIS${c.kz?" VON "+esc(c.kz):""}</small><p style="margin:4px 0 0;font-size:15px;line-height:1.45">${esc(hint)}</p></div>`:`<p style="color:#4f677b">Kein zus\u00E4tzlicher Hinweis.</p>`}<div class="kw-aktionen">${btn}${del}</div>`)});
 /* Lehrkraft: Anwesenheit eintragen */
 function lxAnForm(){const kz=lxKzAuto(),uid=currentUser&&currentUser.uid,
  mine=(LXWA.an||[]).filter(a=>a.von===uid&&lxPtBis(a)>=lxHeute()).sort((x,y)=>((x.datum||"")+(x.zeit||""))<((y.datum||"")+(y.zeit||""))?-1:1);

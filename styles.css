@@ -384,3 +384,19 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lx3-dt b{display:block;font-size:15px;margin:2px 0}.lx3-dt p{margin:4px 0 0;font-size:14px;line-height:1.4}.lx3-dt p.lx3-nh{color:#4f677b}
 .lx3-da{display:flex;gap:8px;flex-wrap:wrap}
 @media(max-width:700px){.lx3-c{flex-basis:220px}}
+
+/* kompakter */
+.lx3{gap:10px}.lx3-w,.lx3-auf{padding:8px 10px;border-radius:12px}
+.lx3-kopf h2,.lx3-auf h2{font-size:14px}.lx3-auf h2 small{font-size:11px}.lx3-kopf{margin-bottom:2px}.lx3-kopf button{padding:2px 8px;font-size:12px}
+.lx3-leg{gap:6px;margin:2px 0 6px}.lx3-l{padding:1px 8px;font-size:11px}
+.lx3-g{grid-template-columns:44px repeat(5,minmax(100px,1fr));gap:4px;min-width:600px}
+.lx3-dk{font-size:12px;padding:0}.lx3-lab{font-size:11px;padding-top:3px}
+.lx3-h{padding:3px;min-height:34px;border-radius:6px}.lx3-ks{min-height:14px;gap:2px}.lx3-kz{font-size:10px;padding:0 5px;line-height:1.5}.lx3-no{font-size:11px}
+.lx3-t{font-size:11px;padding:2px 5px;margin-top:1px}
+.lx3-b{padding:3px 8px;font-size:12px;border-radius:6px}.lx3-b small{font-size:10px}
+.lx3-kl{font-size:11px;margin-top:4px}
+.lx3-row{gap:8px;padding:2px 2px 6px;margin-top:4px}
+.lx3-c{flex:0 0 190px;padding:7px 8px;gap:8px;border-radius:10px;border-top-width:3px}
+.lx3-r{flex-basis:22px;height:22px;font-size:12px}
+.lx3-ct{gap:1px}.lx3-ct small{font-size:10px}.lx3-ct b{font-size:12px;line-height:1.2}.lx3-ct em,.lx3-ct u{font-size:11px}
+@media(max-width:700px){.lx3-c{flex-basis:170px}}
