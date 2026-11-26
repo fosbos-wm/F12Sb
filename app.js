@@ -4969,7 +4969,7 @@ async function renderUnterrichtsfaecherAlt(){await kwLaden().catch(()=>{});const
   <p class="lxw-hint">Die Sch\xFCler:innen gehen selbst in die Bibliothek: Check-in, Infotext, bei Bedarf \xDCbungen, dann Check-out.</p>${s}
   <label>Hinweis (optional)<textarea id="waText" rows="2" placeholder="Nur wenn n\xF6tig, sonst reichen die Themen."></textarea></label>
   <div class="kw-aktionen"><button class="primary" data-wa="save">Ver\xF6ffentlichen</button></div>
-  <div class="lxw-liste"><h4>Aktuelle Auftr\xE4ge</h4>${o.map(u=>`<div class="lxw-z"><div><b>${esc(u.fach||"")}</b> \xB7 bis ${esc(lxTagKurz(u.bis))}<small>${esc(u.text||"")}${(u.themen||[]).map(g=>`<span class="lxw-th1">${esc(c(g))}: <b>${a(g)} von ${(r.schueler||[]).length}</b> geschafft</span>`).join("")}</small></div><button class="secondary" data-wa="del" data-id="${esc(u.id)}">L\xF6schen</button></div>`).join("")||'<div class="kw-leer">Noch kein Arbeitsauftrag.</div>'}</div></section>
+  <div class="lxw-liste"><h4>Reihenfolge (Rang) \u2013 per Drag &amp; Drop</h4>${lxRangHtml()}</div><div class="lxw-liste"><h4>Aktuelle Auftr\xE4ge</h4>${o.map(u=>`<div class="lxw-z"><div><b>${esc(u.fach||"")}</b> \xB7 bis ${esc(lxTagKurz(u.bis))}<small>${esc(u.text||"")}${(u.themen||[]).map(g=>`<span class="lxw-th1">${esc(c(g))}: <b>${a(g)} von ${(r.schueler||[]).length}</b> geschafft</span>`).join("")}</small></div><button class="secondary" data-wa="del" data-id="${esc(u.id)}">L\xF6schen</button></div>`).join("")||'<div class="kw-leer">Noch kein Arbeitsauftrag.</div>'}</div></section>
  <section class="lxw-k lxw-g"><h3>Termin einplanen</h3>
   <p class="lxw-hint">Erscheint den Sch\xFCler:innen auf der Startseite, je nach Auswahl als verpflichtend oder optional.</p>
   <div class="lxw-row"><label>Datum<input type="date" id="ptDatum" value="${lxFreitag(lxPlus(3))}"></label><label>bis Datum (optional, z. B. Projekt)<input type="date" id="ptDatumBis"></label>
@@ -5111,10 +5111,10 @@ function lxNeuWoche(){const t=window.__lxWo||0,n=new Date;n.setDate(n.getDate()+
  const days=[0,1,2,3,4].map(p=>{const b=new Date(r);b.setDate(r.getDate()+p);return lxIso(b)});
  const c=new Date(Date.UTC(r.getFullYear(),r.getMonth(),r.getDate()+3)),u=new Date(Date.UTC(c.getUTCFullYear(),0,1));
  return{off:t,days,kw:Math.ceil(((c-u)/864e5+1)/7)}}
-function lxNeuCards(){
+function lxNeuCards(all){
  const heute=lxHeute(),cards=[],seen=new Set();
  const aufs=(LXWA.d||[]).filter(a=>(a.bis||"")>=heute).sort((x,y)=>(x.bis||"")<(y.bis||"")?-1:(x.bis||"")>(y.bis||"")?1:0);
- const add=c=>{const k=c.fach+"|"+(c.tid||("lb"+c.lb)||c.aid)+"|"+(c.frei?c.aid:"");if(seen.has(k))return;seen.add(k);cards.push(c)};
+ const add=c=>{const k=c.fach+"|"+(c.tid||("lb"+c.lb)||c.aid)+"|"+(c.frei?c.aid:"");if(seen.has(k))return;seen.add(k);{const d=(LXWA.d||[]).find(x=>x.id===c.aid);c.o=d&&d.ord?d.ord[lxCk(c)]:void 0}cards.push(c)};
  aufs.forEach(a=>{const kz=a.kz||lxKzVon(a.vonName),ids=a.themen||[],pr=a.projekte||[];
   ids.forEach(id=>{const th=kwThemaById(id);if(th)add({fach:a.fach||"",titel:kwKurz(th),bis:a.bis||"",hint:a.text||"",kz,tid:id,aid:a.id})});
   pr.forEach(lb=>{const ph=kwPhase(lb);if(ph)add({fach:a.fach||"",titel:"Projekt LB "+lb+(ph.titel?": "+ph.titel:""),bis:a.bis||"",hint:a.text||"",kz,lb,aid:a.id})});
@@ -5122,8 +5122,9 @@ function lxNeuCards(){
  const PP="P\u00e4dagogik / Psychologie";
  if(!cards.some(c=>c.fach===PP)){try{const ph=LX_CFG.phasen().slice().sort((x,y)=>x.start<y.start?-1:1),cur=ph.find(x=>x.start<=heute&&heute<=x.end)||ph.find(x=>x.start>heute)||ph[ph.length-1];
   kwThemenSicht(cur).slice(0,6).forEach(th=>add({fach:PP,titel:kwKurz(th),bis:"",hint:"",kz:"",tid:th.id,aid:""}))}catch{}}
+ cards.sort((x,y)=>(x.o==null?1e9:x.o)-(y.o==null?1e9:y.o));
  const rank={};
- cards.forEach(c=>{const f=c.tid?(KW.fort[c.tid]||{}):{};c.done=!!f.abgeschlossen;c.begun=Object.keys(f).length>0;
+ cards.forEach(c=>{const f=c.tid?(KW.fort[c.tid]||{}):{};c.done=!all&&!!f.abgeschlossen;c.begun=Object.keys(f).length>0;
   if(!c.done){rank[c.fach]=(rank[c.fach]||0)+1;c.rang=rank[c.fach]}else c.rang=0});
  return cards.sort((x,y)=>(x.done-y.done)||((x.rang||99)-(y.rang||99))||((x.bis||"9")<(y.bis||"9")?-1:(x.bis||"9")>(y.bis||"9")?1:0))}
 function lxNeuStart(e,alt){try{return lxNeuStartX(e)}catch(err){console.error("Startseite neu:",err);return alt}}
@@ -5178,7 +5179,7 @@ function lxNeuStartX(e){
  const kopf=`<div class="lx3-kopf"><h2>Meine Woche \u00b7 KW ${W.kw} \u00b7 ${fmtKurz(days[0])}\u2013${fmtKurz(days[4])}</h2><div><button type="button" class="secondary" data-lxwo="${W.off-1}">\u2039</button><button type="button" class="secondary" data-lxwo="0">Diese Woche</button><button type="button" class="secondary" data-lxwo="${W.off+1}">\u203a</button></div></div>`;
  const leg=`<p class="lx3-leg"><span class="lx3-l pf">Pflichttermin</span><span class="lx3-l op">optional</span>${hatAn?'<span class="lx3-l kz">K\u00fcrzel oben rechts = Lehrkraft da</span>':""}<span class="lx3-l pj">Projekt \u00fcber mehrere Tage</span></p>`.replace("K\u00fcrzel","K\u00fcrzel");
  return`<div class="lx3"><section class="lx3-w">${kopf}${leg}<div class="lx3-gw"><div class="lx3-g">${g}</div></div>${kzLeg?`<p class="lx3-kl">${kzLeg}</p>`:""}</section>
- <section class="lx3-auf"><h2>Meine Auftr\u00e4ge <small>Rang 1 zuerst \u00b7 Klick startet den Auftrag</small></h2>${cards.length?`<div class="lx3-row">${row}</div>`:'<p class="lxs-leer">Diese Woche gibt es keine Auftr\u00e4ge.</p>'}</section></div>`}
+ <section class="lx3-auf"><h2>Meine Auftr\u00e4ge <small>Rang 1 zuerst \u00b7 Klick startet den Auftrag</small>${T&&cards.some(c=>c.aid)?'<button type="button" class="secondary lx3-rang" data-lx3rang="1">Reihenfolge \u00e4ndern</button>':""}</h2>${cards.length?`<div class="lx3-row">${row}</div>`:'<p class="lxs-leer">Diese Woche gibt es keine Auftr\u00e4ge.</p>'}</section></div>`}
 function lxNeuLos(c){const b=document.createElement("button");b.type="button";b.style.display="none";
  if(c.tid){b.dataset.kw="thema";b.dataset.id=c.tid}else if(c.lb){b.dataset.kw="projekt";b.dataset.lb=c.lb}else return;
  document.body.appendChild(b);b.click();b.remove()}
@@ -5205,3 +5206,26 @@ document.addEventListener("click",async ev=>{const t=ev.target.closest&&ev.targe
   await addDoc(collection(db,"pflichttermine"),{art:"Anwesenheit",kz,name:String(anzeigeName(profile,currentUser)||"").slice(0,60),datum:d,...db2&&db2>d?{datumBis:db2}:{},zeit:von,zeitBis:bis,titel:"Anwesenheit "+kz,fach:"",optional:true,von:currentUser.uid,createdAt:serverTimestamp()});
   LXWA.t=0;toast("Anwesenheit eingetragen.");render()}catch(err){console.error(err);toast("Das hat nicht geklappt.")}});
 async function lbKwVerknuepfen(r,s){const ks=[].concat(r.kw||[]).filter(Boolean);let n=0;for(const k of ks){const q=await getDocs(query(collection(db,"lehrplanMaterialien"),where("wocheId","==",k)));if(q.docs.some(d=>d.data().url==="board:"+s))continue;await addDoc(collection(db,"lehrplanMaterialien"),{wocheId:k,fach:"paedagogik",kategorie:"lernuebersicht",titel:r.thema,url:"board:"+s,dateiName:"",createdBy:currentUser.uid,createdAt:serverTimestamp()});n++}return n}
+/* Rang per Drag&Drop */
+function lxCk(c){return String(c.tid||(c.lb?"lb"+c.lb:"frei")).replace(/[.\/]/g,"_")}
+function lxRangHtml(){let cards=[];try{cards=lxNeuCards(!0).filter(c=>c.aid)}catch{}
+ if(!cards.length)return'<p class="lxw-hint">Noch keine Aufträge mit Themen vorhanden.</p>';
+ const by={};cards.forEach(c=>{(by[c.fach||"Auftrag"]=by[c.fach||"Auftrag"]||[]).push(c)});
+ return Object.keys(by).map(f=>`<div class="lx3-rf"><h5 style="--fc:${lxNeuFarbe(f)}"><i></i>${esc(f)}</h5><div class="lx3-rl" data-rl="${esc(f)}">${by[f].map((c,i)=>`<div class="lx3-ri" data-aid="${esc(c.aid)}" data-k="${esc(lxCk(c))}"><span class="lx3-rh" title="Ziehen zum Verschieben" aria-label="Ziehen zum Verschieben">☰</span><span class="lx3-rn">${i+1}</span><span class="lx3-rt"><b>${esc(c.titel)}</b>${c.bis?"<small>bis "+esc(lxTagKurz(c.bis))+"</small>":""}</span><span class="lx3-rb"><button type="button" data-lxmv="-1" aria-label="Nach oben">▲</button><button type="button" data-lxmv="1" aria-label="Nach unten">▼</button></span></div>`).join("")}</div></div>`).join("")}
+function lxRangNum(l){[...l.children].forEach((it,i)=>{const n=it.querySelector(".lx3-rn");if(n)n.textContent=i+1})}
+async function lxRangSave(l){lxRangNum(l);const per={};
+ [...l.children].forEach((it,i)=>{(per[it.dataset.aid]=per[it.dataset.aid]||{})[it.dataset.k]=i+1});
+ try{for(const aid of Object.keys(per)){const d=(LXWA.d||[]).find(x=>x.id===aid);if(!d)continue;const ord=Object.assign({},d.ord||{},per[aid]);
+  await updateDoc(doc(db,"wochenauftraege",aid),{ord});d.ord=ord}
+  toast("Reihenfolge gespeichert.")}catch(e){console.error(e);toast("Die Reihenfolge konnte nicht gespeichert werden.")}}
+document.addEventListener("pointerdown",ev=>{const h=ev.target.closest&&ev.target.closest(".lx3-rh");if(!h)return;const it=h.closest(".lx3-ri");if(!it)return;
+ ev.preventDefault();it.classList.add("drag");try{h.setPointerCapture(ev.pointerId)}catch{}window.__lxDrag={it,l:it.parentNode}});
+document.addEventListener("pointermove",ev=>{const g=window.__lxDrag;if(!g)return;ev.preventDefault();const y=ev.clientY,{it,l}=g,sib=[...l.children].filter(x=>x!==it);
+ let ref=null;for(const s of sib){const r=s.getBoundingClientRect();if(y<r.top+r.height/2){ref=s;break}}
+ if(ref!==it.nextSibling){l.insertBefore(it,ref);lxRangNum(l)}},{passive:false});
+function lxRangEnde(){const g=window.__lxDrag;if(!g)return;window.__lxDrag=null;g.it.classList.remove("drag");lxRangSave(g.l)}
+document.addEventListener("pointerup",lxRangEnde);document.addEventListener("pointercancel",lxRangEnde);
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-lxmv]");if(!b)return;const it=b.closest(".lx3-ri"),l=it.parentNode,d=Number(b.dataset.lxmv);
+ if(d<0&&it.previousElementSibling)l.insertBefore(it,it.previousElementSibling);else if(d>0&&it.nextElementSibling)l.insertBefore(it.nextElementSibling,it);else return;lxRangSave(l)});
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-lx3rang]");if(!b)return;
+ modal(`<button class="modal-close" onclick="closeModal();render()">×</button><div class="kicker">REIHENFOLGE</div><h2 style="margin:4px 0 6px">Rang der Aufträge</h2><p class="lxw-hint">Ziehe mit ☰ (oder nutze ▲▼). Rang 1 erscheint den Schüler:innen zuerst.</p>${lxRangHtml()}<div class="kw-aktionen"><button type="button" class="primary" onclick="closeModal();render()">Fertig</button></div>`)});

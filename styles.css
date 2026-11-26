@@ -400,3 +400,11 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lx3-r{flex-basis:22px;height:22px;font-size:12px}
 .lx3-ct{gap:1px}.lx3-ct small{font-size:10px}.lx3-ct b{font-size:12px;line-height:1.2}.lx3-ct em,.lx3-ct u{font-size:11px}
 @media(max-width:700px){.lx3-c{flex-basis:170px}}
+.lx3-rf{margin:10px 0 14px}.lx3-rf h5{margin:0 0 6px;font-size:13px;display:flex;align-items:center;gap:6px;color:#33495c}.lx3-rf h5 i{width:10px;height:10px;border-radius:50%;background:var(--fc,#888)}
+.lx3-rl{display:flex;flex-direction:column;gap:6px}.lx3-ri{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #d6e0e8;border-left:5px solid #8a99a3;border-radius:10px;padding:6px 8px;user-select:none}
+.lx3-ri.drag{box-shadow:0 6px 18px rgba(0,0,0,.18);background:#f4f9fd;position:relative;z-index:2}
+.lx3-rh{cursor:grab;touch-action:none;font-size:18px;line-height:1;padding:6px 8px;color:#5b7083;border-radius:8px;background:#eef3f7}
+.lx3-rn{min-width:24px;height:24px;border-radius:50%;background:#2d5d86;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.lx3-rt{flex:1;min-width:0;display:flex;flex-direction:column;font-size:13px}.lx3-rt small{color:#6a7d8c;font-size:11px}
+.lx3-rb{display:flex;gap:2px}.lx3-rb button{border:0;background:#eef3f7;border-radius:6px;padding:4px 7px;font-size:11px;cursor:pointer;color:#33495c}
+.lx3-auf h2 .lx3-rang{margin-left:8px;font-size:12px;padding:3px 9px;vertical-align:middle}
