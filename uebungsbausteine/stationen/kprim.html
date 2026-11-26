@@ -38,7 +38,7 @@ function render(){
 $("chk").addEventListener("click",()=>{
   checked=true;tries++;clearInterval(tick);secs=Math.round((Date.now()-t0)/1000);
   let ok=0,tot=0;D.aufgaben.forEach((t,ti)=>t.statements.forEach((s,si)=>{tot++;if(ans[ti+"-"+si]===s.richtig)ok++}));
-  render();$("sum").innerHTML=`<div class="sum">${ok} von ${tot} Aussagen richtig.${TS?" Zeige deiner Lehrkraft den Ergebniscode (oben).":""}</div>`;
+  render();$("sum").innerHTML=`<div class="sum">${ok} von ${tot} Aussagen richtig.${""}</div>`;
   if(TS)try{parent.postMessage({tsResult:{punkte:ok,max:tot,zuege:tries,sekunden:secs}},"*")}catch(e){}
 });
 $("again").addEventListener("click",()=>{ans={};checked=false;secs=0;tick=null;$("sum").innerHTML="";render()});

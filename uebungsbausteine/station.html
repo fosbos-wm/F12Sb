@@ -77,7 +77,7 @@ const fail=t=>{$("fehler").hidden=false;$("ftext").textContent=t};
       let old=null;try{old=JSON.parse(ls.get(key)||"null")}catch(_){}
       const best=old&&rankSort(old,n)<=0?old:n;ls.set(key,JSON.stringify(best));
       const box=$("res");box.hidden=false;box.className="res msg ok";
-      box.innerHTML=`Dein bestes Ergebnis: ${best.punkte} von ${best.max} · ${best.zuege} Züge · ${fmtTime(best.sekunden)} min. Ergebniscode für die Lehrkraft: <code>${esc(makeCode(best))}</code>`;
+      box.innerHTML=`Dein bestes Ergebnis: ${best.punkte} von ${best.max} · ${best.zuege} Züge · ${fmtTime(best.sekunden)} min.`;
     });
   }catch(e){fail("Die Übung konnte nicht geladen werden. Prüfe die Verbindung.")}
 })();

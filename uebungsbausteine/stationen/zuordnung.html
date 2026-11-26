@@ -82,7 +82,7 @@ function report(punkte){if(!TS)return;try{parent.postMessage({tsResult:{punkte,m
 function check(){
   tries++;const res={};let ok=0;Object.keys(link).forEach(l=>{res[l]=+link[l]===+l;if(res[l])ok++});
   if(first===null)first=ok;
-  if(ok===P.length){done=true;clearInterval(tick);secs=Math.round((Date.now()-t0)/1000);render(res);m(`Alles richtig! ${tries===1?"Gleich beim ersten Versuch.":"Nach "+tries+" Prüfungen."}`+(TS?" Zeige deiner Lehrkraft den Ergebniscode (oben).":""));report(first)}
+  if(ok===P.length){done=true;clearInterval(tick);secs=Math.round((Date.now()-t0)/1000);render(res);m(`Alles richtig! ${tries===1?"Gleich beim ersten Versuch.":"Nach "+tries+" Prüfungen."}`+(""));report(first)}
   else{render(res);m(`${ok} von ${P.length} richtig. Die falschen Verbindungen sind rot: tippe sie an, um sie zu lösen, und verbinde neu.`,true)}
 }
 function init(){

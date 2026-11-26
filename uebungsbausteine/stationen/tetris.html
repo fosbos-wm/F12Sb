@@ -359,7 +359,6 @@ function gameOver(done){
   var d=$("dlg");d.textContent="";
   d.appendChild(el("h2",null,done===true?"Geschafft!":"Spiel beendet"));
   d.appendChild(el("p",null,S.score+" Punkte, Level "+S.level+", "+S.lines+" Reihen. "+S.right+" von "+S.asked+" Fragen richtig."+(isBest&&S.score>0?" Neuer Bestwert auf diesem Gerät.":"")));
-  if(TS)d.appendChild(el("p","small","Dein Ergebnis steht oben auf der Seite, dort findest du den Ergebniscode für die Lehrkraft."));
   var list=Object.keys(S.res).map(function(k){return S.res[k];}).filter(function(r){return r.last==="wrong";});
   var fixed=Object.keys(S.res).map(function(k){return S.res[k];}).filter(function(r){return r.wrong>0&&r.last==="right";}).length;
   if(list.length){

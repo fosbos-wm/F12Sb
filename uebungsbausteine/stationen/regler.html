@@ -32,7 +32,7 @@ const QS=new URLSearchParams(location.search),TS=QS.get("ts")==="1",SET=(QS.get(
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let D=null,checked=false,tries=0,t0=0,secs=0,started=false;
 const start=()=>{if(!started){started=true;t0=Date.now()}};
-function done(ok,tot){checked=true;tries++;secs=Math.round((Date.now()-t0)/1000);$("sum").innerHTML=`<div class="sum">${ok} von ${tot} richtig.${TS?" Zeige deiner Lehrkraft den Ergebniscode (oben).":""}</div>`;
+function done(ok,tot){checked=true;tries++;secs=Math.round((Date.now()-t0)/1000);$("sum").innerHTML=`<div class="sum">${ok} von ${tot} richtig.${""}</div>`;
  if(TS)try{parent.postMessage({tsResult:{punkte:ok,max:tot,zuege:tries,sekunden:secs}},"*")}catch(e){}}
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 let val={};
