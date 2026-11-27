@@ -79,6 +79,8 @@ button{font:inherit;color:inherit;cursor:pointer}
  .qban .qt{font-size:clamp(1.3rem,2.7vw,2.3rem)}
  .stage{min-height:0}
 }
+/* Schmale oder hochkante Fenster (Handy, Übung im App-Fenster): Seite scrollt, damit Start-Knopf und Antworten immer erreichbar sind */
+@media not all and (min-aspect-ratio:5/4) and (min-width:820px){body{overflow:auto;height:auto}.app{height:auto;min-height:100dvh}.stage{flex:none;overflow:visible;min-height:0}}
 @media (max-width:640px){.simgrid{grid-template-columns:1fr}}
 @media (max-width:560px){.chip{padding:4px 8px}.chip b{font-size:.9rem}.chip .st{font-size:1rem}}
 </style></head><body><main class="app" id="app">
@@ -251,7 +253,7 @@ function askSim(){
   const col=i=>`<div class="simcol" data-team="${i}"><div class="simh" style="border-color:${COL[i]}">${dotH(i)}<b>${esc(names[i])}</b><span class="simst" id="ss${i}">Wählt ...</span></div>${cur.o.map((o,k)=>`<button class="opt" type="button" data-team="${i}" data-k="${k}"><span class="k">${i===0?k+1:[7,8,9,0][k]}</span><span>${esc(o.t)}</span></button>`).join("")}</div>`;
   body=`<div class="simgrid">${col(0)}${col(1)}</div>`;
  }else{
-  const L="ABCD";
+  const L="ABCDE";
   body=`<div class="olist">${cur.o.map((o,k)=>`<div class="olr" data-k="${k}"><span class="k">${L[k]}</span><span>${esc(o.t)}</span></div>`).join("")}</div><div class="tg">${[...Array(N).keys()].map(i=>`<div class="tgr" style="border-color:${COL[i]}"><div class="tgn">${dotH(i)}<b>${esc(names[i])}</b></div><span class="tgs" id="ss${i}">wählt ...</span><div class="tgb">${cur.o.map((o,k)=>`<button class="opt tb" type="button" data-team="${i}" data-k="${k}" aria-label="${esc(names[i])}: Antwort ${L[k]}"><span class="k"></span>${L[k]}</button>`).join("")}</div></div>`).join("")}</div>`;
  }
  $("stage").innerHTML=`<div class="card">${body}<div id="fb" class="fbslot"></div><p class="nxrow"><button class="b" id="nx" type="button" disabled>Weiter</button><button class="b alt" id="force" type="button" hidden>Auflösen</button></p></div>`;
