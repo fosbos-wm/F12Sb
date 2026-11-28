@@ -408,3 +408,6 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lx3-rt{flex:1;min-width:0;display:flex;flex-direction:column;font-size:13px}.lx3-rt small{color:#6a7d8c;font-size:11px}
 .lx3-rb{display:flex;gap:2px}.lx3-rb button{border:0;background:#eef3f7;border-radius:6px;padding:4px 7px;font-size:11px;cursor:pointer;color:#33495c}
 .lx3-auf h2 .lx3-rang{margin-left:8px;font-size:12px;padding:3px 9px;vertical-align:middle}
+
+/* Startseite: ueberfaellige Auftraege ruhig kennzeichnen */
+.lx3-c.over{border-top-color:#C58B2A}.lx3-c.over em{color:#9A6A12;font-weight:700}
