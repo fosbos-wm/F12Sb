@@ -5071,7 +5071,7 @@ async function renderLernstaendeLx(){if(window.__lsFach==="fertig"&&!isTeacher()
 function lxLsErkl(){const k=(c,t,x)=>`<div class="lsx-m" style="--mc:${c}"><b>${t}</b><span>${x}</span></div>`;
  return`<section class="lsx-erkl"><h2>Was wird hier gemessen?</h2><p>Alle Zahlen kommen automatisch aus dem, was die Sch\u00fcler:innen in der App tun. Sie sind Orientierung f\u00fcr deinen Unterricht, keine Note.</p><div class="lsx-mg">${
   k("#3A8FD4","Check-in","Wissenstest vor dem Thema. Zeigt das Vorwissen. Der erste Versuch gilt als Startwert.")+
-  k("#2E7D57","Check-out","Gleiche Art Test am Ende. Check-out minus Check-in ist der Lernzuwachs.")+
+  k("#2E7D57","Check-out","Test am Ende, etwas anspruchsvoller als der Check-in. Check-out minus Check-in ist der Lernzuwachs.")+
   k("#D9822B","\u00dcbungen","Ergebnisse der \u00dcbungsstationen, getrennt nach 1. Versuch und letztem Versuch.")+
   k("#6B3F9B","Fachaufsatz-Training","Selbsteinsch\u00e4tzung der eigenen L\u00f6sung im Vergleich mit dem Erwartungshorizont.")+
   k("#4B6477","Selbsteinsch\u00e4tzung","Wie sicher f\u00fchlt sich die Person beim Thema (1 bis 4). Weicht sie stark von der Messung ab, steht ein \u201E!\u201C.")+

@@ -426,3 +426,5 @@ details.lxw-lb .lxw-chip:has(input:checked) span{color:#fff}
 .lsx-kopf h2{margin:0;font-size:21px;color:#17384f}.lsx-kopf p{margin:3px 0 0;font-size:14px;line-height:1.4;color:#3f576b;max-width:900px}
 .lsx-inh{padding:0 14px}.lsx-inh>*+*{margin-top:12px}
 .lsx-sek .lsn-h{display:none}.lsx-sek .lsn-lbd{border-left:6px solid var(--c,#3A8FD4)}
+
+.lsx-amp{margin-top:22px;padding-top:12px;border-top:1px solid #cfe2f3}
